@@ -201,8 +201,6 @@ public class BuildoutGenerator {
 	}
 	
 	private void addClientObject(List<SWGObject> objects, SWGObject obj) {
-		if (obj.getObjectId() == -507780858040143424L)
-			System.out.println(obj.getLocation());
 		objects.add(obj);
 		for (SWGObject child : obj.getContainedObjects()) {
 			addClientObject(objects, child);
@@ -263,15 +261,12 @@ public class BuildoutGenerator {
 		double transX = 0;
 		double transZ = 0;
 		boolean adjust = area.adjust || !area.area.getCompositeName().isEmpty();
-		if (adjust) {
-			if (!area.area.getCompositeName().isEmpty()) {
-				transX = area.area.getCompositeX1() + (area.area.getCompositeX2() - area.area.getCompositeX1()) / 2;
-				transZ = area.area.getCompositeZ1() + (area.area.getCompositeZ2() - area.area.getCompositeZ1()) / 2;
-			} else {
-				transX = area.area.getX1() + (area.area.getX2() - area.area.getX1()) / 2;
-				transZ = area.area.getZ1() + (area.area.getZ2() - area.area.getZ1()) / 2;
-			}
+		if (!area.area.getCompositeName().isEmpty()) {
+			transX = area.area.getCompositeX1() + (area.area.getCompositeX2() - area.area.getCompositeX1()) / 2;
+			transZ = area.area.getCompositeZ1() + (area.area.getCompositeZ2() - area.area.getCompositeZ1()) / 2;
 		}
+		transX -= area.area.getX1() + (area.area.getX2() - area.area.getX1()) / 2;
+		transZ -= area.area.getZ1() + (area.area.getZ2() - area.area.getZ1()) / 2;
 		gen.writeLine(area.id, terrain, substituteName, area.area.getEventRequired(), x1, z1, x2, z2, adjust?"1":"0", transX, transZ);
 	}
 	

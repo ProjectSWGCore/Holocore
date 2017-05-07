@@ -339,6 +339,7 @@ public class ClientBuildoutService extends Service {
 			return areas.containsKey(creationData.areaId);
 		}
 		
+		
 		public void createObject() {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(creationData.id, CRC.getString(creationData.templateCrc));
 			obj.setClassification(creationData.snapshot ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);

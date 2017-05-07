@@ -56,6 +56,7 @@ import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
+import resources.buildout.BuildoutArea;
 import resources.config.ConfigFile;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
@@ -274,6 +275,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		Assert.test(obj instanceof CreatureObject, "DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		Location requestedLocation = new Location(dt.getLocation());
 		requestedLocation.setTerrain(obj.getTerrain());
+		Location before = new Location(requestedLocation);
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area != null)
+			area.adjustLocation(requestedLocation, requestedLocation);
+		Log.d("Transformed: %s -> %s", before, requestedLocation);
 		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
 	}
 	

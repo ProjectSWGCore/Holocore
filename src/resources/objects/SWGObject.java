@@ -76,7 +76,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private final long 								objectId;
 	private final Location 							location		= new Location(0, 0, 0, null);
-	private final Location							buildoutLocation= new Location(0, 0, 0, null);
 	private final Set<SWGObject>					containedObjects= new SynchronizedSet<>();
 	private final Map <String, SWGObject>			slots			= new SynchronizedMap<>();
 	private final Map <String, String>				attributes		= new SynchronizedMap<>(new LinkedHashMap<>());
@@ -160,6 +159,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.getAwareness().addObjectAware(object.getSuperParent().getAwareness());
 		// Remove as parent
 		object.parent = null;
+		object.buildoutArea = buildoutArea;
 		object.getAwareness().setParent(null);
 		object.slotArrangement = -1;
 	}
@@ -321,8 +321,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setLocation(Location l) {
 		synchronized (location) {
-			buildoutLocation.mergeWith(l);
-			updateBuildoutLocation();
+			this.location.mergeWith(l);
+		}
+	}
+	
+	public void setBuildoutArea(BuildoutArea area) {
+		synchronized (location) {
+			this.buildoutArea = area;
+			if (area == null)
+				this.areaId = 0;
+			else
+				this.areaId = area.getId();
 		}
 	}
 	
@@ -357,20 +366,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setComplexity(float complexity) {
 		this.complexity = complexity;
-	}
-	
-	public void setBuildoutArea(BuildoutArea buildoutArea) {
-		this.buildoutArea = buildoutArea;
-		updateBuildoutLocation();
-	}
-	
-	private void updateBuildoutLocation() {
-		synchronized (location) {
-			if (buildoutArea != null)
-				buildoutArea.adjustLocation(buildoutLocation, location);
-			else
-				location.mergeWith(buildoutLocation);
-		}
 	}
 	
 	public void setBuildoutAreaId(int areaId) {
@@ -429,20 +424,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public Location getLocation() {
-		return new Location(location);
+		synchronized (location) {
+			return new Location(location);
+		}
 	}
 	
 	public Location getBuildoutLocation() {
-		return new Location(buildoutLocation);
+		synchronized (location) {
+			BuildoutArea area = getBuildoutArea();
+			if (area == null)
+				return getLocation();
+			return area.readjustLocation(location);
+		}
 	}
 	
 	public Location getWorldLocation() {
-		Location loc = new Location(location);
+		Location loc = getLocation();
 		SWGObject parent = getParent();
 		while (parent != null) {
 			Location l = parent.location; // Have to access privately to avoid copies
-			loc.translateLocation(l);
-			loc.setTerrain(l.getTerrain());
+			synchronized (l) {
+				loc.translateLocation(l);
+				loc.setTerrain(l.getTerrain());
+			}
 			parent = parent.getParent();
 		}
 		return loc;
@@ -477,7 +481,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public BuildoutArea getBuildoutArea() {
-		return buildoutArea;
+		synchronized (location) {
+			if (parent != null)
+				return parent.getBuildoutArea();
+			return buildoutArea;
+		}
 	}
 	
 	public int getBuildoutAreaId() {
@@ -641,7 +649,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
-		create.setLocation(buildoutLocation);
+		if (parent == null)
+			create.setLocation(getBuildoutLocation());
+		else
+			create.setLocation(getLocation());
 		create.setObjectCrc(crc);
 		target.sendPacket(create);
 	}
@@ -931,9 +942,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(4);
+		stream.addByte(5);
 		location.save(stream);
-		buildoutLocation.save(stream);
+		stream.addInt(areaId);
 		boolean hasParent = parent != null;
 		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
 		stream.addBoolean(hasParent);
@@ -973,6 +984,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	@Override
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
+			case 5:
+				readVersion5(stream);
+				break;
 			case 4:
 				readVersion4(stream);
 				break;
@@ -991,9 +1005,32 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
+	private void readVersion5(NetBufferStream stream) {
+		location.read(stream);
+		areaId = stream.getInt();
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		prefLoadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
+	}
+	
 	private void readVersion4(NetBufferStream stream) {
 		location.read(stream);
-		buildoutLocation.read(stream);
+		new Location().read(stream); // ignored now
 		if (stream.getBoolean()) {
 			parent = SWGObjectFactory.create(stream);
 			if (stream.getBoolean()) {
@@ -1016,7 +1053,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void readVersion3(NetBufferStream stream) {
 		location.read(stream);
-		buildoutLocation.read(stream);
+		new Location().read(stream); // ignored now
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
@@ -1031,8 +1068,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private void readVersion2(NetBufferStream stream) {
-		buildoutLocation.read(stream);
-		location.mergeWith(buildoutLocation);
+		location.read(stream);
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());

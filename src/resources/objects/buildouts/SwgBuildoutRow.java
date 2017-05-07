@@ -57,7 +57,6 @@ public class SwgBuildoutRow {
 			loadLarge(datatableRow, crcString);
 		else
 			throw new IllegalArgumentException("Datatable row must be either 11 or 14 columns!");
-		translateLocation();
 	}
 	
 	private void loadSmall(Object [] datatableRow, CrcStringTableData crcString) {
@@ -84,8 +83,8 @@ public class SwgBuildoutRow {
 	}
 	
 	private void loadLarge(Object [] datatableRow, CrcStringTableData crcString) {
-		objectId = ((Number) datatableRow[0]).longValue();
-		containerId = ((Number) datatableRow[1]).longValue();
+		objectId = (Integer) datatableRow[0];
+		containerId = (Integer) datatableRow[1];
 		type = (Integer) datatableRow[2];
 		loadEndColumns(datatableRow, crcString, 3);
 		final long indexShifted = (buildoutArea.getIndex() + 1L) << 48;
@@ -108,16 +107,6 @@ public class SwgBuildoutRow {
 		radius = (Float) datatableRow[offset + 9];
 		portalLayoutCrc = (Integer) datatableRow[offset + 10];
 		template = crcString.getTemplateString(sharedTemplateCrc);
-	}
-	
-	private void translateLocation() {
-		if (cellIndex != 0)
-			return;
-		if (buildoutArea.isUseOrigin()) {
-			location.translatePosition(buildoutArea.getOriginX(), 0, buildoutArea.getOriginZ());
-		} else {
-			location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
-		}
 	}
 	
 	public Location getLocation() {
