@@ -23,6 +23,7 @@ kashyyyk_rryatt_trail_5.sdb	FALSE
 kashyyyk_south_dungeons_bocctyyy.sdb	FALSE																						
 kashyyyk_south_dungeons_hracca.sdb	FALSE																						
 lok.sdb	TRUE																						
+mustafar.sdb	TRUE																						
 naboo.sdb	TRUE																						
 rori.sdb	TRUE																						
 talus.sdb	TRUE																						
@@ -30,7 +31,7 @@ tatooine.sdb	TRUE
 yavin4.sdb	TRUE																						
 event_empireday.sdb	FALSE																						
 event_halloween.sdb	FALSE																						
-event_lifeday.sdb	TRUE																						
+event_lifeday.sdb	FALSE																						
 event_loveday.sdb	FALSE																						
 event_remembranceday.sdb	FALSE																						
 gcw_base_npc_corellia.sdb	TRUE																						
