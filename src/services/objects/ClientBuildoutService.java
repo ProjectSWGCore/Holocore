@@ -50,8 +50,6 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
-import intents.object.ObjectCreatedIntent;
-import intents.player.PlayerTransformedIntent;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
 import resources.buildout.BuildoutAreaGrid;
@@ -77,9 +75,6 @@ public class ClientBuildoutService extends Service {
 	public ClientBuildoutService() {
 		areaGrid = new BuildoutAreaGrid();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
-		
-		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransform(pti));
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreated(oci));
 	}
 	
 	public Map<Long, SWGObject> loadClientObjects() {
@@ -249,27 +244,6 @@ public class ClientBuildoutService extends Service {
 		areasById.put(area.getId(), area);
 	}
 	
-	private void handlePlayerTransform(PlayerTransformedIntent pti) {
-		setObjectArea(pti.getPlayer());
-	}
-	
-	private void handleObjectCreated(ObjectCreatedIntent oci) {
-		setObjectArea(oci.getObject());
-	}
-	
-	private void setObjectArea(SWGObject obj) {
-		if (obj.getParent() != null) {
-			obj.setBuildoutArea(null);
-			return;
-		}
-		Location world = obj.getWorldLocation();
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
-			area = getAreaForObject(obj);
-			obj.setBuildoutArea(area);
-		}
-	}
-	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
 		BuildoutAreaBuilder bldr = new BuildoutAreaBuilder()
 			.setId(set.getInt(ind.id))
@@ -284,15 +258,6 @@ public class ClientBuildoutService extends Service {
 			.setTranslationX(set.getDouble(ind.transX))
 			.setTranslationZ(set.getDouble(ind.transZ));
 		return bldr.build();
-	}
-	
-	private BuildoutArea getAreaForObject(SWGObject obj) {
-		Location l = obj.getWorldLocation();
-		return areaGrid.getBuildoutArea(l.getTerrain(), l.getX(), l.getZ());
-	}
-	
-	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
-		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
 	}
 	
 	private static class BuildoutLoader implements AutoCloseable {

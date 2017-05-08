@@ -56,7 +56,6 @@ import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.buildout.BuildoutArea;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
 import resources.encodables.StringId;
@@ -87,7 +86,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
 	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
 	private List <List <String>>		arrangement		= new ArrayList<>();
-	private BuildoutArea				buildoutArea	= null;
 	private Player						owner			= null;
 	
 	private SWGObject	parent			= null;
@@ -159,7 +157,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.getAwareness().addObjectAware(object.getSuperParent().getAwareness());
 		// Remove as parent
 		object.parent = null;
-		object.buildoutArea = buildoutArea;
 		object.getAwareness().setParent(null);
 		object.slotArrangement = -1;
 	}
@@ -325,16 +322,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	public void setBuildoutArea(BuildoutArea area) {
-		synchronized (location) {
-			this.buildoutArea = area;
-			if (area == null)
-				this.areaId = 0;
-			else
-				this.areaId = area.getId();
-		}
-	}
-	
 	public void setStf(String stfFile, String stfKey) {
 		this.stringId = new StringId(stfFile, stfKey);
 	}
@@ -429,15 +416,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	public Location getBuildoutLocation() {
-		synchronized (location) {
-			BuildoutArea area = getBuildoutArea();
-			if (area == null)
-				return getLocation();
-			return area.readjustLocation(location);
-		}
-	}
-	
 	public Location getWorldLocation() {
 		Location loc = getLocation();
 		SWGObject parent = getParent();
@@ -478,14 +456,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public float getComplexity() {
 		return complexity;
-	}
-	
-	public BuildoutArea getBuildoutArea() {
-		synchronized (location) {
-			if (parent != null)
-				return parent.getBuildoutArea();
-			return buildoutArea;
-		}
 	}
 	
 	public int getBuildoutAreaId() {
@@ -649,10 +619,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
-		if (parent == null)
-			create.setLocation(getBuildoutLocation());
-		else
-			create.setLocation(getLocation());
+		create.setLocation(location);
 		create.setObjectCrc(crc);
 		target.sendPacket(create);
 	}

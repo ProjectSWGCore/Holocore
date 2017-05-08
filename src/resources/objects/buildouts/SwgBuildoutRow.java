@@ -57,6 +57,7 @@ public class SwgBuildoutRow {
 			loadLarge(datatableRow, crcString);
 		else
 			throw new IllegalArgumentException("Datatable row must be either 11 or 14 columns!");
+		translateLocation();
 	}
 	
 	private void loadSmall(Object [] datatableRow, CrcStringTableData crcString) {
@@ -107,6 +108,12 @@ public class SwgBuildoutRow {
 		radius = (Float) datatableRow[offset + 9];
 		portalLayoutCrc = (Integer) datatableRow[offset + 10];
 		template = crcString.getTemplateString(sharedTemplateCrc);
+	}
+	
+	private void translateLocation() {
+		if (cellIndex != 0)
+			return;
+		location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
 	}
 	
 	public Location getLocation() {

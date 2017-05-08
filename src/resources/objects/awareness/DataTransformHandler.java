@@ -54,7 +54,7 @@ public class DataTransformHandler {
 	}
 	
 	private UpdateTransformMessage createTransform(SWGObject obj, double speed, int update) {
-		Location loc = obj.getBuildoutLocation();
+		Location loc = obj.getLocation();
 		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(obj.getObjectId());
 		transform.setX((short) (loc.getX() * 4 + 0.5));
