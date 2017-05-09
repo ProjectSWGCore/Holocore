@@ -27,13 +27,11 @@
 
 package resources.commands.callbacks;
 
-import java.io.FileNotFoundException;
-import java.util.Map;
-
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
-
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
@@ -57,6 +55,8 @@ import services.objects.ObjectManager;
 import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
+
+import java.util.Map;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -94,7 +94,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "details":
 					try {
 						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
-					} catch (FileNotFoundException ex) {
+					} catch (ResourceException | ScriptException e) {
 						Log.e("sendDetails qatool script not found!");
 					}
 					break;
