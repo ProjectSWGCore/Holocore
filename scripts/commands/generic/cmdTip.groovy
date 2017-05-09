@@ -26,7 +26,6 @@ class CmdTip implements ICmdCallback {
     }
 }
 
-def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-    println("Hello World!")
+static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
     new CmdTip().execute(galacticManager, player, target, args)
 }
