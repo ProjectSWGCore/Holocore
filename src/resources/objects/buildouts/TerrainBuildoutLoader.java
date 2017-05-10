@@ -102,8 +102,8 @@ class TerrainBuildoutLoader {
 	private SWGObject createObject(SwgBuildoutRow row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getObjectId(), row.getTemplate());
 		Location l = row.getLocation();
-		l.setTerrain(terrain);
-		object.setLocation(l);
+		object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
+		object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
 		return object;
 	}
 	

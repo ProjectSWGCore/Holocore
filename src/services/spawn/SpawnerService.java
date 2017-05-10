@@ -31,6 +31,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,12 +44,9 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
-import java.util.Random;
-
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
-
 import resources.PvpFlag;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
@@ -353,6 +351,8 @@ public final class SpawnerService extends Service {
 				// Random heading when spawned
 				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
 				aiLocation.setHeading(randomHeading);	// -180 to 180
+				break;
+			default:
 				break;
 		}
 		

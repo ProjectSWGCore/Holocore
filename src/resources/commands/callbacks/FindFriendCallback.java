@@ -89,14 +89,14 @@ public class FindFriendCallback implements ICmdCallback {
 
 		if (waypoint == null) {
 			waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
-			waypoint.setLocation(location);
+			waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
 			waypoint.setColor(WaypointObject.WaypointColor.PURPLE);
 			waypoint.setName(friendName);
 			ghost.addWaypoint(waypoint);
 			new ObjectCreatedIntent(waypoint).broadcast();
 			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_create_new_wp"), "TU", friendName)).broadcast();
 		} else {
-			waypoint.setLocation(location);
+			waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
 			ghost.updateWaypoint(waypoint);
 			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location"), "TU", friendName)).broadcast();
 		}

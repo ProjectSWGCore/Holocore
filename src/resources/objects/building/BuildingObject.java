@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
@@ -94,7 +93,7 @@ public class BuildingObject extends TangibleObject {
 				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
 				Assert.notNull(cell);
 				cell.setNumber(i);
-				cell.setLocation(new Location(0, 0, 0, getTerrain()));
+				cell.setPosition(getTerrain(), 0, 0, 0);
 				addObject(cell);
 				new ObjectCreatedIntent(cell).broadcast();
 			}

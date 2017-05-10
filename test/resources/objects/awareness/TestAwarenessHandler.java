@@ -43,7 +43,6 @@ import com.projectswg.common.debug.Log;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
-import services.objects.ClientBuildoutService;
 import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
@@ -52,24 +51,18 @@ public class TestAwarenessHandler {
 	private static final Location CREATURE_LOCATION = new Location(3618, 5, -4801, Terrain.TATOOINE);
 	private static final Location CREATURE2_LOCATION = new Location(3650, 5, -4800, Terrain.TATOOINE);
 	
-	private static final List<SWGObject> EISLEY_OBJECTS = new ArrayList<>(2524);
-	private static final List<SWGObject> WITHIN_RANGE = new ArrayList<>(537);
+	private static final List<SWGObject> EISLEY_OBJECTS = new ArrayList<>();
+	private static final List<SWGObject> WITHIN_RANGE = new ArrayList<>();
 	
 	private static final GenericCreatureObject CREATURE2 = new GenericCreatureObject(2);
 	private static final GenericCreatureObject CREATURE3 = new GenericCreatureObject(3);
 	
 	@BeforeClass
 	public static void initTatooine() {
-		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		buildoutService.initialize();
+		TestBuildoutObjectList list = TestBuildoutObjectList.getInstance();
+		EISLEY_OBJECTS.addAll(list.getMosEisleyObjects());
+		
 		double loadDistance = 1024*1.414*2; // 1024 * sqrt(2)
-		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843).values()) { // mos eisley's area id
-			initObject(obj, loadDistance);
-		}
-		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-60).values()) { // general tatooine's area id
-			initObject(obj, loadDistance);
-		}
-		buildoutService.terminate();
 		CREATURE2.setLocation(CREATURE2_LOCATION);
 		initObject(CREATURE2, loadDistance);
 		CREATURE3.setLocation(CREATURE2_LOCATION);

@@ -34,7 +34,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.encoding.Encodable;
@@ -61,7 +60,7 @@ public class GroupObject extends SWGObject {
 	
 	public GroupObject(long objectId) {
 		super(objectId, Baseline.BaselineType.GRUP);
-		setLocation(new Location(0, 0, 0, Terrain.GONE));
+		setPosition(Terrain.GONE, 0, 0, 0);
 	}
 	
 	@Override

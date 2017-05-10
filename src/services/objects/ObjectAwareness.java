@@ -70,8 +70,6 @@ import resources.server_info.DataManager;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
-	private static final Location GONE_LOCATION = new Location(0, 0, 0, Terrain.GONE);
-	
 	private final AwarenessHandler awarenessHandler;
 	private final DataTransformHandler dataTransformHandler;
 	
@@ -156,7 +154,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
 		disappearObject(obj, true, true);
-		obj.setLocation(GONE_LOCATION);
+		obj.setPosition(Terrain.GONE, 0, 0, 0);
 		obj.moveToContainer(null);
 	}
 	

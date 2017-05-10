@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
 import resources.objects.SWGObject;
@@ -61,8 +60,8 @@ public class TestTerrainMapChunk {
 		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
 		GenericCreatureObject objA = new GenericCreatureObject(1);
 		GenericCreatureObject objB = new GenericCreatureObject(2);
-		objA.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
-		objB.setLocation(new Location(100, 0, 0, Terrain.TATOOINE)); // 100m away
+		objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		objB.setPosition(Terrain.TATOOINE, 100, 0, 0); // 100m away
 		chunk.addObject(objA);
 		chunk.addObject(objB);
 		Assert.assertTrue("CONTAINS-OBJA", chunk.containsObject(objA));
@@ -74,8 +73,8 @@ public class TestTerrainMapChunk {
 		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
 		GenericCreatureObject objA = new GenericCreatureObject(1);
 		GenericCreatureObject objB = new GenericCreatureObject(2);
-		objA.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
-		objB.setLocation(new Location(100, 0, 0, Terrain.TATOOINE)); // 100m away
+		objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		objB.setPosition(Terrain.TATOOINE, 100, 0, 0); // 100m away
 		chunk.addObject(objA);
 		Assert.assertTrue("CONTAINS-OBJA", chunk.containsObject(objA));
 		chunk.addObject(objB);
@@ -160,7 +159,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunk.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 50);
 		cell.addObject(objA);
@@ -174,7 +173,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunk.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 25);
 		cell.addObject(objA);
@@ -189,7 +188,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 50);
 		cell.addObject(objA);
@@ -204,7 +203,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 25);
 		cell.addObject(objA);
@@ -217,7 +216,7 @@ public class TestTerrainMapChunk {
 		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 25);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 50);
 		cell.addObject(objA);
@@ -230,7 +229,7 @@ public class TestTerrainMapChunk {
 		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 25);
 		createCreature(chunk, 2, 50, 0, 0, 25);
 		cell.addObject(objA);
@@ -245,7 +244,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 25);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 50);
 		cell.addObject(objA);
@@ -260,7 +259,7 @@ public class TestTerrainMapChunk {
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
-		cell.setLocation(new Location(0, 0, 0, Terrain.TATOOINE));
+		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		GenericCreatureObject objA = createCreature(null, 1, 0, 0, 0, 25);
 		createCreature(chunkB, 2, 50, 0, 0, 25);
 		cell.addObject(objA);
@@ -270,7 +269,7 @@ public class TestTerrainMapChunk {
 	
 	private GenericCreatureObject createCreature(TerrainMapChunk chunk, long id, double x, double y, double z, double loadRange) {
 		GenericCreatureObject creature = new GenericCreatureObject(id);
-		creature.setLocation(new Location(x, y, z, Terrain.TATOOINE));
+		creature.setPosition(Terrain.TATOOINE, x, y, z);
 		creature.setPrefLoadRange(loadRange);
 		if (chunk != null)
 			chunk.addObject(creature);

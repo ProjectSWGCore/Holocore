@@ -86,7 +86,7 @@ public class AwarenessHandler implements AutoCloseable {
 		if (obj.getTerrain() != Terrain.GONE) {
 			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 			if (map != null) {
-				map.moveWithinMap(obj, requestedLocation);
+				map.moveWithinMap(obj);
 			} else {
 				Log.e("Unknown terrain: %s", requestedLocation.getTerrain());
 			}
