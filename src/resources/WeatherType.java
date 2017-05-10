@@ -33,9 +33,9 @@ package resources;
  *
  */
 public enum WeatherType {
-	CLEAR(0, .60f),	// 60% chance
-	LIGHT(1, .20f),	// 20% chance
-	MEDIUM(2, .15f),	// 15% chance
+	CLEAR(0, .70f),	// 70% chance
+	LIGHT(1, .15f),	// 15% chance
+	MEDIUM(2, .10f),	// 10% chance
 	HEAVY(3, .05f);	// 5% chance
 	
 	private int value;
