@@ -33,9 +33,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Terrain;
-
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import services.objects.ClientBuildoutService;
@@ -43,7 +40,6 @@ import services.objects.ClientBuildoutService;
 public class TestBuildoutObjectList {
 	
 	private static final TestBuildoutObjectList INSTANCE = new TestBuildoutObjectList();
-	private static final Location CENTER_LOCATION = new Location(3500, 5, -4800, Terrain.TATOOINE);
 	
 	private final List<SWGObject> mosEisleyObjects;
 	private final AtomicBoolean loaded;

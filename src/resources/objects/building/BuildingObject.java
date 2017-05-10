@@ -93,7 +93,7 @@ public class BuildingObject extends TangibleObject {
 				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
 				Assert.notNull(cell);
 				cell.setNumber(i);
-				cell.setPosition(getTerrain(), 0, 0, 0);
+				cell.setTerrain(getTerrain());
 				addObject(cell);
 				new ObjectCreatedIntent(cell).broadcast();
 			}

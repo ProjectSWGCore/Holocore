@@ -74,7 +74,7 @@ public class ClientBuildoutService extends Service {
 		Map<Long, SWGObject> objects;
 		long startTime = StandardLog.onStartLoad("client objects");
 		try {
-			loadAreas(getEvents());
+			loadAreas();
 			if (DataManager.getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
 				objects = loadObjects();
 			else
@@ -166,19 +166,14 @@ public class ClientBuildoutService extends Service {
 		}
 	}
 	
-	private List<String> getEvents() {
+	private void loadAreas() throws SQLException {
 		List <String> events = new ArrayList<>();
-		String eventStr = DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "");
-		String [] eventArray = eventStr.split(",");
-		for (String event : eventArray) {
-			event = event.toLowerCase(Locale.US);
-			if (!event.isEmpty())
-				events.add(event);
+		for (String event : DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "").split(",")) {
+			if (event.isEmpty())
+				continue;
+			events.add(event.toLowerCase(Locale.US));
 		}
-		return events;
-	}
-	
-	private void loadAreas(List <String> events) throws SQLException {
+		
 		try (AreaLoader areaLoader = new AreaLoader(new File("serverdata/buildout/areas.sdb"))) {
 			for (BuildoutArea area : areaLoader.getAllAreas(events)) {
 				areasById.put(area.getId(), area);
@@ -288,9 +283,8 @@ public class ClientBuildoutService extends Service {
 				areaId = getAreaId(line);
 				if (currentArea.getId() != areaId) {
 					BuildoutArea area = areas.get(areaId);
-					if (area == null) {
+					if (area == null) // usually for events
 						continue;
-					}
 					currentArea = area;
 				}
 				parseLine(line);
@@ -340,16 +334,16 @@ public class ClientBuildoutService extends Service {
 			int nextIndex = 0;
 			nextIndex = line.indexOf('\t', nextIndex); // move to column 2
 			nextIndex = line.indexOf('\t', nextIndex+1); // move to column 3
-			int prevIndex = nextIndex;
+			int prevIndex = nextIndex+1;
 			nextIndex = line.indexOf('\t', nextIndex+1); // move to column 3
-			return Integer.parseInt(line.substring(prevIndex+1, nextIndex));
+			return Integer.parseInt(line.substring(prevIndex, nextIndex));
 		}
 		
 		private void parseValue(String str, int index) {
 			switch (index) {
 				case 0: creationData.id				= Long.parseLong(str); break;
 				case 1: creationData.snapshot		= Long.parseLong(str) != 0; break;
-				case 2: creationData.areaId			= Integer.parseInt(str); break;
+				// case 2 = area id
 				case 3: creationData.templateCrc	= Integer.parseInt(str); break;
 				case 4: creationData.containerId	= Long.parseLong(str); break;
 				case 5: creationData.x				= Double.parseDouble(str); break;
@@ -370,7 +364,6 @@ public class ClientBuildoutService extends Service {
 		
 		public long id;
 		public boolean snapshot;
-		public int areaId;
 		public int templateCrc;
 		public long containerId;
 		public double x;
