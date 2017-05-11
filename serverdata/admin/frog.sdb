@@ -1,52 +1,52 @@
-frog_id	terrain	building_id	cell	x	y	z
-INTEGER	TEXT	TEXT	INTEGER	REAL	REAL	REAL
-1	CORELLIA		0	4735	26.5	-5676
-2	CORELLIA		0	5137	16.9	1518
-3	CORELLIA		0	213	50.5	4533
-6	DANTOOINE		0	4078	48.8	7381
-7	DANTOOINE		0	-6225	48.8	7381
-8	DANTOOINE		0	-564	1	-3789
-11	DATHOMIR		0	-6079	132	971
-12	DATHOMIR		0	-3989	124.7	-10
-13	DATHOMIR		0	-2457	117.9	1530
-14	DATHOMIR		0	-5786	510	-6554
-17	ENDOR		0	-1714	31.5	-8
-18	ENDOR		0	-4683	13.3	4326
-21	KASHYYYK_HUNTING		0	275	48.1	506
-22	KASHYYYK_MAIN		0	146	19.1	162
-23	KASHYYYK_DEAD_FOREST		0	-164	16.5	-262
-24	LOK		0	3331	106	4.912
-25	LOK		0	3848	62	-464
-26	LOK		0	-1914	12	-3299
-27	LOK		0	-70	41.1	2768
-28	NABOO		0	2535	295.9	-3887
-29	NABOO		0	-6439	41	-3265
-30	RORI		0	-1211	97.8	4552
-31	TALUS		0	4958	449.9	-5983
-32	TATOOINE		0	-3941	60	6318
-33	TATOOINE		0	7380	122.8	4298
-34	TATOOINE		0	3525	4	-4807
-35	TATOOINE		0	3684	7.8	2357
-36	TATOOINE		0	57	152.3	-79
-37	TATOOINE		0	-5485	11	2601
-38	YAVIN4		0	-947	86.4	-2131
-39	YAVIN4		0	4928	103.4	5587
-40	YAVIN4		0	5107	81.7	301
-41	YAVIN4		0	-5575	88	4902
-42	YAVIN4		0	-6485	84	-446
-43	DUNGEON1	du1_corvette_neutral_1	1	-42.6	0	-2.4
-44	DUNGEON1	du1_corvette_imperial	1	-42.6	0	-2.4
-45	DUNGEON1	du1_corvette_rebel_1	1	-42.6	0	-2.4
-47	DUNGEON1	du1_heroic_ek_1	1	-11.8	0.2	-117.7
-48	DUNGEON1	du1_heroic_isd_1	1	0	173.8	36.2
-49	DUNGEON1	du1_npe_station_1	8	75.1	0.9	-34.8
-50	DUNGEON1	du1_npe_dungeon_1	1	0.4	10.6	8.9
-51	DUNGEON1	du1_nova_orion	8	57.4	0.8	-41.7
-53	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	1	-5	-1.2	-5.2
-54	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_1	2	77.3	0	21.6
-55	MUSTAFAR	mus_sher_kar_1	1	-21.5	-1	4.8
-56	MUSTAFAR	mus_old_rep_fac_1	35	12.4	0	0
-57	MUSTAFAR	mus_obi_cave_1	1	4.8	0	0.6
-58	MUSTAFAR	mus_uplink_cave_1	1	-4.4	-1.2	-0.6
-59	MUSTAFAR	mus_working_df_1	1	0	0	2.5
-60	MUSTAFAR	mus_decrepit_df_1	1	0	0	2.5
+frog_id	comment	terrain	building_id	cell	x	y	z
+INTEGER	TEXT	TEXT	TEXT	INTEGER	REAL	REAL	REAL
+1	Corellia - Stronghold	CORELLIA		0	4735	26.5	-5676
+2	Coreliia - Corsec Base	CORELLIA		0	5137	16.9	1518
+3	Corellia - Rebel Base with X-Wings	CORELLIA		0	213	50.5	4533
+6	Dantooine - Force Crystal Hunter's Cave	DANTOOINE		0	4078	48.8	7381
+7	Dantooine - Jedi Temple Ruins	DANTOOINE		0	-6225	48.8	7381
+8	Dantooine - The Warren	DANTOOINE		0	-564	1	-3789
+11	Dathomir - Imperial Prison	DATHOMIR		0	-6079	132	971
+12	Dathomir - Nightsister Stronghold	DATHOMIR		0	-3989	124.7	-10
+13	Dathomir - Nightsister vs. Singing Moutain Clan	DATHOMIR		0	-2457	117.9	1530
+14	Dathomir - Quarantine Zone	DATHOMIR		0	-5786	510	-6554
+17	Endor - DWB	ENDOR		0	-1714	31.5	-8
+18	Endor - Jinda Cave	ENDOR		0	-4683	13.3	4326
+21	Kashyyyk - Etyyy, The Hunting Grounds	KASHYYYK_HUNTING		0	275	48.1	506
+22	Kashyyyk - Kachirho, Slaver Camp	KASHYYYK_MAIN		0	146	19.1	162
+23	Kashyyyk - Kkowir, The Dead Forest	KASHYYYK_DEAD_FOREST		0	-164	16.5	-262
+24	Lok - Droid Cave	LOK		0	3331	106	4.912
+25	Lok - Great Maze of Lok	LOK		0	3848	62	-464
+26	Lok - Imperial Outpost	LOK		0	-1914	12	-3299
+27	Lok - Kimogila Town	LOK		0	-70	41.1	2768
+28	Naboo - Emperor's Retreat	NABOO		0	2535	295.9	-3887
+29	Naboo - Weapon Development Facility	NABOO		0	-6439	41	-3265
+30	Rori - Hyperdrive Research Facility	RORI		0	-1211	97.8	4552
+31	Talus - Detainment Center	TALUS		0	4958	449.9	-5983
+32	Tatooine - Fort Tusken	TATOOINE		0	-3941	60	6318
+33	Tatooine - Imperial Oasis	TATOOINE		0	7380	122.8	4298
+34	Tatooine - Krayt Graveyard	TATOOINE		0	3525	4	-4807
+35	Tatooine - Mos Eisley	TATOOINE		0	3684	7.8	2357
+36	Tatooine - Mos Taike	TATOOINE		0	57	152.3	-79
+37	Tatooine - Squill Cave	TATOOINE		0	-5485	11	2601
+38	Yavin 4 - Blueleaf Temple	YAVIN4		0	-947	86.4	-2131
+39	Yavin 4 - Dark Enclave	YAVIN4		0	4928	103.4	5587
+40	Yavin 4 - Exar Kun	YAVIN4		0	5107	81.7	301
+41	Yavin 4 - Geonosian Cave	YAVIN4		0	-5575	88	4902
+42	Yavin 4 - Light Enclave	YAVIN4		0	-6485	84	-446
+43	Dungeon1 - Corvette Neutral	DUNGEON1	du1_corvette_neutral_1	1	-42.6	0	-2.4
+44	Dungeon1 - Corvette Imperial	DUNGEON1	du1_corvette_imperial	1	-42.6	0	-2.4
+45	Dungeon1 - Corvette Rebel	DUNGEON1	du1_corvette_rebel_1	1	-42.6	0	-2.4
+47	Dungeon1 - Heroic Exar Kun	DUNGEON1	du1_heroic_ek_1	1	-11.8	0.2	-117.7
+48	Dungeon1 - Heroic ISD	DUNGEON1	du1_heroic_isd_1	1	0	173.8	36.2
+49	Dungeon1 - NPE Station	DUNGEON1	du1_npe_station_1	8	75.1	0.9	-34.8
+50	Dungeon1 - NPE Dungeon	DUNGEON1	du1_npe_dungeon_1	1	0.4	10.6	8.9
+51	Dungeon1 - Nova Orion	DUNGEON1	du1_nova_orion	8	57.4	0.8	-41.7
+53	Kashyyyk - Myyydril Cave	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	1	-5	-1.2	-5.2
+54	Kashyyyk - Avatar Platform	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_1	2	77.3	0	21.6
+55	Mustafar - Sher Kar	MUSTAFAR	mus_sher_kar_1	1	-21.5	-1	4.8
+56	Mustafar - Old Republic Facility	MUSTAFAR	mus_old_rep_fac_1	35	12.4	0	0
+57	Mustafar - Obi Wan Cave	MUSTAFAR	mus_obi_cave_1	1	4.8	0	0.6
+58	Mustafar - Uplink Cave	MUSTAFAR	mus_uplink_cave_1	1	-4.4	-1.2	-0.6
+59	Mustafar - Working Droid Factory	MUSTAFAR	mus_working_df_1	1	0	0	2.5
+60	Mustafar - Decrepit Droid Factory	MUSTAFAR	mus_decrepit_df_1	1	0	0	2.5
