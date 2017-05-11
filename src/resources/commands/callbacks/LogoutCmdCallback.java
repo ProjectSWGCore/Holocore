@@ -42,6 +42,7 @@ import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
 import utilities.ScheduledUtilities;
 
@@ -64,11 +65,12 @@ public class LogoutCmdCallback implements ICmdCallback {
 		
 		if (timeToLogout == 0) {
 			IntentChain.broadcastChain(new ChatBroadcastIntent(player, "@logout:safe_to_log_out"), new ForceLogoutIntent(player));
-		} else if (isSystemMessageInterval(timeToLogout)) {
-			sendSystemMessage(player, "time_left", "DI", timeToLogout);
-			ScheduledUtilities.run(() -> updateLogout(player, creature, timeToLogout-1), 1, TimeUnit.SECONDS);
+			return;
 		}
-		
+		if (isSystemMessageInterval(timeToLogout)) {
+			sendSystemMessage(player, "time_left", "DI", timeToLogout);
+		}
+		ScheduledUtilities.run(() -> updateLogout(player, creature, timeToLogout-1), 1, TimeUnit.SECONDS);
 	}
 	
 	private boolean isSystemMessageInterval(int timeToLogout) {
@@ -88,14 +90,19 @@ public class LogoutCmdCallback implements ICmdCallback {
 			Log.i("Logout cancelled for %s - stood up!", creature.getObjectName());
 			return false;
 		}
+		if (player.getPlayerState() != PlayerState.ZONED_IN) {
+			Log.i("Logout cancelled for %s - player state changed to %s", player.getPlayerState());
+			return false;
+		}
 		return true;
 	}
 	
-	private void sendSystemMessage(Player player, String str, Object ... prose) {
-		if (prose.length == 0)
-			new ChatBroadcastIntent(player, "@logout:" + str).broadcast();
-		else
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("@logout:" + str), prose)).broadcast();
+	private void sendSystemMessage(Player player, String str) {
+		new ChatBroadcastIntent(player, "@logout:" + str).broadcast();
+	}
+	
+	private void sendSystemMessage(Player player, String str, String proseKey, Object prose) {
+		new ChatBroadcastIntent(player, new ProsePackage(new StringId("@logout:" + str), proseKey, prose)).broadcast();
 	}
 	
 }
