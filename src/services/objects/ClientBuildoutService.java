@@ -203,7 +203,7 @@ public class ClientBuildoutService extends Service {
 			while ((line = loader.loadNextLine()) != null) {
 				area = parseLine(line);
 				BuildoutArea replaced = areas.get(area.getName());
-				if (replaced == null || (!area.getEvent().isEmpty() && events.contains(area.getEvent()))) {
+				if ((replaced == null && area.getEvent().isEmpty()) || (!area.getEvent().isEmpty() && events.contains(area.getEvent()))) {
 					areas.put(area.getName(), area);
 				}
 			}

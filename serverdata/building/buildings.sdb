@@ -1,12 +1,69 @@
 building_id	terrain_name	object_id	iff	building_name	total_cells	x	y	z
-TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	REAL	REAL	REAL
-ad1_heroic_tusken_1	ADVENTURE1	-563231429879129061	tatooine_laserflit_bunker.iff	Adventure1 - Tusken Instance	10	-3782	5	3894
-ad1_heroic_tusken_2	ADVENTURE1	-563231429325558805	military_base_shed_rebel_style_01.iff	Adventure1 - Tusken Instance	6	-3091	5	4177
-ad1_heroic_tusken_3	ADVENTURE1	-563231428978316333	housing_tatt_style01_small.iff	Adventure1 - Tusken Instance	10	-4049	5	3498
+TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER	TEXT	TEXT	INTEGER	REAL	REAL	REAL
+ad1_heroic_tusken_bunker_1	ADVENTURE1	-566327654622946277	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 1	10	5217	5	-2106
+ad1_heroic_tusken_shed_1	ADVENTURE1	-566327654069376021	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 1	6	5909	5	-1823
+ad1_heroic_tusken_small_1	ADVENTURE1	-566327653722133549	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 1	10	4951	5	-2501
+ad1_heroic_tusken_bunker_2	ADVENTURE1	-566046179646235621	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 2	10	2217	5	-2106
+ad1_heroic_tusken_shed_2	ADVENTURE1	-566046179092665365	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 2	6	2909	5	-1823
+ad1_heroic_tusken_small_2	ADVENTURE1	-566046178745422893	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 2	10	1951	5	-2501
+ad1_heroic_tusken_bunker_3	ADVENTURE1	-565764704669524965	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 3	10	-775	5	-2098
+ad1_heroic_tusken_shed_3	ADVENTURE1	-565764704115954709	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 3	6	-83	5	-1815
+ad1_heroic_tusken_small_3	ADVENTURE1	-565764703768712237	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 3	10	-1041	5	-2493
+ad1_heroic_tusken_bunker_4	ADVENTURE1	-565483229692814309	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 4	10	-3783	5	-2106
+ad1_heroic_tusken_shed_4	ADVENTURE1	-565483229139244053	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 4	6	-3091	5	-1823
+ad1_heroic_tusken_small_4	ADVENTURE1	-565483228792001581	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 4	10	-4049	5	-2501
+ad1_heroic_tusken_bunker_5	ADVENTURE1	-565201754716103653	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 5	10	5217	5	894
+ad1_heroic_tusken_shed_5	ADVENTURE1	-565201754162533397	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 5	6	5909	5	1177
+ad1_heroic_tusken_small_5	ADVENTURE1	-565201753815290925	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 5	10	4951	5	499
+ad1_heroic_tusken_bunker_6	ADVENTURE1	-564920279739392997	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 6	10	2217	5	894
+ad1_heroic_tusken_shed_6	ADVENTURE1	-564920279185822741	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 6	6	2909	5	1177
+ad1_heroic_tusken_small_6	ADVENTURE1	-564920278838580269	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 6	10	1951	5	499
+ad1_heroic_tusken_bunker_7	ADVENTURE1	-564638804762682341	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 7	10	-783	5	894
+ad1_heroic_tusken_shed_7	ADVENTURE1	-564638804209112085	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 7	6	-91	5	1177
+ad1_heroic_tusken_small_7	ADVENTURE1	-564638803861869613	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 7	10	-1049	5	499
+ad1_heroic_tusken_bunker_8	ADVENTURE1	-564357329785971685	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 8	10	-3783	5	894
+ad1_heroic_tusken_shed_8	ADVENTURE1	-564357329232401429	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 8	6	-3091	5	1177
+ad1_heroic_tusken_small_8	ADVENTURE1	-564357328885158957	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 8	10	-4049	5	499
+ad1_heroic_tusken_bunker_9	ADVENTURE1	-564075854809261029	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 9	10	5217	5	3894
+ad1_heroic_tusken_shed_9	ADVENTURE1	-564075854255690773	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 9	6	5909	5	4177
+ad1_heroic_tusken_small_9	ADVENTURE1	-564075853908448301	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 9	10	4951	5	3499
+ad1_heroic_tusken_bunker_10	ADVENTURE1	-563794379832550373	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 10	10	2217	5	3894
+ad1_heroic_tusken_shed_10	ADVENTURE1	-563794379278980117	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 10	6	2909	5	4177
+ad1_heroic_tusken_small_10	ADVENTURE1	-563794378931737645	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 10	10	1951	5	3499
+ad1_heroic_tusken_bunker_11	ADVENTURE1	-563512904855839717	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 11	10	-783	5	3894
+ad1_heroic_tusken_shed_11	ADVENTURE1	-563512904302269461	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 11	6	-91	5	4177
+ad1_heroic_tusken_small_11	ADVENTURE1	-563512903955026989	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 11	10	-1049	5	3499
+ad1_heroic_tusken_bunker_12	ADVENTURE1	-563231429879129061	tatooine_laserflit_bunker.iff	Adventure1 - Heroic - Tusken Instance 12	10	-3783	5	3894
+ad1_heroic_tusken_shed_12	ADVENTURE1	-563231429325558805	military_base_shed_rebel_style_01.iff	Adventure1 - Heroic - Tusken Instance 12	6	-3091	5	4177
+ad1_heroic_tusken_small_12	ADVENTURE1	-563231428978316333	housing_tatt_style01_small.iff	Adventure1 - Heroic - Tusken Instance 12	10	-4049	5	3499
 ad1_world	ADVENTURE1	0	empty	Adventure1 - World	0	0	0	0
-ad2_heroic_echo_1	ADVENTURE2	-591378928025475237	military_abandoned_police_station_rebel.iff	Adventure2 - Hoth Instance	12	-6078	-4	5662
-ad2_heroic_echo_base	ADVENTURE2	-591378927621027473	echo_base.iff	Adventure2 - Hoth Instance - Echo Base	40	-5006	32	5000
-ad2_heroic_echo_3	ADVENTURE2	-591378927302421357	military_outpost_guard_house_rebel.iff	Adventure2 - Hoth Instance	2	-6068	8	5662
+ad2_heroic_echo_station_1	ADVENTURE2	-593630727839160485	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 1	12	3921	-4	-4337
+ad2_heroic_echo_base_1	ADVENTURE2	-593630727434712721	echo_base.iff	Adventure2 - Heroic - Echo Instance 1	40	4993	32	-5000
+ad2_heroic_echo_house_1	ADVENTURE2	-593630727116106605	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 1	2	3931	8	-4337
+ad2_heroic_echo_station_2	ADVENTURE2	-593349252862449829	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 2	12	-1079	-4	-4337
+ad2_heroic_echo_base_2	ADVENTURE2	-593349252458002065	echo_base.iff	Adventure2 - Heroic - Echo Instance 2	40	-7	32	-5000
+ad2_heroic_echo_house_2	ADVENTURE2	-593349252139395949	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 2	2	-1069	8	-4337
+ad2_heroic_echo_station_3	ADVENTURE2	-593067777885739173	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 3	12	-6079	-4	-4337
+ad2_heroic_echo_base_3	ADVENTURE2	-593067777481291409	echo_base.iff	Adventure2 - Heroic - Echo Instance 3	40	-5007	32	-5000
+ad2_heroic_echo_house_3	ADVENTURE2	-593067777162685293	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 3	2	-6069	8	-4337
+ad2_heroic_echo_station_4	ADVENTURE2	-592786302909028517	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 4	12	3921	-4	663
+ad2_heroic_echo_base_4	ADVENTURE2	-592786302504580753	echo_base.iff	Adventure2 - Heroic - Echo Instance 4	40	4993	32	0
+ad2_heroic_echo_house_4	ADVENTURE2	-592786302185974637	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 4	2	3931	8	663
+ad2_heroic_echo_station_5	ADVENTURE2	-592504827932317861	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 5	12	-1079	-4	663
+ad2_heroic_echo_base_5	ADVENTURE2	-592504827527870097	echo_base.iff	Adventure2 - Heroic - Echo Instance 5	40	-7	32	0
+ad2_heroic_echo_house_5	ADVENTURE2	-592504827209263981	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 5	2	-1069	8	663
+ad2_heroic_echo_station_6	ADVENTURE2	-592223352955607205	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 6	12	-6079	-4	663
+ad2_heroic_echo_base_6	ADVENTURE2	-592223352551159441	echo_base.iff	Adventure2 - Heroic - Echo Instance 6	40	-5007	32	0
+ad2_heroic_echo_house_6	ADVENTURE2	-592223352232553325	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 6	2	-6069	8	663
+ad2_heroic_echo_station_7	ADVENTURE2	-591941877978896549	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 7	12	3921	-4	5663
+ad2_heroic_echo_base_7	ADVENTURE2	-591941877574448785	echo_base.iff	Adventure2 - Heroic - Echo Instance 7	40	4993	32	5000
+ad2_heroic_echo_house_7	ADVENTURE2	-591941877255842669	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 7	2	3931	8	5663
+ad2_heroic_echo_station_8	ADVENTURE2	-591660403002185893	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 8	12	-1079	-4	5663
+ad2_heroic_echo_base_8	ADVENTURE2	-591660402597738129	echo_base.iff	Adventure2 - Heroic - Echo Instance 8	40	-7	32	5000
+ad2_heroic_echo_house_8	ADVENTURE2	-591660402279132013	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 8	2	-1069	8	5663
+ad2_heroic_echo_station_9	ADVENTURE2	-591378928025475237	military_abandoned_police_station_rebel.iff	Adventure2 - Heroic - Echo Instance 9	12	-6079	-4	5663
+ad2_heroic_echo_base_9	ADVENTURE2	-591378927621027473	echo_base.iff	Adventure2 - Heroic - Echo Instance 9	40	-5007	32	5000
+ad2_heroic_echo_house_9	ADVENTURE2	-591378927302421357	military_outpost_guard_house_rebel.iff	Adventure2 - Heroic - Echo Instance 9	2	-6069	8	5663
 ad2_world	ADVENTURE2	0	empty	Adventure2 - World	0	0	0	0
 cor_afarathu_cave	CORELLIA	6035619	corellia_afarathu_cave.iff	Corellia - Afarathu Cave	11	-2523	28	2927
 cor_bela_asso_hall	CORELLIA	2365921	association_hall_civilian_corellia.iff	Corellia - Bela Vistal / Association Hall	17	6707	315	-5619
@@ -247,62 +304,117 @@ dat_trade_outpost_shed1	DATHOMIR	1392896	outpost_shed_s03.iff	Dathomir - Trade O
 dat_trade_outpost_shed2	DATHOMIR	6955398	outpost_shed.iff	Dathomir - Trade Outpost / Shed 2	6	577	6	3041
 dat_trade_outpost_starport	DATHOMIR	6915358	outpost_starport.iff	Dathomir - Trade Outpost / Starport	1	592	6	3087
 dat_world	DATHOMIR	0	empty	Dathomir - World	0	0	0	0
-du1_corvette_1	DUNGEON1	4335861	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 1	66	600	0	600
-du1_corvette_10	DUNGEON1	1945896	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 10	66	1900	0	1000
-du1_corvette_11	DUNGEON1	1945762	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 11	66	2050	0	600
-du1_corvette_12	DUNGEON1	1945829	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 12	66	2050	0	1000
-du1_corvette_13	DUNGEON1	1945963	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 13	66	2550	0	600
-du1_corvette_14	DUNGEON1	1946164	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 14	66	2550	0	1000
-du1_corvette_15	DUNGEON1	1946030	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 15	66	2700	0	600
-du1_corvette_16	DUNGEON1	1946097	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 16	66	2700	0	1000
-du1_corvette_2	DUNGEON1	4336062	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 2	66	600	0	1000
-du1_corvette_3	DUNGEON1	4335928	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 3	66	750	0	600
-du1_corvette_4	DUNGEON1	4335995	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 4	66	750	0	1000
-du1_corvette_5	DUNGEON1	1945628	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 5	66	1250	0	1000
-du1_corvette_6	DUNGEON1	4336129	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 6	66	1250	0	600
-du1_corvette_7	DUNGEON1	1945494	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 7	66	1400	0	600
-du1_corvette_8	DUNGEON1	1945561	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 8	66	1400	0	1000
-du1_corvette_9	DUNGEON1	1945695	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 9	66	1900	0	600
-du1_imp_corvette_1	DUNGEON1	4336196	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 1	66	600	0	1900
-du1_imp_corvette_10	DUNGEON1	1946633	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 10	66	1900	0	2300
-du1_imp_corvette_11	DUNGEON1	1946499	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 11	66	2050	0	1900
-du1_imp_corvette_12	DUNGEON1	1946566	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 12	66	2050	0	2300
-du1_imp_corvette_13	DUNGEON1	1946700	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 13	66	2550	0	1900
-du1_imp_corvette_14	DUNGEON1	1946901	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 14	66	2550	0	2300
-du1_imp_corvette_15	DUNGEON1	1946767	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 15	66	2700	0	1900
-du1_imp_corvette_16	DUNGEON1	1946834	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 16	66	2700	0	2300
-du1_imp_corvette_2	DUNGEON1	4336397	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 2	66	600	0	2300
-du1_imp_corvette_3	DUNGEON1	4336263	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 3	66	750	0	1900
-du1_imp_corvette_4	DUNGEON1	4336330	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 4	66	750	0	2300
-du1_imp_corvette_5	DUNGEON1	1946365	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 5	66	1250	0	2300
-du1_imp_corvette_6	DUNGEON1	4336464	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 6	66	1250	0	1900
-du1_imp_corvette_7	DUNGEON1	1946231	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 7	66	1400	0	1900
-du1_imp_corvette_8	DUNGEON1	1946298	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 8	66	1400	0	2300
-du1_imp_corvette_9	DUNGEON1	1946432	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 9	66	1900	0	1900
-du1_reb_corvette_1	DUNGEON1	4336531	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 1	66	600	0	3200
-du1_reb_corvette_10	DUNGEON1	1947370	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 10	66	1900	0	3600
-du1_reb_corvette_11	DUNGEON1	1947236	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 11	66	2050	0	3200
-du1_reb_corvette_12	DUNGEON1	1947303	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 12	66	2050	0	3600
-du1_reb_corvette_13	DUNGEON1	1947437	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 13	66	2550	0	3200
-du1_reb_corvette_14	DUNGEON1	1947638	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 14	66	2550	0	3600
-du1_reb_corvette_15	DUNGEON1	1947504	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 15	66	2700	0	3200
-du1_reb_corvette_16	DUNGEON1	1947571	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 16	66	2700	0	3600
-du1_reb_corvette_2	DUNGEON1	4336732	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 2	66	600	0	3600
-du1_reb_corvette_3	DUNGEON1	4336598	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 3	66	750	0	3200
-du1_reb_corvette_4	DUNGEON1	4336665	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 4	66	750	0	3600
-du1_reb_corvette_5	DUNGEON1	1947102	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 5	66	1250	0	3600
-du1_reb_corvette_6	DUNGEON1	4336799	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 6	66	1250	0	3200
-du1_reb_corvette_7	DUNGEON1	1946968	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 7	66	1400	0	3200
-du1_reb_corvette_8	DUNGEON1	1947035	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 8	66	1400	0	3600
-du1_reb_corvette_9	DUNGEON1	1947169	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 9	66	1900	0	3200
-du1_meatlump_bunker	DUNGEON1	-550002104623079852	mtp_instance_bunker.iff	Dungeon1 - Meatlump Bunker	34	7434	0	2740
-du1_heroic_ek	DUNGEON1	-547187355972011807	exar_kun_tomb.iff	Dungeon1 - Heroic Instance - EK	7	-6751	2	-3736
-du1_heroic_isd	DUNGEON1	-544372605667357341	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic Instance - ISD	58	-7249	625	6241
-du1_heroic_ig88	DUNGEON1	-541557855450031756	ig88_factory_arena.iff	Dungeon1 - Heroic Instance - IG88	1	-6750	50	-5750
-du1_heroic_am	DUNGEON1	-538743105424195585	axkva_min_lair.iff	Dungeon1 - Heroic Instance - AM	2	-6750	50	-6750
-du1_npe_dungeon	DUNGEON1	-537054255563931649	npe_space_dungeon.iff	Dungeon1 - Tansarii Dungeon	44	-200	0	1290
+du1_corvette_neutral_1	DUNGEON1	4335861	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 1	66	600	0	600
+du1_corvette_neutral_2	DUNGEON1	4336062	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 2	66	600	0	1000
+du1_corvette_neutral_3	DUNGEON1	4335928	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 3	66	750	0	600
+du1_corvette_neutral_4	DUNGEON1	4335995	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 4	66	750	0	1000
+du1_corvette_neutral_5	DUNGEON1	1945628	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 5	66	1250	0	1000
+du1_corvette_neutral_6	DUNGEON1	4336129	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 6	66	1250	0	600
+du1_corvette_neutral_7	DUNGEON1	1945494	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 7	66	1400	0	600
+du1_corvette_neutral_8	DUNGEON1	1945561	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 8	66	1400	0	1000
+du1_corvette_neutral_9	DUNGEON1	1945695	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 9	66	1900	0	600
+du1_corvette_neutral_10	DUNGEON1	1945896	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 10	66	1900	0	1000
+du1_corvette_neutral_11	DUNGEON1	1945762	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 11	66	2050	0	600
+du1_corvette_neutral_12	DUNGEON1	1945829	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 12	66	2050	0	1000
+du1_corvette_neutral_13	DUNGEON1	1945963	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 13	66	2550	0	600
+du1_corvette_neutral_14	DUNGEON1	1946164	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 14	66	2550	0	1000
+du1_corvette_neutral_15	DUNGEON1	1946030	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 15	66	2700	0	600
+du1_corvette_neutral_16	DUNGEON1	1946097	space_dungeon_corellian_corvette.iff	Dungeon1 - Corvette - Neutral 16	66	2700	0	1000
+du1_corvette_imperial_1	DUNGEON1	4336196	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 1	66	600	0	1900
+du1_corvette_imperial_2	DUNGEON1	4336397	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 2	66	600	0	2300
+du1_corvette_imperial_3	DUNGEON1	4336263	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 3	66	750	0	1900
+du1_corvette_imperial_4	DUNGEON1	4336330	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 4	66	750	0	2300
+du1_corvette_imperial_5	DUNGEON1	1946365	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 5	66	1250	0	2300
+du1_corvette_imperial_6	DUNGEON1	4336464	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 6	66	1250	0	1900
+du1_corvette_imperial_7	DUNGEON1	1946231	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 7	66	1400	0	1900
+du1_corvette_imperial_8	DUNGEON1	1946298	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 8	66	1400	0	2300
+du1_corvette_imperial_9	DUNGEON1	1946432	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 9	66	1900	0	1900
+du1_corvette_imperial_10	DUNGEON1	1946633	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 10	66	1900	0	2300
+du1_corvette_imperial_11	DUNGEON1	1946499	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 11	66	2050	0	1900
+du1_corvette_imperial_12	DUNGEON1	1946566	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 12	66	2050	0	2300
+du1_corvette_imperial_13	DUNGEON1	1946700	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 13	66	2550	0	1900
+du1_corvette_imperial_14	DUNGEON1	1946901	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 14	66	2550	0	2300
+du1_corvette_imperial_15	DUNGEON1	1946767	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 15	66	2700	0	1900
+du1_corvette_imperial_16	DUNGEON1	1946834	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Corvette - Imperial 16	66	2700	0	2300
+du1_corvette_rebel_1	DUNGEON1	4336531	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 1	66	600	0	3200
+du1_corvette_rebel_2	DUNGEON1	4336732	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 2	66	600	0	3600
+du1_corvette_rebel_3	DUNGEON1	4336598	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 3	66	750	0	3200
+du1_corvette_rebel_4	DUNGEON1	4336665	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 4	66	750	0	3600
+du1_corvette_rebel_5	DUNGEON1	1947102	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 5	66	1250	0	3600
+du1_corvette_rebel_6	DUNGEON1	4336799	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 6	66	1250	0	3200
+du1_corvette_rebel_7	DUNGEON1	1946968	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 7	66	1400	0	3200
+du1_corvette_rebel_8	DUNGEON1	1947035	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 8	66	1400	0	3600
+du1_corvette_rebel_9	DUNGEON1	1947169	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 9	66	1900	0	3200
+du1_corvette_rebel_10	DUNGEON1	1947370	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 10	66	1900	0	3600
+du1_corvette_rebel_11	DUNGEON1	1947236	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 11	66	2050	0	3200
+du1_corvette_rebel_12	DUNGEON1	1947303	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 12	66	2050	0	3600
+du1_corvette_rebel_13	DUNGEON1	1947437	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 13	66	2550	0	3200
+du1_corvette_rebel_14	DUNGEON1	1947638	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 14	66	2550	0	3600
+du1_corvette_rebel_15	DUNGEON1	1947504	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 15	66	2700	0	3200
+du1_corvette_rebel_16	DUNGEON1	1947571	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Corvette - Rebel 16	66	2700	0	3600
+du1_meatlump_bunker_1	DUNGEON1	-552535379413475756	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 1	34	7434	0	-2120
+du1_meatlump_bunker_2	DUNGEON1	-552253904436765100	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 2	34	7434	0	-1580
+du1_meatlump_bunker_3	DUNGEON1	-551972429460054444	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 3	34	7434	0	-1040
+du1_meatlump_bunker_4	DUNGEON1	-551690954483343788	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 4	34	7434	0	-500
+du1_meatlump_bunker_5	DUNGEON1	-551409479506633132	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 5	34	7434	0	40
+du1_meatlump_bunker_6	DUNGEON1	-551128004529922476	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 6	34	7434	0	580
+du1_meatlump_bunker_7	DUNGEON1	-550846529553211820	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 7	34	7434	0	1120
+du1_meatlump_bunker_8	DUNGEON1	-550565054576501164	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 8	34	7434	0	1660
+du1_meatlump_bunker_9	DUNGEON1	-550283579599790508	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 9	34	7434	0	2200
+du1_meatlump_bunker_10	DUNGEON1	-550002104623079852	mtp_instance_bunker.iff	Dungeon1 - Meatlump - Bunker Instance 10	34	7434	0	2740
+du1_heroic_ek_1	DUNGEON1	-549720630762407711	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 1	7	6749	2	-3736
+du1_heroic_ek_2	DUNGEON1	-549439155785697055	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 2	7	5249	2	-3736
+du1_heroic_ek_3	DUNGEON1	-549157680808986399	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 3	7	3749	2	-3736
+du1_heroic_ek_4	DUNGEON1	-548876205832275743	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 4	7	2249	2	-3736
+du1_heroic_ek_5	DUNGEON1	-548594730855565087	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 5	7	749	2	-3736
+du1_heroic_ek_6	DUNGEON1	-548313255878854431	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 6	7	-751	2	-3736
+du1_heroic_ek_7	DUNGEON1	-548031780902143775	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 7	7	-2251	2	-3736
+du1_heroic_ek_8	DUNGEON1	-547750305925433119	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 8	7	-3751	2	-3736
+du1_heroic_ek_9	DUNGEON1	-547468830948722463	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 9	7	-5251	2	-3736
+du1_heroic_ek_10	DUNGEON1	-547187355972011807	exar_kun_tomb.iff	Dungeon1 - Heroic - Exar Kun - 10	7	-6751	2	-3736
+du1_heroic_isd_1	DUNGEON1	-546905880457753245	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 1	58	7151	625	6242
+du1_heroic_isd_2	DUNGEON1	-546624405481042589	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 2	58	5551	625	6242
+du1_heroic_isd_3	DUNGEON1	-546342930504331933	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 3	58	3951	625	6242
+du1_heroic_isd_4	DUNGEON1	-546061455527621277	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 4	58	2351	625	6242
+du1_heroic_isd_5	DUNGEON1	-545779980550910621	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 5	58	751	625	6242
+du1_heroic_isd_6	DUNGEON1	-545498505574199965	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 6	58	-849	625	6242
+du1_heroic_isd_7	DUNGEON1	-545217030597489309	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 7	58	-2449	625	6242
+du1_heroic_isd_8	DUNGEON1	-544935555620778653	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 8	58	-4049	625	6242
+du1_heroic_isd_9	DUNGEON1	-544654080644067997	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 9	58	-5649	625	6242
+du1_heroic_isd_10	DUNGEON1	-544372605667357341	space_dungeon_star_destroyer.iff	Dungeon1 - Heroic - ISD - 10	58	-7249	625	6242
+du1_heroic_ig88_1	DUNGEON1	-544091130240427660	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 1	1	2250	50	-5750
+du1_heroic_ig88_2	DUNGEON1	-543809655263717004	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 2	1	1250	50	-5750
+du1_heroic_ig88_3	DUNGEON1	-543528180287006348	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 3	1	250	50	-5750
+du1_heroic_ig88_4	DUNGEON1	-543246705310295692	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 4	1	-750	50	-5750
+du1_heroic_ig88_5	DUNGEON1	-542965230333585036	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 5	1	-1750	50	-5750
+du1_heroic_ig88_6	DUNGEON1	-542683755356874380	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 6	1	-2750	50	-5750
+du1_heroic_ig88_7	DUNGEON1	-542402280380163724	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 7	1	-3750	50	-5750
+du1_heroic_ig88_8	DUNGEON1	-542120805403453068	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 8	1	-4750	50	-5750
+du1_heroic_ig88_9	DUNGEON1	-541839330426742412	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 9	1	-5750	50	-5750
+du1_heroic_ig88_10	DUNGEON1	-541557855450031756	ig88_factory_arena.iff	Dungeon1 - Heroic - IG88 - 10	1	-6750	50	-5750
+du1_heroic_am_1	DUNGEON1	-541276380214591489	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 1	2	2250	50	-6750
+du1_heroic_am_2	DUNGEON1	-540994905237880833	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 2	2	1250	50	-6750
+du1_heroic_am_3	DUNGEON1	-540713430261170177	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 3	2	250	50	-6750
+du1_heroic_am_4	DUNGEON1	-540431955284459521	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 4	2	-750	50	-6750
+du1_heroic_am_5	DUNGEON1	-540150480307748865	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 5	2	-1750	50	-6750
+du1_heroic_am_6	DUNGEON1	-539869005331038209	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 6	2	-2750	50	-6750
+du1_heroic_am_7	DUNGEON1	-539587530354327553	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 7	2	-3750	50	-6750
+du1_heroic_am_8	DUNGEON1	-539306055377616897	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 8	2	-4750	50	-6750
+du1_heroic_am_9	DUNGEON1	-539024580400906241	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 9	2	-5750	50	-6750
+du1_heroic_am_10	DUNGEON1	-538743105424195585	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 10	2	-6750	50	-6750
+du1_npe_station_1	DUNGEON1	-538461630447484929	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 1	44	-4700	0	1290
+du1_npe_station_2	DUNGEON1	-538180155470774273	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 2	44	-3800	0	1290
+du1_npe_station_3	DUNGEON1	-537898680494063617	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 3	44	-2900	0	1290
+du1_npe_station_4	DUNGEON1	-537617205517352961	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 4	44	-2000	0	1290
+du1_npe_station_5	DUNGEON1	-537335730540642305	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 5	44	-1100	0	1290
+du1_npe_station_6	DUNGEON1	-537054255563931649	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 6	44	-200	0	1290
 du1_nova_orion	DUNGEON1	-536772780644430992	chapter_8_space_station.iff	Dungeon1 - Nova Orion	31	-5550	0	150
-du1_npe_station	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - Tansarii Station	31	-150	0	150
+du1_npe_dungeon_1	DUNGEON1	-536491305610510337	npe_space_station.iff	Dungeon1 - NPE - Station - 1	31	-4650	0	150
+du1_npe_dungeon_2	DUNGEON1	-536209830633799681	npe_space_station.iff	Dungeon1 - NPE - Station - 2	31	-3750	0	150
+du1_npe_dungeon_3	DUNGEON1	-535928355657089025	npe_space_station.iff	Dungeon1 - NPE - Station - 3	31	-2850	0	150
+du1_npe_dungeon_4	DUNGEON1	-535646880680378369	npe_space_station.iff	Dungeon1 - NPE - Station - 4	31	-1950	0	150
+du1_npe_dungeon_5	DUNGEON1	-535365405703667713	npe_space_station.iff	Dungeon1 - NPE - Station - 5	31	-1050	0	150
+du1_npe_dungeon_6	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - NPE - Station - 6	31	-150	0	150
 du1_world	DUNGEON1	0	empty	Dungeon1 - World	0	0	0	0
 end_bf_bunker_bunker	ENDOR	-424464266445617086	gcw_battlefield_base.iff	Endor - BF Bunker Assault / Bunker	10	-7065	379	7076
 end_bf_bunker_imp	ENDOR	-424464265497775194	military_imperial_field_hospital.iff	Endor - BF Bunker Assault / Imp	9	-7099	305	7281
@@ -336,9 +448,6 @@ end_world	ENDOR	0	empty	Endor - World	0	0	0	0
 kas_dead_f_shadowweave_caverns	KASHYYYK_DEAD_FOREST	-281474976740656	ep3_forest_webweaver.iff	Kashyyyk - Dead Forest / ShadowWeave Caverns	11	212	10	326
 kas_dead_f_world	KASHYYYK_DEAD_FOREST	0	empty	Kashyyyk - Dead Forest / World	0	0	0	0
 kas_hunting_chiss_hut1	KASHYYYK_HUNTING	-28428972650806242	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 1	1	-1239	10	-104
-kas_hunting_chiss_hut10	KASHYYYK_HUNTING	-28428972650806254	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 10	1	-1088	4	75
-kas_hunting_chiss_hut11	KASHYYYK_HUNTING	-28428972650806236	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 11	1	-1077	7	-80
-kas_hunting_chiss_hut12	KASHYYYK_HUNTING	-28428972650806234	poi_kash_rodian_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 12	1	285	48	494
 kas_hunting_chiss_hut2	KASHYYYK_HUNTING	-28428972650806244	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 2	1	-1238	13	-125
 kas_hunting_chiss_hut3	KASHYYYK_HUNTING	-28428972650806250	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 3	1	-1235	6	-4
 kas_hunting_chiss_hut4	KASHYYYK_HUNTING	-28428972650806248	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 4	1	-1228	6	-26
@@ -347,6 +456,51 @@ kas_hunting_chiss_hut6	KASHYYYK_HUNTING	-28428972650806240	poi_kash_chiss_hut.if
 kas_hunting_chiss_hut7	KASHYYYK_HUNTING	-28428972650806238	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 7	1	-1185	13	-147
 kas_hunting_chiss_hut8	KASHYYYK_HUNTING	-28428972650806246	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 8	1	-1143	6	-52
 kas_hunting_chiss_hut9	KASHYYYK_HUNTING	-28428972650806256	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 9	1	-1122	5	86
+kas_hunting_chiss_hut10	KASHYYYK_HUNTING	-28428972650806254	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 10	1	-1088	4	75
+kas_hunting_chiss_hut11	KASHYYYK_HUNTING	-28428972650806236	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 11	1	-1077	7	-80
+kas_hunting_chiss_hut12	KASHYYYK_HUNTING	-28428972650806234	poi_kash_rodian_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 12	1	285	48	494
+kas_north_trando_slave_camp_1	KASHYYYK_NORTH_DUNGEONS	-9360000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 1	10	2832	35	2332
+kas_north_trando_slave_camp_2	KASHYYYK_NORTH_DUNGEONS	-9330000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 2	10	1552	35	2332
+kas_north_trando_slave_camp_3	KASHYYYK_NORTH_DUNGEONS	-9300000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 3	10	272	35	2332
+kas_north_trando_slave_camp_4	KASHYYYK_NORTH_DUNGEONS	-9270000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 4	10	-1007	35	2332
+kas_north_trando_slave_camp_5	KASHYYYK_NORTH_DUNGEONS	-9240000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 5	10	-2287	35	2332
+kas_north_trando_slave_camp_6	KASHYYYK_NORTH_DUNGEONS	-9210000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 6	10	-3567	35	2332
+kas_north_trando_slave_camp_7	KASHYYYK_NORTH_DUNGEONS	-9180000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 7	10	2832	35	3612
+kas_north_trando_slave_camp_8	KASHYYYK_NORTH_DUNGEONS	-9150000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 8	10	1552	35	3612
+kas_north_trando_slave_camp_9	KASHYYYK_NORTH_DUNGEONS	-9120000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 9	10	272	35	3612
+kas_north_trando_slave_camp_10	KASHYYYK_NORTH_DUNGEONS	-9090000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 10	10	-1008	35	3612
+kas_north_trando_slave_camp_11	KASHYYYK_NORTH_DUNGEONS	-9060000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 11	10	-2288	35	3612
+kas_north_trando_slave_camp_12	KASHYYYK_NORTH_DUNGEONS	-9030000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 12	10	-3568	35	3612
+kas_pob_myyyydril_1	KASHYYYK_POB_DUNGEONS	-12900000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 1	79	5141	4	-2719
+kas_pob_myyyydril_2	KASHYYYK_POB_DUNGEONS	-12870000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 2	79	4117	4	-2719
+kas_pob_myyyydril_3	KASHYYYK_POB_DUNGEONS	-12840000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 3	79	3093	4	-2719
+kas_pob_myyyydril_4	KASHYYYK_POB_DUNGEONS	-12810000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 4	79	2069	4	-2719
+kas_pob_myyyydril_5	KASHYYYK_POB_DUNGEONS	-12780000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 5	79	1045	4	-2719
+kas_pob_myyyydril_6	KASHYYYK_POB_DUNGEONS	-12750000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 6	79	5141	4	-1695
+kas_pob_myyyydril_7	KASHYYYK_POB_DUNGEONS	-12720000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 7	79	4117	4	-1695
+kas_pob_myyyydril_8	KASHYYYK_POB_DUNGEONS	-12690000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 8	79	3093	4	-1695
+kas_pob_myyyydril_9	KASHYYYK_POB_DUNGEONS	-12660000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 9	79	2069	4	-1695
+kas_pob_myyyydril_10	KASHYYYK_POB_DUNGEONS	-12630000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 10	79	1045	4	-1695
+kas_pob_avatar_1	KASHYYYK_POB_DUNGEONS	-12600000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 1	52	-5694	42	2548
+kas_pob_avatar_2	KASHYYYK_POB_DUNGEONS	-12570000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 2	52	-4670	42	2548
+kas_pob_avatar_3	KASHYYYK_POB_DUNGEONS	-12540000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 3	52	-3646	42	2548
+kas_pob_avatar_4	KASHYYYK_POB_DUNGEONS	-12510000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 4	52	-2622	42	2548
+kas_pob_avatar_5	KASHYYYK_POB_DUNGEONS	-12480000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 5	52	-1598	42	2548
+kas_pob_avatar_6	KASHYYYK_POB_DUNGEONS	-12450000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 6	52	-5694	42	1524
+kas_pob_avatar_7	KASHYYYK_POB_DUNGEONS	-12420000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 7	52	-4670	42	1524
+kas_pob_avatar_8	KASHYYYK_POB_DUNGEONS	-12390000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 8	52	-3646	42	1524
+kas_pob_avatar_9	KASHYYYK_POB_DUNGEONS	-12360000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 9	52	-2622	42	1524
+kas_pob_avatar_10	KASHYYYK_POB_DUNGEONS	-12330000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 10	52	-1598	42	1524
+kas_pob_avatar_11	KASHYYYK_POB_DUNGEONS	-12300000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 11	52	5570	42	2548
+kas_pob_avatar_12	KASHYYYK_POB_DUNGEONS	-12270000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 12	52	4546	42	2548
+kas_pob_avatar_13	KASHYYYK_POB_DUNGEONS	-12240000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 13	52	3522	42	2548
+kas_pob_avatar_14	KASHYYYK_POB_DUNGEONS	-12210000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 14	52	2498	42	2548
+kas_pob_avatar_15	KASHYYYK_POB_DUNGEONS	-12180000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 15	52	1474	42	2548
+kas_pob_avatar_16	KASHYYYK_POB_DUNGEONS	-12150000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 16	52	5570	42	1524
+kas_pob_avatar_17	KASHYYYK_POB_DUNGEONS	-12120000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 17	52	4546	42	1524
+kas_pob_avatar_18	KASHYYYK_POB_DUNGEONS	-12090000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 18	52	3522	42	1524
+kas_pob_avatar_19	KASHYYYK_POB_DUNGEONS	-12060000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 19	52	2498	42	1524
+kas_pob_avatar_20	KASHYYYK_POB_DUNGEONS	-12030000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 20	52	1474	42	1524
 kas_hunting_world	KASHYYYK_HUNTING	0	empty	Kashyyyk - Hunting grounds / World	0	0	0	0
 kas_main_kachirho_guard_house	KASHYYYK_MAIN	-56576470324871856	military_outpost_guard_house_imperial.iff	Kashyyyk - Kachirho / Guard House	2	-665	19	-108
 kas_main_kachirho_imp_bunker	KASHYYYK_MAIN	-56576470324871847	bunker_imperial_kashyyyk_01.iff	Kashyyyk - Kachirho / Imp Bunker	10	-678	19	-110
@@ -384,12 +538,72 @@ lok_prolog_bunker	LOK	-487796135652092032	prolog_bunker_dungeon.iff	Lok - Prolog
 lok_reb_base_hospital	LOK	-482729586888819169	military_rebel_field_hospital.iff	Lok - Reb Base / Hospital	9	-6097	62	5950
 lok_reb_base_outpost	LOK	-482729585582547239	military_rebel_forward_outpost.iff	Lok - Reb Base / Outpost	6	-6069	62	5946
 lok_world	LOK	0	empty	Lok - World	0	0	0	0
-mus_crashed_republic_ship_cockpit	MUSTAFAR	-506936433055891607	must_crashed_republic_ship.iff	Mustafar - Crashed Republic Ship / Cockpit	2	1956	99	3009
-mus_mensix	MUSTAFAR	-507780858040143424	must_new_mining_facility.iff	Mustafar - Mensix Mining Facility	30	-1245	199	5639
-mus_sher_kar	MUSTAFAR	-528328531340261312	must_monster_lair.iff	Mustafar - Sher Kar	1	-6744	-5	-5746
-mus_old_republic_facility	MUSTAFAR	-524950831619703440	old_republic_facility.iff	Mustafar - Old Republic Facility	35	-6748	-5	-4746
-mus_obi_wan_cave	MUSTAFAR	-515943632364872448	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave	1	6748	-5	6954
-mus_beetle_cave	MUSTAFAR	-513691832551157200	uplink_cave.iff	Mustafar - Beetle Cave	1	5947	-5	6255
+mus_shar_kar_1	MUSTAFAR	-531424756084078528	must_monster_lair.iff	Mustafar - Sher Kar Instance - 1	1	956	-5	-5747
+mus_shar_kar_2	MUSTAFAR	-531143281107367872	must_monster_lair.iff	Mustafar - Sher Kar Instance - 2	1	256	-5	-5747
+mus_shar_kar_3	MUSTAFAR	-530861806130657216	must_monster_lair.iff	Mustafar - Sher Kar Instance - 3	1	-444	-5	-5747
+mus_shar_kar_4	MUSTAFAR	-530580331153946560	must_monster_lair.iff	Mustafar - Sher Kar Instance - 4	1	-1144	-5	-5747
+mus_shar_kar_5	MUSTAFAR	-530298856177235904	must_monster_lair.iff	Mustafar - Sher Kar Instance - 5	1	-1844	-5	-5747
+mus_shar_kar_6	MUSTAFAR	-530017381200525248	must_monster_lair.iff	Mustafar - Sher Kar Instance - 6	1	-2544	-5	-5747
+mus_shar_kar_7	MUSTAFAR	-529735906223814592	must_monster_lair.iff	Mustafar - Sher Kar Instance - 7	1	-3244	-5	-5747
+mus_shar_kar_8	MUSTAFAR	-529454431247103936	must_monster_lair.iff	Mustafar - Sher Kar Instance - 8	1	-3944	-5	-5747
+mus_shar_kar_9	MUSTAFAR	-529172956270393280	must_monster_lair.iff	Mustafar - Sher Kar Instance - 9	1	-4644	-5	-5747
+mus_shar_kar_10	MUSTAFAR	-528891481293682624	must_monster_lair.iff	Mustafar - Sher Kar Instance - 10	1	-5344	-5	-5747
+mus_shar_kar_11	MUSTAFAR	-528610006316971968	must_monster_lair.iff	Mustafar - Sher Kar Instance - 11	1	-6044	-5	-5747
+mus_shar_kar_12	MUSTAFAR	-528328531340261312	must_monster_lair.iff	Mustafar - Sher Kar Instance - 12	1	-6744	-5	-5747
+mus_old_rep_fac_1	MUSTAFAR	-528047056363520656	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 1	35	951	-5	-4746
+mus_old_rep_fac_2	MUSTAFAR	-527765581386810000	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 2	35	251	-5	-4746
+mus_old_rep_fac_3	MUSTAFAR	-527484106410099344	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 3	35	-449	-5	-4746
+mus_old_rep_fac_4	MUSTAFAR	-527202631433388688	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 4	35	-1149	-5	-4746
+mus_old_rep_fac_5	MUSTAFAR	-526921156456678032	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 5	35	-1849	-5	-4746
+mus_old_rep_fac_6	MUSTAFAR	-526639681479967376	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 6	35	-2549	-5	-4746
+mus_old_rep_fac_7	MUSTAFAR	-526358206503256720	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 7	35	-3249	-5	-4746
+mus_old_rep_fac_8	MUSTAFAR	-526076731526546064	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 8	35	-3949	-5	-4746
+mus_old_rep_fac_9	MUSTAFAR	-525795256549835408	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 9	35	-4649	-5	-4746
+mus_old_rep_fac_10	MUSTAFAR	-525513781573124752	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 10	35	-5349	-5	-4746
+mus_old_rep_fac_11	MUSTAFAR	-525232306596414096	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 11	35	-6049	-5	-4746
+mus_old_rep_fac_12	MUSTAFAR	-524950831619703440	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 12	35	-6749	-5	-4746
+mus_obi_cave_1	MUSTAFAR	-519039857108689664	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 1	1	6749	-5	-745
+mus_obi_cave_2	MUSTAFAR	-518758382131979008	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 2	1	6749	-5	-45
+mus_obi_cave_3	MUSTAFAR	-518476907155268352	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 3	1	6749	-5	655
+mus_obi_cave_4	MUSTAFAR	-518195432178557696	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 4	1	6749	-5	1355
+mus_obi_cave_5	MUSTAFAR	-517913957201847040	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 5	1	6749	-5	2055
+mus_obi_cave_6	MUSTAFAR	-517632482225136384	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 6	1	6749	-5	2755
+mus_obi_cave_7	MUSTAFAR	-517351007248425728	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 7	1	6749	-5	3455
+mus_obi_cave_8	MUSTAFAR	-517069532271715072	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 8	1	6749	-5	4155
+mus_obi_cave_9	MUSTAFAR	-516788057295004416	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 9	1	6749	-5	4855
+mus_obi_cave_10	MUSTAFAR	-516506582318293760	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 10	1	6749	-5	5555
+mus_obi_cave_11	MUSTAFAR	-516225107341583104	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 11	1	6749	-5	6255
+mus_obi_cave_12	MUSTAFAR	-515943632364872448	lair_of_the_crystal.iff	Mustafar - Obi Wan Cave Instance - 12	1	6749	-5	6955
+mus_uplink_cave_1	MUSTAFAR	-515662157388131792	uplink_cave.iff	Mustafar - Uplink Cave Instance - 1	1	5947	-5	1355
+mus_uplink_cave_2	MUSTAFAR	-515380682411421136	uplink_cave.iff	Mustafar - Uplink Cave Instance - 2	1	5947	-5	2055
+mus_uplink_cave_3	MUSTAFAR	-515099207434710480	uplink_cave.iff	Mustafar - Uplink Cave Instance - 3	1	5947	-5	2755
+mus_uplink_cave_4	MUSTAFAR	-514817732457999824	uplink_cave.iff	Mustafar - Uplink Cave Instance - 4	1	5947	-5	3455
+mus_uplink_cave_5	MUSTAFAR	-514536257481289168	uplink_cave.iff	Mustafar - Uplink Cave Instance - 5	1	5947	-5	4155
+mus_uplink_cave_6	MUSTAFAR	-514254782504578512	uplink_cave.iff	Mustafar - Uplink Cave Instance - 6	1	5947	-5	4855
+mus_uplink_cave_7	MUSTAFAR	-513973307527867856	uplink_cave.iff	Mustafar - Uplink Cave Instance - 7	1	5947	-5	5555
+mus_uplink_cave_8	MUSTAFAR	-513691832551157200	uplink_cave.iff	Mustafar - Uplink Cave Instance - 8	1	5947	-5	6255
+mus_mensix	MUSTAFAR	-507780858040143424	must_new_mining_facility.iff	Mustafar - Mensix Mining Facility	30	-2421	199	1767
+mus_crashed_republic_ship_cockpit	MUSTAFAR	-506936433055891607	must_crashed_republic_ship.iff	Mustafar - Crashed Republic Ship / Cockpit	2	-2620	99	3009
+mus_working_df_1	MUSTAFAR	-55920000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 1	28	950	35	-3743
+mus_working_df_2	MUSTAFAR	-55890000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 2	28	250	35	-3743
+mus_working_df_3	MUSTAFAR	-55860000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 3	28	-450	35	-3743
+mus_working_df_4	MUSTAFAR	-55830000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 4	28	-1150	35	-3743
+mus_working_df_5	MUSTAFAR	-55800000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 5	28	-1850	35	-3743
+mus_working_df_6	MUSTAFAR	-55770000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 6	28	-2550	35	-3743
+mus_working_df_7	MUSTAFAR	-55740000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 7	28	-3250	35	-3743
+mus_working_df_8	MUSTAFAR	-55710000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 8	28	-3950	35	-3743
+mus_working_df_9	MUSTAFAR	-55680000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 9	28	-4650	35	-3743
+mus_working_df_10	MUSTAFAR	-55650000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 10	28	-5350	35	-3743
+mus_working_df_11	MUSTAFAR	-55620000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 11	28	-6050	35	-3743
+mus_working_df_12	MUSTAFAR	-55590000	working_droid_factory.iff	Mustafar - Working Droid Factory Instance - 12	28	-6750	35	-3743
+mus_decrepit_df_1	MUSTAFAR	-55560000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 1	28	-1853	35	-2745
+mus_decrepit_df_2	MUSTAFAR	-55530000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 2	28	-2553	35	-2745
+mus_decrepit_df_3	MUSTAFAR	-55500000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 3	28	-3253	35	-2745
+mus_decrepit_df_4	MUSTAFAR	-55470000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 4	28	-3953	35	-2745
+mus_decrepit_df_5	MUSTAFAR	-55440000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 5	28	-4653	35	-2745
+mus_decrepit_df_6	MUSTAFAR	-55410000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 6	28	-5353	35	-2745
+mus_decrepit_df_7	MUSTAFAR	-55380000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 7	28	-6053	35	-2745
+mus_decrepit_df_8	MUSTAFAR	-55350000	decrepit_droid_factory.iff	Mustafar - Decrepit Factory Instance - 8	28	-6753	35	-2745
 mus_world	MUSTAFAR	0	empty	Mustafar - World	0	0	0	0
 nab_amidala_hotel	NABOO	1865359	hotel_naboo_theed.iff	Naboo - Amidalas Beach / Hotel	10	-5527	-150	-34
 nab_black_sun_outpost	NABOO	-285697101969323686	bunker_blacksun_outpost_01.iff	Naboo - BlackSun Outpost	49	-4740	-196	4846
