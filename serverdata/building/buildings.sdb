@@ -402,19 +402,19 @@ du1_heroic_am_7	DUNGEON1	-539587530354327553	axkva_min_lair.iff	Dungeon1 - Heroi
 du1_heroic_am_8	DUNGEON1	-539306055377616897	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 8	2	-4750	50	-6750
 du1_heroic_am_9	DUNGEON1	-539024580400906241	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 9	2	-5750	50	-6750
 du1_heroic_am_10	DUNGEON1	-538743105424195585	axkva_min_lair.iff	Dungeon1 - Heroic - AM - 10	2	-6750	50	-6750
-du1_npe_station_1	DUNGEON1	-538461630447484929	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 1	44	-4700	0	1290
-du1_npe_station_2	DUNGEON1	-538180155470774273	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 2	44	-3800	0	1290
-du1_npe_station_3	DUNGEON1	-537898680494063617	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 3	44	-2900	0	1290
-du1_npe_station_4	DUNGEON1	-537617205517352961	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 4	44	-2000	0	1290
-du1_npe_station_5	DUNGEON1	-537335730540642305	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 5	44	-1100	0	1290
-du1_npe_station_6	DUNGEON1	-537054255563931649	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 6	44	-200	0	1290
+du1_npe_dungeon_1	DUNGEON1	-538461630447484929	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 1	44	-4700	0	1290
+du1_npe_dungeon_2	DUNGEON1	-538180155470774273	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 2	44	-3800	0	1290
+du1_npe_dungeon_3	DUNGEON1	-537898680494063617	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 3	44	-2900	0	1290
+du1_npe_dungeon_4	DUNGEON1	-537617205517352961	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 4	44	-2000	0	1290
+du1_npe_dungeon_5	DUNGEON1	-537335730540642305	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 5	44	-1100	0	1290
+du1_npe_dungeon_6	DUNGEON1	-537054255563931649	npe_space_dungeon.iff	Dungeon1 - NPE - Dungeon - 6	44	-200	0	1290
 du1_nova_orion	DUNGEON1	-536772780644430992	chapter_8_space_station.iff	Dungeon1 - Nova Orion	31	-5550	0	150
-du1_npe_dungeon_1	DUNGEON1	-536491305610510337	npe_space_station.iff	Dungeon1 - NPE - Station - 1	31	-4650	0	150
-du1_npe_dungeon_2	DUNGEON1	-536209830633799681	npe_space_station.iff	Dungeon1 - NPE - Station - 2	31	-3750	0	150
-du1_npe_dungeon_3	DUNGEON1	-535928355657089025	npe_space_station.iff	Dungeon1 - NPE - Station - 3	31	-2850	0	150
-du1_npe_dungeon_4	DUNGEON1	-535646880680378369	npe_space_station.iff	Dungeon1 - NPE - Station - 4	31	-1950	0	150
-du1_npe_dungeon_5	DUNGEON1	-535365405703667713	npe_space_station.iff	Dungeon1 - NPE - Station - 5	31	-1050	0	150
-du1_npe_dungeon_6	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - NPE - Station - 6	31	-150	0	150
+du1_npe_station_1	DUNGEON1	-536491305610510337	npe_space_station.iff	Dungeon1 - NPE - Station - 1	31	-4650	0	150
+du1_npe_station_2	DUNGEON1	-536209830633799681	npe_space_station.iff	Dungeon1 - NPE - Station - 2	31	-3750	0	150
+du1_npe_station_3	DUNGEON1	-535928355657089025	npe_space_station.iff	Dungeon1 - NPE - Station - 3	31	-2850	0	150
+du1_npe_station_4	DUNGEON1	-535646880680378369	npe_space_station.iff	Dungeon1 - NPE - Station - 4	31	-1950	0	150
+du1_npe_station_5	DUNGEON1	-535365405703667713	npe_space_station.iff	Dungeon1 - NPE - Station - 5	31	-1050	0	150
+du1_npe_station_6	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - NPE - Station - 6	31	-150	0	150
 du1_world	DUNGEON1	0	empty	Dungeon1 - World	0	0	0	0
 end_bf_bunker_bunker	ENDOR	-424464266445617086	gcw_battlefield_base.iff	Endor - BF Bunker Assault / Bunker	10	-7065	379	7076
 end_bf_bunker_imp	ENDOR	-424464265497775194	military_imperial_field_hospital.iff	Endor - BF Bunker Assault / Imp	9	-7099	305	7281
@@ -471,16 +471,16 @@ kas_north_trando_slave_camp_9	KASHYYYK_NORTH_DUNGEONS	-9120000	ep3_trando_slave_
 kas_north_trando_slave_camp_10	KASHYYYK_NORTH_DUNGEONS	-9090000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 10	10	-1008	35	3612
 kas_north_trando_slave_camp_11	KASHYYYK_NORTH_DUNGEONS	-9060000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 11	10	-2288	35	3612
 kas_north_trando_slave_camp_12	KASHYYYK_NORTH_DUNGEONS	-9030000	ep3_trando_slave_camp_bunker.iff	Kashyyyk - North Dungeons - Trando Slave Camp - 12	10	-3568	35	3612
-kas_pob_myyyydril_1	KASHYYYK_POB_DUNGEONS	-12900000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 1	79	5141	4	-2719
-kas_pob_myyyydril_2	KASHYYYK_POB_DUNGEONS	-12870000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 2	79	4117	4	-2719
-kas_pob_myyyydril_3	KASHYYYK_POB_DUNGEONS	-12840000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 3	79	3093	4	-2719
-kas_pob_myyyydril_4	KASHYYYK_POB_DUNGEONS	-12810000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 4	79	2069	4	-2719
-kas_pob_myyyydril_5	KASHYYYK_POB_DUNGEONS	-12780000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 5	79	1045	4	-2719
-kas_pob_myyyydril_6	KASHYYYK_POB_DUNGEONS	-12750000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 6	79	5141	4	-1695
-kas_pob_myyyydril_7	KASHYYYK_POB_DUNGEONS	-12720000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 7	79	4117	4	-1695
-kas_pob_myyyydril_8	KASHYYYK_POB_DUNGEONS	-12690000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 8	79	3093	4	-1695
-kas_pob_myyyydril_9	KASHYYYK_POB_DUNGEONS	-12660000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 9	79	2069	4	-1695
-kas_pob_myyyydril_10	KASHYYYK_POB_DUNGEONS	-12630000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 10	79	1045	4	-1695
+kas_pob_myyydril_1	KASHYYYK_POB_DUNGEONS	-12900000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 1	79	5141	4	-2719
+kas_pob_myyydril_2	KASHYYYK_POB_DUNGEONS	-12870000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 2	79	4117	4	-2719
+kas_pob_myyydril_3	KASHYYYK_POB_DUNGEONS	-12840000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 3	79	3093	4	-2719
+kas_pob_myyydril_4	KASHYYYK_POB_DUNGEONS	-12810000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 4	79	2069	4	-2719
+kas_pob_myyydril_5	KASHYYYK_POB_DUNGEONS	-12780000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 5	79	1045	4	-2719
+kas_pob_myyydril_6	KASHYYYK_POB_DUNGEONS	-12750000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 6	79	5141	4	-1695
+kas_pob_myyydril_7	KASHYYYK_POB_DUNGEONS	-12720000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 7	79	4117	4	-1695
+kas_pob_myyydril_8	KASHYYYK_POB_DUNGEONS	-12690000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 8	79	3093	4	-1695
+kas_pob_myyydril_9	KASHYYYK_POB_DUNGEONS	-12660000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 9	79	2069	4	-1695
+kas_pob_myyydril_10	KASHYYYK_POB_DUNGEONS	-12630000	thm_kash_myyydril_caverns.iff	Kashyyyk - POB Dungeons - Myyydril Caverns - 10	79	1045	4	-1695
 kas_pob_avatar_1	KASHYYYK_POB_DUNGEONS	-12600000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 1	52	-5694	42	2548
 kas_pob_avatar_2	KASHYYYK_POB_DUNGEONS	-12570000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 2	52	-4670	42	2548
 kas_pob_avatar_3	KASHYYYK_POB_DUNGEONS	-12540000	dungeon_avatar_platform.iff	Kashyyyk - POB Dungeons - Avatar Platform - 3	52	-3646	42	2548
@@ -538,18 +538,18 @@ lok_prolog_bunker	LOK	-487796135652092032	prolog_bunker_dungeon.iff	Lok - Prolog
 lok_reb_base_hospital	LOK	-482729586888819169	military_rebel_field_hospital.iff	Lok - Reb Base / Hospital	9	-6097	62	5950
 lok_reb_base_outpost	LOK	-482729585582547239	military_rebel_forward_outpost.iff	Lok - Reb Base / Outpost	6	-6069	62	5946
 lok_world	LOK	0	empty	Lok - World	0	0	0	0
-mus_shar_kar_1	MUSTAFAR	-531424756084078528	must_monster_lair.iff	Mustafar - Sher Kar Instance - 1	1	956	-5	-5747
-mus_shar_kar_2	MUSTAFAR	-531143281107367872	must_monster_lair.iff	Mustafar - Sher Kar Instance - 2	1	256	-5	-5747
-mus_shar_kar_3	MUSTAFAR	-530861806130657216	must_monster_lair.iff	Mustafar - Sher Kar Instance - 3	1	-444	-5	-5747
-mus_shar_kar_4	MUSTAFAR	-530580331153946560	must_monster_lair.iff	Mustafar - Sher Kar Instance - 4	1	-1144	-5	-5747
-mus_shar_kar_5	MUSTAFAR	-530298856177235904	must_monster_lair.iff	Mustafar - Sher Kar Instance - 5	1	-1844	-5	-5747
-mus_shar_kar_6	MUSTAFAR	-530017381200525248	must_monster_lair.iff	Mustafar - Sher Kar Instance - 6	1	-2544	-5	-5747
-mus_shar_kar_7	MUSTAFAR	-529735906223814592	must_monster_lair.iff	Mustafar - Sher Kar Instance - 7	1	-3244	-5	-5747
-mus_shar_kar_8	MUSTAFAR	-529454431247103936	must_monster_lair.iff	Mustafar - Sher Kar Instance - 8	1	-3944	-5	-5747
-mus_shar_kar_9	MUSTAFAR	-529172956270393280	must_monster_lair.iff	Mustafar - Sher Kar Instance - 9	1	-4644	-5	-5747
-mus_shar_kar_10	MUSTAFAR	-528891481293682624	must_monster_lair.iff	Mustafar - Sher Kar Instance - 10	1	-5344	-5	-5747
-mus_shar_kar_11	MUSTAFAR	-528610006316971968	must_monster_lair.iff	Mustafar - Sher Kar Instance - 11	1	-6044	-5	-5747
-mus_shar_kar_12	MUSTAFAR	-528328531340261312	must_monster_lair.iff	Mustafar - Sher Kar Instance - 12	1	-6744	-5	-5747
+mus_sher_kar_1	MUSTAFAR	-531424756084078528	must_monster_lair.iff	Mustafar - Sher Kar Instance - 1	1	956	-5	-5747
+mus_sher_kar_2	MUSTAFAR	-531143281107367872	must_monster_lair.iff	Mustafar - Sher Kar Instance - 2	1	256	-5	-5747
+mus_sher_kar_3	MUSTAFAR	-530861806130657216	must_monster_lair.iff	Mustafar - Sher Kar Instance - 3	1	-444	-5	-5747
+mus_sher_kar_4	MUSTAFAR	-530580331153946560	must_monster_lair.iff	Mustafar - Sher Kar Instance - 4	1	-1144	-5	-5747
+mus_sher_kar_5	MUSTAFAR	-530298856177235904	must_monster_lair.iff	Mustafar - Sher Kar Instance - 5	1	-1844	-5	-5747
+mus_sher_kar_6	MUSTAFAR	-530017381200525248	must_monster_lair.iff	Mustafar - Sher Kar Instance - 6	1	-2544	-5	-5747
+mus_sher_kar_7	MUSTAFAR	-529735906223814592	must_monster_lair.iff	Mustafar - Sher Kar Instance - 7	1	-3244	-5	-5747
+mus_sher_kar_8	MUSTAFAR	-529454431247103936	must_monster_lair.iff	Mustafar - Sher Kar Instance - 8	1	-3944	-5	-5747
+mus_sher_kar_9	MUSTAFAR	-529172956270393280	must_monster_lair.iff	Mustafar - Sher Kar Instance - 9	1	-4644	-5	-5747
+mus_sher_kar_10	MUSTAFAR	-528891481293682624	must_monster_lair.iff	Mustafar - Sher Kar Instance - 10	1	-5344	-5	-5747
+mus_sher_kar_11	MUSTAFAR	-528610006316971968	must_monster_lair.iff	Mustafar - Sher Kar Instance - 11	1	-6044	-5	-5747
+mus_sher_kar_12	MUSTAFAR	-528328531340261312	must_monster_lair.iff	Mustafar - Sher Kar Instance - 12	1	-6744	-5	-5747
 mus_old_rep_fac_1	MUSTAFAR	-528047056363520656	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 1	35	951	-5	-4746
 mus_old_rep_fac_2	MUSTAFAR	-527765581386810000	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 2	35	251	-5	-4746
 mus_old_rep_fac_3	MUSTAFAR	-527484106410099344	old_republic_facility.iff	Mustafar - Old Republic Facility Instance - 3	35	-449	-5	-4746
