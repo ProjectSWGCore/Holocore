@@ -14,11 +14,9 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 	if (args.length > 0) {
 		if (args.indexOf("imperial") > -1) {
 			intent = new FactionIntent(creature, PvpFaction.IMPERIAL)
-		}
-		else if (args.indexOf("rebel") > -1) {
+		} else if (args.indexOf("rebel") > -1) {
 			intent = new FactionIntent(creature, PvpFaction.REBEL)
-		}
-		else {
+		} else {
 			intent = new FactionIntent(creature, PvpFaction.NEUTRAL)
 		}
 		intent.broadcast()

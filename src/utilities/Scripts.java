@@ -57,7 +57,8 @@ public class Scripts {
      * @param args       to pass to the method.
      * @return expected return type of the script. If the method doesn't have a return statement, this method returns {@code null}.
      * If an exception occurs, {@code null} is returned.
-     * @throws java.io.FileNotFoundException if the script file wasn't found
+     * @throws ResourceException if script file does not exist
+     * @throws ScriptException if there is a problem executing the script and/or method within the script
      */
     @SuppressWarnings("unchecked")
     public static <T> T invoke(String scriptName, String method, Object... args) throws ResourceException, ScriptException {
@@ -66,8 +67,10 @@ public class Scripts {
     }
 
     /**
-     * Creates a binding from an array of variables. The name of the variable should lead the instance. An example would be:
-     * <br>&nbsp&nbsp{@code setupScriptVariables("variableNameOne", variableOne, "variableNameTwo", variableTwo);}
+     * Creates a binding from an array of variables. Bindings are a set of <i>global</i> variables that can be used by the script. As such,
+     * you should use a new set of bindings for each invocation of the script on different threads.
+     * <br><br>The name of the variable should lead the instance. An example would be:
+     * <br>&nbsp&nbsp{@code Binding bindings = createBindings("variableNameOne", variableOne, "variableNameTwo", variableTwo);}
      * @param variables an array of variables. Variable names should lead the instance of the variable.
      */
     public static Binding createBindings(Object... variables) {
@@ -94,7 +97,8 @@ public class Scripts {
     }
 
     /**
-     * Creates the Groovy Script and returns it. The method uses the {@link GroovyScriptEngine}'s createScript method.
+     * Creates the Groovy Script and returns it, with the global variables specified within the binding.
+     * The method uses the {@link GroovyScriptEngine}'s createScript method.
      * @param scriptName name of the script to load
      * @param binding the binding instance to use
      * @return an instance of the obtained Groovy Script
