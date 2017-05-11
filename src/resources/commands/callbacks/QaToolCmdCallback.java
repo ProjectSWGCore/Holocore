@@ -40,6 +40,7 @@ import intents.network.CloseConnectionIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ForceAwarenessUpdateIntent;
+import intents.object.MoveObjectIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.commands.ICmdCallback;
@@ -201,6 +202,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void setInstance(Player player, String args) {
 		try {
 			CreatureObject creature = player.getCreatureObject();
+			if (creature.getParent() != null) {
+				new MoveObjectIntent(creature, creature.getWorldLocation(), 0, 0).broadcast();
+			}
 			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
 			new ForceAwarenessUpdateIntent(creature).broadcast();
 		} catch (NumberFormatException e) {
