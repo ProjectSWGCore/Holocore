@@ -41,6 +41,7 @@ import intents.network.CloseConnectionIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
+import intents.object.ForceAwarenessUpdateIntent;
 import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
@@ -86,6 +87,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		registerForIntent(MoveObjectIntent.class, moi -> processMoveObjectIntent(moi));
 		registerForIntent(ContainerTransferIntent.class, cti -> processContainerTransferIntent(cti));
 		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getPlayer(), rzii.getCreature().getLocation(), rzii.getCreature().getParent()));
+		registerForIntent(ForceAwarenessUpdateIntent.class, faui -> handleForceUpdate(faui));
 	}
 	
 	@Override
@@ -219,6 +221,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			}
 		}
 		Assert.notNull(creature.getTerrain());
+	}
+	
+	private void handleForceUpdate(ForceAwarenessUpdateIntent faui) {
+		SWGObject obj = faui.getObject();
+		moveObject(obj, obj.getParent(), obj.getLocation());
 	}
 	
 	private void resetAwarenessOnZone(CreatureObject creature, boolean firstZone) {
