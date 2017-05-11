@@ -3,10 +3,10 @@ import resources.player.Player
 import resources.radial.RadialItem
 import resources.radial.RadialOption
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object ... args) {
+static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
 	options.add(new RadialOption(RadialItem.ITEM_USE))
 	options.add(new RadialOption(RadialItem.EXAMINE))
 }
 
-static def handleSelection(Player player, SWGObject target, RadialItem selection, Object ... args) {
+static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
 }

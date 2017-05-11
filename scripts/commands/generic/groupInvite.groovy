@@ -7,11 +7,11 @@ import utilities.IntentFactory
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	def farAwayTarget
-	
+
 	if (args) {
 		farAwayTarget = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(args)
 	}
-	
+
 	if (farAwayTarget != null) {
 		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_INVITE, player, (farAwayTarget as Player).getCreatureObject()).broadcast()
 	} else {

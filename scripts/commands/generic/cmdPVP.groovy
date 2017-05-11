@@ -8,7 +8,7 @@ import utilities.IntentFactory
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()
 	def intent = null
-	
+
 	// Ziggy was using this to test until recruiters are enabled.
 
 	if (args.length > 0) {

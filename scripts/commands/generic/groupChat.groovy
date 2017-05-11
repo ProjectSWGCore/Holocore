@@ -5,18 +5,18 @@ import services.CoreManager
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if(args.isEmpty()) {
+	if (args.isEmpty()) {
 		// Should there for some reason be no actual message to display, do nothing
 		return
 	}
-	
+
 	def groupObjectId = player.getCreatureObject().getGroupId()
-	
-	if(groupObjectId == 0) {
+
+	if (groupObjectId == 0) {
 		// If their group object ID is 0, they're ungrouped. Ungrouped players can't send group messages.
 		return
 	}
-	
+
 	def galaxy = CoreManager.getGalaxy().getName()
 	def groupChatPath = "SWG." + galaxy + ".group." + groupObjectId + ".GroupChat"
 

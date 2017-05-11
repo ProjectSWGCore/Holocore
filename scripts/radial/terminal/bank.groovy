@@ -6,13 +6,13 @@ import resources.radial.RadialItem
 import resources.radial.RadialOption
 import resources.sui.SuiEvent
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object ... args) {
+static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
 	def use = new RadialOption(RadialItem.ITEM_USE)
 	def reserve = new RadialOption(RadialItem.SERVER_MENU50)
 	def creature = player.getCreatureObject()
-    
-    reserve.setOverriddenText("@sui:bank_galactic_reserve")
-    
+
+	reserve.setOverriddenText("@sui:bank_galactic_reserve")
+
 	options.add(use)
 	options.add(new RadialOption(RadialItem.EXAMINE))
 	if (creature.getCurrentCity() == "@corellia_region_names:coronet" ||
@@ -34,7 +34,7 @@ static def getOptions(List<RadialOption> options, Player player, SWGObject targe
 		reserve.addChildWithOverriddenText(RadialItem.SERVER_MENU48, "@sui:bank_galactic_reserve_withdraw")
 }
 
-static def handleSelection(Player player, SWGObject target, RadialItem selection, Object ... args) {
+static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
 	def creature = player.getCreatureObject()
 	switch (selection) {
 		case RadialItem.ITEM_USE:
@@ -109,7 +109,8 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 	}
 }
 
-static def handleBankTransfer(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+static
+def handleBankTransfer(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
 	switch (eventType) {
 		case SuiEvent.OK_PRESSED:
 			creature.setCashBalance(Long.valueOf(parameters.get('transaction.txtInputFrom.Text')))

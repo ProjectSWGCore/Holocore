@@ -18,7 +18,7 @@ static def sendDetails(Player player, SWGObject object, String args) {
 		def aware = object.getObjectsAware()
 		def count = 0
 		for (def iterator = aware.iterator(); iterator.hasNext();) {
-	        def obj = ++iterator
+			def obj = ++iterator
 			if (obj.getObjectId() == parseInt(args[2]) || obj.getTemplate().contains(args[2])) {
 				IntentFactory.sendSystemMessage(player, "True: " + obj)
 				return

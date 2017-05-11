@@ -4,13 +4,13 @@ import resources.player.Player
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if(args == null) {
+	if (args == null) {
 		return
 	}
-	
+
 	def name = args.split(" ")[0].toLowerCase(Locale.ENGLISH)
-	
-	if(name == null) {
+
+	if (name == null) {
 		return
 	}
 

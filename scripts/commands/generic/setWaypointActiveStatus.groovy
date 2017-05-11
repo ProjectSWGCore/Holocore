@@ -4,21 +4,21 @@ import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 
-	if(player.getPlayerObject() == null || target == null) {
+	if (player.getPlayerObject() == null || target == null) {
 		return
 	}
-	
+
 	def waypoint = player.getPlayerObject().getWaypoint(target.getObjectId())
-	
-	if(waypoint == null) {
+
+	if (waypoint == null) {
 		return
 	}
-	
-	if(waypoint.isActive()) {
+
+	if (waypoint.isActive()) {
 		waypoint.setActive(false)
 	} else {
 		waypoint.setActive(true)
 	}
-	
+
 	player.getPlayerObject().updateWaypoint(waypoint)
 }

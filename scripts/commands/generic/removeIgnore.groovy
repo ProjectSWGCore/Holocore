@@ -4,15 +4,15 @@ import resources.player.Player
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-    if(args == null) {
-        return
-    }
+	if (args == null) {
+		return
+	}
 
-    def name = args.split(" ")[0].toLowerCase(Locale.ENGLISH)
+	def name = args.split(" ")[0].toLowerCase(Locale.ENGLISH)
 
-    if(name == null) {
-        return
-    }
+	if (name == null) {
+		return
+	}
 
-    new ChatAvatarRequestIntent(player, name, ChatAvatarRequestIntent.RequestType.IGNORE_REMOVE_TARGET).broadcast()
+	new ChatAvatarRequestIntent(player, name, ChatAvatarRequestIntent.RequestType.IGNORE_REMOVE_TARGET).broadcast()
 }
