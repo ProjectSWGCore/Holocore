@@ -39,6 +39,7 @@ import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
+import intents.object.ForceAwarenessUpdateIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.commands.ICmdCallback;
@@ -90,6 +91,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 					break;
 				case "recover":
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
+					break;
+				case "setinstance":
+					setInstance(player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "details":
 					try {
@@ -192,6 +196,18 @@ public class QaToolCmdCallback implements ICmdCallback {
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
 		new ObjectTeleportIntent(obj, loc).broadcast();
 		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
+	}
+	
+	private void setInstance(Player player, String args) {
+		try {
+			CreatureObject creature = player.getCreatureObject();
+			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
+			new ForceAwarenessUpdateIntent(creature).broadcast();
+		} catch (NumberFormatException e) {
+			Log.e("Invalid instance number with qatool: %s", args);
+			sendSystemMessage(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
+			return;
+		}
 	}
 	
 	private void displayHelp(Player player) {
