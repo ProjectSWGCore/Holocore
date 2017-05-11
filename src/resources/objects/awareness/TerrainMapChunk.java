@@ -90,6 +90,8 @@ class TerrainMapChunk {
 	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {
 		if (obj.equals(inRange))
 			return false;
+		if (obj.getInstanceLocation().getInstanceNumber() != inRange.getInstanceLocation().getInstanceNumber())
+			return false;
 		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
 			return false;
 		if (!isWithinRange(obj, inRange, range))

@@ -36,6 +36,7 @@ import org.junit.runners.JUnit4;
 
 import com.projectswg.common.data.location.Terrain;
 
+import resources.location.InstanceType;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import test_resources.GenericCreatureObject;
@@ -267,6 +268,23 @@ public class TestTerrainMapChunk {
 		testContains(chunkB, cell);
 	}
 	
+	@Test
+	public void testInstanceNumber() {
+		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		GenericCreatureObject creatureA = new GenericCreatureObject(1);
+		GenericCreatureObject creatureB = new GenericCreatureObject(2);
+		chunk.addObject(creatureA);
+		chunk.addObject(creatureB);
+		testContains(chunk, creatureA, creatureB);
+		testContains(chunk, creatureB, creatureA);
+		creatureA.setInstance(InstanceType.NONE, 1);
+		testNotContains(chunk, creatureA, creatureB);
+		testNotContains(chunk, creatureB, creatureA);
+		creatureB.setInstance(InstanceType.NONE, 1);
+		testContains(chunk, creatureA, creatureB);
+		testContains(chunk, creatureB, creatureA);
+	}
+	
 	private GenericCreatureObject createCreature(TerrainMapChunk chunk, long id, double x, double y, double z, double loadRange) {
 		GenericCreatureObject creature = new GenericCreatureObject(id);
 		creature.setPosition(Terrain.TATOOINE, x, y, z);
@@ -281,6 +299,13 @@ public class TestTerrainMapChunk {
 		Assert.assertEquals("TEST-SIZE", expected.length, aware.size());
 		for (SWGObject e : expected) {
 			Assert.assertTrue("TEST-CONTAIN-"+e, aware.contains(e));
+		}
+	}
+	
+	private void testNotContains(TerrainMapChunk chunk, SWGObject src, SWGObject ... expected) {
+		List<SWGObject> aware = chunk.getWithinAwareness(src);
+		for (SWGObject e : expected) {
+			Assert.assertFalse("TEST-NOT-CONTAIN-"+e, aware.contains(e));
 		}
 	}
 	
