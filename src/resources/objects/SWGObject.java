@@ -35,6 +35,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
@@ -72,6 +73,7 @@ import resources.player.Player;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
+import utilities.ScheduledUtilities;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -685,8 +687,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.addObjectAware(aware.getAwareness())) {
 			createObject(aware);
 			aware.createObject(this);
-			onObjectEnterAware(aware);
-			aware.onObjectEnterAware(this);
+			onAddObjectAware(aware);
+			aware.onAddObjectAware(this);
 		}
 	}
 	
@@ -694,8 +696,57 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.removeObjectAware(aware.getAwareness())) {
 			destroyObject(aware);
 			aware.destroyObject(this);
-			onObjectLeaveAware(aware);
-			aware.onObjectLeaveAware(this);
+			onRemoveObjectAware(aware);
+			aware.onRemoveObjectAware(this);
+		}
+	}
+	
+	/**
+	 * Called when this object has been moved somehow via awareness. This will
+	 * not run on any buildout or snapshot object!
+	 */
+	public void onObjectMoved() {
+		if (isBuildout() || isSnapshot())
+			return;
+		Set<SWGObject> aware = getObjectsAware();
+		// Running on a different thread to make sure this doesn't slow down awareness
+		ScheduledUtilities.run(() -> onObjectMoved(aware), 0, TimeUnit.MILLISECONDS);
+	}
+	
+	private void onAddObjectAware(SWGObject aware) {
+		try {
+			if (!isBuildout() && !isSnapshot())
+				onObjectEnterAware(aware);
+		} catch (Throwable t) {
+			Log.e(t);
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onAddObjectAware(aware);
+		}
+	}
+	
+	private void onRemoveObjectAware(SWGObject aware) {
+		try {
+			if (!isBuildout() && !isSnapshot())
+				onObjectLeaveAware(aware);
+		} catch (Throwable t) {
+			Log.e(t);
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onRemoveObjectAware(aware);
+		}
+	}
+	
+	private void onObjectMoved(Set<SWGObject> aware) {
+		for (SWGObject a : aware) {
+			try {
+				a.onObjectMoveInAware(this);
+			} catch (Throwable t) {
+				Log.e(t);
+			}
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onObjectMoved(aware);
 		}
 	}
 	
