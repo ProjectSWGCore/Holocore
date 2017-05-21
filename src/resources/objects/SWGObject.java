@@ -715,6 +715,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 	}
 	
+	/**
+	 * Called when an object moves within this object's awareness
+	 * @param aware the object that moved
+	 */
+	public void onObjectMoveInAware(SWGObject aware) {
+		
+	}
+	
 	public boolean isObjectAware(SWGObject aware) {
 		return awareness.isObjectAware(aware);
 	}

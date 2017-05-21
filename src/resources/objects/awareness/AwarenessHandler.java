@@ -82,6 +82,7 @@ public class AwarenessHandler implements AutoCloseable {
 		obj.setLocation(requestedLocation);
 		if (obj.getParent() != null)
 			obj.moveToContainer(null);
+		notifyObjectMoved(obj);
 		// Update awareness
 		if (obj.getTerrain() != Terrain.GONE) {
 			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
@@ -101,6 +102,7 @@ public class AwarenessHandler implements AutoCloseable {
 			oldMap.removeWithoutUpdate(obj);
 		// Update location
 		obj.setLocation(requestedLocation);
+		notifyObjectMoved(obj);
 		// Update awareness
 		if (obj.getParent() != parent)
 			obj.moveToContainer(parent);
@@ -118,6 +120,16 @@ public class AwarenessHandler implements AutoCloseable {
 		}
 		if (disappearCustom)
 			obj.clearCustomAware(true);
+	}
+	
+	private void notifyObjectMoved(SWGObject obj) {
+		try {
+			for (SWGObject aware : obj.getObjectsAware())
+				obj.onObjectMoveInAware(aware);
+		} catch (Throwable t) {
+			Log.e("Throwable caught when notifying onObjectMoveInAware");
+			Log.e(t);
+		}
 	}
 	
 	private TerrainMap getTerrainMap(SWGObject object) {
