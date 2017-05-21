@@ -27,21 +27,20 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import network.packets.swg.zone.baselines.Baseline;
-import resources.common.CRC;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
-import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
-
-import java.nio.ByteBuffer;
 
 public class Equipment implements Encodable, Persistable {
 	
@@ -71,31 +70,31 @@ public class Equipment implements Encodable, Persistable {
 	
 	@Override
 	public byte [] encode() {
-		byte [] weaponData = new byte[0];
-		if (weapon != null)
-			weaponData = getWeaponData();
+		byte [] weaponData = (weapon != null) ? getWeaponData() : new byte[0];
 		
 		NetBuffer buffer = NetBuffer.allocate(19 + weaponData.length);
-		
 		buffer.addArray(customizationString); // TODO: Create encodable class for customization string
 		buffer.addInt(arrangementId);
 		buffer.addLong(objectId);
 		buffer.addEncodable(template);
 		buffer.addBoolean(weapon != null);
 		buffer.addRawArray(weaponData);
-		
 		return buffer.array();
 	}
 
 	@Override
-	public void decode(ByteBuffer bb) {
-		NetBuffer data = NetBuffer.wrap(bb);
+	public void decode(NetBuffer data) {
 		customizationString	= data.getArray(); // TODO: Create encodable class for customization string
 		arrangementId		= data.getInt();
 		objectId			= data.getLong();
 		template			= data.getEncodable(CRC.class);
 		if (data.getBoolean())
 			this.weapon = createWeaponFromData(data);
+	}
+	
+	@Override
+	public int getLength() {
+		return 19 + (weapon != null ? getWeaponData().length : 0);
 	}
 	
 	@Override
@@ -138,15 +137,15 @@ public class Equipment implements Encodable, Persistable {
 	
 	private byte[] getWeaponData() {
 		Player target = weapon.getOwner();
-		ByteBuffer data3 = weapon.createBaseline3(target).encode();
+		NetBuffer data3 = weapon.createBaseline3(target).encode();
 		data3.position(0);
 
-		ByteBuffer data6 = weapon.createBaseline6(target).encode();
+		NetBuffer data6 = weapon.createBaseline6(target).encode();
 		data6.position(0);
 		
-		ByteBuffer ret = ByteBuffer.allocate(data3.remaining() + data6.remaining());
-		ret.put(data3);
-		ret.put(data6);
+		NetBuffer ret = NetBuffer.allocate(data3.remaining() + data6.remaining());
+		ret.addRawArray(data3.array());
+		ret.addRawArray(data6.array());
 		return ret.array();
 	}
 	
@@ -154,15 +153,15 @@ public class Equipment implements Encodable, Persistable {
 		SWGObject weapon = ObjectCreator.createObjectFromTemplate(objectId, template.getString());
 		
 		Baseline b3 = new Baseline();
-		b3.decode(data.getBuffer());
+		b3.decode(data);
 		Baseline b6 = new Baseline();
-		b6.decode(data.getBuffer());
+		b6.decode(data);
 		
 		weapon.parseBaseline(b3);
 		weapon.parseBaseline(b6);
 		if (weapon instanceof TangibleObject)
 			return (TangibleObject) weapon;
-		Log.e("Equipment", "Unknown Equipment Type: " + weapon.getClass().getSimpleName());
+		Log.e("Unknown Equipment Type: " + weapon.getClass().getSimpleName());
 		return null;
 	}
 	

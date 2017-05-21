@@ -42,14 +42,14 @@ public class TestQuadTree {
 	public void testInsertGet() {
 		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
 		tree.put(5, 5, 5.0);
-		Assert.assertEquals(5, (double)tree.getIgnoreCollisions(5, 5), 1E-10);
+		Assert.assertEquals(5, tree.getIgnoreCollisions(5, 5), 1E-10);
 		tree.put(0, 0, 10.0);
-		Assert.assertEquals(10, (double)tree.getIgnoreCollisions(0, 0), 1E-10);
+		Assert.assertEquals(10, tree.getIgnoreCollisions(0, 0), 1E-10);
 		tree.put(10, 10, 15.0);
-		Assert.assertEquals(15, (double)tree.getIgnoreCollisions(10, 10), 1E-10);
+		Assert.assertEquals(15, tree.getIgnoreCollisions(10, 10), 1E-10);
 		tree.put(0, 0, 5.0);
 		tree.put(0, 0, 2.5);
-		Assert.assertEquals(10, (double)tree.getIgnoreCollisions(0, 0), 1E-10);
+		Assert.assertEquals(10, tree.getIgnoreCollisions(0, 0), 1E-10);
 		Double [] vals = tree.get(0, 0).toArray(new Double[3]);
 		Assert.assertArrayEquals(new Double[]{10.0, 5.0, 2.5}, vals);
 		Assert.assertEquals(3, tree.remove(0, 0));
@@ -59,7 +59,7 @@ public class TestQuadTree {
 			float y = (float) (Math.random() * 10);
 			double v = Math.random() * 1000;
 			tree.put(x, y, v);
-			Assert.assertEquals(v, (double)tree.getIgnoreCollisions(x, y), 1E-10);
+			Assert.assertEquals(v, tree.getIgnoreCollisions(x, y), 1E-10);
 			tree.remove(x, y);
 			Assert.assertNull(tree.getIgnoreCollisions(x, y));
 		}
@@ -124,15 +124,15 @@ public class TestQuadTree {
 		List <Point2D> points = new ArrayList<Point2D>();
 		QuadTree <Point2D> tree = new QuadTree<Point2D>(16, -8192, -8192, 8192, 8192);
 		Point2D p;
-		for (int x = -2000; x < 2000; x += 25) {
-			for (int y = -2000; y < 2000; y += 25) {
+		for (int x = -2000; x < 2000; x += 50) {
+			for (int y = -2000; y < 2000; y += 50) {
 				p = new Point2D(x, y);
 				points.add(p);
 				tree.put(x, y, p);
 			}
 		}
-		for (int x = -2000; x < 2000; x += 50) {
-			for (int y = -2000; y < 2000; y += 50) {
+		for (int x = -2000; x < 2000; x += 100) {
+			for (int y = -2000; y < 2000; y += 100) {
 				test(points, tree, x, y, 200);
 			}
 		}
@@ -232,6 +232,7 @@ public class TestQuadTree {
 			this.x = x;
 			this.y = y;
 		}
+		@Override
 		public String toString() {
 			return "(" + x + ", " + y + ")";
 		}

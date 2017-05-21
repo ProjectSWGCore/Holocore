@@ -38,26 +38,35 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
 
 public class Scripts {
-
-	private static final String SCRIPTS = "scripts/";
-	private static final String EXTENSION = ".js";
-	private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("nashorn");
-	private static final Invocable INVOCABLE = (Invocable) ENGINE;
+	
+	private static final String SCRIPTS;
+	private static final String EXTENSION;
+	private static final ScriptEngine ENGINE;
+	private static final Invocable INVOCABLE;
 	
 	static {
-		ENGINE.put("intentFactory", new IntentFactory());
-		try {
-			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
-			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
-			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
-			ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiWindow')");
-			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
-			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
-		} catch (ScriptException e) {
-			Log.e("Scripts", e);
+		ScriptEngineManager engineManager = new ScriptEngineManager();
+		SCRIPTS		= "scripts/";
+		EXTENSION	= ".js";
+		ENGINE		= engineManager.getEngineByName("nashorn");
+		INVOCABLE	= (Invocable) ENGINE;
+		if (ENGINE == null) {
+			Log.e("ScriptEngine is null!");
+		} else {
+			try {
+				ENGINE.put("intentFactory", new IntentFactory());
+				ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
+				ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
+				ENGINE.eval("var Log = Java.type('com.projectswg.common.debug.Log')");
+				ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiWindow')");
+				ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
+				ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
+			} catch (Throwable t) {
+				Log.e(t);
+			}
 		}
 	}
 	
@@ -78,9 +87,9 @@ public class Scripts {
 			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
 		} catch (ScriptException | NoSuchMethodException t) {
-			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
-			Log.e("Scripts", "    Args: " + Arrays.toString(args));
-			Log.e("Scripts", t);
+			Log.e("Error invoking script: " + script + "  with function: " + function);
+			Log.e("    Args: " + Arrays.toString(args));
+			Log.e(t);
 			return null;
 		}
 	}

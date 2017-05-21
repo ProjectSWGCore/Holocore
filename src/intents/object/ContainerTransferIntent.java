@@ -27,12 +27,11 @@
  ***********************************************************************************/
 package intents.object;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.SWGObject;
 
 public class ContainerTransferIntent extends Intent {
-	
-	public static final String TYPE = "ContainerTransferIntent";
 	
 	private SWGObject obj;
 	private SWGObject container;
@@ -42,7 +41,6 @@ public class ContainerTransferIntent extends Intent {
 	}
 	
 	public ContainerTransferIntent(SWGObject obj, SWGObject container) {
-		super(TYPE);
 		setObject(obj);
 		setContainer(container);
 	}

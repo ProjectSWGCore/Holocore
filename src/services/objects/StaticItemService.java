@@ -32,23 +32,26 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
 import network.packets.swg.zone.object_controller.ShowLootBox;
-import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.DataManager;
+import resources.server_info.StandardLog;
 
 /**
  * @author mads
@@ -72,14 +75,15 @@ public final class StaticItemService extends Service {
 
 	@Override
 	public boolean initialize() {
-		boolean configEnable = getConfig(ConfigFile.FEATURES).getBoolean(CONFIG_OPTION_NAME, true);
-
+		boolean configEnable = DataManager.getConfig(ConfigFile.FEATURES).getBoolean(CONFIG_OPTION_NAME, true);
+		
 		if (configEnable) {
-			return super.initialize() && loadStaticItems();
+			if (!loadStaticItems())
+				return false;
 		} else {
-			Log.i(this, "Static items have been disabled - none have been loaded");
-			return super.initialize();
+			Log.i("Static items have been disabled - none have been loaded");
 		}
+		return super.initialize();
 	}
 
 	/**
@@ -87,9 +91,9 @@ public final class StaticItemService extends Service {
 	 */
 	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
 		if (cci.getKey().equals(CONFIG_OPTION_NAME)) {
-			boolean oldValue = Boolean.valueOf(cci.getOldValue());
-			boolean newValue = Boolean.valueOf(cci.getNewValue());
-
+			boolean oldValue = Boolean.parseBoolean(cci.getOldValue());
+			boolean newValue = Boolean.parseBoolean(cci.getNewValue());
+			
 			if (newValue != oldValue) {    // If the value has changed
 				if (newValue) {    // If the new value is to enable static items
 					loadStaticItems();    // ... then load them!
@@ -101,32 +105,18 @@ public final class StaticItemService extends Service {
 	}
 
 	private boolean loadStaticItems() {
-		Log.i(this, "Loading static items...");
-		long startLoad = System.currentTimeMillis();
+		long startTime = StandardLog.onStartLoad("static items");
 		try (RelationalServerData data = RelationalServerFactory.getServerData("items/master_item.db", "master_item")) {
 			try (ResultSet resultSet = data.executeQuery(GET_STATIC_ITEMS)) {
 				while (resultSet.next()) {
 					String itemName = resultSet.getString("item_name");
-					String iffTemplate = resultSet.getString("iff_template");
 					String type = resultSet.getString("type");
-					ObjectAttributes objectAttributes;
-
-					switch (type) {
-						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
-						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
-						case "wearable": objectAttributes = new WearableAttributes(itemName, iffTemplate);	break;
-						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
-						case "consumable":	// TODO implement
-						case "costume":	// TODO implement
-						case "dna":	// TODO implement
-						case "grant":	// TODO implement
-						case "item": objectAttributes = new ItemAttributes(itemName, iffTemplate); break;
-						case "object":	// TODO implement
-						case "schematic":	// TODO implement
-						case "storyteller": objectAttributes = new StorytellerAttributes(itemName, iffTemplate); break;
-						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
+					ObjectAttributes objectAttributes = createObjectAttributes(type, itemName, resultSet.getString("iff_template"));
+					if (objectAttributes == null) {
+						Log.e("Item %s was not loaded because the specified type %s is unknown", itemName, type);
+						continue;
 					}
-
+					
 					try {
 						// Pass the ResultSet to the ObjectAttributes object,
 						// so type-specific attributes can be loaded and applied later
@@ -138,24 +128,39 @@ public final class StaticItemService extends Service {
 							objectAttributesMap.put(itemName, objectAttributes);
 						}
 					} catch (SQLException ex) {
-						Log.e(this, "Failed loading %s type attributes for item %s. Exception: %s", type, itemName, ex.getLocalizedMessage());
+						Log.e("Failed loading %s type attributes for item %s. Exception: %s", type, itemName, ex.getLocalizedMessage());
 					}
 				}
 			} catch (SQLException ex) {
-				Log.e(this, ex);
+				Log.e(ex);
 			}
 		}
-
-		registerForIntent(CreateStaticItemIntent.TYPE);    // Start receiving the item intent
-		long loadTime = System.currentTimeMillis() - startLoad;
-		Log.i(this, "Finished loading %d items. Time: %dms", objectAttributesMap.size(), loadTime);
+		
+		StandardLog.onEndLoad(objectAttributesMap.size(), "static items", startTime);
 		return true;
+	}
+	
+	private ObjectAttributes createObjectAttributes(String type, String itemName, String iffTemplate) {
+		switch (type) {
+			case "armor":		return new ArmorAttributes(itemName, iffTemplate);
+			case "weapon":		return new WeaponAttributes(itemName, iffTemplate);
+			case "wearable":	return new WearableAttributes(itemName, iffTemplate);
+			case "collection":	return new CollectionAttributes(itemName, iffTemplate);
+			case "consumable":	return new ItemAttributes(itemName, iffTemplate); // TODO implement
+			case "costume":		return new ItemAttributes(itemName, iffTemplate); // TODO implement
+			case "dna":			return new ItemAttributes(itemName, iffTemplate); // TODO implement
+			case "grant":		return new ItemAttributes(itemName, iffTemplate); // TODO implement
+			case "item":		return new ItemAttributes(itemName, iffTemplate);
+			case "object":		return new StorytellerAttributes(itemName, iffTemplate); // TODO implement
+			case "schematic":	return new StorytellerAttributes(itemName, iffTemplate); // TODO implement
+			case "storyteller": return new StorytellerAttributes(itemName, iffTemplate);
+			default:			return null;
+		}
 	}
 
 	private void unloadStaticItems() {
-		unregisterForIntent(CreateStaticItemIntent.TYPE);    // Stop receiving this intent
 		objectAttributesMap.clear();    // Clear the cache.
-		Log.i(this, "Static items have been disabled");
+		Log.i("Static items have been disabled");
 	}
 
 	private void handleCreateStaticItemIntent(CreateStaticItemIntent csii) {
@@ -189,7 +194,7 @@ public final class StaticItemService extends Service {
 						
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
-								Log.i(this, "Successfully moved %s into container %s", itemName, container);
+								Log.i("Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
 								break;
 							default:
@@ -198,18 +203,18 @@ public final class StaticItemService extends Service {
 						new ObjectCreatedIntent(object).broadcast();
 						
 					} else {
-						Log.w(this, "%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
+						Log.w("%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
 					}
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
-					Log.e(this, errorMessage);
+					Log.e(errorMessage);
 					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
 			
 			objectCreationHandler.success(createdObjects);
 		} else {
-			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
+			Log.w("No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
 	}
 
@@ -508,7 +513,7 @@ public final class StaticItemService extends Service {
 				case "acid": return DamageType.ELEMENTAL_ACID;
 				case "electricity": return DamageType.ELEMENTAL_ELECTRICAL;
 				default:
-					Log.e("StaticItemService", "Unknown damage type %s", damageTypeName);
+					Log.e("Unknown damage type %s", damageTypeName);
 					return null;	// TODO Unknown DamageType... now what?
 			}
 		}
@@ -535,7 +540,7 @@ public final class StaticItemService extends Service {
 				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;
 				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
-					Log.e(this, "Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
+					Log.e("Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
 					// We return false here. That way, we don't store the
 					// itemName in the Map and the item can never be spawned.
 					return false;

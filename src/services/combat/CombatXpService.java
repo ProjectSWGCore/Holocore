@@ -27,27 +27,26 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.combat.CreatureKilledIntent;
-import intents.experience.ExperienceIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import resources.control.Service;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.combat.CreatureKilledIntent;
+import intents.experience.ExperienceIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 
-/**
- *
- * @author mads
- */
 public class CombatXpService extends Service {
 	
 	private final Map<Short, XpData> xpData;
@@ -75,21 +74,17 @@ public class CombatXpService extends Service {
 	}
 	
 	private void loadXpData() {
-		long start = System.nanoTime();
-		
-		Log.i(this, "Loading combat XP rates...");
-		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("creatures/npc_stats.db", "npc_stats")) {
+		long startTime = StandardLog.onStartLoad("combat XP rates");
+		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("npc/npc_stats.db", "npc_stats")) {
 			try (ResultSet set = npcStats.executeQuery("SELECT * FROM npc_stats")) {
 				while (set.next()) {
 					xpData.put(set.getShort("Level"), new XpData(set.getInt("XP"), set.getInt("Elite_XP"), set.getInt("Boss_XP")));
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
-		
-		double time = (System.nanoTime()-start)/1E6;
-		Log.i(this, "Finished loading %d combat XP rates. Time: %fms", xpData.size(), time);
+		StandardLog.onEndLoad(xpData.size(), "combat XP rates", startTime);
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
@@ -107,7 +102,7 @@ public class CombatXpService extends Service {
 		
 		synchronized (groupObjects) {
 			if(object instanceof GroupObject && groupObjects.remove(object.getObjectId()) == null) {
-				Log.w(this, "%s was expected to be in the GroupObject mapping but wasn't", object);
+				Log.w("%s was expected to be in the GroupObject mapping but wasn't", object);
 			}
 		}
 	}
@@ -159,7 +154,7 @@ public class CombatXpService extends Service {
 			XpData xpForLevel = this.xpData.get(corpseLevel);
 
 			if (xpForLevel == null) {
-				Log.e(this, "%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
+				Log.e("%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
 				return 0;
 			}
 
@@ -173,7 +168,7 @@ public class CombatXpService extends Service {
 				case NORMAL:
 					return xpForLevel.getXp();
 				default:
-					Log.e(this, "%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
+					Log.e("%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
 					return 0;
 			}
 		}

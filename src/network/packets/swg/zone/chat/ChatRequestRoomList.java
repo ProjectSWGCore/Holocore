@@ -27,24 +27,28 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 public class ChatRequestRoomList extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatRequestRoomList");
 	
-	public ChatRequestRoomList() {}
-	
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
+	public ChatRequestRoomList() {
 	}
 	
-	public ByteBuffer encode() {
-		int length = 6;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 1);
-		addInt(  data, CRC);
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+	}
+	
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6);
+		data.addShort(1);
+		data.addInt(CRC);
 		return data;
 	}
 }

@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public final class ExpertiseRequestMessage extends SWGPacket {
 	
@@ -42,40 +42,40 @@ public final class ExpertiseRequestMessage extends SWGPacket {
 		
 	}
 	
-	public ExpertiseRequestMessage(ByteBuffer data) {
+	public ExpertiseRequestMessage(NetBuffer data) {
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		requestedSkills = new String[getInt(data)];
+		requestedSkills = new String[data.getInt()];
 		
 		for (int i = 0; i < requestedSkills.length; i++) {
-			requestedSkills[i] = getAscii(data);
+			requestedSkills[i] = data.getAscii();
 		}
 		
-		clearAllExpertisesFirst = getBoolean(data);
+		clearAllExpertisesFirst = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int skillNamesLength = 0;
 		
 		for (String skillName : requestedSkills)
 			skillNamesLength += 2 + skillName.length();
 		
-		ByteBuffer data = ByteBuffer.allocate(11 + skillNamesLength);
-		addShort(data, 3);
-		addInt(data, CRC);
-		addInt(data, requestedSkills.length);
+		NetBuffer data = NetBuffer.allocate(11 + skillNamesLength);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(requestedSkills.length);
 		
 		for (String requestedSkill : requestedSkills) {
-			addAscii(data, requestedSkill);
+			data.addAscii(requestedSkill);
 		}
 		
-		addBoolean(data, clearAllExpertisesFirst);
+		data.addBoolean(clearAllExpertisesFirst);
 		
 		return data;
 	}

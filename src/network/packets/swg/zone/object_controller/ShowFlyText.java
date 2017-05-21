@@ -27,14 +27,14 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
 import java.util.EnumSet;
 import java.util.Set;
 
-import resources.common.RGB;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.network.NetBuffer;
+
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.StringId;
-import resources.network.NetBuffer;
 
 public class ShowFlyText extends ObjectController {
 	
@@ -72,34 +72,33 @@ public class ShowFlyText extends ObjectController {
 		setDisplayFlag(flags);
 	}
 	
-	public ShowFlyText(ByteBuffer data) {
+	public ShowFlyText(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		getLong(data);
-		text = getEncodable(data, StringId.class);
-		oob = getEncodable(data, OutOfBandPackage.class);
-		scale = getFloat(data);
-		rgb = getEncodable(data, RGB.class);
-		display = Flag.getFlyFlags(getInt(data));
+		data.getLong();
+		text = data.getEncodable(StringId.class);
+		oob = data.getEncodable(OutOfBandPackage.class);
+		scale = data.getFloat();
+		rgb = data.getEncodable(RGB.class);
+		display = Flag.getFlyFlags(data.getInt());
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		byte [] oobRaw = oob.encode();
-		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 27 + text.getFile().length() + text.getKey().length() + oobRaw.length);
-		encodeHeader(data.getBuffer());
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 27 + text.getFile().length() + text.getKey().length() + oob.getLength());
+		encodeHeader(data);
 		data.addLong(getObjectId());
 		data.addEncodable(text);
-		data.addRawArray(oobRaw);
+		data.addEncodable(oob);
 		data.addFloat((float) scale);
 		data.addEncodable(rgb);
 		data.addInt(getDisplayBitmask());
-		return data.getBuffer();
+		return data;
 	}
 	
 	public StringId getText() {

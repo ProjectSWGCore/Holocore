@@ -27,8 +27,14 @@
  ***********************************************************************************/
 package utilities;
 
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.chat.PersistentMessageIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
-import resources.Terrain;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -36,10 +42,6 @@ import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
-import intents.chat.PersistentMessageIntent;
-import resources.server_info.Log;
 
 /**
  * @author Mads
@@ -106,7 +108,7 @@ public final class IntentFactory {
 	 */
 	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
 		if (objects.length % 2 != 0)
-			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
+			Log.e("Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);
@@ -120,7 +122,7 @@ public final class IntentFactory {
 	 * @param message Message to display in the players chat console.
 	 */
 	public void sendConsoleMessage(Player target, String message) {
-		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
+		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, message));
 	}
 
 	/**

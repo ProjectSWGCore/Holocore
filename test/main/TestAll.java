@@ -27,12 +27,16 @@
 ***********************************************************************************/
 package main;
 
-import network.encryption.TestEncryption;
-
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.debug.Log.LogLevel;
+import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
+
+import network.encryption.TestEncryption;
 import resources.TestResources;
 
 @RunWith(Suite.class)
@@ -41,5 +45,10 @@ import resources.TestResources;
 	TestResources.class
 })
 public class TestAll {
+	
+	@BeforeClass
+	public static void initLog() {
+		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+	}
 	
 }

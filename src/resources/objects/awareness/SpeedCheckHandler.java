@@ -27,7 +27,8 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import resources.Location;
+import com.projectswg.common.data.location.Location;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
@@ -38,7 +39,7 @@ class SpeedCheckHandler {
 	}
 	
 	public void moveObjectSpeedChecks(CreatureObject obj, Location requestedLocation) {
-		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		double time = obj.getTimeSinceLastTransform() / 1000;
 		obj.updateLastTransformTime();
 		Location l = obj.getWorldLocation();
 		if (isSpeeding(obj, l, requestedLocation, time)) {
@@ -49,7 +50,7 @@ class SpeedCheckHandler {
 	}
 	
 	public void moveObjectSpeedChecks(CreatureObject obj, SWGObject parent, Location requestedLocation) {
-		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		double time = obj.getTimeSinceLastTransform() / 1000;
 		obj.updateLastTransformTime();
 		Location l = obj.getWorldLocation();
 		Location requestedWorld = new Location(requestedLocation.getX(), 0, requestedLocation.getZ(), parent.getTerrain());

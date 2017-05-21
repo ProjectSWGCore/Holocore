@@ -27,8 +27,8 @@
  ***********************************************************************************/
 package resources.buildout;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
 
 public class BuildoutArea implements Comparable<BuildoutArea> {
 	
@@ -101,10 +101,12 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		this.loaded = loaded;
 	}
 	
+	@Override
 	public int hashCode() {
 		return terrain.hashCode() ^ Double.hashCode(x1) ^ Double.hashCode(z1);
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		if (o == null || !(o instanceof BuildoutArea))
 			return false;
@@ -118,6 +120,7 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		return true;
 	}
 	
+	@Override
 	public int compareTo(BuildoutArea area) {
 		int comp = terrain.getName().compareTo(area.terrain.getName());
 		if (comp != 0)
@@ -147,7 +150,7 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		adjusted.mergeWith(l);
 		if (!isAdjustCoordinates())
 			return;
-		adjusted.translatePosition(-translationX, 0, -translationZ);
+		adjusted.translatePosition(-x1, 0, -z1);
 	}
 	
 	public Location readjustLocation(Location l) {
@@ -160,9 +163,10 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		adjusted.mergeWith(l);
 		if (!isAdjustCoordinates())
 			return;
-		adjusted.translatePosition(translationX, 0, translationZ);
+		adjusted.translatePosition(x1, 0, z1);
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("%s/%s: (%.1f,%.1f)/(%.1f,%.1f) %b(%.1f,%.1f)", name, terrain.getName(), x1, z1, x2, z2, adjustCoordinates, translationX, translationZ);
 	}

@@ -30,7 +30,6 @@ package resources.zone;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 public class NameFilter {
 	
@@ -86,11 +86,8 @@ public class NameFilter {
 				}
 			}
 			return true;
-		} catch (FileNotFoundException e) {
-			Log.e(this, e);
-			return false;
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return false;
 		}
 	}

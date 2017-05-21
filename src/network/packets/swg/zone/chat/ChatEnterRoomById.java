@@ -27,9 +27,9 @@
 
 package network.packets.swg.zone.chat;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 /**
  * @author Waverunner
@@ -42,23 +42,23 @@ public class ChatEnterRoomById extends SWGPacket {
 	private String roomPath;
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 
-		sequence = getInt(data);
-		roomId = getInt(data);
-		roomPath = getAscii(data);
+		sequence = data.getInt();
+		roomId = data.getInt();
+		roomPath = data.getAscii();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(10 + roomPath.length());
-		addShort(bb, 4);
-		addInt(bb, sequence);
-		addInt(bb, roomId);
-		addAscii(bb, roomPath);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10 + roomPath.length());
+		data.addShort(4);
+		data.addInt(sequence);
+		data.addInt(roomId);
+		data.addAscii(roomPath);
+		return data;
 	}
 
 	public int getSequence() {

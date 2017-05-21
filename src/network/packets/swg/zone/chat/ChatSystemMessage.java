@@ -27,81 +27,92 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
-import resources.encodables.OutOfBandPackage;
 import network.packets.swg.SWGPacket;
+import resources.encodables.OutOfBandPackage;
 
 public class ChatSystemMessage extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatSystemMessage");
-
-	private int type = 0;
-	private String message = "";
+	
 	private OutOfBandPackage oob;
+	private String message;
+	private SystemChatType type;
 	
 	public ChatSystemMessage() {
-		
-	}
-	
-	public ChatSystemMessage(int type, String message) {
-		this.type = type;
-		this.message = message;
-	}
-	
-	public ChatSystemMessage(int type, OutOfBandPackage oob) {
-		this.type = type;
-		this.oob = oob;
+		this(SystemChatType.PERSONAL, "", null);
 	}
 	
 	public ChatSystemMessage(SystemChatType type, String message) {
-		this(type.ordinal(), message);
+		this(type, message, null);
 	}
 	
 	public ChatSystemMessage(SystemChatType type, OutOfBandPackage oob) {
-		this(type.ordinal(), oob);
+		this(type, "", oob);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public ChatSystemMessage(SystemChatType type, String message, OutOfBandPackage oob) {
+		this.type = type;
+		this.message = message;
+		this.oob = oob;
+	}
+	
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		type = getByte(data);
-		message = getUnicode(data);
-		getUnicode(data);
+		type = SystemChatType.getType(data.getByte());
+		message = data.getUnicode();
+		data.getUnicode();
 	}
 	
-	public ByteBuffer encode() {
-		byte[] oobData = (oob != null ? oob.encode() : null);
-		int length = 7;
-		
-		if (oobData == null) length+= 15 + message.length() * 2;
-		else length+=  4 + oobData.length;
-		
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 4);
-		addInt(    data, CRC);
-		addByte(   data, type);
-		if (oobData == null) {
-			addUnicode(data, message);
-			addUnicode(data, "");
-		} else {
-			addInt(data, 0);
-			addData(data, oobData);
-		}
-		
+	@Override
+	public NetBuffer encode() {
+		boolean oobExists = (oob != null);
+		NetBuffer data = NetBuffer.allocate(11 + message.length()*2 + (oobExists ? oob.getLength() : 4));
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addByte(type.getType());
+		data.addUnicode(message);
+		if (oobExists)
+			data.addEncodable(oob);
+		else
+			data.addInt(0);
 		return data;
 	}
 	
-	public SystemChatType getType() {
-		for (SystemChatType t : SystemChatType.values()) {
-			if (type == t.ordinal()) return t;
-		}
-		return SystemChatType.SCREEN_AND_CHAT;
+	public String getMessage() {
+		return message;
 	}
-	public String getMessage() { return message; }
 	
 	public enum SystemChatType {
-		SCREEN_AND_CHAT,
-		SCREEN,
-		CHAT
+		PERSONAL	(0x00),
+		BROADCAST	(0x01),
+		CHAT_BOX	(0x02),
+		QUEST		(0x04);
+		
+		int type;
+		
+		SystemChatType(int type) {
+			this.type = type;
+		}
+		
+		public int getType() {
+			return type;
+		}
+		
+		public static SystemChatType getType(int type) {
+			switch (type) {
+				case 0:
+				default:
+					return SystemChatType.PERSONAL;
+				case 1:
+					return SystemChatType.BROADCAST;
+				case 2:
+					return SystemChatType.CHAT_BOX;
+			}
+		}
 	}
+	
 }

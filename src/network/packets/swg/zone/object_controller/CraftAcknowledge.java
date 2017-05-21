@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class CraftAcknowledge extends ObjectController {
 	
@@ -44,26 +44,26 @@ public class CraftAcknowledge extends ObjectController {
 		this.updateCounter = updateCounter;
 	}
 	
-	public CraftAcknowledge(ByteBuffer data) {
+	public CraftAcknowledge(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		acknowledgeId = getInt(data);
-		errorId = getInt(data);
-		updateCounter = getByte(data);
+		acknowledgeId = data.getInt();
+		errorId = data.getInt();
+		updateCounter = data.getByte();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 9);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 9);
 		encodeHeader(data);
-		addInt(data, acknowledgeId);
-		addInt(data, errorId);
-		addByte(data, updateCounter);
+		data.addInt(acknowledgeId);
+		data.addInt(errorId);
+		data.addByte(updateCounter);
 		return data;
 	}
 

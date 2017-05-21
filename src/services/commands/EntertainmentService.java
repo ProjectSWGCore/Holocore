@@ -36,6 +36,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import intents.DanceIntent;
 import intents.FlourishIntent;
 import intents.PlayerEventIntent;
@@ -44,17 +50,12 @@ import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.player.PlayerTransformedIntent;
 import network.packets.swg.zone.object_controller.Animation;
-import resources.Location;
 import resources.Posture;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
 
 /**
  *
@@ -245,7 +246,7 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performanceListenTarget);
 			
 			if(performance == null) {
-				Log.e(this, "Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
+				Log.e("Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
 				return;
 			}
 			
@@ -259,7 +260,7 @@ public class EntertainmentService extends Service {
 				if(performance.removeSpectator(movedPlayer)) {
 					stopWatching(movedPlayer, true);
 				} else {
-					Log.w(this, "%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
+					Log.w("%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
 				}
 			}
 		}
@@ -276,7 +277,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void scheduleExperienceTask(CreatureObject performer, String performanceName) {
-		Log.d(this, "Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
+		Log.d("Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized(performerMap) {
 			long performerId = performer.getObjectId();
 			Future<?> future = executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS);
@@ -292,12 +293,12 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void cancelExperienceTask(CreatureObject performer) {
-		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
+		Log.d("%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized (performerMap) {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
-				Log.e(this, "Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
+				Log.e("Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
 				return;
 			}
 			
@@ -441,7 +442,7 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
-				Log.e("EntertainerExperience", "Performer %s wasn't in performermap", performer);
+				Log.e("Performer %s wasn't in performermap", performer);
 				return;
 			}
 			

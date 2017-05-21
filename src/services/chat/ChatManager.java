@@ -31,6 +31,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Locale;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
@@ -46,36 +53,28 @@ import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
-import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
-import resources.collections.SWGList;
-import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
-import services.CoreManager;
-import services.player.PlayerManager;
 
 public class ChatManager extends Manager {
-
+	
 	private final ChatRoomService roomService;
 	private final ChatMailService mailService;
 	private final RelationalServerData chatLogs;
 	private final PreparedStatement insertChatLog;
-
+	
 	public ChatManager() {
 		roomService = new ChatRoomService();
 		mailService = new ChatMailService();
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
+		
 		addChildService(roomService);
 		addChildService(mailService);
 		
@@ -90,37 +89,31 @@ public class ChatManager extends Manager {
 		Packet p = gpi.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
-		SWGPacket swg = (SWGPacket) p;
-		switch (swg.getPacketType()) {
+		switch (((SWGPacket) p).getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
 				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(gpi.getPlayerManager(), gpi.getPlayer(), (ChatInstantMessageToCharacter) p);
+					handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) p);
 				break;
 			default:
 				break;
 		}
 	}
-
+	
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		Player player = pei.getPlayer();
-		if (player == null)
-			return;
-
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
-				updateChatAvatarStatus(player, true);
+				updateChatAvatarStatus(pei.getPlayer(), true);
 				break;
 			case PE_LOGGED_OUT:
-				if (player.getCreatureObject() == null)
-					break;
-				updateChatAvatarStatus(player, false);
+				updateChatAvatarStatus(pei.getPlayer(), false);
 				break;
-			default: break;
+			default:
+				break;
 		}
 	}
-
+	
 	private void handleChatBroadcastIntent(ChatBroadcastIntent cbi) {
-		switch(cbi.getBroadcastType()) {
+		switch (cbi.getBroadcastType()) {
 			case AREA:
 				broadcastAreaMessage(cbi.getMessage(), cbi.getBroadcaster());
 				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, cbi.getMessage());
@@ -134,19 +127,22 @@ public class ChatManager extends Manager {
 				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, cbi.getMessage());
 				break;
 			case PERSONAL:
-				broadcastPersonalMessage(cbi.getProse(), cbi.getBroadcaster(), cbi.getMessage());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
+				if (cbi.getProse() != null) {
+					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getProse());
+					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, "**OOB DATA**");
+				} else {
+					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getMessage());
+					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
+				}
 				break;
 		}
 	}
-
+	
 	private void handleChatAvatarRequestIntent(ChatAvatarRequestIntent cari) {
 		switch (cari.getRequestType()) {
-			case TARGET_STATUS: {
-				Player player = cari.getPlayer();
-				sendTargetAvatarStatus(player, new ChatAvatar(0, cari.getTarget(), CoreManager.getGalaxy().getName()));
+			case TARGET_STATUS:
+				sendTargetAvatarStatus(cari.getPlayer(), new ChatAvatar(cari.getPlayer(), cari.getTarget()));
 				break;
-			}
 			case FRIEND_ADD_TARGET:
 				handleAddFriend(cari.getPlayer(), cari.getTarget());
 				break;
@@ -156,237 +152,183 @@ public class ChatManager extends Manager {
 			case FRIEND_LIST:
 				handleRequestFriendList(cari.getPlayer());
 				break;
-			case IGNORE_REMOVE_TARGET:
-				handleRemoveIgnored(cari.getPlayer(), cari.getTarget());
-				break;
 			case IGNORE_ADD_TARGET:
 				handleAddIgnored(cari.getPlayer(), cari.getTarget());
+				break;
+			case IGNORE_REMOVE_TARGET:
+				handleRemoveIgnored(cari.getPlayer(), cari.getTarget());
 				break;
 			case IGNORE_LIST:
 				handleRequestIgnoreList(cari.getPlayer());
 				break;
 		}
 	}
-
+	
 	/* Friends List */
-
-	private void handleRequestFriendList(Player player) {
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
-			return;
-
-		SWGList<String> friends = (SWGList<String>) ghost.getFriendsList();
-
-		friends.sendRefreshedListData(ghost);
-	}
-
-	private void handleRemoveFriend(Player player, String target) {
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
-			return;
-
-		if (!ghost.isFriend(target)) {
-			sendSystemMessage(player, "@cmnty:friend_not_found", target);
-			return;
-		}
-
-		ghost.removeFriend(target);
-
-		sendSystemMessage(player, "@cmnty:friend_removed", target);
-	}
-
+	
 	private void handleAddFriend(Player player, String target) {
-		if (target.equalsIgnoreCase(player.getCharacterName().split(" ")[0]))
+		if (target.equalsIgnoreCase(player.getCharacterFirstName()))
 			return;
-
+		
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
-
+		
 		if (ghost.isIgnored(target)) {
 			sendSystemMessage(player, "@cmnty:friend_fail_is_ignored", target);
 			return;
 		}
-
-		if (ghost.isFriend(target)) {
-			sendSystemMessage(player, "@cmnty:friend_duplicate", target);
-			return;
-		}
-
+		
 		if (!player.getPlayerManager().playerExists(target)) {
 			sendSystemMessage(player, "@cmnty:friend_not_found", target);
 			return;
 		}
-
-		ghost.addFriend(target);
-		sendSystemMessage(player, "@cmnty:friend_added", target);
-
-		player.sendPacket(new ChatFriendsListUpdate(new ChatAvatar(0, target, CoreManager.getGalaxy().getName()), true));
-	}
-
-	/* Ignore List */
-
-	private void handleAddIgnored(Player player, String target) {
-		if (target.equalsIgnoreCase(player.getCharacterName().split(" ")[0]))
-			return;
-
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
-			return;
-
-		if (ghost.isIgnored(target)) {
-			sendSystemMessage(player, "@cmnty:ignore_duplicate", target);
+		
+		if (!ghost.addFriend(target)) {
+			sendSystemMessage(player, "@cmnty:friend_duplicate", target);
 			return;
 		}
-
+		
+		sendSystemMessage(player, "@cmnty:friend_added", target);
+		sendTargetAvatarStatus(player, new ChatAvatar(null, target));
+	}
+	
+	private void handleRemoveFriend(Player player, String target) {
+		if (!player.getPlayerObject().removeFriend(target)) {
+			sendSystemMessage(player, "@cmnty:friend_not_found", target);
+			return;
+		}
+		
+		sendSystemMessage(player, "@cmnty:friend_removed", target);
+	}
+	
+	private void handleRequestFriendList(Player player) {
+		player.getPlayerObject().sendFriendsList();
+	}
+	
+	/* Ignore List */
+	
+	private void handleAddIgnored(Player player, String target) {
+		if (target.equalsIgnoreCase(player.getCharacterFirstName()))
+			return;
+		
 		if (!player.getPlayerManager().playerExists(target)) {
 			sendSystemMessage(player, "@cmnty:ignore_not_found", target);
 			return;
 		}
-
-		ghost.addIgnored(target);
+		
+		player.getPlayerObject().removeFriend(target);
+		
+		if (!player.getPlayerObject().addIgnored(target)) {
+			sendSystemMessage(player, "@cmnty:ignore_duplicate", target);
+			return;
+		}
+		
 		sendSystemMessage(player, "@cmnty:ignore_added", target);
 	}
-
+	
 	private void handleRemoveIgnored(Player player, String target) {
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
-			return;
-
-		if (!ghost.isIgnored(target)) {
+		if (!player.getPlayerObject().removeIgnored(target)) {
 			sendSystemMessage(player, "@cmnty:ignore_not_found", target);
 			return;
 		}
-
-		ghost.removeIgnored(target);
-
+		
 		sendSystemMessage(player, "@cmnty:ignore_removed", target);
 	}
-
+	
 	private void handleRequestIgnoreList(Player player) {
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
-			return;
-
-		SWGList<String> ignored = (SWGList<String>) ghost.getIgnoreList();
-
-		ignored.sendRefreshedListData(ghost);
+		player.getPlayerObject().sendIgnoreList();
 	}
-
+	
 	/* Misc */
-
+	
 	private void sendSystemMessage(Player player, String stringId, String target) {
 		new ChatBroadcastIntent(player, new ProsePackage("StringId", stringId, "TT", target)).broadcast();
 	}
-
+	
 	private void handleSpatialChatIntent(SpatialChatIntent spi) {
 		Player sender = spi.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
+		String senderName = sender.getCharacterFirstName();
 		
 		// Send to self
 		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, spi.getMessage(), (short) spi.getChatType(), (short) spi.getMoodId());
 		sender.sendPacket(message);
 		logChat(sender, ChatType.SPATIAL, ChatRange.LOCAL, spi.getMessage());
-
-		String senderName = ChatAvatar.getFromPlayer(sender).getName();
-
+		
 		// Notify observers of the chat message
 		for (Player owner : actor.getObservers()) {
-			PlayerObject awareGhost = owner.getPlayerObject();
-			if (!awareGhost.isIgnored(senderName))
-				owner.sendPacket(new SpatialChat(owner.getCreatureObject().getObjectId(), message));
+			if (owner.getPlayerObject().isIgnored(senderName))
+				continue;
+			owner.sendPacket(new SpatialChat(owner.getCreatureObject().getObjectId(), message));
 		}
 	}
 	
-	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
+	private void handleInstantMessage(Player sender, ChatInstantMessageToCharacter request) {
 		String strReceiver = request.getCharacter().toLowerCase(Locale.ENGLISH);
-		String strSender = sender.getCharacterName();
+		String strSender = sender.getCharacterFirstName();
 		
-		if (strSender.contains(" "))
-			strSender = strSender.split(" ")[0];
+		Player receiver = sender.getPlayerManager().getPlayerByCreatureFirstName(strReceiver);
 		
-		Player receiver = playerMgr.getPlayerByCreatureFirstName(strReceiver);
-		
-		int errorCode = 0; // 0 = No issue, 4 = "strReceiver is not online"
+		ChatResult result = ChatResult.SUCCESS;
 		if (receiver == null || receiver.getPlayerState() != PlayerState.ZONED_IN)
-			errorCode = 4;
-
-		if (errorCode != 4 && receiver.getPlayerObject() != null && receiver.getPlayerObject().isIgnored(strSender))
-			errorCode = ChatResult.IGNORED.getCode();
-
-		sender.sendPacket(new ChatOnSendInstantMessage(errorCode, request.getSequence()));
+			result = ChatResult.TARGET_AVATAR_DOESNT_EXIST;
+		else if (receiver.getPlayerObject().isIgnored(strSender))
+			result = ChatResult.IGNORED;
 		
-		if (errorCode != 0)
+		sender.sendPacket(new ChatOnSendInstantMessage(result.getCode(), request.getSequence()));
+		
+		if (result != ChatResult.SUCCESS)
 			return;
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
 		logChat(sender, receiver, ChatType.TELL, request.getMessage());
 	}
-
+	
 	/* Friends */
-
+	
 	private void updateChatAvatarStatus(Player player, boolean online) {
-		PlayerManager playerManager = player.getPlayerManager();
-		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
-		String galaxy = CoreManager.getGalaxy().getName();
-
 		if (online) {
-			PlayerObject playerObject = player.getPlayerObject();
-			if (playerObject != null && playerObject.getFriendsList().size() <= 0) {
-				for (String friend : playerObject.getFriendsList()) {
-					sendTargetAvatarStatus(player, new ChatAvatar(0, friend, galaxy));
-				}
+			for (String friend : player.getPlayerObject().getFriendsList()) {
+				sendTargetAvatarStatus(player, new ChatAvatar(null, friend));
 			}
 		}
-
-		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(avatar, online);
-
-		playerManager.notifyPlayers(playerNotified -> {
+		
+		String playerName = player.getCharacterFirstName().toLowerCase(Locale.US);
+		player.getPlayerManager().notifyPlayers(playerNotified -> {
 			if (playerNotified.getPlayerState() != PlayerState.ZONED_IN)
 				return false;
-
-			PlayerObject playerObject = playerNotified.getPlayerObject();
-			return playerObject != null && playerObject.getFriendsList().contains(update.getFriend().getName());
-
-		}, update);
+			
+			return playerNotified.getPlayerObject().isFriend(playerName);
+		}, new ChatFriendsListUpdate(new ChatAvatar(player, playerName), online));
 	}
-
+	
 	private void sendTargetAvatarStatus(Player player, ChatAvatar target) {
-		PlayerObject object = player.getPlayerObject();
-		if (object == null)
-			return;
-
 		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target.getName());
-
-		boolean online = true;
-		if (targetPlayer == null || targetPlayer.getPlayerState() != PlayerState.ZONED_IN)
-			online = false;
-
-		player.sendPacket(new ChatFriendsListUpdate(target, online));
-	}
-
-	private void broadcastAreaMessage(String message, Player broadcaster) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
-		broadcaster.sendPacket(packet);
 		
-		broadcaster.getCreatureObject().sendObservers(packet);
+		player.sendPacket(new ChatFriendsListUpdate(target, targetPlayer != null && targetPlayer.getPlayerState() == PlayerState.ZONED_IN));
 	}
-
+	
+	private void broadcastAreaMessage(String message, Player broadcaster) {
+		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.PERSONAL, message));
+	}
+	
 	private void broadcastPlanetMessage(String message, Terrain terrain) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
-		new NotifyPlayersPacketIntent(packet, terrain, null).broadcast();
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
+		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
 	}
-
+	
 	private void broadcastGalaxyMessage(String message) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
 		new NotifyPlayersPacketIntent(packet).broadcast();
 	}
 	
-	private void broadcastPersonalMessage(ProsePackage prose, Player player, String message) {
-		if (prose != null)
-			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBandPackage(prose)));
-		else
-			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
+	private void broadcastPersonalMessage(Player player, String message) {
+		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, message));
+	}
+	
+	private void broadcastPersonalMessage(Player player, ProsePackage prose) {
+		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, new OutOfBandPackage(prose)));
 	}
 	
 	private void logChat(Player broadcaster, ChatType type, ChatRange range, String message) {
@@ -414,8 +356,7 @@ public class ChatManager extends Manager {
 	}
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String type, String range, String room, String subject, String message) {
-		if (message == null)
-			return;
+		Assert.notNull(message, "Message cannot be null!");
 		try {
 			synchronized (insertChatLog) {
 				insertChatLog.setLong(1, System.currentTimeMillis());
@@ -431,24 +372,16 @@ public class ChatManager extends Manager {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
-	public static enum ChatType {
-		MAIL,
-		TELL,
-		SYSTEM,
-		SPATIAL,
-		CHAT
+	public enum ChatType {
+		MAIL, TELL, SYSTEM, SPATIAL, CHAT
 	}
 	
-	public static enum ChatRange {
-		PERSONAL,
-		ROOM,
-		LOCAL,
-		TERRAIN,
-		GALAXY
+	public enum ChatRange {
+		PERSONAL, ROOM, LOCAL, TERRAIN, GALAXY
 	}
 	
 }

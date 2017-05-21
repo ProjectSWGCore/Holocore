@@ -30,12 +30,13 @@ package resources.objects.awareness;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.Location;
-import resources.Terrain;
-import resources.control.Assert;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.server_info.Log;
 
 public class AwarenessHandler implements AutoCloseable {
 	
@@ -46,6 +47,7 @@ public class AwarenessHandler implements AutoCloseable {
 		loadTerrainMaps(callback);
 	}
 	
+	@Override
 	public void close() {
 		for (TerrainMap map : terrains.values()) {
 			map.stop();
@@ -84,9 +86,9 @@ public class AwarenessHandler implements AutoCloseable {
 		if (obj.getTerrain() != Terrain.GONE) {
 			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 			if (map != null) {
-				map.moveWithinMap(obj, requestedLocation);
+				map.moveWithinMap(obj);
 			} else {
-				Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
+				Log.e("Unknown terrain: %s", requestedLocation.getTerrain());
 			}
 		}
 	}

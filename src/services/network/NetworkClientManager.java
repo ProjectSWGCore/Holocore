@@ -30,32 +30,35 @@ package services.network;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import java.nio.channels.SocketChannel;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.TCPServer;
+import com.projectswg.common.network.TCPServer.TCPCallback;
 
 import intents.network.CloseConnectionIntent;
 import main.ProjectSWG.CoreException;
+import network.AdminNetworkClient;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.control.Manager;
-import resources.network.DisconnectReason;
-import resources.network.NetBuffer;
-import resources.network.NetworkCallback;
-import resources.network.TCPServer;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
-import resources.server_info.Log;
+import resources.server_info.DataManager;
 import services.CoreManager;
 
-public class NetworkClientManager extends Manager implements NetworkCallback {
+public class NetworkClientManager extends Manager {
 	
 	private final InboundNetworkManager inboundManager;
 	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
 	private final UDPServer udpServer;
+	private final TCPServer adminServer;
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
@@ -65,6 +68,11 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 		} catch (SocketException e) {
 			throw new CoreException("Socket Exception on UDP bind: " + e);
 		}
+		int adminServerPort = CoreManager.getGalaxy().getAdminServerPort();
+		if (adminServerPort <= 0)
+			adminServer = null;
+		else
+			adminServer = new TCPServer(InetAddress.getLoopbackAddress(), adminServerPort, 1024);
 		udpServer.setCallback(packet -> onUdpPacket(packet));
 		inboundManager = new InboundNetworkManager(clientManager);
 		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
@@ -79,11 +87,15 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	public boolean start() {
 		try {
 			tcpServer.bind();
-			tcpServer.setCallback(this);
+			if (adminServer != null) {
+				adminServer.bind();
+				adminServer.setCallback(new AdminNetworkCallback());
+			}
+			tcpServer.setCallback(new StandardNetworkCallback());
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			if (e instanceof BindException)
-				Log.e(this, "Failed to bind to " + getBindPort());
+				Log.e("Failed to bind to " + getBindPort());
 			return false;
 		}
 		return super.start();
@@ -92,6 +104,9 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	@Override
 	public boolean stop() {
 		tcpServer.close();
+		if (adminServer != null) {
+			adminServer.close();
+		}
 		return super.stop();
 	}
 	
@@ -100,50 +115,23 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 		udpServer.close();
 		return super.terminate();
 	}
-		
+	
 	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
 		NetworkClient client = clientManager.getClient(ccii.getNetworkId());
-		if (client != null)
-			onSessionDisconnect(client.getAddress(), getHolocoreReason(ccii.getDisconnectReason()));
-	}
-	
-	private ConnectionStoppedReason getHolocoreReason(DisconnectReason reason) {
-		switch (reason) {
-			case APPLICATION:
-				return ConnectionStoppedReason.APPLICATION;
-			case CONNECTION_REFUSED:
-				return ConnectionStoppedReason.NETWORK;
-			case NEW_CONNECTION_ATTEMPT:
-				return ConnectionStoppedReason.NETWORK;
-			case OTHER_SIDE_TERMINATED:
-				return ConnectionStoppedReason.OTHER_SIDE_TERMINATED;
-			case TIMEOUT:
-				return ConnectionStoppedReason.NETWORK;
+		if (client != null) {
+			if (client instanceof AdminNetworkClient)
+				adminServer.disconnect(client.getAddress());
+			else
+				tcpServer.disconnect(client.getAddress());
 		}
-		return ConnectionStoppedReason.APPLICATION;
-	}
-	
-	@Override
-	public void onIncomingConnection(Socket s, SocketAddress addr) {
-		onSessionConnect(addr);
-	}
-	
-	@Override
-	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
-		onSessionDisconnect(addr, ConnectionStoppedReason.APPLICATION);
-	}
-	
-	@Override
-	public void onIncomingData(Socket s, SocketAddress addr, byte [] data) {
-		onInboundData(addr, data);
 	}
 	
 	private int getBindPort() {
-		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
 	private int getBufferSize() {
-		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
 	private void onUdpPacket(UDPPacket packet) {
@@ -163,26 +151,74 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 		udpServer.send(port, addr, data.array());
 	}
 	
-	private void onSessionConnect(SocketAddress addr) {
-		NetworkClient client = clientManager.createSession(addr);
-		client.onConnected();
-		inboundManager.onSessionCreated(client);
-		outboundManager.onSessionCreated(client);
-	}
-	
-	private void onInboundData(SocketAddress addr, byte [] data) {
-		inboundManager.onInboundData(addr, data);
-	}
-	
-	private void onSessionDisconnect(SocketAddress addr, ConnectionStoppedReason reason) {
-		NetworkClient client = clientManager.getClient(addr);
-		if (client != null) {
-			client.onDisconnected(reason);
-			client.onSessionDestroyed();
-			inboundManager.onSessionDestroyed(client);
-			outboundManager.onSessionDestroyed(client);
+	private class StandardNetworkCallback implements TCPCallback {
+		
+		private final PacketSender sender;
+		
+		public StandardNetworkCallback() {
+			this.sender = new PacketSender(tcpServer);
 		}
-		tcpServer.disconnect(addr);
+		
+		@Override
+		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
+			NetworkClient client = clientManager.createSession(addr, sender);
+			client.onConnected();
+			inboundManager.onSessionCreated(client);
+			outboundManager.onSessionCreated(client);
+		}
+		
+		@Override
+		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
+			NetworkClient client = clientManager.getClient(addr);
+			if (client != null) {
+				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
+				client.onSessionDestroyed();
+				inboundManager.onSessionDestroyed(client);
+				outboundManager.onSessionDestroyed(client);
+			}
+			tcpServer.disconnect(addr);
+		}
+		
+		@Override
+		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
+			inboundManager.onInboundData(addr, data);
+		}
+		
+	}
+	
+	private class AdminNetworkCallback implements TCPCallback {
+		
+		private final PacketSender sender;
+		
+		public AdminNetworkCallback() {
+			this.sender = new PacketSender(adminServer);
+		}
+		
+		@Override
+		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
+			NetworkClient client = clientManager.createAdminSession(addr, sender);
+			client.onConnected();
+			inboundManager.onSessionCreated(client);
+			outboundManager.onSessionCreated(client);
+		}
+		
+		@Override
+		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
+			NetworkClient client = clientManager.getClient(addr);
+			if (client != null) {
+				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
+				client.onSessionDestroyed();
+				inboundManager.onSessionDestroyed(client);
+				outboundManager.onSessionDestroyed(client);
+			}
+			adminServer.disconnect(addr);
+		}
+		
+		@Override
+		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
+			inboundManager.onInboundData(addr, data);
+		}
+		
 	}
 	
 }

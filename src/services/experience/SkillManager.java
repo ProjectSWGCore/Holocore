@@ -32,17 +32,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Assert;
-import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 
 /**
  *
@@ -135,7 +136,7 @@ public final class SkillManager extends Manager {
 			grantParentSkills(skillData, parentSkillName, target);
 			grantRequiredSkills(skillData, target);
 		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
-			Log.i(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
+			Log.i("%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
 			return;
 		}
 		
@@ -192,7 +193,7 @@ public final class SkillManager extends Manager {
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
 		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
 		if (qualifyingSkills == null) {
-			Log.w(this, "%s tried to use undefined role icon %d", creature, chosenIcon);
+			Log.w("%s tried to use undefined role icon %d", creature, chosenIcon);
 			return;
 		}
 		Assert.notNull(creature.getPlayerObject());
@@ -203,7 +204,7 @@ public final class SkillManager extends Manager {
 				return;
 			}
 		}
-		Log.e(this, "%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
+		Log.e("%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
 	}
 	
 	private static class SkillData {

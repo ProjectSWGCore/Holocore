@@ -1,6 +1,6 @@
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MissionListRequest extends ObjectController{
 	
@@ -9,7 +9,7 @@ public class MissionListRequest extends ObjectController{
 	private long terminalId;
 	private byte tickCount;	
 	
-	public MissionListRequest(ByteBuffer data) {
+	public MissionListRequest(NetBuffer data) {
 		super(CRC);
 	}
 	
@@ -30,20 +30,20 @@ public class MissionListRequest extends ObjectController{
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		data.get();
-		setTickCount(data.get());
+		data.getByte();
+		setTickCount(data.getByte());
 		setTerminalId(data.getLong());		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 10);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 10);
 		encodeHeader(data);
-		addByte(data, 0);
-		addByte(data, getTickCount());
-		addLong(data, getTerminalId());			
+		data.addByte(0);
+		data.addByte(getTickCount());
+		data.addLong(getTerminalId());			
 		return data;
 	}
 }

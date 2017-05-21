@@ -27,20 +27,19 @@
 ***********************************************************************************/
 package resources.collections;
 
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import resources.server_info.Log;
-import resources.server_info.SynchronizedMap;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import network.packets.Packet;
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
+import resources.objects.SWGObject;
 
 public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	
@@ -135,15 +134,20 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<K> kType, Class<V> vType) instead");
+	}
+	
+	@Override
+	public int getLength() {
+		return 8 + dataSize + data.size();
 	}
 	
 	@SuppressWarnings("unchecked")
 	// Unfortunately the exception is just caught
 	public void decode(ByteBuffer data, StringType keyType, StringType valType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
@@ -151,7 +155,7 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 				put((K) buffer.getString(keyType), (V) buffer.getString(valType));
 			}
 		} catch (ClassCastException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		clearDeltaQueue();
 	}
@@ -159,8 +163,8 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	@SuppressWarnings("unchecked")
 	// Unfortunately the exception is just caught
 	public void decode(ByteBuffer data, StringType keyType, Class<V> vType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
@@ -170,10 +174,10 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 				if (value != null && vType.isAssignableFrom(value.getClass()))
 					put((K) key, (V) value);
 				else
-					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
+					Log.e("Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		clearDeltaQueue();
 	}
@@ -181,26 +185,26 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	@SuppressWarnings("unchecked")
 	// There is type checking in the respective if's
 	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {
 			buffer.getByte();
 			Object key = buffer.getGeneric(kType);
 			if (key == null) {
-				Log.e("SWGMap", "Failed to decode: " + kType.getSimpleName());
+				Log.e("Failed to decode: " + kType.getSimpleName());
 				break;
 			}
 			Object value = buffer.getGeneric(vType);
 			if (value == null) {
-				Log.e("SWGMap", "Failed to decode: " + vType.getSimpleName());
+				Log.e("Failed to decode: " + vType.getSimpleName());
 				break;
 			}
 			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
 				put((K) key, (V) value);
 			else
-				Log.e("SWGMap", "Failed to insert key=" + key + "  value=" + value);
+				Log.e("Failed to insert key=" + key + "  value=" + value);
 		}
 		clearDeltaQueue();
 	}
@@ -280,4 +284,23 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 			dataSize -= data.get(key).length;
 		}
 	}
+	
+	public static SWGMap<String, String> getSwgMap(NetBuffer buffer, int num, int var, StringType type) {
+		SWGMap<String, String> set = new SWGMap<>(num, var, type);
+		set.decode(buffer.getBuffer(), type, type);
+		return set;
+	}
+	
+	public static <T> SWGMap<String, T> getSwgMap(NetBuffer buffer, int num, int var, StringType keyType, Class<T> c) {
+		SWGMap<String, T> set = new SWGMap<>(num, var, keyType);
+		set.decode(buffer.getBuffer(), keyType, c);
+		return set;
+	}
+	
+	public static <K, V> SWGMap<K, V> getSwgMap(NetBuffer buffer, int num, int var, Class<K> keyClass, Class<V> valClass) {
+		SWGMap<K, V> set = new SWGMap<>(num, var);
+		set.decode(buffer.getBuffer(), keyClass, valClass);
+		return set;
+	}
+	
 }

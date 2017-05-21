@@ -27,62 +27,60 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
-
-import java.nio.ByteBuffer;
+import resources.chat.ChatResult;
 
 public class ChatOnEnteredRoom extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatOnEnteredRoom");
-
+	
 	private ChatAvatar avatar;
-	private int result;
+	private ChatResult result;
 	private int chatRoomId;
 	private int sequence;
-
+	
 	public ChatOnEnteredRoom() {
 		
 	}
 	
 	public ChatOnEnteredRoom(ChatAvatar avatar, int chatRoomId, int sequence) {
-		this.avatar = avatar;
-		this.chatRoomId = chatRoomId;
-		this.sequence = sequence;
-	}
-
-	public ChatOnEnteredRoom(ChatAvatar avatar, int result, int chatRoomId, int sequence) {
-		this.avatar = avatar;
-		this.result = result;
-		this.chatRoomId = chatRoomId;
-		this.sequence = sequence;
-	}
-
-	public ChatOnEnteredRoom(ByteBuffer data) {
-		decode(data);
-	}
-
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
-		avatar 		= getEncodable(data, ChatAvatar.class);
-		result 		= getInt(data);
-		chatRoomId 	= getInt(data);
-		sequence 	= getInt(data);
+		this(avatar, ChatResult.NONE, chatRoomId, sequence);
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(avatar.getSize() + 18);
-		addShort(data, 5);
-		addInt  (data, CRC);
-		addEncodable(data, avatar);
-		addInt(data, result);
-		addInt  (data, chatRoomId);
-		addInt  (data, sequence);
+	public ChatOnEnteredRoom(ChatAvatar avatar, ChatResult result, int chatRoomId, int sequence) {
+		this.avatar = avatar;
+		this.result = result;
+		this.chatRoomId = chatRoomId;
+		this.sequence = sequence;
+	}
+	
+	public ChatOnEnteredRoom(NetBuffer data) {
+		decode(data);
+	}
+	
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		avatar = data.getEncodable(ChatAvatar.class);
+		result = ChatResult.fromInteger(data.getInt());
+		chatRoomId = data.getInt();
+		sequence = data.getInt();
+	}
+	
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(avatar.getLength() + 18);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addInt(result.getCode());
+		data.addInt(chatRoomId);
+		data.addInt(sequence);
 		return data;
 	}
-
-	public void setResult(int result) {
-		this.result = result;
-	}
+	
 }
-

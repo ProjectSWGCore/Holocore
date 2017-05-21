@@ -27,12 +27,17 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+
+import com.projectswg.common.debug.Log;
+
 import intents.server.ServerManagementIntent;
 import intents.server.ServerManagementIntent.ServerManagementEvent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -40,10 +45,6 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ServerCmdCallback implements ICmdCallback {
 
@@ -72,7 +73,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				case 2: handleUnbanPlayer(player); break;
 				case 3: handleShutdownServer(player); break;
 				case 4: handleCustomShutdownServer(player); break;
-				default: Log.i("ServerCmdCallback", "There is no handle function for selected list item %d", selection); break;
+				default: Log.i("There is no handle function for selected list item %d", selection); break;
 			}
 		}
 		

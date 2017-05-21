@@ -27,19 +27,18 @@
 ***********************************************************************************/
 package intents.server;
 
+import com.projectswg.common.control.Intent;
+
 import resources.config.ConfigFile;
-import resources.control.Intent;
 
 public final class ConfigChangedIntent extends Intent {
-
-	public static final String TYPE = "ConfigChangedIntent";
-	private final ConfigFile changedConfig;
-	private final String key, oldValue, newValue;
 	
-	public ConfigChangedIntent(ConfigFile changedConfig,
-			String key, String oldValue, String newValue) {
-		super(TYPE);
-		
+	private final ConfigFile changedConfig;
+	private final String key;
+	private final String oldValue;
+	private final String newValue;
+	
+	public ConfigChangedIntent(ConfigFile changedConfig, String key, String oldValue, String newValue) {
 		this.changedConfig = changedConfig;
 		this.key = key;
 		this.oldValue = oldValue;

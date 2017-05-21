@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.auction;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,21 +45,21 @@ public class GetAuctionDetails extends SWGPacket {
 		this.auctionId = auctionId;
 	}
 	
-	public GetAuctionDetails(ByteBuffer data) {
+	public GetAuctionDetails(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		auctionId = getLong(data);
+		auctionId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(14);
-		addShort(data, 2);
-		addInt  (data, CRC);
-		addLong (data, auctionId);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addLong(auctionId);
 		return data;
 	}
 

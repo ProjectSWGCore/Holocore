@@ -34,7 +34,7 @@ naboo	starport	Moenia Starport	4745	4	-4672
 naboo	shuttleport	Theed Shuttle A	-5856	6	4172
 naboo	shuttleport	Theed Shuttle B	-5005	6	4072
 naboo	shuttleport	Theed Shuttle C	-5411	6	4321
-naboo	theed_starport	Theed Spaceport	-4866	6	4155
+naboo	starport	Theed Spaceport	-4866	6	4155
 rori	starport	Narmle Starport	-5359	80	-2188
 rori	shuttleport	Narmle Shuttleport	-5255	80	-2161
 rori	starport	Rebel Outpost	3693	96	-6403
@@ -62,4 +62,4 @@ yavin4	starport	Imperial Base	4054	37	-6216
 yavin4	starport	Labor Outpost	-6922	73	-5727
 yavin4	starport	Mining Outpost	-267	35	4896
 kashyyyk_main	starport	Kachirho Starport	-689	21	-170
-mustafar	starport	Mensix Mining Facility	407	230	-1355
+mustafar	starport	Mensix Mining Facility	-2476	230	1622

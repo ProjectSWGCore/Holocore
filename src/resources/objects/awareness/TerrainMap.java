@@ -30,14 +30,14 @@ package resources.objects.awareness;
 import java.util.HashSet;
 import java.util.Set;
 
-import resources.Location;
-import resources.Terrain;
-import resources.callback.CallbackManager;
-import resources.control.Assert;
+import com.projectswg.common.callback.CallbackManager;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.server_info.Log;
 
 public class TerrainMap {
 	
@@ -78,8 +78,7 @@ public class TerrainMap {
 		return callbackManager.isQueueEmpty();
 	}
 	
-	public void moveWithinMap(SWGObject obj, Location loc) {
-		obj.setLocation(loc);
+	public void moveWithinMap(SWGObject obj) {
 		if (isInAwareness(obj)) {
 			move(obj);
 			update(obj);
@@ -104,7 +103,7 @@ public class TerrainMap {
 		TerrainMapChunk chunk = getChunk(obj.getX(), obj.getZ());
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
 		if (chunk == null) {
-			Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
+			Log.e("Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
 			return;
 		}
 		if (current == chunk)

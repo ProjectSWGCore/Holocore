@@ -27,12 +27,14 @@
  ***********************************************************************************/
 package services.network;
 
-import java.net.SocketAddress;
+import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
+import java.net.SocketAddress;
+import java.nio.channels.SocketChannel;
 
-import resources.network.TCPServer;
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.TCPServer;
 
 public class PacketSender {
 	
@@ -42,15 +44,26 @@ public class PacketSender {
 		this.tcpServer = server;
 	}
 	
-	public void sendPacket(SocketAddress addr, ByteBuffer data) {
+	public void sendPacket(SocketAddress addr, NetBuffer data) {
 		if (addr instanceof InetSocketAddress)
 			sendPacket((InetSocketAddress) addr, data);
 		else
-			Log.e(this, "Unknown socket address: %s", addr);
+			Log.e("Unknown socket address: %s", addr);
 	}
 	
-	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {
-		tcpServer.send(addr, data);
+	public void sendPacket(InetSocketAddress addr, NetBuffer data) {
+		SocketChannel sc = tcpServer.getChannel(addr);
+		if (sc == null)
+			return;
+		try {
+			while (data.hasRemaining()) {
+				sc.write(data.getBuffer());
+			}
+		} catch (IOException e) {
+			Log.e("Failed to write to channel: %s", addr);
+			Log.e(e);
+			tcpServer.disconnect(addr);
+		}
 	}
 	
 }

@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
 
-import resources.server_info.Log;
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.object_controller.combat.*;
+import network.packets.swg.zone.object_controller.combat.CombatAction;
+import network.packets.swg.zone.object_controller.combat.CombatSpam;
 
 public abstract class ObjectController extends SWGPacket {
 	
@@ -56,28 +57,30 @@ public abstract class ObjectController extends SWGPacket {
 		this.update = 0x1B;
 	}
 	
-	protected final void decodeHeader(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	protected final void decodeHeader(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		update = getInt(data);
-		if (getInt(data) != controllerCrc)
-			Log.e(getClass().getSimpleName(), "Attempting to process invalid controller");
-		objectId = getLong(data);
-		getInt(data);
+		update = data.getInt();
+		if (data.getInt() != controllerCrc)
+			Log.e("Attempting to process invalid controller");
+		objectId = data.getLong();
+		data.getInt();
 		return;
 	}
 	
-	protected final void encodeHeader(ByteBuffer data) {
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addInt  (data, update);
-		addInt(  data, controllerCrc);
-		addLong( data, objectId);
-		addInt(  data, 0);
+	protected final void encodeHeader(NetBuffer data) {
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addInt(update);
+		data.addInt(controllerCrc);
+		data.addLong(objectId);
+		data.addInt(0);
 	}
 	
-	public abstract void decode(ByteBuffer data);
-	public abstract ByteBuffer encode();
+	@Override
+	public abstract void decode(NetBuffer data);
+	@Override
+	public abstract NetBuffer encode();
 	
 	public long getObjectId() { return objectId; }
 	public int getUpdate() { return update; }
@@ -85,10 +88,13 @@ public abstract class ObjectController extends SWGPacket {
 	
 	public void setUpdate(int update) { this.update = update; }
 	
-	public static final ObjectController decodeController(ByteBuffer data) {
+	public static final ObjectController decodeController(NetBuffer data) {
 		if (data.array().length < 14)
 			return null;
-		int crc = data.getInt(10);
+		int pos = data.position();
+		data.position(pos+10);
+		int crc = data.getInt();
+		data.position(pos);
 		switch (crc) {
 			case 0x0071: return new DataTransform(data);
 			case 0x00CC: return new CombatAction(data);
@@ -109,26 +115,26 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x00F5: return new MissionListRequest(data);
 			case 0x041C: return new JTLTerminalSharedMessage(data);
 		}
-		Log.w("ObjectController", "Unknown object controller: %08X", crc);
+		Log.w("Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);
 	}
 	
 	private static class GenericObjectController extends ObjectController {
 		
-		public GenericObjectController(int crc, ByteBuffer data) {
+		public GenericObjectController(int crc, NetBuffer data) {
 			super(0, crc);
 			decode(data);
 		}
 		
 		@Override
-		public ByteBuffer encode() {
-			ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH);
+		public NetBuffer encode() {
+			NetBuffer data = NetBuffer.allocate(HEADER_LENGTH);
 			encodeHeader(data);
 			return data;
 		}
 		
 		@Override
-		public void decode(ByteBuffer data) {
+		public void decode(NetBuffer data) {
 			decodeHeader(data);
 		}
 	}

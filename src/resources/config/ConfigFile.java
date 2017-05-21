@@ -36,7 +36,9 @@ public enum ConfigFile {
 	/** Meant for networking-related configuration. Includes Login and Zone configuration */
 	NETWORK	("cfg/network.cfg"),
 	/** Meant for specific in-game features that may be better disabled or tweaked */
-	FEATURES("cfg/features.cfg");
+	FEATURES("cfg/features.cfg"),
+	/** Meant for debug features to help fix problems in-game */
+	DEBUG("cfg/debug.cfg");
 	
 	private static final Map<String, ConfigFile> NAMEMAP = new HashMap<>();
 	private String filename;

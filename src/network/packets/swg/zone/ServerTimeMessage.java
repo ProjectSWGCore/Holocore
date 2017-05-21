@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class ServerTimeMessage extends SWGPacket {
 	public static final int CRC = getCrc("ServerTimeMessage");
@@ -44,17 +44,17 @@ public class ServerTimeMessage extends SWGPacket {
 		this.time = time;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		time = getLong(data);
+		time = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(14);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addLong( data, time);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addLong(time);
 		return data;
 	}
 	

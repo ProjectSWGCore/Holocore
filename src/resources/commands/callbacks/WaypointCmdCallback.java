@@ -27,10 +27,11 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -183,7 +184,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 
 	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
-		waypoint.setLocation(location);
+		waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
 		waypoint.setColor(color);
 		waypoint.setName(name);
 		new ObjectCreatedIntent(waypoint).broadcast();

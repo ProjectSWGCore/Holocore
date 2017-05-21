@@ -32,16 +32,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import resources.Location;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.WorldSnapshotData;
-import resources.client_info.visitors.WorldSnapshotData.Node;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.WorldSnapshotData;
+import com.projectswg.common.data.swgfile.visitors.WorldSnapshotData.Node;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
 public class TerrainSnapshotLoader {
@@ -92,8 +93,8 @@ public class TerrainSnapshotLoader {
 	private SWGObject createObject(Map <Integer, String> templateMap, Node row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getId(), templateMap.get(row.getObjectTemplateNameIndex()));
 		Location l = row.getLocation();
-		l.setTerrain(terrain);
-		object.setLocation(l);
+		object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
+		object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
 		return object;
 	}
 	
@@ -102,12 +103,12 @@ public class TerrainSnapshotLoader {
 		if (containerId != 0) {
 			SWGObject container = objectTable.get(containerId);
 			if (!(object instanceof CellObject) && container instanceof BuildingObject) {
-				Log.w(this, "Not adding: %s to %s - invalid type for BuildingObject", object, container);
+				Log.w("Not adding: %s to %s - invalid type for BuildingObject", object, container);
 				return;
 			}
 			object.moveToContainer(container);
 			if (container == null)
-				Log.e("TerrainSnapshotLoader", "Failed to load object: " + object.getTemplate());
+				Log.e("Failed to load object: " + object.getTemplate());
 		} else {
 			objects.add(object);
 		}

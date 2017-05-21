@@ -27,10 +27,11 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import resources.Location;
-import resources.objects.SWGObject;
+import com.projectswg.common.data.location.Location;
+
 import network.packets.swg.zone.UpdateTransformMessage;
 import network.packets.swg.zone.UpdateTransformWithParentMessage;
+import resources.objects.SWGObject;
 
 public class DataTransformHandler {
 	
@@ -53,7 +54,7 @@ public class DataTransformHandler {
 	}
 	
 	private UpdateTransformMessage createTransform(SWGObject obj, double speed, int update) {
-		Location loc = obj.getBuildoutLocation();
+		Location loc = obj.getLocation();
 		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(obj.getObjectId());
 		transform.setX((short) (loc.getX() * 4 + 0.5));

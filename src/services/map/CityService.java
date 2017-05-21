@@ -34,21 +34,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
-import resources.Terrain;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 
 public class CityService extends Service {
 	
@@ -69,19 +70,21 @@ public class CityService extends Service {
 		cities.clear();
 		try (RelationalDatabase db = RelationalServerFactory.getServerData("map/cities.db", "cities")) {
 			try (ResultSet set = db.executeQuery(GET_ALL_CITIES)) {
-				Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-				List<City> list = cities.get(t);
-				if (list == null)
-					cities.put(t, list = new ArrayList<>());
-				list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
+				while (set.next()) {
+					Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
+					List<City> list = cities.get(t);
+					if (list == null)
+						cities.put(t, list = new ArrayList<>());
+					list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
+				}
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
-		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+		GalacticPacketIntent gpi = i;
 		Packet p = gpi.getPacket();
 		if (p instanceof DataTransform) {
 			performLocationUpdate(gpi.getPlayer().getCreatureObject());
@@ -89,9 +92,9 @@ public class CityService extends Service {
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		Player player = ((PlayerEventIntent) i).getPlayer();
+		Player player = i.getPlayer();
 		CreatureObject creature = player.getCreatureObject();
-		if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
+		if (i.getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
 			performLocationUpdate(creature);
 		}
 	}
@@ -138,11 +141,16 @@ public class CityService extends Service {
 		}
 		
 		public boolean isWithinRange(SWGObject obj) {
-			return Math.sqrt(square((int) obj.getX()-x) + square((int) obj.getZ()-z)) <= radius;
+			return square((int) obj.getX()-x) + square((int) obj.getZ()-z) <= square(radius);
 		}
 		
 		private int square(int x) {
 			return x * x;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("City[%s, (%d, %d), radius=%d]", name, x, z, radius);
 		}
 		
 	}

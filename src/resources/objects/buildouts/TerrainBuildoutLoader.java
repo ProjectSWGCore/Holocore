@@ -32,15 +32,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import resources.Location;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.CrcStringTableData;
-import resources.client_info.visitors.DatatableData;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
 class TerrainBuildoutLoader {
@@ -101,8 +102,8 @@ class TerrainBuildoutLoader {
 	private SWGObject createObject(SwgBuildoutRow row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getObjectId(), row.getTemplate());
 		Location l = row.getLocation();
-		l.setTerrain(terrain);
-		object.setLocation(l);
+		object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
+		object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
 		return object;
 	}
 	
@@ -112,7 +113,7 @@ class TerrainBuildoutLoader {
 			SWGObject container = objectTable.get(containerId);
 			object.moveToContainer(container);
 			if (container == null)
-				Log.e("TerrainBuildoutLoader", "Failed to load object: " + object.getTemplate());
+				Log.e("Failed to load object: " + object.getTemplate());
 		} else {
 			List<SWGObject> list = objects.get(areaName);
 			if (list == null) {

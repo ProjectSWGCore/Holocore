@@ -30,11 +30,13 @@ package services.objects;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
 
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ObjectData;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.client_info.visitors.SlotArrangementData;
-import resources.client_info.visitors.SlotDescriptorData;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ObjectData;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
+import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.GameObjectType;
 import resources.objects.GameObjectTypeMask;
 import resources.objects.SWGObject;
@@ -56,7 +58,6 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
-import resources.server_info.Log;
 
 public final class ObjectCreator {
 	
@@ -81,7 +82,8 @@ public final class ObjectCreator {
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+		template = ClientFactory.formatToSharedFile(template);
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
 		if(attributes == null)
 			return null;
 		GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
@@ -100,15 +102,15 @@ public final class ObjectCreator {
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			Log.e("ObjectCreator", e);
+			Log.e(e);
 			obj = null;
 		}
 		if (obj == null)
 			return null;
+		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
 
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
-		handlePostCreation(obj, attributes);
+		handlePostCreation(obj, (ObjectData) ClientFactory.getInfoFromFile(template, true));
 		updateMaxObjectId(objectId);
 		return obj;
 	}
@@ -188,7 +190,7 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
+			default:						Log.e("Unknown type: " + type); return null;
 		}
 	}
 	

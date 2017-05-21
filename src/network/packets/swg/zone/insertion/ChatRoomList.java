@@ -27,52 +27,60 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import network.packets.swg.SWGPacket;
-import resources.chat.ChatRoom;
-
-import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.swg.SWGPacket;
+import resources.chat.ChatRoom;
+
 public class ChatRoomList extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatRoomList");
-
+	
 	private Collection<ChatRoom> rooms;
-
-	public ChatRoomList() {}
-
-	public ChatRoomList(ChatRoom ... rooms) {
+	
+	public ChatRoomList() {
+		this.rooms = new ArrayList<>();
+	}
+	
+	public ChatRoomList(ChatRoom... rooms) {
 		this.rooms = Arrays.asList(rooms);
 	}
-
+	
 	public ChatRoomList(Collection<ChatRoom> rooms) {
 		this.rooms = rooms;
 	}
-
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		rooms = getList(data, ChatRoom.class);
+		rooms = data.getList(ChatRoom.class);
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		int length = 10;
 		for (ChatRoom r : rooms) {
-			length += r.encode().length;
+			length += r.getLength();
 		}
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addList(data, rooms);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addList(rooms);
 		return data;
 	}
-
+	
 	public Collection<ChatRoom> getRooms() {
 		return rooms;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ChatRoomList[roomSize=" + rooms.size() + "]";
 	}
+	
 }

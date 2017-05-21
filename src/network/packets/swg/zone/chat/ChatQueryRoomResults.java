@@ -24,57 +24,60 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package network.packets.swg.zone.chat;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatRoom;
-import java.nio.ByteBuffer;
-import java.util.List;
 
-/**
- * @author Waverunner
- */
 public class ChatQueryRoomResults extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatQueryRoomResults");
-
+	
 	private ChatRoom room;
 	private int sequence;
-
+	
 	public ChatQueryRoomResults(ChatRoom room, int sequence) {
 		this.room = room;
 		this.sequence = sequence;
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
 	}
-
+	
 	@Override
-	public ByteBuffer encode() {
-		byte[] data = room.encode();
-		int size = data.length;
-
-		List<ChatAvatar> members = room.getMembers();
-		List<ChatAvatar> invited = room.getInvited();
-		List<ChatAvatar> moderators = room.getModerators();
-		List<ChatAvatar> banned = room.getBanned();
-
-		for (ChatAvatar avatar : members) { size += avatar.getSize(); }
-		for (ChatAvatar avatar : invited) { size += avatar.getSize(); }
-		for (ChatAvatar avatar : moderators) { size += avatar.getSize(); }
-		for (ChatAvatar avatar : banned) { size += avatar.getSize(); }
-
-		ByteBuffer bb = ByteBuffer.allocate(20 + size);
-		addList(bb, members);
-		addList(bb, invited);
-		addList(bb, moderators);
-		addList(bb, banned);
-		addInt(bb, sequence);
-		addData(bb, data);
-
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addList(room.getMembers());
+		data.addList(room.getInvited());
+		data.addList(room.getModerators());
+		data.addList(room.getBanned());
+		data.addInt(sequence);
+		data.addEncodable(room);
+		return data;
+	}
+	
+	private int getLength() {
+		int size = 20 + room.getLength();
+		
+		for (ChatAvatar avatar : room.getMembers()) {
+			size += avatar.getLength();
+		}
+		for (ChatAvatar avatar : room.getInvited()) {
+			size += avatar.getLength();
+		}
+		for (ChatAvatar avatar : room.getModerators()) {
+			size += avatar.getLength();
+		}
+		for (ChatAvatar avatar : room.getBanned()) {
+			size += avatar.getLength();
+		}
+		
+		return size;
 	}
 }

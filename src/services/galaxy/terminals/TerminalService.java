@@ -35,16 +35,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
-import resources.control.Service;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 
 public class TerminalService extends Service {
 	
@@ -79,7 +80,7 @@ public class TerminalService extends Service {
 					templates.add(set.getString("iff"));
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return super.initialize();
@@ -124,15 +125,15 @@ public class TerminalService extends Service {
 				if (set.next())
 					return set.getString("script");
 				else
-					Log.e("TerminalService", "Cannot find script for template: " + iff);
+					Log.e("Cannot find script for template: " + iff);
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			} finally {
 				if (set != null) {
 					try {
 						set.close();
 					} catch (SQLException e) {
-						Log.e(this, e);
+						Log.e(e);
 					}
 				}
 			}

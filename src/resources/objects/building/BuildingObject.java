@@ -27,23 +27,23 @@
 ***********************************************************************************/
 package resources.objects.building;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Location;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.PortalLayoutData;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.control.Assert;
-import resources.network.NetBufferStream;
-import resources.objects.SWGObject;
-import resources.objects.cell.CellObject;
-import resources.objects.tangible.TangibleObject;
-import resources.server_info.SynchronizedMap;
-import services.objects.ObjectCreator;
-import intents.object.ObjectCreatedIntent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.NetBufferStream;
+
+import intents.object.ObjectCreatedIntent;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.objects.SWGObject;
+import resources.objects.cell.CellObject;
+import resources.objects.tangible.TangibleObject;
+import services.objects.ObjectCreator;
 
 public class BuildingObject extends TangibleObject {
 	
@@ -93,7 +93,7 @@ public class BuildingObject extends TangibleObject {
 				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
 				Assert.notNull(cell);
 				cell.setNumber(i);
-				cell.setLocation(new Location(0, 0, 0, getTerrain()));
+				cell.setTerrain(getTerrain());
 				addObject(cell);
 				new ObjectCreatedIntent(cell).broadcast();
 			}

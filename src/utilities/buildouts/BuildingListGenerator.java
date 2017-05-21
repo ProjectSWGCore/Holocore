@@ -34,20 +34,23 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import resources.Terrain;
+import com.projectswg.common.data.location.Terrain;
+
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
+import resources.server_info.DataManager;
 import services.objects.ClientBuildoutService;
 import utilities.SdbGenerator;
 
 public class BuildingListGenerator {
 	
 	public static void main(String [] args) throws IOException {
+		DataManager.initialize();
 		ClientBuildoutService buildouts = new ClientBuildoutService();
 		Collection<SWGObject> objects = buildouts.loadClientObjects().values();
 		System.out.println("Organizing data...");
 		List<BuildingObject> buildings = new ArrayList<>();
-		SdbGenerator gen = new SdbGenerator(new File("buildings.sdb"));
+		SdbGenerator gen = new SdbGenerator(new File("serverdata/building/buildings.sdb"));
 		gen.open();
 		initializeSdb(gen);
 		for (SWGObject obj : objects) {
@@ -74,6 +77,7 @@ public class BuildingListGenerator {
 		}
 		System.out.println("Finished.");
 		gen.close();
+		DataManager.terminate();
 		System.exit(0);
 	}
 	

@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package resources.objects.buildouts;
 
-import resources.Location;
-import resources.client_info.visitors.CrcStringTableData;
-import resources.common.CRC;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
 
 public class SwgBuildoutRow {
 	
@@ -84,8 +84,8 @@ public class SwgBuildoutRow {
 	}
 	
 	private void loadLarge(Object [] datatableRow, CrcStringTableData crcString) {
-		objectId = ((Number) datatableRow[0]).longValue();
-		containerId = ((Number) datatableRow[1]).longValue();
+		objectId = (Integer) datatableRow[0];
+		containerId = (Integer) datatableRow[1];
 		type = (Integer) datatableRow[2];
 		loadEndColumns(datatableRow, crcString, 3);
 		final long indexShifted = (buildoutArea.getIndex() + 1L) << 48;
@@ -113,11 +113,7 @@ public class SwgBuildoutRow {
 	private void translateLocation() {
 		if (cellIndex != 0)
 			return;
-		if (buildoutArea.isUseOrigin()) {
-			location.translatePosition(buildoutArea.getOriginX(), 0, buildoutArea.getOriginZ());
-		} else {
-			location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
-		}
+		location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
 	}
 	
 	public Location getLocation() {

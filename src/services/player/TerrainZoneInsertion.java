@@ -30,11 +30,11 @@ package services.player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import resources.Location;
-import resources.Terrain;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
 
 public class TerrainZoneInsertion {
 	
@@ -55,7 +55,7 @@ public class TerrainZoneInsertion {
 			Location l = generateRandomLocation(Terrain.getTerrainFromName(set.getString("terrain")), set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), set.getDouble("radius"));
 			return new SpawnInformation(!building.isEmpty(), l, set.getLong("object_id"), set.getString("cell"));
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return null;
 	}

@@ -26,27 +26,26 @@
  ******************************************************************************/
 package intents;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
 public class GrantBadgeIntent extends Intent {
-	public static final String TYPE = "GrantBadgeIntent";
 	
 	private CreatureObject creature;
 	private String collectionBadgeName;
 	
-	public GrantBadgeIntent(CreatureObject creature, String collectionBadgeName){
-		super(TYPE);
+	public GrantBadgeIntent(CreatureObject creature, String collectionBadgeName) {
 		this.creature = creature;
 		this.collectionBadgeName = collectionBadgeName;
 		
 	}
 	
-	public CreatureObject getCreature(){
+	public CreatureObject getCreature() {
 		return creature;
 	}
 	
-	public String getCollectionBadgeName(){
+	public String getCollectionBadgeName() {
 		return collectionBadgeName;
 	}
 }

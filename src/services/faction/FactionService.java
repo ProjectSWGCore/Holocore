@@ -35,6 +35,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+
 import intents.FactionIntent;
 import intents.chat.ChatBroadcastIntent;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -43,7 +45,6 @@ import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -87,7 +88,7 @@ public final class FactionService extends Service {
 	}
 	
 	private void sendSystemMessage(TangibleObject target, String message) {
-		target.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
+		target.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, message));
 	}
 	
 	private String getBeginMessage(PvpStatus oldStatus, PvpStatus newStatus) {

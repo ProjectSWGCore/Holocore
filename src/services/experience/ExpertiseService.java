@@ -27,26 +27,29 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.GrantSkillIntent;
-import intents.experience.LevelChangedIntent;
-import intents.network.GalacticPacketIntent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
+import intents.experience.GrantSkillIntent;
+import intents.experience.LevelChangedIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Intent;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiMessageBox;
 
@@ -82,8 +85,7 @@ public final class ExpertiseService extends Service {
 	}
 	
 	private void loadTrees() {
-		Log.i(this, "Loading expertise trees...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise trees");
 		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise_trees.iff", false);
 		int rowCount = expertiseTable.getRowCount();
 		
@@ -91,13 +93,11 @@ public final class ExpertiseService extends Service {
 			int treeId = (int) expertiseTable.getCell(i, 0);
 			trees.put(treeId, new HashMap<>());
 		}
-		
-		Log.i(this, "Finished loading %d expertise trees in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
+		StandardLog.onEndLoad(rowCount, "expertise trees", startTime);
 	}
 	
 	private boolean loadExpertise() {
-		Log.i(this, "Loading expertise skills...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise skills");
 		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise.iff", false);
 		int rowCount = expertiseTable.getRowCount();
 		
@@ -108,7 +108,7 @@ public final class ExpertiseService extends Service {
 			Map<String, Expertise> expertise = trees.get(treeId);
 			
 			if (expertise == null) {
-				Log.e(this, "Expertise %s refers to unknown tree with ID %d", skillName, treeId);
+				Log.e("Expertise %s refers to unknown tree with ID %d", skillName, treeId);
 				return false;
 			}
 			
@@ -119,15 +119,12 @@ public final class ExpertiseService extends Service {
 			
 			expertise.put(skillName, new Expertise(requiredProfession, tier));
 		}
-		
-		Log.i(this, "Finished loading %d expertise skills in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
-		
+		StandardLog.onEndLoad(rowCount, "expertise skills", startTime);
 		return true;
 	}
 	
 	private boolean loadAbilities() {
-		Log.i(this, "Loading expertise abilities...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise abilities");
 		int abilityCount = 0;
 		
 		try (RelationalDatabase abilityDatabase = RelationalServerFactory.getServerData("player/expertise_abilities.db", "expertise_abilities")) {
@@ -149,13 +146,11 @@ public final class ExpertiseService extends Service {
 					expertiseAbilities.put(skill, abilityChains);
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			}
 		}
-		
-		Log.i(this, "Finished loading %d expertise abilities in %fms", abilityCount, (System.nanoTime() - startTime) / 1E6);
-		
+		StandardLog.onEndLoad(abilityCount, "expertise abilities", startTime);
 		return true;
 	}
 	
@@ -184,7 +179,7 @@ public final class ExpertiseService extends Service {
 
 		for (String requestedSkill : requestedSkills) {
 			if (getAvailablePoints(creatureObject) < 1) {
-				Log.i(this, "%s attempted to spend more expertise points than available to them", creatureObject);
+				Log.i("%s attempted to spend more expertise points than available to them", creatureObject);
 				return;
 			}
 
@@ -201,14 +196,14 @@ public final class ExpertiseService extends Service {
 			Expertise expertise = tree.get(requestedSkill);
 
 			if (!expertise.getRequiredProfession().equals(profession)) {
-				Log.i(this, "%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
+				Log.i("%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
 				continue;
 			}
 
 			int requiredTreePoints = (expertise.getTier() - 1) * 4;
 
 			if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
-				Log.i(this, "%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
+				Log.i("%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
 				continue;
 			}
 			

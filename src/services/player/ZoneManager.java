@@ -27,6 +27,18 @@
 ***********************************************************************************/
 package services.player;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
+
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
@@ -42,35 +54,30 @@ import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.chat.ChatSystemMessage;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-
+import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.config.ConfigFile;
-import resources.control.Manager;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.player.Player.PlayerServer;
-import resources.server_info.Log;
-
-import java.io.File;
-import java.io.IOException;
+import resources.player.PlayerEvent;
+import resources.server_info.DataManager;
+import services.objects.ObjectManager;
+import services.player.zone.ZoneRequester;
 
 public class ZoneManager extends Manager {
 	
 	private final CharacterCreationService characterCreationService;
+	private final ZoneRequester zoneRequester;
 	
 	private String commitHistory;
 	
 	public ZoneManager() {
 		characterCreationService = new CharacterCreationService();
+		zoneRequester = new ZoneRequester();
 		commitHistory = "";
 		
 		addChildService(characterCreationService);
@@ -88,7 +95,7 @@ public class ZoneManager extends Manager {
 	private void handlePlayerEventIntent(Player player, PlayerEvent event) {
 		switch (event) {
 			case PE_FIRST_ZONE:
-				player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
+				player.getPlayerObject().initStartPlayTime();
 				sendCommitHistory(player);
 				sendMessageOfTheDay(player);
 				break;
@@ -112,6 +119,8 @@ public class ZoneManager extends Manager {
 			handleShowHelmet(player, (ShowHelmet) p);
 		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
 			handleLagRequest(player);
+		if (p instanceof SelectCharacter)
+			handleSelectCharacter(intent.getObjectManager(), player, ((SelectCharacter) p).getCharacterId());
 	}
 	
 	public boolean characterExistsForName(String name) {
@@ -141,21 +150,21 @@ public class ZoneManager extends Manager {
 						commitHistory += "\n";
 				}
 			} catch (GitAPIException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		} catch (IOException e) {
-			Log.e(this, "Failed to open %s to read commit history", repoDir);
+			Log.e("Failed to open %s to read commit history", repoDir);
 			// An exception is thrown if bash isn't installed.
 			// https://www.eclipse.org/forums/index.php/t/1031740/
 		}
 	}
 	
 	private void sendCommitHistory(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
+		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, commitHistory));
 	}
 	
 	private void sendMessageOfTheDay(Player player) {
-		String message = getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
+		String message = DataManager.getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
 		
 		if(!message.isEmpty())	// If the message isn't nothing
 			new ChatBroadcastIntent(player, message).broadcast();	// Send it
@@ -184,18 +193,23 @@ public class ZoneManager extends Manager {
 			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
 			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
 			case "white": waypoint.setColor(WaypointColor.WHITE); break;
-			default: Log.e(this, "Don't know color %s", p.getColor()); break;
+			default: Log.e("Don't know color %s", p.getColor()); break;
 		}
 		
 		ghost.updateWaypoint(waypoint);
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		Log.i("ZoneService", "%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
+		Log.i("%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
 		player.setPlayerServer(PlayerServer.ZONE);
 		player.sendPacket(new HeartBeat());
 		player.sendPacket(new AccountFeatureBits());
 		player.sendPacket(new ClientPermissionsMessage());
+	}
+	
+	private void handleSelectCharacter(ObjectManager objectManager, Player player, long characterId) {
+		SWGObject creatureObj = objectManager.getObjectById(characterId);
+		zoneRequester.onZoneRequested(creatureObj, player, characterId);
 	}
 	
 }

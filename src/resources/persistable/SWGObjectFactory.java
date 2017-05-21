@@ -27,7 +27,8 @@
  ***********************************************************************************/
 package resources.persistable;
 
-import resources.network.NetBufferStream;
+import com.projectswg.common.network.NetBufferStream;
+
 import resources.objects.SWGObject;
 import services.objects.ObjectCreator;
 

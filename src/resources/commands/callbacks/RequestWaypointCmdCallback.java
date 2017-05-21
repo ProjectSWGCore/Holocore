@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.location.Terrain;
+
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
@@ -65,7 +65,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
 
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
-		waypoint.setLocation(new Location(x, y, z, terrain));
+		waypoint.setPosition(terrain, x, y, z);
 		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
 		if (color != null)
 			waypoint.setColor(color);

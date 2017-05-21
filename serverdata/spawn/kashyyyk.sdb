@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 1200003	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	-1.98	-11.86	-7.08	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	GUARD	idle	0	0	0	0	300	120	0
 1200004	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	23.17	-28.13	-10.18	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	GUARD	idle	0	0	0	0	300	120	0

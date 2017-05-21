@@ -27,19 +27,17 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 
 public class RequestZoneInIntent extends Intent {
 	
-	public static final String TYPE = "ZoneInIntent";
-	
 	private Player player;
 	private CreatureObject creature;
 	
 	public RequestZoneInIntent(Player player, CreatureObject creature) {
-		super(TYPE);
 		setPlayer(player);
 		setCreature(creature);
 	}

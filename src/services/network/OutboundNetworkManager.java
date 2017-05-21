@@ -27,19 +27,18 @@
  ***********************************************************************************/
 package services.network;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.TCPServer;
+
 import intents.network.OutboundPacketIntent;
 import network.NetworkClient;
-import resources.control.Assert;
-import resources.control.Service;
-import resources.network.TCPServer;
 
 public class OutboundNetworkManager extends Service {
 	
 	private final ClientManager clientManager;
-	private final PacketSender sender;
 	
 	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
-		this.sender = new PacketSender(tcpServer);
 		this.clientManager = clientManager;
 		
 		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
@@ -52,7 +51,7 @@ public class OutboundNetworkManager extends Service {
 	}
 	
 	public void onSessionCreated(NetworkClient client) {
-		client.setPacketSender(sender);
+		
 	}
 	
 	public void onSessionDestroyed(NetworkClient client) {

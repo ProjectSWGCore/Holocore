@@ -9,4 +9,4 @@
 packets.txt
 log.txt
 /target/
-/lib/
+*.db-journal

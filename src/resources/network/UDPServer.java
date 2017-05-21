@@ -37,7 +37,8 @@ import java.net.UnknownHostException;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 /**
  * This class represents a UDP server that listens for packets and
@@ -140,7 +141,7 @@ public class UDPServer {
 			if (msg != null && msg.startsWith("Socket") && msg.endsWith("closed"))
 				return false;
 			else
-				Log.e(this, e);
+				Log.e(e);
 			return false;
 		}
 	}
@@ -149,7 +150,7 @@ public class UDPServer {
 		try {
 			return send(port, InetAddress.getByName(addr), data);
 		} catch (UnknownHostException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return false;
 	}
@@ -230,7 +231,7 @@ public class UDPServer {
 					loop();
 				}
 			} catch (Exception e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 			running = false;
 		}
@@ -261,7 +262,7 @@ public class UDPServer {
 				if (e.getMessage() != null && (e.getMessage().contains("socket closed") || e.getMessage().contains("Socket closed")))
 					running = false;
 				else
-					Log.e(this, e);
+					Log.e(e);
 				packet.setLength(0);
 			}
 			return packet;

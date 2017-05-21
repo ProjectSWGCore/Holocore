@@ -27,15 +27,12 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.encodables.OutOfBandPackage;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import utilities.Encoder;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import resources.encodables.OutOfBandPackage;
 
 public class Mail implements Encodable, Persistable {
 	
@@ -72,6 +69,10 @@ public class Mail implements Encodable, Persistable {
 	public String getSender() {
 		return sender;
 	}
+	
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 
 	public long getReceiverId() {
 		return receiverId;
@@ -107,21 +108,23 @@ public class Mail implements Encodable, Persistable {
 
 	@Override
 	public byte[] encode() {
-		byte[] oob = outOfBandPackage.encode();
-
-		ByteBuffer bb = ByteBuffer.allocate(8 + (message.length() * 2) + (subject.length() * 2) + oob.length);
-		Packet.addUnicode(bb, message);
-		Packet.addUnicode(bb, subject);
-		Packet.addData(bb, oob);
-
-		return bb.array();
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addUnicode(message);
+		data.addUnicode(subject);
+		data.addEncodable(outOfBandPackage);
+		return data.array();
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		message 			= Packet.getUnicode(data);
-		subject				= Packet.getUnicode(data);
-		outOfBandPackage	= Packet.getEncodable(data, OutOfBandPackage.class);
+	public void decode(NetBuffer data) {
+		message 			= data.getUnicode();
+		subject				= data.getUnicode();
+		outOfBandPackage	= data.getEncodable(OutOfBandPackage.class);
+	}
+	
+	@Override
+	public int getLength() {
+		return  8 + message.length()*2 + subject.length()*2 + outOfBandPackage.getLength();
 	}
 	
 	@Override
@@ -155,10 +158,12 @@ public class Mail implements Encodable, Persistable {
 		}
 	}
 	
+	@Override
 	public int hashCode() {
 		return id;
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Mail))
 			return false;
@@ -166,11 +171,17 @@ public class Mail implements Encodable, Persistable {
 	}
 
 	public byte[] encodeHeader() {
-		ByteBuffer bb = ByteBuffer.allocate(12 + subject.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(0);
-		bb.put(Encoder.encodeUnicode(subject));
-		bb.putInt(0);
-		return bb.array();
+		NetBuffer data = NetBuffer.allocate(12 + subject.length() * 2);
+		data.addInt(0);
+		data.addUnicode(subject);
+		data.addInt(0);
+		return data.array();
+	}
+	
+	public void decodeHeader(NetBuffer data) {
+		data.getInt();
+		subject = data.getUnicode();
+		data.getInt();
 	}
 	
 	public static Mail create(NetBufferStream stream) {

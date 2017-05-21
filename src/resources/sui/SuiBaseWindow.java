@@ -27,16 +27,15 @@
 ***********************************************************************************/
 package resources.sui;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 
 public class SuiBaseWindow implements Encodable {
 
@@ -91,7 +90,7 @@ public class SuiBaseWindow implements Encodable {
 	protected void subscribeToEvent(int event, String widgetSource, String callback) {
 		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
 		if (component != null) {
-			Log.i("SuiWindow", "Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
+			Log.i("Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
 			component.getNarrowParams().set(2, callback);
 		} else {
 			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);
@@ -291,35 +290,35 @@ public class SuiBaseWindow implements Encodable {
 
 	@Override
 	public byte[] encode() {
-
-		int listSize = 0;
-		List<byte[]> componentData = new ArrayList<>();
-		for (SuiComponent component : components) {
-			byte[] data = component.encode();
-			componentData.add(data);
-			listSize += data.length;
-		}
-
-		ByteBuffer data = ByteBuffer.allocate(34 + suiScript.length() + listSize);
-		Packet.addInt(data, id);
-		Packet.addAscii(data, suiScript);
-		Packet.addList(data, componentData);
-		Packet.addLong(data, rangeObjId);
-		Packet.addFloat(data, maxDistance);
-		Packet.addLong(data, 0); // Window Location?
-		Packet.addInt(data, 0);
-
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addInt(id);
+		data.addAscii(suiScript);
+		data.addList(components);
+		data.addLong(rangeObjId);
+		data.addFloat(maxDistance);
+		data.addLong(0); // Window Location?
+		data.addInt(0);
 		return data.array();
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		id = Packet.getInt(data);
-		suiScript = Packet.getAscii(data);
-		components = Packet.getList(data, SuiComponent.class);
-		rangeObjId = Packet.getLong(data);
-		maxDistance = Packet.getFloat(data);
+	public void decode(NetBuffer data) {
+		id = data.getInt();
+		suiScript = data.getAscii();
+		components = data.getList(SuiComponent.class);
+		rangeObjId = data.getLong();
+		maxDistance = data.getFloat();
 		// unk long
 		// unk int
 	}
+	
+	@Override
+	public int getLength() {
+		int listSize = 0;
+		for (SuiComponent component : components) {
+			listSize += component.getLength();
+		}
+		return 34 + suiScript.length() + listSize;
+	}
+	
 }

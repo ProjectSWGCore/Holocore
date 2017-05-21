@@ -27,28 +27,26 @@
 ***********************************************************************************/
 package intents.combat;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
 public class CreatureKilledIntent extends Intent {
-
-	public static final String TYPE = "CreatureKilledIntent";
 	
 	private final CreatureObject killer;
 	private final CreatureObject corpse;
-
+	
 	public CreatureKilledIntent(CreatureObject killer, CreatureObject corpse) {
-		super(TYPE);
 		this.killer = killer;
 		this.corpse = corpse;
 	}
-
+	
 	public CreatureObject getKiller() {
 		return killer;
 	}
-
+	
 	public CreatureObject getCorpse() {
 		return corpse;
 	}
-
+	
 }

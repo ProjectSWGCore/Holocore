@@ -28,9 +28,10 @@
  */
 package resources.commands.callbacks;
 
+import com.projectswg.common.debug.Assert;
+
 import intents.chat.ChatBroadcastIntent;
 import resources.commands.ICmdCallback;
-import resources.control.Assert;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -52,11 +53,11 @@ public class TransferItemCallback implements ICmdCallback {
 			new ChatBroadcastIntent(player, "@container_error_message:container29").broadcast();
 			return;
 		}
-		
+
 		CreatureObject actor = player.getCreatureObject();
-		
+
 		// You can't transfer your own creature
-		if(actor.equals(target)) {
+		if (actor.equals(target)) {
 			new ChatBroadcastIntent(player, "@container_error_message:container17").broadcast();
 			return;
 		}
@@ -69,87 +70,81 @@ public class TransferItemCallback implements ICmdCallback {
 			SWGObject newContainer = galacticManager.getObjectManager().getObjectById(Long.valueOf(args.split(" ")[1]));
 
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
-			if(newContainer == null) {
+			if (newContainer == null) {
 				new ChatBroadcastIntent(player, "@container_error_message:container15").broadcast();
 				return;
 			}
-			
+
 			// You can't add something to itself
 			if (target.equals(newContainer)) {
 				new ChatBroadcastIntent(player, "@container_error_message:container02").broadcast();
 				return;
 			}
-			
+
 			// You can't move an object to a container that it's already inside
 			if (oldContainer.equals(newContainer)) {
 				new ChatBroadcastIntent(player, "@container_error_message:container11").broadcast();
 				return;
 			}
-			
+
 			SWGObject appearanceInventory = actor.getSlottedObject("appearance_inventory");
-			
+
 			Assert.notNull(appearanceInventory);
-			
-			// TODO move check to CommandService. There's an in-combat boolean column in the command table!
-			// You can't equip or unequip non-weapon equipment whilst in combat
-			if (!weapon && actor.isInCombat() && ((newContainer.equals(actor) || oldContainer.equals(actor)) || (newContainer.equals(appearanceInventory) || oldContainer.equals(appearanceInventory)))) {
-				new ChatBroadcastIntent(player, "@base_player:not_while_in_combat").broadcast();
-				return;
-			}
 
 			// A container can only be the child of another container if the other container has a larger volume
-			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize()>= newContainer.getMaxContainerSize()) {
+			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
 				new ChatBroadcastIntent(player, "@container_error_message:container12").broadcast();
 				return;
 			}
-			
+
 			// We can't transfer an item into an appearance-equipped container!
 			SWGObject containerParent = newContainer.getParent();
-			
+
 			if (containerParent != null && containerParent.equals(appearanceInventory)) {
 				// Don't be fooled - the message below contains no prose keys
 				new ChatBroadcastIntent(player, "@container_error_message:container34_prose").broadcast();
 				return;
 			}
 
-			// If armour, they must have the "wear_all_armor" ability
-			if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
-				new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
-				return;
+			// Check if item is being equipped
+			if (newContainer.equals(actor)) {
+				// If armor, they must have the "wear_all_armor" ability
+				if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
+					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
+					return;
+				}
+
+				// Check the players level, if they're too low of a level, don't allow them to wear it
+				String reqLevelStr = target.getAttribute("required_combat_level");
+
+				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
+					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
+					return;
+				}
+				
+				// Make sure the player can wear it based on their species
+				if (!checkSpeciesRestriction(actor, target))
+					return;
+
+				// If the character doesn't have the right profession, reject it
+				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
+					String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
+					if (!target.getAttribute("class_required").contains(profession)) {
+						new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+						return;
+					}
+				}
 			}
 
 			// Only empty containers can be Appearance Equipped
 			if (newContainer.equals(appearanceInventory)) {
-				if(targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
+				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
 					// Don't be fooled - the message below contains no prose keys
 					new ChatBroadcastIntent(player, "@container_error_message:container33_prose").broadcast();
 					return;
 				}
 			}
 
-			// Check the players level, if they're too low of a level, don't allow them to wear it
-			String reqLevelStr = target.getAttribute("required_combat_level");
-
-			if (reqLevelStr != null) {
-				short reqLevel = Short.parseShort(reqLevelStr);
-				if (actor.getLevel() < reqLevel) {
-					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
-					return;
-				}
-			}
-
-			// Make sure the player can wear it based on their species
-			if (!checkSpeciesRestriction(actor, target))
-				return;
-
-			// If the character doesn't have the right profession, reject it
-			if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
-				String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
-				if (!target.getAttribute("class_required").contains(profession)) {
-					new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
-					return;
-				}
-			}
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
 					if (weapon) {

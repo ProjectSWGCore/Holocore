@@ -27,14 +27,14 @@
  ***********************************************************************************/
 package services.network;
 
-import intents.network.InboundPacketPendingIntent;
-
 import java.net.SocketAddress;
 import java.util.Arrays;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
+
+import intents.network.InboundPacketPendingIntent;
 import network.NetworkClient;
-import resources.control.Service;
-import resources.server_info.Log;
 
 public class InboundNetworkManager extends Service {
 	
@@ -51,7 +51,7 @@ public class InboundNetworkManager extends Service {
 		if (client.addToBuffer(data))
 			new InboundPacketPendingIntent(client).broadcast();
 		else
-			Log.d(this, "Not enough to process. Waiting. Data: %s", Arrays.toString(data));
+			Log.d("Not enough to process. Waiting. Data: %s", Arrays.toString(data));
 	}
 	
 	public void onSessionCreated(NetworkClient client) {

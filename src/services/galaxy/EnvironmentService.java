@@ -34,15 +34,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Terrain;
+
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import main.ProjectSWG;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ServerTimeMessage;
 import network.packets.swg.zone.ServerWeatherMessage;
-import resources.Terrain;
 import resources.WeatherType;
-import resources.control.Service;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import utilities.ThreadUtilities;
@@ -54,7 +55,7 @@ public final class EnvironmentService extends Service {
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
 	private final Random random;
-
+	
 	private ScheduledExecutorService executor;
 	
 	public EnvironmentService() {
@@ -83,7 +84,7 @@ public final class EnvironmentService extends Service {
 	}
 	
 	@Override
-	public boolean stop() {
+	public boolean terminate() {
 		try {
 			if (executor != null) {
 				executor.shutdownNow();
@@ -92,7 +93,7 @@ public final class EnvironmentService extends Service {
 		} catch (InterruptedException e) {
 			
 		}
-		return super.stop();
+		return super.terminate();
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent pei){

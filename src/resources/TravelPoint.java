@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources;
 
+import com.projectswg.common.data.location.Location;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import services.galaxy.travel.TravelGroup;
@@ -113,6 +115,7 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 		return name.hashCode();
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("TravelPoint[name=%s location=%s %s", name, location.getTerrain(), location.getPosition());
 	}

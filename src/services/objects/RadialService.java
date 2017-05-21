@@ -31,6 +31,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
+
 import intents.network.GalacticPacketIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
@@ -40,13 +43,11 @@ import network.packets.Packet;
 import network.packets.swg.zone.ObjectMenuSelect;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.radial.RadialOption;
-import resources.server_info.Log;
 import services.galaxy.GalacticManager;
 
 public class RadialService extends Service {
@@ -86,12 +87,12 @@ public class RadialService extends Service {
 		if (target == null)
 			return;
 		if (!(requestor instanceof CreatureObject)) {
-			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
+			Log.w("Requestor of target: %s is not a creature object! %s", target, requestor);
 			return;
 		}
 		Player player = requestor.getOwner();
 		if (player == null) {
-			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
+			Log.w("Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
 
@@ -106,16 +107,16 @@ public class RadialService extends Service {
 	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
 		if (target == null) {
-			Log.e("RadialService", "Selection target [%d] does not exist!", select.getObjectId());
+			Log.e("Selection target [%d] does not exist!", select.getObjectId());
 			return;
 		}
 		if (player == null) {
-			Log.e("RadialService", "Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
+			Log.e("Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
 			return;
 		}
 		RadialItem selection = RadialItem.getFromId(select.getSelection());
 		if (selection == null) {
-			Log.e("RadialService", "RadialItem does not exist with selection id: %d", select.getSelection());
+			Log.e("RadialItem does not exist with selection id: %d", select.getSelection());
 			return;
 		}
 		new RadialSelectionIntent(player, target, selection).broadcast();

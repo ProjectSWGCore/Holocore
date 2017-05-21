@@ -27,26 +27,27 @@
 ***********************************************************************************/
 package network;
 
-import intents.network.ConnectionClosedIntent;
-import intents.network.ConnectionOpenedIntent;
-import intents.network.InboundPacketIntent;
-
 import java.io.EOFException;
 import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import resources.control.Assert;
-import resources.network.NetBufferStream;
-import resources.server_info.Log;
-import services.network.HolocoreSessionManager;
-import services.network.NetworkProtocol;
-import services.network.PacketSender;
-import services.network.HolocoreSessionManager.ResponseAction;
-import utilities.IntentChain;
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBufferStream;
+
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
+import intents.network.InboundPacketIntent;
 import network.packets.Packet;
+import network.packets.swg.admin.AdminPacket;
 import network.packets.swg.holo.HoloConnectionStopped;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import services.network.HolocoreSessionManager;
+import services.network.HolocoreSessionManager.ResponseAction;
+import services.network.NetworkProtocol;
+import services.network.PacketSender;
 
 public class NetworkClient {
 	
@@ -61,10 +62,10 @@ public class NetworkClient {
 	private final Object outboundMutex;
 	private final Lock inboundSemaphore;
 	private final Object stateMutex;
+	private final PacketSender sender;
 	private State state;
-	private PacketSender sender;
 	
-	public NetworkClient(SocketAddress address, long networkId) {
+	public NetworkClient(SocketAddress address, long networkId, PacketSender sender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
@@ -73,8 +74,8 @@ public class NetworkClient {
 		this.outboundMutex = new Object();
 		this.inboundSemaphore = new ReentrantLock(true);
 		this.stateMutex = new Object();
+		this.sender = sender;
 		this.state = State.DISCONNECTED;
-		this.sender = null;
 	}
 	
 	public void close() {
@@ -112,10 +113,6 @@ public class NetworkClient {
 		sessionManager.onSessionDestroyed();
 	}
 	
-	public void setPacketSender(PacketSender sender) {
-		this.sender = sender;
-	}
-	
 	public void processInbound() {
 		if (getState() != State.CONNECTED)
 			return;
@@ -126,7 +123,7 @@ public class NetworkClient {
 				
 			}
 		} catch (EOFException e) {
-			Log.e(this, "Read error: " + e.getMessage());
+			Log.e("Read error: " + e.getMessage());
 		} finally {
 			inboundSemaphore.unlock();
 		}
@@ -141,6 +138,8 @@ public class NetworkClient {
 				flushOutbound();
 				return;
 			}
+			if (!isOutboundAllowed(packet))
+				return;
 			sendPacket(packet);
 		}
 	}
@@ -150,6 +149,14 @@ public class NetworkClient {
 			buffer.write(data);
 			return protocol.canDecode(buffer);
 		}
+	}
+	
+	protected boolean isInboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
+	}
+	
+	protected boolean isOutboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
 	}
 	
 	private boolean processNextPacket() throws EOFException {
@@ -176,6 +183,8 @@ public class NetworkClient {
 			return true;
 		if (action == ResponseAction.SHUT_DOWN)
 			return true;
+		if (!isInboundAllowed(p))
+			return true;
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 		return true;
 	}
@@ -188,7 +197,7 @@ public class NetworkClient {
 	
 	private void sendPacket(Packet p) {
 		if (sender == null) {
-			Log.w(this, "Unable to send packet %s - sender is null!");
+			Log.w("Unable to send packet %s - sender is null!");
 			return;
 		}
 		sender.sendPacket(address, protocol.encode(p));

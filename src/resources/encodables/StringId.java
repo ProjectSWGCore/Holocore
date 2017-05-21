@@ -27,21 +27,20 @@
 ***********************************************************************************/
 package resources.encodables;
 
-import network.packets.Packet;
-
-import java.nio.ByteBuffer;
-
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
 public class StringId implements OutOfBandData, Persistable {
 	
 	private String key = "";
 	private String file = "";
-
-	public StringId() {}
-
+	
+	public StringId() {
+		
+	}
+	
 	public StringId(String file, String key) {
 		this.file = file;
 		this.key = key;
@@ -49,13 +48,14 @@ public class StringId implements OutOfBandData, Persistable {
 	
 	public StringId(String stf) {
 		if (!stf.contains(":")) {
-			Log.e("Stf", "Invalid stf format! Expected a semi-colon for " + stf);
+			Log.e("Invalid stf format! Expected a semi-colon for " + stf);
 			return;
 		}
 		
-		if (stf.startsWith("@")) stf = stf.replaceFirst("@", "");
+		if (stf.startsWith("@"))
+			stf = stf.substring(1);
 		
-		String[] split = stf.split(":");
+		String[] split = stf.split(":", 2);
 		file = split[0];
 		
 		if (split.length == 2)
@@ -64,20 +64,23 @@ public class StringId implements OutOfBandData, Persistable {
 	
 	@Override
 	public byte[] encode() {
-		ByteBuffer buffer = ByteBuffer.allocate(8 + key.length() + file.length());
-
-		Packet.addAscii(buffer, file);
-		Packet.addInt(buffer, 0);
-		Packet.addAscii(buffer, key);
-		
+		NetBuffer buffer = NetBuffer.allocate(getLength());
+		buffer.addAscii(file);
+		buffer.addInt(0);
+		buffer.addAscii(key);
 		return buffer.array();
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		file 	= Packet.getAscii(data);
-		Packet.getInt(data);
-		key 	= Packet.getAscii(data);
+	public void decode(NetBuffer data) {
+		file = data.getAscii();
+		data.getInt();
+		key = data.getAscii();
+	}
+	
+	@Override
+	public int getLength() {
+		return 8 + key.length() + file.length();
 	}
 	
 	@Override
@@ -91,23 +94,33 @@ public class StringId implements OutOfBandData, Persistable {
 		file = stream.getAscii();
 		key = stream.getAscii();
 	}
-
+	
 	@Override
 	public OutOfBandPackage.Type getOobType() {
 		return OutOfBandPackage.Type.STRING_ID;
 	}
-
+	
 	@Override
 	public int getOobPosition() {
 		return -1;
 	}
-
-	public String getKey() { return key; }
-	public void setKey(String key) { this.key = key; }
-
-	public String getFile() { return file; }
-	public void setFile(String file) { this.file = file; }
-
+	
+	public String getKey() {
+		return key;
+	}
+	
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
+	public String getFile() {
+		return file;
+	}
+	
+	public void setFile(String file) {
+		this.file = file;
+	}
+	
 	@Override
 	public String toString() {
 		return "@" + file + ":" + key;

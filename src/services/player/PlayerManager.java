@@ -32,19 +32,20 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import network.packets.Packet;
-import resources.Terrain;
-import resources.control.Assert;
-import resources.control.Manager;
 import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
-import resources.server_info.SynchronizedMap;
 import services.CoreManager;
 
 public class PlayerManager extends Manager {

@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -41,17 +41,17 @@ public class RandomNameRequest extends SWGPacket {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		raceCrc = getAscii(data);
+		raceCrc = data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8 + raceCrc.length());
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addAscii(data, raceCrc);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8 + raceCrc.length());
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addAscii(raceCrc);
 		return data;
 	}
 	

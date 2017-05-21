@@ -27,26 +27,27 @@
 
 package resources.commands.callbacks;
 
+import java.io.FileNotFoundException;
+import java.util.Map;
+
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectTeleportIntent;
 import intents.object.CreateStaticItemIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ForceAwarenessUpdateIntent;
+import intents.object.MoveObjectIntent;
+import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
-import java.io.FileNotFoundException;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
-import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -55,13 +56,9 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
+import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
-import services.objects.StaticItemService.ObjectCreationHandler;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -96,11 +93,14 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "recover":
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
+				case "setinstance":
+					setInstance(player, args.substring(args.indexOf(' ') + 1));
+					break;
 				case "details":
 					try {
 						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
 					} catch (FileNotFoundException ex) {
-						Log.e("QATool", "sendDetails qatool script not found!");
+						Log.e("sendDetails qatool script not found!");
 					}
 					break;
 				case "xp":
@@ -116,7 +116,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 		} else {
 			displayMainWindow(player);
 		}
-		Log.i("QA", "%s has accessed the QA Tool", player.getUsername());
+		Log.i("%s has accessed the QA Tool", player.getUsername());
 	}
 	
 	/* Windows */
@@ -147,7 +147,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 		if (inventory == null)
 			return;
 
-		Log.i("QA", "%s attempted to create item %s", player, itemName);
+		Log.i("%s attempted to create item %s", player, itemName);
 		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
 			@Override
 			public void success(SWGObject[] createdObjects) {
@@ -170,14 +170,14 @@ public class QaToolCmdCallback implements ICmdCallback {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
 		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
 			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
-				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getObjectName());
+				Log.i("[%s] Requested deletion of character: %s", player.getUsername(), target.getObjectName());
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();
 				if (owner != null)
 					new CloseConnectionIntent(owner.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
 				return;
 			}
-			Log.i("QA", "[%s] Requested deletion of object: %s", player.getUsername(), target);
+			Log.i("[%s] Requested deletion of object: %s", player.getUsername(), target);
 			if (target != null) {
 				new DestroyObjectIntent(target).broadcast();
 			}
@@ -186,73 +186,32 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String args) {
-		String name = args;
-		String[] nameParts = name.split(" ");
-		String loc = "";
-		if (nameParts.length == 2) {
-			name = nameParts[0];
-			loc = nameParts[1];
-		} else if (nameParts.length == 3) {
-			name = nameParts[0] + " " + nameParts[1];
-			loc = nameParts[1];
-		} else {
-			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
-		}
-		name = name.trim();
-		recoverPlayer(objManager, playerManager, player, name, loc);
-	}
-	
-	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		Player recoveree = playerManager.getPlayerByCreatureFirstName(name);
-		
+		args = args.trim();
+		Player recoveree = playerManager.getPlayerByCreatureFirstName(args);
 		if (recoveree == null) {
-			sendSystemMessage(player, "Could not find player by first name: '" + name + "'");
+			sendSystemMessage(player, "Could not find player by first name: '" + args + "'");
 			return;
 		}
 		
-		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree.getCreatureObject(), loc));
+		CreatureObject obj = recoveree.getCreatureObject();
+		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
+		new ObjectTeleportIntent(obj, loc).broadcast();
+		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
 	}
 	
-	private String teleportToRecoveryLocation(ObjectManager objManager, SWGObject obj, String loc) {
-		final String whereClause = "(player_spawns.id = ?) AND (player_spawns.building_id = '' OR buildings.building_id = player_spawns.building_id)";
-		try (RelationalServerData data = RelationalServerFactory.getServerData("player/player_spawns.db", "building/buildings", "player_spawns")) {
-			try (ResultSet set = data.selectFromTable("player_spawns, buildings", new String[] { "player_spawns.*", "buildings.object_id" }, whereClause, loc)) {
-				if (!set.next())
-					return "No such location found: " + loc;
-				return teleportToRecovery(objManager, obj, loc, set);
-			} catch (SQLException e) {
-				Log.e(this, e);
-				return "Exception thrown. Failed to teleport: [" + e.getErrorCode() + "] " + e.getMessage();
+	private void setInstance(Player player, String args) {
+		try {
+			CreatureObject creature = player.getCreatureObject();
+			if (creature.getParent() != null) {
+				new MoveObjectIntent(creature, creature.getWorldLocation(), 0, 0).broadcast();
 			}
+			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
+			new ForceAwarenessUpdateIntent(creature).broadcast();
+		} catch (NumberFormatException e) {
+			Log.e("Invalid instance number with qatool: %s", args);
+			sendSystemMessage(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
+			return;
 		}
-	}
-	
-	private String teleportToRecovery(ObjectManager objManager, SWGObject obj, String loc, ResultSet set) throws SQLException {
-		String building = set.getString("building_id");
-		Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-		Location l = new Location(set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), t);
-		if (building.isEmpty())
-			new ObjectTeleportIntent(obj, l).broadcast();
-		else
-			return teleportToRecoveryBuilding(objManager, obj, set.getLong("object_id"), set.getString("cell"), l);
-		return "Sucessfully teleported " + obj.getObjectName() + " to " + loc;
-	}
-	
-	private String teleportToRecoveryBuilding(ObjectManager objManager, SWGObject obj, long buildingId, String cellName, Location l) {
-		SWGObject parent = objManager.getObjectById(buildingId);
-		if (parent == null || !(parent instanceof BuildingObject)) {
-			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
-			Log.e("CharacterCreationService", err);
-			return err;
-		}
-		CellObject cell = ((BuildingObject) parent).getCellByName(cellName);
-		if (cell == null) {
-			String err = String.format("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", cellName, parent.getTemplate(), buildingId);
-			Log.e("CharacterCreationService", err);
-			return err;
-		}
-		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported " + obj.getObjectName() + " to " + buildingId + "/" + cellName + " " + l;
 	}
 	
 	private void displayHelp(Player player) {
@@ -264,10 +223,10 @@ public class QaToolCmdCallback implements ICmdCallback {
 		try {
 			int xpGained = Integer.valueOf(xpGainedArg);
 			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
-			Log.i("QA", "XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
+			Log.i("XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
 		} catch (NumberFormatException e) {
 			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
-			Log.e("QA", "XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+			Log.e("XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 800003	TALUS	tal_aakuan_cave	AREA	2	24.36	-38.96	-37.38	0	1	an Aa'kuan defender	aakuan_defender_47_h_att_n	poi	Aa'kuan Champion's Cave	2	FLOAT	idle	0	0	0	0	600	450	4
 800092	TALUS	tal_aakuan_cave	AREA	2	43.73	-47.09	-7.73	0	1	an Aa'kuan keeper	aakuan_keeper_42_h_att_n	poi	Aa'kuan Champion's Cave	3	FLOAT	idle	0	0	0	0	600	450	6

@@ -34,8 +34,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.debug.Log;
+
 import resources.player.Player;
-import resources.server_info.Log;
 
 public class CharacterCreationRestriction {
 	
@@ -123,7 +124,7 @@ public class CharacterCreationRestriction {
 				final long time = now();
 				if (hackSuccess) {
 					final String state = Arrays.toString(lastCreations.toArray(new Long[lastCreations.size()]));
-					Log.e(this, "Character created when not allowed! Current time/state: %s/%s", time, state);
+					Log.e("Character created when not allowed! Current time/state: %s/%s", time, state);
 				}
 				if (hitMax)
 					lastCreations.pollLast();

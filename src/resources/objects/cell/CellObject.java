@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package resources.objects.cell;
 
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.player.Player;
 

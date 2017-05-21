@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class NewTicketActivityResponseMessage extends SWGPacket {
 	public static final int CRC = getCrc("NewTicketActivityResponseMessage");
@@ -38,23 +38,23 @@ public class NewTicketActivityResponseMessage extends SWGPacket {
 		
 	}
 	
-	public NewTicketActivityResponseMessage(ByteBuffer data) {
+	public NewTicketActivityResponseMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		getByte(data);
-		getInt(data);
+		data.getByte();
+		data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(11);
-		addShort(data, 2);
-		addInt  (data, CRC);
-		addByte (data, 0);
-		addInt  (data, 1);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(11);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addByte(0);
+		data.addInt(1);
 		return data;
 	}
 

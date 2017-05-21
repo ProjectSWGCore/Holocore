@@ -31,9 +31,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.server_info.Log;
 
 class MapCallback implements TerrainMapCallback {
 	
@@ -60,7 +61,7 @@ class MapCallback implements TerrainMapCallback {
 	@Override
 	public void onMoveFailure(SWGObject obj) {
 		failedMove.incrementAndGet();
-		Log.e(this, "Move failed!");
+		Log.e("Move failed!");
 	}
 	
 	public void set(int withinRange, int outOfRange, int successful, int failed) {

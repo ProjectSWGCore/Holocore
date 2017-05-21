@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftRequestSession extends ObjectController{
 
@@ -42,24 +42,24 @@ public class MessageQueueCraftRequestSession extends ObjectController{
 		this.sequenceId = sequenceId;
 	}
 		
-	public MessageQueueCraftRequestSession(ByteBuffer data) {
+	public MessageQueueCraftRequestSession(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}	
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		sessionId = getLong(data);
-		sequenceId = getInt(data);		
+		sessionId = data.getLong();
+		sequenceId = data.getInt();		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 12);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 12);
 		encodeHeader(data);
-		addLong(data, sessionId);
-		addInt(data, sequenceId);
+		data.addLong(sessionId);
+		data.addInt(sequenceId);
 		return data;
 	}
 

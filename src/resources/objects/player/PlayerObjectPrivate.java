@@ -27,16 +27,17 @@
  ***********************************************************************************/
 package resources.objects.player;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
-import utilities.Encoder.StringType;
 
 class PlayerObjectPrivate  implements Persistable {
 	
@@ -57,7 +58,7 @@ class PlayerObjectPrivate  implements Persistable {
 				waypoints.put(waypoint.getObjectId(), waypoint);
 				waypoints.sendDeltaMessage(target);
 			} else {
-				target.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@base_player:too_many_waypoints"));
+				target.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.PERSONAL, "@base_player:too_many_waypoints"));
 			}
 		}
 	}

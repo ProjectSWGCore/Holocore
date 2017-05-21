@@ -39,24 +39,31 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import network.packets.Packet;
-import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
-import network.packets.swg.zone.PlanetTravelPointListRequest;
-import network.packets.swg.zone.PlanetTravelPointListResponse;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
-import intents.travel.*;
-import resources.Location;
+import intents.travel.TicketPurchaseIntent;
+import intents.travel.TicketUseIntent;
+import intents.travel.TravelPointSelectionIntent;
+import network.packets.Packet;
+import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
+import network.packets.swg.zone.PlanetTravelPointListRequest;
+import network.packets.swg.zone.PlanetTravelPointListResponse;
 import resources.Posture;
-import resources.Terrain;
 import resources.TravelPoint;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -64,13 +71,10 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.DataManager;
 import resources.sui.SuiButtons;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
-import services.galaxy.travel.TravelGroup;
 import services.galaxy.travel.TravelGroup.ShuttleStatus;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
@@ -81,10 +85,7 @@ public class TravelService extends Service {
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
 	private static final short TICKET_USE_RADIUS = 8;	// The distance a player needs to be within in order to use their ticket
 	
-	private Terrain[] travelPlanets;
 	private final Map<Terrain, Map<Terrain, Integer>> allowedRoutes; // Describes which planets are linked and base prices.
-	private final DatatableData travelFeeTable;
-	
 	private final AtomicInteger groundTime;
 	private final AtomicInteger airTime;
 	private final double ticketPriceFactor;
@@ -95,17 +96,16 @@ public class TravelService extends Service {
 	
 	public TravelService() {
 		allowedRoutes = new HashMap<>();
-		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		travel = new HashMap<>();
 		
-		ticketPriceFactor = getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
-		groundTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-GROUND-TIME", 120));
-		airTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AIR-TIME", 60));
+		Config config = DataManager.getConfig(ConfigFile.FEATURES);
+		ticketPriceFactor = config.getDouble("TICKET-PRICE-FACTOR", 1);
+		groundTime = new AtomicInteger(config.getInt("SHUTTLE-GROUND-TIME", 120));
+		airTime = new AtomicInteger(config.getInt("SHUTTLE-AIR-TIME", 60));
 		
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_shuttle.iff", 17000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport.iff", 21000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff", 24000);
-		loadTravelPlanetNames();
 		loadAllowedRoutesAndPrices();
 		loadTravelPoints();
 		
@@ -137,13 +137,11 @@ public class TravelService extends Service {
 		travel.put(template, new TravelGroup(template, landTime, groundTime.get() * 1000L, airTime.get() * 1000L));
 	}
 	
-	private void loadTravelPlanetNames() {
-		travelPlanets = new Terrain[travelFeeTable.getRowCount()];
-		
-		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANET_NAMES_COLUMN_INDEX)));
-	}
-	
 	private void loadAllowedRoutesAndPrices() {
+		DatatableData travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
+		Terrain [] travelPlanets = new Terrain[travelFeeTable.getRowCount()];
+		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANET_NAMES_COLUMN_INDEX)));
+		
 		for(Terrain travelPlanet : travelPlanets) {
 			int rowIndex = travelFeeTable.getColumnFromName(travelPlanet.getName()) - 1;
 			Map<Terrain, Integer> prices = new HashMap<>();
@@ -193,8 +191,8 @@ public class TravelService extends Service {
 						loadTravelPoint(set, travelPlanet);
 					}
 				} catch (SQLException e) {
-					Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
-					Log.e(this, e);
+					Log.e(String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
+					Log.e(e);
 					success = false;
 				}
 			}
@@ -279,7 +277,7 @@ public class TravelService extends Service {
 			List<TravelPoint> pointsForPlanet = new ArrayList<>();
 			Terrain to = Terrain.getTerrainFromName(req.getPlanetName());
 			if (to == null) {
-				Log.e(this, "Unknown terrain in PlanetTravelPointListRequest: %s", req.getPlanetName());
+				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", req.getPlanetName());
 				return;
 			}
 			for (TravelGroup gt : travel.values())
@@ -291,6 +289,10 @@ public class TravelService extends Service {
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
+	}
+	
+	private boolean isValidRoute(Terrain departurePlanet, Terrain arrivalPlanet) {
+		return allowedRoutes.get(departurePlanet) != null && allowedRoutes.get(departurePlanet).get(arrivalPlanet) != null;
 	}
 	
 	private int getTicketBasePrice(Terrain departurePlanet, Terrain arrivalPlanet) {
@@ -325,8 +327,8 @@ public class TravelService extends Service {
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
-		if (nearestPoint == null || destinationPoint == null) {
-			Log.w(this, "Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
+		if (nearestPoint == null || destinationPoint == null || !isValidRoute(nearestPoint.getLocation().getTerrain(), destinationPoint.getLocation().getTerrain())) {
+			Log.w("Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
 			return;
 		}
 		
@@ -403,12 +405,12 @@ public class TravelService extends Service {
 		TravelPoint point = getNearestTravelPoint(player.getCreatureObject().getWorldLocation());
 		TravelGroup travel = null;
 		if (point.getShuttle() == null) {
-			Log.w(this, "No travel point shuttle near player: %s", player.getCreatureObject().getWorldLocation());
+			Log.w("No travel point shuttle near player: %s", player.getCreatureObject().getWorldLocation());
 			return;
 		}
 		travel = this.travel.get(point.getShuttle().getTemplate());
 		if (travel == null) {
-			Log.e(this, "Travel point is null for shuttle: " + point.getShuttle());
+			Log.e("Travel point is null for shuttle: " + point.getShuttle());
 			return;
 		}
 		
@@ -480,7 +482,7 @@ public class TravelService extends Service {
 		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
 		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getCollector().getWorldLocation());
 		if (!isTicket(ticket)) {
-			Log.e(this, "%s attempted to use an object that isn't a ticket!", player);
+			Log.e("%s attempted to use an object that isn't a ticket!", player);
 		} else if (nearestPoint.getGroup().getStatus() != ShuttleStatus.GROUNDED) {
 			int time = nearestPoint.getGroup().getTimeRemaining();
 			new ChatBroadcastIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast();
@@ -489,7 +491,7 @@ public class TravelService extends Service {
 			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 			// They can use their ticket if they're within range.
-			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
+			Log.i("%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
 			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 		} else {
 			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
@@ -506,7 +508,7 @@ public class TravelService extends Service {
 			CreatureObject shuttle = (CreatureObject) object;
 			
 			if (pointForShuttle == null) {
-				Log.w(this, "No point for shuttle at location: " + object.getWorldLocation());
+				Log.w("No point for shuttle at location: " + object.getWorldLocation());
 				return;
 			}
 			// Assign the shuttle to the nearest travel point
@@ -519,7 +521,7 @@ public class TravelService extends Service {
 			TravelPoint pointForCollector = getNearestTravelPoint(object.getWorldLocation());
 			
 			if (pointForCollector == null) {
-				Log.w(this, "No point for collector at location: " + object.getWorldLocation());
+				Log.w("No point for collector at location: " + object.getWorldLocation());
 				return;
 			}
 			

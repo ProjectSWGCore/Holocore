@@ -27,48 +27,64 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import com.projectswg.common.network.NetBuffer;
 
-import resources.encodables.player.Mail;
 import network.packets.swg.SWGPacket;
+import resources.encodables.player.Mail;
+import services.CoreManager;
 
 public class ChatPersistentMessageToClient extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatPersistentMessageToClient");
 	
 	private Mail mail;
-	private String galaxy;
 	private boolean header;
 	
 	public ChatPersistentMessageToClient() {
-		this(null, "", false);
+		this(null, false);
 	}
 	
-	public ChatPersistentMessageToClient(Mail mail, String galaxy, boolean header) {
+	public ChatPersistentMessageToClient(Mail mail, boolean header) {
 		this.mail = mail;
-		this.galaxy = galaxy;
 		this.header = header;
 	}
-
+	
 	@Override
-	public ByteBuffer encode() {
-		byte[] data = (header ? mail.encodeHeader() : mail.encode());
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		mail = new Mail(null, null, null, 0);
+		mail.setSender(data.getAscii());
+		data.getAscii(); // SWG
+		data.getAscii(); // galaxy
+		mail.setId(data.getInt());
+		header = data.getBoolean();
+		if (header)
+			mail.decodeHeader(data);
+		else
+			mail.decode(data);
+		mail.setStatus(data.getByte());
+		mail.setTimestamp(data.getInt());
+	}
+	
+	@Override
+	public NetBuffer encode() {
+		byte[] mailData = (header ? mail.encodeHeader() : mail.encode());
+		String galaxy = CoreManager.getGalaxy().getName();
 
-		ByteBuffer bb = ByteBuffer.allocate(25 + galaxy.length() + data.length + (mail.getSender().length() * 2)).order(ByteOrder.LITTLE_ENDIAN);
-		addShort(bb, 2);
-		addInt(bb, CRC);
+		NetBuffer data = NetBuffer.allocate(25 + galaxy.length() + mailData.length + (mail.getSender().length() * 2));
+		data.addShort(2);
+		data.addInt(CRC);
 
-		addAscii(bb, mail.getSender());
-		addAscii(bb, "SWG");
-		addAscii(bb, galaxy);
-		addInt(bb, mail.getId());
-		addBoolean(bb, header);
-
-		bb.put(data);
-
-		addByte(bb, mail.getStatus());
-		addInt(bb, mail.getTimestamp());
-		return bb;
+		data.addAscii(mail.getSender());
+		data.addAscii("SWG");
+		data.addAscii(galaxy);
+		data.addInt(mail.getId());
+		data.addBoolean(header);
+		data.addRawArray(mailData);
+		data.addByte(mail.getStatus());
+		data.addInt(mail.getTimestamp());
+		return data;
 	}
 
 }

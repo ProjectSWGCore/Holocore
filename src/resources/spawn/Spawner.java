@@ -28,14 +28,19 @@
 package resources.spawn;
 
 import java.util.Random;
+
+import com.projectswg.common.data.location.Location;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
 
 public final class Spawner {
-
+	
 	private final Random random;
-	private final SWGObject spawnerObject;
+	private final Location location;
+	private final int id;
+	private SWGObject eggObject;
 	private String creatureName;
 	private String[] iffTemplates;
 	private CreatureDifficulty creatureDifficulty;
@@ -47,13 +52,18 @@ public final class Spawner {
 	private String moodAnimation;
 	private int maxHealth;
 	private int maxAction;
-	private String flagString;
-
-	public Spawner(SWGObject spawnerObject) {
-		random = new Random();
-		this.spawnerObject = spawnerObject;
+	private SpawnerFlag flags;
+	
+	public Spawner(int id) {
+		this.id = id;
+		this.random = new Random();
+		this.location = new Location();
 	}
-
+	
+	public int getSpawnerId() {
+		return id;
+	}
+	
 	/**
 	 * Calculates a random number between {@code minRespawnDelay} and
 	 * {@code maxRespawnDelay}
@@ -64,16 +74,28 @@ public final class Spawner {
 		return random.nextInt((maxRespawnDelay - minRespawnDelay) + 1) + minRespawnDelay;
 	}
 	
+	public SWGObject getSpawnerObject() {
+		return eggObject;
+	}
+	
+	public void setSpawnerObject(SWGObject egg) {
+		this.eggObject = egg;
+	}
+	
+	public Location getLocation() {
+		return location;
+	}
+	
+	public void setLocation(Location loc) {
+		this.location.mergeWith(loc);
+	}
+	
 	/**
 	 * Returns a random IFF template 
 	 * @return 
 	 */
 	public String getRandomIffTemplate() {
 		return iffTemplates[random.nextInt(iffTemplates.length)];
-	}
-	
-	public SWGObject getSpawnerObject() {
-		return spawnerObject;
 	}
 
 	public void setIffTemplates(String[] iffTemplates) {
@@ -160,12 +182,18 @@ public final class Spawner {
 		this.maxAction = maxAction;
 	}
 
-	public String getFlagString() {
-		return flagString;
+	public SpawnerFlag getSpawnerFlag() {
+		return flags;
 	}
 
-	public void setFlagString(String flagString) {
-		this.flagString = flagString;
+	public void setSpawnerFlag(SpawnerFlag flags) {
+		this.flags = flags;
+	}
+	
+	public enum SpawnerFlag {
+		AGGRESSIVE,
+		ATTACKABLE,
+		INVULNERABLE
 	}
 	
 }

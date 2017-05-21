@@ -30,11 +30,16 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -42,15 +47,13 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
-import resources.common.CRC;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -58,7 +61,6 @@ import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.group.GroupInviterData;
-import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
@@ -79,9 +81,11 @@ public class CreatureObject extends TangibleObject {
 	private long 	statesBitmask			= 0;
 	private long	lastTransform			= 0;
 	
-	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
+	private SWGSet<String> skills					= new SWGSet<String>(1, 3, StringType.ASCII);
 	
-	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	private SWGList<Integer> baseAttributes			= new SWGList<Integer>(1, 2);
+	
+	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -595,8 +599,8 @@ public class CreatureObject extends TangibleObject {
 		return creo4.getSkillModValue(skillModName);
 	}
 	
-	public void addBuff(CRC buffCrc, Buff buff) {
-		creo6.putBuff(buffCrc, buff, this);
+	public void addBuff(Buff buff) {
+		creo6.putBuff(buff, this);
 	}
 	
 	public Buff removeBuff(CRC buffCrc) {
@@ -604,10 +608,10 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean hasBuff(String buffName) {
-		return getBuffEntries(buffEntry -> new CRC(buffName.toLowerCase(Locale.ENGLISH)).equals(buffEntry.getKey())).count() > 0;
+		return getBuffEntries(buff -> CRC.getCrc(buffName.toLowerCase(Locale.ENGLISH)) == buff.getCrc()).count() > 0;
 	}
 	
-	public Stream<Map.Entry<CRC, Buff>> getBuffEntries(Predicate<Map.Entry<CRC, Buff>> predicate) {
+	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
 		return creo6.getBuffEntries(predicate);
 	}
 	
@@ -798,6 +802,22 @@ public class CreatureObject extends TangibleObject {
 		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
 	}
 	
+	public boolean hasSentDuelRequestToPlayer(CreatureObject player) {
+		return sentDuels.contains(player);
+	}
+	
+	public boolean isDuelingPlayer(CreatureObject player) {
+		return hasSentDuelRequestToPlayer(player) && player.hasSentDuelRequestToPlayer(this);
+	}
+	
+	public void addPlayerToSentDuels(CreatureObject player) {
+		sentDuels.add(player);
+	}
+	
+	public void removePlayerFromSentDuels(CreatureObject player) {
+		sentDuels.remove(player);
+	}
+	
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
 		boolean tangibleEnemy = super.isEnemy(otherObject);
@@ -806,7 +826,13 @@ public class CreatureObject extends TangibleObject {
 			return tangibleEnemy;
 		}
 		
+		if (isDuelingPlayer((CreatureObject)otherObject))
+			return true;
+		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
+				&& getPvpFaction() != PvpFaction.NEUTRAL
+				&& otherObject.getPvpFaction() != PvpFaction.NEUTRAL
+				&& getPvpFaction() != otherObject.getPvpFaction()
 				&& getPvpStatus() == PvpStatus.SPECIALFORCES
 				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 	}
@@ -821,6 +847,7 @@ public class CreatureObject extends TangibleObject {
 		return super.hashCode() * 20 + race.toString().hashCode();
 	}
 	
+	@Override
 	public void sendBaselines(Player target) {
 		boolean targetSelf = getOwner() == target;
 		
@@ -840,6 +867,7 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	@Override
 	protected void sendFinalBaselinePackets(Player target) {
 		super.sendFinalBaselinePackets(target);
 		
@@ -851,6 +879,7 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -863,6 +892,7 @@ public class CreatureObject extends TangibleObject {
 		bb.incrementOperandCount(4);
 	}
 	
+	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -877,6 +907,7 @@ public class CreatureObject extends TangibleObject {
 		bb.incrementOperandCount(6);
 	}
 	
+	@Override
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -884,6 +915,7 @@ public class CreatureObject extends TangibleObject {
 		creo4.createBaseline4(target, bb);
 	}
 	
+	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -891,16 +923,18 @@ public class CreatureObject extends TangibleObject {
 		creo6.createBaseline6(target, bb);
 	}
 	
+	@Override
 	protected void parseBaseline1(NetBuffer buffer) {
 		super.parseBaseline1(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
 		bankBalance = buffer.getInt();
 		cashBalance = buffer.getInt();
-		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
-		skills = buffer.getSwgSet(1, 3, StringType.ASCII);
+		baseAttributes = SWGList.getSwgList(buffer, 1, 2, Integer.class);
+		skills = SWGSet.getSwgSet(buffer, 1, 3, StringType.ASCII);
 	}
 	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -913,6 +947,7 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = buffer.getLong();
 	}
 	
+	@Override
 	protected void parseBaseline4(NetBuffer buffer) {
 		super.parseBaseline4(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -920,6 +955,7 @@ public class CreatureObject extends TangibleObject {
 		creo4.parseBaseline4(buffer);
 	}
 	
+	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -975,7 +1011,7 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
 		if (stream.getBoolean()) {
-			SWGObject defaultWeapon = (WeaponObject) SWGObjectFactory.create(stream);
+			SWGObject defaultWeapon = SWGObjectFactory.create(stream);
 			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
 		}
 		stream.getList((i) -> skills.add(stream.getAscii()));

@@ -33,6 +33,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import network.AdminNetworkClient;
 import network.NetworkClient;
 
 class ClientManager {
@@ -47,13 +48,15 @@ class ClientManager {
 		networkIdCounter = new AtomicLong(1);
 	}
 	
-	public NetworkClient createSession(SocketAddress addr) {
-		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet());
-		synchronized (clients) {
-			sockets.put(client.getAddress(), client.getNetworkId());
-			clients.put(client.getNetworkId(), client);
-		}
-		client.onSessionCreated();
+	public NetworkClient createAdminSession(SocketAddress addr, PacketSender sender) {
+		NetworkClient client = new AdminNetworkClient(addr, networkIdCounter.incrementAndGet(), sender);
+		registerClient(client);
+		return client;
+	}
+	
+	public NetworkClient createSession(SocketAddress addr, PacketSender sender) {
+		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet(), sender);
+		registerClient(client);
 		return client;
 	}
 	
@@ -80,6 +83,14 @@ class ClientManager {
 				return -1;
 			return id;
 		}
+	}
+	
+	private void registerClient(NetworkClient client) {
+		synchronized (clients) {
+			sockets.put(client.getAddress(), client.getNetworkId());
+			clients.put(client.getNetworkId(), client);
+		}
+		client.onSessionCreated();
 	}
 	
 	private void destroySession(NetworkClient client) {

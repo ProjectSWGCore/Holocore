@@ -27,19 +27,16 @@
 ***********************************************************************************/
 package intents.network;
 
-import resources.player.Player;
 import intents.GalacticIntent;
 import network.packets.Packet;
+import resources.player.Player;
 
 public class GalacticPacketIntent extends GalacticIntent {
-	
-	public static final String TYPE = "GalacticPacketIntent";
 	
 	private Packet packet;
 	private Player player;
 	
 	public GalacticPacketIntent(Packet packet, Player player) {
-		super(TYPE);
 		setPacket(packet);
 		setPlayer(player);
 	}

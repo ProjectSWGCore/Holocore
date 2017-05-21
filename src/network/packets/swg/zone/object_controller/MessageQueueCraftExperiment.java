@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftExperiment extends ObjectController {
 
@@ -45,31 +45,31 @@ public class MessageQueueCraftExperiment extends ObjectController {
 		this.statExperimentationAmount = statExperimentationAmount;
 		this.spentPoints = spentPoints;
 	}
-	public MessageQueueCraftExperiment(ByteBuffer data) {
+	public MessageQueueCraftExperiment(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		actionCounter = getByte(data);
-		statCount = getInt(data);
+		actionCounter = data.getByte();
+		statCount = data.getInt();
 		for(int i = 0; i < statCount; i++){
-			statExperimentationAmount[i] = getInt(data);
-			spentPoints[i] = getInt(data);
+			statExperimentationAmount[i] = data.getInt();
+			spentPoints[i] = data.getInt();
 		}		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 5 + statCount * 8);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 5 + statCount * 8);
 		encodeHeader(data);
-		addByte(data, actionCounter);
-		addInt(data, statCount);
+		data.addByte(actionCounter);
+		data.addInt(statCount);
 		for(int i = 0; i < statCount; i++){
-			addInt(data, statExperimentationAmount[i]);
-			addInt(data, spentPoints[i]);
+			data.addInt(statExperimentationAmount[i]);
+			data.addInt(spentPoints[i]);
 		}
 		return data;
 	}

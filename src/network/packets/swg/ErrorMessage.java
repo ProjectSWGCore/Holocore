@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 
 public class ErrorMessage extends SWGPacket {
@@ -47,22 +47,23 @@ public class ErrorMessage extends SWGPacket {
 		this.fatal = fatal;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		type = getAscii(data);
-		message = getAscii(data);
-		fatal = getBoolean(data);
+		type = data.getAscii();
+		message = data.getAscii();
+		fatal = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		int length = 11 + type.length() + message.length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 3);
-		addInt(  data, CRC);
-		addAscii(data, type);
-		addAscii(data, message);
-		addBoolean(data, fatal);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(11 + type.length() + message.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addAscii(type);
+		data.addAscii(message);
+		data.addBoolean(fatal);
 		return data;
 	}
 }

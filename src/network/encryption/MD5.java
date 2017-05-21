@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package network.encryption;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.io.UnsupportedEncodingException;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 public class MD5 {
 	
@@ -42,9 +43,9 @@ public class MD5 {
 			md.update(text.getBytes("iso-8859-1"), 0, text.length());
 			result = convertToHex(md.digest());
 		} catch (NoSuchAlgorithmException e) {
-			Log.e("MD5", e);
+			Log.e(e);
 		} catch (UnsupportedEncodingException e) {
-			Log.e("MD5", e);
+			Log.e(e);
 		}
 		return result;
 	}

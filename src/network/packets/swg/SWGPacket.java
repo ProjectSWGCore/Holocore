@@ -27,23 +27,22 @@
 ***********************************************************************************/
 package network.packets.swg;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+
 import network.PacketType;
 import network.packets.Packet;
-import resources.common.CRC;
-import resources.server_info.Log;
-
-import java.nio.ByteBuffer;
 
 
-public class SWGPacket extends Packet {
+public abstract class SWGPacket extends Packet {
 	
-	private ByteBuffer data = null;
-	private int crc = 0;
-	private PacketType type = PacketType.UNKNOWN;
-
-	public void setSWGOpcode(int opcode) {
-		this.crc = opcode;
-		this.type = PacketType.fromCrc(opcode);
+	private PacketType type;
+	private int crc;
+	
+	public SWGPacket() {
+		this.type = PacketType.UNKNOWN;
+		this.crc = 0;
 	}
 	
 	public int getSWGOpcode() {
@@ -54,34 +53,18 @@ public class SWGPacket extends Packet {
 		return type;
 	}
 	
-	public boolean decode(ByteBuffer data, int crc) {
-		this.data = data;
-		super.decode(data);
-		setSWGOpcode(getInt(data));
-		if (getSWGOpcode() == crc)
+	public boolean checkDecode(NetBuffer data, int crc) {
+		data.getShort();
+		this.crc = data.getInt();
+		this.type = PacketType.fromCrc(crc);
+		if (this.crc == crc)
 			return true;
-		Log.w(getClass().getSimpleName(), "SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X", crc, getSWGOpcode());
+		Log.w("SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X", crc, getSWGOpcode());
 		return false;
 	}
 	
-	public void decode(ByteBuffer data) {
-		this.data = data;
-		if (data.array().length < 6)
-			return;
-		data.position(2);
-		setSWGOpcode(getInt(data));
-		data.position(0);
-	}
-	
-	public ByteBuffer encode() {
-		return data;
-	}
-	
-	public ByteBuffer getData() {
-		return data;
-	}
-
 	public static int getCrc(String string) {
 		return CRC.getCrc(string);
 	}
+	
 }

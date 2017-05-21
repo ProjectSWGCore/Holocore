@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import network.packets.swg.SWGPacket;
-import resources.Location;
-import resources.Race;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
+import resources.Race;
 
 public class CmdStartScene extends SWGPacket {
 	public static final int CRC = getCrc("CmdStartScene");
@@ -62,40 +62,42 @@ public class CmdStartScene extends SWGPacket {
 		this.serverEpoch = serverEpoch;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		ignoreLayoutFiles = getBoolean(data);
-		charId = getLong(data);
-		String ter = getAscii(data);
+		ignoreLayoutFiles = data.getBoolean();
+		charId = data.getLong();
+		String ter = data.getAscii();
 		l.setTerrain(null);
 		for (Terrain t : Terrain.values())
 			if (t.getFile().equals(ter))
 				l.setTerrain(t);
-		l.setX(getFloat(data));
-		l.setY(getFloat(data));
-		l.setZ(getFloat(data));
-		l.setHeading(getFloat(data));
-		race = Race.getRaceByFile(getAscii(data));
-		galacticTime = getLong(data);
-		serverEpoch = getInt(data);
+		l.setX(data.getFloat());
+		l.setY(data.getFloat());
+		l.setZ(data.getFloat());
+		l.setHeading(data.getFloat());
+		race = Race.getRaceByFile(data.getAscii());
+		galacticTime = data.getLong();
+		serverEpoch = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		int length = 47 + l.getTerrain().getFile().length() + race.getFilename().length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 2);
-		addInt(    data, CRC);
-		addBoolean(data, ignoreLayoutFiles);
-		addLong(   data, charId);
-		addAscii(  data, l.getTerrain().getFile());
-		addFloat(  data, (float) l.getX());
-		addFloat(  data, (float) l.getY());
-		addFloat(  data, (float) l.getZ());
-		addFloat(  data, (float) l.getYaw());
-		addAscii(  data, race.getFilename());
-		addLong(   data, galacticTime);
-		addInt    (data, serverEpoch);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addBoolean(ignoreLayoutFiles);
+		data.addLong(charId);
+		data.addAscii(l.getTerrain().getFile());
+		data.addFloat((float) l.getX());
+		data.addFloat((float) l.getY());
+		data.addFloat((float) l.getZ());
+		data.addFloat((float) l.getYaw());
+		data.addAscii(race.getFilename());
+		data.addLong(galacticTime);
+		data.addInt(serverEpoch);
 		return data;
 	}
 	

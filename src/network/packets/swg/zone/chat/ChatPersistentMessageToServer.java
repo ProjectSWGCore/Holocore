@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
-
-import java.nio.ByteBuffer;
 
 public class ChatPersistentMessageToServer extends SWGPacket {
 	public static final int CRC = getCrc("ChatPersistentMessageToServer");
@@ -51,30 +51,29 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		message 			= getUnicode(data);
-		outOfBandPackage 	= getEncodable(data, OutOfBandPackage.class);
-		counter 			= getInt(data);
-		subject 			= getUnicode(data);
-		getAscii(data); // "SWG"
-		galaxy 				= getAscii(data);
-		recipient 			= getAscii(data);
+		message 			= data.getUnicode();
+		outOfBandPackage 	= data.getEncodable(OutOfBandPackage.class);
+		counter 			= data.getInt();
+		subject 			= data.getUnicode();
+		data.getAscii(); // "SWG"
+		galaxy 				= data.getAscii();
+		recipient 			= data.getAscii();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		byte[] oob = outOfBandPackage.encode();
-		int dataLength = 31 + message.length()*2+oob.length+subject.length()*2+galaxy.length()+recipient.length();
-		ByteBuffer data = ByteBuffer.allocate(dataLength);
-		addUnicode(data, message);
-		addData(data, oob);
-		addInt(data, counter);
-		addUnicode(data, subject);
-		addAscii(data, "SWG");
-		addAscii(data, galaxy);
-		addAscii(data, recipient);
+	public NetBuffer encode() {
+		int dataLength = 31 + message.length() * 2 + outOfBandPackage.getLength() + subject.length() * 2 + galaxy.length() + recipient.length();
+		NetBuffer data = NetBuffer.allocate(dataLength);
+		data.addUnicode(message);
+		data.addEncodable(outOfBandPackage);
+		data.addInt(counter);
+		data.addUnicode(subject);
+		data.addAscii("SWG");
+		data.addAscii(galaxy);
+		data.addAscii(recipient);
 		return data;
 	}
 	

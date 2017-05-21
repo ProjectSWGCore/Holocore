@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,19 +45,19 @@ public class CreateCharacterFailure extends SWGPacket {
 		this.reason = reason;
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		String errorString = nameFailureTranslation(reason);
-		ByteBuffer data = ByteBuffer.allocate(20 + errorString.length());
-		addShort(  data, 3);
-		addInt(    data, CRC);
-		addUnicode(data, "");
-		addAscii(  data, "ui");
-		addInt(    data, 0);
-		addAscii(  data, errorString);
+		NetBuffer data = NetBuffer.allocate(20 + errorString.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addUnicode("");
+		data.addAscii("ui");
+		data.addInt(0);
+		data.addAscii(errorString);
 		return data;
 	}
 	

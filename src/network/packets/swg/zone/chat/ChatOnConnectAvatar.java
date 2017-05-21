@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -42,18 +42,21 @@ public class ChatOnConnectAvatar extends SWGPacket {
 		
 	}
 	
-	public ChatOnConnectAvatar(ByteBuffer data) {
+	public ChatOnConnectAvatar(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 2);
-		addInt  (data, CRC);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6);
+		data.addShort(2);
+		data.addInt(CRC);
 		return data;
 	}
 

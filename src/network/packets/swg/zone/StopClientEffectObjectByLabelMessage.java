@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class StopClientEffectObjectByLabelMessage extends SWGPacket {
 	public static final int CRC = getCrc("StopClientEffectObjectByLabelMessage");
@@ -48,27 +48,27 @@ public class StopClientEffectObjectByLabelMessage extends SWGPacket {
 		this.softStop = softStop;
 	}
 	
-	public StopClientEffectObjectByLabelMessage(ByteBuffer data) {
+	public StopClientEffectObjectByLabelMessage(NetBuffer data) {
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objectId = getLong(data);
-		label = getAscii(data);
-		softStop = getBoolean(data);
+		objectId = data.getLong();
+		label = data.getAscii();
+		softStop = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + Byte.BYTES + label.length());
-		addShort(data, 4);
-		addInt  (data, CRC);
-		addLong (data, objectId);
-		addAscii(data, label);
-		addBoolean(data, softStop);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + Byte.BYTES + label.length());
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addLong(objectId);
+		data.addAscii(label);
+		data.addBoolean(softStop);
 		return data;
 	}
 

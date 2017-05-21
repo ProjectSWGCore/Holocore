@@ -27,11 +27,11 @@
  ***********************************************************************************/
 package network.packets.swg.holo;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class HoloConnectionStopped extends HoloPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("HoloConnectionStopped");
+	public static final int CRC = getCrc("HoloConnectionStopped");
 	
 	private ConnectionStoppedReason reason;
 	
@@ -44,22 +44,22 @@ public class HoloConnectionStopped extends HoloPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 		try {
-			reason = ConnectionStoppedReason.valueOf(getAscii(data));
+			reason = ConnectionStoppedReason.valueOf(data.getAscii());
 		} catch (IllegalArgumentException e) {
 			reason = ConnectionStoppedReason.UNKNOWN;
 		}
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8+reason.name().length());
-		addShort(data, 1);
-		addInt(data, CRC);
-		addAscii(data, reason.name());
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8+reason.name().length());
+		data.addShort(1);
+		data.addInt(CRC);
+		data.addAscii(reason.name());
 		return data;
 	}
 	

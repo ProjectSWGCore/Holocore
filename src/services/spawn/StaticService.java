@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package services.spawn;
 
-import intents.object.ObjectCreatedIntent;
-
 import java.lang.ref.SoftReference;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,14 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import resources.Location;
-import resources.control.Assert;
-import resources.control.Service;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.objects.ObjectCreator;
 
 public class StaticService extends Service {
@@ -98,7 +98,7 @@ public class StaticService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return objects;
@@ -128,15 +128,14 @@ public class StaticService extends Service {
 			else if (building instanceof BuildingObject)
 				createObjectInParent(((BuildingObject) building).getCellByName(cell));
 			else
-				Log.e("StaticService", "Parent object with cell specified is not a BuildingObject!");
+				Log.e("Parent object with cell specified is not a BuildingObject!");
 		}
 		
 		private SWGObject createObjectInParent(SWGObject parent) {
 			Assert.notNull(parent);
-			Location loc = new Location(x, y, z, parent.getTerrain());
-			loc.setHeading(heading);
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
-			obj.setLocation(loc);
+			obj.setPosition(parent.getTerrain(), x, y, z);
+			obj.setHeading(heading);
 			obj.moveToContainer(parent);
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
