@@ -38,7 +38,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
-import resources.TravelPoint;
+import services.galaxy.travel.TravelPoint;
 
 public class PlanetTravelPointListResponse extends SWGPacket {
 	

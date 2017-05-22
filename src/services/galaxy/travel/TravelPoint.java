@@ -25,29 +25,31 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources;
+package services.galaxy.travel;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
 
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import services.galaxy.travel.TravelGroup;
 
 public final class TravelPoint implements Comparable<TravelPoint> {
+	
+	private static final double MAX_USE_DISTANCE = 8;
 	
 	private final String name;
 	private final Location location;
 	private final boolean reachable;
+	private final boolean starport;
 	private TravelGroup group;
 	private CreatureObject shuttle;
 	private SWGObject collector;
-	private final boolean starport;
 	
 	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
 		this.name = name;
 		this.location = location;
-		this.starport = starport;
 		this.reachable = reachable;	// Not sure which effect this has on the client.
+		this.starport = starport;
 		this.group = null;
 	}
 	
@@ -57,6 +59,10 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	public Location getLocation() {
 		return location;
+	}
+	
+	public Terrain getTerrain() {
+		return location.getTerrain();
 	}
 	
 	public TravelGroup getGroup() {
@@ -77,6 +83,10 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	public SWGObject getCollector() {
 		return collector;
+	}
+	
+	public boolean isWithinRange(SWGObject object) {
+		return collector.getWorldLocation().isWithinFlatDistance(object.getWorldLocation(), MAX_USE_DISTANCE);
 	}
 
 	public void setShuttle(CreatureObject shuttle) {

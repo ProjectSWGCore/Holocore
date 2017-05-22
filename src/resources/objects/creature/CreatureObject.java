@@ -325,6 +325,44 @@ public class CreatureObject extends TangibleObject {
 		this.reserveBalance = reserveBalance;
 	}
 	
+	/**
+	 * Removes amount from cash first, then bank after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromCashAndBank(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (cashBalance < amount) {
+			bankBalance -= amount - cashBalance;
+			cashBalance = 0;
+		} else {
+			cashBalance -= amount;
+		}
+		return true;
+	}
+	
+	/**
+	 * Removes amount from bank first, then cash after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromBankAndCash(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (bankBalance < amount) {
+			cashBalance -= amount - bankBalance;
+			bankBalance = 0;
+		} else {
+			bankBalance -= amount;
+		}
+		return true;
+	}
+	
 	public boolean canPerformGalacticReserveTransaction() {
 		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
 	}
