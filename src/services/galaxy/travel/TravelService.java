@@ -91,19 +91,18 @@ public class TravelService extends Service {
 		List<Integer> additionalCosts = new ArrayList<>();
 		
 		for (TravelPoint point : points) {
-			additionalCosts.add(getAdditionalCost(objectTerrain, point.getTerrain()));
+			additionalCosts.add(-getClientCost(objectTerrain, point.getTerrain()) + getTravelCost(objectTerrain, point.getTerrain()));
 		}
 		
 		return additionalCosts;
 	}
 	
-	private int getAdditionalCost(Terrain departureTerrain, Terrain destinationTerrain) {
-		if (getTicketPriceFactor() <= 0) {
-			return -travel.getTravelFee(departureTerrain, destinationTerrain);
-		} else {
-			// TODO implement algorithm for the extra ticket cost.
-			return 10;
-		}
+	private int getClientCost(Terrain departure, Terrain destination) {
+		return travel.getTravelFee(departure, destination);
+	}
+	
+	private int getTravelCost(Terrain departure, Terrain destination) {
+		return (int) (travel.getTravelFee(departure, destination) * getTicketPriceFactor());
 	}
 	
 	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
@@ -217,14 +216,10 @@ public class TravelService extends Service {
 		if (getTicketPriceFactor() <= 0)
 			return 0;
 		
-		int totalPrice = 0;
-		totalPrice += travel.getTravelFee(departurePlanet, arrivalPlanet);	// The base price
-		totalPrice += getAdditionalCost(departurePlanet, arrivalPlanet);	// The extra amount to pay.
+		int totalPrice = getTravelCost(departurePlanet, arrivalPlanet);
 		
-		if (roundTrip) {
-			totalPrice += travel.getTravelFee(arrivalPlanet, departurePlanet);	// The base price
-			totalPrice += getAdditionalCost(arrivalPlanet, departurePlanet);	// The extra amount to pay.
-		}
+		if (roundTrip)
+			totalPrice += getTravelCost(arrivalPlanet, departurePlanet);
 		
 		return totalPrice;
 	}
