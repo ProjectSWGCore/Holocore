@@ -64,11 +64,9 @@ import resources.sui.SuiMessageBox;
 public class TravelService extends Service {
 	
 	private final TravelHelper travel;
-	private final double ticketPriceFactor;
 	
 	public TravelService() {
 		this.travel = new TravelHelper();
-		this.ticketPriceFactor = DataManager.getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
 		
 		registerForIntent(TravelPointSelectionIntent.class, tpsi -> handlePointSelection(tpsi));
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleTravelPointRequest(gpi));
@@ -100,7 +98,7 @@ public class TravelService extends Service {
 	}
 	
 	private int getAdditionalCost(Terrain departureTerrain, Terrain destinationTerrain) {
-		if (ticketPriceFactor <= 0) {
+		if (getTicketPriceFactor() <= 0) {
 			return -travel.getTravelFee(departureTerrain, destinationTerrain);
 		} else {
 			// TODO implement algorithm for the extra ticket cost.
@@ -216,7 +214,7 @@ public class TravelService extends Service {
 	}
 	
 	private int getTotalTicketPrice(Terrain departurePlanet, Terrain arrivalPlanet, boolean roundTrip) {
-		if (ticketPriceFactor <= 0)
+		if (getTicketPriceFactor() <= 0)
 			return 0;
 		
 		int totalPrice = 0;
@@ -259,6 +257,10 @@ public class TravelService extends Service {
 			
 			pointForCollector.setCollector(object);
 		}
+	}
+	
+	private double getTicketPriceFactor() {
+		return DataManager.getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
 	}
 	
 	private void sendTravelMessage(CreatureObject creature, String message) {
