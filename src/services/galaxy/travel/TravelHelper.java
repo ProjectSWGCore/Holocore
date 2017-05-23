@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package services.galaxy.travel;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,6 +37,7 @@ import java.util.Map;
 
 import com.projectswg.common.concurrency.PswgThreadPool;
 import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
@@ -52,6 +55,8 @@ import resources.objects.SpecificObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.DataManager;
+import resources.server_info.SdbLoader;
+import resources.server_info.SdbLoader.SdbResultSet;
 import services.galaxy.travel.TravelGroup.ShuttleStatus;
 
 class TravelHelper {
@@ -69,6 +74,7 @@ class TravelHelper {
 		
 		loadAllowedRoutesAndPrices();
 		createGalaxyTravels();
+		loadTravelPoints();
 	}
 	
 	public void start() {
@@ -116,16 +122,6 @@ class TravelHelper {
 	
 	public TravelPoint getNearestTravelPoint(SWGObject object) {
 		return pointManager.getNearestPoint(object.getWorldLocation());
-	}
-	
-	public void grantTickets(CreatureObject purchaser, TravelPoint departurePoint, TravelPoint arrivalPoint, boolean roundTrip) {
-		// Put the ticket in their inventory
-		grantTicket(departurePoint, arrivalPoint, purchaser);
-		
-		if (roundTrip) {
-			// Put the ticket in their inventory
-			grantTicket(arrivalPoint, departurePoint, purchaser);
-		}
 	}
 	
 	public void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
@@ -228,6 +224,49 @@ class TravelHelper {
 	
 	private void createGalaxyTravel(String template, long landTime, long groundTime, long airTime) {
 		travel.put(template, new TravelGroup(landTime * 1000, groundTime * 1000, airTime * 1000));
+	}
+	
+	private void loadTravelPoints() {
+		SdbLoader loader = new SdbLoader();
+		try (SdbResultSet set = loader.load(new File("serverdata/travel/travel.sdb"))) {
+			while (set.next()) {
+				loadTravelPoint(set);
+			}
+		} catch (IOException e) {
+			Log.e("Failed to load a travel point");
+			Log.e(e);
+		}
+	}
+	
+	private void loadTravelPoint(SdbResultSet set) {
+		String pointName = set.getText("name");
+		double x = set.getReal("x");
+		double z = set.getReal("z");
+		String type = set.getText("type");
+		Terrain travelPlanet = Terrain.getTerrainFromName(set.getText("planet"));
+		if (travelPlanet == null) {
+			Log.e("Invalid planet in travel.sdb: %s", set.getText("planet"));
+			return;
+		}
+		
+		TravelGroup group = getTravelGroupForType(type);
+		TravelPoint point = new TravelPoint(pointName, new Location(x, 0, z, travelPlanet), group, type.endsWith("starport"));
+		group.addTravelPoint(point);
+		pointManager.addTravelPoint(point);
+	}
+	
+	private TravelGroup getTravelGroupForType(String type) {
+		switch (type) {
+			case "shuttleport":
+				return getTravelGroup(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate());
+			case "starport":
+				return getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate());
+			case "theed_starport":
+				return getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT_THEED.getTemplate());
+			default:
+				Log.w("Invalid travel point type: %s", type);
+				return null;
+		}
 	}
 	
 	private static class AllowedRouteManager {

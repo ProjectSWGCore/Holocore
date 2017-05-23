@@ -34,6 +34,7 @@ import org.junit.runners.JUnit4;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert.AssertionException;
 
 import test_resources.GenericCreatureObject;
 
@@ -53,11 +54,59 @@ public class TestSWGObject {
 		Assert.assertEquals(worldLocation, parent.getWorldLocation());
 		Assert.assertEquals(worldLocation, parent.getLocation());
 		Assert.assertEquals(worldLocation, child.getWorldLocation());
-		Assert.assertEquals(new Location(0, 0, 0, null), child.getLocation());
+		Assert.assertEquals(new Location(0, 0, 0, Terrain.NABOO), child.getLocation());
 		
 		child.setPosition(5, 5, 5);
 		Assert.assertEquals(new Location(20, 22, 24, Terrain.NABOO), child.getWorldLocation());
-		Assert.assertEquals(new Location(5, 5, 5, null), child.getLocation());
+		Assert.assertEquals(new Location(5, 5, 5, Terrain.NABOO), child.getLocation());
+	}
+	
+	@Test
+	public void testChildTerrainUpdates() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject child = new GenericCreatureObject(2);
+		parent.setTerrain(Terrain.ADVENTURE1);
+		
+		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
+		Assert.assertEquals(null, child.getTerrain());
+		
+		child.moveToContainer(parent);
+		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
+		Assert.assertEquals(Terrain.ADVENTURE1, child.getTerrain());
+		
+		parent.setTerrain(Terrain.TATOOINE);
+		Assert.assertEquals(Terrain.TATOOINE, parent.getTerrain());
+		Assert.assertEquals(Terrain.TATOOINE, child.getTerrain());
+	}
+	
+	@Test(expected=AssertionException.class)
+	public void testChildTerrainInvalidParent1() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject child = new GenericCreatureObject(2);
+		parent.setTerrain(Terrain.ADVENTURE1);
+		child.moveToContainer(parent);
+		
+		child.setTerrain(Terrain.TATOOINE);
+	}
+	
+	@Test(expected=AssertionException.class)
+	public void testChildTerrainInvalidParent2() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject child = new GenericCreatureObject(2);
+		parent.setTerrain(Terrain.ADVENTURE1);
+		child.moveToContainer(parent);
+		
+		child.setPosition(Terrain.CORELLIA, 0, 0, 0);
+	}
+	
+	@Test(expected=AssertionException.class)
+	public void testChildTerrainInvalidParent3() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject child = new GenericCreatureObject(2);
+		parent.setTerrain(Terrain.ADVENTURE1);
+		child.moveToContainer(parent);
+		
+		child.setLocation(new Location(0, 0, 0, Terrain.NABOO));
 	}
 	
 }

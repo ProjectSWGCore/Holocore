@@ -41,16 +41,17 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	private final Location location;
 	private final boolean reachable;
 	private final boolean starport;
-	private TravelGroup group;
+	private final TravelGroup group;
+	
 	private CreatureObject shuttle;
 	private SWGObject collector;
 	
-	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
+	public TravelPoint(String name, Location location, TravelGroup group, boolean starport) {
 		this.name = name;
 		this.location = location;
-		this.reachable = reachable;	// Not sure which effect this has on the client.
+		this.reachable = true;	// Not sure which effect this has on the client.
 		this.starport = starport;
-		this.group = null;
+		this.group = group;
 	}
 	
 	public String getName() {
@@ -95,10 +96,6 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	public void setCollector(SWGObject collector) {
 		this.collector = collector;
-	}
-	
-	public void setGroup(TravelGroup group) {
-		this.group = group;
 	}
 	
 	public String getSuiFormat() {

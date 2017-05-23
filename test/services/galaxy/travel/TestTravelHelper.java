@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package services.galaxy.travel;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +37,7 @@ import org.junit.runners.JUnit4;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
+import resources.objects.SWGObject;
 import resources.objects.SpecificObject;
 import test_resources.GenericCreatureObject;
 
@@ -65,14 +68,17 @@ public class TestTravelHelper {
 		Assert.assertEquals(2000, helper.getTravelFee(Terrain.CORELLIA, Terrain.DATHOMIR));
 		Assert.assertEquals(4000, helper.getTravelFee(Terrain.NABOO, Terrain.ENDOR));
 		Assert.assertEquals(500, helper.getTravelFee(Terrain.TATOOINE, Terrain.NABOO));
+		Assert.assertFalse(helper.isValidRoute(Terrain.TATOOINE, Terrain.YAVIN4));
+		Assert.assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.LOK));
+		Assert.assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.NABOO));
 	}
 	
 	@Test
 	public void testNearestTravelPoint() {
 		TravelHelper helper = new TravelHelper();
-		TravelPoint starport = new TravelPoint("starport", new Location(50, 0, 50, Terrain.TATOOINE), true, true);
-		TravelPoint shuttleport = new TravelPoint("shuttleport", new Location(-50, 0, -50, Terrain.TATOOINE), false, true);
-		TravelPoint outOfRange = new TravelPoint("outOfRange", new Location(1000, 0, 1000, Terrain.TATOOINE), true, true);
+		TravelPoint starport = new TravelPoint("starport", new Location(50, 0, 50, Terrain.TATOOINE), null, true);
+		TravelPoint shuttleport = new TravelPoint("shuttleport", new Location(-50, 0, -50, Terrain.TATOOINE), null, false);
+		TravelPoint outOfRange = new TravelPoint("outOfRange", new Location(1000, 0, 1000, Terrain.TATOOINE), null, true);
 		helper.addTravelPoint(starport);
 		helper.addTravelPoint(shuttleport);
 		helper.addTravelPoint(outOfRange);
@@ -87,6 +93,49 @@ public class TestTravelHelper {
 		Assert.assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
 		creature.setPosition(Terrain.TATOOINE, -75, 0, -75);
 		Assert.assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
+	}
+	
+	@Test
+	public void testNoInvalidRoutesTatooine() {
+		TravelHelper helper = new TravelHelper();
+		GenericCreatureObject creature = new GenericCreatureObject(1);
+		creature.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		List<TravelPoint> destinations = helper.getAvailableTravelPoints(creature, Terrain.YAVIN4);
+		Assert.assertEquals(0, destinations.size());
+		destinations = helper.getAvailableTravelPoints(creature, Terrain.LOK);
+		Assert.assertEquals(1, destinations.size());
+		Assert.assertEquals("Nym's Stronghold" , destinations.get(0).getName());
+	}
+	
+	@Test
+	public void testNoInvalidRoutesCorellia() {
+		TravelHelper helper = new TravelHelper();
+		GenericCreatureObject creature = new GenericCreatureObject(1);
+		creature.setPosition(Terrain.CORELLIA, -75, 0, -4723);
+		List<TravelPoint> destinations = helper.getAvailableTravelPoints(creature, Terrain.YAVIN4);
+		Assert.assertEquals(3, destinations.size());
+		Assert.assertEquals("Imperial Base", destinations.get(0).getName());
+		Assert.assertEquals("Labor Outpost", destinations.get(1).getName());
+		Assert.assertEquals("Mining Outpost", destinations.get(2).getName());
+		destinations = helper.getAvailableTravelPoints(creature, Terrain.LOK);
+		Assert.assertEquals(0, destinations.size());
+	}
+	
+	@Test
+	public void testValidTicketCreated() {
+		TravelHelper helper = new TravelHelper();
+		GenericCreatureObject creature = new GenericCreatureObject(1);
+		creature.setupAsCharacter();
+		creature.setPosition(Terrain.YAVIN4, 4054, 0, -6216);
+		TravelPoint imperialBase = helper.getDestinationPoint(Terrain.YAVIN4, "Imperial Base");
+		TravelPoint coronet = helper.getDestinationPoint(Terrain.CORELLIA, "Coronet Starport");
+		helper.grantTicket(imperialBase, coronet, creature);
+		Assert.assertEquals(imperialBase, helper.getNearestTravelPoint(creature));
+		Assert.assertEquals(1, creature.getSlottedObject("inventory").getContainedObjects().size());
+		System.out.println(creature.getSlottedObject("inventory").getContainedObjects());
+		List<SWGObject> tickets = helper.getTickets(creature);
+		Assert.assertEquals(1, tickets.size());
+		
 	}
 	
 }

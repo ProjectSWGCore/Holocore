@@ -27,15 +27,12 @@ t* Copyright (c) 2015 /// Project SWG /// www.projectswg.com                    
 ***********************************************************************************/
 package services.galaxy.travel;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import com.projectswg.common.control.Service;
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
@@ -60,8 +57,6 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
 import resources.server_info.DataManager;
-import resources.server_info.SdbLoader;
-import resources.server_info.SdbLoader.SdbResultSet;
 import resources.sui.SuiButtons;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
@@ -74,8 +69,6 @@ public class TravelService extends Service {
 	public TravelService() {
 		this.travel = new TravelHelper();
 		this.ticketPriceFactor = DataManager.getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
-		
-		loadTravelPoints();
 		
 		registerForIntent(TravelPointSelectionIntent.class, tpsi -> handlePointSelection(tpsi));
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleTravelPointRequest(gpi));
@@ -94,56 +87,6 @@ public class TravelService extends Service {
 	public boolean stop() {
 		travel.stop();
 		return super.stop();
-	}
-	
-	/**
-	 * Travel points are loaded from serverdata/static/travel.sdb
-	 * A travel point represents a travel destination.
-	 * 
-	 * @return true if all points were loaded succesfully and false if not.
-	 */
-	private void loadTravelPoints() {
-		SdbLoader loader = new SdbLoader();
-		try (SdbResultSet set = loader.load(new File("serverdata/travel/travel.sdb"))) {
-			while (set.next()) {
-				loadTravelPoint(set);
-			}
-		} catch (IOException e) {
-			Log.e("Failed to load a travel point");
-			Log.e(e);
-		}
-	}
-	
-	private void loadTravelPoint(SdbResultSet set) {
-		String pointName = set.getText("name");
-		double x = set.getReal("x");
-		double z = set.getReal("z");
-		String type = set.getText("type");
-		Terrain travelPlanet = Terrain.getTerrainFromName(set.getText("planet"));
-		if (travelPlanet == null) {
-			Log.e("Invalid planet in travel.sdb: %s", set.getText("planet"));
-			return;
-		}
-		
-		TravelPoint point = new TravelPoint(pointName, new Location(x, 0, z, travelPlanet), type.endsWith("starport"), true);
-		TravelGroup group;
-		switch (type) {
-			case "shuttleport":
-				group = travel.getTravelGroup(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate());
-				break;
-			case "starport":
-				group = travel.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate());
-				break;
-			case "theed_starport":
-				group = travel.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT_THEED.getTemplate());
-				break;
-			default:
-				Log.w("Invalid travel point type: %s", type);
-				return;
-		}
-		group.addTravelPoint(point);
-		point.setGroup(group);
-		travel.addTravelPoint(point);
 	}
 	
 	private List<Integer> getAdditionalCosts(Terrain objectTerrain, Collection<TravelPoint> points) {
@@ -213,7 +156,9 @@ public class TravelService extends Service {
 			return;
 		}
 		
-		travel.grantTickets(purchaser, nearestPoint, destinationPoint, roundTrip);
+		travel.grantTicket(nearestPoint, destinationPoint, purchaser);
+		if (roundTrip)
+			travel.grantTicket(destinationPoint, nearestPoint, purchaser);
 		showMessageBox(purchaserOwner, "ticket_purchase_complete");
 	}
 	
@@ -278,8 +223,10 @@ public class TravelService extends Service {
 		totalPrice += travel.getTravelFee(departurePlanet, arrivalPlanet);	// The base price
 		totalPrice += getAdditionalCost(departurePlanet, arrivalPlanet);	// The extra amount to pay.
 		
-		if (roundTrip)
-			totalPrice += travel.getTravelFee(arrivalPlanet, departurePlanet);
+		if (roundTrip) {
+			totalPrice += travel.getTravelFee(arrivalPlanet, departurePlanet);	// The base price
+			totalPrice += getAdditionalCost(arrivalPlanet, departurePlanet);	// The extra amount to pay.
+		}
 		
 		return totalPrice;
 	}

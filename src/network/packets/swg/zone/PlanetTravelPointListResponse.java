@@ -98,7 +98,7 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		List<String> pointNames = data.getList(StringType.ASCII);
 		List<Point3D> points = data.getList(Point3D.class);
 		int[] additionalCosts = data.getIntArray();
-		boolean[] pointsReachable = data.getBooleanArray();
+		data.getBooleanArray(); // reachable
 		
 		for (int additionalCost : additionalCosts) {
 			this.additionalCosts.add(additionalCost * 2);
@@ -107,9 +107,8 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		for (int i = 0; i < pointNames.size(); i++) {
 			String pointName = pointNames.get(i);
 			Point3D point = points.get(i);
-			boolean reachable = pointsReachable[i];
 			
-			travelPoints.add(new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), isStarport(pointName), reachable));
+			travelPoints.add(new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), null, isStarport(pointName)));
 		}
 	}
 	
