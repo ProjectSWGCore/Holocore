@@ -201,13 +201,14 @@ class TravelHelper {
 		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, "Planet")));
 		
 		for (int rowIndex = 0; rowIndex < travelPlanets.length; rowIndex++) {
-			for (int columnIndex = 0; columnIndex < travelPlanets.length; columnIndex++) {
+			for (int columnIndex = rowIndex; columnIndex < travelPlanets.length; columnIndex++) {
 				int price = (int) travelFeeTable.getCell(rowIndex, columnIndex+1);
 				
 				if (price <= 0)	// If price is below or equal to 0 then this is an invalid route and isn't an option.
 					continue;
 				
 				routeManager.addRoute(travelPlanets[rowIndex], travelPlanets[columnIndex], price);
+				routeManager.addRoute(travelPlanets[columnIndex], travelPlanets[rowIndex], price);
 			}
 		}
 	}
