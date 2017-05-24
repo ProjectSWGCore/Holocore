@@ -38,7 +38,9 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
+import resources.objects.SpecificObject;
 import resources.objects.waypoint.WaypointObject;
+import services.objects.ObjectCreator;
 
 public class OutOfBandPackage implements Encodable, Persistable {
 	
@@ -114,7 +116,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 				oob = data.getEncodable(ProsePackage.class);
 				break;
 			case WAYPOINT:
-				oob = new WaypointObject(-1);
+				oob = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
 				oob.decode(data);
 				break;
 			case STRING_ID:

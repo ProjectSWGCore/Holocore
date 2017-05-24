@@ -79,8 +79,8 @@ public class TestMailPersistable {
 	@Test
 	public void testMailWaypointPersistable() throws IOException {
 		Mail mail = new Mail("sender", "subject", "message", 100);
-		WaypointObject waypoint1 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WAYPOINT_BLUE.getTemplate());
-		WaypointObject waypoint2 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WAYPOINT_BLUE.getTemplate());
+		WaypointObject waypoint1 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
+		WaypointObject waypoint2 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
 		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1));
 		test(mail);
 		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1, waypoint2));
