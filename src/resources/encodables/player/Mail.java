@@ -101,6 +101,10 @@ public class Mail implements Encodable, Persistable {
 	public void setTimestamp(int timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	public OutOfBandPackage getOutOfBandPackage() {
+		return outOfBandPackage;
+	}
 
 	public void setOutOfBandPackage(OutOfBandPackage outOfBandPackage) {
 		this.outOfBandPackage = outOfBandPackage;

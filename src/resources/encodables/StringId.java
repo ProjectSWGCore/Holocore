@@ -125,4 +125,16 @@ public class StringId implements OutOfBandData, Persistable {
 	public String toString() {
 		return "@" + file + ":" + key;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof StringId))
+			return false;
+		return ((StringId) o).getKey().equals(getKey()) && ((StringId) o).getFile().equals(getFile());
+	}
+	
+	@Override
+	public int hashCode() {
+		return key.hashCode() * 67 + file.hashCode();
+	}
 }
