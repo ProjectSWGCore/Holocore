@@ -76,8 +76,8 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 
 	@Override
 	public NetBuffer encode() {
-		int size = planet.length() + 34;
-
+		int size = planet.length() + 32;
+		
 		// Get size of data
 		if (updatedStaticLocations != null) {
 			for (MapLocation location : updatedStaticLocations) {

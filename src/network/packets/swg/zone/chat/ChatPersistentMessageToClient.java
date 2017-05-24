@@ -71,8 +71,8 @@ public class ChatPersistentMessageToClient extends SWGPacket {
 	public NetBuffer encode() {
 		byte[] mailData = (header ? mail.encodeHeader() : mail.encode());
 		String galaxy = CoreManager.getGalaxy().getName();
-
-		NetBuffer data = NetBuffer.allocate(25 + galaxy.length() + mailData.length + (mail.getSender().length() * 2));
+		
+		NetBuffer data = NetBuffer.allocate(25 + galaxy.length() + mailData.length + mail.getSender().length());
 		data.addShort(2);
 		data.addInt(CRC);
 
