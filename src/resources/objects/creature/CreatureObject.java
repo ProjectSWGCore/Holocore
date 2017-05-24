@@ -336,10 +336,10 @@ public class CreatureObject extends TangibleObject {
 		if (amountBalance < amount)
 			return false;
 		if (cashBalance < amount) {
-			bankBalance -= amount - cashBalance;
-			cashBalance = 0;
+			setBankBalance(bankBalance - (amount - cashBalance));
+			setCashBalance(0);
 		} else {
-			cashBalance -= amount;
+			setCashBalance(cashBalance - amount);
 		}
 		return true;
 	}
@@ -355,10 +355,10 @@ public class CreatureObject extends TangibleObject {
 		if (amountBalance < amount)
 			return false;
 		if (bankBalance < amount) {
-			cashBalance -= amount - bankBalance;
-			bankBalance = 0;
+			setCashBalance(cashBalance - (amount - bankBalance));
+			setBankBalance(0);
 		} else {
-			bankBalance -= amount;
+			setBankBalance(bankBalance - amount);
 		}
 		return true;
 	}
