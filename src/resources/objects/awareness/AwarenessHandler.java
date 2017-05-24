@@ -101,11 +101,11 @@ public class AwarenessHandler implements AutoCloseable {
 		if (oldMap != null)
 			oldMap.removeWithoutUpdate(obj);
 		// Update location
+		if (obj.getParent() != parent)
+			obj.moveToContainer(parent);
 		obj.setLocation(requestedLocation);
 		obj.onObjectMoved();
 		// Update awareness
-		if (obj.getParent() != parent)
-			obj.moveToContainer(parent);
 		obj.resetAwareness();
 	}
 	
