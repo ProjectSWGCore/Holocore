@@ -87,18 +87,21 @@ public class TravelService extends Service {
 		return super.stop();
 	}
 	
-	private List<Integer> getAdditionalCosts(Terrain objectTerrain, Collection<TravelPoint> points) {
+	private List<Integer> getAdditionalCosts(TravelPoint departure, Collection<TravelPoint> points) {
 		List<Integer> additionalCosts = new ArrayList<>();
 		
 		for (TravelPoint point : points) {
-			additionalCosts.add(-getClientCost(objectTerrain, point.getTerrain()) + getTravelCost(objectTerrain, point.getTerrain()));
+			if (point == departure)
+				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()));
+			else
+				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()) + getTravelCost(departure.getTerrain(), point.getTerrain()));
 		}
 		
 		return additionalCosts;
 	}
 	
 	private int getClientCost(Terrain departure, Terrain destination) {
-		return travel.getTravelFee(departure, destination);
+		return travel.getTravelFee(departure, destination) - 50;
 	}
 	
 	private int getTravelCost(Terrain departure, Terrain destination) {
@@ -128,8 +131,8 @@ public class TravelService extends Service {
 			TravelPoint nearest = travel.getNearestTravelPoint(player.getCreatureObject());
 			if (pointsForPlanet.remove(nearest))
 				pointsForPlanet.add(0, nearest); // Yes ... adding it to the beginning of the list because I hate the client
-				
-			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet, getAdditionalCosts(player.getCreatureObject().getTerrain(), pointsForPlanet)));
+			
+			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet, getAdditionalCosts(nearest, pointsForPlanet)));
 		}
 	}
 	
@@ -137,7 +140,6 @@ public class TravelService extends Service {
 		CreatureObject purchaser = i.getPurchaser();
 		TravelPoint nearestPoint = travel.getNearestTravelPoint(purchaser);
 		TravelPoint destinationPoint = travel.getDestinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
-		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
 		if (nearestPoint == null || destinationPoint == null || !travel.isValidRoute(nearestPoint.getTerrain(), destinationPoint.getTerrain())) {
@@ -147,16 +149,16 @@ public class TravelService extends Service {
 		
 		int ticketPrice = getTotalTicketPrice(nearestPoint.getTerrain(), destinationPoint.getTerrain(), roundTrip);
 		if (purchaser.removeFromBankAndCash(ticketPrice)) {
-			new ChatBroadcastIntent(purchaserOwner, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice)).broadcast();
+			sendTravelMessage(purchaser, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice));
 		} else {
-			showMessageBox(purchaserOwner, "short_funds");
+			showMessageBox(purchaser, "short_funds");
 			return;
 		}
 		
 		travel.grantTicket(nearestPoint, destinationPoint, purchaser);
 		if (roundTrip)
 			travel.grantTicket(destinationPoint, nearestPoint, purchaser);
-		showMessageBox(purchaserOwner, "ticket_purchase_complete");
+		showMessageBox(purchaser, "ticket_purchase_complete");
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
@@ -213,9 +215,6 @@ public class TravelService extends Service {
 	}
 	
 	private int getTotalTicketPrice(Terrain departurePlanet, Terrain arrivalPlanet, boolean roundTrip) {
-		if (getTicketPriceFactor() <= 0)
-			return 0;
-		
 		int totalPrice = getTravelCost(departurePlanet, arrivalPlanet);
 		
 		if (roundTrip)
@@ -266,12 +265,12 @@ public class TravelService extends Service {
 		new ChatBroadcastIntent(creature.getOwner(), new ProsePackage(new StringId(str), key, obj)).broadcast();
 	}
 	
-	private void showMessageBox(Player receiver, String message) {
+	private void showMessageBox(CreatureObject creature, String message) {
 		// Create the SUI window
 		SuiMessageBox messageBox = new SuiMessageBox(SuiButtons.OK, "STAR WARS GALAXIES", "@travel:" + message);
 		
 		// Display the window to the purchaser
-		messageBox.display(receiver);
+		messageBox.display(creature.getOwner());
 	}
 	
 }
