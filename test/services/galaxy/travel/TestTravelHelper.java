@@ -64,9 +64,9 @@ public class TestTravelHelper {
 		for (int i = 0; i < terrains.length; i++) {
 			Assert.assertEquals(100, helper.getTravelFee(terrains[i], terrains[i]));
 		}
-		Assert.assertEquals(1250, helper.getTravelFee(Terrain.DATHOMIR, Terrain.CORELLIA));
+		Assert.assertEquals(2000, helper.getTravelFee(Terrain.DATHOMIR, Terrain.CORELLIA));
 		Assert.assertEquals(2000, helper.getTravelFee(Terrain.CORELLIA, Terrain.DATHOMIR));
-		Assert.assertEquals(4000, helper.getTravelFee(Terrain.NABOO, Terrain.ENDOR));
+		Assert.assertEquals(1750, helper.getTravelFee(Terrain.NABOO, Terrain.ENDOR));
 		Assert.assertEquals(500, helper.getTravelFee(Terrain.TATOOINE, Terrain.NABOO));
 		Assert.assertFalse(helper.isValidRoute(Terrain.TATOOINE, Terrain.YAVIN4));
 		Assert.assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.LOK));
