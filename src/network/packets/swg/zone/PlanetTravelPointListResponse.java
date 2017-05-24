@@ -79,7 +79,7 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		
 		data.addInt(additionalCosts.size()); // List size
 		for (int additionalCost : additionalCosts) { // additional costs
-			data.addInt(additionalCost <= 0 ? additionalCost + 50 : additionalCost / 2);
+			data.addInt(additionalCost);
 		}
 		
 		data.addInt(travelPoints.size()); // List size
