@@ -27,15 +27,10 @@
  ***********************************************************************************/
 package services.commands;
 
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.debug.Log;
-
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
@@ -51,6 +46,11 @@ import resources.player.Player;
 import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
 import utilities.Scripts;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class CommandLauncher {
 	
@@ -180,8 +180,11 @@ public class CommandLauncher {
 			}
 		} else {
 			try {
-				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", enqueued.getGalacticManager(), player, enqueued.getTarget(), enqueued.getRequest().getArguments());
-			} catch (FileNotFoundException ex) {
+				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", enqueued.getGalacticManager(), player, enqueued.getTarget(), enqueued.getRequest().getArguments());
+			} catch (ResourceException e) {
+				// Script doesn't exist
+			} catch (ScriptException e) {
+				Log.a(e);
 			}
 		}
 	}

@@ -27,16 +27,10 @@
 ***********************************************************************************/
 package services.sui;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Log;
-
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.network.GalacticPacketIntent;
 import intents.sui.SuiWindowIntent;
 import network.packets.Packet;
@@ -50,6 +44,12 @@ import resources.sui.SuiBaseWindow;
 import resources.sui.SuiComponent;
 import resources.sui.SuiEvent;
 import utilities.Scripts;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SuiService extends Service {
 
@@ -135,7 +135,7 @@ public class SuiService extends Service {
 			String script = window.getCallbackScript(callback);
 			try {
 				Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
-			} catch (FileNotFoundException ex) {
+			} catch (ResourceException | ScriptException e) {
 				Log.e("Callback script %s not found", script);
 			}
 		} else if (window.hasJavaCallback(callback)) {
