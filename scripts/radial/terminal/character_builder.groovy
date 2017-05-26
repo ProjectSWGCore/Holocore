@@ -33,12 +33,11 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 	}
 }
 
-static
-def handleCategorySelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+static def handleCategorySelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
 	if (eventType != SuiEvent.OK_PRESSED) {
 		return
 	}
-	def def selection = SuiListBox.getSelectedRow(parameters)
+	def selection = SuiListBox.getSelectedRow(parameters)
 
 	switch (selection) {
 		case 0: handleArmor(player); break
@@ -87,8 +86,7 @@ static def handleArmor(Player player) {
 	listBox.display(player)
 }
 
-static
-def handleArmorSelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+static def handleArmorSelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
 	if (eventType != SuiEvent.OK_PRESSED) {
 		return
 	}
