@@ -1,9 +1,12 @@
 import resources.combat.CombatStatus
+import resources.commands.CombatCommand
+import resources.objects.SWGObject
+import resources.objects.creature.CreatureObject
 
-def canPerform(source, target, command) {
+static def canPerform(CreatureObject source, SWGObject target, CombatCommand command) {
 	return CombatStatus.SUCCESS
 }
 
-def doCombat(source, target, command) {
+static def doCombat(CreatureObject source, SWGObject target, CombatCommand command) {
 	return 100
 }
