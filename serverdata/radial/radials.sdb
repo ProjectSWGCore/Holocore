@@ -7,3 +7,14 @@ object/tangible/travel/ticket_collector/shared_ticket_collector.iff	terminal/tic
 object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff	terminal/ticket
 object/tangible/npe/shared_npe_uniform_box.iff	object/usable
 object/tangible/terminal/shared_terminal_character_builder.iff	terminal/character_builder
+object/tangible/survey_tool/shared_survey_tool_all.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_gas.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_geo_thermal.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_inorganic.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_liquid.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_lumber.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_mineral.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_moisture.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_organic.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_solar.iff	object/survey/survey_tool
+object/tangible/survey_tool/shared_survey_tool_wind.iff	object/survey/survey_tool

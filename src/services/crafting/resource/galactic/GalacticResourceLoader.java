@@ -25,35 +25,71 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services;
+package services.crafting.resource.galactic;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.ArrayList;
+import java.util.List;
 
-import resources.server_info.DataManager;
-import services.crafting.TestCrafting;
-import services.galaxy.TestGalaxy;
-import services.player.TestPlayer;
+import com.projectswg.common.debug.Log;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
+import resources.server_info.CachedObjectDatabase;
+
+public class GalacticResourceLoader {
 	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
+	public GalacticResourceLoader() {
+		
 	}
 	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
+	public List<GalacticResource> loadResources() {
+		CachedObjectDatabase<GalacticResource> resources = new CachedObjectDatabase<>("odb/resources.odb", GalacticResource::create, GalacticResource::save);
+		if (!resources.load()) {
+			Log.w("Unable to load resource ODB!");
+			return new ArrayList<>();
+		}
+		List<GalacticResource> resourceList = new ArrayList<>(resources.size());
+		resources.traverse(r -> resourceList.add(r));
+		resources.close();
+		return resourceList;
+	}
+	
+	public List<GalacticResourceSpawn> loadSpawns() {
+		CachedObjectDatabase<GalacticResourceSpawn> spawns = new CachedObjectDatabase<>("odb/resource_spawns.odb", GalacticResourceSpawn::create, GalacticResourceSpawn::save);
+		if (!spawns.load()) {
+			Log.w("Unable to load resource spawn ODB!");
+			return new ArrayList<>();
+		}
+		List<GalacticResourceSpawn> spawnList = new ArrayList<>(spawns.size());
+		spawns.traverse(s -> spawnList.add(s));
+		spawns.close();
+		return spawnList;
+	}
+	
+	public void saveResources(List<GalacticResource> resourceList) {
+		CachedObjectDatabase<GalacticResource> resources = new CachedObjectDatabase<>("odb/resources.odb", GalacticResource::create, GalacticResource::save);
+		if (!resources.load()) {
+			Log.w("Unable to load resource ODB to save");
+			return;
+		}
+		resources.clearObjects();
+		for (GalacticResource r : resourceList) {
+			resources.add(r);
+		}
+		resources.save();
+		resources.close();
+	}
+	
+	public void saveSpawns(List<GalacticResourceSpawn> spawnList) {
+		CachedObjectDatabase<GalacticResourceSpawn> spawns = new CachedObjectDatabase<>("odb/resource_spawns.odb", GalacticResourceSpawn::create, GalacticResourceSpawn::save);
+		if (!spawns.load()) {
+			Log.w("Unable to load resource spawn ODB to save");
+			return;
+		}
+		spawns.clearObjects();
+		for (GalacticResourceSpawn s : spawnList) {
+			spawns.add(s);
+		}
+		spawns.save();
+		spawns.close();
 	}
 	
 }

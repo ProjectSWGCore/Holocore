@@ -25,35 +25,49 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services;
+package services.crafting.resource;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.concurrent.TimeUnit;
 
-import resources.server_info.DataManager;
-import services.crafting.TestCrafting;
-import services.galaxy.TestGalaxy;
-import services.player.TestPlayer;
+import com.projectswg.common.concurrency.PswgBasicScheduledThread;
+import com.projectswg.common.control.Service;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
+import services.crafting.resource.galactic.GalacticResourceSpawner;
+import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import services.crafting.resource.raw.RawResource;
+import services.crafting.resource.raw.RawResourceContainer;
+
+/**
+ * In charge of spawning, despawning, and overall management of resources
+ */
+public class ResourceService extends Service {
 	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
+	private final RawResourceContainer container;
+	private final GalacticResourceSpawner spawner;
+	private final PswgBasicScheduledThread spawnerUpdater;
+	
+	public ResourceService() {
+		this.container = new RawResourceContainer();
+		this.spawner = new GalacticResourceSpawner();
+		this.spawnerUpdater = new PswgBasicScheduledThread("resource-spawn-updater", () -> spawner.updateAllResources());
 	}
 	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
+	@Override
+	public boolean initialize() {
+		container.loadResources();
+		for (RawResource rawResource : container.getResources()) {
+			GalacticResourceContainer.getContainer().addRawResource(rawResource);
+		}
+		spawner.initialize();
+		spawnerUpdater.startWithFixedRate(0, TimeUnit.HOURS.toMillis(3));
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		spawnerUpdater.stop();
+		spawner.terminate();
+		return super.terminate();
 	}
 	
 }

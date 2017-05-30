@@ -25,35 +25,91 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services;
+package services.crafting.resource.galactic;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
-import resources.server_info.DataManager;
-import services.crafting.TestCrafting;
-import services.galaxy.TestGalaxy;
-import services.player.TestPlayer;
-
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
+public class GalacticResource implements Persistable {
 	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
+	private final GalacticResourceStats stats;
+	
+	private long id;
+	private String name;
+	private long rawId;
+	
+	public GalacticResource() {
+		this(0, "", 0);
 	}
 	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
+	public GalacticResource(long id, String name, long rawResourceId) {
+		this.id = id;
+		this.name = name;
+		this.rawId = rawResourceId;
+		this.stats = new GalacticResourceStats();
+	}
+	
+	public void generateRandomStats() {
+		stats.generateRandomStats();
+	}
+	
+	public long getId() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public long getRawResourceId() {
+		return rawId;
+	}
+	
+	public GalacticResourceStats getStats() {
+		return stats;
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		stream.addLong(id);
+		stream.addAscii(name);
+		stream.addLong(rawId);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		id = stream.getLong();
+		name = stream.getAscii();
+		rawId = stream.getLong();
+	}
+	
+	@Override
+	public String toString() {
+		return "GalacticResource[ID=" + id + "  NAME='" + name + "']";
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GalacticResource))
+			return false;
+		return ((GalacticResource) o).id == id && ((GalacticResource) o).name.equals(name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Long.hashCode(id);
+	}
+	
+	public static GalacticResource create(NetBufferStream stream) {
+		GalacticResource resource = new GalacticResource();
+		resource.read(stream);
+		return resource;
+	}
+	
+	public void save(NetBufferStream stream, GalacticResource resource) {
+		resource.save(stream);
 	}
 	
 }

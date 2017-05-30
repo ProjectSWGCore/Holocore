@@ -25,35 +25,14 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services;
+package intents.crafting.survey;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import com.projectswg.common.control.Intent;
 
-import resources.server_info.DataManager;
-import services.crafting.TestCrafting;
-import services.galaxy.TestGalaxy;
-import services.player.TestPlayer;
-
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
+public class StartSurveyingIntent extends Intent {
 	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
-	}
-	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
+	public StartSurveyingIntent() {
+		
 	}
 	
 }

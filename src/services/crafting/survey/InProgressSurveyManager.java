@@ -25,35 +25,29 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services;
+package services.crafting.survey;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.HashMap;
+import java.util.Map;
 
-import resources.server_info.DataManager;
-import services.crafting.TestCrafting;
-import services.galaxy.TestGalaxy;
-import services.player.TestPlayer;
+import resources.objects.creature.CreatureObject;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
+public class InProgressSurveyManager {
 	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
+	private final Map<CreatureObject, SurveySession> surveySessions;
+	
+	public InProgressSurveyManager() {
+		this.surveySessions = new HashMap<>();
 	}
 	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
+	private static class SurveySession {
+		
+		private final CreatureObject creature;
+		
+		public SurveySession(CreatureObject creature) {
+			this.creature = creature;
+		}
+		
 	}
 	
 }
