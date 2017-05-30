@@ -11,7 +11,6 @@ static def getOptions(List<RadialOption> options, Player player, SWGObject targe
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
 	switch (selection) {
 		case RadialItem.ITEM_USE:
-			//Log.d("bazaar.js", "Bazaar Selection: ITEM_USE")
 			break
 	}
 }

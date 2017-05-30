@@ -5,6 +5,8 @@ import resources.player.Player
 import resources.radial.RadialItem
 import resources.radial.RadialOption
 import resources.sui.SuiEvent
+import resources.sui.SuiButtons
+import utilities.IntentFactory
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
 	def use = new RadialOption(RadialItem.ITEM_USE)
@@ -39,7 +41,7 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 	switch (selection) {
 		case RadialItem.ITEM_USE:
 		case RadialItem.SERVER_MENU1:
-			window = new SuiWindow("Script.transfer", SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt')
+			def window = new SuiWindow("Script.transfer", SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt')
 			window.setPropertyText('transaction.lblFrom', 'Cash')
 			window.setPropertyText('transaction.lblTo', 'Bank')
 			window.setPropertyText('transaction.lblStartingFrom', creature.getCashBalance())
@@ -109,8 +111,7 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 	}
 }
 
-static
-def handleBankTransfer(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+static def handleBankTransfer(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
 	switch (eventType) {
 		case SuiEvent.OK_PRESSED:
 			creature.setCashBalance(Long.valueOf(parameters.get('transaction.txtInputFrom.Text')))
