@@ -27,25 +27,31 @@
  ***********************************************************************************/
 package services.crafting.survey;
 
-import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 
-import intents.crafting.survey.StartSurveyingIntent;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 
-/**
- * In charge of responding to survey requests
- */
-public class SurveyService extends Service {
+public class SurveySession {
 	
-	private final InProgressSurveyManager inProgressSurveyManager;
+	private final CreatureObject creature;
+	private final SWGObject surveyTool;
 	
-	public SurveyService() {
-		this.inProgressSurveyManager = new InProgressSurveyManager();
-		
-		registerForIntent(StartSurveyingIntent.class, ssi -> handleStartSurveyingIntent(ssi));
+	public SurveySession(CreatureObject creature, SWGObject surveyTool) {
+		this.creature = creature;
+		this.surveyTool = surveyTool;
 	}
 	
-	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
-		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getSurveyTool());
+	public SWGObject getSurveyTool() {
+		return surveyTool;
+	}
+	
+	public void startSession() {
+		Log.d("%s starting survey session with %s", creature.getObjectName(), surveyTool);
+	}
+	
+	public void stopSession() {
+		Log.d("%s ending survey session with %s", creature.getObjectName(), surveyTool);
 	}
 	
 }

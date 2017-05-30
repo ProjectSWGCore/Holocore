@@ -29,10 +29,25 @@ package intents.crafting.survey;
 
 import com.projectswg.common.control.Intent;
 
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+
 public class StartSurveyingIntent extends Intent {
 	
-	public StartSurveyingIntent() {
-		
+	private final CreatureObject creature;
+	private final SWGObject surveyTool;
+	
+	public StartSurveyingIntent(CreatureObject creature, SWGObject surveyTool) {
+		this.creature = creature;
+		this.surveyTool = surveyTool;
+	}
+	
+	public CreatureObject getCreature() {
+		return creature;
+	}
+	
+	public SWGObject getSurveyTool() {
+		return surveyTool;
 	}
 	
 }

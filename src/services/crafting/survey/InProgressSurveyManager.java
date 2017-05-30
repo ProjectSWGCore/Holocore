@@ -30,6 +30,7 @@ package services.crafting.survey;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 public class InProgressSurveyManager {
@@ -40,14 +41,18 @@ public class InProgressSurveyManager {
 		this.surveySessions = new HashMap<>();
 	}
 	
-	private static class SurveySession {
-		
-		private final CreatureObject creature;
-		
-		public SurveySession(CreatureObject creature) {
-			this.creature = creature;
+	public void startSession(CreatureObject creature, SWGObject surveyTool) {
+		SurveySession session;
+		synchronized (surveySessions) {
+			session = surveySessions.get(creature);
+			if (session == null)
+				surveySessions.put(creature, session = new SurveySession(creature, surveyTool));
+			if (!session.getSurveyTool().equals(surveyTool)) {
+				session.stopSession();
+				surveySessions.put(creature, session = new SurveySession(creature, surveyTool));
+			}
 		}
-		
+		session.startSession();
 	}
 	
 }
