@@ -12,7 +12,6 @@ static def getOptions(List<RadialOption> options, Player player, SWGObject targe
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
 	switch (selection) {
 		case RadialItem.ITEM_USE:
-			Log.d("ticket.js", "Travel Selection: ITEM_USE")
 			new TicketUseIntent(player, target).broadcast()
 			break
 	}
