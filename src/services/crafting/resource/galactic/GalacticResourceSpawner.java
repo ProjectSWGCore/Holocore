@@ -41,6 +41,13 @@ import services.crafting.resource.raw.RawResource;
 
 public class GalacticResourceSpawner {
 	
+	private static final Terrain [] ALL_PLANETS = new Terrain[] {
+		Terrain.CORELLIA,	Terrain.DANTOOINE,		Terrain.DATHOMIR,
+		Terrain.ENDOR,		Terrain.KASHYYYK_MAIN,	Terrain.LOK,
+		Terrain.NABOO,		Terrain.RORI,			Terrain.TALUS,
+		Terrain.TATOOINE,	Terrain.YAVIN4,			Terrain.MUSTAFAR
+	};
+	
 	private static final Terrain [] BASE_PLANETS = new Terrain[] {
 		Terrain.CORELLIA,	Terrain.DANTOOINE,		Terrain.DATHOMIR,
 		Terrain.ENDOR,		Terrain.KASHYYYK_MAIN,	Terrain.LOK,
@@ -131,9 +138,17 @@ public class GalacticResourceSpawner {
 		int targetSpawns = random.nextInt(raw.getMaxPools() - raw.getMinPools() + 1) + raw.getMinPools();
 		GalacticResource resource = createNewResource(raw);
 		Log.i("Created new resource '%s' with ID %d of type %s with %d spawns per planet", resource.getName(), resource.getId(), raw.getName().getKey(), targetSpawns);
-		for (Terrain terrain : BASE_PLANETS) {
+		Terrain restricted = getRestrictedResource(raw);
+		Log.d("    %s - restricted %s", raw.getName().getKey(), restricted);
+		if (restricted == null) {
+			for (Terrain terrain : BASE_PLANETS) {
+				for (int i = 0; i < targetSpawns; i++) {
+					createNewSpawn(resource, terrain);
+				}
+			}
+		} else {
 			for (int i = 0; i < targetSpawns; i++) {
-				createNewSpawn(resource, terrain);
+				createNewSpawn(resource, restricted);
 			}
 		}
 	}
@@ -176,6 +191,19 @@ public class GalacticResourceSpawner {
 		for (GalacticResourceSpawn spawn : expired) {
 			GalacticResourceContainer.getContainer().removeResourceSpawn(spawn);
 		}
+	}
+	
+	private Terrain getRestrictedResource(RawResource resource) {
+		String key = resource.getName().getKey();
+		if (key.length() >= 2 && Character.isDigit(key.charAt(key.length()-1)) && key.charAt(key.length()-2) == '_')
+			key = key.substring(0, key.lastIndexOf('_'));
+		for (Terrain test : ALL_PLANETS) {
+			if (key.endsWith(test.getName()))
+				return test;
+		}
+		if (key.endsWith("kashyyyk")) // special case because kashyyyk = kashyyyk_main
+			return Terrain.KASHYYYK_MAIN;
+		return null;
 	}
 	
 }

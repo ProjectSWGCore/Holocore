@@ -29,8 +29,14 @@ package services.crafting.survey;
 
 import com.projectswg.common.debug.Log;
 
+import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
+import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import services.crafting.resource.galactic.GalacticResource;
+import services.crafting.resource.galactic.GalacticResourceType;
+import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import services.crafting.resource.raw.RawResource;
 
 public class SurveySession {
 	
@@ -47,11 +53,48 @@ public class SurveySession {
 	}
 	
 	public void startSession() {
-		Log.d("%s starting survey session with %s", creature.getObjectName(), surveyTool);
+		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
+		Log.d("%s starting survey session for %s", creature.getObjectName(), resourceType);
+		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
+		GalacticResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
+		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
+			RawResource rawResource = GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId());
+			if (!surveyToolType.isResourceType(rawResource))
+				continue;
+			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
+		}
+		creature.getOwner().sendPacket(survey);
 	}
 	
 	public void stopSession() {
 		Log.d("%s ending survey session with %s", creature.getObjectName(), surveyTool);
+	}
+	
+	private GalacticResourceType getTypeFromSurveyTool(String surveyTool) {
+		switch (surveyTool) {
+			case "mineral":
+				return GalacticResourceType.MINERAL;
+			case "lumber":
+				return GalacticResourceType.FLORA_STRUCTURAL;
+			case "liquid":
+			case "moisture":
+				return GalacticResourceType.WATER;
+			case "gas":
+			case "gas_thermal":
+				return GalacticResourceType.GAS;
+			case "wind":
+				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND;
+			case "solar":
+				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR;
+			case "inorganic":
+				return GalacticResourceType.INORGANIC;
+			case "organic":
+				return GalacticResourceType.ORGANIC;
+			default:
+				Log.w("Unknokwn survey tool type: %s", surveyTool);
+			case "all":
+				return GalacticResourceType.RESOURCE;
+		}
 	}
 	
 }
