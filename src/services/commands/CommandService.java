@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.commands;
 
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
@@ -73,21 +74,26 @@ import resources.commands.callbacks.StandCmdCallback;
 import resources.commands.callbacks.StartDanceCallback;
 import resources.commands.callbacks.TransferItemCallback;
 import resources.commands.callbacks.WaypointCmdCallback;
+import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
+import resources.server_info.BasicLogStream;
+import resources.server_info.DataManager;
 import services.commands.CommandLauncher.EnqueuedCommand;
 import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
 	
-	private final CommandContainer					commandContainer;
-	private final CommandLauncher					commandLauncher;
+	private final CommandContainer	commandContainer;
+	private final CommandLauncher	commandLauncher;
+	private final BasicLogStream	commandLogger;
 	
 	public CommandService() {
 		this.commandContainer = new CommandContainer();
 		this.commandLauncher = new CommandLauncher();
+		this.commandLogger = new BasicLogStream(new File("log/commands.txt"));
 		
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
@@ -151,6 +157,8 @@ public class CommandService extends Service {
 		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
 		SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
+		if (isCommandLogging())
+			commandLogger.log("%-25s[from: %s, script: %s, target: %s]", command.getName(), player.getCreatureObject().getObjectName(), command.getDefaultScriptCallback(), target);
 		
 		EnqueuedCommand enqueued = new EnqueuedCommand(command, galacticManager, target, request);
 		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
@@ -159,6 +167,10 @@ public class CommandService extends Service {
 			// Execute it now
 			commandLauncher.doCommand(player, enqueued);
 		}
+	}
+	
+	private boolean isCommandLogging() {
+		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("COMMAND-LOGGING", true);
 	}
 	
 	private void loadBaseCommands() {

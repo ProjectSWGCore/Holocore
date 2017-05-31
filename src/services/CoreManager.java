@@ -27,13 +27,7 @@
 ***********************************************************************************/
 package services;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.io.File;
 import java.time.OffsetTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -56,34 +50,34 @@ import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.ServerStatus;
+import resources.server_info.BasicLogStream;
 import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
 import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
-
-	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
+	
 	private static final Galaxy GALAXY = new Galaxy();
 	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
 	private final EngineManager engineManager;
 	private final GalacticManager galacticManager;
-	private final PrintStream packetStream;
-	private final boolean packetDebug;
+	private final BasicLogStream packetLogger;
+	private final Config debugConfig;
 	
 	private long startTime;
 	private boolean shutdownRequested;
 	
 	public CoreManager(int adminServerPort) {
-		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
-		setupGalaxy(c);
+		debugConfig = DataManager.getConfig(ConfigFile.DEBUG);
+		Config primaryConfig = DataManager.getConfig(ConfigFile.PRIMARY);
+		setupGalaxy(primaryConfig);
 		if (adminServerPort <= 0)
 			adminServerPort = -1;
 		getGalaxy().setAdminServerPort(adminServerPort);
-		packetStream = setupPrintStream(c);
-		packetDebug = packetStream != null;
+		packetLogger = new BasicLogStream(new File("log/packets.txt"));
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		engineManager = new EngineManager();
@@ -146,23 +140,23 @@ public class CoreManager extends Manager {
 	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
 		if (ipi.getPacket() instanceof AdminShutdownServer)
 			initiateShutdownSequence(((AdminShutdownServer) ipi.getPacket()).getShutdownTime(), TimeUnit.SECONDS);
-		if (!packetDebug)
+		if (!isPacketDebug())
 			return;
 		printPacketStream(true, ipi.getNetworkId(), createExtendedPacketInformation(ipi.getPacket()));
 	}
 	
 	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
-		if (!packetDebug)
+		if (!isPacketDebug())
 			return;
 		printPacketStream(false, opi.getNetworkId(), createExtendedPacketInformation(opi.getPacket()));
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {
-		String date;
-		synchronized (LOG_FORMAT) {
-			date = LOG_FORMAT.format(System.currentTimeMillis());
-		}
-		packetStream.printf("%s %s %d:\t%s%n", date, in?"IN ":"OUT", networkId, str);
+		packetLogger.log("%s %d:\t%s%n", in?"IN ":"OUT", networkId, str);
+	}
+	
+	private boolean isPacketDebug() {
+		return debugConfig.getBoolean("PACKET-LOGGING", false);
 	}
 	
 	private String createExtendedPacketInformation(Packet p) {
@@ -214,18 +208,6 @@ public class CoreManager extends Manager {
 	 */
 	public double getCoreTime() {
 		return (System.nanoTime()-startTime)/1E6;
-	}
-	
-	private PrintStream setupPrintStream(Config c) {
-		if (c.getBoolean("PACKET-DEBUG", false)) {
-			try {
-				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
-			} catch (UnsupportedEncodingException | FileNotFoundException e) {
-				Log.e(e);
-				Log.e(e);
-			}
-		}
-		return null;
 	}
 	
 	public static Galaxy getGalaxy() {
