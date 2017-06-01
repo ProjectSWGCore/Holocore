@@ -6,21 +6,22 @@ import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
 import resources.radial.RadialItem
-import static resources.radial.RadialItem.*
 import resources.radial.RadialOption
 import resources.sui.SuiButtons
 import resources.sui.SuiEvent
 import resources.sui.SuiListBox
 import services.objects.StaticItemService
+import com.projectswg.common.debug.Log
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
-	options.add(new RadialOption(ITEM_USE))
-	options.add(new RadialOption(EXAMINE))
+	options.add(new RadialOption(RadialItem.ITEM_USE))
+	options.add(new RadialOption(RadialItem.EXAMINE))
 }
 
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
+	Log.d("Selection: %s/%s   ITEM_USE: %s/%s", selection, selection.getClass(), RadialItem.ITEM_USE, RadialItem.ITEM_USE.getClass());
 	switch (selection) {
-		case ITEM_USE:
+		case RadialItem.ITEM_USE:
 			def listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.")
 
 			listBox.addListItem("Armor")
