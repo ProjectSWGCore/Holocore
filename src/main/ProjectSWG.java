@@ -60,8 +60,9 @@ public class ProjectSWG {
 	private int adminServerPort;
 	
 	public static final void main(String [] args) throws IOException {
+		new File("log").mkdirs();
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
-		Log.addWrapper(new FileLogWrapper(new File("log.txt")));
+		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
 		server = new ProjectSWG();
 		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {

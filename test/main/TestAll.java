@@ -38,11 +38,13 @@ import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
 
 import network.encryption.TestEncryption;
 import resources.TestResources;
+import services.TestServices;
 
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestEncryption.class,
-	TestResources.class
+	TestResources.class,
+	TestServices.class
 })
 public class TestAll {
 	

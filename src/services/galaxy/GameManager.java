@@ -35,6 +35,7 @@ import services.combat.CombatManager;
 import services.commands.BuffService;
 import services.commands.CommandService;
 import services.commands.EntertainmentService;
+import services.crafting.CraftingManager;
 import services.experience.ExperienceManager;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
@@ -57,7 +58,8 @@ public class GameManager extends Manager {
 	private final CombatManager combatManager;
 	private final ExperienceManager experienceManager;
 	private final BuffService buffService;
-
+	private final CraftingManager craftingManager;
+	
 	public GameManager() {
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
@@ -73,7 +75,8 @@ public class GameManager extends Manager {
 		combatManager = new CombatManager();
 		experienceManager = new ExperienceManager();
 		buffService = new BuffService();
-
+		craftingManager = new CraftingManager();
+		
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
@@ -88,5 +91,7 @@ public class GameManager extends Manager {
 		addChildService(combatManager);
 		addChildService(experienceManager);
 		addChildService(buffService);
+		addChildService(craftingManager);
 	}
+	
 }

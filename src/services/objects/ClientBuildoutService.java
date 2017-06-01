@@ -27,10 +27,7 @@
  ***********************************************************************************/
 package services.objects;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,6 +53,8 @@ import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.DataManager;
+import resources.server_info.SdbLoader;
+import resources.server_info.SdbLoader.SdbResultSet;
 import resources.server_info.StandardLog;
 
 public class ClientBuildoutService extends Service {
@@ -89,9 +88,8 @@ public class ClientBuildoutService extends Service {
 	
 	public Map<Long, SWGObject> loadClientObjectsByArea(int areaId) {
 		try {
-			try (AreaLoader areaLoader = new AreaLoader(new File("serverdata/buildout/areas.sdb"))) {
-				areasById.put(areaId, areaLoader.getAreaById(areaId));
-			}
+			AreaLoader areaLoader = new AreaLoader(new File("serverdata/buildout/areas.sdb"));
+			areasById.put(areaId, areaLoader.getAreaById(areaId));
 			return loadObjects();
 		} catch (SQLException e) {
 			Log.e(e);
@@ -100,10 +98,8 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Map<Long, SWGObject> loadObjects() throws SQLException {
-		Map<Long, SWGObject> objects;
-		try (BuildoutLoader loader = new BuildoutLoader(areasById, new File("serverdata/buildout/objects.sdb"))) {
-			objects = loader.getAllObjects();
-		}
+		BuildoutLoader loader = new BuildoutLoader(areasById, new File("serverdata/buildout/objects.sdb"));
+		Map<Long, SWGObject> objects = loader.getAllObjects();
 		addAdditionalObjects(objects);
 		return objects;
 	}
@@ -174,122 +170,100 @@ public class ClientBuildoutService extends Service {
 			events.add(event.toLowerCase(Locale.US));
 		}
 		
-		try (AreaLoader areaLoader = new AreaLoader(new File("serverdata/buildout/areas.sdb"))) {
-			for (BuildoutArea area : areaLoader.getAllAreas(events)) {
-				areasById.put(area.getId(), area);
-			}
+		AreaLoader areaLoader = new AreaLoader(new File("serverdata/buildout/areas.sdb"));
+		for (BuildoutArea area : areaLoader.getAllAreas(events)) {
+			areasById.put(area.getId(), area);
 		}
 	}
 	
-	private static class AreaLoader implements AutoCloseable {
-		
-		private final SdbLoader loader;
+	private static class AreaLoader {
 		
 		public AreaLoader(File file) {
-			this.loader = new SdbLoader(file);
-			loader.loadNextLine(); // Skip column names
-			loader.loadNextLine(); // Skip data types
-		}
-		
-		@Override
-		public void close() {
-			loader.close();
+			
 		}
 		
 		public List<BuildoutArea> getAllAreas(List<String> events) {
-			String line;
 			Map<String, BuildoutArea> areas = new HashMap<>();
 			BuildoutArea area;
-			while ((line = loader.loadNextLine()) != null) {
-				area = parseLine(line);
-				BuildoutArea replaced = areas.get(area.getName());
-				if ((replaced == null && area.getEvent().isEmpty()) || (!area.getEvent().isEmpty() && events.contains(area.getEvent()))) {
-					areas.put(area.getName(), area);
+			SdbLoader loader = new SdbLoader();
+			try (SdbResultSet set = loader.load(new File("serverdata/buildout/areas.sdb"))) {
+				while (set.next()) {
+					area = parseLine(set);
+					BuildoutArea replaced = areas.get(area.getName());
+					if ((replaced == null && area.getEvent().isEmpty()) || (!area.getEvent().isEmpty() && events.contains(area.getEvent()))) {
+						areas.put(area.getName(), area);
+					}
 				}
+			} catch (IOException e) {
+				Log.e(e);
 			}
 			return new ArrayList<>(areas.values());
 		}
 		
 		public BuildoutArea getAreaById(int areaId) {
-			String line;
-			String areaIdStr = Integer.toString(areaId);
-			while ((line = loader.loadNextLine()) != null) {
-				if (line.startsWith(areaIdStr)) {
-					return parseLine(line);
+			SdbLoader loader = new SdbLoader();
+			try (SdbResultSet set = loader.load(new File("serverdata/buildout/areas.sdb"))) {
+				while (set.next()) {
+					if (set.getInt(0) == areaId)
+						return parseLine(set);
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 			return null;
 		}
 		
-		private BuildoutArea parseLine(String line) {
-			int prevIndex = 0;
-			int nextIndex = 0;
-			BuildoutAreaBuilder builder = new BuildoutAreaBuilder();
-			for (int i = 0; i < 10; i++) { // 10 expected variables
-				nextIndex = line.indexOf('\t', prevIndex);
-				parseValue(builder, line.substring(prevIndex, nextIndex), i);
-				prevIndex = nextIndex+1;
-			}
-			parseValue(builder, line.substring(prevIndex), 10);
-			return builder.build();
-		}
-		
-		private void parseValue(BuildoutAreaBuilder builder, String str, int index) {
-			// id	terrain	area_name	event	min_x	min_z	max_x	max_z	adjust_coordinates	translate_x	translate_z
-			switch (index) {
-				case 0:  builder.setId(Integer.parseInt(str)); break;
-				case 1:  builder.setTerrain(Terrain.getTerrainFromName(str)); break;
-				case 2:  builder.setName(str); break;
-				case 3:  builder.setEvent(str); break;
-				case 4:  builder.setX1(Double.parseDouble(str)); break;
-				case 5:  builder.setZ1(Double.parseDouble(str)); break;
-				case 6:  builder.setX2(Double.parseDouble(str)); break;
-				case 7:  builder.setZ2(Double.parseDouble(str)); break;
-				case 8:  builder.setAdjustCoordinates(Integer.parseInt(str) != 0); break;
-				case 9:  builder.setTranslationX(Double.parseDouble(str)); break;
-				case 10: builder.setTranslationZ(Double.parseDouble(str)); break;
-			}
+		private BuildoutArea parseLine(SdbResultSet set) {
+			return new BuildoutAreaBuilder()
+					.setId((int) set.getInt(0))
+					.setTerrain(Terrain.getTerrainFromName(set.getText(1)))
+					.setName(set.getText(2))
+					.setEvent(set.getText(3))
+					.setX1(set.getReal(4))
+					.setZ1(set.getReal(5))
+					.setX2(set.getReal(6))
+					.setZ2(set.getReal(7))
+					.setAdjustCoordinates(set.getInt(8) != 0)
+					.setTranslationX(set.getReal(9))
+					.setTranslationX(set.getReal(10))
+					.build();
 		}
 		
 	}
 	
-	private static class BuildoutLoader implements AutoCloseable {
+	private static class BuildoutLoader {
 		
 		private final Map<Integer, BuildoutArea> areas;
-		private final SdbLoader loader;
 		private final ObjectCreationData creationData;
 		private BuildoutArea currentArea;
 		
 		public BuildoutLoader(Map<Integer, BuildoutArea> areas, File file) {
 			this.areas = areas;
-			this.loader = new SdbLoader(file);
 			this.creationData = new ObjectCreationData();
 			this.currentArea = areas.values().iterator().next();
-			loader.loadNextLine(); // Skip column names
-			loader.loadNextLine(); // Skip data types
-		}
-		
-		@Override
-		public void close() {
-			loader.close();
 		}
 		
 		public Map<Long, SWGObject> getAllObjects() {
+			SdbLoader loader = new SdbLoader();
 			Map<Long, SWGObject> objects = new HashMap<>();
-			String line;
 			int areaId;
 			SWGObject object;
-			while ((line = loader.loadNextLine()) != null) {
-				areaId = getAreaId(line);
-				if (currentArea.getId() != areaId) {
-					BuildoutArea area = areas.get(areaId);
-					if (area == null) // usually for events
-						continue;
-					currentArea = area;
+			try (SdbResultSet set = loader.load(new File("serverdata/buildout/objects.sdb"))) {
+				while (set.next()) {
+					areaId = (int) set.getInt(2);
+					if (currentArea.getId() != areaId) {
+						BuildoutArea area = areas.get(areaId);
+						if (area == null) { // usually for events
+							continue;
+						}
+						currentArea = area;
+					}
+					parseLine(set);
+					object = createObject(objects);
+					objects.put(object.getObjectId(), object);
 				}
-				parseLine(line);
-				object = createObject(objects);
-				objects.put(object.getObjectId(), object);
+			} catch (IOException e) {
+				Log.e(e);
 			}
 			return objects;
 		}
@@ -319,43 +293,20 @@ public class ClientBuildoutService extends Service {
 			}
 		}
 		
-		private void parseLine(String line) {
-			int prevIndex = 0;
-			int nextIndex = 0;
-			for (int i = 0; i < 13; i++) { // 14 expected variables
-				nextIndex = line.indexOf('\t', prevIndex);
-				parseValue(line.substring(prevIndex, nextIndex), i);
-				prevIndex = nextIndex+1;
-			}
-			parseValue(line.substring(prevIndex), 13);
-		}
-		
-		private int getAreaId(String line) {
-			int nextIndex = 0;
-			nextIndex = line.indexOf('\t', nextIndex); // move to column 2
-			nextIndex = line.indexOf('\t', nextIndex+1); // move to column 3
-			int prevIndex = nextIndex+1;
-			nextIndex = line.indexOf('\t', nextIndex+1); // move to column 3
-			return Integer.parseInt(line.substring(prevIndex, nextIndex));
-		}
-		
-		private void parseValue(String str, int index) {
-			switch (index) {
-				case 0: creationData.id				= Long.parseLong(str); break;
-				case 1: creationData.snapshot		= Long.parseLong(str) != 0; break;
-				// case 2 = area id
-				case 3: creationData.templateCrc	= Integer.parseInt(str); break;
-				case 4: creationData.containerId	= Long.parseLong(str); break;
-				case 5: creationData.x				= Double.parseDouble(str); break;
-				case 6: creationData.y				= Double.parseDouble(str); break;
-				case 7: creationData.z				= Double.parseDouble(str); break;
-				case 8: creationData.orientationX	= Double.parseDouble(str); break;
-				case 9: creationData.orientationY	= Double.parseDouble(str); break;
-				case 10: creationData.orientationZ	= Double.parseDouble(str); break;
-				case 11: creationData.orientationW	= Double.parseDouble(str); break;
-				case 12: creationData.radius		= Double.parseDouble(str); break;
-				case 13: creationData.cellIndex		= Integer.parseInt(str); break;
-			}
+		private void parseLine(SdbResultSet set) {
+			creationData.id				= set.getInt(0);
+			creationData.snapshot		= set.getInt(1) != 0;
+			creationData.templateCrc	= (int) set.getInt(3);
+			creationData.containerId	= set.getInt(4);
+			creationData.x				= set.getReal(5);
+			creationData.y				= set.getReal(6);
+			creationData.z				= set.getReal(7);
+			creationData.orientationX	= set.getReal(8);
+			creationData.orientationY	= set.getReal(9);
+			creationData.orientationZ	= set.getReal(10);
+			creationData.orientationW	= set.getReal(11);
+			creationData.radius			= set.getReal(12);
+			creationData.cellIndex		= (int) set.getInt(13);
 		}
 		
 	}
@@ -375,43 +326,6 @@ public class ClientBuildoutService extends Service {
 		public double orientationW;
 		public double radius;
 		public int cellIndex;
-		
-	}
-	
-	private static class SdbLoader implements AutoCloseable {
-		
-		private final BufferedReader reader;
-		
-		public SdbLoader(File file) {
-			BufferedReader br = null;
-			try {
-				br = new BufferedReader(new FileReader(file));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				br = null;
-			}
-			this.reader = br;
-		}
-		
-		@Override
-		public void close() {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		public String loadNextLine() {
-			try {
-				return reader.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
 		
 	}
 	

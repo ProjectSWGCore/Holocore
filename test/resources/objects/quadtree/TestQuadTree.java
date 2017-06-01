@@ -124,16 +124,16 @@ public class TestQuadTree {
 		List <Point2D> points = new ArrayList<Point2D>();
 		QuadTree <Point2D> tree = new QuadTree<Point2D>(16, -8192, -8192, 8192, 8192);
 		Point2D p;
-		for (int x = -2000; x < 2000; x += 50) {
-			for (int y = -2000; y < 2000; y += 50) {
+		for (int x = -2000; x < 2000; x += 100) {
+			for (int y = -2000; y < 2000; y += 100) {
 				p = new Point2D(x, y);
 				points.add(p);
 				tree.put(x, y, p);
 			}
 		}
-		for (int x = -2000; x < 2000; x += 100) {
-			for (int y = -2000; y < 2000; y += 100) {
-				test(points, tree, x, y, 200);
+		for (int x = -2000; x < 2000; x += 200) {
+			for (int y = -2000; y < 2000; y += 200) {
+				test(points, tree, x, y, 400);
 			}
 		}
 	}

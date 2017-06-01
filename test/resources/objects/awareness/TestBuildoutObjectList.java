@@ -33,9 +33,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import com.projectswg.common.data.location.Terrain;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import services.objects.ClientBuildoutService;
+import services.objects.ObjectCreator;
 
 public class TestBuildoutObjectList {
 	
@@ -57,8 +59,16 @@ public class TestBuildoutObjectList {
 	private void load() {
 		if (loaded.getAndSet(true))
 			return;
-		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		mosEisleyObjects.addAll(buildoutService.loadClientObjectsByArea(843).values().stream().filter(obj -> obj.getParent() != null).collect(Collectors.toList()));
+		double maxAngle = 2 * Math.PI;
+		for (double radius = 10; radius <= 250; radius += 20) {
+			for (double angle = 0; angle < maxAngle; angle += maxAngle / 10) {
+				SWGObject object = ObjectCreator.createObjectFromTemplate("object/building/tatooine/shared_housing_tatt_style01_med.iff");
+				object.setPosition(Terrain.TATOOINE, radius * Math.cos(angle) + 3500, 5, radius * Math.sin(angle) - 4800);
+				mosEisleyObjects.add(object);
+			}
+		}
+//		ClientBuildoutService buildoutService = new ClientBuildoutService();
+//		mosEisleyObjects.addAll(buildoutService.loadClientObjectsByArea(843).values().stream().filter(obj -> obj.getParent() != null).collect(Collectors.toList()));
 	}
 	
 	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {

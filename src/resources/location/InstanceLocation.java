@@ -151,7 +151,7 @@ public class InstanceLocation implements Persistable {
 		Location loc = getLocation();
 		SWGObject parent = self.getParent();
 		while (parent != null) {
-			loc.translate(parent.getInstanceLocation().location); // avoids copies
+			loc.translateLocation(parent.getInstanceLocation().location); // avoids copies
 			loc.setTerrain(parent.getTerrain());
 			parent = parent.getParent();
 		}

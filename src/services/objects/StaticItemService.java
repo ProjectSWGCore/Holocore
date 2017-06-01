@@ -284,8 +284,13 @@ public final class StaticItemService extends Service {
 		 */
 		private void applyAttributes(SWGObject object) {
 			// apply global attributes
-			object.setStf("static_item_n", itemName);
-			object.setDetailStf("static_item_d", itemName);
+			if (itemName.startsWith("survey_tool")) {
+				object.setStf("item_n", itemName);
+				object.setDetailStf("item_d", itemName);
+			} else {
+				object.setStf("static_item_n", itemName);
+				object.setDetailStf("static_item_d", itemName);
+			}
 			if (noTrade)
 				object.addAttribute("no_trade", "1");
 			if (unique)

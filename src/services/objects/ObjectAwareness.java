@@ -156,8 +156,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
 		disappearObject(obj, true, true);
-		obj.setPosition(Terrain.GONE, 0, 0, 0);
 		obj.moveToContainer(null);
+		obj.setPosition(Terrain.GONE, 0, 0, 0);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -210,8 +210,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			Log.i("Zoning in %s with character %s at %s in %s/%s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), superParent, world, superParent.getTerrain());
 		}
 		resetAwarenessOnZone(creature, firstZone);
-		creature.setLocation(loc);
 		creature.moveToContainer(parent);
+		creature.setLocation(loc);
 		startZone(creature, firstZone);
 		recursiveCreateObject(creature, player);
 		if (parent != null) {

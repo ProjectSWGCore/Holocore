@@ -35,6 +35,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
@@ -72,6 +73,7 @@ import resources.player.Player;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
+import utilities.ScheduledUtilities;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -131,6 +133,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		object.parent = this;
+		object.setTerrain(getTerrain());
 		object.getAwareness().setParent(getAwareness());
 	}
 	
@@ -317,15 +320,24 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void setLocation(Location location) {
+		if (parent != null)
+			Assert.test(location.getTerrain() == parent.getTerrain(), "Attempted to set different terrain from parent!");
 		this.location.setLocation(location);
+		updateChildrenTerrain();
 	}
 	
 	public void setTerrain(Terrain terrain) {
+		if (parent != null)
+			Assert.test(terrain == parent.getTerrain(), "Attempted to set different terrain from parent!");
 		location.setTerrain(terrain);
+		updateChildrenTerrain();
 	}
 	
-	public void setPosition(Terrain t, double x, double y, double z) {
-		location.setPosition(t, x, y, z);
+	public void setPosition(Terrain terrain, double x, double y, double z) {
+		if (parent != null)
+			Assert.test(terrain == parent.getTerrain(), "Attempted to set different terrain from parent!");
+		location.setPosition(terrain, x, y, z);
+		updateChildrenTerrain();
 	}
 	
 	public void setPosition(double x, double y, double z) {
@@ -342,6 +354,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setInstance(InstanceType instanceType, int instanceNumber) {
 		location.setInstance(instanceType, instanceNumber);
+	}
+	
+	private void updateChildrenTerrain() {
+		Terrain terrain = getTerrain();
+		synchronized (containedObjects) {
+			for (SWGObject child : containedObjects) {
+				child.setTerrain(terrain);
+			}
+		}
+		synchronized (slots) {
+			for (SWGObject child : slots.values()) {
+				if (child != null)
+					child.setTerrain(terrain);
+			}
+		}
 	}
 	
 	public void setStf(String stfFile, String stfKey) {
@@ -685,8 +712,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.addObjectAware(aware.getAwareness())) {
 			createObject(aware);
 			aware.createObject(this);
-			onObjectEnterAware(aware);
-			aware.onObjectEnterAware(this);
+			onAddObjectAware(aware);
+			aware.onAddObjectAware(this);
 		}
 	}
 	
@@ -694,8 +721,57 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.removeObjectAware(aware.getAwareness())) {
 			destroyObject(aware);
 			aware.destroyObject(this);
-			onObjectLeaveAware(aware);
-			aware.onObjectLeaveAware(this);
+			onRemoveObjectAware(aware);
+			aware.onRemoveObjectAware(this);
+		}
+	}
+	
+	/**
+	 * Called when this object has been moved somehow via awareness. This will
+	 * not run on any buildout or snapshot object!
+	 */
+	public void onObjectMoved() {
+		if (isBuildout() || isSnapshot())
+			return;
+		Set<SWGObject> aware = getObjectsAware();
+		// Running on a different thread to make sure this doesn't slow down awareness
+		ScheduledUtilities.run(() -> onObjectMoved(aware), 0, TimeUnit.MILLISECONDS);
+	}
+	
+	private void onAddObjectAware(SWGObject aware) {
+		try {
+			if (!isBuildout() && !isSnapshot())
+				onObjectEnterAware(aware);
+		} catch (Throwable t) {
+			Log.e(t);
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onAddObjectAware(aware);
+		}
+	}
+	
+	private void onRemoveObjectAware(SWGObject aware) {
+		try {
+			if (!isBuildout() && !isSnapshot())
+				onObjectLeaveAware(aware);
+		} catch (Throwable t) {
+			Log.e(t);
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onRemoveObjectAware(aware);
+		}
+	}
+	
+	private void onObjectMoved(Set<SWGObject> aware) {
+		for (SWGObject a : aware) {
+			try {
+				a.onObjectMoveInAware(this);
+			} catch (Throwable t) {
+				Log.e(t);
+			}
+		}
+		for (SWGObject child : getContainedObjects()) {
+			child.onObjectMoved(aware);
 		}
 	}
 	
@@ -712,6 +788,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param aware the object entering awareness
 	 */
 	protected void onObjectLeaveAware(SWGObject aware) {
+		
+	}
+	
+	/**
+	 * Called when an object moves within this object's awareness
+	 * @param aware the object that moved
+	 */
+	public void onObjectMoveInAware(SWGObject aware) {
 		
 	}
 	

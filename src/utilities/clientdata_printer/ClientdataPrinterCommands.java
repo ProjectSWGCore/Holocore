@@ -42,29 +42,29 @@ public class ClientdataPrinterCommands {
 	
 	public static void main(String [] args) {
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
-		List<String> strings = loadBaseCommands();
-		for (String str : strings) {
-			System.out.println(str);
+		List<Command> commands = loadBaseCommands();
+		for (Command command : commands) {
+			System.out.println(command);
 		}
 	}
 	
-	private static List<String> loadBaseCommands() {
+	private static List<Command> loadBaseCommands() {
 		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
 		String [] commandTables = new String[] {
 				"command_table", "command_table_ground", "client_command_table",
 				"command_table_space", "client_command_table_ground", "client_command_table_space"
 		};
 		
-		Set<String> strings = new HashSet<>();
+		Set<Command> commands = new HashSet<>();
 		for (String table : commandTables) {
-			loadBaseCommands(strings, table);
+			loadBaseCommands(commands, table);
 		}
-		List<String> stringSorted = new ArrayList<>(strings);
-		stringSorted.sort((a, b) -> a.compareTo(b));
-		return stringSorted;
+		List<Command> commandsSorted = new ArrayList<>(commands);
+		commandsSorted.sort((a, b) -> a.name.compareTo(b.name));
+		return commandsSorted;
 	}
 	
-	private static void loadBaseCommands(Set<String> strings, String table) {
+	private static void loadBaseCommands(Set<Command> commands, String table) {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/" + table + ".iff");
 		
 		System.out.println("Table: " + table);
@@ -77,8 +77,25 @@ public class ClientdataPrinterCommands {
 		System.out.println("]");
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
-			strings.add(baseCommands.getString(row, "commandName"));
+			commands.add(new Command(baseCommands.getString(row, "commandName"), baseCommands.getString(row, "scriptHook")));
 		}
+	}
+	
+	private static class Command {
+		
+		private final String name;
+		private final String scriptHook;
+		
+		public Command(String name, String scriptHook) {
+			this.name = name;
+			this.scriptHook = scriptHook;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("Command: %-25s\t%s", name, scriptHook);
+		}
+		
 	}
 	
 }
