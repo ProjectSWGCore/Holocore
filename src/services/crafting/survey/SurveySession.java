@@ -30,7 +30,6 @@ package services.crafting.survey;
 import java.util.List;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 
 import network.packets.swg.zone.crafting.surveying.SurveyMessage;
 import network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
@@ -54,14 +53,13 @@ public class SurveySession {
 	}
 	
 	public void startSession() {
-		Log.d("%s start survey session with %s", creature.getObjectName(), resource);
 		SurveyMessage surveyMessage = new SurveyMessage();
 		loadResourcePoints(surveyMessage, creature, resource, 320);
 		creature.getOwner().sendPacket(surveyMessage);
 	}
 	
 	public void stopSession() {
-		Log.d("%s ending survey session with %s", creature.getObjectName(), resource);
+		
 	}
 	
 	private void loadResourcePoints(SurveyMessage surveyMessage, CreatureObject creature, GalacticResource resource, int range) {
