@@ -128,10 +128,15 @@ public class GalacticResourceSpawner {
 		int maxTypes = raw.getMaxTypes();
 		if (spawned >= minTypes)
 			return; // Only respawn once total number spawned in goes below minTypes
-		int targetTypes = random.nextInt(maxTypes - minTypes + 1) + minTypes;
+		int targetTypes = calculateTargetTypes(minTypes, maxTypes);
 		for (int i = spawned; i < targetTypes; i++) {
 			createNewResourceWithSpawns(raw);
 		}
+	}
+	
+	private int calculateTargetTypes(int minTypes, int maxTypes) {
+		double x = random.nextDouble();
+		return (int) (x * x * (maxTypes - minTypes)) + minTypes;
 	}
 	
 	private void createNewResourceWithSpawns(RawResource raw) {
