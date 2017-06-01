@@ -6,6 +6,7 @@ import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
 import resources.radial.RadialItem
+import static resources.radial.RadialItem.*
 import resources.radial.RadialOption
 import resources.sui.SuiButtons
 import resources.sui.SuiEvent
@@ -13,13 +14,13 @@ import resources.sui.SuiListBox
 import services.objects.StaticItemService
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
-	options.add(new RadialOption(RadialItem.ITEM_USE))
-	options.add(new RadialOption(RadialItem.EXAMINE))
+	options.add(new RadialOption(ITEM_USE))
+	options.add(new RadialOption(EXAMINE))
 }
 
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
 	switch (selection) {
-		case RadialItem.ITEM_USE:
+		case ITEM_USE:
 			def listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.")
 
 			listBox.addListItem("Armor")
