@@ -69,6 +69,16 @@ public class GalacticResourceContainer {
 		return galacticResources.get(resourceId);
 	}
 	
+	public GalacticResource getGalacticResourceByName(String resourceName) {
+		synchronized (galacticResources) {
+			for (GalacticResource gr : galacticResources.values()) {
+				if (gr.getName().equals(resourceName))
+					return gr;
+			}
+		}
+		return null;
+	}
+	
 	public List<RawResource> getRawResources() {
 		return copyImmutable(rawResources.values());
 	}

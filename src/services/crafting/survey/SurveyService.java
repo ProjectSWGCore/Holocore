@@ -28,8 +28,18 @@
 package services.crafting.survey;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 
+import intents.crafting.survey.StartSurveyToolIntent;
 import intents.crafting.survey.StartSurveyingIntent;
+import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
+import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+import services.crafting.resource.galactic.GalacticResource;
+import services.crafting.resource.galactic.GalacticResourceType;
+import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import services.crafting.resource.raw.RawResource;
 
 /**
  * In charge of responding to survey requests
@@ -41,11 +51,55 @@ public class SurveyService extends Service {
 	public SurveyService() {
 		this.inProgressSurveyManager = new InProgressSurveyManager();
 		
+		registerForIntent(StartSurveyToolIntent.class, ssti -> handleSurveyToolOpened(ssti));
 		registerForIntent(StartSurveyingIntent.class, ssi -> handleStartSurveyingIntent(ssi));
 	}
 	
+	private void handleSurveyToolOpened(StartSurveyToolIntent ssti) {
+		CreatureObject creature = ssti.getCreature();
+		SWGObject surveyTool = ssti.getSurveyTool();
+		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
+		Log.d("%s starting survey session for %s", creature.getObjectName(), resourceType);
+		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
+		GalacticResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
+		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
+			RawResource rawResource = GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId());
+			if (!surveyToolType.isResourceType(rawResource))
+				continue;
+			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
+		}
+		creature.getOwner().sendPacket(survey);
+	}
+	
 	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
-		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getSurveyTool());
+		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getResource());
+	}
+	
+	private GalacticResourceType getTypeFromSurveyTool(String surveyTool) {
+		switch (surveyTool) {
+			case "mineral":
+				return GalacticResourceType.MINERAL;
+			case "lumber":
+				return GalacticResourceType.FLORA_STRUCTURAL;
+			case "liquid":
+			case "moisture":
+				return GalacticResourceType.WATER;
+			case "gas":
+			case "gas_thermal":
+				return GalacticResourceType.GAS;
+			case "wind":
+				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND;
+			case "solar":
+				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR;
+			case "inorganic":
+				return GalacticResourceType.INORGANIC;
+			case "organic":
+				return GalacticResourceType.ORGANIC;
+			default:
+				Log.w("Unknokwn survey tool type: %s", surveyTool);
+			case "all":
+				return GalacticResourceType.RESOURCE;
+		}
 	}
 	
 }

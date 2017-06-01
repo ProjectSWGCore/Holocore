@@ -72,7 +72,7 @@ public class GalacticResourceSpawn implements Persistable {
 		this.terrain = terrain;
 		this.x = random.nextInt(MAP_SIZE) - MAP_SIZE/2;
 		this.z = random.nextInt(MAP_SIZE) - MAP_SIZE/2;
-		this.radius = (int) (random.nextDouble() * getMaxRadius() + 0.5);
+		this.radius = (int) (random.nextDouble() * (getMaxRadius() - getMinRadius()) + getMinRadius());
 		
 		int minSpawnTime = getMinSpawnTime();
 		int maxSpawnTime = getMaxSpawnTime();
@@ -120,7 +120,7 @@ public class GalacticResourceSpawn implements Persistable {
 		double distance = getDistance(terrain, x, z);
 		if (distance > radius)
 			return 0;
-		return (int) ((distance / radius) * (maxConcentration - minConcentration) + minConcentration);
+		return (int) ((1 - distance / radius) * (maxConcentration - minConcentration) + minConcentration);
 	}
 	
 	public boolean isExpired() {
@@ -135,8 +135,12 @@ public class GalacticResourceSpawn implements Persistable {
 		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-TIME", 21);
 	}
 	
+	private int getMinRadius() {
+		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MIN-SPAWN-RADIUS", 100);
+	}
+	
 	private int getMaxRadius() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-RADIUS", 200);
+		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-RADIUS", 1000);
 	}
 	
 	@Override

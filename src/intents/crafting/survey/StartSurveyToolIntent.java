@@ -29,25 +29,25 @@ package intents.crafting.survey;
 
 import com.projectswg.common.control.Intent;
 
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import services.crafting.resource.galactic.GalacticResource;
 
-public class StartSurveyingIntent extends Intent {
+public class StartSurveyToolIntent extends Intent {
 	
 	private final CreatureObject creature;
-	private final GalacticResource resource;
+	private final SWGObject surveyTool;
 	
-	public StartSurveyingIntent(CreatureObject creature, GalacticResource resource) {
+	public StartSurveyToolIntent(CreatureObject creature, SWGObject surveyTool) {
 		this.creature = creature;
-		this.resource = resource;
+		this.surveyTool = surveyTool;
 	}
 	
 	public CreatureObject getCreature() {
 		return creature;
 	}
 	
-	public GalacticResource getResource() {
-		return resource;
+	public SWGObject getSurveyTool() {
+		return surveyTool;
 	}
 	
 }

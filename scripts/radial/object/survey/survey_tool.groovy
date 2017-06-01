@@ -1,4 +1,4 @@
-import intents.crafting.survey.StartSurveyingIntent
+import intents.crafting.survey.StartSurveyToolIntent
 import resources.objects.SWGObject
 import resources.player.Player
 import resources.radial.RadialItem
@@ -11,5 +11,5 @@ static def getOptions(List<RadialOption> options, Player player, SWGObject targe
 }
 
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
-	new StartSurveyingIntent(player.getCreatureObject(), target).broadcast();
+	new StartSurveyToolIntent(player.getCreatureObject(), target).broadcast();
 }

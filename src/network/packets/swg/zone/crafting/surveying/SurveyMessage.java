@@ -25,64 +25,107 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.crafting.survey;
+package network.packets.swg.zone.crafting.surveying;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
 
-import network.packets.swg.zone.crafting.surveying.SurveyMessage;
-import network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
-import resources.objects.creature.CreatureObject;
-import services.crafting.resource.galactic.GalacticResource;
-import services.crafting.resource.galactic.GalacticResourceSpawn;
-import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import network.packets.swg.SWGPacket;
 
-public class SurveySession {
+public class SurveyMessage extends SWGPacket {
 	
-	private final CreatureObject creature;
-	private final GalacticResource resource;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("SurveyMessage");
 	
-	public SurveySession(CreatureObject creature, GalacticResource resource) {
-		this.creature = creature;
-		this.resource = resource;
+	private final List<ResourceConcentration> concentrations;
+	
+	public SurveyMessage() {
+		this.concentrations = new ArrayList<>();
 	}
 	
-	public GalacticResource getResource() {
-		return resource;
+	public SurveyMessage(NetBuffer data) {
+		this.concentrations = new ArrayList<>();
+		decode(data);
 	}
 	
-	public void startSession() {
-		Log.d("%s start survey session with %s", creature.getObjectName(), resource);
-		SurveyMessage surveyMessage = new SurveyMessage();
-		loadResourcePoints(surveyMessage, creature, resource, 320);
-		creature.getOwner().sendPacket(surveyMessage);
-	}
-	
-	public void stopSession() {
-		Log.d("%s ending survey session with %s", creature.getObjectName(), resource);
-	}
-	
-	private void loadResourcePoints(SurveyMessage surveyMessage, CreatureObject creature, GalacticResource resource, int range) {
-		double baseLocationX = creature.getX();
-		double baseLocationZ = creature.getZ();
-		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain());
-		double interval = range / 4;
-		double halfWidth = interval * 2;
-		for (double x = baseLocationX - halfWidth; x <= baseLocationX + halfWidth; x += interval) {
-			for (double z = baseLocationZ - halfWidth; z <= baseLocationZ + halfWidth; z += interval) {
-				surveyMessage.addConcentration(new ResourceConcentration(x, z, getConcentration(spawns, creature.getTerrain(), x, z)));
-			}
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		int pointAmounts = data.getInt();
+		for (int i = 0; i < pointAmounts; i++) {
+			float x = data.getFloat();
+			data.getFloat();
+			float z = data.getFloat();
+			float concentration = data.getFloat();
+			concentrations.add(new ResourceConcentration(x, z, concentration));
 		}
 	}
 	
-	private double getConcentration(List<GalacticResourceSpawn> spawns, Terrain terrain, double x, double z) {
-		double concentration = 0;
-		for (GalacticResourceSpawn spawn : spawns) {
-			concentration += spawn.getConcentration(terrain, x, z) / 100.0;
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(concentrations.size());
+		for (ResourceConcentration rc : concentrations) {
+			data.addFloat((float) rc.getX());
+			data.addFloat(0);
+			data.addFloat((float) rc.getZ());
+			data.addFloat((float) rc.getConcentration());
 		}
-		return concentration;
+		return data;
+	}
+	
+	private int getLength() {
+		return 10 + concentrations.size() * 16;
+	}
+	
+	public List<ResourceConcentration> getConcentrations() {
+		return concentrations;
+	}
+	
+	public void addConcentration(ResourceConcentration rc) {
+		concentrations.add(rc);
+	}
+	
+	public void removeConcentration(ResourceConcentration rc) {
+		concentrations.remove(rc);
+	}
+	
+	public static class ResourceConcentration {
+		
+		private final double x;
+		private final double z;
+		private final double concentration;
+		
+		public ResourceConcentration(double x, double z, double concentration) {
+			this.x = x;
+			this.z = z;
+			this.concentration = concentration;
+		}
+		
+		public double getX() {
+			return x;
+		}
+		
+		public double getZ() {
+			return z;
+		}
+		
+		public double getConcentration() {
+			return concentration;
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (!(o instanceof ResourceConcentration))
+				return false;
+			ResourceConcentration rc = (ResourceConcentration) o;
+			return rc.x == x && rc.z == z && rc.concentration == concentration;
+		}
+		
 	}
 	
 }
