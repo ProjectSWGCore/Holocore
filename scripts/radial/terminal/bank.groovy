@@ -6,6 +6,7 @@ import resources.radial.RadialItem
 import resources.radial.RadialOption
 import resources.sui.SuiEvent
 import resources.sui.SuiButtons
+import resources.sui.SuiWindow
 import utilities.IntentFactory
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
@@ -44,10 +45,10 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 			def window = new SuiWindow("Script.transfer", SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt')
 			window.setPropertyText('transaction.lblFrom', 'Cash')
 			window.setPropertyText('transaction.lblTo', 'Bank')
-			window.setPropertyText('transaction.lblStartingFrom', creature.getCashBalance())
-			window.setPropertyText('transaction.lblStartingTo', creature.getBankBalance())
-			window.setPropertyText('transaction.txtInputFrom', creature.getCashBalance())
-			window.setPropertyText('transaction.txtInputTo', creature.getBankBalance())
+			window.setPropertyText('transaction.lblStartingFrom', creature.getCashBalance().toString())
+			window.setPropertyText('transaction.lblStartingTo', creature.getBankBalance().toString())
+			window.setPropertyText('transaction.txtInputFrom', creature.getCashBalance().toString())
+			window.setPropertyText('transaction.txtInputTo', creature.getBankBalance().toString())
 			window.setProperty('transaction', 'ConversionRatioFrom', '1')
 			window.setProperty('transaction', 'ConversionRatioTo', '1')
 			window.addReturnableProperty('transaction.txtInputFrom', 'Text')
