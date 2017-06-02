@@ -28,6 +28,7 @@ along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
 Ready to help bring back an awesome MMORPG with your programming skills?
 
 The following assumes that you're familiar with:
+
 * Installing applications on your machine
 * Command line interfaces
 * Git
