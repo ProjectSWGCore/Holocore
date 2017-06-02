@@ -1,0 +1,37 @@
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+mainClassName  = 'main.ProjectSWG'
+
+manifest {
+	attributes 'Main-Class': 'main.ProjectSWG'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+	test {
+		java {
+			srcDirs = ['test']
+		}
+	}
+}
+
+dependencies {
+	compile fileTree(dir: 'lib', include: ['*.jar'])
+}
+
+buildscript {
+  repositories {
+    maven {
+      url 'https://plugins.gradle.org/m2/'
+    }
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
+  }
+}

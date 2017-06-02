@@ -1,14 +1,6 @@
-### **Branch** ###
-
-**Quality Assurance:** Upload your Pull Requests here so it can be tested. This is the main working space
-
-**Master:** Tested and approved commits will be moved to this branch (Test Center)
-
---------------------------------------------------------------------------------
-
 ![holocore.png](https://bitbucket.org/repo/norXdj/images/3473411954-holocore.png)
 
-## Copyright (c) 2017 /// Project SWG /// www.projectswg.com ##
+# Copyright (c) 2017 /// Project SWG /// www.projectswg.com #
 
 ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on
 July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.
@@ -31,52 +23,74 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
 
-## Setting up the developer environment ##
+# Setting up a development environment #
 
-### Java 1.8 ###
+Ready to help bring back an awesome MMORPG with your programming skills?
 
-You need to have a Java compiler that supports [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Which
-you can download from Oracle.
+The following assumes that you're familiar with:
+* Installing applications on your machine
+* Command line interfaces
+* Git
+* Programming in general
+* Java, to a lesser degree
 
-### Maven ###
+Support for any of these topics cannot be expected of the development team.
 
-This project uses Maven as it's build tool of choice, and requires Maven 3.x. To install Maven, see your
-specific OS instructions from the [Maven installation](http://books.sonatype.com/mvnref-book/reference/installation.html) section
-from the Sonatype site.
+## Java ##
 
-**The Maven build will generate two artifacts**
+This project currently requires Java 8. We may use newer versions in the future.
 
-- Standalone 'uber' jar that you can run the Holocore server out of.
-- Jar containing a sub-set of files as defined by 'asselby-tools.xml'
+In order to compile the source code, you need a JDK installation on your machine. The `JAVA_HOME` environment variable
+should point to the directory of the JDK!
 
-**Using the standard Maven life-cycle, you have the following supported goals:**
+## Gradle ##
 
-- clean   - Removes any .class and old jar files
-- compile - Just compiles the java code, does *not* update any artifacts
-- test    - Does all that 'compile' does, plus runs the unit tests
-- package - Does all that 'test' does but generates all of the artifacts
+This project uses Gradle as it's build tool of choice. You must install Gradle on your machine in order to build the
+source code!
 
-### Forwarder ###
+Building an uber jar: Run `gradle shadowJar` in the root project folder
 
-Holocore uses TCP for network communications, whereas SWG was programmed for UDP.  This adds numerous efficiencies with long distance communications, but requires that a little more work is done on the client side.  If you are using the launcher, you do not have to worry about this.  If you are not using the launcher, follow the guide [here](https://bitbucket.org/projectswg/forwarder).
+Running the uber jar: Run `java -jar build/libs/holocore-all.jar` in the root project folder
 
-### Running Holocore ###
-In order to successfully build and run Holocore, you must:
+## Forwarder ##
 
-1. Have a valid Star Wars Galaxies installation that is updated from the final patch.
-2. Setup a postgresql server, preferably on localhost, with a database and user named nge with read/write permissions.
-    * Note: You will need to restore the database that you created using nge.backup in order to create the proper tables.
-3. Extract the following contents of the sku's to a new clientdata folder in the holocore directory:
-    * abstract
-    * appearance
-    * creation
-    * customization
-    * datatables
-    * footprint
-    * interiorlayout
-    * misc
-    * object
-    * quest
-    * snapshot
-    * string
-    * terrain
+Holocore uses TCP for network communications, whereas SWG was programmed for UDP.  This adds numerous efficiencies with
+long distance communications, but requires that a little more work is done on the client side.  If you are using the
+launcher, you do not have to worry about this.  If you are not using the launcher, follow the guide
+[here](https://bitbucket.org/projectswg/forwarder).
+
+## Clientdata ##
+
+Extract the following folders of every sku#_client.toc file to a new clientdata folder in the holocore directory:
+* abstract
+* appearance
+* creation
+* customization
+* datatables
+* footprint
+* interiorlayout
+* misc
+* object
+* quest
+* snapshot
+* string
+* terrain
+
+Note that every TOC file won't necessarily have all of these folders! If they're present, extract them.
+A tool such as TRE Explorer is capable of opening the files.
+
+## Contributing ##
+1. Fork the repository
+2. Clone the repository
+3. Find something to do on [one of our Trello boards](https://trello.com/projectswg)
+4. Create a new branch on your fork of holocore
+5. Write code, commit and push it to your branch
+6. Once ready, create a pull request with destination branch `quality_assurance` and source branch
+`<your_branch_name>`
+7. Your changes are reviewed and are merged, unless something is wrong
+8. Once merged, your changes will be available on the official server soon
+9. If you want to work on something else, go back to step 3
+
+It's not required, but it's definitely a good idea to get in the same chat room as the rest of the
+developers if you're serious about contributing. Request an invitation to the development chat by sending a message to
+Undercova on the forums! Inactive/malicious members may be removed.
