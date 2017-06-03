@@ -176,10 +176,8 @@ public final class LootService extends Service {
 		if (lootTable == null) {
 			return null;
 		}
-		
-		NPCTable npcTable = new NPCTable(tableChance, lootTable);
-		
-		return npcTable;
+
+		return new NPCTable(tableChance, lootTable);
 	}
 
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
@@ -215,14 +213,12 @@ public final class LootService extends Service {
 			return;
 		}
 
-		SWGObject target = cci.getTarget();
-
-		lootAll(cci.getSource(), target);
+		lootAll(cci.getSource(), cci.getTarget());
 	}
 
 	private void handleRadialSelection(RadialSelectionIntent rsi) {
 		switch (rsi.getSelection()) {
-			case LOOT:
+			case LOOT: {
 				// TODO permissions check
 				SWGObject inventory = rsi.getTarget().getSlottedObject("inventory");
 
@@ -233,9 +229,11 @@ public final class LootService extends Service {
 
 				rsi.getPlayer().sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
 				break;
-			case LOOT_ALL:
+			}
+			case LOOT_ALL: {
 				lootAll(rsi.getPlayer().getCreatureObject(), rsi.getTarget());
 				break;
+			}
 		}
 	}
 
@@ -335,11 +333,10 @@ public final class LootService extends Service {
 				continue;
 			}
 
-			Collection<LootGroup> itemGroups = lootTable.getLootGroups();
 			int itemGroupRoll = random.nextInt(100) + 1;
 			int minInterval = 1;
 
-			for (LootGroup itemGroup : itemGroups) {
+			for (LootGroup itemGroup : lootTable.getLootGroups()) {
 				int groupChance = itemGroup.getChance();
 
 				if (minInterval < itemGroupRoll && itemGroupRoll > groupChance) {
