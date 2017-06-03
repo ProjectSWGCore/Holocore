@@ -27,26 +27,26 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.NetBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class PlayClientEffectObjectMessage extends SWGPacket {
-	public static final int CRC = getCrc("PlayClientEffectObjectMessage");
-	
-	private String effectFile;
-	private String effectLocation;
+public class PlayClientEffectObjectTransformMessage extends SWGPacket {
+	public static final int CRC = getCrc("PlayClientEffectObjectTransformMessage");
+
 	private long objectId;
+	private String effectFile;
+	private Location location;
 	private String commandString;
-	
-	public PlayClientEffectObjectMessage() {
-		
+
+	public PlayClientEffectObjectTransformMessage() {
+
 	}
-	
-	public PlayClientEffectObjectMessage(String effectFile, String effectLocation, long objectId, String commandString) {
-		this.effectFile = effectFile;
-		this.effectLocation = effectLocation;
+
+	public PlayClientEffectObjectTransformMessage(long objectId, String effectFile, Location location, String commandString) {
 		this.objectId = objectId;
+		this.effectFile = effectFile;
+		this.location = location;
 		this.commandString = commandString;
 	}
 	
@@ -54,19 +54,20 @@ public class PlayClientEffectObjectMessage extends SWGPacket {
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
+
 		effectFile = data.getAscii();
-		effectLocation = data.getAscii();
+		location = data.getEncodable(Location.class);
 		objectId = data.getLong();
 		commandString = data.getAscii();
 	}
 	
 	@Override
 	public NetBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(20 + effectFile.length() + effectLocation.length() + commandString.length());
-		data.addShort(4);
+		NetBuffer data = NetBuffer.allocate(46 + effectFile.length() + commandString.length());
+		data.addShort(5);
 		data.addInt(CRC);
 		data.addAscii(effectFile);
-		data.addAscii(effectLocation);
+		data.addEncodable(location);
 		data.addLong(objectId);
 		data.addAscii(commandString);
 		return data;
