@@ -46,8 +46,8 @@ should point to the directory of the JDK!
 
 ## Gradle ##
 
-This project uses Gradle as it's build tool of choice. You must install Gradle on your machine in order to build the
-source code!
+This project uses Gradle as its build tool of choice. You can install Gradle on your machine in order to build the
+source code.
 
 Building an uber jar: Run `gradle shadowJar` in the root project folder
 
@@ -63,6 +63,7 @@ launcher, you do not have to worry about this.  If you are not using the launche
 ## Clientdata ##
 
 Extract the following folders of every sku#_client.toc file to a new clientdata folder in the holocore directory:
+
 * abstract
 * appearance
 * creation
