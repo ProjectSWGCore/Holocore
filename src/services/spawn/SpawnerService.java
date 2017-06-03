@@ -72,7 +72,7 @@ public final class SpawnerService extends Service {
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
 			+ "static.min_spawn_time, static.max_spawn_time, static.amount, static.spawn_id, " // even more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "npc.iff_template AS iff, npc.npc_name, npc.combat_level, npc.difficulty, npc.attackable, " // npc columns
+			+ "npc.npc_id, npc.iff_template AS iff, npc.npc_name, npc.combat_level, npc.difficulty, npc.attackable, " // npc columns
 			+ "npc_stats.HP, npc_stats.Action, npc_stats.Boss_HP, npc_stats.Boss_Action, npc_stats.Elite_HP, npc_stats.Elite_Action "	// npc_stats columns
 			+ "FROM static, buildings, npc, npc_stats "
 			+ "WHERE buildings.building_id = static.building_id AND static.npc_id = npc.npc_id AND npc.combat_level = npc_stats.Level";
@@ -161,6 +161,7 @@ public final class SpawnerService extends Service {
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
 		Spawner spawner = new Spawner(set.getInt("spawn_id"));
+		spawner.setCreatureId(set.getString("npc_id"));
 		spawner.setIffTemplates(createTemplateList(set.getString("iff")));
 		spawner.setCreatureName(set.getString("npc_name").intern());
 		spawner.setCombatLevel(set.getShort("combat_level"));
@@ -298,6 +299,7 @@ public final class SpawnerService extends Service {
 		object.setMoodAnimation(spawner.getMoodAnimation());
 		object.setBehavior(spawner.getAIBehavior());
 		object.setFloatRadius(spawner.getFloatRadius());
+		object.setCreatureId(spawner.getCreatureId());
 		setFlags(object, spawner.getSpawnerFlag());
 		
 		object.moveToContainer(spawner.getSpawnerObject().getParent());
