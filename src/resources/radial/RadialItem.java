@@ -381,12 +381,6 @@ public enum RadialItem {
 		return text;
 	}
 	
-	public boolean isCase(RadialItem item) {
-		if (item == null)
-			return false;
-		return item == this;
-	}
-	
 	/**
 	 * Gets the RadialItem from the selection id. If the item is undefined,
 	 * then NULL is returned

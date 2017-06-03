@@ -40,7 +40,12 @@ import resources.server_info.DataManager;
 
 public class GalacticResourceSpawn implements Persistable {
 	
-	private static final int MAP_SIZE = 16384;
+	private static final int	MAP_SIZE						= 16384;
+	private static final int	MUST_MAP_SIZE					= 8000;
+	private static final int	KASH_MAP_SIZE					= 8192;
+	private static final double	POSITION_GAUSSIAN_FACTOR		= MAP_SIZE / 2 * Math.sqrt(2);
+	private static final double	POSITION_MUST_GAUSSIAN_FACTOR	= MUST_MAP_SIZE / 2 * Math.sqrt(2);
+	private static final double	POSITION_KASH_GAUSSIAN_FACTOR	= KASH_MAP_SIZE / 2 * Math.sqrt(2);
 	
 	// Resource-based
 	private long resourceId;
@@ -66,13 +71,12 @@ public class GalacticResourceSpawn implements Persistable {
 	public void setRandomValues(Terrain terrain) {
 		Random random = new Random();
 		
-		this.minConcentration = random.nextInt(100);
-		this.maxConcentration = random.nextInt(100 - minConcentration) + minConcentration;
+		this.minConcentration = random.nextInt(50);
+		this.maxConcentration = calculateRandomMaxConcentration(random, minConcentration);
 		
 		this.terrain = terrain;
-		this.x = random.nextInt(MAP_SIZE) - MAP_SIZE/2;
-		this.z = random.nextInt(MAP_SIZE) - MAP_SIZE/2;
-		this.radius = (int) (random.nextDouble() * (getMaxRadius() - getMinRadius()) + getMinRadius());
+		setPosition(random, terrain);
+		this.radius = calculateRandomRadius(random);
 		
 		int minSpawnTime = getMinSpawnTime();
 		int maxSpawnTime = getMaxSpawnTime();
@@ -115,12 +119,14 @@ public class GalacticResourceSpawn implements Persistable {
 	public long getEndTime() {
 		return endTime;
 	}
-
+	
 	public int getConcentration(Terrain terrain, double x, double z) {
 		double distance = getDistance(terrain, x, z);
 		if (distance > radius)
 			return 0;
-		return (int) ((1 - distance / radius) * (maxConcentration - minConcentration) + minConcentration);
+		double factor = (1 - distance / radius);
+		factor = factor * factor; // creates a more serious dropoff of concentration
+		return (int) (factor * (maxConcentration - minConcentration) + minConcentration);
 	}
 	
 	public boolean isExpired() {
@@ -136,11 +142,47 @@ public class GalacticResourceSpawn implements Persistable {
 	}
 	
 	private int getMinRadius() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MIN-SPAWN-RADIUS", 100);
+		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MIN-SPAWN-RADIUS", 200);
 	}
 	
 	private int getMaxRadius() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-RADIUS", 1000);
+		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-RADIUS", 500);
+	}
+	
+	private int calculateRandomMaxConcentration(Random random, int min) {
+		double x;
+		do {
+			x = random.nextDouble();
+			x = x * x * 100;
+		} while (x <= min);
+		return (int) x;
+	}
+	
+	private void setPosition(Random random, Terrain terrain) {
+		double angle = random.nextDouble() * 6.283185307;
+		double distance = Math.max(-1, Math.min(1, random.nextGaussian() / 6 + 0.5));
+		if (terrain == Terrain.MUSTAFAR)
+			distance *= POSITION_MUST_GAUSSIAN_FACTOR;
+		else if (terrain == Terrain.KASHYYYK_MAIN)
+			distance *= POSITION_KASH_GAUSSIAN_FACTOR;
+		else
+			distance *= POSITION_GAUSSIAN_FACTOR;
+		this.x = capPosition((int) (Math.cos(angle) * distance));
+		this.z = capPosition((int) (Math.sin(angle) * distance));
+		if (terrain == Terrain.MUSTAFAR) {
+			x += -2880;
+			z += 2976;
+		}
+	}
+	
+	private int calculateRandomRadius(Random random) {
+		double x = random.nextDouble();
+		x = Math.sqrt(x);
+		return (int) (x * (getMaxRadius() - getMinRadius()) + getMinRadius());
+	}
+	
+	private int capPosition(int x) {
+		return Math.max(-MAP_SIZE/2, Math.min(MAP_SIZE/2, x));
 	}
 	
 	@Override

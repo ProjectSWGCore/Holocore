@@ -287,7 +287,7 @@ public final class CorpseService extends Service {
 			Log.e("Cannot delete the corpse of a player!", creatureCorpse);
 		} else {
 			new DestroyObjectIntent(creatureCorpse).broadcast();
-			Log.i("Corpse of NPC %s was deleted from the world", creatureCorpse);
+			Log.d("Corpse of NPC %s was deleted from the world", creatureCorpse);
 		}
 	}
 	
@@ -379,7 +379,7 @@ public final class CorpseService extends Service {
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
 		corpse.setHealth(corpse.getMaxHealth());
-		corpse.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId()));
+		corpse.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
 		
 		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
 		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);

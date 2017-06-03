@@ -194,7 +194,7 @@ public final class StaticItemService extends Service {
 						
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
-								Log.i("Successfully moved %s into container %s", itemName, container);
+								Log.d("Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
 								break;
 							default:

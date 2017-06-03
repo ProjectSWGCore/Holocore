@@ -155,7 +155,7 @@ public final class SkillTemplateService extends Service {
 			flyTextColor = new RGB(Color.BLUE);
 		}
 		
-		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId));
+		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId, ""));
 		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
 		if (skillUp)

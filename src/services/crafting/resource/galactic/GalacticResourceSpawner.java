@@ -34,10 +34,14 @@ import java.util.stream.Collectors;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.debug.Log.LogLevel;
+import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
 
+import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 import services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import services.crafting.resource.raw.RawResource;
+import services.crafting.resource.raw.RawResourceContainer;
 
 public class GalacticResourceSpawner {
 	
@@ -50,9 +54,9 @@ public class GalacticResourceSpawner {
 	
 	private static final Terrain [] BASE_PLANETS = new Terrain[] {
 		Terrain.CORELLIA,	Terrain.DANTOOINE,		Terrain.DATHOMIR,
-		Terrain.ENDOR,		Terrain.KASHYYYK_MAIN,	Terrain.LOK,
-		Terrain.NABOO,		Terrain.RORI,			Terrain.TALUS,
-		Terrain.TATOOINE,	Terrain.YAVIN4
+		Terrain.ENDOR,		Terrain.LOK,			Terrain.NABOO,
+		Terrain.RORI,			Terrain.TALUS,		Terrain.TATOOINE,
+		Terrain.YAVIN4
 	};
 	
 	private final Random random;
@@ -61,6 +65,20 @@ public class GalacticResourceSpawner {
 	public GalacticResourceSpawner() {
 		this.random = new Random();
 		this.resourceIdMax = new AtomicLong(0);
+	}
+	
+	public static void main(String [] args) {
+		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		DataManager.initialize();
+		RawResourceContainer container = new RawResourceContainer();
+		container.loadResources();
+		for (RawResource rawResource : container.getResources()) {
+			GalacticResourceContainer.getContainer().addRawResource(rawResource);
+		}
+		GalacticResourceSpawner spawner = new GalacticResourceSpawner();
+		spawner.initialize();
+		spawner.terminate();
+		DataManager.terminate();
 	}
 	
 	public void initialize() {
@@ -126,12 +144,17 @@ public class GalacticResourceSpawner {
 		int spawned = GalacticResourceContainer.getContainer().getSpawnedGalacticResources(raw);
 		int minTypes = raw.getMinTypes();
 		int maxTypes = raw.getMaxTypes();
-		if (spawned > minTypes)
+		if (spawned >= minTypes)
 			return; // Only respawn once total number spawned in goes below minTypes
-		int targetTypes = random.nextInt(maxTypes - minTypes + 1) + minTypes;
+		int targetTypes = calculateTargetTypes(minTypes, maxTypes);
 		for (int i = spawned; i < targetTypes; i++) {
 			createNewResourceWithSpawns(raw);
 		}
+	}
+	
+	private int calculateTargetTypes(int minTypes, int maxTypes) {
+		double x = random.nextDouble();
+		return (int) (x * x * (maxTypes - minTypes)) + minTypes;
 	}
 	
 	private void createNewResourceWithSpawns(RawResource raw) {
@@ -139,7 +162,6 @@ public class GalacticResourceSpawner {
 		GalacticResource resource = createNewResource(raw);
 		Log.i("Created new resource '%s' with ID %d of type %s with %d spawns per planet", resource.getName(), resource.getId(), raw.getName().getKey(), targetSpawns);
 		Terrain restricted = getRestrictedResource(raw);
-		Log.d("    %s - restricted %s", raw.getName().getKey(), restricted);
 		if (restricted == null) {
 			for (Terrain terrain : BASE_PLANETS) {
 				for (int i = 0; i < targetSpawns; i++) {

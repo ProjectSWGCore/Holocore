@@ -19,7 +19,6 @@ static def getOptions(List<RadialOption> options, Player player, SWGObject targe
 }
 
 static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
-	Log.d("Selection: %s/%s   ITEM_USE: %s/%s", selection, selection.getClass(), RadialItem.ITEM_USE, RadialItem.ITEM_USE.getClass());
 	switch (selection) {
 		case RadialItem.ITEM_USE:
 			def listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.")
