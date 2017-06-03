@@ -36,10 +36,11 @@ import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
 
 public final class Spawner {
-	
+
 	private final Random random;
 	private final Location location;
 	private final int id;
+	private String creatureId;
 	private SWGObject eggObject;
 	private String creatureName;
 	private String[] iffTemplates;
@@ -59,7 +60,15 @@ public final class Spawner {
 		this.random = new Random();
 		this.location = new Location();
 	}
-	
+
+	public void setCreatureId(String creatureId) {
+		this.creatureId = creatureId;
+	}
+
+	public String getCreatureId() {
+		return creatureId;
+	}
+
 	public int getSpawnerId() {
 		return id;
 	}
