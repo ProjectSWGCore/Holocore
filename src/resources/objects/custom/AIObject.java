@@ -39,6 +39,7 @@ public abstract class AIObject extends CreatureObject {
 	private long initialDelay;
 	private long delay;
 	private TimeUnit unit;
+	private String creatureId;
 	
 	public AIObject(long objectId) {
 		super(objectId);
@@ -92,5 +93,12 @@ public abstract class AIObject extends CreatureObject {
 		future.cancel(true);
 		future = null;
 	}
-	
+
+	public String getCreatureId() {
+		return creatureId;
+	}
+
+	public void setCreatureId(String creatureId) {
+		this.creatureId = creatureId;
+	}
 }
