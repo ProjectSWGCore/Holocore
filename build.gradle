@@ -16,22 +16,33 @@ sourceSets {
     }
 	test {
 		java {
-			srcDirs = ['test']
+			srcDirs = ['src', 'test']
 		}
 	}
 }
 
+test {
+	testLogging {
+		events "skipped", "failed" // just good to know in terms of what failed
+	}
+	afterSuite { TestDescriptor td, TestResult tr ->
+		println 'Tests run: ('+tr.getTestCount()+'), Failures: ('+tr.getFailedTestCount()+')' // IMPORTANT - this is required for Lightspeed
+	}
+	include 'main/TestAll.class' // to run only a single test case
+}
+
 dependencies {
 	compile fileTree(dir: 'lib', include: ['*.jar'])
+	testCompile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
 buildscript {
-  repositories {
-    maven {
-      url 'https://plugins.gradle.org/m2/'
-    }
-  }
-  dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
-  }
+	repositories {
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
+	}
 }
