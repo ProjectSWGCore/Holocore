@@ -31,6 +31,10 @@ test {
 	include 'main/TestAll.class' // to run only a single test case
 }
 
+shadowJar{
+	archiveName = "Holocore.${extension}"
+}
+
 dependencies {
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 	testCompile fileTree(dir: 'lib', include: ['*.jar'])
