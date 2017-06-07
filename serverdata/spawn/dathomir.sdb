@@ -754,7 +754,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 300754	DATHOMIR	dat_world	AREA	0	5549.22	127.98	-687.81	0	1	a Singing Mountain clan scout	singing_mtn_clan_scout_84_h_agg_e	Outback	Dathomir	1	FLOAT	idle	0	0	0	0	900	600	2
 300755	DATHOMIR	dat_world	AREA	0	7196.56	537.07	5574.70	0	1	a Singing Mountain clan slave	singing_mtn_clan_slave_85_h_agg_n	Outback	Dathomir	3	FLOAT	idle	0	0	0	0	600	300	6
 300756	DATHOMIR	dat_world	AREA	0	7208.24	533.50	5543.33	0	1	a Nightsister slave	nightsister_slave_86_h_agg_e	Outback	Dathomir	3	FLOAT	idle	0	0	0	0	600	300	6
-300757	DATHOMIR	dat_world	AREA	0	736.25	107.23	4989.38	0	1	a Sith Shadow outlaw	shadow_outlaw_77_h_agg_n	Outback	Dathomir	1	STOP	idle	0	0	0	0	300	120	2
+300757	DATHOMIR	dat_world	AREA	0	736.25	197.80	4989.38	0	1	a Sith Shadow outlaw	shadow_outlaw_77_h_agg_n	Outback	Dathomir	1	STOP	idle	0	0	0	0	300	120	2
 300758	DATHOMIR	dat_world	AREA	0	7436.27	549.65	-3031.61	0	1	a Singing Mountain clan scout	singing_mtn_clan_scout_84_h_agg_e	Outback	Dathomir	1	FLOAT	idle	0	0	0	0	900	600	2
 300759	DATHOMIR	dat_world	AREA	0	7439.00	548.81	-3043.89	0	1	a Singing Mountain clan rancor	rancor_smc_87_c_agg_e	Outback	Dathomir	1	FLOAT	idle	0	0	0	0	900	600	10
 300760	DATHOMIR	dat_world	AREA	0	7480.02	362.93	-912.29	0	1	a Singing Mountain clan outcast	singing_mtn_clan_outcast_82_h_agg_e	Outback	Dathomir	1	FLOAT	idle	0	0	0	0	900	600	2
