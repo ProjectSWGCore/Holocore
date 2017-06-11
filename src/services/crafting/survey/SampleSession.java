@@ -34,6 +34,7 @@ import com.projectswg.common.debug.Log;
 
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
+import resources.Posture;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
 import services.crafting.resource.galactic.GalacticResourceSpawn;
@@ -57,6 +58,7 @@ public class SampleSession {
 	
 	public void startSession() {
 		double concentration = getConcentration(creature);
+		creature.setPosture(Posture.CROUCHED);
 		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
 		creature.sendObserversAndSelf(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 		Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
