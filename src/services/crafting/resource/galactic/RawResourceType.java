@@ -30,11 +30,12 @@ package services.crafting.resource.galactic;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.projectswg.common.data.EnumLookup;
 import com.projectswg.common.data.location.Terrain;
 
 import services.crafting.resource.raw.RawResource;
 
-public enum GalacticResourceType {
+public enum RawResourceType {
 	RESOURCE									("resource", null),
 	ORGANIC										("organic", RESOURCE),
 	CREATURE_RESOURCES							("creature_resources", ORGANIC),
@@ -143,10 +144,12 @@ public enum GalacticResourceType {
 	ENERGY_RENEWABLE_SITE_LIMITED_HYDRON3		("energy_renewable_site_limited_hydron3", ENERGY_RENEWABLE_SITE_LIMITED),
 	ENERGY_RENEWABLE_SITE_LIMITED_GEOTHERMAL	("energy_renewable_site_limited_geothermal", ENERGY_RENEWABLE_SITE_LIMITED);
 	
-	private final String resourceName;
-	private final List<GalacticResourceType> children;
+	private static final EnumLookup<String, RawResourceType> NAME_LOOKUP = new EnumLookup<>(RawResourceType.class, rrt -> rrt.getResourceName());
 	
-	GalacticResourceType(String resourceName, GalacticResourceType parent) {
+	private final String resourceName;
+	private final List<RawResourceType> children;
+	
+	RawResourceType(String resourceName, RawResourceType parent) {
 		this.resourceName = resourceName;
 		this.children = new ArrayList<>();
 		if (parent != null)
@@ -169,7 +172,17 @@ public enum GalacticResourceType {
 		return isSpecificResourceType(this, customExtension, resource);
 	}
 	
-	private static boolean isSpecificResourceType(GalacticResourceType type, String extension, RawResource resource) {
+	public static RawResourceType getRawResourceType(RawResource resource) {
+		while (resource != null) {
+			RawResourceType type = NAME_LOOKUP.getEnum(resource.getName().getKey(), null);
+			if (type != null)
+				return type;
+			resource = resource.getParent();
+		}
+		return RawResourceType.RESOURCE;
+	}
+	
+	private static boolean isSpecificResourceType(RawResourceType type, String extension, RawResource resource) {
 		if (!isResourceNameMatch(resource.getName().getKey(), extension)) {
 			return false;
 		}

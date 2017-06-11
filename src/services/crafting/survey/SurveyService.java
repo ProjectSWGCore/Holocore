@@ -33,12 +33,13 @@ import com.projectswg.common.debug.Log;
 import intents.crafting.survey.SampleResourceIntent;
 import intents.crafting.survey.StartSurveyToolIntent;
 import intents.crafting.survey.StartSurveyingIntent;
+import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
 import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
-import services.crafting.resource.galactic.GalacticResourceType;
+import services.crafting.resource.galactic.RawResourceType;
 import services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import services.crafting.resource.raw.RawResource;
 
@@ -64,13 +65,14 @@ public class SurveyService extends Service {
 		SWGObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
-		GalacticResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
+		RawResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
 		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
 			RawResource rawResource = GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId());
 			if (!surveyToolType.isResourceType(rawResource))
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
+		creature.getOwner().sendPacket(new PlayMusicMessage(0, "sound/item_surveypad_lp.snd", 1, false));
 		creature.getOwner().sendPacket(survey);
 	}
 	
@@ -82,30 +84,31 @@ public class SurveyService extends Service {
 		inProgressSampleManager.startSession(sri.getCreature(), sri.getResource());
 	}
 	
-	private GalacticResourceType getTypeFromSurveyTool(String surveyTool) {
+	private RawResourceType getTypeFromSurveyTool(String surveyTool) {
 		switch (surveyTool) {
 			case "mineral":
-				return GalacticResourceType.MINERAL;
+				return RawResourceType.MINERAL;
 			case "lumber":
-				return GalacticResourceType.FLORA_STRUCTURAL;
+				return RawResourceType.FLORA_STRUCTURAL;
 			case "liquid":
+				return RawResourceType.CHEMICAL;
 			case "moisture":
-				return GalacticResourceType.WATER;
+				return RawResourceType.WATER;
 			case "gas":
 			case "gas_thermal":
-				return GalacticResourceType.GAS;
+				return RawResourceType.GAS;
 			case "wind":
-				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND;
+				return RawResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND;
 			case "solar":
-				return GalacticResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR;
+				return RawResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR;
 			case "inorganic":
-				return GalacticResourceType.INORGANIC;
+				return RawResourceType.INORGANIC;
 			case "organic":
-				return GalacticResourceType.ORGANIC;
+				return RawResourceType.ORGANIC;
 			default:
 				Log.w("Unknokwn survey tool type: %s", surveyTool);
 			case "all":
-				return GalacticResourceType.RESOURCE;
+				return RawResourceType.RESOURCE;
 		}
 	}
 	

@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 
 import resources.encodables.StringId;
+import services.crafting.resource.galactic.RawResourceType;
 
 public class RawResource {
 	
@@ -40,6 +41,7 @@ public class RawResource {
 	private final List<RawResource> children;
 	
 	private RawResource parent;
+	private RawResourceType type;
 	private String crateTemplate;
 	private int minTypes;
 	private int maxTypes;
@@ -50,6 +52,7 @@ public class RawResource {
 	public RawResource(long id) {
 		this.id = id;
 		this.parent = null;
+		this.type = RawResourceType.RESOURCE;
 		this.children = new ArrayList<>();
 		this.crateTemplate = "";
 		this.name = new StringId("resource/resource_names", "");
@@ -69,6 +72,10 @@ public class RawResource {
 	
 	public RawResource getParent() {
 		return parent;
+	}
+	
+	public RawResourceType getResourceType() {
+		return type;
 	}
 	
 	public List<RawResource> getChildren() {
@@ -152,6 +159,7 @@ public class RawResource {
 		}
 		
 		public RawResource build() {
+			resource.type = RawResourceType.getRawResourceType(resource);
 			return resource;
 		}
 		

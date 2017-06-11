@@ -30,6 +30,8 @@ package services.crafting.resource.galactic;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
+import services.crafting.resource.raw.RawResource;
+
 public class GalacticResource implements Persistable {
 	
 	private final GalacticResourceStats stats;
@@ -37,6 +39,7 @@ public class GalacticResource implements Persistable {
 	private long id;
 	private String name;
 	private long rawId;
+	private RawResource rawResource;
 	
 	public GalacticResource() {
 		this(0, "", 0);
@@ -46,6 +49,7 @@ public class GalacticResource implements Persistable {
 		this.id = id;
 		this.name = name;
 		this.rawId = rawResourceId;
+		this.rawResource = null;
 		this.stats = new GalacticResourceStats();
 	}
 	
@@ -65,8 +69,16 @@ public class GalacticResource implements Persistable {
 		return rawId;
 	}
 	
+	public RawResource getRawResource() {
+		return rawResource;
+	}
+	
 	public GalacticResourceStats getStats() {
 		return stats;
+	}
+	
+	public void setRawResource(RawResource rawResource) {
+		this.rawResource = rawResource;
 	}
 	
 	@Override

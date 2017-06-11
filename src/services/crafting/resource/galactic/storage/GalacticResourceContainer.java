@@ -104,6 +104,7 @@ public class GalacticResourceContainer {
 	public void addGalacticResource(GalacticResource resource) {
 		RawResource raw = getRawResource(resource.getRawResourceId());
 		Assert.notNull(raw, "Invalid raw resource ID in GalacticResource!");
+		Assert.test(raw == resource.getRawResource(), "RawResource invalid with galactic resource");
 		Assert.isNull(galacticResources.put(resource.getId(), resource), "Duplicate galactic resource!");
 		synchronized (rawToGalactic) {
 			List<GalacticResource> list = rawToGalactic.get(raw);

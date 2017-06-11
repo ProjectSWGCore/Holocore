@@ -105,6 +105,7 @@ public class GalacticResourceSpawner {
 		long startTime = StandardLog.onStartLoad("galactic resources");
 		List<GalacticResource> resources = loader.loadResources();
 		for (GalacticResource resource : resources) {
+			resource.setRawResource(GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId()));
 			GalacticResourceContainer.getContainer().addGalacticResource(resource);
 			if (resource.getId() > resourceIdMax.get())
 				resourceIdMax.set(resource.getId());
