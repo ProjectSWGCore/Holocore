@@ -13,7 +13,7 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 
 	// Ziggy was using this to test until recruiters are enabled.
 
-	if (args.length() > 0) {
+	if (!args.isEmpty()) {
 		if (args.indexOf("imperial") > -1) {
 			intent = new FactionIntent(creature, PvpFaction.IMPERIAL)
 		} else if (args.indexOf("rebel") > -1) {
