@@ -102,7 +102,7 @@ public class SurveySession {
 			return "sound/item_lumber_tool_survey.snd";
 		if (RawResourceType.GAS.isResourceType(rawResource))
 			return "sound/item_gas_tool_survey.snd";
-		Log.w("Unknown raw resource music file: %s with type %s", rawResource, rawResource.getResourceType());
+		Log.w("Unknown raw resource survey music file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
 	
@@ -118,7 +118,7 @@ public class SurveySession {
 			return "clienteffect/survey_tool_lumber.cef";
 		if (RawResourceType.GAS.isResourceType(rawResource))
 			return "clienteffect/survey_tool_gas.cef";
-		Log.w("Unknown raw resource effect file: %s with type %s", rawResource, rawResource.getResourceType());
+		Log.w("Unknown raw resource survey effect file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
 	

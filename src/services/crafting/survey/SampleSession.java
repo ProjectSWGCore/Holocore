@@ -32,10 +32,14 @@ import java.util.List;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.PlayMusicMessage;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
 import services.crafting.resource.galactic.GalacticResourceSpawn;
+import services.crafting.resource.galactic.RawResourceType;
 import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import services.crafting.resource.raw.RawResource;
 
 public class SampleSession {
 	
@@ -53,6 +57,8 @@ public class SampleSession {
 	
 	public void startSession() {
 		double concentration = getConcentration(creature);
+		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
+		creature.sendObserversAndSelf(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 		Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
 	}
 	
@@ -71,6 +77,38 @@ public class SampleSession {
 			concentration += spawn.getConcentration(terrain, x, z) / 100.0;
 		}
 		return concentration;
+	}
+	
+	private String getMusicFile() {
+		RawResource rawResource = resource.getRawResource();
+		if (RawResourceType.MINERAL.isResourceType(rawResource))
+			return "sound/item_mineral_tool_sample.snd";
+		if (RawResourceType.WATER.isResourceType(rawResource))
+			return "sound/item_moisture_tool_sample.snd";
+		if (RawResourceType.CHEMICAL.isResourceType(rawResource))
+			return "sound/item_liquid_tool_sample.snd";
+		if (RawResourceType.FLORA_STRUCTURAL.isResourceType(rawResource))
+			return "sound/item_lumber_tool_sample.snd";
+		if (RawResourceType.GAS.isResourceType(rawResource))
+			return "sound/item_gas_tool_sample.snd";
+		Log.w("Unknown raw resource sample music file: %s with type %s", rawResource, rawResource.getResourceType());
+		return "";
+	}
+	
+	private String getEffectFile() {
+		RawResource rawResource = resource.getRawResource();
+		if (RawResourceType.MINERAL.isResourceType(rawResource))
+			return "clienteffect/survey_sample_mineral.cef";
+		if (RawResourceType.WATER.isResourceType(rawResource))
+			return "clienteffect/survey_sample_moisture.cef";
+		if (RawResourceType.CHEMICAL.isResourceType(rawResource))
+			return "clienteffect/survey_sample_liquid.cef";
+		if (RawResourceType.FLORA_STRUCTURAL.isResourceType(rawResource))
+			return "clienteffect/survey_sample_lumber.cef";
+		if (RawResourceType.GAS.isResourceType(rawResource))
+			return "clienteffect/survey_sample_gas.cef";
+		Log.w("Unknown raw resource sample effect file: %s with type %s", rawResource, rawResource.getResourceType());
+		return "";
 	}
 	
 }
