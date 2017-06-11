@@ -132,7 +132,6 @@ public class TestTravelHelper {
 		helper.grantTicket(imperialBase, coronet, creature);
 		Assert.assertEquals(imperialBase, helper.getNearestTravelPoint(creature));
 		Assert.assertEquals(1, creature.getSlottedObject("inventory").getContainedObjects().size());
-		System.out.println(creature.getSlottedObject("inventory").getContainedObjects());
 		List<SWGObject> tickets = helper.getTickets(creature);
 		Assert.assertEquals(1, tickets.size());
 		

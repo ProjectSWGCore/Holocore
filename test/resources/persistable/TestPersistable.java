@@ -35,7 +35,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	TestSimplePersistable.class,
 	TestSWGPersistable.class,
-	TestMailPersistable.class
+	TestMailPersistable.class,
+	TestResourcePersistable.class
 })
 public class TestPersistable {
 	

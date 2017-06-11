@@ -39,112 +39,61 @@ import org.junit.runners.JUnit4;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
 
-import resources.Race;
-import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
-import services.objects.ObjectCreator;
+import services.crafting.resource.galactic.GalacticResource;
 
 @RunWith(JUnit4.class)
-public class TestSWGPersistable {
+public class TestResourcePersistable {
 	
 	@Test
-	public void testCreatureObject() throws IOException {
-		test(Race.HUMAN_MALE.getFilename());
+	public void testGalacticResourcePersistable() throws IOException {
+		GalacticResource res = new GalacticResource(1, "MYRESOURCE", 15);
+		res.generateRandomStats();
+		test(res);
+		res = new GalacticResource(200, "Test", 100);
+		res.generateRandomStats();
+		test(res);
+		for (int i = 0; i < 50; i++) {
+			res.generateRandomStats();
+			test(res);
+		}
 	}
 	
-	@Test
-	public void testPlayerObject() throws IOException {
-		test("object/player/shared_player.iff");
+	private void test(GalacticResource resource) throws IOException {
+		byte [] written = write(resource);
+		GalacticResource read = read(written);
+		test(resource, read);
 	}
 	
-	@Test
-	public void testTangibleObject() throws IOException {
-		test("object/tangible/inventory/shared_character_inventory.iff");
+	private void test(GalacticResource write, GalacticResource read) {
+		Assert.assertEquals(write.getId(), read.getId());
+		Assert.assertEquals(write.getName(), read.getName());
+		Assert.assertEquals(write.getRawResourceId(), read.getRawResourceId());
+		Assert.assertEquals(write.getStats().getColdResistance(), read.getStats().getColdResistance());
+		Assert.assertEquals(write.getStats().getConductivity(), read.getStats().getConductivity());
+		Assert.assertEquals(write.getStats().getDecayResistance(), read.getStats().getDecayResistance());
+		Assert.assertEquals(write.getStats().getEntangleResistance(), read.getStats().getEntangleResistance());
+		Assert.assertEquals(write.getStats().getFlavor(), read.getStats().getFlavor());
+		Assert.assertEquals(write.getStats().getHeatResistance(), read.getStats().getHeatResistance());
+		Assert.assertEquals(write.getStats().getMalleability(), read.getStats().getMalleability());
+		Assert.assertEquals(write.getStats().getOverallQuality(), read.getStats().getOverallQuality());
+		Assert.assertEquals(write.getStats().getPotentialEnergy(), read.getStats().getPotentialEnergy());
+		Assert.assertEquals(write.getStats().getShockResistance(), read.getStats().getShockResistance());
+		Assert.assertEquals(write.getStats().getUnitToughness(), read.getStats().getUnitToughness());
 	}
 	
-	@Test
-	public void testWeaponObject() throws IOException {
-		test("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
-	}
-	
-	@Test
-	public void testResourceObject() throws IOException {
-		test("object/resource_container/shared_resource_container_energy_gas.iff");
-	}
-	
-	@Test
-	public void testWaypointObject() throws IOException {
-		test("object/waypoint/shared_world_waypoint_orange.iff");
-	}
-	
-	@Test
-	public void testMissionObject() throws IOException {
-		test("object/mission/shared_mission_object.iff");
-	}
-	
-	@Test
-	public void testFactoryObject() throws IOException {
-		test("object/factory/shared_factory_crate_weapon.iff");
-	}
-	
-	@Test
-	public void testInstallationObject() throws IOException {
-		test("object/installation/generators/shared_power_generator_wind_style_1.iff");
-	}
-	
-	@Test
-	public void testShipObject() throws IOException {
-		test("object/ship/shared_grievous_starship.iff");
-	}
-	
-	@Test
-	public void testManufactureObject() throws IOException {
-		test("object/manufacture_schematic/shared_generic_schematic.iff");
-	}
-	
-	@Test
-	public void testBuildingObject() throws IOException {
-		BuildingObject expected = (BuildingObject) ObjectCreator.createObjectFromTemplate("object/building/tatooine/shared_palace_tatooine_jabba.iff");
-		expected.populateCells();
-		test(expected);
-	}
-	
-	@Test
-	public void testCellObject() throws IOException {
-		test("object/cell/shared_cell.iff");
-	}
-	
-	private void test(String template) throws IOException {
-		test(ObjectCreator.createObjectFromTemplate(template));
-	}
-	
-	private void test(SWGObject object) throws IOException {
-		byte [] written = write(object);
-		SWGObject read = read(written);
-		test(object, read);
-	}
-	
-	private void test(SWGObject expected, SWGObject actual) {
-		Assert.assertNotNull(actual);
-		Assert.assertTrue("actual instanceof expected", expected.getClass().isAssignableFrom(actual.getClass()));
-		Assert.assertEquals("expected.equals(actual)", expected, actual);
-		Assert.assertEquals("contained objects", expected.getContainedObjects(), actual.getContainedObjects());
-		Assert.assertEquals("slots", expected.getSlots(), actual.getSlots());
-	}
-	
-	private byte [] write(SWGObject obj) throws IOException {
+	private byte [] write(GalacticResource mail) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		OutputPersistenceStream os = new OutputPersistenceStream(baos);
-		os.write(obj, SWGObjectFactory::save);
+		os.write(mail, GalacticResource::save);
 		os.close();
 		return baos.toByteArray();
 	}
 	
-	private SWGObject read(byte [] data) throws IOException {
+	private GalacticResource read(byte [] data) throws IOException {
 		try (InputPersistenceStream is = new InputPersistenceStream(new ByteArrayInputStream(data))) {
-			SWGObject obj = is.read(SWGObjectFactory::create);
+			GalacticResource mail = is.read(GalacticResource::create);
 			Assert.assertEquals(0, is.available());
-			return obj;
+			return mail;
 		}
 	}
 	

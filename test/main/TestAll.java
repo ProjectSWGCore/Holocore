@@ -27,17 +27,17 @@
 ***********************************************************************************/
 package main;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.debug.Log.LogLevel;
-import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
+import com.projectswg.common.control.IntentManager;
 
 import network.encryption.TestEncryption;
 import resources.TestResources;
+import resources.server_info.DataManager;
 import services.TestServices;
 
 @RunWith(Suite.class)
@@ -50,7 +50,14 @@ public class TestAll {
 	
 	@BeforeClass
 	public static void initLog() {
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		IntentManager.getInstance().initialize();
+		DataManager.initialize();
+	}
+	
+	@AfterClass
+	public static void terminateLog() {
+		DataManager.terminate();
+		IntentManager.getInstance().terminate();
 	}
 	
 }

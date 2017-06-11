@@ -27,13 +27,10 @@
  ***********************************************************************************/
 package services;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import resources.server_info.DataManager;
 import services.crafting.TestCrafting;
 import services.galaxy.TestGalaxy;
 import services.player.TestPlayer;
@@ -45,15 +42,5 @@ import services.player.TestPlayer;
 	TestGalaxy.class
 })
 public class TestServices {
-	
-	@BeforeClass
-	public static void setupDataManager() {
-		DataManager.initialize();
-	}
-	
-	@AfterClass
-	public static void closeDataManager() {
-		DataManager.terminate();
-	}
 	
 }
