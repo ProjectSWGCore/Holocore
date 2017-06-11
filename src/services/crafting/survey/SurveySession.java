@@ -30,13 +30,18 @@ package services.crafting.survey;
 import java.util.List;
 
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
 
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.crafting.surveying.SurveyMessage;
 import network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
 import services.crafting.resource.galactic.GalacticResourceSpawn;
+import services.crafting.resource.galactic.RawResourceType;
 import services.crafting.resource.galactic.storage.GalacticResourceContainer;
+import services.crafting.resource.raw.RawResource;
 
 public class SurveySession {
 	
@@ -56,6 +61,8 @@ public class SurveySession {
 		SurveyMessage surveyMessage = new SurveyMessage();
 		loadResourcePoints(surveyMessage, creature, resource, 320);
 		creature.getOwner().sendPacket(surveyMessage);
+		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
+		creature.sendObserversAndSelf(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
 	
 	public void stopSession() {
@@ -81,6 +88,38 @@ public class SurveySession {
 			concentration += spawn.getConcentration(terrain, x, z) / 100.0;
 		}
 		return concentration;
+	}
+	
+	private String getMusicFile() {
+		RawResource rawResource = resource.getRawResource();
+		if (RawResourceType.MINERAL.isResourceType(rawResource))
+			return "sound/item_mineral_tool_survey.snd";
+		if (RawResourceType.WATER.isResourceType(rawResource))
+			return "sound/item_moisture_tool_survey.snd";
+		if (RawResourceType.CHEMICAL.isResourceType(rawResource))
+			return "sound/item_liquid_tool_survey.snd";
+		if (RawResourceType.FLORA_STRUCTURAL.isResourceType(rawResource))
+			return "sound/item_lumber_tool_survey.snd";
+		if (RawResourceType.GAS.isResourceType(rawResource))
+			return "sound/item_gas_tool_survey.snd";
+		Log.w("Unknown raw resource music file: %s with type %s", rawResource, rawResource.getResourceType());
+		return "";
+	}
+	
+	private String getEffectFile() {
+		RawResource rawResource = resource.getRawResource();
+		if (RawResourceType.MINERAL.isResourceType(rawResource))
+			return "clienteffect/survey_tool_mineral.cef";
+		if (RawResourceType.WATER.isResourceType(rawResource))
+			return "clienteffect/survey_tool_moisture.cef";
+		if (RawResourceType.CHEMICAL.isResourceType(rawResource))
+			return "clienteffect/survey_tool_liquid.cef";
+		if (RawResourceType.FLORA_STRUCTURAL.isResourceType(rawResource))
+			return "clienteffect/survey_tool_lumber.cef";
+		if (RawResourceType.GAS.isResourceType(rawResource))
+			return "clienteffect/survey_tool_gas.cef";
+		Log.w("Unknown raw resource effect file: %s with type %s", rawResource, rawResource.getResourceType());
+		return "";
 	}
 	
 }
