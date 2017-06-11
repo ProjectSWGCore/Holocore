@@ -180,6 +180,7 @@ public class GalacticResourceSpawner {
 		long newId = resourceIdMax.incrementAndGet();
 		String newName = createRandomName(raw) + " " + newId;
 		GalacticResource resource = new GalacticResource(newId, newName, raw.getId());
+		resource.setRawResource(raw);
 		GalacticResourceContainer.getContainer().addGalacticResource(resource);
 		return resource;
 	}
