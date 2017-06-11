@@ -30,6 +30,7 @@ package services.crafting.survey;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Log;
 
+import intents.crafting.survey.SampleResourceIntent;
 import intents.crafting.survey.StartSurveyToolIntent;
 import intents.crafting.survey.StartSurveyingIntent;
 import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
@@ -47,19 +48,21 @@ import services.crafting.resource.raw.RawResource;
 public class SurveyService extends Service {
 	
 	private final InProgressSurveyManager inProgressSurveyManager;
+	private final InProgressSampleManager inProgressSampleManager;
 	
 	public SurveyService() {
 		this.inProgressSurveyManager = new InProgressSurveyManager();
+		this.inProgressSampleManager = new InProgressSampleManager();
 		
 		registerForIntent(StartSurveyToolIntent.class, ssti -> handleSurveyToolOpened(ssti));
 		registerForIntent(StartSurveyingIntent.class, ssi -> handleStartSurveyingIntent(ssi));
+		registerForIntent(SampleResourceIntent.class, sri -> handleStartSamplingIntent(sri));
 	}
 	
 	private void handleSurveyToolOpened(StartSurveyToolIntent ssti) {
 		CreatureObject creature = ssti.getCreature();
 		SWGObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
-		Log.d("%s starting survey session for %s", creature.getObjectName(), resourceType);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
 		GalacticResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
 		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
@@ -73,6 +76,10 @@ public class SurveyService extends Service {
 	
 	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
 		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getResource());
+	}
+	
+	private void handleStartSamplingIntent(SampleResourceIntent sri) {
+		inProgressSampleManager.startSession(sri.getCreature(), sri.getResource());
 	}
 	
 	private GalacticResourceType getTypeFromSurveyTool(String surveyTool) {

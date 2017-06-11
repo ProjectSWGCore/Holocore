@@ -25,93 +25,34 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.crafting.resource.galactic;
+package services.crafting.survey;
 
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GalacticResource implements Persistable {
+import resources.objects.creature.CreatureObject;
+import services.crafting.resource.galactic.GalacticResource;
+
+public class InProgressSampleManager {
 	
-	private final GalacticResourceStats stats;
+	private final Map<CreatureObject, SampleSession> surveySessions;
 	
-	private long id;
-	private String name;
-	private long rawId;
-	
-	public GalacticResource() {
-		this(0, "", 0);
+	public InProgressSampleManager() {
+		this.surveySessions = new HashMap<>();
 	}
 	
-	public GalacticResource(long id, String name, long rawResourceId) {
-		this.id = id;
-		this.name = name;
-		this.rawId = rawResourceId;
-		this.stats = new GalacticResourceStats();
-	}
-	
-	public void generateRandomStats() {
-		stats.generateRandomStats();
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public long getRawResourceId() {
-		return rawId;
-	}
-	
-	public GalacticResourceStats getStats() {
-		return stats;
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addLong(id);
-		stream.addAscii(name);
-		stream.addLong(rawId);
-		stats.save(stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		id = stream.getLong();
-		name = stream.getAscii();
-		rawId = stream.getLong();
-		stats.read(stream);
-	}
-	
-	@Override
-	public String toString() {
-		return "GalacticResource[ID=" + id + "  NAME='" + name + "']";
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (!(o instanceof GalacticResource))
-			return false;
-		return ((GalacticResource) o).id == id && ((GalacticResource) o).name.equals(name);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Long.hashCode(id);
-	}
-	
-	public static GalacticResource create(NetBufferStream stream) {
-		GalacticResource resource = new GalacticResource();
-		resource.read(stream);
-		return resource;
-	}
-	
-	public void save(NetBufferStream stream, GalacticResource resource) {
-		resource.save(stream);
+	public void startSession(CreatureObject creature, GalacticResource resource) {
+		SampleSession session;
+		synchronized (surveySessions) {
+			session = surveySessions.get(creature);
+			if (session == null)
+				surveySessions.put(creature, session = new SampleSession(creature, resource));
+			if (!session.getResource().equals(resource)) {
+				session.stopSession();
+				surveySessions.put(creature, session = new SampleSession(creature, resource));
+			}
+		}
+		session.startSession();
 	}
 	
 }
