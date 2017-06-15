@@ -188,7 +188,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject obj = i.getObject();
 		Assert.notNull(obj);
 		Assert.notNull(obj.getTerrain());
-		moveObject(obj, i.getContainer(), obj.getLocation());
+		transferContainers(obj, i.getContainer());
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Player player, Location loc, SWGObject parent) {
@@ -303,16 +303,18 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			awarenessHandler.moveObject(obj, parent, requestedLocation);
 	}
 	
+	private void transferContainers(SWGObject obj, SWGObject newContainer) {
+		awarenessHandler.transferContainers(obj, newContainer);
+	}
+	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		SWGObject oldParent = obj.getParent();
-		Location oldLocation = obj.getLocation();
 		moveObject(obj, parent, requestedLocation);
 		if (parent == null)
 			dataTransformHandler.handleMove(obj, speed, update);
 		else
 			dataTransformHandler.handleMove(obj, parent, speed, update);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
-			new PlayerTransformedIntent((CreatureObject) obj, oldParent, parent, oldLocation, requestedLocation).broadcast();
+			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
 	}
 	
 	private void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {

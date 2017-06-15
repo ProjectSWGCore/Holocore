@@ -31,8 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
-import com.projectswg.common.concurrency.SynchronizedSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -46,7 +45,7 @@ class TerrainMapChunk {
 	private final double maxZ;
 	
 	public TerrainMapChunk(double minX, double minZ, double maxX, double maxZ) {
-		objects = new SynchronizedSet<>(); // There will be some expanding and shrinking
+		objects = new CopyOnWriteArraySet<>(); // There will be some expanding and shrinking
 		this.minX = minX;
 		this.minZ = minZ;
 		this.maxX = maxX;
@@ -79,11 +78,9 @@ class TerrainMapChunk {
 	
 	public void getWithinAwareness(SWGObject obj, Collection<SWGObject> withinRange) {
 		double loadRange = obj.getLoadRange();
-		synchronized (objects) {
-			for (SWGObject test : objects) {
-				if (isValidWithinRange(obj, test, loadRange))
-					withinRange.add(test);
-			}
+		for (SWGObject test : objects) {
+			if (isValidWithinRange(obj, test, loadRange))
+				withinRange.add(test);
 		}
 	}
 	

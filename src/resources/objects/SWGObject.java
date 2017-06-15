@@ -29,17 +29,19 @@ package resources.objects;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.concurrency.SynchronizedSet;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -79,11 +81,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
-	private final Set<SWGObject>					containedObjects= new SynchronizedSet<>();
+	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
 	private final Map <String, SWGObject>			slots			= new SynchronizedMap<>();
 	private final Map <String, String>				attributes		= new SynchronizedMap<>(new LinkedHashMap<>());
 	private final ObjectAware						awareness		= new ObjectAware(this);
-	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new SynchronizedMap<>();
+	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new ConcurrentHashMap<>();
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
@@ -121,12 +123,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void addObject(SWGObject object) {
 		object.setSlotArrangement(getArrangementId(object));
 		if (object.getSlotArrangement() == -1) {
-			synchronized (containedObjects) {
-				containedObjects.add(object);
-				
-				// We need to adjust the volume of our container accordingly!
-				setVolume(getVolume() + object.getVolume() + 1);
-			}
+			containedObjects.add(object);
+			
+			// We need to adjust the volume of our container accordingly!
+			setVolume(getVolume() + object.getVolume() + 1);
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
 				setSlot(requiredSlot, object);
@@ -143,12 +143,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 */
 	protected void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
-			synchronized (containedObjects) {
-				containedObjects.remove(object);
-				
-				// We need to adjust the volume of our container accordingly!
-				setVolume(getVolume() - object.getVolume() - 1);
-			}
+			containedObjects.remove(object);
+			
+			// We need to adjust the volume of our container accordingly!
+			setVolume(getVolume() - object.getVolume() - 1);
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
 				setSlot(requiredSlot, null);
@@ -198,7 +196,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
 		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
-		new ContainerTransferIntent(this, container).broadcast();
+		if (parent != container)
+			new ContainerTransferIntent(this, container).broadcast();
 		return ContainerResult.SUCCESS;
 	}
 
@@ -275,9 +274,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
 	 */
 	public SWGObject getSlottedObject(String slotName) {
-		synchronized (slots) {
-			return slots.get(slotName);
-		}
+		return slots.get(slotName);
 	}
 
 	/**
@@ -286,21 +283,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		synchronized (containedObjects) {
-			return new ArrayList<>(containedObjects);
-		}
+		return Collections.unmodifiableSet(containedObjects);
 	}
 
 	public boolean hasSlot(String slotName) {
-		synchronized (slots) {
-			return slots.containsKey(slotName);
-		}
+		return slots.containsKey(slotName);
 	}
 	
 	public void setSlot(String name, SWGObject value) {
-		synchronized (slots) {
-			slots.put(name, value);
-		}
+		slots.put(name, value);
 	}
 
 	public Map<String, SWGObject> getSlots() {
@@ -358,16 +349,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void updateChildrenTerrain() {
 		Terrain terrain = getTerrain();
-		synchronized (containedObjects) {
-			for (SWGObject child : containedObjects) {
-				child.setTerrain(terrain);
-			}
+		for (SWGObject child : containedObjects) {
+			child.setTerrain(terrain);
 		}
-		synchronized (slots) {
-			for (SWGObject child : slots.values()) {
-				if (child != null)
-					child.setTerrain(terrain);
-			}
+		for (SWGObject child : slots.values()) {
+			if (child != null)
+				child.setTerrain(terrain);
 		}
 	}
 	
@@ -598,14 +585,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public double getLoadRange() {
 		double bubble = getPrefLoadRange();
-		synchronized (containedObjects) {
-			for (SWGObject contained : containedObjects) {
-				double x = contained.getX();
-				double z = contained.getZ();
-				double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
-				if (dist > bubble)
-					bubble = dist;
-			}
+		for (SWGObject contained : containedObjects) {
+			double x = contained.getX();
+			double z = contained.getZ();
+			double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
+			if (dist > bubble)
+				bubble = dist;
 		}
 		return bubble;
 	}
@@ -628,10 +613,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return Arrangement ID for the object
 	 */
 	public int getArrangementId(SWGObject object) {
-		synchronized (slots) {
-			if (slots.size() == 0 || object.getArrangement() == null)
-				return -1;
-		}
+		if (slots.size() == 0 || object.getArrangement() == null)
+			return -1;
 
 		int arrangementId = 4;
 		int filledId = -1;
@@ -901,21 +884,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private void createChildrenObjects(Player target) {
-		synchronized (slots) {
-			for (SWGObject slotObject : slots.values()) {
-				if (slotObject != null) {
-					slotObject.createObject(target);
-				}
+		for (SWGObject slotObject : slots.values()) {
+			if (slotObject != null) {
+				slotObject.createObject(target);
 			}
 		}
 		
-		synchronized (containedObjects) {
-			for (SWGObject containedObject : containedObjects) {
-				Assert.notNull(containedObject);
-				if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
-					continue; // If it's a player, but that's logged out
-				containedObject.createObject(target);
-			}
+		for (SWGObject containedObject : containedObjects) {
+			Assert.notNull(containedObject);
+			if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
+				continue; // If it's a player, but that's logged out
+			containedObject.createObject(target);
 		}
 	}
 	
@@ -1034,14 +1013,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				stream.addAscii(e.getValue());
 			});
 		}
-		Set<SWGObject> contained;
-		synchronized (containedObjects) {
-			contained = new HashSet<>(containedObjects);
-		}
-		synchronized (slots) {
-			contained.addAll(slots.values());
-			contained.remove(null);
-		}
+		Set<SWGObject> contained = new HashSet<>(containedObjects);
+		contained.addAll(slots.values());
+		contained.remove(null);
 		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
 	}
 	

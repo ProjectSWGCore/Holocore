@@ -142,7 +142,8 @@ public class TestAwarenessHandler {
 			awaitCallbacks(awareness);
 			callback.testAssert(0, 0, 1, 0);
 			callback.set(0, 0, 0, 0);
-			awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
+			creature.setPosition(Terrain.TATOOINE, 0, 0, 0);
+			awareness.transferContainers(creature, starport.getCellByNumber(1));
 			awaitCallbacks(awareness);
 			callback.testAssert(0, 0, 0, 0);
 		}
