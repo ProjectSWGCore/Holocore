@@ -73,7 +73,7 @@ public class AwarenessHandler implements AutoCloseable {
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
 		// Remove from previous awareness
-		if (obj.getTerrain() != requestedLocation.getTerrain()) {
+		if (obj.getTerrain() != requestedLocation.getTerrain() && obj.getTerrain() != null) {
 			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
 			if (oldTerrainMap != null)
 				oldTerrainMap.removeWithoutUpdate(obj);
