@@ -109,32 +109,6 @@ public class AwarenessHandler implements AutoCloseable {
 		obj.resetAwareness();
 	}
 	
-	public void transferContainers(SWGObject obj, SWGObject newContainer) {
-		// Remove from previous awareness
-		TerrainMap oldMap = getTerrainMap(obj.getTerrain());
-		if (oldMap != null)
-			oldMap.removeWithoutUpdate(obj);
-		// Update location
-		if (obj.getParent() != newContainer) {
-			obj.moveToContainer(newContainer);
-			obj.onObjectMoved();
-			// Update awareness
-			if (newContainer == null) {
-				Location loc = obj.getLocation();
-				if (obj.getTerrain() != Terrain.GONE) {
-					TerrainMap map = getTerrainMap(loc.getTerrain());
-					if (map != null) {
-						map.moveWithinMap(obj);
-					} else {
-						Log.e("Unknown terrain: %s", loc.getTerrain());
-					}
-				}
-			} else {
-				obj.resetAwareness();
-			}
-		}
-	}
-	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
 		if (obj.getTerrain() != Terrain.GONE) {
 			TerrainMap map = getTerrainMap(obj);

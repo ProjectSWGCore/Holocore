@@ -188,7 +188,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject obj = i.getObject();
 		Assert.notNull(obj);
 		Assert.notNull(obj.getTerrain());
-		transferContainers(obj, i.getContainer());
+		moveObject(obj, i.getContainer(), obj.getLocation());
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Player player, Location loc, SWGObject parent) {
@@ -301,10 +301,6 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			awarenessHandler.moveObject(obj, requestedLocation);
 		else
 			awarenessHandler.moveObject(obj, parent, requestedLocation);
-	}
-	
-	private void transferContainers(SWGObject obj, SWGObject newContainer) {
-		awarenessHandler.transferContainers(obj, newContainer);
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
