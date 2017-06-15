@@ -30,6 +30,7 @@ package main;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Thread.State;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ import org.junit.runner.notification.Failure;
 
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.control.IntentManager.IntentSpeedRecord;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.debug.Log.LogLevel;
 import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
@@ -129,6 +131,16 @@ public class ProjectSWG {
 		Log.i("    Threads: %d", threads.size());
 		for (Thread thread : threads) {
 			Log.i("        Thread: %s", thread.getName());
+		}
+		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
+		Collections.sort(intentTimes);
+		Log.i("    Intent Times: [%d]", intentTimes.size());
+		Log.i("        %-30s%-40s%-10s%s", "Intent", "Receiver", "Count", "Time");
+		for (IntentSpeedRecord record : intentTimes) {
+			String receiverName = record.getConsumer().getClass().getName();
+			if (receiverName.indexOf('$') != -1)
+				receiverName = receiverName.substring(0, receiverName.indexOf('$'));
+			Log.i("        %-30s%-40s%-10s%.6fms", record.getIntent().getSimpleName(), receiverName, Long.toString(record.getCount()), record.getTime() / 1E6);
 		}
 	}
 	
