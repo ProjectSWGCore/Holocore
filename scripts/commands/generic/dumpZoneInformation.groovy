@@ -24,7 +24,7 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 				IntentFactory.sendSystemMessage(player, "  Parent ID/Type: " + parent.getObjectId() + " / " + parent.getClass().getSimpleName())
 				IntentFactory.sendSystemMessage(player, "  Parent Template: " + parent.getTemplate())
 			}
-			grandparent = parent.getParent()
+			def grandparent = parent.getParent()
 			if (grandparent != null) {
 				IntentFactory.sendSystemMessage(player, "    Grandparent ID/Type: " + grandparent.getObjectId() + " / " + grandparent.getClass().getSimpleName())
 				IntentFactory.sendSystemMessage(player, "    Grandparent Template: " + grandparent.getTemplate())
@@ -34,13 +34,13 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 		def creature = player.getCreatureObject()
 		def parent = creature.getParent()
 		if (parent != null) {
-			grandparent = parent.getParent()
+			def grandparent = parent.getParent()
 			if (grandparent != null) {
 				if (grandparent instanceof BuildingObject) {
 					def cells = grandparent.getCells()
 					IntentFactory.sendSystemMessage(player, "Cell Count: " + cells.size())
-					for (i = 0; i < cells.size(); i++) {
-						cell = cells.get(i)
+					for (int i = 0; i < cells.size(); i++) {
+						def cell = cells.get(i)
 						IntentFactory.sendSystemMessage(player, "    " + cell.getNumber() + " / " + cell.getCellName())
 					}
 				} else {
