@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedList;
@@ -47,7 +48,9 @@ import com.projectswg.common.network.NetBuffer;
 import network.packets.swg.zone.baselines.Baseline;
 import resources.objects.SWGObject;
 
-public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
+public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final int view;
 	private final int updateType;
