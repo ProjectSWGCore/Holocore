@@ -39,6 +39,7 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 	TestAware.class,
 	TestTerrainMapChunk.class,
 	TestTerrainMap.class,
+	TestObjectAwareness.class
 //	TestAwarenessHandler.class
 })
 public class TestAwareness {

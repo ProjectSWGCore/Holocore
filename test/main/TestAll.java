@@ -39,6 +39,7 @@ import network.encryption.TestEncryption;
 import resources.TestResources;
 import resources.server_info.DataManager;
 import services.TestServices;
+import utilities.ScheduledUtilities;
 
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -50,7 +51,6 @@ public class TestAll {
 	
 	@BeforeClass
 	public static void initLog() {
-		IntentManager.getInstance().initialize();
 		DataManager.initialize();
 	}
 	
@@ -58,6 +58,7 @@ public class TestAll {
 	public static void terminateLog() {
 		DataManager.terminate();
 		IntentManager.getInstance().terminate();
+		ScheduledUtilities.shutdown();
 	}
 	
 }
