@@ -113,13 +113,14 @@ public class ProjectSWG {
 	}
 	
 	private static void startupStaticClasses() {
-		DataManager.initialize();
+		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()*10));
 		IntentManager.getInstance().initialize();
+		DataManager.initialize();
 	}
 	
 	private static void shutdownStaticClasses() {
-		IntentManager.getInstance().terminate();
 		DataManager.terminate();
+		IntentManager.getInstance().terminate();
 	}
 	
 	private static void printFinalPswgState() {

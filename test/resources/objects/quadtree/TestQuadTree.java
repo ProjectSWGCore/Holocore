@@ -29,6 +29,7 @@ package resources.objects.quadtree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,10 +55,15 @@ public class TestQuadTree {
 		Assert.assertArrayEquals(new Double[]{10.0, 5.0, 2.5}, vals);
 		Assert.assertEquals(3, tree.remove(0, 0));
 		Assert.assertNull(tree.getIgnoreCollisions(0, 0));
+		
+		Random random = new Random();
+		double x, y, v;
 		for (int i = 0; i < 1000; i++) {
-			float x = (float) (Math.random() * 10);
-			float y = (float) (Math.random() * 10);
-			double v = Math.random() * 1000;
+			do {
+				x = random.nextDouble() * 10;
+				y = random.nextDouble() * 10;
+				v = random.nextDouble() * 1000;
+			} while (tree.getIgnoreCollisions(x, y) != null);
 			tree.put(x, y, v);
 			Assert.assertEquals(v, tree.getIgnoreCollisions(x, y), 1E-10);
 			tree.remove(x, y);

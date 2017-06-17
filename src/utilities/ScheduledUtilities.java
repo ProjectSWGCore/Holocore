@@ -66,7 +66,8 @@ public class ScheduledUtilities {
 	public static void shutdown() {
 		synchronized (mutex) {
 			if (executor != null) {
-				executor.shutdown();
+				executor.shutdownNow();
+				executor = null;
 			}
 		}
 	}

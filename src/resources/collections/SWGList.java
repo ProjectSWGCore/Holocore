@@ -32,6 +32,7 @@ import java.nio.ByteOrder;
 import java.util.AbstractList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedList;
@@ -51,7 +52,9 @@ import resources.objects.SWGObject;
  * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic
  *            type.
  */
-public class SWGList<E> extends SynchronizedList<E> implements Encodable {
+public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final StringType strType;
 	private final int view;

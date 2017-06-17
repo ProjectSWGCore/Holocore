@@ -158,6 +158,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		disappearObject(obj, true, true);
 		obj.moveToContainer(null);
 		obj.setPosition(Terrain.GONE, 0, 0, 0);
+		obj.clearObjectsAware();
+		obj.clearCustomAware(true);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
