@@ -4,7 +4,7 @@ import resources.player.Player
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if (target === null) {
+	if (target == null) {
 		return
 	}
 
