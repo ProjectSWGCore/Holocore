@@ -356,8 +356,8 @@ public final class LootService extends Service {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
 
-					new ObjectCreatedIntent(object).broadcast();
 					object.moveToContainer(lootInventory);
+					new ObjectCreatedIntent(object).broadcast();
 				} else {
 					new CreateStaticItemIntent(requester, lootInventory, new StaticItemService.ObjectCreationHandler() {
 						@Override
