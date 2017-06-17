@@ -5,7 +5,7 @@ import resources.player.Player
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if (target != null && (args == null || args.length() == 0)) {
+	if (target != null && (args == null || args.isEmpty())) {
 		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_KICK, player, target as CreatureObject).broadcast()
 	}
 }
