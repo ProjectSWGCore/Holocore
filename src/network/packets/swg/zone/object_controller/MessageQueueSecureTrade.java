@@ -27,10 +27,7 @@ public class MessageQueueSecureTrade extends ObjectController {
 		decodeHeader(data);
 		tradeId = data.getInt();
 		trader = data.getLong();
-		reciever = data.getLong();
-		
-		
-		
+		reciever = data.getLong();		
 	}
 
 	@Override
