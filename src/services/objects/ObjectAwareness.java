@@ -155,11 +155,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		disappearObject(obj, true, true);
 		obj.moveToContainer(null);
+		disappearObject(obj, true, true);
 		obj.setPosition(Terrain.GONE, 0, 0, 0);
-		obj.clearObjectsAware();
-		obj.clearCustomAware(true);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -317,6 +315,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
 		awarenessHandler.disappearObject(obj, disappearObjects, disappearCustom);
+		obj.clearObjectsAware();
+		obj.clearCustomAware(true);
 	}
 	
 }

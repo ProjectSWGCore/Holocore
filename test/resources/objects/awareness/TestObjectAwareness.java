@@ -39,11 +39,13 @@ import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.IntentManager;
 import com.projectswg.common.data.location.Terrain;
 
+import intents.PlayerEventIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.player.PlayerEvent;
 import services.objects.ObjectAwareness;
 import services.objects.ObjectCreator;
 import test_resources.GenericCreatureObject;
@@ -51,7 +53,8 @@ import test_resources.GenericCreatureObject;
 @RunWith(JUnit4.class)
 public class TestObjectAwareness {
 	
-	private GenericCreatureObject player;
+	private GenericCreatureObject player1;
+	private GenericCreatureObject player2;
 	private BuildingObject building;
 	private CellObject firstCell;
 	private CreatureObject npc;
@@ -60,11 +63,12 @@ public class TestObjectAwareness {
 	public void initializeTests() {
 		IntentManager.setInstance(new IntentManager(1));
 		IntentManager.getInstance().initialize();
-		player = new GenericCreatureObject(1);
-		building = (BuildingObject) ObjectCreator.createObjectFromTemplate(2, "object/building/tatooine/shared_starport_tatooine.iff");
-		firstCell = new CellObject(3);
+		player1 = new GenericCreatureObject(1);
+		player2 = new GenericCreatureObject(2);
+		building = (BuildingObject) ObjectCreator.createObjectFromTemplate(10, "object/building/tatooine/shared_starport_tatooine.iff");
+		firstCell = new CellObject(11);
 		firstCell.setNumber(1);
-		npc = (CreatureObject) ObjectCreator.createObjectFromTemplate(4, "object/mobile/dressed_tatooine_opening_wh_guard.iff");
+		npc = (CreatureObject) ObjectCreator.createObjectFromTemplate(20, "object/mobile/dressed_tatooine_opening_wh_guard.iff");
 		Assert.assertNotNull("Building is null!", building);
 		Assert.assertNotNull("NPC is null!", npc);
 		building.addObject(firstCell);
@@ -82,11 +86,11 @@ public class TestObjectAwareness {
 		 *   1) Player is inside Cell #1
 		 *   2) NPC is inside Cell #1
 		 */
-		player.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
 		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		npc.moveToContainer(firstCell);
-		player.moveToContainer(firstCell);
+		player1.moveToContainer(firstCell);
 		
 		// Create service and start sending intents
 		ObjectAwareness awareness = new ObjectAwareness();
@@ -94,12 +98,54 @@ public class TestObjectAwareness {
 		Assert.assertTrue(awareness.start());
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
 		
 		// Check to make sure NPC is in awareness
-		Assert.assertTrue("Player isn't inside NPC's observer set!", npc.getObservers().contains(player.getOwner()));
+		Assert.assertTrue("Player isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
 		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
-		Assert.assertFalse("Player is still inside NPC's observer set!", npc.getObservers().contains(player.getOwner()));
+		Assert.assertFalse("Player is still inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(awareness.stop());
+		Assert.assertTrue(awareness.terminate());
+	}
+	
+	@Test
+	public void testObjectAwarenessPlayerLogOut() {
+		/*
+		 * Setup:
+		 *   1) Player 1 is inside Cell #1
+		 *   2) Player 2 is inside Cell #1
+		 *   3) NPC is inside Cell #1
+		 */
+		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		player2.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
+		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		npc.moveToContainer(firstCell);
+		player1.moveToContainer(firstCell);
+		player2.moveToContainer(firstCell);
+		
+		// Create service and start sending intents
+		ObjectAwareness awareness = new ObjectAwareness();
+		Assert.assertTrue(awareness.initialize());
+		Assert.assertTrue(awareness.start());
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
+		
+		// Check to make sure NPC is in awareness
+		Assert.assertTrue("Player1 isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 isn't inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player2 isn't inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player1 isn't inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DISAPPEAR)));
+		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DESTROYED)));
+		Assert.assertFalse("Player2 is still inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Player2 is still inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player1 isn't inside NPC's observer set! (round 2)", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
+		Assert.assertFalse("NPC is still inside Player1's observer set!", player1.getObservers().contains(npc.getOwner()));
+		Assert.assertFalse("Player2 is still inside Player1's observer set! (round 2)", player1.getObservers().contains(player2.getOwner()));
 		Assert.assertTrue(awareness.stop());
 		Assert.assertTrue(awareness.terminate());
 	}
