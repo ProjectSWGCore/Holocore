@@ -64,6 +64,7 @@ import resources.objects.awareness.AwarenessHandler;
 import resources.objects.awareness.DataTransformHandler;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
@@ -304,6 +305,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT))
+			parent = obj.getParent();
 		moveObject(obj, parent, requestedLocation);
 		if (parent == null)
 			dataTransformHandler.handleMove(obj, speed, update);

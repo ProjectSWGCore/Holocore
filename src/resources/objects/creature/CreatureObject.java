@@ -605,6 +605,14 @@ public class CreatureObject extends TangibleObject {
 	public long getStatesBitmask() {
 		return statesBitmask;
 	}
+	
+	public boolean isStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states) {
+			if ((statesBitmask & state.getBitmask()) == 0)
+				return false;
+		}
+		return true;
+	}
 
 	public void setStatesBitmask(CreatureState ... states) {
 		for (CreatureState state : states)
