@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.objects.building;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +51,13 @@ public class BuildingObject extends TangibleObject {
 	private final Map<String, CellObject> nameToCell;
 	private final Map<Integer, CellObject> idToCell;
 	
+	private WeakReference<PortalLayoutData> portalLayoutData;
+	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
-		nameToCell = new SynchronizedMap<>();
-		idToCell = new SynchronizedMap<>();
+		this.nameToCell = new SynchronizedMap<>();
+		this.idToCell = new SynchronizedMap<>();
+		this.portalLayoutData = null;
 	}
 	
 	public CellObject getCellByName(String cellName) {
@@ -71,14 +75,14 @@ public class BuildingObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject object) {
 		super.addObject(object);
-		Assert.test(object instanceof CellObject);
+		Assert.test(object instanceof CellObject, "Object added to building is not a cell!");
 		
 		CellObject cell = (CellObject) object;
-		Assert.test(cell.getNumber() > 0);
-		Assert.test(cell.getNumber() < getCellCount());
+		Assert.test(cell.getNumber() > 0, "Cell Number must be greater than 0!");
+		Assert.test(cell.getNumber() < getCellCount(), "Cell Number must be less than the cell count!");
 		cell.setCellName(getCellName(cell.getNumber()));
 		synchronized (idToCell) {
-			Assert.isNull(idToCell.get(cell.getNumber()));
+			Assert.isNull(idToCell.get(cell.getNumber()), "Multiple cells have the same number!");
 			idToCell.put(cell.getNumber(), cell);
 			nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
 		}
@@ -91,7 +95,7 @@ public class BuildingObject extends TangibleObject {
 				if (idToCell.get(i) != null)
 					continue;
 				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				Assert.notNull(cell);
+				Assert.notNull(cell, "Failed to create a cell!");
 				cell.setNumber(i);
 				cell.setTerrain(getTerrain());
 				addObject(cell);
@@ -115,12 +119,16 @@ public class BuildingObject extends TangibleObject {
 	}
 	
 	private PortalLayoutData getPortalLayoutData() {
-		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
-		if (portalFile == null || portalFile.isEmpty())
-			return null;
-		
-		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
-		Assert.test(portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0);
+		PortalLayoutData portalLayoutData = (this.portalLayoutData == null) ? null : this.portalLayoutData.get();
+		if (portalLayoutData == null) {
+			String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
+			if (portalFile == null || portalFile.isEmpty())
+				return null;
+			
+			portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+			this.portalLayoutData = new WeakReference<>(portalLayoutData);
+		}
+		Assert.test(portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0, "Invalid portal layout data!");
 		return portalLayoutData;
 	}
 	
