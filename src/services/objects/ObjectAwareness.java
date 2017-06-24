@@ -306,8 +306,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			dataTransformHandler.handleMove(obj.getParent(), speed, update);
-			return;
+			parent = obj.getParent();
+			moveObject(parent, null, requestedLocation);
+			dataTransformHandler.handleMove(parent, speed, update);
 		}
 		moveObject(obj, parent, requestedLocation);
 		if (parent == null)
