@@ -72,7 +72,7 @@ public class Equipment implements Encodable, Persistable {
 	public byte [] encode() {
 		byte [] weaponData = (weapon != null) ? getWeaponData() : new byte[0];
 		
-		NetBuffer buffer = NetBuffer.allocate(19 + weaponData.length);
+		NetBuffer buffer = NetBuffer.allocate(17 + weaponData.length + customizationString.length + template.getLength());
 		buffer.addArray(customizationString); // TODO: Create encodable class for customization string
 		buffer.addInt(arrangementId);
 		buffer.addLong(objectId);
@@ -81,7 +81,7 @@ public class Equipment implements Encodable, Persistable {
 		buffer.addRawArray(weaponData);
 		return buffer.array();
 	}
-
+	
 	@Override
 	public void decode(NetBuffer data) {
 		customizationString	= data.getArray(); // TODO: Create encodable class for customization string
