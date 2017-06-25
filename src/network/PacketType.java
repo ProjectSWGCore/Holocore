@@ -362,7 +362,7 @@ public enum PacketType {
 
 	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
-		if (type == null)
+		if (type == null || type == UNKNOWN)
 			return null;
 		Class <? extends SWGPacket> c = type.c;
 		try {

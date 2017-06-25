@@ -983,8 +983,6 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		posture = Posture.getFromId(buffer.getByte());
 		factionRank = buffer.getByte();
 		ownerId = buffer.getLong();
@@ -996,16 +994,12 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline4(NetBuffer buffer) {
 		super.parseBaseline4(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		creo4.parseBaseline4(buffer);
 	}
 	
 	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		creo6.parseBaseline6(buffer);
 	}
 	

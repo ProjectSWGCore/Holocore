@@ -39,13 +39,12 @@ import resources.objects.SWGObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
-import resources.player.Player;
 import services.objects.ObjectCreator;
 
 public class Equipment implements Encodable, Persistable {
 	
 	private TangibleObject 	weapon;
-	private byte []			customizationString;
+	private byte[]			customizationString;
 	private int				arrangementId;
 	private long			objectId;
 	private CRC				template;
@@ -70,14 +69,14 @@ public class Equipment implements Encodable, Persistable {
 	
 	@Override
 	public byte [] encode() {
-		byte [] weaponData = (weapon != null) ? getWeaponData() : new byte[0];
-		
-		NetBuffer buffer = NetBuffer.allocate(17 + weaponData.length + customizationString.length + template.getLength());
+		boolean hasWeapon = weapon != null;
+		byte [] weaponData = hasWeapon ? getWeaponData() : new byte[0];
+		NetBuffer buffer = NetBuffer.allocate(getLength(weaponData.length));
 		buffer.addArray(customizationString); // TODO: Create encodable class for customization string
 		buffer.addInt(arrangementId);
 		buffer.addLong(objectId);
 		buffer.addEncodable(template);
-		buffer.addBoolean(weapon != null);
+		buffer.addBoolean(hasWeapon);
 		buffer.addRawArray(weaponData);
 		return buffer.array();
 	}
@@ -94,7 +93,13 @@ public class Equipment implements Encodable, Persistable {
 	
 	@Override
 	public int getLength() {
-		return 19 + (weapon != null ? getWeaponData().length : 0);
+		boolean hasWeapon = weapon != null;
+		int weaponLength = hasWeapon ? getWeaponData().length : 0;
+		return getLength(weaponLength);
+	}
+	
+	private int getLength(int weaponLength) {
+		return 15 + weaponLength + customizationString.length + template.getLength();
 	}
 	
 	@Override
@@ -120,8 +125,8 @@ public class Equipment implements Encodable, Persistable {
 			weapon = (TangibleObject) SWGObjectFactory.create(stream);
 	}
 
-	public byte[] getCustomizationString() {return customizationString;}
-	public void setCustomizationString(byte[] customizationString) { this.customizationString = customizationString; }
+	public byte [] getCustomizationString() {return customizationString;}
+	public void setCustomizationString(byte [] customizationString) { this.customizationString = customizationString; }
 
 	public int getArrangementId() { return arrangementId; }
 	public void setArrangementId(int arrangementId) { this.arrangementId = arrangementId; }
@@ -136,17 +141,17 @@ public class Equipment implements Encodable, Persistable {
 	public void setWeapon(TangibleObject weapon) { this.weapon = weapon; }
 	
 	private byte[] getWeaponData() {
-		Player target = weapon.getOwner();
-		NetBuffer data3 = weapon.createBaseline3(target).encode();
-		data3.position(0);
-
-		NetBuffer data6 = weapon.createBaseline6(target).encode();
-		data6.position(0);
+		if (weapon == null)
+			return new byte[0];
+		NetBuffer data3 = weapon.createBaseline3(null).encode();
+		NetBuffer data6 = weapon.createBaseline6(null).encode();
 		
-		NetBuffer ret = NetBuffer.allocate(data3.remaining() + data6.remaining());
-		ret.addRawArray(data3.array());
-		ret.addRawArray(data6.array());
-		return ret.array();
+		int data3Size = data3.limit();
+		int data6Size = data6.limit();
+		byte [] ret = new byte[data3Size + data6Size];
+		System.arraycopy(data3.array(), 0, ret, 0, data3Size);
+		System.arraycopy(data6.array(), 0, ret, data3Size, data6Size);
+		return ret;
 	}
 	
 	private TangibleObject createWeaponFromData(NetBuffer data) {

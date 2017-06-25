@@ -81,7 +81,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 			int padding = data.getShort();
 			Type type = Type.getTypeForByte(data.getByte());
 			unpackOutOfBandData(data, type);
-			data.position(data.position() + padding);
+			data.seek(padding);
 			remaining -= data.position() - start;
 		}
 	}
@@ -170,7 +170,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 		
 		private static final EnumLookup<Byte, Type> LOOKUP = new EnumLookup<>(Type.class, t -> t.getType());
 		
-		byte type;
+		private byte type;
 		
 		Type(int type) {
 			this.type = (byte) type;

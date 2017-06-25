@@ -30,6 +30,8 @@ package resources.network;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.ref.SoftReference;
+import java.nio.BufferOverflowException;
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,28 +73,33 @@ public class BaselineObject {
 	public void parseBaseline(Baseline baseline) {
 		NetBuffer buffer = NetBuffer.wrap(baseline.getBaselineData());
 		buffer.getShort();
-		switch (baseline.getNum()) {
-			case 1:
-				parseBaseline1(buffer);
-				break;
-			case 3:
-				parseBaseline3(buffer);
-				break;
-			case 4:
-				parseBaseline4(buffer);
-				break;
-			case 6:
-				parseBaseline6(buffer);
-				break;
-			case 7:
-				parseBaseline7(buffer);
-				break;
-			case 8:
-				parseBaseline8(buffer);
-				break;
-			case 9:
-				parseBaseline9(buffer);
-				break;
+		try {
+			switch (baseline.getNum()) {
+				case 1:
+					parseBaseline1(buffer);
+					break;
+				case 3:
+					parseBaseline3(buffer);
+					break;
+				case 4:
+					parseBaseline4(buffer);
+					break;
+				case 6:
+					parseBaseline6(buffer);
+					break;
+				case 7:
+					parseBaseline7(buffer);
+					break;
+				case 8:
+					parseBaseline8(buffer);
+					break;
+				case 9:
+					parseBaseline9(buffer);
+					break;
+			}
+		} catch (BufferUnderflowException | BufferOverflowException e) {
+			Log.e("Failed to parse baseline %s %d with object: %s", baseline.getType(), baseline.getNum(), this);
+			Log.e(e);
 		}
 	}
 	
