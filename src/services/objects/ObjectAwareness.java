@@ -306,15 +306,17 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			parent = obj.getParent();
-			moveObject(parent, null, requestedLocation);
-			dataTransformHandler.handleMove(parent, speed, update);
+			SWGObject vehicle = obj.getParent();
+			moveObject(vehicle, null, requestedLocation);
+			dataTransformHandler.handleMove(vehicle, speed, update);
+			moveObject(obj, null, requestedLocation);
+		} else {
+			moveObject(obj, parent, requestedLocation);
+			if (parent == null)
+				dataTransformHandler.handleMove(obj, speed, update);
+			else
+				dataTransformHandler.handleMove(obj, parent, speed, update);
 		}
-		moveObject(obj, parent, requestedLocation);
-		if (parent == null)
-			dataTransformHandler.handleMove(obj, speed, update);
-		else
-			dataTransformHandler.handleMove(obj, parent, speed, update);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
 	}
