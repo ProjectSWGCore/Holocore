@@ -294,8 +294,6 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		bb.addInt(pvpFaction.getCrc()); // Faction - 4
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addArray(appearanceData); // - 6
@@ -313,8 +311,6 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		bb.addBoolean(inCombat); // 2 - Combat flag
 		bb.addObject(defenders); // 3 - Defenders List (Set, Long)
 		bb.addInt(0); // 4 - Map color
@@ -330,8 +326,6 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData = buffer.getArray();
@@ -346,8 +340,6 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		inCombat = buffer.getBoolean();
 		defenders = SWGSet.getSwgSet(buffer, 6, 3, Long.TYPE);
 		buffer.getInt();

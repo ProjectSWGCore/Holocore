@@ -64,6 +64,7 @@ import resources.objects.awareness.AwarenessHandler;
 import resources.objects.awareness.DataTransformHandler;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
@@ -155,11 +156,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		disappearObject(obj, true, true);
 		obj.moveToContainer(null);
+		disappearObject(obj, true, true);
 		obj.setPosition(Terrain.GONE, 0, 0, 0);
-		obj.clearObjectsAware();
-		obj.clearCustomAware(true);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -306,17 +305,26 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		moveObject(obj, parent, requestedLocation);
-		if (parent == null)
-			dataTransformHandler.handleMove(obj, speed, update);
-		else
-			dataTransformHandler.handleMove(obj, parent, speed, update);
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
+			SWGObject vehicle = obj.getParent();
+			moveObject(vehicle, null, requestedLocation);
+			dataTransformHandler.handleMove(vehicle, speed, update);
+			moveObject(obj, null, requestedLocation);
+		} else {
+			moveObject(obj, parent, requestedLocation);
+			if (parent == null)
+				dataTransformHandler.handleMove(obj, speed, update);
+			else
+				dataTransformHandler.handleMove(obj, parent, speed, update);
+		}
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
 	}
 	
 	private void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
 		awarenessHandler.disappearObject(obj, disappearObjects, disappearCustom);
+		obj.clearObjectsAware();
+		obj.clearCustomAware(true);
 	}
 	
 }

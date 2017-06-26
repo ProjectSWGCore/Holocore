@@ -37,6 +37,8 @@ import com.projectswg.common.debug.Log;
 
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
+import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 
 public class AwarenessHandler implements AutoCloseable {
 	
@@ -80,7 +82,7 @@ public class AwarenessHandler implements AutoCloseable {
 		}
 		// Update location
 		obj.setLocation(requestedLocation);
-		if (obj.getParent() != null)
+		if (obj.getParent() != null && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
 			obj.moveToContainer(null);
 		obj.onObjectMoved();
 		// Update awareness
@@ -101,7 +103,7 @@ public class AwarenessHandler implements AutoCloseable {
 		if (oldMap != null)
 			oldMap.removeWithoutUpdate(obj);
 		// Update location
-		if (obj.getParent() != parent)
+		if (obj.getParent() != parent && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
 			obj.moveToContainer(parent);
 		obj.setLocation(requestedLocation);
 		obj.onObjectMoved();

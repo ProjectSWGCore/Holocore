@@ -79,12 +79,6 @@ public class MissionObject extends IntangibleObject {
 	}
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addInt(-1);
-	}
-	
-	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		difficulty = buffer.getInt();
@@ -104,12 +98,6 @@ public class MissionObject extends IntangibleObject {
 		waypoint = new WaypointObject(buffer.getLong());
 		buffer.position(pos);
 		waypoint.decode(buffer);
-	}
-	
-	@Override
-	public void parseBaseline6(NetBuffer buffer) {
-		super.parseBaseline6(buffer);
-		buffer.getInt();
 	}
 	
 	@Override

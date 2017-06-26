@@ -37,13 +37,20 @@ import org.junit.runners.JUnit4;
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
+import intents.PlayerEventIntent;
+import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
+import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
+import resources.Posture;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
+import resources.player.PlayerEvent;
 import services.objects.ObjectAwareness;
 import services.objects.ObjectCreator;
 import test_resources.GenericCreatureObject;
@@ -51,7 +58,8 @@ import test_resources.GenericCreatureObject;
 @RunWith(JUnit4.class)
 public class TestObjectAwareness {
 	
-	private GenericCreatureObject player;
+	private GenericCreatureObject player1;
+	private GenericCreatureObject player2;
 	private BuildingObject building;
 	private CellObject firstCell;
 	private CreatureObject npc;
@@ -60,11 +68,12 @@ public class TestObjectAwareness {
 	public void initializeTests() {
 		IntentManager.setInstance(new IntentManager(1));
 		IntentManager.getInstance().initialize();
-		player = new GenericCreatureObject(1);
-		building = (BuildingObject) ObjectCreator.createObjectFromTemplate(2, "object/building/tatooine/shared_starport_tatooine.iff");
-		firstCell = new CellObject(3);
+		player1 = new GenericCreatureObject(1);
+		player2 = new GenericCreatureObject(2);
+		building = (BuildingObject) ObjectCreator.createObjectFromTemplate(10, "object/building/tatooine/shared_starport_tatooine.iff");
+		firstCell = new CellObject(11);
 		firstCell.setNumber(1);
-		npc = (CreatureObject) ObjectCreator.createObjectFromTemplate(4, "object/mobile/dressed_tatooine_opening_wh_guard.iff");
+		npc = (CreatureObject) ObjectCreator.createObjectFromTemplate(20, "object/mobile/dressed_tatooine_opening_wh_guard.iff");
 		Assert.assertNotNull("Building is null!", building);
 		Assert.assertNotNull("NPC is null!", npc);
 		building.addObject(firstCell);
@@ -82,11 +91,11 @@ public class TestObjectAwareness {
 		 *   1) Player is inside Cell #1
 		 *   2) NPC is inside Cell #1
 		 */
-		player.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
 		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
 		npc.moveToContainer(firstCell);
-		player.moveToContainer(firstCell);
+		player1.moveToContainer(firstCell);
 		
 		// Create service and start sending intents
 		ObjectAwareness awareness = new ObjectAwareness();
@@ -94,12 +103,143 @@ public class TestObjectAwareness {
 		Assert.assertTrue(awareness.start());
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
 		
 		// Check to make sure NPC is in awareness
-		Assert.assertTrue("Player isn't inside NPC's observer set!", npc.getObservers().contains(player.getOwner()));
+		Assert.assertTrue("Player isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
 		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
-		Assert.assertFalse("Player is still inside NPC's observer set!", npc.getObservers().contains(player.getOwner()));
+		Assert.assertFalse("Player is still inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(awareness.stop());
+		Assert.assertTrue(awareness.terminate());
+	}
+	
+	@Test
+	public void testObjectAwarenessPlayerLogOut() {
+		/*
+		 * Setup:
+		 *   1) Player 1 is inside Cell #1
+		 *   2) Player 2 is inside Cell #1
+		 *   3) NPC is inside Cell #1
+		 */
+		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		player2.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
+		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
+		npc.moveToContainer(firstCell);
+		player1.moveToContainer(firstCell);
+		player2.moveToContainer(firstCell);
+		
+		// Create service and start sending intents
+		ObjectAwareness awareness = new ObjectAwareness();
+		Assert.assertTrue(awareness.initialize());
+		Assert.assertTrue(awareness.start());
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
+		
+		// Check to make sure NPC is in awareness
+		Assert.assertTrue("Player1 isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 isn't inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player2 isn't inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player1 isn't inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DISAPPEAR)));
+		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DESTROYED)));
+		Assert.assertFalse("Player2 is still inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Player2 is still inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Player1 isn't inside NPC's observer set! (round 2)", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
+		Assert.assertFalse("NPC is still inside Player1's observer set!", player1.getObservers().contains(npc.getOwner()));
+		Assert.assertFalse("Player2 is still inside Player1's observer set! (round 2)", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue(awareness.stop());
+		Assert.assertTrue(awareness.terminate());
+	}
+	
+	@Test
+	public void testVehicleMount() {
+		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate("object/mobile/vehicle/shared_barc_speeder.iff");
+		player1.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		player2.setPosition(Terrain.TATOOINE, 3510, 5, -4810); // 12ish meters away
+		vehicle.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		
+		ObjectAwareness awareness = new ObjectAwareness();
+		Assert.assertTrue(awareness.initialize());
+		Assert.assertTrue(awareness.start());
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(vehicle)));
+		
+		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertTrue("Vehicle is not inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
+		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
+		Assert.assertNull("Player1 is in a parent!", player1.getParent());
+		
+		// Mount
+		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, vehicle)));
+		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
+		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		vehicle.setPosture(Posture.DRIVING_VEHICLE);
+		
+		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Vehicle is still inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
+		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
+		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
+		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
+		
+		Assert.assertTrue(fireAndWait(100, new MoveObjectIntent(player1, new Location(3510, 5, -4810, Terrain.TATOOINE), 7.3, 1)));
+		
+		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Vehicle is inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
+		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
+		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
+		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
+		
+		Assert.assertTrue(awareness.stop());
+		Assert.assertTrue(awareness.terminate());
+	}
+	
+	@Test
+	public void testVehicleMove() {
+		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate("object/mobile/vehicle/shared_barc_speeder.iff");
+		player1.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		player2.setPosition(Terrain.TATOOINE, 3510, 5, -4810); // 12ish meters away
+		vehicle.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		npc.setPosition(Terrain.TATOOINE, 3000, 5, 4000);
+		
+		ObjectAwareness awareness = new ObjectAwareness();
+		Assert.assertTrue(awareness.initialize());
+		Assert.assertTrue(awareness.start());
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
+		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(vehicle)));
+		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, vehicle)));
+		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
+		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		vehicle.setPosture(Posture.DRIVING_VEHICLE);
+		
+		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Vehicle is still inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
+		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
+		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
+		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
+		
+		Assert.assertTrue(fireAndWait(100, new MoveObjectIntent(player1, new Location(3000, 5, 4010, Terrain.TATOOINE), 7.3, 1)));
+		
+		Assert.assertFalse("Player1 is still inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
+		Assert.assertFalse("Player2 is still inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
+		Assert.assertFalse("Vehicle is inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
+		Assert.assertFalse("Vehicle is still inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
+		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
+		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
+		
+		Assert.assertTrue("Player1 is not inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
+		Assert.assertTrue("Vehicle is not inside NPC's awareness set!", npc.getObjectsAware().contains(vehicle));
+		
 		Assert.assertTrue(awareness.stop());
 		Assert.assertTrue(awareness.terminate());
 	}

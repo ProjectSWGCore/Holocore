@@ -40,6 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
@@ -295,11 +296,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	public Map<String, SWGObject> getSlots() {
-		synchronized (slots) {
-			return new HashMap<>(slots);
-		}
+		return new HashMap<>(slots);
 	}
-
+	
+	public List<SWGObject> getSlottedObjects() {
+		return slots.values().stream()
+				.filter(obj -> (obj != null))
+				.collect(Collectors.toList());
+	}
+	
 	public void setOwner(Player player) {
 		if (owner == player)
 			return;
