@@ -198,7 +198,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		if (parent != container)
-			new ContainerTransferIntent(this, container).broadcast();
+			new ContainerTransferIntent(this, parent, container).broadcast();
 		return ContainerResult.SUCCESS;
 	}
 
