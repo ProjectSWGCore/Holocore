@@ -52,12 +52,4 @@ public class TradeSession {
 	public CreatureObject getAccepter() {
 		return accepter;
 	}	
-	
-	public CreatureObject getTradePartner(CreatureObject self) {
-		if (self.equals(initiator)) {
-			return accepter;
-		} else {
-			return initiator;
-		}
-	}
 }

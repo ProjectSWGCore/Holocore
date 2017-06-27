@@ -82,6 +82,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	statesBitmask			= 0;
 	private long	lastTransform			= 0;
 	private TradeSession tradeSession		= null;
+	private CreatureObject tradePartner		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<String>(1, 3, StringType.ASCII);
 	
@@ -268,6 +269,14 @@ public class CreatureObject extends TangibleObject {
 
 	public void setTradeSession(TradeSession tradeSession) {
 		this.tradeSession = tradeSession;
+	}
+	
+	public CreatureObject getTradePartner() {
+		return tradePartner;
+	}
+
+	public void setTradePartner(CreatureObject tradePartner) {
+		this.tradePartner = tradePartner;
 	}
 
 	public void setPosture(Posture posture) {
