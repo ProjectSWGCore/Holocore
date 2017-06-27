@@ -61,6 +61,7 @@ import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.group.GroupInviterData;
+import services.trade.TradeSession;
 
 public class CreatureObject extends TangibleObject {
 	
@@ -80,6 +81,7 @@ public class CreatureObject extends TangibleObject {
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private long	lastTransform			= 0;
+	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<String>(1, 3, StringType.ASCII);
 	
@@ -258,8 +260,16 @@ public class CreatureObject extends TangibleObject {
 	
 	public boolean isLoggedOutPlayer() {
 		return getOwner() == null && isPlayer();
-	}
+	}	
 	
+	public TradeSession getTradeSession() {
+		return tradeSession;
+	}
+
+	public void setTradeSession(TradeSession tradeSession) {
+		this.tradeSession = tradeSession;
+	}
+
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
