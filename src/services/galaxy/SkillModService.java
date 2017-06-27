@@ -276,9 +276,6 @@ public class SkillModService extends Service {
 					creature.handleLevelSkillMods("action_regen", skillModValue);
 			}
 		}	
-		
-		Log.i("Health Regen: %s Action Regen: %s", creature.getSkillModValue("health_regen"), creature.getSkillModValue("action_regen"));
-
 	}
 	
 	private int getLevelSkillModValue(int level, String professionModName, String raceModName){
