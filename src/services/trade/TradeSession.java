@@ -13,6 +13,8 @@ public class TradeSession {
 	private final List<Long> accepterTradeItems;
 	private final CreatureObject initiator;
 	private final CreatureObject accepter;
+
+	private CreatureObject tradePartner		= null;
 	
 	public TradeSession(CreatureObject initiator, CreatureObject accepter) {		
 		this.initiator = initiator;
@@ -21,12 +23,20 @@ public class TradeSession {
 		this.accepterTradeItems = new ArrayList<Long>();
 	}
 
-	public void addToItemList(CreatureObject requester, long objectId){
-		if(requester.equals(this.initiator)){
-			this.initiatorTradeItems.add(objectId);
-		} else {
-			this.accepterTradeItems.add(objectId);
-		}
+	public void addToInitiatorList(long objectId){
+		this.initiatorTradeItems.add(objectId);
+	}
+	
+	public void addToAccepterList(long objectId){
+		this.accepterTradeItems.add(objectId);
+	}
+	
+	public void removeFromInitiatorList(long objectId){
+		this.initiatorTradeItems.remove(objectId);
+	}
+	
+	public void removeFromAccepterList(long objectId){
+		this.accepterTradeItems.remove(objectId);
 	}
 	
 	public void removeFromItemList(CreatureObject requester, long objectId){
@@ -51,5 +61,13 @@ public class TradeSession {
 
 	public CreatureObject getAccepter() {
 		return accepter;
+	}
+
+	public CreatureObject getTradePartner() {
+		return tradePartner;
+	}
+
+	public void setTradePartner(CreatureObject tradePartner) {
+		this.tradePartner = tradePartner;
 	}	
 }
