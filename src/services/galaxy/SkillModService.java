@@ -48,18 +48,18 @@ import utilities.IntentFactory;
 public class SkillModService extends Service {
 	
 	private static final String GET_PLAYER_LEVELS_SQL = "SELECT * FROM player_levels where combat_level = ?";
-	private RelationalServerData playerLevelDatabase;
-	private PreparedStatement getPlayerLevelStatement;	
-	
 	private static final String GET_RACIAL_STATS_SQL = "SELECT * FROM racial_stats where level = ?";
-	private RelationalServerData racialStatsDatabase;
-	private PreparedStatement getRacialStatsStatement;	
 	
-	private static int HEALTH_POINTS_PER_STAMINA 			= 2;
-	private static int HEALTH_POINTS_PER_CONSTITUTION 		= 8;
+	private final RelationalServerData playerLevelDatabase;
+	private final RelationalServerData racialStatsDatabase;
+	private final PreparedStatement getPlayerLevelStatement;
+	private final PreparedStatement getRacialStatsStatement;
+	
+	private static final int HEALTH_POINTS_PER_STAMINA 			= 2;
+	private static final int HEALTH_POINTS_PER_CONSTITUTION 	= 8;
 
-	private static int ACTION_POINTS_PER_STAMINA 			= 8;
-	private static int ACTION_POINTS_PER_CONSTITUTION 		= 2;	
+	private static final int ACTION_POINTS_PER_STAMINA 			= 8;
+	private static final int ACTION_POINTS_PER_CONSTITUTION 	= 2;	
 
 	public SkillModService() {
 		
@@ -81,34 +81,42 @@ public class SkillModService extends Service {
 		registerForIntent(SkillModIntent.class, smi -> handleSkillModIntent(smi));
 	}
 	
+	@Override
+	public boolean terminate() {
+		playerLevelDatabase.close();
+		racialStatsDatabase.close();
+		return super.terminate();
+	}
+	
 	private void handleContainerTransferIntent(ContainerTransferIntent cti){
 
-		if(cti.getObject().getOwner() != null){
-			CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
-			String objAttributes = cti.getObject().getAttributes().toString();
-			String[] modStrings = objAttributes.split(",");	
-			
-			for(String modString : modStrings) {
-				String[] splitValues = modString.split("=");	
-				String modName = splitValues[0];
-				String modValue = splitValues[1].replace("}", "");
+		if (cti.getObject().getOwner() == null)
+		    return;
+		
+		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
+		String objAttributes = cti.getObject().getAttributes().toString();
+		String[] modStrings = objAttributes.split(",");	
+		
+		for(String modString : modStrings) {
+			String[] splitValues = modString.split("=");	
+			String modName = splitValues[0];
+			String modValue = splitValues[1].replace("}", "");
 
-				if(modName.endsWith("_modified")) {
-					String[] splitModName = modName.split(":");
-					modName = splitModName[1];
+			if(modName.endsWith("_modified")) {
+				String[] splitModName = modName.split(":");
+				modName = splitModName[1];
 
-					if(cti.getContainer().getObjectId() == creature.getObjectId()){
-						creature.adjustSkillmod(modName, 0, Integer.parseInt(modValue));
-						updateSkillModHamValues(creature, modName,Integer.parseInt(modValue));
-					}else if(cti.getOldContainer() != null){
-						if(cti.getOldContainer().getObjectId() == creature.getObjectId()){
-							creature.adjustSkillmod(modName, 0, -Integer.parseInt(modValue));
-							updateSkillModHamValues(creature, modName, -Integer.parseInt(modValue));
-						}
+				if(cti.getContainer().getObjectId() == creature.getObjectId()){
+					creature.adjustSkillmod(modName, 0, Integer.parseInt(modValue));
+					updateSkillModHamValues(creature, modName,Integer.parseInt(modValue));
+				}else if(cti.getOldContainer() != null){
+					if(cti.getOldContainer().getObjectId() == creature.getObjectId()){
+						creature.adjustSkillmod(modName, 0, -Integer.parseInt(modValue));
+						updateSkillModHamValues(creature, modName, -Integer.parseInt(modValue));
 					}
 				}
 			}
-		}		
+		}
 	}
 	
 	private void handleCreatedCharacterIntent(CreatedCharacterIntent cci){
@@ -195,87 +203,28 @@ public class SkillModService extends Service {
 		
 		if (level < 1 || level > 90){
 			return;
+		}		
+		
+		for(SkillModTypes skillModTypes : SkillModTypes.values()){
+			if (!skillModTypes.raceMod.isEmpty()){
+				skillModValue = getLevelSkillModValue(level, profession + skillModTypes.professionMod,  race + skillModTypes.raceMod);
+			}else{
+				skillModValue = getLevelSkillModValue(level, profession + skillModTypes.professionMod, "");
+			}
+			if (skillModValue > 0){
+				oldSkillModValue = creature.getSkillModValue(skillModTypes.toString().toLowerCase());
+				if (skillModValue > oldSkillModValue){
+					creature.handleLevelSkillMods(skillModTypes.toString().toLowerCase(), -creature.getSkillModValue(skillModTypes.toString().toLowerCase()));
+					creature.handleLevelSkillMods(skillModTypes.toString().toLowerCase(), skillModValue);
+					
+					if(skillModTypes.toString().equals("CONSTITUTION_MODIFIED") || skillModTypes.toString().equals("STAMINA_MODIFIED"))
+						updateSkillModHamValues(creature, skillModTypes.toString().toLowerCase(),skillModValue - oldSkillModValue);
+					
+					if (skillModTypes.levelUpMessage != null)
+						sendSystemMessage(creature.getOwner(), skillModTypes.levelUpMessage, "DI", skillModValue - oldSkillModValue);
+				}
+			}				
 		}
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_luck",  race + "_LCK");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("luck_modified");
-			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods("luck_modified", -creature.getSkillModValue("luck_modified"));
-				creature.handleLevelSkillMods("luck_modified", skillModValue);
-				sendSystemMessage(creature.getOwner(), "level_up_stat_gain_0", "DI", skillModValue - oldSkillModValue);
-			}
-		}	
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_precision",  race + "_PRE");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("precision_modified");
-			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods("precision_modified", -creature.getSkillModValue("precision_modified"));
-				creature.handleLevelSkillMods("precision_modified", skillModValue);
-				sendSystemMessage(creature.getOwner(), "level_up_stat_gain_1", "DI", skillModValue - oldSkillModValue);
-			}
-		}	
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_strength",  race + "_STR");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("strength_modified");
-			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods("strength_modified", -creature.getSkillModValue("strength_modified"));
-				creature.handleLevelSkillMods("strength_modified", skillModValue);
-				sendSystemMessage(creature.getOwner(), "level_up_stat_gain_2", "DI", skillModValue - oldSkillModValue);
-			}
-		}	
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_constitution", race + "_CON");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("constitution_modified");
-			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods("constitution_modified", -creature.getSkillModValue("constitution_modified"));
-				creature.handleLevelSkillMods("constitution_modified", skillModValue);
-				updateSkillModHamValues(creature, "constitution_modified",skillModValue - oldSkillModValue);
-				sendSystemMessage(creature.getOwner(), "level_up_stat_gain_3", "DI", skillModValue - oldSkillModValue);
-			}
-		}
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_stamina",  race + "_STA");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("stamina_modified");
-			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods("stamina_modified", -creature.getSkillModValue("stamina_modified"));
-				creature.handleLevelSkillMods("stamina_modified", skillModValue);
-				updateSkillModHamValues(creature, "stamina_modified",skillModValue - oldSkillModValue);
-				sendSystemMessage(creature.getOwner(), "level_up_stat_gain_4", "DI", skillModValue - oldSkillModValue);
-			}
-		}
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_agility",  race + "_AGI");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("agility_modified");
-			if (skillModValue > oldSkillModValue){
-					creature.handleLevelSkillMods("agility_modified", -creature.getSkillModValue("agility_modified"));
-					creature.handleLevelSkillMods("agility_modified", skillModValue);
-					sendSystemMessage(creature.getOwner(), "level_up_stat_gain_5", "DI", skillModValue - oldSkillModValue);
-			}
-		}
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_health_regen", "");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("health_regen");
-			if (skillModValue > oldSkillModValue){
-					creature.handleLevelSkillMods("health_regen", -creature.getSkillModValue("health_regen"));
-					creature.handleLevelSkillMods("health_regen", skillModValue);
-			}
-		}
-		
-		skillModValue = getLevelSkillModValue(level, profession + "_action_regen", "");
-		if (skillModValue > 0){
-			oldSkillModValue = creature.getSkillModValue("action_regen");
-			if (skillModValue > oldSkillModValue){
-					creature.handleLevelSkillMods("action_regen", -creature.getSkillModValue("action_regen"));
-					creature.handleLevelSkillMods("action_regen", skillModValue);
-			}
-		}	
 	}
 	
 	private int getLevelSkillModValue(int level, String professionModName, String raceModName){
@@ -319,5 +268,27 @@ public class SkillModService extends Service {
 		if (target != null){
 			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
 		}
+	}	
+	
+	public enum SkillModTypes{
+		LUCK_MODIFIED ("_luck","_lck","level_up_stat_gain_0"),
+		PRECISION_MODIFIED ("_precision","_pre","level_up_stat_gain_1"),
+		STRENGTH_MODIFIED ("_strength","_str","level_up_stat_gain_2"),
+		CONSTITUTION_MODIFIED ("_constitution","_con","level_up_stat_gain_3"),
+		STAMINA_MODIFIED ("_stamina","_sta","level_up_stat_gain_4"),
+		AGILITY_MODIFIED ("_agility","_agi","level_up_stat_gain_5"),
+		HEALTH_REGEN ("_health_regen","",null),
+		ACTION_REGEN ("_action_regen","",null);
+		
+		private final String professionMod;
+		private final String raceMod;
+		private final String levelUpMessage;
+		
+		SkillModTypes(String profession, String race, String levelUpMessage){
+			this.professionMod = profession;
+			this.raceMod = race;
+			this.levelUpMessage = levelUpMessage;
+		}
+		
 	}	
 }

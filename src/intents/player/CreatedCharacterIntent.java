@@ -33,20 +33,13 @@ import resources.objects.creature.CreatureObject;
 
 public class CreatedCharacterIntent extends Intent {
 	
-	private CreatureObject creatureObject;
-	
+	private final CreatureObject creatureObject;	
 	
 	public CreatedCharacterIntent(CreatureObject creatureObject) {
-		setCreatureObject(creatureObject);
+		this.creatureObject = creatureObject;
 	}	
-	
 	
 	public CreatureObject getCreatureObject(){
 		return this.creatureObject;
 	}
-	
-	public void setCreatureObject(CreatureObject creatureObject){
-		this.creatureObject = creatureObject;
-	}
-
 }
