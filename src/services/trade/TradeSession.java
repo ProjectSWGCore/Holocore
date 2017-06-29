@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import resources.objects.SWGObject;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.creature.CreatureObject;
 
 public class TradeSession {
@@ -14,45 +15,35 @@ public class TradeSession {
 	private final CreatureObject initiator;
 	private final CreatureObject accepter;
 
-	private CreatureObject tradePartner		= null;
-	
-	public TradeSession(CreatureObject initiator, CreatureObject accepter) {		
+	public TradeSession(CreatureObject initiator, CreatureObject accepter) {
 		this.initiator = initiator;
 		this.accepter = accepter;
 		this.initiatorTradeItems = new ArrayList<Long>();
 		this.accepterTradeItems = new ArrayList<Long>();
 	}
 
-	public void addToInitiatorList(long objectId){
-		this.initiatorTradeItems.add(objectId);
-	}
-	
-	public void addToAccepterList(long objectId){
-		this.accepterTradeItems.add(objectId);
-	}
-	
-	public void removeFromInitiatorList(long objectId){
-		this.initiatorTradeItems.remove(objectId);
-	}
-	
-	public void removeFromAccepterList(long objectId){
-		this.accepterTradeItems.remove(objectId);
-	}
-	
-	public void removeFromItemList(CreatureObject requester, long objectId){
-		if(requester.equals(this.initiator)){
+	public void removeFromItemList(CreatureObject requester, long objectId) {
+		if (requester.equals(this.initiator)) {
 			this.initiatorTradeItems.remove(objectId);
 		} else {
 			this.accepterTradeItems.remove(objectId);
 		}
 	}
-	
-	public List<Long> getFromInitiatorList(){
-		return Collections.unmodifiableList(initiatorTradeItems);
+
+	public CreatureObject getTradePartner(CreatureObject self) {
+		if (self.equals(initiator)) {
+			return accepter;
+		} else {
+			return initiator;
+		}
 	}
-	
-	public List<Long> getFromAccepterList(){
-		return Collections.unmodifiableList(accepterTradeItems);
+		
+	public List<Long> getFromItemList(CreatureObject creature) {
+		if(this.initiator == creature){
+			return Collections.unmodifiableList(initiatorTradeItems);
+		} else {
+			return Collections.unmodifiableList(accepterTradeItems);
+		}
 	}
 
 	public CreatureObject getInitiator() {
@@ -63,11 +54,13 @@ public class TradeSession {
 		return accepter;
 	}
 
-	public CreatureObject getTradePartner() {
-		return tradePartner;
+	public void addItem(CreatureObject self, long itemId) {
+	    if (this.initiator == self) {
+	        initiatorTradeItems.add(itemId);
+	    } else if (this.accepter == self) {
+	    	accepterTradeItems.add(itemId);
+	    } else {
+	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
+	    }
 	}
-
-	public void setTradePartner(CreatureObject tradePartner) {
-		this.tradePartner = tradePartner;
-	}	
 }
