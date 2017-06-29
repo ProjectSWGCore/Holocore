@@ -176,7 +176,7 @@ public class TestObjectAwareness {
 		Assert.assertNull("Player1 is in a parent!", player1.getParent());
 		
 		// Mount
-		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, vehicle)));
+		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, null,vehicle))); 
 		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
 		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		vehicle.setPosture(Posture.DRIVING_VEHICLE);
@@ -216,7 +216,7 @@ public class TestObjectAwareness {
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
 		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(vehicle)));
-		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, vehicle)));
+		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, null, vehicle))); 
 		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
 		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		vehicle.setPosture(Posture.DRIVING_VEHICLE);

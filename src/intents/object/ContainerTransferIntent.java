@@ -35,13 +35,15 @@ public class ContainerTransferIntent extends Intent {
 	
 	private SWGObject obj;
 	private SWGObject container;
+	private SWGObject oldContainer;
 	
 	public ContainerTransferIntent() {
-		this(null, null);
+		this(null, null, null);
 	}
 	
-	public ContainerTransferIntent(SWGObject obj, SWGObject container) {
+	public ContainerTransferIntent(SWGObject obj, SWGObject oldContainer,SWGObject container) {
 		setObject(obj);
+		setOldContainer(oldContainer);
 		setContainer(container);
 	}
 	
@@ -60,5 +62,13 @@ public class ContainerTransferIntent extends Intent {
 	public void setContainer(SWGObject container) {
 		this.container = container;
 	}
+	
+	public SWGObject getOldContainer() {
+		return oldContainer;
+	}
+	
+	public void setOldContainer(SWGObject oldContainer) {
+		this.oldContainer = oldContainer;
+	}	
 	
 }

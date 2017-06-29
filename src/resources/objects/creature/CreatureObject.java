@@ -154,6 +154,10 @@ public class CreatureObject extends TangibleObject {
 		return Collections.unmodifiableSet(skills);
 	}
 	
+	public void handleLevelSkillMods(String modName, int modValue){
+		adjustSkillmod(modName, 0, modValue);
+	}
+	
 	public int getCashBalance() {
 		return cashBalance;
 	}
