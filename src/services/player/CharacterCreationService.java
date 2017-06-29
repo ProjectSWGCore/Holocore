@@ -45,8 +45,8 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 
 import intents.GalacticIntent;
-import intents.PlayerEventIntent;
 import intents.object.DestroyObjectIntent;
+import intents.player.CreatedCharacterIntent;
 import network.packets.Packet;
 import network.packets.swg.login.creation.ClientCreateCharacter;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
@@ -62,7 +62,6 @@ import resources.config.ConfigFile;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
 import resources.zone.NameFilter;
@@ -203,7 +202,7 @@ public class CharacterCreationService extends Service {
 		Assert.test(creature.getObjectId() > 0);
 		Log.i("%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
 		player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
-		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+		new CreatedCharacterIntent(creature).broadcast(); //Replaced PlayerEventIntent(PE_CREATE_CHARACTER)
 	}
 	
 	private CreatureObject tryCharacterCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {

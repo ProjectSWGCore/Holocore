@@ -60,14 +60,14 @@ public final class ExperienceManager extends Manager {
 	private final SkillTemplateService skillTemplateService;
 	private final Map<Short, Integer> levelXpMap;
 	private final double xpMultiplier;
-	
+
 	public ExperienceManager() {
 		skillManager = new SkillManager();
 		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
 		xpMultiplier = DataManager.getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
-		
-		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));
+
+		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));		
 		
 		addChildService(skillManager);
 		addChildService(skillTemplateService);
@@ -90,6 +90,7 @@ public final class ExperienceManager extends Manager {
 	private void handleExperienceIntent(ExperienceIntent ei) {
 		CreatureObject creatureObject = ei.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
+		
 		if (playerObject != null) {
 			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
 			
@@ -98,10 +99,8 @@ public final class ExperienceManager extends Manager {
 			short newLevel = attemptLevelUp(creatureObject.getLevel(), creatureObject, newXpTotal);
 			
 			if (oldLevel < newLevel) {	// If we've leveled up at least once
-				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				creatureObject.setLevel(newLevel);
-				adjustHealth(creatureObject, newLevel);
-				adjustAction(creatureObject, newLevel);
+				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i("%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
@@ -147,37 +146,7 @@ public final class ExperienceManager extends Manager {
 		return newXpTotal >= xpNextLevel ? attemptLevelUp(nextLevel, creatureObject, newXpTotal) : currentLevel;
 	}
 	
-	private void adjustHealth(CreatureObject creatureObject, short newLevel) {
-		int currentLevelHealthGranted = creatureObject.getLevelHealthGranted();	// The existing levelHealthGranted
-		int newLevelHealthGranted = 100 * newLevel;	// new levelHealthGranted
-		int difference = newLevelHealthGranted - currentLevelHealthGranted;
 		
-		// Set new levelHealthGranted
-		creatureObject.setLevelHealthGranted(newLevelHealthGranted);
-		
-		// Add the difference to their max health
-		int newMaxHealth = creatureObject.getMaxHealth() + difference;
-		creatureObject.setMaxHealth(newMaxHealth);
-		
-		// Give them full health
-		creatureObject.setBaseHealth(newMaxHealth);
-		creatureObject.setHealth(newMaxHealth);
-	}
-	
-	private void adjustAction(CreatureObject creatureObject, short newLevel) {
-		int currentMaxAction = creatureObject.getMaxAction();
-		int newLevelActionGranted = 75 * newLevel;
-		int difference = newLevelActionGranted - currentMaxAction;
-		
-		// Add the difference to their max action
-		int newMaxAction = currentMaxAction + difference;
-		creatureObject.setMaxAction(newMaxAction);
-		
-		// Give them full action
-		creatureObject.setBaseAction(newMaxAction);
-		creatureObject.setAction(newMaxAction);
-	}
-	
 	private int getMaxLevel() {
 		return levelXpMap.size();
 	}
