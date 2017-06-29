@@ -66,6 +66,8 @@ public final class ExperienceManager extends Manager {
 		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
 		xpMultiplier = DataManager.getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
+
+		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));		
 		
 		addChildService(skillManager);
 		addChildService(skillTemplateService);
@@ -82,8 +84,6 @@ public final class ExperienceManager extends Manager {
 			
 			levelXpMap.put((short) level, xpRequired);
 		}
-		
-		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));		
 		
 		return super.initialize();
 	}
