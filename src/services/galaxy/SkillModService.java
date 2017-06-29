@@ -174,16 +174,12 @@ public class SkillModService extends Service {
 
 		if(skillModName.equals("constitution_modified")){
 			newHealth = HEALTH_POINTS_PER_CONSTITUTION * modifer;
-		}else if (skillModName.equals("stamina_modified")){
-			newHealth = HEALTH_POINTS_PER_STAMINA * modifer;
-		}
-		
-		if(skillModName.equals("constitution_modified")){
 			newAction = ACTION_POINTS_PER_CONSTITUTION * modifer;
 		}else if (skillModName.equals("stamina_modified")){
-			newAction = ACTION_POINTS_PER_STAMINA * modifer;	
+			newHealth = HEALTH_POINTS_PER_STAMINA * modifer;
+			newAction = ACTION_POINTS_PER_STAMINA * modifer;
 		}
-		
+
 		if (newHealth > 0){
 			creature.setMaxHealth(creature.getMaxHealth() + newHealth);
 			creature.setHealth(creature.getMaxHealth());
@@ -203,28 +199,28 @@ public class SkillModService extends Service {
 			return;
 		}		
 		
-		for(SkillModTypes skillModTypes : SkillModTypes.values()){
-			if (skillModTypes.isRaceModDefined()){
-				skillModValue = getLevelSkillModValue(level, profession + skillModTypes.getProfession(),  race + skillModTypes.getRace());
+		for(SkillModTypes type : SkillModTypes.values()){
+			if (type.isRaceModDefined()){
+				skillModValue = getLevelSkillModValue(level, profession + type.getProfession(),  race + type.getRace());
 			}else{
-				skillModValue = getLevelSkillModValue(level, profession + skillModTypes.getProfession(), "");
+				skillModValue = getLevelSkillModValue(level, profession + type.getProfession(), "");
 			}
 			
 			if (skillModValue <= 0){
 				continue;
 			}
 			
-			oldSkillModValue = creature.getSkillModValue(skillModTypes.toString().toLowerCase());
+			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase());
 			
 			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods(skillModTypes.toString().toLowerCase(), -creature.getSkillModValue(skillModTypes.toString().toLowerCase()));
-				creature.handleLevelSkillMods(skillModTypes.toString().toLowerCase(), skillModValue);
+				creature.handleLevelSkillMods(type.toString().toLowerCase(), -creature.getSkillModValue(type.toString().toLowerCase()));
+				creature.handleLevelSkillMods(type.toString().toLowerCase(), skillModValue);
+
+				if (type == SkillModTypes.CONSTITUTION_MODIFIED || type == SkillModTypes.STAMINA_MODIFIED)
+					updateSkillModHamValues(creature, type.toString().toLowerCase(),skillModValue - oldSkillModValue);
 					
-				if(skillModTypes.toString().equals("CONSTITUTION_MODIFIED") || skillModTypes.toString().equals("STAMINA_MODIFIED"))
-					updateSkillModHamValues(creature, skillModTypes.toString().toLowerCase(),skillModValue - oldSkillModValue);
-					
-				if (skillModTypes.islevelUpMessageDefined())
-					sendSystemMessage(creature.getOwner(), skillModTypes.getlevelUpMessage(), "DI", skillModValue - oldSkillModValue);
+				if (type.isLevelUpMessageDefined())
+					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);
 			}				
 		}
 	}
@@ -272,14 +268,14 @@ public class SkillModService extends Service {
 	}	
 	
 	public enum SkillModTypes{
-		LUCK_MODIFIED ("_luck","_lck","level_up_stat_gain_0"),
-		PRECISION_MODIFIED ("_precision","_pre","level_up_stat_gain_1"),
-		STRENGTH_MODIFIED ("_strength","_str","level_up_stat_gain_2"),
-		CONSTITUTION_MODIFIED ("_constitution","_con","level_up_stat_gain_3"),
-		STAMINA_MODIFIED ("_stamina","_sta","level_up_stat_gain_4"),
-		AGILITY_MODIFIED ("_agility","_agi","level_up_stat_gain_5"),
-		HEALTH_REGEN ("_health_regen",null,null),
-		ACTION_REGEN ("_action_regen",null,null);
+		LUCK_MODIFIED 			("_luck","_lck","level_up_stat_gain_0"),
+		PRECISION_MODIFIED 		("_precision","_pre","level_up_stat_gain_1"),
+		STRENGTH_MODIFIED 		("_strength","_str","level_up_stat_gain_2"),
+		CONSTITUTION_MODIFIED 	("_constitution","_con","level_up_stat_gain_3"),
+		STAMINA_MODIFIED 		("_stamina","_sta","level_up_stat_gain_4"),
+		AGILITY_MODIFIED 		("_agility","_agi","level_up_stat_gain_5"),
+		HEALTH_REGEN 			("_health_regen",null,null),
+		ACTION_REGEN 			("_action_regen",null,null);
 		
 		private final String professionMod;
 		private final String raceMod;
@@ -299,22 +295,16 @@ public class SkillModService extends Service {
 			return this.raceMod;
 		}
 		
-		public String getlevelUpMessage(){
+		public String getLevelUpMessage(){
 			return this.levelUpMessage;
 		}
 		
 		public boolean isRaceModDefined(){
-			if (raceMod != null){
-				return true;
-			}
-			return false;
+			return raceMod !=null;
 		}
 
-		public boolean islevelUpMessageDefined(){
-			if (levelUpMessage != null){
-				return true;
-			}
-			return false;
+		public boolean isLevelUpMessageDefined(){
+			return levelUpMessage != null;
 		}
 	}	
 }
