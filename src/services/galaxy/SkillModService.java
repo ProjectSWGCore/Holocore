@@ -96,6 +96,8 @@ public class SkillModService extends Service {
 		
 		for(String modString : modStrings) {
 			String[] splitValues = modString.split("=",2);	
+			if (splitValues.length <= 1)
+				continue;
 			String modName = splitValues[0];
 			String modValue = splitValues[1].replace("}", "");
 

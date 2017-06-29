@@ -71,8 +71,7 @@ public final class ExperienceManager extends Manager {
 		
 		addChildService(skillManager);
 		addChildService(skillTemplateService);
-	
-}
+	}
 
 	@Override
 	public boolean initialize() {
