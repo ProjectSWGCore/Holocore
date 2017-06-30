@@ -189,7 +189,7 @@ public class CombatManager extends Manager {
 	
 	private void regenerationActionTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getAction() < creatureObject.getMaxAction()) {
-			int modification = 13;
+			int modification = creatureObject.getSkillModValue("action_regen");
 			int level = creatureObject.getLevel();
 			
 			if(level > 1) {
@@ -209,7 +209,7 @@ public class CombatManager extends Manager {
 	
 	private void regenerationHealthTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getHealth() < creatureObject.getMaxHealth()) {
-			int modification = 40;
+			int modification = creatureObject.getSkillModValue("health_regen");
 			int level = creatureObject.getLevel();
 			
 			if (level > 1) {
