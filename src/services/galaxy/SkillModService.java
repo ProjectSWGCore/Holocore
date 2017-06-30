@@ -30,6 +30,7 @@ package services.galaxy;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
@@ -91,29 +92,22 @@ public class SkillModService extends Service {
 		    return;
 		
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
-		String objAttributes = cti.getObject().getAttributes().toString();
-		String[] modStrings = objAttributes.split(",");	
 		
-		for(String modString : modStrings) {
-			String[] splitValues = modString.split("=",2);	
-			if (splitValues.length <= 1)
-				continue;
-			String modName = splitValues[0];
-			String modValue = splitValues[1].replace("}", "");
-
-			if(modName.endsWith("_modified")) {
-				String[] splitModName = modName.split(":",2);
-				modName = splitModName[1];
+		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
+			if(attributes.getKey().endsWith("_modified")){
+				String[] splitModName = attributes.getKey().split(":",2);
+				String modName = splitModName[1];
+				int modValue = Integer.parseInt(attributes.getValue());
 
 				if(cti.getContainer().getObjectId() == creature.getObjectId()){
-					creature.adjustSkillmod(modName, 0, Integer.parseInt(modValue));
-					updateSkillModHamValues(creature, modName,Integer.parseInt(modValue));
+					creature.adjustSkillmod(modName, 0, modValue);
+					updateSkillModHamValues(creature, modName,modValue);
 				}else if(cti.getOldContainer() != null){
 					if(cti.getOldContainer().getObjectId() == creature.getObjectId()){
-						creature.adjustSkillmod(modName, 0, -Integer.parseInt(modValue));
-						updateSkillModHamValues(creature, modName, -Integer.parseInt(modValue));
+						creature.adjustSkillmod(modName, 0, -modValue);
+						updateSkillModHamValues(creature, modName, -modValue);
 					}
-				}
+				}				
 			}
 		}
 	}
@@ -181,13 +175,13 @@ public class SkillModService extends Service {
 			newHealth = HEALTH_POINTS_PER_STAMINA * modifer;
 			newAction = ACTION_POINTS_PER_STAMINA * modifer;
 		}
-
-		if (newHealth > 0){
+		
+		if (newHealth != 0){
 			creature.setMaxHealth(creature.getMaxHealth() + newHealth);
 			creature.setHealth(creature.getMaxHealth());
 		}
 		
-		if (newAction > 0){
+		if (newAction !=0){
 			creature.setMaxAction(creature.getMaxAction() + newAction);
 			creature.setAction(creature.getMaxAction());
 		}
