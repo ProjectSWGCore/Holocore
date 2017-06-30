@@ -41,6 +41,10 @@ public class GiveMoneyMessage extends SWGPacket{
 		super();
 		this.moneyAmount = moneyAmount;
 	}
+	
+	public GiveMoneyMessage() {
+		super();
+	}
 
 	@Override
 	public void decode(NetBuffer data) {

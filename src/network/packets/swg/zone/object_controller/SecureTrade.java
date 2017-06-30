@@ -48,7 +48,7 @@ public class SecureTrade extends ObjectController {
 	public void setType(TradeMessageType type) {
 		this.type = type;
 	}
-	
+		
 	public long getStarterId() {
 		return starterId;
 	}

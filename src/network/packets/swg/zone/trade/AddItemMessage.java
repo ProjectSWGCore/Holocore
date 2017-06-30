@@ -38,11 +38,12 @@ public class AddItemMessage extends SWGPacket{
 	private long objectId;	
 	
 	public AddItemMessage(long objectId) {
+		super();		
 		this.objectId = objectId;
 	}
 	
 	public AddItemMessage() {
-		this.objectId = 0;
+		super();
 	}
 	
 	@Override

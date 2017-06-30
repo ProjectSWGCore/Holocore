@@ -23,7 +23,7 @@ public class TradeSession {
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
-		if (requester.equals(this.initiator)) {
+		if (requester.equals(this.accepter)) {
 			this.initiatorTradeItems.remove(objectId);
 		} else {
 			this.accepterTradeItems.remove(objectId);
@@ -31,34 +31,39 @@ public class TradeSession {
 	}
 
 	public CreatureObject getTradePartner(CreatureObject self) {
-		if (self.equals(initiator)) {
-			return accepter;
+		if (self.equals(this.accepter)) {
+			return this.accepter;
+		} else if(self.equals(this.initiator)) {
+			return this.initiator;
 		} else {
-			return initiator;
-		}
+	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
+			return self;
+	    }
 	}
 		
 	public List<Long> getFromItemList(CreatureObject creature) {
-		if(this.initiator == creature){
-			return Collections.unmodifiableList(initiatorTradeItems);
+		if(creature.equals(this.accepter)){
+			return Collections.unmodifiableList(this.initiatorTradeItems);
 		} else {
-			return Collections.unmodifiableList(accepterTradeItems);
+			return Collections.unmodifiableList(this.accepterTradeItems);
 		}
 	}
 
 	public CreatureObject getInitiator() {
-		return initiator;
+		return this.initiator;
 	}
 
 	public CreatureObject getAccepter() {
-		return accepter;
+		return this.accepter;
 	}
 
 	public void addItem(CreatureObject self, long itemId) {
-	    if (this.initiator == self) {
-	        initiatorTradeItems.add(itemId);
-	    } else if (this.accepter == self) {
-	    	accepterTradeItems.add(itemId);
+	    if (self.equals(this.initiator)) {
+	        this.initiatorTradeItems.add(itemId);
+	        System.out.println("Item added to Initiatorlist");
+	    } else if (self.equals(this.accepter)) {
+	    	this.accepterTradeItems.add(itemId);
+	    	System.out.println("Item added to Accepterlist");
 	    } else {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
 	    }
