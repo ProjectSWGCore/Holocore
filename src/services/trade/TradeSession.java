@@ -39,8 +39,18 @@ public class TradeSession {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
 			return self;
 	    }
+	}		
+	
+	public List<Long> addToInitiatorList(long objectId){
+		this.initiatorTradeItems.add(objectId);
+		return this.initiatorTradeItems;
 	}
-		
+	
+	public List<Long> addToAccepterList(long objectId){
+		this.accepterTradeItems.add(objectId);
+		return this.accepterTradeItems;
+	}
+	
 	public List<Long> getFromItemList(CreatureObject creature) {
 		if(creature.equals(this.accepter)){
 			return Collections.unmodifiableList(this.initiatorTradeItems);

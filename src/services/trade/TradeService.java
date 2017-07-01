@@ -6,14 +6,19 @@ import com.projectswg.common.debug.Log;
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
+import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.SecureTrade;
+import network.packets.swg.zone.object_controller.SecureTrade.TradeMessageType;
 import network.packets.swg.zone.trade.AbortTradeMessage;
 import network.packets.swg.zone.trade.AcceptTransactionMessage;
 import network.packets.swg.zone.trade.AddItemMessage;
 import network.packets.swg.zone.trade.BeginTradeMessage;
+import network.packets.swg.zone.trade.BeginVerificationMessage;
 import network.packets.swg.zone.trade.DenyTradeMessage;
 import network.packets.swg.zone.trade.GiveMoneyMessage;
+import network.packets.swg.zone.trade.TradeCompleteMessage;
 import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
+import network.packets.swg.zone.trade.VerifyTradeMessage;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.sui.SuiButtons;
@@ -51,8 +56,11 @@ public class TradeService extends Service {
 
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
-		/*if (gpi.getPacket() instanceof SWGPacket)
-		    Log.d("RX Packet: %s", ((SWGPacket) gpi.getPacket()).getPacketType());*/
+		if (packet instanceof SWGPacket){
+			if((packet instanceof SecureTrade) || (packet instanceof AbortTradeMessage) || (packet instanceof DenyTradeMessage) || (packet instanceof AcceptTransactionMessage) || (packet instanceof UnAcceptTransactionMessage)
+					|| (packet instanceof AddItemMessage) || (packet instanceof GiveMoneyMessage))
+			    Log.d("RX Packet: %s, Packet Name: %s", ((SWGPacket) gpi.getPacket()).getPacketType(), gpi.getPacket().toString());
+		}
 				
 		if (packet instanceof SecureTrade) {
 			handleSecureTrade((SecureTrade) packet,gpi.getPlayer(), gpi.getObjectManager());
@@ -68,6 +76,12 @@ public class TradeService extends Service {
 			handleAddItemMessage((AddItemMessage) packet, gpi.getPlayer());
 		} else if (packet instanceof GiveMoneyMessage){
 			handleGiveMoneyMessage((GiveMoneyMessage) packet, gpi.getPlayer());
+		} else if (packet instanceof BeginVerificationMessage){
+			handleBeginVerificationMessage(gpi.getPlayer());
+		} else if (packet instanceof VerifyTradeMessage){
+			handleVerifyTradeMessage(gpi.getPlayer());
+		} else if (packet instanceof TradeCompleteMessage){
+			handleTradeCompleteMessage(gpi.getPlayer());
 		}
 	}
 
@@ -148,12 +162,43 @@ public class TradeService extends Service {
 		}
 	}
 	
+	private void handleVerifyTradeMessage(Player player) {
+		TradeSession session = player.getCreatureObject().getTradeSession();
+		
+		if(player.getCreatureObject().getObjectId() != session.getAccepter().getObjectId()){
+			session.getAccepter().sendSelf(new VerifyTradeMessage());
+		} else {
+			session.getInitiator().sendSelf(new VerifyTradeMessage());
+		}		
+	}
+	
+	private void handleTradeCompleteMessage(Player player) {
+		TradeSession session = player.getCreatureObject().getTradeSession();
+		
+		if(player.getCreatureObject().getObjectId() != session.getAccepter().getObjectId()){
+			session.getAccepter().sendSelf(new TradeCompleteMessage());
+		} else {
+			session.getInitiator().sendSelf(new TradeCompleteMessage());
+		}	
+	}
+	
+	private void handleBeginVerificationMessage(Player player) {
+		TradeSession session = player.getCreatureObject().getTradeSession();
+		
+		if(player.getCreatureObject().getObjectId() != session.getAccepter().getObjectId()){
+			session.getAccepter().sendSelf(new BeginVerificationMessage());
+		} else {
+			session.getInitiator().sendSelf(new BeginVerificationMessage());
+		}	
+	}
+	
 	private void handleTradeSessionRequest(SecureTrade packet, Player packetSender , CreatureObject initiator, CreatureObject accepter) {		
 		SuiMessageBox requestBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Trade Request",	accepter.getOwner().getCharacterName() + " wants to trade with you.\nDo you want to accept the request?");
 		requestBox.display(accepter.getOwner());
 		requestBox.addOkButtonCallback("handleTradeRequest", (player, actor, event, paramenters)-> {
 			if(initiator.getTradeSession() != null && initiator.getTradeSession().getInitiator() != null){
 				accepter.setTradeSession(initiator.getTradeSession());
+				accepter.sendSelf(new SecureTrade(TradeMessageType.REQUEST_TRADE_REVERSED, initiator.getObjectId(), accepter.getObjectId()));
 				initiator.sendSelf(new BeginTradeMessage(accepter.getObjectId()));
 				accepter.sendSelf(new BeginTradeMessage(initiator.getObjectId()));
 				Log.d("Trade Session Request. Type=%s  Initiator=%d  Receipient=%d PacketSenderID: %d", packet.getType(), packet.getStarterId(), packet.getAccepterId(), player.getCreatureObject().getObjectId());
