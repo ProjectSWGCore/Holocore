@@ -426,6 +426,8 @@ public class CombatManager extends Manager {
 			
 			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
+			target.handleDamage(source, finalDamage);
+			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
 			else

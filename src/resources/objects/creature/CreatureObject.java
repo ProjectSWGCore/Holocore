@@ -30,8 +30,10 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -86,6 +88,8 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Integer> baseAttributes			= new SWGList<Integer>(1, 2);
 	
 	private List<CreatureObject> sentDuels			= new ArrayList<>();
+	
+	private Map<CreatureObject, Integer> damageMap 	= new HashMap<>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -844,6 +848,21 @@ public class CreatureObject extends TangibleObject {
 			}
 		}
 		return items;
+	}
+	
+	public Map<CreatureObject, Integer> getDamageMap(){
+		return damageMap;
+	}
+	
+	public CreatureObject getHighestDamageDealer(){
+		return damageMap.keySet().stream().max((c1, c2) -> damageMap.get(c1) - damageMap.get(c2)).orElse(null);
+	}
+	
+	public void handleDamage(CreatureObject attacker, int damage){
+		if(damageMap.containsKey(attacker))
+			damageMap.put(attacker, damageMap.get(attacker) + damage);
+		else 
+			damageMap.put(attacker, damage);
 	}
 
 	public boolean isAttackable(CreatureObject otherObject) {
