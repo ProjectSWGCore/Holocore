@@ -53,7 +53,7 @@ class LootPermissions extends ContainerPermissions {
 		if (container.getParent() != null && container.getParent().getParent() instanceof CreatureObject){
 			CreatureObject owner = (CreatureObject) container.getParent().getParent();
 
-			if (requester.getOwner() != null && owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
+			if (owner != null && requester.getOwner() != null && owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
 				return true;
 			}
 		}
