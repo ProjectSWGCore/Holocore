@@ -67,15 +67,6 @@ class LootPermissions extends ContainerPermissions {
 			    return true;
 
 		return defaultCanMove(requester, container);		
-		/*
-		return requester.getOwner().equals(container.getOwner());		
-		if (container.getParent() != null && container.getParent().getParent() instanceof CreatureObject){
-			CreatureObject owner = (CreatureObject) container.getParent().getParent();
-
-			if (owner != null && requester.getOwner() != null && owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
-				return true;
-			}
-		}*/
 	}
 	
 	@Override
