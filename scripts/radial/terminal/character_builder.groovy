@@ -53,7 +53,7 @@ static def spawnItems(Player player, List<String> items) {
 	def creature = player.getCreatureObject()
 	def inventory = creature.getSlottedObject("inventory")
 
-	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, items.toArray(new String[0])).broadcast()
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, items.toArray(new String[items.size()]).broadcast()
 }
 
 static def handleArmor(Player player) {

@@ -50,10 +50,10 @@ class LootPermissions extends ContainerPermissions {
 	@Override
 	public boolean canMove(SWGObject requester, SWGObject container) {
 		//TODO: Group Permissions
-		if (container.getParent().getParent() instanceof CreatureObject){
+		if (container.getParent() != null && container.getParent().getParent() instanceof CreatureObject){
 			CreatureObject owner = (CreatureObject) container.getParent().getParent();
 
-			if (owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
+			if (requester.getOwner() != null && owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
 				return true;
 			}
 		}
