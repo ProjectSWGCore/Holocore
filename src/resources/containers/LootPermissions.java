@@ -27,6 +27,8 @@
 
 package resources.containers;
 
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
@@ -50,18 +52,38 @@ class LootPermissions extends ContainerPermissions {
 	@Override
 	public boolean canMove(SWGObject requester, SWGObject container) {
 		//TODO: Group Permissions
+		if (requester.getOwner() == null || requester.getParent() == null)
+			return true;
+		
+		if (container.getParent() == null || requester.getParent() == null)
+		    return defaultCanMove(requester, container);
+		
+		if (!(container.getParent().getParent() instanceof CreatureObject))
+		    return defaultCanMove(requester, container);		
+		
+		CreatureObject highestDamageDealer = ((CreatureObject) container.getParent().getParent()).getHighestDamageDealer();
+		
+		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null && highestDamageDealer.getOwner().equals(requester.getOwner()))
+			    return true;
+
+		return defaultCanMove(requester, container);		
+		/*
+		return requester.getOwner().equals(container.getOwner());		
 		if (container.getParent() != null && container.getParent().getParent() instanceof CreatureObject){
 			CreatureObject owner = (CreatureObject) container.getParent().getParent();
 
 			if (owner != null && requester.getOwner() != null && owner.getHighestDamageDealer().getOwner().equals(requester.getOwner())){
 				return true;
 			}
-		}
-		return requester.getOwner().equals(container.getOwner());
+		}*/
 	}
 	
 	@Override
 	public boolean canAdd(SWGObject requester, SWGObject container) {
 		return false;
+	}
+	
+	public boolean defaultCanMove(SWGObject requester, SWGObject container){
+		return requester.getOwner() != null && requester.getOwner().equals(container.getOwner());
 	}
 }
