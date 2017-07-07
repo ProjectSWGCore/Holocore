@@ -74,7 +74,7 @@ class LootPermissions extends ContainerPermissions {
 		return false;
 	}
 	
-	public boolean defaultCanMove(SWGObject requester, SWGObject container){
+	private boolean defaultCanMove(SWGObject requester, SWGObject container){
 		return requester.getOwner() != null && requester.getOwner().equals(container.getOwner());
 	}
 }
