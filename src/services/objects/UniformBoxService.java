@@ -41,6 +41,7 @@ import com.projectswg.common.debug.Log;
 import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
 import intents.radial.RadialSelectionIntent;
+import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -113,7 +114,7 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), staticItems.toArray(new String[staticItems.size()])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[staticItems.size()])).broadcast();
 	}
 	
 }

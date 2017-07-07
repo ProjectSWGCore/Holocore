@@ -42,6 +42,7 @@ import intents.object.MoveObjectIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.commands.ICmdCallback;
+import resources.containers.ContainerPermissionsType;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -163,7 +164,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			public boolean isIgnoreVolume() {
 				return false;
 			}
-		}, itemName).broadcast();
+		}, ContainerPermissionsType.DEFAULT, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {

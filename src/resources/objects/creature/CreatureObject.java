@@ -30,8 +30,10 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -66,8 +68,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
-	private final CreatureObjectClientServerNP	creo4 = new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 = new CreatureObjectSharedNP();
+	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
+	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
+	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
@@ -844,6 +847,25 @@ public class CreatureObject extends TangibleObject {
 			}
 		}
 		return items;
+	}
+	
+	public Map<CreatureObject, Integer> getDamageMap(){
+		return Collections.unmodifiableMap(damageMap);
+	}
+	
+	public CreatureObject getHighestDamageDealer(){
+		synchronized (damageMap){
+			return damageMap.keySet().stream().max((c1, c2) -> damageMap.get(c1) - damageMap.get(c2)).orElse(null);
+		}
+	}
+	
+	public void handleDamage(CreatureObject attacker, int damage){
+		synchronized (damageMap){
+			if(damageMap.containsKey(attacker))
+				damageMap.put(attacker, damageMap.get(attacker) + damage);
+			else 
+				damageMap.put(attacker, damage);
+		}
 	}
 
 	public boolean isAttackable(CreatureObject otherObject) {

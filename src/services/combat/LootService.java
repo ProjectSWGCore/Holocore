@@ -47,6 +47,7 @@ import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 import network.packets.swg.zone.ClientOpenContainerMessage;
 import network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
+import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
@@ -199,7 +200,6 @@ public final class LootService extends Service {
 
 		SWGObject lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff");
 		lootInventory.setLocation(corpse.getLocation());
-		// TODO set permissions on lootInventory
 		corpse.addObject(lootInventory);	// It's a slotted object and goes in the inventory slot
 		new ObjectCreatedIntent(lootInventory).broadcast();
 
@@ -355,7 +355,7 @@ public final class LootService extends Service {
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
-
+					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
 					new ObjectCreatedIntent(object).broadcast();
 				} else {
@@ -369,14 +369,13 @@ public final class LootService extends Service {
 						public boolean isIgnoreVolume() {
 							return true;
 						}
-					}, randomItemName).broadcast();
+					},ContainerPermissionsType.LOOT, randomItemName).broadcast();
 				}
-
 				break;	// Only one group is ever spawned
 			}
 		}
 	}
-
+	
 	private static class NPCLoot {
 
 		private final int minCash;

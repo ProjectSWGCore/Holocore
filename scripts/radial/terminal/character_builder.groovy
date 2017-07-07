@@ -2,6 +2,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import intents.object.CreateStaticItemIntent
 import intents.object.ObjectTeleportIntent
+import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
@@ -52,7 +53,7 @@ static def spawnItems(Player player, List<String> items) {
 	def creature = player.getCreatureObject()
 	def inventory = creature.getSlottedObject("inventory")
 
-	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items.toArray(new String[0])).broadcast()
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, items.toArray(new String[items.size()])).broadcast()
 }
 
 static def handleArmor(Player player) {
