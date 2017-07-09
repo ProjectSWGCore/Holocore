@@ -3,9 +3,12 @@ package services.trade;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.debug.Log;
 
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.trade.AddItemMessage;
 import resources.objects.creature.CreatureObject;
 
 public class TradeSession {
@@ -14,8 +17,12 @@ public class TradeSession {
 	private final List<Long> accepterTradeItems;
 	private final CreatureObject initiator;
 	private final CreatureObject accepter;
+	private final AtomicInteger moneyAmountInitiator;
+	private final AtomicInteger moneyAmountAccepter;
 
 	public TradeSession(CreatureObject initiator, CreatureObject accepter) {
+		this.moneyAmountInitiator = new AtomicInteger();
+		this.moneyAmountAccepter = new AtomicInteger();
 		this.initiator = initiator;
 		this.accepter = accepter;
 		this.initiatorTradeItems = new ArrayList<Long>();
@@ -78,4 +85,32 @@ public class TradeSession {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
 	    }
 	}
+	
+	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
+		TradeSession tradeSession = creature.getTradeSession();
+		if(creature.getObjectId() != tradeSession.getAccepter().getObjectId()){
+			tradeSession.getAccepter().getOwner().sendPacket(packet);
+		} else {
+			tradeSession.getInitiator().getOwner().sendPacket(packet);
+		}		
+	}
+	
+	public void setMoneyAmount(CreatureObject creature, int amount){
+		if(creature.equals(this.initiator)){
+			this.moneyAmountInitiator.set(amount);
+		} else if (creature.equals(this.initiator)){
+			this.moneyAmountAccepter.set(amount);
+		}
+	}
+
+	public AtomicInteger getMoneyAmount(CreatureObject creature) {
+		if(creature.equals(this.initiator)){
+			return this.moneyAmountInitiator;
+		} else if (creature.equals(this.initiator)){
+			return this.moneyAmountAccepter;
+		}
+		return this.moneyAmountAccepter;
+	}
+	
+	
 }
