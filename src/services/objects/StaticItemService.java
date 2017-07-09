@@ -45,6 +45,7 @@ import intents.server.ConfigChangedIntent;
 import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.combat.DamageType;
 import resources.config.ConfigFile;
+import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
@@ -168,6 +169,7 @@ public final class StaticItemService extends Service {
 		String[] itemNames = csii.getItemNames();
 		Player requesterOwner = csii.getRequester().getOwner();
 		ObjectCreationHandler objectCreationHandler = csii.getObjectCreationHandler();
+		ContainerPermissionsType permissions = csii.getPermissions();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
@@ -196,6 +198,8 @@ public final class StaticItemService extends Service {
 							case SUCCESS:
 								Log.d("Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
+								object.setContainerPermissions(permissions);
+								
 								break;
 							default:
 								break;

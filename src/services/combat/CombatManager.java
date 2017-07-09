@@ -426,6 +426,8 @@ public class CombatManager extends Manager {
 			
 			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
+			target.handleDamage(source, finalDamage);
+			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
 			else
@@ -546,8 +548,11 @@ public class CombatManager extends Manager {
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
+		// We don't want to kill a creature that is already dead
+		if (corpse.getPosture() == Posture.DEAD)
+			return;
+
 		corpse.setPosture(Posture.DEAD);
-		Log.i("%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
