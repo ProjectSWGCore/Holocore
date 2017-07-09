@@ -190,12 +190,10 @@ public class CombatManager extends Manager {
 	private void regenerationActionTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getAction() < creatureObject.getMaxAction()) {
 			int modification = creatureObject.getSkillModValue("action_regen");
-			int level = creatureObject.getLevel();
-			
-			if(level > 1) {
-				modification += 4 * level;
-			}
-			
+
+			if (!creatureObject.isInCombat()){
+				modification *= 4;
+			}	
 			
 			if(creatureObject.modifyAction(modification) == 0) {
 				// Their action didn't change, meaning they're maxed out
@@ -210,11 +208,10 @@ public class CombatManager extends Manager {
 	private void regenerationHealthTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getHealth() < creatureObject.getMaxHealth()) {
 			int modification = creatureObject.getSkillModValue("health_regen");
-			int level = creatureObject.getLevel();
 			
-			if (level > 1) {
-				modification += 4 * level;
-			}
+			if (!creatureObject.isInCombat()){
+				modification *= 4;
+			}	
 			
 			if(creatureObject.modifyHealth(modification) == 0) {
 				// Their health didn't change, meaning they're maxed out
