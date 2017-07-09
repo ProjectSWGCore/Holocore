@@ -454,7 +454,7 @@ public class EntertainmentService extends Service {
 			PerformanceData performanceData = performanceMap.get(performanceName);
 			int flourishXpMod = performanceData.getFlourishXpMod();
 			int performanceCounter = performer.getPerformanceCounter();
-			int xpGained = (int) (performanceCounter * (flourishXpMod * 3.8));
+			int xpGained = (int) (performanceCounter * flourishXpMod);
 			
 			if(xpGained > 0) {
 				new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
