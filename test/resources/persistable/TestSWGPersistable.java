@@ -104,12 +104,9 @@ public class TestSWGPersistable {
 	
 	@Test
 	public void testBuildingObject() throws IOException {
-		test("object/building/tatooine/shared_palace_tatooine_jabba.iff");
 		BuildingObject expected = (BuildingObject) ObjectCreator.createObjectFromTemplate("object/building/tatooine/shared_palace_tatooine_jabba.iff");
 		expected.populateCells();
-		byte [] data = write(expected);
-		SWGObject obj = read(data);
-		test(expected, obj);
+		test(expected);
 	}
 	
 	@Test
@@ -118,16 +115,21 @@ public class TestSWGPersistable {
 	}
 	
 	private void test(String template) throws IOException {
-		SWGObject expected = ObjectCreator.createObjectFromTemplate(template);
-		byte [] data = write(expected);
-		SWGObject obj = read(data);
-		test(expected, obj);
+		test(ObjectCreator.createObjectFromTemplate(template));
+	}
+	
+	private void test(SWGObject object) throws IOException {
+		byte [] written = write(object);
+		SWGObject read = read(written);
+		test(object, read);
 	}
 	
 	private void test(SWGObject expected, SWGObject actual) {
 		Assert.assertNotNull(actual);
 		Assert.assertTrue("actual instanceof expected", expected.getClass().isAssignableFrom(actual.getClass()));
 		Assert.assertEquals("expected.equals(actual)", expected, actual);
+		Assert.assertEquals("contained objects", expected.getContainedObjects(), actual.getContainedObjects());
+		Assert.assertEquals("slots", expected.getSlots(), actual.getSlots());
 	}
 	
 	private byte [] write(SWGObject obj) throws IOException {

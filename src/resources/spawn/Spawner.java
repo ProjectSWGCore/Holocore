@@ -31,15 +31,17 @@ import java.util.Random;
 
 import com.projectswg.common.data.location.Location;
 
+import resources.PvpFaction;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
 
 public final class Spawner {
-	
+
 	private final Random random;
 	private final Location location;
 	private final int id;
+	private String creatureId;
 	private SWGObject eggObject;
 	private String creatureName;
 	private String[] iffTemplates;
@@ -53,13 +55,23 @@ public final class Spawner {
 	private int maxHealth;
 	private int maxAction;
 	private SpawnerFlag flags;
+	private PvpFaction faction;
+	private boolean specForce;
 	
 	public Spawner(int id) {
 		this.id = id;
 		this.random = new Random();
 		this.location = new Location();
 	}
-	
+
+	public void setCreatureId(String creatureId) {
+		this.creatureId = creatureId;
+	}
+
+	public String getCreatureId() {
+		return creatureId;
+	}
+
 	public int getSpawnerId() {
 		return id;
 	}
@@ -188,6 +200,19 @@ public final class Spawner {
 
 	public void setSpawnerFlag(SpawnerFlag flags) {
 		this.flags = flags;
+	}
+
+	public void setFaction(PvpFaction faction, boolean specForce) {
+		this.faction = faction;
+		this.specForce = specForce;
+	}
+
+	public PvpFaction getFaction() {
+		return faction;
+	}
+
+	public boolean isSpecForce() {
+		return specForce;
 	}
 	
 	public enum SpawnerFlag {

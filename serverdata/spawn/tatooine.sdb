@@ -1584,12 +1584,12 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901584	TATOOINE	tat_jabbas_palace	AREA	22	8.10	2.00	34.21	-90	1	Beissa (Jabba's Pilot Trainer)	beissa_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
 901585	TATOOINE	tat_jabbas_palace	AREA	22	-12.11	2.00	49.43	105	1	Bib Fortuna	bib_fortuna_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
 901586	TATOOINE	tat_jabbas_palace	AREA	22	-1.00	3.00	31.02	-40	1	Boba Fett	boba_fett_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
-901587	TATOOINE	tat_jabbas_palace	AREA	22	-13.00	2.00	37.11	0	1	Droopy McCool	droopy_mccool_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_music_2	9	0	0	0	300	120	0
+901587	TATOOINE	tat_jabbas_palace	AREA	22	-13.00	2.00	37.11	0	1	Droopy McCool	droopy_mccool_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_music_3	9	0	0	0	300	120	0
 901588	TATOOINE	tat_jabbas_palace	AREA	22	-8.74	2.00	49.61	-8	1	a fringer	fringer_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901589	TATOOINE	tat_jabbas_palace	AREA	22	-1.00	3.00	24.92	72	1	a Jawa	jawa_greeter_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
 901590	TATOOINE	tat_jabbas_palace	AREA	22	8.82	2.00	23.54	9	1	a Jawa	jawa_greeter_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
 901591	TATOOINE	tat_jabbas_palace	AREA	22	9.22	2.00	25.30	-168	1	a Jawa	jawa_greeter_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
-901592	TATOOINE	tat_jabbas_palace	AREA	22	-11.02	2.00	35.91	0	1	Max Rebo	max_rebo_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_music_2	0	0	0	0	300	120	0
+901592	TATOOINE	tat_jabbas_palace	AREA	22	-11.02	2.00	35.91	0	1	Max Rebo	max_rebo_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_music_3	0	0	0	0	300	120	0
 901593	TATOOINE	tat_jabbas_palace	AREA	22	-10.03	2.00	43.00	90	1	Oola	oola_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_oola	0	0	0	0	300	120	0
 901594	TATOOINE	tat_jabbas_palace	AREA	22	-5.81	2.00	44.12	-176	1	a roughneck	roughneck_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901595	TATOOINE	tat_jabbas_palace	AREA	22	-5.91	2.00	43.12	4	1	a roughneck	roughneck_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
@@ -1597,7 +1597,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901597	TATOOINE	tat_jabbas_palace	AREA	22	5.02	2.00	44.11	0	1	a scoundrel	scoundrel_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901598	TATOOINE	tat_jabbas_palace	AREA	22	-8.92	2.00	51.00	176	1	a slicer	slicer_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901599	TATOOINE	tat_jabbas_palace	AREA	22	-9.11	3.00	25.04	-59	1	a spacer	spacer_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
-901600	TATOOINE	tat_jabbas_palace	AREA	22	-9.00	2.00	37.01	0	1	Sy Snootles	sy_snootles_100_h_inv_n	POI	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
+901600	TATOOINE	tat_jabbas_palace	AREA	22	-9.00	2.00	37.01	0	1	Sy Snootles	sy_snootles_100_h_inv_n	POI	Jabbas Palace	1	STOP	themepark_sy_snootles	0	0	0	0	300	120	0
 901601	TATOOINE	tat_jabbas_palace	AREA	22	5.02	2.00	45.51	177	1	a wastrel	wastrel_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901602	TATOOINE	tat_jabbas_palace	AREA	22	-15.82	2.00	51.99	87	1	a thug	thug_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
 901603	TATOOINE	tat_jabbas_palace	AREA	22	-9.91	3.00	25.61	126	1	a thug	thug_100_h_inv_n	POI	Jabbas Palace	1	STOP	conversation	0	0	0	0	300	120	0
@@ -1677,3 +1677,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901677	TATOOINE	tat_world	AREA	0	930.01	0.92	3819.76	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 901678	TATOOINE	tat_world	AREA	0	938.35	0.88	3828.66	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 901679	TATOOINE	tat_world	AREA	0	2380.24	2.00	4999.61	-91	1	Race Coordinator	race_coordinator_protocol_100_d_inv_n	POI	Old Mos Espa Arena Track	1	STOP	idle	0	0	0	0	300	120	0
+901680	TATOOINE	tat_world	AREA	0	3470.50	5.00	-4929.30	-50	1	Jar Jar Binks - Empire Day	jar_jar_binks_empireday_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0
+901681	TATOOINE	tat_world	AREA	0	3469.00	5.00	-4931.30	-50	1	Jar Jar Binks - Halloween	jar_jar_binks_halloween_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0
+901682	TATOOINE	tat_world	AREA	0	3467.50	5.00	-4933.30	-50	1	Jar Jar Binks - House Packup	jar_jar_binks_housepackup_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0
+901683	TATOOINE	tat_world	AREA	0	3466.00	5.00	-4935.30	-50	1	Jar Jar Binks - Lifeday	jar_jar_binks_lifeday_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0
+901684	TATOOINE	tat_world	AREA	0	3464.50	5.00	-4937.30	-50	1	Jar Jar Binks - Publish and Reward	jar_jar_binks_publishreward_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0
+901685	TATOOINE	tat_world	AREA	0	3463.00	5.00	-4939.30	-50	1	Jar Jar Binks - TCG	jar_jar_binks_tcg_1_h_att_n	city	Mos Eisley	1	STOP	idle	0	0	0	0	20	10	0

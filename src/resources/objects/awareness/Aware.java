@@ -147,6 +147,7 @@ class Aware {
 	private Set<Player> getObservers(Player owner, SWGObject original, boolean useAware) {
 		Set<Player> observers = new HashSet<>();
 		addObserversToSet(getObject().getContainedObjects(), observers, owner, original);
+		addObserversToSet(getObject().getSlottedObjects(), observers, owner, original);
 		if (useAware) {
 			addObserversToSet(getAware(), observers, owner, original);
 		}

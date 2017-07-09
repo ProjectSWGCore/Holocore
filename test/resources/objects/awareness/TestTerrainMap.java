@@ -27,25 +27,19 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
-import resources.objects.creature.CreatureObject;
-import services.objects.ClientBuildoutService;
 import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
@@ -60,8 +54,10 @@ public class TestTerrainMap {
 			map.start();
 			GenericCreatureObject objA = new GenericCreatureObject(1);
 			GenericCreatureObject objB = new GenericCreatureObject(2);
-			map.moveWithinMap(objA, new Location(0, 0, 0, Terrain.TATOOINE)); // 0 - Within Range, 1 - Successful Move
-			map.moveWithinMap(objB, new Location(5, 0, 5, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
+			objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
+			objB.setPosition(Terrain.TATOOINE, 5, 0, 5);
+			map.moveWithinMap(objA); // 0 - Within Range, 1 - Successful Move
+			map.moveWithinMap(objB); // 1 - Within Range, 1 - Successful Move
 			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
@@ -79,9 +75,11 @@ public class TestTerrainMap {
 			GenericCreatureObject objA = new GenericCreatureObject(1);
 			GenericCreatureObject objB = new GenericCreatureObject(2);
 			CellObject cell = new CellObject(3);
-			map.moveWithinMap(cell, new Location(5, 0, 5, Terrain.TATOOINE)); // 0 - Within Range, 1 - Successful Move
-			map.moveWithinMap(objA, new Location(0, 0, 0, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
-			objB.setLocation(new Location(5, 0, 5, Terrain.TATOOINE));
+			cell.setPosition(Terrain.TATOOINE, 5, 0, 5);
+			objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
+			map.moveWithinMap(cell); // 0 - Within Range, 1 - Successful Move
+			map.moveWithinMap(objA); // 1 - Within Range, 1 - Successful Move
+			objB.setPosition(Terrain.TATOOINE, 5, 0, 5);
 			objB.moveToContainer(cell);
 			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
@@ -101,8 +99,10 @@ public class TestTerrainMap {
 			GenericCreatureObject objB = new GenericCreatureObject(2);
 			objA.setPrefLoadRange(200);
 			objB.setPrefLoadRange(200);
-			map.moveWithinMap(objA, new Location(5, 0, 5, Terrain.TATOOINE)); // 0 - Within Range, 1 - Successful Move
-			map.moveWithinMap(objB, new Location(-5, 0, -5, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
+			objA.setPosition(Terrain.TATOOINE, 5, 0, 5);
+			objB.setPosition(Terrain.TATOOINE, -5, 0, -5);
+			map.moveWithinMap(objA); // 0 - Within Range, 1 - Successful Move
+			map.moveWithinMap(objB); // 1 - Within Range, 1 - Successful Move
 			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
@@ -112,16 +112,12 @@ public class TestTerrainMap {
 	
 	@Test
 	public void testTatooine() {
-		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843).values(); // mos eisley's area id
-		List<SWGObject> tatObjects = allObjects.stream().filter((obj) -> {
-			return obj.getTerrain() == Terrain.TATOOINE && obj.getParent() == null;
-		}).collect(Collectors.toList());
 		TerrainMap map = new TerrainMap(Terrain.TATOOINE);
-		List<SWGObject> withinRange = new Vector<>();
 		AtomicBoolean onlyWithinRange = new AtomicBoolean(true);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
-		MapCallback callback = new MapCallback() {
+		creature.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
+		List<SWGObject> withinRange = TestBuildoutObjectList.getInstance().getWithinRangeObjects(creature);
+		map.setCallback(new MapCallback() {
 			@Override
 			public void onWithinRange(SWGObject obj, SWGObject inRange) {
 				if (obj.equals(creature) && !withinRange.remove(inRange)) {
@@ -129,19 +125,13 @@ public class TestTerrainMap {
 					onlyWithinRange.set(false);
 				}
 			}
-		};
-		map.setCallback(callback);
+		});
 		try {
 			map.start();
-			creature.setObjectName("testTatooine");
-			Location creatureLocation = new Location(3500, 5, -4800, Terrain.TATOOINE);
-			for (SWGObject obj : tatObjects) {
-				double range = Math.min(1024*Math.sqrt(2), Math.max(obj.getLoadRange(), creature.getLoadRange()));
-				if (isValidWithinRange(creature, obj, creatureLocation, range))
-					withinRange.add(obj);
-				map.moveWithinMap(obj, obj.getLocation());
+			for (SWGObject obj : getMosEisleyObjects()) {
+				map.moveWithinMap(obj);
 			}
-			map.moveWithinMap(creature, creatureLocation);
+			map.moveWithinMap(creature);
 			awaitCallbacks(map, 1000);
 			Assert.assertEquals(0, withinRange.size());
 			Assert.assertTrue("TEST-ONLY-WITHIN-RANGE", onlyWithinRange.get());
@@ -150,14 +140,8 @@ public class TestTerrainMap {
 		}
 	}
 	
-	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, Location objLocation, double range) {
-		if (obj.equals(inRange))
-			return false;
-		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
-			return false;
-		if (!inRange.getWorldLocation().isWithinFlatDistance(objLocation, Math.max(range, inRange.getLoadRange())))
-			return false;
-		return true;
+	private List<SWGObject> getMosEisleyObjects() {
+		return TestBuildoutObjectList.getInstance().getMosEisleyObjects();
 	}
 	
 	private void awaitCallbacks(TerrainMap map, long timeout) {

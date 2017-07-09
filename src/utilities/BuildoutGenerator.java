@@ -59,8 +59,8 @@ public class BuildoutGenerator {
 		{"INTEGER PRIMARY KEY", strType, strType, strType+" DEFAULT \"\"", floatType, floatType, floatType, floatType, "INTEGER NOT NULL DEFAULT 0", floatType, floatType}
 	};
 	private static final String [][] OBJECT_COLUMNS = {
-		{"buildout_id", "id", "snapshot", "area_id", "template_crc", "container_id", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cell_index"},
-		{"INTEGER PRIMARY KEY", intType, intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType}
+		{"id", "snapshot", "area_id", "template_crc", "container_id", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cell_index"},
+		{"INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType}
 	};
 	
 	private final List<GenBuildoutArea> areas;
@@ -175,11 +175,10 @@ public class BuildoutGenerator {
 					return comp;
 				return 0;
 			});
-			long buildoutId = 0;
 			for (SWGObject obj : objects) {
 				if (obj instanceof CellObject)
 					continue;
-				writeObject(gen, obj, buildoutId++);
+				writeObject(gen, obj);
 				while (percent / 100.0 * objects.size() <= objNum) {
 					System.out.print(".");
 					percent++;
@@ -201,8 +200,6 @@ public class BuildoutGenerator {
 	}
 	
 	private void addClientObject(List<SWGObject> objects, SWGObject obj) {
-		if (obj.getObjectId() == -507780858040143424L)
-			System.out.println(obj.getLocation());
 		objects.add(obj);
 		for (SWGObject child : obj.getContainedObjects()) {
 			addClientObject(objects, child);
@@ -263,19 +260,16 @@ public class BuildoutGenerator {
 		double transX = 0;
 		double transZ = 0;
 		boolean adjust = area.adjust || !area.area.getCompositeName().isEmpty();
-		if (adjust) {
-			if (!area.area.getCompositeName().isEmpty()) {
-				transX = area.area.getCompositeX1() + (area.area.getCompositeX2() - area.area.getCompositeX1()) / 2;
-				transZ = area.area.getCompositeZ1() + (area.area.getCompositeZ2() - area.area.getCompositeZ1()) / 2;
-			} else {
-				transX = area.area.getX1() + (area.area.getX2() - area.area.getX1()) / 2;
-				transZ = area.area.getZ1() + (area.area.getZ2() - area.area.getZ1()) / 2;
-			}
+		if (!area.area.getCompositeName().isEmpty()) {
+			transX = area.area.getCompositeX1() + (area.area.getCompositeX2() - area.area.getCompositeX1()) / 2;
+			transZ = area.area.getCompositeZ1() + (area.area.getCompositeZ2() - area.area.getCompositeZ1()) / 2;
 		}
+		transX -= area.area.getX1() + (area.area.getX2() - area.area.getX1()) / 2;
+		transZ -= area.area.getZ1() + (area.area.getZ2() - area.area.getZ1()) / 2;
 		gen.writeLine(area.id, terrain, substituteName, area.area.getEventRequired(), x1, z1, x2, z2, adjust?"1":"0", transX, transZ);
 	}
 	
-	private void writeObject(SdbGenerator gen, SWGObject object, long buildoutId) throws IOException {
+	private void writeObject(SdbGenerator gen, SWGObject object) throws IOException {
 		long id = object.getObjectId();
 		int crc = CRC.getCrc(object.getTemplate());
 		long container = (object.getParent() != null) ? object.getParent().getObjectId() : 0;
@@ -288,7 +282,7 @@ public class BuildoutGenerator {
 		int snapshot = object.isSnapshot() ? 1 : 0;
 		float x = (float) l.getX(), y = (float) l.getY(), z = (float) l.getZ();
 		float oX = (float) q.getX(), oY = (float) q.getY(), oZ = (float) q.getZ(), oW = (float) q.getW();
-		gen.writeLine(buildoutId, id, snapshot, object.getBuildoutAreaId(), crc, container, x, y, z, oX, oY, oZ, oW, radius, cellIndex);
+		gen.writeLine(id, snapshot, object.getBuildoutAreaId(), crc, container, x, y, z, oX, oY, oZ, oW, radius, cellIndex);
 	}
 	
 	private GenBuildoutArea getAreaForObject(SWGObject obj) {

@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.objects.waypoint;
 
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -110,14 +109,13 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 	@Override
 	public void decode(NetBuffer data) {
 		data.getInt();
-		Location loc = new Location(data.getFloat(), data.getFloat(), data.getFloat(), null);
+		setPosition(data.getFloat(), data.getFloat(), data.getFloat());
 		cellId = data.getLong();
-		loc.setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
+		setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
 		name = data.getUnicode();
 		data.getLong(); // objectId
 		color = WaypointColor.valueOf(data.getByte());
 		active = data.getBoolean();
-		setLocation(loc);
 	}
 	
 	@Override

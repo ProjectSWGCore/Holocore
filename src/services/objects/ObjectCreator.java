@@ -154,6 +154,7 @@ public final class ObjectCreator {
 			case GOTM_RESOURCE_CONTAINER:	return new ResourceContainerObject(objectId);
 			case GOTM_SHIP:					return new ShipObject(objectId);
 			case GOTM_WEAPON:				return new WeaponObject(objectId);
+			case GOTM_VEHICLE:				return new CreatureObject(objectId);
 			case GOTM_ARMOR:
 			case GOTM_CLOTHING:
 			case GOTM_COMPONENT:
@@ -163,8 +164,7 @@ public final class ObjectCreator {
 			case GOTM_CHRONICLES:
 			case GOTM_CYBERNETIC:
 			case GOTM_TERMINAL:
-			case GOTM_POWERUP_WEAPON:
-			case GOTM_VEHICLE:				return new TangibleObject(objectId);
+			case GOTM_POWERUP_WEAPON:		return new TangibleObject(objectId);
 			default: 						return null;
 		}
 	}

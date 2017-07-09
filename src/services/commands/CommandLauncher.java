@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package services.commands;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -36,19 +35,19 @@ import java.util.Queue;
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.debug.Log;
 
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import resources.commands.Command;
-import resources.config.ConfigFile;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
-import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
 import utilities.Scripts;
 
@@ -104,9 +103,6 @@ public class CommandLauncher {
 		Command command = enqueued.getCommand();
 		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
 		// TODO target and targetType checks
-		
-		if (DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-LOG-COMMAND", false))
-			Log.d("doCommand %s", command.getName());
 		
 		sendCommandDequeue(player, command, enqueued.getRequest(), 0, 0);
 		
@@ -180,8 +176,11 @@ public class CommandLauncher {
 			}
 		} else {
 			try {
-				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", enqueued.getGalacticManager(), player, enqueued.getTarget(), enqueued.getRequest().getArguments());
-			} catch (FileNotFoundException ex) {
+				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", enqueued.getGalacticManager(), player, enqueued.getTarget(), enqueued.getRequest().getArguments());
+			} catch (ResourceException e) {
+				// Script doesn't exist
+			} catch (ScriptException e) {
+				Log.a(e);
 			}
 		}
 	}

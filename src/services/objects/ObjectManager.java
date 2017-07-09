@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.projectswg.common.control.Manager;
@@ -78,7 +78,7 @@ public class ObjectManager extends Manager {
 		petService = new PetService();
 		
 		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
-		objectMap = new Hashtable<>(16*1024);
+		objectMap = new ConcurrentHashMap<>(128*1024);
 		started = new AtomicBoolean(false);
 		
 		addChildService(objectAwareness);
@@ -97,17 +97,13 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		synchronized (objectMap) {
-			objectMap.putAll(clientBuildoutService.loadClientObjects());
-		}
+		objectMap.putAll(clientBuildoutService.loadClientObjects());
 		if (!loadObjects())
 			return false;
 		synchronized (database) {
 			database.traverse((obj) -> loadObject(obj));
 		}
-		synchronized (objectMap) {
-			objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
-		}
+		objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
 		return super.initialize();
 	}
 	
@@ -153,24 +149,20 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean start() {
-		synchronized (objectMap) {
-			for (SWGObject obj : objectMap.values()) {
-				if (obj instanceof AIObject)
-					((AIObject) obj).aiStart();
-			}
-			started.set(true);
+		for (SWGObject obj : objectMap.values()) {
+			if (obj instanceof AIObject)
+				((AIObject) obj).aiStart();
 		}
+		started.set(true);
 		return super.start();
 	}
 	
 	@Override
 	public boolean stop() {
-		synchronized (objectMap) {
-			started.set(false);
-			for (SWGObject obj : objectMap.values()) {
-				if (obj instanceof AIObject)
-					((AIObject) obj).aiStop();
-			}
+		started.set(false);
+		for (SWGObject obj : objectMap.values()) {
+			if (obj instanceof AIObject)
+				((AIObject) obj).aiStop();
 		}
 		return super.stop();
 	}
@@ -194,20 +186,16 @@ public class ObjectManager extends Manager {
 		}
 		if (!(obj instanceof AIObject))
 			return;
-		synchronized (objectMap) {
-			if (started.get())
-				((AIObject) obj).aiStart();
-		}
+		if (started.get())
+			((AIObject) obj).aiStart();
 	}
 	
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
 		destroyObject(doi.getObject());
 		if (!(doi.getObject() instanceof AIObject))
 			return;
-		synchronized (objectMap) {
-			if (started.get())
-				((AIObject) doi.getObject()).aiStop();
-		}
+		if (started.get())
+			((AIObject) doi.getObject()).aiStop();
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
@@ -223,17 +211,13 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject getObjectById(long objectId) {
-		synchronized (objectMap) {
-			return objectMap.get(objectId);
-		}
+		return objectMap.get(objectId);
 	}
 	
 	private void putObject(SWGObject object) {
-		synchronized (objectMap) {
-			SWGObject replaced = objectMap.put(object.getObjectId(), object);
-			if (replaced != null && replaced != object)
-				Log.e("Replaced object in object map! Old: %s  New: %s", replaced, object);
-		}
+		SWGObject replaced = objectMap.put(object.getObjectId(), object);
+		if (replaced != null && replaced != object)
+			Log.e("Replaced object in object map! Old: %s  New: %s", replaced, object);
 	}
 
 	private SWGObject destroyObject(SWGObject object) {
@@ -250,10 +234,8 @@ public class ObjectManager extends Manager {
 			if (database.remove(object))
 				database.save();
 		}
-		synchronized (objectMap) {
-			objectMap.remove(object.getObjectId());
-		}
-
+		objectMap.remove(object.getObjectId());
+		
 		return object;
 	}
 	

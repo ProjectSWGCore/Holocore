@@ -38,7 +38,9 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
+import resources.objects.SpecificObject;
 import resources.objects.waypoint.WaypointObject;
+import services.objects.ObjectCreator;
 
 public class OutOfBandPackage implements Encodable, Persistable {
 	
@@ -79,7 +81,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 			int padding = data.getShort();
 			Type type = Type.getTypeForByte(data.getByte());
 			unpackOutOfBandData(data, type);
-			data.position(data.position() + padding);
+			data.seek(padding);
 			remaining -= data.position() - start;
 		}
 	}
@@ -114,7 +116,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 				oob = data.getEncodable(ProsePackage.class);
 				break;
 			case WAYPOINT:
-				oob = new WaypointObject(-1);
+				oob = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
 				oob.decode(data);
 				break;
 			case STRING_ID:
@@ -168,7 +170,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 		
 		private static final EnumLookup<Byte, Type> LOOKUP = new EnumLookup<>(Type.class, t -> t.getType());
 		
-		byte type;
+		private byte type;
 		
 		Type(int type) {
 			this.type = (byte) type;

@@ -69,7 +69,6 @@ public final class ConfigWatcher {
 		} catch (IOException e) {
 			this.watcher = null;
 		}
-		watcherThread.setInterruptOnStop(true);
 	}
 	
 	public void start() {
@@ -79,7 +78,7 @@ public final class ConfigWatcher {
 	
 	public void stop() {
 		running.set(false);
-		watcherThread.stop();
+		watcherThread.stop(true);
 		watcherThread.awaitTermination(1000);
 	}
 	

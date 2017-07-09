@@ -91,6 +91,7 @@ public class CombatManager extends Manager {
 	private final CorpseService corpseService;
 	private final CombatXpService combatXpService;
 	private final DuelPlayerService duelPlayerService;
+	private final LootService lootService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -109,9 +110,12 @@ public class CombatManager extends Manager {
 		corpseService = new CorpseService();
 		combatXpService = new CombatXpService();
 		duelPlayerService = new DuelPlayerService();
+		lootService = new LootService();
+
 		addChildService(corpseService);
 		addChildService(combatXpService);
 		addChildService(duelPlayerService);
+		addChildService(lootService);
 		
 		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
@@ -185,13 +189,11 @@ public class CombatManager extends Manager {
 	
 	private void regenerationActionTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getAction() < creatureObject.getMaxAction()) {
-			int modification = 13;
-			int level = creatureObject.getLevel();
-			
-			if(level > 1) {
-				modification += 4 * level;
-			}
-			
+			int modification = creatureObject.getSkillModValue("action_regen");
+
+			if (!creatureObject.isInCombat()){
+				modification *= 4;
+			}	
 			
 			if(creatureObject.modifyAction(modification) == 0) {
 				// Their action didn't change, meaning they're maxed out
@@ -205,12 +207,11 @@ public class CombatManager extends Manager {
 	
 	private void regenerationHealthTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
 		if(creatureObject.getHealth() < creatureObject.getMaxHealth()) {
-			int modification = 40;
-			int level = creatureObject.getLevel();
+			int modification = creatureObject.getSkillModValue("health_regen");
 			
-			if (level > 1) {
-				modification += 4 * level;
-			}
+			if (!creatureObject.isInCombat()){
+				modification *= 4;
+			}	
 			
 			if(creatureObject.modifyHealth(modification) == 0) {
 				// Their health didn't change, meaning they're maxed out
@@ -326,7 +327,7 @@ public class CombatManager extends Manager {
 		
 		// Show particle effect to everyone observing the delay egg, if one is defined
 		if (delayEgg != null && !delayAttackParticle.isEmpty())
-			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId()));
+			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId(), ""));
 		
 		// Handle the attack of this loop
 		handleAttack(source, target, delayEgg, combatCommand);
@@ -424,6 +425,8 @@ public class CombatManager extends Manager {
 			int finalDamage = info.getFinalDamage();
 			
 			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			
+			target.handleDamage(source, finalDamage);
 			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
@@ -545,8 +548,11 @@ public class CombatManager extends Manager {
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
+		// We don't want to kill a creature that is already dead
+		if (corpse.getPosture() == Posture.DEAD)
+			return;
+
 		corpse.setPosture(Posture.DEAD);
-		Log.i("%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	

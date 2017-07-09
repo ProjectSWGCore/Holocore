@@ -37,8 +37,9 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestAware.class,
-//	TestTerrainMapChunk.class,
+	TestTerrainMapChunk.class,
 	TestTerrainMap.class,
+	TestObjectAwareness.class
 //	TestAwarenessHandler.class
 })
 public class TestAwareness {

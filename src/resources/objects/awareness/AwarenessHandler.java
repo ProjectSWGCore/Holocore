@@ -37,6 +37,8 @@ import com.projectswg.common.debug.Log;
 
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
+import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 
 public class AwarenessHandler implements AutoCloseable {
 	
@@ -73,20 +75,21 @@ public class AwarenessHandler implements AutoCloseable {
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
 		// Remove from previous awareness
-		if (obj.getTerrain() != requestedLocation.getTerrain()) {
+		if (obj.getTerrain() != requestedLocation.getTerrain() && obj.getTerrain() != null) {
 			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
 			if (oldTerrainMap != null)
 				oldTerrainMap.removeWithoutUpdate(obj);
 		}
 		// Update location
 		obj.setLocation(requestedLocation);
-		if (obj.getParent() != null)
+		if (obj.getParent() != null && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
 			obj.moveToContainer(null);
+		obj.onObjectMoved();
 		// Update awareness
 		if (obj.getTerrain() != Terrain.GONE) {
 			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 			if (map != null) {
-				map.moveWithinMap(obj, requestedLocation);
+				map.moveWithinMap(obj);
 			} else {
 				Log.e("Unknown terrain: %s", requestedLocation.getTerrain());
 			}
@@ -100,10 +103,11 @@ public class AwarenessHandler implements AutoCloseable {
 		if (oldMap != null)
 			oldMap.removeWithoutUpdate(obj);
 		// Update location
-		obj.setLocation(requestedLocation);
-		// Update awareness
-		if (obj.getParent() != parent)
+		if (obj.getParent() != parent && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
 			obj.moveToContainer(parent);
+		obj.setLocation(requestedLocation);
+		obj.onObjectMoved();
+		// Update awareness
 		obj.resetAwareness();
 	}
 	

@@ -30,8 +30,10 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -66,8 +68,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
-	private final CreatureObjectClientServerNP	creo4 = new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 = new CreatureObjectSharedNP();
+	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
+	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
+	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
@@ -150,6 +153,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public Set<String> getSkills() {
 		return Collections.unmodifiableSet(skills);
+	}
+	
+	public void handleLevelSkillMods(String modName, int modValue){
+		adjustSkillmod(modName, 0, modValue);
 	}
 	
 	public int getCashBalance() {
@@ -323,6 +330,44 @@ public class CreatureObject extends TangibleObject {
 		else if (reserveBalance > 3E9)
 			reserveBalance = (long) 3E9; // 3 billion cap
 		this.reserveBalance = reserveBalance;
+	}
+	
+	/**
+	 * Removes amount from cash first, then bank after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromCashAndBank(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (cashBalance < amount) {
+			setBankBalance(bankBalance - (amount - cashBalance));
+			setCashBalance(0);
+		} else {
+			setCashBalance(cashBalance - amount);
+		}
+		return true;
+	}
+	
+	/**
+	 * Removes amount from bank first, then cash after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromBankAndCash(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (bankBalance < amount) {
+			setCashBalance(cashBalance - (amount - bankBalance));
+			setBankBalance(0);
+		} else {
+			setBankBalance(bankBalance - amount);
+		}
+		return true;
 	}
 	
 	public boolean canPerformGalacticReserveTransaction() {
@@ -567,6 +612,14 @@ public class CreatureObject extends TangibleObject {
 	public long getStatesBitmask() {
 		return statesBitmask;
 	}
+	
+	public boolean isStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states) {
+			if ((statesBitmask & state.getBitmask()) == 0)
+				return false;
+		}
+		return true;
+	}
 
 	public void setStatesBitmask(CreatureState ... states) {
 		for (CreatureState state : states)
@@ -795,6 +848,25 @@ public class CreatureObject extends TangibleObject {
 		}
 		return items;
 	}
+	
+	public Map<CreatureObject, Integer> getDamageMap(){
+		return Collections.unmodifiableMap(damageMap);
+	}
+	
+	public CreatureObject getHighestDamageDealer(){
+		synchronized (damageMap){
+			return damageMap.keySet().stream().max((c1, c2) -> damageMap.get(c1) - damageMap.get(c2)).orElse(null);
+		}
+	}
+	
+	public void handleDamage(CreatureObject attacker, int damage){
+		synchronized (damageMap){
+			if(damageMap.containsKey(attacker))
+				damageMap.put(attacker, damageMap.get(attacker) + damage);
+			else 
+				damageMap.put(attacker, damage);
+		}
+	}
 
 	public boolean isAttackable(CreatureObject otherObject) {
 		Posture otherPosture = otherObject.getPosture();
@@ -937,8 +1009,6 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		posture = Posture.getFromId(buffer.getByte());
 		factionRank = buffer.getByte();
 		ownerId = buffer.getLong();
@@ -950,16 +1020,12 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline4(NetBuffer buffer) {
 		super.parseBaseline4(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		creo4.parseBaseline4(buffer);
 	}
 	
 	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		creo6.parseBaseline6(buffer);
 	}
 	

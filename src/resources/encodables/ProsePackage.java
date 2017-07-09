@@ -261,7 +261,20 @@ public class ProsePackage implements OutOfBandData {
 		return "ProsePackage[base=" + base + ", grammarFlag=" + grammarFlag + ", actor=" + actor + ", target=" + target + ", other=" + other + ", di=" + di + ", df=" + df + "]";
 	}
 	
-	private static class Prose implements Encodable, Persistable {
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof ProsePackage))
+			return false;
+		ProsePackage pp = (ProsePackage) o;
+		return base.equals(pp.base) && actor.equals(pp.actor) && target.equals(pp.target) && other.equals(pp.other) && grammarFlag == pp.grammarFlag && di == pp.di && df == pp.df;
+	}
+	
+	@Override
+	public int hashCode() {
+		return base.hashCode() * 3 + actor.hashCode() * 7 + target.hashCode() * 13 + other.hashCode() * 17 + (grammarFlag ? 1 : 0) + di * 19 + ((int) (df * 23));
+	}
+	
+	public static class Prose implements Encodable, Persistable {
 		
 		private long objectId;
 		private StringId stringId;
@@ -322,6 +335,19 @@ public class ProsePackage implements OutOfBandData {
 			stringId.read(stream);
 			objectId = stream.getLong();
 			text = stream.getUnicode();
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (!(o instanceof Prose))
+				return false;
+			Prose p = (Prose) o;
+			return stringId.equals(p.stringId) && objectId == p.objectId && text.equals(p.text);
+		}
+		
+		@Override
+		public int hashCode() {
+			return stringId.hashCode() * 3 + Long.hashCode(objectId) * 7 + text.hashCode() * 13;
 		}
 
 		@Override

@@ -27,21 +27,22 @@
 
 package resources.commands.callbacks;
 
-import java.io.FileNotFoundException;
-import java.util.Map;
-
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
-
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
+import intents.object.ForceAwarenessUpdateIntent;
+import intents.object.MoveObjectIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.commands.ICmdCallback;
+import resources.containers.ContainerPermissionsType;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -57,6 +58,8 @@ import services.objects.ObjectManager;
 import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
+
+import java.util.Map;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -91,10 +94,13 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "recover":
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
+				case "setinstance":
+					setInstance(player, args.substring(args.indexOf(' ') + 1));
+					break;
 				case "details":
 					try {
 						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
-					} catch (FileNotFoundException ex) {
+					} catch (ResourceException | ScriptException e) {
 						Log.e("sendDetails qatool script not found!");
 					}
 					break;
@@ -158,7 +164,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			public boolean isIgnoreVolume() {
 				return false;
 			}
-		}, itemName).broadcast();
+		}, ContainerPermissionsType.DEFAULT, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
@@ -192,6 +198,21 @@ public class QaToolCmdCallback implements ICmdCallback {
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
 		new ObjectTeleportIntent(obj, loc).broadcast();
 		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
+	}
+	
+	private void setInstance(Player player, String args) {
+		try {
+			CreatureObject creature = player.getCreatureObject();
+			if (creature.getParent() != null) {
+				new MoveObjectIntent(creature, creature.getWorldLocation(), 0, 0).broadcast();
+			}
+			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
+			new ForceAwarenessUpdateIntent(creature).broadcast();
+		} catch (NumberFormatException e) {
+			Log.e("Invalid instance number with qatool: %s", args);
+			sendSystemMessage(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
+			return;
+		}
 	}
 	
 	private void displayHelp(Player player) {

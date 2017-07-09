@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.projectswg.common.callback.CallbackManager;
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
@@ -79,8 +78,7 @@ public class TerrainMap {
 		return callbackManager.isQueueEmpty();
 	}
 	
-	public void moveWithinMap(SWGObject obj, Location loc) {
-		obj.setLocation(loc);
+	public void moveWithinMap(SWGObject obj) {
 		if (isInAwareness(obj)) {
 			move(obj);
 			update(obj);

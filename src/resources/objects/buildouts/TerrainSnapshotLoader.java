@@ -93,8 +93,8 @@ public class TerrainSnapshotLoader {
 	private SWGObject createObject(Map <Integer, String> templateMap, Node row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getId(), templateMap.get(row.getObjectTemplateNameIndex()));
 		Location l = row.getLocation();
-		l.setTerrain(terrain);
-		object.setLocation(l);
+		object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
+		object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
 		return object;
 	}
 	

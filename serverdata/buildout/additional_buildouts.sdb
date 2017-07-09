@@ -34,10 +34,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	INTEGER
 32	TATOOINE	object/building/poi/shared_tatooine_jawa_tradesmen_camp_medium1.iff		-3513.26	13.99	2060.90	0	tat_world	0	256	1	
 33	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4287.56	9.28	-4739.69	0	tat_world	0	256	1	
 34	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4251.40	8.75	2488.28	0	tat_world	0	256	1	
-35	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-75	28	-4723	0	cor_world	0	1024	1	Coronet Starport
-36	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-4998	21	-2246	0	cor_world	0	1024	1	Tyrena Starport
-37	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-3141	31	2864	0	cor_world	0	1024	1	Kor Vella Starport
-38	CORELLIA	object/mobile/shared_distant_ship_controller.iff		3358	308	5581	0	cor_world	0	1024	1	Doaba Guerfel Starport
+35	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-75	28	-4723	0	cor_world	0	512	1	Coronet Starport
+36	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-4998	21	-2246	0	cor_world	0	512	1	Tyrena Starport
+37	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-3141	31	2864	0	cor_world	0	512	1	Kor Vella Starport
+38	CORELLIA	object/mobile/shared_distant_ship_controller.iff		3358	308	5581	0	cor_world	0	512	1	Doaba Guerfel Starport
 39	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-636	3	2505	0	dan_world	0	512	1	Mining Outpost
 40	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-4208	3	-2350	0	dan_world	0	512	1	Imperial Outpost
 41	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		1569	4	-6415	0	dan_world	0	512	1	Agro Outpost
@@ -45,23 +45,23 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	INTEGER
 43	DATHOMIR	object/mobile/shared_distant_ship_controller.iff		618	6	3092	0	dat_world	0	512	1	Trade Outpost
 44	ENDOR	object/mobile/shared_distant_ship_controller.iff		-950	73	1553	0	end_world	0	512	1	Smuggler Outpost
 45	ENDOR	object/mobile/shared_distant_ship_controller.iff		3201	24	-3500	0	end_world	0	512	1	Research Outpost
-46	KASHYYYK_MAIN	object/mobile/shared_distant_ship_controller.iff		-689	21	-170	0	kas_main_world	0	256	1	Kachirho Starport
+46	KASHYYYK_MAIN	object/mobile/shared_distant_ship_controller.iff		-689	21	-170	0	kas_main_world	0	512	1	Kachirho Starport
 47	LOK	object/mobile/shared_distant_ship_controller.iff		479	8	5511	0	lok_world	0	512	1	Nym's Stronghold
 48	MUSTAFAR	object/mobile/shared_distant_ship_controller.iff		407	230	-1355	0	mus_world	0	512	1	Mensix Mining Facility
-49	NABOO	object/mobile/shared_distant_ship_controller.iff		5295	-192	6675	0	nab_world	0	1024	1	Kaadara Starport
-50	NABOO	object/mobile/shared_distant_ship_controller.iff		1377	13	2760	0	nab_world	0	1024	1	Keren Starport
-51	NABOO	object/mobile/shared_distant_ship_controller.iff		4745	0	-4672	0	nab_world	0	1024	1	Moenia Starport
-52	NABOO	object/mobile/shared_distant_ship_controller.iff		-4866	6	4155	0	nab_world	0	1024	1	Theed Spaceport
-53	RORI	object/mobile/shared_distant_ship_controller.iff		-5359	80	-2188	0	ror_world	0	1024	1	Narmle Starport
+49	NABOO	object/mobile/shared_distant_ship_controller.iff		5295	-192	6675	0	nab_world	0	512	1	Kaadara Starport
+50	NABOO	object/mobile/shared_distant_ship_controller.iff		1377	13	2760	0	nab_world	0	512	1	Keren Starport
+51	NABOO	object/mobile/shared_distant_ship_controller.iff		4745	0	-4672	0	nab_world	0	512	1	Moenia Starport
+52	NABOO	object/mobile/shared_distant_ship_controller.iff		-4866	6	4155	0	nab_world	0	512	1	Theed Spaceport
+53	RORI	object/mobile/shared_distant_ship_controller.iff		-5359	80	-2188	0	ror_world	0	512	1	Narmle Starport
 54	RORI	object/mobile/shared_distant_ship_controller.iff		3693	96	-6403	0	ror_world	0	512	1	Rebel Outpost
 55	RORI	object/mobile/shared_distant_ship_controller.iff		5301	80	6190	0	ror_world	0	512	1	Restuss Starport
-56	TALUS	object/mobile/shared_distant_ship_controller.iff		274	6	-2933	0	tal_world	0	1024	1	Dearic Starport
-57	TALUS	object/mobile/shared_distant_ship_controller.iff		4461	2	5342	0	tal_world	0	1024	1	Nashal Starport
+56	TALUS	object/mobile/shared_distant_ship_controller.iff		274	6	-2933	0	tal_world	0	512	1	Dearic Starport
+57	TALUS	object/mobile/shared_distant_ship_controller.iff		4461	2	5342	0	tal_world	0	512	1	Nashal Starport
 58	TALUS	object/mobile/shared_distant_ship_controller.iff		-2227	20	2322	0	tal_world	0	512	1	Imperial Outpost
-59	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-1350	12	-3586	0	tat_world	0	1024	1	Bestine Starport
-60	TATOOINE	object/mobile/shared_distant_ship_controller.iff		3592	5	-4793	0	tat_world	0	1024	1	Mos Eisley Starport
-61	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-2844	5	2097	0	tat_world	0	1024	1	Mos Espa Starport
-62	TATOOINE	object/mobile/shared_distant_ship_controller.iff		1257	7	3079	0	tat_world	0	1024	1	Mos Entha Starport
+59	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-1350	12	-3586	0	tat_world	0	512	1	Bestine Starport
+60	TATOOINE	object/mobile/shared_distant_ship_controller.iff		3592	5	-4793	0	tat_world	0	512	1	Mos Eisley Starport
+61	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-2844	5	2097	0	tat_world	0	512	1	Mos Espa Starport
+62	TATOOINE	object/mobile/shared_distant_ship_controller.iff		1257	7	3079	0	tat_world	0	512	1	Mos Entha Starport
 63	YAVIN4	object/mobile/shared_distant_ship_controller.iff		4054	37	-6216	0	yav_world	0	512	1	Imperial Base
 64	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-6922	73	-5727	0	yav_world	0	512	1	Labor Outpost
 65	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-267	35	4896	0	yav_world	0	512	1	Mining Outpost
@@ -274,12 +274,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	INTEGER
 272	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-168.70	-44.00	77.20	82	nab_mauler_stronghold	29	128	1	
 273	DATHOMIR	object/tangible/quest/township/shared_axkva_nightsister_skull.iff		47.50	-54.50	-155.60	-37	dat_ns_rancor_cave	5	128	1	
 274	DATHOMIR	object/tangible/quest/township/shared_axkva_pedastal.iff		47.50	-58.35	-155.60	-37	dat_ns_rancor_cave	5	128	1	
-275	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_02.iff		5382.48	98.24	-4065.40	0	dat_world	0	256	0	
-276	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_03.iff		5116.33	78.39	-3957.83	0	dat_world	0	256	0	
-277	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_04.iff		5408.06	78.87	-4189.11	0	dat_world	0	256	0	
-278	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_05.iff		-3.87	0.56	-0.35	0	dat_aurilia_prisoner_hut1	1	128	0	
-279	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_06.iff		9.39	1.75	-2.12	0	dat_aurilia_adv_gh	10	256	0	
-280	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5312.49	78.50	-4159.19	0	dat_world	0	256	0	
+275	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5382.48	98.24	-4065.40	0	dat_world	0	64	1	Figurine 2
+276	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5116.33	78.39	-3957.83	0	dat_world	0	64	1	Figurine 3
+277	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5408.06	78.87	-4189.11	0	dat_world	0	64	1	Figurine 4
+278	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		-3.87	0.56	-0.35	0	dat_aurilia_prisoner_hut1	1	64	1	Figurine 5
+279	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		9.39	1.75	-2.12	0	dat_aurilia_adv_gh	10	64	1	Figurine 6
+280	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5312.49	78.50	-4159.19	0	dat_world	0	64	1	Figurine 1
 281	ENDOR	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		-6500.00	-0.92	-7000.00	0	end_world	0	8	1	PvP Battlefield
 282	YAVIN4	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		1015.00	68.68	425.00	0	yav_world	0	8	0	PvP Battlefield
 283	DATHOMIR	object/tangible/spawning/kashyyyk/shared_rodian_shuttle_spawner.iff		5423.04	83.16	-4125.71	0	dat_world	0	256	0	
@@ -385,3 +385,4 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	INTEGER
 383	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-103.94	-27.56	-191.13	0	yav_geonosian_cave	27	8	1	
 384	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-127.62	-34.00	-250.77	0	yav_geonosian_cave	33	8	1	
 385	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		47.47	-34.00	-333.93	0	yav_geonosian_cave	43	8	1	
+386	TATOOINE	object/tangible/crafting/station/shared_public_space_station.iff		3534	5.00	-4811.00	-90	tat_world	0	8	1	

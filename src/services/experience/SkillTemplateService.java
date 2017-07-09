@@ -49,6 +49,7 @@ import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.Race;
+import resources.containers.ContainerPermissionsType;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -155,7 +156,7 @@ public final class SkillTemplateService extends Service {
 			flyTextColor = new RGB(Color.BLUE);
 		}
 		
-		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId));
+		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId, ""));
 		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
 		if (skillUp)
@@ -196,7 +197,7 @@ public final class SkillTemplateService extends Service {
 			
 			// No reason to broadcast this intent if we don't need new static items anyways
 			if (!staticItems.isEmpty())
-				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), staticItems.toArray(new String[staticItems.size()])).broadcast();
+				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[staticItems.size()])).broadcast();
 		}
 	}
 

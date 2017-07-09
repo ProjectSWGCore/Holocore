@@ -87,11 +87,13 @@ public class CellObject extends SWGObject {
 		this.labelZ = z;
 	}
 
+	@Override
 	protected void sendFinalBaselinePackets(Player target) {
 		super.sendFinalBaselinePackets(target);
 		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addBoolean(isPublic);
@@ -99,21 +101,24 @@ public class CellObject extends SWGObject {
 		bb.incrementOperandCount(2);
 	}
 	
+	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addUnicode(label);
 		bb.addFloat((float) labelX);
-		bb.addFloat((float) 0);
+		bb.addFloat(0);
 		bb.addFloat((float) labelZ);
 		bb.incrementOperandCount(2);
 	}
 	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		isPublic = buffer.getBoolean();
 		number = buffer.getInt();
 	}
 	
+	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		label = buffer.getUnicode();

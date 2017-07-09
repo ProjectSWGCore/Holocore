@@ -27,103 +27,36 @@
 ***********************************************************************************/
 package services.galaxy.travel;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.debug.Log;
 
 import resources.Posture;
-import resources.TravelPoint;
 import resources.objects.creature.CreatureObject;
 
 public class TravelGroup implements Runnable {
 	
-	private final Set<TravelPoint> points;
-	private final Map<Terrain, Set<TravelPoint>> terrainToPoint;
+	private final List<TravelPoint> points;
 	private final AtomicLong timeRemaining;
-	private final String template;
 	private final long landTime;
 	private final long groundTime;
 	private final long airTime;
-	private final boolean starport;
 	private ShuttleStatus status;
 	
-	public TravelGroup(String template, long landTime, long groundTime, long airTime) {
-		this.points = new HashSet<>();
-		this.terrainToPoint = new HashMap<>();
+	public TravelGroup(long landTime, long groundTime, long airTime) {
+		this.points = new ArrayList<>();
 		this.timeRemaining = new AtomicLong(airTime / 1000);
-		this.template = template;
 		this.landTime = landTime + 10000;
 		this.groundTime = groundTime;
 		this.airTime = airTime;
-		String [] folders = template.split("/");
-		this.starport = folders[folders.length - 1].startsWith("shared_player_transport");
 		this.status = ShuttleStatus.GROUNDED;
 	}
 	
 	public void addTravelPoint(TravelPoint point) {
-		point.setGroup(this);
-		synchronized (points) {
-			points.add(point);
-		}
-		synchronized (terrainToPoint) {
-			Terrain t = point.getLocation().getTerrain();
-			Set<TravelPoint> s = terrainToPoint.get(t);
-			if (s == null) {
-				s = new HashSet<>();
-				terrainToPoint.put(t, s);
-			}
-			s.add(point);
-		}
-	}
-	
-	public void getPointsForTerrain(Collection<TravelPoint> points, TravelPoint nearest, Terrain to) {
-		synchronized (terrainToPoint) {
-			Set<TravelPoint> set = terrainToPoint.get(to);
-			if (set == null)
-				return;
-			if (nearest.getLocation().getTerrain() == to)
-				points.addAll(set);
-			else if (nearest.isStarport() && starport)
-				points.addAll(set);
-		}
-	}
-	
-	public TravelPoint getNearestPoint(Location l) {
-		synchronized (terrainToPoint) {
-			Set<TravelPoint> set = terrainToPoint.get(l.getTerrain());
-			if (set == null || set.isEmpty()) {
-				return null;
-			}
-			TravelPoint nearest = null;
-			double dist = Double.MAX_VALUE;
-			for (TravelPoint tp : set) {
-				if (tp.getLocation().distanceTo(l) < dist) {
-					nearest = tp;
-					dist = tp.getLocation().distanceTo(l);
-				}
-			}
-			return nearest;
-		}
-	}
-	
-	public TravelPoint getDestination(Terrain t, String destination) {
-		synchronized (terrainToPoint) {
-			Set<TravelPoint> set = terrainToPoint.get(t);
-			if (set == null)
-				return null;
-			for (TravelPoint tp : set) {
-				if (tp.getName().equals(destination))
-					return tp;
-			}
-			return null;
-		}
+		this.points.add(point);
 	}
 	
 	public int getTimeRemaining() {
@@ -137,43 +70,54 @@ public class TravelGroup implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while (true) {
+			while (!Delay.isInterrupted()) {
 				// GROUNDED
-				status = ShuttleStatus.GROUNDED;
-				Thread.sleep(groundTime);
-				
+				handleStatusGrounded();
 				// LEAVING
-				status = ShuttleStatus.LEAVING;
-				updateShuttlePostures(false);
-				Thread.sleep(landTime);
-				
+				handleStatusLeaving();
 				// AWAY
-				status = ShuttleStatus.AWAY;
-				for (int timeElapsed = 0; timeElapsed < airTime / 1000; timeElapsed++) {
-					Thread.sleep(1000);	// Sleep for a second
-					timeRemaining.decrementAndGet();
-				}
-				timeRemaining.set(airTime / 1000);	// Reset the timer
-				
+				handleStatusAway();
 				// LANDING
-				status = ShuttleStatus.LANDING;
-				updateShuttlePostures(true);
-				Thread.sleep(landTime);
+				handleStatusLanding();
 			}
-		} catch (InterruptedException e) {
-			
 		} catch (Exception e) {
 			Log.e(e);
 		}
+	}
+	
+	private void handleStatusGrounded() {
+		status = ShuttleStatus.GROUNDED;
+		Delay.sleepMilli(groundTime);
+	}
+	
+	private void handleStatusLeaving() {
+		status = ShuttleStatus.LEAVING;
+		updateShuttlePostures(false);
+		Delay.sleepMilli(landTime);
+	}
+	
+	private void handleStatusAway() {
+		status = ShuttleStatus.AWAY;
+		for (int timeElapsed = 0; timeElapsed < airTime / 1000; timeElapsed++) {
+			if (Delay.sleepSeconds(1))
+				break;
+			timeRemaining.decrementAndGet();
+		}
+		timeRemaining.set(airTime / 1000);	// Reset the timer
+	}
+	
+	private void handleStatusLanding() {
+		status = ShuttleStatus.LANDING;
+		updateShuttlePostures(true);
+		Delay.sleepMilli(landTime);
 	}
 	
 	private void updateShuttlePostures(boolean landed) {
 		synchronized (points) {
 			for (TravelPoint tp : points) {
 				CreatureObject shuttle = tp.getShuttle();
-				
-				if (shuttle == null || !shuttle.getTemplate().equals(template))	// This TravelPoint has no associated shuttle
-					continue;	// Continue with the next TravelPoint
+				if (shuttle == null) // No associated shuttle
+					continue;
 				
 				shuttle.setPosture(landed ? Posture.UPRIGHT : Posture.PRONE);
 			}

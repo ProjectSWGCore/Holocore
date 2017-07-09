@@ -27,18 +27,38 @@
 ***********************************************************************************/
 package main;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.projectswg.common.control.IntentManager;
+
 import network.encryption.TestEncryption;
 import resources.TestResources;
+import resources.server_info.DataManager;
+import services.TestServices;
+import utilities.ScheduledUtilities;
 
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestEncryption.class,
-	TestResources.class
+	TestResources.class,
+	TestServices.class
 })
 public class TestAll {
+	
+	@BeforeClass
+	public static void initLog() {
+		DataManager.initialize();
+	}
+	
+	@AfterClass
+	public static void terminateLog() {
+		DataManager.terminate();
+		IntentManager.getInstance().terminate();
+		ScheduledUtilities.shutdown();
+	}
 	
 }

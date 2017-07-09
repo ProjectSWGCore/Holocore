@@ -192,7 +192,10 @@ public class EntertainmentService extends Service {
 		Player performer = fi.getPerformer();
 		CreatureObject performerObject = performer.getCreatureObject();
 		
-		performerObject.setPerformanceCounter(performerObject.getPerformanceCounter() + 1);
+		if (performerObject.getPerformanceCounter() != 0)
+			return;
+		
+		performerObject.setPerformanceCounter(1);
 		
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
 		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
@@ -313,6 +316,7 @@ public class EntertainmentService extends Service {
 	private void startDancing(CreatureObject dancer, String danceName) {
 		dancer.setAnimation("dance_" + performanceMap.get(danceName).getPerformanceId());
 		dancer.setPerformanceId(0);	// 0 - anything else will make it look like we're playing music
+		dancer.setPerformanceCounter(0);
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
 		
@@ -450,7 +454,7 @@ public class EntertainmentService extends Service {
 			PerformanceData performanceData = performanceMap.get(performanceName);
 			int flourishXpMod = performanceData.getFlourishXpMod();
 			int performanceCounter = performer.getPerformanceCounter();
-			int xpGained = (int) (performanceCounter * (flourishXpMod * 3.8));
+			int xpGained = (int) (performanceCounter * flourishXpMod);
 			
 			if(xpGained > 0) {
 				new ExperienceIntent(performer, "entertainer", xpGained).broadcast();

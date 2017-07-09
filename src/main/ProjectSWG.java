@@ -30,14 +30,20 @@ package main;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Thread.State;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.control.IntentManager.IntentSpeedRecord;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.debug.Log.LogLevel;
 import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
@@ -53,6 +59,7 @@ public class ProjectSWG {
 	
 	private static ProjectSWG server;
 	private final Thread mainThread;
+	private final Result testResult;
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	private ServerStatus status;
@@ -60,9 +67,11 @@ public class ProjectSWG {
 	private int adminServerPort;
 	
 	public static final void main(String [] args) throws IOException {
+		Result testResult = verifyTestCases();
+		new File("log").mkdirs();
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
-		Log.addWrapper(new FileLogWrapper(new File("log.txt")));
-		server = new ProjectSWG();
+		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
+		server = new ProjectSWG(testResult);
 		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			forcingShutdown.set(true);
@@ -104,13 +113,14 @@ public class ProjectSWG {
 	}
 	
 	private static void startupStaticClasses() {
-		DataManager.initialize();
+		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()*10));
 		IntentManager.getInstance().initialize();
+		DataManager.initialize();
 	}
 	
 	private static void shutdownStaticClasses() {
-		IntentManager.getInstance().terminate();
 		DataManager.terminate();
+		IntentManager.getInstance().terminate();
 	}
 	
 	private static void printFinalPswgState() {
@@ -123,16 +133,50 @@ public class ProjectSWG {
 		for (Thread thread : threads) {
 			Log.i("        Thread: %s", thread.getName());
 		}
+		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
+		Collections.sort(intentTimes);
+		Log.i("    Intent Times: [%d]", intentTimes.size());
+		Log.i("        %-30s%-40s%-10s%s", "Intent", "Receiver", "Count", "Time");
+		for (IntentSpeedRecord record : intentTimes) {
+			String receiverName = record.getConsumer().getClass().getName();
+			if (receiverName.indexOf('$') != -1)
+				receiverName = receiverName.substring(0, receiverName.indexOf('$'));
+			Log.i("        %-30s%-40s%-10s%.6fms", record.getIntent().getSimpleName(), receiverName, Long.toString(record.getCount()), record.getTime() / 1E6);
+		}
 	}
 	
-	private ProjectSWG() {
-		mainThread = Thread.currentThread();
-		shutdownRequested = false;
-		initStatus = ServerInitStatus.INITIALIZED;
+	private static Result verifyTestCases() {
+		try {
+			return JUnitCore.runClasses(TestAll.class);
+		} catch (Throwable t) {
+			throw new CoreException("Exception when starting test cases", t);
+		}
+	}
+	
+	private ProjectSWG(Result testResult) {
+		this.mainThread = Thread.currentThread();
+		this.testResult = testResult;
+		this.manager = null;
+		this.shutdownRequested = false;
+		this.status = ServerStatus.OFFLINE;
+		this.initStatus = ServerInitStatus.INITIALIZED;
+		this.adminServerPort = 0;
 	}
 	
 	private void run(String [] args) {
 		setupParameters(args);
+		if (testResult.getFailureCount() > 0) {
+			int passCount = testResult.getRunCount()-testResult.getFailureCount();
+			int runCount = testResult.getRunCount();
+			for (Failure failure : testResult.getFailures()) {
+				Log.e("Failed test. Class: %s  Method: %s", failure.getDescription().getTestClass(), failure.getDescription().getMethodName());
+			}
+			Log.e("Passed %d of %d unit tests in %.3fms - aborting start", passCount, runCount, testResult.getRunTime() / 1000.0);
+			return;
+		} else {
+			int runCount = testResult.getRunCount();
+			Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
+		}
 		long start = System.nanoTime();
 		manager = new CoreManager(adminServerPort);
 		long end = System.nanoTime();
@@ -219,7 +263,7 @@ public class ProjectSWG {
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
-			if (Delay.sleepMicro(50))
+			if (Delay.sleepMilli(50))
 				throw new CoreException("Main Thread Interrupted");
 		}
 	}
@@ -264,6 +308,10 @@ public class ProjectSWG {
 		
 		public CoreException(String reason) {
 			super(reason);
+		}
+		
+		public CoreException(String reason, Throwable cause) {
+			super(reason, cause);
 		}
 		
 	}

@@ -29,7 +29,6 @@ package services.player.zone;
 
 import java.util.concurrent.TimeUnit;
 
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
@@ -75,9 +74,8 @@ public class ZoneRequester {
 	
 	private boolean debugChecks(SWGObject creatureObject, Player player, long characterId) {
 		if (isSafeZone()) {
-			Location safeLocation = new Location(0, 0, 0, Terrain.DEV_AREA);
-			creatureObject.setLocation(safeLocation);
-			new ChatBroadcastIntent(player, "Safe-zoning into dev terrain at " + safeLocation.getPosition()).broadcast();
+			creatureObject.setPosition(Terrain.DEV_AREA, 0, 0, 0);
+			new ChatBroadcastIntent(player, "Safe-zoning into dev terrain at (0, 0, 0)").broadcast();
 		}
 		return true;
 	}

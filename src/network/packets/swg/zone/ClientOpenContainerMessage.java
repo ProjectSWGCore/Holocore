@@ -58,7 +58,7 @@ public class ClientOpenContainerMessage extends SWGPacket {
 	}
 	
 	public NetBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(20 + slot.length());
+		NetBuffer data = NetBuffer.allocate(16 + slot.length());
 		data.addShort(2);
 		data.addInt(CRC);
 		data.addLong(containerId);

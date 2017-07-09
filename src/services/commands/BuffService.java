@@ -27,20 +27,13 @@
 ***********************************************************************************/
 package services.commands;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
-
 import com.projectswg.common.concurrency.PswgBasicScheduledThread;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
-
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
@@ -53,6 +46,13 @@ import resources.server_info.StandardLog;
 import services.commands.buff.BuffData;
 import services.commands.buff.BuffMap;
 import utilities.Scripts;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 
 public class BuffService extends Service {
 	
@@ -310,7 +310,7 @@ public class BuffService extends Service {
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
 		if (!effectFileName.isEmpty()) {
-			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId()));
+			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
 		}
 	}
 	
@@ -326,7 +326,7 @@ public class BuffService extends Service {
 		} else {
 			try {
 				Scripts.invoke("buffs/callback" + callback, callback, creature);
-			} catch (FileNotFoundException ex) {
+			} catch (ResourceException | ScriptException e) {
 				Log.w("Callback script %s doesn't exist - buff %s won't behave as expected", callback, buffData.getName());
 			}
 		}

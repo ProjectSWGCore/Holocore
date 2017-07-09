@@ -32,6 +32,7 @@ import resources.objects.SWGObject;
 public enum ContainerPermissionsType {
 	DEFAULT		(new DefaultPermissions()),
 	INVENTORY	(new InventoryPermissions()),
+	LOOT		(new LootPermissions()),
 	ADMIN		(new AdminPermissions());
 	
 	private final ContainerPermissions permissions;

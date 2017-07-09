@@ -35,12 +35,14 @@ import com.projectswg.common.debug.Log;
 
 import intents.chat.ChatBroadcastIntent;
 import intents.connection.ForceLogoutIntent;
+import resources.Posture;
 import resources.commands.ICmdCallback;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
 import utilities.ScheduledUtilities;
 
@@ -50,28 +52,57 @@ public class LogoutCmdCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		Assert.notNull(creature);
+		creature.setPosture(Posture.SITTING);
+		Log.i("Logout command called for %s - 30s timer started", creature.getObjectName());
 		updateLogout(player, creature, 30);
 	}
 	
 	private void updateLogout(Player player, CreatureObject creature, int timeToLogout) {
+		if (!checkValidLogout(player, creature)) {
+			sendSystemMessage(player, "aborted");
+			return;
+		}
+		
+		if (timeToLogout == 0) {
+			IntentChain.broadcastChain(new ChatBroadcastIntent(player, "@logout:safe_to_log_out"), new ForceLogoutIntent(player));
+			return;
+		}
+		if (isSystemMessageInterval(timeToLogout)) {
+			sendSystemMessage(player, "time_left", "DI", timeToLogout);
+		}
+		ScheduledUtilities.run(() -> updateLogout(player, creature, timeToLogout-1), 1, TimeUnit.SECONDS);
+	}
+	
+	private boolean isSystemMessageInterval(int timeToLogout) {
+		return timeToLogout == 30 || timeToLogout == 20 || timeToLogout == 10 || timeToLogout <= 5;
+	}
+	
+	private boolean checkValidLogout(Player player, CreatureObject creature) {
 		if (creature.isInCombat()) {
 			Log.i("Logout cancelled for %s - in combat!", creature.getObjectName());
-			return;
+			return false;
 		}
 		if (player.getCreatureObject() != creature) {
 			Log.i("Logout cancelled for %s - Player became invalid", creature.getObjectName());
-			return;
+			return false;
 		}
-		if (timeToLogout == 0) {
-			IntentChain.broadcastChain(
-					new ChatBroadcastIntent(player, "@logout:safe_to_log_out"),
-					new ForceLogoutIntent(player));
-			return;
+		if (creature.getPosture() != Posture.SITTING) {
+			Log.i("Logout cancelled for %s - stood up!", creature.getObjectName());
+			return false;
 		}
-		if (timeToLogout == 30 || timeToLogout == 20 || timeToLogout == 10 || timeToLogout <= 5) {
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("logout", "time_left"), "DI", timeToLogout)).broadcast();
+		if (player.getPlayerState() != PlayerState.ZONED_IN) {
+			Log.i("Logout cancelled for %s - player state changed to %s", player.getPlayerState());
+			return false;
 		}
-		ScheduledUtilities.run(() -> updateLogout(player, creature, timeToLogout-1), 1, TimeUnit.SECONDS);
+		return true;
+	}
+	
+	private void sendSystemMessage(Player player, String str) {
+		new ChatBroadcastIntent(player, "@logout:" + str).broadcast();
+	}
+	
+	private void sendSystemMessage(Player player, String str, String proseKey, Object prose) {
+		new ChatBroadcastIntent(player, new ProsePackage(new StringId("@logout:" + str), proseKey, prose)).broadcast();
 	}
 	
 }

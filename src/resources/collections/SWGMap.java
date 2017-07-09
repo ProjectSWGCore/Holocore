@@ -30,6 +30,7 @@ package resources.collections;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
@@ -41,7 +42,9 @@ import com.projectswg.common.network.NetBuffer;
 
 import resources.objects.SWGObject;
 
-public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
+public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final int view;
 	private final int updateType;

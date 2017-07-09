@@ -1,0 +1,847 @@
+id	parent	resource_name	crate_template	min_types	max_types	min_pools	max_pools	recycled
+INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER
+1	0	resource		658	690	0	0	0
+2	1	energy		69	76	0	0	0
+3	2	energy_renewable		69	76	0	0	0
+4	3	energy_renewable_site_limited		38	46	0	0	0
+5	4	energy_renewable_site_limited_geothermal		12	21	0	0	0
+6	5	energy_renewable_site_limited_geothermal_corellia	object/resource_container/energy_liquid.iff	1	2	1	1	0
+7	5	energy_renewable_site_limited_geothermal_dantooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+8	5	energy_renewable_site_limited_geothermal_dathomir	object/resource_container/energy_liquid.iff	1	2	1	1	0
+9	5	energy_renewable_site_limited_geothermal_endor	object/resource_container/energy_liquid.iff	1	2	1	1	0
+10	5	energy_renewable_site_limited_geothermal_kashyyyk	object/resource_container/energy_liquid.iff	1	2	4	4	0
+11	5	energy_renewable_site_limited_geothermal_lok	object/resource_container/energy_liquid.iff	1	2	1	1	0
+12	5	energy_renewable_site_limited_geothermal_naboo	object/resource_container/energy_liquid.iff	1	2	1	1	0
+13	5	energy_renewable_site_limited_geothermal_rori	object/resource_container/energy_liquid.iff	1	2	1	1	0
+14	5	energy_renewable_site_limited_geothermal_talus	object/resource_container/energy_liquid.iff	1	2	1	1	0
+15	5	energy_renewable_site_limited_geothermal_tatooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+16	5	energy_renewable_site_limited_geothermal_weak	object/resource_container/energy_liquid.iff	1	1	1	1	1
+17	5	energy_renewable_site_limited_geothermal_yavin4	object/resource_container/energy_liquid.iff	1	2	1	1	0
+18	4	energy_renewable_site_limited_hydron3		12	21	0	0	0
+19	18	energy_renewable_site_limited_hydron3_corellia	object/resource_container/energy_liquid.iff	1	2	1	1	0
+20	18	energy_renewable_site_limited_hydron3_dantooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+21	18	energy_renewable_site_limited_hydron3_dathomir	object/resource_container/energy_liquid.iff	1	2	1	1	0
+22	18	energy_renewable_site_limited_hydron3_endor	object/resource_container/energy_liquid.iff	1	2	1	1	0
+23	18	energy_renewable_site_limited_hydron3_kashyyyk	object/resource_container/energy_liquid.iff	1	2	4	4	0
+24	18	energy_renewable_site_limited_hydron3_lok	object/resource_container/energy_liquid.iff	1	2	1	1	0
+25	18	energy_renewable_site_limited_hydron3_naboo	object/resource_container/energy_liquid.iff	1	2	1	1	0
+26	18	energy_renewable_site_limited_hydron3_rori	object/resource_container/energy_liquid.iff	1	2	1	1	0
+27	18	energy_renewable_site_limited_hydron3_talus	object/resource_container/energy_liquid.iff	1	2	1	1	0
+28	18	energy_renewable_site_limited_hydron3_tatooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+29	18	energy_renewable_site_limited_hydron3_weak	object/resource_container/energy_liquid.iff	1	1	1	1	1
+30	18	energy_renewable_site_limited_hydron3_yavin4	object/resource_container/energy_liquid.iff	1	2	1	1	0
+31	4	energy_renewable_site_limited_tidal		12	21	0	0	0
+32	31	energy_renewable_site_limited_tidal_corellia	object/resource_container/energy_liquid.iff	1	2	1	1	0
+33	31	energy_renewable_site_limited_tidal_dantooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+34	31	energy_renewable_site_limited_tidal_dathomir	object/resource_container/energy_liquid.iff	1	2	1	1	0
+35	31	energy_renewable_site_limited_tidal_endor	object/resource_container/energy_liquid.iff	1	2	1	1	0
+36	31	energy_renewable_site_limited_tidal_kashyyyk	object/resource_container/energy_liquid.iff	1	2	4	4	0
+37	31	energy_renewable_site_limited_tidal_lok	object/resource_container/energy_liquid.iff	1	2	1	1	0
+38	31	energy_renewable_site_limited_tidal_naboo	object/resource_container/energy_liquid.iff	1	2	1	1	0
+39	31	energy_renewable_site_limited_tidal_rori	object/resource_container/energy_liquid.iff	1	2	1	1	0
+40	31	energy_renewable_site_limited_tidal_talus	object/resource_container/energy_liquid.iff	1	2	1	1	0
+41	31	energy_renewable_site_limited_tidal_tatooine	object/resource_container/energy_liquid.iff	1	2	1	1	0
+42	31	energy_renewable_site_limited_tidal_weak	object/resource_container/energy_liquid.iff	1	1	1	1	1
+43	31	energy_renewable_site_limited_tidal_yavin4	object/resource_container/energy_liquid.iff	1	2	1	1	0
+44	3	energy_renewable_unlimited		24	24	0	0	0
+45	44	energy_renewable_unlimited_solar		12	12	0	0	0
+46	45	energy_renewable_unlimited_solar_corellia	object/resource_container/energy_liquid.iff	1	1	1	1	0
+47	45	energy_renewable_unlimited_solar_dantooine	object/resource_container/energy_liquid.iff	1	1	1	1	0
+48	45	energy_renewable_unlimited_solar_dathomir	object/resource_container/energy_liquid.iff	1	1	1	1	0
+49	45	energy_renewable_unlimited_solar_endor	object/resource_container/energy_liquid.iff	1	1	1	1	0
+50	45	energy_renewable_unlimited_solar_kashyyyk	object/resource_container/energy_liquid.iff	1	1	4	4	0
+51	45	energy_renewable_unlimited_solar_lok	object/resource_container/energy_liquid.iff	1	1	1	1	0
+52	45	energy_renewable_unlimited_solar_naboo	object/resource_container/energy_liquid.iff	1	1	1	1	0
+53	45	energy_renewable_unlimited_solar_rori	object/resource_container/energy_liquid.iff	1	1	1	1	0
+54	45	energy_renewable_unlimited_solar_talus	object/resource_container/energy_liquid.iff	1	1	1	1	0
+55	45	energy_renewable_unlimited_solar_tatooine	object/resource_container/energy_liquid.iff	1	1	1	1	0
+56	45	energy_renewable_unlimited_solar_weak	object/resource_container/energy_liquid.iff	1	1	1	1	1
+57	45	energy_renewable_unlimited_solar_yavin4	object/resource_container/energy_liquid.iff	1	1	1	1	0
+58	44	energy_renewable_unlimited_wind		12	12	0	0	0
+59	58	energy_renewable_unlimited_wind_corellia	object/resource_container/energy_liquid.iff	1	1	1	1	0
+60	58	energy_renewable_unlimited_wind_dantooine	object/resource_container/energy_liquid.iff	1	1	1	1	0
+61	58	energy_renewable_unlimited_wind_dathomir	object/resource_container/energy_liquid.iff	1	1	1	1	0
+62	58	energy_renewable_unlimited_wind_endor	object/resource_container/energy_liquid.iff	1	1	1	1	0
+63	58	energy_renewable_unlimited_wind_kashyyyk	object/resource_container/energy_liquid.iff	1	1	4	4	0
+64	58	energy_renewable_unlimited_wind_lok	object/resource_container/energy_liquid.iff	1	1	1	1	0
+65	58	energy_renewable_unlimited_wind_naboo	object/resource_container/energy_liquid.iff	1	1	1	1	0
+66	58	energy_renewable_unlimited_wind_rori	object/resource_container/energy_liquid.iff	1	1	1	1	0
+67	58	energy_renewable_unlimited_wind_talus	object/resource_container/energy_liquid.iff	1	1	1	1	0
+68	58	energy_renewable_unlimited_wind_tatooine	object/resource_container/energy_liquid.iff	1	1	1	1	0
+69	58	energy_renewable_unlimited_wind_weak	object/resource_container/energy_liquid.iff	1	1	1	1	1
+70	58	energy_renewable_unlimited_wind_yavin4	object/resource_container/energy_liquid.iff	1	1	1	1	0
+71	1	inorganic		110	209	0	0	0
+72	71	chemical		24	29	0	0	0
+73	72	chemical_compound	object/resource_container/energy_liquid.iff	1	1	1	1	1
+74	72	fiberplast		13	13	0	0	0
+75	74	fiberplast_corellia	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+76	74	fiberplast_dantooine	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+77	74	fiberplast_dathomir	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+78	74	fiberplast_endor	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+79	74	fiberplast_gravitonic	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+80	74	fiberplast_kashyyyk	object/resource_container/inorganic_chemicals.iff	1	1	4	4	0
+81	74	fiberplast_lok	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+82	74	fiberplast_mustafar	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+83	74	fiberplast_naboo	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+84	74	fiberplast_rori	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+85	74	fiberplast_talus	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+86	74	fiberplast_tatooine	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+87	74	fiberplast_yavin4	object/resource_container/inorganic_chemicals.iff	1	1	1	1	0
+88	72	fuel_petrochem_liquid		2	8	0	0	0
+89	88	fuel_petrochem_liquid_known		2	6	0	0	0
+90	89	petrochem_fuel_liquid_mustafar	object/resource_container/inorganic_petrochem_liquid.iff	1	1	1	1	0
+91	89	petrochem_fuel_liquid_type1	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+92	89	petrochem_fuel_liquid_type2	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+93	89	petrochem_fuel_liquid_type3	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+94	89	petrochem_fuel_liquid_type4	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+95	89	petrochem_fuel_liquid_type5	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+96	89	petrochem_fuel_liquid_type6	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+97	89	petrochem_fuel_liquid_type7	object/resource_container/inorganic_petrochem_liquid.iff	0	1	1	3	0
+98	88	petrochem_fuel_liquid_unknown	object/resource_container/inorganic_petrochem_liquid.iff	0	2	1	3	0
+99	72	petrochem_inert		4	7	0	0	0
+100	99	petrochem_inert_lubricating_oil	object/resource_container/inorganic_chemicals.iff	2	5	8	8	0
+101	99	petrochem_inert_polymer	object/resource_container/inorganic_chemicals.iff	2	5	8	8	0
+102	71	gas		6	18	0	0	0
+103	102	gas_inert		2	12	0	0	0
+104	103	gas_inert_known		2	12	0	0	0
+105	104	gas_inert_bilal	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+106	104	gas_inert_corthel	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+107	104	gas_inert_culsion	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+108	104	gas_inert_dioxis	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+109	104	gas_inert_hurlothrombic	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+110	104	gas_inert_hydron3	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+111	104	gas_inert_kaylon	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+112	104	gas_inert_korfaise	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+113	104	gas_inert_malium	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+114	104	gas_inert_methanagen	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+115	104	gas_inert_mirth	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+116	104	gas_inert_mixed	object/resource_container/inorganic_gas.iff	1	1	1	1	1
+117	104	gas_inert_obah	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+118	104	gas_inert_rethin	object/resource_container/inorganic_gas.iff	0	2	8	8	0
+119	103	gas_inert_unknown	object/resource_container/inorganic_gas.iff	0	2	1	3	0
+120	102	gas_reactive		4	10	0	0	0
+121	120	gas_reactive_known		4	8	0	0	0
+122	121	gas_reactive_eleton	object/resource_container/energy_gas.iff	0	2	8	8	0
+123	121	gas_reactive_irolunn	object/resource_container/energy_gas.iff	0	2	8	8	0
+124	121	gas_reactive_methane	object/resource_container/energy_gas.iff	0	2	8	8	0
+125	121	gas_reactive_mixed	object/resource_container/energy_gas.iff	1	1	1	1	1
+126	121	gas_reactive_mustafar	object/resource_container/energy_gas.iff	1	2	1	1	0
+127	121	gas_reactive_organometallic	object/resource_container/energy_gas.iff	1	1	1	1	0
+128	121	gas_reactive_orveth	object/resource_container/energy_gas.iff	0	2	8	8	0
+129	121	gas_reactive_sig	object/resource_container/energy_gas.iff	0	2	8	8	0
+130	121	gas_reactive_skevon	object/resource_container/energy_gas.iff	0	2	8	8	0
+131	121	gas_reactive_tolium	object/resource_container/energy_gas.iff	0	2	8	8	0
+132	120	gas_reactive_unknown	object/resource_container/energy_gas.iff	0	2	1	3	0
+133	71	mineral		67	145	0	0	0
+134	133	fuel_petrochem_solid		3	10	0	0	0
+135	134	degraded_fuel_petrochem_solid	object/resource_container/energy_solid.iff	1	1	1	1	1
+136	134	fuel_petrochem_solid_known		2	7	0	0	0
+137	136	petrochem_fuel_solid_mustafar	object/resource_container/energy_solid.iff	1	1	1	1	0
+138	136	petrochem_fuel_solid_type1	object/resource_container/energy_solid.iff	0	1	1	3	0
+139	136	petrochem_fuel_solid_type2	object/resource_container/energy_solid.iff	0	1	1	3	0
+140	136	petrochem_fuel_solid_type3	object/resource_container/energy_solid.iff	0	1	1	3	0
+141	136	petrochem_fuel_solid_type4	object/resource_container/energy_solid.iff	0	1	1	3	0
+142	136	petrochem_fuel_solid_type5	object/resource_container/energy_solid.iff	0	1	1	3	0
+143	136	petrochem_fuel_solid_type6	object/resource_container/energy_solid.iff	0	1	1	3	0
+144	136	petrochem_fuel_solid_type7	object/resource_container/energy_solid.iff	0	1	1	3	0
+145	134	petrochem_fuel_solid_unknown	object/resource_container/energy_solid.iff	0	2	1	3	0
+146	133	gemstone		9	24	0	0	0
+147	146	gemstone_armophous		4	14	0	0	0
+148	147	armophous_baltaran	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+149	147	armophous_baradium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+150	147	armophous_bospridium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+151	147	armophous_mustafar_1	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+152	147	armophous_mustafar_2	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+153	147	armophous_plexite	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+154	147	armophous_regvis	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+155	147	armophous_rudic	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+156	147	armophous_ryll	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+157	147	armophous_sedrellium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+158	147	armophous_stygium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+159	147	armophous_vendusii	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+160	146	gemstone_crystalline		4	10	0	0	0
+161	160	crystalline_byrothsis	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+162	160	crystalline_gallinorian	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+163	160	crystalline_green_diamond	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+164	160	crystalline_kerol_firegem	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+165	160	crystalline_laboi_mineral_crystal	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+166	160	crystalline_mustafar_1	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+167	160	crystalline_mustafar_2	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+168	160	crystalline_seafah_jewel	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+169	160	crystalline_sormahil_firegem	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+170	160	crystalline_vertex	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+171	146	gemstone_mixed_low_quality	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+172	146	gemstone_unknown	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+173	133	metal		41	74	0	0	0
+174	173	metal_ferrous		22	42	0	0	0
+175	174	iron		16	22	0	0	0
+176	175	iron_axidite	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+177	175	iron_bronzium	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+178	175	iron_colat	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+179	175	iron_dolovite	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+180	175	iron_doonium	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+181	175	iron_kammris	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+182	175	iron_mustafar	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+183	175	iron_plumbum	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+184	175	iron_polonium	object/resource_container/inorganic_minerals.iff	0	5	1	3	0
+185	175	iron_smelted	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+186	174	metal_ferrous_unknown	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+187	174	smelted_metal_ferrous_unknown	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+188	174	steel		5	25	0	0	0
+189	188	steel_arveshian	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+190	188	steel_bicorbantium	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+191	188	steel_carbonite	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+192	188	steel_cubirian	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+193	188	steel_ditanium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+194	188	steel_duralloy	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+195	188	steel_duranium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+196	188	steel_kiirium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+197	188	steel_mustafar	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+198	188	steel_neutronium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+199	188	steel_quadranium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+200	188	steel_rhodium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+201	188	steel_smelted	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+202	188	steel_thoranium	object/resource_container/inorganic_minerals.iff	0	5	8	8	0
+203	173	metal_nonferrous		10	32	0	0	0
+204	203	aluminum		4	13	0	0	0
+205	204	aluminum_agrinium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+206	204	aluminum_chromium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+207	204	aluminum_duralumin	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+208	204	aluminum_linksteel	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+209	204	aluminum_mustafar	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+210	204	aluminum_perovskitic	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+211	204	aluminum_phrik	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+212	204	aluminum_smelted	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+213	204	aluminum_titanium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+214	203	copper		4	19	0	0	0
+215	214	copper_beyrllius	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+216	214	copper_borocarbitic	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+217	214	copper_codoan	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+218	214	copper_desh	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+219	214	copper_diatium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+220	214	copper_kelsh	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+221	214	copper_mustafar	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+222	214	copper_mythra	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+223	214	copper_platinite	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+224	214	copper_polysteel	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+225	214	copper_smelted	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+226	214	copper_thallium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+227	203	metal_nonferrous_unknown	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+228	203	smelted_metal_nonferrous_unknown	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+229	133	ore		10	30	0	0	0
+230	229	ore_igneous		5	20	0	0	0
+231	230	ore_extrusive		2	11	0	0	0
+232	231	ore_extrusive_bene	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+233	231	ore_extrusive_chronamite	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+234	231	ore_extrusive_ilimium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+235	231	ore_extrusive_kalonterium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+236	231	ore_extrusive_keschel	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+237	231	ore_extrusive_lidium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+238	231	ore_extrusive_maranium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+239	231	ore_extrusive_mustafar	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+240	231	ore_extrusive_pholokite	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+241	231	ore_extrusive_quadrenium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+242	231	ore_extrusive_vintrium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+243	230	ore_extrusive_low_grade	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+244	230	ore_igneous_unknown	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+245	230	ore_intrusive		2	12	0	0	0
+246	245	ore_intrusive_berubium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+247	245	ore_intrusive_chanlon	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+248	245	ore_intrusive_corintium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+249	245	ore_intrusive_derillium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+250	245	ore_intrusive_dylinium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+251	245	ore_intrusive_hollinium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+252	245	ore_intrusive_ionite	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+253	245	ore_intrusive_katrium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+254	245	ore_intrusive_mustafar	object/resource_container/inorganic_minerals.iff	1	2	1	1	0
+255	245	ore_intrusive_oridium	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+256	229	ore_sedimentary		5	15	0	0	0
+257	256	ore_carbonate		1	10	0	0	0
+258	257	ore_carbonate_alantium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+259	257	ore_carbonate_barthierium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+260	257	ore_carbonate_chromite	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+261	257	ore_carbonate_frasium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+262	257	ore_carbonate_lommite	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+263	257	ore_carbonate_ostrine	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+264	257	ore_carbonate_varium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+265	257	ore_carbonate_zinsiam	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+266	256	ore_carbonate_low_grade	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+267	256	ore_sedimentary_unknown	object/resource_container/inorganic_minerals.iff	0	2	1	3	0
+268	256	ore_siliclastic		3	8	0	0	0
+269	268	ore_siliclastic_ardanium	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+270	268	ore_siliclastic_cortosis	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+271	268	ore_siliclastic_crism	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+272	268	ore_siliclastic_fermionic	object/resource_container/inorganic_minerals.iff	1	1	1	1	0
+273	268	ore_siliclastic_low_grade	object/resource_container/inorganic_minerals.iff	1	1	1	1	1
+274	268	ore_siliclastic_malab	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+275	268	ore_siliclastic_robindun	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+276	268	ore_siliclastic_tertian	object/resource_container/inorganic_minerals.iff	0	2	8	8	0
+277	133	radioactive		4	7	0	0	0
+278	277	combined_radioactive_isotpopes	object/resource_container/energy_radioactive.iff	1	1	1	1	1
+279	277	radioactive_known		3	5	0	0	0
+280	279	radioactive_mustafar	object/resource_container/energy_radioactive.iff	1	1	1	1	0
+281	279	radioactive_polymetric	object/resource_container/energy_radioactive.iff	1	1	1	1	0
+282	279	radioactive_type1	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+283	279	radioactive_type2	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+284	279	radioactive_type3	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+285	279	radioactive_type4	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+286	279	radioactive_type5	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+287	279	radioactive_type6	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+288	279	radioactive_type7	object/resource_container/energy_radioactive.iff	0	1	8	8	0
+289	277	radioactive_unknown	object/resource_container/energy_radioactive.iff	0	2	1	3	0
+290	71	water		13	17	0	0	0
+291	290	water_solution	object/resource_container/inorganic_water.iff	1	1	1	1	1
+292	290	water_vapor_corellia	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+293	290	water_vapor_dantooine	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+294	290	water_vapor_dathomir	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+295	290	water_vapor_endor	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+296	290	water_vapor_kashyyyk	object/resource_container/inorganic_bottle_water.iff	1	5	4	4	0
+297	290	water_vapor_lok	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+298	290	water_vapor_mustafar	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+299	290	water_vapor_naboo	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+300	290	water_vapor_rori	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+301	290	water_vapor_talus	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+302	290	water_vapor_tatooine	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+303	290	water_vapor_yavin4	object/resource_container/inorganic_bottle_water.iff	1	5	1	1	0
+304	1	organic		466	466	0	0	0
+305	304	creature_resources		246	246	0	0	0
+306	305	creature_food		159	159	0	0	0
+307	306	meat		134	134	0	0	0
+308	307	meat_avian		12	12	0	0	0
+309	308	meat_avian_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+310	308	meat_avian_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+311	308	meat_avian_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+312	308	meat_avian_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+313	308	meat_avian_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+314	308	meat_avian_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+315	308	meat_avian_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+316	308	meat_avian_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+317	308	meat_avian_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+318	308	meat_avian_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+319	308	meat_avian_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+320	308	meat_avian_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+321	307	meat_carnivore		12	12	0	0	0
+322	321	meat_carnivore_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+323	321	meat_carnivore_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+324	321	meat_carnivore_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+325	321	meat_carnivore_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+326	321	meat_carnivore_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+327	321	meat_carnivore_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+328	321	meat_carnivore_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+329	321	meat_carnivore_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+330	321	meat_carnivore_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+331	321	meat_carnivore_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+332	321	meat_carnivore_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+333	321	meat_carnivore_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+334	307	meat_domesticated		12	12	0	0	0
+335	334	meat_domesticated_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+336	334	meat_domesticated_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+337	334	meat_domesticated_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+338	334	meat_domesticated_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+339	334	meat_domesticated_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+340	334	meat_domesticated_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+341	334	meat_domesticated_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+342	334	meat_domesticated_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+343	334	meat_domesticated_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+344	334	meat_domesticated_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+345	334	meat_domesticated_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+346	334	meat_domesticated_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+347	307	meat_egg		12	12	0	0	0
+348	347	meat_egg_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+349	347	meat_egg_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+350	347	meat_egg_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+351	347	meat_egg_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+352	347	meat_egg_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+353	347	meat_egg_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+354	347	meat_egg_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+355	347	meat_egg_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+356	347	meat_egg_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+357	347	meat_egg_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+358	347	meat_egg_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+359	347	meat_egg_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+360	307	meat_herbivore		12	12	0	0	0
+361	360	meat_herbivore_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+362	360	meat_herbivore_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+363	360	meat_herbivore_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+364	360	meat_herbivore_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+365	360	meat_herbivore_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+366	360	meat_herbivore_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+367	360	meat_herbivore_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+368	360	meat_herbivore_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+369	360	meat_herbivore_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+370	360	meat_herbivore_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+371	360	meat_herbivore_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+372	360	meat_herbivore_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+373	307	meat_insect		12	12	0	0	0
+374	373	meat_insect_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+375	373	meat_insect_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+376	373	meat_insect_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+377	373	meat_insect_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+378	373	meat_insect_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+379	373	meat_insect_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+380	373	meat_insect_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+381	373	meat_insect_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+382	373	meat_insect_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+383	373	meat_insect_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+384	373	meat_insect_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+385	373	meat_insect_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+386	307	meat_reptillian		12	12	0	0	0
+387	386	meat_reptilian_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+388	386	meat_reptilian_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+389	386	meat_reptilian_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+390	386	meat_reptilian_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+391	386	meat_reptilian_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+392	386	meat_reptilian_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+393	386	meat_reptilian_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+394	386	meat_reptilian_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+395	386	meat_reptilian_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+396	386	meat_reptilian_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+397	386	meat_reptilian_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+398	386	meat_reptilian_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+399	307	meat_wild		12	12	0	0	0
+400	399	meat_wild_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+401	399	meat_wild_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+402	399	meat_wild_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+403	399	meat_wild_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+404	399	meat_wild_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+405	399	meat_wild_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+406	399	meat_wild_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+407	399	meat_wild_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+408	399	meat_wild_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+409	399	meat_wild_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+410	399	meat_wild_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+411	399	meat_wild_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+412	307	processed_meat	object/resource_container/organic_food.iff	1	1	1	1	1
+413	307	seafood		37	37	0	0	0
+414	413	processed_seafood	object/resource_container/organic_food.iff	1	1	1	1	1
+415	413	seafood_crustacean		12	12	0	0	0
+416	415	seafood_crustacean_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+417	415	seafood_crustacean_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+418	415	seafood_crustacean_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+419	415	seafood_crustacean_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+420	415	seafood_crustacean_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+421	415	seafood_crustacean_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+422	415	seafood_crustacean_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+423	415	seafood_crustacean_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+424	415	seafood_crustacean_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+425	415	seafood_crustacean_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+426	415	seafood_crustacean_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+427	415	seafood_crustacean_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+428	413	seafood_fish		12	12	0	0	0
+429	428	seafood_fish_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+430	428	seafood_fish_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+431	428	seafood_fish_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+432	428	seafood_fish_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+433	428	seafood_fish_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+434	428	seafood_fish_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+435	428	seafood_fish_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+436	428	seafood_fish_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+437	428	seafood_fish_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+438	428	seafood_fish_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+439	428	seafood_fish_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+440	428	seafood_fish_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+441	413	seafood_mollusk		12	12	0	0	0
+442	441	seafood_mollusk_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+443	441	seafood_mollusk_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+444	441	seafood_mollusk_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+445	441	seafood_mollusk_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+446	441	seafood_mollusk_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+447	441	seafood_mollusk_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+448	441	seafood_mollusk_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+449	441	seafood_mollusk_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+450	441	seafood_mollusk_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+451	441	seafood_mollusk_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+452	441	seafood_mollusk_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+453	441	seafood_mollusk_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+454	306	milk		25	25	0	0	0
+455	454	milk_domesticated		12	12	0	0	0
+456	455	milk_domesticated_corellia	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+457	455	milk_domesticated_dantooine	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+458	455	milk_domesticated_dathomir	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+459	455	milk_domesticated_endor	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+460	455	milk_domesticated_kashyyyk	object/resource_container/organic_bottle_milk.iff	1	1	4	4	0
+461	455	milk_domesticated_lok	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+462	455	milk_domesticated_mustafar	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+463	455	milk_domesticated_naboo	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+464	455	milk_domesticated_rori	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+465	455	milk_domesticated_talus	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+466	455	milk_domesticated_tatooine	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+467	455	milk_domesticated_yavin4	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+468	454	milk_homogenized	object/resource_container/organic_food.iff	1	1	1	1	1
+469	454	milk_wild		12	12	0	0	0
+470	469	milk_wild_corellia	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+471	469	milk_wild_dantooine	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+472	469	milk_wild_dathomir	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+473	469	milk_wild_endor	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+474	469	milk_wild_kashyyyk	object/resource_container/organic_bottle_milk.iff	1	1	4	4	0
+475	469	milk_wild_lok	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+476	469	milk_wild_mustafar	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+477	469	milk_wild_naboo	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+478	469	milk_wild_rori	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+479	469	milk_wild_talus	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+480	469	milk_wild_tatooine	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+481	469	milk_wild_yavin4	object/resource_container/organic_bottle_milk.iff	1	1	1	1	0
+482	305	creature_structural		87	87	0	0	0
+483	482	bone		25	25	0	0	0
+484	483	bone_avian		12	12	0	0	0
+485	484	bone_avian_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+486	484	bone_avian_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+487	484	bone_avian_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+488	484	bone_avian_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+489	484	bone_avian_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+490	484	bone_avian_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+491	484	bone_avian_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+492	484	bone_avian_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+493	484	bone_avian_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+494	484	bone_avian_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+495	484	bone_avian_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+496	484	bone_avian_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+497	483	bone_mammal_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+498	483	bone_mammal_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+499	483	bone_mammal_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+500	483	bone_mammal_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+501	483	bone_mammal_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+502	483	bone_mammal_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+503	483	bone_mammal_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+504	483	bone_mammal_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+505	483	bone_mammal_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+506	483	bone_mammal_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+507	483	bone_mammal_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+508	483	bone_mammal_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+509	483	ground_bones	object/resource_container/organic_structure.iff	1	1	1	1	1
+510	482	bone_horn		13	13	0	0	0
+511	510	bone_horn_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+512	510	bone_horn_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+513	510	bone_horn_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+514	510	bone_horn_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+515	510	bone_horn_ground	object/resource_container/organic_structure.iff	1	1	1	1	1
+516	510	bone_horn_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+517	510	bone_horn_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+518	510	bone_horn_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+519	510	bone_horn_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+520	510	bone_horn_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+521	510	bone_horn_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+522	510	bone_horn_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+523	510	bone_horn_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+524	482	hide		49	49	0	0	0
+525	524	hide_bristley		12	12	0	0	0
+526	525	hide_bristley_corellia	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+527	525	hide_bristley_dantooine	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+528	525	hide_bristley_dathomir	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+529	525	hide_bristley_endor	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+530	525	hide_bristley_kashyyyk	object/resource_container/organic_bristley_hide.iff	1	1	4	4	0
+531	525	hide_bristley_lok	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+532	525	hide_bristley_mustafar	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+533	525	hide_bristley_naboo	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+534	525	hide_bristley_rori	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+535	525	hide_bristley_talus	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+536	525	hide_bristley_tatooine	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+537	525	hide_bristley_yavin4	object/resource_container/organic_bristley_hide.iff	1	1	1	1	0
+538	524	hide_leathery		12	12	0	0	0
+539	538	hide_leathery_corellia	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+540	538	hide_leathery_dantooine	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+541	538	hide_leathery_dathomir	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+542	538	hide_leathery_endor	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+543	538	hide_leathery_kashyyyk	object/resource_container/organic_leathery_hide.iff	1	1	4	4	0
+544	538	hide_leathery_lok	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+545	538	hide_leathery_mustafar	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+546	538	hide_leathery_naboo	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+547	538	hide_leathery_rori	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+548	538	hide_leathery_talus	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+549	538	hide_leathery_tatooine	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+550	538	hide_leathery_yavin4	object/resource_container/organic_leathery_hide.iff	1	1	1	1	0
+551	524	hide_scaley		12	12	0	0	0
+552	551	hide_scaley_corellia	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+553	551	hide_scaley_dantooine	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+554	551	hide_scaley_dathomir	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+555	551	hide_scaley_endor	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+556	551	hide_scaley_kashyyyk	object/resource_container/organic_scaley_hide.iff	1	1	4	4	0
+557	551	hide_scaley_lok	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+558	551	hide_scaley_mustafar	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+559	551	hide_scaley_naboo	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+560	551	hide_scaley_rori	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+561	551	hide_scaley_talus	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+562	551	hide_scaley_tatooine	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+563	551	hide_scaley_yavin4	object/resource_container/organic_scaley_hide.iff	1	1	1	1	0
+564	524	hide_wooly		12	12	0	0	0
+565	564	hide_wooly_corellia	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+566	564	hide_wooly_dantooine	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+567	564	hide_wooly_dathomir	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+568	564	hide_wooly_endor	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+569	564	hide_wooly_kashyyyk	object/resource_container/organic_wooly_hide.iff	1	1	4	4	0
+570	564	hide_wooly_lok	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+571	564	hide_wooly_mustafar	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+572	564	hide_wooly_naboo	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+573	564	hide_wooly_rori	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+574	564	hide_wooly_talus	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+575	564	hide_wooly_tatooine	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+576	564	hide_wooly_yavin4	object/resource_container/organic_wooly_hide.iff	1	1	1	1	0
+577	524	synthesized_hides	object/resource_container/organic_hide.iff	1	1	1	1	1
+578	304	flora_resources		220	220	0	0	0
+579	578	flora_food		183	183	0	0	0
+580	579	cereal		97	97	0	0	0
+581	580	corn		24	24	0	0	0
+582	581	corn_domesticated		12	12	0	0	0
+583	582	corn_domesticated_corellia	object/resource_container/organic_corn.iff	1	1	1	1	0
+584	582	corn_domesticated_dantooine	object/resource_container/organic_corn.iff	1	1	1	1	0
+585	582	corn_domesticated_dathomir	object/resource_container/organic_corn.iff	1	1	1	1	0
+586	582	corn_domesticated_endor	object/resource_container/organic_corn.iff	1	1	1	1	0
+587	582	corn_domesticated_kashyyyk	object/resource_container/organic_corn.iff	1	1	4	4	0
+588	582	corn_domesticated_lok	object/resource_container/organic_corn.iff	1	1	1	1	0
+589	582	corn_domesticated_mustafar	object/resource_container/organic_corn.iff	1	1	1	1	0
+590	582	corn_domesticated_naboo	object/resource_container/organic_corn.iff	1	1	1	1	0
+591	582	corn_domesticated_rori	object/resource_container/organic_corn.iff	1	1	1	1	0
+592	582	corn_domesticated_talus	object/resource_container/organic_corn.iff	1	1	1	1	0
+593	582	corn_domesticated_tatooine	object/resource_container/organic_corn.iff	1	1	1	1	0
+594	582	corn_domesticated_yavin4	object/resource_container/organic_corn.iff	1	1	1	1	0
+595	581	corn_wild		12	12	0	0	0
+596	595	corn_wild_corellia	object/resource_container/organic_corn.iff	1	1	1	1	0
+597	595	corn_wild_dantooine	object/resource_container/organic_corn.iff	1	1	1	1	0
+598	595	corn_wild_dathomir	object/resource_container/organic_corn.iff	1	1	1	1	0
+599	595	corn_wild_endor	object/resource_container/organic_corn.iff	1	1	1	1	0
+600	595	corn_wild_kashyyyk	object/resource_container/organic_corn.iff	1	1	4	4	0
+601	595	corn_wild_lok	object/resource_container/organic_corn.iff	1	1	1	1	0
+602	595	corn_wild_mustafar	object/resource_container/organic_corn.iff	1	1	1	1	0
+603	595	corn_wild_naboo	object/resource_container/organic_corn.iff	1	1	1	1	0
+604	595	corn_wild_rori	object/resource_container/organic_corn.iff	1	1	1	1	0
+605	595	corn_wild_talus	object/resource_container/organic_corn.iff	1	1	1	1	0
+606	595	corn_wild_tatooine	object/resource_container/organic_corn.iff	1	1	1	1	0
+607	595	corn_wild_yavin4	object/resource_container/organic_corn.iff	1	1	1	1	0
+608	580	oats		24	24	0	0	0
+609	608	oats_domesticated		12	12	0	0	0
+610	609	oats_domesticated_corellia	object/resource_container/organic_oats.iff	1	1	1	1	0
+611	609	oats_domesticated_dantooine	object/resource_container/organic_oats.iff	1	1	1	1	0
+612	609	oats_domesticated_dathomir	object/resource_container/organic_oats.iff	1	1	1	1	0
+613	609	oats_domesticated_endor	object/resource_container/organic_oats.iff	1	1	1	1	0
+614	609	oats_domesticated_kashyyyk	object/resource_container/organic_oats.iff	1	1	4	4	0
+615	609	oats_domesticated_lok	object/resource_container/organic_oats.iff	1	1	1	1	0
+616	609	oats_domesticated_mustafar	object/resource_container/organic_oats.iff	1	1	1	1	0
+617	609	oats_domesticated_naboo	object/resource_container/organic_oats.iff	1	1	1	1	0
+618	609	oats_domesticated_rori	object/resource_container/organic_oats.iff	1	1	1	1	0
+619	609	oats_domesticated_talus	object/resource_container/organic_oats.iff	1	1	1	1	0
+620	609	oats_domesticated_tatooine	object/resource_container/organic_oats.iff	1	1	1	1	0
+621	609	oats_domesticated_yavin4	object/resource_container/organic_oats.iff	1	1	1	1	0
+622	608	oats_wild		12	12	0	0	0
+623	622	oats_wild_corellia	object/resource_container/organic_oats.iff	1	1	1	1	0
+624	622	oats_wild_dantooine	object/resource_container/organic_oats.iff	1	1	1	1	0
+625	622	oats_wild_dathomir	object/resource_container/organic_oats.iff	1	1	1	1	0
+626	622	oats_wild_endor	object/resource_container/organic_oats.iff	1	1	1	1	0
+627	622	oats_wild_kashyyyk	object/resource_container/organic_oats.iff	1	1	4	4	0
+628	622	oats_wild_lok	object/resource_container/organic_oats.iff	1	1	1	1	0
+629	622	oats_wild_mustafar	object/resource_container/organic_oats.iff	1	1	1	1	0
+630	622	oats_wild_naboo	object/resource_container/organic_oats.iff	1	1	1	1	0
+631	622	oats_wild_rori	object/resource_container/organic_oats.iff	1	1	1	1	0
+632	622	oats_wild_talus	object/resource_container/organic_oats.iff	1	1	1	1	0
+633	622	oats_wild_tatooine	object/resource_container/organic_oats.iff	1	1	1	1	0
+634	622	oats_wild_yavin4	object/resource_container/organic_oats.iff	1	1	1	1	0
+635	580	processed_cereal	object/resource_container/organic_food.iff	1	1	1	1	1
+636	580	rice		24	24	0	0	0
+637	636	rice_domesticated		12	12	0	0	0
+638	637	rice_domesticated_corellia	object/resource_container/organic_rice.iff	1	1	1	1	0
+639	637	rice_domesticated_dantooine	object/resource_container/organic_rice.iff	1	1	1	1	0
+640	637	rice_domesticated_dathomir	object/resource_container/organic_rice.iff	1	1	1	1	0
+641	637	rice_domesticated_endor	object/resource_container/organic_rice.iff	1	1	1	1	0
+642	637	rice_domesticated_kashyyyk	object/resource_container/organic_rice.iff	1	1	4	4	0
+643	637	rice_domesticated_lok	object/resource_container/organic_rice.iff	1	1	1	1	0
+644	637	rice_domesticated_mustafar	object/resource_container/organic_rice.iff	1	1	1	1	0
+645	637	rice_domesticated_naboo	object/resource_container/organic_rice.iff	1	1	1	1	0
+646	637	rice_domesticated_rori	object/resource_container/organic_rice.iff	1	1	1	1	0
+647	637	rice_domesticated_talus	object/resource_container/organic_rice.iff	1	1	1	1	0
+648	637	rice_domesticated_tatooine	object/resource_container/organic_rice.iff	1	1	1	1	0
+649	637	rice_domesticated_yavin4	object/resource_container/organic_rice.iff	1	1	1	1	0
+650	636	rice_wild		12	12	0	0	0
+651	650	rice_wild_corellia	object/resource_container/organic_rice.iff	1	1	1	1	0
+652	650	rice_wild_dantooine	object/resource_container/organic_rice.iff	1	1	1	1	0
+653	650	rice_wild_dathomir	object/resource_container/organic_rice.iff	1	1	1	1	0
+654	650	rice_wild_endor	object/resource_container/organic_rice.iff	1	1	1	1	0
+655	650	rice_wild_kashyyyk	object/resource_container/organic_rice.iff	1	1	4	4	0
+656	650	rice_wild_lok	object/resource_container/organic_rice.iff	1	1	1	1	0
+657	650	rice_wild_mustafar	object/resource_container/organic_rice.iff	1	1	1	1	0
+658	650	rice_wild_naboo	object/resource_container/organic_rice.iff	1	1	1	1	0
+659	650	rice_wild_rori	object/resource_container/organic_rice.iff	1	1	1	1	0
+660	650	rice_wild_talus	object/resource_container/organic_rice.iff	1	1	1	1	0
+661	650	rice_wild_tatooine	object/resource_container/organic_rice.iff	1	1	1	1	0
+662	650	rice_wild_yavin4	object/resource_container/organic_rice.iff	1	1	1	1	0
+663	580	wheat		24	24	0	0	0
+664	663	wheat_domesticated		12	12	0	0	0
+665	664	wheat_domesticated_corellia	object/resource_container/organic_wheat.iff	1	1	1	1	0
+666	664	wheat_domesticated_dantooine	object/resource_container/organic_wheat.iff	1	1	1	1	0
+667	664	wheat_domesticated_dathomir	object/resource_container/organic_wheat.iff	1	1	1	1	0
+668	664	wheat_domesticated_endor	object/resource_container/organic_wheat.iff	1	1	1	1	0
+669	664	wheat_domesticated_kashyyyk	object/resource_container/organic_wheat.iff	1	1	4	4	0
+670	664	wheat_domesticated_lok	object/resource_container/organic_wheat.iff	1	1	1	1	0
+671	664	wheat_domesticated_mustafar	object/resource_container/organic_wheat.iff	1	1	1	1	0
+672	664	wheat_domesticated_naboo	object/resource_container/organic_wheat.iff	1	1	1	1	0
+673	664	wheat_domesticated_rori	object/resource_container/organic_wheat.iff	1	1	1	1	0
+674	664	wheat_domesticated_talus	object/resource_container/organic_wheat.iff	1	1	1	1	0
+675	664	wheat_domesticated_tatooine	object/resource_container/organic_wheat.iff	1	1	1	1	0
+676	664	wheat_domesticated_yavin4	object/resource_container/organic_wheat.iff	1	1	1	1	0
+677	663	wheat_wild		12	12	0	0	0
+678	677	wheat_wild_corellia	object/resource_container/organic_wheat.iff	1	1	1	1	0
+679	677	wheat_wild_dantooine	object/resource_container/organic_wheat.iff	1	1	1	1	0
+680	677	wheat_wild_dathomir	object/resource_container/organic_wheat.iff	1	1	1	1	0
+681	677	wheat_wild_endor	object/resource_container/organic_wheat.iff	1	1	1	1	0
+682	677	wheat_wild_kashyyyk	object/resource_container/organic_wheat.iff	1	1	4	4	0
+683	677	wheat_wild_lok	object/resource_container/organic_wheat.iff	1	1	1	1	0
+684	677	wheat_wild_mustafar	object/resource_container/organic_wheat.iff	1	1	1	1	0
+685	677	wheat_wild_naboo	object/resource_container/organic_wheat.iff	1	1	1	1	0
+686	677	wheat_wild_rori	object/resource_container/organic_wheat.iff	1	1	1	1	0
+687	677	wheat_wild_talus	object/resource_container/organic_wheat.iff	1	1	1	1	0
+688	677	wheat_wild_tatooine	object/resource_container/organic_wheat.iff	1	1	1	1	0
+689	677	wheat_wild_yavin4	object/resource_container/organic_wheat.iff	1	1	1	1	0
+690	579	seeds		86	86	0	0	0
+691	690	fruit		37	37	0	0	0
+692	691	fruit_berries		12	12	0	0	0
+693	692	fruit_berries_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+694	692	fruit_berries_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+695	692	fruit_berries_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+696	692	fruit_berries_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+697	692	fruit_berries_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+698	692	fruit_berries_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+699	692	fruit_berries_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+700	692	fruit_berries_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+701	692	fruit_berries_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+702	692	fruit_berries_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+703	692	fruit_berries_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+704	692	fruit_berries_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+705	691	fruit_flowers		12	12	0	0	0
+706	705	fruit_flowers_corellia	object/resource_container/organic_food.iff	1	1	1	1	0
+707	705	fruit_flowers_dantooine	object/resource_container/organic_food.iff	1	1	1	1	0
+708	705	fruit_flowers_dathomir	object/resource_container/organic_food.iff	1	1	1	1	0
+709	705	fruit_flowers_endor	object/resource_container/organic_food.iff	1	1	1	1	0
+710	705	fruit_flowers_kashyyyk	object/resource_container/organic_food.iff	1	1	4	4	0
+711	705	fruit_flowers_lok	object/resource_container/organic_food.iff	1	1	1	1	0
+712	705	fruit_flowers_mustafar	object/resource_container/organic_food.iff	1	1	1	1	0
+713	705	fruit_flowers_naboo	object/resource_container/organic_food.iff	1	1	1	1	0
+714	705	fruit_flowers_rori	object/resource_container/organic_food.iff	1	1	1	1	0
+715	705	fruit_flowers_talus	object/resource_container/organic_food.iff	1	1	1	1	0
+716	705	fruit_flowers_tatooine	object/resource_container/organic_food.iff	1	1	1	1	0
+717	705	fruit_flowers_yavin4	object/resource_container/organic_food.iff	1	1	1	1	0
+718	691	fruit_fruits		12	12	0	0	0
+719	718	fruit_fruits_corellia	object/resource_container/organic_fruit.iff	1	1	1	1	0
+720	718	fruit_fruits_dantooine	object/resource_container/organic_fruit.iff	1	1	1	1	0
+721	718	fruit_fruits_dathomir	object/resource_container/organic_fruit.iff	1	1	1	1	0
+722	718	fruit_fruits_endor	object/resource_container/organic_fruit.iff	1	1	1	1	0
+723	718	fruit_fruits_kashyyyk	object/resource_container/organic_fruit.iff	1	1	4	4	0
+724	718	fruit_fruits_lok	object/resource_container/organic_fruit.iff	1	1	1	1	0
+725	718	fruit_fruits_mustafar	object/resource_container/organic_fruit.iff	1	1	1	1	0
+726	718	fruit_fruits_naboo	object/resource_container/organic_fruit.iff	1	1	1	1	0
+727	718	fruit_fruits_rori	object/resource_container/organic_fruit.iff	1	1	1	1	0
+728	718	fruit_fruits_talus	object/resource_container/organic_fruit.iff	1	1	1	1	0
+729	718	fruit_fruits_tatooine	object/resource_container/organic_fruit.iff	1	1	1	1	0
+730	718	fruit_fruits_yavin4	object/resource_container/organic_fruit.iff	1	1	1	1	0
+731	691	mixed_fruits	object/resource_container/organic_food.iff	1	1	1	1	1
+732	690	vegetable		49	49	0	0	0
+733	732	mixed_vegetables	object/resource_container/organic_food.iff	1	1	1	1	1
+734	732	vegetable_beans		12	12	0	0	0
+735	734	vegetable_beans_corellia	object/resource_container/organic_bean.iff	1	1	1	1	0
+736	734	vegetable_beans_dantooine	object/resource_container/organic_bean.iff	1	1	1	1	0
+737	734	vegetable_beans_dathomir	object/resource_container/organic_bean.iff	1	1	1	1	0
+738	734	vegetable_beans_endor	object/resource_container/organic_bean.iff	1	1	1	1	0
+739	734	vegetable_beans_kashyyyk	object/resource_container/organic_bean.iff	1	1	4	4	0
+740	734	vegetable_beans_lok	object/resource_container/organic_bean.iff	1	1	1	1	0
+741	734	vegetable_beans_mustafar	object/resource_container/organic_bean.iff	1	1	1	1	0
+742	734	vegetable_beans_naboo	object/resource_container/organic_bean.iff	1	1	1	1	0
+743	734	vegetable_beans_rori	object/resource_container/organic_bean.iff	1	1	1	1	0
+744	734	vegetable_beans_talus	object/resource_container/organic_bean.iff	1	1	1	1	0
+745	734	vegetable_beans_tatooine	object/resource_container/organic_bean.iff	1	1	1	1	0
+746	734	vegetable_beans_yavin4	object/resource_container/organic_bean.iff	1	1	1	1	0
+747	732	vegetable_fungi		12	12	0	0	0
+748	747	vegetable_fungi_corellia	object/resource_container/organic_fungi.iff	1	1	1	1	0
+749	747	vegetable_fungi_dantooine	object/resource_container/organic_fungi.iff	1	1	1	1	0
+750	747	vegetable_fungi_dathomir	object/resource_container/organic_fungi.iff	1	1	1	1	0
+751	747	vegetable_fungi_endor	object/resource_container/organic_fungi.iff	1	1	1	1	0
+752	747	vegetable_fungi_kashyyyk	object/resource_container/organic_fungi.iff	1	1	4	4	0
+753	747	vegetable_fungi_lok	object/resource_container/organic_fungi.iff	1	1	1	1	0
+754	747	vegetable_fungi_mustafar	object/resource_container/organic_fungi.iff	1	1	1	1	0
+755	747	vegetable_fungi_naboo	object/resource_container/organic_fungi.iff	1	1	1	1	0
+756	747	vegetable_fungi_rori	object/resource_container/organic_fungi.iff	1	1	1	1	0
+757	747	vegetable_fungi_talus	object/resource_container/organic_fungi.iff	1	1	1	1	0
+758	747	vegetable_fungi_tatooine	object/resource_container/organic_fungi.iff	1	1	1	1	0
+759	747	vegetable_fungi_yavin4	object/resource_container/organic_fungi.iff	1	1	1	1	0
+760	732	vegetable_greens		12	12	0	0	0
+761	760	vegetable_greens_corellia	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+762	760	vegetable_greens_dantooine	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+763	760	vegetable_greens_dathomir	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+764	760	vegetable_greens_endor	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+765	760	vegetable_greens_kashyyyk	object/resource_container/organic_green_vegetables.iff	1	1	4	4	0
+766	760	vegetable_greens_lok	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+767	760	vegetable_greens_mustafar	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+768	760	vegetable_greens_naboo	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+769	760	vegetable_greens_rori	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+770	760	vegetable_greens_talus	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+771	760	vegetable_greens_tatooine	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+772	760	vegetable_greens_yavin4	object/resource_container/organic_green_vegetables.iff	1	1	1	1	0
+773	732	vegetable_tubers		12	12	0	0	0
+774	773	vegetable_tubers_corellia	object/resource_container/organic_tuber.iff	1	1	1	1	0
+775	773	vegetable_tubers_dantooine	object/resource_container/organic_tuber.iff	1	1	1	1	0
+776	773	vegetable_tubers_dathomir	object/resource_container/organic_tuber.iff	1	1	1	1	0
+777	773	vegetable_tubers_endor	object/resource_container/organic_tuber.iff	1	1	1	1	0
+778	773	vegetable_tubers_kashyyyk	object/resource_container/organic_tuber.iff	1	1	4	4	0
+779	773	vegetable_tubers_lok	object/resource_container/organic_tuber.iff	1	1	1	1	0
+780	773	vegetable_tubers_mustafar	object/resource_container/organic_tuber.iff	1	1	1	1	0
+781	773	vegetable_tubers_naboo	object/resource_container/organic_tuber.iff	1	1	1	1	0
+782	773	vegetable_tubers_rori	object/resource_container/organic_tuber.iff	1	1	1	1	0
+783	773	vegetable_tubers_talus	object/resource_container/organic_tuber.iff	1	1	1	1	0
+784	773	vegetable_tubers_tatooine	object/resource_container/organic_tuber.iff	1	1	1	1	0
+785	773	vegetable_tubers_yavin4	object/resource_container/organic_tuber.iff	1	1	1	1	0
+786	578	flora_structural		37	37	0	0	0
+787	786	wood		37	37	0	0	0
+788	787	processed_wood	object/resource_container/organic_structure.iff	1	1	1	1	1
+789	787	softwood		24	24	0	0	0
+790	789	softwood_conifer_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+791	789	softwood_conifer_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+792	789	softwood_conifer_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+793	789	softwood_conifer_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+794	789	softwood_conifer_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+795	789	softwood_conifer_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+796	789	softwood_conifer_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+797	789	softwood_conifer_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+798	789	softwood_conifer_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+799	789	softwood_conifer_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+800	789	softwood_conifer_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+801	789	softwood_conifer_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+802	789	softwood_evergreen		12	12	0	0	0
+803	802	softwood_evergreen_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+804	802	softwood_evergreen_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+805	802	softwood_evergreen_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+806	802	softwood_evergreen_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+807	802	softwood_evergreen_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+808	802	softwood_evergreen_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+809	802	softwood_evergreen_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+810	802	softwood_evergreen_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+811	802	softwood_evergreen_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+812	802	softwood_evergreen_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+813	802	softwood_evergreen_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+814	802	softwood_evergreen_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+815	787	wood_deciduous		12	12	0	0	0
+816	815	wood_deciduous_corellia	object/resource_container/organic_structure.iff	1	1	1	1	0
+817	815	wood_deciduous_dantooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+818	815	wood_deciduous_dathomir	object/resource_container/organic_structure.iff	1	1	1	1	0
+819	815	wood_deciduous_endor	object/resource_container/organic_structure.iff	1	1	1	1	0
+820	815	wood_deciduous_kashyyyk	object/resource_container/organic_structure.iff	1	1	4	4	0
+821	815	wood_deciduous_lok	object/resource_container/organic_structure.iff	1	1	1	1	0
+822	815	wood_deciduous_mustafar	object/resource_container/organic_structure.iff	1	1	1	1	0
+823	815	wood_deciduous_naboo	object/resource_container/organic_structure.iff	1	1	1	1	0
+824	815	wood_deciduous_rori	object/resource_container/organic_structure.iff	1	1	1	1	0
+825	815	wood_deciduous_talus	object/resource_container/organic_structure.iff	1	1	1	1	0
+826	815	wood_deciduous_tatooine	object/resource_container/organic_structure.iff	1	1	1	1	0
+827	815	wood_deciduous_yavin4	object/resource_container/organic_structure.iff	1	1	1	1	0
+828	1	space_resource		13	13	0	0	0
+829	828	space_chemical		4	4	0	0	0
+830	829	space_chemical_acid		1	1	0	0	0
+831	829	space_chemical_cyanomethanic		1	1	0	0	0
+832	829	space_chemical_petrochem		1	1	0	0	0
+833	829	space_chemical_sulfuric		1	1	0	0	0
+834	828	space_gas		2	2	0	0	0
+835	834	space_gas_methane		1	1	0	0	0
+836	834	space_gas_organometallic		1	1	0	0	0
+837	828	space_gem		2	2	0	0	0
+838	837	space_gem_crystal		1	1	0	0	0
+839	837	space_gem_diamond		1	1	0	0	0
+840	828	space_metal		5	5	0	0	0
+841	840	space_metal_carbonaceous		1	1	0	0	0
+842	840	space_metal_ice		1	1	0	0	0
+843	840	space_metal_iron		1	1	0	0	0
+844	840	space_metal_obsidian		1	1	0	0	0
+845	840	space_metal_silicaceous		1	1	0	0	0
