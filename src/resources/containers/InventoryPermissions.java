@@ -28,6 +28,8 @@
 package resources.containers;
 
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+import services.trade.TradeSession;
 
 class InventoryPermissions extends DefaultPermissions {
 	
@@ -37,7 +39,9 @@ class InventoryPermissions extends DefaultPermissions {
 			return true;
 		if (container.getOwner() == null)
 			return false;
-		return requester.getOwner().equals(container.getOwner());
+		if (!requester.getOwner().equals(container.getOwner()))
+			return false;
+		return canTradePartnerView(requester, container);
 	}
 
 	@Override
@@ -48,4 +52,16 @@ class InventoryPermissions extends DefaultPermissions {
 			return false;
 		return requester.getOwner().equals(container.getOwner());
 	}
+	
+	private boolean canTradePartnerView(SWGObject requester, SWGObject container) {
+		CreatureObject creature = container.getOwner().getCreatureObject();
+		if (creature == null)
+			return false;
+		TradeSession session = creature.getTradeSession();
+		if (session == null || !session.getFromItemList(creature).contains(container.getObjectId()))
+			return false;
+		CreatureObject partner = session.getTradePartner(creature);
+		return partner != null && partner.equals(requester.getOwner());
+	}
+	
 }
