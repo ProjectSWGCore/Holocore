@@ -58,6 +58,7 @@ import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
+import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
@@ -99,7 +100,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
+		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject) && !super.hasOptionFlags(OptionFlag.MOUNT)) {
 			addEquipment(obj);
 		}
 	}
