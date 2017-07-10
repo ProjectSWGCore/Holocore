@@ -170,26 +170,26 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		}
 	}
 	
-	private void processGalacticPacketIntent(GalacticPacketIntent i) {
-		Packet packet = i.getPacket();
+	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
+		Packet packet = gpi.getPacket();
 		if (packet instanceof DataTransform) {
-			handleDataTransform((DataTransform) packet, i.getObjectManager());
+			handleDataTransform((DataTransform) packet, gpi.getObjectManager());
 		} else if (packet instanceof DataTransformWithParent) {
-			handleDataTransformWithParent((DataTransformWithParent) packet, i.getObjectManager());
+			handleDataTransformWithParent((DataTransformWithParent) packet, gpi.getObjectManager());
 		} else if (packet instanceof CmdSceneReady) {
-			handleCmdSceneReady(i.getPlayer(), (CmdSceneReady) packet);
+			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
 		}
 	}
 	
-	private void processMoveObjectIntent(MoveObjectIntent i) {
-		moveObjectWithTransform(i.getObject(), i.getParent(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
+	private void processMoveObjectIntent(MoveObjectIntent moi) {
+		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed(), moi.getUpdateCounter());
 	}
 	
-	private void processContainerTransferIntent(ContainerTransferIntent i) {
-		SWGObject obj = i.getObject();
+	private void processContainerTransferIntent(ContainerTransferIntent cti) {
+		SWGObject obj = cti.getObject();
 		Assert.notNull(obj);
 		Assert.notNull(obj.getTerrain());
-		moveObject(obj, i.getContainer(), obj.getLocation());
+		moveObject(obj, cti.getContainer(), obj.getLocation());
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Player player, Location loc, SWGObject parent) {

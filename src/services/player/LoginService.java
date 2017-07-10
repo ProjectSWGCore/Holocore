@@ -83,6 +83,7 @@ public class LoginService extends Service {
 	private RelationalDatabase database;
 	private PreparedStatement getUser;
 	private PreparedStatement getCharacter;
+	private PreparedStatement getCharacterFirstName;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
 	
@@ -96,6 +97,7 @@ public class LoginService extends Service {
 		database = RelationalServerFactory.getServerDatabase("login/login.db");
 		getUser = database.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
 		getCharacter = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
+		getCharacterFirstName = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ? OR LOWER(name) LIKE ?");
 		getCharacters = database.prepareStatement("SELECT * FROM players WHERE userid = ?");
 		deleteCharacter = database.prepareStatement("DELETE FROM players WHERE id = ?");
 		return super.initialize();
@@ -105,6 +107,24 @@ public class LoginService extends Service {
 	public boolean terminate() {
 		database.close();
 		return super.terminate();
+	}
+	
+	public long getCharacterIdByFirstName(String name) {
+		Assert.notNull(name);
+		name = name.trim().toLowerCase(Locale.US);
+		Assert.test(!name.isEmpty());
+		synchronized (getCharacterFirstName) {
+			try {
+				getCharacterFirstName.setString(1, name + "%");
+				try (ResultSet set = getCharacterFirstName.executeQuery()) {
+					if (set.next())
+						return set.getLong("id");
+				}
+			} catch (SQLException e) {
+				Log.e(e);
+			}
+		}
+		return 0;
 	}
 	
 	public long getCharacterId(String name) {
