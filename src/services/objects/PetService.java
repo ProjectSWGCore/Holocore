@@ -30,7 +30,6 @@ package services.objects;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.debug.Log;
-import intents.ObjectTeleportedIntent;
 import intents.PlayerEventIntent;
 import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
@@ -171,7 +170,7 @@ public final class PetService extends Service {
 
 		petControlDevice.moveToContainer(creator.getSlottedObject("datapad"));
 
-		callPet(vehicle, creator.getLocation());
+		callPet(creator, vehicle, creator.getLocation());
 		new ObjectCreatedIntent(vehicle).broadcast();
 		new ObjectCreatedIntent(petControlDevice).broadcast();
 	}
@@ -221,7 +220,7 @@ public final class PetService extends Service {
 		return deedTemplate.replace("tangible/deed/vehicle_deed", "intangible/vehicle").replace("deed", "pcd");
 	}
 
-	private void callPet(CreatureObject caller, CreatureObject pet, Location location) {
+	private void  callPet(CreatureObject caller, CreatureObject pet, Location location) {
 		Collection<Pet> callerPets;
 
 		if (calledPets.containsKey(caller)) {
@@ -284,8 +283,8 @@ public final class PetService extends Service {
 		private final CreatureObject creature;
 
 		private Pet(SWGObject petControlDevice, CreatureObject creature) {
+			this.petControlDevice = petControlDevice;
 			this.creature = creature;
-			this.pet = pet;
 		}
 
 		private SWGObject getPetControlDevice() {
