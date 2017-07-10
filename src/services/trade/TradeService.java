@@ -99,7 +99,7 @@ public class TradeService extends Service {
 		} else if (packet instanceof BeginVerificationMessage){
 			handleBeginVerificationMessage(gpi.getPlayer());
 		} else if (packet instanceof VerifyTradeMessage){
-			handleVerifyTradeMessage(gpi.getPlayer());
+			handleVerifyTradeMessage(gpi.getPlayer(), gpi.getObjectManager());
 		} else if (packet instanceof TradeCompleteMessage){
 			handleTradeCompleteMessage(gpi.getPlayer());
 		}
@@ -162,9 +162,9 @@ public class TradeService extends Service {
 			return;
 
 		tradeSession.getAccepter().sendSelf(new AbortTradeMessage());
-		tradeSession.getAccepter().sendSelf(new DenyTradeMessage());
+		tradeSession.getAccepter().sendSelf(new TradeCompleteMessage());
 		tradeSession.getInitiator().sendSelf(new AbortTradeMessage());
-		tradeSession.getInitiator().sendSelf(new DenyTradeMessage());
+		tradeSession.getInitiator().sendSelf(new TradeCompleteMessage());
 	}
 	
 	private void handleDenyTradeMessage(Player player) {
@@ -203,9 +203,9 @@ public class TradeService extends Service {
 			tradeSession.removeFromItemList(creature, packet.getObjectId());
 		}
 		
-		creature.getTradeSession().addItem(creature, packet.getObjectId());
-		tradeSession.sendToPartner(partner, new AddItemMessage(packet.getObjectId()));	
+		creature.getTradeSession().addItem(creature, tradeObject);
 		partner.setContainerPermissions(ContainerPermissionsType.INVENTORY);
+		tradeSession.sendToPartner(partner, new AddItemMessage(packet.getObjectId()));	
 		partner.addCustomAware(tradeObject);
 	}
 	
@@ -215,19 +215,42 @@ public class TradeService extends Service {
 		tradeSession.sendToPartner(player.getCreatureObject(), new GiveMoneyMessage(packet.getMoneyAmount()));
 	}
 	
-	private void handleVerifyTradeMessage(Player player) {
+	private void handleVerifyTradeMessage(Player player, ObjectManager objectManager) {
 		TradeSession tradeSession = player.getCreatureObject().getTradeSession();
-		tradeSession.sendToPartner(player.getCreatureObject(), new VerifyTradeMessage());
+		CreatureObject initiator = tradeSession.getInitiator();
+		CreatureObject accepter = tradeSession.getAccepter();
+				
+		if(!tradeSession.getFromItemList(initiator).isEmpty()){
+			tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(initiator));		
+		} else if(!tradeSession.getFromItemList(accepter).isEmpty()){
+			tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(accepter));
+		}
+		long oldMoneyBalanceInititater = initiator.getCashBalance();
+		long oldMoneyBalanceAccepter = accepter.getCashBalance();
+		
+		if(tradeSession.getMoneyAmount(initiator).get() != 0){
+			accepter.setCashBalance(oldMoneyBalanceAccepter + tradeSession.getMoneyAmount(initiator).get());
+			initiator.setCashBalance(oldMoneyBalanceInititater - tradeSession.getMoneyAmount(initiator).get()); 
+		} else {
+			initiator.setCashBalance(oldMoneyBalanceInititater + tradeSession.getMoneyAmount(accepter).get());
+			accepter.setCashBalance(oldMoneyBalanceAccepter - tradeSession.getMoneyAmount(accepter).get());
+		}
+
+		accepter.sendSelf(new TradeCompleteMessage());
+		initiator.sendSelf(new TradeCompleteMessage());
+		
 	}
 	
 	private void handleTradeCompleteMessage(Player player) {
 		TradeSession tradeSession = player.getCreatureObject().getTradeSession();
-		tradeSession.sendToPartner(player.getCreatureObject(), new TradeCompleteMessage());
+		tradeSession.getAccepter().setTradeSession(null);
+		tradeSession.getInitiator().setTradeSession(null);
 	}
 	
 	private void handleBeginVerificationMessage(Player player) {
 		TradeSession tradeSession = player.getCreatureObject().getTradeSession();		
-		tradeSession.sendToPartner(player.getCreatureObject(), new BeginVerificationMessage());
+		tradeSession.getAccepter().sendSelf(new VerifyTradeMessage());
+		tradeSession.getInitiator().sendSelf(new VerifyTradeMessage());
 	}
 	
 	private void handleTradeSessionRequest(SecureTrade packet, Player packetSender , CreatureObject initiator, CreatureObject accepter) {		

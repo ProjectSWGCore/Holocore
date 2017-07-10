@@ -8,13 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.projectswg.common.debug.Log;
 
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.trade.AddItemMessage;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 public class TradeSession {
 
-	private final List<Long> initiatorTradeItems;
-	private final List<Long> accepterTradeItems;
+	private final List<SWGObject> initiatorTradeItems;
+	private final List<SWGObject> accepterTradeItems;
 	private final CreatureObject initiator;
 	private final CreatureObject accepter;
 	private final AtomicInteger moneyAmountInitiator;
@@ -25,8 +25,8 @@ public class TradeSession {
 		this.moneyAmountAccepter = new AtomicInteger();
 		this.initiator = initiator;
 		this.accepter = accepter;
-		this.initiatorTradeItems = new ArrayList<Long>();
-		this.accepterTradeItems = new ArrayList<Long>();
+		this.initiatorTradeItems = new ArrayList<SWGObject>();
+		this.accepterTradeItems = new ArrayList<SWGObject>();
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
@@ -48,17 +48,7 @@ public class TradeSession {
 	    }
 	}		
 	
-	public List<Long> addToInitiatorList(long objectId){
-		this.initiatorTradeItems.add(objectId);
-		return this.initiatorTradeItems;
-	}
-	
-	public List<Long> addToAccepterList(long objectId){
-		this.accepterTradeItems.add(objectId);
-		return this.accepterTradeItems;
-	}
-	
-	public List<Long> getFromItemList(CreatureObject creature) {
+	public List<SWGObject> getFromItemList(CreatureObject creature) {
 		if(creature.equals(this.accepter)){
 			return Collections.unmodifiableList(this.initiatorTradeItems);
 		} else {
@@ -74,12 +64,12 @@ public class TradeSession {
 		return this.accepter;
 	}
 
-	public void addItem(CreatureObject self, long itemId) {
+	public void addItem(CreatureObject self, SWGObject tradeObject) {
 	    if (self.equals(this.initiator)) {
-	        this.initiatorTradeItems.add(itemId);
+	        this.initiatorTradeItems.add(tradeObject);
 	        System.out.println("Item added to Initiatorlist");
 	    } else if (self.equals(this.accepter)) {
-	    	this.accepterTradeItems.add(itemId);
+	    	this.accepterTradeItems.add(tradeObject);
 	    	System.out.println("Item added to Accepterlist");
 	    } else {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
@@ -112,5 +102,9 @@ public class TradeSession {
 		return this.moneyAmountAccepter;
 	}
 	
-	
+	public void moveToPartnerInventory(CreatureObject partner, List<SWGObject> fromItemList) {
+		for (SWGObject tradeObject : getFromItemList(partner)) {
+			tradeObject.moveToContainer(partner.getSlottedObject("inventory"));
+		}			
+	}
 }
