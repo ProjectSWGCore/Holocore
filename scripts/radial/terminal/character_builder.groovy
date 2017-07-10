@@ -1,8 +1,9 @@
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import intents.object.CreateStaticItemIntent
+import intents.object.ObjectCreatedIntent
 import intents.object.ObjectTeleportIntent
-import resources.containers.ContainerPermissionsType;
+import resources.containers.ContainerPermissionsType
 import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
@@ -12,6 +13,7 @@ import resources.sui.SuiButtons
 import resources.sui.SuiEvent
 import resources.sui.SuiListBox
 import services.objects.StaticItemService
+import services.objects.ObjectCreator
 import com.projectswg.common.debug.Log
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
@@ -28,6 +30,7 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 			listBox.addListItem("Weapons")
 			listBox.addListItem("Wearables")
 			listBox.addListItem("Travel")
+			listBox.addListItem("Vehicle")
 
 			listBox.addCallback("radial/terminal/character_builder", "handleCategorySelection")
 			listBox.display(player)
@@ -46,6 +49,7 @@ static def handleCategorySelection(Player player, CreatureObject creature, SuiEv
 		case 1: handleWeapons(player); break
 		case 2: handleWearables(player); break
 		case 3: handleTravel(player); break
+		case 4: handleVehicle(player); break
 	}
 }
 
@@ -53,7 +57,7 @@ static def spawnItems(Player player, List<String> items) {
 	def creature = player.getCreatureObject()
 	def inventory = creature.getSlottedObject("inventory")
 
-	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, items.toArray(new String[items.size()])).broadcast()
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items.toArray(new String[0])).broadcast()
 }
 
 static def handleArmor(Player player) {
@@ -1345,4 +1349,12 @@ static def handleYavLightEnclave(Player player) {
 
 static def handleYavGeoCave(Player player) {
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6485d, 83d, -446d, Terrain.YAVIN4)).broadcast()
+}
+
+static def handleVehicle(Player player) {
+	SWGObject deed = ObjectCreator.createObjectFromTemplate("object/tangible/deed/vehicle_deed/shared_barc_speeder_deed.iff")
+
+	deed.moveToContainer(player.getCreatureObject().getSlottedObject("inventory"))
+
+	new ObjectCreatedIntent(deed).broadcast()
 }
