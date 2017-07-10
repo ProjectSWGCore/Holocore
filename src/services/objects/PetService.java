@@ -110,15 +110,14 @@ public final class PetService extends Service {
 			long ownerId = vehicle.getOwnerId();
 
 			if (ownerId != requester.getObjectId()) {	// Check ownership
+				// TODO group members can mount multislot mounts, but not as the driver
 				return;
 			}
 
-			if (vehicle.getSlots().containsValue(requester)) {
-				System.out.println("Exit vehicle");
+			if (isMounted(vehicle, requester)) {
 				// Requester is on this mount
 				options.add(new RadialOption(RadialItem.SERVER_VEHICLE_EXIT));
 			} else {
-				System.out.println("Enter vehicle");
 				options.add(new RadialOption(RadialItem.SERVER_VEHICLE_ENTER));
 			}
 		} else if (target.getTemplate().startsWith("object/intangible/vehicle/")) {
@@ -184,6 +183,12 @@ public final class PetService extends Service {
 		CreatureObject vehicle = (CreatureObject) object;
 		CreatureObject requester = player.getCreatureObject();
 
+		// TODO check if they're mounted in general instead
+		if (isMounted(vehicle, requester)) {
+			Log.d("%s attempted to mount an object that they are already mounted on", requester);
+			return;
+		}
+
 		requester.moveToContainer(vehicle);	// Put requester in the vehicle object
 		requester.setStatesBitmask(CreatureState.RIDING_MOUNT);
 
@@ -207,8 +212,10 @@ public final class PetService extends Service {
 		requester.moveToContainer(null);	// Put requester back in the world
 		requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 
+		// TODO only execute below if the mount is now empty?
 		vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		vehicle.setPosture(Posture.UPRIGHT);
+
 		// TODO remove Vehicle speed, turn, acceleration etc from requester
 	}
 
@@ -220,7 +227,7 @@ public final class PetService extends Service {
 		return deedTemplate.replace("tangible/deed/vehicle_deed", "intangible/vehicle").replace("deed", "pcd");
 	}
 
-	private void  callPet(CreatureObject caller, CreatureObject pet, Location location) {
+	private void callPet(CreatureObject caller, CreatureObject pet, Location location) {
 		Collection<Pet> callerPets;
 
 		if (calledPets.containsKey(caller)) {
@@ -245,6 +252,13 @@ public final class PetService extends Service {
 	* Stores the specified pet
 	*/
 	private void storePet(CreatureObject pet, SWGObject petControlDevice) {
+		if (isMountable(pet)) {
+			// Dismount anyone riding the pet about to be stored
+			Collection<SWGObject> riders = pet.getSlots.values();
+
+			// TODO slot values can be null!
+		}
+
 		pet.moveToContainer(petControlDevice);
 	}
 
@@ -259,7 +273,7 @@ public final class PetService extends Service {
 		Collection<Pet> pets = calledPets.remove(player);
 
 		for (Pet pet : pets) {
-			pet.getCreature().moveToContainer(pet.getPetControlDevice());
+			storePet(pet.getCreature(), pet.getPetControlDevice());
 		}
 	}
 
@@ -276,6 +290,10 @@ public final class PetService extends Service {
 
 	private boolean isMountable(SWGObject object) {
 		return object instanceof CreatureObject && ((CreatureObject) object).hasOptionFlags(OptionFlag.MOUNT);
+	}
+
+	private boolean isMounted(CreatureObject mount, CreatureObject rider) {
+		return mount.getSlots().containsValue(rider);
 	}
 
 	private static class Pet {
