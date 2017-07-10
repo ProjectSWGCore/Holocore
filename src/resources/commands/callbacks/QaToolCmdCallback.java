@@ -27,9 +27,12 @@
 
 package resources.commands.callbacks;
 
+import java.util.Map;
+
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
 import intents.chat.ChatBroadcastIntent;
@@ -58,8 +61,6 @@ import services.objects.ObjectManager;
 import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
-
-import java.util.Map;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -186,15 +187,19 @@ public class QaToolCmdCallback implements ICmdCallback {
 		inputBox.display(player);
 	}
 	
-	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String args) {
+	private void recoverPlayer(ObjectManager objectManager, PlayerManager playerManager, Player player, String args) {
 		args = args.trim();
-		Player recoveree = playerManager.getPlayerByCreatureFirstName(args);
-		if (recoveree == null) {
+		long recoveree = playerManager.getCharacterIdByFirstName(args);
+		if (recoveree == 0) {
 			sendSystemMessage(player, "Could not find player by first name: '" + args + "'");
 			return;
 		}
 		
-		CreatureObject obj = recoveree.getCreatureObject();
+		SWGObject obj = objectManager.getObjectById(recoveree);
+		if (!(obj instanceof CreatureObject)) {
+			sendSystemMessage(player, "Object is not a creature: '" + args + "'");
+			return;
+		}
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
 		new ObjectTeleportIntent(obj, loc).broadcast();
 		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
