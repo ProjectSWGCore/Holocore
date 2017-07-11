@@ -17,16 +17,16 @@ public class TradeSession {
 	private final List<SWGObject> accepterTradeItems;
 	private final CreatureObject initiator;
 	private final CreatureObject accepter;
-	private final AtomicInteger moneyAmountInitiator;
-	private final AtomicInteger moneyAmountAccepter;
+	private final AtomicInteger initiatorMoneyAmount;
+	private final AtomicInteger accepterMoneyAmount;
 
 	public TradeSession(CreatureObject initiator, CreatureObject accepter) {
-		this.moneyAmountInitiator = new AtomicInteger();
-		this.moneyAmountAccepter = new AtomicInteger();
+		this.initiatorTradeItems = new ArrayList<>();
+		this.accepterTradeItems = new ArrayList<>();
 		this.initiator = initiator;
 		this.accepter = accepter;
-		this.initiatorTradeItems = new ArrayList<SWGObject>();
-		this.accepterTradeItems = new ArrayList<SWGObject>();
+		this.initiatorMoneyAmount = new AtomicInteger();
+		this.accepterMoneyAmount = new AtomicInteger();
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
@@ -77,34 +77,33 @@ public class TradeSession {
 	}
 	
 	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
-		TradeSession tradeSession = creature.getTradeSession();
-		if(creature.getObjectId() != tradeSession.getAccepter().getObjectId()){
-			tradeSession.getAccepter().getOwner().sendPacket(packet);
+		if(creature.getObjectId() != this.getAccepter().getObjectId()){
+			this.getAccepter().getOwner().sendPacket(packet);
 		} else {
-			tradeSession.getInitiator().getOwner().sendPacket(packet);
+			this.getInitiator().getOwner().sendPacket(packet);
 		}		
 	}
 	
 	public void setMoneyAmount(CreatureObject creature, int amount){
 		if(creature.equals(this.initiator)){
-			this.moneyAmountInitiator.set(amount);
+			this.initiatorMoneyAmount.set(amount);
 		} else if (creature.equals(this.initiator)){
-			this.moneyAmountAccepter.set(amount);
+			this.accepterMoneyAmount.set(amount);
 		}
 	}
 
-	public AtomicInteger getMoneyAmount(CreatureObject creature) {
+	public int getMoneyAmount(CreatureObject creature) {
 		if(creature.equals(this.initiator)){
-			return this.moneyAmountInitiator;
+			return this.initiatorMoneyAmount.get();
 		} else if (creature.equals(this.initiator)){
-			return this.moneyAmountAccepter;
+			return this.accepterMoneyAmount.get();
 		}
-		return this.moneyAmountAccepter;
+		return this.accepterMoneyAmount.get();
 	}
 	
 	public void moveToPartnerInventory(CreatureObject partner, List<SWGObject> fromItemList) {
-		for (SWGObject tradeObject : getFromItemList(partner)) {
-			tradeObject.moveToContainer(partner.getSlottedObject("inventory"));
+		for (SWGObject tradeObject : fromItemList) {
+			tradeObject.moveToContainer(getTradePartner(partner).getSlottedObject("inventory"));
 		}			
 	}
 }

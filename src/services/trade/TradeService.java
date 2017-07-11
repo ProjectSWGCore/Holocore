@@ -36,39 +36,38 @@ import services.objects.ObjectManager;
 
 public class TradeService extends Service {
 	
-	private List<CreatureObject> tradeInitiators;
-	private List<CreatureObject> tradeAccepters;
 	private List<TradeSession> tradeSessions;
 	
 	public TradeService() {
-		tradeInitiators = new ArrayList<CreatureObject>();
-		tradeAccepters = new ArrayList<CreatureObject>();
 		tradeSessions = new ArrayList<TradeSession>();
 		
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 	}
-
+	
+	@Override
+	public boolean terminate() {
+		for (TradeSession tradeSession : tradeSessions) {
+			tradeSession.getAccepter().sendSelf(new AbortTradeMessage());
+			tradeSession.getAccepter().sendSelf(new TradeCompleteMessage());	
+			tradeSession.getAccepter().setTradeSession(null);
+			tradeSession.getInitiator().sendSelf(new AbortTradeMessage());
+			tradeSession.getInitiator().sendSelf(new TradeCompleteMessage());	
+			tradeSession.getInitiator().setTradeSession(null);
+		}
+		return super.terminate();
+	}
+	
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 				if(pei.getPlayer().getCreatureObject().getTradeSession() != null){
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().sendSelf(new AbortTradeMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().sendSelf(new TradeCompleteMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().sendSelf(new AbortTradeMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().sendSelf(new TradeCompleteMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().setTradeSession(null);
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().setTradeSession(null);
+					abortTrade(pei.getPlayer());
 				}
 				break;
 			case PE_LOGGED_OUT:
 				if(pei.getPlayer().getCreatureObject().getTradeSession() != null){
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().sendSelf(new AbortTradeMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().sendSelf(new TradeCompleteMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().sendSelf(new AbortTradeMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().sendSelf(new TradeCompleteMessage());
-					pei.getPlayer().getCreatureObject().getTradeSession().getAccepter().setTradeSession(null);
-					pei.getPlayer().getCreatureObject().getTradeSession().getInitiator().setTradeSession(null);
+					abortTrade(pei.getPlayer());
 				}
 				break;
 			default:
@@ -93,7 +92,7 @@ public class TradeService extends Service {
 		} else if (packet instanceof UnAcceptTransactionMessage){
 			handleUnAcceptTransactionMessage(gpi.getPlayer());
 		} else if (packet instanceof AddItemMessage){
-			handleAddItemMessage((AddItemMessage) packet, gpi.getPlayer(), gpi.getObjectManager());		
+			handleAddItemMessage((AddItemMessage) packet, gpi.getPlayer(), gpi.getObjectManager());
 		} else if (packet instanceof GiveMoneyMessage){
 			handleGiveMoneyMessage((GiveMoneyMessage) packet, gpi.getPlayer());
 		} else if (packet instanceof BeginVerificationMessage){
@@ -108,11 +107,6 @@ public class TradeService extends Service {
 	private void handleSecureTrade(SecureTrade packet, Player player, ObjectManager objectManager) {
 		CreatureObject initiator = player.getCreatureObject();
 		CreatureObject accepter = (CreatureObject) objectManager.getObjectById(packet.getAccepterId());
-		
-		if(accepter.getTradeSession() != null){
-			sendSystemMessage(initiator.getOwner(), "request_player_busy_no_obj");
-			return;
-		}
 		
 		if(accepter.isInCombat()){
 			return;
@@ -148,9 +142,9 @@ public class TradeService extends Service {
 		}
 		
 		TradeSession tradeSession = new TradeSession(initiator, accepter);
+		tradeSessions.add(tradeSession);
 		initiator.setTradeSession(tradeSession);
 		tradeSessions.add(tradeSession);
-		tradeInitiators.add(initiator);
 		handleTradeSessionRequest(packet, player, initiator, accepter);
 		Log.d("Trade Session Request. Type=%s  Initiator=%d  Receipient=%d PacketSenderID: %d", packet.getType(), packet.getStarterId(), packet.getAccepterId(), player.getCreatureObject().getObjectId());
 	}
@@ -161,10 +155,7 @@ public class TradeService extends Service {
 		if(tradeSession == null)
 			return;
 
-		tradeSession.getAccepter().sendSelf(new AbortTradeMessage());
-		tradeSession.getAccepter().sendSelf(new TradeCompleteMessage());
-		tradeSession.getInitiator().sendSelf(new AbortTradeMessage());
-		tradeSession.getInitiator().sendSelf(new TradeCompleteMessage());
+		abortTrade(player);
 	}
 	
 	private void handleDenyTradeMessage(Player player) {
@@ -174,7 +165,7 @@ public class TradeService extends Service {
 
 	private void handleAcceptTransactionMessage(Player player) {
 		TradeSession tradeSession = player.getCreatureObject().getTradeSession();
-		tradeSession.sendToPartner(player.getCreatureObject(), new AcceptTransactionMessage());	
+		tradeSession.sendToPartner(player.getCreatureObject(), new AcceptTransactionMessage());
 	}
 	
 	private void handleUnAcceptTransactionMessage(Player player) {
@@ -220,29 +211,32 @@ public class TradeService extends Service {
 		CreatureObject initiator = tradeSession.getInitiator();
 		CreatureObject accepter = tradeSession.getAccepter();
 				
+		if(!tradeSession.getFromItemList(accepter).isEmpty()){
+			tradeSession.moveToPartnerInventory(accepter, tradeSession.getFromItemList(accepter));		
+		} 
+		
 		if(!tradeSession.getFromItemList(initiator).isEmpty()){
-			tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(initiator));		
-		} else if(!tradeSession.getFromItemList(accepter).isEmpty()){
-			tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(accepter));
+			tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(initiator));
 		}
+		
 		long oldMoneyBalanceInititater = initiator.getCashBalance();
 		long oldMoneyBalanceAccepter = accepter.getCashBalance();
 		
-		if(tradeSession.getMoneyAmount(initiator).get() != 0){
-			accepter.setCashBalance(oldMoneyBalanceAccepter + tradeSession.getMoneyAmount(initiator).get());
-			initiator.setCashBalance(oldMoneyBalanceInititater - tradeSession.getMoneyAmount(initiator).get()); 
+		if(tradeSession.getMoneyAmount(initiator) != 0){
+			accepter.setCashBalance(oldMoneyBalanceAccepter + tradeSession.getMoneyAmount(initiator));
+			initiator.setCashBalance(oldMoneyBalanceInititater - tradeSession.getMoneyAmount(initiator)); 
 		} else {
-			initiator.setCashBalance(oldMoneyBalanceInititater + tradeSession.getMoneyAmount(accepter).get());
-			accepter.setCashBalance(oldMoneyBalanceAccepter - tradeSession.getMoneyAmount(accepter).get());
+			initiator.setCashBalance(oldMoneyBalanceInititater + tradeSession.getMoneyAmount(accepter));
+			accepter.setCashBalance(oldMoneyBalanceAccepter - tradeSession.getMoneyAmount(accepter));
 		}
-
+		
 		accepter.sendSelf(new TradeCompleteMessage());
 		initiator.sendSelf(new TradeCompleteMessage());
-		
 	}
 	
 	private void handleTradeCompleteMessage(Player player) {
 		TradeSession tradeSession = player.getCreatureObject().getTradeSession();
+		tradeSession.sendToPartner(player.getCreatureObject(), new TradeCompleteMessage());
 		tradeSession.getAccepter().setTradeSession(null);
 		tradeSession.getInitiator().setTradeSession(null);
 	}
@@ -259,7 +253,6 @@ public class TradeService extends Service {
 		requestBox.addOkButtonCallback("handleTradeRequest", (player, actor, event, paramenters)-> {
 			if(initiator.getTradeSession() != null && initiator.getTradeSession().getInitiator() != null){
 				accepter.setTradeSession(initiator.getTradeSession());
-				tradeAccepters.add(accepter);
 				accepter.sendSelf(new SecureTrade(TradeMessageType.REQUEST_TRADE, initiator.getObjectId(), accepter.getObjectId()));
 				initiator.sendSelf(new SecureTrade(TradeMessageType.REQUEST_TRADE, initiator.getObjectId(), accepter.getObjectId()));
 				initiator.sendSelf(new BeginTradeMessage(accepter.getObjectId()));
@@ -283,19 +276,13 @@ public class TradeService extends Service {
 		new ChatBroadcastIntent(player, "@ui_trade:" + str).broadcast();
 	}
 
-	@Override
-	public boolean terminate() {
-		for (CreatureObject tradeAccepter : tradeAccepters) {
-			tradeAccepter.sendSelf(new AbortTradeMessage());
-			tradeAccepter.sendSelf(new TradeCompleteMessage());	
-			tradeAccepter.setTradeSession(null);
-		}
-		for (CreatureObject tradeInitiator : tradeInitiators) {
-			tradeInitiator.sendSelf(new AbortTradeMessage());
-			tradeInitiator.sendSelf(new TradeCompleteMessage());		
-			tradeInitiator.setTradeSession(null);
-		}
-		System.out.println("terminatetest");
-		return super.terminate();
+	private void abortTrade(Player player) {
+		TradeSession tradeSession = player.getCreatureObject().getTradeSession();
+		tradeSession.getAccepter().sendSelf(new AbortTradeMessage());
+		tradeSession.getAccepter().sendSelf(new TradeCompleteMessage());
+		tradeSession.getInitiator().sendSelf(new AbortTradeMessage());
+		tradeSession.getInitiator().sendSelf(new TradeCompleteMessage());
+		tradeSession.getAccepter().setTradeSession(null);
+		tradeSession.getInitiator().setTradeSession(null);		
 	}	
 }

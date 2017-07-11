@@ -39,7 +39,7 @@ class InventoryPermissions extends DefaultPermissions {
 			return true;
 		if (container.getOwner() == null)
 			return false;
-		if (!requester.getOwner().equals(container.getOwner()))
+		if (requester.getOwner().equals(container.getOwner()))
 			return false;
 		return canTradePartnerView(requester, container);
 	}
@@ -57,11 +57,13 @@ class InventoryPermissions extends DefaultPermissions {
 		CreatureObject creature = container.getOwner().getCreatureObject();
 		if (creature == null)
 			return false;
+		if(container.getOwner() == null)
+			return false;
 		TradeSession session = creature.getTradeSession();
 		if (session == null || !session.getFromItemList(creature).contains(container.getObjectId()))
 			return false;
 		CreatureObject partner = session.getTradePartner(creature);
-		return partner != null && partner.equals(requester.getOwner());
+		return partner != null && partner.equals(requester);
 	}
 	
 }
