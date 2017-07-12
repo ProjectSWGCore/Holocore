@@ -43,7 +43,7 @@ public class TradeSession {
 
 	public CreatureObject getTradePartner(CreatureObject self) {
 		if (self.equals(accepter)) {
-			return this.accepter;
+			return accepter;
 		} else if(self.equals(initiator)) {
 			return initiator;
 		} else {
