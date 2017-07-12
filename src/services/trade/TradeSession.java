@@ -30,18 +30,22 @@ public class TradeSession {
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
-		if (requester.equals(this.accepter)) {
-			this.initiatorTradeItems.remove(objectId);
+		if (requester.equals(accepter)) {
+			synchronized (initiatorTradeItems) {
+				initiatorTradeItems.remove(objectId);
+			}
 		} else {
-			this.accepterTradeItems.remove(objectId);
+			synchronized (accepterTradeItems) {
+				accepterTradeItems.remove(objectId);
+			}
 		}
 	}
 
 	public CreatureObject getTradePartner(CreatureObject self) {
-		if (self.equals(this.accepter)) {
+		if (self.equals(accepter)) {
 			return this.accepter;
-		} else if(self.equals(this.initiator)) {
-			return this.initiator;
+		} else if(self.equals(initiator)) {
+			return initiator;
 		} else {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
 			return self;
@@ -50,55 +54,57 @@ public class TradeSession {
 	
 	public List<SWGObject> getFromItemList(CreatureObject creature) {
 		if(creature.equals(this.accepter)){
-			return Collections.unmodifiableList(this.initiatorTradeItems);
+			return Collections.unmodifiableList(initiatorTradeItems);
 		} else {
-			return Collections.unmodifiableList(this.accepterTradeItems);
+			return Collections.unmodifiableList(accepterTradeItems);
 		}
 	}
 
 	public CreatureObject getInitiator() {
-		return this.initiator;
+		return initiator;
 	}
 
 	public CreatureObject getAccepter() {
-		return this.accepter;
+		return accepter;
 	}
 
-	public void addItem(CreatureObject self, SWGObject tradeObject) {
-	    if (self.equals(this.initiator)) {
-	        this.initiatorTradeItems.add(tradeObject);
-	        System.out.println("Item added to Initiatorlist");
-	    } else if (self.equals(this.accepter)) {
-	    	this.accepterTradeItems.add(tradeObject);
-	    	System.out.println("Item added to Accepterlist");
+	public void addItem(CreatureObject self, SWGObject tradeObject) {		
+	    if (self.equals(initiator)) {
+	    	synchronized (initiatorTradeItems) {
+	    		initiatorTradeItems.add(tradeObject);
+	    	}
+	    } else if (self.equals(accepter)) {
+	    	synchronized (accepterTradeItems) {
+	    		accepterTradeItems.add(tradeObject);
+	    	}
 	    } else {
 	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
 	    }
 	}
 	
 	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
-		if(creature.getObjectId() != this.getAccepter().getObjectId()){
-			this.getAccepter().getOwner().sendPacket(packet);
+		if(creature.getObjectId() != getAccepter().getObjectId()){
+			getAccepter().getOwner().sendPacket(packet);
 		} else {
-			this.getInitiator().getOwner().sendPacket(packet);
+			getInitiator().getOwner().sendPacket(packet);
 		}		
 	}
 	
 	public void setMoneyAmount(CreatureObject creature, int amount){
-		if(creature.equals(this.initiator)){
-			this.initiatorMoneyAmount.set(amount);
-		} else if (creature.equals(this.initiator)){
-			this.accepterMoneyAmount.set(amount);
+		if(creature.equals(initiator)){
+			initiatorMoneyAmount.set(amount);
+		} else if (creature.equals(initiator)){
+			accepterMoneyAmount.set(amount);
 		}
 	}
 
 	public int getMoneyAmount(CreatureObject creature) {
-		if(creature.equals(this.initiator)){
-			return this.initiatorMoneyAmount.get();
-		} else if (creature.equals(this.initiator)){
-			return this.accepterMoneyAmount.get();
+		if(creature.equals(initiator)){
+			return initiatorMoneyAmount.get();
+		} else if (creature.equals(initiator)){
+			return accepterMoneyAmount.get();
 		}
-		return this.accepterMoneyAmount.get();
+		return accepterMoneyAmount.get();
 	}
 	
 	public void moveToPartnerInventory(CreatureObject partner, List<SWGObject> fromItemList) {
