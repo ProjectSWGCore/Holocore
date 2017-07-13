@@ -68,7 +68,7 @@ public class TradeSession {
 		return accepter;
 	}
 
-	public void addItem(CreatureObject self, SWGObject tradeObject) {		
+	public void addItem(CreatureObject self, SWGObject tradeObject) {
 	    if (self.equals(initiator)) {
 	    	synchronized (initiatorTradeItems) {
 	    		initiatorTradeItems.add(tradeObject);
