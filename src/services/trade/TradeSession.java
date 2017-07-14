@@ -3,13 +3,18 @@ package services.trade;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.projectswg.common.debug.Log;
+import com.projectswg.common.debug.Assert;
 
 import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.trade.AbortTradeMessage;
+import network.packets.swg.zone.trade.TradeCompleteMessage;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.player.Player;
 
 public class TradeSession {
 
@@ -19,71 +24,76 @@ public class TradeSession {
 	private final CreatureObject accepter;
 	private final AtomicInteger initiatorMoneyAmount;
 	private final AtomicInteger accepterMoneyAmount;
+	private final AtomicBoolean initiatorVerified;
+	private final AtomicBoolean accepterVerified;
 
 	public TradeSession(CreatureObject initiator, CreatureObject accepter) {
 		this.initiatorTradeItems = new ArrayList<>();
 		this.accepterTradeItems = new ArrayList<>();
-		this.initiator = initiator;
-		this.accepter = accepter;
+		this.initiator = Objects.requireNonNull(initiator, "Initiator cannot be null!");
+		this.accepter = Objects.requireNonNull(accepter, "Accepter cannot be null!");
 		this.initiatorMoneyAmount = new AtomicInteger();
 		this.accepterMoneyAmount = new AtomicInteger();
+		this.initiatorVerified = new AtomicBoolean();
+		this.accepterVerified = new AtomicBoolean();
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
-		if (requester.equals(accepter)) {
+		Assert.test(isInTradeSession(requester), "Creature is not a part of this trade session!");
+		if(isInitiator(requester)){
 			synchronized (initiatorTradeItems) {
 				initiatorTradeItems.remove(objectId);
 			}
+		
 		} else {
 			synchronized (accepterTradeItems) {
 				accepterTradeItems.remove(objectId);
 			}
 		}
 	}
-
-	public CreatureObject getTradePartner(CreatureObject self) {
-		if (self.equals(accepter)) {
+	
+	public CreatureObject getTradePartner(CreatureObject creature) {
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){
 			return accepter;
-		} else if(self.equals(initiator)) {
-			return initiator;
 		} else {
-	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
-			return self;
-	    }
+			return initiator;
+		}
 	}		
 	
 	public List<SWGObject> getFromItemList(CreatureObject creature) {
-		if(creature.equals(this.accepter)){
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){
 			return Collections.unmodifiableList(initiatorTradeItems);
 		} else {
 			return Collections.unmodifiableList(accepterTradeItems);
 		}
 	}
-
+	
 	public CreatureObject getInitiator() {
 		return initiator;
 	}
-
+	
 	public CreatureObject getAccepter() {
 		return accepter;
 	}
-
-	public void addItem(CreatureObject self, SWGObject tradeObject) {
-	    if (self.equals(initiator)) {
-	    	synchronized (initiatorTradeItems) {
-	    		initiatorTradeItems.add(tradeObject);
-	    	}
-	    } else if (self.equals(accepter)) {
-	    	synchronized (accepterTradeItems) {
-	    		accepterTradeItems.add(tradeObject);
-	    	}
-	    } else {
-	        Log.w("Invalid trade item owner for session: %s  (initiator=%s, accepter=%s)", self, initiator, accepter);
-	    }
+	
+	public void addItem(CreatureObject creature, SWGObject tradeObject) {
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){
+			synchronized (initiatorTradeItems) {
+				initiatorTradeItems.add(tradeObject);
+			}
+		} else {
+			synchronized (accepterTradeItems) {
+				accepterTradeItems.add(tradeObject);
+			}
+		}
 	}
 	
 	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
-		if(creature.getObjectId() != getAccepter().getObjectId()){
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){ // Obique: don't use object id comparisons
 			getAccepter().getOwner().sendPacket(packet);
 		} else {
 			getInitiator().getOwner().sendPacket(packet);
@@ -91,25 +101,64 @@ public class TradeSession {
 	}
 	
 	public void setMoneyAmount(CreatureObject creature, int amount){
-		if(creature.equals(initiator)){
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){
 			initiatorMoneyAmount.set(amount);
-		} else if (creature.equals(initiator)){
+		} else {
 			accepterMoneyAmount.set(amount);
 		}
 	}
 
 	public int getMoneyAmount(CreatureObject creature) {
-		if(creature.equals(initiator)){
+		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
+		if(isInitiator(creature)){
 			return initiatorMoneyAmount.get();
-		} else if (creature.equals(initiator)){
+		} else {
 			return accepterMoneyAmount.get();
 		}
-		return accepterMoneyAmount.get();
 	}
 	
 	public void moveToPartnerInventory(CreatureObject partner, List<SWGObject> fromItemList) {
 		for (SWGObject tradeObject : fromItemList) {
 			tradeObject.moveToContainer(getTradePartner(partner).getSlottedObject("inventory"));
 		}			
+	}
+
+	public boolean isInitiatorVerified() { 
+		return initiatorVerified.get();
+	}
+
+	public boolean isAccepterVerified() { 
+		return accepterVerified.get();
+	}
+	
+	public void setInititatorVerified(boolean initiatorVerfified){
+		this.initiatorVerified.set(initiatorVerfified);
+	}
+	
+	public void setAccepterVerified(boolean accepterVerified){
+		this.accepterVerified.set(accepterVerified);
+	}
+	
+	public void sendAbortTrade() { 
+		Player accepter = this.accepter.getOwner();
+		Player initiator = this.initiator.getOwner();
+		if (accepter != null)
+			accepter.sendPacket(new AbortTradeMessage(), new TradeCompleteMessage());
+		if (initiator != null)
+			initiator.sendPacket(new AbortTradeMessage(), new TradeCompleteMessage());
+		
+		if (initiator.getCreatureObject() != null)
+			initiator.getCreatureObject().setTradeSession(null);
+		if (accepter.getCreatureObject() != null)
+			accepter.getCreatureObject().setTradeSession(null);
+	}
+	
+	private boolean isInitiator(CreatureObject creature) {
+		return creature.equals(initiator); 
+	}
+	
+	private boolean isInTradeSession(CreatureObject creature) {
+		return isInitiator(creature) || (accepter != null && creature.equals(accepter));
 	}
 }
