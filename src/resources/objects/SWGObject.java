@@ -295,6 +295,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		slots.put(name, value);
 	}
 
+	public boolean hasSlottedObject(SWGObject obj) {
+		return slots.containsValue(obj);
+	}
+	
 	public Map<String, SWGObject> getSlots() {
 		return new HashMap<>(slots);
 	}

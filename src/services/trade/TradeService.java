@@ -170,6 +170,10 @@ public class TradeService extends Service {
 		}
 		
 		SWGObject tradeObject = objectManager.getObjectById(packet.getObjectId());
+		if(creature.hasSlottedObject(tradeObject)){
+			return;
+		}			
+		
 		if(tradeObject.hasAttribute("no_trade")){
 			sendSystemMessage(player, "add_item_failed_prose");
 			tradeSession.sendToPartner(creature, new RemoveItemMessage(packet.getObjectId()));
