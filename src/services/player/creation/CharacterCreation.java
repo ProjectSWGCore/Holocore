@@ -77,7 +77,6 @@ public class CharacterCreation {
 		setPlayerObjectValues(playerObj);
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(creatureObj, create.getRace());
-		
 		playerObj.setAdminTag(accessLevel);
 		new ObjectCreatedIntent(creatureObj).broadcast();
 		return creatureObj;
@@ -151,6 +150,8 @@ public class CharacterCreation {
 		creatureObj.setObjectName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
 		creatureObj.setVolume(0x000F4240);
+		creatureObj.setBankBalance(1000);
+		creatureObj.setCashBalance(100);
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
 		
@@ -161,7 +162,7 @@ public class CharacterCreation {
 		defWeapon.setMinDamage(50);
 		defWeapon.setMaxDamage(100);
 		creatureObj.setEquippedWeapon(defWeapon);
-		createInventoryObject(creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
+		createDefaultObject(creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
 		createInventoryObject(creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
 		createInventoryObject(creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff");

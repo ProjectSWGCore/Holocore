@@ -162,6 +162,18 @@ import network.packets.swg.zone.spatial.AttributeListMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import network.packets.swg.zone.spatial.NewTicketActivityResponseMessage;
+import network.packets.swg.zone.trade.AbortTradeMessage;
+import network.packets.swg.zone.trade.AcceptTransactionMessage;
+import network.packets.swg.zone.trade.AddItemFailedMessage;
+import network.packets.swg.zone.trade.AddItemMessage;
+import network.packets.swg.zone.trade.BeginTradeMessage;
+import network.packets.swg.zone.trade.BeginVerificationMessage;
+import network.packets.swg.zone.trade.DenyTradeMessage;
+import network.packets.swg.zone.trade.GiveMoneyMessage;
+import network.packets.swg.zone.trade.RemoveItemMessage;
+import network.packets.swg.zone.trade.TradeCompleteMessage;
+import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
+import network.packets.swg.zone.trade.VerifyTradeMessage;
 
 
 public enum PacketType {
@@ -326,6 +338,19 @@ public enum PacketType {
 		PLANET_TRAVEL_POINT_LIST_REQUEST		(PlanetTravelPointListRequest.CRC,			PlanetTravelPointListRequest.class),
 		PLANET_TRAVEL_POINT_LIST_RESPONSE		(PlanetTravelPointListResponse.CRC,			PlanetTravelPointListResponse.class),
 		
+		//Trade
+		ABORT_TRADE_MESSAGE						(AbortTradeMessage.CRC,						AbortTradeMessage.class),
+		ACCEPT_TRANSACTION_MESSAGE				(AcceptTransactionMessage.CRC,				AcceptTransactionMessage.class),
+		ADD_ITEM_FAILED_MESSAGE					(AddItemFailedMessage.CRC,					AddItemFailedMessage.class),
+		ADD_ITEM_MESSAGE						(AddItemMessage.CRC,						AddItemMessage.class),
+		BEGIN_TRADE_MESSAGE						(BeginTradeMessage.CRC,						BeginTradeMessage.class),
+		BEGIN_VERIFICATION_MESSAGE				(BeginVerificationMessage.CRC,				BeginVerificationMessage.class),
+		DENY_TRADE_MESSAGE						(DenyTradeMessage.CRC,						DenyTradeMessage.class),
+		GIVE_MONEY_MESSAGE						(GiveMoneyMessage.CRC,						GiveMoneyMessage.class),
+		REMOVE_ITEM_MESSAGE						(RemoveItemMessage.CRC,						RemoveItemMessage.class),
+		TRADE_COMPLETE_MESSAGE					(TradeCompleteMessage.CRC,					TradeCompleteMessage.class),
+		UNACCEPT_TRANSACTION_MESSAGE			(UnAcceptTransactionMessage.CRC,			UnAcceptTransactionMessage.class),
+		VERIFY_TRADE_MESSAGE					(VerifyTradeMessage.CRC,					VerifyTradeMessage.class),
 		
 	UNKNOWN (0xFFFFFFFF, SWGPacket.class);
 
