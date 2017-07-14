@@ -93,7 +93,7 @@ public class TradeSession {
 	
 	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
 		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
-		if(isInitiator(creature)){ // Obique: don't use object id comparisons
+		if(isInitiator(creature)){
 			getAccepter().getOwner().sendPacket(packet);
 		} else {
 			getInitiator().getOwner().sendPacket(packet);

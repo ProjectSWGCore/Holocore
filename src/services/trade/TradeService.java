@@ -165,7 +165,7 @@ public class TradeService extends Service {
 		CreatureObject creature = player.getCreatureObject();
 		TradeSession tradeSession = creature.getTradeSession();
 		if (tradeSession == null) {
-			Log.w("Invalid TradeSession");
+			Log.w("Invalid TradeSession for handleAddItemMessage. Creature %s: ", creature);
 			return;
 		}
 		
