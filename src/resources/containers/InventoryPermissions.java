@@ -40,7 +40,7 @@ class InventoryPermissions extends DefaultPermissions {
 		if (container.getOwner() == null)
 			return false;
 		if (requester.getOwner().equals(container.getOwner()))
-			return false;
+			return true;
 		return canTradePartnerView(requester, container);
 	}
 
