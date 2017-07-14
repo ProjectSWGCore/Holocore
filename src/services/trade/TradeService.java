@@ -10,7 +10,6 @@ import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
-import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.SecureTrade;
 import network.packets.swg.zone.object_controller.SecureTrade.TradeMessageType;
 import network.packets.swg.zone.trade.AbortTradeMessage;
@@ -123,7 +122,7 @@ public class TradeService extends Service {
 		tradeSessions.add(tradeSession);
 		initiator.setTradeSession(tradeSession);
 		handleTradeSessionRequest(packet, player, initiator, accepter);
-		Log.d("Trade Session Request. Type=%s  Initiator=%s  Receipient=%s PacketSenderID: %d", packet.getType(), packet.getStarterId(), packet.getAccepterId(), player.getCreatureObject().getObjectId());
+		Log.d("Trade Session Request. Type=%s  Initiator=%s  Receipient=%s PacketSenderID: %d", packet.getType(), initiator, accepter, player.getCreatureObject().getObjectId());
 	}
 
 	private void handleAbortTradeMessage(Player player) {
