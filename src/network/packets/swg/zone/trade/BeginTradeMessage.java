@@ -24,46 +24,40 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
+package network.packets.swg.zone.trade;
 
-package resources.containers;
+import com.projectswg.common.network.NetBuffer;
 
-import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
-import services.trade.TradeSession;
+import network.packets.swg.SWGPacket;
 
-class InventoryPermissions extends DefaultPermissions {
+public class BeginTradeMessage extends SWGPacket {
 	
-	@Override
-	public boolean canView(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
-			return true;
-		if (container.getOwner() == null)
-			return false;
-		if (requester.getOwner().equals(container.getOwner()))
-			return true;
-		return canTradePartnerView(requester, container);
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("BeginTradeMessage");
+	
+	private long playerId;
+		
+	public BeginTradeMessage(long playerId) {
+		super();
+		this.playerId = playerId;
 	}
 
 	@Override
-	public boolean canEnter(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
-			return true;
-		if (container.getOwner() == null)
-			return false;
-		return requester.getOwner().equals(container.getOwner());
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		playerId = data.getLong();
 	}
 	
-	private boolean canTradePartnerView(SWGObject requester, SWGObject container) {
-		CreatureObject creature = container.getOwner().getCreatureObject();
-		if (creature == null)
-			return false;
-		if(container.getOwner() == null)
-			return false;
-		TradeSession session = creature.getTradeSession();
-		if (session == null || !session.getFromItemList(creature).contains(container.getObjectId()))
-			return false;
-		CreatureObject partner = session.getTradePartner(creature);
-		return partner != null && partner.equals(requester);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addLong(playerId);
+		return data;
 	}
-	
+
+	public long getPlayerId() {
+		return playerId;
+	}	
 }

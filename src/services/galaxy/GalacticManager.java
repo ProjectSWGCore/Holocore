@@ -46,6 +46,7 @@ import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.objects.UniformBoxService;
 import services.player.PlayerManager;
+import services.trade.TradeService;
 
 public class GalacticManager extends Manager {
 	
@@ -56,6 +57,7 @@ public class GalacticManager extends Manager {
 	private final TravelService travelService;
 	private final DeveloperService developerService;
 	private final UniformBoxService uniformBox;
+	private final TradeService tradeService;
 	private final Map<Long, IntentChain> prevIntentMap;
 	
 	public GalacticManager() {
@@ -66,8 +68,9 @@ public class GalacticManager extends Manager {
 		travelService = new TravelService();
 		developerService = new DeveloperService();
 		uniformBox = new UniformBoxService();
+		tradeService = new TradeService();
 		prevIntentMap = new SynchronizedMap<>();
-		
+				
 		addChildService(objectManager);
 		addChildService(playerManager);
 		addChildService(gameManager);
@@ -75,6 +78,7 @@ public class GalacticManager extends Manager {
 		addChildService(travelService);
 		addChildService(developerService);
 		addChildService(uniformBox);
+		addChildService(tradeService);
 		
 		registerForIntent(InboundPacketIntent.class, ipi -> handleInboundPacketIntent(ipi));
 		registerForIntent(ConnectionOpenedIntent.class, coi -> handleConnectionOpenedIntent(coi));

@@ -102,6 +102,12 @@ public class PlayerManager extends Manager {
 		return null;
 	}
 	
+	public long getCharacterIdByFirstName(String name) {
+		Assert.notNull(name);
+		Assert.test(!name.trim().isEmpty());
+		return loginService.getCharacterIdByFirstName(name);
+	}
+	
 	public long getCharacterIdByName(String name) {
 		Assert.notNull(name);
 		Assert.test(!name.trim().isEmpty());
