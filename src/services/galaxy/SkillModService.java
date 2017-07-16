@@ -92,7 +92,7 @@ public class SkillModService extends Service {
 		    return;
 		
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
-		
+	
 		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
 			if(attributes.getKey().endsWith("_modified")){
 				String[] splitModName = attributes.getKey().split(":",2);
@@ -117,8 +117,7 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);			
-		String race = creature.getRace().toString();
-		race = race.substring(0, 3);
+		String race = getRaceColumnAbbr(creature.getRace().toString());
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
@@ -130,8 +129,7 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);		
-		String race = creature.getRace().toString();
-		race = race.substring(0, 3);
+		String race = getRaceColumnAbbr(creature.getRace().toString());
 		int newLevel = lci.getNewLevel();
 		
 		updateLevelHAMValues(creature, newLevel, profession);
@@ -261,7 +259,34 @@ public class SkillModService extends Service {
 		if (target != null){
 			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
 		}
-	}	
+	}
+	
+	private String getRaceColumnAbbr(String race){
+		
+		if (race.contains("HUMAN")){
+			return "hum";
+		}else if (race.contains("RODIAN")){
+			return "rod";
+		}else if (race.contains("TRANDOSHAN")){
+			return "tran";
+		}else if (race.contains("MONCAL")){
+			return "mon";
+		}else if (race.contains("WOOKIE")){
+			return "wok";
+		}else if (race.contains("BOTHAN")){
+			return "both";
+		}else if (race.contains("TWILEK")){
+			return "twi";
+		}else if (race.contains("ZABRAK")){
+			return "zab";
+		}else if (race.contains("ITHORIAN")){
+			return "ith";	
+		}else if (race.contains("SULLUSTAN")){
+			return "sul";			
+		}
+
+		return "";
+	}
 	
 	public enum SkillModTypes{
 		LUCK_MODIFIED 			("_luck","_lck","level_up_stat_gain_0"),
