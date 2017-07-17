@@ -117,23 +117,23 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);			
-		String race = getRaceColumnAbbr(creature.getRace().toString());
+		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race);
+		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent lci){
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);		
-		String race = getRaceColumnAbbr(creature.getRace().toString());
+		profession = profession.substring(0,profession.length()-3);	
+		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
 		int newLevel = lci.getNewLevel();
-		
+
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race);
+		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
 	}
 
 	private void handleSkillModIntent(SkillModIntent smi) {
@@ -261,31 +261,38 @@ public class SkillModService extends Service {
 		}
 	}
 	
-	private String getRaceColumnAbbr(String race){
-		
-		if (race.contains("HUMAN")){
-			return "hum";
-		}else if (race.contains("RODIAN")){
-			return "rod";
-		}else if (race.contains("TRANDOSHAN")){
-			return "tran";
-		}else if (race.contains("MONCAL")){
-			return "mon";
-		}else if (race.contains("WOOKIE")){
-			return "wok";
-		}else if (race.contains("BOTHAN")){
-			return "both";
-		}else if (race.contains("TWILEK")){
-			return "twi";
-		}else if (race.contains("ZABRAK")){
-			return "zab";
-		}else if (race.contains("ITHORIAN")){
-			return "ith";	
-		}else if (race.contains("SULLUSTAN")){
-			return "sul";			
-		}
+	public enum RaceAbbr {
 
-		return "";
+		HUMAN_MALE  			("hum"),
+		HUMAN_FEMALE			("hum"),
+		TRANDOSHAN_MALE 		("tran"),
+		TRANDOSHAN_FEMALE   	("tran"),
+		TWILEK_MALE 			("twi"),
+		TWILEK_FEMALE   		("twi"),
+		BOTHAN_MALE 			("both"),
+		BOTHAN_FEMALE   		("both"),
+		ZABRAK_MALE 			("zab"),
+		ZABRAK_FEMALE   		("zab"),
+		RODIAN_MALE 			("rod"),
+		RODIAN_FEMALE   		("rod"),
+		MONCAL_MALE 			("mon"),
+		MONCAL_FEMALE   		("mon"),
+		WOOKIEE_MALE			("wok"),
+		WOOKIEE_FEMALE  		("wok"),
+		SULLUSTAN_MALE  		("sul"),
+		SULLUSTAN_FEMALE		("sul"),
+		ITHORIAN_MALE   		("ith"),
+		ITHORIAN_FEMALE 		("ith");
+		
+		private final String raceAbbr;
+		
+		RaceAbbr(String race){
+			this.raceAbbr = race;
+		}
+		
+		public String getRaceAbbr(){
+			return this.raceAbbr;
+		}		
 	}
 	
 	public enum SkillModTypes{
