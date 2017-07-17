@@ -117,23 +117,23 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);			
-		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
+		String race = getRaceColumnAbbr(creature.getRace().toString());
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
+		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent lci){
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);	
-		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
+		profession = profession.substring(0,profession.length()-3);		
+		String race = getRaceColumnAbbr(creature.getRace().toString());
 		int newLevel = lci.getNewLevel();
-
+		
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
+		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 
 	private void handleSkillModIntent(SkillModIntent smi) {
@@ -286,39 +286,6 @@ public class SkillModService extends Service {
 		}
 
 		return "";
-	}
-	
-	public enum RaceAbbr {
-		HUMAN_MALE			("hum"),
-		HUMAN_FEMALE		("hum"),
-		TRANDOSHAN_MALE		("tran"),
-		TRANDOSHAN_FEMALE	("tran"),
-		TWILEK_MALE			("twi"),
-		TWILEK_FEMALE		("twi"),
-		BOTHAN_MALE			("both"),
-		BOTHAN_FEMALE		("both"),
-		ZABRAK_MALE			("zab"),
-		ZABRAK_FEMALE		("zab"),
-		RODIAN_MALE			("rod"),
-		RODIAN_FEMALE		("rod"),
-		MONCAL_MALE			("mon"),
-		MONCAL_FEMALE		("mon"),
-		WOOKIEE_MALE		("wok"),
-		WOOKIEE_FEMALE		("wok"),
-		SULLUSTAN_MALE		("sul"),
-		SULLUSTAN_FEMALE	("sul"),
-		ITHORIAN_MALE		("ith"),
-		ITHORIAN_FEMALE		("ith");
-		
-		private final String raceAbbr;
-		
-		RaceAbbr(String race){
-			this.raceAbbr = race;
-		}
-		
-		public String getRaceAbbr(){
-			return this.raceAbbr;
-		}		
 	}
 	
 	public enum SkillModTypes{
