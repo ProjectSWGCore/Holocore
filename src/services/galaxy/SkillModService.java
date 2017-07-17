@@ -263,26 +263,26 @@ public class SkillModService extends Service {
 	
 	public enum RaceAbbr {
 
-		HUMAN_MALE  				("hum"),
-		HUMAN_FEMALE				("hum"),
-		TRANDOSHAN_MALE 			("tran"),
-		TRANDOSHAN_FEMALE   		("tran"),
-		TWILEK_MALE 				("twi"),
-		TWILEK_FEMALE   			("twi"),
-		BOTHAN_MALE 				("both"),
-		BOTHAN_FEMALE   			("both"),
-		ZABRAK_MALE 				("zab"),
-		ZABRAK_FEMALE   			("zab"),
-		RODIAN_MALE 				("rod"),
-		RODIAN_FEMALE   			("rod"),
-		MONCAL_MALE 				("mon"),
-		MONCAL_FEMALE   			("mon"),
-		WOOKIEE_MALE				("wok"),
-		WOOKIEE_FEMALE  			("wok"),
-		SULLUSTAN_MALE  			("sul"),
-		SULLUSTAN_FEMALE			("sul"),
-		ITHORIAN_MALE   			("ith"),
-		ITHORIAN_FEMALE 			("ith");
+		HUMAN_MALE            ("hum"),
+		HUMAN_FEMALE          ("hum"),
+		TRANDOSHAN_MALE       ("tran"),
+		TRANDOSHAN_FEMALE     ("tran"),
+		TWILEK_MALE           ("twi"),
+		TWILEK_FEMALE         ("twi"),
+		BOTHAN_MALE           ("both"),
+		BOTHAN_FEMALE         ("both"),
+		ZABRAK_MALE           ("zab"),
+		ZABRAK_FEMALE         ("zab"),
+		RODIAN_MALE           ("rod"),
+		RODIAN_FEMALE         ("rod"),
+		MONCAL_MALE           ("mon"),
+		MONCAL_FEMALE         ("mon"),
+		WOOKIEE_MALE          ("wok"),
+		WOOKIEE_FEMALE        ("wok"),
+		SULLUSTAN_MALE        ("sul"),
+		SULLUSTAN_FEMALE      ("sul"),
+		ITHORIAN_MALE         ("ith"),
+		ITHORIAN_FEMALE       ("ith");
 		
 		private final String raceAbbr;
 		
