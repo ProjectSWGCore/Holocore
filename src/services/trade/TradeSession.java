@@ -26,6 +26,8 @@ public class TradeSession {
 	private final AtomicInteger accepterMoneyAmount;
 	private final AtomicBoolean initiatorVerified;
 	private final AtomicBoolean accepterVerified;
+	private final AtomicBoolean initiatorBeginSend;
+	private final AtomicBoolean accepterBeginSend;
 
 	public TradeSession(CreatureObject initiator, CreatureObject accepter) {
 		this.initiatorTradeItems = new ArrayList<>();
@@ -36,6 +38,8 @@ public class TradeSession {
 		this.accepterMoneyAmount = new AtomicInteger();
 		this.initiatorVerified = new AtomicBoolean();
 		this.accepterVerified = new AtomicBoolean();
+		this.initiatorBeginSend = new AtomicBoolean();
+		this.accepterBeginSend = new AtomicBoolean();
 	}
 
 	public void removeFromItemList(CreatureObject requester, long objectId) {
@@ -140,6 +144,22 @@ public class TradeSession {
 		this.accepterVerified.set(accepterVerified);
 	}
 	
+	public boolean isInitiatorBeginSend() {
+		return initiatorBeginSend.get();
+	}
+
+	public boolean isAccepterBeginSend() {
+		return accepterBeginSend.get();
+	}
+	
+	public void setInititatorBeginSend(boolean inititatorBeginSend){
+		this.initiatorBeginSend.set(inititatorBeginSend);
+	}
+	
+	public void setAccepterBeginSend(boolean accepterBeginSend){
+		this.accepterBeginSend.set(accepterBeginSend);
+	}
+
 	public void sendAbortTrade() { 
 		Player accepter = this.accepter.getOwner();
 		Player initiator = this.initiator.getOwner();

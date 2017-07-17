@@ -19,7 +19,6 @@ import network.packets.swg.zone.trade.BeginTradeMessage;
 import network.packets.swg.zone.trade.BeginVerificationMessage;
 import network.packets.swg.zone.trade.DenyTradeMessage;
 import network.packets.swg.zone.trade.GiveMoneyMessage;
-import network.packets.swg.zone.trade.RemoveItemMessage;
 import network.packets.swg.zone.trade.TradeCompleteMessage;
 import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
 import network.packets.swg.zone.trade.VerifyTradeMessage;
@@ -73,6 +72,8 @@ public class TradeService extends Service {
 
 		if (packet instanceof SecureTrade) {
 			handleSecureTrade((SecureTrade) packet,gpi.getPlayer(), gpi.getObjectManager());
+		} else if(packet instanceof BeginTradeMessage){
+			System.out.println("beginTradetest");
 		} else if (packet instanceof AbortTradeMessage){
 			handleAbortTradeMessage(gpi.getPlayer());
 		} else if (packet instanceof DenyTradeMessage){
@@ -238,18 +239,23 @@ public class TradeService extends Service {
 	}
 	
 	private void handleTradeSessionRequest(SecureTrade packet, Player packetSender , CreatureObject initiator, CreatureObject accepter) {
+		TradeSession tradeSession = packetSender.getCreatureObject().getTradeSession();
 		SuiMessageBox requestBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Trade Request", accepter.getOwner().getCharacterName() + " wants to trade with you.\nDo you want to accept the request?");
-		requestBox.display(accepter.getOwner());
 		requestBox.addOkButtonCallback("handleTradeRequest", (player, actor, event, paramenters)-> {
 			if(initiator.getTradeSession() == null)
 				return;
 			
-			accepter.setTradeSession(initiator.getTradeSession());
-			accepter.sendSelf(new SecureTrade(TradeMessageType.REQUEST_TRADE, initiator.getObjectId(), accepter.getObjectId()));
-			initiator.sendSelf(new SecureTrade(TradeMessageType.REQUEST_TRADE, initiator.getObjectId(), accepter.getObjectId()));
-			initiator.sendSelf(new BeginTradeMessage(accepter.getObjectId()));
-			accepter.sendSelf(new BeginTradeMessage(initiator.getObjectId()));
-			Log.d("Trade Session Request. Type=%s  Initiator=%d  Receipient=%d PacketSenderID: %d", packet.getType(), packet.getStarterId(), packet.getAccepterId(), player.getCreatureObject().getObjectId());
+			if(!tradeSession.isInitiatorBeginSend()){
+				initiator.sendSelf(new BeginTradeMessage(accepter.getObjectId()));
+				tradeSession.setInititatorBeginSend(true);
+			}
+			
+			if(!tradeSession.isAccepterBeginSend()){			
+				accepter.setTradeSession(initiator.getTradeSession());
+				accepter.sendSelf(new BeginTradeMessage(initiator.getObjectId()));
+				tradeSession.setAccepterBeginSend(true);
+			} 
+			Log.d("Trade Started between Player A: %s and Player B: %s ", initiator.getOwner().getCharacterName(), accepter.getOwner().getCharacterName());
 		});
 		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (player, actor, event, paramenters)-> {
 			if(packetSender.getCreatureObject().equals(initiator)){
@@ -260,6 +266,7 @@ public class TradeService extends Service {
 				accepter.sendSelf(new AbortTradeMessage());
 			}
 		});
+		requestBox.display(accepter.getOwner());
 		Log.i("Player: %s sent TradeRequest to Player %s", initiator.getOwner().getCharacterName(), accepter.getOwner().getCharacterName());
 	}
 	
