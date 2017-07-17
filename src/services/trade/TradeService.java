@@ -244,7 +244,7 @@ public class TradeService extends Service {
 			accepter.setTradeSession(initiator.getTradeSession());
 			initiator.sendSelf(new BeginTradeMessage(accepter.getObjectId()));
 			accepter.sendSelf(new BeginTradeMessage(initiator.getObjectId()));		
-			Log.d("Trade Started between %s and %s ", initiator.getOwner().getCharacterName(), accepter.getOwner().getCharacterName());
+			Log.d("Trade Started between %s and %s ", initiator.getObjectName(), accepter.getObjectName());
 		});
 		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (player, actor, event, paramenters)-> {
 			if(packetSender.getCreatureObject().equals(initiator)){
