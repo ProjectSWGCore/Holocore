@@ -84,6 +84,4 @@ public class SecureTrade extends ObjectController {
 			return LOOKUP.getEnum(id, UNDEFINED);
 		}
 	}
-
-
 }
