@@ -18,7 +18,6 @@ import network.packets.swg.zone.trade.BeginTradeMessage;
 import network.packets.swg.zone.trade.BeginVerificationMessage;
 import network.packets.swg.zone.trade.DenyTradeMessage;
 import network.packets.swg.zone.trade.GiveMoneyMessage;
-import network.packets.swg.zone.trade.RemoveItemMessage;
 import network.packets.swg.zone.trade.TradeCompleteMessage;
 import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
 import network.packets.swg.zone.trade.VerifyTradeMessage;
