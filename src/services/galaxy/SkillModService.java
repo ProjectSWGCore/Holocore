@@ -41,6 +41,7 @@ import intents.SkillModIntent;
 import intents.player.CreatedCharacterIntent;
 import intents.experience.LevelChangedIntent;
 import intents.object.ContainerTransferIntent;
+import resources.Race;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -117,7 +118,7 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);			
-		String race = getRaceColumnAbbr(RaceAbbr.valueOf(creature.getRace().toString()));
+		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
@@ -129,7 +130,7 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);	
-		String race = getRaceColumnAbbr(RaceAbbr.valueOf(creature.getRace().toString()));
+		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = lci.getNewLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
@@ -255,47 +256,37 @@ public class SkillModService extends Service {
 		return skillModValue;
 	}	
 	
-private String getRaceColumnAbbr(RaceAbbr race){
+private String getRaceColumnAbbr(Race race){
 	
 		switch (race) {
 			case HUMAN_MALE:
-				return "hum";
 			case HUMAN_FEMALE:
 				return "hum";
 			case TRANDOSHAN_MALE:
-				return "tran";
 			case TRANDOSHAN_FEMALE:
 				return "tran";
 			case TWILEK_MALE:
-				return "twi";
 			case TWILEK_FEMALE:
 				return "twi";
 			case BOTHAN_MALE:
-				return "both";
 			case BOTHAN_FEMALE:
 				return "both";
 			case ZABRAK_MALE:
-				return "zab";
 			case ZABRAK_FEMALE:
 				return "zab";
 			case RODIAN_MALE:
-				return "rod";
 			case RODIAN_FEMALE:
 				return "rod";
 			case MONCAL_MALE:
-				return "mon";
 			case MONCAL_FEMALE:
 				return "mon";
 			case WOOKIEE_MALE:
-				return "wok";
 			case WOOKIEE_FEMALE:
 				return "wok";
 			case SULLUSTAN_MALE:
-				return "sul";
 			case SULLUSTAN_FEMALE:
 				return "sul";
 			case ITHORIAN_MALE:
-				return "ith";
 			case ITHORIAN_FEMALE:
 				return "ith";
 			default:
@@ -308,30 +299,6 @@ private String getRaceColumnAbbr(RaceAbbr race){
 		if (target != null){
 			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
 		}
-	}
-	
-	private enum RaceAbbr {
-
-		HUMAN_MALE,
-		HUMAN_FEMALE,
-		TRANDOSHAN_MALE,
-		TRANDOSHAN_FEMALE,
-		TWILEK_MALE,
-		TWILEK_FEMALE,
-		BOTHAN_MALE,
-		BOTHAN_FEMALE,
-		ZABRAK_MALE,
-		ZABRAK_FEMALE,
-		RODIAN_MALE,
-		RODIAN_FEMALE,
-		MONCAL_MALE,
-		MONCAL_FEMALE,
-		WOOKIEE_MALE,
-		WOOKIEE_FEMALE,
-		SULLUSTAN_MALE,
-		SULLUSTAN_FEMALE,
-		ITHORIAN_MALE,
-		ITHORIAN_FEMALE;
 	}
 	
 	public enum SkillModTypes{
