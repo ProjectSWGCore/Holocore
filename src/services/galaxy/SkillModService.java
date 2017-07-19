@@ -117,11 +117,11 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);			
-		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
+		String race = getRaceColumnAbbr(RaceAbbr.valueOf(creature.getRace().toString()));
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
+		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent lci){
@@ -129,11 +129,11 @@ public class SkillModService extends Service {
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
 		profession = profession.substring(0,profession.length()-3);	
-		RaceAbbr race = RaceAbbr.valueOf(creature.getRace().toString());
+		String race = getRaceColumnAbbr(RaceAbbr.valueOf(creature.getRace().toString()));
 		int newLevel = lci.getNewLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race.getRaceAbbr());
+		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 
 	private void handleSkillModIntent(SkillModIntent smi) {
@@ -255,44 +255,83 @@ public class SkillModService extends Service {
 		return skillModValue;
 	}	
 	
+private String getRaceColumnAbbr(RaceAbbr race){
+	
+		switch (race) {
+			case HUMAN_MALE:
+				return "hum";
+			case HUMAN_FEMALE:
+				return "hum";
+			case TRANDOSHAN_MALE:
+				return "tran";
+			case TRANDOSHAN_FEMALE:
+				return "tran";
+			case TWILEK_MALE:
+				return "twi";
+			case TWILEK_FEMALE:
+				return "twi";
+			case BOTHAN_MALE:
+				return "both";
+			case BOTHAN_FEMALE:
+				return "both";
+			case ZABRAK_MALE:
+				return "zab";
+			case ZABRAK_FEMALE:
+				return "zab";
+			case RODIAN_MALE:
+				return "rod";
+			case RODIAN_FEMALE:
+				return "rod";
+			case MONCAL_MALE:
+				return "mon";
+			case MONCAL_FEMALE:
+				return "mon";
+			case WOOKIEE_MALE:
+				return "wok";
+			case WOOKIEE_FEMALE:
+				return "wok";
+			case SULLUSTAN_MALE:
+				return "sul";
+			case SULLUSTAN_FEMALE:
+				return "sul";
+			case ITHORIAN_MALE:
+				return "ith";
+			case ITHORIAN_FEMALE:
+				return "ith";
+			default:
+				return "";
+		}
+	}
+
+	
 	private void sendSystemMessage(Player target, String id, Object... objects) {
 		if (target != null){
 			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
 		}
 	}
 	
-	public enum RaceAbbr {
+	private enum RaceAbbr {
 
-		HUMAN_MALE            ("hum"),
-		HUMAN_FEMALE          ("hum"),
-		TRANDOSHAN_MALE       ("tran"),
-		TRANDOSHAN_FEMALE     ("tran"),
-		TWILEK_MALE           ("twi"),
-		TWILEK_FEMALE         ("twi"),
-		BOTHAN_MALE           ("both"),
-		BOTHAN_FEMALE         ("both"),
-		ZABRAK_MALE           ("zab"),
-		ZABRAK_FEMALE         ("zab"),
-		RODIAN_MALE           ("rod"),
-		RODIAN_FEMALE         ("rod"),
-		MONCAL_MALE           ("mon"),
-		MONCAL_FEMALE         ("mon"),
-		WOOKIEE_MALE          ("wok"),
-		WOOKIEE_FEMALE        ("wok"),
-		SULLUSTAN_MALE        ("sul"),
-		SULLUSTAN_FEMALE      ("sul"),
-		ITHORIAN_MALE         ("ith"),
-		ITHORIAN_FEMALE       ("ith");
-		
-		private final String raceAbbr;
-		
-		RaceAbbr(String race){
-			this.raceAbbr = race;
-		}
-		
-		public String getRaceAbbr(){
-			return this.raceAbbr;
-		}		
+		HUMAN_MALE,
+		HUMAN_FEMALE,
+		TRANDOSHAN_MALE,
+		TRANDOSHAN_FEMALE,
+		TWILEK_MALE,
+		TWILEK_FEMALE,
+		BOTHAN_MALE,
+		BOTHAN_FEMALE,
+		ZABRAK_MALE,
+		ZABRAK_FEMALE,
+		RODIAN_MALE,
+		RODIAN_FEMALE,
+		MONCAL_MALE,
+		MONCAL_FEMALE,
+		WOOKIEE_MALE,
+		WOOKIEE_FEMALE,
+		SULLUSTAN_MALE,
+		SULLUSTAN_FEMALE,
+		ITHORIAN_MALE,
+		ITHORIAN_FEMALE;
 	}
 	
 	public enum SkillModTypes{
