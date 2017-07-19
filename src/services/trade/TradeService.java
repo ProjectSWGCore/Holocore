@@ -169,9 +169,6 @@ public class TradeService extends Service {
 		}
 				
 		SWGObject tradeObject = objectManager.getObjectById(packet.getObjectId());
-		if(creature.hasSlottedObject(tradeObject)){
-			sendSystemMessageNoStf(player, "Warning: You have just added an equipped item to the trade window!");
-		}			
 		
 		if(tradeObject.hasAttribute("no_trade")){	
 			sendSystemMessageNoStf(player, "Error: You have just added a NoTrade item to the trade window! Trade will be aborted");
