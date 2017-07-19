@@ -171,7 +171,6 @@ public class TradeService extends Service {
 		SWGObject tradeObject = objectManager.getObjectById(packet.getObjectId());
 		
 		if(tradeObject.hasAttribute("no_trade")){	
-			sendSystemMessageNoStf(player, "Error: You have just added a NoTrade item to the trade window! Trade will be aborted");
 			tradeSession.sendAbortTrade();
 			return;
 		}
