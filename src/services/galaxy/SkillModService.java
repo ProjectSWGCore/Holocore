@@ -129,7 +129,7 @@ public class SkillModService extends Service {
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);	
+		profession = profession.substring(0,profession.length()-3);
 		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = lci.getNewLevel();
 
