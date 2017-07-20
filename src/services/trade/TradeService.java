@@ -28,6 +28,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.sui.SuiButtons;
 import resources.sui.SuiMessageBox;
+import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 
 public class TradeService extends Service {
@@ -170,7 +171,7 @@ public class TradeService extends Service {
 				
 		SWGObject tradeObject = objectManager.getObjectById(packet.getObjectId());
 		
-		if(tradeObject.hasAttribute("no_trade")){	
+		if(tradeObject.hasAttribute("no_trade")){
 			tradeSession.sendAbortTrade();
 			return;
 		}
