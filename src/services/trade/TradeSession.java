@@ -59,7 +59,7 @@ public class TradeSession {
 		} else {
 			return initiator;
 		}
-	}		
+	}
 	
 	public List<SWGObject> getFromItemList(CreatureObject creature) {
 		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
@@ -93,11 +93,7 @@ public class TradeSession {
 	
 	public void sendToPartner(CreatureObject creature, SWGPacket packet) {
 		Assert.test(isInTradeSession(creature), "Creature is not a part of this trade session!");
-		if(isInitiator(creature)){
-			getAccepter().getOwner().sendPacket(packet);
-		} else {
-			getInitiator().getOwner().sendPacket(packet);
-		}		
+		getTradePartner(creature).getOwner().sendPacket(packet);
 	}
 	
 	public void setMoneyAmount(CreatureObject creature, int amount){
@@ -118,10 +114,14 @@ public class TradeSession {
 		}
 	}
 	
-	public void moveToPartnerInventory(CreatureObject partner, List<SWGObject> fromItemList) {
+	public void moveToPartnerInventory(CreatureObject creature, List<SWGObject> fromItemList) {
+		CreatureObject partner = getTradePartner(creature);
+		SWGObject inventory = partner.getSlottedObject("inventory");
+		
 		for (SWGObject tradeObject : fromItemList) {
-			tradeObject.moveToContainer(getTradePartner(partner).getSlottedObject("inventory"));
-		}			
+			partner.removeCustomAware(tradeObject);
+			tradeObject.moveToContainer(inventory);
+		}
 	}
 
 	public boolean isInitiatorVerified() { 
