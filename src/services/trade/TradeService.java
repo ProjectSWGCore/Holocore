@@ -52,14 +52,14 @@ public class TradeService extends Service {
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		if (pei.getPlayer().getCreatureObject() == null)
 			return;
-		TradeSession session = pei.getPlayer().getCreatureObject().getTradeSession();
-		if (session == null)
+		TradeSession tradeSession = pei.getPlayer().getCreatureObject().getTradeSession();
+		if (tradeSession == null)
 			return;
 		
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 			case PE_LOGGED_OUT:
-				session.sendAbortTrade();
+				tradeSession.sendAbortTrade();
 				break;
 			default:
 				break;
@@ -162,20 +162,17 @@ public class TradeService extends Service {
 	private void handleAddItemMessage(AddItemMessage packet, Player player, ObjectManager objectManager) {
 		CreatureObject creature = player.getCreatureObject();
 		TradeSession tradeSession = creature.getTradeSession();
+
 		if (tradeSession == null) {
 			Log.w("Invalid TradeSession for handleAddItemMessage. Creature %s: ", creature);
 			return;
 		}
-		
+				
 		SWGObject tradeObject = objectManager.getObjectById(packet.getObjectId());
-		if(creature.hasSlottedObject(tradeObject)){
-			tradeSession.sendAbortTrade();
-			return;
-		}			
 		
 		if(tradeObject.hasAttribute("no_trade")){
-			sendSystemMessage(player, "add_item_failed_prose");
 			tradeSession.sendAbortTrade();
+			return;
 		}
 		
 		tradeObject.setContainerPermissions(ContainerPermissionsType.INVENTORY);
@@ -236,7 +233,7 @@ public class TradeService extends Service {
 	}
 	
 	private void handleTradeSessionRequest(SecureTrade packet, Player packetSender , CreatureObject initiator, CreatureObject accepter) {
-		SuiMessageBox requestBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Trade Request", accepter.getOwner().getCharacterName() + " wants to trade with you.\nDo you want to accept the request?");
+		SuiMessageBox requestBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Trade Request", initiator.getObjectName() + " wants to trade with you.\nDo you want to accept the request?");
 		requestBox.addOkButtonCallback("handleTradeRequest", (player, actor, event, paramenters)-> {
 			if(initiator.getTradeSession() == null)
 				return;
