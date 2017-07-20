@@ -258,42 +258,41 @@ public class SkillModService extends Service {
 	
 private String getRaceColumnAbbr(Race race){
 	
-		switch (race) {
-			case HUMAN_MALE:
-			case HUMAN_FEMALE:
-				return "hum";
-			case TRANDOSHAN_MALE:
-			case TRANDOSHAN_FEMALE:
-				return "tran";
-			case TWILEK_MALE:
-			case TWILEK_FEMALE:
-				return "twi";
-			case BOTHAN_MALE:
-			case BOTHAN_FEMALE:
-				return "both";
-			case ZABRAK_MALE:
-			case ZABRAK_FEMALE:
-				return "zab";
-			case RODIAN_MALE:
-			case RODIAN_FEMALE:
-				return "rod";
-			case MONCAL_MALE:
-			case MONCAL_FEMALE:
-				return "mon";
-			case WOOKIEE_MALE:
-			case WOOKIEE_FEMALE:
-				return "wok";
-			case SULLUSTAN_MALE:
-			case SULLUSTAN_FEMALE:
-				return "sul";
-			case ITHORIAN_MALE:
-			case ITHORIAN_FEMALE:
-				return "ith";
-			default:
-				return "";
+	switch (race) {
+		case HUMAN_MALE:
+		case HUMAN_FEMALE:
+			return "hum";
+		case TRANDOSHAN_MALE:
+		case TRANDOSHAN_FEMALE:
+			return "tran";
+		case TWILEK_MALE:
+		case TWILEK_FEMALE:
+			return "twi";
+		case BOTHAN_MALE:
+		case BOTHAN_FEMALE:
+			return "both";
+		case ZABRAK_MALE:
+		case ZABRAK_FEMALE:
+			return "zab";
+		case RODIAN_MALE:
+		case RODIAN_FEMALE:
+			return "rod";
+		case MONCAL_MALE:
+		case MONCAL_FEMALE:
+			return "mon";
+		case WOOKIEE_MALE:
+		case WOOKIEE_FEMALE:
+			return "wok";
+		case SULLUSTAN_MALE:
+		case SULLUSTAN_FEMALE:
+			return "sul";
+		case ITHORIAN_MALE:
+		case ITHORIAN_FEMALE:
+			return "ith";
+		default:
+			return "";
 		}
 	}
-
 	
 	private void sendSystemMessage(Player target, String id, Object... objects) {
 		if (target != null){
