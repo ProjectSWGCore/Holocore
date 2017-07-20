@@ -28,7 +28,6 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.sui.SuiButtons;
 import resources.sui.SuiMessageBox;
-import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 
 public class TradeService extends Service {
@@ -259,9 +258,5 @@ public class TradeService extends Service {
 	
 	private void sendSystemMessage(Player player, String str) {
 		new ChatBroadcastIntent(player, "@ui_trade:" + str).broadcast();
-	}
-	
-	private void sendSystemMessageNoStf(Player player, String message) {
-		new ChatBroadcastIntent(player, message).broadcast();
 	}
 }
