@@ -264,7 +264,7 @@ public class SkillModService extends Service {
 				return "hum";
 			case TRANDOSHAN_MALE:
 			case TRANDOSHAN_FEMALE:
-			return "tran";
+				return "tran";
 			case TWILEK_MALE:
 			case TWILEK_FEMALE:
 				return "twi";
