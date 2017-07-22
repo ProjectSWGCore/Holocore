@@ -41,6 +41,7 @@ import intents.SkillModIntent;
 import intents.player.CreatedCharacterIntent;
 import intents.experience.LevelChangedIntent;
 import intents.object.ContainerTransferIntent;
+import resources.Race;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -92,7 +93,7 @@ public class SkillModService extends Service {
 		    return;
 		
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
-		
+	
 		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
 			if(attributes.getKey().endsWith("_modified")){
 				String[] splitModName = attributes.getKey().split(":",2);
@@ -116,9 +117,8 @@ public class SkillModService extends Service {
 		CreatureObject creature = cci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);			
-		String race = creature.getRace().toString();
-		race = race.substring(0, 3);
+		profession = profession.substring(0,profession.length()-3);
+		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = creature.getLevel();
 
 		updateLevelHAMValues(creature, newLevel, profession);
@@ -129,11 +129,10 @@ public class SkillModService extends Service {
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
 		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);		
-		String race = creature.getRace().toString();
-		race = race.substring(0, 3);
+		profession = profession.substring(0,profession.length()-3);
+		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = lci.getNewLevel();
-		
+
 		updateLevelHAMValues(creature, newLevel, profession);
 		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
@@ -257,11 +256,49 @@ public class SkillModService extends Service {
 		return skillModValue;
 	}	
 	
+	private String getRaceColumnAbbr(Race race){
+
+		switch (race) {
+			case HUMAN_MALE:
+			case HUMAN_FEMALE:
+				return "hum";
+			case TRANDOSHAN_MALE:
+			case TRANDOSHAN_FEMALE:
+				return "tran";
+			case TWILEK_MALE:
+			case TWILEK_FEMALE:
+				return "twi";
+			case BOTHAN_MALE:
+			case BOTHAN_FEMALE:
+				return "both";
+			case ZABRAK_MALE:
+			case ZABRAK_FEMALE:
+				return "zab";
+			case RODIAN_MALE:
+			case RODIAN_FEMALE:
+				return "rod";
+			case MONCAL_MALE:
+			case MONCAL_FEMALE:
+				return "mon";
+			case WOOKIEE_MALE:
+			case WOOKIEE_FEMALE:
+				return "wok";
+			case SULLUSTAN_MALE:
+			case SULLUSTAN_FEMALE:
+				return "sul";
+			case ITHORIAN_MALE:
+			case ITHORIAN_FEMALE:
+				return "ith";
+			default:
+				return "";
+		}
+	}
+	
 	private void sendSystemMessage(Player target, String id, Object... objects) {
 		if (target != null){
 			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
 		}
-	}	
+	}
 	
 	public enum SkillModTypes{
 		LUCK_MODIFIED 			("_luck","_lck","level_up_stat_gain_0"),
