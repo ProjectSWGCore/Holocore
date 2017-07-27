@@ -52,12 +52,17 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
+import resources.objects.group.GroupObject;
+import resources.objects.group.LootRule;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
+import services.objects.ObjectManager;
 import services.objects.StaticItemService;
+import utilities.IntentFactory;
 
 public final class LootService extends Service {
 
@@ -66,11 +71,13 @@ public final class LootService extends Service {
 	
 	private final Map<String, LootTable> lootTables;	// K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;	// K: npc_id, V: possible loot
+	private final ObjectManager objectManager;
 	private final Random random;
 	
 	public LootService() {
 		lootTables = new HashMap<>();
 		npcLoot = new HashMap<>();
+		objectManager = new ObjectManager();
 		random = new Random();
 
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommand(cci));
@@ -200,6 +207,7 @@ public final class LootService extends Service {
 
 		SWGObject lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff");
 		lootInventory.setLocation(corpse.getLocation());
+		lootInventory.setContainerPermissions(ContainerPermissionsType.LOOT);
 		corpse.addObject(lootInventory);	// It's a slotted object and goes in the inventory slot
 		new ObjectCreatedIntent(lootInventory).broadcast();
 
@@ -210,9 +218,13 @@ public final class LootService extends Service {
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
+
 		if(!cci.getCommand().getName().equalsIgnoreCase("loot")) {
 			return;
 		}
+		
+		if (!getLootPermission(cci.getSource(), cci.getTarget()))
+			return;				
 
 		lootAll(cci.getSource(), cci.getTarget());
 	}
@@ -220,24 +232,22 @@ public final class LootService extends Service {
 	private void handleRadialSelection(RadialSelectionIntent rsi) {
 		switch (rsi.getSelection()) {
 			case LOOT: {
-				// TODO permissions check
-				SWGObject inventory = rsi.getTarget().getSlottedObject("inventory");
-
-				if (inventory.getContainedObjects().isEmpty()) {
-					// Don't bother opening a window for an inventory with no loot in it
+				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
 					return;
-				}
-
-				rsi.getPlayer().sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
+				
+				lootBox(rsi.getPlayer(), rsi.getTarget());
 				break;
 			}
 			case LOOT_ALL: {
+				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
+					return;				
+				
 				lootAll(rsi.getPlayer().getCreatureObject(), rsi.getTarget());
 				break;
 			}
 		}
 	}
-
+	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
 		SWGObject target = rri.getTarget();
 
@@ -261,21 +271,41 @@ public final class LootService extends Service {
 		options.add(loot);
 		new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
 	}
+	
+	private void lootBox(Player player, SWGObject target){
+		SWGObject inventory = target.getSlottedObject("inventory");
+		
+		player.sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
+	}
 
 	private void lootAll(SWGObject looter, SWGObject corpse) {
 		if (!(corpse instanceof AIObject)) {
-			// Can't loot something that's not a NPC
 			return;
 		}
 
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
-
-		// TODO respect loot rules for groups
-		// TODO permissions check
+		SWGObject looterInventory = looter.getSlottedObject("inventory");
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
+		
+		loot.forEach(item -> item.moveToContainer(looter, looter.getSlottedObject("inventory")));
+	}
+	
+	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {
+		if (!(corpse instanceof AIObject)) {
+			return;
+		}
 
-		loot.forEach(item -> item.moveToContainer(looter.getSlottedObject("inventory")));
+		SWGObject lootInventory = corpse.getSlottedObject("inventory");
+		CreatureObject randomPlayer =null;
+
+		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
+		
+		for (SWGObject item : loot){
+			randomPlayer = lootGroup.getRandomPlayer();
+			if(randomPlayer != null)
+				item.moveToContainer(randomPlayer, randomPlayer.getSlottedObject("inventory"));
+		}
 	}
 
 	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
@@ -376,6 +406,55 @@ public final class LootService extends Service {
 		}
 	}
 	
+	private boolean getLootPermission(CreatureObject looter, SWGObject target){
+		
+		if (!isLootable(looter, target))
+			return false;
+		
+		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
+		
+		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null){
+			Long looterGroup = looter.getGroupId();
+			Long killerGroup = highestDamageDealer.getGroupId();
+			
+			if (looterGroup.equals(killerGroup) && killerGroup != 0){
+				GroupObject killerGroupObject = (GroupObject) objectManager.getObjectById(killerGroup);
+
+					int lootRuleID = killerGroupObject.getLootRule().getId();
+
+					switch (lootRuleID){
+						case 0:
+							return true;
+						case 1:
+							if (highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster())
+								return true;
+						case 2: //TODO Lottery
+							return false;
+						case 3:
+							randomGroupLoot(killerGroupObject, target);
+							return false;
+						default:
+							return false;
+					}
+			}else if (highestDamageDealer.getOwner().equals(looter.getOwner())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isLootable(CreatureObject looter, SWGObject target){
+		SWGObject inventory = target.getSlottedObject("inventory");
+
+		if (inventory.getContainedObjects().isEmpty())
+			return false;
+
+		if (inventory.getContainerPermissions() != ContainerPermissionsType.LOOT)
+			return false;
+
+		return true;
+	}
+
 	private static class NPCLoot {
 
 		private final int minCash;

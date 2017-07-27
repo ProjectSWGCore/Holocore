@@ -27,10 +27,10 @@
 
 package resources.containers;
 
-import com.projectswg.common.debug.Log;
 
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
+import resources.objects.custom.AIObject;
+import resources.player.Player;
 
 class LootPermissions extends ContainerPermissions {
 	
@@ -51,22 +51,20 @@ class LootPermissions extends ContainerPermissions {
 	
 	@Override
 	public boolean canMove(SWGObject requester, SWGObject container) {
-		//TODO: Group Permissions
-		if (requester.getOwner() == null || requester.getParent() == null)
+		if (requester == null)
 			return true;
-		
-		if (container.getParent() == null || requester.getParent() == null)
-		    return defaultCanMove(requester, container);
-		
-		if (!(container.getParent().getParent() instanceof CreatureObject))
-		    return defaultCanMove(requester, container);		
-		
-		CreatureObject highestDamageDealer = ((CreatureObject) container.getParent().getParent()).getHighestDamageDealer();
-		
-		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null && highestDamageDealer.getOwner().equals(requester.getOwner()))
-			    return true;
 
-		return defaultCanMove(requester, container);		
+		Player requesterPlayer = requester.getOwner();
+		SWGObject containerOwner = container.getParent().getParent();
+		
+		if (container.getParent() == null || containerOwner == null)
+			return defaultCanMove(requester, container);
+
+		if (!(container.getParent().getParent() instanceof AIObject) || requesterPlayer == null)
+			return defaultCanMove(requester, container);
+		
+		container.setContainerPermissions(ContainerPermissionsType.DEFAULT);
+		return true;
 	}
 	
 	@Override

@@ -29,6 +29,7 @@ package resources.objects.group;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -52,7 +53,7 @@ public class GroupObject extends SWGObject {
 	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
 	private final Map<Long, GroupMember>memberMap			= new SynchronizedMap<>();
 	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
-	
+
 	private CreatureObject	leader		= null;
 	private LootRule		lootRule	= LootRule.RANDOM;
 	private short			level		= 0;
@@ -143,6 +144,21 @@ public class GroupObject extends SWGObject {
 	
 	public LootRule getLootRule() {
 		return lootRule;
+	}
+	
+	public CreatureObject getRandomPlayer(){
+		Random random = new Random();
+		int randomSlot = random.nextInt(groupMembers.size());	
+		CreatureObject randomPlayer = null;
+		
+		while (randomPlayer == null){
+			if (groupMembers.get(randomSlot).getCreature().isPlayer()){
+				randomPlayer = groupMembers.get(randomSlot).getCreature();
+			}else
+				randomSlot = random.nextInt(groupMembers.size());
+		}
+		
+		return randomPlayer;
 	}
 	
 	public void setLevel(short level) {
