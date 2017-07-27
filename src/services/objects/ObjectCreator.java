@@ -137,12 +137,14 @@ public final class ObjectCreator {
 	private static SWGObject createFastFromType(long objectId, GameObjectType type) {
 		switch (type) {
 			case GOT_DATA_MANUFACTURING_SCHEMATIC:	return new ManufactureSchematicObject(objectId);
+			case GOT_LAIR:
 			case GOT_MISC_ITEM:
 			case GOT_MISC_SIGN:
 			case GOT_MISC_CONTAINER:
 			case GOT_MISC_CONTAINER_PUBLIC:
 			case GOT_MISC_CONTAINER_SHIP_LOOT:
-			case GOT_MISC_CONTAINER_WEARABLE:		return new TangibleObject(objectId);
+			case GOT_MISC_CONTAINER_WEARABLE:
+			case GOT_MISC_FURNITURE:				return new TangibleObject(objectId);
 			default:								return null;
 		}
 	}
