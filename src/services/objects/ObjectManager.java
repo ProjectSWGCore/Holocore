@@ -48,6 +48,7 @@ import resources.persistable.SWGObjectFactory;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.StandardLog;
+import services.combat.LootService;
 import services.map.MapManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
@@ -61,6 +62,7 @@ public class ObjectManager extends Manager {
 	private final RadialService radialService;
 	private final ClientBuildoutService clientBuildoutService;
 	private final StaticItemService staticItemService;
+	private final LootService lootService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
@@ -74,6 +76,7 @@ public class ObjectManager extends Manager {
 		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
 		staticItemService = new StaticItemService();
+		lootService = new LootService(this);
 		
 		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		objectMap = new ConcurrentHashMap<>(128*1024);
@@ -86,6 +89,7 @@ public class ObjectManager extends Manager {
 		addChildService(spawnerService);
 		addChildService(clientBuildoutService);
 		addChildService(staticItemService);
+		addChildService(lootService);
 		
 		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
 		registerForIntent(ObjectCreatedIntent.class, oci -> processObjectCreatedIntent(oci));

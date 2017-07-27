@@ -91,7 +91,6 @@ public class CombatManager extends Manager {
 	private final CorpseService corpseService;
 	private final CombatXpService combatXpService;
 	private final DuelPlayerService duelPlayerService;
-	private final LootService lootService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -110,12 +109,10 @@ public class CombatManager extends Manager {
 		corpseService = new CorpseService();
 		combatXpService = new CombatXpService();
 		duelPlayerService = new DuelPlayerService();
-		lootService = new LootService();
 
 		addChildService(corpseService);
 		addChildService(combatXpService);
 		addChildService(duelPlayerService);
-		addChildService(lootService);
 		
 		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));

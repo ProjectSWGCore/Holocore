@@ -53,7 +53,6 @@ import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
 import resources.objects.group.GroupObject;
-import resources.objects.group.LootRule;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
@@ -62,7 +61,6 @@ import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.objects.StaticItemService;
-import utilities.IntentFactory;
 
 public final class LootService extends Service {
 
@@ -74,10 +72,10 @@ public final class LootService extends Service {
 	private final ObjectManager objectManager;
 	private final Random random;
 	
-	public LootService() {
+	public LootService(ObjectManager objectManager) {
 		lootTables = new HashMap<>();
 		npcLoot = new HashMap<>();
-		objectManager = new ObjectManager();
+		this.objectManager = objectManager;
 		random = new Random();
 
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommand(cci));
