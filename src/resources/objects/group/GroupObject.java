@@ -154,8 +154,9 @@ public class GroupObject extends SWGObject {
 		while (randomPlayer == null){
 			if (groupMembers.get(randomSlot).getCreature().isPlayer()){
 				randomPlayer = groupMembers.get(randomSlot).getCreature();
-			}else
+			}else{
 				randomSlot = random.nextInt(groupMembers.size());
+			}
 		}
 		
 		return randomPlayer;

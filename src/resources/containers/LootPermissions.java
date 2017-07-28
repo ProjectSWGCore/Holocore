@@ -30,7 +30,6 @@ package resources.containers;
 
 import resources.objects.SWGObject;
 import resources.objects.custom.AIObject;
-import resources.player.Player;
 
 class LootPermissions extends ContainerPermissions {
 	
@@ -54,16 +53,15 @@ class LootPermissions extends ContainerPermissions {
 		if (requester == null)
 			return true;
 
-		Player requesterPlayer = requester.getOwner();
-		SWGObject containerOwner = container.getParent().getParent();
-		
-		if (container.getParent() == null || containerOwner == null)
+		if (requester.getOwner() == null || requester.getParent() == null)
+			return true;
+
+		if (container.getParent() == null)
 			return defaultCanMove(requester, container);
 
-		if (!(container.getParent().getParent() instanceof AIObject) || requesterPlayer == null)
+		if (!(container.getParent().getParent() instanceof AIObject))
 			return defaultCanMove(requester, container);
 		
-		container.setContainerPermissions(ContainerPermissionsType.DEFAULT);
 		return true;
 	}
 	

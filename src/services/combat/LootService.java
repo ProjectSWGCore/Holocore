@@ -40,6 +40,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import intents.object.ContainerTransferIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.radial.RadialRequestIntent;
@@ -59,7 +60,7 @@ import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
-import services.objects.ObjectManager;
+import services.objects.ObjectManager.ObjectLookup;
 import services.objects.StaticItemService;
 
 public final class LootService extends Service {
@@ -69,16 +70,15 @@ public final class LootService extends Service {
 	
 	private final Map<String, LootTable> lootTables;	// K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;	// K: npc_id, V: possible loot
-	private final ObjectManager objectManager;
 	private final Random random;
 	
-	public LootService(ObjectManager objectManager) {
+	public LootService() {
 		lootTables = new HashMap<>();
 		npcLoot = new HashMap<>();
-		this.objectManager = objectManager;
 		random = new Random();
 
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommand(cci));
+		registerForIntent(ContainerTransferIntent.class, cti -> handleContainerTransfer(cti));
 		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilled(cki));
 		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelection(rsi));
 		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
@@ -187,6 +187,17 @@ public final class LootService extends Service {
 		return new NPCTable(tableChance, lootTable);
 	}
 
+	private void handleContainerTransfer(ContainerTransferIntent cti){
+		SWGObject object = cti.getObject();
+		
+		if (!(cti.getContainer().getOwner() instanceof Player))
+			return;
+		
+		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT){
+			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
+		}
+	}
+	
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 
@@ -295,7 +306,7 @@ public final class LootService extends Service {
 		}
 
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
-		CreatureObject randomPlayer =null;
+		CreatureObject randomPlayer;
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
 		
@@ -416,7 +427,7 @@ public final class LootService extends Service {
 			Long killerGroup = highestDamageDealer.getGroupId();
 			
 			if (looterGroup.equals(killerGroup) && killerGroup != 0){
-				GroupObject killerGroupObject = (GroupObject) objectManager.getObjectById(killerGroup);
+				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
 
 					int lootRuleID = killerGroupObject.getLootRule().getId();
 
@@ -424,8 +435,7 @@ public final class LootService extends Service {
 						case 0:
 							return true;
 						case 1:
-							if (highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster())
-								return true;
+							return highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster();
 						case 2: //TODO Lottery
 							return false;
 						case 3:
