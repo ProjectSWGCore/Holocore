@@ -190,12 +190,11 @@ public final class LootService extends Service {
 	private void handleContainerTransfer(ContainerTransferIntent cti){
 		SWGObject object = cti.getObject();
 		
-		if (!(cti.getContainer().getOwner() instanceof Player))
+		if (cti.getContainer().getOwner() == null)
 			return;
 		
-		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT){
+		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT)
 			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
-		}
 	}
 	
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
@@ -423,10 +422,11 @@ public final class LootService extends Service {
 		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
 		
 		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null){
-			Long looterGroup = looter.getGroupId();
-			Long killerGroup = highestDamageDealer.getGroupId();
+			long looterGroup = looter.getGroupId();
+			long killerGroup = highestDamageDealer.getGroupId();
 			
-			if (looterGroup.equals(killerGroup) && killerGroup != 0){
+			if (looterGroup == killerGroup && killerGroup != 0){
+				Log.i("Made it here");
 				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
 
 					int lootRuleID = killerGroupObject.getLootRule().getId();
