@@ -296,7 +296,7 @@ public final class LootService extends Service {
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
 		
-		loot.forEach(item -> item.moveToContainer(looter, looter.getSlottedObject("inventory")));
+		loot.forEach(item -> item.moveToContainer(looter, looterInventory));
 	}
 	
 	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {
@@ -307,9 +307,7 @@ public final class LootService extends Service {
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
 		CreatureObject randomPlayer;
 
-		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
-		
-		for (SWGObject item : loot){
+		for (SWGObject item : lootInventory.getContainedObjects()){
 			randomPlayer = lootGroup.getRandomPlayer();
 			if(randomPlayer != null)
 				item.moveToContainer(randomPlayer, randomPlayer.getSlottedObject("inventory"));
@@ -426,19 +424,16 @@ public final class LootService extends Service {
 			long killerGroup = highestDamageDealer.getGroupId();
 			
 			if (looterGroup == killerGroup && killerGroup != 0){
-				Log.i("Made it here");
 				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
 
-					int lootRuleID = killerGroupObject.getLootRule().getId();
-
-					switch (lootRuleID){
-						case 0:
+					switch (killerGroupObject.getLootRule()){
+						case FREE_FOR_ALL:
 							return true;
-						case 1:
+						case MASTER_LOOTER:
 							return highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster();
-						case 2: //TODO Lottery
+						case LOTTERY: //TODO Lottery
 							return false;
-						case 3:
+						case RANDOM:
 							randomGroupLoot(killerGroupObject, target);
 							return false;
 						default:
@@ -457,10 +452,7 @@ public final class LootService extends Service {
 		if (inventory.getContainedObjects().isEmpty())
 			return false;
 
-		if (inventory.getContainerPermissions() != ContainerPermissionsType.LOOT)
-			return false;
-
-		return true;
+		return inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
 	}
 
 	private static class NPCLoot {
