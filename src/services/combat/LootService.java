@@ -189,8 +189,8 @@ public final class LootService extends Service {
 
 	private void handleContainerTransfer(ContainerTransferIntent cti){
 		SWGObject object = cti.getObject();
-		
-		if (cti.getContainer().getOwner() == null)
+
+		if (cti.getContainer() == null || cti.getContainer().getOwner() == null)
 			return;
 		
 		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT)
