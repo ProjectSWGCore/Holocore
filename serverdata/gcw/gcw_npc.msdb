@@ -1,8 +1,0 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	imp_creature_name	imp_creature_id	reb_creature_name	reb_creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-gcw_base_npc_corellia.sdb	TRUE																								
-gcw_base_npc_naboo.sdb	TRUE																								
-gcw_base_npc_talus.sdb	TRUE																								
-gcw_presence_corellia.sdb	TRUE																								
-gcw_presence_naboo.sdb	TRUE																								
-gcw_presence_tatooine.sdb	TRUE																								

@@ -1,541 +1,541 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-400003	ENDOR	end_research_outpost_cantina	AREA	3	-0.38	0.62	-7.89	-29	1	Admiral Kilnstrider (Storm Squadron Pilot Trainer)	kilnstrider_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400004	ENDOR	end_world	AREA	0	3212.71	24.50	-3452.25	163	1	a commoner	commoner_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400005	ENDOR	end_world	AREA	0	3245.07	24.00	-3492.27	56	1	a commoner	commoner_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400006	ENDOR	end_world	AREA	0	3278.48	24.00	-3498.35	-78	1	Jener Mich (Endor Collector)	jener_mich_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400007	ENDOR	end_world	AREA	0	3228.22	24.00	-3478.42	-98	1	an agriculturalist	farmer_agriculturist_8_h_att_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400008	ENDOR	end_world	AREA	0	3249.01	24.00	-3450.00	178	1	a frontiersman	frontiersman_17_h_att_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400009	ENDOR	end_world	AREA	0	3196.19	24.00	-3509.81	2	1	a hunter	hunter_100_h_inv_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400010	ENDOR	end_world	AREA	0	3190.81	24.00	-3451.61	27	1	a mercenary	mercenary_100_h_inv_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400011	ENDOR	end_world	AREA	0	3265.13	24.00	-3501.48	41	1	a nomad	mission_nomad_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400012	ENDOR	end_world	AREA	0	3196.23	24.00	-3508.08	179	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400013	ENDOR	end_world	AREA	0	3226.93	24.00	-3479.55	24	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400014	ENDOR	end_world	AREA	0	3227.03	24.00	-3477.58	155	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400015	ENDOR	end_world	AREA	0	3191.43	24.00	-3450.58	-153	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400016	ENDOR	end_world	AREA	0	3334.00	25.70	-3521.00	0	1	Alec	smuggler_fence_alec_100_h_inv_n	City	Research Outpost	1	GUARD	idle	0	0	0	0	300	120	0
-400017	ENDOR	end_world	AREA	0	3346.54	25.66	-3501.79	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
-400018	ENDOR	end_world	AREA	0	3327.81	24.99	-3543.82	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
-400019	ENDOR	end_world	AREA	0	3309.59	24.37	-3518.16	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
-400020	ENDOR	end_world	AREA	0	3260.00	24.00	-3466.73	-82	1	a technician	technician_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400021	ENDOR	end_world	AREA	0	3169.34	24.00	-3497.30	149	1	a traveller	traveller_100_h_inv_n	City	Research Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400022	ENDOR	end_smuggler_outpost_house	AREA	1	-4.28	0.63	1.99	12	1	Galody	ig88_bothan_spy_01_galody_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400023	ENDOR	end_smuggler_outpost_house	AREA	3	3.60	0.62	-6.00	0	1	Tupit	ig88_bothan_spy_02_tupit_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400024	ENDOR	end_world	AREA	0	-986.68	73.00	1575.34	-135	1	Eyd Tommsin	eyd_tommsin_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400025	ENDOR	end_world	AREA	0	-915.06	80.15	1605.65	148	1	a commoner	commoner_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400026	ENDOR	end_world	AREA	0	-899.45	77.98	1565.84	-68	1	a commoner	commoner_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400027	ENDOR	end_world	AREA	0	-964.38	73.00	1533.99	116	1	a criminal	criminal_4_h_att_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400028	ENDOR	end_world	AREA	0	-875.19	76.00	1631.95	112	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400029	ENDOR	end_world	AREA	0	-830.82	76.00	1576.85	-137	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400030	ENDOR	end_world	AREA	0	-829.38	76.00	1569.20	-70	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400031	ENDOR	end_world	AREA	0	-831.16	76.00	1569.83	105	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400032	ENDOR	end_world	AREA	0	-836.42	76.00	1582.85	-105	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400033	ENDOR	end_world	AREA	0	-833.01	80.30	1603.80	-159	1	The Ice Cream Man	icecream_man_ice_cream_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400034	ENDOR	end_world	AREA	0	-962.68	73.00	1533.05	-65	1	a pirate	mission_pirate_17_h_att_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400035	ENDOR	end_world	AREA	0	-874.23	80.00	1565.62	-78	1	a scoundrel	mission_scoundrel_4_h_att_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400036	ENDOR	end_world	AREA	0	-872.57	76.00	1632.41	-130	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	STOP	conversation	0	0	0	0	300	120	0
-400037	ENDOR	end_world	AREA	0	-878.78	76.00	1627.93	138	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400038	ENDOR	end_world	AREA	0	-867.72	76.00	1624.16	-142	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400039	ENDOR	end_world	AREA	0	-841.43	79.85	1613.36	25	1	Harding	smuggler_broker_harding_100_h_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400040	ENDOR	end_world	PATROL	0	-920.56	76.00	1567.73	0	1	a thief	smuggler_patrol_thief_7_60_h_att_n	City	Smuggler Outpost	1	PATROL	idle	0	999	0	0	300	120	0
-400041	ENDOR	end_world	PATROL	0	-922.73	76.00	1565.38	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	idle	0	999	0	0	300	120	0
-400042	ENDOR	end_world	PATROL	0	-924.21	76.00	1567.19	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	idle	0	999	0	0	300	120	0
-400043	ENDOR	end_world	AREA	0	-834.96	80.10	1605.95	-155	1	Otonon Tracks	otonon_tracks_ice_cream_100_d_inv_n	City	Smuggler Outpost	1	STOP	idle	0	0	0	0	300	120	0
-400044	ENDOR	end_mummer_bunker	AREA	11	66.50	-12.00	79.20	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400045	ENDOR	end_mummer_bunker	AREA	11	49.70	-12.00	87.60	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400046	ENDOR	end_mummer_bunker	AREA	12	68.50	-12.00	56.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400047	ENDOR	end_mummer_bunker	AREA	12	65.90	-12.00	60.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400048	ENDOR	end_mummer_bunker	AREA	12	50.00	-12.00	54.00	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400049	ENDOR	end_mummer_bunker	AREA	13	33.70	-20.00	138.00	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400050	ENDOR	end_mummer_bunker	AREA	13	20.00	-20.00	124.90	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400051	ENDOR	end_mummer_bunker	AREA	13	35.20	-20.00	123.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400052	ENDOR	end_mummer_bunker	AREA	13	21.50	-20.00	139.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400053	ENDOR	end_mummer_bunker	AREA	14	55.90	-12.00	20.30	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400054	ENDOR	end_mummer_bunker	AREA	14	32.40	-12.00	2.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400055	ENDOR	end_mummer_bunker	AREA	14	25.60	-12.00	17.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400056	ENDOR	end_mummer_bunker	AREA	14	54.20	-12.00	2.90	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400057	ENDOR	end_mummer_bunker	AREA	14	38.40	-12.00	18.20	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400058	ENDOR	end_mummer_bunker	AREA	16	-16.50	-20.00	1.80	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400059	ENDOR	end_mummer_bunker	AREA	16	-16.40	-20.00	4.50	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400060	ENDOR	end_mummer_bunker	AREA	19	-25.60	-20.00	95.60	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400061	ENDOR	end_mummer_bunker	AREA	19	-19.20	-20.00	95.60	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400062	ENDOR	end_mummer_bunker	AREA	21	0.20	-20.00	67.30	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400063	ENDOR	end_mummer_bunker	AREA	21	-5.90	-20.00	73.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400064	ENDOR	end_mummer_bunker	AREA	5	8.20	-12.00	67.60	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400065	ENDOR	end_mummer_bunker	AREA	5	25.60	-12.00	51.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400066	ENDOR	end_mummer_bunker	AREA	5	0.50	-12.00	28.20	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400067	ENDOR	end_mummer_bunker	AREA	5	3.70	-12.00	68.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400068	ENDOR	end_mummer_bunker	AREA	5	26.60	-12.00	44.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400069	ENDOR	end_mummer_bunker	AREA	5	3.80	-12.00	36.60	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400070	ENDOR	end_mummer_bunker	AREA	5	-16.80	-12.00	46.00	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400071	ENDOR	end_mummer_bunker	AREA	5	-1.10	-12.00	67.50	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400072	ENDOR	end_mummer_bunker	AREA	7	-55.60	-20.00	59.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400073	ENDOR	end_mummer_bunker	AREA	7	-61.60	-20.00	44.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400074	ENDOR	end_mummer_bunker	AREA	7	-60.60	-20.00	33.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400075	ENDOR	end_mummer_bunker	AREA	7	-73.90	-20.00	65.90	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400076	ENDOR	end_mummer_bunker	AREA	8	-67.80	-20.00	13.50	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400077	ENDOR	end_mummer_bunker	AREA	8	-56.90	-20.00	12.70	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400078	ENDOR	end_mummer_bunker	AREA	9	-70.80	-20.00	86.10	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400079	ENDOR	end_mummer_bunker	AREA	9	-53.60	-20.00	76.40	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	GUARD	idle	0	0	0	0	600	450	0
-400080	ENDOR	end_dwb	AREA	1	-32.30	-12.00	-9.00	85	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400081	ENDOR	end_dwb	AREA	1	-32.20	-12.00	-2.60	177	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400082	ENDOR	end_dwb	AREA	10	-127.40	-20.00	-27.20	58	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400083	ENDOR	end_dwb	AREA	10	-128.40	-20.00	-19.50	94	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400084	ENDOR	end_dwb	AREA	10	-124.90	-20.00	-20.30	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400085	ENDOR	end_dwb	AREA	11	-128.60	-20.00	-52.60	179	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400086	ENDOR	end_dwb	AREA	11	-125.60	-20.00	-49.80	1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400087	ENDOR	end_dwb	AREA	11	-132.90	-20.00	-53.30	93	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400088	ENDOR	end_dwb	AREA	12	-93.00	-20.00	-96.30	88	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400089	ENDOR	end_dwb	AREA	12	-92.60	-20.00	-80.30	89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400090	ENDOR	end_dwb	AREA	12	-82.90	-20.00	-80.00	-90	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400091	ENDOR	end_dwb	AREA	12	-73.60	-20.00	-89.70	-174	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400092	ENDOR	end_dwb	AREA	12	-73.40	-20.00	-100.40	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400093	ENDOR	end_dwb	AREA	12	-59.70	-20.00	-53.10	-88	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400094	ENDOR	end_dwb	AREA	13	-62.80	-20.00	-72.90	103	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400095	ENDOR	end_dwb	AREA	13	-54.50	-20.00	-73.20	-89	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400096	ENDOR	end_dwb	AREA	13	-65.80	-20.00	-77.10	2	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400097	ENDOR	end_dwb	AREA	14	-112.40	-20.00	-89.50	122	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400098	ENDOR	end_dwb	AREA	14	-103.40	-20.00	-100.10	-54	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400099	ENDOR	end_dwb	AREA	14	-113.70	-20.00	-94.70	91	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400100	ENDOR	end_dwb	AREA	14	-112.40	-20.00	-100.60	45	1	a WED Treadwell droid	mand_bunker_workshop_droid_wed_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400101	ENDOR	end_dwb	AREA	15	-88.30	-20.00	-114.80	34	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400102	ENDOR	end_dwb	AREA	15	-83.20	-20.00	-117.20	-40	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400103	ENDOR	end_dwb	AREA	15	-80.20	-20.00	-120.70	-37	1	a 2-1B surgical droid	mand_bunker_med_droid_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400104	ENDOR	end_dwb	AREA	16	-37.90	-20.00	-46.70	-1	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400105	ENDOR	end_dwb	AREA	16	-3.70	-20.00	-47.50	-1	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400106	ENDOR	end_dwb	AREA	16	-58.80	-20.00	-40.90	-89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400107	ENDOR	end_dwb	AREA	16	-23.40	-20.00	-40.70	97	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400108	ENDOR	end_dwb	AREA	16	-79.80	-20.00	-40.60	85	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400109	ENDOR	end_dwb	AREA	17	-30.70	-20.00	-56.80	172	1	Mara Jade	itp_vader_mara_jade_100_h_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	1800	1500	0
-400110	ENDOR	end_dwb	AREA	17	-9.60	-32.00	-51.80	-176	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400111	ENDOR	end_dwb	AREA	17	-45.30	-32.00	-102.30	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400112	ENDOR	end_dwb	AREA	17	-10.20	-32.00	-102.20	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400113	ENDOR	end_dwb	AREA	18	6.70	-22.00	-73.50	25	1	a scientist	scientist_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400114	ENDOR	end_dwb	AREA	18	12.90	-20.00	-57.30	-169	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400115	ENDOR	end_dwb	AREA	18	11.10	-22.00	-73.50	-6	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400116	ENDOR	end_dwb	AREA	18	24.20	-20.00	-80.80	-39	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400117	ENDOR	end_dwb	AREA	18	-5.30	-20.00	-57.30	125	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400118	ENDOR	end_dwb	AREA	19	24.90	-20.00	-42.90	0	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400119	ENDOR	end_dwb	AREA	19	20.80	-20.00	-44.20	0	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400120	ENDOR	end_dwb	AREA	19	23.90	-20.00	-29.00	-176	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400121	ENDOR	end_dwb	AREA	2	-15.40	-12.00	9.20	-10	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400122	ENDOR	end_dwb	AREA	2	-15.40	-12.00	11.90	177	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400123	ENDOR	end_dwb	AREA	20	-4.30	-24.00	-113.70	1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400124	ENDOR	end_dwb	AREA	20	-35.50	-32.00	-112.80	93	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400125	ENDOR	end_dwb	AREA	20	-57.80	-32.00	-118.90	-4	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400126	ENDOR	end_dwb	AREA	21	-2.10	-32.00	-37.50	75	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400127	ENDOR	end_dwb	AREA	21	1.40	-32.00	-32.20	177	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400128	ENDOR	end_dwb	AREA	22	36.30	-28.00	-54.80	166	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400129	ENDOR	end_dwb	AREA	22	35.60	-20.00	-86.50	-175	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400130	ENDOR	end_dwb	AREA	22	28.20	-20.00	-93.90	-27	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400131	ENDOR	end_dwb	AREA	22	5.80	-28.00	-61.90	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400132	ENDOR	end_dwb	AREA	23	16.50	-32.00	-96.10	-51	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400133	ENDOR	end_dwb	AREA	23	-1.40	-32.00	-81.90	159	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400134	ENDOR	end_dwb	AREA	23	5.60	-31.90	-91.40	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400135	ENDOR	end_dwb	AREA	24	43.80	-36.80	-101.00	-88	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400136	ENDOR	end_dwb	AREA	24	32.10	-52.00	-117.20	100	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400137	ENDOR	end_dwb	AREA	24	28.30	-42.00	-113.10	80	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400138	ENDOR	end_dwb	AREA	24	44.10	-32.00	-102.40	-72	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400139	ENDOR	end_dwb	AREA	24	32.20	-42.00	-106.50	77	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400140	ENDOR	end_dwb	AREA	24	48.80	-32.00	-113.60	169	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400141	ENDOR	end_dwb	AREA	24	42.10	-32.00	-114.60	-88	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400142	ENDOR	end_dwb	AREA	24	47.80	-52.00	-129.10	155	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400143	ENDOR	end_dwb	AREA	25	71.90	-32.00	-101.20	-91	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400144	ENDOR	end_dwb	AREA	26	68.80	-32.00	-62.80	180	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400145	ENDOR	end_dwb	AREA	26	46.60	-32.00	-91.10	0	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400146	ENDOR	end_dwb	AREA	26	65.90	-32.00	-91.10	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400147	ENDOR	end_dwb	AREA	26	48.50	-32.00	-63.20	180	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400148	ENDOR	end_dwb	AREA	27	38.50	-32.00	-51.00	93	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400149	ENDOR	end_dwb	AREA	27	49.43	-32.00	-51.00	-85	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400150	ENDOR	end_dwb	AREA	28	98.40	-32.00	-93.10	-53	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400151	ENDOR	end_dwb	AREA	28	86.90	-32.00	-84.20	174	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400152	ENDOR	end_dwb	AREA	28	99.20	-32.00	-83.10	-1	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400153	ENDOR	end_dwb	AREA	29	90.73	-32.00	-68.06	164	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400154	ENDOR	end_dwb	AREA	29	96.01	-32.00	-56.37	-163	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400155	ENDOR	end_dwb	AREA	29	91.92	-32.00	-56.27	178	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400156	ENDOR	end_dwb	AREA	30	112.92	-32.00	-80.55	-88	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400157	ENDOR	end_dwb	AREA	30	110.37	-32.00	-81.25	92	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400158	ENDOR	end_dwb	AREA	30	111.70	-32.00	-71.51	-174	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400159	ENDOR	end_dwb	AREA	31	14.00	-56.00	-160.90	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400160	ENDOR	end_dwb	AREA	31	-7.90	-52.00	-143.90	-4	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400161	ENDOR	end_dwb	AREA	33	49.10	-64.00	-124.30	122	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400162	ENDOR	end_dwb	AREA	33	20.50	-64.00	-111.10	99	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400163	ENDOR	end_dwb	AREA	33	40.60	-64.00	-153.90	-94	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400164	ENDOR	end_dwb	AREA	33	39.30	-64.00	-146.20	-129	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400165	ENDOR	end_dwb	AREA	33	58.80	-64.00	-137.70	80	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400166	ENDOR	end_dwb	AREA	33	21.90	-64.00	-95.70	-88	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400167	ENDOR	end_dwb	AREA	37	114.10	-68.00	-183.20	2	1	a scientist	scientist_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400168	ENDOR	end_dwb	AREA	38	-62.20	-60.00	-179.10	-102	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400169	ENDOR	end_dwb	AREA	38	-42.00	-59.60	-174.10	21	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400170	ENDOR	end_dwb	AREA	38	-21.90	-60.10	-185.50	8	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400171	ENDOR	end_dwb	AREA	38	-1.80	-60.00	-171.80	178	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400172	ENDOR	end_dwb	AREA	39	-41.60	-59.80	-205.60	-5	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400173	ENDOR	end_dwb	AREA	4	-1.20	-12.00	34.50	-137	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400174	ENDOR	end_dwb	AREA	4	2.30	-12.00	31.00	-103	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400175	ENDOR	end_dwb	AREA	40	-9.30	-60.10	-277.10	-23	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400176	ENDOR	end_dwb	AREA	40	-7.80	-60.20	-225.40	-24	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400177	ENDOR	end_dwb	AREA	40	-16.40	-60.10	-245.00	17	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400178	ENDOR	end_dwb	AREA	40	-13.10	-60.10	-212.90	13	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400179	ENDOR	end_dwb	AREA	40	-14.50	-60.30	-254.80	-156	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400180	ENDOR	end_dwb	AREA	40	-11.10	-60.10	-207.10	4	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400181	ENDOR	end_dwb	AREA	40	-10.60	-60.00	-205.50	-174	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400182	ENDOR	end_dwb	AREA	40	-12.00	-60.20	-293.30	-1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400183	ENDOR	end_dwb	AREA	40	-8.60	-60.00	-235.70	-72	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400184	ENDOR	end_dwb	AREA	41	27.70	-61.80	-302.70	-160	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400185	ENDOR	end_dwb	AREA	41	26.70	-61.30	-306.00	35	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400186	ENDOR	end_dwb	AREA	41	24.60	-61.40	-302.70	-31	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400187	ENDOR	end_dwb	AREA	41	28.40	-61.80	-300.20	-159	1	Japer Witter (a mine foreman)	dwb_japer_witter_100_h_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400188	ENDOR	end_dwb	AREA	42	-46.10	-59.80	-317.80	-9	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400189	ENDOR	end_dwb	AREA	42	-46.10	-59.80	-316.40	3	1	a Blastromech	blastromech_75_d_agg_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400190	ENDOR	end_dwb	AREA	42	-43.50	-59.80	-296.80	91	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400191	ENDOR	end_dwb	AREA	43	-97.50	-59.80	-306.10	21	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400192	ENDOR	end_dwb	AREA	43	-90.80	-60.30	-282.30	-18	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400193	ENDOR	end_dwb	AREA	43	-90.50	-60.20	-260.60	-129	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400194	ENDOR	end_dwb	AREA	43	-67.40	-60.10	-314.30	106	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400195	ENDOR	end_dwb	AREA	43	-163.00	-60.20	-315.20	-122	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400196	ENDOR	end_dwb	AREA	43	-147.90	-60.10	-320.50	-67	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400197	ENDOR	end_dwb	AREA	43	-130.40	-60.10	-319.40	9	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400198	ENDOR	end_dwb	AREA	43	-130.00	-60.10	-341.10	132	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400199	ENDOR	end_dwb	AREA	43	-123.20	-60.00	-364.50	-158	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400200	ENDOR	end_dwb	AREA	43	-112.80	-60.10	-319.90	-77	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400201	ENDOR	end_dwb	AREA	43	-110.30	-59.90	-377.40	105	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400202	ENDOR	end_dwb	AREA	43	-98.40	-60.00	-277.70	118	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400203	ENDOR	end_dwb	AREA	43	-88.40	-59.50	-302.10	-58	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400204	ENDOR	end_dwb	AREA	43	-125.90	-60.10	-348.20	1	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400205	ENDOR	end_dwb	AREA	43	-124.90	-59.90	-303.40	-144	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400206	ENDOR	end_dwb	AREA	43	-127.30	-59.70	-378.20	11	1	Death Watch Overlord	dwb_overlord_93_h_agg_b	Dungeon	DWB	1	STOP	idle	0	0	0	0	1800	1500	0
-400207	ENDOR	end_dwb	AREA	43	-89.90	-59.70	-375.40	-12	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400208	ENDOR	end_dwb	AREA	43	-97.10	-59.90	-375.10	21	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400209	ENDOR	end_dwb	AREA	43	-99.20	-60.30	-342.00	44	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400210	ENDOR	end_dwb	AREA	43	-99.20	-59.70	-357.60	19	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400211	ENDOR	end_dwb	AREA	43	-88.70	-59.60	-333.60	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400212	ENDOR	end_dwb	AREA	43	-100.60	-60.10	-314.80	16	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400213	ENDOR	end_dwb	AREA	43	-127.60	-59.80	-372.30	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400214	ENDOR	end_dwb	AREA	43	-127.40	-59.90	-377.90	13	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400215	ENDOR	end_dwb	AREA	43	-122.00	-60.00	-377.70	45	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400216	ENDOR	end_dwb	AREA	44	-80.00	-59.80	-204.50	-178	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400217	ENDOR	end_dwb	AREA	45	-93.40	-59.80	-218.40	-175	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400218	ENDOR	end_dwb	AREA	46	-124.00	-59.80	-198.20	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400219	ENDOR	end_dwb	AREA	47	-128.20	-60.10	-161.90	161	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400220	ENDOR	end_dwb	AREA	47	-125.70	-60.10	-137.50	127	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400221	ENDOR	end_dwb	AREA	47	-124.50	-60.20	-148.40	-179	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400222	ENDOR	end_dwb	AREA	47	-119.10	-59.80	-137.50	127	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400223	ENDOR	end_dwb	AREA	47	-136.00	-59.90	-143.60	126	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400224	ENDOR	end_dwb	AREA	47	-118.30	-59.80	-154.30	-66	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400225	ENDOR	end_dwb	AREA	48	-93.20	-59.80	-149.10	-69	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400226	ENDOR	end_dwb	AREA	48	-78.60	-59.90	-151.20	-37	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400227	ENDOR	end_dwb	AREA	48	-78.30	-59.90	-131.00	72	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400228	ENDOR	end_dwb	AREA	48	-71.20	-59.60	-125.20	-146	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400229	ENDOR	end_dwb	AREA	48	-63.60	-59.60	-151.10	-71	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400230	ENDOR	end_dwb	AREA	48	-57.60	-59.70	-136.30	-143	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400231	ENDOR	end_dwb	AREA	48	-51.80	-59.50	-124.20	148	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400232	ENDOR	end_dwb	AREA	48	-39.90	-60.00	-136.00	-119	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400233	ENDOR	end_dwb	AREA	48	-95.00	-60.10	-140.20	154	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400234	ENDOR	end_dwb	AREA	48	-37.70	-59.60	-146.90	-83	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400235	ENDOR	end_dwb	AREA	48	-70.70	-59.70	-161.30	-8	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400236	ENDOR	end_dwb	AREA	5	-68.80	-20.00	31.40	91	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400237	ENDOR	end_dwb	AREA	5	-56.80	-20.00	34.80	179	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400238	ENDOR	end_dwb	AREA	5	-55.90	-20.00	27.00	-11	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400239	ENDOR	end_dwb	AREA	50	-153.30	-60.00	-184.50	117	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400240	ENDOR	end_dwb	AREA	50	-152.90	-59.90	-209.20	12	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400241	ENDOR	end_dwb	AREA	50	-143.80	-60.40	-200.30	-101	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400242	ENDOR	end_dwb	AREA	50	-143.70	-59.90	-175.50	-86	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400243	ENDOR	end_dwb	AREA	50	-143.30	-60.00	-164.00	-25	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400244	ENDOR	end_dwb	AREA	50	-150.10	-59.90	-162.40	9	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400245	ENDOR	end_dwb	AREA	50	-146.20	-60.20	-187.10	-6	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400246	ENDOR	end_dwb	AREA	51	-157.40	-60.00	-106.90	93	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400247	ENDOR	end_dwb	AREA	51	-148.20	-59.80	-127.20	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400248	ENDOR	end_dwb	AREA	52	-178.50	-59.80	-120.40	90	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400249	ENDOR	end_dwb	AREA	53	-222.40	-60.00	-130.50	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400250	ENDOR	end_dwb	AREA	53	-206.70	-59.80	-120.80	-89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400251	ENDOR	end_dwb	AREA	54	-152.10	-60.00	-83.00	-179	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400252	ENDOR	end_dwb	AREA	54	-143.00	-60.00	-74.00	0	1	an R2 unit	r2_droid_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400253	ENDOR	end_dwb	AREA	55	-179.50	-60.00	-138.60	8	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400254	ENDOR	end_dwb	AREA	55	-176.30	-60.00	-150.50	-130	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400255	ENDOR	end_dwb	AREA	55	-171.80	-60.10	-140.80	-38	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400256	ENDOR	end_dwb	AREA	55	-181.40	-60.10	-151.20	24	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400257	ENDOR	end_dwb	AREA	55	-175.80	-60.00	-132.30	-130	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400258	ENDOR	end_dwb	AREA	56	-254.50	-50.00	-88.80	-80	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400259	ENDOR	end_dwb	AREA	56	-247.30	-27.60	-89.50	67	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400260	ENDOR	end_dwb	AREA	56	-266.50	-50.00	-85.00	0	1	an R3 unit	r3_droid_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400261	ENDOR	end_dwb	AREA	56	-236.00	-40.00	-84.00	0	1	an R4 unit	r4_droid_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400262	ENDOR	end_dwb	AREA	57	-282.10	-60.00	-129.80	3	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400263	ENDOR	end_dwb	AREA	57	-281.60	-60.00	-121.00	-177	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400264	ENDOR	end_dwb	AREA	57	-288.60	-60.00	-125.20	89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400265	ENDOR	end_dwb	AREA	58	-212.50	-59.90	-158.40	23	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400266	ENDOR	end_dwb	AREA	58	-210.70	-60.10	-195.10	164	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400267	ENDOR	end_dwb	AREA	58	-203.50	-60.00	-145.00	-160	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400268	ENDOR	end_dwb	AREA	58	-210.10	-59.90	-205.10	165	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400269	ENDOR	end_dwb	AREA	58	-207.10	-60.30	-179.20	-175	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400270	ENDOR	end_dwb	AREA	58	-204.20	-60.60	-172.40	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400271	ENDOR	end_dwb	AREA	58	-208.70	-60.10	-139.30	10	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400272	ENDOR	end_dwb	AREA	58	-208.00	-60.20	-205.10	165	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400273	ENDOR	end_dwb	AREA	59	-225.30	-60.00	-218.70	-140	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400274	ENDOR	end_dwb	AREA	6	-73.90	-20.00	57.40	-177	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400275	ENDOR	end_dwb	AREA	6	-79.30	-20.00	51.80	117	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400276	ENDOR	end_dwb	AREA	6	-70.80	-20.00	50.30	-60	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400277	ENDOR	end_dwb	AREA	60	-246.00	-59.90	-231.40	179	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400278	ENDOR	end_dwb	AREA	60	-246.00	-60.00	-245.00	0	1	an R5 unit	r5_droid_100_d_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400279	ENDOR	end_dwb	AREA	61	-189.40	-59.80	-217.00	-94	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400280	ENDOR	end_dwb	AREA	61	-181.20	-59.80	-217.60	89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400281	ENDOR	end_dwb	AREA	62	-185.00	-60.10	-237.90	63	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400282	ENDOR	end_dwb	AREA	62	-179.30	-60.40	-230.90	121	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400283	ENDOR	end_dwb	AREA	62	-177.80	-60.10	-260.80	11	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400284	ENDOR	end_dwb	AREA	62	-172.50	-60.00	-232.20	-9	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400285	ENDOR	end_dwb	AREA	62	-171.40	-60.10	-245.10	-21	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400286	ENDOR	end_dwb	AREA	62	-169.60	-59.90	-265.50	-148	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400287	ENDOR	end_dwb	AREA	62	-168.90	-60.00	-256.10	-66	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400288	ENDOR	end_dwb	AREA	62	-160.90	-59.80	-241.60	-76	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400289	ENDOR	end_dwb	AREA	62	-183.80	-60.20	-257.50	-85	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400290	ENDOR	end_dwb	AREA	62	-158.70	-59.50	-230.70	-125	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400291	ENDOR	end_dwb	AREA	62	-186.10	-60.00	-243.70	135	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400292	ENDOR	end_dwb	AREA	63	-174.80	-59.80	-316.90	88	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400293	ENDOR	end_dwb	AREA	63	-174.30	-59.80	-276.20	1	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400294	ENDOR	end_dwb	AREA	63	-173.90	-59.80	-297.70	179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400295	ENDOR	end_dwb	AREA	64	-19.00	-52.00	-160.70	0	1	a crazed technician	dwb_crazed_technician_100_h_inv_n	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400296	ENDOR	end_dwb	AREA	64	-25.30	-52.00	-162.10	54	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400297	ENDOR	end_dwb	AREA	64	-12.50	-52.00	-169.40	178	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400298	ENDOR	end_dwb	AREA	64	-10.20	-52.00	-150.40	89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400299	ENDOR	end_dwb	AREA	64	-23.30	-52.00	-147.50	-179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400300	ENDOR	end_dwb	AREA	64	-19.00	-52.00	-152.40	179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400301	ENDOR	end_dwb	AREA	7	-77.10	-20.00	12.00	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400302	ENDOR	end_dwb	AREA	7	-76.90	-20.00	-10.30	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400303	ENDOR	end_dwb	AREA	7	-70.50	-20.00	-10.10	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400304	ENDOR	end_dwb	AREA	7	-70.30	-20.00	12.20	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-400305	ENDOR	end_dwb	AREA	8	-81.20	-20.00	-25.70	90	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400306	ENDOR	end_dwb	AREA	9	-90.30	-20.00	-32.30	-106	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400307	ENDOR	end_dwb	AREA	9	-110.10	-20.00	-54.20	0	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400308	ENDOR	end_dwb	AREA	9	-95.60	-20.00	-29.30	177	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400309	ENDOR	end_dwb	AREA	9	-96.80	-22.00	-33.60	90	1	an R2 unit	r2_droid_4_d_att_n	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400310	ENDOR	end_dwb	AREA	9	-102.60	-22.00	-41.30	40	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	DWB	1	GUARD	idle	0	0	0	0	600	450	0
-400311	ENDOR	end_itp_merc_bunker	AREA	10	1.20	-12.00	64.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400312	ENDOR	end_itp_merc_bunker	AREA	10	0.40	-12.00	74.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400313	ENDOR	end_itp_merc_bunker	AREA	10	-1.50	-12.00	53.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400314	ENDOR	end_itp_merc_bunker	AREA	14	19.10	-12.00	99.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400315	ENDOR	end_itp_merc_bunker	AREA	14	18.00	-12.00	95.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400316	ENDOR	end_itp_merc_bunker	AREA	14	14.80	-12.00	105.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400317	ENDOR	end_itp_merc_bunker	AREA	15	2.70	-12.00	115.60	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400318	ENDOR	end_itp_merc_bunker	AREA	16	-6.80	-12.00	98.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400319	ENDOR	end_itp_merc_bunker	AREA	16	-10.80	-12.00	99.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400320	ENDOR	end_itp_merc_bunker	AREA	29	42.20	-20.00	59.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400321	ENDOR	end_itp_merc_bunker	AREA	29	20.00	-20.00	47.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400322	ENDOR	end_itp_merc_bunker	AREA	29	19.90	-20.00	77.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400323	ENDOR	end_itp_merc_bunker	AREA	31	25.00	-20.00	112.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400324	ENDOR	end_itp_merc_bunker	AREA	31	16.50	-20.00	121.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400325	ENDOR	end_itp_merc_bunker	AREA	31	-15.20	-20.00	121.50	0	1	Vurrha Jantsk (leader of the Jantsk mercenaries)	itp_emperor_mercenary_leader_invul_100_h_inv_n	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400326	ENDOR	end_itp_merc_bunker	AREA	34	65.90	-20.00	30.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400327	ENDOR	end_itp_merc_bunker	AREA	34	55.90	-20.00	30.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400328	ENDOR	end_itp_merc_bunker	AREA	34	48.50	-20.00	36.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400329	ENDOR	end_itp_merc_bunker	AREA	35	64.00	-20.00	55.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400330	ENDOR	end_itp_merc_bunker	AREA	35	63.50	-20.00	61.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400331	ENDOR	end_itp_merc_bunker	AREA	37	68.70	-50.00	43.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400332	ENDOR	end_itp_merc_bunker	AREA	37	59.30	-50.00	45.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400333	ENDOR	end_itp_merc_bunker	AREA	40	42.20	-50.00	-4.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400334	ENDOR	end_itp_merc_bunker	AREA	41	44.90	-50.00	20.60	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400335	ENDOR	end_itp_merc_bunker	AREA	41	34.70	-50.00	30.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400336	ENDOR	end_itp_merc_bunker	AREA	41	19.90	-50.00	25.10	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400337	ENDOR	end_itp_merc_bunker	AREA	43	24.50	-50.00	70.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400338	ENDOR	end_itp_merc_bunker	AREA	43	12.30	-50.00	68.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400339	ENDOR	end_itp_merc_bunker	AREA	43	17.80	-50.00	72.30	0	1	Vurrha Jantsk (leader of the Jantsk mercenaries)	itp_emperor_mercenary_leader_boss_90_h_agg_b	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400340	ENDOR	end_itp_merc_bunker	AREA	6	23.00	-12.00	24.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400341	ENDOR	end_itp_merc_bunker	AREA	6	22.60	-12.00	33.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400342	ENDOR	end_itp_merc_bunker	AREA	9	53.40	-12.00	59.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400343	ENDOR	end_itp_merc_bunker	AREA	9	41.30	-12.00	54.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400344	ENDOR	end_itp_merc_bunker	AREA	9	33.00	-12.00	63.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-400345	ENDOR	end_tao_ni_security_compound	AREA	13	35.40	-20.00	122.80	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400346	ENDOR	end_tao_ni_security_compound	AREA	13	21.00	-20.00	133.00	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400347	ENDOR	end_tao_ni_security_compound	AREA	13	37.10	-20.00	138.60	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400348	ENDOR	end_tao_ni_security_compound	AREA	14	25.40	-12.00	9.50	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400349	ENDOR	end_tao_ni_security_compound	AREA	14	56.00	-12.00	-0.10	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400350	ENDOR	end_tao_ni_security_compound	AREA	14	50.90	-12.00	21.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400351	ENDOR	end_tao_ni_security_compound	AREA	16	-16.70	-20.00	3.10	0	1	Tao-Ni Security Mechanized Omega Class	taoni_sec_mech_omega_endor_ig88_90_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400352	ENDOR	end_tao_ni_security_compound	AREA	19	-22.70	-20.00	115.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400353	ENDOR	end_tao_ni_security_compound	AREA	19	-15.70	-20.00	101.80	0	1	Tao-Ni Security Mechanized Alpha Class	taoni_sec_mech_alpha_endor_ig88_87_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400354	ENDOR	end_tao_ni_security_compound	AREA	2	-0.30	0.30	3.00	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400355	ENDOR	end_tao_ni_security_compound	AREA	21	-3.20	-20.00	69.10	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400356	ENDOR	end_tao_ni_security_compound	AREA	3	3.30	0.30	-4.50	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400357	ENDOR	end_tao_ni_security_compound	AREA	5	3.30	-12.00	31.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400358	ENDOR	end_tao_ni_security_compound	AREA	5	22.50	-12.00	47.90	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400359	ENDOR	end_tao_ni_security_compound	AREA	5	-14.10	-12.00	46.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400360	ENDOR	end_tao_ni_security_compound	AREA	7	-68.30	-20.00	33.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400361	ENDOR	end_tao_ni_security_compound	AREA	7	-52.10	-20.00	60.40	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400362	ENDOR	end_tao_ni_security_compound	AREA	7	-71.20	-20.00	62.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400363	ENDOR	end_tao_ni_security_compound	AREA	7	-63.20	-20.00	43.40	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	GUARD	idle	0	0	0	0	300	120	0
-400364	ENDOR	end_world	AREA	0	2584.92	199.11	6654.78	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	FLOAT	idle	0	0	0	0	300	120	2
-400365	ENDOR	end_world	AREA	0	-235.70	208.47	3521.44	0	1	Captured old man	captured_old_man_100_h_inv_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	300	120	2
-400366	ENDOR	end_world	AREA	0	-4610.77	177.20	-2549.98	0	1	Zalbar Jyvun	itp_loam_twilek_force_sensitive_87_h_att_e	Outback	Endor	1	STOP	idle	0	0	0	0	300	120	0
-400367	ENDOR	end_world	AREA	0	6401.71	220.21	-254.76	-55	1	Macchbraus	mun_quest_marauder_100_h_inv_n	Outback	Endor	1	STOP	idle	0	0	0	0	300	120	0
-400368	ENDOR	end_world	AREA	0	667.00	207.80	4972.00	0	1	Carter	smuggler_fence_carter_100_h_inv_n	Outback	Endor	1	GUARD	idle	0	0	0	0	300	120	0
-400369	ENDOR	end_world	AREA	0	6018.00	212.15	6146.00	0	1	Dreda	smuggler_fence_dreda_100_h_inv_n	Outback	Endor	1	GUARD	idle	0	0	0	0	300	120	0
-400370	ENDOR	end_world	AREA	0	-2888.46	21.55	-4640.48	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400371	ENDOR	end_world	AREA	0	-2869.70	16.70	-4621.73	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400372	ENDOR	end_world	AREA	0	-2864.26	17.66	-4638.55	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400373	ENDOR	end_world	AREA	0	-222.29	207.98	3517.26	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400374	ENDOR	end_world	AREA	0	-212.14	207.69	3522.83	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400375	ENDOR	end_world	AREA	0	-2872.37	19.43	-4634.57	0	1	a Dark Jedi Elder	treasure_guard_jedi_elder_78_h_agg_n	Outback	Endor	1	GUARD	idle	0	0	0	0	900	600	0
-400376	ENDOR	end_world	AREA	0	-208.36	207.02	3511.30	0	1	a Dark Jedi Elder	treasure_guard_jedi_elder_78_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400377	ENDOR	end_world	AREA	0	-235.89	208.20	3534.84	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400378	ENDOR	end_world	AREA	0	-226.12	208.51	3543.06	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Endor	1	FLOAT	idle	0	0	0	0	900	600	2
-400379	ENDOR	end_world	AREA	0	1214.22	19.61	1987.71	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400380	ENDOR	end_world	AREA	0	1213.04	9.64	1930.84	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400381	ENDOR	end_world	AREA	0	1201.88	10.98	1943.24	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400382	ENDOR	end_world	AREA	0	1201.45	21.51	1973.95	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400383	ENDOR	end_world	AREA	0	1195.09	19.03	1994.74	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400384	ENDOR	end_world	AREA	0	1192.96	10.67	1919.00	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400385	ENDOR	end_world	AREA	0	1189.21	10.84	1947.51	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400386	ENDOR	end_world	AREA	0	1179.57	20.81	1978.01	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400387	ENDOR	end_world	AREA	0	1171.25	8.50	1947.97	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400388	ENDOR	end_world	AREA	0	1167.16	9.71	1931.80	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400389	ENDOR	end_world	AREA	0	1161.27	9.41	2018.82	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400390	ENDOR	end_world	AREA	0	1161.25	8.20	1999.26	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400391	ENDOR	end_world	AREA	0	1157.51	12.71	1974.02	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400392	ENDOR	end_world	AREA	0	1154.81	10.79	1932.63	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400393	ENDOR	end_world	AREA	0	1150.53	11.08	1960.94	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400394	ENDOR	end_world	AREA	0	1140.98	11.40	1990.05	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400395	ENDOR	end_world	AREA	0	1140.13	11.86	1945.47	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400396	ENDOR	end_world	AREA	0	1137.28	8.41	2042.07	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400397	ENDOR	end_world	AREA	0	1135.45	8.29	2017.40	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400398	ENDOR	end_world	AREA	0	1126.33	8.69	1971.60	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400399	ENDOR	end_world	AREA	0	1117.33	8.50	1983.74	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400400	ENDOR	end_world	AREA	0	1112.12	11.13	2032.54	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400401	ENDOR	end_world	AREA	0	1107.63	8.26	1998.81	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400402	ENDOR	end_world	AREA	0	1104.28	10.66	2019.14	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	FLOAT	idle	0	0	0	0	300	120	2
-400403	ENDOR	end_world	AREA	0	-1198.80	25.00	2981.30	0	1	a Donkuwah battlelord	donkuwah_battlelord_79_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400404	ENDOR	end_world	AREA	0	-1156.90	17.00	2953.30	0	1	a Donkuwah chieftain	donkuwah_chieftain_90_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400405	ENDOR	end_world	AREA	0	-1239.40	18.00	2984.60	0	1	a Donkuwah cub	donkuwah_cub_78_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400406	ENDOR	end_world	AREA	0	-1271.30	12.00	2970.40	0	1	a Donkuwah laborer	donkuwah_laborer_78_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400407	ENDOR	end_world	AREA	0	-1228.37	12.00	2935.95	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400408	ENDOR	end_world	AREA	0	-1215.12	12.00	2932.08	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400409	ENDOR	end_world	AREA	0	-1174.50	12.00	2942.80	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400410	ENDOR	end_world	AREA	0	-1253.60	12.00	2973.10	0	1	a Donkuwah shaman	donkuwah_shaman_78_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400411	ENDOR	end_world	AREA	0	-1207.40	9.00	2966.00	0	1	a Donkuwah spiritmaster	donkuwah_spiritmaster_78_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400412	ENDOR	end_world	AREA	0	-1220.40	9.00	2968.40	0	1	a Donkuwah tribesman	donkuwah_tribesman_80_h_agg_n	POI	Dulok Village #1	1	FLOAT	idle	0	0	0	0	300	120	2
-400413	ENDOR	end_world	AREA	0	6092.30	263.00	-2511.00	0	1	a Dulok outcast	dulok_outcast_72_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400414	ENDOR	end_world	AREA	0	6107.20	265.00	-2451.55	0	1	the Dulok outcast leader	dulok_outcast_leader_73_h_agg_e	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400415	ENDOR	end_world	AREA	0	6097.32	265.00	-2461.88	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400416	ENDOR	end_world	AREA	0	6094.16	265.00	-2454.76	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400417	ENDOR	end_world	AREA	0	6092.86	263.00	-2485.46	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400418	ENDOR	end_world	AREA	0	6068.64	263.00	-2448.37	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400419	ENDOR	end_world	AREA	0	6054.38	262.00	-2508.48	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400420	ENDOR	end_world	AREA	0	6039.19	262.00	-2455.34	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-400421	ENDOR	end_jinda_cave	AREA	1	0.81	-12.42	-15.83	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400422	ENDOR	end_jinda_cave	AREA	10	-162.79	-41.83	-75.27	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400423	ENDOR	end_jinda_cave	AREA	10	-172.64	-41.65	-69.64	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400424	ENDOR	end_jinda_cave	AREA	10	-162.96	-41.55	-67.47	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400425	ENDOR	end_jinda_cave	AREA	10	-173.07	-41.32	-75.21	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400426	ENDOR	end_jinda_cave	AREA	10	-174.36	-41.83	-87.03	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400427	ENDOR	end_jinda_cave	AREA	10	-172.62	-42.06	-63.34	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400428	ENDOR	end_jinda_cave	AREA	10	-162.99	-41.51	-83.21	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400429	ENDOR	end_jinda_cave	AREA	11	-98.85	-47.01	-83.69	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400430	ENDOR	end_jinda_cave	AREA	11	-112.02	-46.74	-86.64	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400431	ENDOR	end_jinda_cave	AREA	11	-97.82	-30.93	-88.94	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400432	ENDOR	end_jinda_cave	AREA	11	-102.92	-30.91	-91.04	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400433	ENDOR	end_jinda_cave	AREA	11	-138.56	-45.76	-82.31	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400434	ENDOR	end_jinda_cave	AREA	16	-107.31	-50.06	-27.89	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400435	ENDOR	end_jinda_cave	AREA	16	-115.80	-50.03	-27.54	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400436	ENDOR	end_jinda_cave	AREA	16	-110.70	-49.70	-34.44	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400437	ENDOR	end_jinda_cave	AREA	16	-102.87	-33.99	-36.55	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400438	ENDOR	end_jinda_cave	AREA	17	-105.14	-34.35	-16.98	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400439	ENDOR	end_jinda_cave	AREA	19	16.58	-14.04	-22.75	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400440	ENDOR	end_jinda_cave	AREA	19	20.63	-17.45	-33.07	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400441	ENDOR	end_jinda_cave	AREA	19	15.35	-22.83	-49.09	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400442	ENDOR	end_jinda_cave	AREA	2	-39.99	-23.99	-25.94	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400443	ENDOR	end_jinda_cave	AREA	2	-38.58	-23.91	-23.03	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400444	ENDOR	end_jinda_cave	AREA	2	-8.45	-22.16	-43.40	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400445	ENDOR	end_jinda_cave	AREA	2	-10.85	-22.40	-48.23	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400446	ENDOR	end_jinda_cave	AREA	2	-29.17	-21.05	-23.00	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400447	ENDOR	end_jinda_cave	AREA	20	-15.59	-26.82	-66.85	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400448	ENDOR	end_jinda_cave	AREA	20	-7.87	-27.00	-80.75	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400449	ENDOR	end_jinda_cave	AREA	20	-9.36	-26.83	-65.96	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400450	ENDOR	end_jinda_cave	AREA	21	-28.41	-29.65	-77.40	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400451	ENDOR	end_jinda_cave	AREA	21	-29.95	-27.54	-67.40	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400452	ENDOR	end_jinda_cave	AREA	22	-7.61	-36.05	-96.61	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400453	ENDOR	end_jinda_cave	AREA	22	-24.52	-59.94	-106.45	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400454	ENDOR	end_jinda_cave	AREA	22	-15.73	-36.03	-105.35	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400455	ENDOR	end_jinda_cave	AREA	22	-40.00	-36.80	-111.00	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400456	ENDOR	end_jinda_cave	AREA	22	-64.25	-44.84	-112.98	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400457	ENDOR	end_jinda_cave	AREA	22	-31.73	-59.78	-114.31	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400458	ENDOR	end_jinda_cave	AREA	26	-1.73	-59.85	-85.56	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400459	ENDOR	end_jinda_cave	AREA	26	9.94	-61.11	-96.63	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400460	ENDOR	end_jinda_cave	AREA	26	-0.32	-63.06	-107.42	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400461	ENDOR	end_jinda_cave	AREA	27	55.34	-57.91	-87.28	0	1	an archaic Jinda ritualist	jinda_archaic_ritualist_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400462	ENDOR	end_jinda_cave	AREA	27	41.98	-60.84	-100.97	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400463	ENDOR	end_jinda_cave	AREA	27	28.46	-60.56	-100.11	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400464	ENDOR	end_jinda_cave	AREA	27	50.58	-58.62	-77.81	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400465	ENDOR	end_jinda_cave	AREA	27	50.17	-58.16	-90.74	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400466	ENDOR	end_jinda_cave	AREA	27	37.53	-61.37	-114.30	0	1	a Jinda chief	jinda_chief_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400467	ENDOR	end_jinda_cave	AREA	27	30.72	-61.21	-107.96	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400468	ENDOR	end_jinda_cave	AREA	27	33.61	-61.28	-115.03	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400469	ENDOR	end_jinda_cave	AREA	27	35.23	-59.00	-63.93	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400470	ENDOR	end_jinda_cave	AREA	28	-63.95	-58.23	-175.08	0	1	a Jinda loremaster	jinda_loremaster_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400471	ENDOR	end_jinda_cave	AREA	28	-42.06	-58.20	-174.20	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400472	ENDOR	end_jinda_cave	AREA	28	-85.05	-58.38	-175.49	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400473	ENDOR	end_jinda_cave	AREA	28	-59.89	-57.80	-175.69	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400474	ENDOR	end_jinda_cave	AREA	28	-68.25	-58.05	-175.90	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400475	ENDOR	end_jinda_cave	AREA	29	-61.91	-58.43	-236.02	0	1	an archaic Jinda ritualist	jinda_archaic_ritualist_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400476	ENDOR	end_jinda_cave	AREA	29	-56.16	-58.01	-205.68	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400477	ENDOR	end_jinda_cave	AREA	29	-52.84	-58.06	-205.70	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400478	ENDOR	end_jinda_cave	AREA	29	-52.83	-57.88	-236.06	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400479	ENDOR	end_jinda_cave	AREA	29	-56.54	-57.53	-229.86	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400480	ENDOR	end_jinda_cave	AREA	29	-65.21	-57.07	-228.96	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400481	ENDOR	end_jinda_cave	AREA	4	-68.44	-38.57	-28.47	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400482	ENDOR	end_jinda_cave	AREA	4	-55.78	-33.91	-20.40	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400483	ENDOR	end_jinda_cave	AREA	4	-67.36	-37.50	-14.32	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400484	ENDOR	end_jinda_cave	AREA	5	-80.50	-39.13	-54.29	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400485	ENDOR	end_jinda_cave	AREA	5	-78.28	-39.19	-66.95	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400486	ENDOR	end_jinda_cave	AREA	5	-65.38	-38.94	-72.43	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400487	ENDOR	end_jinda_cave	AREA	5	-74.31	-39.31	-72.01	0	1	a Jinda shaman	jinda_shaman_67_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400488	ENDOR	end_jinda_cave	AREA	5	-71.58	-38.52	-57.64	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400489	ENDOR	end_jinda_cave	AREA	5	-64.50	-23.33	-60.70	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400490	ENDOR	end_jinda_cave	AREA	5	-65.32	-23.04	-51.74	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400491	ENDOR	end_jinda_cave	AREA	5	-68.15	-23.44	-58.64	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400492	ENDOR	end_jinda_cave	AREA	5	-66.72	-22.69	-66.70	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400493	ENDOR	end_jinda_cave	AREA	5	-79.07	-22.58	-40.15	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400494	ENDOR	end_jinda_cave	AREA	6	-125.95	-41.53	-61.43	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400495	ENDOR	end_jinda_cave	AREA	6	-109.54	-26.75	-64.71	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400496	ENDOR	end_jinda_cave	AREA	8	-165.27	-41.99	-40.85	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400497	ENDOR	end_jinda_cave	AREA	9	-108.88	-61.74	-115.51	0	1	an adept Jinda shaman	jinda_adept_shaman_65_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400498	ENDOR	end_jinda_cave	AREA	9	-94.64	-62.80	-106.90	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400499	ENDOR	end_jinda_cave	AREA	9	-85.95	-64.13	-109.61	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400500	ENDOR	end_jinda_cave	AREA	9	-85.36	-63.92	-119.47	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400501	ENDOR	end_jinda_cave	AREA	9	-112.63	-45.92	-112.76	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400502	ENDOR	end_jinda_cave	AREA	9	-91.49	-63.11	-118.82	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400503	ENDOR	end_jinda_cave	AREA	9	-72.76	-62.65	-109.97	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400504	ENDOR	end_jinda_cave	AREA	9	-109.29	-61.64	-108.81	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400505	ENDOR	end_korga_cave	AREA	1	25.19	-27.50	-7.81	0	1	a Korga adept	korga_adept_74_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400506	ENDOR	end_korga_cave	AREA	10	49.94	-48.75	-102.88	0	1	an enraged Korga	korga_enraged_76_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400507	ENDOR	end_korga_cave	AREA	11	83.86	-46.28	-138.60	0	1	a crafty Korga scout	konga_crafty_scout_74_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400508	ENDOR	end_korga_cave	AREA	11	83.58	-46.63	-144.47	0	1	a Korga ancient	korga_ancient_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400509	ENDOR	end_korga_cave	AREA	2	47.05	-48.33	-63.45	0	1	a Korga elder	korga_elder_78_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400510	ENDOR	end_korga_cave	AREA	2	53.63	-68.17	-37.60	0	1	a Korga elder	korga_elder_78_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400511	ENDOR	end_korga_cave	AREA	2	23.13	-42.27	-63.62	0	1	a Korga scout	korga_scout_76_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400512	ENDOR	end_korga_cave	AREA	3	87.73	-62.10	-14.29	0	1	a Korga spiritmaster	korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400513	ENDOR	end_korga_cave	AREA	5	92.73	-46.16	-104.06	0	1	a frenzied Korga	korga_frenzied_75_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400514	ENDOR	end_korga_cave	AREA	5	95.95	-66.03	-116.34	0	1	a Korga battlelord	korga_battlelord_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400515	ENDOR	end_korga_cave	AREA	5	90.02	-46.01	-120.93	0	1	a Korga dark shaman	korga_dark_shaman_76_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400516	ENDOR	end_korga_cave	AREA	8	131.02	-66.28	-98.01	0	1	an eerie Korga spiritmaster	korga_eerie_spiritmaster_76_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400517	ENDOR	end_korga_cave	AREA	8	131.46	-66.15	-116.88	0	1	a tricky Korga scout	tricky_korga_scout_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400518	ENDOR	end_korga_cave	AREA	9	188.33	-66.18	-99.46	0	1	a Korga chieftain	korga_chieftan_78_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400519	ENDOR	end_korga_cave	AREA	9	180.93	-66.03	-98.38	0	1	a Korga spiritmaster	korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400520	ENDOR	end_korga_cave	AREA	9	188.39	-65.78	-106.51	0	1	a spooky Korga spiritmaster	spooky_korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400521	ENDOR	end_world	AREA	0	-4564.00	99.00	-2297.30	1	1	Charal	charal_100_h_inv_n	POI	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-400522	ENDOR	end_world	AREA	0	-4581.60	99.10	-2243.20	-176	1	Fightmaster Jorak	fightmaster_jorak_100_h_inv_n	POI	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-400523	ENDOR	end_world	AREA	0	-4570.50	99.00	-2273.00	-84	1	King Terak	king_terak_100_h_inv_n	POI	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-400524	ENDOR	end_world	AREA	0	-4618.70	90.00	-2295.10	-44	1	Scholar Zingo	scholar_szingo_100_h_inv_n	POI	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-400525	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	smuggler_fence_quinton_100_h_inv_n	POI	Marauder's Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
-400526	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-400527	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-400528	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-400529	ENDOR	end_marauder_orphans_cave	AREA	1	-12.11	-5.81	-7.25	0	1	a feral Marauder	feral_marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400530	ENDOR	end_marauder_orphans_cave	AREA	11	78.67	-46.59	-142.28	0	1	a frenzied Marauder	marauder_frenzied_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400531	ENDOR	end_marauder_orphans_cave	AREA	2	48.09	-48.51	-63.92	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400532	ENDOR	end_marauder_orphans_cave	AREA	4	68.28	-75.36	-64.33	0	1	a blood-crazed plains Marauder	blood_crazed_plains_marauder_76_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400533	ENDOR	end_marauder_orphans_cave	AREA	4	91.47	-76.04	-68.05	0	1	a grassland blood Marauder	grassland_blood_marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400534	ENDOR	end_marauder_orphans_cave	AREA	5	92.11	-46.60	-110.45	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400535	ENDOR	end_marauder_orphans_cave	AREA	8	130.79	-66.18	-119.14	0	1	a frenzied Marauder	marauder_frenzied_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400536	ENDOR	end_marauder_orphans_cave	AREA	8	131.08	-66.27	-97.04	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400537	ENDOR	end_marauder_orphans_cave	AREA	9	180.99	-66.13	-97.13	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400538	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	smuggler_fence_lavina_100_h_inv_n	POI	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-400539	ENDOR	end_world	AREA	0	-6859.60	17.70	607.00	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
-400540	ENDOR	end_world	AREA	0	-6899.20	11.90	649.60	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
-400541	ENDOR	end_world	AREA	0	-6865.20	13.00	658.00	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
+400003	ENDOR	end_research_outpost_cantina	AREA	3	-0.38	0.62	-7.89	-29	1	Admiral Kilnstrider (Storm Squadron Pilot Trainer)	kilnstrider_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400004	ENDOR	end_world	AREA	0	3212.71	24.50	-3452.25	163	1	a commoner	commoner_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400005	ENDOR	end_world	AREA	0	3245.07	24.00	-3492.27	56	1	a commoner	commoner_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400006	ENDOR	end_world	AREA	0	3278.48	24.00	-3498.35	-78	1	Jener Mich (Endor Collector)	jener_mich_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400007	ENDOR	end_world	AREA	0	3228.22	24.00	-3478.42	-98	1	an agriculturalist	farmer_agriculturist_8_h_att_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400008	ENDOR	end_world	AREA	0	3249.01	24.00	-3450.00	178	1	a frontiersman	frontiersman_17_h_att_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400009	ENDOR	end_world	AREA	0	3196.19	24.00	-3509.81	2	1	a hunter	hunter_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400010	ENDOR	end_world	AREA	0	3190.81	24.00	-3451.61	27	1	a mercenary	mercenary_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400011	ENDOR	end_world	AREA	0	3265.13	24.00	-3501.48	41	1	a nomad	mission_nomad_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400012	ENDOR	end_world	AREA	0	3196.23	24.00	-3508.08	179	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400013	ENDOR	end_world	AREA	0	3226.93	24.00	-3479.55	24	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400014	ENDOR	end_world	AREA	0	3227.03	24.00	-3477.58	155	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400015	ENDOR	end_world	AREA	0	3191.43	24.00	-3450.58	-153	1	a scientist	scientist_1_h_att_n	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400016	ENDOR	end_world	AREA	0	3334.00	25.70	-3521.00	0	1	Alec	smuggler_fence_alec_100_h_inv_n	City	Research Outpost	1	TURN	0	0	-	idle	0	0	0	300	120
+400017	ENDOR	end_world	AREA	0	3346.54	25.66	-3501.79	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	300	120
+400018	ENDOR	end_world	AREA	0	3327.81	24.99	-3543.82	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	300	120
+400019	ENDOR	end_world	AREA	0	3309.59	24.37	-3518.16	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	300	120
+400020	ENDOR	end_world	AREA	0	3260.00	24.00	-3466.73	-82	1	a technician	technician_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400021	ENDOR	end_world	AREA	0	3169.34	24.00	-3497.30	149	1	a traveller	traveller_100_h_inv_n	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400022	ENDOR	end_smuggler_outpost_house	AREA	1	-4.28	0.63	1.99	12	1	Galody	ig88_bothan_spy_01_galody_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400023	ENDOR	end_smuggler_outpost_house	AREA	3	3.60	0.62	-6.00	0	1	Tupit	ig88_bothan_spy_02_tupit_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400024	ENDOR	end_world	AREA	0	-986.68	73.00	1575.34	-135	1	Eyd Tommsin	eyd_tommsin_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400025	ENDOR	end_world	AREA	0	-915.06	80.15	1605.65	148	1	a commoner	commoner_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400026	ENDOR	end_world	AREA	0	-899.45	77.98	1565.84	-68	1	a commoner	commoner_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400027	ENDOR	end_world	AREA	0	-964.38	73.00	1533.99	116	1	a criminal	criminal_4_h_att_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400028	ENDOR	end_world	AREA	0	-875.19	76.00	1631.95	112	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400029	ENDOR	end_world	AREA	0	-830.82	76.00	1576.85	-137	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400030	ENDOR	end_world	AREA	0	-829.38	76.00	1569.20	-70	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400031	ENDOR	end_world	AREA	0	-831.16	76.00	1569.83	105	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400032	ENDOR	end_world	AREA	0	-836.42	76.00	1582.85	-105	1	a hunter	hunter_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400033	ENDOR	end_world	AREA	0	-833.01	80.30	1603.80	-159	1	The Ice Cream Man	icecream_man_ice_cream_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400034	ENDOR	end_world	AREA	0	-962.68	73.00	1533.05	-65	1	a pirate	mission_pirate_17_h_att_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400035	ENDOR	end_world	AREA	0	-874.23	80.00	1565.62	-78	1	a scoundrel	mission_scoundrel_4_h_att_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400036	ENDOR	end_world	AREA	0	-872.57	76.00	1632.41	-130	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
+400037	ENDOR	end_world	AREA	0	-878.78	76.00	1627.93	138	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400038	ENDOR	end_world	AREA	0	-867.72	76.00	1624.16	-142	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400039	ENDOR	end_world	AREA	0	-841.43	79.85	1613.36	25	1	Harding	smuggler_broker_harding_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400040	ENDOR	end_world	PATROL	0	-920.56	76.00	1567.73	0	1	a thief	smuggler_patrol_thief_7_60_h_att_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+400041	ENDOR	end_world	PATROL	0	-922.73	76.00	1565.38	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+400042	ENDOR	end_world	PATROL	0	-924.21	76.00	1567.19	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+400043	ENDOR	end_world	AREA	0	-834.96	80.10	1605.95	-155	1	Otonon Tracks	otonon_tracks_ice_cream_100_d_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+400044	ENDOR	end_mummer_bunker	AREA	11	66.50	-12.00	79.20	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400045	ENDOR	end_mummer_bunker	AREA	11	49.70	-12.00	87.60	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400046	ENDOR	end_mummer_bunker	AREA	12	68.50	-12.00	56.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400047	ENDOR	end_mummer_bunker	AREA	12	65.90	-12.00	60.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400048	ENDOR	end_mummer_bunker	AREA	12	50.00	-12.00	54.00	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400049	ENDOR	end_mummer_bunker	AREA	13	33.70	-20.00	138.00	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400050	ENDOR	end_mummer_bunker	AREA	13	20.00	-20.00	124.90	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400051	ENDOR	end_mummer_bunker	AREA	13	35.20	-20.00	123.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400052	ENDOR	end_mummer_bunker	AREA	13	21.50	-20.00	139.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400053	ENDOR	end_mummer_bunker	AREA	14	55.90	-12.00	20.30	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400054	ENDOR	end_mummer_bunker	AREA	14	32.40	-12.00	2.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400055	ENDOR	end_mummer_bunker	AREA	14	25.60	-12.00	17.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400056	ENDOR	end_mummer_bunker	AREA	14	54.20	-12.00	2.90	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400057	ENDOR	end_mummer_bunker	AREA	14	38.40	-12.00	18.20	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400058	ENDOR	end_mummer_bunker	AREA	16	-16.50	-20.00	1.80	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400059	ENDOR	end_mummer_bunker	AREA	16	-16.40	-20.00	4.50	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400060	ENDOR	end_mummer_bunker	AREA	19	-25.60	-20.00	95.60	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400061	ENDOR	end_mummer_bunker	AREA	19	-19.20	-20.00	95.60	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400062	ENDOR	end_mummer_bunker	AREA	21	0.20	-20.00	67.30	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400063	ENDOR	end_mummer_bunker	AREA	21	-5.90	-20.00	73.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400064	ENDOR	end_mummer_bunker	AREA	5	8.20	-12.00	67.60	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400065	ENDOR	end_mummer_bunker	AREA	5	25.60	-12.00	51.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400066	ENDOR	end_mummer_bunker	AREA	5	0.50	-12.00	28.20	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400067	ENDOR	end_mummer_bunker	AREA	5	3.70	-12.00	68.90	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400068	ENDOR	end_mummer_bunker	AREA	5	26.60	-12.00	44.10	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400069	ENDOR	end_mummer_bunker	AREA	5	3.80	-12.00	36.60	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400070	ENDOR	end_mummer_bunker	AREA	5	-16.80	-12.00	46.00	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400071	ENDOR	end_mummer_bunker	AREA	5	-1.10	-12.00	67.50	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400072	ENDOR	end_mummer_bunker	AREA	7	-55.60	-20.00	59.40	0	1	a Black Sun aggressor	black_sun_aggressor_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400073	ENDOR	end_mummer_bunker	AREA	7	-61.60	-20.00	44.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400074	ENDOR	end_mummer_bunker	AREA	7	-60.60	-20.00	33.40	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400075	ENDOR	end_mummer_bunker	AREA	7	-73.90	-20.00	65.90	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400076	ENDOR	end_mummer_bunker	AREA	8	-67.80	-20.00	13.50	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400077	ENDOR	end_mummer_bunker	AREA	8	-56.90	-20.00	12.70	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400078	ENDOR	end_mummer_bunker	AREA	9	-70.80	-20.00	86.10	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400079	ENDOR	end_mummer_bunker	AREA	9	-53.60	-20.00	76.40	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
+400080	ENDOR	end_dwb	AREA	1	-32.30	-12.00	-9.00	85	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400081	ENDOR	end_dwb	AREA	1	-32.20	-12.00	-2.60	177	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400082	ENDOR	end_dwb	AREA	10	-127.40	-20.00	-27.20	58	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400083	ENDOR	end_dwb	AREA	10	-128.40	-20.00	-19.50	94	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400084	ENDOR	end_dwb	AREA	10	-124.90	-20.00	-20.30	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400085	ENDOR	end_dwb	AREA	11	-128.60	-20.00	-52.60	179	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400086	ENDOR	end_dwb	AREA	11	-125.60	-20.00	-49.80	1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400087	ENDOR	end_dwb	AREA	11	-132.90	-20.00	-53.30	93	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400088	ENDOR	end_dwb	AREA	12	-93.00	-20.00	-96.30	88	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400089	ENDOR	end_dwb	AREA	12	-92.60	-20.00	-80.30	89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400090	ENDOR	end_dwb	AREA	12	-82.90	-20.00	-80.00	-90	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400091	ENDOR	end_dwb	AREA	12	-73.60	-20.00	-89.70	-174	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400092	ENDOR	end_dwb	AREA	12	-73.40	-20.00	-100.40	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400093	ENDOR	end_dwb	AREA	12	-59.70	-20.00	-53.10	-88	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400094	ENDOR	end_dwb	AREA	13	-62.80	-20.00	-72.90	103	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400095	ENDOR	end_dwb	AREA	13	-54.50	-20.00	-73.20	-89	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400096	ENDOR	end_dwb	AREA	13	-65.80	-20.00	-77.10	2	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400097	ENDOR	end_dwb	AREA	14	-112.40	-20.00	-89.50	122	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400098	ENDOR	end_dwb	AREA	14	-103.40	-20.00	-100.10	-54	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400099	ENDOR	end_dwb	AREA	14	-113.70	-20.00	-94.70	91	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400100	ENDOR	end_dwb	AREA	14	-112.40	-20.00	-100.60	45	1	a WED Treadwell droid	mand_bunker_workshop_droid_wed_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400101	ENDOR	end_dwb	AREA	15	-88.30	-20.00	-114.80	34	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400102	ENDOR	end_dwb	AREA	15	-83.20	-20.00	-117.20	-40	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400103	ENDOR	end_dwb	AREA	15	-80.20	-20.00	-120.70	-37	1	a 2-1B surgical droid	mand_bunker_med_droid_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400104	ENDOR	end_dwb	AREA	16	-37.90	-20.00	-46.70	-1	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400105	ENDOR	end_dwb	AREA	16	-3.70	-20.00	-47.50	-1	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400106	ENDOR	end_dwb	AREA	16	-58.80	-20.00	-40.90	-89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400107	ENDOR	end_dwb	AREA	16	-23.40	-20.00	-40.70	97	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400108	ENDOR	end_dwb	AREA	16	-79.80	-20.00	-40.60	85	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400109	ENDOR	end_dwb	AREA	17	-30.70	-20.00	-56.80	172	1	Mara Jade	itp_vader_mara_jade_100_h_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	1800	1500
+400110	ENDOR	end_dwb	AREA	17	-9.60	-32.00	-51.80	-176	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400111	ENDOR	end_dwb	AREA	17	-45.30	-32.00	-102.30	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400112	ENDOR	end_dwb	AREA	17	-10.20	-32.00	-102.20	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400113	ENDOR	end_dwb	AREA	18	6.70	-22.00	-73.50	25	1	a scientist	scientist_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400114	ENDOR	end_dwb	AREA	18	12.90	-20.00	-57.30	-169	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400115	ENDOR	end_dwb	AREA	18	11.10	-22.00	-73.50	-6	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400116	ENDOR	end_dwb	AREA	18	24.20	-20.00	-80.80	-39	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400117	ENDOR	end_dwb	AREA	18	-5.30	-20.00	-57.30	125	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400118	ENDOR	end_dwb	AREA	19	24.90	-20.00	-42.90	0	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400119	ENDOR	end_dwb	AREA	19	20.80	-20.00	-44.20	0	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400120	ENDOR	end_dwb	AREA	19	23.90	-20.00	-29.00	-176	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400121	ENDOR	end_dwb	AREA	2	-15.40	-12.00	9.20	-10	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400122	ENDOR	end_dwb	AREA	2	-15.40	-12.00	11.90	177	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400123	ENDOR	end_dwb	AREA	20	-4.30	-24.00	-113.70	1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400124	ENDOR	end_dwb	AREA	20	-35.50	-32.00	-112.80	93	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400125	ENDOR	end_dwb	AREA	20	-57.80	-32.00	-118.90	-4	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400126	ENDOR	end_dwb	AREA	21	-2.10	-32.00	-37.50	75	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400127	ENDOR	end_dwb	AREA	21	1.40	-32.00	-32.20	177	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400128	ENDOR	end_dwb	AREA	22	36.30	-28.00	-54.80	166	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400129	ENDOR	end_dwb	AREA	22	35.60	-20.00	-86.50	-175	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400130	ENDOR	end_dwb	AREA	22	28.20	-20.00	-93.90	-27	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400131	ENDOR	end_dwb	AREA	22	5.80	-28.00	-61.90	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400132	ENDOR	end_dwb	AREA	23	16.50	-32.00	-96.10	-51	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400133	ENDOR	end_dwb	AREA	23	-1.40	-32.00	-81.90	159	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400134	ENDOR	end_dwb	AREA	23	5.60	-31.90	-91.40	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400135	ENDOR	end_dwb	AREA	24	43.80	-36.80	-101.00	-88	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400136	ENDOR	end_dwb	AREA	24	32.10	-52.00	-117.20	100	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400137	ENDOR	end_dwb	AREA	24	28.30	-42.00	-113.10	80	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400138	ENDOR	end_dwb	AREA	24	44.10	-32.00	-102.40	-72	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400139	ENDOR	end_dwb	AREA	24	32.20	-42.00	-106.50	77	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400140	ENDOR	end_dwb	AREA	24	48.80	-32.00	-113.60	169	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400141	ENDOR	end_dwb	AREA	24	42.10	-32.00	-114.60	-88	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400142	ENDOR	end_dwb	AREA	24	47.80	-52.00	-129.10	155	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400143	ENDOR	end_dwb	AREA	25	71.90	-32.00	-101.20	-91	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400144	ENDOR	end_dwb	AREA	26	68.80	-32.00	-62.80	180	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400145	ENDOR	end_dwb	AREA	26	46.60	-32.00	-91.10	0	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400146	ENDOR	end_dwb	AREA	26	65.90	-32.00	-91.10	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400147	ENDOR	end_dwb	AREA	26	48.50	-32.00	-63.20	180	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400148	ENDOR	end_dwb	AREA	27	38.50	-32.00	-51.00	93	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400149	ENDOR	end_dwb	AREA	27	49.43	-32.00	-51.00	-85	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400150	ENDOR	end_dwb	AREA	28	98.40	-32.00	-93.10	-53	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400151	ENDOR	end_dwb	AREA	28	86.90	-32.00	-84.20	174	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400152	ENDOR	end_dwb	AREA	28	99.20	-32.00	-83.10	-1	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400153	ENDOR	end_dwb	AREA	29	90.73	-32.00	-68.06	164	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400154	ENDOR	end_dwb	AREA	29	96.01	-32.00	-56.37	-163	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400155	ENDOR	end_dwb	AREA	29	91.92	-32.00	-56.27	178	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400156	ENDOR	end_dwb	AREA	30	112.92	-32.00	-80.55	-88	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400157	ENDOR	end_dwb	AREA	30	110.37	-32.00	-81.25	92	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400158	ENDOR	end_dwb	AREA	30	111.70	-32.00	-71.51	-174	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400159	ENDOR	end_dwb	AREA	31	14.00	-56.00	-160.90	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400160	ENDOR	end_dwb	AREA	31	-7.90	-52.00	-143.90	-4	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400161	ENDOR	end_dwb	AREA	33	49.10	-64.00	-124.30	122	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400162	ENDOR	end_dwb	AREA	33	20.50	-64.00	-111.10	99	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400163	ENDOR	end_dwb	AREA	33	40.60	-64.00	-153.90	-94	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400164	ENDOR	end_dwb	AREA	33	39.30	-64.00	-146.20	-129	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400165	ENDOR	end_dwb	AREA	33	58.80	-64.00	-137.70	80	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400166	ENDOR	end_dwb	AREA	33	21.90	-64.00	-95.70	-88	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400167	ENDOR	end_dwb	AREA	37	114.10	-68.00	-183.20	2	1	a scientist	scientist_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400168	ENDOR	end_dwb	AREA	38	-62.20	-60.00	-179.10	-102	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400169	ENDOR	end_dwb	AREA	38	-42.00	-59.60	-174.10	21	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400170	ENDOR	end_dwb	AREA	38	-21.90	-60.10	-185.50	8	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400171	ENDOR	end_dwb	AREA	38	-1.80	-60.00	-171.80	178	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400172	ENDOR	end_dwb	AREA	39	-41.60	-59.80	-205.60	-5	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400173	ENDOR	end_dwb	AREA	4	-1.20	-12.00	34.50	-137	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400174	ENDOR	end_dwb	AREA	4	2.30	-12.00	31.00	-103	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400175	ENDOR	end_dwb	AREA	40	-9.30	-60.10	-277.10	-23	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400176	ENDOR	end_dwb	AREA	40	-7.80	-60.20	-225.40	-24	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400177	ENDOR	end_dwb	AREA	40	-16.40	-60.10	-245.00	17	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400178	ENDOR	end_dwb	AREA	40	-13.10	-60.10	-212.90	13	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400179	ENDOR	end_dwb	AREA	40	-14.50	-60.30	-254.80	-156	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400180	ENDOR	end_dwb	AREA	40	-11.10	-60.10	-207.10	4	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400181	ENDOR	end_dwb	AREA	40	-10.60	-60.00	-205.50	-174	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400182	ENDOR	end_dwb	AREA	40	-12.00	-60.20	-293.30	-1	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400183	ENDOR	end_dwb	AREA	40	-8.60	-60.00	-235.70	-72	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400184	ENDOR	end_dwb	AREA	41	27.70	-61.80	-302.70	-160	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400185	ENDOR	end_dwb	AREA	41	26.70	-61.30	-306.00	35	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400186	ENDOR	end_dwb	AREA	41	24.60	-61.40	-302.70	-31	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400187	ENDOR	end_dwb	AREA	41	28.40	-61.80	-300.20	-159	1	Japer Witter (a mine foreman)	dwb_japer_witter_100_h_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400188	ENDOR	end_dwb	AREA	42	-46.10	-59.80	-317.80	-9	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400189	ENDOR	end_dwb	AREA	42	-46.10	-59.80	-316.40	3	1	a Blastromech	blastromech_75_d_agg_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400190	ENDOR	end_dwb	AREA	42	-43.50	-59.80	-296.80	91	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400191	ENDOR	end_dwb	AREA	43	-97.50	-59.80	-306.10	21	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400192	ENDOR	end_dwb	AREA	43	-90.80	-60.30	-282.30	-18	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400193	ENDOR	end_dwb	AREA	43	-90.50	-60.20	-260.60	-129	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400194	ENDOR	end_dwb	AREA	43	-67.40	-60.10	-314.30	106	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400195	ENDOR	end_dwb	AREA	43	-163.00	-60.20	-315.20	-122	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400196	ENDOR	end_dwb	AREA	43	-147.90	-60.10	-320.50	-67	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400197	ENDOR	end_dwb	AREA	43	-130.40	-60.10	-319.40	9	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400198	ENDOR	end_dwb	AREA	43	-130.00	-60.10	-341.10	132	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400199	ENDOR	end_dwb	AREA	43	-123.20	-60.00	-364.50	-158	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400200	ENDOR	end_dwb	AREA	43	-112.80	-60.10	-319.90	-77	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400201	ENDOR	end_dwb	AREA	43	-110.30	-59.90	-377.40	105	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400202	ENDOR	end_dwb	AREA	43	-98.40	-60.00	-277.70	118	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400203	ENDOR	end_dwb	AREA	43	-88.40	-59.50	-302.10	-58	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400204	ENDOR	end_dwb	AREA	43	-125.90	-60.10	-348.20	1	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400205	ENDOR	end_dwb	AREA	43	-124.90	-59.90	-303.40	-144	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400206	ENDOR	end_dwb	AREA	43	-127.30	-59.70	-378.20	11	1	Death Watch Overlord	dwb_overlord_93_h_agg_b	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	1800	1500
+400207	ENDOR	end_dwb	AREA	43	-89.90	-59.70	-375.40	-12	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400208	ENDOR	end_dwb	AREA	43	-97.10	-59.90	-375.10	21	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400209	ENDOR	end_dwb	AREA	43	-99.20	-60.30	-342.00	44	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400210	ENDOR	end_dwb	AREA	43	-99.20	-59.70	-357.60	19	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400211	ENDOR	end_dwb	AREA	43	-88.70	-59.60	-333.60	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400212	ENDOR	end_dwb	AREA	43	-100.60	-60.10	-314.80	16	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400213	ENDOR	end_dwb	AREA	43	-127.60	-59.80	-372.30	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400214	ENDOR	end_dwb	AREA	43	-127.40	-59.90	-377.90	13	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400215	ENDOR	end_dwb	AREA	43	-122.00	-60.00	-377.70	45	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400216	ENDOR	end_dwb	AREA	44	-80.00	-59.80	-204.50	-178	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400217	ENDOR	end_dwb	AREA	45	-93.40	-59.80	-218.40	-175	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400218	ENDOR	end_dwb	AREA	46	-124.00	-59.80	-198.20	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400219	ENDOR	end_dwb	AREA	47	-128.20	-60.10	-161.90	161	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400220	ENDOR	end_dwb	AREA	47	-125.70	-60.10	-137.50	127	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400221	ENDOR	end_dwb	AREA	47	-124.50	-60.20	-148.40	-179	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400222	ENDOR	end_dwb	AREA	47	-119.10	-59.80	-137.50	127	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400223	ENDOR	end_dwb	AREA	47	-136.00	-59.90	-143.60	126	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400224	ENDOR	end_dwb	AREA	47	-118.30	-59.80	-154.30	-66	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400225	ENDOR	end_dwb	AREA	48	-93.20	-59.80	-149.10	-69	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400226	ENDOR	end_dwb	AREA	48	-78.60	-59.90	-151.20	-37	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400227	ENDOR	end_dwb	AREA	48	-78.30	-59.90	-131.00	72	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400228	ENDOR	end_dwb	AREA	48	-71.20	-59.60	-125.20	-146	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400229	ENDOR	end_dwb	AREA	48	-63.60	-59.60	-151.10	-71	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400230	ENDOR	end_dwb	AREA	48	-57.60	-59.70	-136.30	-143	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400231	ENDOR	end_dwb	AREA	48	-51.80	-59.50	-124.20	148	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400232	ENDOR	end_dwb	AREA	48	-39.90	-60.00	-136.00	-119	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400233	ENDOR	end_dwb	AREA	48	-95.00	-60.10	-140.20	154	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400234	ENDOR	end_dwb	AREA	48	-37.70	-59.60	-146.90	-83	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400235	ENDOR	end_dwb	AREA	48	-70.70	-59.70	-161.30	-8	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400236	ENDOR	end_dwb	AREA	5	-68.80	-20.00	31.40	91	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400237	ENDOR	end_dwb	AREA	5	-56.80	-20.00	34.80	179	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400238	ENDOR	end_dwb	AREA	5	-55.90	-20.00	27.00	-11	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400239	ENDOR	end_dwb	AREA	50	-153.30	-60.00	-184.50	117	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400240	ENDOR	end_dwb	AREA	50	-152.90	-59.90	-209.20	12	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400241	ENDOR	end_dwb	AREA	50	-143.80	-60.40	-200.30	-101	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400242	ENDOR	end_dwb	AREA	50	-143.70	-59.90	-175.50	-86	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400243	ENDOR	end_dwb	AREA	50	-143.30	-60.00	-164.00	-25	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400244	ENDOR	end_dwb	AREA	50	-150.10	-59.90	-162.40	9	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400245	ENDOR	end_dwb	AREA	50	-146.20	-60.20	-187.10	-6	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400246	ENDOR	end_dwb	AREA	51	-157.40	-60.00	-106.90	93	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400247	ENDOR	end_dwb	AREA	51	-148.20	-59.80	-127.20	0	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400248	ENDOR	end_dwb	AREA	52	-178.50	-59.80	-120.40	90	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400249	ENDOR	end_dwb	AREA	53	-222.40	-60.00	-130.50	2	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400250	ENDOR	end_dwb	AREA	53	-206.70	-59.80	-120.80	-89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400251	ENDOR	end_dwb	AREA	54	-152.10	-60.00	-83.00	-179	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400252	ENDOR	end_dwb	AREA	54	-143.00	-60.00	-74.00	0	1	an R2 unit	r2_droid_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400253	ENDOR	end_dwb	AREA	55	-179.50	-60.00	-138.60	8	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400254	ENDOR	end_dwb	AREA	55	-176.30	-60.00	-150.50	-130	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400255	ENDOR	end_dwb	AREA	55	-171.80	-60.10	-140.80	-38	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400256	ENDOR	end_dwb	AREA	55	-181.40	-60.10	-151.20	24	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400257	ENDOR	end_dwb	AREA	55	-175.80	-60.00	-132.30	-130	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400258	ENDOR	end_dwb	AREA	56	-254.50	-50.00	-88.80	-80	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400259	ENDOR	end_dwb	AREA	56	-247.30	-27.60	-89.50	67	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400260	ENDOR	end_dwb	AREA	56	-266.50	-50.00	-85.00	0	1	an R3 unit	r3_droid_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400261	ENDOR	end_dwb	AREA	56	-236.00	-40.00	-84.00	0	1	an R4 unit	r4_droid_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400262	ENDOR	end_dwb	AREA	57	-282.10	-60.00	-129.80	3	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400263	ENDOR	end_dwb	AREA	57	-281.60	-60.00	-121.00	-177	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400264	ENDOR	end_dwb	AREA	57	-288.60	-60.00	-125.20	89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400265	ENDOR	end_dwb	AREA	58	-212.50	-59.90	-158.40	23	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400266	ENDOR	end_dwb	AREA	58	-210.70	-60.10	-195.10	164	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400267	ENDOR	end_dwb	AREA	58	-203.50	-60.00	-145.00	-160	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400268	ENDOR	end_dwb	AREA	58	-210.10	-59.90	-205.10	165	1	a technician	technician_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400269	ENDOR	end_dwb	AREA	58	-207.10	-60.30	-179.20	-175	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400270	ENDOR	end_dwb	AREA	58	-204.20	-60.60	-172.40	-15	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400271	ENDOR	end_dwb	AREA	58	-208.70	-60.10	-139.30	10	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400272	ENDOR	end_dwb	AREA	58	-208.00	-60.20	-205.10	165	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400273	ENDOR	end_dwb	AREA	59	-225.30	-60.00	-218.70	-140	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400274	ENDOR	end_dwb	AREA	6	-73.90	-20.00	57.40	-177	1	Death Watch Bloodguard	dwb_bloodguard_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400275	ENDOR	end_dwb	AREA	6	-79.30	-20.00	51.80	117	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400276	ENDOR	end_dwb	AREA	6	-70.80	-20.00	50.30	-60	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400277	ENDOR	end_dwb	AREA	60	-246.00	-59.90	-231.40	179	1	a crazed scientist	dwb_crazed_scientist_10_h_agg_b	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400278	ENDOR	end_dwb	AREA	60	-246.00	-60.00	-245.00	0	1	an R5 unit	r5_droid_100_d_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400279	ENDOR	end_dwb	AREA	61	-189.40	-59.80	-217.00	-94	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400280	ENDOR	end_dwb	AREA	61	-181.20	-59.80	-217.60	89	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400281	ENDOR	end_dwb	AREA	62	-185.00	-60.10	-237.90	63	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400282	ENDOR	end_dwb	AREA	62	-179.30	-60.40	-230.90	121	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400283	ENDOR	end_dwb	AREA	62	-177.80	-60.10	-260.80	11	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400284	ENDOR	end_dwb	AREA	62	-172.50	-60.00	-232.20	-9	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400285	ENDOR	end_dwb	AREA	62	-171.40	-60.10	-245.10	-21	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400286	ENDOR	end_dwb	AREA	62	-169.60	-59.90	-265.50	-148	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400287	ENDOR	end_dwb	AREA	62	-168.90	-60.00	-256.10	-66	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400288	ENDOR	end_dwb	AREA	62	-160.90	-59.80	-241.60	-76	1	a mine rat	rat_mine_83_c_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400289	ENDOR	end_dwb	AREA	62	-183.80	-60.20	-257.50	-85	1	a miner	miner_85_h_att_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400290	ENDOR	end_dwb	AREA	62	-158.70	-59.50	-230.70	-125	1	Death Watch Wraith	dwb_wraith_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400291	ENDOR	end_dwb	AREA	62	-186.10	-60.00	-243.70	135	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400292	ENDOR	end_dwb	AREA	63	-174.80	-59.80	-316.90	88	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400293	ENDOR	end_dwb	AREA	63	-174.30	-59.80	-276.20	1	1	Death Watch Ghost	dwb_ghost_89_h_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400294	ENDOR	end_dwb	AREA	63	-173.90	-59.80	-297.70	179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400295	ENDOR	end_dwb	AREA	64	-19.00	-52.00	-160.70	0	1	a crazed technician	dwb_crazed_technician_100_h_inv_n	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400296	ENDOR	end_dwb	AREA	64	-25.30	-52.00	-162.10	54	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400297	ENDOR	end_dwb	AREA	64	-12.50	-52.00	-169.40	178	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400298	ENDOR	end_dwb	AREA	64	-10.20	-52.00	-150.40	89	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400299	ENDOR	end_dwb	AREA	64	-23.30	-52.00	-147.50	-179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400300	ENDOR	end_dwb	AREA	64	-19.00	-52.00	-152.40	179	1	Super Battle Droid	mand_bunker_sbd_91_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400301	ENDOR	end_dwb	AREA	7	-77.10	-20.00	12.00	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400302	ENDOR	end_dwb	AREA	7	-76.90	-20.00	-10.30	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400303	ENDOR	end_dwb	AREA	7	-70.50	-20.00	-10.10	0	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400304	ENDOR	end_dwb	AREA	7	-70.30	-20.00	12.20	179	1	Battle Droid	mand_bunker_battle_droid_88_d_agg_e	Dungeon	DWB	1	IDLE	0	0	-	idle	0	0	0	600	450
+400305	ENDOR	end_dwb	AREA	8	-81.20	-20.00	-25.70	90	1	Black Sun Guard	dwb_guard_88_int_h_agg_e	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400306	ENDOR	end_dwb	AREA	9	-90.30	-20.00	-32.30	-106	1	Black Sun Assassin	dwb_assassin_int_89_h_agg_e	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400307	ENDOR	end_dwb	AREA	9	-110.10	-20.00	-54.20	0	1	Black Sun Henchman	dwb_henchman_int_85_h_agg_e	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400308	ENDOR	end_dwb	AREA	9	-95.60	-20.00	-29.30	177	1	Black Sun Thug	dwb_thug_int_85_h_agg_e	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400309	ENDOR	end_dwb	AREA	9	-96.80	-22.00	-33.60	90	1	an R2 unit	r2_droid_4_d_att_n	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400310	ENDOR	end_dwb	AREA	9	-102.60	-22.00	-41.30	40	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	DWB	1	TURN	0	0	-	idle	0	0	0	600	450
+400311	ENDOR	end_itp_merc_bunker	AREA	10	1.20	-12.00	64.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400312	ENDOR	end_itp_merc_bunker	AREA	10	0.40	-12.00	74.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400313	ENDOR	end_itp_merc_bunker	AREA	10	-1.50	-12.00	53.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400314	ENDOR	end_itp_merc_bunker	AREA	14	19.10	-12.00	99.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400315	ENDOR	end_itp_merc_bunker	AREA	14	18.00	-12.00	95.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400316	ENDOR	end_itp_merc_bunker	AREA	14	14.80	-12.00	105.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400317	ENDOR	end_itp_merc_bunker	AREA	15	2.70	-12.00	115.60	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400318	ENDOR	end_itp_merc_bunker	AREA	16	-6.80	-12.00	98.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400319	ENDOR	end_itp_merc_bunker	AREA	16	-10.80	-12.00	99.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400320	ENDOR	end_itp_merc_bunker	AREA	29	42.20	-20.00	59.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400321	ENDOR	end_itp_merc_bunker	AREA	29	20.00	-20.00	47.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400322	ENDOR	end_itp_merc_bunker	AREA	29	19.90	-20.00	77.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400323	ENDOR	end_itp_merc_bunker	AREA	31	25.00	-20.00	112.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400324	ENDOR	end_itp_merc_bunker	AREA	31	16.50	-20.00	121.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400325	ENDOR	end_itp_merc_bunker	AREA	31	-15.20	-20.00	121.50	0	1	Vurrha Jantsk (leader of the Jantsk mercenaries)	itp_emperor_mercenary_leader_invul_100_h_inv_n	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400326	ENDOR	end_itp_merc_bunker	AREA	34	65.90	-20.00	30.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400327	ENDOR	end_itp_merc_bunker	AREA	34	55.90	-20.00	30.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400328	ENDOR	end_itp_merc_bunker	AREA	34	48.50	-20.00	36.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400329	ENDOR	end_itp_merc_bunker	AREA	35	64.00	-20.00	55.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400330	ENDOR	end_itp_merc_bunker	AREA	35	63.50	-20.00	61.80	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400331	ENDOR	end_itp_merc_bunker	AREA	37	68.70	-50.00	43.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400332	ENDOR	end_itp_merc_bunker	AREA	37	59.30	-50.00	45.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400333	ENDOR	end_itp_merc_bunker	AREA	40	42.20	-50.00	-4.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400334	ENDOR	end_itp_merc_bunker	AREA	41	44.90	-50.00	20.60	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400335	ENDOR	end_itp_merc_bunker	AREA	41	34.70	-50.00	30.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400336	ENDOR	end_itp_merc_bunker	AREA	41	19.90	-50.00	25.10	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400337	ENDOR	end_itp_merc_bunker	AREA	43	24.50	-50.00	70.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400338	ENDOR	end_itp_merc_bunker	AREA	43	12.30	-50.00	68.30	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400339	ENDOR	end_itp_merc_bunker	AREA	43	17.80	-50.00	72.30	0	1	Vurrha Jantsk (leader of the Jantsk mercenaries)	itp_emperor_mercenary_leader_boss_90_h_agg_b	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400340	ENDOR	end_itp_merc_bunker	AREA	6	23.00	-12.00	24.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400341	ENDOR	end_itp_merc_bunker	AREA	6	22.60	-12.00	33.70	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400342	ENDOR	end_itp_merc_bunker	AREA	9	53.40	-12.00	59.20	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400343	ENDOR	end_itp_merc_bunker	AREA	9	41.30	-12.00	54.40	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400344	ENDOR	end_itp_merc_bunker	AREA	9	33.00	-12.00	63.00	0	1	a Jantsk mercenary	itp_emperor_mercenary_90_h_agg_e	Dungeon	ITP - Merc Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
+400345	ENDOR	end_tao_ni_security_compound	AREA	13	35.40	-20.00	122.80	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400346	ENDOR	end_tao_ni_security_compound	AREA	13	21.00	-20.00	133.00	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400347	ENDOR	end_tao_ni_security_compound	AREA	13	37.10	-20.00	138.60	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400348	ENDOR	end_tao_ni_security_compound	AREA	14	25.40	-12.00	9.50	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400349	ENDOR	end_tao_ni_security_compound	AREA	14	56.00	-12.00	-0.10	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400350	ENDOR	end_tao_ni_security_compound	AREA	14	50.90	-12.00	21.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400351	ENDOR	end_tao_ni_security_compound	AREA	16	-16.70	-20.00	3.10	0	1	Tao-Ni Security Mechanized Omega Class	taoni_sec_mech_omega_endor_ig88_90_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400352	ENDOR	end_tao_ni_security_compound	AREA	19	-22.70	-20.00	115.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400353	ENDOR	end_tao_ni_security_compound	AREA	19	-15.70	-20.00	101.80	0	1	Tao-Ni Security Mechanized Alpha Class	taoni_sec_mech_alpha_endor_ig88_87_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400354	ENDOR	end_tao_ni_security_compound	AREA	2	-0.30	0.30	3.00	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400355	ENDOR	end_tao_ni_security_compound	AREA	21	-3.20	-20.00	69.10	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400356	ENDOR	end_tao_ni_security_compound	AREA	3	3.30	0.30	-4.50	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400357	ENDOR	end_tao_ni_security_compound	AREA	5	3.30	-12.00	31.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400358	ENDOR	end_tao_ni_security_compound	AREA	5	22.50	-12.00	47.90	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400359	ENDOR	end_tao_ni_security_compound	AREA	5	-14.10	-12.00	46.60	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400360	ENDOR	end_tao_ni_security_compound	AREA	7	-68.30	-20.00	33.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_blue_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400361	ENDOR	end_tao_ni_security_compound	AREA	7	-52.10	-20.00	60.40	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_purple_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400362	ENDOR	end_tao_ni_security_compound	AREA	7	-71.20	-20.00	62.70	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400363	ENDOR	end_tao_ni_security_compound	AREA	7	-63.20	-20.00	43.40	0	1	Tao-Ni Security Mechanized Beta Class	taoni_sec_mech_beta_endor_ig88_88_d_agg_n	Dungeon	Tao Ni Security Compound	1	TURN	0	0	-	idle	0	0	0	300	120
+400364	ENDOR	end_world	AREA	0	2584.92	199.11	6654.78	0	1	Tao-Ni Security Battle Droid	taoni_sec_battle_droid_endor_ig88_red_85_d_agg_n	Dungeon	Tao Ni Security Compound	1	LOITER	2	0	-	idle	0	0	0	300	120
+400365	ENDOR	end_world	AREA	0	-235.70	208.47	3521.44	0	1	Captured old man	captured_old_man_100_h_inv_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	300	120
+400366	ENDOR	end_world	AREA	0	-4610.77	177.20	-2549.98	0	1	Zalbar Jyvun	itp_loam_twilek_force_sensitive_87_h_att_e	Outback	Endor	1	IDLE	0	0	-	idle	0	0	0	300	120
+400367	ENDOR	end_world	AREA	0	6401.71	220.21	-254.76	-55	1	Macchbraus	mun_quest_marauder_100_h_inv_n	Outback	Endor	1	IDLE	0	0	-	idle	0	0	0	300	120
+400368	ENDOR	end_world	AREA	0	667.00	207.80	4972.00	0	1	Carter	smuggler_fence_carter_100_h_inv_n	Outback	Endor	1	TURN	0	0	-	idle	0	0	0	300	120
+400369	ENDOR	end_world	AREA	0	6018.00	212.15	6146.00	0	1	Dreda	smuggler_fence_dreda_100_h_inv_n	Outback	Endor	1	TURN	0	0	-	idle	0	0	0	300	120
+400370	ENDOR	end_world	AREA	0	-2888.46	21.55	-4640.48	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400371	ENDOR	end_world	AREA	0	-2869.70	16.70	-4621.73	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400372	ENDOR	end_world	AREA	0	-2864.26	17.66	-4638.55	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400373	ENDOR	end_world	AREA	0	-222.29	207.98	3517.26	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400374	ENDOR	end_world	AREA	0	-212.14	207.69	3522.83	0	1	a Dark Jedi	treasure_guard_jedi_68_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400375	ENDOR	end_world	AREA	0	-2872.37	19.43	-4634.57	0	1	a Dark Jedi Elder	treasure_guard_jedi_elder_78_h_agg_n	Outback	Endor	1	TURN	0	0	-	idle	0	0	0	900	600
+400376	ENDOR	end_world	AREA	0	-208.36	207.02	3511.30	0	1	a Dark Jedi Elder	treasure_guard_jedi_elder_78_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400377	ENDOR	end_world	AREA	0	-235.89	208.20	3534.84	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400378	ENDOR	end_world	AREA	0	-226.12	208.51	3543.06	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Endor	1	LOITER	2	0	-	idle	0	0	0	900	600
+400379	ENDOR	end_world	AREA	0	1214.22	19.61	1987.71	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400380	ENDOR	end_world	AREA	0	1213.04	9.64	1930.84	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400381	ENDOR	end_world	AREA	0	1201.88	10.98	1943.24	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400382	ENDOR	end_world	AREA	0	1201.45	21.51	1973.95	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400383	ENDOR	end_world	AREA	0	1195.09	19.03	1994.74	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400384	ENDOR	end_world	AREA	0	1192.96	10.67	1919.00	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400385	ENDOR	end_world	AREA	0	1189.21	10.84	1947.51	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400386	ENDOR	end_world	AREA	0	1179.57	20.81	1978.01	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400387	ENDOR	end_world	AREA	0	1171.25	8.50	1947.97	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400388	ENDOR	end_world	AREA	0	1167.16	9.71	1931.80	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400389	ENDOR	end_world	AREA	0	1161.27	9.41	2018.82	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400390	ENDOR	end_world	AREA	0	1161.25	8.20	1999.26	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400391	ENDOR	end_world	AREA	0	1157.51	12.71	1974.02	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400392	ENDOR	end_world	AREA	0	1154.81	10.79	1932.63	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400393	ENDOR	end_world	AREA	0	1150.53	11.08	1960.94	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400394	ENDOR	end_world	AREA	0	1140.98	11.40	1990.05	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400395	ENDOR	end_world	AREA	0	1140.13	11.86	1945.47	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400396	ENDOR	end_world	AREA	0	1137.28	8.41	2042.07	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400397	ENDOR	end_world	AREA	0	1135.45	8.29	2017.40	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400398	ENDOR	end_world	AREA	0	1126.33	8.69	1971.60	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400399	ENDOR	end_world	AREA	0	1117.33	8.50	1983.74	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400400	ENDOR	end_world	AREA	0	1112.12	11.13	2032.54	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400401	ENDOR	end_world	AREA	0	1107.63	8.26	1998.81	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400402	ENDOR	end_world	AREA	0	1104.28	10.66	2019.14	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Meatlump Moop Camp	1	LOITER	2	0	-	idle	0	0	0	300	120
+400403	ENDOR	end_world	AREA	0	-1198.80	25.00	2981.30	0	1	a Donkuwah battlelord	donkuwah_battlelord_79_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400404	ENDOR	end_world	AREA	0	-1156.90	17.00	2953.30	0	1	a Donkuwah chieftain	donkuwah_chieftain_90_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400405	ENDOR	end_world	AREA	0	-1239.40	18.00	2984.60	0	1	a Donkuwah cub	donkuwah_cub_78_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400406	ENDOR	end_world	AREA	0	-1271.30	12.00	2970.40	0	1	a Donkuwah laborer	donkuwah_laborer_78_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400407	ENDOR	end_world	AREA	0	-1228.37	12.00	2935.95	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400408	ENDOR	end_world	AREA	0	-1215.12	12.00	2932.08	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400409	ENDOR	end_world	AREA	0	-1174.50	12.00	2942.80	0	1	a Donkuwah scout	donkuwah_scout_76_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400410	ENDOR	end_world	AREA	0	-1253.60	12.00	2973.10	0	1	a Donkuwah shaman	donkuwah_shaman_78_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400411	ENDOR	end_world	AREA	0	-1207.40	9.00	2966.00	0	1	a Donkuwah spiritmaster	donkuwah_spiritmaster_78_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400412	ENDOR	end_world	AREA	0	-1220.40	9.00	2968.40	0	1	a Donkuwah tribesman	donkuwah_tribesman_80_h_agg_n	POI	Dulok Village #1	1	LOITER	2	0	-	idle	0	0	0	300	120
+400413	ENDOR	end_world	AREA	0	6092.30	263.00	-2511.00	0	1	a Dulok outcast	dulok_outcast_72_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400414	ENDOR	end_world	AREA	0	6107.20	265.00	-2451.55	0	1	the Dulok outcast leader	dulok_outcast_leader_73_h_agg_e	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400415	ENDOR	end_world	AREA	0	6097.32	265.00	-2461.88	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400416	ENDOR	end_world	AREA	0	6094.16	265.00	-2454.76	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400417	ENDOR	end_world	AREA	0	6092.86	263.00	-2485.46	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400418	ENDOR	end_world	AREA	0	6068.64	263.00	-2448.37	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400419	ENDOR	end_world	AREA	0	6054.38	262.00	-2508.48	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400420	ENDOR	end_world	AREA	0	6039.19	262.00	-2455.34	0	1	a Dulok outcast raider	dulok_outcast_raider_71_h_agg_n	POI	Dulok Village #2	1	LOITER	2	0	-	idle	0	0	0	300	120
+400421	ENDOR	end_jinda_cave	AREA	1	0.81	-12.42	-15.83	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400422	ENDOR	end_jinda_cave	AREA	10	-162.79	-41.83	-75.27	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400423	ENDOR	end_jinda_cave	AREA	10	-172.64	-41.65	-69.64	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400424	ENDOR	end_jinda_cave	AREA	10	-162.96	-41.55	-67.47	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400425	ENDOR	end_jinda_cave	AREA	10	-173.07	-41.32	-75.21	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400426	ENDOR	end_jinda_cave	AREA	10	-174.36	-41.83	-87.03	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400427	ENDOR	end_jinda_cave	AREA	10	-172.62	-42.06	-63.34	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400428	ENDOR	end_jinda_cave	AREA	10	-162.99	-41.51	-83.21	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400429	ENDOR	end_jinda_cave	AREA	11	-98.85	-47.01	-83.69	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400430	ENDOR	end_jinda_cave	AREA	11	-112.02	-46.74	-86.64	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400431	ENDOR	end_jinda_cave	AREA	11	-97.82	-30.93	-88.94	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400432	ENDOR	end_jinda_cave	AREA	11	-102.92	-30.91	-91.04	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400433	ENDOR	end_jinda_cave	AREA	11	-138.56	-45.76	-82.31	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400434	ENDOR	end_jinda_cave	AREA	16	-107.31	-50.06	-27.89	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400435	ENDOR	end_jinda_cave	AREA	16	-115.80	-50.03	-27.54	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400436	ENDOR	end_jinda_cave	AREA	16	-110.70	-49.70	-34.44	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400437	ENDOR	end_jinda_cave	AREA	16	-102.87	-33.99	-36.55	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400438	ENDOR	end_jinda_cave	AREA	17	-105.14	-34.35	-16.98	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400439	ENDOR	end_jinda_cave	AREA	19	16.58	-14.04	-22.75	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400440	ENDOR	end_jinda_cave	AREA	19	20.63	-17.45	-33.07	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400441	ENDOR	end_jinda_cave	AREA	19	15.35	-22.83	-49.09	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400442	ENDOR	end_jinda_cave	AREA	2	-39.99	-23.99	-25.94	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400443	ENDOR	end_jinda_cave	AREA	2	-38.58	-23.91	-23.03	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400444	ENDOR	end_jinda_cave	AREA	2	-8.45	-22.16	-43.40	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400445	ENDOR	end_jinda_cave	AREA	2	-10.85	-22.40	-48.23	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400446	ENDOR	end_jinda_cave	AREA	2	-29.17	-21.05	-23.00	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400447	ENDOR	end_jinda_cave	AREA	20	-15.59	-26.82	-66.85	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400448	ENDOR	end_jinda_cave	AREA	20	-7.87	-27.00	-80.75	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400449	ENDOR	end_jinda_cave	AREA	20	-9.36	-26.83	-65.96	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400450	ENDOR	end_jinda_cave	AREA	21	-28.41	-29.65	-77.40	0	1	a Jinda elder	jinda_elder_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400451	ENDOR	end_jinda_cave	AREA	21	-29.95	-27.54	-67.40	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400452	ENDOR	end_jinda_cave	AREA	22	-7.61	-36.05	-96.61	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400453	ENDOR	end_jinda_cave	AREA	22	-24.52	-59.94	-106.45	0	1	a Jinda elder worker	jinda_elder_worker_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400454	ENDOR	end_jinda_cave	AREA	22	-15.73	-36.03	-105.35	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400455	ENDOR	end_jinda_cave	AREA	22	-40.00	-36.80	-111.00	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400456	ENDOR	end_jinda_cave	AREA	22	-64.25	-44.84	-112.98	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400457	ENDOR	end_jinda_cave	AREA	22	-31.73	-59.78	-114.31	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400458	ENDOR	end_jinda_cave	AREA	26	-1.73	-59.85	-85.56	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400459	ENDOR	end_jinda_cave	AREA	26	9.94	-61.11	-96.63	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400460	ENDOR	end_jinda_cave	AREA	26	-0.32	-63.06	-107.42	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400461	ENDOR	end_jinda_cave	AREA	27	55.34	-57.91	-87.28	0	1	an archaic Jinda ritualist	jinda_archaic_ritualist_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400462	ENDOR	end_jinda_cave	AREA	27	41.98	-60.84	-100.97	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400463	ENDOR	end_jinda_cave	AREA	27	28.46	-60.56	-100.11	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400464	ENDOR	end_jinda_cave	AREA	27	50.58	-58.62	-77.81	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400465	ENDOR	end_jinda_cave	AREA	27	50.17	-58.16	-90.74	0	1	a hardened Jinda warrior	hardened_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400466	ENDOR	end_jinda_cave	AREA	27	37.53	-61.37	-114.30	0	1	a Jinda chief	jinda_chief_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400467	ENDOR	end_jinda_cave	AREA	27	30.72	-61.21	-107.96	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400468	ENDOR	end_jinda_cave	AREA	27	33.61	-61.28	-115.03	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400469	ENDOR	end_jinda_cave	AREA	27	35.23	-59.00	-63.93	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400470	ENDOR	end_jinda_cave	AREA	28	-63.95	-58.23	-175.08	0	1	a Jinda loremaster	jinda_loremaster_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400471	ENDOR	end_jinda_cave	AREA	28	-42.06	-58.20	-174.20	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400472	ENDOR	end_jinda_cave	AREA	28	-85.05	-58.38	-175.49	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400473	ENDOR	end_jinda_cave	AREA	28	-59.89	-57.80	-175.69	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400474	ENDOR	end_jinda_cave	AREA	28	-68.25	-58.05	-175.90	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400475	ENDOR	end_jinda_cave	AREA	29	-61.91	-58.43	-236.02	0	1	an archaic Jinda ritualist	jinda_archaic_ritualist_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400476	ENDOR	end_jinda_cave	AREA	29	-56.16	-58.01	-205.68	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400477	ENDOR	end_jinda_cave	AREA	29	-52.84	-58.06	-205.70	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400478	ENDOR	end_jinda_cave	AREA	29	-52.83	-57.88	-236.06	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400479	ENDOR	end_jinda_cave	AREA	29	-56.54	-57.53	-229.86	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400480	ENDOR	end_jinda_cave	AREA	29	-65.21	-57.07	-228.96	0	1	a wise Jinda ritualist	wise_jinda_ritualist_67_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400481	ENDOR	end_jinda_cave	AREA	4	-68.44	-38.57	-28.47	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400482	ENDOR	end_jinda_cave	AREA	4	-55.78	-33.91	-20.40	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400483	ENDOR	end_jinda_cave	AREA	4	-67.36	-37.50	-14.32	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400484	ENDOR	end_jinda_cave	AREA	5	-80.50	-39.13	-54.29	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400485	ENDOR	end_jinda_cave	AREA	5	-78.28	-39.19	-66.95	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400486	ENDOR	end_jinda_cave	AREA	5	-65.38	-38.94	-72.43	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400487	ENDOR	end_jinda_cave	AREA	5	-74.31	-39.31	-72.01	0	1	a Jinda shaman	jinda_shaman_67_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400488	ENDOR	end_jinda_cave	AREA	5	-71.58	-38.52	-57.64	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400489	ENDOR	end_jinda_cave	AREA	5	-64.50	-23.33	-60.70	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400490	ENDOR	end_jinda_cave	AREA	5	-65.32	-23.04	-51.74	0	1	a Jinda warrior	jinda_warrior_67_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400491	ENDOR	end_jinda_cave	AREA	5	-68.15	-23.44	-58.64	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400492	ENDOR	end_jinda_cave	AREA	5	-66.72	-22.69	-66.70	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400493	ENDOR	end_jinda_cave	AREA	5	-79.07	-22.58	-40.15	0	1	a weathered Jinda shaman	weathered_jinda_shaman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400494	ENDOR	end_jinda_cave	AREA	6	-125.95	-41.53	-61.43	0	1	a Jinda tribesman	jinda_tribesman_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400495	ENDOR	end_jinda_cave	AREA	6	-109.54	-26.75	-64.71	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior_66_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400496	ENDOR	end_jinda_cave	AREA	8	-165.27	-41.99	-40.85	0	1	a Jinda worker	jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400497	ENDOR	end_jinda_cave	AREA	9	-108.88	-61.74	-115.51	0	1	an adept Jinda shaman	jinda_adept_shaman_65_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400498	ENDOR	end_jinda_cave	AREA	9	-94.64	-62.80	-106.90	0	1	a Jinda cub	jinda_cub_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400499	ENDOR	end_jinda_cave	AREA	9	-85.95	-64.13	-109.61	0	1	a Jinda matriarch	jinda_matriarch_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400500	ENDOR	end_jinda_cave	AREA	9	-85.36	-63.92	-119.47	0	1	a Jinda veteran	jinda_veteran_68_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400501	ENDOR	end_jinda_cave	AREA	9	-112.63	-45.92	-112.76	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400502	ENDOR	end_jinda_cave	AREA	9	-91.49	-63.11	-118.82	0	1	a masterful Jinda warrior	jinda_masterful_warrior_66_h_agg_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400503	ENDOR	end_jinda_cave	AREA	9	-72.76	-62.65	-109.97	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400504	ENDOR	end_jinda_cave	AREA	9	-109.29	-61.64	-108.81	0	1	a skilled Jinda worker	skilled_jinda_worker_64_h_att_n	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400505	ENDOR	end_korga_cave	AREA	1	25.19	-27.50	-7.81	0	1	a Korga adept	korga_adept_74_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400506	ENDOR	end_korga_cave	AREA	10	49.94	-48.75	-102.88	0	1	an enraged Korga	korga_enraged_76_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400507	ENDOR	end_korga_cave	AREA	11	83.86	-46.28	-138.60	0	1	a crafty Korga scout	konga_crafty_scout_74_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400508	ENDOR	end_korga_cave	AREA	11	83.58	-46.63	-144.47	0	1	a Korga ancient	korga_ancient_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400509	ENDOR	end_korga_cave	AREA	2	47.05	-48.33	-63.45	0	1	a Korga elder	korga_elder_78_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400510	ENDOR	end_korga_cave	AREA	2	53.63	-68.17	-37.60	0	1	a Korga elder	korga_elder_78_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400511	ENDOR	end_korga_cave	AREA	2	23.13	-42.27	-63.62	0	1	a Korga scout	korga_scout_76_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400512	ENDOR	end_korga_cave	AREA	3	87.73	-62.10	-14.29	0	1	a Korga spiritmaster	korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400513	ENDOR	end_korga_cave	AREA	5	92.73	-46.16	-104.06	0	1	a frenzied Korga	korga_frenzied_75_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400514	ENDOR	end_korga_cave	AREA	5	95.95	-66.03	-116.34	0	1	a Korga battlelord	korga_battlelord_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400515	ENDOR	end_korga_cave	AREA	5	90.02	-46.01	-120.93	0	1	a Korga dark shaman	korga_dark_shaman_76_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400516	ENDOR	end_korga_cave	AREA	8	131.02	-66.28	-98.01	0	1	an eerie Korga spiritmaster	korga_eerie_spiritmaster_76_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400517	ENDOR	end_korga_cave	AREA	8	131.46	-66.15	-116.88	0	1	a tricky Korga scout	tricky_korga_scout_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400518	ENDOR	end_korga_cave	AREA	9	188.33	-66.18	-99.46	0	1	a Korga chieftain	korga_chieftan_78_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400519	ENDOR	end_korga_cave	AREA	9	180.93	-66.03	-98.38	0	1	a Korga spiritmaster	korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400520	ENDOR	end_korga_cave	AREA	9	188.39	-65.78	-106.51	0	1	a spooky Korga spiritmaster	spooky_korga_spiritmaster_77_h_agg_n	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400521	ENDOR	end_world	AREA	0	-4564.00	99.00	-2297.30	1	1	Charal	charal_100_h_inv_n	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+400522	ENDOR	end_world	AREA	0	-4581.60	99.10	-2243.20	-176	1	Fightmaster Jorak	fightmaster_jorak_100_h_inv_n	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+400523	ENDOR	end_world	AREA	0	-4570.50	99.00	-2273.00	-84	1	King Terak	king_terak_100_h_inv_n	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+400524	ENDOR	end_world	AREA	0	-4618.70	90.00	-2295.10	-44	1	Scholar Zingo	scholar_szingo_100_h_inv_n	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+400525	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	smuggler_fence_quinton_100_h_inv_n	POI	Marauder's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+400526	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	LOITER	2	0	-	idle	0	0	0	300	120
+400527	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	LOITER	2	0	-	idle	0	0	0	300	120
+400528	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Marauder's Stronghold	1	LOITER	2	0	-	idle	0	0	0	300	120
+400529	ENDOR	end_marauder_orphans_cave	AREA	1	-12.11	-5.81	-7.25	0	1	a feral Marauder	feral_marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400530	ENDOR	end_marauder_orphans_cave	AREA	11	78.67	-46.59	-142.28	0	1	a frenzied Marauder	marauder_frenzied_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400531	ENDOR	end_marauder_orphans_cave	AREA	2	48.09	-48.51	-63.92	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400532	ENDOR	end_marauder_orphans_cave	AREA	4	68.28	-75.36	-64.33	0	1	a blood-crazed plains Marauder	blood_crazed_plains_marauder_76_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400533	ENDOR	end_marauder_orphans_cave	AREA	4	91.47	-76.04	-68.05	0	1	a grassland blood Marauder	grassland_blood_marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400534	ENDOR	end_marauder_orphans_cave	AREA	5	92.11	-46.60	-110.45	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400535	ENDOR	end_marauder_orphans_cave	AREA	8	130.79	-66.18	-119.14	0	1	a frenzied Marauder	marauder_frenzied_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400536	ENDOR	end_marauder_orphans_cave	AREA	8	131.08	-66.27	-97.04	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400537	ENDOR	end_marauder_orphans_cave	AREA	9	180.99	-66.13	-97.13	0	1	a Marauder	marauder_78_h_agg_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400538	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	smuggler_fence_lavina_100_h_inv_n	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	300	120
+400539	ENDOR	end_world	AREA	0	-6859.60	17.70	607.00	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	LOITER	2	0	-	idle	0	0	0	300	120
+400540	ENDOR	end_world	AREA	0	-6899.20	11.90	649.60	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	LOITER	2	0	-	idle	0	0	0	300	120
+400541	ENDOR	end_world	AREA	0	-6865.20	13.00	658.00	0	1	a mercenary	smuggler_patrol_thief_8_60_h_att_n	POI	Orphaned Marauder's Cave	1	LOITER	2	0	-	idle	0	0	0	300	120
