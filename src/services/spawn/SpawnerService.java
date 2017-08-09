@@ -73,7 +73,7 @@ import utilities.ThreadUtilities;
 public final class SpawnerService extends Service {
 	
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
-			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
+			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.loiter_radius, " // more static columns
 			+ "static.min_spawn_time, static.max_spawn_time, static.amount, static.spawn_id, " // even more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "npc.npc_id, npc.iff_template AS iff, npc.npc_name, npc.combat_level, npc.difficulty, npc.attackable, npc.faction, npc.spec_force, " // npc columns
@@ -271,8 +271,8 @@ public final class SpawnerService extends Service {
 	private void setAiBehavior(Spawner spawner, ResultSet set) throws SQLException {
 		AIBehavior aiBehavior = AIBehavior.valueOf(set.getString("behaviour"));
 		spawner.setAIBehavior(aiBehavior);
-		if (aiBehavior == AIBehavior.FLOAT) {
-			spawner.setFloatRadius(set.getInt("float_radius"));
+		if (aiBehavior == AIBehavior.LOITER) {
+			spawner.setFloatRadius(set.getInt("loiter_radius"));
 		}
 	}
 	
@@ -319,7 +319,7 @@ public final class SpawnerService extends Service {
 		object.setAction(spawner.getMaxAction());
 		object.setMoodAnimation(spawner.getMoodAnimation());
 		object.setBehavior(spawner.getAIBehavior());
-		object.setFloatRadius(spawner.getFloatRadius());
+		object.setLoiterRadius(spawner.getFloatRadius());
 		object.setCreatureId(spawner.getCreatureId());
 		setFlags(object, spawner.getSpawnerFlag());
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
@@ -377,7 +377,7 @@ public final class SpawnerService extends Service {
 		Location aiLocation = new Location(spawner.getLocation());
 		
 		switch (spawner.getAIBehavior()) {
-			case FLOAT:
+			case LOITER:
 				// Random location within float radius of spawner and 
 				int floatRadius = spawner.getFloatRadius();
 				int offsetX = randomBetween(0, floatRadius);
@@ -386,8 +386,8 @@ public final class SpawnerService extends Service {
 				spawner.setFloatRadius(floatRadius);
 				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
 	
-				// Doesn't break here - FLOAT NPCs also have GUARD behavior
-			case GUARD:
+				// Doesn't break here - LOITER NPCs also have TURN behavior
+			case TURN:
 				// Random heading when spawned
 				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
 				aiLocation.setHeading(randomHeading);	// -180 to 180

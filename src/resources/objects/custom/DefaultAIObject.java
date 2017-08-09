@@ -44,7 +44,7 @@ public class DefaultAIObject extends AIObject {
 	
 	public DefaultAIObject(long objectId) {
 		super(objectId);
-		behavior = AIBehavior.STOP;
+		behavior = AIBehavior.IDLE;
 		updateCounter = 0;
 		radius = 0;
 	}
@@ -60,7 +60,7 @@ public class DefaultAIObject extends AIObject {
 		return behavior;
 	}
 	
-	public double getFloatRadius() {
+	public double getLoiterRadius() {
 		return radius;
 	}
 	
@@ -68,7 +68,7 @@ public class DefaultAIObject extends AIObject {
 		this.behavior = behavior;
 	}
 	
-	public void setFloatRadius(double radius) {
+	public void setLoiterRadius(double radius) {
 		this.radius = radius;
 	}
 	
@@ -81,14 +81,14 @@ public class DefaultAIObject extends AIObject {
 	@Override
 	protected void aiLoop() {
 		switch (behavior) {
-			case FLOAT:	aiLoopFloat();	break;
-			case GUARD:	aiLoopGuard();	break;
-			case STOP:
+			case LOITER:	aiLoopLoiter();	break;
+			case TURN:	aiLoopTurn();	break;
+			case IDLE:
 			default:	break;
 		}
 	}
 	
-	private void aiLoopFloat() {
+	private void aiLoopLoiter() {
 		if (isInCombat())
 			return;
 		Random r = new Random();
@@ -110,7 +110,7 @@ public class DefaultAIObject extends AIObject {
 		new MoveObjectIntent(this, getParent(), l, 1.37, updateCounter++).broadcast();
 	}
 	
-	private void aiLoopGuard() {
+	private void aiLoopTurn() {
 		if (isInCombat())
 			return;
 		Random r = new Random();
