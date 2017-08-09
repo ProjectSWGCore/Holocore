@@ -337,7 +337,7 @@ public class EntertainmentService extends Service {
 			// Non-entertainers don't receive XP and have no audience - ignore them
 			if(isEntertainer(dancer)) {
 				cancelExperienceTask(dancer);
-				performerMap.get(dancer.getObjectId()).clearSpectators();
+				performerMap.remove(dancer.getObjectId()).clearSpectators();
 			}
 			
 			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();

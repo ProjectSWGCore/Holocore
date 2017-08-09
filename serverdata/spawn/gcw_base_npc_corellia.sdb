@@ -1,46 +1,46 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-3300003	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300004	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300005	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300006	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300007	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300008	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300009	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300010	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300011	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300012	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300013	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300014	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300015	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300016	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300017	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300018	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300019	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300020	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300021	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300022	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300023	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300024	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Imperial Logistics Officer	gcw_base_imperial_corellia_reward_officer_100_h_inv_n	Base Imperial	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300025	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300026	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300027	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300028	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300029	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300030	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300031	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300032	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300033	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300034	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300035	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300036	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300037	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300038	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300039	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300040	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300041	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300042	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300043	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300044	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300045	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
-3300046	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Rebel Logistics Officer	gcw_base_rebel_corellia_reward_officer_100_h_inv_n	Base Rebel	Corellia GCW Base	1	STOP	idle	0	0	0	0	360	300	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
+3300003	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300004	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300005	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300006	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300007	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300008	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300009	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300010	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300011	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300012	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300013	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300014	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300015	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300016	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300017	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300018	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300019	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300020	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300021	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300022	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300023	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	an Imperial stormtrooper	gcw_base_stormtrooper_90_h_att_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300024	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Imperial Logistics Officer	gcw_base_imperial_corellia_reward_officer_100_h_inv_n	Base Imperial	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300025	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300026	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300027	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300028	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300029	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300030	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300031	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300032	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300033	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300034	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300035	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300036	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300037	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300038	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300039	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300040	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300041	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300042	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300043	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300044	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300045	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
+3300046	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Rebel Logistics Officer	gcw_base_rebel_corellia_reward_officer_100_h_inv_n	Base Rebel	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	360	300
