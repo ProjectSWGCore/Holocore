@@ -193,19 +193,23 @@ public class TradeService extends Service {
 		CreatureObject initiator = tradeSession.getInitiator();
 		CreatureObject accepter = tradeSession.getAccepter();
 		
-		if(creature.equals(accepter) && !tradeSession.isAccepterVerified()){
+		if(creature.equals(accepter)){
 			accepter.sendSelf(new VerifyTradeMessage());
 			tradeSession.setAccepterVerified(true);
 		}
 		
-		if(creature.equals(initiator) && !tradeSession.isInitiatorVerified()){
+		if(creature.equals(initiator)){
 			initiator.sendSelf(new VerifyTradeMessage());
 			tradeSession.setInititatorVerified(true);
 		}
 		
 		if (!tradeSession.isInitiatorVerified() || !tradeSession.isAccepterVerified())
 			return;
-	
+		accepter.sendSelf(new TradeCompleteMessage());
+		initiator.sendSelf(new TradeCompleteMessage());
+		accepter.setTradeSession(null);
+		initiator.setTradeSession(null);
+		
 		tradeSession.moveToPartnerInventory(accepter, tradeSession.getFromItemList(accepter));
 		tradeSession.moveToPartnerInventory(initiator, tradeSession.getFromItemList(initiator));
 		
@@ -214,9 +218,6 @@ public class TradeService extends Service {
 		
 		initiator.setCashBalance(initiator.getCashBalance() + accepterTransfer - initiatorTransfer);
 		accepter.setCashBalance(accepter.getCashBalance() + initiatorTransfer - accepterTransfer);
-		
-		accepter.sendSelf(new TradeCompleteMessage());
-		initiator.sendSelf(new TradeCompleteMessage());
 	}
 	
 	private void handleTradeCompleteMessage(Player player) {
