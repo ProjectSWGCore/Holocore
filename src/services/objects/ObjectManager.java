@@ -30,6 +30,7 @@ package services.objects;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.debug.Log;
@@ -61,7 +62,7 @@ public class ObjectManager extends Manager {
 	private final RadialService radialService;
 	private final ClientBuildoutService clientBuildoutService;
 	private final StaticItemService staticItemService;
-
+	
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
 	private final AtomicBoolean started;
@@ -94,6 +95,7 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
+		ObjectLookup.setObjectManager(this);
 		objectMap.putAll(clientBuildoutService.loadClientObjects());
 		if (!loadObjects())
 			return false;
@@ -102,6 +104,35 @@ public class ObjectManager extends Manager {
 		}
 		objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		for (SWGObject obj : objectMap.values()) {
+			if (obj instanceof AIObject)
+				((AIObject) obj).aiStart();
+		}
+		started.set(true);
+		return super.start();
+	}
+	
+	@Override
+	public boolean stop() {
+		started.set(false);
+		for (SWGObject obj : objectMap.values()) {
+			if (obj instanceof AIObject)
+				((AIObject) obj).aiStop();
+		}
+		return super.stop();
+	}
+	
+	@Override
+	public boolean terminate() {
+		synchronized (database) {
+			database.close();
+		}
+		ObjectLookup.setObjectManager(null);
+		return super.terminate();
 	}
 	
 	private boolean loadObjects() {
@@ -142,34 +173,6 @@ public class ObjectManager extends Manager {
 		for (SWGObject child : obj.getContainedObjects()) {
 			addChildrenObjects(child);
 		}
-	}
-	
-	@Override
-	public boolean start() {
-		for (SWGObject obj : objectMap.values()) {
-			if (obj instanceof AIObject)
-				((AIObject) obj).aiStart();
-		}
-		started.set(true);
-		return super.start();
-	}
-	
-	@Override
-	public boolean stop() {
-		started.set(false);
-		for (SWGObject obj : objectMap.values()) {
-			if (obj instanceof AIObject)
-				((AIObject) obj).aiStop();
-		}
-		return super.stop();
-	}
-	
-	@Override
-	public boolean terminate() {
-		synchronized (database) {
-			database.close();
-		}
-		return super.terminate();
 	}
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
@@ -234,6 +237,20 @@ public class ObjectManager extends Manager {
 		objectMap.remove(object.getObjectId());
 		
 		return object;
+	}
+	
+	public static class ObjectLookup {
+		
+		private static final AtomicReference<ObjectManager> OBJECT_MANAGER = new AtomicReference<>(null);
+		
+		private static void setObjectManager(ObjectManager objManager) {
+			OBJECT_MANAGER.set(objManager);
+		}
+		
+		public static SWGObject getObjectById(long id) {
+			return OBJECT_MANAGER.get().getObjectById(id);
+		}
+		
 	}
 	
 }

@@ -133,8 +133,8 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private boolean isLocationValidToDuel(CreatureObject creature1, CreatureObject creature2) {
-		Location location1 = creature1.getLocation();
-		Location location2 = creature2.getLocation();
+		Location location1 = creature1.getWorldLocation();
+		Location location2 = creature2.getWorldLocation();
 		if (location1.getTerrain() != location2.getTerrain())
 			return false;
 		return location1.isWithinDistance(location2, 32);
