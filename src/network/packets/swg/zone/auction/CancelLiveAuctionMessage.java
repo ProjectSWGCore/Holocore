@@ -33,7 +33,7 @@ import network.packets.swg.SWGPacket;
 
 public class CancelLiveAuctionMessage extends SWGPacket {
 	
-	public static final int CRC = 0x3687A4D2;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("CancelLiveAuctionMessage");
 	
 	public CancelLiveAuctionMessage() {
 		

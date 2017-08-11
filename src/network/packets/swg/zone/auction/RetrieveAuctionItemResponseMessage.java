@@ -33,7 +33,7 @@ import network.packets.swg.SWGPacket;
 
 public class RetrieveAuctionItemResponseMessage extends SWGPacket {
 	
-	public static final int CRC = 0x9499EF8C;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("RetrieveAuctionItemResponseMessage");
 	
 	public RetrieveAuctionItemResponseMessage() {
 		
