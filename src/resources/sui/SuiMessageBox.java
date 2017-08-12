@@ -83,6 +83,11 @@ public class SuiMessageBox extends SuiWindow {
 				setCancelButtonText("@cancel");
 				setRevertButtonText("@retry");
 				break;
+			case OK_LEAVE_GROUP:
+				setOkButtonText();
+				setCancelButtonText("@group:leave_group");
+				setShowRevertButton(false);
+				break;				
 			case OK:
 			default:
 				setOkButtonText();
