@@ -51,26 +51,6 @@ public class IsVendorOwnerResponseMessage extends SWGPacket {
 		this.maxPageSize = maxPageSize;
 	}
 	
-	public int getOwnerResult() {
-		return ownerResult;
-	}
-
-	public int getAuctionResult() {
-		return auctionResult;
-	}
-
-	public long getContainerId() {
-		return containerId;
-	}
-
-	public String getMarketName() {
-		return marketName;
-	}
-
-	public short getMaxPageSize() {
-		return maxPageSize;
-	}
-
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
@@ -93,6 +73,26 @@ public class IsVendorOwnerResponseMessage extends SWGPacket {
 		data.addInt(ownerResult);
 		data.addShort(maxPageSize);		
 		return data;
+	}	
+
+	public int getOwnerResult() {
+		return ownerResult;
+	}
+
+	public int getAuctionResult() {
+		return auctionResult;
+	}
+
+	public long getContainerId() {
+		return containerId;
+	}
+
+	public String getMarketName() {
+		return marketName;
+	}
+
+	public short getMaxPageSize() {
+		return maxPageSize;
 	}
 	
 	public enum VendorOwnerResult {

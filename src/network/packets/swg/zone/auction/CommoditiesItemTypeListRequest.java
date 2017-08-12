@@ -10,10 +10,6 @@ public class CommoditiesItemTypeListRequest extends SWGPacket {
 	
 	private String from;
 
-	public String getFrom() {
-		return from;
-	}
-
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
@@ -23,10 +19,14 @@ public class CommoditiesItemTypeListRequest extends SWGPacket {
 
 	@Override
 	public NetBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(6);
+		NetBuffer data = NetBuffer.allocate(6 + from.length());
 		data.addShort(2);
 		data.addInt(CRC);
 		data.addAscii(from);
 		return data;
+	}
+	
+	public String getFrom() {
+		return from;
 	}
 }

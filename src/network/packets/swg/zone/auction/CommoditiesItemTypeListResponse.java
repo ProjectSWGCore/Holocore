@@ -16,7 +16,7 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 	private int placeholder;
 	private String type;	
 
-	public CommoditiesItemTypeListResponse(String serverName, int subCategoryCounter, int subCatagory,	int itemsInSubCategory, String categoryName, int placeholder, String type) {
+	public CommoditiesItemTypeListResponse(String serverName, int subCategoryCounter, int subCatagory, int itemsInSubCategory, String categoryName, int placeholder, String type) {
 		this.serverName = serverName;
 		this.subCategoryCounter = subCategoryCounter;
 		this.subCatagory = subCatagory;
@@ -24,34 +24,6 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 		this.categoryName = categoryName;
 		this.placeholder = placeholder;
 		this.type = type;
-	}
-
-	public String getServerName() {
-		return serverName;
-	}
-
-	public int getSubCategoryCounter() {
-		return subCategoryCounter;
-	}
-
-	public int getSubCatagory() {
-		return subCatagory;
-	}
-
-	public int getItemsInSubCategory() {
-		return itemsInSubCategory;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public int getPlaceholder() {
-		return placeholder;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	@Override
@@ -80,5 +52,33 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 		data.addInt(placeholder);
 		data.addUnicode(type);
 		return data;
+	}
+
+	public String getServerName() {
+		return serverName;
+	}
+
+	public int getSubCategoryCounter() {
+		return subCategoryCounter;
+	}
+
+	public int getSubCatagory() {
+		return subCatagory;
+	}
+
+	public int getItemsInSubCategory() {
+		return itemsInSubCategory;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public int getPlaceholder() {
+		return placeholder;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

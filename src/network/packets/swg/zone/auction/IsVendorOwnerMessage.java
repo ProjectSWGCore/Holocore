@@ -10,10 +10,6 @@ public class IsVendorOwnerMessage extends SWGPacket {
 	
 	private long terminalId;	
 	
-	public long getTerminalId() {
-		return terminalId;
-	}
-
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
@@ -28,5 +24,9 @@ public class IsVendorOwnerMessage extends SWGPacket {
 		data.addInt(CRC);
 		data.addLong(terminalId);
 		return data;
+	}
+	
+	public long getTerminalId() {
+		return terminalId;
 	}
 }
