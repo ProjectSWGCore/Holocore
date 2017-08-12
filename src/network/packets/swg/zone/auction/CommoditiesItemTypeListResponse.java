@@ -30,7 +30,7 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
-		serverName = data.getAscii();	
+		serverName = data.getAscii();
 		subCategoryCounter = data.getInt();
 		subCatagory = data.getInt();
 		itemsInSubCategory = data.getInt();

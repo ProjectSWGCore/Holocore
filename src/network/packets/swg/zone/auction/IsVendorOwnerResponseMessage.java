@@ -71,7 +71,7 @@ public class IsVendorOwnerResponseMessage extends SWGPacket {
 		data.addInt(auctionResult);
 		data.addAscii(marketName);
 		data.addInt(ownerResult);
-		data.addShort(maxPageSize);		
+		data.addShort(maxPageSize);
 		return data;
 	}	
 
