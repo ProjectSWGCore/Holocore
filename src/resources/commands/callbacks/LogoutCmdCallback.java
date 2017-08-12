@@ -33,7 +33,7 @@ import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.connection.ForceLogoutIntent;
 import resources.Posture;
 import resources.commands.ICmdCallback;
@@ -64,7 +64,7 @@ public class LogoutCmdCallback implements ICmdCallback {
 		}
 		
 		if (timeToLogout == 0) {
-			IntentChain.broadcastChain(new ChatBroadcastIntent(player, "@logout:safe_to_log_out"), new ForceLogoutIntent(player));
+			IntentChain.broadcastChain(new SystemMessageIntent(player, "@logout:safe_to_log_out"), new ForceLogoutIntent(player));
 			return;
 		}
 		if (isSystemMessageInterval(timeToLogout)) {
@@ -98,11 +98,11 @@ public class LogoutCmdCallback implements ICmdCallback {
 	}
 	
 	private void sendSystemMessage(Player player, String str) {
-		new ChatBroadcastIntent(player, "@logout:" + str).broadcast();
+		new SystemMessageIntent(player, "@logout:" + str).broadcast();
 	}
 	
 	private void sendSystemMessage(Player player, String str, String proseKey, Object prose) {
-		new ChatBroadcastIntent(player, new ProsePackage(new StringId("@logout:" + str), proseKey, prose)).broadcast();
+		new SystemMessageIntent(player, new ProsePackage(new StringId("@logout:" + str), proseKey, prose)).broadcast();
 	}
 	
 }

@@ -36,7 +36,7 @@ import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.travel.TicketPurchaseIntent;
@@ -193,7 +193,7 @@ public class TravelService extends Service {
 		List<SWGObject> usableTickets = travel.getTickets(player.getCreatureObject());
 		
 		if (usableTickets.isEmpty()) {	// They don't have a valid ticket.
-			new ChatBroadcastIntent(player, "@travel:no_ticket_for_shuttle").broadcast();
+			new SystemMessageIntent(player, "@travel:no_ticket_for_shuttle").broadcast();
 		} else {
 			SuiListBox ticketBox = new SuiListBox(SuiButtons.OK_CANCEL, "@travel:select_destination", "@travel:select_destination");
 			
@@ -258,11 +258,11 @@ public class TravelService extends Service {
 	}
 	
 	private void sendTravelMessage(CreatureObject creature, String message) {
-		new ChatBroadcastIntent(creature.getOwner(), message).broadcast();
+		new SystemMessageIntent(creature.getOwner(), message).broadcast();
 	}
 	
 	private void sendTravelMessage(CreatureObject creature, String str, String key, Object obj) {
-		new ChatBroadcastIntent(creature.getOwner(), new ProsePackage(new StringId(str), key, obj)).broadcast();
+		new SystemMessageIntent(creature.getOwner(), new ProsePackage(new StringId(str), key, obj)).broadcast();
 	}
 	
 	private void showMessageBox(CreatureObject creature, String message) {

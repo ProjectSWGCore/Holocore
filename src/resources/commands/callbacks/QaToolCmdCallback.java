@@ -35,7 +35,7 @@ import com.projectswg.common.debug.Log;
 
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.CreateStaticItemIntent;
@@ -153,12 +153,12 @@ public class QaToolCmdCallback implements ICmdCallback {
 		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
 			@Override
 			public void success(SWGObject[] createdObjects) {
-				new ChatBroadcastIntent(player, "@system_msg:give_item_success").broadcast();
+				new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
 			}
 
 			@Override
 			public void containerFull() {
-				new ChatBroadcastIntent(player, "@system_msg:give_item_failure").broadcast();
+				new SystemMessageIntent(player, "@system_msg:give_item_failure").broadcast();
 			}
 
 			@Override
@@ -243,7 +243,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void sendSystemMessage(Player player, String message) {
-		new ChatBroadcastIntent(player, message).broadcast();
+		new SystemMessageIntent(player, message).broadcast();
 	}
 	
 	/* Callbacks */

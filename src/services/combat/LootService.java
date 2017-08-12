@@ -27,19 +27,25 @@
  */
 package services.combat;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatCommandIntent;
-import intents.combat.CreatureKilledIntent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
 
+import intents.chat.ChatCommandIntent;
+import intents.chat.SystemMessageIntent;
+import intents.combat.CreatureKilledIntent;
 import intents.object.ContainerTransferIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
@@ -253,6 +259,8 @@ public final class LootService extends Service {
 				lootAll(rsi.getPlayer().getCreatureObject(), rsi.getTarget());
 				break;
 			}
+			default:
+				break;
 		}
 	}
 	
@@ -387,7 +395,7 @@ public final class LootService extends Service {
 
 				if (randomItemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
-					new ChatBroadcastIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
+					new SystemMessageIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);

@@ -46,7 +46,7 @@ import intents.DanceIntent;
 import intents.FlourishIntent;
 import intents.PlayerEventIntent;
 import intents.WatchIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.experience.ExperienceIntent;
 import intents.player.PlayerTransformedIntent;
 import network.packets.swg.zone.object_controller.Animation;
@@ -123,7 +123,7 @@ public class EntertainmentService extends Service {
 			boolean changeDance = di.isChangeDance();
 			
 			if (!changeDance && dancer.isPerforming()) {
-				new ChatBroadcastIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
+				new SystemMessageIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
 			} else if (performanceMap.containsKey(danceName)) {
 				// The dance name is valid.
 				if (dancer.hasAbility("startDance+" + danceName)) {
@@ -135,11 +135,11 @@ public class EntertainmentService extends Service {
 					}
 				} else {
 					// This creature doesn't have the ability to perform this dance.
-					new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_lack_skill_self").broadcast();
+					new SystemMessageIntent(dancer.getOwner(), "@performance:dance_lack_skill_self").broadcast();
 				}
 			} else {
 				// This dance name is invalid
-				new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_unknown_self").broadcast();
+				new SystemMessageIntent(dancer.getOwner(), "@performance:dance_unknown_self").broadcast();
 			}
 		} else {
 			// This intent wants the creature to stop dancing
@@ -199,7 +199,7 @@ public class EntertainmentService extends Service {
 		
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
 		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
-		new ChatBroadcastIntent(performer, "@performance:flourish_perform").broadcast();
+		new SystemMessageIntent(performer, "@performance:flourish_perform").broadcast();
 	}
 	
 	private void handleWatchIntent(WatchIntent wi) {
@@ -230,11 +230,11 @@ public class EntertainmentService extends Service {
 					}
 				} else {
 					// While this is a valid target for watching, the target is currently not performing.
-					new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getObjectName())).broadcast();
+					new SystemMessageIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getObjectName())).broadcast();
 				}
 			} else {
 				// You can't watch NPCs, regardless of whether they're dancing or not
-				new ChatBroadcastIntent(actorOwner, "@performance:dance_watch_npc").broadcast();
+				new SystemMessageIntent(actorOwner, "@performance:dance_watch_npc").broadcast();
 			}
 		}
 	}
@@ -324,7 +324,7 @@ public class EntertainmentService extends Service {
 		if(isEntertainer(dancer))
 			scheduleExperienceTask(dancer, danceName);
 		
-		new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
+		new SystemMessageIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
 	}
 
 	private void stopDancing(CreatureObject dancer) {
@@ -340,9 +340,9 @@ public class EntertainmentService extends Service {
 				performerMap.remove(dancer.getObjectId()).clearSpectators();
 			}
 			
-			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();
+			new SystemMessageIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();
 		} else {
-			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_not_performing").broadcast();
+			new SystemMessageIntent(dancer.getOwner(), "@performance:dance_not_performing").broadcast();
 		}
 	}
 	
@@ -353,13 +353,13 @@ public class EntertainmentService extends Service {
 
 	private void startWatching(CreatureObject actor, CreatureObject creature) {
 		actor.setMoodAnimation("entertained");
-		new ChatBroadcastIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getObjectName())).broadcast();
+		new SystemMessageIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getObjectName())).broadcast();
 		actor.setPerformanceListenTarget(creature.getObjectId());
 	}
 	private void stopWatching(CreatureObject actor, boolean displaySystemMessage) {
 		actor.setMoodAnimation("");
 		if(displaySystemMessage)
-			new ChatBroadcastIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
+			new SystemMessageIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
 		actor.setPerformanceListenTarget(0);
 	}
 	

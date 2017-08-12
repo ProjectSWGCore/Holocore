@@ -1,5 +1,4 @@
-/**
- * *********************************************************************************
+/************************************************************************************
  * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
  *                                                                                  *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
@@ -23,27 +22,62 @@
  * GNU Affero General Public License for more details.                              *
  *                                                                                  *
  * You should have received a copy of the GNU Affero General Public License         *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>. * *
- * *********************************************************************************
- */
-package resources.commands.callbacks;
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
+package resources.server_info;
 
-import intents.chat.SystemMessageIntent;
-import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
-import resources.player.Player;
-import services.galaxy.GalacticManager;
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
-public class ChangeDanceCallback extends StartDanceCallback {
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteConcern;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.projectswg.common.debug.Log;
+
+import resources.server_info.SdbLoader.SdbResultSet;
+
+public class MongoServerData implements Closeable {
+	
+	private final MongoClient client;
+	private final MongoDatabase database;
+	private final MongoCollection<Document> collection;
+	
+	public MongoServerData(String collection) {
+		this.client = new MongoClient(new ServerAddress(), MongoClientOptions.builder().writeConcern(WriteConcern.UNACKNOWLEDGED).build());
+		this.database = client.getDatabase("holocore");
+		this.collection = database.getCollection(collection);
+	}
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		CreatureObject actor = player.getCreatureObject();
-		
-		if(actor.isPerforming()) {	// They need to be dancing in the first place!
-			super.handleCommand(galacticManager, player, target, args, true);
-		} else {
-			new SystemMessageIntent(player, "@performance:dance_must_be_performing_self").broadcast();
+	public void close() {
+		client.close();
+	}
+	
+	public void importFromSdb(String sdb) {
+		SdbLoader loader = new SdbLoader();
+		try {
+			SdbResultSet set = loader.load(new File("serverdata", sdb));
+			List<String> columnList = set.getColumns();
+			String [] columns = columnList.toArray(new String[columnList.size()]);
+			Document doc;
+			collection.drop();
+			while (set.next()) {
+				doc = new Document();
+				for (int i = 0; i < columns.length; i++) {
+					doc.put(columns[i], set.getObject(i));
+				}
+				collection.insertOne(doc);
+			}
+		} catch (IOException e) {
+			Log.e(e);
 		}
 	}
 	

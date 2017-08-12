@@ -36,7 +36,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.object.ObjectTeleportIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -65,7 +65,7 @@ public class GotoCmdCallback implements ICmdCallback  {
 			
 		}
 		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc, cell);
-		new ChatBroadcastIntent(player, err).broadcast();
+		new SystemMessageIntent(player, err).broadcast();
 	}
 	
 	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc, int cell) {

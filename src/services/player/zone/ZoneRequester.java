@@ -33,7 +33,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
 import intents.RequestZoneInIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import network.packets.swg.ErrorMessage;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
@@ -75,7 +75,7 @@ public class ZoneRequester {
 	private boolean debugChecks(SWGObject creatureObject, Player player, long characterId) {
 		if (isSafeZone()) {
 			creatureObject.setPosition(Terrain.DEV_AREA, 0, 0, 0);
-			new ChatBroadcastIntent(player, "Safe-zoning into dev terrain at (0, 0, 0)").broadcast();
+			new SystemMessageIntent(player, "Safe-zoning into dev terrain at (0, 0, 0)").broadcast();
 		}
 		return true;
 	}
