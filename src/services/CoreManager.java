@@ -152,7 +152,7 @@ public class CoreManager extends Manager {
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {
-		packetLogger.log("%s %d:\t%s%n", in?"IN ":"OUT", networkId, str);
+		packetLogger.log("%s %d:\t%s", in?"IN ":"OUT", networkId, str);
 	}
 	
 	private boolean isPacketDebug() {

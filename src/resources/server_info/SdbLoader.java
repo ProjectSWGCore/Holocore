@@ -31,7 +31,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.projectswg.common.debug.Log;
@@ -100,6 +102,14 @@ public class SdbLoader {
 				return true;
 			}
 			return false;
+		}
+		
+		public List<String> getColumns() {
+			return new ArrayList<>(columnNames.keySet());
+		}
+		
+		public Object getObject(int index) {
+			return columnValues[index];
 		}
 		
 		public String getText(int index) {
