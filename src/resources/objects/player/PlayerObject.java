@@ -375,8 +375,9 @@ public class PlayerObject extends IntangibleObject {
 		return play3.getProfessionIcon();
 	}
 	
-	public void addDraftSchematic(String schematic) {
-		play9.addDraftSchematic(schematic, this);
+	public void addDraftSchematic(int serverCrc, int clientCrc, int counter) {
+		long combinedCrc = (((long) serverCrc << 32) & 0xFFFFFFFF00000000l) | (clientCrc & 0x00000000FFFFFFFFl);
+		play9.addDraftSchematic(combinedCrc, counter , this);
 	}
 	
 	public int getExperiencePoints(String xpType) {

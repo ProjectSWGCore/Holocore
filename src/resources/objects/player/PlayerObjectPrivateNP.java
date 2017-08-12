@@ -36,6 +36,7 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
 import resources.collections.SWGList;
+import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -46,7 +47,7 @@ class PlayerObjectPrivateNP implements Persistable {
 	private int 				experimentFlag		= 0;
 	private int 				craftingStage		= 0;
 	private long 				nearbyCraftStation	= 0;
-	private SWGList<String> 	draftSchemList		= new SWGList<>(9, 3, StringType.ASCII);
+	private SWGMap<Long, Integer> 	draftSchemList		= new SWGMap<>(9, 3);
 	private int 				experimentPoints	= 0;
 	private SWGList<String> 	friendsList			= new SWGList<>(9, 7, StringType.ASCII);
 	private SWGList<String> 	ignoreList			= new SWGList<>(9, 8, StringType.ASCII);
@@ -127,8 +128,8 @@ class PlayerObjectPrivateNP implements Persistable {
 		ignoreList.sendRefreshedListData(target);
 	}
 	
-	public void addDraftSchematic(String schematic, SWGObject target) {
-		draftSchemList.add(schematic);
+	public void addDraftSchematic(long combinedCrc, int counter, SWGObject target) {
+		draftSchemList.put(combinedCrc, counter);
 		draftSchemList.sendDeltaMessage(target);
 	}
 	
@@ -176,7 +177,6 @@ class PlayerObjectPrivateNP implements Persistable {
 		stream.addInt(languageId);
 		stream.addInt(killMeter);
 		stream.addLong(petId);
-		stream.addList(draftSchemList, (s) -> stream.addAscii(s));
 		stream.addList(friendsList, (s) -> stream.addAscii(s));
 		stream.addList(ignoreList, (s) -> stream.addAscii(s));
 		stream.addList(petAbilities, (s) -> stream.addAscii(s));
@@ -189,7 +189,6 @@ class PlayerObjectPrivateNP implements Persistable {
 		languageId = stream.getInt();
 		killMeter = stream.getInt();
 		petId = stream.getLong();
-		stream.getList((i) -> draftSchemList.add(stream.getAscii()));
 		stream.getList((i) -> friendsList.add(stream.getAscii()));
 		stream.getList((i) -> ignoreList.add(stream.getAscii()));
 		stream.getList((i) -> petAbilities.add(stream.getAscii()));
