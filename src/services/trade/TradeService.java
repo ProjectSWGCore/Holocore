@@ -27,43 +27,6 @@ import resources.sui.SuiMessageBox;
 import services.objects.ObjectManager;
 import services.objects.ObjectManager.ObjectLookup;
 
-/*
- * Server Packets: 
- *   class BeginTradeMessage	: ServerSecureTrade::beginTrading()
- *   class AbortTradeMessage	: ServerSecureTrade::cancelTrade()
- *   
- *   class AddItemMessage		: ServerSecureTrade::addItem() [forwarded]
- *   class AddItemFailedMessage	: ServerSecureTrade::addItem()
- *   class RemoveItemMessage	: --commented out--
- *   class GiveMoneyMessage		: ServerSecureTrade::giveMoney() [forwarded]
- *   class TradeCompleteMessage	: ServerSecureTrade::completeTrade()
- *   
- *   class AcceptTransactionMessage		: ServerSecureTrade::acceptOffer() [forwarded]
- *   class UnAcceptTransactionMessage	: ServerSecureTrade::unacceptOffer() [forwarded]
- *   
- *   class VerifyTradeMessage			: ServerSecureTrade::verifyTrade() [forwarded]
- *   class DenyTradeMessage				: ServerSecureTrade::rejectOffer() [forwarded]
- *   class BeginVerificationMessage		: ServerSecureTrade::beginVerification()
- * Notes:
- *   + A sends TMI_RequestTrade
- *     + S sends TMI_TradeRequested to B
- *   + B sends AcceptTradeMessage
- *     + S sends BeginTradeMessage to Act
- *     
- *     + S sends BeginTradeMessage to B
- *   ----- In Trade -----
- *       + A/B sends AddItemMessage
- *         + S either sends AddItemFailedMessage or forwards packet
- *       + A/B sends GiveMoneyMessage
- *         + S forwards packet
- *       + A/B sends AcceptTransactionMessage
- *         + S forwards packet
- *         + if both accept, S sends BeginVerifyMessage
- *       + A/B sends VerifyTradeMessage
- *         + S forwards packet
- *       + S sends TradeCompleteMessage when done
- *       + 
- */
 public class TradeService extends Service {
 	
 	private final List<TradeSession> tradeSessions;
