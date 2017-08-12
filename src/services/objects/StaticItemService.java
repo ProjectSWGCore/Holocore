@@ -38,7 +38,7 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
@@ -212,7 +212,7 @@ public final class StaticItemService extends Service {
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
 					Log.e(errorMessage);
-					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
+					new SystemMessageIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
 			

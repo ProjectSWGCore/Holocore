@@ -32,7 +32,7 @@ import java.util.Map;
 
 import com.projectswg.common.data.location.Location;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.commands.ICmdCallback;
 import resources.encodables.ProsePackage;
@@ -59,19 +59,19 @@ public class FindFriendCallback implements ICmdCallback {
 		String friendName = args.split(" ")[0].toLowerCase(Locale.US);
 
 		if (!ghost.isFriend(friendName)) {
-			new ChatBroadcastIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
+			new SystemMessageIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
 			return;
 		}
 
 		Player friend = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(friendName);
 		if (friend == null || friend.getPlayerState() != PlayerState.ZONED_IN) {
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_failed"), "TU", friendName)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_failed"), "TU", friendName)).broadcast();
 			return;
 		}
 
 		PlayerObject friendGhost = friend.getPlayerObject();
 		if (friendGhost == null || !friendGhost.isFriend(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_failed"), "TU", friendName)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_failed"), "TU", friendName)).broadcast();
 			return;
 		}
 
@@ -94,11 +94,11 @@ public class FindFriendCallback implements ICmdCallback {
 			waypoint.setName(friendName);
 			ghost.addWaypoint(waypoint);
 			new ObjectCreatedIntent(waypoint).broadcast();
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_create_new_wp"), "TU", friendName)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_create_new_wp"), "TU", friendName)).broadcast();
 		} else {
 			waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
 			ghost.updateWaypoint(waypoint);
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location"), "TU", friendName)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location"), "TU", friendName)).broadcast();
 		}
 	}
 }

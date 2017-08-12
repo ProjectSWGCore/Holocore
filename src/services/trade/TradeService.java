@@ -7,7 +7,7 @@ import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Log;
 
 import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.SecureTrade;
@@ -261,7 +261,7 @@ public class TradeService extends Service {
 	}
 	
 	private void sendSystemMessage(Player player, String str) {
-		ChatBroadcastIntent.broadcastPersonal(player, "@ui_trade:" + str);
+		SystemMessageIntent.broadcastPersonal(player, "@ui_trade:" + str);
 	}
 	
 }

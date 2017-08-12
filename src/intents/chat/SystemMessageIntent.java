@@ -33,7 +33,7 @@ import com.projectswg.common.data.location.Terrain;
 import resources.encodables.ProsePackage;
 import resources.player.Player;
 
-public class ChatBroadcastIntent extends Intent {
+public class SystemMessageIntent extends Intent {
 	
 	private final BroadcastType broadcastType;
 	private final Player receiver;
@@ -43,11 +43,12 @@ public class ChatBroadcastIntent extends Intent {
 	
 	/**
 	 * Custom broadcast type with a specified receiver and message
+	 * 
 	 * @param receiver the receiver to send to
 	 * @param message the message to send
 	 * @param type the broadcast type
 	 */
-	public ChatBroadcastIntent(Player receiver, String message, BroadcastType type) {
+	public SystemMessageIntent(Player receiver, String message, BroadcastType type) {
 		this.broadcastType = type;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -57,10 +58,11 @@ public class ChatBroadcastIntent extends Intent {
 	
 	/**
 	 * Planet-wide message to the specified terrain with the message
+	 * 
 	 * @param terrain the terrain to broadcast on
 	 * @param message the message to send
 	 */
-	public ChatBroadcastIntent(Terrain terrain, String message) {
+	public SystemMessageIntent(Terrain terrain, String message) {
 		this.broadcastType = BroadcastType.PLANET;
 		this.receiver = null;
 		this.terrain = terrain;
@@ -70,10 +72,11 @@ public class ChatBroadcastIntent extends Intent {
 	
 	/**
 	 * Personal message to the receiver with the prose package
+	 * 
 	 * @param receiver the receiver
 	 * @param prose the prose package to send
 	 */
-	public ChatBroadcastIntent(Player receiver, ProsePackage prose) {
+	public SystemMessageIntent(Player receiver, ProsePackage prose) {
 		this.broadcastType = BroadcastType.PERSONAL;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -83,10 +86,11 @@ public class ChatBroadcastIntent extends Intent {
 	
 	/**
 	 * Personal message to the receiver with the message
+	 * 
 	 * @param receiver the receiver
 	 * @param message the message
 	 */
-	public ChatBroadcastIntent(Player receiver, String message) {
+	public SystemMessageIntent(Player receiver, String message) {
 		this.broadcastType = BroadcastType.PERSONAL;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -95,11 +99,10 @@ public class ChatBroadcastIntent extends Intent {
 	}
 	
 	/**
-	 * 
-	 * @param message
-	 * @param type
+	 * @param message the message
+	 * @param type the broadcast type
 	 */
-	public ChatBroadcastIntent(String message, BroadcastType type) {
+	public SystemMessageIntent(String message, BroadcastType type) {
 		this.broadcastType = type;
 		this.receiver = null;
 		this.terrain = null;
@@ -128,26 +131,29 @@ public class ChatBroadcastIntent extends Intent {
 	}
 	
 	public static void broadcastPersonal(Player receiver, String message) {
-		new ChatBroadcastIntent(receiver, message).broadcast();
+		new SystemMessageIntent(receiver, message).broadcast();
 	}
 	
 	public static void broadcastPersonal(Player receiver, ProsePackage prose) {
-		new ChatBroadcastIntent(receiver, prose).broadcast();
+		new SystemMessageIntent(receiver, prose).broadcast();
 	}
 	
 	public static void broadcastArea(Player receiver, String message) {
-		new ChatBroadcastIntent(receiver, message, BroadcastType.AREA).broadcast();
+		new SystemMessageIntent(receiver, message, BroadcastType.AREA).broadcast();
 	}
 	
 	public static void broadcastPlanet(Terrain terrain, String message) {
-		new ChatBroadcastIntent(terrain, message).broadcast();
+		new SystemMessageIntent(terrain, message).broadcast();
 	}
 	
 	public static void broadcastGalaxy(String message) {
-		new ChatBroadcastIntent(message, BroadcastType.GALAXY).broadcast();
+		new SystemMessageIntent(message, BroadcastType.GALAXY).broadcast();
 	}
 	
 	public enum BroadcastType {
-		AREA, PLANET, GALAXY, PERSONAL
+		AREA,
+		PLANET,
+		GALAXY,
+		PERSONAL
 	}
 }

@@ -1,4 +1,4 @@
-import intents.chat.ChatBroadcastIntent
+import intents.chat.SystemMessageIntent
 import resources.objects.SWGObject
 import resources.player.AccessLevel
 import resources.player.Player
@@ -6,7 +6,7 @@ import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	if (player.getAccessLevel() == AccessLevel.PLAYER) {
-		new ChatBroadcastIntent(player, "Players cannot use this command :(").broadcast();
+		SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(")
 		return
 	}
 
@@ -17,9 +17,9 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 
 	if (creatureObject.hasAbility("admin")) {
 		creatureObject.removeAbility("admin")
-		new ChatBroadcastIntent(player, "God Mode Disabled").broadcast();
+		SystemMessageIntent.broadcastPersonal(player, "God Mode Disabled")
 	} else {
 		creatureObject.addAbility("admin")
-		new ChatBroadcastIntent(player, "God Mode Enabled").broadcast();
+		SystemMessageIntent.broadcastPersonal(player, "God Mode Enabled")
 	}
 }

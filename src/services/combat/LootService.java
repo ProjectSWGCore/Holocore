@@ -43,7 +43,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.object.CreateStaticItemIntent;
@@ -359,7 +359,7 @@ public final class LootService extends Service {
 
 				if (randomItemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
-					new ChatBroadcastIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
+					new SystemMessageIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);

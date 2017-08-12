@@ -37,7 +37,7 @@ import com.projectswg.common.debug.Log;
 
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -152,14 +152,14 @@ public class CommandLauncher {
 			String playerAccessLevel = player.getAccessLevel().toString();
 			Log.i("[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s", player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
 			String errorProseString1 = "use that command";
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", commandAccessLevel)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", commandAccessLevel)).broadcast();
 			return;
 		}
 		
 		if (!command.getCharacterAbility().isEmpty() && !player.getCreatureObject().hasAbility(command.getCharacterAbility())) {
 			Log.i("[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s", player.getCharacterName(), command.getName(), command.getCharacterAbility());
 			String errorProseString = String.format("use the %s command", command.getName());
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
 			return;
 		}
 		

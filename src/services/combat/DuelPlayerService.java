@@ -30,7 +30,7 @@ package services.combat;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.combat.DuelPlayerIntent;
 import resources.PvpFlag;
 import resources.encodables.ProsePackage;
@@ -141,6 +141,6 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void sendSystemMessage(CreatureObject playerToMessage, CreatureObject playerToMessageAbout, String message) {
-		new ChatBroadcastIntent(playerToMessage.getOwner() , new ProsePackage(new StringId("duel", message), "TT", playerToMessageAbout.getObjectName())).broadcast();
+		new SystemMessageIntent(playerToMessage.getOwner() , new ProsePackage(new StringId("duel", message), "TT", playerToMessageAbout.getObjectName())).broadcast();
 	}
 }

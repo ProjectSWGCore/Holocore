@@ -30,7 +30,7 @@ package resources.commands.callbacks;
 
 import com.projectswg.common.debug.Assert;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
@@ -50,7 +50,7 @@ public class TransferItemCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		// There must always be a target for transfer
 		if (target == null) {
-			new ChatBroadcastIntent(player, "@container_error_message:container29").broadcast();
+			new SystemMessageIntent(player, "@container_error_message:container29").broadcast();
 			return;
 		}
 
@@ -58,7 +58,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 		// You can't transfer your own creature
 		if (actor.equals(target)) {
-			new ChatBroadcastIntent(player, "@container_error_message:container17").broadcast();
+			new SystemMessageIntent(player, "@container_error_message:container17").broadcast();
 			return;
 		}
 
@@ -71,19 +71,19 @@ public class TransferItemCallback implements ICmdCallback {
 
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
 			if (newContainer == null) {
-				new ChatBroadcastIntent(player, "@container_error_message:container15").broadcast();
+				new SystemMessageIntent(player, "@container_error_message:container15").broadcast();
 				return;
 			}
 
 			// You can't add something to itself
 			if (target.equals(newContainer)) {
-				new ChatBroadcastIntent(player, "@container_error_message:container02").broadcast();
+				new SystemMessageIntent(player, "@container_error_message:container02").broadcast();
 				return;
 			}
 
 			// You can't move an object to a container that it's already inside
 			if (oldContainer.equals(newContainer)) {
-				new ChatBroadcastIntent(player, "@container_error_message:container11").broadcast();
+				new SystemMessageIntent(player, "@container_error_message:container11").broadcast();
 				return;
 			}
 
@@ -93,7 +93,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
-				new ChatBroadcastIntent(player, "@container_error_message:container12").broadcast();
+				new SystemMessageIntent(player, "@container_error_message:container12").broadcast();
 				return;
 			}
 
@@ -102,7 +102,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 			if (containerParent != null && containerParent.equals(appearanceInventory)) {
 				// Don't be fooled - the message below contains no prose keys
-				new ChatBroadcastIntent(player, "@container_error_message:container34_prose").broadcast();
+				new SystemMessageIntent(player, "@container_error_message:container34_prose").broadcast();
 				return;
 			}
 
@@ -110,7 +110,7 @@ public class TransferItemCallback implements ICmdCallback {
 			if (newContainer.equals(actor)) {
 				// If armor, they must have the "wear_all_armor" ability
 				if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
-					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
+					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
 					return;
 				}
 
@@ -118,7 +118,7 @@ public class TransferItemCallback implements ICmdCallback {
 				String reqLevelStr = target.getAttribute("required_combat_level");
 
 				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
-					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
+					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
 					return;
 				}
 				
@@ -130,7 +130,7 @@ public class TransferItemCallback implements ICmdCallback {
 				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
 					String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
 					if (!target.getAttribute("class_required").contains(profession)) {
-						new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+						new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
 						return;
 					}
 				}
@@ -140,7 +140,7 @@ public class TransferItemCallback implements ICmdCallback {
 			if (newContainer.equals(appearanceInventory)) {
 				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
 					// Don't be fooled - the message below contains no prose keys
-					new ChatBroadcastIntent(player, "@container_error_message:container33_prose").broadcast();
+					new SystemMessageIntent(player, "@container_error_message:container33_prose").broadcast();
 					return;
 				}
 			}
@@ -158,21 +158,21 @@ public class TransferItemCallback implements ICmdCallback {
 					}
 					break;
 				case CONTAINER_FULL:
-					new ChatBroadcastIntent(player, "@container_error_message:container03").broadcast();
+					new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
 					break;
 				case NO_PERMISSION:
-					new ChatBroadcastIntent(player, "@container_error_message:container08").broadcast();
+					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
 					break;
 				case SLOT_NO_EXIST:
-					new ChatBroadcastIntent(player, "@container_error_message:container06").broadcast();
+					new SystemMessageIntent(player, "@container_error_message:container06").broadcast();
 					break;
 				case SLOT_OCCUPIED:
-					new ChatBroadcastIntent(player, "@container_error_message:container08").broadcast();
+					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
 					break;
 			}
 		} catch (NumberFormatException e) {
 			// Lookup failed, their client gave us an object ID that couldn't be parsed to a long
-			new ChatBroadcastIntent(player, "@container_error_message:container15").broadcast();
+			new SystemMessageIntent(player, "@container_error_message:container15").broadcast();
 		}
 	}
 
@@ -181,7 +181,7 @@ public class TransferItemCallback implements ICmdCallback {
 	}
 
 	private static void sendNotEquippable(Player player) {
-		new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+		new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
 	}
 
 	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
