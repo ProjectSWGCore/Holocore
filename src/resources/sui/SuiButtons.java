@@ -51,7 +51,8 @@ public enum SuiButtons {
 	BET_MAX_BET_ONE_SPIN,
 	DEFAULT,
 	COMBO_OK,
-	COMBO_OK_CANCEL;
+	COMBO_OK_CANCEL,
+	OK_LEAVE_GROUP;
 
 	public static SuiButtons valueOf(int index) {
 		switch(index) {
