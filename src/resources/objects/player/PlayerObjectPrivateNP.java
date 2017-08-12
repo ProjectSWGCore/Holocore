@@ -47,8 +47,8 @@ class PlayerObjectPrivateNP implements Persistable {
 	private int 				experimentFlag		= 0;
 	private int 				craftingStage		= 0;
 	private long 				nearbyCraftStation	= 0;
-	private SWGMap<Long, Integer> 	draftSchemMap		= new SWGMap<>(9, 3);
-	private SWGList<String> draftSchemList = new SWGList<>(9,3, StringType.ASCII);
+	private SWGMap<Long, Integer> 	draftSchemMap	= new SWGMap<>(9, 3);
+	private SWGList<String>		draftSchemList		= new SWGList<>(9,3, StringType.ASCII);
 	private int 				experimentPoints	= 0;
 	private SWGList<String> 	friendsList			= new SWGList<>(9, 7, StringType.ASCII);
 	private SWGList<String> 	ignoreList			= new SWGList<>(9, 8, StringType.ASCII);
