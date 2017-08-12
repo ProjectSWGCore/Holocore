@@ -38,7 +38,7 @@ import network.packets.swg.SWGPacket;
 
 public class AuctionQueryHeadersResponseMessage extends SWGPacket {
 	
-	public static final int CRC = 0xFA500E52;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("AuctionQueryHeadersResponseMessage");
 	
 	private int counter;
 	private int screen;

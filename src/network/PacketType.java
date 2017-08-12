@@ -99,8 +99,11 @@ import network.packets.swg.zone.auction.AuctionQueryHeadersMessage;
 import network.packets.swg.zone.auction.AuctionQueryHeadersResponseMessage;
 import network.packets.swg.zone.auction.CancelLiveAuctionMessage;
 import network.packets.swg.zone.auction.CancelLiveAuctionResponseMessage;
+import network.packets.swg.zone.auction.CommoditiesItemTypeListRequest;
+import network.packets.swg.zone.auction.CommoditiesItemTypeListResponse;
 import network.packets.swg.zone.auction.GetAuctionDetails;
 import network.packets.swg.zone.auction.GetAuctionDetailsResponse;
+import network.packets.swg.zone.auction.IsVendorOwnerMessage;
 import network.packets.swg.zone.auction.IsVendorOwnerResponseMessage;
 import network.packets.swg.zone.auction.RetrieveAuctionItemMessage;
 import network.packets.swg.zone.auction.RetrieveAuctionItemResponseMessage;
@@ -331,7 +334,9 @@ public enum PacketType {
 		AUCTION_QUERY_HEADERS_RESPONSE_MESSAGE	(AuctionQueryHeadersResponseMessage.CRC, 	AuctionQueryHeadersResponseMessage.class),
 		RETRIEVE_AUCTION_ITEM_MESSAGE			(RetrieveAuctionItemMessage.CRC, 			RetrieveAuctionItemMessage.class),
 		RETRIEVE_AUCTION_ITEM_RESPONSE_MESSAGE	(RetrieveAuctionItemResponseMessage.CRC, 	RetrieveAuctionItemResponseMessage.class),
-
+		IS_VENDOR_OWNER_MESSAGE						(IsVendorOwnerMessage.CRC,						IsVendorOwnerMessage.class),
+		COMMODITIES_ITEM_TYPE_LIST_REPSONSE		(CommoditiesItemTypeListResponse.CRC,		CommoditiesItemTypeListResponse.class),
+		COMMODITIES_ITEM_TYPE_LIST_REQUEST		(CommoditiesItemTypeListRequest.CRC,		CommoditiesItemTypeListRequest.class),
 		
 		// Travel
 		ENTER_TICKET_PURCHASE_MODE_MESSAGE		(EnterTicketPurchaseModeMessage.CRC,		EnterTicketPurchaseModeMessage.class),

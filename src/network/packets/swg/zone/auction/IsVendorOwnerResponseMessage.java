@@ -27,36 +27,95 @@
 ***********************************************************************************/
 package network.packets.swg.zone.auction;
 
+import com.projectswg.common.data.EnumLookup;
 import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 public class IsVendorOwnerResponseMessage extends SWGPacket {
 	
-	public static final int CRC = 0xCE04173E;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("IsVendorOwnerResponseMessage");
+
+	private int ownerResult;
+	private int auctionResult;
+	private long containerId;
+	private String marketName;
+	private short maxPageSize;
 	
-	public IsVendorOwnerResponseMessage() {
-		
+	public IsVendorOwnerResponseMessage(long containerId, String marketName, int auctionResult, int ownerResult, short maxPageSize) {
+		super();
+		this.containerId = containerId;	
+		this.marketName = marketName;
+		this.auctionResult = auctionResult;
+		this.ownerResult = ownerResult;
+		this.maxPageSize = maxPageSize;
 	}
 	
-	public IsVendorOwnerResponseMessage(String command) {
-		
-	}
-	
-	public IsVendorOwnerResponseMessage(NetBuffer data) {
-		decode(data);
-	}
-	
+	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
-			return;
+			return;	
+		containerId = data.getLong();
+		auctionResult = data.getInt();
+		marketName = data.getAscii();
+		ownerResult = data.getInt();
+		maxPageSize = data.getShort();
 	}
 	
+	@Override
 	public NetBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(6);
-		data.addShort(2);
+		NetBuffer data = NetBuffer.allocate(26 + marketName.length());
+		data.addShort(5);
 		data.addInt(CRC);
+		data.addLong(containerId);
+		data.addInt(auctionResult);
+		data.addAscii(marketName);
+		data.addInt(ownerResult);
+		data.addShort(maxPageSize);
 		return data;
+	}	
+
+	public int getOwnerResult() {
+		return ownerResult;
 	}
 
+	public int getAuctionResult() {
+		return auctionResult;
+	}
+
+	public long getContainerId() {
+		return containerId;
+	}
+
+	public String getMarketName() {
+		return marketName;
+	}
+
+	public short getMaxPageSize() {
+		return maxPageSize;
+	}
+	
+	public enum VendorOwnerResult {
+		UNDEFINED					(Integer.MIN_VALUE),
+		IS_OWNER					(0),
+		IS_NOT_OWNER				(1),
+		IS_BAZAAR					(2);
+
+		
+		private static final EnumLookup<Integer, VendorOwnerResult> LOOKUP = new EnumLookup<>(VendorOwnerResult.class, t -> t.getId());
+		
+		private int id;
+		
+		VendorOwnerResult(int id) {
+			this.id = id;
+		}	
+		
+		public int getId() {
+			return id;
+		}
+		
+		public static VendorOwnerResult getTypeForInt(int id) {
+			return LOOKUP.getEnum(id, UNDEFINED);
+		}
+	}	
 }
