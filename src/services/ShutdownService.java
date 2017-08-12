@@ -36,8 +36,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.projectswg.common.control.Service;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.chat.SystemMessageIntent;
+import intents.chat.SystemMessageIntent.BroadcastType;
 import intents.server.ServerStatusIntent;
 import resources.control.ServerStatus;
 import utilities.ThreadUtilities;
@@ -124,7 +124,7 @@ public class ShutdownService extends Service {
 	}
 	
 	private void broadcast(String message) {
-		new ChatBroadcastIntent(message, BroadcastType.GALAXY).broadcast();
+		new SystemMessageIntent(message, BroadcastType.GALAXY).broadcast();
 	}
 	
 }

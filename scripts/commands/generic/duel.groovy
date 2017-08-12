@@ -5,7 +5,7 @@ import resources.player.Player
 import services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if (target.getOwner() == null)
+	if (target == null || target.getOwner() == null)
 		return
 
 	def creoTarget = target as CreatureObject

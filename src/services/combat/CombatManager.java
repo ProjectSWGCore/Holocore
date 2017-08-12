@@ -49,7 +49,7 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
 import intents.BuffIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureIncapacitatedIntent;
 import intents.combat.CreatureKilledIntent;
@@ -514,8 +514,8 @@ public class CombatManager extends Manager {
 		}
 		
 		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
-		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
-		new ChatBroadcastIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		new SystemMessageIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
+		new SystemMessageIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
 		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
 	}
 	

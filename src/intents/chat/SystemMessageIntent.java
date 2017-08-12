@@ -33,40 +33,89 @@ import com.projectswg.common.data.location.Terrain;
 import resources.encodables.ProsePackage;
 import resources.player.Player;
 
-public class ChatBroadcastIntent extends Intent {
+public class SystemMessageIntent extends Intent {
 	
-	private BroadcastType broadcastType;
-	private Player broadcaster;
-	private Terrain terrain;
-	private String message;
-	private ProsePackage prose;
+	private final BroadcastType broadcastType;
+	private final Player receiver;
+	private final Terrain terrain;
+	private final String message;
+	private final ProsePackage prose;
 	
-	public ChatBroadcastIntent(String message, Player broadcaster, Terrain terrain, BroadcastType type) {
-		this.message = message;
+	/**
+	 * Custom broadcast type with a specified receiver and message
+	 * 
+	 * @param receiver the receiver to send to
+	 * @param message the message to send
+	 * @param type the broadcast type
+	 */
+	public SystemMessageIntent(Player receiver, String message, BroadcastType type) {
 		this.broadcastType = type;
-		this.broadcaster = broadcaster;
-		this.terrain = terrain;
+		this.receiver = receiver;
+		this.terrain = null;
+		this.message = message;
+		this.prose = null;
 	}
 	
-	public ChatBroadcastIntent(Player receiver, ProsePackage prose) {
-		this(null, receiver, null, BroadcastType.PERSONAL);
+	/**
+	 * Planet-wide message to the specified terrain with the message
+	 * 
+	 * @param terrain the terrain to broadcast on
+	 * @param message the message to send
+	 */
+	public SystemMessageIntent(Terrain terrain, String message) {
+		this.broadcastType = BroadcastType.PLANET;
+		this.receiver = null;
+		this.terrain = terrain;
+		this.message = message;
+		this.prose = null;
+	}
+	
+	/**
+	 * Personal message to the receiver with the prose package
+	 * 
+	 * @param receiver the receiver
+	 * @param prose the prose package to send
+	 */
+	public SystemMessageIntent(Player receiver, ProsePackage prose) {
+		this.broadcastType = BroadcastType.PERSONAL;
+		this.receiver = receiver;
+		this.terrain = null;
+		this.message = null;
 		this.prose = prose;
 	}
 	
-	public ChatBroadcastIntent(String message, BroadcastType type) {
-		this(message, null, null, type);
+	/**
+	 * Personal message to the receiver with the message
+	 * 
+	 * @param receiver the receiver
+	 * @param message the message
+	 */
+	public SystemMessageIntent(Player receiver, String message) {
+		this.broadcastType = BroadcastType.PERSONAL;
+		this.receiver = receiver;
+		this.terrain = null;
+		this.message = message;
+		this.prose = null;
 	}
 	
-	public ChatBroadcastIntent(Player receiver, String message) {
-		this(message, receiver, null, BroadcastType.PERSONAL);
+	/**
+	 * @param message the message
+	 * @param type the broadcast type
+	 */
+	public SystemMessageIntent(String message, BroadcastType type) {
+		this.broadcastType = type;
+		this.receiver = null;
+		this.terrain = null;
+		this.message = message;
+		this.prose = null;
 	}
 	
 	public BroadcastType getBroadcastType() {
 		return broadcastType;
 	}
 	
-	public Player getBroadcaster() {
-		return broadcaster;
+	public Player getReceiver() {
+		return receiver;
 	}
 	
 	public Terrain getTerrain() {
@@ -81,7 +130,30 @@ public class ChatBroadcastIntent extends Intent {
 		return prose;
 	}
 	
+	public static void broadcastPersonal(Player receiver, String message) {
+		new SystemMessageIntent(receiver, message).broadcast();
+	}
+	
+	public static void broadcastPersonal(Player receiver, ProsePackage prose) {
+		new SystemMessageIntent(receiver, prose).broadcast();
+	}
+	
+	public static void broadcastArea(Player receiver, String message) {
+		new SystemMessageIntent(receiver, message, BroadcastType.AREA).broadcast();
+	}
+	
+	public static void broadcastPlanet(Terrain terrain, String message) {
+		new SystemMessageIntent(terrain, message).broadcast();
+	}
+	
+	public static void broadcastGalaxy(String message) {
+		new SystemMessageIntent(message, BroadcastType.GALAXY).broadcast();
+	}
+	
 	public enum BroadcastType {
-		AREA, PLANET, GALAXY, PERSONAL
+		AREA,
+		PLANET,
+		GALAXY,
+		PERSONAL
 	}
 }

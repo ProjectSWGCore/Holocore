@@ -51,7 +51,7 @@ import com.projectswg.common.debug.Log;
 import intents.BuffIntent;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -161,8 +161,8 @@ public final class CorpseService extends Service {
 		
 		if(corpse.isPlayer()) {
 			Player corpseOwner = corpse.getOwner();
-			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
-			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
+			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
+			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
 			
 			scheduleCloneTimer(corpse);
 		} else {
@@ -411,7 +411,7 @@ public final class CorpseService extends Service {
 		if(reviveTimers.remove(corpse) != null) {
 			Player corpseOwner = corpse.getOwner();
 		
-			new ChatBroadcastIntent(corpseOwner, "@base_player:revive_expired").broadcast();
+			new SystemMessageIntent(corpseOwner, "@base_player:revive_expired").broadcast();
 			suiWindow.close(corpseOwner);
 			forceClone(corpse, facilitiesInTerrain);
 		} else {
