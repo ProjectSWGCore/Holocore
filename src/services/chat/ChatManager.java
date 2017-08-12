@@ -115,24 +115,24 @@ public class ChatManager extends Manager {
 	private void handleChatBroadcastIntent(ChatBroadcastIntent cbi) {
 		switch (cbi.getBroadcastType()) {
 			case AREA:
-				broadcastAreaMessage(cbi.getMessage(), cbi.getBroadcaster());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, cbi.getMessage());
+				broadcastAreaMessage(cbi.getMessage(), cbi.getReceiver());
+				logChat(cbi.getReceiver(), ChatType.SYSTEM, ChatRange.LOCAL, cbi.getMessage());
 				break;
 			case PLANET:
 				broadcastPlanetMessage(cbi.getMessage(), cbi.getTerrain());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.TERRAIN, cbi.getMessage());
+				logChat(cbi.getReceiver(), ChatType.SYSTEM, ChatRange.TERRAIN, cbi.getMessage());
 				break;
 			case GALAXY:
 				broadcastGalaxyMessage(cbi.getMessage());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, cbi.getMessage());
+				logChat(cbi.getReceiver(), ChatType.SYSTEM, ChatRange.GALAXY, cbi.getMessage());
 				break;
 			case PERSONAL:
 				if (cbi.getProse() != null) {
-					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getProse());
-					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, "**OOB DATA**");
+					broadcastPersonalMessage(cbi.getReceiver(), cbi.getProse());
+					logChat(cbi.getReceiver(), ChatType.SYSTEM, ChatRange.PERSONAL, "**OOB DATA**");
 				} else {
-					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getMessage());
-					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
+					broadcastPersonalMessage(cbi.getReceiver(), cbi.getMessage());
+					logChat(cbi.getReceiver(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
 				}
 				break;
 		}

@@ -27,12 +27,10 @@
  ***********************************************************************************/
 package utilities;
 
-import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
 import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.encodables.OutOfBandPackage;
@@ -49,48 +47,42 @@ import resources.player.Player;
  */
 public final class IntentFactory {
 	
-	private final IntentChain broadcastChain = new IntentChain();
-	
-	private void broadcast(String message, Player source, BroadcastType type) {
-		broadcastChain.broadcastAfter(new ChatBroadcastIntent(message, source, source.getCreatureObject().getTerrain(), type));
-	}
-
 	/**
 	 * Sends a system message around the observing players for the source {@link Player}.
 	 * @param message System message to broadcast.
 	 * @param source Source of the system message, anyone observing this player will receive the system message.
 	 */
 	public void broadcastArea(String message, Player source) {
-		broadcast(message, source, BroadcastType.AREA);
+		ChatBroadcastIntent.broadcastArea(source, message);
 	}
-
+	
 	/**
 	 * Sends a system message to the entire galaxy.
 	 * @param message System message to broadcast.
 	 * @param source The source of this system message.
 	 */
 	public void broadcastGalaxy(String message, Player source) {
-		broadcast(message, source, BroadcastType.GALAXY);
+		ChatBroadcastIntent.broadcastGalaxy(message);
 	}
-
+	
 	/**
 	 * Sends a system message to all players who are on the specified {@link Terrain}.
 	 * @param terrain Terrain to broadcast system message on.
 	 * @param message System message to broadcast.
 	 */
 	public void broadcastPlanet(Terrain terrain, String message) {
-		new ChatBroadcastIntent(message, null, terrain, BroadcastType.PLANET).broadcast();
+		ChatBroadcastIntent.broadcastPlanet(terrain, message);
 	}
-
+	
 	/**
 	 * Sends a system message to the target.
 	 * @param target Player receiving the message.
 	 * @param message System message to send.
 	 */
 	public void sendSystemMessage(Player target, String message) {
-		broadcast(message, target, BroadcastType.PERSONAL);
+		ChatBroadcastIntent.broadcastPersonal(target, message);
 	}
-
+	
 	/**
 	 * Sends a system message to the target as a ProsePackage which allows prose keys to be used.
 	 * <br><br>
