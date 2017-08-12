@@ -55,7 +55,7 @@ public class IsVendorOwnerResponseMessage extends SWGPacket {
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;	
-		containerId = data.getLong();		
+		containerId = data.getLong();
 		auctionResult = data.getInt();
 		marketName = data.getAscii();
 		ownerResult = data.getInt();
