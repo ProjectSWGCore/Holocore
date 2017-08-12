@@ -34,9 +34,9 @@ import resources.objects.SWGObject;
 
 public class ObjectTeleportIntent extends Intent {
 	
-	private SWGObject object;
-	private SWGObject parent;
-	private Location newLocation;
+	private final SWGObject object;
+	private final SWGObject parent;
+	private final Location newLocation;
 	
 	public ObjectTeleportIntent(SWGObject object, Location newLocation) {
 		this.object = object;
@@ -54,24 +54,20 @@ public class ObjectTeleportIntent extends Intent {
 		return object;
 	}
 	
-	public void setObject(SWGObject object) {
-		this.object = object;
-	}
-	
 	public SWGObject getParent() {
 		return parent;
-	}
-	
-	public void setParent(SWGObject parent) {
-		this.parent = parent;
 	}
 	
 	public Location getNewLocation() {
 		return newLocation;
 	}
 	
-	public void setNewLocation(Location newLocation) {
-		this.newLocation = newLocation;
+	public static void broadcast(SWGObject object, Location newLocation) {
+		new ObjectTeleportIntent(object, newLocation).broadcast();
+	}
+	
+	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation) {
+		new ObjectTeleportIntent(object, parent, newLocation).broadcast();
 	}
 	
 }
