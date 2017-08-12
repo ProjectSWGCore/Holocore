@@ -193,13 +193,11 @@ public final class StaticItemService extends Service {
 					if (object != null) {
 						// Global attributes and type-specific attributes are applied
 						objectAttributes.applyAttributes(object);
-						
+						object.setContainerPermissions(permissions);
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
 								Log.d("Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
-								object.setContainerPermissions(permissions);
-								
 								break;
 							default:
 								break;

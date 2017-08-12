@@ -43,9 +43,10 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
+import intents.chat.SystemMessageIntent;
 import intents.combat.CreatureKilledIntent;
+import intents.object.ContainerTransferIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.radial.RadialRequestIntent;
@@ -58,11 +59,14 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
+import resources.objects.group.GroupObject;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
+import services.objects.ObjectManager.ObjectLookup;
 import services.objects.StaticItemService;
 
 public final class LootService extends Service {
@@ -80,6 +84,7 @@ public final class LootService extends Service {
 		random = new Random();
 
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommand(cci));
+		registerForIntent(ContainerTransferIntent.class, cti -> handleContainerTransfer(cti));
 		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilled(cki));
 		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelection(rsi));
 		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
@@ -188,6 +193,16 @@ public final class LootService extends Service {
 		return new NPCTable(tableChance, lootTable);
 	}
 
+	private void handleContainerTransfer(ContainerTransferIntent cti){
+		SWGObject object = cti.getObject();
+
+		if (cti.getContainer() == null || cti.getContainer().getOwner() == null)
+			return;
+		
+		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT)
+			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
+	}
+	
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 
@@ -206,6 +221,7 @@ public final class LootService extends Service {
 
 		SWGObject lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff");
 		lootInventory.setLocation(corpse.getLocation());
+		lootInventory.setContainerPermissions(ContainerPermissionsType.LOOT);
 		corpse.addObject(lootInventory);	// It's a slotted object and goes in the inventory slot
 		new ObjectCreatedIntent(lootInventory).broadcast();
 
@@ -216,9 +232,13 @@ public final class LootService extends Service {
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
+
 		if(!cci.getCommand().getName().equalsIgnoreCase("loot")) {
 			return;
 		}
+		
+		if (!getLootPermission(cci.getSource(), cci.getTarget()))
+			return;				
 
 		lootAll(cci.getSource(), cci.getTarget());
 	}
@@ -226,18 +246,16 @@ public final class LootService extends Service {
 	private void handleRadialSelection(RadialSelectionIntent rsi) {
 		switch (rsi.getSelection()) {
 			case LOOT: {
-				// TODO permissions check
-				SWGObject inventory = rsi.getTarget().getSlottedObject("inventory");
-
-				if (inventory.getContainedObjects().isEmpty()) {
-					// Don't bother opening a window for an inventory with no loot in it
+				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
 					return;
-				}
-
-				rsi.getPlayer().sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
+				
+				lootBox(rsi.getPlayer(), rsi.getTarget());
 				break;
 			}
 			case LOOT_ALL: {
+				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
+					return;				
+				
 				lootAll(rsi.getPlayer().getCreatureObject(), rsi.getTarget());
 				break;
 			}
@@ -245,7 +263,7 @@ public final class LootService extends Service {
 				break;
 		}
 	}
-
+	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
 		SWGObject target = rri.getTarget();
 
@@ -269,21 +287,39 @@ public final class LootService extends Service {
 		options.add(loot);
 		new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
 	}
+	
+	private void lootBox(Player player, SWGObject target){
+		SWGObject inventory = target.getSlottedObject("inventory");
+		
+		player.sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
+	}
 
 	private void lootAll(SWGObject looter, SWGObject corpse) {
 		if (!(corpse instanceof AIObject)) {
-			// Can't loot something that's not a NPC
 			return;
 		}
 
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
-
-		// TODO respect loot rules for groups
-		// TODO permissions check
+		SWGObject looterInventory = looter.getSlottedObject("inventory");
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
+		
+		loot.forEach(item -> item.moveToContainer(looter, looterInventory));
+	}
+	
+	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {
+		if (!(corpse instanceof AIObject)) {
+			return;
+		}
 
-		loot.forEach(item -> item.moveToContainer(looter.getSlottedObject("inventory")));
+		SWGObject lootInventory = corpse.getSlottedObject("inventory");
+		CreatureObject randomPlayer;
+
+		for (SWGObject item : lootInventory.getContainedObjects()){
+			randomPlayer = lootGroup.getRandomPlayer();
+			if(randomPlayer != null)
+				item.moveToContainer(randomPlayer, randomPlayer.getSlottedObject("inventory"));
+		}
 	}
 
 	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
@@ -384,6 +420,49 @@ public final class LootService extends Service {
 		}
 	}
 	
+	private boolean getLootPermission(CreatureObject looter, SWGObject target){
+		
+		if (!isLootable(looter, target))
+			return false;
+		
+		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
+		
+		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null){
+			long looterGroup = looter.getGroupId();
+			long killerGroup = highestDamageDealer.getGroupId();
+			
+			if (looterGroup == killerGroup && killerGroup != 0){
+				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
+
+					switch (killerGroupObject.getLootRule()){
+						case FREE_FOR_ALL:
+							return true;
+						case MASTER_LOOTER:
+							return highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster();
+						case LOTTERY: //TODO Lottery
+							return false;
+						case RANDOM:
+							randomGroupLoot(killerGroupObject, target);
+							return false;
+						default:
+							return false;
+					}
+			}else if (highestDamageDealer.getOwner().equals(looter.getOwner())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isLootable(CreatureObject looter, SWGObject target){
+		SWGObject inventory = target.getSlottedObject("inventory");
+
+		if (inventory.getContainedObjects().isEmpty())
+			return false;
+
+		return inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
+	}
+
 	private static class NPCLoot {
 
 		private final int minCash;

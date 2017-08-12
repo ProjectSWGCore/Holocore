@@ -67,6 +67,7 @@ import resources.Posture;
 import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
+import services.combat.LootService;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
 import resources.encodables.ProsePackage;
@@ -105,17 +106,18 @@ public class CombatManager extends Manager {
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
 		incapacitatedCreatures = new HashMap<>();
+		lootService = new LootService();
 		random = new Random();
 		
 		corpseService = new CorpseService();
 		combatXpService = new CombatXpService();
 		duelPlayerService = new DuelPlayerService();
-		lootService = new LootService();
 
 		addChildService(corpseService);
 		addChildService(combatXpService);
 		addChildService(duelPlayerService);
 		addChildService(lootService);
+	
 		
 		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));

@@ -28,8 +28,8 @@
 package resources.objects.custom;
 
 public enum AIBehavior {
-	STOP,
-	GUARD,
+	IDLE,
+	LOITER,
 	PATROL,
-	FLOAT
+	TURN
 }

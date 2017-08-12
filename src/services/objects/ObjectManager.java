@@ -62,7 +62,7 @@ public class ObjectManager extends Manager {
 	private final RadialService radialService;
 	private final ClientBuildoutService clientBuildoutService;
 	private final StaticItemService staticItemService;
-
+	
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
 	private final AtomicBoolean started;
