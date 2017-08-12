@@ -186,31 +186,13 @@ class PlayerObjectPrivateNP implements Persistable {
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		switch(stream.getByte()) {
-		case 1:
-			readVersion1(stream);
-			break;
-		case 0:
-			readVersion0(stream);
-			break;
+		byte version = stream.getByte();
+		languageId = stream.getInt();
+		killMeter = stream.getInt();
+		petId = stream.getLong();
+		if(version == 0){
+			stream.getList((i) -> draftSchemList.add(stream.getAscii()));
 		}
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		languageId = stream.getInt();
-		killMeter = stream.getInt();
-		petId = stream.getLong();
-		stream.getList((i) -> draftSchemList.add(stream.getAscii()));
-		stream.getList((i) -> friendsList.add(stream.getAscii()));
-		stream.getList((i) -> ignoreList.add(stream.getAscii()));
-		stream.getList((i) -> petAbilities.add(stream.getAscii()));
-		stream.getList((i) -> activePetAbilities.add(stream.getAscii()));
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		languageId = stream.getInt();
-		killMeter = stream.getInt();
-		petId = stream.getLong();
 		stream.getList((i) -> friendsList.add(stream.getAscii()));
 		stream.getList((i) -> ignoreList.add(stream.getAscii()));
 		stream.getList((i) -> petAbilities.add(stream.getAscii()));
