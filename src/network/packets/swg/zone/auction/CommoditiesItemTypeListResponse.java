@@ -14,7 +14,7 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 	private int itemsInSubCategory;
 	private String categoryName;
 	private int placeholder;
-	private String type;	
+	private String type;
 
 	public CommoditiesItemTypeListResponse(String serverName, int subCategoryCounter, int subCatagory, int itemsInSubCategory, String categoryName, int placeholder, String type) {
 		this.serverName = serverName;
@@ -29,7 +29,7 @@ public class CommoditiesItemTypeListResponse extends SWGPacket {
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
-			return;		
+			return;
 		serverName = data.getAscii();	
 		subCategoryCounter = data.getInt();
 		subCatagory = data.getInt();

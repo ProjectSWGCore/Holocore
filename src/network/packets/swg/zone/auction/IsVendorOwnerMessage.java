@@ -13,7 +13,7 @@ public class IsVendorOwnerMessage extends SWGPacket {
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
-			return;		
+			return;
 		terminalId = data.getLong();
 	}
 

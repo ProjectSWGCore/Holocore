@@ -13,13 +13,13 @@ public class CommoditiesItemTypeListRequest extends SWGPacket {
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
-			return;		
-		from = data.getAscii();	
+			return;
+		from = data.getAscii();
 	}
 
 	@Override
 	public NetBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(6 + from.length());
+		NetBuffer data = NetBuffer.allocate(8 + from.length());
 		data.addShort(2);
 		data.addInt(CRC);
 		data.addAscii(from);
