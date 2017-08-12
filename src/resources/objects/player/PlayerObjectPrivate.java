@@ -143,11 +143,11 @@ class PlayerObjectPrivate  implements Persistable {
 		bb.addObject(waypoints); // 1
 		bb.addInt(100); // Current Force Power -- 2
 		bb.addInt(100); // Max Force Power -- 3
-		bb.addObject(completedQuests); // Completed Quests (List) -- 4 // TODO: Save this value when it's implemented
-		bb.addObject(activeQuests); // Active Quests (List) -- 5 	   // TODO: Save this value when it's implemented
+		bb.addObject(completedQuests); // Completed Quests (List) -- 4
+		bb.addObject(activeQuests); // Active Quests (List) -- 5
 		bb.addInt(activeQuest); // Current Quest -- 6
 		bb.addObject(quests); // All Quests 7
-		bb.addAscii(profWheelPosition); // Position of ProfWheel 8		
+		bb.addAscii(profWheelPosition); // Position of ProfWheel 8
 		bb.incrementOperandCount(9);
 	}
 	

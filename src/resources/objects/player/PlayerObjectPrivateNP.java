@@ -47,7 +47,8 @@ class PlayerObjectPrivateNP implements Persistable {
 	private int 				experimentFlag		= 0;
 	private int 				craftingStage		= 0;
 	private long 				nearbyCraftStation	= 0;
-	private SWGMap<Long, Integer> 	draftSchemList		= new SWGMap<>(9, 3);
+	private SWGMap<Long, Integer> 	draftSchemMap		= new SWGMap<>(9, 3);
+	private SWGList<String> draftSchemList = new SWGList<>(9,3, StringType.ASCII);
 	private int 				experimentPoints	= 0;
 	private SWGList<String> 	friendsList			= new SWGList<>(9, 7, StringType.ASCII);
 	private SWGList<String> 	ignoreList			= new SWGList<>(9, 8, StringType.ASCII);
@@ -129,15 +130,15 @@ class PlayerObjectPrivateNP implements Persistable {
 	}
 	
 	public void addDraftSchematic(long combinedCrc, int counter, SWGObject target) {
-		draftSchemList.put(combinedCrc, counter);
-		draftSchemList.sendDeltaMessage(target);
+		draftSchemMap.put(combinedCrc, counter);
+		draftSchemMap.sendDeltaMessage(target);
 	}
 	
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		bb.addInt(experimentFlag); // 0
 		bb.addInt(craftingStage); // 1
 		bb.addLong(nearbyCraftStation); // 2
-		bb.addObject(draftSchemList); // 3
+		bb.addObject(draftSchemMap); // 3
 		bb.addInt(0); // Might or might not be a list, two ints that are part of the same delta -- 4
 		bb.addInt(0);
 		bb.addInt(experimentPoints); // 5
@@ -185,7 +186,28 @@ class PlayerObjectPrivateNP implements Persistable {
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		switch(stream.getByte()) {
+		case 1:
+			readVersion1(stream);
+			break;
+		case 0:
+			readVersion0(stream);
+			break;
+		}
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
+		languageId = stream.getInt();
+		killMeter = stream.getInt();
+		petId = stream.getLong();
+		stream.getList((i) -> draftSchemList.add(stream.getAscii()));
+		stream.getList((i) -> friendsList.add(stream.getAscii()));
+		stream.getList((i) -> ignoreList.add(stream.getAscii()));
+		stream.getList((i) -> petAbilities.add(stream.getAscii()));
+		stream.getList((i) -> activePetAbilities.add(stream.getAscii()));
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
 		languageId = stream.getInt();
 		killMeter = stream.getInt();
 		petId = stream.getLong();
@@ -194,5 +216,4 @@ class PlayerObjectPrivateNP implements Persistable {
 		stream.getList((i) -> petAbilities.add(stream.getAscii()));
 		stream.getList((i) -> activePetAbilities.add(stream.getAscii()));
 	}
-	
 }
