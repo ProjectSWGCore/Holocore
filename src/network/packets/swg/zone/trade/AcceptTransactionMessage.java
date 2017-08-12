@@ -38,7 +38,7 @@ public class AcceptTransactionMessage extends SWGPacket {
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
-			return;		
+			return;
 	}
 
 	@Override

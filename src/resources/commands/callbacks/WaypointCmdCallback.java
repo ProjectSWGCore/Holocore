@@ -30,7 +30,7 @@ package resources.commands.callbacks;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -172,11 +172,11 @@ public class WaypointCmdCallback implements ICmdCallback {
 		ghost.addWaypoint(waypoint);
 
 		if (differentPlanetMessage) {
-			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
+			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
 					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
 					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
 		} else {
-			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
+			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
 					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
 					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
 		}

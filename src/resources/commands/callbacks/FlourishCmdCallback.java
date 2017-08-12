@@ -28,7 +28,7 @@
 package resources.commands.callbacks;
 
 import intents.FlourishIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
@@ -44,7 +44,7 @@ public class FlourishCmdCallback implements ICmdCallback  {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		// No performance, no flourish!
 		if (!player.getCreatureObject().isPerforming()) {
-			new ChatBroadcastIntent(player, "@performance:flourish_not_performing").broadcast();
+			new SystemMessageIntent(player, "@performance:flourish_not_performing").broadcast();
 			return;
 		}
 		
@@ -52,14 +52,14 @@ public class FlourishCmdCallback implements ICmdCallback  {
 			int flourishNumber = Integer.parseInt(args);
 
 			if(flourishNumber < 1 || flourishNumber > 9) {
-				new ChatBroadcastIntent(player, "@performance:flourish_not_valid").broadcast();
+				new SystemMessageIntent(player, "@performance:flourish_not_valid").broadcast();
 			} else if(flourishNumber == 9) {
 				new FlourishIntent(player, "mistake").broadcast();
 			} else {
 				new FlourishIntent(player, "skill_action_" + flourishNumber).broadcast();
 			}
 		} catch (NumberFormatException e) {
-			new ChatBroadcastIntent(player, "@performance:flourish_not_valid").broadcast();
+			new SystemMessageIntent(player, "@performance:flourish_not_valid").broadcast();
 		}
 
 

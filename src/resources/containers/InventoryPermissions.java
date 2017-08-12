@@ -53,17 +53,16 @@ class InventoryPermissions extends DefaultPermissions {
 		return requester.getOwner().equals(container.getOwner());
 	}
 	
-	private boolean canTradePartnerView(SWGObject requester, SWGObject container) {
-		CreatureObject creature = container.getOwner().getCreatureObject();
-		if (creature == null)
+	private boolean canTradePartnerView(SWGObject requester, SWGObject object) {
+		CreatureObject creature = object.getOwner().getCreatureObject();
+		if (creature == null || !(requester instanceof CreatureObject))
 			return false;
-		if(container.getOwner() == null)
+		if(object.getOwner() == null)
 			return false;
 		TradeSession session = creature.getTradeSession();
-		if (session == null || !session.getFromItemList(creature).contains(container.getObjectId()))
+		if (session == null || !session.isValidSession() || !session.isItemTraded(creature, object))
 			return false;
-		CreatureObject partner = session.getTradePartner(creature);
-		return partner != null && partner.equals(requester);
+		return ((CreatureObject) requester).getTradeSession() == session; // must be the same instance
 	}
 	
 }

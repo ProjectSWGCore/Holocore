@@ -35,7 +35,7 @@ import com.projectswg.common.debug.Assert;
 
 import intents.GroupEventIntent;
 import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.chat.ChatRoomUpdateIntent.UpdateType;
 import intents.object.DestroyObjectIntent;
@@ -415,7 +415,7 @@ public class GroupService extends Service {
 	}
 	
 	private void sendSystemMessage(Player target, String id) {
-		new ChatBroadcastIntent(target, new ProsePackage("group", id)).broadcast();
+		new SystemMessageIntent(target, new ProsePackage("group", id)).broadcast();
 	}
 	
 	private void sendSystemMessage(Player target, String id, Object... objects) {

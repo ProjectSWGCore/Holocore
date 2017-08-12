@@ -33,7 +33,7 @@ import network.packets.swg.SWGPacket;
 
 public class GetAuctionDetails extends SWGPacket {
 	
-	public static final int CRC = 0xD36EFAE4;
+	public static final int CRC = com.projectswg.common.data.CRC.getCrc("GetAuctionDetails");
 	
 	private long auctionId;
 	

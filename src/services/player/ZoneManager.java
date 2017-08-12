@@ -41,7 +41,7 @@ import com.projectswg.common.debug.Log;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
@@ -167,7 +167,7 @@ public class ZoneManager extends Manager {
 		String message = DataManager.getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
 		
 		if(!message.isEmpty())	// If the message isn't nothing
-			new ChatBroadcastIntent(player, message).broadcast();	// Send it
+			new SystemMessageIntent(player, message).broadcast();	// Send it
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {

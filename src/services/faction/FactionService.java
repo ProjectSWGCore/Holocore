@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 import com.projectswg.common.control.Service;
 
 import intents.FactionIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
@@ -216,7 +216,7 @@ public final class FactionService extends Service {
 			statusChangers.remove(target);
 		}
 		
-		new ChatBroadcastIntent(target.getOwner(), getCompletionMessage(oldStatus, newStatus)).broadcast();
+		new SystemMessageIntent(target.getOwner(), getCompletionMessage(oldStatus, newStatus)).broadcast();
 		target.clearPvpFlags(pvpFlag);
 		changeStatus(target, newStatus);
 	}

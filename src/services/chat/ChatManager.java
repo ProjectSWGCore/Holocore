@@ -41,7 +41,7 @@ import com.projectswg.common.debug.Log;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -81,7 +81,7 @@ public class ChatManager extends Manager {
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(SpatialChatIntent.class, spi -> handleSpatialChatIntent(spi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(ChatBroadcastIntent.class, cbi -> handleChatBroadcastIntent(cbi));
+		registerForIntent(SystemMessageIntent.class, smii -> handleSystemMessageIntent(smii));
 		registerForIntent(ChatAvatarRequestIntent.class, cari -> handleChatAvatarRequestIntent(cari));
 	}
 	
@@ -112,27 +112,27 @@ public class ChatManager extends Manager {
 		}
 	}
 	
-	private void handleChatBroadcastIntent(ChatBroadcastIntent cbi) {
-		switch (cbi.getBroadcastType()) {
+	private void handleSystemMessageIntent(SystemMessageIntent smi) {
+		switch (smi.getBroadcastType()) {
 			case AREA:
-				broadcastAreaMessage(cbi.getMessage(), cbi.getBroadcaster());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, cbi.getMessage());
+				broadcastAreaMessage(smi.getMessage(), smi.getReceiver());
+				logChat(smi.getReceiver(), ChatType.SYSTEM, ChatRange.LOCAL, smi.getMessage());
 				break;
 			case PLANET:
-				broadcastPlanetMessage(cbi.getMessage(), cbi.getTerrain());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.TERRAIN, cbi.getMessage());
+				broadcastPlanetMessage(smi.getMessage(), smi.getTerrain());
+				logChat(smi.getReceiver(), ChatType.SYSTEM, ChatRange.TERRAIN, smi.getMessage());
 				break;
 			case GALAXY:
-				broadcastGalaxyMessage(cbi.getMessage());
-				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, cbi.getMessage());
+				broadcastGalaxyMessage(smi.getMessage());
+				logChat(smi.getReceiver(), ChatType.SYSTEM, ChatRange.GALAXY, smi.getMessage());
 				break;
 			case PERSONAL:
-				if (cbi.getProse() != null) {
-					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getProse());
-					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, "**OOB DATA**");
+				if (smi.getProse() != null) {
+					broadcastPersonalMessage(smi.getReceiver(), smi.getProse());
+					logChat(smi.getReceiver(), ChatType.SYSTEM, ChatRange.PERSONAL, "**OOB DATA**");
 				} else {
-					broadcastPersonalMessage(cbi.getBroadcaster(), cbi.getMessage());
-					logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
+					broadcastPersonalMessage(smi.getReceiver(), smi.getMessage());
+					logChat(smi.getReceiver(), ChatType.SYSTEM, ChatRange.PERSONAL, smi.getMessage());
 				}
 				break;
 		}
@@ -243,7 +243,7 @@ public class ChatManager extends Manager {
 	/* Misc */
 	
 	private void sendSystemMessage(Player player, String stringId, String target) {
-		new ChatBroadcastIntent(player, new ProsePackage("StringId", stringId, "TT", target)).broadcast();
+		new SystemMessageIntent(player, new ProsePackage("StringId", stringId, "TT", target)).broadcast();
 	}
 	
 	private void handleSpatialChatIntent(SpatialChatIntent spi) {

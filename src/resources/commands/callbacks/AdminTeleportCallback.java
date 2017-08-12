@@ -29,22 +29,23 @@ package resources.commands.callbacks;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 
+import intents.chat.SystemMessageIntent;
 import intents.object.ObjectTeleportIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectManager.ObjectLookup;
 
 public class AdminTeleportCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		String [] cmd = args.split(" ");
-		if (cmd.length < 4) {
-			Log.e("Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
-			Log.e("For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
+		if (cmd.length < 4 || cmd.length > 5) {
+			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
+			SystemMessageIntent.broadcastPersonal(player, "For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
 			return;
 		}
 		double x, y, z;
@@ -56,15 +57,31 @@ public class AdminTeleportCallback implements ICmdCallback {
 			y = Double.parseDouble(cmd[cmdOffset+2]);
 			z = Double.parseDouble(cmd[cmdOffset+3]);
 		} catch (NumberFormatException e) {
-			Log.e("Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
+			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
 			return;
 		}
 		
-		Location newLocation = new Location(x, y, z, Terrain.getTerrainFromName(cmd[cmdOffset]));
+		Terrain terrain = Terrain.getTerrainFromName(cmd[cmdOffset]);
+		if (terrain == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Invalid terrain: " + cmd[cmdOffset]);
+			return;
+		}
+		
 		SWGObject teleportObject = player.getCreatureObject();
-		if (cmd.length > 4)
-			teleportObject = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(cmd[0]).getCreatureObject();
-		new ObjectTeleportIntent(teleportObject, newLocation).broadcast();
+		if (cmd.length > 4) {
+			long characterId = galacticManager.getPlayerManager().getCharacterIdByFirstName(cmd[0]);
+			if (characterId == 0) {
+				SystemMessageIntent.broadcastPersonal(player, "Invalid character name: '"+cmd[0]+"'");
+				return;
+			}
+			teleportObject = ObjectLookup.getObjectById(characterId);
+			if (teleportObject == null) {
+				SystemMessageIntent.broadcastPersonal(player, "Server Error. Unable to lookup creature with id: " + characterId);
+				return;
+			}
+		}
+		
+		ObjectTeleportIntent.broadcast(teleportObject, new Location(x, y, z, terrain));
 	}
 
 }

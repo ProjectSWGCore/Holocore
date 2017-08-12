@@ -43,7 +43,7 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
@@ -176,16 +176,16 @@ class TravelHelper {
 			Log.e("%s attempted to use an object that isn't a ticket!", player);
 		} else if (nearestPoint.getGroup().getStatus() != ShuttleStatus.GROUNDED) {
 			int time = nearestPoint.getGroup().getTimeRemaining();
-			new ChatBroadcastIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast();
+			new SystemMessageIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast();
 		} else if (!isTicketUsable(ticket, nearestPoint)) {
 			// This ticket isn't valid for this point
-			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
+			new SystemMessageIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (nearestPoint.isWithinRange(player.getCreatureObject())) {
 			// They can use their ticket if they're within range.
 			Log.i("%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), destinationPoint);
 			teleportAndDestroyTicket(destinationPoint, ticket, traveler);
 		} else {
-			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
+			new SystemMessageIntent(player, "@travel:boarding_too_far").broadcast();
 		}
 	}
 	

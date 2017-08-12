@@ -28,7 +28,7 @@
  */
 package resources.commands.callbacks;
 
-import intents.chat.ChatBroadcastIntent;
+import intents.chat.SystemMessageIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -43,7 +43,7 @@ public class ChangeDanceCallback extends StartDanceCallback {
 		if(actor.isPerforming()) {	// They need to be dancing in the first place!
 			super.handleCommand(galacticManager, player, target, args, true);
 		} else {
-			new ChatBroadcastIntent(player, "@performance:dance_must_be_performing_self").broadcast();
+			new SystemMessageIntent(player, "@performance:dance_must_be_performing_self").broadcast();
 		}
 	}
 	

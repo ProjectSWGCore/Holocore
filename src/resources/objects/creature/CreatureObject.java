@@ -47,6 +47,7 @@ import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
+import network.packets.swg.zone.trade.AbortTradeMessage;
 import resources.HologramColour;
 import resources.Posture;
 import resources.PvpFaction;
@@ -958,6 +959,9 @@ public class CreatureObject extends TangibleObject {
 			
 			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
 			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
+			
+			if (getOwner() == target)
+				target.sendPacket(new AbortTradeMessage());
 		}
 	}
 	
