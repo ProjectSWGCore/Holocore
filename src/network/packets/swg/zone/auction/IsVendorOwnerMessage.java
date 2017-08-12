@@ -8,7 +8,7 @@ public class IsVendorOwnerMessage extends SWGPacket {
 
 	public static final int CRC = com.projectswg.common.data.CRC.getCrc("IsVendorOwnerMessage");
 	
-	private long terminalId;	
+	private long terminalId;
 	
 	@Override
 	public void decode(NetBuffer data) {
