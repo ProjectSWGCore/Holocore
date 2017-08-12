@@ -174,7 +174,7 @@ class PlayerObjectPrivateNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		stream.addInt(languageId);
 		stream.addInt(killMeter);
 		stream.addLong(petId);
