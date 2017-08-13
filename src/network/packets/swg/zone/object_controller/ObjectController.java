@@ -115,6 +115,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x00F5: return new MissionListRequest(data);
 			case 0x041C: return new JTLTerminalSharedMessage(data);
 			case 0x0115: return new SecureTrade(data);
+			case 0x0102: return new DraftSlotsQueryResponse(data);
 		}
 		Log.w("Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);
