@@ -41,12 +41,16 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 
+import intents.GroupEventIntent;
+import intents.GroupEventIntent.GroupEventType;
 import network.packets.swg.zone.baselines.Baseline;
 import resources.collections.SWGList;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.sui.SuiButtons;
+import resources.sui.SuiMessageBox;
 
 public class GroupObject extends SWGObject {
 	
@@ -55,7 +59,7 @@ public class GroupObject extends SWGObject {
 	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
 
 	private CreatureObject	leader		= null;
-	private LootRule		lootRule	= LootRule.RANDOM;
+	private LootRule		lootRule	= LootRule.FREE_FOR_ALL;
 	private short			level		= 0;
 	private long			lootMaster	= 0;
 	
@@ -88,6 +92,7 @@ public class GroupObject extends SWGObject {
 		if (this.leader != null)
 			throw new IllegalStateException("Group already formed!");
 		this.leader = leader;
+		this.lootMaster = leader.getObjectId();
 		addGroupMembers(leader, member);
 	}
 	
@@ -106,6 +111,24 @@ public class GroupObject extends SWGObject {
 	
 	public int size() {
 		return groupMembers.size();
+	}
+	
+	public void displayLootRuleChangeBox(String lootRuleMsg){
+		Player memberPlayer;
+		SuiMessageBox window;
+		
+		for(GroupMember member : groupMembers){
+			if (member.getCreature() != leader){
+				memberPlayer = member.getPlayer();
+				if (memberPlayer != null){
+					window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
+					window.addCancelButtonCallback("handleLeaveGroup", (leavingPlayer, actor, event, parameters) -> {
+						new GroupEventIntent(GroupEventType.GROUP_LEAVE,leavingPlayer).broadcast();
+					});
+				    window.display(memberPlayer);
+				}
+			}
+		}
 	}
 	
 	public boolean isFull() {
@@ -326,6 +349,10 @@ public class GroupObject extends SWGObject {
 		
 		public String getName() {
 			return creature.getObjectName();
+		}
+		
+		public Player getPlayer(){
+			return creature.getOwner();
 		}
 		
 		@Override

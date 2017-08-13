@@ -42,17 +42,22 @@ import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.chat.ChatAvatar;
 import resources.encodables.ProsePackage;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
 import resources.player.Player.PlayerServer;
+import resources.sui.SuiButtons;
+import resources.sui.SuiEvent;
+import resources.sui.SuiListBox;
 import services.objects.ObjectCreator;
+import services.objects.ObjectManager.ObjectLookup;
 import utilities.IntentFactory;
 
 public class GroupService extends Service {
 	
 	private final Map<Long, GroupObject> groups;
-	
+
 	public GroupService() {
 		groups = new SynchronizedMap<>();
 		registerForIntent(GroupEventIntent.class, gei -> handleGroupEventIntent(gei));
@@ -88,6 +93,9 @@ public class GroupService extends Service {
 			case GROUP_MAKE_MASTER_LOOTER:
 				handleMakeMasterLooter(gei.getPlayer(), gei.getTarget());
 				break;
+			case GROUP_LOOT:
+				handleGroupLootOptions(gei.getPlayer());
+				break;
 		}
 	}
 	
@@ -103,6 +111,45 @@ public class GroupService extends Service {
 				break;
 		}
 	}
+	
+	private void handleGroupLootOptions(Player groupLeader){
+		SuiListBox window = new SuiListBox(SuiButtons.OK_CANCEL, "@group:set_loot_type_title", "@group:set_loot_type_text");
+		window.addListItem("Free For All");
+		window.addListItem("Master Looter");
+		window.addListItem("Lottery");
+		window.addListItem("Random");
+
+		window.addCallback("handleSelectedItem", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+			if (event != SuiEvent.OK_PRESSED)
+				return;
+			
+			int selectedRow = SuiListBox.getSelectedRow(parameters);
+			String lootRuleMsg;
+			
+			switch (window.getListItem(selectedRow).getName()){
+				case "Free For All" :
+					lootRuleMsg = "selected_free4all";
+					break;
+				case "Master Looter" :
+					lootRuleMsg = "selected_master";
+					break;
+				case "Lottery" :
+					lootRuleMsg = "selected_lotto";
+					break;
+				case "Random" :
+					lootRuleMsg = "selected_random";
+					break;
+				default:
+					lootRuleMsg = "selected_free4all";
+			}
+			
+			GroupObject groupObject = (GroupObject) ObjectLookup.getObjectById(player.getCreatureObject().getGroupId());
+			groupObject.setLootRule(selectedRow);
+			groupObject.displayLootRuleChangeBox(lootRuleMsg);
+			sendSystemMessage(player, lootRuleMsg);
+		});
+		window.display(groupLeader);		
+	}	
 	
 	private void handleMemberRezoned(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
@@ -421,5 +468,4 @@ public class GroupService extends Service {
 	private void sendSystemMessage(Player target, String id, Object... objects) {
 		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
 	}
-	
 }
