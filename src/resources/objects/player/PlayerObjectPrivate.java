@@ -32,6 +32,7 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.collections.SWGBitSet;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -41,12 +42,14 @@ import resources.player.Player;
 
 class PlayerObjectPrivate  implements Persistable {
 	
-	private SWGMap<String, Integer> 		experience			= new SWGMap<>(8, 0, StringType.ASCII);
-	private SWGMap<Long, WaypointObject> 	waypoints			= new SWGMap<>(8, 1);
+	private final SWGMap<String, Integer> 		experience			= new SWGMap<>(8, 0, StringType.ASCII);
+	private final SWGMap<Long, WaypointObject> 	waypoints			= new SWGMap<>(8, 1);
 	private int 							guildRankTitle		= 0;
 	private int 							activeQuest			= 0;
-	private SWGMap<Integer, Integer>		quests				= new SWGMap<>(8, 7);
+	private final SWGMap<Integer, Integer>		quests				= new SWGMap<>(8, 7);
 	private String 							profWheelPosition	= "";
+	private final SWGBitSet						completedQuests		= new SWGBitSet(8,4); // TODO: Save this value when it's implemented
+	private final SWGBitSet						activeQuests		= new SWGBitSet(8,5); // TODO: Save this value when it's implemented
 	
 	public PlayerObjectPrivate() {
 		
@@ -140,14 +143,11 @@ class PlayerObjectPrivate  implements Persistable {
 		bb.addObject(waypoints); // 1
 		bb.addInt(100); // Current Force Power -- 2
 		bb.addInt(100); // Max Force Power -- 3
-		bb.addInt(0); // Completed Quests (List) -- 4
-			bb.addInt(0);
-		bb.addInt(0); // Active Quests (List) -- 5
-			bb.addInt(0);
+		bb.addObject(completedQuests); // Completed Quests (List) -- 4
+		bb.addObject(activeQuests); // Active Quests (List) -- 5
 		bb.addInt(activeQuest); // Current Quest -- 6
-		bb.addObject(quests); // 7
-		bb.addAscii(profWheelPosition); // 8
-		
+		bb.addObject(quests); // All Quests 7
+		bb.addAscii(profWheelPosition); // Position of ProfWheel 8
 		bb.incrementOperandCount(9);
 	}
 	
