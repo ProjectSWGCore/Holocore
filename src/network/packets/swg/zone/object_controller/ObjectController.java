@@ -99,6 +99,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x0071: return new DataTransform(data);
 			case 0x00CC: return new CombatAction(data);
 			case 0x00F1: return new DataTransformWithParent(data);
+			case 0x0115: return new SecureTrade(data);
 			case 0x0116: return new CommandQueueEnqueue(data);
 			case 0x0117: return new CommandQueueDequeue(data);
 			case 0x0126: return new LookAtTarget(data);
@@ -107,6 +108,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x0134: return new CombatSpam(data);
 			case 0x0146: return new ObjectMenuRequest(data);
 			case 0x01BD: return new ShowFlyText(data);
+			case 0x01BF: return new DraftSlotsQueryResponse(data);
 			case 0x01DB: return new BiographyUpdate(data);
 			case 0x0448: return new CommandTimer(data);
 			case 0x044D: return new ChangeRoleIconChoice(data);
@@ -114,8 +116,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x04C5: return new IntendedTarget(data);
 			case 0x00F5: return new MissionListRequest(data);
 			case 0x041C: return new JTLTerminalSharedMessage(data);
-			case 0x0115: return new SecureTrade(data);
-			case 0x0102: return new DraftSlotsQueryResponse(data);
+			
 		}
 		Log.w("Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);

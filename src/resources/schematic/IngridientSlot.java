@@ -38,7 +38,9 @@ public class IngridientSlot implements Encodable{
 	}
 
 	public void addSlotDataOption(DraftSlotDataOption object){
-		slotOptions.add(object);		
+		synchronized (slotOptions) {
+			slotOptions.add(object);	
+		}	
 	}
 
 	public List<DraftSlotDataOption> getFromSlotDataOption(){

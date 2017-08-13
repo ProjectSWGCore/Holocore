@@ -9,10 +9,11 @@ import resources.schematic.IngridientSlot.IngridientType;
 
 public class DraftSchematic {
 
+	private final List<IngridientSlot> ingridientSlot;
+	
 	private String parent;
 	private int itemsPerContainer;
 	private String craftedSharedTemplate;
-	private final List<IngridientSlot> ingridientSlot;
 	private int complexity;
 	private long combinedCrc;
 	private int volume;
