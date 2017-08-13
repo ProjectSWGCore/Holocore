@@ -37,6 +37,8 @@ public enum ConfigFile {
 	NETWORK	("cfg/network.cfg"),
 	/** Meant for specific in-game features that may be better disabled or tweaked */
 	FEATURES("cfg/features.cfg"),
+	/** Meant for enabling/disabling loot options */
+	LOOTOPTIONS("cfg/loot.cfg"),
 	/** Meant for debug features to help fix problems in-game */
 	DEBUG("cfg/debug.cfg");
 	

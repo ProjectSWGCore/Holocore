@@ -54,6 +54,7 @@ import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 import network.packets.swg.zone.ClientOpenContainerMessage;
 import network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
+import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
@@ -64,6 +65,7 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.radial.RadialOption;
+import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager.ObjectLookup;
@@ -227,8 +229,10 @@ public final class LootService extends Service {
 
 		CreatureObject killer = cki.getKiller();
 
-	//	generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
-		generateLoot(loot, killer, lootInventory);
+		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLECASHLOOT", false))
+			generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
+		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLEITEMLOOT", true))
+			generateLoot(loot, killer, lootInventory);
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
@@ -330,9 +334,21 @@ public final class LootService extends Service {
 			// If there's something we can loot, draw the loot disc icon on the corpse!
 			Location effectLocation = new Location(corpse.getLocation());
 			effectLocation.setPosition(0,0.5, 0);	// TODO should 0.5 be hardcoded or grabbed from somewhere?
-
-			// TODO display it to everyone with access to lootInventory. For now, display the disc to the killer
-			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+			
+			long requesterGroup = requester.getGroupId();
+			
+			if (requesterGroup != 0){
+				GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
+				
+				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()){
+					Player player = creature.getOwner();
+					if (player != null){
+						creature.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+					}
+				}
+			}else {
+				requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+			}
 		}
 	}
 	
@@ -359,6 +375,7 @@ public final class LootService extends Service {
 		TangibleObject cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", TangibleObject.class);
 
 		cashObject.setObjectName(cashAmount + " cr");
+		cashObject.setContainerPermissions(ContainerPermissionsType.LOOT);
 		cashObject.moveToContainer(inventory);
 
 		new ObjectCreatedIntent(cashObject).broadcast();
@@ -438,7 +455,7 @@ public final class LootService extends Service {
 						case FREE_FOR_ALL:
 							return true;
 						case MASTER_LOOTER:
-							return highestDamageDealer.getOwnerId() == killerGroupObject.getLootMaster();
+							return looter.getObjectId() == killerGroupObject.getLootMaster();
 						case LOTTERY: //TODO Lottery
 							return false;
 						case RANDOM:
