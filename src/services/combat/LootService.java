@@ -343,7 +343,7 @@ public final class LootService extends Service {
 				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()){
 					Player player = creature.getOwner();
 					if (player != null){
-						creature.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+						player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 					}
 				}
 			}else {
