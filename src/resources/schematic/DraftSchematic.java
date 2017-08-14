@@ -69,21 +69,17 @@ public class DraftSchematic {
 		this.volume = volume;
 	}
 
-
 	public boolean isCanManufacture() {
 		return canManufacture;
 	}
-
 
 	public void setCanManufacture(boolean canManufacture) {
 		this.canManufacture = canManufacture;
 	}
 
-
 	public List<IngridientSlot> getIngridientSlot() {
 		return ingridientSlot;
 	}
-
 
 	// hardcoded for testing
 	private void createSchematic() {
