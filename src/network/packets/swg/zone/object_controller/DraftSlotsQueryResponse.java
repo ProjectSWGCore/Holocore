@@ -10,22 +10,13 @@ public class DraftSlotsQueryResponse extends ObjectController {
 	private final static int CRC = 0x01BF;
 	
 	private DraftSchematic schematic;
-	private long combinedCrc;
-	private int complexity;
-	private int volume;
-	private boolean canManufacture;
 	private IngridientSlot ingridientSlot;
 	
 	public DraftSlotsQueryResponse(DraftSchematic schematic) {
 		this.schematic = schematic;
-		this.combinedCrc = schematic.getCombinedCrc();
-		this.complexity = schematic.getComplexity();
-		this.volume = schematic.getComplexity();
-		this.canManufacture = schematic.isCanManufacture();
 		for (IngridientSlot ingridientSlot : schematic.getIngridientSlot()) {
 			this.ingridientSlot = ingridientSlot;
 		}
-		
 	}
 
 	public DraftSlotsQueryResponse(NetBuffer data){
@@ -35,11 +26,11 @@ public class DraftSlotsQueryResponse extends ObjectController {
 	
 	@Override
 	public void decode(NetBuffer data) {
-		combinedCrc = data.getLong();
+		schematic.setCombinedCrc(data.getLong());
 		ingridientSlot = data.getEncodable(IngridientSlot.class);
-		complexity = data.getInt();
-		volume = data.getInt();
-		canManufacture = data.getBoolean();
+		schematic.setComplexity(data.getInt());
+		schematic.setVolume(data.getInt());
+		schematic.setCanManufacture(data.getBoolean());
 	}
 
 	@Override
@@ -50,31 +41,15 @@ public class DraftSlotsQueryResponse extends ObjectController {
 		}
 		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 17 + length);
 		encodeHeader(data);
-		data.addLong(combinedCrc);
+		data.addLong(schematic.getCombinedCrc());
 		data.addEncodable(ingridientSlot);
-		data.addInt(complexity);
-		data.addInt(volume);
-		data.addBoolean(isCanManufacture());
+		data.addInt(schematic.getComplexity());
+		data.addInt(schematic.getVolume());
+		data.addBoolean(schematic.isCanManufacture());
 		return data;
 	}
 	
 	public DraftSchematic getSchematic() {
 		return schematic;
-	}
-
-	public long getCombinedCrc() {
-		return combinedCrc;
-	}
-
-	public int getComplexity() {
-		return complexity;
-	}
-
-	public int getVolume() {
-		return volume;
-	}
-
-	public boolean isCanManufacture() {
-		return canManufacture;
 	}
 }
