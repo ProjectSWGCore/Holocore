@@ -11,7 +11,6 @@ public class DraftSchematic {
 
 	private final List<IngridientSlot> ingridientSlot;
 	
-	private String parent;
 	private int itemsPerContainer;
 	private String craftedSharedTemplate;
 	private int complexity;
@@ -20,19 +19,14 @@ public class DraftSchematic {
 	private boolean canManufacture;
 
 	public DraftSchematic() {
-		this.parent = "";
-		this.itemsPerContainer = 0;
-		this.craftedSharedTemplate = "";
 		this.ingridientSlot = new ArrayList<>();
+		this.itemsPerContainer = 0;
+		this.craftedSharedTemplate = "";		
 		this.complexity = 0;
 		this.combinedCrc = 0;
 		this.volume = 0;
 		this.canManufacture = false;
 		createSchematic();
-	}
-
-	public String getParent() {
-		return parent;
 	}
 
 	public int getItemsPerContainer() {
@@ -53,10 +47,6 @@ public class DraftSchematic {
 
 	public void setComplexity(int complexity) {
 		this.complexity = complexity;
-	}
-
-	public void setParent(String parent) {
-		this.parent = parent;
 	}
 
 	public void setItemsPerContainer(int itemsPerContainer) {
@@ -88,7 +78,6 @@ public class DraftSchematic {
 		CRC clientCrc = new CRC(clientTemplate);
 		
 		combinedCrc = (((long) serverCrc.getCrc() << 32) & 0xFFFFFFFF00000000l) | (clientCrc.getCrc() & 0x00000000FFFFFFFFl);
-		parent = "object/draft_schematic/food/base_food_schematic.iff";
 		volume = 1;
 		itemsPerContainer = 25;
 		complexity = 5;
