@@ -9,14 +9,14 @@ import resources.schematic.IngridientSlot.IngridientType;
 
 public class DraftSchematic {
 
-	private final List<IngridientSlot> ingridientSlot;
+	private final List<IngridientSlot> ingridientSlot; // needed for both
 	
-	private int itemsPerContainer;
-	private String craftedSharedTemplate;
-	private int complexity;
-	private long combinedCrc;
-	private int volume;
-	private boolean canManufacture;
+	private int itemsPerContainer; //not needed for Datapadschematic
+	private String craftedSharedTemplate; //needed for Datapadschematic
+	private int complexity; //needed for Datapadschematic
+	private long combinedCrc;  //needed for Datapadschematic
+	private int volume; //needed for Datapadschematic
+	private boolean canManufacture; //not needed for Datapadschematic
 
 	public DraftSchematic() {
 		this.ingridientSlot = new ArrayList<>();
