@@ -229,9 +229,9 @@ public final class LootService extends Service {
 
 		CreatureObject killer = cki.getKiller();
 
-		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLECASHLOOT", false))
+		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", false))
 			generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
-		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLEITEMLOOT", true))
+		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
 			generateLoot(loot, killer, lootInventory);
 	}
 
