@@ -12,6 +12,6 @@ public class RequestDraftSlotsCallback implements ICmdCallback{
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		DraftSchematic schematic = new DraftSchematic();		
-		player.getPlayerObject().sendSelf(new DraftSlotsQueryResponse(schematic));
+		player.sendPacket(new DraftSlotsQueryResponse(schematic));
 	}
 }
