@@ -9,20 +9,20 @@ public class DraftSlotDataOption implements Encodable {
 	
 	private String stfName;
 	private String ingredientName;
-	private int ingredientType;
+	private IngridientType ingredientType;
 	private int amount;
 	
 	public DraftSlotDataOption(String stfName, String ingredientName, IngridientType ingredientType, int amount) {
 		this.stfName = stfName;
 		this.ingredientName = ingredientName;
-		this.ingredientType = ingredientType.getId();
+		this.ingredientType = ingredientType;
 		this.amount = amount;
 	}
 
 	public DraftSlotDataOption(){
 		this.stfName = "";
 		this.ingredientName = "";
-		this.ingredientType = IngridientType.IT_NONE.getId();
+		this.ingredientType = IngridientType.IT_NONE;
 		this.amount = 0;
 	}
 	
@@ -34,7 +34,7 @@ public class DraftSlotDataOption implements Encodable {
 		return ingredientName;
 	}
 	
-	public int getIngredientType() {
+	public IngridientType getIngredientType() {
 		return ingredientType;
 	}
 	
@@ -46,7 +46,7 @@ public class DraftSlotDataOption implements Encodable {
 	public void decode(NetBuffer data) {
 		stfName = data.getAscii();
 		ingredientName = data.getUnicode();
-		ingredientType =  data.getInt();
+		ingredientType =  IngridientType.getTypeForInt(data.getInt());
 		amount = data.getInt();		
 	}
 	
@@ -55,7 +55,7 @@ public class DraftSlotDataOption implements Encodable {
 		NetBuffer data = NetBuffer.allocate(getLength());
 		data.addAscii(stfName);
 		data.addUnicode(ingredientName);
-		data.addInt(ingredientType);
+		data.addInt(ingredientType.getId());
 		data.addInt(amount);
 		return data.array();
 	}

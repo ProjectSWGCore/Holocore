@@ -10,9 +10,10 @@ import com.projectswg.common.network.NetBuffer;
 
 public class IngridientSlot implements Encodable{
 	
+	private final List<DraftSlotDataOption> slotOptions;
+	
 	private String name;
 	private boolean optional;
-	private List<DraftSlotDataOption> slotOptions;
 	private String hardPoint;
 	
 	public IngridientSlot(String name, boolean optional) {
@@ -55,7 +56,8 @@ public class IngridientSlot implements Encodable{
 	public void decode(NetBuffer data) {
 		name = data.getAscii();
 		optional = data.getBoolean();
-		slotOptions = data.getList(DraftSlotDataOption.class);
+		slotOptions.clear();
+		slotOptions.addAll(data.getList(DraftSlotDataOption.class));
 		hardPoint = data.getAscii();	
 	}
 	
