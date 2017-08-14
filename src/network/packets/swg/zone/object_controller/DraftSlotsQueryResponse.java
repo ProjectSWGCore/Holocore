@@ -10,13 +10,9 @@ public class DraftSlotsQueryResponse extends ObjectController {
 	private final static int CRC = 0x01BF;
 	
 	private DraftSchematic schematic;
-	private IngridientSlot ingridientSlot;
 	
 	public DraftSlotsQueryResponse(DraftSchematic schematic) {
 		this.schematic = schematic;
-		for (IngridientSlot ingridientSlot : schematic.getIngridientSlot()) {
-			this.ingridientSlot = ingridientSlot;
-		}
 	}
 
 	public DraftSlotsQueryResponse(NetBuffer data){
@@ -26,26 +22,28 @@ public class DraftSlotsQueryResponse extends ObjectController {
 	
 	@Override
 	public void decode(NetBuffer data) {
+		decodeHeader(data);
 		schematic.setCombinedCrc(data.getLong());
-		ingridientSlot = data.getEncodable(IngridientSlot.class);
 		schematic.setComplexity(data.getInt());
 		schematic.setVolume(data.getInt());
 		schematic.setCanManufacture(data.getBoolean());
+		schematic.getIngridientSlot().clear();
+		schematic.getIngridientSlot().addAll(data.getList(IngridientSlot.class));
 	}
 
 	@Override
 	public NetBuffer encode() {
 		int length = 0;
-		for (IngridientSlot ingridientslot : schematic.getIngridientSlot()) {
-			length += ingridientslot.getLength();
+		for (IngridientSlot ingridientSlot : schematic.getIngridientSlot()) {
+			length += ingridientSlot.getLength();
 		}
-		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 17 + length);
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 21 + length);
 		encodeHeader(data);
 		data.addLong(schematic.getCombinedCrc());
-		data.addEncodable(ingridientSlot);
 		data.addInt(schematic.getComplexity());
 		data.addInt(schematic.getVolume());
 		data.addBoolean(schematic.isCanManufacture());
+		data.addList(schematic.getIngridientSlot());		
 		return data;
 	}
 	
