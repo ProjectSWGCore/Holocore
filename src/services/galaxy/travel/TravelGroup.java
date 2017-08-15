@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.projectswg.common.concurrency.Delay;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.debug.Log;
 
-import resources.Posture;
 import resources.objects.creature.CreatureObject;
 
 public class TravelGroup implements Runnable {

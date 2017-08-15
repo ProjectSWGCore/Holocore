@@ -35,18 +35,18 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.WeatherType;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.ServerTimeMessage;
+import com.projectswg.common.network.packets.swg.zone.ServerWeatherMessage;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import main.ProjectSWG;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.ServerTimeMessage;
-import network.packets.swg.zone.ServerWeatherMessage;
-import resources.WeatherType;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import utilities.ThreadUtilities;
 
 public final class EnvironmentService extends Service {
 	
@@ -115,7 +115,7 @@ public final class EnvironmentService extends Service {
 	private void setWeather(Terrain terrain, WeatherType type) {
 		SWGPacket swm;
 		
-		// Ziggy: Prevent packets containing the same weather from being sent
+		// Ziggy: Prevent SWGPackets containing the same weather from being sent
 		if(weatherForTerrain.containsKey(terrain))
 			if(type.equals(weatherForTerrain.get(terrain)))
 				return;

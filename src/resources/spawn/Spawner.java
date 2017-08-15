@@ -29,9 +29,9 @@ package resources.spawn;
 
 import java.util.Random;
 
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
 
-import resources.PvpFaction;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;

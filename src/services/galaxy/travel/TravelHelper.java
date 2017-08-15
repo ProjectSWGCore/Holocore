@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.projectswg.common.concurrency.PswgThreadPool;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -48,8 +50,6 @@ import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import resources.config.ConfigFile;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.SpecificObject;
 import resources.objects.creature.CreatureObject;

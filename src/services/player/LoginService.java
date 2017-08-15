@@ -36,11 +36,28 @@ import java.util.Locale;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.BCrypt;
+import com.projectswg.common.data.encodables.galaxy.Galaxy;
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.common.network.packets.swg.login.CharacterCreationDisabled;
+import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId;
+import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
+import com.projectswg.common.network.packets.swg.login.LoginClientId;
+import com.projectswg.common.network.packets.swg.login.LoginClientToken;
+import com.projectswg.common.network.packets.swg.login.LoginClusterStatus;
+import com.projectswg.common.network.packets.swg.login.LoginEnumCluster;
+import com.projectswg.common.network.packets.swg.login.LoginIncorrectClientId;
+import com.projectswg.common.network.packets.swg.login.creation.DeleteCharacterRequest;
+import com.projectswg.common.network.packets.swg.login.creation.DeleteCharacterResponse;
+import com.projectswg.common.network.packets.swg.zone.GameServerLagResponse;
+import com.projectswg.common.network.packets.swg.zone.LagRequest;
+import com.projectswg.common.network.packets.swg.zone.ServerNowEpochTime;
 
 import intents.GalacticIntent;
 import intents.LoginEventIntent;
@@ -48,23 +65,6 @@ import intents.LoginEventIntent.LoginEvent;
 import intents.network.GalacticPacketIntent;
 import intents.object.DestroyObjectIntent;
 import intents.player.DeleteCharacterIntent;
-import network.packets.Packet;
-import network.packets.swg.ErrorMessage;
-import network.packets.swg.login.CharacterCreationDisabled;
-import network.packets.swg.login.EnumerateCharacterId;
-import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
-import network.packets.swg.login.LoginClientId;
-import network.packets.swg.login.LoginClientToken;
-import network.packets.swg.login.LoginClusterStatus;
-import network.packets.swg.login.LoginEnumCluster;
-import network.packets.swg.login.LoginIncorrectClientId;
-import network.packets.swg.login.creation.DeleteCharacterRequest;
-import network.packets.swg.login.creation.DeleteCharacterResponse;
-import network.packets.swg.zone.GameServerLagResponse;
-import network.packets.swg.zone.LagRequest;
-import network.packets.swg.zone.ServerNowEpochTime;
-import resources.Galaxy;
-import resources.Race;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -145,7 +145,7 @@ public class LoginService extends Service {
 		return 0;
 	}
 	
-	private void handlePacket(GalacticPacketIntent gpi, Packet p) {
+	private void handlePacket(GalacticPacketIntent gpi, SWGPacket p) {
 		if (p instanceof LoginClientId) {
 			handleLogin(gpi.getPlayer(), (LoginClientId) p);
 		} else if (p instanceof DeleteCharacterRequest) {

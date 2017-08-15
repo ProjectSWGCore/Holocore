@@ -37,9 +37,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.debug.Log;
 
-import resources.Race;
 import resources.zone.NameFilter;
 
 public class SWGNameGenerator {

@@ -36,19 +36,19 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.FactionIntent;
 import intents.chat.SystemMessageIntent;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
-import network.packets.swg.zone.chat.ChatSystemMessage;
-import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import resources.PvpFaction;
-import resources.PvpFlag;
-import resources.PvpStatus;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
-import utilities.ThreadUtilities;
 
 public final class FactionService extends Service {
 

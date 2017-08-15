@@ -27,8 +27,8 @@
 package intents.chat;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
 
-import resources.chat.ChatAvatar;
 import resources.player.Player;
 
 public class ChatRoomUpdateIntent extends Intent {

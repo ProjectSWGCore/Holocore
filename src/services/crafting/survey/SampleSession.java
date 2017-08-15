@@ -29,12 +29,12 @@ package services.crafting.survey;
 
 import java.util.List;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import network.packets.swg.zone.PlayMusicMessage;
-import resources.Posture;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
 import services.crafting.resource.galactic.GalacticResourceSpawn;

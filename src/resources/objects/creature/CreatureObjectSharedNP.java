@@ -33,16 +33,16 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
-import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
-import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
+import resources.objects.Equipment;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;

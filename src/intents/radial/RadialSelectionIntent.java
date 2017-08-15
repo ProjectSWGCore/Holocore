@@ -28,10 +28,10 @@
 package intents.radial;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.radial.RadialItem;
 
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.radial.RadialItem;
 
 public class RadialSelectionIntent extends Intent {
 	

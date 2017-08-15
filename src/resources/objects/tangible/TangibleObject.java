@@ -31,16 +31,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Set;
 
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import intents.FactionIntent;
 import intents.FactionIntent.FactionIntentType;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.PvpFaction;
-import resources.PvpFlag;
-import resources.PvpStatus;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;

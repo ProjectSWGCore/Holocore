@@ -33,20 +33,20 @@ import java.util.Locale;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.combat.AttackType;
+import com.projectswg.common.data.combat.DamageType;
+import com.projectswg.common.data.combat.DelayAttackEggPosition;
+import com.projectswg.common.data.combat.HitType;
+import com.projectswg.common.data.combat.ValidTarget;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import resources.combat.AttackType;
-import resources.combat.DamageType;
-import resources.combat.DelayAttackEggPosition;
-import resources.combat.HitType;
-import resources.combat.ValidTarget;
 import resources.commands.CombatCommand;
 import resources.commands.Command;
 import resources.commands.DefaultPriority;
@@ -116,7 +116,7 @@ public class CommandService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof CommandQueueEnqueue) {
 			CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
 			handleCommandRequest(gpi.getPlayer(), gpi.getGalacticManager(), controller);

@@ -38,15 +38,18 @@ shadowJar{
 }
 
 dependencies {
+	compile project(':PSWGCommon')
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 	testCompile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
+repositories {
+	mavenCentral()
+}
+
 buildscript {
 	repositories {
-		maven {
-			url 'https://plugins.gradle.org/m2/'
-		}
+		jcenter()
 	}
 	dependencies {
 		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'

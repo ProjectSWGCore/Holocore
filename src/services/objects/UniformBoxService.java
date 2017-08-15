@@ -36,6 +36,7 @@ import java.util.Collection;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.debug.Log;
 
 import intents.object.CreateStaticItemIntent;
@@ -45,7 +46,6 @@ import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.radial.RadialItem;
 
 public class UniformBoxService extends Service {
 	

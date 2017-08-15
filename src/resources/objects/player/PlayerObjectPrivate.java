@@ -31,7 +31,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
-import network.packets.swg.zone.chat.ChatSystemMessage;
+import intents.chat.SystemMessageIntent;
 import resources.collections.SWGBitSet;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
@@ -61,7 +61,7 @@ class PlayerObjectPrivate  implements Persistable {
 				waypoints.put(waypoint.getObjectId(), waypoint);
 				waypoints.sendDeltaMessage(target);
 			} else {
-				target.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.PERSONAL, "@base_player:too_many_waypoints"));
+				SystemMessageIntent.broadcastPersonal(target.getOwner(), "@base_player:too_many_waypoints");
 			}
 		}
 	}

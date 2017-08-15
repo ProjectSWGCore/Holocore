@@ -42,8 +42,8 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.SWGObject;
 
 /**

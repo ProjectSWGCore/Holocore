@@ -34,6 +34,16 @@ import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
+import com.projectswg.common.network.packets.swg.zone.HeartBeat;
+import com.projectswg.common.network.packets.swg.zone.ParametersMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
+import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus;
+import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
@@ -47,16 +57,6 @@ import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.PlayerTransformedIntent;
 import main.ProjectSWG;
-import network.packets.Packet;
-import network.packets.swg.zone.CmdSceneReady;
-import network.packets.swg.zone.HeartBeat;
-import network.packets.swg.zone.ParametersMessage;
-import network.packets.swg.zone.chat.ChatOnConnectAvatar;
-import network.packets.swg.zone.chat.VoiceChatStatus;
-import network.packets.swg.zone.insertion.ChatServerStatus;
-import network.packets.swg.zone.insertion.CmdStartScene;
-import network.packets.swg.zone.object_controller.DataTransform;
-import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.config.ConfigFile;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
@@ -171,13 +171,13 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
-		if (packet instanceof DataTransform) {
-			handleDataTransform((DataTransform) packet, gpi.getObjectManager());
-		} else if (packet instanceof DataTransformWithParent) {
-			handleDataTransformWithParent((DataTransformWithParent) packet, gpi.getObjectManager());
-		} else if (packet instanceof CmdSceneReady) {
-			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
+		SWGPacket SWGPacket = gpi.getPacket();
+		if (SWGPacket instanceof DataTransform) {
+			handleDataTransform((DataTransform) SWGPacket, gpi.getObjectManager());
+		} else if (SWGPacket instanceof DataTransformWithParent) {
+			handleDataTransformWithParent((DataTransformWithParent) SWGPacket, gpi.getObjectManager());
+		} else if (SWGPacket instanceof CmdSceneReady) {
+			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) SWGPacket);
 		}
 	}
 	

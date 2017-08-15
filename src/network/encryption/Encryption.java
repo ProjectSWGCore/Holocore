@@ -151,7 +151,7 @@ public class Encryption {
 			int length = decompressor.inflate(result);
 			return length;
 		} catch (DataFormatException e) {
-			System.err.println("Failed to decompress packet. "+e.getClass().getSimpleName()+" Message: " + e.getMessage());
+			System.err.println("Failed to decompress SWGPacket. "+e.getClass().getSimpleName()+" Message: " + e.getMessage());
 			return -1;
 		} finally {
 			decompressor.end();

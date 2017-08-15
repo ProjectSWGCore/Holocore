@@ -31,20 +31,19 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 import com.projectswg.common.debug.Log;
-
-import network.packets.Packet;
-import network.packets.swg.ErrorMessage;
-import network.packets.swg.holo.HoloConnectionStarted;
-import network.packets.swg.holo.HoloConnectionStopped;
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
-import network.packets.swg.holo.HoloPacket;
-import network.packets.swg.holo.HoloSetProtocolVersion;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.common.network.packets.swg.holo.HoloPacket;
+import com.projectswg.common.network.packets.swg.holo.HoloSetProtocolVersion;
 
 public class HolocoreSessionManager {
 	
 	private static final String PROTOCOL = "2016-04-13";
 	
-	private final Queue<Packet> outbound;
+	private final Queue<SWGPacket> outbound;
 	private HolocoreSessionCallback callback;
 	private Status status;
 	
@@ -59,11 +58,11 @@ public class HolocoreSessionManager {
 	}
 	
 	/**
-	 * Called when a packet is being received
-	 * @param p the packet received
-	 * @return TRUE if the packet is allowed to be broadcasted, FALSE otherwise
+	 * Called when a SWGPacket is being received
+	 * @param p the SWGPacket received
+	 * @return TRUE if the SWGPacket is allowed to be broadcasted, FALSE otherwise
 	 */
-	public ResponseAction onInbound(Packet p) {
+	public ResponseAction onInbound(SWGPacket p) {
 		boolean holoPacket = p instanceof HoloPacket;
 		if (!holoPacket && getConnectionStatus() != Status.CONNECTED) {
 			addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
@@ -76,8 +75,8 @@ public class HolocoreSessionManager {
 		return ResponseAction.CONTINUE;
 	}
 	
-	private ResponseAction processSetProtocolVersion(HoloSetProtocolVersion packet) {
-		if (!packet.getProtocol().equals(PROTOCOL)) {
+	private ResponseAction processSetProtocolVersion(HoloSetProtocolVersion SWGPacket) {
+		if (!SWGPacket.getProtocol().equals(PROTOCOL)) {
 			addToOutbound(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
 			return ResponseAction.SHUT_DOWN;
 		}
@@ -87,17 +86,17 @@ public class HolocoreSessionManager {
 	}
 	
 	/**
-	 * Called when a packet is being sent out
-	 * @param p the packet being sent
-	 * @return TRUE if the packet is allowed to be sent, FALSE otherwise
+	 * Called when a SWGPacket is being sent out
+	 * @param p the SWGPacket being sent
+	 * @return TRUE if the SWGPacket is allowed to be sent, FALSE otherwise
 	 */
-	public ResponseAction onOutbound(Packet p) {
+	public ResponseAction onOutbound(SWGPacket p) {
 		return ResponseAction.CONTINUE;
 	}
 	
-	public Packet [] getOutbound() {
+	public SWGPacket [] getOutbound() {
 		synchronized (outbound) {
-			Packet [] ret = outbound.toArray(new Packet[outbound.size()]);
+			SWGPacket [] ret = outbound.toArray(new SWGPacket[outbound.size()]);
 			outbound.clear();
 			return ret;
 		}
@@ -115,7 +114,7 @@ public class HolocoreSessionManager {
 		updateStatus(Status.DISCONNECTED);
 	}
 	
-	private void addToOutbound(Packet p) {
+	private void addToOutbound(SWGPacket p) {
 		synchronized (outbound) {
 			outbound.add(p);
 		}

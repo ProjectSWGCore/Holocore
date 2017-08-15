@@ -28,13 +28,13 @@
 package services.combat;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 
 import intents.chat.SystemMessageIntent;
 import intents.combat.DuelPlayerIntent;
-import resources.PvpFlag;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 
 public class DuelPlayerService extends Service {

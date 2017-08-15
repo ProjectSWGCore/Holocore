@@ -35,6 +35,7 @@ public enum SpecificObject {
 	SO_TRANSPORT_SHUTTLE		("object/creature/npc/theme_park/shared_player_shuttle.iff"),
 	SO_TRANSPORT_STARPORT		("object/creature/npc/theme_park/shared_player_transport.iff"),
 	SO_TRANSPORT_STARPORT_THEED	("object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff"),
+	SO_WAYPOINT					("object/waypoint/shared_waypoint.iff"),
 	SO_WORLD_WAYPOINT			("object/waypoint/shared_world_waypoint.iff");
 	
 	private final String template;

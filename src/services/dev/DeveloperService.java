@@ -28,11 +28,11 @@
 package services.dev;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
 import intents.object.ObjectCreatedIntent;
-import resources.PvpFlag;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.custom.DefaultAIObject;

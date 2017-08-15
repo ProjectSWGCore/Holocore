@@ -32,31 +32,30 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
+import com.projectswg.common.data.encodables.chat.ChatResult;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatFriendsListUpdate;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendInstantMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
+import com.projectswg.common.network.packets.swg.zone.object_controller.SpatialChat;
 
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
-import intents.chat.SystemMessageIntent;
 import intents.chat.SpatialChatIntent;
+import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.ChatFriendsListUpdate;
-import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
-import network.packets.swg.zone.chat.ChatInstantMessageToClient;
-import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
-import network.packets.swg.zone.chat.ChatSystemMessage;
-import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import network.packets.swg.zone.object_controller.SpatialChat;
-import resources.chat.ChatAvatar;
-import resources.chat.ChatResult;
-import resources.encodables.OutOfBandPackage;
-import resources.encodables.ProsePackage;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -86,7 +85,7 @@ public class ChatManager extends Manager {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
 		switch (((SWGPacket) p).getPacketType()) {
@@ -314,13 +313,13 @@ public class ChatManager extends Manager {
 	}
 	
 	private void broadcastPlanetMessage(String message, Terrain terrain) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
-		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
+		ChatSystemMessage SWGPacket = new ChatSystemMessage(SystemChatType.PERSONAL, message);
+		new NotifyPlayersPacketIntent(SWGPacket, terrain).broadcast();
 	}
 	
 	private void broadcastGalaxyMessage(String message) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
-		new NotifyPlayersPacketIntent(packet).broadcast();
+		ChatSystemMessage SWGPacket = new ChatSystemMessage(SystemChatType.PERSONAL, message);
+		new NotifyPlayersPacketIntent(SWGPacket).broadcast();
 	}
 	
 	private void broadcastPersonalMessage(Player player, String message) {

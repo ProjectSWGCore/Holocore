@@ -38,10 +38,10 @@ import java.util.List;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.utilities.ByteUtilities;
 
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.player.Player;

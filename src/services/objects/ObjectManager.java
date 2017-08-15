@@ -34,12 +34,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
 
 import intents.network.GalacticPacketIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.object_controller.IntendedTarget;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
@@ -199,9 +199,9 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
-		if (packet instanceof IntendedTarget) {
-			IntendedTarget intendedTarget = (IntendedTarget) packet;
+		SWGPacket SWGPacket = gpi.getPacket();
+		if (SWGPacket instanceof IntendedTarget) {
+			IntendedTarget intendedTarget = (IntendedTarget) SWGPacket;
 			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 			long targetId = intendedTarget.getTargetId();
 			

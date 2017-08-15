@@ -33,18 +33,18 @@ import java.util.Map;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 
 import intents.experience.ExperienceIntent;
 import intents.experience.LevelChangedIntent;
-import network.packets.swg.zone.object_controller.ShowFlyText;
-import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.config.ConfigFile;
-import resources.encodables.OutOfBandPackage;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.DataManager;
@@ -108,16 +108,8 @@ public final class ExperienceManager extends Manager {
 	}
 	
 	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
-		Integer currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal;
-		
-		xpGained *= xpMultiplier;
-		
-		if (currentXp == null) {	// They don't have this type of XP already
-			newXpTotal = xpGained;
-		} else {	// They already have this kind of XP - add gained to current
-			newXpTotal = currentXp + xpGained;
-		}
+		int currentXp = playerObject.getExperiencePoints(xpType);
+		int newXpTotal = currentXp + (int) (xpGained * xpMultiplier);
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);

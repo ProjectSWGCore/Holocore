@@ -29,9 +29,9 @@ package resources.player;
 
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
+import com.projectswg.common.network.packets.SWGPacket;
 
 import intents.network.OutboundPacketIntent;
-import network.packets.Packet;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -39,7 +39,7 @@ import services.player.PlayerManager;
 
 public class Player implements Comparable<Player> {
 	
-	private final IntentChain packetChain;
+	private final IntentChain SWGPacketChain;
 	private final Service playerManager;
 	private final Object sendingLock;
 	private final long networkId;
@@ -58,7 +58,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Player(Service playerManager, long networkId) {
-		this.packetChain = new IntentChain();
+		this.SWGPacketChain = new IntentChain();
 		this.playerManager = playerManager;
 		this.sendingLock = new Object();
 		this.networkId = networkId;
@@ -97,7 +97,7 @@ public class Player implements Comparable<Player> {
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
 		if (obj == null)
-			packetChain.reset();
+			SWGPacketChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -167,10 +167,10 @@ public class Player implements Comparable<Player> {
 		return sendingLock;
 	}
 	
-	public void sendPacket(Packet ... packets) {
+	public void sendPacket(SWGPacket ... SWGPackets) {
 		synchronized (getSendingLock()) {
-			for (Packet p : packets) {
-				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+			for (SWGPacket p : SWGPackets) {
+				SWGPacketChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
 			}
 		}
 	}

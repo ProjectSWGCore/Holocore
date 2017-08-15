@@ -28,9 +28,9 @@
 package resources.objects.awareness;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformMessage;
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformWithParentMessage;
 
-import network.packets.swg.zone.UpdateTransformMessage;
-import network.packets.swg.zone.UpdateTransformWithParentMessage;
 import resources.objects.SWGObject;
 
 public class DataTransformHandler {

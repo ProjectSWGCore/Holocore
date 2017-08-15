@@ -34,27 +34,27 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.encodables.galaxy.Galaxy;
+import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.admin.AdminShutdownServer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
-import network.packets.Packet;
-import network.packets.swg.admin.AdminShutdownServer;
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.deltas.DeltasMessage;
-import network.packets.swg.zone.object_controller.ObjectController;
-import resources.Galaxy;
-import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.ServerStatus;
 import resources.server_info.BasicLogStream;
 import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
 import utilities.ScheduledUtilities;
-import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
 	
@@ -64,7 +64,7 @@ public class CoreManager extends Manager {
 	private final ScheduledExecutorService shutdownService;
 	private final EngineManager engineManager;
 	private final GalacticManager galacticManager;
-	private final BasicLogStream packetLogger;
+	private final BasicLogStream SWGPacketLogger;
 	private final Config debugConfig;
 	
 	private long startTime;
@@ -77,7 +77,7 @@ public class CoreManager extends Manager {
 		if (adminServerPort <= 0)
 			adminServerPort = -1;
 		getGalaxy().setAdminServerPort(adminServerPort);
-		packetLogger = new BasicLogStream(new File("log/packets.txt"));
+		SWGPacketLogger = new BasicLogStream(new File("log/SWGPackets.txt"));
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		engineManager = new EngineManager();
@@ -152,14 +152,14 @@ public class CoreManager extends Manager {
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {
-		packetLogger.log("%s %d:\t%s", in?"IN ":"OUT", networkId, str);
+		SWGPacketLogger.log("%s %d:\t%s", in?"IN ":"OUT", networkId, str);
 	}
 	
 	private boolean isPacketDebug() {
-		return debugConfig.getBoolean("PACKET-LOGGING", false);
+		return debugConfig.getBoolean("SWGPacket-LOGGING", false);
 	}
 	
-	private String createExtendedPacketInformation(Packet p) {
+	private String createExtendedPacketInformation(SWGPacket p) {
 		if (p instanceof Baseline)
 			return createBaselineInformation((Baseline) p);
 		if (p instanceof DeltasMessage)

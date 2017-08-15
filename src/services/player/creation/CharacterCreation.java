@@ -29,16 +29,16 @@ package services.player.creation;
 
 import java.util.Calendar;
 
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
 
 import intents.experience.GrantSkillIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.swg.login.creation.ClientCreateCharacter;
-import resources.PvpFlag;
-import resources.Race;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;

@@ -44,13 +44,27 @@ import java.util.stream.Collectors;
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.common.data.combat.HitLocation;
+import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.BuffIntent;
-import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
+import intents.chat.SystemMessageIntent;
 import intents.combat.CreatureIncapacitatedIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
@@ -58,27 +72,13 @@ import intents.combat.IncapacitateCreatureIntent;
 import intents.combat.KillCreatureIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import network.packets.swg.zone.object_controller.ShowFlyText;
-import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-import network.packets.swg.zone.object_controller.combat.CombatAction;
-import network.packets.swg.zone.object_controller.combat.CombatSpam;
-import resources.Posture;
-import resources.combat.AttackInfo;
-import resources.combat.CombatStatus;
-import resources.combat.HitLocation;
-import services.combat.LootService;
-import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import services.objects.ObjectCreator;
-import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
 
@@ -382,7 +382,9 @@ public class CombatManager extends Manager {
 		CombatAction action = new CombatAction(source.getObjectId());
 		String anim = command.getRandomAnimation(weapon.getType());
 		action.setActionCrc(CRC.getCrc(anim));
-		action.setAttacker(source);
+		action.setAttackerId(source.getObjectId());
+		action.setPosture(source.getPosture());
+		action.setWeaponId(source.getEquippedWeapon() == null ? 0 : source.getEquippedWeapon().getObjectId());
 		action.setClientEffectId((byte) 0);
 		action.setCommandCrc(command.getCrc());
 		action.setTrail(TrailLocation.WEAPON);
@@ -399,8 +401,11 @@ public class CombatManager extends Manager {
 			source.addDefender(target);
 			
 			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
-			combatSpam.setAttacker(source);
-			combatSpam.setDefender(target);
+			combatSpam.setAttacker(source.getObjectId());
+			combatSpam.setAttackerPosition(source.getLocation().getPosition());
+			combatSpam.setWeapon(source.getEquippedWeapon() == null ? 0 : source.getEquippedWeapon().getObjectId());
+			combatSpam.setDefender(target.getObjectId());
+			combatSpam.setDefenderPosition(target.getLocation().getPosition());
 			combatSpam.setInfo(info);
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
@@ -426,7 +431,7 @@ public class CombatManager extends Manager {
 
 			int finalDamage = info.getFinalDamage();
 			
-			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
 			
 			target.handleDamage(source, finalDamage);
 			

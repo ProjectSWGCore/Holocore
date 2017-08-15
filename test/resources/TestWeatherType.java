@@ -31,6 +31,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.projectswg.common.data.WeatherType;
+
 public class TestWeatherType {
 
 	/**

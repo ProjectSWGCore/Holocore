@@ -30,11 +30,12 @@ package resources.commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.combat.AttackType;
-import resources.combat.DamageType;
-import resources.combat.DelayAttackEggPosition;
-import resources.combat.HitType;
-import resources.combat.ValidTarget;
+import com.projectswg.common.data.combat.AttackType;
+import com.projectswg.common.data.combat.DamageType;
+import com.projectswg.common.data.combat.DelayAttackEggPosition;
+import com.projectswg.common.data.combat.HitType;
+import com.projectswg.common.data.combat.ValidTarget;
+
 import resources.objects.weapon.WeaponType;
 
 public class CombatCommand extends Command {

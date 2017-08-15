@@ -37,30 +37,30 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.login.AccountFeatureBits;
+import com.projectswg.common.network.packets.swg.login.ClientIdMsg;
+import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage;
+import com.projectswg.common.network.packets.swg.login.ConnectionServerLagResponse;
+import com.projectswg.common.network.packets.swg.zone.HeartBeat;
+import com.projectswg.common.network.packets.swg.zone.LagRequest;
+import com.projectswg.common.network.packets.swg.zone.SetWaypointColor;
+import com.projectswg.common.network.packets.swg.zone.ShowBackpack;
+import com.projectswg.common.network.packets.swg.zone.ShowHelmet;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
+import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.login.AccountFeatureBits;
-import network.packets.swg.login.ClientIdMsg;
-import network.packets.swg.login.ClientPermissionsMessage;
-import network.packets.swg.login.ConnectionServerLagResponse;
-import network.packets.swg.zone.HeartBeat;
-import network.packets.swg.zone.LagRequest;
-import network.packets.swg.zone.SetWaypointColor;
-import network.packets.swg.zone.ShowBackpack;
-import network.packets.swg.zone.ShowHelmet;
-import network.packets.swg.zone.chat.ChatSystemMessage;
-import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
@@ -107,7 +107,7 @@ public class ZoneManager extends Manager {
 		}
 	}
 	
-	private void handlePacket(GalacticIntent intent, Player player, Packet p) {
+	private void handlePacket(GalacticIntent intent, Player player, SWGPacket p) {
 		characterCreationService.handlePacket(intent, player, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
@@ -179,7 +179,7 @@ public class ZoneManager extends Manager {
 	}
 
 	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
-		// TODO Should move this to a different service, maybe make a service for other packets similar to this (ie misc.)
+		// TODO Should move this to a different service, maybe make a service for other SWGPackets similar to this (ie misc.)
 		PlayerObject ghost = player.getPlayerObject();
 		
 		WaypointObject waypoint = ghost.getWaypoint(p.getObjId());

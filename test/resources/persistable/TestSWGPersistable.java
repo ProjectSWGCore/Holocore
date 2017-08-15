@@ -36,10 +36,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
 
-import resources.Race;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import services.objects.ObjectCreator;

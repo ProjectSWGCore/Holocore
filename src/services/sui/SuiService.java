@@ -27,29 +27,29 @@
 ***********************************************************************************/
 package services.sui;
 
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import groovy.util.ResourceException;
-import groovy.util.ScriptException;
-import intents.network.GalacticPacketIntent;
-import intents.sui.SuiWindowIntent;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
-import network.packets.swg.zone.server_ui.SuiEventNotification;
-import network.packets.swg.zone.server_ui.SuiForceClosePage;
-import resources.player.Player;
-import resources.sui.ISuiCallback;
-import resources.sui.SuiBaseWindow;
-import resources.sui.SuiComponent;
-import resources.sui.SuiEvent;
-import utilities.Scripts;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.sui.ISuiCallback;
+import com.projectswg.common.data.sui.SuiBaseWindow;
+import com.projectswg.common.data.sui.SuiComponent;
+import com.projectswg.common.data.sui.SuiEvent;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage;
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification;
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiForceClosePage;
+
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
+import intents.network.GalacticPacketIntent;
+import intents.sui.SuiWindowIntent;
+import resources.player.Player;
+import utilities.Scripts;
 
 public class SuiService extends Service {
 
@@ -63,9 +63,9 @@ public class SuiService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(gpi.getPlayer(), (SWGPacket) p);
+			processSwgPacket(gpi.getPlayer(), p);
 	}
 	
 	private void processSwgPacket(Player player, SWGPacket p) {
@@ -140,7 +140,7 @@ public class SuiService extends Service {
 			}
 		} else if (window.hasJavaCallback(callback)) {
 			ISuiCallback suiCallback = window.getJavaCallback(callback);
-			suiCallback.handleEvent(player, player.getCreatureObject(), event, parameters);
+			suiCallback.handleEvent(event, parameters);
 		}
 
 		// Both of these events "closes" the sui window for the client, so we have no need for the server to continue tracking the window.
@@ -152,8 +152,8 @@ public class SuiService extends Service {
 		int id = createWindowId();
 		window.setId(id);
 
-		SuiCreatePageMessage packet = new SuiCreatePageMessage(window);
-		player.sendPacket(packet);
+		SuiCreatePageMessage SWGPacket = new SuiCreatePageMessage(window);
+		player.sendPacket(SWGPacket);
 
 		long networkId = player.getNetworkId();
 		List<SuiBaseWindow> activeWindows = windows.get(networkId);

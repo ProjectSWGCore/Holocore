@@ -28,8 +28,8 @@
 package resources.commands.callbacks;
 
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.BiographyUpdate;
 
-import network.packets.swg.zone.object_controller.BiographyUpdate;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

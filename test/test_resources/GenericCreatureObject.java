@@ -29,16 +29,16 @@ package test_resources;
 
 import java.util.Map.Entry;
 
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.packets.SWGPacket;
 
 import intents.object.ObjectCreatedIntent;
-import network.packets.Packet;
-import resources.Race;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
@@ -57,7 +57,7 @@ public class GenericCreatureObject extends CreatureObject {
 		super(objectId);
 		player = new Player() {
 			@Override
-			public void sendPacket(Packet ... packets) {
+			public void sendPacket(SWGPacket ... SWGPackets) {
 				// Nah
 			}
 		};

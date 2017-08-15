@@ -28,29 +28,28 @@
 package intents.network;
 
 import com.projectswg.common.control.Intent;
-
-import network.packets.Packet;
+import com.projectswg.common.network.packets.SWGPacket;
 
 public class InboundPacketIntent extends Intent {
 	
-	private Packet packet;
+	private SWGPacket SWGPacket;
 	private long networkId;
 	
-	public InboundPacketIntent(Packet p, long networkId) {
+	public InboundPacketIntent(SWGPacket p, long networkId) {
 		setPacket(p);
 		setNetworkId(networkId);
 	}
 	
-	public void setPacket(Packet p) {
-		this.packet = p;
+	public void setPacket(SWGPacket p) {
+		this.SWGPacket = p;
 	}
 	
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}
 	
-	public Packet getPacket() {
-		return packet;
+	public SWGPacket getPacket() {
+		return SWGPacket;
 	}
 	
 	public long getNetworkId() {

@@ -145,6 +145,7 @@ public final class ObjectCreator {
 			case GOT_MISC_CONTAINER_SHIP_LOOT:
 			case GOT_MISC_CONTAINER_WEARABLE:
 			case GOT_MISC_FURNITURE:				return new TangibleObject(objectId);
+			case GOT_STATIC:						return new StaticObject(objectId);
 			default:								return null;
 		}
 	}
@@ -167,6 +168,7 @@ public final class ObjectCreator {
 			case GOTM_CYBERNETIC:
 			case GOTM_TERMINAL:
 			case GOTM_POWERUP_WEAPON:		return new TangibleObject(objectId);
+			case GOTM_NONE:
 			default: 						return null;
 		}
 	}

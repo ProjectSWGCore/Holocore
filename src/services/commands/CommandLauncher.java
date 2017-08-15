@@ -33,17 +33,17 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-import intents.chat.SystemMessageIntent;
 import intents.chat.ChatCommandIntent;
-import network.packets.swg.zone.object_controller.CommandQueueDequeue;
-import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
+import intents.chat.SystemMessageIntent;
 import resources.commands.Command;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;

@@ -33,15 +33,15 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.debug.Log;
 
 import intents.SkillModIntent;
-import intents.player.CreatedCharacterIntent;
 import intents.experience.LevelChangedIntent;
 import intents.object.ContainerTransferIntent;
-import resources.Race;
+import intents.player.CreatedCharacterIntent;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;

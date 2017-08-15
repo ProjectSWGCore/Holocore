@@ -31,46 +31,46 @@ import java.util.List;
 
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.SWGPacket;
 
-import network.packets.Packet;
 import resources.player.Player;
 
 public class NotifyPlayersPacketIntent extends Intent {
 	
-	private Packet packet;
+	private SWGPacket SWGPacket;
 	private Terrain terrain;
 	private List<Long> networkIds;
 	private ConditionalNotify condition;
 	
-	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
-		this.packet = packet;
+	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
+		this.SWGPacket = SWGPacket;
 		this.terrain = terrain;
 		this.condition = condition;
 		this.networkIds = networkIds;
 	}
 	
-	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition) {
-		this(packet, terrain, condition, null);
+	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain, ConditionalNotify condition) {
+		this(SWGPacket, terrain, condition, null);
 	}
 	
-	public NotifyPlayersPacketIntent(Packet packet, ConditionalNotify condition, List<Long> networkIds) {
-		this(packet, null, condition, networkIds);
+	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, ConditionalNotify condition, List<Long> networkIds) {
+		this(SWGPacket, null, condition, networkIds);
 	}
 	
-	public NotifyPlayersPacketIntent(Packet packet, List<Long> networkIds) {
-		this(packet, null, null, networkIds);
+	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, List<Long> networkIds) {
+		this(SWGPacket, null, null, networkIds);
 	}
 	
-	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain) {
-		this(packet, terrain, null);
+	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain) {
+		this(SWGPacket, terrain, null);
 	}
 	
-	public NotifyPlayersPacketIntent(Packet p) {
+	public NotifyPlayersPacketIntent(SWGPacket p) {
 		this(p, null, null, null);
 	}
 	
-	public Packet getPacket() {
-		return packet;
+	public SWGPacket getPacket() {
+		return SWGPacket;
 	}
 	
 	public Terrain getTerrain() {

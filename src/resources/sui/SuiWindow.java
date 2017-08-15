@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package resources.sui;
 
+import com.projectswg.common.data.sui.ISuiCallback;
+import com.projectswg.common.data.sui.SuiBaseWindow;
+import com.projectswg.common.data.sui.SuiEvent;
+
 import intents.sui.SuiWindowIntent;
 import resources.player.Player;
 

@@ -31,11 +31,11 @@ import java.util.List;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.crafting.surveying.SurveyMessage;
+import com.projectswg.common.network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
 
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import network.packets.swg.zone.PlayMusicMessage;
-import network.packets.swg.zone.crafting.surveying.SurveyMessage;
-import network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;
 import services.crafting.resource.galactic.GalacticResourceSpawn;

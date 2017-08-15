@@ -41,12 +41,12 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.ExpertiseRequestMessage;
 
 import intents.experience.GrantSkillIntent;
 import intents.experience.LevelChangedIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.ExpertiseRequestMessage;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.StandardLog;
@@ -167,13 +167,13 @@ public final class ExpertiseService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
+		SWGPacket SWGPacket = gpi.getPacket();
 		
-		if (!(packet instanceof ExpertiseRequestMessage)) {
+		if (!(SWGPacket instanceof ExpertiseRequestMessage)) {
 			return;
 		}
 		
-		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
+		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) SWGPacket;
 		CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 

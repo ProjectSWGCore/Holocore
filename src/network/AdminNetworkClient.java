@@ -29,20 +29,23 @@ package network;
 
 import java.net.SocketAddress;
 
-import network.packets.Packet;
+import com.projectswg.common.network.packets.SWGPacket;
+
 import services.network.PacketSender;
 
 public class AdminNetworkClient extends NetworkClient {
-
+	
 	public AdminNetworkClient(SocketAddress address, long networkId, PacketSender sender) {
 		super(address, networkId, sender);
 	}
 	
-	protected boolean isInboundAllowed(Packet p) {
+	@Override
+	protected boolean isInboundAllowed(SWGPacket p) {
 		return true;
 	}
 	
-	protected boolean isOutboundAllowed(Packet p) {
+	@Override
+	protected boolean isOutboundAllowed(SWGPacket p) {
 		return true;
 	}
 	

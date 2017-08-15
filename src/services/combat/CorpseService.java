@@ -41,12 +41,20 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.BuffIntent;
 import intents.FactionIntent;
@@ -56,12 +64,6 @@ import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import resources.Posture;
-import resources.PvpFaction;
-import resources.PvpStatus;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
@@ -69,10 +71,8 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
 import resources.sui.SuiWindow;
-import utilities.ThreadUtilities;
 
 /**
  * The {@code CorpseService} removes corpses from the world a while after
@@ -262,16 +262,16 @@ public final class CorpseService extends Service {
 			suiWindow.addListItem(name);
 		}
 		
-		suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+		suiWindow.addCallback("handleFacilityChoice", (SuiEvent event, Map<String, String> parameters) -> {
 			int selectionIndex = SuiListBox.getSelectedRow(parameters);
 
 			if (event != SuiEvent.OK_PRESSED || selectionIndex >= availableFacilities.size() || selectionIndex < 0) {
-				suiWindow.display(player);
+				suiWindow.display(corpse.getOwner());
 				return;
 			}
 
 			if (reviveCorpse(corpse, availableFacilities.get(selectionIndex)) != CloneResult.SUCCESS) {
-				suiWindow.display(player);
+				suiWindow.display(corpse.getOwner());
 			}
 		});
 

@@ -27,14 +27,15 @@
  ***********************************************************************************/
 package utilities;
 
+import java.io.IOException;
+
 import com.projectswg.common.debug.Log;
+
 import groovy.lang.Binding;
 import groovy.lang.Script;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-
-import java.io.IOException;
 
 public class Scripts {
 	private static GroovyScriptEngine groovyEngine;

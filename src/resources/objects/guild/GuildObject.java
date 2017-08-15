@@ -30,8 +30,8 @@ package resources.objects.guild;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;

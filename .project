@@ -11,13 +11,8 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>full,incremental,</triggers>
+			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
 			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/org.eclipse.buildship.core.gradleprojectbuilder (1).launch</value>
-				</dictionary>
 			</arguments>
 		</buildCommand>
 	</buildSpec>

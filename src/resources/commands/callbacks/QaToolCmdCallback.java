@@ -27,10 +27,9 @@
 
 package resources.commands.callbacks;
 
-import java.util.Map;
-
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.debug.Log;
 
 import groovy.util.ResourceException;
@@ -50,9 +49,7 @@ import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
 import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
@@ -109,7 +106,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					if(command.length == 3)
 						grantXp(player, command[1], command[2]);
 					else
-						sendSystemMessage(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
+						SystemMessageIntent.broadcastPersonal(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
 					break;
 				default:
 					displayMainWindow(player);
@@ -127,15 +124,20 @@ public class QaToolCmdCallback implements ICmdCallback {
 		SuiListBox window = new SuiListBox(SuiButtons.OK_CANCEL, TITLE, PROMPT);
 		window.addListItem("Item Creator");
 		
-		window.addCallback("handleQaTool", new QaListBoxSuiCallback());
+		window.addCallback("handleQaTool", (event, parameters) -> {
+			if (event != SuiEvent.OK_PRESSED || SuiListBox.getSelectedRow(parameters) != 0)
+				return;
+			
+			displayItemCreator(player);
+		});
 		window.display(player);
 	}
 	
-	private void displayItemCreator(Player creator) {
+	private void displayItemCreator(Player player) {
 		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the name of the item you wish to create");
-		inputBox.addOkButtonCallback("handleCreateItem", (player, actor, event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
-		inputBox.addCancelButtonCallback("displayMainWindow", (player, actor, event, parameters) -> displayMainWindow(player));
-		inputBox.display(creator);
+		inputBox.addOkButtonCallback("handleCreateItem", (event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
+		inputBox.addCancelButtonCallback("displayMainWindow", (event, parameters) -> displayMainWindow(player));
+		inputBox.display(player);
 	}
 	
 	/* Handlers */
@@ -170,7 +172,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
-		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
+		inputBox.addOkButtonCallback("handleDeleteObject", (event, parameters) -> {
 			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
 				Log.i("[%s] Requested deletion of character: %s", player.getUsername(), target.getObjectName());
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
@@ -191,18 +193,18 @@ public class QaToolCmdCallback implements ICmdCallback {
 		args = args.trim();
 		long recoveree = playerManager.getCharacterIdByFirstName(args);
 		if (recoveree == 0) {
-			sendSystemMessage(player, "Could not find player by first name: '" + args + "'");
+			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + "'");
 			return;
 		}
 		
 		SWGObject obj = objectManager.getObjectById(recoveree);
 		if (!(obj instanceof CreatureObject)) {
-			sendSystemMessage(player, "Object is not a creature: '" + args + "'");
+			SystemMessageIntent.broadcastPersonal(player, "Object is not a creature: '" + args + "'");
 			return;
 		}
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
 		new ObjectTeleportIntent(obj, loc).broadcast();
-		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
+		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
 	}
 	
 	private void setInstance(Player player, String args) {
@@ -215,7 +217,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			new ForceAwarenessUpdateIntent(creature).broadcast();
 		} catch (NumberFormatException e) {
 			Log.e("Invalid instance number with qatool: %s", args);
-			sendSystemMessage(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
+			SystemMessageIntent.broadcastPersonal(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
 			return;
 		}
 	}
@@ -231,7 +233,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
 			Log.i("XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
 		} catch (NumberFormatException e) {
-			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
+			SystemMessageIntent.broadcastPersonal(player, String.format("XP command: %s is not a number", xpGainedArg));
 			Log.e("XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
 		}
 	}
@@ -242,27 +244,4 @@ public class QaToolCmdCallback implements ICmdCallback {
 		new SuiMessageBox(SuiButtons.OK, title, prompt).display(player);
 	}
 	
-	private void sendSystemMessage(Player player, String message) {
-		new SystemMessageIntent(player, message).broadcast();
-	}
-	
-	/* Callbacks */
-	
-	private class QaListBoxSuiCallback implements ISuiCallback {
-		@Override
-		public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
-			if (event != SuiEvent.OK_PRESSED)
-				return;
-			
-			int selection = SuiListBox.getSelectedRow(parameters);
-			
-			switch (selection) {
-				case 0:
-					displayItemCreator(player);
-					break;
-				default:
-					break;
-			}
-		}
-	}
 }

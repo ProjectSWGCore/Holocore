@@ -37,10 +37,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 
 import intents.DanceIntent;
 import intents.FlourishIntent;
@@ -49,10 +53,6 @@ import intents.WatchIntent;
 import intents.chat.SystemMessageIntent;
 import intents.experience.ExperienceIntent;
 import intents.player.PlayerTransformedIntent;
-import network.packets.swg.zone.object_controller.Animation;
-import resources.Posture;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -454,7 +454,7 @@ public class EntertainmentService extends Service {
 			PerformanceData performanceData = performanceMap.get(performanceName);
 			int flourishXpMod = performanceData.getFlourishXpMod();
 			int performanceCounter = performer.getPerformanceCounter();
-			int xpGained = (int) (performanceCounter * flourishXpMod);
+			int xpGained = performanceCounter * flourishXpMod;
 			
 			if(xpGained > 0) {
 				new ExperienceIntent(performer, "entertainer", xpGained).broadcast();

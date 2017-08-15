@@ -28,9 +28,9 @@
 package intents.chat;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.location.Terrain;
 
-import resources.encodables.ProsePackage;
 import resources.player.Player;
 
 public class SystemMessageIntent extends Intent {

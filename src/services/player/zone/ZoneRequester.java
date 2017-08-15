@@ -31,10 +31,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.ErrorMessage;
 
 import intents.RequestZoneInIntent;
 import intents.chat.SystemMessageIntent;
-import network.packets.swg.ErrorMessage;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

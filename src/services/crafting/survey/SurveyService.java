@@ -29,13 +29,13 @@ package services.crafting.survey;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
+import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
 
 import intents.crafting.survey.SampleResourceIntent;
 import intents.crafting.survey.StartSurveyToolIntent;
 import intents.crafting.survey.StartSurveyingIntent;
-import network.packets.swg.zone.PlayMusicMessage;
-import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
-import network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import services.crafting.resource.galactic.GalacticResource;

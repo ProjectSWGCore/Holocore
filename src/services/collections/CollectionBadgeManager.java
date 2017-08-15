@@ -34,11 +34,11 @@ import java.util.BitSet;
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
 import intents.GrantBadgeIntent;
 import intents.GrantClickyCollectionIntent;
 import intents.object.DestroyObjectIntent;
-import network.packets.swg.zone.PlayMusicMessage;
 import resources.objects.SWGObject;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;

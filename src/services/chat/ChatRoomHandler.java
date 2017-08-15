@@ -33,23 +33,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
+import com.projectswg.common.data.encodables.chat.ChatResult;
+import com.projectswg.common.data.encodables.chat.ChatRoom;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnDestroyRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnEnteredRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnLeaveRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendRoomMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatRoomMessage;
+import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 
-import network.packets.swg.zone.chat.ChatOnDestroyRoom;
-import network.packets.swg.zone.chat.ChatOnEnteredRoom;
-import network.packets.swg.zone.chat.ChatOnLeaveRoom;
-import network.packets.swg.zone.chat.ChatOnSendRoomMessage;
-import network.packets.swg.zone.insertion.ChatRoomList;
-import resources.chat.ChatAvatar;
-import resources.chat.ChatResult;
-import resources.chat.ChatRoom;
 import resources.client_info.ServerFactory;
-import resources.encodables.OutOfBandPackage;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
@@ -259,7 +260,15 @@ public class ChatRoomHandler {
 		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 		
 		if (result == ChatResult.SUCCESS) {
-			room.sendMessage(avatar, message, oobPackage, player.getPlayerManager());
+			ChatRoomMessage chatRoomMessage = new ChatRoomMessage(avatar, room.getId(), message, oobPackage);
+			for (ChatAvatar member : room.getMembers()) {
+				if (member.getPlayer().getPlayerObject().isIgnored(sender.getName()))
+					continue;
+				
+				member.getPlayer().sendPacket(chatRoomMessage);
+			}
+			
+			room.sendMessage(avatar, message, oobPackage);
 			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId() + "/" + room.getPath(), message);
 		}
 	}
@@ -274,11 +283,11 @@ public class ChatRoomHandler {
 			rooms.destroyRoom(room);
 		}
 		
-		// Send the ChatOnDestroyRoom packet to every else in the room besides the person destroying the packet
-		ChatOnDestroyRoom packet = new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0);
+		// Send the ChatOnDestroyRoom SWGPacket to every else in the room besides the person destroying the SWGPacket
+		ChatOnDestroyRoom SWGPacket = new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0);
 		room.getMembers().forEach(member -> {
 			if (!destroyer.equals(member))
-				member.getPlayer().sendPacket(packet);
+				member.getPlayer().sendPacket(SWGPacket);
 		});
 		
 		return true;

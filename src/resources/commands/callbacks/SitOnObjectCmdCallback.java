@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.swg.zone.object_controller.SitOnObject;
 
-import network.packets.swg.zone.object_controller.SitOnObject;
-import resources.Posture;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

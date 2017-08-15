@@ -32,6 +32,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.utilities.ThreadUtilities;
+
 public class ScheduledUtilities {
 	
 	private static final Object mutex = new Object();

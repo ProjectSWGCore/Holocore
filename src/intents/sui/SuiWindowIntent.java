@@ -28,9 +28,9 @@
 package intents.sui;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.sui.SuiBaseWindow;
 
 import resources.player.Player;
-import resources.sui.SuiBaseWindow;
 
 public class SuiWindowIntent extends Intent {
 	

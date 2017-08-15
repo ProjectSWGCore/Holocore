@@ -33,20 +33,19 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.PacketType;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
 
-import network.PacketType;
 import network.encryption.Compression;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkProtocol {
 	
-	public NetBuffer encode(Packet p) {
+	public NetBuffer encode(SWGPacket p) {
 		NetBuffer encoded = p.encode();
 		encoded.flip();
 		if (encoded.remaining() != encoded.capacity())
-			Log.w("Packet %s has invalid array length. Expected: %d  Actual: %d", p, encoded.remaining(), encoded.capacity());
+			Log.w("SWGPacket %s has invalid array length. Expected: %d  Actual: %d", p, encoded.remaining(), encoded.capacity());
 		return preparePacket(encoded);
 	}
 	
@@ -65,7 +64,7 @@ public class NetworkProtocol {
 		}
 	}
 	
-	public Packet decode(NetBufferStream buffer) throws EOFException {
+	public SWGPacket decode(NetBufferStream buffer) throws EOFException {
 		if (buffer.remaining() < 5)
 			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
 		byte bitfield = buffer.getByte();
@@ -83,13 +82,13 @@ public class NetworkProtocol {
 		return processSWG(pData);
 	}
 	
-	private NetBuffer preparePacket(NetBuffer packet) {
-		int remaining = packet.remaining();
+	private NetBuffer preparePacket(NetBuffer SWGPacket) {
+		int remaining = SWGPacket.remaining();
 		NetBuffer data = NetBuffer.allocate(remaining + 5);
 		data.addByte(2); // SWG bitmask
 		data.addShort(remaining);
 		data.addShort(remaining);
-		data.add(packet);
+		data.add(SWGPacket);
 		data.flip();
 		return data;
 	}

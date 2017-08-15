@@ -32,9 +32,9 @@ import java.util.List;
 
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.UpdatePostureMessage;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.UpdatePostureMessage;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;

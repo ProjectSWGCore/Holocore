@@ -37,6 +37,7 @@ import org.junit.runners.JUnit4;
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
@@ -45,7 +46,6 @@ import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import resources.Posture;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;

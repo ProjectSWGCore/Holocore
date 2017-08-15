@@ -44,7 +44,7 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	private int updateType;
 	
 	public SWGBitSet(int view, int updateType) {
-		super(128); // Seems to be the default size for the bitmask sets in packets
+		super(128); // Seems to be the default size for the bitmask sets in SWGPackets
 		this.view = view;
 		this.updateType = updateType;
 	}

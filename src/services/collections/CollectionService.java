@@ -36,6 +36,7 @@ import java.util.List;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.debug.Log;
 
 import intents.GrantClickyCollectionIntent;
@@ -44,7 +45,6 @@ import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
-import resources.radial.RadialOption;
 import resources.radial.Radials;
 
 public class CollectionService extends Service {

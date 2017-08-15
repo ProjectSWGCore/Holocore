@@ -31,24 +31,23 @@ import java.util.Set;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.debug.Assert;
 
 import intents.GroupEventIntent;
 import intents.PlayerEventIntent;
-import intents.chat.SystemMessageIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.chat.ChatRoomUpdateIntent.UpdateType;
+import intents.chat.SystemMessageIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import resources.chat.ChatAvatar;
-import resources.encodables.ProsePackage;
-import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager.ObjectLookup;
@@ -119,7 +118,7 @@ public class GroupService extends Service {
 		window.addListItem("Lottery");
 		window.addListItem("Random");
 
-		window.addCallback("handleSelectedItem", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+		window.addCallback("handleSelectedItem", (SuiEvent event, Map<String, String> parameters) -> {
 			if (event != SuiEvent.OK_PRESSED)
 				return;
 			
@@ -143,10 +142,10 @@ public class GroupService extends Service {
 					lootRuleMsg = "selected_free4all";
 			}
 			
-			GroupObject groupObject = (GroupObject) ObjectLookup.getObjectById(player.getCreatureObject().getGroupId());
+			GroupObject groupObject = (GroupObject) ObjectLookup.getObjectById(groupLeader.getCreatureObject().getGroupId());
 			groupObject.setLootRule(selectedRow);
 			groupObject.displayLootRuleChangeBox(lootRuleMsg);
-			sendSystemMessage(player, lootRuleMsg);
+			sendSystemMessage(groupLeader, lootRuleMsg);
 		});
 		window.display(groupLeader);		
 	}	

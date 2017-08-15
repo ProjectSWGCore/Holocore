@@ -30,13 +30,14 @@ package resources.commands.callbacks;
 import java.util.Locale;
 import java.util.Map;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.location.Location;
 
 import intents.chat.SystemMessageIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.commands.ICmdCallback;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
@@ -90,7 +91,7 @@ public class FindFriendCallback implements ICmdCallback {
 		if (waypoint == null) {
 			waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
 			waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
-			waypoint.setColor(WaypointObject.WaypointColor.PURPLE);
+			waypoint.setColor(WaypointColor.PURPLE);
 			waypoint.setName(friendName);
 			ghost.addWaypoint(waypoint);
 			new ObjectCreatedIntent(waypoint).broadcast();

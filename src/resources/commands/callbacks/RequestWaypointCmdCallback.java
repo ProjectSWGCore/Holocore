@@ -27,12 +27,16 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 
+import intents.chat.SystemMessageIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
-import resources.objects.player.PlayerObject;
+import resources.objects.SpecificObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
@@ -42,34 +46,51 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		// First parameter can be name of the planet or an int for the color
-		// Args: (^-,=+_)color_1(,+-=_^)=1 planet x 0.0 z
-		PlayerObject ghost = player.getPlayerObject();
-		if (ghost == null)
+		String[] cmd = args.split(" ");
+		CreatureObject creature = player.getCreatureObject();
+		long cellId = 0;
+		Point3D position = creature.getLocation().getPosition();
+		Terrain terrain = creature.getTerrain();
+		String expectedFormat = "/waypoint x y z";
+		try {
+			switch (cmd.length) {
+				case 0:
+					cellId = (creature.getParent() != null) ? creature.getParent().getObjectId() : 0;
+					break;
+				case 3: // x y z
+					position.setX(Double.parseDouble(cmd[0]));
+					position.setY(Double.parseDouble(cmd[1]));
+					position.setZ(Double.parseDouble(cmd[2]));
+					break;
+				case 4: // terrain x y z
+					expectedFormat = "/waypoint terrain x y z";
+					terrain = Terrain.getTerrainFromName(cmd[0]);
+					position.setX(Double.parseDouble(cmd[1]));
+					position.setY(Double.parseDouble(cmd[2]));
+					position.setZ(Double.parseDouble(cmd[3]));
+					break;
+				default:
+					SystemMessageIntent.broadcastPersonal(player, "Warning: unknown number of args: "+cmd.length+" - defaulting to 0 argument call to waypoint");
+					break;
+			}
+		} catch (NumberFormatException e) {
+			SystemMessageIntent.broadcastPersonal(player, "Invalid call to waypoint [INVALID_NUMBER]! Expected: " + expectedFormat);
 			return;
-
-		String[] cmd = args.split(" ", 6);
-		WaypointObject.WaypointColor color = WaypointObject.WaypointColor.BLUE;
-
-/*		if (cmd[0].contains("color_")) {
-			// Command is in color planet x y z name format
-			String colorId = cmd[0].substring(14, cmd[0].length() - 10);
-			color = WaypointObject.WaypointColor.values()[Integer.valueOf(colorId) - 1];
-		}*/
-		Terrain terrain = (color != null ? Terrain.getTerrainFromName(cmd[1]) : Terrain.getTerrainFromName(cmd[0]));
-
-		double x = (color != null ? Double.valueOf(cmd[2]) : Double.valueOf(cmd[1]));
-		double y = (color != null ? Double.valueOf(cmd[3]) : Double.valueOf(cmd[2]));
-		double z = (color != null ? Double.valueOf(cmd[4]) : Double.valueOf(cmd[3]));
-
-		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
-
-		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
-		waypoint.setPosition(terrain, x, y, z);
-		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
-		if (color != null)
-			waypoint.setColor(color);
-		ghost.addWaypoint(waypoint);
-		new ObjectCreatedIntent(waypoint).broadcast();
+		}
+		if (terrain == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Invalid call to waypoint [INVALID_TERRAIN]! Expected: " + expectedFormat);
+			return;
+		}
+		createWaypoint(player, terrain, position, cellId);
+	}
+	
+	private static void createWaypoint(Player player, Terrain terrain, Point3D position, long cellId) {
+		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WAYPOINT.getTemplate());
+		waypoint.setPosition(terrain, position.getX(), position.getY(), position.getZ());
+		waypoint.setCellId(cellId);
+		waypoint.setName("@planet_n:" + terrain.getName());
+		waypoint.setColor(WaypointColor.BLUE);
+		player.getPlayerObject().addWaypoint(waypoint);
+		ObjectCreatedIntent.broadcast(waypoint);
 	}
 }

@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import resources.encodables.StringId;
+import com.projectswg.common.data.encodables.oob.StringId;
+
 import services.crafting.resource.galactic.RawResourceType;
 
 public class RawResource {

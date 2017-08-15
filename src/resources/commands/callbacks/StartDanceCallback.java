@@ -29,7 +29,6 @@
 package resources.commands.callbacks;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import resources.commands.ICmdCallback;
@@ -37,7 +36,6 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
 import services.galaxy.GalacticManager;
 
@@ -69,16 +67,13 @@ public class StartDanceCallback implements ICmdCallback {
 				}
 			}
 
-			listBox.addOkButtonCallback("handleSelectedItem", new resources.sui.ISuiCallback() {
-				@Override
-				public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
-					int selection = SuiListBox.getSelectedRow(parameters);
-					String selectedDanceName = listBox.getListItem(selection).getName().toLowerCase(Locale.ENGLISH);
-
-					new intents.DanceIntent(selectedDanceName, player.getCreatureObject(), changeDance).broadcast();
-				}
+			listBox.addOkButtonCallback("handleSelectedItem", (event, parameters) -> {
+				int selection = SuiListBox.getSelectedRow(parameters);
+				String selectedDanceName = listBox.getListItem(selection).getName().toLowerCase(Locale.ENGLISH);
+				
+				new intents.DanceIntent(selectedDanceName, player.getCreatureObject(), changeDance).broadcast();
 			});
-
+			
 			listBox.display(player);
 		} else {
 			new intents.DanceIntent(args, player.getCreatureObject(), changeDance).broadcast();

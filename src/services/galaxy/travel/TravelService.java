@@ -33,8 +33,16 @@ import java.util.Collections;
 import java.util.List;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.EnterTicketPurchaseModeMessage;
+import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListRequest;
+import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse;
+import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint;
 
 import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
@@ -42,14 +50,7 @@ import intents.object.ObjectCreatedIntent;
 import intents.travel.TicketPurchaseIntent;
 import intents.travel.TicketUseIntent;
 import intents.travel.TravelPointSelectionIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
-import network.packets.swg.zone.PlanetTravelPointListRequest;
-import network.packets.swg.zone.PlanetTravelPointListResponse;
-import resources.Posture;
 import resources.config.ConfigFile;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.SpecificObject;
 import resources.objects.creature.CreatureObject;
@@ -114,12 +115,12 @@ public class TravelService extends Service {
 		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName(), tpsi.isInstant()));
 	}
 	
-	private void handleTravelPointRequest(GalacticPacketIntent i) {
-		Packet p = i.getPacket();
+	private void handleTravelPointRequest(GalacticPacketIntent gpi) {
+		SWGPacket p = gpi.getPacket();
 		
 		if (p instanceof PlanetTravelPointListRequest) {
 			String planetName = ((PlanetTravelPointListRequest) p).getPlanetName();
-			Player player = i.getPlayer();
+			Player player = gpi.getPlayer();
 			Terrain to = Terrain.getTerrainFromName(planetName);
 			if (to == null) {
 				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", planetName);
@@ -132,7 +133,14 @@ public class TravelService extends Service {
 			if (pointsForPlanet.remove(nearest))
 				pointsForPlanet.add(0, nearest); // Yes ... adding it to the beginning of the list because I hate the client
 			
-			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet, getAdditionalCosts(nearest, pointsForPlanet)));
+			List<Integer> additionalCosts = getAdditionalCosts(nearest, pointsForPlanet);
+			List<PlanetTravelPoint> pointList = new ArrayList<>();
+			for (int i = 0; i < pointsForPlanet.size(); i++) {
+				TravelPoint tp = pointsForPlanet.get(i);
+				int cost = additionalCosts.get(i);
+				pointList.add(new PlanetTravelPoint(tp.getName(), tp.getLocation().getPosition(), cost, tp.isReachable()));
+			}
+			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointList));
 		}
 	}
 	
@@ -203,12 +211,12 @@ public class TravelService extends Service {
 				ticketBox.addListItem(destinationPoint.getSuiFormat(), destinationPoint);
 			}
 			
-			ticketBox.addOkButtonCallback("handleSelectedItem", (callbackPlayer, actor, event, parameters) -> {
+			ticketBox.addOkButtonCallback("handleSelectedItem", (event, parameters) -> {
 				int row = SuiListBox.getSelectedRow(parameters);
 				SWGObject ticket = usableTickets.get(row);
 				TravelPoint nearestPoint = travel.getNearestTravelPoint(ticket);
 				TravelPoint destinationPoint = (TravelPoint) ticketBox.getListItem(row).getObject();
-				travel.handleTicketUse(callbackPlayer, ticket, nearestPoint, destinationPoint);
+				travel.handleTicketUse(player, ticket, nearestPoint, destinationPoint);
 			});
 			ticketBox.display(player);
 		}

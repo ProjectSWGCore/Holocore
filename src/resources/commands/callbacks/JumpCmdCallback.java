@@ -27,7 +27,8 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import network.packets.swg.zone.object_controller.JumpUpdate;
+import com.projectswg.common.network.packets.swg.zone.object_controller.JumpUpdate;
+
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

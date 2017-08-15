@@ -39,12 +39,12 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.TCPServer;
 import com.projectswg.common.network.TCPServer.TCPCallback;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 import intents.network.CloseConnectionIntent;
 import main.ProjectSWG.CoreException;
 import network.AdminNetworkClient;
 import network.NetworkClient;
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
@@ -73,7 +73,7 @@ public class NetworkClientManager extends Manager {
 			adminServer = null;
 		else
 			adminServer = new TCPServer(InetAddress.getLoopbackAddress(), adminServerPort, 1024);
-		udpServer.setCallback(packet -> onUdpPacket(packet));
+		udpServer.setCallback(SWGPacket -> onUdpPacket(SWGPacket));
 		inboundManager = new InboundNetworkManager(clientManager);
 		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
 		
@@ -134,11 +134,11 @@ public class NetworkClientManager extends Manager {
 		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
-	private void onUdpPacket(UDPPacket packet) {
-		if (packet.getLength() <= 0)
+	private void onUdpPacket(UDPPacket SWGPacket) {
+		if (SWGPacket.getLength() <= 0)
 			return;
-		switch (packet.getData()[0]) {
-			case 1: sendState(packet.getAddress(), packet.getPort()); break;
+		switch (SWGPacket.getData()[0]) {
+			case 1: sendState(SWGPacket.getAddress(), SWGPacket.getPort()); break;
 			default: break;
 		}
 	}

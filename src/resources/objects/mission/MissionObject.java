@@ -28,15 +28,16 @@
 package resources.objects.mission;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
@@ -75,7 +76,7 @@ public class MissionObject extends IntangibleObject {
 		bb.addInt(status);
 		bb.addObject(missionType);
 		bb.addAscii(targetName);
-		bb.addObject(waypoint);
+		bb.addObject(waypoint.getOOB());
 	}
 	
 	@Override
@@ -97,7 +98,7 @@ public class MissionObject extends IntangibleObject {
 		buffer.getUnicode();
 		waypoint = new WaypointObject(buffer.getLong());
 		buffer.position(pos);
-		waypoint.decode(buffer);
+		waypoint.setOOB(new WaypointPackage(buffer));
 	}
 	
 	@Override

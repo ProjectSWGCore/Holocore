@@ -44,13 +44,13 @@ import org.junit.runner.notification.Failure;
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.IntentManager;
 import com.projectswg.common.control.IntentManager.IntentSpeedRecord;
+import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.debug.Log.LogLevel;
 import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
 import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
 
 import intents.server.ServerStatusIntent;
-import resources.Galaxy.GalaxyStatus;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
 import services.CoreManager;

@@ -28,8 +28,7 @@
 package intents.network;
 
 import com.projectswg.common.control.Intent;
-
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 public class ConnectionClosedIntent extends Intent {
 	

@@ -8,18 +8,18 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.trade.AbortTradeMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.AcceptTransactionMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.AddItemMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.BeginTradeMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.BeginVerificationMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.DenyTradeMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.GiveMoneyMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.TradeCompleteMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.UnAcceptTransactionMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.VerifyTradeMessage;
 
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.trade.AbortTradeMessage;
-import network.packets.swg.zone.trade.AcceptTransactionMessage;
-import network.packets.swg.zone.trade.AddItemMessage;
-import network.packets.swg.zone.trade.BeginTradeMessage;
-import network.packets.swg.zone.trade.BeginVerificationMessage;
-import network.packets.swg.zone.trade.DenyTradeMessage;
-import network.packets.swg.zone.trade.GiveMoneyMessage;
-import network.packets.swg.zone.trade.TradeCompleteMessage;
-import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
-import network.packets.swg.zone.trade.VerifyTradeMessage;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
@@ -230,12 +230,12 @@ public class TradeSession {
 			return true;
 		}
 		
-		public void sendPacket(SWGPacket packet) {
-			creature.getOwner().sendPacket(packet);
+		public void sendPacket(SWGPacket SWGPacket) {
+			creature.getOwner().sendPacket(SWGPacket);
 		}
 		
-		public void sendToPartner(SWGPacket packet) {
-			partner.getOwner().sendPacket(packet);
+		public void sendToPartner(SWGPacket SWGPacket) {
+			partner.getOwner().sendPacket(SWGPacket);
 		}
 		
 		public void setAccepted(boolean accepted) {

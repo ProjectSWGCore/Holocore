@@ -27,7 +27,8 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import network.packets.swg.zone.object_controller.PlayerEmote;
+import com.projectswg.common.network.packets.swg.zone.object_controller.PlayerEmote;
+
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;

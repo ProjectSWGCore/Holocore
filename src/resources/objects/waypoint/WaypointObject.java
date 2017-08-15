@@ -27,130 +27,115 @@
 ***********************************************************************************/
 package resources.objects.waypoint;
 
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage.Type;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.encodables.OutOfBandData;
-import resources.encodables.OutOfBandPackage;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 
-public class WaypointObject extends IntangibleObject implements OutOfBandData {
+public class WaypointObject extends IntangibleObject {
 	
-	private long cellId;
-	private String name;
-	private WaypointColor color;
-	private boolean active;
+	private WaypointPackage waypoint;
 	
 	public WaypointObject(long objectId) {
 		super(objectId, BaselineType.WAYP);
-		this.cellId = 0;
-		this.name = "New Waypoint";
-		this.color = WaypointColor.BLUE;
-		this.active = true;
+		this.waypoint = new WaypointPackage();
+	}
+	
+	public void setOOB(WaypointPackage oob) {
+		this.waypoint = oob;
+	}
+	
+	public WaypointPackage getOOB() {
+		return waypoint;
 	}
 	
 	@Override
 	public String getObjectName() {
-		return name;
+		return waypoint.getName();
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public Point3D getPosition() {
+		return waypoint.getPosition();
 	}
 	
-	public WaypointColor getColor() {
-		return color;
+	@Override
+	public long getObjectId() {
+		return waypoint.getObjectId();
 	}
 	
-	public void setColor(WaypointColor color) {
-		this.color = color;
-	}
-	
-	public boolean isActive() {
-		return active;
-	}
-	
-	public void setActive(boolean active) {
-		this.active = active;
+	@Override
+	public Terrain getTerrain() {
+		return waypoint.getTerrain();
 	}
 	
 	public long getCellId() {
-		return cellId;
+		return waypoint.getCellId();
+	}
+	
+	public String getName() {
+		return waypoint.getName();
+	}
+	
+	public WaypointColor getColor() {
+		return waypoint.getColor();
+	}
+	
+	public boolean isActive() {
+		return waypoint.isActive();
+	}
+	
+	public void setObjectId(long objectId) {
+		waypoint.setObjectId(objectId);
+	}
+	
+	@Override
+	public void setTerrain(Terrain terrain) {
+		waypoint.setTerrain(terrain);
 	}
 	
 	public void setCellId(long cellId) {
-		this.cellId = cellId;
+		waypoint.setCellId(cellId);
 	}
 	
+	public void setName(String name) {
+		waypoint.setName(name);
+	}
+	
+	public void setColor(WaypointColor color) {
+		waypoint.setColor(color);
+	}
+	
+	public void setActive(boolean active) {
+		waypoint.setActive(active);
+	}
+
+	public Type getOobType() {
+		return waypoint.getOobType();
+	}
+
 	@Override
 	public void createObject(Player target) {
 		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
 	}
 	
 	@Override
-	public byte[] encode() {
-		NetBuffer data = NetBuffer.allocate(getLength());
-		data.addInt(0);
-		data.addFloat((float) getX());
-		data.addFloat((float) getY());
-		data.addFloat((float) getZ());
-		data.addLong(cellId);
-		data.addInt(getTerrain().getCrc());
-		data.addUnicode(name);
-		data.addLong(getObjectId());
-		data.addByte(color.getValue());
-		data.addBoolean(active);
-		return data.array();
-	}
-	
-	@Override
-	public void decode(NetBuffer data) {
-		data.getInt();
-		setPosition(data.getFloat(), data.getFloat(), data.getFloat());
-		cellId = data.getLong();
-		setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
-		name = data.getUnicode();
-		data.getLong(); // objectId
-		color = WaypointColor.valueOf(data.getByte());
-		active = data.getBoolean();
-	}
-	
-	@Override
-	public int getLength() {
-		return 42 + name.length() * 2;
-	}
-	
-	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
 		stream.addByte(0);
-		stream.addBoolean(active);
-		stream.addLong(cellId);
-		stream.addAscii(name);
-		stream.addAscii(color.name());
+		waypoint.save(stream);
 	}
 	
 	@Override
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		stream.getByte();
-		active = stream.getBoolean();
-		cellId = stream.getLong();
-		name = stream.getAscii();
-		color = WaypointColor.valueOf(stream.getAscii());
-	}
-	
-	@Override
-	public OutOfBandPackage.Type getOobType() {
-		return OutOfBandPackage.Type.WAYPOINT;
-	}
-	
-	@Override
-	public int getOobPosition() {
-		return -3;
+		waypoint.read(stream);
 	}
 	
 	@Override
@@ -158,65 +143,12 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 		if (!(o instanceof WaypointObject))
 			return false;
 		WaypointObject wp = (WaypointObject) o;
-		return wp.name.equals(name) && wp.cellId == cellId && wp.color == color && wp.active == active;
-	}
-	
-	@Override
-	public int hashCode() {
-		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + (int) cellId;
+		return wp.getObjectId() == getObjectId();
 	}
 	
 	@Override
 	public String toString() {
-		return "WaypointObject[" + "cellId=" + cellId + ", name='" + name + '\'' + ", color=" + color + ", active=" + active + ", location=" + getLocation() + "]";
+		return String.format("WaypointObject[name='%s', color=%s, active=%b, location=%s:%s", getName(), getColor(), isActive(), getTerrain(), getPosition());
 	}
 	
-	public enum WaypointColor {
-		BLUE(1),
-		GREEN(2),
-		ORANGE(3),
-		YELLOW(4),
-		PURPLE(5),
-		WHITE(6),
-		MULTICOLOR(7);
-		
-		private int i;
-		
-		WaypointColor(int i) {
-			this.i = i;
-		}
-		
-		public int getValue() {
-			return i;
-		}
-		
-		public static WaypointColor valueOf(int colorId) {
-			for (WaypointColor color : WaypointColor.values()) {
-				if (color.getValue() == colorId)
-					return color;
-			}
-			return WaypointColor.BLUE;
-		}
-		
-		public static WaypointColor fromString(String string) {
-			switch (string) {
-				case "blue":
-					return WaypointColor.BLUE;
-				case "green":
-					return WaypointColor.GREEN;
-				case "orange":
-					return WaypointColor.ORANGE;
-				case "yellow":
-					return WaypointColor.YELLOW;
-				case "purple":
-					return WaypointColor.PURPLE;
-				case "white":
-					return WaypointColor.WHITE;
-				case "multicolor":
-					return WaypointColor.MULTICOLOR;
-				default:
-					return WaypointColor.BLUE;
-			}
-		}
-	}
 }

@@ -36,13 +36,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
 
-import resources.encodables.OutOfBandPackage;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
-import resources.encodables.player.Mail;
 import resources.objects.SpecificObject;
 import resources.objects.waypoint.WaypointObject;
 import services.objects.ObjectCreator;
@@ -81,9 +81,9 @@ public class TestMailPersistable {
 		Mail mail = new Mail("sender", "subject", "message", 100);
 		WaypointObject waypoint1 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
 		WaypointObject waypoint2 = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WORLD_WAYPOINT.getTemplate());
-		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1));
+		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1.getOOB()));
 		test(mail);
-		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1, waypoint2));
+		mail.setOutOfBandPackage(new OutOfBandPackage(waypoint1.getOOB(), waypoint2.getOOB()));
 		test(mail);
 	}
 	

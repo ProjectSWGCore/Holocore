@@ -38,13 +38,13 @@ import java.util.Set;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.debug.Log;
 
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
-import resources.radial.RadialOption;
 import resources.radial.Radials;
 
 public class TerminalService extends Service {

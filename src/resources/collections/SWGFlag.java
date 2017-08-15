@@ -35,9 +35,9 @@ import java.util.BitSet;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.persistable.Persistable;
 
-import network.packets.swg.zone.baselines.Baseline;
 import resources.objects.SWGObject;
 
 public class SWGFlag extends BitSet implements Encodable, Persistable {
@@ -58,7 +58,7 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	 *            this BitSet resides at within the baseline
 	 */
 	public SWGFlag(int view, int updateType) {
-		super(128); // Seems to be the default size for the bitmask sets in packets
+		super(128); // Seems to be the default size for the bitmask sets in SWGPackets
 		this.view = view;
 		this.updateType = updateType;
 	}

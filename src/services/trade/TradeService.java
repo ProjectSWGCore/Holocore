@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.SecureTrade;
+import com.projectswg.common.network.packets.swg.zone.trade.AbortTradeMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.AcceptTransactionMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.AddItemMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.DenyTradeMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.GiveMoneyMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.UnAcceptTransactionMessage;
+import com.projectswg.common.network.packets.swg.zone.trade.VerifyTradeMessage;
 
 import intents.PlayerEventIntent;
 import intents.chat.SystemMessageIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.object_controller.SecureTrade;
-import network.packets.swg.zone.trade.AbortTradeMessage;
-import network.packets.swg.zone.trade.AcceptTransactionMessage;
-import network.packets.swg.zone.trade.AddItemMessage;
-import network.packets.swg.zone.trade.DenyTradeMessage;
-import network.packets.swg.zone.trade.GiveMoneyMessage;
-import network.packets.swg.zone.trade.UnAcceptTransactionMessage;
-import network.packets.swg.zone.trade.VerifyTradeMessage;
-import resources.Posture;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -64,30 +64,30 @@ public class TradeService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
+		SWGPacket SWGPacket = gpi.getPacket();
 		
-		if (packet instanceof SecureTrade) {
-			handleSecureTrade((SecureTrade) packet, gpi.getPlayer());
-		} else if (packet instanceof AbortTradeMessage) {
+		if (SWGPacket instanceof SecureTrade) {
+			handleSecureTrade((SecureTrade) SWGPacket, gpi.getPlayer());
+		} else if (SWGPacket instanceof AbortTradeMessage) {
 			handleAbortTradeMessage(gpi.getPlayer());
-		} else if (packet instanceof DenyTradeMessage) {
+		} else if (SWGPacket instanceof DenyTradeMessage) {
 			handleDenyTradeMessage(gpi.getPlayer());
-		} else if (packet instanceof AcceptTransactionMessage) {
+		} else if (SWGPacket instanceof AcceptTransactionMessage) {
 			handleAcceptTransactionMessage(gpi.getPlayer());
-		} else if (packet instanceof UnAcceptTransactionMessage) {
+		} else if (SWGPacket instanceof UnAcceptTransactionMessage) {
 			handleUnAcceptTransactionMessage(gpi.getPlayer());
-		} else if (packet instanceof AddItemMessage) {
-			handleAddItemMessage((AddItemMessage) packet, gpi.getPlayer());
-		} else if (packet instanceof GiveMoneyMessage) {
-			handleGiveMoneyMessage((GiveMoneyMessage) packet, gpi.getPlayer());
-		} else if (packet instanceof VerifyTradeMessage) {
+		} else if (SWGPacket instanceof AddItemMessage) {
+			handleAddItemMessage((AddItemMessage) SWGPacket, gpi.getPlayer());
+		} else if (SWGPacket instanceof GiveMoneyMessage) {
+			handleGiveMoneyMessage((GiveMoneyMessage) SWGPacket, gpi.getPlayer());
+		} else if (SWGPacket instanceof VerifyTradeMessage) {
 			handleVerifyTradeMessage(gpi.getPlayer(), gpi.getObjectManager());
 		}
 	}
 	
-	private void handleSecureTrade(SecureTrade packet, Player player) {
+	private void handleSecureTrade(SecureTrade SWGPacket, Player player) {
 		CreatureObject initiator = player.getCreatureObject();
-		SWGObject accepterObject = ObjectLookup.getObjectById(packet.getAccepterId());
+		SWGObject accepterObject = ObjectLookup.getObjectById(SWGPacket.getAccepterId());
 		if (!(accepterObject instanceof CreatureObject) || !((CreatureObject) accepterObject).isPlayer()) {
 			sendSystemMessage(initiator.getOwner(), "start_fail_target_not_player");
 			return;
@@ -115,7 +115,7 @@ public class TradeService extends Service {
 		initiator.setTradeSession(tradeSession);
 		if (oldSession != null)
 			oldSession.abortTrade();
-		handleTradeSessionRequest(packet, player, initiator, accepter);
+		handleTradeSessionRequest(SWGPacket, player, initiator, accepter);
 	}
 	
 	private void handleAbortTradeMessage(Player player) {
@@ -158,14 +158,14 @@ public class TradeService extends Service {
 		tradeSession.setTradeAccepted(creature, false);
 	}
 	
-	private void handleAddItemMessage(AddItemMessage packet, Player player) {
+	private void handleAddItemMessage(AddItemMessage SWGPacket, Player player) {
 		CreatureObject creature = player.getCreatureObject();
 		TradeSession tradeSession = creature.getTradeSession();
 		
 		if (!verifyTradeSession(tradeSession, creature))
 			return;
 		
-		SWGObject tradeObject = ObjectLookup.getObjectById(packet.getObjectId());
+		SWGObject tradeObject = ObjectLookup.getObjectById(SWGPacket.getObjectId());
 		
 		if (tradeObject == null || tradeObject.hasAttribute("no_trade") || tradeObject.getSuperParent() != creature) {
 			Log.w("Invalid object to trade: %s for creature: %s", tradeObject, creature);
@@ -176,14 +176,14 @@ public class TradeService extends Service {
 		tradeSession.addItem(creature, tradeObject);
 	}
 	
-	private void handleGiveMoneyMessage(GiveMoneyMessage packet, Player player) {
+	private void handleGiveMoneyMessage(GiveMoneyMessage SWGPacket, Player player) {
 		CreatureObject creature = player.getCreatureObject();
 		TradeSession tradeSession = creature.getTradeSession();
 		
 		if (!verifyTradeSession(tradeSession, creature))
 			return;
 		
-		tradeSession.setMoneyAmount(creature, packet.getMoneyAmount() & 0x00000000FFFFFFFFl);
+		tradeSession.setMoneyAmount(creature, SWGPacket.getMoneyAmount() & 0x00000000FFFFFFFFl);
 	}
 	
 	private void handleVerifyTradeMessage(Player player, ObjectManager objectManager) {
@@ -196,9 +196,9 @@ public class TradeService extends Service {
 		tradeSession.setTradeVerified(creature);
 	}
 	
-	private void handleTradeSessionRequest(SecureTrade packet, Player packetSender, CreatureObject initiator, CreatureObject accepter) {
+	private void handleTradeSessionRequest(SecureTrade SWGPacket, Player SWGPacketSender, CreatureObject initiator, CreatureObject accepter) {
 		SuiMessageBox requestBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Trade Request", initiator.getObjectName() + " wants to trade with you.\nDo you want to accept the request?");
-		requestBox.addOkButtonCallback("handleTradeRequest", (player, actor, event, paramenters) -> {
+		requestBox.addOkButtonCallback("handleTradeRequest", (event, paramenters) -> {
 			TradeSession tradeSession = initiator.getTradeSession();
 			if (tradeSession == null)
 				return;
@@ -206,8 +206,8 @@ public class TradeService extends Service {
 			accepter.setTradeSession(tradeSession);
 			tradeSession.beginTrade();
 		});
-		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (player, actor, event, paramenters) -> {
-			packetSender.sendPacket(new DenyTradeMessage(), new AbortTradeMessage());
+		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (event, paramenters) -> {
+			SWGPacketSender.sendPacket(new DenyTradeMessage(), new AbortTradeMessage());
 		});
 		requestBox.display(accepter.getOwner());
 	}

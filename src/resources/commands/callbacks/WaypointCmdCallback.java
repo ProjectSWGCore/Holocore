@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 
@@ -37,7 +38,6 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectCreator;

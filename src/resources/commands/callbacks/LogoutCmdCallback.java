@@ -30,15 +30,15 @@ package resources.commands.callbacks;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 
 import intents.chat.SystemMessageIntent;
 import intents.connection.ForceLogoutIntent;
-import resources.Posture;
 import resources.commands.ICmdCallback;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;

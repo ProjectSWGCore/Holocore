@@ -30,12 +30,12 @@ package resources.objects.manufacture;
 import java.util.Map.Entry;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
-import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;

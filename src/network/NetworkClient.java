@@ -36,14 +36,14 @@ import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.admin.AdminPacket;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.admin.AdminPacket;
-import network.packets.swg.holo.HoloConnectionStopped;
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import services.network.HolocoreSessionManager;
 import services.network.HolocoreSessionManager.ResponseAction;
 import services.network.NetworkProtocol;
@@ -129,18 +129,18 @@ public class NetworkClient {
 		}
 	}
 	
-	public void addToOutbound(Packet packet) {
+	public void addToOutbound(SWGPacket SWGPacket) {
 		if (getState() != State.CONNECTED)
 			return;
 		synchronized (outboundMutex) {
-			ResponseAction action = sessionManager.onOutbound(packet);
+			ResponseAction action = sessionManager.onOutbound(SWGPacket);
 			if (action != ResponseAction.CONTINUE) {
 				flushOutbound();
 				return;
 			}
-			if (!isOutboundAllowed(packet))
+			if (!isOutboundAllowed(SWGPacket))
 				return;
-			sendPacket(packet);
+			sendPacket(SWGPacket);
 		}
 	}
 	
@@ -151,16 +151,16 @@ public class NetworkClient {
 		}
 	}
 	
-	protected boolean isInboundAllowed(Packet p) {
+	protected boolean isInboundAllowed(SWGPacket p) {
 		return !(p instanceof AdminPacket);
 	}
 	
-	protected boolean isOutboundAllowed(Packet p) {
+	protected boolean isOutboundAllowed(SWGPacket p) {
 		return !(p instanceof AdminPacket);
 	}
 	
 	private boolean processNextPacket() throws EOFException {
-		Packet p;
+		SWGPacket p;
 		synchronized (buffer) {
 			if (!protocol.canDecode(buffer))
 				return false;
@@ -176,7 +176,7 @@ public class NetworkClient {
 		return true;
 	}
 	
-	private boolean processInbound(Packet p) {
+	private boolean processInbound(SWGPacket p) {
 		ResponseAction action = sessionManager.onInbound(p);
 		flushOutbound();
 		if (action == ResponseAction.IGNORE)
@@ -190,14 +190,14 @@ public class NetworkClient {
 	}
 	
 	private void flushOutbound() {
-		for (Packet out : sessionManager.getOutbound()) {
+		for (SWGPacket out : sessionManager.getOutbound()) {
 			sendPacket(out);
 		}
 	}
 	
-	private void sendPacket(Packet p) {
+	private void sendPacket(SWGPacket p) {
 		if (sender == null) {
-			Log.w("Unable to send packet %s - sender is null!");
+			Log.w("Unable to send SWGPacket %s - sender is null!");
 			return;
 		}
 		sender.sendPacket(address, protocol.encode(p));
@@ -220,6 +220,7 @@ public class NetworkClient {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		return "NetworkClient["+address+"]";
 	}

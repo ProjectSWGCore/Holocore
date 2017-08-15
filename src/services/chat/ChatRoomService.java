@@ -28,42 +28,41 @@
 package services.chat;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
+import com.projectswg.common.data.encodables.chat.ChatResult;
+import com.projectswg.common.data.encodables.chat.ChatRoom;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatAddModeratorToRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatBanAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatCreateRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatDestroyRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatEnterRoomById;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInviteAvatarToRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatKickAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnAddModeratorToRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnBanAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnCreateRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnDestroyRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnInviteToRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnKickAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnReceiveRoomInvitation;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnRemoveModeratorFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnUnbanAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnUninviteFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatQueryRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatQueryRoomResults;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatRemoveAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatRemoveModeratorFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatRequestRoomList;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSendToRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatUninviteFromRoom;
+import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.ChatAddModeratorToRoom;
-import network.packets.swg.zone.chat.ChatBanAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatCreateRoom;
-import network.packets.swg.zone.chat.ChatDestroyRoom;
-import network.packets.swg.zone.chat.ChatEnterRoomById;
-import network.packets.swg.zone.chat.ChatInviteAvatarToRoom;
-import network.packets.swg.zone.chat.ChatKickAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatOnAddModeratorToRoom;
-import network.packets.swg.zone.chat.ChatOnBanAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatOnCreateRoom;
-import network.packets.swg.zone.chat.ChatOnDestroyRoom;
-import network.packets.swg.zone.chat.ChatOnInviteToRoom;
-import network.packets.swg.zone.chat.ChatOnKickAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatOnReceiveRoomInvitation;
-import network.packets.swg.zone.chat.ChatOnRemoveModeratorFromRoom;
-import network.packets.swg.zone.chat.ChatOnUnbanAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatOnUninviteFromRoom;
-import network.packets.swg.zone.chat.ChatQueryRoom;
-import network.packets.swg.zone.chat.ChatQueryRoomResults;
-import network.packets.swg.zone.chat.ChatRemoveAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatRemoveModeratorFromRoom;
-import network.packets.swg.zone.chat.ChatRequestRoomList;
-import network.packets.swg.zone.chat.ChatSendToRoom;
-import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
-import network.packets.swg.zone.chat.ChatUninviteFromRoom;
-import network.packets.swg.zone.insertion.ChatRoomList;
-import resources.chat.ChatAvatar;
-import resources.chat.ChatResult;
-import resources.chat.ChatRoom;
-import resources.encodables.OutOfBandPackage;
 import resources.player.Player;
 
 public class ChatRoomService extends Service {
@@ -89,7 +88,7 @@ public class ChatRoomService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof SWGPacket)
 			processSwgPacket(gpi.getPlayer(), (SWGPacket) p);
 	}

@@ -28,8 +28,8 @@
 package resources.objects.staticobject;
 
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.SWGObject;
 
 public class StaticObject extends SWGObject {

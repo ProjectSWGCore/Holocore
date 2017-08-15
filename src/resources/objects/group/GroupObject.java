@@ -40,10 +40,10 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 
 import intents.GroupEventIntent;
 import intents.GroupEventIntent.GroupEventType;
-import network.packets.swg.zone.baselines.Baseline;
 import resources.collections.SWGList;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -114,16 +114,13 @@ public class GroupObject extends SWGObject {
 	}
 	
 	public void displayLootRuleChangeBox(String lootRuleMsg){
-		Player memberPlayer;
-		SuiMessageBox window;
-		
 		for(GroupMember member : groupMembers){
 			if (member.getCreature() != leader){
-				memberPlayer = member.getPlayer();
+				Player memberPlayer = member.getPlayer();
 				if (memberPlayer != null){
-					window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
-					window.addCancelButtonCallback("handleLeaveGroup", (leavingPlayer, actor, event, parameters) -> {
-						new GroupEventIntent(GroupEventType.GROUP_LEAVE,leavingPlayer).broadcast();
+					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
+					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> {
+						new GroupEventIntent(GroupEventType.GROUP_LEAVE, memberPlayer).broadcast();
 					});
 				    window.display(memberPlayer);
 				}

@@ -30,19 +30,20 @@ package resources.network;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class BaselineBuilder {
 	
-	public static final Charset ASCII   = Charset.forName("UTF-8");
-	public static final Charset UNICODE = Charset.forName("UTF-16LE");
+	public static final Charset ASCII   = StandardCharsets.UTF_8;
+	public static final Charset UNICODE = StandardCharsets.UTF_16LE;
 	
 	private SWGObject object;
 	private BaselineType type;

@@ -29,8 +29,8 @@ package resources.objects.intangible;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.player.Player;

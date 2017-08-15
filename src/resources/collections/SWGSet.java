@@ -44,8 +44,8 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 
-import network.packets.swg.zone.baselines.Baseline;
 import resources.objects.SWGObject;
 
 public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {

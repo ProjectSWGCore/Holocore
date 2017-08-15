@@ -37,27 +37,27 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
+import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
+import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
+import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
+import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure;
+import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
+import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterSuccess;
+import com.projectswg.common.network.packets.swg.login.creation.RandomNameRequest;
+import com.projectswg.common.network.packets.swg.login.creation.RandomNameResponse;
 
 import intents.GalacticIntent;
 import intents.object.DestroyObjectIntent;
 import intents.player.CreatedCharacterIntent;
-import network.packets.Packet;
-import network.packets.swg.login.creation.ClientCreateCharacter;
-import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
-import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
-import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
-import network.packets.swg.login.creation.CreateCharacterFailure;
-import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
-import network.packets.swg.login.creation.CreateCharacterSuccess;
-import network.packets.swg.login.creation.RandomNameRequest;
-import network.packets.swg.login.creation.RandomNameResponse;
-import resources.Race;
 import resources.config.ConfigFile;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
@@ -125,7 +125,7 @@ public class CharacterCreationService extends Service {
 		return super.terminate();
 	}
 	
-	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
+	public void handlePacket(GalacticIntent intent, Player player, SWGPacket p) {
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)

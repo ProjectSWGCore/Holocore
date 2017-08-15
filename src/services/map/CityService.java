@@ -39,12 +39,12 @@ import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.object_controller.DataTransform;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -85,7 +85,7 @@ public class CityService extends Service {
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
 		GalacticPacketIntent gpi = i;
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof DataTransform) {
 			performLocationUpdate(gpi.getPlayer().getCreatureObject());
 		}

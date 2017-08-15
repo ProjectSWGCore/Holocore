@@ -27,30 +27,31 @@
 ***********************************************************************************/
 package intents.network;
 
+import com.projectswg.common.network.packets.SWGPacket;
+
 import intents.GalacticIntent;
-import network.packets.Packet;
 import resources.player.Player;
 
 public class GalacticPacketIntent extends GalacticIntent {
 	
-	private Packet packet;
+	private SWGPacket SWGPacket;
 	private Player player;
 	
-	public GalacticPacketIntent(Packet packet, Player player) {
-		setPacket(packet);
+	public GalacticPacketIntent(SWGPacket SWGPacket, Player player) {
+		setPacket(SWGPacket);
 		setPlayer(player);
 	}
 	
-	public Packet getPacket() {
-		return packet;
+	public SWGPacket getPacket() {
+		return SWGPacket;
 	}
 	
 	public Player getPlayer() {
 		return player;
 	}
 	
-	public void setPacket(Packet packet) {
-		this.packet = packet;
+	public void setPacket(SWGPacket SWGPacket) {
+		this.SWGPacket = SWGPacket;
 	}
 	
 	public void setPlayer(Player player) {

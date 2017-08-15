@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.sui;
 
+import com.projectswg.common.data.sui.ISuiCallback;
+
 public class SuiMessageBox extends SuiWindow {
 
 	public SuiMessageBox(SuiButtons buttons, String title, String prompt) {

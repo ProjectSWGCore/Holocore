@@ -37,12 +37,12 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 
 import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.objects.creature.CreatureObject;
 
 /**
@@ -144,9 +144,9 @@ public final class SkillManager extends Manager {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
-		if (packet instanceof ChangeRoleIconChoice) {
-			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
+		SWGPacket SWGPacket = gpi.getPacket();
+		if (SWGPacket instanceof ChangeRoleIconChoice) {
+			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) SWGPacket;
 			changeRoleIcon(gpi.getPlayer().getCreatureObject(), iconChoice.getIconChoice());
 		}
 	}

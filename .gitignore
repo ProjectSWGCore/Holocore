@@ -9,3 +9,5 @@
 /serverdata/**/*.db
 /log
 *.db-journal
+/lib/
+/serverdata/

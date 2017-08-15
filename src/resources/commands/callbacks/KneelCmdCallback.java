@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import network.packets.swg.zone.object_controller.PostureUpdate;
-import resources.Posture;
+import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
+
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

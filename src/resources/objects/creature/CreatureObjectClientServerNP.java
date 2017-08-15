@@ -30,12 +30,12 @@ package resources.objects.creature;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.projectswg.common.data.encodables.tangible.SkillMod;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
-import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;

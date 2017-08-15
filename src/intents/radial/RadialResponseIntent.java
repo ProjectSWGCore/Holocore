@@ -30,10 +30,10 @@ package intents.radial;
 import java.util.List;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.radial.RadialOption;
 
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.radial.RadialOption;
 
 public class RadialResponseIntent extends Intent {
 	

@@ -38,12 +38,13 @@ import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.HeartBeat;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.PlayerEventIntent;
 import intents.connection.ForceLogoutIntent;
 import intents.network.CloseConnectionIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.swg.zone.HeartBeat;
 import resources.network.DisconnectReason;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -51,7 +52,6 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import services.CoreManager;
-import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	

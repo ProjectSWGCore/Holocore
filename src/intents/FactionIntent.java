@@ -28,9 +28,9 @@
 package intents;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 
-import resources.PvpFaction;
-import resources.PvpStatus;
 import resources.objects.tangible.TangibleObject;
 
 public class FactionIntent extends Intent {

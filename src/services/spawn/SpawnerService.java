@@ -37,20 +37,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.FactionIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
-import resources.PvpFaction;
-import resources.PvpFlag;
-import resources.PvpStatus;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
@@ -68,7 +69,6 @@ import resources.spawn.Spawner.SpawnerFlag;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
-import utilities.ThreadUtilities;
 
 public final class SpawnerService extends Service {
 	

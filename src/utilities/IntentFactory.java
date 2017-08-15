@@ -27,16 +27,17 @@
  ***********************************************************************************/
 package utilities;
 
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
+import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SystemMessageIntent;
-import network.packets.swg.zone.chat.ChatSystemMessage;
-import resources.encodables.OutOfBandPackage;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
-import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
@@ -141,9 +142,12 @@ public final class IntentFactory {
 	 */
 	public void sendMail(SWGObject receiver, String sender, String subject, String message, WaypointObject... waypoints) {
 		Mail mail = new Mail(sender, subject, message, receiver.getObjectId());
-		mail.setOutOfBandPackage(new OutOfBandPackage(waypoints));
-
+		WaypointPackage [] packages = new WaypointPackage[waypoints.length];
+		for (int i = 0; i < waypoints.length; i++)
+			packages[i] = waypoints[i].getOOB();
+		mail.setOutOfBandPackage(new OutOfBandPackage(packages));
+		
 		new PersistentMessageIntent(receiver, mail, receiver.getOwner().getGalaxyName()).broadcast();
 	}
-
+	
 }

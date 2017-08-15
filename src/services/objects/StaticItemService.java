@@ -33,17 +33,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
 
 import intents.chat.SystemMessageIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
-import network.packets.swg.zone.object_controller.ShowLootBox;
-import resources.combat.DamageType;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;

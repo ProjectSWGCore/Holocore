@@ -29,7 +29,8 @@ package resources.commands.callbacks;
 
 import java.util.Map;
 
-import network.packets.swg.zone.spatial.AttributeListMessage;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeListMessage;
+
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;

@@ -36,22 +36,21 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.chat.ChatResult;
+import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatDeletePersistentMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatPersistentMessageToClient;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatPersistentMessageToServer;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatRequestPersistentMessage;
 
 import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.network.GalacticPacketIntent;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
-import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
-import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
-import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
-import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
-import resources.chat.ChatResult;
-import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -111,12 +110,9 @@ public class ChatMailService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){ 
-		Packet p = gpi.getPacket();
-		if (!(p instanceof SWGPacket))
-			return;
-		SWGPacket swg = (SWGPacket) p;
+		SWGPacket p = gpi.getPacket();
 		String galaxyName = CoreManager.getGalaxy().getName();
-		switch (swg.getPacketType()) {
+		switch (p.getPacketType()) {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
@@ -239,18 +235,18 @@ public class ChatMailService extends Service {
 			return;
 		}
 
-		ChatPersistentMessageToClient packet = null;
+		ChatPersistentMessageToClient SWGPacket = null;
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(mail, false);
+				SWGPacket = new ChatPersistentMessageToClient(mail, CoreManager.getGalaxy().getName(), false);
 				break;
 			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(mail, true);
+				SWGPacket = new ChatPersistentMessageToClient(mail, CoreManager.getGalaxy().getName(), true);
 				break;
 		}
 		
-		receiver.sendPacket(packet);
+		receiver.sendPacket(SWGPacket);
 	}
 	
 	private void deletePersistentMessage(int mailId) {

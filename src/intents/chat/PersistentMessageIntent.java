@@ -28,8 +28,8 @@
 package intents.chat;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.encodables.player.Mail;
 
-import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 
 public class PersistentMessageIntent extends Intent {

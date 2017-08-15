@@ -44,6 +44,7 @@ import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
@@ -51,18 +52,17 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.SceneCreateObjectByCrc;
+import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject;
+import com.projectswg.common.network.packets.swg.zone.SceneEndBaselines;
+import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
 
 import intents.object.ContainerTransferIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.SceneCreateObjectByCrc;
-import network.packets.swg.zone.SceneDestroyObject;
-import network.packets.swg.zone.SceneEndBaselines;
-import network.packets.swg.zone.UpdateContainmentMessage;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
-import resources.encodables.StringId;
 import resources.location.InstanceLocation;
 import resources.location.InstanceType;
 import resources.network.BaselineBuilder;
@@ -859,26 +859,26 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.getObservers();
 	}
 	
-	public int sendObserversAndSelf(Packet ... packets) {
+	public int sendObserversAndSelf(SWGPacket ... SWGPackets) {
 		int sent = 0;
-		sent += sendSelf(packets);
-		sent += sendObservers(packets);
+		sent += sendSelf(SWGPackets);
+		sent += sendObservers(SWGPackets);
 		return sent;
 	}
 	
-	public int sendObservers(Packet ... packets) {
+	public int sendObservers(SWGPacket ... SWGPackets) {
 		int sent = 0;
 		for (Player observer : getObservers()) {
-			observer.sendPacket(packets);
+			observer.sendPacket(SWGPackets);
 			sent++;
 		}
 		return sent;
 	}
 	
-	public int sendSelf(Packet ... packets) {
+	public int sendSelf(SWGPacket ... SWGPackets) {
 		Player owner = getOwner();
 		if (owner != null)
-			owner.sendPacket(packets);
+			owner.sendPacket(SWGPackets);
 		return owner != null ? 1 : 0;
 	}
 	
@@ -977,7 +977,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId = buffer.getEncodable(StringId.class);
 	}
 	
-	/* Baseline send permissions based on packet observations:
+	/* Baseline send permissions based on SWGPacket observations:
 	 * 
 	 * Baseline1 sent if you have full permissions to the object.
 	 * Baseline4 sent if you have full permissions to the object.

@@ -41,7 +41,7 @@ import com.projectswg.common.debug.Log;
 
 
 /**
- * This class represents a UDP server that listens for packets and
+ * This class represents a UDP server that listens for SWGPackets and
  * will call the callback when it receives one
  */
 public class UDPServer {
@@ -51,7 +51,7 @@ public class UDPServer {
 	private final DatagramSocket socket;
 	private final UDPUpdater updater;
 	private final Queue <UDPPacket> inbound;
-	private final int packetSize;
+	private final int SWGPacketSize;
 	private UDPCallback callback;
 	private int port;
 	
@@ -59,13 +59,13 @@ public class UDPServer {
 		this(port, 1024);
 	}
 	
-	public UDPServer(int port, int packetSize) throws SocketException {
-		this(null, port, packetSize);
+	public UDPServer(int port, int SWGPacketSize) throws SocketException {
+		this(null, port, SWGPacketSize);
 	}
 	
-	public UDPServer(InetAddress bindAddr, int port, int packetSize) throws SocketException {
+	public UDPServer(InetAddress bindAddr, int port, int SWGPacketSize) throws SocketException {
 		this.callback = null;
-		this.packetSize = packetSize;
+		this.SWGPacketSize = SWGPacketSize;
 		inbound = new LinkedBlockingQueue<UDPPacket>();
 		if (port > 0) {
 			if (bindAddr == null)
@@ -90,7 +90,7 @@ public class UDPServer {
 		return inbound.poll();
 	}
 	
-	public int packetCount() {
+	public int SWGPacketCount() {
 		return inbound.size();
 	}
 	
@@ -168,7 +168,7 @@ public class UDPServer {
 	}
 	
 	public interface UDPCallback {
-		public void onReceivedPacket(UDPPacket packet);
+		public void onReceivedPacket(UDPPacket SWGPacket);
 	}
 	
 	public static class UDPPacket {
@@ -208,7 +208,7 @@ public class UDPServer {
 		public UDPUpdater() {
 			thread = new Thread(this);
 			thread.setName("UDPServer Port#" + port);
-			dataBuffer = new byte[packetSize];
+			dataBuffer = new byte[SWGPacketSize];
 		}
 		
 		public boolean isRunning() {
@@ -237,10 +237,10 @@ public class UDPServer {
 		}
 		
 		private void loop() {
-			DatagramPacket packet = receivePacket();
-			if (packet.getLength() <= 0)
+			DatagramPacket SWGPacket = receivePacket();
+			if (SWGPacket.getLength() <= 0)
 				return;
-			UDPPacket udpPacket = generatePacket(packet);
+			UDPPacket udpPacket = generatePacket(SWGPacket);
 			if (callback != null)
 				callback.onReceivedPacket(udpPacket);
 			else
@@ -255,23 +255,23 @@ public class UDPServer {
 		}
 		
 		private DatagramPacket receivePacket() {
-			DatagramPacket packet = new DatagramPacket(dataBuffer, dataBuffer.length);
+			DatagramPacket SWGPacket = new DatagramPacket(dataBuffer, dataBuffer.length);
 			try {
-				socket.receive(packet);
+				socket.receive(SWGPacket);
 			} catch (IOException e) {
 				if (e.getMessage() != null && (e.getMessage().contains("socket closed") || e.getMessage().contains("Socket closed")))
 					running = false;
 				else
 					Log.e(e);
-				packet.setLength(0);
+				SWGPacket.setLength(0);
 			}
-			return packet;
+			return SWGPacket;
 		}
 		
-		private UDPPacket generatePacket(DatagramPacket packet) {
-			byte [] data = new byte[packet.getLength()];
-			System.arraycopy(packet.getData(), 0, data, 0, packet.getLength());
-			UDPPacket udpPacket = new UDPPacket(packet.getAddress(), packet.getPort(), data);
+		private UDPPacket generatePacket(DatagramPacket SWGPacket) {
+			byte [] data = new byte[SWGPacket.getLength()];
+			System.arraycopy(SWGPacket.getData(), 0, data, 0, SWGPacket.getLength());
+			UDPPacket udpPacket = new UDPPacket(SWGPacket.getAddress(), SWGPacket.getPort(), data);
 			return udpPacket;
 		}
 		

@@ -35,8 +35,8 @@ import java.util.Set;
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
 
-import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.commands.Command;
 import resources.objects.creature.CreatureObject;
 import services.commands.CommandLauncher.EnqueuedCommand;

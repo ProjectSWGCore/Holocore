@@ -43,4 +43,8 @@ public class ObjectCreatedIntent extends Intent {
 		return obj;
 	}
 	
+	public static void broadcast(SWGObject obj) {
+		new ObjectCreatedIntent(obj).broadcast();
+	}
+	
 }

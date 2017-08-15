@@ -32,22 +32,22 @@ import java.util.List;
 import java.util.Set;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.radial.RadialItem;
+import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
 
 import intents.network.GalacticPacketIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
-import network.packets.Packet;
-import network.packets.swg.zone.ObjectMenuSelect;
-import network.packets.swg.zone.object_controller.ObjectMenuRequest;
-import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.radial.RadialItem;
-import resources.radial.RadialOption;
 import services.galaxy.GalacticManager;
 
 public class RadialService extends Service {
@@ -63,7 +63,7 @@ public class RadialService extends Service {
 	}
 
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){
-		Packet p = gpi.getPacket();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
 			onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
 		} else if (p instanceof ObjectMenuSelect) {
