@@ -31,6 +31,7 @@ package resources.commands.callbacks;
 import com.projectswg.common.debug.Assert;
 
 import intents.chat.SystemMessageIntent;
+import network.packets.swg.zone.PlayMusicMessage;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
@@ -51,6 +52,7 @@ public class TransferItemCallback implements ICmdCallback {
 		// There must always be a target for transfer
 		if (target == null) {
 			new SystemMessageIntent(player, "@container_error_message:container29").broadcast();
+			player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 			return;
 		}
 
@@ -59,6 +61,7 @@ public class TransferItemCallback implements ICmdCallback {
 		// You can't transfer your own creature
 		if (actor.equals(target)) {
 			new SystemMessageIntent(player, "@container_error_message:container17").broadcast();
+			player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 			return;
 		}
 
@@ -72,18 +75,21 @@ public class TransferItemCallback implements ICmdCallback {
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
 			if (newContainer == null) {
 				new SystemMessageIntent(player, "@container_error_message:container15").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
 
 			// You can't add something to itself
 			if (target.equals(newContainer)) {
 				new SystemMessageIntent(player, "@container_error_message:container02").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
 
 			// You can't move an object to a container that it's already inside
 			if (oldContainer.equals(newContainer)) {
 				new SystemMessageIntent(player, "@container_error_message:container11").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
 
@@ -94,6 +100,7 @@ public class TransferItemCallback implements ICmdCallback {
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
 				new SystemMessageIntent(player, "@container_error_message:container12").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
 
@@ -103,6 +110,7 @@ public class TransferItemCallback implements ICmdCallback {
 			if (containerParent != null && containerParent.equals(appearanceInventory)) {
 				// Don't be fooled - the message below contains no prose keys
 				new SystemMessageIntent(player, "@container_error_message:container34_prose").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
 
@@ -111,6 +119,7 @@ public class TransferItemCallback implements ICmdCallback {
 				// If armor, they must have the "wear_all_armor" ability
 				if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
 					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					return;
 				}
 
@@ -119,6 +128,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
 					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					return;
 				}
 				
@@ -131,6 +141,7 @@ public class TransferItemCallback implements ICmdCallback {
 					String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
 					if (!target.getAttribute("class_required").contains(profession)) {
 						new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
+						player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 						return;
 					}
 				}
@@ -141,6 +152,7 @@ public class TransferItemCallback implements ICmdCallback {
 				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
 					// Don't be fooled - the message below contains no prose keys
 					new SystemMessageIntent(player, "@container_error_message:container33_prose").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					return;
 				}
 			}
@@ -151,28 +163,35 @@ public class TransferItemCallback implements ICmdCallback {
 						if (newContainer.equals(actor)) {
 							// They just equipped a weapon. The equipped weapon must now be set to the target object.
 							actor.setEquippedWeapon((WeaponObject) target);
+							player.sendPacket(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 						} else {
 							// They just unequipped a weapon. The equipped weapon must now be set to the default weapon.
 							actor.setEquippedWeapon(null);
+							player.sendPacket(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 						}
 					}
 					break;
 				case CONTAINER_FULL:
 					new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_danger_message.snd", 1, false));
 					break;
 				case NO_PERMISSION:
 					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					break;
 				case SLOT_NO_EXIST:
 					new SystemMessageIntent(player, "@container_error_message:container06").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					break;
 				case SLOT_OCCUPIED:
 					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					break;
 			}
 		} catch (NumberFormatException e) {
 			// Lookup failed, their client gave us an object ID that couldn't be parsed to a long
 			new SystemMessageIntent(player, "@container_error_message:container15").broadcast();
+			player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 		}
 	}
 
@@ -182,6 +201,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 	private static void sendNotEquippable(Player player) {
 		new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
+		player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 	}
 
 	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
