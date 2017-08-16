@@ -330,7 +330,6 @@ public class GroupService extends Service {
 
 		group.setLootMaster(target.getObjectId());
 		sendGroupSystemMessage(group,"new_master_looter", "TU", target.getObjectName());
-		
 	}
 	
 	private void handleKick(Player leader, CreatureObject kickedCreature) {
