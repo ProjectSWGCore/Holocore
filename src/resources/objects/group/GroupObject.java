@@ -192,6 +192,7 @@ public class GroupObject extends SWGObject {
 	
 	public void setLootMaster(long lootMaster) {
 		this.lootMaster = lootMaster;
+		sendDelta(6, 7, this.lootMaster);
 	}
 	
 	public void setLootRule(int lootRule) {
