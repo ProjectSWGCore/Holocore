@@ -321,8 +321,16 @@ public class GroupService extends Service {
 			return;
 		}
 		
+		if (target.getOwner() == null){
+			return;
+		}
+		
 		GroupObject group = getGroup(creature.getGroupId());
 		Assert.notNull(group);
+
+		group.setLootMaster(target.getObjectId());
+		sendGroupSystemMessage(group,"new_master_looter", "TU", target.getObjectName());
+		
 	}
 	
 	private void handleKick(Player leader, CreatureObject kickedCreature) {
