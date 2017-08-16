@@ -52,6 +52,7 @@ import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.network.GalacticPacketIntent;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
@@ -60,6 +61,7 @@ import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
+import services.player.PlayerManager.PlayerLookup;
 
 public class ChatMailService extends Service {
 	
@@ -136,22 +138,22 @@ public class ChatMailService extends Service {
 		if (recipientStr.contains(" "))
 			recipientStr = recipientStr.split(" ")[0];
 		
-		Player recipient = playerMgr.getPlayerByCreatureFirstName(recipientStr);
-		long recId = (recipient == null ? playerMgr.getCharacterIdByName(request.getRecipient()) : recipient.getCreatureObject().getObjectId());
+		Player recipient = PlayerLookup.getPlayerByFirstName(recipientStr);
+		CreatureObject recipientCreature = PlayerLookup.getCharacterByFirstName(recipientStr);
 		ChatResult result = ChatResult.SUCCESS;
 		
-		if (recId == 0)
+		if (recipientCreature == null)
 			result = ChatResult.TARGET_AVATAR_DOESNT_EXIST;
-
+		
 		if (sender.getPlayerObject().isIgnored(recipientStr))
 			result = ChatResult.IGNORED;
-
+		
 		sender.sendPacket(new ChatOnSendPersistentMessage(result, request.getCounter()));
-
+		
 		if (result != ChatResult.SUCCESS)
 			return;
-
-		Mail mail = new Mail(sender.getCharacterName().split(" ")[0].toLowerCase(Locale.US), request.getSubject(), request.getMessage(), recId);
+		
+		Mail mail = new Mail(sender.getCharacterName().split(" ")[0].toLowerCase(Locale.US), request.getSubject(), request.getMessage(), recipientCreature.getObjectId());
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());

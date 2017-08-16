@@ -34,9 +34,10 @@ import intents.chat.SystemMessageIntent;
 import intents.object.ObjectTeleportIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
-import services.objects.ObjectManager.ObjectLookup;
+import services.player.PlayerManager.PlayerLookup;
 
 public class AdminTeleportCallback implements ICmdCallback {
 
@@ -67,16 +68,11 @@ public class AdminTeleportCallback implements ICmdCallback {
 			return;
 		}
 		
-		SWGObject teleportObject = player.getCreatureObject();
+		CreatureObject teleportObject = player.getCreatureObject();
 		if (cmd.length > 4) {
-			long characterId = galacticManager.getPlayerManager().getCharacterIdByFirstName(cmd[0]);
-			if (characterId == 0) {
-				SystemMessageIntent.broadcastPersonal(player, "Invalid character name: '"+cmd[0]+"'");
-				return;
-			}
-			teleportObject = ObjectLookup.getObjectById(characterId);
+			teleportObject = PlayerLookup.getCharacterByFirstName(cmd[0]);
 			if (teleportObject == null) {
-				SystemMessageIntent.broadcastPersonal(player, "Server Error. Unable to lookup creature with id: " + characterId);
+				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+"'");
 				return;
 			}
 		}

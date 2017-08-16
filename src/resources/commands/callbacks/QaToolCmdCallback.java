@@ -56,7 +56,7 @@ import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 import services.objects.StaticItemService.ObjectCreationHandler;
-import services.player.PlayerManager;
+import services.player.PlayerManager.PlayerLookup;
 import utilities.Scripts;
 
 /**
@@ -90,7 +90,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					forceDelete(galacticManager.getObjectManager(), player, target);
 					break;
 				case "recover":
-					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
+					recoverPlayer(player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "setinstance":
 					setInstance(player, args.substring(args.indexOf(' ') + 1));
@@ -189,22 +189,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 		inputBox.display(player);
 	}
 	
-	private void recoverPlayer(ObjectManager objectManager, PlayerManager playerManager, Player player, String args) {
+	private void recoverPlayer(Player player, String args) {
 		args = args.trim();
-		long recoveree = playerManager.getCharacterIdByFirstName(args);
-		if (recoveree == 0) {
+		CreatureObject recoveree = PlayerLookup.getCharacterByFirstName(args);
+		if (recoveree == null) {
 			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + "'");
 			return;
 		}
 		
-		SWGObject obj = objectManager.getObjectById(recoveree);
-		if (!(obj instanceof CreatureObject)) {
-			SystemMessageIntent.broadcastPersonal(player, "Object is not a creature: '" + args + "'");
-			return;
-		}
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
-		new ObjectTeleportIntent(obj, loc).broadcast();
-		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
+		ObjectTeleportIntent.broadcast(recoveree, new Location(3525, 4, -4807, Terrain.TATOOINE));
+		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
 	}
 	
 	private void setInstance(Player player, String args) {

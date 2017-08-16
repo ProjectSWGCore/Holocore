@@ -85,7 +85,7 @@ public class CollectionService extends Service {
 		String itemName = rri.getTarget().getStringId().getKey();
 
 		if (isClickyCollectionItem(iff) || isConsumeCollectionItem(itemName, iff)) {
-			RadialRequestIntent i = (RadialRequestIntent) rri;
+			RadialRequestIntent i = rri;
 			List<RadialOption> options = new ArrayList<RadialOption>(i.getRequest().getOptions());
 			options.addAll(Radials.getRadialOptions("collection/world_item", i.getPlayer(), i.getTarget()));
 			new RadialResponseIntent(i.getPlayer(), i.getTarget(), options, i.getRequest().getCounter()).broadcast();
@@ -232,6 +232,7 @@ public class CollectionService extends Service {
 			this.iffTemplate = iffTemplate;
 		}
 
+		@Override
 		public boolean equals(Object o) {
 			if (o instanceof ConsumeCollection)
 				return itemName.equals(((ConsumeCollection) o).itemName) && iffTemplate.equals(((ConsumeCollection) o).iffTemplate);

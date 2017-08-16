@@ -1,10 +1,10 @@
-import network.packets.swg.zone.ClientOpenContainerMessage
+import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage
 import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
-import resources.radial.RadialItem
-import resources.radial.RadialOption
-import resources.sui.SuiEvent
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.common.data.sui.SuiEvent
 import resources.sui.SuiButtons
 import resources.sui.SuiWindow
 import utilities.IntentFactory

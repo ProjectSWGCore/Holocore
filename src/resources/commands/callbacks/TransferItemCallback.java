@@ -31,7 +31,7 @@ package resources.commands.callbacks;
 import com.projectswg.common.debug.Assert;
 
 import intents.chat.SystemMessageIntent;
-import network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;

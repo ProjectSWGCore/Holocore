@@ -34,6 +34,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.info.Config;
@@ -231,6 +232,8 @@ public class CoreManager extends Manager {
 		GALAXY.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 		GALAXY.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 		GALAXY.setRecommended(true);
+		
+		ChatAvatar.setGalaxy(GALAXY.getName());
 	}
 	
 }

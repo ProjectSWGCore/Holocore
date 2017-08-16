@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.player;
 
+import java.util.Locale;
+
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -132,6 +134,10 @@ public class Player implements Comparable<Player> {
 		if (spaceIndex != -1)
 			return name.substring(0, spaceIndex);
 		return name;
+	}
+	
+	public String getCharacterChatName() {
+		return getCharacterFirstName().toLowerCase(Locale.US);
 	}
 	
 	public int getUserId() {

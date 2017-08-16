@@ -1,4 +1,4 @@
-import network.packets.swg.zone.object_controller.BiographyUpdate
+import com.projectswg.common.network.packets.swg.zone.object_controller.BiographyUpdate
 import resources.objects.SWGObject
 import resources.player.Player
 import services.galaxy.GalacticManager

@@ -45,6 +45,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectCreator;
+import services.player.PlayerManager.PlayerLookup;
 
 /**
  * @author Waverunner
@@ -64,7 +65,7 @@ public class FindFriendCallback implements ICmdCallback {
 			return;
 		}
 
-		Player friend = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(friendName);
+		Player friend = PlayerLookup.getPlayerByFirstName(friendName);
 		if (friend == null || friend.getPlayerState() != PlayerState.ZONED_IN) {
 			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_failed"), "TU", friendName)).broadcast();
 			return;

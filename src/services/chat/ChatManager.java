@@ -60,6 +60,7 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
+import services.player.PlayerManager.PlayerLookup;
 
 public class ChatManager extends Manager {
 	
@@ -88,7 +89,7 @@ public class ChatManager extends Manager {
 		SWGPacket p = gpi.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
-		switch (((SWGPacket) p).getPacketType()) {
+		switch (p.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
 				if (p instanceof ChatInstantMessageToCharacter)
 					handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) p);
@@ -140,7 +141,7 @@ public class ChatManager extends Manager {
 	private void handleChatAvatarRequestIntent(ChatAvatarRequestIntent cari) {
 		switch (cari.getRequestType()) {
 			case TARGET_STATUS:
-				sendTargetAvatarStatus(cari.getPlayer(), new ChatAvatar(cari.getPlayer(), cari.getTarget()));
+				sendTargetAvatarStatus(cari.getPlayer(), new ChatAvatar(cari.getTarget()));
 				break;
 			case FRIEND_ADD_TARGET:
 				handleAddFriend(cari.getPlayer(), cari.getTarget());
@@ -189,7 +190,7 @@ public class ChatManager extends Manager {
 		}
 		
 		sendSystemMessage(player, "@cmnty:friend_added", target);
-		sendTargetAvatarStatus(player, new ChatAvatar(null, target));
+		sendTargetAvatarStatus(player, new ChatAvatar(target));
 	}
 	
 	private void handleRemoveFriend(Player player, String target) {
@@ -267,7 +268,7 @@ public class ChatManager extends Manager {
 		String strReceiver = request.getCharacter().toLowerCase(Locale.ENGLISH);
 		String strSender = sender.getCharacterFirstName();
 		
-		Player receiver = sender.getPlayerManager().getPlayerByCreatureFirstName(strReceiver);
+		Player receiver = PlayerLookup.getPlayerByFirstName(strReceiver);
 		
 		ChatResult result = ChatResult.SUCCESS;
 		if (receiver == null || receiver.getPlayerState() != PlayerState.ZONED_IN)
@@ -289,7 +290,7 @@ public class ChatManager extends Manager {
 	private void updateChatAvatarStatus(Player player, boolean online) {
 		if (online) {
 			for (String friend : player.getPlayerObject().getFriendsList()) {
-				sendTargetAvatarStatus(player, new ChatAvatar(null, friend));
+				sendTargetAvatarStatus(player, new ChatAvatar(friend));
 			}
 		}
 		
@@ -299,11 +300,11 @@ public class ChatManager extends Manager {
 				return false;
 			
 			return playerNotified.getPlayerObject().isFriend(playerName);
-		}, new ChatFriendsListUpdate(new ChatAvatar(player, playerName), online));
+		}, new ChatFriendsListUpdate(new ChatAvatar(playerName), online));
 	}
 	
 	private void sendTargetAvatarStatus(Player player, ChatAvatar target) {
-		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target.getName());
+		Player targetPlayer = PlayerLookup.getPlayerByFirstName(target.getName());
 		
 		player.sendPacket(new ChatFriendsListUpdate(target, targetPlayer != null && targetPlayer.getPlayerState() == PlayerState.ZONED_IN));
 	}

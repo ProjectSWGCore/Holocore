@@ -45,8 +45,14 @@ public class ChatRoomUpdateIntent extends Intent {
 	
 	public ChatRoomUpdateIntent(String path, String title, String target, ChatAvatar avatar, String message, UpdateType updateType) {
 		this.path = path;
-		this.updateType = updateType;
+		this.title = null;
+		this.target = null;
 		this.avatar = avatar;
+		this.message = null;
+		this.updateType = updateType;
+		this.isPublic = false;
+		this.player = null;
+		this.ignoreInvitation = false;
 		
 		switch (updateType) {
 			case DESTROY:
@@ -63,6 +69,12 @@ public class ChatRoomUpdateIntent extends Intent {
 		}
 	}
 	
+	public ChatRoomUpdateIntent(Player player, String path, String title, String target, String message, UpdateType updateType, boolean ignoreInvitation) {
+		this(path, title, target, new ChatAvatar(player.getCharacterChatName()), message, updateType);
+		this.player = player;
+		this.ignoreInvitation = ignoreInvitation;
+	}
+	
 	public ChatRoomUpdateIntent(ChatAvatar avatar, String path, String title, boolean isPublic) {
 		this(path, title, null, avatar, null, UpdateType.CREATE);
 		this.isPublic = isPublic;
@@ -72,14 +84,8 @@ public class ChatRoomUpdateIntent extends Intent {
 		this(path, null, null, avatar, null, updateType);
 	}
 	
-	public ChatRoomUpdateIntent(Player player, String path, String title, String target, String message, UpdateType updateType, boolean ignoreInvitation) {
-		this(path, title, target, ChatAvatar.getFromPlayer(player), message, updateType);
-		this.player = player;
-		this.ignoreInvitation = ignoreInvitation;
-	}
-	
 	public ChatRoomUpdateIntent(Player player, String path, UpdateType updateType) {
-		this(ChatAvatar.getFromPlayer(player), path, updateType);
+		this(new ChatAvatar(player.getCharacterChatName()), path, updateType);
 		this.player = player;
 	}
 	

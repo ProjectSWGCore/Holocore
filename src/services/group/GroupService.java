@@ -365,14 +365,14 @@ public class GroupService extends Service {
 		new ObjectCreatedIntent(group).broadcast();
 		
 		String galaxy = leader.getGalaxyName();
-		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(leader), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
+		new ChatRoomUpdateIntent(new ChatAvatar(leader.getCharacterChatName()), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
 		sendSystemMessage(leader, "formed_self", "TT", leader.getCreatureObject().getObjectId());
 		onJoinGroup(member.getCreatureObject(), group);
 	}
 	
 	private void destroyGroup(GroupObject group, Player player) {
 		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null, ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null, new ChatAvatar(player.getCharacterChatName()), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
 		
 		sendGroupSystemMessage(group, "disbanded");
 		group.disbandGroup();

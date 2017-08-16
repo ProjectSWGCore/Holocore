@@ -57,13 +57,15 @@ import services.CoreManager;
 public class PlayerManager extends Manager {
 	
 	private final Map<Long, Player> players;
-	private final Map<String, CreatureObject> characters;
+	private final Map<String, CreatureObject> charactersByFullName;
+	private final Map<String, CreatureObject> charactersByFirstName;
 	private final LoginService loginService;
 	private final ZoneManager zoneService;
 	
 	public PlayerManager() {
 		this.players = new SynchronizedMap<>();
-		this.characters = new ConcurrentHashMap<>();
+		this.charactersByFullName = new ConcurrentHashMap<>();
+		this.charactersByFirstName = new ConcurrentHashMap<>();
 		this.loginService = new LoginService();
 		this.zoneService = new ZoneManager();
 		
@@ -77,42 +79,48 @@ public class PlayerManager extends Manager {
 		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
 	}
 	
+	@Override
+	public boolean initialize() {
+		PlayerLookup.setPlayerManager(this);
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		PlayerLookup.setPlayerManager(null);
+		return super.terminate();
+	}
+	
 	public boolean playerExists(String name) {
 		return zoneService.characterExistsForName(name);
 	}
 	
-	public Player getPlayerByCreatureName(String name) {
-		Assert.notNull(name);
-		Assert.test(!name.trim().isEmpty());
-		synchronized (players) {
-			for (Player p : players.values()) {
-				if (p.getCreatureObject() != null && p.getCharacterName().equalsIgnoreCase(name))
-					return p;
-			}
-		}
-		return null;
-	}
-	
-	public Player getPlayerByCreatureFirstName(String name) {
-		Assert.notNull(name);
-		name = name.trim().toLowerCase(Locale.ENGLISH);
-		Assert.test(!name.isEmpty());
-		CreatureObject creature = characters.get(name);
+	public Player getPlayerByFullName(String name) {
+		CreatureObject creature = getCharacterByFullName(name);
 		if (creature == null)
 			return null;
 		return creature.getOwner();
 	}
 	
-	public long getCharacterIdByFirstName(String name) {
-		Assert.notNull(name);
-		Assert.test(!name.trim().isEmpty());
-		return loginService.getCharacterIdByFirstName(name);
+	public Player getPlayerByFirstName(String name) {
+		CreatureObject creature = getCharacterByFirstName(name);
+		if (creature == null)
+			return null;
+		return creature.getOwner();
 	}
 	
-	public long getCharacterIdByName(String name) {
+	public CreatureObject getCharacterByFullName(String name) {
 		Assert.notNull(name);
-		Assert.test(!name.trim().isEmpty());
-		return loginService.getCharacterId(name);
+		name = name.trim().toLowerCase(Locale.ENGLISH);
+		Assert.test(!name.isEmpty());
+		return charactersByFullName.get(name);
+	}
+	
+	public CreatureObject getCharacterByFirstName(String name) {
+		Assert.notNull(name);
+		name = name.trim().toLowerCase(Locale.ENGLISH);
+		Assert.test(!name.isEmpty());
+		return charactersByFirstName.get(name);
 	}
 	
 	public void notifyPlayers(SWGPacket ... SWGPackets) {
@@ -252,7 +260,7 @@ public class PlayerManager extends Manager {
 		if (name.indexOf(' ') != -1)
 			name = name.substring(0, name.indexOf(' '));
 		name = name.toLowerCase(Locale.US);
-		characters.put(name, creature);
+		charactersByFirstName.put(name, creature);
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
@@ -268,19 +276,31 @@ public class PlayerManager extends Manager {
 		if (name.indexOf(' ') != -1)
 			name = name.substring(0, name.indexOf(' '));
 		name = name.toLowerCase(Locale.US);
-		characters.remove(name);
+		charactersByFirstName.remove(name);
 	}
 	
-	public static class ObjectLookup {
+	public static class PlayerLookup {
 		
 		private static final AtomicReference<PlayerManager> PLAYER_MANAGER = new AtomicReference<>(null);
 		
-		private static void setObjectManager(PlayerManager playerManager) {
+		private static void setPlayerManager(PlayerManager playerManager) {
 			PLAYER_MANAGER.set(playerManager);
 		}
 		
+		public static Player getPlayerByFullName(String name) {
+			return PLAYER_MANAGER.get().getPlayerByFullName(name);
+		}
+		
+		public static Player getPlayerByFirstName(String name) {
+			return PLAYER_MANAGER.get().getPlayerByFirstName(name);
+		}
+		
+		public static CreatureObject getCharacterByFullName(String name) {
+			return PLAYER_MANAGER.get().getCharacterByFullName(name);
+		}
+		
 		public static CreatureObject getCharacterByFirstName(String name) {
-			return PLAYER_MANAGER.get().getObjectById(id);
+			return PLAYER_MANAGER.get().getCharacterByFirstName(name);
 		}
 		
 	}

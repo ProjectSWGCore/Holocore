@@ -6,10 +6,10 @@ import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject
 import resources.objects.creature.CreatureObject
 import resources.player.Player
-import resources.radial.RadialItem
-import resources.radial.RadialOption
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
 import resources.sui.SuiButtons
-import resources.sui.SuiEvent
+import com.projectswg.common.data.sui.SuiEvent
 import resources.sui.SuiListBox
 import services.objects.StaticItemService
 import com.projectswg.common.debug.Log

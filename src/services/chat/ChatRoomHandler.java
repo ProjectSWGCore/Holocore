@@ -43,6 +43,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnDestroyRoom;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnEnteredRoom;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnLeaveRoom;
@@ -58,6 +59,7 @@ import resources.server_info.ObjectDatabase;
 import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
+import services.player.PlayerManager.PlayerLookup;
 
 public class ChatRoomHandler {
 	
@@ -127,7 +129,7 @@ public class ChatRoomHandler {
 	 * @param room Chat room to enter
 	 */
 	public void enterChatChannel(Player player, ChatRoom room, int sequence, boolean ignoreInvitation) {
-		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		
 		ChatResult result = room.canJoinRoom(avatar, ignoreInvitation);
 		if (player.getAccessLevel() != AccessLevel.PLAYER)
@@ -151,7 +153,7 @@ public class ChatRoomHandler {
 		player.sendPacket(new ChatOnEnteredRoom(avatar, result, room.getId(), sequence));
 		
 		// Notify everyone that a player entered the room
-		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnEnteredRoom(avatar, result, room.getId(), 0));
+		sendPacketToMembers(room, new ChatOnEnteredRoom(avatar, result, room.getId(), 0));
 		
 		room.addMember(avatar);
 	}
@@ -159,7 +161,7 @@ public class ChatRoomHandler {
 	public void enterChatChannel(Player player, int id, int sequence) {
 		ChatRoom room = rooms.getRoomById(id);
 		if (room == null) {
-			player.sendPacket(new ChatOnEnteredRoom(ChatAvatar.getFromPlayer(player), ChatResult.NONE, id, sequence));
+			player.sendPacket(new ChatOnEnteredRoom(new ChatAvatar(player.getCharacterChatName()), ChatResult.NONE, id, sequence));
 			return;
 		}
 		enterChatChannel(player, room, sequence, false);
@@ -177,13 +179,13 @@ public class ChatRoomHandler {
 	}
 	
 	public void leaveChatChannel(Player player, ChatRoom room, int sequence) {
-		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		
 		if (!room.removeMember(avatar) && !player.getPlayerObject().removeJoinedChannel(room.getPath()))
 			return;
 		
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
-		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), 0));
+		sendPacketToMembers(room, new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), 0));
 	}
 	
 	public void leaveChatChannel(Player player, String path) {
@@ -252,7 +254,7 @@ public class ChatRoomHandler {
 			return;
 		}
 		
-		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		ChatResult result = room.canSendMessage(avatar);
 		if (result == ChatResult.SUCCESS && message.length() > 512)
 			result = ChatResult.ROOM_AVATAR_NO_PERMISSION;
@@ -260,15 +262,7 @@ public class ChatRoomHandler {
 		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 		
 		if (result == ChatResult.SUCCESS) {
-			ChatRoomMessage chatRoomMessage = new ChatRoomMessage(avatar, room.getId(), message, oobPackage);
-			for (ChatAvatar member : room.getMembers()) {
-				if (member.getPlayer().getPlayerObject().isIgnored(sender.getName()))
-					continue;
-				
-				member.getPlayer().sendPacket(chatRoomMessage);
-			}
-			
-			room.sendMessage(avatar, message, oobPackage);
+			sendMessage(room, avatar, message, oobPackage);
 			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId() + "/" + room.getPath(), message);
 		}
 	}
@@ -287,7 +281,7 @@ public class ChatRoomHandler {
 		ChatOnDestroyRoom SWGPacket = new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0);
 		room.getMembers().forEach(member -> {
 			if (!destroyer.equals(member))
-				member.getPlayer().sendPacket(SWGPacket);
+				getPlayer(member).sendPacket(SWGPacket);
 		});
 		
 		return true;
@@ -353,7 +347,7 @@ public class ChatRoomHandler {
 	}
 	
 	public List<ChatRoom> getRoomList(Player player) {
-		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		
 		List<ChatRoom> ret = new ArrayList<>();
 		for (ChatRoom chatRoom : rooms.getAllRooms()) {
@@ -383,6 +377,27 @@ public class ChatRoomHandler {
 		} catch (SQLException e) {
 			Log.e(e);
 		}
+	}
+	
+	private static void sendMessage(ChatRoom room, ChatAvatar sender, String message, OutOfBandPackage oob) {
+		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, room.getId(), message, oob);
+		for (ChatAvatar member : room.getMembers()) {
+			Player player = getPlayer(member);
+			if (player.getPlayerObject().isIgnored(sender.getName()))
+				continue;
+			
+			player.sendPacket(chatRoomMessage);
+		}
+	}
+	
+	private static void sendPacketToMembers(ChatRoom room, SWGPacket... packets) {
+		for (ChatAvatar member : room.getMembers()) {
+			getPlayer(member).sendPacket(packets);
+		}
+	}
+	
+	private static Player getPlayer(ChatAvatar avatar) {
+		return PlayerLookup.getPlayerByFirstName(avatar.getName());
 	}
 	
 }

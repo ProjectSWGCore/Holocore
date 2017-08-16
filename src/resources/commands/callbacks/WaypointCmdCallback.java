@@ -41,7 +41,6 @@ import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectCreator;
-import services.objects.ObjectManager;
 
 public class WaypointCmdCallback implements ICmdCallback {
 
@@ -168,8 +167,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (name == null || name.isEmpty())
 			name = "Waypoint";
 
-		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), color, name, location);
-		ghost.addWaypoint(waypoint);
+		ghost.addWaypoint(createWaypoint(color, name, location));
 
 		if (differentPlanetMessage) {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
@@ -182,7 +180,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 		}
 	}
 
-	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {
+	private WaypointObject createWaypoint(WaypointColor color, String name, Location location) {
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
 		waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
 		waypoint.setColor(color);

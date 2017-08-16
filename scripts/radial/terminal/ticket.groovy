@@ -1,8 +1,8 @@
 import intents.travel.TicketUseIntent
 import resources.objects.SWGObject
 import resources.player.Player
-import resources.radial.RadialItem
-import resources.radial.RadialOption
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
 
 static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
 	options.add(new RadialOption(RadialItem.ITEM_USE))
