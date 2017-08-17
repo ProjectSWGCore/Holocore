@@ -29,6 +29,7 @@ package resources.objects.awareness;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import resources.objects.SWGObject;
 import resources.player.Player;
@@ -38,29 +39,21 @@ public class ObjectAware {
 	private final SWGObject object;
 	private final Aware objectsAware;
 	private final Aware customAware;
-	private final Object chunkMutex;
-	private TerrainMapChunk chunk;
+	private final AtomicReference<TerrainMapChunk> chunk;
 	
 	public ObjectAware(SWGObject obj) {
 		this.object = obj;
 		this.objectsAware = new Aware(obj);
 		this.customAware = new Aware(obj);
-		this.chunkMutex = new Object();
-		this.chunk = null;
+		this.chunk = new AtomicReference<>(null);
 	}
 	
 	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
-		synchronized (chunkMutex) {
-			TerrainMapChunk old = this.chunk;
-			this.chunk = chunk;
-			return old;
-		}
+		return this.chunk.getAndSet(chunk);
 	}
 	
 	protected TerrainMapChunk getTerrainMapChunk() {
-		synchronized (chunkMutex) {
-			return chunk;
-		}
+		return chunk.get();
 	}
 	
 	public void setParent(ObjectAware parent) {

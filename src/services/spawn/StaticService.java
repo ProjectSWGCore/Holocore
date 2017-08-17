@@ -27,18 +27,14 @@
 ***********************************************************************************/
 package services.spawn;
 
-import java.lang.ref.SoftReference;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.projectswg.common.control.Service;
-import com.projectswg.common.data.info.RelationalServerData;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
@@ -46,62 +42,57 @@ import com.projectswg.common.debug.Log;
 import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
+import resources.server_info.SdbLoader;
+import resources.server_info.SdbLoader.SdbResultSet;
+import resources.server_info.StandardLog;
 import services.objects.ObjectCreator;
 
 public class StaticService extends Service {
 	
-	private static final String GET_SUPPORTING_SQL = "SELECT spawns.* FROM spawns, types WHERE types.iff = ? AND spawns.iff_type = types.iff_type";
-	
-	private final Object databaseMutex;
-	private final Map<String, SoftReference<List<SpawnedObject>>> spawnableObjects;
-	private RelationalServerData spawnDatabase;
-	private PreparedStatement getSupportingStatement;
+	private final Map<String, List<SpawnedObject>> spawnableObjects;
 	
 	public StaticService() {
-		this.databaseMutex = new Object();
-		
-		spawnDatabase = RelationalServerFactory.getServerData("static/spawns.db", "spawns", "types");
-		if (spawnDatabase == null)
-			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		
-		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
 		spawnableObjects = new HashMap<>();
+		loadSupportingObjects();
 		
 		registerForIntent(ObjectCreatedIntent.class, oci -> createSupportingObjects(oci.getObject()));
 	}
 	
-	private void createSupportingObjects(SWGObject object) {
-		List<SpawnedObject> objects = null;
-		synchronized (spawnableObjects) {
-			SoftReference<List<SpawnedObject>> ref = spawnableObjects.get(object.getTemplate());
-			if (ref != null)
-				objects = ref.get();
-			if (objects == null) {
-				objects = fetchFromDatabase(object.getTemplate());
-				spawnableObjects.put(object.getTemplate(), new SoftReference<List<SpawnedObject>>(objects));
+	private void loadSupportingObjects() {
+		long startTime = StandardLog.onStartLoad("static objects");
+		Map<String, String> typeToIff = new HashMap<>();
+		SdbLoader loader = new SdbLoader();
+		try (SdbResultSet set = loader.load(new File("serverdata/static/types.sdb"))) {
+			while (set.next()) {
+				typeToIff.put(set.getText(1), set.getText(0));
 			}
+		} catch (IOException e) {
+			Log.e(e);
+			return;
 		}
+		try (SdbResultSet set = loader.load(new File("serverdata/static/spawns.sdb"))) {
+			while (set.next()) {
+				String iff = typeToIff.get(set.getText("iff_type"));
+				List<SpawnedObject> objects = spawnableObjects.get(iff);
+				if (objects == null)
+					spawnableObjects.put(iff, objects = new ArrayList<>());
+				objects.add(new SpawnedObject(set));
+			}
+		} catch (IOException e) {
+			Log.e(e);
+			return;
+		}
+		StandardLog.onEndLoad(spawnableObjects.size(), "static objects", startTime);
+	}
+	
+	private void createSupportingObjects(SWGObject object) {
+		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
+		if (objects == null)
+			return;
 		Location world = object.getWorldLocation();
 		for (SpawnedObject spawn : objects) {
 			spawn.createObject(object, world);
 		}
-	}
-	
-	private List<SpawnedObject> fetchFromDatabase(String template) {
-		List<SpawnedObject> objects = new ArrayList<>();
-		synchronized (databaseMutex) {
-			try {
-				getSupportingStatement.setString(1, template);
-				try (ResultSet set = getSupportingStatement.executeQuery()) {
-					while (set.next()) {
-						objects.add(new SpawnedObject(set));
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
-		return objects;
 	}
 	
 	private static class SpawnedObject {
@@ -113,13 +104,13 @@ public class StaticService extends Service {
 		private final double z;
 		private final double heading;
 		
-		public SpawnedObject(ResultSet set) throws SQLException {
-			this.iff = set.getString("child_iff");
-			this.cell = set.getString("cell");
-			this.x = set.getDouble("x");
-			this.y = set.getDouble("y");
-			this.z = set.getDouble("z");
-			this.heading = set.getDouble("heading");
+		public SpawnedObject(SdbResultSet set) {
+			this.iff = set.getText("child_iff");
+			this.cell = set.getText("cell");
+			this.x = set.getReal("x");
+			this.y = set.getReal("y");
+			this.z = set.getReal("z");
+			this.heading = set.getReal("heading");
 		}
 		
 		public void createObject(SWGObject building, Location parentLocation) {
@@ -137,7 +128,7 @@ public class StaticService extends Service {
 			obj.setPosition(parent.getTerrain(), x, y, z);
 			obj.setHeading(heading);
 			obj.moveToContainer(parent);
-			new ObjectCreatedIntent(obj).broadcast();
+			ObjectCreatedIntent.broadcast(obj);
 			return obj;
 		}
 		
@@ -147,7 +138,7 @@ public class StaticService extends Service {
 			loc.translateLocation(parentLocation);
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.setLocation(loc);
-			new ObjectCreatedIntent(obj).broadcast();
+			ObjectCreatedIntent.broadcast(obj);
 			return obj;
 		}
 		

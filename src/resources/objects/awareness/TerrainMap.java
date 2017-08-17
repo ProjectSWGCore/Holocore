@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,10 +35,10 @@ import com.projectswg.common.callback.CallbackManager;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.waypoint.WaypointObject;
 
 public class TerrainMap {
 	
@@ -121,18 +122,9 @@ public class TerrainMap {
 	}
 	
 	private void update(SWGObject obj) {
-		Set<SWGObject> prevAware = obj.getObjectsAware();
-		Set<SWGObject> aware = getNearbyAware(obj);
-		callbackManager.callOnEach(call -> {
-			for (SWGObject n : aware) {
-				if (!prevAware.contains(n))
-					call.onWithinRange(obj, n);
-			}
-			for (SWGObject p : prevAware) {
-				if (!aware.contains(p))
-					call.onOutOfRange(obj, p);
-			}
-		});
+		final Collection<SWGObject> oldAware = obj.getObjectsAware();
+		final Collection<SWGObject> newAware = getNearbyAware(obj);
+		callbackManager.callOnEach(call -> updateAwareness(call, oldAware, newAware, obj));
 	}
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
@@ -149,20 +141,10 @@ public class TerrainMap {
 		return aware;
 	}
 	
-	private void getWithinAwareness(int x, int z, SWGObject obj, Set<SWGObject> aware) {
+	private void getWithinAwareness(int x, int z, SWGObject obj, Collection<SWGObject> aware) {
 		if (x < 0 || z < 0 || x >= CHUNK_COUNT_ACROSS || z >= CHUNK_COUNT_ACROSS)
 			return;
 		chunks[z][x].getWithinAwareness(obj, aware);
-	}
-	
-	private boolean isInAwareness(SWGObject obj) {
-		if (obj.getParent() != null)
-			return false;
-		if (obj instanceof WaypointObject)
-			return false;
-		if (!(obj instanceof CreatureObject))
-			return true;
-		return ((CreatureObject) obj).isLoggedInPlayer() || !((CreatureObject) obj).isPlayer();
 	}
 	
 	private TerrainMapChunk getChunk(double x, double z) {
@@ -173,7 +155,28 @@ public class TerrainMap {
 		return chunks[zInd][xInd];
 	}
 	
-	private int calculateIndex(double x) {
+	private static void updateAwareness(TerrainMapCallback call, Collection<SWGObject> oldAware, Collection<SWGObject> newAware, SWGObject obj) {
+		for (SWGObject n : newAware) {
+			if (!oldAware.contains(n))
+				call.onWithinRange(obj, n);
+		}
+		for (SWGObject p : oldAware) {
+			if (!newAware.contains(p))
+				call.onOutOfRange(obj, p);
+		}
+	}
+	
+	private static boolean isInAwareness(SWGObject obj) {
+		if (obj.getParent() != null)
+			return false;
+		if (obj.getBaselineType() == BaselineType.WAYP)
+			return false;
+		if (obj.getBaselineType() != BaselineType.CREO)
+			return true;
+		return !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer();
+	}
+	
+	private static int calculateIndex(double x) {
 		return (int) ((x+8192)/16384*CHUNK_COUNT_ACROSS);
 	}
 	

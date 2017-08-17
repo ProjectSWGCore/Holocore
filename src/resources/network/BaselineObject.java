@@ -27,8 +27,6 @@
  ***********************************************************************************/
 package resources.network;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.lang.ref.SoftReference;
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
@@ -58,9 +56,8 @@ public class BaselineObject {
 		initBaselineData();
 	}
 	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		initBaselineData();
+	public BaselineType getBaselineType() {
+		return type;
 	}
 	
 	private void initBaselineData() {

@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -42,15 +44,12 @@ class Aware {
 	
 	private final SWGObject object;
 	private final List<Aware> awareness;
-	private final Object parentMutex;
-	private Aware parent;
+	private final AtomicReference<Aware> parent;
 	
 	public Aware(SWGObject obj) {
-		if (obj == null)
-			throw new NullPointerException("Object cannot be null!");
-		this.object = obj;
+		this.object = Objects.requireNonNull(obj, "Object cannot be null!");
 		this.awareness = new ArrayList<>();
-		this.parentMutex = new Object();
+		this.parent = new AtomicReference<>(null);
 	}
 	
 	public SWGObject getObject() {
@@ -58,7 +57,7 @@ class Aware {
 	}
 	
 	public void setParent(Aware parent) {
-		this.parent = parent;
+		this.parent.set(parent);
 	}
 	
 	public boolean add(Aware a) {
@@ -97,10 +96,7 @@ class Aware {
 				aware.add(a.getObject());
 			}
 		}
-		Aware parent;
-		synchronized (parentMutex) {
-			parent = this.parent;
-		}
+		Aware parent = getParent();
 		if (parent != null)
 			aware.addAll(parent.getAware());
 		return aware;
@@ -108,11 +104,9 @@ class Aware {
 	
 	public Set<Player> getObservers() {
 		Player owner = object.getOwner();
-		synchronized (parentMutex) {
-			if (parent == null)
-				return getObservers(owner, getObject(), true);
-			return getSuperParent().getObservers(owner, getObject(), true);
-		}
+		if (getParent() == null)
+			return getObservers(owner, getObject(), true);
+		return getSuperParent().getObservers(owner, getObject(), true);
 	}
 	
 	private boolean internalAdd(Aware binding) {
@@ -128,9 +122,7 @@ class Aware {
 	}
 	
 	private Aware getParent() {
-		synchronized (parentMutex) {
-			return parent;
-		}
+		return parent.get();
 	}
 	
 	private Aware getSuperParent() {
