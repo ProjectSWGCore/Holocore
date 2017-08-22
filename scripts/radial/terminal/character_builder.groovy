@@ -27,6 +27,7 @@ static def handleSelection(Player player, SWGObject target, RadialItem selection
 			listBox.addListItem("Armor")
 			listBox.addListItem("Weapons")
 			listBox.addListItem("Wearables")
+			listBox.addListItem("Tools")
 			listBox.addListItem("Travel")
 
 			listBox.addCallback("radial/terminal/character_builder", "handleCategorySelection")
@@ -45,7 +46,8 @@ static def handleCategorySelection(Player player, CreatureObject creature, SuiEv
 		case 0: handleArmor(player); break
 		case 1: handleWeapons(player); break
 		case 2: handleWearables(player); break
-		case 3: handleTravel(player); break
+		case 3: handleTools(player); break
+		case 4: handleTravel(player); break
 	}
 }
 
@@ -585,8 +587,7 @@ static def handleWearables(Player player) {
 	listBox.display(player)
 }
 
-static
-def handleWearablesSelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+static def handleWearablesSelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
 
 	if (eventType != SuiEvent.OK_PRESSED) {
 		return
@@ -1083,6 +1084,41 @@ static def handleOther(Player player) {
 			"item_tow_duster_03_01",
 			"item_event_gmf_jacket_01",
 			"item_event_gmf_wings_01"
+	])
+}
+
+static def handleTools(Player player) {
+	def listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select the tools you want to receive.")
+
+	listBox.addListItem("Survey Tools")
+
+	listBox.addCallback("radial/terminal/character_builder", "handleToolsSelection")
+	listBox.display(player)
+}
+
+static def handleToolsSelection(Player player, CreatureObject creature, SuiEvent eventType, Map<String, String> parameters) {
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return
+	}
+
+	def selection = SuiListBox.getSelectedRow(parameters)
+
+	switch (selection) {
+		case 0: handleSurveyTools(player); break
+	}
+}
+
+static def handleSurveyTools(Player player) {
+	spawnItems(player, [
+			"survey_tool_gas",
+			"survey_tool_inorganic",
+			"survey_tool_liquid",
+			"survey_tool_lumber",
+			"survey_tool_mineral",
+			"survey_tool_moisture",
+			"survey_tool_organic",
+			"survey_tool_solar",
+			"survey_tool_wind"
 	])
 }
 

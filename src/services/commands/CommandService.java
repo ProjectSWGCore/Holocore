@@ -64,6 +64,7 @@ import resources.commands.callbacks.PlayerAppearanceCallback;
 import resources.commands.callbacks.ProneCmdCallback;
 import resources.commands.callbacks.QaToolCmdCallback;
 import resources.commands.callbacks.RequestBiographyCmdCallback;
+import resources.commands.callbacks.RequestDraftSlotsCallback;
 import resources.commands.callbacks.RequestWaypointCmdCallback;
 import resources.commands.callbacks.RevertAppearanceCallback;
 import resources.commands.callbacks.ServerCmdCallback;
@@ -383,6 +384,7 @@ public class CommandService extends Service {
 		registerCallback("transferItemArmor", TransferItemCallback.class);
 		registerCallback("transferItemWeapon", TransferItemCallback.class);
 		registerCallback("logout", LogoutCmdCallback.class);
+		registerCallback("requestDraftSlots", RequestDraftSlotsCallback.class);
 	}
 	
 }

@@ -102,6 +102,10 @@ public class SurveySession {
 			return "sound/item_lumber_tool_survey.snd";
 		if (RawResourceType.GAS.isResourceType(rawResource))
 			return "sound/item_gas_tool_survey.snd";
+		if (RawResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR.isResourceType(rawResource))
+			return "sound/item_moisture_tool_survey.snd";
+		if (RawResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND.isResourceType(rawResource))
+			return "sound/item_moisture_tool_survey.snd";
 		Log.w("Unknown raw resource survey music file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
@@ -118,6 +122,10 @@ public class SurveySession {
 			return "clienteffect/survey_tool_lumber.cef";
 		if (RawResourceType.GAS.isResourceType(rawResource))
 			return "clienteffect/survey_tool_gas.cef";
+		if (RawResourceType.ENERGY_RENEWABLE_UNLIMITED_SOLAR.isResourceType(rawResource))
+			return "clienteffect/survey_tool_moisture.cef";
+		if (RawResourceType.ENERGY_RENEWABLE_UNLIMITED_WIND.isResourceType(rawResource))
+			return "clienteffect/survey_tool_moisture.cef";
 		Log.w("Unknown raw resource survey effect file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
