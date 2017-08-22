@@ -33,6 +33,7 @@ import java.sql.SQLException;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
@@ -61,7 +62,7 @@ public class TerrainZoneInsertion {
 	}
 	
 	private static final Location generateRandomLocation(Terrain terrain, double x, double y, double z, double delta) {
-		Location location = new Location();
+		LocationBuilder location = Location.builder();
 		location.setTerrain(terrain);
 		location.setX(x + (Math.random()-.5) * delta);
 		location.setY(y);
@@ -70,7 +71,7 @@ public class TerrainZoneInsertion {
 		location.setOrientationY(0);
 		location.setOrientationZ(0);
 		location.setOrientationW(1);
-		return location;
+		return location.build();
 	}
 	
 	public static class SpawnInformation {

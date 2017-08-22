@@ -332,8 +332,7 @@ public final class LootService extends Service {
 		// At this point, something will have dropped for sure.
 		if (requester.isPlayer() && !inventory.getContainedObjects().isEmpty()) {	// TODO needs adjustment for group loot
 			// If there's something we can loot, draw the loot disc icon on the corpse!
-			Location effectLocation = new Location(corpse.getLocation());
-			effectLocation.setPosition(0,0.5, 0);	// TODO should 0.5 be hardcoded or grabbed from somewhere?
+			Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
 			
 			long requesterGroup = requester.getGroupId();
 			

@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.objects.buildouts;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
@@ -36,7 +38,7 @@ public class SwgBuildoutRow {
 	private static final int	cellCrc		= CRC.getCrc("object/cell/shared_cell.iff");
 	
 	private final SwgBuildoutArea	buildoutArea;
-	private final Location		location	= new Location();
+	private final AtomicReference<Location> location;
 	private long				objectId;
 	private long				containerId;
 	private int					type;
@@ -48,6 +50,7 @@ public class SwgBuildoutRow {
 	
 	public SwgBuildoutRow(SwgBuildoutArea buildoutArea) {
 		this.buildoutArea = buildoutArea;
+		this.location = new AtomicReference<>(null);
 	}
 	
 	public void load(Object [] datatableRow, CrcStringTableData crcString) {
@@ -98,13 +101,16 @@ public class SwgBuildoutRow {
 	private void loadEndColumns(Object [] datatableRow, CrcStringTableData crcString, int offset) {
 		sharedTemplateCrc = (Integer) datatableRow[offset + 0];
 		cellIndex = (Integer) datatableRow[offset + 1];
-		location.setX((Float) datatableRow[offset + 2]);
-		location.setY((Float) datatableRow[offset + 3]);
-		location.setZ((Float) datatableRow[offset + 4]);
-		location.setOrientationW((Float) datatableRow[offset + 5]);
-		location.setOrientationX((Float) datatableRow[offset + 6]);
-		location.setOrientationY((Float) datatableRow[offset + 7]);
-		location.setOrientationZ((Float) datatableRow[offset + 8]);
+		Location loc = Location.builder()
+				.setX((Float) datatableRow[offset + 2])
+				.setY((Float) datatableRow[offset + 3])
+				.setZ((Float) datatableRow[offset + 4])
+				.setOrientationW((Float) datatableRow[offset + 5])
+				.setOrientationX((Float) datatableRow[offset + 6])
+				.setOrientationY((Float) datatableRow[offset + 7])
+				.setOrientationZ((Float) datatableRow[offset + 8])
+				.build();
+		location.set(loc);
 		radius = (Float) datatableRow[offset + 9];
 		portalLayoutCrc = (Integer) datatableRow[offset + 10];
 		template = crcString.getTemplateString(sharedTemplateCrc);
@@ -113,11 +119,11 @@ public class SwgBuildoutRow {
 	private void translateLocation() {
 		if (cellIndex != 0)
 			return;
-		location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
+		location.set(Location.builder(location.get()).translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1()).build());
 	}
 	
 	public Location getLocation() {
-		return location;
+		return location.get();
 	}
 	
 	public long getObjectId() {

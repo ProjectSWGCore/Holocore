@@ -43,6 +43,7 @@ import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
@@ -174,7 +175,7 @@ public final class SpawnerService extends Service {
 		setDifficulty(spawner, set);
 		setMoodAnimation(spawner, set);
 		setAiBehavior(spawner, set);
-		setLocation(spawner, loc, set);
+		setLocation(spawner, set);
 		setFaction(spawner, set);
 		createEgg(spawner, set);
 		
@@ -236,11 +237,13 @@ public final class SpawnerService extends Service {
 		spawner.setCreatureDifficulty(difficulty);
 	}
 	
-	private void setLocation(Spawner spawner, Location loc, ResultSet set) throws SQLException {
+	private void setLocation(Spawner spawner, ResultSet set) throws SQLException {
 		Terrain terrain = Terrain.valueOf(set.getString("building_terrain"));
-		loc.setTerrain(terrain);
-		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
-		loc.setHeading(set.getFloat("heading"));
+		Location loc = Location.builder()
+				.setTerrain(terrain)
+				.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"))
+				.setHeading(set.getFloat("heading"))
+				.build();
 		spawner.setLocation(loc);
 	}
 
@@ -374,7 +377,7 @@ public final class SpawnerService extends Service {
 	}
 	
 	private Location behaviorLocation(Spawner spawner) {
-		Location aiLocation = new Location(spawner.getLocation());
+		LocationBuilder builder = Location.builder(spawner.getLocation());
 		
 		switch (spawner.getAIBehavior()) {
 			case LOITER:
@@ -384,19 +387,19 @@ public final class SpawnerService extends Service {
 				int offsetZ = randomBetween(0, floatRadius);
 				
 				spawner.setFloatRadius(floatRadius);
-				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
+				builder.translatePosition(offsetX, 0, offsetZ);
 	
 				// Doesn't break here - LOITER NPCs also have TURN behavior
 			case TURN:
 				// Random heading when spawned
 				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
-				aiLocation.setHeading(randomHeading);	// -180 to 180
+				builder.setHeading(randomHeading);
 				break;
 			default:
 				break;
 		}
 		
-		return aiLocation;
+		return builder.build();
 	}
 	
 	/**

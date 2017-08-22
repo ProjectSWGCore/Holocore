@@ -43,9 +43,7 @@ class SpeedCheckHandler {
 		obj.updateLastTransformTime();
 		Location l = obj.getWorldLocation();
 		if (isSpeeding(obj, l, requestedLocation, time)) {
-			double angle = getMovementAngle(l, requestedLocation);
-			requestedLocation.setX(l.getX()+obj.getMovementScale()*7.3*time*Math.cos(angle));
-			requestedLocation.setZ(l.getZ()+obj.getMovementScale()*7.3*time*Math.sin(angle));
+			// TODO: Do something about it
 		}
 	}
 	
@@ -53,32 +51,21 @@ class SpeedCheckHandler {
 		double time = obj.getTimeSinceLastTransform() / 1000;
 		obj.updateLastTransformTime();
 		Location l = obj.getWorldLocation();
-		Location requestedWorld = new Location(requestedLocation.getX(), 0, requestedLocation.getZ(), parent.getTerrain());
-		requestedWorld.translateLocation(parent.getWorldLocation());
+		Location requestedWorld = Location.builder()
+				.setPosition(requestedLocation.getX(), 0, requestedLocation.getZ())
+				.setTerrain(parent.getTerrain())
+				.translateLocation(parent.getWorldLocation())
+				.build();
 		if (isSpeeding(obj, l, requestedWorld, time)) {
-			double angle = getMovementAngle(l, requestedWorld);
-			requestedLocation.setX(requestedLocation.getX()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.cos(angle)));
-			requestedLocation.setZ(requestedLocation.getZ()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.sin(angle)));
+			// TODO: Do something about it
 		}
 	}
 	
-	private boolean isSpeeding(CreatureObject obj, Location nWorld, Location newLocation, double time) {
+	private static boolean isSpeeding(CreatureObject obj, Location nWorld, Location newLocation, double time) {
 		return Math.sqrt(square(nWorld.getX()-nWorld.getX()) + square(nWorld.getZ()-newLocation.getZ())) / time > obj.getMovementScale()*7.3;
 	}
 	
-	private double getMovementAngle(Location oldLocation, Location newLocation) {
-		if (newLocation.getX() == oldLocation.getX())
-			return Math.PI;
-		return Math.atan2(newLocation.getZ()-oldLocation.getZ(), newLocation.getX()-oldLocation.getX()) + Math.PI;
-	}
-	
-	private double invertNormalizedValue(double x) {
-		if (x < 0)
-			return -1 - x;
-		return 1-x;
-	}
-	
-	private double square(double x) {
+	private static double square(double x) {
 		return x * x;
 	}
 	

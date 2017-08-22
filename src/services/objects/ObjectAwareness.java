@@ -69,6 +69,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
+import services.objects.ObjectManager.ObjectLookup;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
@@ -171,13 +172,13 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket SWGPacket = gpi.getPacket();
-		if (SWGPacket instanceof DataTransform) {
-			handleDataTransform((DataTransform) SWGPacket, gpi.getObjectManager());
-		} else if (SWGPacket instanceof DataTransformWithParent) {
-			handleDataTransformWithParent((DataTransformWithParent) SWGPacket, gpi.getObjectManager());
-		} else if (SWGPacket instanceof CmdSceneReady) {
-			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) SWGPacket);
+		SWGPacket packet = gpi.getPacket();
+		if (packet instanceof DataTransform) {
+			handleDataTransform((DataTransform) packet);
+		} else if (packet instanceof DataTransformWithParent) {
+			handleDataTransformWithParent((DataTransformWithParent) packet);
+		} else if (packet instanceof CmdSceneReady) {
+			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
 		}
 	}
 	
@@ -275,24 +276,22 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			obj.createObject(owner);
 	}
 	
-	private void handleDataTransform(DataTransform dt, ObjectManager objectManager) {
-		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
+	private void handleDataTransform(DataTransform dt) {
+		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
 		Assert.test(obj instanceof CreatureObject, "DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
-		Location requestedLocation = new Location(dt.getLocation());
-		requestedLocation.setTerrain(obj.getTerrain());
+		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
 		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
 	}
 	
-	private void handleDataTransformWithParent(DataTransformWithParent dt, ObjectManager objectManager) {
-		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
-		SWGObject parent = objectManager.getObjectById(dt.getCellId());
+	private void handleDataTransformWithParent(DataTransformWithParent dt) {
+		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
+		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
 		Assert.test(obj instanceof CreatureObject, "DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		if (parent == null) {
 			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
 			return;
 		}
-		Location requestedLocation = new Location(dt.getLocation());
-		requestedLocation.setTerrain(obj.getTerrain());
+		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
 		moveObjectWithTransform(obj, parent, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
 	}
 	

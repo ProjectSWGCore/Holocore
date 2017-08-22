@@ -45,7 +45,7 @@ class TerrainMapChunk {
 	private final double maxZ;
 	
 	public TerrainMapChunk(double minX, double minZ, double maxX, double maxZ) {
-		objects = new CopyOnWriteArraySet<>(); // There will be some expanding and shrinking
+		this.objects = new CopyOnWriteArraySet<>(); // There will be some expanding and shrinking
 		this.minX = minX;
 		this.minZ = minZ;
 		this.maxX = maxX;
@@ -84,23 +84,21 @@ class TerrainMapChunk {
 		}
 	}
 	
-	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {
+	private static boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {
 		if (obj.equals(inRange))
 			return false;
 		if (obj.getInstanceLocation().getInstanceNumber() != inRange.getInstanceLocation().getInstanceNumber())
 			return false;
 		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
 			return false;
-		if (!isWithinRange(obj, inRange, range))
-			return false;
-		return true;
+		return isWithinRange(obj, inRange, range);
 	}
 	
-	private boolean isWithinRange(SWGObject a, SWGObject b, double range) {
+	private static boolean isWithinRange(SWGObject a, SWGObject b, double range) {
 		return square(a.getX()-b.getX()) + square(a.getZ()-b.getZ()) <= square(Math.max(b.getLoadRange(), range));
 	}
 	
-	private double square(double x) {
+	private static double square(double x) {
 		return x * x;
 	}
 	

@@ -1031,6 +1031,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	@Override
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
+			default:
 			case 6:
 				readVersion6(stream);
 				break;

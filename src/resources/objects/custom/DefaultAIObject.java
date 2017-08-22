@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 
 import intents.object.MoveObjectIntent;
 
@@ -98,16 +98,15 @@ public class DefaultAIObject extends AIObject {
 			return;
 		double dist = Math.sqrt(radius);
 		double theta;
-		Location l = getLocation();
-		Point3D point = new Point3D();
+		Location currentLocation = getLocation();
+		LocationBuilder l = Location.builder(currentLocation);
 		do {
 			theta = r.nextDouble() * Math.PI * 2;
-			point.setX(l.getX() + Math.cos(theta) * dist);
-			point.setZ(l.getZ() + Math.sin(theta) * dist);
-		} while (!mainLocation.isWithinFlatDistance(point, radius));
-		l.setPosition(point.getX(), l.getY(), point.getZ());
+			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
+			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
+		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		new MoveObjectIntent(this, getParent(), l, 1.37, updateCounter++).broadcast();
+		new MoveObjectIntent(this, getParent(), l.build(), 1.37, updateCounter++).broadcast();
 	}
 	
 	private void aiLoopTurn() {
@@ -119,8 +118,7 @@ public class DefaultAIObject extends AIObject {
 		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
 		double theta = r.nextDouble() * 360;
-		mainLocation.setHeading(theta);
-		new MoveObjectIntent(this, getParent(), mainLocation, 1.37, updateCounter++).broadcast();
+		new MoveObjectIntent(this, getParent(), Location.builder(mainLocation).setHeading(theta).build(), 1.37, updateCounter++).broadcast();
 	}
 	
 }

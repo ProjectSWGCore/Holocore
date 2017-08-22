@@ -1,3 +1,6 @@
 [submodule "PSWGCommon"]
 	path = PSWGCommon
 	url = git@bitbucket.org:projectswg/pswgcommon.git
+[submodule "PSWGCommonFX"]
+	path = PSWGCommonFX
+	url = ssh://git@bitbucket.org/projectswg/pswgcommonfx.git

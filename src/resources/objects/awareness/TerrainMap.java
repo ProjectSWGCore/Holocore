@@ -128,23 +128,23 @@ public class TerrainMap {
 	}
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
-		Set<SWGObject> aware = new HashSet<>();
+		Set<SWGObject> aware = new HashSet<>(64);
 		if (obj.getAwareness().getTerrainMapChunk() == null)
 			return aware;
 		int sX = calculateIndex(obj.getX())-1;
 		int sZ = calculateIndex(obj.getZ())-1;
-		for (int z = sZ; z <= sZ+2; ++z) {
-			for (int x = sX; x <= sX+2; ++x) {
-				getWithinAwareness(x, z, obj, aware);
+		int eX = sX + 2;
+		int eZ = sZ + 2;
+		for (int z = sZ; z <= eZ; ++z) {
+			if (z < 0 || z >= CHUNK_COUNT_ACROSS)
+				continue;
+			for (int x = sX; x <= eX; ++x) {
+				if (x < 0 || x >= CHUNK_COUNT_ACROSS)
+					continue;
+				chunks[z][x].getWithinAwareness(obj, aware);
 			}
 		}
 		return aware;
-	}
-	
-	private void getWithinAwareness(int x, int z, SWGObject obj, Collection<SWGObject> aware) {
-		if (x < 0 || z < 0 || x >= CHUNK_COUNT_ACROSS || z >= CHUNK_COUNT_ACROSS)
-			return;
-		chunks[z][x].getWithinAwareness(obj, aware);
 	}
 	
 	private TerrainMapChunk getChunk(double x, double z) {

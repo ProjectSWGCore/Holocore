@@ -29,6 +29,7 @@ package resources.commands.callbacks;
 
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
 
 import intents.chat.SystemMessageIntent;
@@ -148,7 +149,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 		}
 
 		CreatureObject creature = player.getCreatureObject();
-		Location location = creature.getWorldLocation();
+		LocationBuilder location = Location.builder(creature.getWorldLocation());
 
 		if (!Float.isNaN(x))
 			location.setX(x);
@@ -167,7 +168,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (name == null || name.isEmpty())
 			name = "Waypoint";
 
-		ghost.addWaypoint(createWaypoint(color, name, location));
+		ghost.addWaypoint(createWaypoint(color, name, location.build()));
 
 		if (differentPlanetMessage) {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "

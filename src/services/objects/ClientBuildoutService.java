@@ -42,6 +42,7 @@ import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
@@ -280,9 +281,11 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		private void setObjectLocation(SWGObject obj) {
-			obj.setPosition(creationData.x, creationData.y, creationData.z);
-			obj.setOrientation(creationData.orientationX, creationData.orientationY, creationData.orientationZ, creationData.orientationW);
-			obj.setTerrain(currentArea.getTerrain());
+			obj.setLocation(Location.builder()
+					.setPosition(creationData.x, creationData.y, creationData.z)
+					.setOrientation(creationData.orientationX, creationData.orientationY, creationData.orientationZ, creationData.orientationW)
+					.setTerrain(currentArea.getTerrain())
+					.build());
 		}
 		
 		private void setCellNumber(Map<Long, SWGObject> objects, SWGObject obj) {

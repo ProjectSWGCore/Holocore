@@ -49,6 +49,7 @@ import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -351,22 +352,24 @@ public final class CorpseService extends Service {
 	}
 	
 	private Location getCloneLocation(FacilityData facilityData, BuildingObject selectedFacility) {
-		Location cloneLocation;
+		LocationBuilder cloneLocation = Location.builder();
 		Location facilityLocation = selectedFacility.getLocation();
 		TubeData[] tubeData = facilityData.getTubeData();
 		int tubeCount = tubeData.length;
 
 		if (tubeCount > 0) {
 			TubeData randomData = tubeData[random.nextInt(tubeCount)];
-			cloneLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), facilityLocation.getTerrain());
+			cloneLocation.setTerrain(facilityLocation.getTerrain());
+			cloneLocation.setPosition(randomData.getTubeX(), 0, randomData.getTubeZ());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
 			cloneLocation.rotateHeading(randomData.getTubeHeading());
 		} else {
-			cloneLocation = new Location(facilityData.getX(), facilityData.getY(), facilityData.getZ(), facilityLocation.getTerrain());
+			cloneLocation.setTerrain(facilityLocation.getTerrain());
+			cloneLocation.setPosition(facilityData.getX(), facilityData.getY(), facilityData.getZ());
 			cloneLocation.rotateHeading(facilityData.getHeading());
 		}
 		
-		return cloneLocation;
+		return cloneLocation.build();
 	}
 	
 	private void teleport(CreatureObject corpse, CellObject cellObject, Location cloneLocation) {

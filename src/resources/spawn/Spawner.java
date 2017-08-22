@@ -28,6 +28,7 @@
 package resources.spawn;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
@@ -39,7 +40,7 @@ import resources.objects.custom.AIBehavior;
 public final class Spawner {
 
 	private final Random random;
-	private final Location location;
+	private final AtomicReference<Location> location;
 	private final int id;
 	private String creatureId;
 	private SWGObject eggObject;
@@ -61,7 +62,7 @@ public final class Spawner {
 	public Spawner(int id) {
 		this.id = id;
 		this.random = new Random();
-		this.location = new Location();
+		this.location = new AtomicReference<>(null);
 	}
 
 	public void setCreatureId(String creatureId) {
@@ -95,11 +96,11 @@ public final class Spawner {
 	}
 	
 	public Location getLocation() {
-		return location;
+		return location.get();
 	}
 	
 	public void setLocation(Location loc) {
-		this.location.mergeWith(loc);
+		this.location.set(loc);
 	}
 	
 	/**

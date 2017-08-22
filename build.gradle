@@ -39,6 +39,7 @@ shadowJar{
 
 dependencies {
 	compile project(':PSWGCommon')
+	compile project(':PSWGCommonFX')
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 	testCompile fileTree(dir: 'lib', include: ['*.jar'])
 }
