@@ -32,13 +32,16 @@ import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.persistable.Persistable;
 
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 
-public class WaypointObject extends IntangibleObject {
+public class WaypointObject extends IntangibleObject implements Encodable, Persistable {
 	
 	private WaypointPackage waypoint;
 	
@@ -124,6 +127,21 @@ public class WaypointObject extends IntangibleObject {
 		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
 	}
 	
+	@Override
+	public void decode(NetBuffer data) {
+		waypoint.decode(data);
+	}
+	
+	@Override
+	public byte[] encode() {
+		return waypoint.encode();
+	}
+	
+	@Override
+	public int getLength() {
+		return waypoint.getLength();
+	}
+
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
