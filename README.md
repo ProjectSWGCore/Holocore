@@ -70,15 +70,16 @@ A tool such as TRE Explorer is capable of opening the files and extracting their
 ## Contributing ##
 
 1. Fork this repository
-2. Clone the fork you just created
-3. Find something to do on [one of our Trello boards](https://trello.com/projectswg)
-4. Create a new branch on your fork of holocore
-5. Write code, commit and push it to your branch
-6. Once ready, create a pull request with destination branch `quality_assurance` and source branch
+2. Clone the fork you just created, using `git clone`
+3. Get the submodules using `git submodule update --init`
+4. Find something to do on [one of our Trello boards](https://trello.com/projectswg)
+5. Create a new branch on your fork of holocore
+6. Write code, commit and push it to your branch
+7. Once ready, create a pull request with destination branch `quality_assurance` and source branch
 `<your_branch_name>`
-7. Your changes are reviewed and are merged, unless something is wrong
-8. Once merged, your changes will be available in future builds
-9. If you want to work on something else, go back to step 3
+8. Your changes are reviewed and are merged, unless something is wrong
+9. Once merged, your changes will be available in future builds
+10. If you want to work on something else, go back to step 4
 
 # Contact #
 
