@@ -1,0 +1,857 @@
+patrol_id	patrol_type	patrol_points	terrain	building_id	cell_id	x	y	z	pause	comment
+INTEGER PRIMARY KEY	TEXT	INTEGER	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+tatooine_100	FLIP	6	TATOOINE	tat_cave_08	19	16.88	-13.54	-17.87	0	feeder_tusken_patrol_10751313
+tatooine_101			TATOOINE	tat_cave_08	19	18.74	-20.34	-41.56	0	
+tatooine_102			TATOOINE	tat_cave_08	19	15.90	-26.34	-58.98	0	
+tatooine_103			TATOOINE	tat_cave_08	20	17.18	-27.21	-77.97	0	
+tatooine_104			TATOOINE	tat_cave_08	20	0.36	-27.78	-81.49	0	
+tatooine_105			TATOOINE	tat_cave_08	20	-11.07	-27.16	-76.89	0	
+tatooine_106			TATOOINE	tat_cave_08	21	-27.04	-27.31	-68.08	0	
+tatooine_200	FLIP	8	TATOOINE	tat_cave_08	22	-12.95	-35.81	-97.91	0	feeder_tusken_patrol_02_10752370
+tatooine_201			TATOOINE	tat_cave_08	22	-32.74	-35.88	-94.72	0	
+tatooine_202			TATOOINE	tat_cave_08	22	-53.27	-41.70	-105.82	0	
+tatooine_203			TATOOINE	tat_cave_08	22	-62.51	-44.56	-113.25	0	
+tatooine_204			TATOOINE	tat_cave_08	9	-89.87	-45.79	-114.03	0	
+tatooine_205			TATOOINE	tat_cave_08	23	-128.61	-45.80	-112.58	0	
+tatooine_206			TATOOINE	tat_cave_08	23	-131.24	-50.61	-128.90	0	
+tatooine_207			TATOOINE	tat_cave_08	24	-125.69	-52.37	-138.97	0	
+tatooine_208			TATOOINE	tat_cave_08	24	-104.97	-58.94	-136.37	0	
+tatooine_300	FLIP	15	TATOOINE	tat_cave_08	25	-49.11	-61.14	-115.68	0	feeder_tusken_patrol_04_10764530
+tatooine_301			TATOOINE	tat_cave_08	25	-49.94	-60.29	-135.48	0	
+tatooine_302			TATOOINE	tat_cave_08	25	-62.47	-57.94	-140.19	0	
+tatooine_303			TATOOINE	tat_cave_08	28	-66.62	-58.16	-176.58	0	
+tatooine_304			TATOOINE	tat_cave_08	28	-82.77	-58.44	-190.43	0	
+tatooine_305			TATOOINE	tat_cave_08	28	-69.75	-57.84	-198.53	0	
+tatooine_306			TATOOINE	tat_cave_08	28	-56.06	-57.91	-198.07	0	
+tatooine_307			TATOOINE	tat_cave_08	29	-56.25	-57.63	-219.36	0	
+tatooine_308			TATOOINE	tat_cave_08	28	-50.40	-58.55	-179.64	0	
+tatooine_309			TATOOINE	tat_cave_08	28	-43.35	-58.45	-164.37	0	
+tatooine_310			TATOOINE	tat_cave_08	28	-48.19	-58.66	-156.94	0	
+tatooine_311			TATOOINE	tat_cave_08	28	-64.56	-57.84	-151.74	0	
+tatooine_312			TATOOINE	tat_cave_08	25	-64.95	-58.22	-139.49	0	
+tatooine_313			TATOOINE	tat_cave_08	25	-76.56	-59.10	-134.96	0	
+tatooine_314			TATOOINE	tat_cave_08	9	-85.53	-64.07	-105.63	0	
+tatooine_315			TATOOINE	tat_cave_08	9	-108.49	-61.57	-106.05	0	
+tatooine_400	FLIP	4	TATOOINE	tat_cave_08	27	38.73	-58.25	-85.08	0	feeder_tusken_patrol_03_10764350
+tatooine_401			TATOOINE	tat_cave_08	27	37.92	-58.89	-68.47	0	
+tatooine_402			TATOOINE	tat_cave_08	20	3.85	-59.54	-66.00	0	
+tatooine_403			TATOOINE	tat_cave_08	26	2.15	-62.91	-102.61	0	
+tatooine_404			TATOOINE	tat_cave_08	26	-19.16	-59.95	-107.83	0	
+tatooine_500	FLIP	5	TATOOINE	tat_world	0	-5118.97	75.00	-6450.39	0	Smuggler_Enemy_Patrol_10030282
+tatooine_501			TATOOINE	tat_world	0	-5148.48	75.00	-6459.70	0	
+tatooine_502			TATOOINE	tat_world	0	-5174.16	75.00	-6461.53	0	
+tatooine_503			TATOOINE	tat_world	0	-5157.67	75.00	-6453.19	0	
+tatooine_504			TATOOINE	tat_world	0	-5195.41	75.00	-6449.13	0	
+tatooine_505			TATOOINE	tat_world	0	-5156.38	75.03	-6446.57	0	
+tatooine_600	FLIP	6	TATOOINE	tat_world	0	-5210.82	75.00	-6487.51	0	smuggler_enemy_patrol_10029077
+tatooine_601			TATOOINE	tat_world	0	-5185.36	75.00	-6488.35	0	
+tatooine_602			TATOOINE	tat_world	0	-5151.40	75.00	-6487.99	0	
+tatooine_603			TATOOINE	tat_world	0	-5151.92	75.00	-6504.20	0	
+tatooine_604			TATOOINE	tat_world	0	-5186.21	75.00	-6507.45	0	
+tatooine_605			TATOOINE	tat_world	0	-5187.60	75.00	-6498.75	0	
+tatooine_606			TATOOINE	tat_world	0	-5211.74	75.00	-6499.62	0	
+tatooine_700	FLIP	5	TATOOINE	tat_world	0	-5136.84	79.77	-6982.19	0	tatooine_hutt_assassin_camp_10058276
+tatooine_701			TATOOINE	tat_world	0	-5170.36	79.75	-6977.43	0	
+tatooine_702			TATOOINE	tat_world	0	-5162.49	79.77	-6969.11	0	
+tatooine_703			TATOOINE	tat_world	0	-5150.11	79.77	-6942.57	0	
+tatooine_704			TATOOINE	tat_world	0	-5130.27	79.77	-6954.90	0	
+tatooine_705			TATOOINE	tat_world	0	-5180.91	77.74	-6960.23	0	
+tatooine_800	FLIP	5	TATOOINE	tat_world	0	-5041.45	39.79	-6136.00	0	tatooine_valarian_thief_camp_10033755
+tatooine_801			TATOOINE	tat_world	0	-5038.25	39.84	-6110.45	0	
+tatooine_802			TATOOINE	tat_world	0	-5006.02	39.54	-6144.11	0	
+tatooine_803			TATOOINE	tat_world	0	-4985.57	35.12	-6126.77	0	
+tatooine_804			TATOOINE	tat_world	0	-5052.96	41.81	-6116.46	0	
+tatooine_805			TATOOINE	tat_world	0	-5033.76	38.41	-6160.29	0	
+tatooine_900	FLIP	7	TATOOINE	tat_valarian_strategic_bunker	5	3.39	-12.00	60.24	0	valarian_vandal_04_10518686
+tatooine_901			TATOOINE	tat_valarian_strategic_bunker	5	9.77	-12.00	53.63	0	
+tatooine_902			TATOOINE	tat_valarian_strategic_bunker	5	12.88	-12.00	47.87	0	
+tatooine_903			TATOOINE	tat_valarian_strategic_bunker	5	10.39	-12.00	40.55	0	
+tatooine_904			TATOOINE	tat_valarian_strategic_bunker	5	4.54	-12.00	37.60	0	
+tatooine_905			TATOOINE	tat_valarian_strategic_bunker	5	-3.44	-12.00	40.61	0	
+tatooine_906			TATOOINE	tat_valarian_strategic_bunker	5	-5.55	-12.00	47.24	0	
+tatooine_907			TATOOINE	tat_valarian_strategic_bunker	5	-3.04	-12.00	53.90	0	
+tatooine_1000	FLIP	3	TATOOINE	tat_valarian_strategic_bunker	7	-51.36	-20.00	61.06	0	valarian_enforcer_04_10518264
+tatooine_1001			TATOOINE	tat_valarian_strategic_bunker	7	-54.74	-20.00	65.62	0	
+tatooine_1002			TATOOINE	tat_valarian_strategic_bunker	7	-65.00	-20.00	66.96	0	
+tatooine_1003			TATOOINE	tat_valarian_strategic_bunker	7	-69.32	-20.00	63.68	0	
+tatooine_1100	FLIP	3	TATOOINE	tat_valarian_strategic_bunker	10	26.96	-12.00	34.82	0	valarian_vandal_05_10520297
+tatooine_1101			TATOOINE	tat_valarian_strategic_bunker	10	35.31	-12.00	35.27	0	
+tatooine_1102			TATOOINE	tat_valarian_strategic_bunker	10	35.60	-12.00	42.65	0	
+tatooine_1103			TATOOINE	tat_valarian_strategic_bunker	10	35.38	-12.00	58.25	0	
+tatooine_1200	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	10	35.44	-12.00	87.77	0	valarian_vandal_06_10520369
+tatooine_1201			TATOOINE	tat_valarian_strategic_bunker	10	35.30	-12.00	73.91	0	
+tatooine_1202			TATOOINE	tat_valarian_strategic_bunker	10	35.37	-12.00	62.01	0	
+tatooine_1300	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	12	72.09	-12.00	59.42	0	valarian_enforcer_09_10519929
+tatooine_1301			TATOOINE	tat_valarian_strategic_bunker	12	60.84	-12.00	59.19	0	
+tatooine_1302			TATOOINE	tat_valarian_strategic_bunker	12	47.72	-12.00	59.10	0	
+tatooine_1400	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	13	17.83	-20.00	122.19	0	valarian_executioner_04_10519172
+tatooine_1401			TATOOINE	tat_valarian_strategic_bunker	13	27.62	-20.00	122.76	0	
+tatooine_1402			TATOOINE	tat_valarian_strategic_bunker	13	35.91	-20.00	123.24	0	
+tatooine_1500	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	13	36.35	-20.00	143.68	0	valarian_executioner_05_10519236
+tatooine_1501			TATOOINE	tat_valarian_strategic_bunker	13	36.72	-20.00	135.52	0	
+tatooine_1502			TATOOINE	tat_valarian_strategic_bunker	13	36.95	-20.00	124.86	0	
+tatooine_1600	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	14	55.47	-12.00	-0.25	0	valarian_executioner_07_10520123
+tatooine_1601			TATOOINE	tat_valarian_strategic_bunker	14	41.95	-12.00	-0.32	0	
+tatooine_1602			TATOOINE	tat_valarian_strategic_bunker	14	31.07	-12.00	1.14	0	
+tatooine_1700	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	14	56.47	-12.00	21.18	0	valarian_executioner_08_10520199
+tatooine_1701			TATOOINE	tat_valarian_strategic_bunker	14	46.29	-12.00	20.92	0	
+tatooine_1702			TATOOINE	tat_valarian_strategic_bunker	14	31.61	-12.00	21.06	0	
+tatooine_1800	FLIP	3	TATOOINE	tat_valarian_strategic_bunker	18	-30.87	-20.00	69.01	0	valarian_enforcer_06_10519713
+tatooine_1801			TATOOINE	tat_valarian_strategic_bunker	18	-30.68	-20.00	54.14	0	
+tatooine_1802			TATOOINE	tat_valarian_strategic_bunker	18	-30.78	-20.00	41.48	0	
+tatooine_1803			TATOOINE	tat_valarian_strategic_bunker	18	-30.76	-20.00	28.96	0	
+tatooine_1900	FLIP	2	TATOOINE	tat_valarian_strategic_bunker	19	-31.75	-20.00	100.66	0	valarian_executioner_03_10519043
+tatooine_1901			TATOOINE	tat_valarian_strategic_bunker	19	-23.08	-20.00	100.91	0	
+tatooine_1902			TATOOINE	tat_valarian_strategic_bunker	19	-14.51	-20.00	100.96	0	
+tatooine_2000	FLIP	3	TATOOINE	tat_world	0	-3937.31	4.99	-3990.23	0	valarian_vandal_11_10521291
+tatooine_2001			TATOOINE	tat_world	0	-3935.73	5.17	-4002.99	0	
+tatooine_2002			TATOOINE	tat_world	0	-3931.76	6.34	-4014.77	0	
+tatooine_2003			TATOOINE	tat_world	0	-3923.78	6.65	-4024.28	0	
+tatooine_2100	FLIP	4	TATOOINE	tat_world	0	-3052.39	5.00	2025.83	0	Smuggler_Patrol_Enemy_10034404
+tatooine_2101			TATOOINE	tat_world	0	-3062.88	5.00	2037.02	0	
+tatooine_2102			TATOOINE	tat_world	0	-3075.89	5.00	2040.74	0	
+tatooine_2103			TATOOINE	tat_world	0	-3073.25	5.00	2036.73	0	
+tatooine_2104			TATOOINE	tat_world	0	-3053.53	5.00	2039.03	0	
+tatooine_2200	FLIP	2	TATOOINE	tat_world	0	-3068.28	5.00	2320.75	0	Smuggler_Enemy_Patrol_10029992
+tatooine_2201			TATOOINE	tat_world	0	-3095.79	5.00	2314.60	0	
+tatooine_2202			TATOOINE	tat_world	0	-3140.54	5.00	2301.16	0	
+tatooine_2300	FLIP	20	TATOOINE	tat_world	2	-4096.46	0.25	2051.58	0	tatooine_laserflit_patrol_gs1_18724369
+tatooine_2301			TATOOINE	tat_world	3	-4092.59	0.25	2043.97	0	
+tatooine_2302			TATOOINE	tat_world	4	-4092.25	-12.00	2075.76	0	
+tatooine_2303			TATOOINE	tat_world	5	-4066.07	-12.00	2074.76	0	
+tatooine_2304			TATOOINE	tat_world	5	-4061.37	-12.00	2083.66	0	
+tatooine_2305			TATOOINE	tat_world	5	-4074.39	-12.00	2079.84	0	
+tatooine_2306			TATOOINE	tat_world	4	-4092.27	-12.00	2079.12	0	
+tatooine_2307			TATOOINE	tat_world	7	-4092.51	-16.00	2129.06	0	
+tatooine_2308			TATOOINE	tat_world	7	-4113.03	-16.00	2129.47	0	
+tatooine_2309			TATOOINE	tat_world	9	-4132.26	-14.00	2127.41	0	
+tatooine_2310			TATOOINE	tat_world	7	-4112.24	-16.00	2124.84	0	
+tatooine_2311			TATOOINE	tat_world	7	-4108.95	-16.00	2132.86	0	
+tatooine_2312			TATOOINE	tat_world	7	-4078.93	-16.00	2122.37	0	
+tatooine_2313			TATOOINE	tat_world	8	-4054.05	-16.00	2127.52	0	
+tatooine_2314			TATOOINE	tat_world	8	-4037.86	-16.00	2113.55	0	
+tatooine_2315			TATOOINE	tat_world	8	-4017.99	-16.00	2105.00	0	
+tatooine_2316			TATOOINE	tat_world	8	-4017.43	-16.00	2133.28	0	
+tatooine_2317			TATOOINE	tat_world	8	-4047.47	-16.00	2133.61	0	
+tatooine_2318			TATOOINE	tat_world	8	-4056.81	-16.00	2121.01	0	
+tatooine_2319			TATOOINE	tat_world	8	-4048.11	-16.00	2131.32	0	
+tatooine_2320			TATOOINE	tat_world	8	-4034.51	-16.00	2121.74	0	
+tatooine_2400	FLIP	3	TATOOINE	tat_world	0	-3112.25	5.00	2068.88	0	Smuggler_Enemy_patrol_10033895
+tatooine_2401			TATOOINE	tat_world	0	-3085.88	5.00	2072.62	0	
+tatooine_2402			TATOOINE	tat_world	0	-3078.17	5.00	2058.81	0	
+tatooine_2403			TATOOINE	tat_world	0	-3087.57	5.00	2072.97	0	
+tatooine_2500	FLIP	3	TATOOINE	tat_world	0	-3150.22	5.00	2284.38	0	Smuggler_Enemy_patrol_10030545
+tatooine_2501			TATOOINE	tat_world	0	-3138.36	5.00	2300.81	0	
+tatooine_2502			TATOOINE	tat_world	0	-3118.48	5.00	2307.51	0	
+tatooine_2503			TATOOINE	tat_world	0	-3147.56	5.00	2298.88	0	
+tatooine_2600	FLIP	3	TATOOINE	tat_world	0	-3512.87	13.99	2075.27	0	tatooine_jawa_camp_10032884
+tatooine_2601			TATOOINE	tat_world	0	-3503.66	13.99	2071.01	0	
+tatooine_2602			TATOOINE	tat_world	0	-3500.91	13.99	2060.94	0	
+tatooine_2603			TATOOINE	tat_world	0	-3516.62	13.99	2048.41	0	
+tatooine_2700	FLIP	5	TATOOINE	tat_world	0	-3407.12	7.34	2467.39	0	tatooine_jabba_smuggler_party_10029806
+tatooine_2701			TATOOINE	tat_world	0	-3386.35	7.17	2489.04	0	
+tatooine_2702			TATOOINE	tat_world	0	-3379.17	9.77	2463.49	0	
+tatooine_2703			TATOOINE	tat_world	0	-3409.63	6.88	2496.67	0	
+tatooine_2704			TATOOINE	tat_world	0	-3421.83	6.31	2474.80	0	
+tatooine_2705			TATOOINE	tat_world	0	-3372.26	8.55	2477.98	0	
+tatooine_2800	FLIP	4	TATOOINE	tat_world	0	-3046.00	130.86	4529.46	0	ac_hov_bandit_walk_10702457
+tatooine_2801			TATOOINE	tat_world	0	-3036.44	124.19	4515.10	0	
+tatooine_2802			TATOOINE	tat_world	0	-3028.59	123.08	4506.50	0	
+tatooine_2803			TATOOINE	tat_world	0	-3008.79	113.29	4489.38	0	
+tatooine_2804			TATOOINE	tat_world	0	-2991.22	113.01	4528.23	0	
+tatooine_2900	FLIP	11	TATOOINE	tat_hoverdale_cave	5	-76.84	-30.20	-40.47	0	hoverdale_ban_15707319
+tatooine_2901			TATOOINE	tat_hoverdale_cave	5	-71.05	-30.83	-47.42	0	
+tatooine_2902			TATOOINE	tat_hoverdale_cave	5	-70.79	-30.93	-73.35	0	
+tatooine_2903			TATOOINE	tat_hoverdale_cave	9	-71.58	-38.07	-117.22	0	
+tatooine_2904			TATOOINE	tat_hoverdale_cave	9	-97.20	-37.74	-122.82	0	
+tatooine_2905			TATOOINE	tat_hoverdale_cave	11	-104.81	-38.90	-85.14	0	
+tatooine_2906			TATOOINE	tat_hoverdale_cave	11	-124.74	-37.72	-79.20	0	
+tatooine_2907			TATOOINE	tat_hoverdale_cave	6	-129.30	-33.78	-66.58	0	
+tatooine_2908			TATOOINE	tat_hoverdale_cave	6	-109.92	-35.45	-64.41	0	
+tatooine_2909			TATOOINE	tat_hoverdale_cave	16	-102.99	-42.18	-35.91	0	
+tatooine_2910			TATOOINE	tat_hoverdale_cave	17	-107.70	-42.98	-12.08	0	
+tatooine_2911			TATOOINE	tat_hoverdale_cave	18	-135.25	-54.09	-11.80	0	
+tatooine_3000	FLIP	5	TATOOINE	tat_hoverdale_cave	6	-126.47	-49.69	-59.69	0	hoverdale_ban_15707901
+tatooine_3001			TATOOINE	tat_hoverdale_cave	5	-68.90	-46.67	-57.34	0	
+tatooine_3002			TATOOINE	tat_hoverdale_cave	4	-65.75	-46.51	-32.77	0	
+tatooine_3003			TATOOINE	tat_hoverdale_cave	4	-59.34	-42.99	-16.41	0	
+tatooine_3004			TATOOINE	tat_hoverdale_cave	4	-54.03	-39.70	-9.16	0	
+tatooine_3005			TATOOINE	tat_hoverdale_cave	2	-28.29	-29.85	-22.84	0	
+tatooine_3100	FLIP	10	TATOOINE	tat_hoverdale_cave	6	-129.43	-49.60	-61.65	0	hoverdale_ban_15707716
+tatooine_3101			TATOOINE	tat_hoverdale_cave	8	-140.37	-49.63	-51.45	0	
+tatooine_3102			TATOOINE	tat_hoverdale_cave	8	-149.93	-51.02	-41.14	0	
+tatooine_3103			TATOOINE	tat_hoverdale_cave	8	-166.93	-49.74	-39.95	0	
+tatooine_3104			TATOOINE	tat_hoverdale_cave	10	-167.69	-49.65	-67.62	0	
+tatooine_3105			TATOOINE	tat_hoverdale_cave	12	-171.28	-52.98	-111.36	0	
+tatooine_3106			TATOOINE	tat_hoverdale_cave	12	-156.50	-55.93	-122.02	0	
+tatooine_3107			TATOOINE	tat_hoverdale_cave	12	-144.91	-53.90	-118.80	0	
+tatooine_3108			TATOOINE	tat_hoverdale_cave	12	-143.12	-54.32	-96.36	0	
+tatooine_3109			TATOOINE	tat_hoverdale_cave	11	-121.50	-54.37	-84.44	0	
+tatooine_3110			TATOOINE	tat_hoverdale_cave	11	-98.50	-54.96	-86.12	0	
+tatooine_3200	FLIP	15	TATOOINE	tat_hoverdale_cave	9	-80.53	-71.64	-123.39	0	hoverdale_enf_15706792
+tatooine_3201			TATOOINE	tat_hoverdale_cave	25	-80.26	-67.57	-133.93	0	
+tatooine_3202			TATOOINE	tat_hoverdale_cave	25	-67.27	-66.52	-139.39	0	
+tatooine_3203			TATOOINE	tat_hoverdale_cave	25	-48.86	-68.39	-135.67	0	
+tatooine_3204			TATOOINE	tat_hoverdale_cave	25	-47.95	-69.22	-115.90	0	
+tatooine_3205			TATOOINE	tat_hoverdale_cave	22	-31.28	-68.05	-110.92	0	
+tatooine_3206			TATOOINE	tat_hoverdale_cave	25	-45.58	-69.23	-116.00	0	
+tatooine_3207			TATOOINE	tat_hoverdale_cave	25	-50.25	-68.10	-133.51	0	
+tatooine_3208			TATOOINE	tat_hoverdale_cave	25	-63.44	-65.77	-142.52	0	
+tatooine_3209			TATOOINE	tat_hoverdale_cave	25	-77.24	-67.23	-133.18	0	
+tatooine_3210			TATOOINE	tat_hoverdale_cave	9	-81.94	-71.95	-119.45	0	
+tatooine_3211			TATOOINE	tat_hoverdale_cave	9	-101.18	-69.79	-118.58	0	
+tatooine_3212			TATOOINE	tat_hoverdale_cave	24	-107.09	-66.68	-133.83	0	
+tatooine_3213			TATOOINE	tat_hoverdale_cave	24	-125.32	-60.33	-137.74	0	
+tatooine_3214			TATOOINE	tat_hoverdale_cave	23	-131.34	-54.40	-116.57	0	
+tatooine_3215			TATOOINE	tat_hoverdale_cave	22	-63.88	-52.72	-112.75	0	
+tatooine_3300	FLIP	5	TATOOINE	tat_hoverdale_cave	18	-135.25	-54.09	-11.80	0	hoverdale_ban_15707466
+tatooine_3301			TATOOINE	tat_hoverdale_cave	18	-135.19	-57.56	-24.78	0	
+tatooine_3302			TATOOINE	tat_hoverdale_cave	16	-104.59	-58.23	-31.21	0	
+tatooine_3303			TATOOINE	tat_hoverdale_cave	14	-84.15	-57.45	-39.62	0	
+tatooine_3304			TATOOINE	tat_hoverdale_cave	14	-84.67	-57.11	-81.71	0	
+tatooine_3305			TATOOINE	tat_hoverdale_cave	11	-97.96	-54.97	-81.32	0	
+tatooine_3400	FLIP	4	TATOOINE	tat_hoverdale_cave	20	-2.31	-35.34	-81.50	0	hoverdale_ban_15708334
+tatooine_3401			TATOOINE	tat_hoverdale_cave	20	16.42	-35.17	-78.73	0	
+tatooine_3402			TATOOINE	tat_hoverdale_cave	20	17.49	-34.92	-61.70	0	
+tatooine_3403			TATOOINE	tat_hoverdale_cave	19	18.96	-26.17	-34.43	0	
+tatooine_3404			TATOOINE	tat_hoverdale_cave	19	15.40	-21.43	-20.25	0	
+tatooine_3500	FLIP	4	TATOOINE	tat_world	0	-2988.92	112.73	4527.34	0	ac_hov_bandit_walk_10702591
+tatooine_3501			TATOOINE	tat_world	0	-3004.17	116.63	4516.65	0	
+tatooine_3502			TATOOINE	tat_world	0	-3022.97	121.87	4507.46	0	
+tatooine_3503			TATOOINE	tat_world	0	-3034.74	123.31	4516.21	0	
+tatooine_3504			TATOOINE	tat_world	0	-3042.37	130.53	4534.49	0	
+tatooine_3600	FLIP	13	TATOOINE	tat_legacy_darklighter_cave	2	8.73	-21.75	-39.06	0	legacy_darklighter_hauler1_17656498
+tatooine_3601			TATOOINE	tat_legacy_darklighter_cave	3	-5.06	-23.39	-41.05	0	
+tatooine_3602			TATOOINE	tat_legacy_darklighter_cave	3	-11.47	-24.49	-41.46	0	
+tatooine_3603			TATOOINE	tat_legacy_darklighter_cave	3	-26.86	-33.66	-51.45	0	
+tatooine_3604			TATOOINE	tat_legacy_darklighter_cave	3	-27.24	-39.11	-67.59	0	
+tatooine_3605			TATOOINE	tat_legacy_darklighter_cave	3	-29.24	-43.30	-77.05	0	
+tatooine_3606			TATOOINE	tat_legacy_darklighter_cave	3	-53.80	-47.20	-94.09	0	
+tatooine_3607			TATOOINE	tat_legacy_darklighter_cave	4	-53.12	-45.67	-100.96	0	
+tatooine_3608			TATOOINE	tat_legacy_darklighter_cave	4	-32.77	-49.87	-111.84	0	
+tatooine_3609			TATOOINE	tat_legacy_darklighter_cave	4	-16.20	-53.77	-123.29	0	
+tatooine_3610			TATOOINE	tat_legacy_darklighter_cave	4	-9.15	-51.30	-131.81	0	
+tatooine_3611			TATOOINE	tat_legacy_darklighter_cave	4	-11.19	-48.17	-143.70	0	
+tatooine_3612			TATOOINE	tat_legacy_darklighter_cave	5	-15.70	-48.50	-158.83	0	
+tatooine_3613			TATOOINE	tat_legacy_darklighter_cave	5	-20.18	-48.44	-159.79	0	
+tatooine_3700	FLIP	4	TATOOINE	tat_legacy_darklighter_cave	3	-21.09	-29.43	-45.64	0	legacy_darklighter_area1_17417975
+tatooine_3701			TATOOINE	tat_legacy_darklighter_cave	3	-25.98	-34.07	-52.63	0	
+tatooine_3702			TATOOINE	tat_legacy_darklighter_cave	3	-26.84	-39.37	-68.71	0	
+tatooine_3703			TATOOINE	tat_legacy_darklighter_cave	3	-27.88	-41.84	-75.81	0	
+tatooine_3704			TATOOINE	tat_legacy_darklighter_cave	3	-43.21	-48.15	-86.84	0	
+tatooine_3800	FLIP	3	TATOOINE	tat_legacy_darklighter_cave	4	-43.96	-46.70	-106.70	0	legacy_darkligher_area2_17418525
+tatooine_3801			TATOOINE	tat_legacy_darklighter_cave	4	-22.87	-53.01	-115.82	0	
+tatooine_3802			TATOOINE	tat_legacy_darklighter_cave	4	-11.51	-53.33	-125.92	0	
+tatooine_3803			TATOOINE	tat_legacy_darklighter_cave	4	-7.68	-50.67	-133.18	0	
+tatooine_3900	FLIP	10	TATOOINE	tat_legacy_darklighter_cave	5	-17.12	-48.65	-161.13	0	legacy_darklighter_hauler3_17715339
+tatooine_3901			TATOOINE	tat_legacy_darklighter_cave	5	-3.26	-48.56	-160.10	0	
+tatooine_3902			TATOOINE	tat_legacy_darklighter_cave	6	25.53	-50.46	-159.05	0	
+tatooine_3903			TATOOINE	tat_legacy_darklighter_cave	6	41.32	-58.69	-161.22	0	
+tatooine_3904			TATOOINE	tat_legacy_darklighter_cave	6	53.33	-64.02	-171.21	0	
+tatooine_3905			TATOOINE	tat_legacy_darklighter_cave	7	50.84	-66.61	-178.31	0	
+tatooine_3906			TATOOINE	tat_legacy_darklighter_cave	7	39.76	-71.29	-186.72	0	
+tatooine_3907			TATOOINE	tat_legacy_darklighter_cave	7	29.91	-77.75	-202.60	0	
+tatooine_3908			TATOOINE	tat_legacy_darklighter_cave	11	33.76	-78.84	-223.64	0	
+tatooine_3909			TATOOINE	tat_legacy_darklighter_cave	11	42.75	-79.68	-231.81	0	
+tatooine_3910			TATOOINE	tat_legacy_darklighter_cave	11	39.71	-81.24	-240.29	0	
+tatooine_4000	FLIP	2	TATOOINE	tat_legacy_darklighter_cave	6	34.14	-55.19	-160.16	0	legacy_darklighter_area4_17419211
+tatooine_4001			TATOOINE	tat_legacy_darklighter_cave	6	50.17	-61.91	-164.77	0	
+tatooine_4002			TATOOINE	tat_legacy_darklighter_cave	6	53.24	-65.04	-173.08	0	
+tatooine_4100	FLIP	2	TATOOINE	tat_legacy_darklighter_cave	7	44.89	-69.12	-183.79	0	legacy_darklighter_area5_17419478
+tatooine_4101			TATOOINE	tat_legacy_darklighter_cave	7	34.31	-74.88	-191.40	0	
+tatooine_4102			TATOOINE	tat_legacy_darklighter_cave	7	29.28	-78.94	-207.38	0	
+tatooine_4200	FLIP	2	TATOOINE	tat_legacy_darklighter_cave	8	-27.68	-50.54	-192.62	0	legacy_darkligher_area11_17514799
+tatooine_4201			TATOOINE	tat_legacy_darklighter_cave	8	-34.50	-59.50	-211.56	0	
+tatooine_4202			TATOOINE	tat_legacy_darklighter_cave	8	-36.34	-59.94	-211.11	0	
+tatooine_4300	FLIP	5	TATOOINE	tat_legacy_darklighter_cave	9	-47.53	-63.07	-205.69	0	legacy_darklighter_area12_17515245
+tatooine_4301			TATOOINE	tat_legacy_darklighter_cave	9	-53.63	-64.40	-202.46	0	
+tatooine_4302			TATOOINE	tat_legacy_darklighter_cave	9	-71.83	-68.93	-196.89	0	
+tatooine_4303			TATOOINE	tat_legacy_darklighter_cave	9	-92.92	-74.47	-198.90	0	
+tatooine_4304			TATOOINE	tat_legacy_darklighter_cave	9	-102.69	-77.33	-207.70	0	
+tatooine_4305			TATOOINE	tat_legacy_darklighter_cave	9	-110.00	-78.04	-213.64	0	
+tatooine_4400	FLIP	15	TATOOINE	tat_legacy_darklighter_cave	10	-132.06	-86.34	-255.72	0	legacy_darklighter_hauler2_17694159
+tatooine_4401			TATOOINE	tat_legacy_darklighter_cave	10	-124.20	-84.53	-253.99	0	
+tatooine_4402			TATOOINE	tat_legacy_darklighter_cave	10	-111.34	-82.12	-245.23	0	
+tatooine_4403			TATOOINE	tat_legacy_darklighter_cave	10	-108.43	-77.92	-233.86	0	
+tatooine_4404			TATOOINE	tat_legacy_darklighter_cave	9	-108.76	-78.21	-213.68	0	
+tatooine_4405			TATOOINE	tat_legacy_darklighter_cave	9	-101.03	-76.60	-203.89	0	
+tatooine_4406			TATOOINE	tat_legacy_darklighter_cave	9	-92.67	-74.56	-199.80	0	
+tatooine_4407			TATOOINE	tat_legacy_darklighter_cave	9	-78.48	-70.91	-194.61	0	
+tatooine_4408			TATOOINE	tat_legacy_darklighter_cave	9	-63.09	-67.02	-197.17	0	
+tatooine_4409			TATOOINE	tat_legacy_darklighter_cave	9	-50.52	-63.87	-204.09	0	
+tatooine_4410			TATOOINE	tat_legacy_darklighter_cave	8	-33.86	-59.30	-209.41	0	
+tatooine_4411			TATOOINE	tat_legacy_darklighter_cave	8	-28.57	-55.01	-206.69	0	
+tatooine_4412			TATOOINE	tat_legacy_darklighter_cave	8	-29.17	-53.78	-199.79	0	
+tatooine_4413			TATOOINE	tat_legacy_darklighter_cave	8	-26.99	-48.53	-186.25	0	
+tatooine_4414			TATOOINE	tat_legacy_darklighter_cave	5	-23.51	-48.67	-171.94	0	
+tatooine_4415			TATOOINE	tat_legacy_darklighter_cave	5	-21.46	-48.34	-166.07	0	
+tatooine_4500	FLIP	3	TATOOINE	tat_legacy_darklighter_cave	10	-109.46	-78.73	-236.28	0	legacy_darklighter_cross1_17528454
+tatooine_4501			TATOOINE	tat_legacy_darklighter_cave	10	-111.31	-77.81	-224.13	0	
+tatooine_4502			TATOOINE	tat_legacy_darklighter_cave	9	-106.98	-78.08	-210.88	0	
+tatooine_4503			TATOOINE	tat_legacy_darklighter_cave	9	-101.00	-76.79	-205.05	0	
+tatooine_4600	FLIP	4	TATOOINE	tat_legacy_darklighter_cave	10	-108.82	-77.41	-230.58	0	legacy_darklighter_area16_17524162
+tatooine_4601			TATOOINE	tat_legacy_darklighter_cave	10	-109.52	-80.42	-240.11	0	
+tatooine_4602			TATOOINE	tat_legacy_darklighter_cave	10	-120.69	-84.80	-251.24	0	
+tatooine_4603			TATOOINE	tat_legacy_darklighter_cave	10	-133.97	-86.23	-257.75	0	
+tatooine_4604			TATOOINE	tat_legacy_darklighter_cave	10	-140.10	-85.81	-258.29	0	
+tatooine_4700	FLIP	18	TATOOINE	tat_legacy_darklighter_cave	11	23.88	-79.09	-245.47	0	legacy_darklighter_hauler4_17718048
+tatooine_4701			TATOOINE	tat_legacy_darklighter_cave	13	18.43	-79.58	-258.80	0	
+tatooine_4702			TATOOINE	tat_legacy_darklighter_cave	13	06.08	-80.42	-281.26	0	
+tatooine_4703			TATOOINE	tat_legacy_darklighter_cave	14	-6.70	-78.57	-280.17	0	
+tatooine_4704			TATOOINE	tat_legacy_darklighter_cave	14	-17.17	-80.01	-274.57	0	
+tatooine_4705			TATOOINE	tat_legacy_darklighter_cave	14	-28.79	-87.11	-259.25	0	
+tatooine_4706			TATOOINE	tat_legacy_darklighter_cave	14	-36.30	-89.14	-247.38	0	
+tatooine_4707			TATOOINE	tat_legacy_darklighter_cave	15	-56.39	-92.16	-241.03	0	
+tatooine_4708			TATOOINE	tat_legacy_darklighter_cave	15	-75.16	-95.59	-231.14	0	
+tatooine_4709			TATOOINE	tat_legacy_darklighter_cave	15	-85.73	-99.55	-240.08	0	
+tatooine_4710			TATOOINE	tat_legacy_darklighter_cave	15	-79.11	-102.67	-255.61	0	
+tatooine_4711			TATOOINE	tat_legacy_darklighter_cave	15	-69.50	-107.05	-274.03	0	
+tatooine_4712			TATOOINE	tat_legacy_darklighter_cave	16	-66.45	-107.34	-289.98	0	
+tatooine_4713			TATOOINE	tat_legacy_darklighter_cave	16	-73.96	-107.29	-307.95	0	
+tatooine_4714			TATOOINE	tat_legacy_darklighter_cave	16	-90.82	-107.81	-320.36	0	
+tatooine_4715			TATOOINE	tat_legacy_darklighter_cave	17	-113.44	-107.91	-333.56	0	
+tatooine_4716			TATOOINE	tat_legacy_darklighter_cave	17	-131.77	-111.47	-334.11	0	
+tatooine_4717			TATOOINE	tat_legacy_darklighter_cave	17	-158.82	-110.97	-335.37	0	
+tatooine_4718			TATOOINE	tat_legacy_darklighter_cave	17	-165.66	-108.44	-332.84	0	
+tatooine_4800	FLIP	4	TATOOINE	tat_legacy_darklighter_cave	13	9.78	-79.65	-269.90	0	legacy_darkligher_area61_17504223
+tatooine_4801			TATOOINE	tat_legacy_darklighter_cave	13	19.11	-80.16	-263.93	0	
+tatooine_4802			TATOOINE	tat_legacy_darklighter_cave	13	26.65	-79.98	-271.53	0	
+tatooine_4803			TATOOINE	tat_legacy_darklighter_cave	13	18.71	-80.33	-282.20	0	
+tatooine_4804			TATOOINE	tat_legacy_darklighter_cave	13	9.33	-80.16	-279.63	0	
+tatooine_4900	FLIP	3	TATOOINE	tat_legacy_darklighter_cave	14	-9.08	-78.41	-280.44	0	legacy_darklighter_area7_17508192
+tatooine_4901			TATOOINE	tat_legacy_darklighter_cave	14	-16.64	-79.34	-277.44	0	
+tatooine_4902			TATOOINE	tat_legacy_darklighter_cave	14	-27.13	-86.41	-259.89	0	
+tatooine_4903			TATOOINE	tat_legacy_darklighter_cave	14	-32.49	-89.01	-252.73	0	
+tatooine_5000	FLIP	4	TATOOINE	tat_legacy_darklighter_cave	15	-50.92	-91.29	-242.10	0	legacy_darklighter_area8_17508722
+tatooine_5001			TATOOINE	tat_legacy_darklighter_cave	15	-66.92	-93.76	-236.49	0	
+tatooine_5002			TATOOINE	tat_legacy_darklighter_cave	15	-80.82	-96.57	-229.81	0	
+tatooine_5003			TATOOINE	tat_legacy_darklighter_cave	15	-81.24	-99.66	-241.78	0	
+tatooine_5004			TATOOINE	tat_legacy_darklighter_cave	15	-75.18	-104.49	-263.53	0	
+tatooine_5005			TATOOINE	tat_legacy_darklighter_cave	15	-67.37	-107.13	-279.46	0	
+tatooine_5100	FLIP	3	TATOOINE	tat_legacy_darklighter_cave	16	-66.27	-107.33	-294.93	0	legacy_darkligher_area9_17509228
+tatooine_5101			TATOOINE	tat_legacy_darklighter_cave	16	-70.21	-107.49	-304.52	0	
+tatooine_5102			TATOOINE	tat_legacy_darklighter_cave	16	-83.47	-107.85	-315.95	0	
+tatooine_5103			TATOOINE	tat_legacy_darklighter_cave	16	-92.70	-107.72	-320.29	0	
+tatooine_5200	FLIP	3	TATOOINE	tat_legacy_darklighter_cave	17	-172.83	-108.16	-329.41	0	legacy_darklighter_pallet2_17512238
+tatooine_5201			TATOOINE	tat_legacy_darklighter_cave	17	-176.48	-108.67	-332.86	0	
+tatooine_5202			TATOOINE	tat_legacy_darklighter_cave	17	-177.99	-108.69	-319.72	0	
+tatooine_5203			TATOOINE	tat_legacy_darklighter_cave	17	-171.96	-108.88	-320.14	0	
+tatooine_5300	FLIP	4	TATOOINE	tat_legacy_darklighter_cave	17	-122.34	-108.20	-317.30	0	legacy_darklighter_area10_17509656
+tatooine_5301			TATOOINE	tat_legacy_darklighter_cave	17	-113.61	-108.54	-321.94	0	
+tatooine_5302			TATOOINE	tat_legacy_darklighter_cave	17	-111.43	-107.78	-330.35	0	
+tatooine_5303			TATOOINE	tat_legacy_darklighter_cave	17	-120.46	-107.82	-341.88	0	
+tatooine_5304			TATOOINE	tat_legacy_darklighter_cave	17	-125.77	-109.67	-350.54	0	
+tatooine_5400	FLIP	3	TATOOINE	tat_legacy_darklighter_cave					0	legacy_darklighter_area13_17515714
+tatooine_5401			TATOOINE	tat_legacy_darklighter_cave	10	-108.95	-79.10	-237.02	0	
+tatooine_5402			TATOOINE	tat_legacy_darklighter_cave	10	-118.92	-83.88	-251.64	0	
+tatooine_5403			TATOOINE	tat_legacy_darklighter_cave	10	-130.25	-86.15	-255.42	0	
+tatooine_5500	FLIP	3	TATOOINE	tat_legacy_darklighter_cave					0	legacy_darklighter_area15a_17521792
+tatooine_5501			TATOOINE	tat_legacy_darklighter_cave	12	-170.45	-88.50	-190.47	0	
+tatooine_5502			TATOOINE	tat_legacy_darklighter_cave	12	-196.51	-86.73	-177.25	0	
+tatooine_5503			TATOOINE	tat_legacy_darklighter_cave	12	-215.88	-85.94	-192.41	0	
+tatooine_5600	FLIP	3	TATOOINE	tat_world	0	-1347.04	12.00	-3664.02	0	Smuggler_Enemy_Patrol_10028545
+tatooine_5601			TATOOINE	tat_world	0	-1368.19	12.00	-3649.26	0	
+tatooine_5602			TATOOINE	tat_world	0	-1376.68	12.00	-3639.64	0	
+tatooine_5603			TATOOINE	tat_world	0	-1369.77	12.00	-3659.55	0	
+tatooine_5700	FLIP	9	TATOOINE	tat_world	0	-909.00	19.47	-4027.00	0	anchorjobs_legplus_merc_recon_10825751
+tatooine_5701			TATOOINE	tat_world	0	-918.05	19.39	-4024.26	0	
+tatooine_5702			TATOOINE	tat_world	0	-929.10	19.25	-4021.01	0	
+tatooine_5703			TATOOINE	tat_world	0	-943.35	19.68	-4016.83	0	
+tatooine_5704			TATOOINE	tat_world	0	-962.51	21.42	-4012.18	0	
+tatooine_5705			TATOOINE	tat_world	0	-985.07	22.78	-4008.23	0	
+tatooine_5706			TATOOINE	tat_world	0	-1015.80	28.89	-4002.87	0	
+tatooine_5707			TATOOINE	tat_world	0	-1042.20	35.62	-3993.47	0	
+tatooine_5708			TATOOINE	tat_world	0	-1060.62	42.70	-3980.39	0	
+tatooine_5709			TATOOINE	tat_world	0	-1078.43	52.46	-3964.64	0	
+tatooine_5800	FLIP	8	TATOOINE	tat_world	0	-904.42	19.44	-4028.57	0	anchorjobs_legplus_merc_commando_10826018
+tatooine_5801			TATOOINE	tat_world	0	-923.56	19.36	-4022.66	0	
+tatooine_5802			TATOOINE	tat_world	0	-952.44	20.53	-4013.98	0	
+tatooine_5803			TATOOINE	tat_world	0	-976.14	22.01	-4009.81	0	
+tatooine_5804			TATOOINE	tat_world	0	-1000.05	25.50	-4005.37	0	
+tatooine_5805			TATOOINE	tat_world	0	-1027.52	31.51	-3998.15	0	
+tatooine_5806			TATOOINE	tat_world	0	-1049.98	38.58	-3990.16	0	
+tatooine_5807			TATOOINE	tat_world	0	-1064.50	43.78	-3976.94	0	
+tatooine_5808			TATOOINE	tat_world	0	-1077.44	51.54	-3965.55	0	
+tatooine_5900	FLIP	5	TATOOINE	tat_world	0	-1427.94	12.00	-3630.54	0	Smuggler_Enemy_Patrol_10027959
+tatooine_5901			TATOOINE	tat_world	0	-1410.46	12.00	-3632.16	0	
+tatooine_5902			TATOOINE	tat_world	0	-1367.25	12.00	-3647.06	0	
+tatooine_5903			TATOOINE	tat_world	0	-1365.43	12.00	-3655.22	0	
+tatooine_5904			TATOOINE	tat_world	0	-1380.37	12.00	-3641.33	0	
+tatooine_5905			TATOOINE	tat_world	0	-1419.66	12.00	-3625.62	0	
+tatooine_6000	FLIP	9	TATOOINE	tat_world	0	-1805.56	11.59	-3845.14	0	roaming_dune_bantha_12621479
+tatooine_6001			TATOOINE	tat_world	0	-1844.37	9.33	-3870.01	0	
+tatooine_6002			TATOOINE	tat_world	0	-1805.44	8.23	-3910.77	0	
+tatooine_6003			TATOOINE	tat_world	0	-1801.63	11.60	-3854.57	0	
+tatooine_6004			TATOOINE	tat_world	0	-1866.37	9.24	-3904.13	0	
+tatooine_6005			TATOOINE	tat_world	0	-1826.86	6.87	-3941.09	0	
+tatooine_6006			TATOOINE	tat_world	0	-1797.38	7.91	-3913.65	0	
+tatooine_6007			TATOOINE	tat_world	0	-1800.81	11.57	-3842.75	0	
+tatooine_6008			TATOOINE	tat_world	0	-1837.93	8.69	-3911.53	0	
+tatooine_6009			TATOOINE	tat_world	0	-1848.92	8.52	-3881.06	0	
+tatooine_6100	FLIP	6	TATOOINE	tat_world	0	-1755.90	30.70	-3323.31	0	legacy_head_hauler_10112410
+tatooine_6101			TATOOINE	tat_world	0	-1755.64	31.48	-3330.63	0	
+tatooine_6102			TATOOINE	tat_world	0	-1769.96	31.48	-3332.90	0	
+tatooine_6103			TATOOINE	tat_world	0	-1778.07	31.48	-3327.35	0	
+tatooine_6104			TATOOINE	tat_world	0	-1773.98	31.48	-3319.12	0	
+tatooine_6105			TATOOINE	tat_world	0	-1763.74	31.48	-3324.85	0	
+tatooine_6106			TATOOINE	tat_world	0	-1755.90	31.48	-3323.31	0	
+tatooine_6200	FLIP	4	TATOOINE	tat_world	0	146.24	51.89	-5303.74	0	Smuggler_Enemy_Patrol_10030463
+tatooine_6201			TATOOINE	tat_world	0	113.76	52.74	-5300.07	0	
+tatooine_6202			TATOOINE	tat_world	0	73.98	54.75	-5299.20	0	
+tatooine_6203			TATOOINE	tat_world	0	107.72	52.63	-5301.08	0	
+tatooine_6204			TATOOINE	tat_world	0	130.95	51.86	-5301.47	0	
+tatooine_6300	FLIP	4	TATOOINE	tat_world	0	121.95	52.00	-5333.50	0	Smuggler_Enemy_Patrol_10028724
+tatooine_6301			TATOOINE	tat_world	0	101.38	52.00	-5332.78	0	
+tatooine_6302			TATOOINE	tat_world	0	104.58	52.00	-5327.14	0	
+tatooine_6303			TATOOINE	tat_world	0	80.04	52.00	-5325.96	0	
+tatooine_6304			TATOOINE	tat_world	0	72.22	52.00	-5334.45	0	
+tatooine_6400	FLIP	4	TATOOINE	tat_world	0	19.59	09.08	-5080.77	0	tatooine_imperial_cadet_10020331
+tatooine_6401			TATOOINE	tat_world	0	15.69	9.35	-5062.03	0	
+tatooine_6402			TATOOINE	tat_world	0	11.38	09.08	-5080.02	0	
+tatooine_6403			TATOOINE	tat_world	0	36.19	8.57	-5067.71	0	
+tatooine_6404			TATOOINE	tat_world	0	17.99	9.49	-5092.87	0	
+tatooine_6500	FLIP	3	TATOOINE	tat_world	0	1502.41	7.00	3352.14	0	Smuggler_Enemy_Patrol_10047777
+tatooine_6501			TATOOINE	tat_world	0	1503.44	7.00	3318.14	0	
+tatooine_6502			TATOOINE	tat_world	0	1510.62	7.00	3329.33	0	
+tatooine_6503			TATOOINE	tat_world	0	1518.21	7.00	3348.82	0	
+tatooine_6600	FLIP	6	TATOOINE	tat_world	0	1509.91	7.00	3256.29	0	Smuggler_Enemy_Patrol_10046999
+tatooine_6601			TATOOINE	tat_world	0	1506.40	7.00	3288.16	0	
+tatooine_6602			TATOOINE	tat_world	0	1506.61	7.00	3336.34	0	
+tatooine_6603			TATOOINE	tat_world	0	1447.93	7.00	3335.29	0	
+tatooine_6604			TATOOINE	tat_world	0	1389.42	7.00	3318.44	0	
+tatooine_6605			TATOOINE	tat_world	0	1396.55	7.00	3258.17	0	
+tatooine_6606			TATOOINE	tat_world	0	1455.33	7.00	3253.36	0	
+tatooine_6700	FLIP	2	TATOOINE	tat_world	0	1553.34	7.00	3014.89	0	Smuggler_Enemy_Patrol_10045692
+tatooine_6701			TATOOINE	tat_world	0	1541.63	7.00	3020.82	0	
+tatooine_6702			TATOOINE	tat_world	0	1541.80	7.00	3040.32	0	
+tatooine_6800	FLIP	6	TATOOINE	tat_world	0	1549.83	7.00	3088.55	0	Smuggler_Enemy_Patrol_10039459
+tatooine_6801			TATOOINE	tat_world	0	1540.60	7.00	3081.89	0	
+tatooine_6802			TATOOINE	tat_world	0	1541.02	7.00	3018.66	0	
+tatooine_6803			TATOOINE	tat_world	0	1558.37	7.00	3020.97	0	
+tatooine_6804			TATOOINE	tat_world	0	1551.79	7.00	3031.09	0	
+tatooine_6805			TATOOINE	tat_world	0	1540.89	7.00	3031.33	0	
+tatooine_6806			TATOOINE	tat_world	0	1537.78	7.00	3078.29	0	
+tatooine_6900	FLIP	6	TATOOINE	tat_world	0	998.91	12.59	2499.71	0	tatooine_imperial_stormtrooper_squadleader_10042172
+tatooine_6901			TATOOINE	tat_world	0	1008.46	12.59	2517.31	0	
+tatooine_6902			TATOOINE	tat_world	0	996.30	12.59	2533.83	0	
+tatooine_6903			TATOOINE	tat_world	0	988.13	12.59	2516.13	0	
+tatooine_6904			TATOOINE	tat_world	0	989.67	12.59	2535.34	0	
+tatooine_6905			TATOOINE	tat_world	0	968.14	12.40	2529.54	0	
+tatooine_6906			TATOOINE	tat_world	0	977.78	12.59	2498.88	0	
+tatooine_7000	FLIP	5	TATOOINE	tat_world	0	969.76	12.59	2513.36	0	tatooine_imperial_stormtrooper_patrol_10040800
+tatooine_7001			TATOOINE	tat_world	0	979.13	13.13	2539.94	0	
+tatooine_7002			TATOOINE	tat_world	0	1010.08	14.44	2533.80	0	
+tatooine_7003			TATOOINE	tat_world	0	1008.83	12.73	2497.57	0	
+tatooine_7004			TATOOINE	tat_world	0	976.40	10.80	2489.05	0	
+tatooine_7005			TATOOINE	tat_world	0	983.37	12.59	2500.12	0	
+tatooine_7100	FLIP	5	TATOOINE	tat_world	0	3278.64	04.07	-4598.94	0	Smuggler_Enemy_patrol_10029562
+tatooine_7101			TATOOINE	tat_world	0	3243.52	4.78	-4574.09	0	
+tatooine_7102			TATOOINE	tat_world	0	3226.79	5.00	-4604.14	0	
+tatooine_7103			TATOOINE	tat_world	0	3204.93	5.00	-4634.44	0	
+tatooine_7104			TATOOINE	tat_world	0	3222.94	4.56	-4659.57	0	
+tatooine_7105			TATOOINE	tat_world	0	3246.87	4.96	-4664.20	0	
+tatooine_7200	FLIP	3	TATOOINE	tat_world	0	3242.60	04.05	-4667.36	0	Smuggler_Enemy_PAtrol_10030794
+tatooine_7201			TATOOINE	tat_world	0	3202.45	5.00	-4638.00	0	
+tatooine_7202			TATOOINE	tat_world	0	3215.70	5.00	-4621.82	0	
+tatooine_7203			TATOOINE	tat_world	0	3196.12	4.87	-4640.99	0	
+tatooine_7300	FLIP	3	TATOOINE	tat_world	0	3163.67	5.00	-4752.05	0	legacy_niko_thugs_12810957
+tatooine_7301			TATOOINE	tat_world	0	3150.28	05.03	-4755.43	0	
+tatooine_7302			TATOOINE	tat_world	0	3136.76	5.54	-4761.64	0	
+tatooine_7303			TATOOINE	tat_world	0	3114.02	8.88	-4767.16	0	
+tatooine_7400	FLIP	10	TATOOINE	tat_world	0	3187.53	5.00	-4660.50	0	legacy_niko_thugs_10024124
+tatooine_7401			TATOOINE	tat_world	0	3185.70	5.00	-4670.60	0	
+tatooine_7402			TATOOINE	tat_world	0	3179.88	5.00	-4686.82	0	
+tatooine_7403			TATOOINE	tat_world	0	3173.54	5.00	-4700.81	0	
+tatooine_7404			TATOOINE	tat_world	0	3163.71	5.00	-4720.67	0	
+tatooine_7405			TATOOINE	tat_world	0	3155.64	5.00	-4737.49	0	
+tatooine_7406			TATOOINE	tat_world	0	3153.48	5.00	-4754.59	0	
+tatooine_7407			TATOOINE	tat_world	0	3158.82	5.00	-4766.26	0	
+tatooine_7408			TATOOINE	tat_world	0	3170.78	5.00	-4773.36	0	
+tatooine_7409			TATOOINE	tat_world	0	3181.76	5.00	-4778.48	0	
+tatooine_7410			TATOOINE	tat_world	0	3192.09	5.00	-4769.94		
+tatooine_7500	FLIP	8	TATOOINE	tat_world	0	3188.99	5.00	-4706.36	0	legacy_niko_thugs_12714421
+tatooine_7501			TATOOINE	tat_world	0	3178.60	5.00	-4712.99	0	
+tatooine_7502			TATOOINE	tat_world	0	3168.45	5.00	-4716.45	0	
+tatooine_7503			TATOOINE	tat_world	0	3160.72	5.00	-4729.42	0	
+tatooine_7504			TATOOINE	tat_world	0	3158.99	5.00	-4747.99	0	
+tatooine_7505			TATOOINE	tat_world	0	3159.81	5.00	-4763.18	0	
+tatooine_7506			TATOOINE	tat_world	0	3168.06	5.00	-4777.78	0	
+tatooine_7507			TATOOINE	tat_world	0	3181.65	5.00	-4780.54	0	
+tatooine_7508			TATOOINE	tat_world	0	3191.43	5.00	-4769.24	0	
+tatooine_7600	FLIP	6	TATOOINE	tat_world	0	3205.66	5.00	-4786.05	0	legacy_niko_thugs_12811528
+tatooine_7601			TATOOINE	tat_world	0	3213.76	5.00	-4796.88	0	
+tatooine_7602			TATOOINE	tat_world	0	3218.21	5.00	-4812.44	0	
+tatooine_7603			TATOOINE	tat_world	0	3211.56	5.00	-4826.04	0	
+tatooine_7604			TATOOINE	tat_world	0	3200.57	5.00	-4839.67	0	
+tatooine_7605			TATOOINE	tat_world	0	3189.75	5.00	-4852.95	0	
+tatooine_7606			TATOOINE	tat_world	0	3171.10	5.00	-4879.59	0	
+tatooine_7700	FLIP	3	TATOOINE	tat_world	0	3459.66	5.00	-4989.43	0	Smuggler_Enemy_Patrol_10043732
+tatooine_7701			TATOOINE	tat_world	0	3480.73	5.00	-5006.38	0	
+tatooine_7702			TATOOINE	tat_world	0	3469.51	5.00	-5020.64	0	
+tatooine_7703			TATOOINE	tat_world	0	3483.80	5.00	-5006.83	0	
+tatooine_7800	FLIP	5	TATOOINE	tat_world	0	3457.20	5.00	-5058.85	0	Smuggler_Enemy_Patrol_10043126
+tatooine_7801			TATOOINE	tat_world	0	3449.36	5.00	-5047.03	0	
+tatooine_7802			TATOOINE	tat_world	0	3481.20	5.00	-5006.17	0	
+tatooine_7803			TATOOINE	tat_world	0	3446.67	5.00	-4978.40	0	
+tatooine_7804			TATOOINE	tat_world	0	3402.56	5.00	-5036.14	0	
+tatooine_7805			TATOOINE	tat_world	0	3441.57	5.00	-5068.73	0	
+tatooine_7900	FLIP	13	TATOOINE	tat_world	0	2762.44	7.21	-4563.12	0	nubthug_hi_patroller_10282043
+tatooine_7901			TATOOINE	tat_world	0	2753.98	6.95	-4567.54	0	
+tatooine_7902			TATOOINE	tat_world	0	2745.97	06.04	-4575.17	0	
+tatooine_7903			TATOOINE	tat_world	0	2735.44	7.23	-4568.50	0	
+tatooine_7904			TATOOINE	tat_world	0	2734.93	7.91	-4556.45	0	
+tatooine_7905			TATOOINE	tat_world	0	2751.09	7.46	-4556.07	0	
+tatooine_7906			TATOOINE	tat_world	0	2751.49	7.69	-4551.27	0	
+tatooine_7907			TATOOINE	tat_world	0	2755.84	7.44	-4551.78	0	
+tatooine_7908			TATOOINE	tat_world	0	2764.72	6.96	-4545.25	0	
+tatooine_7909			TATOOINE	tat_world	0	2774.42	6.91	-4549.64	0	
+tatooine_7910			TATOOINE	tat_world	0	2775.56	7.26	-4556.60	0	
+tatooine_7911			TATOOINE	tat_world	0	2771.45	7.36	-4561.06	0	
+tatooine_7912			TATOOINE	tat_world	0	2766.82	7.28	-4559.77	0	
+tatooine_7913			TATOOINE	tat_world	0	2767.19	7.11	-4553.01	0	
+tatooine_8000	FLIP	17	TATOOINE	tat_world	0	3202.80	5.00	-4697.38	0	legacy_nikos_thugs_10021354
+tatooine_8001			TATOOINE	tat_world	0	3187.12	5.00	-4691.16	0	
+tatooine_8002			TATOOINE	tat_world	0	3167.67	5.00	-4690.31	0	
+tatooine_8003			TATOOINE	tat_world	0	3148.12	05.06	-4703.14	0	
+tatooine_8004			TATOOINE	tat_world	0	3133.97	6.37	-4718.28	0	
+tatooine_8005			TATOOINE	tat_world	0	3127.26	7.40	-4729.45	0	
+tatooine_8006			TATOOINE	tat_world	0	3114.60	8.95	-4763.00	0	
+tatooine_8007			TATOOINE	tat_world	0	3119.71	7.12	-4784.15	0	
+tatooine_8008			TATOOINE	tat_world	0	3120.99	6.48	-4811.49	0	
+tatooine_8009			TATOOINE	tat_world	0	3137.18	5.30	-4825.89	0	
+tatooine_8010			TATOOINE	tat_world	0	3154.85	05.01	-4843.00	0	
+tatooine_8011			TATOOINE	tat_world	0	3160.35	05.01	-4856.39	0	
+tatooine_8012			TATOOINE	tat_world	0	3169.01	5.00	-4877.32	0	
+tatooine_8013			TATOOINE	tat_world	0	3179.02	5.00	-4847.71	0	
+tatooine_8014			TATOOINE	tat_world	0	3193.54	5.00	-4836.23	0	
+tatooine_8015			TATOOINE	tat_world	0	3200.23	5.00	-4816.44	0	
+tatooine_8016			TATOOINE	tat_world	0	3197.78	5.00	-4800.15	0	
+tatooine_8017			TATOOINE	tat_world	0	3188.98	5.00	-4783.19	0	
+tatooine_8100	FLIP	4	TATOOINE	tat_world	0	2909.53	5.80	-4572.29	0	tatooine_newbie_gunrunner_sentry_10015577
+tatooine_8101			TATOOINE	tat_world	0	2932.04	07.04	-4523.34	0	
+tatooine_8102			TATOOINE	tat_world	0	2987.14	5.67	-4537.73	0	
+tatooine_8103			TATOOINE	tat_world	0	3007.06	8.84	-4597.44	0	
+tatooine_8104			TATOOINE	tat_world	0	2943.01	13.02	-4626.68	0	
+tatooine_8200	FLIP	27	TATOOINE	tat_moseisley_legacy_cult_cave	1	0.12	-5.68	13.03	0	legacy_kraytcult_10_10020061
+tatooine_8201			TATOOINE	tat_moseisley_legacy_cult_cave	1	-6.06	-7.92	0.40	0	
+tatooine_8202			TATOOINE	tat_moseisley_legacy_cult_cave	1	-7.43	-8.61	-4.74	0	
+tatooine_8203			TATOOINE	tat_moseisley_legacy_cult_cave	2	-6.12	-8.97	-9.07	0	
+tatooine_8204			TATOOINE	tat_moseisley_legacy_cult_cave	2	3.63	-11.33	-18.65	0	
+tatooine_8205			TATOOINE	tat_moseisley_legacy_cult_cave	2	8.55	-12.77	-22.01	0	
+tatooine_8206			TATOOINE	tat_moseisley_legacy_cult_cave	2	15.16	-16.30	-28.88	0	
+tatooine_8207			TATOOINE	tat_moseisley_legacy_cult_cave	2	14.60	-19.93	-35.41	0	
+tatooine_8208			TATOOINE	tat_moseisley_legacy_cult_cave	2	9.70	-21.51	-38.06	0	
+tatooine_8209			TATOOINE	tat_moseisley_legacy_cult_cave	2	2.59	-23.58	-41.21	0	
+tatooine_8210			TATOOINE	tat_moseisley_legacy_cult_cave	3	-4.73	-23.45	-41.40	0	
+tatooine_8211			TATOOINE	tat_moseisley_legacy_cult_cave	3	-14.53	-25.24	-41.29	0	
+tatooine_8212			TATOOINE	tat_moseisley_legacy_cult_cave	3	-19.91	-27.34	-43.39	0	
+tatooine_8213			TATOOINE	tat_moseisley_legacy_cult_cave	3	-26.39	-33.66	-51.75	0	
+tatooine_8214			TATOOINE	tat_moseisley_legacy_cult_cave	3	-27.14	-37.66	-61.01	0	
+tatooine_8215			TATOOINE	tat_moseisley_legacy_cult_cave	3	-26.82	-39.54	-69.43	0	
+tatooine_8216			TATOOINE	tat_moseisley_legacy_cult_cave	3	-27.55	-41.11	-74.71	0	
+tatooine_8217			TATOOINE	tat_moseisley_legacy_cult_cave	3	-33.66	-44.87	-78.82	0	
+tatooine_8218			TATOOINE	tat_moseisley_legacy_cult_cave	3	-48.78	-48.23	-91.48	0	
+tatooine_8219			TATOOINE	tat_moseisley_legacy_cult_cave	4	-53.27	-46.89	-99.43	0	
+tatooine_8220			TATOOINE	tat_moseisley_legacy_cult_cave	4	-49.62	-46.65	-103.36	0	
+tatooine_8221			TATOOINE	tat_moseisley_legacy_cult_cave	4	-40.48	-47.02	-107.77	0	
+tatooine_8222			TATOOINE	tat_moseisley_legacy_cult_cave	4	-17.85	-53.49	-120.57	0	
+tatooine_8223			TATOOINE	tat_moseisley_legacy_cult_cave	4	-9.50	-52.38	-127.91	0	
+tatooine_8224			TATOOINE	tat_moseisley_legacy_cult_cave	4	-9.06	-50.08	-137.11	0	
+tatooine_8225			TATOOINE	tat_moseisley_legacy_cult_cave	4	-12.12	-48.59	-143.54	0	
+tatooine_8226			TATOOINE	tat_moseisley_legacy_cult_cave	5	-12.63	-48.83	-147.68	0	
+tatooine_8227			TATOOINE	tat_moseisley_legacy_cult_cave	5	-11.91	-49.23	-151.69	0	
+tatooine_8300	FLIP	19	TATOOINE	tat_moseisley_legacy_cult_cave	5	3.57	-51.75	-171.16	0	legacy_kraytcult_10_10020175
+tatooine_8301			TATOOINE	tat_moseisley_legacy_cult_cave	5	-4.12	-50.78	-168.39	0	
+tatooine_8302			TATOOINE	tat_moseisley_legacy_cult_cave	5	-11.18	-50.93	-161.78	0	
+tatooine_8303			TATOOINE	tat_moseisley_legacy_cult_cave	5	-19.01	-50.83	-160.53	0	
+tatooine_8304			TATOOINE	tat_moseisley_legacy_cult_cave	5	-28.18	-52.33	-165.40	0	
+tatooine_8305			TATOOINE	tat_moseisley_legacy_cult_cave	5	-36.14	-53.76	-170.16	0	
+tatooine_8306			TATOOINE	tat_moseisley_legacy_cult_cave	5	-44.58	-54.75	-172.29	0	
+tatooine_8307			TATOOINE	tat_moseisley_legacy_cult_cave	5	-48.10	-54.87	-173.12	0	
+tatooine_8308			TATOOINE	tat_moseisley_legacy_cult_cave	5	-52.35	-56.54	-173.42	0	
+tatooine_8309			TATOOINE	tat_moseisley_legacy_cult_cave	5	-57.99	-57.29	-171.57	0	
+tatooine_8310			TATOOINE	tat_moseisley_legacy_cult_cave	5	-64.11	-57.57	-171.33	0	
+tatooine_8311			TATOOINE	tat_moseisley_legacy_cult_cave	5	-69.47	-57.19	-172.97	0	
+tatooine_8312			TATOOINE	tat_moseisley_legacy_cult_cave	5	-75.27	-56.15	-175.33	0	
+tatooine_8313			TATOOINE	tat_moseisley_legacy_cult_cave	5	-78.30	-55.86	-180.61	0	
+tatooine_8314			TATOOINE	tat_moseisley_legacy_cult_cave	5	-77.23	-56.52	-188.01	0	
+tatooine_8315			TATOOINE	tat_moseisley_legacy_cult_cave	5	-75.33	-56.81	-194.78	0	
+tatooine_8316			TATOOINE	tat_moseisley_legacy_cult_cave	5	-70.38	-55.53	-199.35	0	
+tatooine_8317			TATOOINE	tat_moseisley_legacy_cult_cave	5	-66.46	-55.34	-202.41	0	
+tatooine_8318			TATOOINE	tat_moseisley_legacy_cult_cave	5	-64.10	-55.71	-204.47	0	
+tatooine_8319			TATOOINE	tat_moseisley_legacy_cult_cave	5	-60.14	-56.89	-214.21	0	
+tatooine_8400	FLIP	22	TATOOINE	tat_moseisley_legacy_cult_cave	5	-12.46	-49.85	-213.45	0	legacy_Kraytcult_12_10020128
+tatooine_8401			TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.30	-48.96	-222.83	0	
+tatooine_8402			TATOOINE	tat_moseisley_legacy_cult_cave	9	-13.65	-50.18	-230.83	0	
+tatooine_8403			TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.85	-51.66	-235.64	0	
+tatooine_8404			TATOOINE	tat_moseisley_legacy_cult_cave	9	-8.70	-54.42	-241.42	0	
+tatooine_8405			TATOOINE	tat_moseisley_legacy_cult_cave	9	-0.98	-55.88	-244.02	0	
+tatooine_8406			TATOOINE	tat_moseisley_legacy_cult_cave	10	7.75	-54.41	-246.32	0	
+tatooine_8407			TATOOINE	tat_moseisley_legacy_cult_cave	10	12.29	-55.87	-251.32	0	
+tatooine_8408			TATOOINE	tat_moseisley_legacy_cult_cave	10	14.36	-58.30	-258.58	0	
+tatooine_8409			TATOOINE	tat_moseisley_legacy_cult_cave	10	12.71	-60.59	-267.60	0	
+tatooine_8410			TATOOINE	tat_moseisley_legacy_cult_cave	10	8.13	-63.34	-273.97	0	
+tatooine_8411			TATOOINE	tat_moseisley_legacy_cult_cave	10	3.95	-64.09	-276.25	0	
+tatooine_8412			TATOOINE	tat_moseisley_legacy_cult_cave	10	-1.15	-64.81	-278.07	0	
+tatooine_8413			TATOOINE	tat_moseisley_legacy_cult_cave	10	-5.88	-63.91	-279.32	0	
+tatooine_8414			TATOOINE	tat_moseisley_legacy_cult_cave	11	-10.91	-63.56	-277.06	0	
+tatooine_8415			TATOOINE	tat_moseisley_legacy_cult_cave	11	-15.12	-64.66	-275.74	0	
+tatooine_8416			TATOOINE	tat_moseisley_legacy_cult_cave	11	-18.16	-65.77	-277.12	0	
+tatooine_8417			TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.54	-67.42	-279.43	0	
+tatooine_8418			TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.29	-70.63	-285.33	0	
+tatooine_8419			TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-71.90	-291.40	0	
+tatooine_8420			TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-74.18	-299.71	0	
+tatooine_8421			TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.84	-75.33	-309.68	0	
+tatooine_8422			TATOOINE	tat_moseisley_legacy_cult_cave	11	-19.56	-76.68	-318.17	0	
+tatooine_8500	FLIP	23	TATOOINE	tat_moseisley_legacy_cult_cave	5	-70.11	-55.73	-184.20	0	legacy_kraytcult_10_10020090
+tatooine_8501			TATOOINE	tat_moseisley_legacy_cult_cave	5	-59.42	-55.47	-196.85	0	
+tatooine_8502			TATOOINE	tat_moseisley_legacy_cult_cave	5	-53.02	-56.26	-203.43	0	
+tatooine_8503			TATOOINE	tat_moseisley_legacy_cult_cave	5	-54.36	-57.26	-212.28	0	
+tatooine_8504			TATOOINE	tat_moseisley_legacy_cult_cave	5	-56.50	-56.94	-223.81	0	
+tatooine_8505			TATOOINE	tat_moseisley_legacy_cult_cave	12	-57.56	-56.98	-231.17	0	
+tatooine_8506			TATOOINE	tat_moseisley_legacy_cult_cave	12	-62.37	-60.80	-243.01	0	
+tatooine_8507			TATOOINE	tat_moseisley_legacy_cult_cave	12	-67.48	-66.49	-250.82	0	
+tatooine_8508			TATOOINE	tat_moseisley_legacy_cult_cave	12	-72.84	-71.67	-256.82	0	
+tatooine_8509			TATOOINE	tat_moseisley_legacy_cult_cave	12	-82.93	-75.54	-258.85	0	
+tatooine_8510			TATOOINE	tat_moseisley_legacy_cult_cave	12	-92.34	-76.95	-260.14	0	
+tatooine_8511			TATOOINE	tat_moseisley_legacy_cult_cave	13	-101.89	-75.89	-261.76	0	
+tatooine_8512			TATOOINE	tat_moseisley_legacy_cult_cave	13	-107.24	-76.50	-267.70	0	
+tatooine_8513			TATOOINE	tat_moseisley_legacy_cult_cave	13	-106.15	-79.50	-276.38	0	
+tatooine_8514			TATOOINE	tat_moseisley_legacy_cult_cave	13	-103.36	-82.14	-284.67	0	
+tatooine_8515			TATOOINE	tat_moseisley_legacy_cult_cave	13	-92.88	-87.08	-289.32	0	
+tatooine_8516			TATOOINE	tat_moseisley_legacy_cult_cave	14	-87.42	-88.36	-289.15	0	
+tatooine_8517			TATOOINE	tat_moseisley_legacy_cult_cave	14	-83.31	-89.98	-292.84	0	
+tatooine_8518			TATOOINE	tat_moseisley_legacy_cult_cave	14	-78.75	-88.50	-300.11	0	
+tatooine_8519			TATOOINE	tat_moseisley_legacy_cult_cave	14	-80.10	-84.78	-309.13	0	
+tatooine_8520			TATOOINE	tat_moseisley_legacy_cult_cave	17	-83.53	-82.61	-321.52	0	
+tatooine_8521			TATOOINE	tat_moseisley_legacy_cult_cave	17	-88.91	-82.85	-330.00	0	
+tatooine_8522			TATOOINE	tat_moseisley_legacy_cult_cave	17	-93.76	-84.45	-334.75	0	
+tatooine_8523			TATOOINE	tat_moseisley_legacy_cult_cave	17	-91.56	-82.61	-344.19	0	
+tatooine_8600	FLIP	18	TATOOINE	tat_moseisley_legacy_cult_cave	16	-41.11	-77.86	-365.28	0	legacy_bonegnasher_10020154
+tatooine_8601			TATOOINE	tat_moseisley_legacy_cult_cave	16	-35.44	-78.47	-364.92	0	
+tatooine_8602			TATOOINE	tat_moseisley_legacy_cult_cave	16	-31.07	-78.62	-361.12	0	
+tatooine_8603			TATOOINE	tat_moseisley_legacy_cult_cave	16	-29.01	-78.45	-356.44	0	
+tatooine_8604			TATOOINE	tat_moseisley_legacy_cult_cave	16	-26.25	-78.54	-350.64	0	
+tatooine_8605			TATOOINE	tat_moseisley_legacy_cult_cave	16	-27.60	-78.63	-346.05	0	
+tatooine_8606			TATOOINE	tat_moseisley_legacy_cult_cave	16	-26.58	-77.79	-342.70	0	
+tatooine_8607			TATOOINE	tat_moseisley_legacy_cult_cave	16	-23.41	-77.58	-340.66	0	
+tatooine_8608			TATOOINE	tat_moseisley_legacy_cult_cave	16	-18.29	-78.09	-340.32	0	
+tatooine_8609			TATOOINE	tat_moseisley_legacy_cult_cave	16	-14.07	-78.13	-342.55	0	
+tatooine_8610			TATOOINE	tat_moseisley_legacy_cult_cave	16	-11.81	-78.03	-347.21	0	
+tatooine_8611			TATOOINE	tat_moseisley_legacy_cult_cave	16	-8.32	-78.03	-352.52	0	
+tatooine_8612			TATOOINE	tat_moseisley_legacy_cult_cave	16	-4.24	-77.81	-354.76	0	
+tatooine_8613			TATOOINE	tat_moseisley_legacy_cult_cave	16	-2.33	-77.81	-359.02	0	
+tatooine_8614			TATOOINE	tat_moseisley_legacy_cult_cave	16	-5.87	-78.26	-365.05	0	
+tatooine_8615			TATOOINE	tat_moseisley_legacy_cult_cave	16	-12.49	-78.30	-367.17	0	
+tatooine_8616			TATOOINE	tat_moseisley_legacy_cult_cave	16	-19.84	-78.67	-367.85	0	
+tatooine_8617			TATOOINE	tat_moseisley_legacy_cult_cave	16	-25.62	-77.76	-367.83	0	
+tatooine_8618			TATOOINE	tat_moseisley_legacy_cult_cave	16	-32.05	-77.76	-368.04	0	
+tatooine_8700	FLIP	11	TATOOINE	tat_moseisley_legacy_cult_cave	17	-110.54	-82.39	-320.56	0	legacy_kraytcult_12_10020115
+tatooine_8701			TATOOINE	tat_moseisley_legacy_cult_cave	17	-112.22	-83.24	-324.88	0	
+tatooine_8702			TATOOINE	tat_moseisley_legacy_cult_cave	17	-116.17	-83.91	-329.39	0	
+tatooine_8703			TATOOINE	tat_moseisley_legacy_cult_cave	17	-121.76	-84.10	-331.31	0	
+tatooine_8704			TATOOINE	tat_moseisley_legacy_cult_cave	17	-127.85	-84.34	-334.49	0	
+tatooine_8705			TATOOINE	tat_moseisley_legacy_cult_cave	17	-128.97	-85.17	-339.25	0	
+tatooine_8706			TATOOINE	tat_moseisley_legacy_cult_cave	17	-124.87	-84.39	-344.17	0	
+tatooine_8707			TATOOINE	tat_moseisley_legacy_cult_cave	17	-116.04	-83.45	-342.66	0	
+tatooine_8708			TATOOINE	tat_moseisley_legacy_cult_cave	17	-110.64	-83.00	-341.79	0	
+tatooine_8709			TATOOINE	tat_moseisley_legacy_cult_cave	17	-105.49	-83.51	-339.49	0	
+tatooine_8710			TATOOINE	tat_moseisley_legacy_cult_cave	17	-99.57	-84.62	-337.14	0	
+tatooine_8711			TATOOINE	tat_moseisley_legacy_cult_cave	17	-100.61	-85.01	-335.84	0	
+tatooine_8800	FLIP	25	TATOOINE	tat_moseisley_legacy_cult_cave	20	8.84	-118.84	-357.89	0	legacy_kraytcult_12_10020233
+tatooine_8801			TATOOINE	tat_moseisley_legacy_cult_cave	20	25.81	-119.17	-352.77	0	
+tatooine_8802			TATOOINE	tat_moseisley_legacy_cult_cave	20	30.12	-118.48	-352.07	0	
+tatooine_8803			TATOOINE	tat_moseisley_legacy_cult_cave	19	36.43	-118.82	-350.91	0	
+tatooine_8804			TATOOINE	tat_moseisley_legacy_cult_cave	19	42.70	-117.98	-349.71	0	
+tatooine_8805			TATOOINE	tat_moseisley_legacy_cult_cave	19	44.79	-117.69	-350.21	0	
+tatooine_8806			TATOOINE	tat_moseisley_legacy_cult_cave	19	48.84	-116.69	-351.87	0	
+tatooine_8807			TATOOINE	tat_moseisley_legacy_cult_cave	19	52.01	-115.32	-353.27	0	
+tatooine_8808			TATOOINE	tat_moseisley_legacy_cult_cave	19	56.32	-113.88	-356.42	0	
+tatooine_8809			TATOOINE	tat_moseisley_legacy_cult_cave	19	58.27	-111.79	-359.04	0	
+tatooine_8810			TATOOINE	tat_moseisley_legacy_cult_cave	19	61.22	-110.31	-362.84	0	
+tatooine_8811			TATOOINE	tat_moseisley_legacy_cult_cave	19	63.67	-108.73	-365.92	0	
+tatooine_8812			TATOOINE	tat_moseisley_legacy_cult_cave	19	67.07	-106.77	-369.87	0	
+tatooine_8813			TATOOINE	tat_moseisley_legacy_cult_cave	18	70.03	-106.14	-372.28	0	
+tatooine_8814			TATOOINE	tat_moseisley_legacy_cult_cave	18	71.99	-104.90	-372.19	0	
+tatooine_8815			TATOOINE	tat_moseisley_legacy_cult_cave	18	76.61	-103.47	-371.66	0	
+tatooine_8816			TATOOINE	tat_moseisley_legacy_cult_cave	18	82.51	-102.14	-368.81	0	
+tatooine_8817			TATOOINE	tat_moseisley_legacy_cult_cave	18	86.55	-98.47	-364.16	0	
+tatooine_8818			TATOOINE	tat_moseisley_legacy_cult_cave	18	88.23	-97.81	-361.83	0	
+tatooine_8819			TATOOINE	tat_moseisley_legacy_cult_cave	18	88.08	-96.62	-358.05	0	
+tatooine_8820			TATOOINE	tat_moseisley_legacy_cult_cave	18	86.78	-94.55	-353.13	0	
+tatooine_8821			TATOOINE	tat_moseisley_legacy_cult_cave	18	85.92	-92.06	-348.64	0	
+tatooine_8822			TATOOINE	tat_moseisley_legacy_cult_cave	15	86.09	-90.58	-344.39	0	
+tatooine_8823			TATOOINE	tat_moseisley_legacy_cult_cave	15	88.13	-90.13	-341.23	0	
+tatooine_8824			TATOOINE	tat_moseisley_legacy_cult_cave	15	90.49	-90.23	-337.06	0	
+tatooine_8825			TATOOINE	tat_moseisley_legacy_cult_cave	15	95.27	-90.09	-335.94	0	
+tatooine_8900	FLIP	9	TATOOINE	tat_legacy_swoop_gang_bunker	5	7.52	-12.00	35.02	0	legacy_wt_tech_8_10118056
+tatooine_8901			TATOOINE	tat_legacy_swoop_gang_bunker	5	7.23	-12.00	39.72	0	
+tatooine_8902			TATOOINE	tat_legacy_swoop_gang_bunker	5	7.41	-12.00	51.84	0	
+tatooine_8903			TATOOINE	tat_legacy_swoop_gang_bunker	5	7.15	-12.00	52.88	0	
+tatooine_8904			TATOOINE	tat_legacy_swoop_gang_bunker	5	0.82	-12.00	54.02	0	
+tatooine_8905			TATOOINE	tat_legacy_swoop_gang_bunker	5	-1.81	-12.00	51.85	0	
+tatooine_8906			TATOOINE	tat_legacy_swoop_gang_bunker	5	0.20	-12.00	47.75	0	
+tatooine_8907			TATOOINE	tat_legacy_swoop_gang_bunker	5	0.50	-12.00	36.36	0	
+tatooine_8908			TATOOINE	tat_legacy_swoop_gang_bunker	5	-2.03	-12.00	36.03	0	
+tatooine_8909			TATOOINE	tat_legacy_swoop_gang_bunker	5	3.80	-12.00	34.46	0	
+tatooine_9000	FLIP	17	TATOOINE	tat_legacy_swoop_gang_bunker	7	21.11	-16.00	71.80	0	legacy_wt_guard_11_p_10530599
+tatooine_9001			TATOOINE	tat_legacy_swoop_gang_bunker	7	17.35	-16.00	76.87	0	
+tatooine_9002			TATOOINE	tat_legacy_swoop_gang_bunker	7	17.40	-16.00	83.57	0	
+tatooine_9003			TATOOINE	tat_legacy_swoop_gang_bunker	8	17.42	-16.00	87.79	0	
+tatooine_9004			TATOOINE	tat_legacy_swoop_gang_bunker	8	17.44	-16.00	92.82	0	
+tatooine_9005			TATOOINE	tat_legacy_swoop_gang_bunker	9	9.86	-16.00	93.05	0	
+tatooine_9006			TATOOINE	tat_legacy_swoop_gang_bunker	9	-0.59	-12.00	93.00	0	
+tatooine_9007			TATOOINE	tat_legacy_swoop_gang_bunker	18	-10.41	-12.00	93.15	0	
+tatooine_9008			TATOOINE	tat_legacy_swoop_gang_bunker	18	-19.30	-12.00	93.24	0	
+tatooine_9009			TATOOINE	tat_legacy_swoop_gang_bunker	19	-25.79	-12.00	93.10	0	
+tatooine_9010			TATOOINE	tat_legacy_swoop_gang_bunker	20	-31.52	-12.00	93.03	0	
+tatooine_9011			TATOOINE	tat_legacy_swoop_gang_bunker	20	-32.75	-12.00	99.34	0	
+tatooine_9012			TATOOINE	tat_legacy_swoop_gang_bunker	20	-32.98	-12.00	105.49	0	
+tatooine_9013			TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.02	-12.00	112.13	0	
+tatooine_9014			TATOOINE	tat_legacy_swoop_gang_bunker	20	-36.47	-12.00	114.29	0	
+tatooine_9015			TATOOINE	tat_legacy_swoop_gang_bunker	20	-36.52	-12.00	119.09	0	
+tatooine_9016			TATOOINE	tat_legacy_swoop_gang_bunker	21	-36.65	-12.00	122.62	0	
+tatooine_9017			TATOOINE	tat_legacy_swoop_gang_bunker	21	-36.77	-12.00	126.16	0	
+tatooine_9100	FLIP	2	TATOOINE	tat_legacy_swoop_gang_bunker	7	22.07	-16.00	82.76	0	legacy_wh_tech_10_10070271
+tatooine_9101			TATOOINE	tat_legacy_swoop_gang_bunker	7	13.86	-16.00	82.97	0	
+tatooine_9102			TATOOINE	tat_legacy_swoop_gang_bunker	7	10.92	-16.00	79.12	0	
+tatooine_9200	FLIP	5	TATOOINE	tat_legacy_swoop_gang_bunker	10	9.61	-16.00	109.44	0	legacy_wh_tech_10_10070325
+tatooine_9201			TATOOINE	tat_legacy_swoop_gang_bunker	10	7.18	-16.00	113.64	0	
+tatooine_9202			TATOOINE	tat_legacy_swoop_gang_bunker	10	1.31	-16.00	113.91	0	
+tatooine_9203			TATOOINE	tat_legacy_swoop_gang_bunker	10	-2.60	-16.00	114.10	0	
+tatooine_9204			TATOOINE	tat_legacy_swoop_gang_bunker	10	-15.03	-16.00	119.61	0	
+tatooine_9205			TATOOINE	tat_legacy_swoop_gang_bunker	10	-16.86	-16.00	115.96	0	
+tatooine_9300	FLIP	14	TATOOINE	tat_legacy_swoop_gang_bunker	10	-15.42	-16.00	123.27	0	legacy_wh_tech_13_10070333
+tatooine_9301			TATOOINE	tat_legacy_swoop_gang_bunker	10	-4.42	-16.00	125.72	0	
+tatooine_9302			TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.76	-16.00	130.00	0	
+tatooine_9303			TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.82	-16.00	132.03	0	
+tatooine_9304			TATOOINE	tat_legacy_swoop_gang_bunker	10	6.94	-16.00	132.58	0	
+tatooine_9305			TATOOINE	tat_legacy_swoop_gang_bunker	10	9.47	-16.00	127.80	0	
+tatooine_9306			TATOOINE	tat_legacy_swoop_gang_bunker	10	13.50	-16.00	126.38	0	
+tatooine_9307			TATOOINE	tat_legacy_swoop_gang_bunker	10	25.05	-16.00	126.50	0	
+tatooine_9308			TATOOINE	tat_legacy_swoop_gang_bunker	10	25.29	-16.00	116.21	0	
+tatooine_9309			TATOOINE	tat_legacy_swoop_gang_bunker	10	11.85	-16.00	115.68	0	
+tatooine_9310			TATOOINE	tat_legacy_swoop_gang_bunker	10	05.02	-16.00	110.67	0	
+tatooine_9311			TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.81	-16.00	99.87	0	
+tatooine_9312			TATOOINE	tat_legacy_swoop_gang_bunker	10	-2.97	-16.00	112.43	0	
+tatooine_9313			TATOOINE	tat_legacy_swoop_gang_bunker	10	-4.48	-16.00	116.19	0	
+tatooine_9314			TATOOINE	tat_legacy_swoop_gang_bunker	10	-10.72	-16.00	116.04	0	
+tatooine_9400	FLIP	20	TATOOINE	tat_legacy_swoop_gang_bunker	12	-23.00	-12.00	145.10	0	legacy_wt_tech_13_10418413
+tatooine_9401			TATOOINE	tat_legacy_swoop_gang_bunker	12	-29.43	-12.00	150.73	0	
+tatooine_9402			TATOOINE	tat_legacy_swoop_gang_bunker	13	-37.13	-12.00	151.01	0	
+tatooine_9403			TATOOINE	tat_legacy_swoop_gang_bunker	13	-45.07	-15.22	151.09	0	
+tatooine_9404			TATOOINE	tat_legacy_swoop_gang_bunker	13	-54.74	-20.00	151.18	0	
+tatooine_9405			TATOOINE	tat_legacy_swoop_gang_bunker	15	-62.76	-20.00	151.25	0	
+tatooine_9406			TATOOINE	tat_legacy_swoop_gang_bunker	15	-71.09	-24.00	151.07	0	
+tatooine_9407			TATOOINE	tat_legacy_swoop_gang_bunker	16	-76.91	-24.00	150.95	0	
+tatooine_9408			TATOOINE	tat_legacy_swoop_gang_bunker	16	-78.90	-24.00	150.92	0	
+tatooine_9409			TATOOINE	tat_legacy_swoop_gang_bunker	16	-81.16	-24.00	150.07	0	
+tatooine_9410			TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.65	-24.00	148.26	0	
+tatooine_9411			TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.50	-24.00	142.18	0	
+tatooine_9412			TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.50	-26.85	135.60	0	
+tatooine_9413			TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.55	-28.00	130.95	0	
+tatooine_9414			TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.60	-28.00	126.43	0	
+tatooine_9415			TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.23	-28.00	109.93	0	
+tatooine_9416			TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.23	-28.00	109.93	0	
+tatooine_9417			TATOOINE	tat_legacy_swoop_gang_bunker	17	-85.62	-28.00	110.00	0	
+tatooine_9418			TATOOINE	tat_legacy_swoop_gang_bunker	17	-92.01	-28.00	110.47	0	
+tatooine_9419			TATOOINE	tat_legacy_swoop_gang_bunker	17	-91.61	-28.00	106.45	0	
+tatooine_9420			TATOOINE	tat_legacy_swoop_gang_bunker	17	-91.49	-28.00	102.66	0	
+tatooine_9500	FLIP	4	TATOOINE	tat_legacy_swoop_gang_bunker	18	-17.89	-12.00	94.16	0	legacy_wh_tech_10_10070280
+tatooine_9501			TATOOINE	tat_legacy_swoop_gang_bunker	18	-15.86	-12.00	90.74	0	
+tatooine_9502			TATOOINE	tat_legacy_swoop_gang_bunker	18	-8.31	-12.00	93.74	0	
+tatooine_9503			TATOOINE	tat_legacy_swoop_gang_bunker	18	-6.26	-12.00	96.42	0	
+tatooine_9504			TATOOINE	tat_legacy_swoop_gang_bunker	18	-16.74	-12.00	95.45	0	
+tatooine_9600	FLIP	2	TATOOINE	tat_legacy_swoop_gang_bunker	18	-8.82	-12.00	99.51	0	legacy_wh_tech_10_10070276
+tatooine_9601			TATOOINE	tat_legacy_swoop_gang_bunker	18	-16.53	-12.00	99.04	0	
+tatooine_9602			TATOOINE	tat_legacy_swoop_gang_bunker	18	-18.06	-12.00	96.69	0	
+tatooine_9700	FLIP	8	TATOOINE	tat_legacy_swoop_gang_bunker	20	-32.93	-12.00	115.04	0	legacy_wh_tech_13_10070313
+tatooine_9701			TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.13	-12.00	113.80	0	
+tatooine_9702			TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.91	-12.00	110.11	0	
+tatooine_9703			TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.53	-12.00	104.20	0	
+tatooine_9704			TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.44	-12.00	98.24	0	
+tatooine_9705			TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.38	-12.00	98.09	0	
+tatooine_9706			TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.03	-12.00	86.96	0	
+tatooine_9707			TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.51	-12.00	87.08	0	
+tatooine_9708			TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.00	-12.00	110.47	0	
+tatooine_9800	FLIP	20	TATOOINE	tat_legacy_swoop_gang_bunker	29	-145.13	-44.00	97.18	0	legacy_wh_guard_14_10267932
+tatooine_9801			TATOOINE	tat_legacy_swoop_gang_bunker	29	-151.63	-44.00	92.61	0	
+tatooine_9802			TATOOINE	tat_legacy_swoop_gang_bunker	29	-158.09	-44.00	92.49	0	
+tatooine_9803			TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.29	-44.00	91.35	0	
+tatooine_9804			TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.84	-44.00	87.17	0	
+tatooine_9805			TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.67	-44.00	82.19	0	
+tatooine_9806			TATOOINE	tat_legacy_swoop_gang_bunker	29	-161.00	-44.00	76.87	0	
+tatooine_9807			TATOOINE	tat_legacy_swoop_gang_bunker	29	-155.08	-44.00	73.80	0	
+tatooine_9808			TATOOINE	tat_legacy_swoop_gang_bunker	29	-150.17	-44.00	73.55	0	
+tatooine_9809			TATOOINE	tat_legacy_swoop_gang_bunker	29	-140.05	-44.00	72.48	0	
+tatooine_9810			TATOOINE	tat_legacy_swoop_gang_bunker	29	-140.05	-44.00	72.48	0	
+tatooine_9811			TATOOINE	tat_legacy_swoop_gang_bunker	29	-138.83	-44.00	75.41	0	
+tatooine_9812			TATOOINE	tat_legacy_swoop_gang_bunker	29	-139.08	-44.00	77.36	0	
+tatooine_9813			TATOOINE	tat_legacy_swoop_gang_bunker	29	-139.84	-44.00	78.32	0	
+tatooine_9814			TATOOINE	tat_legacy_swoop_gang_bunker	29	-142.19	-44.00	77.45	0	
+tatooine_9815			TATOOINE	tat_legacy_swoop_gang_bunker	29	-144.44	-44.00	76.40	0	
+tatooine_9816			TATOOINE	tat_legacy_swoop_gang_bunker	29	-157.33	-44.00	77.07	0	
+tatooine_9817			TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.33	-44.00	78.57	0	
+tatooine_9818			TATOOINE	tat_legacy_swoop_gang_bunker	29	-164.91	-44.00	89.08	0	
+tatooine_9819			TATOOINE	tat_legacy_swoop_gang_bunker	29	-155.74	-44.00	92.52	0	
+tatooine_9820			TATOOINE	tat_legacy_swoop_gang_bunker	29	-148.69	-44.00	92.72	0	
+tatooine_9900	FLIP	3	TATOOINE	tat_legacy_swoop_gang_bunker	29	-137.33	-44.00	84.99	0	legacy_wh_guard_14_10268535
+tatooine_9901			TATOOINE	tat_legacy_swoop_gang_bunker	29	-144.36	-44.00	85.30	0	
+tatooine_9902			TATOOINE	tat_legacy_swoop_gang_bunker	29	-151.67	-44.00	85.34	0	
+tatooine_9903			TATOOINE	tat_legacy_swoop_gang_bunker	29	-163.05	-44.00	85.44	0	
+tatooine_10000	FLIP	30	TATOOINE	tat_legacy_swoop_gang_bunker	29	-166.12	-44.00	97.71	0	legacy_wt_dren_10532491
+tatooine_10001			TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.56	-44.00	97.58	0	
+tatooine_10002			TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.82	-44.00	95.27	0	
+tatooine_10003			TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.10	-44.00	83.36	0	
+tatooine_10004			TATOOINE	tat_legacy_swoop_gang_bunker	29	-159.06	-44.00	73.57	0	
+tatooine_10005			TATOOINE	tat_legacy_swoop_gang_bunker	29	-142.70	-44.00	75.55	0	
+tatooine_10006			TATOOINE	tat_legacy_swoop_gang_bunker	29	-138.87	-44.00	77.00	0	
+tatooine_10007			TATOOINE	tat_legacy_swoop_gang_bunker	33	-129.35	-42.66	77.52	0	
+tatooine_10008			TATOOINE	tat_legacy_swoop_gang_bunker	33	-118.50	-36.71	76.99	0	
+tatooine_10009			TATOOINE	tat_legacy_swoop_gang_bunker	28	-112.04	-36.00	77.01	0	
+tatooine_10010			TATOOINE	tat_legacy_swoop_gang_bunker	28	-102.90	-33.32	76.75	0	
+tatooine_10011			TATOOINE	tat_legacy_swoop_gang_bunker	28	-93.54	-28.19	76.74	0	
+tatooine_10012			TATOOINE	tat_legacy_swoop_gang_bunker	28	-89.96	-28.00	76.78	0	
+tatooine_10013			TATOOINE	tat_legacy_swoop_gang_bunker	26	-88.00	-28.00	76.79	0	
+tatooine_10014			TATOOINE	tat_legacy_swoop_gang_bunker	26	-83.59	-28.00	76.82	0	
+tatooine_10015			TATOOINE	tat_legacy_swoop_gang_bunker	26	-83.15	-28.00	62.69	0	
+tatooine_10016			TATOOINE	tat_legacy_swoop_gang_bunker	30	-88.96	-28.00	61.11	0	
+tatooine_10017			TATOOINE	tat_legacy_swoop_gang_bunker	30	-93.54	-28.00	60.97	0	
+tatooine_10018			TATOOINE	tat_legacy_swoop_gang_bunker	30	-94.66	-28.00	58.24	0	
+tatooine_10019			TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.63	-28.00	52.02	0	
+tatooine_10020			TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.45	-32.46	42.16	0	
+tatooine_10021			TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.41	-36.00	32.61	0	
+tatooine_10022			TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.44	-36.00	26.85	0	
+tatooine_10023			TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.53	-41.45	16.36	0	
+tatooine_10024			TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.41	-44.00	8.20	0	
+tatooine_10025			TATOOINE	tat_legacy_swoop_gang_bunker	32	-94.37	-44.00	5.81	0	
+tatooine_10026			TATOOINE	tat_legacy_swoop_gang_bunker	32	-94.32	-44.00	2.27	0	
+tatooine_10027			TATOOINE	tat_legacy_swoop_gang_bunker	32	-76.88	-44.00	-1.35	0	
+tatooine_10028			TATOOINE	tat_legacy_swoop_gang_bunker	32	-63.29	-44.00	-1.02	0	
+tatooine_10029			TATOOINE	tat_legacy_swoop_gang_bunker	32	-57.96	-44.00	-4.59	0	
+tatooine_10030			TATOOINE	tat_legacy_swoop_gang_bunker	32	-57.71	-44.00	-5.59	0	
+tatooine_10100	FLIP	9	TATOOINE	tat_legacy_swoop_gang_bunker	32	-77.64	-44.00	4.30	0	legacy_wh_guard_15_2_10070458
+tatooine_10101			TATOOINE	tat_legacy_swoop_gang_bunker	32	-83.30	-44.00	2.26	0	
+tatooine_10102			TATOOINE	tat_legacy_swoop_gang_bunker	32	-89.66	-44.00	1.24	0	
+tatooine_10103			TATOOINE	tat_legacy_swoop_gang_bunker	32	-98.36	-44.00	-7.60	0	
+tatooine_10104			TATOOINE	tat_legacy_swoop_gang_bunker	32	-98.62	-44.00	-20.82	0	
+tatooine_10105			TATOOINE	tat_legacy_swoop_gang_bunker	32	-80.55	-44.00	-20.47	0	
+tatooine_10106			TATOOINE	tat_legacy_swoop_gang_bunker	32	-61.30	-44.00	-19.74	0	
+tatooine_10107			TATOOINE	tat_legacy_swoop_gang_bunker	32	-66.61	-44.00	-15.22	0	
+tatooine_10108			TATOOINE	tat_legacy_swoop_gang_bunker	32	-67.15	-44.00	-4.32	0	
+tatooine_10109			TATOOINE	tat_legacy_swoop_gang_bunker	32	-72.67	-44.00	1.91	0	
+tatooine_10200	FLIP	4	TATOOINE	tat_world	0	3839.99	14.15	2296.93	0	smuggler_enemy_patrol_10035690
+tatooine_10201			TATOOINE	tat_world	0	3837.55	15.86	2312.47	0	
+tatooine_10202			TATOOINE	tat_world	0	3844.26	19.89	2315.02	0	
+tatooine_10203			TATOOINE	tat_world	0	3845.31	23.90	2343.46	0	
+tatooine_10204			TATOOINE	tat_world	0	3842.95	20.44	2319.57	0	
+tatooine_10300	FLIP	3	TATOOINE	tat_world	0	3840.62	22.86	2360.02	0	smuggler_enemy_patrol_10036396
+tatooine_10301			TATOOINE	tat_world	0	3819.37	16.87	2342.07	0	
+tatooine_10302			TATOOINE	tat_world	0	3796.74	12.62	2352.05	0	
+tatooine_10303			TATOOINE	tat_world	0	3815.91	17.06	2366.29	0	
+tatooine_10400	FLIP	5	TATOOINE	tat_world	0	4270.52	8.75	2484.97	0	tatooine_tusken_guard_10072680
+tatooine_10401			TATOOINE	tat_world	0	4267.91	8.75	2502.88	0	
+tatooine_10402			TATOOINE	tat_world	0	4251.08	7.86	2517.89	0	
+tatooine_10403			TATOOINE	tat_world	0	4229.83	8.78	2502.94	0	
+tatooine_10404			TATOOINE	tat_world	0	4226.70	14.44	2468.23	0	
+tatooine_10405			TATOOINE	tat_world	0	4253.18	15.28	2452.80	0	
