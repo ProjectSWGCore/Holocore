@@ -1,5 +1,5 @@
-patrol_id	patrol_type	patrol_points	terrain	building_id	cell_id	x	y	z	pause	comment
-INTEGER PRIMARY KEY	TEXT	INTEGER	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
 patrol_corellia.sdb	FALSE									
 patrol_dantooine.sdb	FALSE									
 patrol_dathomir.sdb	FALSE									
