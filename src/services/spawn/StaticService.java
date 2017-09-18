@@ -61,8 +61,7 @@ public class StaticService extends Service {
 	private void loadSupportingObjects() {
 		long startTime = StandardLog.onStartLoad("static objects");
 		Map<String, String> typeToIff = new HashMap<>();
-		SdbLoader loader = new SdbLoader();
-		try (SdbResultSet set = loader.load(new File("serverdata/static/types.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/types.sdb"))) {
 			while (set.next()) {
 				typeToIff.put(set.getText(1), set.getText(0));
 			}
@@ -70,7 +69,7 @@ public class StaticService extends Service {
 			Log.e(e);
 			return;
 		}
-		try (SdbResultSet set = loader.load(new File("serverdata/static/spawns.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/spawns.sdb"))) {
 			while (set.next()) {
 				String iff = typeToIff.get(set.getText("iff_type"));
 				List<SpawnedObject> objects = spawnableObjects.get(iff);

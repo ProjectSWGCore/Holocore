@@ -25,59 +25,71 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.crafting.resource.raw;
+package resources.server_info.loader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
 import resources.server_info.SdbLoader;
 import resources.server_info.SdbLoader.SdbResultSet;
-import resources.server_info.StandardLog;
-import services.crafting.resource.raw.RawResource.RawResourceBuilder;
 
-public class RawResourceContainer {
+public class BuildingLoader {
 	
-	private final Map<Long, RawResource> resources;
+	private final Map<String, BuildingLoaderInfo> buildingMap;
 	
-	public RawResourceContainer() {
-		this.resources = new HashMap<>();
+	private BuildingLoader() {
+		this.buildingMap = new HashMap<>();
 	}
 	
-	public List<RawResource> getResources() {
-		return new ArrayList<>(resources.values());
+	public BuildingLoaderInfo getBuilding(String buildingName) {
+		return buildingMap.get(buildingName);
 	}
 	
-	public RawResource getResource(long id) {
-		return resources.get(id);
-	}
-	
-	public void loadResources() {
-		resources.clear();
-		long startTime = StandardLog.onStartLoad("raw resources");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/resources/resources.sdb"))) {
+	private void loadFromFile() {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/building/buildings.sdb"))) {
 			while (set.next()) {
-				RawResource resource = new RawResourceBuilder(set.getInt("id"))
-						.setParent(resources.get(set.getInt("parent")))
-						.setName(set.getText("resource_name"))
-						.setCrateTemplate(set.getText("crate_template"))
-						.setMinPools((int) set.getInt("min_pools"))
-						.setMaxPools((int) set.getInt("max_pools"))
-						.setMinTypes((int) set.getInt("min_types"))
-						.setMaxTypes((int) set.getInt("max_types"))
-						.setRecycled(set.getInt("recycled") != 0)
-						.build();
-				resources.put(resource.getId(), resource);
+				buildingMap.put(set.getText(0), new BuildingLoaderInfo(set));
 			}
 		} catch (IOException e) {
 			Log.e(e);
 		}
-		StandardLog.onEndLoad(resources.size(), "raw resources", startTime);
+	}
+	
+	public static BuildingLoader load() {
+		BuildingLoader loader = new BuildingLoader();
+		loader.loadFromFile();
+		return loader;
+	}
+	
+	public static class BuildingLoaderInfo {
+		
+		private final String name;
+		private final long id;
+		private final Terrain terrain;
+		
+		public BuildingLoaderInfo(SdbResultSet set) {
+			this.name = set.getText(0);
+			this.id = set.getInt(2);
+			this.terrain = Terrain.valueOf(set.getText(1));
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public long getId() {
+			return id;
+		}
+		
+		public Terrain getTerrain() {
+			return terrain;
+		}
+		
 	}
 	
 }

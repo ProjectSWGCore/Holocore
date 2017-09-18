@@ -10,4 +10,5 @@
 /log
 *.db-journal
 /lib/
+
 /serverdata/

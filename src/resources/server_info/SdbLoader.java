@@ -33,27 +33,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.debug.Log;
 
 public class SdbLoader {
 	
-	public SdbLoader() {
+	private SdbLoader() {
 		
-	}
-	
-	public SdbResultSet load(File file) throws IOException {
-		SdbResultSet set = new SdbResultSet(file);
-		set.load();
-		return set;
 	}
 	
 	private enum DataType {
 		TEXT,
 		INTEGER,
-		REAL;
+		REAL,
+		BOOLEAN;
 		
 		public Object decode(String str) {
 			switch (this) {
@@ -64,11 +62,158 @@ public class SdbLoader {
 					return Long.parseLong(str);
 				case REAL:
 					return Double.parseDouble(str);
+				case BOOLEAN:
+					return str.equalsIgnoreCase("true") || str.equals("1");
 			}
 		}
 	}
 	
-	public static class SdbResultSet implements AutoCloseable {
+	public static SdbResultSet load(File file) throws IOException {
+		String ext = getExtension(file);
+		if (ext.equals("msdb")) {
+			return MasterSdbResultSet.load(file);
+		} else if (ext.equals("sdb")) {
+			return SingleSdbResultSet.load(file);
+		} else {
+			throw new IllegalArgumentException("Invalid file! Expected either msdb or sdb");
+		}
+	}
+	
+	private static String getExtension(File file) {
+		String ext = file.getName().toLowerCase(Locale.US);
+		int lastPeriod = ext.lastIndexOf('.');
+		if (lastPeriod == -1)
+			return ext;
+		return ext.substring(lastPeriod+1);
+	}
+	
+	public interface SdbResultSet extends AutoCloseable {
+		
+		@Override
+		void close() throws IOException;
+		boolean next() throws IOException;
+		List<String> getColumns();
+		
+		Object getObject(int index);
+		
+		String getText(int index);
+		String getText(String columnName);
+		
+		long getInt(int index);
+		long getInt(String columnName);
+		
+		double getReal(int index);
+		double getReal(String columnName);
+		
+		boolean getBoolean(int index);
+		boolean getBoolean(String columnName);
+	}
+	
+	private static class MasterSdbResultSet implements SdbResultSet {
+		
+		private final Iterator<SdbResultSet> sdbs;
+		private final AtomicReference<SdbResultSet> sdb;
+		
+		private MasterSdbResultSet(Iterator<SdbResultSet> sdbs) {
+			this.sdbs = sdbs;
+			this.sdb = new AtomicReference<>(sdbs.hasNext() ? sdbs.next() : null);
+		}
+		
+		@Override
+		public void close() throws IOException {
+			SdbResultSet set = getResultSet();
+			if (set != null)
+				set.close();
+		}
+		
+		@Override
+		public boolean next() throws IOException {
+			SdbResultSet set = getResultSet();
+			if (set == null)
+				return false;
+			while (!set.next()) {
+				set.close();
+				if (!sdbs.hasNext()) {
+					sdb.set(null);
+					return false; // bummer
+				}
+				set = sdbs.next();
+				sdb.set(set);
+				if (set == null)
+					return false; // shouldn't be possible anyways
+			}
+			return true;
+		}
+		
+		@Override
+		public List<String> getColumns() {
+			return getResultSet().getColumns();
+		}
+		
+		@Override
+		public Object getObject(int index) {
+			return getResultSet().getObject(index);
+		}
+		
+		@Override
+		public String getText(int index) {
+			return getResultSet().getText(index);
+		}
+		
+		@Override
+		public String getText(String columnName) {
+			return getResultSet().getText(columnName);
+		}
+		
+		@Override
+		public long getInt(int index) {
+			return getResultSet().getInt(index);
+		}
+		
+		@Override
+		public long getInt(String columnName) {
+			return getResultSet().getInt(columnName);
+		}
+		
+		@Override
+		public double getReal(int index) {
+			return getResultSet().getReal(index);
+		}
+		
+		@Override
+		public double getReal(String columnName) {
+			return getResultSet().getReal(columnName);
+		}
+		
+		@Override
+		public boolean getBoolean(int index) {
+			return getResultSet().getBoolean(index);
+		}
+		
+		@Override
+		public boolean getBoolean(String columnName) {
+			return getResultSet().getBoolean(columnName);
+		}
+		
+		private SdbResultSet getResultSet() {
+			return sdb.get();
+		}
+		
+		private static MasterSdbResultSet load(File file) throws IOException {
+			List<SdbResultSet> sets = new ArrayList<>();
+			File parentFile = file.getParentFile();
+			try (SingleSdbResultSet msdb = SingleSdbResultSet.load(file)) {
+				while (msdb.next()) {
+					if (msdb.getBoolean(1)) // is enabled
+						sets.add(SdbLoader.load(new File(parentFile, msdb.getText(0)))); // relative file path
+				}
+			}
+			return new MasterSdbResultSet(sets.iterator());
+		}
+		
+	}
+	
+	private static class SingleSdbResultSet implements SdbResultSet {
 		
 		private final File file;
 		private final Map<String, Integer> columnNames;
@@ -76,7 +221,7 @@ public class SdbLoader {
 		private Object [] columnValues;
 		private BufferedReader reader;
 		
-		private SdbResultSet(File file) {
+		private SingleSdbResultSet(File file) {
 			this.file = file;
 			this.columnNames = new HashMap<>();
 			this.columnTypes = null;
@@ -91,6 +236,7 @@ public class SdbLoader {
 			reader = null;
 		}
 		
+		@Override
 		public boolean next() throws IOException {
 			String line;
 			do {
@@ -104,36 +250,54 @@ public class SdbLoader {
 			return false;
 		}
 		
+		@Override
 		public List<String> getColumns() {
 			return new ArrayList<>(columnNames.keySet());
 		}
 		
+		@Override
 		public Object getObject(int index) {
 			return columnValues[index];
 		}
 		
+		@Override
 		public String getText(int index) {
 			return (String) columnValues[index];
 		}
 		
-		public long getInt(int index) {
-			return (Long) columnValues[index];
-		}
-		
-		public double getReal(int index) {
-			return (Double) columnValues[index];
-		}
-		
+		@Override
 		public String getText(String columnName) {
 			return getText(columnNames.get(columnName));
 		}
 		
+		@Override
+		public long getInt(int index) {
+			return (Long) columnValues[index];
+		}
+		
+		@Override
 		public long getInt(String columnName) {
 			return getInt(columnNames.get(columnName));
 		}
 		
+		@Override
+		public double getReal(int index) {
+			return (Double) columnValues[index];
+		}
+		
+		@Override
 		public double getReal(String columnName) {
 			return getReal(columnNames.get(columnName));
+		}
+		
+		@Override
+		public boolean getBoolean(int index) {
+			return (Boolean) columnValues[index];
+		}
+		
+		@Override
+		public boolean getBoolean(String columnName) {
+			return getBoolean(columnNames.get(columnName));
 		}
 		
 		private void readNextLine(String line) {
@@ -148,7 +312,13 @@ public class SdbLoader {
 			columnValues[i] = columnTypes[i].decode(line.substring(prevIndex));
 		}
 		
-		protected void load() throws IOException {
+		private static SingleSdbResultSet load(File file) throws IOException {
+			SingleSdbResultSet sdb = new SingleSdbResultSet(file);
+			sdb.load();
+			return sdb;
+		}
+		
+		private void load() throws IOException {
 			reader = new BufferedReader(new FileReader(file));
 			if (!loadHeader(reader.readLine(), reader.readLine()))
 				return;
@@ -183,6 +353,8 @@ public class SdbLoader {
 				return DataType.INTEGER;
 			if (type.equalsIgnoreCase("REAL"))
 				return DataType.REAL;
+			if (type.equalsIgnoreCase("BOOL") || type.equalsIgnoreCase("BOOLEAN"))
+				return DataType.BOOLEAN;
 			Log.e("Unknown column type: %s for file %s", type, file);
 			return DataType.TEXT;
 		}

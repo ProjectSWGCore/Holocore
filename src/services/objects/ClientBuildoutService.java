@@ -186,8 +186,7 @@ public class ClientBuildoutService extends Service {
 		public List<BuildoutArea> getAllAreas(List<String> events) {
 			Map<String, BuildoutArea> areas = new HashMap<>();
 			BuildoutArea area;
-			SdbLoader loader = new SdbLoader();
-			try (SdbResultSet set = loader.load(new File("serverdata/buildout/areas.sdb"))) {
+			try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/areas.sdb"))) {
 				while (set.next()) {
 					area = parseLine(set);
 					BuildoutArea replaced = areas.get(area.getName());
@@ -202,8 +201,7 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		public BuildoutArea getAreaById(int areaId) {
-			SdbLoader loader = new SdbLoader();
-			try (SdbResultSet set = loader.load(new File("serverdata/buildout/areas.sdb"))) {
+			try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/areas.sdb"))) {
 				while (set.next()) {
 					if (set.getInt(0) == areaId)
 						return parseLine(set);
@@ -245,11 +243,10 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		public Map<Long, SWGObject> getAllObjects() {
-			SdbLoader loader = new SdbLoader();
 			Map<Long, SWGObject> objects = new HashMap<>();
 			int areaId;
 			SWGObject object;
-			try (SdbResultSet set = loader.load(new File("serverdata/buildout/objects.sdb"))) {
+			try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
 				while (set.next()) {
 					areaId = (int) set.getInt(2);
 					if (currentArea.getId() != areaId) {

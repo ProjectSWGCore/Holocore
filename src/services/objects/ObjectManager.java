@@ -71,7 +71,7 @@ public class ObjectManager extends Manager {
 		objectAwareness = new ObjectAwareness();
 		mapManager = new MapManager();
 		staticService = new StaticService();
-		spawnerService = new SpawnerService(this);
+		spawnerService = new SpawnerService();
 		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
 		staticItemService = new StaticItemService();

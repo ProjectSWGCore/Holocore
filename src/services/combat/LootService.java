@@ -67,6 +67,8 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
+import resources.server_info.loader.npc.NpcLoader;
+import resources.server_info.loader.npc.NpcLoader.NpcInfo;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager.ObjectLookup;
 import services.objects.StaticItemService;
@@ -74,7 +76,6 @@ import services.objects.StaticItemService;
 public final class LootService extends Service {
 
 	private static final String LOOT_TABLE_SELECTOR = "SELECT * FROM loot_table";
-	private static final String NPC_LOOT_SELECTOR = "SELECT npc_id, min_cash, max_cash, loot_table1_chance, loot_table1, loot_table2_chance, loot_table2, loot_table3_chance, loot_table3 FROM npc";
 	
 	private final Map<String, LootTable> lootTables;	// K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;	// K: npc_id, V: possible loot
@@ -148,51 +149,38 @@ public final class LootService extends Service {
 	private void loadNPCLoot() {
 		String what = "NPC loot links";
 		long startTime = StandardLog.onStartLoad(what);
-
-		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("npc/npc.db", "npc")) {
-			try (ResultSet set = spawnerDatabase.executeQuery(NPC_LOOT_SELECTOR)) {
-				while (set.next()) {
-					loadNPCLoot(set);
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
+		
+		NpcLoader npcLoader = NpcLoader.load();
+		npcLoader.iterate(npc -> {
+			loadNPCLoot(npc);
+		});
 
 		StandardLog.onEndLoad(npcLoot.size(), what, startTime);
 	}
 	
-	private void loadNPCLoot(ResultSet set) throws SQLException {
-		int minCash = set.getInt("min_cash");
-		int maxCash = set.getInt("max_cash");
-		String creatureId = set.getString("npc_id");
+	private void loadNPCLoot(NpcInfo info) {
+		if (info.getHumanoidInfo() == null)
+			return;
+		int minCash = info.getHumanoidInfo().getMinCash();
+		int maxCash = info.getHumanoidInfo().getMaxCash();
+		String creatureId = info.getId();
 		NPCLoot loot = new NPCLoot(minCash, maxCash);
 		
-		for (byte tableNum = 1; tableNum <= 3; tableNum++) {
-			NPCTable npcTable = loadNPCTable(set, tableNum);
-			
-			if (npcTable == null || npcTable.getChance() <= 0) {
-				continue;
-			}
-
-			loot.addNPCTable(npcTable);
-		}
-		
+		loadNPCTable(loot, info.getLootTable1(), info.getLootTable1Chance());
+		loadNPCTable(loot, info.getLootTable2(), info.getLootTable2Chance());
+		loadNPCTable(loot, info.getLootTable3(), info.getLootTable3Chance());
 		npcLoot.put(creatureId, loot);
 	}
 	
-	private NPCTable loadNPCTable(ResultSet set, int tableNum) throws SQLException {
-		String columnName = "loot_table" + tableNum;
-		String columnChance = columnName + "_chance";
-		String tableName = set.getString(columnName);
-		int tableChance = set.getInt(columnChance);
-		LootTable lootTable = lootTables.get(tableName);
-
-		if (lootTable == null) {
-			return null;
-		}
-
-		return new NPCTable(tableChance, lootTable);
+	private void loadNPCTable(NPCLoot loot, String table, int chance) {
+		if (chance <= 0)
+			return;
+		
+		LootTable lootTable = lootTables.get(table);
+		if (lootTable == null)
+			return;
+		
+		loot.addNPCTable(new NPCTable(chance, lootTable));
 	}
 
 	private void handleContainerTransfer(ContainerTransferIntent cti){

@@ -27,27 +27,19 @@
 ***********************************************************************************/
 package services.spawn;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
-import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.FactionIntent;
 import intents.object.DestroyObjectIntent;
@@ -65,34 +57,33 @@ import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
+import resources.server_info.loader.BuildingLoader;
+import resources.server_info.loader.BuildingLoader.BuildingLoaderInfo;
+import resources.server_info.loader.npc.NpcLoader;
+import resources.server_info.loader.npc.NpcLoader.NpcInfo;
+import resources.server_info.loader.npc.NpcStatLoader;
+import resources.server_info.loader.npc.NpcStatLoader.DetailNpcStatInfo;
+import resources.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
+import resources.server_info.loader.spawn.StaticSpawnLoader;
+import resources.server_info.loader.spawn.StaticSpawnLoader.StaticSpawnInfo;
 import resources.spawn.Spawner;
 import resources.spawn.Spawner.SpawnerFlag;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
-import services.objects.ObjectManager;
+import services.objects.ObjectManager.ObjectLookup;
 
 public final class SpawnerService extends Service {
 	
-	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
-			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.loiter_radius, " // more static columns
-			+ "static.min_spawn_time, static.max_spawn_time, static.amount, static.spawn_id, " // even more static columns
-			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "npc.npc_id, npc.iff_template AS iff, npc.npc_name, npc.combat_level, npc.difficulty, npc.attackable, npc.faction, npc.spec_force, " // npc columns
-			+ "npc_stats.HP, npc_stats.Action, npc_stats.Boss_HP, npc_stats.Boss_Action, npc_stats.Elite_HP, npc_stats.Elite_Action "	// npc_stats columns
-			+ "FROM static, buildings, npc, npc_stats "
-			+ "WHERE buildings.building_id = static.building_id AND static.npc_id = npc.npc_id AND npc.combat_level = npc_stats.Level";
-	private static final String IDLE_MOOD = "idle";
+	private static final String IDLE_MOOD = "idle".intern();
 	
-	private final ObjectManager objectManager;
 	private final Map<Long, Spawner> spawnerMap;
-	private final ScheduledExecutorService executorService;
+	private final PswgScheduledThreadPool executor;
 	private final Random random;
 	
-	public SpawnerService(ObjectManager objectManager) {
-		this.objectManager = objectManager;
-		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("spawner-service"));
-		spawnerMap = new HashMap<>();
-		random = new Random();
+	public SpawnerService() {
+		this.spawnerMap = new HashMap<>();
+		this.executor = new PswgScheduledThreadPool(1, "spawner-service");
+		this.random = new Random();
 		
 		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
 		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
@@ -100,6 +91,7 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean initialize() {
+		executor.start();
 		if(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
 			loadSpawners();
 		
@@ -108,7 +100,7 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executorService.shutdown();
+		executor.stop();
 		
 		return super.terminate();
 	}
@@ -142,62 +134,74 @@ public final class SpawnerService extends Service {
 			return;
 		}
 		
-		executorService.schedule(() -> spawnNPC(spawner), spawner.getRespawnDelay(), TimeUnit.SECONDS);
+		executor.execute(spawner.getRespawnDelay() * 1000, () -> spawnNPC(spawner));
 	}
 	
 	private void loadSpawners() {
 		long startTime = StandardLog.onStartLoad("spawners");
 		
-		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "npc/npc", "npc/npc_stats")) {
-			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
-				Location loc = new Location();
-				while (set.next()) {
-					if (set.getBoolean("active")) {	// TODO temporary until dynamically enabled NPCs are supported
-						loadSpawner(set, loc);
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(e);
+		BuildingLoader buildingLoader = BuildingLoader.load();
+		NpcStatLoader npcStatLoader = NpcStatLoader.load();
+		NpcLoader npcLoader = NpcLoader.load();
+		StaticSpawnLoader staticSpawnLoader = StaticSpawnLoader.load();
+		staticSpawnLoader.iterate(spawn -> {
+			BuildingLoaderInfo building = buildingLoader.getBuilding(spawn.getBuildingId());
+			if (building == null) {
+				Log.e("Invalid entry for spawn id [%d] - unknown building: '%s'", spawn.getId(), spawn.getBuildingId());
+				return;
 			}
-		}
+			
+			NpcInfo npc = npcLoader.getNpc(spawn.getNpcId());
+			if (npc == null) {
+				Log.w("Invalid entry for spawn id [%d] - unknown NPC: '%s'", spawn.getId(), spawn.getNpcId());
+				return;
+			}
+			
+			NpcStatInfo npcStat = npcStatLoader.getNpcStats(npc.getCombatLevel());
+			if (npcStat == null) {
+				Log.w("Invalid entry for spawn id [%d], NPC id [%d] - unknown NPC stat for level: %d", spawn.getId(), npc.getId(), npc.getCombatLevel());
+				return;
+			}
+			
+			loadSpawner(spawn, building, npc, npcStat);
+		});
 		
 		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
 	}
 	
-	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
-		Spawner spawner = new Spawner(set.getInt("spawn_id"));
-		spawner.setCreatureId(set.getString("npc_id"));
-		spawner.setIffTemplates(createTemplateList(set.getString("iff")));
-		spawner.setCreatureName(set.getString("npc_name").intern());
-		spawner.setCombatLevel(set.getShort("combat_level"));
-		spawner.setSpawnerFlag(SpawnerFlag.valueOf(set.getString("attackable")));
-		setRespawnDelay(spawner, set);
-		setDifficulty(spawner, set);
-		setMoodAnimation(spawner, set);
-		setAiBehavior(spawner, set);
-		setLocation(spawner, set);
-		setFaction(spawner, set);
-		createEgg(spawner, set);
+	private void loadSpawner(StaticSpawnInfo spawn, BuildingLoaderInfo building, NpcInfo npc, NpcStatInfo npcStat) {
+		Spawner spawner = new Spawner(spawn.getId());
+		spawner.setCreatureId(npc.getId());
+		spawner.setIffTemplates(createTemplateList(npc.getIff()));
+		spawner.setCreatureName(npc.getName().intern());
+		spawner.setCombatLevel((short) npc.getCombatLevel());
+		spawner.setSpawnerFlag(SpawnerFlag.valueOf(npc.getAttackable()));
+		setRespawnDelay(spawner, spawn);
+		setDifficulty(spawner, npc, npcStat);
+		setMoodAnimation(spawner, spawn);
+		setAiBehavior(spawner, spawn);
+		setLocation(spawner, spawn, building);
+		setFaction(spawner, npc);
+		createEgg(spawner, spawn, building);
 		
-		int amount = set.getInt("amount");
-		for (int i = 0; i < amount; i++) {
+		for (int i = 0; i < spawn.getAmount(); i++) {
 			spawnNPC(spawner);
 		}
 	}
 	
-	private void createEgg(Spawner spawner, ResultSet set) throws SQLException {
-		SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
+	private void createEgg(Spawner spawner, StaticSpawnInfo spawn, BuildingLoaderInfo building) {
+		SpawnerType spawnerType = SpawnerType.valueOf(spawn.getSpawnerType());
 		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
 		egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
-		egg.moveToContainer(getCell(spawner.getSpawnerId(), set));
+		egg.moveToContainer(getCell(spawner.getSpawnerId(), spawn.getCellId(), building));
 		egg.setLocation(spawner.getLocation());
 		spawner.setSpawnerObject(egg);
-		new ObjectCreatedIntent(egg).broadcast();
+		ObjectCreatedIntent.broadcast(egg);
 	}
 	
-	private void setRespawnDelay(Spawner spawner, ResultSet set) throws SQLException {
-		int minRespawnDelay = set.getInt("min_spawn_time");
-		int maxRespawnDelay = set.getInt("max_spawn_time");
+	private void setRespawnDelay(Spawner spawner, StaticSpawnInfo spawn) {
+		int minRespawnDelay = spawn.getMinSpawnTime();
+		int maxRespawnDelay = spawn.getMaxSpawnTime();
 		
 		if (minRespawnDelay > maxRespawnDelay) {
 			Log.e("Spawner with ID %d has a minimum respawn time larger than the maximum respawn time", spawner.getSpawnerId());
@@ -207,100 +211,89 @@ public final class SpawnerService extends Service {
 		spawner.setMaxRespawnDelay(maxRespawnDelay);
 	}
 	
-	private void setDifficulty(Spawner spawner, ResultSet set) throws SQLException {
-		char difficultyChar = set.getString("difficulty").charAt(0);
-		CreatureDifficulty difficulty;
-		int maxHealth = 0;
-		int maxAction = 0;
+	private void setDifficulty(Spawner spawner, NpcInfo npc, NpcStatInfo npcStat) {
+		char difficultyChar = npc.getDifficulty().charAt(0);
 		
+		CreatureDifficulty difficulty;
+		DetailNpcStatInfo detailInfo; // undefined to trigger warnings if not defined below
 		switch (difficultyChar) {
 			default:
 				Log.w("Unknown creature difficulty: %s", difficultyChar);
 			case 'N':
 				difficulty = CreatureDifficulty.NORMAL;
-				maxHealth = set.getInt("HP");
-				maxAction = set.getInt("Action");
+				detailInfo = npcStat.getNormalDetailStat();
 				break;
 			case 'E':
 				difficulty = CreatureDifficulty.ELITE;
-				maxHealth = set.getInt("Elite_HP");
-				maxAction = set.getInt("Elite_Action");
+				detailInfo = npcStat.getEliteDetailStat();
 				break;
 			case 'B':
 				difficulty = CreatureDifficulty.BOSS;
-				maxHealth = set.getInt("Boss_HP");
-				maxAction = set.getInt("Boss_Action");
+				detailInfo = npcStat.getBossDetailStat();
 				break;
 		}
-		spawner.setMaxHealth(maxHealth);
-		spawner.setMaxAction(maxAction);
+		spawner.setMaxHealth(detailInfo.getHealth());
+		spawner.setMaxAction(detailInfo.getAction());
 		spawner.setCreatureDifficulty(difficulty);
 	}
 	
-	private void setLocation(Spawner spawner, ResultSet set) throws SQLException {
-		Terrain terrain = Terrain.valueOf(set.getString("building_terrain"));
+	private void setLocation(Spawner spawner, StaticSpawnInfo spawn, BuildingLoaderInfo building) {
 		Location loc = Location.builder()
-				.setTerrain(terrain)
-				.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"))
-				.setHeading(set.getFloat("heading"))
+				.setTerrain(building.getTerrain())
+				.setPosition(spawn.getX(), spawn.getY(), spawn.getZ())
+				.setHeading(spawn.getHeading())
 				.build();
 		spawner.setLocation(loc);
 	}
 
-	private void setFaction(Spawner spawner, ResultSet set) throws SQLException {
-		String factionString = set.getString("faction");
+	private void setFaction(Spawner spawner, NpcInfo npc) {
 		PvpFaction faction;
-
-		switch (factionString) {
-			case "rebel": faction = PvpFaction.REBEL; break;
-			case "Imperial": faction = PvpFaction.IMPERIAL; break;
+		
+		switch (npc.getFaction()) {
+			case "rebel":		faction = PvpFaction.REBEL; break;
+			case "imperial":	faction = PvpFaction.IMPERIAL; break;
 			default: return;
 		}
-
-
-		boolean specForce = set.getString("spec_force").equalsIgnoreCase("true");
-
-		spawner.setFaction(faction, specForce);
+		
+		spawner.setFaction(faction, npc.isSpecForce());
 	}
 	
-	private void setMoodAnimation(Spawner spawner, ResultSet set) throws SQLException {
-		String moodAnimation = set.getString("mood").intern();
+	private void setMoodAnimation(Spawner spawner, StaticSpawnInfo spawn) {
+		String moodAnimation = spawn.getMood().intern();
 		
-		if (moodAnimation == IDLE_MOOD) // since the string is intern'd, this will work
+		if (moodAnimation.equals(IDLE_MOOD))
 			moodAnimation = "neutral";
+		
 		spawner.setMoodAnimation(moodAnimation);
 	}
 	
-	private void setAiBehavior(Spawner spawner, ResultSet set) throws SQLException {
-		AIBehavior aiBehavior = AIBehavior.valueOf(set.getString("behaviour"));
+	private void setAiBehavior(Spawner spawner, StaticSpawnInfo spawn) {
+		AIBehavior aiBehavior = AIBehavior.valueOf(spawn.getBehavior());
 		spawner.setAIBehavior(aiBehavior);
 		if (aiBehavior == AIBehavior.LOITER) {
-			spawner.setFloatRadius(set.getInt("loiter_radius"));
+			spawner.setFloatRadius(spawn.getLoiterRadius());
 		}
 	}
 	
-	private SWGObject getCell(int spawnId, ResultSet set) throws SQLException {
-		int cellId = set.getInt("cell_id");
-		long buildingId = set.getLong("building_id");
-		
-		if (buildingId != 0 && cellId == 0) {
+	private SWGObject getCell(int spawnId, int cellId, BuildingLoaderInfo buildingInfo) {
+		if (buildingInfo.getId() != 0 && cellId == 0) {
 			Log.e("No cell ID specified for spawner with ID %d", spawnId);
 			return null;
-		} else if (buildingId == 0) {
+		} else if (buildingInfo.getId() == 0) {
 			if (cellId != 0)
 				Log.w("Unnecessary cell ID specified for spawner with ID %d", spawnId);
 			return null; // No cell to find
 		}
 		
-		SWGObject building = objectManager.getObjectById(buildingId);
+		SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
 		if (!(building instanceof BuildingObject)) {
-			Log.w("Skipping spawner with ID %d - building_id %d didn't reference a BuildingObject!", spawnId, buildingId);
+			Log.w("Skipping spawner with ID %d - building_id %d didn't reference a BuildingObject!", spawnId, buildingInfo.getId());
 			return null;
 		}
 		
 		SWGObject cellObject = ((BuildingObject) building).getCellByNumber(cellId);
 		if (cellObject == null) {
-			Log.e("Spawner with ID %d - building %d didn't have cell ID %d!", spawnId, buildingId, cellId);
+			Log.e("Spawner with ID %d - building %d didn't have cell ID %d!", spawnId, buildingInfo.getId(), cellId);
 		}
 		return cellObject;
 	}

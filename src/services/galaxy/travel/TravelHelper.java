@@ -228,8 +228,7 @@ class TravelHelper {
 	}
 	
 	private void loadTravelPoints() {
-		SdbLoader loader = new SdbLoader();
-		try (SdbResultSet set = loader.load(new File("serverdata/travel/travel.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/travel/travel.sdb"))) {
 			while (set.next()) {
 				loadTravelPoint(set);
 			}
