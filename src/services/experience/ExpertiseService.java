@@ -250,6 +250,14 @@ public final class ExpertiseService extends Service {
 		int baseRequirement = 18;
 		int levelDifference = 12;	// Amount of levels between each ability
 		int level = creatureObject.getLevel();
+
+		// All first rank abilities have a required level of 10
+		// The required level logic is required for ranks 2+
+		if (abilityIndex == 0) {
+			return level >= 10;
+		}
+
+		// Otherwise, perform the check as usual
 		int requiredLevel = baseRequirement + abilityIndex * levelDifference;
 		
 		// TODO what if requiredLevel goes above the maximum level possible for a player?
@@ -258,8 +266,8 @@ public final class ExpertiseService extends Service {
 	
 	private void grantExtraAbilities(CreatureObject creatureObject, String expertise) {
 		expertiseAbilities.get(expertise).forEach(chain -> {
-			for (int abilityIndex = 1; abilityIndex <= chain.length; abilityIndex++) {
-				String ability = chain[abilityIndex - 1];
+			for (int abilityIndex = 0; abilityIndex < chain.length; abilityIndex++) {
+				String ability = chain[abilityIndex];
 				
 				if (isQualified(creatureObject, abilityIndex) && !creatureObject.hasAbility(ability)) {
 					creatureObject.addAbility(ability);
