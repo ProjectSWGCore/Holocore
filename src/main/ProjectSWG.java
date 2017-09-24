@@ -113,9 +113,10 @@ public class ProjectSWG {
 	}
 	
 	private static void startupStaticClasses() {
-		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()*10));
+		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()));
 		IntentManager.getInstance().initialize();
 		DataManager.initialize();
+		Thread.currentThread().setPriority(10);
 	}
 	
 	private static void shutdownStaticClasses() {
