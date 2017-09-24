@@ -27,8 +27,7 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -42,10 +41,10 @@ import resources.objects.creature.CreatureState;
 
 public class AwarenessHandler implements AutoCloseable {
 	
-	private final Map<Terrain, TerrainMap> terrains;
+	private final EnumMap<Terrain, TerrainMap> terrains;
 	
 	public AwarenessHandler(TerrainMapCallback callback) {
-		terrains = new HashMap<>(Terrain.getTerrainCount());
+		terrains = new EnumMap<>(Terrain.class);
 		loadTerrainMaps(callback);
 	}
 	

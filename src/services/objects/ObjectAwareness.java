@@ -93,9 +93,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	@Override
-	public boolean terminate() {
+	public boolean stop() {
 		awarenessHandler.close();
-		return super.terminate();
+		return super.stop();
 	}
 	
 	@Override
