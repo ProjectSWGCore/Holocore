@@ -26,25 +26,25 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 1000026	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	3.10	-16.00	64.10	0	1	a dark jedi	itp_vader_dark_jedi_90_h_agg_e	Dungeon	Dark Jedi Hideout	1	TURN	0	0	-	idle	0	0	0	300	120
 1000027	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	8	70.40	-16.00	74.70	0	1	Magus Jocle (a dark jedi)	itp_vader_dark_jedi_leader_100_h_inv_n	Dungeon	Dark Jedi Hideout	1	IDLE	0	0	-	npc_meditate	0	0	0	900	600
 1000028	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	9	-34.70	-14.00	78.70	0	1	a dark jedi	itp_vader_dark_jedi_90_h_agg_e	Dungeon	Dark Jedi Hideout	1	TURN	0	0	-	idle	0	0	0	300	120
-1000029	YAVIN4	yav_world	AREA	0	4834.27	102.16	5514.60	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000030	YAVIN4	yav_world	AREA	0	4837.80	102.92	5623.81	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000031	YAVIN4	yav_world	AREA	0	4838.20	100.00	5558.79	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000032	YAVIN4	yav_world	AREA	0	4843.29	103.48	5606.93	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000033	YAVIN4	yav_world	AREA	0	4847.85	103.19	5544.97	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000034	YAVIN4	yav_world	AREA	0	4852.71	104.13	5607.40	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000029	YAVIN4	yav_world	AREA	0	4834.27	102.16	5514.60	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000030	YAVIN4	yav_world	AREA	0	4837.80	102.92	5623.81	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000031	YAVIN4	yav_world	AREA	0	4838.20	100.00	5558.79	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000032	YAVIN4	yav_world	AREA	0	4843.29	103.48	5606.93	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000033	YAVIN4	yav_world	AREA	0	4847.85	103.19	5544.97	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000034	YAVIN4	yav_world	AREA	0	4852.71	104.13	5607.40	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
 1000035	YAVIN4	yav_world	AREA	0	4927.72	103.84	5593.47	-80	1	a Rebel trooper	exar_intro_reb_trooper_100_h_inv_n	Dungeon	Exar Kun site	1	IDLE	0	0	-	nervous	0	999	0	300	120
-1000036	YAVIN4	yav_world	AREA	0	4809.46	105.78	5590.37	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000037	YAVIN4	yav_world	AREA	0	4811.34	104.37	5537.35	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000038	YAVIN4	yav_world	AREA	0	4813.08	107.22	5567.59	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000039	YAVIN4	yav_world	AREA	0	4819.46	103.46	5607.67	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000040	YAVIN4	yav_world	AREA	0	4820.97	100.00	5582.41	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000041	YAVIN4	yav_world	AREA	0	4829.91	96.00	5572.64	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000042	YAVIN4	yav_world	AREA	0	4832.85	103.73	5545.29	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000043	YAVIN4	yav_world	AREA	0	4860.10	100.00	5591.14	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000044	YAVIN4	yav_world	AREA	0	4865.15	103.34	5534.06	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000045	YAVIN4	yav_world	AREA	0	4865.42	104.88	5619.11	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000046	YAVIN4	yav_world	AREA	0	4877.11	103.63	5591.34	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
-1000047	YAVIN4	yav_world	AREA	0	4878.73	103.11	5562.99	0	1	an Exar Kun cultist	heroic_exar_cultist_90_h_att_b	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000036	YAVIN4	yav_world	AREA	0	4809.46	105.78	5590.37	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000037	YAVIN4	yav_world	AREA	0	4811.34	104.37	5537.35	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000038	YAVIN4	yav_world	AREA	0	4813.08	107.22	5567.59	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000039	YAVIN4	yav_world	AREA	0	4819.46	103.46	5607.67	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000040	YAVIN4	yav_world	AREA	0	4820.97	100.00	5582.41	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000041	YAVIN4	yav_world	AREA	0	4829.91	96.00	5572.64	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000042	YAVIN4	yav_world	AREA	0	4832.85	103.73	5545.29	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000043	YAVIN4	yav_world	AREA	0	4860.10	100.00	5591.14	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000044	YAVIN4	yav_world	AREA	0	4865.15	103.34	5534.06	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000045	YAVIN4	yav_world	AREA	0	4865.42	104.88	5619.11	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000046	YAVIN4	yav_world	AREA	0	4877.11	103.63	5591.34	0	1	a Cult of Exar Kun bloodservant	exar_intro_bloodservant_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
+1000047	YAVIN4	yav_world	AREA	0	4878.73	103.11	5562.99	0	1	a Cult of Exar Kun soulslave	exar_intro_soulslave_90_h_agg_n	Dungeon	Exar Kun site	1	LOITER	2	0	-	idle	0	0	0	300	120
 1000048	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	geo_scientist_human_female_85_h_att_e	Dungeon	Geonosian Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 1000049	YAVIN4	yav_geonosian_cave	AREA	10	-106.50	-18.00	-33.00	0	1	a Geonosian technical assistant	geo_tech_assistant_86_h_att_e	Dungeon	Geonosian Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 1000050	YAVIN4	yav_geonosian_cave	AREA	10	-118.40	-20.00	-39.20	0	1	a Geonosian technical assistant	geo_tech_assistant_86_h_att_e	Dungeon	Geonosian Cave	1	TURN	0	0	-	idle	0	0	0	300	120
