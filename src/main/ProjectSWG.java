@@ -166,22 +166,9 @@ public class ProjectSWG {
 	
 	private void run(String [] args) {
 		setupParameters(args);
-		if (testResult.getFailureCount() > 0) {
-			int passCount = testResult.getRunCount()-testResult.getFailureCount();
-			int runCount = testResult.getRunCount();
-			for (Failure failure : testResult.getFailures()) {
-				Log.e("Failed test. Class: %s  Method: %s", failure.getDescription().getTestClass(), failure.getDescription().getMethodName());
-			}
-			Log.e("Passed %d of %d unit tests in %.3fms - aborting start", passCount, runCount, testResult.getRunTime() / 1000.0);
+		if (!verifyUnitTests())
 			return;
-		} else {
-			int runCount = testResult.getRunCount();
-			Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
-		}
-		long start = System.nanoTime();
-		manager = new CoreManager(adminServerPort);
-		long end = System.nanoTime();
-		Log.i("Created new manager in %.3fms", (end-start)/1E6);
+		create();
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
@@ -189,10 +176,7 @@ public class ProjectSWG {
 			stop();
 			terminate();
 			if (!shutdownRequested && !manager.isShutdownRequested()) {
-				start = System.nanoTime();
-				manager = new CoreManager(adminServerPort);
-				end = System.nanoTime();
-				Log.i("Created new manager in %.3fms", (end-start)/1E6);
+				create();
 			}
 		}
 	}
@@ -242,6 +226,29 @@ public class ProjectSWG {
 		shutdownRequested = true;
 		mainThread.interrupt();
 		try { mainThread.join(); } catch (InterruptedException e) { }
+	}
+	
+	private boolean verifyUnitTests() {
+		if (testResult.getFailureCount() > 0) {
+			int passCount = testResult.getRunCount()-testResult.getFailureCount();
+			int runCount = testResult.getRunCount();
+			for (Failure failure : testResult.getFailures()) {
+				Log.e("Failed test. Class: %s  Method: %s", failure.getDescription().getTestClass(), failure.getDescription().getMethodName());
+			}
+			Log.e("Passed %d of %d unit tests in %.3fms - aborting start", passCount, runCount, testResult.getRunTime() / 1000.0);
+			return false;
+		} else {
+			int runCount = testResult.getRunCount();
+			Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
+			return true;
+		}
+	}
+	
+	private void create() {
+		long start = System.nanoTime();
+		manager = new CoreManager(adminServerPort);
+		long end = System.nanoTime();
+		Log.i("Created new manager in %.3fms", (end-start)/1E6);
 	}
 	
 	private void initialize() {
