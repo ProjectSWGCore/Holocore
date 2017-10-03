@@ -36,60 +36,37 @@ import intents.object.ObjectCreatedIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.SpecificObject;
-import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectCreator;
 
 public class RequestWaypointCmdCallback implements ICmdCallback {
-
+	
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		String[] cmd = args.split(" ");
-		CreatureObject creature = player.getCreatureObject();
-		long cellId = 0;
-		Point3D position = creature.getLocation().getPosition();
-		Terrain terrain = creature.getTerrain();
-		String expectedFormat = "/waypoint x y z";
-		try {
-			switch (cmd.length) {
-				case 0:
-					cellId = (creature.getParent() != null) ? creature.getParent().getObjectId() : 0;
-					break;
-				case 3: // x y z
-					position.setX(Double.parseDouble(cmd[0]));
-					position.setY(Double.parseDouble(cmd[1]));
-					position.setZ(Double.parseDouble(cmd[2]));
-					break;
-				case 4: // terrain x y z
-					expectedFormat = "/waypoint terrain x y z";
-					terrain = Terrain.getTerrainFromName(cmd[0]);
-					position.setX(Double.parseDouble(cmd[1]));
-					position.setY(Double.parseDouble(cmd[2]));
-					position.setZ(Double.parseDouble(cmd[3]));
-					break;
-				default:
-					SystemMessageIntent.broadcastPersonal(player, "Warning: unknown number of args: "+cmd.length+" - defaulting to 0 argument call to waypoint");
-					break;
-			}
-		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, "Invalid call to waypoint [INVALID_NUMBER]! Expected: " + expectedFormat);
+		String[] cmd = args.split(" ", 6);
+		if (cmd.length < 5) {
+			SystemMessageIntent.broadcastPersonal(player, "Invalid number of arguments for waypoint! Expected 5 or 6");
 			return;
 		}
-		if (terrain == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Invalid call to waypoint [INVALID_TERRAIN]! Expected: " + expectedFormat);
-			return;
-		}
-		createWaypoint(player, terrain, position, cellId);
+		WaypointColor color = WaypointColor.BLUE;
+		
+		Terrain terrain = Terrain.getTerrainFromName(cmd[1]);
+		
+		Point3D position = new Point3D();
+		position.set(Double.parseDouble(cmd[2]), Double.parseDouble(cmd[3]), Double.parseDouble(cmd[4]));
+		
+		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
+		
+		createWaypoint(player, terrain, position, color, name);
 	}
 	
-	private static void createWaypoint(Player player, Terrain terrain, Point3D position, long cellId) {
+	private static void createWaypoint(Player player, Terrain terrain, Point3D position, WaypointColor color, String name) {
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate(SpecificObject.SO_WAYPOINT.getTemplate());
 		waypoint.setPosition(terrain, position.getX(), position.getY(), position.getZ());
-		waypoint.setCellId(cellId);
-		waypoint.setName("@planet_n:" + terrain.getName());
-		waypoint.setColor(WaypointColor.BLUE);
+		waypoint.setName(name);
+		waypoint.setColor(color);
 		player.getPlayerObject().addWaypoint(waypoint);
 		ObjectCreatedIntent.broadcast(waypoint);
 	}

@@ -48,6 +48,7 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 	public WaypointObject(long objectId) {
 		super(objectId, BaselineType.WAYP);
 		this.waypoint = new WaypointPackage();
+		this.waypoint.setObjectId(objectId);
 	}
 	
 	public void setOOB(WaypointPackage oob) {

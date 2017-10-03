@@ -36,9 +36,9 @@ import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribut
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import resources.objects.GameObjectType;
-import resources.objects.GameObjectTypeMask;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
@@ -84,10 +84,9 @@ public final class ObjectCreator {
 			return null;
 		template = ClientFactory.formatToSharedFile(template);
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
-		if(attributes == null)
+		if (attributes == null)
 			return null;
-		GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
-		SWGObject obj = createObjectFromType(objectId, template, type);
+		SWGObject obj = createObjectFromType(objectId, template, attributes);
 		if (obj == null)
 			return null;
 		obj.setTemplate(template);
@@ -123,57 +122,44 @@ public final class ObjectCreator {
 		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
-	private static SWGObject createObjectFromType(long objectId, String template, GameObjectType got) {
-		SWGObject obj;
-		obj = createFastFromMask(objectId, got.getMask());
-		if (obj != null)
-			return obj;
-		obj = createFastFromType(objectId, got);
-		if (obj != null)
-			return obj;
-		return createSlowFromType(objectId, getTemplatePart(template, 1));
-	}
-	
-	private static SWGObject createFastFromType(long objectId, GameObjectType type) {
-		switch (type) {
-			case GOT_DATA_MANUFACTURING_SCHEMATIC:	return new ManufactureSchematicObject(objectId);
-			case GOT_LAIR:
-			case GOT_MISC_ITEM:
-			case GOT_MISC_SIGN:
-			case GOT_MISC_CONTAINER:
-			case GOT_MISC_CONTAINER_PUBLIC:
-			case GOT_MISC_CONTAINER_SHIP_LOOT:
-			case GOT_MISC_CONTAINER_WEARABLE:
-			case GOT_MISC_FURNITURE:				return new TangibleObject(objectId);
-			case GOT_STATIC:						return new StaticObject(objectId);
-			default:								return null;
+	private static SWGObject createObjectFromType(long objectId, String template, ObjectData attributes) {
+		Integer gotInt = (Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
+		if (gotInt == null)
+			return null;
+		
+		GameObjectType got = GameObjectType.getTypeFromId(gotInt);
+		BaselineType baseline = got.getBaselineType();
+		if (baseline == null) {
+			return createSlowFromType(objectId, template);
+		}
+		
+		switch (baseline) {
+			case BUIO:	return new BuildingObject(objectId);
+			case CREO:	return new CreatureObject(objectId);
+			case FCYT:	return new FactoryObject(objectId);
+			case GILD:	return new GuildObject(objectId);
+			case GRUP:	return new GroupObject(objectId);
+			case INSO:	return new InstallationObject(objectId);
+			case ITNO:	return new IntangibleObject(objectId);
+			case MISO:	return new MissionObject(objectId);
+			case MSCO:	return new ManufactureSchematicObject(objectId);
+			case PLAY:	return new PlayerObject(objectId);
+			case RCNO:	return new ResourceContainerObject(objectId);
+			case SCLT:	return new CellObject(objectId);
+			case SHIP:	return new ShipObject(objectId);
+			case STAO:	return new StaticObject(objectId);
+			case TANO:	return new TangibleObject(objectId);
+			case WAYP:	return new WaypointObject(objectId);
+			case WEAO:	return new WeaponObject(objectId);
+			/* Unimplemented baselines */
+			default:
+				Log.w("Could not create unimplemented baseline: %s", baseline);
+				return null;
 		}
 	}
 	
-	private static SWGObject createFastFromMask(long objectId, GameObjectTypeMask mask) {
-		switch (mask) {
-			case GOTM_BUILDING:				return new BuildingObject(objectId);
-			case GOTM_INSTALLATION:			return new InstallationObject(objectId);
-			case GOTM_RESOURCE_CONTAINER:	return new ResourceContainerObject(objectId);
-			case GOTM_SHIP:					return new ShipObject(objectId);
-			case GOTM_WEAPON:				return new WeaponObject(objectId);
-			case GOTM_VEHICLE:				return new CreatureObject(objectId);
-			case GOTM_ARMOR:
-			case GOTM_CLOTHING:
-			case GOTM_COMPONENT:
-			case GOTM_SHIP_COMPONENT:
-			case GOTM_TOOL:
-			case GOTM_JEWELRY:
-			case GOTM_CHRONICLES:
-			case GOTM_CYBERNETIC:
-			case GOTM_TERMINAL:
-			case GOTM_POWERUP_WEAPON:		return new TangibleObject(objectId);
-			case GOTM_NONE:
-			default: 						return null;
-		}
-	}
-	
-	private static SWGObject createSlowFromType(long objectId, String type) {
+	private static SWGObject createSlowFromType(long objectId, String template) {
+		String type = getObjectType(template);
 		switch (type) {
 			case "building":				return new BuildingObject(objectId);
 			case "cell":					return new CellObject(objectId);
@@ -250,21 +236,8 @@ public final class ObjectCreator {
 	/*
 		Misc helper methods
 	 */
-	private static String getTemplatePart(String template, int index) {
-		int start = 0;
-		int end = 0;
-		for (int i = 0; i < template.length(); i++) {
-			if (template.charAt(i) != '/')
-				continue;
-			index--;
-			if (index == 0)
-				start = i+1;
-			else if (index == -1) {
-				end = i;
-				break;
-			}
-		}
-		return template.substring(start, end);
+	private static String getObjectType(String template) {
+		return template.substring(7, template.indexOf('/', 8));
 	}
 	
 }
