@@ -27,7 +27,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500027	LOK	lok_nym_cantina	AREA	4	20.32	-0.89	-19.77	6	1	Commander Ramna (CorSec Pilot Trainer)	ramna_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500028	LOK	lok_nym_cantina	AREA	5	16.48	-0.89	21.87	-103	1	Berema	berema_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 500029	LOK	lok_nym_cantina	AREA	5	18.17	-0.89	20.80	175	1	a slicer	slicer_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500030	LOK	lok_nym_cantina	AREA	5	18.16	-0.89	18.21	0	1	a technician	technician_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
+500030	LOK	lok_nym_cantina	AREA	5	18.16	-0.89	18.21	0	1	a technician	technician_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	conversation	0	0	0	300	120
 500031	LOK	lok_nym_cantina	AREA	6	0.71	-0.89	-14.79	-172	1	a businessman	businessman_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500032	LOK	lok_nym_cantina	AREA	6	0.51	-0.89	-16.98	3	1	a hunter	hunter_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500033	LOK	lok_nym_cantina	AREA	6	11.60	-0.89	-16.70	-80	1	Choster (Retired Engineer)	nym_themepark_choster_cantina_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	300	120
@@ -37,7 +37,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500037	LOK	lok_nym_cantina	AREA	9	-6.41	-0.89	21.73	-77	1	a smuggler	smuggler_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500038	LOK	lok_nym_cantina	AREA	9	-7.69	-0.89	21.24	58	1	a vendor	vendor_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500039	LOK	lok_nym_hospital	AREA	6	-25.50	0.26	-3.50	119	1	a 2-1B surgical droid	21b_surgical_droid_100_d_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500040	LOK	lok_nym_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500040	LOK	lok_nym_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500041	LOK	lok_nym_hotel	AREA	4	-7.73	1.00	-4.01	88	1	a medic	medic_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500042	LOK	lok_nym_hotel	AREA	4	-6.36	1.00	-3.98	-100	1	a mercenary	mercenary_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500043	LOK	lok_nym_hotel	AREA	5	20.69	1.57	12.96	178	1	a bartender	bartender_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -51,21 +51,21 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500051	LOK	lok_nym_stronghold	AREA	3	-3.61	3.28	-25.73	34	1	Scourge	scourge_100_c_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 500052	LOK	lok_nym_stronghold	AREA	3	3.13	3.29	-21.21	-2	1	Jinkins	jinkins_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500053	LOK	lok_nym_stronghold	AREA	3	-1.74	3.34	-19.21	-14	1	Kole	kole_20_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500054	LOK	lok_nym_stronghold	AREA	3	-0.04	3.28	-23.03	0	1	Nym	nym_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+500054	LOK	lok_nym_stronghold	AREA	3	-0.04	3.28	-23.03	0	1	Nym	nym_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	npc_sitting_chair	0	0	0	300	120
 500055	LOK	lok_nym_stronghold	AREA	3	-3.51	1.30	3.96	90	1	Nym's bodyguard	nym_bodyguard_55_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500056	LOK	lok_nym_stronghold	AREA	3	5.65	1.30	-5.27	-88	1	Nym's bodyguard	nym_bodyguard_55_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500057	LOK	lok_nym_stronghold	AREA	3	-8.06	1.30	-0.95	179	1	Nym's brawler	nym_brawler_53_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500058	LOK	lok_nym_stronghold	AREA	3	3.86	1.30	-5.60	32	1	Nym's brawler	nym_brawler_53_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500059	LOK	lok_nym_stronghold	AREA	3	-2.04	1.30	3.96	-90	1	Nym's destroyer	nym_destroyer_55_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
-500060	LOK	lok_nym_stronghold	AREA	3	-3.30	4.08	-9.49	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500061	LOK	lok_nym_stronghold	AREA	3	3.30	4.08	-9.49	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500062	LOK	lok_nym_stronghold	AREA	3	1.85	8.90	-30.50	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500063	LOK	lok_nym_stronghold	AREA	3	-1.85	8.90	-30.50	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500060	LOK	lok_nym_stronghold	AREA	3	-3.30	4.08	-9.49	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500061	LOK	lok_nym_stronghold	AREA	3	3.30	4.08	-9.49	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500062	LOK	lok_nym_stronghold	AREA	3	1.85	8.90	-30.50	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500063	LOK	lok_nym_stronghold	AREA	3	-1.85	8.90	-30.50	0	1	Nym's elite guard	nym_guard_elite_58_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500064	LOK	lok_nym_stronghold	AREA	3	19.11	2.30	11.20	179	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500065	LOK	lok_nym_stronghold	AREA	3	-19.11	2.30	11.20	179	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500066	LOK	lok_nym_stronghold	AREA	3	-20.28	2.30	-18.78	0	1	Nym's guard	nym_guard_weak_56_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500067	LOK	lok_nym_stronghold	AREA	3	20.28	2.30	-18.78	0	1	Nym's guard	nym_guard_weak_56_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500068	LOK	lok_nym_stronghold	AREA	3	-8.06	1.30	-2.23	0	1	Nym's surveyor	nym_surveyer_56_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500066	LOK	lok_nym_stronghold	AREA	3	-20.28	2.30	-18.78	0	1	Nym's guard	nym_guard_weak_56_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500067	LOK	lok_nym_stronghold	AREA	3	20.28	2.30	-18.78	0	1	Nym's guard	nym_guard_weak_56_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500068	LOK	lok_nym_stronghold	AREA	3	-8.06	1.30	-2.23	0	1	Nym's surveyor	nym_surveyer_56_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500069	LOK	lok_nym_stronghold	AREA	3	4.38	1.30	-4.14	150	1	Nym's surveyor	nym_surveyer_56_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	conversation	0	0	0	300	120
 500070	LOK	lok_nym_stronghold	AREA	3	1.89	4.08	-10.71	-172	1	Grenz Zittoun	nym_themepark_grenz_zittoun_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500071	LOK	lok_nym_stronghold	AREA	3	5.54	4.07	-13.73	-155	1	Mako Ghast	nym_themepark_mako_ghast_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -74,7 +74,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500074	LOK	lok_nym_stronghold	AREA	3	0.26	3.31	-15.72	-179	1	Vana Sage	nym_themepark_vana_sage_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500075	LOK	lok_nym_stronghold	AREA	3	-5.57	2.30	8.58	-179	1	Kelson Sharphorn	slicer_kelson_sharphorn_56_h_agg_b	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500076	LOK	lok_nym_stronghold	AREA	3	-2.21	4.08	-11.02	-2	1	Lady Viopa (Rebel Pilot Trainer)	viopa_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500077	LOK	lok_nym_stronghold	AREA	6	-23.88	4.22	-37.43	7	1	Nym's Fuel Technician	nym_fuel_tech_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500077	LOK	lok_nym_stronghold	AREA	6	-23.88	4.22	-37.43	7	1	Nym's Fuel Technician	nym_fuel_tech_i_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500078	LOK	lok_nym_stronghold	AREA	7	-28.48	2.30	1.41	-90	1	Nym's bodyguard	nym_bodyguard_55_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500079	LOK	lok_world	AREA	0	351.45	12.06	4862.06	90	1	Bedhead	bedhead_100_c_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500080	LOK	lok_world	AREA	0	351.66	11.87	4854.02	90	1	Blinky	blinky_100_c_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -85,7 +85,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500085	LOK	lok_world	PATROL	0	591.04	12.35	5020.81	0	1	Ding	ntp_ding_100_c_inv_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500086	LOK	lok_world	PATROL	0	517.60	12.09	5121.50	0	1	Gargle	ntp_gargle_100_c_inv_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500087	LOK	lok_world	PATROL	0	376.30	11.20	5225.30	0	1	Wart Face	wart_face_100_c_inv_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-500088	LOK	lok_world	AREA	0	684.90	45.69	4987.94	0	1	Troubles	troubles_100_c_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500088	LOK	lok_world	AREA	0	684.90	45.69	4987.94	0	1	Troubles	troubles_100_c_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500089	LOK	lok_world	AREA	0	427.81	13.00	5136.07	102	1	a bounty hunter	bounty_hunter_23_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500090	LOK	lok_world	AREA	0	430.05	13.00	5137.73	-13	1	a commoner	commoner_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500091	LOK	lok_world	AREA	0	414.43	11.92	4972.05	-114	1	a commoner	commoner_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -119,10 +119,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500119	LOK	lok_world	AREA	0	471.04	11.94	5018.36	-123	1	a pirate	mission_pirate_17_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500120	LOK	lok_world	AREA	0	335.71	11.99	4925.47	101	1	a pirate	mission_pirate_17_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500121	LOK	lok_world	AREA	0	610.20	11.88	5105.33	34	1	a pirate	mission_pirate_17_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500122	LOK	lok_world	AREA	0	373.43	11.99	4985.35	43	1	Nym's Fuel Technician	nym_fuel_tech_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500123	LOK	lok_world	AREA	0	480.17	23.00	4961.80	-174	1	Nym's Fuel Technician	nym_fuel_tech_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500124	LOK	lok_world	AREA	0	480.93	22.84	4921.16	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500125	LOK	lok_world	AREA	0	472.83	22.78	4920.99	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500122	LOK	lok_world	AREA	0	373.43	11.99	4985.35	43	1	Nym's Fuel Technician	nym_fuel_tech_ii_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500123	LOK	lok_world	AREA	0	480.17	23.00	4961.80	-174	1	Nym's Fuel Technician	nym_fuel_tech_iii_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500124	LOK	lok_world	AREA	0	480.93	22.84	4921.16	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
+500125	LOK	lok_world	AREA	0	472.83	22.78	4920.99	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500126	LOK	lok_world	PATROL	0	465.39	7.24	5475.64	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500127	LOK	lok_world	PATROL	0	461.58	7.42	5477.04	0	1	Nym's guard	nym_guard_strong_57_h_att_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500128	LOK	lok_world	PATROL	0	463.50	7.15	5474.84	0	1	Nym's guard	nym_guard_weak_56_h_att_n	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
@@ -135,7 +135,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500135	LOK	lok_world	AREA	0	484.17	23.00	4948.35	0	1	a disgruntled townsperson	nym_themepark_d_townsperson_06_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500136	LOK	lok_world	AREA	0	470.00	23.00	4946.00	172	1	a disgruntled townsperson	nym_themepark_d_townsperson_lead_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500137	LOK	lok_world	AREA	0	711.00	11.39	5265.00	-92	1	Phor Cl-lan (A Water Treatment Tech)	nym_themepark_phor_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500138	LOK	lok_world	AREA	0	362.00	12.07	4837.00	0	1	Ralia Reeven (Nym's Quartermaster)	nym_themepark_quatermaster_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500138	LOK	lok_world	AREA	0	362.00	12.07	4837.00	0	1	Ralia Reeven (Nym's Quartermaster)	nym_themepark_quatermaster_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500139	LOK	lok_world	AREA	0	463.67	23.00	4967.00	-90	1	Ran Machado	nym_themepark_ran_machado_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500140	LOK	lok_world	AREA	0	588.28	3.00	5354.67	-117	1	Balfur Jhcor (associate bounty hunter)	quest_u10_bossk_henchman_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500141	LOK	lok_world	PATROL	0	251.42	12.00	4998.52	0	1	Joti Laike	quest_u10_joti_laike_65_h_att_e	City	Nym's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
@@ -147,7 +147,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500147	LOK	lok_world	AREA	0	385.15	12.00	5147.74	176	1	a smuggler	smuggler_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500148	LOK	lok_world	AREA	0	519.86	11.99	5037.10	-130	1	a smuggler	smuggler_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500149	LOK	lok_world	AREA	0	367.36	12.00	5176.94	77	1	a smuggler	smuggler_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-500150	LOK	lok_world	AREA	0	401.00	11.98	5226.00	0	1	Baldwin	smuggler_broker_baldwin_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+500150	LOK	lok_world	AREA	0	401.00	11.98	5226.00	0	1	Baldwin	smuggler_broker_baldwin_100_h_inv_n	City	Nym's Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 500151	LOK	lok_world	AREA	0	517.77	12.01	5100.49	141	1	a technician	technician_100_h_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500152	LOK	lok_world	AREA	0	630.10	12.67	5054.94	-66	1	Race Coordinator	race_coordinator_protocol_100_d_inv_n	City	Nym's Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 500153	LOK	lok_world	AREA	0	-7668.05	92.05	3528.92	0	1	Tao-Ni Security Elite Protector	taoni_sec_elite_prot_lok_ig88_90_d_agg_e	Dungeon	IG-88 Entrance	4	LOITER	12	0	-	idle	0	0	0	300	120
@@ -302,10 +302,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500302	LOK	lok_ntp_pirate_cave	AREA	9	-72.50	-38.00	-118.60	0	1	a Sulfur Lake cutthroat	u13_nym_slp_cutthroat_58_h_agg_n	Dungeon	NTP - Sulfur Pirate Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 500303	LOK	lok_ntp_pirate_cave	AREA	9	-92.90	-71.10	-113.60	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate_58_h_agg_n	Dungeon	NTP - Sulfur Pirate Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 500304	LOK	lok_ntp_pirate_cave	AREA	9	-110.80	-69.60	-108.00	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate_58_h_agg_n	Dungeon	NTP - Sulfur Pirate Cave	1	TURN	0	0	-	idle	0	0	0	300	120
-500305	LOK	lok_prolog_bunker	AREA	5	-4.50	-6.80	-7.50	0	1	a Dead Biologist	content_dead_biologist_v_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
-500306	LOK	lok_prolog_bunker	AREA	6	4.70	-6.80	-15.90	0	1	a Dead Biologist	content_dead_biologist_vii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
-500307	LOK	lok_prolog_bunker	AREA	7	3.80	-6.80	-1.50	0	1	a Dead Biologist	content_dead_biologist_viii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
-500308	LOK	lok_prolog_bunker	AREA	9	3.20	-13.80	-12.50	0	1	a Dead Biologist	content_dead_biologist_iii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
+500305	LOK	lok_prolog_bunker	AREA	5	-4.50	-6.80	-7.50	0	1	a Dead Biologist	content_dead_biologist_v_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	TURN	0	0	-	npc_dead_02	0	0	0	300	120
+500306	LOK	lok_prolog_bunker	AREA	6	4.70	-6.80	-15.90	0	1	a Dead Biologist	content_dead_biologist_vii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	TURN	0	0	-	npc_dead_02	0	0	0	300	120
+500307	LOK	lok_prolog_bunker	AREA	7	3.80	-6.80	-1.50	0	1	a Dead Biologist	content_dead_biologist_viii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	TURN	0	0	-	npc_dead_02	0	0	0	300	120
+500308	LOK	lok_prolog_bunker	AREA	9	3.20	-13.80	-12.50	0	1	a Dead Biologist	content_dead_biologist_iii_100_h_inv_n	Dungeon	Prolog Bunker Dungeon	1	TURN	0	0	-	npc_dead_02	0	0	0	300	120
 500309	LOK	lok_ntp_mercenary_bunker	AREA	11	55.90	-12.00	86.30	0	1	a Scientist	nym_themepark_imperial_scientist_100_h_inv_n	Dungeon	Research Lab	1	TURN	0	0	-	idle	0	0	0	300	120
 500310	LOK	lok_ntp_mercenary_bunker	AREA	11	73.60	-12.00	78.60	0	1	Kendo Ryzak	nym_themepark_kendo_ryzak_62_h_agg_e	Dungeon	Research Lab	1	TURN	0	0	-	idle	0	0	0	300	120
 500311	LOK	lok_ntp_mercenary_bunker	AREA	11	72.80	-12.00	79.80	0	1	Platt Pareja	nym_themepark_platt_pareja_62_h_agg_e	Dungeon	Research Lab	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -423,7 +423,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500423	LOK	lok_world	AREA	0	6199.10	62.11	900.91	0	1	a mercenary elite	mercenary_elite_56_h_agg_n	Outback	Lok	1	TURN	0	0	-	idle	0	0	0	300	120
 500424	LOK	lok_world	AREA	0	6189.33	61.97	913.42	0	1	a strong mercenary	mercenary_strong_54_h_agg_n	Outback	Lok	1	TURN	0	0	-	idle	0	0	0	300	120
 500425	LOK	lok_world	AREA	0	6192.58	61.93	909.65	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Lok	1	TURN	0	0	-	idle	0	0	0	300	120
-500426	LOK	lok_world	AREA	0	6055.13	11.92	5152.75	0	1	a marooned pirate	marooned_pirate_36_h_agg_n	Outback	Lok	4	IDLE	12	0	-	idle	0	0	0	300	120
+500426	LOK	lok_world	AREA	0	6055.13	11.92	5152.75	0	1	a marooned pirate	marooned_pirate_36_h_agg_n	Outback	Lok	4	LOITER	12	0	-	idle	0	0	0	300	120
 500427	LOK	lok_world	AREA	0	6053.67	11.92	5143.63	0	1	a marooned pirate captain	marooned_pirate_captain_37_h_agg_n	Outback	Lok	1	TURN	0	0	-	idle	0	0	0	300	120
 500428	LOK	lok_world	AREA	0	6018.00	11.99	5182.00	156	1	Etta	smuggler_fence_etta_100_h_inv_n	Outback	Lok	1	IDLE	0	0	-	idle	0	0	0	300	120
 500429	LOK	lok_world	PATROL	0	6013.47	12.00	5220.72	0	1	a criminal	smuggler_patrol_thief_4_40_h_att_n	Outback	Lok	1	PATROL	0	999	column	idle	0	0	0	300	120
@@ -539,7 +539,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500539	LOK	lok_world	PATROL	0	-3950.56	11.57	-3887.66	0	1	a criminal	smuggler_patrol_thief_4_40_h_att_n	POI	Canyon Corsair's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500540	LOK	lok_world	PATROL	0	-3896.39	11.81	-3932.09	0	1	a criminal	smuggler_patrol_thief_4_40_h_att_n	POI	Canyon Corsair's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
 500541	LOK	lok_world	PATROL	0	-3892.97	11.99	-3907.85	0	1	a criminal	smuggler_patrol_thief_4_40_h_att_n	POI	Canyon Corsair's Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-500542	LOK	lok_blood_razor_transport_outpost	AREA	3	-0.00	0.13	-5.95	0	1	a Blood Razor berzerker	blood_razor_berzerker_38_h_agg_n	POI	Downed Blood Razor Transport	1	IDLE	0	0	-	idle	0	0	0	300	120
+500542	LOK	lok_blood_razor_transport_outpost	AREA	3	-0.00	0.13	-5.95	0	1	a Blood Razor berzerker	blood_razor_berzerker_38_h_agg_n	POI	Downed Blood Razor Transport	1	TURN	0	0	-	idle	0	0	0	300	120
 500543	LOK	lok_blood_razor_transport_outpost	AREA	4	4.48	0.13	3.34	-152	1	a Blood Razor berzerker	blood_razor_berzerker_38_h_agg_n	POI	Downed Blood Razor Transport	1	IDLE	0	0	-	idle	0	0	0	300	120
 500544	LOK	lok_blood_razor_transport_shed	AREA	4	3.83	0.13	3.44	-177	1	a Blood Razor cutthroat	blood_razor_cutthroat_38_h_agg_n	POI	Downed Blood Razor Transport	1	IDLE	0	0	-	idle	0	0	0	300	120
 500545	LOK	lok_blood_razor_transport_shed	AREA	5	5.02	0.13	-4.38	-81	1	a Blood Razor cutthroat	blood_razor_cutthroat_38_h_agg_n	POI	Downed Blood Razor Transport	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -593,7 +593,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500593	LOK	lok_evil_droid_eng_cave	AREA	9	-107.47	-69.60	-110.50	0	1	a droideka	droideka_40_d_agg_n	POI	Droid Engineers Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 500594	LOK	lok_evil_droid_eng_cave	AREA	9	-97.14	-70.59	-107.47	0	1	a droideka	droideka_strong_55_d_agg_n	POI	Droid Engineers Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 500595	LOK	lok_evil_droid_eng_cave	AREA	9	-83.11	-72.27	-107.6	0	1	a droideka	droideka_weak_53_d_agg_n	POI	Droid Engineers Cave	1	TURN	0	0	-	idle	0	0	0	300	120
-500596	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0	1	Oono Mor'in	quest_u10_oono_morin_65_h_att_e	POI	Great Kimogila's Skeleton	1	IDLE	2	0	-	idle	0	0	0	300	120
+500596	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0	1	Oono Mor'in	quest_u10_oono_morin_65_h_att_e	POI	Great Kimogila's Skeleton	1	LOITER	2	0	-	idle	0	0	0	300	120
 500597	LOK	lok_world	AREA	0	3821.67	63.00	-542.40	51	1	Rei Reeven (injured)	nym_themepark_rei_reeven_100_h_inv_n	POI	Great Maze	1	IDLE	0	0	-	idle	0	0	0	300	120
 500598	LOK	lok_world	AREA	0	-1874.15	12.00	-3123.66	30	1	a commoner	commoner_100_h_inv_n	POI	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 500599	LOK	lok_world	AREA	0	-1844.42	12.00	-3069.08	90	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	POI	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -616,13 +616,13 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 500616	LOK	lok_world	AREA	0	-1991.73	11.24	-3345.88	0	1	Nym's elite enforcer	smuggler_patrol_elite_4_80_h_att_e	POI	Imperial Outpost	2	LOITER	4	0	-	idle	0	0	0	300	120
 500617	LOK	lok_world	AREA	0	-1981.52	11.12	-3407.14	0	1	Nym's elite enforcer	smuggler_patrol_elite_4_80_h_att_e	POI	Imperial Outpost	2	LOITER	4	0	-	idle	0	0	0	300	120
 500618	LOK	lok_world	AREA	0	-1936.50	12.09	-3386.84	0	1	Nym's elite enforcer	smuggler_patrol_elite_4_80_h_att_e	POI	Imperial Outpost	2	LOITER	4	0	-	idle	0	0	0	300	120
-500619	LOK	lok_world	AREA	0	1.16	11.95	2711.75	0	1	a giant dune kimogila	kimogila_giant_dune_81_c_agg_b	POI	Kimogila Town	1	TURN	20	0	-	idle	0	0	0	300	120
-500620	LOK	lok_world	AREA	0	-144.42	11.98	2753.73	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
-500621	LOK	lok_world	AREA	0	-136.70	11.97	2764.55	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
-500622	LOK	lok_world	AREA	0	-136.38	12.00	2658.42	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
-500623	LOK	lok_world	AREA	0	-130.61	12.07	2647.27	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
-500624	LOK	lok_world	AREA	0	-129.54	12.02	2774.12	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
-500625	LOK	lok_world	AREA	0	-126.66	12.10	2641.21	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	TURN	15	0	-	idle	0	0	0	300	120
+500619	LOK	lok_world	AREA	0	1.16	11.95	2711.75	0	1	a giant dune kimogila	kimogila_giant_dune_81_c_agg_b	POI	Kimogila Town	1	LOITER	20	0	-	idle	0	0	0	300	120
+500620	LOK	lok_world	AREA	0	-144.42	11.98	2753.73	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
+500621	LOK	lok_world	AREA	0	-136.70	11.97	2764.55	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
+500622	LOK	lok_world	AREA	0	-136.38	12.00	2658.42	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
+500623	LOK	lok_world	AREA	0	-130.61	12.07	2647.27	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
+500624	LOK	lok_world	AREA	0	-129.54	12.02	2774.12	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
+500625	LOK	lok_world	AREA	0	-126.66	12.10	2641.21	0	1	a kimogila hatchling	kimogila_hatchling_78_c_agg_b	POI	Kimogila Town	1	LOITER	15	0	-	idle	0	0	0	300	120
 500626	LOK	lok_world	AREA	0	-10.77	12.02	2712.69	-26	1	Cas Vankoo	cas_vankoo_80_h_agg_b	POI	Kimogila Town	1	IDLE	0	0	-	idle	0	0	0	300	120
 500627	LOK	lok_world	AREA	0	-87.19	12.00	2724.93	0	1	a commoner	commoner_60_h_att_n	POI	Kimogila Town	1	TURN	0	0	-	idle	0	0	0	300	120
 500628	LOK	lok_world	AREA	0	-86.32	12.00	2685.97	0	1	a commoner	commoner_60_h_att_n	POI	Kimogila Town	1	TURN	0	0	-	idle	0	0	0	300	120
