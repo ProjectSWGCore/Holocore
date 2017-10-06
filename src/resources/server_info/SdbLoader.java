@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.debug.Log;
@@ -217,6 +218,7 @@ public class SdbLoader {
 		
 		private final File file;
 		private final Map<String, Integer> columnNames;
+		private final AtomicLong lineNumber;
 		private DataType [] columnTypes;
 		private Object [] columnValues;
 		private BufferedReader reader;
@@ -224,6 +226,7 @@ public class SdbLoader {
 		private SingleSdbResultSet(File file) {
 			this.file = file;
 			this.columnNames = new HashMap<>();
+			this.lineNumber = new AtomicLong(0);
 			this.columnTypes = null;
 			this.columnValues = null;
 			this.reader = null;
@@ -301,15 +304,20 @@ public class SdbLoader {
 		}
 		
 		private void readNextLine(String line) {
+			long lineNum = lineNumber.incrementAndGet();
 			int prevIndex = 0;
 			int nextIndex = 0;
 			int i = 0;
-			for (i = 0; i < columnTypes.length-1; i++) {
-				nextIndex = line.indexOf('\t', prevIndex);
-				columnValues[i] = columnTypes[i].decode(line.substring(prevIndex, nextIndex));
-				prevIndex = nextIndex+1;
+			try {
+				for (i = 0; i < columnTypes.length-1; i++) {
+					nextIndex = line.indexOf('\t', prevIndex);
+					columnValues[i] = columnTypes[i].decode(line.substring(prevIndex, nextIndex));
+					prevIndex = nextIndex+1;
+				}
+				columnValues[i] = columnTypes[i].decode(line.substring(prevIndex));
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNum + " in column " + (i+1));
 			}
-			columnValues[i] = columnTypes[i].decode(line.substring(prevIndex));
 		}
 		
 		private static SingleSdbResultSet load(File file) throws IOException {
@@ -341,6 +349,7 @@ public class SdbLoader {
 				columnTypes[i] = parseColumnType(types[i]);
 				columnNames.put(columns[i], i);
 			}
+			lineNumber.set(2);
 			return true;
 		}
 		
