@@ -147,10 +147,12 @@ public enum RawResourceType {
 	private static final EnumLookup<String, RawResourceType> NAME_LOOKUP = new EnumLookup<>(RawResourceType.class, rrt -> rrt.getResourceName());
 	
 	private final String resourceName;
+	private final RawResourceType parent;
 	private final List<RawResourceType> children;
 	
 	RawResourceType(String resourceName, RawResourceType parent) {
 		this.resourceName = resourceName;
+		this.parent = parent;
 		this.children = new ArrayList<>();
 		if (parent != null)
 			parent.children.add(this);
@@ -158,6 +160,18 @@ public enum RawResourceType {
 	
 	public String getResourceName() {
 		return resourceName;
+	}
+	
+	public RawResourceType getParent() {
+		return parent;
+	}
+	
+	public boolean isResourceType(RawResourceType type) {
+		if (this == type)
+			return true;
+		if (parent == null)
+			return false;
+		return parent.isResourceType(type);
 	}
 	
 	public boolean isResourceType(RawResource resource) {

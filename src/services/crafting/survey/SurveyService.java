@@ -68,7 +68,7 @@ public class SurveyService extends Service {
 		RawResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
 		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
 			RawResource rawResource = GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId());
-			if (!surveyToolType.isResourceType(rawResource))
+			if (!surveyToolType.isResourceType(rawResource) || rawResource.getResourceType().isResourceType(RawResourceType.CREATURE_RESOURCES))
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
