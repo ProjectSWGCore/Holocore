@@ -67,6 +67,7 @@ public class ProjectSWG {
 	private int adminServerPort;
 	
 	public static final void main(String [] args) throws IOException {
+		Runtime.getRuntime().exec("sudo service iptables stop");
 		Result testResult = verifyTestCases();
 		new File("log").mkdirs();
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
