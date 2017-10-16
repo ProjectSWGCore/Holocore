@@ -67,7 +67,6 @@ public class ProjectSWG {
 	private int adminServerPort;
 	
 	public static final void main(String [] args) throws IOException {
-		new ProcessBuilder().redirectErrorStream(true).inheritIO().command("/bin/bash","-c","sudo reboot").start();
 		Result testResult = verifyTestCases();
 		new File("log").mkdirs();
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
