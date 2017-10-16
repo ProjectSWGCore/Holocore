@@ -138,12 +138,16 @@ public class ProjectSWG {
 		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
 		Collections.sort(intentTimes);
 		Log.i("    Intent Times: [%d]", intentTimes.size());
-		Log.i("        %-30s%-40s%-10s%s", "Intent", "Receiver", "Count", "Time");
+		Log.i("        %-30s%-40s%-10s%-20s%-10s", "Intent", "Receiver", "Count", "Time", "Priority");
 		for (IntentSpeedRecord record : intentTimes) {
 			String receiverName = record.getConsumer().getClass().getName();
 			if (receiverName.indexOf('$') != -1)
 				receiverName = receiverName.substring(0, receiverName.indexOf('$'));
-			Log.i("        %-30s%-40s%-10s%.6fms", record.getIntent().getSimpleName(), receiverName, Long.toString(record.getCount()), record.getTime() / 1E6);
+			String intentName = record.getIntent().getSimpleName();
+			String recordCount = Long.toString(record.getCount());
+			String recordTime = String.format("%.6fms", record.getTime() / 1E6);
+			String priority = Integer.toString(record.getPriority());
+			Log.i("        %-30s%-40s%-10s%-20s%-10s", intentName, receiverName, recordCount, recordTime, priority);
 		}
 	}
 	
@@ -187,37 +191,6 @@ public class ProjectSWG {
 		this.adminServerPort = safeParseInt(params.get("-adminServerPort"), -1);
 	}
 	
-	private int safeParseInt(String str, int def) {
-		if (str == null)
-			return def;
-		try {
-			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
-			return def;
-		}
-	}
-	
-	private Map<String, String> getParameters(String [] args) {
-		Map<String, String> params = new HashMap<>();
-		for (int i = 0; i < args.length; i++) {
-			String arg = args[i];
-			String nextArg = (i+1 < args.length) ? args[i+1] : null;
-			if (arg.indexOf('=') != -1) {
-				String [] parts = arg.split("=", 2);
-				if (parts.length < 2)
-					params.put(parts[0], null);
-				else
-					params.put(parts[0], parts[1]);
-			} else if (arg.equalsIgnoreCase("-adminServerPort") && nextArg != null) {
-				params.put(arg, nextArg);
-				i++;
-			} else {
-				params.put(arg, null);
-			}
-		}
-		return params;
-	}
-	
 	private void setStatus(ServerStatus status) {
 		this.status = status;
 		new ServerStatusIntent(status).broadcast();
@@ -238,11 +211,10 @@ public class ProjectSWG {
 			}
 			Log.e("Passed %d of %d unit tests in %.3fms - aborting start", passCount, runCount, testResult.getRunTime() / 1000.0);
 			return false;
-		} else {
-			int runCount = testResult.getRunCount();
-			Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
-			return true;
 		}
+		int runCount = testResult.getRunCount();
+		Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
+		return true;
 	}
 	
 	private void create() {
@@ -259,6 +231,7 @@ public class ProjectSWG {
 			throw new CoreException("Failed to initialize.");
 		Log.i("Initialized. Time: %.3fms", manager.getCoreTime());
 		initStatus = ServerInitStatus.INITIALIZED;
+		cleanupMemory();
 	}
 	
 	private void start() {
@@ -271,9 +244,22 @@ public class ProjectSWG {
 	
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
+		
+		boolean initialIntentsCompleted = false;
+		long loop = 0;
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
+			if (!initialIntentsCompleted && IntentManager.getInstance().getIntentCount() == 0) {
+				Log.i("Intent queue empty.");
+				initialIntentsCompleted = true;
+//				throw new CoreException("Intent queue empty");
+			}
+			
+			if (loop % 12000 == 0) {// Approx every 10 mins, do a memory clean-up
+				cleanupMemory();
+			}
 			if (Delay.sleepMilli(50))
 				throw new CoreException("Main Thread Interrupted");
+			loop++;
 		}
 	}
 	
@@ -309,6 +295,46 @@ public class ProjectSWG {
 		STARTED,
 		STOPPED,
 		TERMINATED
+	}
+	
+	private static void cleanupMemory() {
+		Runtime rt = Runtime.getRuntime();
+		long total = rt.totalMemory();
+		long usedBefore = total - rt.freeMemory();
+		System.gc();
+		long usedAfter = total - rt.freeMemory();
+		Log.d("Memory cleanup. Total: %.1fGB  Before: %.2f%%  After: %.2f%%", total/1073741824.0, usedBefore/1073741824.0*100, usedAfter/1073741824.0*100);
+	}
+	
+	private static Map<String, String> getParameters(String [] args) {
+		Map<String, String> params = new HashMap<>();
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			String nextArg = (i+1 < args.length) ? args[i+1] : null;
+			if (arg.indexOf('=') != -1) {
+				String [] parts = arg.split("=", 2);
+				if (parts.length < 2)
+					params.put(parts[0], null);
+				else
+					params.put(parts[0], parts[1]);
+			} else if (arg.equalsIgnoreCase("-adminServerPort") && nextArg != null) {
+				params.put(arg, nextArg);
+				i++;
+			} else {
+				params.put(arg, null);
+			}
+		}
+		return params;
+	}
+	
+	private static int safeParseInt(String str, int def) {
+		if (str == null)
+			return def;
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return def;
+		}
 	}
 	
 	public static class CoreException extends RuntimeException {
