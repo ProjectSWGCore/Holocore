@@ -31,11 +31,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import intents.combat.CreatureKilledIntent;
 import intents.experience.ExperienceIntent;
@@ -54,7 +56,7 @@ public class CombatXpService extends Service {
 
 	public CombatXpService() {
 		xpData = new HashMap<>();
-		groupObjects = new HashMap<>();
+		groupObjects = new ConcurrentHashMap<>();
 	}
 	
 	@Override
@@ -90,20 +92,16 @@ public class CombatXpService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject object = i.getObject();
 		
-		if(object instanceof GroupObject) {
-			synchronized (groupObjects) {
-				groupObjects.put(object.getObjectId(), (GroupObject) object);
-			}
+		if (object.getBaselineType() == BaselineType.GRUP) {
+			groupObjects.put(object.getObjectId(), (GroupObject) object);
 		}
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
 		SWGObject object = i.getObject();
 		
-		synchronized (groupObjects) {
-			if(object instanceof GroupObject && groupObjects.remove(object.getObjectId()) == null) {
-				Log.w("%s was expected to be in the GroupObject mapping but wasn't", object);
-			}
+		if(object instanceof GroupObject && groupObjects.remove(object.getObjectId()) == null) {
+			Log.w("%s was expected to be in the GroupObject mapping but wasn't", object);
 		}
 	}
 	

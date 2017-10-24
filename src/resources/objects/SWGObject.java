@@ -479,6 +479,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return location.getPositionZ();
 	}
 	
+	public int getTruncX() {
+		return (int) location.getPositionX();
+	}
+	
+	public int getTruncY() {
+		return (int) location.getPositionY();
+	}
+	
+	public int getTruncZ() {
+		return (int) location.getPositionZ();
+	}
+	
 	public Terrain getTerrain() {
 		return location.getTerrain();
 	}

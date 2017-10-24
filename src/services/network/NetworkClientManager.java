@@ -39,12 +39,17 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.TCPServer;
 import com.projectswg.common.network.TCPServer.TCPCallback;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.admin.AdminPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 import intents.network.CloseConnectionIntent;
+import intents.network.ConnectionClosedIntent;
+import intents.network.InboundPacketPendingIntent;
+import intents.network.OutboundPacketIntent;
 import main.ProjectSWG.CoreException;
-import network.AdminNetworkClient;
 import network.NetworkClient;
+import network.NetworkClient.NetworkClientFilter;
 import resources.config.ConfigFile;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
@@ -53,8 +58,6 @@ import services.CoreManager;
 
 public class NetworkClientManager extends Manager {
 	
-	private final InboundNetworkManager inboundManager;
-	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
 	private final UDPServer udpServer;
@@ -62,40 +65,49 @@ public class NetworkClientManager extends Manager {
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
-		tcpServer = new TCPServer(getBindPort(), getBufferSize());
-		try {
-			udpServer = new UDPServer(getBindPort(), 1024);
-		} catch (SocketException e) {
-			throw new CoreException("Socket Exception on UDP bind: " + e);
+		
+		{
+			int bindPort = getBindPort();
+			int bufferSize = getBufferSize();
+			tcpServer = new TCPServer(bindPort, bufferSize);
+			try {
+				udpServer = new UDPServer(bindPort, bufferSize);
+			} catch (SocketException e) {
+				throw new CoreException("Socket Exception on UDP bind: " + e);
+			}
+			udpServer.setCallback(this::onUdpPacket);
 		}
-		int adminServerPort = CoreManager.getGalaxy().getAdminServerPort();
-		if (adminServerPort <= 0)
-			adminServer = null;
-		else
-			adminServer = new TCPServer(InetAddress.getLoopbackAddress(), adminServerPort, 1024);
-		udpServer.setCallback(SWGPacket -> onUdpPacket(SWGPacket));
-		inboundManager = new InboundNetworkManager(clientManager);
-		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
+		{
+			int adminServerPort = CoreManager.getGalaxy().getAdminServerPort();
+			if (adminServerPort <= 0)
+				adminServer = null;
+			else
+				adminServer = new TCPServer(InetAddress.getLoopbackAddress(), adminServerPort, 1024);
+		}
 		
-		addChildService(inboundManager);
-		addChildService(outboundManager);
-		
-		registerForIntent(CloseConnectionIntent.class, cci -> handleCloseConnectionIntent(cci));
+		registerForIntent(CloseConnectionIntent.class, this::handleCloseConnectionIntent);
+		registerForIntent(ConnectionClosedIntent.class, this::handleConnectionClosedIntent);
+		registerForIntent(InboundPacketPendingIntent.class, NetworkClientManager::handleInboundPacketPendingIntent);
+		registerForIntent(OutboundPacketIntent.class, this::handleOutboundPacketIntent);
 	}
 	
 	@Override
 	public boolean start() {
+		int bindPort = -1;
 		try {
+			bindPort = getBindPort();
 			tcpServer.bind();
+			bindPort = CoreManager.getGalaxy().getAdminServerPort();
 			if (adminServer != null) {
 				adminServer.bind();
-				adminServer.setCallback(new AdminNetworkCallback());
+				adminServer.setCallback(new NetworkCallback(clientManager, adminServer, new AdminNetworkFilter()));
 			}
-			tcpServer.setCallback(new StandardNetworkCallback());
+			tcpServer.setCallback(new NetworkCallback(clientManager, tcpServer, new StandardNetworkFilter()));
 		} catch (IOException e) {
-			Log.e(e);
 			if (e instanceof BindException)
-				Log.e("Failed to bind to " + getBindPort());
+				Log.e("Failed to bind to %d", bindPort);
+			else
+				Log.e(e);
 			return false;
 		}
 		return super.start();
@@ -116,29 +128,23 @@ public class NetworkClientManager extends Manager {
 		return super.terminate();
 	}
 	
-	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
-		NetworkClient client = clientManager.getClient(ccii.getNetworkId());
-		if (client != null) {
-			if (client instanceof AdminNetworkClient)
-				adminServer.disconnect(client.getAddress());
-			else
-				tcpServer.disconnect(client.getAddress());
-		}
+	private void disconnect(long networkId) {
+		disconnect(clientManager.getClient(networkId));
 	}
 	
-	private int getBindPort() {
-		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
-	}
-	
-	private int getBufferSize() {
-		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
-	}
-	
-	private void onUdpPacket(UDPPacket SWGPacket) {
-		if (SWGPacket.getLength() <= 0)
+	private void disconnect(NetworkClient client) {
+		if (client == null)
 			return;
-		switch (SWGPacket.getData()[0]) {
-			case 1: sendState(SWGPacket.getAddress(), SWGPacket.getPort()); break;
+		
+		tcpServer.disconnect(client.getAddress());
+		adminServer.disconnect(client.getAddress());
+	}
+	
+	private void onUdpPacket(UDPPacket packet) {
+		if (packet.getLength() <= 0)
+			return;
+		switch (packet.getData()[0]) {
+			case 1: sendState(packet.getAddress(), packet.getPort()); break;
 			default: break;
 		}
 	}
@@ -151,74 +157,115 @@ public class NetworkClientManager extends Manager {
 		udpServer.send(port, addr, data.array());
 	}
 	
-	private class StandardNetworkCallback implements TCPCallback {
+	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
+		disconnect(ccii.getNetworkId());
+	}
+	
+	private void handleConnectionClosedIntent(ConnectionClosedIntent cci) {
+		disconnect(cci.getNetworkId());
+	}
+	
+	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
+		NetworkClient client = clientManager.getClient(opi.getNetworkId());
+		if (client == null)
+			return;
 		
+		client.addToOutbound(opi.getPacket());
+	}
+	
+	private static void handleInboundPacketPendingIntent(InboundPacketPendingIntent ippi) {
+		ippi.getClient().processInbound();
+	}
+	
+	private static int getBindPort() {
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
+	}
+	
+	private static int getBufferSize() {
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+	}
+	
+	private static class NetworkCallback implements TCPCallback {
+		
+		private final ClientManager clientManager;
+		private final TCPServer server;
 		private final PacketSender sender;
+		private final NetworkClientFilter filter;
 		
-		public StandardNetworkCallback() {
-			this.sender = new PacketSender(tcpServer);
+		public NetworkCallback(ClientManager clientManager, TCPServer server, NetworkClientFilter filter) {
+			this.clientManager = clientManager;
+			this.server = server;
+			this.sender = new PacketSender(server);
+			this.filter = filter;
 		}
 		
 		@Override
 		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
-			NetworkClient client = clientManager.createSession(addr, sender);
-			client.onConnected();
-			inboundManager.onSessionCreated(client);
-			outboundManager.onSessionCreated(client);
+			NetworkClient client = clientManager.createSession(addr, sender, filter);
+			client.connect();
 		}
 		
 		@Override
 		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.getClient(addr);
-			if (client != null) {
-				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
-				client.onSessionDestroyed();
-				inboundManager.onSessionDestroyed(client);
-				outboundManager.onSessionDestroyed(client);
-			}
-			tcpServer.disconnect(addr);
+			if (client == null)
+				return;
+			
+			if (client.isConnected())
+				client.close(ConnectionStoppedReason.APPLICATION);
+			clientManager.destroySession(client.getNetworkId());
+			server.disconnect(addr);
 		}
 		
 		@Override
 		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
-			inboundManager.onInboundData(addr, data);
-		}
-		
-	}
-	
-	private class AdminNetworkCallback implements TCPCallback {
-		
-		private final PacketSender sender;
-		
-		public AdminNetworkCallback() {
-			this.sender = new PacketSender(adminServer);
-		}
-		
-		@Override
-		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
-			NetworkClient client = clientManager.createAdminSession(addr, sender);
-			client.onConnected();
-			inboundManager.onSessionCreated(client);
-			outboundManager.onSessionCreated(client);
-		}
-		
-		@Override
-		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.getClient(addr);
-			if (client != null) {
-				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
-				client.onSessionDestroyed();
-				inboundManager.onSessionDestroyed(client);
-				outboundManager.onSessionDestroyed(client);
+			if (client == null)
+				return;
+			
+			try {
+				if (client.addToBuffer(data))
+					InboundPacketPendingIntent.broadcast(client);
+			} catch (IOException e) {
+				Log.e("Socket failed to handle incoming data: %s", addr);
+				Log.e(e);
+				onConnectionDisconnect(s, addr);
 			}
-			adminServer.disconnect(addr);
-		}
-		
-		@Override
-		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
-			inboundManager.onInboundData(addr, data);
 		}
 		
 	}
 	
+	/**
+	 * Network filter for local admin connections
+	 */
+	private static class AdminNetworkFilter implements NetworkClientFilter {
+		
+		@Override
+		public boolean isInboundAllowed(SWGPacket p) {
+			return true;
+		}
+		
+		@Override
+		public boolean isOutboundAllowed(SWGPacket p) {
+			return true;
+		}
+		
+	}
+	
+	/**
+	 * Standard network filter for local or remote connections
+	 */
+	private static class StandardNetworkFilter implements NetworkClientFilter {
+		
+		@Override
+		public boolean isInboundAllowed(SWGPacket p) {
+			return !(p instanceof AdminPacket);
+		}
+		
+		@Override
+		public boolean isOutboundAllowed(SWGPacket p) {
+			return !(p instanceof AdminPacket);
+		}
+		
+	}
 }

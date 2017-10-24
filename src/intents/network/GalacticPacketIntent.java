@@ -37,8 +37,8 @@ public class GalacticPacketIntent extends GalacticIntent {
 	private SWGPacket SWGPacket;
 	private Player player;
 	
-	public GalacticPacketIntent(SWGPacket SWGPacket, Player player) {
-		setPacket(SWGPacket);
+	public GalacticPacketIntent(SWGPacket packet, Player player) {
+		setPacket(packet);
 		setPlayer(player);
 	}
 	

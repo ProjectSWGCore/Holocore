@@ -41,7 +41,6 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.debug.Log;
 
-import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
@@ -86,18 +85,6 @@ public class TerminalService extends Service {
 		return super.initialize();
 	}
 	
-	@Override
-	public boolean start() {
-		new RadialRegisterIntent(templates, true).broadcast();
-		return super.start();
-	}
-	
-	@Override
-	public boolean stop() {
-		new RadialRegisterIntent(templates, false).broadcast();
-		return super.stop();
-	}
-	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
 		String script = lookupScript(rri.getTarget().getTemplate());
 		if (script == null)
@@ -118,24 +105,16 @@ public class TerminalService extends Service {
 		if (!templates.contains(iff))
 			return null;
 		synchronized (getScriptForIffStatement) {
-			ResultSet set = null;
 			try {
 				getScriptForIffStatement.setString(1, iff);
-				set = getScriptForIffStatement.executeQuery();
-				if (set.next())
-					return set.getString("script");
-				else
+				try (ResultSet set = getScriptForIffStatement.executeQuery()) {
+					if (set.next())
+						return set.getString("script");
+					
 					Log.e("Cannot find script for template: " + iff);
+				}
 			} catch (SQLException e) {
 				Log.e(e);
-			} finally {
-				if (set != null) {
-					try {
-						set.close();
-					} catch (SQLException e) {
-						Log.e(e);
-					}
-				}
 			}
 		}
 		return null;

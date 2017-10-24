@@ -27,9 +27,7 @@
  ***********************************************************************************/
 package services.objects;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.radial.RadialItem;
@@ -41,7 +39,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMe
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
 
 import intents.network.GalacticPacketIntent;
-import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
@@ -51,18 +48,14 @@ import resources.player.Player;
 import services.galaxy.GalacticManager;
 
 public class RadialService extends Service {
-
-	private final Set<String> templatesRegistered;
-
+	
 	public RadialService() {
-		templatesRegistered = new HashSet<>();
-
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(RadialResponseIntent.class, rri -> handleRadialResponseIntent(rri));
-		registerForIntent(RadialRegisterIntent.class, rri -> handleRadialRegisterIntent(rri));
+		registerForIntent(GalacticPacketIntent.class, RadialService::handleGalacticPacketIntent);
+		registerForIntent(RadialResponseIntent.class, RadialService::handleRadialResponseIntent);
+		// RadialRegisterIntent
 	}
 
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){
+	private static void handleGalacticPacketIntent(GalacticPacketIntent gpi){
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
 			onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
@@ -71,17 +64,7 @@ public class RadialService extends Service {
 		}
 	}
 	
-	private void handleRadialRegisterIntent(RadialRegisterIntent rri){
-		synchronized (templatesRegistered) {
-			if (rri.isRegister()) {
-				templatesRegistered.addAll(rri.getTemplates());
-			} else {
-				templatesRegistered.removeAll(rri.getTemplates());
-			}
-		}
-	}
-	
-	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
+	private static void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
 		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
 		if (target == null)
@@ -99,12 +82,12 @@ public class RadialService extends Service {
 		new RadialRequestIntent(player, target, request).broadcast();
 	}
 
-	private void handleRadialResponseIntent(RadialResponseIntent rri) {
+	private static void handleRadialResponseIntent(RadialResponseIntent rri) {
 		Player player = rri.getPlayer();
 		sendResponse(player, rri.getTarget(), rri.getOptions(), rri.getCounter());
 	}
 
-	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
+	private static void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
 		if (target == null) {
 			Log.e("Selection target [%d] does not exist!", select.getObjectId());
@@ -122,7 +105,7 @@ public class RadialService extends Service {
 		new RadialSelectionIntent(player, target, selection).broadcast();
 	}
 
-	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
+	private static void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
 		menuResponse.setTargetId(target.getObjectId());
 		menuResponse.setRequestorId(player.getCreatureObject().getObjectId());

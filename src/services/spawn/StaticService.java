@@ -55,20 +55,43 @@ public class StaticService extends Service {
 		spawnableObjects = new HashMap<>();
 		loadSupportingObjects();
 		
-		registerForIntent(ObjectCreatedIntent.class, oci -> createSupportingObjects(oci.getObject()));
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
 	}
 	
 	private void loadSupportingObjects() {
 		long startTime = StandardLog.onStartLoad("static objects");
+		try {
+			loadSpawnableObjects(spawnableObjects);
+		} catch (IOException e) {
+			Log.e(e);
+			return;
+		}
+		StandardLog.onEndLoad(spawnableObjects.size(), "static objects", startTime);
+	}
+	
+	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
+		SWGObject object = oci.getObject();
+		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
+		if (objects == null)
+			return;
+		Location world = object.getWorldLocation();
+		for (SpawnedObject spawn : objects) {
+			spawn.createObject(object, world);
+		}
+	}
+	
+	private static Map<String, String> createTypeMap() throws IOException {
 		Map<String, String> typeToIff = new HashMap<>();
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/types.sdb"))) {
 			while (set.next()) {
 				typeToIff.put(set.getText(1), set.getText(0));
 			}
-		} catch (IOException e) {
-			Log.e(e);
-			return;
 		}
+		return typeToIff;
+	}
+	
+	private static void loadSpawnableObjects(Map<String, List<SpawnedObject>> spawnableObjects) throws IOException {
+		Map<String, String> typeToIff = createTypeMap();
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/spawns.sdb"))) {
 			while (set.next()) {
 				String iff = typeToIff.get(set.getText("iff_type"));
@@ -77,20 +100,6 @@ public class StaticService extends Service {
 					spawnableObjects.put(iff, objects = new ArrayList<>());
 				objects.add(new SpawnedObject(set));
 			}
-		} catch (IOException e) {
-			Log.e(e);
-			return;
-		}
-		StandardLog.onEndLoad(spawnableObjects.size(), "static objects", startTime);
-	}
-	
-	private void createSupportingObjects(SWGObject object) {
-		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
-		if (objects == null)
-			return;
-		Location world = object.getWorldLocation();
-		for (SpawnedObject spawn : objects) {
-			spawn.createObject(object, world);
 		}
 	}
 	

@@ -32,7 +32,7 @@ import java.util.EnumMap;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
@@ -65,73 +65,60 @@ public class AwarenessHandler implements AutoCloseable {
 	
 	private void loadTerrainMaps(TerrainMapCallback callback) {
 		for (Terrain t : Terrain.values()) {
-			TerrainMap map = new TerrainMap(t);
+			TerrainMap map = new TerrainMap(t, callback);
 			map.start();
-			map.setCallback(callback);
 			terrains.put(t, map);
 		}
 	}
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
-		// Remove from previous awareness
-		if (obj.getTerrain() != requestedLocation.getTerrain() && obj.getTerrain() != null) {
-			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
-			if (oldTerrainMap != null)
-				oldTerrainMap.removeWithoutUpdate(obj);
-		}
 		// Update location
-		obj.setLocation(requestedLocation);
-		if (obj.getParent() != null && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
-			obj.moveToContainer(null);
-		obj.onObjectMoved();
+		updateLocation(obj, null, requestedLocation);
 		// Update awareness
-		if (obj.getTerrain() != Terrain.GONE) {
-			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
-			if (map != null) {
-				map.moveWithinMap(obj);
-			} else {
-				Log.e("Unknown terrain: %s", requestedLocation.getTerrain());
-			}
+		Terrain terrain = requestedLocation.getTerrain();
+		if (terrain != null && terrain != Terrain.GONE) {
+			TerrainMap map = getTerrainMap(terrain);
+			map.moveWithinMap(obj);
 		}
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
 		Assert.notNull(parent);
 		// Remove from previous awareness
-		TerrainMap oldMap = getTerrainMap(obj.getTerrain());
-		if (oldMap != null)
-			oldMap.removeWithoutUpdate(obj);
+		TerrainMap.removeWithoutUpdate(obj);
 		// Update location
-		if (obj.getParent() != parent && !(obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)))
-			obj.moveToContainer(parent);
-		obj.setLocation(requestedLocation);
-		obj.onObjectMoved();
+		updateLocation(obj, parent, requestedLocation);
 		// Update awareness
 		obj.resetAwareness();
 	}
-	
+
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		if (obj.getTerrain() != Terrain.GONE) {
-			TerrainMap map = getTerrainMap(obj);
-			Assert.notNull(map);
-			if (disappearObjects)
+		if (disappearObjects) {
+			Terrain terrain = obj.getTerrain();
+			if (terrain != null && terrain != Terrain.GONE) {
+				TerrainMap map = getTerrainMap(terrain);
 				map.removeFromMap(obj);
-			else
-				map.removeWithoutUpdate(obj);
+			}
+		} else {
+			TerrainMap.removeWithoutUpdate(obj);
 		}
 		if (disappearCustom)
 			obj.clearCustomAware(true);
 	}
 	
-	private TerrainMap getTerrainMap(SWGObject object) {
-		Terrain t = object.getTerrain();
-		if (t == null)
-			return null;
-		return getTerrainMap(t);
-	}
-	
 	private TerrainMap getTerrainMap(Terrain t) {
 		return terrains.get(t);
+	}
+	
+	private static void updateLocation(SWGObject obj, SWGObject parent, Location requestedLocation) {
+		obj.setLocation(requestedLocation);
+		if (isRider(obj, parent))
+			obj.moveToContainer(parent);
+		obj.onObjectMoved();
+	}
+	
+	private static boolean isRider(SWGObject obj, SWGObject parent) {
+		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
 	}
 	
 }

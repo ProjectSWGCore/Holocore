@@ -92,19 +92,19 @@ public class GalacticManager extends Manager {
 	}
 	
 	private void handleInboundPacketIntent(InboundPacketIntent ipi){
-		Player player = playerManager.getPlayerFromNetworkId(((InboundPacketIntent) ipi).getNetworkId());
+		Player player = playerManager.getPlayerFromNetworkId(ipi.getNetworkId());
 		Assert.notNull(player);
-		GalacticPacketIntent g = new GalacticPacketIntent(((InboundPacketIntent) ipi).getPacket(), player);
+		GalacticPacketIntent g = new GalacticPacketIntent(ipi.getPacket(), player);
 		g.setGalacticManager(this);
 		prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
 	}
 	
 	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi){
-		prevIntentMap.put(((ConnectionOpenedIntent) coi).getNetworkId(), new IntentChain(coi));
+		prevIntentMap.put(coi.getNetworkId(), new IntentChain(coi));
 	}
 	
 	private void handleConnectionClosedIntent(ConnectionClosedIntent cci){
-		prevIntentMap.remove(((ConnectionClosedIntent) cci).getNetworkId()).reset();
+		prevIntentMap.remove(cci.getNetworkId()).reset();
 	}
 	
 	public ObjectManager getObjectManager() {
