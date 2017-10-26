@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.spawn;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -36,6 +37,8 @@ import com.projectswg.common.data.location.Location;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
+import resources.server_info.loader.npc.NpcPatrolRouteLoader.PatrolRouteWaypoint;
+import resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
 
 public final class Spawner {
 
@@ -58,6 +61,8 @@ public final class Spawner {
 	private SpawnerFlag flags;
 	private PvpFaction faction;
 	private boolean specForce;
+	private List<PatrolRouteWaypoint> patrolRoute;
+	private PatrolFormation formation;
 	
 	public Spawner(int id) {
 		this.id = id;
@@ -216,6 +221,22 @@ public final class Spawner {
 		return specForce;
 	}
 	
+	public void setPatrolRoute(List<PatrolRouteWaypoint> patrolRoute) {
+		this.patrolRoute = patrolRoute;
+	}
+	
+	public List<PatrolRouteWaypoint> getPatrolRoute() {
+		return patrolRoute;
+	}
+	
+	public PatrolFormation getFormation() {
+		return formation;
+	}
+	
+	public void setFormation(PatrolFormation formation) {
+		this.formation = formation;
+	}
+
 	public enum SpawnerFlag {
 		AGGRESSIVE,
 		ATTACKABLE,
