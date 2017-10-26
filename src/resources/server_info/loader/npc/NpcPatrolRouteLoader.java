@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
@@ -55,6 +56,10 @@ public class NpcPatrolRouteLoader {
 	
 	public int getPatrolRouteCount() {
 		return patrolRouteMap.size();
+	}
+	
+	public void forEach(Consumer<List<PatrolRouteWaypoint>> c) {
+		patrolRouteMap.values().forEach(c);
 	}
 	
 	private void loadFromFile() {

@@ -46,6 +46,7 @@ import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
 import resources.objects.custom.DefaultAIObject;
@@ -145,6 +146,7 @@ public final class SpawnerService extends Service {
 		
 		SpawnLoader loader = new SpawnLoader(this::spawnNPC);
 		loader.load();
+		loader.createPatrolRouteWaypoints();
 		
 		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
 	}
@@ -190,6 +192,30 @@ public final class SpawnerService extends Service {
 			staticSpawnLoader.iterate(this::loadStaticSpawn);
 		}
 		
+		public void createPatrolRouteWaypoints() {
+			npcPatrolRouteLoader.forEach(route -> {
+				for (PatrolRouteWaypoint waypoint : route) {
+					SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
+					obj.setLocation(Location.builder()
+							.setTerrain(waypoint.getTerrain())
+							.setX(waypoint.getX())
+							.setY(waypoint.getY())
+							.setZ(waypoint.getZ()).build());
+					if (!waypoint.getBuildingId().isEmpty()) {
+						BuildingLoaderInfo buildingInfo = buildingLoader.getBuilding(waypoint.getBuildingId());
+						SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
+						if (building instanceof BuildingObject) {
+							SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
+							if (cell instanceof CellObject) {
+								obj.moveToContainer(cell);
+							}
+						}
+					}
+					ObjectCreatedIntent.broadcast(obj);
+				}
+			});
+		}
+		
 		private void loadStaticSpawn(StaticSpawnInfo spawn) {
 			building = buildingLoader.getBuilding(spawn.getBuildingId());
 			if (building == null) {
@@ -213,16 +239,6 @@ public final class SpawnerService extends Service {
 				waypoints = null;
 			} else {
 				waypoints = npcPatrolRouteLoader.getPatrolRoute(spawn.getPatrolId());
-				Log.d("Waypoints: %s", waypoints);
-				for (PatrolRouteWaypoint waypoint : waypoints) {
-					SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
-					obj.setLocation(Location.builder()
-							.setTerrain(waypoint.getTerrain())
-							.setX(waypoint.getX())
-							.setY(waypoint.getY())
-							.setZ(waypoint.getZ()).build());
-					ObjectCreatedIntent.broadcast(obj);
-				}
 			}
 			
 			loadSpawner(spawn);
