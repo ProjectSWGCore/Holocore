@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.objects;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
 
@@ -83,6 +84,9 @@ public final class ObjectCreator {
 		if (!template.endsWith(".iff"))
 			return null;
 		template = ClientFactory.formatToSharedFile(template);
+		File f = new File("clientdata/", template);
+		if (!f.exists())
+			Log.w("File doesn't exist: '%s'  getAbsoluteExists=%b", f, f.getAbsoluteFile().exists());
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
 		if (attributes == null)
 			return null;
