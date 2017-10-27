@@ -30,6 +30,7 @@ package services.objects;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData;
@@ -64,6 +65,7 @@ public final class ObjectCreator {
 	
 	private static final Object OBJECT_ID_MUTEX = new Object();
 	private static long nextObjectId = 1;
+	private static final AtomicLong MYCOUNTER = new AtomicLong(0);
 	
 	private static void updateMaxObjectId(long objectId) {
 		synchronized (OBJECT_ID_MUTEX) {
@@ -84,9 +86,17 @@ public final class ObjectCreator {
 		if (!template.endsWith(".iff"))
 			return null;
 		template = ClientFactory.formatToSharedFile(template);
-		File f = new File("clientdata/", template);
-		if (!f.exists())
-			Log.w("File doesn't exist: '%s'  getAbsoluteExists=%b", new File(f.getAbsolutePath()), new File(f.getAbsolutePath()).exists());
+		{ // Windows testing
+			File f = new File("clientdata/", template);
+			MYCOUNTER.incrementAndGet();
+			if (!f.exists()) {
+				Log.w("File #%d doesn't exist: '%s'  getAbsoluteExists=%b", MYCOUNTER.get(), new File(f.getAbsolutePath()), new File(f.getAbsolutePath()).exists());
+				while (f != null) {
+					Log.w("    Parent: '%s' exists=%b", f.getAbsolutePath(), f.exists());
+					f = f.getParentFile();
+				}
+			}
+		}
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
 		if (attributes == null)
 			return null;
