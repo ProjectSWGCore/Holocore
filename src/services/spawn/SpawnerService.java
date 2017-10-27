@@ -50,7 +50,7 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
-import resources.objects.custom.RandomAIObject;
+import resources.objects.custom.AIObject;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 import resources.server_info.loader.BuildingLoader;
@@ -121,7 +121,7 @@ public final class SpawnerService extends Service {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject destroyedObject = doi.getObject();
-		if (!(destroyedObject instanceof RandomAIObject))
+		if (!(destroyedObject instanceof AIObject))
 			return;
 		
 		Spawner spawner = spawnerMap.remove(destroyedObject.getObjectId());
