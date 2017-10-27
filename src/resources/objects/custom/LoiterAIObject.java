@@ -28,44 +28,29 @@
 package resources.objects.custom;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 
 import intents.object.MoveObjectIntent;
 
-public class DefaultAIObject extends AIObject {
+/**
+ * AI object that loiters the area
+ */
+public class LoiterAIObject extends RandomAIObject {
 	
-	private Location mainLocation;
-	private AIBehavior behavior;
-	private int updateCounter;
+	private final AtomicInteger updateCounter;
 	private double radius;
 	
-	public DefaultAIObject(long objectId) {
+	public LoiterAIObject(long objectId) {
 		super(objectId);
-		behavior = AIBehavior.IDLE;
-		updateCounter = 0;
-		radius = 0;
-	}
-	
-	@Override
-	protected void aiInitialize() {
-		super.aiInitialize();
-		long delay = (long) (30E3 + Math.random() * 10E3);
-		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
-	}
-	
-	public AIBehavior getBehavior() {
-		return behavior;
+		this.updateCounter = new AtomicInteger(0);
+		this.radius = 0;
 	}
 	
 	public double getLoiterRadius() {
 		return radius;
-	}
-	
-	public void setBehavior(AIBehavior behavior) {
-		this.behavior = behavior;
 	}
 	
 	public void setLoiterRadius(double radius) {
@@ -73,22 +58,7 @@ public class DefaultAIObject extends AIObject {
 	}
 	
 	@Override
-	public void aiStart() {
-		super.aiStart();
-		this.mainLocation = getLocation();
-	}
-	
-	@Override
 	protected void aiLoop() {
-		switch (behavior) {
-			case LOITER:	aiLoopLoiter();	break;
-			case TURN:	aiLoopTurn();	break;
-			case IDLE:
-			default:	break;
-		}
-	}
-	
-	private void aiLoopLoiter() {
 		if (isInCombat())
 			return;
 		Random r = new Random();
@@ -104,21 +74,9 @@ public class DefaultAIObject extends AIObject {
 			theta = r.nextDouble() * Math.PI * 2;
 			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
 			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
-		} while (!l.isWithinFlatDistance(mainLocation, radius));
+		} while (!l.isWithinFlatDistance(getMainLocation(), radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		new MoveObjectIntent(this, getParent(), l.build(), 1.37, updateCounter++).broadcast();
-	}
-	
-	private void aiLoopTurn() {
-		if (isInCombat())
-			return;
-		Random r = new Random();
-		if (r.nextDouble() > 0.25) // Only a 25% movement chance
-			return;
-		if (getObservers().isEmpty()) // No need to dance if nobody is watching
-			return;
-		double theta = r.nextDouble() * 360;
-		new MoveObjectIntent(this, getParent(), Location.builder(mainLocation).setHeading(theta).build(), 1.37, updateCounter++).broadcast();
+		MoveObjectIntent.broadcast(this, getParent(), l.build(), 1.37, updateCounter.getAndIncrement());
 	}
 	
 }

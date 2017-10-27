@@ -37,11 +37,11 @@ import com.projectswg.common.data.location.Location;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
-import resources.server_info.loader.npc.NpcPatrolRouteLoader.PatrolRouteWaypoint;
+import resources.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
 import resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
 
 public final class Spawner {
-
+	
 	private final Random random;
 	private final AtomicReference<Location> location;
 	private final int id;
@@ -61,7 +61,9 @@ public final class Spawner {
 	private SpawnerFlag flags;
 	private PvpFaction faction;
 	private boolean specForce;
-	private List<PatrolRouteWaypoint> patrolRoute;
+	private double attackSpeed;
+	private double movementSpeed;
+	private List<ResolvedPatrolWaypoint> patrolRoute;
 	private PatrolFormation formation;
 	
 	public Spawner(int id) {
@@ -221,11 +223,27 @@ public final class Spawner {
 		return specForce;
 	}
 	
-	public void setPatrolRoute(List<PatrolRouteWaypoint> patrolRoute) {
+	public double getAttackSpeed() {
+		return attackSpeed;
+	}
+	
+	public void setAttackSpeed(double attackSpeed) {
+		this.attackSpeed = attackSpeed;
+	}
+	
+	public double getMovementSpeed() {
+		return movementSpeed;
+	}
+	
+	public void setMovementSpeed(double movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+	
+	public void setPatrolRoute(List<ResolvedPatrolWaypoint> patrolRoute) {
 		this.patrolRoute = patrolRoute;
 	}
 	
-	public List<PatrolRouteWaypoint> getPatrolRoute() {
+	public List<ResolvedPatrolWaypoint> getPatrolRoute() {
 		return patrolRoute;
 	}
 	
@@ -236,11 +254,43 @@ public final class Spawner {
 	public void setFormation(PatrolFormation formation) {
 		this.formation = formation;
 	}
-
+	
 	public enum SpawnerFlag {
 		AGGRESSIVE,
 		ATTACKABLE,
 		INVULNERABLE
+	}
+	
+	public static class ResolvedPatrolWaypoint {
+		
+		private final SWGObject parent;
+		private final Location location;
+		private final double delay;
+		private final PatrolType patrolType;
+		
+		public ResolvedPatrolWaypoint(SWGObject parent, Location location, double delay, PatrolType patrolType) {
+			this.parent = null;
+			this.location = location;
+			this.delay = delay;
+			this.patrolType = patrolType;
+		}
+		
+		public SWGObject getParent() {
+			return parent;
+		}
+		
+		public Location getLocation() {
+			return location;
+		}
+		
+		public double getDelay() {
+			return delay;
+		}
+		
+		public PatrolType getPatrolType() {
+			return patrolType;
+		}
+		
 	}
 	
 }

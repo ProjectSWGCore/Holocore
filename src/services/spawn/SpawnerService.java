@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Service;
@@ -49,7 +50,7 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
-import resources.objects.custom.DefaultAIObject;
+import resources.objects.custom.RandomAIObject;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 import resources.server_info.loader.BuildingLoader;
@@ -64,6 +65,7 @@ import resources.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
 import resources.server_info.loader.spawn.StaticSpawnLoader;
 import resources.server_info.loader.spawn.StaticSpawnLoader.StaticSpawnInfo;
 import resources.spawn.Spawner;
+import resources.spawn.Spawner.ResolvedPatrolWaypoint;
 import resources.spawn.Spawner.SpawnerFlag;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
@@ -119,7 +121,7 @@ public final class SpawnerService extends Service {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject destroyedObject = doi.getObject();
-		if (!(destroyedObject instanceof DefaultAIObject))
+		if (!(destroyedObject instanceof RandomAIObject))
 			return;
 		
 		Spawner spawner = spawnerMap.remove(destroyedObject.getObjectId());
@@ -166,7 +168,7 @@ public final class SpawnerService extends Service {
 		private BuildingLoaderInfo building;
 		private NpcInfo npc;
 		private NpcStatInfo npcStat;
-		private List<PatrolRouteWaypoint> waypoints;
+		private List<ResolvedPatrolWaypoint> waypoints;
 		
 		public SpawnLoader(Consumer<Spawner> npcSpawner) {
 			this.npcSpawner = npcSpawner;
@@ -196,24 +198,44 @@ public final class SpawnerService extends Service {
 			npcPatrolRouteLoader.forEach(route -> {
 				for (PatrolRouteWaypoint waypoint : route) {
 					SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
-					obj.setLocation(Location.builder()
-							.setTerrain(waypoint.getTerrain())
-							.setX(waypoint.getX())
-							.setY(waypoint.getY())
-							.setZ(waypoint.getZ()).build());
-					if (!waypoint.getBuildingId().isEmpty()) {
-						BuildingLoaderInfo buildingInfo = buildingLoader.getBuilding(waypoint.getBuildingId());
-						SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
-						if (building instanceof BuildingObject) {
-							SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
-							if (cell instanceof CellObject) {
-								obj.moveToContainer(cell);
-							}
-						}
-					}
+					obj.setLocation(getPatrolWaypointLocation(waypoint));
+					obj.moveToContainer(getPatrolWaypointParent(waypoint, true));
 					ObjectCreatedIntent.broadcast(obj);
 				}
 			});
+		}
+		
+		private Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {
+			return Location.builder()
+					.setTerrain(waypoint.getTerrain())
+					.setX(waypoint.getX())
+					.setY(waypoint.getY())
+					.setZ(waypoint.getZ()).build();
+		}
+		
+		private SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint, boolean printErrors) {
+			if (waypoint.getBuildingId().isEmpty()) {
+				Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			BuildingLoaderInfo buildingInfo = buildingLoader.getBuilding(waypoint.getBuildingId());
+			if (buildingInfo == null) {
+				Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			if (buildingInfo.getId() == 0)
+				return null;
+			SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
+			if (!(building instanceof BuildingObject)) {
+				Log.w("PatrolRouteWaypoint: Invalid building [%d] for patrol id: %d and group id: %d", buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
+			if (!(cell instanceof CellObject)) {
+				Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			return cell;
 		}
 		
 		private void loadStaticSpawn(StaticSpawnInfo spawn) {
@@ -238,7 +260,10 @@ public final class SpawnerService extends Service {
 			if (spawn.getPatrolId() < 1000) {
 				waypoints = null;
 			} else {
-				waypoints = npcPatrolRouteLoader.getPatrolRoute(spawn.getPatrolId());
+				waypoints = npcPatrolRouteLoader.getPatrolRoute(spawn.getPatrolId())
+						.parallelStream()
+						.map(route -> new ResolvedPatrolWaypoint(getPatrolWaypointParent(route, false), getPatrolWaypointLocation(route), route.getDelay(), route.getPatrolType()))
+						.collect(Collectors.toList());
 			}
 			
 			loadSpawner(spawn);
@@ -253,6 +278,8 @@ public final class SpawnerService extends Service {
 			spawner.setSpawnerFlag(SpawnerFlag.valueOf(npc.getAttackable()));
 			spawner.setPatrolRoute(waypoints);
 			spawner.setFormation(spawn.getPatrolFormation());
+			spawner.setAttackSpeed(npc.getAttackSpeed());
+			spawner.setMovementSpeed(npc.getMovementSpeed());
 			setRespawnDelay(spawner, spawn);
 			setDifficulty(spawner);
 			setMoodAnimation(spawner, spawn);

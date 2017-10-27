@@ -40,7 +40,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 3200040	TATOOINE	tat_world	PATROL	0	3318.30	5.00	-4613.00	30	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	0	999	column	idle	0	0	0	300	120
 3200041	TATOOINE	tat_world	PATROL	0	3360.18	5.00	-4742.17	-150	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	0	999	column	idle	0	0	0	300	120
 3200042	TATOOINE	tat_world	PATROL	0	3427.14	5.00	-4952.92	56	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	0	999	column	idle	0	0	0	300	120
-3200043	TATOOINE	tat_world	PATROL	0	3538.04	5.12	-4806.46	-73	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	0	999	column	idle	0	0	0	300	120
+3200043	TATOOINE	tat_world	PATROL	0	3538.04	5.12	-4806.46	-73	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	0	11010300	column	idle	0	0	0	300	120
 3200044	TATOOINE	tat_world	AREA	0	3482.52	7.50	-4683.05	129	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300	120
 3200045	TATOOINE	tat_world	AREA	0	3496.81	5.52	-4923.13	-7	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300	120
 3200046	TATOOINE	tat_world	AREA	0	3427.46	7.50	-4728.61	-146	1	an Imperial comm op	imp_comm_op_14_h_att_n	Presence Imperial	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300	120

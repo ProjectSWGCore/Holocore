@@ -27,92 +27,36 @@
  ***********************************************************************************/
 package resources.objects.custom;
 
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import resources.objects.creature.CreatureObject;
-import utilities.ScheduledUtilities;
+import com.projectswg.common.data.location.Location;
 
-public abstract class AIObject extends CreatureObject {
+import intents.object.MoveObjectIntent;
+
+/**
+ * AI object that loiters the area
+ */
+public class TurningAIObject extends RandomAIObject {
 	
-	private transient ScheduledFuture<?> future;
-	private long initialDelay;
-	private long delay;
-	private TimeUnit unit;
-	private String creatureId;
+	private final AtomicInteger updateCounter;
 	
-	public AIObject(long objectId) {
+	public TurningAIObject(long objectId) {
 		super(objectId);
-		aiInitialize();
+		this.updateCounter = new AtomicInteger(0);
 	}
 	
-	/**
-	 * Called upon object creation.  If overridden, you must call this
-	 * function via super.aiInitialize()
-	 */
-	protected void aiInitialize() {
-		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
-	}
-	
-	/**
-	 * Sets scheduler properties for how often aiLoop runs
-	 * @param initialDelay the initial delay
-	 * @param delay the delay between each loop
-	 * @param unit the time unit for both delays
-	 */
-	protected void setSchedulerProperties(long initialDelay, long delay, TimeUnit unit) {
-		this.initialDelay = initialDelay;
-		this.delay = delay;
-		this.unit = unit;
-	}
-	
-	protected void disableScheduler() {
-		setSchedulerProperties(0, 0, null);
-	}
-	
-	protected void requestNextLoop(long delay, TimeUnit unit) {
-		ScheduledUtilities.run(this::aiLoop, delay, unit);
-	}
-	
-	public void setSpeed(double speed) {
-		setWalkSpeed(speed);
-		setRunSpeed(speed);
-	}
-	
-	/**
-	 * Called when Holocore is starting.  If overridden, you must call this
-	 * function via super.aiStart()
-	 */
-	public void aiStart() {
-		if (future != null) {
+	@Override
+	protected void aiLoop() {
+		if (isInCombat())
 			return;
-		}
-		if (unit != null)
-			future = ScheduledUtilities.scheduleAtFixedRate(this::aiLoop, initialDelay, delay, unit);
-	}
-	
-	/**
-	 * Called periodically for move updates, etc.
-	 */
-	protected abstract void aiLoop();
-	
-	/**
-	 * Called when Holocore is stopping.  If overridden, you must call this
-	 * function via super.aiStop()
-	 */
-	public void aiStop() {
-		if (future == null) {
+		Random r = new Random();
+		if (r.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
-		}
-		future.cancel(true);
-		future = null;
+		if (getObservers().isEmpty()) // No need to dance if nobody is watching
+			return;
+		double theta = r.nextDouble() * 360;
+		new MoveObjectIntent(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, updateCounter.getAndIncrement()).broadcast();
 	}
-
-	public String getCreatureId() {
-		return creatureId;
-	}
-
-	public void setCreatureId(String creatureId) {
-		this.creatureId = creatureId;
-	}
+	
 }

@@ -86,7 +86,7 @@ public final class ObjectCreator {
 		template = ClientFactory.formatToSharedFile(template);
 		File f = new File("clientdata/", template);
 		if (!f.exists())
-			Log.w("File doesn't exist: '%s'  getAbsoluteExists=%b", f, f.getAbsoluteFile().exists());
+			Log.w("File doesn't exist: '%s'  getAbsoluteExists=%b", new File(f.getAbsolutePath()), new File(f.getAbsolutePath()).exists());
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
 		if (attributes == null)
 			return null;

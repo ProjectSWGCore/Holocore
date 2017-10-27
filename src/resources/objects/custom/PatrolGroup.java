@@ -27,92 +27,38 @@
  ***********************************************************************************/
 package resources.objects.custom;
 
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import resources.objects.creature.CreatureObject;
-import utilities.ScheduledUtilities;
+import resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
 
-public abstract class AIObject extends CreatureObject {
+public class PatrolGroup {
 	
-	private transient ScheduledFuture<?> future;
-	private long initialDelay;
-	private long delay;
-	private TimeUnit unit;
-	private String creatureId;
+	private final List<AIObject> objects;
+	private final int count;
+	private final PatrolFormation formation;
 	
-	public AIObject(long objectId) {
-		super(objectId);
-		aiInitialize();
+	public PatrolGroup(int count, PatrolFormation formation) {
+		this.objects = new ArrayList<>();
+		this.count = count;
+		this.formation = formation;
 	}
 	
-	/**
-	 * Called upon object creation.  If overridden, you must call this
-	 * function via super.aiInitialize()
-	 */
-	protected void aiInitialize() {
-		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
+	public int getCount() {
+		return count;
 	}
 	
-	/**
-	 * Sets scheduler properties for how often aiLoop runs
-	 * @param initialDelay the initial delay
-	 * @param delay the delay between each loop
-	 * @param unit the time unit for both delays
-	 */
-	protected void setSchedulerProperties(long initialDelay, long delay, TimeUnit unit) {
-		this.initialDelay = initialDelay;
-		this.delay = delay;
-		this.unit = unit;
+	public PatrolFormation getFormation() {
+		return formation;
 	}
 	
-	protected void disableScheduler() {
-		setSchedulerProperties(0, 0, null);
+	public List<AIObject> getObjects() {
+		return Collections.unmodifiableList(objects);
 	}
 	
-	protected void requestNextLoop(long delay, TimeUnit unit) {
-		ScheduledUtilities.run(this::aiLoop, delay, unit);
+	public void addObject(AIObject object) {
+		this.objects.add(object);
 	}
 	
-	public void setSpeed(double speed) {
-		setWalkSpeed(speed);
-		setRunSpeed(speed);
-	}
-	
-	/**
-	 * Called when Holocore is starting.  If overridden, you must call this
-	 * function via super.aiStart()
-	 */
-	public void aiStart() {
-		if (future != null) {
-			return;
-		}
-		if (unit != null)
-			future = ScheduledUtilities.scheduleAtFixedRate(this::aiLoop, initialDelay, delay, unit);
-	}
-	
-	/**
-	 * Called periodically for move updates, etc.
-	 */
-	protected abstract void aiLoop();
-	
-	/**
-	 * Called when Holocore is stopping.  If overridden, you must call this
-	 * function via super.aiStop()
-	 */
-	public void aiStop() {
-		if (future == null) {
-			return;
-		}
-		future.cancel(true);
-		future = null;
-	}
-
-	public String getCreatureId() {
-		return creatureId;
-	}
-
-	public void setCreatureId(String creatureId) {
-		this.creatureId = creatureId;
-	}
 }

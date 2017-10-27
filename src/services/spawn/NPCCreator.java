@@ -38,7 +38,11 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import intents.FactionIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.objects.creature.CreatureObject;
-import resources.objects.custom.DefaultAIObject;
+import resources.objects.custom.AIObject;
+import resources.objects.custom.LoiterAIObject;
+import resources.objects.custom.PatrolAIObject;
+import resources.objects.custom.RandomAIObject;
+import resources.objects.custom.TurningAIObject;
 import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.spawn.Spawner;
@@ -50,7 +54,7 @@ class NPCCreator {
 	private static final Random RANDOM = new Random();
 	
 	public static long createNPC(Spawner spawner) {
-		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), DefaultAIObject.class);
+		AIObject object = createNPCFromBehavior(spawner);
 		
 		object.setLocation(behaviorLocation(spawner));
 		object.setObjectName(spawner.getCreatureName());
@@ -61,15 +65,37 @@ class NPCCreator {
 		object.setMaxAction(spawner.getMaxAction());
 		object.setAction(spawner.getMaxAction());
 		object.setMoodAnimation(spawner.getMoodAnimation());
-		object.setBehavior(spawner.getAIBehavior());
-		object.setLoiterRadius(spawner.getFloatRadius());
 		object.setCreatureId(spawner.getCreatureId());
+		object.setSpeed(spawner.getMovementSpeed());
 		setFlags(object, spawner.getSpawnerFlag());
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
 		object.moveToContainer(spawner.getSpawnerObject().getParent());
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
+	}
+	
+	private static AIObject createNPCFromBehavior(Spawner spawner) {
+		String template = spawner.getRandomIffTemplate();
+		switch (spawner.getAIBehavior()) {
+			case LOITER: {
+				LoiterAIObject object = ObjectCreator.createObjectFromTemplate(template, LoiterAIObject.class);
+				object.setLoiterRadius(spawner.getFloatRadius());
+				return object;
+			}
+			case PATROL: {
+				PatrolAIObject object = ObjectCreator.createObjectFromTemplate(template, PatrolAIObject.class);
+				if (spawner.getPatrolRoute() != null) {
+					object.setPatrolWaypoints(spawner.getPatrolRoute());
+				}
+				return object;
+			}
+			case TURN:
+				return ObjectCreator.createObjectFromTemplate(template, TurningAIObject.class);
+			case IDLE:
+			default:
+				return ObjectCreator.createObjectFromTemplate(template, RandomAIObject.class);
+		}
 	}
 	
 	private static void setFlags(CreatureObject creature, SpawnerFlag flags) {
