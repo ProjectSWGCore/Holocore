@@ -227,7 +227,7 @@ public class PatrolAIObject extends AIObject {
 					.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
 					.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
 					.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
-					.setHeading(Math.toDegrees(Math.atan2(l2.getZ()-l1.getZ(), l2.getX()-l1.getX())))
+					.setHeading(Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ())))
 					.build();
 		}
 		
