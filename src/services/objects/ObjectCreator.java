@@ -37,6 +37,7 @@ import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
+import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
@@ -81,10 +82,7 @@ public final class ObjectCreator {
 	}
 	
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
-		if (!template.startsWith("object/"))
-			return null;
-		if (!template.endsWith(".iff"))
-			return null;
+		Assert.test(template.startsWith("object/") && template.endsWith(".iff"), "Invalid template for createObjectFromTemplate");
 		template = ClientFactory.formatToSharedFile(template);
 		{ // Windows testing
 			File f = new File("clientdata/", template);
