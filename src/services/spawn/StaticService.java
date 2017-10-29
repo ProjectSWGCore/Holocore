@@ -36,6 +36,7 @@ import java.util.Map;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 
@@ -60,11 +61,28 @@ public class StaticService extends Service {
 	
 	private void loadSupportingObjects() {
 		long startTime = StandardLog.onStartLoad("static objects");
-		try {
-			loadSpawnableObjects(spawnableObjects);
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/spawns.sdb"))) {
+			Map<String, List<String>> typeToIff = createTypeMap();
+			while (set.next()) {
+				List<String> iffList = typeToIff.get(set.getText("iff_type"));
+				if (iffList == null) {
+					Log.w("Type defined in spawns.sdb but not in types.sdb: %s", set.getText("iff_type"));
+					continue;
+				}
+				if (iffList.isEmpty())
+					continue;
+				
+				List<SpawnedObject> objects = spawnableObjects.get(iffList.get(0)); // try to cut down on ArrayList objects
+				if (objects == null)
+					objects = new ArrayList<>();
+				
+				objects.add(new SpawnedObject(set));
+				for (String iff : iffList) {
+					spawnableObjects.put(iff, objects);
+				}
+			}
 		} catch (IOException e) {
 			Log.e(e);
-			return;
 		}
 		StandardLog.onEndLoad(spawnableObjects.size(), "static objects", startTime);
 	}
@@ -72,35 +90,36 @@ public class StaticService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
 		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
-		if (objects == null)
+		if (objects == null) {
+			if (object.getTemplate().contains("object/building/corellia/shared_starport_corellia.iff"))
+				Log.d("Cache Miss: %s", object.getTemplate());
 			return;
+		}
+		if (object.getTemplate().contains("object/building/corellia/shared_starport_corellia.iff"))
+			Log.d("Cache Hit:  %s", object.getTemplate());
 		Location world = object.getWorldLocation();
 		for (SpawnedObject spawn : objects) {
 			spawn.createObject(object, world);
 		}
 	}
 	
-	private static Map<String, String> createTypeMap() throws IOException {
-		Map<String, String> typeToIff = new HashMap<>();
+	private static Map<String, List<String>> createTypeMap() throws IOException {
+		Map<String, List<String>> typeToIff = new HashMap<>();
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/types.sdb"))) {
 			while (set.next()) {
-				typeToIff.put(set.getText(1), set.getText(0));
+				String iff = ClientFactory.formatToSharedFile(set.getText("iff"));
+				String iffType = set.getText("iff_type");
+				
+				if (iff.contains("object/building/corellia/shared_starport_corellia.iff"))
+					Log.d("Loading: %s\t\t%s", iffType, iff);
+				
+				List<String> list = typeToIff.get(iffType);
+				if (list == null)
+					typeToIff.put(iffType, list = new ArrayList<>());
+				list.add(iff);
 			}
 		}
 		return typeToIff;
-	}
-	
-	private static void loadSpawnableObjects(Map<String, List<SpawnedObject>> spawnableObjects) throws IOException {
-		Map<String, String> typeToIff = createTypeMap();
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/spawns.sdb"))) {
-			while (set.next()) {
-				String iff = typeToIff.get(set.getText("iff_type"));
-				List<SpawnedObject> objects = spawnableObjects.get(iff);
-				if (objects == null)
-					spawnableObjects.put(iff, objects = new ArrayList<>());
-				objects.add(new SpawnedObject(set));
-			}
-		}
 	}
 	
 	private static class SpawnedObject {
