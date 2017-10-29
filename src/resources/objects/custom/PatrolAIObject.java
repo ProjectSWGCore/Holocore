@@ -67,8 +67,28 @@ public class PatrolAIObject extends AIObject {
 	protected void aiLoop() {
 		if (isInCombat())
 			return;
+		switch (getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+			case INVALID:
+			case KNOCKED_DOWN:
+			case LYING_DOWN:
+			case SITTING:
+				return;
+			case BLOCKING:
+			case CLIMBING:
+			case CROUCHED:
+			case DRIVING_VEHICLE:
+			case FLYING:
+			case PRONE:
+			case RIDING_CREATURE:
+			case SKILL_ANIMATING:
+			case SNEAKING:
+			case UPRIGHT:
+				break;
+		}
 		
-		double speed = getWalkSpeed();
+		double speed = getMovementPercent() * getMovementScale() * getWalkSpeed();
 		route.move(speed);
 		ResolvedPatrolWaypoint waypoint = route.getPreviousWaypoint();
 		Location loc = route.getCurrentLocation();
