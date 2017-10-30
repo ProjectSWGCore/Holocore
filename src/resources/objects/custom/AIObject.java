@@ -115,4 +115,28 @@ public abstract class AIObject extends CreatureObject {
 	public void setCreatureId(String creatureId) {
 		this.creatureId = creatureId;
 	}
+	
+	protected final boolean canAiMove() {
+		switch (getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+			case INVALID:
+			case KNOCKED_DOWN:
+			case LYING_DOWN:
+			case SITTING:
+				return false;
+			case BLOCKING:
+			case CLIMBING:
+			case CROUCHED:
+			case DRIVING_VEHICLE:
+			case FLYING:
+			case PRONE:
+			case RIDING_CREATURE:
+			case SKILL_ANIMATING:
+			case SNEAKING:
+			case UPRIGHT:
+				return true;
+		}
+		return true;
+	}
 }

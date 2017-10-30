@@ -91,12 +91,8 @@ public class StaticService extends Service {
 		SWGObject object = oci.getObject();
 		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
 		if (objects == null) {
-			if (object.getTemplate().contains("object/building/corellia/shared_starport_corellia.iff"))
-				Log.d("Cache Miss: %s", object.getTemplate());
 			return;
 		}
-		if (object.getTemplate().contains("object/building/corellia/shared_starport_corellia.iff"))
-			Log.d("Cache Hit:  %s", object.getTemplate());
 		Location world = object.getWorldLocation();
 		for (SpawnedObject spawn : objects) {
 			spawn.createObject(object, world);
@@ -109,9 +105,6 @@ public class StaticService extends Service {
 			while (set.next()) {
 				String iff = ClientFactory.formatToSharedFile(set.getText("iff"));
 				String iffType = set.getText("iff_type");
-				
-				if (iff.contains("object/building/corellia/shared_starport_corellia.iff"))
-					Log.d("Loading: %s\t\t%s", iffType, iff);
 				
 				List<String> list = typeToIff.get(iffType);
 				if (list == null)

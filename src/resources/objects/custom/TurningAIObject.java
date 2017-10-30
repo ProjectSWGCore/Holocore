@@ -48,7 +48,7 @@ public class TurningAIObject extends RandomAIObject {
 	
 	@Override
 	protected void aiLoop() {
-		if (isInCombat())
+		if (isInCombat() || !canAiMove())
 			return;
 		Random r = new Random();
 		if (r.nextDouble() > 0.25) // Only a 25% movement chance
