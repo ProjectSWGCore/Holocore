@@ -29,8 +29,10 @@ package resources.server_info.loader;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
@@ -39,6 +41,8 @@ import resources.server_info.SdbLoader;
 import resources.server_info.SdbLoader.SdbResultSet;
 
 public class BuildingLoader {
+	
+	private static final AtomicReference<SoftReference<BuildingLoader>> CACHED_LOADER = new AtomicReference<>(null);
 	
 	private final Map<String, BuildingLoaderInfo> buildingMap;
 	
@@ -61,8 +65,13 @@ public class BuildingLoader {
 	}
 	
 	public static BuildingLoader load() {
-		BuildingLoader loader = new BuildingLoader();
-		loader.loadFromFile();
+		SoftReference<BuildingLoader> ref = CACHED_LOADER.get();
+		BuildingLoader loader = (ref == null) ? null : ref.get();
+		if (loader == null) {
+			loader = new BuildingLoader();
+			loader.loadFromFile();
+			CACHED_LOADER.set(new SoftReference<>(loader));
+		}
 		return loader;
 	}
 	

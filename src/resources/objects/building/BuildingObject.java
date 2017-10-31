@@ -40,7 +40,6 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
@@ -99,7 +98,6 @@ public class BuildingObject extends TangibleObject {
 				cell.setNumber(i);
 				cell.setTerrain(getTerrain());
 				addObject(cell);
-				new ObjectCreatedIntent(cell).broadcast();
 			}
 		}
 	}

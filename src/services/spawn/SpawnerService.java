@@ -96,6 +96,12 @@ public final class SpawnerService extends Service {
 	}
 	
 	@Override
+	public boolean start() {
+		
+		return super.start();
+	}
+	
+	@Override
 	public boolean terminate() {
 		executor.stop();
 		
@@ -148,9 +154,59 @@ public final class SpawnerService extends Service {
 		
 		SpawnLoader loader = new SpawnLoader(this::spawnNPC);
 		loader.load();
-		loader.createPatrolRouteWaypoints();
+		createPatrolRouteWaypoints();
 		
 		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
+	}
+	
+	private static void createPatrolRouteWaypoints() {
+		NpcPatrolRouteLoader npcPatrolRouteLoader = NpcPatrolRouteLoader.load();
+		npcPatrolRouteLoader.forEach(route -> {
+			for (PatrolRouteWaypoint waypoint : route) {
+				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
+				obj.setLocation(getPatrolWaypointLocation(waypoint));
+				obj.moveToContainer(getPatrolWaypointParent(waypoint, true));
+				ObjectCreatedIntent.broadcast(obj);
+			}
+		});
+	}
+	
+	private static Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {
+		return Location.builder()
+				.setTerrain(waypoint.getTerrain())
+				.setX(waypoint.getX())
+				.setY(waypoint.getY())
+				.setZ(waypoint.getZ()).build();
+	}
+	
+	private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint, boolean printErrors) {
+		if (waypoint.getBuildingId().isEmpty()) {
+			Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+			return null;
+		}
+		
+		BuildingLoaderInfo buildingInfo = BuildingLoader.load().getBuilding(waypoint.getBuildingId());
+		if (buildingInfo == null) {
+			Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+			return null;
+		}
+		
+		if (buildingInfo.getId() == 0)
+			return null;
+		
+		SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
+		if (!(building instanceof BuildingObject)) {
+			Log.w("PatrolRouteWaypoint: Invalid building [%d] for patrol id: %d and group id: %d", buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+			return null;
+		}
+		
+		SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
+		if (!(cell instanceof CellObject)) {
+			Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+			return null;
+		}
+		
+		return cell;
 	}
 	
 	private static class SpawnLoader {
@@ -192,50 +248,6 @@ public final class SpawnerService extends Service {
 			npcPatrolRouteLoader = NpcPatrolRouteLoader.load();
 			
 			staticSpawnLoader.iterate(this::loadStaticSpawn);
-		}
-		
-		public void createPatrolRouteWaypoints() {
-			npcPatrolRouteLoader.forEach(route -> {
-				for (PatrolRouteWaypoint waypoint : route) {
-					SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
-					obj.setLocation(getPatrolWaypointLocation(waypoint));
-					obj.moveToContainer(getPatrolWaypointParent(waypoint, true));
-					ObjectCreatedIntent.broadcast(obj);
-				}
-			});
-		}
-		
-		private Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {
-			return Location.builder()
-					.setTerrain(waypoint.getTerrain())
-					.setX(waypoint.getX())
-					.setY(waypoint.getY())
-					.setZ(waypoint.getZ()).build();
-		}
-		
-		private SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint, boolean printErrors) {
-			if (waypoint.getBuildingId().isEmpty()) {
-				Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
-				return null;
-			}
-			BuildingLoaderInfo buildingInfo = buildingLoader.getBuilding(waypoint.getBuildingId());
-			if (buildingInfo == null) {
-				Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
-				return null;
-			}
-			if (buildingInfo.getId() == 0)
-				return null;
-			SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
-			if (!(building instanceof BuildingObject)) {
-				Log.w("PatrolRouteWaypoint: Invalid building [%d] for patrol id: %d and group id: %d", buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
-				return null;
-			}
-			SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
-			if (!(cell instanceof CellObject)) {
-				Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
-				return null;
-			}
-			return cell;
 		}
 		
 		private void loadStaticSpawn(StaticSpawnInfo spawn) {
