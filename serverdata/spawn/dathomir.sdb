@@ -52,11 +52,11 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 300052	DATHOMIR	dat_world	AREA	0	-101.93	18.00	-1542.60	-141	1	Shaki Hamachil	shaki_hamachil_100_h_inv_n	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 300053	DATHOMIR	dat_world	AREA	0	-70.51	18.00	-1638.97	37	1	Shibb Nisshil	shibb_nisshil_100_h_inv_n	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	300	120
 300054	DATHOMIR	dat_world	AREA	0	-120.87	18.00	-1610.90	-51	1	Kam	smuggler_fence_kam_100_h_inv_n	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-300055	DATHOMIR	dat_world	PATROL	0	-84.30	18.00	-1607.37	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-300056	DATHOMIR	dat_world	PATROL	0	-86.01	18.00	-1609.60	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-300057	DATHOMIR	dat_world	PATROL	0	-90.88	18.00	-1605.83	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-300058	DATHOMIR	dat_world	PATROL	0	-94.34	18.00	-1618.37	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-300059	DATHOMIR	dat_world	PATROL	0	-99.48	18.00	-1614.42	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+300055	DATHOMIR	dat_world	PATROL	0	-84.30	18.00	-1607.37	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+300056	DATHOMIR	dat_world	PATROL	0	-86.01	18.00	-1609.60	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+300057	DATHOMIR	dat_world	PATROL	0	-90.88	18.00	-1605.83	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+300058	DATHOMIR	dat_world	PATROL	0	-94.34	18.00	-1618.37	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+300059	DATHOMIR	dat_world	PATROL	0	-99.48	18.00	-1614.42	0	1	a mercenary	smuggler_patrol_thief_10_60_h_att_n	City	Science Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 300060	DATHOMIR	dat_world	AREA	0	-67.53	18.00	-1622.12	-61	1	a technician	technician_100_h_inv_n	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 300061	DATHOMIR	dat_trade_outpost_cantina	AREA	1	-0.08	0.62	0.89	35	1	Nirame Sakute (Privateer Pilot Trainer)	nirame_sakute_100_h_inv_n	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 300062	DATHOMIR	dat_trade_outpost_cantina	AREA	1	2.40	0.60	6.10	146	1	Wallaw Loowobbli	wallaw_loowobbli_100_h_inv_n	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
@@ -99,12 +99,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 300099	DATHOMIR	dat_imp_prison_cave	AREA	11	43.29	-81.73	-239.55	0	1	a gaping spider queen	gaping_spider_queen_65_c_agg_n	Dungeon	Imp Prison / Cave	1	LOITER	2	0	-	idle	0	0	0	900	600
 300100	DATHOMIR	dat_imp_prison_cave	AREA	13	11.83	-79.34	-277.03	0	1	a gaping spider recluse	gaping_spider_recluse_75_c_agg_n	Dungeon	Imp Prison / Cave	4	LOITER	8	0	-	idle	0	0	0	900	600
 300101	DATHOMIR	dat_imp_prison_cave	AREA	17	-147.54	-118.58	-334.22	0	1	a mutant rancor	rancor_mutant_89_c_agg_e	Dungeon	Imp Prison / Cave	1	LOITER	5	0	-	idle	0	0	0	900	600
-300102	DATHOMIR	dat_imp_weapons_research_facility	PATROL	10	29.50	-12.00	70.90	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
-300103	DATHOMIR	dat_imp_weapons_research_facility	PATROL	10	30.50	-12.00	35.20	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
+300102	DATHOMIR	dat_imp_weapons_research_facility	PATROL	10	29.50	-12.00	70.90	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
+300103	DATHOMIR	dat_imp_weapons_research_facility	PATROL	10	30.50	-12.00	35.20	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
 300104	DATHOMIR	dat_imp_weapons_research_facility	AREA	10	40.00	-12.00	58.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300105	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	29.70	-20.00	118.10	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300106	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	32.30	-20.00	132.40	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
-300107	DATHOMIR	dat_imp_weapons_research_facility	PATROL	13	35.50	-12.00	94.60	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
+300107	DATHOMIR	dat_imp_weapons_research_facility	PATROL	13	35.50	-12.00	94.60	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
 300108	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	39.90	-20.00	132.50	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300109	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	20.40	-12.00	-0.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300110	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	24.60	-12.00	17.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
@@ -112,14 +112,14 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 300112	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	36.80	-12.00	19.60	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300113	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	39.00	-12.00	0.60	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300114	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	39.20	-12.00	10.60	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
-300115	DATHOMIR	dat_imp_weapons_research_facility	PATROL	15	11.20	-12.00	3.00	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
+300115	DATHOMIR	dat_imp_weapons_research_facility	PATROL	15	11.20	-12.00	3.00	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
 300116	DATHOMIR	dat_imp_weapons_research_facility	AREA	16	-12.80	-20.00	3.00	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300117	DATHOMIR	dat_imp_weapons_research_facility	AREA	16	-21.50	-20.00	2.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
-300118	DATHOMIR	dat_imp_weapons_research_facility	PATROL	18	-30.50	-20.00	86.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
-300119	DATHOMIR	dat_imp_weapons_research_facility	PATROL	18	-30.60	-20.00	19.00	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
+300118	DATHOMIR	dat_imp_weapons_research_facility	PATROL	18	-30.50	-20.00	86.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
+300119	DATHOMIR	dat_imp_weapons_research_facility	PATROL	18	-30.60	-20.00	19.00	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
 300120	DATHOMIR	dat_imp_weapons_research_facility	AREA	19	-12.40	-20.00	100.70	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300121	DATHOMIR	dat_imp_weapons_research_facility	AREA	19	-32.60	-20.00	100.90	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
-300122	DATHOMIR	dat_imp_weapons_research_facility	PATROL	20	-8.50	-20.00	85.30	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	999	column	idle	0	0	0	300	120
+300122	DATHOMIR	dat_imp_weapons_research_facility	PATROL	20	-8.50	-20.00	85.30	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	PATROL	0	0	column	idle	0	0	0	300	120
 300123	DATHOMIR	dat_imp_weapons_research_facility	AREA	21	-4.50	-20.00	66.50	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300124	DATHOMIR	dat_imp_weapons_research_facility	AREA	21	-4.70	-20.00	74.80	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120
 300125	DATHOMIR	dat_imp_weapons_research_facility	AREA	5	-14.80	-12.00	46.90	0	1	a Meatlump pronk	mtp_quest_stephax_meatlump_high_90_h_agg_n	Dungeon	Imperial Weapons Research Facility	1	LOITER	2	0	-	idle	0	0	0	300	120

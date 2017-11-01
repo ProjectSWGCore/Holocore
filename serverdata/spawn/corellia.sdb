@@ -8,25 +8,25 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100008	CORELLIA	cor_world	AREA	0	6718.61	327.41	-5864.42	0	1	a victory class dark trooper	crackdown_dark_trooper_victory_32_d_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
 100009	CORELLIA	cor_world	AREA	0	6709.64	328.36	-5867.80	179	1	a victory class dark trooper	crackdown_dark_trooper_victory_32_d_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
 100010	CORELLIA	cor_world	AREA	0	6749.09	315.00	-5684.41	-134	1	a victory class dark trooper	crackdown_dark_trooper_victory_32_d_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
-100011	CORELLIA	cor_world	PATROL	0	6740.50	315.00	-5634.55	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100012	CORELLIA	cor_world	PATROL	0	6739.35	315.00	-5683.82	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100013	CORELLIA	cor_world	PATROL	0	6739.61	315.00	-5813.46	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100014	CORELLIA	cor_world	PATROL	0	6741.48	315.00	-5817.22	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100015	CORELLIA	cor_world	PATROL	0	6715.11	315.00	-5564.96	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100016	CORELLIA	cor_world	PATROL	0	6842.73	330.00	-5468.03	0	1	an Imperial corporal	imp_corporal_16_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100017	CORELLIA	cor_world	PATROL	0	6732.35	315.00	-5546.91	0	1	an Imperial noncom	imp_noncom_14_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100018	CORELLIA	cor_world	PATROL	0	6777.90	315.00	-5506.22	0	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
+100011	CORELLIA	cor_world	PATROL	0	6740.50	315.00	-5634.55	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100012	CORELLIA	cor_world	PATROL	0	6739.35	315.00	-5683.82	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100013	CORELLIA	cor_world	PATROL	0	6739.61	315.00	-5813.46	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100014	CORELLIA	cor_world	PATROL	0	6741.48	315.00	-5817.22	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100015	CORELLIA	cor_world	PATROL	0	6715.11	315.00	-5564.96	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100016	CORELLIA	cor_world	PATROL	0	6842.73	330.00	-5468.03	0	1	an Imperial corporal	imp_corporal_16_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100017	CORELLIA	cor_world	PATROL	0	6732.35	315.00	-5546.91	0	1	an Imperial noncom	imp_noncom_14_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100018	CORELLIA	cor_world	PATROL	0	6777.90	315.00	-5506.22	0	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
 100019	CORELLIA	cor_world	AREA	0	6896.91	330.00	-5540.28	148	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
-100020	CORELLIA	cor_world	PATROL	0	6898.47	330.00	-5575.04	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
+100020	CORELLIA	cor_world	PATROL	0	6898.47	330.00	-5575.04	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
 100021	CORELLIA	cor_world	AREA	0	6639.76	330.60	-5908.23	90	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
-100022	CORELLIA	cor_world	PATROL	0	6767.34	315.00	-5812.86	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100023	CORELLIA	cor_world	PATROL	0	6764.73	315.00	-5811.69	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
+100022	CORELLIA	cor_world	PATROL	0	6767.34	315.00	-5812.86	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100023	CORELLIA	cor_world	PATROL	0	6764.73	315.00	-5811.69	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
 100024	CORELLIA	cor_world	AREA	0	6750.09	315.00	-5667.27	-90	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
-100025	CORELLIA	cor_world	PATROL	0	6840.66	330.00	-5466.44	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
+100025	CORELLIA	cor_world	PATROL	0	6840.66	330.00	-5466.44	0	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
 100026	CORELLIA	cor_world	AREA	0	6796.27	315.00	-5491.09	-124	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
-100027	CORELLIA	cor_world	PATROL	0	6771.97	315.00	-5810.49	0	1	an Imperial stormcaptain	imp_stormcaptain_29_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100028	CORELLIA	cor_world	PATROL	0	6769.41	315.00	-5809.54	0	1	an Imperial stormmedic	imp_stormmedic_25_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
-100029	CORELLIA	cor_world	PATROL	0	6840.22	330.00	-5468.85	0	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	City	Bela Vistal	1	PATROL	0	999	column	idle	0	0	0	300	120
+100027	CORELLIA	cor_world	PATROL	0	6771.97	315.00	-5810.49	0	1	an Imperial stormcaptain	imp_stormcaptain_29_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100028	CORELLIA	cor_world	PATROL	0	6769.41	315.00	-5809.54	0	1	an Imperial stormmedic	imp_stormmedic_25_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
+100029	CORELLIA	cor_world	PATROL	0	6840.22	330.00	-5468.85	0	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	City	Bela Vistal	1	PATROL	0	0	column	idle	0	0	0	300	120
 100030	CORELLIA	cor_world	AREA	0	6836.30	315.00	-5767.12	-91	1	Grondorn Muse	grondorn_muse_100_h_inv_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
 100031	CORELLIA	cor_world	AREA	0	6718.97	315.00	-5804.04	179	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
 100032	CORELLIA	cor_world	AREA	0	6706.00	315.00	-5558.00	168	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	City	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -126,7 +126,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100126	CORELLIA	cor_coronet_theater	AREA	8	19.26	2.12	56.13	-176	1	a noble	noble_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100127	CORELLIA	cor_coronet_theater	AREA	8	21.89	2.12	63.50	-1	1	a theater manager	quest_crowd_pleaser_theater_manager_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100128	CORELLIA	cor_world	AREA	0	-152.16	28.00	-4805.92	0	1	C-3PO	c3po_100_d_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
-100129	CORELLIA	cor_world	PATROL	0	-146.21	28.00	-4738.98	-23	1	a CLL-8 binary load lifter	binary_load_lifter_100_d_inv_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
+100129	CORELLIA	cor_world	PATROL	0	-146.21	28.00	-4738.98	-23	1	a CLL-8 binary load lifter	binary_load_lifter_100_d_inv_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
 100130	CORELLIA	cor_world	AREA	0	-51.07	28	-4663.32	-16	1	Hunter Javeezo	hunter_javeezo_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100131	CORELLIA	cor_world	AREA	0	-103.05	28.00	-4182.61	85	1	a commoner	commoner_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100132	CORELLIA	cor_world	AREA	0	-106.80	28.00	-4528.60	-97	1	a commoner	commoner_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -201,9 +201,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100201	CORELLIA	cor_world	AREA	0	-80.99	30.12	-4987.79	-25	1	a Meatlump lunk	meatlump_lunk_30_h_agg_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100202	CORELLIA	cor_world	AREA	0	185.01	27.99	-4261.43	-126	1	Pol Handerin (a farmer)	pol_handerin_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100203	CORELLIA	cor_world	AREA	0	-201.06	28.00	-4504.38	-34	1	a CorSec agent	corsec_agent_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
-100204	CORELLIA	cor_world	PATROL	0	-200.09	28.00	-4398.61	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
-100205	CORELLIA	cor_world	PATROL	0	-298.57	28.00	-4379.58	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
-100206	CORELLIA	cor_world	PATROL	0	-128.19	28.00	-4394.73	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
+100204	CORELLIA	cor_world	PATROL	0	-200.09	28.00	-4398.61	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
+100205	CORELLIA	cor_world	PATROL	0	-298.57	28.00	-4379.58	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
+100206	CORELLIA	cor_world	PATROL	0	-128.19	28.00	-4394.73	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
 100207	CORELLIA	cor_world	AREA	0	-213.64	28.00	-4445.46	24	1	Lutin Nightstalker	lutin_nightstalker_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100208	CORELLIA	cor_world	AREA	0	-138.97	28.00	-4718.86	135	1	Ral Mundi (a merchant)	greeter_coronet_merchant_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100209	CORELLIA	cor_world	AREA	0	-137.46	28.00	-4718.83	-118	1	Tarth Jaxx (a shipwright)	greeter_coronet_shipwright_impatient_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -228,10 +228,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100228	CORELLIA	cor_world	AREA	0	19.88	28.00	-4774.69	17	1	a gadget specialist	quest_gadget_specialist_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100229	CORELLIA	cor_world	AREA	0	-129.47	28.00	-4758.75	-76	1	a profession counselor	respec_seller_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100230	CORELLIA	cor_world	AREA	0	-529.00	28.00	-4517.00	115	1	Dustin	smuggler_fence_dustin_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
-100231	CORELLIA	cor_world	PATROL	0	-523.88	28.00	-4491.61	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
-100232	CORELLIA	cor_world	PATROL	0	-523.88	28.00	-4492.08	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
-100233	CORELLIA	cor_world	PATROL	0	-487.59	28.00	-4534.13	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
-100234	CORELLIA	cor_world	PATROL	0	-490.95	28.00	-4534.19	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	999	column	idle	0	0	0	300	120
+100231	CORELLIA	cor_world	PATROL	0	-523.88	28.00	-4491.61	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
+100232	CORELLIA	cor_world	PATROL	0	-523.88	28.00	-4492.08	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
+100233	CORELLIA	cor_world	PATROL	0	-487.59	28.00	-4534.13	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
+100234	CORELLIA	cor_world	PATROL	0	-490.95	28.00	-4534.19	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Coronet	1	PATROL	0	0	column	idle	0	0	0	300	120
 100235	CORELLIA	cor_world	AREA	0	-422.00	28.00	-4652.00	-118	1	Beast Trainer	trainer_beast_master_100_h_inv_n	City	Coronet	1	IDLE	0	0	-	idle	0	0	0	300	120
 100236	CORELLIA	cor_doaba_cantina	AREA	6	10.69	-0.89	-14.51	-80	1	Jadam Questrel	jadam_questrel_100_h_inv_n	City	Doaba Guerfel	1	IDLE	0	0	-	idle	0	0	0	300	120
 100237	CORELLIA	cor_doaba_cantina	AREA	7	5.42	-0.89	20.81	168	1	Zakarisz Ghent	zakarisz_ghent_100_h_inv_n	City	Doaba Guerfel	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -270,10 +270,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100270	CORELLIA	cor_world	AREA	0	3258.71	290.00	4964.77	0	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	City	Doaba Guerfel	2	LOITER	6	0	-	idle	0	0	0	300	120
 100271	CORELLIA	cor_world	AREA	0	3347.74	308.00	5490.49	93	1	Scolex Grath	scolex_grath_100_h_inv_n	City	Doaba Guerfel	1	IDLE	0	0	-	idle	0	0	0	300	120
 100272	CORELLIA	cor_world	AREA	0	3078.01	300.00	5175.80	-179	1	Yaron	smuggler_fence_yaron_100_h_inv_n	City	Doaba Guerfel	1	IDLE	0	0	-	idle	0	0	0	300	120
-100273	CORELLIA	cor_world	PATROL	0	3122.96	300.00	5149.53	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	999	column	idle	0	0	0	300	120
-100274	CORELLIA	cor_world	PATROL	0	3110.87	300.00	5170.94	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	999	column	idle	0	0	0	300	120
-100275	CORELLIA	cor_world	PATROL	0	3064.07	300.00	5162.42	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	999	column	idle	0	0	0	300	120
-100276	CORELLIA	cor_world	PATROL	0	3051.49	300.00	5190.25	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	999	column	idle	0	0	0	300	120
+100273	CORELLIA	cor_world	PATROL	0	3122.96	300.00	5149.53	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	0	column	idle	0	0	0	300	120
+100274	CORELLIA	cor_world	PATROL	0	3110.87	300.00	5170.94	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	0	column	idle	0	0	0	300	120
+100275	CORELLIA	cor_world	PATROL	0	3064.07	300.00	5162.42	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	0	column	idle	0	0	0	300	120
+100276	CORELLIA	cor_world	PATROL	0	3051.49	300.00	5190.25	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Doaba Guerfel	1	PATROL	0	0	column	idle	0	0	0	300	120
 100277	CORELLIA	cor_korvella_cantina	AREA	1	39.59	0.10	-0.05	152	1	Lasha Bindari	lasha_bindari_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100278	CORELLIA	cor_korvella_cantina	AREA	3	0.84	-0.89	-2.50	161	1	a bartender	bartender_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100279	CORELLIA	cor_korvella_cantina	AREA	7	9.13	-0.89	21.99	-152	1	Skinkner	skinkner_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -283,12 +283,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100283	CORELLIA	cor_korvella_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100284	CORELLIA	cor_korvella_mayor	AREA	4	8.90	0.60	-4.30	93	1	Deel Draav (mayor of Kor Vella)	deel_draav__100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100285	CORELLIA	cor_korvella_starport	AREA	1	-0.03	0.64	73.02	0	1	Chassis Dealer	chassis_dealer_ii_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
-100286	CORELLIA	cor_world	PATROL	0	-3367.73	86.00	3276.93	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100287	CORELLIA	cor_world	PATROL	0	-3689.41	86.00	3118.70	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100288	CORELLIA	cor_world	PATROL	0	-3359.78	86.00	3272.89	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100289	CORELLIA	cor_world	PATROL	0	-3119.98	31.00	2800.93	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100290	CORELLIA	cor_world	PATROL	0	-3180.99	31.00	2777.99	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100291	CORELLIA	cor_world	PATROL	0	-3669.51	86.00	3111.68	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
+100286	CORELLIA	cor_world	PATROL	0	-3367.73	86.00	3276.93	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100287	CORELLIA	cor_world	PATROL	0	-3689.41	86.00	3118.70	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100288	CORELLIA	cor_world	PATROL	0	-3359.78	86.00	3272.89	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100289	CORELLIA	cor_world	PATROL	0	-3119.98	31.00	2800.93	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100290	CORELLIA	cor_world	PATROL	0	-3180.99	31.00	2777.99	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100291	CORELLIA	cor_world	PATROL	0	-3669.51	86.00	3111.68	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
 100292	CORELLIA	cor_world	AREA	0	-3144.66	31.00	2801.60	98	1	Sgt. Eryk Chinn (an Imperial bodyguard)	imp_sgt_eryk_chinn_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100293	CORELLIA	cor_world	AREA	0	-3118.31	31.00	2790.64	15	1	Ha'adj	azure_haadj_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100294	CORELLIA	cor_world	AREA	0	-3101.82	26.69	2799.81	0	1	Lt. Lon Cope (a CorSec officer)	lt_lon_cope_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -301,10 +301,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100301	CORELLIA	cor_world	AREA	0	-3143.51	31.00	2802.63	175	1	Lt. Logro Elsin (an Imperial pilot)	logro_elsin_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
 100302	CORELLIA	cor_world	AREA	0	-3131.00	101.44	3162.00	0	1	Voba Duey (a Meatlump lieutenant)	quest_u10_meatlump_lt_100_h_inv_n	City	Kor Vella	1	TURN	0	0	-	idle	0	0	0	300	120
 100303	CORELLIA	cor_world	AREA	0	-3301.00	86.00	3243.00	43	1	Wardell	smuggler_fence_wardell_100_h_inv_n	City	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300	120
-100304	CORELLIA	cor_world	PATROL	0	-3295.03	86.00	3261.04	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100305	CORELLIA	cor_world	PATROL	0	-3297.86	86.00	3260.87	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100306	CORELLIA	cor_world	PATROL	0	-3306.72	86.00	3224.79	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
-100307	CORELLIA	cor_world	PATROL	0	-3301.54	86.00	3223.84	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	999	column	idle	0	0	0	300	120
+100304	CORELLIA	cor_world	PATROL	0	-3295.03	86.00	3261.04	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100305	CORELLIA	cor_world	PATROL	0	-3297.86	86.00	3260.87	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100306	CORELLIA	cor_world	PATROL	0	-3306.72	86.00	3224.79	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
+100307	CORELLIA	cor_world	PATROL	0	-3301.54	86.00	3223.84	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Kor Vella	1	PATROL	0	0	column	idle	0	0	0	300	120
 100308	CORELLIA	cor_world	AREA	0	-3404.64	86.00	3017.19	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kor Vella	2	LOITER	6	0	-	idle	0	0	0	300	120
 100309	CORELLIA	cor_world	AREA	0	-3411.18	86.00	3141.64	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kor Vella	2	LOITER	6	0	-	idle	0	0	0	300	120
 100310	CORELLIA	cor_world	AREA	0	-3341.61	86.00	3247.78	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kor Vella	2	LOITER	6	0	-	idle	0	0	0	300	120
@@ -457,27 +457,27 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100457	CORELLIA	cor_world	AREA	0	-5684.77	16.71	-2843.10	0	1	a Ragtag Thug	ragtag_thug_36_h_agg_n	City	Tyrena	4	LOITER	8	0	-	idle	0	0	0	300	120
 100458	CORELLIA	cor_world	AREA	0	-5692.51	15.83	-2865.79	0	1	a Ragtag Thug	ragtag_thug_36_h_agg_n	City	Tyrena	4	LOITER	8	0	-	idle	0	0	0	300	120
 100459	CORELLIA	cor_world	AREA	0	-5445.20	21.00	-2738.03	97	1	Serina	smuggler_fence_serina_100_h_inv_n	City	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300	120
-100460	CORELLIA	cor_world	PATROL	0	-5441.40	21.00	-2724.42	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	999	column	idle	0	0	0	300	120
-100461	CORELLIA	cor_world	PATROL	0	-5439.57	21.00	-2721.30	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	999	column	idle	0	0	0	300	120
-100462	CORELLIA	cor_world	PATROL	0	-5438.13	21.00	-2765.08	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	999	column	idle	0	0	0	300	120
-100463	CORELLIA	cor_world	PATROL	0	-5443.05	21.00	-2765.24	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	999	column	idle	0	0	0	300	120
+100460	CORELLIA	cor_world	PATROL	0	-5441.40	21.00	-2724.42	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	0	column	idle	0	0	0	300	120
+100461	CORELLIA	cor_world	PATROL	0	-5439.57	21.00	-2721.30	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	0	column	idle	0	0	0	300	120
+100462	CORELLIA	cor_world	PATROL	0	-5438.13	21.00	-2765.08	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	0	column	idle	0	0	0	300	120
+100463	CORELLIA	cor_world	PATROL	0	-5443.05	21.00	-2765.24	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Tyrena	1	PATROL	0	0	column	idle	0	0	0	300	120
 100464	CORELLIA	cor_vreni_cantina	AREA	3	-1.14	-0.89	-2.50	157	1	a bartender	bartender_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100465	CORELLIA	cor_vreni_cantina	AREA	8	-5.00	-0.89	-21.69	-29	1	Venthan Chassu	venthan_chassu_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100466	CORELLIA	cor_vreni_cantina	AREA	13	-29.96	-0.52	10.56	40	1	Vinya Maysor	vinya_maysor_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100467	CORELLIA	cor_vreni_hotel	AREA	8	-6.24	1.60	-7.21	-154	1	Karrek Flim	karrek_flim_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100468	CORELLIA	cor_vreni_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
-100469	CORELLIA	cor_world	PATROL	0	-5282.73	4.00	-6427.86	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100470	CORELLIA	cor_world	PATROL	0	-5159.91	4.00	-6394.56	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100471	CORELLIA	cor_world	PATROL	0	-5481.14	23.40	-6212.01	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100472	CORELLIA	cor_world	PATROL	0	-5554.03	15.14	-6064.60	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100473	CORELLIA	cor_world	PATROL	0	-5502.90	23.40	-6229.42	0	1	a watchful Rebel guard captain	reb_guard_captain_watchful_50_h_att_e	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
+100469	CORELLIA	cor_world	PATROL	0	-5282.73	4.00	-6427.86	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100470	CORELLIA	cor_world	PATROL	0	-5159.91	4.00	-6394.56	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100471	CORELLIA	cor_world	PATROL	0	-5481.14	23.40	-6212.01	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100472	CORELLIA	cor_world	PATROL	0	-5554.03	15.14	-6064.60	0	1	a Rebel security officer	reb_security_officer_25_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100473	CORELLIA	cor_world	PATROL	0	-5502.90	23.40	-6229.42	0	1	a watchful Rebel guard captain	reb_guard_captain_watchful_50_h_att_e	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
 100474	CORELLIA	cor_world	AREA	0	-5538.85	16.49	-6054.59	-179	1	a watchful Rebel guard	reb_guard_watchful_50_h_att_e	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100475	CORELLIA	cor_world	AREA	0	-5412.19	24.90	-6219.39	0	1	a watchful Rebel guard	reb_guard_watchful_50_h_att_e	City	Vreni Island	1	TURN	0	0	-	idle	0	0	0	300	120
 100476	CORELLIA	cor_world	AREA	0	-5429.03	24.00	-6219.35	0	1	a watchful Rebel guard	reb_guard_watchful_50_h_att_e	City	Vreni Island	1	TURN	0	0	-	idle	0	0	0	300	120
-100477	CORELLIA	cor_world	PATROL	0	-5500.46	23.46	-6238.56	0	1	a Rebel liberator	reb_liberator_28_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100478	CORELLIA	cor_world	PATROL	0	-5498.18	23.46	-6237.10	0	1	a Rebel liberator	reb_liberator_28_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100479	CORELLIA	cor_world	PATROL	0	-5501.72	23.40	-6230.79	0	1	a crack Rebel rifleman	reb_rifleman_crack_50_h_att_e	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100480	CORELLIA	cor_world	PATROL	0	-5504.46	23.40	-6230.88	0	1	a Rebel soldier	reb_soldier_25_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
+100477	CORELLIA	cor_world	PATROL	0	-5500.46	23.46	-6238.56	0	1	a Rebel liberator	reb_liberator_28_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100478	CORELLIA	cor_world	PATROL	0	-5498.18	23.46	-6237.10	0	1	a Rebel liberator	reb_liberator_28_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100479	CORELLIA	cor_world	PATROL	0	-5501.72	23.40	-6230.79	0	1	a crack Rebel rifleman	reb_rifleman_crack_50_h_att_e	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100480	CORELLIA	cor_world	PATROL	0	-5504.46	23.40	-6230.88	0	1	a Rebel soldier	reb_soldier_25_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
 100481	CORELLIA	cor_world	AREA	0	-5715.67	14.60	-6153.28	-90	1	a battle ready Rebel soldier	reb_soldier_battle_ready_50_h_att_e	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100482	CORELLIA	cor_world	AREA	0	-5664.35	14.60	-6179.16	90	1	a battle ready Rebel soldier	reb_soldier_battle_ready_50_h_att_e	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100483	CORELLIA	cor_world	AREA	0	-5534.91	23.40	-6203.75	35	1	a battle ready Rebel soldier	reb_soldier_battle_ready_50_h_att_e	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -485,10 +485,10 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100485	CORELLIA	cor_world	AREA	0	-5166.65	4.00	-6422.01	90	1	a Rebel recruiter	rebel_recruiter_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100486	CORELLIA	cor_world	AREA	0	-5528.67	23.00	-6183.96	90	1	a Rebel recruiter	rebel_recruiter_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
 100487	CORELLIA	cor_world	AREA	0	-5544.92	23.40	-6161.93	-87	1	Isbel	smuggler_fence_isbel_100_h_inv_n	City	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300	120
-100488	CORELLIA	cor_world	PATROL	0	-5551.45	23.40	-6174.31	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100489	CORELLIA	cor_world	PATROL	0	-5554.05	23.40	-6178.15	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100490	CORELLIA	cor_world	PATROL	0	-5558.31	23.40	-6126.13	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
-100491	CORELLIA	cor_world	PATROL	0	-5551.91	23.40	-6117.23	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	999	column	idle	0	0	0	300	120
+100488	CORELLIA	cor_world	PATROL	0	-5551.45	23.40	-6174.31	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100489	CORELLIA	cor_world	PATROL	0	-5554.05	23.40	-6178.15	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100490	CORELLIA	cor_world	PATROL	0	-5558.31	23.40	-6126.13	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
+100491	CORELLIA	cor_world	PATROL	0	-5551.91	23.40	-6117.23	0	1	a Corsec inspector	smuggler_patrol_thief_5_30_h_att_n	City	Vreni Island	1	PATROL	0	0	column	idle	0	0	0	300	120
 100492	CORELLIA	cor_doaba_sb_cavern	AREA	3	-2.20	-32.30	-66.70	0	1	a Sleepless Brotherhood Rogue	azure_sb_rogue_90_h_agg_n	Dungeon	AC SB Cavern	2	LOITER	6	0	-	idle	0	0	0	300	120
 100493	CORELLIA	cor_doaba_sb_cavern	AREA	4	39.00	-38.00	-50.00	0	1	a Sleepless Brotherhood Rogue	azure_sb_rogue_90_h_agg_n	Dungeon	AC SB Cavern	2	LOITER	6	0	-	idle	0	0	0	300	120
 100494	CORELLIA	cor_doaba_sb_cavern	AREA	4	44.50	-38.10	-94.90	0	1	a Sleepless Brotherhood Rogue	azure_sb_rogue_90_h_agg_n	Dungeon	AC SB Cavern	2	LOITER	6	0	-	idle	0	0	0	300	120
@@ -592,20 +592,20 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100592	CORELLIA	cor_world	AREA	0	2461.56	34.52	5047.28	0	1	a Chirq Council watcher	chirq_watcher_37_h_agg_n	Dungeon	Chirq Elite Council 1	1	TURN	0	0	-	idle	0	0	0	300	120
 100593	CORELLIA	cor_world	AREA	0	2450.25	35.89	5034.73	0	1	Teniel Waray (a CorSec agent)	teniel_waray_100_h_inv_n	Dungeon	Chirq Elite Council 1	1	IDLE	0	0	-	idle	0	0	0	300	120
 100594	CORELLIA	cor_chirq_council2	AREA	6	17.75	-12.00	28.91	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
-100595	CORELLIA	cor_chirq_council2	PATROL	7	17.10	-12.00	47.20	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
+100595	CORELLIA	cor_chirq_council2	PATROL	7	17.10	-12.00	47.20	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
 100596	CORELLIA	cor_chirq_council2	AREA	9	53.50	-12.00	59.60	-90	1	Koran Lassk (a Chirq Council elite councilor)	chirq_koran_lassk_42_h_agg_n	Dungeon	Chirq Elite Council 2	1	IDLE	0	0	-	idle	0	0	0	300	120
 100597	CORELLIA	cor_chirq_council2	AREA	9	37.10	-12.00	59.30	0	1	a Chirq Council vanquisher	chirq_vanquisher_39_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
 100598	CORELLIA	cor_chirq_council2	AREA	10	3.40	-12.00	77.10	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
 100599	CORELLIA	cor_chirq_council2	AREA	10	4.40	-12.00	58.40	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
-100600	CORELLIA	cor_chirq_council2	PATROL	13	3.50	-12.00	98.50	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
+100600	CORELLIA	cor_chirq_council2	PATROL	13	3.50	-12.00	98.50	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
 100601	CORELLIA	cor_chirq_council2	AREA	15	3.50	-12.00	112.30	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
-100602	CORELLIA	cor_chirq_council2	PATROL	17	23.80	-12.00	75.10	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
+100602	CORELLIA	cor_chirq_council2	PATROL	17	23.80	-12.00	75.10	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
 100603	CORELLIA	cor_chirq_council2	AREA	19	48.40	-20.00	111.50	0	1	a Chirq Council mechanized guardian	chirq_council_mech_guard_40_d_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
 100604	CORELLIA	cor_chirq_council2	AREA	21	46.80	-20.00	154.30	179	1	Markus Gilder (a Chirq Council elite councilor)	chirq_markus_glider_42_h_agg_n	Dungeon	Chirq Elite Council 2	1	IDLE	0	0	-	idle	0	0	0	300	120
 100605	CORELLIA	cor_chirq_council2	AREA	21	46.80	-20.00	140.20	0	1	a Chirq Council vanquisher	chirq_vanquisher_39_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
-100606	CORELLIA	cor_chirq_council2	PATROL	22	64.90	-20.00	151.20	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
-100607	CORELLIA	cor_chirq_council2	PATROL	23	83.72	-20.00	111.02	0	1	Braganti Hooge (a Chirq Council elite councilor)	chirq_braganti_hooge_42_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
-100608	CORELLIA	cor_chirq_council2	PATROL	23	83.60	-20.00	143.60	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	999	column	idle	0	0	0	300	120
+100606	CORELLIA	cor_chirq_council2	PATROL	22	64.90	-20.00	151.20	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
+100607	CORELLIA	cor_chirq_council2	PATROL	23	83.72	-20.00	111.02	0	1	Braganti Hooge (a Chirq Council elite councilor)	chirq_braganti_hooge_42_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
+100608	CORELLIA	cor_chirq_council2	PATROL	23	83.60	-20.00	143.60	0	1	a Chirq Council sentinel	chirq_sentinel_40_h_agg_n	Dungeon	Chirq Elite Council 2	1	PATROL	0	0	column	idle	0	0	0	300	120
 100609	CORELLIA	cor_chirq_council2	AREA	24	95.80	-20.00	151.10	0	1	a Chirq Council vanquisher	chirq_vanquisher_39_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
 100610	CORELLIA	cor_chirq_council2	AREA	25	98.70	-20.00	131.10	0	1	Tettsel Anker (a Chirq Council sub-councilor)	chirq_tettsel_anker_41_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
 100611	CORELLIA	cor_chirq_council2	AREA	27	67.40	-20.00	110.80	0	1	a Chirq Council vanquisher	chirq_vanquisher_39_h_agg_n	Dungeon	Chirq Elite Council 2	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -663,17 +663,17 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100663	CORELLIA	cor_slavers_bunker	AREA	3	79.20	-36.00	75.00	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100664	CORELLIA	cor_slavers_bunker	AREA	3	70.60	-36.00	83.80	138	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100665	CORELLIA	cor_slavers_bunker	AREA	3	85.80	-36.00	55.60	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100666	CORELLIA	cor_slavers_bunker	PATROL	3	93.75	-36.00	60.29	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100667	CORELLIA	cor_slavers_bunker	PATROL	3	33.68	-36.00	74.08	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100666	CORELLIA	cor_slavers_bunker	PATROL	3	93.75	-36.00	60.29	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100667	CORELLIA	cor_slavers_bunker	PATROL	3	33.68	-36.00	74.08	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100668	CORELLIA	cor_slavers_bunker	AREA	4	38.70	-36.00	78.90	90	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100669	CORELLIA	cor_slavers_bunker	AREA	4	26.70	-36.00	78.70	90	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100670	CORELLIA	cor_slavers_bunker	AREA	6	41.30	-36.00	123.10	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100671	CORELLIA	cor_slavers_bunker	AREA	6	42.40	-36.00	130.40	92	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100672	CORELLIA	cor_slavers_bunker	AREA	8	-19.90	-36.00	158.20	90	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100673	CORELLIA	cor_slavers_bunker	AREA	8	-6.00	-36.00	158.80	-90	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100674	CORELLIA	cor_slavers_bunker	PATROL	10	35.89	-36.00	35.12	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100674	CORELLIA	cor_slavers_bunker	PATROL	10	35.89	-36.00	35.12	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100675	CORELLIA	cor_slavers_bunker	AREA	10	-45.90	-36.00	110.90	-75	1	a timid guard	tyrena_timid_guard_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100676	CORELLIA	cor_slavers_bunker	PATROL	11	-48.42	-36.00	70.90	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100676	CORELLIA	cor_slavers_bunker	PATROL	11	-48.42	-36.00	70.90	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100677	CORELLIA	cor_slavers_bunker	AREA	11	-72.90	-36.00	81.50	-57	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100678	CORELLIA	cor_slavers_bunker	AREA	11	-73.10	-36.00	72.70	-141	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100679	CORELLIA	cor_slavers_bunker	AREA	11	-46.60	-36.00	77.30	-90	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -690,20 +690,20 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100690	CORELLIA	cor_slavers_bunker	AREA	12	-93.00	-36.00	195.80	13	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100691	CORELLIA	cor_slavers_bunker	AREA	13	-78.40	-36.00	231.20	-137	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100692	CORELLIA	cor_slavers_bunker	AREA	13	-90.10	-36.00	230.70	137	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100693	CORELLIA	cor_slavers_bunker	PATROL	14	20.40	-12.00	2.39	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100693	CORELLIA	cor_slavers_bunker	PATROL	14	20.40	-12.00	2.39	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100694	CORELLIA	cor_slavers_bunker	AREA	15	-28.41	-36.00	236.73	0	1	Probulator	probulator_slaver_med_droid_wed_39_d_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100695	CORELLIA	cor_slavers_bunker	PATROL	16	4.10	-36.00	257.30	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100695	CORELLIA	cor_slavers_bunker	PATROL	16	4.10	-36.00	257.30	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100696	CORELLIA	cor_slavers_bunker	AREA	17	-15.40	-36.00	197.90	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100697	CORELLIA	cor_slavers_bunker	AREA	17	-8.30	-36.00	210.40	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100698	CORELLIA	cor_slavers_bunker	AREA	17	-17.10	-36.00	184.00	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100699	CORELLIA	cor_slavers_bunker	AREA	17	-18.20	-36.00	210.80	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100700	CORELLIA	cor_slavers_bunker	AREA	17	-7.40	-36.00	194.30	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100701	CORELLIA	cor_slavers_bunker	PATROL	18	15.80	-36.00	189.10	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100701	CORELLIA	cor_slavers_bunker	PATROL	18	15.80	-36.00	189.10	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100702	CORELLIA	cor_slavers_bunker	AREA	19	40.50	-36.00	236.20	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100703	CORELLIA	cor_slavers_bunker	AREA	19	42.20	-36.00	216.80	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100704	CORELLIA	cor_slavers_bunker	AREA	19	51.60	-36.00	217.30	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100705	CORELLIA	cor_slavers_bunker	AREA	19	30.50	-36.00	215.50	-48	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100706	CORELLIA	cor_slavers_bunker	PATROL	21	29.60	-36.00	167.70	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100706	CORELLIA	cor_slavers_bunker	PATROL	21	29.60	-36.00	167.70	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100707	CORELLIA	cor_slavers_bunker	AREA	23	93.60	-36.00	221.20	-90	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100708	CORELLIA	cor_slavers_bunker	AREA	29	27.70	-60.00	205.40	-179	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100709	CORELLIA	cor_slavers_bunker	AREA	29	43.50	-60.00	206.30	-179	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -711,7 +711,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100711	CORELLIA	cor_slavers_bunker	AREA	31	-39.20	-60.00	192.30	0	1	a technician	tyrena_technician_35_h_att_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100712	CORELLIA	cor_slavers_bunker	AREA	31	-57.60	-60.00	215.90	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100713	CORELLIA	cor_slavers_bunker	AREA	31	-57.70	-60.00	204.90	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100714	CORELLIA	cor_slavers_bunker	PATROL	31	-50.60	-60.00	211.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100714	CORELLIA	cor_slavers_bunker	PATROL	31	-50.60	-60.00	211.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100715	CORELLIA	cor_slavers_bunker	AREA	37	-165.20	-60.00	136.00	50	1	Akers Radch	tyrena_akers_radch_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100716	CORELLIA	cor_slavers_bunker	AREA	37	-113.30	-60.00	134.60	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100717	CORELLIA	cor_slavers_bunker	AREA	37	-118.00	-60.00	151.70	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -722,8 +722,8 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100722	CORELLIA	cor_slavers_bunker	AREA	37	-155.40	-60.00	163.40	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100723	CORELLIA	cor_slavers_bunker	AREA	37	-160.70	-60.00	115.20	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100724	CORELLIA	cor_slavers_bunker	AREA	37	-161.40	-60.00	115.90	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100725	CORELLIA	cor_slavers_bunker	PATROL	37	-130.80	-60.00	157.70	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100726	CORELLIA	cor_slavers_bunker	PATROL	37	-143.00	-60.00	159.50	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100725	CORELLIA	cor_slavers_bunker	PATROL	37	-130.80	-60.00	157.70	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100726	CORELLIA	cor_slavers_bunker	PATROL	37	-143.00	-60.00	159.50	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100727	CORELLIA	cor_slavers_bunker	AREA	37	-105.80	-60.00	171.00	-180	1	Stavu Huu	tyrena_stavu_huu_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100728	CORELLIA	cor_slavers_bunker	AREA	38	-21.40	-60.00	155.40	-104	1	Akkus Meik	tyrena_akkus_meik_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100729	CORELLIA	cor_slavers_bunker	AREA	38	-31.90	-60.00	155.50	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -732,9 +732,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100732	CORELLIA	cor_slavers_bunker	AREA	38	-41.20	-60.00	157.00	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100733	CORELLIA	cor_slavers_bunker	AREA	38	-50.40	-60.00	162.90	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100734	CORELLIA	cor_slavers_bunker	AREA	38	-62.50	-60.00	134.90	90	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100735	CORELLIA	cor_slavers_bunker	PATROL	38	-63.60	-60.00	140.40	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100736	CORELLIA	cor_slavers_bunker	PATROL	38	16.50	-60.00	178.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100737	CORELLIA	cor_slavers_bunker	PATROL	38	-32.92	-60.00	161.30	0	1	Slavemaster	tyrena_slavemaster_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100735	CORELLIA	cor_slavers_bunker	PATROL	38	-63.60	-60.00	140.40	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100736	CORELLIA	cor_slavers_bunker	PATROL	38	16.50	-60.00	178.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100737	CORELLIA	cor_slavers_bunker	PATROL	38	-32.92	-60.00	161.30	0	1	Slavemaster	tyrena_slavemaster_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100738	CORELLIA	cor_slavers_bunker	AREA	39	44.10	-60.00	143.20	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100739	CORELLIA	cor_slavers_bunker	AREA	39	48.10	-60.00	158.40	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100740	CORELLIA	cor_slavers_bunker	AREA	39	50.20	-60.00	152.50	0	1	a slave	tyrena_slave_100_h_inv_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -751,14 +751,14 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100751	CORELLIA	cor_slavers_bunker	AREA	41	42.30	-58.00	80.30	0	1	a prison guard	tyrena_prison_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100752	CORELLIA	cor_slavers_bunker	AREA	41	45.50	-60.00	117.00	0	1	a prison guard	tyrena_prison_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100753	CORELLIA	cor_slavers_bunker	AREA	41	48.80	-58.00	80.60	0	1	a prison guard	tyrena_prison_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100754	CORELLIA	cor_slavers_bunker	PATROL	42	27.70	-68.00	165.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100755	CORELLIA	cor_slavers_bunker	PATROL	43	43.70	-68.00	165.10	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100754	CORELLIA	cor_slavers_bunker	PATROL	42	27.70	-68.00	165.20	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100755	CORELLIA	cor_slavers_bunker	PATROL	43	43.70	-68.00	165.10	0	1	an elite slaver guard	tyrena_elite_slaver_guard_40_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100756	CORELLIA	cor_slavers_bunker	AREA	45	-17.10	-28.00	165.70	-179	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100757	CORELLIA	cor_slavers_bunker	AREA	45	-8.20	-28.00	165.90	-179	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100758	CORELLIA	cor_slavers_bunker	AREA	45	40.50	-28.00	141.90	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100759	CORELLIA	cor_weather_station	PATROL	20	-2.10	-20.00	84.86	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100760	CORELLIA	cor_weather_station	PATROL	21	1.27	-20.00	70.72	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-100761	CORELLIA	cor_world	PATROL	0	-6401.80	25.96	-2157.00	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100759	CORELLIA	cor_weather_station	PATROL	20	-2.10	-20.00	84.86	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100760	CORELLIA	cor_weather_station	PATROL	21	1.27	-20.00	70.72	0	1	a helper droid	quest_u10_helper_droid_65_d_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+100761	CORELLIA	cor_world	PATROL	0	-6401.80	25.96	-2157.00	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100762	CORELLIA	cor_world	AREA	0	-6374.43	23.85	-2157.12	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	2	LOITER	6	0	-	idle	0	0	0	300	120
 100763	CORELLIA	cor_world	AREA	0	-6390.66	22.07	-2210.26	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	2	LOITER	6	0	-	idle	0	0	0	300	120
 100764	CORELLIA	cor_world	AREA	0	-6401.31	20.53	-2126.87	0	1	a slaver guard	tyrena_slaver_guard_37_h_agg_n	Dungeon	Corellian Slaver Bunker	2	LOITER	6	0	-	idle	0	0	0	300	120
@@ -819,7 +819,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100819	CORELLIA	cor_deflarian_bunker	AREA	4	3.60	-12.00	31.40	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100820	CORELLIA	cor_deflarian_bunker	AREA	5	33.70	-12.00	31.00	-90	1	Captain Donovan	captain_donovan_100_h_inv_n	Dungeon	Deflarian Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 100821	CORELLIA	cor_deflarian_bunker	AREA	7	-10.40	-16.00	84.10	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-100822	CORELLIA	cor_deflarian_bunker	PATROL	7	-16.40	-16.00	78.10	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100822	CORELLIA	cor_deflarian_bunker	PATROL	7	-16.40	-16.00	78.10	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100823	CORELLIA	cor_deflarian_bunker	AREA	7	15.10	-16.00	82.70	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100824	CORELLIA	cor_deflarian_bunker	AREA	7	3.70	-16.00	65.40	0	1	a Deflarian Henchman	deflarian_henchman_36_h_agg_n	Dungeon	Deflarian Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100825	CORELLIA	cor_deflarian_bunker	AREA	7	3.80	-16.00	84.50	0	1	Underboss(a Deflarian henchman)	deflarian_underboss_37_h_agg_n	Dungeon	Deflarian Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -911,7 +911,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100911	CORELLIA	cor_droid_bunker	AREA	32	-66.10	-34.00	-277.10	0	1	Super Battle Droid	sbd_50_d_agg_e	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100912	CORELLIA	cor_droid_bunker	AREA	35	-134.00	-34.00	-193.50	0	1	Super Battle Droid	sbd_50_d_agg_e	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100913	CORELLIA	cor_droid_bunker	AREA	36	-129.70	-34.00	-268.30	90	1	Super Battle Droid	sbd_50_d_agg_e	Dungeon	Droid Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-100914	CORELLIA	cor_droid_bunker	PATROL	37	-135.80	-33.80	-322.90	0	1	Battle Droid	battle_droid_50_d_agg_n	Dungeon	Droid Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+100914	CORELLIA	cor_droid_bunker	PATROL	37	-135.80	-33.80	-322.90	0	1	Battle Droid	battle_droid_50_d_agg_n	Dungeon	Droid Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 100915	CORELLIA	cor_droid_bunker	AREA	38	-133.40	-34.40	-367.40	0	1	Battle Droid	battle_droid_50_d_agg_n	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100916	CORELLIA	cor_droid_bunker	AREA	38	-150.90	-34.70	-389.00	0	1	Droideka	droideka_52_d_agg_e	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100917	CORELLIA	cor_droid_bunker	AREA	38	-116.90	-33.80	-350.00	0	1	Super Battle Droid	sbd_50_d_agg_e	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -927,7 +927,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100927	CORELLIA	cor_droid_bunker	AREA	43	92.70	-34.30	-327.20	0	1	Prototype Droid	prototype_droid_boss_50_d_agg_b	Dungeon	Droid Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 100928	CORELLIA	cor_korvella_frosch_research_station	AREA	2	-3.80	0.30	-4.00	3	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	IDLE	0	0	-	idle	0	0	0	300	120
 100929	CORELLIA	cor_korvella_frosch_research_station	AREA	5	22.30	-12.00	45.00	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
-100930	CORELLIA	cor_korvella_frosch_research_station	PATROL	5	2.84	-12.00	30.79	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
+100930	CORELLIA	cor_korvella_frosch_research_station	PATROL	5	2.84	-12.00	30.79	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
 100931	CORELLIA	cor_korvella_frosch_research_station	AREA	5	-2.90	-12.00	48.10	112	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	IDLE	0	0	-	idle	0	0	0	300	120
 100932	CORELLIA	cor_korvella_frosch_research_station	AREA	5	-3.20	-12.00	45.70	72	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	IDLE	0	0	-	idle	0	0	0	300	120
 100933	CORELLIA	cor_korvella_frosch_research_station	AREA	5	2.70	-12.00	40.30	5	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -939,9 +939,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100939	CORELLIA	cor_korvella_frosch_research_station	AREA	8	-70.50	-20.00	13.40	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100940	CORELLIA	cor_korvella_frosch_research_station	AREA	9	-53.30	-20.00	84.30	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100941	CORELLIA	cor_korvella_frosch_research_station	AREA	9	-69.40	-20.00	77.10	0	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
-100942	CORELLIA	cor_korvella_frosch_research_station	PATROL	10	35.66	-12.00	42.20	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
-100943	CORELLIA	cor_korvella_frosch_research_station	PATROL	11	49.30	-12.00	77.30	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
-100944	CORELLIA	cor_korvella_frosch_research_station	PATROL	11	72.00	-12.00	89.10	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
+100942	CORELLIA	cor_korvella_frosch_research_station	PATROL	10	35.66	-12.00	42.20	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
+100943	CORELLIA	cor_korvella_frosch_research_station	PATROL	11	49.30	-12.00	77.30	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
+100944	CORELLIA	cor_korvella_frosch_research_station	PATROL	11	72.00	-12.00	89.10	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
 100945	CORELLIA	cor_korvella_frosch_research_station	AREA	12	48.20	-12.00	59.10	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100946	CORELLIA	cor_korvella_frosch_research_station	AREA	13	18.00	-20.00	129.70	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100947	CORELLIA	cor_korvella_frosch_research_station	AREA	13	32.80	-20.00	122.30	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -949,12 +949,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 100949	CORELLIA	cor_korvella_frosch_research_station	AREA	14	44.30	-12.00	0.70	0	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100950	CORELLIA	cor_korvella_frosch_research_station	AREA	14	57.70	-12.00	19.60	0	1	a Frosch Researcher	azure_frosch_researcher_89_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100951	CORELLIA	cor_korvella_frosch_research_station	AREA	16	-12.90	-20.00	0.20	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
-100952	CORELLIA	cor_korvella_frosch_research_station	PATROL	18	-31.00	-20.00	51.99	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
+100952	CORELLIA	cor_korvella_frosch_research_station	PATROL	18	-31.00	-20.00	51.99	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
 100953	CORELLIA	cor_korvella_frosch_research_station	AREA	19	-22.50	-20.00	113.10	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100954	CORELLIA	cor_korvella_frosch_research_station	AREA	19	-33.40	-20.00	98.10	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100955	CORELLIA	cor_korvella_frosch_research_station	AREA	21	-4.30	-20.00	72.90	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
 100956	CORELLIA	cor_korvella_frosch_research_station	AREA	21	0.10	-20.00	68.30	0	1	a Frosch Cryptoanalyst	azure_frosch_crypto_90_h_agg_n	Dungeon	Frosch Research Station	1	TURN	0	0	-	idle	0	0	0	300	120
-100957	CORELLIA	cor_world	PATROL	0	-3672.57	101.00	3348.18	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	999	column	idle	0	0	0	300	120
+100957	CORELLIA	cor_world	PATROL	0	-3672.57	101.00	3348.18	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	1	PATROL	0	0	column	idle	0	0	0	300	120
 100958	CORELLIA	cor_world	AREA	0	-3674.41	101.00	3437.11	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	2	LOITER	6	0	-	idle	0	0	0	300	120
 100959	CORELLIA	cor_world	AREA	0	-3692.76	101.00	3401.13	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	2	LOITER	6	0	-	idle	0	0	0	300	120
 100960	CORELLIA	cor_world	AREA	0	-3660.24	101.00	3408.16	0	1	a Frosch Guard	azure_frosch_guard_91_h_agg_n	Dungeon	Frosch Research Station	2	LOITER	6	0	-	idle	0	0	0	300	120
@@ -1000,7 +1000,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101000	CORELLIA	cor_tyrena_meatlump_cave	AREA	3	87.50	-54.10	-12.60	0	1	a Meatlump simp	meatlump_simp_38_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 101001	CORELLIA	cor_tyrena_meatlump_cave	AREA	4	70.60	-67.20	-61.80	0	1	a Meatlump simp	meatlump_simp_38_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 101002	CORELLIA	cor_tyrena_meatlump_cave	AREA	4	89.20	-69.10	-61.40	0	1	a Meatlump simp	meatlump_simp_38_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
-101003	CORELLIA	cor_tyrena_meatlump_cave	PATROL	5	91.60	-59.20	-109.70	0	1	Hrath Koo (a Meatlump thug)	meatlump_hrath_koo_39_h_agg_n	Dungeon	Meatlump Cave	1	PATROL	0	999	column	idle	0	0	0	300	120
+101003	CORELLIA	cor_tyrena_meatlump_cave	PATROL	5	91.60	-59.20	-109.70	0	1	Hrath Koo (a Meatlump thug)	meatlump_hrath_koo_39_h_agg_n	Dungeon	Meatlump Cave	1	PATROL	0	0	column	idle	0	0	0	300	120
 101004	CORELLIA	cor_tyrena_meatlump_cave	AREA	5	88.40	-38.90	-104.30	0	1	a Meatlump nerp	meatlump_nerp_39_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 101005	CORELLIA	cor_tyrena_meatlump_cave	AREA	5	88.40	-37.70	-121.10	0	1	a Meatlump nerp	meatlump_nerp_39_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 101006	CORELLIA	cor_tyrena_meatlump_cave	AREA	5	89.50	-38.60	-112.40	0	1	a Meatlump nerp	meatlump_nerp_39_h_agg_n	Dungeon	Meatlump Cave	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1100,19 +1100,19 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101100	CORELLIA	cor_meatlump_hideout_main	AREA	45	-6.85	-28.00	129.21	0	1	a Meatlump lieutenant	mtp_hideout_meatlump_lieutenant_100_h_att_n	Dungeon	Meatlump Hideout Main	3	LOITER	6	0	-	idle	0	0	0	300	120
 101101	CORELLIA	cor_murmurs_lab	AREA	6	15.00	-12.00	25.80	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 101102	CORELLIA	cor_murmurs_lab	AREA	6	17.60	-12.00	34.00	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-101103	CORELLIA	cor_murmurs_lab	PATROL	7	17.70	-12.00	45.50	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-101104	CORELLIA	cor_murmurs_lab	PATROL	8	17.50	-12.00	58.70	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+101103	CORELLIA	cor_murmurs_lab	PATROL	7	17.70	-12.00	45.50	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+101104	CORELLIA	cor_murmurs_lab	PATROL	8	17.50	-12.00	58.70	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 101105	CORELLIA	cor_murmurs_lab	AREA	9	33.00	-12.00	58.80	0	1	an administrator	murmur_administrator_28_h_att_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 101106	CORELLIA	cor_murmurs_lab	AREA	9	52.30	-12.00	58.60	0	1	an administrator	murmur_administrator_28_h_att_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 101107	CORELLIA	cor_murmurs_lab	AREA	10	-1.50	-12.00	53.50	-2	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-101108	CORELLIA	cor_murmurs_lab	PATROL	10	5.60	-12.00	60.10	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+101108	CORELLIA	cor_murmurs_lab	PATROL	10	5.60	-12.00	60.10	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 101109	CORELLIA	cor_murmurs_lab	AREA	10	0.40	-12.00	74.90	102	1	Jeridel	murmur_side_brother_100_h_inv_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 101110	CORELLIA	cor_murmurs_lab	AREA	13	3.60	-12.00	98.90	-179	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 101111	CORELLIA	cor_murmurs_lab	AREA	14	18.50	-12.00	99.10	-126	1	Pirt Rawklin	murmur_executive_2_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 101112	CORELLIA	cor_murmurs_lab	AREA	15	03.07	-12.00	115.17	-175	1	Rond Fenimer	murmur_executive_3_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
 101113	CORELLIA	cor_murmurs_lab	AREA	16	-10.30	-12.00	98.60	76	1	Benn Calder	murmur_executive_1_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	IDLE	0	0	-	idle	0	0	0	300	120
-101114	CORELLIA	cor_murmurs_lab	PATROL	17	33.50	-12.00	75.20	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-101115	CORELLIA	cor_murmurs_lab	PATROL	18	33.40	-20.00	110.80	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+101114	CORELLIA	cor_murmurs_lab	PATROL	17	33.50	-12.00	75.20	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+101115	CORELLIA	cor_murmurs_lab	PATROL	18	33.40	-20.00	110.80	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 101116	CORELLIA	cor_murmurs_lab	AREA	19	47.10	-20.00	112.30	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 101117	CORELLIA	cor_murmurs_lab	AREA	21	47.10	-20.00	137.30	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 101118	CORELLIA	cor_murmurs_lab	AREA	21	47.90	-20.00	155.40	0	1	a security officer	murmur_admin_security_34_h_agg_n	Dungeon	Murmurs Lab Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1169,7 +1169,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101169	CORELLIA	cor_doaba_pendretronics	AREA	5	0.30	-12.00	59.80	-9	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
 101170	CORELLIA	cor_doaba_pendretronics	AREA	5	21.20	-12.00	45.10	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101171	CORELLIA	cor_doaba_pendretronics	AREA	5	3.60	-12.00	40.70	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
-101172	CORELLIA	cor_doaba_pendretronics	PATROL	5	6.76	-12.00	56.50	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	999	column	idle	0	0	0	300	120
+101172	CORELLIA	cor_doaba_pendretronics	PATROL	5	6.76	-12.00	56.50	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	0	column	idle	0	0	0	300	120
 101173	CORELLIA	cor_doaba_pendretronics	AREA	7	-49.80	-20.00	67.90	38	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
 101174	CORELLIA	cor_doaba_pendretronics	AREA	7	-56.60	-20.00	39.50	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101175	CORELLIA	cor_doaba_pendretronics	AREA	7	-70.00	-20.00	64.20	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1177,7 +1177,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101177	CORELLIA	cor_doaba_pendretronics	AREA	8	-63.90	-20.00	12.40	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101178	CORELLIA	cor_doaba_pendretronics	AREA	9	-57.10	-20.00	83.60	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101179	CORELLIA	cor_doaba_pendretronics	AREA	9	-65.30	-20.00	78.30	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
-101180	CORELLIA	cor_doaba_pendretronics	PATROL	10	35.61	-12.00	53.64	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	999	column	idle	0	0	0	300	120
+101180	CORELLIA	cor_doaba_pendretronics	PATROL	10	35.61	-12.00	53.64	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	0	column	idle	0	0	0	300	120
 101181	CORELLIA	cor_doaba_pendretronics	AREA	11	49.40	-12.00	87.70	177	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
 101182	CORELLIA	cor_doaba_pendretronics	AREA	11	56.70	-12.00	78.40	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101183	CORELLIA	cor_doaba_pendretronics	AREA	12	46.60	-12.00	54.50	-147	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -1189,9 +1189,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101189	CORELLIA	cor_doaba_pendretronics	AREA	14	26.25	-12.00	26.04	-1	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
 101190	CORELLIA	cor_doaba_pendretronics	AREA	14	61.40	-12.00	16.20	90	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
 101191	CORELLIA	cor_doaba_pendretronics	AREA	14	61.70	-12.00	5.50	90	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
-101192	CORELLIA	cor_doaba_pendretronics	PATROL	14	23.53	-12.00	9.53	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	999	column	idle	0	0	0	300	120
+101192	CORELLIA	cor_doaba_pendretronics	PATROL	14	23.53	-12.00	9.53	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	0	column	idle	0	0	0	300	120
 101193	CORELLIA	cor_doaba_pendretronics	AREA	16	-9.63	-20.00	9.48	-154	1	Kazic Pendre (owner of Pendretronics)	chirq_kazic_pendre_39_h_att_e	Dungeon	Pendretronics	1	IDLE	0	0	-	idle	0	0	0	300	120
-101194	CORELLIA	cor_doaba_pendretronics	PATROL	18	-30.27	-20.00	48.94	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	999	column	idle	0	0	0	300	120
+101194	CORELLIA	cor_doaba_pendretronics	PATROL	18	-30.27	-20.00	48.94	0	1	a Pendretronics security guard	pendretronics_security_38_h_agg_n	Dungeon	Pendretronics	1	PATROL	0	0	column	idle	0	0	0	300	120
 101195	CORELLIA	cor_doaba_pendretronics	AREA	19	-14.90	-20.00	103.00	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101196	CORELLIA	cor_doaba_pendretronics	AREA	19	-27.90	-20.00	103.30	0	1	a Pendretronics employee	pendretronics_employee_37_h_att_n	Dungeon	Pendretronics	1	TURN	0	0	-	idle	0	0	0	300	120
 101197	CORELLIA	cor_coronet_tomi_jinsin	AREA	3	3.70	0.30	-3.70	0	1	a Ragtag sentry	ragtag_sentry_31_h_agg_n	Dungeon	Rag Tag Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1230,7 +1230,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101230	CORELLIA	cor_imp_captured_starships	AREA	4	3.80	-9.00	26.10	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
 101231	CORELLIA	cor_imp_captured_starships	AREA	5	-32.80	-9.00	27.60	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
 101232	CORELLIA	cor_imp_captured_starships	AREA	6	-54.30	-9.00	11.10	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
-101233	CORELLIA	cor_imp_captured_starships	PATROL	6	-75.70	-9.00	27.30	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	PATROL	0	999	column	idle	0	0	0	300	120
+101233	CORELLIA	cor_imp_captured_starships	PATROL	6	-75.70	-9.00	27.30	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	PATROL	0	0	column	idle	0	0	0	300	120
 101234	CORELLIA	cor_imp_captured_starships	AREA	7	19.40	-17.00	63.50	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
 101235	CORELLIA	cor_imp_captured_starships	AREA	9	-12.20	-23.00	196.80	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
 101236	CORELLIA	cor_imp_captured_starships	AREA	9	-37.70	-23.00	189.70	0	1	a Stormtrooper guard	rtp_wedge_stormtrooper_guard_85_h_att_e	Dungeon	RTP - Imperial Captured Starships	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1421,7 +1421,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101421	CORELLIA	cor_world	AREA	0	-4795.52	4.32	-1951.86	-171	1	Hoolar Freeb	azure_hoolar_freeb_100_h_inv_n	Outback	Corellia	1	IDLE	0	0	-	idle	0	0	0	300	120
 101422	CORELLIA	cor_world	AREA	0	-204.25	1.45	-3831.77	0	1	Aldalad	borvo_aldalad_27_h_att_n	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	300	120
 101423	CORELLIA	cor_world	AREA	0	642.45	0.19	-4439.00	0	1	Maerzen	borvo_maerzen_27_h_att_n	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	300	120
-101424	CORELLIA	cor_world	PATROL	0	-6182.88	34.77	-2830.20	0	1	a Deflarian Courier	deflarian_courier_35_h_agg_n	Outback	Corellia	1	PATROL	0	999	column	idle	0	0	0	300	120
+101424	CORELLIA	cor_world	PATROL	0	-6182.88	34.77	-2830.20	0	1	a Deflarian Courier	deflarian_courier_35_h_agg_n	Outback	Corellia	1	PATROL	0	0	column	idle	0	0	0	300	120
 101425	CORELLIA	cor_world	AREA	0	3871.14	269.27	5626.53	-62	1	Myron Beech	disappear_myron_beech_100_h_inv_n	Outback	Corellia	1	IDLE	0	0	-	idle	0	0	0	300	120
 101426	CORELLIA	cor_world	AREA	0	624.15	26.52	-424.21	0	1	an industrial spy	industrial_spy_7_h_att_n	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	300	120
 101427	CORELLIA	cor_world	AREA	0	-6831.07	454.34	2211.75	0	1	a visionary of Lord Nyax	lord_nyax_visionary_39_h_agg_n	Outback	Corellia	3	LOITER	9	0	-	idle	0	0	0	300	120
@@ -1619,16 +1619,16 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101619	CORELLIA	cor_world	AREA	0	4248.56	25.12	-160.00	0	1	a Drall monk	drall_monk_37_h_att_n	POI	Drall Patriot's Cave	2	LOITER	6	0	-	idle	0	0	0	300	120
 101620	CORELLIA	cor_world	AREA	0	1041.12	33.07	4213.03	0	1	a Drall patriot	drall_patriot_37_h_att_n	POI	Drall Patriot's Cave	3	LOITER	9	0	-	idle	0	0	0	300	120
 101621	CORELLIA	cor_hidden_reb_base	AREA	2	-2.78	02.01	4.47	141	1	C-3PO	c3po_100_d_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-101622	CORELLIA	cor_hidden_reb_base	PATROL	2	18.97	01.01	8.10	0	1	an MSE-6 "Mouse" droid	mouse_droid_1_d_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101623	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.94	01.01	-0.03	0	1	an MSE-6 "Mouse" droid	mouse_droid_1_d_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101622	CORELLIA	cor_hidden_reb_base	PATROL	2	18.97	01.01	8.10	0	1	an MSE-6 "Mouse" droid	mouse_droid_1_d_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101623	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.94	01.01	-0.03	0	1	an MSE-6 "Mouse" droid	mouse_droid_1_d_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101624	CORELLIA	cor_hidden_reb_base	AREA	2	-3.95	01.01	-0.93	26	1	R2-D2	r2d2_100_d_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101625	CORELLIA	cor_hidden_reb_base	AREA	2	7.27	01.01	-8.20	-90	1	Falton Molard	falton_molard_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-101626	CORELLIA	cor_hidden_reb_base	PATROL	2	-0.33	01.01	-14.29	0	1	a Rebel Second Lieuteneant	rebel_second_lieutenant_19_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101626	CORELLIA	cor_hidden_reb_base	PATROL	2	-0.33	01.01	-14.29	0	1	a Rebel Second Lieuteneant	rebel_second_lieutenant_19_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101627	CORELLIA	cor_hidden_reb_base	AREA	2	0.34	02.01	5.50	0	1	a Rebel Second Lieuteneant	rebel_second_lieutenant_19_h_att_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-101628	CORELLIA	cor_hidden_reb_base	PATROL	2	4.70	01.01	-8.44	0	1	a Rebel Staff Corporal	rebel_staff_corporal_16_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101629	CORELLIA	cor_hidden_reb_base	PATROL	2	6.37	01.01	2.49	0	1	a Rebel trooper	rebel_trooper_15_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101630	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.76	01.01	-11.98	0	1	a Rebel trooper	rebel_trooper_15_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101631	CORELLIA	cor_hidden_reb_base	PATROL	5	15.30	01.01	-1.68	0	1	a 3PO protocol droid	reb_detain_battle_astromech_60_d_agg_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101628	CORELLIA	cor_hidden_reb_base	PATROL	2	4.70	01.01	-8.44	0	1	a Rebel Staff Corporal	rebel_staff_corporal_16_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101629	CORELLIA	cor_hidden_reb_base	PATROL	2	6.37	01.01	2.49	0	1	a Rebel trooper	rebel_trooper_15_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101630	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.76	01.01	-11.98	0	1	a Rebel trooper	rebel_trooper_15_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101631	CORELLIA	cor_hidden_reb_base	PATROL	5	15.30	01.01	-1.68	0	1	a 3PO protocol droid	reb_detain_battle_astromech_60_d_agg_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101632	CORELLIA	cor_hidden_reb_base	AREA	5	15.00	01.01	-6.53	-81	1	Major Qual'do Herm	qualdo_herm_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101633	CORELLIA	cor_hidden_reb_base	AREA	5	13.11	01.01	1.63	179	1	a Rebel First Lieutenant	rebel_first_lieutenant_20_h_att_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 101634	CORELLIA	cor_hidden_reb_base	AREA	5	13.28	01.01	-6.27	87	1	a Rebel scout	rebel_scout_15_h_att_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
@@ -1642,18 +1642,18 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101642	CORELLIA	cor_hidden_reb_base	AREA	11	-6.23	07.01	06.05	82	1	a Rebel trooper	rebel_trooper_15_h_att_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101643	CORELLIA	cor_hidden_reb_base	AREA	11	-11.19	07.01	11.68	167	1	Leia Organa	rtp_leia_organa_summoned_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101644	CORELLIA	cor_hidden_reb_base	AREA	12	5.91	07.01	10.03	87	1	a Rebel Colonel	rebel_colonel_24_h_att_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-101645	CORELLIA	cor_world	PATROL	0	-6479.03	398.00	5966.28	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101646	CORELLIA	cor_world	PATROL	0	-6475.40	398.00	5958.95	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101647	CORELLIA	cor_world	PATROL	0	-6487.88	398.00	6022.32	0	1	an R3 unit	r3_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101648	CORELLIA	cor_world	PATROL	0	-6472.88	398.00	6029.06	0	1	an R5 unit	r5_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101649	CORELLIA	cor_world	PATROL	0	-6454.20	398.00	5985.37	0	1	an R5 unit	r5_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101645	CORELLIA	cor_world	PATROL	0	-6479.03	398.00	5966.28	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101646	CORELLIA	cor_world	PATROL	0	-6475.40	398.00	5958.95	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101647	CORELLIA	cor_world	PATROL	0	-6487.88	398.00	6022.32	0	1	an R3 unit	r3_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101648	CORELLIA	cor_world	PATROL	0	-6472.88	398.00	6029.06	0	1	an R5 unit	r5_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101649	CORELLIA	cor_world	PATROL	0	-6454.20	398.00	5985.37	0	1	an R5 unit	r5_droid_100_d_inv_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101650	CORELLIA	cor_world	AREA	0	-6563.62	398.00	5984.90	51	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101651	CORELLIA	cor_world	AREA	0	-6552.44	398.00	6014.82	78	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101652	CORELLIA	cor_world	AREA	0	-6510.09	398.00	6040.92	-148	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101653	CORELLIA	cor_world	AREA	0	-6454.66	398.00	6008.84	-142	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101654	CORELLIA	cor_world	AREA	0	-6485.96	398.00	5970.23	120	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101655	CORELLIA	cor_world	AREA	0	-6497.05	398.00	5950.87	-171	1	a commoner	commoner_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-101656	CORELLIA	cor_world	PATROL	0	-6583.82	405.00	5967.56	0	1	a Rebel Captain	reb_army_captain_21_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101656	CORELLIA	cor_world	PATROL	0	-6583.82	405.00	5967.56	0	1	a Rebel Captain	reb_army_captain_21_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101657	CORELLIA	cor_world	AREA	0	-6519.32	398.00	6043.70	149	1	Lt. Lance	lt_lance_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101658	CORELLIA	cor_world	AREA	0	-6490.71	398.00	6047.45	100	1	a medic	medic_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101659	CORELLIA	cor_world	AREA	0	-6430.63	405.00	6033.71	0	1	a Rebel guard	rebel_base_guard_15_h_att_n	POI	Hidden Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -1662,18 +1662,18 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101662	CORELLIA	cor_world	AREA	0	-6482.10	405.00	5914.92	0	1	a Rebel guard	rebel_base_guard_15_h_att_n	POI	Hidden Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 101663	CORELLIA	cor_world	AREA	0	-6529.17	405.00	5910.89	0	1	a Rebel guard	rebel_base_guard_15_h_att_n	POI	Hidden Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 101664	CORELLIA	cor_world	AREA	0	-6570.11	405.00	5942.90	0	1	a Rebel guard	rebel_base_guard_15_h_att_n	POI	Hidden Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
-101665	CORELLIA	cor_world	PATROL	0	-6555.23	403.34	5944.66	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101666	CORELLIA	cor_world	PATROL	0	-6586.66	405.00	5967.40	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101667	CORELLIA	cor_world	PATROL	0	-6584.70	405.00	5963.74	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101668	CORELLIA	cor_world	PATROL	0	-6581.84	405.00	5966.13	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101669	CORELLIA	cor_world	PATROL	0	-6550.86	401.63	5949.75	0	1	a Rebel First Lieutenant	rebel_first_lieutenant_20_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101670	CORELLIA	cor_world	PATROL	0	-6553.28	402.58	5946.93	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101671	CORELLIA	cor_world	PATROL	0	-6559.73	405.00	5920.79	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101672	CORELLIA	cor_world	PATROL	0	-6558.93	405.00	5923.41	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101673	CORELLIA	cor_world	PATROL	0	-6498.89	398.00	6035.33	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
-101674	CORELLIA	cor_world	PATROL	0	-6482.04	398.00	6024.85	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101665	CORELLIA	cor_world	PATROL	0	-6555.23	403.34	5944.66	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101666	CORELLIA	cor_world	PATROL	0	-6586.66	405.00	5967.40	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101667	CORELLIA	cor_world	PATROL	0	-6584.70	405.00	5963.74	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101668	CORELLIA	cor_world	PATROL	0	-6581.84	405.00	5966.13	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101669	CORELLIA	cor_world	PATROL	0	-6550.86	401.63	5949.75	0	1	a Rebel First Lieutenant	rebel_first_lieutenant_20_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101670	CORELLIA	cor_world	PATROL	0	-6553.28	402.58	5946.93	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101671	CORELLIA	cor_world	PATROL	0	-6559.73	405.00	5920.79	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101672	CORELLIA	cor_world	PATROL	0	-6558.93	405.00	5923.41	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101673	CORELLIA	cor_world	PATROL	0	-6498.89	398.00	6035.33	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
+101674	CORELLIA	cor_world	PATROL	0	-6482.04	398.00	6024.85	0	1	a Rebel Major	rebel_major_22_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101675	CORELLIA	cor_world	AREA	0	-6485.00	398.00	6017.00	35	1	Teslo Ten'Doora	rebel_officer_questgiver_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-101676	CORELLIA	cor_world	PATROL	0	-6474.63	398.00	6020.03	0	1	a Rebel Sergeant	rebel_sergeant_16_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	999	column	idle	0	0	0	300	120
+101676	CORELLIA	cor_world	PATROL	0	-6474.63	398.00	6020.03	0	1	a Rebel Sergeant	rebel_sergeant_16_h_att_n	POI	Hidden Rebel Base	1	PATROL	0	0	column	idle	0	0	0	300	120
 101677	CORELLIA	cor_world	AREA	0	-6435.16	405.00	6032.51	0	1	a Rebel guard captain	rtp_c3po_guard_captain_16_h_att_n	POI	Hidden Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 101678	CORELLIA	cor_world	AREA	0	-6522.76	398.00	5956.46	111	1	a slicer	slicer_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 101679	CORELLIA	cor_world	AREA	0	-6538.48	398.00	5985.63	-86	1	a smuggler	smuggler_100_h_inv_n	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -1744,6 +1744,6 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 101744	CORELLIA	cor_world	AREA	0	4705.13	25.00	-5773.65	0	1	Imperial TIE Fighter pilot	imp_pilot_tie_20_h_att_n	POI	Stronghold	1	LOITER	2	0	-	idle	0	0	0	300	120
 101745	CORELLIA	cor_world	AREA	0	4680.94	25.00	-5820.61	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Stronghold	3	LOITER	9	0	-	idle	0	0	0	300	120
 101746	CORELLIA	cor_world	AREA	0	4692.95	25.00	-5762.53	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Stronghold	3	LOITER	9	0	-	idle	0	0	0	300	120
-101747	CORELLIA	cor_world	PATROL	0	4682.24	25.00	-5762.14	0	1	a Novatrooper Squad Leader	stormtrooper_novatrooper_squad_leader_81_h_agg_e	POI	Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-101748	CORELLIA	cor_world	PATROL	0	4683.26	25.00	-5811.92	0	1	a Novatrooper Squad Leader	stormtrooper_novatrooper_squad_leader_81_h_agg_e	POI	Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-101749	CORELLIA	cor_world	PATROL	0	4582.01	25.00	-5771.90	0	1	an AT-AT	imp_atst_200_c_agg_b	POI	Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+101747	CORELLIA	cor_world	PATROL	0	4682.24	25.00	-5762.14	0	1	a Novatrooper Squad Leader	stormtrooper_novatrooper_squad_leader_81_h_agg_e	POI	Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
+101748	CORELLIA	cor_world	PATROL	0	4683.26	25.00	-5811.92	0	1	a Novatrooper Squad Leader	stormtrooper_novatrooper_squad_leader_81_h_agg_e	POI	Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
+101749	CORELLIA	cor_world	PATROL	0	4582.01	25.00	-5771.90	0	1	an AT-AT	imp_atst_200_c_agg_b	POI	Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120

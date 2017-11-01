@@ -1,9 +1,10 @@
 patrol_terain	active
 TEXT	BOOLEAN
-patrol_corellia.sdb	FALSE
-patrol_dantooine.sdb	FALSE
-patrol_dathomir.sdb	FALSE
-patrol_endor.sdb	FALSE
+patrol_corellia.sdb	TRUE
+patrol_dantooine.sdb	TRUE
+patrol_dathomir.sdb	TRUE
+patrol_endor.sdb	TRUE
+patrol_kashyyyk.sdb	FALSE
 patrol_lok.sdb	FALSE
 patrol_naboo.sdb	FALSE
 patrol_rori.sdb	FALSE
