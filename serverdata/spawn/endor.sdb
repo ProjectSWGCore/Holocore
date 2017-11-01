@@ -37,9 +37,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 400037	ENDOR	end_world	AREA	0	-878.78	76.00	1627.93	138	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 400038	ENDOR	end_world	AREA	0	-867.72	76.00	1624.16	-142	1	a smuggler	smuggler_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 400039	ENDOR	end_world	AREA	0	-841.43	79.85	1613.36	25	1	Harding	smuggler_broker_harding_100_h_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-400040	ENDOR	end_world	PATROL	0	-920.56	76.00	1567.73	0	1	a thief	smuggler_patrol_thief_7_60_h_att_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-400041	ENDOR	end_world	PATROL	0	-922.73	76.00	1565.38	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-400042	ENDOR	end_world	PATROL	0	-924.21	76.00	1567.19	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+400040	ENDOR	end_world	PATROL	0	-920.56	76.00	1567.73	0	1	a thief	smuggler_patrol_thief_7_60_h_att_n	City	Smuggler Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+400041	ENDOR	end_world	PATROL	0	-922.73	76.00	1565.38	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+400042	ENDOR	end_world	PATROL	0	-924.21	76.00	1567.19	0	1	a Smuggler	yavin_smuggler_member_70_h_agg_n	City	Smuggler Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 400043	ENDOR	end_world	AREA	0	-834.96	80.10	1605.95	-155	1	Otonon Tracks	otonon_tracks_ice_cream_100_d_inv_n	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 400044	ENDOR	end_mummer_bunker	AREA	11	66.50	-12.00	79.20	0	1	a Black Sun blood reaper	black_sun_blood_reaper_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
 400045	ENDOR	end_mummer_bunker	AREA	11	49.70	-12.00	87.60	0	1	an elite Black Sun enforcer	black_sun_elite_enforcer_90_h_agg_e	Dungeon	Black Sun Stronghold	1	TURN	0	0	-	idle	0	0	0	600	450
