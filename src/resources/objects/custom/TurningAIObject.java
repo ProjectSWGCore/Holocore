@@ -28,89 +28,27 @@
 package resources.objects.custom;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Location.LocationBuilder;
 
 import intents.object.MoveObjectIntent;
 
-public class DefaultAIObject extends AIObject {
+/**
+ * AI object that loiters the area
+ */
+public class TurningAIObject extends RandomAIObject {
 	
-	private Location mainLocation;
-	private AIBehavior behavior;
-	private int updateCounter;
-	private double radius;
+	private final AtomicInteger updateCounter;
 	
-	public DefaultAIObject(long objectId) {
+	public TurningAIObject(long objectId) {
 		super(objectId);
-		behavior = AIBehavior.IDLE;
-		updateCounter = 0;
-		radius = 0;
-	}
-	
-	@Override
-	protected void aiInitialize() {
-		super.aiInitialize();
-		long delay = (long) (30E3 + Math.random() * 10E3);
-		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
-	}
-	
-	public AIBehavior getBehavior() {
-		return behavior;
-	}
-	
-	public double getLoiterRadius() {
-		return radius;
-	}
-	
-	public void setBehavior(AIBehavior behavior) {
-		this.behavior = behavior;
-	}
-	
-	public void setLoiterRadius(double radius) {
-		this.radius = radius;
-	}
-	
-	@Override
-	public void aiStart() {
-		super.aiStart();
-		this.mainLocation = getLocation();
+		this.updateCounter = new AtomicInteger(0);
 	}
 	
 	@Override
 	protected void aiLoop() {
-		switch (behavior) {
-			case LOITER:	aiLoopLoiter();	break;
-			case TURN:	aiLoopTurn();	break;
-			case IDLE:
-			default:	break;
-		}
-	}
-	
-	private void aiLoopLoiter() {
-		if (isInCombat())
-			return;
-		Random r = new Random();
-		if (r.nextDouble() > 0.25) // Only a 25% movement chance
-			return;
-		if (getObservers().isEmpty()) // No need to dance if nobody is watching
-			return;
-		double dist = Math.sqrt(radius);
-		double theta;
-		Location currentLocation = getLocation();
-		LocationBuilder l = Location.builder(currentLocation);
-		do {
-			theta = r.nextDouble() * Math.PI * 2;
-			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
-			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
-		} while (!l.isWithinFlatDistance(mainLocation, radius));
-		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		new MoveObjectIntent(this, getParent(), l.build(), 1.37, updateCounter++).broadcast();
-	}
-	
-	private void aiLoopTurn() {
-		if (isInCombat())
+		if (isInCombat() || !canAiMove())
 			return;
 		Random r = new Random();
 		if (r.nextDouble() > 0.25) // Only a 25% movement chance
@@ -118,7 +56,7 @@ public class DefaultAIObject extends AIObject {
 		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
 		double theta = r.nextDouble() * 360;
-		new MoveObjectIntent(this, getParent(), Location.builder(mainLocation).setHeading(theta).build(), 1.37, updateCounter++).broadcast();
+		new MoveObjectIntent(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, updateCounter.getAndIncrement()).broadcast();
 	}
 	
 }

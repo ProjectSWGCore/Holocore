@@ -34,11 +34,11 @@ import resources.objects.SWGObject;
 
 public class MoveObjectIntent extends Intent {
 	
-	private SWGObject object;
-	private SWGObject parent;
-	private Location newLocation;
-	private double speed;
-	private int updateCounter;
+	private final SWGObject object;
+	private final SWGObject parent;
+	private final Location newLocation;
+	private final double speed;
+	private final int updateCounter;
 	
 	public MoveObjectIntent(SWGObject object, Location newLocation, double speed, int updateCounter) {
 		this.object = object;
@@ -60,40 +60,28 @@ public class MoveObjectIntent extends Intent {
 		return object;
 	}
 	
-	public void setObject(SWGObject object) {
-		this.object = object;
-	}
-	
 	public SWGObject getParent() {
 		return parent;
-	}
-	
-	public void setParent(SWGObject parent) {
-		this.parent = parent;
 	}
 	
 	public Location getNewLocation() {
 		return newLocation;
 	}
 	
-	public void setNewLocation(Location newLocation) {
-		this.newLocation = newLocation;
-	}
-	
 	public double getSpeed() {
 		return speed;
-	}
-	
-	public void setSpeed(double speed) {
-		this.speed = speed;
 	}
 	
 	public int getUpdateCounter() {
 		return updateCounter;
 	}
 	
-	public void setUpdateCounter(int updateCounter) {
-		this.updateCounter = updateCounter;
+	public static void broadcast(SWGObject object, Location newLocation, double speed, int updateCounter) {
+		new MoveObjectIntent(object, newLocation, speed, updateCounter).broadcast();
+	}
+	
+	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation, double speed, int updateCounter) {
+		new MoveObjectIntent(object, parent, newLocation, speed, updateCounter).broadcast();
 	}
 	
 }

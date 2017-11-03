@@ -77,7 +77,7 @@ public class ObjectManager extends Manager {
 		staticItemService = new StaticItemService();
 		
 		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
-		objectMap = new ConcurrentHashMap<>(128*1024);
+		objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		started = new AtomicBoolean(false);
 		
 		addChildService(objectAwareness);
@@ -88,30 +88,32 @@ public class ObjectManager extends Manager {
 		addChildService(clientBuildoutService);
 		addChildService(staticItemService);
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
-		registerForIntent(ObjectCreatedIntent.class, oci -> processObjectCreatedIntent(oci));
-		registerForIntent(DestroyObjectIntent.class, doi -> processDestroyObjectIntent(doi));
+		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
+		registerForIntent(ObjectCreatedIntent.class, this::processObjectCreatedIntent);
+		registerForIntent(DestroyObjectIntent.class, this::processDestroyObjectIntent);
 	}
 	
 	@Override
 	public boolean initialize() {
 		ObjectLookup.setObjectManager(this);
-		objectMap.putAll(clientBuildoutService.loadClientObjects());
+		
+		clientBuildoutService.getClientObjects().forEach(obj -> objectMap.put(obj.getObjectId(), obj));
+		
 		if (!loadObjects())
 			return false;
 		synchronized (database) {
 			database.traverse((obj) -> loadObject(obj));
 		}
-		objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
 		return super.initialize();
 	}
 	
 	@Override
 	public boolean start() {
-		for (SWGObject obj : objectMap.values()) {
+		objectMap.forEach((id, obj) -> {
 			if (obj instanceof AIObject)
 				((AIObject) obj).aiStart();
-		}
+		});
+		
 		started.set(true);
 		return super.start();
 	}

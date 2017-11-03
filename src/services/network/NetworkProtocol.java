@@ -28,8 +28,8 @@
 package services.network;
 
 import java.io.EOFException;
+import java.io.IOException;
 
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -41,7 +41,7 @@ import network.encryption.Compression;
 
 public class NetworkProtocol {
 	
-	public NetBuffer encode(SWGPacket p) {
+	public static NetBuffer encode(SWGPacket p) {
 		NetBuffer encoded = p.encode();
 		encoded.flip();
 		if (encoded.remaining() != encoded.capacity())
@@ -49,65 +49,63 @@ public class NetworkProtocol {
 		return preparePacket(encoded);
 	}
 	
-	public boolean canDecode(NetBufferStream buffer) {
+	public static boolean canDecode(NetBufferStream buffer) throws IOException {
 		if (buffer.remaining() < 5)
 			return false;
 		buffer.mark();
 		try {
 			buffer.getByte();
 			int length = buffer.getShort();
-			Assert.test(length >= 0);
 			buffer.getShort();
+			if (length < 0) {
+				throw new IOException("Stream corrupted");
+			}
 			return buffer.remaining() >= length;
 		} finally {
 			buffer.rewind();
 		}
 	}
 	
-	public SWGPacket decode(NetBufferStream buffer) throws EOFException {
+	public static SWGPacket decode(NetBufferStream buffer) throws EOFException {
 		if (buffer.remaining() < 5)
 			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
-		byte bitfield = buffer.getByte();
-		boolean compressed = (bitfield & 0x01) != 0;
+		byte bitmask = buffer.getByte();
 		int length = buffer.getShort();
-		int decompressedLength = buffer.getShort();
+		int decompLength = buffer.getShort();
 		if (buffer.remaining() < length) {
 			buffer.position(buffer.position() - 5);
 			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
 		}
-		byte [] pData = buffer.getArray(length);
-		if (compressed) {
-			pData = Compression.decompress(pData, decompressedLength);
-		}
-		return processSWG(pData);
+		byte [] data = buffer.getArray(length);
+		if ((bitmask & 1) == 1)
+			data = Compression.decompress(data, decompLength);
+		return processSWG(NetBuffer.wrap(data));
 	}
 	
-	private NetBuffer preparePacket(NetBuffer SWGPacket) {
-		int remaining = SWGPacket.remaining();
+	private static NetBuffer preparePacket(NetBuffer packet) {
+		int remaining = packet.remaining();
 		NetBuffer data = NetBuffer.allocate(remaining + 5);
-		data.addByte(2); // SWG bitmask
+		data.addByte(0);
 		data.addShort(remaining);
 		data.addShort(remaining);
-		data.add(SWGPacket);
+		data.add(packet);
 		data.flip();
 		return data;
 	}
 	
-	private SWGPacket processSWG(byte [] data) throws EOFException {
-		if (data.length < 6)
-			throw new EOFException("Length too small: " + data.length);
-		NetBuffer buffer = NetBuffer.wrap(data);
+	private static SWGPacket processSWG(NetBuffer buffer) throws EOFException {
+		if (buffer.remaining() < 6)
+			throw new EOFException("Length too small: " + buffer.remaining());
 		buffer.getShort();
 		int crc = buffer.getInt();
 		buffer.position(0);
-		if (crc == ObjectController.CRC) {
+		if (crc == ObjectController.CRC)
 			return ObjectController.decodeController(buffer);
-		} else {
-			SWGPacket packet = PacketType.getForCrc(crc);
-			if (packet != null)
-				packet.decode(buffer);
-			return packet;
-		}
+		
+		SWGPacket packet = PacketType.getForCrc(crc);
+		if (packet != null)
+			packet.decode(buffer);
+		return packet;
 	}
 	
 }

@@ -33,6 +33,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +47,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
+import intents.object.ObjectCreatedIntent;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
 import resources.config.ConfigFile;
@@ -65,12 +67,34 @@ public class ClientBuildoutService extends Service {
 	private static final String GET_BUILDING_INFO_SQL = "SELECT object_id FROM buildings WHERE building_id = ?";
 	
 	private final Map<Integer, BuildoutArea> areasById;
+	private final List<SWGObject> objects;
 	
 	public ClientBuildoutService() {
-		areasById = new HashMap<>(1000); // Number of buildout areas
+		this.areasById = new HashMap<>(1000); // Number of buildout areas
+		this.objects = new ArrayList<>();
 	}
 	
-	public Map<Long, SWGObject> loadClientObjects() {
+	@Override
+	public boolean initialize() {
+		loadClientObjects();
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		objects.forEach(ObjectCreatedIntent::broadcast);
+		objects.clear();
+		return super.start();
+	}
+	
+	public List<SWGObject> getClientObjects() {
+		loadClientObjects();
+		return Collections.unmodifiableList(objects);
+	}
+	
+	private void loadClientObjects() {
+		if (!objects.isEmpty())
+			return;
 		Map<Long, SWGObject> objects;
 		long startTime = StandardLog.onStartLoad("client objects");
 		try {
@@ -84,7 +108,8 @@ public class ClientBuildoutService extends Service {
 			Log.e(e);
 		}
 		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
-		return objects;
+		this.objects.clear();
+		this.objects.addAll(objects.values());
 	}
 	
 	public Map<Long, SWGObject> loadClientObjectsByArea(int areaId) {

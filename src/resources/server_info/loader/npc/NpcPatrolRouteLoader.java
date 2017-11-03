@@ -25,94 +25,111 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.server_info.loader.spawn;
+package resources.server_info.loader.npc;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.function.Consumer;
 
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
 
 import resources.server_info.SdbLoader;
 import resources.server_info.SdbLoader.SdbResultSet;
 
-public class StaticSpawnLoader {
+public class NpcPatrolRouteLoader {
 	
-	private final List<StaticSpawnInfo> spawns;
+	private final Map<Integer, List<PatrolRouteWaypoint>> patrolRouteMap;
 	
-	private StaticSpawnLoader() {
-		this.spawns = new ArrayList<>();
+	private NpcPatrolRouteLoader() {
+		this.patrolRouteMap = new HashMap<>();
 	}
 	
-	public List<StaticSpawnInfo> getSpawns() {
-		return spawns;
+	public List<PatrolRouteWaypoint> getPatrolRoute(int groupId) {
+		return patrolRouteMap.get(groupId);
 	}
 	
-	public void iterate(Consumer<StaticSpawnInfo> spawn) {
-		spawns.forEach(spawn);
+	public int getPatrolRouteCount() {
+		return patrolRouteMap.size();
+	}
+	
+	public void forEach(Consumer<List<PatrolRouteWaypoint>> c) {
+		patrolRouteMap.values().forEach(c);
 	}
 	
 	private void loadFromFile() {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/patrol/patrol_id.msdb"))) {
 			while (set.next()) {
-				spawns.add(new StaticSpawnInfo(set));
+				PatrolRouteWaypoint waypoint = new PatrolRouteWaypoint(set);
+				List<PatrolRouteWaypoint> route = patrolRouteMap.get(waypoint.getGroupId());
+				if (route == null)
+					patrolRouteMap.put(waypoint.getGroupId(), route = new ArrayList<>());
+				route.add(waypoint);
 			}
 		} catch (IOException e) {
 			Log.e(e);
 		}
 	}
 	
-	public static StaticSpawnLoader load() {
-		StaticSpawnLoader loader = new StaticSpawnLoader();
+	public static NpcPatrolRouteLoader load() {
+		NpcPatrolRouteLoader loader = new NpcPatrolRouteLoader();
 		loader.loadFromFile();
 		return loader;
 	}
 	
-	public static class StaticSpawnInfo {
+	public static class PatrolRouteWaypoint {
 		
-		private final int id;
+		private final int groupId;
+		private final int patrolId;
+		private final PatrolType patrolType;
+		private final Terrain terrain;
+		private final String buildingId;
+		private final int cellId;
 		private final double x;
 		private final double y;
 		private final double z;
-		private final int heading;
-		private final int cellId;
-		private final String spawnerType;
-		private final String npcId;
-		private final String buildingId;
-		private final String mood;
-		private final String behavior;
-		private final int patrolId;
-		private final PatrolFormation patrolFormation;
-		private final int loiterRadius;
-		private final int minSpawnTime;
-		private final int maxSpawnTime;
-		private final int amount;
+		private final double delay;
 		
-		private StaticSpawnInfo(SdbResultSet set) {
-			this.id = (int) set.getInt("spawn_id");
+		public PatrolRouteWaypoint(SdbResultSet set) {
+			this.groupId = (int) set.getInt("patrol_group");
+			this.patrolId = (int) set.getInt("patrol_id");
+			this.patrolType = parsePatrolType(set.getText("patrol_type"));
+			this.terrain = Terrain.valueOf(set.getText("terrain"));
+			this.buildingId = set.getText("building_id");
+			this.cellId = (int) set.getInt("cell_id");
 			this.x = set.getReal("x");
 			this.y = set.getReal("y");
 			this.z = set.getReal("z");
-			this.heading = (int) set.getInt("heading");
-			this.cellId = (int) set.getInt("cell_id");
-			this.spawnerType = set.getText("spawner_type");
-			this.npcId = set.getText("npc_id");
-			this.buildingId = set.getText("building_id");
-			this.mood = set.getText("mood");
-			this.behavior = set.getText("behaviour");
-			this.patrolId = (int) set.getInt("patrol_id");
-			this.patrolFormation = parsePatrolFormation(set.getText("patrol_formation"));
-			this.loiterRadius = (int) set.getInt("loiter_radius");
-			this.minSpawnTime = (int) set.getInt("min_spawn_time");
-			this.maxSpawnTime = (int) set.getInt("max_spawn_time");
-			this.amount = (int) set.getInt("amount");
+			this.delay = set.getReal("pause");
 		}
 		
-		public int getId() {
-			return id;
+		public int getGroupId() {
+			return groupId;
+		}
+		
+		public int getPatrolId() {
+			return patrolId;
+		}
+		
+		public PatrolType getPatrolType() {
+			return patrolType;
+		}
+		
+		public Terrain getTerrain() {
+			return terrain;
+		}
+		
+		public String getBuildingId() {
+			return buildingId;
+		}
+		
+		public int getCellId() {
+			return cellId;
 		}
 		
 		public double getX() {
@@ -127,82 +144,25 @@ public class StaticSpawnLoader {
 			return z;
 		}
 		
-		public int getHeading() {
-			return heading;
+		public double getDelay() {
+			return delay;
 		}
 		
-		public int getCellId() {
-			return cellId;
-		}
-		
-		public String getSpawnerType() {
-			return spawnerType;
-		}
-		
-		public String getNpcId() {
-			return npcId;
-		}
-		
-		public String getBuildingId() {
-			return buildingId;
-		}
-		
-		public String getMood() {
-			return mood;
-		}
-		
-		public String getBehavior() {
-			return behavior;
-		}
-		
-		public int getPatrolId() {
-			return patrolId;
-		}
-		
-		public PatrolFormation getPatrolFormation() {
-			return patrolFormation;
-		}
-		
-		public int getLoiterRadius() {
-			return loiterRadius;
-		}
-		
-		public int getMinSpawnTime() {
-			return minSpawnTime;
-		}
-		
-		public int getMaxSpawnTime() {
-			return maxSpawnTime;
-		}
-		
-		public int getAmount() {
-			return amount;
-		}
-		
-		private static PatrolFormation parsePatrolFormation(String str) {
+		private static PatrolType parsePatrolType(String str) {
 			switch (str.toUpperCase(Locale.US)) {
-				case "column":
-					return PatrolFormation.COLUMN;
-				case "wedge":
-					return PatrolFormation.WEDGE;
-				case "line":
-					return PatrolFormation.LINE;
-				case "box":
-					return PatrolFormation.BOX;
-				case "":
+				case "FLIP":
+					return PatrolType.FLIP;
+				case "LOOP":
 				default:
-					return PatrolFormation.NONE;
+					return PatrolType.LOOP;
 			}
 		}
 		
 	}
 	
-	public enum PatrolFormation {
-		NONE,
-		COLUMN,
-		WEDGE,
-		LINE,
-		BOX
+	public enum PatrolType {
+		LOOP,
+		FLIP
 	}
 	
 }

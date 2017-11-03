@@ -57,4 +57,8 @@ public class CloseConnectionIntent extends Intent {
 		return reason;
 	}
 	
+	public static void broadcast(long networkId, DisconnectReason reason) {
+		new CloseConnectionIntent(networkId, reason).broadcast();
+	}
+	
 }

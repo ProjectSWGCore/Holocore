@@ -38,7 +38,6 @@ import com.projectswg.common.control.Service;
 import com.projectswg.common.utilities.ThreadUtilities;
 
 import intents.chat.SystemMessageIntent;
-import intents.chat.SystemMessageIntent.BroadcastType;
 import intents.server.ServerStatusIntent;
 import resources.control.ServerStatus;
 
@@ -59,7 +58,7 @@ public class ShutdownService extends Service {
 		timeRemaining = new AtomicLong();
 		shutdownExecutor = null;
 		
-		registerForIntent(ServerStatusIntent.class, ssi -> handleServerStatusIntent(ssi));
+		registerForIntent(ServerStatusIntent.class, this::handleServerStatusIntent);
 	}
 	
 	@Override
@@ -87,7 +86,7 @@ public class ShutdownService extends Service {
 		if (time > 0)
 			scheduleBroadcast(timeUnit, time, timeNanoSeconds / intervalCount.get());
 		else
-			broadcast(SHUTDOWN_MESSAGE);
+			SystemMessageIntent.broadcastGalaxy(SHUTDOWN_MESSAGE);
 	}
 	
 	private void scheduleBroadcast(final TimeUnit timeUnit, final long time, final long timeBetweenBroadcasts) {
@@ -108,7 +107,7 @@ public class ShutdownService extends Service {
 					message = String.format(SHUTDOWN_PERIODIC, timeRemainingVal, units);
 					timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, BROADCAST_UNIT));
 				}
-				broadcast(message);
+				SystemMessageIntent.broadcastGalaxy(message);
 			}
 		}, 0, timeBetweenBroadcasts, BROADCAST_UNIT);
 	}
@@ -121,10 +120,6 @@ public class ShutdownService extends Service {
 	private void shutdownExecutor() {
 		if (shutdownExecutor != null)
 			shutdownExecutor.shutdownNow();
-	}
-	
-	private void broadcast(String message) {
-		new SystemMessageIntent(message, BroadcastType.GALAXY).broadcast();
 	}
 	
 }

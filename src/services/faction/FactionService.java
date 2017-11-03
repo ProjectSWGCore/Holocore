@@ -27,22 +27,18 @@
  ***********************************************************************************/
 package services.faction;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import com.projectswg.common.utilities.ThreadUtilities;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import intents.FactionIntent;
 import intents.chat.SystemMessageIntent;
@@ -52,21 +48,27 @@ import resources.player.Player;
 
 public final class FactionService extends Service {
 
-	private final ScheduledExecutorService executor;
 	private final Map<TangibleObject, Future<?>> statusChangers;
+	private final PswgScheduledThreadPool executor;
 	
 	public FactionService() {
-		statusChangers = new HashMap<>();
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("faction-service"));
+		statusChangers = new ConcurrentHashMap<>();
+		executor = new PswgScheduledThreadPool(1, "faction-service");
 		
 		registerForIntent(FactionIntent.class, fi -> handleFactionIntent(fi));
 	}
 	
 	@Override
+	public boolean initialize() {
+		executor.start();
+		return super.initialize();
+	}
+	
+	@Override
 	public boolean terminate() {
-		// If some were in the middle of switching, finish the switches immediately
-		executor.shutdownNow().forEach(runnable -> runnable.run());
-			
+		executor.stop();
+		executor.awaitTermination(500);
+		
 		return super.terminate();
 	}
 	
@@ -87,49 +89,6 @@ public final class FactionService extends Service {
 		}
 	}
 	
-	private void sendSystemMessage(TangibleObject target, String message) {
-		target.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, message));
-	}
-	
-	private String getBeginMessage(PvpStatus oldStatus, PvpStatus newStatus) {
-		String message = "@faction_recruiter:";
-		
-		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
-			message += "on_leave_to_covert";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
-			message += "covert_to_overt";
-		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
-			message += "overt_to_covert";
-		
-		return message;
-	}
-	
-	private String getCompletionMessage(PvpStatus oldStatus, PvpStatus newStatus) {
-		String message = "@faction_recruiter:";
-		
-		if((oldStatus == PvpStatus.ONLEAVE || oldStatus == PvpStatus.SPECIALFORCES) && newStatus == PvpStatus.COMBATANT)
-			message += "covert_complete";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
-			message += "overt_complete";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.ONLEAVE )
-			message += "on_leave_complete";
-			
-		return message;
-	}
-	
-	private long getDelay(PvpStatus oldStatus, PvpStatus newStatus) {
-		long delay = 0;
-		
-		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
-			delay = 1;
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
-			delay = 30;
-		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
-			delay = 300;
-		
-		return delay;
-	}
-	
 	private void handleTypeChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
 		PvpFaction newFaction = fi.getNewFaction();
@@ -137,7 +96,7 @@ public final class FactionService extends Service {
 		target.setPvpFaction(newFaction);
 		handleFlagChange(target);
 		
-		if(target instanceof CreatureObject && ((CreatureObject) target).getPvpFaction() != PvpFaction.NEUTRAL) {
+		if(target.getBaselineType() == BaselineType.CREO && ((CreatureObject) target).getPvpFaction() != PvpFaction.NEUTRAL) {
 			// We're given rank 1 upon joining a non-neutral faction
 			((CreatureObject) target).setFactionRank((byte) 1);
 		}
@@ -150,7 +109,7 @@ public final class FactionService extends Service {
 		final PvpStatus newStatus;
 		
 		if(target.hasPvpFlag(PvpFlag.GOING_COVERT) || target.hasPvpFlag(PvpFlag.GOING_OVERT)) {
-			sendSystemMessage(target, "@faction_recruiter:pvp_status_changing");
+			SystemMessageIntent.broadcastPersonal(target.getOwner(), "@faction_recruiter:pvp_status_changing");
 		} else {
 			if(oldStatus == PvpStatus.COMBATANT) {
 				pvpFlag = PvpFlag.GOING_OVERT;
@@ -161,10 +120,8 @@ public final class FactionService extends Service {
 			}
 			
 			target.setPvpFlags(pvpFlag);
-			sendSystemMessage(target, getBeginMessage(oldStatus, newStatus));
-			synchronized (statusChangers) {
-				statusChangers.put(target, executor.schedule(() -> completeChange(target, pvpFlag, oldStatus, newStatus), getDelay(oldStatus, newStatus), TimeUnit.SECONDS));
-			}
+			SystemMessageIntent.broadcastPersonal(target.getOwner(), getBeginMessage(oldStatus, newStatus));
+			statusChangers.put(target, executor.execute(getDelay(oldStatus, newStatus) * 1000, () -> completeChange(target, pvpFlag, oldStatus, newStatus)));
 		}
 	}
 	
@@ -179,20 +136,18 @@ public final class FactionService extends Service {
 			return;
 		
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
-		synchronized (statusChangers) {
-			Future<?> future = statusChangers.remove(target);
+		Future<?> future = statusChangers.remove(target);
 
-			if (future != null) {
-				if (future.cancel(false)) {
-					target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
-				} else if (target.getPvpStatus() != newStatus) {
-					// Their new status does not equal the one we want - apply the new one
-					changeStatus(target, newStatus);
-				}
-			} else {
-				// They're not currently waiting to switch to a new status - change now
+		if (future != null) {
+			if (future.cancel(false)) {
+				target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
+			} else if (target.getPvpStatus() != newStatus) {
+				// Their new status does not equal the one we want - apply the new one
 				changeStatus(target, newStatus);
 			}
+		} else {
+			// They're not currently waiting to switch to a new status - change now
+			changeStatus(target, newStatus);
 		}
 	}
 	
@@ -212,11 +167,9 @@ public final class FactionService extends Service {
 	}
 	
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
-		synchronized (statusChangers) {
-			statusChangers.remove(target);
-		}
+		statusChangers.remove(target);
 		
-		new SystemMessageIntent(target.getOwner(), getCompletionMessage(oldStatus, newStatus)).broadcast();
+		SystemMessageIntent.broadcastPersonal(target.getOwner(), getCompletionMessage(oldStatus, newStatus));
 		target.clearPvpFlags(pvpFlag);
 		changeStatus(target, newStatus);
 	}
@@ -226,12 +179,51 @@ public final class FactionService extends Service {
 		handleFlagChange(target);
 	}
 	
-	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject target, int flags) {
+	private static String getBeginMessage(PvpStatus oldStatus, PvpStatus newStatus) {
+		String message = "@faction_recruiter:";
+		
+		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
+			message += "on_leave_to_covert";
+		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
+			message += "covert_to_overt";
+		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
+			message += "overt_to_covert";
+		
+		return message;
+	}
+	
+	private static String getCompletionMessage(PvpStatus oldStatus, PvpStatus newStatus) {
+		String message = "@faction_recruiter:";
+		
+		if((oldStatus == PvpStatus.ONLEAVE || oldStatus == PvpStatus.SPECIALFORCES) && newStatus == PvpStatus.COMBATANT)
+			message += "covert_complete";
+		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
+			message += "overt_complete";
+		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.ONLEAVE )
+			message += "on_leave_complete";
+			
+		return message;
+	}
+	
+	private static long getDelay(PvpStatus oldStatus, PvpStatus newStatus) {
+		long delay = 0;
+		
+		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
+			delay = 1;
+		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
+			delay = 30;
+		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
+			delay = 300;
+		
+		return delay;
+	}
+	
+	private static UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject target, int flags) {
 		Set<PvpFlag> flagSet = PvpFlag.getFlags(flags);
 		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), flagSet.toArray(new PvpFlag[flagSet.size()]));
 	}
 	
-	private int getPvpBitmask(TangibleObject target, TangibleObject observer) {
+	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
 		int pvpBitmask = 0;
 
 		if(target.isEnemy(observer)) {

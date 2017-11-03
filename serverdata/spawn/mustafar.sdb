@@ -195,7 +195,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 1400195	MUSTAFAR	mus_world	AREA	0	-614.00	70.82	-874.00	0	1	a Blistmok Shrieker	som_blistmok_shrieker_82_c_agg_e	-	-	1	TURN	0	0	-	idle	0	0	0	300	120
 1400196	MUSTAFAR	mus_world	AREA	0	-2678.00	130.96	-807.00	0	1	an enthralled kubaza beetle	som_beetle_kubaza_enthralled_80_c_agg_e	-	-	1	TURN	0	0	-	idle	0	0	0	300	120
 1400197	MUSTAFAR	mus_world	AREA	0	-901.61	67.85	-329.38	0	1	Ura Jen	som_blistmok_urajen_80_c_agg_e	-	-	1	TURN	0	0	-	idle	0	0	0	300	120
-1400198	MUSTAFAR	mus_world	AREA	0	-1002.89	103.61	-3228.38	0	1	a Mustafarian lava miner	som_mustafarian_miner_1_h_att_n	-	-	5	LOITER	20	0	-	idle	0	0	0	300	120
+1400198	MUSTAFAR	mus_world	AREA	0	-1002.89	103.61	-3228.38	0	1	a Mustafarian lava miner	som_mustafarian_miner_100_h_inv_n	-	-	5	LOITER	20	0	-	idle	0	0	0	300	120
 1400199	MUSTAFAR	mus_world	AREA	0	312.87	97.19	-277.33	0	1	a tulrus matriarch	tulrus_matriarch_80_c_agg_n	-	-	3	LOITER	15	0	-	idle	0	0	0	300	120
 1400200	MUSTAFAR	mus_world	AREA	0	-11.28	110.20	-329.38	0	1	a tulrus matriarch	tulrus_matriarch_80_c_agg_n	-	-	3	LOITER	15	0	-	idle	0	0	0	300	120
 1400201	MUSTAFAR	mus_world	AREA	0	331.28	110.33	-194.93	0	1	a tulrus matriarch	tulrus_matriarch_80_c_agg_n	-	-	3	LOITER	15	0	-	idle	0	0	0	300	120
@@ -211,9 +211,9 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 1400211	MUSTAFAR	mus_world	AREA	0	-526.45	99.80	-1366.03	0	1	a Mustafarian mining droid	som_mining_droid_bucket_must_mining_100_d_inv_n	-	-	7	LOITER	20	0	-	idle	0	0	0	300	120
 1400212	MUSTAFAR	mus_world	AREA	0	-940.68	99.80	-1776.70	0	1	a Mustafarian mining droid	som_mining_droid_claw_must_mining_100_d_inv_n	-	-	7	LOITER	25	0	-	idle	0	0	0	300	120
 1400213	MUSTAFAR	mus_world	AREA	0	-1226.77	99.80	-1805.99	0	1	a Mustafarian mining droid	som_mining_droid_fork_must_mining_100_d_inv_n	-	-	4	LOITER	20	0	-	idle	0	0	0	300	120
-1400214	MUSTAFAR	mus_world	AREA	0	-1054.41	140.40	-1630.79	0	1	a Mustafarian lava miner	som_mustafarian_miner_1_h_att_n	-	-	4	LOITER	30	0	-	idle	0	0	0	300	120
-1400215	MUSTAFAR	mus_world	AREA	0	-1161.04	144.91	-1653.32	0	1	a Mustafarian lava miner	som_mustafarian_miner_1_h_att_n	-	-	4	LOITER	20	0	-	idle	0	0	0	300	120
-1400216	MUSTAFAR	mus_world	AREA	0	-1258.53	145.16	-1648.31	0	1	a Mustafarian lava miner	som_mustafarian_miner_1_h_att_n	-	-	4	LOITER	20	0	-	idle	0	0	0	300	120
+1400214	MUSTAFAR	mus_world	AREA	0	-1054.41	140.40	-1630.79	0	1	a Mustafarian lava miner	som_mustafarian_miner_100_h_inv_n	-	-	4	LOITER	30	0	-	idle	0	0	0	300	120
+1400215	MUSTAFAR	mus_world	AREA	0	-1161.04	144.91	-1653.32	0	1	a Mustafarian lava miner	som_mustafarian_miner_100_h_inv_n	-	-	4	LOITER	20	0	-	idle	0	0	0	300	120
+1400216	MUSTAFAR	mus_world	AREA	0	-1258.53	145.16	-1648.31	0	1	a Mustafarian lava miner	som_mustafarian_miner_100_h_inv_n	-	-	4	LOITER	20	0	-	idle	0	0	0	300	120
 1400217	MUSTAFAR	mus_world	AREA	0	-1081.45	99.81	-1980.44	0	1	a Mustafarian mining droid	som_mining_droid_bucket_must_mining_100_d_inv_n	-	-	6	LOITER	30	0	-	idle	0	0	0	300	120
 1400218	MUSTAFAR	mus_world	AREA	0	-616.92	99.81	-1534.32	0	1	a Mustafarian mining droid	som_mining_droid_claw_must_mining_100_d_inv_n	-	-	5	LOITER	20	0	-	idle	0	0	0	300	120
 1400219	MUSTAFAR	mus_mensix	AREA	5	-9.50	10.80	52.60	90	1	Chief Glost	som_chief_glost_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -232,24 +232,24 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 1400232	MUSTAFAR	mus_mensix	AREA	13	-59.70	10.80	32.50	0	1	a mustafarian miner	som_mustafarian_miner_b_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400233	MUSTAFAR	mus_mensix	AREA	14	-107.80	10.80	32.50	0	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400234	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	som_foreman_chivos_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400235	MUSTAFAR	mus_mensix	AREA	16	-117.40	10.80	39.60	91	1	A Computer Technician	som_kenobi_computer_technician_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
+1400235	MUSTAFAR	mus_mensix	AREA	16	-166.60	10.80	39.90	91	1	A Computer Technician	som_kenobi_computer_technician_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400236	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	som_mining_droid_fork_must_mining_100_d_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400237	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	som_mining_droid_claw_must_mining_100_d_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400238	MUSTAFAR	mus_mensix	AREA	18	-94.00	14.90	3.00	-90	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
+1400238	MUSTAFAR	mus_mensix	AREA	18	-94.50	14.90	2.80	-90	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	300	120
 1400239	MUSTAFAR	mus_mensix	AREA	20	-16.40	19.10	-20.40	-75	1	Epo Qetora	som_kenobi_epo_qetora_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400240	MUSTAFAR	mus_mensix	AREA	20	-28.80	19.10	-22.00	29	1	Q4P3	som_kenobi_pann_q4p3_protocol_100_d_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400241	MUSTAFAR	mus_mensix	AREA	20	-23.70	19.10	-6.10	79	1	a blistmok terroraptor	som_cube_ithes_olok_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
+1400241	MUSTAFAR	mus_mensix	AREA	20	-23.70	19.10	-6.10	79	1	Ithes Olok	som_cube_ithes_olok_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400242	MUSTAFAR	mus_mensix	AREA	22	-152.40	19.10	-13.30	-116	1	Mining Corporation Executive	som_kenobi_mining_exec_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400243	MUSTAFAR	mus_mensix	AREA	22	-158.10	22.60	-15.20	90	1	Milo Mensix	som_foreman_milo_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400244	MUSTAFAR	mus_mensix	AREA	22	-152.70	19.10	-17.40	-68	1	Urup Fal'co	som_urup_falco_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400245	MUSTAFAR	mus_mensix	AREA	24	-150.00	18.60	-61.00	0	1	Chief Armstrong	som_chief_armstrong_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400246	MUSTAFAR	mus_mensix	AREA	24	-145.60	18.60	-58.10	-80	1	Surveyor Jo Keslev	som_surveyor_keslev_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400247	MUSTAFAR	mus_mensix	AREA	24	-154.80	19.10	-66.60	0	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400248	MUSTAFAR	mus_mensix	AREA	25	-126.90	19.10	-44.60	50	1	a mustafarian miner	som_mustafarian_miner_b_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400249	MUSTAFAR	mus_mensix	AREA	25	-126.00	19.10	-41.80	-161	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400250	MUSTAFAR	mus_mensix	AREA	25	-124.30	19.10	-44.00	-95	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400251	MUSTAFAR	mus_mensix	AREA	26	-82.30	23.20	-35.20	0	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
+1400247	MUSTAFAR	mus_mensix	AREA	24	-155.20	19.10	-67.20	179	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	300	120
+1400248	MUSTAFAR	mus_mensix	AREA	25	-126.90	19.10	-44.60	50	1	a mustafarian miner	som_mustafarian_miner_b_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	300	120
+1400249	MUSTAFAR	mus_mensix	AREA	25	-126.00	19.10	-41.80	-161	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	300	120
+1400250	MUSTAFAR	mus_mensix	AREA	25	-124.30	19.10	-44.00	-95	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	300	120
+1400251	MUSTAFAR	mus_mensix	AREA	26	-81.50	23.20	-34.70	0	1	a mustafarian miner	som_mustafarian_miner_a_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	300	120
 1400252	MUSTAFAR	mus_mensix	AREA	26	-90.00	22.70	-47.90	49	1	Mensix Corp. Merchant	som_mustafarian_junk_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
 1400253	MUSTAFAR	mus_mensix	AREA	29	-41.90	31.50	-106.90	-145	1	a pilot	som_volcano_pilot_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400254	MUSTAFAR	mus_mensix	AREA	29	-56.50	31.50	-119.10	135	1	an unhappy tourist	som_traveler_f_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
-1400255	MUSTAFAR	mus_mensix	AREA	29	-55.10	31.50	-120.30	-53	1	an unhappy tourist	som_traveler_m_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	300	120
+1400254	MUSTAFAR	mus_mensix	AREA	29	-56.50	31.50	-119.10	135	1	an unhappy tourist	som_traveler_f_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	300	120
+1400255	MUSTAFAR	mus_mensix	AREA	29	-55.10	31.50	-120.30	-53	1	an unhappy tourist	som_traveler_m_100_h_inv_n	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	300	120

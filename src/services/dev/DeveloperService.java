@@ -35,7 +35,7 @@ import com.projectswg.common.data.location.Terrain;
 import intents.object.ObjectCreatedIntent;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
-import resources.objects.custom.DefaultAIObject;
+import resources.objects.custom.RandomAIObject;
 import resources.objects.tangible.TangibleObject;
 import resources.server_info.DataManager;
 import services.objects.ObjectCreator;
@@ -57,7 +57,7 @@ public class DeveloperService extends Service {
 	}
 	
 	private void setupDeveloperArea() {
-		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
+		RandomAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), RandomAIObject.class);
 		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
 	}
 	

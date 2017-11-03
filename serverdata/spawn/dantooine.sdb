@@ -1,6 +1,6 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
 INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
-200003	DANTOOINE	dan_imp_outpost_cantina	AREA	3	0.02	0.13	-5.72	0	1	Insurgent (Black Epsilon Pilot Trainer)	imp_insurgent_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+200003	DANTOOINE	dan_imp_outpost_cantina	AREA	3	0.02	0.13	-5.72	0	1	Insurgent (Black Epsilon Pilot Trainer)	imp_insurgent_100_h_inv_n	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300	120
 200004	DANTOOINE	dan_imp_outpost_hospital	AREA	6	-4.45	0.13	-1.59	136	1	a tusk-cat	cat_tusk_100_c_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200005	DANTOOINE	dan_world	AREA	0	-4273.00	3.00	-2314.65	0	1	an AT-ST	imp_atst_65_c_agg_n	City	Imperial Outpost	1	LOITER	10	0	-	idle	0	0	0	300	120
 200006	DANTOOINE	dan_world	AREA	0	-4268.18	3.00	-2480.42	0	1	an AT-ST	imp_atst_65_c_agg_n	City	Imperial Outpost	1	LOITER	10	0	-	idle	0	0	0	300	120
@@ -16,8 +16,8 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200016	DANTOOINE	dan_world	AREA	0	-4275.44	3.00	-2413.99	89	1	an explorer	explorer_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200017	DANTOOINE	dan_world	AREA	0	-4203.23	3.00	-2357.84	-135	1	an explorer	explorer_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200018	DANTOOINE	dan_world	AREA	0	-4231.80	3.00	-2403.62	-61	1	a hunter	hunter_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	300	120
-200019	DANTOOINE	dan_world	PATROL	0	-4208.91	3.00	-2384.88	0	1	an Imperial Lance Corporal	imp_lance_corporal_15_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200020	DANTOOINE	dan_world	PATROL	0	-4208.22	3.00	-2381.14	0	1	an Imperial noncom	imp_noncom_14_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200019	DANTOOINE	dan_world	PATROL	0	-4208.91	3.00	-2384.88	0	1	an Imperial Lance Corporal	imp_lance_corporal_15_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200020	DANTOOINE	dan_world	PATROL	0	-4208.22	3.00	-2381.14	0	1	an Imperial noncom	imp_noncom_14_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200021	DANTOOINE	dan_world	AREA	0	-4197.36	3.00	-2402.45	-92	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200022	DANTOOINE	dan_world	AREA	0	-4225.36	10.01	-2442.61	-135	1	Commander Jatrian Lytus	jatrian_lytus_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200023	DANTOOINE	dan_world	AREA	0	-4219.92	3.00	-2378.92	-83	1	Lt. Juntah Herm (an Imperial pilot)	imp_lt_juntah_herm_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -26,19 +26,19 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200026	DANTOOINE	dan_world	AREA	0	-4198.86	3.00	-2426.41	46	1	a settler	settler_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200027	DANTOOINE	dan_world	AREA	0	-4217.35	3.00	-2402.64	127	1	a settler	settler_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200028	DANTOOINE	dan_world	AREA	0	-4291.37	3.00	-2408.11	90	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200029	DANTOOINE	dan_world	PATROL	0	-4246.33	3.00	-2380.44	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200030	DANTOOINE	dan_world	PATROL	0	-4234.88	3.00	-2418.17	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200029	DANTOOINE	dan_world	PATROL	0	-4246.33	3.00	-2380.44	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200030	DANTOOINE	dan_world	PATROL	0	-4234.88	3.00	-2418.17	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200031	DANTOOINE	dan_world	AREA	0	-4226.21	3.00	-2398.51	-2	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200032	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2381.14	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200033	DANTOOINE	dan_world	PATROL	0	-4179.53	3.00	-2395.33	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200032	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2381.14	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200033	DANTOOINE	dan_world	PATROL	0	-4179.53	3.00	-2395.33	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200034	DANTOOINE	dan_world	AREA	0	-4158.04	3.00	-2408.21	-90	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200035	DANTOOINE	dan_world	AREA	0	-4223.37	3.00	-2398.44	-2	1	a Stormtrooper Captain	stormtrooper_captain_29_h_att_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200036	DANTOOINE	dan_world	AREA	0	-4231.60	10.01	-2439.76	-137	1	an Imperial officer	storyteller_imperial_officer_1_h_att_n	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 200037	DANTOOINE	dan_world	AREA	0	-4259.36	3.00	-2384.13	87	1	a technician	technician_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200038	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2384.06	0	1	a Veteran Stormtrooper Squad Leader	veteran_stormtrooper_squad_leader_70_h_att_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200039	DANTOOINE	dan_world	PATROL	0	-4219.94	3.00	-2363.13	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200040	DANTOOINE	dan_world	PATROL	0	-4217.94	3.00	-2365.13	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200041	DANTOOINE	dan_world	PATROL	0	-4231.26	3.00	-2431.13	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200038	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2384.06	0	1	a Veteran Stormtrooper Squad Leader	veteran_stormtrooper_squad_leader_70_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200039	DANTOOINE	dan_world	PATROL	0	-4219.94	3.00	-2363.13	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200040	DANTOOINE	dan_world	PATROL	0	-4217.94	3.00	-2365.13	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200041	DANTOOINE	dan_world	PATROL	0	-4231.26	3.00	-2431.13	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200042	DANTOOINE	dan_mining_outpost_cantina	AREA	1	9.28	0.62	1.83	-39	1	a fringer	fringer_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 200043	DANTOOINE	dan_mining_outpost_cantina	AREA	1	7.14	0.62	1.70	40	1	a scavenger	scavenger_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 200044	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-9.07	0.63	3.40	88	1	Adwan Turoldine (CorSec Pilot Trainer)	adwan_turoldine_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -64,7 +64,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200064	DANTOOINE	dan_world	AREA	0	-574.85	3.00	2499.19	64	1	a settler	settler_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200065	DANTOOINE	dan_world	AREA	0	-622.31	3.00	2451.74	-51	1	a technician	technician_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	300	120
 200066	DANTOOINE	dan_world	AREA	0	-636.29	3.00	2507.78	149	1	a traveller	traveller_100_h_inv_n	City	Mining Outpost	1	IDLE	0	0	-	bored	0	0	0	300	120
-200067	DANTOOINE	dan_world	PATROL	0	-637.53	3.00	2484.25	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Mining Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200067	DANTOOINE	dan_world	PATROL	0	-637.53	3.00	2484.25	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Mining Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200068	DANTOOINE	dan_world	AREA	0	1602.00	4.00	-6434.53	74	1	Daiv Dekven	daiv_dekven_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200069	DANTOOINE	dan_world	AREA	0	1629.16	4.00	-6414.93	-66	1	an assassin	assassin_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200070	DANTOOINE	dan_world	AREA	0	1542.68	4.00	-6416.95	36	1	a commoner	commoner_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -76,18 +76,18 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200076	DANTOOINE	dan_world	AREA	0	1559.28	4.00	-6372.92	136	1	a pilot	pilot_100_h_inv_n	City	Pirate Outpost	1	TURN	0	0	-	idle	0	0	0	300	120
 200077	DANTOOINE	dan_world	AREA	0	1621.30	4.00	-6379.10	142	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200078	DANTOOINE	dan_world	AREA	0	1549.00	4.00	-6374.00	-163	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200079	DANTOOINE	dan_world	PATROL	0	1631.90	4.00	-6392.56	90	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200080	DANTOOINE	dan_world	PATROL	0	1553.16	4.00	-6390.29	-90	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200079	DANTOOINE	dan_world	PATROL	0	1631.90	4.00	-6392.56	90	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200080	DANTOOINE	dan_world	PATROL	0	1553.16	4.00	-6390.29	-90	1	a pirate	pirate_11_h_att_n	City	Pirate Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200081	DANTOOINE	dan_world	AREA	0	1608.00	4.00	-6395.71	91	1	a scoundrel	scoundrel_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200082	DANTOOINE	dan_world	AREA	0	1569.90	4.00	-6404.30	-57	1	a smuggler	smuggler_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200083	DANTOOINE	dan_world	AREA	0	1571.62	4.00	-6418.70	-1	1	Yras Shen-jen (a self-employed pilot)	yras_shen_jen_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200084	DANTOOINE	dan_world	PATROL	0	1591.89	4.00	-6400.29	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200085	DANTOOINE	dan_world	PATROL	0	1588.90	4.00	-6399.20	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
-200086	DANTOOINE	dan_world	PATROL	0	1563.71	4.00	-6414.03	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	999	column	idle	0	0	0	300	120
+200084	DANTOOINE	dan_world	PATROL	0	1591.89	4.00	-6400.29	0	1	an R4 unit	r4_droid_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200085	DANTOOINE	dan_world	PATROL	0	1588.90	4.00	-6399.20	0	1	an R5 unit	r5_droid_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
+200086	DANTOOINE	dan_world	PATROL	0	1563.71	4.00	-6414.03	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	City	Pirate Outpost	1	PATROL	0	0	column	idle	0	0	0	300	120
 200087	DANTOOINE	dan_abandoned_reb_shed	AREA	2	-4.30	0.10	3.80	90	1	a Mokk tribesman	mokk_tribesman_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-200088	DANTOOINE	dan_abandoned_reb_shed	AREA	4	3.00	0.10	1.80	0	1	a Mokk tribesman	mokk_tribesman_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-200089	DANTOOINE	dan_abandoned_reb_shed	AREA	5	4.60	0.10	-3.80	0	1	a Mokk tribesman	mokk_tribesman_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-200090	DANTOOINE	dan_abandoned_reb_shed	AREA	6	-3.30	0.10	-3.80	0	1	a Mokk clan leader	mokk_clan_leader_68_h_agg_n	Dungeon	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
+200088	DANTOOINE	dan_abandoned_reb_shed	AREA	4	3.00	0.10	1.80	0	1	a Mokk tribesman	mokk_tribesman_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
+200089	DANTOOINE	dan_abandoned_reb_shed	AREA	5	4.60	0.10	-3.80	0	1	a Mokk tribesman	mokk_tribesman_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
+200090	DANTOOINE	dan_abandoned_reb_shed	AREA	6	-3.30	0.10	-3.80	0	1	a Mokk clan leader	mokk_clan_leader_68_h_agg_n	Dungeon	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 200091	DANTOOINE	dan_world	AREA	0	4069.95	10.65	-5144.73	0	1	a Mokk hunter	mokk_hunter_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	LOITER	2	0	-	idle	0	0	0	300	120
 200092	DANTOOINE	dan_world	AREA	0	4054.05	12.52	-5141.72	0	1	a Mokk hunter	mokk_hunter_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	LOITER	2	0	-	idle	0	0	0	300	120
 200093	DANTOOINE	dan_world	AREA	0	4051.79	10.86	-5127.00	0	1	a Mokk hunter	mokk_hunter_66_h_agg_n	Dungeon	Abandoned Rebel Base	1	LOITER	2	0	-	idle	0	0	0	300	120
@@ -153,12 +153,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200153	DANTOOINE	dan_underground_bunker	AREA	20	-37.90	-12.00	108.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 200154	DANTOOINE	dan_underground_bunker	AREA	21	-37.00	-12.00	132.20	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 200155	DANTOOINE	dan_underground_bunker	AREA	21	-35.20	-12.00	131.30	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
-200156	DANTOOINE	dan_underground_bunker	PATROL	22	-12.20	-16.00	70.10	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-200157	DANTOOINE	dan_underground_bunker	PATROL	23	-53.60	-27.90	62.80	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-200158	DANTOOINE	dan_underground_bunker	PATROL	23	-45.10	-24.00	62.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-200159	DANTOOINE	dan_underground_bunker	PATROL	23	-21.40	-16.00	62.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-200160	DANTOOINE	dan_underground_bunker	PATROL	24	-65.00	-28.00	62.80	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
-200161	DANTOOINE	dan_underground_bunker	PATROL	25	-64.70	-28.00	72.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	999	column	idle	0	0	0	300	120
+200156	DANTOOINE	dan_underground_bunker	PATROL	22	-12.20	-16.00	70.10	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+200157	DANTOOINE	dan_underground_bunker	PATROL	23	-53.60	-27.90	62.80	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+200158	DANTOOINE	dan_underground_bunker	PATROL	23	-45.10	-24.00	62.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+200159	DANTOOINE	dan_underground_bunker	PATROL	23	-21.40	-16.00	62.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+200160	DANTOOINE	dan_underground_bunker	PATROL	24	-65.00	-28.00	62.80	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
+200161	DANTOOINE	dan_underground_bunker	PATROL	25	-64.70	-28.00	72.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	PATROL	0	0	column	idle	0	0	0	300	120
 200162	DANTOOINE	dan_underground_bunker	AREA	26	-81.00	-28.00	60.90	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 200163	DANTOOINE	dan_underground_bunker	AREA	29	-163.20	-44.00	79.00	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
 200164	DANTOOINE	dan_underground_bunker	AREA	29	-153.00	-44.00	93.10	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	Ryll Smuggler Bunker	1	TURN	0	0	-	idle	0	0	0	300	120
@@ -256,7 +256,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200256	DANTOOINE	dan_world	AREA	0	-3972.74	17.20	2142.93	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	Outback	Dantooine	3	LOITER	6	0	-	idle	0	0	0	300	120
 200257	DANTOOINE	dan_world	AREA	0	-5750.20	35.49	1939.79	0	1	a Mokk hunter	mokk_hunter_66_h_agg_n	Outback	Dantooine	3	LOITER	6	0	-	idle	0	0	0	300	120
 200258	DANTOOINE	dan_world	AREA	0	-5744.49	35.52	1918.62	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	Outback	Dantooine	3	LOITER	6	0	-	idle	0	0	0	300	120
-200259	DANTOOINE	dan_world	AREA	0	1559.25	7.11	1742.98	0	1	a domestic bol mount	bol_mount_domestic_30_c_att_n	Outback	Dantooine	2	LOITER	4	0	-	idle	0	0	0	300	120
+200259	DANTOOINE	dan_world	AREA	0	1559.25	7.11	1742.98	0	1	a domestic bol mount	bol_mount_domestic_100_c_inv_n	Outback	Dantooine	2	LOITER	4	0	-	idle	0	0	0	300	120
 200260	DANTOOINE	dan_world	AREA	0	1554.31	7.15	1762.75	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	Outback	Dantooine	2	LOITER	4	0	-	idle	0	0	0	300	120
 200261	DANTOOINE	dan_world	AREA	0	4326.71	25.05	3908.33	0	1	a Mokk clan leader	mokk_clan_leader_68_h_agg_n	Outback	Dantooine	1	TURN	0	0	-	idle	0	0	0	300	120
 200262	DANTOOINE	dan_world	AREA	0	4335.93	25.63	3911.10	0	1	a Mokk herbalist	mokk_herbalist_65_h_agg_n	Outback	Dantooine	3	LOITER	6	0	-	idle	0	0	0	300	120
@@ -366,7 +366,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200366	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	41.84	-46.52	-60.94	-81	1	an untrained wielder of the Dark Side	untrained_wielder_of_the_dark_side_88_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
 200367	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.88	-47.17	-8.27	-86	1	an untrained wielder of the Dark Side	untrained_wielder_of_the_dark_side_88_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
 200368	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.10	-47.00	-6.96	-136	1	an untrained wielder of the Dark Side	untrained_wielder_of_the_dark_side_88_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
-200369	DANTOOINE	dan_force_crystal_hunter_cave	AREA	3	90.92	-63.49	-24.81	0	1	an untrained wielder of the Dark Side	untrained_wielder_of_the_dark_side_88_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
+200369	DANTOOINE	dan_force_crystal_hunter_cave	AREA	3	90.92	-63.49	-24.81	0	1	an untrained wielder of the Dark Side	untrained_wielder_of_the_dark_side_88_h_agg_n	POI	Force Crystal Hunters Cave	1	TURN	0	0	-	idle	0	0	0	300	120
 200370	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	67.76	-75.42	-55.26	167	1	a force crystal hunter	force_crystal_hunter_86_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
 200371	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	68.41	-75.61	-57.75	-16	1	a force crystal hunter	force_crystal_hunter_86_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
 200372	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	63.65	-75.48	-64.44	74	1	a force crystal hunter	force_crystal_hunter_86_h_agg_n	POI	Force Crystal Hunters Cave	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -426,19 +426,19 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200426	DANTOOINE	dan_kunga_cave	AREA	10	-167.68	-49.50	-64.63	-94	1	a Kunga hunter	kunga_hunter_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200427	DANTOOINE	dan_kunga_cave	AREA	10	-170.19	-49.89	-64.92	87	1	a Kunga scout	kunga_scout_69_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200428	DANTOOINE	dan_kunga_cave	AREA	10	-175.16	-49.67	-73.29	76	1	a Kunga scout	kunga_scout_69_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200429	DANTOOINE	dan_kunga_cave	PATROL	10	-167.57	-49.44	-55.82	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200429	DANTOOINE	dan_kunga_cave	PATROL	10	-167.57	-49.44	-55.82	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200430	DANTOOINE	dan_kunga_cave	AREA	11	-132.18	-53.94	-81.61	165	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200431	DANTOOINE	dan_kunga_cave	AREA	11	-112.32	-38.37	-79.18	-110	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200432	DANTOOINE	dan_kunga_cave	AREA	11	-115.11	-38.55	-80.22	83	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200433	DANTOOINE	dan_kunga_cave	AREA	11	-106.14	-54.44	-84.83	85	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200434	DANTOOINE	dan_kunga_cave	AREA	12	-137.71	-54.30	-97.63	-23	1	a Kunga loreweaver	kunga_loreweaver_69_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200435	DANTOOINE	dan_kunga_cave	AREA	12	-144.64	-54.06	-95.14	57	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200436	DANTOOINE	dan_kunga_cave	PATROL	12	-154.32	-55.43	-123.51	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-200437	DANTOOINE	dan_kunga_cave	PATROL	14	-80.11	-61.89	-60.83	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200436	DANTOOINE	dan_kunga_cave	PATROL	12	-154.32	-55.43	-123.51	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
+200437	DANTOOINE	dan_kunga_cave	PATROL	14	-80.11	-61.89	-60.83	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200438	DANTOOINE	dan_kunga_cave	AREA	16	-107.48	-57.69	-25.55	-93	1	a Kunga soothsayer	kunga_soothsayer_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200439	DANTOOINE	dan_kunga_cave	AREA	16	-110.43	-57.82	-25.75	106	1	a Kunga soothsayer	kunga_soothsayer_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200440	DANTOOINE	dan_kunga_cave	AREA	16	-120.19	-57.77	-33.79	-8	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200441	DANTOOINE	dan_kunga_cave	PATROL	17	-104.28	-42.45	-10.85	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200441	DANTOOINE	dan_kunga_cave	PATROL	17	-104.28	-42.45	-10.85	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200442	DANTOOINE	dan_kunga_cave	AREA	19	13.33	-32.75	-54.43	26	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200443	DANTOOINE	dan_kunga_cave	AREA	19	18.52	-33.25	-55.20	-42	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200444	DANTOOINE	dan_kunga_cave	AREA	2	-39.19	-31.81	-26.48	-9	1	a Kunga harvester	kunga_harvester_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -473,8 +473,8 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200473	DANTOOINE	dan_kunga_cave	AREA	29	-54.89	-66.16	-236.39	-57	1	a Kunga shaman	kunga_shaman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200474	DANTOOINE	dan_kunga_cave	AREA	29	-56.67	-65.62	-221.41	1	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200475	DANTOOINE	dan_kunga_cave	AREA	29	-51.15	-65.44	-221.90	-6	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200476	DANTOOINE	dan_kunga_cave	PATROL	3	-40.00	-29.71	-49.86	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
-200477	DANTOOINE	dan_kunga_cave	PATROL	4	-63.19	-44.36	-14.54	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200476	DANTOOINE	dan_kunga_cave	PATROL	3	-40.00	-29.71	-49.86	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
+200477	DANTOOINE	dan_kunga_cave	PATROL	4	-63.19	-44.36	-14.54	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200478	DANTOOINE	dan_kunga_cave	AREA	5	-63.55	-30.65	-51.20	167	1	a Kunga harvester	kunga_harvester_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200479	DANTOOINE	dan_kunga_cave	AREA	5	-63.07	-30.22	-71.29	174	1	a Kunga rockshaper	kunga_rockshaper_70_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200480	DANTOOINE	dan_kunga_cave	AREA	5	-68.61	-46.94	-73.75	-50	1	a Kunga shaman	kunga_shaman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -482,16 +482,16 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200482	DANTOOINE	dan_kunga_cave	AREA	5	-62.22	-30.91	-60.47	-134	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200483	DANTOOINE	dan_kunga_cave	AREA	5	-67.29	-31.60	-56.87	-81	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200484	DANTOOINE	dan_kunga_cave	AREA	5	-71.68	-46.98	-67.62	-73	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200485	DANTOOINE	dan_kunga_cave	PATROL	6	-138.61	-49.35	-56.54	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200485	DANTOOINE	dan_kunga_cave	PATROL	6	-138.61	-49.35	-56.54	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200486	DANTOOINE	dan_kunga_cave	AREA	6	-101.88	-35.98	-65.85	71	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200487	DANTOOINE	dan_kunga_cave	AREA	6	-129.17	-34.14	-63.13	-46	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200488	DANTOOINE	dan_kunga_cave	AREA	9	-104.21	-69.45	-104.90	117	1	a Kunga clan primalist	kunga_clan_primalist_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200489	DANTOOINE	dan_kunga_cave	AREA	9	-90.25	-70.98	-121.43	0	1	a Kunga clan primalist	kunga_clan_primalist_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+200489	DANTOOINE	dan_kunga_cave	AREA	9	-90.25	-70.98	-121.43	0	1	a Kunga clan primalist	kunga_clan_primalist_71_h_att_n	POI	Kunga Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 200490	DANTOOINE	dan_kunga_cave	AREA	9	-75.25	-71.32	-119.86	-94	1	a Kunga clan primalist	kunga_clan_primalist_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200491	DANTOOINE	dan_kunga_cave	AREA	9	-78.26	-71.76	-120.11	90	1	a Kunga clan primalist	kunga_clan_primalist_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200492	DANTOOINE	dan_kunga_cave	AREA	9	-71.33	-37.89	-119.94	-83	1	a Kunga tribe member	kunga_tribesman_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200493	DANTOOINE	dan_kunga_cave	AREA	9	-101.23	-39.79	-113.14	89	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200494	DANTOOINE	dan_kunga_cave	PATROL	9	-99.72	-53.73	-112.99	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	999	column	idle	0	0	0	300	120
+200494	DANTOOINE	dan_kunga_cave	PATROL	9	-99.72	-53.73	-112.99	0	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	PATROL	0	0	column	idle	0	0	0	300	120
 200495	DANTOOINE	dan_kunga_cave	AREA	9	-81.40	-52.87	-113.38	88	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200496	DANTOOINE	dan_world	AREA	0	-145.15	7.25	-412.16	-53	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200497	DANTOOINE	dan_world	AREA	0	-147.61	7.16	-410.53	91	1	a Kunga warrior	kunga_warrior_71_h_att_n	POI	Kunga Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -529,12 +529,12 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200529	DANTOOINE	dan_world	AREA	0	-7055.25	2.46	-3346.07	179	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200530	DANTOOINE	dan_world	AREA	0	-7048.77	2.76	-3347.81	179	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200531	DANTOOINE	dan_world	AREA	0	-7046.48	3.01	-3351.75	-146	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200532	DANTOOINE	dan_world	AREA	0	-7039.69	1.10	-3305.01	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+200532	DANTOOINE	dan_world	AREA	0	-7039.69	1.10	-3305.01	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 200533	DANTOOINE	dan_world	AREA	0	-7039.20	3.05	-3353.35	141	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200534	DANTOOINE	dan_world	AREA	0	-7038.00	1.33	-3305.00	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
+200534	DANTOOINE	dan_world	AREA	0	-7038.00	1.33	-3305.00	0	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	TURN	0	0	-	idle	0	0	0	300	120
 200535	DANTOOINE	dan_world	AREA	0	-7034.31	1.99	3316.90	-64	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
 200536	DANTOOINE	dan_world	AREA	0	-7030.51	2.81	-3335.55	-159	1	a Mokk warrior	mokk_warrior_68_h_agg_n	POI	Mokk Stronghold	1	IDLE	0	0	-	idle	0	0	0	300	120
-200537	DANTOOINE	dan_warren	AREA	11	-40.67	-20.00	-59.05	0	1	a fierce huurton	huurton_fierce_52_c_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200537	DANTOOINE	dan_warren	AREA	11	-40.67	-20.00	-59.05	0	1	a fierce huurton	huurton_fierce_52_c_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200538	DANTOOINE	dan_warren	AREA	13	-62.80	-18.00	-110.52	0	1	a hostile huurton	huurton_hostile_52_c_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200539	DANTOOINE	dan_warren	AREA	13	-81.31	-18.00	-97.00	0	1	a hostile huurton	huurton_hostile_52_c_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200540	DANTOOINE	dan_warren	AREA	13	-71.97	-18.00	-85.47	0	1	a hostile huurton	huurton_hostile_52_c_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
@@ -544,29 +544,29 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200544	DANTOOINE	dan_warren	AREA	14	-27.26	-20.00	-96.41	90	1	a savage huurton	huurton_savage_52_c_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200545	DANTOOINE	dan_warren	AREA	18	-24.78	-28.00	-39.22	0	1	a scientist	warren_scientist_50_h_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	180	120
 200546	DANTOOINE	dan_warren	AREA	18	2.08	-28.00	-44.47	0	1	a scientist	warren_scientist_50_h_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	180	120
-200547	DANTOOINE	dan_warren	AREA	18	3.46	-28.00	-51.84	0	1	a rogue droid	warren_agro_rogue_droid_s01_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200548	DANTOOINE	dan_warren	AREA	18	-5.38	-28.00	-40.80	0	1	a rogue droid	warren_agro_rogue_droid_s02_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200549	DANTOOINE	dan_warren	AREA	18	-19.01	-28.00	-45.46	0	1	a rogue droid	warren_agro_rogue_droid_s03_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200550	DANTOOINE	dan_warren	AREA	18	-30.20	-28.00	-54.62	0	1	a rogue droid	warren_agro_rogue_droid_s04_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200551	DANTOOINE	dan_warren	AREA	21	3.34	-28.00	-70.44	0	1	an enhanced droid	warren_agro_droid_boss	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200547	DANTOOINE	dan_warren	AREA	18	3.46	-28.00	-51.84	0	1	a rogue droid	warren_agro_rogue_droid_s01_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200548	DANTOOINE	dan_warren	AREA	18	-5.38	-28.00	-40.80	0	1	a rogue droid	warren_agro_rogue_droid_s02_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200549	DANTOOINE	dan_warren	AREA	18	-19.01	-28.00	-45.46	0	1	a rogue droid	warren_agro_rogue_droid_s03_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200550	DANTOOINE	dan_warren	AREA	18	-30.20	-28.00	-54.62	0	1	a rogue droid	warren_agro_rogue_droid_s04_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200551	DANTOOINE	dan_warren	AREA	21	3.34	-28.00	-70.44	0	1	an enhanced droid	warren_agro_enhanced_droid_boss_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200552	DANTOOINE	dan_warren	AREA	25	38.14	-20.00	-104.71	-83	1	a computer scientist	warren_insane_comp_sci_51_h_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200553	DANTOOINE	dan_warren	AREA	25	22.57	-20.00	-107.50	0	1	a rogue droid	warren_agro_rogue_droid_s03_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200554	DANTOOINE	dan_warren	AREA	25	17.38	-20.00	-93.93	0	1	a rogue droid	warren_agro_rogue_droid_s04_52_d_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200553	DANTOOINE	dan_warren	AREA	25	22.57	-20.00	-107.50	0	1	a rogue droid	warren_agro_rogue_droid_s03_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200554	DANTOOINE	dan_warren	AREA	25	17.38	-20.00	-93.93	0	1	a rogue droid	warren_agro_rogue_droid_s04_52_d_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200555	DANTOOINE	dan_warren	AREA	27	3.07	-28.00	-129.26	-90	1	a bol	bol_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200556	DANTOOINE	dan_warren	AREA	27	5.18	-28.00	-111.10	-53	1	a bol	bol_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200557	DANTOOINE	dan_warren	AREA	27	-26.88	-28.00	-130.64	0	1	an Unstable Cracktooth Narglatch	narglatch_cracktooth_70_c_agg_b	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600	300
+200557	DANTOOINE	dan_warren	AREA	27	-26.88	-28.00	-130.64	0	1	an Unstable Cracktooth Narglatch	narglatch_cracktooth_70_c_agg_b	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	600	300
 200558	DANTOOINE	dan_warren	AREA	27	-16.23	-28.00	-193.77	12	1	a slice hound	slicehound_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200559	DANTOOINE	dan_warren	AREA	27	-8.96	-28.00	-189.47	12	1	a slice hound	slicehound_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200560	DANTOOINE	dan_warren	AREA	27	-34.71	-28.00	-130.22	0	1	a sludgepanther	sludge_panther_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200561	DANTOOINE	dan_warren	AREA	27	28.80	-28.00	-133.92	0	1	a sludgepanther	sludge_panther_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200562	DANTOOINE	dan_warren	AREA	27	3.58	-28.00	-190.53	0	1	a warren thune	thune_warren_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200560	DANTOOINE	dan_warren	AREA	27	-34.71	-28.00	-130.22	0	1	a sludgepanther	sludge_panther_100_c_inv_n	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200561	DANTOOINE	dan_warren	AREA	27	28.80	-28.00	-133.92	0	1	a sludgepanther	sludge_panther_100_c_inv_n	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
+200562	DANTOOINE	dan_warren	AREA	27	3.58	-28.00	-190.53	0	1	a warren thune	thune_warren_100_c_inv_n	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200563	DANTOOINE	dan_warren	AREA	27	-41.02	-28.00	-194.88	22	1	a tusk-cat	warren_cat_tusk_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200564	DANTOOINE	dan_warren	AREA	27	-48.37	-28.00	-192.56	-22	1	a tusk-cat	warren_cat_tusk_100_c_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200565	DANTOOINE	dan_warren	AREA	29	-56.14	-28.00	-88.62	-155	1	Dirk Maggin (a dying loyalist)	dirk_maggin_100_h_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200566	DANTOOINE	dan_warren	AREA	32	-78.46	-20.00	-1.01	0	1	a Teraud loyalist cyborg	warren_teraud_loyalist_cyborg_52_h_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200567	DANTOOINE	dan_warren	AREA	38	-63.21	-52.00	-70.77	0	1	an Imperial worker	warren_imperial_worker_hospital_50_h_att_e	POI	The Warren	4	LOITER	8	0	-	idle	0	0	0	300	120
 200568	DANTOOINE	dan_warren	AREA	41	-36.96	-52.00	-94.43	0	1	an Imperial officer	warren_imperial_officer_kitchen_51_h_att_e	POI	The Warren	4	LOITER	8	0	-	idle	0	0	0	300	120
-200569	DANTOOINE	dan_warren	AREA	43	35.45	-54.00	-117.61	0	1	M'anx Try (a researcher)	manx_try_100_h_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200569	DANTOOINE	dan_warren	AREA	43	35.45	-54.00	-117.61	0	1	M'anx Try (a researcher)	manx_try_100_h_inv_n	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200570	DANTOOINE	dan_warren	AREA	44	62.36	-54.00	-128.69	-48	1	a crazed scientist	warren_irradiated_worker_50_h_att_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200571	DANTOOINE	dan_warren	AREA	44	59.34	-54.00	-121.10	141	1	a crazed scientist	warren_irradiated_worker_50_h_att_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200572	DANTOOINE	dan_warren	AREA	45	-10.03	-54.00	-140.10	0	1	an Imperial officer	warren_imperial_officer_51_h_att_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
@@ -594,7 +594,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200594	DANTOOINE	dan_warren	AREA	60	-8.88	-60.00	33.21	0	1	a cyborg slice hound	slicehound_cyborg_51_c_agg_e	POI	The Warren	4	LOITER	8	0	-	idle	0	0	0	300	120
 200595	DANTOOINE	dan_warren	AREA	60	5.00	-60.00	29.92	0	1	a Teraud loyalist	warren_teraud_loyalist_52_h_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200596	DANTOOINE	dan_warren	AREA	60	6.83	-60.00	35.93	0	1	a Teraud loyalist	warren_teraud_loyalist_52_h_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
-200597	DANTOOINE	dan_warren	AREA	63	23.28	-60.00	1.10	0	1	a Teraud loyalist cyborg	warren_teraud_loyalist_cyborg_52_h_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
+200597	DANTOOINE	dan_warren	AREA	63	23.28	-60.00	1.10	0	1	a Teraud loyalist cyborg	warren_teraud_loyalist_cyborg_52_h_agg_e	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	300	120
 200598	DANTOOINE	dan_warren	AREA	64	28.76	-60.00	-19.20	-33	1	an Imperial worker	warren_imperial_worker_hospital_50_h_att_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200599	DANTOOINE	dan_warren	AREA	65	77.10	-68.00	20.94	-90	1	a Teraud loyalist cyborg	warren_teraud_loyalist_cyborg_52_h_agg_e	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
 200600	DANTOOINE	dan_warren	AREA	66	71.34	-68.00	39.10	90	1	Doctor Knag (a researcher)	doctor_knag_18_h_agg_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -610,7 +610,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200610	DANTOOINE	dan_warren	AREA	7	-6.59	-20.00	-39.44	0	1	a hostile huurton	huurton_hostile_52_c_agg_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200611	DANTOOINE	dan_warren	AREA	7	-24.93	-20.00	-47.41	0	1	an Imperial worker	warren_imperial_worker_50_h_att_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
 200612	DANTOOINE	dan_warren	AREA	7	-23.18	-20.00	-38.92	0	1	an Imperial worker	warren_imperial_worker_50_h_att_e	POI	The Warren	3	LOITER	6	0	-	idle	0	0	0	300	120
-200613	DANTOOINE	dan_warren	AREA	74	23.92	-84.00	-20.61	0	1	an altered AT-ST	warren_agro_atst_altered_55_d_agg_b	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	900	900
+200613	DANTOOINE	dan_warren	AREA	74	23.92	-84.00	-20.61	0	1	an altered AT-ST	warren_agro_atst_altered_55_d_agg_b	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	900	900
 200614	DANTOOINE	dan_warren	AREA	78	85.87	-60.00	-54.67	0	1	a rogue droid	warren_agro_rogue_droid_s01_52_d_agg_e	POI	The Warren	4	LOITER	8	0	-	idle	0	0	0	300	120
 200615	DANTOOINE	dan_warren	AREA	80	95.75	-84.00	-98.40	0	1	a Teraud loyalist	warren_teraud_loyalist_52_h_agg_e	POI	The Warren	4	LOITER	8	0	-	idle	0	0	0	300	120
 200616	DANTOOINE	dan_warren	AREA	82	117.87	-60.00	-77.03	-90	1	an Unstable Wing-clipped Hawk Bat	bat_hawk_90_c_agg_b	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600	300
@@ -618,4 +618,4 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200618	DANTOOINE	dan_warren	AREA	84	87.48	-52.00	10.89	0	1	a Teraud loyalist commander	warren_teraud_loyalist_commander_53_h_agg_e	POI	The Warren	1	LOITER	2	0	-	idle	0	0	0	300	120
 200619	DANTOOINE	dan_warren	AREA	87	118.43	-52.00	39.37	179	1	Bors Teraud	warren_bors_teraud_55_h_agg_b	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600	300
 200620	DANTOOINE	dan_warren	AREA	9	-10.04	-20.00	-59.88	101	1	Phy Hudgen (an escaped worker)	phy_hudgen_100_h_inv_n	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	300	120
-200621	DANTOOINE	dan_world	PATROL	0	-462.07	15.51	-3800.02	0	1	O'Evitt Piboi (an escapee)	oevitt_piboi_100_h_inv_n	POI	The Warren	1	PATROL	0	999	column	idle	0	0	0	300	120
+200621	DANTOOINE	dan_world	PATROL	0	-462.07	15.51	-3800.02	0	1	O'Evitt Piboi (an escapee)	oevitt_piboi_100_h_inv_n	POI	The Warren	1	PATROL	0	0	column	idle	0	0	0	300	120

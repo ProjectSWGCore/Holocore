@@ -66,4 +66,8 @@ public class PacketSender {
 		}
 	}
 	
+	public void disconnect(SocketAddress addr) {
+		tcpServer.disconnect(addr);
+	}
+	
 }

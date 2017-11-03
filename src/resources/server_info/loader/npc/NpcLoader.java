@@ -103,8 +103,8 @@ public class NpcLoader {
 			hue						*	INTEGER
 			grant_skill				*	TEXT
 			ignore_player			*	TEXT
-			attack_speed			*	REAL
-			movement_speed			*	REAL
+			attack_speed				REAL
+			movement_speed				REAL
 			primary_weapon			*	TEXT
 			primary_weapon_speed	*	REAL
 			primary_weapon_specials	*	TEXT
@@ -139,6 +139,8 @@ public class NpcLoader {
 		private final String iff;
 		private final String faction;
 		private final boolean specForce;
+		private final double attackSpeed;
+		private final double movementSpeed;
 		private final String lootTable1;
 		private final String lootTable2;
 		private final String lootTable3;
@@ -161,6 +163,8 @@ public class NpcLoader {
 			this.iff = set.getText("iff_template");
 			this.faction = set.getText("faction");
 			this.specForce = set.getBoolean("spec_force");
+			this.attackSpeed = set.getReal("attack_speed");
+			this.movementSpeed = set.getReal("movement_speed");
 			this.lootTable1 = set.getText("loot_table1");
 			this.lootTable2 = set.getText("loot_table2");
 			this.lootTable3 = set.getText("loot_table3");
@@ -227,6 +231,14 @@ public class NpcLoader {
 		
 		public boolean isSpecForce() {
 			return specForce;
+		}
+		
+		public double getAttackSpeed() {
+			return attackSpeed;
+		}
+		
+		public double getMovementSpeed() {
+			return movementSpeed;
 		}
 		
 		public String getLootTable1() {

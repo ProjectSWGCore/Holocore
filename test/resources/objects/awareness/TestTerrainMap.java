@@ -47,9 +47,8 @@ public class TestTerrainMap {
 	
 	@Test
 	public void testWithoutParent() {
-		TerrainMap map = new TerrainMap(Terrain.TATOOINE);
 		MapCallback callback = new MapCallback();
-		map.setCallback(callback);
+		TerrainMap map = new TerrainMap(Terrain.TATOOINE, callback);
 		try {
 			map.start();
 			GenericCreatureObject objA = new GenericCreatureObject(1);
@@ -67,9 +66,8 @@ public class TestTerrainMap {
 	
 	@Test
 	public void testWithParent() {
-		TerrainMap map = new TerrainMap(Terrain.TATOOINE);
 		MapCallback callback = new MapCallback();
-		map.setCallback(callback);
+		TerrainMap map = new TerrainMap(Terrain.TATOOINE, callback);
 		try {
 			map.start();
 			GenericCreatureObject objA = new GenericCreatureObject(1);
@@ -90,9 +88,8 @@ public class TestTerrainMap {
 	
 	@Test
 	public void testMultiChunk() {
-		TerrainMap map = new TerrainMap(Terrain.TATOOINE);
 		MapCallback callback = new MapCallback();
-		map.setCallback(callback);
+		TerrainMap map = new TerrainMap(Terrain.TATOOINE, callback);
 		try {
 			map.start();
 			GenericCreatureObject objA = new GenericCreatureObject(1);
@@ -112,12 +109,12 @@ public class TestTerrainMap {
 	
 	@Test
 	public void testTatooine() {
-		TerrainMap map = new TerrainMap(Terrain.TATOOINE);
 		AtomicBoolean onlyWithinRange = new AtomicBoolean(true);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		creature.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
 		List<SWGObject> withinRange = TestBuildoutObjectList.getInstance().getWithinRangeObjects(creature);
-		map.setCallback(new MapCallback() {
+		
+		TerrainMap map = new TerrainMap(Terrain.TATOOINE, new MapCallback() {
 			@Override
 			public void onWithinRange(SWGObject obj, SWGObject inRange) {
 				if (obj.equals(creature) && !withinRange.remove(inRange)) {
@@ -140,11 +137,11 @@ public class TestTerrainMap {
 		}
 	}
 	
-	private List<SWGObject> getMosEisleyObjects() {
+	private static List<SWGObject> getMosEisleyObjects() {
 		return TestBuildoutObjectList.getInstance().getMosEisleyObjects();
 	}
 	
-	private void awaitCallbacks(TerrainMap map, long timeout) {
+	private static void awaitCallbacks(TerrainMap map, long timeout) {
 		try {
 			while (!map.isCallbacksDone() && timeout > 0) {
 				Thread.sleep(1);

@@ -120,8 +120,6 @@ public class GalacticResourceSpawner {
 		for (GalacticResourceSpawn spawn: spawns) {
 			if (!spawn.isExpired())
 				GalacticResourceContainer.getContainer().addResourceSpawn(spawn);
-			else
-				Log.v("Removing expired resource spawn %s for resource %s", spawn, GalacticResourceContainer.getContainer().getGalacticResource(spawn.getResourceId()));
 		}
 		StandardLog.onEndLoad(spawns.size(), "galactic spawns", startTime);
 	}
@@ -161,7 +159,6 @@ public class GalacticResourceSpawner {
 	private void createNewResourceWithSpawns(RawResource raw) {
 		int targetSpawns = random.nextInt(raw.getMaxPools() - raw.getMinPools() + 1) + raw.getMinPools();
 		GalacticResource resource = createNewResource(raw);
-		Log.i("Created new resource '%s' with ID %d of type %s with %d spawns per planet", resource.getName(), resource.getId(), raw.getName().getKey(), targetSpawns);
 		Terrain restricted = getRestrictedResource(raw);
 		if (restricted == null) {
 			for (Terrain terrain : BASE_PLANETS) {

@@ -33,19 +33,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 class TerrainMapChunk {
 	
 	private final Set<SWGObject> objects;
-	private final double minX;
-	private final double minZ;
-	private final double maxX;
-	private final double maxZ;
+	private final int minX;
+	private final int minZ;
+	private final int maxX;
+	private final int maxZ;
 	
-	public TerrainMapChunk(double minX, double minZ, double maxX, double maxZ) {
-		this.objects = new CopyOnWriteArraySet<>(); // There will be some expanding and shrinking
+	public TerrainMapChunk(int minX, int minZ, int maxX, int maxZ) {
+		this.objects = new CopyOnWriteArraySet<>();
 		this.minX = minX;
 		this.minZ = minZ;
 		this.maxX = maxX;
@@ -65,8 +67,8 @@ class TerrainMapChunk {
 	}
 	
 	public boolean isWithinBounds(SWGObject obj) {
-		double x = obj.getX();
-		double z = obj.getZ();
+		int x = obj.getTruncX();
+		int z = obj.getTruncZ();
 		return minX <= x && minZ <= z && maxX >= x && maxZ >= z;
 	}
 	
@@ -77,28 +79,28 @@ class TerrainMapChunk {
 	}
 	
 	public void getWithinAwareness(SWGObject obj, Collection<SWGObject> withinRange) {
-		double loadRange = obj.getLoadRange();
+		int loadRange = (int) obj.getLoadRange();
 		for (SWGObject test : objects) {
 			if (isValidWithinRange(obj, test, loadRange))
 				withinRange.add(test);
 		}
 	}
 	
-	private static boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {
+	private static boolean isValidWithinRange(SWGObject obj, SWGObject inRange, int range) {
+		if (!isWithinRange(obj, inRange, range))
+			return false;
+		if (inRange.getBaselineType() == BaselineType.CREO && ((CreatureObject) inRange).isLoggedOutPlayer())
+			return false;
 		if (obj.equals(inRange))
 			return false;
-		if (obj.getInstanceLocation().getInstanceNumber() != inRange.getInstanceLocation().getInstanceNumber())
-			return false;
-		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
-			return false;
-		return isWithinRange(obj, inRange, range);
+		return obj.getInstanceLocation().getInstanceNumber() == inRange.getInstanceLocation().getInstanceNumber();
 	}
 	
-	private static boolean isWithinRange(SWGObject a, SWGObject b, double range) {
-		return square(a.getX()-b.getX()) + square(a.getZ()-b.getZ()) <= square(Math.max(b.getLoadRange(), range));
+	private static boolean isWithinRange(SWGObject a, SWGObject b, int range) {
+		return square(a.getTruncX()-b.getTruncX()) + square(a.getTruncZ()-b.getTruncZ()) <= square(Math.max((int) b.getLoadRange(), range));
 	}
 	
-	private static double square(double x) {
+	private static int square(int x) {
 		return x * x;
 	}
 	

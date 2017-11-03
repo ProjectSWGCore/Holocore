@@ -25,28 +25,58 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package network;
+package resources.objects.custom;
 
-import java.net.SocketAddress;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Location.LocationBuilder;
 
-import services.network.PacketSender;
+import intents.object.MoveObjectIntent;
 
-public class AdminNetworkClient extends NetworkClient {
+/**
+ * AI object that loiters the area
+ */
+public class LoiterAIObject extends RandomAIObject {
 	
-	public AdminNetworkClient(SocketAddress address, long networkId, PacketSender sender) {
-		super(address, networkId, sender);
+	private final AtomicInteger updateCounter;
+	private double radius;
+	
+	public LoiterAIObject(long objectId) {
+		super(objectId);
+		this.updateCounter = new AtomicInteger(0);
+		this.radius = 0;
+	}
+	
+	public double getLoiterRadius() {
+		return radius;
+	}
+	
+	public void setLoiterRadius(double radius) {
+		this.radius = radius;
 	}
 	
 	@Override
-	protected boolean isInboundAllowed(SWGPacket p) {
-		return true;
-	}
-	
-	@Override
-	protected boolean isOutboundAllowed(SWGPacket p) {
-		return true;
+	protected void aiLoop() {
+		if (isInCombat() || !canAiMove())
+			return;
+		Random r = new Random();
+		if (r.nextDouble() > 0.25) // Only a 25% movement chance
+			return;
+		if (getObservers().isEmpty()) // No need to dance if nobody is watching
+			return;
+		double dist = Math.sqrt(radius);
+		double theta;
+		Location currentLocation = getLocation();
+		LocationBuilder l = Location.builder(currentLocation);
+		do {
+			theta = r.nextDouble() * Math.PI * 2;
+			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
+			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
+		} while (!l.isWithinFlatDistance(getMainLocation(), radius));
+		l.setHeading(l.getYaw() - Math.toDegrees(theta));
+		MoveObjectIntent.broadcast(this, getParent(), l.build(), 1.37, updateCounter.getAndIncrement());
 	}
 	
 }

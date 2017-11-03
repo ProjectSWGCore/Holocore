@@ -43,21 +43,23 @@ import resources.objects.creature.CreatureObject;
 public class TerrainMap {
 	
 	private static final int CHUNK_COUNT_ACROSS = 16;
-	private static final double MIN_X = -8192;
-	private static final double MIN_Z = -8192;
-	private static final double MAP_WIDTH = 16384;
-	private static final double CHUNK_WIDTH = MAP_WIDTH / CHUNK_COUNT_ACROSS;
+	private static final int MIN_X = -8192;
+	private static final int MIN_Z = -8192;
+	private static final int MAP_WIDTH = 16384;
+	private static final int CHUNK_WIDTH = MAP_WIDTH / CHUNK_COUNT_ACROSS;
+	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
 	
 	private final CallbackManager<TerrainMapCallback> callbackManager;
 	private final TerrainMapChunk [][] chunks;
 	
-	public TerrainMap(Terrain t) {
+	public TerrainMap(Terrain t, TerrainMapCallback callback) {
 		callbackManager = new CallbackManager<>("terrain-map-"+t.name(), 1);
+		callbackManager.setCallback(callback);
 		chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
-				double chunkStartX = MIN_X+x*CHUNK_WIDTH;
-				double chunkStartZ = MIN_Z+z*CHUNK_WIDTH;
+				int chunkStartX = MIN_X+x*CHUNK_WIDTH;
+				int chunkStartZ = MIN_Z+z*CHUNK_WIDTH;
 				chunks[z][x] = new TerrainMapChunk(chunkStartX, chunkStartZ, chunkStartX+CHUNK_WIDTH, chunkStartZ+CHUNK_WIDTH);
 			}
 		}
@@ -69,10 +71,6 @@ public class TerrainMap {
 	
 	public void stop() {
 		callbackManager.stop();
-	}
-	
-	public void setCallback(TerrainMapCallback callback) {
-		callbackManager.setCallback(callback);
 	}
 	
 	public boolean isCallbacksDone() {
@@ -89,19 +87,15 @@ public class TerrainMap {
 		}
 	}
 	
-	public void removeWithoutUpdate(SWGObject obj) {
-		remove(obj);
-	}
-	
 	public void removeFromMap(SWGObject obj) {
-		if (remove(obj)) {
+		if (removeWithoutUpdate(obj)) {
 			update(obj);
 			Assert.test(isInAwareness(obj));
 		}
 	}
 	
 	private void move(SWGObject obj) {
-		TerrainMapChunk chunk = getChunk(obj.getX(), obj.getZ());
+		TerrainMapChunk chunk = getChunk(obj);
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
 		if (chunk == null) {
 			Log.e("Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
@@ -114,13 +108,6 @@ public class TerrainMap {
 		chunk.addObject(obj);
 	}
 	
-	private boolean remove(SWGObject obj) {
-		TerrainMapChunk chunk = obj.getAwareness().setTerrainMapChunk(null);
-		if (chunk != null)
-			chunk.removeObject(obj);
-		return chunk != null;
-	}
-	
 	private void update(SWGObject obj) {
 		final Collection<SWGObject> oldAware = obj.getObjectsAware();
 		final Collection<SWGObject> newAware = getNearbyAware(obj);
@@ -128,31 +115,44 @@ public class TerrainMap {
 	}
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
-		Set<SWGObject> aware = new HashSet<>(64);
+		Set<SWGObject> aware = new HashSet<>(128);
 		if (obj.getAwareness().getTerrainMapChunk() == null)
 			return aware;
-		int sX = calculateIndex(obj.getX())-1;
-		int sZ = calculateIndex(obj.getZ())-1;
+		
+		int sX = calculateIndex(obj.getTruncX())-1;
+		int sZ = calculateIndex(obj.getTruncZ())-1;
 		int eX = sX + 2;
 		int eZ = sZ + 2;
+		if (sX < 0)
+			sX = 0;
+		if (sZ < 0)
+			sZ = 0;
+		if (eX >= CHUNK_COUNT_ACROSS)
+			eX = CHUNK_COUNT_ACROSS-1;
+		if (eZ >= CHUNK_COUNT_ACROSS)
+			eZ = CHUNK_COUNT_ACROSS-1;
+		
 		for (int z = sZ; z <= eZ; ++z) {
-			if (z < 0 || z >= CHUNK_COUNT_ACROSS)
-				continue;
 			for (int x = sX; x <= eX; ++x) {
-				if (x < 0 || x >= CHUNK_COUNT_ACROSS)
-					continue;
 				chunks[z][x].getWithinAwareness(obj, aware);
 			}
 		}
 		return aware;
 	}
 	
-	private TerrainMapChunk getChunk(double x, double z) {
-		int xInd = calculateIndex(x);
-		int zInd = calculateIndex(z);
+	private TerrainMapChunk getChunk(SWGObject obj) {
+		int xInd = calculateIndex(obj.getTruncX());
+		int zInd = calculateIndex(obj.getTruncZ());
 		if (xInd < 0 || zInd < 0 || xInd >= CHUNK_COUNT_ACROSS || zInd >= CHUNK_COUNT_ACROSS)
 			return null;
 		return chunks[zInd][xInd];
+	}
+	
+	public static boolean removeWithoutUpdate(SWGObject obj) {
+		TerrainMapChunk chunk = obj.getAwareness().setTerrainMapChunk(null);
+		if (chunk != null)
+			chunk.removeObject(obj);
+		return chunk != null;
 	}
 	
 	private static void updateAwareness(TerrainMapCallback call, Collection<SWGObject> oldAware, Collection<SWGObject> newAware, SWGObject obj) {
@@ -176,8 +176,8 @@ public class TerrainMap {
 		return !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer();
 	}
 	
-	private static int calculateIndex(double x) {
-		return (int) ((x+8192)/16384*CHUNK_COUNT_ACROSS);
+	private static int calculateIndex(int x) {
+		return (x+8192) >> INDEX_FACTOR;
 	}
 	
 	public interface TerrainMapCallback {

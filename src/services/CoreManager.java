@@ -65,7 +65,7 @@ public class CoreManager extends Manager {
 	private final ScheduledExecutorService shutdownService;
 	private final EngineManager engineManager;
 	private final GalacticManager galacticManager;
-	private final BasicLogStream SWGPacketLogger;
+	private final BasicLogStream packetLogger;
 	private final Config debugConfig;
 	
 	private long startTime;
@@ -78,7 +78,7 @@ public class CoreManager extends Manager {
 		if (adminServerPort <= 0)
 			adminServerPort = -1;
 		getGalaxy().setAdminServerPort(adminServerPort);
-		SWGPacketLogger = new BasicLogStream(new File("log/SWGPackets.txt"));
+		packetLogger = new BasicLogStream(new File("log/packets.txt"));
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		engineManager = new EngineManager();
@@ -153,11 +153,11 @@ public class CoreManager extends Manager {
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {
-		SWGPacketLogger.log("%s %d:\t%s", in?"IN ":"OUT", networkId, str);
+		packetLogger.log("%s %d:\t%s", in?"IN ":"OUT", networkId, str);
 	}
 	
 	private boolean isPacketDebug() {
-		return debugConfig.getBoolean("SWGPacket-LOGGING", false);
+		return debugConfig.getBoolean("PACKET-LOGGING", false);
 	}
 	
 	private String createExtendedPacketInformation(SWGPacket p) {

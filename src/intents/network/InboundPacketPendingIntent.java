@@ -51,4 +51,8 @@ public class InboundPacketPendingIntent extends Intent {
 		this.client = client;
 	}
 	
+	public static void broadcast(NetworkClient client) {
+		new InboundPacketPendingIntent(client).broadcast();
+	}
+	
 }

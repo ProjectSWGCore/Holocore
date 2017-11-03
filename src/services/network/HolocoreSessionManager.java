@@ -27,30 +27,24 @@
  ***********************************************************************************/
 package services.network;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.ErrorMessage;
-import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
-import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import com.projectswg.common.network.packets.swg.holo.HoloPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloSetProtocolVersion;
+
+import services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
 
 public class HolocoreSessionManager {
 	
 	private static final String PROTOCOL = "2016-04-13";
 	
-	private final Queue<SWGPacket> outbound;
 	private HolocoreSessionCallback callback;
-	private Status status;
+	private SessionStatus status;
 	
 	public HolocoreSessionManager() {
-		outbound = new ArrayDeque<>();
 		callback = null;
-		status = Status.DISCONNECTED;
+		status = SessionStatus.DISCONNECTED;
 	}
 	
 	public void setCallback(HolocoreSessionCallback callback) {
@@ -60,93 +54,81 @@ public class HolocoreSessionManager {
 	/**
 	 * Called when a SWGPacket is being received
 	 * @param p the SWGPacket received
-	 * @return TRUE if the SWGPacket is allowed to be broadcasted, FALSE otherwise
 	 */
-	public ResponseAction onInbound(SWGPacket p) {
+	public void onInbound(SWGPacket p) throws HolocoreSessionException {
 		boolean holoPacket = p instanceof HoloPacket;
-		if (!holoPacket && getConnectionStatus() != Status.CONNECTED) {
-			addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
-			return ResponseAction.SHUT_DOWN;
-		} else if (holoPacket) {
+		
+		if (!holoPacket && getStatus() != SessionStatus.CONNECTED)
+			throw new HolocoreSessionException(SessionExceptionReason.NO_PROTOCOL);
+		
+		if (holoPacket) {
 			if (p instanceof HoloSetProtocolVersion) {
-				return processSetProtocolVersion((HoloSetProtocolVersion) p);
-			}
-		}
-		return ResponseAction.CONTINUE;
-	}
-	
-	private ResponseAction processSetProtocolVersion(HoloSetProtocolVersion SWGPacket) {
-		if (!SWGPacket.getProtocol().equals(PROTOCOL)) {
-			addToOutbound(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
-			return ResponseAction.SHUT_DOWN;
-		}
-		updateStatus(Status.CONNECTED);
-		addToOutbound(new HoloConnectionStarted());
-		return ResponseAction.CONTINUE;
-	}
-	
-	/**
-	 * Called when a SWGPacket is being sent out
-	 * @param p the SWGPacket being sent
-	 * @return TRUE if the SWGPacket is allowed to be sent, FALSE otherwise
-	 */
-	public ResponseAction onOutbound(SWGPacket p) {
-		return ResponseAction.CONTINUE;
-	}
-	
-	public SWGPacket [] getOutbound() {
-		synchronized (outbound) {
-			SWGPacket [] ret = outbound.toArray(new SWGPacket[outbound.size()]);
-			outbound.clear();
-			return ret;
+				processSetProtocolVersion((HoloSetProtocolVersion) p);
+			} else if (p instanceof HoloConnectionStopped)
+				throw new HolocoreSessionException(SessionExceptionReason.DISCONNECT_REQUESTED);
 		}
 	}
 	
-	public Status getConnectionStatus() {
-		return status;
+	private void processSetProtocolVersion(HoloSetProtocolVersion p) throws HolocoreSessionException {
+		if (!p.getProtocol().equals(PROTOCOL))
+			throw new HolocoreSessionException(SessionExceptionReason.PROTOCOL_INVALID);
+		
+		updateStatus(SessionStatus.CONNECTED);
+		try {
+			if (callback != null)
+				callback.onSessionInitialized();
+		} catch (Throwable t) {
+			Log.e(t);
+		}
 	}
 	
 	public void onSessionCreated() {
-		updateStatus(Status.CONNECTING);
+		updateStatus(SessionStatus.CONNECTING);
 	}
 	
 	public void onSessionDestroyed() {
-		updateStatus(Status.DISCONNECTED);
+		updateStatus(SessionStatus.DISCONNECTED);
 	}
 	
-	private void addToOutbound(SWGPacket p) {
-		synchronized (outbound) {
-			outbound.add(p);
-		}
+	public SessionStatus getStatus() {
+		return status;
 	}
 	
-	private void updateStatus(Status newStatus) {
-		Status oldStatus = this.status;
+	private void updateStatus(SessionStatus newStatus) {
 		this.status = newStatus;
-		try {
-			if (callback != null)
-				callback.onSessionStatusChanged(oldStatus, newStatus);
-		} catch (Exception e) {
-			Log.e(e);
-		}
 	}
 	
-	public enum Status {
+	private enum SessionStatus {
 		DISCONNECTED,
 		CONNECTING,
 		CONNECTED,
-		SHUT_DOWN
-	}
-	
-	public enum ResponseAction {
-		CONTINUE,
-		IGNORE,
-		SHUT_DOWN
+		CLOSED
 	}
 	
 	public interface HolocoreSessionCallback {
-		void onSessionStatusChanged(Status oldStatus, Status newStatus);
-		void onSessionError(String error);
+		void onSessionInitialized();
+	}
+	
+	public static class HolocoreSessionException extends Exception {
+		
+		private static final long serialVersionUID = 1L;
+		
+		private final SessionExceptionReason reason;
+		
+		public HolocoreSessionException(SessionExceptionReason reason) {
+			this.reason = reason;
+		}
+		
+		public SessionExceptionReason getReason() {
+			return reason;
+		}
+		
+		public enum SessionExceptionReason {
+			NO_PROTOCOL,
+			PROTOCOL_INVALID,
+			DISCONNECT_REQUESTED
+		}
+		
 	}
 	
 }

@@ -66,6 +66,19 @@ public abstract class AIObject extends CreatureObject {
 		this.unit = unit;
 	}
 	
+	protected void disableScheduler() {
+		setSchedulerProperties(0, 0, null);
+	}
+	
+	protected void requestNextLoop(long delay, TimeUnit unit) {
+		ScheduledUtilities.run(this::aiLoop, delay, unit);
+	}
+	
+	public void setSpeed(double speed) {
+		setWalkSpeed(speed);
+		setRunSpeed(speed);
+	}
+	
 	/**
 	 * Called when Holocore is starting.  If overridden, you must call this
 	 * function via super.aiStart()
@@ -74,7 +87,8 @@ public abstract class AIObject extends CreatureObject {
 		if (future != null) {
 			return;
 		}
-		future = ScheduledUtilities.scheduleAtFixedRate(() -> aiLoop(), initialDelay, delay, unit);
+		if (unit != null)
+			future = ScheduledUtilities.scheduleAtFixedRate(this::aiLoop, initialDelay, delay, unit);
 	}
 	
 	/**
@@ -100,5 +114,29 @@ public abstract class AIObject extends CreatureObject {
 
 	public void setCreatureId(String creatureId) {
 		this.creatureId = creatureId;
+	}
+	
+	protected final boolean canAiMove() {
+		switch (getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+			case INVALID:
+			case KNOCKED_DOWN:
+			case LYING_DOWN:
+			case SITTING:
+				return false;
+			case BLOCKING:
+			case CLIMBING:
+			case CROUCHED:
+			case DRIVING_VEHICLE:
+			case FLYING:
+			case PRONE:
+			case RIDING_CREATURE:
+			case SKILL_ANIMATING:
+			case SNEAKING:
+			case UPRIGHT:
+				return true;
+		}
+		return true;
 	}
 }

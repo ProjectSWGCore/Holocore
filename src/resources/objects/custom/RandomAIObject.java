@@ -25,36 +25,42 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.network;
+package resources.objects.custom;
 
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.network.TCPServer;
+import java.util.concurrent.TimeUnit;
 
-import intents.network.OutboundPacketIntent;
-import network.NetworkClient;
+import com.projectswg.common.data.location.Location;
 
-public class OutboundNetworkManager extends Service {
+/**
+ * Boring AI object that just sits in the same location.  aiLoop() can be extended for other AI objects that want random movements
+ */
+public class RandomAIObject extends AIObject {
 	
-	private final ClientManager clientManager;
+	private Location mainLocation;
 	
-	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
-		this.clientManager = clientManager;
-		
-		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
+	public RandomAIObject(long objectId) {
+		super(objectId);
 	}
 	
-	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
-		NetworkClient client = clientManager.getClient(opi.getNetworkId());
-		Assert.notNull(client);
-		client.addToOutbound(opi.getPacket());
+	public Location getMainLocation() {
+		return mainLocation;
 	}
 	
-	public void onSessionCreated(NetworkClient client) {
-		
+	@Override
+	protected void aiInitialize() {
+		super.aiInitialize();
+		long delay = (long) (30E3 + Math.random() * 10E3);
+		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
 	}
 	
-	public void onSessionDestroyed(NetworkClient client) {
+	@Override
+	public void aiStart() {
+		super.aiStart();
+		this.mainLocation = getLocation();
+	}
+	
+	@Override
+	protected void aiLoop() {
 		
 	}
 	

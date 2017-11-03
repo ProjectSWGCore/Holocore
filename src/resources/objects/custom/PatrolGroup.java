@@ -25,40 +25,40 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package intents.radial;
+package resources.objects.custom;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import com.projectswg.common.control.Intent;
+import resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
 
-public class RadialRegisterIntent extends Intent {
+public class PatrolGroup {
 	
-	private Set<String> templates;
-	private boolean register;
+	private final List<AIObject> objects;
+	private final int count;
+	private final PatrolFormation formation;
 	
-	public RadialRegisterIntent(boolean register) {
-		setRegister(register);
+	public PatrolGroup(int count, PatrolFormation formation) {
+		this.objects = new ArrayList<>();
+		this.count = count;
+		this.formation = formation;
 	}
 	
-	public RadialRegisterIntent(Set<String> templates, boolean register) {
-		setTemplates(templates);
-		setRegister(register);
+	public int getCount() {
+		return count;
 	}
 	
-	public void setTemplates(Set<String> templates) {
-		this.templates = templates;
+	public PatrolFormation getFormation() {
+		return formation;
 	}
 	
-	public void setRegister(boolean register) {
-		this.register = register;
+	public List<AIObject> getObjects() {
+		return Collections.unmodifiableList(objects);
 	}
 	
-	public Set<String> getTemplates() {
-		return templates;
-	}
-	
-	public boolean isRegister() {
-		return register;
+	public void addObject(AIObject object) {
+		this.objects.add(object);
 	}
 	
 }

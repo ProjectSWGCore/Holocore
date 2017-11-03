@@ -34,7 +34,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
@@ -63,7 +62,7 @@ public class PlayerManager extends Manager {
 	private final ZoneManager zoneService;
 	
 	public PlayerManager() {
-		this.players = new SynchronizedMap<>();
+		this.players = new ConcurrentHashMap<>();
 		this.charactersByFullName = new ConcurrentHashMap<>();
 		this.charactersByFirstName = new ConcurrentHashMap<>();
 		this.loginService = new LoginService();
@@ -226,9 +225,7 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void iteratePlayers(BiConsumer<Long, Player> consumer) {
-		synchronized (players) {
-			players.forEach(consumer);
-		}
+		players.forEach(consumer);
 	}
 	
 	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi) {
