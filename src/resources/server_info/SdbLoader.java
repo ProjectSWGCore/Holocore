@@ -27,11 +27,16 @@
  ***********************************************************************************/
 package resources.server_info;
 
-import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +44,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 import com.projectswg.common.debug.Log;
 
@@ -49,23 +55,19 @@ public class SdbLoader {
 	}
 	
 	private enum DataType {
-		TEXT,
-		INTEGER,
-		REAL,
-		BOOLEAN;
+		TEXT	(str -> str),
+		INTEGER	(str -> Long.valueOf(str)),
+		REAL	(str -> Double.valueOf(str)),
+		BOOLEAN	(str -> Boolean.valueOf(str));
 		
-		public Object decode(String str) {
-			switch (this) {
-				case TEXT:
-				default:
-					return str;
-				case INTEGER:
-					return Long.parseLong(str);
-				case REAL:
-					return Double.parseDouble(str);
-				case BOOLEAN:
-					return str.equalsIgnoreCase("true") || str.equals("1");
-			}
+		private final Function<String, Object> transformer;
+		
+		DataType(Function<String, Object> transformer) {
+			this.transformer = transformer;
+		}
+		
+		public Function<String, Object> getTransformer() {
+			return transformer;
 		}
 	}
 	
@@ -95,7 +97,7 @@ public class SdbLoader {
 		boolean next() throws IOException;
 		List<String> getColumns();
 		
-		Object getObject(int index);
+		<T> T getObject(int index);
 		
 		String getText(int index);
 		String getText(String columnName);
@@ -152,7 +154,7 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public Object getObject(int index) {
+		public <T> T getObject(int index) {
 			return getResultSet().getObject(index);
 		}
 		
@@ -219,38 +221,41 @@ public class SdbLoader {
 		private final File file;
 		private final Map<String, Integer> columnNames;
 		private final AtomicLong lineNumber;
-		private DataType [] columnTypes;
-		private Object [] columnValues;
-		private BufferedReader reader;
+		private final BasicStringBuilder lineBuffer;
+		private Function<String, Object> [] columnParsers;
+		private String [] columnValues;
+		private ByteBuffer input;
 		
 		private SingleSdbResultSet(File file) {
 			this.file = file;
 			this.columnNames = new HashMap<>();
 			this.lineNumber = new AtomicLong(0);
-			this.columnTypes = null;
+			this.lineBuffer = new BasicStringBuilder(256);
+			this.columnParsers = null;
 			this.columnValues = null;
-			this.reader = null;
+			this.input = null;
 		}
 		
 		@Override
 		public void close() throws IOException {
-			if (reader != null)
-				reader.close();
-			reader = null;
+			
 		}
 		
 		@Override
 		public boolean next() throws IOException {
-			String line;
-			do {
-				line = reader.readLine();
-			} while (line != null && line.isEmpty());
-			
-			if (line != null) {
-				readNextLine(line);
+			lineNumber.incrementAndGet();
+			int i = 0;
+			try {
+				for (i = 0; i < columnValues.length-1; i++) {
+					columnValues[i] = fetchValue(false);
+				}
+				columnValues[i] = fetchValue(true);
 				return true;
+			} catch (EOFException e) {
+				if (i > 0 && i < columnValues.length-1)
+					Log.e("Invalid entry in sdb: %s on line %d - invalid number of columns!", file, lineNumber.get(), i+1);
+				return false;
 			}
-			return false;
 		}
 		
 		@Override
@@ -258,14 +263,19 @@ public class SdbLoader {
 			return new ArrayList<>(columnNames.keySet());
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
-		public Object getObject(int index) {
-			return columnValues[index];
+		public <T> T getObject(int index) {
+			try {
+				return (T) columnParsers[index].apply(columnValues[index]);
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNumber.get() + " in column " + (index+1));
+			}
 		}
 		
 		@Override
 		public String getText(int index) {
-			return (String) columnValues[index];
+			return columnValues[index];
 		}
 		
 		@Override
@@ -275,7 +285,7 @@ public class SdbLoader {
 		
 		@Override
 		public long getInt(int index) {
-			return (Long) columnValues[index];
+			return getObject(index);
 		}
 		
 		@Override
@@ -285,7 +295,7 @@ public class SdbLoader {
 		
 		@Override
 		public double getReal(int index) {
-			return (Double) columnValues[index];
+			return getObject(index);
 		}
 		
 		@Override
@@ -295,7 +305,7 @@ public class SdbLoader {
 		
 		@Override
 		public boolean getBoolean(int index) {
-			return (Boolean) columnValues[index];
+			return getObject(index);
 		}
 		
 		@Override
@@ -303,21 +313,51 @@ public class SdbLoader {
 			return getBoolean(columnNames.get(columnName));
 		}
 		
-		private void readNextLine(String line) {
-			long lineNum = lineNumber.incrementAndGet();
-			int prevIndex = 0;
-			int nextIndex = 0;
-			int i = 0;
+		private String fetchValue(boolean endsNewline) throws EOFException {
+			lineBuffer.clear();
+			
 			try {
-				for (i = 0; i < columnTypes.length-1; i++) {
-					nextIndex = line.indexOf('\t', prevIndex);
-					columnValues[i] = columnTypes[i].decode(line.substring(prevIndex, nextIndex));
-					prevIndex = nextIndex+1;
+				byte b;
+				while (!isValueSeparator(b = input.get())) {
+					lineBuffer.pushBack(b);
 				}
-				columnValues[i] = columnTypes[i].decode(line.substring(prevIndex));
-			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNum + " in column " + (i+1));
+				
+				if (isLineSeparator(b)) {
+					readNewLine();
+					if (!endsNewline)
+						throw new EOFException();
+				}
+			} catch (BufferUnderflowException | IndexOutOfBoundsException e) {
+				if (lineBuffer.isEmpty())
+					throw new EOFException();
 			}
+			
+			return lineBuffer.toString();
+		}
+		
+		private String fetchLine() {
+			lineBuffer.clear();
+			try {
+				byte b;
+				while (!isLineSeparator(b = input.get())) {
+					lineBuffer.pushBack(b);
+				}
+				readNewLine();
+			} catch (BufferUnderflowException | IndexOutOfBoundsException e) {
+				if (lineBuffer.isEmpty())
+					return null;
+			}
+			
+			return lineBuffer.toString();
+		}
+		
+		private void readNewLine() throws BufferUnderflowException, IndexOutOfBoundsException {
+			int position = input.position();
+			int limit = input.limit();
+			while (position < limit && isLineSeparator(input.get(position))) {
+				position++;
+			}
+			input.position(position);
 		}
 		
 		private static SingleSdbResultSet load(File file) throws IOException {
@@ -327,11 +367,12 @@ public class SdbLoader {
 		}
 		
 		private void load() throws IOException {
-			reader = new BufferedReader(new FileReader(file));
-			if (!loadHeader(reader.readLine(), reader.readLine()))
+			input = FileChannel.open(file.toPath(), StandardOpenOption.READ).map(MapMode.READ_ONLY, 0, file.length());
+			if (!loadHeader(fetchLine(), fetchLine()))
 				return;
 		}
 		
+		@SuppressWarnings("unchecked") // stupid java not supporting generic arrays
 		private boolean loadHeader(String columnsStr, String typesStr) {
 			if (columnsStr == null || typesStr == null) {
 				Log.e("Invalid SDB header: %s - nonexistent", file);
@@ -343,10 +384,10 @@ public class SdbLoader {
 				Log.e("Invalid SDB header: %s - invalid lengths!", file);
 				return false;
 			}
-			columnTypes = new DataType[columns.length];
-			columnValues = new Object[columns.length];
+			columnParsers = new Function[columns.length];
+			columnValues = new String[columns.length];
 			for (int i = 0; i < columns.length; i++) {
-				columnTypes[i] = parseColumnType(types[i]);
+				columnParsers[i] = parseColumnType(types[i]).getTransformer();
 				columnNames.put(columns[i], i);
 			}
 			lineNumber.set(2);
@@ -356,16 +397,58 @@ public class SdbLoader {
 		private DataType parseColumnType(String type) {
 			if (type.indexOf(' ') != -1)
 				type = type.substring(0, type.indexOf(' '));
-			if (type.equalsIgnoreCase("TEXT"))
+			type = type.toLowerCase(Locale.US);
+			
+			if (type.equals("text"))
 				return DataType.TEXT;
-			if (type.equalsIgnoreCase("INTEGER"))
+			if (type.equals("integer"))
 				return DataType.INTEGER;
-			if (type.equalsIgnoreCase("REAL"))
+			if (type.equals("real"))
 				return DataType.REAL;
-			if (type.equalsIgnoreCase("BOOL") || type.equalsIgnoreCase("BOOLEAN"))
+			if (type.equals("bool") || type.equals("boolean"))
 				return DataType.BOOLEAN;
+			
 			Log.e("Unknown column type: %s for file %s", type, file);
 			return DataType.TEXT;
+		}
+		
+		private static boolean isValueSeparator(byte c) {
+			return c == '\r' || c == '\n' || c == '\t';
+		}
+		
+		private static boolean isLineSeparator(byte c) {
+			return c == '\r' || c == '\n';
+		}
+		
+	}
+	
+	private static class BasicStringBuilder {
+		
+		private char [] data;
+		private int length;
+		
+		public BasicStringBuilder(int size) {
+			this.data = new char[size];
+			this.length = 0;
+		}
+		
+		public boolean isEmpty() {
+			return length == 0;
+		}
+		
+		public void clear() {
+			this.length = 0;
+		}
+		
+		public void pushBack(byte b) {
+			if (length == data.length)
+				data = Arrays.copyOf(data, length*2);
+			data[length++] = (char) b;
+		}
+		
+		@Override
+		public String toString() {
+			return new String(data, 0, length);
 		}
 		
 	}
