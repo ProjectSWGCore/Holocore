@@ -467,28 +467,28 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 11008118	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-64.10	-55.71	-204.47	0	
 11008119	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-60.14	-56.89	-214.21	0	
 11008200	11008200	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	5	-12.46	-49.85	-213.45	0	legacy_Kraytcult_12_10020128
-11008401	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.30	-48.96	-222.83	0	
-11008402	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-13.65	-50.18	-230.83	0	
-11008403	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.85	-51.66	-235.64	0	
-11008404	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-8.70	-54.42	-241.42	0	
-11008405	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-0.98	-55.88	-244.02	0	
-11008406	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	7.75	-54.41	-246.32	0	
-11008407	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.29	-55.87	-251.32	0	
-11008408	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	14.36	-58.30	-258.58	0	
-11008409	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.71	-60.59	-267.60	0	
-11008410	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	8.13	-63.34	-273.97	0	
-11008411	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	3.95	-64.09	-276.25	0	
-11008412	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-1.15	-64.81	-278.07	0	
-11008413	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-5.88	-63.91	-279.32	0	
-11008414	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-10.91	-63.56	-277.06	0	
-11008415	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-15.12	-64.66	-275.74	0	
-11008416	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-18.16	-65.77	-277.12	0	
-11008417	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.54	-67.42	-279.43	0	
-11008418	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.29	-70.63	-285.33	0	
-11008419	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-71.90	-291.40	0	
-11008420	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-74.18	-299.71	0	
-11008421	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.84	-75.33	-309.68	0	
-11008422	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-19.56	-76.68	-318.17	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.30	-48.96	-222.83	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-13.65	-50.18	-230.83	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.85	-51.66	-235.64	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-8.70	-54.42	-241.42	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-0.98	-55.88	-244.02	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	7.75	-54.41	-246.32	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.29	-55.87	-251.32	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	14.36	-58.30	-258.58	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.71	-60.59	-267.60	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	8.13	-63.34	-273.97	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	3.95	-64.09	-276.25	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-1.15	-64.81	-278.07	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-5.88	-63.91	-279.32	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-10.91	-63.56	-277.06	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-15.12	-64.66	-275.74	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-18.16	-65.77	-277.12	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.54	-67.42	-279.43	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.29	-70.63	-285.33	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-71.90	-291.40	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.65	-74.18	-299.71	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.84	-75.33	-309.68	0	
+11008200	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-19.56	-76.68	-318.17	0	
 11008300	11008300	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	5	-70.11	-55.73	-184.20	0	legacy_kraytcult_10_10020090
 11008301	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-59.42	-55.47	-196.85	0	
 11008302	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-53.02	-56.26	-203.43	0	
@@ -790,12 +790,123 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 11010807	11010800		TATOOINE	tat_world	0	-2900.70	5.00	2495.90	0	
 11010808	11010800		TATOOINE	tat_world	0	-2921.80	5.00	2449.40	0	
 11010809	11010800		TATOOINE	tat_world	0	-2918.60	5.00	2400.60	0	
-11010900	11010900	LOOP	TATOOINE	tat_world	0	-1134.60	12.00	-3713.40	0	Bestine - ATST
-11010901	11010900		TATOOINE	tat_world	0	-1129.60	12.00	-3690.20	0	
-11010902	11010900		TATOOINE	tat_world	0	-1168.80	12.00	-3645.30	0	
-11010903	11010900		TATOOINE	tat_world	0	-1195.20	12.00	-3626.30	0	
-11010904	11010900		TATOOINE	tat_world	0	-1275.00	12.00	-3620.40	0	
-11010905	11010900		TATOOINE	tat_world	0	-1317.30	12.00	-3643.50	0	
-11010906	11010900		TATOOINE	tat_world	0	-1325.50	12.00	-3705.40	0	
-11010907	11010900		TATOOINE	tat_world	0	-1230.50	12.00	-3701.90	0	
-11010908	11010900		TATOOINE	tat_world	0	-1152.80	12.10	-3742.20	0	
+11010900	11010900	LOOP	TATOOINE	tat_world	0	-1272.00	12.00	-3582.90	0	Bestine - ATST
+11010901	11010900		TATOOINE	tat_world	0	-1285.40	12.00	-3574.20	0	
+11010902	11010900		TATOOINE	tat_world	0	-1292.70	12.00	-3611.00	0	
+11010903	11010900		TATOOINE	tat_world	0	-1335.10	12.00	-3658.00	0	
+11010904	11010900		TATOOINE	tat_world	0	-1315.40	12.00	-3669.90	0	
+11010905	11010900		TATOOINE	tat_world	0	-1311.50	12.00	-3641.50	0	
+11010907	11010900		TATOOINE	tat_world	0	-1277.70	12.00	-3618.30	0	
+11010908	11010900		TATOOINE	tat_world	0	-1277.90	12.10	-3593.90	0	
+11011000	11011000	FLIP	TATOOINE	tat_world	0	-1273.19	12.00	-3619.45	0	pathPoint:gcw_wp_starport
+11011001	11011000		TATOOINE	tat_world	0	-1210.06	12.00	-3628.60	0	pathPoint:gcw_wp_defhqa
+11011002	11011000		TATOOINE	tat_world	0	-1202.67	12.00	-3544.19	0	pathPoint:gcw_wp_guildsq
+11011003	11011000		TATOOINE	tat_world	0	-1108.81	12.00	-3636.90	0	pathPoint:gcw_wp_capitol
+11011100	11011100	FLIP	TATOOINE	tat_world	0	-1284.28	48.33	-3353.93	0	pathPoint:gcw_wp_nw_guildsq_1
+11011101	11011100		TATOOINE	tat_world	0	-1256.84	14.64	-3423.87	0	pathPoint:gcw_wp_nw_guildsq_2
+11011102	11011100		TATOOINE	tat_world	0	-1233.40	13.72	-3478.91	0	pathPoint:gcw_wp_nw_guildsq_3
+11011103	11011100		TATOOINE	tat_world	0	-1214.91	12.00	-3518.15	0	pathPoint:gcw_wp_nw_guildsq_4
+11011104	11011100		TATOOINE	tat_world	0	-1195.02	12.00	-3534.02	0	pathPoint:gcw_wp_nw_guildsq_5
+11011200	11011200	FLIP	TATOOINE	tat_world	0	-1152.60	53.25	-3344.48	0	pathPoint:gcw_wp_ne_guildsq_1
+11011201	11011200		TATOOINE	tat_world	0	-1117.33	22.95	-3437.02	0	pathPoint:gcw_wp_ne_guildsq_2
+11011202	11011200		TATOOINE	tat_world	0	-1090.96	20.55	-3472.61	0	pathPoint:gcw_wp_ne_guildsq_3
+11011203	11011200		TATOOINE	tat_world	0	-1089.02	12.00	-3504.58	0	pathPoint:gcw_wp_ne_guildsq_4
+11011204	11011200		TATOOINE	tat_world	0	-1088.08	12.00	-3531.60	0	pathPoint:gcw_wp_ne_guildsq_5
+11011205	11011200		TATOOINE	tat_world	0	-1115.09	12.00	-3566.22	0	pathPoint:gcw_wp_ne_guildsq_6
+11011206	11011200		TATOOINE	tat_world	0	-1164.53	12.00	-3526.01	0	pathPoint:gcw_wp_ne_guildsq_7
+11011207	11011200		TATOOINE	tat_world	0	-1175.15	12.00	-3536.43	0	pathPoint:gcw_wp_ne_guildsq_8
+11011208	11011200		TATOOINE	tat_world	0	-1183.01	12.00	-3544.74	0	pathPoint:gcw_wp_ne_guildsq_9
+11011209	11011200		TATOOINE	tat_world	0	-1194.34	12.00	-3533.91	0	pathPoint:gcw_wp_ne_guildsq_10
+11011300	11011300	FLIP	TATOOINE	tat_world	0	-1222.28	12.00	-3568.79	0	pathPoint:gcw_wp_guildsq_starport_1
+11011301	11011300		TATOOINE	tat_world	0	-1244.51	12.00	-3550.36	0	pathPoint:gcw_wp_guildsq_starport_2
+11011302	11011300		TATOOINE	tat_world	0	-1271.57	12.00	-3574.46	0	pathPoint:gcw_wp_guildsq_starport_3
+11011303	11011300		TATOOINE	tat_world	0	-1282.16	12.00	-3607.19	0	pathPoint:gcw_wp_guildsq_starport_4
+11011400	11011400	FLIP	TATOOINE	tat_world	0	-1254.19	12.00	-3625.60	0	pathPoint:gcw_wp_starport_defhq_1
+11011401	11011400		TATOOINE	tat_world	0	-1239.94	12.00	-3636.37	0	pathPoint:gcw_wp_starport_defhq_2
+11011402	11011400		TATOOINE	tat_world	0	-1227.93	12.00	-3626.59	0	pathPoint:gcw_wp_starport_defhq_3
+11011500	11011500	FLIP	TATOOINE	tat_world	0	-1395.08	24.11	-3907.69	0	pathPoint:gcw_wp_sw_starport_1
+11011501	11011500		TATOOINE	tat_world	0	-1400.15	18.22	-3844.30	0	pathPoint:gcw_wp_sw_starport_2
+11011502	11011500		TATOOINE	tat_world	0	-1378.99	10.74	-3818.33	0	pathPoint:gcw_wp_sw_starport_3
+11011503	11011500		TATOOINE	tat_world	0	-1376.87	10.49	-3782.10	0	pathPoint:gcw_wp_sw_starport_4
+11011504	11011500		TATOOINE	tat_world	0	-1351.60	13.12	-3736.67	0	pathPoint:gcw_wp_sw_starport_5
+11011505	11011500		TATOOINE	tat_world	0	-1326.33	12.00	-3701.07	0	pathPoint:gcw_wp_sw_starport_6
+11011506	11011500		TATOOINE	tat_world	0	-1318.99	12.00	-3658.37	0	pathPoint:gcw_wp_sw_starport_7
+11011507	11011500		TATOOINE	tat_world	0	-1300.29	12.00	-3627.33	0	pathPoint:gcw_wp_sw_starport_8
+11011600	11011600	FLIP	TATOOINE	tat_world	0	-905.66	24.20	-3777.46	0	pathPoint:gcw_wp_se_capitol_1
+11011601	11011600		TATOOINE	tat_world	0	-952.49	18.96	-3760.90	0	pathPoint:gcw_wp_se_capitol_2
+11011602	11011600		TATOOINE	tat_world	0	-983.20	12.00	-3743.16	0	pathPoint:gcw_wp_se_capitol_3
+11011603	11011600		TATOOINE	tat_world	0	-995.09	12.00	-3728.08	0	pathPoint:gcw_wp_se_capitol_4
+11011604	11011600		TATOOINE	tat_world	0	-1003.85	12.00	-3707.76	0	pathPoint:gcw_wp_se_capitol_5
+11011605	11011600		TATOOINE	tat_world	0	-1050.86	12.00	-3666.92	0	pathPoint:gcw_wp_se_capitol_6
+11011606	11011600		TATOOINE	tat_world	0	-1066.23	12.00	-3671.20	0	pathPoint:gcw_wp_se_capitol_7
+11011607	11011600		TATOOINE	tat_world	0	-1086.09	12.00	-3648.81	0	pathPoint:gcw_wp_se_capitol_8
+11011700	11011700	FLIP	TATOOINE	tat_world	0	-1132.98	12.00	-3653.68	0	pathPoint:gcw_wp_capitol_defhq_1
+11011701	11011700		TATOOINE	tat_world	0	-1151.21	12.00	-3663.09	0	pathPoint:gcw_wp_capitol_defhq_2
+11011702	11011700		TATOOINE	tat_world	0	-1186.79	12.00	-3629.19	0	pathPoint:gcw_wp_capitol_defhq_3
+11011800	11011800	FLIP	TATOOINE	tat_world	0	-956.65	32.67	-3630.29	0	pathPoint:gcw_wp_e_capitol_1
+11011801	11011800		TATOOINE	tat_world	0	-1017.37	15.00	-3591.73	0	pathPoint:gcw_wp_e_capitol_2
+11011802	11011800		TATOOINE	tat_world	0	-1047.49	9.73	-3569.75	0	pathPoint:gcw_wp_e_capitol_3
+11011803	11011800		TATOOINE	tat_world	0	-1065.60	12.00	-3590.11	0	pathPoint:gcw_wp_e_capitol_4
+11011804	11011800		TATOOINE	tat_world	0	-1074.11	12.00	-3584.95	0	pathPoint:gcw_wp_e_capitol_5
+11011805	11011800		TATOOINE	tat_world	0	-1079.95	12.00	-3584.54	0	pathPoint:gcw_wp_e_capitol_6
+11011806	11011800		TATOOINE	tat_world	0	-1081.63	12.00	-3599.25	0	pathPoint:gcw_wp_e_capitol_7
+11011900	11011900	FLIP	TATOOINE	tat_world	0	-1260.30	44.80	-3371.20	0	pathPoint:gcw_wp_nw_guildsq_1_2
+11011901	11011900		TATOOINE	tat_world	0	-1223.84	16.56	-3424.66	0	pathPoint:gcw_wp_nw_guildsq_2_2
+11011902	11011900		TATOOINE	tat_world	0	-1218.33	15.34	-3481.77	0	pathPoint:gcw_wp_nw_guildsq_3_2
+11011903	11011900		TATOOINE	tat_world	0	-1222.85	12.00	-3511.30	0	pathPoint:gcw_wp_nw_guildsq_4_2
+11011904	11011900		TATOOINE	tat_world	0	-1196.28	12.00	-3532.50	0	pathPoint:gcw_wp_nw_guildsq_5_2
+11012000	11012000	FLIP	TATOOINE	tat_world	0	-1131.13	57.37	-3348.43	0	pathPoint:gcw_wp_ne_guildsq_1_2
+11012001	11012000		TATOOINE	tat_world	0	-1097.61	25.93	-3435.44	0	pathPoint:gcw_wp_ne_guildsq_2_2
+11012002	11012000		TATOOINE	tat_world	0	-1099.81	20.39	-3472.77	0	pathPoint:gcw_wp_ne_guildsq_3_2
+11012003	11012000		TATOOINE	tat_world	0	-1085.83	12.00	-3505.32	0	pathPoint:gcw_wp_ne_guildsq_4_2
+11012004	11012000		TATOOINE	tat_world	0	-1093.54	12.00	-3531.25	0	pathPoint:gcw_wp_ne_guildsq_5_2
+11012005	11012000		TATOOINE	tat_world	0	-1111.56	12.00	-3565.93	0	pathPoint:gcw_wp_ne_guildsq_6_2
+11012006	11012000		TATOOINE	tat_world	0	-1167.39	12.00	-3528.98	0	pathPoint:gcw_wp_ne_guildsq_7_2
+11012007	11012000		TATOOINE	tat_world	0	-1176.36	12.00	-3536.26	0	pathPoint:gcw_wp_ne_guildsq_8_2
+11012008	11012000		TATOOINE	tat_world	0	-1181.83	12.00	-3543.57	0	pathPoint:gcw_wp_ne_guildsq_9_2
+11012009	11012000		TATOOINE	tat_world	0	-1193.37	12.00	-3534.80	0	pathPoint:gcw_wp_ne_guildsq_10_2
+11012100	11012100	FLIP	TATOOINE	tat_world	0	-1220.48	12.00	-3566.22	0	pathPoint:gcw_wp_guildsq_starport_1_2
+11012101	11012100		TATOOINE	tat_world	0	-1244.67	12.00	-3552.58	0	pathPoint:gcw_wp_guildsq_starport_2_2
+11012102	11012100		TATOOINE	tat_world	0	-1278.53	12.00	-3576.35	0	pathPoint:gcw_wp_guildsq_starport_3_2
+11012103	11012100		TATOOINE	tat_world	0	-1288.50	12.00	-3609.26	0	pathPoint:gcw_wp_guildsq_starport_4_2
+11012200	11012200	FLIP	TATOOINE	tat_world	0	-1251.45	12.00	-3622.31	0	pathPoint:gcw_wp_starport_defhq_1_2
+11012201	11012200		TATOOINE	tat_world	0	-1232.01	12.00	-3620.47	0	pathPoint:gcw_wp_starport_defhq_2_2
+11012202	11012200		TATOOINE	tat_world	0	-1220.52	12.00	-3617.03	0	pathPoint:gcw_wp_starport_defhq_3_2
+11012300	11012300	FLIP	TATOOINE	tat_world	0	-1200.42	42.95	-3784.26	0	pathPoint:gcw_wp_s_defhq_1
+11012301	11012300		TATOOINE	tat_world	0	-1198.80	33.03	-3769.38	0	pathPoint:gcw_wp_s_defhq_1_2
+11012400	11012400	FLIP	TATOOINE	tat_world	0	-1148.47	9.75	-3734.22	0	pathPoint:gcw_wp_s_defhq_2
+11012401	11012400		TATOOINE	tat_world	0	-1155.58	8.10	-3723.44	0	pathPoint:gcw_wp_s_defhq_2_2
+11012500	11012500	FLIP	TATOOINE	tat_world	0	-1119.08	12.00	-3695.04	0	pathPoint:gcw_wp_s_defhq_3
+11012501	11012500		TATOOINE	tat_world	0	-1125.78	12.00	-3695.47	0	pathPoint:gcw_wp_s_defhq_3_2
+11012600	11012600	FLIP	TATOOINE	tat_world	0	-1387.15	23.41	-3905.64	0	pathPoint:gcw_wp_sw_starport_1_2
+11012601	11012600		TATOOINE	tat_world	0	-1407.96	18.73	-3847.23	0	pathPoint:gcw_wp_sw_starport_2_2
+11012602	11012600		TATOOINE	tat_world	0	-1383.95	10.08	-3821.90	0	pathPoint:gcw_wp_sw_starport_3_2
+11012603	11012600		TATOOINE	tat_world	0	-1385.30	9.99	-3769.46	0	pathPoint:gcw_wp_sw_starport_4_2
+11012604	11012600		TATOOINE	tat_world	0	-1376.61	12.00	-3730.89	0	pathPoint:gcw_wp_sw_starport_5_2
+11012605	11012600		TATOOINE	tat_world	0	-1369.27	12.00	-3709.67	0	pathPoint:gcw_wp_sw_starport_6_2
+11012606	11012600		TATOOINE	tat_world	0	-1316.09	12.00	-3662.30	0	pathPoint:gcw_wp_sw_starport_7_2
+11012607	11012600		TATOOINE	tat_world	0	-1302.13	12.00	-3621.56	0	pathPoint:gcw_wp_sw_starport_8_2
+11012700	11012700	FLIP	TATOOINE	tat_world	0	-926.56	29.02	-3798.38	0	pathPoint:gcw_wp_se_capitol_1_2
+11012701	11012700		TATOOINE	tat_world	0	-966.23	15.23	-3763.69	0	pathPoint:gcw_wp_se_capitol_2_2
+11012702	11012700		TATOOINE	tat_world	0	-983.60	12.00	-3743.68	0	pathPoint:gcw_wp_se_capitol_3_2
+11012703	11012700		TATOOINE	tat_world	0	-993.89	12.00	-3723.70	0	pathPoint:gcw_wp_se_capitol_4_2
+11012704	11012700		TATOOINE	tat_world	0	-1004.39	12.00	-3708.28	0	pathPoint:gcw_wp_se_capitol_5_2
+11012705	11012700		TATOOINE	tat_world	0	-1041.09	12.00	-3673.26	0	pathPoint:gcw_wp_se_capitol_6_2
+11012706	11012700		TATOOINE	tat_world	0	-1068.45	12.00	-3664.56	0	pathPoint:gcw_wp_se_capitol_7_2
+11012707	11012700		TATOOINE	tat_world	0	-1093.79	12.00	-3647.43	0	pathPoint:gcw_wp_se_capitol_8_2
+11012800	11012800	FLIP	TATOOINE	tat_world	0	-1121.53	12.00	-3645.71	0	pathPoint:gcw_wp_capitol_defhq_1_2
+11012801	11012800		TATOOINE	tat_world	0	-1151.33	12.00	-3655.56	0	pathPoint:gcw_wp_capitol_defhq_2_2
+11012802	11012800		TATOOINE	tat_world	0	-1186.81	12.00	-3629.91	0	pathPoint:gcw_wp_capitol_defhq_3_2
+11012900	11012900	FLIP	TATOOINE	tat_world	0	-948.20	30.12	-3617.08	0	pathPoint:gcw_wp_e_capitol_1_2
+11012901	11012900		TATOOINE	tat_world	0	-1029.05	14.09	-3593.07	0	pathPoint:gcw_wp_e_capitol_2_2
+11012902	11012900		TATOOINE	tat_world	0	-1056.42	12.00	-3583.52	0	pathPoint:gcw_wp_e_capitol_3_2
+11012903	11012900		TATOOINE	tat_world	0	-1070.04	12.00	-3587.48	0	pathPoint:gcw_wp_e_capitol_4_2
+11012904	11012900		TATOOINE	tat_world	0	-1074.62	12.00	-3585.64	0	pathPoint:gcw_wp_e_capitol_5_2
+11012905	11012900		TATOOINE	tat_world	0	-1089.22	12.00	-3585.23	0	pathPoint:gcw_wp_e_capitol_6_2
+11012906	11012900		TATOOINE	tat_world	0	-1086.86	12.00	-3602.57	0	pathPoint:gcw_wp_e_capitol_7_2
+11013000	11013000	FLIP	TATOOINE	tat_world	0	-1285.00	12.00	-3526.00	0	pathPoint:gcw_demoralized_1_1
+11013001	11013000		TATOOINE	tat_world	0	-1217.00	12.00	-3589.00	0	pathPoint:gcw_demoralized_1_2
+11013002	11013000		TATOOINE	tat_world	0	-1240.00	12.00	-3616.00	0	pathPoint:gcw_demoralized_1_3
+11013003	11013000		TATOOINE	tat_world	0	-1348.00	12.00	-3661.00	0	pathPoint:gcw_demoralized_1_4
+11013004	11013000		TATOOINE	tat_world	0	-1238.00	12.00	-3669.00	0	pathPoint:gcw_demoralized_1_5
+11013005	11013000		TATOOINE	tat_world	0	-1236.00	12.00	-3645.00	0	pathPoint:gcw_demoralized_1_6
