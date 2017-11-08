@@ -54,9 +54,14 @@ public class StaticService extends Service {
 	
 	public StaticService() {
 		spawnableObjects = new HashMap<>();
-		loadSupportingObjects();
 		
 		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
+	}
+	
+	@Override
+	public boolean initialize() {
+		loadSupportingObjects();
+		return super.initialize();
 	}
 	
 	private void loadSupportingObjects() {
