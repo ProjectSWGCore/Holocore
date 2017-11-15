@@ -381,6 +381,14 @@ public class CreatureObject extends TangibleObject {
 		return true;
 	}
 	
+	/**
+	 * Adds amount to cash balance.
+	 * @param amount the amount to add
+	 */
+	public void addToCash(long amount) {
+		setCashBalance(cashBalance + amount);
+	}
+	
 	public boolean canPerformGalacticReserveTransaction() {
 		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
 	}

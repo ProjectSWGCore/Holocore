@@ -44,6 +44,7 @@ import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -60,6 +61,7 @@ import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
 
+import intents.chat.SystemMessageIntent;
 import intents.object.ContainerTransferIntent;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
@@ -174,6 +176,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
 		if (parent == container) // One could be null, and this is specifically an instance-based check
 			return ContainerResult.SUCCESS;
+		
 		ContainerResult result = moveToContainerChecks(requester, container);
 		if (result != ContainerResult.SUCCESS)
 			return result;
@@ -183,22 +186,50 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (parent != null)
 			parent.removeObject(this);
 		
-		if (container != null) {
-			int arrangement = container.getArrangementId(this);
-			if (arrangement != -1)
-				container.handleSlotReplacement(parent, this, arrangement);
-			container.addObject(this);
-			location.setTerrain(container.getTerrain());
+		// if this object is cash and it is being transferred to a player
+		// don't transfer into a container; just add the cash value to the player's balance
+		// and remove credit object from old container
+		if (objectName.contains("cr") && requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()) {
+			long cash = Long.parseLong(objectName.replace(" cr", ""));
+			((CreatureObject) requester).addToCash(cash);
+			
+			Set<Player> newObservers = getObserversAndParent();
+			
+			long newId = 0;
+			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
+			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+			
+			new ContainerTransferIntent(this, parent, null).broadcast();	// not sure if this is necessary
+			
+			new SystemMessageIntent(((CreatureObject) requester).getOwner(), new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
+		}
+		// object is not cash or it is cash but being transferred to an inventory of a corpse
+		// so just transfer the object to the new container
+		else {
+			if (container != null) {
+				int arrangement = container.getArrangementId(this);
+				if (arrangement != -1)
+					container.handleSlotReplacement(parent, this, arrangement);
+				container.addObject(this);
+				location.setTerrain(container.getTerrain());
+			}
+			
+			Set<Player> newObservers = getObserversAndParent();
+			
+			long newId = (container != null) ? container.getObjectId() : 0;
+			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
+			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
+			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+			
+			if (parent != container)
+				new ContainerTransferIntent(this, parent, container).broadcast();
+			
+			if (requester != null && requester instanceof CreatureObject)
+				new SystemMessageIntent(((CreatureObject) requester).getOwner(), new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", getAttribute("string_name"))).broadcast();
 		}
 		
-		Set<Player> newObservers = getObserversAndParent();
-		long newId = (container != null) ? container.getObjectId() : 0;
-		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
-		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
-		if (parent != container)
-			new ContainerTransferIntent(this, parent, container).broadcast();
 		return ContainerResult.SUCCESS;
 	}
 
@@ -230,7 +261,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
-			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0) {
+			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0 && !objectName.contains("cr")) {
 				Log.w("Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}

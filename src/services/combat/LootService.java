@@ -77,6 +77,9 @@ public final class LootService extends Service {
 
 	private static final String LOOT_TABLE_SELECTOR = "SELECT * FROM loot_table";
 	
+	private static final float CASH_LOOT_CHANCE_NORMAL = 0.6f;
+	private static final float CASH_LOOT_CHANCE_ELITE = 0.8f;
+	
 	private final Map<String, LootTable> lootTables;	// K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;	// K: npc_id, V: possible loot
 	private final Random random;
@@ -217,7 +220,7 @@ public final class LootService extends Service {
 
 		CreatureObject killer = cki.getKiller();
 
-		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", false))
+		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", true))
 			generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
 			generateLoot(loot, killer, lootInventory);
@@ -258,26 +261,36 @@ public final class LootService extends Service {
 	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
 		SWGObject target = rri.getTarget();
+		
+		Log.i("LootService (handleRadialRequestIntent); target name: %s", target.getObjectName());
+		
+		if (target instanceof AIObject) {
+			CreatureObject creature = (CreatureObject) target;
 
-		if (!(target instanceof AIObject)) {
-			// We can only loot NPCs
+			if (creature.getHealth() > 0) {
+				// Live creatures shouldn't get a loot radial
+				return;
+			}
+
+			// TODO permissions check
+
+			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+			RadialOption loot = new RadialOption(RadialItem.LOOT);
+			loot.addChild(RadialItem.LOOT_ALL);
+			options.add(loot);
+			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
+			
 			return;
 		}
 
-		CreatureObject creature = (CreatureObject) target;
-
-		if (creature.getHealth() > 0) {
-			// Live creatures shouldn't get a loot radial
+		/*if (target.getObjectName().contains(" cr")) {
+			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
+			options.add(transfer);
+			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
+			
 			return;
-		}
-
-		// TODO permissions check
-
-		List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
-		RadialOption loot = new RadialOption(RadialItem.LOOT);
-		loot.addChild(RadialItem.LOOT_ALL);
-		options.add(loot);
-		new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
+		}*/
 	}
 	
 	private void lootBox(Player player, SWGObject target){
@@ -340,6 +353,27 @@ public final class LootService extends Service {
 	}
 	
 	private void generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject inventory, CreatureDifficulty difficulty) {
+		float cashLootRoll = random.nextFloat();
+		int multiplier;
+		
+		switch (difficulty) {
+			default:
+			case NORMAL:
+				if (cashLootRoll > CASH_LOOT_CHANCE_NORMAL)
+					return;
+				multiplier = 1;
+				break;
+			case ELITE:
+				if (cashLootRoll > CASH_LOOT_CHANCE_ELITE)
+					return;
+				multiplier = 2;
+				break;
+			case BOSS:
+				// bosses always drop cash loot, so no need to check
+				multiplier = 3;
+				break;
+		}
+		
 		int maxCash = loot.getMaxCash();
 
 		if (maxCash == 0) {
@@ -349,13 +383,14 @@ public final class LootService extends Service {
 
 		int minCash = loot.getMinCash();
 		int cashAmount = random.nextInt((maxCash - minCash) + 1) + minCash;
-
-		switch (difficulty) {
+		cashAmount *= multiplier;
+		
+		/*switch (difficulty) {
 			default:
 			case NORMAL: cashAmount *= 1; break;
 			case ELITE: cashAmount *= 2; break;
 			case BOSS: cashAmount *= 3; break;
-		}
+		}*/
 
 		// TODO scale with group size?
 
@@ -396,17 +431,21 @@ public final class LootService extends Service {
 
 				String[] itemNames = itemGroup.getItemNames();
 				String randomItemName = itemNames[random.nextInt(itemNames.length)];	// Selects a completely random item from the group
+				
+				Log.i("LootService (generateLoot); randomItemName: %s", randomItemName);
 
 				if (randomItemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
 					new SystemMessageIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
+					Log.i("LootService (generateLoot); template: %s", sharedTemplate);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
 					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
 					new ObjectCreatedIntent(object).broadcast();
 				} else {
+					Log.i("LootService (generateLoot); else");
 					new CreateStaticItemIntent(requester, lootInventory, new StaticItemService.ObjectCreationHandler() {
 						@Override
 						public void success(SWGObject[] createdObjects) {
