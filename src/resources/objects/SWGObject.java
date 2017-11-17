@@ -44,7 +44,6 @@ import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -61,7 +60,6 @@ import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
 
-import intents.chat.SystemMessageIntent;
 import intents.object.ContainerTransferIntent;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
@@ -109,6 +107,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private double		prefLoadRange	= 200;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
+	private boolean isCredits = false;
 	
 	public SWGObject() {
 		this(0, null);
@@ -189,7 +188,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// if this object is cash and it is being transferred to a player
 		// don't transfer into a container; just add the cash value to the player's balance
 		// and remove credit object from old container
-		if (objectName.contains("cr") && requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()) {
+		if (isCredits && requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()) {
 			long cash = Long.parseLong(objectName.replace(" cr", ""));
 			((CreatureObject) requester).addToCash(cash);
 			
@@ -201,8 +200,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 			
 			new ContainerTransferIntent(this, parent, null).broadcast();	// not sure if this is necessary
-			
-			new SystemMessageIntent(((CreatureObject) requester).getOwner(), new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
 		}
 		// object is not cash or it is cash but being transferred to an inventory of a corpse
 		// so just transfer the object to the new container
@@ -225,9 +222,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			
 			if (parent != container)
 				new ContainerTransferIntent(this, parent, container).broadcast();
-			
-			if (requester != null && requester instanceof CreatureObject)
-				new SystemMessageIntent(((CreatureObject) requester).getOwner(), new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", getAttribute("string_name"))).broadcast();
 		}
 		
 		return ContainerResult.SUCCESS;
@@ -261,7 +255,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
-			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0 && !objectName.contains("cr")) {
+			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0 && !isCredits) {
 				Log.w("Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
@@ -421,6 +415,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setObjectName(String name) {
 		this.objectName = name;
+		
+		if (objectName.endsWith(" cr"))
+			isCredits = true;
 	}
 	
 	public void setVolume(int volume) {
@@ -657,6 +654,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setPrefLoadRange(double range) {
 		this.prefLoadRange = range;
+	}
+	
+	public boolean isCredits() {
+		return isCredits;
 	}
 	
 	/**

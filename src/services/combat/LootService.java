@@ -37,6 +37,8 @@ import java.util.Map;
 import java.util.Random;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
@@ -46,10 +48,13 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
 import intents.chat.ChatCommandIntent;
 import intents.chat.SystemMessageIntent;
+import intents.combat.CorpseLootedIntent;
 import intents.combat.CreatureKilledIntent;
+import intents.combat.LootItemIntent;
 import intents.object.ContainerTransferIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
@@ -94,6 +99,7 @@ public final class LootService extends Service {
 		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilled(cki));
 		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelection(rsi));
 		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
+		registerForIntent(LootItemIntent.class, lii -> handleLootItemIntent(lii));
 	}
 
 	@Override
@@ -220,10 +226,16 @@ public final class LootService extends Service {
 
 		CreatureObject killer = cki.getKiller();
 
+		boolean cashGenerated = false;
+		boolean lootGenerated = false;
+		
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", true))
-			generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
+			cashGenerated = generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
-			generateLoot(loot, killer, lootInventory);
+			lootGenerated = generateLoot(loot, killer, lootInventory);
+		
+		if (!cashGenerated && !lootGenerated)
+			new CorpseLootedIntent((CreatureObject) lootInventory.getParent()).broadcast();
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
@@ -239,21 +251,36 @@ public final class LootService extends Service {
 	}
 
 	private void handleRadialSelection(RadialSelectionIntent rsi) {
+		Player player = rsi.getPlayer();
+		CreatureObject looter = player.getCreatureObject();
+		SWGObject object = rsi.getTarget();
+		
 		switch (rsi.getSelection()) {
 			case LOOT: {
-				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
+				if (!getLootPermission(looter, object))
 					return;
 				
-				lootBox(rsi.getPlayer(), rsi.getTarget());
+				lootBox(player, object);
 				break;
 			}
 			case LOOT_ALL: {
-				if (!getLootPermission(rsi.getPlayer().getCreatureObject(), rsi.getTarget()))
+				if (!getLootPermission(looter, object))
 					return;				
 				
-				lootAll(rsi.getPlayer().getCreatureObject(), rsi.getTarget());
+				lootAll(looter, object);
 				break;
 			}
+			case TRANSFER_CREDITS_TO_BANK_ACCOUNT:
+				if (!getLootPermission(looter, object))
+					return;
+				
+				long cash = Long.parseLong(object.getObjectName().replace(" cr", ""));
+				looter.addToBank(cash);
+				
+				new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
+				
+				object.moveToContainer(null);
+				break;
 			default:
 				break;
 		}
@@ -261,8 +288,6 @@ public final class LootService extends Service {
 	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
 		SWGObject target = rri.getTarget();
-		
-		Log.i("LootService (handleRadialRequestIntent); target name: %s", target.getObjectName());
 		
 		if (target instanceof AIObject) {
 			CreatureObject creature = (CreatureObject) target;
@@ -279,18 +304,64 @@ public final class LootService extends Service {
 			loot.addChild(RadialItem.LOOT_ALL);
 			options.add(loot);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
-			
-			return;
 		}
-
-		/*if (target.getObjectName().contains(" cr")) {
+		else if (target.isCredits()) {
 			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
 			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
 			options.add(transfer);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
-			
-			return;
-		}*/
+		}
+	}
+	
+	private void handleLootItemIntent(LootItemIntent lii) {
+		Player looter = lii.getLooter();
+		SWGObject item = lii.getItem();
+		SWGObject container = lii.getContainer();
+		
+		loot(looter.getCreatureObject(), item, container);
+	}
+	
+	/**
+	 * Transfers the item to the looter's inventory and sends appropriate system messages.
+	 * @param looter the player doing the looting
+	 * @param item the item being looted
+	 * @param container the container of the item
+	 */
+	private void loot(CreatureObject looter, SWGObject item, SWGObject container) {
+		Player player = looter.getOwner();
+		
+		switch (item.moveToContainer(looter, looter.getSlottedObject("inventory"))) {
+			case SUCCESS:
+				String itemName = item.getObjectName();
+				
+				if (item.isCredits()) {
+					long cash = Long.parseLong(itemName.replace(" cr", ""));
+					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
+				}
+				else {
+					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
+				}
+				
+				if (container.getContainedObjects().isEmpty())
+					new CorpseLootedIntent((CreatureObject) container.getParent()).broadcast();
+				break;
+			case CONTAINER_FULL:
+				new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_danger_message.snd", 1, false));
+				break;
+			case NO_PERMISSION:
+				new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+				break;
+			case SLOT_NO_EXIST:
+				new SystemMessageIntent(player, "@container_error_message:container06").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+				break;
+			case SLOT_OCCUPIED:
+				new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+				break;
+		}
 	}
 	
 	private void lootBox(Player player, SWGObject target){
@@ -305,11 +376,10 @@ public final class LootService extends Service {
 		}
 
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
-		SWGObject looterInventory = looter.getSlottedObject("inventory");
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
 		
-		loot.forEach(item -> item.moveToContainer(looter, looterInventory));
+		loot.forEach(item -> loot((CreatureObject) looter, item, lootInventory));
 	}
 	
 	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {
@@ -323,7 +393,7 @@ public final class LootService extends Service {
 		for (SWGObject item : lootInventory.getContainedObjects()){
 			randomPlayer = lootGroup.getRandomPlayer();
 			if(randomPlayer != null)
-				item.moveToContainer(randomPlayer, randomPlayer.getSlottedObject("inventory"));
+				loot(randomPlayer, item, lootInventory);
 		}
 	}
 
@@ -352,7 +422,7 @@ public final class LootService extends Service {
 		}
 	}
 	
-	private void generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject inventory, CreatureDifficulty difficulty) {
+	private boolean generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject inventory, CreatureDifficulty difficulty) {
 		float cashLootRoll = random.nextFloat();
 		int multiplier;
 		
@@ -360,12 +430,12 @@ public final class LootService extends Service {
 			default:
 			case NORMAL:
 				if (cashLootRoll > CASH_LOOT_CHANCE_NORMAL)
-					return;
+					return false;
 				multiplier = 1;
 				break;
 			case ELITE:
 				if (cashLootRoll > CASH_LOOT_CHANCE_ELITE)
-					return;
+					return false;
 				multiplier = 2;
 				break;
 			case BOSS:
@@ -378,19 +448,12 @@ public final class LootService extends Service {
 
 		if (maxCash == 0) {
 			// No cash is ever dropped on this creature
-			return;
+			return false;
 		}
 
 		int minCash = loot.getMinCash();
 		int cashAmount = random.nextInt((maxCash - minCash) + 1) + minCash;
 		cashAmount *= multiplier;
-		
-		/*switch (difficulty) {
-			default:
-			case NORMAL: cashAmount *= 1; break;
-			case ELITE: cashAmount *= 2; break;
-			case BOSS: cashAmount *= 3; break;
-		}*/
 
 		// TODO scale with group size?
 
@@ -403,10 +466,14 @@ public final class LootService extends Service {
 		new ObjectCreatedIntent(cashObject).broadcast();
 
 		showLootDisc(killer, inventory.getParent());
+		
+		return true;
 	}
 	
-	private void generateLoot(NPCLoot loot, CreatureObject requester, SWGObject lootInventory) {
+	private boolean generateLoot(NPCLoot loot, CreatureObject requester, SWGObject lootInventory) {
 		int tableRoll = random.nextInt(100) + 1;
+		
+		boolean lootGenerated = false;
 
 		for (NPCTable npcTable : loot.getNPCTables()) {
 			LootTable lootTable = npcTable.getLootTable();
@@ -439,13 +506,15 @@ public final class LootService extends Service {
 					new SystemMessageIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
-					Log.i("LootService (generateLoot); template: %s", sharedTemplate);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
 					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
 					new ObjectCreatedIntent(object).broadcast();
+					
+					// show loot disc?
+					
+					lootGenerated = true;
 				} else {
-					Log.i("LootService (generateLoot); else");
 					new CreateStaticItemIntent(requester, lootInventory, new StaticItemService.ObjectCreationHandler() {
 						@Override
 						public void success(SWGObject[] createdObjects) {
@@ -457,10 +526,14 @@ public final class LootService extends Service {
 							return true;
 						}
 					},ContainerPermissionsType.LOOT, randomItemName).broadcast();
+					
+					lootGenerated = true;
 				}
 				break;	// Only one group is ever spawned
 			}
 		}
+		
+		return lootGenerated;
 	}
 	
 	private boolean getLootPermission(CreatureObject looter, SWGObject target){

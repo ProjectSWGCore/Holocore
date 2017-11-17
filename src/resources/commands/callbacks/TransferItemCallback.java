@@ -29,13 +29,15 @@
 package resources.commands.callbacks;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
 import intents.chat.SystemMessageIntent;
-import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import intents.combat.LootItemIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.custom.AIObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
@@ -155,6 +157,14 @@ public class TransferItemCallback implements ICmdCallback {
 					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					return;
 				}
+			}
+			
+			SWGObject oldContainerParent = oldContainer.getParent();
+			
+			// check if this is loot
+			if (oldContainerParent instanceof AIObject && ((AIObject) oldContainerParent).getHealth() <= 0) {		//oldContainer.getTemplate().contains("shared_creature_inventory")
+				new LootItemIntent(player, target, oldContainer).broadcast();
+				return;
 			}
 
 			switch (target.moveToContainer(actor, newContainer)) {

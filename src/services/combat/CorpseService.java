@@ -37,6 +37,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -61,6 +62,7 @@ import intents.BuffIntent;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
 import intents.chat.SystemMessageIntent;
+import intents.combat.CorpseLootedIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -91,6 +93,8 @@ public final class CorpseService extends Service {
 	private final List<BuildingObject> cloningFacilities;
 	private final Random random;
 	
+	private final Map<Long, ScheduledFuture<?>> deleteCorpseTasks;
+	
 	public CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		reviveTimers = new HashMap<>();
@@ -98,7 +102,10 @@ public final class CorpseService extends Service {
 		cloningFacilities = new ArrayList<>();
 		random = new Random();
 		
+		deleteCorpseTasks = new HashMap<>();
+		
 		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
+		registerForIntent(CorpseLootedIntent.class, cli -> handleCorpseLootedIntent(cli));
 		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
 		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
@@ -168,8 +175,26 @@ public final class CorpseService extends Service {
 			scheduleCloneTimer(corpse);
 		} else {
 			// This is a NPC - schedule corpse for deletion
-			executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
+			ScheduledFuture<?> task = executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
+			deleteCorpseTasks.put(corpse.getObjectId(), task);
 		}
+	}
+	
+	private void handleCorpseLootedIntent(CorpseLootedIntent i) {
+		CreatureObject corpse = i.getCorpse();
+		
+		ScheduledFuture<?> task = deleteCorpseTasks.get(corpse.getObjectId());
+		
+		if (task == null) {
+			Log.e("There should already be a deleteCorpse task for corpse %s!", corpse.toString());
+			executor.schedule(() -> deleteCorpse(corpse), 5, TimeUnit.SECONDS);
+			return;
+		}
+		
+		// if existing deleteCorpse task has more than 5 seconds remaining, cancel it
+		// if the cancel operation succeeds, schedule another deleteCorpse task for 5 seconds
+		if (task.getDelay(TimeUnit.SECONDS) > 5 && task.cancel(false))
+			executor.schedule(() -> deleteCorpse(corpse), 5, TimeUnit.SECONDS);
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
@@ -288,6 +313,7 @@ public final class CorpseService extends Service {
 			Log.e("Cannot delete the corpse of a player!", creatureCorpse);
 		} else {
 			new DestroyObjectIntent(creatureCorpse).broadcast();
+			deleteCorpseTasks.remove(creatureCorpse.getObjectId());
 			Log.d("Corpse of NPC %s was deleted from the world", creatureCorpse);
 		}
 	}
