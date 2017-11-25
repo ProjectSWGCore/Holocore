@@ -625,3 +625,13 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200625	DANTOOINE	dan_world	PATROL	0	-4267.2	3.00	-2427.7	0	1	a stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	2000400	column	idle	0	0	0	300	120
 200626	DANTOOINE	dan_world	PATROL	0	-453.8	0.4	2507.6	0	1	a scientist	scientist_100_h_inv_n	City	Mining Outpost	1	PATROL	0	2000100	column	idle	0	0	0	300	120
 200627	DANTOOINE	dan_world	PATROL	0	1621.6	4.0	-6369.8	0	1	a commoner	commoner_100_h_inv_n	City	Pirate Outpost	1	PATROL	0	2000200	column	idle	0	0	0	300	120
+200628	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	9.8	0.6	2.6	-43	1	a smuggler	smuggler_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200629	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	2.9	0.6	3.2	-139	1	a thug	thug_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200670	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	0.6	0.6	0.9	37	1	a bounty hunter	bounty_hunter_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200671	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	-9.2	0.6	2.7	127	1	a bartender	bartender_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
+200672	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	-7.3	0.6	2.5	-85	1	a explorer	explorer_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	300	120
+200673	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	-3.3	0.6	-7.3	-3	1	a bith musican	bith_musican_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	themepark_music_1	0	0	0	300	120
+200674	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	1.8	0.6	-4.8	-107	1	a commoner	commoner_aqualish_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200675	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	-0.4	0.6	-3.1	-159	1	a pilot	commoner_sullustan_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200676	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	-4.5	0.6	-2.3	146	1	a scientist	scientist_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200677	DANTOOINE	ply_corl_house_m_s01_fp1	AREA	3	10.2	0.6	-5.0	-85	1	a starport manager	commoner_twilek_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
