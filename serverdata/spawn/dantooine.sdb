@@ -69,17 +69,17 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200069	DANTOOINE	dan_world	PATROL	0	-619.00	3.00	2449.00	0	1	a technician	technician_100_h_inv_n	City	Mining Outpost	1	PATROL	0	2001500	column	idle	0	0	0	300	120
 200070	DANTOOINE	dan_world	PATROL	0	-601.00	3.00	2482.00	0	1	a settler	settler_100_h_inv_n	City	Mining Outpost	1	PATROL	0	2001700	column	idle	0	0	0	300	120
 200071	DANTOOINE	dan_world	PATROL	0	-453.8	0.4	2507.6	0	1	a scientist	scientist_100_h_inv_n	City	Mining Outpost	1	PATROL	0	2000100	column	idle	0	0	0	300	120
-200072	DANTOOINE	dan_pirate_outpost_bldg4	AREA	3	5.1	0.1	-3.7	-105	1	a starport manager	commoner_twilek_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200073	DANTOOINE	dan_pirate_outpost_bldg4	AREA	3	3.2	0.1	-4.6	56	1	a pilot	pilot_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200074	DANTOOINE	dan_pirate_outpost_bldg4	AREA	3	4.9	0.1	3.8	179	1	a technician	technician_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200075	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	9.8	0.6	2.6	-43	1	a smuggler	smuggler_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200076	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	2.9	0.6	3.2	-139	1	a thug	thug_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200077	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	0.6	0.6	0.9	37	1	an artisan	artisan_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200078	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-9.2	0.6	2.7	127	1	a bartender	bartender_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
-200079	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-7.3	0.6	2.5	-85	1	a explorer	explorer_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	300	120
+200072	DANTOOINE	dan_pirate_outpost_bldg4	AREA	4	4.9	0.1	3.8	179	1	a technician	technician_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200073	DANTOOINE	dan_pirate_outpost_bldg4	AREA	5	5.1	0.1	-3.7	-105	1	a starport manager	commoner_twilek_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200074	DANTOOINE	dan_pirate_outpost_bldg4	AREA	5	3.2	0.1	-4.6	56	1	a pilot	pilot_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200075	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	9.8	0.6	2.6	-43	1	a smuggler	smuggler_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200076	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	2.9	0.6	3.2	-139	1	a thug	thug_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200077	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	0.6	0.6	0.9	37	1	an artisan	artisan_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200078	DANTOOINE	dan_pirate_outpost_cantina	AREA	2	-7.3	0.6	2.5	-85	1	a explorer	explorer_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	300	120
+200079	DANTOOINE	dan_pirate_outpost_cantina	AREA	2	-9.2	0.6	2.7	127	1	a bartender	bartender_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200080	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-3.3	0.6	-7.3	-3	1	a Bith musician	bith_musician_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	themepark_music_1	0	0	0	300	120
 200081	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	1.8	0.6	-4.8	-107	1	a commoner	commoner_aqualish_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
-200082	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-0.4	0.6	-3.1	-159	1	a pilot	commoner_sullustan_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+200082	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-0.4	0.6	-3.1	-159	1	a commoner	commoner_sullustan_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 200083	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-4.5	0.6	-2.3	146	1	a scientist	scientist_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
 200084	DANTOOINE	dan_world	AREA	0	1602.00	4.00	-6434.53	74	1	Daiv Dekven	daiv_dekven_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
 200085	DANTOOINE	dan_world	AREA	0	1629.16	4.00	-6414.93	-66	1	an assassin	assassin_100_h_inv_n	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	300	120
@@ -304,14 +304,14 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 200304	DANTOOINE	dan_abandoned_reb_base_main	AREA	5	16.31	1.01	-1.71	-78	1	a Rebel First Lieutenant	rebel_first_lieutenant_20_h_att_n	POI	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 200305	DANTOOINE	dan_abandoned_reb_base_main	AREA	8	-14.51	1.01	-22.09	29	1	Captain Ackbar	captain_ackbar_100_h_inv_n	POI	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 200306	DANTOOINE	dan_abandoned_reb_base_main	AREA	8	-12.42	1.01	-19.44	-150	1	Leia Organa	clone_leia_organa_100_h_inv_n	POI	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
-200307	DANTOOINE	dan_world	PATROL	0	-6954.54	25.00	5421.27	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	3	PATROL	6	3003200	column	idle	0	0	0	300	120
-200308	DANTOOINE	dan_world	PATROL	0	-6657.43	30.00	5560.84	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	4	PATROL	8	3003100	column	idle	0	0	0	300	120
+200307	DANTOOINE	dan_world	PATROL	0	-6954.54	25.00	5421.27	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	3	PATROL	6	2003200	column	idle	0	0	0	300	120
+200308	DANTOOINE	dan_world	PATROL	0	-6657.43	30.00	5560.84	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	4	PATROL	8	2003100	column	idle	0	0	0	300	120
 200309	DANTOOINE	dan_world	AREA	0	-6817.92	46.00	5511.86	179	1	a Rebel recruiter	rebel_recruiter_100_h_inv_n	POI	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 200310	DANTOOINE	dan_world	AREA	0	-6594.00	18.40	5689.00	133	1	Nola	smuggler_fence_nola_100_h_inv_n	POI	Abandoned Rebel Base	1	IDLE	0	0	-	idle	0	0	0	300	120
 200311	DANTOOINE	dan_world	AREA	0	-6628.21	22.13	5704.44	0	1	an enforcer	smuggler_patrol_thief_15_65_h_att_n	POI	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 200312	DANTOOINE	dan_world	AREA	0	-6599.08	19.56	5654.78	0	1	an enforcer	smuggler_patrol_thief_15_65_h_att_n	POI	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
 200313	DANTOOINE	dan_world	AREA	0	-6567.25	16.88	5685.90	0	1	an enforcer	smuggler_patrol_thief_15_65_h_att_n	POI	Abandoned Rebel Base	1	TURN	0	0	-	idle	0	0	0	300	120
-200314	DANTOOINE	dan_world	PATROL	0	-6849.1	53.0	5517.7	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	1	PATROL	0	3003300	column	idle	0	0	0	300	120
+200314	DANTOOINE	dan_world	PATROL	0	-6849.1	53.0	5517.7	0	1	a Rebel commando	rebel_commando_25_h_att_n	POI	Abandoned Rebel Base	1	PATROL	0	2003300	column	idle	0	0	0	300	120
 200315	DANTOOINE	dan_world	AREA	0	-3870.56	2.50	-5690.56	149	1	a Janta clan leader	janta_clan_leader_77_h_att_n	POI	Dantari Village (1)	1	IDLE	0	0	-	idle	0	0	0	300	120
 200316	DANTOOINE	dan_world	AREA	0	-3792.34	6.23	-5720.93	0	1	a Janta harvester	janta_harvester_74_h_att_n	POI	Dantari Village (1)	1	TURN	0	0	-	idle	0	0	0	300	120
 200317	DANTOOINE	dan_world	AREA	0	-3866.23	2.35	-5728.56	0	1	a Janta herbalist	janta_herbalist_74_h_att_n	POI	Dantari Village (1)	1	LOITER	5	0	-	idle	0	0	0	300	120
