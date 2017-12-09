@@ -195,15 +195,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			long cash = Long.parseLong(objectName.replace(" cr", ""));
 			((CreatureObject) requester).addToCash(cash);
 			
-			/*Set<Player> newObservers = getObserversAndParent();
-			
-			long newId = 0;
-			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
-			
-			new ContainerTransferIntent(this, parent, null).broadcast();	// not sure if this is necessary
-*/			
 			newId = 0;
 			new ContainerTransferIntent(this, parent, null).broadcast();
 		// object is not cash or it is cash but being transferred to an inventory of a corpse
@@ -216,17 +207,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				container.addObject(this);
 				location.setTerrain(container.getTerrain());
 			}
-			
-			/*Set<Player> newObservers = getObserversAndParent();
-			
-			long newId = (container != null) ? container.getObjectId() : 0;
-			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
-			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
-			
-			if (parent != container)
-				new ContainerTransferIntent(this, parent, container).broadcast();*/
 			
 			newObservers = getObserversAndParent();
 			

@@ -271,7 +271,10 @@ public final class LootService extends Service {
 				break;
 			}
 			case TRANSFER_CREDITS_TO_BANK_ACCOUNT: {
-				if (!getLootPermission(looter, object))
+				SWGObject container = object.getParent();
+				SWGObject owner = container.getParent();
+				
+				if (!getLootPermission(looter, owner))
 					return;
 				
 				long cash = Long.parseLong(object.getObjectName().replace(" cr", ""));
@@ -280,6 +283,10 @@ public final class LootService extends Service {
 				new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
 				
 				object.moveToContainer(null);
+				
+				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty())
+					new CorpseLootedIntent((CreatureObject) owner).broadcast();
+				
 				break;
 			}
 			default:
@@ -536,41 +543,40 @@ public final class LootService extends Service {
 		return lootGenerated;
 	}
 	
-	private boolean getLootPermission(CreatureObject looter, SWGObject target){
-		
+	private boolean getLootPermission(CreatureObject looter, SWGObject target) {
 		if (!isLootable(looter, target))
 			return false;
 		
 		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
 		
-		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null){
+		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null) {
 			long looterGroup = looter.getGroupId();
 			long killerGroup = highestDamageDealer.getGroupId();
 			
-			if (looterGroup == killerGroup && killerGroup != 0){
+			if (looterGroup == killerGroup && killerGroup != 0) {
 				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
 
-					switch (killerGroupObject.getLootRule()){
-						case FREE_FOR_ALL:
-							return true;
-						case MASTER_LOOTER:
-							return looter.getObjectId() == killerGroupObject.getLootMaster();
-						case LOTTERY: //TODO Lottery
-							return false;
-						case RANDOM:
-							randomGroupLoot(killerGroupObject, target);
-							return false;
-						default:
-							return false;
-					}
-			}else if (highestDamageDealer.getOwner().equals(looter.getOwner())){
+				switch (killerGroupObject.getLootRule()) {
+					case FREE_FOR_ALL:
+						return true;
+					case MASTER_LOOTER:
+						return looter.getObjectId() == killerGroupObject.getLootMaster();
+					case LOTTERY: //TODO Lottery
+						return false;
+					case RANDOM:
+						randomGroupLoot(killerGroupObject, target);
+						return false;
+					default:
+						return false;
+				}
+			} else if (highestDamageDealer.getOwner().equals(looter.getOwner())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean isLootable(CreatureObject looter, SWGObject target){
+	private boolean isLootable(CreatureObject looter, SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
 
 		if (inventory.getContainedObjects().isEmpty())
