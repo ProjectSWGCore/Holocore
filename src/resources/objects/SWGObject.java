@@ -185,6 +185,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (parent != null)
 			parent.removeObject(this);
 		
+		long newId;
+		Set<Player> newObservers = null;
+		
 		// if this object is cash and it is being transferred to a player
 		// don't transfer into a container; just add the cash value to the player's balance
 		// and remove credit object from old container
@@ -192,7 +195,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			long cash = Long.parseLong(objectName.replace(" cr", ""));
 			((CreatureObject) requester).addToCash(cash);
 			
-			Set<Player> newObservers = getObserversAndParent();
+			/*Set<Player> newObservers = getObserversAndParent();
 			
 			long newId = 0;
 			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
@@ -200,10 +203,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 			
 			new ContainerTransferIntent(this, parent, null).broadcast();	// not sure if this is necessary
-		}
+*/			
+			newId = 0;
+			new ContainerTransferIntent(this, parent, null).broadcast();
 		// object is not cash or it is cash but being transferred to an inventory of a corpse
 		// so just transfer the object to the new container
-		else {
+		} else {
 			if (container != null) {
 				int arrangement = container.getArrangementId(this);
 				if (arrangement != -1)
@@ -212,7 +217,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				location.setTerrain(container.getTerrain());
 			}
 			
-			Set<Player> newObservers = getObserversAndParent();
+			/*Set<Player> newObservers = getObserversAndParent();
 			
 			long newId = (container != null) ? container.getObjectId() : 0;
 			UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
@@ -221,8 +226,23 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 			
 			if (parent != container)
+				new ContainerTransferIntent(this, parent, container).broadcast();*/
+			
+			newObservers = getObserversAndParent();
+			
+			newId = (container != null) ? container.getObjectId() : 0;
+			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
+			
+			if (parent != container)
 				new ContainerTransferIntent(this, parent, container).broadcast();
 		}
+		
+		if (newObservers == null)
+			newObservers = getObserversAndParent();
+		
+		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
+		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		
 		return ContainerResult.SUCCESS;
 	}

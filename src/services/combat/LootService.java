@@ -270,7 +270,7 @@ public final class LootService extends Service {
 				lootAll(looter, object);
 				break;
 			}
-			case TRANSFER_CREDITS_TO_BANK_ACCOUNT:
+			case TRANSFER_CREDITS_TO_BANK_ACCOUNT: {
 				if (!getLootPermission(looter, object))
 					return;
 				
@@ -281,6 +281,7 @@ public final class LootService extends Service {
 				
 				object.moveToContainer(null);
 				break;
+			}
 			default:
 				break;
 		}
@@ -304,8 +305,7 @@ public final class LootService extends Service {
 			loot.addChild(RadialItem.LOOT_ALL);
 			options.add(loot);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
-		}
-		else if (target.isCredits()) {
+		} else if (target.isCredits()) {
 			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
 			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
 			options.add(transfer);
@@ -314,11 +314,11 @@ public final class LootService extends Service {
 	}
 	
 	private void handleLootItemIntent(LootItemIntent lii) {
-		Player looter = lii.getLooter();
+		CreatureObject looter = lii.getLooter().getCreatureObject();
 		SWGObject item = lii.getItem();
 		SWGObject container = lii.getContainer();
 		
-		loot(looter.getCreatureObject(), item, container);
+		loot(looter, item, container);
 	}
 	
 	/**
@@ -331,20 +331,20 @@ public final class LootService extends Service {
 		Player player = looter.getOwner();
 		
 		switch (item.moveToContainer(looter, looter.getSlottedObject("inventory"))) {
-			case SUCCESS:
+			case SUCCESS: {
 				String itemName = item.getObjectName();
 				
 				if (item.isCredits()) {
 					long cash = Long.parseLong(itemName.replace(" cr", ""));
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
-				}
-				else {
+				} else {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
 				}
 				
 				if (container.getContainedObjects().isEmpty())
 					new CorpseLootedIntent((CreatureObject) container.getParent()).broadcast();
 				break;
+			}
 			case CONTAINER_FULL:
 				new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
 				player.sendPacket(new PlayMusicMessage(0, "sound/ui_danger_message.snd", 1, false));
