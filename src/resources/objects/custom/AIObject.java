@@ -27,13 +27,21 @@
  ***********************************************************************************/
 package resources.objects.custom;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import utilities.ScheduledUtilities;
 
 public abstract class AIObject extends CreatureObject {
+	
+	private final Set<CreatureObject> playersNearby;
 	
 	private transient ScheduledFuture<?> future;
 	private long initialDelay;
@@ -43,6 +51,7 @@ public abstract class AIObject extends CreatureObject {
 	
 	public AIObject(long objectId) {
 		super(objectId);
+		this.playersNearby = new CopyOnWriteArraySet<>();
 		aiInitialize();
 	}
 	
@@ -52,6 +61,17 @@ public abstract class AIObject extends CreatureObject {
 	 */
 	protected void aiInitialize() {
 		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
+	}
+	
+	@Override
+	public void onObjectMoveInAware(SWGObject aware) {
+		if (aware.getBaselineType() != BaselineType.CREO || !((CreatureObject) aware).isLoggedInPlayer())
+			return;
+		if (getLocation().distanceTo(aware.getLocation()) <= 300) {
+			playersNearby.add((CreatureObject) aware);
+		} else {
+			playersNearby.remove(aware);
+		}
 	}
 	
 	/**
@@ -139,4 +159,13 @@ public abstract class AIObject extends CreatureObject {
 		}
 		return true;
 	}
+	
+	protected final boolean hasNearbyPlayers() {
+		return !playersNearby.isEmpty();
+	}
+	
+	protected final Set<CreatureObject> getNearbyPlayers() {
+		return Collections.unmodifiableSet(playersNearby);
+	}
+	
 }

@@ -82,7 +82,7 @@ public class ClientBuildoutService extends Service {
 	
 	@Override
 	public boolean start() {
-		objects.forEach(ObjectCreatedIntent::broadcast);
+		objects.forEach(ClientBuildoutService::broadcast);
 		objects.clear();
 		return super.start();
 	}
@@ -90,6 +90,12 @@ public class ClientBuildoutService extends Service {
 	public List<SWGObject> getClientObjects() {
 		loadClientObjects();
 		return Collections.unmodifiableList(objects);
+	}
+	
+	private static void broadcast(SWGObject obj) {
+		ObjectCreatedIntent.broadcast(obj);
+		obj.getContainedObjects().forEach(ClientBuildoutService::broadcast);
+		obj.getSlottedObjects().forEach(ClientBuildoutService::broadcast);
 	}
 	
 	private void loadClientObjects() {

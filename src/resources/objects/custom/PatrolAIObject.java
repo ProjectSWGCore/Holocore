@@ -65,7 +65,7 @@ public class PatrolAIObject extends AIObject {
 	
 	@Override
 	protected void aiLoop() {
-		if (isInCombat() || !canAiMove())
+		if (isInCombat() || !canAiMove() || !hasNearbyPlayers())
 			return;
 		
 		double speed = getMovementPercent() * getMovementScale() * getWalkSpeed();

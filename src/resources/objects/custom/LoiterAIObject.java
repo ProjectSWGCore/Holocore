@@ -59,7 +59,7 @@ public class LoiterAIObject extends RandomAIObject {
 	
 	@Override
 	protected void aiLoop() {
-		if (isInCombat() || !canAiMove())
+		if (isInCombat() || !canAiMove() || !hasNearbyPlayers())
 			return;
 		Random r = new Random();
 		if (r.nextDouble() > 0.25) // Only a 25% movement chance
