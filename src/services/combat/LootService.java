@@ -397,9 +397,9 @@ public final class LootService extends Service {
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
 		CreatureObject randomPlayer;
 
-		for (SWGObject item : lootInventory.getContainedObjects()){
+		for (SWGObject item : lootInventory.getContainedObjects()) {
 			randomPlayer = lootGroup.getRandomPlayer();
-			if(randomPlayer != null)
+			if (randomPlayer != null)
 				loot(randomPlayer, item, lootInventory);
 		}
 	}
@@ -414,16 +414,16 @@ public final class LootService extends Service {
 			
 			long requesterGroup = requester.getGroupId();
 			
-			if (requesterGroup != 0){
+			if (requesterGroup != 0) {
 				GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
 				
-				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()){
+				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
 					Player player = creature.getOwner();
-					if (player != null){
+					if (player != null) {
 						player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 					}
 				}
-			}else {
+			} else {
 				requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 			}
 		}
@@ -505,8 +505,6 @@ public final class LootService extends Service {
 
 				String[] itemNames = itemGroup.getItemNames();
 				String randomItemName = itemNames[random.nextInt(itemNames.length)];	// Selects a completely random item from the group
-				
-				Log.i("LootService (generateLoot); randomItemName: %s", randomItemName);
 
 				if (randomItemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
@@ -544,7 +542,7 @@ public final class LootService extends Service {
 	}
 	
 	private boolean getLootPermission(CreatureObject looter, SWGObject target) {
-		if (!isLootable(looter, target))
+		if (!isLootable(target))
 			return false;
 		
 		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
@@ -576,7 +574,7 @@ public final class LootService extends Service {
 		return false;
 	}
 
-	private boolean isLootable(CreatureObject looter, SWGObject target) {
+	private boolean isLootable(SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
 
 		if (inventory.getContainedObjects().isEmpty())
