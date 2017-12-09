@@ -162,7 +162,7 @@ public class TransferItemCallback implements ICmdCallback {
 			SWGObject oldContainerParent = oldContainer.getParent();
 			
 			// check if this is loot
-			if (oldContainerParent instanceof AIObject && ((AIObject) oldContainerParent).getHealth() <= 0) {		//oldContainer.getTemplate().contains("shared_creature_inventory")
+			if (oldContainerParent instanceof AIObject && ((AIObject) oldContainerParent).getHealth() <= 0) {
 				new LootItemIntent(player, target, oldContainer).broadcast();
 				return;
 			}

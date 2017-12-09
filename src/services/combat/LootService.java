@@ -236,6 +236,8 @@ public final class LootService extends Service {
 		
 		if (!cashGenerated && !lootGenerated)
 			new CorpseLootedIntent((CreatureObject) lootInventory.getParent()).broadcast();
+		else
+			showLootDisc(killer, lootInventory.getParent());
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
@@ -398,6 +400,7 @@ public final class LootService extends Service {
 		CreatureObject randomPlayer;
 
 		for (SWGObject item : lootInventory.getContainedObjects()) {
+			// TODO: split cash
 			randomPlayer = lootGroup.getRandomPlayer();
 			if (randomPlayer != null)
 				loot(randomPlayer, item, lootInventory);
@@ -429,7 +432,7 @@ public final class LootService extends Service {
 		}
 	}
 	
-	private boolean generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject inventory, CreatureDifficulty difficulty) {
+	private boolean generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject lootInventory, CreatureDifficulty difficulty) {
 		float cashLootRoll = random.nextFloat();
 		int multiplier;
 		
@@ -468,16 +471,14 @@ public final class LootService extends Service {
 
 		cashObject.setObjectName(cashAmount + " cr");
 		cashObject.setContainerPermissions(ContainerPermissionsType.LOOT);
-		cashObject.moveToContainer(inventory);
+		cashObject.moveToContainer(lootInventory);
 
 		new ObjectCreatedIntent(cashObject).broadcast();
-
-		showLootDisc(killer, inventory.getParent());
 		
 		return true;
 	}
 	
-	private boolean generateLoot(NPCLoot loot, CreatureObject requester, SWGObject lootInventory) {
+	private boolean generateLoot(NPCLoot loot, CreatureObject killer, SWGObject lootInventory) {
 		int tableRoll = random.nextInt(100) + 1;
 		
 		boolean lootGenerated = false;
@@ -508,7 +509,7 @@ public final class LootService extends Service {
 
 				if (randomItemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
-					new SystemMessageIntent(requester.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
+					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
 				} else if (randomItemName.endsWith(".iff")) {
 					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
@@ -516,21 +517,19 @@ public final class LootService extends Service {
 					object.moveToContainer(lootInventory);
 					new ObjectCreatedIntent(object).broadcast();
 					
-					// show loot disc?
-					
 					lootGenerated = true;
 				} else {
-					new CreateStaticItemIntent(requester, lootInventory, new StaticItemService.ObjectCreationHandler() {
+					new CreateStaticItemIntent(killer, lootInventory, new StaticItemService.ObjectCreationHandler() {
 						@Override
 						public void success(SWGObject[] createdObjects) {
-							showLootDisc(requester, lootInventory.getParent());
+							// do nothing - loot disc is created on the return of the generateLoot method
 						}
 
 						@Override
 						public boolean isIgnoreVolume() {
 							return true;
 						}
-					},ContainerPermissionsType.LOOT, randomItemName).broadcast();
+					}, ContainerPermissionsType.LOOT, randomItemName).broadcast();
 					
 					lootGenerated = true;
 				}
