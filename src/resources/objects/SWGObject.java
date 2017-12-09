@@ -744,8 +744,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void onAddObjectAware(SWGObject aware) {
 		try {
-			if (!isBuildout() && !isSnapshot())
+			if (!isBuildout() && !isSnapshot()) {
 				onObjectEnterAware(aware);
+			}
 		} catch (Throwable t) {
 			Log.e(t);
 		}
