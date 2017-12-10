@@ -49,6 +49,7 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
 
 import intents.chat.ChatCommandIntent;
 import intents.chat.SystemMessageIntent;
@@ -286,8 +287,11 @@ public final class LootService extends Service {
 				
 				object.moveToContainer(null);
 				
-				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty())
-					new CorpseLootedIntent((CreatureObject) owner).broadcast();
+				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
+					CreatureObject corpse = (CreatureObject) owner;
+					new CorpseLootedIntent(corpse).broadcast();
+					player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
+				}
 				
 				break;
 			}
@@ -350,8 +354,11 @@ public final class LootService extends Service {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
 				}
 				
-				if (container.getContainedObjects().isEmpty())
-					new CorpseLootedIntent((CreatureObject) container.getParent()).broadcast();
+				if (container.getContainedObjects().isEmpty()) {
+					CreatureObject corpse = (CreatureObject) container.getParent();
+					new CorpseLootedIntent(corpse).broadcast();
+					player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
+				}
 				break;
 			}
 			case CONTAINER_FULL:
