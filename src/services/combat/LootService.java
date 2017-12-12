@@ -68,7 +68,7 @@ import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
 import resources.objects.group.GroupObject;
-import resources.objects.tangible.TangibleObject;
+import resources.objects.tangible.CreditObject;
 import resources.player.Player;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
@@ -279,7 +279,7 @@ public final class LootService extends Service {
 				if (!getLootPermission(looter, owner))
 					return;
 				
-				long cash = Long.parseLong(object.getObjectName().replace(" cr", ""));
+				long cash = ((CreditObject) object).getAmount();
 				looter.addToBank(cash);
 				
 				new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
@@ -314,7 +314,7 @@ public final class LootService extends Service {
 			loot.addChild(RadialItem.LOOT_ALL);
 			options.add(loot);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
-		} else if (target.isCredits()) {
+		} else if (target instanceof CreditObject) {
 			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
 			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
 			options.add(transfer);
@@ -343,8 +343,8 @@ public final class LootService extends Service {
 			case SUCCESS: {
 				String itemName = item.getObjectName();
 				
-				if (item.isCredits()) {
-					long cash = Long.parseLong(itemName.replace(" cr", ""));
+				if (item instanceof CreditObject) {
+					long cash = ((CreditObject) item).getAmount();
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
 				} else {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
@@ -467,9 +467,9 @@ public final class LootService extends Service {
 
 		// TODO scale with group size?
 
-		TangibleObject cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", TangibleObject.class);
+		CreditObject cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", CreditObject.class);
 
-		cashObject.setObjectName(cashAmount + " cr");
+		cashObject.setAmount(cashAmount);
 		cashObject.setContainerPermissions(ContainerPermissionsType.LOOT);
 		cashObject.moveToContainer(lootInventory);
 
