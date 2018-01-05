@@ -91,11 +91,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
 	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
-	protected ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
+	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
 	private List <List <String>>		arrangement		= new ArrayList<>();
 	private Player						owner			= null;
 	
-	protected SWGObject	parent			= null;
+	private SWGObject	parent			= null;
 	private StringId 	stringId		= new StringId("", "");
 	private StringId 	detailStringId	= new StringId("", "");
 	private String		template		= "";
@@ -142,7 +142,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Removes the specified object from this current object.
 	 * @param object Object to remove
 	 */
-	protected void removeObject(SWGObject object) {
+	public void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object);
 			
@@ -163,15 +163,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.parent = null;
 		object.getAwareness().setParent(null);
 		object.slotArrangement = -1;
-	}
-	
-	/**
-	 * Removes this object from its parent
-	 * Used by classes extending SWGObject that can't call removeObject on their parent
-	 */
-	protected void removeFromParent() {
-		if (parent != null)
-			parent.removeObject(this);
 	}
 	
 	/**
