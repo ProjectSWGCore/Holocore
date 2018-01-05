@@ -107,7 +107,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private double		prefLoadRange	= 200;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
-	private boolean isCredits = false;
 	
 	public SWGObject() {
 		this(0, null);
@@ -143,7 +142,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Removes the specified object from this current object.
 	 * @param object Object to remove
 	 */
-	protected void removeObject(SWGObject object) {
+	public void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object);
 			
@@ -167,6 +166,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	/**
+	 * Attempts to move this object to the defined container without checking for permissions
+	 * @param container
+	 * @return {@link ContainerResult}
+	 */
+	public ContainerResult moveToContainer(SWGObject container) {
+		return moveToContainer(null, container);
+	}
+	
+	/**
 	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 * @param requester Object that is requesting to move the object, used for permission checking
 	 * @param container Where this object should be moved to
@@ -185,58 +193,36 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (parent != null)
 			parent.removeObject(this);
 		
-		long newId;
-		Set<Player> newObservers = null;
-		
-		// if this object is cash and it is being transferred to a player
-		// don't transfer into a container; just add the cash value to the player's balance
-		// and remove credit object from old container
-		if (isCredits && requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()) {
-			long cash = Long.parseLong(objectName.replace(" cr", ""));
-			((CreatureObject) requester).addToCash(cash);
-			
-			newId = 0;
-			new ContainerTransferIntent(this, parent, null).broadcast();
-		// object is not cash or it is cash but being transferred to an inventory of a corpse
-		// so just transfer the object to the new container
-		} else {
-			if (container != null) {
-				int arrangement = container.getArrangementId(this);
-				if (arrangement != -1)
-					container.handleSlotReplacement(parent, this, arrangement);
-				container.addObject(this);
-				location.setTerrain(container.getTerrain());
-			}
-			
-			newObservers = getObserversAndParent();
-			
-			newId = (container != null) ? container.getObjectId() : 0;
-			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
-			
-			if (parent != container)
-				new ContainerTransferIntent(this, parent, container).broadcast();
+		if (container != null) {
+			int arrangement = container.getArrangementId(this);
+			if (arrangement != -1)
+				container.handleSlotReplacement(parent, this, arrangement);
+			container.addObject(this);
+			location.setTerrain(container.getTerrain());
 		}
 		
-		if (newObservers == null)
-			newObservers = getObserversAndParent();
+		Set<Player> newObservers = getObserversAndParent();
+		
+		long newId = (container != null) ? container.getObjectId() : 0;
 		
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+		
+		if (parent != container)
+			new ContainerTransferIntent(this, parent, container).broadcast();
 		
 		return ContainerResult.SUCCESS;
 	}
-
+	
 	/**
-	 * Attempts to move this object to the defined container without checking for permissions
-	 * @param container
+	 * Checks if an object can be moved to the container by the requester
+	 * @param requester Object that is requesting to move the object, used for permission checking
+	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	public ContainerResult moveToContainer(SWGObject container) {
-		return moveToContainer(null, container);
-	}
-	
-	private ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
+	protected ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
 		if (requester == null)
 			return ContainerResult.SUCCESS;
 		if (!permissions.canMove(requester, this)) {
@@ -255,7 +241,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
-			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0 && !isCredits) {
+			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0) {
 				Log.w("Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
@@ -415,9 +401,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setObjectName(String name) {
 		this.objectName = name;
-		
-		if (objectName.endsWith(" cr"))
-			isCredits = true;
 	}
 	
 	public void setVolume(int volume) {
@@ -654,10 +637,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setPrefLoadRange(double range) {
 		this.prefLoadRange = range;
-	}
-	
-	public boolean isCredits() {
-		return isCredits;
 	}
 	
 	/**
