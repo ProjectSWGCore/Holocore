@@ -142,7 +142,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Removes the specified object from this current object.
 	 * @param object Object to remove
 	 */
-	protected void removeObject(SWGObject object) {
+	public void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object);
 			
@@ -166,6 +166,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	/**
+	 * Attempts to move this object to the defined container without checking for permissions
+	 * @param container
+	 * @return {@link ContainerResult}
+	 */
+	public ContainerResult moveToContainer(SWGObject container) {
+		return moveToContainer(null, container);
+	}
+	
+	/**
 	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 * @param requester Object that is requesting to move the object, used for permission checking
 	 * @param container Where this object should be moved to
@@ -174,6 +183,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
 		if (parent == container) // One could be null, and this is specifically an instance-based check
 			return ContainerResult.SUCCESS;
+		
 		ContainerResult result = moveToContainerChecks(requester, container);
 		if (result != ContainerResult.SUCCESS)
 			return result;
@@ -192,26 +202,27 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		Set<Player> newObservers = getObserversAndParent();
+		
 		long newId = (container != null) ? container.getObjectId() : 0;
+		
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
 		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+		
 		if (parent != container)
 			new ContainerTransferIntent(this, parent, container).broadcast();
+		
 		return ContainerResult.SUCCESS;
 	}
-
+	
 	/**
-	 * Attempts to move this object to the defined container without checking for permissions
-	 * @param container
+	 * Checks if an object can be moved to the container by the requester
+	 * @param requester Object that is requesting to move the object, used for permission checking
+	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	public ContainerResult moveToContainer(SWGObject container) {
-		return moveToContainer(null, container);
-	}
-	
-	private ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
+	protected ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
 		if (requester == null)
 			return ContainerResult.SUCCESS;
 		if (!permissions.canMove(requester, this)) {

@@ -238,6 +238,7 @@ public final class StaticItemService extends Service {
 		private boolean unique;
 		private String conditionString;
 		private int volume;
+		private String stringName;
 		// TODO bio-link
 		private final String itemName;
 		private final String iffTemplate;
@@ -264,6 +265,8 @@ public final class StaticItemService extends Service {
 			int hitPoints = resultSet.getInt("hit_points");
 			conditionString = String.format("%d/%d", hitPoints, hitPoints);
 			volume = resultSet.getInt("volume");
+			
+			stringName = resultSet.getString("string_name");
 
 			// load type-specific attributes
 			return loadTypeAttributes(resultSet);
@@ -299,6 +302,8 @@ public final class StaticItemService extends Service {
 				object.addAttribute("unique", "1");
 			object.addAttribute("condition", conditionString);
 			object.addAttribute("volume", String.valueOf(volume));
+			
+			object.setObjectName(stringName);
 			
 			// apply type-specific attributes
 			applyTypeAttributes(object);
