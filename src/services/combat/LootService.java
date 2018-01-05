@@ -45,6 +45,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
@@ -415,27 +416,23 @@ public final class LootService extends Service {
 	}
 
 	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
-		SWGObject inventory = corpse.getSlottedObject("inventory");
+		Assert.test(requester.isPlayer());
 
-		// At this point, something will have dropped for sure.
-		if (requester.isPlayer() && !inventory.getContainedObjects().isEmpty()) {	// TODO needs adjustment for group loot
-			// If there's something we can loot, draw the loot disc icon on the corpse!
-			Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
+		Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
+		
+		long requesterGroup = requester.getGroupId();
+		
+		if (requesterGroup != 0) {
+			GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
 			
-			long requesterGroup = requester.getGroupId();
-			
-			if (requesterGroup != 0) {
-				GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
-				
-				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
-					Player player = creature.getOwner();
-					if (player != null) {
-						player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
-					}
+			for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
+				Player player = creature.getOwner();
+				if (player != null) {
+					player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 				}
-			} else {
-				requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 			}
+		} else {
+			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 		}
 	}
 	
