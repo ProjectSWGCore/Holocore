@@ -41,8 +41,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.AwarenessUtilities;
 
-public class CreditObject extends TangibleObject
-{
+public class CreditObject extends TangibleObject {
 	private long amount;
 
 	public CreditObject(long objectId) {
