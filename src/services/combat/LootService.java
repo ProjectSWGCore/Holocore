@@ -45,10 +45,12 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
 
 import intents.chat.ChatCommandIntent;
 import intents.chat.SystemMessageIntent;
@@ -286,8 +288,11 @@ public final class LootService extends Service {
 				
 				object.moveToContainer(null);
 				
-				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty())
-					new CorpseLootedIntent((CreatureObject) owner).broadcast();
+				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
+					CreatureObject corpse = (CreatureObject) owner;
+					new CorpseLootedIntent(corpse).broadcast();
+					player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
+				}
 				
 				break;
 			}
@@ -350,8 +355,11 @@ public final class LootService extends Service {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
 				}
 				
-				if (container.getContainedObjects().isEmpty())
-					new CorpseLootedIntent((CreatureObject) container.getParent()).broadcast();
+				if (container.getContainedObjects().isEmpty()) {
+					CreatureObject corpse = (CreatureObject) container.getParent();
+					new CorpseLootedIntent(corpse).broadcast();
+					player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
+				}
 				break;
 			}
 			case CONTAINER_FULL:
@@ -408,27 +416,23 @@ public final class LootService extends Service {
 	}
 
 	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
-		SWGObject inventory = corpse.getSlottedObject("inventory");
+		Assert.test(requester.isPlayer());
 
-		// At this point, something will have dropped for sure.
-		if (requester.isPlayer() && !inventory.getContainedObjects().isEmpty()) {	// TODO needs adjustment for group loot
-			// If there's something we can loot, draw the loot disc icon on the corpse!
-			Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
+		Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
+		
+		long requesterGroup = requester.getGroupId();
+		
+		if (requesterGroup != 0) {
+			GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
 			
-			long requesterGroup = requester.getGroupId();
-			
-			if (requesterGroup != 0) {
-				GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
-				
-				for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
-					Player player = creature.getOwner();
-					if (player != null) {
-						player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
-					}
+			for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
+				Player player = creature.getOwner();
+				if (player != null) {
+					player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 				}
-			} else {
-				requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 			}
+		} else {
+			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 		}
 	}
 	
