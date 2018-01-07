@@ -65,7 +65,6 @@ import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.containers.ContainerResult;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
