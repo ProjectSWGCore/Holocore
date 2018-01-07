@@ -150,6 +150,8 @@ public final class LootService extends Service {
 		
 		for (int groupNum = 1; groupNum <= 16 && totalChance < 100; groupNum++) {
 			LootGroup lootGroup = loadLootGroup(set, groupNum, totalChance);
+			if (lootGroup == null)
+				continue;
 			table.addLootGroup(lootGroup);
 			totalChance = lootGroup.getChance();
 		}
@@ -167,8 +169,11 @@ public final class LootService extends Service {
 	 * @return {@link LootGroup}
 	 */
 	private LootGroup loadLootGroup(ResultSet set, int groupNum, int totalChance) throws SQLException {
+		int groupChance = set.getInt("chance_group_" + groupNum);
+		if (groupChance == 0)
+			return null;
+		groupChance += totalChance;
 		String groupItems = set.getString("items_group_" + groupNum);
-		int groupChance = set.getInt("chance_group_" + groupNum) + totalChance;
 		String[] itemNames = groupItems.split(";");
 			
 		return new LootGroup(groupChance, itemNames);
