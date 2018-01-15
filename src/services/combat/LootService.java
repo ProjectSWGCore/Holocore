@@ -156,7 +156,8 @@ public final class LootService extends Service {
 			totalChance = lootGroup.getChance();
 		}
 		
-		Assert.test(totalChance == 100, "Loot chance != 100 while loading loot_table! Table: " + tableName + ", total chance: " + totalChance);
+		if (totalChance != 100)
+			Log.w("Loot chance != 100 while loading loot_table! Table: %s, totalChance: %s", tableName, totalChance);
 
 		lootTables.put(tableName, table);
 	}
