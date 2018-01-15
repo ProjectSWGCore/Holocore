@@ -112,6 +112,11 @@ public final class LootService extends Service {
 		return super.initialize();
 	}
 
+	/**
+	 * Loads loot tables from loot_table.db. Each "loot table" is in the form of a row.
+	 * Each row has an id and several "loot groups," which consist of actual items that can be dropped.
+	 * Each group has a different chance of being selected for loot.
+	 */
 	private void loadLootTables() {
 		String what = "loot tables";
 		long startTime = StandardLog.onStartLoad(what);
@@ -119,7 +124,7 @@ public final class LootService extends Service {
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("loot/loot_table.db", "loot_table")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(LOOT_TABLE_SELECTOR)) {
 				while (set.next()) {
-					loadLootTable(set);
+					loadLootTable(set);		// each set is one row in the DB
 				}
 			} catch (SQLException e) {
 				Log.e(e);
@@ -129,6 +134,10 @@ public final class LootService extends Service {
 		StandardLog.onEndLoad(lootTables.size(), what, startTime);
 	}
 	
+	/**
+	 * Loads a single loot table.
+	 * @param set a single loot table (a row in loot_table.db)
+	 */
 	private void loadLootTable(ResultSet set) throws SQLException {
 		String tableName = set.getString("loot_id");
 
@@ -137,26 +146,43 @@ public final class LootService extends Service {
 		}
 
 		LootTable table = new LootTable();
-		byte totalChance = 0;	// Must not be above 100
+		int totalChance = 0;	// Must not be above 100. Also used to convert chances in the form of "33, 33, 34" to "33, 66, 100"
 		
-		for (int groupNum = 1; groupNum <= 16 && totalChance <= 100; groupNum++) {
-			LootGroup lootGroup = loadLootGroup(set, groupNum);
-			
+		for (int groupNum = 1; groupNum <= 16 && totalChance < 100; groupNum++) {
+			LootGroup lootGroup = loadLootGroup(set, groupNum, totalChance);
+			if (lootGroup == null)
+				continue;
 			table.addLootGroup(lootGroup);
-			totalChance += lootGroup.getChance();
+			totalChance = lootGroup.getChance();
 		}
+		
+		if (totalChance != 100)
+			Log.w("Loot chance != 100 while loading loot_table! Table: %s, totalChance: %s", tableName, totalChance);
 
 		lootTables.put(tableName, table);
 	}
 	
-	private LootGroup loadLootGroup(ResultSet set, int groupNum) throws SQLException {
-		String groupItems = set.getString("items_group_" + groupNum);
+	/**
+	 * Loads a single loot group from a loot table.
+	 * @param set the loot table
+	 * @param groupNum the group number
+	 * @param totalChance the sum of all group chances before this group
+	 * @return {@link LootGroup}
+	 */
+	private LootGroup loadLootGroup(ResultSet set, int groupNum, int totalChance) throws SQLException {
 		int groupChance = set.getInt("chance_group_" + groupNum);
+		if (groupChance == 0)
+			return null;
+		groupChance += totalChance;
+		String groupItems = set.getString("items_group_" + groupNum);
 		String[] itemNames = groupItems.split(";");
 			
 		return new LootGroup(groupChance, itemNames);
 	}
 
+	/**
+	 * Loads NPC loot tables. There are up to 3 tables per NPC.
+	 */
 	private void loadNPCLoot() {
 		String what = "NPC loot links";
 		long startTime = StandardLog.onStartLoad(what);
@@ -169,7 +195,12 @@ public final class LootService extends Service {
 		StandardLog.onEndLoad(npcLoot.size(), what, startTime);
 	}
 	
+	/**
+	 * Load tables for a specific NPC.
+	 * @param info the NPC info
+	 */
 	private void loadNPCLoot(NpcInfo info) {
+		// we don't care about non-humanoids
 		if (info.getHumanoidInfo() == null)
 			return;
 		int minCash = info.getHumanoidInfo().getMinCash();
@@ -177,13 +208,21 @@ public final class LootService extends Service {
 		String creatureId = info.getId();
 		NPCLoot loot = new NPCLoot(minCash, maxCash);
 		
+		// load each loot table (up to 3) and add to loot object
 		loadNPCTable(loot, info.getLootTable1(), info.getLootTable1Chance());
 		loadNPCTable(loot, info.getLootTable2(), info.getLootTable2Chance());
 		loadNPCTable(loot, info.getLootTable3(), info.getLootTable3Chance());
 		npcLoot.put(creatureId, loot);
 	}
 	
+	/**
+	 * Load a specific table for an NPC.
+	 * @param loot the loot object for the NPC
+	 * @param table the loot table
+	 * @param chance the chance for this loot table (used when generating loot)
+	 */
 	private void loadNPCTable(NPCLoot loot, String table, int chance) {
+		// if chance <= 0, this table for this NPC doesn't exist
 		if (chance <= 0)
 			return;
 		
@@ -482,40 +521,43 @@ public final class LootService extends Service {
 		return true;
 	}
 	
+	/**
+	 * Generates loot and places it in the inventory of the corpse.
+	 * @param loot the loot info of the creature killed
+	 * @param killer
+	 * @param lootInventory the inventory the loot will be placed in (corpse inventory)
+	 * @return whether loot was generated or not
+	 */
 	private boolean generateLoot(NPCLoot loot, CreatureObject killer, SWGObject lootInventory) {
-		int tableRoll = random.nextInt(100) + 1;
-		
 		boolean lootGenerated = false;
 
+		int tableRoll = random.nextInt(100) + 1;
+		
 		for (NPCTable npcTable : loot.getNPCTables()) {
 			LootTable lootTable = npcTable.getLootTable();
 			int tableChance = npcTable.getChance();
 
-			if (tableChance == 0 || tableChance < tableRoll ) {
+			if (tableRoll > tableChance) {
 				// Skip ahead if there's no drop chance
 				continue;
 			}
-
-			int itemGroupRoll = random.nextInt(100) + 1;
-			int minInterval = 1;
-
-			for (LootGroup itemGroup : lootTable.getLootGroups()) {
-				int groupChance = itemGroup.getChance();
-
-				if (minInterval < itemGroupRoll && itemGroupRoll > groupChance) {
-					minInterval += groupChance;
-					// Check next item group
+			
+			int groupRoll = random.nextInt(100) + 1;
+			
+			for (LootGroup group : lootTable.getLootGroups()) {
+				int groupChance = group.getChance();
+				
+				if (groupRoll > groupChance)
 					continue;
-				}
-
-				String[] itemNames = itemGroup.getItemNames();
-				String randomItemName = itemNames[random.nextInt(itemNames.length)];	// Selects a completely random item from the group
-
-				if (randomItemName.startsWith("dynamic_")) {
+				
+				String[] itemNames = group.getItemNames();
+				String itemName = itemNames[random.nextInt(itemNames.length)];
+				
+				if (itemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
-					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + randomItemName).broadcast();
-				} else if (randomItemName.endsWith(".iff")) {
-					String sharedTemplate = ClientFactory.formatToSharedFile(randomItemName);
+					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + itemName).broadcast();
+				} else if (itemName.endsWith(".iff")) {
+					String sharedTemplate = ClientFactory.formatToSharedFile(itemName);
 					SWGObject object = ObjectCreator.createObjectFromTemplate(sharedTemplate);
 					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
@@ -533,11 +575,12 @@ public final class LootService extends Service {
 						public boolean isIgnoreVolume() {
 							return true;
 						}
-					}, ContainerPermissionsType.LOOT, randomItemName).broadcast();
+					}, ContainerPermissionsType.LOOT, itemName).broadcast();
 					
 					lootGenerated = true;
 				}
-				break;	// Only one group is ever spawned
+				
+				break;
 			}
 		}
 		
