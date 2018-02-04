@@ -1,143 +1,102 @@
 /***********************************************************************************
-* Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
-*                                                                                  *
-* ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
-* July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
-* Our goal is to create an emulator which will provide a server for players to     *
-* continue playing a game similar to the one they used to play. We are basing      *
-* it on the final publish of the game prior to end-game events.                    *
-*                                                                                  *
-* This file is part of Holocore.                                                   *
-*                                                                                  *
-* -------------------------------------------------------------------------------- *
-*                                                                                  *
-* Holocore is free software: you can redistribute it and/or modify                 *
-* it under the terms of the GNU Affero General Public License as                   *
-* published by the Free Software Foundation, either version 3 of the               *
-* License, or (at your option) any later version.                                  *
-*                                                                                  *
-* Holocore is distributed in the hope that it will be useful,                      *
-* but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
-* GNU Affero General Public License for more details.                              *
-*                                                                                  *
-* You should have received a copy of the GNU Affero General Public License         *
-* along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
-*                                                                                  *
-***********************************************************************************/
+ * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package network;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.SocketAddress;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.NetworkProtocol;
+import com.projectswg.common.network.TCPServer.TCPSession;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.common.network.packets.swg.admin.AdminPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
-
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
+import intents.network.InboundPacketPendingIntent;
 import services.network.HolocoreSessionManager;
-import services.network.HolocoreSessionManager.HolocoreSessionCallback;
 import services.network.HolocoreSessionManager.HolocoreSessionException;
 import services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
-import services.network.NetworkProtocol;
-import services.network.PacketSender;
+import services.network.HolocoreSessionManager.SessionStatus;
 
-public class NetworkClient implements HolocoreSessionCallback {
+import java.io.EOFException;
+import java.io.IOException;
+import java.nio.channels.SocketChannel;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class NetworkClient extends TCPSession {
 	
 	private static final int DEFAULT_BUFFER = 1024;
 	
+	private final SocketChannel socket;
 	private final IntentChain intentChain;
-	private final SocketAddress address;
-	private final long networkId;
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
 	private final Lock inboundLock;
-	private final PacketSender sender;
-	private final AtomicReference<NetworkState> state;
-	private final AtomicReference<NetworkClientFilter> filter;
 	
-	public NetworkClient(SocketAddress address, long networkId, PacketSender sender, NetworkClientFilter filter) {
+	public NetworkClient(SocketChannel socket) {
+		super(socket);
+		this.socket = socket;
 		this.intentChain = new IntentChain();
-		this.address = address;
-		this.networkId = networkId;
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.sessionManager = new HolocoreSessionManager();
 		this.inboundLock = new ReentrantLock(false);
-		this.sender = sender;
-		this.state = new AtomicReference<>(NetworkState.DISCONNECTED);
-		this.filter = new AtomicReference<>(filter);
 		
-		this.sessionManager.setCallback(this);
-	}
-	
-	public void connect() {
-		inboundLock.lock();
-		try {
-			Assert.test(getState() == NetworkState.DISCONNECTED);
-			buffer.reset();
-			intentChain.reset();
-			setState(NetworkState.CONNECTED);
-			sessionManager.onSessionCreated();
-			broadcast(new ConnectionOpenedIntent(networkId));
-		} finally {
-			inboundLock.unlock();
-		}
+		this.sessionManager.setCallback(this::onSessionInitialized);
 	}
 	
 	public void close(ConnectionStoppedReason reason) {
-		inboundLock.lock();
-		try {
-			Assert.test(getState() == NetworkState.CONNECTED);
-			buffer.reset();
-			intentChain.reset();
-			setState(NetworkState.CLOSED);
+		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
 			sessionManager.onSessionDestroyed();
-			broadcast(new ConnectionClosedIntent(networkId, reason));
-		} finally {
-			inboundLock.unlock();
+			intentChain.broadcastAfter(new ConnectionClosedIntent(getSessionId(), reason));
+			try {
+				socket.close();
+			} catch (IOException e) {
+				Log.e("Failed to close connection. IOException: %s", e.getMessage());
+			}
 		}
 	}
 	
 	public boolean isConnected() {
-		return getState() == NetworkState.CONNECTED;
-	}
-	
-	public SocketAddress getAddress() {
-		return address;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
-	}
-	
-	@Override
-	public void onSessionInitialized() {
-		sendPacket(new HoloConnectionStarted());
+		return sessionManager.getStatus() == SessionStatus.CONNECTED;
 	}
 	
 	public void processInbound() {
-		if (getState() != NetworkState.CONNECTED)
-			return;
 		if (!inboundLock.tryLock())
 			return;
 		try {
 			handleInboundPackets();
 		} catch (HolocoreSessionException e) {
 			if (e.getReason() != SessionExceptionReason.DISCONNECT_REQUESTED)
-				Log.w("HolocoreSessionException with %s and error: %s", address, e.getReason());
+				Log.w("HolocoreSessionException with %s and error: %s", getRemoteAddress(), e.getReason());
 			
 			switch (e.getReason()) {
 				case NO_PROTOCOL:
@@ -158,42 +117,64 @@ public class NetworkClient implements HolocoreSessionCallback {
 	}
 	
 	public void addToOutbound(SWGPacket p) {
-		if (getState() != NetworkState.CONNECTED)
-			return;
-		if (!isOutboundAllowed(p))
-			return;
-		sendPacket(p);
+		if (allowOutbound(p))
+			sendPacket(p);
 	}
 	
-	public boolean addToBuffer(byte [] data) throws IOException {
+	@Override
+	public String toString() {
+		return "NetworkClient[" + getRemoteAddress() + "]";
+	}
+	
+	@Override
+	protected void onIncomingData(byte[] data) {
+		inboundLock.lock();
 		try {
-			inboundLock.lock();
-			if (getState() != NetworkState.CONNECTED)
-				return false;
 			buffer.write(data);
-			return NetworkProtocol.canDecode(buffer);
+			if (NetworkProtocol.canDecode(buffer))
+				InboundPacketPendingIntent.broadcast(this);
+		} catch (IOException e) {
+			close(ConnectionStoppedReason.INVALID_PROTOCOL);
 		} finally {
 			inboundLock.unlock();
 		}
 	}
 	
-	private boolean isInboundAllowed(SWGPacket p) {
-		return filter.get().isInboundAllowed(p);
+	@Override
+	protected void onConnected() {
+		sessionManager.onSessionCreated();
+		intentChain.broadcastAfter(new ConnectionOpenedIntent(getSessionId()));
 	}
 	
-	private boolean isOutboundAllowed(SWGPacket p) {
-		return filter.get().isOutboundAllowed(p);
+	@Override
+	protected void onDisconnected() {
+		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
+			sessionManager.onSessionDestroyed();
+			intentChain.broadcastAfter(new ConnectionClosedIntent(getSessionId(), ConnectionStoppedReason.UNKNOWN));
+		}
+	}
+	
+	protected boolean allowInbound(SWGPacket packet) {
+		return !(packet instanceof AdminPacket);
+	}
+	
+	protected boolean allowOutbound(SWGPacket packet) {
+		return !(packet instanceof AdminPacket);
+	}
+	
+	private void onSessionInitialized() {
+		sendPacket(new HoloConnectionStarted());
 	}
 	
 	private void handleInboundPackets() throws HolocoreSessionException, EOFException {
 		long loop = 0;
 		while (loop++ < 100) { // EOFException or HolocoreSessionException should terminate the loop
 			SWGPacket p = NetworkProtocol.decode(buffer);
-			if (p == null || !isInboundAllowed(p))
+			if (p == null || !allowInbound(p))
 				continue;
-			p.setSocketAddress(address);
+			p.setSocketAddress(getRemoteAddress());
 			sessionManager.onInbound(p);
-			broadcast(new InboundPacketIntent(p, networkId));
+			intentChain.broadcastAfter(new InboundPacketIntent(p, getSessionId()));
 		}
 		if (loop >= 100) {
 			Log.w("Possible infinite loop detected and stopped in NetworkClient::processInbound()");
@@ -201,62 +182,11 @@ public class NetworkClient implements HolocoreSessionCallback {
 	}
 	
 	private void sendPacket(SWGPacket p) {
-		if (sender == null) {
-			Log.w("Unable to send SWGPacket %s - sender is null!");
-			return;
-		}
-		sender.sendPacket(address, NetworkProtocol.encode(p));
-	}
-	
-	private NetworkState getState() {
-		inboundLock.lock();
 		try {
-			return state.get();
-		} finally {
-			inboundLock.unlock();
+			writeToChannel(NetworkProtocol.encode(p).array());
+		} catch (IOException e) {
+			Log.e("Failed to send packet. IOException: %s", e.getMessage());
 		}
-	}
-	
-	private void setState(NetworkState state) {
-		inboundLock.lock();
-		try {
-			NetworkState prev = getState();
-			switch (state) { // ensure they go in the proper order
-				case DISCONNECTED:
-					Assert.fail();
-					break;
-				case CONNECTED:
-					Assert.test(prev == NetworkState.DISCONNECTED);
-					break;
-				case CLOSED:
-					Assert.test(prev == NetworkState.CONNECTED);
-					break;
-			}
-			
-			this.state.set(state);
-		} finally {
-			inboundLock.unlock();
-		}
-	}
-	
-	private void broadcast(Intent i) {
-		intentChain.broadcastAfter(i);
-	}
-	
-	@Override
-	public String toString() {
-		return "NetworkClient["+address+"]";
-	}
-	
-	private enum NetworkState {
-		DISCONNECTED,
-		CONNECTED,
-		CLOSED
-	}
-	
-	public interface NetworkClientFilter {
-		boolean isInboundAllowed(SWGPacket p);
-		boolean isOutboundAllowed(SWGPacket p);
 	}
 	
 }

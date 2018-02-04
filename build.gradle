@@ -1,12 +1,20 @@
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+	}
+}
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '2.0.2'
+	id 'application'
+	id 'java'
+	id 'idea'
+}
 
 mainClassName  = 'main.ProjectSWG'
-
-manifest {
-	attributes 'Main-Class': 'main.ProjectSWG'
-}
 
 sourceSets {
     main {
@@ -37,6 +45,10 @@ shadowJar{
 	archiveName = "Holocore.jar"
 }
 
+repositories {
+	jcenter()
+}
+
 dependencies {
 	compile project(':PSWGCommon')
 	compile project(':PSWGCommonFX')
@@ -44,15 +56,6 @@ dependencies {
 	testCompile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
-repositories {
-	mavenCentral()
-}
-
-buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
-	}
+task wrapper(type: Wrapper) {
+	gradleVersion = "4.4.1"
 }
