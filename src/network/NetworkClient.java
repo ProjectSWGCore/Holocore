@@ -75,6 +75,7 @@ public class NetworkClient extends TCPSession {
 	
 	public void close(ConnectionStoppedReason reason) {
 		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
+			sendPacket(new HoloConnectionStopped(reason));
 			sessionManager.onSessionDestroyed();
 			intentChain.broadcastAfter(new ConnectionClosedIntent(getSessionId(), reason));
 			try {
@@ -128,16 +129,18 @@ public class NetworkClient extends TCPSession {
 	
 	@Override
 	protected void onIncomingData(byte[] data) {
+		boolean canDecode = false;
 		inboundLock.lock();
 		try {
 			buffer.write(data);
-			if (NetworkProtocol.canDecode(buffer))
-				InboundPacketPendingIntent.broadcast(this);
+			canDecode = NetworkProtocol.canDecode(buffer);
 		} catch (IOException e) {
 			close(ConnectionStoppedReason.INVALID_PROTOCOL);
 		} finally {
 			inboundLock.unlock();
 		}
+		if (canDecode)
+			InboundPacketPendingIntent.broadcast(this);
 	}
 	
 	@Override
