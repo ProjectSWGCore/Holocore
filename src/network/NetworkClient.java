@@ -46,7 +46,6 @@ import services.network.HolocoreSessionManager.HolocoreSessionException;
 import services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
 import services.network.HolocoreSessionManager.SessionStatus;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.locks.Lock;
@@ -86,32 +85,22 @@ public class NetworkClient extends TCPSession {
 		}
 	}
 	
-	public boolean isConnected() {
-		return sessionManager.getStatus() == SessionStatus.CONNECTED;
-	}
-	
 	public void processInbound() {
-		if (!inboundLock.tryLock())
-			return;
+		inboundLock.lock();
 		try {
-			handleInboundPackets();
-		} catch (HolocoreSessionException e) {
-			if (e.getReason() != SessionExceptionReason.DISCONNECT_REQUESTED)
-				Log.w("HolocoreSessionException with %s and error: %s", getRemoteAddress(), e.getReason());
-			
-			switch (e.getReason()) {
-				case NO_PROTOCOL:
-					sendPacket(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
-					break;
-				case PROTOCOL_INVALID:
-					sendPacket(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
-					break;
-				case DISCONNECT_REQUESTED:
-					close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
-					break;
+			while (NetworkProtocol.canDecode(buffer)) {
+				SWGPacket p = NetworkProtocol.decode(buffer);
+				if (p == null || !allowInbound(p))
+					continue;
+				p.setSocketAddress(getRemoteAddress());
+				sessionManager.onInbound(p);
+				intentChain.broadcastAfter(new InboundPacketIntent(p, getSessionId()));
 			}
-		} catch (EOFException e) {
-			// Slow connection is likely the culprit
+		} catch (HolocoreSessionException e) {
+			onSessionError(e);
+		} catch (IOException e) {
+			Log.w("Failed to process inbound packets. IOException: %s", e.getMessage());
+			close(ConnectionStoppedReason.NETWORK);
 		} finally {
 			inboundLock.unlock();
 		}
@@ -135,7 +124,7 @@ public class NetworkClient extends TCPSession {
 			buffer.write(data);
 			canDecode = NetworkProtocol.canDecode(buffer);
 		} catch (IOException e) {
-			close(ConnectionStoppedReason.INVALID_PROTOCOL);
+			close(ConnectionStoppedReason.NETWORK);
 		} finally {
 			inboundLock.unlock();
 		}
@@ -169,18 +158,20 @@ public class NetworkClient extends TCPSession {
 		sendPacket(new HoloConnectionStarted());
 	}
 	
-	private void handleInboundPackets() throws HolocoreSessionException, EOFException {
-		long loop = 0;
-		while (loop++ < 100) { // EOFException or HolocoreSessionException should terminate the loop
-			SWGPacket p = NetworkProtocol.decode(buffer);
-			if (p == null || !allowInbound(p))
-				continue;
-			p.setSocketAddress(getRemoteAddress());
-			sessionManager.onInbound(p);
-			intentChain.broadcastAfter(new InboundPacketIntent(p, getSessionId()));
-		}
-		if (loop >= 100) {
-			Log.w("Possible infinite loop detected and stopped in NetworkClient::processInbound()");
+	private void onSessionError(HolocoreSessionException e) {
+		if (e.getReason() != SessionExceptionReason.DISCONNECT_REQUESTED)
+			Log.w("HolocoreSessionException with %s and error: %s", getRemoteAddress(), e.getReason());
+		
+		switch (e.getReason()) {
+			case NO_PROTOCOL:
+				sendPacket(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
+				break;
+			case PROTOCOL_INVALID:
+				sendPacket(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
+				break;
+			case DISCONNECT_REQUESTED:
+				close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
+				break;
 		}
 	}
 	
