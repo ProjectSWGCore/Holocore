@@ -163,7 +163,7 @@ public class NetworkClientManager extends Manager {
 	
 	private NetworkClient getClient(long id) {
 		NetworkClient client = tcpServer.getSession(id);
-		if (client != null)
+		if (client != null || adminServer == null)
 			return client;
 		return adminServer.getSession(id);
 	}
