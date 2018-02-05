@@ -28,6 +28,7 @@
 package resources.client_info;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -56,8 +57,9 @@ public final class ServerFactory extends DataFactory {
 
 	public static DatatableData getDatatable(String file) {
 		ClientData data = getInstance().readFile(file);
-		// Safe type conversion as ServerFactory can only create DatatableData ClientData objects
-		return (data != null ? (DatatableData) data : null);
+		if (data == null)
+			throw new RuntimeException(new FileNotFoundException(file));
+		return (DatatableData) data;
 	}
 
 	public void updateServerIffs() throws IOException {

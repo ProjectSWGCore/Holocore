@@ -118,7 +118,6 @@ public class ChatRoomService extends Service {
 		switch (pei.getEvent()) {
 			case PE_ZONE_IN_CLIENT:
 				chatRoomHandler.enterChatChannels(pei.getPlayer());
-				chatRoomHandler.enterPlanetaryChatChannels(pei.getPlayer());
 				break;
 			default:
 				break;
@@ -331,7 +330,7 @@ public class ChatRoomService extends Service {
 	}
 	
 	private void handleChatRoomListRequest(Player player) {
-		player.sendPacket(new ChatRoomList());
+		player.sendPacket(new ChatRoomList(chatRoomHandler.getRoomList(player)));
 	}
 	
 	private static void sendMessage(ChatRoom room, ChatAvatar sender, String message, OutOfBandPackage oob) {

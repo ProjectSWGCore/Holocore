@@ -33,7 +33,6 @@ import com.projectswg.common.data.encodables.chat.ChatRoom;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
@@ -52,26 +51,11 @@ import services.player.PlayerManager.PlayerLookup;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class ChatRoomHandler {
-	
-	private static final Terrain[] CHAT_PLANETS = new Terrain[] {
-			Terrain.CORELLIA,
-			Terrain.DANTOOINE,
-			Terrain.DATHOMIR,
-			Terrain.ENDOR,
-			Terrain.KASHYYYK,
-			Terrain.LOK,
-			Terrain.MUSTAFAR,
-			Terrain.NABOO,
-			Terrain.RORI,
-			Terrain.TALUS,
-			Terrain.TATOOINE,
-			Terrain.YAVIN4
-	};
 	
 	private final ObjectDatabase<ChatRoom> database;
 	private final ChatRoomContainer rooms;
@@ -113,31 +97,6 @@ public class ChatRoomHandler {
 	public void enterChatChannels(Player player) {
 		for (String channel : player.getPlayerObject().getJoinedChannels()) {
 			enterChatChannel(player, channel, false);
-		}
-	}
-	
-	public void enterPlanetaryChatChannels(Player player) {
-		// Leave old zone-only chat channels
-		ChatAvatar avatar = new ChatAvatar(player.getCharacterName());
-		for (String channel : player.getPlayerObject().getJoinedChannels()) {
-			if (channel.endsWith(".Planet") || channel.endsWith(".system")) {
-				ChatRoom room = rooms.getRoomByPath(channel);
-				if (room == null) {
-					Log.w("Planet/System chat does not exist: %s", channel);
-					continue;
-				}
-				room.removeMember(avatar);
-				player.getPlayerObject().removeJoinedChannel(channel);
-			}
-		}
-		
-		// Enter the new zone-only chat channels
-		for (Terrain terrain : CHAT_PLANETS) {
-			String planetPath = "SWG." + player.getGalaxyName() + "." + getPlanetChatName(terrain) + ".";
-			Assert.test(rooms.hasRoomWithPath(planetPath + "Planet"), "Planet chat does not exist! planetPath = " + planetPath);
-			Assert.test(rooms.hasRoomWithPath(planetPath + "system"), "System chat does not exist! planetPath = " + planetPath);
-			enterChatChannel(player, planetPath + "Planet", false);
-			enterChatChannel(player, planetPath + "system", false);
 		}
 	}
 	
@@ -223,7 +182,6 @@ public class ChatRoomHandler {
 	 * @param path Address for the channel (Ex: SWG.serverName.Imperial)
 	 * @param title Descriptive name of the chat channel (Ex: Imperial chat for this galaxy)
 	 * @param persist If true then this channel will be saved in an {@link ObjectDatabase}
-	 * @return {@link ChatRoom}
 	 */
 	public void createRoom(ChatAvatar creator, boolean isPublic, boolean moderated, String path, String title, boolean persist) {
 		Assert.notNull(path, "Path cannot be empty!");
@@ -341,22 +299,6 @@ public class ChatRoomHandler {
 		});
 	}
 	
-	private String getPlanetChatName(Terrain terrain) {
-		switch (terrain) {
-			case KASHYYYK:
-			case KASHYYYK_DEAD_FOREST:
-			case KASHYYYK_HUNTING:
-			case KASHYYYK_MAIN:
-			case KASHYYYK_NORTH_DUNGEONS:
-			case KASHYYYK_POB_DUNGEONS:
-			case KASHYYYK_RRYATT_TRAIL:
-			case KASHYYYK_SOUTH_DUNGEONS:
-				return "kashyyyk";
-			default:
-				return terrain.getName();
-		}
-	}
-	
 	public ChatRoom getRoomById(int roomId) {
 		return rooms.getRoomById(roomId);
 	}
@@ -368,14 +310,7 @@ public class ChatRoomHandler {
 	public List<ChatRoom> getRoomList(Player player) {
 		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		
-		List<ChatRoom> ret = new ArrayList<>();
-		for (ChatRoom chatRoom : rooms.getAllRooms()) {
-			if (!chatRoom.isPublic() && !chatRoom.isInvited(avatar) && !chatRoom.getOwner().equals(avatar))
-				continue;
-			ret.add(chatRoom);
-		}
-		
-		return ret;
+		return rooms.getAllRooms().stream().filter(r -> !r.isPublic() && !r.isInvited(avatar) && !r.getOwner().equals(avatar)).collect(Collectors.toList());
 	}
 	
 	public void logChat(long sendId, String sendName, String room, String message) {
