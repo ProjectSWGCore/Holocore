@@ -49,6 +49,7 @@ import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager.PlayerLookup;
 
+import javax.annotation.CheckForNull;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -153,6 +154,7 @@ public class ChatRoomHandler {
 			player.getPlayerObject().removeJoinedChannel(path);
 			return;
 		}
+		
 		enterChatChannel(player, room, 0, ignoreInvitation);
 	}
 	
@@ -182,15 +184,16 @@ public class ChatRoomHandler {
 	 * @param path Address for the channel (Ex: SWG.serverName.Imperial)
 	 * @param title Descriptive name of the chat channel (Ex: Imperial chat for this galaxy)
 	 * @param persist If true then this channel will be saved in an {@link ObjectDatabase}
+	 * @return TRUE if the room was successfully created, FALSE otherwise
 	 */
-	public void createRoom(ChatAvatar creator, boolean isPublic, boolean moderated, String path, String title, boolean persist) {
+	public boolean createRoom(ChatAvatar creator, boolean isPublic, boolean moderated, String path, String title, boolean persist) {
 		Assert.notNull(path, "Path cannot be empty!");
 		Assert.test(!path.isEmpty(), "Path cannot be empty!");
 		Assert.test(path.startsWith("SWG."+creator.getGalaxy()) && !path.equals("SWG."+creator.getGalaxy()), "Invalid path! " + path);
 		
 		synchronized (roomCreationMutex) {
 			if (rooms.getRoomByPath(path) != null)
-				return;
+				return false;
 			
 			// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
 			// This chunk of code makes this function recursive
@@ -214,6 +217,8 @@ public class ChatRoomHandler {
 			
 			if (persist)
 				database.add(room);
+			
+			return true;
 		}
 	}
 	
@@ -303,6 +308,7 @@ public class ChatRoomHandler {
 		return rooms.getRoomById(roomId);
 	}
 	
+	@CheckForNull
 	public ChatRoom getRoomByPath(String path) {
 		return rooms.getRoomByPath(path);
 	}
@@ -310,7 +316,10 @@ public class ChatRoomHandler {
 	public List<ChatRoom> getRoomList(Player player) {
 		ChatAvatar avatar = new ChatAvatar(player.getCharacterChatName());
 		
-		return rooms.getAllRooms().stream().filter(r -> !r.isPublic() && !r.isInvited(avatar) && !r.getOwner().equals(avatar)).collect(Collectors.toList());
+		boolean admin = player.getAccessLevel().getValue() >= AccessLevel.CSR.getValue();
+		return rooms.getAllRooms().stream()
+				.filter(r -> r.isPublic() || r.isInvited(avatar) || r.getOwner().equals(avatar) || admin)
+				.collect(Collectors.toList());
 	}
 	
 	public void logChat(long sendId, String sendName, String room, String message) {
