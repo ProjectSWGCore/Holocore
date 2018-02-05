@@ -52,8 +52,13 @@ repositories {
 dependencies {
 	compile project(':PSWGCommon')
 	compile project(':PSWGCommonFX')
-	compile fileTree(dir: 'lib', include: ['*.jar'])
-	testCompile fileTree(dir: 'lib', include: ['*.jar'])
+	
+	compile 'org.codehaus.groovy:groovy:3.0.0-alpha-1'
+	compile 'junit:junit:4.12'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
+	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.10.0.201712302008-r'
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
 }
 
 task wrapper(type: Wrapper) {
