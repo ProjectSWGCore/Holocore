@@ -48,6 +48,7 @@ import services.network.HolocoreSessionManager.SessionStatus;
 
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -60,6 +61,7 @@ public class NetworkClient extends TCPSession {
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
 	private final Lock inboundLock;
+	private final AtomicBoolean requestedProcessInbound;
 	
 	public NetworkClient(SocketChannel socket) {
 		super(socket);
@@ -68,6 +70,7 @@ public class NetworkClient extends TCPSession {
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.sessionManager = new HolocoreSessionManager();
 		this.inboundLock = new ReentrantLock(false);
+		this.requestedProcessInbound = new AtomicBoolean(false);
 		
 		this.sessionManager.setCallback(this::onSessionInitialized);
 	}
@@ -87,6 +90,7 @@ public class NetworkClient extends TCPSession {
 	
 	public void processInbound() {
 		inboundLock.lock();
+		requestedProcessInbound.set(false);
 		try {
 			while (NetworkProtocol.canDecode(buffer)) {
 				SWGPacket p = NetworkProtocol.decode(buffer);
@@ -118,18 +122,16 @@ public class NetworkClient extends TCPSession {
 	
 	@Override
 	protected void onIncomingData(byte[] data) {
-		boolean canDecode = false;
 		inboundLock.lock();
 		try {
 			buffer.write(data);
-			canDecode = NetworkProtocol.canDecode(buffer);
+			if (!requestedProcessInbound.getAndSet(true) && NetworkProtocol.canDecode(buffer))
+				InboundPacketPendingIntent.broadcast(this);
 		} catch (IOException e) {
 			close(ConnectionStoppedReason.NETWORK);
 		} finally {
 			inboundLock.unlock();
 		}
-		if (canDecode)
-			InboundPacketPendingIntent.broadcast(this);
 	}
 	
 	@Override
