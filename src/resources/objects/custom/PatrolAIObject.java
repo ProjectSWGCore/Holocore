@@ -149,17 +149,15 @@ public class PatrolAIObject extends AIObject {
 				case 1:
 					updateValues(getFirstWaypoint(), 0);
 					return;
+			}
+			switch (patrolType) {
+				case LOOP:
 				default:
-					switch (patrolType) {
-						case LOOP:
-						default:
-							updateLocationLoop();
-							break;
-						case FLIP:
-							updateLocationFlip();
-							break;
-					}
-					return;
+					updateLocationLoop();
+					break;
+				case FLIP:
+					updateLocationFlip();
+					break;
 			}
 		}
 		
