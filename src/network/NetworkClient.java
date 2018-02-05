@@ -47,6 +47,7 @@ import services.network.HolocoreSessionManager.HolocoreSessionException.SessionE
 import services.network.HolocoreSessionManager.SessionStatus;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
@@ -61,6 +62,7 @@ public class NetworkClient extends TCPSession {
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
 	private final Lock inboundLock;
+	private final Lock outboundLock;
 	private final AtomicBoolean requestedProcessInbound;
 	
 	public NetworkClient(SocketChannel socket) {
@@ -70,6 +72,7 @@ public class NetworkClient extends TCPSession {
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.sessionManager = new HolocoreSessionManager();
 		this.inboundLock = new ReentrantLock(false);
+		this.outboundLock = new ReentrantLock(true);
 		this.requestedProcessInbound = new AtomicBoolean(false);
 		
 		this.sessionManager.setCallback(this::onSessionInitialized);
@@ -178,10 +181,15 @@ public class NetworkClient extends TCPSession {
 	}
 	
 	private void sendPacket(SWGPacket p) {
+		ByteBuffer data = NetworkProtocol.encode(p).getBuffer();
+		outboundLock.lock();
 		try {
-			writeToChannel(NetworkProtocol.encode(p).array());
+			while (data.hasRemaining())
+				socket.write(data);
 		} catch (IOException e) {
 			Log.e("Failed to send packet. IOException: %s", e.getMessage());
+		} finally {
+			outboundLock.unlock();
 		}
 	}
 	
