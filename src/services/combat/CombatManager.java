@@ -646,9 +646,9 @@ public class CombatManager extends Manager {
 			return CombatStatus.NO_TARGET;
 		
 		WeaponObject weapon = source.getEquippedWeapon();
-		double dist = source.getWorldLocation().distanceTo(target.getWorldLocation());
-		float commandRange = c.getMaxRange();
-		float range = commandRange > 0 ? commandRange : weapon.getMaxRange();
+		double dist = Math.floor(source.getWorldLocation().distanceTo(target.getWorldLocation()));
+		double commandRange = c.getMaxRange();
+		double range = commandRange > 0 ? commandRange : weapon.getMaxRange();
 		
 		if (dist > range)
 			return CombatStatus.TOO_FAR;
