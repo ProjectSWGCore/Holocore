@@ -155,6 +155,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addChildrenObjects(SWGObject obj) {
+		ObjectCreatedIntent.broadcast(obj);
 		putObject(obj);
 		for (SWGObject child : obj.getSlots().values()) {
 			if (child != null)
