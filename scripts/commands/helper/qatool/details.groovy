@@ -6,7 +6,7 @@ import resources.objects.tangible.TangibleObject
 import resources.player.Player
 import utilities.IntentFactory
 
-static def sendDetails(Player player, SWGObject object, String args) {
+static def sendDetails(Player player, SWGObject object, String [] args) {
 	if (object == null) {
 		object = player.getCreatureObject()
 	}
