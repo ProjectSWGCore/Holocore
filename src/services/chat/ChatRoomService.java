@@ -33,34 +33,8 @@ import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.chat.ChatRoom;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatAddModeratorToRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatBanAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatCreateRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatDestroyRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatEnterRoomById;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatInviteAvatarToRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatKickAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnAddModeratorToRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnBanAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnCreateRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnDestroyRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnInviteToRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnKickAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnReceiveRoomInvitation;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnRemoveModeratorFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnUnbanAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnUninviteFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatQueryRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatQueryRoomResults;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRemoveAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRemoveModeratorFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRequestRoomList;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRoomMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSendToRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatUninviteFromRoom;
+import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
-
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
@@ -94,60 +68,46 @@ public class ChatRoomService extends Service {
 		Player player = gpi.getPlayer();
 		switch (packet.getPacketType()) {
 			case CHAT_QUERY_ROOM:
-				if (packet instanceof ChatQueryRoom)
-					handleChatQueryRoom(player, (ChatQueryRoom) packet);
+				handleChatQueryRoom(player, (ChatQueryRoom) packet);
 				break;
 			case CHAT_ENTER_ROOM_BY_ID:
-				if (packet instanceof ChatEnterRoomById)
-					chatRoomHandler.enterChatChannel(player, ((ChatEnterRoomById) packet).getRoomId(), ((ChatEnterRoomById) packet).getSequence());
+				chatRoomHandler.enterChatChannel(player, ((ChatEnterRoomById) packet).getRoomId(), ((ChatEnterRoomById) packet).getSequence());
 				break;
 			case CHAT_REMOVE_AVATAR_FROM_ROOM:
-				if (packet instanceof ChatRemoveAvatarFromRoom)
-					chatRoomHandler.leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) packet).getPath());
+				chatRoomHandler.leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) packet).getPath());
 				break;
 			case CHAT_SEND_TO_ROOM:
-				if (packet instanceof ChatSendToRoom)
-					handleChatSendToRoom(player, (ChatSendToRoom) packet);
+				handleChatSendToRoom(player, (ChatSendToRoom) packet);
 				break;
 			case CHAT_REQUEST_ROOM_LIST:
-				if (packet instanceof ChatRequestRoomList)
-					handleChatRoomListRequest(player);
+				handleChatRoomListRequest(player);
 				break;
 			case CHAT_CREATE_ROOM:
-				if (packet instanceof ChatCreateRoom)
-					handleChatCreateRoom(player, (ChatCreateRoom) packet);
+				handleChatCreateRoom(player, (ChatCreateRoom) packet);
 				break;
 			case CHAT_DESTROY_ROOM:
-				if (packet instanceof ChatDestroyRoom)
-					handleChatDestroyRoom(player, (ChatDestroyRoom) packet);
+				handleChatDestroyRoom(player, (ChatDestroyRoom) packet);
 				break;
 			case CHAT_INVITE_AVATAR_TO_ROOM:
-				if (packet instanceof ChatInviteAvatarToRoom)
-					handleChatInviteToRoom(player, (ChatInviteAvatarToRoom) packet);
+				handleChatInviteToRoom(player, (ChatInviteAvatarToRoom) packet);
 				break;
 			case CHAT_UNINVITE_FROM_ROOM:
-				if (packet instanceof ChatUninviteFromRoom)
-					handleChatUninviteFromRoom(player, (ChatUninviteFromRoom) packet);
+				handleChatUninviteFromRoom(player, (ChatUninviteFromRoom) packet);
 				break;
 			case CHAT_KICK_AVATAR_FROM_ROOM:
-				if (packet instanceof ChatKickAvatarFromRoom)
-					handleChatKickAvatarFromRoom(player, (ChatKickAvatarFromRoom) packet);
+				handleChatKickAvatarFromRoom(player, (ChatKickAvatarFromRoom) packet);
 				break;
 			case CHAT_BAN_AVATAR_FROM_ROOM:
-				if (packet instanceof ChatBanAvatarFromRoom)
-					handleChatBanAvatarFromRoom(player, (ChatBanAvatarFromRoom) packet);
+				handleChatBanAvatarFromRoom(player, (ChatBanAvatarFromRoom) packet);
 				break;
 			case CHAT_UNBAN_AVATAR_FROM_ROOM:
-				if (packet instanceof ChatUnbanAvatarFromRoom)
-					handleChatUnbanAvatarFromRoom(player, (ChatUnbanAvatarFromRoom) packet);
+				handleChatUnbanAvatarFromRoom(player, (ChatUnbanAvatarFromRoom) packet);
 				break;
 			case CHAT_ADD_MODERATOR_TO_ROOM:
-				if (packet instanceof ChatAddModeratorToRoom)
-					handleChatAddModeratorToRoom(player, (ChatAddModeratorToRoom) packet);
+				handleChatAddModeratorToRoom(player, (ChatAddModeratorToRoom) packet);
 				break;
 			case CHAT_REMOVE_MODERATOR_FROM_ROOM:
-				if (packet instanceof ChatRemoveModeratorFromRoom)
-					handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) packet);
+				handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) packet);
 				break;
 			default:
 				break;

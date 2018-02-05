@@ -27,12 +27,6 @@
  ***********************************************************************************/
 package services.chat;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.chat.ChatRoom;
@@ -44,13 +38,8 @@ import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnDestroyRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnEnteredRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnLeaveRoom;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendRoomMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRoomMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
-
 import resources.client_info.ServerFactory;
 import resources.player.AccessLevel;
 import resources.player.Player;
@@ -61,7 +50,28 @@ import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager.PlayerLookup;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ChatRoomHandler {
+	
+	private static final Terrain[] CHAT_PLANETS = new Terrain[] {
+			Terrain.CORELLIA,
+			Terrain.DANTOOINE,
+			Terrain.DATHOMIR,
+			Terrain.ENDOR,
+			Terrain.KASHYYYK,
+			Terrain.LOK,
+			Terrain.MUSTAFAR,
+			Terrain.NABOO,
+			Terrain.RORI,
+			Terrain.TALUS,
+			Terrain.TATOOINE,
+			Terrain.YAVIN4
+	};
 	
 	private final ObjectDatabase<ChatRoom> database;
 	private final ChatRoomContainer rooms;
@@ -108,18 +118,27 @@ public class ChatRoomHandler {
 	
 	public void enterPlanetaryChatChannels(Player player) {
 		// Leave old zone-only chat channels
-		for (String channel : new ArrayList<>(player.getPlayerObject().getJoinedChannels())) {
+		ChatAvatar avatar = new ChatAvatar(player.getCharacterName());
+		for (String channel : player.getPlayerObject().getJoinedChannels()) {
 			if (channel.endsWith(".Planet") || channel.endsWith(".system")) {
-				leaveChatChannel(player, channel);
+				ChatRoom room = rooms.getRoomByPath(channel);
+				if (room == null) {
+					Log.w("Planet/System chat does not exist: %s", channel);
+					continue;
+				}
+				room.removeMember(avatar);
+				player.getPlayerObject().removeJoinedChannel(channel);
 			}
 		}
 		
 		// Enter the new zone-only chat channels
-		String planetPath = "SWG." + player.getGalaxyName() + "." + getPlanetChatName(player.getCreatureObject().getTerrain()) + ".";
-		Assert.test(rooms.hasRoomWithPath(planetPath + "Planet"), "Planet chat does not exist! planetPath = " + planetPath);
-		Assert.test(rooms.hasRoomWithPath(planetPath + "system"), "System chat does not exist! planetPath = " + planetPath);
-		enterChatChannel(player, planetPath + "Planet", false);
-		enterChatChannel(player, planetPath + "system", false);
+		for (Terrain terrain : CHAT_PLANETS) {
+			String planetPath = "SWG." + player.getGalaxyName() + "." + getPlanetChatName(terrain) + ".";
+			Assert.test(rooms.hasRoomWithPath(planetPath + "Planet"), "Planet chat does not exist! planetPath = " + planetPath);
+			Assert.test(rooms.hasRoomWithPath(planetPath + "system"), "System chat does not exist! planetPath = " + planetPath);
+			enterChatChannel(player, planetPath + "Planet", false);
+			enterChatChannel(player, planetPath + "system", false);
+		}
 	}
 	
 	/**
