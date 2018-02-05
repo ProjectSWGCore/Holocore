@@ -207,8 +207,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
-		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, this::createObject);
+		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, this::destroyObject);
 		
 		if (parent != container)
 			new ContainerTransferIntent(this, parent, container).broadcast();

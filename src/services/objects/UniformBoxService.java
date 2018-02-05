@@ -63,7 +63,7 @@ public class UniformBoxService extends Service {
 		
 		getUniformBoxStatement = uniformBoxDatabase.prepareStatement(GET_UNIFORMBOX_SQL);
 		
-		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
+		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelectionIntent);
 	}
 	
 	@Override

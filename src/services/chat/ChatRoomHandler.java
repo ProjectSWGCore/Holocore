@@ -72,7 +72,7 @@ public class ChatRoomHandler {
 	private PreparedStatement insertChatLog;
 	
 	public ChatRoomHandler() {
-		this.database = new CachedObjectDatabase<ChatRoom>("odb/chat_rooms.db", ChatRoom::create, (r, s) -> r.save(s));
+		this.database = new CachedObjectDatabase<>("odb/chat_rooms.db", ChatRoom::create, ChatRoom::save);
 		this.rooms = new ChatRoomContainer();
 		this.maxChatRoomId = new AtomicInteger(0);
 		this.roomCreationMutex = new Object();
@@ -241,11 +241,11 @@ public class ChatRoomHandler {
 	}
 	
 	public void sendMessageToRoom(Player player, int roomId, int sequence, String message, OutOfBandPackage oobPackage) {
-		sendMessageToRoom(player, rooms.getRoomById(roomId), sequence, message, oobPackage);;
+		sendMessageToRoom(player, rooms.getRoomById(roomId), sequence, message, oobPackage);
 	}
 	
 	public void sendMessageToRoom(Player player, String path, int sequence, String message, OutOfBandPackage oobPackage) {
-		sendMessageToRoom(player, rooms.getRoomByPath(path), sequence, message, oobPackage);;
+		sendMessageToRoom(player, rooms.getRoomByPath(path), sequence, message, oobPackage);
 	}
 	
 	public void sendMessageToRoom(Player player, ChatRoom room, int sequence, String message, OutOfBandPackage oobPackage) {

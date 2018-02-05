@@ -60,7 +60,7 @@ class CreatureObjectClientServerNP implements Persistable {
 	
 	private SWGSet<String> missionCriticalObjs = new SWGSet<>(4, 13);
 	
-	private SWGList<Integer> hamEncumbList = new SWGList<Integer>(4, 2);
+	private SWGList<Integer> hamEncumbList = new SWGList<>(4, 2);
 	
 	private SWGMap<String, SkillMod> skillMods = new SWGMap<>(4, 3, StringType.ASCII);
 	private SWGMap<String, Integer> abilities = new SWGMap<>(4, 14, StringType.ASCII);
@@ -195,11 +195,7 @@ class CreatureObjectClientServerNP implements Persistable {
 	public void addAbility(SWGObject target, String ... abilityList) {
 		synchronized (abilities) {
 			for (String abilityName : abilityList) {
-				Integer count = abilities.get(abilityName);
-				if (count != null)
-					abilities.put(abilityName, count + 1);
-				else
-					abilities.put(abilityName, 1);
+				abilities.merge(abilityName, 1, (a, b) -> a + b);
 			}
 			abilities.sendDeltaMessage(target);
 		}
@@ -223,7 +219,7 @@ class CreatureObjectClientServerNP implements Persistable {
 		synchronized (abilities) {
 			return new HashSet<>(abilities.keySet());
 		}
-	};
+	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		bb.addFloat((float) accelPercent); // 0
@@ -280,7 +276,7 @@ class CreatureObjectClientServerNP implements Persistable {
 		stream.addFloat((float) waterModPercent);
 		stream.addInt(totalLevelXp);
 		synchronized (hamEncumbList) {
-			stream.addList(hamEncumbList, (i) -> stream.addInt(i));
+			stream.addList(hamEncumbList, stream::addInt);
 		}
 		synchronized (skillMods) {
 			stream.addMap(skillMods, (e) -> {
@@ -289,7 +285,7 @@ class CreatureObjectClientServerNP implements Persistable {
 			});
 		}
 		synchronized (missionCriticalObjs) {
-			stream.addList(missionCriticalObjs, (s) -> stream.addAscii(s));
+			stream.addList(missionCriticalObjs, stream::addAscii);
 		}
 		synchronized (abilities) {
 			stream.addMap(abilities, (e) -> {

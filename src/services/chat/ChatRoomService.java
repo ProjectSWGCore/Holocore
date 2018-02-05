@@ -74,9 +74,9 @@ public class ChatRoomService extends Service {
 	public ChatRoomService() {
 		chatRoomHandler = new ChatRoomHandler();
 		
-		registerForIntent(ChatRoomUpdateIntent.class, crui -> handleChatRoomUpdateIntent(crui));
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(ChatRoomUpdateIntent.class, this::handleChatRoomUpdateIntent);
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	@Override
@@ -90,68 +90,64 @@ public class ChatRoomService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
-		if (p instanceof SWGPacket)
-			processSwgPacket(gpi.getPlayer(), p);
-	}
-	
-	private void processSwgPacket(Player player, SWGPacket p) {
-		switch (p.getPacketType()) {
+		SWGPacket packet = gpi.getPacket();
+		Player player = gpi.getPlayer();
+		switch (packet.getPacketType()) {
 			case CHAT_QUERY_ROOM:
-				if (p instanceof ChatQueryRoom)
-					handleChatQueryRoom(player, (ChatQueryRoom) p);
+				if (packet instanceof ChatQueryRoom)
+					handleChatQueryRoom(player, (ChatQueryRoom) packet);
 				break;
 			case CHAT_ENTER_ROOM_BY_ID:
-				if (p instanceof ChatEnterRoomById)
-					chatRoomHandler.enterChatChannel(player, ((ChatEnterRoomById) p).getRoomId(), ((ChatEnterRoomById) p).getSequence());
+				if (packet instanceof ChatEnterRoomById)
+					chatRoomHandler.enterChatChannel(player, ((ChatEnterRoomById) packet).getRoomId(), ((ChatEnterRoomById) packet).getSequence());
 				break;
 			case CHAT_REMOVE_AVATAR_FROM_ROOM:
-				if (p instanceof ChatRemoveAvatarFromRoom)
-					chatRoomHandler.leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) p).getPath());
+				if (packet instanceof ChatRemoveAvatarFromRoom)
+					chatRoomHandler.leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) packet).getPath());
 				break;
 			case CHAT_SEND_TO_ROOM:
-				if (p instanceof ChatSendToRoom)
-					handleChatSendToRoom(player, (ChatSendToRoom) p);
+				if (packet instanceof ChatSendToRoom)
+					handleChatSendToRoom(player, (ChatSendToRoom) packet);
 				break;
 			case CHAT_REQUEST_ROOM_LIST:
-				if (p instanceof ChatRequestRoomList)
+				if (packet instanceof ChatRequestRoomList)
 					handleChatRoomListRequest(player);
 				break;
 			case CHAT_CREATE_ROOM:
-				if (p instanceof ChatCreateRoom)
-					handleChatCreateRoom(player, (ChatCreateRoom) p);
+				if (packet instanceof ChatCreateRoom)
+					handleChatCreateRoom(player, (ChatCreateRoom) packet);
 				break;
 			case CHAT_DESTROY_ROOM:
-				if (p instanceof ChatDestroyRoom)
-					handleChatDestroyRoom(player, (ChatDestroyRoom) p);
+				if (packet instanceof ChatDestroyRoom)
+					handleChatDestroyRoom(player, (ChatDestroyRoom) packet);
 				break;
 			case CHAT_INVITE_AVATAR_TO_ROOM:
-				if (p instanceof ChatInviteAvatarToRoom)
-					handleChatInviteToRoom(player, (ChatInviteAvatarToRoom) p);
+				if (packet instanceof ChatInviteAvatarToRoom)
+					handleChatInviteToRoom(player, (ChatInviteAvatarToRoom) packet);
 				break;
 			case CHAT_UNINVITE_FROM_ROOM:
-				if (p instanceof ChatUninviteFromRoom)
-					handleChatUninviteFromRoom(player, (ChatUninviteFromRoom) p);
+				if (packet instanceof ChatUninviteFromRoom)
+					handleChatUninviteFromRoom(player, (ChatUninviteFromRoom) packet);
 				break;
 			case CHAT_KICK_AVATAR_FROM_ROOM:
-				if (p instanceof ChatKickAvatarFromRoom)
-					handleChatKickAvatarFromRoom(player, (ChatKickAvatarFromRoom) p);
+				if (packet instanceof ChatKickAvatarFromRoom)
+					handleChatKickAvatarFromRoom(player, (ChatKickAvatarFromRoom) packet);
 				break;
 			case CHAT_BAN_AVATAR_FROM_ROOM:
-				if (p instanceof ChatBanAvatarFromRoom)
-					handleChatBanAvatarFromRoom(player, (ChatBanAvatarFromRoom) p);
+				if (packet instanceof ChatBanAvatarFromRoom)
+					handleChatBanAvatarFromRoom(player, (ChatBanAvatarFromRoom) packet);
 				break;
 			case CHAT_UNBAN_AVATAR_FROM_ROOM:
-				if (p instanceof ChatUnbanAvatarFromRoom)
-					handleChatUnbanAvatarFromRoom(player, (ChatUnbanAvatarFromRoom) p);
+				if (packet instanceof ChatUnbanAvatarFromRoom)
+					handleChatUnbanAvatarFromRoom(player, (ChatUnbanAvatarFromRoom) packet);
 				break;
 			case CHAT_ADD_MODERATOR_TO_ROOM:
-				if (p instanceof ChatAddModeratorToRoom)
-					handleChatAddModeratorToRoom(player, (ChatAddModeratorToRoom) p);
+				if (packet instanceof ChatAddModeratorToRoom)
+					handleChatAddModeratorToRoom(player, (ChatAddModeratorToRoom) packet);
 				break;
 			case CHAT_REMOVE_MODERATOR_FROM_ROOM:
-				if (p instanceof ChatRemoveModeratorFromRoom)
-					handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) p);
+				if (packet instanceof ChatRemoveModeratorFromRoom)
+					handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) packet);
 				break;
 			default:
 				break;

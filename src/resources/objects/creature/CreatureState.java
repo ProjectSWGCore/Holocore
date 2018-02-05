@@ -31,7 +31,7 @@ import java.util.EnumSet;
 
 public enum CreatureState {
 	INVALID						(0),
-	COVER						(1<<0),
+	COVER						(1),
 	COMBAT						(1<<1),
 	PEACE						(1<<2),
 	AIMING						(1<<3),

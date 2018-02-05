@@ -27,10 +27,7 @@
  ***********************************************************************************/
 package utilities.clientdata_printer;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
@@ -60,7 +57,7 @@ public class ClientdataPrinterCommands {
 			loadBaseCommands(commands, table);
 		}
 		List<Command> commandsSorted = new ArrayList<>(commands);
-		commandsSorted.sort((a, b) -> a.name.compareTo(b.name));
+		commandsSorted.sort(Comparator.comparing(a -> a.name));
 		return commandsSorted;
 	}
 	

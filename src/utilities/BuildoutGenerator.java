@@ -160,17 +160,19 @@ public class BuildoutGenerator {
 			gen.setColumnTypes(OBJECT_COLUMNS[1]);
 			int objNum = 0;
 			int percent = 0;
-			Collections.sort(objects, (o1, o2) -> {
+			objects.sort((o1, o2) -> {
 				int comp = Integer.compare(getBuildoutDepth(o1), getBuildoutDepth(o2));
 				if (comp != 0)
 					return comp;
 				comp = Integer.compare(o1.getBuildoutAreaId(), o2.getBuildoutAreaId());
 				if (comp != 0)
 					return comp;
-				comp = Long.compare(o1.getParent()==null?0:o1.getParent().getObjectId(), o2.getParent()==null?0:o2.getParent().getObjectId());
+				comp = Long.compare(o1.getParent() == null ? 0 : o1.getParent().getObjectId(), o2.getParent() == null ? 0 : o2.getParent()
+						.getObjectId());
 				if (comp != 0)
 					return comp;
-				comp = Integer.compare(o1 instanceof CellObject?((CellObject)o1).getNumber():0, o2 instanceof CellObject?((CellObject)o2).getNumber():0);
+				comp = Integer.compare(o1 instanceof CellObject ? ((CellObject) o1).getNumber() : 0, o2 instanceof CellObject ? ((CellObject) o2)
+						.getNumber() : 0);
 				if (comp != 0)
 					return comp;
 				return 0;
@@ -239,7 +241,7 @@ public class BuildoutGenerator {
 		System.out.println();
 	}
 	
-	private void getArea(Terrain t, int sceneRow, boolean adjust) throws IOException {
+	private void getArea(Terrain t, int sceneRow, boolean adjust) {
 		String file = "datatables/buildout/areas_"+t.getName()+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
@@ -364,13 +366,7 @@ public class BuildoutGenerator {
 			if (o == null || !(o instanceof GenBuildoutArea))
 				return false;
 			GenBuildoutArea area = (GenBuildoutArea) o;
-			if (!terrain.equals(area.terrain))
-				return false;
-			if (x1 != area.x1)
-				return false;
-			if (z1 != area.z1)
-				return false;
-			return true;
+			return terrain.equals(area.terrain) && x1 == area.x1 && z1 == area.z1;
 		}
 		
 		@Override

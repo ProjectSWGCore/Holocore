@@ -75,7 +75,7 @@ public class CreditObject extends TangibleObject {
 		Set<Player> oldObservers = getObserversAndParent();
 		if (parent != null)
 			parent.removeObject(this);
-		AwarenessUtilities.callForOldObserver(oldObservers, Collections.emptySet(), (observer) -> destroyObject(observer));
+		AwarenessUtilities.callForOldObserver(oldObservers, Collections.emptySet(), this::destroyObject);
 		new ContainerTransferIntent(this, parent, null).broadcast();
 		new DestroyObjectIntent(this).broadcast();
 		

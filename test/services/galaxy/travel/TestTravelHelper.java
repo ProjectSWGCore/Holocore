@@ -61,8 +61,8 @@ public class TestTravelHelper {
 			Terrain.YAVIN4,		Terrain.MUSTAFAR,	Terrain.KASHYYYK_MAIN
 		};
 		TravelHelper helper = new TravelHelper();
-		for (int i = 0; i < terrains.length; i++) {
-			Assert.assertEquals(100, helper.getTravelFee(terrains[i], terrains[i]));
+		for (Terrain terrain : terrains) {
+			Assert.assertEquals(100, helper.getTravelFee(terrain, terrain));
 		}
 		Assert.assertEquals(2000, helper.getTravelFee(Terrain.DATHOMIR, Terrain.CORELLIA));
 		Assert.assertEquals(2000, helper.getTravelFee(Terrain.CORELLIA, Terrain.DATHOMIR));

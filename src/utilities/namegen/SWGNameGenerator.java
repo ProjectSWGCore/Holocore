@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package utilities.namegen;
 
+import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.debug.Log;
+import resources.zone.NameFilter;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,11 +40,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.debug.Log;
-
-import resources.zone.NameFilter;
 
 public class SWGNameGenerator {
 
@@ -162,7 +161,7 @@ public class SWGNameGenerator {
 	}
 	
 	private String getNameByRule(RaceNameRule rule) {
-		StringBuffer buffer = new StringBuffer("");
+		StringBuilder buffer = new StringBuilder("");
 		String instructions = getRandomInstruction(rule);
 		int l = instructions.length();
 
@@ -293,10 +292,9 @@ public class SWGNameGenerator {
 		String value = line.split("=")[1];
 		
 		switch (key) {
-		case "SurnameChance":
-			rule.setSurnameChance(Integer.parseInt(value));
-			break;
-		default: return;
+			case "SurnameChance":
+				rule.setSurnameChance(Integer.parseInt(value));
+				break;
 		}
 	}
 	
@@ -326,9 +324,6 @@ public class SWGNameGenerator {
 	}
 	
 	private boolean shouldGenerateSurname(RaceNameRule rule) {
-		if (rule.getSurnameChance() == 0)
-			return false;
-		
-		return (randomInt(0,100) <= rule.getSurnameChance());
+		return rule.getSurnameChance() != 0 && (randomInt(0, 100) <= rule.getSurnameChance());
 	}
 }

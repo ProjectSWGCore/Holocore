@@ -91,7 +91,7 @@ public class GalacticResourceContainer {
 	
 	public int getSpawnedGalacticResources(RawResource rawResource) {
 		return (int) resourceSpawns.getSpawnedGalacticResourceIds().stream()
-				.map(l -> getGalacticResource(l))
+				.map(this::getGalacticResource)
 				.filter(r -> r.getRawResourceId() == rawResource.getId())
 				.count();
 	}
@@ -107,9 +107,7 @@ public class GalacticResourceContainer {
 		Assert.test(raw == resource.getRawResource(), "RawResource invalid with galactic resource");
 		Assert.isNull(galacticResources.put(resource.getId(), resource), "Duplicate galactic resource!");
 		synchronized (rawToGalactic) {
-			List<GalacticResource> list = rawToGalactic.get(raw);
-			if (list == null)
-				rawToGalactic.put(raw, list = new ArrayList<>());
+			List<GalacticResource> list = rawToGalactic.computeIfAbsent(raw, k -> new ArrayList<>());
 			list.add(resource);
 		}
 	}
@@ -125,11 +123,11 @@ public class GalacticResourceContainer {
 	}
 	
 	public List<GalacticResource> getSpawnedResources() {
-		return resourceSpawns.getSpawnedGalacticResourceIds().stream().map(l -> getGalacticResource(l)).collect(Collectors.toList());
+		return resourceSpawns.getSpawnedGalacticResourceIds().stream().map(this::getGalacticResource).collect(Collectors.toList());
 	}
 	
 	public List<GalacticResource> getSpawnedResources(Terrain terrain) {
-		return resourceSpawns.getSpawnedGalacticResourceIds(terrain).stream().map(l -> getGalacticResource(l)).collect(Collectors.toList());
+		return resourceSpawns.getSpawnedGalacticResourceIds(terrain).stream().map(this::getGalacticResource).collect(Collectors.toList());
 	}
 	
 	public List<GalacticResourceSpawn> getTerrainResourceSpawns(GalacticResource resource, Terrain terrain) {
@@ -171,9 +169,7 @@ public class GalacticResourceContainer {
 		public boolean addSpawn(GalacticResourceSpawn spawn) {
 			ResourceSpawnTreeResource resource;
 			synchronized (resourceSpawnTree) {
-				resource = resourceSpawnTree.get(spawn.getResourceId());
-				if (resource == null)
-					resourceSpawnTree.put(spawn.getResourceId(), resource = new ResourceSpawnTreeResource());
+				resource = resourceSpawnTree.computeIfAbsent(spawn.getResourceId(), k -> new ResourceSpawnTreeResource());
 			}
 			return resource.addSpawn(spawn);
 		}
@@ -242,9 +238,7 @@ public class GalacticResourceContainer {
 		public boolean addSpawn(GalacticResourceSpawn spawn) {
 			ResourceSpawnTreePlanet planet;
 			synchronized (planetSpawnTree) {
-				planet = planetSpawnTree.get(spawn.getTerrain());
-				if (planet == null)
-					planetSpawnTree.put(spawn.getTerrain(), planet = new ResourceSpawnTreePlanet());
+				planet = planetSpawnTree.computeIfAbsent(spawn.getTerrain(), k -> new ResourceSpawnTreePlanet());
 			}
 			return planet.addSpawn(spawn);
 		}

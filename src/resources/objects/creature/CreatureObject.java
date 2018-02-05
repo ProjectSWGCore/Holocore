@@ -27,14 +27,7 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -87,9 +80,9 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private TradeSession tradeSession		= null;
 	
-	private SWGSet<String> skills					= new SWGSet<String>(1, 3, StringType.ASCII);
+	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
 	
-	private SWGList<Integer> baseAttributes			= new SWGList<Integer>(1, 2);
+	private SWGList<Integer> baseAttributes			= new SWGList<>(1, 2);
 	
 	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
@@ -882,7 +875,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureObject getHighestDamageDealer(){
 		synchronized (damageMap){
-			return damageMap.keySet().stream().max((c1, c2) -> damageMap.get(c1) - damageMap.get(c2)).orElse(null);
+			return damageMap.keySet().stream().max(Comparator.comparingInt(damageMap::get)).orElse(null);
 		}
 	}
 	
@@ -1076,10 +1069,10 @@ public class CreatureObject extends TangibleObject {
 		stream.addLong(statesBitmask);
 		stream.addByte(factionRank);
 		synchronized (skills) {
-			stream.addList(skills, (s) -> stream.addAscii(s));
+			stream.addList(skills, stream::addAscii);
 		}
 		synchronized (baseAttributes) {
-			stream.addList(baseAttributes, (s) -> stream.addInt(s));
+			stream.addList(baseAttributes, stream::addInt);
 		}
 	}
 	

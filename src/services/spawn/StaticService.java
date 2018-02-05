@@ -111,9 +111,7 @@ public class StaticService extends Service {
 				String iff = ClientFactory.formatToSharedFile(set.getText("iff"));
 				String iffType = set.getText("iff_type");
 				
-				List<String> list = typeToIff.get(iffType);
-				if (list == null)
-					typeToIff.put(iffType, list = new ArrayList<>());
+				List<String> list = typeToIff.computeIfAbsent(iffType, k -> new ArrayList<>());
 				list.add(iff);
 			}
 		}

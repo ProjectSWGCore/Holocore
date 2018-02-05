@@ -89,7 +89,7 @@ public final class SkillTemplateService extends Service {
 		badgeNames.put("trader_0c", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_armorsmith_master", "new_prof_crafting_weaponsmith_master"});
 		badgeNames.put("trader_0d", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_droidengineer_master"});
 		
-		registerForIntent(LevelChangedIntent.class, lci -> handleLevelChangedIntent(lci));
+		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
 	}
 
 	@Override

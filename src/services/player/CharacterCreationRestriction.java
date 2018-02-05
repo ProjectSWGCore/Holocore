@@ -69,7 +69,7 @@ public class CharacterCreationRestriction {
 	}
 	
 	private PlayerRestriction getRestriction(Player player) {
-		PlayerRestriction pr = null;
+		PlayerRestriction pr;
 		synchronized (restrictions) {
 			pr = restrictions.get(player.getUserId());
 		}
@@ -107,11 +107,7 @@ public class CharacterCreationRestriction {
 		
 		public boolean isAbleToCreate() {
 			synchronized (lastCreations) {
-				if (lastCreations.size() < creationsPerPeriod)
-					return true;
-				if (creationsPerPeriod == 0)
-					return true;
-				return !isWithinPeriod(lastCreations.getLast().longValue());
+				return lastCreations.size() < creationsPerPeriod || creationsPerPeriod == 0 || !isWithinPeriod(lastCreations.getLast());
 			}
 		}
 		

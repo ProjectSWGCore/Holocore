@@ -96,9 +96,9 @@ public class CommandService extends Service {
 		this.commandLauncher = new CommandLauncher();
 		this.commandLogger = new BasicLogStream(new File("log/commands.txt"));
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(PlayerTransformedIntent.class, this::handlePlayerTransformedIntent);
 	}
 	
 	@Override

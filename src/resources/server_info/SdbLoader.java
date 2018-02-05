@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package resources.server_info;
 
+import com.projectswg.common.debug.Log;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
@@ -35,18 +37,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
-
-import com.projectswg.common.debug.Log;
 
 public class SdbLoader {
 	
@@ -56,9 +50,9 @@ public class SdbLoader {
 	
 	private enum DataType {
 		TEXT	(str -> str),
-		INTEGER	(str -> Long.valueOf(str)),
-		REAL	(str -> Double.valueOf(str)),
-		BOOLEAN	(str -> Boolean.valueOf(str));
+		INTEGER	(Long::valueOf),
+		REAL	(Double::valueOf),
+		BOOLEAN	(Boolean::valueOf);
 		
 		private final Function<String, Object> transformer;
 		
@@ -73,12 +67,13 @@ public class SdbLoader {
 	
 	public static SdbResultSet load(File file) throws IOException {
 		String ext = getExtension(file);
-		if (ext.equals("msdb")) {
-			return MasterSdbResultSet.load(file);
-		} else if (ext.equals("sdb")) {
-			return SingleSdbResultSet.load(file);
-		} else {
-			throw new IllegalArgumentException("Invalid file! Expected either msdb or sdb");
+		switch (ext) {
+			case "msdb":
+				return MasterSdbResultSet.load(file);
+			case "sdb":
+				return SingleSdbResultSet.load(file);
+			default:
+				throw new IllegalArgumentException("Invalid file! Expected either msdb or sdb");
 		}
 	}
 	
@@ -237,12 +232,12 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public void close() throws IOException {
+		public void close() {
 			
 		}
 		
 		@Override
-		public boolean next() throws IOException {
+		public boolean next() {
 			lineNumber.incrementAndGet();
 			int i = 0;
 			try {
@@ -368,21 +363,20 @@ public class SdbLoader {
 		
 		private void load() throws IOException {
 			input = FileChannel.open(file.toPath(), StandardOpenOption.READ).map(MapMode.READ_ONLY, 0, file.length());
-			if (!loadHeader(fetchLine(), fetchLine()))
-				return;
+			loadHeader(fetchLine(), fetchLine());
 		}
 		
 		@SuppressWarnings("unchecked") // stupid java not supporting generic arrays
-		private boolean loadHeader(String columnsStr, String typesStr) {
+		private void loadHeader(String columnsStr, String typesStr) {
 			if (columnsStr == null || typesStr == null) {
 				Log.e("Invalid SDB header: %s - nonexistent", file);
-				return false;
+				return;
 			}
 			String [] columns = columnsStr.split("\t");
 			String [] types = typesStr.split("\t");
 			if (columns.length != types.length) {
 				Log.e("Invalid SDB header: %s - invalid lengths!", file);
-				return false;
+				return;
 			}
 			columnParsers = new Function[columns.length];
 			columnValues = new String[columns.length];
@@ -391,7 +385,6 @@ public class SdbLoader {
 				columnNames.put(columns[i], i);
 			}
 			lineNumber.set(2);
-			return true;
 		}
 		
 		private DataType parseColumnType(String type) {

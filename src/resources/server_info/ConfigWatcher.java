@@ -60,7 +60,7 @@ public final class ConfigWatcher {
 	public ConfigWatcher(Map<ConfigFile, Config> configMap) {
 		this.configMap = configMap;
 		this.directory = Paths.get(CFGPATH);
-		this.watcherThread = new PswgBasicThread("config-watcher", () -> watch());
+		this.watcherThread = new PswgBasicThread("config-watcher", this::watch);
 		this.running = new AtomicBoolean(false);
 		
 		try {

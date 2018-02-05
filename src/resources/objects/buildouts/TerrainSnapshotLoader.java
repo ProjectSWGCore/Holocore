@@ -55,7 +55,7 @@ public class TerrainSnapshotLoader {
 	
 	public TerrainSnapshotLoader(Terrain terrain) {
 		this.terrain = terrain;
-		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
+		this.objectTable = new Hashtable<>(12 * 1024);
 		this.objects = new LinkedList<>();
 	}
 

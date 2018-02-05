@@ -55,9 +55,9 @@ public class SurveyService extends Service {
 		this.inProgressSurveyManager = new InProgressSurveyManager();
 		this.inProgressSampleManager = new InProgressSampleManager();
 		
-		registerForIntent(StartSurveyToolIntent.class, ssti -> handleSurveyToolOpened(ssti));
-		registerForIntent(StartSurveyingIntent.class, ssi -> handleStartSurveyingIntent(ssi));
-		registerForIntent(SampleResourceIntent.class, sri -> handleStartSamplingIntent(sri));
+		registerForIntent(StartSurveyToolIntent.class, this::handleSurveyToolOpened);
+		registerForIntent(StartSurveyingIntent.class, this::handleStartSurveyingIntent);
+		registerForIntent(SampleResourceIntent.class, this::handleStartSamplingIntent);
 	}
 	
 	private void handleSurveyToolOpened(StartSurveyToolIntent ssti) {

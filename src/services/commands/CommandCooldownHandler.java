@@ -27,10 +27,7 @@
  ***********************************************************************************/
 package services.commands;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.data.CRC;
@@ -93,21 +90,13 @@ public class CommandCooldownHandler {
 	
 	private boolean addValidCooldowns(CreatureObject creature, String ... cooldownGroups) {
 		synchronized (cooldownMap) {
-			Set<String> cooldowns = cooldownMap.get(creature);
-			
-			if (cooldowns == null) {
-				// This is the first time they're using a cooldown command
-				cooldowns = new HashSet<>();
-				cooldownMap.put(creature, cooldowns);
-			}
+			Set<String> cooldowns = cooldownMap.computeIfAbsent(creature, k -> new HashSet<>());
 			
 			for (String cooldownGroup : cooldownGroups) {
 				if (isValidCooldownGroup(cooldownGroup) && cooldowns.contains(cooldownGroup))
 					return false;
 			}
-			for (String cooldownGroup : cooldownGroups) {
-				cooldowns.add(cooldownGroup);
-			}
+			cooldowns.addAll(Arrays.asList(cooldownGroups));
 			return true;
 		}
 	}
@@ -115,9 +104,7 @@ public class CommandCooldownHandler {
 	private void removeCooldown(CreatureObject creature, String cooldownGroup) {
 		synchronized (cooldownMap) {
 			Set<String> cooldownGroups = cooldownMap.get(creature);
-			if (cooldownGroups.remove(cooldownGroup)) {
-				
-			} else {
+			if (!cooldownGroups.remove(cooldownGroup)) {
 				Log.w("%s doesn't have cooldown group %s!", creature, cooldownGroup);
 			}
 		}

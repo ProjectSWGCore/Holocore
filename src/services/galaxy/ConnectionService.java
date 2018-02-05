@@ -79,9 +79,9 @@ public class ConnectionService extends Service {
 			}
 		};
 		
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(ForceLogoutIntent.class, fli -> handleForceLogoutIntent(fli));
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(ForceLogoutIntent.class, this::handleForceLogoutIntent);
 	}
 	
 	@Override

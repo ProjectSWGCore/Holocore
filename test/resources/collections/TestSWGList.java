@@ -42,7 +42,7 @@ import com.projectswg.common.encoding.StringType;
 public class TestSWGList {
 
 	@Test
-	public void testAdd() throws Exception {
+	public void testAdd() {
 		int size = 24;
 		String[] strings = new String[24];
 		for (int i = 0; i < size; i++) {
@@ -61,17 +61,17 @@ public class TestSWGList {
 	}
 
 	@Test
-	public void testSet() throws Exception {
+	public void testSet() {
 
 	}
 
 	@Test
-	public void testRemove() throws Exception {
+	public void testRemove() {
 
 	}
 
 	@Test
-	public void testEncode() throws Exception {
+	public void testEncode() {
 		int size = 24;
 		String[] strings = new String[24];
 		for (int i = 0; i < size; i++) {

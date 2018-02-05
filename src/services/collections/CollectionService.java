@@ -27,18 +27,11 @@
  ***********************************************************************************/
 package services.collections;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.debug.Log;
-
 import intents.GrantClickyCollectionIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
@@ -46,6 +39,12 @@ import intents.radial.RadialSelectionIntent;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
 import resources.radial.Radials;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionService extends Service {
 
@@ -58,17 +57,16 @@ public class CollectionService extends Service {
 	private RelationalServerData consumeDatabase;
 	private final PreparedStatement getClickyCollectionItemsStatement;
 	private final PreparedStatement getConsumeCollectionItemsStatement;
-	private List<String> clickyCollectionItems = new ArrayList<String>();
-	private List<ConsumeCollection> consumeCollectionItems = new ArrayList<>();
+	private final List<String> clickyCollectionItems = new ArrayList<>();
+	private final List<ConsumeCollection> consumeCollectionItems = new ArrayList<>();
 
 	public CollectionService() {
-
-		try {
-			createClickyDatabaseConnection();
-			createConsumeDatabaseConnection();
-		} catch (SQLException e) {
-			Log.e(e);
-		}
+		clickyDatabase = RelationalServerFactory.getServerData("collections/collection_clicky.db", "collection_clicky");
+		consumeDatabase = RelationalServerFactory.getServerData("items/collection.db", "collection");
+		if (clickyDatabase == null)
+			throw new main.ProjectSWG.CoreException("Database collection_clicky failed to load");
+		if (consumeDatabase == null)
+			throw new main.ProjectSWG.CoreException("Database collection failed to load");
 
 		getClickyCollectionItemsStatement = clickyDatabase.prepareStatement(GET_CLICKY_DETAILS_SQL);
 		getConsumeCollectionItemsStatement = consumeDatabase.prepareStatement(GET_CONSUME_DETAILS_SQL);
@@ -76,8 +74,8 @@ public class CollectionService extends Service {
 		registerClickyCollectionItems();
 		registerConsumeCollectionItems();
 
-		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
-		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
+		registerForIntent(RadialRequestIntent.class, this::handleRadialRequestIntent);
+		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelectionIntent);
 	}
 	
 	private void handleRadialRequestIntent(RadialRequestIntent rri){
@@ -85,10 +83,9 @@ public class CollectionService extends Service {
 		String itemName = rri.getTarget().getStringId().getKey();
 
 		if (isClickyCollectionItem(iff) || isConsumeCollectionItem(itemName, iff)) {
-			RadialRequestIntent i = rri;
-			List<RadialOption> options = new ArrayList<RadialOption>(i.getRequest().getOptions());
-			options.addAll(Radials.getRadialOptions("collection/world_item", i.getPlayer(), i.getTarget()));
-			new RadialResponseIntent(i.getPlayer(), i.getTarget(), options, i.getRequest().getCounter()).broadcast();
+			List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
+			options.addAll(Radials.getRadialOptions("collection/world_item", rri.getPlayer(), rri.getTarget()));
+			new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
 		}
 	}
 
@@ -144,12 +141,6 @@ public class CollectionService extends Service {
 		CollectionItem collection = null;
 
 		try {
-			createConsumeDatabaseConnection();
-		} catch (SQLException e) {
-			Log.e(e);
-		}
-
-		try {
 			synchronized (getConsumeCollectionItemsStatement) {
 				getConsumeCollectionItemsStatement.setString(1, cleanedIff);
 				ResultSet set = getConsumeCollectionItemsStatement.executeQuery();
@@ -168,13 +159,7 @@ public class CollectionService extends Service {
 	private ClickyCollectionItem getClickyCollectionDetails(String iff) {
 		String cleanedIff = cleanIff(iff);
 		ClickyCollectionItem collection = null;
-
-		try {
-			createClickyDatabaseConnection();
-		} catch (SQLException e) {
-			Log.e(e);
-		}
-
+		
 		try {
 			ResultSet set;
 			synchronized (getClickyCollectionItemsStatement) {
@@ -203,24 +188,11 @@ public class CollectionService extends Service {
 	}
 
 	private boolean isConsumeCollectionItem(ConsumeCollection collection) {
-		// FINDBUGS ERROR: Bug: String is incompatible with expected argument type CollectionService$ConsumeCollection in services.collections.CollectionService.isConsumeCollectionItem(CollectionService$ConsumeCollection)
-		return consumeCollectionItems.contains(cleanIff(collection.iffTemplate));
+		return consumeCollectionItems.contains(collection);
 	}
 
-	private String cleanIff(String iff) {
+	private static String cleanIff(String iff) {
 		return iff.replace("shared_", "");
-	}
-
-	private void createConsumeDatabaseConnection() throws SQLException {
-		consumeDatabase = RelationalServerFactory.getServerData("items/collection.db", "collection");
-		if (consumeDatabase == null)
-			throw new main.ProjectSWG.CoreException("Database collection failed to load");
-	}
-
-	private void createClickyDatabaseConnection() throws SQLException {
-		clickyDatabase = RelationalServerFactory.getServerData("collections/collection_clicky.db", "collection_clicky");
-		if (clickyDatabase == null)
-			throw new main.ProjectSWG.CoreException("Database collection_clicky failed to load");
 	}
 
 	private class ConsumeCollection {
@@ -234,10 +206,11 @@ public class CollectionService extends Service {
 
 		@Override
 		public boolean equals(Object o) {
-			if (o instanceof ConsumeCollection)
-				return itemName.equals(((ConsumeCollection) o).itemName) && iffTemplate.equals(((ConsumeCollection) o).iffTemplate);
-			else
+			if (!(o instanceof ConsumeCollection))
 				return false;
+			String myTemplate = cleanIff(iffTemplate);
+			String oTemplate = cleanIff(((ConsumeCollection) o).iffTemplate);
+			return itemName.equals(((ConsumeCollection) o).itemName) && myTemplate.equals(oTemplate);
 		}
 	}
 }

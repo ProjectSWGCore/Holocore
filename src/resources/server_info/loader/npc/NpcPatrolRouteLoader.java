@@ -66,9 +66,7 @@ public class NpcPatrolRouteLoader {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/patrol/patrol_id.msdb"))) {
 			while (set.next()) {
 				PatrolRouteWaypoint waypoint = new PatrolRouteWaypoint(set);
-				List<PatrolRouteWaypoint> route = patrolRouteMap.get(waypoint.getGroupId());
-				if (route == null)
-					patrolRouteMap.put(waypoint.getGroupId(), route = new ArrayList<>());
+				List<PatrolRouteWaypoint> route = patrolRouteMap.computeIfAbsent(waypoint.getGroupId(), k -> new ArrayList<>());
 				route.add(waypoint);
 			}
 		} catch (IOException e) {

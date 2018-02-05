@@ -27,19 +27,12 @@
 ***********************************************************************************/
 package services.spawn;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
-
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
@@ -47,7 +40,6 @@ import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
-import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;
 import resources.objects.custom.AIObject;
@@ -71,9 +63,15 @@ import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager.ObjectLookup;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
 public final class SpawnerService extends Service {
 	
-	private static final String IDLE_MOOD = "idle".intern();
+	private static final String IDLE_MOOD = "idle";
 	
 	private final Map<Long, Spawner> spawnerMap;
 	private final PswgScheduledThreadPool executor;
@@ -82,8 +80,8 @@ public final class SpawnerService extends Service {
 		this.spawnerMap = new HashMap<>();
 		this.executor = new PswgScheduledThreadPool(1, "spawner-service");
 		
-		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
-		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
+		registerForIntent(ConfigChangedIntent.class, this::handleConfigChangedIntent);
+		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
 	}
 	
 	@Override
@@ -165,7 +163,7 @@ public final class SpawnerService extends Service {
 			for (PatrolRouteWaypoint waypoint : route) {
 				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
 				obj.setLocation(getPatrolWaypointLocation(waypoint));
-				obj.moveToContainer(getPatrolWaypointParent(waypoint, true));
+				obj.moveToContainer(getPatrolWaypointParent(waypoint));
 				ObjectCreatedIntent.broadcast(obj);
 			}
 		});
@@ -179,7 +177,7 @@ public final class SpawnerService extends Service {
 				.setZ(waypoint.getZ()).build();
 	}
 	
-	private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint, boolean printErrors) {
+	private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint) {
 		if (waypoint.getBuildingId().isEmpty()) {
 			Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
 			return null;
@@ -201,7 +199,7 @@ public final class SpawnerService extends Service {
 		}
 		
 		SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
-		if (!(cell instanceof CellObject)) {
+		if (cell == null) {
 			Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
 			return null;
 		}
@@ -274,7 +272,7 @@ public final class SpawnerService extends Service {
 			} else {
 				waypoints = npcPatrolRouteLoader.getPatrolRoute(spawn.getPatrolId())
 						.parallelStream()
-						.map(route -> new ResolvedPatrolWaypoint(getPatrolWaypointParent(route, false), getPatrolWaypointLocation(route), route.getDelay(), route.getPatrolType()))
+						.map(route -> new ResolvedPatrolWaypoint(getPatrolWaypointParent(route), getPatrolWaypointLocation(route), route.getDelay(), route.getPatrolType()))
 						.collect(Collectors.toList());
 			}
 			

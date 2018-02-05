@@ -102,7 +102,7 @@ public class ObjectManager extends Manager {
 		if (!loadObjects())
 			return false;
 		synchronized (database) {
-			database.traverse((obj) -> loadObject(obj));
+			database.traverse(this::loadObject);
 		}
 		return super.initialize();
 	}

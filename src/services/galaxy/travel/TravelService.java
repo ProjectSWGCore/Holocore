@@ -69,11 +69,11 @@ public class TravelService extends Service {
 	public TravelService() {
 		this.travel = new TravelHelper();
 		
-		registerForIntent(TravelPointSelectionIntent.class, tpsi -> handlePointSelection(tpsi));
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleTravelPointRequest(gpi));
-		registerForIntent(TicketPurchaseIntent.class, tpi -> handleTicketPurchase(tpi));
-		registerForIntent(TicketUseIntent.class, tui -> handleTicketUse(tui));
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreation(oci));
+		registerForIntent(TravelPointSelectionIntent.class, this::handlePointSelection);
+		registerForIntent(GalacticPacketIntent.class, this::handleTravelPointRequest);
+		registerForIntent(TicketPurchaseIntent.class, this::handleTicketPurchase);
+		registerForIntent(TicketUseIntent.class, this::handleTicketUse);
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreation);
 	}
 	
 	@Override

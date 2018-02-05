@@ -54,12 +54,16 @@ public class SwgBuildoutRow {
 	}
 	
 	public void load(Object [] datatableRow, CrcStringTableData crcString) {
-		if (datatableRow.length == 11)
-			loadSmall(datatableRow, crcString);
-		else if (datatableRow.length == 14)
-			loadLarge(datatableRow, crcString);
-		else
-			throw new IllegalArgumentException("Datatable row must be either 11 or 14 columns!");
+		switch (datatableRow.length) {
+			case 11:
+				loadSmall(datatableRow, crcString);
+				break;
+			case 14:
+				loadLarge(datatableRow, crcString);
+				break;
+			default:
+				throw new IllegalArgumentException("Datatable row must be either 11 or 14 columns!");
+		}
 		translateLocation();
 	}
 	
@@ -99,7 +103,7 @@ public class SwgBuildoutRow {
 	}
 	
 	private void loadEndColumns(Object [] datatableRow, CrcStringTableData crcString, int offset) {
-		sharedTemplateCrc = (Integer) datatableRow[offset + 0];
+		sharedTemplateCrc = (Integer) datatableRow[offset];
 		cellIndex = (Integer) datatableRow[offset + 1];
 		Location loc = Location.builder()
 				.setX((Float) datatableRow[offset + 2])

@@ -65,8 +65,8 @@ public class TerminalService extends Service {
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
 		
-		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
-		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
+		registerForIntent(RadialRequestIntent.class, this::handleRadialRequestIntent);
+		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelectionIntent);
 	}
 	
 	@Override
@@ -89,7 +89,7 @@ public class TerminalService extends Service {
 		String script = lookupScript(rri.getTarget().getTemplate());
 		if (script == null)
 			return;
-		List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+		List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
 		options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
 		new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
 	}

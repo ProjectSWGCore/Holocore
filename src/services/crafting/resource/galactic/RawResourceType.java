@@ -144,7 +144,7 @@ public enum RawResourceType {
 	ENERGY_RENEWABLE_SITE_LIMITED_HYDRON3		("energy_renewable_site_limited_hydron3", ENERGY_RENEWABLE_SITE_LIMITED),
 	ENERGY_RENEWABLE_SITE_LIMITED_GEOTHERMAL	("energy_renewable_site_limited_geothermal", ENERGY_RENEWABLE_SITE_LIMITED);
 	
-	private static final EnumLookup<String, RawResourceType> NAME_LOOKUP = new EnumLookup<>(RawResourceType.class, rrt -> rrt.getResourceName());
+	private static final EnumLookup<String, RawResourceType> NAME_LOOKUP = new EnumLookup<>(RawResourceType.class, RawResourceType::getResourceName);
 	
 	private final String resourceName;
 	private final RawResourceType parent;

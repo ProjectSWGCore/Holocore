@@ -66,7 +66,7 @@ public class UDPServer {
 	public UDPServer(InetAddress bindAddr, int port, int SWGPacketSize) throws SocketException {
 		this.callback = null;
 		this.SWGPacketSize = SWGPacketSize;
-		inbound = new LinkedBlockingQueue<UDPPacket>();
+		inbound = new LinkedBlockingQueue<>();
 		if (port > 0) {
 			if (bindAddr == null)
 				socket = new DatagramSocket(port);
@@ -168,7 +168,7 @@ public class UDPServer {
 	}
 	
 	public interface UDPCallback {
-		public void onReceivedPacket(UDPPacket SWGPacket);
+		void onReceivedPacket(UDPPacket SWGPacket);
 	}
 	
 	public static class UDPPacket {
@@ -271,8 +271,7 @@ public class UDPServer {
 		private UDPPacket generatePacket(DatagramPacket SWGPacket) {
 			byte [] data = new byte[SWGPacket.getLength()];
 			System.arraycopy(SWGPacket.getData(), 0, data, 0, SWGPacket.getLength());
-			UDPPacket udpPacket = new UDPPacket(SWGPacket.getAddress(), SWGPacket.getPort(), data);
-			return udpPacket;
+			return new UDPPacket(SWGPacket.getAddress(), SWGPacket.getPort(), data);
 		}
 		
 	}

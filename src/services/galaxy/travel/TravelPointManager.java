@@ -99,9 +99,7 @@ public class TravelPointManager {
 	
 	private List<TravelPoint> getTravelPoints(Terrain terrain, boolean starport) {
 		Map<Terrain, List<TravelPoint>> travelPoints = starport ? starportPoints : shuttlePoints;
-		List<TravelPoint> points = travelPoints.get(terrain);
-		if (points == null)
-			travelPoints.put(terrain, points = new ArrayList<>());
+		List<TravelPoint> points = travelPoints.computeIfAbsent(terrain, k -> new ArrayList<>());
 		return points;
 	}
 	

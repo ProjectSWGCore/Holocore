@@ -72,9 +72,9 @@ public final class ExpertiseService extends Service {
 		expertiseAbilities = new HashMap<>();
 		pointsForLevel = new HashMap<>();
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(LevelChangedIntent.class, lci -> handleLevelChangedIntent(lci));
-		registerForIntent(GrantSkillIntent.class, gsi -> handleGrantSkillIntent(gsi));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
+		registerForIntent(GrantSkillIntent.class, this::handleGrantSkillIntent);
 	}
 
 	@Override
@@ -135,8 +135,7 @@ public final class ExpertiseService extends Service {
 					
 					Collection<String[]> abilityChains = new ArrayList<>();
 					
-					for (int i = 0; i < chains.length; i++) {
-						String chain = chains[i];
+					for (String chain : chains) {
 						String[] abilities = chain.split(";");
 						
 						abilityChains.add(abilities);

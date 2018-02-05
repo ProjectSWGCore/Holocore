@@ -141,14 +141,22 @@ public class ZoneManager extends Manager {
 			Repository repo = git.getRepository();
 			
 			try {
-				commitHistory = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':\n";
+				StringBuilder commitHistory = new StringBuilder();
+				commitHistory.append("The ");
+				commitHistory.append(commitCount);
+				commitHistory.append(" most recent commits in branch '");
+				commitHistory.append(repo.getBranch());
+				commitHistory.append("':\n");
 				
 				for (RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					commitHistory += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					commitHistory.append(commit.getName().substring(0, 7));
+					commitHistory.append(' ');
+					commitHistory.append(commit.getShortMessage());
 					
 					if (commitCount > iterations++)
-						commitHistory += "\n";
+						commitHistory.append('\n');
 				}
+				this.commitHistory = commitHistory.toString();
 			} catch (GitAPIException e) {
 				Log.e(e);
 			}

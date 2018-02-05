@@ -194,7 +194,7 @@ public class ClientBuildoutService extends Service {
 		}
 	}
 	
-	private void loadAreas() throws SQLException {
+	private void loadAreas() {
 		List <String> events = new ArrayList<>();
 		for (String event : DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "").split(",")) {
 			if (event.isEmpty())

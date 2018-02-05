@@ -77,10 +77,8 @@ public class ChatRoomContainer {
 	public boolean destroyRoom(ChatRoom room) {
 		Assert.notNull(room, "ChatRoom cannot be null!");
 		synchronized (mapMutex) {
-			boolean success = true;
-			success = idMap.remove(room.getId()) != null && success;
-			success = pathMap.remove(room.getPath()) != null && success;
-			return success;
+			boolean success = idMap.remove(room.getId()) != null;
+			return pathMap.remove(room.getPath()) != null && success;
 		}
 	}
 	

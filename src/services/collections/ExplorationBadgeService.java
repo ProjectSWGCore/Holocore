@@ -48,11 +48,11 @@ import resources.objects.creature.CreatureObject;
 public class ExplorationBadgeService extends Service {
 
 	private static final String GET_BADGES_SQL = "SELECT * FROM explorationBadges";
-	private Map<String, Map<String, ExplorationRegion>> explorationLocations = new TreeMap<String, Map<String, ExplorationRegion>>();
+	private Map<String, Map<String, ExplorationRegion>> explorationLocations = new TreeMap<>();
 	
 	public ExplorationBadgeService(){
 		registerExplorationBadge();
-		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
+		registerForIntent(PlayerTransformedIntent.class, this::handlePlayerTransformedIntent);
 	}
 		
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti){
@@ -91,7 +91,7 @@ public class ExplorationBadgeService extends Service {
 					int range = set.getInt("radius");
 					
 					if (!explorationLocations.containsKey(planet)) {
-						explorationLocations.put(planet, new TreeMap<String, ExplorationRegion>());
+						explorationLocations.put(planet, new TreeMap<>());
 					}
 					explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
 				}

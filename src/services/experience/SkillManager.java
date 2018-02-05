@@ -61,8 +61,8 @@ public final class SkillManager extends Manager {
 		
 		addChildService(new ExpertiseService());
 		
-		registerForIntent(GrantSkillIntent.class, gsi -> handleGrantSkillIntent(gsi));
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(GrantSkillIntent.class, this::handleGrantSkillIntent);
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
 	}
 	
 	@Override
@@ -73,12 +73,7 @@ public final class SkillManager extends Manager {
 			int iconIndex = (int) roleIconTable.getCell(i, 0);
 			String qualifyingSkill = (String) roleIconTable.getCell(i, 2);
 			
-			Set<String> qualifyingSkills = roleIconMap.get(iconIndex);
-			
-			if(qualifyingSkills == null) {
-				qualifyingSkills = new HashSet<>();
-				roleIconMap.put(iconIndex, qualifyingSkills);
-			}
+			Set<String> qualifyingSkills = roleIconMap.computeIfAbsent(iconIndex, k -> new HashSet<>());
 			
 			qualifyingSkills.add(qualifyingSkill);
 		}

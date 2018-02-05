@@ -53,7 +53,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		this.file = new File(filename);
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
-		this.autosaveThread = new PswgBasicScheduledThread("odb-autosave-"+file.getName(), () -> save());
+		this.autosaveThread = new PswgBasicScheduledThread("odb-autosave-"+file.getName(), this::save);
 		this.autosaveThread.startWithFixedDelay(autosaveInterval, autosaveInterval);
 		try {
 			createFilesAndDirectories();
@@ -107,11 +107,11 @@ public abstract class ObjectDatabase<V extends Persistable> {
 	public abstract void traverseInterruptable(InterruptableTraverser<V> traverser);
 	
 	public interface Traverser<V> {
-		public void process(V element);
+		void process(V element);
 	}
 	
 	public interface InterruptableTraverser<V> {
-		public boolean process(V element);
+		boolean process(V element);
 	}
 	
 }

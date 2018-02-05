@@ -489,9 +489,7 @@ class CreatureObjectSharedNP implements Persistable {
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
-		safeModifyBuff(buffCrc, target, buff -> {
-			buff.adjustStackCount(adjustment);
-		});
+		safeModifyBuff(buffCrc, target, buff -> buff.adjustStackCount(adjustment));
 	}
 	
 	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
@@ -620,12 +618,10 @@ class CreatureObjectSharedNP implements Persistable {
 		if (equippedWeapon != null)
 			SWGObjectFactory.save(equippedWeapon, stream);
 		synchronized (maxAttributes) {
-			stream.addList(maxAttributes, (i) -> stream.addInt(i));
+			stream.addList(maxAttributes, stream::addInt);
 		}
 		synchronized (buffs) {
-			stream.addMap(buffs, (e) -> {
-				e.getValue().save(stream);
-			});
+			stream.addMap(buffs, (e) -> e.getValue().save(stream));
 		}
 	}
 	

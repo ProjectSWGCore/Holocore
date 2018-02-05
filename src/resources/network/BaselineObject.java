@@ -101,31 +101,31 @@ public class BaselineObject {
 	}
 	
 	public Baseline createBaseline1(Player target) {
-		return createBaseline(target, 1, (t, bb)->createBaseline1(t, bb));
+		return createBaseline(target, 1, this::createBaseline1);
 	}
 	
 	public Baseline createBaseline3(Player target) {
-		return createBaseline(target, 3, (t, bb)->createBaseline3(t, bb));
+		return createBaseline(target, 3, this::createBaseline3);
 	}
 	
 	public Baseline createBaseline4(Player target) {
-		return createBaseline(target, 4, (t, bb)->createBaseline4(t, bb));
+		return createBaseline(target, 4, this::createBaseline4);
 	}
 	
 	public Baseline createBaseline6(Player target) {
-		return createBaseline(target, 6, (t, bb)->createBaseline6(t, bb));
+		return createBaseline(target, 6, this::createBaseline6);
 	}
 	
 	public Baseline createBaseline7(Player target) {
-		return createBaseline(target, 7, (t, bb)->createBaseline7(t, bb));
+		return createBaseline(target, 7, this::createBaseline7);
 	}
 	
 	public Baseline createBaseline8(Player target) {
-		return createBaseline(target, 8, (t, bb)->createBaseline8(t, bb));
+		return createBaseline(target, 8, this::createBaseline8);
 	}
 	
 	public Baseline createBaseline9(Player target) {
-		return createBaseline(target, 9, (t, bb)->createBaseline9(t, bb));
+		return createBaseline(target, 9, this::createBaseline9);
 	}
 	
 	protected void createBaseline1(Player target, BaselineBuilder data) {
@@ -235,7 +235,7 @@ public class BaselineObject {
 	}
 	
 	private void setBaseline(int num, Baseline baseline) {
-		baselineData.set(num-1, new SoftReference<Baseline>(baseline));
+		baselineData.set(num-1, new SoftReference<>(baseline));
 	}
 	
 	private interface BaselineCreator {

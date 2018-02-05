@@ -65,12 +65,12 @@ public final class ServerFactory extends DataFactory {
 
 		Files.walkFileTree(root.toPath(), new FileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) {
 				return FileVisitResult.CONTINUE;
 			}
 
 			@Override
-			public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+			public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) {
 				if (path.toString().endsWith("sdf")) {
 					String name = path.toString();
 					name = name.substring(0, name.length() - 4) + ".iff";
@@ -92,12 +92,12 @@ public final class ServerFactory extends DataFactory {
 			}
 
 			@Override
-			public FileVisitResult visitFileFailed(Path path, IOException e) throws IOException {
+			public FileVisitResult visitFileFailed(Path path, IOException e) {
 				return FileVisitResult.CONTINUE;
 			}
 
 			@Override
-			public FileVisitResult postVisitDirectory(Path path, IOException e) throws IOException {
+			public FileVisitResult postVisitDirectory(Path path, IOException e) {
 				return FileVisitResult.CONTINUE;
 			}
 		});

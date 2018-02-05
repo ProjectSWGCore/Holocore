@@ -278,9 +278,7 @@ class TravelHelper {
 		}
 		
 		public void addRoute(Terrain departure, Terrain destination, int fee) {
-			Map<Terrain, Integer> departureCosts = routeCosts.get(departure);
-			if (departureCosts == null)
-				routeCosts.put(departure, departureCosts = new HashMap<>());
+			Map<Terrain, Integer> departureCosts = routeCosts.computeIfAbsent(departure, k -> new HashMap<>());
 			departureCosts.put(destination, fee);
 		}
 		
@@ -292,7 +290,7 @@ class TravelHelper {
 			Integer fee = routeCosts.get(departure).get(destination);
 			if (fee == null)
 				return 0;
-			return fee.intValue();
+			return fee;
 		}
 	}
 	

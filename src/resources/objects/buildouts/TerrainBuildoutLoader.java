@@ -56,8 +56,8 @@ class TerrainBuildoutLoader {
 	public TerrainBuildoutLoader(CrcStringTableData crcTable, Terrain terrain) {
 		this.crcTable = crcTable;
 		this.terrain = terrain;
-		this.objectTable = new Hashtable<Long, SWGObject>(512);
-		this.objects = new Hashtable<String, List<SWGObject>>();
+		this.objectTable = new Hashtable<>(512);
+		this.objects = new Hashtable<>();
 	}
 	
 	public void load(int sceneNumber) {
@@ -115,11 +115,7 @@ class TerrainBuildoutLoader {
 			if (container == null)
 				Log.e("Failed to load object: " + object.getTemplate());
 		} else {
-			List<SWGObject> list = objects.get(areaName);
-			if (list == null) {
-				list = new LinkedList<>();
-				objects.put(areaName, list);
-			}
+			List<SWGObject> list = objects.computeIfAbsent(areaName, k -> new LinkedList<>());
 			list.add(object);
 		}
 	}

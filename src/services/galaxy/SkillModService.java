@@ -74,10 +74,10 @@ public class SkillModService extends Service {
 		
 		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);			
 
-		registerForIntent(ContainerTransferIntent.class, cti -> handleContainerTransferIntent(cti));
-		registerForIntent(LevelChangedIntent.class, lci -> handleLevelChangedIntent(lci));
-		registerForIntent(CreatedCharacterIntent.class, cci -> handleCreatedCharacterIntent(cci));
-		registerForIntent(SkillModIntent.class, smi -> handleSkillModIntent(smi));
+		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransferIntent);
+		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
+		registerForIntent(CreatedCharacterIntent.class, this::handleCreatedCharacterIntent);
+		registerForIntent(SkillModIntent.class, this::handleSkillModIntent);
 	}
 	
 	@Override
@@ -187,8 +187,8 @@ public class SkillModService extends Service {
 	}
 	
 	private void updateLevelSkillModValues(CreatureObject creature, int level, String profession, String race){
-		int oldSkillModValue = 0;
-		int skillModValue = 0;
+		int oldSkillModValue;
+		int skillModValue;
 		
 		if (level < 1 || level > 90){
 			return;

@@ -136,11 +136,7 @@ public class CommandContainer {
 	
 	/** Note: Not Thread-Safe */
 	private void createScriptCommandList(String script) {
-		List<Command> commands = scriptToCommand.get(script);
-		if (commands == null) {
-			commands = new ArrayList<>();
-			scriptToCommand.put(script, commands);
-		}
+		List<Command> commands = scriptToCommand.computeIfAbsent(script, k -> new ArrayList<>());
 	}
 	
 	/** Note: Not Thread-Safe */

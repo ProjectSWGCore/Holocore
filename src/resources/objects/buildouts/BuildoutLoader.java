@@ -51,7 +51,7 @@ public class BuildoutLoader {
 	
 	public BuildoutLoader() {
 		objectTable = new HashMap<>();
-		objects = new Hashtable<String, List<SWGObject>>();
+		objects = new Hashtable<>();
 	}
 	
 	public void loadAllBuildouts() {
@@ -84,7 +84,7 @@ public class BuildoutLoader {
 	
 	private static List <Terrain> getTerrainsToLoad() {
 		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/buildout/buildout_scenes.iff");
-		List <Terrain> terrains = new LinkedList<Terrain>();
+		List <Terrain> terrains = new LinkedList<>();
 		for (int row = 0; row < table.getRowCount(); row++) {
 			Terrain t = Terrain.getTerrainFromName((String) table.getCell(row, 0));
 			if (t != null)

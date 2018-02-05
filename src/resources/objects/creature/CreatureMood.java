@@ -226,10 +226,10 @@ public enum CreatureMood {
 	}
 	
 	public byte getMood() {
-		return (byte) mood;
+		return mood;
 	}
 	
-	public static final CreatureMood getForMood(byte mood) {
+	public static CreatureMood getForMood(byte mood) {
 		for (CreatureMood d : values())
 			if (d.getMood() == mood)
 				return d;

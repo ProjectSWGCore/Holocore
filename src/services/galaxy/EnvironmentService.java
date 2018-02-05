@@ -64,7 +64,7 @@ public final class EnvironmentService extends Service {
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	@Override
@@ -79,7 +79,7 @@ public final class EnvironmentService extends Service {
 	
 	@Override
 	public boolean start() {
-		executor.scheduleAtFixedRate(() -> { updateTime(); }, 30, 30, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this::updateTime, 30, 30, TimeUnit.SECONDS);
 		return super.start();
 	}
 	

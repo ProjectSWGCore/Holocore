@@ -57,18 +57,14 @@ public class CollectionBadgeManager extends Manager {
 	// TODO play music file stored in collection.iff column "music"
 	// TODO fix to appropriate message ex: kill_merek_activation_01
 
-	private final ExplorationBadgeService explorationBadgeService;
-
 	private DatatableData collectionTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/collection/collection.iff");
 
 
 	public CollectionBadgeManager() {
-		explorationBadgeService = new ExplorationBadgeService();
+		addChildService(new ExplorationBadgeService());
 
-		addChildService(explorationBadgeService);
-
-		registerForIntent(GrantBadgeIntent.class, gbi -> handleGrantBadgeIntent(gbi));
-		registerForIntent(GrantClickyCollectionIntent.class, gcci -> handleGrantClickyCollectionIntent(gcci));
+		registerForIntent(GrantBadgeIntent.class, this::handleGrantBadgeIntent);
+		registerForIntent(GrantClickyCollectionIntent.class, this::handleGrantClickyCollectionIntent);
 	}
 
 	private void handleGrantClickyCollectionIntent(GrantClickyCollectionIntent gcci){
@@ -288,11 +284,8 @@ public class CollectionBadgeManager extends Manager {
 
 	private boolean hasBadge(PlayerObject player, int badgeBeginSlotId) {
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
-
-		if (collections.get(badgeBeginSlotId)) {
-			return true;
-		}
-		return false;
+		
+		return collections.get(badgeBeginSlotId);
 	}
 
 	private boolean hasCompletedCollection(PlayerObject player, String collectionTitle) {
@@ -302,7 +295,7 @@ public class CollectionBadgeManager extends Manager {
 
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
 			int beginSlotId = (int) collectionTable.getCell(row, 4);
-			if (collectionTable.getCell(row, 2).toString() != "") {
+			if (!collectionTable.getCell(row, 2).toString().isEmpty()) {
 				collectionName = collectionTable.getCell(row, 2).toString();
 			} else if (collectionName.equals(collectionTitle)) {
 				if (!collections.get(beginSlotId)) {

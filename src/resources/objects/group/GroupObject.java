@@ -119,9 +119,7 @@ public class GroupObject extends SWGObject {
 				Player memberPlayer = member.getPlayer();
 				if (memberPlayer != null){
 					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
-					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> {
-						new GroupEventIntent(GroupEventType.GROUP_LEAVE, memberPlayer).broadcast();
-					});
+					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventIntent(GroupEventType.GROUP_LEAVE, memberPlayer).broadcast());
 				    window.display(memberPlayer);
 				}
 			}

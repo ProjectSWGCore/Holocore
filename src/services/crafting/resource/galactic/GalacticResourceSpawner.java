@@ -208,7 +208,7 @@ public class GalacticResourceSpawner {
 	private void updateResourceTerrainSpawns(GalacticResource resource, Terrain terrain) {
 		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, terrain);
 		// Remove expired spawns
-		List<GalacticResourceSpawn> expired = spawns.stream().filter(s -> s.isExpired()).collect(Collectors.toList());
+		List<GalacticResourceSpawn> expired = spawns.stream().filter(GalacticResourceSpawn::isExpired).collect(Collectors.toList());
 		for (GalacticResourceSpawn spawn : expired) {
 			GalacticResourceContainer.getContainer().removeResourceSpawn(spawn);
 		}

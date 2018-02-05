@@ -59,8 +59,8 @@ public class GroupService extends Service {
 
 	public GroupService() {
 		groups = new SynchronizedMap<>();
-		registerForIntent(GroupEventIntent.class, gei -> handleGroupEventIntent(gei));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(GroupEventIntent.class, this::handleGroupEventIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	private void handleGroupEventIntent(GroupEventIntent gei) {

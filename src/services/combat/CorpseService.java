@@ -29,11 +29,7 @@ package services.combat;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -104,11 +100,11 @@ public final class CorpseService extends Service {
 		
 		deleteCorpseTasks = new HashMap<>();
 		
-		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
-		registerForIntent(CorpseLootedIntent.class, cli -> handleCorpseLootedIntent(cli));
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
-		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
+		registerForIntent(CorpseLootedIntent.class, this::handleCorpseLootedIntent);
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
+		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 		
 		loadFacilityData();
 	}
@@ -330,7 +326,7 @@ public final class CorpseService extends Service {
 			Location corpseLocation = corpse.getWorldLocation();
 			return cloningFacilities.stream()
 					.filter(facilityObject -> isValidTerrain(facilityObject, corpse) && isFactionAllowed(facilityObject, corpse))
-					.sorted((facility, otherFacility) -> Double.compare(corpseLocation.distanceTo(facility.getLocation()), corpseLocation.distanceTo(otherFacility.getLocation())))
+					.sorted(Comparator.comparingDouble(facility -> corpseLocation.distanceTo(facility.getLocation())))
 					.collect(Collectors.toList());
 			
 		}
@@ -506,7 +502,7 @@ public final class CorpseService extends Service {
 		}
 	}
 	
-	private static enum FacilityType {
+	private enum FacilityType {
 		STANDARD,
 		RESTRICTED,
 		PLAYER_CITY,
@@ -540,7 +536,7 @@ public final class CorpseService extends Service {
 		}
 	}
 	
-	private static enum CloneResult {
+	private enum CloneResult {
 		INVALID_SELECTION, TEMPLATE_MISSING, INVALID_CELL, SUCCESS
 	}
 	

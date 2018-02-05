@@ -32,7 +32,7 @@ public class TradeService extends Service {
 	private final List<TradeSession> tradeSessions;
 	
 	public TradeService() {
-		tradeSessions = new ArrayList<TradeSession>();
+		tradeSessions = new ArrayList<>();
 		
 		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
 		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
@@ -183,7 +183,7 @@ public class TradeService extends Service {
 		if (!verifyTradeSession(tradeSession, creature))
 			return;
 		
-		tradeSession.setMoneyAmount(creature, SWGPacket.getMoneyAmount() & 0x00000000FFFFFFFFl);
+		tradeSession.setMoneyAmount(creature, SWGPacket.getMoneyAmount() & 0x00000000FFFFFFFFL);
 	}
 	
 	private void handleVerifyTradeMessage(Player player, ObjectManager objectManager) {
@@ -206,9 +206,7 @@ public class TradeService extends Service {
 			accepter.setTradeSession(tradeSession);
 			tradeSession.beginTrade();
 		});
-		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (event, paramenters) -> {
-			SWGPacketSender.sendPacket(new DenyTradeMessage(), new AbortTradeMessage());
-		});
+		requestBox.addCancelButtonCallback("handleTradeRequestDeny", (event, paramenters) -> SWGPacketSender.sendPacket(new DenyTradeMessage(), new AbortTradeMessage()));
 		requestBox.display(accepter.getOwner());
 	}
 	

@@ -42,8 +42,11 @@ import utilities.MathUtils;
 
 class PlayerObjectShared implements Persistable {
 
-	private SWGFlag 	        flagsList			= new SWGFlag(3, 5);
-	private SWGFlag 	        profileFlags		= new SWGFlag(3, 6);
+	private final SWGFlag		flagsList			= new SWGFlag(3, 5);
+	private final SWGFlag		profileFlags		= new SWGFlag(3, 6);
+	private final SWGBitSet		collectionBadges	= new SWGBitSet(3, 16);
+	private final SWGBitSet		collectionBadges2	= new SWGBitSet(3, 17);
+	
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
@@ -53,8 +56,6 @@ class PlayerObjectShared implements Persistable {
 	private int 				pvpKills			= 0;
 	private long 				lifetimeGcwPoints	= 0;
 	private int 				lifetimePvpKills	= 0;
-	private SWGBitSet 		 	collectionBadges	= new SWGBitSet(3, 16);
-	private SWGBitSet		 	collectionBadges2	= new SWGBitSet(3, 17);
 	private boolean				showHelmet			= true;
 	private boolean				showBackpack		= true;
 	
@@ -118,14 +119,6 @@ class PlayerObjectShared implements Persistable {
 	
 	public boolean isShowBackpack() {
 		return showBackpack;
-	}
-	
-	public void setFlagsList(SWGFlag flagsList) {
-		this.flagsList = flagsList;
-	}
-	
-	public void setProfileFlags(SWGFlag profileFlags) {
-		this.profileFlags = profileFlags;
 	}
 	
 	public void setTitle(String title) {

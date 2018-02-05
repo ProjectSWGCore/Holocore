@@ -70,13 +70,13 @@ public class BuffService extends Service {
 	private final BuffMap dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
-		timerCheckThread = new PswgBasicScheduledThread("buff-timer-check", () -> checkBuffTimers());
+		timerCheckThread = new PswgBasicScheduledThread("buff-timer-check", this::checkBuffTimers);
 		monitored = new HashSet<>();
 		dataMap = new BuffMap();
 		
-		registerForIntent(BuffIntent.class, bi -> handleBuffIntent(bi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
+		registerForIntent(BuffIntent.class, this::handleBuffIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
 	}
 	
 	@Override
@@ -154,7 +154,7 @@ public class BuffService extends Service {
 			corpse.getBuffEntries(buff -> isBuffDecayable(corpse, buff)).forEach(buff -> decayDuration(corpse, buff));
 		} else {
 			// PvE death - remove certain buffs
-			removeAllBuffs(corpse, corpse.getBuffEntries(buff -> isBuffRemovedOnDeath(buff)));
+			removeAllBuffs(corpse, corpse.getBuffEntries(this::isBuffRemovedOnDeath));
 		}
 	}
 	

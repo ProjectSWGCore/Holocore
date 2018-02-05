@@ -81,15 +81,15 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		dataTransformHandler = new DataTransformHandler();
 		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
-		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
-		registerForIntent(ObjectTeleportIntent.class, oti -> processObjectTeleportIntent(oti));
-		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
-		registerForIntent(MoveObjectIntent.class, moi -> processMoveObjectIntent(moi));
-		registerForIntent(ContainerTransferIntent.class, cti -> processContainerTransferIntent(cti));
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
+		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
+		registerForIntent(ObjectTeleportIntent.class, this::processObjectTeleportIntent);
+		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
+		registerForIntent(MoveObjectIntent.class, this::processMoveObjectIntent);
+		registerForIntent(ContainerTransferIntent.class, this::processContainerTransferIntent);
 		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getPlayer(), rzii.getCreature().getLocation(), rzii.getCreature().getParent()));
-		registerForIntent(ForceAwarenessUpdateIntent.class, faui -> handleForceUpdate(faui));
+		registerForIntent(ForceAwarenessUpdateIntent.class, this::handleForceUpdate);
 	}
 	
 	@Override

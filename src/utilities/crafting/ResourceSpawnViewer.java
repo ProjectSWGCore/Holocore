@@ -78,7 +78,7 @@ public class ResourceSpawnViewer extends Application {
 	}
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		VBox root = new VBox();
 		HBox topPanel = new HBox();
 		root.getChildren().add(topPanel);

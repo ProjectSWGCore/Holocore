@@ -55,7 +55,7 @@ public final class FactionService extends Service {
 		statusChangers = new ConcurrentHashMap<>();
 		executor = new PswgScheduledThreadPool(1, "faction-service");
 		
-		registerForIntent(FactionIntent.class, fi -> handleFactionIntent(fi));
+		registerForIntent(FactionIntent.class, this::handleFactionIntent);
 	}
 	
 	@Override
@@ -96,7 +96,7 @@ public final class FactionService extends Service {
 		target.setPvpFaction(newFaction);
 		handleFlagChange(target);
 		
-		if(target.getBaselineType() == BaselineType.CREO && ((CreatureObject) target).getPvpFaction() != PvpFaction.NEUTRAL) {
+		if(target.getBaselineType() == BaselineType.CREO && target.getPvpFaction() != PvpFaction.NEUTRAL) {
 			// We're given rank 1 upon joining a non-neutral faction
 			((CreatureObject) target).setFactionRank((byte) 1);
 		}

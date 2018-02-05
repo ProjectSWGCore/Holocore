@@ -87,7 +87,7 @@ public class TestAwarenessHandler {
 	}
 	
 	@Test
-	public void testMoveSameAwareness() throws InterruptedException {
+	public void testMoveSameAwareness() {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
 			GenericCreatureObject creature = new GenericCreatureObject(1);
@@ -103,7 +103,7 @@ public class TestAwarenessHandler {
 	}
 	
 	@Test
-	public void testMoveAwayBack() throws InterruptedException {
+	public void testMoveAwayBack() {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
 			initAwareness(awareness, callback);
@@ -123,7 +123,7 @@ public class TestAwarenessHandler {
 	}
 	
 	@Test
-	public void testMoveIntoStarport() throws InterruptedException {
+	public void testMoveIntoStarport() {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
 			GenericCreatureObject creature = new GenericCreatureObject(1);

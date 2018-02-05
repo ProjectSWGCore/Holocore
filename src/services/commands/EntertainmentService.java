@@ -77,11 +77,11 @@ public class EntertainmentService extends Service {
 		performerMap = new HashMap<>();	// TODO synchronize access?
 		danceMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor();
-		registerForIntent(DanceIntent.class, di -> handleDanceIntent(di));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(FlourishIntent.class, fi -> handleFlourishIntent(fi));
-		registerForIntent(WatchIntent.class, wi -> handleWatchIntent(wi));
-		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
+		registerForIntent(DanceIntent.class, this::handleDanceIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(FlourishIntent.class, this::handleFlourishIntent);
+		registerForIntent(WatchIntent.class, this::handleWatchIntent);
+		registerForIntent(PlayerTransformedIntent.class, this::handlePlayerTransformedIntent);
 	}
 
 	@Override

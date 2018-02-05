@@ -81,27 +81,19 @@ public class ServerCmdCallback implements ICmdCallback {
 	
 	private static void handleBanPlayer(Player player) {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Ban Player", "Enter the name of the player that you wish to BAN from the server.");
-		window.addOkButtonCallback("handleBanPlayer", (event, parameters) -> {
-			String name = SuiInputBox.getEnteredText(parameters);
-			new ServerManagementIntent(player, name, ServerManagementEvent.BAN).broadcast();
-		});
+		window.addOkButtonCallback("handleBanPlayer", (event, parameters) -> new ServerManagementIntent(player, SuiInputBox.getEnteredText(parameters), ServerManagementEvent.BAN).broadcast());
 		window.display(player);
 	}
 	
 	private static void handleUnbanPlayer(Player player) {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Unban Player", "Enter the name of the player that you wish to UNBAN from the server.");
-		window.addOkButtonCallback("handleUnbanPlayer", (event, parameters) -> {
-			String name = SuiInputBox.getEnteredText(parameters);
-			new ServerManagementIntent(player, name, ServerManagementEvent.UNBAN).broadcast();
-		});
+		window.addOkButtonCallback("handleUnbanPlayer", (event, parameters) -> new ServerManagementIntent(player, SuiInputBox.getEnteredText(parameters), ServerManagementEvent.UNBAN).broadcast());
 		window.display(player);
 	}
 	
 	private static void handleShutdownServer(Player player) {
 		SuiMessageBox window = new SuiMessageBox(SuiButtons.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
-		window.addOkButtonCallback("handleShutdownServer", (event, parameters) -> {
-			new ServerManagementIntent(15, TimeUnit.MINUTES, ServerManagementEvent.SHUTDOWN).broadcast();
-		});
+		window.addOkButtonCallback("handleShutdownServer", (event, parameters) -> new ServerManagementIntent(15, TimeUnit.MINUTES, ServerManagementEvent.SHUTDOWN).broadcast());
 		window.display(player);
 	}
 	

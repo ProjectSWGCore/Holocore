@@ -66,7 +66,7 @@ public class CommandLauncher {
 	public void start() {
 		cooldownHandler.start();
 		combatQueueThread.start();
-		combatQueueThread.executeWithFixedRate(1000, 1000, () -> pollQueues());
+		combatQueueThread.executeWithFixedRate(1000, 1000, this::pollQueues);
 	}
 	
 	public void stop() {
@@ -83,11 +83,7 @@ public class CommandLauncher {
 	public void addToQueue(Player player, EnqueuedCommand c) {
 		Queue<EnqueuedCommand> combatQueue;
 		synchronized (combatQueueMap) {
-			combatQueue = combatQueueMap.get(player);
-			if (combatQueue == null) {
-				combatQueue = new PriorityQueue<>();
-				combatQueueMap.put(player, combatQueue);
-			}
+			combatQueue = combatQueueMap.computeIfAbsent(player, k -> new PriorityQueue<>());
 		}
 		
 		// Schedule for later execution

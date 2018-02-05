@@ -27,13 +27,6 @@
 ***********************************************************************************/
 package services.player;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.BCrypt;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
@@ -45,20 +38,13 @@ import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
-import com.projectswg.common.network.packets.swg.login.CharacterCreationDisabled;
-import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId;
+import com.projectswg.common.network.packets.swg.login.*;
 import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
-import com.projectswg.common.network.packets.swg.login.LoginClientId;
-import com.projectswg.common.network.packets.swg.login.LoginClientToken;
-import com.projectswg.common.network.packets.swg.login.LoginClusterStatus;
-import com.projectswg.common.network.packets.swg.login.LoginEnumCluster;
-import com.projectswg.common.network.packets.swg.login.LoginIncorrectClientId;
 import com.projectswg.common.network.packets.swg.login.creation.DeleteCharacterRequest;
 import com.projectswg.common.network.packets.swg.login.creation.DeleteCharacterResponse;
 import com.projectswg.common.network.packets.swg.zone.GameServerLagResponse;
 import com.projectswg.common.network.packets.swg.zone.LagRequest;
 import com.projectswg.common.network.packets.swg.zone.ServerNowEpochTime;
-
 import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
@@ -67,13 +53,19 @@ import intents.object.DestroyObjectIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
 import services.CoreManager;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class LoginService extends Service {
 	
@@ -173,7 +165,7 @@ public class LoginService extends Service {
 		boolean success = obj != null && deleteCharacter(obj);
 		if (success) {
 			new DestroyObjectIntent(obj).broadcast();
-			Log.i("Deleted character %s for user %s", ((CreatureObject)obj).getObjectName(), player.getUsername());
+			Log.i("Deleted character %s for user %s", obj.getObjectName(), player.getUsername());
 		} else {
 			Log.e("Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		}

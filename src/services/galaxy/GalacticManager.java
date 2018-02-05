@@ -80,9 +80,9 @@ public class GalacticManager extends Manager {
 		addChildService(uniformBox);
 		addChildService(tradeService);
 		
-		registerForIntent(InboundPacketIntent.class, ipi -> handleInboundPacketIntent(ipi));
-		registerForIntent(ConnectionOpenedIntent.class, coi -> handleConnectionOpenedIntent(coi));
-		registerForIntent(ConnectionClosedIntent.class, cci -> handleConnectionClosedIntent(cci));
+		registerForIntent(InboundPacketIntent.class, this::handleInboundPacketIntent);
+		registerForIntent(ConnectionOpenedIntent.class, this::handleConnectionOpenedIntent);
+		registerForIntent(ConnectionClosedIntent.class, this::handleConnectionClosedIntent);
 	}
 	
 	@Override

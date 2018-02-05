@@ -119,8 +119,8 @@ public class CombatManager extends Manager {
 		addChildService(lootService);
 	
 		
-		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
-		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
+		registerForIntent(DeathblowIntent.class, this::handleDeathblowIntent);
+		registerForIntent(ChatCommandIntent.class, this::handleChatCommandIntent);
 		registerForIntent(IncapacitateCreatureIntent.class, ici -> incapacitatePlayer(ici.getIncapper(), ici.getIncappee()));
 		registerForIntent(KillCreatureIntent.class, kci -> killCreature(kci.getKiller(), kci.getCorpse()));
 	}
@@ -133,8 +133,8 @@ public class CombatManager extends Manager {
 	
 	@Override
 	public boolean start() {
-		executor.scheduleAtFixedRate(() -> periodicChecks(), 0, 5, TimeUnit.SECONDS);
-		executor.scheduleAtFixedRate(() -> periodicRegeneration(), 1, 1, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this::periodicChecks, 0, 5, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this::periodicRegeneration, 1, 1, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -286,7 +286,7 @@ public class CombatManager extends Manager {
 	
 	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
 		Location eggLocation;
-		SWGObject eggParent = null;
+		SWGObject eggParent;
 		
 		switch (combatCommand.getEggPosition()) {
 			case LOCATION: 
@@ -365,7 +365,7 @@ public class CombatManager extends Manager {
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(target -> target instanceof CreatureObject)
 				.map(target -> (CreatureObject) target)
-				.filter(creature -> source.isAttackable(creature))
+				.filter(source::isAttackable)
 				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
 				.collect(Collectors.toSet());
 		

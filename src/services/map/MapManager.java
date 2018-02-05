@@ -63,10 +63,7 @@ public class MapManager extends Manager {
 	private final AtomicInteger dynamicMapVersion = new AtomicInteger(1);
 	private final AtomicInteger persistMapVersion = new AtomicInteger(1);
 	
-	private final CityService cityService;
-
 	public MapManager() {
-		cityService = new CityService();
 		mapCategories = new HashMap<>();
 		mappingTemplates = new HashMap<>();
 
@@ -78,9 +75,9 @@ public class MapManager extends Manager {
 		loadMapCategories();
 		loadMappingTemplates();
 		
-		addChildService(cityService);
+		addChildService(new CityService());
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> processPacket(gpi));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
 		registerForIntent(ObjectCreatedIntent.class, oci -> addMapLocation(oci.getObject(), MapType.STATIC));
 	}
 
@@ -90,23 +87,18 @@ public class MapManager extends Manager {
 		return super.initialize();
 	}
 
-	private void processPacket(GalacticPacketIntent intent) {
-		SWGPacket p = intent.getPacket();
-		if (p instanceof SWGPacket)
-			processSwgPacket(intent.getPlayer(), (SWGPacket) p);
-	}
-	
-	private void processSwgPacket(Player player, SWGPacket p) {
-		switch (p.getPacketType()) {
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+		SWGPacket packet = gpi.getPacket();
+		switch (packet.getPacketType()) {
 			case GET_MAP_LOCATIONS_MESSAGE:
-				if (p instanceof GetMapLocationsMessage)
-					handleMapLocationsRequest(player, (GetMapLocationsMessage) p);
+				if (packet instanceof GetMapLocationsMessage)
+					handleMapLocationsRequest(gpi.getPlayer(), (GetMapLocationsMessage) packet);
 				break;
 			default:
 				break;
 		}
 	}
-
+	
 	private void handleMapLocationsRequest(Player player, GetMapLocationsMessage p) {
 		String planet = p.getPlanet();
 

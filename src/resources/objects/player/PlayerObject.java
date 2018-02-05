@@ -47,14 +47,14 @@ import resources.player.PlayerFlags;
 
 public class PlayerObject extends IntangibleObject {
 	
-	private PlayerObjectShared		play3	= new PlayerObjectShared();
-	private PlayerObjectSharedNP	play6	= new PlayerObjectSharedNP();
-	private PlayerObjectPrivate		play8	= new PlayerObjectPrivate();
-	private PlayerObjectPrivateNP	play9	= new PlayerObjectPrivateNP();
+	private final PlayerObjectShared	play3	= new PlayerObjectShared();
+	private final PlayerObjectSharedNP	play6	= new PlayerObjectSharedNP();
+	private final PlayerObjectPrivate	play8	= new PlayerObjectPrivate();
+	private final PlayerObjectPrivateNP	play9	= new PlayerObjectPrivateNP();
+	private final List<String>			joinedChannels	= new ArrayList<>();
 	
-	private int				startPlayTime	= 0;
-	private String			biography		= "";
-	private List<String> 	joinedChannels	= new ArrayList<>();
+	private int		startPlayTime	= 0;
+	private String	biography		= "";
 	
 	private int	lastUpdatePlayTime = 0;
 	
@@ -376,7 +376,7 @@ public class PlayerObject extends IntangibleObject {
 	}
 	
 	public void addDraftSchematic(int serverCrc, int clientCrc, int counter) {
-		long combinedCrc = (((long) serverCrc << 32) & 0xFFFFFFFF00000000l) | (clientCrc & 0x00000000FFFFFFFFl);
+		long combinedCrc = (((long) serverCrc << 32) & 0xFFFFFFFF00000000L) | (clientCrc & 0x00000000FFFFFFFFL);
 		play9.addDraftSchematic(combinedCrc, counter , this);
 	}
 	

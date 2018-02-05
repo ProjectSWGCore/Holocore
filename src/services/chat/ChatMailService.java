@@ -76,9 +76,9 @@ public class ChatMailService extends Service {
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(PersistentMessageIntent.class, pmi -> handlePersistentMessageIntent(pmi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(PersistentMessageIntent.class, this::handlePersistentMessageIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	@Override

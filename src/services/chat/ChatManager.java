@@ -64,35 +64,29 @@ import services.player.PlayerManager.PlayerLookup;
 
 public class ChatManager extends Manager {
 	
-	private final ChatRoomService roomService;
-	private final ChatMailService mailService;
 	private final RelationalServerData chatLogs;
 	private final PreparedStatement insertChatLog;
 	
 	public ChatManager() {
-		roomService = new ChatRoomService();
-		mailService = new ChatMailService();
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		
-		addChildService(roomService);
-		addChildService(mailService);
+		addChildService(new ChatRoomService());
+		addChildService(new ChatMailService());
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(SpatialChatIntent.class, spi -> handleSpatialChatIntent(spi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(SystemMessageIntent.class, smii -> handleSystemMessageIntent(smii));
-		registerForIntent(ChatAvatarRequestIntent.class, cari -> handleChatAvatarRequestIntent(cari));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(SpatialChatIntent.class, this::handleSpatialChatIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(SystemMessageIntent.class, this::handleSystemMessageIntent);
+		registerForIntent(ChatAvatarRequestIntent.class, this::handleChatAvatarRequestIntent);
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
-		if (!(p instanceof SWGPacket))
-			return;
-		switch (p.getPacketType()) {
+		SWGPacket packet = gpi.getPacket();
+		switch (packet.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
-				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) p);
+				if (packet instanceof ChatInstantMessageToCharacter)
+					handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) packet);
 				break;
 			default:
 				break;
@@ -294,13 +288,8 @@ public class ChatManager extends Manager {
 			}
 		}
 		
-		String playerName = player.getCharacterFirstName().toLowerCase(Locale.US);
-		player.getPlayerManager().notifyPlayers(playerNotified -> {
-			if (playerNotified.getPlayerState() != PlayerState.ZONED_IN)
-				return false;
-			
-			return playerNotified.getPlayerObject().isFriend(playerName);
-		}, new ChatFriendsListUpdate(new ChatAvatar(playerName), online));
+		String name = player.getCharacterFirstName().toLowerCase(Locale.US);
+		player.getPlayerManager().notifyPlayers(p -> p.getPlayerState() == PlayerState.ZONED_IN && p.getPlayerObject().isFriend(name), new ChatFriendsListUpdate(new ChatAvatar(name), online));
 	}
 	
 	private void sendTargetAvatarStatus(Player player, ChatAvatar target) {

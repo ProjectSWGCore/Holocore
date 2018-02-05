@@ -96,14 +96,14 @@ public final class LootService extends Service {
 		npcLoot = new HashMap<>();
 		random = new Random();
 
-		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommand(cci));
-		registerForIntent(ContainerTransferIntent.class, cti -> handleContainerTransfer(cti));
-		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilled(cki));
-		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelection(rsi));
-		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
-		registerForIntent(LootItemIntent.class, lii -> handleLootItemIntent(lii));
+		registerForIntent(ChatCommandIntent.class, this::handleChatCommand);
+		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransfer);
+		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilled);
+		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelection);
+		registerForIntent(RadialRequestIntent.class, this::handleRadialRequestIntent);
+		registerForIntent(LootItemIntent.class, this::handleLootItemIntent);
 	}
-
+	
 	@Override
 	public boolean initialize() {
 		loadLootTables();
@@ -188,9 +188,7 @@ public final class LootService extends Service {
 		long startTime = StandardLog.onStartLoad(what);
 		
 		NpcLoader npcLoader = NpcLoader.load();
-		npcLoader.iterate(npc -> {
-			loadNPCLoot(npc);
-		});
+		npcLoader.iterate(this::loadNPCLoot);
 
 		StandardLog.onEndLoad(npcLoot.size(), what, startTime);
 	}
@@ -353,13 +351,13 @@ public final class LootService extends Service {
 
 			// TODO permissions check
 
-			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+			List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
 			RadialOption loot = new RadialOption(RadialItem.LOOT);
 			loot.addChild(RadialItem.LOOT_ALL);
 			options.add(loot);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
 		} else if (target instanceof CreditObject) {
-			List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+			List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
 			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
 			options.add(transfer);
 			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
@@ -613,8 +611,8 @@ public final class LootService extends Service {
 					default:
 						return false;
 				}
-			} else if (highestDamageDealer.getOwner().equals(looter.getOwner())) {
-				return true;
+			} else {
+				return highestDamageDealer.getOwner().equals(looter.getOwner());
 			}
 		}
 		return false;
@@ -622,11 +620,9 @@ public final class LootService extends Service {
 
 	private boolean isLootable(SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
-
-		if (inventory.getContainedObjects().isEmpty())
-			return false;
-
-		return inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
+		
+		return !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
+		
 	}
 
 	private static class NPCLoot {

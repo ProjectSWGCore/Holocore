@@ -12,6 +12,7 @@ plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
+	id 'findbugs'
 }
 
 mainClassName  = 'main.ProjectSWG'
@@ -51,7 +52,6 @@ repositories {
 
 dependencies {
 	compile project(':PSWGCommon')
-	compile project(':PSWGCommonFX')
 	
 	compile 'org.codehaus.groovy:groovy:3.0.0-alpha-1'
 	compile 'junit:junit:4.12'
@@ -59,8 +59,16 @@ dependencies {
 	compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
 	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.10.0.201712302008-r'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
+	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 }
 
 task wrapper(type: Wrapper) {
 	gradleVersion = "4.4.1"
+}
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
 }

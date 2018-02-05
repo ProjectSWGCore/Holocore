@@ -49,7 +49,7 @@ public class ResourceService extends Service {
 	public ResourceService() {
 		this.container = new RawResourceContainer();
 		this.spawner = new GalacticResourceSpawner();
-		this.spawnerUpdater = new PswgBasicScheduledThread("resource-spawn-updater", () -> spawner.updateAllResources());
+		this.spawnerUpdater = new PswgBasicScheduledThread("resource-spawn-updater", spawner::updateAllResources);
 	}
 	
 	@Override

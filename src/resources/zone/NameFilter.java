@@ -59,14 +59,13 @@ public class NameFilter {
 		this.profaneFile = badWordsFile;
 		this.reservedFile = reservedFile;
 		this.fictionFile = fictionFile;
-		this.profaneWords = new ArrayList<String>();
-		this.reservedWords = new ArrayList<String>();
-		this.fictionNames = new ArrayList<String>();
+		this.profaneWords = new ArrayList<>();
+		this.reservedWords = new ArrayList<>();
+		this.fictionNames = new ArrayList<>();
 	}
 	
 	public boolean load() {
-		boolean success = true;
-		success = load(profaneWords, profaneFile) && success;
+		boolean success = load(profaneWords, profaneFile);
 		success = load(reservedWords, reservedFile) && success;
 		success = load(fictionNames, fictionFile) && success;
 		return success;
@@ -77,7 +76,7 @@ public class NameFilter {
 			return false;
 		try {
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
-				String line = "";
+				String line;
 				list.clear();
 				while ((line = reader.readLine()) != null) {
 					line = line.toLowerCase(Locale.US);
@@ -131,7 +130,7 @@ public class NameFilter {
 			char c = name.charAt(i);
 			if (!Character.isAlphabetic(c))
 				space = true;
-			else if (Character.isUpperCase(c) && space == false)
+			else if (Character.isUpperCase(c) && !space)
 				return true;
 			else
 				space = false;

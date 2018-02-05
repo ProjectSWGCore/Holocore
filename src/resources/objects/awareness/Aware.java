@@ -129,7 +129,7 @@ class Aware {
 		Aware tmpParent = getParent();
 		Aware ret = tmpParent;
 		if (tmpParent == null)
-			return ret;
+			return null;
 		while ((tmpParent = tmpParent.getParent()) != null) {
 			ret = tmpParent;
 		}

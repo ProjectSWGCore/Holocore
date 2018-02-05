@@ -30,10 +30,7 @@ package main;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Thread.State;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -127,7 +124,7 @@ public class ProjectSWG {
 	private static void printFinalPswgState() {
 		List<Thread> threads = Thread.getAllStackTraces().keySet().stream()
 				.filter(t -> !t.isDaemon() && t.getState() != State.TERMINATED)
-				.sorted((a, b) -> a.getName().compareTo(b.getName()))
+				.sorted(Comparator.comparing(Thread::getName))
 				.collect(Collectors.toList());
 		Log.i("Final PSWG State:");
 		Log.i("    Threads: %d", threads.size());

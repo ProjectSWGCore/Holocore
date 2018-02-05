@@ -178,10 +178,10 @@ class PlayerObjectPrivateNP implements Persistable {
 		stream.addInt(languageId);
 		stream.addInt(killMeter);
 		stream.addLong(petId);
-		stream.addList(friendsList, (s) -> stream.addAscii(s));
-		stream.addList(ignoreList, (s) -> stream.addAscii(s));
-		stream.addList(petAbilities, (s) -> stream.addAscii(s));
-		stream.addList(activePetAbilities, (s) -> stream.addAscii(s));
+		stream.addList(friendsList, stream::addAscii);
+		stream.addList(ignoreList, stream::addAscii);
+		stream.addList(petAbilities, stream::addAscii);
+		stream.addList(activePetAbilities, stream::addAscii);
 	}
 	
 	@Override

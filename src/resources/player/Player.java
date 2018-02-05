@@ -210,9 +210,7 @@ public class Player implements Comparable<Player> {
 		if (creatureObject == null)
 			return false;
 		CreatureObject oCreature = ((Player) o).getCreatureObject();
-		if (oCreature == null)
-			return false;
-		return creatureObject.equals(oCreature);
+		return oCreature != null && creatureObject.equals(oCreature);
 	}
 	
 	@Override
@@ -222,7 +220,7 @@ public class Player implements Comparable<Player> {
 		return Long.valueOf(creatureObject.getObjectId()).hashCode() ^ getUserId();
 	}
 	
-	public static enum PlayerServer {
+	public enum PlayerServer {
 		NONE,
 		LOGIN,
 		ZONE

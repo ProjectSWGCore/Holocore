@@ -68,9 +68,9 @@ public class CombatXpService extends Service {
 	@Override
 	public boolean start() {
 		// The objects we care about are only created/destroyed at this point anyways.
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
-		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
-		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
+		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
+		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
 		
 		return super.start();
 	}

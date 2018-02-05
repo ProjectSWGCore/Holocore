@@ -45,5 +45,5 @@ public enum InstanceType {
 	THE_VOLCANO_CRATER,
 	SHER_KAR,
 	/* Kashyyyk */
-	NK_NECROSIS;
+	NK_NECROSIS
 }

@@ -44,9 +44,7 @@ public class InProgressSurveyManager {
 	public void startSession(CreatureObject creature, GalacticResource resource) {
 		SurveySession session;
 		synchronized (surveySessions) {
-			session = surveySessions.get(creature);
-			if (session == null)
-				surveySessions.put(creature, session = new SurveySession(creature, resource));
+			session = surveySessions.computeIfAbsent(creature, c -> new SurveySession(c, resource));
 			if (!session.getResource().equals(resource)) {
 				session.stopSession();
 				surveySessions.put(creature, session = new SurveySession(creature, resource));

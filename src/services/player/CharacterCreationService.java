@@ -91,8 +91,8 @@ public class CharacterCreationService extends Service {
 	private PreparedStatement getCharacterCount;
 	
 	public CharacterCreationService() {
-		lockedNames = new HashMap<String, Player>();
-		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
+		lockedNames = new HashMap<>();
+		profTemplates = new ConcurrentHashMap<>();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
@@ -375,7 +375,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private boolean isLocked(Player assignedTo, String firstName) {
-		Player player = null;
+		Player player;
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}

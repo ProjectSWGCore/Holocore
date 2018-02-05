@@ -58,21 +58,16 @@ public class SuiService extends Service {
 	public SuiService() {
 		windows = new ConcurrentHashMap<>();
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(SuiWindowIntent.class, swi -> handleSuiWindowIntent(swi));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(SuiWindowIntent.class, this::handleSuiWindowIntent);
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
-		if (p instanceof SWGPacket)
-			processSwgPacket(gpi.getPlayer(), p);
-	}
-	
-	private void processSwgPacket(Player player, SWGPacket p) {
-		switch(p.getPacketType()) {
+		SWGPacket packet = gpi.getPacket();
+		switch (packet.getPacketType()) {
 			case SUI_EVENT_NOTIFICATION:
-				if (p instanceof SuiEventNotification)
-					handleSuiEventNotification(player, (SuiEventNotification) p);
+				if (packet instanceof SuiEventNotification)
+					handleSuiEventNotification(gpi.getPlayer(), (SuiEventNotification) packet);
 				break;
 			default:
 				break;
@@ -156,11 +151,7 @@ public class SuiService extends Service {
 		player.sendPacket(SWGPacket);
 
 		long networkId = player.getNetworkId();
-		List<SuiBaseWindow> activeWindows = windows.get(networkId);
-		if (activeWindows == null) {
-			activeWindows = new ArrayList<>();
-			windows.put(networkId, activeWindows);
-		}
+		List<SuiBaseWindow> activeWindows = windows.computeIfAbsent(networkId, k -> new ArrayList<>());
 		activeWindows.add(window);
 	}
 

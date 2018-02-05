@@ -91,24 +91,21 @@ public class ShutdownService extends Service {
 	
 	private void scheduleBroadcast(final TimeUnit timeUnit, final long time, final long timeBetweenBroadcasts) {
 		recreateExecutor();
-		shutdownExecutor.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				String message;
-				long timeRemainingVal = timeRemaining.get();
-				
-				if(runCount.getAndIncrement() == intervalCount.get()) {
-					message = SHUTDOWN_MESSAGE;
-				} else {
-					String unitName = timeUnit.name().toLowerCase(Locale.ENGLISH);
-					String units = unitName.substring(0, unitName.length()-1);
-					if (timeRemainingVal > 1)
-						units += "s";
-					message = String.format(SHUTDOWN_PERIODIC, timeRemainingVal, units);
-					timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, BROADCAST_UNIT));
-				}
-				SystemMessageIntent.broadcastGalaxy(message);
+		shutdownExecutor.scheduleAtFixedRate(() -> {
+			String message;
+			long timeRemainingVal = timeRemaining.get();
+			
+			if(runCount.getAndIncrement() == intervalCount.get()) {
+				message = SHUTDOWN_MESSAGE;
+			} else {
+				String unitName = timeUnit.name().toLowerCase(Locale.ENGLISH);
+				String units = unitName.substring(0, unitName.length()-1);
+				if (timeRemainingVal > 1)
+					units += "s";
+				message = String.format(SHUTDOWN_PERIODIC, timeRemainingVal, units);
+				timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, BROADCAST_UNIT));
 			}
+			SystemMessageIntent.broadcastGalaxy(message);
 		}, 0, timeBetweenBroadcasts, BROADCAST_UNIT);
 	}
 	

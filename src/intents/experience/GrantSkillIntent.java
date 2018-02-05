@@ -61,7 +61,7 @@ public final class GrantSkillIntent extends Intent {
 		return grantRequiredSkills;
 	}
 	
-	public static enum IntentType {
+	public enum IntentType {
 		GRANT,
 		GIVEN
 	}

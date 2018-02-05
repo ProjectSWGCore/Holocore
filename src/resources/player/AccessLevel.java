@@ -51,7 +51,7 @@ public enum AccessLevel {
 
 	private final int value;
 
-	private AccessLevel(int value){
+	AccessLevel(int value){
 		this.value = value;
 	}
 

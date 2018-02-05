@@ -28,6 +28,7 @@
 package resources.buildout;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import com.projectswg.common.data.location.Terrain;
@@ -61,7 +62,7 @@ public class BuildoutAreaGrid {
 	public void addBuildoutArea(BuildoutArea area) {
 		int zMax = getNodeIndex(area.getZ2());
 		int xMax = getNodeIndex(area.getX2());
-		BuildoutAreaNode node = null;
+		BuildoutAreaNode node;
 		synchronized (grid) {
 			for (int z = getNodeIndex(area.getZ1()); z <= zMax && z < grid.length; z++) {
 				for (int x = getNodeIndex(area.getX1()); x <= xMax && x < grid.length; x++) {
@@ -105,7 +106,7 @@ public class BuildoutAreaGrid {
 		public void add(BuildoutArea area) {
 			synchronized (areas) {
 				areas.add(area);
-				areas.sort((a, b) -> Double.compare(getArea(a), getArea(b)));
+				areas.sort(Comparator.comparingDouble(this::getArea));
 			}
 		}
 		

@@ -41,7 +41,7 @@ public class TestQuadTree {
 	
 	@Test
 	public void testInsertGet() {
-		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
+		QuadTree<Double> tree = new QuadTree<>(2, 0, 0, 10, 10);
 		tree.put(5, 5, 5.0);
 		Assert.assertEquals(5, tree.getIgnoreCollisions(5, 5), 1E-10);
 		tree.put(0, 0, 10.0);
@@ -73,8 +73,8 @@ public class TestQuadTree {
 	
 	@Test
 	public void testDuplicatesBug() {
-		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
-		Double d = Double.valueOf(5.0);
+		QuadTree<Double> tree = new QuadTree<>(2, 0, 0, 10, 10);
+		Double d = 5.0;
 		tree.put(5.0, 5.0, d);
 		Assert.assertEquals(1, tree.getWithinRange(5.0, 5.0, 10).size());
 		Assert.assertEquals(tree.getIgnoreCollisions(5.0, 5.0), d);
@@ -102,8 +102,8 @@ public class TestQuadTree {
 	
 	@Test
 	public void testWithinArea() {
-		List <Point2D> points = new ArrayList<Point2D>();
-		QuadTree <Point2D> tree = new QuadTree<Point2D>(4, 0, 0, 10, 10);
+		List <Point2D> points = new ArrayList<>();
+		QuadTree <Point2D> tree = new QuadTree<>(4, 0, 0, 10, 10);
 		Point2D p;
 		for (double x = 0; x < 10; x += 0.15) {
 			for (double y = 0; y < 10; y += 0.15) {
@@ -127,8 +127,8 @@ public class TestQuadTree {
 	
 	@Test
 	public void testQuadLarge() {
-		List <Point2D> points = new ArrayList<Point2D>();
-		QuadTree <Point2D> tree = new QuadTree<Point2D>(16, -8192, -8192, 8192, 8192);
+		List <Point2D> points = new ArrayList<>();
+		QuadTree <Point2D> tree = new QuadTree<>(16, -8192, -8192, 8192, 8192);
 		Point2D p;
 		for (int x = -2000; x < 2000; x += 100) {
 			for (int y = -2000; y < 2000; y += 100) {

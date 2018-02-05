@@ -87,9 +87,9 @@ public class CoreManager extends Manager {
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		
-		registerForIntent(InboundPacketIntent.class, ipi -> handleInboundPacketIntent(ipi));
-		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
-		registerForIntent(ServerManagementIntent.class, smi -> handleServerManagementIntent(smi));
+		registerForIntent(InboundPacketIntent.class, this::handleInboundPacketIntent);
+		registerForIntent(OutboundPacketIntent.class, this::handleOutboundPacketIntent);
+		registerForIntent(ServerManagementIntent.class, this::handleServerManagementIntent);
 	}
 	
 	/**
@@ -185,15 +185,9 @@ public class CoreManager extends Manager {
 	private void initiateShutdownSequence(long time, TimeUnit unit) {
 		Log.i("Beginning server shutdown sequence...");
 		
-		shutdownService.schedule(
-				new Runnable() {
-					@Override
-					public void run() {
-						shutdownRequested = true;
-					}
-					// Ziggy: Give the broadcast method extra time to complete.
-					// If we don't, the final broadcast won't be displayed.
-				},
+		// Ziggy: Give the broadcast method extra time to complete.
+// If we don't, the final broadcast won't be displayed.
+		shutdownService.schedule(() -> { shutdownRequested = true; },
 				TimeUnit.NANOSECONDS.convert(time, unit) + TimeUnit.NANOSECONDS.convert(1, TimeUnit.SECONDS), TimeUnit.NANOSECONDS);
 
 		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time, unit).broadcast();

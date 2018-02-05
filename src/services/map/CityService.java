@@ -61,9 +61,9 @@ public class CityService extends Service {
 		cities = new HashMap<>();
 		loadCities();
 		
-		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
-		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
-		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
 	}
 	
 	private void loadCities() {
@@ -72,9 +72,7 @@ public class CityService extends Service {
 			try (ResultSet set = db.executeQuery(GET_ALL_CITIES)) {
 				while (set.next()) {
 					Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-					List<City> list = cities.get(t);
-					if (list == null)
-						cities.put(t, list = new ArrayList<>());
+					List<City> list = cities.computeIfAbsent(t, k -> new ArrayList<>());
 					list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
 				}
 			}
@@ -83,8 +81,7 @@ public class CityService extends Service {
 		}
 	}
 	
-	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
-		GalacticPacketIntent gpi = i;
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof DataTransform) {
 			performLocationUpdate(gpi.getPlayer().getCreatureObject());

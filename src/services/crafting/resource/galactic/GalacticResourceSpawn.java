@@ -161,12 +161,17 @@ public class GalacticResourceSpawn implements Persistable {
 	private void setPosition(Random random, Terrain terrain) {
 		double angle = random.nextDouble() * 6.283185307;
 		double distance = Math.max(-1, Math.min(1, random.nextGaussian() / 6 + 0.5));
-		if (terrain == Terrain.MUSTAFAR)
-			distance *= POSITION_MUST_GAUSSIAN_FACTOR;
-		else if (terrain == Terrain.KASHYYYK_MAIN)
-			distance *= POSITION_KASH_GAUSSIAN_FACTOR;
-		else
-			distance *= POSITION_GAUSSIAN_FACTOR;
+		switch (terrain) {
+			case MUSTAFAR:
+				distance *= POSITION_MUST_GAUSSIAN_FACTOR;
+				break;
+			case KASHYYYK_MAIN:
+				distance *= POSITION_KASH_GAUSSIAN_FACTOR;
+				break;
+			default:
+				distance *= POSITION_GAUSSIAN_FACTOR;
+				break;
+		}
 		this.x = capPosition((int) (Math.cos(angle) * distance));
 		this.z = capPosition((int) (Math.sin(angle) * distance));
 		if (terrain == Terrain.MUSTAFAR) {

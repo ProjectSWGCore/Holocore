@@ -47,7 +47,7 @@ public class GalacticResourceLoader {
 			return new ArrayList<>();
 		}
 		List<GalacticResource> resourceList = new ArrayList<>(resources.size());
-		resources.traverse(r -> resourceList.add(r));
+		resources.traverse(resourceList::add);
 		resources.close();
 		return resourceList;
 	}
@@ -59,7 +59,7 @@ public class GalacticResourceLoader {
 			return new ArrayList<>();
 		}
 		List<GalacticResourceSpawn> spawnList = new ArrayList<>(spawns.size());
-		spawns.traverse(s -> spawnList.add(s));
+		spawns.traverse(spawnList::add);
 		spawns.close();
 		return spawnList;
 	}

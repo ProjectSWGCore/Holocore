@@ -40,7 +40,7 @@ import resources.player.Player;
 
 public class GuildObject extends SWGObject {
 	
-	private SWGSet<String> abbreviations = new SWGSet<String>(3, 4, StringType.ASCII);
+	private SWGSet<String> abbreviations = new SWGSet<>(3, 4, StringType.ASCII);
 	private SWGMap<String, CurrentServerGCWZonePercent> gcwImperialScorePercentileThisGalaxy = new SWGMap<>(6, 2);
 	private SWGMap<String, CurrentServerGCWZonePercent> gcwGroupImperialScorePercentileThisGalaxy = new SWGMap<>(6, 3);
 	private SWGMap<String, CurrentServerGCWZoneHistory> gcwImperialScorePercentileHistoryThisGalaxy = new SWGMap<>(6, 4);

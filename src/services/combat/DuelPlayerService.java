@@ -40,7 +40,7 @@ import resources.objects.creature.CreatureObject;
 public class DuelPlayerService extends Service {
 	
 	public DuelPlayerService() {
-		registerForIntent(DuelPlayerIntent.class, dpi -> handleDuelPlayerIntent(dpi));
+		registerForIntent(DuelPlayerIntent.class, this::handleDuelPlayerIntent);
 	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {

@@ -55,16 +55,6 @@ public class ManufactureSchematicObject extends IntangibleObject {
 		super(objectId, BaselineType.MSCO);
 	}
 	
-	public float getManufactureAttribute(String name) {
-		Float attr;
-		synchronized (attributes) {
-			attr = attributes.get(name);
-		}
-		if (attr == null)
-			return Float.NaN;
-		return attr;
-	}
-	
 	public void setItemsPerContainer(int items) {
 		this.itemsPerContainer = items;
 	}

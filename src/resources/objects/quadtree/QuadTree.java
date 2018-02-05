@@ -73,7 +73,7 @@ public class QuadTree<V> {
 	}
 	
 	public List<V> getWithinRange(double x, double y, double range) {
-		List<V> list = new ArrayList<V>();
+		List<V> list = new ArrayList<>();
 		if (Double.isNaN(x) || Double.isNaN(y))
 			return list;
 		if (x < minX || y < minY || x > maxX || y > maxY)
@@ -110,7 +110,7 @@ public class QuadTree<V> {
 		private final QuadSubNodes<QuadNode> subnodes;
 		private final double minX, minY, maxX, maxY, centerX, centerY;
 		private final double cellWidth, cellHeight;
-		private Node obj = null;
+		private Node obj;
 		private int size = 0;
 		
 		public QuadNode(double minX, double minY, double maxX, double maxY) {
@@ -154,9 +154,7 @@ public class QuadTree<V> {
 					return obj.removeInstance(instance);
 			}
 			QuadNode quad = subnodes.get(x, y);
-			if (quad != null)
-				return quad.remove(x, y, instance);
-			return false;
+			return quad != null && quad.remove(x, y, instance);
 		}
 		
 		public int remove(double x, double y, int maxRemove) {
@@ -402,8 +400,8 @@ public class QuadTree<V> {
 		}
 	}
 	
-	private static int getIndex(double pos, double min, double width) {
-		return (int) ((pos - min) / width);
+	private static int getIndex(double pos, double min, double max) {
+		return (int) ((pos - min) / max);
 	}
 	
 }

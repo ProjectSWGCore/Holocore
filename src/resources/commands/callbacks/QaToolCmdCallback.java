@@ -213,7 +213,6 @@ public class QaToolCmdCallback implements ICmdCallback {
 		} catch (NumberFormatException e) {
 			Log.e("Invalid instance number with qatool: %s", args);
 			SystemMessageIntent.broadcastPersonal(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
-			return;
 		}
 	}
 	

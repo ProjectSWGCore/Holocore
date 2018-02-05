@@ -70,8 +70,8 @@ public final class StaticItemService extends Service {
 	StaticItemService() {
 		objectAttributesMap = new HashMap<>();
 
-		registerForIntent(CreateStaticItemIntent.class, csii -> handleCreateStaticItemIntent(csii));
-		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
+		registerForIntent(CreateStaticItemIntent.class, this::handleCreateStaticItemIntent);
+		registerForIntent(ConfigChangedIntent.class, this::handleConfigChangedIntent);
 	}
 
 	@Override
@@ -682,7 +682,7 @@ public final class StaticItemService extends Service {
 		}
 
 		@Override
-		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+		protected boolean loadTypeAttributes(ResultSet resultSet) {
 			return true;
 		}
 
