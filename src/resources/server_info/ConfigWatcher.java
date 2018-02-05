@@ -51,7 +51,6 @@ public final class ConfigWatcher {
 	private static final String CFGPATH = "cfg/";
 	
 	private final Map<ConfigFile, Config> configMap;
-	private final Path directory;
 	private final PswgBasicThread watcherThread;
 	private final AtomicBoolean running;
 	
@@ -59,13 +58,12 @@ public final class ConfigWatcher {
 	
 	public ConfigWatcher(Map<ConfigFile, Config> configMap) {
 		this.configMap = configMap;
-		this.directory = Paths.get(CFGPATH);
 		this.watcherThread = new PswgBasicThread("config-watcher", this::watch);
 		this.running = new AtomicBoolean(false);
 		
 		try {
 			this.watcher = FileSystems.getDefault().newWatchService();
-			directory.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
+			Paths.get(CFGPATH).register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 		} catch (IOException e) {
 			this.watcher = null;
 		}

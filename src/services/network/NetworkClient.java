@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package network;
+package services.network;
 
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.debug.Log;

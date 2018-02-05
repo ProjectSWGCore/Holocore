@@ -29,7 +29,7 @@ package intents.network;
 
 import com.projectswg.common.control.Intent;
 
-import network.NetworkClient;
+import services.network.NetworkClient;
 
 public class InboundPacketPendingIntent extends Intent {
 	

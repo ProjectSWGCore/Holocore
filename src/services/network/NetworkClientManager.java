@@ -36,8 +36,6 @@ import intents.network.ConnectionClosedIntent;
 import intents.network.InboundPacketPendingIntent;
 import intents.network.OutboundPacketIntent;
 import main.ProjectSWG.CoreException;
-import network.AdminNetworkClient;
-import network.NetworkClient;
 import resources.config.ConfigFile;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;

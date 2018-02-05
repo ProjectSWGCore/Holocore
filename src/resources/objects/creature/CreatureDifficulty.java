@@ -42,7 +42,7 @@ public enum CreatureDifficulty {
 		return (byte) difficulty;
 	}
 	
-	public static final CreatureDifficulty getForDifficulty(int difficulty) {
+	public static CreatureDifficulty getForDifficulty(int difficulty) {
 		for (CreatureDifficulty d : values())
 			if (d.getDifficulty() == difficulty)
 				return d;

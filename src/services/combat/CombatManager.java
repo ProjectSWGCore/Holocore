@@ -89,10 +89,6 @@ public class CombatManager extends Manager {
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final Random random;
-	private final CorpseService corpseService;
-	private final CombatXpService combatXpService;
-	private final DuelPlayerService duelPlayerService;
-	private final LootService lootService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -106,18 +102,12 @@ public class CombatManager extends Manager {
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
 		incapacitatedCreatures = new HashMap<>();
-		lootService = new LootService();
 		random = new Random();
 		
-		corpseService = new CorpseService();
-		combatXpService = new CombatXpService();
-		duelPlayerService = new DuelPlayerService();
-
-		addChildService(corpseService);
-		addChildService(combatXpService);
-		addChildService(duelPlayerService);
-		addChildService(lootService);
-	
+		addChildService(new CorpseService());
+		addChildService(new CombatXpService());
+		addChildService(new DuelPlayerService());
+		addChildService(new LootService());
 		
 		registerForIntent(DeathblowIntent.class, this::handleDeathblowIntent);
 		registerForIntent(ChatCommandIntent.class, this::handleChatCommandIntent);

@@ -55,38 +55,26 @@ import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 	
-	private final ObjectAwareness objectAwareness;
-	private final MapManager mapManager;
-	private final StaticService staticService;
-	private final SpawnerService spawnerService;
-	private final RadialService radialService;
 	private final ClientBuildoutService clientBuildoutService;
-	private final StaticItemService staticItemService;
 	
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
 	private final AtomicBoolean started;
 	
 	public ObjectManager() {
-		objectAwareness = new ObjectAwareness();
-		mapManager = new MapManager();
-		staticService = new StaticService();
-		spawnerService = new SpawnerService();
-		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
-		staticItemService = new StaticItemService();
 		
 		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		started = new AtomicBoolean(false);
 		
-		addChildService(objectAwareness);
-		addChildService(mapManager);
-		addChildService(staticService);
-		addChildService(radialService);
-		addChildService(spawnerService);
+		addChildService(new ObjectAwareness());
+		addChildService(new MapManager());
+		addChildService(new StaticService());
+		addChildService(new RadialService());
+		addChildService(new SpawnerService());
 		addChildService(clientBuildoutService);
-		addChildService(staticItemService);
+		addChildService(new StaticItemService());
 		
 		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
 		registerForIntent(ObjectCreatedIntent.class, this::processObjectCreatedIntent);

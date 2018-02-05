@@ -63,8 +63,6 @@ public class CoreManager extends Manager {
 	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
-	private final EngineManager engineManager;
-	private final GalacticManager galacticManager;
 	private final BasicLogStream packetLogger;
 	private final Config debugConfig;
 	
@@ -81,11 +79,9 @@ public class CoreManager extends Manager {
 		packetLogger = new BasicLogStream(new File("log/packets.txt"));
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
-		engineManager = new EngineManager();
-		galacticManager = new GalacticManager();
 		
-		addChildService(engineManager);
-		addChildService(galacticManager);
+		addChildService(new EngineManager());
+		addChildService(new GalacticManager());
 		
 		registerForIntent(InboundPacketIntent.class, this::handleInboundPacketIntent);
 		registerForIntent(OutboundPacketIntent.class, this::handleOutboundPacketIntent);

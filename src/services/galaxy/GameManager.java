@@ -43,55 +43,23 @@ import services.group.GroupService;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {
-
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionService collectionService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService environmentService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-	private final CombatManager combatManager;
-	private final ExperienceManager experienceManager;
-	private final BuffService buffService;
-	private final CraftingManager craftingManager;
 	
 	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionService = new CollectionService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		environmentService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-		combatManager = new CombatManager();
-		experienceManager = new ExperienceManager();
-		buffService = new BuffService();
-		craftingManager = new CraftingManager();
-		
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionService);
-		addChildService(collectionBadgeManager);
-		addChildService(environmentService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
-		addChildService(combatManager);
-		addChildService(experienceManager);
-		addChildService(buffService);
-		addChildService(craftingManager);
+		addChildService(new CommandService());
+		addChildService(new ConnectionService());
+		addChildService(new SuiService());
+		addChildService(new CollectionService());
+		addChildService(new CollectionBadgeManager());
+		addChildService(new EnvironmentService());
+		addChildService(new TerminalService());
+		addChildService(new FactionService());
+		addChildService(new GroupService());
+		addChildService(new SkillModService());
+		addChildService(new EntertainmentService());
+		addChildService(new CombatManager());
+		addChildService(new ExperienceManager());
+		addChildService(new BuffService());
+		addChildService(new CraftingManager());
 	}
 	
 }

@@ -43,15 +43,9 @@ import services.network.NetworkManager;
 
 public class EngineManager extends Manager {
 	
-	private ShutdownService shutdownService;
-	private NetworkManager networkManager;
-	
 	public EngineManager() {
-		networkManager = new NetworkManager();
-		shutdownService = new ShutdownService();
-		
-		addChildService(networkManager);
-		addChildService(shutdownService);
+		addChildService(new NetworkManager());
+		addChildService(new ShutdownService());
 
 		initializeServerFactory();
 	}

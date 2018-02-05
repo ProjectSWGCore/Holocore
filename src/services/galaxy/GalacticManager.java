@@ -27,13 +27,9 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import java.util.Map;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.debug.Assert;
-
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
@@ -48,37 +44,28 @@ import services.objects.UniformBoxService;
 import services.player.PlayerManager;
 import services.trade.TradeService;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class GalacticManager extends Manager {
 	
 	private final ObjectManager objectManager;
 	private final PlayerManager playerManager;
-	private final GameManager gameManager;
-	private final ChatManager chatManager;
-	private final TravelService travelService;
-	private final DeveloperService developerService;
-	private final UniformBoxService uniformBox;
-	private final TradeService tradeService;
 	private final Map<Long, IntentChain> prevIntentMap;
 	
 	public GalacticManager() {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
-		gameManager = new GameManager();
-		chatManager = new ChatManager();
-		travelService = new TravelService();
-		developerService = new DeveloperService();
-		uniformBox = new UniformBoxService();
-		tradeService = new TradeService();
-		prevIntentMap = new SynchronizedMap<>();
-				
+		prevIntentMap = new ConcurrentHashMap<>();
+		
 		addChildService(objectManager);
 		addChildService(playerManager);
-		addChildService(gameManager);
-		addChildService(chatManager);
-		addChildService(travelService);
-		addChildService(developerService);
-		addChildService(uniformBox);
-		addChildService(tradeService);
+		addChildService(new GameManager());
+		addChildService(new ChatManager());
+		addChildService(new TravelService());
+		addChildService(new DeveloperService());
+		addChildService(new UniformBoxService());
+		addChildService(new TradeService());
 		
 		registerForIntent(InboundPacketIntent.class, this::handleInboundPacketIntent);
 		registerForIntent(ConnectionOpenedIntent.class, this::handleConnectionOpenedIntent);

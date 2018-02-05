@@ -63,7 +63,7 @@ public class ProjectSWG {
 	private ServerInitStatus initStatus;
 	private int adminServerPort;
 	
-	public static final void main(String [] args) throws IOException {
+	public static void main(String [] args) throws IOException {
 		Result testResult = verifyTestCases();
 		new File("log").mkdirs();
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
@@ -96,7 +96,7 @@ public class ProjectSWG {
 	 * Returns the time in milliseconds since the server started initialization
 	 * @return the core time represented as a double
 	 */
-	public static final long getCoreTime() {
+	public static long getCoreTime() {
 		return (long) server.manager.getCoreTime();
 	}
 	
@@ -105,7 +105,7 @@ public class ProjectSWG {
 	 * the client and should be used for any official client-time purposes.
 	 * @return the server's galactic time in seconds
 	 */
-	public static final long getGalacticTime() {
+	public static long getGalacticTime() {
 		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
 	}
 	

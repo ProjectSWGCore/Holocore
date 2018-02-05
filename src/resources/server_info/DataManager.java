@@ -133,7 +133,7 @@ public class DataManager {
 		}
 	}
 	
-	private static final DataManager getInstance() {
+	private static DataManager getInstance() {
 		synchronized (instanceLock) {
 			return instance;
 		}

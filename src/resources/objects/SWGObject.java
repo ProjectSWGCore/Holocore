@@ -669,10 +669,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 
 			arrangementId++;
 		}
-		return (filledId != -1) ? filledId : -1;
+		return filledId;
 	}
 	
-	private final void sendSceneCreateObject(Player target) {
+	private void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
 		create.setLocation(location.getLocation());
@@ -680,7 +680,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		target.sendPacket(create);
 	}
 	
-	private final void sendSceneDestroyObject(Player target) {
+	private void sendSceneDestroyObject(Player target) {
 		target.sendPacket(new SceneDestroyObject(objectId));
 	}
 	
@@ -955,9 +955,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof SWGObject))
-			return false;
-		return getObjectId() == ((SWGObject)o).getObjectId();
+		return o instanceof SWGObject && getObjectId() == ((SWGObject) o).getObjectId();
 	}
 	
 	@Override

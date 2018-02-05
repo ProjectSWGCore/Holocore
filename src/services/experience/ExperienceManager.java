@@ -56,21 +56,17 @@ import resources.server_info.DataManager;
  */
 public final class ExperienceManager extends Manager {
 	
-	private final SkillManager skillManager;
-	private final SkillTemplateService skillTemplateService;
 	private final Map<Short, Integer> levelXpMap;
 	private final double xpMultiplier;
 
 	public ExperienceManager() {
-		skillManager = new SkillManager();
-		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
 		xpMultiplier = DataManager.getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
 
 		registerForIntent(ExperienceIntent.class, this::handleExperienceIntent);		
 		
-		addChildService(skillManager);
-		addChildService(skillTemplateService);
+		addChildService(new SkillManager());
+		addChildService(new SkillTemplateService());
 	}
 
 	@Override

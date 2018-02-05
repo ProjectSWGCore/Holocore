@@ -61,7 +61,7 @@ public class TerrainZoneInsertion {
 		return null;
 	}
 	
-	private static final Location generateRandomLocation(Terrain terrain, double x, double y, double z, double delta) {
+	private static Location generateRandomLocation(Terrain terrain, double x, double y, double z, double delta) {
 		LocationBuilder location = Location.builder();
 		location.setTerrain(terrain);
 		location.setX(x + (Math.random()-.5) * delta);

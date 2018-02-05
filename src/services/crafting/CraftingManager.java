@@ -34,15 +34,9 @@ import services.crafting.survey.SurveyService;
 
 public class CraftingManager extends Manager {
 	
-	private final ResourceService resourceService;
-	private final SurveyService surveyService;
-	
 	public CraftingManager() {
-		this.resourceService = new ResourceService();
-		this.surveyService = new SurveyService();
-		
-		addChildService(resourceService);
-		addChildService(surveyService);
+		addChildService(new ResourceService());
+		addChildService(new SurveyService());
 	}
 	
 }

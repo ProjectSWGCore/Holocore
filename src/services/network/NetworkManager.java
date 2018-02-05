@@ -31,12 +31,8 @@ import com.projectswg.common.control.Manager;
 
 public class NetworkManager extends Manager {
 	
-	private final NetworkClientManager netClientManager;
-	
 	public NetworkManager() {
-		netClientManager = new NetworkClientManager();
-		
-		addChildService(netClientManager);
+		addChildService(new NetworkClientManager());
 	}
 	
 }
