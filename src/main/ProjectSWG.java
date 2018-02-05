@@ -27,17 +27,6 @@
 ***********************************************************************************/
 package main;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.Thread.State;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.IntentManager;
 import com.projectswg.common.control.IntentManager.IntentSpeedRecord;
@@ -46,16 +35,26 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.debug.Log.LogLevel;
 import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
 import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
-
 import intents.server.ServerStatusIntent;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
 import services.CoreManager;
 
+import java.io.File;
+import java.lang.Thread.State;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+
 public class ProjectSWG {
 	
-	private static ProjectSWG server;
-	private final Thread mainThread;
+	private static final AtomicBoolean SHUTDOWN_HOOK = new AtomicBoolean(false);
+	private static final AtomicReference<ProjectSWG> INSTANCE = new AtomicReference<>(null);
+	
 	private final Result testResult;
 	private CoreManager manager;
 	private boolean shutdownRequested;
@@ -63,17 +62,44 @@ public class ProjectSWG {
 	private ServerInitStatus initStatus;
 	private int adminServerPort;
 	
-	public static void main(String [] args) throws IOException {
+	public static void main(String [] args) throws InterruptedException {
+		ThreadGroup group = new ThreadGroup("holocore");
+		Thread mainThread = new Thread(group, () -> mainThread(args), "main");
+		Runtime.getRuntime().addShutdownHook(createShutdownHook(mainThread));
+		
+		mainThread.start();
+		mainThread.join();
+		
+		if (!SHUTDOWN_HOOK.get())
+			System.exit(0);
+	}
+	
+	/**
+	 * Returns the time in milliseconds since the server started initialization
+	 * @return the core time represented as a double
+	 */
+	public static long getCoreTime() {
+		return (long) INSTANCE.get().manager.getCoreTime();
+	}
+	
+	/**
+	 * Returns the server's galactic time. This is the official time sent to
+	 * the client and should be used for any official client-time purposes.
+	 * @return the server's galactic time in seconds
+	 */
+	public static long getGalacticTime() {
+		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
+	}
+	
+	private static void mainThread(String [] args) {
 		Result testResult = verifyTestCases();
-		new File("log").mkdirs();
+		File logDirectory = new File("log");
+		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
+			Log.w("Failed to make log directory!");
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
 		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
-		server = new ProjectSWG(testResult);
-		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			forcingShutdown.set(true);
-			server.forceShutdown();
-		}, "main-shutdown-hook"));
+		
+		ProjectSWG server = new ProjectSWG(testResult);
 		try {
 			startupStaticClasses();
 			server.run(args);
@@ -87,26 +113,23 @@ public class ProjectSWG {
 			shutdownStaticClasses();
 			printFinalPswgState();
 			Log.i("Server shut down.");
-			if (!forcingShutdown.get())
-				System.exit(0);
 		}
 	}
 	
-	/**
-	 * Returns the time in milliseconds since the server started initialization
-	 * @return the core time represented as a double
-	 */
-	public static long getCoreTime() {
-		return (long) server.manager.getCoreTime();
-	}
-	
-	/**
-	 * Returns the server's galactic time. This is the official time sent to
-	 * the client and should be used for any official client-time purposes.
-	 * @return the server's galactic time in seconds
-	 */
-	public static long getGalacticTime() {
-		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
+	private static Thread createShutdownHook(Thread mainThread) {
+		Thread currentThread = Thread.currentThread();
+		Thread thread = new Thread(() -> {
+			SHUTDOWN_HOOK.set(true);
+			currentThread.interrupt();
+			mainThread.interrupt();
+			try {
+				mainThread.join();
+			} catch (InterruptedException e) {
+				Log.e(e);
+			}
+		}, "holocore-shutdown-hook");
+		thread.setDaemon(true);
+		return thread;
 	}
 	
 	private static void startupStaticClasses() {
@@ -156,7 +179,6 @@ public class ProjectSWG {
 	}
 	
 	private ProjectSWG(Result testResult) {
-		this.mainThread = Thread.currentThread();
 		this.testResult = testResult;
 		this.manager = null;
 		this.shutdownRequested = false;
@@ -190,12 +212,6 @@ public class ProjectSWG {
 	private void setStatus(ServerStatus status) {
 		this.status = status;
 		new ServerStatusIntent(status).broadcast();
-	}
-	
-	private void forceShutdown() {
-		shutdownRequested = true;
-		mainThread.interrupt();
-		try { mainThread.join(); } catch (InterruptedException e) { }
 	}
 	
 	private boolean verifyUnitTests() {

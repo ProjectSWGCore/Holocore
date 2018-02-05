@@ -84,7 +84,7 @@ class TravelHelper {
 	}
 	
 	public void stop() {
-		travelExecutor.stop(false);
+		travelExecutor.stop(true);
 	}
 	
 	public void addTravelPoint(TravelPoint point) {
