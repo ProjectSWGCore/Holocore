@@ -85,8 +85,8 @@ public class TestZoneRequester {
 		private final AtomicBoolean sentError = new AtomicBoolean(false);
 		
 		@Override
-		public void sendPacket(SWGPacket ... SWGPackets) {
-			if (SWGPackets.length == 1 && SWGPackets[0] instanceof ErrorMessage)
+		public void sendPacket(SWGPacket ... packets) {
+			if (packets.length == 1 && packets[0] instanceof ErrorMessage)
 				sentError.set(true);
 		}
 		

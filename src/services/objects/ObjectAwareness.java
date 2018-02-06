@@ -266,6 +266,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		Log.i("%s with character %s zoned in from %s", player.getUsername(), player.getCharacterName(), p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
+		player.sendBufferedDeltas();
 	}
 	
 	private void recursiveCreateObject(SWGObject obj, Player owner) {

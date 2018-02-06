@@ -64,9 +64,17 @@ public class DeltaBuilder {
 		DeltasMessage message = getBuiltMessage();
 		Player owner = object.getOwner();
 		boolean sent = false;
-		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN) {
-			owner.sendPacket(message);
-			sent = true;
+		if (owner != null) {
+			switch (owner.getPlayerState()) {
+				case ZONED_IN:
+					owner.sendPacket(message);
+					sent = true;
+					break;
+				case ZONING_IN:
+					owner.addBufferedDelta(message);
+					sent = true;
+					break;
+			}
 		}
 		if (num == 3 || num == 6) { // Shared Objects
 			sent = object.sendObservers(message) > 0 || sent;

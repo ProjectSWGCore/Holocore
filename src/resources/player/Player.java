@@ -27,12 +27,15 @@
 ***********************************************************************************/
 package resources.player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.network.packets.SWGPacket;
 
+import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import intents.network.OutboundPacketIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -41,7 +44,8 @@ import services.player.PlayerManager;
 
 public class Player implements Comparable<Player> {
 	
-	private final IntentChain SWGPacketChain;
+	private final List<DeltasMessage> bufferedDeltas;
+	private final IntentChain packetChain;
 	private final Service playerManager;
 	private final Object sendingLock;
 	private final long networkId;
@@ -60,7 +64,8 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Player(Service playerManager, long networkId) {
-		this.SWGPacketChain = new IntentChain();
+		this.bufferedDeltas = new ArrayList<>();
+		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
 		this.sendingLock = new Object();
 		this.networkId = networkId;
@@ -99,7 +104,7 @@ public class Player implements Comparable<Player> {
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
 		if (obj == null)
-			SWGPacketChain.reset();
+			packetChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -173,10 +178,25 @@ public class Player implements Comparable<Player> {
 		return sendingLock;
 	}
 	
-	public void sendPacket(SWGPacket ... SWGPackets) {
+	public void addBufferedDelta(DeltasMessage packet) {
+		synchronized (bufferedDeltas) {
+			bufferedDeltas.add(packet);
+		}
+	}
+	
+	public void sendBufferedDeltas() {
+		DeltasMessage [] packets;
+		synchronized (bufferedDeltas) {
+			packets = bufferedDeltas.toArray(new DeltasMessage[bufferedDeltas.size()]);
+			bufferedDeltas.clear();
+		}
+		sendPacket(packets);
+	}
+	
+	public void sendPacket(SWGPacket ... packets) {
 		synchronized (getSendingLock()) {
-			for (SWGPacket p : SWGPackets) {
-				SWGPacketChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+			for (SWGPacket p : packets) {
+				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
 			}
 		}
 	}

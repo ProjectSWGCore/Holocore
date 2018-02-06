@@ -47,24 +47,20 @@ import resources.server_info.DataManager;
 
 public class BaselineObject {
 	
-	private transient List<SoftReference<Baseline>> baselineData;
+	private transient final List<SoftReference<Baseline>> baselineData;
 	
 	private final BaselineType type;
 	
 	public BaselineObject(BaselineType type) {
 		this.type = type;
-		initBaselineData();
-	}
-	
-	public BaselineType getBaselineType() {
-		return type;
-	}
-	
-	private void initBaselineData() {
 		baselineData = new ArrayList<>(9);
 		for (int i = 0; i < 9; i++) {
 			baselineData.add(null);
 		}
+	}
+	
+	public BaselineType getBaselineType() {
+		return type;
 	}
 	
 	public void parseBaseline(Baseline baseline) {

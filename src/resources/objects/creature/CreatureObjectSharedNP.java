@@ -35,6 +35,7 @@ import java.util.stream.Stream;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
@@ -353,7 +354,7 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public int modifyHealth(int mod, SWGObject target) {
+	public void modifyHealth(int mod, SWGObject target) {
 		synchronized(attributes) {
 			int oldHealth = getHealth();
 			int newHealthValue = oldHealth + mod;
@@ -366,15 +367,11 @@ class CreatureObjectSharedNP implements Persistable {
 				newHealthValue = 0;
 			}
 			
-			int difference = newHealthValue - oldHealth;
-			
 			// We don't send deltas unnecessarily
-			if(difference != 0) {
+			if (newHealthValue != oldHealth) {
 				attributes.set(0, newHealthValue);
 				attributes.sendDeltaMessage(target);
 			}
-
-			return difference;
 		}
 	}
 	
@@ -392,7 +389,7 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public int modifyAction(int mod, SWGObject target) {
+	public void modifyAction(int mod, SWGObject target) {
 		synchronized(attributes) {
 			int oldAction = getAction();
 			int newActionValue = oldAction + mod;
@@ -405,15 +402,11 @@ class CreatureObjectSharedNP implements Persistable {
 				newActionValue = 0;
 			}
 			
-			int difference = newActionValue - oldAction;
-			
 			// We don't send deltas unnecessarily
-			if(difference != 0) {
+			if (newActionValue != oldAction) {
 				attributes.set(2, newActionValue);
 				attributes.sendDeltaMessage(target);
 			}
-
-			return difference;
 		}
 	}
 	

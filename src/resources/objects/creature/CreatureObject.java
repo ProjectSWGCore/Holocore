@@ -797,8 +797,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setHealth(health, this);
 	}
 	
-	public int modifyHealth(int mod) {
-		return creo6.modifyHealth(mod, this);
+	public void modifyHealth(int mod) {
+		creo6.modifyHealth(mod, this);
 	}
 	
 	public void setMaxHealth(int maxHealth) {
@@ -816,8 +816,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setAction(action, this);
 	}
 	
-	public int modifyAction(int mod) {
-		return creo6.modifyAction(mod, this);
+	public void modifyAction(int mod) {
+		creo6.modifyAction(mod, this);
 	}
 	
 	public void setMaxAction(int maxAction) {
