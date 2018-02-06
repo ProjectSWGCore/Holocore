@@ -166,13 +166,13 @@ public final class ExpertiseService extends Service {
 	}
 	
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket SWGPacket = gpi.getPacket();
+		SWGPacket packet = gpi.getPacket();
 		
-		if (!(SWGPacket instanceof ExpertiseRequestMessage)) {
+		if (!(packet instanceof ExpertiseRequestMessage)) {
 			return;
 		}
 		
-		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) SWGPacket;
+		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
 		CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 

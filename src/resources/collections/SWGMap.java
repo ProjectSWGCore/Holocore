@@ -27,20 +27,19 @@
 ***********************************************************************************/
 package resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-
 import resources.objects.SWGObject;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	

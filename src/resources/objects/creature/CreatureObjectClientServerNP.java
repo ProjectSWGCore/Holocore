@@ -27,21 +27,20 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.projectswg.common.data.encodables.tangible.SkillMod;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.player.Player;
+
+import java.util.HashSet;
+import java.util.Set;
 
 class CreatureObjectClientServerNP implements Persistable {
 	
@@ -58,12 +57,12 @@ class CreatureObjectClientServerNP implements Persistable {
 	private long performanceListenTarget = 0;
 	private int totalLevelXp = 0;
 	
-	private SWGSet<String> missionCriticalObjs = new SWGSet<>(4, 13);
+	private final SWGSet<String> missionCriticalObjs = new SWGSet<>(4, 13);
 	
-	private SWGList<Integer> hamEncumbList = new SWGList<>(4, 2);
+	private final SWGList<Integer> hamEncumbList = new SWGList<>(4, 2);
 	
-	private SWGMap<String, SkillMod> skillMods = new SWGMap<>(4, 3, StringType.ASCII);
-	private SWGMap<String, Integer> abilities = new SWGMap<>(4, 14, StringType.ASCII);
+	private final SWGMap<String, SkillMod> skillMods = new SWGMap<>(4, 3, StringType.ASCII);
+	private final SWGMap<String, Integer> abilities = new SWGMap<>(4, 14, StringType.ASCII);
 	
 	public CreatureObjectClientServerNP() {
 		
@@ -195,7 +194,11 @@ class CreatureObjectClientServerNP implements Persistable {
 	public void addAbility(SWGObject target, String ... abilityList) {
 		synchronized (abilities) {
 			for (String abilityName : abilityList) {
-				abilities.merge(abilityName, 1, (a, b) -> a + b);
+				Integer prev = abilities.get(abilityName);
+				if (prev == null)
+					prev = 0;
+				prev += 1;
+				abilities.put(abilityName, prev);
 			}
 			abilities.sendDeltaMessage(target);
 		}
@@ -245,8 +248,8 @@ class CreatureObjectClientServerNP implements Persistable {
 	public void parseBaseline4(NetBuffer buffer) {
 		accelPercent = buffer.getFloat();
 		accelScale = buffer.getFloat();
-		hamEncumbList = SWGList.getSwgList(buffer, 4, 2, Integer.class);
-		skillMods = SWGMap.getSwgMap(buffer, 4, 3, StringType.ASCII, SkillMod.class);
+		hamEncumbList.addAll(SWGList.getSwgList(buffer, 4, 2, Integer.class));
+		skillMods.putAll(SWGMap.getSwgMap(buffer, 4, 3, StringType.ASCII, SkillMod.class));
 		movementPercent = buffer.getFloat();
 		movementScale = buffer.getFloat();
 		performanceListenTarget = buffer.getLong();
@@ -256,8 +259,8 @@ class CreatureObjectClientServerNP implements Persistable {
 		turnScale = buffer.getFloat();
 		walkSpeed = buffer.getFloat();
 		waterModPercent = buffer.getFloat();
-		missionCriticalObjs = SWGSet.getSwgSet(buffer, 4, 13, StringType.ASCII);
-		abilities = SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class);
+		missionCriticalObjs.addAll(SWGSet.getSwgSet(buffer, 4, 13, StringType.ASCII));
+		abilities.putAll(SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class));
 		totalLevelXp = buffer.getInt();
 	}
 	

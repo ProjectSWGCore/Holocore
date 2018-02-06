@@ -137,7 +137,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 				break;
 			case PE_DISAPPEAR:
 				Assert.notNull(creature);
-				disappearObject(creature, true, true);
+				disappearObject(creature);
 				break;
 			case PE_DESTROYED:
 				Assert.notNull(creature);
@@ -158,7 +158,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
 		obj.moveToContainer(null);
-		disappearObject(obj, true, true);
+		disappearObject(obj);
 		obj.setPosition(Terrain.GONE, 0, 0, 0);
 	}
 	
@@ -279,7 +279,10 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleDataTransform(DataTransform dt) {
 		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
-		Assert.test(obj instanceof CreatureObject, "DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+		if (!(obj instanceof CreatureObject)) {
+			Log.w("DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+			return;
+		}
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
 		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
 	}
@@ -287,7 +290,10 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDataTransformWithParent(DataTransformWithParent dt) {
 		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
 		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
-		Assert.test(obj instanceof CreatureObject, "DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+		if (!(obj instanceof CreatureObject)) {
+			Log.w("DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+			return;
+		}
 		if (parent == null) {
 			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
 			return;
@@ -321,8 +327,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
 	}
 	
-	private void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		awarenessHandler.disappearObject(obj, disappearObjects, disappearCustom);
+	private void disappearObject(SWGObject obj) {
+		awarenessHandler.disappearObject(obj, true, true);
 		obj.clearObjectsAware();
 		obj.clearCustomAware(true);
 	}

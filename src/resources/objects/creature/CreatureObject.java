@@ -38,6 +38,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;

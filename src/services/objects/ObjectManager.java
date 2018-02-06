@@ -53,6 +53,8 @@ import services.map.MapManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
+import javax.annotation.CheckForNull;
+
 public class ObjectManager extends Manager {
 	
 	private final ClientBuildoutService clientBuildoutService;
@@ -211,7 +213,7 @@ public class ObjectManager extends Manager {
 			Log.e("Replaced object in object map! Old: %s  New: %s", replaced, object);
 	}
 
-	private SWGObject destroyObject(SWGObject object) {
+	private void destroyObject(SWGObject object) {
 		for (SWGObject slottedObj : object.getSlots().values()) {
 			if (slottedObj != null)
 				destroyObject(slottedObj);
@@ -226,8 +228,6 @@ public class ObjectManager extends Manager {
 				database.save();
 		}
 		objectMap.remove(object.getObjectId());
-		
-		return object;
 	}
 	
 	public static class ObjectLookup {
@@ -238,6 +238,7 @@ public class ObjectManager extends Manager {
 			OBJECT_MANAGER.set(objManager);
 		}
 		
+		@CheckForNull
 		public static SWGObject getObjectById(long id) {
 			return OBJECT_MANAGER.get().getObjectById(id);
 		}

@@ -30,6 +30,7 @@ package resources.player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
@@ -45,6 +46,7 @@ import services.player.PlayerManager;
 public class Player implements Comparable<Player> {
 	
 	private final List<DeltasMessage> bufferedDeltas;
+	private final AtomicBoolean bufferedDeltasSent;
 	private final IntentChain packetChain;
 	private final Service playerManager;
 	private final Object sendingLock;
@@ -65,6 +67,7 @@ public class Player implements Comparable<Player> {
 	
 	public Player(Service playerManager, long networkId) {
 		this.bufferedDeltas = new ArrayList<>();
+		this.bufferedDeltasSent = new AtomicBoolean(false);
 		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
 		this.sendingLock = new Object();
@@ -180,13 +183,17 @@ public class Player implements Comparable<Player> {
 	
 	public void addBufferedDelta(DeltasMessage packet) {
 		synchronized (bufferedDeltas) {
-			bufferedDeltas.add(packet);
+			if (bufferedDeltasSent.get())
+				sendPacket(packet);
+			else
+				bufferedDeltas.add(packet);
 		}
 	}
 	
 	public void sendBufferedDeltas() {
 		DeltasMessage [] packets;
 		synchronized (bufferedDeltas) {
+			bufferedDeltasSent.set(true);
 			packets = bufferedDeltas.toArray(new DeltasMessage[bufferedDeltas.size()]);
 			bufferedDeltas.clear();
 		}
