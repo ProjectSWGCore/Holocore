@@ -58,7 +58,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testContains() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = new GenericCreatureObject(1);
 		GenericCreatureObject objB = new GenericCreatureObject(2);
 		objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
@@ -71,7 +71,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testRemove() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = new GenericCreatureObject(1);
 		GenericCreatureObject objB = new GenericCreatureObject(2);
 		objA.setPosition(Terrain.TATOOINE, 0, 0, 0);
@@ -88,7 +88,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseA() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunk, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 50);
 		testContains(chunk, objA, objB);
@@ -96,7 +96,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseB() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunk, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 25);
 		testContains(chunk, objA, objB);
@@ -104,8 +104,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseC() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunkA, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 50);
 		testContains(chunkB, objA, objB);
@@ -113,8 +113,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseD() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunkA, 1, 0, 0, 0, 100);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 25);
 		testContains(chunkB, objA, objB);
@@ -122,7 +122,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseE() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunk, 1, 0, 0, 0, 25);
 		GenericCreatureObject objB = createCreature(chunk, 2, 50, 0, 0, 50);
 		testContains(chunk, objA, objB);
@@ -130,7 +130,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseF() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunk, 1, 0, 0, 0, 25);
 		createCreature(chunk, 2, 50, 0, 0, 25);
 		testContains(chunk, objA);
@@ -138,8 +138,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseG() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunkA, 1, 0, 0, 0, 25);
 		GenericCreatureObject objB = createCreature(chunkB, 2, 50, 0, 0, 50);
 		testContains(chunkB, objA, objB);
@@ -147,8 +147,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseH() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		GenericCreatureObject objA = createCreature(chunkA, 1, 0, 0, 0, 25);
 		createCreature(chunkB, 2, 50, 0, 0, 25);
 		testContains(chunkB, objA);
@@ -156,7 +156,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellA() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunk.addObject(cell);
@@ -170,7 +170,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellB() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunk.addObject(cell);
@@ -184,8 +184,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellC() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
@@ -199,8 +199,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellD() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
@@ -214,7 +214,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellE() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
@@ -227,7 +227,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellF() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		cell.setPosition(Terrain.TATOOINE, 0, 0, 0);
@@ -240,8 +240,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellG() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
@@ -255,8 +255,8 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testCaseCellH() {
-		TerrainMapChunk chunkA = new TerrainMapChunk(0, 0, 0, 0);
-		TerrainMapChunk chunkB = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunkA = new TerrainMapChunk();
+		TerrainMapChunk chunkB = new TerrainMapChunk();
 		CellObject cell = new CellObject(3);
 		cell.setPrefLoadRange(0);
 		chunkA.addObject(cell);
@@ -270,7 +270,7 @@ public class TestTerrainMapChunk {
 	
 	@Test
 	public void testInstanceNumber() {
-		TerrainMapChunk chunk = new TerrainMapChunk(0, 0, 0, 0);
+		TerrainMapChunk chunk = new TerrainMapChunk();
 		GenericCreatureObject creatureA = new GenericCreatureObject(1);
 		GenericCreatureObject creatureB = new GenericCreatureObject(2);
 		chunk.addObject(creatureA);

@@ -55,14 +55,6 @@ public class AwarenessHandler implements AutoCloseable {
 		}
 	}
 	
-	public boolean isCallbacksDone() {
-		for (TerrainMap map : terrains.values()) {
-			if (!map.isCallbacksDone())
-				return false;
-		}
-		return true;
-	}
-	
 	private void loadTerrainMaps(TerrainMapCallback callback) {
 		for (Terrain t : Terrain.values()) {
 			TerrainMap map = new TerrainMap(t, callback);

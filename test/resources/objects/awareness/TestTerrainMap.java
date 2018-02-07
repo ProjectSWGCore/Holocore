@@ -57,7 +57,6 @@ public class TestTerrainMap {
 			objB.setPosition(Terrain.TATOOINE, 5, 0, 5);
 			map.moveWithinMap(objA); // 0 - Within Range, 1 - Successful Move
 			map.moveWithinMap(objB); // 1 - Within Range, 1 - Successful Move
-			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
@@ -79,7 +78,6 @@ public class TestTerrainMap {
 			map.moveWithinMap(objA); // 1 - Within Range, 1 - Successful Move
 			objB.setPosition(Terrain.TATOOINE, 5, 0, 5);
 			objB.moveToContainer(cell);
-			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
@@ -100,7 +98,6 @@ public class TestTerrainMap {
 			objB.setPosition(Terrain.TATOOINE, -5, 0, -5);
 			map.moveWithinMap(objA); // 0 - Within Range, 1 - Successful Move
 			map.moveWithinMap(objB); // 1 - Within Range, 1 - Successful Move
-			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
@@ -129,7 +126,6 @@ public class TestTerrainMap {
 				map.moveWithinMap(obj);
 			}
 			map.moveWithinMap(creature);
-			awaitCallbacks(map, 1000);
 			Assert.assertEquals(0, withinRange.size());
 			Assert.assertTrue("TEST-ONLY-WITHIN-RANGE", onlyWithinRange.get());
 		} finally {
@@ -139,17 +135,6 @@ public class TestTerrainMap {
 	
 	private static List<SWGObject> getMosEisleyObjects() {
 		return TestBuildoutObjectList.getInstance().getMosEisleyObjects();
-	}
-	
-	private static void awaitCallbacks(TerrainMap map, long timeout) {
-		try {
-			while (!map.isCallbacksDone() && timeout > 0) {
-				Thread.sleep(1);
-				timeout--;
-			}
-		} catch (InterruptedException e) {
-			Log.e(e);
-		}
 	}
 	
 }

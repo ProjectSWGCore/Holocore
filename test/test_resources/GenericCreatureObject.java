@@ -27,27 +27,24 @@
  ***********************************************************************************/
 package test_resources;
 
-import java.util.Map.Entry;
-
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.packets.SWGPacket;
-
 import intents.object.ObjectCreatedIntent;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import services.objects.ObjectCreator;
+
+import java.util.Map.Entry;
 
 public class GenericCreatureObject extends CreatureObject {
 	
@@ -83,22 +80,20 @@ public class GenericCreatureObject extends CreatureObject {
 		createInventoryObject("object/tangible/mission_bag/shared_mission_bag.iff");
 	}
 	
-	private TangibleObject createTangible(ContainerPermissionsType type, String template) {
+	private void createTangible(ContainerPermissionsType type, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		Assert.test(obj instanceof TangibleObject);
 		obj.setContainerPermissions(type);
 		obj.moveToContainer(this);
-		new ObjectCreatedIntent(obj).broadcast();
-		return (TangibleObject) obj;
+		ObjectCreatedIntent.broadcast(obj);
 	}
 	
 	/** Creates an object with inventory-level world visibility (only the owner) */
-	private TangibleObject createInventoryObject(String template) {
-		return createTangible(ContainerPermissionsType.INVENTORY, template);
+	private void createInventoryObject(String template) {
+		createTangible(ContainerPermissionsType.INVENTORY, template);
 	}
 	
 	private void handlePostCreation() {
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(Race.HUMAN_MALE.getFilename(), true);
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(Race.HUMAN_MALE.getFilename());
 		addObjectAttributes(attributes);
 		createObjectSlots();
 		Object got = getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
@@ -128,7 +123,7 @@ public class GenericCreatureObject extends CreatureObject {
 	private void createObjectSlots() {
 		if (getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME));
 			if (descriptor == null)
 				return;
 
@@ -139,7 +134,7 @@ public class GenericCreatureObject extends CreatureObject {
 		
 		if (getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME));
 			if (arrangementData == null)
 				return;
 

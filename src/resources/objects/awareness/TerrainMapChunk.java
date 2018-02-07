@@ -27,31 +27,22 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
-import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
-
 class TerrainMapChunk {
 	
 	private final Set<SWGObject> objects;
-	private final int minX;
-	private final int minZ;
-	private final int maxX;
-	private final int maxZ;
 	
-	public TerrainMapChunk(int minX, int minZ, int maxX, int maxZ) {
+	public TerrainMapChunk() {
 		this.objects = new CopyOnWriteArraySet<>();
-		this.minX = minX;
-		this.minZ = minZ;
-		this.maxX = maxX;
-		this.maxZ = maxZ;
 	}
 	
 	public void addObject(SWGObject obj) {
@@ -66,42 +57,43 @@ class TerrainMapChunk {
 		return objects.contains(obj);
 	}
 	
-	public boolean isWithinBounds(SWGObject obj) {
-		int x = obj.getTruncX();
-		int z = obj.getTruncZ();
-		return minX <= x && minZ <= z && maxX >= x && maxZ >= z;
-	}
-	
 	public List<SWGObject> getWithinAwareness(SWGObject obj) {
-		List<SWGObject> withinRange = new ArrayList<>(objects.size() / 8);
+		List<SWGObject> withinRange = new ArrayList<>(objects.size());
 		getWithinAwareness(obj, withinRange);
 		return withinRange;
 	}
 	
 	public void getWithinAwareness(SWGObject obj, Collection<SWGObject> withinRange) {
+		int truncX = obj.getTruncX();
+		int truncZ = obj.getTruncZ();
+		int instance = obj.getInstanceLocation().getInstanceNumber();
 		int loadRange = (int) obj.getLoadRange();
-		for (SWGObject test : objects) {
-			if (isValidWithinRange(obj, test, loadRange))
-				withinRange.add(test);
-		}
-	}
-	
-	private static boolean isValidWithinRange(SWGObject obj, SWGObject inRange, int range) {
-		if (!isWithinRange(obj, inRange, range))
-			return false;
-		if (inRange.getBaselineType() == BaselineType.CREO && ((CreatureObject) inRange).isLoggedOutPlayer())
-			return false;
-		if (obj.equals(inRange))
-			return false;
-		return obj.getInstanceLocation().getInstanceNumber() == inRange.getInstanceLocation().getInstanceNumber();
-	}
-	
-	private static boolean isWithinRange(SWGObject a, SWGObject b, int range) {
-		return square(a.getTruncX()-b.getTruncX()) + square(a.getTruncZ()-b.getTruncZ()) <= square(Math.max((int) b.getLoadRange(), range));
-	}
-	
-	private static int square(int x) {
-		return x * x;
+		objects.forEach(test -> {
+			// Calculate distance
+			int dTmp = truncX - test.getTruncX();
+			int d = dTmp * dTmp;
+			dTmp = truncZ - test.getTruncZ();
+			d = (int) Math.sqrt(d + dTmp * dTmp);
+			
+			if (d <= loadRange || d <= (int) test.getLoadRange()) {
+				if (test.getBaselineType() != BaselineType.CREO || !((CreatureObject) test).isLoggedOutPlayer()) {
+					if (!obj.equals(test)) {
+						if (instance == test.getInstanceLocation().getInstanceNumber()) {
+							withinRange.add(test);
+						}
+					}
+				}
+			}
+//			if (d > obj.getLoadRange() && d > (int) test.getLoadRange())
+//				return;
+//			if (test.getBaselineType() == BaselineType.CREO && ((CreatureObject) test).isLoggedOutPlayer())
+//				return;
+//			if (obj.equals(test))
+//				return;
+//			if (obj.getInstanceLocation().getInstanceNumber() != test.getInstanceLocation().getInstanceNumber())
+//				return;
+//			withinRange.add(test);
+		});
 	}
 	
 }

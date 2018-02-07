@@ -66,20 +66,20 @@ public class ObjectAware {
 		}
 	}
 	
-	public boolean addObjectAware(ObjectAware aware) {
-		return objectsAware.add(aware.getRawObjectsAware());
+	public void addObjectAware(ObjectAware aware) {
+		objectsAware.add(aware.getRawObjectsAware());
 	}
 	
-	public boolean removeObjectAware(ObjectAware aware) {
-		return objectsAware.remove(aware.getRawObjectsAware());
+	public void removeObjectAware(ObjectAware aware) {
+		objectsAware.remove(aware.getRawObjectsAware());
 	}
 	
-	public boolean addCustomAware(ObjectAware aware) {
-		return customAware.add(aware.getRawCustomAware());
+	public void addCustomAware(ObjectAware aware) {
+		customAware.add(aware.getRawCustomAware());
 	}
 	
-	public boolean removeCustomAware(ObjectAware aware) {
-		return customAware.remove(aware.getRawCustomAware());
+	public void removeCustomAware(ObjectAware aware) {
+		customAware.remove(aware.getRawCustomAware());
 	}
 	
 	public boolean isObjectAware(SWGObject aware) {
@@ -99,14 +99,16 @@ public class ObjectAware {
 	}
 	
 	public Set<SWGObject> getAware() {
-		Set<SWGObject> aware = objectsAware.getAware();
-		aware.addAll(customAware.getAware());
+		Set<SWGObject> aware = new HashSet<>();
+		objectsAware.getAware(aware);
+		customAware.getAware(aware);
 		return aware;
 	}
 	
 	public Set<Player> getObservers() {
-		Set<Player> observers = objectsAware.getObservers();
-		observers.addAll(customAware.getObservers());
+		Set<Player> observers = new HashSet<>();
+		objectsAware.getObservers(observers);
+		customAware.getObservers(observers);
 		return observers;
 	}
 	

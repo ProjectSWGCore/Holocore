@@ -86,7 +86,7 @@ public final class ExpertiseService extends Service {
 	
 	private void loadTrees() {
 		long startTime = StandardLog.onStartLoad("expertise trees");
-		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise_trees.iff", false);
+		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise_trees.iff");
 		int rowCount = expertiseTable.getRowCount();
 		
 		for (int i = 0; i < rowCount; i++) {
@@ -98,7 +98,7 @@ public final class ExpertiseService extends Service {
 	
 	private boolean loadExpertise() {
 		long startTime = StandardLog.onStartLoad("expertise skills");
-		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise.iff", false);
+		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise.iff");
 		int rowCount = expertiseTable.getRowCount();
 		
 		for (int i = 0; i < rowCount; i++) {
@@ -154,7 +154,7 @@ public final class ExpertiseService extends Service {
 	}
 	
 	private void loadPointsForLevel() {
-		DatatableData playerLevelTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/player_level.iff", false);
+		DatatableData playerLevelTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/player_level.iff");
 		int points = 0;
 		
 		for (int i = 0; i < playerLevelTable.getRowCount(); i++) {

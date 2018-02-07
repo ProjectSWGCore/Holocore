@@ -48,7 +48,7 @@ public class TestAware {
 		GenericCreatureObject creatureB = new GenericCreatureObject(2);
 		Aware a = new Aware(creatureA);
 		Aware b = new Aware(creatureB);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Assert.assertTrue(a.contains(creatureB));
 		Assert.assertTrue(b.contains(creatureA));
 	}
@@ -59,10 +59,10 @@ public class TestAware {
 		GenericCreatureObject creatureB = new GenericCreatureObject(2);
 		Aware a = new Aware(creatureA);
 		Aware b = new Aware(creatureB);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Assert.assertTrue(a.contains(creatureB));
 		Assert.assertTrue(b.contains(creatureA));
-		Assert.assertTrue(a.remove(b));
+		a.remove(b);
 		Assert.assertFalse(a.contains(creatureB));
 		Assert.assertFalse(b.contains(creatureA));
 	}
@@ -73,7 +73,7 @@ public class TestAware {
 		GenericCreatureObject creatureB = new GenericCreatureObject(2);
 		Aware a = new Aware(creatureA);
 		Aware b = new Aware(creatureB);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Set<SWGObject> aware = a.getAware();
 		Assert.assertEquals(1, aware.size());
 		Assert.assertTrue(aware.contains(creatureB));
@@ -85,7 +85,7 @@ public class TestAware {
 		GenericCreatureObject creatureB = new GenericCreatureObject(2);
 		Aware a = new Aware(creatureA);
 		Aware b = new Aware(creatureB);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Assert.assertTrue(a.contains(creatureB));
 		Assert.assertTrue(b.contains(creatureA));
 		Set<Player> observers = a.getObservers();
@@ -102,7 +102,7 @@ public class TestAware {
 		Aware b = new Aware(creatureB);
 		Aware c = new Aware(creatureC);
 		c.setParent(a);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Set<SWGObject> aware = c.getAware();
 		Assert.assertEquals(1, aware.size());
 		Assert.assertTrue(aware.contains(creatureB));
@@ -118,7 +118,7 @@ public class TestAware {
 		Aware c = new Aware(creatureC);
 		cellA.addObject(creatureC);
 		c.setParent(a);
-		Assert.assertTrue(a.add(b));
+		a.add(b);
 		Assert.assertTrue(a.contains(creatureB));
 		Assert.assertTrue(b.contains(cellA));
 		Set<Player> observers = c.getObservers();

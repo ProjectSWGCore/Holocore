@@ -27,18 +27,12 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map.Entry;
-
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -60,33 +54,31 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
 
+import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicLong;
+
 public final class ObjectCreator {
 	
-	private static final Object OBJECT_ID_MUTEX = new Object();
-	private static long nextObjectId = 1;
+	private static final AtomicLong OBJECT_ID = new AtomicLong(0);
 	
 	private static void updateMaxObjectId(long objectId) {
-		synchronized (OBJECT_ID_MUTEX) {
-			if (objectId >= nextObjectId)
-				nextObjectId = objectId+1;
-		}
+		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
 	}
 	
 	private static long getNextObjectId() {
-		synchronized (OBJECT_ID_MUTEX) {
-			return nextObjectId++;
-		}
+		return OBJECT_ID.incrementAndGet();
 	}
 	
+	@Nonnull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
-		Assert.test(template.startsWith("object/") && template.endsWith(".iff"), "Invalid template for createObjectFromTemplate: '" + template + "'");
+		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + "'";
 		template = ClientFactory.formatToSharedFile(template);
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template);
 		if (attributes == null)
-			return null;
+			throw new ObjectCreationException(template, "Template not found: " + template);
 		SWGObject obj = createObjectFromType(objectId, template, attributes);
-		if (obj == null)
-			return null;
 		obj.setTemplate(template);
 
 		handlePostCreation(obj, attributes);
@@ -94,36 +86,37 @@ public final class ObjectCreator {
 		return obj;
 	}
 	
+	@Nonnull
 	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
 		T obj;
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			Log.e(e);
-			obj = null;
+			throw new ObjectCreationException(template, e.getClass() + ": " + e.getMessage());
 		}
-		if (obj == null)
-			return null;
 		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
 
-		handlePostCreation(obj, (ObjectData) ClientFactory.getInfoFromFile(template, true));
+		handlePostCreation(obj, (ObjectData) ClientFactory.getInfoFromFile(template));
 		updateMaxObjectId(objectId);
 		return obj;
 	}
 	
+	@Nonnull
 	public static SWGObject createObjectFromTemplate(String template) {
 		return createObjectFromTemplate(getNextObjectId(), template);
 	}
 	
+	@Nonnull
 	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
 		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
+	@Nonnull
 	private static SWGObject createObjectFromType(long objectId, String template, ObjectData attributes) {
 		Integer gotInt = (Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
 		if (gotInt == null)
-			return null;
+			throw new ObjectCreationException(template, "No GOT");
 		
 		GameObjectType got = GameObjectType.getTypeFromId(gotInt);
 		BaselineType baseline = got.getBaselineType();
@@ -150,12 +143,11 @@ public final class ObjectCreator {
 			case WAYP:	return new WaypointObject(objectId);
 			case WEAO:	return new WeaponObject(objectId);
 			/* Unimplemented baselines */
-			default:
-				Log.w("Could not create unimplemented baseline: %s", baseline);
-				return null;
+			default:	throw new ObjectCreationException(template, "Unimplemented baseline: " + baseline);
 		}
 	}
 	
+	@Nonnull
 	private static SWGObject createSlowFromType(long objectId, String template) {
 		String type = getObjectType(template);
 		switch (type) {
@@ -178,7 +170,7 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						Log.e("Unknown type: " + type); return null;
+			default:						throw new ObjectCreationException(template, "Unknown type: " + type);
 		}
 	}
 	
@@ -212,7 +204,7 @@ public final class ObjectCreator {
 	private static void createObjectSlots(SWGObject object) {
 		if (object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME));
 			if (descriptor == null)
 				return;
 
@@ -223,7 +215,7 @@ public final class ObjectCreator {
 		
 		if (object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME));
 			if (arrangementData == null)
 				return;
 
@@ -236,6 +228,14 @@ public final class ObjectCreator {
 	 */
 	private static String getObjectType(String template) {
 		return template.substring(7, template.indexOf('/', 8));
+	}
+	
+	public static class ObjectCreationException extends RuntimeException {
+		
+		public ObjectCreationException(String template, String error) {
+			super("Could not create '" + template + "'. " + error);
+		}
+		
 	}
 	
 }

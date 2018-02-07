@@ -67,7 +67,7 @@ public final class SkillManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		DatatableData roleIconTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/role/role.iff", false);
+		DatatableData roleIconTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/role/role.iff");
 		
 		for (int i = 0; i < roleIconTable.getRowCount(); i++) {
 			int iconIndex = (int) roleIconTable.getCell(i, 0);
@@ -84,7 +84,7 @@ public final class SkillManager extends Manager {
 	}
 	
 	private void loadSkills() {
-		DatatableData skillsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill/skills.iff", false);
+		DatatableData skillsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill/skills.iff");
 		
 		for (int i = 0; i < skillsTable.getRowCount(); i++) {
 			String skillName = (String) skillsTable.getCell(i, 0);

@@ -74,7 +74,7 @@ public class BuildingObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject object) {
 		super.addObject(object);
-		Assert.test(object instanceof CellObject, "Object added to building is not a cell!");
+		assert object instanceof CellObject : "Object added to building is not a cell!";
 		
 		CellObject cell = (CellObject) object;
 		Assert.test(cell.getNumber() > 0, "Cell Number must be greater than 0!");
@@ -123,7 +123,7 @@ public class BuildingObject extends TangibleObject {
 			if (portalFile == null || portalFile.isEmpty())
 				return null;
 			
-			portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+			portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
 			this.portalLayoutData = new WeakReference<>(portalLayoutData);
 		}
 		Assert.test(portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0, "Invalid portal layout data!");

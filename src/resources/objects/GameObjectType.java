@@ -326,9 +326,6 @@ public enum GameObjectType {
 	}
 	
 	public static GameObjectType getTypeFromId(int id) {
-		GameObjectType type = TYPE_MAP.get(id);
-		if (type != null)
-			return type;
-		return GOT_UNKNOWN;
+		return TYPE_MAP.getOrDefault(id, GOT_UNKNOWN);
 	}
 }

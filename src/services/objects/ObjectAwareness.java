@@ -100,19 +100,15 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	@Override
 	public void onWithinRange(SWGObject obj, SWGObject inRange) {
-		Assert.notNull(obj);
-		Assert.notNull(inRange);
-		Assert.isNull(obj.getParent());
-		Assert.isNull(inRange.getParent());
-		Assert.notNull(obj.getTerrain());
-		Assert.notNull(inRange.getTerrain());
+		assert obj != null && inRange != null;
+		assert obj.getParent() == null && inRange.getParent() == null;
+		assert obj.getTerrain() != null && inRange.getTerrain() != null;
 		obj.addObjectAware(inRange);
 	}
 	
 	@Override
 	public void onOutOfRange(SWGObject obj, SWGObject outRange) {
-		Assert.notNull(obj);
-		Assert.notNull(outRange);
+		assert obj != null && outRange != null;
 		obj.removeObjectAware(outRange);
 	}
 	

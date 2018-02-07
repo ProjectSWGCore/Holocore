@@ -40,6 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
@@ -105,6 +106,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private float		complexity		= 1;
 	private int     	containerType	= 0;
 	private double		prefLoadRange	= 200;
+	private double		cachedLoadRange	= -1;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
 	
@@ -125,6 +127,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.setSlotArrangement(getArrangementId(object));
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.add(object);
+			cachedLoadRange = -1;
 			
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() + object.getVolume() + 1);
@@ -145,6 +148,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object);
+			cachedLoadRange = -1;
 			
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() - object.getVolume() - 1);
@@ -340,8 +344,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setTerrain(Terrain terrain) {
 		if (parent != null)
 			Assert.test(terrain == parent.getTerrain(), "Attempted to set different terrain from parent!");
-		location.setTerrain(terrain);
-		updateChildrenTerrain();
+		if (location.getTerrain() != terrain) {
+			location.setTerrain(terrain);
+			updateChildrenTerrain();
+		}
 	}
 	
 	public void setPosition(Terrain terrain, double x, double y, double z) {
@@ -369,9 +375,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void updateChildrenTerrain() {
 		Terrain terrain = getTerrain();
-		for (SWGObject child : containedObjects) {
-			child.setTerrain(terrain);
-		}
+		containedObjects.forEach(child -> child.setTerrain(terrain));
 		for (SWGObject child : slots.values()) {
 			if (child != null)
 				child.setTerrain(terrain);
@@ -616,15 +620,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public double getLoadRange() {
-		double bubble = getPrefLoadRange();
-		for (SWGObject contained : containedObjects) {
-			double x = contained.getX();
-			double z = contained.getZ();
-			double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
-			if (dist > bubble)
-				bubble = dist;
-		}
-		return bubble;
+		if (cachedLoadRange != -1)
+			return cachedLoadRange;
+		AtomicReference<Double> max = new AtomicReference<>(prefLoadRange);
+		containedObjects.forEach(contained -> {
+			double dist = Math.sqrt(contained.getTruncX()*contained.getTruncX() + contained.getTruncZ()*contained.getTruncZ()) + contained.getLoadRange();
+			max.updateAndGet(m -> m > dist ? m : dist);
+		});
+		cachedLoadRange = max.get();
+		return max.get();
 	}
 	
 	public double getChildRadius() {
@@ -724,21 +728,19 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void addObjectAware(SWGObject aware) {
-		if (awareness.addObjectAware(aware.getAwareness())) {
-			createObject(aware);
-			aware.createObject(this);
-			onAddObjectAware(aware);
-			aware.onAddObjectAware(this);
-		}
+		awareness.addObjectAware(aware.getAwareness());
+		createObject(aware);
+		aware.createObject(this);
+		onAddObjectAware(aware);
+		aware.onAddObjectAware(this);
 	}
 	
 	public void removeObjectAware(SWGObject aware) {
-		if (awareness.removeObjectAware(aware.getAwareness())) {
-			destroyObject(aware);
-			aware.destroyObject(this);
-			onRemoveObjectAware(aware);
-			aware.onRemoveObjectAware(this);
-		}
+		awareness.removeObjectAware(aware.getAwareness());
+		destroyObject(aware);
+		aware.destroyObject(this);
+		onRemoveObjectAware(aware);
+		aware.onRemoveObjectAware(this);
 	}
 	
 	/**
@@ -837,17 +839,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void addCustomAware(SWGObject aware) {
-		if (awareness.addCustomAware(aware.getAwareness())) {
-			createObject(aware);
-			aware.createObject(this);
-		}
+		awareness.addCustomAware(aware.getAwareness());
+		createObject(aware);
+		aware.createObject(this);
 	}
 	
 	public void removeCustomAware(SWGObject aware) {
-		if (awareness.removeCustomAware(aware.getAwareness())) {
-			destroyObject(aware);
-			aware.destroyObject(this);
-		}
+		awareness.removeCustomAware(aware.getAwareness());
+		destroyObject(aware);
+		aware.destroyObject(this);
 	}
 	
 	public boolean isCustomAware(SWGObject aware) {
@@ -955,7 +955,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public boolean equals(Object o) {
-		return o instanceof SWGObject && getObjectId() == ((SWGObject) o).getObjectId();
+		return o instanceof SWGObject && objectId == ((SWGObject) o).objectId;
 	}
 	
 	@Override

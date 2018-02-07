@@ -93,11 +93,9 @@ public class TestAwarenessHandler {
 			GenericCreatureObject creature = new GenericCreatureObject(1);
 			initAwareness(awareness, callback);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 			callback.set(0, 0, 0, 0);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(0, 0, 1, 0);
 		}
 	}
@@ -109,15 +107,12 @@ public class TestAwarenessHandler {
 			initAwareness(awareness, callback);
 			GenericCreatureObject creature = new GenericCreatureObject(1);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 			callback.set(0, 0, 0, 0);
 			awareness.moveObject(creature, new Location(0, 0, 0, Terrain.TATOOINE));
-			awaitCallbacks(awareness);
 			callback.testAssert(0, WITHIN_RANGE.size(), 1, 0);
 			callback.set(0, 0, 0, 0);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 		}
 	}
@@ -135,16 +130,13 @@ public class TestAwarenessHandler {
 			Assert.assertNotNull("Starport is null!", starport);
 			initAwareness(awareness, callback);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 			callback.set(0, 0, 0, 0);
 			awareness.moveObject(creature, CREATURE_LOCATION);
-			awaitCallbacks(awareness);
 			callback.testAssert(0, 0, 1, 0);
 			callback.set(0, 0, 0, 0);
 			creature.setPosition(Terrain.TATOOINE, 0, 0, 0);
 			awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
-			awaitCallbacks(awareness);
 			callback.testAssert(0, 0, 0, 0);
 		}
 	}
@@ -154,20 +146,7 @@ public class TestAwarenessHandler {
 		for (SWGObject obj : EISLEY_OBJECTS) {
 			awareness.moveObject(obj, obj.getLocation());
 		}
-		awaitCallbacks(awareness);
 		callback.set(0, 0, 0, 0);
-	}
-	
-	private void awaitCallbacks(AwarenessHandler awareness) {
-		try {
-			long timeout = 5000;
-			while (!awareness.isCallbacksDone() && timeout > 0) {
-				Thread.sleep(1);
-				timeout--;
-			}
-		} catch (InterruptedException e) {
-			Log.e(e);
-		}
 	}
 	
 	private static class MapCallbackRealistic extends MapCallback {
