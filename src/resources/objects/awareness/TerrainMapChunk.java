@@ -75,24 +75,19 @@ class TerrainMapChunk {
 			dTmp = truncZ - test.getTruncZ();
 			d = (int) Math.sqrt(d + dTmp * dTmp);
 			
+			// Must be within load range
 			if (d <= loadRange || d <= (int) test.getLoadRange()) {
+				// Can't be a logged out player
 				if (test.getBaselineType() != BaselineType.CREO || !((CreatureObject) test).isLoggedOutPlayer()) {
+					// Can't be the same object
 					if (!obj.equals(test)) {
+						// Must be within the same instance number
 						if (instance == test.getInstanceLocation().getInstanceNumber()) {
 							withinRange.add(test);
 						}
 					}
 				}
 			}
-//			if (d > obj.getLoadRange() && d > (int) test.getLoadRange())
-//				return;
-//			if (test.getBaselineType() == BaselineType.CREO && ((CreatureObject) test).isLoggedOutPlayer())
-//				return;
-//			if (obj.equals(test))
-//				return;
-//			if (obj.getInstanceLocation().getInstanceNumber() != test.getInstanceLocation().getInstanceNumber())
-//				return;
-//			withinRange.add(test);
 		});
 	}
 	
