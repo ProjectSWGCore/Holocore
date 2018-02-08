@@ -253,19 +253,17 @@ public class CombatManager extends Manager {
 		}
 		
 		// Spawn delay egg object
-		String delayAttackEggTemplate = combatCommand.getDelayAttackEggTemplate();
-		
-		SWGObject delayEgg = delayAttackEggTemplate.endsWith("generic_egg_small.iff") ? null : ObjectCreator
-				.createObjectFromTemplate(ClientFactory.formatToSharedFile(delayAttackEggTemplate));
+		String eggTemplate = combatCommand.getDelayAttackEggTemplate();
+		SWGObject delayEgg = eggTemplate.endsWith("generic_egg_small.iff") ? null : ObjectCreator.createObjectFromTemplate(eggTemplate);
 		
 		if (delayEgg != null) {
 			delayEgg.setLocation(eggLocation);
 			delayEgg.moveToContainer(eggParent);
-			new ObjectCreatedIntent(delayEgg).broadcast();
+			ObjectCreatedIntent.broadcast(delayEgg);
 		}
 		
-		executor.execute((long) (combatCommand
-				.getInitialDelayAttackInterval() * 1000), () -> delayEggLoop(delayEgg, source, target, combatCommand, 1));
+		long interval = (long) (combatCommand.getInitialDelayAttackInterval() * 1000);
+		executor.execute(interval, () -> delayEggLoop(delayEgg, source, target, combatCommand, 1));
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
@@ -280,8 +278,8 @@ public class CombatManager extends Manager {
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
-			executor.execute((long) (combatCommand
-					.getInitialDelayAttackInterval() * 1000), () -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1));
+			long interval = (long) (combatCommand.getDelayAttackInterval() * 1000);
+			executor.execute(interval, () -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1));
 		} else if (delayEgg != null) {
 			// The delayed attack has ended - destroy the egg
 			new DestroyObjectIntent(delayEgg).broadcast();
@@ -307,12 +305,16 @@ public class CombatManager extends Manager {
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
 		
 		// TODO line of sight checks between the explosive and each target
-		Set<CreatureObject> targets = objectsToCheck.stream().filter(target -> target instanceof CreatureObject)
-				.map(target -> (CreatureObject) target).filter(source::isAttackable)
-				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange).collect(Collectors.toSet());
+		Set<CreatureObject> targets = objectsToCheck.stream()
+				.filter(CreatureObject.class::isInstance)
+				.map(CreatureObject.class::cast)
+				.filter(source::isAttackable)
+				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS)
+				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
+				.collect(Collectors.toSet());
 		
 		// This way, mines or grenades won't try to harm themselves
-		if (includeOrigin && !(origin instanceof StaticObject) && !(origin instanceof WeaponObject))
+		if (includeOrigin && origin instanceof CreatureObject)
 			targets.add((CreatureObject) origin);
 		
 		doCombat(source, targets, weapon, info, command);
