@@ -1,30 +1,29 @@
 /***********************************************************************************
-* Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
-*                                                                                  *
-* ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
-* July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
-* Our goal is to create an emulator which will provide a server for players to     *
-* continue playing a game similar to the one they used to play. We are basing      *
-* it on the final publish of the game prior to end-game events.                    *
-*                                                                                  *
-* This file is part of Holocore.                                                   *
-*                                                                                  *
-* -------------------------------------------------------------------------------- *
-*                                                                                  *
-* Holocore is free software: you can redistribute it and/or modify                 *
-* it under the terms of the GNU Affero General Public License as                   *
-* published by the Free Software Foundation, either version 3 of the               *
-* License, or (at your option) any later version.                                  *
-*                                                                                  *
-* Holocore is distributed in the hope that it will be useful,                      *
-* but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
-* GNU Affero General Public License for more details.                              *
-*                                                                                  *
-* You should have received a copy of the GNU Affero General Public License         *
-* along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
-*                                                                                  *
-***********************************************************************************/
+ * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package main;
 
 import com.projectswg.common.concurrency.Delay;
@@ -37,9 +36,6 @@ import com.projectswg.common.debug.Log.LogLevel;
 import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
 import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
 import intents.server.ServerStatusIntent;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
 import services.CoreManager;
@@ -56,7 +52,6 @@ public class ProjectSWG {
 	private static final AtomicBoolean SHUTDOWN_HOOK = new AtomicBoolean(false);
 	private static final AtomicReference<ProjectSWG> INSTANCE = new AtomicReference<>(null);
 	
-	private final Result testResult;
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	private ServerStatus status;
@@ -93,14 +88,13 @@ public class ProjectSWG {
 	}
 	
 	private static void mainThread(String [] args) {
-		Result testResult = verifyTestCases();
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
 		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
 		
-		ProjectSWG server = new ProjectSWG(testResult);
+		ProjectSWG server = new ProjectSWG();
 		try {
 			startupStaticClasses();
 			server.run(args);
@@ -171,16 +165,7 @@ public class ProjectSWG {
 		}
 	}
 	
-	private static Result verifyTestCases() {
-		try {
-			return JUnitCore.runClasses(TestAll.class);
-		} catch (Throwable t) {
-			throw new CoreException("Exception when starting test cases", t);
-		}
-	}
-	
-	private ProjectSWG(Result testResult) {
-		this.testResult = testResult;
+	private ProjectSWG() {
 		this.manager = null;
 		this.shutdownRequested = false;
 		this.status = ServerStatus.OFFLINE;
@@ -190,8 +175,6 @@ public class ProjectSWG {
 	
 	private void run(String [] args) {
 		setupParameters(args);
-		if (!verifyUnitTests())
-			return;
 		create();
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
@@ -213,21 +196,6 @@ public class ProjectSWG {
 	private void setStatus(ServerStatus status) {
 		this.status = status;
 		new ServerStatusIntent(status).broadcast();
-	}
-	
-	private boolean verifyUnitTests() {
-		if (testResult.getFailureCount() > 0) {
-			int passCount = testResult.getRunCount()-testResult.getFailureCount();
-			int runCount = testResult.getRunCount();
-			for (Failure failure : testResult.getFailures()) {
-				Log.e("Failed test. Class: %s  Method: %s", failure.getDescription().getTestClass(), failure.getDescription().getMethodName());
-			}
-			Log.e("Passed %d of %d unit tests in %.3fms - aborting start", passCount, runCount, testResult.getRunTime() / 1000.0);
-			return false;
-		}
-		int runCount = testResult.getRunCount();
-		Log.i("Passed %d of %d unit tests in %.3fms", runCount, runCount, testResult.getRunTime() / 1000.0);
-		return true;
 	}
 	
 	private void create() {
