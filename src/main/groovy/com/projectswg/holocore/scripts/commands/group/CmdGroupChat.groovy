@@ -32,6 +32,7 @@ import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.CoreManager
 import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.utilities.IntentFactory
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	if (args.isEmpty()) {
@@ -42,7 +43,7 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 	def groupObjectId = player.getCreatureObject().getGroupId()
 
 	if (groupObjectId == 0) {
-		// If their group object ID is 0, they're ungrouped. Ungrouped players can't send group messages.
+		IntentFactory.sendSystemMessage(player, "You aren't in a group!")
 		return
 	}
 

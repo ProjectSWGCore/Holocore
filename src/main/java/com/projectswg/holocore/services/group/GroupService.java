@@ -365,7 +365,7 @@ public class GroupService extends Service {
 		new ObjectCreatedIntent(group).broadcast();
 		
 		String galaxy = leader.getGalaxyName();
-		new ChatRoomUpdateIntent(new ChatAvatar(leader.getCharacterChatName()), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
+		new ChatRoomUpdateIntent(leader, new ChatAvatar(leader.getCharacterChatName()), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
 		sendSystemMessage(leader, "formed_self", "TT", leader.getCreatureObject().getObjectId());
 		onJoinGroup(member.getCreatureObject(), group);
 	}

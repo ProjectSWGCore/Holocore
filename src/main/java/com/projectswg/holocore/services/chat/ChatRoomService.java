@@ -131,6 +131,7 @@ public class ChatRoomService extends Service {
 		switch (crui.getUpdateType()) {
 			case CREATE:
 				chatRoomHandler.createRoom(crui.getAvatar(), crui.isPublic(), false, crui.getPath(), crui.getTitle(), false);
+				chatRoomHandler.enterChatChannel(crui.getPlayer(), crui.getPath(), crui.isIgnoreInvitation());
 				break;
 			case DESTROY:
 				chatRoomHandler.notifyDestroyRoom(crui.getAvatar(), crui.getPath(), 0);

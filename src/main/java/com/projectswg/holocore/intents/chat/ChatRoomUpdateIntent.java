@@ -75,8 +75,9 @@ public class ChatRoomUpdateIntent extends Intent {
 		this.ignoreInvitation = ignoreInvitation;
 	}
 	
-	public ChatRoomUpdateIntent(ChatAvatar avatar, String path, String title, boolean isPublic) {
+	public ChatRoomUpdateIntent(Player player, ChatAvatar avatar, String path, String title, boolean isPublic) {
 		this(path, title, null, avatar, null, UpdateType.CREATE);
+		this.player = player;
 		this.isPublic = isPublic;
 	}
 	
