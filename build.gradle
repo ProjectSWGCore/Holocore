@@ -11,11 +11,14 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '2.0.2'
 	id 'application'
 	id 'java'
+	id 'groovy'
 	id 'idea'
 	id 'findbugs'
 }
 
-mainClassName  = 'main.ProjectSWG'
+mainClassName  = 'com.projectswg.holocore.ProjectSWG'
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
 
 test {
 	testLogging {
@@ -26,11 +29,13 @@ test {
 			println 'Tests run: ('+tr.getTestCount()+'), Failures: ('+tr.getFailedTestCount()+')' // IMPORTANT - this is required for Lightspeed
 		}
 	}
-	include 'main/TestAll.class' // to run only a single test case
+	include 'com/projectswg/holocore/TestAll.class' // to run only a single test case
 }
 
 shadowJar{
-	archiveName = "Holocore.jar"
+	baseName = "Holocore"
+	classifier = null
+	version = null
 }
 
 repositories {

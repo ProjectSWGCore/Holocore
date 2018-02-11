@@ -1,5 +1,5 @@
 iff	script
-TEXT PRIMARY KEY NOT NULL	TEXT NOT NULL
+TEXT	TEXT
 object/tangible/terminal/shared_terminal_bank.iff	terminal/bank
 object/tangible/terminal/shared_terminal_bazaar.iff	terminal/bazaar
 object/tangible/terminal/shared_terminal_travel.iff	terminal/travel
