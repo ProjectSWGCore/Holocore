@@ -20,6 +20,19 @@ mainClassName  = 'com.projectswg.holocore.ProjectSWG'
 sourceCompatibility = 9
 targetCompatibility = 9
 
+sourceSets {
+	// https://stackoverflow.com/questions/22159699/gradle-groovy-and-java-class-dependency-compile
+    main {
+        groovy {
+            // override the default locations, rather than adding additional ones
+            srcDirs = ['src/main/groovy', 'src/main/java'] 
+        }
+        java {
+            srcDirs = [] // don't compile Java code twice 
+        }
+    }
+}
+
 test {
 	testLogging {
 		events "skipped", "failed" // just good to know in terms of what failed
