@@ -233,10 +233,11 @@ public class ProjectSWG {
 			if (!initialIntentsCompleted && IntentManager.getInstance().getIntentCount() == 0) {
 				Log.i("Intent queue empty.");
 				initialIntentsCompleted = true;
+				cleanupMemory();
 //				throw new CoreException("Intent queue empty");
 			}
 			
-			if (loop % 12000 == 0) {// Approx every 10 mins, do a memory clean-up
+			if (loop % 12000 == 0 && initialIntentsCompleted) {// Approx every 10 mins, do a memory clean-up
 				cleanupMemory();
 			}
 			if (Delay.sleepMilli(50))
