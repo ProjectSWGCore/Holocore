@@ -26,16 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.AbstractSet;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.concurrency.SynchronizedList;
 import com.projectswg.common.concurrency.SynchronizedSet;
 import com.projectswg.common.debug.Log;
@@ -43,9 +33,14 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	
@@ -65,8 +60,6 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	 * Creates a new {@link SWGSet} for the defined baseline with the given view and update. Note
 	 * that this is an extension of {@link AbstractSet} and makes use of {@link HashSet}
 	 * 
-	 * @param baseline {@link Baseline.BaselineType} for this set, should be the same as the parent
-	 *            class this list resides in
 	 * @param view The baseline number this list resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that
 	 *            this list resides at within the baseline
@@ -79,9 +72,8 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	 * Creates a new {@link SWGSet} with the given StringType to encode in. Note that this
 	 * constructor must be used if the elements within the list is a String.
 	 * 
-	 * @param baseline {@link Baseline.BaselineType} for this set, should be the same as the parent
-	 *            class this list resides in
 	 * @param view The baseline number this set resides in
+	 * @param updateType The update number for this variable
 	 * @param strType The {@link StringType} of the string, required only if the element in the set
 	 *            is a String as it's used for encoding either Unicode or ASCII characters
 	 */
@@ -269,12 +261,12 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	private boolean decodeElement(NetBuffer wrap, Class<E> elementType, boolean encodable) {
 		if (encodable) {
 			try {
-				E instance = elementType.newInstance();
+				E instance = elementType.getConstructor().newInstance();
 				if (instance instanceof Encodable) {
 					((Encodable) instance).decode(wrap);
 					add(instance);
 				}
-			} catch (InstantiationException | IllegalAccessException e) {
+			} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
 				Log.e(e);
 				return false;
 			}

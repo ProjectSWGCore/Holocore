@@ -56,12 +56,11 @@ import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.CorpseLootedIntent;
 import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.combat.LootItemIntent;
+import com.projectswg.holocore.intents.combat.loot.LootRequestIntent;
 import com.projectswg.holocore.intents.object.ContainerTransferIntent;
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent;
+import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.radial.RadialRequestIntent;
-import com.projectswg.holocore.intents.radial.RadialResponseIntent;
-import com.projectswg.holocore.intents.radial.RadialSelectionIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
@@ -98,8 +97,7 @@ public final class LootService extends Service {
 		registerForIntent(ChatCommandIntent.class, this::handleChatCommand);
 		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransfer);
 		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilled);
-		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelection);
-		registerForIntent(RadialRequestIntent.class, this::handleRadialRequestIntent);
+		registerForIntent(LootRequestIntent.class, this::handleLootRequestIntent);
 		registerForIntent(LootItemIntent.class, this::handleLootItemIntent);
 	}
 	
@@ -289,77 +287,28 @@ public final class LootService extends Service {
 
 		lootAll(cci.getSource(), cci.getTarget());
 	}
-
-	private void handleRadialSelection(RadialSelectionIntent rsi) {
-		Player player = rsi.getPlayer();
-		CreatureObject looter = player.getCreatureObject();
-		SWGObject object = rsi.getTarget();
-		
-		switch (rsi.getSelection()) {
-			case LOOT: {
-				if (!getLootPermission(looter, object))
-					return;
-				
-				lootBox(player, object);
-				break;
-			}
-			case LOOT_ALL: {
-				if (!getLootPermission(looter, object))
-					return;				
-				
-				lootAll(looter, object);
-				break;
-			}
-			case TRANSFER_CREDITS_TO_BANK_ACCOUNT: {
-				SWGObject container = object.getParent();
-				SWGObject owner = container.getParent();
-				
-				if (!getLootPermission(looter, owner))
-					return;
-				
-				long cash = ((CreditObject) object).getAmount();
-				looter.addToBank(cash);
-				
-				new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
-				
-				object.moveToContainer(null);
-				
-				if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
-					CreatureObject corpse = (CreatureObject) owner;
-					new CorpseLootedIntent(corpse).broadcast();
-					player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
-				}
-				
-				break;
-			}
-			default:
-				break;
-		}
-	}
 	
-	private void handleRadialRequestIntent(RadialRequestIntent rri){
-		SWGObject target = rri.getTarget();
+	private void handleLootRequestIntent(LootRequestIntent lri) {
+		Player player = lri.getPlayer();
+		CreatureObject looter = player.getCreatureObject();
+		SWGObject target = lri.getTarget();
 		
-		if (target instanceof AIObject) {
-			CreatureObject creature = (CreatureObject) target;
-
-			if (creature.getHealth() > 0) {
-				// Live creatures shouldn't get a loot radial
-				return;
-			}
-
-			// TODO permissions check
-
-			List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
-			RadialOption loot = new RadialOption(RadialItem.LOOT);
-			loot.addChild(RadialItem.LOOT_ALL);
-			options.add(loot);
-			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
-		} else if (target instanceof CreditObject) {
-			List<RadialOption> options = new ArrayList<>(rri.getRequest().getOptions());
-			RadialOption transfer = new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT);
-			options.add(transfer);
-			new RadialResponseIntent(rri.getPlayer(), target, options, rri.getRequest().getCounter()).broadcast();
+		switch (lri.getType()) {
+			case LOOT:
+				if (!getLootPermission(looter, target))
+					return;
+				
+				lootBox(player, target);
+				break;
+			case LOOT_ALL:
+				if (!getLootPermission(looter, target))
+					return;
+				
+				lootAll(looter, target);
+				break;
+			case CREDITS:
+				lootCredits(player, looter, target);
+				break;
 		}
 	}
 	
@@ -433,6 +382,26 @@ public final class LootService extends Service {
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
 		
 		loot.forEach(item -> loot((CreatureObject) looter, item, lootInventory));
+	}
+	
+	private void lootCredits(Player player, CreatureObject looter, SWGObject target) {
+		SWGObject container = target.getParent();
+		SWGObject owner = container.getParent();
+		
+		if (!getLootPermission(looter, owner))
+			return;
+		
+		long cash = ((CreditObject) target).getAmount();
+		looter.addToBank(cash);
+		DestroyObjectIntent.broadcast(target);
+		
+		new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
+		
+		if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
+			CreatureObject corpse = (CreatureObject) owner;
+			new CorpseLootedIntent(corpse).broadcast();
+			player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
+		}
 	}
 	
 	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {

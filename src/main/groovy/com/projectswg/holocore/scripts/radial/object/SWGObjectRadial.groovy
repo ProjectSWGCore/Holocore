@@ -24,59 +24,23 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.collections;
 
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.holocore.resources.objects.collections.ClickyCollectionItem;
-import com.projectswg.holocore.resources.objects.collections.CollectionItem;
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.server_info.StandardLog;
-import com.projectswg.holocore.scripts.radial.RadialHandler;
-import com.projectswg.holocore.scripts.radial.collection.WorldItemRadial;
+package com.projectswg.holocore.scripts.radial.object
 
-import java.io.File;
-import java.io.IOException;
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-public class CollectionService extends Service {
+class SWGObjectRadial implements RadialHandlerInterface {
 	
-	public CollectionService() {
+	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
 		
 	}
 	
-	@Override
-	public boolean initialize() {
-		int count = 0;
-		long startTime = StandardLog.onStartLoad("collections");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/items/collection.sdb"))) {
-			while (set.next()) {
-				String iff = set.getText("iff_template");
-				String slotName = set.getText("collection_slot_name");
-				String collectionName = set.getText("collection_name");
-				RadialHandler.registerHandler(iff, new WorldItemRadial(new CollectionItem(slotName, collectionName, iff)));
-				count++;
-			}
-		} catch (IOException e) {
-			Log.e(e);
-		}
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/collections/collection_clicky.sdb"))) {
-			while (set.next()) {
-				String iff = set.getText("iff_template");
-				String slotName = set.getText("slotName");
-				String collectionName = set.getText("collectionName");
-				int objectId = (int) set.getInt("object_id");
-				String terrain = set.getText("terrain");
-				double x = set.getReal("x");
-				double y = set.getReal("y");
-				RadialHandler.registerHandler(iff, new WorldItemRadial(new ClickyCollectionItem(slotName, collectionName, objectId, iff, terrain, x, y)));
-				count++;
-			}
-		} catch (IOException e) {
-			Log.e(e);
-		}
-		StandardLog.onEndLoad(count, "collections", startTime);
-		return super.initialize();
+	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		
 	}
 	
 }

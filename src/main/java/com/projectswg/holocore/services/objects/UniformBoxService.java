@@ -41,7 +41,7 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
-import com.projectswg.holocore.intents.radial.RadialSelectionIntent;
+import com.projectswg.holocore.intents.player.uniform.OpenUniformBoxIntent;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
@@ -63,7 +63,7 @@ public class UniformBoxService extends Service {
 		
 		getUniformBoxStatement = uniformBoxDatabase.prepareStatement(GET_UNIFORMBOX_SQL);
 		
-		registerForIntent(RadialSelectionIntent.class, this::handleRadialSelectionIntent);
+		registerForIntent(OpenUniformBoxIntent.class, this::handleOpenUniformBoxIntent);
 	}
 	
 	@Override
@@ -72,20 +72,12 @@ public class UniformBoxService extends Service {
 		return super.terminate();
 	}
 	
-	private void handleRadialSelectionIntent(RadialSelectionIntent rsi) {
-		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
-			return;
-		
-		if(!rsi.getSelection().equals(RadialItem.ITEM_USE)) {
-			return;
-		}
-		
-		Player player = rsi.getPlayer();
+	private void handleOpenUniformBoxIntent(OpenUniformBoxIntent oubi) {
+		Player player = oubi.getPlayer();
 		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		String profession = creature.getPlayerObject().getProfession();
 		
-		new DestroyObjectIntent(rsi.getTarget()).broadcast();
 		handleCreateItems(inventory, profession, creature);
 	}
 	

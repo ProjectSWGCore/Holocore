@@ -24,44 +24,23 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.radial;
 
-import java.util.List;
+package com.projectswg.holocore.intents.combat.loot;
 
 import com.projectswg.common.control.Intent;
-import com.projectswg.common.data.radial.RadialOption;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
 
-public class RadialResponseIntent extends Intent {
+public class LootRequestIntent extends Intent {
 	
-	private Player player;
-	private SWGObject target;
-	private List<RadialOption> options;
-	private int counter;
+	private final Player player;
+	private final SWGObject target;
+	private final LootType type;
 	
-	public RadialResponseIntent(Player player, SWGObject target, List<RadialOption> options, int counter) {
-		setPlayer(player);
-		setTarget(target);
-		setOptions(options);
-		setCounter(counter);
-	}
-	
-	public void setPlayer(Player player) {
+	public LootRequestIntent(Player player, SWGObject target, LootType type) {
 		this.player = player;
-	}
-	
-	public void setTarget(SWGObject target) {
 		this.target = target;
-	}
-	
-	public void setOptions(List<RadialOption> options) {
-		this.options = options;
-	}
-	
-	public void setCounter(int counter) {
-		this.counter = counter;
+		this.type = type;
 	}
 	
 	public Player getPlayer() {
@@ -72,12 +51,18 @@ public class RadialResponseIntent extends Intent {
 		return target;
 	}
 	
-	public List<RadialOption> getOptions() {
-		return options;
+	public LootType getType() {
+		return type;
 	}
 	
-	public int getCounter() {
-		return counter;
+	public static void broadcast(Player player, SWGObject target, LootType type) {
+		new LootRequestIntent(player, target, type).broadcast();
+	}
+	
+	public enum LootType {
+		LOOT,
+		LOOT_ALL,
+		CREDITS
 	}
 	
 }

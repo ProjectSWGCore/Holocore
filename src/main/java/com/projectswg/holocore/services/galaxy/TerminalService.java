@@ -25,55 +25,14 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.scripts.radial.terminal
+package com.projectswg.holocore.services.galaxy;
 
-import com.projectswg.common.data.radial.RadialItem
-import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.common.control.Service;
 
-static def getOptions(String type, List<RadialOption> options, Player player, SWGObject target) {
-	switch (type) {
-		case "bank":
-			TerminalBankRadial.getOptions(options, player, target)
-			break
-		case "bazaar":
-			TerminalBazaarRadial.getOptions(options, player, target)
-			break
-		case "character_builder":
-			TerminalCharacterBuilderRadial.getOptions(options, player, target)
-			break
-		case "ticket":
-			TerminalTicketRadial.getOptions(options, player, target)
-			break
-		case "ticket_collector":
-			TerminalTicketCollectorRadial.getOptions(options, player, target)
-			break
-		case "travel":
-			TerminalTravelRadial.getOptions(options, player, target)
-			break
+public class TerminalService extends Service {
+	
+	public TerminalService() {
+		
 	}
-}
-
-static def handleSelection(String type, Player player, SWGObject target, RadialItem selection) {
-	switch (type) {
-		case "bank":
-			TerminalBankRadial.handleSelection(player, target, selection)
-			break
-		case "bazaar":
-			TerminalBazaarRadial.handleSelection(player, target, selection)
-			break
-		case "character_builder":
-			TerminalCharacterBuilderRadial.handleSelection(player, target, selection)
-			break
-		case "ticket":
-			TerminalTicketRadial.handleSelection(player, target, selection)
-			break
-		case "ticket_collector":
-			TerminalTicketCollectorRadial.handleSelection(player, target, selection)
-			break
-		case "travel":
-			TerminalTravelRadial.handleSelection(player, target, selection)
-			break
-	}
+	
 }

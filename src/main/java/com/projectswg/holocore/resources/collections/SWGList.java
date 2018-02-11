@@ -26,24 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.AbstractList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.concurrency.SynchronizedList;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.AbstractList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.
@@ -70,8 +69,6 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	 * that this is an extension of {@link AbstractList} and makes use of
 	 * {@link java.util.ArrayList}
 	 * 
-	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class
-	 *            this list resides in
 	 * @param view The baseline number this list resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that
 	 *            this list resides at within the baseline
@@ -84,9 +81,8 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	 * Creates a new {@link SWGList} with the given StringType to encode in. Note that this
 	 * constructor must be used if the elements within the list is a String.
 	 * 
-	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class
-	 *            this list resides in
 	 * @param view The baseline number this list resides in
+	 * @param updateType The update number for this variable
 	 * @param strType The {@link StringType} of the string, required only if the element in the list
 	 *            is a String as it's used for encoding either Unicode or ASCII characters
 	 */
@@ -217,12 +213,12 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	private boolean decodeElement(NetBuffer wrap, Class<E> elementType, boolean encodable) {
 		if (encodable) {
 			try {
-				E instance = elementType.newInstance();
+				E instance = elementType.getConstructor().newInstance();
 				if (instance instanceof Encodable) {
 					((Encodable) instance).decode(wrap);
 					add(instance);
 				}
-			} catch (InstantiationException | IllegalAccessException e) {
+			} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
 				Log.e(e);
 				return false;
 			}
@@ -299,7 +295,7 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	
 	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
-		Assert.notNull(encodedData);
+		Objects.requireNonNull(encodedData, "Unable to encode obj");
 		
 		synchronized (data) {
 			dataSize += encodedData.length;

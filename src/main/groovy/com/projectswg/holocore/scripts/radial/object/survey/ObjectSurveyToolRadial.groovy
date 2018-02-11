@@ -24,48 +24,25 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.radial;
 
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.data.radial.RadialItem;
+package com.projectswg.holocore.scripts.radial.object.survey
 
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.intents.crafting.survey.StartSurveyToolIntent
+import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-public class RadialSelectionIntent extends Intent {
+class ObjectSurveyToolRadial implements RadialHandlerInterface {
 	
-	private Player player;
-	private SWGObject target;
-	private RadialItem selection;
-	
-	public RadialSelectionIntent(Player player, SWGObject target, RadialItem selection) {
-		setPlayer(player);
-		setTarget(target);
-		setSelection(selection);
+	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		options.add(new RadialOption(RadialItem.ITEM_USE))
+		options.add(new RadialOption(RadialItem.EXAMINE))
 	}
 	
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
-	public void setTarget(SWGObject target) {
-		this.target = target;
-	}
-	
-	public void setSelection(RadialItem selection) {
-		this.selection = selection;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public SWGObject getTarget() {
-		return target;
-	}
-	
-	public RadialItem getSelection() {
-		return selection;
+	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		new StartSurveyToolIntent(player.getCreatureObject(), target).broadcast()
 	}
 	
 }

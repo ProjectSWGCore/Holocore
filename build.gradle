@@ -17,8 +17,8 @@ plugins {
 }
 
 mainClassName  = 'com.projectswg.holocore.ProjectSWG'
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+sourceCompatibility = 9
+targetCompatibility = 9
 
 test {
 	testLogging {

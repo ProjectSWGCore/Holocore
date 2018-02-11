@@ -24,48 +24,23 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.radial;
 
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
+package com.projectswg.holocore.scripts.radial.object
 
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.intents.combat.loot.LootRequestIntent
+import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-public class RadialRequestIntent extends Intent {
+class CreditObjectRadial extends SWGObjectRadial implements RadialHandlerInterface {
 	
-	private Player player;
-	private SWGObject target;
-	private ObjectMenuRequest request;
-	
-	public RadialRequestIntent(Player player, SWGObject target, ObjectMenuRequest request) {
-		setPlayer(player);
-		setTarget(target);
-		setRequest(request);
+	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		options.add(new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT))
 	}
 	
-	public void setPlayer(Player player) {
-		this.player = player;
+	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		LootRequestIntent.broadcast(player, target, LootRequestIntent.LootType.CREDITS)
 	}
-	
-	public void setTarget(SWGObject target) {
-		this.target = target;
-	}
-	
-	public void setRequest(ObjectMenuRequest request) {
-		this.request = request;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public SWGObject getTarget() {
-		return target;
-	}
-	
-	public ObjectMenuRequest getRequest() {
-		return request;
-	}
-	
 }

@@ -42,4 +42,8 @@ public class DestroyObjectIntent extends Intent {
 		return obj;
 	}
 	
+	public static void broadcast(SWGObject obj) {
+		new DestroyObjectIntent(obj).broadcast();
+	}
+	
 }

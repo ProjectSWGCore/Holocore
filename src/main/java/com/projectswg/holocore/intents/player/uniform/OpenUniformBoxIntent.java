@@ -25,19 +25,24 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.scripts.radial.object.survey
+package com.projectswg.holocore.intents.player.uniform;
 
-import com.projectswg.common.data.radial.RadialItem
-import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.crafting.survey.StartSurveyToolIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.common.control.Intent;
+import com.projectswg.holocore.resources.player.Player;
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
-	options.add(new RadialOption(RadialItem.ITEM_USE))
-	options.add(new RadialOption(RadialItem.EXAMINE))
-}
-
-static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
-	new StartSurveyToolIntent(player.getCreatureObject(), target).broadcast()
+public class OpenUniformBoxIntent extends Intent {
+	
+	private final Player player;
+	
+	public OpenUniformBoxIntent(Player player) {
+		this.player = player;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public static void broadcast(Player player) {
+		new OpenUniformBoxIntent(player).broadcast();
+	}
 }

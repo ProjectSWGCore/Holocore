@@ -25,17 +25,14 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.scripts.radial.object
+package com.projectswg.holocore.scripts.radial
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
-	options.add(new RadialOption(RadialItem.ITEM_USE))
-	options.add(new RadialOption(RadialItem.EXAMINE))
-}
-
-static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
+interface RadialHandlerInterface {
+	def getOptions(List<RadialOption> options, Player player, SWGObject target)
+	def handleSelection(Player player, SWGObject target, RadialItem selection)
 }

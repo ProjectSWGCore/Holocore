@@ -32,16 +32,21 @@ import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.intents.travel.TravelPointSelectionIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target) {
-	options.add(new RadialOption(RadialItem.ITEM_USE))
-	options.add(new RadialOption(RadialItem.EXAMINE))
-}
-
-static def handleSelection(Player player, SWGObject target, RadialItem selection) {
-	switch (selection) {
-		case RadialItem.ITEM_USE:
-			new TravelPointSelectionIntent(player.getCreatureObject(), false).broadcast()
-			break
+class TerminalTravelRadial implements RadialHandlerInterface {
+	
+	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		options.add(new RadialOption(RadialItem.ITEM_USE))
+		options.add(new RadialOption(RadialItem.EXAMINE))
 	}
+	
+	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		switch (selection) {
+			case RadialItem.ITEM_USE:
+				new TravelPointSelectionIntent(player.getCreatureObject(), false).broadcast()
+				break
+		}
+	}
+	
 }

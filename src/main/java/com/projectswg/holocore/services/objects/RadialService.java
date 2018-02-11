@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import java.util.List;
-
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
@@ -36,25 +34,29 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
-
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
-import com.projectswg.holocore.intents.radial.RadialRequestIntent;
-import com.projectswg.holocore.intents.radial.RadialResponseIntent;
-import com.projectswg.holocore.intents.radial.RadialSelectionIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.holocore.scripts.radial.RadialHandler;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadialService extends Service {
 	
 	public RadialService() {
-		registerForIntent(GalacticPacketIntent.class, RadialService::handleGalacticPacketIntent);
-		registerForIntent(RadialResponseIntent.class, RadialService::handleRadialResponseIntent);
-		// RadialRegisterIntent
+		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
 	}
-
-	private static void handleGalacticPacketIntent(GalacticPacketIntent gpi){
+	
+	@Override
+	public boolean initialize() {
+		RadialHandler.initialize();
+		return super.initialize();
+	}
+	
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
 			onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
@@ -63,7 +65,7 @@ public class RadialService extends Service {
 		}
 	}
 	
-	private static void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
+	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
 		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
 		if (target == null)
@@ -77,16 +79,13 @@ public class RadialService extends Service {
 			Log.w("Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
-
-		new RadialRequestIntent(player, target, request).broadcast();
+		
+		List<RadialOption> options = new ArrayList<>();
+		RadialHandler.getOptions(options, player, target);
+		sendResponse(player, target, options, request.getCounter());
 	}
-
-	private static void handleRadialResponseIntent(RadialResponseIntent rri) {
-		Player player = rri.getPlayer();
-		sendResponse(player, rri.getTarget(), rri.getOptions(), rri.getCounter());
-	}
-
-	private static void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
+	
+	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
 		if (target == null) {
 			Log.e("Selection target [%d] does not exist!", select.getObjectId());
@@ -96,14 +95,16 @@ public class RadialService extends Service {
 			Log.e("Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
 			return;
 		}
+		
 		RadialItem selection = RadialItem.getFromId(select.getSelection());
 		if (selection == null) {
 			Log.e("RadialItem does not exist with selection id: %d", select.getSelection());
 			return;
 		}
-		new RadialSelectionIntent(player, target, selection).broadcast();
+		
+		RadialHandler.handleSelection(player, target, selection);
 	}
-
+	
 	private static void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
 		menuResponse.setTargetId(target.getObjectId());
@@ -112,5 +113,5 @@ public class RadialService extends Service {
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
 	}
-
+	
 }

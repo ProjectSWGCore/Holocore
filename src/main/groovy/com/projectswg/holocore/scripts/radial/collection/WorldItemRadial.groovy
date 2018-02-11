@@ -29,18 +29,41 @@ package com.projectswg.holocore.scripts.radial.collection
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.intents.GrantClickyCollectionIntent
 import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.objects.collections.CollectionItem
 import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-static def getOptions(List<RadialOption> options, Player player, SWGObject target, Object... args) {
-	options.add(new RadialOption(RadialItem.ITEM_USE))
-	options.get(0).setOverriddenText("@collection:consume_item")
-}
-
-static def handleSelection(Player player, SWGObject target, RadialItem selection, Object... args) {
-	switch (selection) {
-		case RadialItem.ITEM_USE:
-			//Log.d("bazaar.groovy", "Bazaar Selection: ITEM_USE")
-			break
+class WorldItemRadial implements RadialHandlerInterface {
+	
+	private final CollectionItem details
+	
+	WorldItemRadial(CollectionItem details) {
+		this.details = details
 	}
+	
+	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		def use = null
+		for (RadialOption option : options) {
+			if (option.getOptionType() == RadialItem.ITEM_USE.getId()) {
+				use = option
+				break
+			}
+		}
+		if (use == null) {
+			use = new RadialOption(RadialItem.ITEM_USE)
+			options.add(0, use)
+		}
+		use.setOverriddenText("@collection:consume_item")
+	}
+	
+	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		if (selection != RadialItem.ITEM_USE)
+			return
+		
+		new GrantClickyCollectionIntent(player.getCreatureObject(), target, details).broadcast();
+	}
+	
 }
+

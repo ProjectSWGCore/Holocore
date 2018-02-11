@@ -58,6 +58,7 @@ import com.projectswg.holocore.resources.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.CoreManager;
+import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -92,6 +93,30 @@ public class LoginService extends Service {
 		getCharacters = database.prepareStatement("SELECT * FROM players WHERE userid = ?");
 		deleteCharacter = database.prepareStatement("DELETE FROM players WHERE id = ?");
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		synchronized (deleteCharacter) {
+			try (ResultSet set = database.executeQuery("SELECT id FROM players")) {
+				while (set.next()) {
+					long id = set.getLong(1);
+					if (ObjectLookup.getObjectById(id) != null)
+						continue;
+					
+					try {
+						deleteCharacter.setLong(1, id);
+						deleteCharacter.executeUpdate();
+						Log.d("Deleted character with id: %d", id);
+					} catch (SQLException e) {
+						Log.e(e);
+					}
+				}
+			} catch (SQLException e) {
+				Log.e(e);
+			}
+		}
+		return super.start();
 	}
 	
 	@Override
