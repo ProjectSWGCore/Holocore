@@ -392,7 +392,6 @@ public class CombatManager extends Manager {
 		creature.setInCombat(true);
 		
 		// If this creature is currently regenerating health, they should stop doing so now
-		startActionRegeneration(creature);
 		stopHealthRegeneration(creature);
 	}
 	
@@ -604,6 +603,7 @@ public class CombatManager extends Manager {
 		}
 		
 		source.modifyAction((int) -actionCost);
+		startActionRegeneration(source);
 	}
 	
 	private int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
