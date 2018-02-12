@@ -8,4 +8,9 @@ pipelines:
         image: alpine/git
         script:
           - git submodule update --init
+    - step:
+        caches:
+          - gradle
+        image: openjdk:9-jdk-slim
+        script:
           - ./gradlew test
