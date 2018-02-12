@@ -10,6 +10,7 @@ pipelines:
     - step:
         caches:
           - gradle
+        image: alpine/git
         script:
-          - bash git submodule update --init
+          - git submodule update --init
           - bash ./gradlew build
