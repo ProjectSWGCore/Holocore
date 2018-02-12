@@ -11,5 +11,5 @@ pipelines:
         caches:
           - gradle
         script:
-          - git submodule update --init
+          - bash git submodule update --init
           - bash ./gradlew build
