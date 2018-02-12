@@ -14,23 +14,29 @@ plugins {
 	id 'groovy'
 	id 'idea'
 	id 'findbugs'
+	id 'checkstyle'
 }
 
-mainClassName  = 'com.projectswg.holocore.ProjectSWG'
+mainClassName = 'com.projectswg.holocore.ProjectSWG'
 sourceCompatibility = 9
 targetCompatibility = 9
 
 sourceSets {
 	// https://stackoverflow.com/questions/22159699/gradle-groovy-and-java-class-dependency-compile
-    main {
-        groovy {
-            // override the default locations, rather than adding additional ones
-            srcDirs = ['src/main/groovy', 'src/main/java'] 
-        }
-        java {
-            srcDirs = [] // don't compile Java code twice 
-        }
-    }
+	main {
+		groovy {
+			// override the default locations, rather than adding additional ones
+			srcDirs = ['src/main/groovy', 'src/main/java']
+		}
+		java {
+			srcDirs = [] // don't compile Java code twice 
+		}
+	}
+	display {
+		java {
+			
+		}
+	}
 }
 
 test {
@@ -39,13 +45,13 @@ test {
 	}
 	afterSuite { TestDescriptor td, TestResult tr ->
 		if (td.parent == null) {
-			println 'Tests run: ('+tr.getTestCount()+'), Failures: ('+tr.getFailedTestCount()+')' // IMPORTANT - this is required for Lightspeed
+			println 'Tests run: (' + tr.getTestCount() + '), Failures: (' + tr.getFailedTestCount() + ')' // IMPORTANT - this is required for Lightspeed
 		}
 	}
 	include 'com/projectswg/holocore/TestAll.class' // to run only a single test case
 }
 
-shadowJar{
+shadowJar {
 	baseName = "Holocore"
 	classifier = null
 	version = null
@@ -66,6 +72,9 @@ dependencies {
 	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 	
 	testCompile 'junit:junit:4.12'
+	
+	displayCompile project(':PSWGCommon')
+	displayCompile sourceSets.main.output
 }
 
 task wrapper(type: Wrapper) {
@@ -77,4 +86,8 @@ tasks.withType(FindBugs) {
 		xml.enabled = false
 		html.enabled = true
 	}
+}
+
+checkstyle {
+	toolVersion "8.8"
 }
