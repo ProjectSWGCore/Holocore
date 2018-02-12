@@ -7,6 +7,7 @@ pipelines:
           - gradle
         image: openjdk:9-jdk-slim
         script:
-          - apt install -y git
+          - apt-get update
+          - apt-get install -y git
           - git submodule update --init
           - ./gradlew test
