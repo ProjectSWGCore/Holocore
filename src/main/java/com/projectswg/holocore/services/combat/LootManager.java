@@ -1,3 +1,4 @@
+
 /***********************************************************************************
  * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
@@ -35,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.projectswg.common.control.Service;
+import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.RelationalDatabase;
@@ -78,21 +79,23 @@ import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 import com.projectswg.holocore.services.objects.StaticItemService;
 
-public final class LootService extends Service {
+public final class LootManager extends Manager {
 
 	private static final String LOOT_TABLE_SELECTOR = "SELECT * FROM loot_table";
-	
+
 	private static final float CASH_LOOT_CHANCE_NORMAL = 0.6f;
 	private static final float CASH_LOOT_CHANCE_ELITE = 0.8f;
-	
+
 	private final Map<String, LootTable> lootTables;	// K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;	// K: npc_id, V: possible loot
 	private final Random random;
-	
-	public LootService() {
+
+	public LootManager() {
 		lootTables = new HashMap<>();
 		npcLoot = new HashMap<>();
 		random = new Random();
+
+		addChildService(new RareLootService());
 
 		registerForIntent(ChatCommandIntent.class, this::handleChatCommand);
 		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransfer);
@@ -100,7 +103,7 @@ public final class LootService extends Service {
 		registerForIntent(LootRequestIntent.class, this::handleLootRequestIntent);
 		registerForIntent(LootItemIntent.class, this::handleLootItemIntent);
 	}
-	
+
 	@Override
 	public boolean initialize() {
 		loadLootTables();
@@ -130,7 +133,7 @@ public final class LootService extends Service {
 
 		StandardLog.onEndLoad(lootTables.size(), what, startTime);
 	}
-	
+
 	/**
 	 * Loads a single loot table.
 	 * @param set a single loot table (a row in loot_table.db)
@@ -144,7 +147,7 @@ public final class LootService extends Service {
 
 		LootTable table = new LootTable();
 		int totalChance = 0;	// Must not be above 100. Also used to convert chances in the form of "33, 33, 34" to "33, 66, 100"
-		
+
 		for (int groupNum = 1; groupNum <= 16 && totalChance < 100; groupNum++) {
 			LootGroup lootGroup = loadLootGroup(set, groupNum, totalChance);
 			if (lootGroup == null)
@@ -152,13 +155,13 @@ public final class LootService extends Service {
 			table.addLootGroup(lootGroup);
 			totalChance = lootGroup.getChance();
 		}
-		
+
 		if (totalChance != 100)
 			Log.w("Loot chance != 100 while loading loot_table! Table: %s, totalChance: %s", tableName, totalChance);
 
 		lootTables.put(tableName, table);
 	}
-	
+
 	/**
 	 * Loads a single loot group from a loot table.
 	 * @param set the loot table
@@ -173,7 +176,7 @@ public final class LootService extends Service {
 		groupChance += totalChance;
 		String groupItems = set.getString("items_group_" + groupNum);
 		String[] itemNames = groupItems.split(";");
-			
+
 		return new LootGroup(groupChance, itemNames);
 	}
 
@@ -183,13 +186,13 @@ public final class LootService extends Service {
 	private void loadNPCLoot() {
 		String what = "NPC loot links";
 		long startTime = StandardLog.onStartLoad(what);
-		
+
 		NpcLoader npcLoader = NpcLoader.load();
 		npcLoader.iterate(this::loadNPCLoot);
 
 		StandardLog.onEndLoad(npcLoot.size(), what, startTime);
 	}
-	
+
 	/**
 	 * Load tables for a specific NPC.
 	 * @param info the NPC info
@@ -202,14 +205,14 @@ public final class LootService extends Service {
 		int maxCash = info.getHumanoidInfo().getMaxCash();
 		String creatureId = info.getId();
 		NPCLoot loot = new NPCLoot(minCash, maxCash);
-		
+
 		// load each loot table (up to 3) and add to loot object
 		loadNPCTable(loot, info.getLootTable1(), info.getLootTable1Chance());
 		loadNPCTable(loot, info.getLootTable2(), info.getLootTable2Chance());
 		loadNPCTable(loot, info.getLootTable3(), info.getLootTable3Chance());
 		npcLoot.put(creatureId, loot);
 	}
-	
+
 	/**
 	 * Load a specific table for an NPC.
 	 * @param loot the loot object for the NPC
@@ -220,11 +223,11 @@ public final class LootService extends Service {
 		// if chance <= 0, this table for this NPC doesn't exist
 		if (chance <= 0)
 			return;
-		
+
 		LootTable lootTable = lootTables.get(table);
 		if (lootTable == null)
 			return;
-		
+
 		loot.addNPCTable(new NPCTable(chance, lootTable));
 	}
 
@@ -233,11 +236,11 @@ public final class LootService extends Service {
 
 		if (cti.getContainer() == null || cti.getContainer().getOwner() == null)
 			return;
-		
+
 		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT)
 			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
 	}
-	
+
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 
@@ -264,16 +267,16 @@ public final class LootService extends Service {
 
 		boolean cashGenerated = false;
 		boolean lootGenerated = false;
-		
+
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", true))
 			cashGenerated = generateCreditChip(loot, killer, lootInventory, corpse.getDifficulty());
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
 			lootGenerated = generateLoot(loot, killer, lootInventory);
-		
+
 		if (!cashGenerated && !lootGenerated)
-			new CorpseLootedIntent((CreatureObject) lootInventory.getParent()).broadcast();
+			new CorpseLootedIntent(corpse).broadcast();
 		else
-			showLootDisc(killer, lootInventory.getParent());
+			showLootDisc(killer, corpse);
 	}
 
 	private void handleChatCommand(ChatCommandIntent cci) {
@@ -281,29 +284,29 @@ public final class LootService extends Service {
 		if(!cci.getCommand().getName().equalsIgnoreCase("loot")) {
 			return;
 		}
-		
+
 		if (!getLootPermission(cci.getSource(), cci.getTarget()))
-			return;				
+			return;
 
 		lootAll(cci.getSource(), cci.getTarget());
 	}
-	
+
 	private void handleLootRequestIntent(LootRequestIntent lri) {
 		Player player = lri.getPlayer();
 		CreatureObject looter = player.getCreatureObject();
 		SWGObject target = lri.getTarget();
-		
+
 		switch (lri.getType()) {
 			case LOOT:
 				if (!getLootPermission(looter, target))
 					return;
-				
+
 				lootBox(player, target);
 				break;
 			case LOOT_ALL:
 				if (!getLootPermission(looter, target))
 					return;
-				
+
 				lootAll(looter, target);
 				break;
 			case CREDITS:
@@ -311,15 +314,15 @@ public final class LootService extends Service {
 				break;
 		}
 	}
-	
+
 	private void handleLootItemIntent(LootItemIntent lii) {
 		CreatureObject looter = lii.getLooter().getCreatureObject();
 		SWGObject item = lii.getItem();
 		SWGObject container = lii.getContainer();
-		
+
 		loot(looter, item, container);
 	}
-	
+
 	/**
 	 * Transfers the item to the looter's inventory and sends appropriate system messages.
 	 * @param looter the player doing the looting
@@ -328,18 +331,18 @@ public final class LootService extends Service {
 	 */
 	private void loot(CreatureObject looter, SWGObject item, SWGObject container) {
 		Player player = looter.getOwner();
-		
+
 		switch (item.moveToContainer(looter, looter.getSlottedObject("inventory"))) {
 			case SUCCESS: {
 				String itemName = item.getObjectName();
-				
+
 				if (item instanceof CreditObject) {
 					long cash = ((CreditObject) item).getAmount();
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
 				} else {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
 				}
-				
+
 				if (container.getContainedObjects().isEmpty()) {
 					CreatureObject corpse = (CreatureObject) container.getParent();
 					new CorpseLootedIntent(corpse).broadcast();
@@ -365,10 +368,10 @@ public final class LootService extends Service {
 				break;
 		}
 	}
-	
+
 	private void lootBox(Player player, SWGObject target){
 		SWGObject inventory = target.getSlottedObject("inventory");
-		
+
 		player.sendPacket(new ClientOpenContainerMessage(inventory.getObjectId(), ""));
 	}
 
@@ -380,30 +383,30 @@ public final class LootService extends Service {
 		SWGObject lootInventory = corpse.getSlottedObject("inventory");
 
 		Collection<SWGObject> loot = lootInventory.getContainedObjects();	// No concurrent modification because a copy Collection is returned
-		
+
 		loot.forEach(item -> loot((CreatureObject) looter, item, lootInventory));
 	}
-	
+
 	private void lootCredits(Player player, CreatureObject looter, SWGObject target) {
 		SWGObject container = target.getParent();
 		SWGObject owner = container.getParent();
-		
+
 		if (!getLootPermission(looter, owner))
 			return;
-		
+
 		long cash = ((CreditObject) target).getAmount();
 		looter.addToBank(cash);
 		DestroyObjectIntent.broadcast(target);
-		
+
 		new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
-		
+
 		if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
 			CreatureObject corpse = (CreatureObject) owner;
 			new CorpseLootedIntent(corpse).broadcast();
 			player.sendPacket(new StopClientEffectObjectByLabelMessage(corpse.getObjectId(), "lootMe", false));
 		}
 	}
-	
+
 	private void randomGroupLoot(GroupObject lootGroup, SWGObject corpse) {
 		if (!(corpse instanceof AIObject)) {
 			return;
@@ -424,12 +427,12 @@ public final class LootService extends Service {
 		Assert.test(requester.isPlayer());
 
 		Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
-		
+
 		long requesterGroup = requester.getGroupId();
-		
+
 		if (requesterGroup != 0) {
-			GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);	
-			
+			GroupObject requesterGroupObject = (GroupObject) ObjectLookup.getObjectById(requesterGroup);
+
 			for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
 				Player player = creature.getOwner();
 				if (player != null) {
@@ -440,11 +443,11 @@ public final class LootService extends Service {
 			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 		}
 	}
-	
+
 	private boolean generateCreditChip(NPCLoot loot, CreatureObject killer, SWGObject lootInventory, CreatureDifficulty difficulty) {
 		float cashLootRoll = random.nextFloat();
 		int multiplier;
-		
+
 		switch (difficulty) {
 			default:
 			case NORMAL:
@@ -462,7 +465,7 @@ public final class LootService extends Service {
 				multiplier = 3;
 				break;
 		}
-		
+
 		int maxCash = loot.getMaxCash();
 
 		if (maxCash == 0) {
@@ -483,10 +486,10 @@ public final class LootService extends Service {
 		cashObject.moveToContainer(lootInventory);
 
 		new ObjectCreatedIntent(cashObject).broadcast();
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Generates loot and places it in the inventory of the corpse.
 	 * @param loot the loot info of the creature killed
@@ -498,7 +501,7 @@ public final class LootService extends Service {
 		boolean lootGenerated = false;
 
 		int tableRoll = random.nextInt(100) + 1;
-		
+
 		for (NPCTable npcTable : loot.getNPCTables()) {
 			LootTable lootTable = npcTable.getLootTable();
 			int tableChance = npcTable.getChance();
@@ -507,18 +510,18 @@ public final class LootService extends Service {
 				// Skip ahead if there's no drop chance
 				continue;
 			}
-			
+
 			int groupRoll = random.nextInt(100) + 1;
-			
+
 			for (LootGroup group : lootTable.getLootGroups()) {
 				int groupChance = group.getChance();
-				
+
 				if (groupRoll > groupChance)
 					continue;
-				
+
 				String[] itemNames = group.getItemNames();
 				String itemName = itemNames[random.nextInt(itemNames.length)];
-				
+
 				if (itemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
 					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + itemName).broadcast();
@@ -528,7 +531,7 @@ public final class LootService extends Service {
 					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
 					new ObjectCreatedIntent(object).broadcast();
-					
+
 					lootGenerated = true;
 				} else {
 					new CreateStaticItemIntent(killer, lootInventory, new StaticItemService.ObjectCreationHandler() {
@@ -542,27 +545,27 @@ public final class LootService extends Service {
 							return true;
 						}
 					}, ContainerPermissionsType.LOOT, itemName).broadcast();
-					
+
 					lootGenerated = true;
 				}
-				
+
 				break;
 			}
 		}
-		
+
 		return lootGenerated;
 	}
-	
+
 	private boolean getLootPermission(CreatureObject looter, SWGObject target) {
 		if (!isLootable(target))
 			return false;
-		
+
 		CreatureObject highestDamageDealer = ((CreatureObject) target).getHighestDamageDealer();
-		
+
 		if (highestDamageDealer != null && highestDamageDealer.getOwner() != null) {
 			long looterGroup = looter.getGroupId();
 			long killerGroup = highestDamageDealer.getGroupId();
-			
+
 			if (looterGroup == killerGroup && killerGroup != 0) {
 				GroupObject killerGroupObject = (GroupObject) ObjectLookup.getObjectById(killerGroup);
 
@@ -588,9 +591,9 @@ public final class LootService extends Service {
 
 	private boolean isLootable(SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
-		
+
 		return !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
-		
+
 	}
 
 	private static class NPCLoot {
@@ -616,7 +619,7 @@ public final class LootService extends Service {
 		public Collection<NPCTable> getNPCTables() {
 			return npcTables;
 		}
-		
+
 		public void addNPCTable(NPCTable npcTable) {
 			npcTables.add(npcTable);
 		}
@@ -653,7 +656,7 @@ public final class LootService extends Service {
 		public void addLootGroup(LootGroup lootGroup) {
 			lootGroups.add(lootGroup);
 		}
-		
+
 		public Collection<LootGroup> getLootGroups() {
 			return lootGroups;
 		}
