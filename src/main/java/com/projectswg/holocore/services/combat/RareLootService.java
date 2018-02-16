@@ -28,17 +28,23 @@
 package com.projectswg.holocore.services.combat;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.holocore.intents.combat.CorpseLootedIntent;
+import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 
-import intents.combat.CorpseLootedIntent;
-import intents.combat.CreatureKilledIntent;
+import java.util.Random;
 
 public final class RareLootService extends Service {
 
 	// TODO these two could be config options
-	private static final short ALLOWED_LEVEL_DIFFERENCE = 6;	// +-6 difference is allowed between killer and corpse
+	private static final short MAX_LEVEL_DIFFERENCE = 6;	// +-6 difference is allowed between killer and corpse
 	private static final int DROP_CHANCE = 1;	// One in a hundred eligible kills will drop a chest
 
 	private final Random random;
@@ -62,22 +68,21 @@ public final class RareLootService extends Service {
 		CreatureObject corpse = cki.getCorpse();
 		CreatureObject killer = cki.getKiller();
 
-		if(!isChestEligible(corpse.isPlayer(), killer.isPlayer())) {
+		if(!isPlayerEligible(corpse.isPlayer(), killer.isPlayer())) {
 			return;
 		}
 
-		if(!isLevelEligible(corpse.getCombatLevel(), killer.getCombatLevel())) {
+		if(!isLevelEligible(corpse.getLevel(), killer.getLevel())) {
 			return;
 		}
 
-		int roll = random.nextInt(100 + 1) + 1;	// Rolls from 1 to 100%
+		int roll = random.nextInt(100) + 1;	// Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
 
-		if(roll > DROP_CHANCE) {
-			// If roll is outside the drop chance, then do nothing
+		if(!isDrop(roll)) {
 			return;
 		}
 
-		String template = templateForDifficulty(corpse.getCreatureDifficulty());
+		String template = templateForDifficulty(corpse.getDifficulty());
 		SWGObject chest = ObjectCreator.createObjectFromTemplate(template);
 		SWGObject inventory = killer.getSlottedObject("inventory");
 
@@ -87,29 +92,36 @@ public final class RareLootService extends Service {
 
 				PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse.getObjectId(), "");
 				PlayMusicMessage sound = new PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false);
-				ShowLootBox box = new ShowLootBox(killer.getObjectId(), chest.getObjectId());
+				ShowLootBox box = new ShowLootBox(killer.getObjectId(), new long[]{chest.getObjectId()});
 
-				killer.sendPacket(effect, sound, box);
+				killer.getOwner().sendPacket(effect, sound, box);
 				break;
 		}
 	}
 
-	boolean isChestEligible(boolean killerPlayer, boolean corpsePlayer) {
+	boolean isPlayerEligible(boolean killerPlayer, boolean corpsePlayer) {
 		return killerPlayer && !corpsePlayer;
 	}
 
-	boolean isLevelEligible(short corpseLevel, short killerLevel) {
-		short levelDifference = corpseLevel - killerLevel;
+	boolean isLevelEligible(int corpseLevel, int killerLevel) {
+		// Ensure a positive levelDifference
+		int highestLevel = Math.max(corpseLevel, killerLevel);
+		int lowestLevel = Math.min(corpseLevel, killerLevel);
+		int levelDifference = highestLevel - lowestLevel;
 
-		return	levelDifference <= ALLOWED_LEVEL_DIFFERENCE ||
-						levelDifference >= -ALLOWED_LEVEL_DIFFERENCE;
+		return levelDifference <= MAX_LEVEL_DIFFERENCE;
+	}
+
+	boolean isDrop(int roll) {
+		return roll <= DROP_CHANCE;
 	}
 
 	String templateForDifficulty(CreatureDifficulty difficulty) {
-		switch(corpse.getCreatureDifficulty()) {
+		switch(difficulty) {
 			case NORMAL:	return "object/tangible/item/shared_rare_loot_chest_1.iff";
 			case ELITE:		return "object/tangible/item/shared_rare_loot_chest_2.iff";
 			case BOSS:		return "object/tangible/item/shared_rare_loot_chest_3.iff";
+			default:			throw new IllegalArgumentException("Unknown CreatureDifficulty: " + difficulty);
 		}
 	}
 
