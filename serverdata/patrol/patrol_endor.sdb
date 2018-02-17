@@ -1,0 +1,102 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+4000100	4000100	FLIP	ENDOR	end_tao_ni_security_compound	5	11.5	-12.0	47.6	0	ig88_security_patrol_alpha_01_30064954
+4000101	4000100		ENDOR	end_tao_ni_security_compound	5	10.6	-12.0	41.0	0	
+4000102	4000100		ENDOR	end_tao_ni_security_compound	5	-3.1	-12.0	40.5	0	
+4000103	4000100		ENDOR	end_tao_ni_security_compound	5	-2.8	-12.0	55.0	0	
+4000104	4000100		ENDOR	end_tao_ni_security_compound	5	9.7	-12.0	54.2	0	
+4000105	4000100		ENDOR	end_tao_ni_security_compound	5	12.2	-12.0	50.7	0	
+4000200	4000200	FLIP	ENDOR	end_tao_ni_security_compound	8	-74.8	-20.0	12.8	0	ig88_security_patrol_omega_01_30065149
+4000201	4000200		ENDOR	end_tao_ni_security_compound	8	-71.1	-20.0	18.5	0	
+4000202	4000200		ENDOR	end_tao_ni_security_compound	8	-57.4	-20.0	18.5	0	
+4000203	4000200		ENDOR	end_tao_ni_security_compound	8	-51.9	-20.0	8.0	0	
+4000204	4000200		ENDOR	end_tao_ni_security_compound	8	-67.6	-20.0	8.1	0	
+4000300	4000300	FLIP	ENDOR	end_tao_ni_security_compound	9	-70.5	-20.0	76.8	0	ig88_security_patrol_omega_02_30065323
+4000301	4000300		ENDOR	end_tao_ni_security_compound	9	-76.6	-20.0	76.7	0	
+4000302	4000300		ENDOR	end_tao_ni_security_compound	9	-76.0	-20.0	87.1	0	
+4000303	4000300		ENDOR	end_tao_ni_security_compound	9	-62.1	-20.0	86.9	0	
+4000304	4000300		ENDOR	end_tao_ni_security_compound	9	-52.9	-20.0	85.9	0	
+4000305	4000300		ENDOR	end_tao_ni_security_compound	9	-52.2	-20.0	79.1	0	
+4000306	4000300		ENDOR	end_tao_ni_security_compound	9	-64.5	-20.0	76.9	0	
+4000307	4000300		ENDOR	end_tao_ni_security_compound	9	-69.4	-20.0	77.1	0	
+4000400	4000400	FLIP	ENDOR	end_tao_ni_security_compound	11	46.0	-12.0	83.2	0	ig88_security_patrol_omega_04_30065519
+4000401	4000400		ENDOR	end_tao_ni_security_compound	11	48.3	-12.0	89.4	0	
+4000402	4000400		ENDOR	end_tao_ni_security_compound	11	59.2	-12.0	90.4	0	
+4000403	4000400		ENDOR	end_tao_ni_security_compound	11	60.7	-12.0	84.8	0	
+4000404	4000400		ENDOR	end_tao_ni_security_compound	11	60.6	-12.0	77.9	0	
+4000405	4000400		ENDOR	end_tao_ni_security_compound	11	69.2	-12.0	78.0	0	
+4000406	4000400		ENDOR	end_tao_ni_security_compound	11	70.5	-12.0	86.6	0	
+4000407	4000400		ENDOR	end_tao_ni_security_compound	11	65.7	-12.0	88.8	0	
+4000408	4000400		ENDOR	end_tao_ni_security_compound	11	51.1	-12.0	88.9	0	
+4000409	4000400		ENDOR	end_tao_ni_security_compound	11	50.9	-12.0	77.1	0	
+4000410	4000400		ENDOR	end_tao_ni_security_compound	11	46.0	-12.0	77.9	0	
+4000500	4000500	FLIP	ENDOR	end_tao_ni_security_compound	12	46.5	-12.0	58.8	0	ig88_security_patrol_omega_03_30065429
+4000501	4000500		ENDOR	end_tao_ni_security_compound	12	49.6	-12.0	65.9	0	
+4000502	4000500		ENDOR	end_tao_ni_security_compound	12	68.0	-12.0	66.3	0	
+4000503	4000500		ENDOR	end_tao_ni_security_compound	12	72.5	-12.0	61.3	0	
+4000504	4000500		ENDOR	end_tao_ni_security_compound	12	69.1	-12.0	59.1	0	
+4000505	4000500		ENDOR	end_tao_ni_security_compound	12	50.2	-12.0	59.3	0	
+4000506	4000500		ENDOR	end_tao_ni_security_compound	12	49.8	-12.0	52.0	0	
+4000507	4000500		ENDOR	end_tao_ni_security_compound	12	68.5	-12.0	52.4	0	
+4000508	4000500		ENDOR	end_tao_ni_security_compound	12	69.1	-12.0	58.4	0	
+4000509	4000500		ENDOR	end_tao_ni_security_compound	12	50.4	-12.0	57.8	0	
+4000600	4000600	FLIP	ENDOR	end_tao_ni_security_compound	17	-30.5	-20.0	3.0	0	ig88_security_patrol_alpha_02_30066011
+4000601	4000600		ENDOR	end_tao_ni_security_compound	18	-30.8	-20.0	13.1	0	
+4000602	4000600		ENDOR	end_tao_ni_security_compound	18	-30.2	-20.0	26.1	0	
+4000603	4000600		ENDOR	end_tao_ni_security_compound	18	-30.0	-20.0	48.8	0	
+4000604	4000600		ENDOR	end_tao_ni_security_compound	18	-30.3	-20.0	73.6	0	
+4000605	4000600		ENDOR	end_tao_ni_security_compound	18	-30.4	-20.0	86.8	0	
+4000606	4000600		ENDOR	end_tao_ni_security_compound	19	-33.5	-20.0	103.3	0	
+4000607	4000600		ENDOR	end_tao_ni_security_compound	19	-25.3	-20.0	101.8	0	
+4000608	4000600		ENDOR	end_tao_ni_security_compound	19	-23.6	-20.0	96.6	0	
+4000609	4000600		ENDOR	end_tao_ni_security_compound	19	-35.7	-20.0	95.5	0	
+4000700	4000700	FLIP	ENDOR	end_world	0	2564.3	199.3	6647.8	0	ig88_security_battle_patrol_01_30778913
+4000701	4000700		ENDOR	end_world	0	2569.8	201.0	6634.8	0	
+4000702	4000700		ENDOR	end_world	0	2629.9	201.9	6629.6	0	
+4000703	4000700		ENDOR	end_world	0	2650.0	204.2	6647.4	0	
+4000704	4000700		ENDOR	end_world	0	2636.0	206.3	6698.1	0	
+4000705	4000700		ENDOR	end_world	0	2588.4	201.0	6686.7	0	
+4000706	4000700		ENDOR	end_world	0	2564.4	200.2	6680.5	0	
+4000707	4000700		ENDOR	end_world	0	2567.6	199.5	6649.2	0	
+4000708	4000700		ENDOR	end_world	0	2599.3	198.8	6651.4	0	
+4000709	4000700		ENDOR	end_world	0	2595.0	199.6	6660.4	0	
+4000710	4000700		ENDOR	end_world	0	2569.3	199.5	6648.4	0	
+4000800	4000800	FLIP	ENDOR	end_world	0	6085.8	264.2	-2462.2	0	endorv1e9_47354935
+4000801	4000800		ENDOR	end_world	0	6027.7	260.0	-2486.1	0	
+4000900	4000900	LOOP	ENDOR	end_world	0	-922.7	76.0	1565.3	0	Smuggler Outpost - a Smuggler #1
+4000901	4000900		ENDOR	end_world	0	-885.2	76.0	1595.6	0	
+4000902	4000900		ENDOR	end_world	0	-874.2	76.0	1626.5	0	
+4000903	4000900		ENDOR	end_world	0	-885.2	76.0	1595.6	0	
+4000904	4000900		ENDOR	end_world	0	-835.9	76.0	1576.0	0	
+4000905	4000900		ENDOR	end_world	0	-885.2	76.0	1595.6	0	
+4001000	4001000	LOOP	ENDOR	end_world	0	-924.2	76.0	1567.2	0	Smuggler Outpost - a Smuggler #2
+4001001	4001000		ENDOR	end_world	0	-937.7	76.0	1554.4	0	
+4001002	4001000		ENDOR	end_world	0	-966.4	73.0	1524.9	0	
+4001003	4001000		ENDOR	end_world	0	-995.2	73.0	1581.1	0	
+4001004	4001000		ENDOR	end_world	0	-962.0	73.0	1550.8	0	
+4001005	4001000		ENDOR	end_world	0	-937.7	76.0	1554.4	0	
+4001100	4001100	LOOP	ENDOR	end_world	0	3260.0	24.0	-3466.8	0	Research Outpost - Technician
+4001101	4001100		ENDOR	end_world	0	3268.6	24.0	-3444.5	0	
+4001102	4001100		ENDOR	end_world	0	3277.9	24.0	-3444.8	0	
+4001103	4001100		ENDOR	end_world	0	3268.6	24.0	-3444.5	0	
+4001104	4001100		ENDOR	end_world	0	3265.3	24.0	-3452.1	0	
+4001105	4001100		ENDOR	end_world	0	3204.4	24.0	-3481.1	0	
+4001106	4001100		ENDOR	end_world	0	3204.4	24.0	-3489.0	0	
+4001107	4001100		ENDOR	end_world	0	3239.3	24.0	-3488.7	0	
+4001108	4001100		ENDOR	end_world	0	3239.3	24.0	-3480.7	0	
+4001109	4001100		ENDOR	end_world	0	3240.0	24.0	-3475.3	0	
+4001200	4001200	FLIP	ENDOR	end_world	0	3172.7	24.0	-3494.0	0	Research Outpost - a scoundrel
+4001201	4001200		ENDOR	end_world	0	3180.3	24.0	-3488.9	0	
+4001202	4001200		ENDOR	end_world	0	3180.5	24.0	-3468.7	0	
+4001203	4001200		ENDOR	end_world	0	3158.0	24.0	-3477.5	0	
+4001204	4001200		ENDOR	end_world	0	3158.2	24.7	-3505.7	0	
+4001205	4001200		ENDOR	end_world	0	3174.4	24.6	-3522.3	0	
+4001206	4001200		ENDOR	end_world	0	3273.9	24.3	3522.7	0	
+4001207	4001200		ENDOR	end_world	0	3287.4	24.7	-3504.6	0	
+4001208	4001200		ENDOR	end_world	0	3286.0	24.0	-3436.2	0	
+4001209	4001200		ENDOR	end_world	0	3270.0	24.0	-3422.7	0	
+4001210	4001200		ENDOR	end_world	0	3170.2	24.0	-3423.5	0	
+4001211	4001200		ENDOR	end_world	0	3157.2	23.9	-3439.1	0	
+4001212	4001200		ENDOR	end_world	0	3158.0	24.0	-3477.5	0	
+4001213	4001200		ENDOR	end_world	0	3180.5	24.0	-3468.7	0	
+4001214	4001200		ENDOR	end_world	0	3180.3	24.0	-3488.9	0	

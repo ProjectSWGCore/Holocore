@@ -1,155 +1,155 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1130003	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.00	-12.00	48.60	158	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130004	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130005	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130006	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130007	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.00	-12.00	48.60	158	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130008	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130009	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130010	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130011	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130012	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130013	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130014	DUNGEON1	du1_meatlump_bunker_1	AREA	7	17.80	-16.00	76.70	150	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130015	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130016	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130017	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130018	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130019	DUNGEON1	du1_meatlump_bunker_1	AREA	10	5.70	-16.00	139.90	-160	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130020	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130021	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130022	DUNGEON1	du1_meatlump_bunker_1	AREA	10	6.00	-16.00	131.70	148	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130023	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130024	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130025	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130026	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130027	DUNGEON1	du1_meatlump_bunker_1	AREA	10	24.10	-16.00	121.40	-86	1	a Meatlump dunder	mtp_instance_lost_meatlump_100_h_inv_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130028	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130029	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130030	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130031	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130032	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130033	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130034	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130035	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130036	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130037	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130038	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130039	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130040	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-11.40	-16.00	120.70	-112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130041	DUNGEON1	du1_meatlump_bunker_1	AREA	10	2.90	-16.00	112.30	164	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130042	DUNGEON1	du1_meatlump_bunker_1	AREA	10	17.80	-16.00	123.90	-158	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130043	DUNGEON1	du1_meatlump_bunker_1	AREA	10	6.60	-16.00	135.50	172	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130044	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-6.30	-16.00	128.40	147	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130045	DUNGEON1	du1_meatlump_bunker_1	AREA	10	2.40	-16.00	99.00	12	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130046	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130047	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130048	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130049	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130050	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130051	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130052	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130053	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130054	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130055	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-26.10	-12.00	150.30	-51	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130056	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-28.40	-12.00	165.20	168	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130057	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-29.30	-12.00	152.00	168	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130058	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.20	-12.00	148.60	2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130059	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-25.90	-12.00	154.00	-48	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130060	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.90	-12.00	155.30	-142	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130061	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130062	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-79.40	-28.00	121.00	97	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130063	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.30	-28.00	114.90	94	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130064	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-85.80	-28.00	113.10	39	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130065	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130066	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130067	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130068	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130069	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130070	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130071	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130072	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130073	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130074	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-90.00	-28.00	115.50	94	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130075	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-92.50	-28.00	102.40	15	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130076	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-15.40	-12.00	91.10	63	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130077	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130078	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-6.20	-12.00	93.10	112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130079	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130080	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130081	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130082	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130083	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130084	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130085	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-15.40	-12.00	91.10	63	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130086	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.50	-12.00	94.80	-4	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130087	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130088	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130089	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130090	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130091	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130092	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130093	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130094	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130095	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130096	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130097	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130098	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130099	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.50	-12.00	94.80	-4	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130100	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-38.70	-12.00	106.90	112	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130101	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130102	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130103	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130104	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130105	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130106	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130107	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130108	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130109	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130110	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-33.70	-12.00	127.20	-153	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130111	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-36.20	-12.00	135.70	-176	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130112	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-33.70	-12.00	127.20	-153	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130113	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-36.20	-12.00	135.70	-176	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130114	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130115	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-78.10	-28.00	74.10	9	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130116	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130117	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130118	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130119	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130120	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130121	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130122	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-85.10	-28.00	66.40	39	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130123	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-84.60	-28.00	76.30	77	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130124	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-151.00	-44.00	79.60	52	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130125	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-145.30	-44.00	94.70	144	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130126	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130127	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130128	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130129	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130130	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130131	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130132	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130133	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130134	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130135	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130136	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130137	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130138	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-151.00	-44.00	79.60	52	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130139	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-145.30	-44.00	94.70	144	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130140	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130141	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130142	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130143	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130144	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130145	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130146	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130147	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130148	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130149	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130150	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130151	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130152	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-92.10	-44.00	-2.30	-78	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130153	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-79.10	-44.00	-7.70	-91	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130154	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-92.10	-44.00	-2.30	-78	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
-1130155	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-79.10	-44.00	-7.70	-91	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	STOP	idle	0	0	0	0	600	480	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
+1130003	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.00	-12.00	48.60	158	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130004	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130005	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130006	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.50	-12.00	50.10	169	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130007	DUNGEON1	du1_meatlump_bunker_1	AREA	5	2.00	-12.00	48.60	158	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130008	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130009	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130010	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130011	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130012	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130013	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130014	DUNGEON1	du1_meatlump_bunker_1	AREA	7	17.80	-16.00	76.70	150	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130015	DUNGEON1	du1_meatlump_bunker_1	AREA	7	20.10	-16.00	74.50	-142	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130016	DUNGEON1	du1_meatlump_bunker_1	AREA	7	15.00	-16.00	78.70	114	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130017	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130018	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130019	DUNGEON1	du1_meatlump_bunker_1	AREA	10	5.70	-16.00	139.90	-160	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130020	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130021	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130022	DUNGEON1	du1_meatlump_bunker_1	AREA	10	6.00	-16.00	131.70	148	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130023	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130024	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130025	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130026	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130027	DUNGEON1	du1_meatlump_bunker_1	AREA	10	24.10	-16.00	121.40	-86	1	a Meatlump dunder	mtp_instance_lost_meatlump_100_h_inv_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130028	DUNGEON1	du1_meatlump_bunker_1	AREA	10	1.30	-16.00	105.00	100	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130029	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130030	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130031	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130032	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130033	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130034	DUNGEON1	du1_meatlump_bunker_1	AREA	10	7.50	-16.00	140.00	-160	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130035	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-0.40	-16.00	133.80	148	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130036	DUNGEON1	du1_meatlump_bunker_1	AREA	10	19.90	-16.00	121.30	74	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130037	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-15.10	-16.00	123.60	-112	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130038	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130039	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-7.40	-16.00	119.30	127	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130040	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-11.40	-16.00	120.70	-112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130041	DUNGEON1	du1_meatlump_bunker_1	AREA	10	2.90	-16.00	112.30	164	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130042	DUNGEON1	du1_meatlump_bunker_1	AREA	10	17.80	-16.00	123.90	-158	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130043	DUNGEON1	du1_meatlump_bunker_1	AREA	10	6.60	-16.00	135.50	172	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130044	DUNGEON1	du1_meatlump_bunker_1	AREA	10	-6.30	-16.00	128.40	147	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130045	DUNGEON1	du1_meatlump_bunker_1	AREA	10	2.40	-16.00	99.00	12	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130046	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130047	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130048	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130049	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130050	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130051	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130052	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.30	-12.00	144.30	2	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130053	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.00	-12.00	168.70	-48	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130054	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-21.60	-12.00	166.10	-142	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130055	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-26.10	-12.00	150.30	-51	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130056	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-28.40	-12.00	165.20	168	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130057	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-29.30	-12.00	152.00	168	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130058	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-27.20	-12.00	148.60	2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130059	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-25.90	-12.00	154.00	-48	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130060	DUNGEON1	du1_meatlump_bunker_1	AREA	12	-31.90	-12.00	155.30	-142	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130061	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130062	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-79.40	-28.00	121.00	97	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130063	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.30	-28.00	114.90	94	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130064	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-85.80	-28.00	113.10	39	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130065	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130066	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130067	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130068	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130069	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130070	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130071	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-93.40	-28.00	104.90	39	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130072	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-81.10	-28.00	100.40	-6	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130073	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-88.00	-28.00	121.40	97	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130074	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-90.00	-28.00	115.50	94	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130075	DUNGEON1	du1_meatlump_bunker_1	AREA	17	-92.50	-28.00	102.40	15	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130076	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-15.40	-12.00	91.10	63	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130077	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130078	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-6.20	-12.00	93.10	112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130079	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130080	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130081	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130082	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130083	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-10.80	-12.00	94.80	114	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130084	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-17.70	-12.00	95.70	112	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130085	DUNGEON1	du1_meatlump_bunker_1	AREA	18	-15.40	-12.00	91.10	63	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130086	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.50	-12.00	94.80	-4	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130087	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130088	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130089	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130090	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130091	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130092	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130093	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.30	-12.00	99.20	164	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130094	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130095	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130096	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-36.40	-12.00	90.90	-5	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130097	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-40.00	-12.00	104.60	-95	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130098	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-35.80	-12.00	112.00	-174	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130099	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-33.50	-12.00	94.80	-4	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130100	DUNGEON1	du1_meatlump_bunker_1	AREA	20	-38.70	-12.00	106.90	112	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130101	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130102	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130103	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130104	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130105	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130106	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130107	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-39.20	-12.00	127.30	97	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130108	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-35.80	-12.00	134.80	175	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130109	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-32.10	-12.00	128.70	-127	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130110	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-33.70	-12.00	127.20	-153	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130111	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-36.20	-12.00	135.70	-176	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130112	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-33.70	-12.00	127.20	-153	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130113	DUNGEON1	du1_meatlump_bunker_1	AREA	21	-36.20	-12.00	135.70	-176	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130114	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130115	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-78.10	-28.00	74.10	9	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130116	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130117	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130118	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130119	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130120	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.50	-28.00	63.20	9	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130121	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-81.00	-28.00	78.80	87	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130122	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-85.10	-28.00	66.40	39	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130123	DUNGEON1	du1_meatlump_bunker_1	AREA	26	-84.60	-28.00	76.30	77	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130124	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-151.00	-44.00	79.60	52	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130125	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-145.30	-44.00	94.70	144	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130126	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130127	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	an S-1 security droid	mtp_instance_aggro_sec_droid_s1_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130128	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130129	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130130	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130131	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130132	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130133	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-144.20	-44.00	76.90	86	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130134	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130135	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-156.20	-44.00	93.20	163	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130136	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-158.00	-44.00	73.70	-2	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130137	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-143.80	-44.00	97.50	164	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130138	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-151.00	-44.00	79.60	52	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130139	DUNGEON1	du1_meatlump_bunker_1	AREA	29	-145.30	-44.00	94.70	144	1	an S-1 security droid	mtp_instance_sec_droid_s1_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130140	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130141	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a blastromech	mtp_instance_blastromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130142	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130143	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	an MSE-6 "Mouse" droid	mtp_instance_mouse_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130144	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130145	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	an EG-6 power droid	mtp_instance_power_droid_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130146	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130147	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	an R5 astromech	mtp_instance_r5_astromech_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130148	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-71.60	-44.00	0.30	-122	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130149	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-68.60	-44.00	-17.10	-66	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130150	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-99.10	-44.00	-21.20	10	1	a Ragtag blackjack	mtp_instance_ragtag_blackjack_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130151	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-82.30	-44.00	-13.80	-33	1	a Ragtag cudgel	mtp_instance_ragtag_cudgel_65_h_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130152	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-92.10	-44.00	-2.30	-78	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130153	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-79.10	-44.00	-7.70	-91	1	an S-2 security droid	mtp_instance_sec_droid_s2_65_d_att_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130154	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-92.10	-44.00	-2.30	-78	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480
+1130155	DUNGEON1	du1_meatlump_bunker_1	AREA	32	-79.10	-44.00	-7.70	-91	1	an S-2 security droid	mtp_instance_aggro_sec_droid_s2_65_d_agg_n	Dungeon	Meatlump Hideout Instance	1	IDLE	0	0	-	idle	0	0	0	600	480

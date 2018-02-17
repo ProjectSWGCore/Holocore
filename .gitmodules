@@ -1,0 +1,3 @@
+[submodule "PSWGCommon"]
+	path = PSWGCommon
+	url = https://Obique@bitbucket.org/projectswg/pswgcommon.git

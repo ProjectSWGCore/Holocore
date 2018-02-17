@@ -1,22 +1,40 @@
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
-
-mainClassName  = 'main.ProjectSWG'
-
-manifest {
-	attributes 'Main-Class': 'main.ProjectSWG'
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+	}
 }
 
+plugins {
+	id 'com.github.johnrengelman.shadow' version '2.0.2'
+	id 'application'
+	id 'java'
+	id 'groovy'
+	id 'idea'
+	id 'findbugs'
+	id 'checkstyle'
+}
+
+mainClassName = 'com.projectswg.holocore.ProjectSWG'
+sourceCompatibility = 9
+targetCompatibility = 9
+
 sourceSets {
-    main {
-        java {
-            srcDirs = ['src', 'test']
-        }
-    }
-	test {
+	// https://stackoverflow.com/questions/22159699/gradle-groovy-and-java-class-dependency-compile
+	main {
+		groovy {
+			// override the default locations, rather than adding additional ones
+			srcDirs = ['src/main/groovy', 'src/main/java']
+		}
 		java {
-			srcDirs = ['src', 'test']
+			srcDirs = [] // don't compile Java code twice 
+		}
+	}
+	display {
+		java {
+			
 		}
 	}
 }
@@ -27,28 +45,49 @@ test {
 	}
 	afterSuite { TestDescriptor td, TestResult tr ->
 		if (td.parent == null) {
-			println 'Tests run: ('+tr.getTestCount()+'), Failures: ('+tr.getFailedTestCount()+')' // IMPORTANT - this is required for Lightspeed
+			println 'Tests run: (' + tr.getTestCount() + '), Failures: (' + tr.getFailedTestCount() + ')' // IMPORTANT - this is required for Lightspeed
 		}
 	}
-	include 'main/TestAll.class' // to run only a single test case
+	include 'com/projectswg/holocore/TestAll.class' // to run only a single test case
 }
 
-shadowJar{
-	archiveName = "Holocore.jar"
+shadowJar {
+	baseName = "Holocore"
+	classifier = null
+	version = null
+}
+
+repositories {
+	jcenter()
 }
 
 dependencies {
-	compile fileTree(dir: 'lib', include: ['*.jar'])
-	testCompile fileTree(dir: 'lib', include: ['*.jar'])
+	compile project(':PSWGCommon')
+	
+	compile group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.0-alpha-1'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
+	compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.10.0.201712302008-r'
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
+	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+	
+	testCompile 'junit:junit:4.12'
+	
+	displayCompile project(':PSWGCommon')
+	displayCompile sourceSets.main.output
 }
 
-buildscript {
-	repositories {
-		maven {
-			url 'https://plugins.gradle.org/m2/'
-		}
+task wrapper(type: Wrapper) {
+	gradleVersion = "4.4.1"
+}
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
 	}
-	dependencies {
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
-	}
+}
+
+checkstyle {
+	toolVersion "8.8"
 }

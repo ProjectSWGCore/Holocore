@@ -1,328 +1,328 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1220003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	1.60	-20.75	32.67	179	1	Darth Vader	darth_vader_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.23	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.58	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.59	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.45	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-6.37	-13.75	6.20	0	1	Admiral Krieg	clone_admiral_krieg_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-1.15	-13.75	9.50	163	1	a comm operator	imp_comm_operator_14_h_att_n	City	Kachirho	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
-1220010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-7.97	-13.75	6.87	106	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	2.07	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	4.90	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220013	KASHYYYK_MAIN	kas_main_world	AREA	0	-419.10	179.60	-88.78	-95	1	Harwakokok the Mighty	ep3_avatar_harwakokok_86_h_agg_b	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220014	KASHYYYK_MAIN	kas_main_world	AREA	0	-425.85	179.60	-85.21	-126	1	Ovarra	ep3_ovarra_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220015	KASHYYYK_MAIN	kas_main_world	AREA	0	-432.37	179.60	-96.57	-33	1	Dr. Cheyerooto	ep3_dr_cheyerooto_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220016	KASHYYYK_MAIN	kas_main_world	AREA	0	-441.35	211.20	-75.77	-143	1	Captain Koh	ep3_mining_captain_koh_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220017	KASHYYYK_MAIN	kas_main_world	AREA	0	-441.41	158.50	-63.77	-113	1	Belga Daeri	ep3_belga_daeri_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220018	KASHYYYK_MAIN	kas_main_world	AREA	0	-442.75	211.20	-74.56	-142	1	Fezrik Bendledon	ep3_fezrik_bendledon_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220019	KASHYYYK_MAIN	kas_main_world	AREA	0	-448.43	158.50	-102.85	-38	1	Chatook	ep3_kachirho_chatook_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220020	KASHYYYK_MAIN	kas_main_world	AREA	0	-453.60	158.40	-20.00	-81	1	Flash Harrison	ep3_mining_flash_harrison_100_h_inv_n	City	Kachirho	1	STOP	npc_standing_drinking	1	0	0	0	300	120	0
-1220021	KASHYYYK_MAIN	kas_main_world	AREA	0	-458.00	158.40	-27.20	-25	1	Colonel Gurnst	ep3_colonel_gurnst_100_h_inv_n	City	Kachirho	1	STOP	npc_standing_drinking	1	0	0	0	300	120	0
-1220022	KASHYYYK_MAIN	kas_main_world	AREA	0	-465.44	158.10	-19.46	-174	1	Unluto	ep3_unluto_bartender_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220023	KASHYYYK_MAIN	kas_main_world	AREA	0	-478.41	211.30	-92.74	95	1	Mada Johnson	ep3_mada_johnson_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220024	KASHYYYK_MAIN	kas_main_world	AREA	0	-495.54	17.94	-109.90	-35	1	Dr. Criss Ne`Pomi	ep3_dr_criss_nepomi_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220025	KASHYYYK_MAIN	kas_main_world	AREA	0	-498.75	17.94	-113.12	-24	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220026	KASHYYYK_MAIN	kas_main_world	AREA	0	-501.77	17.94	-113.02	4	1	Rroow	ep3_rroow_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220027	KASHYYYK_MAIN	kas_main_world	AREA	0	-502.20	18.76	-74.10	-123	1	Kymayrr	ep3_kymayrr_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220028	KASHYYYK_MAIN	kas_main_world	AREA	0	-504.27	17.94	-98.91	-52	1	Dr. Farnsworth	ep3_dr_farnsworth_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220029	KASHYYYK_MAIN	kas_main_world	AREA	0	-507.80	19.30	-111.90	-126	1	Wrelaac	ep3_wrelaac_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220030	KASHYYYK_MAIN	kas_main_world	AREA	0	-508.77	18.29	-66.29	-160	1	Tien Wallub	ep3_tien_wallub_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220031	KASHYYYK_MAIN	kas_main_world	AREA	0	-510.33	18.82	-28.70	0	1	a corpse	ep3_rodian_corpse_100_h_inv_n	City	Kachirho	1	STOP	npc_dead_02	0	0	0	0	300	120	0
-1220032	KASHYYYK_MAIN	kas_main_world	AREA	0	-512.49	17.83	-69.99	-177	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_03_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220033	KASHYYYK_MAIN	kas_main_world	AREA	0	-513.05	19.30	-108.74	0	1	Ikvizi	ep3_ikvizi_100_h_inv_n	City	Kachirho	1	GUARD	scared	0	0	0	0	300	120	0
-1220034	KASHYYYK_MAIN	kas_main_world	AREA	0	-548.04	19.27	-108.26	0	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_03_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220035	KASHYYYK_MAIN	kas_main_world	AREA	0	-549.64	18.99	-132.42	-28	1	Eyma	ep3_eyma_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220036	KASHYYYK_MAIN	kas_main_world	AREA	0	-556.01	19.81	-71.23	-155	1	Gursan Bryes	ep3_gursan_bryes_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220037	KASHYYYK_MAIN	kas_main_world	AREA	0	-578.87	18.82	-68.11	-159	1	Kiaanta (Patrol Squad)	ep3_marium_valmont_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220038	KASHYYYK_MAIN	kas_main_world	AREA	0	-587.29	18.56	-104.16	0	1	Chewbacca	clone_chewbacca_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220039	KASHYYYK_MAIN	kas_main_world	AREA	0	-589.23	18.48	-103.28	0	1	Vryyyr (Master Hunter)	ep3_wke_vryyyr_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220040	KASHYYYK_MAIN	kas_main_world	AREA	0	-610.92	18.61	-95.99	0	1	a corpse	ep3_rodian_corpse_100_h_inv_n	City	Kachirho	1	STOP	npc_dead_02	0	0	0	0	300	120	0
-1220041	KASHYYYK_MAIN	kas_main_world	AREA	0	-635.95	22.83	-119.63	73	1	Commander Richards	ep3_commander_richards_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220042	KASHYYYK_MAIN	kas_main_world	AREA	0	-660.88	25.83	-111.88	-63	1	Dr. Price	ep3_dr_price_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220043	KASHYYYK_MAIN	kas_main_world	AREA	0	-667.66	18.82	-116.09	-177	1	Stren Colo	ep3_stren_colo_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220044	KASHYYYK_MAIN	kas_main_world	AREA	0	-682.21	18.82	-160.87	0	1	Ace Fendo (a chassis broker)	ep3_ace_fendo_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220045	KASHYYYK_MAIN	kas_main_world	AREA	0	-701.06	17.13	11.24	40	1	Chrilooc	ep3_chrilooc_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220046	KASHYYYK_MAIN	kas_main_world	AREA	0	-438.29	8.83	386.75	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220047	KASHYYYK_MAIN	kas_main_world	PATROL	0	-444.47	9.29	377.45	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220048	KASHYYYK_MAIN	kas_main_world	AREA	0	-466.20	7.45	281.19	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220049	KASHYYYK_MAIN	kas_main_world	AREA	0	-472.03	8.30	316.10	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220050	KASHYYYK_MAIN	kas_main_world	AREA	0	-479.46	7.45	151.65	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220051	KASHYYYK_MAIN	kas_main_world	AREA	0	-493.91	7.45	230.71	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220052	KASHYYYK_MAIN	kas_main_world	AREA	0	-516.85	13.54	276.83	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220053	KASHYYYK_MAIN	kas_main_world	PATROL	0	-522.32	7.45	146.04	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220054	KASHYYYK_MAIN	kas_main_world	AREA	0	-523.90	7.45	149.87	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220055	KASHYYYK_MAIN	kas_main_world	AREA	0	-540.91	7.45	146.94	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220056	KASHYYYK_MAIN	kas_main_world	AREA	0	-551.06	7.43	178.62	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220057	KASHYYYK_MAIN	kas_main_world	AREA	0	-558.85	7.45	162.71	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220058	KASHYYYK_MAIN	kas_main_world	AREA	0	-562.06	7.45	142.11	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220059	KASHYYYK_MAIN	kas_main_world	AREA	0	-581.53	6.27	101.72	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220060	KASHYYYK_MAIN	kas_main_world	AREA	0	-646.95	5.51	49.72	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220061	KASHYYYK_MAIN	kas_main_world	AREA	0	-681.04	5.49	91.74	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220062	KASHYYYK_MAIN	kas_main_world	AREA	0	-701.11	5.49	-4.99	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220063	KASHYYYK_MAIN	kas_main_world	AREA	0	-807.18	5.42	-52.24	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220064	KASHYYYK_MAIN	kas_main_world	AREA	0	-810.53	5.51	2.17	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220065	KASHYYYK_MAIN	kas_main_world	AREA	0	-859.89	5.55	-224.50	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220066	KASHYYYK_MAIN	kas_main_world	AREA	0	-944.06	18.38	-121.61	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220067	KASHYYYK_MAIN	kas_main_world	AREA	0	927.17	8.63	222.59	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220068	KASHYYYK_MAIN	kas_main_world	AREA	0	926.30	8.70	244.50	0	1	Jagged Fang	ep3_varactyl_jaggedfang_55_c_agg_b	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220069	KASHYYYK_MAIN	kas_main_world	AREA	0	900.41	8.74	135.40	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220070	KASHYYYK_MAIN	kas_main_world	AREA	0	893.95	8.79	232.78	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220071	KASHYYYK_MAIN	kas_main_world	AREA	0	890.24	4.23	491.38	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220072	KASHYYYK_MAIN	kas_main_world	AREA	0	882.45	8.63	173.89	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220073	KASHYYYK_MAIN	kas_main_world	AREA	0	864.11	4.17	444.85	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220074	KASHYYYK_MAIN	kas_main_world	AREA	0	830.37	18.82	716.82	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220075	KASHYYYK_MAIN	kas_main_world	AREA	0	825.88	23.65	643.87	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220076	KASHYYYK_MAIN	kas_main_world	AREA	0	824.64	18.82	780.31	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220077	KASHYYYK_MAIN	kas_main_world	AREA	0	819.11	8.63	170.97	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220078	KASHYYYK_MAIN	kas_main_world	AREA	0	811.96	8.68	109.53	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	3
-1220079	KASHYYYK_MAIN	kas_main_world	PATROL	0	810.91	23.92	-502.82	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220080	KASHYYYK_MAIN	kas_main_world	AREA	0	808.69	5.44	391.51	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220081	KASHYYYK_MAIN	kas_main_world	AREA	0	806.46	18.61	452.62	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220082	KASHYYYK_MAIN	kas_main_world	AREA	0	800.88	18.82	702.19	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220083	KASHYYYK_MAIN	kas_main_world	AREA	0	797.90	6.27	309.46	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220084	KASHYYYK_MAIN	kas_main_world	AREA	0	792.92	18.97	434.33	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220085	KASHYYYK_MAIN	kas_main_world	AREA	0	791.60	18.82	821.47	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220086	KASHYYYK_MAIN	kas_main_world	AREA	0	789.40	19.40	609.10	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220087	KASHYYYK_MAIN	kas_main_world	AREA	0	787.42	23.92	-401.19	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220088	KASHYYYK_MAIN	kas_main_world	AREA	0	786.65	23.92	-451.82	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	12
-1220089	KASHYYYK_MAIN	kas_main_world	AREA	0	782.43	5.49	344.42	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220090	KASHYYYK_MAIN	kas_main_world	AREA	0	772.92	6.80	289.91	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220091	KASHYYYK_MAIN	kas_main_world	AREA	0	766.90	18.73	490.42	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220092	KASHYYYK_MAIN	kas_main_world	AREA	0	764.56	18.82	554.96	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220093	KASHYYYK_MAIN	kas_main_world	AREA	0	763.91	18.82	786.53	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220094	KASHYYYK_MAIN	kas_main_world	AREA	0	724.40	23.90	-335.30	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220095	KASHYYYK_MAIN	kas_main_world	AREA	0	759.09	23.92	-510.75	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	12
-1220096	KASHYYYK_MAIN	kas_main_world	AREA	0	757.69	8.63	128.44	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220097	KASHYYYK_MAIN	kas_main_world	AREA	0	750.09	18.82	749.81	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220098	KASHYYYK_MAIN	kas_main_world	PATROL	0	749.22	18.00	529.10	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220099	KASHYYYK_MAIN	kas_main_world	AREA	0	738.59	5.39	313.19	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220100	KASHYYYK_MAIN	kas_main_world	AREA	0	729.00	23.90	-593.00	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220101	KASHYYYK_MAIN	kas_main_world	PATROL	0	718.06	24.31	-270.51	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220102	KASHYYYK_MAIN	kas_main_world	AREA	0	712.26	23.92	-459.81	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220103	KASHYYYK_MAIN	kas_main_world	PATROL	0	708.64	19.62	-173.77	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220104	KASHYYYK_MAIN	kas_main_world	AREA	0	704.52	23.92	-399.78	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220105	KASHYYYK_MAIN	kas_main_world	AREA	0	704.31	5.43	263.05	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220106	KASHYYYK_MAIN	kas_main_world	AREA	0	701.61	18.82	-192.71	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220107	KASHYYYK_MAIN	kas_main_world	AREA	0	699.40	8.63	83.12	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220108	KASHYYYK_MAIN	kas_main_world	AREA	0	695.69	18.82	834.93	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220109	KASHYYYK_MAIN	kas_main_world	AREA	0	669.80	18.80	756.20	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220110	KASHYYYK_MAIN	kas_main_world	AREA	0	673.65	18.82	808.25	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220111	KASHYYYK_MAIN	kas_main_world	AREA	0	663.80	23.92	-620.91	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	6
-1220112	KASHYYYK_MAIN	kas_main_world	AREA	0	660.40	19.58	-304.70	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220113	KASHYYYK_MAIN	kas_main_world	AREA	0	656.68	07.02	161.53	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220114	KASHYYYK_MAIN	kas_main_world	AREA	0	651.15	18.82	668.44	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220115	KASHYYYK_MAIN	kas_main_world	AREA	0	636.80	21.60	-259.30	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220116	KASHYYYK_MAIN	kas_main_world	AREA	0	639.60	21.50	-248.50	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220117	KASHYYYK_MAIN	kas_main_world	AREA	0	631.17	5.58	119.89	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220118	KASHYYYK_MAIN	kas_main_world	PATROL	0	629.72	20.20	-251.65	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220119	KASHYYYK_MAIN	kas_main_world	AREA	0	601.60	8.20	85.10	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	12
-1220120	KASHYYYK_MAIN	kas_main_world	AREA	0	610.35	24.71	754.86	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220121	KASHYYYK_MAIN	kas_main_world	PATROL	0	607.31	24.71	744.92	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220122	KASHYYYK_MAIN	kas_main_world	AREA	0	591.71	23.56	-440.45	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	12
-1220123	KASHYYYK_MAIN	kas_main_world	AREA	0	589.58	24.54	-589.41	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220124	KASHYYYK_MAIN	kas_main_world	AREA	0	591.40	24.70	715.70	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220125	KASHYYYK_MAIN	kas_main_world	AREA	0	577.30	24.70	739.20	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220126	KASHYYYK_MAIN	kas_main_world	AREA	0	573.32	21.28	-480.01	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220127	KASHYYYK_MAIN	kas_main_world	AREA	0	549.15	20.58	-556.44	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220128	KASHYYYK_MAIN	kas_main_world	AREA	0	531.35	21.52	-522.89	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220129	KASHYYYK_MAIN	kas_main_world	AREA	0	525.08	6.93	-54.08	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220130	KASHYYYK_MAIN	kas_main_world	AREA	0	518.82	18.94	657.34	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220131	KASHYYYK_MAIN	kas_main_world	AREA	0	513.96	8.41	36.31	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220132	KASHYYYK_MAIN	kas_main_world	AREA	0	503.96	23.92	-590.96	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220133	KASHYYYK_MAIN	kas_main_world	AREA	0	444.76	24.23	-537.18	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	FLOAT	idle	0	0	0	0	300	120	6
-1220134	KASHYYYK_MAIN	kas_main_world	AREA	0	443.52	7.51	-81.13	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	4	FLOAT	idle	0	0	0	0	300	120	12
-1220135	KASHYYYK_MAIN	kas_main_world	PATROL	0	443.30	18.00	670.94	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220136	KASHYYYK_MAIN	kas_main_world	AREA	0	437.76	5.15	-51.23	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220137	KASHYYYK_MAIN	kas_main_world	AREA	0	425.70	27.53	-477.89	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220138	KASHYYYK_MAIN	kas_main_world	AREA	0	417.39	20.00	603.25	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220139	KASHYYYK_MAIN	kas_main_world	PATROL	0	404.90	21.16	-499.26	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220140	KASHYYYK_MAIN	kas_main_world	AREA	0	404.61	18.80	499.69	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220141	KASHYYYK_MAIN	kas_main_world	AREA	0	402.61	19.49	-9.14	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220142	KASHYYYK_MAIN	kas_main_world	AREA	0	376.87	07.01	-71.84	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220143	KASHYYYK_MAIN	kas_main_world	AREA	0	337.64	19.65	118.24	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220144	KASHYYYK_MAIN	kas_main_world	PATROL	0	337.40	18.40	387.38	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220145	KASHYYYK_MAIN	kas_main_world	AREA	0	336.24	19.22	323.48	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220146	KASHYYYK_MAIN	kas_main_world	AREA	0	334.01	5.31	-49.85	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220147	KASHYYYK_MAIN	kas_main_world	PATROL	0	331.37	20.01	112.50	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220148	KASHYYYK_MAIN	kas_main_world	AREA	0	328.16	18.76	451.73	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220149	KASHYYYK_MAIN	kas_main_world	AREA	0	315.15	19.90	710.18	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220150	KASHYYYK_MAIN	kas_main_world	AREA	0	293.66	7.52	-25.90	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220151	KASHYYYK_MAIN	kas_main_world	AREA	0	284.81	19.58	92.91	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	4	FLOAT	idle	0	0	0	0	300	120	8
-1220152	KASHYYYK_MAIN	kas_main_world	AREA	0	275.92	32.60	-286.04	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220153	KASHYYYK_MAIN	kas_main_world	AREA	0	263.47	36.65	-296.24	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220154	KASHYYYK_MAIN	kas_main_world	AREA	0	259.55	30.07	-428.45	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220155	KASHYYYK_MAIN	kas_main_world	AREA	0	254.83	18.60	33.47	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220156	KASHYYYK_MAIN	kas_main_world	AREA	0	236.10	18.90	743.91	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220157	KASHYYYK_MAIN	kas_main_world	AREA	0	233.06	20.92	502.75	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220158	KASHYYYK_MAIN	kas_main_world	AREA	0	221.74	33.99	-274.83	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220159	KASHYYYK_MAIN	kas_main_world	AREA	0	211.91	11.23	-86.51	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220160	KASHYYYK_MAIN	kas_main_world	AREA	0	205.48	28.13	-373.90	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220161	KASHYYYK_MAIN	kas_main_world	AREA	0	204.55	29.20	-137.72	-26	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220162	KASHYYYK_MAIN	kas_main_world	AREA	0	202.46	19.61	549.36	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	4
-1220163	KASHYYYK_MAIN	kas_main_world	AREA	0	198.74	26.13	-316.53	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220164	KASHYYYK_MAIN	kas_main_world	AREA	0	197.37	23.65	631.12	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220165	KASHYYYK_MAIN	kas_main_world	PATROL	0	195.90	30.38	-286.48	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220166	KASHYYYK_MAIN	kas_main_world	AREA	0	191.40	21.59	597.00	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220167	KASHYYYK_MAIN	kas_main_world	AREA	0	186.48	19.68	578.04	0	1	Wrhisch	ep3_qst_wrhisch_25_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220168	KASHYYYK_MAIN	kas_main_world	AREA	0	166.67	19.61	535.48	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220169	KASHYYYK_MAIN	kas_main_world	AREA	0	164.89	20.78	590.63	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220170	KASHYYYK_MAIN	kas_main_world	AREA	0	162.44	19.61	494.19	0	1	an anguished wookiee	ep3_qst_anguished_wookiee_25_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220171	KASHYYYK_MAIN	kas_main_world	AREA	0	157.85	7.13	773.54	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220172	KASHYYYK_MAIN	kas_main_world	AREA	0	148.86	19.61	539.13	0	1	an anguished wookiee	ep3_qst_anguished_wookiee_25_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220173	KASHYYYK_MAIN	kas_main_world	AREA	0	146.24	6.14	-45.19	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220174	KASHYYYK_MAIN	kas_main_world	AREA	0	140.10	22.20	585.77	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220175	KASHYYYK_MAIN	kas_main_world	AREA	0	119.18	10.52	811.52	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220176	KASHYYYK_MAIN	kas_main_world	AREA	0	101.97	18.82	-134.89	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220177	KASHYYYK_MAIN	kas_main_world	AREA	0	97.74	21.10	533.61	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220178	KASHYYYK_MAIN	kas_main_world	AREA	0	94.69	20.00	-305.66	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220179	KASHYYYK_MAIN	kas_main_world	AREA	0	92.56	9.88	769.92	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220180	KASHYYYK_MAIN	kas_main_world	AREA	0	88.79	18.93	-151.39	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220181	KASHYYYK_MAIN	kas_main_world	AREA	0	41.20	20.20	493.50	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	4
-1220182	KASHYYYK_MAIN	kas_main_world	AREA	0	36.61	07.05	-46.79	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220183	KASHYYYK_MAIN	kas_main_world	AREA	0	29.13	5.47	-1.53	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220184	KASHYYYK_MAIN	kas_main_world	AREA	0	19.89	20.69	-275.67	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220185	KASHYYYK_MAIN	kas_main_world	AREA	0	-3.28	18.96	-147.79	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220186	KASHYYYK_MAIN	kas_main_world	AREA	0	-92.45	19.38	-173.18	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220187	KASHYYYK_MAIN	kas_main_world	AREA	0	-45.18	19.20	-200.49	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220188	KASHYYYK_MAIN	kas_main_world	AREA	0	-24.39	5.19	-5.21	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220189	KASHYYYK_MAIN	kas_main_world	AREA	0	-81.20	5.88	-8.18	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	9
-1220190	KASHYYYK_MAIN	kas_main_world	AREA	0	-70.99	19.22	84.12	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220191	KASHYYYK_MAIN	kas_main_world	AREA	0	-93.15	18.38	98.56	-161	1	Pressk (a slavemaster)	ep3_pressk_100_h_inv_n	Outback	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220192	KASHYYYK_MAIN	kas_main_world	AREA	0	-28.68	28.15	693.50	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	4
-1220193	KASHYYYK_MAIN	kas_main_world	AREA	0	-34.75	19.10	742.48	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220194	KASHYYYK_MAIN	kas_main_world	AREA	0	-52.74	20.30	440.06	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220195	KASHYYYK_MAIN	kas_main_world	AREA	0	-68.27	21.18	404.24	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220196	KASHYYYK_MAIN	kas_main_world	AREA	0	-82.99	20.52	602.36	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220197	KASHYYYK_MAIN	kas_main_world	AREA	0	-87.56	19.87	757.60	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	4	FLOAT	idle	0	0	0	0	300	120	15
-1220198	KASHYYYK_MAIN	kas_main_world	AREA	0	-88.65	18.82	115.55	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220199	KASHYYYK_MAIN	kas_main_world	AREA	0	-89.52	18.82	268.16	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220200	KASHYYYK_MAIN	kas_main_world	AREA	0	-95.42	22.08	545.36	0	1	corpse of Takook	ep3_takook_100_h_inv_n	Outback	Kachirho	1	STOP	npc_dead_01	0	0	0	0	300	120	0
-1220201	KASHYYYK_MAIN	kas_main_world	AREA	0	-98.51	21.54	542.61	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220202	KASHYYYK_MAIN	kas_main_world	AREA	0	-110.40	18.88	89.27	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220203	KASHYYYK_MAIN	kas_main_world	AREA	0	-119.81	18.85	108.98	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220204	KASHYYYK_MAIN	kas_main_world	AREA	0	-131.81	22.74	861.22	-109	1	Rawarok	ep3_rawarok_100_h_inv_n	Outback	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220205	KASHYYYK_MAIN	kas_main_world	AREA	0	-133.77	22.74	864.98	-132	1	Chawroo	ep3_chawroo_100_h_inv_n	Outback	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220206	KASHYYYK_MAIN	kas_main_world	AREA	0	-148.38	19.22	-94.15	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220207	KASHYYYK_MAIN	kas_main_world	AREA	0	-158.05	6.27	25.99	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220208	KASHYYYK_MAIN	kas_main_world	AREA	0	-160.05	19.22	-82.89	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220209	KASHYYYK_MAIN	kas_main_world	AREA	0	-168.12	5.92	55.35	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220210	KASHYYYK_MAIN	kas_main_world	PATROL	0	-171.10	21.45	472.51	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	PATROL	idle	0	999	0	0	300	120	0
-1220211	KASHYYYK_MAIN	kas_main_world	AREA	0	-172.08	20.06	483.33	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	4	FLOAT	idle	0	0	0	0	300	120	15
-1220212	KASHYYYK_MAIN	kas_main_world	AREA	0	-184.30	5.80	887.70	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220213	KASHYYYK_MAIN	kas_main_world	AREA	0	-202.95	19.22	-104.11	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220214	KASHYYYK_MAIN	kas_main_world	AREA	0	-221.80	5.50	901.70	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220215	KASHYYYK_MAIN	kas_main_world	AREA	0	-236.18	6.45	59.79	-139	1	Sera Jossi	ep3_sera_jossi_100_h_inv_n	Outback	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220216	KASHYYYK_MAIN	kas_main_world	AREA	0	-252.19	5.59	21.80	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220217	KASHYYYK_MAIN	kas_main_world	AREA	0	-265.27	5.60	675.89	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	12
-1220218	KASHYYYK_MAIN	kas_main_world	AREA	0	-275.11	20.00	453.21	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220219	KASHYYYK_MAIN	kas_main_world	AREA	0	-275.32	6.27	713.88	0	1	a sunbaked bolotaur	ep3_bolotaur_sunbaked_30_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220220	KASHYYYK_MAIN	kas_main_world	AREA	0	-308.07	5.60	645.30	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220221	KASHYYYK_MAIN	kas_main_world	AREA	0	-312.73	19.15	-162.57	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220222	KASHYYYK_MAIN	kas_main_world	AREA	0	-321.71	5.60	607.08	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220223	KASHYYYK_MAIN	kas_main_world	AREA	0	-322.89	21.02	-175.93	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	FLOAT	idle	0	0	0	0	300	120	6
-1220224	KASHYYYK_MAIN	kas_main_world	AREA	0	-346.63	5.90	130.94	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220225	KASHYYYK_MAIN	kas_main_world	AREA	0	-365.59	15.35	419.08	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	9
-1220226	KASHYYYK_MAIN	kas_main_world	PATROL	0	-372.46	22.26	806.42	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220227	KASHYYYK_MAIN	kas_main_world	AREA	0	-379.11	18.82	700.16	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220228	KASHYYYK_MAIN	kas_main_world	AREA	0	-384.74	19.57	762.22	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220229	KASHYYYK_MAIN	kas_main_world	AREA	0	-385.43	5.90	464.63	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	15
-1220230	KASHYYYK_MAIN	kas_main_world	PATROL	0	-386.55	6.00	456.65	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220231	KASHYYYK_MAIN	kas_main_world	AREA	0	-390.36	19.20	640.33	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220232	KASHYYYK_MAIN	kas_main_world	AREA	0	-395.70	19.29	578.68	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220233	KASHYYYK_MAIN	kas_main_world	PATROL	0	-398.59	6.27	467.45	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	1	PATROL	idle	0	999	0	0	300	120	0
-1220234	KASHYYYK_MAIN	kas_main_world	AREA	0	-402.15	20.93	668.01	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220235	KASHYYYK_MAIN	kas_main_world	AREA	0	-405.13	21.98	682.33	20	1	a dead researcher	ep3_researcher_corpse_m_100_h_inv_n	Outback	Kachirho	1	STOP	npc_dead_02	0	0	0	0	300	120	0
-1220236	KASHYYYK_MAIN	kas_main_world	AREA	0	-405.33	21.54	667.76	0	1	Big Nworb Yorel the Bad	ep3_kachirho_canopy_boss_32_h_agg_e	Outback	Kachirho	1	GUARD	idle	0	0	0	0	300	120	0
-1220237	KASHYYYK_MAIN	kas_main_world	AREA	0	-406.83	22.50	679.13	-161	1	a dead researcher	ep3_researcher_corpse_f_100_h_inv_n	Outback	Kachirho	1	STOP	npc_dead_03	0	0	0	0	300	120	0
-1220238	KASHYYYK_MAIN	kas_main_world	AREA	0	-411.43	18.83	537.02	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	FLOAT	idle	0	0	0	0	300	120	6
-1220239	KASHYYYK_MAIN	kas_main_world	AREA	0	431.63	18.82	826.69	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220240	KASHYYYK_MAIN	kas_main_world	AREA	0	429.53	19.09	905.68	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220241	KASHYYYK_MAIN	kas_main_world	AREA	0	427.89	19.82	768.45	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220242	KASHYYYK_MAIN	kas_main_world	AREA	0	427.09	18.82	968.91	-157	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220243	KASHYYYK_MAIN	kas_main_world	AREA	0	424.75	18.82	955.39	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220244	KASHYYYK_MAIN	kas_main_world	AREA	0	415.42	18.98	892.37	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220245	KASHYYYK_MAIN	kas_main_world	PATROL	0	414.52	18.82	958.56	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	PATROL	idle	0	999	0	0	300	120	0
-1220246	KASHYYYK_MAIN	kas_main_world	AREA	0	412.06	18.82	827.42	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220247	KASHYYYK_MAIN	kas_main_world	AREA	0	406.93	19.20	775.59	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220248	KASHYYYK_MAIN	kas_main_world	AREA	0	403.52	18.82	955.08	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220249	KASHYYYK_MAIN	kas_main_world	AREA	0	403.17	18.82	969.71	166	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220250	KASHYYYK_MAIN	kas_main_world	AREA	0	337.53	32.46	-223.55	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220251	KASHYYYK_MAIN	kas_main_world	AREA	0	324.58	29.32	-166.94	0	1	a healthy looking Wookiee	ep3_kachirho_wke_healthy_100_h_inv_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	6
-1220252	KASHYYYK_MAIN	kas_main_world	AREA	0	316.35	33.20	-194.82	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220253	KASHYYYK_MAIN	kas_main_world	AREA	0	304.40	32.89	-207.81	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220254	KASHYYYK_MAIN	kas_main_world	PATROL	0	303.04	32.00	-186.70	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	PATROL	idle	0	999	0	0	300	120	0
-1220255	KASHYYYK_MAIN	kas_main_world	AREA	0	284.17	32.54	-151.54	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220256	KASHYYYK_MAIN	kas_main_world	AREA	0	274.54	32.96	-193.70	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220257	KASHYYYK_MAIN	kas_main_world	AREA	0	248.75	33.19	-180.59	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220258	KASHYYYK_MAIN	kas_main_world	AREA	0	245.63	31.82	-142.85	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	FLOAT	idle	0	0	0	0	300	120	2
-1220259	KASHYYYK_MAIN	kas_main_world	AREA	0	218.16	27.60	-124.27	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	GUARD	idle	0	0	0	0	300	120	0
-1220260	KASHYYYK_MAIN	kas_main_world	AREA	0	218.05	33.55	-162.81	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	GUARD	idle	0	0	0	0	300	120	0
-1220261	KASHYYYK_MAIN	kas_main_world	AREA	0	213.48	38.66	-151.19	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	GUARD	idle	0	0	0	0	300	120	0
-1220262	KASHYYYK_MAIN	kas_main_world	AREA	0	-738.44	18.82	247.20	-120	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220263	KASHYYYK_MAIN	kas_main_world	AREA	0	-755.01	19.24	263.45	-162	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220264	KASHYYYK_MAIN	kas_main_world	AREA	0	-757.50	19.22	232.24	-120	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220265	KASHYYYK_MAIN	kas_main_world	AREA	0	-773.36	19.45	249.45	-158	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220266	KASHYYYK_MAIN	kas_main_world	AREA	0	-799.31	19.29	182.21	-148	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220267	KASHYYYK_MAIN	kas_main_world	AREA	0	-815.65	19.27	188.84	159	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220268	KASHYYYK_MAIN	kas_main_world	AREA	0	587.35	23.92	-637.75	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220269	KASHYYYK_MAIN	kas_main_world	AREA	0	582.18	23.92	-637.98	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220270	KASHYYYK_MAIN	kas_main_world	AREA	0	577.30	23.92	-639.23	0	1	Kerssoc	ep3_kerssoc_100_h_inv_n	POI	Rodian Hunters' Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220271	KASHYYYK_MAIN	kas_main_world	AREA	0	567.31	23.92	-643.60	-1	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220272	KASHYYYK_MAIN	kas_main_world	AREA	0	554.85	24.25	-644.07	35	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_04_100_h_inv_n	POI	Rodian Hunters' Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220273	KASHYYYK_MAIN	kas_main_world	AREA	0	553.86	24.70	-654.79	0	1	Ortha Ledox	ep3_ortha_ledox_100_h_inv_n	POI	Rodian Hunters' Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220274	KASHYYYK_MAIN	kas_main_world	PATROL	0	545.06	24.70	-647.22	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220275	KASHYYYK_MAIN	kas_main_world	AREA	0	-54.40	21.60	839.33	-155	1	a Captain of the Guard	ep3_npc_ceremonial_captain_34_h_att_n	POI	Rryat Trail Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220276	KASHYYYK_MAIN	kas_main_world	AREA	0	-54.97	19.80	830.39	-150	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220277	KASHYYYK_MAIN	kas_main_world	AREA	0	-69.82	19.64	835.43	-177	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	STOP	idle	0	0	0	0	300	120	0
-1220278	KASHYYYK_MAIN	kas_main_world	AREA	0	-74.38	19.88	778.31	0	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220279	KASHYYYK_MAIN	kas_main_world	AREA	0	-84.37	19.20	784.75	0	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	GUARD	idle	0	0	0	0	300	120	0
-1220280	KASHYYYK_MAIN	kas_main_world	AREA	0	565.95	30.56	467.42	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	FLOAT	idle	0	0	0	0	300	120	9
-1220281	KASHYYYK_MAIN	kas_main_world	PATROL	0	564.07	30.76	438.95	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220282	KASHYYYK_MAIN	kas_main_world	AREA	0	560.59	24.71	267.42	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	FLOAT	idle	0	0	0	0	300	120	9
-1220283	KASHYYYK_MAIN	kas_main_world	AREA	0	546.26	30.96	463.49	0	1	a prisoner	ep3_prisoner_100_h_inv_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220284	KASHYYYK_MAIN	kas_main_world	AREA	0	545.23	24.70	402.08	-94	1	Orooroo the Betrayer	ep3_orooroo_betrayer_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220285	KASHYYYK_MAIN	kas_main_world	AREA	0	544.10	24.71	311.38	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220286	KASHYYYK_MAIN	kas_main_world	AREA	0	542.00	24.71	398.50	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220287	KASHYYYK_MAIN	kas_main_world	AREA	0	539.24	30.74	482.95	149	1	Lesnorr	ep3_lesnorr_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220288	KASHYYYK_MAIN	kas_main_world	PATROL	0	532.92	24.71	431.43	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220289	KASHYYYK_MAIN	kas_main_world	AREA	0	530.72	25.19	360.57	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220290	KASHYYYK_MAIN	kas_main_world	AREA	0	524.36	24.71	242.42	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220291	KASHYYYK_MAIN	kas_main_world	AREA	0	524.32	24.97	359.29	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220292	KASHYYYK_MAIN	kas_main_world	AREA	0	522.80	24.81	267.30	98	1	Dakar	ep3_dakar_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220293	KASHYYYK_MAIN	kas_main_world	AREA	0	522.59	24.71	256.17	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220294	KASHYYYK_MAIN	kas_main_world	AREA	0	518.99	24.70	433.37	103	1	Mosolium	ep3_musolium_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220295	KASHYYYK_MAIN	kas_main_world	AREA	0	517.05	24.70	426.54	120	1	Hssissk Bloodscale	ep3_hssissk_bloodscale_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220296	KASHYYYK_MAIN	kas_main_world	AREA	0	516.57	24.74	438.21	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220297	KASHYYYK_MAIN	kas_main_world	AREA	0	497.19	27.05	275.74	0	1	Tempal B'uncho	ep3_tempal_buncho_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220298	KASHYYYK_MAIN	kas_main_world	AREA	0	494.62	27.06	286.93	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	FLOAT	idle	0	0	0	0	300	120	4
-1220299	KASHYYYK_MAIN	kas_main_world	AREA	0	489.06	27.06	276.82	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220300	KASHYYYK_MAIN	kas_main_world	AREA	0	478.12	18.88	238.08	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220301	KASHYYYK_MAIN	kas_main_world	AREA	0	476.46	19.09	252.97	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220302	KASHYYYK_MAIN	kas_main_world	AREA	0	461.49	19.07	258.70	-128	1	Borantok	ep3_borantok_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220303	KASHYYYK_MAIN	kas_main_world	AREA	0	220.82	18.55	40.51	78	1	Olima Grunc	ep3_olima_grunc_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220304	KASHYYYK_MAIN	kas_main_world	PATROL	0	220.78	20.60	100.80	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220305	KASHYYYK_MAIN	kas_main_world	AREA	0	211.21	22.20	106.14	131	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220306	KASHYYYK_MAIN	kas_main_world	AREA	0	208.81	26.10	109.15	133	1	Ssiksik	ep3_ssiksik_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220307	KASHYYYK_MAIN	kas_main_world	AREA	0	206.65	23.12	95.59	95	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220308	KASHYYYK_MAIN	kas_main_world	PATROL	0	198.52	21.80	117.25	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220309	KASHYYYK_MAIN	kas_main_world	AREA	0	196.59	22.83	98.69	-11	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220310	KASHYYYK_MAIN	kas_main_world	AREA	0	167.33	19.79	147.56	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220311	KASHYYYK_MAIN	kas_main_world	AREA	0	157.14	19.04	120.60	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220312	KASHYYYK_MAIN	kas_main_world	PATROL	0	155.93	20.10	182.78	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220313	KASHYYYK_MAIN	kas_main_world	AREA	0	149.86	19.30	118.22	54	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sitting_ground	0	0	0	0	300	120	0
-1220314	KASHYYYK_MAIN	kas_main_world	AREA	0	147.09	19.55	118.91	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sad	0	0	0	0	300	120	0
-1220315	KASHYYYK_MAIN	kas_main_world	AREA	0	144.52	19.61	120.46	34	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sad	0	0	0	0	300	120	0
-1220316	KASHYYYK_MAIN	kas_main_world	AREA	0	141.88	19.29	123.28	93	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sitting_ground	0	0	0	0	300	120	0
-1220317	KASHYYYK_MAIN	kas_main_world	PATROL	0	140.98	19.13	130.23	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	idle	0	999	0	0	300	120	0
-1220318	KASHYYYK_MAIN	kas_main_world	AREA	0	139.78	19.24	126.25	-68	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sitting_ground	0	0	0	0	300	120	0
-1220319	KASHYYYK_MAIN	kas_main_world	AREA	0	138.48	19.02	134.03	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220320	KASHYYYK_MAIN	kas_main_world	AREA	0	137.93	22.35	214.26	-163	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sitting_ground	0	0	0	0	300	120	0
-1220321	KASHYYYK_MAIN	kas_main_world	AREA	0	135.94	19.22	171.12	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220322	KASHYYYK_MAIN	kas_main_world	AREA	0	134.25	22.33	188.02	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220323	KASHYYYK_MAIN	kas_main_world	AREA	0	132.92	22.35	204.68	-172	1	Ysith	ep3_ysith_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220324	KASHYYYK_MAIN	kas_main_world	AREA	0	125.71	22.35	195.29	46	1	Mssikss	ep3_mssikss_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220325	KASHYYYK_MAIN	kas_main_world	AREA	0	112.58	21.88	159.37	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	GUARD	idle	0	0	0	0	300	120	0
-1220326	KASHYYYK_MAIN	kas_main_world	AREA	0	112.04	21.72	162.44	68	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	STOP	npc_sitting_ground	0	0	0	0	300	120	0
-1220327	KASHYYYK_MAIN	kas_main_world	AREA	0	110.01	26.96	168.42	-127	1	Boshaz	ep3_boshaz_100_h_inv_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
-1220328	KASHYYYK_MAIN	kas_main_world	AREA	0	104.62	23.46	148.15	114	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	STOP	idle	0	0	0	0	300	120	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
+1220003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	1.60	-20.75	32.67	179	1	Darth Vader	darth_vader_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.23	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.58	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.59	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.45	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-6.37	-13.75	6.20	0	1	Admiral Krieg	clone_admiral_krieg_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-1.15	-13.75	9.50	163	1	a comm operator	imp_comm_operator_14_h_att_n	City	Kachirho	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300	120
+1220010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-7.97	-13.75	6.87	106	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	2.07	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	4.90	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220013	KASHYYYK_MAIN	kas_main_world	AREA	0	-419.10	179.60	-88.78	-95	1	Harwakokok the Mighty	ep3_avatar_harwakokok_86_h_agg_b	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220014	KASHYYYK_MAIN	kas_main_world	AREA	0	-425.85	179.60	-85.21	-126	1	Ovarra	ep3_ovarra_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220015	KASHYYYK_MAIN	kas_main_world	AREA	0	-432.37	179.60	-96.57	-33	1	Dr. Cheyerooto	ep3_dr_cheyerooto_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220016	KASHYYYK_MAIN	kas_main_world	AREA	0	-441.35	211.20	-75.77	-143	1	Captain Koh	ep3_mining_captain_koh_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220017	KASHYYYK_MAIN	kas_main_world	AREA	0	-441.41	158.50	-63.77	-113	1	Belga Daeri	ep3_belga_daeri_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220018	KASHYYYK_MAIN	kas_main_world	AREA	0	-442.75	211.20	-74.56	-142	1	Fezrik Bendledon	ep3_fezrik_bendledon_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220019	KASHYYYK_MAIN	kas_main_world	AREA	0	-448.43	158.50	-102.85	-38	1	Chatook	ep3_kachirho_chatook_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220020	KASHYYYK_MAIN	kas_main_world	AREA	0	-453.60	158.40	-20.00	-81	1	Flash Harrison	ep3_mining_flash_harrison_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	npc_standing_drinking	1	0	0	300	120
+1220021	KASHYYYK_MAIN	kas_main_world	AREA	0	-458.00	158.40	-27.20	-25	1	Colonel Gurnst	ep3_colonel_gurnst_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	npc_standing_drinking	1	0	0	300	120
+1220022	KASHYYYK_MAIN	kas_main_world	AREA	0	-465.44	158.10	-19.46	-174	1	Unluto	ep3_unluto_bartender_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220023	KASHYYYK_MAIN	kas_main_world	AREA	0	-478.41	211.30	-92.74	95	1	Mada Johnson	ep3_mada_johnson_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220024	KASHYYYK_MAIN	kas_main_world	AREA	0	-495.54	17.94	-109.90	-35	1	Dr. Criss Ne`Pomi	ep3_dr_criss_nepomi_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220025	KASHYYYK_MAIN	kas_main_world	AREA	0	-498.75	17.94	-113.12	-24	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220026	KASHYYYK_MAIN	kas_main_world	AREA	0	-501.77	17.94	-113.02	4	1	Rroow	ep3_rroow_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220027	KASHYYYK_MAIN	kas_main_world	AREA	0	-502.20	18.76	-74.10	-123	1	Kymayrr	ep3_kymayrr_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220028	KASHYYYK_MAIN	kas_main_world	AREA	0	-504.27	17.94	-98.91	-52	1	Dr. Farnsworth	ep3_dr_farnsworth_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220029	KASHYYYK_MAIN	kas_main_world	AREA	0	-507.80	19.30	-111.90	-126	1	Wrelaac	ep3_wrelaac_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220030	KASHYYYK_MAIN	kas_main_world	AREA	0	-508.77	18.29	-66.29	-160	1	Tien Wallub	ep3_tien_wallub_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220031	KASHYYYK_MAIN	kas_main_world	AREA	0	-510.33	18.82	-28.70	0	1	a corpse	ep3_rodian_corpse_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
+1220032	KASHYYYK_MAIN	kas_main_world	AREA	0	-512.49	17.83	-69.99	-177	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_03_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220033	KASHYYYK_MAIN	kas_main_world	AREA	0	-513.05	19.30	-108.74	0	1	Ikvizi	ep3_ikvizi_100_h_inv_n	City	Kachirho	1	TURN	0	0	-	scared	0	0	0	300	120
+1220034	KASHYYYK_MAIN	kas_main_world	AREA	0	-548.04	19.27	-108.26	0	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_03_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220035	KASHYYYK_MAIN	kas_main_world	AREA	0	-549.64	18.99	-132.42	-28	1	Eyma	ep3_eyma_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220036	KASHYYYK_MAIN	kas_main_world	AREA	0	-556.01	19.81	-71.23	-155	1	Gursan Bryes	ep3_gursan_bryes_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220037	KASHYYYK_MAIN	kas_main_world	AREA	0	-578.87	18.82	-68.11	-159	1	Kiaanta (Patrol Squad)	ep3_marium_valmont_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220038	KASHYYYK_MAIN	kas_main_world	AREA	0	-587.29	18.56	-104.16	0	1	Chewbacca	clone_chewbacca_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220039	KASHYYYK_MAIN	kas_main_world	AREA	0	-589.23	18.48	-103.28	0	1	Vryyyr (Master Hunter)	ep3_wke_vryyyr_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220040	KASHYYYK_MAIN	kas_main_world	AREA	0	-610.92	18.61	-95.99	0	1	a corpse	ep3_rodian_corpse_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
+1220041	KASHYYYK_MAIN	kas_main_world	AREA	0	-635.95	22.83	-119.63	73	1	Commander Richards	ep3_commander_richards_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220042	KASHYYYK_MAIN	kas_main_world	AREA	0	-660.88	25.83	-111.88	-63	1	Dr. Price	ep3_dr_price_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220043	KASHYYYK_MAIN	kas_main_world	AREA	0	-667.66	18.82	-116.09	-177	1	Stren Colo	ep3_stren_colo_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220044	KASHYYYK_MAIN	kas_main_world	AREA	0	-682.21	18.82	-160.87	0	1	Ace Fendo (a chassis broker)	ep3_ace_fendo_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220045	KASHYYYK_MAIN	kas_main_world	AREA	0	-701.06	17.13	11.24	40	1	Chrilooc	ep3_chrilooc_100_h_inv_n	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220046	KASHYYYK_MAIN	kas_main_world	AREA	0	-438.29	8.83	386.75	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220047	KASHYYYK_MAIN	kas_main_world	PATROL	0	-444.47	9.29	377.45	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220048	KASHYYYK_MAIN	kas_main_world	AREA	0	-466.20	7.45	281.19	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220049	KASHYYYK_MAIN	kas_main_world	AREA	0	-472.03	8.30	316.10	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220050	KASHYYYK_MAIN	kas_main_world	AREA	0	-479.46	7.45	151.65	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220051	KASHYYYK_MAIN	kas_main_world	AREA	0	-493.91	7.45	230.71	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220052	KASHYYYK_MAIN	kas_main_world	AREA	0	-516.85	13.54	276.83	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220053	KASHYYYK_MAIN	kas_main_world	PATROL	0	-522.32	7.45	146.04	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220054	KASHYYYK_MAIN	kas_main_world	AREA	0	-523.90	7.45	149.87	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220055	KASHYYYK_MAIN	kas_main_world	AREA	0	-540.91	7.45	146.94	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220056	KASHYYYK_MAIN	kas_main_world	AREA	0	-551.06	7.43	178.62	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220057	KASHYYYK_MAIN	kas_main_world	AREA	0	-558.85	7.45	162.71	0	1	a Wookiee freedom fighter	ep3_npc_wookiee_freedom_fighters_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220058	KASHYYYK_MAIN	kas_main_world	AREA	0	-562.06	7.45	142.11	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220059	KASHYYYK_MAIN	kas_main_world	AREA	0	-581.53	6.27	101.72	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220060	KASHYYYK_MAIN	kas_main_world	AREA	0	-646.95	5.51	49.72	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220061	KASHYYYK_MAIN	kas_main_world	AREA	0	-681.04	5.49	91.74	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220062	KASHYYYK_MAIN	kas_main_world	AREA	0	-701.11	5.49	-4.99	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220063	KASHYYYK_MAIN	kas_main_world	AREA	0	-807.18	5.42	-52.24	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220064	KASHYYYK_MAIN	kas_main_world	AREA	0	-810.53	5.51	2.17	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220065	KASHYYYK_MAIN	kas_main_world	AREA	0	-859.89	5.55	-224.50	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220066	KASHYYYK_MAIN	kas_main_world	AREA	0	-944.06	18.38	-121.61	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220067	KASHYYYK_MAIN	kas_main_world	AREA	0	927.17	8.63	222.59	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220068	KASHYYYK_MAIN	kas_main_world	AREA	0	926.30	8.70	244.50	0	1	Jagged Fang	ep3_varactyl_jaggedfang_55_c_agg_b	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220069	KASHYYYK_MAIN	kas_main_world	AREA	0	900.41	8.74	135.40	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220070	KASHYYYK_MAIN	kas_main_world	AREA	0	893.95	8.79	232.78	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220071	KASHYYYK_MAIN	kas_main_world	AREA	0	890.24	4.23	491.38	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220072	KASHYYYK_MAIN	kas_main_world	AREA	0	882.45	8.63	173.89	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220073	KASHYYYK_MAIN	kas_main_world	AREA	0	864.11	4.17	444.85	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220074	KASHYYYK_MAIN	kas_main_world	AREA	0	830.37	18.82	716.82	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220075	KASHYYYK_MAIN	kas_main_world	AREA	0	825.88	23.65	643.87	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220076	KASHYYYK_MAIN	kas_main_world	AREA	0	824.64	18.82	780.31	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220077	KASHYYYK_MAIN	kas_main_world	AREA	0	819.11	8.63	170.97	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220078	KASHYYYK_MAIN	kas_main_world	AREA	0	811.96	8.68	109.53	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	LOITER	3	0	-	idle	0	0	0	300	120
+1220079	KASHYYYK_MAIN	kas_main_world	PATROL	0	810.91	23.92	-502.82	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220080	KASHYYYK_MAIN	kas_main_world	AREA	0	808.69	5.44	391.51	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220081	KASHYYYK_MAIN	kas_main_world	AREA	0	806.46	18.61	452.62	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220082	KASHYYYK_MAIN	kas_main_world	AREA	0	800.88	18.82	702.19	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220083	KASHYYYK_MAIN	kas_main_world	AREA	0	797.90	6.27	309.46	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220084	KASHYYYK_MAIN	kas_main_world	AREA	0	792.92	18.97	434.33	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220085	KASHYYYK_MAIN	kas_main_world	AREA	0	791.60	18.82	821.47	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220086	KASHYYYK_MAIN	kas_main_world	AREA	0	789.40	19.40	609.10	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220087	KASHYYYK_MAIN	kas_main_world	AREA	0	787.42	23.92	-401.19	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220088	KASHYYYK_MAIN	kas_main_world	AREA	0	786.65	23.92	-451.82	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	2	LOITER	12	0	-	idle	0	0	0	300	120
+1220089	KASHYYYK_MAIN	kas_main_world	AREA	0	782.43	5.49	344.42	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220090	KASHYYYK_MAIN	kas_main_world	AREA	0	772.92	6.80	289.91	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220091	KASHYYYK_MAIN	kas_main_world	AREA	0	766.90	18.73	490.42	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220092	KASHYYYK_MAIN	kas_main_world	AREA	0	764.56	18.82	554.96	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220093	KASHYYYK_MAIN	kas_main_world	AREA	0	763.91	18.82	786.53	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220094	KASHYYYK_MAIN	kas_main_world	AREA	0	724.40	23.90	-335.30	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220095	KASHYYYK_MAIN	kas_main_world	AREA	0	759.09	23.92	-510.75	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	LOITER	12	0	-	idle	0	0	0	300	120
+1220096	KASHYYYK_MAIN	kas_main_world	AREA	0	757.69	8.63	128.44	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220097	KASHYYYK_MAIN	kas_main_world	AREA	0	750.09	18.82	749.81	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220098	KASHYYYK_MAIN	kas_main_world	PATROL	0	749.22	18.00	529.10	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220099	KASHYYYK_MAIN	kas_main_world	AREA	0	738.59	5.39	313.19	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220100	KASHYYYK_MAIN	kas_main_world	AREA	0	729.00	23.90	-593.00	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220101	KASHYYYK_MAIN	kas_main_world	PATROL	0	718.06	24.31	-270.51	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220102	KASHYYYK_MAIN	kas_main_world	AREA	0	712.26	23.92	-459.81	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220103	KASHYYYK_MAIN	kas_main_world	PATROL	0	708.64	19.62	-173.77	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220104	KASHYYYK_MAIN	kas_main_world	AREA	0	704.52	23.92	-399.78	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220105	KASHYYYK_MAIN	kas_main_world	AREA	0	704.31	5.43	263.05	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220106	KASHYYYK_MAIN	kas_main_world	AREA	0	701.61	18.82	-192.71	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220107	KASHYYYK_MAIN	kas_main_world	AREA	0	699.40	8.63	83.12	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220108	KASHYYYK_MAIN	kas_main_world	AREA	0	695.69	18.82	834.93	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220109	KASHYYYK_MAIN	kas_main_world	AREA	0	669.80	18.80	756.20	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220110	KASHYYYK_MAIN	kas_main_world	AREA	0	673.65	18.82	808.25	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220111	KASHYYYK_MAIN	kas_main_world	AREA	0	663.80	23.92	-620.91	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	LOITER	6	0	-	idle	0	0	0	300	120
+1220112	KASHYYYK_MAIN	kas_main_world	AREA	0	660.40	19.58	-304.70	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220113	KASHYYYK_MAIN	kas_main_world	AREA	0	656.68	07.02	161.53	0	1	an elder uller	ep3_uller_elder_45_c_agg_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220114	KASHYYYK_MAIN	kas_main_world	AREA	0	651.15	18.82	668.44	0	1	a bull bantha	bantha_bull_15_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220115	KASHYYYK_MAIN	kas_main_world	AREA	0	636.80	21.60	-259.30	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220116	KASHYYYK_MAIN	kas_main_world	AREA	0	639.60	21.50	-248.50	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220117	KASHYYYK_MAIN	kas_main_world	AREA	0	631.17	5.58	119.89	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220118	KASHYYYK_MAIN	kas_main_world	PATROL	0	629.72	20.20	-251.65	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220119	KASHYYYK_MAIN	kas_main_world	AREA	0	601.60	8.20	85.10	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	LOITER	12	0	-	idle	0	0	0	300	120
+1220120	KASHYYYK_MAIN	kas_main_world	AREA	0	610.35	24.71	754.86	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220121	KASHYYYK_MAIN	kas_main_world	PATROL	0	607.31	24.71	744.92	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220122	KASHYYYK_MAIN	kas_main_world	AREA	0	591.71	23.56	-440.45	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	2	LOITER	12	0	-	idle	0	0	0	300	120
+1220123	KASHYYYK_MAIN	kas_main_world	AREA	0	589.58	24.54	-589.41	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220124	KASHYYYK_MAIN	kas_main_world	AREA	0	591.40	24.70	715.70	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220125	KASHYYYK_MAIN	kas_main_world	AREA	0	577.30	24.70	739.20	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220126	KASHYYYK_MAIN	kas_main_world	AREA	0	573.32	21.28	-480.01	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220127	KASHYYYK_MAIN	kas_main_world	AREA	0	549.15	20.58	-556.44	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220128	KASHYYYK_MAIN	kas_main_world	AREA	0	531.35	21.52	-522.89	0	1	a varactyl	ep3_varactyl_26_c_agg_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220129	KASHYYYK_MAIN	kas_main_world	AREA	0	525.08	6.93	-54.08	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220130	KASHYYYK_MAIN	kas_main_world	AREA	0	518.82	18.94	657.34	0	1	a Chiss poacher	ep3_chiss_poacher_25_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220131	KASHYYYK_MAIN	kas_main_world	AREA	0	513.96	8.41	36.31	0	1	a varactyl	ep3_varactyl_65_c_att_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220132	KASHYYYK_MAIN	kas_main_world	AREA	0	503.96	23.92	-590.96	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220133	KASHYYYK_MAIN	kas_main_world	AREA	0	444.76	24.23	-537.18	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	LOITER	6	0	-	idle	0	0	0	300	120
+1220134	KASHYYYK_MAIN	kas_main_world	AREA	0	443.52	7.51	-81.13	0	1	a forest stalker	ep3_npc_wookiee_forest_stalker_28_h_agg_n	Outback	Kachirho	4	LOITER	12	0	-	idle	0	0	0	300	120
+1220135	KASHYYYK_MAIN	kas_main_world	PATROL	0	443.30	18.00	670.94	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220136	KASHYYYK_MAIN	kas_main_world	AREA	0	437.76	5.15	-51.23	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220137	KASHYYYK_MAIN	kas_main_world	AREA	0	425.70	27.53	-477.89	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220138	KASHYYYK_MAIN	kas_main_world	AREA	0	417.39	20.00	603.25	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220139	KASHYYYK_MAIN	kas_main_world	PATROL	0	404.90	21.16	-499.26	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220140	KASHYYYK_MAIN	kas_main_world	AREA	0	404.61	18.80	499.69	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220141	KASHYYYK_MAIN	kas_main_world	AREA	0	402.61	19.49	-9.14	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220142	KASHYYYK_MAIN	kas_main_world	AREA	0	376.87	07.01	-71.84	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220143	KASHYYYK_MAIN	kas_main_world	AREA	0	337.64	19.65	118.24	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220144	KASHYYYK_MAIN	kas_main_world	PATROL	0	337.40	18.40	387.38	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220145	KASHYYYK_MAIN	kas_main_world	AREA	0	336.24	19.22	323.48	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220146	KASHYYYK_MAIN	kas_main_world	AREA	0	334.01	5.31	-49.85	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220147	KASHYYYK_MAIN	kas_main_world	PATROL	0	331.37	20.01	112.50	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220148	KASHYYYK_MAIN	kas_main_world	AREA	0	328.16	18.76	451.73	0	1	an uller	ep3_uller_25_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220149	KASHYYYK_MAIN	kas_main_world	AREA	0	315.15	19.90	710.18	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220150	KASHYYYK_MAIN	kas_main_world	AREA	0	293.66	7.52	-25.90	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220151	KASHYYYK_MAIN	kas_main_world	AREA	0	284.81	19.58	92.91	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	4	LOITER	8	0	-	idle	0	0	0	300	120
+1220152	KASHYYYK_MAIN	kas_main_world	AREA	0	275.92	32.60	-286.04	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220153	KASHYYYK_MAIN	kas_main_world	AREA	0	263.47	36.65	-296.24	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220154	KASHYYYK_MAIN	kas_main_world	AREA	0	259.55	30.07	-428.45	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220155	KASHYYYK_MAIN	kas_main_world	AREA	0	254.83	18.60	33.47	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220156	KASHYYYK_MAIN	kas_main_world	AREA	0	236.10	18.90	743.91	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220157	KASHYYYK_MAIN	kas_main_world	AREA	0	233.06	20.92	502.75	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220158	KASHYYYK_MAIN	kas_main_world	AREA	0	221.74	33.99	-274.83	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220159	KASHYYYK_MAIN	kas_main_world	AREA	0	211.91	11.23	-86.51	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220160	KASHYYYK_MAIN	kas_main_world	AREA	0	205.48	28.13	-373.90	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220161	KASHYYYK_MAIN	kas_main_world	AREA	0	204.55	29.20	-137.72	-26	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	Outback	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220162	KASHYYYK_MAIN	kas_main_world	AREA	0	202.46	19.61	549.36	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	LOITER	4	0	-	idle	0	0	0	300	120
+1220163	KASHYYYK_MAIN	kas_main_world	AREA	0	198.74	26.13	-316.53	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220164	KASHYYYK_MAIN	kas_main_world	AREA	0	197.37	23.65	631.12	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220165	KASHYYYK_MAIN	kas_main_world	PATROL	0	195.90	30.38	-286.48	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220166	KASHYYYK_MAIN	kas_main_world	AREA	0	191.40	21.59	597.00	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220167	KASHYYYK_MAIN	kas_main_world	AREA	0	186.48	19.68	578.04	0	1	Wrhisch	ep3_qst_wrhisch_25_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220168	KASHYYYK_MAIN	kas_main_world	AREA	0	166.67	19.61	535.48	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220169	KASHYYYK_MAIN	kas_main_world	AREA	0	164.89	20.78	590.63	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220170	KASHYYYK_MAIN	kas_main_world	AREA	0	162.44	19.61	494.19	0	1	an anguished wookiee	ep3_qst_anguished_wookiee_25_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220171	KASHYYYK_MAIN	kas_main_world	AREA	0	157.85	7.13	773.54	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220172	KASHYYYK_MAIN	kas_main_world	AREA	0	148.86	19.61	539.13	0	1	an anguished wookiee	ep3_qst_anguished_wookiee_25_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220173	KASHYYYK_MAIN	kas_main_world	AREA	0	146.24	6.14	-45.19	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220174	KASHYYYK_MAIN	kas_main_world	AREA	0	140.10	22.20	585.77	0	1	a mad wookiee	ep3_qst_mad_wookiee_24_h_agg_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220175	KASHYYYK_MAIN	kas_main_world	AREA	0	119.18	10.52	811.52	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220176	KASHYYYK_MAIN	kas_main_world	AREA	0	101.97	18.82	-134.89	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220177	KASHYYYK_MAIN	kas_main_world	AREA	0	97.74	21.10	533.61	0	1	a forlorn wookiee	ep3_qst_forlorn_wookiee_23_h_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220178	KASHYYYK_MAIN	kas_main_world	AREA	0	94.69	20.00	-305.66	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220179	KASHYYYK_MAIN	kas_main_world	AREA	0	92.56	9.88	769.92	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220180	KASHYYYK_MAIN	kas_main_world	AREA	0	88.79	18.93	-151.39	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220181	KASHYYYK_MAIN	kas_main_world	AREA	0	41.20	20.20	493.50	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	LOITER	4	0	-	idle	0	0	0	300	120
+1220182	KASHYYYK_MAIN	kas_main_world	AREA	0	36.61	07.05	-46.79	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220183	KASHYYYK_MAIN	kas_main_world	AREA	0	29.13	5.47	-1.53	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220184	KASHYYYK_MAIN	kas_main_world	AREA	0	19.89	20.69	-275.67	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220185	KASHYYYK_MAIN	kas_main_world	AREA	0	-3.28	18.96	-147.79	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220186	KASHYYYK_MAIN	kas_main_world	AREA	0	-92.45	19.38	-173.18	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220187	KASHYYYK_MAIN	kas_main_world	AREA	0	-45.18	19.20	-200.49	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220188	KASHYYYK_MAIN	kas_main_world	AREA	0	-24.39	5.19	-5.21	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220189	KASHYYYK_MAIN	kas_main_world	AREA	0	-81.20	5.88	-8.18	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220190	KASHYYYK_MAIN	kas_main_world	AREA	0	-70.99	19.22	84.12	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220191	KASHYYYK_MAIN	kas_main_world	AREA	0	-93.15	18.38	98.56	-161	1	Pressk (a slavemaster)	ep3_pressk_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220192	KASHYYYK_MAIN	kas_main_world	AREA	0	-28.68	28.15	693.50	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	2	LOITER	4	0	-	idle	0	0	0	300	120
+1220193	KASHYYYK_MAIN	kas_main_world	AREA	0	-34.75	19.10	742.48	0	1	a sathog	ep3_sathog_20_c_agg_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220194	KASHYYYK_MAIN	kas_main_world	AREA	0	-52.74	20.30	440.06	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220195	KASHYYYK_MAIN	kas_main_world	AREA	0	-68.27	21.18	404.24	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220196	KASHYYYK_MAIN	kas_main_world	AREA	0	-82.99	20.52	602.36	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220197	KASHYYYK_MAIN	kas_main_world	AREA	0	-87.56	19.87	757.60	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	4	LOITER	15	0	-	idle	0	0	0	300	120
+1220198	KASHYYYK_MAIN	kas_main_world	AREA	0	-88.65	18.82	115.55	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220199	KASHYYYK_MAIN	kas_main_world	AREA	0	-89.52	18.82	268.16	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220200	KASHYYYK_MAIN	kas_main_world	AREA	0	-95.42	22.08	545.36	0	1	corpse of Takook	ep3_takook_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	npc_dead_01	0	0	0	300	120
+1220201	KASHYYYK_MAIN	kas_main_world	AREA	0	-98.51	21.54	542.61	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220202	KASHYYYK_MAIN	kas_main_world	AREA	0	-110.40	18.88	89.27	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220203	KASHYYYK_MAIN	kas_main_world	AREA	0	-119.81	18.85	108.98	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220204	KASHYYYK_MAIN	kas_main_world	AREA	0	-131.81	22.74	861.22	-109	1	Rawarok	ep3_rawarok_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220205	KASHYYYK_MAIN	kas_main_world	AREA	0	-133.77	22.74	864.98	-132	1	Chawroo	ep3_chawroo_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220206	KASHYYYK_MAIN	kas_main_world	AREA	0	-148.38	19.22	-94.15	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220207	KASHYYYK_MAIN	kas_main_world	AREA	0	-158.05	6.27	25.99	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220208	KASHYYYK_MAIN	kas_main_world	AREA	0	-160.05	19.22	-82.89	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220209	KASHYYYK_MAIN	kas_main_world	AREA	0	-168.12	5.92	55.35	0	1	a Wookiee commando	ep3_npc_wookiee_commando_30_h_agg_n	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220210	KASHYYYK_MAIN	kas_main_world	PATROL	0	-171.10	21.45	472.51	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	PATROL	0	999	column	idle	0	0	0	300	120
+1220211	KASHYYYK_MAIN	kas_main_world	AREA	0	-172.08	20.06	483.33	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	4	LOITER	15	0	-	idle	0	0	0	300	120
+1220212	KASHYYYK_MAIN	kas_main_world	AREA	0	-184.30	5.80	887.70	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220213	KASHYYYK_MAIN	kas_main_world	AREA	0	-202.95	19.22	-104.11	0	1	a kkryytch	ep3_kkryytch_17_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220214	KASHYYYK_MAIN	kas_main_world	AREA	0	-221.80	5.50	901.70	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220215	KASHYYYK_MAIN	kas_main_world	AREA	0	-236.18	6.45	59.79	-139	1	Sera Jossi	ep3_sera_jossi_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220216	KASHYYYK_MAIN	kas_main_world	AREA	0	-252.19	5.59	21.80	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220217	KASHYYYK_MAIN	kas_main_world	AREA	0	-265.27	5.60	675.89	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	12	0	-	idle	0	0	0	300	120
+1220218	KASHYYYK_MAIN	kas_main_world	AREA	0	-275.11	20.00	453.21	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220219	KASHYYYK_MAIN	kas_main_world	AREA	0	-275.32	6.27	713.88	0	1	a sunbaked bolotaur	ep3_bolotaur_sunbaked_30_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220220	KASHYYYK_MAIN	kas_main_world	AREA	0	-308.07	5.60	645.30	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220221	KASHYYYK_MAIN	kas_main_world	AREA	0	-312.73	19.15	-162.57	0	1	a ro-roo	ep3_roroo_18_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220222	KASHYYYK_MAIN	kas_main_world	AREA	0	-321.71	5.60	607.08	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220223	KASHYYYK_MAIN	kas_main_world	AREA	0	-322.89	21.02	-175.93	0	1	a Kashyyyk bantha	ep3_bantha_kash_22_c_att_n	Outback	Kachirho	2	LOITER	6	0	-	idle	0	0	0	300	120
+1220224	KASHYYYK_MAIN	kas_main_world	AREA	0	-346.63	5.90	130.94	0	1	a pug jumper	ep3_pug_jumper_17_c_att_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220225	KASHYYYK_MAIN	kas_main_world	AREA	0	-365.59	15.35	419.08	0	1	a jyykle vulture	ep3_vulture_jyykle_18_c_att_n	Outback	Kachirho	3	LOITER	9	0	-	idle	0	0	0	300	120
+1220226	KASHYYYK_MAIN	kas_main_world	PATROL	0	-372.46	22.26	806.42	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220227	KASHYYYK_MAIN	kas_main_world	AREA	0	-379.11	18.82	700.16	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220228	KASHYYYK_MAIN	kas_main_world	AREA	0	-384.74	19.57	762.22	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220229	KASHYYYK_MAIN	kas_main_world	AREA	0	-385.43	5.90	464.63	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	3	LOITER	15	0	-	idle	0	0	0	300	120
+1220230	KASHYYYK_MAIN	kas_main_world	PATROL	0	-386.55	6.00	456.65	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220231	KASHYYYK_MAIN	kas_main_world	AREA	0	-390.36	19.20	640.33	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220232	KASHYYYK_MAIN	kas_main_world	AREA	0	-395.70	19.29	578.68	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220233	KASHYYYK_MAIN	kas_main_world	PATROL	0	-398.59	6.27	467.45	0	1	a bolotaur	ep3_bolotaur_26_c_agg_n	Outback	Kachirho	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220234	KASHYYYK_MAIN	kas_main_world	AREA	0	-402.15	20.93	668.01	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220235	KASHYYYK_MAIN	kas_main_world	AREA	0	-405.13	21.98	682.33	20	1	a dead researcher	ep3_researcher_corpse_m_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	npc_dead_02	0	0	0	300	120
+1220236	KASHYYYK_MAIN	kas_main_world	AREA	0	-405.33	21.54	667.76	0	1	Big Nworb Yorel the Bad	ep3_kachirho_canopy_boss_32_h_agg_e	Outback	Kachirho	1	TURN	0	0	-	idle	0	0	0	300	120
+1220237	KASHYYYK_MAIN	kas_main_world	AREA	0	-406.83	22.50	679.13	-161	1	a dead researcher	ep3_researcher_corpse_f_100_h_inv_n	Outback	Kachirho	1	IDLE	0	0	-	npc_dead_03	0	0	0	300	120
+1220238	KASHYYYK_MAIN	kas_main_world	AREA	0	-411.43	18.83	537.02	0	1	a Canopy bandit	ep3_kachirho_canopy_bandit_27_h_agg_n	Outback	Kachirho	3	LOITER	6	0	-	idle	0	0	0	300	120
+1220239	KASHYYYK_MAIN	kas_main_world	AREA	0	431.63	18.82	826.69	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220240	KASHYYYK_MAIN	kas_main_world	AREA	0	429.53	19.09	905.68	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220241	KASHYYYK_MAIN	kas_main_world	AREA	0	427.89	19.82	768.45	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220242	KASHYYYK_MAIN	kas_main_world	AREA	0	427.09	18.82	968.91	-157	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220243	KASHYYYK_MAIN	kas_main_world	AREA	0	424.75	18.82	955.39	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220244	KASHYYYK_MAIN	kas_main_world	AREA	0	415.42	18.98	892.37	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220245	KASHYYYK_MAIN	kas_main_world	PATROL	0	414.52	18.82	958.56	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220246	KASHYYYK_MAIN	kas_main_world	AREA	0	412.06	18.82	827.42	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220247	KASHYYYK_MAIN	kas_main_world	AREA	0	406.93	19.20	775.59	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220248	KASHYYYK_MAIN	kas_main_world	AREA	0	403.52	18.82	955.08	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220249	KASHYYYK_MAIN	kas_main_world	AREA	0	403.17	18.82	969.71	166	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	POI	Blackscale Slaver Compound Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220250	KASHYYYK_MAIN	kas_main_world	AREA	0	337.53	32.46	-223.55	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220251	KASHYYYK_MAIN	kas_main_world	AREA	0	324.58	29.32	-166.94	0	1	a healthy looking Wookiee	ep3_kachirho_wke_healthy_100_h_inv_n	POI	Isolationist Wookiee Village	1	LOITER	6	0	-	idle	0	0	0	300	120
+1220252	KASHYYYK_MAIN	kas_main_world	AREA	0	316.35	33.20	-194.82	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220253	KASHYYYK_MAIN	kas_main_world	AREA	0	304.40	32.89	-207.81	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220254	KASHYYYK_MAIN	kas_main_world	PATROL	0	303.04	32.00	-186.70	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220255	KASHYYYK_MAIN	kas_main_world	AREA	0	284.17	32.54	-151.54	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220256	KASHYYYK_MAIN	kas_main_world	AREA	0	274.54	32.96	-193.70	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220257	KASHYYYK_MAIN	kas_main_world	AREA	0	248.75	33.19	-180.59	0	1	a Wookiee villager	ep3_qst_wookiee_civilians_24_h_att_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220258	KASHYYYK_MAIN	kas_main_world	AREA	0	245.63	31.82	-142.85	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	LOITER	2	0	-	idle	0	0	0	300	120
+1220259	KASHYYYK_MAIN	kas_main_world	AREA	0	218.16	27.60	-124.27	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	TURN	0	0	-	idle	0	0	0	300	120
+1220260	KASHYYYK_MAIN	kas_main_world	AREA	0	218.05	33.55	-162.81	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	TURN	0	0	-	idle	0	0	0	300	120
+1220261	KASHYYYK_MAIN	kas_main_world	AREA	0	213.48	38.66	-151.19	0	1	a Wookiee guard	ep3_qst_wookiee_guard_27_h_agg_n	POI	Isolationist Wookiee Village	1	TURN	0	0	-	idle	0	0	0	300	120
+1220262	KASHYYYK_MAIN	kas_main_world	AREA	0	-738.44	18.82	247.20	-120	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220263	KASHYYYK_MAIN	kas_main_world	AREA	0	-755.01	19.24	263.45	-162	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220264	KASHYYYK_MAIN	kas_main_world	AREA	0	-757.50	19.22	232.24	-120	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220265	KASHYYYK_MAIN	kas_main_world	AREA	0	-773.36	19.45	249.45	-158	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220266	KASHYYYK_MAIN	kas_main_world	AREA	0	-799.31	19.29	182.21	-148	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220267	KASHYYYK_MAIN	kas_main_world	AREA	0	-815.65	19.27	188.84	159	1	a Dead Guard	ep3_npc_dead_guard_32_h_att_n	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220268	KASHYYYK_MAIN	kas_main_world	AREA	0	587.35	23.92	-637.75	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220269	KASHYYYK_MAIN	kas_main_world	AREA	0	582.18	23.92	-637.98	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220270	KASHYYYK_MAIN	kas_main_world	AREA	0	577.30	23.92	-639.23	0	1	Kerssoc	ep3_kerssoc_100_h_inv_n	POI	Rodian Hunters' Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220271	KASHYYYK_MAIN	kas_main_world	AREA	0	567.31	23.92	-643.60	-1	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220272	KASHYYYK_MAIN	kas_main_world	AREA	0	554.85	24.25	-644.07	35	1	a Wookiee Trading Co. Employee	ep3_wke_merchant_04_100_h_inv_n	POI	Rodian Hunters' Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220273	KASHYYYK_MAIN	kas_main_world	AREA	0	553.86	24.70	-654.79	0	1	Ortha Ledox	ep3_ortha_ledox_100_h_inv_n	POI	Rodian Hunters' Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220274	KASHYYYK_MAIN	kas_main_world	PATROL	0	545.06	24.70	-647.22	0	1	a Rodian hunter	ep3_npc_rodian_lesser_hunter_100_h_inv_n	POI	Rodian Hunters' Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220275	KASHYYYK_MAIN	kas_main_world	AREA	0	-54.40	21.60	839.33	-155	1	a Captain of the Guard	ep3_npc_ceremonial_captain_34_h_att_n	POI	Rryat Trail Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220276	KASHYYYK_MAIN	kas_main_world	AREA	0	-54.97	19.80	830.39	-150	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220277	KASHYYYK_MAIN	kas_main_world	AREA	0	-69.82	19.64	835.43	-177	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220278	KASHYYYK_MAIN	kas_main_world	AREA	0	-74.38	19.88	778.31	0	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220279	KASHYYYK_MAIN	kas_main_world	AREA	0	-84.37	19.20	784.75	0	1	a Rryatt Ceremonial Guard	ep3_npc_ceremonial_guard_32_h_att_n	POI	Rryat Trail Gate	1	TURN	0	0	-	idle	0	0	0	300	120
+1220280	KASHYYYK_MAIN	kas_main_world	AREA	0	565.95	30.56	467.42	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220281	KASHYYYK_MAIN	kas_main_world	PATROL	0	564.07	30.76	438.95	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220282	KASHYYYK_MAIN	kas_main_world	AREA	0	560.59	24.71	267.42	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	LOITER	9	0	-	idle	0	0	0	300	120
+1220283	KASHYYYK_MAIN	kas_main_world	AREA	0	546.26	30.96	463.49	0	1	a prisoner	ep3_prisoner_100_h_inv_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220284	KASHYYYK_MAIN	kas_main_world	AREA	0	545.23	24.70	402.08	-94	1	Orooroo the Betrayer	ep3_orooroo_betrayer_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220285	KASHYYYK_MAIN	kas_main_world	AREA	0	544.10	24.71	311.38	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220286	KASHYYYK_MAIN	kas_main_world	AREA	0	542.00	24.71	398.50	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220287	KASHYYYK_MAIN	kas_main_world	AREA	0	539.24	30.74	482.95	149	1	Lesnorr	ep3_lesnorr_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220288	KASHYYYK_MAIN	kas_main_world	PATROL	0	532.92	24.71	431.43	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220289	KASHYYYK_MAIN	kas_main_world	AREA	0	530.72	25.19	360.57	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220290	KASHYYYK_MAIN	kas_main_world	AREA	0	524.36	24.71	242.42	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220291	KASHYYYK_MAIN	kas_main_world	AREA	0	524.32	24.97	359.29	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220292	KASHYYYK_MAIN	kas_main_world	AREA	0	522.80	24.81	267.30	98	1	Dakar	ep3_dakar_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220293	KASHYYYK_MAIN	kas_main_world	AREA	0	522.59	24.71	256.17	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220294	KASHYYYK_MAIN	kas_main_world	AREA	0	518.99	24.70	433.37	103	1	Mosolium	ep3_musolium_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220295	KASHYYYK_MAIN	kas_main_world	AREA	0	517.05	24.70	426.54	120	1	Hssissk Bloodscale	ep3_hssissk_bloodscale_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220296	KASHYYYK_MAIN	kas_main_world	AREA	0	516.57	24.74	438.21	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220297	KASHYYYK_MAIN	kas_main_world	AREA	0	497.19	27.05	275.74	0	1	Tempal B'uncho	ep3_tempal_buncho_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220298	KASHYYYK_MAIN	kas_main_world	AREA	0	494.62	27.06	286.93	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	2	LOITER	4	0	-	idle	0	0	0	300	120
+1220299	KASHYYYK_MAIN	kas_main_world	AREA	0	489.06	27.06	276.82	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220300	KASHYYYK_MAIN	kas_main_world	AREA	0	478.12	18.88	238.08	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220301	KASHYYYK_MAIN	kas_main_world	AREA	0	476.46	19.09	252.97	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220302	KASHYYYK_MAIN	kas_main_world	AREA	0	461.49	19.07	258.70	-128	1	Borantok	ep3_borantok_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220303	KASHYYYK_MAIN	kas_main_world	AREA	0	220.82	18.55	40.51	78	1	Olima Grunc	ep3_olima_grunc_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220304	KASHYYYK_MAIN	kas_main_world	PATROL	0	220.78	20.60	100.80	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220305	KASHYYYK_MAIN	kas_main_world	AREA	0	211.21	22.20	106.14	131	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220306	KASHYYYK_MAIN	kas_main_world	AREA	0	208.81	26.10	109.15	133	1	Ssiksik	ep3_ssiksik_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220307	KASHYYYK_MAIN	kas_main_world	AREA	0	206.65	23.12	95.59	95	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220308	KASHYYYK_MAIN	kas_main_world	PATROL	0	198.52	21.80	117.25	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220309	KASHYYYK_MAIN	kas_main_world	AREA	0	196.59	22.83	98.69	-11	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220310	KASHYYYK_MAIN	kas_main_world	AREA	0	167.33	19.79	147.56	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220311	KASHYYYK_MAIN	kas_main_world	AREA	0	157.14	19.04	120.60	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220312	KASHYYYK_MAIN	kas_main_world	PATROL	0	155.93	20.10	182.78	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220313	KASHYYYK_MAIN	kas_main_world	AREA	0	149.86	19.30	118.22	54	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	300	120
+1220314	KASHYYYK_MAIN	kas_main_world	AREA	0	147.09	19.55	118.91	0	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sad	0	0	0	300	120
+1220315	KASHYYYK_MAIN	kas_main_world	AREA	0	144.52	19.61	120.46	34	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sad	0	0	0	300	120
+1220316	KASHYYYK_MAIN	kas_main_world	AREA	0	141.88	19.29	123.28	93	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	300	120
+1220317	KASHYYYK_MAIN	kas_main_world	PATROL	0	140.98	19.13	130.23	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	PATROL	0	999	column	idle	0	0	0	300	120
+1220318	KASHYYYK_MAIN	kas_main_world	AREA	0	139.78	19.24	126.25	-68	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	300	120
+1220319	KASHYYYK_MAIN	kas_main_world	AREA	0	138.48	19.02	134.03	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220320	KASHYYYK_MAIN	kas_main_world	AREA	0	137.93	22.35	214.26	-163	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	300	120
+1220321	KASHYYYK_MAIN	kas_main_world	AREA	0	135.94	19.22	171.12	0	1	Trandoshan Researcher	clone_trandoshan_researcher_35_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220322	KASHYYYK_MAIN	kas_main_world	AREA	0	134.25	22.33	188.02	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220323	KASHYYYK_MAIN	kas_main_world	AREA	0	132.92	22.35	204.68	-172	1	Ysith	ep3_ysith_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220324	KASHYYYK_MAIN	kas_main_world	AREA	0	125.71	22.35	195.29	46	1	Mssikss	ep3_mssikss_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220325	KASHYYYK_MAIN	kas_main_world	AREA	0	112.58	21.88	159.37	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	TURN	0	0	-	idle	0	0	0	300	120
+1220326	KASHYYYK_MAIN	kas_main_world	AREA	0	112.04	21.72	162.44	68	1	a passive Wookiee captive	ep3_kachirho_wke_bloodsample_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	300	120
+1220327	KASHYYYK_MAIN	kas_main_world	AREA	0	110.01	26.96	168.42	-127	1	Boshaz	ep3_boshaz_100_h_inv_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120
+1220328	KASHYYYK_MAIN	kas_main_world	AREA	0	104.62	23.46	148.15	114	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers_27_h_att_n	POI	Slaver Camp	1	IDLE	0	0	-	idle	0	0	0	300	120

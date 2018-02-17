@@ -1,354 +1,354 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1250003	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	1	0.30	-1.90	-7.50	-90	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250004	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-163.79	-66.08	56.34	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250005	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-143.44	-68.06	49.79	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250006	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-133.93	-66.25	56.22	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250007	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-131.02	-66.57	36.56	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250008	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-119.91	-65.31	41.49	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250009	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-112.02	-61.54	28.09	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250010	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-100.82	-58.00	26.64	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250011	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-94.81	-57.34	17.36	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250012	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-64.78	-42.99	23.72	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250013	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-64.35	-41.18	10.45	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250014	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-59.51	-34.98	-4.12	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250015	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-57.55	-42.96	18.69	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250016	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-43.38	-34.52	-12.26	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250017	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-51.98	-25.18	-41.55	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250018	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-22.82	-19.21	-40.25	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	480	300	0
-1250019	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-63.55	-222.07	96.39	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250020	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-63.63	-221.65	116.50	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250021	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-85.37	-221.66	121.31	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250022	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-97.88	-221.64	114.61	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250023	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-102.75	-221.72	123.60	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250024	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-119.65	-197.63	81.98	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250025	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-109.95	-197.82	86.65	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250026	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.30	-221.83	85.20	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250027	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	228.01	-123.11	-299.46	-57	1	Chasuli (Myyydril Villager)	ep3_myyydril_chasuli_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250028	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	208.86	-122.81	-323.03	34	1	Compactor 3000 (Junk Collector)	ep3_myyydril_compactor_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250029	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	68.97	-18.59	-44.29	-97	1	Deathswarm	ep3_beetle_uwari_deathswarm_36_c_agg_e	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250030	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-388.90	-178.76	175.35	-179	1	Erriya (a Lost Soul)	ep3_myyydril_erriya_64_h_att_e	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	600	450	0
-1250031	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	130.51	-46.66	-146.82	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250032	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	108.14	-46.47	-151.60	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250033	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	115.75	-46.46	-123.02	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250034	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	156.74	-46.82	-116.01	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250035	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	143.97	-46.74	-133.96	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250036	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	186.98	-63.81	-84.75	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250037	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	201.05	-63.62	-75.10	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250038	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	210.65	-63.56	-92.80	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250039	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	209.06	-63.66	-95.78	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250040	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	228.34	-63.34	-91.90	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250041	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	187.98	-123.28	-356.32	-52	1	Rhirren (Myyydril Guard)	ep3_myyydril_greeter_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250042	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	130.41	-44.34	-11.44	110	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250043	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	133.38	-44.86	-100.66	-7	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250044	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	122.60	-45.03	-101.06	10	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250045	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	21	153.71	-54.90	2.72	4	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250046	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	21	160.07	-54.85	3.08	3	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250047	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	23	153.44	-55.37	-77.22	157	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250048	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	25	258.46	-69.03	-93.56	-177	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250049	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	25	255.94	-80.38	-132.06	10	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250050	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	229.92	-91.11	-132.75	5	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250051	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	229.49	-91.18	-122.49	169	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250052	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	136.34	-90.41	-213.00	1	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250053	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	120.85	-90.49	-212.55	1	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250054	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	160.61	-90.43	-49.36	-127	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250055	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	31	128.86	-90.78	-233.05	93	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250056	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	226.65	-123.41	-213.63	178	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250057	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	229.95	-123.22	-253.17	-90	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250058	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	218.92	-123.18	-254.11	90	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250059	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	35	90.74	-153.01	-246.25	55	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250060	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	35	115.84	-152.99	-246.97	-8	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250061	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	39	42.30	-198.18	-195.80	-9	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250062	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	39	40.94	-197.83	-171.11	174	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250063	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	200.74	-95.00	-156.95	66	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250064	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	171.97	-91.67	-156.31	124	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250065	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	125.80	-90.67	-145.78	-42	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250066	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	132.32	-94.14	-189.19	22	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250067	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	146.32	-93.94	-78.36	-113	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250068	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	158.21	-91.22	-88.10	-110	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250069	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	142.37	-90.78	-22.02	-164	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250070	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	131.66	-90.57	-30.39	47	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250071	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	146.03	-90.91	-33.89	-28	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250072	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	178.00	-117.00	-374.00	0	1	Echrhin Isdan (Mystic Shaman)	ep3_myyydril_isdan_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250073	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	215.75	-123.50	-309.58	52	1	Ivesa (Myyydril Villager)	ep3_myyydril_ivesa_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250074	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	108.00	-123.00	-308.00	160	1	Kallaarac (Myyydril Chief)	ep3_myyydril_kallaarac_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250075	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	231.42	-123.36	-233.26	-41	1	Kiaanta (Patrol Squad)	ep3_myyydril_kiaanta_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250076	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	134.00	-155.00	-294.00	31	1	Doctor Kinesworthy (Cybernetics Doctor)	ep3_myyydril_kinesworthy_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250077	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	228.00	110.00	-339.00	-138	1	Kirrir (Cantina Girl)	ep3_myyydril_kirrir_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250078	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	230.44	-123.53	-235.86	-41	1	Kivvaaa (Patrol Leader)	ep3_myyydril_kivvaaa_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250079	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	57	-217.66	-92.82	149.16	-87	1	Treun Lorn (Cybernetic Doctor)	ep3_myyydril_lorn_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	600	450	0
-1250080	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	55	-361.00	-145.00	169.00	12	1	Model 3-NIi	myyydril_model_3nli_lorn_servant_100_d_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	600	450	0
-1250081	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	129.18	-159.72	-210.52	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250082	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	137.58	-160.28	-183.77	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250083	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	108.45	-160.22	-196.79	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250084	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	38	77.86	-188.08	-135.12	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250085	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	38	74.00	-196.10	-166.61	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250086	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	114.37	-123.53	-319.02	-85	1	Ildisa (Myyydril Mystic)	ep3_myyydril_mystic_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250087	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	224.40	-111.58	-353.99	-69	1	Nawika (Cantina Patron)	ep3_myyydril_nawika_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250088	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	211.59	-122.92	-326.86	20	1	Old Warris (Myyydril Villager)	ep3_myyydril_old_warris_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250089	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	165.49	-147.83	-286.36	-102	1	Shady Pers (Smuggler)	ep3_myyydril_pers_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250090	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-109.72	-222.24	127.40	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250091	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-116.60	-222.67	132.69	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250092	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-108.92	-197.93	92.79	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250093	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-123.68	-197.04	81.17	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250094	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-108.15	-197.38	73.69	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250095	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.35	-196.78	75.24	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250096	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-82.41	-222.15	116.72	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250097	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-74.64	-221.93	132.07	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250098	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.83	-196.73	75.87	-90	1	Ren'Salla (Refugee Leader)	ep3_myyydril_rensalla_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	600	450	0
-1250099	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	205.77	-114.58	-280.31	146	1	Seri'leo (Myyydril Villager)	ep3_myyydril_serileo_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250100	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-327.65	-193.51	35.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250101	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-358.28	-191.99	-24.32	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250102	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-351.51	-183.64	9.31	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250103	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-351.35	-184.39	20.18	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250104	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-375.86	-192.97	35.45	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250105	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-327.16	-190.19	81.28	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250106	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-319.44	-189.23	95.59	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250107	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-336.97	-193.42	109.43	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250108	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-385.54	-186.82	121.20	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250109	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-386.17	-190.26	105.22	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250110	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-398.81	-190.78	58.57	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250111	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-399.37	-191.38	101.75	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250112	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-402.93	-186.79	141.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250113	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-392.37	-189.68	158.71	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250114	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-414.04	-191.64	122.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250115	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-317.39	-183.31	65.97	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250116	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-384.54	-190.94	156.20	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250117	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-361.44	-187.47	191.66	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250118	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-346.38	-188.16	190.40	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250119	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-306.97	-188.21	188.58	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250120	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-299.42	-190.36	167.22	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250121	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	230.96	-123.39	-239.28	-41	1	Tala'oree (Patrol Squad)	ep3_myyydril_talaoree_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250122	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	105.00	-128.00	-358.00	31	1	Treesh (Weaponsmith)	ep3_myyydril_treesh_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250123	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	10.28	-17.28	-41.35	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250124	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	1.09	-16.46	-38.46	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250125	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	34.84	-21.25	-46.26	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250126	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	33.77	-21.14	-34.74	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250127	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	4	13.27	-21.12	-57.84	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250128	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	4	4.29	-21.97	-60.10	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250129	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	-5.46	-23.32	-69.80	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250130	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	-6.21	-23.47	-85.30	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250131	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	2.78	-21.89	-85.00	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250132	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	24.46	-15.62	-80.05	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250133	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	6	33.65	-22.87	-63.92	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250134	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	7	27.79	-21.10	-16.64	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250135	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	36.15	-13.15	-88.51	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250136	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	46.73	-13.01	-93.37	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250137	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	43.02	-29.97	-102.62	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250138	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	44.74	-29.81	-86.64	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250139	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	61.49	-26.75	-35.70	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250140	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	57.80	-26.81	-50.56	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250141	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	49.23	-26.82	-18.61	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250142	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	53.29	-26.93	-3.76	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250143	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	62.23	-26.62	-15.06	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250144	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	71.32	-29.08	5.47	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250145	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	83.84	-34.33	-1.07	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250146	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	11	78.82	-29.28	-35.76	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250147	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	61.12	-14.63	-80.92	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250148	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	72.20	-16.36	-72.58	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250149	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	69.29	-14.65	-83.66	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250150	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	13	76.73	-29.67	-108.23	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250151	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	13	65.72	-29.14	-101.08	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250152	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	109.23	-36.90	-95.09	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250153	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	96.99	-32.76	-83.20	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250154	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	92.35	-32.25	-93.97	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250155	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	83.00	-30.38	-95.50	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250156	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	15	80.91	-21.58	-59.81	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250157	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	15	85.74	-22.03	-52.15	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250158	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	16	99.15	-27.45	-58.93	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250159	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	16	113.47	-33.54	-53.16	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250160	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	104.07	-41.77	1.90	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250161	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	96.50	-39.76	-13.10	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250162	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	91.57	-37.15	-27.28	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250163	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	115.31	-44.31	-33.41	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250164	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	129.21	-44.40	-21.50	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250165	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	146.79	-41.63	-15.68	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250166	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	124.17	-36.36	-43.19	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250167	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	131.38	-36.67	-54.48	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250168	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	133.04	-41.56	-70.28	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250169	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	122.40	-40.15	-82.60	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250170	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	211.89	-97.15	-148.78	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250171	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	209.91	-97.01	-152.41	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250172	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	208.04	-97.01	-148.13	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250173	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	206.31	-96.82	-152.98	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250174	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	207.68	-96.44	-157.21	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250175	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	178.13	-91.76	-163.64	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250176	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	176.17	-91.46	-160.62	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250177	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	179.21	-91.84	-157.14	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250178	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	183.00	-92.42	-161.50	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250179	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	187.95	-92.93	-161.24	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250180	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	118.13	-91.10	-136.73	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250181	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	117.34	-91.28	-143.36	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250182	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	125.30	-90.78	-138.65	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250183	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	123.70	-90.94	-151.42	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250184	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	130.84	-90.78	-145.59	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250185	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	138.27	-93.97	-181.88	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250186	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	139.74	-93.58	-171.53	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250187	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	132.13	-94.06	-178.13	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250188	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	145.53	-94.21	-98.14	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250189	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	137.27	-96.12	-98.21	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250190	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	122.37	-94.96	-104.55	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250191	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	113.67	-95.25	-97.15	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250192	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	119.87	-96.98	-85.79	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250193	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	124.15	-96.65	-91.54	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250194	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	137.20	-96.53	-87.52	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250195	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	129.08	-96.77	-96.98	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250196	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	109.84	-95.27	-106.58	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	360	300	0
-1250197	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	185.00	-115.00	-317.00	104	1	Yraka Nes (Medical Nurse)	ep3_myyydril_yraka_100_h_inv_n	dungeon	Myyydril Cave	1	STOP	idle	0	0	0	0	360	300	0
-1250198	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-220.28	-252.90	-100.07	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250199	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-184.42	-254.15	-64.48	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250200	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-133.32	-261.87	-73.29	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250201	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-227.03	-269.33	-228.67	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250202	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-224.36	-268.73	-218.95	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250203	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-243.57	-223.01	-275.68	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250204	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-203.46	-263.33	-229.32	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250205	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-204.05	-264.47	-219.64	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250206	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-210.34	-177.41	-382.16	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250207	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-179.62	-169.21	-403.31	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250208	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-326.15	-273.11	-196.55	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250209	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-325.43	-273.25	-208.26	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250210	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-379.28	-255.59	-122.15	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250211	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-365.93	-255.64	-107.16	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250212	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-348.10	-228.23	-68.13	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250213	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-351.12	-219.05	-88.33	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250214	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-349.16	-217.33	-98.68	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250215	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	51	-378.80	-206.58	-99.39	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250216	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	51	-381.95	-202.74	-84.46	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250217	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-369.07	-197.73	-63.87	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250218	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-352.76	-188.96	-68.57	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250219	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-339.18	-187.03	-55.29	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	600	0
-1250220	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-333.34	-187.50	-55.76	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250221	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-338.33	-185.65	-29.94	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250222	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-389.42	-186.19	21.87	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250223	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-311.89	-178.82	55.97	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250224	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-354.38	-190.02	115.88	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250225	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-388.04	-183.49	133.57	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250226	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-415.26	-192.43	110.47	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250227	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-418.99	-182.89	67.08	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250228	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-321.61	-190.74	27.72	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250229	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-325.54	-188.37	192.28	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250230	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-285.87	-188.86	166.82	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250231	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-267.03	-184.56	167.38	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250232	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-265.11	-178.62	187.72	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250233	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-274.20	-177.76	206.62	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250234	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-295.92	-177.96	210.36	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250235	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-324.81	-177.66	207.50	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250236	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-346.48	-163.81	207.78	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250237	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	75	-134.65	-263.91	-120.93	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250238	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-158.26	-263.29	-127.46	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250239	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-162.67	-263.89	-142.24	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250240	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-147.04	-263.45	-150.73	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250241	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-114.84	-263.57	-152.89	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250242	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-86.38	-260.83	-176.25	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250243	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-82.43	-263.14	-148.51	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250244	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-109.45	-265.58	-190.98	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250245	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-97.08	-262.58	-203.52	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250246	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-109.16	-265.91	-232.22	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250247	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	78	-143.51	-263.93	-258.54	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250248	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	78	-152.58	-264.21	-241.53	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250249	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	79	-178.12	-263.59	-221.02	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250250	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	79	-168.82	-262.93	-239.95	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250251	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-177.96	-167.79	-191.88	0	1	Urnsor'is Eviscerater	ep3_urnsoris_eviscerator_77_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	900	600	0
-1250252	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-160.10	-169.08	-413.56	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250253	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-166.64	-168.89	-429.96	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	600	0
-1250254	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-162.18	-169.37	-425.27	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250255	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-362.73	-174.72	68.14	0	1	Nefarious	ep3_urnsoris_nefarious_79_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	900	450	0
-1250256	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-156.79	-168.21	-157.36	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250257	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-151.10	-168.21	-130.72	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250258	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-140.60	-168.19	-157.22	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250259	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-96.14	-167.28	-162.02	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250260	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-98.06	-167.76	-183.40	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250261	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-114.04	-167.49	-181.02	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250262	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-95.44	-168.36	-148.95	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250263	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-111.49	-167.41	-225.51	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250264	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-122.60	-168.48	-241.87	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250265	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-138.30	-168.28	-250.93	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250266	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-125.07	-169.26	-231.31	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250267	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-96.76	-168.63	-221.17	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250268	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-140.60	-199.87	-175.56	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250269	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-105.73	-200.07	-164.84	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250270	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-130.78	-199.98	-150.52	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250271	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-122.39	-199.87	-186.05	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250272	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-141.23	-200.13	-192.32	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250273	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-71.66	-200.27	-212.10	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250274	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-62.08	-199.83	-210.38	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250275	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-74.25	-200.02	-225.48	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250276	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-149.49	-172.91	-421.36	0	1	Mother Queen	ep3_urnsoris_motherqueen_81_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	900	600	0
-1250277	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	41	-207.43	-187.98	-356.06	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250278	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	41	-225.83	-188.65	-355.83	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250279	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-213.47	-183.03	-371.01	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250280	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-204.87	-174.96	-391.84	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250281	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-183.87	-168.61	-426.17	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	800	450	0
-1250282	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-228.03	-222.82	-273.30	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250283	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-125.53	-173.37	-86.99	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250284	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-123.96	-196.27	-38.12	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250285	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-142.35	-196.29	-37.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250286	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-142.12	-198.72	-63.46	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250287	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-152.46	-204.76	-92.67	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250288	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-232.16	-251.90	-181.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250289	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-234.75	-253.11	-153.53	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250290	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-215.91	-252.97	-119.88	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250291	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-197.54	-252.81	-95.75	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250292	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-221.60	-221.12	18.17	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250293	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-210.89	-221.05	18.53	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250294	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-178.72	-221.60	66.97	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250295	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-194.71	-221.79	44.64	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250296	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-213.21	-221.19	43.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250297	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-194.23	-221.01	60.58	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250298	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	45	-146.48	-220.10	83.27	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250299	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	45	-166.19	-221.56	82.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250300	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-127.17	-221.34	67.37	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250301	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-130.29	-167.37	-124.41	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250302	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-112.52	-167.36	-140.46	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250303	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-122.06	-167.83	-122.19	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250304	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-99.47	-168.25	-137.61	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250305	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-135.71	-167.46	-212.94	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250306	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-121.52	-167.23	-219.28	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250307	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-161.71	-166.06	-185.63	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250308	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-127.16	-167.49	-191.23	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250309	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-143.38	-168.02	-193.26	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250310	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-115.84	-199.58	-129.86	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250311	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-137.86	-200.28	-121.50	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250312	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-96.18	-200.33	-130.11	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250313	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-121.79	-199.51	-124.36	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250314	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-123.89	-199.94	-167.54	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250315	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-97.71	-199.99	-144.23	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250316	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-95.83	-200.01	-162.52	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250317	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-107.45	-200.20	-152.32	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250318	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-90.56	-200.05	-177.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250319	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-90.77	-200.05	-224.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250320	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-101.15	-199.83	-181.72	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250321	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-97.69	-200.18	-189.65	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250322	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-95.98	-199.78	-214.87	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250323	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	73	-80.54	-200.08	-184.47	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250324	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	73	-72.79	-200.64	-172.82	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250325	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-336.93	-272.54	-211.37	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250326	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-340.28	-271.31	-186.64	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250327	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-350.22	-272.29	-200.58	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250328	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-348.64	-267.07	-164.44	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250329	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-363.35	-263.99	-161.20	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250330	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-372.26	-259.45	-148.90	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250331	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-364.40	-254.24	-133.72	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250332	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-384.10	-254.04	-98.92	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250333	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-380.54	-247.83	-84.21	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250334	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-380.55	-241.70	-66.29	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250335	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-181.83	-169.08	-424.71	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250336	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-116.18	-167.06	-254.35	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250337	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-132.78	-169.21	-229.63	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250338	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-128.99	-167.10	-200.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250339	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-85.50	-263.05	-137.06	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250340	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-93.42	-263.58	-139.97	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250341	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-91.45	-263.47	-147.72	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250342	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-89.45	-262.02	-162.77	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250343	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-99.50	-263.06	-170.90	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250344	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-119.01	-263.92	-224.19	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250345	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-128.42	-263.75	-214.23	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250346	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-117.95	-262.41	-213.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250347	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-130.54	-263.78	-178.45	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250348	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-121.89	-262.91	-179.78	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250349	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-123.15	-263.83	-158.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250350	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-107.62	-263.45	-145.90	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250351	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-77.21	-262.48	-192.22	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250352	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-79.60	-263.03	-228.09	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250353	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-94.41	-261.80	-240.83	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
-1250354	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-122.71	-263.34	-243.73	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	GUARD	idle	0	0	0	0	600	450	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	max_spawn_time	min_spawn_time
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL
+1250003	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	1	0.30	-1.90	-7.50	-90	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250004	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	10.28	-17.28	-41.35	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250005	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	1.09	-16.46	-38.46	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250006	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	34.84	-21.25	-46.26	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250007	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	3	33.77	-21.14	-34.74	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250008	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	4	13.27	-21.12	-57.84	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250009	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	4	4.29	-21.97	-60.10	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250010	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	-5.46	-23.32	-69.80	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250011	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	-6.21	-23.47	-85.30	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250012	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	2.78	-21.89	-85.00	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250013	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	5	24.46	-15.62	-80.05	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250014	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	6	33.65	-22.87	-63.92	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250015	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	7	27.79	-21.10	-16.64	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250016	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	36.15	-13.15	-88.51	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250017	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	46.73	-13.01	-93.37	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250018	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	43.02	-29.97	-102.62	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250019	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	8	44.74	-29.81	-86.64	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250020	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	68.97	-18.59	-44.29	-97	1	Deathswarm	ep3_beetle_uwari_deathswarm_36_c_agg_e	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250021	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	61.49	-26.75	-35.70	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250022	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	9	57.80	-26.81	-50.56	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250023	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	49.23	-26.82	-18.61	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250024	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	53.29	-26.93	-3.76	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250025	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	62.23	-26.62	-15.06	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250026	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	71.32	-29.08	5.47	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250027	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	10	83.84	-34.33	-1.07	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250028	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	11	78.82	-29.28	-35.76	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250029	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	61.12	-14.63	-80.92	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250030	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	72.20	-16.36	-72.58	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250031	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	12	69.29	-14.65	-83.66	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250032	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	13	76.73	-29.67	-108.23	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250033	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	13	65.72	-29.14	-101.08	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250034	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	109.23	-36.90	-95.09	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250035	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	96.99	-32.76	-83.20	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250036	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	92.35	-32.25	-93.97	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250037	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	14	83.00	-30.38	-95.50	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250038	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	15	80.91	-21.58	-59.81	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250039	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	15	85.74	-22.03	-52.15	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250040	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	16	99.15	-27.45	-58.93	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250041	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	16	113.47	-33.54	-53.16	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250042	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	104.07	-41.77	1.90	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250043	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	96.50	-39.76	-13.10	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250044	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	17	91.57	-37.15	-27.28	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250045	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	130.41	-44.34	-11.44	110	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250046	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	115.31	-44.31	-33.41	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250047	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	129.21	-44.40	-21.50	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250048	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	18	146.79	-41.63	-15.68	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250049	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	133.38	-44.86	-100.66	-7	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250050	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	122.60	-45.03	-101.06	10	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250051	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	124.17	-36.36	-43.19	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250052	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	131.38	-36.67	-54.48	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250053	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	133.04	-41.56	-70.28	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250054	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	19	122.40	-40.15	-82.60	0	1	an uwari beetle	ep3_beetle_uwari_34_c_agg_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250055	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	21	153.71	-54.90	2.72	4	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250056	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	21	160.07	-54.85	3.08	3	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250057	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	130.51	-46.66	-146.82	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250058	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	108.14	-46.47	-151.60	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250059	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	115.75	-46.46	-123.02	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250060	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	156.74	-46.82	-116.01	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250061	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	22	143.97	-46.74	-133.96	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250062	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	23	153.44	-55.37	-77.22	157	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250063	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	186.98	-63.81	-84.75	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250064	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	201.05	-63.62	-75.10	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250065	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	210.65	-63.56	-92.80	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250066	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	209.06	-63.66	-95.78	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250067	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	24	228.34	-63.34	-91.90	0	1	a myyydril farmer	ep3_myyydril_farmer_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250068	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	25	258.46	-69.03	-93.56	-177	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250069	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	25	255.94	-80.38	-132.06	10	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250070	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	229.92	-91.11	-132.75	5	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250071	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	229.49	-91.18	-122.49	169	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250072	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	136.34	-90.41	-213.00	1	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250073	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	120.85	-90.49	-212.55	1	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250074	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	160.61	-90.43	-49.36	-127	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250075	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	200.74	-95.00	-156.95	66	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250076	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	171.97	-91.67	-156.31	124	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250077	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	125.80	-90.67	-145.78	-42	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250078	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	132.32	-94.14	-189.19	22	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250079	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	146.32	-93.94	-78.36	-113	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250080	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	158.21	-91.22	-88.10	-110	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250081	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	211.89	-97.15	-148.78	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250082	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	209.91	-97.01	-152.41	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250083	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	208.04	-97.01	-148.13	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250084	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	206.31	-96.82	-152.98	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250085	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	207.68	-96.44	-157.21	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250086	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	178.13	-91.76	-163.64	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250087	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	176.17	-91.46	-160.62	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250088	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	179.21	-91.84	-157.14	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250089	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	183.00	-92.42	-161.50	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250090	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	187.95	-92.93	-161.24	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250091	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	118.13	-91.10	-136.73	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250092	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	117.34	-91.28	-143.36	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250093	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	125.30	-90.78	-138.65	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250094	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	123.70	-90.94	-151.42	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250095	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	130.84	-90.78	-145.59	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250096	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	138.27	-93.97	-181.88	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250097	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	139.74	-93.58	-171.53	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250098	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	132.13	-94.06	-178.13	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250099	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	145.53	-94.21	-98.14	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250100	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	137.27	-96.12	-98.21	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250101	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	122.37	-94.96	-104.55	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250102	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	113.67	-95.25	-97.15	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250103	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	119.87	-96.98	-85.79	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250104	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	124.15	-96.65	-91.54	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250105	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	137.20	-96.53	-87.52	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250106	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	129.08	-96.77	-96.98	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250107	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	29	109.84	-95.27	-106.58	0	1	a domestic uwari beetle	ep3_beetle_dom_uwari_100_c_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250108	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	142.37	-90.78	-22.02	-164	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250109	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	131.66	-90.57	-30.39	47	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250110	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	30	146.03	-90.91	-33.89	-28	1	a myyydril herder	ep3_myyydril_herder_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250111	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	31	128.86	-90.78	-233.05	93	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250112	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	226.65	-123.41	-213.63	178	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250113	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	229.95	-123.22	-253.17	-90	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250114	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	218.92	-123.18	-254.11	90	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250115	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	231.42	-123.36	-233.26	-41	1	Kiaanta (Patrol Squad)	ep3_myyydril_kiaanta_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250116	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	230.44	-123.53	-235.86	-41	1	Kivvaaa (Patrol Leader)	ep3_myyydril_kivvaaa_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250117	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	33	230.96	-123.39	-239.28	-41	1	Tala'oree (Patrol Squad)	ep3_myyydril_talaoree_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250118	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	228.01	-123.11	-299.46	-57	1	Chasuli (Myyydril Villager)	ep3_myyydril_chasuli_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250119	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	208.86	-122.81	-323.03	34	1	Compactor 3000 (Junk Collector)	ep3_myyydril_compactor_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250120	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	187.98	-123.28	-356.32	-52	1	Rhirren (Myyydril Guard)	ep3_myyydril_greeter_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250121	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	178.00	-117.00	-374.00	0	1	Echrhin Isdan (Mystic Shaman)	ep3_myyydril_isdan_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250122	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	215.75	-123.50	-309.58	52	1	Ivesa (Myyydril Villager)	ep3_myyydril_ivesa_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250123	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	108.00	-123.00	-308.00	160	1	Kallaarac (Myyydril Chief)	ep3_myyydril_kallaarac_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250124	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	134.00	-155.00	-294.00	31	1	Doctor Kinesworthy (Cybernetics Doctor)	ep3_myyydril_kinesworthy_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250125	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	228.00	110.00	-339.00	-138	1	Kirrir (Cantina Girl)	ep3_myyydril_kirrir_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250126	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	114.37	-123.53	-319.02	-85	1	Ildisa (Myyydril Mystic)	ep3_myyydril_mystic_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250127	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	224.40	-111.58	-353.99	-69	1	Nawika (Cantina Patron)	ep3_myyydril_nawika_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250128	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	211.59	-122.92	-326.86	20	1	Old Warris (Myyydril Villager)	ep3_myyydril_old_warris_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250129	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	165.49	-147.83	-286.36	-102	1	Shady Pers (Smuggler)	ep3_myyydril_pers_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250130	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	205.77	-114.58	-280.31	146	1	Seri'leo (Myyydril Villager)	ep3_myyydril_serileo_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250131	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	105.00	-128.00	-358.00	31	1	Treesh (Weaponsmith)	ep3_myyydril_treesh_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250132	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	34	185.00	-115.00	-317.00	104	1	Yraka Nes (Medical Nurse)	ep3_myyydril_yraka_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250133	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	35	90.74	-153.01	-246.25	55	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250134	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	35	115.84	-152.99	-246.97	-8	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250135	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	129.18	-159.72	-210.52	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250136	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	137.58	-160.28	-183.77	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250137	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	36	108.45	-160.22	-196.79	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250138	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	38	77.86	-188.08	-135.12	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250139	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	38	74.00	-196.10	-166.61	0	1	a myyydril miner	ep3_myyydril_miner_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	360	300
+1250140	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	39	42.30	-198.18	-195.80	-9	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250141	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	39	40.94	-197.83	-171.11	174	1	a myyydril guard	ep3_myyydril_guard_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	360	300
+1250142	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-220.28	-252.90	-100.07	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250143	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-184.42	-254.15	-64.48	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250144	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-133.32	-261.87	-73.29	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250145	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-227.03	-269.33	-228.67	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250146	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-224.36	-268.73	-218.95	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250147	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-243.57	-223.01	-275.68	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250148	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-203.46	-263.33	-229.32	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250149	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-204.05	-264.47	-219.64	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250150	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-228.03	-222.82	-273.30	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250151	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-125.53	-173.37	-86.99	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250152	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-123.96	-196.27	-38.12	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250153	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-142.35	-196.29	-37.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250154	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-142.12	-198.72	-63.46	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250155	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-152.46	-204.76	-92.67	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250156	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-232.16	-251.90	-181.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250157	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-234.75	-253.11	-153.53	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250158	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-215.91	-252.97	-119.88	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250159	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	40	-197.54	-252.81	-95.75	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250160	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	41	-207.43	-187.98	-356.06	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250161	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	41	-225.83	-188.65	-355.83	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250162	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-210.34	-177.41	-382.16	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250163	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-179.62	-169.21	-403.31	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250164	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-213.47	-183.03	-371.01	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250165	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	42	-204.87	-174.96	-391.84	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250166	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-160.10	-169.08	-413.56	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250167	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-166.64	-168.89	-429.96	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	600
+1250168	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-162.18	-169.37	-425.27	0	1	an urnsor'is handmaiden	ep3_urnsoris_handmaiden_79_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250169	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-149.49	-172.91	-421.36	0	1	Mother Queen	ep3_urnsoris_motherqueen_81_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	900	600
+1250170	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-183.87	-168.61	-426.17	0	1	an urnsor'is guardian	ep3_urnsoris_guardian_80_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	800	450
+1250171	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	43	-181.83	-169.08	-424.71	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250172	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-221.60	-221.12	18.17	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250173	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-210.89	-221.05	18.53	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250174	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-178.72	-221.60	66.97	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250175	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-194.71	-221.79	44.64	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250176	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-213.21	-221.19	43.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250177	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	44	-194.23	-221.01	60.58	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250178	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	45	-146.48	-220.10	83.27	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250179	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	45	-166.19	-221.56	82.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250180	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-63.55	-222.07	96.39	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250181	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-63.63	-221.65	116.50	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250182	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-85.37	-221.66	121.31	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250183	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-97.88	-221.64	114.61	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250184	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-102.75	-221.72	123.60	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250185	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-119.65	-197.63	81.98	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250186	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-109.95	-197.82	86.65	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250187	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.30	-221.83	85.20	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250188	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-109.72	-222.24	127.40	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250189	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-116.60	-222.67	132.69	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250190	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-108.92	-197.93	92.79	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250191	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-123.68	-197.04	81.17	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250192	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-108.15	-197.38	73.69	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250193	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.35	-196.78	75.24	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250194	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-82.41	-222.15	116.72	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250195	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-74.64	-221.93	132.07	0	1	a cavern refugee	ep3_myyydril_refugee_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250196	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-93.83	-196.73	75.87	-90	1	Ren'Salla (Refugee Leader)	ep3_myyydril_rensalla_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	600	450
+1250197	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	46	-127.17	-221.34	67.37	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250198	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-326.15	-273.11	-196.55	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250199	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-325.43	-273.25	-208.26	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250200	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-336.93	-272.54	-211.37	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250201	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-340.28	-271.31	-186.64	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250202	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-350.22	-272.29	-200.58	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250203	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	47	-348.64	-267.07	-164.44	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250204	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-363.35	-263.99	-161.20	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250205	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-372.26	-259.45	-148.90	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250206	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	48	-364.40	-254.24	-133.72	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250207	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-379.28	-255.59	-122.15	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250208	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-365.93	-255.64	-107.16	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250209	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-384.10	-254.04	-98.92	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250210	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	49	-380.54	-247.83	-84.21	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250211	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-348.10	-228.23	-68.13	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250212	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-351.12	-219.05	-88.33	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250213	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-349.16	-217.33	-98.68	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250214	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	50	-380.55	-241.70	-66.29	0	1	an urnsor'is worker	ep3_urnsoris_worker_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250215	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	51	-378.80	-206.58	-99.39	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250216	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	51	-381.95	-202.74	-84.46	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250217	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-369.07	-197.73	-63.87	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250218	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-352.76	-188.96	-68.57	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250219	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-339.18	-187.03	-55.29	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	600
+1250220	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	52	-333.34	-187.50	-55.76	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250221	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-388.90	-178.76	175.35	-179	1	Erriya (a Lost Soul)	ep3_myyydril_erriya_64_h_att_e	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	600	450
+1250222	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-327.65	-193.51	35.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250223	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-358.28	-191.99	-24.32	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250224	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-351.51	-183.64	9.31	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250225	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-351.35	-184.39	20.18	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250226	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-375.86	-192.97	35.45	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250227	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-327.16	-190.19	81.28	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250228	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-319.44	-189.23	95.59	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250229	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-336.97	-193.42	109.43	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250230	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-385.54	-186.82	121.20	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250231	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-386.17	-190.26	105.22	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250232	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-398.81	-190.78	58.57	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250233	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-399.37	-191.38	101.75	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250234	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-402.93	-186.79	141.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250235	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-392.37	-189.68	158.71	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250236	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-414.04	-191.64	122.90	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250237	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-317.39	-183.31	65.97	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250238	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-384.54	-190.94	156.20	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250239	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-361.44	-187.47	191.66	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250240	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-346.38	-188.16	190.40	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250241	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-306.97	-188.21	188.58	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250242	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-299.42	-190.36	167.22	0	1	a lost soul	ep3_myyydril_sick_100_h_inv_n	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250243	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-338.33	-185.65	-29.94	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250244	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-389.42	-186.19	21.87	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250245	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-311.89	-178.82	55.97	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250246	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-354.38	-190.02	115.88	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250247	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-388.04	-183.49	133.57	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250248	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-415.26	-192.43	110.47	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250249	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-418.99	-182.89	67.08	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250250	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-321.61	-190.74	27.72	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250251	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-325.54	-188.37	192.28	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250252	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-285.87	-188.86	166.82	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250253	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	53	-362.73	-174.72	68.14	0	1	Nefarious	ep3_urnsoris_nefarious_79_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	900	450
+1250254	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-267.03	-184.56	167.38	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250255	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-265.11	-178.62	187.72	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250256	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-274.20	-177.76	206.62	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250257	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-295.92	-177.96	210.36	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250258	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-324.81	-177.66	207.50	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250259	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	54	-346.48	-163.81	207.78	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250260	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	55	-361.00	-145.00	169.00	12	1	Model 3-NIi	myyydril_model_3nli_lorn_servant_100_d_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	600	450
+1250261	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	57	-217.66	-92.82	149.16	-87	1	Treun Lorn (Cybernetic Doctor)	ep3_myyydril_lorn_100_h_inv_n	dungeon	Myyydril Cave	1	IDLE	0	0	-	idle	0	0	0	600	450
+1250262	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-163.79	-66.08	56.34	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250263	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-143.44	-68.06	49.79	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250264	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-133.93	-66.25	56.22	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250265	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-131.02	-66.57	36.56	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250266	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-119.91	-65.31	41.49	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250267	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-112.02	-61.54	28.09	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250268	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-100.82	-58.00	26.64	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250269	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	61	-94.81	-57.34	17.36	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250270	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-64.78	-42.99	23.72	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250271	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-64.35	-41.18	10.45	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250272	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-59.51	-34.98	-4.12	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250273	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	62	-57.55	-42.96	18.69	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250274	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-43.38	-34.52	-12.26	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250275	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-51.98	-25.18	-41.55	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250276	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	63	-22.82	-19.21	-40.25	0	1	a forgotten creation	forgotten_creation_droid_74_d_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	480	300
+1250277	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-156.79	-168.21	-157.36	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250278	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-151.10	-168.21	-130.72	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250279	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-140.60	-168.19	-157.22	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250280	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-130.29	-167.37	-124.41	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250281	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-112.52	-167.36	-140.46	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250282	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	64	-122.06	-167.83	-122.19	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250283	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-96.14	-167.28	-162.02	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250284	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-98.06	-167.76	-183.40	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250285	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-114.04	-167.49	-181.02	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250286	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-95.44	-168.36	-148.95	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250287	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	65	-99.47	-168.25	-137.61	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250288	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-111.49	-167.41	-225.51	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250289	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-122.60	-168.48	-241.87	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250290	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-138.30	-168.28	-250.93	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250291	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-125.07	-169.26	-231.31	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250292	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-96.76	-168.63	-221.17	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250293	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-135.71	-167.46	-212.94	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250294	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-121.52	-167.23	-219.28	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250295	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-116.18	-167.06	-254.35	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250296	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	66	-132.78	-169.21	-229.63	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250297	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-177.96	-167.79	-191.88	0	1	Urnsor'is Eviscerater	ep3_urnsoris_eviscerator_77_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	900	600
+1250298	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-161.71	-166.06	-185.63	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250299	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-127.16	-167.49	-191.23	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250300	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-143.38	-168.02	-193.26	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250301	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	67	-128.99	-167.10	-200.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250302	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-115.84	-199.58	-129.86	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250303	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-137.86	-200.28	-121.50	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250304	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-96.18	-200.33	-130.11	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250305	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	69	-121.79	-199.51	-124.36	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250306	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-140.60	-199.87	-175.56	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250307	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-105.73	-200.07	-164.84	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250308	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-130.78	-199.98	-150.52	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250309	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-122.39	-199.87	-186.05	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250310	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-141.23	-200.13	-192.32	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250311	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-123.89	-199.94	-167.54	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250312	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-97.71	-199.99	-144.23	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250313	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-95.83	-200.01	-162.52	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250314	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	70	-107.45	-200.20	-152.32	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250315	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-90.56	-200.05	-177.59	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250316	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-90.77	-200.05	-224.31	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250317	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-101.15	-199.83	-181.72	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250318	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-97.69	-200.18	-189.65	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250319	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	71	-95.98	-199.78	-214.87	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250320	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-71.66	-200.27	-212.10	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250321	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-62.08	-199.83	-210.38	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250322	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	72	-74.25	-200.02	-225.48	0	1	an urnsor'is caretaker	ep3_urnsoris_caretaker_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250323	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	73	-80.54	-200.08	-184.47	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250324	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	73	-72.79	-200.64	-172.82	0	1	an urnsor'is soldier	ep3_urnsoris_soldier_76_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250325	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	75	-134.65	-263.91	-120.93	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250326	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-158.26	-263.29	-127.46	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250327	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-162.67	-263.89	-142.24	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250328	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	76	-147.04	-263.45	-150.73	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250329	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-114.84	-263.57	-152.89	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250330	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-86.38	-260.83	-176.25	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250331	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-82.43	-263.14	-148.51	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250332	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-109.45	-265.58	-190.98	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250333	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-97.08	-262.58	-203.52	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250334	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-109.16	-265.91	-232.22	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250335	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-85.50	-263.05	-137.06	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250336	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-93.42	-263.58	-139.97	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250337	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-91.45	-263.47	-147.72	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250338	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-89.45	-262.02	-162.77	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250339	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-99.50	-263.06	-170.90	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250340	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-119.01	-263.92	-224.19	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250341	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-128.42	-263.75	-214.23	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250342	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-117.95	-262.41	-213.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250343	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-130.54	-263.78	-178.45	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250344	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-121.89	-262.91	-179.78	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250345	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-123.15	-263.83	-158.21	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250346	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-107.62	-263.45	-145.90	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250347	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-77.21	-262.48	-192.22	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250348	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-79.60	-263.03	-228.09	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250349	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-94.41	-261.80	-240.83	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250350	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	77	-122.71	-263.34	-243.73	0	1	a juvenile urnsor'is	ep3_urnsoris_juvenile_75_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250351	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	78	-143.51	-263.93	-258.54	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250352	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	78	-152.58	-264.21	-241.53	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250353	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	79	-178.12	-263.59	-221.02	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
+1250354	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	AREA	79	-168.82	-262.93	-239.95	0	1	an urnsor'is thrasher	ep3_urnsoris_thrasher_78_c_agg_e	dungeon	Myyydril Cave	1	TURN	0	0	-	idle	0	0	0	600	450
