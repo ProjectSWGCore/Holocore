@@ -77,7 +77,7 @@ import com.projectswg.holocore.resources.sui.SuiWindow;
  * they've died. It also lets players clone at a cloning facility.
  * @author mads
  */
-public final class CorpseService extends Service {
+final class CorpseService extends Service {
 	
 	private static final String DB_QUERY = "SELECT * FROM cloning_respawn";
 	private static final byte CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
@@ -90,7 +90,7 @@ public final class CorpseService extends Service {
 	
 	private final Map<Long, ScheduledFuture<?>> deleteCorpseTasks;
 	
-	public CorpseService() {
+	CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		reviveTimers = new HashMap<>();
 		facilityDataMap = new HashMap<>();

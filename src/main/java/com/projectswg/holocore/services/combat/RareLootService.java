@@ -41,7 +41,7 @@ import com.projectswg.holocore.services.objects.ObjectCreator;
 
 import java.util.Random;
 
-public final class RareLootService extends Service {
+class RareLootService extends Service {
 	
 	// TODO these two could be config options
 	private static final short MAX_LEVEL_DIFFERENCE = 6;    // +-6 difference is allowed between killer and corpse
@@ -49,7 +49,7 @@ public final class RareLootService extends Service {
 	
 	private final Random random;
 	
-	public RareLootService() {
+	RareLootService() {
 		random = new Random();
 		
 		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilled);
@@ -93,6 +93,17 @@ public final class RareLootService extends Service {
 		}
 	}
 	
+	private void sendSuccessPackets(SWGObject chest, CreatureObject corpse, CreatureObject killer) {
+		ObjectCreatedIntent.broadcast(chest);
+		
+		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse
+				.getObjectId(), "");
+		PlayMusicMessage sound = new PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false);
+		ShowLootBox box = new ShowLootBox(killer.getObjectId(), new long[] { chest.getObjectId() });
+		
+		killer.getOwner().sendPacket(effect, sound, box);
+	}
+	
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
 		// TODO only the player that delivered the killing blow is considered for this
 		CreatureObject corpse = cki.getCorpse();
@@ -118,14 +129,7 @@ public final class RareLootService extends Service {
 		
 		switch (chest.moveToContainer(inventory)) {
 			case SUCCESS:
-				new ObjectCreatedIntent(chest).broadcast();
-				
-				PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse
-						.getObjectId(), "");
-				PlayMusicMessage sound = new PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false);
-				ShowLootBox box = new ShowLootBox(killer.getObjectId(), new long[] { chest.getObjectId() });
-				
-				killer.getOwner().sendPacket(effect, sound, box);
+				sendSuccessPackets(chest, corpse, killer);
 				break;
 		}
 	}

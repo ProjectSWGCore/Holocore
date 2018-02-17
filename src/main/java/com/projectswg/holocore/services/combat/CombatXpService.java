@@ -48,12 +48,12 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.group.GroupObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 
-public class CombatXpService extends Service {
+class CombatXpService extends Service {
 	
 	private final Map<Short, XpData> xpData;
 	private final Map<Long, GroupObject> groupObjects;
 
-	public CombatXpService() {
+	CombatXpService() {
 		xpData = new HashMap<>();
 		groupObjects = new ConcurrentHashMap<>();
 	}
