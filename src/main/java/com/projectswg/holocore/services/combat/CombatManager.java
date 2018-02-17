@@ -56,6 +56,7 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
+import com.projectswg.holocore.services.loot.LootManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 
 import java.awt.*;

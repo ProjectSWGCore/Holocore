@@ -36,7 +36,7 @@ import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.DuelPlayerIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
-class DuelPlayerService extends Service {
+final class DuelPlayerService extends Service {
 	
 	DuelPlayerService() {
 		registerForIntent(DuelPlayerIntent.class, this::handleDuelPlayerIntent);

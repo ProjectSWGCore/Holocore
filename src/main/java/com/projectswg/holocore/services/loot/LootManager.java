@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.combat;
+package com.projectswg.holocore.services.loot;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.oob.ProsePackage;

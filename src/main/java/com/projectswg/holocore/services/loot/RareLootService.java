@@ -26,7 +26,7 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>. * *
  * *********************************************************************************
  */
-package com.projectswg.holocore.services.combat;
+package com.projectswg.holocore.services.loot;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -41,7 +41,7 @@ import com.projectswg.holocore.services.objects.ObjectCreator;
 
 import java.util.Random;
 
-class RareLootService extends Service {
+final class RareLootService extends Service {
 	
 	// TODO these two could be config options
 	private static final short MAX_LEVEL_DIFFERENCE = 6;    // +-6 difference is allowed between killer and corpse

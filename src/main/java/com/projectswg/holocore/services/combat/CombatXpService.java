@@ -48,7 +48,7 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.group.GroupObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 
-class CombatXpService extends Service {
+final class CombatXpService extends Service {
 	
 	private final Map<Short, XpData> xpData;
 	private final Map<Long, GroupObject> groupObjects;

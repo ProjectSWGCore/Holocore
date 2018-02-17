@@ -25,9 +25,10 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package com.projectswg.holocore.services.combat;
+package com.projectswg.holocore.services.loot;
 
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
+import com.projectswg.holocore.services.loot.RareLootService;
 import org.junit.Assert;
 import org.junit.Test;
 
