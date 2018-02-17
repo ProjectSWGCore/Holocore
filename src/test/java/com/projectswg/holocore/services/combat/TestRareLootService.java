@@ -28,42 +28,41 @@
 package com.projectswg.holocore.services.combat;
 
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestRareLootService {
-
+	
 	private final RareLootService rls;
-
+	
 	public TestRareLootService() {
 		rls = new RareLootService();
 	}
-
+	
 	@Test
 	public void testIsPlayerEligible() {
 		Assert.assertTrue(rls.isPlayerEligible(true, false));
 		Assert.assertFalse(rls.isPlayerEligible(false, true));
 		Assert.assertFalse(rls.isPlayerEligible(false, false));
 	}
-
+	
 	@Test
 	public void testIsLevelEligible() {
 		Assert.assertTrue(rls.isLevelEligible(90, 84));
 		Assert.assertFalse(rls.isLevelEligible(90, 83));
 	}
-
+	
 	@Test
 	public void testIsDrop() {
 		Assert.assertTrue(rls.isDrop(1));
 		Assert.assertFalse(rls.isDrop(2));
 	}
-
+	
 	@Test
 	public void testTemplateForDifficulty() {
 		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_1.iff", rls.templateForDifficulty(CreatureDifficulty.NORMAL));
 		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_2.iff", rls.templateForDifficulty(CreatureDifficulty.ELITE));
 		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_3.iff", rls.templateForDifficulty(CreatureDifficulty.BOSS));
 	}
-
+	
 }
