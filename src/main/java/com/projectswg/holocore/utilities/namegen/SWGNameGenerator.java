@@ -31,8 +31,8 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.resources.zone.NameFilter;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -41,27 +41,39 @@ import java.util.Locale;
 import java.util.Map;
 
 public class SWGNameGenerator {
-
-    private Map<String, RaceNameRule> ruleMap = new HashMap<>();
-    
-    private NameFilter nameFilter;
-    private String race;
-    
-    /**
-     * Creates a new instance of {@link SWGNameGenerator} with all racial naming rules loaded.
-     */
+	
+	private Map<String, RaceNameRule> ruleMap = new HashMap<>();
+	
+	private NameFilter nameFilter;
+	private String race;
+	
+	/**
+	 * Creates a new instance of {@link SWGNameGenerator} with all racial naming rules loaded.
+	 */
 	public SWGNameGenerator(NameFilter nameFilter) {
 		this.nameFilter = nameFilter;
 	}
 	
 	/**
-	 * Creates a new instance of {@link SWGNameGenerator} loaded with only the naming rules for the defined race. If a name is attempted to be generated 
+	 * Creates a new instance of {@link SWGNameGenerator} loaded with only the naming rules for the defined race. If a name is attempted to be generated
 	 * later that is not this race, then it'll load the naming rules specific to that race before generating a name.
+	 *
 	 * @param race Race to load the naming rules for.
 	 */
 	public SWGNameGenerator(Race race) {
 		loadNamingRule(race.getSpecies());
 		this.race = race.getSpecies().split("_")[0];
+	}
+	
+	/**
+	 * Creates a new instance of {@link SWGNameGenerator} loaded with only the naming rules for the defined race. If a name is attempted to be generated
+	 * later that is not this race, then it'll load the naming rules specific to that race before generating a name.
+	 *
+	 * @param race Race to load the naming rules for.
+	 */
+	public SWGNameGenerator(String race) {
+		loadNamingRule(race);
+		this.race = race;
 	}
 	
 	public void loadAllRules() {
@@ -75,20 +87,11 @@ public class SWGNameGenerator {
 		loadNamingRule(Race.WOOKIEE_MALE.getSpecies());
 		loadNamingRule(Race.ZABRAK_MALE.getSpecies());
 	}
-
-	/**
-	 * Creates a new instance of {@link SWGNameGenerator} loaded with only the naming rules for the defined race. If a name is attempted to be generated
-	 * later that is not this race, then it'll load the naming rules specific to that race before generating a name.
-	 * @param race Race to load the naming rules for.
-	 */
-	public SWGNameGenerator(String race) {
-		loadNamingRule(race);
-		this.race = race;
-	}
 	
 	/**
 	 * Generates a random name for the species the generator was initialized with. If initialized without a {@link Race}, the species is random.
 	 * This will also generate a surname for the race depending on the surname chance.
+	 *
 	 * @return Generated name in the form of a {@link String}, including surname dependent on chance.
 	 */
 	public String generateRandomName() {
@@ -96,28 +99,39 @@ public class SWGNameGenerator {
 			int i = randomInt(1, 10);
 			
 			switch (i) {
-			
-			case 1: return generateRandomName("rodian");
-			case 2: return generateRandomName("sullustan");
-			case 3: return generateRandomName("trandoshan");
-			case 4: return generateRandomName("human");
-			case 5: return generateRandomName("bothan");
-			case 6: return generateRandomName("wookiee");
-			case 7: return generateRandomName("twilek");
-			case 8: return generateRandomName("zabrak");
-			case 9: return generateRandomName("moncal");
-			case 10: return generateRandomName("ithorian");
-			
+				
+				case 1:
+					return generateRandomName("rodian");
+				case 2:
+					return generateRandomName("sullustan");
+				case 3:
+					return generateRandomName("trandoshan");
+				case 4:
+					return generateRandomName("human");
+				case 5:
+					return generateRandomName("bothan");
+				case 6:
+					return generateRandomName("wookiee");
+				case 7:
+					return generateRandomName("twilek");
+				case 8:
+					return generateRandomName("zabrak");
+				case 9:
+					return generateRandomName("moncal");
+				case 10:
+					return generateRandomName("ithorian");
+				
 			}
 			
 		}
-
+		
 		return generateRandomName(race);
 	}
 	
 	/**
 	 * Generates a random name for the defined race.
-	 * @param race Species to generate a name for
+	 *
+	 * @param race    Species to generate a name for
 	 * @param surname Determines if a surname should be generated or not.
 	 * @return Generated name in the form of a {@link String}, as well as the surname dependent on chance if true
 	 */
@@ -143,6 +157,7 @@ public class SWGNameGenerator {
 	
 	/**
 	 * Generates a random name and surname for the defined race depending on the chance specific to this race.
+	 *
 	 * @param race Species to generate a name for.
 	 * @return Generated name in the form of a{@link String}, including surname dependent on chance.
 	 */
@@ -152,10 +167,11 @@ public class SWGNameGenerator {
 	
 	/**
 	 * Generates a random name specific to the {@link Race} given. This will include a surname depending on the chance specific to this race.
+	 *
 	 * @param race Race/Species to generate a name for.
 	 * @return Generated name in the form of a {@link String}.
 	 */
-	public String generateRandomName(Race race){
+	public String generateRandomName(Race race) {
 		return generateRandomName(race.getSpecies());
 	}
 	
@@ -163,19 +179,21 @@ public class SWGNameGenerator {
 		StringBuilder buffer = new StringBuilder("");
 		String instructions = getRandomInstruction(rule);
 		int l = instructions.length();
-
-		for (int i = 0; i < l; i++) { 
-			char x = instructions.charAt(0); 
+		
+		for (int i = 0; i < l; i++) {
+			char x = instructions.charAt(0);
 			
 			switch (x) {
 				case 'v':
 					buffer.append(removeExcessDuplications(rule.getVowels(), buffer.toString(), getRandomElementFrom(rule.getVowels())));
 					break;
 				case 'c':
-					buffer.append(removeExcessDuplications(rule.getStartConsonants(), buffer.toString(), getRandomElementFrom(rule.getStartConsonants())));
+					buffer.append(removeExcessDuplications(rule.getStartConsonants(), buffer.toString(), getRandomElementFrom(rule
+							.getStartConsonants())));
 					break;
 				case 'd':
-					buffer.append(removeExcessDuplications(rule.getEndConsonants(), buffer.toString(), getRandomElementFrom(rule.getEndConsonants())));
+					buffer.append(removeExcessDuplications(rule.getEndConsonants(), buffer.toString(), getRandomElementFrom(rule
+							.getEndConsonants())));
 					break;
 				case '/':
 					buffer.append("'");
@@ -184,12 +202,12 @@ public class SWGNameGenerator {
 					break;
 			}
 			
-			instructions = instructions.substring(1); 
+			instructions = instructions.substring(1);
 		}
 		if (buffer.length() == 0)
 			return getNameByRule(rule);
 		return buffer.toString();
-	} 
+	}
 	
 	private String getRandomInstruction(RaceNameRule rule) {
 		return getRandomElementFrom(rule.getInstructions());
@@ -199,10 +217,9 @@ public class SWGNameGenerator {
 		String species = race.split("_")[0];
 		
 		RaceNameRule rule = null;
-		try {
-			FileInputStream fileStream = new FileInputStream("./namegen/" + species + ".txt");
-			rule = createRaceRule(fileStream);
-			fileStream.close();
+		try(InputStream stream = getClass().getClassLoader().getResourceAsStream("namegen/" + species + ".txt")) {
+			rule = createRaceRule(stream);
+			
 			if (rule != null)
 				ruleMap.put(species, rule);
 			
@@ -214,7 +231,7 @@ public class SWGNameGenerator {
 		return (rule != null);
 	}
 	
-	private RaceNameRule createRaceRule(FileInputStream stream) {
+	private RaceNameRule createRaceRule(InputStream stream) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
 		RaceNameRule rule = new RaceNameRule();
 		
@@ -229,7 +246,7 @@ public class SWGNameGenerator {
 	}
 	
 	private boolean populateRule(RaceNameRule rule, BufferedReader reader) throws IOException {
-
+		
 		String populating = "NONE";
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -244,22 +261,23 @@ public class SWGNameGenerator {
 				
 			} else if (!line.startsWith("#")) {
 				switch (populating) {
-				case "Settings":
-					populateSettings(rule, line);
-					break;
-				case "Vowels": 
-					rule.addVowel(line);
-					break;
-				case "StartConsonants": 
-					rule.addStartConsonant(line);
-					break;
-				case "EndConsonants": 
-					rule.addEndConsant(line);
-					break;
-				case "Instructions": 
-					rule.addInstruction(line);
-					break;
-					default: break;
+					case "Settings":
+						populateSettings(rule, line);
+						break;
+					case "Vowels":
+						rule.addVowel(line);
+						break;
+					case "StartConsonants":
+						rule.addStartConsonant(line);
+						break;
+					case "EndConsonants":
+						rule.addEndConsant(line);
+						break;
+					case "Instructions":
+						rule.addInstruction(line);
+						break;
+					default:
+						break;
 				}
 			}
 		}
@@ -270,19 +288,20 @@ public class SWGNameGenerator {
 	
 	private String getPopulateType(String line) {
 		switch (line) {
-		case "[Settings]":
-			return "Settings";
-		case "[Vowels]": 
-			return "Vowels";
-		case "[StartConsonants]": 
-			return "StartConsonants";
-		case "[EndConsonants]": 
-			return "EndConsonants";
-		case "[Instructions]": 
-			return "Instructions";
-		case "[END]": 
-			return "End";
-		default: return "End";
+			case "[Settings]":
+				return "Settings";
+			case "[Vowels]":
+				return "Vowels";
+			case "[StartConsonants]":
+				return "StartConsonants";
+			case "[EndConsonants]":
+				return "EndConsonants";
+			case "[Instructions]":
+				return "Instructions";
+			case "[END]":
+				return "End";
+			default:
+				return "End";
 		}
 	}
 	
@@ -297,9 +316,9 @@ public class SWGNameGenerator {
 		}
 	}
 	
-	private String firstCharUppercase(String name) { 
+	private String firstCharUppercase(String name) {
 		return Character.toString(name.charAt(0)).toUpperCase(Locale.US) + name.substring(1);
-	} 
+	}
 	
 	private String removeExcessDuplications(List<String> list, String orig, String n) {
 		// Only checks the first and last for repeating
