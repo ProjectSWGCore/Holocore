@@ -219,7 +219,7 @@ public class SWGNameGenerator {
 		RaceNameRule rule = null;
 		try(InputStream stream = getClass().getClassLoader().getResourceAsStream("namegen/" + species + ".txt")) {
 			rule = createRaceRule(stream);
-			stream.close();
+			
 			if (rule != null)
 				ruleMap.put(species, rule);
 			
