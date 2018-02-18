@@ -56,6 +56,7 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
+import com.projectswg.holocore.services.loot.LootManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 
 import java.awt.*;
@@ -92,7 +93,7 @@ public class CombatManager extends Manager {
 		addChildService(new CorpseService());
 		addChildService(new CombatXpService());
 		addChildService(new DuelPlayerService());
-		addChildService(new LootService());
+		addChildService(new LootManager());
 		
 		registerForIntent(DeathblowIntent.class, this::handleDeathblowIntent);
 		registerForIntent(ChatCommandIntent.class, this::handleChatCommandIntent);
@@ -116,9 +117,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private void periodicChecks() {
-		inCombat.values().stream()
-				.filter(c -> c.getTimeSinceCombat() >= 10E3)
-				.forEach(c -> exitCombat(c.getCreature()));
+		inCombat.values().stream().filter(c -> c.getTimeSinceCombat() >= 10E3).forEach(c -> exitCombat(c.getCreature()));
 	}
 	
 	private void periodicRegeneration() {
@@ -302,13 +301,9 @@ public class CombatManager extends Manager {
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
 		
 		// TODO line of sight checks between the explosive and each target
-		Set<CreatureObject> targets = objectsToCheck.stream()
-				.filter(CreatureObject.class::isInstance)
-				.map(CreatureObject.class::cast)
-				.filter(source::isAttackable)
-				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS)
-				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
-				.collect(Collectors.toSet());
+		Set<CreatureObject> targets = objectsToCheck.stream().filter(CreatureObject.class::isInstance).map(CreatureObject.class::cast)
+				.filter(source::isAttackable).filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS)
+				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange).collect(Collectors.toSet());
 		
 		// This way, mines or grenades won't try to harm themselves
 		if (includeOrigin && origin instanceof CreatureObject)
