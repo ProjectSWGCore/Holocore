@@ -128,26 +128,20 @@ final class CivilWarService extends Service {
 			
 			playerObject.setRankProgress(nextRankProgress);
 		} else if (newProgress > 0) {
-			// Push their progress forwards
+			// Set their new progress
 			playerObject.setRankProgress(newProgress);
-		} else if (newProgress < 0) {
-			if (isRankDown(oldProgress, newProgress)) {
-				int newRank = currentRank - 1;
+		} else if (newProgress < 0 && isRankDown(oldProgress, newProgress)) {
+			int newRank = currentRank - 1;
 				
-				playerObject.setCurrentRank(newRank);
+			playerObject.setCurrentRank(newRank);
 				
-				// Push their progress backwards in the new rank
-				int leftoverPoints = leftoverPoints(newProgress, points);
+			// Push their progress backwards in the new rank
+			int leftoverPoints = leftoverPoints(newProgress, points);
 				
-				// Calculate progress within the new rank using leftover points
-				float nextRankProgress = 100 - rankProgress(newProgress, 0, newRank, leftoverPoints);
+			// Calculate progress within the new rank using leftover points
+			float nextRankProgress = 100 - rankProgress(newProgress, 0, newRank, leftoverPoints);
 				
-				playerObject.setRankProgress(nextRankProgress);
-			} else {
-				// Push their progress backwards
-				playerObject.setRankProgress(newProgress);
-			}
-			
+			playerObject.setRankProgress(nextRankProgress);
 		}
 		
 		int kills = playerObject.getPvpKills();
