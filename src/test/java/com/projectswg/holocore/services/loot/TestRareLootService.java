@@ -66,4 +66,9 @@ public class TestRareLootService {
 		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_3.iff", rls.templateForDifficulty(CreatureDifficulty.BOSS));
 	}
 	
+	@Test
+	public void testChestIdForTemplate() {
+		Assert.assertEquals("rare_loot_chest_1", rls.chestIdForTemplate("object/tangible/item/shared_rare_loot_chest_1.iff"));
+	}
+	
 }

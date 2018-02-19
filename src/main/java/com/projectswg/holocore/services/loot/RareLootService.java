@@ -27,6 +27,7 @@
 package com.projectswg.holocore.services.loot;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
@@ -91,11 +92,14 @@ final class RareLootService extends Service {
 		}
 	}
 	
+	String chestIdForTemplate(String template) {
+		return template.replace("object/tangible/item/shared_", "").replace(".iff", "");
+	}
+	
 	private void sendSuccessPackets(SWGObject chest, CreatureObject corpse, CreatureObject killer) {
 		ObjectCreatedIntent.broadcast(chest);
 		
-		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse
-				.getObjectId(), "");
+		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse.getObjectId(), "");
 		PlayMusicMessage sound = new PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false);
 		ShowLootBox box = new ShowLootBox(killer.getObjectId(), new long[] { chest.getObjectId() });
 		
@@ -107,7 +111,7 @@ final class RareLootService extends Service {
 		CreatureObject corpse = cki.getCorpse();
 		CreatureObject killer = cki.getKiller();
 		
-		if (!isPlayerEligible(corpse.isPlayer(), killer.isPlayer())) {
+		if (!isPlayerEligible(killer.isPlayer(), corpse.isPlayer())) {
 			return;
 		}
 		
@@ -118,12 +122,16 @@ final class RareLootService extends Service {
 		int roll = random.nextInt(100) + 1;    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
 		
 		if (!isDrop(roll)) {
+			Log.d("No RLS drop from %s with roll %d", corpse, roll);
 			return;
 		}
 		
 		String template = templateForDifficulty(corpse.getDifficulty());
 		SWGObject chest = ObjectCreator.createObjectFromTemplate(template);
 		SWGObject inventory = killer.getSlottedObject("inventory");
+		
+		chest.setStf("loot_n", chestIdForTemplate(template) + "_n");
+		chest.setDetailStf("loot_n", chestIdForTemplate(template) + "_d");    // Not located in loot_d, for whatever reason...
 		
 		switch (chest.moveToContainer(inventory)) {
 			case SUCCESS:
