@@ -106,7 +106,13 @@ final class CivilWarService extends Service {
 		int currentRank = playerObject.getCurrentRank();
 		float oldProgress = playerObject.getRankProgress();
 		int points = playerObject.getGcwPoints();
-		float newProgress = rankProgress(oldProgress, 0, currentRank, points);
+		float decay = 0;
+		
+		if (isDecayRank(currentRank)) {
+			decay = currentRank;
+		}
+		
+		float newProgress = rankProgress(oldProgress, decay, currentRank, points);
 		
 		if (newProgress >= 100) {
 			// Rank them up!
@@ -153,6 +159,8 @@ final class CivilWarService extends Service {
 		// Add current stats to lifetime stats
 		playerObject.setLifetimeGcwPoints(playerObject.getLifetimeGcwPoints() + points);
 		playerObject.setLifetimePvpKills(playerObject.getLifetimePvpKills() + kills);
+		
+		// TODO award GCW abilities
 	}
 	
 	private void updateRanks() {
