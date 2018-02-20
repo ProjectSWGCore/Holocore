@@ -93,6 +93,11 @@ public class SuiTableWindow extends SuiWindow {
 		}
 	}
 	
+	@Override
+	public void setPrompt(String prompt) {
+		setPropertyText("comp.Prompt.lblPrompt", prompt);    // Table windows use a different widget for prompt text
+	}
+	
 	public void addColumn(String columnName, String type) {
 		int index = table.size();
 		
