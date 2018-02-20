@@ -28,9 +28,10 @@ package com.projectswg.holocore.resources.sui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SuiTableWindow extends SuiWindow {
-
+	
 	private List<SuiTableColumn> table;
 	
 	public SuiTableWindow(SuiButtons buttons, String title, String prompt, boolean exportBtn) {
@@ -39,13 +40,18 @@ public class SuiTableWindow extends SuiWindow {
 		
 		if (prompt == null || prompt.isEmpty())
 			setProperty("comp.Prompt", "Visible", "false");
-
-		setShowExportButton(false);
-
+		
+		setShowExportButton(exportBtn);
+		
 		clearDataSource("comp.TablePage.dataTable");
-
+		
 	}
-
+	
+	@Override
+	protected void onDisplayRequest() {
+		addReturnableProperty("comp.TablePage.table", "SelectedRow");
+	}
+	
 	@Override
 	protected void setButtons(SuiButtons buttons) {
 		switch(buttons) {
@@ -86,18 +92,18 @@ public class SuiTableWindow extends SuiWindow {
 				break;
 		}
 	}
-
+	
 	public void addColumn(String columnName, String type) {
 		int index = table.size();
 		
 		SuiTableColumn column = new SuiTableColumn();
 		String sIndex = String.valueOf(index);
-
-        addDataSource("comp.TablePage.dataTable", "Name", sIndex);
-        setProperty("comp.TablePage.dataTable." + sIndex, "Label", columnName);
-        setProperty("comp.TablePage.dataTable." + sIndex, "Type", type);
-        
-        table.add(column);
+		
+		addDataSource("comp.TablePage.dataTable", "Name", sIndex);
+		setProperty("comp.TablePage.dataTable." + sIndex, "Label", columnName);
+		setProperty("comp.TablePage.dataTable." + sIndex, "Type", type);
+		
+		table.add(column);
 	}
 	
 	public void addCell(String cellName, long cellObjId, int columnIndex) {
@@ -118,7 +124,7 @@ public class SuiTableWindow extends SuiWindow {
 	public void addCell(String cellName, int columnIndex) {
 		addCell(cellName, 0, columnIndex);
 	}
-
+	
 	public void setScrollExtent(int x, int z) {
 		setProperty("comp.TablePage.header", "ScrollExtent", String.valueOf(x) + "," + String.valueOf(z));
 	}
@@ -136,15 +142,21 @@ public class SuiTableWindow extends SuiWindow {
 		if (cell == null) return null;
 		else return cell.getValue();
 	}
-
+	
 	private void setShowExportButton(boolean show) {
 		setProperty("btnExport", "Visible", String.valueOf(show));
 	}
-
+	
+	public static int getSelectedRow(Map<String, String> parameters) {
+		String selectedIndex = parameters.get("comp.TablePage.table.SelectedRow");
+		if (selectedIndex != null) return Integer.parseInt(selectedIndex);
+		return -1;
+	}
+	
 	private static class SuiTableColumn {
 		
 		private List<SuiTableCell> cells;
-
+		
 		public SuiTableColumn(List<SuiTableCell> cells) {
 			this.cells = cells;
 		}
@@ -164,7 +176,7 @@ public class SuiTableWindow extends SuiWindow {
 			this.value = value;
 			this.id = id;
 		}
-
+		
 		public String getValue() { return this.value; }
 		public long getId() { return this.id; }
 	}
