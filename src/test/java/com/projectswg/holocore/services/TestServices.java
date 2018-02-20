@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services;
 
+import com.projectswg.holocore.services.faction.TestCivilWarService;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -38,6 +39,7 @@ import com.projectswg.holocore.services.player.TestPlayer;
 
 @RunWith(Suite.class)
 @SuiteClasses({
+	TestCivilWarService.class,
 	TestRareLootService.class,
 	TestCrafting.class,
 	TestPlayer.class,

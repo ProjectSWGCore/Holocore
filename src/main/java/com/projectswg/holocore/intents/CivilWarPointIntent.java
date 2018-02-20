@@ -24,39 +24,36 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.galaxy;
+package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Manager;
+import com.projectswg.common.control.Intent;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
-import com.projectswg.holocore.services.collections.CollectionBadgeManager;
-import com.projectswg.holocore.services.collections.CollectionService;
-import com.projectswg.holocore.services.combat.CombatManager;
-import com.projectswg.holocore.services.commands.BuffService;
-import com.projectswg.holocore.services.commands.CommandService;
-import com.projectswg.holocore.services.commands.EntertainmentService;
-import com.projectswg.holocore.services.crafting.CraftingManager;
-import com.projectswg.holocore.services.experience.ExperienceManager;
-import com.projectswg.holocore.services.faction.FactionManager;
-import com.projectswg.holocore.services.group.GroupService;
-import com.projectswg.holocore.services.sui.SuiService;
+import javax.annotation.Nonnull;
 
-public class GameManager extends Manager {
+public class CivilWarPointIntent extends Intent {
 	
-	public GameManager() {
-		addChildService(new CommandService());
-		addChildService(new ConnectionService());
-		addChildService(new SuiService());
-		addChildService(new CollectionService());
-		addChildService(new CollectionBadgeManager());
-		addChildService(new EnvironmentService());
-		addChildService(new FactionManager());
-		addChildService(new GroupService());
-		addChildService(new SkillModService());
-		addChildService(new EntertainmentService());
-		addChildService(new CombatManager());
-		addChildService(new ExperienceManager());
-		addChildService(new BuffService());
-		addChildService(new CraftingManager());
+	private final PlayerObject receiver;
+	private final int points;
+	
+	@Nonnull
+	private CivilWarPointIntent(PlayerObject receiver, int points) {
+		this.receiver = receiver;
+		this.points = points;
+	}
+	
+	@Nonnull
+	public PlayerObject getReceiver() {
+		return receiver;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+	
+	@Nonnull
+	public static void broadcast(PlayerObject receiver, int points) {
+		new CivilWarPointIntent(receiver, points).broadcast();
 	}
 	
 }

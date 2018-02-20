@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
-import com.projectswg.common.control.Service;
+import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -45,14 +45,16 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
-public final class FactionService extends Service {
+public final class FactionManager extends Manager {
 
 	private final Map<TangibleObject, Future<?>> statusChangers;
 	private final PswgScheduledThreadPool executor;
 	
-	public FactionService() {
+	public FactionManager() {
 		statusChangers = new ConcurrentHashMap<>();
 		executor = new PswgScheduledThreadPool(1, "faction-service");
+		
+		addChildService(new CivilWarService());
 		
 		registerForIntent(FactionIntent.class, this::handleFactionIntent);
 	}
@@ -97,7 +99,13 @@ public final class FactionService extends Service {
 		
 		if(target.getBaselineType() == BaselineType.CREO && target.getPvpFaction() != PvpFaction.NEUTRAL) {
 			// We're given rank 1 upon joining a non-neutral faction
-			((CreatureObject) target).setFactionRank((byte) 1);
+			CreatureObject creatureTarget = (CreatureObject) target;
+			
+			if (!creatureTarget.isPlayer()) {
+				return;
+			}
+			
+			creatureTarget.getPlayerObject().setCurrentRank(1);
 		}
 	}
 	
