@@ -239,7 +239,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			CivilWarPointIntent.broadcast(receiver, points);
 			Log.i("GCW command: %s gave themselves %d GCW points", player.getUsername(), points);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, String.format("XP command: %s is not a number", pointsArg));
+			SystemMessageIntent.broadcastPersonal(player, String.format("GCW command: %s is not a number", pointsArg));
 		}
 		
 	}

@@ -28,6 +28,7 @@
 
 package com.projectswg.holocore.services.faction;
 
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
@@ -36,7 +37,6 @@ import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-import com.projectswg.common.utilities.ThreadUtilities;
 import com.projectswg.holocore.intents.CivilWarPointIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
@@ -56,11 +56,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 final class CivilWarService extends Service {
@@ -70,7 +68,7 @@ final class CivilWarService extends Service {
 	
 	private final Map<Integer, String[]> rankAbilities;
 	private final Set<PlayerObject> playerObjects;
-	private final ScheduledExecutorService executor;
+	private final PswgScheduledThreadPool threadPool;
 	private final DayOfWeek updateWeekDay;
 	private final LocalTime updateTime;
 	private final ZoneOffset updateOffset;
@@ -79,8 +77,8 @@ final class CivilWarService extends Service {
 	
 	CivilWarService() {
 		rankAbilities = new HashMap<>();
-		playerObjects = new HashSet<>();
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("civil-war-service"));
+		playerObjects = ConcurrentHashMap.newKeySet();
+		threadPool = new PswgScheduledThreadPool(1, "civil-war-service");
 		// Rank update time is the night between Thursday and Friday at 00:00 UTC
 		updateWeekDay = DayOfWeek.FRIDAY;
 		updateTime = LocalTime.MIDNIGHT;
@@ -102,15 +100,22 @@ final class CivilWarService extends Service {
 		return super.initialize();
 	}
 	
+	@Override
+	public boolean terminate() {
+		threadPool.stop();
+		
+		return super.terminate();
+	}
+	
 	private void loadRankAbilities() {
 		String what = "rank abilities";
 		long startTime = StandardLog.onStartLoad(what);
 		
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/gcw/abilities.sdb"))) {
 			while (set.next()) {
-				int rank = (int) set.getInt(0);
-				String imperial = set.getText(1);
-				String rebel = set.getText(2);
+				int rank = (int) set.getInt("rank");
+				String imperial = set.getText("imperial");
+				String rebel = set.getText("rebel");
 				String[] abilities = new String[2];
 				
 				abilities[IMPERIAL_INDEX] = imperial;
@@ -131,7 +136,8 @@ final class CivilWarService extends Service {
 		rankEpoch = nextUpdateTime(now);	// Is in the future
 		int delay = rankEpoch - nowEpoch;
 		
-		executor.schedule(this::updateRanks, delay, updateUnit);
+		
+		threadPool.execute(delay, this::updateRanks);
 		playerObjects.forEach(this::updateTimer);
 	}
 	
