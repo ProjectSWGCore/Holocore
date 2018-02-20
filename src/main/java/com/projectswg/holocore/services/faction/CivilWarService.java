@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 final class CivilWarService extends Service {
 	
@@ -72,7 +71,6 @@ final class CivilWarService extends Service {
 	private final DayOfWeek updateWeekDay;
 	private final LocalTime updateTime;
 	private final ZoneOffset updateOffset;
-	private final TimeUnit updateUnit;
 	private int rankEpoch;
 	
 	CivilWarService() {
@@ -83,7 +81,6 @@ final class CivilWarService extends Service {
 		updateWeekDay = DayOfWeek.FRIDAY;
 		updateTime = LocalTime.MIDNIGHT;
 		updateOffset = ZoneOffset.UTC;
-		updateUnit = TimeUnit.SECONDS;
 		
 		loadRankAbilities();
 		
@@ -95,6 +92,7 @@ final class CivilWarService extends Service {
 	
 	@Override
 	public boolean initialize() {
+		threadPool.start();
 		scheduleRankUpdate();
 		
 		return super.initialize();
@@ -102,9 +100,71 @@ final class CivilWarService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		threadPool.stop();
+		threadPool.stop(); // To stop more threads from running
+		threadPool.awaitTermination(1000); // Waits for them to complete executing
 		
 		return super.terminate();
+	}
+	
+	int leftoverPoints(float progress, int points) {
+		return (int) ((progress - 100) / 100 * (float) points);
+	}
+	
+	boolean isRankDown(float oldProgress, float newProgress) {
+		return oldProgress + newProgress < 0;
+	}
+	
+	int nextUpdateTime(LocalDate now) {
+		LocalDate nextUpdateDate = now.with(updateWeekDay);
+		
+		return (int) nextUpdateDate.toEpochSecond(updateTime, updateOffset);
+	}
+	
+	boolean isDecayRank(int rank) {
+		return rank >= 7;    // Lieutenant and above has decay
+	}
+	
+	float rankProgress(float currentProgress, float decay, int currentRank, int points) {
+		float progress = currentProgress - decay;
+		
+		progress += (float) points / (currentRank * 100.0f);
+		
+		return progress;
+	}
+	
+	boolean isFactionEligible(PvpFaction killerFaction, PvpFaction corpseFaction, boolean specialForces) {
+		return killerFaction != PvpFaction.NEUTRAL && corpseFaction != PvpFaction.NEUTRAL && killerFaction != corpseFaction && specialForces;
+	}
+	
+	byte makeMultiplier(boolean specialForces, boolean player) {
+		byte multiplier = 1;
+		
+		if (specialForces) {
+			multiplier += 1;
+		}
+		
+		if (player) {
+			multiplier += 18;
+		}
+		
+		return multiplier;
+	}
+	
+	int baseForDifficulty(CreatureDifficulty difficulty) {
+		switch (difficulty) {
+			case NORMAL:
+				return 5;
+			case ELITE:
+				return 10;
+			case BOSS:
+				return 15;
+			default:
+				throw new IllegalArgumentException("Unhandled CreatureDifficulty: " + difficulty);
+		}
+	}
+	
+	int pointsGranted(int base, byte multiplier) {
+		return base * multiplier;
 	}
 	
 	private void loadRankAbilities() {
@@ -133,9 +193,8 @@ final class CivilWarService extends Service {
 	private void scheduleRankUpdate() {
 		LocalDate now = LocalDate.now();
 		int nowEpoch = (int) now.toEpochSecond(updateTime, updateOffset);
-		rankEpoch = nextUpdateTime(now);	// Is in the future
-		int delay = rankEpoch - nowEpoch;
-		
+		rankEpoch = nextUpdateTime(now);    // Is in the future
+		int delay = (rankEpoch - nowEpoch) * 1000;    // Must be milliseconds
 		
 		threadPool.execute(delay, this::updateRanks);
 		playerObjects.forEach(this::updateTimer);
@@ -146,15 +205,11 @@ final class CivilWarService extends Service {
 	}
 	
 	private void changeRank(PlayerObject playerObject, int newRank) {
-		if (newRank < 1 || newRank > 12) {
-			throw new IllegalArgumentException("Rank must be at least 1 and max 12");
-		}
+		assert (newRank < 1 || newRank > 12);
 		
 		int oldRank = playerObject.getCurrentRank();
 		
-		if (oldRank < 1) {
-			throw new IllegalArgumentException("Unranked players cannot receive rank changes");
-		}
+		assert (oldRank > 1);
 		
 		int highestRank = Math.max(oldRank, newRank);
 		int lowestRank = Math.min(oldRank, newRank);
@@ -220,13 +275,13 @@ final class CivilWarService extends Service {
 			int demotion = playerObject.getCurrentRank() - 1;
 			
 			changeRank(playerObject, demotion);
-				
+			
 			// Push their progress backwards in the new rank
 			int leftoverPoints = leftoverPoints(newProgress, points);
-				
+			
 			// Calculate progress within the new rank using leftover points
 			float nextRankProgress = 100 - rankProgress(newProgress, 0, demotion, leftoverPoints);
-				
+			
 			playerObject.setRankProgress(nextRankProgress);
 		}
 		
@@ -244,72 +299,12 @@ final class CivilWarService extends Service {
 	}
 	
 	private void updateRanks() {
-		playerObjects.stream()
-				.filter(playerObject -> playerObject.getCurrentRank() > 0)
-				.forEach(this::updateRank);
+		playerObjects.forEach(playerObject -> {
+			if (playerObject.getCurrentRank() > 0)
+				updateRank(playerObject);
+		});
 		
-		scheduleRankUpdate();	// Schedule next rank update
-	}
-	
-	int leftoverPoints(float progress, int points) {
-		return (int) ((progress - 100) / 100 * (float) points);
-	}
-	
-	boolean isRankDown(float oldProgress, float newProgress) {
-		return oldProgress + newProgress < 0;
-	}
-	
-	int nextUpdateTime(LocalDate now) {
-		LocalDate nextUpdateDate = now.with(updateWeekDay);
-		
-		return (int) nextUpdateDate.toEpochSecond(updateTime, updateOffset);
-	}
-	
-	boolean isDecayRank(int rank) {
-		return rank >= 7;	// Lieutenant and above has decay
-	}
-	
-	float rankProgress(float currentProgress, float decay, int currentRank, int points) {
-		float progress = currentProgress - decay;
-		
-		progress += (float) points / (currentRank * 100.0f);
-		
-		return progress;
-	}
-	
-	boolean isFactionEligible(PvpFaction killerFaction, PvpFaction corpseFaction, boolean specialForces) {
-		return killerFaction != PvpFaction.NEUTRAL && corpseFaction != PvpFaction.NEUTRAL && killerFaction != corpseFaction && specialForces;
-	}
-	
-	byte makeMultiplier(boolean specialForces, boolean player) {
-		byte multiplier = 1;
-		
-		if (specialForces) {
-			multiplier += 1;
-		}
-		
-		if (player) {
-			multiplier += 18;
-		}
-		
-		return multiplier;
-	}
-	
-	int baseForDifficulty(CreatureDifficulty difficulty) {
-		switch (difficulty) {
-			case NORMAL:
-				return 5;
-			case ELITE:
-				return 10;
-			case BOSS:
-				return 15;
-			default:
-				throw new IllegalArgumentException("Unhandled CreatureDifficulty: " + difficulty);
-		}
-	}
-	
-	int pointsGranted(int base, byte multiplier) {
-		return base * multiplier;
+		scheduleRankUpdate();    // Schedule next rank update
 	}
 	
 	private void grantPoints(ProsePackage prose, PlayerObject receiver, int points) {
@@ -364,7 +359,8 @@ final class CivilWarService extends Service {
 			}
 			
 			// PvP GCW point system message
-			prose = new ProsePackage("StringId", new StringId("gcw", "gcw_rank_pvp_kill_point_grant"), "DI", granted, "TT", corpseCreature.getObjectName());
+			prose = new ProsePackage("StringId", new StringId("gcw", "gcw_rank_pvp_kill_point_grant"), "DI", granted, "TT", corpseCreature
+					.getObjectName());
 			
 			// Send visual effect to killer and everyone around
 			killerCreature.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "head", killerCreature.getObjectId(), ""));

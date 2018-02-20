@@ -29,16 +29,20 @@ package com.projectswg.holocore.intents;
 import com.projectswg.common.control.Intent;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
+import javax.annotation.Nonnull;
+
 public class CivilWarPointIntent extends Intent {
 	
 	private final PlayerObject receiver;
 	private final int points;
 	
+	@Nonnull
 	private CivilWarPointIntent(PlayerObject receiver, int points) {
 		this.receiver = receiver;
 		this.points = points;
 	}
 	
+	@Nonnull
 	public PlayerObject getReceiver() {
 		return receiver;
 	}
@@ -47,6 +51,7 @@ public class CivilWarPointIntent extends Intent {
 		return points;
 	}
 	
+	@Nonnull
 	public static void broadcast(PlayerObject receiver, int points) {
 		new CivilWarPointIntent(receiver, points).broadcast();
 	}
