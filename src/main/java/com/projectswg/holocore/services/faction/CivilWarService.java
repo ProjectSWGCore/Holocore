@@ -132,7 +132,7 @@ final class CivilWarService extends Service {
 		int delay = rankEpoch - nowEpoch;
 		
 		executor.schedule(this::updateRanks, delay, updateUnit);
-		playerObjects.stream().forEach(this::updateTimer);
+		playerObjects.forEach(this::updateTimer);
 	}
 	
 	private void updateTimer(PlayerObject playerObject) {
@@ -176,7 +176,6 @@ final class CivilWarService extends Service {
 					continue;
 				}
 				
-				Log.d("Rank: " + rank);
 				String ability = rankAbilities.get(rank)[abilityIndex];
 				
 				creature.addAbility(ability);
@@ -398,12 +397,6 @@ final class CivilWarService extends Service {
 		
 		// Let's make sure the timer's displayed for them
 		updateTimer(playerObject);
-		
-		// TODO debugging - remove three lines below!
-		CreatureObject creature = (CreatureObject) playerObject.getParent();
-		creature.setPvpFaction(PvpFaction.REBEL);
-		playerObject.setCurrentRank(1);
-		changeRank(playerObject, 12);
 		
 		playerObjects.add(playerObject);
 	}
