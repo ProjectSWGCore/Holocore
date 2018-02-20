@@ -31,10 +31,6 @@ import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
 public class CivilWarPointIntent extends Intent {
 	
-	public static void broadcast(PlayerObject receiver, int points) {
-		new CivilWarPointIntent(receiver, points).broadcast();
-	}
-	
 	private final PlayerObject receiver;
 	private final int points;
 	
@@ -49,6 +45,10 @@ public class CivilWarPointIntent extends Intent {
 	
 	public int getPoints() {
 		return points;
+	}
+	
+	public static void broadcast(PlayerObject receiver, int points) {
+		new CivilWarPointIntent(receiver, points).broadcast();
 	}
 	
 }
