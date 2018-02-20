@@ -33,6 +33,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.utilities.ThreadUtilities;
@@ -45,12 +46,18 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.StandardLog;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -58,6 +65,10 @@ import java.util.concurrent.TimeUnit;
 
 final class CivilWarService extends Service {
 	
+	private static final int IMPERIAL_INDEX = 0;
+	private static final int REBEL_INDEX = 1;
+	
+	private final Map<Integer, String[]> rankAbilities;
 	private final Set<PlayerObject> playerObjects;
 	private final ScheduledExecutorService executor;
 	private final DayOfWeek updateWeekDay;
@@ -67,6 +78,7 @@ final class CivilWarService extends Service {
 	private int rankEpoch;
 	
 	CivilWarService() {
+		rankAbilities = new HashMap<>();
 		playerObjects = new HashSet<>();
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("civil-war-service"));
 		// Rank update time is the night between Thursday and Friday at 00:00 UTC
@@ -74,6 +86,8 @@ final class CivilWarService extends Service {
 		updateTime = LocalTime.MIDNIGHT;
 		updateOffset = ZoneOffset.UTC;
 		updateUnit = TimeUnit.SECONDS;
+		
+		loadRankAbilities();
 		
 		registerForIntent(CivilWarPointIntent.class, this::handleCivilWarPointIntent);
 		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
@@ -86,6 +100,29 @@ final class CivilWarService extends Service {
 		scheduleRankUpdate();
 		
 		return super.initialize();
+	}
+	
+	private void loadRankAbilities() {
+		String what = "rank abilities";
+		long startTime = StandardLog.onStartLoad(what);
+		
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/gcw/abilities.sdb"))) {
+			while (set.next()) {
+				int rank = (int) set.getInt(0);
+				String imperial = set.getText(1);
+				String rebel = set.getText(2);
+				String[] abilities = new String[2];
+				
+				abilities[IMPERIAL_INDEX] = imperial;
+				abilities[REBEL_INDEX] = rebel;
+				
+				rankAbilities.put(rank, abilities);
+			}
+		} catch (IOException e) {
+			Log.e(e);
+		}
+		
+		StandardLog.onEndLoad(rankAbilities.size(), what, startTime);
 	}
 	
 	private void scheduleRankUpdate() {
@@ -102,6 +139,51 @@ final class CivilWarService extends Service {
 		playerObject.setGcwNextUpdate(rankEpoch);
 	}
 	
+	private void changeRank(PlayerObject playerObject, int newRank) {
+		if (newRank < 1 || newRank > 12) {
+			throw new IllegalArgumentException("Rank must be at least 1 and max 12");
+		}
+		
+		int oldRank = playerObject.getCurrentRank();
+		
+		if (oldRank < 1) {
+			throw new IllegalArgumentException("Unranked players cannot receive rank changes");
+		}
+		
+		int highestRank = Math.max(oldRank, newRank);
+		int lowestRank = Math.min(oldRank, newRank);
+		CreatureObject creature = (CreatureObject) playerObject.getParent();
+		PvpFaction faction = creature.getPvpFaction();
+		int abilityIndex = faction == PvpFaction.IMPERIAL ? IMPERIAL_INDEX : REBEL_INDEX;
+		
+		playerObject.setCurrentRank(newRank);
+		
+		if (oldRank > newRank) {
+			// They've been demoted
+			for (int rank = highestRank; rank >= lowestRank; rank--) {
+				if (!isDecayRank(rank)) {
+					break;
+				}
+				
+				String ability = rankAbilities.get(rank)[abilityIndex];
+				
+				creature.removeAbility(ability);
+			}
+		} else if (oldRank < newRank) {
+			// They've been promoted
+			for (int rank = lowestRank; rank <= highestRank; rank++) {
+				if (!isDecayRank(rank)) {
+					continue;
+				}
+				
+				Log.d("Rank: " + rank);
+				String ability = rankAbilities.get(rank)[abilityIndex];
+				
+				creature.addAbility(ability);
+			}
+		}
+	}
+	
 	private void updateRank(PlayerObject playerObject) {
 		int currentRank = playerObject.getCurrentRank();
 		float oldProgress = playerObject.getRankProgress();
@@ -115,31 +197,30 @@ final class CivilWarService extends Service {
 		float newProgress = rankProgress(oldProgress, decay, currentRank, points);
 		
 		if (newProgress >= 100) {
-			// Rank them up!
-			int newRank = currentRank + 1;
+			int promotion = playerObject.getCurrentRank() + 1;
 			
-			playerObject.setCurrentRank(newRank);
+			changeRank(playerObject, promotion);
 			
 			// Leftover points carry over
 			int leftoverPoints = leftoverPoints(newProgress, points);
 			
 			// Calculate progress within the new rank using leftover points
-			float nextRankProgress = rankProgress(newProgress, 0, newRank, leftoverPoints);
+			float nextRankProgress = rankProgress(newProgress, 0, promotion, leftoverPoints);
 			
 			playerObject.setRankProgress(nextRankProgress);
 		} else if (newProgress > 0) {
 			// Set their new progress
 			playerObject.setRankProgress(newProgress);
 		} else if (newProgress < 0 && isRankDown(oldProgress, newProgress)) {
-			int newRank = currentRank - 1;
-				
-			playerObject.setCurrentRank(newRank);
+			int demotion = playerObject.getCurrentRank() - 1;
+			
+			changeRank(playerObject, demotion);
 				
 			// Push their progress backwards in the new rank
 			int leftoverPoints = leftoverPoints(newProgress, points);
 				
 			// Calculate progress within the new rank using leftover points
-			float nextRankProgress = 100 - rankProgress(newProgress, 0, newRank, leftoverPoints);
+			float nextRankProgress = 100 - rankProgress(newProgress, 0, demotion, leftoverPoints);
 				
 			playerObject.setRankProgress(nextRankProgress);
 		}
@@ -159,7 +240,7 @@ final class CivilWarService extends Service {
 	
 	private void updateRanks() {
 		playerObjects.stream()
-				.filter(playerObject -> playerObject.getCurrentRank() > 1)
+				.filter(playerObject -> playerObject.getCurrentRank() > 0)
 				.forEach(this::updateRank);
 		
 		scheduleRankUpdate();	// Schedule next rank update
@@ -317,6 +398,12 @@ final class CivilWarService extends Service {
 		
 		// Let's make sure the timer's displayed for them
 		updateTimer(playerObject);
+		
+		// TODO debugging - remove three lines below!
+		CreatureObject creature = (CreatureObject) playerObject.getParent();
+		creature.setPvpFaction(PvpFaction.REBEL);
+		playerObject.setCurrentRank(1);
+		changeRank(playerObject, 12);
 		
 		playerObjects.add(playerObject);
 	}
