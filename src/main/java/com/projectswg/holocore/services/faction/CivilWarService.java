@@ -294,8 +294,6 @@ final class CivilWarService extends Service {
 		// Add current stats to lifetime stats
 		playerObject.setLifetimeGcwPoints(playerObject.getLifetimeGcwPoints() + points);
 		playerObject.setLifetimePvpKills(playerObject.getLifetimePvpKills() + kills);
-		
-		// TODO award GCW abilities
 	}
 	
 	private void updateRanks() {
@@ -367,8 +365,6 @@ final class CivilWarService extends Service {
 			
 			// Send sound to just to the killer
 			killerCreature.sendSelf(new PlayMusicMessage(0, soundFile, 0, false));
-			
-			// TODO planetary control points?
 		} else {
 			// NPC GCW point system message
 			prose = new ProsePackage(new StringId("gcw", "gcw_rank_generic_point_grant"), "DI", granted);

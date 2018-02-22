@@ -36,8 +36,7 @@ public class CivilWarPointIntent extends Intent {
 	private final PlayerObject receiver;
 	private final int points;
 	
-	@Nonnull
-	private CivilWarPointIntent(PlayerObject receiver, int points) {
+	private CivilWarPointIntent(@Nonnull PlayerObject receiver, int points) {
 		this.receiver = receiver;
 		this.points = points;
 	}
@@ -51,8 +50,7 @@ public class CivilWarPointIntent extends Intent {
 		return points;
 	}
 	
-	@Nonnull
-	public static void broadcast(PlayerObject receiver, int points) {
+	public static void broadcast(@Nonnull PlayerObject receiver, int points) {
 		new CivilWarPointIntent(receiver, points).broadcast();
 	}
 	
