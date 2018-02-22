@@ -477,7 +477,7 @@ public class CombatManager extends Manager {
 		startHealthRegeneration(revivedCreature);
 		startActionRegeneration(revivedCreature);
 		
-		Log.i("% was revived", revivedCreature);
+		Log.i("%s was revived", revivedCreature);
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
