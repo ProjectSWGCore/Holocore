@@ -169,7 +169,7 @@ public class CombatManager extends Manager {
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
 			case ATTACK:
-				handleAttack(source, target, null, c, cci.getArguments());
+				handleAttack(source, target, null, c);
 				break;
 			case BUFF:
 				handleBuff(source, target, c);
@@ -188,7 +188,7 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command, String[] arguments) {
+	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
@@ -277,7 +277,7 @@ public class CombatManager extends Manager {
 			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId(), ""));
 		
 		// Handle the attack of this loop
-		handleAttack(source, target, delayEgg, combatCommand, null);
+		handleAttack(source, target, delayEgg, combatCommand);
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
