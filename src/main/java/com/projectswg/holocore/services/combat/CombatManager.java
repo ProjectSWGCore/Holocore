@@ -169,7 +169,7 @@ public class CombatManager extends Manager {
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
 			case ATTACK:
-				handleAttack(source, target, null, c);
+				handleAttack(source, target, null, c, cci.getArguments());
 				break;
 			case BUFF:
 				handleBuff(source, target, c);
@@ -188,7 +188,7 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
+	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command, String[] arguments) {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
@@ -205,8 +205,14 @@ public class CombatManager extends Manager {
 					doCombatArea(source, source, info, weapon, command, false);
 					break;
 				case TARGET_AREA:
-					doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
-					break;        // Same as AREA, but the target is the destination for the AoE and  can take damage
+					if (target != null) {
+						// Same as AREA, but the target is the destination for the AoE and  can take damage
+						doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
+					} else {
+						// TODO AoE based on Location instead of delay egg
+					}
+					
+					break;
 				default:
 					break;
 			}
@@ -271,7 +277,7 @@ public class CombatManager extends Manager {
 			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId(), ""));
 		
 		// Handle the attack of this loop
-		handleAttack(source, target, delayEgg, combatCommand);
+		handleAttack(source, target, delayEgg, combatCommand, null);
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
