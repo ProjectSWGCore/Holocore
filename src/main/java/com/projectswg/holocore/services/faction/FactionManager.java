@@ -37,11 +37,9 @@ import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
@@ -96,17 +94,6 @@ public final class FactionManager extends Manager {
 		
 		target.setPvpFaction(newFaction);
 		handleFlagChange(target);
-		
-		if(target.getBaselineType() == BaselineType.CREO && target.getPvpFaction() != PvpFaction.NEUTRAL) {
-			// We're given rank 1 upon joining a non-neutral faction
-			CreatureObject creatureTarget = (CreatureObject) target;
-			
-			if (!creatureTarget.isPlayer()) {
-				return;
-			}
-			
-			creatureTarget.getPlayerObject().setCurrentRank(1);
-		}
 	}
 	
 	private void handleSwitchChange(FactionIntent fi) {

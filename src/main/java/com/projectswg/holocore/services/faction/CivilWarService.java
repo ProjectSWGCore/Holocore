@@ -38,6 +38,7 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.CivilWarPointIntent;
+import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
@@ -46,15 +47,14 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
+import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -80,13 +80,14 @@ final class CivilWarService extends Service {
 		// Rank update time is the night between Thursday and Friday at 00:00 UTC
 		updateWeekDay = DayOfWeek.FRIDAY;
 		updateTime = LocalTime.MIDNIGHT;
-		updateOffset = ZoneOffset.UTC;
+		updateOffset = OffsetDateTime.now().getOffset();
 		
 		loadRankAbilities();
 		
 		registerForIntent(CivilWarPointIntent.class, this::handleCivilWarPointIntent);
 		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
 		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
+		registerForIntent(FactionIntent.class, this::handleFactionIntent);
 		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
 	}
 	
@@ -115,7 +116,7 @@ final class CivilWarService extends Service {
 	}
 	
 	int nextUpdateTime(LocalDate now) {
-		LocalDate nextUpdateDate = now.with(updateWeekDay);
+		LocalDate nextUpdateDate = now.with(TemporalAdjusters.next(updateWeekDay));
 		
 		return (int) nextUpdateDate.toEpochSecond(updateTime, updateOffset);
 	}
@@ -191,10 +192,14 @@ final class CivilWarService extends Service {
 	}
 	
 	private void scheduleRankUpdate() {
-		LocalDate now = LocalDate.now();
-		int nowEpoch = (int) now.toEpochSecond(updateTime, updateOffset);
-		rankEpoch = nextUpdateTime(now);    // Is in the future
+		LocalDate nowDate = LocalDate.now();
+		LocalTime nowTime = LocalTime.now();
+		int nowEpoch = (int) nowDate.toEpochSecond(nowTime, updateOffset);
+		rankEpoch = nextUpdateTime(nowDate);    // Is in the future
+		
 		int delay = (rankEpoch - nowEpoch) * 1000;    // Must be milliseconds
+		
+		Log.d("GCW update occurs in: %d minutes", (rankEpoch - nowEpoch) / 60);
 		
 		threadPool.execute(delay, this::updateRanks);
 		playerObjects.forEach(this::updateTimer);
@@ -244,6 +249,18 @@ final class CivilWarService extends Service {
 		}
 	}
 	
+	private void moveToLifetime(PlayerObject playerObject, int points) {
+		int kills = playerObject.getPvpKills();
+		
+		// Reset current kills and points
+		playerObject.setGcwPoints(0);
+		playerObject.setPvpKills(0);
+		
+		// Add current stats to lifetime stats
+		playerObject.setLifetimeGcwPoints(playerObject.getLifetimeGcwPoints() + points);
+		playerObject.setLifetimePvpKills(playerObject.getLifetimePvpKills() + kills);
+	}
+	
 	private void updateRank(PlayerObject playerObject) {
 		int currentRank = playerObject.getCurrentRank();
 		float oldProgress = playerObject.getRankProgress();
@@ -259,6 +276,12 @@ final class CivilWarService extends Service {
 		if (newProgress >= 100) {
 			int promotion = playerObject.getCurrentRank() + 1;
 			
+			if (promotion > 12) {	// 12 is the max rank
+				playerObject.setRankProgress(99.99F);
+				moveToLifetime(playerObject, points);
+				return;
+			}
+			
 			changeRank(playerObject, promotion);
 			
 			// Leftover points carry over
@@ -267,12 +290,25 @@ final class CivilWarService extends Service {
 			// Calculate progress within the new rank using leftover points
 			float nextRankProgress = rankProgress(newProgress, 0, promotion, leftoverPoints);
 			
-			playerObject.setRankProgress(nextRankProgress);
+			if (nextRankProgress >= 100) {
+				// They've ranked up and can rank up again
+				updateRank(playerObject);
+				return;
+			} else {
+				// They've ranked up, but cannot rank up again
+				playerObject.setRankProgress(nextRankProgress);
+			}
+			
 		} else if (newProgress > 0) {
 			// Set their new progress
 			playerObject.setRankProgress(newProgress);
 		} else if (newProgress < 0 && isRankDown(oldProgress, newProgress)) {
 			int demotion = playerObject.getCurrentRank() - 1;
+			
+			if (demotion < 1) {	// 1 is the minimum rank
+				playerObject.setRankProgress(0);
+				return;
+			}
 			
 			changeRank(playerObject, demotion);
 			
@@ -282,18 +318,18 @@ final class CivilWarService extends Service {
 			// Calculate progress within the new rank using leftover points
 			float nextRankProgress = 100 - rankProgress(newProgress, 0, demotion, leftoverPoints);
 			
-			playerObject.setRankProgress(nextRankProgress);
+			if (nextRankProgress <= 0) {
+				// They've ranked down and can rank down again
+				updateRank(playerObject);
+				moveToLifetime(playerObject, points);
+				return;
+			} else {
+				// They've ranked down, but cannot rank down again
+				playerObject.setRankProgress(nextRankProgress);
+			}
 		}
 		
-		int kills = playerObject.getPvpKills();
-		
-		// Reset current kills and points
-		playerObject.setGcwPoints(0);
-		playerObject.setPvpKills(0);
-		
-		// Add current stats to lifetime stats
-		playerObject.setLifetimeGcwPoints(playerObject.getLifetimeGcwPoints() + points);
-		playerObject.setLifetimePvpKills(playerObject.getLifetimePvpKills() + kills);
+		moveToLifetime(playerObject, points);
 	}
 	
 	private void updateRanks() {
@@ -372,6 +408,39 @@ final class CivilWarService extends Service {
 		
 		// Increment GCW point counter
 		grantPoints(prose, killerPlayer, granted);
+	}
+	
+	private void handleFactionIntent(FactionIntent fi) {
+		if (fi.getUpdateType() != FactionIntent.FactionIntentType.FACTIONUPDATE) {
+			return;
+		}
+		
+		TangibleObject target = fi.getTarget();
+		
+		if (!(target instanceof CreatureObject)) {
+			return;
+		}
+		
+		CreatureObject creature = (CreatureObject) target;
+		
+		if (!creature.isPlayer()) {
+			// NPCs don't have factional ranks
+			return;
+		}
+		
+		PlayerObject playerObject = creature.getPlayerObject();
+		
+		if (fi.getNewFaction() == PvpFaction.NEUTRAL) {
+			// They've left the imperials or rebels and must have rank removed
+			playerObject.setCurrentRank(0);
+			
+			int points = playerObject.getGcwPoints();
+			
+			moveToLifetime(playerObject, points);
+		} else {
+			// They've joined the imperials or rebels and become Privates
+			playerObject.setCurrentRank(1);
+		}
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {

@@ -75,11 +75,14 @@ public class TestCivilWarService {
 	@Test
 	public void testNextUpdateTime() {
 		LocalDate now = LocalDate.of(2018, 2, 19);	// It's a Monday
-		LocalDate rankDay = LocalDate.of(2018, 2, 23);	// It's a Friday
-		int expectedRankTime = 1519344000;	// The Friday that week, at 00:00 UTC (night between thursday and friday)
+		LocalDate rankDay = LocalDate.of(2018, 2, 23);	// It's a Friday, the exact time we rank up
+		LocalDate dayAfter = LocalDate.of(2018, 2, 24);	// It's a Saturday, 24 hours after rank up
+		int nowRankTime = 1519344000;	// The Friday that week, at 00:00 UTC (night between thursday and friday)
+		int nextRankTime = 1519948800;	// Friday the week after, at 00:00 UTC (night between thursday and friday)
 		
-		Assert.assertEquals(expectedRankTime, service.nextUpdateTime(now));
-		Assert.assertEquals(expectedRankTime, service.nextUpdateTime(rankDay));
+		Assert.assertEquals(nowRankTime, service.nextUpdateTime(now));
+		Assert.assertEquals(nextRankTime, service.nextUpdateTime(rankDay));	// When we hit the scheduled rank time, the next update should be in a week
+		Assert.assertEquals(nextRankTime, service.nextUpdateTime(dayAfter));	// Next time should be in exactly a week
 	}
 	
 	@Test
@@ -103,4 +106,5 @@ public class TestCivilWarService {
 	public void testLeftoverPoints() {
 		Assert.assertEquals(6000, service.leftoverPoints(130, 20000));
 	}
+	
 }
