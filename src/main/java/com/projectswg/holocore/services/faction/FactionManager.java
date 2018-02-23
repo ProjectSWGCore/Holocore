@@ -36,19 +36,12 @@ import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.network.OutboundPacketIntent;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.objects.ObjectManager;
 
 public final class FactionManager extends Manager {
 
