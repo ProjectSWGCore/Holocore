@@ -11,7 +11,7 @@ build
 
 # Holocore
 clientdata/
-serverdata/
 log/
 cfg/
 odb/
+*.db
