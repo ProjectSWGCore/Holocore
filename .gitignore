@@ -15,3 +15,4 @@ log/
 cfg/
 odb/
 *.db
+*.iff
