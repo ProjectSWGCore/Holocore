@@ -59,7 +59,7 @@ public class RandomAIObject extends AIObject {
 	@Override
 	public void aiStart() {
 		super.aiStart();
-		if(mainLocation == null){
+		if (mainLocation == null) {
 			// If no location is given, then use object location
 			setMainLocation(getLocation());
 		}
