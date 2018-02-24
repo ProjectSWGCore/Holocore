@@ -44,11 +44,11 @@ public class RandomAIObject extends AIObject {
 	public Location getMainLocation() {
 		return mainLocation;
 	}
-
+	
 	public void setMainLocation(Location mainLocation) {
 		this.mainLocation = mainLocation;
 	}
-
+	
 	@Override
 	protected void aiInitialize() {
 		super.aiInitialize();
