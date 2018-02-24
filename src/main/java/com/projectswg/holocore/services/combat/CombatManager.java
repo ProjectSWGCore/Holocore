@@ -204,8 +204,14 @@ public class CombatManager extends Manager {
 					doCombatArea(source, source, info, weapon, command, false);
 					break;
 				case TARGET_AREA:
-					doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
-					break;        // Same as AREA, but the target is the destination for the AoE and  can take damage
+					if (target != null) {
+						// Same as AREA, but the target is the destination for the AoE and  can take damage
+						doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
+					} else {
+						// TODO AoE based on Location instead of delay egg
+					}
+					
+					break;
 				default:
 					break;
 			}
