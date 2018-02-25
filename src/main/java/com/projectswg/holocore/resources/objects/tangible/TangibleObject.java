@@ -262,7 +262,7 @@ public class TangibleObject extends SWGObject {
 			return true;
 		}
 		
-		PvpFaction ourFaction = pvpFaction;
+		PvpFaction ourFaction = getPvpFaction();
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
 		return otherFaction != PvpFaction.NEUTRAL && ourFaction != PvpFaction.NEUTRAL && ourFaction != otherFaction
