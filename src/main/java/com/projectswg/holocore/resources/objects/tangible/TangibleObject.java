@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.objects.tangible;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Map;
 import java.util.Set;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -88,18 +89,21 @@ public class TangibleObject extends SWGObject {
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
 		// Check if object is stackable
 		if (counter > 0) {
-			// Check if requester has permission to container
 			
+			// Check if requester has permission to container
 			if (!getContainerPermissions().canMove(requester, container)) {
 				return ContainerResult.NO_PERMISSION;
 			}
 			
 			// Scan container for matching stackable item
 			String ourTemplate = getTemplate();
+			Map<String, String> ourAttributes = getAttributes();
 			
 			for (SWGObject candidate : container.getContainedObjects()) {
 				String theirTemplate = candidate.getTemplate();
-				if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate)) {
+				Map<String, String> theirAttributes = candidate.getAttributes();
+				
+				if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
 					// Increase stack count on matching stackable item
 					TangibleObject tangibleMatch = (TangibleObject) candidate;
 					int theirCounter = tangibleMatch.getCounter();
