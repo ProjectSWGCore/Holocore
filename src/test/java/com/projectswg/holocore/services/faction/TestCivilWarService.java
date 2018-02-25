@@ -77,8 +77,8 @@ public class TestCivilWarService {
 		LocalDate now = LocalDate.of(2018, 2, 19);	// It's a Monday
 		LocalDate rankDay = LocalDate.of(2018, 2, 23);	// It's a Friday, the exact time we rank up
 		LocalDate dayAfter = LocalDate.of(2018, 2, 24);	// It's a Saturday, 24 hours after rank up
-		int nowRankTime = 1519344000;	// The Friday that week, at 00:00 UTC (night between thursday and friday)
-		int nextRankTime = 1519948800;	// Friday the week after, at 00:00 UTC (night between thursday and friday)
+		int nowRankTime = 1519340400;	// The Friday that week, at 00:00 UTC (night between thursday and friday)
+		int nextRankTime = 1519945200;	// Friday the week after, at 00:00 UTC (night between thursday and friday)
 		
 		Assert.assertEquals(nowRankTime, service.nextUpdateTime(now));
 		Assert.assertEquals(nextRankTime, service.nextUpdateTime(rankDay));	// When we hit the scheduled rank time, the next update should be in a week
