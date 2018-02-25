@@ -42,6 +42,7 @@ import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.FactionIntent.FactionIntentType;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.collections.SWGSet;
+import com.projectswg.holocore.resources.containers.ContainerResult;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
@@ -81,6 +82,35 @@ public class TangibleObject extends SWGObject {
 		defenders.clear();
 		defenders.resetUpdateCount();
 		inCombat = false;
+	}
+	
+	@Override
+	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		// Check if object is stackable
+		if (counter > 0) {
+			// Check if requester has permission to container
+			
+			if (!getContainerPermissions().canMove(requester, container)) {
+				return ContainerResult.NO_PERMISSION;
+			}
+			
+			// Scan container for matching stackable item
+			String ourTemplate = getTemplate();
+			
+			for (SWGObject candidate : container.getContainedObjects()) {
+				String theirTemplate = candidate.getTemplate();
+				if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate)) {
+					// Increase stack count on matching stackable item
+					TangibleObject tangibleMatch = (TangibleObject) candidate;
+					int theirCounter = tangibleMatch.getCounter();
+					
+					tangibleMatch.setCounter(theirCounter + counter);
+					
+					return ContainerResult.SUCCESS;
+				}
+			}
+		}
+		return super.moveToContainer(requester, container);
 	}
 	
 	public byte [] getAppearanceData() {
