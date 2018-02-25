@@ -39,10 +39,12 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 
+import com.projectswg.holocore.intents.SetTitleIntent;
 import com.projectswg.holocore.intents.SkillModIntent;
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
 /**
  *
@@ -62,6 +64,7 @@ public final class SkillManager extends Manager {
 		
 		registerForIntent(GrantSkillIntent.class, this::handleGrantSkillIntent);
 		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		registerForIntent(SetTitleIntent.class, this::handleSetTitleIntent);
 	}
 	
 	@Override
@@ -95,6 +98,7 @@ public final class SkillManager extends Manager {
 			}
 			
 			SkillData skillData = new SkillData(
+					(boolean) skillsTable.getCell(i, 4),	// Is title
 					splitCsv((String) skillsTable.getCell(i, 10)),	// required skills
 					(String) skillsTable.getCell(i, 1),				// parent skill
 					(String) skillsTable.getCell(i, 12),			// xp type
@@ -143,6 +147,24 @@ public final class SkillManager extends Manager {
 			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) SWGPacket;
 			changeRoleIcon(gpi.getPlayer().getCreatureObject(), iconChoice.getIconChoice());
 		}
+	}
+	
+	private void handleSetTitleIntent(SetTitleIntent sti) {
+		String title = sti.getTitle();
+		
+		if (!skillDataMap.containsKey(title)) {
+			// Might be a Collections title or someone playing tricks
+			return;
+		}
+		
+		SkillData skillData = skillDataMap.get(title);
+		
+		if (!skillData.isTitle()) {
+			// There's a skill with this name, but it doesn't grant a title
+			return;
+		}
+		
+		sti.getRequester().setTitle(title);
 	}
 	
 	private boolean hasRequiredSkills(SkillData skillData, CreatureObject creatureObject) {
@@ -202,6 +224,7 @@ public final class SkillManager extends Manager {
 	}
 	
 	private static class SkillData {
+		private boolean title;
 		private String[] requiredSkills;
 		private final String parentSkill;
 		private final String xpType;
@@ -210,7 +233,8 @@ public final class SkillManager extends Manager {
 		private final Map<String, Integer> skillMods;
 		private final String[] schematics;
 
-		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+		public SkillData(boolean title, String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+			this.title = title;
 			this.requiredSkills = requiredSkills;
 			this.parentSkill = parentSkill;
 			this.xpType = xpType;
@@ -219,7 +243,8 @@ public final class SkillManager extends Manager {
 			this.skillMods = skillMods;
 			this.schematics = schematics;
 		}
-
+		
+		private boolean isTitle() { return title; }
 		public String[] getRequiredSkills() { return requiredSkills; }
 		public String getParentSkill() { return parentSkill; }
 		public String getXpType() { return xpType; }
