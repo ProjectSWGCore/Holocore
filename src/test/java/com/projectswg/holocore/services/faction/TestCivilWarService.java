@@ -34,6 +34,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class TestCivilWarService {
 	
@@ -72,17 +75,23 @@ public class TestCivilWarService {
 		Assert.assertEquals(200, service.pointsGranted(10, (byte) 20));
 	}
 	
+	private int epochTime(LocalDate date) {
+		return (int) date.toEpochSecond(LocalTime.MIDNIGHT, OffsetDateTime.now().getOffset());
+	}
+	
 	@Test
 	public void testNextUpdateTime() {
 		LocalDate now = LocalDate.of(2018, 2, 19);	// It's a Monday
 		LocalDate rankDay = LocalDate.of(2018, 2, 23);	// It's a Friday, the exact time we rank up
 		LocalDate dayAfter = LocalDate.of(2018, 2, 24);	// It's a Saturday, 24 hours after rank up
-		int nowRankTime = 1519340400;	// The Friday that week, at 00:00 UTC (night between thursday and friday)
-		int nextRankTime = 1519945200;	// Friday the week after, at 00:00 UTC (night between thursday and friday)
+		LocalDate nextRankDay = LocalDate.of(2018, 3, 2);	// It's a Friday, exactly one week after first rank up
+		
+		int nowRankTime = epochTime(rankDay);
+		int nextRankTime = epochTime(nextRankDay);
 		
 		Assert.assertEquals(nowRankTime, service.nextUpdateTime(now));
 		Assert.assertEquals(nextRankTime, service.nextUpdateTime(rankDay));	// When we hit the scheduled rank time, the next update should be in a week
-		Assert.assertEquals(nextRankTime, service.nextUpdateTime(dayAfter));	// Next time should be in exactly a week
+		Assert.assertEquals(nextRankTime, service.nextUpdateTime(dayAfter));	// Next time should be in six days (from Saturday to Friday)
 	}
 	
 	@Test
