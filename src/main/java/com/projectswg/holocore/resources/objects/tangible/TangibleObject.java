@@ -262,13 +262,10 @@ public class TangibleObject extends SWGObject {
 			return true;
 		}
 		
-		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
-			return false;
-		} 
-		
+		PvpFaction ourFaction = getPvpFaction();
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
-		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
+		return otherFaction != PvpFaction.NEUTRAL && ourFaction != PvpFaction.NEUTRAL && ourFaction != otherFaction
 				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
 	}
 
@@ -348,10 +345,10 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
-	protected void sendBaselines(Player target) {
-		super.sendBaselines(target);
-		
-//		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	protected void sendFinalBaselinePackets(Player target) {
+		if (pvpFaction != PvpFaction.NEUTRAL) {
+			new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+		}
 	}
 	
 	@Override
