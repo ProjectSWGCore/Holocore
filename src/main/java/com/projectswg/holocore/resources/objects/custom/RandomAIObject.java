@@ -45,6 +45,10 @@ public class RandomAIObject extends AIObject {
 		return mainLocation;
 	}
 	
+	public void setMainLocation(Location mainLocation) {
+		this.mainLocation = mainLocation;
+	}
+	
 	@Override
 	protected void aiInitialize() {
 		super.aiInitialize();
@@ -55,7 +59,10 @@ public class RandomAIObject extends AIObject {
 	@Override
 	public void aiStart() {
 		super.aiStart();
-		this.mainLocation = getLocation();
+		if (mainLocation == null) {
+			// If no location is given, then use object location
+			setMainLocation(getLocation());
+		}
 	}
 	
 	@Override
