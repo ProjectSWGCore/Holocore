@@ -367,7 +367,6 @@ public class CommandService extends Service {
 	private void registerCallbacks() {
 		registerCallback("waypoint", new WaypointCmdCallback());
 		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
-		registerCallback("server", new ServerCmdCallback());
 		registerCallback("getAttributesBatch", new AttributesCmdCallback());
 		registerCallback("socialInternal", new SocialInternalCmdCallback());
 		registerCallback("sitServer", new SitOnObjectCmdCallback());
@@ -378,10 +377,7 @@ public class CommandService extends Service {
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 		registerCallback("findFriend", new FindFriendCallback());
-		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
-		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
-		registerCallback("qatool", new QaToolCmdCallback());
-		registerCallback("goto", new GotoCmdCallback());
+
 		registerCallback("startDance", new StartDanceCallback());
 		registerCallback("requestBiography", new RequestBiographyCmdCallback());
 		registerCallback("flourish", new FlourishCmdCallback());
@@ -399,7 +395,6 @@ public class CommandService extends Service {
 		addFlagScripts();
 		addGroupScripts();
 		addSurveyScripts();
-		registerCallback("grantSkill", CmdGrantSkill::execute);
 		registerCallback("stopDance", CmdStopDance::execute);
 		registerCallback("stopwatching", CmdStopWatching::execute);
 		registerCallback("tip", CmdTip::execute);
@@ -407,6 +402,7 @@ public class CommandService extends Service {
 		registerCallback("openContainer", CmdOpenContainer::execute);
 		registerCallback("purchaseTicket", CmdPurchaseTicket::execute);
 		registerCallback("setBiography", CmdSetBiography::execute);
+		registerCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::execute);
 		registerCallback("setMoodInternal", CmdSetMoodInternal::execute);
 		registerCallback("setWaypointActiveStatus", CmdSetWaypointActiveStatus::execute);
 		registerCallback("setWaypointName", CmdSetWaypointName::execute);
@@ -414,7 +410,14 @@ public class CommandService extends Service {
 	
 	private void addAdminScripts() {
 		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::execute);
+		registerCallback("goto", new GotoCmdCallback());
+		registerCallback("grantSkill", CmdGrantSkill::execute);
+		registerCallback("qatool", new QaToolCmdCallback());
+		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
 		registerCallback("setGodMode", CmdSetGodMode::execute);
+		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
+		registerCallback("server", new ServerCmdCallback());
+		
 		registerCallback("setSpeed", CmdSetSpeed::execute);
 	}
 	
