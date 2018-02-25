@@ -36,7 +36,6 @@ import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 
 import com.projectswg.holocore.intents.FactionIntent;
