@@ -127,8 +127,8 @@ public final class FactionManager extends Manager {
 		PvpStatus newStatus = fi.getNewStatus();
 		
 		// No reason to send deltas and all that if the status isn't effectively changing
-//		if(oldStatus == newStatus)
-//			return;
+		if(oldStatus == newStatus)
+			return;
 		
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
 		Future<?> future = statusChangers.remove(target);
