@@ -37,6 +37,7 @@ import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
 import com.projectswg.holocore.intents.GrantBadgeIntent;
 import com.projectswg.holocore.intents.GrantClickyCollectionIntent;
+import com.projectswg.holocore.intents.SetTitleIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.collections.ClickyCollectionItem;
@@ -64,6 +65,7 @@ public class CollectionBadgeManager extends Manager {
 
 		registerForIntent(GrantBadgeIntent.class, this::handleGrantBadgeIntent);
 		registerForIntent(GrantClickyCollectionIntent.class, this::handleGrantClickyCollectionIntent);
+		registerForIntent(SetTitleIntent.class, this::handleSetTitleIntent);
 	}
 
 	private void handleGrantClickyCollectionIntent(GrantClickyCollectionIntent gcci){
@@ -76,6 +78,18 @@ public class CollectionBadgeManager extends Manager {
 	
 	private void handleGrantBadgeIntent(GrantBadgeIntent gbi){
 		handleCollectionBadge(gbi.getCreature(), gbi.getCollectionBadgeName());
+	}
+	
+	private void handleSetTitleIntent(SetTitleIntent sti) {
+		String title = sti.getTitle();
+		PlayerObject requester = sti.getRequester();
+		
+		if (!hasCompletedCollection(requester, title)) {
+			// You can't be assigned a title for a collection you haven't completed
+			return;
+		}
+		
+		requester.setTitle(title);
 	}
 	
 	public void grantBadge(PlayerObject player, int beginSlotId, String collectionName, boolean isHidden, String slotName) {
