@@ -161,6 +161,7 @@ public final class SpawnerService extends Service {
 		npcPatrolRouteLoader.forEach(route -> {
 			for (PatrolRouteWaypoint waypoint : route) {
 				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
+				obj.setContainerPermissions(ContainerPermissionsType.ADMIN);
 				obj.setLocation(getPatrolWaypointLocation(waypoint));
 				obj.moveToContainer(getPatrolWaypointParent(waypoint));
 				ObjectCreatedIntent.broadcast(obj);
