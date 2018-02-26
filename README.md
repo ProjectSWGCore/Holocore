@@ -61,22 +61,22 @@ A tool such as TRE Explorer is capable of opening the files and extracting their
 You should end up with a structure that looks something like this:
 ```
 holocore/
-    clientdata/
-        abstract/
-        appearance/
-        creation/
-        customization/
-        datatables/
-        footprint/
-        ...
-    gradle/
-    res/
-    serverdata/
-    src/
-    .gitignore
-    .gitmodules
-    LICENSE.txt
-    ...
+	clientdata/
+		abstract/
+		appearance/
+		creation/
+		customization/
+		datatables/
+		footprint/
+		...
+	gradle/
+	res/
+	serverdata/
+	src/
+	.gitignore
+	.gitmodules
+	LICENSE.txt
+	...
 ```
 
 ## Gradle ##
