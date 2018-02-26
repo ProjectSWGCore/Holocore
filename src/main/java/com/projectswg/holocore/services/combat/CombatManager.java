@@ -77,11 +77,6 @@ public class CombatManager extends Manager {
 	private final PswgScheduledThreadPool executor;
 	private final Random random;
 	
-	// TODO upon first combat, cache skillmod-related calculations
-	// TODO upon receiving SkillModIntent, the relevant calculation(s) must be updated
-	// TODO remove calculations if they haven't been accessed for a while?
-	// TODO remove calculations if the creature disappears
-	
 	public CombatManager() {
 		this.inCombat = new ConcurrentHashMap<>();
 		this.regeneratingHealthCreatures = new CopyOnWriteArraySet<>();
