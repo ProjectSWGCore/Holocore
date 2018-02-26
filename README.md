@@ -16,46 +16,7 @@ This is *the* Star Wars Galaxies server emulator for the Java Virtual Machine. T
 
 The way we perform code reviews should reflect these points.
 
-## Configuration ##
-
-Holocore can be configured in different ways. When the application has run at least once, the`/cfg/` folder will be
-populated with config files. 
-
-## Logging ##
-
-When Holocore runs, it logs various events. These are output to locations, such as `log/log.txt` and `System.out` 
-(console). There are different `LogLevel`s:
-
-1. Verbose (v)
-2. Debug (d)
-3. Info (i)
-4. Warn (w)
-5. Error (e)
-6. Assert (a)
-
-The highest level is Verbose and the lowest is Assert. These determine how detailed the log is. You should generally
-use the highest level that you find reasonable. If we don't, our logs will flood with unnecessary amounts of information.
-
-The used `LogLevel` can differ per log output destination. A text file could be more detailed than the console log by
-setting the desired `LogLevel` on the `LogWrapper`.
-
-## Intents ##
-
-An `Intent` is an abstract class. These can be broadcasted anywhere in the code. They have no mutators (setters),
-only accessors (getters). An `Intent` is *not* mutable!
-
-Any given `Intent` can be handled by any number of `Service` classes.
-
-## Services ##
-
-A `Service` is a class that can handle specific instances of `Intent`s. These classes hold the complex logic for the
-emulator.
-
-## Managers ##
-
-`Manager` extends `Service`. The only difference is that a `Manager` can have `Service`s as children, creating a tree
-structure of `Manager`s and `Service`s. If your new `Service` isn't added to the Service tree, then it won't be used for
-anything.
+You can find detailed information on the [wiki](https://bitbucket.org/projectswg/holocore/wiki/Home).
 
 # Setting up a development environment #
 
@@ -135,7 +96,8 @@ launcher, you do not have to worry about this.  If you are not using the launche
 
 ## Credentials ##
 
-Default credentials are currently created. Your username is `holocore` and your password is `password`.
+Default credentials are currently created. Your username is `holocore` and your password is `password`. This user has the
+highest admin level assigned to it.
 
 ## Contributing ##
 
