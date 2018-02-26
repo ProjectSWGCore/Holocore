@@ -1,9 +1,9 @@
+![Banner](https://imgur.com/V14kDE5.png)
+
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg?longCache=true&style=flat)
 ![JDK](https://img.shields.io/badge/JDK-9-blue.svg?longCache=true&style=flat)
 ![Discord](https://img.shields.io/discord/373548910225915905.svg)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr/projectswg/holocore.svg)
-
-![Banner](https://imgur.com/V14kDE5.png)
 
 # Introduction #
 
