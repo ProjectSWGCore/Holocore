@@ -27,19 +27,25 @@
 
 package com.projectswg.holocore.scripts.radial.terminal
 
+import com.projectswg.common.data.customization.PaletteCustomizationVariable
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent
+import com.projectswg.holocore.intents.object.ObjectCreatedIntent
 import com.projectswg.holocore.intents.object.ObjectTeleportIntent
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType
 import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject
+import com.projectswg.holocore.resources.objects.weapon.WeaponObject
+import com.projectswg.holocore.resources.objects.weapon.WeaponType
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.resources.sui.SuiButtons
 import com.projectswg.holocore.resources.sui.SuiListBox
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
+import com.projectswg.holocore.services.objects.ObjectCreator
 import com.projectswg.holocore.services.objects.StaticItemService
 
 class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
@@ -59,6 +65,7 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Wearables")
 				listBox.addListItem("Tools")
 				listBox.addListItem("Travel")
+				listBox.addListItem("Test Lightsaber")
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", { event, parameters -> handleCategorySelection(player, parameters) })
 				listBox.display(player)
@@ -76,6 +83,7 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 2: handleWearables(player); break
 			case 3: handleTools(player); break
 			case 4: handleTravel(player); break
+			case 5: handleTestLightsaber(player); break
 		}
 	}
 	
@@ -1172,6 +1180,37 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", { event, parameters -> handleTravelSelection(player, parameters) })
 		listBox.display(player)
+	}
+	
+	static def handleTestLightsaber(Player player) {
+		def lightsaber = ObjectCreator.createObjectFromTemplate("object/weapon/melee/polearm/crafted_saber/shared_sword_lightsaber_polearm_pvp_bf.iff", WeaponObject.class)
+		def goggles = ObjectCreator.createObjectFromTemplate("object/tangible/wearables/goggles/shared_goggles_s01.iff", TangibleObject.class)
+		def inventory = player.getCreatureObject().getSlottedObject("inventory")
+		def bladeColor = new PaletteCustomizationVariable()
+		def gogglesPrimary = new PaletteCustomizationVariable()
+		def gogglesSecondary = new PaletteCustomizationVariable()
+		
+		// LS config
+		lightsaber.setAttackSpeed(1)
+		lightsaber.setMinDamage(1)
+		lightsaber.setMaxDamage(2)
+		lightsaber.setType(WeaponType.TWO_HANDED_SABER)
+		bladeColor.setColor(0, 29)	// Palette #0 (wp_lightsaber.pal), color at index 29
+		lightsaber.putCustomization("/private/index_color_blade", bladeColor)	// private/alternate_shader_blade for lava, permafrost etc
+		
+		// Goggles config
+		gogglesPrimary.setColor(0, 6)	// Teal
+		gogglesSecondary.setColor(0, 1)	// Silver
+		goggles.putCustomization("/private/index_color_1", gogglesPrimary)
+		goggles.putCustomization("/private/index_color_2", gogglesPrimary)
+		
+		// Create items
+		ObjectCreatedIntent.broadcast(lightsaber)
+		ObjectCreatedIntent.broadcast(goggles)
+		
+		// Move items to inventory
+		lightsaber.moveToContainer(inventory)
+		goggles.moveToContainer(inventory)
 	}
 	
 	static

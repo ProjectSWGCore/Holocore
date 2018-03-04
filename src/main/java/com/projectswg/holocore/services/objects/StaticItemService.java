@@ -33,6 +33,7 @@ import java.util.Map;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.combat.DamageType;
+import com.projectswg.common.data.customization.PaletteCustomizationVariable;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -47,6 +48,7 @@ import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
@@ -335,8 +337,7 @@ public final class StaticItemService extends Service {
 		private boolean wearableByRodians;
 		private boolean wearableByTrandoshans;
 		private boolean wearableByRest;
-
-		// TODO customisation variables, ie. for colours
+		private int colorIndex;
 
 		public WearableAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
@@ -380,6 +381,7 @@ public final class StaticItemService extends Service {
 			wearableByRodians = resultSet.getInt("race_rodian") != 0;
 			wearableByTrandoshans = resultSet.getInt("race_trandoshan") != 0;
 			wearableByRest = resultSet.getInt("race_rest") != 0;
+			colorIndex = resultSet.getInt("index_color");
 
 			return true;
 		}
@@ -402,6 +404,15 @@ public final class StaticItemService extends Service {
 			// Add the race restrictions only if there are any
 			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
+			
+			if (colorIndex != 0 && object instanceof TangibleObject) {	// All wearables should be TangibleObjects, but oh well...
+				PaletteCustomizationVariable color = new PaletteCustomizationVariable();
+				
+				color.setColor(0, colorIndex);
+				
+				((TangibleObject) object).putCustomization("/private/index_color_1", color);
+				//((TangibleObject) object).putCustomization("/private/index_color_2", color);
+			}
 		}
 
 		private String buildRaceRestrictionString() {

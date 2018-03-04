@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Set;
 
+import com.projectswg.common.data.customization.CustomizationString;
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -49,7 +51,7 @@ import com.projectswg.holocore.resources.player.Player;
 
 public class TangibleObject extends SWGObject {
 	
-	private byte []	appearanceData	= new byte[0];
+	private CustomizationString	appearanceData	= new CustomizationString();
 	private int		maxHitPoints	= 1000;
 	private int		components		= 0;
 	private boolean	inCombat		= false;
@@ -83,7 +85,7 @@ public class TangibleObject extends SWGObject {
 		inCombat = false;
 	}
 	
-	public byte [] getAppearanceData() {
+	public CustomizationString getAppearanceData() {	// TODO a getter for this isn't a good idea
 		return appearanceData;
 	}
 	
@@ -153,8 +155,14 @@ public class TangibleObject extends SWGObject {
 		return objectEffects;
 	}
 	
-	public void setAppearanceData(byte [] appearanceData) {
+	public void putCustomization(String name, CustomizationVariable value) {
+		appearanceData.put(name, value);
+	}
+	
+	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
+		
+		sendDelta(3, 6, appearanceData);
 	}
 	
 	public void setMaxHitPoints(int maxHitPoints) {
@@ -295,7 +303,7 @@ public class TangibleObject extends SWGObject {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addInt(pvpFaction.getCrc()); // Faction - 4
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
-		bb.addArray(appearanceData); // - 6
+		bb.addObject(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
@@ -327,7 +335,7 @@ public class TangibleObject extends SWGObject {
 		super.parseBaseline3(buffer);
 		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
-		appearanceData = buffer.getArray();
+		appearanceData.decode(buffer);
 		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
@@ -358,7 +366,7 @@ public class TangibleObject extends SWGObject {
 	public void save(NetBufferStream stream) {
 		super.save(stream);
 		stream.addByte(0);
-		stream.addArray(appearanceData);
+		appearanceData.save(stream);
 		stream.addInt(maxHitPoints);
 		stream.addInt(components);
 		stream.addBoolean(inCombat);
@@ -379,7 +387,7 @@ public class TangibleObject extends SWGObject {
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		stream.getByte();
-		appearanceData = stream.getArray();
+		appearanceData.read(stream);
 		maxHitPoints = stream.getInt();
 		components = stream.getInt();
 		inCombat = stream.getBoolean();

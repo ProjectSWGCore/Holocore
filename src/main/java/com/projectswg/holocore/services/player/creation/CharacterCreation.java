@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.player.creation;
 
 import java.util.Calendar;
 
+import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -135,7 +136,7 @@ public class CharacterCreation {
 		return createTangible(container, ContainerPermissionsType.INVENTORY, template);
 	}
 	
-	private void createHair(CreatureObject creatureObj, String hair, byte [] customization) {
+	private void createHair(CreatureObject creatureObj, String hair, CustomizationString customization) {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createDefaultObject(creatureObj, ClientFactory.formatToSharedFile(hair));
