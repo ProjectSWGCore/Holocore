@@ -32,11 +32,7 @@ import java.util.Locale;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.data.combat.AttackType;
-import com.projectswg.common.data.combat.DamageType;
-import com.projectswg.common.data.combat.DelayAttackEggPosition;
-import com.projectswg.common.data.combat.HitType;
-import com.projectswg.common.data.combat.ValidTarget;
+import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Log;
@@ -208,6 +204,7 @@ public class CommandService extends Service {
 		int cooldownGroup2 = baseCommands.getColumnFromName("cooldownGroup2");
 		int cooldownTime = baseCommands.getColumnFromName("cooldownTime");
 		int cooldownTime2 = baseCommands.getColumnFromName("cooldownTime2");
+		int targetType = baseCommands.getColumnFromName("targetType");
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object[] cmdRow = baseCommands.getRow(row);
@@ -228,6 +225,7 @@ public class CommandService extends Service {
 			command.setCooldownGroup2((String) cmdRow[cooldownGroup2]);
 			command.setCooldownTime((float) cmdRow[cooldownTime]);
 			command.setCooldownTime2((float) cmdRow[cooldownTime2]);
+			command.setTargetType(TargetType.getTargetType((int) cmdRow[targetType]));
 			
 			// Ziggy: The amount of columns in the table seems to change for each row
 			if (cmdRow.length >= 83) {
@@ -261,6 +259,7 @@ public class CommandService extends Service {
 		cc.setCooldownTime(c.getCooldownTime());
 		cc.setCooldownTime2(c.getCooldownTime2());
 		cc.setMaxRange(c.getMaxRange());
+		cc.setTargetType(c.getTargetType());
 		return cc;
 	}
 	
@@ -289,6 +288,7 @@ public class CommandService extends Service {
 		int delayAttackLoops = combatCommands.getColumnFromName("delayAttackLoops");
 		int delayAttackEggPosition = combatCommands.getColumnFromName("delayAttackEggPosition");
 		int coneLength = combatCommands.getColumnFromName("coneLength");
+		int healAttrib = combatCommands.getColumnFromName("healAttrib");
 		// animDefault anim_unarmed anim_onehandmelee anim_twohandmelee anim_polearm
 		// anim_pistol anim_lightRifle anim_carbine anim_rifle anim_heavyweapon
 		// anim_thrown anim_onehandlightsaber anim_twohandlightsaber anim_polearmlightsaber
@@ -323,6 +323,7 @@ public class CommandService extends Service {
 			cc.setDelayAttackLoops((int) cmdRow[delayAttackLoops]);
 			cc.setEggPosition(DelayAttackEggPosition.getEggPosition((int) cmdRow[delayAttackEggPosition]));
 			cc.setConeLength((float) cmdRow[coneLength]);
+			cc.setHealAttrib(HealAttrib.getHealAttrib((Integer) cmdRow[healAttrib]));
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault + 1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault + 2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault + 3]));
@@ -367,7 +368,6 @@ public class CommandService extends Service {
 	private void registerCallbacks() {
 		registerCallback("waypoint", new WaypointCmdCallback());
 		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
-		registerCallback("server", new ServerCmdCallback());
 		registerCallback("getAttributesBatch", new AttributesCmdCallback());
 		registerCallback("socialInternal", new SocialInternalCmdCallback());
 		registerCallback("sitServer", new SitOnObjectCmdCallback());
@@ -378,10 +378,7 @@ public class CommandService extends Service {
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 		registerCallback("findFriend", new FindFriendCallback());
-		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
-		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
-		registerCallback("qatool", new QaToolCmdCallback());
-		registerCallback("goto", new GotoCmdCallback());
+
 		registerCallback("startDance", new StartDanceCallback());
 		registerCallback("requestBiography", new RequestBiographyCmdCallback());
 		registerCallback("flourish", new FlourishCmdCallback());
@@ -399,7 +396,6 @@ public class CommandService extends Service {
 		addFlagScripts();
 		addGroupScripts();
 		addSurveyScripts();
-		registerCallback("grantSkill", CmdGrantSkill::execute);
 		registerCallback("stopDance", CmdStopDance::execute);
 		registerCallback("stopwatching", CmdStopWatching::execute);
 		registerCallback("tip", CmdTip::execute);
@@ -407,6 +403,7 @@ public class CommandService extends Service {
 		registerCallback("openContainer", CmdOpenContainer::execute);
 		registerCallback("purchaseTicket", CmdPurchaseTicket::execute);
 		registerCallback("setBiography", CmdSetBiography::execute);
+		registerCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::execute);
 		registerCallback("setMoodInternal", CmdSetMoodInternal::execute);
 		registerCallback("setWaypointActiveStatus", CmdSetWaypointActiveStatus::execute);
 		registerCallback("setWaypointName", CmdSetWaypointName::execute);
@@ -414,7 +411,14 @@ public class CommandService extends Service {
 	
 	private void addAdminScripts() {
 		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::execute);
+		registerCallback("goto", new GotoCmdCallback());
+		registerCallback("grantSkill", CmdGrantSkill::execute);
+		registerCallback("qatool", new QaToolCmdCallback());
+		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
 		registerCallback("setGodMode", CmdSetGodMode::execute);
+		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
+		registerCallback("server", new ServerCmdCallback());
+		
 		registerCallback("setSpeed", CmdSetSpeed::execute);
 	}
 	

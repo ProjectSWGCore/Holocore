@@ -29,11 +29,7 @@ package com.projectswg.holocore.resources.commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.projectswg.common.data.combat.AttackType;
-import com.projectswg.common.data.combat.DamageType;
-import com.projectswg.common.data.combat.DelayAttackEggPosition;
-import com.projectswg.common.data.combat.HitType;
-import com.projectswg.common.data.combat.ValidTarget;
+import com.projectswg.common.data.combat.*;
 
 import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 
@@ -62,6 +58,7 @@ public class CombatCommand extends Command {
 	private int delayAttackLoops;
 	private DelayAttackEggPosition eggPosition;
 	private float coneLength;
+	private HealAttrib healAttrib;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -257,4 +254,12 @@ public class CombatCommand extends Command {
 		this.coneLength = coneLength;
 	}
 
+	public HealAttrib getHealAttrib() {
+		return healAttrib;
+	}
+	
+	public void setHealAttrib(HealAttrib healAttrib) {
+		this.healAttrib = healAttrib;
+	}
+	
 }

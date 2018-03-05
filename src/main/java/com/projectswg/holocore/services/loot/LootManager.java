@@ -280,10 +280,16 @@ public final class LootManager extends Manager {
 			return;
 		}
 		
-		if (!getLootPermission(cci.getSource(), cci.getTarget()))
+		SWGObject target = cci.getTarget();
+		
+		if (target == null) {
+			return;
+		}
+		
+		if (!getLootPermission(cci.getSource(), target))
 			return;
 		
-		lootAll(cci.getSource(), cci.getTarget());
+		lootAll(cci.getSource(), target);
 	}
 	
 	private void handleLootRequestIntent(LootRequestIntent lri) {

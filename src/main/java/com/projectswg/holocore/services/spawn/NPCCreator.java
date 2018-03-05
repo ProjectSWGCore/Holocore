@@ -80,6 +80,7 @@ class NPCCreator {
 			case LOITER: {
 				LoiterAIObject object = ObjectCreator.createObjectFromTemplate(template, LoiterAIObject.class);
 				object.setLoiterRadius(spawner.getFloatRadius());
+				object.setMainLocation(spawner.getLocation());
 				return object;
 			}
 			case PATROL: {

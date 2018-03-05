@@ -24,50 +24,36 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.objects.custom;
+package com.projectswg.holocore.intents;
 
-import java.util.concurrent.TimeUnit;
+import com.projectswg.common.control.Intent;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
-import com.projectswg.common.data.location.Location;
+import javax.annotation.Nonnull;
 
-/**
- * Boring AI object that just sits in the same location.  aiLoop() can be extended for other AI objects that want random movements
- */
-public class RandomAIObject extends AIObject {
+public class SetTitleIntent extends Intent {
 	
-	private Location mainLocation;
+	private final String title;
+	private final PlayerObject requester;
 	
-	public RandomAIObject(long objectId) {
-		super(objectId);
+	private SetTitleIntent(@Nonnull String title, @Nonnull PlayerObject requester) {
+		this.title = title;
+		this.requester = requester;
 	}
 	
-	public Location getMainLocation() {
-		return mainLocation;
+	@Nonnull
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setMainLocation(Location mainLocation) {
-		this.mainLocation = mainLocation;
+	@Nonnull
+	public PlayerObject getRequester() {
+		return requester;
 	}
 	
-	@Override
-	protected void aiInitialize() {
-		super.aiInitialize();
-		long delay = (long) (30E3 + Math.random() * 10E3);
-		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
-	}
-	
-	@Override
-	public void aiStart() {
-		super.aiStart();
-		if (mainLocation == null) {
-			// If no location is given, then use object location
-			setMainLocation(getLocation());
-		}
-	}
-	
-	@Override
-	protected void aiLoop() {
-		
+	public static void broadcast(@Nonnull String title, @Nonnull PlayerObject requester) {
+		new SetTitleIntent(title, requester).broadcast();
 	}
 	
 }

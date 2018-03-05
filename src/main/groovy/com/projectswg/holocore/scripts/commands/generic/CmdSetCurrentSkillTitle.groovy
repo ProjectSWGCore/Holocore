@@ -24,50 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.objects.custom;
 
-import java.util.concurrent.TimeUnit;
+package com.projectswg.holocore.scripts.commands.generic
 
-import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.intents.SetTitleIntent
+import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.services.galaxy.GalacticManager
 
-/**
- * Boring AI object that just sits in the same location.  aiLoop() can be extended for other AI objects that want random movements
- */
-public class RandomAIObject extends AIObject {
-	
-	private Location mainLocation;
-	
-	public RandomAIObject(long objectId) {
-		super(objectId);
-	}
-	
-	public Location getMainLocation() {
-		return mainLocation;
-	}
-	
-	public void setMainLocation(Location mainLocation) {
-		this.mainLocation = mainLocation;
-	}
-	
-	@Override
-	protected void aiInitialize() {
-		super.aiInitialize();
-		long delay = (long) (30E3 + Math.random() * 10E3);
-		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
-	}
-	
-	@Override
-	public void aiStart() {
-		super.aiStart();
-		if (mainLocation == null) {
-			// If no location is given, then use object location
-			setMainLocation(getLocation());
-		}
-	}
-	
-	@Override
-	protected void aiLoop() {
-		
-	}
-	
+static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	SetTitleIntent.broadcast(args, player.getPlayerObject())
 }
