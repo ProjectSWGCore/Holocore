@@ -29,18 +29,145 @@ package com.projectswg.holocore.scripts.radial.object
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.common.debug.Log
+import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage
+import com.projectswg.holocore.intents.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.object.DestroyObjectIntent
+import com.projectswg.holocore.intents.object.ObjectCreatedIntent
 import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.objects.creature.CreatureObject
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject
 import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.resources.sui.SuiInputBox
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
+import com.projectswg.holocore.services.objects.ObjectCreator
 
 class SWGObjectRadial implements RadialHandlerInterface {
 	
 	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		stackOptions(options, target)
+	}
+	
+	def stackOptions(List<RadialOption> options, SWGObject target) {
+		// Verify that target is a tangible
+		if (!(target instanceof TangibleObject)) {
+			return
+		}
 		
+		if (target instanceof CreatureObject) {
+			return
+		}
+		
+		// Check if the target is not in a container then show no radial options
+		SWGObject container = target.getParent()
+		
+		if (container == null) {
+			return
+		}
+		
+		def tangibleTarget = (TangibleObject) target
+		
+		if (tangibleTarget.getCounter() < 1) {
+			return
+		}
+		
+		options.add(new RadialOption(RadialItem.SERVER_MENU49))	// Split
+		options.add(new RadialOption(RadialItem.SERVER_MENU50))	// Stack
+	}
+	
+	def split(Player player, SWGObject target) {
+		// Create input-window
+		def window = new SuiInputBox("@autostack:unstack", "@autostack:stacksize")
+		
+		// Handle button selection
+		window.addOkButtonCallback("split", {event, parameters ->
+			String input = SuiInputBox.getEnteredText(parameters)
+			TangibleObject originalStack = (TangibleObject) target
+			
+			try {
+				int newStackSize = Integer.parseInt(input)
+				int counter = originalStack.getCounter()
+				int oldStackSize = counter - newStackSize
+				
+				if (oldStackSize < 1) {
+					SystemMessageIntent.broadcastPersonal(player, "@autostack:zero_size")
+					return
+				} else if (oldStackSize >= counter) {
+					SystemMessageIntent.broadcastPersonal(player, "@autostack:too_big")
+					return
+				}
+				
+				// Check inventory volume
+				SWGObject container = target.getParent()
+				
+				if (container.getVolume() + 1 > container.getMaxContainerSize()) {
+					SystemMessageIntent.broadcastPersonal(player, "@autostack:full_container")
+					return
+				}
+				
+				// Create new object using same template
+				// TODO needs to copy other stuff as well, such as customization variables and object attributes
+				String template = originalStack.getTemplate()
+				TangibleObject newStack = ObjectCreator.createObjectFromTemplate(template, TangibleObject.class)
+				
+				// Adjust stack sizes
+				originalStack.setCounter(oldStackSize)
+				newStack.setCounter(newStackSize)
+				
+				// Add new stack to container
+				container.addObject(newStack)
+				
+				// Let objects aware of the container know that there's been created an object
+				container.getObjectsAware().forEach {observer -> newStack.createObject(observer) }
+				
+				// Let the executor of the split know that there's been created an object
+				newStack.createObject(player)
+				
+				ObjectCreatedIntent.broadcast(newStack)
+			} catch (NumberFormatException e) {
+				SystemMessageIntent.broadcastPersonal(player, "@autostack:number_format_wrong")
+			}
+		})
+		
+		// Display the window
+		window.display(player)
+	}
+	
+	def stack(SWGObject target) {
+		// Scan container for matching stackable item
+		String ourTemplate = target.getTemplate()
+		SWGObject container = target.getParent()
+		
+		for (SWGObject candidate : container.getContainedObjects()) {
+			if (target.equals(candidate)) {
+				continue
+			}
+			
+			String theirTemplate = candidate.getTemplate()
+			
+			if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate)) {
+				// Increase stack count on matching stackable item
+				TangibleObject tangibleMatch = (TangibleObject) candidate
+				int theirCounter = tangibleMatch.getCounter()
+				TangibleObject tangibleTarget = (TangibleObject) target
+				int ourCounter = tangibleTarget.getCounter()
+				
+				DestroyObjectIntent.broadcast(tangibleTarget)
+				tangibleMatch.setCounter(theirCounter + ourCounter)
+				
+				break
+			}
+		}
 	}
 	
 	def handleSelection(Player player, SWGObject target, RadialItem selection) {
-		
+		switch (selection) {
+			case RadialItem.SERVER_MENU49:
+				split(player, target)
+				break
+			case RadialItem.SERVER_MENU50:
+				stack(target)
+				break
+		}
 	}
-	
 }

@@ -34,6 +34,7 @@ import java.util.Set;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -41,6 +42,7 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.FactionIntent.FactionIntentType;
+import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.collections.SWGSet;
 import com.projectswg.holocore.resources.containers.ContainerResult;
@@ -86,10 +88,14 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
+	public ContainerResult moveToContainer(SWGObject container) {
+		return this.moveToContainer(null, container);
+	}
+	
+	@Override
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
 		// Check if object is stackable
-		if (counter > 0) {
-			
+		if (container != null && counter > 0) {
 			// Check if requester has permission to container
 			if (!getContainerPermissions().canMove(requester, container)) {
 				return ContainerResult.NO_PERMISSION;
@@ -104,6 +110,9 @@ public class TangibleObject extends SWGObject {
 				Map<String, String> theirAttributes = candidate.getAttributes();
 				
 				if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
+					Log.d("Match found! Merging objects.");
+					DestroyObjectIntent.broadcast(this);
+					
 					// Increase stack count on matching stackable item
 					TangibleObject tangibleMatch = (TangibleObject) candidate;
 					int theirCounter = tangibleMatch.getCounter();
@@ -114,6 +123,7 @@ public class TangibleObject extends SWGObject {
 				}
 			}
 		}
+		
 		return super.moveToContainer(requester, container);
 	}
 	

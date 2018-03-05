@@ -550,7 +550,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public Map<String, String> getAttributes() {
-		return attributes;
+		return new HashMap<>(attributes);
 	}
 
 	public int getContainerType() {
