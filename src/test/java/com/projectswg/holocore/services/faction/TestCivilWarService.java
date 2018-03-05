@@ -48,11 +48,11 @@ public class TestCivilWarService {
 	
 	@Test
 	public void testIsFactionEligible() {
-		Assert.assertTrue(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.IMPERIAL, true));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.NEUTRAL, false));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.REBEL, false));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.IMPERIAL, false));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.REBEL, true));
+		Assert.assertTrue(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.IMPERIAL));
+		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.NEUTRAL));
+		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.REBEL));
+		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.IMPERIAL));
+		Assert.assertFalse(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.REBEL));
 	}
 	
 	@Test
