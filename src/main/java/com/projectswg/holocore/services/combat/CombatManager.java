@@ -290,7 +290,7 @@ public class CombatManager extends Manager {
 							
 							CreatureObject creatureTarget = (CreatureObject) target;
 							
-							if (source.isEnemy(creatureTarget)) {
+							if (source.isEnemyOf(creatureTarget)) {
 								doHeal(source, source, healAmount, combatCommand);
 							} else {
 								doHeal(source, creatureTarget, healAmount, combatCommand);
@@ -660,7 +660,7 @@ public class CombatManager extends Manager {
 		}
 		
 		// They must be enemies
-		if (!corpse.isEnemy(killer)) {
+		if (!corpse.isEnemyOf(killer)) {
 			return;
 		}
 		
@@ -711,7 +711,7 @@ public class CombatManager extends Manager {
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
 		
-		if (!source.isEnemy((TangibleObject) target)) {
+		if (!source.isEnemyOf((TangibleObject) target)) {
 			return CombatStatus.INVALID_TARGET;
 		}
 		

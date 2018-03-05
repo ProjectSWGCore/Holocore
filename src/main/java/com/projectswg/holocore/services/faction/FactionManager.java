@@ -232,7 +232,7 @@ public final class FactionManager extends Manager {
 	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
 		int pvpBitmask = 0;
 
-		if(target.isEnemy(observer)) {
+		if(target.isEnemyOf(observer)) {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		

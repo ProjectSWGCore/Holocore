@@ -33,9 +33,7 @@ import java.util.stream.Stream;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
-import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
@@ -890,7 +888,7 @@ public class CreatureObject extends TangibleObject {
 	public boolean isAttackable(CreatureObject otherObject) {
 		Posture otherPosture = otherObject.getPosture();
 		
-		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
+		return isEnemyOf(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
 	}
 	
 	public boolean hasSentDuelRequestToPlayer(CreatureObject player) {
@@ -909,23 +907,29 @@ public class CreatureObject extends TangibleObject {
 		sentDuels.remove(player);
 	}
 	
+	/**
+	 * Members of the same faction might be enemies, if there are players
+	 * involved.
+	 * @param otherObject
+	 * @return
+	 */
 	@Override
-	public boolean isEnemy(TangibleObject otherObject) {
-		boolean tangibleEnemy = super.isEnemy(otherObject);
-		
-		if (tangibleEnemy || !(otherObject instanceof CreatureObject)) {
-			return tangibleEnemy;
+	public boolean isEnemyOf(TangibleObject otherObject) {
+		if (!(otherObject instanceof CreatureObject)) {
+			// If the other object isn't a creature, then our job here's done
+			return super.isEnemyOf(otherObject);
 		}
 		
-		if (isDuelingPlayer((CreatureObject)otherObject))
-			return true;
+		// TODO bounty hunting
+		// TODO pets, vehicles etc having same flagging as their owner
+		// TODO guild wars
 		
-		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
-				&& getPvpFaction() != PvpFaction.NEUTRAL
-				&& otherObject.getPvpFaction() != PvpFaction.NEUTRAL
-				&& getPvpFaction() != otherObject.getPvpFaction()
-				&& getPvpStatus() == PvpStatus.SPECIALFORCES
-				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
+		if (isDuelingPlayer((CreatureObject)otherObject)) {
+			// Dueling is an exception, since it allows allies to be enemies
+			return true;
+		}
+		
+		return super.isEnemyOf(otherObject);	// Default
 	}
 	
 	@Override

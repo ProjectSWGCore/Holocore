@@ -253,7 +253,12 @@ public class TangibleObject extends SWGObject {
 		sendDelta(3, 9, counter);
 	}
 	
-	public boolean isEnemy(TangibleObject otherObject) {
+	/**
+	 *
+	 * @param otherObject
+	 * @return true if this object is an enemy of {@code otherObject}
+	 */
+	public boolean isEnemyOf(TangibleObject otherObject) {
 		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
 			return false;
 		}
@@ -265,14 +270,47 @@ public class TangibleObject extends SWGObject {
 		PvpFaction ourFaction = getPvpFaction();
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
-		return otherFaction != PvpFaction.NEUTRAL && ourFaction != PvpFaction.NEUTRAL && ourFaction != otherFaction
-				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
+		if (ourFaction == PvpFaction.NEUTRAL || otherFaction == PvpFaction.NEUTRAL) {
+			// Neutrals are always excluded from factional combat
+			return false;
+		}
+		
+		// At this point, neither are neutral
+		
+		if (ourFaction == otherFaction) {
+			// Members of the same faction are not enemies
+			return false;
+		}
+		
+		// At this point, they're members of opposing factions
+		
+		PvpStatus ourStatus = getPvpStatus();
+		PvpStatus otherStatus = otherObject.getPvpStatus();
+		
+		if (ourStatus == PvpStatus.ONLEAVE || otherStatus == PvpStatus.ONLEAVE) {
+			// They're of opposing factions, but one of them on leave
+			return false;
+		}
+		
+		// At this point, they're both either combatant or special forces
+		
+		boolean ourPlayer = getSlottedObject("ghost") != null;
+		boolean otherPlayer = otherObject.getSlottedObject("ghost") != null;
+		
+		if (ourPlayer && otherPlayer) {
+			// Two players can only attack each other if both are Special Forces
+			return ourStatus == PvpStatus.SPECIALFORCES && otherStatus == PvpStatus.SPECIALFORCES;
+		} else {
+			// At this point, we're dealing with player vs npc or npc vs npc
+			// In this case, they just need to not be on leave and we've already established this
+			return true;
+		}
 	}
-
+	
 	public String getCurrentCity() {
 		return currentCity;
 	}
-
+	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
 	}
