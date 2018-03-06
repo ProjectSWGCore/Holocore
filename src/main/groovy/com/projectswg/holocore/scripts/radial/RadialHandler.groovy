@@ -30,7 +30,10 @@ package com.projectswg.holocore.scripts.radial
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.custom.AIObject
+import com.projectswg.holocore.resources.objects.custom.LoiterAIObject
+import com.projectswg.holocore.resources.objects.custom.PatrolAIObject
+import com.projectswg.holocore.resources.objects.custom.RandomAIObject
+import com.projectswg.holocore.resources.objects.custom.TurningAIObject
 import com.projectswg.holocore.resources.objects.tangible.CreditObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.object.AIObjectRadial
@@ -53,7 +56,12 @@ class RadialHandler {
 		initializeSurveyRadials()
 		initializeMiscRadials()
 		
-		classHandlers.put(AIObject.class, new AIObjectRadial())
+		RadialHandlerInterface aiHandler = new AIObjectRadial()
+		
+		classHandlers.put(LoiterAIObject.class, aiHandler)
+		classHandlers.put(PatrolAIObject.class, aiHandler)
+		classHandlers.put(RandomAIObject.class, aiHandler)
+		classHandlers.put(TurningAIObject.class, aiHandler)
 		classHandlers.put(CreditObject.class, new CreditObjectRadial())
 	}
 	
@@ -78,6 +86,7 @@ class RadialHandler {
 		
 		if (target != null) {
 			handler = classHandlers.get(target.getClass())
+			
 			if (handler != null)
 				return handler
 		}
