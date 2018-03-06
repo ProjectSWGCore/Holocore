@@ -85,10 +85,6 @@ public class TangibleObject extends SWGObject {
 		inCombat = false;
 	}
 	
-	public CustomizationString getAppearanceData() {	// TODO a getter for this isn't a good idea
-		return appearanceData;
-	}
-	
 	public int getMaxHitPoints() {
 		return maxHitPoints;
 	}
