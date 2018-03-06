@@ -33,7 +33,7 @@ import java.util.Map;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.combat.DamageType;
-import com.projectswg.common.data.customization.PaletteCustomizationVariable;
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -405,13 +405,13 @@ public final class StaticItemService extends Service {
 			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
 			
-			if (colorIndex != 0 && object instanceof TangibleObject) {	// All wearables should be TangibleObjects, but oh well...
-				PaletteCustomizationVariable color = new PaletteCustomizationVariable();
+			if (colorIndex != 0 && object instanceof TangibleObject) {
+				CustomizationVariable color = new CustomizationVariable();
 				
-				color.setColor(0, colorIndex);
+				color.setValue(colorIndex);
 				
 				((TangibleObject) object).putCustomization("/private/index_color_1", color);
-				//((TangibleObject) object).putCustomization("/private/index_color_2", color);
+				// TODO our item SDB has no way of defining multiple colors for a single item
 			}
 		}
 
