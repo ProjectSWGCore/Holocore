@@ -155,6 +155,10 @@ public class TangibleObject extends SWGObject {
 		appearanceData.put(name, value);
 	}
 	
+	public CustomizationVariable getCustomization(String name) {
+		return appearanceData.get(name);
+	}
+	
 	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
 		
