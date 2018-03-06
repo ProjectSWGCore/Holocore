@@ -29,9 +29,7 @@ package com.projectswg.holocore.scripts.radial
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.common.debug.Log
 import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.custom.AIObject
 import com.projectswg.holocore.resources.objects.custom.LoiterAIObject
 import com.projectswg.holocore.resources.objects.custom.PatrolAIObject
 import com.projectswg.holocore.resources.objects.custom.RandomAIObject
