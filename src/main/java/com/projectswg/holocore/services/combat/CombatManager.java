@@ -756,7 +756,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private void addActionCost(CreatureObject source, CombatCommand command) {
-		double actionCost = command.getActionCost();
+		double actionCost = command.getActionCost() * command.getAttackRolls();
 		int currentAction = source.getAction();
 		
 		if (actionCost <= 0 || actionCost > currentAction) {
