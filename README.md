@@ -104,7 +104,7 @@ highest admin level assigned to it.
 1. Fork this repository
 2. Clone the fork you just created, using `git clone`
 3. Get the submodules using `git submodule update --init`
-4. Find something to do on [one of our Trello boards](https://trello.com/projectswg)
+4. Find something to do in our issues list that is unassigned => https://bitbucket.org/projectswg/holocore/issues?status=new&status=open
 5. Create a new branch on your fork of holocore
 6. Write code, commit and push it to your branch
 7. Once ready, create a pull request with destination branch `quality_assurance` and source branch
