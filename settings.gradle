@@ -1,1 +1,2 @@
-include 'PSWGCommon', 'PSWGCommonFX'
+rootProject.name = 'Holocore'
+include 'PSWGCommon'
