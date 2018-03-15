@@ -1,14 +1,14 @@
-item_name	iff_template	type	string_name	volume	hit_points	min_damage	max_damage	weapon_category	weapon_type	damage_type	elemental_type	elemental_damage	attack_speed	special_attack_cost	min_range_distance	max_range_distance	proc_effect	target_dps	actual_dps	lifespan	buff_name	hide_buff_identity	cool_down_group	reuse_time	healing_power	client_effect	client_animation	grant_GCW_faction	grant_GCW_value	grant_vehicle	grant_mount	grant_greeter	grant_holopet	grant_familiar	collection_beginSlotId	collection_endSlotId	collection_name	collection_slot_name	schematic_id	schematic_type	schematic_use	schematic_skill_needed	armor_level	armor_category	protection	required_faction	required_level	required_profession	race_wookiee	race_ithorian	race_rodian	race_trandoshan	race_rest	no_trade	bio_link	worn_item_buff	deconstruct	sockets	skill_mods	index_color	value	isUnique	charges	tier	version	comments	objvars
-TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	INTEGER	INTEGER	INTEGER	TEXT NOT NULL	INTEGER	TEXT NOT NULL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT NOT NULL	TEXT	INTEGER	INTEGER	TEXT	TEXT	TEXT	REAL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT NOT NULL	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	TEXT
-armor.sdb	TRUE																																																																		
-collection.sdb	TRUE																																																																		
-consumable.sdb	TRUE																																																																		
-costume.sdb	TRUE																																																																		
-dna.sdb	TRUE																																																																		
-grant.sdb	TRUE																																																																		
-item.sdb	TRUE																																																																		
-object.sdb	TRUE																																																																		
-schematic.sdb	TRUE																																																																		
-storyteller.sdb	TRUE																																																																		
-weapon.sdb	TRUE																																																																		
-wearable.sdb	TRUE																																																																		
+item_name	iff_template	type	string_name	volume	hit_points	min_damage	max_damage	weapon_category	weapon_type	damage_type	elemental_type	elemental_damage	attack_speed	special_attack_cost	min_range_distance	max_range_distance	proc_effect	target_dps	actual_dps	lifespan	buff_name	hide_buff_identity	cool_down_group	reuse_time	healing_power	client_effect	client_animation	grant_GCW_faction	grant_GCW_value	grant_vehicle	grant_mount	grant_greeter	grant_holopet	grant_familiar	collection_beginSlotId	collection_endSlotId	collection_name	collection_slot_name	schematic_id	schematic_type	schematic_use	schematic_skill_needed	armor_level	armor_category	protection	required_faction	required_level	required_profession	race_wookiee	race_ithorian	race_rodian	race_trandoshan	race_rest	no_trade	bio_link	worn_item_buff	deconstruct	sockets	skill_mods	index_color_0	index_color_1	index_color_2	index_color_3	value	isUnique	charges	tier	version	comments
+TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	INTEGER	INTEGER	INTEGER	TEXT NOT NULL	INTEGER	TEXT NOT NULL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT NOT NULL	TEXT	INTEGER	INTEGER	TEXT	TEXT	TEXT	REAL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT
+armor.sdb	TRUE																																																																				
+collection.sdb	TRUE																																																																				
+consumable.sdb	TRUE																																																																				
+costume.sdb	TRUE																																																																				
+dna.sdb	TRUE																																																																				
+grant.sdb	TRUE																																																																				
+item.sdb	TRUE																																																																				
+object.sdb	TRUE																																																																				
+schematic.sdb	TRUE																																																																				
+storyteller.sdb	TRUE																																																																				
+weapon.sdb	TRUE																																																																				
+wearable.sdb	TRUE																																																																				
