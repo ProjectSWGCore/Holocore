@@ -1,0 +1,632 @@
+terrain	regionName	geometry	minX_or_centerX	minZ_or_centerZ	maxX_or_radius	maxZ	geographicalType	municipal
+TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	INTEGER
+CORELLIA	a_crash_site_37	circle	-1754	-3280	40		default	0
+CORELLIA	a_droid_graveyard_39	circle	-1869	-143	75		default	0
+CORELLIA	abandoned_camp_site_01	circle	6295	-3954	40		default	0
+CORELLIA	abandoned_milotary_site_32	circle	-3613	-354	60		default	0
+CORELLIA	abandoned_mine_project_02	circle	5602	-1529	60		default	0
+CORELLIA	abandoned_power_generator_38	circle	-2295	-1335	40		default	0
+CORELLIA	bandoned_smugglers_camp_04	circle	6047	6400	40		default	0
+CORELLIA	beach_hut_05_	circle	7511	-1780	40		default	0
+CORELLIA	bela_vistal_nobuild_1	circle	6788	-5654	1000		default	0
+CORELLIA	braggans_fist_camp_spawn_block	circle	-5289	-2024	75		city	0
+CORELLIA	bridge_underconstruction_18	circle	414	-2806	50		default	0
+CORELLIA	broken_ore_extracter_21	circle	111	1726	60		default	0
+CORELLIA	cara_raeth_spawn_block	circle	2547	5094	50		city	0
+CORELLIA	collection_click_mini_dungeon	circle	-7136	1159	45		default	0
+CORELLIA	collection_glowing_rock_08	circle	5669	-1563	9		city	0
+CORELLIA	collection_manipulator_arm	circle	1773	4668	15		city	0
+CORELLIA	collection_rebel_marine_armor_chestplate	circle	1885	-226	14		city	0
+CORELLIA	collection_steaming_stone_07	circle	-7404	7513	37		city	0
+CORELLIA	cons_meeting_spawn_block	circle	-701	-4181	75		city	0
+CORELLIA	corellia_force_shrine_01	circle	-6907	4527	199		city	0
+CORELLIA	corellia_force_shrine_02	circle	-7392	-3938	199		city	0
+CORELLIA	corellia_force_shrine_03	circle	6093	-5578	199		city	0
+CORELLIA	corellia_force_shrine_04	circle	6301	6688	199		city	0
+CORELLIA	corellia_force_shrine_05	circle	-2384	6393	199		city	0
+CORELLIA	corellia_rebel_hideout	circle	-6507	5992	225		city	0
+CORELLIA	corellia_rebel_vs_imperial_battlesite	circle	4112	-1260	300		city	0
+CORELLIA	corellia_sdungeon_cave_01	circle	1360	-329	128		city	0
+CORELLIA	corellia_sdungeon_cave_02	circle	1029	4198	128		city	0
+CORELLIA	corellia_sdungeon_cave_03	circle	-2510	2922	128		city	0
+CORELLIA	corellia_vreni_island_outdoor_theater	rectangle	-5442	-6283	-5398	-6221	theater	0
+CORELLIA	corellian_monument_06	circle	751	2487	30		default	0
+CORELLIA	coronet_nobuild_1	circle	-178	-4504	1000		default	0
+CORELLIA	corsec_agents_spawn_block	circle	3921	4834	50		city	0
+CORELLIA	crash_site_28	circle	-5416	2080	40		default	0
+CORELLIA	crashed_landing_pod_26	circle	-5467	-934	30		default	0
+CORELLIA	crystal_arch_half_11	circle	-6833	2183	100		default	0
+CORELLIA	crystal_steam_vent_12	circle	-7524	4618	60		default	0
+CORELLIA	daoba_guerfel_nobuild_1	circle	3272	5456	1200		default	0
+CORELLIA	doaba_drall_warehouse_spawn_block	circle	3342	4816	75		city	0
+CORELLIA	droid_dungeon	circle	-6323	388	138		city	0
+CORELLIA	eastedge_corellia_nobuild	rectangle	7640	-7640	8000	7640	default	0
+CORELLIA	elite1_bunker_spawn_block	circle	2457	5047	150		city	0
+CORELLIA	elite2_bunker_spawn_block	circle	4009	4843	175		city	0
+CORELLIA	enraged_carrion_spat_spawn_block	circle	309	-3997	100		city	0
+CORELLIA	face_monlith_16	circle	-1905	3990	50		default	0
+CORELLIA	flaming_bowl_24	circle	4516	4313	40		default	0
+CORELLIA	gcw_corellia_imperial_start	rectangle	4124	-5074	4380	-4818	city	0
+CORELLIA	gcw_corellia_main_base	rectangle	4517	-5490	5029	-4978	city	0
+CORELLIA	gcw_corellia_rebel_start	rectangle	5164	-5746	5420	-5490	city	0
+CORELLIA	genovin_seyda_camp_spawn_block	circle	3659	5351	100		city	0
+CORELLIA	grey_shroud_camp_spawn_block	circle	3340	5977	150		city	0
+CORELLIA	half_arch_and_gyser_22	circle	4117	-4312	60		default	0
+CORELLIA	informant_stash_spawn_block	circle	448	-4642	75		city	0
+CORELLIA	jzoros_bunker_spawn_block	circle	2635	5634	125		city	0
+CORELLIA	kal_braggan_hiding_spawn_block	circle	-5285	-1657	50		city	0
+CORELLIA	kor_vella_nobuild_1	circle	-3512	3184	1500		default	0
+CORELLIA	listening_post_15	circle	-1419	1972	20		default	0
+CORELLIA	maerzen_loc_spawn_block	circle	646	-4439	50		city	0
+CORELLIA	meatlump_1_spawn_block	circle	-143	-5016	75		city	0
+CORELLIA	meatlump_2_spawn_block	circle	-75	-4983	75		city	0
+CORELLIA	meatlump_3_spawn_block	circle	-74	-5069	75		city	0
+CORELLIA	memorial_statue_09	circle	-7065	-1593	40		default	0
+CORELLIA	monument_10	circle	-7138	132	50		default	0
+CORELLIA	monument_31	circle	-2938	-1839	60		default	0
+CORELLIA	nedgarr_bandit_spawn_block	circle	337	-4404	125		city	0
+CORELLIA	northedge_corellia_nobuild	rectangle	-8000	7640	8000	8000	default	0
+CORELLIA	oilivia_bain_spawn_block	circle	-2325	3280	25		city	0
+CORELLIA	old_battlefield_nobuild_cor1	circle	263	4620	256		default	0
+CORELLIA	old_battlefield_nobuild_cor2	circle	-1870	-1223	192		default	0
+CORELLIA	old_battlefield_nobuild_cor3	circle	3785	-4037	192		default	0
+CORELLIA	pol_handerin_farm_spawn_block	circle	185	-4261	120		city	0
+CORELLIA	power_plant_20	circle	528	-415	50		default	0
+CORELLIA	preens_boola_loc_spawn_block	circle	407	-4972	125		city	0
+CORELLIA	red_circle_bunker_spawn_block	circle	-2274	2682	100		city	0
+CORELLIA	rock_bowl_25	circle	4872	6692	40		default	0
+CORELLIA	ruined_guard_tower_29	circle	-5899	4674	75		default	0
+CORELLIA	ruined_milotary_installation_27	circle	-5324	213	50		default	0
+CORELLIA	ruins_in_river_35	circle	-4476	5540	100		default	0
+CORELLIA	ryll_smuggler_bunker_spawn_block	circle	-2237	3303	150		city	0
+CORELLIA	ryll_warehouse_spawn_block	circle	-3329	3403	75		city	0
+CORELLIA	sdungeon_imperial_outpost	circle	4664	-5784	128		city	0
+CORELLIA	sdungeon_rogue_corsec_bunker	circle	5225	1567	128		city	0
+CORELLIA	southedge_corellia_nobuild	rectangle	-7995	-8000	8000	-7640	default	0
+CORELLIA	spice_delivery_meet_spawn_block	circle	2973	5870	150		city	0
+CORELLIA	tomi_jinsen_spawn_block	circle	-518	-5063	125		city	0
+CORELLIA	troemans_ambush_spawn_block	circle	-32	-5211	75		city	0
+CORELLIA	tyrena_meatlumps_cave_spawn_block	circle	-5694	-2289	100		city	0
+CORELLIA	tyrena_nobuild_1	circle	-5282	-2526	1200		default	0
+CORELLIA	vermin_bunker_spawn_block	circle	-3646	2870	75		city	0
+CORELLIA	vreni_island_nobuild_1	circle	-5472	-6272	1400		default	0
+CORELLIA	vuuls_camp_spawn_block	circle	-2955	3397	75		city	0
+CORELLIA	westegde_corellia_nobuild	rectangle	-8000	-7640	-7640	7640	default	0
+CORELLIA	windmill_power_plant_03	circle	6217	4682	40		default	0
+DANTOOINE	2_statues_52	circle	5779	-2997	50		default	0
+DANTOOINE	3_walls_31	circle	1937	2170	25		default	0
+DANTOOINE	abandoned_hut_51	circle	-6862	-3519	50		default	0
+DANTOOINE	abandoned_mud_hut_05	circle	1648	5920	50		default	0
+DANTOOINE	abandoned_ranch_32	circle	1539	1747	50		default	0
+DANTOOINE	abandoned_rebel_camp_48	circle	-4060	-747	30		default	0
+DANTOOINE	abandoned_village_17	circle	288	3517	50		default	0
+DANTOOINE	abandoned_village_32	circle	-3981	2131	50		default	0
+DANTOOINE	ancient_lighthouse_14	circle	126	5235	50		default	0
+DANTOOINE	arch_and_fire_42	circle	2909	4512	50		default	0
+DANTOOINE	arch_and_ruins_12	circle	-4221	4264	50		default	0
+DANTOOINE	arch_and_ruins_32	circle	-4639	1793	50		default	0
+DANTOOINE	arch_bridge_ruins_41	circle	6749	4996	75		default	0
+DANTOOINE	arches_and_statue_21	circle	-6146	4681	50		default	0
+DANTOOINE	burning_alter_ruins_50	circle	5422	-860	50		default	0
+DANTOOINE	cliff_village_27	circle	-2566	2597	50		default	0
+DANTOOINE	col_family_story_gravesite_03	circle	-1453	-3253	25		city	0
+DANTOOINE	collection_burning_rock_03	circle	2908	4514	20		city	0
+DANTOOINE	collection_datapad_05	circle	4500	-6500	39		city	0
+DANTOOINE	collection_rebel_marine_armor_gloves	circle	4066	-5120	49		city	0
+DANTOOINE	column_bridge_29	circle	197	2159	50		default	0
+DANTOOINE	dantooine_abandoned_rebel_base_nobuild_1	circle	-6827	5539	500		default	0
+DANTOOINE	dantooine_coa2_imperial_base	circle	2512	-2051	50		city	0
+DANTOOINE	dantooine_force_crystal_cave_sd	circle	-6228	7380	125		city	0
+DANTOOINE	dantooine_force_shrine_01	circle	-6173	4120	199		city	0
+DANTOOINE	dantooine_force_shrine_02	circle	2164	7548	199		city	0
+DANTOOINE	dantooine_force_shrine_03	circle	2641	-1537	199		city	0
+DANTOOINE	dantooine_force_shrine_04	circle	-1814	-6202	199		city	0
+DANTOOINE	dantooine_force_shrine_05	circle	-6999	-5270	199		city	0
+DANTOOINE	dantooine_imperial_outpost_nobuild_1	circle	-4224	-2400	600		city	0
+DANTOOINE	dantooine_janta_dantari_cave	circle	7068	-4099	198		pathfind	0
+DANTOOINE	dantooine_jedi_temple	circle	4207	5240	500		city	0
+DANTOOINE	dantooine_kunga_dantari_cave	circle	-139	-396	198		pathfind	0
+DANTOOINE	dantooine_mining_outpost_1	circle	-568	2511	7		default	0
+DANTOOINE	dantooine_mining_outpost_1	circle	-569	2512	7		default	0
+DANTOOINE	dantooine_mining_outpost_10	circle	-616	2518	2		default	0
+DANTOOINE	dantooine_mining_outpost_11	circle	-629	2509	2		default	0
+DANTOOINE	dantooine_mining_outpost_12	circle	-611	2533	7		default	0
+DANTOOINE	dantooine_mining_outpost_13	circle	-580	2530	2		default	0
+DANTOOINE	dantooine_mining_outpost_14	circle	-601	2549	5		default	0
+DANTOOINE	dantooine_mining_outpost_2	circle	-603	2507	10		default	0
+DANTOOINE	dantooine_mining_outpost_3	circle	-611	2488	2		default	0
+DANTOOINE	dantooine_mining_outpost_4	circle	-647	2449	2		default	0
+DANTOOINE	dantooine_mining_outpost_5	circle	-631	2463	2		default	0
+DANTOOINE	dantooine_mining_outpost_6	circle	-656	2462	7		default	0
+DANTOOINE	dantooine_mining_outpost_7	circle	-662	2482	2		default	0
+DANTOOINE	dantooine_mining_outpost_8	circle	-641	2472	10		default	0
+DANTOOINE	dantooine_mining_outpost_9	circle	-621	2501	7		default	0
+DANTOOINE	dantooine_mokk_dantari_cave	circle	-7056	-3312	198		pathfind	0
+DANTOOINE	dantooine_pirate_outpost_1	circle	1558	-6430	7		default	0
+DANTOOINE	dantooine_pirate_outpost_10	circle	1601	-6403	5		default	0
+DANTOOINE	dantooine_pirate_outpost_11	circle	1587	-6398	5		default	0
+DANTOOINE	dantooine_pirate_outpost_2	circle	1614	-6428	7		default	0
+DANTOOINE	dantooine_pirate_outpost_3	circle	1547	-6398	15		default	0
+DANTOOINE	dantooine_pirate_outpost_4	circle	1635	-6397	15		default	0
+DANTOOINE	dantooine_pirate_outpost_5	circle	1606	-6378	7		default	0
+DANTOOINE	dantooine_pirate_outpost_6	circle	1630	-6371	2		default	0
+DANTOOINE	dantooine_pirate_outpost_7	circle	1546	-6371	2		default	0
+DANTOOINE	dantooine_pirate_outpost_8	circle	1570	-6370	2		default	0
+DANTOOINE	dantooine_pirate_outpost_9	circle	1575	-6396	2		default	0
+DANTOOINE	dantooine_pirate_outpost_nobuild_1	circle	1588	-6390	200		city	0
+DANTOOINE	dantooine_rebel commander_base_CoA_act2	circle	6863	-2251	250		city	0
+DANTOOINE	dantooine_the_warren_nobuild_1	circle	-555	-3834	250		city	0
+DANTOOINE	eastedge_dantooine_nobuild	rectangle	7640	-7640	8000	7640	default	0
+DANTOOINE	fences_35	circle	-6863	2487	40		default	0
+DANTOOINE	fences_37	circle	-433	568	50		default	0
+DANTOOINE	junk_13	circle	-1562	5466	40		default	0
+DANTOOINE	large_hut_39	circle	3184	5988	50		default	0
+DANTOOINE	marker_45	circle	2735	3361	50		default	0
+DANTOOINE	meteor_crash_33	circle	-5396	1380	75		default	0
+DANTOOINE	mud_hut_23	circle	-6190	2694	100		default	0
+DANTOOINE	northedge_dantooine_nobuild	rectangle	-8000	7640	8000	8000	default	0
+DANTOOINE	Pillars_24	circle	-5168	2688	75		default	0
+DANTOOINE	poisoned_pool_06	circle	-194	5962	50		default	0
+DANTOOINE	pyramid_statue_26	circle	-3347	2915	50		default	0
+DANTOOINE	Relay_Station_22	circle	-7342	3681	100		default	0
+DANTOOINE	ring_of_fire_40	circle	5472	5840	75		default	0
+DANTOOINE	rock_hut_35	circle	-6060	1135	100		default	0
+DANTOOINE	ruined_arches_16	circle	1027	4359	25		default	0
+DANTOOINE	Ruined_entrance_09	circle	-4081	5960	50		default	0
+DANTOOINE	ruined_wall_01	circle	-3886	6892	50		default	0
+DANTOOINE	ruins_19	circle	-2480	3424	50		default	0
+DANTOOINE	ruins_36	circle	-2085	-306	50		default	0
+DANTOOINE	sacred_alter_34	circle	-5752	1926	150		default	0
+DANTOOINE	sacred_place_07	circle	336	5552	40		default	0
+DANTOOINE	skeletons_02	circle	-2138	6728	50		default	0
+DANTOOINE	Skulls_18	circle	-1825	3799	40		default	0
+DANTOOINE	southedge_dantooine_nobuild	rectangle	-7641	-8000	8000	-7640	default	0
+DANTOOINE	statue_38	circle	897	1397	50		default	0
+DANTOOINE	statue_head_28	circle	-96	1874	50		default	0
+DANTOOINE	staue_heads_44	circle	3078	1215	50		default	0
+DANTOOINE	stone_hut_15	circle	1680	4864	40		default	0
+DANTOOINE	stone_hut_25	circle	-3776	2546	75		default	0
+DANTOOINE	stone_shelter_47	circle	-5503	-1771	50		default	0
+DANTOOINE	stones_30	circle	2096	2864	50		default	0
+DANTOOINE	stones_in_hill_46	circle	3859	170	50		default	0
+DANTOOINE	totem_over_water_04	circle	2312	6056	50		default	0
+DANTOOINE	tribal_hut_20	circle	-5787	3452	50		default	0
+DANTOOINE	tribal_hut_53	circle	-7078	-6145	50		default	0
+DANTOOINE	two_statues_11	circle	-5536	4464	40		default	0
+DANTOOINE	watcher_of_the_valley	circle	-4974	6365	50		default	0
+DANTOOINE	westedge_dantooine_nobuild	rectangle	-8000	-8000	-7640	7640	default	0
+DANTOOINE	wheel_and_fence_03	circle	1185	7048	50		default	0
+DANTOOINE	wooden_bridge_49	circle	2528	-2867	50		default	0
+DANTOOINE	wooden_platform_15	circle	1347	5211	50		default	0
+DANTOOINE	wooden_platform_43	circle	4329	3903	50		default	0
+DANTOOINE	worshiped_junk_08	circle	-2783	5668	40		default	0
+DATHOMIR	aurilia_township_outdoor_cantina	rectangle	5316	-4072	5347	-4041	theater	0
+DATHOMIR	collection_comlink_02	circle	-6249	-6109	50		city	0
+DATHOMIR	collection_reb_marine_armor_r_bracer	circle	-40	85	24		city	0
+DATHOMIR	dathomir_coa2_imperial_base	circle	-6303	-529	50		city	0
+DATHOMIR	dathomir_coa2_rebel_base	circle	4010	2987	50		city	0
+DATHOMIR	dathomir_crashed_transport_sd	circle	5684	1918	125		city	0
+DATHOMIR	dathomir_force_shrine_01	circle	-4961	-3493	199		city	0
+DATHOMIR	dathomir_force_shrine_02	circle	-4148	5926	199		city	0
+DATHOMIR	dathomir_force_shrine_03	circle	3087	4887	199		city	0
+DATHOMIR	dathomir_force_shrine_04	circle	5571	-1513	199		city	0
+DATHOMIR	dathomir_force_shrine_05	circle	1654	-5765	199		city	0
+DATHOMIR	dathomir_fs_combat_camp1	circle	5939	-2030	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp10	circle	-376	-1856	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp11	circle	-1022	-2932	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp12	circle	-392	-6004	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp13	circle	-737	-5158	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp14	circle	-1663	-4690	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp15	circle	-2850	-2366	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp16	circle	-3824	-3011	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp17	circle	-3961	-2606	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp18	circle	-2932	738	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp19	circle	-3133	1165	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp2	circle	5313	-1145	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp20	circle	-1676	1651	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp21	circle	-1977	2234	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp22	circle	-1092	2343	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp23	circle	-410	2506	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp24	circle	1369	1217	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp25	circle	3076	2174	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp3	circle	4072	-1402	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp4	circle	3456	-1258	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp5	circle	2960	45	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp6	circle	3041	787	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp7	circle	1073	1860	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp8	circle	642	732	150		fictional	0
+DATHOMIR	dathomir_fs_combat_camp9	circle	-53	-165	150		fictional	0
+DATHOMIR	dathomir_fs_village_unpassable	circle	5306	-4145	512		city	0
+DATHOMIR	dathomir_fs_village_unpassable_nobuild	circle	5306	-4145	1024		city	0
+DATHOMIR	dathomir_imperial_prison	circle	-6399	943	429		city	0
+DATHOMIR	dathomir_nightsister_giant_gaping_spider_cave	circle	-1196	6250	80		city	0
+DATHOMIR	dathomir_nightsister_slave_mine_sd	circle	2452	-1628	125		city	0
+DATHOMIR	dathomir_nightsister_vs_smc_battle_sd	circle	-2523	1537	250		city	0
+DATHOMIR	dathomir_pvp_battlefield5_no_build	rectangle	-7575	6575	-6575	7575	default	0
+DATHOMIR	dathomir_rebel_base	circle	6077	877	150		city	0
+DATHOMIR	dathomir_singing_mtn_clan_city1	circle	534	4198	90		city	0
+DATHOMIR	dathomir_singing_mtn_clan_city2	circle	593	4523	80		city	0
+DATHOMIR	dathomir_singing_mtn_clan_city3	circle	522	4718	80		city	0
+DATHOMIR	dathomir_singing_mtn_clan_nobuild	circle	416	4576	1600		default	0
+DATHOMIR	dathomir_singing_mtn_clan_witch_city	circle	194	4513	150		city	0
+DATHOMIR	dathomir_smc_east_side_bridge	circle	-440	4176	40		city	0
+DATHOMIR	dathomir_survey_outpost_1	circle	-99	-1590	10		default	0
+DATHOMIR	dathomir_survey_outpost_2	circle	-79	-1618	10		default	0
+DATHOMIR	dathomir_survey_outpost_3	circle	-37	-1588	7		default	0
+DATHOMIR	dathomir_survey_outpost_4	circle	-88	-1547	7		default	0
+DATHOMIR	dathomir_survey_outpost_5	circle	-61	-1596	5		default	0
+DATHOMIR	dathomir_survey_outpost_nobuild_1	circle	-85	-1600	200		city	0
+DATHOMIR	dathomir_trade_outpost_1	circle	586	3073	10		default	0
+DATHOMIR	dathomir_trade_outpost_2	circle	577	3101	5		default	0
+DATHOMIR	dathomir_trade_outpost_3	circle	619	3072	2		default	0
+DATHOMIR	dathomir_trade_outpost_4	circle	617	3057	2		default	0
+DATHOMIR	dathomir_trade_outpost_5	circle	606	3081	5		default	0
+DATHOMIR	dathomir_trade_outpost_6	circle	622	3093	2		default	0
+DATHOMIR	dathomir_trade_outpost_7	circle	599	3047	2		default	0
+DATHOMIR	dathomir_trade_outpost_8	circle	586	3052	2		default	0
+DATHOMIR	dathomir_trade_outpost_nobuild_1	circle	599	3071	200		city	0
+DATHOMIR	eastedge_dathomir_nobuild	rectangle	7640	-7640	8000	7640	default	0
+DATHOMIR	northedge_dathomir_nobuild	rectangle	-8000	7640	8000	8000	default	0
+DATHOMIR	old_battlefield_nobuild_dath1	circle	4162	-4279	256		default	0
+DATHOMIR	outbreak_infected_area_01	rectangle	-7480	-7500	-5966	-6420	city	0
+DATHOMIR	outbreak_infected_area_02	circle	-6242	-7507	100		city	0
+DATHOMIR	outbreak_infected_area_03	rectangle	-6016	-7496	-5635	-6898	city	0
+DATHOMIR	outbreak_infected_area_04	circle	-6062	-6774	318		city	0
+DATHOMIR	southedge_dathomir_nobuild	rectangle	-8000	-8000	8000	-7640	default	0
+DATHOMIR	westedge_dathomir_nobuild	rectangle	-8000	-7640	-7640	7640	default	0
+ENDOR	collection_glowing_rock_02	circle	-1236	-2960	25		city	0
+ENDOR	collection_lighting_07	circle	-208	3511	33		city	0
+ENDOR	eastedge_endor_nobuild	rectangle	7640	-7640	8000	7640	default	0
+ENDOR	endor_coa2_imperial_base	circle	-1953	1046	50		city	0
+ENDOR	endor_coa2_rebel_base	circle	-48	86	50		city	0
+ENDOR	endor_death_watch_bunker	circle	-4645	4341	200		city	0
+ENDOR	endor_dulok_korga_cave	circle	2269	3530	198		pathfind	0
+ENDOR	endor_force_shrine_01	circle	-3871	-4468	199		city	0
+ENDOR	endor_force_shrine_02	circle	5117	1924	199		city	0
+ENDOR	endor_force_shrine_03	circle	670	5548	199		city	0
+ENDOR	endor_force_shrine_04	circle	-5627	4814	199		city	0
+ENDOR	endor_force_shrine_05	circle	-5056	-1703	199		city	0
+ENDOR	endor_ig88_security	circle	2603	6658	230		city	0
+ENDOR	endor_jinda_cave	circle	-1712	0	198		pathfind	0
+ENDOR	endor_marauder_base	circle	-4677	-2271	229		city	0
+ENDOR	endor_marauder_base_nobuild_1	circle	-4677	-2271	329		default	0
+ENDOR	endor_marauder_orphans_cave	circle	-6902	700	198		pathfind	0
+ENDOR	endor_neutral_outpost_1	circle	3222	-3474	15		city	0
+ENDOR	endor_neutral_outpost_2	circle	3171	-3505	5		city	0
+ENDOR	endor_neutral_outpost_3	circle	3201	-3509	5		city	0
+ENDOR	endor_neutral_outpost_4	circle	3271	-3502	7		city	0
+ENDOR	endor_neutral_outpost_5	circle	3256	-3484	10		city	0
+ENDOR	endor_neutral_outpost_6	circle	3273	-3439	5		city	0
+ENDOR	endor_neutral_outpost_7	circle	3186	-3460	10		city	0
+ENDOR	endor_neutral_outpost_8	circle	3189	-3483	7		city	0
+ENDOR	endor_neutral_outpost_9	circle	3177	-3512	2		city	0
+ENDOR	endor_neutral_outpost_nobuild_1	circle	3222	-3467	200		default	0
+ENDOR	endor_pvp_battlefield3_no_build	rectangle	-7575	6575	-6575	7575	default	0
+ENDOR	endor_pvp_battlefield4_no_build	rectangle	-7000	-7500	-6000	-6500	default	0
+ENDOR	mun_armor_quest	circle	6398	-251	159		city	0
+ENDOR	northedge_endor_nobuild	rectangle	-8000	7640	8000	8000	default	0
+ENDOR	old_battlefield_nobuild_end1	circle	-469	3651	256		default	0
+ENDOR	old_battlefield_nobuild_end2	circle	-2790	-4457	256		default	0
+ENDOR	pvp_battlefield_-6500.0_-7000.0	rectangle	-6800	-7300	-6200	-6700	city	0
+ENDOR	pvp_battlefield_-7075.0_7075.0	rectangle	-7225	6925	-6975	7225	city	0
+ENDOR	pvp_pushback_-6500.0_-7000.0	rectangle	-7000	-7500	-6000	-6500	city	0
+ENDOR	pvp_pushback_-7075.0_7075.0	rectangle	-7575	6575	-6575	7575	city	0
+ENDOR	southedge_endor_nobuild	rectangle	-8000	-8000	8000	-7640	default	0
+ENDOR	westedge_endor_nobuild	rectangle	-8000	-7640	-7640	7640	default	0
+LOK	01_Stone_debris_nobuild	circle	-6000	6000	512		default	0
+LOK	02_Metal_Debris_nobuild	circle	-6071	5315	150		default	0
+LOK	03_Stone_block_nobuild	circle	-6436	4858	100		default	0
+LOK	04_marker_nobuild	circle	-6907	4506	200		default	0
+LOK	05_Burning_Stones_nobuild	circle	-6292	4083	25		default	0
+LOK	06_Old_Outpost_nobuild	circle	-6209	3383	50		default	0
+LOK	07_Tent_Skulls_nobuild	circle	-5000	4500	40		default	0
+LOK	08_Burning_Rocks_nobuild	circle	-4239	2717	25		default	0
+LOK	09_Stone_Mast_nobuild	circle	-6356	1122	100		default	0
+LOK	10_graves_nobuild	circle	-3814	5319	100		default	0
+LOK	11_graveyard_nobuild	circle	-5692	267	25		default	0
+LOK	12_imperial_outpost_nobuild	circle	-4490	7408	50		default	0
+LOK	13_hutnstuff_nobuild	circle	-3465	920	25		default	0
+LOK	14_skeletons_nobuild	circle	-2721	4172	100		default	0
+LOK	15_broken_bridge_nobuild	circle	-2767	2470	25		default	0
+LOK	16_escape_pod_nobuild	circle	6057	5149	200		default	0
+LOK	17_water_feature_nobuild	circle	6409	5020	75		default	0
+LOK	18_huts_nobuild	circle	2948	3951	50		default	0
+LOK	19_moisture_farm_nobuild	circle	2381	2721	50		default	0
+LOK	20_moisture_farm_nobuild	circle	6203	913	50		default	0
+LOK	21_debris_nobuild	circle	3897	593	25		default	0
+LOK	22_docks_nobuild	circle	2227	1895	25		default	0
+LOK	23_tents_nobuild	circle	1996	4957	50		default	0
+LOK	24_debris_nobuild	circle	3509	5471	50		default	0
+LOK	25_Imp_camp_nobuild	circle	5036	4328	50		default	0
+LOK	26_green_fire_nobuild	circle	5066	410	50		default	0
+LOK	27_arches_nobuild	circle	5056	-5136	25		default	0
+LOK	28_stone_blocks_nobuild	circle	1816	-2243	125		default	0
+LOK	29_monument_nobuild	circle	284	-5593	25		default	0
+LOK	30_palms_bones_nobuild	circle	4960	-2096	25		default	0
+LOK	31_ruins_nobuild	circle	2722	-3287	100		default	0
+LOK	32_gurk_king_nobuild	circle	717	-3391	25		default	0
+LOK	33_vaporator_nobuild	circle	576	-2160	25		default	0
+LOK	34_stone_buildings_nobuild	circle	3261	-1447	38		default	0
+LOK	35_broken_wall_nobuild	circle	3329	-2416	50		default	0
+LOK	36_broken_wall_nobuild	circle	5073	-4113	125		default	0
+LOK	37_palms_arches_nobuild	circle	5531	-6005	38		default	0
+LOK	38_slum_house_nobuild	circle	1558	-6420	75		default	0
+LOK	39_frame_graves_nobuild	circle	219	-5975	100		default	0
+LOK	40_monument_nobuild	circle	6186	-5556	25		default	0
+LOK	41_atst_debris_nobuild	circle	6513	-2015	40		default	0
+LOK	42_broken_wall_nobuild	circle	2705	-5377	25		default	0
+LOK	43_pyramids_nobuild	circle	3648	-4112	25		default	0
+LOK	44_ruins_nobuild	circle	1473	-4467	38		default	0
+LOK	45_stone_block_nobuild	circle	1865	-3013	50		default	0
+LOK	46_ruins_nobuild	circle	1990	-957	25		default	0
+LOK	47_stone_frame_nobuild	circle	1993	-1293	50		default	0
+LOK	48_ancient_skeleton_nobuild	circle	4568	-1168	25		default	0
+LOK	49_building_nobuild	circle	5881	-1133	100		default	0
+LOK	50_ruins_nobuild	circle	-240	-479	25		default	0
+LOK	51_awning_debris_nobuild	circle	-3888	-4494	25		default	0
+LOK	52_power_station_nobuild	circle	-2889	-238	50		default	0
+LOK	53_stone_buildings_nobuild	circle	-4868	-1041	100		default	0
+LOK	54_abandoned_homes_nobuild	circle	6116	-3171	38		default	0
+LOK	55_ruins_nobuild	circle	-672	-2144	50		default	0
+LOK	56_evil_tree_nobuild	circle	-788	-4976	25		default	0
+LOK	57_arches_nobuild	circle	-3318	-5635	50		default	0
+LOK	58_broken_wall_nobuild	circle	-4432	-5743	100		default	0
+LOK	59_pillars_nobuild	circle	-5185	-4816	75		default	0
+LOK	60_gurk_hut_nobuild	circle	-3764	-3468	50		default	0
+LOK	collection_ice_cream_01	circle	4159	7591	50		city	0
+LOK	collection_rebel_marine_left_bicep	circle	-7491	-7095	46		city	0
+LOK	collection_scout_trooper_leggings	circle	4964	6998	26		city	0
+LOK	eastedge_lok_nobuild	rectangle	7640	-7640	8000	7640	default	0
+LOK	ig88_exterior	circle	-7597	3478	98		city	0
+LOK	lok_bloodrazor_pirate_ship	circle	3623	2172	167		pathfind	0
+LOK	lok_coa2_imperial_base	circle	-2570	-858	40		city	0
+LOK	lok_evil_droid_engineer_cave	circle	3321	-4910	241		pathfind	0
+LOK	lok_force_shrine_01	circle	-3641	-6031	199		city	0
+LOK	lok_force_shrine_02	circle	-5807	1977	199		city	0
+LOK	lok_force_shrine_03	circle	-2124	5959	199		city	0
+LOK	lok_force_shrine_04	circle	5455	3806	199		city	0
+LOK	lok_force_shrine_05	circle	4979	-5674	199		city	0
+LOK	lok_great_maze_nobuild_1	circle	3825	-540	100		default	0
+LOK	lok_imperial_outpost_nobuild_1	circle	-1920	-3084	402		default	0
+LOK	lok_kimogila_town_surface_dungeon	circle	-81	2709	100		pathfind	0
+LOK	lok_landmark_near_ottos_base	circle	-2090	-2642	119		default	0
+LOK	lok_new_bunker	circle	902	-4193	100		pathfind	0
+LOK	lok_new_cave_01	circle	-3010	-672	100		pathfind	0
+LOK	lok_new_cave_02	circle	-6467	3885	100		pathfind	0
+LOK	lok_nyms_stronghold_1	circle	285	5117	5		default	0
+LOK	lok_nyms_stronghold_2	circle	450	5141	5		default	0
+LOK	lok_nyms_stronghold_3	circle	546	5081	5		default	0
+LOK	lok_nyms_stronghold_4	circle	523	4967	5		default	0
+LOK	lok_nyms_stronghold_nobuild_1	circle	436	5120	1000		default	0
+LOK	lok_rebel_commanders_base	circle	-4784	3552	300		city	0
+LOK	lok_sdungeon_canyon_corsairs	circle	-3829	-3885	167		pathfind	0
+LOK	lok_volcano_nobuild	circle	2928	-4632	666		default	0
+LOK	northedge_lok_nobuild	rectangle	-8000	7640	8000	8000	default	0
+LOK	southedge_lok_nobuild	rectangle	-8000	-8000	7999	-7640	default	0
+LOK	westedge_lok_nobuild	rectangle	-8000	-7641	-7641	7640	default	0
+MUSTAFAR	bandit_camp_no_build	circle	-6011	42	185		fictional	1
+MUSTAFAR	eastern_no_spawn	rectangle	1140	-1090	8000	8000	fictional	0
+MUSTAFAR	jedi_enclave_one	circle	-4331	3196	300		fictional	1
+MUSTAFAR	jedi_enclave_three	rectangle	0	3600	525	4850	default	0
+MUSTAFAR	jedi_enclave_two	circle	-5320	6150	300		fictional	1
+MUSTAFAR	large_volcano_no_build	circle	-1070	1122	630		fictional	1
+MUSTAFAR	mustafar_droid_army	rectangle	4560	5952	5072	6464	pathfind	0
+MUSTAFAR	mustafar_planetary	rectangle	-8000	-8000	8000	8000	fictional	0
+MUSTAFAR	new_mining_facility	circle	-2670	1730	272		fictional	1
+MUSTAFAR	old_republic_no_build	circle	-771	6082	30		fictional	1
+MUSTAFAR	ruins	circle	-2660	6050	300		fictional	1
+MUSTAFAR	stiking_miner_camp	circle	-5216	4616	259		fictional	1
+NABOO	collection_burning_stone_08	circle	5867	3055	24		city	0
+NABOO	collection_glowing_stone_09	circle	6107	70	38		city	0
+NABOO	collection_rebel_marine_armor_helmet	circle	-6077	5945	16		city	0
+NABOO	collection_shock_trooper_boots	circle	-6591	5982	36		city	0
+NABOO	deeja_peak_nobuild_1	circle	5048	-1528	1200		default	0
+NABOO	dungeon_bunker_01	circle	-4477	-1813	379		default	0
+NABOO	dungeon_bunker_02	circle	-4906	-6878	259		default	0
+NABOO	eastedge_naboo_nobuild	rectangle	7640	-7640	8000	7640	default	0
+NABOO	gcw_naboo_imperial_start	rectangle	1446	-1622	1574	-1494	city	0
+NABOO	gcw_naboo_main_base	rectangle	795	-1650	1243	-1393	city	0
+NABOO	gcw_naboo_rebel_start	rectangle	466	-1518	594	-1390	city	0
+NABOO	gungan_sacred_place_nobuild_1	circle	-1999	-5418	500		default	0
+NABOO	jonni_skaak_island_nobuild	circle	6686	7180	205		default	0
+NABOO	kaadara_nobuild_1	circle	5168	6704	640		default	0
+NABOO	keren_nobuild_1	rectangle	-200	1756	3000	3700	default	0
+NABOO	moenia_nobuild_1	circle	4800	-4784	700		default	0
+NABOO	naboo_acklay_peko	circle	-4452	-3422	100		city	0
+NABOO	naboo_acklay_tusk_cats	circle	-3508	-1918	100		city	0
+NABOO	naboo_force_shrine_01	circle	7182	-235	199		city	0
+NABOO	naboo_force_shrine_02	circle	-6859	-1938	199		city	0
+NABOO	naboo_force_shrine_03	circle	2378	-474	199		city	0
+NABOO	naboo_force_shrine_04	circle	-2583	-6185	199		city	0
+NABOO	naboo_peko_albatros_1	circle	-1671	-2611	140		city	0
+NABOO	naboo_peko_albatros_2	circle	-5912	695	124		city	0
+NABOO	naboo_sdungeon_cave_01	circle	5837	-4669	200		city	0
+NABOO	naboo_sdungeon_cave_02	circle	-6496	-3296	200		city	0
+NABOO	naboo_sdungeon_cave_03	circle	5708	-1538	200		city	0
+NABOO	northedge_naboo_nobuild	rectangle	-7998	7640	8000	8000	default	0
+NABOO	old_battlefield_nobuild_nab1	circle	-4113	-533	256		default	0
+NABOO	old_battlfield_nobuild_nab2	circle	-3762	-5377	192		default	0
+NABOO	old_battlfield_nobuild_nab3	circle	-5044	6662	192		default	0
+NABOO	sdungeon_gungan_stronghold	circle	-264	2836	200		city	0
+NABOO	sdungeon_mauler_stronghold_cave	circle	2919	1107	200		city	0
+NABOO	southedge_naboo_nobuild	rectangle	-7620	-8000	8000	-7640	default	0
+NABOO	statue_fountain_landmark_nobuild_1	circle	5559	5531	10		default	0
+NABOO	theed_nobuild_1	rectangle	-6600	3420	-3980	5316	default	0
+NABOO	westedge_naboo_nobuild	rectangle	-8000	-8000	-7621	7640	default	0
+RORI	blacksun_bunker_rori	circle	4846	-1084	250		default	0
+RORI	col_family_story_gravesite_01	circle	726	-3246	25		city	0
+RORI	collection_comlink_08	circle	7058	-5284	50		city	0
+RORI	collection_droid_part_07	circle	771	-2089	15		city	0
+RORI	collection_glowing_stone_04	circle	-6958	-3130	38		city	0
+RORI	collection_potted_flower_16	circle	-1707	6144	10		city	0
+RORI	collection_rebel_marine_leggings	circle	-5514	2098	15		city	0
+RORI	eastedge_rori_nobuild	rectangle	7640	-7640	8000	7640	default	0
+RORI	merc_crash_rori	circle	0	2000	250		default	0
+RORI	narmle_nobuild_1	circle	-5200	-2288	800		default	0
+RORI	northedge_rori_nobuild	rectangle	-8000	7640	8000	8000	default	0
+RORI	old_battlefield_nobuild_ror1	circle	-2337	6427	256		default	0
+RORI	old_battlefield_nobuild_ror2	circle	2879	-1277	256		default	0
+RORI	old_battlfield_nobuild_ror3	circle	-3372	-6972	192		default	0
+RORI	rebel_marine_right_bicep	circle	5218	1023	15		city	0
+RORI	restuss_nobuild_1	circle	5318	5680	800		default	0
+RORI	rori_bark_mite_cave	circle	3554	5438	60		pathfind	0
+RORI	rori_force_shrine_01	circle	307	-979	199		city	0
+RORI	rori_force_shrine_02	circle	-6376	6404	199		city	0
+RORI	rori_force_shrine_03	circle	6854	-1222	199		city	0
+RORI	rori_force_shrine_04	circle	-4497	-7535	199		city	0
+RORI	rori_force_shrine_05	circle	-926	6040	199		city	0
+RORI	rori_garyn_thieves_camp	circle	-6023	-1821	80		pathfind	0
+RORI	rori_gungan_camp	circle	-2066	3305	109		pathfind	0
+RORI	rori_imperial_hyperdrive_facility	circle	-1132	4533	198		city	0
+RORI	rori_rebel_encampment	circle	-5356	5043	109		pathfind	0
+RORI	rori_sdungeon_cave_01	circle	5445	5029	128		city	0
+RORI	rori_sdungeon_cave_02	circle	860	-4888	128		city	0
+RORI	rori_sdungeon_cave_03	circle	7252	108	128		city	0
+RORI	sdungeon_imperial_encampment	circle	-5574	-5674	100		city	0
+RORI	southedge_rori_nobuild	rectangle	-7641	-8000	8000	-7640	default	0
+RORI	storytellerblocked_restuss_01	circle	5318	5680	1600		default	0
+RORI	westedge_rori_nobuild	rectangle	-8000	-8000	-7641	7640	default	0
+TALUS	binayre_camp_talus	circle	-1622	618	100		default	0
+TALUS	coa_aclo_office_nospawn	circle	1280	-3127	100		city	0
+TALUS	coa_nightstrikesoldierhegemony_base_nospawn	circle	-4623	-3233	120		city	0
+TALUS	collection_burning_stone_01	circle	4313	2564	16		city	0
+TALUS	collection_comlink_04	circle	-5810	-6398	25		city	0
+TALUS	collection_datapad_06	circle	-6681	7267	25		city	0
+TALUS	collection_droid_part_10	circle	4847	-4725	7		city	0
+TALUS	collection_flower_18	circle	-3164	6824	25		city	0
+TALUS	collection_glowing_rock_10	circle	4784	-6244	247		city	0
+TALUS	collection_rebel_marine_left_bracer	circle	-3361	-3814	24		city	0
+TALUS	collection_steaming_stone_10	circle	7535	891	15		city	0
+TALUS	dearic_nobuild_1	circle	425	-3000	1000		default	0
+TALUS	eastedge_talus_nobuild	rectangle	7640	-7640	8000	7640	default	0
+TALUS	gcw_base_01_talus_nobuild	circle	-5186	280	200		default	0
+TALUS	gcw_talus_imperial_start	rectangle	-4865	-2757	-4737	-2629	city	0
+TALUS	gcw_talus_rebel_start	circle	-5114	-3494	64		city	0
+TALUS	nashal_nobuild_1	circle	4361	5251	800		default	0
+TALUS	northedge_talus_nobuild	rectangle	-8000	7640	8000	7999	default	0
+TALUS	old_battlefield_nobuild_tal1	circle	-3420	-3196	192		default	0
+TALUS	old_battlefield_nobuild_tal2	circle	-5355	2784	256		default	0
+TALUS	old_battlefield_nobuild_tal3	circle	-411	4639	256		default	0
+TALUS	sdungeon_creature_village	circle	4260	946	500		city	0
+TALUS	southedge_talus_nobuild	rectangle	-8000	-8000	8000	-7640	default	0
+TALUS	talus_corsec_vs_criminals_battle	circle	3033	6088	128		pathfind	0
+TALUS	talus_factional_bunker	circle	-4938	-3107	150		city	0
+TALUS	talus_factional_bunker2	circle	4987	-6022	150		pathfind	0
+TALUS	talus_force_shrine_01	circle	-5786	4478	199		city	0
+TALUS	talus_force_shrine_02	circle	-5494	-3240	199		city	0
+TALUS	talus_force_shrine_03	circle	5760	-5208	199		city	0
+TALUS	talus_force_shrine_04	circle	318	5843	199		city	0
+TALUS	talus_giant_fynock_cave	circle	1591	-868	89		pathfind	0
+TALUS	talus_rebels_vs_imperials_atat_bomber_battle	circle	-2400	3708	256		pathfind	0
+TALUS	talus_sdungeon_cave_01	circle	-4807	-4751	128		city	0
+TALUS	talus_sdungeon_cave_02	circle	5929	4656	128		city	0
+TALUS	talus_sdungeon_cave_03	circle	-4352	-1431	128		city	0
+TALUS	talus_sdungeon_cave_04	circle	5584	-4080	128		city	0
+TALUS	westedge_talus_nobuild	rectangle	-7998	-7641	-7641	7640	default	0
+TATOOINE	alkhara_camp_02_spawn_block	circle	-5455	-6122	100		city	0
+TATOOINE	alkhara_camp_spawn_block	circle	-992	-4275	75		city	0
+TATOOINE	anchorhead_nobuild_1	circle	102	-5360	400		default	0
+TATOOINE	anchorhead_tosche_station_1	circle	-187	-5329	200		city	0
+TATOOINE	bestine_nobuild_1	circle	-1218	-3688	700		default	0
+TATOOINE	col_family_story_gravesite_05	circle	-3550	-1137	25		city	0
+TATOOINE	collection_burning_stone_07	circle	7033	2509	38		city	0
+TATOOINE	collection_ice_cream_tatooine_01	circle	-7666	-7381	50		city	0
+TATOOINE	collection_thug_camp_01	circle	3070	-5099	28		city	0
+TATOOINE	collection_thug_camp_02	circle	3711	-5195	28		city	0
+TATOOINE	collection_thug_camp_03	circle	3943	-4314	28		city	0
+TATOOINE	collection_thug_camp_04	circle	3268	-4289	28		city	0
+TATOOINE	eastedge_tatooine_nobuild	rectangle	7640	-7640	8000	7640	default	0
+TATOOINE	feeder_tusken_cave	circle	-6979	7081	175		city	0
+TATOOINE	hero_of_tat_pirate_base_spawn_block	circle	5672	-5737	100		city	0
+TATOOINE	mos_eisley_nobuild_1	circle	3460	-4768	900		default	0
+TATOOINE	mos_entha_nobuild_1	circle	1488	3256	900		default	0
+TATOOINE	mos_espa_nobuild_1	circle	-2712	2464	1100		default	0
+TATOOINE	mos_teike_nobuild_1	circle	3832	2360	500		default	0
+TATOOINE	northedge_tatooine_nobuild	rectangle	-7980	7640	8000	8000	default	0
+TATOOINE	old_battlefield_nobuild_tat1	circle	2488	4388	192		default	0
+TATOOINE	old_battlefield_nobuild_tat2	circle	4950	4650	256		default	0
+TATOOINE	romo_vax_hideout_spawn_block	circle	-5055	-6962	120		city	0
+TATOOINE	sand_splitter_cave_spawn_block	circle	-6740	-5647	100		city	0
+TATOOINE	sdungeon_tusken_village	circle	-5322	-4444	140		city	0
+TATOOINE	sdungeon_tusken_village_quest_giver_refugee_town	circle	-5473	-3881	128		city	0
+TATOOINE	southedge_tatooine_nobuild	rectangle	-8000	-8000	8000	-7640	default	0
+TATOOINE	tatooine_bib_newbie_1	circle	-1430	-3773	5		default	0
+TATOOINE	tatooine_darklighter_estate	circle	-673	-6723	193		city	0
+TATOOINE	tatooine_darklighter_estate_nobuild	circle	-673	-6723	293		city	0
+TATOOINE	tatooine_force_shrine_01	circle	-6506	-3668	199		city	0
+TATOOINE	tatooine_force_shrine_02	circle	5264	113	199		city	0
+TATOOINE	tatooine_force_shrine_03	circle	-3623	5281	199		city	0
+TATOOINE	tatooine_force_shrine_04	circle	5633	6015	199		city	0
+TATOOINE	tatooine_force_shrine_05	circle	5958	-5684	199		city	0
+TATOOINE	tatooine_rebel_encampment	circle	-784	-4451	198		city	0
+TATOOINE	tatooine_sdungeon_cave_01	circle	52	-91	128		city	0
+TATOOINE	tatooine_sdungeon_cave_02	circle	-1479	-185	128		city	0
+TATOOINE	tatooine_sdungeon_cave_03	circle	5145	618	128		city	0
+TATOOINE	tatooine_sdungeon_cave_04	circle	-3978	6249	200		city	0
+TATOOINE	tatooine_sdungeon_cave_05	circle	6557	-1302	128		city	0
+TATOOINE	valarian_bookie_camp_spawn_block	circle	-6258	-5929	100		city	0
+TATOOINE	valarian_command_bunker_spawn_block	circle	-3952	-4017	150		city	0
+TATOOINE	valarian_hackers_bunker_spawn_block	circle	-5371	-6899	100		city	0
+TATOOINE	valarian_pod_racer_bunker_spawn_block	circle	-713	-6282	150		city	0
+TATOOINE	wayfar_nobuild_1	circle	-5174	-6582	500		default	0
+TATOOINE	wayfar_spies_camp_spawn_block	circle	-5491	-6633	100		city	0
+TATOOINE	westedge_tatooine_nobuild	rectangle	-7980	-7641	-7640	7640	default	0
+YAVIN4	camp_collection_nobuild	circle	4359	980	33		city	0
+YAVIN4	col_family_story_gravesite_02	circle	-2465	2176	25		city	0
+YAVIN4	collection_enemy_camp	circle	-7090	4405	22		city	0
+YAVIN4	collection_force_stone	circle	6074	5435	12		city	0
+YAVIN4	collection_imperial_camp	circle	-3180	3340	30		city	0
+YAVIN4	collection_jedi_gazebo_camp	circle	945	-1460	17		city	0
+YAVIN4	collection_rebel_camp_nobuild	circle	-6940	-110	16		city	0
+YAVIN4	collection_skreeg_ruins	circle	-4210	-3895	11		city	0
+YAVIN4	collection_smuggler_camp	circle	-5511	-1261	28		city	0
+YAVIN4	eastedge_yavin4_nobuild	rectangle	7640	-7640	7999	7640	default	0
+YAVIN4	geonosian_collection_ruins	circle	-7460	380	18		city	0
+YAVIN4	north_west_coast_01_nobuild	rectangle	-7328	7070	-6631	7660	city	0
+YAVIN4	north_west_coast_02_nobuild	rectangle	-7998	5006	-7290	6415	city	0
+YAVIN4	north_west_island_nobuild	rectangle	-7999	6628	-7311	7660	city	0
+YAVIN4	northedge_yavin4_nobuild	rectangle	-8000	7640	8000	8000	default	0
+YAVIN4	northern_coast_nobuild_01	circle	-1811	6973	421		city	0
+YAVIN4	northern_coast_nobuild_02	circle	-2113	7429	268		city	0
+YAVIN4	old_battlefield_nobuild_yav1	circle	3791	-2416	256		default	0
+YAVIN4	old_battlefield_nobuild_yav2	circle	-4230	3755	256		default	0
+YAVIN4	pvp_battlefield_-2500.0_-7000.0	rectangle	-2800	-7300	-2200	-6700	city	0
+YAVIN4	pvp_battlefield_1015.0_425.0	rectangle	715	125	1315	725	city	0
+YAVIN4	pvp_pushback_-2500.0_-7000.0	rectangle	-3000	-7500	-2000	-6500	city	0
+YAVIN4	pvp_pushback_1015.0_425.0	rectangle	515	-75	1515	925	city	0
+YAVIN4	southedge_yavin4_nobuild	rectangle	-8000	-8000	8000	-7640	default	0
+YAVIN4	westedge_yavin4_nobuild	rectangle	-8000	-7640	-7640	7640	default	0
+YAVIN4	yavin4_blueleaf_temple	circle	-830	-2056	250		city	0
+YAVIN4	yavin4_coa2_imperial_base	circle	1596	-3533	60		city	0
+YAVIN4	yavin4_coa2_rebel_base	circle	-4238	2277	60		city	0
+YAVIN4	yavin4_exar_kun_temple	circle	5056	5537	400		city	0
+YAVIN4	yavin4_force_shrine_01	circle	-4585	-3761	199		city	0
+YAVIN4	yavin4_force_shrine_02	circle	2390	-4935	199		city	0
+YAVIN4	yavin4_force_shrine_03	circle	6455	6420	199		city	0
+YAVIN4	yavin4_force_shrine_04	circle	-3362	6915	199		city	0
+YAVIN4	yavin4_geo_bunker_dynamic	circle	-6506	-441	676		fictional	0
+YAVIN4	yavin4_geo_bunker_nobuild	circle	-6488	-417	250		city	0
+YAVIN4	yavin4_imperial_base	circle	4034	-6212	128		city	0
+YAVIN4	yavin4_jedi_enclave_dark	circle	5070	310	577		pathfind	0
+YAVIN4	yavin4_jedi_enclave_light	circle	-5514	4912	577		pathfind	0
+YAVIN4	yavin4_labor_outpost_1	circle	-6954	-5735	2		default	0
+YAVIN4	yavin4_labor_outpost_2	circle	-6979	-5676	2		default	0
+YAVIN4	yavin4_labor_outpost_3	circle	-6921	-5653	2		default	0
+YAVIN4	yavin4_labor_outpost_4	circle	-6912	-5732	2		default	0
+YAVIN4	yavin4_labor_outpost_5	circle	-6948	-5754	2		default	0
+YAVIN4	yavin4_labor_outpost_nobuild_1	circle	-6925	-5707	200		default	0
+YAVIN4	yavin4_masassi_temple	circle	-3038	-2960	500		city	0
+YAVIN4	yavin4_mining_outpost_1	circle	-364	4839	2		default	0
+YAVIN4	yavin4_mining_outpost_10	circle	-256	4892	5		default	0
+YAVIN4	yavin4_mining_outpost_2	circle	-366	4867	2		default	0
+YAVIN4	yavin4_mining_outpost_3	circle	-348	4882	2		default	0
+YAVIN4	yavin4_mining_outpost_4	circle	-325	4889	5		default	0
+YAVIN4	yavin4_mining_outpost_5	circle	-329	4823	5		default	0
+YAVIN4	yavin4_mining_outpost_6	circle	-353	4821	2		default	0
+YAVIN4	yavin4_mining_outpost_7	circle	-312	4825	5		default	0
+YAVIN4	yavin4_mining_outpost_8	circle	-274	4828	2		default	0
+YAVIN4	yavin4_mining_outpost_9	circle	-258	4838	2		default	0
+YAVIN4	yavin4_mining_outpost_nobuild_1	circle	-307	4861	200		default	0
+YAVIN4	yavin4_pvp_battlefield1_no_build	rectangle	-3000	-7500	-2000	-6500	city	0
+YAVIN4	yavin4_pvp_battlefield2_no_build	rectangle	515	-75	1515	925	city	0
+YAVIN4	yavin4_woolamander_temple	circle	512	-655	400		city	0
