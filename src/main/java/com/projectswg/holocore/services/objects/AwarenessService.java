@@ -65,7 +65,6 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
 import java.util.Collections;
-import java.util.Set;
 
 public class AwarenessService extends Service {
 	

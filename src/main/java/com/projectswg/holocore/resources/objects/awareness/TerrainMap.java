@@ -65,6 +65,7 @@ public class TerrainMap {
 	
 	public void update(SWGObject obj) {
 		obj.setAware(AwarenessType.OBJECT, getAware(obj));
+		obj.onObjectMoved();
 	}
 	
 	public void move(SWGObject obj) {
