@@ -52,7 +52,6 @@ public class TestZoneRequester {
 		Assert.assertTrue(player.isSentError());
 	}
 	
-	
 	@Test
 	public void testInvalidCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();

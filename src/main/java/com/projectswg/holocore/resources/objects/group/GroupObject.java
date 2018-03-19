@@ -33,6 +33,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.location.Terrain;
@@ -129,14 +130,6 @@ public class GroupObject extends SWGObject {
 	
 	public boolean isFull() {
 		return size() >= 8;
-	}
-	
-	public void updateMember(CreatureObject object) {
-//		if (memberMap.containsKey(object.getObjectId()))
-//			addAware(AwarenessType.CUSTOM, object);
-//		else
-//			removeAware(AwarenessType.CUSTOM, object);
-		// TODO: Group awareness
 	}
 	
 	public long getLeaderId() {
@@ -259,9 +252,8 @@ public class GroupObject extends SWGObject {
 			Assert.test(creature.getGroupId() == 0);
 			GroupMember member = new GroupMember(creature);
 			Assert.isNull(memberMap.put(creature.getObjectId(), member));
-			// TODO: Group awareness
-//			addAware(AwarenessType.CUSTOM, creature);
 			groupMembers.add(member);
+			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 			creature.setGroupId(getObjectId());
 		}
 		groupMembers.sendDeltaMessage(this);
@@ -274,8 +266,7 @@ public class GroupObject extends SWGObject {
 			Assert.notNull(member);
 			creature.setGroupId(0);
 			groupMembers.remove(member);
-			// TODO: Group awareness
-//			removeAware(AwarenessType.CUSTOM, creature);
+			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 		}
 		groupMembers.sendDeltaMessage(this);
 	}
@@ -356,10 +347,7 @@ public class GroupObject extends SWGObject {
 		
 		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof GroupMember))
-				return false;
-			
-			return creature.equals(((GroupMember) o).getCreature());
+			return o instanceof GroupMember && creature.equals(((GroupMember) o).getCreature());
 		}
 		
 		@Override

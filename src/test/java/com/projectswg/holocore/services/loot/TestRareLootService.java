@@ -28,11 +28,11 @@
 package com.projectswg.holocore.services.loot;
 
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
-import com.projectswg.holocore.services.loot.RareLootService;
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestRareLootService {
+public class TestRareLootService extends TestRunnerNoIntents {
 	
 	private final RareLootService rls;
 	

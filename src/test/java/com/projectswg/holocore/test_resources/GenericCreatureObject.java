@@ -106,7 +106,6 @@ public class GenericCreatureObject extends CreatureObject {
 		obj.setArrangement(List.of(List.of(slot)));
 		obj.setContainerPermissions(ContainerPermissionsType.INVENTORY);
 		obj.moveToContainer(this);
-		ObjectCreatedIntent.broadcast(obj);
 	}
 	
 }

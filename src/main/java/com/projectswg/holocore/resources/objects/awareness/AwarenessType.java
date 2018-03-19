@@ -33,7 +33,8 @@ import java.util.Collections;
 
 public enum AwarenessType {
 	OBJECT,
-	CUSTOM;
+	GROUP,
+	TRADE;
 	
 	private static final Collection<AwarenessType> VALUES = Collections.unmodifiableCollection(Arrays.asList(values()));
 	

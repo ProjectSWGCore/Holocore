@@ -26,17 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.awareness;
 
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.player.Player;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 public class ObjectAware {
 	
@@ -52,35 +52,6 @@ public class ObjectAware {
 		this.chunk = new AtomicReference<>(null);
 		for (AwarenessType type : AwarenessType.getValues()) {
 			awareness.put(type, createSet());
-		}
-	}
-	
-	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
-		return this.chunk.getAndSet(chunk);
-	}
-	
-	@CheckForNull
-	protected TerrainMapChunk getTerrainMapChunk() {
-		return chunk.get();
-	}
-	
-	public void addAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.add(obj)) {
-			Map<SWGObject, Integer> awareCounts = getAwareCounts();
-			Integer count = awareCounts.get(obj);
-			if (count != null && count == 1) {
-				object.onObjectEnterAware(obj);
-			}
-		}
-	}
-	
-	public void removeAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.remove(obj)) {
-			if (getAwareStream().noneMatch(test -> test.equals(obj))) {
-				object.onObjectLeaveAware(obj);
-			}
 		}
 	}
 	
@@ -102,6 +73,8 @@ public class ObjectAware {
 				object.onObjectEnterAware(added);
 			}
 		}
+		
+		attemptFlush();
 	}
 	
 	@Nonnull
@@ -117,6 +90,43 @@ public class ObjectAware {
 	@Nonnull
 	public Set<SWGObject> getAware(@Nonnull AwarenessType type) {
 		return awareness.getOrDefault(type, EMPTY_SET);
+	}
+	
+	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
+		return this.chunk.getAndSet(chunk);
+	}
+	
+	@CheckForNull
+	protected TerrainMapChunk getTerrainMapChunk() {
+		return chunk.get();
+	}
+	
+	private void addAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
+		Set<SWGObject> aware = awareness.get(type);
+		if (aware.add(obj)) {
+			Map<SWGObject, Integer> awareCounts = getAwareCounts();
+			Integer count = awareCounts.get(obj);
+			if (count != null && count == 1) {
+				object.onObjectEnterAware(obj);
+				attemptFlush();
+			}
+		}
+		
+	}
+	
+	private void removeAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
+		Set<SWGObject> aware = awareness.get(type);
+		if (aware.remove(obj)) {
+			if (getAwareStream().noneMatch(test -> test.equals(obj))) {
+				object.onObjectLeaveAware(obj);
+				attemptFlush();
+			}
+		}
+	}
+	
+	private void attemptFlush() {
+		if (object instanceof CreatureObject)
+			((CreatureObject) object).flushObjectsAware();
 	}
 	
 	private Stream<SWGObject> getAwareStream() {
