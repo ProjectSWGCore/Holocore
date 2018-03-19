@@ -92,7 +92,8 @@ public class CharacterCreationService extends Service {
 	public CharacterCreationService() {
 		lockedNames = new HashMap<>();
 		profTemplates = new ConcurrentHashMap<>();
-		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
+		
+		nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
 		insertion = new TerrainZoneInsertion();

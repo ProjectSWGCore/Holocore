@@ -32,6 +32,8 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.debug.Log;
 
+import com.projectswg.holocore.intents.CivilWarPointIntent;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.scripts.commands.admin.qatool.QaToolDetails;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.experience.ExperienceIntent;
@@ -101,6 +103,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 						grantXp(player, command[1], command[2]);
 					else
 						SystemMessageIntent.broadcastPersonal(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
+					break;
+				case "gcw":
+					grantGcw(player, command[1]);
 					break;
 				default:
 					displayMainWindow(player);
@@ -224,6 +229,19 @@ public class QaToolCmdCallback implements ICmdCallback {
 			SystemMessageIntent.broadcastPersonal(player, String.format("XP command: %s is not a number", xpGainedArg));
 			Log.e("XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
 		}
+	}
+	
+	private void grantGcw(Player player, String pointsArg) {
+		PlayerObject receiver = player.getCreatureObject().getPlayerObject();
+		
+		try {
+			int points = Integer.parseInt(pointsArg);
+			CivilWarPointIntent.broadcast(receiver, points);
+			Log.i("GCW command: %s gave themselves %d GCW points", player.getUsername(), points);
+		} catch (NumberFormatException e) {
+			SystemMessageIntent.broadcastPersonal(player, String.format("GCW command: %s is not a number", pointsArg));
+		}
+		
 	}
 	
 	/* Utility Methods */

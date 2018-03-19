@@ -25,26 +25,50 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package com.projectswg.holocore.services;
+package com.projectswg.holocore.services.loot;
 
-import com.projectswg.holocore.services.faction.TestCivilWarService;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
+import com.projectswg.holocore.services.loot.RareLootService;
+import org.junit.Assert;
+import org.junit.Test;
 
-import com.projectswg.holocore.services.crafting.TestCrafting;
-import com.projectswg.holocore.services.galaxy.TestGalaxy;
-import com.projectswg.holocore.services.loot.TestRareLootService;
-import com.projectswg.holocore.services.player.TestPlayer;
-
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestCivilWarService.class,
-	TestRareLootService.class,
-	TestCrafting.class,
-	TestPlayer.class,
-	TestGalaxy.class
-})
-public class TestServices {
-
+public class TestRareLootService {
+	
+	private final RareLootService rls;
+	
+	public TestRareLootService() {
+		rls = new RareLootService();
+	}
+	
+	@Test
+	public void testIsPlayerEligible() {
+		Assert.assertTrue(rls.isPlayerEligible(true, false));
+		Assert.assertFalse(rls.isPlayerEligible(false, true));
+		Assert.assertFalse(rls.isPlayerEligible(false, false));
+	}
+	
+	@Test
+	public void testIsLevelEligible() {
+		Assert.assertTrue(rls.isLevelEligible(90, 84));
+		Assert.assertFalse(rls.isLevelEligible(90, 83));
+	}
+	
+	@Test
+	public void testIsDrop() {
+		Assert.assertTrue(rls.isDrop(1));
+		Assert.assertFalse(rls.isDrop(2));
+	}
+	
+	@Test
+	public void testTemplateForDifficulty() {
+		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_1.iff", rls.templateForDifficulty(CreatureDifficulty.NORMAL));
+		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_2.iff", rls.templateForDifficulty(CreatureDifficulty.ELITE));
+		Assert.assertEquals("object/tangible/item/shared_rare_loot_chest_3.iff", rls.templateForDifficulty(CreatureDifficulty.BOSS));
+	}
+	
+	@Test
+	public void testChestIdForTemplate() {
+		Assert.assertEquals("rare_loot_chest_1", rls.chestIdForTemplate("object/tangible/item/shared_rare_loot_chest_1.iff"));
+	}
+	
 }

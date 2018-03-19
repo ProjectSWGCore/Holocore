@@ -26,11 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.zone;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,35 +42,29 @@ public class NameFilter {
 	private final List <String> profaneWords;
 	private final List <String> reservedWords;
 	private final List <String> fictionNames;
-	private final File profaneFile;
-	private final File reservedFile;
-	private final File fictionFile;
+	private final InputStream profaneStream;
+	private final InputStream reservedStream;
+	private final InputStream fictionStream;
 	
-	public NameFilter(String badWordsPath, String reservedPath, String fictionPath) {
-		this(new File(badWordsPath), new File(reservedPath), new File(fictionPath));
-	}
-	
-	public NameFilter(File badWordsFile, File reservedFile, File fictionFile) {
-		this.profaneFile = badWordsFile;
-		this.reservedFile = reservedFile;
-		this.fictionFile = fictionFile;
+	public NameFilter(InputStream profaneStream, InputStream reservedStream, InputStream fictionStream) {
+		this.profaneStream = profaneStream;
+		this.reservedStream = reservedStream;
+		this.fictionStream = fictionStream;
 		this.profaneWords = new ArrayList<>();
 		this.reservedWords = new ArrayList<>();
 		this.fictionNames = new ArrayList<>();
 	}
 	
 	public boolean load() {
-		boolean success = load(profaneWords, profaneFile);
-		success = load(reservedWords, reservedFile) && success;
-		success = load(fictionNames, fictionFile) && success;
+		boolean success = load(profaneWords, profaneStream);
+		success = load(reservedWords, reservedStream) && success;
+		success = load(fictionNames, fictionStream) && success;
 		return success;
 	}
 	
-	private boolean load(List <String> list, File file) {
-		if (!file.exists())
-			return false;
+	private boolean load(List <String> list, InputStream input) {
 		try {
-			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
 				String line;
 				list.clear();
 				while ((line = reader.readLine()) != null) {
