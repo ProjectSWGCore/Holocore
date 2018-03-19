@@ -103,11 +103,6 @@ public class CreatureObject extends TangibleObject {
 			awareness.flushAware(getOwner());
 	}
 	
-	public void resendObjectsAware() {
-		if (isPlayer())
-			awareness.resendAware(getOwner());
-	}
-	
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);

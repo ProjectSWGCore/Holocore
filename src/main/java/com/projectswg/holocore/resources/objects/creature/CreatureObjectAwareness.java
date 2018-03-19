@@ -75,7 +75,6 @@ public class CreatureObjectAwareness {
 		pendingRemove.clear();
 		
 		if (target != null) {
-			Log.d("Player update. C=%d  D=%d", create.size(), destroy.size());
 			for (SWGObject obj : destroy) {
 				destroyObject(obj, target);
 			}
@@ -88,13 +87,6 @@ public class CreatureObjectAwareness {
 			}
 			popStackUntil(target, createStack, null);
 		}
-	}
-	
-	public synchronized void resendAware(Player target) {
-		pendingAdd.addAll(aware);
-		aware.clear();
-		Log.d("Resending %d objects", pendingAdd.size());
-		flushAware(target);
 	}
 	
 	List<SWGObject> getCreateList() {
