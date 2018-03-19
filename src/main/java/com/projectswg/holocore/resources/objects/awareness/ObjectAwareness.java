@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 
 public class ObjectAwareness {
 	
@@ -52,7 +53,7 @@ public class ObjectAwareness {
 	 * @param obj the object created
 	 */
 	public void createObject(@Nonnull SWGObject obj) {
-		if (AwarenessUtilities.isInAwareness(obj)) {
+		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
 			TerrainMap map = getTerrainMap(obj);
 			map.add(obj);
 			map.update(obj);

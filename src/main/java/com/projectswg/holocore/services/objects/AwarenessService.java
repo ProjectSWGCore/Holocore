@@ -63,6 +63,7 @@ import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AwarenessService extends Service {
@@ -92,13 +93,10 @@ public class AwarenessService extends Service {
 		Player p = pei.getPlayer();
 		CreatureObject creature = p.getCreatureObject();
 		switch (pei.getEvent()) {
-			case PE_DISAPPEAR:
-				assert creature != null;
-				awareness.destroyObject(creature);
-				break;
 			case PE_DESTROYED:
 				assert creature != null;
 				creature.setOwner(null);
+				awareness.destroyObject(creature);
 				break;
 			default:
 				break;
@@ -166,9 +164,10 @@ public class AwarenessService extends Service {
 		}
 		
 		creature.systemMove(parent, loc);
-		creature.setAware(AwarenessType.OBJECT, List.of());
+		creature.resetObjectsAware();
 		startZone(creature, firstZone);
 		awareness.updateObject(creature);
+		creature.resyncObjectsAware();
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {

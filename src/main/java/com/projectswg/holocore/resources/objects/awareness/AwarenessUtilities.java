@@ -35,8 +35,6 @@ import javax.annotation.Nonnull;
 class AwarenessUtilities {
 	
 	public static boolean isInAwareness(@Nonnull SWGObject obj) {
-		if (obj.getParent() != null)
-			return false;
 		switch (obj.getBaselineType()) {
 			case WAYP:
 				return false;

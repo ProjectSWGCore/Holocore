@@ -80,7 +80,13 @@ public class TerrainMap {
 	@Nonnull
 	private Collection<SWGObject> getAware(SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
-		Collection<SWGObject> aware = superParent == null ? getNearbyAware(obj) : superParent.getAware(AwarenessType.OBJECT);
+		Set<SWGObject> aware;
+		if (!AwarenessUtilities.isInAwareness(obj))
+			aware = new HashSet<>();
+		else if (superParent == null)
+			aware = getNearbyAware(obj);
+		else
+			aware = superParent.getAware(AwarenessType.OBJECT);
 		recursiveAdd(aware, obj);
 		return aware;
 	}

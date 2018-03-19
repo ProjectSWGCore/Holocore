@@ -104,6 +104,20 @@ public class CreatureObject extends TangibleObject {
 			awareness.flushAware(getOwner());
 	}
 	
+	public void resetObjectsAware() {
+		if (isPlayer())
+			awareness.resetObjectsAware();
+	}
+	
+	public void resyncObjectsAware() {
+		if (isPlayer()) {
+			for (SWGObject obj : getAware()) {
+				awareness.addAware(obj);
+			}
+			awareness.flushAware(getOwner());
+		}
+	}
+	
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);

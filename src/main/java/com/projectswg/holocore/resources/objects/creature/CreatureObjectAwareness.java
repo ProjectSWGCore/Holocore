@@ -89,6 +89,12 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
+	public synchronized void resetObjectsAware() {
+		aware.clear();
+		pendingAdd.clear();
+		pendingRemove.clear();
+	}
+	
 	List<SWGObject> getCreateList() {
 		List<SWGObject> list = new ArrayList<>();
 		List<SWGObject> sortedDepth = new ArrayList<>(pendingAdd);
