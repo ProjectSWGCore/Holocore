@@ -28,14 +28,7 @@ package com.projectswg.holocore.resources.server_info;
 
 import com.projectswg.common.debug.Log;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileChannel.MapMode;
-import java.nio.file.StandardOpenOption;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
@@ -218,7 +211,8 @@ public class SdbLoader {
 		private final BasicStringBuilder lineBuffer;
 		private Function<String, Object> [] columnParsers;
 		private String [] columnValues;
-		private ByteBuffer input;
+		private BufferedInputStream input;
+		private FileInputStream inputFile;
 		
 		private SingleSdbResultSet(File file) {
 			this.file = file;
@@ -228,11 +222,12 @@ public class SdbLoader {
 			this.columnParsers = null;
 			this.columnValues = null;
 			this.input = null;
+			this.inputFile = null;
 		}
 		
 		@Override
-		public void close() {
-			
+		public void close() throws IOException {
+			input.close();
 		}
 		
 		@Override
@@ -311,17 +306,26 @@ public class SdbLoader {
 			lineBuffer.clear();
 			
 			try {
-				byte b;
-				while (!isValueSeparator(b = input.get())) {
-					lineBuffer.pushBack(b);
+				int b;
+				readLoop:
+				while (true) {
+					b = input.read();
+					switch (b) {
+						case -1:
+							throw new EOFException();
+						case '\n':
+							if (!endsNewline)
+								throw new EOFException();
+						case '\t':
+							break readLoop;
+						case '\r':
+							continue;
+						default:
+							lineBuffer.pushBack((char) b);
+							break;
+					}
 				}
-				
-				if (isLineSeparator(b)) {
-					readNewLine();
-					if (!endsNewline)
-						throw new EOFException();
-				}
-			} catch (BufferUnderflowException | IndexOutOfBoundsException e) {
+			} catch (IOException e) {
 				if (lineBuffer.isEmpty())
 					throw new EOFException();
 			}
@@ -332,26 +336,20 @@ public class SdbLoader {
 		private String fetchLine() {
 			lineBuffer.clear();
 			try {
-				byte b;
-				while (!isLineSeparator(b = input.get())) {
-					lineBuffer.pushBack(b);
+				int b = input.read();
+				while (b != '\n' && b != -1) {
+					if (b != '\r')
+						lineBuffer.pushBack((char) b);
+					b = input.read();
 				}
-				readNewLine();
-			} catch (BufferUnderflowException | IndexOutOfBoundsException e) {
+				if (b == -1 && lineBuffer.isEmpty())
+					return null;
+			} catch (IOException e) {
 				if (lineBuffer.isEmpty())
 					return null;
 			}
 			
 			return lineBuffer.toString();
-		}
-		
-		private void readNewLine() throws BufferUnderflowException, IndexOutOfBoundsException {
-			int position = input.position();
-			int limit = input.limit();
-			while (position < limit && isLineSeparator(input.get(position))) {
-				position++;
-			}
-			input.position(position);
 		}
 		
 		private static SingleSdbResultSet load(File file) throws IOException {
@@ -361,7 +359,8 @@ public class SdbLoader {
 		}
 		
 		private void load() throws IOException {
-			input = FileChannel.open(file.toPath(), StandardOpenOption.READ).map(MapMode.READ_ONLY, 0, file.length());
+			inputFile = new FileInputStream(file);
+			input = new BufferedInputStream(inputFile);
 			loadHeader(fetchLine(), fetchLine());
 		}
 		
@@ -404,14 +403,6 @@ public class SdbLoader {
 			return DataType.TEXT;
 		}
 		
-		private static boolean isValueSeparator(byte c) {
-			return c == '\r' || c == '\n' || c == '\t';
-		}
-		
-		private static boolean isLineSeparator(byte c) {
-			return c == '\r' || c == '\n';
-		}
-		
 	}
 	
 	private static class BasicStringBuilder {
@@ -432,10 +423,10 @@ public class SdbLoader {
 			this.length = 0;
 		}
 		
-		public void pushBack(byte b) {
+		public void pushBack(char b) {
 			if (length == data.length)
 				data = Arrays.copyOf(data, length*2);
-			data[length++] = (char) b;
+			data[length++] = b;
 		}
 		
 		@Override

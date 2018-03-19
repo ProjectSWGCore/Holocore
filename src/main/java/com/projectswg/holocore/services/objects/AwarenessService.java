@@ -29,7 +29,6 @@ package com.projectswg.holocore.services.objects;
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
@@ -43,25 +42,19 @@ import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
-
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.RequestZoneInIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
-import com.projectswg.holocore.intents.object.ContainerTransferIntent;
-import com.projectswg.holocore.intents.object.DestroyObjectIntent;
-import com.projectswg.holocore.intents.object.ForceAwarenessUpdateIntent;
-import com.projectswg.holocore.intents.object.MoveObjectIntent;
-import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.object.ObjectTeleportIntent;
+import com.projectswg.holocore.intents.object.*;
 import com.projectswg.holocore.intents.player.PlayerTransformedIntent;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.network.DisconnectReason;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.awareness.AwarenessHandler;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.awareness.DataTransformHandler;
-import com.projectswg.holocore.resources.objects.awareness.TerrainMap.TerrainMapCallback;
+import com.projectswg.holocore.resources.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
 import com.projectswg.holocore.resources.player.Player;
@@ -70,13 +63,17 @@ import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
-public class ObjectAwareness extends Service implements TerrainMapCallback {
+import java.util.List;
+
+public class AwarenessService extends Service {
 	
-	private final AwarenessHandler awarenessHandler;
+	private static final Location GONE_LOCATION = Location.builder().setTerrain(Terrain.GONE).setPosition(0, 0, 0).build();
+	
+	private final ObjectAwareness awareness;
 	private final DataTransformHandler dataTransformHandler;
 	
-	public ObjectAwareness() {
-		awarenessHandler = new AwarenessHandler(this);
+	public AwarenessService() {
+		this.awareness = new ObjectAwareness();
 		dataTransformHandler = new DataTransformHandler();
 		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
@@ -87,55 +84,20 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
 		registerForIntent(MoveObjectIntent.class, this::processMoveObjectIntent);
 		registerForIntent(ContainerTransferIntent.class, this::processContainerTransferIntent);
-		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getPlayer(), rzii.getCreature().getLocation(), rzii.getCreature().getParent()));
+		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getCreature().getLocation(), rzii.getCreature().getParent()));
 		registerForIntent(ForceAwarenessUpdateIntent.class, this::handleForceUpdate);
 	}
 	
-	@Override
-	public boolean stop() {
-		awarenessHandler.close();
-		return super.stop();
-	}
-	
-	@Override
-	public void onWithinRange(SWGObject obj, SWGObject inRange) {
-		assert obj != null && inRange != null;
-		assert obj.getParent() == null && inRange.getParent() == null;
-		assert obj.getTerrain() != null && inRange.getTerrain() != null;
-		obj.addObjectAware(inRange);
-	}
-	
-	@Override
-	public void onOutOfRange(SWGObject obj, SWGObject outRange) {
-		assert obj != null && outRange != null;
-		obj.removeObjectAware(outRange);
-	}
-	
-	@Override
-	public void onMoveSuccess(SWGObject obj) {
-		
-	}
-	
-	@Override
-	public void onMoveFailure(SWGObject obj) {
-		Assert.notNull(obj);
-		obj.clearObjectsAware();
-	}
-
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		CreatureObject creature = p.getCreatureObject();
 		switch (pei.getEvent()) {
-			case PE_ZONE_IN_CLIENT:
-				Assert.notNull(creature);
-				moveObject(creature, creature.getParent(), creature.getLocation());
-				break;
 			case PE_DISAPPEAR:
-				Assert.notNull(creature);
-				disappearObject(creature);
+				assert creature != null;
+				awareness.destroyObject(creature);
 				break;
 			case PE_DESTROYED:
-				Assert.notNull(creature);
+				assert creature != null;
 				creature.setOwner(null);
 				break;
 			default:
@@ -144,25 +106,25 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject obj = oci.getObject();
-		Assert.notNull(obj);
-		Assert.notNull(obj.getTerrain());
-		moveObject(obj, obj.getParent(), obj.getLocation());
+		awareness.createObject(oci.getObject());
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		obj.moveToContainer(null);
-		disappearObject(obj);
-		obj.setPosition(Terrain.GONE, 0, 0, 0);
+		SWGObject parent = obj.getParent();
+		obj.setLocation(GONE_LOCATION);
+		if (parent != null)
+			parent.removeObject(obj);
+		awareness.destroyObject(doi.getObject());
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject obj = oti.getObject();
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
-			handleZoneIn((CreatureObject) obj, obj.getOwner(), oti.getNewLocation(), oti.getParent());
+			handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
 		} else {
-			moveObject(obj, oti.getParent(), oti.getNewLocation());
+			obj.systemMove(oti.getParent(), oti.getNewLocation());
+			awareness.updateObject(obj);
 		}
 	}
 	
@@ -182,65 +144,37 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processContainerTransferIntent(ContainerTransferIntent cti) {
-		SWGObject obj = cti.getObject();
-		Assert.notNull(obj);
-		Assert.notNull(obj.getTerrain());
-		moveObject(obj, cti.getContainer(), obj.getLocation());
-	}
-	
-	private void handleZoneIn(CreatureObject creature, Player player, Location loc, SWGObject parent) {
-		creature.setOwner(player);
-		// Fresh login or teleport/travel
-		PlayerState state = player.getPlayerState();
-		if (state != PlayerState.LOGGED_IN && state != PlayerState.ZONED_IN) {
-			new CloseConnectionIntent(player.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
-			return;
-		}
-		boolean firstZone = state == PlayerState.LOGGED_IN;
-		player.setPlayerState(PlayerState.ZONING_IN);
-		if (parent == null) {
-			Log.i("Zoning in %s with character %s to %s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), loc.getTerrain());
-		} else {
-			Assert.notNull(parent.getParent()); // Character must be in a cell, inside a building
-			SWGObject superParent = parent.getSuperParent();
-			Point3D world = superParent.getLocation().getPosition();
-			Log.i("Zoning in %s with character %s at %s in %s/%s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), superParent, world, superParent.getTerrain());
-		}
-		resetAwarenessOnZone(creature, firstZone);
-		creature.moveToContainer(parent);
-		creature.setLocation(loc);
-		startZone(creature, firstZone);
-		recursiveCreateObject(creature, player);
-		if (parent != null) {
-			for (SWGObject obj : creature.getObjectsAware()) {
-				obj.createObject(creature);
-				creature.createObject(obj);
-			}
-		}
-		Assert.notNull(creature.getTerrain());
+		SWGObject oldContainer = cti.getOldContainer();
+		if (oldContainer != null)
+			awareness.updateObject(oldContainer);
+		awareness.updateObject(cti.getObject());
 	}
 	
 	private void handleForceUpdate(ForceAwarenessUpdateIntent faui) {
-		SWGObject obj = faui.getObject();
-		moveObject(obj, obj.getParent(), obj.getLocation());
+		awareness.updateObject(faui.getObject());
 	}
 	
-	private void resetAwarenessOnZone(CreatureObject creature, boolean firstZone) {
-		if (firstZone) {
-			for (Player observer : creature.getObservers()) {
-				creature.destroyObject(observer);
-			}
-			creature.resetAwareness();
-			creature.clearCustomAware(false);
-		} else {
-			creature.clearObjectsAware();
+	private void handleZoneIn(CreatureObject creature, Location loc, SWGObject parent) {
+		Player player = creature.getOwner();
+		
+		// Fresh login or teleport/travel
+		PlayerState state = player.getPlayerState();
+		boolean firstZone = (state == PlayerState.LOGGED_IN);
+		if (!firstZone && state != PlayerState.ZONED_IN) {
+			new CloseConnectionIntent(player.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+			return;
 		}
+		
+		creature.systemMove(parent, loc);
+		creature.setAware(AwarenessType.OBJECT, List.of());
+		creature.flushObjectsAware();
+		startZone(creature, firstZone);
+		awareness.updateObject(creature);
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {
 		Player player = creature.getOwner();
-		long time = ProjectSWG.getGalacticTime();
-		int realTime = (int) (System.currentTimeMillis()/1E3);
+		player.setPlayerState(PlayerState.ZONING_IN);
 		Intent firstZoneIntent = null;
 		if (firstZone) {
 			player.sendPacket(new HeartBeat());
@@ -251,7 +185,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			firstZoneIntent = new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE);
 			firstZoneIntent.broadcast();
 		}
-		player.sendPacket(new CmdStartScene(true, creature.getObjectId(), creature.getRace(), creature.getWorldLocation(), time, realTime));
+		Location loc = creature.getWorldLocation();
+		player.sendPacket(new CmdStartScene(true, creature.getObjectId(), creature.getRace(), loc, ProjectSWG.getGalacticTime(), (int) (System.currentTimeMillis() / 1E3)));
+		Log.i("Zoning in %s with character %s to %s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), loc.getTerrain());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcastAfterIntent(firstZoneIntent);
 	}
 	
@@ -264,18 +200,10 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		player.sendBufferedDeltas();
 	}
 	
-	private void recursiveCreateObject(SWGObject obj, Player owner) {
-		SWGObject parent = obj.getParent();
-		if (parent != null)
-			recursiveCreateObject(parent, owner);
-		else
-			obj.createObject(owner);
-	}
-	
 	private void handleDataTransform(DataTransform dt) {
 		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
 		if (!(obj instanceof CreatureObject)) {
-			Log.w("DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+			Log.w("DataTransform object not CreatureObject! Was: " + (obj == null ? "null" : obj.getClass()));
 			return;
 		}
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
@@ -286,7 +214,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
 		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
 		if (!(obj instanceof CreatureObject)) {
-			Log.w("DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
+			Log.w("DataTransformWithParent object not CreatureObject! Was: " + (obj == null ? "null" : obj.getClass()));
 			return;
 		}
 		if (parent == null) {
@@ -297,35 +225,24 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		moveObjectWithTransform(obj, parent, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
 	}
 	
-	private void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		Assert.notNull(requestedLocation.getTerrain());
-		if (parent == null)
-			awarenessHandler.moveObject(obj, requestedLocation);
-		else
-			awarenessHandler.moveObject(obj, parent, requestedLocation);
-	}
-	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			SWGObject vehicle = obj.getParent();
-			moveObject(vehicle, null, requestedLocation);
-			dataTransformHandler.handleMove(vehicle, speed, update);
-			moveObject(obj, null, requestedLocation);
+//			SWGObject vehicle = obj.getParent();
+//			assert vehicle != null : "vehicle is null";
+//			awareness.moveObject(vehicle, null, requestedLocation);
+//			dataTransformHandler.handleMove(vehicle, speed, update);
+//			awareness.moveObject(obj, null, requestedLocation);
 		} else {
-			moveObject(obj, parent, requestedLocation);
-			if (parent == null)
+			obj.systemMove(parent, requestedLocation);
+			awareness.updateObject(obj);
+			if (parent == null) {
 				dataTransformHandler.handleMove(obj, speed, update);
-			else
+			} else {
 				dataTransformHandler.handleMove(obj, parent, speed, update);
+			}
 		}
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
-	}
-	
-	private void disappearObject(SWGObject obj) {
-		awarenessHandler.disappearObject(obj, true, true);
-		obj.clearObjectsAware();
-		obj.clearCustomAware(true);
 	}
 	
 }

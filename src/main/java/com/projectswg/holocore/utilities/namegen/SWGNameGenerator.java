@@ -24,6 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.utilities.namegen;
 
 import com.projectswg.common.data.encodables.tangible.Race;
@@ -155,7 +156,7 @@ public class SWGNameGenerator {
 	 * @param race Race/Species to generate a name for.
 	 * @return Generated name in the form of a {@link String}.
 	 */
-	public String generateRandomName(Race race){
+	public String generateRandomName(Race race) {
 		return generateRandomName(race.getSpecies());
 	}
 	

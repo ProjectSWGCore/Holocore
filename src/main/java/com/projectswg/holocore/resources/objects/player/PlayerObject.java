@@ -26,30 +26,28 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.UpdatePostureMessage;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureObjectAwareness;
 import com.projectswg.holocore.resources.objects.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerFlags;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerObject extends IntangibleObject {
 	
-	private final PlayerObjectShared	play3	= new PlayerObjectShared();
-	private final PlayerObjectSharedNP	play6	= new PlayerObjectSharedNP();
-	private final PlayerObjectPrivate	play8	= new PlayerObjectPrivate();
-	private final PlayerObjectPrivateNP	play9	= new PlayerObjectPrivateNP();
+	private final PlayerObjectShared	play3		= new PlayerObjectShared();
+	private final PlayerObjectSharedNP	play6		= new PlayerObjectSharedNP();
+	private final PlayerObjectPrivate	play8		= new PlayerObjectPrivate();
+	private final PlayerObjectPrivateNP	play9		= new PlayerObjectPrivateNP();
 	private final List<String>			joinedChannels	= new ArrayList<>();
 	
 	private int		startPlayTime	= 0;
@@ -398,14 +396,6 @@ public class PlayerObject extends IntangibleObject {
 	public void initStartPlayTime() {
 		startPlayTime = (int)(System.currentTimeMillis() / 1000);
 		lastUpdatePlayTime = startPlayTime;
-	}
-	
-	@Override
-	public void sendFinalBaselinePackets(Player target) {
-		super.sendFinalBaselinePackets(target);
-		SWGObject parent = getParent();
-		if (parent != null && parent instanceof CreatureObject)
-			target.sendPacket(new UpdatePostureMessage(((CreatureObject)parent).getPosture().getId(), getObjectId()));
 	}
 	
 	@Override

@@ -24,67 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-
-import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Collections;
 
-class TerrainMapChunk {
+public enum AwarenessType {
+	OBJECT,
+	CUSTOM;
 	
-	private final List<SWGObject> objects;
+	private static final Collection<AwarenessType> VALUES = Collections.unmodifiableCollection(Arrays.asList(values()));
 	
-	public TerrainMapChunk() {
-		this.objects = new CopyOnWriteArrayList<>();
+	public static Collection<AwarenessType> getValues() {
+		return VALUES;
 	}
-	
-	public void addObject(@Nonnull SWGObject obj) {
-		assert !objects.contains(obj) : "the chunk already contains this object";
-		objects.add(obj);
-	}
-	
-	public void removeObject(@Nonnull SWGObject obj) {
-		objects.remove(obj);
-	}
-	
-	public void getWithinAwareness(@Nonnull SWGObject obj, @Nonnull Collection<SWGObject> withinRange) {
-		int truncX = obj.getTruncX();
-		int truncZ = obj.getTruncZ();
-		int instance = obj.getInstanceLocation().getInstanceNumber();
-		int loadRange = obj.getLoadRange();
-		for (SWGObject test : objects) {
-			// Calculate distance
-			int dTmp = truncX - test.getTruncX();
-			int d = dTmp * dTmp;
-			dTmp = truncZ - test.getTruncZ();
-			
-			int range = test.getLoadRange();
-			if (range < loadRange)
-				range = loadRange;
-			range = range * range;
-			
-			// Must be within load range and the same instance
-			if ((d + dTmp * dTmp) < range && instance == test.getInstanceLocation().getInstanceNumber()) {
-				recursiveAdd(withinRange, obj, test);
-			}
-		}
-	}
-	
-	private static void recursiveAdd(@Nonnull Collection<SWGObject> withinRange, @Nonnull SWGObject obj, @Nonnull SWGObject test) {
-		if (!test.isVisible(obj))
-			return;
-		withinRange.add(test);
-		for (SWGObject child : test.getSlots().values()) {
-			if (child != null)
-				recursiveAdd(withinRange, obj, child);
-		}
-		for (SWGObject child : test.getContainedObjects()) {
-			recursiveAdd(withinRange, obj, child);
-		}
-	}
-	
 }

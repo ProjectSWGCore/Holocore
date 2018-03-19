@@ -30,6 +30,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -42,6 +43,7 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
+import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 
 public class BuildingObject extends TangibleObject {
@@ -50,12 +52,14 @@ public class BuildingObject extends TangibleObject {
 	private final Map<Integer, CellObject> idToCell;
 	
 	private WeakReference<PortalLayoutData> portalLayoutData;
+	private int loadRange;
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
 		this.nameToCell = new SynchronizedMap<>();
 		this.idToCell = new SynchronizedMap<>();
 		this.portalLayoutData = null;
+		this.loadRange = 0;
 	}
 	
 	public CellObject getCellByName(String cellName) {
@@ -72,8 +76,8 @@ public class BuildingObject extends TangibleObject {
 	
 	@Override
 	public void addObject(SWGObject object) {
-		super.addObject(object);
 		assert object instanceof CellObject : "Object added to building is not a cell!";
+		super.addObject(object);
 		
 		CellObject cell = (CellObject) object;
 		Assert.test(cell.getNumber() > 0, "Cell Number must be greater than 0!");
@@ -84,6 +88,11 @@ public class BuildingObject extends TangibleObject {
 			idToCell.put(cell.getNumber(), cell);
 			nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
 		}
+	}
+	
+	@Override
+	protected int calculateLoadRange() {
+		return loadRange != 0 ? loadRange : super.calculateLoadRange();
 	}
 	
 	public void populateCells() {
@@ -99,6 +108,15 @@ public class BuildingObject extends TangibleObject {
 				addObject(cell);
 			}
 		}
+	}
+	
+	@Override
+	public void setTemplate(String template) {
+		super.setTemplate(template);
+		if (template.equals("object/building/tatooine/shared_palace_tatooine_jabba.iff"))
+			loadRange = Integer.MAX_VALUE;
+		if (template.equals("object/building/tatooine/shared_tower_jabbas_palace.iff"))
+			loadRange = Integer.MAX_VALUE;
 	}
 	
 	private int getCellCount() {

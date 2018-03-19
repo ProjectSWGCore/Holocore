@@ -24,48 +24,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.common.data.location.Location;
+package com.projectswg.holocore.resources.objects.awareness;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
-class SpeedCheckHandler {
+import javax.annotation.Nonnull;
+
+class AwarenessUtilities {
 	
-	public SpeedCheckHandler() {
-		
-	}
-	
-	public void moveObjectSpeedChecks(CreatureObject obj, Location requestedLocation) {
-		double time = obj.getTimeSinceLastTransform() / 1000;
-		obj.updateLastTransformTime();
-		Location l = obj.getWorldLocation();
-		if (isSpeeding(obj, l, requestedLocation, time)) {
-			// TODO: Do something about it
+	public static boolean isInAwareness(@Nonnull SWGObject obj) {
+		if (obj.getParent() != null)
+			return false;
+		switch (obj.getBaselineType()) {
+			case WAYP:
+				return false;
+			case CREO:
+				return !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer();
+			default:
+				return true;
 		}
-	}
-	
-	public void moveObjectSpeedChecks(CreatureObject obj, SWGObject parent, Location requestedLocation) {
-		double time = obj.getTimeSinceLastTransform() / 1000;
-		obj.updateLastTransformTime();
-		Location l = obj.getWorldLocation();
-		Location requestedWorld = Location.builder()
-				.setPosition(requestedLocation.getX(), 0, requestedLocation.getZ())
-				.setTerrain(parent.getTerrain())
-				.translateLocation(parent.getWorldLocation())
-				.build();
-		if (isSpeeding(obj, l, requestedWorld, time)) {
-			// TODO: Do something about it
-		}
-	}
-	
-	private static boolean isSpeeding(CreatureObject obj, Location nWorld, Location newLocation, double time) {
-		return Math.sqrt(square(nWorld.getX()-nWorld.getX()) + square(nWorld.getZ()-newLocation.getZ())) / time > obj.getMovementScale()*7.3;
-	}
-	
-	private static double square(double x) {
-		return x * x;
 	}
 	
 }

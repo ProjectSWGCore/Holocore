@@ -1,260 +1,285 @@
-/************************************************************************************
- * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
- *                                                                                  *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
- * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
- * Our goal is to create an emulator which will provide a server for players to     *
- * continue playing a game similar to the one they used to play. We are basing      *
- * it on the final publish of the game prior to end-game events.                    *
- *                                                                                  *
- * This file is part of Holocore.                                                   *
- *                                                                                  *
- * -------------------------------------------------------------------------------- *
- *                                                                                  *
- * Holocore is free software: you can redistribute it and/or modify                 *
- * it under the terms of the GNU Affero General Public License as                   *
- * published by the Free Software Foundation, either version 3 of the               *
- * License, or (at your option) any later version.                                  *
- *                                                                                  *
- * Holocore is distributed in the hope that it will be useful,                      *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
- * GNU Affero General Public License for more details.                              *
- *                                                                                  *
- * You should have received a copy of the GNU Affero General Public License         *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
- *                                                                                  *
+/***********************************************************************************
+ * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.objects.awareness;
 
-import org.junit.After;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.building.BuildingObject;
+import com.projectswg.holocore.resources.objects.cell.CellObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
+import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
+import com.projectswg.holocore.services.objects.ObjectCreator;
+import com.projectswg.holocore.test_resources.GenericCreatureObject;
+import com.projectswg.holocore.test_resources.GenericTangibleObject;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.projectswg.common.concurrency.Delay;
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.control.IntentManager;
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Terrain;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import com.projectswg.holocore.intents.PlayerEventIntent;
-import com.projectswg.holocore.intents.object.ContainerTransferIntent;
-import com.projectswg.holocore.intents.object.DestroyObjectIntent;
-import com.projectswg.holocore.intents.object.MoveObjectIntent;
-import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.objects.building.BuildingObject;
-import com.projectswg.holocore.resources.objects.cell.CellObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureState;
-import com.projectswg.holocore.resources.player.PlayerEvent;
-import com.projectswg.holocore.services.objects.ObjectAwareness;
-import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
+import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestObjectAwareness {
 	
-	private GenericCreatureObject player1;
-	private GenericCreatureObject player2;
-	private BuildingObject building;
-	private CellObject firstCell;
-	private CreatureObject npc;
+	private ObjectAwareness awareness;
+	private GenericCreatureObject player;
+	private GenericCreatureObject testPlayer;
+	private GenericTangibleObject testTangible;
+	private BuildingObject testBuilding1;
+	private BuildingObject testBuilding2;
+	private WaypointObject testWaypoint;
+	private CellObject testCell1;
+	private CellObject testCell2;
+	private TangibleObject inventoryObject;
+	private TangibleObject testInventoryObject;
 	
-	@Before
-	public void initializeTests() {
-		IntentManager.setInstance(new IntentManager(1));
-		IntentManager.getInstance().initialize();
-		player1 = new GenericCreatureObject(1);
-		player2 = new GenericCreatureObject(2);
-		building = (BuildingObject) ObjectCreator.createObjectFromTemplate(10, "object/building/tatooine/shared_starport_tatooine.iff");
-		firstCell = new CellObject(11);
-		firstCell.setNumber(1);
-		npc = (CreatureObject) ObjectCreator.createObjectFromTemplate(20, "object/mobile/dressed_tatooine_opening_wh_guard.iff");
-		Assert.assertNotNull("Building is null!", building);
-		Assert.assertNotNull("NPC is null!", npc);
-		building.addObject(firstCell);
-	}
-	
-	@After
-	public void terminateTests() {
-		IntentManager.getInstance().terminate();
-	}
-	
-	@Test
-	public void testObjectAwarenessNpcDie() {
-		/*
-		 * Setup:
-		 *   1) Player is inside Cell #1
-		 *   2) NPC is inside Cell #1
-		 */
-		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
-		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
-		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
-		npc.moveToContainer(firstCell);
-		player1.moveToContainer(firstCell);
+	private void initialize() {
+		awareness = new ObjectAwareness();
+		player = new GenericCreatureObject(1);
+		testPlayer = new GenericCreatureObject(2);
+		testTangible = new GenericTangibleObject(3);
+		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(5, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testCell1 = new CellObject(6);
+		testCell2 = new CellObject(7);
+		testWaypoint = new WaypointObject(8);
+		inventoryObject = new TangibleObject(9);
+		testInventoryObject = new TangibleObject(10);
 		
-		// Create service and start sending intents
-		ObjectAwareness awareness = new ObjectAwareness();
-		Assert.assertTrue(awareness.initialize());
-		Assert.assertTrue(awareness.start());
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
+		player.setLoadRange(100);
+		testPlayer.setLoadRange(100);
+		testTangible.setLoadRange(0);
+		testCell1.setNumber(1);
+		testCell2.setNumber(1);
 		
-		// Check to make sure NPC is in awareness
-		Assert.assertTrue("Player isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
-		Assert.assertFalse("Player is still inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue(awareness.stop());
-		Assert.assertTrue(awareness.terminate());
-	}
-	
-	@Test
-	public void testObjectAwarenessPlayerLogOut() {
-		/*
-		 * Setup:
-		 *   1) Player 1 is inside Cell #1
-		 *   2) Player 2 is inside Cell #1
-		 *   3) NPC is inside Cell #1
-		 */
-		player1.setPosition(Terrain.TATOOINE, 0, 0, 0);
-		player2.setPosition(Terrain.TATOOINE, 0, 0, 0);
-		building.setPosition(Terrain.TATOOINE, 10, 10, 10);
-		npc.setPosition(Terrain.TATOOINE, 0, 0, 0);
-		npc.moveToContainer(firstCell);
-		player1.moveToContainer(firstCell);
-		player2.moveToContainer(firstCell);
+		player.setupAsCharacter();
+		testPlayer.setupAsCharacter();
 		
-		// Create service and start sending intents
-		ObjectAwareness awareness = new ObjectAwareness();
-		Assert.assertTrue(awareness.initialize());
-		Assert.assertTrue(awareness.start());
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(building)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
+		testCell1.moveToContainer(testBuilding1);
+		testCell2.moveToContainer(testBuilding2);
+		inventoryObject.moveToContainer(player.getSlottedObject("inventory"));
+		testInventoryObject.moveToContainer(testPlayer.getSlottedObject("inventory"));
 		
-		// Check to make sure NPC is in awareness
-		Assert.assertTrue("Player1 isn't inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Player2 isn't inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
-		Assert.assertTrue("Player2 isn't inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertTrue("Player1 isn't inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DISAPPEAR)));
-		Assert.assertTrue(fireAndWait(1000, new PlayerEventIntent(player2.getOwner(), PlayerEvent.PE_DESTROYED)));
-		Assert.assertFalse("Player2 is still inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertFalse("Player2 is still inside NPC's observer set!", npc.getObservers().contains(player2.getOwner()));
-		Assert.assertTrue("Player1 isn't inside NPC's observer set! (round 2)", npc.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue(fireAndWait(1000, new DestroyObjectIntent(npc)));
-		Assert.assertFalse("NPC is still inside Player1's observer set!", player1.getObservers().contains(npc.getOwner()));
-		Assert.assertFalse("Player2 is still inside Player1's observer set! (round 2)", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertTrue(awareness.stop());
-		Assert.assertTrue(awareness.terminate());
+		testPlayer.setLocation(buildTatooine(40, 40));
+		testTangible.setLocation(buildTatooine(50, 50));
+		testBuilding1.setLocation(buildTatooine(45, 45));
+		testBuilding2.setLocation(buildNaboo(45, 45));
+		testWaypoint.setLocation(buildTatooine(41, 41));
+		
+		awareness.createObject(testPlayer);
+		awareness.createObject(testTangible);
+		awareness.createObject(testBuilding1);
+		awareness.createObject(testBuilding2);
+		awareness.createObject(testCell1);
+		awareness.createObject(testWaypoint);
 	}
 	
 	@Test
-	public void testVehicleMount() {
-		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate("object/mobile/vehicle/shared_barc_speeder.iff");
-		player1.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
-		player2.setPosition(Terrain.TATOOINE, 3510, 5, -4810); // 12ish meters away
-		vehicle.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
-		
-		ObjectAwareness awareness = new ObjectAwareness();
-		Assert.assertTrue(awareness.initialize());
-		Assert.assertTrue(awareness.start());
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(vehicle)));
-		
-		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertTrue("Vehicle is not inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
-		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
-		Assert.assertNull("Player1 is in a parent!", player1.getParent());
-		
-		// Mount
-		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, null,vehicle))); 
-		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
-		vehicle.setPosture(Posture.DRIVING_VEHICLE);
-		
-		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertFalse("Vehicle is still inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
-		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
-		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
-		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
-		
-		Assert.assertTrue(fireAndWait(100, new MoveObjectIntent(player1, new Location(3510, 5, -4810, Terrain.TATOOINE), 7.3, 1)));
-		
-		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertFalse("Vehicle is inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
-		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
-		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
-		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
-		
-		Assert.assertTrue(awareness.stop());
-		Assert.assertTrue(awareness.terminate());
+	public void testTour() {
+		testCombination(new ArrayList<>(), 2);
 	}
 	
-	@Test
-	public void testVehicleMove() {
-		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate("object/mobile/vehicle/shared_barc_speeder.iff");
-		player1.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
-		player2.setPosition(Terrain.TATOOINE, 3510, 5, -4810); // 12ish meters away
-		vehicle.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
-		npc.setPosition(Terrain.TATOOINE, 3000, 5, 4000);
-		
-		ObjectAwareness awareness = new ObjectAwareness();
-		Assert.assertTrue(awareness.initialize());
-		Assert.assertTrue(awareness.start());
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player1)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(player2)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(npc)));
-		Assert.assertTrue(fireAndWait(100, new ObjectCreatedIntent(vehicle)));
-		Assert.assertTrue(fireAndWait(100, new ContainerTransferIntent(player1, null, vehicle))); 
-		player1.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
-		vehicle.setPosture(Posture.DRIVING_VEHICLE);
-		
-		Assert.assertTrue("Player1 is not inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Player2 is not inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertFalse("Vehicle is still inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
-		Assert.assertTrue("Vehicle is not inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
-		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
-		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
-		
-		Assert.assertTrue(fireAndWait(100, new MoveObjectIntent(player1, new Location(3000, 5, 4010, Terrain.TATOOINE), 7.3, 1)));
-		
-		Assert.assertFalse("Player1 is still inside Player2's observer set!", player2.getObservers().contains(player1.getOwner()));
-		Assert.assertFalse("Player2 is still inside Player1's observer set!", player1.getObservers().contains(player2.getOwner()));
-		Assert.assertFalse("Vehicle is inside Player1's awareness set!", player1.getObjectsAware().contains(vehicle));
-		Assert.assertFalse("Vehicle is still inside Player2's awareness set!", player2.getObjectsAware().contains(vehicle));
-		Assert.assertNotNull("Player1 is not in a parent!", player1.getParent());
-		Assert.assertEquals("Player1 is not mounted to the vehicle!", vehicle, player1.getParent());
-		
-		Assert.assertTrue("Player1 is not inside NPC's observer set!", npc.getObservers().contains(player1.getOwner()));
-		Assert.assertTrue("Vehicle is not inside NPC's awareness set!", npc.getObjectsAware().contains(vehicle));
-		
-		Assert.assertTrue(awareness.stop());
-		Assert.assertTrue(awareness.terminate());
-	}
-	
-	private static boolean fireAndWait(long timeout, Intent intent) {
-		intent.broadcast();
-		for (int i = 0; i < timeout; i++) {
-			if (intent.isComplete()) {
-				Delay.sleepMilli(5);
-				return true;
+	private void testCombination(List<TestLocation> tests, int depth) {
+		if (depth == 0) {
+			try {
+				initialize();
+				for (TestLocation test : tests)
+					move(test);
+			} catch (AssertionError e) {
+				throw new AssertionError("Failed " + tests, e);
 			}
-			if (Delay.sleepMilli(1))
-				return false;
+			return;
 		}
-		return false;
+		for (TestLocation test : TestLocation.values()) {
+			List<TestLocation> recurse = new ArrayList<>(tests);
+			recurse.add(test);
+			testCombination(recurse, depth-1);
+		}
+	}
+	
+	@Test
+	public void testPlayerZoneIn() {
+		initialize();
+		player.setLoadRange(-1);
+		player.setHasOwner(false);
+		Assert.assertEquals(0, player.getLoadRange());
+		
+		moveNoAssert(TestLocation.SSI);
+		System.out.println(player.getObjectsAware());
+		assertAware(List.of(player));
+		
+		player.setHasOwner(true);
+		Assert.assertNotEquals(0, player.getLoadRange());
+		player.setLoadRange(100);
+		Assert.assertEquals(100, player.getLoadRange());
+		move(TestLocation.SSI);
+		move(TestLocation.SSO);
+	}
+	
+	@Test
+	public void testDestroyWaypoint() {
+		initialize();
+		move(TestLocation.SSI);
+		awareness.destroyObject(testWaypoint);
+		assertAware(getExpectedAware(TestLocation.SSI.getAwareSet()));
+	}
+	
+	@Test
+	public void testDestroyBuilding() {
+		initialize();
+		move(TestLocation.SSI);
+		awareness.destroyObject(testBuilding1);
+		assertAware(List.of(player, testPlayer, testTangible));
+	}
+	
+	@Test
+	public void testLoadRangeUpdate() {
+		initialize();
+		move(TestLocation.SSI);
+		assertEquals(0, testBuilding1.getLoadRange());
+		player.moveToContainer(testCell1);
+		assertEquals(player.getLoadRange(), testBuilding1.getLoadRange());
+	}
+	
+	private void moveNoAssert(TestLocation location) {
+		player.moveToContainer(getParent(location.getParent()));
+		player.setLocation(location.getLocation());
+		awareness.updateObject(player);
+	}
+	
+	private void move(TestLocation location) {
+		player.moveToContainer(getParent(location.getParent()));
+		player.setLocation(location.getLocation());
+		awareness.updateObject(player);
+		
+		assertAware(getExpectedAware(location.getAwareSet()));
+	}
+	
+	private void assertAware(Collection<SWGObject> awareExpected) {
+		Collection<SWGObject> awareActual = player.getObjectsAware();
+		
+		// Ensure it doesn't contain the unexpected
+		for (SWGObject a : awareActual) {
+			if (a.getParent() != null)
+				continue;
+			assertTrue("Not supposed to be aware of object: " + a, awareExpected.contains(a));
+		}
+		assertFalse("Test inventory object should not be visible", awareActual.contains(testInventoryObject));
+		assertTrue("Inventory object should always be visible", awareActual.contains(inventoryObject));
+		
+		// Ensure it contains the expected
+		for (SWGObject a : awareExpected) {
+			assertTrue("Supposed to be aware of object: " + a, awareActual.contains(a));
+		}
+	}
+	
+	private SWGObject getParent(TestParent parent) {
+		switch (parent) {
+			case NONE:	return null;
+			case BUIO1:	return testCell1;
+			case BUIO2:	return testCell2;
+		}
+		throw new RuntimeException("Invalid test parent: " + parent);
+	}
+	
+	private Collection<SWGObject> getExpectedAware(TestAwareSet awareSet) {
+		switch (awareSet) {
+			case NONE:		return List.of(player);
+			case TATOOINE:	return List.of(player, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"));
+			case NABOO:		return List.of(player, testBuilding2);
+		}
+		throw new RuntimeException("Invalid test aware set: " + awareSet);
+	}
+	
+	private static Location buildTatooine(double x, double z) {
+		return Location.builder().setTerrain(Terrain.TATOOINE).setPosition(x, 0, z).build();
+	}
+	
+	private static Location buildNaboo(double x, double z) {
+		return Location.builder().setTerrain(Terrain.NABOO).setPosition(x, 0, z).build();
+	}
+	
+	private enum TestParent {
+		NONE,
+		BUIO1,
+		BUIO2
+	}
+	
+	private enum TestAwareSet {
+		NONE,
+		TATOOINE,
+		NABOO
+	}
+	
+	private enum TestLocation {
+		SSI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(25, 25)),
+		SDI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(-10, -10)),
+		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(150, 150)),
+		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-150, -150)),
+		BSSI(TestParent.BUIO1,	TestAwareSet.TATOOINE, buildTatooine(0, 0)),
+		DDO	(TestParent.NONE,	TestAwareSet.NABOO, buildNaboo(25, 25)),
+		BDDO(TestParent.BUIO2,	TestAwareSet.NABOO, buildNaboo(0, 0)),
+		TAT_OOM_CT	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(25, 17000)),
+		TAT_OOM_CB	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(25, -17000)),
+		TAT_OOM_RC	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(17000, 25)),
+		TAT_OOM_LC	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(-17000, 25)),
+		TAT_OOM_RT	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(17000, 17000)),
+		TAT_OOM_RB	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(17000, -17000)),
+		TAT_OOM_LT	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(-17000, 17000)),
+		TAT_OOM_LB	(TestParent.NONE, TestAwareSet.NONE, buildTatooine(-17000, -17000));
+		
+		private final TestParent parent;
+		private final TestAwareSet awareSet;
+		private final Location location;
+		
+		TestLocation(TestParent parent, TestAwareSet awareSet, Location location) {
+			this.parent = parent;
+			this.awareSet = awareSet;
+			this.location = location;
+		}
+		
+		public TestParent getParent() {
+			return parent;
+		}
+		
+		public TestAwareSet getAwareSet() {
+			return awareSet;
+		}
+		
+		public Location getLocation() {
+			return location;
+		}
+		
 	}
 	
 }

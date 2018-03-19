@@ -26,119 +26,115 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.awareness;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 public class ObjectAware {
 	
+	private static final Set<SWGObject> EMPTY_SET = Collections.emptySet();
+	
 	private final SWGObject object;
-	private final Aware objectsAware;
-	private final Aware customAware;
+	private final EnumMap<AwarenessType, Set<SWGObject>> awareness;
 	private final AtomicReference<TerrainMapChunk> chunk;
 	
-	public ObjectAware(SWGObject obj) {
+	public ObjectAware(@Nonnull SWGObject obj) {
 		this.object = obj;
-		this.objectsAware = new Aware(obj);
-		this.customAware = new Aware(obj);
+		this.awareness = new EnumMap<>(AwarenessType.class);
 		this.chunk = new AtomicReference<>(null);
+		for (AwarenessType type : AwarenessType.getValues()) {
+			awareness.put(type, createSet());
+		}
 	}
 	
 	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
 		return this.chunk.getAndSet(chunk);
 	}
 	
+	@CheckForNull
 	protected TerrainMapChunk getTerrainMapChunk() {
 		return chunk.get();
 	}
 	
-	public void setParent(ObjectAware parent) {
-		if (parent == null) {
-			objectsAware.setParent(null);
-			customAware.setParent(null);
-		} else {
-			objectsAware.setParent(parent.getRawObjectsAware());
-			customAware.setParent(parent.getRawCustomAware());
+	public void addAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
+		Set<SWGObject> aware = awareness.get(type);
+		if (aware.add(obj)) {
+			Map<SWGObject, Integer> awareCounts = getAwareCounts();
+			Integer count = awareCounts.get(obj);
+			if (count != null && count == 1) {
+				object.onObjectEnterAware(obj);
+			}
 		}
 	}
 	
-	public void addObjectAware(ObjectAware aware) {
-		objectsAware.add(aware.getRawObjectsAware());
+	public void removeAware(@Nonnull AwarenessType type, @Nonnull SWGObject obj) {
+		Set<SWGObject> aware = awareness.get(type);
+		if (aware.remove(obj)) {
+			if (getAwareStream().noneMatch(test -> test.equals(obj))) {
+				object.onObjectLeaveAware(obj);
+			}
+		}
 	}
 	
-	public void removeObjectAware(ObjectAware aware) {
-		objectsAware.remove(aware.getRawObjectsAware());
+	public void setAware(@Nonnull AwarenessType type, @Nonnull Collection<SWGObject> objects) {
+		Set<SWGObject> oldAware = awareness.put(type, createSet(objects));
+		Map<SWGObject, Integer> awareCounts = getAwareCounts();
+		oldAware.removeAll(objects);
+		for (SWGObject removed : oldAware) {
+			removed.getAwareness().removeAware(type, object);
+			if (!awareCounts.containsKey(removed)) {
+				object.onObjectLeaveAware(removed);
+			}
+		}
+		
+		for (SWGObject added : objects) {
+			added.getAwareness().addAware(type, object);
+			Integer count = awareCounts.get(added);
+			if (count != null && count == 1) {
+				object.onObjectEnterAware(added);
+			}
+		}
 	}
 	
-	public void addCustomAware(ObjectAware aware) {
-		customAware.add(aware.getRawCustomAware());
-	}
-	
-	public void removeCustomAware(ObjectAware aware) {
-		customAware.remove(aware.getRawCustomAware());
-	}
-	
-	public boolean isObjectAware(SWGObject aware) {
-		return objectsAware.contains(aware);
-	}
-	
-	public boolean isCustomAware(SWGObject aware) {
-		return customAware.contains(aware);
-	}
-	
-	public void clearObjectsAware() {
-		objectsAware.clear();
-	}
-	
-	public void clearCustomAware() {
-		customAware.clear();
-	}
-	
-	public Set<SWGObject> getAware() {
-		Set<SWGObject> aware = new HashSet<>();
-		objectsAware.getAware(aware);
-		customAware.getAware(aware);
-		return aware;
-	}
-	
+	@Nonnull
 	public Set<Player> getObservers() {
-		Set<Player> observers = new HashSet<>();
-		objectsAware.getObservers(observers);
-		customAware.getObservers(observers);
-		return observers;
+		return getAwareStream().map(SWGObject::getOwnerShallow).filter(Objects::nonNull).collect(Collectors.toSet());
 	}
 	
-	public Set<Player> getChildObservers() {
-		Set<Player> observers = new HashSet<>();
-		Aware.addObserversToSet(object.getContainedObjects(), observers, object.getOwner(), object);
-		return observers;
+	@Nonnull
+	public Set<SWGObject> getAware() {
+		return getAwareStream().collect(Collectors.toSet());
 	}
 	
-	public Set<SWGObject> getObjectsAware() {
-		return objectsAware.getAware();
+	@Nonnull
+	public Set<SWGObject> getAware(@Nonnull AwarenessType type) {
+		return awareness.getOrDefault(type, EMPTY_SET);
 	}
 	
-	public Set<SWGObject> getCustomAware() {
-		return customAware.getAware();
+	private Stream<SWGObject> getAwareStream() {
+		return awareness.values().stream().flatMap(Collection::stream);
 	}
 	
-	public Set<Player> getObjectObservers() {
-		return objectsAware.getObservers();
+	private Map<SWGObject, Integer> getAwareCounts() {
+		return awareness.values().stream().flatMap(Collection::stream).collect(Collectors.toMap(obj -> obj, obj -> 1, (prev, next) -> prev + next));
 	}
 	
-	public Set<Player> getCustomObservers() {
-		return customAware.getObservers();
+	private static Set<SWGObject> createSet() {
+		return ConcurrentHashMap.newKeySet();
 	}
 	
-	private Aware getRawObjectsAware() {
-		return objectsAware;
-	}
-	
-	private Aware getRawCustomAware() {
-		return customAware;
+	private static Set<SWGObject> createSet(Collection<SWGObject> objects) {
+		Set<SWGObject> set = ConcurrentHashMap.newKeySet();
+		set.addAll(objects);
+		return set;
 	}
 	
 }

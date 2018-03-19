@@ -47,6 +47,7 @@ import com.projectswg.holocore.intents.GroupEventIntent.GroupEventType;
 import com.projectswg.holocore.resources.collections.SWGList;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
@@ -131,10 +132,11 @@ public class GroupObject extends SWGObject {
 	}
 	
 	public void updateMember(CreatureObject object) {
-		if (memberMap.containsKey(object.getObjectId()))
-			addCustomAware(object);
-		else
-			removeCustomAware(object);
+//		if (memberMap.containsKey(object.getObjectId()))
+//			addAware(AwarenessType.CUSTOM, object);
+//		else
+//			removeAware(AwarenessType.CUSTOM, object);
+		// TODO: Group awareness
 	}
 	
 	public long getLeaderId() {
@@ -254,11 +256,11 @@ public class GroupObject extends SWGObject {
 	
 	private void addGroupMembers(CreatureObject ... creatures) {
 		for (CreatureObject creature : creatures) {
-			Assert.test(!isCustomAware(creature));
 			Assert.test(creature.getGroupId() == 0);
 			GroupMember member = new GroupMember(creature);
 			Assert.isNull(memberMap.put(creature.getObjectId(), member));
-			addCustomAware(creature);
+			// TODO: Group awareness
+//			addAware(AwarenessType.CUSTOM, creature);
 			groupMembers.add(member);
 			creature.setGroupId(getObjectId());
 		}
@@ -272,7 +274,8 @@ public class GroupObject extends SWGObject {
 			Assert.notNull(member);
 			creature.setGroupId(0);
 			groupMembers.remove(member);
-			removeCustomAware(creature);
+			// TODO: Group awareness
+//			removeAware(AwarenessType.CUSTOM, creature);
 		}
 		groupMembers.sendDeltaMessage(this);
 	}

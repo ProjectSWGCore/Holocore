@@ -189,23 +189,13 @@ public final class StaticItemService extends Service {
 					String iffTemplate = ClientFactory.formatToSharedFile(objectAttributes.getIffTemplate());
 					SWGObject object = ObjectCreator.createObjectFromTemplate(iffTemplate);
 
-					if (object != null) {
-						// Global attributes and type-specific attributes are applied
-						objectAttributes.applyAttributes(object);
-						object.setContainerPermissions(permissions);
-						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
-							case SUCCESS:
-								Log.d("Successfully moved %s into container %s", itemName, container);
-								createdObjects[j] = object;
-								break;
-							default:
-								break;
-						}
-						new ObjectCreatedIntent(object).broadcast();
-						
-					} else {
-						Log.w("%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
-					}
+					// Global attributes and type-specific attributes are applied
+					objectAttributes.applyAttributes(object);
+					object.setContainerPermissions(permissions);
+					object.moveToContainer(container);
+					Log.d("Successfully moved %s into container %s", itemName, container);
+					createdObjects[j] = object;
+					new ObjectCreatedIntent(object).broadcast();
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
 					Log.e(errorMessage);

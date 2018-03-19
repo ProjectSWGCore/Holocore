@@ -48,6 +48,7 @@ import com.projectswg.common.network.packets.swg.zone.trade.UnAcceptTransactionM
 import com.projectswg.common.network.packets.swg.zone.trade.VerifyTradeMessage;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
 public class TradeSession {
@@ -303,7 +304,8 @@ public class TradeSession {
 			SWGObject inventory = partner.getSlottedObject("inventory");
 			
 			for (SWGObject tradeObject : itemsOffered) {
-				partner.removeCustomAware(tradeObject);
+				// TODO: Set trade awareness
+//				partner.removeAware(AwarenessType.CUSTOM, tradeObject);
 				tradeObject.moveToContainer(inventory);
 			}
 			
