@@ -247,7 +247,6 @@ public class ChatManager extends Manager {
 		
 		// Send to self
 		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, spi.getMessage(), (short) spi.getChatType(), (short) spi.getMoodId());
-		sender.sendPacket(message);
 		logChat(sender, ChatType.SPATIAL, ChatRange.LOCAL, spi.getMessage());
 		
 		// Notify observers of the chat message
