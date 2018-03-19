@@ -88,6 +88,7 @@ public class TerrainMap {
 			aware = getNearbyAware(obj);
 		else
 			aware = superParent.getAware(AwarenessType.OBJECT);
+		aware.removeIf(a -> !AwarenessUtilities.isInAwareness(a));
 		recursiveAdd(aware, obj);
 		return aware;
 	}
