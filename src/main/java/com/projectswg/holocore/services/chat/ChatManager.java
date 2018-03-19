@@ -56,6 +56,7 @@ import com.projectswg.holocore.intents.chat.SpatialChatIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
@@ -323,8 +324,11 @@ public class ChatManager extends Manager {
 		long sendId = 0;
 		String sendName = "";
 		if (broadcaster != null) {
-			sendId = broadcaster.getCreatureObject().getObjectId();
-			sendName = broadcaster.getCharacterName();
+			CreatureObject creature = broadcaster.getCreatureObject();
+			if (creature != null) {
+				sendId = creature.getObjectId();
+				sendName = creature.getObjectName();
+			}
 		}
 		logChat(sendId, sendName, 0, "", type.name(), range.name(), "", "", message);
 	}
@@ -333,12 +337,18 @@ public class ChatManager extends Manager {
 		long sendId = 0, recvId = 0;
 		String sendName = "", recvName = "";
 		if (sender != null) {
-			sendId = sender.getCreatureObject().getObjectId();
-			sendName = sender.getCharacterName();
+			CreatureObject creature = sender.getCreatureObject();
+			if (creature != null) {
+				sendId = creature.getObjectId();
+				sendName = creature.getObjectName();
+			}
 		}
 		if (receiver != null) {
-			recvId = receiver.getCreatureObject().getObjectId();
-			recvName = receiver.getCharacterName();
+			CreatureObject creature = receiver.getCreatureObject();
+			if (creature != null) {
+				recvId = creature.getObjectId();
+				recvName = creature.getObjectName();
+			}
 		}
 		logChat(sendId, sendName, recvId, recvName, type.name(), ChatRange.PERSONAL.name(), "", "", message);
 	}
