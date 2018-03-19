@@ -64,7 +64,6 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
 import java.util.Collections;
-import java.util.List;
 
 public class AwarenessService extends Service {
 	
@@ -109,10 +108,7 @@ public class AwarenessService extends Service {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		SWGObject parent = obj.getParent();
-		obj.setLocation(GONE_LOCATION);
-		if (parent != null)
-			parent.removeObject(obj);
+		obj.systemMove(null, GONE_LOCATION);
 		awareness.destroyObject(doi.getObject());
 	}
 	
@@ -164,10 +160,11 @@ public class AwarenessService extends Service {
 		}
 		
 		creature.systemMove(parent, loc);
-		creature.resetObjectsAware();
+		creature.setOwner(null);
+		creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		creature.setOwner(player);
 		startZone(creature, firstZone);
 		awareness.updateObject(creature);
-		creature.resyncObjectsAware();
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {

@@ -32,6 +32,7 @@ import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.building.BuildingObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.player.Player;
 
@@ -54,6 +55,9 @@ public class CreatureObjectAwareness {
 		if (pendingRemove.remove(obj) || aware.contains(obj))
 			return;
 		pendingAdd.add(obj);
+		if (obj instanceof BuildingObject) { // Client is picky about buildings - just need to ensure the cells are sent with the building no matter what
+			obj.getContainedObjects().forEach(this::addAware);
+		}
 	}
 	
 	public synchronized void removeAware(@Nonnull SWGObject obj) {
@@ -87,12 +91,6 @@ public class CreatureObjectAwareness {
 			}
 			popStackUntil(target, createStack, null);
 		}
-	}
-	
-	public synchronized void resetObjectsAware() {
-		aware.clear();
-		pendingAdd.clear();
-		pendingRemove.clear();
 	}
 	
 	List<SWGObject> getCreateList() {
