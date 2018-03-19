@@ -166,8 +166,10 @@ public class AwarenessService extends Service {
 		creature.systemMove(parent, loc);
 		creature.setOwner(null);
 		creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		creature.resetObjectsAware();
 		creature.setOwner(player);
 		startZone(creature, firstZone);
+		creature.addObjectsAware();
 		awareness.updateObject(creature);
 	}
 	
