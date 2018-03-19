@@ -36,6 +36,7 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
 import com.projectswg.common.network.packets.swg.zone.HeartBeat;
 import com.projectswg.common.network.packets.swg.zone.ParametersMessage;
+import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus;
@@ -64,6 +65,7 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 
 import java.util.Collections;
+import java.util.Set;
 
 public class AwarenessService extends Service {
 	
@@ -138,10 +140,13 @@ public class AwarenessService extends Service {
 	}
 	
 	private void processContainerTransferIntent(ContainerTransferIntent cti) {
+		SWGObject obj = cti.getObject();
 		SWGObject oldContainer = cti.getOldContainer();
+		SWGObject newContainer = cti.getContainer();
 		if (oldContainer != null)
 			awareness.updateObject(oldContainer);
 		awareness.updateObject(cti.getObject());
+		obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newContainer == null ? 0 : newContainer.getObjectId(), obj.getSlotArrangement()));
 	}
 	
 	private void handleForceUpdate(ForceAwarenessUpdateIntent faui) {

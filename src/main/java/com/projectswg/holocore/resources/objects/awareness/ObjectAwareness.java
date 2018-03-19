@@ -83,11 +83,10 @@ public class ObjectAwareness {
 			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
 			map.remove(obj);
 			map.update(superParent);
-			map.update(obj);
 		} else {
 			map.move(obj);
-			map.update(obj);
 		}
+		map.update(obj);
 	}
 	
 	@Nonnull
