@@ -26,14 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TerrainMap {
 	
@@ -41,11 +41,9 @@ public class TerrainMap {
 	private static final int MAP_WIDTH = 16384;
 	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
 	
-	private final TerrainMapCallback callback;
 	private final TerrainMapChunk [][] chunks;
 	
-	public TerrainMap(Terrain t, TerrainMapCallback callback) {
-		this.callback = callback;
+	public TerrainMap() {
 		this.chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
@@ -54,96 +52,89 @@ public class TerrainMap {
 		}
 	}
 	
-	public void start() {
-		
-	}
-	
-	public void stop() {
-		
-	}
-	
-	public void moveWithinMap(SWGObject obj) {
-		if (isInAwareness(obj)) {
+	public void add(SWGObject obj) {
+		if (obj.getAwareness().getTerrainMapChunk() == null)
 			move(obj);
-			update(obj);
-			callback.onMoveSuccess(obj);
-		} else {
-			callback.onMoveFailure(obj);
-		}
 	}
 	
-	public void removeFromMap(SWGObject obj) {
-		if (removeWithoutUpdate(obj)) {
-			update(obj);
-			Assert.test(isInAwareness(obj));
-		}
-	}
-	
-	private void move(SWGObject obj) {
-		TerrainMapChunk chunk = getChunk(obj);
-		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
-		if (current == chunk)
-			return; // Ignore if it doesn't change
+	public void remove(SWGObject obj) {
+		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(null);
 		if (current != null)
 			current.removeObject(obj);
-		chunk.addObject(obj);
 	}
 	
-	private void update(SWGObject obj) {
-		final Collection<SWGObject> oldAware = obj.getObjectsAware();
-		final Collection<SWGObject> newAware = getNearbyAware(obj);
-		final TerrainMapCallback call = this.callback;
-		newAware.forEach(n -> {
-			if (!oldAware.contains(n))
-				call.onWithinRange(obj, n);
-		});
-		oldAware.forEach(p -> {
-			if (!newAware.contains(p))
-				call.onOutOfRange(obj, p);
-		});
+	public void update(SWGObject obj) {
+		obj.setAware(AwarenessType.OBJECT, getAware(obj));
 	}
 	
+	public void move(SWGObject obj) {
+		TerrainMapChunk chunk = chunks[calculateIndex(obj.getTruncZ())][calculateIndex(obj.getTruncX())];
+		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
+		if (current != chunk) {
+			if (current != null)
+				current.removeObject(obj);
+			chunk.addObject(obj);
+		}
+	}
+	
+	@Nonnull
+	private Collection<SWGObject> getAware(SWGObject obj) {
+		SWGObject superParent = obj.getSuperParent();
+		Set<SWGObject> aware;
+		if (!AwarenessUtilities.isInAwareness(obj))
+			aware = new HashSet<>();
+		else if (superParent == null)
+			aware = getNearbyAware(obj);
+		else
+			aware = superParent.getAware(AwarenessType.OBJECT);
+		recursiveAdd(aware, obj);
+		return aware;
+	}
+	
+	@Nonnull
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
-		if (obj.getAwareness().getTerrainMapChunk() == null)
+		if (obj.getAwareness().getTerrainMapChunk() == null || !AwarenessUtilities.isInAwareness(obj))
 			return new HashSet<>();
 		
-		int sX = calculateIndex(obj.getTruncX())-1;
-		int sZ = calculateIndex(obj.getTruncZ())-1;
+		int countAcross = CHUNK_COUNT_ACROSS;
+		int sX = ((obj.getTruncX()+8192) >> INDEX_FACTOR) - 1;
+		int sZ = ((obj.getTruncZ()+8192) >> INDEX_FACTOR) - 1;
 		int eX = sX + 2;
 		int eZ = sZ + 2;
 		if (sX < 0)
 			sX = 0;
 		if (sZ < 0)
 			sZ = 0;
-		if (eX >= CHUNK_COUNT_ACROSS)
-			eX = CHUNK_COUNT_ACROSS-1;
-		if (eZ >= CHUNK_COUNT_ACROSS)
-			eZ = CHUNK_COUNT_ACROSS-1;
+		if (eX < 0)
+			eX = 0;
+		if (eZ < 0)
+			eZ = 0;
+		if (sX >= countAcross)
+			sX = countAcross-1;
+		if (sZ >= countAcross)
+			sZ = countAcross-1;
+		if (eX >= countAcross)
+			eX = countAcross-1;
+		if (eZ >= countAcross)
+			eZ = countAcross-1;
 		
-		List<SWGObject> aware = new ArrayList<>(128);
+		Set<SWGObject> aware = new HashSet<>();
 		for (int z = sZ; z <= eZ; ++z) {
 			for (int x = sX; x <= eX; ++x) {
 				chunks[z][x].getWithinAwareness(obj, aware);
 			}
 		}
-		return new HashSet<>(aware);
+		return aware;
 	}
 	
-	@Nonnull
-	private TerrainMapChunk getChunk(SWGObject obj) {
-		return chunks[calculateIndex(obj.getTruncZ())][calculateIndex(obj.getTruncX())];
-	}
-	
-	public static boolean removeWithoutUpdate(SWGObject obj) {
-		TerrainMapChunk chunk = obj.getAwareness().setTerrainMapChunk(null);
-		if (chunk != null)
-			chunk.removeObject(obj);
-		return chunk != null;
-	}
-	
-	private static boolean isInAwareness(SWGObject obj) {
-		return obj.getParent() == null && obj.getBaselineType() != BaselineType.WAYP
-				&& (obj.getBaselineType() != BaselineType.CREO || !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer());
+	private static void recursiveAdd(@Nonnull Collection<SWGObject> aware, @Nonnull SWGObject obj) {
+		aware.add(obj);
+		for (SWGObject child : obj.getSlottedObjects()) {
+			recursiveAdd(aware, child);
+		}
+		for (SWGObject child : obj.getContainedObjects()) {
+			recursiveAdd(aware, child);
+		}
 	}
 	
 	private static int calculateIndex(int x) {
@@ -153,13 +144,6 @@ public class TerrainMap {
 		if (i >= CHUNK_COUNT_ACROSS)
 			return CHUNK_COUNT_ACROSS-1;
 		return i;
-	}
-	
-	public interface TerrainMapCallback {
-		void onWithinRange(SWGObject obj, SWGObject inRange);
-		void onOutOfRange(SWGObject obj, SWGObject outRange);
-		void onMoveSuccess(SWGObject obj);
-		void onMoveFailure(SWGObject obj);
 	}
 	
 }

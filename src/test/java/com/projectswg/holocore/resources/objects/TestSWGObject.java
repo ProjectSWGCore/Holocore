@@ -68,7 +68,7 @@ public class TestSWGObject {
 		parent.setTerrain(Terrain.ADVENTURE1);
 		
 		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
-		Assert.assertEquals(null, child.getTerrain());
+		Assert.assertEquals(Terrain.GONE, child.getTerrain());
 		
 		child.moveToContainer(parent);
 		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());

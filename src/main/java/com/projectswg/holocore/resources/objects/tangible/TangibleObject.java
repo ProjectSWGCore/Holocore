@@ -26,10 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.tangible;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.Set;
-
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -39,7 +35,6 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.FactionIntent.FactionIntentType;
 import com.projectswg.holocore.resources.collections.SWGMap;
@@ -48,6 +43,8 @@ import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+
+import java.util.Set;
 
 public class TangibleObject extends SWGObject {
 	
@@ -76,13 +73,6 @@ public class TangibleObject extends SWGObject {
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		defenders.clear();
-		defenders.resetUpdateCount();
-		inCombat = false;
 	}
 	
 	public int getMaxHitPoints() {
@@ -388,13 +378,6 @@ public class TangibleObject extends SWGObject {
 		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
 		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
 		effectsMap = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII);
-	}
-	
-	@Override
-	protected void sendFinalBaselinePackets(Player target) {
-		if (pvpFaction != PvpFaction.NEUTRAL) {
-			new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
-		}
 	}
 	
 	@Override

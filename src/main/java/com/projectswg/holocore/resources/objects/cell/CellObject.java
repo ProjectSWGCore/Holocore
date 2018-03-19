@@ -29,8 +29,6 @@ package com.projectswg.holocore.resources.objects.cell;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
-
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
@@ -84,12 +82,6 @@ public class CellObject extends SWGObject {
 	public void setLabelMapPosition(float x, float z) {
 		this.labelX = x;
 		this.labelZ = z;
-	}
-
-	@Override
-	protected void sendFinalBaselinePackets(Player target) {
-		super.sendFinalBaselinePackets(target);
-		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
 	@Override

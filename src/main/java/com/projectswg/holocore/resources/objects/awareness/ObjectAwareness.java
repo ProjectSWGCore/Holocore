@@ -24,91 +24,78 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.objects.awareness;
 
-import java.util.EnumMap;
-
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
 
-public class AwarenessHandler implements AutoCloseable {
-	
-	private final EnumMap<Terrain, TerrainMap> terrains;
-	
-	public AwarenessHandler(TerrainMapCallback callback) {
-		terrains = new EnumMap<>(Terrain.class);
-		loadTerrainMaps(callback);
-	}
-	
-	@Override
-	public void close() {
-		for (TerrainMap map : terrains.values()) {
-			map.stop();
-		}
-	}
-	
-	private void loadTerrainMaps(TerrainMapCallback callback) {
-		for (Terrain t : Terrain.values()) {
-			TerrainMap map = new TerrainMap(t, callback);
-			map.start();
-			terrains.put(t, map);
-		}
-	}
-	
-	public void moveObject(SWGObject obj, Location requestedLocation) {
-		// Update location
-		updateLocation(obj, null, requestedLocation);
-		// Update awareness
-		Terrain terrain = requestedLocation.getTerrain();
-		if (terrain != null && terrain != Terrain.GONE) {
-			TerrainMap map = getTerrainMap(terrain);
-			map.moveWithinMap(obj);
-		}
-	}
-	
-	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		Assert.notNull(parent);
-		// Remove from previous awareness
-		TerrainMap.removeWithoutUpdate(obj);
-		// Update location
-		updateLocation(obj, parent, requestedLocation);
-		// Update awareness
-		obj.resetAwareness();
-	}
+import javax.annotation.Nonnull;
+import java.util.Collections;
 
-	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		if (disappearObjects) {
-			Terrain terrain = obj.getTerrain();
-			if (terrain != null && terrain != Terrain.GONE) {
-				TerrainMap map = getTerrainMap(terrain);
-				map.removeFromMap(obj);
-			}
-		} else {
-			TerrainMap.removeWithoutUpdate(obj);
+public class ObjectAwareness {
+	
+	private final TerrainMap[] terrains;
+	
+	public ObjectAwareness() {
+		terrains = new TerrainMap[Terrain.values().length];
+		for (int i = 0; i < terrains.length; i++) {
+			terrains[i] = new TerrainMap();
 		}
-		if (disappearCustom)
-			obj.clearCustomAware(true);
 	}
 	
-	private TerrainMap getTerrainMap(Terrain t) {
-		return terrains.get(t);
+	/**
+	 * Called when an object was created
+	 *
+	 * @param obj the object created
+	 */
+	public void createObject(@Nonnull SWGObject obj) {
+		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
+			TerrainMap map = getTerrainMap(obj);
+			map.add(obj);
+			map.update(obj);
+		}
 	}
 	
-	private static void updateLocation(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		obj.setLocation(requestedLocation);
-		if (isRider(obj, parent))
-			obj.moveToContainer(parent);
-		obj.onObjectMoved();
+	/**
+	 * Called when an object is destroyed
+	 *
+	 * @param obj the object destroyed
+	 */
+	public void destroyObject(@Nonnull SWGObject obj) {
+		TerrainMap map = getTerrainMap(obj);
+		map.remove(obj);
+		map.update(obj);
 	}
 	
-	private static boolean isRider(SWGObject obj, SWGObject parent) {
+	/**
+	 * Called when an object needs an update
+	 *
+	 * @param obj the object to update
+	 */
+	public void updateObject(@Nonnull SWGObject obj) {
+		SWGObject superParent = obj.getSuperParent();
+		TerrainMap map = getTerrainMap(obj);
+		if (superParent != null) {
+			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
+			map.remove(obj);
+			map.update(superParent);
+			map.update(obj);
+		} else {
+			map.move(obj);
+			map.update(obj);
+		}
+	}
+	
+	@Nonnull
+	private TerrainMap getTerrainMap(SWGObject obj) {
+		return terrains[obj.getTerrain().ordinal()];
+	}
+	
+	private static boolean isRider(@Nonnull SWGObject obj, SWGObject parent) {
 		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
 	}
 	

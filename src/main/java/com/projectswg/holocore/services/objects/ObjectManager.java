@@ -69,7 +69,7 @@ public class ObjectManager extends Manager {
 		objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		started = new AtomicBoolean(false);
 		
-		addChildService(new ObjectAwareness());
+		addChildService(new AwarenessService());
 		addChildService(new MapManager());
 		addChildService(new StaticService());
 		addChildService(new RadialService());

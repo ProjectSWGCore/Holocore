@@ -91,7 +91,6 @@ class TerrainBuildoutLoader {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
 			object.setClassification(ObjectClassification.BUILDOUT);
-			object.setPrefLoadRange(buildoutRow.getRadius());
 			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(area.getName(), object, buildoutRow.getContainerId());

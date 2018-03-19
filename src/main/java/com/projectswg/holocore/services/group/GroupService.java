@@ -160,10 +160,7 @@ public class GroupService extends Service {
 		if (groupObject == null) {
 			// Group was destroyed while logged out
 			creatureObject.setGroupId(0);
-			return;
 		}
-		
-		groupObject.updateMember(creatureObject);
 	}
 	
 	private void handleMemberDisappeared(Player player) {
