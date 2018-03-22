@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.commands.callbacks;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 
+import com.projectswg.holocore.intents.BuffIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.LootItemIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -167,17 +168,13 @@ public class TransferItemCallback implements ICmdCallback {
 
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
+					boolean equip = newContainer.equals(actor);
+					
 					if (weapon) {
-						if (newContainer.equals(actor)) {
-							// They just equipped a weapon. The equipped weapon must now be set to the target object.
-							actor.setEquippedWeapon((WeaponObject) target);
-							player.sendPacket(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
-						} else {
-							// They just unequipped a weapon. The equipped weapon must now be set to the default weapon.
-							actor.setEquippedWeapon(null);
-							player.sendPacket(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
-						}
+						changeWeapon(actor, target, equip);
 					}
+					
+					applyEffect(actor, target, equip);
 					break;
 				case CONTAINER_FULL:
 					new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
@@ -238,5 +235,31 @@ public class TransferItemCallback implements ICmdCallback {
 
 	private static String cleanProfessionString(String profession) {
 		return profession.substring(0, profession.lastIndexOf("_"));
+	}
+	
+	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {
+		if (equip) {
+			// The equipped weapon must now be set to the target object
+			actor.setEquippedWeapon((WeaponObject) target);
+			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
+		} else {
+			// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
+			actor.setEquippedWeapon(null);
+			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
+		}
+	}
+	
+	private static void applyEffect(CreatureObject actor, SWGObject target, boolean equip) {
+		String buffValue = target.getAttribute("effect");
+		
+		if (buffValue != null) {
+			String buffName = buffValue.replace("@ui_buff:", "");
+			
+			if (equip) {	// Grant buff
+				new BuffIntent(buffName, actor, actor, false).broadcast();
+			} else {	// Remove buff
+				new BuffIntent(buffName, actor, actor, true).broadcast();
+			}
+		}
 	}
 }
