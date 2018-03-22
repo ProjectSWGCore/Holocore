@@ -305,17 +305,6 @@ public class TangibleObject extends SWGObject {
 		}
 	}
 	
-	@Override
-	public void onObjectEnterAware(SWGObject aware) {
-		super.onObjectEnterAware(aware);
-		
-		if (getPvpFaction() == PvpFaction.NEUTRAL) {
-			return;
-		}
-		
-		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
-	}
-	
 	public String getCurrentCity() {
 		return currentCity;
 	}

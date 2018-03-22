@@ -31,9 +31,11 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
+import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.building.BuildingObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
 import javax.annotation.Nonnull;
@@ -173,6 +175,11 @@ public class CreatureObjectAwareness {
 			SWGObject parent = obj.getParent();
 			if (parent != null)
 				target.sendPacket(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
+		}
+		{ // PvP flag update
+			if (obj instanceof TangibleObject) {
+				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();
+			}
 		}
 	}
 	
