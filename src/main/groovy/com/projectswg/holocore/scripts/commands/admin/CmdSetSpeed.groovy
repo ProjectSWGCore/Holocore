@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.scripts.commands.admin
 
+import com.projectswg.holocore.intents.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.AccessLevel
 import com.projectswg.holocore.resources.player.Player
@@ -45,5 +46,9 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 		return
 	}
 
-	creature.setMovementScale(Integer.valueOf(args))
+	try {
+		creature.setMovementScale(Integer.valueOf(args))
+	} catch (NumberFormatException e) {
+		SystemMessageIntent.broadcastPersonal(player, args + " is not a valid number!")
+	}
 }
