@@ -27,6 +27,7 @@
 package com.projectswg.holocore.services.collections;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.resources.objects.collections.ClickyCollectionItem;
 import com.projectswg.holocore.resources.objects.collections.CollectionItem;
@@ -69,7 +70,8 @@ public class CollectionService extends Service {
 				String terrain = set.getText("terrain");
 				double x = set.getReal("x");
 				double y = set.getReal("y");
-				RadialHandler.registerHandler(iff, new WorldItemRadial(new ClickyCollectionItem(slotName, collectionName, objectId, iff, terrain, x, y)));
+				String sharedFile = ClientFactory.formatToSharedFile(iff);
+				RadialHandler.registerHandler(sharedFile, new WorldItemRadial(new ClickyCollectionItem(slotName, collectionName, objectId, iff, terrain, x, y)));
 				count++;
 			}
 		} catch (IOException e) {
