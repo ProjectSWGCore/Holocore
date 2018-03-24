@@ -165,11 +165,11 @@ public class TransferItemCallback implements ICmdCallback {
 				new LootItemIntent(player, target, oldContainer).broadcast();
 				return;
 			}
-
+			
+			boolean equip = newContainer.equals(actor);
+			
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
-					boolean equip = newContainer.equals(actor);
-					
 					if (weapon) {
 						changeWeapon(actor, target, equip);
 					}
