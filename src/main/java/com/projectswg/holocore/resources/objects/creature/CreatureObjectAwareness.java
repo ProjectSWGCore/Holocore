@@ -170,16 +170,14 @@ public class CreatureObjectAwareness {
 				Set<PvpFlag> flags = PvpFlag.getFlags(creature.getPvpFlags());
 				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, flags.toArray(new PvpFlag[flags.size()])));
 			}
+			if (obj instanceof TangibleObject) {
+				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();
+			}
 		}
 		{ // UpdateContainmentMessage
 			SWGObject parent = obj.getParent();
 			if (parent != null)
 				target.sendPacket(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
-		}
-		{ // PvP flag update
-			if (obj instanceof TangibleObject) {
-				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();
-			}
 		}
 	}
 	
