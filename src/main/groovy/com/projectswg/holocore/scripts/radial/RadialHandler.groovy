@@ -40,8 +40,10 @@ import com.projectswg.holocore.resources.objects.tangible.CreditObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.object.AIObjectRadial
 import com.projectswg.holocore.scripts.radial.object.CreditObjectRadial
+import com.projectswg.holocore.scripts.radial.object.PetDeviceRadial
 import com.projectswg.holocore.scripts.radial.object.SWGObjectRadial
 import com.projectswg.holocore.scripts.radial.object.UsableObjectRadial
+import com.projectswg.holocore.scripts.radial.object.VehicleMountRadial
 import com.projectswg.holocore.scripts.radial.object.survey.ObjectSurveyToolRadial
 import com.projectswg.holocore.scripts.radial.object.uniform.ObjectUniformBoxRadial
 import com.projectswg.holocore.scripts.radial.terminal.*
@@ -58,6 +60,7 @@ class RadialHandler {
 	static def initialize() {
 		initializeTerminalRadials()
 		initializeSurveyRadials()
+		initializePetRadials()
 		initializeMiscRadials()
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial()
@@ -124,6 +127,11 @@ class RadialHandler {
 	
 	private static def initializeSurveyRadials() {
 		registerHandler(GameObjectType.GOT_TOOL_SURVEY, new ObjectSurveyToolRadial())
+	}
+	
+	private static def initializePetRadials() {
+		registerHandler(GameObjectType.GOT_DATA_VEHICLE_CONTROL_DEVICE, new PetDeviceRadial())
+		registerHandler(GameObjectType.GOT_VEHICLE_HOVER, new VehicleMountRadial())
 	}
 	
 	private static def initializeMiscRadials() {

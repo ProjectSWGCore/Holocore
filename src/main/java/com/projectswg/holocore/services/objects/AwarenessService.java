@@ -228,11 +228,13 @@ public class AwarenessService extends Service {
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-//			SWGObject vehicle = obj.getParent();
-//			assert vehicle != null : "vehicle is null";
-//			awareness.moveObject(vehicle, null, requestedLocation);
-//			dataTransformHandler.handleMove(vehicle, speed, update);
-//			awareness.moveObject(obj, null, requestedLocation);
+			SWGObject vehicle = obj.getParent();
+			assert vehicle != null : "vehicle is null";
+			obj.systemMove(vehicle, requestedLocation);
+			vehicle.systemMove(null, requestedLocation);
+			awareness.updateObject(obj);
+			awareness.updateObject(vehicle);
+			dataTransformHandler.handleMove(vehicle, speed, update);
 		} else {
 			obj.systemMove(parent, requestedLocation);
 			awareness.updateObject(obj);

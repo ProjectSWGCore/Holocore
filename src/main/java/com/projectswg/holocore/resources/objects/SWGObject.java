@@ -628,6 +628,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	protected int calculateLoadRange() {
 		int loadRange = 0;
 		int containedRange;
+		for (SWGObject slot : slots.values()) {
+			if (slot == null)
+				continue;
+			containedRange = slot.getLoadRange();
+			if (containedRange > loadRange)
+				loadRange = containedRange;
+		}
 		for (SWGObject contained : containedObjects) {
 			containedRange = contained.getLoadRange();
 			if (containedRange > loadRange)
@@ -699,6 +706,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		for (SWGObject child : getContainedObjects()) {
 			child.onObjectMoved(aware);
+		}
+		for (SWGObject slot : getSlottedObjects()) {
+			slot.onObjectMoved(aware);
 		}
 	}
 	

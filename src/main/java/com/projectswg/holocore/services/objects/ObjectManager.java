@@ -76,6 +76,7 @@ public class ObjectManager extends Manager {
 		addChildService(new SpawnerService());
 		addChildService(clientBuildoutService);
 		addChildService(new StaticItemService());
+		addChildService(new PetService());
 		
 		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
 		registerForIntent(ObjectCreatedIntent.class, this::processObjectCreatedIntent);
