@@ -30,44 +30,38 @@ import com.projectswg.common.control.Intent;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 public class ContainerTransferIntent extends Intent {
 	
 	private SWGObject obj;
 	private SWGObject container;
 	private SWGObject oldContainer;
 	
-	public ContainerTransferIntent() {
-		this(null, null, null);
+	public ContainerTransferIntent(@Nonnull SWGObject obj, @CheckForNull SWGObject oldContainer, @CheckForNull SWGObject container) {
+		this.obj = obj;
+		this.oldContainer = oldContainer;
+		this.container = container;
 	}
 	
-	public ContainerTransferIntent(SWGObject obj, SWGObject oldContainer,SWGObject container) {
-		setObject(obj);
-		setOldContainer(oldContainer);
-		setContainer(container);
-	}
-	
+	@Nonnull
 	public SWGObject getObject() {
 		return obj;
 	}
 	
-	public void setObject(SWGObject obj) {
-		this.obj = obj;
-	}
-	
+	@CheckForNull
 	public SWGObject getContainer() {
 		return container;
 	}
 	
-	public void setContainer(SWGObject container) {
-		this.container = container;
-	}
-	
+	@CheckForNull
 	public SWGObject getOldContainer() {
 		return oldContainer;
 	}
 	
-	public void setOldContainer(SWGObject oldContainer) {
-		this.oldContainer = oldContainer;
-	}	
+	public static void broadcast(@Nonnull SWGObject obj, @CheckForNull SWGObject oldContainer, @CheckForNull SWGObject newContainer) {
+		new ContainerTransferIntent(obj, oldContainer, newContainer).broadcast();
+	}
 	
 }

@@ -184,10 +184,7 @@ public class BaselineObject {
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
 		}
-		DeltaBuilder builder = new DeltaBuilder((SWGObject) this, this.type, type, update, value);
-		boolean sent = builder.send();
-		if (sent && isDeltaLogging())
-			Log.v("Delta [type=%d, update=%d, value=%s] = %s", type, update, value, ByteUtilities.getHexString(builder.getEncodedData()));
+		new DeltaBuilder((SWGObject) this, this.type, type, update, value).send();
 	}
 	
 	public final void sendDelta(int type, int update, Object value, StringType strType) {
@@ -195,14 +192,7 @@ public class BaselineObject {
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
 		}
-		DeltaBuilder builder = new DeltaBuilder((SWGObject) this, this.type, type, update, value, strType);
-		boolean sent = builder.send();
-		if (sent && isDeltaLogging())
-			Log.v("Delta %s: [type=%d, update=%d, value=%s, strType=%s] = %s", this, type, update, value, strType, ByteUtilities.getHexString(builder.getEncodedData()));
-	}
-	
-	private boolean isDeltaLogging() {
-		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-LOG-DELTA", false);
+		new DeltaBuilder((SWGObject) this, this.type, type, update, value, strType).send();
 	}
 	
 	private Baseline createBaseline(Player target, int num, BaselineCreator bc) {

@@ -36,7 +36,7 @@ import com.projectswg.holocore.services.commands.CommandService;
 import com.projectswg.holocore.services.commands.EntertainmentService;
 import com.projectswg.holocore.services.crafting.CraftingManager;
 import com.projectswg.holocore.services.experience.ExperienceManager;
-import com.projectswg.holocore.services.faction.FactionService;
+import com.projectswg.holocore.services.faction.FactionManager;
 import com.projectswg.holocore.services.group.GroupService;
 import com.projectswg.holocore.services.sui.SuiService;
 
@@ -49,7 +49,7 @@ public class GameManager extends Manager {
 		addChildService(new CollectionService());
 		addChildService(new CollectionBadgeManager());
 		addChildService(new EnvironmentService());
-		addChildService(new FactionService());
+		addChildService(new FactionManager());
 		addChildService(new GroupService());
 		addChildService(new SkillModService());
 		addChildService(new EntertainmentService());

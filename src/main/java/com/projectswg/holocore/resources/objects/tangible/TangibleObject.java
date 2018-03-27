@@ -26,10 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.tangible;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.Set;
-
+import com.projectswg.common.data.customization.CustomizationString;
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -37,7 +35,6 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.FactionIntent.FactionIntentType;
 import com.projectswg.holocore.resources.collections.SWGMap;
@@ -47,9 +44,11 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 
+import java.util.Set;
+
 public class TangibleObject extends SWGObject {
 	
-	private byte []	appearanceData	= new byte[0];
+	private CustomizationString	appearanceData	= new CustomizationString();
 	private int		maxHitPoints	= 1000;
 	private int		components		= 0;
 	private boolean	inCombat		= false;
@@ -74,17 +73,6 @@ public class TangibleObject extends SWGObject {
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		defenders.clear();
-		defenders.resetUpdateCount();
-		inCombat = false;
-	}
-	
-	public byte [] getAppearanceData() {
-		return appearanceData;
 	}
 	
 	public int getMaxHitPoints() {
@@ -153,8 +141,18 @@ public class TangibleObject extends SWGObject {
 		return objectEffects;
 	}
 	
-	public void setAppearanceData(byte [] appearanceData) {
+	public void putCustomization(String name, CustomizationVariable value) {
+		appearanceData.put(name, value);
+	}
+	
+	public CustomizationVariable getCustomization(String name) {
+		return appearanceData.get(name);
+	}
+	
+	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
+		
+		sendDelta(3, 6, appearanceData);
 	}
 	
 	public void setMaxHitPoints(int maxHitPoints) {
@@ -253,7 +251,12 @@ public class TangibleObject extends SWGObject {
 		sendDelta(3, 9, counter);
 	}
 	
-	public boolean isEnemy(TangibleObject otherObject) {
+	/**
+	 *
+	 * @param otherObject
+	 * @return true if this object is an enemy of {@code otherObject}
+	 */
+	public boolean isEnemyOf(TangibleObject otherObject) {
 		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
 			return false;
 		}
@@ -262,20 +265,50 @@ public class TangibleObject extends SWGObject {
 			return true;
 		}
 		
-		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
-			return false;
-		} 
-		
+		PvpFaction ourFaction = getPvpFaction();
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
-		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
-				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
+		if (ourFaction == PvpFaction.NEUTRAL || otherFaction == PvpFaction.NEUTRAL) {
+			// Neutrals are always excluded from factional combat
+			return false;
+		}
+		
+		// At this point, neither are neutral
+		
+		if (ourFaction == otherFaction) {
+			// Members of the same faction are not enemies
+			return false;
+		}
+		
+		// At this point, they're members of opposing factions
+		
+		PvpStatus ourStatus = getPvpStatus();
+		PvpStatus otherStatus = otherObject.getPvpStatus();
+		
+		if (ourStatus == PvpStatus.ONLEAVE || otherStatus == PvpStatus.ONLEAVE) {
+			// They're of opposing factions, but one of them on leave
+			return false;
+		}
+		
+		// At this point, they're both either combatant or special forces
+		
+		boolean ourPlayer = getSlottedObject("ghost") != null;
+		boolean otherPlayer = otherObject.getSlottedObject("ghost") != null;
+		
+		if (ourPlayer && otherPlayer) {
+			// Two players can only attack each other if both are Special Forces
+			return ourStatus == PvpStatus.SPECIALFORCES && otherStatus == PvpStatus.SPECIALFORCES;
+		} else {
+			// At this point, we're dealing with player vs npc or npc vs npc
+			// In this case, they just need to not be on leave and we've already established this
+			return true;
+		}
 	}
-
+	
 	public String getCurrentCity() {
 		return currentCity;
 	}
-
+	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
 	}
@@ -295,7 +328,7 @@ public class TangibleObject extends SWGObject {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addInt(pvpFaction.getCrc()); // Faction - 4
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
-		bb.addArray(appearanceData); // - 6
+		bb.addObject(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
@@ -327,7 +360,7 @@ public class TangibleObject extends SWGObject {
 		super.parseBaseline3(buffer);
 		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
-		appearanceData = buffer.getArray();
+		appearanceData.decode(buffer);
 		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
@@ -348,17 +381,10 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
-	protected void sendBaselines(Player target) {
-		super.sendBaselines(target);
-		
-//		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
-	}
-	
-	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
 		stream.addByte(0);
-		stream.addArray(appearanceData);
+		appearanceData.save(stream);
 		stream.addInt(maxHitPoints);
 		stream.addInt(components);
 		stream.addBoolean(inCombat);
@@ -379,7 +405,7 @@ public class TangibleObject extends SWGObject {
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		stream.getByte();
-		appearanceData = stream.getArray();
+		appearanceData.read(stream);
 		maxHitPoints = stream.getInt();
 		components = stream.getInt();
 		inCombat = stream.getBoolean();

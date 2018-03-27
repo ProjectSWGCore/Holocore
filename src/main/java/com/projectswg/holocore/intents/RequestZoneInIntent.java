@@ -33,28 +33,18 @@ import com.projectswg.holocore.resources.player.Player;
 
 public class RequestZoneInIntent extends Intent {
 	
-	private Player player;
-	private CreatureObject creature;
+	private final CreatureObject creature;
 	
-	public RequestZoneInIntent(Player player, CreatureObject creature) {
-		setPlayer(player);
-		setCreature(creature);
-	}
-	
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
-	public void setCreature(CreatureObject creature) {
+	public RequestZoneInIntent(CreatureObject creature) {
 		this.creature = creature;
-	}
-	
-	public Player getPlayer() {
-		return player;
 	}
 	
 	public CreatureObject getCreature() {
 		return creature;
+	}
+	
+	public static void broadcast(CreatureObject creature) {
+		new RequestZoneInIntent(creature).broadcast();
 	}
 	
 }

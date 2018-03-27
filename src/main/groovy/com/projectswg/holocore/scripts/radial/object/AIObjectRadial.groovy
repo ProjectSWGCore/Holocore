@@ -27,22 +27,36 @@
 
 package com.projectswg.holocore.scripts.radial.object
 
+import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.intents.combat.loot.LootRequestIntent
 import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.objects.custom.AIObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
 class AIObjectRadial extends SWGObjectRadial implements RadialHandlerInterface {
 	
 	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		AIObject ai = (AIObject) target
+		
+		if (ai.getPosture() != Posture.DEAD) {
+			return
+		}
+		
 		RadialOption loot = new RadialOption(RadialItem.LOOT)
 		loot.addChild(RadialItem.LOOT_ALL)
 		options.add(loot)
 	}
 	
 	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		AIObject ai = (AIObject) target
+		
+		if (ai.getPosture() != Posture.DEAD) {
+			return
+		}
+		
 		switch (selection) {
 			case RadialItem.LOOT:
 				LootRequestIntent.broadcast(player, target, LootRequestIntent.LootType.LOOT)

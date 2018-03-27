@@ -71,10 +71,10 @@ public class CreditObject extends TangibleObject {
 		
 		((CreatureObject) requester).addToCash(amount);
 		
-		Set<Player> oldObservers = getObserversAndParent();
-		if (parent != null)
-			parent.removeObject(this);
-		AwarenessUtilities.callForOldObserver(oldObservers, Collections.emptySet(), this::destroyObject);
+//		Set<Player> oldObservers = getObserversAndParent();
+//		if (parent != null)
+//			parent.removeObject(this);
+//		AwarenessUtilities.callForOldObserver(oldObservers, Collections.emptySet(), this::destroyObject);
 		new ContainerTransferIntent(this, parent, null).broadcast();
 		new DestroyObjectIntent(this).broadcast();
 		

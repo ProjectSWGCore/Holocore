@@ -32,27 +32,28 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
-import com.projectswg.common.control.Service;
+import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
-public final class FactionService extends Service {
+public final class FactionManager extends Manager {
 
 	private final Map<TangibleObject, Future<?>> statusChangers;
 	private final PswgScheduledThreadPool executor;
 	
-	public FactionService() {
+	public FactionManager() {
 		statusChangers = new ConcurrentHashMap<>();
 		executor = new PswgScheduledThreadPool(1, "faction-service");
+		
+		addChildService(new CivilWarService());
 		
 		registerForIntent(FactionIntent.class, this::handleFactionIntent);
 	}
@@ -94,11 +95,6 @@ public final class FactionService extends Service {
 		
 		target.setPvpFaction(newFaction);
 		handleFlagChange(target);
-		
-		if(target.getBaselineType() == BaselineType.CREO && target.getPvpFaction() != PvpFaction.NEUTRAL) {
-			// We're given rank 1 upon joining a non-neutral faction
-			((CreatureObject) target).setFactionRank((byte) 1);
-		}
 	}
 	
 	private void handleSwitchChange(FactionIntent fi) {
@@ -151,17 +147,28 @@ public final class FactionService extends Service {
 	}
 	
 	private void handleFlagChange(TangibleObject target) {
-		Player objOwner = target.getOwner();
+		Player targetOwner = target.getOwner();
 		
-		for (Player observerOwner : target.getObservers()) {
-			TangibleObject observer = observerOwner.getCreatureObject();
-
-			int pvpBitmask = getPvpBitmask(target, observer);
+		for (SWGObject objectAware : target.getObjectsAware()) {
+			if (!(objectAware instanceof TangibleObject)) {
+				continue;
+			}
 			
-			if (objOwner != null) // Send the PvP information about this observer to the owner
-				objOwner.sendPacket(createPvpStatusMessage(observer, observer.getPvpFlags() | pvpBitmask));
-			// Send the pvp information about the owner to this observer
-			observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+			TangibleObject tangibleAware = (TangibleObject) objectAware;
+			
+			if (tangibleAware.getPvpFaction() == PvpFaction.NEUTRAL) {
+				continue;
+			}
+			
+			Player observerOwner = tangibleAware.getOwner();
+
+			int pvpBitmask = getPvpBitmask(target, tangibleAware);
+			
+			if (targetOwner != null) // Send the PvP information about this observer to the owner
+				targetOwner.sendPacket(createPvpStatusMessage(tangibleAware, tangibleAware.getPvpFlags() | pvpBitmask));
+			
+			if (observerOwner != null)	// Send the pvp information about the owner to this observer
+				observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
 		}
 	}
 	
@@ -225,7 +232,7 @@ public final class FactionService extends Service {
 	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
 		int pvpBitmask = 0;
 
-		if(target.isEnemy(observer)) {
+		if(target.isEnemyOf(observer)) {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		

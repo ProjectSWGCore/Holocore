@@ -27,12 +27,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test_resources;
 
-import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
-import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
@@ -40,15 +35,20 @@ import com.projectswg.holocore.resources.objects.GameObjectType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
-import com.projectswg.holocore.services.objects.ObjectCreator;
 
-import java.util.Map.Entry;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class GenericCreatureObject extends CreatureObject {
 	
+	private static final AtomicLong GENERATED_IDS = new AtomicLong(1000000);
+	
 	private Player player;
+	
+	private int loadRange;
 	
 	public GenericCreatureObject(long objectId) {
 		super(objectId);
@@ -60,86 +60,52 @@ public class GenericCreatureObject extends CreatureObject {
 		};
 		player.setPlayerState(PlayerState.ZONED_IN);
 		setHasOwner(true);
-		setSlot("ghost", new PlayerObject(-getObjectId()));
+		loadRange = -1;
+	}
+	
+	public void setLoadRange(int loadRange) {
+		this.loadRange = loadRange;
+		updateLoadRange();
 	}
 	
 	public void setHasOwner(boolean hasOwner) {
 		if (hasOwner) {
-			player.setCreatureObject(this);
+			setOwner(player);
 		} else {
-			player.setCreatureObject(null);
+			setOwner(null);
 		}
 	}
 	
 	public void setupAsCharacter() {
-		handlePostCreation();
-		createInventoryObject("object/tangible/inventory/shared_character_inventory.iff");
-		createInventoryObject("object/tangible/datapad/shared_character_datapad.iff");
-		createInventoryObject("object/tangible/inventory/shared_appearance_inventory.iff");
-		createInventoryObject("object/tangible/bank/shared_character_bank.iff");
-		createInventoryObject("object/tangible/mission_bag/shared_mission_bag.iff");
-	}
-	
-	private void createTangible(ContainerPermissionsType type, String template) {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		obj.setContainerPermissions(type);
-		obj.moveToContainer(this);
-		ObjectCreatedIntent.broadcast(obj);
-	}
-	
-	/** Creates an object with inventory-level world visibility (only the owner) */
-	private void createInventoryObject(String template) {
-		createTangible(ContainerPermissionsType.INVENTORY, template);
-	}
-	
-	private void handlePostCreation() {
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(Race.HUMAN_MALE.getFilename());
-		addObjectAttributes(attributes);
-		createObjectSlots();
-		Object got = getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
-		if (got != null)
-			setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
-	}
-
-	private void addObjectAttributes(ObjectData attributes) {
-		if (attributes == null)
-			return;
-
-		for (Entry<ObjectDataAttribute, Object> e : attributes.getAttributes().entrySet()) {
-			setObjectAttribute(e.getKey(), e.getValue());
-		}
-	}
-
-	private void setObjectAttribute(ObjectDataAttribute key, Object value) {
-		setDataAttribute(key, value);
-		switch (key) {
-			case OBJECT_NAME: setStringId(value.toString()); break;
-			case DETAILED_DESCRIPTION: setDetailStringId(value.toString()); break;
-			case CONTAINER_TYPE: setContainerType((Integer) value); break;
-			default: break;
-		}
-	}
-
-	private void createObjectSlots() {
-		if (getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
-			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME));
-			if (descriptor == null)
-				return;
-
-			for (String slotName : descriptor.getSlots()) {
-				setSlot(slotName, null);
-			}
+		for (String slotName : List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r")) {
+			setSlot(slotName, null);
 		}
 		
-		if (getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
-			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME));
-			if (arrangementData == null)
-				return;
-
-			setArrangement(arrangementData.getArrangement());
-		}
+		setArrangement(List.of(List.of("rider")));
+		setGameObjectType(GameObjectType.GOT_CREATURE_CHARACTER);
+		
+		PlayerObject playerObject = new PlayerObject(-getObjectId());
+		playerObject.setArrangement(List.of(List.of("ghost")));
+		playerObject.moveToContainer(this);
+		createInventoryObject("inventory");
+		createInventoryObject("datapad");
+		createInventoryObject("appearance_inventory");
+		createInventoryObject("bank");
+		createInventoryObject("mission_bag");
+	}
+	
+	@Override
+	protected int calculateLoadRange() {
+		if (loadRange == -1)
+			return super.calculateLoadRange();
+		return loadRange;
+	}
+	
+	private void createInventoryObject(String slot) {
+		SWGObject obj = new TangibleObject(GENERATED_IDS.incrementAndGet());
+		obj.setArrangement(List.of(List.of(slot)));
+		obj.setContainerPermissions(ContainerPermissionsType.INVENTORY);
+		obj.moveToContainer(this);
 	}
 	
 }
