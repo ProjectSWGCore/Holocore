@@ -25,7 +25,7 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package com.projectswg.holocore.services.objects;
+package com.projectswg.holocore.services.galaxy;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.Posture;
@@ -42,6 +42,7 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
 import com.projectswg.holocore.resources.objects.tangible.OptionFlag;
 import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.holocore.services.objects.ObjectCreator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,13 +52,13 @@ import java.util.Map;
 /**
  * Created by Mads on 19-06-2017.
  */
-class PetService extends Service {
+class ControlDeviceService extends Service {	// TODO rename to ControlDeviceService
 	
 	// TODO no-vehicle zones (does not affect creature mounts)
 	
-	private final Map<CreatureObject, Collection<Pet>> calledPets;
+	private final Map<CreatureObject, Collection<Pet>> calledPets;	// TODO rename Pet class and this field
 	
-	PetService() {
+	ControlDeviceService() {
 		calledPets = new HashMap<>();
 		
 		registerForIntent(ObjectTeleportIntent.class, this::handleObjectTeleport);
@@ -68,7 +69,7 @@ class PetService extends Service {
 	
 	@Override
 	public boolean stop() {
-		storePets();	// Don't want pets out and about when server starts
+		globallyStorePets();	// Don't want pets out and about when server starts up again
 		
 		return super.stop();
 	}
@@ -183,7 +184,7 @@ class PetService extends Service {
 		if (calledPets.containsKey(caller)) {
 			callerPets = calledPets.get(caller);
 			
-			// TODO check if size of callerPets exceeds max allowed
+			// TODO check if size of callerPets exceeds max allowed.
 		} else {
 			callerPets = new ArrayList<>();
 			calledPets.put(caller, callerPets);
@@ -220,7 +221,7 @@ class PetService extends Service {
 			}
 		}
 		
-		pet.getSlottedObject("inventory").moveToContainer(petControlDevice);
+		pet.moveToContainer(petControlDevice);	// Transfer pet from awareness to the datapad control device
 		Log.v("Stored pet %s in control device %s", pet, petControlDevice);
 	}
 	
@@ -243,12 +244,8 @@ class PetService extends Service {
 	/**
 	 * Stores all called pets by all players
 	 */
-	private void storePets() {
-		Collection<CreatureObject> petMasters = calledPets.keySet();
-		
-		for (CreatureObject petMaster : petMasters) {
-			storePets(petMaster);
-		}
+	private void globallyStorePets() {
+		calledPets.keySet().forEach(this::storePets);
 	}
 	
 	private boolean isMountable(CreatureObject pet) {

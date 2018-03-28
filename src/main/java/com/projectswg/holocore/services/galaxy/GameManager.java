@@ -57,6 +57,7 @@ public class GameManager extends Manager {
 		addChildService(new ExperienceManager());
 		addChildService(new BuffService());
 		addChildService(new CraftingManager());
+		addChildService(new ControlDeviceService());
 	}
 	
 }

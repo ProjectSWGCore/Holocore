@@ -230,10 +230,11 @@ public class AwarenessService extends Service {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
 			SWGObject vehicle = obj.getParent();
 			assert vehicle != null : "vehicle is null";
-			obj.systemMove(vehicle, requestedLocation);
+			obj.systemMove(vehicle, requestedLocation);	// This makes buildings disappear, BUT the vehicle moves as it should
 			vehicle.systemMove(null, requestedLocation);
 			awareness.updateObject(obj);
 			awareness.updateObject(vehicle);
+			
 			dataTransformHandler.handleMove(vehicle, speed, update);
 		} else {
 			obj.systemMove(parent, requestedLocation);
@@ -244,7 +245,7 @@ public class AwarenessService extends Service {
 				dataTransformHandler.handleMove(obj, parent, speed, update);
 			}
 		}
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())	// TODO don't the other passengers in the vehicle move as well?
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
 	}
 	
