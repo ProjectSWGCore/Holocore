@@ -38,7 +38,7 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 	def farAwayTarget
 
 	if (args) {
-		farAwayTarget = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(args)
+		farAwayTarget = galacticManager.getPlayerManager().getPlayerByFirstName(args)
 	}
 
 	if (farAwayTarget != null) {

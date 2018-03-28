@@ -38,6 +38,8 @@ import com.projectswg.common.persistable.Persistable;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 
+import javax.annotation.Nonnull;
+
 public class InstanceLocation implements Persistable {
 	
 	private final AtomicReference<Location> location;
@@ -46,7 +48,7 @@ public class InstanceLocation implements Persistable {
 	private int instanceNumber;
 	
 	public InstanceLocation() {
-		this.location = new AtomicReference<>(new Location(0, 0, 0, null));
+		this.location = new AtomicReference<>(new Location(0, 0, 0, Terrain.GONE));
 		this.instanceType = InstanceType.NONE;
 		this.instanceNumber = 0;
 	}
@@ -68,6 +70,7 @@ public class InstanceLocation implements Persistable {
 	}
 	
 	public void setPosition(Terrain terrain, double x, double y, double z) {
+		assert terrain != null : "terrain is null";
 		Location location = Location.builder(getLocation())
 				.setTerrain(terrain)
 				.setPosition(x, y, z)
@@ -76,6 +79,7 @@ public class InstanceLocation implements Persistable {
 	}
 	
 	public void setTerrain(Terrain terrain) {
+		assert terrain != null : "terrain is null";
 		if (getLocation().getTerrain() == terrain)
 			return;
 		setLocation(Location.builder(getLocation()).setTerrain(terrain).build());
@@ -102,14 +106,17 @@ public class InstanceLocation implements Persistable {
 		setInstance(InstanceType.NONE, 0);
 	}
 	
+	@Nonnull
 	public Location getLocation() {
 		return location.get();
 	}
 	
+	@Nonnull
 	public Point3D getPosition() {
 		return getLocation().getPosition();
 	}
 	
+	@Nonnull
 	public Terrain getTerrain() {
 		return getLocation().getTerrain();
 	}

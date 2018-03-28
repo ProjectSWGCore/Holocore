@@ -27,7 +27,7 @@
 package com.projectswg.holocore.services.objects;
 
 import com.projectswg.common.control.Service;
-import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.CrcDatabase;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
@@ -75,19 +75,8 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	public List<SWGObject> getClientObjects() {
-		loadClientObjects();
-		return Collections.unmodifiableList(objects);
-	}
-	
-	private static void broadcast(SWGObject obj) {
-		ObjectCreatedIntent.broadcast(obj);
-		obj.getContainedObjects().forEach(ClientBuildoutService::broadcast);
-		obj.getSlottedObjects().forEach(ClientBuildoutService::broadcast);
-	}
-	
-	private void loadClientObjects() {
 		if (!objects.isEmpty())
-			return;
+			return Collections.unmodifiableList(this.objects);
 		Map<Long, SWGObject> objects;
 		long startTime = StandardLog.onStartLoad("client objects");
 		loadAreas();
@@ -98,6 +87,32 @@ public class ClientBuildoutService extends Service {
 		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
 		this.objects.clear();
 		this.objects.addAll(objects.values());
+		return Collections.unmodifiableList(this.objects);
+	}
+	
+	public List<SWGObject> getClientObjects(Terrain terrain) {
+		if (!objects.isEmpty())
+			return Collections.unmodifiableList(this.objects);
+		Map<Long, SWGObject> objects;
+		long startTime = StandardLog.onStartLoad("client objects");
+		loadAreas();
+		if (DataManager.getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
+			objects = loadObjects(terrain);
+		else
+			objects = new HashMap<>();
+		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
+		this.objects.clear();
+		this.objects.addAll(objects.values());
+		return Collections.unmodifiableList(this.objects);
+	}
+	
+	private static void broadcast(SWGObject obj) {
+		ObjectCreatedIntent.broadcast(obj);
+		obj.getContainedObjects().forEach(ClientBuildoutService::broadcast);
+		obj.getSlottedObjects().forEach(ClientBuildoutService::broadcast);
+	}
+	
+	private void loadClientObjects() {
 	}
 	
 	public Map<Long, SWGObject> loadClientObjectsByArea(int areaId) {
@@ -107,6 +122,12 @@ public class ClientBuildoutService extends Service {
 	
 	private Map<Long, SWGObject> loadObjects() {
 		Map<Long, SWGObject> objects = BuildoutLoader.getAllObjects(areasById);
+		addAdditionalObjects(objects);
+		return objects;
+	}
+	
+	private Map<Long, SWGObject> loadObjects(Terrain terrain) {
+		Map<Long, SWGObject> objects = BuildoutLoader.getAllObjects(areasById, terrain);
 		addAdditionalObjects(objects);
 		return objects;
 	}
@@ -130,7 +151,6 @@ public class ClientBuildoutService extends Service {
 			obj.setTerrain(Terrain.getTerrainFromName(set.getText("terrain")));
 			obj.setHeading(set.getReal("heading"));
 			obj.setClassification(ObjectClassification.BUILDOUT);
-			obj.setPrefLoadRange(set.getReal("radius"));
 			checkParent(buildouts, obj, set.getText("building_name"), (int) set.getInt("cell_id"));
 			buildouts.put(obj.getObjectId(), obj);
 		} catch (ObjectCreationException e) {
@@ -162,7 +182,7 @@ public class ClientBuildoutService extends Service {
 			Log.e("Cell is not found! Building: %s Cell: %d", buildingName, cellId);
 			return;
 		}
-		obj.moveToContainer(cell);
+		obj.systemMove(cell);
 	}
 	
 	private void loadAreas() {
@@ -229,6 +249,8 @@ public class ClientBuildoutService extends Service {
 	
 	private static class BuildoutLoader {
 		
+		private static final CrcDatabase CRC_DATABASE = CrcDatabase.getInstance();
+		
 		private BuildoutLoader() {
 			
 		}
@@ -236,8 +258,6 @@ public class ClientBuildoutService extends Service {
 		public static Map<Long, SWGObject> getAllObjects(Map<Integer, BuildoutArea> areas) {
 			Map<Long, SWGObject> objects = new HashMap<>();
 			int areaId;
-			SWGObject object;
-			ObjectCreationData data = new ObjectCreationData();
 			BuildoutArea currentArea = areas.values().iterator().next();
 			try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
 				while (set.next()) {
@@ -249,9 +269,7 @@ public class ClientBuildoutService extends Service {
 						}
 						currentArea = area;
 					}
-					parseLine(set, data);
-					object = createObject(objects, data, currentArea);
-					objects.put(object.getObjectId(), object);
+					createObject(objects, set, currentArea);
 				}
 			} catch (IOException e) {
 				Log.e(e);
@@ -259,66 +277,47 @@ public class ClientBuildoutService extends Service {
 			return objects;
 		}
 		
-		private static SWGObject createObject(Map<Long, SWGObject> objects, ObjectCreationData data, BuildoutArea area) {
-			SWGObject obj = ObjectCreator.createObjectFromTemplate(data.id, CRC.getString(data.templateCrc));
-			obj.setClassification(data.snapshot ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
-			obj.setPrefLoadRange(data.radius);
-			setObjectLocation(obj, data, area);
-			setCellNumber(objects, obj, data);
-			if (obj instanceof BuildingObject)
-				((BuildingObject) obj).populateCells();
-			return obj;
+		public static Map<Long, SWGObject> getAllObjects(Map<Integer, BuildoutArea> areas, Terrain terrain) {
+			Map<Long, SWGObject> objects = new HashMap<>();
+			int areaId;
+			BuildoutArea currentArea = areas.values().iterator().next();
+			try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
+				while (set.next()) {
+					areaId = (int) set.getInt(2);
+					if (currentArea.getId() != areaId) {
+						BuildoutArea area = areas.get(areaId);
+						if (area == null) { // usually for events
+							continue;
+						}
+						currentArea = area;
+					}
+					if (currentArea.getTerrain() != terrain)
+						continue;
+					createObject(objects, set, currentArea);
+				}
+			} catch (IOException e) {
+				Log.e(e);
+			}
+			return objects;
 		}
 		
-		private static void setObjectLocation(SWGObject obj, ObjectCreationData data, BuildoutArea area) {
+		private static void createObject(Map<Long, SWGObject> objects, SdbResultSet set, BuildoutArea area) {
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(3)));
+			obj.setClassification(set.getInt(1) != 0 ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
 			obj.setLocation(Location.builder()
-					.setPosition(data.x, data.y, data.z)
-					.setOrientation(data.orientationX, data.orientationY, data.orientationZ, data.orientationW)
+					.setPosition(set.getReal(5), set.getReal(6), set.getReal(7))
+					.setOrientation(set.getReal(8), set.getReal(9), set.getReal(10), set.getReal(11))
 					.setTerrain(area.getTerrain())
 					.build());
-		}
-		
-		private static void setCellNumber(Map<Long, SWGObject> objects, SWGObject obj, ObjectCreationData data) {
-			if (data.cellIndex != 0) {
-				BuildingObject building = (BuildingObject) objects.get(data.containerId);
-				CellObject cell = building.getCellByNumber(data.cellIndex);
-				obj.moveToContainer(cell);
+			if (set.getInt(13) != 0) {
+				BuildingObject building = (BuildingObject) objects.get(set.getInt(4));
+				CellObject cell = building.getCellByNumber((int) set.getInt(13));
+				obj.systemMove(cell);
 			}
+			if (obj instanceof BuildingObject)
+				((BuildingObject) obj).populateCells();
+			objects.put(set.getInt(0), obj);
 		}
-		
-		private static void parseLine(SdbResultSet set, ObjectCreationData data) {
-			data.id				= set.getInt(0);
-			data.snapshot		= set.getInt(1) != 0;
-			data.templateCrc	= (int) set.getInt(3);
-			data.containerId	= set.getInt(4);
-			data.x				= set.getReal(5);
-			data.y				= set.getReal(6);
-			data.z				= set.getReal(7);
-			data.orientationX	= set.getReal(8);
-			data.orientationY	= set.getReal(9);
-			data.orientationZ	= set.getReal(10);
-			data.orientationW	= set.getReal(11);
-			data.radius			= set.getReal(12);
-			data.cellIndex		= (int) set.getInt(13);
-		}
-		
-	}
-	
-	private static class ObjectCreationData {
-		
-		public long id;
-		public boolean snapshot;
-		public int templateCrc;
-		public long containerId;
-		public double x;
-		public double y;
-		public double z;
-		public double orientationX;
-		public double orientationY;
-		public double orientationZ;
-		public double orientationW;
-		public double radius;
-		public int cellIndex;
 		
 	}
 	

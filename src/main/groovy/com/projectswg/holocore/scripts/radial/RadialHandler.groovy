@@ -29,8 +29,13 @@ package com.projectswg.holocore.scripts.radial
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.resources.objects.GameObjectType
+import com.projectswg.holocore.resources.objects.GameObjectTypeMask
 import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.custom.AIObject
+import com.projectswg.holocore.resources.objects.custom.LoiterAIObject
+import com.projectswg.holocore.resources.objects.custom.PatrolAIObject
+import com.projectswg.holocore.resources.objects.custom.RandomAIObject
+import com.projectswg.holocore.resources.objects.custom.TurningAIObject
 import com.projectswg.holocore.resources.objects.tangible.CreditObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.object.AIObjectRadial
@@ -45,6 +50,8 @@ import javax.annotation.Nonnull
 
 class RadialHandler {
 	private static Map<String, RadialHandlerInterface> handlers = new HashMap<>()
+	private static Map<GameObjectType, RadialHandlerInterface> gotHandlers = new HashMap<>()
+	private static Map<GameObjectTypeMask, RadialHandlerInterface> gotmHandlers = new HashMap<>()
 	private static Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>()
 	private static SWGObjectRadial genericRadialHandler = new SWGObjectRadial()
 	
@@ -53,12 +60,25 @@ class RadialHandler {
 		initializeSurveyRadials()
 		initializeMiscRadials()
 		
-		classHandlers.put(AIObject.class, new AIObjectRadial())
+		RadialHandlerInterface aiHandler = new AIObjectRadial()
+		
+		classHandlers.put(LoiterAIObject.class, aiHandler)
+		classHandlers.put(PatrolAIObject.class, aiHandler)
+		classHandlers.put(RandomAIObject.class, aiHandler)
+		classHandlers.put(TurningAIObject.class, aiHandler)
 		classHandlers.put(CreditObject.class, new CreditObjectRadial())
 	}
 	
 	static def registerHandler(String iff, RadialHandlerInterface handler) {
 		handlers.put(iff, handler)
+	}
+	
+	static def registerHandler(GameObjectType got, RadialHandlerInterface handler) {
+		gotHandlers.put(got, handler)
+	}
+	
+	static def registerHandler(GameObjectTypeMask gotm, RadialHandlerInterface handler) {
+		gotmHandlers.put(gotm, handler)
 	}
 	
 	static def getOptions(List<RadialOption> options, Player player, SWGObject target) {
@@ -77,7 +97,16 @@ class RadialHandler {
 			return handler
 		
 		if (target != null) {
+			handler = gotHandlers.get(target.getGameObjectType())
+			if (handler != null)
+				return handler
+			
+			handler = gotmHandlers.get(target.getGameObjectType().getMask())
+			if (handler != null)
+				return handler
+			
 			handler = classHandlers.get(target.getClass())
+			
 			if (handler != null)
 				return handler
 		}
@@ -94,17 +123,7 @@ class RadialHandler {
 	}
 	
 	private static def initializeSurveyRadials() {
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_all.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_gas.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_geo_thermal.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_inorganic.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_liquid.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_lumber.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_mineral.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_moisture.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_organic.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_solar.iff", new ObjectSurveyToolRadial())
-		registerHandler("object/tangible/survey_tool/shared_survey_tool_wind.iff", new ObjectSurveyToolRadial())
+		registerHandler(GameObjectType.GOT_TOOL_SURVEY, new ObjectSurveyToolRadial())
 	}
 	
 	private static def initializeMiscRadials() {

@@ -133,8 +133,8 @@ final class CivilWarService extends Service {
 		return progress;
 	}
 	
-	boolean isFactionEligible(PvpFaction killerFaction, PvpFaction corpseFaction, boolean specialForces) {
-		return killerFaction != PvpFaction.NEUTRAL && corpseFaction != PvpFaction.NEUTRAL && killerFaction != corpseFaction && specialForces;
+	boolean isFactionEligible(PvpFaction killerFaction, PvpFaction corpseFaction) {
+		return killerFaction != PvpFaction.NEUTRAL && corpseFaction != PvpFaction.NEUTRAL && killerFaction != corpseFaction;
 	}
 	
 	byte makeMultiplier(boolean specialForces, boolean player) {
@@ -365,7 +365,7 @@ final class CivilWarService extends Service {
 		
 		boolean specialForces = corpseCreature.getPvpStatus() == PvpStatus.SPECIALFORCES;
 		
-		if (!isFactionEligible(killerFaction, corpseCreature.getPvpFaction(), specialForces)) {
+		if (!isFactionEligible(killerFaction, corpseCreature.getPvpFaction())) {
 			return;
 		}
 		

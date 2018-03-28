@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.services.trade;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -48,7 +49,10 @@ import com.projectswg.common.network.packets.swg.zone.trade.UnAcceptTransactionM
 import com.projectswg.common.network.packets.swg.zone.trade.VerifyTradeMessage;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+
+import javax.annotation.Nonnull;
 
 public class TradeSession {
 	
@@ -56,9 +60,7 @@ public class TradeSession {
 	private final TradeMember receiver;
 	private final AtomicReference<TradeStatus> status;
 	
-	public TradeSession(CreatureObject initiator, CreatureObject receiver) {
-		Objects.requireNonNull(initiator, "Initiator cannot be null!");
-		Objects.requireNonNull(receiver, "Receiver cannot be null!");
+	public TradeSession(@Nonnull CreatureObject initiator, @Nonnull CreatureObject receiver) {
 		this.initiator = new TradeMember(initiator, receiver);
 		this.receiver = new TradeMember(receiver, initiator);
 		this.status = new AtomicReference<>(TradeStatus.STARTED);
@@ -244,6 +246,7 @@ public class TradeSession {
 			}
 			invalidateAcceptance();
 			itemsOffered.add(item);
+			partner.setAware(AwarenessType.TRADE, itemsOffered);
 			sendToPartner(new AddItemMessage(item.getObjectId()));
 			return true;
 		}
@@ -303,9 +306,9 @@ public class TradeSession {
 			SWGObject inventory = partner.getSlottedObject("inventory");
 			
 			for (SWGObject tradeObject : itemsOffered) {
-				partner.removeCustomAware(tradeObject);
 				tradeObject.moveToContainer(inventory);
 			}
+			partner.setAware(AwarenessType.TRADE, Collections.emptyList());
 			
 			long cash = moneyOffered.get();
 			creature.removeFromCashAndBank(cash);

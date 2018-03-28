@@ -28,10 +28,16 @@
 package com.projectswg.holocore.scripts.commands.generic
 
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage
+import com.projectswg.holocore.intents.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	if (!target.isVisible(player.getCreatureObject())) {
+		SystemMessageIntent.broadcastPersonal(player, "@container_error_message:container08")
+		return
+	}
+	
 	player.sendPacket(new ClientOpenContainerMessage(target.getObjectId(), ""))
 }

@@ -26,15 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.debug.Log;
@@ -51,6 +42,7 @@ import com.projectswg.common.network.packets.swg.zone.ShowHelmet;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
 
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.GalacticIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
@@ -72,12 +64,9 @@ public class ZoneManager extends Manager {
 	private final CharacterCreationService characterCreationService;
 	private final ZoneRequester zoneRequester;
 	
-	private String commitHistory;
-	
 	public ZoneManager() {
 		characterCreationService = new CharacterCreationService();
 		zoneRequester = new ZoneRequester();
-		commitHistory = "";
 		
 		addChildService(characterCreationService);
 		
@@ -85,17 +74,11 @@ public class ZoneManager extends Manager {
 		registerForIntent(GalacticPacketIntent.class, gpi -> handlePacket(gpi, gpi.getPlayer(), gpi.getPacket()));
 	}
 	
-	@Override
-	public boolean initialize() {
-		loadCommitHistory();
-		return super.initialize();
-	}
-	
 	private void handlePlayerEventIntent(Player player, PlayerEvent event) {
 		switch (event) {
 			case PE_FIRST_ZONE:
 				player.getPlayerObject().initStartPlayTime();
-				sendCommitHistory(player);
+				sendVersion(player);
 				sendMessageOfTheDay(player);
 				break;
 			case PE_ZONE_IN_SERVER:
@@ -130,44 +113,8 @@ public class ZoneManager extends Manager {
 		player.sendPacket(new ConnectionServerLagResponse());
 	}
 	
-	private void loadCommitHistory() {
-		File repoDir = new File("./" + Constants.DOT_GIT);
-		int commitCount = 3;
-		int iterations = 0;
-		
-		try {
-			Git git = Git.open(repoDir);
-			Repository repo = git.getRepository();
-			
-			try {
-				StringBuilder commitHistory = new StringBuilder();
-				commitHistory.append("The ");
-				commitHistory.append(commitCount);
-				commitHistory.append(" most recent commits in branch '");
-				commitHistory.append(repo.getBranch());
-				commitHistory.append("':\n");
-				
-				for (RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					commitHistory.append(commit.getName().substring(0, 7));
-					commitHistory.append(' ');
-					commitHistory.append(commit.getShortMessage());
-					
-					if (commitCount > iterations++)
-						commitHistory.append('\n');
-				}
-				this.commitHistory = commitHistory.toString();
-			} catch (GitAPIException e) {
-				Log.e(e);
-			}
-		} catch (IOException e) {
-			Log.e("Failed to open %s to read commit history", repoDir);
-			// An exception is thrown if bash isn't installed.
-			// https://www.eclipse.org/forums/index.php/t/1031740/
-		}
-	}
-	
-	private void sendCommitHistory(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, commitHistory));
+	private void sendVersion(Player player) {
+		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, "This server runs Holocore " + ProjectSWG.VERSION));
 	}
 	
 	private void sendMessageOfTheDay(Player player) {

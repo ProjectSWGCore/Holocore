@@ -30,10 +30,8 @@ import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
-import com.projectswg.common.data.combat.AttackInfo;
-import com.projectswg.common.data.combat.CombatStatus;
-import com.projectswg.common.data.combat.HitLocation;
-import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
@@ -76,11 +74,6 @@ public class CombatManager extends Manager {
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final PswgScheduledThreadPool executor;
 	private final Random random;
-	
-	// TODO upon first combat, cache skillmod-related calculations
-	// TODO upon receiving SkillModIntent, the relevant calculation(s) must be updated
-	// TODO remove calculations if they haven't been accessed for a while?
-	// TODO remove calculations if the creature disappears
 	
 	public CombatManager() {
 		this.inCombat = new ConcurrentHashMap<>();
@@ -173,6 +166,9 @@ public class CombatManager extends Manager {
 			case BUFF:
 				handleBuff(source, target, c);
 				break;
+			case HEAL:
+				handleHeal(source, target, c);
+				break;
 			case DELAY_ATTACK:
 				handleDelayAttack(source, target, c, cci.getArguments());
 				break;
@@ -219,11 +215,121 @@ public class CombatManager extends Manager {
 	}
 	
 	private void handleBuff(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
+		// TODO group buffs
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		
-		// Only CreatureObjects have buffs
-		if (target instanceof CreatureObject)
-			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
+		if (!(target instanceof CreatureObject)) {
+			return;	// Only CreatureObjects have buffs
+		}
+		
+		String buffNameTarget = combatCommand.getBuffNameTarget();
+		
+		addBuff(source, (CreatureObject) target, buffNameTarget);
+		
+		CreatureObject creatureTarget = (CreatureObject) target;
+		CombatAction action = new CombatAction(source.getObjectId());
+		WeaponObject weapon = source.getEquippedWeapon();
+		String anim = combatCommand.getRandomAnimation(weapon.getType());	// Uses defaultAnim if it needs to
+		action.setPosture(source.getPosture());
+		action.setAttackerId(source.getObjectId());
+		action.setActionCrc(CRC.getCrc(anim));
+		action.setWeaponId(weapon.getObjectId());
+		action.setCommandCrc(combatCommand.getCrc());
+		action.setTrail(TrailLocation.RIGHT_HAND);
+		action.setUseLocation(false);
+		
+		action.addDefender(new Defender(source.getObjectId(), source.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+		
+		if (!buffNameTarget.isEmpty()) {
+			action.addDefender(new Defender(creatureTarget.getObjectId(), creatureTarget.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+		}
+		
+		CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+		
+		combatSpam.setAttacker(source.getObjectId());
+		combatSpam.setAttackerPosition(source.getLocation().getPosition());
+		combatSpam.setWeapon(weapon.getObjectId());
+		combatSpam.setDefender(target.getObjectId());
+		combatSpam.setDefenderPosition(target.getLocation().getPosition());
+		combatSpam.setInfo(new AttackInfo());
+		combatSpam.setAttackName(new StringId("cmd_n", combatCommand.getName()));
+		combatSpam.setSpamType(CombatSpamFilterType.ALL);
+		// TODO doesn't look like a buff in the combat log
+		
+		source.sendObserversAndSelf(action, combatSpam);
+	}
+	
+	private void handleHeal(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
+		int healAmount = combatCommand.getAddedDamage();
+		int healingPotency = source.getSkillModValue("expertise_healing_all");
+		
+		if (healingPotency > 0) {
+			healAmount *= healingPotency;
+		}
+		
+		switch (combatCommand.getAttackType()) {
+			case SINGLE_TARGET: {
+				switch (combatCommand.getTargetType()) {
+					case NONE: {	// No target used, always heals self
+						doHeal(source, source, healAmount, combatCommand);
+						break;
+					}
+					case REQUIRED: {    // Target is always used
+						if (target == null) {
+							return;
+						}
+						
+						// Same logic as OPTIONAL and ALL, so no break!
+					}
+					case OPTIONAL:	// Appears to be the same as ALL
+					case ALL: {	// Target is used IF supplied
+						if (target != null) {
+							if (!(target instanceof CreatureObject)) {
+								return;
+							}
+							
+							CreatureObject creatureTarget = (CreatureObject) target;
+							
+							if (source.isEnemyOf(creatureTarget)) {
+								doHeal(source, source, healAmount, combatCommand);
+							} else {
+								doHeal(source, creatureTarget, healAmount, combatCommand);
+							}
+						} else {
+							doHeal(source, source, healAmount, combatCommand);
+						}
+						
+						break;
+					}
+				}
+				break;
+			}
+			
+			case AREA: {
+				// Targets are never supplied for AoE heals
+				float range = combatCommand.getConeLength();
+				Location sourceLocation = source.getWorldLocation();
+				
+				// Heal ourselves
+				doHeal(source, source, healAmount, combatCommand);
+				
+				for (SWGObject nearbyObject : source.getObjectsAware()) {
+					if (sourceLocation.isWithinDistance(nearbyObject.getLocation(), range)) {
+						if (!(nearbyObject instanceof CreatureObject)) {
+							// We can't heal something that's not a creature
+							continue;
+						}
+						
+						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
+						
+						// Heal nearby friendly
+						doHeal(source, nearbyCreature, healAmount, combatCommand);
+					}
+				}
+				
+				break;
+			}
+		}
 	}
 	
 	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
@@ -288,6 +394,59 @@ public class CombatManager extends Manager {
 		}
 	}
 	
+	private void doHeal(CreatureObject healer, CreatureObject healed, int healAmount, CombatCommand combatCommand) {
+		String attribName;
+		
+		switch (combatCommand.getHealAttrib()) {
+			case HEALTH: {
+				healed.modifyHealth(healAmount);
+				attribName = "HEALTH";
+				break;
+			}
+			
+			case ACTION: {
+				healed.modifyAction(healAmount);
+				attribName = "ACTION";
+				break;
+			}
+			
+			default:
+				return;
+		}
+		
+		CombatAction action = new CombatAction(healer.getObjectId());
+		WeaponObject weapon = healer.getEquippedWeapon();
+		String anim = combatCommand.getRandomAnimation(weapon.getType());	// Uses defaultAnim if it needs to
+		
+		action.setPosture(healed.getPosture());
+		action.setAttackerId(healer.getObjectId());
+		action.setActionCrc(CRC.getCrc(anim));
+		action.setWeaponId(weapon.getObjectId());
+		action.setCommandCrc(combatCommand.getCrc());
+		action.setTrail(TrailLocation.RIGHT_HAND);
+		action.setUseLocation(false);
+		
+		action.addDefender(new Defender(healed.getObjectId(), healed.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+		
+		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "heal_fly"), "DI", healAmount, "TO", attribName));
+		ShowFlyText flyText = new ShowFlyText(healed.getObjectId(), oobp, Scale.MEDIUM, new RGB(46, 139, 87), ShowFlyText.Flag.IS_HEAL);
+		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_heal.prt", "root", healed.getObjectId(), "");
+		CombatSpam combatSpam = new CombatSpam(healer.getObjectId());
+		
+		combatSpam.setAttacker(healer.getObjectId());
+		combatSpam.setAttackerPosition(healer.getLocation().getPosition());
+		combatSpam.setWeapon(weapon.getObjectId());
+		combatSpam.setWeaponName(weapon.getStringId());
+		combatSpam.setDefender(healed.getObjectId());
+		combatSpam.setDefenderPosition(healed.getLocation().getPosition());
+		combatSpam.setInfo(new AttackInfo());
+		combatSpam.setAttackName(new StringId("cmd_n", combatCommand.getName()));
+		combatSpam.setSpamType(CombatSpamFilterType.ALL);
+		// TODO doesn't look like a heal in the combat log
+		
+		healed.sendObserversAndSelf(action, flyText, effect, combatSpam);
+	}
+	
 	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
 		// TODO single target only defence rolls against target
 		// TODO single target only offence rolls for source
@@ -326,7 +485,7 @@ public class CombatManager extends Manager {
 		action.setActionCrc(CRC.getCrc(anim));
 		action.setAttackerId(source.getObjectId());
 		action.setPosture(source.getPosture());
-		action.setWeaponId(source.getEquippedWeapon() == null ? 0 : source.getEquippedWeapon().getObjectId());
+		action.setWeaponId(weapon.getObjectId());
 		action.setClientEffectId((byte) 0);
 		action.setCommandCrc(command.getCrc());
 		action.setTrail(TrailLocation.WEAPON);
@@ -345,12 +504,13 @@ public class CombatManager extends Manager {
 			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
 			combatSpam.setAttacker(source.getObjectId());
 			combatSpam.setAttackerPosition(source.getLocation().getPosition());
-			combatSpam.setWeapon(source.getEquippedWeapon() == null ? 0 : source.getEquippedWeapon().getObjectId());
+			combatSpam.setWeapon(weapon.getObjectId());
+			combatSpam.setWeaponName(weapon.getStringId());
 			combatSpam.setDefender(target.getObjectId());
 			combatSpam.setDefenderPosition(target.getLocation().getPosition());
 			combatSpam.setInfo(info);
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
-			combatSpam.setWeapon(weapon.getObjectId());
+			combatSpam.setSpamType(CombatSpamFilterType.ALL);
 			
 			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
 				target.sendObserversAndSelf(combatSpam);
@@ -500,7 +660,7 @@ public class CombatManager extends Manager {
 		}
 		
 		// They must be enemies
-		if (!corpse.isEnemy(killer)) {
+		if (!corpse.isEnemyOf(killer)) {
 			return;
 		}
 		
@@ -551,7 +711,7 @@ public class CombatManager extends Manager {
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
 		
-		if (!source.isEnemy((TangibleObject) target)) {
+		if (!source.isEnemyOf((TangibleObject) target)) {
 			return CombatStatus.INVALID_TARGET;
 		}
 		
@@ -596,7 +756,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private void addActionCost(CreatureObject source, CombatCommand command) {
-		double actionCost = command.getActionCost();
+		double actionCost = command.getActionCost() * command.getAttackRolls();
 		int currentAction = source.getAction();
 		
 		if (actionCost <= 0 || actionCost > currentAction) {

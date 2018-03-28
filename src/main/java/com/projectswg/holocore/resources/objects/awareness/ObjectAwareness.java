@@ -24,48 +24,78 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.common.data.location.Location;
-
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureState;
 
-class SpeedCheckHandler {
+import javax.annotation.Nonnull;
+import java.util.Collections;
+
+public class ObjectAwareness {
 	
-	public SpeedCheckHandler() {
-		
-	}
+	private final TerrainMap[] terrains;
 	
-	public void moveObjectSpeedChecks(CreatureObject obj, Location requestedLocation) {
-		double time = obj.getTimeSinceLastTransform() / 1000;
-		obj.updateLastTransformTime();
-		Location l = obj.getWorldLocation();
-		if (isSpeeding(obj, l, requestedLocation, time)) {
-			// TODO: Do something about it
+	public ObjectAwareness() {
+		terrains = new TerrainMap[Terrain.values().length];
+		for (int i = 0; i < terrains.length; i++) {
+			terrains[i] = new TerrainMap();
 		}
 	}
 	
-	public void moveObjectSpeedChecks(CreatureObject obj, SWGObject parent, Location requestedLocation) {
-		double time = obj.getTimeSinceLastTransform() / 1000;
-		obj.updateLastTransformTime();
-		Location l = obj.getWorldLocation();
-		Location requestedWorld = Location.builder()
-				.setPosition(requestedLocation.getX(), 0, requestedLocation.getZ())
-				.setTerrain(parent.getTerrain())
-				.translateLocation(parent.getWorldLocation())
-				.build();
-		if (isSpeeding(obj, l, requestedWorld, time)) {
-			// TODO: Do something about it
+	/**
+	 * Called when an object was created
+	 *
+	 * @param obj the object created
+	 */
+	public void createObject(@Nonnull SWGObject obj) {
+		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
+			TerrainMap map = getTerrainMap(obj);
+			map.add(obj);
+			map.update(obj);
 		}
 	}
 	
-	private static boolean isSpeeding(CreatureObject obj, Location nWorld, Location newLocation, double time) {
-		return Math.sqrt(square(nWorld.getX()-nWorld.getX()) + square(nWorld.getZ()-newLocation.getZ())) / time > obj.getMovementScale()*7.3;
+	/**
+	 * Called when an object is destroyed
+	 *
+	 * @param obj the object destroyed
+	 */
+	public void destroyObject(@Nonnull SWGObject obj) {
+		TerrainMap map = getTerrainMap(obj);
+		map.remove(obj);
+		map.update(obj);
 	}
 	
-	private static double square(double x) {
-		return x * x;
+	/**
+	 * Called when an object needs an update
+	 *
+	 * @param obj the object to update
+	 */
+	public void updateObject(@Nonnull SWGObject obj) {
+		SWGObject superParent = obj.getSuperParent();
+		TerrainMap map = getTerrainMap(obj);
+		if (superParent != null) {
+			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
+			map.remove(obj);
+			map.update(superParent);
+		} else {
+			map.move(obj);
+		}
+		map.update(obj);
+	}
+	
+	@Nonnull
+	private TerrainMap getTerrainMap(SWGObject obj) {
+		return terrains[obj.getTerrain().ordinal()];
+	}
+	
+	private static boolean isRider(@Nonnull SWGObject obj, SWGObject parent) {
+		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
 	}
 	
 }

@@ -119,7 +119,7 @@ public class ChatRoomService extends Service {
 	
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
-			case PE_ZONE_IN_CLIENT:
+			case PE_FIRST_ZONE:
 				chatRoomHandler.enterChatChannels(pei.getPlayer());
 				break;
 			default:

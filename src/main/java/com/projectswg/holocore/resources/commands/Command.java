@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands;
 
+import com.projectswg.common.data.combat.TargetType;
+
 public class Command {
 	
 	private int crc;
@@ -43,7 +45,7 @@ public class Command {
 	// posture booleans x63
 	// temp script
 	private int target;
-	private int targetType;
+	private TargetType targetType;
 	// string id
 	// visible - unsure what it's used for (stealth maybe?)
 	private boolean callOnTarget;
@@ -89,8 +91,8 @@ public class Command {
 	public void setCharacterAbility(String characterAbility) { this.characterAbility = characterAbility; }
 	public int getTarget() { return target; }
 	public void setTarget(int target) { this.target = target; }
-	public int getTargetType() { return targetType; }
-	public void setTargetType(int targetType) { this.targetType = targetType; }
+	public TargetType getTargetType() { return targetType; }
+	public void setTargetType(TargetType targetType) { this.targetType = targetType; }
 	public boolean isCallOnTarget() { return callOnTarget; }
 	public void setCallOnTarget(boolean callOnTarget) { this.callOnTarget = callOnTarget; }
 	public float getMaxRange() { return maxRange; }

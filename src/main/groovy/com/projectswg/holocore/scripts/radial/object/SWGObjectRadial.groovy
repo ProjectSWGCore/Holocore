@@ -30,7 +30,7 @@ package com.projectswg.holocore.scripts.radial.object
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.intents.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.object.DestroyObjectIntent
+import com.projectswg.holocore.intents.object.ContainerTransferIntent
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject
@@ -106,14 +106,11 @@ class SWGObjectRadial implements RadialHandlerInterface {
 				originalStack.setCounter(oldStackSize)
 				newStack.setCounter(newStackSize)
 				
-				// Add new stack to container
+				// We don't use moveToContainer, because that would trigger auto-stacking.
 				container.addObject(newStack)
 				
-				// Let objects aware of the container know that there's been created an object
-				container.getObjectsAware().forEach {observer -> newStack.createObject(observer) }
-				
-				// Let the executor of the split know that there's been created an object
-				newStack.createObject(player)
+				// TODO ContainmentUpdate somehow
+				ContainerTransferIntent.broadcast(newStack, null, container)
 				
 				ObjectCreatedIntent.broadcast(newStack)
 			} catch (NumberFormatException e) {
@@ -126,30 +123,7 @@ class SWGObjectRadial implements RadialHandlerInterface {
 	}
 	
 	def stack(SWGObject target) {
-		// Scan container for matching stackable item
-		String ourTemplate = target.getTemplate()
-		SWGObject container = target.getParent()
-		
-		for (SWGObject candidate : container.getContainedObjects()) {
-			if (target.equals(candidate)) {
-				continue
-			}
-			
-			String theirTemplate = candidate.getTemplate()
-			
-			if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate)) {
-				// Increase stack count on matching stackable item
-				TangibleObject tangibleMatch = (TangibleObject) candidate
-				int theirCounter = tangibleMatch.getCounter()
-				TangibleObject tangibleTarget = (TangibleObject) target
-				int ourCounter = tangibleTarget.getCounter()
-				
-				DestroyObjectIntent.broadcast(tangibleTarget)
-				tangibleMatch.setCounter(theirCounter + ourCounter)
-				
-				break
-			}
-		}
+		target.moveToContainer(target.getParent())	// Triggers stacking, if applicable
 	}
 	
 	def handleSelection(Player player, SWGObject target, RadialItem selection) {

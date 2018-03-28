@@ -49,6 +49,8 @@ import java.util.stream.Collectors;
 
 public class ProjectSWG {
 	
+	public static final String VERSION = "FEB18";
+	
 	private static final AtomicBoolean SHUTDOWN_HOOK = new AtomicBoolean(false);
 	private static final AtomicReference<ProjectSWG> INSTANCE = new AtomicReference<>(null);
 	
@@ -93,6 +95,8 @@ public class ProjectSWG {
 			Log.w("Failed to make log directory!");
 		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
 		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
+		
+		Log.i("Holocore version: %s", VERSION);
 		
 		ProjectSWG server = new ProjectSWG();
 		try {

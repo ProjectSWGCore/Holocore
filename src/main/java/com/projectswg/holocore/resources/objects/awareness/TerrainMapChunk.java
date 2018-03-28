@@ -26,68 +26,65 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
-import java.util.ArrayList;
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 class TerrainMapChunk {
 	
-	private final Set<SWGObject> objects;
+	private final List<SWGObject> objects;
 	
 	public TerrainMapChunk() {
-		this.objects = new CopyOnWriteArraySet<>();
+		this.objects = new CopyOnWriteArrayList<>();
 	}
 	
-	public void addObject(SWGObject obj) {
+	public void addObject(@Nonnull SWGObject obj) {
+		assert !objects.contains(obj) : "the chunk already contains this object";
 		objects.add(obj);
 	}
 	
-	public void removeObject(SWGObject obj) {
+	public void removeObject(@Nonnull SWGObject obj) {
 		objects.remove(obj);
 	}
 	
-	public boolean containsObject(SWGObject obj) {
-		return objects.contains(obj);
-	}
-	
-	public List<SWGObject> getWithinAwareness(SWGObject obj) {
-		List<SWGObject> withinRange = new ArrayList<>(objects.size());
-		getWithinAwareness(obj, withinRange);
-		return withinRange;
-	}
-	
-	public void getWithinAwareness(SWGObject obj, Collection<SWGObject> withinRange) {
+	public void getWithinAwareness(@Nonnull SWGObject obj, @Nonnull Collection<SWGObject> withinRange) {
 		int truncX = obj.getTruncX();
 		int truncZ = obj.getTruncZ();
 		int instance = obj.getInstanceLocation().getInstanceNumber();
-		int loadRange = (int) obj.getLoadRange();
-		objects.forEach(test -> {
+		int loadRange = obj.getLoadRange();
+		for (SWGObject test : objects) {
 			// Calculate distance
 			int dTmp = truncX - test.getTruncX();
 			int d = dTmp * dTmp;
 			dTmp = truncZ - test.getTruncZ();
-			d = (int) Math.sqrt(d + dTmp * dTmp);
 			
-			// Must be within load range
-			if (d <= loadRange || d <= (int) test.getLoadRange()) {
-				// Can't be a logged out player
-				if (test.getBaselineType() != BaselineType.CREO || !((CreatureObject) test).isLoggedOutPlayer()) {
-					// Can't be the same object
-					if (!obj.equals(test)) {
-						// Must be within the same instance number
-						if (instance == test.getInstanceLocation().getInstanceNumber()) {
-							withinRange.add(test);
-						}
-					}
-				}
+			int range = test.getLoadRange();
+			if (range < loadRange)
+				range = loadRange;
+			range = range * range;
+			
+			// Must be within load range and the same instance
+			if ((d + dTmp * dTmp) < range && instance == test.getInstanceLocation().getInstanceNumber()) {
+				recursiveAdd(withinRange, obj, test);
 			}
-		});
+		}
+	}
+	
+	private static void recursiveAdd(@Nonnull Collection<SWGObject> withinRange, @Nonnull SWGObject obj, @Nonnull SWGObject test) {
+		if (!test.isVisible(obj))
+			return;
+		withinRange.add(test);
+		for (SWGObject child : test.getSlots().values()) {
+			if (child != null)
+				recursiveAdd(withinRange, obj, child);
+		}
+		for (SWGObject child : test.getContainedObjects()) {
+			recursiveAdd(withinRange, obj, child);
+		}
 	}
 	
 }

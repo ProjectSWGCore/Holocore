@@ -46,33 +46,35 @@ public class ZoneRequester {
 	public boolean onZoneRequested(SWGObject creatureObject, Player player, long characterId) {
 		if (!initialChecks(creatureObject, player, characterId))
 			return false;
-		if (!debugChecks(creatureObject, player, characterId))
+		if (!debugChecks(creatureObject, player))
 			return false;
-		new RequestZoneInIntent(player, (CreatureObject) creatureObject).broadcast();
+		creatureObject.setOwner(player);
+		new RequestZoneInIntent((CreatureObject) creatureObject).broadcast();
 		return true;
 	}
 	
 	private boolean initialChecks(SWGObject creatureObject, Player player, long characterId) {
 		if (creatureObject == null) {
 			Log.e("Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
-			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
+			sendClientFatal(player, "You were not found in the database\nTry relogging to fix this problem");
 			return false;
 		}
 		if (!(creatureObject instanceof CreatureObject)) {
 			Log.e("Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
-			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
+			sendClientFatal(player, "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one");
 			return false;
 		}
 		if (((CreatureObject) creatureObject).getPlayerObject() == null) {
 			Log.e("Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
-			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
+			sendClientFatal(player, "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one");
 			return false;
 		}
 		return true;
 	}
 	
-	private boolean debugChecks(SWGObject creatureObject, Player player, long characterId) {
+	private boolean debugChecks(SWGObject creatureObject, Player player) {
 		if (isSafeZone()) {
+			creatureObject.moveToContainer(null);
 			creatureObject.setPosition(Terrain.DEV_AREA, 0, 0, 0);
 			new SystemMessageIntent(player, "Safe-zoning into dev terrain at (0, 0, 0)").broadcast();
 		}
@@ -83,9 +85,9 @@ public class ZoneRequester {
 		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-ZONE-SAFE", false);
 	}
 	
-	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {
-		player.sendPacket(new ErrorMessage(title, message, false));
-		ScheduledUtilities.run(() -> player.sendPacket(new ErrorMessage(title, message, true)), timeToRead, time);
+	private void sendClientFatal(Player player, String message) {
+		player.sendPacket(new ErrorMessage("Failed to zone", message, false));
+		ScheduledUtilities.run(() -> player.sendPacket(new ErrorMessage("Failed to zone", message, true)), (long) 10, TimeUnit.SECONDS);
 	}
 	
 }

@@ -34,11 +34,11 @@ import com.projectswg.holocore.resources.player.Player;
 public class AwarenessUtilities {
 	
 	public static void handleUpdateAwarenessManual(SWGObject obj, Set<SWGObject> oldAware, Set<Player> oldObservers, Set<SWGObject> newAware, Set<Player> newObservers) {
-		callForNewObserver(oldObservers, newObservers, (observer) -> obj.createObject(observer.getCreatureObject()));
-		callForOldObserver(oldObservers, newObservers, (observer) -> obj.destroyObject(observer.getCreatureObject()));
-		
-		callForNewAware(oldAware, newAware, (aware) -> aware.createObject(obj));
-		callForOldAware(oldAware, newAware, (aware) -> aware.destroyObject(obj));
+//		callForNewObserver(oldObservers, newObservers, obj::createObject);
+//		callForOldObserver(oldObservers, newObservers, obj::destroyObject);
+//		
+//		callForNewAware(oldAware, newAware, (aware) -> aware.createObject(obj));
+//		callForOldAware(oldAware, newAware, (aware) -> aware.destroyObject(obj));
 	}
 	
 	public static void callForNewObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {

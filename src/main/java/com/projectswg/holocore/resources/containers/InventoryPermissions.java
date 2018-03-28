@@ -35,9 +35,9 @@ class InventoryPermissions extends DefaultPermissions {
 	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
+		if (requester == null)
 			return true;
-		if (container.getOwner() == null)
+		if (container.getOwner() == null || requester.getOwner() == null)
 			return false;
 		if (requester.getOwner().equals(container.getOwner()))
 			return true;
@@ -46,9 +46,9 @@ class InventoryPermissions extends DefaultPermissions {
 
 	@Override
 	public boolean canEnter(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
+		if (requester == null)
 			return true;
-		if (container.getOwner() == null)
+		if (container.getOwner() == null || requester.getOwner() == null)
 			return false;
 		return requester.getOwner().equals(container.getOwner());
 	}

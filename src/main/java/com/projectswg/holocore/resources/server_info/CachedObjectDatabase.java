@@ -98,7 +98,6 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 	
 	public synchronized boolean load() {
 		if (!fileExists()) {
-			Log.e("load() - file '%s' does not exist!", getFile());
 			loaded = true;
 			return false;
 		}

@@ -33,6 +33,7 @@ import java.util.Map;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.data.combat.DamageType;
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -47,6 +48,7 @@ import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
@@ -189,23 +191,13 @@ public final class StaticItemService extends Service {
 					String iffTemplate = ClientFactory.formatToSharedFile(objectAttributes.getIffTemplate());
 					SWGObject object = ObjectCreator.createObjectFromTemplate(iffTemplate);
 
-					if (object != null) {
-						// Global attributes and type-specific attributes are applied
-						objectAttributes.applyAttributes(object);
-						object.setContainerPermissions(permissions);
-						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
-							case SUCCESS:
-								Log.d("Successfully moved %s into container %s", itemName, container);
-								createdObjects[j] = object;
-								break;
-							default:
-								break;
-						}
-						new ObjectCreatedIntent(object).broadcast();
-						
-					} else {
-						Log.w("%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
-					}
+					// Global attributes and type-specific attributes are applied
+					objectAttributes.applyAttributes(object);
+					object.setContainerPermissions(permissions);
+					object.moveToContainer(container);
+					Log.d("Successfully moved %s into container %s", itemName, container);
+					createdObjects[j] = object;
+					new ObjectCreatedIntent(object).broadcast();
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
 					Log.e(errorMessage);
@@ -335,8 +327,10 @@ public final class StaticItemService extends Service {
 		private boolean wearableByRodians;
 		private boolean wearableByTrandoshans;
 		private boolean wearableByRest;
-
-		// TODO customisation variables, ie. for colours
+		private int colorIndex0;
+		private int colorIndex1;
+		private int colorIndex2;
+		private int colorIndex3;
 
 		public WearableAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
@@ -380,6 +374,10 @@ public final class StaticItemService extends Service {
 			wearableByRodians = resultSet.getInt("race_rodian") != 0;
 			wearableByTrandoshans = resultSet.getInt("race_trandoshan") != 0;
 			wearableByRest = resultSet.getInt("race_rest") != 0;
+			colorIndex0 = resultSet.getInt("index_color_0");
+			colorIndex1 = resultSet.getInt("index_color_1");
+			colorIndex2 = resultSet.getInt("index_color_2");
+			colorIndex3 = resultSet.getInt("index_color_3");
 
 			return true;
 		}
@@ -402,6 +400,17 @@ public final class StaticItemService extends Service {
 			// Add the race restrictions only if there are any
 			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
+			
+			if (!(object instanceof TangibleObject)) {
+				return;
+			}
+			
+			TangibleObject tangible = (TangibleObject) object;
+			
+			applyColor(tangible, "/private/index_color_0", colorIndex0);
+			applyColor(tangible, "/private/index_color_1", colorIndex1);
+			applyColor(tangible, "/private/index_color_2", colorIndex2);
+			applyColor(tangible, "/private/index_color_3", colorIndex3);
 		}
 
 		private String buildRaceRestrictionString() {
@@ -417,8 +426,17 @@ public final class StaticItemService extends Service {
 				races = races.concat("Trandoshan ");
 			if (wearableByRest)
 				races = races.concat("MonCal Human Zabrak Bothan Sullustan Twi'lek ");
-
+			
 			return races.substring(0, races.length() - 1);
+		}
+		
+		private void applyColor(TangibleObject tangible, String variable, int colorIndex) {
+			if (colorIndex >= 0) {
+				CustomizationVariable color = new CustomizationVariable();
+				
+				color.setValue(colorIndex);
+				tangible.putCustomization(variable, color);
+			}
 		}
 	}
 

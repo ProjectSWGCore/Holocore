@@ -40,6 +40,7 @@ import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
@@ -146,17 +147,28 @@ public final class FactionManager extends Manager {
 	}
 	
 	private void handleFlagChange(TangibleObject target) {
-		Player objOwner = target.getOwner();
+		Player targetOwner = target.getOwner();
 		
-		for (Player observerOwner : target.getObservers()) {
-			TangibleObject observer = observerOwner.getCreatureObject();
-
-			int pvpBitmask = getPvpBitmask(target, observer);
+		for (SWGObject objectAware : target.getObjectsAware()) {
+			if (!(objectAware instanceof TangibleObject)) {
+				continue;
+			}
 			
-			if (objOwner != null) // Send the PvP information about this observer to the owner
-				objOwner.sendPacket(createPvpStatusMessage(observer, observer.getPvpFlags() | pvpBitmask));
-			// Send the pvp information about the owner to this observer
-			observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+			TangibleObject tangibleAware = (TangibleObject) objectAware;
+			
+			if (tangibleAware.getPvpFaction() == PvpFaction.NEUTRAL) {
+				continue;
+			}
+			
+			Player observerOwner = tangibleAware.getOwner();
+
+			int pvpBitmask = getPvpBitmask(target, tangibleAware);
+			
+			if (targetOwner != null) // Send the PvP information about this observer to the owner
+				targetOwner.sendPacket(createPvpStatusMessage(tangibleAware, tangibleAware.getPvpFlags() | pvpBitmask));
+			
+			if (observerOwner != null)	// Send the pvp information about the owner to this observer
+				observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
 		}
 	}
 	
@@ -220,7 +232,7 @@ public final class FactionManager extends Manager {
 	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
 		int pvpBitmask = 0;
 
-		if(target.isEnemy(observer)) {
+		if(target.isEnemyOf(observer)) {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		

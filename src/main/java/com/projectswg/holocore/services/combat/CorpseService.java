@@ -368,6 +368,9 @@ final class CorpseService extends Service {
 			}
 		}
 		
+		// We're put on leave when we're revived at a cloning facility
+		new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
+		
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility));
 		return CloneResult.SUCCESS;
 	}

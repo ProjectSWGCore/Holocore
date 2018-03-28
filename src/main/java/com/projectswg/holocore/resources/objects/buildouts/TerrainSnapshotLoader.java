@@ -80,7 +80,6 @@ public class TerrainSnapshotLoader {
 		SWGObject object = createObject(templates, node);
 		object.setClassification(ObjectClassification.SNAPSHOT);
 		object.setBuildoutAreaId(-1);
-		object.setPrefLoadRange(node.getRadius());
 		setCellInformation(object, node.getCellIndex());
 		addObject(object, node.getContainerId());
 		
