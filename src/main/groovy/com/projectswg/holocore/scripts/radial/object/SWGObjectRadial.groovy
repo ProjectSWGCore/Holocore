@@ -63,8 +63,14 @@ class SWGObjectRadial implements RadialHandlerInterface {
 			return
 		}
 		
-		options.add(new RadialOption(RadialItem.SERVER_MENU49))	// Split
-		options.add(new RadialOption(RadialItem.SERVER_MENU50))	// Stack
+		def splitOption = new RadialOption(RadialItem.SERVER_MENU49)
+		def stackOption = new RadialOption(RadialItem.SERVER_MENU50)
+		
+		splitOption.setOverriddenText("@autostack:unstack")
+		stackOption.setOverriddenText("@autostack:stack")
+		
+		options.add(splitOption)
+		options.add(stackOption)
 	}
 	
 	def split(Player player, SWGObject target) {
