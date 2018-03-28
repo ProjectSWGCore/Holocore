@@ -105,47 +105,6 @@ public class TangibleObject extends SWGObject {
 		super.moveToContainer(newParent);    // Not stackable, use default behavior
 	}
 	
-	/*
-		@Override
-		public void moveToContainer(SWGObject container) {
-			this.moveToContainer(null, container);
-		}
-		
-		@Override
-		public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
-			// Check if object is stackable
-			if (container != null && counter > 0) {
-				// Check if requester has permission to container
-				if (!getContainerPermissions().canMove(requester, container)) {
-					return ContainerResult.NO_PERMISSION;
-				}
-				
-				// Scan container for matching stackable item
-				String ourTemplate = getTemplate();
-				Map<String, String> ourAttributes = getAttributes();
-				
-				for (SWGObject candidate : container.getContainedObjects()) {
-					String theirTemplate = candidate.getTemplate();
-					Map<String, String> theirAttributes = candidate.getAttributes();
-					
-					if (candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
-						Log.d("Match found! Merging objects.");
-						DestroyObjectIntent.broadcast(this);
-						
-						// Increase stack count on matching stackable item
-						TangibleObject tangibleMatch = (TangibleObject) candidate;
-						int theirCounter = tangibleMatch.getCounter();
-						
-						tangibleMatch.setCounter(theirCounter + counter);
-						
-						return ContainerResult.SUCCESS;
-					}
-				}
-			}
-			
-			return super.moveToContainer(requester, container);
-		}
-		*/
 	public int getMaxHitPoints() {
 		return maxHitPoints;
 	}
