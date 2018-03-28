@@ -29,13 +29,10 @@ package com.projectswg.holocore.scripts.radial.object
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.common.debug.Log
-import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage
 import com.projectswg.holocore.intents.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.object.DestroyObjectIntent
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent
 import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.resources.sui.SuiInputBox
@@ -50,13 +47,8 @@ class SWGObjectRadial implements RadialHandlerInterface {
 	
 	def stackOptions(List<RadialOption> options, SWGObject target) {
 		// Verify that target is a tangible
-		if (!(target instanceof TangibleObject)) {
+		if (target == null || target.getClass() != TangibleObject.class)
 			return
-		}
-		
-		if (target instanceof CreatureObject) {
-			return
-		}
 		
 		// Check if the target is not in a container then show no radial options
 		SWGObject container = target.getParent()
@@ -108,7 +100,7 @@ class SWGObjectRadial implements RadialHandlerInterface {
 				// Create new object using same template
 				// TODO needs to copy other stuff as well, such as customization variables and object attributes
 				String template = originalStack.getTemplate()
-				TangibleObject newStack = ObjectCreator.createObjectFromTemplate(template, TangibleObject.class)
+				TangibleObject newStack = (TangibleObject) ObjectCreator.createObjectFromTemplate(template)
 				
 				// Adjust stack sizes
 				originalStack.setCounter(oldStackSize)
