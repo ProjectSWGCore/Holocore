@@ -322,6 +322,10 @@ public class CombatManager extends Manager {
 						
 						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
 						
+						if (source.isAttackable(nearbyCreature) || nearbyCreature.isEnemyOf(source)) {
+							continue;
+						}
+						
 						// Heal nearby friendly
 						doHeal(source, nearbyCreature, healAmount, combatCommand);
 					}
@@ -396,16 +400,21 @@ public class CombatManager extends Manager {
 	
 	private void doHeal(CreatureObject healer, CreatureObject healed, int healAmount, CombatCommand combatCommand) {
 		String attribName;
+		int difference;
 		
 		switch (combatCommand.getHealAttrib()) {
 			case HEALTH: {
+				int currentHealth = healed.getHealth();
 				healed.modifyHealth(healAmount);
+				difference = healed.getHealth() - currentHealth;
 				attribName = "HEALTH";
 				break;
 			}
 			
 			case ACTION: {
+				int currentAction = healed.getAction();
 				healed.modifyAction(healAmount);
+				difference = healed.getAction() - currentAction;
 				attribName = "ACTION";
 				break;
 			}
@@ -428,7 +437,7 @@ public class CombatManager extends Manager {
 		
 		action.addDefender(new Defender(healed.getObjectId(), healed.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		
-		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "heal_fly"), "DI", healAmount, "TO", attribName));
+		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "heal_fly"), "DI", difference, "TO", attribName));
 		ShowFlyText flyText = new ShowFlyText(healed.getObjectId(), oobp, Scale.MEDIUM, new RGB(46, 139, 87), ShowFlyText.Flag.IS_HEAL);
 		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_heal.prt", "root", healed.getObjectId(), "");
 		CombatSpam combatSpam = new CombatSpam(healer.getObjectId());
