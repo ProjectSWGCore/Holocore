@@ -113,7 +113,7 @@ class SWGObjectRadial implements RadialHandlerInterface {
 				newStack.setCounter(newStackSize)
 				
 				// We don't use moveToContainer, because that would trigger auto-stacking.
-				container.systemMove(newStack)
+				newStack.systemMove(container)
 				
 				ContainerTransferIntent.broadcast(newStack, null, container)
 				
