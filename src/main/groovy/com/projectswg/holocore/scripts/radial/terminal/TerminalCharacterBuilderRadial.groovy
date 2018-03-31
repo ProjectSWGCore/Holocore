@@ -33,13 +33,16 @@ import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent
+import com.projectswg.holocore.intents.object.ObjectCreatedIntent
 import com.projectswg.holocore.intents.object.ObjectTeleportIntent
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType
 import com.projectswg.holocore.resources.objects.SWGObject
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.resources.sui.SuiButtons
 import com.projectswg.holocore.resources.sui.SuiListBox
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
+import com.projectswg.holocore.services.objects.ObjectCreator
 import com.projectswg.holocore.services.objects.StaticItemService
 
 class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
@@ -59,6 +62,7 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Wearables")
 				listBox.addListItem("Tools")
 				listBox.addListItem("Travel")
+				listBox.addListItem("Stack test")
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", { event, parameters -> handleCategorySelection(player, parameters) })
 				listBox.display(player)
@@ -76,6 +80,7 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 2: handleWearables(player); break
 			case 3: handleTools(player); break
 			case 4: handleTravel(player); break
+			case 5: handleStackTest(player); break
 		}
 	}
 	
@@ -1386,5 +1391,16 @@ class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	static def handleYavGeoCave(Player player) {
 		new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6485d, 83d, -446d, Terrain.YAVIN4)).broadcast()
+	}
+	
+	static def handleStackTest(Player player) {
+		def stackObject = ObjectCreator.createObjectFromTemplate("object/tangible/dice/shared_eqp_chance_cube.iff", TangibleObject.class)
+		def creature = player.getCreatureObject()
+		def inventory = creature.getSlottedObject("inventory")
+		
+		stackObject.setCounter(6)
+		stackObject.moveToContainer(inventory)
+		
+		ObjectCreatedIntent.broadcast(stackObject)
 	}
 }

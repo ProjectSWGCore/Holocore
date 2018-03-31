@@ -546,7 +546,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public Map<String, String> getAttributes() {
-		return attributes;
+		return Collections.unmodifiableMap(attributes);
 	}
 
 	public int getContainerType() {

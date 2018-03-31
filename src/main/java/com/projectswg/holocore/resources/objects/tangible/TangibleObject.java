@@ -26,6 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.tangible;
 
+import java.util.Map;
+import java.util.Set;
+
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -37,14 +40,13 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.FactionIntent.FactionIntentType;
+import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.collections.SWGSet;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
-
-import java.util.Set;
 
 public class TangibleObject extends SWGObject {
 	
@@ -73,6 +75,34 @@ public class TangibleObject extends SWGObject {
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
+	}
+	
+	@Override
+	public void moveToContainer(SWGObject newParent) {
+		// Check if object is stackable
+		if (newParent != null && counter > 0) {
+			// Scan container for matching stackable item
+			String ourTemplate = getTemplate();
+			Map<String, String> ourAttributes = getAttributes();
+			
+			for (SWGObject candidate : newParent.getContainedObjects()) {
+				String theirTemplate = candidate.getTemplate();
+				Map<String, String> theirAttributes = candidate.getAttributes();
+				
+				if (this != candidate && candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
+					DestroyObjectIntent.broadcast(this);
+					
+					// Increase stack count on matching stackable item
+					TangibleObject tangibleMatch = (TangibleObject) candidate;
+					int theirCounter = tangibleMatch.getCounter();
+					
+					tangibleMatch.setCounter(theirCounter + counter);
+					return;	// Stackable and matching item was found
+				}
+			}
+		}
+		
+		super.moveToContainer(newParent);    // Not stackable, use default behavior
 	}
 	
 	public int getMaxHitPoints() {

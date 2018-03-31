@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.util.Map;
-
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeListMessage;
 
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -52,11 +50,6 @@ public class AttributesCmdCallback implements ICmdCallback {
 	}
 
 	private void handleSendItemAttributes(SWGObject object, Player player) {
-		Map<String, String> attributes = object.getAttributes();
-		if (attributes.size() == 0)
-			attributes.put("", "");
-		
-		AttributeListMessage message = new AttributeListMessage(object.getObjectId(), attributes);
-		player.sendPacket(message);
+		player.sendPacket(new AttributeListMessage(object.getObjectId(), object.getAttributes()));
 	}
 }
