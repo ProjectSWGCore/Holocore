@@ -67,8 +67,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 		
 		if (args != null && !args.isEmpty()) {
 			String[] command = args.split(" ");
+			String commandName = command[0];
 			
-			switch (command[0]) {
+			switch (commandName) {
 				case "help":
 					displayHelp(player);
 					break;
@@ -94,7 +95,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					grantGcw(player, command[1]);
 					break;
 				default:
-					SystemMessageIntent.broadcastPersonal(player, "Unknown qatool subcommand: " + command[0]);
+					SystemMessageIntent.broadcastPersonal(player, "Unknown qatool subcommand: " + commandName);
 					break;
 			}
 		}
