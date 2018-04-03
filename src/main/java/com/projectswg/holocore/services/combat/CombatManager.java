@@ -256,7 +256,7 @@ public class CombatManager extends Manager {
 		combatSpam.setSpamType(CombatSpamFilterType.ALL);
 		// TODO doesn't look like a buff in the combat log
 		
-		source.sendObserversAndSelf(action, combatSpam);
+		source.sendObservers(action, combatSpam);
 	}
 	
 	private void handleHeal(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
@@ -310,10 +310,7 @@ public class CombatManager extends Manager {
 				float range = combatCommand.getConeLength();
 				Location sourceLocation = source.getWorldLocation();
 				
-				// Heal ourselves
-				doHeal(source, source, healAmount, combatCommand);
-				
-				for (SWGObject nearbyObject : source.getObjectsAware()) {
+				for (SWGObject nearbyObject : source.getAware()) {	// The source is included in awareness
 					if (sourceLocation.isWithinDistance(nearbyObject.getLocation(), range)) {
 						if (!(nearbyObject instanceof CreatureObject)) {
 							// We can't heal something that's not a creature
@@ -322,7 +319,7 @@ public class CombatManager extends Manager {
 						
 						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
 						
-						if (source.isAttackable(nearbyCreature) || nearbyCreature.isEnemyOf(source)) {
+						if (source.isAttackable(nearbyCreature)) {
 							continue;
 						}
 						
@@ -453,7 +450,7 @@ public class CombatManager extends Manager {
 		combatSpam.setSpamType(CombatSpamFilterType.ALL);
 		// TODO doesn't look like a heal in the combat log
 		
-		healed.sendObserversAndSelf(action, flyText, effect, combatSpam);
+		healed.sendObservers(action, flyText, effect, combatSpam);
 	}
 	
 	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
@@ -473,6 +470,9 @@ public class CombatManager extends Manager {
 		float aoeRange = command.getConeLength();
 		SWGObject originParent = origin.getParent();
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
+		
+		// TODO block
+		// TODO evasion if no block
 		
 		// TODO line of sight checks between the explosive and each target
 		Set<CreatureObject> targets = objectsToCheck.stream().filter(CreatureObject.class::isInstance).map(CreatureObject.class::cast)
@@ -522,7 +522,7 @@ public class CombatManager extends Manager {
 			combatSpam.setSpamType(CombatSpamFilterType.ALL);
 			
 			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
-				target.sendObserversAndSelf(combatSpam);
+				target.sendObservers(combatSpam);
 				return;
 			}
 			
@@ -538,7 +538,7 @@ public class CombatManager extends Manager {
 			// TODO Critical hit roll for attacker
 			// TODO armour
 			
-			target.sendObserversAndSelf(combatSpam);
+			target.sendObservers(combatSpam);
 			
 			int finalDamage = info.getFinalDamage();
 			
@@ -553,7 +553,7 @@ public class CombatManager extends Manager {
 				target.modifyHealth(-finalDamage);
 		}
 		
-		source.sendObserversAndSelf(action);
+		source.sendObservers(action);
 	}
 	
 	private void enterCombat(CreatureObject creature) {

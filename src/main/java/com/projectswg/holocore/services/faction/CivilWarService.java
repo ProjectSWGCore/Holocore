@@ -397,7 +397,7 @@ final class CivilWarService extends Service {
 					.getObjectName());
 			
 			// Send visual effect to killer and everyone around
-			killerCreature.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "head", killerCreature.getObjectId(), ""));
+			killerCreature.sendObservers(new PlayClientEffectObjectMessage(effectFile, "head", killerCreature.getObjectId(), ""));
 			
 			// Send sound to just to the killer
 			killerCreature.sendSelf(new PlayMusicMessage(0, soundFile, 0, false));

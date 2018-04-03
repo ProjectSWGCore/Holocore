@@ -298,7 +298,7 @@ public class ChatManager extends Manager {
 	}
 	
 	private void broadcastAreaMessage(String message, Player broadcaster) {
-		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.PERSONAL, message));
+		broadcaster.getCreatureObject().sendObservers(new ChatSystemMessage(SystemChatType.PERSONAL, message));
 	}
 	
 	private void broadcastPlanetMessage(String message, Terrain terrain) {

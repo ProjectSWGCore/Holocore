@@ -302,7 +302,7 @@ public class BuffService extends Service {
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
 		if (!effectFileName.isEmpty()) {
-			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
+			receiver.sendObservers(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
 		}
 	}
 	

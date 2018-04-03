@@ -45,10 +45,7 @@ public class SocialInternalCmdCallback implements ICmdCallback {
 		
 		long objectId = player.getCreatureObject().getObjectId();
 		PlayerEmote emote = new PlayerEmote(objectId, objectId, ((target == null) ? 0 : target.getObjectId()), Short.valueOf(cmd[1]));
-		player.sendPacket(emote);
 		
-		for (Player aware : player.getCreatureObject().getObservers()) {
-			aware.sendPacket(new PlayerEmote(aware.getCreatureObject().getObjectId(), emote));
-		}
+		player.getCreatureObject().sendObservers(emote);
 	}
 }

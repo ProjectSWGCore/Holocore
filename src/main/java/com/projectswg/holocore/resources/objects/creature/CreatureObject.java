@@ -312,7 +312,7 @@ public class CreatureObject extends TangibleObject {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
 		if (isPlayer())
-			sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
+			sendObservers(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {

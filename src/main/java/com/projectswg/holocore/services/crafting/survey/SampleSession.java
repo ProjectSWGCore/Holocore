@@ -59,7 +59,7 @@ public class SampleSession {
 		double concentration = getConcentration(creature);
 		creature.setPosture(Posture.CROUCHED);
 		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
-		creature.sendObserversAndSelf(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
+		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 		Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
 	}
 	

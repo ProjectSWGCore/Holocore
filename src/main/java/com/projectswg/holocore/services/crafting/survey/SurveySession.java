@@ -61,7 +61,7 @@ public class SurveySession {
 		loadResourcePoints(surveyMessage, creature, resource, 320);
 		creature.getOwner().sendPacket(surveyMessage);
 		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
-		creature.sendObserversAndSelf(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
+		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
 	
 	public void stopSession() {
