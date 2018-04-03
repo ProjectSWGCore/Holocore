@@ -77,10 +77,7 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.BasicLogStream;
 import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.scripts.commands.admin.CmdCreateStaticItem;
-import com.projectswg.holocore.scripts.commands.admin.CmdDumpZoneInformation;
-import com.projectswg.holocore.scripts.commands.admin.CmdSetGodMode;
-import com.projectswg.holocore.scripts.commands.admin.CmdSetSpeed;
+import com.projectswg.holocore.scripts.commands.admin.*;
 import com.projectswg.holocore.scripts.commands.chat.*;
 import com.projectswg.holocore.scripts.commands.chat.friend.*;
 import com.projectswg.holocore.scripts.commands.combat.CmdCoupDeGrace;
@@ -399,7 +396,6 @@ public class CommandService extends Service {
 		addSurveyScripts();
 		registerCallback("stopDance", CmdStopDance::execute);
 		registerCallback("stopwatching", CmdStopWatching::execute);
-		registerCallback("tip", CmdTip::execute);
 		registerCallback("watch", CmdWatch::execute);
 		registerCallback("openContainer", CmdOpenContainer::execute);
 		registerCallback("purchaseTicket", CmdPurchaseTicket::execute);
@@ -421,6 +417,7 @@ public class CommandService extends Service {
 		registerCallback("server", new ServerCmdCallback());
 		
 		registerCallback("createStaticItem", CmdCreateStaticItem::execute);
+		registerCallback("credits", CmdMoney::execute);
 		registerCallback("setSpeed", CmdSetSpeed::execute);
 	}
 	

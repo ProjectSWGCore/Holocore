@@ -25,7 +25,7 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.scripts.commands.generic
+package com.projectswg.holocore.scripts.commands.admin
 
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.AccessLevel
@@ -34,10 +34,6 @@ import com.projectswg.holocore.services.galaxy.GalacticManager
 import com.projectswg.holocore.utilities.IntentFactory
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if (player.getAccessLevel() == AccessLevel.PLAYER) {
-		IntentFactory.sendSystemMessage(player, "Unable to access /tip command - currently reserved for admins")
-		return
-	}
 	def argSplit = args.split(" ")
 	if (argSplit.length < 2) {
 		IntentFactory.sendSystemMessage(player, "Invalid Arguments: " + args)
