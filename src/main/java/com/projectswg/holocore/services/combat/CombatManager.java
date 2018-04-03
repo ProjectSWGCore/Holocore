@@ -51,6 +51,7 @@ import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.commands.CombatCommand;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
@@ -310,7 +311,7 @@ public class CombatManager extends Manager {
 				float range = combatCommand.getConeLength();
 				Location sourceLocation = source.getWorldLocation();
 				
-				for (SWGObject nearbyObject : source.getAware()) {	// The source is included in awareness
+				for (SWGObject nearbyObject : source.getAware(AwarenessType.OBJECT)) {	// The source is included in awareness
 					if (sourceLocation.isWithinDistance(nearbyObject.getLocation(), range)) {
 						if (!(nearbyObject instanceof CreatureObject)) {
 							// We can't heal something that's not a creature
