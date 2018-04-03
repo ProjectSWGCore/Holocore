@@ -77,6 +77,7 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.BasicLogStream;
 import com.projectswg.holocore.resources.server_info.DataManager;
+import com.projectswg.holocore.scripts.commands.admin.CmdCreateStaticItem;
 import com.projectswg.holocore.scripts.commands.admin.CmdDumpZoneInformation;
 import com.projectswg.holocore.scripts.commands.admin.CmdSetGodMode;
 import com.projectswg.holocore.scripts.commands.admin.CmdSetSpeed;
@@ -419,6 +420,7 @@ public class CommandService extends Service {
 		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
 		registerCallback("server", new ServerCmdCallback());
 		
+		registerCallback("createStaticItem", CmdCreateStaticItem::execute);
 		registerCallback("setSpeed", CmdSetSpeed::execute);
 	}
 	
