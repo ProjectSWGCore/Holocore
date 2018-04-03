@@ -75,7 +75,7 @@ class TerrainMapChunk {
 	}
 	
 	private static void recursiveAdd(@Nonnull Collection<SWGObject> withinRange, @Nonnull SWGObject obj, @Nonnull SWGObject test) {
-		if (obj.equals(test) || !test.isVisible(obj))
+		if (!test.isVisible(obj))
 			return;
 		withinRange.add(test);
 		for (SWGObject child : test.getSlots().values()) {
