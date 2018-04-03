@@ -41,6 +41,8 @@ import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.cell.CellObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
@@ -73,6 +75,12 @@ public final class FactionManager extends Manager {
 	}
 	
 	private void handleFactionIntent(FactionIntent fi) {
+		TangibleObject target = fi.getTarget();
+		
+		if (!(target instanceof CreatureObject) && !(target.getParent() instanceof CellObject)) {	// We don't deal with faction updates for inventory items and the like
+			return;
+		}
+		
 		switch (fi.getUpdateType()) {
 			case FACTIONUPDATE:
 				handleTypeChange(fi);
@@ -84,7 +92,7 @@ public final class FactionManager extends Manager {
 				handleStatusChange(fi);
 				break;
 			case FLAGUPDATE:
-				handleFlagChange(fi.getTarget());
+				handleFlagChange(target);
 				break;
 		}
 	}
@@ -161,7 +169,7 @@ public final class FactionManager extends Manager {
 			}
 			
 			Player observerOwner = tangibleAware.getOwner();
-
+			
 			int pvpBitmask = getPvpBitmask(target, tangibleAware);
 			
 			if (targetOwner != null) // Send the PvP information about this observer to the owner
