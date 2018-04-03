@@ -201,7 +201,8 @@ public final class StaticItemService extends Service {
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
 					Log.e(errorMessage);
-					new SystemMessageIntent(requesterOwner, errorMessage).broadcast();
+					SystemMessageIntent.broadcastPersonal(requesterOwner, errorMessage);
+					return;
 				}
 			}
 			

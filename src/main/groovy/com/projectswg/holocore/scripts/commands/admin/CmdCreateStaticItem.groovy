@@ -28,17 +28,31 @@
 package com.projectswg.holocore.scripts.commands.admin
 
 import com.projectswg.holocore.intents.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.object.CreateStaticItemIntent
+import com.projectswg.holocore.resources.containers.ContainerPermissionsType
 import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.AccessLevel
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.services.objects.StaticItemService
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()
+	def inventory = creature.getSlottedObject("inventory")
 	
-	try {
-		creature.setMovementScale(Integer.valueOf(args))
-	} catch (NumberFormatException e) {
-		SystemMessageIntent.broadcastPersonal(player, args + " is not a valid number!")
-	}
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.ObjectCreationHandler() {
+		@Override
+		void success(SWGObject[] createdObjects) {
+			new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast()
+		}
+		
+		@Override
+		void containerFull() {
+			new SystemMessageIntent(player, "@system_msg:give_item_failure").broadcast()
+		}
+		
+		@Override
+		boolean isIgnoreVolume() {
+			return true	// This is an admin command - coontainer restrictions is for peasants!
+		}
+	}, ContainerPermissionsType.DEFAULT, args).broadcast()
 }
