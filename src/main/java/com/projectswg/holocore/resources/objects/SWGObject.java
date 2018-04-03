@@ -738,13 +738,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.getAware(type);
 	}
 	
-	public int sendObserversAndSelf(SWGPacket ... SWGPackets) {
-		int sent = 0;
-		sent += sendSelf(SWGPackets);
-		sent += sendObservers(SWGPackets);
-		return sent;
-	}
-	
 	public int sendObservers(SWGPacket ... SWGPackets) {
 		int sent = 0;
 		for (Player observer : getObservers()) {

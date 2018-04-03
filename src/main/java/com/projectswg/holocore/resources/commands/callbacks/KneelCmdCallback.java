@@ -46,7 +46,7 @@ public class KneelCmdCallback implements ICmdCallback {
 			creature.setPosture(Posture.CROUCHED);
 			creature.setMovementScale(0);
 			creature.setTurnScale(0);
-			creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.CROUCHED));
+			creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.CROUCHED));
 		}
 	}
 
