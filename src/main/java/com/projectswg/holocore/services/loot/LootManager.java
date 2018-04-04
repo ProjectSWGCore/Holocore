@@ -192,12 +192,16 @@ public final class LootManager extends Manager {
 	 * @param info the NPC info
 	 */
 	private void loadNPCLoot(NpcInfo info) {
-		// we don't care about non-humanoids
-		if (info.getHumanoidInfo() == null)
-			return;
-		int minCash = info.getHumanoidInfo().getMinCash();
-		int maxCash = info.getHumanoidInfo().getMaxCash();
+		int minCash = 0;
+		int maxCash = 0;
 		String creatureId = info.getId();
+		NpcLoader.HumanoidNpcInfo humanoidInfo = info.getHumanoidInfo();
+		
+		if (humanoidInfo != null) {	// Humanoids may have cash
+			minCash = humanoidInfo.getMinCash();
+			maxCash = humanoidInfo.getMaxCash();
+		}
+		
 		NPCLoot loot = new NPCLoot(minCash, maxCash);
 		
 		// load each loot table (up to 3) and add to loot object
@@ -600,7 +604,7 @@ public final class LootManager extends Manager {
 	private boolean isLootable(SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
 		
-		return !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
+		return inventory != null && !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
 		
 	}
 	
