@@ -604,7 +604,7 @@ public final class LootManager extends Manager {
 	private boolean isLootable(SWGObject target) {
 		SWGObject inventory = target.getSlottedObject("inventory");
 		
-		return !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
+		return inventory != null && !inventory.getContainedObjects().isEmpty() && inventory.getContainerPermissions() == ContainerPermissionsType.LOOT;
 		
 	}
 	
