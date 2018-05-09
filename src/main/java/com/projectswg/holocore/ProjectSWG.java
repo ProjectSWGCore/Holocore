@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class ProjectSWG {
 	
-	public static final String VERSION = "MAR18";
+	public static final String VERSION = "APR18";
 	
 	private static final AtomicBoolean SHUTDOWN_HOOK = new AtomicBoolean(false);
 	private static final AtomicReference<ProjectSWG> INSTANCE = new AtomicReference<>(null);
