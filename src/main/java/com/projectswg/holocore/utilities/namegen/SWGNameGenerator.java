@@ -24,6 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.utilities.namegen;
 
 import com.projectswg.common.data.encodables.tangible.Race;

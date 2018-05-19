@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.scripts.commands.admin
 
+import com.projectswg.holocore.intents.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.AccessLevel
 import com.projectswg.holocore.resources.player.Player
@@ -34,16 +35,10 @@ import com.projectswg.holocore.services.galaxy.GalacticManager
 
 static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()
-
-	if (player.getAccessLevel() == AccessLevel.PLAYER) {
-		print("Error: Your Accesslevel is to low to use that command")
-		return
+	
+	try {
+		creature.setMovementScale(Integer.valueOf(args))
+	} catch (NumberFormatException e) {
+		SystemMessageIntent.broadcastPersonal(player, args + " is not a valid number!")
 	}
-
-	if (creature == null) {
-		print("Error: No Player or CreatureObject")
-		return
-	}
-
-	creature.setMovementScale(Integer.valueOf(args))
 }

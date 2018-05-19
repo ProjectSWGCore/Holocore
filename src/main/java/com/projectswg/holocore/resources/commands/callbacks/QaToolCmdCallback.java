@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.commands.callbacks;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.debug.Log;
 
 import com.projectswg.holocore.intents.CivilWarPointIntent;
@@ -38,33 +37,26 @@ import com.projectswg.holocore.scripts.commands.admin.qatool.QaToolDetails;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
-import com.projectswg.holocore.intents.object.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.intents.object.MoveObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectTeleportIntent;
 import com.projectswg.holocore.intents.player.DeleteCharacterIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
-import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.network.DisconnectReason;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
-import com.projectswg.holocore.resources.sui.SuiInputBox;
-import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectManager;
-import com.projectswg.holocore.services.objects.StaticItemService.ObjectCreationHandler;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
 
 /**
  * Created by Waverunner on 8/19/2015
  */
 public class QaToolCmdCallback implements ICmdCallback {
-	private static final String TITLE = "QA Tool";
-	private static final String PROMPT = "Select the action that you would like to do";
 	
 	private GalacticManager galacticManager;
 	
@@ -75,14 +67,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 		
 		if (args != null && !args.isEmpty()) {
 			String[] command = args.split(" ");
+			String commandName = command[0];
 			
-			switch (command[0]) {
-				case "item":
-					if (command.length > 1)
-						handleCreateItem(player, command[1]);
-					else
-						displayItemCreator(player);
-					break;
+			switch (commandName) {
 				case "help":
 					displayHelp(player);
 					break;
@@ -108,66 +95,14 @@ public class QaToolCmdCallback implements ICmdCallback {
 					grantGcw(player, command[1]);
 					break;
 				default:
-					displayMainWindow(player);
+					SystemMessageIntent.broadcastPersonal(player, "Unknown qatool subcommand: " + commandName);
 					break;
 			}
-		} else {
-			displayMainWindow(player);
 		}
 		Log.i("%s has accessed the QA Tool", player.getUsername());
 	}
 	
-	/* Windows */
-	
-	private void displayMainWindow(Player player) {
-		SuiListBox window = new SuiListBox(SuiButtons.OK_CANCEL, TITLE, PROMPT);
-		window.addListItem("Item Creator");
-		
-		window.addCallback("handleQaTool", (event, parameters) -> {
-			if (event != SuiEvent.OK_PRESSED || SuiListBox.getSelectedRow(parameters) != 0)
-				return;
-			
-			displayItemCreator(player);
-		});
-		window.display(player);
-	}
-	
-	private void displayItemCreator(Player player) {
-		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the name of the item you wish to create");
-		inputBox.addOkButtonCallback("handleCreateItem", (event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
-		inputBox.addCancelButtonCallback("displayMainWindow", (event, parameters) -> displayMainWindow(player));
-		inputBox.display(player);
-	}
-	
 	/* Handlers */
-	
-	private void handleCreateItem(Player player, String itemName) {
-		CreatureObject creature = player.getCreatureObject();
-		if (creature == null)
-			return;
-		
-		SWGObject inventory = creature.getSlottedObject("inventory");
-		if (inventory == null)
-			return;
-
-		Log.i("%s attempted to create item %s", player, itemName);
-		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
-			@Override
-			public void success(SWGObject[] createdObjects) {
-				new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
-			}
-
-			@Override
-			public void containerFull() {
-				new SystemMessageIntent(player, "@system_msg:give_item_failure").broadcast();
-			}
-
-			@Override
-			public boolean isIgnoreVolume() {
-				return false;
-			}
-		}, ContainerPermissionsType.DEFAULT, itemName).broadcast();
-	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
@@ -216,7 +151,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void displayHelp(Player player) {
-		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "item <template> -- Generates a new item and adds it to your inventory, not providing template parameter will display Item Creator window\n" + "help -- Displays this window\n";
+		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
 	}
 	

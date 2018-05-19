@@ -197,7 +197,7 @@ public class EntertainmentService extends Service {
 		performerObject.setPerformanceCounter(1);
 		
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
-		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
+		performerObject.sendObservers(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
 		new SystemMessageIntent(performer, "@performance:flourish_perform").broadcast();
 	}
 	

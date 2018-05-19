@@ -35,7 +35,7 @@ import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 import com.projectswg.holocore.scripts.radial.object.SWGObjectRadial
 
-class ObjectUniformBoxRadial extends SWGObjectRadial implements RadialHandlerInterface {
+class ObjectUniformBoxRadial extends SWGObjectRadial {
 	
 	def handleSelection(Player player, SWGObject target, RadialItem selection) {
 		DestroyObjectIntent.broadcast(target)

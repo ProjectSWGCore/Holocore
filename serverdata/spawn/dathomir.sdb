@@ -746,7 +746,7 @@ INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	I
 300746	DATHOMIR	dat_smc_stronghold	AREA	4	-13.38	2.01	-1.98	0	1	Shando	shando_100_c_inv_n	Dungeon	SMC Stronghold	1	TURN	0	0	-	idle	0	0	0	1800	1500
 300747	DATHOMIR	dat_smc_stronghold	AREA	4	-11.88	2.01	-3.48	0	1	Izaryx	izaryx_100_h_inv_n	Dungeon	SMC Stronghold	1	TURN	0	0	-	idle	0	0	0	1800	1500
 300748	DATHOMIR	dat_smc_stronghold	AREA	5	-14.29	1.99	-21.06	0	1	Zideera	zideera_100_h_inv_n	Dungeon	SMC Stronghold	1	TURN	0	0	-	idle	0	0	0	1800	1500
-300749	DATHOMIR	dat_smc_stronghold	AREA	6	3.12	3.01	-4.95	0	1	Aujante K'lee	aujante_klee_20_h_att_n	Dungeon	SMC Stronghold	1	TURN	0	0	-	idle	21	0	0	1800	1500
+300749	DATHOMIR	dat_smc_stronghold	AREA	6	3.12	3.01	-4.95	0	1	Aujante K'lee	aujante_klee_100_h_inv_n	Dungeon	SMC Stronghold	1	TURN	0	0	-	idle	21	0	0	1800	1500
 300750	DATHOMIR	dat_smc_stronghold	AREA	7	16.42	2.01	-10.87	0	1	a Singing Mountain clan sentry	singing_mountain_clan_sentry_88_h_agg_e	Dungeon	SMC Stronghold	1	LOITER	2	0	-	idle	0	0	0	1800	1500
 300751	DATHOMIR	dat_smc_stronghold	AREA	8	23.42	2.01	-21.14	0	1	a Singing Mountain clan slave	singing_mtn_clan_slave_85_h_agg_n	Dungeon	SMC Stronghold	1	LOITER	2	0	-	idle	0	0	0	1800	1500
 300752	DATHOMIR	dat_smc_stronghold	AREA	9	24.79	2.01	-12.47	0	1	a Singing Mountain clan slave	singing_mtn_clan_slave_85_h_agg_n	Dungeon	SMC Stronghold	1	LOITER	2	0	-	idle	0	0	0	1800	1500

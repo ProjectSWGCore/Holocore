@@ -24,16 +24,11 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities.crafting;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import javax.imageio.ImageIO;
+package com.projectswg.holocore.display;
 
 import com.projectswg.common.data.location.Terrain;
-
+import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceLoader;
+import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawn;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -47,8 +42,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceLoader;
-import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawn;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class ResourceSpawnViewer extends Application {
 	

@@ -25,29 +25,77 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.scripts.commands.generic
+package com.projectswg.holocore.resources.objects.awareness;
 
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.AccessLevel
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
-import com.projectswg.holocore.utilities.IntentFactory
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.creature.CreatureState;
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-	if (player.getAccessLevel() == AccessLevel.PLAYER) {
-		IntentFactory.sendSystemMessage(player, "Unable to access /tip command - currently reserved for admins")
-		return
+import javax.annotation.Nonnull;
+import java.util.Collections;
+
+public class ObjectAwareness {
+	
+	private final TerrainMap[] terrains;
+	
+	public ObjectAwareness() {
+		terrains = new TerrainMap[Terrain.values().length];
+		for (int i = 0; i < terrains.length; i++) {
+			terrains[i] = new TerrainMap();
+		}
 	}
-	def argSplit = args.split(" ")
-	if (argSplit.length < 2) {
-		IntentFactory.sendSystemMessage(player, "Invalid Arguments: " + args)
-		return
+	
+	/**
+	 * Called when an object was created
+	 *
+	 * @param obj the object created
+	 */
+	public void createObject(@Nonnull SWGObject obj) {
+		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
+			TerrainMap map = getTerrainMap(obj);
+			map.add(obj);
+			map.update(obj);
+		}
 	}
-	def creature = player.getCreatureObject()
-	if (argSplit[0] == "bank")
-		creature.setBankBalance(creature.getBankBalance() + Long.valueOf(argSplit[1]))
-	else if (argSplit[0] == "cash")
-		creature.setCashBalance(creature.getCashBalance() + Long.valueOf(argSplit[1]))
-	else
-		IntentFactory.sendSystemMessage(player, "Unknown Destination: " + argSplit[0])
+	
+	/**
+	 * Called when an object is destroyed
+	 *
+	 * @param obj the object destroyed
+	 */
+	public void destroyObject(@Nonnull SWGObject obj) {
+		TerrainMap map = getTerrainMap(obj);
+		map.remove(obj);
+		map.update(obj);
+	}
+	
+	/**
+	 * Called when an object needs an update
+	 *
+	 * @param obj the object to update
+	 */
+	public void updateObject(@Nonnull SWGObject obj) {
+		SWGObject superParent = obj.getSuperParent();
+		TerrainMap map = getTerrainMap(obj);
+		if (superParent != null) {
+			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
+			map.remove(obj);
+			map.update(superParent);
+		} else {
+			map.move(obj);
+		}
+		map.update(obj);
+	}
+	
+	@Nonnull
+	private TerrainMap getTerrainMap(SWGObject obj) {
+		return terrains[obj.getTerrain().ordinal()];
+	}
+	
+	private static boolean isRider(@Nonnull SWGObject obj, SWGObject parent) {
+		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
+	}
+	
 }

@@ -34,7 +34,7 @@ import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
-class CreditObjectRadial extends SWGObjectRadial implements RadialHandlerInterface {
+class CreditObjectRadial extends SWGObjectRadial {
 	
 	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
 		options.add(new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT))

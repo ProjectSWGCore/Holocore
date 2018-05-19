@@ -43,12 +43,12 @@ public class SocialInternalCmdCallback implements ICmdCallback {
 		if (!cmd[0].equals("0"))
 			target = galacticManager.getObjectManager().getObjectById(Long.parseLong(cmd[0]));
 		
-		long objectId = player.getCreatureObject().getObjectId();
-		PlayerEmote emote = new PlayerEmote(objectId, objectId, ((target == null) ? 0 : target.getObjectId()), Short.valueOf(cmd[1]));
-		player.sendPacket(emote);
+		long sourceId = player.getCreatureObject().getObjectId();
+		long targetId = ((target == null) ? 0 : target.getObjectId());
+		short emoteId = Short.valueOf(cmd[1]);
 		
 		for (Player aware : player.getCreatureObject().getObservers()) {
-			aware.sendPacket(new PlayerEmote(aware.getCreatureObject().getObjectId(), emote));
+			aware.sendPacket(new PlayerEmote(aware.getCreatureObject().getObjectId(), sourceId, targetId, emoteId));
 		}
 	}
 }

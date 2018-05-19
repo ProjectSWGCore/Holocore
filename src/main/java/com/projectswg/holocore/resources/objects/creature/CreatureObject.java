@@ -26,24 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.creature;
 
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.UpdatePostureMessage;
-import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
-import com.projectswg.common.network.packets.swg.zone.trade.AbortTradeMessage;
-
 import com.projectswg.holocore.resources.collections.SWGList;
 import com.projectswg.holocore.resources.collections.SWGSet;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
@@ -56,10 +50,15 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.group.GroupInviterData;
 import com.projectswg.holocore.services.trade.TradeSession;
 
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
+	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness();
 	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
 	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
 	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
@@ -86,7 +85,36 @@ public class CreatureObject extends TangibleObject {
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initBaseAttributes();
-		setPrefLoadRange(200);
+	}
+	
+	@Override
+	public void onObjectEnterAware(SWGObject aware) {
+		if (isPlayer())
+			awareness.addAware(aware);
+	}
+	
+	@Override
+	public void onObjectLeaveAware(SWGObject aware) {
+		if (isPlayer())
+			awareness.removeAware(aware);
+	}
+	
+	public void flushObjectsAware() {
+		if (isPlayer())
+			awareness.flushAware(getOwner());
+	}
+	
+	public void resetObjectsAware() {
+		if (isPlayer())
+			awareness.resetObjectsAware();
+	}
+	
+	public void addObjectsAware() {
+		if (isPlayer()) {
+			for (SWGObject obj : getAware()) {
+				awareness.addAware(obj);
+			}
+		}
 	}
 	
 	@Override
@@ -112,6 +140,18 @@ public class CreatureObject extends TangibleObject {
 				slotObj.moveToContainer(inventory);
 			}
 		}
+	}
+	
+	@Override
+	protected int calculateLoadRange() {
+		if (isLoggedInPlayer())
+			return 1024;
+		return super.calculateLoadRange();
+	}
+	
+	@Override
+	public boolean isVisible(SWGObject target) {
+		return !isLoggedOutPlayer() && super.isVisible(target);
 	}
 
 	private void addEquipment(SWGObject obj) {
@@ -272,7 +312,7 @@ public class CreatureObject extends TangibleObject {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
 		if (isPlayer())
-			sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
+			sendObservers(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -940,41 +980,6 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public int hashCode() {
 		return super.hashCode() * 20 + race.toString().hashCode();
-	}
-	
-	@Override
-	public void sendBaselines(Player target) {
-		boolean targetSelf = getOwner() == target;
-		
-		if (targetSelf)
-			target.sendPacket(createBaseline1(target));
-		
-		target.sendPacket(createBaseline3(target));
-		
-		if (targetSelf)
-			target.sendPacket(createBaseline4(target));
-		
-		target.sendPacket(createBaseline6(target));
-		
-		if (targetSelf) {
-			target.sendPacket(createBaseline8(target));
-			target.sendPacket(createBaseline9(target));
-		}
-	}
-	
-	@Override
-	protected void sendFinalBaselinePackets(Player target) {
-		super.sendFinalBaselinePackets(target);
-		
-		if (isGenerated()) {
-			target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-			
-			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
-			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
-			
-			if (getOwner() == target)
-				target.sendPacket(new AbortTradeMessage());
-		}
 	}
 	
 	@Override

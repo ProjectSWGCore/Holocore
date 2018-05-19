@@ -47,7 +47,7 @@ public class ProneCmdCallback implements ICmdCallback {
 			creature.setPosture(Posture.PRONE);
 			creature.setTurnScale(1);
 			creature.setMovementScale(0.50);
-			creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
+			creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
 		}
 	}
 

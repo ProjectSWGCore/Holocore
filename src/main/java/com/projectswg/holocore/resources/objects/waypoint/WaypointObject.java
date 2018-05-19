@@ -36,9 +36,7 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.objects.intangible.IntangibleObject;
-import com.projectswg.holocore.resources.player.Player;
 
 public class WaypointObject extends IntangibleObject implements Encodable, Persistable {
 	
@@ -122,11 +120,6 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 		return waypoint.getOobType();
 	}
 
-	@Override
-	public void createObject(Player target) {
-		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
-	}
-	
 	@Override
 	public void decode(NetBuffer data) {
 		waypoint.decode(data);

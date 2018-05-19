@@ -133,11 +133,8 @@ final class RareLootService extends Service {
 		chest.setStf("loot_n", chestIdForTemplate(template) + "_n");
 		chest.setDetailStf("loot_n", chestIdForTemplate(template) + "_d");    // Not located in loot_d, for whatever reason...
 		
-		switch (chest.moveToContainer(inventory)) {
-			case SUCCESS:
-				sendSuccessPackets(chest, corpse, killer);
-				break;
-		}
+		chest.moveToContainer(inventory);
+		sendSuccessPackets(chest, corpse, killer);
 	}
 	
 }

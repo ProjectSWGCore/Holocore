@@ -30,15 +30,15 @@ package com.projectswg.holocore.services.faction;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
-public class TestCivilWarService {
+public class TestCivilWarService extends TestRunnerNoIntents {
 	
 	private final CivilWarService service;
 	

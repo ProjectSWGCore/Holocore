@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.player.Player
 class UsableObjectRadial extends SWGObjectRadial {
 	
 	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		super.getOptions(options, player, target)
 		options.add(new RadialOption(RadialItem.ITEM_USE))
 		options.add(new RadialOption(RadialItem.EXAMINE))
 	}

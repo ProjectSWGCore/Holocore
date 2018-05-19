@@ -33,15 +33,15 @@ import com.projectswg.holocore.intents.crafting.survey.StartSurveyToolIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
+import com.projectswg.holocore.scripts.radial.object.UsableObjectRadial
 
-class ObjectSurveyToolRadial implements RadialHandlerInterface {
-	
-	def getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		options.add(new RadialOption(RadialItem.ITEM_USE))
-		options.add(new RadialOption(RadialItem.EXAMINE))
-	}
+class ObjectSurveyToolRadial extends UsableObjectRadial {
 	
 	def handleSelection(Player player, SWGObject target, RadialItem selection) {
+		if (selection != RadialItem.ITEM_USE) {
+			return
+		}
+		
 		new StartSurveyToolIntent(player.getCreatureObject(), target).broadcast()
 	}
 	
