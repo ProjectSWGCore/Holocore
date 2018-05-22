@@ -27,14 +27,10 @@
 
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.util.Locale;
-import java.util.Map;
-
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.location.Location;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -46,6 +42,9 @@ import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Waverunner

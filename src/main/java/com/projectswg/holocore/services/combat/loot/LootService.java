@@ -24,17 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.loot;
+package com.projectswg.holocore.services.combat.loot;
 
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
@@ -65,12 +62,15 @@ import com.projectswg.holocore.resources.server_info.loader.npc.NpcLoader.NpcInf
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 import com.projectswg.holocore.services.objects.StaticItemService;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public final class LootManager extends Manager {
+public final class LootService extends Service {
 	
 	private static final String LOOT_TABLE_SELECTOR = "SELECT * FROM loot_table";
 	
@@ -81,18 +81,11 @@ public final class LootManager extends Manager {
 	private final Map<String, NPCLoot> npcLoot;    // K: npc_id, V: possible loot
 	private final Random random;
 	
-	public LootManager() {
+	public LootService() {
 		lootTables = new HashMap<>();
 		npcLoot = new HashMap<>();
 		random = new Random();
 		
-		addChildService(new RareLootService());
-		
-		registerForIntent(ChatCommandIntent.class, this::handleChatCommand);
-		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransfer);
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilled);
-		registerForIntent(LootRequestIntent.class, this::handleLootRequestIntent);
-		registerForIntent(LootItemIntent.class, this::handleLootItemIntent);
 	}
 	
 	@Override
@@ -230,6 +223,7 @@ public final class LootManager extends Manager {
 		loot.addNPCTable(new NPCTable(chance, lootTable));
 	}
 	
+	@IntentHandler
 	private void handleContainerTransfer(ContainerTransferIntent cti) {
 		SWGObject object = cti.getObject();
 		
@@ -240,6 +234,7 @@ public final class LootManager extends Manager {
 			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
 	}
 	
+	@IntentHandler
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 		
@@ -278,6 +273,7 @@ public final class LootManager extends Manager {
 			showLootDisc(killer, corpse);
 	}
 	
+	@IntentHandler
 	private void handleChatCommand(ChatCommandIntent cci) {
 		
 		if (!cci.getCommand().getName().equalsIgnoreCase("loot")) {
@@ -296,6 +292,7 @@ public final class LootManager extends Manager {
 		lootAll(cci.getSource(), target);
 	}
 	
+	@IntentHandler
 	private void handleLootRequestIntent(LootRequestIntent lri) {
 		Player player = lri.getPlayer();
 		CreatureObject looter = player.getCreatureObject();
@@ -320,6 +317,7 @@ public final class LootManager extends Manager {
 		}
 	}
 	
+	@IntentHandler
 	private void handleLootItemIntent(LootItemIntent lii) {
 		CreatureObject looter = lii.getLooter().getCreatureObject();
 		SWGObject item = lii.getItem();
@@ -432,7 +430,7 @@ public final class LootManager extends Manager {
 	}
 	
 	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
-		Assert.test(requester.isPlayer());
+		assert requester.isPlayer();
 		
 		Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
 		

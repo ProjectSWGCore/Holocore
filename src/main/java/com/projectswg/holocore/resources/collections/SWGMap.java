@@ -26,13 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

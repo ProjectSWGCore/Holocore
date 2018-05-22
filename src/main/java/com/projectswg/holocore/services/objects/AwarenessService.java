@@ -26,12 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
 import com.projectswg.common.network.packets.swg.zone.HeartBeat;
@@ -63,6 +59,10 @@ import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.Collections;
 
@@ -77,18 +77,9 @@ public class AwarenessService extends Service {
 		this.awareness = new ObjectAwareness();
 		dataTransformHandler = new DataTransformHandler();
 		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
-		
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
-		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
-		registerForIntent(ObjectTeleportIntent.class, this::processObjectTeleportIntent);
-		registerForIntent(GalacticPacketIntent.class, this::processGalacticPacketIntent);
-		registerForIntent(MoveObjectIntent.class, this::processMoveObjectIntent);
-		registerForIntent(ContainerTransferIntent.class, this::processContainerTransferIntent);
-		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getCreature().getLocation(), rzii.getCreature().getParent()));
-		registerForIntent(ForceAwarenessUpdateIntent.class, this::handleForceUpdate);
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		CreatureObject creature = p.getCreatureObject();
@@ -103,16 +94,19 @@ public class AwarenessService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		awareness.createObject(oci.getObject());
 	}
 	
+	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
 		obj.systemMove(null, GONE_LOCATION);
 		awareness.destroyObject(doi.getObject());
 	}
 	
+	@IntentHandler
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject obj = oti.getObject();
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
@@ -123,6 +117,7 @@ public class AwarenessService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		if (packet instanceof DataTransform) {
@@ -134,10 +129,12 @@ public class AwarenessService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void processMoveObjectIntent(MoveObjectIntent moi) {
 		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed(), moi.getUpdateCounter());
 	}
 	
+	@IntentHandler
 	private void processContainerTransferIntent(ContainerTransferIntent cti) {
 		SWGObject obj = cti.getObject();
 		SWGObject oldContainer = cti.getOldContainer();
@@ -148,8 +145,14 @@ public class AwarenessService extends Service {
 		obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newContainer == null ? 0 : newContainer.getObjectId(), obj.getSlotArrangement()));
 	}
 	
-	private void handleForceUpdate(ForceAwarenessUpdateIntent faui) {
+	@IntentHandler
+	private void handleForceAwarenessUpdateIntent(ForceAwarenessUpdateIntent faui) {
 		awareness.updateObject(faui.getObject());
+	}
+	
+	@IntentHandler
+	private void handleRequestZoneInIntent(RequestZoneInIntent rzii) {
+		handleZoneIn(rzii.getCreature(), rzii.getCreature().getLocation(), rzii.getCreature().getParent());
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Location loc, SWGObject parent) {
@@ -193,7 +196,7 @@ public class AwarenessService extends Service {
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
-		Assert.test(player.getPlayerState() == PlayerState.ZONING_IN);
+		assert player.getPlayerState() == PlayerState.ZONING_IN;
 		player.setPlayerState(PlayerState.ZONED_IN);
 		Log.i("%s with character %s zoned in from %s", player.getUsername(), player.getCharacterName(), p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();

@@ -26,19 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.spawn;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.building.BuildingObject;
@@ -46,6 +35,15 @@ import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StaticService extends Service {
 	

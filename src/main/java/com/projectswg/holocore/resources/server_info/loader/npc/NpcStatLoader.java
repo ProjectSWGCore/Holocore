@@ -26,15 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info.loader.npc;
 
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 
 public class NpcStatLoader {
 	

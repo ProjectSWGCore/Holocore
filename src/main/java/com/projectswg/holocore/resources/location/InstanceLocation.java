@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.location;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Point3D;
@@ -35,10 +33,9 @@ import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 
-import javax.annotation.Nonnull;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class InstanceLocation implements Persistable {
 	
@@ -106,17 +103,17 @@ public class InstanceLocation implements Persistable {
 		setInstance(InstanceType.NONE, 0);
 	}
 	
-	@Nonnull
+	@NotNull
 	public Location getLocation() {
 		return location.get();
 	}
 	
-	@Nonnull
+	@NotNull
 	public Point3D getPosition() {
 		return getLocation().getPosition();
 	}
 	
-	@Nonnull
+	@NotNull
 	public Terrain getTerrain() {
 		return getLocation().getTerrain();
 	}

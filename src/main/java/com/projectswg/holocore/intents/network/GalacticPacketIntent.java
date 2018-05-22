@@ -27,28 +27,25 @@
 package com.projectswg.holocore.intents.network;
 
 import com.projectswg.common.network.packets.SWGPacket;
-
 import com.projectswg.holocore.intents.GalacticIntent;
 import com.projectswg.holocore.resources.player.Player;
-
-import javax.annotation.Nonnull;
 
 public class GalacticPacketIntent extends GalacticIntent {
 	
 	private final SWGPacket packet;
 	private final Player player;
 	
-	public GalacticPacketIntent(@Nonnull SWGPacket packet, @Nonnull Player player) {
+	public GalacticPacketIntent(@NotNull SWGPacket packet, @NotNull Player player) {
 		this.packet = packet;
 		this.player = player;
 	}
 	
-	@Nonnull
+	@NotNull
 	public SWGPacket getPacket() {
 		return packet;
 	}
 	
-	@Nonnull
+	@NotNull
 	public Player getPlayer() {
 		return player;
 	}

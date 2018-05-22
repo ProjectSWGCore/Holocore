@@ -26,13 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.raw;
 
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.holocore.services.crafting.resource.galactic.RawResourceType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.projectswg.common.data.encodables.oob.StringId;
-
-import com.projectswg.holocore.services.crafting.resource.galactic.RawResourceType;
 
 public class RawResource {
 	

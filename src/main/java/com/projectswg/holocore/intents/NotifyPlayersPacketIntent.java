@@ -26,13 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import java.util.List;
-
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
+
+import java.util.List;
 
 public class NotifyPlayersPacketIntent extends Intent {
 	

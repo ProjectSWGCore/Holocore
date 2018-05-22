@@ -26,27 +26,22 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map.Entry;
-
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.buildouts.BuildoutLoader;
 import com.projectswg.holocore.resources.objects.buildouts.SnapshotLoader;
 import com.projectswg.holocore.resources.objects.buildouts.SwgBuildoutArea;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class BuildoutGenerator {
 	

@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.server;
 
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
+
+import java.util.concurrent.TimeUnit;
 
 public class ServerManagementIntent extends Intent {
 	

@@ -26,23 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.network;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.lang.ref.SoftReference;
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.encoding.StringType;
-import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.common.utilities.ByteUtilities;
-
-import com.projectswg.holocore.resources.config.ConfigFile;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.resources.server_info.DataManager;
 
 public class BaselineObject {
 	

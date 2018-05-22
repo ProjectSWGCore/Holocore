@@ -26,16 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.group;
 
-import java.util.Map;
-import java.util.Set;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.sui.SuiEvent;
-import com.projectswg.common.debug.Assert;
-
 import com.projectswg.holocore.intents.GroupEventIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.ChatRoomUpdateIntent;
@@ -52,17 +45,23 @@ import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
 import com.projectswg.holocore.utilities.IntentFactory;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GroupService extends Service {
 	
 	private final Map<Long, GroupObject> groups;
 
 	public GroupService() {
-		groups = new SynchronizedMap<>();
-		registerForIntent(GroupEventIntent.class, this::handleGroupEventIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		groups = new ConcurrentHashMap<>();
 	}
 	
+	@IntentHandler
 	private void handleGroupEventIntent(GroupEventIntent gei) {
 		switch (gei.getEventType()) {
 			case GROUP_INVITE:
@@ -98,6 +97,7 @@ public class GroupService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
 			case PE_ZONE_IN_SERVER:
@@ -165,7 +165,7 @@ public class GroupService extends Service {
 	
 	private void handleMemberDisappeared(Player player) {
 		CreatureObject creature = player.getCreatureObject();
-		Assert.notNull(creature);
+		Objects.requireNonNull(creature);
 		if (creature.getGroupId() == 0)
 			return; // Ignore anyone without a group
 		
@@ -174,9 +174,9 @@ public class GroupService extends Service {
 	
 	private void handleGroupDisband(Player player) {
 		CreatureObject creo = player.getCreatureObject();
-		Assert.notNull(creo);
+		Objects.requireNonNull(creo);
 		GroupObject group = getGroup(creo.getGroupId());
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		
 		if (group.getLeaderId() != creo.getObjectId()) {
 			sendSystemMessage(player, "must_be_leader");
@@ -192,7 +192,7 @@ public class GroupService extends Service {
 	
 	private void handleGroupInvite(Player player, CreatureObject target) {
 		CreatureObject creature = player.getCreatureObject();
-		Assert.notNull(creature);
+		Objects.requireNonNull(creature);
 		if (target == null || !target.isPlayer() || creature.equals(target)) {
 			sendSystemMessage(player, "invite_no_target_self");
 			return;
@@ -205,7 +205,7 @@ public class GroupService extends Service {
 		long groupId = creature.getGroupId();
 		if (groupId != 0) {
 			GroupObject group = getGroup(groupId);
-			Assert.notNull(group);
+			Objects.requireNonNull(group);
 			
 			if (!handleInviteToExistingGroup(player, target, group))
 				return;
@@ -242,7 +242,7 @@ public class GroupService extends Service {
 		}
 		
 		Player targetOwner = target.getOwner();
-		Assert.notNull(targetOwner);
+		Objects.requireNonNull(targetOwner);
 		String targetName = targetOwner.getCharacterName();
 		
 		if (target.getInviterData() == null) {
@@ -292,10 +292,10 @@ public class GroupService extends Service {
 	
 	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
 		CreatureObject currentLeaderCreature = currentLeader.getCreatureObject();
-		Assert.notNull(currentLeaderCreature);
-		Assert.test(newLeader.getGroupId() != 0);
+		Objects.requireNonNull(currentLeaderCreature);
+		assert newLeader.getGroupId() != 0 : "new leader is not a part of a group";
 		GroupObject group = getGroup(newLeader.getGroupId());
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		
 		if (group.getLeaderId() != currentLeaderCreature.getObjectId()) {
 			sendSystemMessage(currentLeader, "must_be_leader");
@@ -322,16 +322,16 @@ public class GroupService extends Service {
 		}
 		
 		GroupObject group = getGroup(creature.getGroupId());
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 
 		group.setLootMaster(target.getObjectId());
 		sendGroupSystemMessage(group,"new_master_looter", "TU", target.getObjectName());
 	}
 	
 	private void handleKick(Player leader, CreatureObject kickedCreature) {
-		Assert.notNull(kickedCreature);
+		Objects.requireNonNull(kickedCreature);
 		CreatureObject leaderCreature = leader.getCreatureObject();
-		Assert.notNull(leaderCreature);
+		Objects.requireNonNull(leaderCreature);
 		long groupId = leaderCreature.getGroupId();
 		if (groupId == 0) { // Requester is not in a group
 			sendSystemMessage(leader, "group_only");
@@ -343,7 +343,7 @@ public class GroupService extends Service {
 		}
 		
 		GroupObject group = getGroup(groupId);
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		if (group.getLeaderId() != leaderCreature.getObjectId()) { // Requester is not leader of group
 			sendSystemMessage(leader, "must_be_leader");
 			return;
@@ -354,7 +354,7 @@ public class GroupService extends Service {
 	
 	private void createGroup(Player leader, Player member) {
 		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		groups.put(group.getObjectId(), group);
 		
 		group.formGroup(leader.getCreatureObject(), member.getCreatureObject());
@@ -374,14 +374,14 @@ public class GroupService extends Service {
 		sendGroupSystemMessage(group, "disbanded");
 		group.disbandGroup();
 		new DestroyObjectIntent(group).broadcast();
-		Assert.notNull(groups.remove(group.getObjectId()));
+		Objects.requireNonNull(groups.remove(group.getObjectId()));
 	}
 	
 	private void joinGroup(CreatureObject inviter, CreatureObject creature, long groupId) {
 		Player player = creature.getOwner();
-		Assert.notNull(player);
+		Objects.requireNonNull(player);
 		GroupObject group = getGroup(groupId);
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		
 		if (group.getLeaderId() != inviter.getObjectId()) {
 			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.getObjectName());
@@ -398,16 +398,16 @@ public class GroupService extends Service {
 	
 	private void onJoinGroup(CreatureObject creature, GroupObject group) {
 		Player player = creature.getOwner();
-		Assert.notNull(player);
+		Objects.requireNonNull(player);
 		sendSystemMessage(player, "joined_self");
 		updateChatRoom(player, group, UpdateType.JOIN);
 	}
 	
 	private void removePlayerFromGroup(CreatureObject creature) {
-		Assert.notNull(creature);
-		Assert.test(creature.getGroupId() != 0);
+		Objects.requireNonNull(creature);
+		assert creature.getGroupId() != 0 : "creature is not within a group";
 		GroupObject group = getGroup(creature.getGroupId());
-		Assert.notNull(group);
+		Objects.requireNonNull(group);
 		
 		// Check size of the group, if it only has two members, destroy the group
 		if (group.getGroupMembers().size() <= 2) {
@@ -442,7 +442,7 @@ public class GroupService extends Service {
 		Set<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
-			Assert.notNull(member.getOwner());
+			Objects.requireNonNull(member.getOwner());
 			sendSystemMessage(member.getOwner(), id);
 		}
 	}
@@ -451,7 +451,7 @@ public class GroupService extends Service {
 		Set<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
-			Assert.notNull(member.getOwner());
+			Objects.requireNonNull(member.getOwner());
 			sendSystemMessage(member.getOwner(), id, objects);
 		}
 	}

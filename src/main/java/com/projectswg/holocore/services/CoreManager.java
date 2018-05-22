@@ -26,25 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services;
 
-import java.io.File;
-import java.time.OffsetTime;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.info.Config;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.admin.AdminShutdownServer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
 import com.projectswg.common.utilities.ThreadUtilities;
-
 import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.network.OutboundPacketIntent;
 import com.projectswg.holocore.intents.server.ServerManagementIntent;
@@ -55,6 +46,14 @@ import com.projectswg.holocore.resources.server_info.BasicLogStream;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.time.OffsetTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class CoreManager extends Manager {
 	

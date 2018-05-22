@@ -26,11 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.survey;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResource;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InProgressSurveyManager {
 	

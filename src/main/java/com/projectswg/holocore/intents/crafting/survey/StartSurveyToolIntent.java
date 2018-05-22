@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.crafting.survey;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class StartSurveyToolIntent extends Intent {
 	

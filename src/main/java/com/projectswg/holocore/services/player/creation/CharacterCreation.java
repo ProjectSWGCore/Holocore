@@ -26,17 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player.creation;
 
-import java.util.Calendar;
-
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
-
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
@@ -52,6 +47,9 @@ import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.player.TerrainZoneInsertion.SpawnInformation;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.Calendar;
 
 public class CharacterCreation {
 	

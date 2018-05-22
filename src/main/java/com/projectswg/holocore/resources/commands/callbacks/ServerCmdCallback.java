@@ -26,11 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.server.ServerManagementIntent;
 import com.projectswg.holocore.intents.server.ServerManagementIntent.ServerManagementEvent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -41,6 +36,10 @@ import com.projectswg.holocore.resources.sui.SuiInputBox;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ServerCmdCallback implements ICmdCallback {
 

@@ -26,19 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services;
 
+import com.projectswg.common.utilities.ThreadUtilities;
+import com.projectswg.holocore.intents.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.server.ServerStatusIntent;
+import com.projectswg.holocore.resources.control.ServerStatus;
+import me.joshlarson.jlcommon.control.Service;
+
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.utilities.ThreadUtilities;
-
-import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.server.ServerStatusIntent;
-import com.projectswg.holocore.resources.control.ServerStatus;
 
 public class ShutdownService extends Service {
 	

@@ -26,16 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.common.utilities.TimeUtilities;
-
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.server_info.DataManager;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GalacticResourceSpawn implements Persistable {
 	

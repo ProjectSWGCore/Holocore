@@ -26,11 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.player;
 
-import java.util.BitSet;
-
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.collections.SWGBitSet;
 import com.projectswg.holocore.resources.collections.SWGFlag;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
@@ -38,6 +35,8 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerFlags;
 import com.projectswg.holocore.utilities.MathUtils;
+
+import java.util.BitSet;
 
 class PlayerObjectShared implements Persistable {
 

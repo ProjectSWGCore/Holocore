@@ -26,23 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic.storage;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
-
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawn;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class GalacticResourceContainer {
 	
@@ -54,9 +47,9 @@ public class GalacticResourceContainer {
 	private final ResourceSpawnTreeGlobal resourceSpawns;
 	
 	public GalacticResourceContainer() {
-		this.rawResources = new SynchronizedMap<>();
-		this.galacticResources = new SynchronizedMap<>();
-		this.rawToGalactic = new SynchronizedMap<>();
+		this.rawResources = new ConcurrentHashMap<>();
+		this.galacticResources = new ConcurrentHashMap<>();
+		this.rawToGalactic = new ConcurrentHashMap<>();
 		this.resourceSpawns = new ResourceSpawnTreeGlobal();
 	}
 	
@@ -69,11 +62,9 @@ public class GalacticResourceContainer {
 	}
 	
 	public GalacticResource getGalacticResourceByName(String resourceName) {
-		synchronized (galacticResources) {
-			for (GalacticResource gr : galacticResources.values()) {
-				if (gr.getName().equals(resourceName))
-					return gr;
-			}
+		for (GalacticResource gr : galacticResources.values()) {
+			if (gr.getName().equals(resourceName))
+				return gr;
 		}
 		return null;
 	}
@@ -83,9 +74,7 @@ public class GalacticResourceContainer {
 	}
 	
 	public List<GalacticResource> getGalacticResources(RawResource rawResource) {
-		synchronized (rawToGalactic) {
-			return copyImmutable(rawToGalactic.get(rawResource));
-		}
+		return copyImmutable(rawToGalactic.get(rawResource));
 	}
 	
 	public int getSpawnedGalacticResources(RawResource rawResource) {
@@ -97,24 +86,22 @@ public class GalacticResourceContainer {
 	
 	public void addRawResource(RawResource resource) {
 		RawResource replaced = rawResources.put(resource.getId(), resource);
-		Assert.isNull(replaced);
+		assert replaced == null : "raw resource overwritten";
 	}
 	
 	public void addGalacticResource(GalacticResource resource) {
 		RawResource raw = getRawResource(resource.getRawResourceId());
-		Assert.notNull(raw, "Invalid raw resource ID in GalacticResource!");
-		Assert.test(raw == resource.getRawResource(), "RawResource invalid with galactic resource");
-		Assert.isNull(galacticResources.put(resource.getId(), resource), "Duplicate galactic resource!");
-		synchronized (rawToGalactic) {
-			List<GalacticResource> list = rawToGalactic.computeIfAbsent(raw, k -> new ArrayList<>());
-			list.add(resource);
+		Objects.requireNonNull(raw, "Invalid raw resource ID in GalacticResource!");
+		assert raw == resource.getRawResource() : "RawResource invalid with galactic resource";
+		{
+			GalacticResource replaced = galacticResources.put(resource.getId(), resource);
+			assert replaced == null : "Duplicate galactic resource!";
 		}
+		rawToGalactic.computeIfAbsent(raw, k -> new ArrayList<>()).add(resource);
 	}
 	
 	public List<GalacticResource> getAllResources() {
-		synchronized (galacticResources) {
-			return copyImmutable(galacticResources.values());
-		}
+		return copyImmutable(galacticResources.values());
 	}
 	
 	public List<GalacticResourceSpawn> getAllResourceSpawns() {
@@ -134,12 +121,12 @@ public class GalacticResourceContainer {
 	}
 	
 	public boolean addResourceSpawn(GalacticResourceSpawn spawn) {
-		Assert.notNull(getGalacticResource(spawn.getResourceId()), "Invalid resourceId for GalacticResourceSpawn!");
+		assert getGalacticResource(spawn.getResourceId()) != null : "Invalid resourceId for GalacticResourceSpawn!";
 		return resourceSpawns.addSpawn(spawn);
 	}
 	
 	public boolean removeResourceSpawn(GalacticResourceSpawn spawn) {
-		Assert.notNull(getGalacticResource(spawn.getResourceId()), "Invalid resourceId for GalacticResourceSpawn!");
+		assert getGalacticResource(spawn.getResourceId()) != null : "Invalid resourceId for GalacticResourceSpawn!";
 		return resourceSpawns.removeSpawn(spawn);
 	}
 	
@@ -302,7 +289,8 @@ public class GalacticResourceContainer {
 		
 		public boolean addSpawn(GalacticResourceSpawn spawn) {
 			synchronized (spawns) {
-				Assert.test(!depleted.get(), "Cannot add resource spawn when depleted!");
+				if (depleted.get())
+					throw new IllegalStateException("Cannot add resource spawn when depleted!");
 				if (depleted.get())
 					return false;
 				return spawns.add(spawn);

@@ -28,7 +28,6 @@
 package com.projectswg.holocore.resources.objects.creature;
 
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import com.projectswg.holocore.intents.FactionIntent;
@@ -38,7 +37,6 @@ import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 public class CreatureObjectAwareness {
@@ -53,7 +51,7 @@ public class CreatureObjectAwareness {
 		this.pendingRemove = new HashSet<>();
 	}
 	
-	public synchronized void addAware(@Nonnull SWGObject obj) {
+	public synchronized void addAware(@NotNull SWGObject obj) {
 		if (pendingRemove.remove(obj) || aware.contains(obj))
 			return;
 		pendingAdd.add(obj);
@@ -62,7 +60,7 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
-	public synchronized void removeAware(@Nonnull SWGObject obj) {
+	public synchronized void removeAware(@NotNull SWGObject obj) {
 		if (pendingAdd.remove(obj) || !aware.contains(obj))
 			return;
 		if (pendingRemove.add(obj)) {
@@ -131,7 +129,7 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
-	private static void createObject(@Nonnull SWGObject obj, @Nonnull Player target) {
+	private static void createObject(@NotNull SWGObject obj, @NotNull Player target) {
 		long id = obj.getObjectId();
 		{ // SceneCreateObjectByCrc
 			SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
@@ -181,7 +179,7 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
-	private static void destroyObject(@Nonnull SWGObject obj, @Nonnull Player target) {
+	private static void destroyObject(@NotNull SWGObject obj, @NotNull Player target) {
 		target.sendPacket(new SceneDestroyObject(obj.getObjectId()));
 	}
 	

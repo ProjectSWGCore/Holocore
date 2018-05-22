@@ -26,11 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.buildout;
 
+import com.projectswg.common.data.location.Terrain;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import com.projectswg.common.data.location.Terrain;
 
 
 public class BuildoutAreaGrid {

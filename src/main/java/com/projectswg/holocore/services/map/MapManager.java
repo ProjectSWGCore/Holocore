@@ -27,26 +27,25 @@
 
 package com.projectswg.holocore.services.map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.map.MapLocation;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
-
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.client_info.ServerFactory;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Manager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapManager extends Manager {
 	

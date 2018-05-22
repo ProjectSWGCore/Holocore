@@ -29,11 +29,7 @@ package com.projectswg.holocore.resources.commands.callbacks;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.CivilWarPointIntent;
-import com.projectswg.holocore.resources.objects.player.PlayerObject;
-import com.projectswg.holocore.scripts.commands.admin.qatool.QaToolDetails;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
@@ -46,12 +42,15 @@ import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.network.DisconnectReason;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
+import com.projectswg.holocore.scripts.commands.admin.qatool.QaToolDetails;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import me.joshlarson.jlcommon.log.Log;
 
 /**
  * Created by Waverunner on 8/19/2015

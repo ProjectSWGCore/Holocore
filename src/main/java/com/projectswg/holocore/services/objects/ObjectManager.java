@@ -26,16 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
-
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
@@ -51,8 +43,15 @@ import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.services.map.MapManager;
 import com.projectswg.holocore.services.spawn.SpawnerService;
 import com.projectswg.holocore.services.spawn.StaticService;
+import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.CheckForNull;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ObjectManager extends Manager {
 	
@@ -237,7 +236,7 @@ public class ObjectManager extends Manager {
 			OBJECT_MANAGER.set(objManager);
 		}
 		
-		@CheckForNull
+		@Nullable
 		public static SWGObject getObjectById(long id) {
 			return OBJECT_MANAGER.get().getObjectById(id);
 		}

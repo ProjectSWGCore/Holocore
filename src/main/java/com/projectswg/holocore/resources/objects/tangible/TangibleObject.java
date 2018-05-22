@@ -26,9 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.tangible;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -47,6 +44,9 @@ import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+
+import java.util.Map;
+import java.util.Set;
 
 public class TangibleObject extends SWGObject {
 	

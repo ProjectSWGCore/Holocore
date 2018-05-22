@@ -30,11 +30,7 @@ import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.chat.ChatRoom;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
-import com.projectswg.common.data.info.RelationalServerData;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
@@ -44,13 +40,10 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.server_info.ObjectDatabase;
 import com.projectswg.holocore.services.CoreManager;
-import com.projectswg.holocore.services.chat.ChatManager.ChatRange;
-import com.projectswg.holocore.services.chat.ChatManager.ChatType;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckForNull;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -61,9 +54,6 @@ public class ChatRoomHandler {
 	private final ChatRoomContainer rooms;
 	private final AtomicInteger maxChatRoomId;
 	private final Object roomCreationMutex;
-	
-	private RelationalServerData chatLogs;
-	private PreparedStatement insertChatLog;
 	
 	public ChatRoomHandler() {
 		this.database = new CachedObjectDatabase<>("odb/chat_rooms.db", ChatRoom::create, ChatRoom::save);
@@ -81,8 +71,6 @@ public class ChatRoomHandler {
 				return;
 			rooms.addRoom(room);
 		});
-		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
-		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		createSystemChannels();
 		return true;
 	}
@@ -90,7 +78,6 @@ public class ChatRoomHandler {
 	public boolean terminate() {
 		database.save();
 		database.close();
-		chatLogs.close();
 		return true;
 	}
 	
@@ -185,10 +172,9 @@ public class ChatRoomHandler {
 	 * @param persist If true then this channel will be saved in an {@link ObjectDatabase}
 	 * @return TRUE if the room was successfully created, FALSE otherwise
 	 */
-	public boolean createRoom(ChatAvatar creator, boolean isPublic, boolean moderated, String path, String title, boolean persist) {
-		Assert.notNull(path, "Path cannot be empty!");
-		Assert.test(!path.isEmpty(), "Path cannot be empty!");
-		Assert.test(path.startsWith("SWG."+creator.getGalaxy()) && !path.equals("SWG."+creator.getGalaxy()), "Invalid path! " + path);
+	public boolean createRoom(@NotNull ChatAvatar creator, boolean isPublic, boolean moderated, @NotNull String path, @NotNull String title, boolean persist) {
+		assert !path.isEmpty() : "path must be non-empty";
+		assert path.startsWith("SWG."+creator.getGalaxy()) && !path.equals("SWG."+creator.getGalaxy()) : "Invalid path! " + path;
 		
 		synchronized (roomCreationMutex) {
 			if (rooms.getRoomByPath(path) != null)
@@ -244,7 +230,6 @@ public class ChatRoomHandler {
 		
 		if (result == ChatResult.SUCCESS) {
 			sendMessage(room, avatar, message, oobPackage);
-			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId() + "/" + room.getPath(), message);
 		}
 	}
 	
@@ -307,7 +292,7 @@ public class ChatRoomHandler {
 		return rooms.getRoomById(roomId);
 	}
 	
-	@CheckForNull
+	@Nullable
 	public ChatRoom getRoomByPath(String path) {
 		return rooms.getRoomByPath(path);
 	}
@@ -319,26 +304,6 @@ public class ChatRoomHandler {
 		return rooms.getAllRooms().stream()
 				.filter(r -> r.isPublic() || r.isInvited(avatar) || r.getOwner().equals(avatar) || admin)
 				.collect(Collectors.toList());
-	}
-	
-	public void logChat(long sendId, String sendName, String room, String message) {
-		try {
-			synchronized (insertChatLog) {
-				insertChatLog.setLong(1, System.currentTimeMillis());
-				insertChatLog.setLong(2, sendId);
-				insertChatLog.setString(3, sendName);
-				insertChatLog.setLong(4, 0);
-				insertChatLog.setString(5, "");
-				insertChatLog.setString(6, ChatType.CHAT.name());
-				insertChatLog.setString(7, ChatRange.ROOM.name());
-				insertChatLog.setString(8, room);
-				insertChatLog.setString(9, "");
-				insertChatLog.setString(10, message);
-				insertChatLog.executeUpdate();
-			}
-		} catch (SQLException e) {
-			Log.e(e);
-		}
 	}
 	
 	private static void sendMessage(ChatRoom room, ChatAvatar sender, String message, OutOfBandPackage oob) {

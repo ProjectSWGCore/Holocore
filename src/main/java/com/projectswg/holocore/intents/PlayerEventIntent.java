@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class PlayerEventIntent extends Intent {
 	

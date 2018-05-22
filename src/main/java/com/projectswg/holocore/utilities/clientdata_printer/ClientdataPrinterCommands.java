@@ -26,13 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities.clientdata_printer;
 
-import java.util.*;
-
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.debug.Log.LogLevel;
-import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.Log.LogLevel;
+import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+
+import java.util.*;
 
 public class ClientdataPrinterCommands {
 	

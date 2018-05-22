@@ -26,26 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.data.radial.RadialItem;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent;
-import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.player.uniform.OpenUniformBoxIntent;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class UniformBoxService extends Service {
 	

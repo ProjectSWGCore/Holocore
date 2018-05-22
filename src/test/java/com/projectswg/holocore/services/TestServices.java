@@ -34,7 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.projectswg.holocore.services.crafting.TestCrafting;
 import com.projectswg.holocore.services.galaxy.TestGalaxy;
-import com.projectswg.holocore.services.loot.TestRareLootService;
+import com.projectswg.holocore.services.combat.loot.TestRareLootService;
 import com.projectswg.holocore.services.player.TestPlayer;
 
 @RunWith(Suite.class)

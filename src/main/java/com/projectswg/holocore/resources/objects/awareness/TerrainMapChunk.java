@@ -27,9 +27,7 @@
 package com.projectswg.holocore.resources.objects.awareness;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -42,16 +40,16 @@ class TerrainMapChunk {
 		this.objects = new CopyOnWriteArrayList<>();
 	}
 	
-	public void addObject(@Nonnull SWGObject obj) {
+	public void addObject(@NotNull SWGObject obj) {
 		assert !objects.contains(obj) : "the chunk already contains this object";
 		objects.add(obj);
 	}
 	
-	public void removeObject(@Nonnull SWGObject obj) {
+	public void removeObject(@NotNull SWGObject obj) {
 		objects.remove(obj);
 	}
 	
-	public void getWithinAwareness(@Nonnull SWGObject obj, @Nonnull Collection<SWGObject> withinRange) {
+	public void getWithinAwareness(@NotNull SWGObject obj, @NotNull Collection<SWGObject> withinRange) {
 		int truncX = obj.getTruncX();
 		int truncZ = obj.getTruncZ();
 		int instance = obj.getInstanceLocation().getInstanceNumber();
@@ -74,7 +72,7 @@ class TerrainMapChunk {
 		}
 	}
 	
-	private static void recursiveAdd(@Nonnull Collection<SWGObject> withinRange, @Nonnull SWGObject obj, @Nonnull SWGObject test) {
+	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject obj, @NotNull SWGObject test) {
 		if (!test.isVisible(obj))
 			return;
 		withinRange.add(test);

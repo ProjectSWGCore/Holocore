@@ -26,19 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.raw;
 
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.server_info.StandardLog;
+import com.projectswg.holocore.services.crafting.resource.raw.RawResource.RawResourceBuilder;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.server_info.StandardLog;
-import com.projectswg.holocore.services.crafting.resource.raw.RawResource.RawResourceBuilder;
 
 public class RawResourceContainer {
 	

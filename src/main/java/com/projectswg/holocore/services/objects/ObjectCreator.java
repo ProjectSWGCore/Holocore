@@ -52,8 +52,8 @@ import com.projectswg.holocore.resources.objects.staticobject.StaticObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
@@ -70,7 +70,7 @@ public final class ObjectCreator {
 		return OBJECT_ID.incrementAndGet();
 	}
 	
-	@Nonnull
+	@NotNull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + "'";
 		template = ClientFactory.formatToSharedFile(template);
@@ -85,7 +85,7 @@ public final class ObjectCreator {
 		return obj;
 	}
 	
-	@Nonnull
+	@NotNull
 	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
 		T obj;
 		try {
@@ -101,24 +101,23 @@ public final class ObjectCreator {
 		return obj;
 	}
 	
-	@Nonnull
+	@NotNull
 	public static SWGObject createObjectFromTemplate(String template) {
 		return createObjectFromTemplate(getNextObjectId(), template);
 	}
 	
-	@Nonnull
+	@NotNull
 	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
 		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
-	@Nonnull
+	@NotNull
 	private static SWGObject createObjectFromType(long objectId, String template, ObjectData attributes) {
 		Integer gotInt = (Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
 		if (gotInt == null)
 			throw new ObjectCreationException(template, "No GOT");
 		
-		GameObjectType got = GameObjectType.getTypeFromId(gotInt);
-		BaselineType baseline = got.getBaselineType();
+		BaselineType baseline = GameObjectType.getTypeFromId(gotInt).getBaselineType();
 		if (baseline == null) {
 			return createSlowFromType(objectId, template);
 		}
@@ -146,7 +145,7 @@ public final class ObjectCreator {
 		}
 	}
 	
-	@Nonnull
+	@NotNull
 	private static SWGObject createSlowFromType(long objectId, String template) {
 		String type = getObjectType(template);
 		switch (type) {

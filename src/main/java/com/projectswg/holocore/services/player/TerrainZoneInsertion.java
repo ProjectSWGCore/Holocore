@@ -26,16 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.ProjectSWG;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class TerrainZoneInsertion {
 	

@@ -26,17 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import com.projectswg.holocore.resources.commands.Command;
+
+import java.util.*;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import com.projectswg.common.debug.Assert;
-
-import com.projectswg.holocore.resources.commands.Command;
 
 public class CommandContainer {
 	
@@ -85,10 +79,10 @@ public class CommandContainer {
 			String name = c.getName();
 			List<Command> scriptCommandList = getScriptListRaw(c.getDefaultScriptCallback());
 			
-			Assert.isNull(crcToCommand.get(crc), "Command is already in crc table! CRC="+crc + "  Name="+name);
-			Assert.isNull(nameToCommand.get(name), "Command is already in name table! CRC="+crc + "  Name="+name);
-			Assert.test(!scriptCommandList.contains(c), "Command is already in scripts table! CRC="+crc + "  Name="+name);
-			Assert.test(name.equals(name.toLowerCase(Locale.US)), "Invalid command name - must be all lowercase");
+			assert !crcToCommand.containsKey(crc) : "Command is already in crc table! CRC="+crc + "  Name="+name;
+			assert !nameToCommand.containsKey(name) : "Command is already in name table! CRC="+crc + "  Name="+name;
+			assert !scriptCommandList.contains(c) : "Command is already in scripts table! CRC="+crc + "  Name="+name;
+			assert name.equals(name.toLowerCase(Locale.US)) : "Invalid command name - must be all lowercase";
 			
 			crcToCommand.put(crc, c);
 			nameToCommand.put(name, c);
@@ -135,7 +129,7 @@ public class CommandContainer {
 	
 	/** Note: Not Thread-Safe */
 	private void createScriptCommandList(String script) {
-		List<Command> commands = scriptToCommand.computeIfAbsent(script, k -> new ArrayList<>());
+		scriptToCommand.computeIfAbsent(script, k -> new ArrayList<>());
 	}
 	
 	/** Note: Not Thread-Safe */

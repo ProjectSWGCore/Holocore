@@ -26,26 +26,26 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.WeatherType;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ServerTimeMessage;
 import com.projectswg.common.network.packets.swg.zone.ServerWeatherMessage;
 import com.projectswg.common.utilities.ThreadUtilities;
-
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.NotifyPlayersPacketIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public final class EnvironmentService extends Service {
 	
@@ -63,7 +63,6 @@ public final class EnvironmentService extends Service {
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	@Override
@@ -95,6 +94,7 @@ public final class EnvironmentService extends Service {
 		return super.terminate();
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei){
 		if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN_CLIENT))
 			handleZoneIn(pei);

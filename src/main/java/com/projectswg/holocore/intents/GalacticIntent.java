@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.player.PlayerManager;
+import me.joshlarson.jlcommon.control.Intent;
 
 public abstract class GalacticIntent extends Intent {
 	

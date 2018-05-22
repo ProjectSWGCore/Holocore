@@ -26,9 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.network;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.services.network.NetworkClient;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class InboundPacketPendingIntent extends Intent {
 	

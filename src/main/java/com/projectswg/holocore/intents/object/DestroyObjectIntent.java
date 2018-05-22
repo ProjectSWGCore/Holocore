@@ -26,9 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.object;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class DestroyObjectIntent extends Intent {
 	

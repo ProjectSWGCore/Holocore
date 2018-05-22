@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.object;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.services.objects.StaticItemService.ObjectCreationHandler;
+import me.joshlarson.jlcommon.control.Intent;
 
 public final class CreateStaticItemIntent extends Intent {
 	

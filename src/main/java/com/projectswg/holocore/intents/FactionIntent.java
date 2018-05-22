@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class FactionIntent extends Intent {
 	

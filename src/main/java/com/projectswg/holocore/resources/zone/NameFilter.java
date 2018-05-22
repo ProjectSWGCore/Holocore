@@ -26,13 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.zone;
 
-import java.io.*;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import com.projectswg.common.debug.Log;
 
 
 public class NameFilter {

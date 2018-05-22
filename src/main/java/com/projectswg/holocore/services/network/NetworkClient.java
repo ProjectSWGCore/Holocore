@@ -26,11 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.network;
 
-import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.NetworkProtocol;
-import com.projectswg.common.network.TCPServer.TCPSession;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
 import com.projectswg.common.network.packets.swg.admin.AdminPacket;
@@ -41,10 +38,12 @@ import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.network.InboundPacketPendingIntent;
-import com.projectswg.holocore.services.network.HolocoreSessionManager;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.HolocoreSessionException;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.SessionStatus;
+import me.joshlarson.jlcommon.control.IntentChain;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.network.TCPServer.TCPSession;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

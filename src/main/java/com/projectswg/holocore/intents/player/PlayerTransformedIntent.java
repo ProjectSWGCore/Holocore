@@ -26,12 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.player;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class PlayerTransformedIntent extends Intent {
 	

@@ -26,18 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.combat;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
@@ -47,13 +38,22 @@ import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.group.GroupObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
-final class CombatXpService extends Service {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class CombatExperienceService extends Service {
 	
 	private final Map<Short, XpData> xpData;
 	private final Map<Long, GroupObject> groupObjects;
 
-	CombatXpService() {
+	public CombatExperienceService() {
 		xpData = new HashMap<>();
 		groupObjects = new ConcurrentHashMap<>();
 	}
@@ -61,17 +61,7 @@ final class CombatXpService extends Service {
 	@Override
 	public boolean initialize() {
 		loadXpData();
-		return super.initialize();
-	}
-
-	@Override
-	public boolean start() {
-		// The objects we care about are only created/destroyed at this point anyways.
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
-		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
-		
-		return super.start();
+		return true;
 	}
 	
 	private void loadXpData() {
@@ -88,6 +78,7 @@ final class CombatXpService extends Service {
 		StandardLog.onEndLoad(xpData.size(), "combat XP rates", startTime);
 	}
 	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject object = i.getObject();
 		
@@ -96,6 +87,7 @@ final class CombatXpService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
 		SWGObject object = i.getObject();
 		
@@ -104,6 +96,7 @@ final class CombatXpService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
 		CreatureObject corpse = i.getCorpse();
 		

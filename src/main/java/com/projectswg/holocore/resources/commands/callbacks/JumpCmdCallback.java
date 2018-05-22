@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.commands.callbacks;
 
 import com.projectswg.common.network.packets.swg.zone.object_controller.JumpUpdate;
-
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;

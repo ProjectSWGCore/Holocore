@@ -26,9 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
@@ -42,6 +39,9 @@ import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.objects.UniformBoxService;
 import com.projectswg.holocore.services.player.PlayerManager;
 import com.projectswg.holocore.services.trade.TradeService;
+import me.joshlarson.jlcommon.control.IntentChain;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Manager;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,10 +65,6 @@ public class GalacticManager extends Manager {
 		addChildService(new DeveloperService());
 		addChildService(new UniformBoxService());
 		addChildService(new TradeService());
-		
-		registerForIntent(InboundPacketIntent.class, this::handleInboundPacketIntent);
-		registerForIntent(ConnectionOpenedIntent.class, this::handleConnectionOpenedIntent);
-		registerForIntent(ConnectionClosedIntent.class, this::handleConnectionClosedIntent);
 	}
 	
 	@Override
@@ -77,6 +73,7 @@ public class GalacticManager extends Manager {
 		return super.initialize();
 	}
 	
+	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent ipi){
 		Player player = playerManager.getPlayerFromNetworkId(ipi.getNetworkId());
 		Assert.notNull(player);
@@ -85,10 +82,12 @@ public class GalacticManager extends Manager {
 		prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
 	}
 	
+	@IntentHandler
 	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi){
 		prevIntentMap.put(coi.getNetworkId(), new IntentChain(coi));
 	}
 	
+	@IntentHandler
 	private void handleConnectionClosedIntent(ConnectionClosedIntent cci){
 		prevIntentMap.remove(cci.getNetworkId()).reset();
 	}

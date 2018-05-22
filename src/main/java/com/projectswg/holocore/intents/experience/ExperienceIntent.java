@@ -26,9 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.experience;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public final class ExperienceIntent extends Intent {
 	

@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.chat;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.commands.Command;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class ChatCommandIntent extends Intent {
 	

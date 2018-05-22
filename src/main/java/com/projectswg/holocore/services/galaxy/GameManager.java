@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import com.projectswg.common.control.Manager;
-
 import com.projectswg.holocore.services.collections.CollectionBadgeManager;
 import com.projectswg.holocore.services.collections.CollectionService;
 import com.projectswg.holocore.services.combat.CombatManager;
@@ -39,6 +37,7 @@ import com.projectswg.holocore.services.experience.ExperienceManager;
 import com.projectswg.holocore.services.faction.FactionManager;
 import com.projectswg.holocore.services.group.GroupService;
 import com.projectswg.holocore.services.sui.SuiService;
+import me.joshlarson.jlcommon.control.Manager;
 
 public class GameManager extends Manager {
 	

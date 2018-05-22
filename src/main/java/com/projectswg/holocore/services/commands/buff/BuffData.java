@@ -26,10 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands.buff;
 
-import java.util.Locale;
-
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.debug.Assert;
+import me.joshlarson.jlcommon.utilities.Arguments;
+
+import java.util.Locale;
 
 public class BuffData {
 	
@@ -80,12 +80,12 @@ public class BuffData {
 	}
 	
 	public String getEffectName(int effect) {
-		Assert.test(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
+		Arguments.validate(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
 		return effectNames[effect];
 	}
 	
 	public float getEffectValue(int effect) {
-		Assert.test(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
+		Arguments.validate(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
 		return effectValues[effect];
 	}
 	
@@ -126,12 +126,12 @@ public class BuffData {
 	}
 	
 	public void setEffectName(int effect, String name) {
-		Assert.test(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
+		Arguments.validate(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
 		effectNames[effect] = name;
 	}
 	
 	public void setEffectValue(int effect, float value) {
-		Assert.test(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
+		Arguments.validate(effect >= 0 && effect < 5, "Effect # must be in range: [0, 5)");
 		effectValues[effect] = value;
 	}
 	

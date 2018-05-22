@@ -26,20 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities.buildouts;
 
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.building.BuildingObject;
+import com.projectswg.holocore.resources.server_info.DataManager;
+import com.projectswg.holocore.services.objects.ClientBuildoutService;
+import com.projectswg.holocore.utilities.SdbGenerator;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-
-import com.projectswg.common.data.location.Terrain;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.building.BuildingObject;
-import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.services.objects.ClientBuildoutService;
-import com.projectswg.holocore.utilities.SdbGenerator;
 
 public class BuildingListGenerator {
 	

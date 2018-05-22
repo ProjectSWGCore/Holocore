@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info;
 
-import com.projectswg.common.debug.Log;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.io.*;
 import java.util.*;
@@ -84,8 +84,6 @@ public class SdbLoader {
 		boolean next() throws IOException;
 		List<String> getColumns();
 		
-		<T> T getObject(int index);
-		
 		String getText(int index);
 		String getText(String columnName);
 		
@@ -138,11 +136,6 @@ public class SdbLoader {
 		@Override
 		public List<String> getColumns() {
 			return getResultSet().getColumns();
-		}
-		
-		@Override
-		public <T> T getObject(int index) {
-			return getResultSet().getObject(index);
 		}
 		
 		@Override
@@ -209,7 +202,6 @@ public class SdbLoader {
 		private final Map<String, Integer> columnNames;
 		private final AtomicLong lineNumber;
 		private final BasicStringBuilder lineBuffer;
-		private Function<String, Object> [] columnParsers;
 		private String [] columnValues;
 		private BufferedInputStream input;
 		private FileInputStream inputFile;
@@ -219,7 +211,6 @@ public class SdbLoader {
 			this.columnNames = new HashMap<>();
 			this.lineNumber = new AtomicLong(0);
 			this.lineBuffer = new BasicStringBuilder(256);
-			this.columnParsers = null;
 			this.columnValues = null;
 			this.input = null;
 			this.inputFile = null;
@@ -252,16 +243,6 @@ public class SdbLoader {
 			return new ArrayList<>(columnNames.keySet());
 		}
 		
-		@SuppressWarnings("unchecked")
-		@Override
-		public <T> T getObject(int index) {
-			try {
-				return (T) columnParsers[index].apply(columnValues[index]);
-			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNumber.get() + " in column " + (index+1));
-			}
-		}
-		
 		@Override
 		public String getText(int index) {
 			return columnValues[index];
@@ -269,12 +250,16 @@ public class SdbLoader {
 		
 		@Override
 		public String getText(String columnName) {
-			return getText(columnNames.get(columnName));
+			return columnValues[columnNames.get(columnName)];
 		}
 		
 		@Override
 		public long getInt(int index) {
-			return getObject(index);
+			try {
+				return Long.parseLong(columnValues[index]);
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNumber.get() + " in column " + (index+1));
+			}
 		}
 		
 		@Override
@@ -284,7 +269,11 @@ public class SdbLoader {
 		
 		@Override
 		public double getReal(int index) {
-			return getObject(index);
+			try {
+				return Double.parseDouble(columnValues[index]);
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Failed to parse value in sdb: " + file + " on line " + lineNumber.get() + " in column " + (index+1));
+			}
 		}
 		
 		@Override
@@ -294,7 +283,7 @@ public class SdbLoader {
 		
 		@Override
 		public boolean getBoolean(int index) {
-			return getObject(index);
+			return columnValues[index].equalsIgnoreCase("true");
 		}
 		
 		@Override
@@ -361,46 +350,21 @@ public class SdbLoader {
 		private void load() throws IOException {
 			inputFile = new FileInputStream(file);
 			input = new BufferedInputStream(inputFile);
-			loadHeader(fetchLine(), fetchLine());
+			loadHeader(fetchLine());
+			fetchLine();
 		}
 		
-		@SuppressWarnings("unchecked") // stupid java not supporting generic arrays
-		private void loadHeader(String columnsStr, String typesStr) {
-			if (columnsStr == null || typesStr == null) {
+		private void loadHeader(String columnsStr) {
+			if (columnsStr == null) {
 				Log.e("Invalid SDB header: %s - nonexistent", file);
 				return;
 			}
 			String [] columns = columnsStr.split("\t");
-			String [] types = typesStr.split("\t");
-			if (columns.length != types.length) {
-				Log.e("Invalid SDB header: %s - invalid lengths!", file);
-				return;
-			}
-			columnParsers = new Function[columns.length];
 			columnValues = new String[columns.length];
 			for (int i = 0; i < columns.length; i++) {
-				columnParsers[i] = parseColumnType(types[i]).getTransformer();
 				columnNames.put(columns[i], i);
 			}
 			lineNumber.set(2);
-		}
-		
-		private DataType parseColumnType(String type) {
-			if (type.indexOf(' ') != -1)
-				type = type.substring(0, type.indexOf(' '));
-			type = type.toLowerCase(Locale.US);
-			
-			if (type.equals("text"))
-				return DataType.TEXT;
-			if (type.equals("integer"))
-				return DataType.INTEGER;
-			if (type.equals("real"))
-				return DataType.REAL;
-			if (type.equals("bool") || type.equals("boolean"))
-				return DataType.BOOLEAN;
-			
-			Log.e("Unknown column type: %s for file %s", type, file);
-			return DataType.TEXT;
 		}
 		
 	}

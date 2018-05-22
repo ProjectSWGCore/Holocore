@@ -26,20 +26,20 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands.buff;
 
-import java.util.Locale;
-import java.util.Map;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BuffMap {
 	
 	private final Map<Integer, BuffData> buffMap;
 	
 	public BuffMap() {
-		this.buffMap = new SynchronizedMap<>();
+		this.buffMap = new ConcurrentHashMap<>();
 	}
 	
 	public void load() {

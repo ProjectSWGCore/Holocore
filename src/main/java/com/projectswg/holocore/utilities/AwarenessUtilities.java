@@ -26,10 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities;
 
-import java.util.Set;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
+
+import java.util.Set;
 
 public class AwarenessUtilities {
 	

@@ -26,6 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info.loader.npc;
 
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -33,11 +37,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 
 public class NpcLoader {
 	
@@ -153,14 +152,14 @@ public class NpcLoader {
 		
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
-			this.attackable = set.getText("attackable");
-			this.difficulty = set.getText("difficulty");
+			this.attackable = set.getText("attackable").intern();
+			this.difficulty = set.getText("difficulty").intern();
 			this.combatLevel = (int) set.getInt("combat_level");
-			this.name = set.getText("npc_name");
+			this.name = set.getText("npc_name").intern();
 			this.stfName = set.getText("stf_name");
-			this.niche = set.getText("niche");
+			this.niche = set.getText("niche").intern();
 			this.iff = set.getText("iff_template");
-			this.faction = set.getText("faction");
+			this.faction = set.getText("faction").intern();
 			this.specForce = set.getBoolean("spec_force");
 			this.attackSpeed = set.getReal("attack_speed");
 			this.movementSpeed = set.getReal("movement_speed");

@@ -1,42 +1,5 @@
-/***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
- *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
- * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
- *                                                                                 *
- * This file is part of Holocore.                                                  *
- *                                                                                 *
- * --------------------------------------------------------------------------------*
- *                                                                                 *
- * Holocore is free software: you can redistribute it and/or modify                *
- * it under the terms of the GNU Affero General Public License as                  *
- * published by the Free Software Foundation, either version 3 of the              *
- * License, or (at your option) any later version.                                 *
- *                                                                                 *
- * Holocore is distributed in the hope that it will be useful,                     *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
- * GNU Affero General Public License for more details.                             *
- *                                                                                 *
- * You should have received a copy of the GNU Affero General Public License        *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
- ***********************************************************************************/
 package com.projectswg.holocore.services.combat;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
@@ -49,15 +12,11 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
-import com.projectswg.common.utilities.ThreadUtilities;
-
 import com.projectswg.holocore.intents.BuffIntent;
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.combat.CorpseLootedIntent;
 import com.projectswg.holocore.intents.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
@@ -71,47 +30,54 @@ import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.resources.sui.SuiWindow;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
-/**
- * The {@code CorpseService} removes corpses from the world a while after
- * they've died. It also lets players clone at a cloning facility.
- * @author mads
- */
-final class CorpseService extends Service {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+public class CombatCloningService extends Service {
 	
 	private static final String DB_QUERY = "SELECT * FROM cloning_respawn";
-	private static final byte CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
+	private static final long CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
 	
-	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, Future<?>> reviveTimers;
 	private final Map<String, FacilityData> facilityDataMap;
 	private final List<BuildingObject> cloningFacilities;
+	private final ScheduledThreadPool executor;
 	private final Random random;
 	
-	private final Map<Long, ScheduledFuture<?>> deleteCorpseTasks;
-	
-	CorpseService() {
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
-		reviveTimers = new HashMap<>();
-		facilityDataMap = new HashMap<>();
-		cloningFacilities = new ArrayList<>();
-		random = new Random();
-		
-		deleteCorpseTasks = new HashMap<>();
-		
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
-		registerForIntent(CorpseLootedIntent.class, this::handleCorpseLootedIntent);
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
-		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		
-		loadFacilityData();
+	public CombatCloningService() {
+		this.reviveTimers = new HashMap<>();
+		this.facilityDataMap = new HashMap<>();
+		this.cloningFacilities = new ArrayList<>();
+		this.executor = new ScheduledThreadPool(1, "combat-cloning-service");
+		this.random = new Random();
 	}
-
+	
 	@Override
-	public boolean terminate() {
-		executor.shutdown();
-		return super.terminate();
+	public boolean initialize() {
+		loadFacilityData();
+		return true;
+	}
+	
+	@Override
+	public boolean start() {
+		executor.start();
+		return true;
+	}
+	
+	@Override
+	public boolean stop() {
+		executor.stop();
+		executor.awaitTermination(1000);
+		return true;
 	}
 	
 	private void loadFacilityData() {
@@ -159,39 +125,20 @@ final class CorpseService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
 		CreatureObject corpse = i.getCorpse();
-		
-		if(corpse.isPlayer()) {
-			Player corpseOwner = corpse.getOwner();
-			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
-			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
-			
-			scheduleCloneTimer(corpse);
-		} else {
-			// This is a NPC - schedule corpse for deletion
-			ScheduledFuture<?> task = executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
-			deleteCorpseTasks.put(corpse.getObjectId(), task);
-		}
-	}
-	
-	private void handleCorpseLootedIntent(CorpseLootedIntent i) {
-		CreatureObject corpse = i.getCorpse();
-		
-		ScheduledFuture<?> task = deleteCorpseTasks.get(corpse.getObjectId());
-		
-		if (task == null) {
-			Log.e("There should already be a deleteCorpse task for corpse %s!", corpse.toString());
-			executor.schedule(() -> deleteCorpse(corpse), 5, TimeUnit.SECONDS);
+		if (!corpse.isPlayer())
 			return;
-		}
 		
-		// if existing deleteCorpse task has more than 5 seconds remaining, cancel it
-		// if the cancel operation succeeds, schedule another deleteCorpse task for 5 seconds
-		if (task.getDelay(TimeUnit.SECONDS) > 5 && task.cancel(false))
-			executor.schedule(() -> deleteCorpse(corpse), 5, TimeUnit.SECONDS);
+		Player corpseOwner = corpse.getOwner();
+		new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
+		new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
+		
+		scheduleCloneTimer(corpse);
 	}
 	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject createdObject = i.getObject();
 		
@@ -209,6 +156,7 @@ final class CorpseService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
 		synchronized(cloningFacilities) {
 			SWGObject destroyedObject = i.getObject();
@@ -221,6 +169,7 @@ final class CorpseService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
 		switch(i.getEvent()) {
 			case PE_DISAPPEAR: {
@@ -262,7 +211,7 @@ final class CorpseService extends Service {
 
 		cloningWindow.display(corpse.getOwner());
 		synchronized (reviveTimers) {
-			reviveTimers.put(corpse, executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, cloningWindow), CLONE_TIMER, TimeUnit.MINUTES));
+			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER), () -> expireCloneTimer(corpse, availableFacilities, cloningWindow)));
 		}
 	}
 	
@@ -297,50 +246,6 @@ final class CorpseService extends Service {
 		});
 
 		return suiWindow;
-	}
-	
-	/**
-	 * Only used for NPCs!
-	 * @param creatureCorpse non-player creature to delete from the world
-	 */
-	private void deleteCorpse(CreatureObject creatureCorpse) {
-		if(creatureCorpse.isPlayer()) {
-			Log.e("Cannot delete the corpse of a player!", creatureCorpse);
-		} else {
-			new DestroyObjectIntent(creatureCorpse).broadcast();
-			deleteCorpseTasks.remove(creatureCorpse.getObjectId());
-			Log.d("Corpse of NPC %s was deleted from the world", creatureCorpse);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param corpse
-	 * @return a sorted list of {@code BuildingObject}, ordered by distance
-	 * to {@code corpse}. Order is reversed, so the closest facility is
-	 * first.
-	 */
-	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse) {
-		synchronized (cloningFacilities) {
-			Location corpseLocation = corpse.getWorldLocation();
-			return cloningFacilities.stream()
-					.filter(facilityObject -> isValidTerrain(facilityObject, corpse) && isFactionAllowed(facilityObject, corpse))
-					.sorted(Comparator.comparingDouble(facility -> corpseLocation.distanceTo(facility.getLocation())))
-					.collect(Collectors.toList());
-			
-		}
-	}
-	
-	// TODO below doesn't apply to a a player that died in a heroic. Cloning on Dathomir should be possible if you die during the Axkva Min heroic.
-	private boolean isValidTerrain(BuildingObject cloningFacility, CreatureObject corpse)  {
-		return cloningFacility.getTerrain() == corpse.getTerrain();
-	}
-	
-	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
-		FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
-		PvpFaction factionRestriction = facilityData.getFactionRestriction();
-		
-		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
 	}
 	
 	private CloneResult reviveCorpse(CreatureObject corpse, BuildingObject selectedFacility) {
@@ -444,6 +349,36 @@ final class CorpseService extends Service {
 		} else {
 			Log.w("Could not expire timer for %s because none was active", corpse);
 		}
+	}
+	
+	/**
+	 * 
+	 * @param corpse
+	 * @return a sorted list of {@code BuildingObject}, ordered by distance
+	 * to {@code corpse}. Order is reversed, so the closest facility is
+	 * first.
+	 */
+	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse) {
+		synchronized (cloningFacilities) {
+			Location corpseLocation = corpse.getWorldLocation();
+			return cloningFacilities.stream()
+					.filter(facilityObject -> isValidTerrain(facilityObject, corpse) && isFactionAllowed(facilityObject, corpse))
+					.sorted(Comparator.comparingDouble(facility -> corpseLocation.distanceTo(facility.getLocation())))
+					.collect(Collectors.toList());
+			
+		}
+	}
+	
+	// TODO below doesn't apply to a a player that died in a heroic. Cloning on Dathomir should be possible if you die during the Axkva Min heroic.
+	private boolean isValidTerrain(BuildingObject cloningFacility, CreatureObject corpse)  {
+		return cloningFacility.getTerrain() == corpse.getTerrain();
+	}
+	
+	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
+		FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+		PvpFaction factionRestriction = facilityData.getFactionRestriction();
+		
+		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
 	}
 	
 	private static class FacilityData {

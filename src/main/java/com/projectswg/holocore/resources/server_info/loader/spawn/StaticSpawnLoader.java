@@ -26,17 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info.loader.spawn;
 
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
-
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 
 public class StaticSpawnLoader {
 	
@@ -97,11 +96,11 @@ public class StaticSpawnLoader {
 			this.z = set.getReal("z");
 			this.heading = (int) set.getInt("heading");
 			this.cellId = (int) set.getInt("cell_id");
-			this.spawnerType = set.getText("spawner_type");
-			this.npcId = set.getText("npc_id");
-			this.buildingId = set.getText("building_id");
-			this.mood = set.getText("mood");
-			this.behavior = set.getText("behaviour");
+			this.spawnerType = set.getText("spawner_type").intern();
+			this.npcId = set.getText("npc_id").intern();
+			this.buildingId = set.getText("building_id").intern();
+			this.mood = set.getText("mood").intern();
+			this.behavior = set.getText("behaviour").intern();
 			this.patrolId = (int) set.getInt("patrol_id");
 			this.patrolFormation = parsePatrolFormation(set.getText("patrol_formation"));
 			this.loiterRadius = (int) set.getInt("loiter_radius");

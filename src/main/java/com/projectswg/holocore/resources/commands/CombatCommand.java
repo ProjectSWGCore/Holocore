@@ -26,12 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands;
 
+import com.projectswg.common.data.combat.*;
+import com.projectswg.holocore.resources.objects.weapon.WeaponType;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.projectswg.common.data.combat.*;
-
-import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 
 public class CombatCommand extends Command {
 	

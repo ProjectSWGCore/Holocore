@@ -27,11 +27,8 @@
 package com.projectswg.holocore.resources.objects.awareness;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.player.PlayerObject;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,7 +75,7 @@ public class TerrainMap {
 		}
 	}
 	
-	@Nonnull
+	@NotNull
 	private Collection<SWGObject> getAware(SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
 		Set<SWGObject> aware;
@@ -93,7 +90,7 @@ public class TerrainMap {
 		return aware;
 	}
 	
-	@Nonnull
+	@NotNull
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
 		if (obj.getAwareness().getTerrainMapChunk() == null || !AwarenessUtilities.isInAwareness(obj))
 			return new HashSet<>();
@@ -129,7 +126,7 @@ public class TerrainMap {
 		return aware;
 	}
 	
-	private static void recursiveAdd(@Nonnull Collection<SWGObject> aware, @Nonnull SWGObject obj) {
+	private static void recursiveAdd(@NotNull Collection<SWGObject> aware, @NotNull SWGObject obj) {
 		aware.add(obj);
 		for (SWGObject child : obj.getSlottedObjects()) {
 			recursiveAdd(aware, child);

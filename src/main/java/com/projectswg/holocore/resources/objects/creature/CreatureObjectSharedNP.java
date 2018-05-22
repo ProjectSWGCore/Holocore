@@ -26,18 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.creature;
 
-import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.collections.SWGList;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
@@ -47,6 +40,11 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.group.GroupInviterData;
+
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 class CreatureObjectSharedNP implements Persistable {
 	

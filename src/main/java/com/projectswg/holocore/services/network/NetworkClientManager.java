@@ -26,21 +26,22 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.network;
 
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.TCPServer;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.network.InboundPacketPendingIntent;
 import com.projectswg.holocore.intents.network.OutboundPacketIntent;
-import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.network.UDPServer;
 import com.projectswg.holocore.resources.network.UDPServer.UDPPacket;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.CoreManager;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.network.TCPServer;
 
 import java.io.IOException;
 import java.net.BindException;
@@ -48,7 +49,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-public class NetworkClientManager extends Manager {
+public class NetworkClientManager extends Service {
 	
 	private final TCPServer<NetworkClient> tcpServer;
 	private final TCPServer<AdminNetworkClient> adminServer;
@@ -73,11 +74,6 @@ public class NetworkClientManager extends Manager {
 			else
 				adminServer = new TCPServer<>(new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort), 1024, AdminNetworkClient::new);
 		}
-		
-		registerForIntent(CloseConnectionIntent.class, this::handleCloseConnectionIntent);
-		registerForIntent(ConnectionClosedIntent.class, this::handleConnectionClosedIntent);
-		registerForIntent(InboundPacketPendingIntent.class, NetworkClientManager::handleInboundPacketPendingIntent);
-		registerForIntent(OutboundPacketIntent.class, this::handleOutboundPacketIntent);
 	}
 	
 	@Override
@@ -143,14 +139,17 @@ public class NetworkClientManager extends Manager {
 		udpServer.send(port, addr, data.array());
 	}
 	
+	@IntentHandler
 	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
 		disconnect(ccii.getNetworkId());
 	}
 	
+	@IntentHandler
 	private void handleConnectionClosedIntent(ConnectionClosedIntent cci) {
 		disconnect(cci.getNetworkId());
 	}
 	
+	@IntentHandler
 	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
 		NetworkClient client = getClient(opi.getNetworkId());
 		if (client == null)
@@ -166,6 +165,7 @@ public class NetworkClientManager extends Manager {
 		return adminServer.getSession(id);
 	}
 	
+	@IntentHandler
 	private static void handleInboundPacketPendingIntent(InboundPacketPendingIntent ippi) {
 		ippi.getClient().processInbound();
 	}

@@ -26,14 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.chat;
 
+import com.projectswg.common.data.encodables.chat.ChatRoom;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.projectswg.common.data.encodables.chat.ChatRoom;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class ChatRoomContainer {
 	
@@ -47,12 +47,11 @@ public class ChatRoomContainer {
 		this.pathMap = new HashMap<>();
 	}
 	
-	public boolean addRoom(ChatRoom room) {
-		Assert.notNull(room, "ChatRoom cannot be null!");
-		Assert.test(room.getId() > 0, "ChatRoom ID must be > 0!");
-		Assert.notNull(room.getPath(), "Path must not be null!");
-		Assert.test(!room.getPath().isEmpty(), "Path must be non-empty!");
-		Assert.test(room.getPath().startsWith("SWG."), "Path must start with \"SWG.\"!");
+	public boolean addRoom(@NotNull ChatRoom room) {
+		assert room.getId() > 0 : "ChatRoom ID must be > 0";
+		assert room.getPath() != null : "path must not be null";
+		assert !room.getPath().isEmpty() : "path must be non-empty";
+		assert room.getPath().startsWith("SWG.") : "Path must start with \"SWG.\"!";
 		synchronized (mapMutex) {
 			ChatRoom overwrittenId = idMap.put(room.getId(), room);
 			ChatRoom overwrittenPath = pathMap.put(room.getPath(), room);
@@ -73,8 +72,7 @@ public class ChatRoomContainer {
 		return true;
 	}
 	
-	public boolean destroyRoom(ChatRoom room) {
-		Assert.notNull(room, "ChatRoom cannot be null!");
+	public boolean destroyRoom(@NotNull ChatRoom room) {
 		synchronized (mapMutex) {
 			boolean success = idMap.remove(room.getId()) != null;
 			return pathMap.remove(room.getPath()) != null && success;
@@ -88,32 +86,30 @@ public class ChatRoomContainer {
 	}
 	
 	public ChatRoom getRoomById(int roomId) {
-		Assert.test(roomId > 0, "Room ID must be > 0!");
+		assert roomId > 0 : "ChatRoom ID must be > 0";
 		synchronized (mapMutex) {
 			return idMap.get(roomId);
 		}
 	}
 	
-	public ChatRoom getRoomByPath(String path) {
-		Assert.notNull(path, "Path must not be null!");
-		Assert.test(!path.isEmpty(), "Path must be non-empty!");
-		Assert.test(path.startsWith("SWG."), "Path must start with \"SWG.\"!");
+	public ChatRoom getRoomByPath(@NotNull String path) {
+		assert !path.isEmpty() : "path must be non-empty";
+		assert path.startsWith("SWG.") : "Path must start with \"SWG.\"!";
 		synchronized (mapMutex) {
 			return pathMap.get(path);
 		}
 	}
 	
 	public boolean hasRoomWithId(int roomId) {
-		Assert.test(roomId > 0, "Room ID must be > 0!");
+		assert roomId > 0 : "ChatRoom ID must be > 0";
 		synchronized (mapMutex) {
 			return idMap.containsKey(roomId);
 		}
 	}
 	
-	public boolean hasRoomWithPath(String path) {
-		Assert.notNull(path, "Path must not be null!");
-		Assert.test(!path.isEmpty(), "Path must be non-empty!");
-		Assert.test(path.startsWith("SWG."), "Path must start with \"SWG.\"!");
+	public boolean hasRoomWithPath(@NotNull String path) {
+		assert !path.isEmpty() : "path must be non-empty";
+		assert path.startsWith("SWG.") : "Path must start with \"SWG.\"!";
 		synchronized (mapMutex) {
 			return pathMap.containsKey(path);
 		}

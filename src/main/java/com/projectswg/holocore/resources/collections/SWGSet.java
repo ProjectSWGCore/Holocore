@@ -26,14 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import com.projectswg.common.concurrency.SynchronizedList;
-import com.projectswg.common.concurrency.SynchronizedSet;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.concurrency.SynchronizedList;
+import me.joshlarson.jlcommon.concurrency.SynchronizedSet;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;

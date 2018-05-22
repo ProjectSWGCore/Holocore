@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.combat;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class LootItemIntent extends Intent {
 	

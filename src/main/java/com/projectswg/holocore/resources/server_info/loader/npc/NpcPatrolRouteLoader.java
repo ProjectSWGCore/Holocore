@@ -26,20 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info.loader.npc;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.function.Consumer;
-
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class NpcPatrolRouteLoader {
 	

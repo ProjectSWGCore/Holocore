@@ -76,7 +76,7 @@ public class TestCivilWarService extends TestRunnerNoIntents {
 	}
 	
 	private int epochTime(LocalDate date) {
-		return (int) date.toEpochSecond(LocalTime.MIDNIGHT, OffsetDateTime.now().getOffset());
+		return (int) date.atStartOfDay(OffsetDateTime.now().getOffset()).toEpochSecond();
 	}
 	
 	@Test

@@ -26,23 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.group;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-
 import com.projectswg.holocore.intents.GroupEventIntent;
 import com.projectswg.holocore.intents.GroupEventIntent.GroupEventType;
 import com.projectswg.holocore.resources.collections.SWGList;
@@ -53,6 +41,12 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
+import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class GroupObject extends SWGObject {
 	

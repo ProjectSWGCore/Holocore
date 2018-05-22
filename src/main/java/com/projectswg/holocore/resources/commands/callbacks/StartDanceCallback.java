@@ -26,9 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.util.Locale;
-import java.util.Set;
-
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
@@ -36,6 +33,9 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+
+import java.util.Locale;
+import java.util.Set;
 
 public class StartDanceCallback implements ICmdCallback {
 	

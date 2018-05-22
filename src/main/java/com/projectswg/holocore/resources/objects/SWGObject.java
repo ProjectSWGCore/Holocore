@@ -26,14 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
-import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -56,11 +53,11 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.CoreManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -71,10 +68,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
 	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
-	private final Map <String, SWGObject>			slots			= new SynchronizedMap<>();
-	private final Map <String, String>				attributes		= new SynchronizedMap<>(new LinkedHashMap<>());
+	private final Map <String, SWGObject>			slots			= Collections.synchronizedMap(new HashMap<>());
+	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final ObjectAware						awareness		= new ObjectAware(this);
-	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new ConcurrentHashMap<>();
+	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
@@ -204,7 +201,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param newParent Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	public ContainerResult moveToContainer(@Nonnull SWGObject requester, SWGObject newParent) {
+	public ContainerResult moveToContainer(@NotNull SWGObject requester, SWGObject newParent) {
 		ContainerResult result = isAllowedToMove(requester, newParent);
 		if (result == ContainerResult.SUCCESS) {
 			moveToContainer(newParent);
@@ -219,7 +216,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	protected ContainerResult isAllowedToMove(@Nonnull SWGObject requester, SWGObject container) {
+	protected ContainerResult isAllowedToMove(@NotNull SWGObject requester, SWGObject container) {
 		if (!permissions.canMove(requester, this)) {
 			Log.w("No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
@@ -327,24 +324,24 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void setLocation(Location location) {
-		if (parent != null)
-			Assert.test(location.getTerrain() == parent.getTerrain(), "Attempted to set different terrain from parent!");
+		if (parent != null && location.getTerrain() != parent.getTerrain())
+			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
 		this.location.setLocation(location);
 		updateChildrenTerrain();
 	}
 	
-	public void setTerrain(@Nonnull Terrain terrain) {
-		if (parent != null)
-			Assert.test(terrain == parent.getTerrain(), "Attempted to set different terrain from parent!");
+	public void setTerrain(@NotNull Terrain terrain) {
+		if (parent != null && terrain != parent.getTerrain())
+			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
 		if (location.getTerrain() != terrain) {
 			location.setTerrain(terrain);
 			updateChildrenTerrain();
 		}
 	}
 	
-	public void setPosition(@Nonnull Terrain terrain, double x, double y, double z) {
-		if (parent != null)
-			Assert.test(terrain == parent.getTerrain(), "Attempted to set different terrain from parent!");
+	public void setPosition(@NotNull Terrain terrain, double x, double y, double z) {
+		if (parent != null && terrain != parent.getTerrain())
+			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
 		location.setPosition(terrain, x, y, z);
 		updateChildrenTerrain();
 	}
@@ -429,12 +426,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return owner;
 	}
 	
-	@CheckForNull
+	@Nullable
 	public SWGObject getParent() {
 		return parent;
 	}
 	
-	@CheckForNull
+	@Nullable
 	public SWGObject getSuperParent() {
 		SWGObject sParent = parent;
 		if (sParent == null)
@@ -500,7 +497,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return (int) location.getPositionZ();
 	}
 	
-	@Nonnull
+	@NotNull
 	public Terrain getTerrain() {
 		return location.getTerrain();
 	}

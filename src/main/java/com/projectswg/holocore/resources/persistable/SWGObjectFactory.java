@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.persistable;
 
 import com.projectswg.common.network.NetBufferStream;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 

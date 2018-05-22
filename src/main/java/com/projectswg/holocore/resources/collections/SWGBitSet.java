@@ -26,14 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import java.util.BitSet;
-
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+
+import java.util.BitSet;
 
 public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	

@@ -26,11 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CrcDatabase;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.buildout.BuildoutArea;
 import com.projectswg.holocore.resources.buildout.BuildoutArea.BuildoutAreaBuilder;
@@ -46,6 +44,8 @@ import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.resources.server_info.loader.BuildingLoader;
 import com.projectswg.holocore.resources.server_info.loader.BuildingLoader.BuildingLoaderInfo;
 import com.projectswg.holocore.services.objects.ObjectCreator.ObjectCreationException;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class ClientBuildoutService extends Service {
 	
 	@Override
 	public boolean start() {
-		objects.forEach(ClientBuildoutService::broadcast);
+		objects.parallelStream().forEach(ClientBuildoutService::broadcast);
 		objects.clear();
 		return super.start();
 	}
@@ -291,9 +291,8 @@ public class ClientBuildoutService extends Service {
 						}
 						currentArea = area;
 					}
-					if (currentArea.getTerrain() != terrain)
-						continue;
-					createObject(objects, set, currentArea);
+					if (currentArea.getTerrain() == terrain)
+						createObject(objects, set, currentArea);
 				}
 			} catch (IOException e) {
 				Log.e(e);

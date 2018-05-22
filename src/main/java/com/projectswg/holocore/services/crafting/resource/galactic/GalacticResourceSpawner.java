@@ -26,21 +26,20 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic;
 
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
-
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.debug.Log.LogLevel;
-import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
-
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResourceContainer;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.Log.LogLevel;
+import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 public class GalacticResourceSpawner {
 	

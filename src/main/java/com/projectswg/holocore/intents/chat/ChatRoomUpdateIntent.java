@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.chat;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class ChatRoomUpdateIntent extends Intent {
 	

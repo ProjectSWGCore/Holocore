@@ -26,12 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.spawn;
 
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.intents.server.ConfigChangedIntent;
@@ -61,6 +58,9 @@ import com.projectswg.holocore.resources.spawn.Spawner.SpawnerFlag;
 import com.projectswg.holocore.resources.spawn.SpawnerType;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,11 +73,11 @@ public final class SpawnerService extends Service {
 	private static final String IDLE_MOOD = "idle";
 	
 	private final Map<Long, Spawner> spawnerMap;
-	private final PswgScheduledThreadPool executor;
+	private final ScheduledThreadPool executor;
 	
 	public SpawnerService() {
 		this.spawnerMap = new HashMap<>();
-		this.executor = new PswgScheduledThreadPool(1, "spawner-service");
+		this.executor = new ScheduledThreadPool(1, "spawner-service");
 		
 		registerForIntent(ConfigChangedIntent.class, this::handleConfigChangedIntent);
 		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
@@ -271,7 +271,7 @@ public final class SpawnerService extends Service {
 				waypoints = null;
 			} else {
 				waypoints = npcPatrolRouteLoader.getPatrolRoute(spawn.getPatrolId())
-						.parallelStream()
+						.stream()
 						.map(route -> new ResolvedPatrolWaypoint(getPatrolWaypointParent(route), getPatrolWaypointLocation(route), route.getDelay(), route.getPatrolType()))
 						.collect(Collectors.toList());
 			}
@@ -283,7 +283,7 @@ public final class SpawnerService extends Service {
 			Spawner spawner = new Spawner(spawn.getId());
 			spawner.setCreatureId(npc.getId());
 			spawner.setIffTemplates(createTemplateList(npc.getIff()));
-			spawner.setCreatureName(npc.getName().intern());
+			spawner.setCreatureName(npc.getName());
 			spawner.setCombatLevel((short) npc.getCombatLevel());
 			spawner.setSpawnerFlag(SpawnerFlag.valueOf(npc.getAttackable()));
 			spawner.setPatrolRoute(waypoints);
@@ -307,8 +307,8 @@ public final class SpawnerService extends Service {
 			SpawnerType spawnerType = SpawnerType.valueOf(spawn.getSpawnerType());
 			SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
 			egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
-			egg.moveToContainer(getCell(spawner.getSpawnerId(), spawn.getCellId(), building));
 			egg.setLocation(spawner.getLocation());
+			egg.moveToContainer(getCell(spawner.getSpawnerId(), spawn.getCellId(), building));
 			spawner.setSpawnerObject(egg);
 			ObjectCreatedIntent.broadcast(egg);
 		}
@@ -373,7 +373,7 @@ public final class SpawnerService extends Service {
 		}
 		
 		private void setMoodAnimation(Spawner spawner, StaticSpawnInfo spawn) {
-			String moodAnimation = spawn.getMood().intern();
+			String moodAnimation = spawn.getMood();
 			
 			if (moodAnimation.equals(IDLE_MOOD))
 				moodAnimation = "neutral";
@@ -413,9 +413,23 @@ public final class SpawnerService extends Service {
 		}
 		
 		private String [] createTemplateList(String templates) {
-			String [] templateList = templates.split(";");
-			for (int i = 0; i < templateList.length; ++i) {
-				templateList[i] = ClientFactory.formatToSharedFile("object/mobile/"+templateList[i]);
+			int count = 0;
+			int ind = -1;
+			while (ind < templates.length()) {
+				ind = templates.indexOf(';', ind + 1);
+				count++;
+				if (ind == -1)
+					break;
+			}
+			
+			ind = 0;
+			String[] templateList = new String[count];
+			for (int i = 0; i < count; i++) {
+				int next = templates.indexOf(';', ind);
+				if (next == -1)
+					next = templates.length();
+				templateList[i] = ClientFactory.formatToSharedFile("object/mobile/" + templates.substring(ind, next));
+				ind = next + 1;
 			}
 			return templateList;
 		}

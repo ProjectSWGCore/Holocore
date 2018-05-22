@@ -26,30 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.chat;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicReference;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatDeletePersistentMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatPersistentMessageToClient;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatPersistentMessageToServer;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatRequestPersistentMessage;
-
+import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.PersistentMessageIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.resources.chat.ChatRange;
+import com.projectswg.holocore.resources.chat.ChatType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
@@ -57,10 +44,19 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.server_info.ObjectDatabase;
 import com.projectswg.holocore.services.CoreManager;
-import com.projectswg.holocore.services.chat.ChatManager.ChatRange;
-import com.projectswg.holocore.services.chat.ChatManager.ChatType;
 import com.projectswg.holocore.services.player.PlayerManager;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ChatMailService extends Service {
 	
@@ -75,9 +71,6 @@ public class ChatMailService extends Service {
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(PersistentMessageIntent.class, this::handlePersistentMessageIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
 	}
 	
 	@Override
@@ -96,6 +89,7 @@ public class ChatMailService extends Service {
 		return super.terminate();
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player player = pei.getPlayer();
 		if (player == null)
@@ -110,6 +104,7 @@ public class ChatMailService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){ 
 		SWGPacket p = gpi.getPacket();
 		String galaxyName = CoreManager.getGalaxy().getName();
@@ -166,6 +161,7 @@ public class ChatMailService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePersistentMessageIntent(PersistentMessageIntent pmi) {
 		if (pmi.getReceiver() == null)
 			return;

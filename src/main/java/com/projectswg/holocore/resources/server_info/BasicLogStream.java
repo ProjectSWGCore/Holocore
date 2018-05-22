@@ -26,16 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-import com.projectswg.common.debug.Log;
 
 public class BasicLogStream {
 	

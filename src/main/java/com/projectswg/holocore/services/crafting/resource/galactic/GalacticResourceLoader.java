@@ -26,12 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic;
 
+import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
 
 public class GalacticResourceLoader {
 	

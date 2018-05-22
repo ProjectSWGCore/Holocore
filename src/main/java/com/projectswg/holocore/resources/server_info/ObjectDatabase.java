@@ -26,18 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info;
 
+import com.projectswg.common.persistable.Persistable;
+import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import com.projectswg.common.concurrency.PswgBasicScheduledThread;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.persistable.Persistable;
-
 public abstract class ObjectDatabase<V extends Persistable> {
 	
 	private final File file;
-	private final PswgBasicScheduledThread autosaveThread;
+	private final BasicScheduledThread autosaveThread;
 	
 	public ObjectDatabase(String filename) {
 		this(filename, TimeUnit.MINUTES.toMillis(5));
@@ -52,7 +52,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		this.file = new File(filename);
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
-		this.autosaveThread = new PswgBasicScheduledThread("odb-autosave-"+file.getName(), this::save);
+		this.autosaveThread = new BasicScheduledThread("odb-autosave-"+file.getName(), this::save);
 		this.autosaveThread.startWithFixedDelay(autosaveInterval, autosaveInterval);
 		try {
 			createFilesAndDirectories();

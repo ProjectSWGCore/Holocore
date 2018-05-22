@@ -26,27 +26,22 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.spawn;
 
-import java.util.Random;
-
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-
 import com.projectswg.holocore.intents.FactionIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.objects.custom.AIObject;
-import com.projectswg.holocore.resources.objects.custom.LoiterAIObject;
-import com.projectswg.holocore.resources.objects.custom.PatrolAIObject;
-import com.projectswg.holocore.resources.objects.custom.RandomAIObject;
-import com.projectswg.holocore.resources.objects.custom.TurningAIObject;
+import com.projectswg.holocore.resources.objects.custom.*;
 import com.projectswg.holocore.resources.objects.tangible.OptionFlag;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.spawn.Spawner;
 import com.projectswg.holocore.resources.spawn.Spawner.SpawnerFlag;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+
+import java.util.Random;
 
 class NPCCreator {
 	

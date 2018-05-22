@@ -26,11 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands;
 
-import com.projectswg.common.concurrency.PswgBasicScheduledThread;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.BuffIntent;
@@ -42,6 +38,12 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.services.commands.buff.BuffData;
 import com.projectswg.holocore.services.commands.buff.BuffMap;
+import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -56,18 +58,14 @@ public class BuffService extends Service {
 	 *      Perform same check upon zoning in. Skillmod1 effect name is "group"
 	 */
 	
-	private final PswgBasicScheduledThread timerCheckThread;
+	private final BasicScheduledThread timerCheckThread;
 	private final Set<CreatureObject> monitored;
 	private final BuffMap dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
-		timerCheckThread = new PswgBasicScheduledThread("buff-timer-check", this::checkBuffTimers);
+		timerCheckThread = new BasicScheduledThread("buff-timer-check", this::checkBuffTimers);
 		monitored = new HashSet<>();
 		dataMap = new BuffMap();
-		
-		registerForIntent(BuffIntent.class, this::handleBuffIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
 	}
 	
 	@Override
@@ -100,10 +98,11 @@ public class BuffService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
 		BuffData buffData = getBuff(bi.getBuffName());
-		Assert.notNull(buffData, "No known buff: " + bi.getBuffName());
-		Assert.test(buffData.getName().equals(bi.getBuffName()), "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+"]");
+		Objects.requireNonNull(buffData, "No known buff: " + bi.getBuffName());
+		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+"]";
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -111,6 +110,7 @@ public class BuffService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		CreatureObject creature = pei.getPlayer().getCreatureObject();
 		
@@ -137,6 +137,7 @@ public class BuffService extends Service {
 		removeAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffPersistent(buff)));
 	}
 	
+	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 		
@@ -205,9 +206,7 @@ public class BuffService extends Service {
 		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff), true));
 	}
 	
-	private void addBuff(CreatureObject receiver, BuffData buffData, CreatureObject buffer) {
-		Assert.notNull(buffData);
-		
+	private void addBuff(CreatureObject receiver, @NotNull BuffData buffData, CreatureObject buffer) {
 		String groupName = buffData.getGroupName();
 		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroupName())).findAny();
 		
@@ -235,9 +234,7 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, BuffData buffData, boolean expired) {
-		Assert.notNull(buffData);
-		
+	private void removeBuff(CreatureObject creature, @NotNull BuffData buffData, boolean expired) {
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
 		if (!optionalEntry.isPresent())
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
@@ -247,7 +244,7 @@ public class BuffService extends Service {
 			checkStackCount(creature, buff, calculatePlayTime(creature), buffData.getMaxStackCount());
 		} else {
 			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
-			Assert.notNull(removedBuff, "Buff must exist if being removed");
+			Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
 			
 			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
 			checkCallback(buffData, creature);
@@ -260,7 +257,8 @@ public class BuffService extends Service {
 	
 	private void checkStackCount(CreatureObject receiver, Buff buff, int applyTime, int stackMod) {
 		BuffData buffData = getBuff(buff);
-		Assert.notNull(buffData);
+		
+		Objects.requireNonNull(buffData, "No known buff: " + buff.getCrc());
 		// If it's the same buff, we need to check for stacks
 		int maxStackCount = buffData.getMaxStackCount();
 		
@@ -333,11 +331,13 @@ public class BuffService extends Service {
 			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
 	}
 	
+	@Nullable
 	private BuffData getBuff(String name) {
 		return dataMap.getBuff(name);
 	}
 	
-	private BuffData getBuff(Buff buff) {
+	@Nullable
+	private BuffData getBuff(@NotNull Buff buff) {
 		return dataMap.getBuff(buff.getCrc());
 	}
 	

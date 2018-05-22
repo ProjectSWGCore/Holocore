@@ -26,10 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 
 public enum GameObjectType {
 	GOT_NONE									(0x00000000, null),

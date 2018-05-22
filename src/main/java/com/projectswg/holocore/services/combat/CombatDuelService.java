@@ -26,20 +26,45 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.combat;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.DuelPlayerIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
 
-final class DuelPlayerService extends Service {
+public class CombatDuelService extends Service {
 	
-	DuelPlayerService() {
-		registerForIntent(DuelPlayerIntent.class, this::handleDuelPlayerIntent);
+	public CombatDuelService() {
+		
+	}
+	
+	@IntentHandler
+	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
+		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
+			return;
+		}
+		
+		switch (dpi.getEventType()) {
+			case ACCEPT:
+				handleAcceptDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case CANCEL:
+				handleCancelDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case DECLINE:
+				handleDeclineDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case END:
+				handleEndDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case REQUEST:
+				handleRequestDuel(dpi.getSender(), dpi.getReciever());
+				break;
+		}
 	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
@@ -104,30 +129,6 @@ final class DuelPlayerService extends Service {
 			sendSystemMessage(requester, target, "already_dueling");
 		} else {
 			sendSystemMessage(requester, target, "already_challenged");
-		}
-	}
-	
-	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
-		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
-			return;
-		}
-		
-		switch (dpi.getEventType()) {
-			case ACCEPT:
-				handleAcceptDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case CANCEL:
-				handleCancelDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case DECLINE:
-				handleDeclineDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case END:
-				handleEndDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case REQUEST:
-				handleRequestDuel(dpi.getSender(), dpi.getReciever());
-				break;
 		}
 	}
 	

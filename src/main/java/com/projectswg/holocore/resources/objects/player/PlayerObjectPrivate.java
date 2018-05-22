@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.objects.player;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.collections.SWGBitSet;
 import com.projectswg.holocore.resources.collections.SWGMap;

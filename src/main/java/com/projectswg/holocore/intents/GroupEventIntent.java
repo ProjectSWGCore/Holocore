@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class GroupEventIntent extends Intent {
 	private GroupEventType eventType;

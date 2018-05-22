@@ -26,18 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.manufacture;
 
-import java.util.Map.Entry;
-
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.player.Player;
+
+import java.util.Map.Entry;
 
 public class ManufactureSchematicObject extends IntangibleObject {
 	

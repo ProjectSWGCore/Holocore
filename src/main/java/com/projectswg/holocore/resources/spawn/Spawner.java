@@ -26,18 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.spawn;
 
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.objects.custom.AIBehavior;
 import com.projectswg.holocore.resources.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
+
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class Spawner {
 	

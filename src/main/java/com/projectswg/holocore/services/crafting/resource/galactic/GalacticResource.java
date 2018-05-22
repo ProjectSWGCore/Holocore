@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.crafting.resource.galactic;
 
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
 
 public class GalacticResource implements Persistable {

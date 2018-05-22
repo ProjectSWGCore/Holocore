@@ -25,7 +25,7 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package com.projectswg.holocore.services.loot;
+package com.projectswg.holocore.services.combat.loot;
 
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;

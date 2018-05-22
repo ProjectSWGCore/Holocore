@@ -26,33 +26,30 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
-
-import javax.annotation.Nonnull;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class SetTitleIntent extends Intent {
 	
 	private final String title;
 	private final PlayerObject requester;
 	
-	private SetTitleIntent(@Nonnull String title, @Nonnull PlayerObject requester) {
+	private SetTitleIntent(@NotNull String title, @NotNull PlayerObject requester) {
 		this.title = title;
 		this.requester = requester;
 	}
 	
-	@Nonnull
+	@NotNull
 	public String getTitle() {
 		return title;
 	}
 	
-	@Nonnull
+	@NotNull
 	public PlayerObject getRequester() {
 		return requester;
 	}
 	
-	public static void broadcast(@Nonnull String title, @Nonnull PlayerObject requester) {
+	public static void broadcast(@NotNull String title, @NotNull PlayerObject requester) {
 		new SetTitleIntent(title, requester).broadcast();
 	}
 	

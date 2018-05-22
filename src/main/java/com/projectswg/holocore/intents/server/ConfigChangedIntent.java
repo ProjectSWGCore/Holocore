@@ -26,9 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.server;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.config.ConfigFile;
+import me.joshlarson.jlcommon.control.Intent;
 
 public final class ConfigChangedIntent extends Intent {
 	

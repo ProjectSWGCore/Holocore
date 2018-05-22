@@ -26,23 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy.travel;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.EnterTicketPurchaseModeMessage;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListRequest;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
@@ -60,6 +52,13 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class TravelService extends Service {
 	

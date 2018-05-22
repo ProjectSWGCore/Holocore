@@ -26,14 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.object_controller.BiographyUpdate;
-
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+import me.joshlarson.jlcommon.log.Log;
 
 /**
  *

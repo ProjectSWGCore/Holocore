@@ -26,20 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.collections.SWGList;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.collections.SWGSet;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 class PlayerObjectPrivateNP implements Persistable {
 

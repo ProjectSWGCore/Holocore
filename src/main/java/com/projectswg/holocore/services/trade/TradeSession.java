@@ -27,32 +27,19 @@
 
 package com.projectswg.holocore.services.trade;
 
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.trade.*;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
-
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.trade.AbortTradeMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.AcceptTransactionMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.AddItemMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.BeginTradeMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.BeginVerificationMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.DenyTradeMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.GiveMoneyMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.TradeCompleteMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.UnAcceptTransactionMessage;
-import com.projectswg.common.network.packets.swg.zone.trade.VerifyTradeMessage;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-
-import javax.annotation.Nonnull;
 
 public class TradeSession {
 	
@@ -60,7 +47,7 @@ public class TradeSession {
 	private final TradeMember receiver;
 	private final AtomicReference<TradeStatus> status;
 	
-	public TradeSession(@Nonnull CreatureObject initiator, @Nonnull CreatureObject receiver) {
+	public TradeSession(@NotNull CreatureObject initiator, @NotNull CreatureObject receiver) {
 		this.initiator = new TradeMember(initiator, receiver);
 		this.receiver = new TradeMember(receiver, initiator);
 		this.status = new AtomicReference<>(TradeStatus.STARTED);

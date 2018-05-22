@@ -26,20 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.survey;
 
-import java.util.List;
-
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawn;
 import com.projectswg.holocore.services.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.List;
 
 public class SampleSession {
 	

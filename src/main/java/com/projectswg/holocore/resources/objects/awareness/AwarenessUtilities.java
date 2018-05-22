@@ -30,11 +30,9 @@ package com.projectswg.holocore.resources.objects.awareness;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 
-import javax.annotation.Nonnull;
-
 class AwarenessUtilities {
 	
-	public static boolean isInAwareness(@Nonnull SWGObject obj) {
+	public static boolean isInAwareness(@NotNull SWGObject obj) {
 		switch (obj.getBaselineType()) {
 			case WAYP:
 				return false;

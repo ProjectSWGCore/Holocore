@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents;
 
-import com.projectswg.common.control.Intent;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class LoginEventIntent extends Intent {
 	

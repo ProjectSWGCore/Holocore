@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.sui;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.sui.SuiBaseWindow;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class SuiWindowIntent extends Intent {
 	

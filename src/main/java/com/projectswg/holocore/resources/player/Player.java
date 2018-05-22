@@ -26,21 +26,20 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.network.packets.SWGPacket;
-
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.holocore.intents.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.services.player.PlayerManager;
+import me.joshlarson.jlcommon.control.IntentChain;
+import me.joshlarson.jlcommon.control.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player implements Comparable<Player> {
 	

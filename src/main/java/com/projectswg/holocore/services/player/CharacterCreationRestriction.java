@@ -26,16 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class CharacterCreationRestriction {
 	

@@ -26,15 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource;
 
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.concurrency.PswgBasicScheduledThread;
-import com.projectswg.common.control.Service;
-
 import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawner;
 import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResourceContainer;
+import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
+import me.joshlarson.jlcommon.control.Service;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * In charge of spawning, despawning, and overall management of resources
@@ -43,12 +42,12 @@ public class ResourceService extends Service {
 	
 	private final RawResourceContainer container;
 	private final GalacticResourceSpawner spawner;
-	private final PswgBasicScheduledThread spawnerUpdater;
+	private final BasicScheduledThread spawnerUpdater;
 	
 	public ResourceService() {
 		this.container = new RawResourceContainer();
 		this.spawner = new GalacticResourceSpawner();
-		this.spawnerUpdater = new PswgBasicScheduledThread("resource-spawn-updater", spawner::updateAllResources);
+		this.spawnerUpdater = new BasicScheduledThread("resource-spawn-updater", spawner::updateAllResources);
 	}
 	
 	@Override

@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.network;
 
-import com.projectswg.common.control.Manager;
+import me.joshlarson.jlcommon.control.Manager;
 
 public class NetworkManager extends Manager {
 	

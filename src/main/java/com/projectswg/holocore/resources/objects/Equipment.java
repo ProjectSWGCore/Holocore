@@ -27,17 +27,16 @@
 package com.projectswg.holocore.resources.objects;
 
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.persistable.SWGObjectFactory;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.log.Log;
 
 public class Equipment implements Encodable, Persistable {
 	

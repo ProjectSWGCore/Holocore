@@ -34,7 +34,7 @@ import org.junit.runners.JUnit4;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert.AssertionException;
+import me.joshlarson.jlcommon.log.Assert.AssertionException;
 
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 

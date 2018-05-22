@@ -26,20 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.concurrency.SynchronizedSet;
-import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.HeartBeat;
 import com.projectswg.common.utilities.ThreadUtilities;
-
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.connection.ForceLogoutIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
@@ -51,6 +39,18 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.player.PlayerFlags;
 import com.projectswg.holocore.services.CoreManager;
+import me.joshlarson.jlcommon.control.IntentChain;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ConnectionService extends Service {
 	
@@ -63,8 +63,8 @@ public class ConnectionService extends Service {
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
-		zonedInPlayers = new SynchronizedSet<>();
-		disappearPlayers = new SynchronizedSet<>();
+		zonedInPlayers = ConcurrentHashMap.newKeySet();
+		disappearPlayers = ConcurrentHashMap.newKeySet();
 		disappearRunnable = () -> {
 			synchronized (disappearPlayers) {
 				Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
@@ -77,10 +77,6 @@ public class ConnectionService extends Service {
 				}
 			}
 		};
-		
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(ForceLogoutIntent.class, this::handleForceLogoutIntent);
 	}
 	
 	@Override
@@ -95,6 +91,7 @@ public class ConnectionService extends Service {
 		return super.terminate() && success;
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		switch (pei.getEvent()) {
@@ -109,6 +106,7 @@ public class ConnectionService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Player p = gpi.getPlayer();
 		p.updateLastPacketTimestamp();
@@ -116,9 +114,10 @@ public class ConnectionService extends Service {
 			p.sendPacket(gpi.getPacket());
 	}
 	
+	@IntentHandler
 	private void handleForceLogoutIntent(ForceLogoutIntent fli) {
 		Player player = fli.getPlayer();
-		Assert.notNull(player.getCreatureObject(), "ForceLogoutIntent must have a valid player with creature object!");
+		Objects.requireNonNull(player.getCreatureObject(), "ForceLogoutIntent must have a valid player with creature object!");
 		logOut(player);
 		disappear(player, false, DisconnectReason.APPLICATION);
 	}
@@ -141,7 +140,8 @@ public class ConnectionService extends Service {
 		CoreManager.getGalaxy().incrementPopulationCount();
 		clearPlayerFlag(p, PlayerFlags.LD);
 		removeFromDisappear(p);
-		Assert.test(zonedInPlayers.add(p));
+		boolean unique = zonedInPlayers.add(p);
+		assert unique;
 	}
 	
 	private void logOut(Player p) {

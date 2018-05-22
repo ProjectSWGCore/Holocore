@@ -27,6 +27,13 @@
 
 package com.projectswg.holocore.resources.client_info;
 
+import com.projectswg.common.data.swgfile.ClientData;
+import com.projectswg.common.data.swgfile.DataFactory;
+import com.projectswg.common.data.swgfile.SWGFile;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.data.swgfile.visitors.DatatableData.ColumnType;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,13 +45,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.projectswg.common.data.swgfile.ClientData;
-import com.projectswg.common.data.swgfile.DataFactory;
-import com.projectswg.common.data.swgfile.SWGFile;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.data.swgfile.visitors.DatatableData.ColumnType;
-import com.projectswg.common.debug.Log;
 
 
 /**

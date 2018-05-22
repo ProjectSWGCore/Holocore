@@ -26,34 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
-import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
-import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
+import com.projectswg.common.network.packets.swg.login.creation.*;
 import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
-import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure;
 import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
-import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterSuccess;
-import com.projectswg.common.network.packets.swg.login.creation.RandomNameRequest;
-import com.projectswg.common.network.packets.swg.login.creation.RandomNameResponse;
-
 import com.projectswg.holocore.intents.GalacticIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.player.CreatedCharacterIntent;
@@ -68,6 +49,17 @@ import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.player.TerrainZoneInsertion.SpawnInformation;
 import com.projectswg.holocore.services.player.creation.CharacterCreation;
 import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CharacterCreationService extends Service {
 	

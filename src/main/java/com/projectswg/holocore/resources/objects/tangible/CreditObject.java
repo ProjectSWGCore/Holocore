@@ -26,19 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.tangible;
 
-import java.util.Collections;
-import java.util.Set;
-
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.object.ContainerTransferIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.resources.containers.ContainerResult;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.utilities.AwarenessUtilities;
+import me.joshlarson.jlcommon.log.Log;
 
 public class CreditObject extends TangibleObject {
 	private long amount;

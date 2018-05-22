@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.commands.callbacks;
 
 import com.projectswg.common.data.schematic.DraftSchematic;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DraftSlotsQueryResponse;
-
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;

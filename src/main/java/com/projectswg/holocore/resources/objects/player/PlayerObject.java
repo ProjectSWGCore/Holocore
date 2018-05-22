@@ -31,8 +31,6 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.network.BaselineBuilder;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObjectAwareness;
 import com.projectswg.holocore.resources.objects.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.player.AccessLevel;

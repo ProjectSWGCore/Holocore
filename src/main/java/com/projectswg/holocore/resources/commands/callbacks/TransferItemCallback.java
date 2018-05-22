@@ -26,9 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-
 import com.projectswg.holocore.intents.BuffIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.combat.LootItemIntent;

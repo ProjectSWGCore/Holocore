@@ -26,19 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services;
 
-import java.io.File;
-import java.io.IOException;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.resources.client_info.ServerFactory;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.network.NetworkManager;
+import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.io.IOException;
 
 public class EngineManager extends Manager {
 	

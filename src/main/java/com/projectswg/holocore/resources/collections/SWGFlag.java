@@ -26,18 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Arrays;
-import java.util.BitSet;
-
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.persistable.Persistable;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.Arrays;
+import java.util.BitSet;
 
 public class SWGFlag extends BitSet implements Encodable, Persistable {
 	

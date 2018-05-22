@@ -24,26 +24,17 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.experience;
+package com.projectswg.holocore.services.experience.skills;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-
 import com.projectswg.holocore.intents.GrantBadgeIntent;
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.experience.LevelChangedIntent;
@@ -57,6 +48,14 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.rewards.RoadmapReward;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.services.objects.StaticItemService;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants
@@ -87,8 +86,6 @@ public final class SkillTemplateService extends Service {
 		badgeNames.put("trader_0b", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_architect_master"});
 		badgeNames.put("trader_0c", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_armorsmith_master", "new_prof_crafting_weaponsmith_master"});
 		badgeNames.put("trader_0d", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_droidengineer_master"});
-		
-		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
 	}
 
 	@Override
@@ -106,7 +103,8 @@ public final class SkillTemplateService extends Service {
 
 		return super.initialize();
 	}
-
+	
+	@IntentHandler
 	private void handleLevelChangedIntent(LevelChangedIntent lci) {
 		short oldLevel = lci.getPreviousLevel();
 		short newLevel = lci.getNewLevel();
@@ -148,11 +146,11 @@ public final class SkillTemplateService extends Service {
 		if (skillUp) {
 			effectFile = "clienteffect/skill_granted.cef";
 			flyText = "skill_up";
-			flyTextColor = new RGB(Color.GREEN);
+			flyTextColor = new RGB(0, 255, 0);
 		} else {
 			effectFile = "clienteffect/level_granted.cef";
 			flyText = "level_up";
-			flyTextColor = new RGB(Color.BLUE);
+			flyTextColor = new RGB(0, 0, 255);
 		}
 		
 		creatureObject.sendObservers(new PlayClientEffectObjectMessage(effectFile, "", objectId, ""));

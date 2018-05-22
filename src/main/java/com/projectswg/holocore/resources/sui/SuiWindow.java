@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.sui;
 import com.projectswg.common.data.sui.ISuiCallback;
 import com.projectswg.common.data.sui.SuiBaseWindow;
 import com.projectswg.common.data.sui.SuiEvent;
-
 import com.projectswg.holocore.intents.sui.SuiWindowIntent;
 import com.projectswg.holocore.resources.player.Player;
 

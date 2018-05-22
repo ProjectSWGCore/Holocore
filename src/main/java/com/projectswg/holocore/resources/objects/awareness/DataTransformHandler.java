@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.objects.awareness;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.UpdateTransformMessage;
 import com.projectswg.common.network.packets.swg.zone.UpdateTransformWithParentMessage;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
 
 public class DataTransformHandler {

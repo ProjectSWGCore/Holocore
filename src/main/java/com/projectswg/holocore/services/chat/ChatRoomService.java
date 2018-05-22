@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.services.chat;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.chat.ChatRoom;
@@ -41,19 +40,16 @@ import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
-
-import javax.annotation.Nonnull;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import org.jetbrains.annotations.NotNull;
 
 public class ChatRoomService extends Service {
 	
 	private final ChatRoomHandler chatRoomHandler;
 	
 	public ChatRoomService() {
-		chatRoomHandler = new ChatRoomHandler();
-		
-		registerForIntent(ChatRoomUpdateIntent.class, this::handleChatRoomUpdateIntent);
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
+		this.chatRoomHandler = new ChatRoomHandler();
 	}
 	
 	@Override
@@ -66,6 +62,7 @@ public class ChatRoomService extends Service {
 		return chatRoomHandler.terminate() && super.terminate();
 	}
 	
+	@IntentHandler
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		Player player = gpi.getPlayer();
@@ -117,6 +114,7 @@ public class ChatRoomService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
@@ -127,6 +125,7 @@ public class ChatRoomService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleChatRoomUpdateIntent(ChatRoomUpdateIntent crui) {
 		switch (crui.getUpdateType()) {
 			case CREATE:
@@ -360,7 +359,7 @@ public class ChatRoomService extends Service {
 		player.sendPacket(new ChatRoomList(chatRoomHandler.getRoomList(player)));
 	}
 	
-	private static void sendPacketToMembers(@Nonnull ChatRoom room, SWGPacket... packets) {
+	private static void sendPacketToMembers(@NotNull ChatRoom room, SWGPacket... packets) {
 		for (ChatAvatar member : room.getMembers()) {
 			Player player = PlayerLookup.getPlayerByFirstName(member.getName());
 			player.sendPacket(packets);

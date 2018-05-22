@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.objects.ship;
 
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 
 public class ShipObject extends TangibleObject {

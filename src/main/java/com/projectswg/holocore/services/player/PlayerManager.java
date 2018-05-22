@@ -26,18 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.BiConsumer;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.packets.SWGPacket;
-
 import com.projectswg.holocore.intents.NotifyPlayersPacketIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
@@ -51,6 +41,14 @@ import com.projectswg.holocore.resources.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.services.CoreManager;
+import me.joshlarson.jlcommon.control.Manager;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
 
 public class PlayerManager extends Manager {
 	

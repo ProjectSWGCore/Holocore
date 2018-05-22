@@ -26,17 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.SkillModIntent;
 import com.projectswg.holocore.intents.experience.LevelChangedIntent;
@@ -46,6 +38,14 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.utilities.IntentFactory;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
 
 public class SkillModService extends Service {
 	
@@ -73,11 +73,6 @@ public class SkillModService extends Service {
 			throw new ProjectSWG.CoreException("Unable to load racial_stats.sdb file for SkillTemplateService");
 		
 		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);			
-
-		registerForIntent(ContainerTransferIntent.class, this::handleContainerTransferIntent);
-		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
-		registerForIntent(CreatedCharacterIntent.class, this::handleCreatedCharacterIntent);
-		registerForIntent(SkillModIntent.class, this::handleSkillModIntent);
 	}
 	
 	@Override
@@ -87,6 +82,7 @@ public class SkillModService extends Service {
 		return super.terminate();
 	}
 	
+	@IntentHandler
 	private void handleContainerTransferIntent(ContainerTransferIntent cti){
 
 		if (cti.getObject().getOwner() == null)
@@ -113,6 +109,7 @@ public class SkillModService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleCreatedCharacterIntent(CreatedCharacterIntent cci){
 		CreatureObject creature = cci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
@@ -125,6 +122,7 @@ public class SkillModService extends Service {
 		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 	
+	@IntentHandler
 	private void handleLevelChangedIntent(LevelChangedIntent lci){
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
@@ -137,6 +135,7 @@ public class SkillModService extends Service {
 		updateLevelSkillModValues(creature, newLevel, profession, race);
 	}
 
+	@IntentHandler
 	private void handleSkillModIntent(SkillModIntent smi) {
 		for (CreatureObject creature : smi.getAffectedCreatures()) {
 			int adjustModifier = smi.getAdjustModifier();

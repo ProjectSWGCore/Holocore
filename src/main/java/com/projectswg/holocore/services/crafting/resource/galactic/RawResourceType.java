@@ -26,13 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.projectswg.common.data.EnumLookup;
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum RawResourceType {
 	RESOURCE									("resource", null),

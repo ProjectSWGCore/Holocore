@@ -26,15 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.object.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -44,6 +39,10 @@ import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectManager;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GotoCmdCallback implements ICmdCallback  {
 	

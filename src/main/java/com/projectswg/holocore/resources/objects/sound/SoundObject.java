@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.objects.sound;
 
 import com.projectswg.common.network.NetBufferStream;
-
 import com.projectswg.holocore.resources.objects.staticobject.StaticObject;
 
 public class SoundObject extends StaticObject {

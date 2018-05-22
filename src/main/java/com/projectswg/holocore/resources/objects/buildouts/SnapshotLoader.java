@@ -26,16 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.buildouts;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+
+import java.util.*;
 
 public class SnapshotLoader {
 	

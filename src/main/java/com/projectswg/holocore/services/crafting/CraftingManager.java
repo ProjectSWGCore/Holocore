@@ -26,16 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting;
 
-import com.projectswg.common.control.Manager;
-
 import com.projectswg.holocore.services.crafting.resource.ResourceService;
 import com.projectswg.holocore.services.crafting.survey.SurveyService;
+import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.control.ManagerStructure;
 
+@ManagerStructure(children = {
+		ResourceService.class,
+		SurveyService.class
+})
 public class CraftingManager extends Manager {
 	
 	public CraftingManager() {
-		addChildService(new ResourceService());
-		addChildService(new SurveyService());
+		
 	}
 	
 }

@@ -26,25 +26,24 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands;
 
-import java.util.*;
-
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
-
 import com.projectswg.holocore.resources.commands.Command;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.services.commands.CommandLauncher.EnqueuedCommand;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.*;
 
 public class CommandCooldownHandler {
 	
 	private final Map<CreatureObject, Set<String>>		cooldownMap;
-	private final PswgScheduledThreadPool				cooldownThread;
+	private final ScheduledThreadPool				cooldownThread;
 	
 	public CommandCooldownHandler() {
 		this.cooldownMap = new HashMap<>();
-		this.cooldownThread = new PswgScheduledThreadPool(1, "command-launcher-cooldown-thread");
+		this.cooldownThread = new ScheduledThreadPool(1, "command-launcher-cooldown-thread");
 	}
 	
 	public void start() {

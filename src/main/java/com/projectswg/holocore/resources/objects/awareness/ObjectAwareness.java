@@ -33,9 +33,6 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
 
-import javax.annotation.Nonnull;
-import java.util.Collections;
-
 public class ObjectAwareness {
 	
 	private final TerrainMap[] terrains;
@@ -52,7 +49,7 @@ public class ObjectAwareness {
 	 *
 	 * @param obj the object created
 	 */
-	public void createObject(@Nonnull SWGObject obj) {
+	public void createObject(@NotNull SWGObject obj) {
 		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
 			TerrainMap map = getTerrainMap(obj);
 			map.add(obj);
@@ -65,7 +62,7 @@ public class ObjectAwareness {
 	 *
 	 * @param obj the object destroyed
 	 */
-	public void destroyObject(@Nonnull SWGObject obj) {
+	public void destroyObject(@NotNull SWGObject obj) {
 		TerrainMap map = getTerrainMap(obj);
 		map.remove(obj);
 		map.update(obj);
@@ -76,7 +73,7 @@ public class ObjectAwareness {
 	 *
 	 * @param obj the object to update
 	 */
-	public void updateObject(@Nonnull SWGObject obj) {
+	public void updateObject(@NotNull SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
 		TerrainMap map = getTerrainMap(obj);
 		if (superParent != null) {
@@ -89,12 +86,12 @@ public class ObjectAwareness {
 		map.update(obj);
 	}
 	
-	@Nonnull
+	@NotNull
 	private TerrainMap getTerrainMap(SWGObject obj) {
 		return terrains[obj.getTerrain().ordinal()];
 	}
 	
-	private static boolean isRider(@Nonnull SWGObject obj, SWGObject parent) {
+	private static boolean isRider(@NotNull SWGObject obj, SWGObject parent) {
 		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
 	}
 	

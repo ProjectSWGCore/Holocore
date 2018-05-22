@@ -26,18 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.network;
 
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.encoding.Encodable;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
 
 public class BaselineBuilder {
 	

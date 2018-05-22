@@ -29,7 +29,6 @@ package com.projectswg.holocore.services.group;
 
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-
 import com.projectswg.holocore.resources.player.Player;
 
 public class GroupInviterData implements Encodable {

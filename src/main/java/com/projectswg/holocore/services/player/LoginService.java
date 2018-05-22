@@ -26,15 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.BCrypt;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
 import com.projectswg.common.network.packets.swg.login.*;
@@ -59,6 +56,8 @@ import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.CoreManager;
 import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

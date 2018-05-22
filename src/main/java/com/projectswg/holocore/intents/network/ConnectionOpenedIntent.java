@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.network;
 
-import com.projectswg.common.control.Intent;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class ConnectionOpenedIntent extends Intent {
 	

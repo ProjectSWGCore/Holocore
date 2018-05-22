@@ -26,12 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player.zone;
 
-import java.util.concurrent.TimeUnit;
-
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
-
 import com.projectswg.holocore.intents.RequestZoneInIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
@@ -40,6 +36,9 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.concurrent.TimeUnit;
 
 public class ZoneRequester {
 	

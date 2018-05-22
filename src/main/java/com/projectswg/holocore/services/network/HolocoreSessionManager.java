@@ -26,14 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.network;
 
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetworkProtocol;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
 import com.projectswg.common.network.packets.swg.holo.HoloPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloSetProtocolVersion;
-
 import com.projectswg.holocore.services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
+import me.joshlarson.jlcommon.log.Log;
 
 public class HolocoreSessionManager {
 	

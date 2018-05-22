@@ -26,13 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.custom;
 
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-
 import com.projectswg.holocore.intents.object.MoveObjectIntent;
+
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * AI object that loiters the area

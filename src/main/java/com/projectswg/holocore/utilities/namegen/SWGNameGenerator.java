@@ -28,8 +28,8 @@
 package com.projectswg.holocore.utilities.namegen;
 
 import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.debug.Log;
 import com.projectswg.holocore.resources.zone.NameFilter;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;

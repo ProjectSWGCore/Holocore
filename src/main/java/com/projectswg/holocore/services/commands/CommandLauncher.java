@@ -26,10 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands;
 
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import com.projectswg.holocore.intents.chat.ChatCommandIntent;
@@ -40,6 +38,8 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,12 +49,12 @@ import java.util.Queue;
 public class CommandLauncher {
 	
 	private final Map<Player, Queue<EnqueuedCommand>>	combatQueueMap;
-	private final PswgScheduledThreadPool				combatQueueThread;
+	private final ScheduledThreadPool				combatQueueThread;
 	private final CommandCooldownHandler				cooldownHandler;
 	
 	public CommandLauncher() {
 		this.combatQueueMap = new HashMap<>();
-		this.combatQueueThread = new PswgScheduledThreadPool(1, "command-combat-queue");
+		this.combatQueueThread = new ScheduledThreadPool(1, "command-combat-queue");
 		this.cooldownHandler = new CommandCooldownHandler();
 	}
 	

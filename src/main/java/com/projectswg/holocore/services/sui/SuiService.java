@@ -26,12 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.sui;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.sui.ISuiCallback;
 import com.projectswg.common.data.sui.SuiBaseWindow;
 import com.projectswg.common.data.sui.SuiComponent;
 import com.projectswg.common.data.sui.SuiEvent;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification;
@@ -39,6 +37,8 @@ import com.projectswg.common.network.packets.swg.zone.server_ui.SuiForceClosePag
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.intents.sui.SuiWindowIntent;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;

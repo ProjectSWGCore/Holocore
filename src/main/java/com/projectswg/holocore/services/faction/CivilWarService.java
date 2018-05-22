@@ -28,13 +28,10 @@
 
 package com.projectswg.holocore.services.faction;
 
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.CivilWarPointIntent;
@@ -50,45 +47,45 @@ import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.StandardLog;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalUnit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-final class CivilWarService extends Service {
+public class CivilWarService extends Service {
 	
 	private static final int IMPERIAL_INDEX = 0;
 	private static final int REBEL_INDEX = 1;
 	
 	private final Map<Integer, String[]> rankAbilities;
 	private final Set<PlayerObject> playerObjects;
-	private final PswgScheduledThreadPool threadPool;
+	private final ScheduledThreadPool threadPool;
 	private final DayOfWeek updateWeekDay;
 	private final LocalTime updateTime;
 	private final ZoneOffset updateOffset;
 	private int rankEpoch;
 	
-	CivilWarService() {
+	public CivilWarService() {
 		rankAbilities = new HashMap<>();
 		playerObjects = ConcurrentHashMap.newKeySet();
-		threadPool = new PswgScheduledThreadPool(1, "civil-war-service");
+		threadPool = new ScheduledThreadPool(1, "civil-war-service");
 		// Rank update time is the night between Thursday and Friday at 00:00 UTC
 		updateWeekDay = DayOfWeek.FRIDAY;
 		updateTime = LocalTime.MIDNIGHT;
 		updateOffset = OffsetDateTime.now().getOffset();
 		
 		loadRankAbilities();
-		
-		registerForIntent(CivilWarPointIntent.class, this::handleCivilWarPointIntent);
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilledIntent);
-		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
-		registerForIntent(FactionIntent.class, this::handleFactionIntent);
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
 	}
 	
 	@Override
@@ -118,7 +115,7 @@ final class CivilWarService extends Service {
 	int nextUpdateTime(LocalDate now) {
 		LocalDate nextUpdateDate = now.with(TemporalAdjusters.next(updateWeekDay));
 		
-		return (int) nextUpdateDate.toEpochSecond(updateTime, updateOffset);
+		return (int) nextUpdateDate.atStartOfDay().plus(updateTime.toSecondOfDay(), ChronoUnit.SECONDS).toEpochSecond(updateOffset);
 	}
 	
 	boolean isDecayRank(int rank) {
@@ -194,7 +191,7 @@ final class CivilWarService extends Service {
 	private void scheduleRankUpdate() {
 		LocalDate nowDate = LocalDate.now();
 		LocalTime nowTime = LocalTime.now();
-		int nowEpoch = (int) nowDate.toEpochSecond(nowTime, updateOffset);
+		int nowEpoch = (int) nowDate.atStartOfDay().plus(nowTime.toSecondOfDay(), ChronoUnit.SECONDS).toEpochSecond(updateOffset);
 		rankEpoch = nextUpdateTime(nowDate);    // Is in the future
 		
 		int delay = (rankEpoch - nowEpoch) * 1000;    // Must be milliseconds
@@ -346,6 +343,7 @@ final class CivilWarService extends Service {
 		SystemMessageIntent.broadcastPersonal(receiver.getOwner(), prose);
 	}
 	
+	@IntentHandler
 	private void handleCivilWarPointIntent(CivilWarPointIntent cwpi) {
 		int points = cwpi.getPoints();
 		PlayerObject receiver = cwpi.getReceiver();
@@ -354,6 +352,7 @@ final class CivilWarService extends Service {
 		grantPoints(prose, receiver, points);
 	}
 	
+	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
 		CreatureObject corpseCreature = cki.getCorpse();
 		CreatureObject killerCreature = cki.getKiller();
@@ -410,6 +409,7 @@ final class CivilWarService extends Service {
 		grantPoints(prose, killerPlayer, granted);
 	}
 	
+	@IntentHandler
 	private void handleFactionIntent(FactionIntent fi) {
 		if (fi.getUpdateType() != FactionIntent.FactionIntentType.FACTIONUPDATE) {
 			return;
@@ -443,6 +443,7 @@ final class CivilWarService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject object = doi.getObject();
 		
@@ -453,6 +454,7 @@ final class CivilWarService extends Service {
 		playerObjects.remove(object);
 	}
 	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
 		

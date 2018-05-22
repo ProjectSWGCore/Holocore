@@ -26,10 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.resource.galactic;
 
-import java.util.Random;
-
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
+
+import java.util.Random;
 
 public class GalacticResourceStats implements Persistable {
 	

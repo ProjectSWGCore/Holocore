@@ -26,12 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.object;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 public class ContainerTransferIntent extends Intent {
 	
@@ -39,28 +37,28 @@ public class ContainerTransferIntent extends Intent {
 	private SWGObject container;
 	private SWGObject oldContainer;
 	
-	public ContainerTransferIntent(@Nonnull SWGObject obj, @CheckForNull SWGObject oldContainer, @CheckForNull SWGObject container) {
+	public ContainerTransferIntent(@NotNull SWGObject obj, @Nullable SWGObject oldContainer, @Nullable SWGObject container) {
 		this.obj = obj;
 		this.oldContainer = oldContainer;
 		this.container = container;
 	}
 	
-	@Nonnull
+	@NotNull
 	public SWGObject getObject() {
 		return obj;
 	}
 	
-	@CheckForNull
+	@Nullable
 	public SWGObject getContainer() {
 		return container;
 	}
 	
-	@CheckForNull
+	@Nullable
 	public SWGObject getOldContainer() {
 		return oldContainer;
 	}
 	
-	public static void broadcast(@Nonnull SWGObject obj, @CheckForNull SWGObject oldContainer, @CheckForNull SWGObject newContainer) {
+	public static void broadcast(@NotNull SWGObject obj, @Nullable SWGObject oldContainer, @Nullable SWGObject newContainer) {
 		new ContainerTransferIntent(obj, oldContainer, newContainer).broadcast();
 	}
 	

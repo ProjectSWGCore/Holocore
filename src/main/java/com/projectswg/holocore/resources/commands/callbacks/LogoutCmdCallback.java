@@ -26,15 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.commands.callbacks;
 
-import java.util.concurrent.TimeUnit;
-
-import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.connection.ForceLogoutIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
@@ -44,6 +38,10 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.control.IntentChain;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.util.concurrent.TimeUnit;
 
 public class LogoutCmdCallback implements ICmdCallback {
 	

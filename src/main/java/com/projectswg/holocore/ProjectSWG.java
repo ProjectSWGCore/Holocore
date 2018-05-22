@@ -26,19 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore;
 
-import com.projectswg.common.concurrency.Delay;
-import com.projectswg.common.control.IntentManager;
-import com.projectswg.common.control.IntentManager.IntentSpeedRecord;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.debug.Log.LogLevel;
-import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
-import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
 import com.projectswg.holocore.intents.server.ServerStatusIntent;
 import com.projectswg.holocore.resources.control.ServerStatus;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.CoreManager;
+import me.joshlarson.jlcommon.concurrency.Delay;
+import me.joshlarson.jlcommon.control.IntentManager;
+import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedRecord;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 
 import java.io.File;
 import java.lang.Thread.State;
@@ -93,7 +92,7 @@ public class ProjectSWG {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new ConsoleLogWrapper());
 		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
 		
 		Log.i("Holocore version: %s", VERSION);
@@ -156,7 +155,7 @@ public class ProjectSWG {
 		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
 		Collections.sort(intentTimes);
 		Log.i("    Intent Times: [%d]", intentTimes.size());
-		Log.i("        %-30s%-40s%-10s%-20s%-10s", "Intent", "Receiver", "Count", "Time", "Priority");
+		Log.i("        %-30s%-40s%-10s%-20s", "Intent", "Receiver", "Count", "Time");
 		for (IntentSpeedRecord record : intentTimes) {
 			String receiverName = record.getConsumer().getClass().getName();
 			if (receiverName.indexOf('$') != -1)
@@ -165,8 +164,7 @@ public class ProjectSWG {
 			String intentName = record.getIntent().getSimpleName();
 			String recordCount = Long.toString(record.getCount());
 			String recordTime = String.format("%.6fms", record.getTime() / 1E6);
-			String priority = Integer.toString(record.getPriority());
-			Log.i("        %-30s%-40s%-10s%-20s%-10s", intentName, receiverName, recordCount, recordTime, priority);
+			Log.i("        %-30s%-40s%-10s%-20s", intentName, receiverName, recordCount, recordTime);
 		}
 	}
 	

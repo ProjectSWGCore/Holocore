@@ -1,91 +1,28 @@
-/***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
- *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
- * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
- *                                                                                 *
- * This file is part of Holocore.                                                  *
- *                                                                                 *
- * --------------------------------------------------------------------------------*
- *                                                                                 *
- * Holocore is free software: you can redistribute it and/or modify                *
- * it under the terms of the GNU Affero General Public License as                  *
- * published by the Free Software Foundation, either version 3 of the              *
- * License, or (at your option) any later version.                                 *
- *                                                                                 *
- * Holocore is distributed in the hope that it will be useful,                     *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
- * GNU Affero General Public License for more details.                             *
- *                                                                                 *
- * You should have received a copy of the GNU Affero General Public License        *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
- ***********************************************************************************/
-package com.projectswg.holocore.services.experience;
+package com.projectswg.holocore.services.experience.skills;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
-
 import com.projectswg.holocore.intents.SetTitleIntent;
 import com.projectswg.holocore.intents.SkillModIntent;
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.objects.player.PlayerObject;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
-/**
- *
- * @author Mads
- */
-public final class SkillManager extends Manager {
+import java.util.HashMap;
+import java.util.Map;
+
+public class SkillService extends Service {
 	
-	// Maps icon index to qualifying skill.
-	private final Map<Integer, Set<String>> roleIconMap;
 	private final Map<String, SkillData> skillDataMap;
 	
-	public SkillManager() {
-		roleIconMap = new HashMap<>();
+	public SkillService() {
 		skillDataMap = new HashMap<>();
-		
-		addChildService(new ExpertiseService());
-		
-		registerForIntent(GrantSkillIntent.class, this::handleGrantSkillIntent);
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(SetTitleIntent.class, this::handleSetTitleIntent);
 	}
 	
 	@Override
 	public boolean initialize() {
-		DatatableData roleIconTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/role/role.iff");
-		
-		for (int i = 0; i < roleIconTable.getRowCount(); i++) {
-			int iconIndex = (int) roleIconTable.getCell(i, 0);
-			String qualifyingSkill = (String) roleIconTable.getCell(i, 2);
-			
-			Set<String> qualifyingSkills = roleIconMap.computeIfAbsent(iconIndex, k -> new HashSet<>());
-			
-			qualifyingSkills.add(qualifyingSkill);
-		}
-		
-		loadSkills();
-		
-		return super.initialize();
-	}
-	
-	private void loadSkills() {
 		DatatableData skillsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill/skills.iff");
 		
 		for (int i = 0; i < skillsTable.getRowCount(); i++) {
@@ -110,6 +47,10 @@ public final class SkillManager extends Manager {
 			
 			skillDataMap.put(skillName, skillData);
 		}
+		return true;
+	}
+	
+	private void loadSkills() {
 	}
 	
 	private String [] splitCsv(String str) {
@@ -120,6 +61,7 @@ public final class SkillManager extends Manager {
 		return str.split(",");
 	}
 	
+	@IntentHandler
 	private void handleGrantSkillIntent(GrantSkillIntent gsi) {
 		if (gsi.getIntentType() != GrantSkillIntent.IntentType.GRANT) {
 			return;
@@ -141,14 +83,7 @@ public final class SkillManager extends Manager {
 		grantSkill(skillData, skillName, target);
 	}
 	
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket SWGPacket = gpi.getPacket();
-		if (SWGPacket instanceof ChangeRoleIconChoice) {
-			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) SWGPacket;
-			changeRoleIcon(gpi.getPlayer().getCreatureObject(), iconChoice.getIconChoice());
-		}
-	}
-	
+	@IntentHandler
 	private void handleSetTitleIntent(SetTitleIntent sti) {
 		String title = sti.getTitle();
 		
@@ -204,23 +139,6 @@ public final class SkillManager extends Manager {
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillName, target, false).broadcast();
-	}
-	
-	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
-		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
-		if (qualifyingSkills == null) {
-			Log.w("%s tried to use undefined role icon %d", creature, chosenIcon);
-			return;
-		}
-		Assert.notNull(creature.getPlayerObject());
-		
-		for (String qualifyingSkill : qualifyingSkills) {
-			if (creature.hasSkill(qualifyingSkill)) {
-				creature.getPlayerObject().setProfessionIcon(chosenIcon);
-				return;
-			}
-		}
-		Log.e("%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
 	}
 	
 	private static class SkillData {

@@ -26,11 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.dev;
 
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.objects.SWGObject;
@@ -38,6 +36,7 @@ import com.projectswg.holocore.resources.objects.custom.RandomAIObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.control.Service;
 
 public class DeveloperService extends Service {
 	

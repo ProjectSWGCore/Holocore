@@ -26,11 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.chat;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class SystemMessageIntent extends Intent {
 	

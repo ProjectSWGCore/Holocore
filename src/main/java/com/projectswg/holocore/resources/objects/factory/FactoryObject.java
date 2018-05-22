@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.objects.factory;
 
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 
 public class FactoryObject extends TangibleObject {

@@ -26,17 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.network;
 
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import com.projectswg.common.debug.Log;
 
 
 /**

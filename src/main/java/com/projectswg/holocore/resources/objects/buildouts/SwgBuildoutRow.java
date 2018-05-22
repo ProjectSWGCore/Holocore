@@ -26,11 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.buildouts;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SwgBuildoutRow {
 	

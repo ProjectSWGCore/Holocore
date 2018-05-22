@@ -26,23 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.experience;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ExpertiseRequestMessage;
-
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.experience.LevelChangedIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
@@ -51,12 +40,23 @@ import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
+import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Mads
  */
-public final class ExpertiseService extends Service {
+public class ExperienceExpertiseService extends Service {
 	
 	private static final String EXPERTISE_ABILITIES_QUERY = "SELECT * FROM expertise_abilities";
 	
@@ -65,15 +65,11 @@ public final class ExpertiseService extends Service {
 	private final Map<String, Collection<String[]>> expertiseAbilities;	// Expertise skill to abilities
 	private final Map<Integer, Integer> pointsForLevel;	// Level to points available
 	
-	public ExpertiseService() {
+	public ExperienceExpertiseService() {
 		trees = new HashMap<>();
 		expertiseSkills = new HashMap<>();
 		expertiseAbilities = new HashMap<>();
 		pointsForLevel = new HashMap<>();
-		
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(LevelChangedIntent.class, this::handleLevelChangedIntent);
-		registerForIntent(GrantSkillIntent.class, this::handleGrantSkillIntent);
 	}
 
 	@Override
@@ -164,6 +160,7 @@ public final class ExpertiseService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		
@@ -213,6 +210,7 @@ public final class ExpertiseService extends Service {
 		checkExtraAbilities(creatureObject);
 	}
 	
+	@IntentHandler
 	private void handleLevelChangedIntent(LevelChangedIntent lci) {
 		int newLevel = lci.getNewLevel();
 		CreatureObject creatureObject = lci.getCreatureObject();
@@ -229,6 +227,7 @@ public final class ExpertiseService extends Service {
 		checkExtraAbilities(creatureObject);
 	}
 	
+	@IntentHandler
 	private void handleGrantSkillIntent(GrantSkillIntent gsi) {
 		if (gsi.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
 			return;

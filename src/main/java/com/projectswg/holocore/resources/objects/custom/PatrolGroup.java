@@ -26,11 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.custom;
 
+import com.projectswg.holocore.resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.projectswg.holocore.resources.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
 
 public class PatrolGroup {
 	

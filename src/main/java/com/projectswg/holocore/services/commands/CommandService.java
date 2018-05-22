@@ -26,19 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.commands;
 
-import java.io.File;
-import java.util.List;
-import java.util.Locale;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.network.GalacticPacketIntent;
 import com.projectswg.holocore.intents.player.PlayerTransformedIntent;
@@ -46,30 +39,7 @@ import com.projectswg.holocore.resources.commands.CombatCommand;
 import com.projectswg.holocore.resources.commands.Command;
 import com.projectswg.holocore.resources.commands.DefaultPriority;
 import com.projectswg.holocore.resources.commands.ICmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.AdminTeleportCallback;
-import com.projectswg.holocore.resources.commands.callbacks.AttributesCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.ChangeDanceCallback;
-import com.projectswg.holocore.resources.commands.callbacks.FindFriendCallback;
-import com.projectswg.holocore.resources.commands.callbacks.FlourishCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.GotoCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.JumpCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.KneelCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.LogoutCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.PlayerAppearanceCallback;
-import com.projectswg.holocore.resources.commands.callbacks.ProneCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.QaToolCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.RequestBiographyCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.RequestDraftSlotsCallback;
-import com.projectswg.holocore.resources.commands.callbacks.RequestWaypointCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.RevertAppearanceCallback;
-import com.projectswg.holocore.resources.commands.callbacks.ServerCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.ServerDestroyObjectCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.SitOnObjectCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.SocialInternalCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.StandCmdCallback;
-import com.projectswg.holocore.resources.commands.callbacks.StartDanceCallback;
-import com.projectswg.holocore.resources.commands.callbacks.TransferItemCallback;
-import com.projectswg.holocore.resources.commands.callbacks.WaypointCmdCallback;
+import com.projectswg.holocore.resources.commands.callbacks.*;
 import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
@@ -91,6 +61,12 @@ import com.projectswg.holocore.scripts.commands.survey.CmdRequestCoreSample;
 import com.projectswg.holocore.scripts.commands.survey.CmdRequestSurvey;
 import com.projectswg.holocore.services.commands.CommandLauncher.EnqueuedCommand;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
 
 public class CommandService extends Service {
 	

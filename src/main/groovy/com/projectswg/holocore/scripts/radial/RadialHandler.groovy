@@ -89,7 +89,7 @@ class RadialHandler {
 		getHandler(target).handleSelection(player, target, selection)
 	}
 	
-	@Nonnull
+	@NotNull
 	private static def getHandler(SWGObject target) {
 		def type = target.getTemplate()
 		RadialHandlerInterface handler = handlers.get(type)

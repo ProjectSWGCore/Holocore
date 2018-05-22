@@ -26,25 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.building;
 
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.objects.SWGObject;
+import com.projectswg.holocore.resources.objects.cell.CellObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
+import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.cell.CellObject;
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.objects.ObjectCreator;
 
 public class BuildingObject extends TangibleObject {
 	

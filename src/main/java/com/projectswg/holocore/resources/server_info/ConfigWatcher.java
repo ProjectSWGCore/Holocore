@@ -26,38 +26,31 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info;
 
+import com.projectswg.common.data.info.Config;
+import com.projectswg.holocore.intents.server.ConfigChangedIntent;
+import com.projectswg.holocore.resources.config.ConfigFile;
+import me.joshlarson.jlcommon.concurrency.BasicThread;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.projectswg.common.concurrency.PswgBasicThread;
-import com.projectswg.common.data.info.Config;
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.intents.server.ConfigChangedIntent;
-import com.projectswg.holocore.resources.config.ConfigFile;
 
 public final class ConfigWatcher {
 	
 	private static final String CFGPATH = "cfg/";
 	
 	private final Map<ConfigFile, Config> configMap;
-	private final PswgBasicThread watcherThread;
+	private final BasicThread watcherThread;
 	private final AtomicBoolean running;
 	
 	private WatchService watcher;
 	
 	public ConfigWatcher(Map<ConfigFile, Config> configMap) {
 		this.configMap = configMap;
-		this.watcherThread = new PswgBasicThread("config-watcher", this::watch);
+		this.watcherThread = new BasicThread("config-watcher", this::watch);
 		this.running = new AtomicBoolean(false);
 		
 		try {

@@ -26,22 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.player;
 
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.login.AccountFeatureBits;
 import com.projectswg.common.network.packets.swg.login.ClientIdMsg;
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage;
 import com.projectswg.common.network.packets.swg.login.ConnectionServerLagResponse;
-import com.projectswg.common.network.packets.swg.zone.HeartBeat;
-import com.projectswg.common.network.packets.swg.zone.LagRequest;
-import com.projectswg.common.network.packets.swg.zone.SetWaypointColor;
-import com.projectswg.common.network.packets.swg.zone.ShowBackpack;
-import com.projectswg.common.network.packets.swg.zone.ShowHelmet;
+import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
-
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.GalacticIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
@@ -58,6 +51,8 @@ import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.player.zone.ZoneRequester;
+import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.log.Log;
 
 public class ZoneManager extends Manager {
 	

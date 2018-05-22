@@ -26,15 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects.custom;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.projectswg.common.data.location.Location;
-
 import com.projectswg.holocore.intents.object.MoveObjectIntent;
 import com.projectswg.holocore.resources.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.spawn.Spawner.ResolvedPatrolWaypoint;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * AI object that patrols the specified route

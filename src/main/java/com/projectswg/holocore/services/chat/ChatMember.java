@@ -27,7 +27,6 @@
 package com.projectswg.holocore.services.chat;
 
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
-
 import com.projectswg.holocore.resources.player.Player;
 
 public class ChatMember {

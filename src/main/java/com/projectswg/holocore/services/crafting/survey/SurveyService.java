@@ -26,12 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.crafting.survey;
 
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
-
 import com.projectswg.holocore.intents.crafting.survey.SampleResourceIntent;
 import com.projectswg.holocore.intents.crafting.survey.StartSurveyToolIntent;
 import com.projectswg.holocore.intents.crafting.survey.StartSurveyingIntent;
@@ -41,6 +38,9 @@ import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResou
 import com.projectswg.holocore.services.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.services.crafting.resource.raw.RawResource;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 /**
  * In charge of responding to survey requests
@@ -53,13 +53,10 @@ public class SurveyService extends Service {
 	public SurveyService() {
 		this.inProgressSurveyManager = new InProgressSurveyManager();
 		this.inProgressSampleManager = new InProgressSampleManager();
-		
-		registerForIntent(StartSurveyToolIntent.class, this::handleSurveyToolOpened);
-		registerForIntent(StartSurveyingIntent.class, this::handleStartSurveyingIntent);
-		registerForIntent(SampleResourceIntent.class, this::handleStartSamplingIntent);
 	}
 	
-	private void handleSurveyToolOpened(StartSurveyToolIntent ssti) {
+	@IntentHandler
+	private void handleStartSurveyToolIntent(StartSurveyToolIntent ssti) {
 		CreatureObject creature = ssti.getCreature();
 		SWGObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
@@ -75,10 +72,12 @@ public class SurveyService extends Service {
 		creature.getOwner().sendPacket(survey);
 	}
 	
+	@IntentHandler
 	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
 		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getResource());
 	}
 	
+	@IntentHandler
 	private void handleStartSamplingIntent(SampleResourceIntent sri) {
 		inProgressSampleManager.startSession(sri.getCreature(), sri.getResource());
 	}

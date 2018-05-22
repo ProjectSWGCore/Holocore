@@ -26,15 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy.travel;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.projectswg.common.concurrency.PswgThreadPool;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.Config;
@@ -42,8 +33,6 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.debug.Log;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
@@ -57,17 +46,23 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.services.galaxy.travel.TravelGroup.ShuttleStatus;
+import me.joshlarson.jlcommon.concurrency.ThreadPool;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 class TravelHelper {
 	
 	private final Map<String, TravelGroup> travel;
-	private final PswgThreadPool travelExecutor;
+	private final ThreadPool travelExecutor;
 	private final AllowedRouteManager routeManager;
 	private final TravelPointManager pointManager;
 	
 	public TravelHelper() {
 		this.travel = new HashMap<>();
-		this.travelExecutor = new PswgThreadPool(3, "travel-shuttles-%d");
+		this.travelExecutor = new ThreadPool(3, "travel-shuttles-%d");
 		this.routeManager = new AllowedRouteManager();
 		this.pointManager = new TravelPointManager();
 		
@@ -126,7 +121,7 @@ class TravelHelper {
 	public void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
 		SWGObject ticket = SpecificObject.SO_TRAVEL_TICKET.createType();
-		Log.v("Granting ticket for departure: %s/%s  and destination: %s/%s", departure.getLocation(), departure.getName(), destination.getLocation(), destination.getName());
+		Log.t("Granting ticket for departure: %s/%s  and destination: %s/%s", departure.getLocation(), departure.getName(), destination.getLocation(), destination.getName());
 		
 		// Departure attributes
 		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getTerrain().getName());

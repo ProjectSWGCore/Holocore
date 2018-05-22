@@ -26,26 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.object;
 
-import com.projectswg.common.control.Intent;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
-
-import javax.annotation.Nonnull;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class ForceAwarenessUpdateIntent extends Intent {
 	
 	private final SWGObject obj;
 	
-	public ForceAwarenessUpdateIntent(@Nonnull SWGObject obj) {
+	public ForceAwarenessUpdateIntent(@NotNull SWGObject obj) {
 		this.obj = obj;
 	}
 	
-	@Nonnull
+	@NotNull
 	public SWGObject getObject() {
 		return obj;
 	}
 	
-	public static void broadcast(@Nonnull SWGObject obj) {
+	public static void broadcast(@NotNull SWGObject obj) {
 		new ForceAwarenessUpdateIntent(obj).broadcast();
 	}
 	

@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.commands.callbacks;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.object.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.commands.ICmdCallback;

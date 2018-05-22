@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.object;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.location.Location;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class ObjectTeleportIntent extends Intent {
 	

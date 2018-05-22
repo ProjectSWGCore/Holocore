@@ -27,14 +27,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.collections;
 
-
-import java.util.BitSet;
-
-import com.projectswg.common.control.Manager;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-
 import com.projectswg.holocore.intents.GrantBadgeIntent;
 import com.projectswg.holocore.intents.GrantClickyCollectionIntent;
 import com.projectswg.holocore.intents.SetTitleIntent;
@@ -46,6 +41,9 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.utilities.IntentFactory;
+import me.joshlarson.jlcommon.control.Manager;
+
+import java.util.BitSet;
 
 public class CollectionBadgeManager extends Manager {
 

@@ -30,7 +30,6 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-
 import com.projectswg.holocore.resources.collections.SWGMap;
 import com.projectswg.holocore.resources.collections.SWGSet;
 import com.projectswg.holocore.resources.network.BaselineBuilder;

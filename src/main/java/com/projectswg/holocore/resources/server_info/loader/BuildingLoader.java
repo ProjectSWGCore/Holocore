@@ -26,18 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.server_info.loader;
 
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.holocore.resources.server_info.SdbLoader;
+import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
-
-import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
-
-import com.projectswg.holocore.resources.server_info.SdbLoader;
-import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 
 public class BuildingLoader {
 	
@@ -81,7 +80,7 @@ public class BuildingLoader {
 		private final Terrain terrain;
 		
 		public BuildingLoaderInfo(SdbResultSet set) {
-			this.name = set.getText(0);
+			this.name = set.getText(0).intern();
 			this.id = set.getInt(2);
 			this.terrain = Terrain.valueOf(set.getText(1));
 		}

@@ -26,20 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.objects;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.projectswg.common.control.Service;
 import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
-
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.object.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
@@ -54,6 +46,13 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.server_info.StandardLog;
+import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author mads

@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.common.control.IntentManager;
+import me.joshlarson.jlcommon.control.IntentManager;
 
 import com.projectswg.holocore.resources.TestResources;
 import com.projectswg.holocore.resources.server_info.DataManager;

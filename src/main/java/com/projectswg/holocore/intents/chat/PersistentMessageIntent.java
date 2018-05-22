@@ -26,10 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.chat;
 
-import com.projectswg.common.control.Intent;
 import com.projectswg.common.data.encodables.player.Mail;
-
 import com.projectswg.holocore.resources.objects.SWGObject;
+import me.joshlarson.jlcommon.control.Intent;
 
 public class PersistentMessageIntent extends Intent {
 	
