@@ -3,13 +3,14 @@ package com.projectswg.holocore.services.chat;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatFriendsListUpdate;
+import com.projectswg.holocore.intents.NotifyPlayersPacketIntent;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.ChatAvatarRequestIntent;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -70,7 +71,7 @@ public class ChatFriendService extends Service {
 		}
 		
 		String name = player.getCharacterFirstName().toLowerCase(Locale.US);
-		player.getPlayerManager().notifyPlayers(p -> p.getPlayerState() == PlayerState.ZONED_IN && p.getPlayerObject().isFriend(name), new ChatFriendsListUpdate(new ChatAvatar(name), online));
+		new NotifyPlayersPacketIntent(new ChatFriendsListUpdate(new ChatAvatar(name), online), null, p -> p.getPlayerState() == PlayerState.ZONED_IN && p.getPlayerObject().isFriend(name)).broadcast();
 	}
 	
 	private void sendTargetAvatarStatus(Player player, ChatAvatar target) {
@@ -92,7 +93,7 @@ public class ChatFriendService extends Service {
 			return;
 		}
 		
-		if (!player.getPlayerManager().playerExists(target)) {
+		if (!PlayerLookup.doesCharacterExistByFirstName(target)) {
 			sendSystemMessage(player, "@cmnty:friend_not_found", target);
 			return;
 		}
@@ -125,7 +126,7 @@ public class ChatFriendService extends Service {
 		if (target.equalsIgnoreCase(player.getCharacterFirstName()))
 			return;
 		
-		if (!player.getPlayerManager().playerExists(target)) {
+		if (!PlayerLookup.doesCharacterExistByFirstName(target)) {
 			sendSystemMessage(player, "@cmnty:ignore_not_found", target);
 			return;
 		}

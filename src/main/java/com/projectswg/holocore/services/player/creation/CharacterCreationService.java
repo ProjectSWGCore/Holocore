@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.player;
+package com.projectswg.holocore.services.player.creation;
 
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalDatabase;
@@ -35,7 +35,7 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.login.creation.*;
 import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
-import com.projectswg.holocore.intents.GalacticIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.player.CreatedCharacterIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
@@ -45,10 +45,10 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.zone.NameFilter;
-import com.projectswg.holocore.services.objects.ObjectManager;
-import com.projectswg.holocore.services.player.TerrainZoneInsertion.SpawnInformation;
-import com.projectswg.holocore.services.player.creation.CharacterCreation;
+import com.projectswg.holocore.services.player.zone.TerrainZoneInsertion;
+import com.projectswg.holocore.services.player.zone.TerrainZoneInsertion.SpawnInformation;
 import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -117,13 +117,16 @@ public class CharacterCreationService extends Service {
 		return super.terminate();
 	}
 	
-	public void handlePacket(GalacticIntent intent, Player player, SWGPacket p) {
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
+		Player player = gpi.getPlayer();
+		SWGPacket p = gpi.getPacket();
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)
-			handleApproveNameRequest(intent.getPlayerManager(), player, (ClientVerifyAndLockNameRequest) p);
+			handleApproveNameRequest(player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
-			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
+			handleCharCreation(player, (ClientCreateCharacter) p);
 	}
 	
 	public boolean characterExistsForName(String name) {
@@ -169,7 +172,7 @@ public class CharacterCreationService extends Service {
 		player.sendPacket(response);
 	}
 	
-	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
+	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
@@ -185,19 +188,19 @@ public class CharacterCreationService extends Service {
 		player.sendPacket(new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
-	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		CreatureObject creature = tryCharacterCreation(objManager, player, create);
+	private void handleCharCreation(Player player, ClientCreateCharacter create) {
+		CreatureObject creature = tryCharacterCreation(player, create);
 		if (creature == null)
 			return; // Unable to successfully create character
-		Assert.notNull(creature.getPlayerObject());
-		Assert.test(creature.isPlayer());
-		Assert.test(creature.getObjectId() > 0);
+		assert creature.getPlayerObject() != null;
+		assert creature.isPlayer();
+		assert creature.getObjectId() > 0;
 		Log.i("%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
 		player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 		new CreatedCharacterIntent(creature).broadcast(); //Replaced PlayerEventIntent(PE_CREATE_CHARACTER)
 	}
 	
-	private CreatureObject tryCharacterCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+	private CreatureObject tryCharacterCreation(Player player, ClientCreateCharacter create) {
 		// Valid Name
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err != ErrorMessage.NAME_APPROVED) {
@@ -216,7 +219,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		// Test for successful creation
-		CreatureObject creature = createCharacter(objManager, player, create);
+		CreatureObject creature = createCharacter(player, create);
 		if (creature == null) {
 			Log.e("Failed to create CreatureObject!");
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
@@ -316,14 +319,14 @@ public class CharacterCreationService extends Service {
 		return ErrorMessage.NAME_APPROVED;
 	}
 	
-	private CreatureObject createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+	private CreatureObject createCharacter(Player player, ClientCreateCharacter create) {
 		String spawnLocation = DataManager.getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
 		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
 		if (info == null) {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
-		CharacterCreation creation = new CharacterCreation(objManager, profTemplates.get(create.getClothes()), create);
+		CharacterCreation creation = new CharacterCreation(profTemplates.get(create.getClothes()), create);
 		return creation.createCharacter(player.getAccessLevel(), info);
 	}
 	

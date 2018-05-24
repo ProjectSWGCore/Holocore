@@ -33,7 +33,7 @@ import com.projectswg.holocore.resources.player.AccessLevel
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	if (player.getAccessLevel() == AccessLevel.PLAYER) {
 		SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(")
 		return

@@ -31,5 +31,5 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 
 public interface ICmdCallback {
-	void execute(GalacticManager galacticManager, Player player, SWGObject target, String args);
+	void execute(Player player, SWGObject target, String args);
 }

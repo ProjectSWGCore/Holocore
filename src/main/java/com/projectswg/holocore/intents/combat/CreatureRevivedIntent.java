@@ -24,30 +24,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.network;
+package com.projectswg.holocore.intents.combat;
 
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.holocore.intents.GalacticIntent;
-import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
-public class GalacticPacketIntent extends GalacticIntent {
+public class CreatureRevivedIntent extends Intent {
 	
-	private final SWGPacket packet;
-	private final Player player;
+	private final CreatureObject creature;
 	
-	public GalacticPacketIntent(@NotNull SWGPacket packet, @NotNull Player player) {
-		this.packet = packet;
-		this.player = player;
+	public CreatureRevivedIntent(@NotNull CreatureObject creature) {
+		this.creature = creature;
 	}
 	
 	@NotNull
-	public SWGPacket getPacket() {
-		return packet;
+	public CreatureObject getCreature() {
+		return creature;
 	}
 	
-	@NotNull
-	public Player getPlayer() {
-		return player;
+	public static void broadcast(@NotNull CreatureObject creature) {
+		new CreatureRevivedIntent(creature).broadcast();
 	}
 	
 }

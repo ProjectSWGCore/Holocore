@@ -45,8 +45,7 @@ import com.projectswg.holocore.scripts.radial.object.UsableObjectRadial
 import com.projectswg.holocore.scripts.radial.object.survey.ObjectSurveyToolRadial
 import com.projectswg.holocore.scripts.radial.object.uniform.ObjectUniformBoxRadial
 import com.projectswg.holocore.scripts.radial.terminal.*
-
-import javax.annotation.Nonnull
+import org.jetbrains.annotations.NotNull
 
 class RadialHandler {
 	private static Map<String, RadialHandlerInterface> handlers = new HashMap<>()

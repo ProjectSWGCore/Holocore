@@ -34,6 +34,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.objects.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicReference;
 

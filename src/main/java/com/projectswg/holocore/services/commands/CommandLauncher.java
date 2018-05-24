@@ -160,20 +160,18 @@ public class CommandLauncher {
 		// TODO: Handle for different targetType
 		
 		if (command.hasJavaCallback()) {
-			command.getJavaCallback().execute(enqueued.getGalacticManager(), player, enqueued.getTarget(), enqueued.getRequest().getArguments());
+			command.getJavaCallback().execute(player, enqueued.getTarget(), enqueued.getRequest().getArguments());
 		}
 	}
 	
 	public static class EnqueuedCommand implements Comparable<EnqueuedCommand> {
 		
 		private final Command command;
-		private final GalacticManager galacticManager;
 		private final SWGObject target;
 		private final CommandQueueEnqueue request;
 		
-		public EnqueuedCommand(Command command, GalacticManager galacticManager, SWGObject target, CommandQueueEnqueue request) {
+		public EnqueuedCommand(Command command, SWGObject target, CommandQueueEnqueue request) {
 			this.command = command;
-			this.galacticManager = galacticManager;
 			this.target = target;
 			this.request = request;
 		}
@@ -185,10 +183,6 @@ public class CommandLauncher {
 		
 		public Command getCommand() {
 			return command;
-		}
-		
-		public GalacticManager getGalacticManager() {
-			return galacticManager;
 		}
 		
 		public SWGObject getTarget() {

@@ -26,21 +26,28 @@
  ***********************************************************************************/
 package com.projectswg.holocore;
 
+import com.projectswg.common.data.encodables.chat.ChatAvatar;
+import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
+import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.intents.server.ServerStatusIntent;
+import com.projectswg.holocore.resources.config.ConfigFile;
 import com.projectswg.holocore.resources.control.ServerStatus;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.services.CoreManager;
+import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedRecord;
 import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.Log.LogLevel;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 
 import java.io.File;
 import java.lang.Thread.State;
+import java.time.OffsetTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -50,6 +57,7 @@ public class ProjectSWG {
 	
 	public static final String VERSION = "APR18";
 	
+	private static final Galaxy GALAXY = new Galaxy();
 	private static final AtomicBoolean SHUTDOWN_HOOK = new AtomicBoolean(false);
 	private static final AtomicReference<ProjectSWG> INSTANCE = new AtomicReference<>(null);
 	
@@ -72,14 +80,6 @@ public class ProjectSWG {
 	}
 	
 	/**
-	 * Returns the time in milliseconds since the server started initialization
-	 * @return the core time represented as a double
-	 */
-	public static long getCoreTime() {
-		return (long) INSTANCE.get().manager.getCoreTime();
-	}
-	
-	/**
 	 * Returns the server's galactic time. This is the official time sent to
 	 * the client and should be used for any official client-time purposes.
 	 * @return the server's galactic time in seconds
@@ -88,11 +88,15 @@ public class ProjectSWG {
 		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
 	}
 	
+	public static Galaxy getGalaxy() {
+		return GALAXY;
+	}
+	
 	private static void mainThread(String [] args) {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		Log.addWrapper(new ConsoleLogWrapper());
+		Log.addWrapper(new ConsoleLogWrapper(LogLevel.DATA));
 		Log.addWrapper(new FileLogWrapper(new File("log/log.txt")));
 		
 		Log.i("Holocore version: %s", VERSION);
@@ -135,11 +139,13 @@ public class ProjectSWG {
 		IntentManager.getInstance().initialize();
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
+		setupGalaxy();
 	}
 	
 	private static void shutdownStaticClasses() {
 		DataManager.terminate();
 		IntentManager.getInstance().terminate();
+		ScheduledUtilities.shutdown();
 	}
 	
 	private static void printFinalPswgState() {
@@ -179,21 +185,16 @@ public class ProjectSWG {
 	private void run(String [] args) {
 		setupParameters(args);
 		create();
-		while (!shutdownRequested && !manager.isShutdownRequested()) {
-			initialize();
-			start();
-			loop();
-			stop();
-			terminate();
-			if (!shutdownRequested && !manager.isShutdownRequested()) {
-				create();
-			}
-		}
+		initialize();
+		start();
+		loop();
+		stop();
+		terminate();
 	}
 	
 	private void setupParameters(String [] args) {
 		Map<String, String> params = getParameters(args);
-		this.adminServerPort = safeParseInt(params.get("-adminServerPort"), -1);
+		GALAXY.setAdminServerPort(safeParseInt(params.get("-adminServerPort"), -1));
 	}
 	
 	private void setStatus(ServerStatus status) {
@@ -204,6 +205,7 @@ public class ProjectSWG {
 	private void create() {
 		long start = System.nanoTime();
 		manager = new CoreManager(adminServerPort);
+		manager.setIntentManager(IntentManager.getInstance());
 		long end = System.nanoTime();
 		Log.i("Created new manager in %.3fms", (end-start)/1E6);
 	}
@@ -211,27 +213,31 @@ public class ProjectSWG {
 	private void initialize() {
 		setStatus(ServerStatus.INITIALIZING);
 		Log.i("Initializing...");
+		long start = System.nanoTime();
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
-		Log.i("Initialized. Time: %.3fms", manager.getCoreTime());
+		long time = System.nanoTime() - start;
+		Log.i("Initialized. Time: %.3fms", time / 1E6);
 		initStatus = ServerInitStatus.INITIALIZED;
 		cleanupMemory();
 	}
 	
 	private void start() {
 		Log.i("Starting...");
+		long start = System.nanoTime();
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
-		Log.i("Started. Time: %.3fms", manager.getCoreTime());
+		long time = System.nanoTime() - start;
+		Log.i("Started. Time: %.3fms", time / 1E6);
 		initStatus = ServerInitStatus.STARTED;
 	}
 	
 	private void loop() {
-		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
+		setStatus(ServerStatus.OPEN);
 		
 		boolean initialIntentsCompleted = false;
 		long loop = 0;
-		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
+		while (!shutdownRequested && manager.isOperational()) {
 			if (!initialIntentsCompleted && IntentManager.getInstance().getIntentCount() == 0) {
 				Log.i("Intent queue empty.");
 				initialIntentsCompleted = true;
@@ -242,8 +248,8 @@ public class ProjectSWG {
 			if (loop % 12000 == 0 && initialIntentsCompleted) {// Approx every 10 mins, do a memory clean-up
 				cleanupMemory();
 			}
-			if (Delay.sleepMilli(50))
-				throw new CoreException("Main Thread Interrupted");
+			if (!Delay.sleepMilli(50))
+				break;
 			loop++;
 		}
 	}
@@ -254,11 +260,13 @@ public class ProjectSWG {
 		Log.i("Stopping...");
 		setStatus(ServerStatus.STOPPING);
 		initStatus = ServerInitStatus.STOPPED;
+		long start = System.nanoTime();
 		if (!manager.stop()) {
 			Log.e("Failed to stop.");
 			return;
 		}
-		Log.i("Stopped. Time: %.3fms", manager.getCoreTime());
+		long time = System.nanoTime() - start;
+		Log.i("Stopped. Time: %.3fms", time / 1E6);
 	}
 	
 	private void terminate() {
@@ -268,10 +276,12 @@ public class ProjectSWG {
 			return;
 		Log.i("Terminating...");
 		setStatus(ServerStatus.TERMINATING);
+		long start = System.nanoTime();
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
+		long time = System.nanoTime() - start;
 		setStatus(ServerStatus.OFFLINE);
-		Log.i("Terminated. Time: %.3fms", manager.getCoreTime());
+		Log.i("Terminated. Time: %.3fms", time / 1E6);
 	}
 	
 	private enum ServerInitStatus {
@@ -321,6 +331,24 @@ public class ProjectSWG {
 		} catch (NumberFormatException e) {
 			return def;
 		}
+	}
+	
+	private static void setupGalaxy() {
+		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
+		GALAXY.setId(1);
+		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
+		GALAXY.setAddress("");
+		GALAXY.setPopulation(0);
+		GALAXY.setZoneOffset(OffsetTime.now().getOffset());
+		GALAXY.setZonePort(0);
+		GALAXY.setPingPort(0);
+		GALAXY.setStatus(GalaxyStatus.DOWN);
+		GALAXY.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
+		GALAXY.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setRecommended(true);
+		
+		ChatAvatar.setGalaxy(GALAXY.getName());
 	}
 	
 	public static class CoreException extends RuntimeException {

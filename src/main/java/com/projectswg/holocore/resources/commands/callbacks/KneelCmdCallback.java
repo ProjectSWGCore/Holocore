@@ -37,7 +37,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
 public class KneelCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		if (creature.isPerforming()) {
 			new com.projectswg.holocore.intents.DanceIntent(player.getCreatureObject()).broadcast();

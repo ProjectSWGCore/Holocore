@@ -45,6 +45,8 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -261,6 +263,10 @@ public class TangibleObject extends SWGObject {
 	public void removeDefender(CreatureObject creature) {
 		if (defenders.remove(creature.getObjectId()))
 			defenders.sendDeltaMessage(this);
+	}
+	
+	public List<Long> getDefenders() {
+		return new ArrayList<>(defenders);
 	}
 	
 	public void clearDefenders() {

@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.server_info.SdbLoader;
 import com.projectswg.holocore.resources.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -51,8 +52,6 @@ public class StaticService extends Service {
 	
 	public StaticService() {
 		spawnableObjects = new HashMap<>();
-		
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
 	}
 	
 	@Override
@@ -89,6 +88,7 @@ public class StaticService extends Service {
 		StandardLog.onEndLoad(spawnableObjects.size(), "static objects", startTime);
 	}
 	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
 		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
@@ -143,7 +143,7 @@ public class StaticService extends Service {
 		}
 		
 		private SWGObject createObjectInParent(SWGObject parent) {
-			Assert.notNull(parent);
+			assert parent != null;
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.setLocation(Location.builder()
 					.setPosition(x, y, z)

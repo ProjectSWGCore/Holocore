@@ -35,12 +35,13 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.Random;
 
-final class RareLootService extends Service {
+public class RareLootService extends Service {
 	
 	// TODO these two could be config options
 	private static final short MAX_LEVEL_DIFFERENCE = 6;    // +-6 difference is allowed between killer and corpse
@@ -48,10 +49,9 @@ final class RareLootService extends Service {
 	
 	private final Random random;
 	
-	RareLootService() {
+	public RareLootService() {
 		random = new Random();
 		
-		registerForIntent(CreatureKilledIntent.class, this::handleCreatureKilled);
 		// TODO handle chest opening
 	}
 	
@@ -60,6 +60,38 @@ final class RareLootService extends Service {
 		// TODO load dataset
 		
 		return super.initialize();
+	}
+	
+	@IntentHandler
+	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
+		// TODO only the player that delivered the killing blow is considered for this
+		CreatureObject corpse = cki.getCorpse();
+		CreatureObject killer = cki.getKiller();
+		
+		if (!isPlayerEligible(killer.isPlayer(), corpse.isPlayer())) {
+			return;
+		}
+		
+		if (!isLevelEligible(corpse.getLevel(), killer.getLevel())) {
+			return;
+		}
+		
+		int roll = random.nextInt(100) + 1;    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
+		
+		if (!isDrop(roll)) {
+			Log.d("No RLS drop from %s with roll %d", corpse, roll);
+			return;
+		}
+		
+		String template = templateForDifficulty(corpse.getDifficulty());
+		SWGObject chest = ObjectCreator.createObjectFromTemplate(template);
+		SWGObject inventory = killer.getSlottedObject("inventory");
+		
+		chest.setStf("loot_n", chestIdForTemplate(template) + "_n");
+		chest.setDetailStf("loot_n", chestIdForTemplate(template) + "_d");    // Not located in loot_d, for whatever reason...
+		
+		chest.moveToContainer(inventory);
+		sendSuccessPackets(chest, corpse, killer);
 	}
 	
 	boolean isPlayerEligible(boolean killerPlayer, boolean corpsePlayer) {
@@ -104,37 +136,6 @@ final class RareLootService extends Service {
 		ShowLootBox box = new ShowLootBox(killer.getObjectId(), new long[] { chest.getObjectId() });
 		
 		killer.getOwner().sendPacket(effect, sound, box);
-	}
-	
-	private void handleCreatureKilled(CreatureKilledIntent cki) {
-		// TODO only the player that delivered the killing blow is considered for this
-		CreatureObject corpse = cki.getCorpse();
-		CreatureObject killer = cki.getKiller();
-		
-		if (!isPlayerEligible(killer.isPlayer(), corpse.isPlayer())) {
-			return;
-		}
-		
-		if (!isLevelEligible(corpse.getLevel(), killer.getLevel())) {
-			return;
-		}
-		
-		int roll = random.nextInt(100) + 1;    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
-		
-		if (!isDrop(roll)) {
-			Log.d("No RLS drop from %s with roll %d", corpse, roll);
-			return;
-		}
-		
-		String template = templateForDifficulty(corpse.getDifficulty());
-		SWGObject chest = ObjectCreator.createObjectFromTemplate(template);
-		SWGObject inventory = killer.getSlottedObject("inventory");
-		
-		chest.setStf("loot_n", chestIdForTemplate(template) + "_n");
-		chest.setDetailStf("loot_n", chestIdForTemplate(template) + "_d");    // Not located in loot_d, for whatever reason...
-		
-		chest.moveToContainer(inventory);
-		sendSuccessPackets(chest, corpse, killer);
 	}
 	
 }

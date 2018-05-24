@@ -60,7 +60,7 @@ import com.projectswg.holocore.resources.server_info.StandardLog;
 import com.projectswg.holocore.resources.server_info.loader.npc.NpcLoader;
 import com.projectswg.holocore.resources.server_info.loader.npc.NpcLoader.NpcInfo;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 import com.projectswg.holocore.services.objects.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;

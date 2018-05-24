@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.server_info.StandardLog;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -57,7 +58,7 @@ import java.util.Map;
 /**
  * @author mads
  */
-public final class StaticItemService extends Service {
+public class StaticItemService extends Service {
 
 	private static final String GET_STATIC_ITEMS = "SELECT * FROM master_item";
 	private static final String CONFIG_OPTION_NAME = "STATIC-ITEMS-ENABLED";
@@ -67,11 +68,8 @@ public final class StaticItemService extends Service {
 	// costly.
 	private final Map<String, ObjectAttributes> objectAttributesMap;
 
-	StaticItemService() {
-		objectAttributesMap = new HashMap<>();
-
-		registerForIntent(CreateStaticItemIntent.class, this::handleCreateStaticItemIntent);
-		registerForIntent(ConfigChangedIntent.class, this::handleConfigChangedIntent);
+	public StaticItemService() {
+		this.objectAttributesMap = new HashMap<>();
 	}
 
 	@Override
@@ -90,6 +88,7 @@ public final class StaticItemService extends Service {
 	/**
 	 * Static items can be loaded/unloaded at runtime.
 	 */
+	@IntentHandler
 	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
 		if (cci.getKey().equals(CONFIG_OPTION_NAME)) {
 			boolean oldValue = Boolean.parseBoolean(cci.getOldValue());
@@ -163,7 +162,8 @@ public final class StaticItemService extends Service {
 		objectAttributesMap.clear();    // Clear the cache.
 		Log.i("Static items have been disabled");
 	}
-
+	
+	@IntentHandler
 	private void handleCreateStaticItemIntent(CreateStaticItemIntent csii) {
 		SWGObject container = csii.getContainer();
 		String[] itemNames = csii.getItemNames();

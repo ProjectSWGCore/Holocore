@@ -33,6 +33,7 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -247,12 +248,12 @@ public class TradeSession {
 			return true;
 		}
 		
-		public void sendPacket(SWGPacket SWGPacket) {
-			creature.getOwner().sendPacket(SWGPacket);
+		public void sendPacket(SWGPacket packet) {
+			creature.getOwner().sendPacket(packet);
 		}
 		
-		public void sendToPartner(SWGPacket SWGPacket) {
-			partner.getOwner().sendPacket(SWGPacket);
+		public void sendToPartner(SWGPacket packet) {
+			partner.getOwner().sendPacket(packet);
 		}
 		
 		public void setAccepted(boolean accepted) {

@@ -9,25 +9,57 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
+import com.projectswg.holocore.intents.BuffIntent;
 import com.projectswg.holocore.intents.chat.ChatCommandIntent;
+import com.projectswg.holocore.intents.combat.EnterCombatIntent;
+import com.projectswg.holocore.intents.combat.RequestCreatureDeathIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.commands.CombatCommand;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.services.objects.ObjectCreator;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class CombatCommandService extends Service {
 	
+	private static final RGB COLOR_WHITE = new RGB(255, 255, 255);
+	private static final RGB COLOR_CYAN = new RGB(0, 255, 255);
+	
+	private final ScheduledThreadPool executor;
+	private final Random random;
+	
 	public CombatCommandService() {
-		
+		this.executor = new ScheduledThreadPool(2, "combat-command-service-%d");
+		this.random = new Random();
+	}
+	
+	@Override
+	public boolean start() {
+		executor.start();
+		return true;
+	}
+	
+	@Override
+	public boolean stop() {
+		executor.stop();
+		executor.awaitTermination(1000);
+		return true;
 	}
 	
 	@IntentHandler
@@ -37,9 +69,6 @@ public class CombatCommandService extends Service {
 		CombatCommand c = (CombatCommand) cci.getCommand();
 		CreatureObject source = cci.getSource();
 		SWGObject target = cci.getTarget();
-		
-		// Regardless of HitType, the command might have action cost
-		addActionCost(source, c);
 		
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
@@ -97,7 +126,7 @@ public class CombatCommandService extends Service {
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		
 		if (!(target instanceof CreatureObject)) {
-			return;	// Only CreatureObjects have buffs
+			return;    // Only CreatureObjects have buffs
 		}
 		
 		String buffNameTarget = combatCommand.getBuffNameTarget();
@@ -107,7 +136,7 @@ public class CombatCommandService extends Service {
 		CreatureObject creatureTarget = (CreatureObject) target;
 		CombatAction action = new CombatAction(source.getObjectId());
 		WeaponObject weapon = source.getEquippedWeapon();
-		String anim = combatCommand.getRandomAnimation(weapon.getType());	// Uses defaultAnim if it needs to
+		String anim = combatCommand.getRandomAnimation(weapon.getType());    // Uses defaultAnim if it needs to
 		action.setPosture(source.getPosture());
 		action.setAttackerId(source.getObjectId());
 		action.setActionCrc(CRC.getCrc(anim));
@@ -134,7 +163,7 @@ public class CombatCommandService extends Service {
 		combatSpam.setSpamType(CombatSpamFilterType.ALL);
 		// TODO doesn't look like a buff in the combat log
 		
-		source.sendObserversAndSelf(action, combatSpam);
+		source.sendObservers(action, combatSpam);
 	}
 	
 	private void handleHeal(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
@@ -148,7 +177,7 @@ public class CombatCommandService extends Service {
 		switch (combatCommand.getAttackType()) {
 			case SINGLE_TARGET: {
 				switch (combatCommand.getTargetType()) {
-					case NONE: {	// No target used, always heals self
+					case NONE: {    // No target used, always heals self
 						doHeal(source, source, healAmount, combatCommand);
 						break;
 					}
@@ -159,8 +188,8 @@ public class CombatCommandService extends Service {
 						
 						// Same logic as OPTIONAL and ALL, so no break!
 					}
-					case OPTIONAL:	// Appears to be the same as ALL
-					case ALL: {	// Target is used IF supplied
+					case OPTIONAL:    // Appears to be the same as ALL
+					case ALL: {    // Target is used IF supplied
 						if (target != null) {
 							if (!(target instanceof CreatureObject)) {
 								return;
@@ -220,15 +249,13 @@ public class CombatCommandService extends Service {
 				if (arguments[0].equals("a") || arguments[0].equals("c")) {    // is "c" in free-targeting mode
 					eggLocation = source.getLocation();
 				} else {
-					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source
-							.getTerrain());
+					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
 				}
 				
 				eggParent = source.getParent();
 				break;
 			default:
-				Log.w("Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand
-						.getName());
+				Log.w("Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
 			case SELF:
 				eggLocation = source.getLocation();
 				eggParent = source.getParent();
@@ -300,7 +327,7 @@ public class CombatCommandService extends Service {
 		
 		CombatAction action = new CombatAction(healer.getObjectId());
 		WeaponObject weapon = healer.getEquippedWeapon();
-		String anim = combatCommand.getRandomAnimation(weapon.getType());	// Uses defaultAnim if it needs to
+		String anim = combatCommand.getRandomAnimation(weapon.getType());    // Uses defaultAnim if it needs to
 		
 		action.setPosture(healed.getPosture());
 		action.setAttackerId(healer.getObjectId());
@@ -328,7 +355,197 @@ public class CombatCommandService extends Service {
 		combatSpam.setSpamType(CombatSpamFilterType.ALL);
 		// TODO doesn't look like a heal in the combat log
 		
-		healed.sendObserversAndSelf(action, flyText, effect, combatSpam);
+		healed.sendObservers(action, flyText, effect, combatSpam);
+	}
+	
+	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		// TODO single target only defence rolls against target
+		// TODO single target only offence rolls for source
+		
+		// TODO below logic should be in CommandService when target checks are implemented in there
+		Set<CreatureObject> targets = new HashSet<>();
+		
+		if (target instanceof CreatureObject)
+			targets.add((CreatureObject) target);
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
+		float aoeRange = command.getConeLength();
+		SWGObject originParent = origin.getParent();
+		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
+		
+		// TODO block
+		// TODO evasion if no block
+		
+		// TODO line of sight checks between the explosive and each target
+		Set<CreatureObject> targets = objectsToCheck.stream().filter(CreatureObject.class::isInstance).map(CreatureObject.class::cast).filter(source::isAttackable)
+				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS).filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
+				.collect(Collectors.toSet());
+		
+		// This way, mines or grenades won't try to harm themselves
+		if (includeOrigin && origin instanceof CreatureObject)
+			targets.add((CreatureObject) origin);
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombat(CreatureObject source, Set<CreatureObject> targets, WeaponObject weapon, AttackInfo info, CombatCommand command) {
+		source.updateLastCombatTime();
+		
+		CombatAction action = new CombatAction(source.getObjectId());
+		String anim = command.getRandomAnimation(weapon.getType());
+		action.setActionCrc(CRC.getCrc(anim));
+		action.setAttackerId(source.getObjectId());
+		action.setPosture(source.getPosture());
+		action.setWeaponId(weapon.getObjectId());
+		action.setClientEffectId((byte) 0);
+		action.setCommandCrc(command.getCrc());
+		action.setTrail(TrailLocation.WEAPON);
+		action.setUseLocation(false);
+		
+		for (CreatureObject target : targets) {
+			target.updateLastCombatTime();
+			
+			EnterCombatIntent.broadcast(source, target);
+			EnterCombatIntent.broadcast(target, source);
+			
+			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+			combatSpam.setAttacker(source.getObjectId());
+			combatSpam.setAttackerPosition(source.getLocation().getPosition());
+			combatSpam.setWeapon(weapon.getObjectId());
+			combatSpam.setWeaponName(weapon.getStringId());
+			combatSpam.setDefender(target.getObjectId());
+			combatSpam.setDefenderPosition(target.getLocation().getPosition());
+			combatSpam.setInfo(info);
+			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
+			combatSpam.setSpamType(CombatSpamFilterType.ALL);
+			
+			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
+				target.sendObservers(combatSpam);
+				return;
+			}
+			
+			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
+			
+			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
+			
+			info.setRawDamage(rawDamage);
+			info.setFinalDamage(rawDamage);    // Final damage will be modified by armour and defensive rolls later
+			info.setDamageType(weapon.getDamageType());
+			
+			// TODO block roll for defenders
+			// TODO Critical hit roll for attacker
+			// TODO armour
+			
+			target.sendObservers(combatSpam);
+			
+			int finalDamage = info.getFinalDamage();
+			
+			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
+			
+			target.handleDamage(source, finalDamage);
+			
+			if (target.getHealth() <= finalDamage)
+				RequestCreatureDeathIntent.broadcast(target, source);
+			else
+				target.modifyHealth(-finalDamage);
+		}
+		
+		source.sendObservers(action);
+	}
+	
+	private CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
+		if (source.getEquippedWeapon() == null)
+			return CombatStatus.NO_WEAPON;
+		
+		if (target == null || source.equals(target))
+			return CombatStatus.SUCCESS;
+		
+		if (!(target instanceof TangibleObject))
+			return CombatStatus.INVALID_TARGET;
+		
+		if (!source.isEnemyOf((TangibleObject) target)) {
+			return CombatStatus.INVALID_TARGET;
+		}
+		
+		if (target instanceof CreatureObject) {
+			switch (((CreatureObject) target).getPosture()) {
+				case DEAD:
+				case INCAPACITATED:
+					return CombatStatus.INVALID_TARGET;
+				default:
+					break;
+			}
+		}
+		
+		switch (c.getAttackType()) {
+			case AREA:
+			case TARGET_AREA:
+				return canPerformArea(source, c);
+			case SINGLE_TARGET:
+				return canPerformSingle(source, target, c);
+			default:
+				return CombatStatus.UNKNOWN;
+		}
+	}
+	
+	private CombatStatus canPerformSingle(CreatureObject source, SWGObject target, CombatCommand c) {
+		if (!(target instanceof TangibleObject))
+			return CombatStatus.NO_TARGET;
+		
+		WeaponObject weapon = source.getEquippedWeapon();
+		double dist = Math.floor(source.getWorldLocation().distanceTo(target.getWorldLocation()));
+		double commandRange = c.getMaxRange();
+		double range = commandRange > 0 ? commandRange : weapon.getMaxRange();
+		
+		if (dist > range)
+			return CombatStatus.TOO_FAR;
+		
+		return CombatStatus.SUCCESS;
+	}
+	
+	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
+		return CombatStatus.SUCCESS;
+	}
+	
+	private int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
+		int minDamage = weapon.getMinDamage();
+		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
+		
+		return (int) (weaponDamage * command.getPercentAddFromWeapon());
+	}
+	
+	private void addBuff(CreatureObject caster, CreatureObject receiver, String buffName) {
+		if (buffName.isEmpty()) {
+			return;
+		}
+		
+		new BuffIntent(buffName, caster, receiver, false).broadcast();
+	}
+	
+	private boolean handleStatus(CreatureObject source, CombatStatus status) {
+		switch (status) {
+			case SUCCESS:
+				return true;
+			case NO_TARGET:
+				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
+				return false;
+			case TOO_FAR:
+				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
+				return false;
+			case INVALID_TARGET:
+				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
+				return false;
+			default:
+				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
+				return false;
+		}
+	}
+	
+	private void showFlyText(TangibleObject obj, String text, Scale scale, RGB c, ShowFlyText.Flag... flags) {
+		obj.sendSelf(new ShowFlyText(obj.getObjectId(), text, scale, c, flags));
 	}
 	
 }

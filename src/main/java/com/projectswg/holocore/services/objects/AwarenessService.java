@@ -43,7 +43,7 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.RequestZoneInIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.object.*;
 import com.projectswg.holocore.intents.player.PlayerTransformedIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
@@ -58,7 +58,7 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -118,7 +118,7 @@ public class AwarenessService extends Service {
 	}
 	
 	@IntentHandler
-	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void processGalacticPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		if (packet instanceof DataTransform) {
 			handleDataTransform((DataTransform) packet);

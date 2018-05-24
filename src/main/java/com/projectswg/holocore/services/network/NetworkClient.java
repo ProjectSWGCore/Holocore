@@ -38,12 +38,14 @@ import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.network.InboundPacketPendingIntent;
+import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.HolocoreSessionException;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
 import com.projectswg.holocore.services.network.HolocoreSessionManager.SessionStatus;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.network.TCPServer.TCPSession;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -63,6 +65,7 @@ public class NetworkClient extends TCPSession {
 	private final Lock inboundLock;
 	private final Lock outboundLock;
 	private final AtomicBoolean requestedProcessInbound;
+	private final Player player;
 	
 	public NetworkClient(SocketChannel socket) {
 		super(socket);
@@ -73,6 +76,7 @@ public class NetworkClient extends TCPSession {
 		this.inboundLock = new ReentrantLock(false);
 		this.outboundLock = new ReentrantLock(true);
 		this.requestedProcessInbound = new AtomicBoolean(false);
+		this.player = new Player(getSessionId());
 		
 		this.sessionManager.setCallback(this::onSessionInitialized);
 	}
@@ -81,7 +85,7 @@ public class NetworkClient extends TCPSession {
 		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
 			sendPacket(new HoloConnectionStopped(reason));
 			sessionManager.onSessionDestroyed();
-			intentChain.broadcastAfter(new ConnectionClosedIntent(getSessionId(), reason));
+			intentChain.broadcastAfter(new ConnectionClosedIntent(player, reason));
 			try {
 				socket.close();
 			} catch (IOException e) {
@@ -100,7 +104,7 @@ public class NetworkClient extends TCPSession {
 					continue;
 				p.setSocketAddress(getRemoteAddress());
 				sessionManager.onInbound(p);
-				intentChain.broadcastAfter(new InboundPacketIntent(p, getSessionId()));
+				intentChain.broadcastAfter(new InboundPacketIntent(player, p));
 			}
 		} catch (HolocoreSessionException e) {
 			onSessionError(e);
@@ -123,7 +127,7 @@ public class NetworkClient extends TCPSession {
 	}
 	
 	@Override
-	protected void onIncomingData(byte[] data) {
+	protected void onIncomingData(@NotNull byte[] data) {
 		inboundLock.lock();
 		try {
 			buffer.write(data);
@@ -139,14 +143,14 @@ public class NetworkClient extends TCPSession {
 	@Override
 	protected void onConnected() {
 		sessionManager.onSessionCreated();
-		intentChain.broadcastAfter(new ConnectionOpenedIntent(getSessionId()));
+		intentChain.broadcastAfter(new ConnectionOpenedIntent(player));
 	}
 	
 	@Override
 	protected void onDisconnected() {
 		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
 			sessionManager.onSessionDestroyed();
-			intentChain.broadcastAfter(new ConnectionClosedIntent(getSessionId(), ConnectionStoppedReason.UNKNOWN));
+			intentChain.broadcastAfter(new ConnectionClosedIntent(player, ConnectionStoppedReason.UNKNOWN));
 		}
 	}
 	

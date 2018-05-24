@@ -32,12 +32,13 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.scripts.radial.RadialHandler;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -47,7 +48,7 @@ import java.util.List;
 public class RadialService extends Service {
 	
 	public RadialService() {
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
+		
 	}
 	
 	@Override
@@ -56,18 +57,19 @@ public class RadialService extends Service {
 		return super.initialize();
 	}
 	
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
-			onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
+			onRequest((ObjectMenuRequest) p);
 		} else if (p instanceof ObjectMenuSelect) {
-			onSelection(gpi.getGalacticManager(), gpi.getPlayer(), (ObjectMenuSelect) p);
+			onSelection(gpi.getPlayer(), (ObjectMenuSelect) p);
 		}
 	}
 	
-	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
-		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
-		SWGObject target = objectManager.getObjectById(request.getTargetId());
+	private void onRequest(ObjectMenuRequest request) {
+		SWGObject requestor = ObjectLookup.getObjectById(request.getRequestorId());
+		SWGObject target = ObjectLookup.getObjectById(request.getTargetId());
 		if (target == null)
 			return;
 		if (!(requestor instanceof CreatureObject)) {
@@ -85,8 +87,8 @@ public class RadialService extends Service {
 		sendResponse(player, target, options, request.getCounter());
 	}
 	
-	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
-		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
+	private void onSelection(Player player, ObjectMenuSelect select) {
+		SWGObject target = ObjectLookup.getObjectById(select.getObjectId());
 		if (target == null) {
 			Log.e("Selection target [%d] does not exist!", select.getObjectId());
 			return;

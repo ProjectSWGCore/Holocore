@@ -45,20 +45,19 @@ import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponType;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.services.objects.ObjectManager;
-import com.projectswg.holocore.services.player.TerrainZoneInsertion.SpawnInformation;
-import me.joshlarson.jlcommon.log.Log;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
+import com.projectswg.holocore.services.player.zone.TerrainZoneInsertion.SpawnInformation;
+import me.joshlarson.jlcommon.utilities.Arguments;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
 public class CharacterCreation {
 	
-	private final ObjectManager objManager;
 	private final ProfTemplateData templateData;
 	private final ClientCreateCharacter create;
 	
-	public CharacterCreation(ObjectManager objManager, ProfTemplateData templateData, ClientCreateCharacter create) {
-		this.objManager = objManager;
+	public CharacterCreation(ProfTemplateData templateData, ClientCreateCharacter create) {
 		this.templateData = templateData;
 		this.create = create;
 	}
@@ -66,10 +65,7 @@ public class CharacterCreation {
 	public CreatureObject createCharacter(AccessLevel accessLevel, SpawnInformation info) {
 		Race			race		= Race.getRaceByFile(create.getRace());
 		CreatureObject	creatureObj	= createCreature(race.getFilename(), info);
-		if (creatureObj == null)
-			return null;
-		PlayerObject	playerObj	= createPlayer(creatureObj, "object/player/shared_player.iff");
-		Assert.notNull(playerObj);
+		PlayerObject	playerObj	= createPlayer(creatureObj);
 		
 		setCreatureObjectValues(creatureObj);
 		setPlayerObjectValues(playerObj);
@@ -80,44 +76,44 @@ public class CharacterCreation {
 		return creatureObj;
 	}
 	
+	@NotNull
 	private CreatureObject createCreature(String template, SpawnInformation info) {
 		if (info.building)
 			return createCreatureBuilding(template, info);
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		Assert.test(obj instanceof CreatureObject);
+		assert obj instanceof CreatureObject;
 		obj.setLocation(info.location);
 		return (CreatureObject) obj;
 	}
 	
+	@NotNull
 	private CreatureObject createCreatureBuilding(String template, SpawnInformation info) {
-		SWGObject parent = objManager.getObjectById(info.buildingId);
-		if (parent == null || !(parent instanceof BuildingObject)) {
-			Log.e("Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId);
-			return null;
-		}
+		SWGObject parent = ObjectLookup.getObjectById(info.buildingId);
+		Arguments.validate(parent instanceof BuildingObject, String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId));
+		
 		CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
-		if (cell == null) {
-			Log.e("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
-			return null;
-		}
+		Arguments.validate(cell != null, String.format("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId));
+		
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		Assert.test(obj instanceof CreatureObject);
+		assert obj instanceof CreatureObject;
 		obj.setLocation(info.location);
 		obj.moveToContainer(cell);
 		return (CreatureObject) obj;
 	}
 	
-	private PlayerObject createPlayer(CreatureObject creatureObj, String template) {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		Assert.test(obj instanceof PlayerObject);
+	@NotNull
+	private PlayerObject createPlayer(CreatureObject creatureObj) {
+		SWGObject obj = ObjectCreator.createObjectFromTemplate("object/player/shared_player.iff");
+		assert obj instanceof PlayerObject;
 		obj.moveToContainer(creatureObj);
 		new ObjectCreatedIntent(obj).broadcast();
 		return (PlayerObject) obj;
 	}
 	
+	@NotNull
 	private TangibleObject createTangible(SWGObject container, ContainerPermissionsType type, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		Assert.test(obj instanceof TangibleObject);
+		assert obj instanceof TangibleObject;
 		obj.setContainerPermissions(type);
 		obj.moveToContainer(container);
 		new ObjectCreatedIntent(obj).broadcast();
@@ -125,11 +121,13 @@ public class CharacterCreation {
 	}
 	
 	/** Creates an object with default world visibility */
+	@NotNull
 	private TangibleObject createDefaultObject(SWGObject container, String template) {
 		return createTangible(container, ContainerPermissionsType.DEFAULT, template);
 	}
 	
 	/** Creates an object with inventory-level world visibility (only the owner) */
+	@NotNull
 	private TangibleObject createInventoryObject(SWGObject container, String template) {
 		return createTangible(container, ContainerPermissionsType.INVENTORY, template);
 	}
@@ -179,7 +177,7 @@ public class CharacterCreation {
 		}
 		
 		SWGObject inventory = creature.getSlottedObject("inventory");
-		Assert.notNull(inventory);
+		assert inventory != null : "inventory is not defined";
 		createDefaultObject(inventory, "object/tangible/npe/shared_npe_uniform_box.iff");
 	}
 	

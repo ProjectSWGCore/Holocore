@@ -32,6 +32,8 @@ import com.projectswg.holocore.resources.containers.ContainerResult;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.utilities.Arguments;
+import org.jetbrains.annotations.NotNull;
 
 public class CreditObject extends TangibleObject {
 	private long amount;
@@ -47,11 +49,11 @@ public class CreditObject extends TangibleObject {
 	 * @return {@link ContainerResult}
 	 */
 	@Override
-	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+	public ContainerResult moveToContainer(@NotNull SWGObject requester, SWGObject container) {
 		if (!(requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()))
 			return super.moveToContainer(requester, container);
 		
-		Assert.test(amount > 0, "Amount must be set!");
+		assert amount > 0 : "amount must be set";
 		
 		SWGObject parent = getParent();
 		
@@ -74,12 +76,6 @@ public class CreditObject extends TangibleObject {
 		return ContainerResult.SUCCESS;
 	}
 	
-	/**
-	 * Checks if an object can be moved to the container by the requester
-	 * @param requester Object that is requesting to move the object, used for permission checking
-	 * @param container Where this object should be moved to
-	 * @return
-	 */
 	protected ContainerResult moveToAccountChecks(SWGObject requester) {
 		if (requester == null)
 			return ContainerResult.SUCCESS;
@@ -97,7 +93,7 @@ public class CreditObject extends TangibleObject {
 	}
 	
 	public void setAmount(long amount) {
-		Assert.test(amount > 0, "Amount must be greater than 0!");
+		Arguments.validate(amount > 0, "Amount must be greater than 0");
 		this.amount = amount;
 		setObjectName(amount + " cr");
 	}

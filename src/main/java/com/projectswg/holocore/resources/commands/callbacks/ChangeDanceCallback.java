@@ -35,11 +35,11 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
 public class ChangeDanceCallback extends StartDanceCallback {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		CreatureObject actor = player.getCreatureObject();
 		
 		if(actor.isPerforming()) {	// They need to be dancing in the first place!
-			super.handleCommand(galacticManager, player, target, args, true);
+			super.handleCommand(player, target, args, true);
 		} else {
 			new SystemMessageIntent(player, "@performance:dance_must_be_performing_self").broadcast();
 		}

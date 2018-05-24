@@ -32,7 +32,7 @@ import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	def cmdArgs = args.split(' ', 5)
 
 	new SpatialChatIntent(player, Integer.valueOf(cmdArgs[1]), args.substring(10), Integer.valueOf(cmdArgs[2]))

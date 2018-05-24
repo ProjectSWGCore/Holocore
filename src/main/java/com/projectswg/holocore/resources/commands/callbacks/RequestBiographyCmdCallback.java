@@ -41,7 +41,7 @@ import me.joshlarson.jlcommon.log.Log;
 public class RequestBiographyCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		if(target != null) {
 			if(target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {

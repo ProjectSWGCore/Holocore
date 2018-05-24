@@ -29,6 +29,7 @@ package com.projectswg.holocore.services.player.zone;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +42,7 @@ import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 
-@RunWith(JUnit4.class)
-public class TestZoneRequester {
+public class TestZoneRequester extends TestRunnerNoIntents {
 	
 	@Test
 	public void testNullCreatureObject() {

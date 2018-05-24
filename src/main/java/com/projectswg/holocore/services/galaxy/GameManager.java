@@ -36,26 +36,29 @@ import com.projectswg.holocore.services.crafting.CraftingManager;
 import com.projectswg.holocore.services.experience.ExperienceManager;
 import com.projectswg.holocore.services.faction.FactionManager;
 import com.projectswg.holocore.services.group.GroupService;
+import com.projectswg.holocore.services.player.ConnectionService;
 import com.projectswg.holocore.services.sui.SuiService;
 import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.control.ManagerStructure;
 
+@ManagerStructure(children = {
+		CommandService.class,
+		SuiService.class,
+		CollectionBadgeManager.class,
+		EnvironmentService.class,
+		FactionManager.class,
+		GroupService.class,
+		SkillModService.class,
+		EntertainmentService.class,
+		CombatManager.class,
+		ExperienceManager.class,
+		BuffService.class,
+		CraftingManager.class
+})
 public class GameManager extends Manager {
 	
 	public GameManager() {
-		addChildService(new CommandService());
-		addChildService(new ConnectionService());
-		addChildService(new SuiService());
-		addChildService(new CollectionService());
-		addChildService(new CollectionBadgeManager());
-		addChildService(new EnvironmentService());
-		addChildService(new FactionManager());
-		addChildService(new GroupService());
-		addChildService(new SkillModService());
-		addChildService(new EntertainmentService());
-		addChildService(new CombatManager());
-		addChildService(new ExperienceManager());
-		addChildService(new BuffService());
-		addChildService(new CraftingManager());
+		
 	}
 	
 }

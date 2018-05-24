@@ -28,6 +28,7 @@ package com.projectswg.holocore.intents;
 
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class SetTitleIntent extends Intent {
 	

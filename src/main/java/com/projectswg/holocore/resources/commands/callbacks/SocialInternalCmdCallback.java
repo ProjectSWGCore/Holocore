@@ -30,17 +30,17 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.PlayerEm
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 
 public class SocialInternalCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		// Args: targetId (0), emoteId (1), unk1, unk2
 		String[] cmd = args.split(" ", 3);
 		
 		if (!cmd[0].equals("0"))
-			target = galacticManager.getObjectManager().getObjectById(Long.parseLong(cmd[0]));
+			target = ObjectLookup.getObjectById(Long.parseLong(cmd[0]));
 		
 		long sourceId = player.getCreatureObject().getObjectId();
 		long targetId = ((target == null) ? 0 : target.getObjectId());

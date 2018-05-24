@@ -37,7 +37,7 @@ import java.util.*;
 public class ClientdataPrinterCommands {
 	
 	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new ConsoleLogWrapper());
 		List<Command> commands = loadBaseCommands();
 		for (Command command : commands) {
 			System.out.println(command);

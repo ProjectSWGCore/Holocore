@@ -4,7 +4,7 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -40,10 +40,10 @@ public class ExperienceRoleService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket SWGPacket = gpi.getPacket();
-		if (SWGPacket instanceof ChangeRoleIconChoice) {
-			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) SWGPacket;
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
+		SWGPacket packet = gpi.getPacket();
+		if (packet instanceof ChangeRoleIconChoice) {
+			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
 			changeRoleIcon(gpi.getPlayer().getCreatureObject(), iconChoice.getIconChoice());
 		}
 	}

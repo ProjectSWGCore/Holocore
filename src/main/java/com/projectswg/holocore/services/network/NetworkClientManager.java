@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.network;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
@@ -68,7 +69,7 @@ public class NetworkClientManager extends Service {
 			udpServer.setCallback(this::onUdpPacket);
 		}
 		{
-			int adminServerPort = CoreManager.getGalaxy().getAdminServerPort();
+			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
 			if (adminServerPort <= 0)
 				adminServer = null;
 			else
@@ -82,7 +83,7 @@ public class NetworkClientManager extends Service {
 		try {
 			bindPort = getBindPort();
 			tcpServer.bind();
-			bindPort = CoreManager.getGalaxy().getAdminServerPort();
+			bindPort = ProjectSWG.getGalaxy().getAdminServerPort();
 			if (adminServer != null) {
 				adminServer.bind();
 			}
@@ -132,7 +133,7 @@ public class NetworkClientManager extends Service {
 	}
 	
 	private void sendState(InetAddress addr, int port) {
-		String status = CoreManager.getGalaxy().getStatus().name();
+		String status = ProjectSWG.getGalaxy().getStatus().name();
 		NetBuffer data = NetBuffer.allocate(3 + status.length());
 		data.addByte(1);
 		data.addAscii(status);
@@ -146,12 +147,12 @@ public class NetworkClientManager extends Service {
 	
 	@IntentHandler
 	private void handleConnectionClosedIntent(ConnectionClosedIntent cci) {
-		disconnect(cci.getNetworkId());
+		disconnect(cci.getPlayer().getNetworkId());
 	}
 	
 	@IntentHandler
 	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
-		NetworkClient client = getClient(opi.getNetworkId());
+		NetworkClient client = getClient(opi.getPlayer().getNetworkId());
 		if (client == null)
 			return;
 		

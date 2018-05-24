@@ -35,7 +35,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager
 import com.projectswg.holocore.utilities.IntentFactory
 
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()
 	def intent = null
 	

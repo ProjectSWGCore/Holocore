@@ -27,11 +27,15 @@
 package com.projectswg.holocore.services.network;
 
 import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.control.ManagerStructure;
 
+@ManagerStructure(children = {
+		NetworkClientManager.class
+})
 public class NetworkManager extends Manager {
 	
 	public NetworkManager() {
-		addChildService(new NetworkClientManager());
+		
 	}
 	
 }

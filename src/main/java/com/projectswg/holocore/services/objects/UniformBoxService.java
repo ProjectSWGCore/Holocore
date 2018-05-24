@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -59,8 +60,6 @@ public class UniformBoxService extends Service {
 			throw new ProjectSWG.CoreException("Unable to load npe_uniformbox.sdb file for UniformBoxService");
 		
 		getUniformBoxStatement = uniformBoxDatabase.prepareStatement(GET_UNIFORMBOX_SQL);
-		
-		registerForIntent(OpenUniformBoxIntent.class, this::handleOpenUniformBoxIntent);
 	}
 	
 	@Override
@@ -69,6 +68,7 @@ public class UniformBoxService extends Service {
 		return super.terminate();
 	}
 	
+	@IntentHandler
 	private void handleOpenUniformBoxIntent(OpenUniformBoxIntent oubi) {
 		Player player = oubi.getPlayer();
 		CreatureObject creature = player.getCreatureObject();

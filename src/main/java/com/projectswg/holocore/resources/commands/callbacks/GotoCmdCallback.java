@@ -37,8 +37,7 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.building.BuildingObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
-import com.projectswg.holocore.services.objects.ObjectManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.ResultSet;
@@ -47,7 +46,7 @@ import java.sql.SQLException;
 public class GotoCmdCallback implements ICmdCallback  {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		SWGObject teleportee = player.getCreatureObject();
 		if (teleportee == null)
 			return;
@@ -62,17 +61,17 @@ public class GotoCmdCallback implements ICmdCallback  {
 		} catch (NumberFormatException e) {
 			
 		}
-		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc, cell);
+		String err = teleportToGotoLocation(teleportee, loc, cell);
 		new SystemMessageIntent(player, err).broadcast();
 	}
 	
-	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc, int cell) {
+	private String teleportToGotoLocation(SWGObject obj, String loc, int cell) {
 		try (RelationalServerData data = RelationalServerFactory.getServerData("building/building.db", "buildings")) {
 			try (ResultSet set = data.selectFromTable("buildings", null, "building_id = ?", loc)) {
 				if (!set.next())
 					return "No such location found: " + loc;
 				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
-				return teleportToGoto(objManager, obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
+				return teleportToGoto(obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
 			} catch (SQLException e) {
 				Log.e(e);
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
@@ -80,9 +79,9 @@ public class GotoCmdCallback implements ICmdCallback  {
 		}
 	}
 	
-	private String teleportToGoto(ObjectManager objManager, SWGObject obj, long buildingId, int cellNumber, Location l) {
-		SWGObject parent = objManager.getObjectById(buildingId);
-		if (parent == null || !(parent instanceof BuildingObject)) {
+	private String teleportToGoto(SWGObject obj, long buildingId, int cellNumber, Location l) {
+		SWGObject parent = ObjectLookup.getObjectById(buildingId);
+		if (!(parent instanceof BuildingObject)) {
 			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
 			Log.e(err);
 			return err;

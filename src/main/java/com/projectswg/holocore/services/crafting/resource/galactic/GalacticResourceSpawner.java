@@ -66,7 +66,7 @@ public class GalacticResourceSpawner {
 	}
 	
 	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new ConsoleLogWrapper());
 		DataManager.initialize();
 		RawResourceContainer container = new RawResourceContainer();
 		container.loadResources();

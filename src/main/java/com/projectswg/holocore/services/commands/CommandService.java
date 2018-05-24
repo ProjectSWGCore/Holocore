@@ -33,7 +33,7 @@ import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import com.projectswg.holocore.intents.PlayerEventIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.player.PlayerTransformedIntent;
 import com.projectswg.holocore.resources.commands.CombatCommand;
 import com.projectswg.holocore.resources.commands.Command;
@@ -60,7 +60,8 @@ import com.projectswg.holocore.scripts.commands.group.*;
 import com.projectswg.holocore.scripts.commands.survey.CmdRequestCoreSample;
 import com.projectswg.holocore.scripts.commands.survey.CmdRequestSurvey;
 import com.projectswg.holocore.services.commands.CommandLauncher.EnqueuedCommand;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -78,10 +79,6 @@ public class CommandService extends Service {
 		this.commandContainer = new CommandContainer();
 		this.commandLauncher = new CommandLauncher();
 		this.commandLogger = new BasicLogStream(new File("log/commands.txt"));
-		
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		registerForIntent(PlayerTransformedIntent.class, this::handlePlayerTransformedIntent);
 	}
 	
 	@Override
@@ -99,14 +96,16 @@ public class CommandService extends Service {
 		return super.terminate();
 	}
 	
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof CommandQueueEnqueue) {
 			CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
-			handleCommandRequest(gpi.getPlayer(), gpi.getGalacticManager(), controller);
+			handleCommandRequest(gpi.getPlayer(), controller);
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
 			case PE_LOGGED_OUT:
@@ -119,6 +118,7 @@ public class CommandService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
 		CreatureObject creature = pti.getPlayer();
 		
@@ -130,7 +130,7 @@ public class CommandService extends Service {
 		commandLauncher.removePlayerFromQueue(creature.getOwner());
 	}
 	
-	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
+	private void handleCommandRequest(Player player, CommandQueueEnqueue request) {
 		if (!commandContainer.isCommand(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
 				Log.e("Invalid command crc: %x", request.getCommandCrc());
@@ -140,11 +140,11 @@ public class CommandService extends Service {
 		Command command = commandContainer.getCommand(request.getCommandCrc());
 		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
-		SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
+		SWGObject target = targetId != 0 ? ObjectLookup.getObjectById(targetId) : null;
 		if (isCommandLogging())
 			commandLogger.log("%-25s[from: %s, script: %s, target: %s]", command.getName(), player.getCreatureObject().getObjectName(), command.getDefaultScriptCallback(), target);
 		
-		EnqueuedCommand enqueued = new EnqueuedCommand(command, galacticManager, target, request);
+		EnqueuedCommand enqueued = new EnqueuedCommand(command, target, request);
 		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
 			commandLauncher.addToQueue(player, enqueued);
 		} else {

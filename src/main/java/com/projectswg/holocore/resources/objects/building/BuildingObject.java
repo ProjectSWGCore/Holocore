@@ -35,10 +35,10 @@ import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,8 +52,8 @@ public class BuildingObject extends TangibleObject {
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
-		this.nameToCell = new SynchronizedMap<>();
-		this.idToCell = new SynchronizedMap<>();
+		this.nameToCell = new HashMap<>();
+		this.idToCell = new HashMap<>();
 		this.portalLayoutData = null;
 		this.loadRange = 0;
 	}
@@ -76,14 +76,13 @@ public class BuildingObject extends TangibleObject {
 		super.addObject(object);
 		
 		CellObject cell = (CellObject) object;
-		Assert.test(cell.getNumber() > 0, "Cell Number must be greater than 0!");
-		Assert.test(cell.getNumber() < getCellCount(), "Cell Number must be less than the cell count!");
+		assert cell.getNumber() > 0 : "Cell Number must be greater than 0";
+		assert cell.getNumber() < getCellCount() : "Cell Number must be less than the cell count!";
+		assert idToCell.get(cell.getNumber()) == null : "Multiple cells have the same number!";
+		
 		cell.setCellName(getCellName(cell.getNumber()));
-		synchronized (idToCell) {
-			Assert.isNull(idToCell.get(cell.getNumber()), "Multiple cells have the same number!");
-			idToCell.put(cell.getNumber(), cell);
-			nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
-		}
+		idToCell.put(cell.getNumber(), cell);
+		nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
 	}
 	
 	@Override
@@ -93,16 +92,13 @@ public class BuildingObject extends TangibleObject {
 	
 	public void populateCells() {
 		int cells = getCellCount();
-		synchronized (idToCell) {
-			for (int i = 1; i < cells; i++) { // 0 is world
-				if (idToCell.get(i) != null)
-					continue;
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				Assert.notNull(cell, "Failed to create a cell!");
-				cell.setNumber(i);
-				cell.setTerrain(getTerrain());
-				addObject(cell);
-			}
+		for (int i = 1; i < cells; i++) { // 0 is world
+			if (idToCell.get(i) != null)
+				continue;
+			CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+			cell.setNumber(i);
+			cell.setTerrain(getTerrain());
+			addObject(cell);
 		}
 	}
 	
@@ -139,7 +135,7 @@ public class BuildingObject extends TangibleObject {
 			portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
 			this.portalLayoutData = new WeakReference<>(portalLayoutData);
 		}
-		Assert.test(portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0, "Invalid portal layout data!");
+		assert portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0 : "Invalid portal layout data!";
 		return portalLayoutData;
 	}
 	

@@ -46,9 +46,8 @@ import java.util.concurrent.TimeUnit;
 public class LogoutCmdCallback implements ICmdCallback {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
-		Assert.notNull(creature);
 		creature.setPosture(Posture.SITTING);
 		Log.i("Logout command called for %s - 30s timer started", creature.getObjectName());
 		updateLogout(player, creature, 30);

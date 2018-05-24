@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.objects.building.BuildingObject;
 import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 import com.projectswg.holocore.test_resources.GenericTangibleObject;
@@ -42,14 +43,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class TestObjectAwareness {
+public class TestObjectAwareness extends TestRunnerNoIntents {
 	
 	private ObjectAwareness awareness;
 	private GenericCreatureObject player;
@@ -136,7 +135,7 @@ public class TestObjectAwareness {
 		
 		moveNoAssert(TestLocation.SSI);
 		System.out.println(player.getObjectsAware());
-		assertAware(List.of(player));
+		assertAware(Collections.singletonList(player));
 		
 		player.setHasOwner(true);
 		Assert.assertNotEquals(0, player.getLoadRange());
@@ -159,7 +158,7 @@ public class TestObjectAwareness {
 		initialize();
 		move(TestLocation.SSI);
 		awareness.destroyObject(testBuilding1);
-		assertAware(List.of(player, testPlayer, testTangible));
+		assertAware(Arrays.asList(player, testPlayer, testTangible));
 	}
 	
 	@Test
@@ -214,9 +213,9 @@ public class TestObjectAwareness {
 	
 	private Collection<SWGObject> getExpectedAware(TestAwareSet awareSet) {
 		switch (awareSet) {
-			case NONE:		return List.of(player);
-			case TATOOINE:	return List.of(player, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"));
-			case NABOO:		return List.of(player, testBuilding2);
+			case NONE:		return Collections.singletonList(player);
+			case TATOOINE:	return Arrays.asList(player, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"));
+			case NABOO:		return Arrays.asList(player, testBuilding2);
 		}
 		throw new RuntimeException("Invalid test aware set: " + awareSet);
 	}

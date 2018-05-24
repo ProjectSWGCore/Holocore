@@ -29,6 +29,7 @@ package com.projectswg.holocore.services.galaxy.travel;
 
 import java.util.List;
 
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +43,7 @@ import com.projectswg.holocore.resources.objects.SpecificObject;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
-public class TestTravelHelper {
+public class TestTravelHelper extends TestRunnerNoIntents {
 	
 	@Test
 	public void testTravelGroups() {

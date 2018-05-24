@@ -28,8 +28,8 @@ package com.projectswg.holocore.intents.object;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 import me.joshlarson.jlcommon.control.Intent;
-
-import javax.annotation.CheckForNull;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerTransferIntent extends Intent {
 	

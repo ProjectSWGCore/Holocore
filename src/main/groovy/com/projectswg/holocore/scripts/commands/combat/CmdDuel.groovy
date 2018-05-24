@@ -33,7 +33,7 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject
 import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	if (target == null || target.getOwner() == null)
 		return
 

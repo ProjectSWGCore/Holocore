@@ -28,6 +28,7 @@ package com.projectswg.holocore.intents.object;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class ForceAwarenessUpdateIntent extends Intent {
 	

@@ -36,10 +36,10 @@ import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.ChatRoomUpdateIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +63,7 @@ public class ChatRoomService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		Player player = gpi.getPlayer();
 		switch (packet.getPacketType()) {

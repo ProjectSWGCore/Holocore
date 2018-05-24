@@ -36,7 +36,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
 public class JumpCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		creature.sendObservers(new JumpUpdate(creature.getObjectId()));
 	}

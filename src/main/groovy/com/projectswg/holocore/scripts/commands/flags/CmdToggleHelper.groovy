@@ -32,6 +32,6 @@ import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.resources.player.PlayerFlags
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	player.getPlayerObject().toggleFlag(PlayerFlags.HELPER)
 }

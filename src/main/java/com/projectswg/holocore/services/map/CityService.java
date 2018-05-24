@@ -32,13 +32,14 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.holocore.intents.PlayerEventIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -57,11 +58,40 @@ public class CityService extends Service {
 	
 	public CityService() {
 		cities = new HashMap<>();
+	}
+	
+	@Override
+	public boolean initialize() {
 		loadCities();
+		return true;
+	}
+	
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
+		SWGPacket p = gpi.getPacket();
+		if (p instanceof DataTransform) {
+			performLocationUpdate(gpi.getPlayer().getCreatureObject());
+		}
+	}
+	
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		Player player = i.getPlayer();
+		CreatureObject creature = player.getCreatureObject();
+		if (i.getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
+			performLocationUpdate(creature);
+		}
+	}
+	
+	@IntentHandler
+	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
+		SWGObject object = i.getObject();
 		
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(PlayerEventIntent.class, this::handlePlayerEventIntent);
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreatedIntent);
+		if (!(object instanceof TangibleObject)) {
+			return;
+		}
+		
+		performLocationUpdate((TangibleObject) object);
 	}
 	
 	private void loadCities() {
@@ -77,31 +107,6 @@ public class CityService extends Service {
 		} catch (SQLException e) {
 			Log.e(e);
 		}
-	}
-	
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
-		if (p instanceof DataTransform) {
-			performLocationUpdate(gpi.getPlayer().getCreatureObject());
-		}
-	}
-	
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		Player player = i.getPlayer();
-		CreatureObject creature = player.getCreatureObject();
-		if (i.getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-			performLocationUpdate(creature);
-		}
-	}
-	
-	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
-		SWGObject object = i.getObject();
-		
-		if(!(object instanceof TangibleObject) || object.getTerrain() == null) {
-			return;
-		}
-		
-		performLocationUpdate((TangibleObject) object);
 	}
 	
 	private void performLocationUpdate(TangibleObject object) {
@@ -136,16 +141,16 @@ public class CityService extends Service {
 		}
 		
 		public boolean isWithinRange(SWGObject obj) {
-			return square((int) obj.getX()-x) + square((int) obj.getZ()-z) <= square(radius);
-		}
-		
-		private int square(int x) {
-			return x * x;
+			return square((int) obj.getX() - x) + square((int) obj.getZ() - z) <= square(radius);
 		}
 		
 		@Override
 		public String toString() {
 			return String.format("City[%s, (%d, %d), radius=%d]", name, x, z, radius);
+		}
+		
+		private int square(int x) {
+			return x * x;
 		}
 		
 	}

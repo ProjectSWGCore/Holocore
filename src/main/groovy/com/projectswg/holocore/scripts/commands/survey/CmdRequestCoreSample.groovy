@@ -34,7 +34,7 @@ import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer
 import com.projectswg.holocore.services.galaxy.GalacticManager
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	def resource = GalacticResourceContainer.getContainer().getGalacticResourceByName(args)
 	if (resource == null) {
 		SystemMessageIntent.broadcastPersonal(player, "Unknown resource: " + args)

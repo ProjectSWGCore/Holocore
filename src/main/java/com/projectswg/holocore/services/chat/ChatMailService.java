@@ -32,9 +32,10 @@ import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.chat.PersistentMessageIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.chat.ChatRange;
 import com.projectswg.holocore.resources.chat.ChatType;
 import com.projectswg.holocore.resources.objects.SWGObject;
@@ -44,8 +45,7 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.server_info.ObjectDatabase;
 import com.projectswg.holocore.services.CoreManager;
-import com.projectswg.holocore.services.player.PlayerManager;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -105,14 +105,14 @@ public class ChatMailService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){ 
+	private void handleInboundPacketIntent(InboundPacketIntent gpi){ 
 		SWGPacket p = gpi.getPacket();
-		String galaxyName = CoreManager.getGalaxy().getName();
+		String galaxyName = ProjectSWG.getGalaxy().getName();
 		switch (p.getPacketType()) {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
-					handleSendPersistentMessage(gpi.getPlayerManager(), gpi.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
+					handleSendPersistentMessage(gpi.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
 				break;
 			case CHAT_REQUEST_PERSISTENT_MESSAGE:
 				if (p instanceof ChatRequestPersistentMessage)
@@ -126,7 +126,7 @@ public class ChatMailService extends Service {
 		}
 	}
 	
-	private void handleSendPersistentMessage(PlayerManager playerMgr, Player sender, String galaxy, ChatPersistentMessageToServer request) {
+	private void handleSendPersistentMessage(Player sender, String galaxy, ChatPersistentMessageToServer request) {
 		String recipientStr = request.getRecipient().toLowerCase(Locale.ENGLISH);
 		
 		if (recipientStr.contains(" "))
@@ -217,7 +217,7 @@ public class ChatMailService extends Service {
 				playersMail.add(element);
 		});
 		
-		String galaxy = CoreManager.getGalaxy().getName();
+		String galaxy = ProjectSWG.getGalaxy().getName();
 		for (Mail mail : playersMail)
 			sendPersistentMessage(player, mail, MailFlagType.HEADER_ONLY, galaxy);
 	}
@@ -236,10 +236,10 @@ public class ChatMailService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				SWGPacket = new ChatPersistentMessageToClient(mail, CoreManager.getGalaxy().getName(), false);
+				SWGPacket = new ChatPersistentMessageToClient(mail, ProjectSWG.getGalaxy().getName(), false);
 				break;
 			case HEADER_ONLY:
-				SWGPacket = new ChatPersistentMessageToClient(mail, CoreManager.getGalaxy().getName(), true);
+				SWGPacket = new ChatPersistentMessageToClient(mail, ProjectSWG.getGalaxy().getName(), true);
 				break;
 		}
 		

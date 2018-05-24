@@ -5,10 +5,10 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendInstantMessage;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -21,7 +21,7 @@ public class ChatInstantMessageService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		switch (packet.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:

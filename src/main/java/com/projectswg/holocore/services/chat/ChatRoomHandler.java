@@ -34,13 +34,14 @@ import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.client_info.ServerFactory;
 import com.projectswg.holocore.resources.player.AccessLevel;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.server_info.ObjectDatabase;
 import com.projectswg.holocore.services.CoreManager;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -264,7 +265,7 @@ public class ChatRoomHandler {
 		 *      SWG.serverName.city.CityId.CityChat title = CityId
 		 */
 		
-		String galaxy = CoreManager.getGalaxy().getName();
+		String galaxy = ProjectSWG.getGalaxy().getName();
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar();
 		String basePath = "SWG." + galaxy + ".";
 		

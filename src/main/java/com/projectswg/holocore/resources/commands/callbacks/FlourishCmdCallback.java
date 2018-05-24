@@ -40,7 +40,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
 public class FlourishCmdCallback implements ICmdCallback  {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		// No performance, no flourish!
 		if (!player.getCreatureObject().isPerforming()) {
 			new SystemMessageIntent(player, "@performance:flourish_not_performing").broadcast();

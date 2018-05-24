@@ -41,10 +41,10 @@ import com.projectswg.common.network.packets.swg.login.creation.DeleteCharacterR
 import com.projectswg.common.network.packets.swg.zone.GameServerLagResponse;
 import com.projectswg.common.network.packets.swg.zone.LagRequest;
 import com.projectswg.common.network.packets.swg.zone.ServerNowEpochTime;
-import com.projectswg.holocore.intents.GalacticIntent;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.LoginEventIntent;
 import com.projectswg.holocore.intents.LoginEventIntent.LoginEvent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.object.DestroyObjectIntent;
 import com.projectswg.holocore.intents.player.DeleteCharacterIntent;
 import com.projectswg.holocore.resources.config.ConfigFile;
@@ -54,10 +54,12 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.services.CoreManager;
-import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.utilities.Arguments;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,6 +67,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class LoginService extends Service {
 	
@@ -79,8 +82,7 @@ public class LoginService extends Service {
 	private PreparedStatement deleteCharacter;
 	
 	public LoginService() {
-		registerForIntent(DeleteCharacterIntent.class, dci -> deleteCharacter(dci.getCreature()));
-		registerForIntent(GalacticPacketIntent.class, gpi -> handlePacket(gpi, gpi.getPacket()));
+		
 	}
 	
 	@Override
@@ -124,10 +126,29 @@ public class LoginService extends Service {
 		return super.terminate();
 	}
 	
-	public long getCharacterIdByFirstName(String name) {
-		Assert.notNull(name);
+	@IntentHandler
+	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
+		deleteCharacter(dci.getCreature());
+	}
+	
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
+		SWGPacket p = gpi.getPacket();
+		if (p instanceof LoginClientId) {
+			handleLogin(gpi.getPlayer(), (LoginClientId) p);
+		} else if (p instanceof DeleteCharacterRequest) {
+			handleCharDeletion(gpi.getPlayer(), (DeleteCharacterRequest) p);
+		} else if (p instanceof LagRequest) {
+			Player player = gpi.getPlayer();
+			if (player.getPlayerServer() == PlayerServer.LOGIN)
+				handleLagRequest(player);
+		}
+	}
+	
+	public long getCharacterIdByFirstName(@NotNull String name) {
+		Objects.requireNonNull(name);
 		name = name.trim().toLowerCase(Locale.US);
-		Assert.test(!name.isEmpty());
+		Arguments.validate(!name.isEmpty(), "name cannot be empty");
 		synchronized (getCharacterFirstName) {
 			try {
 				getCharacterFirstName.setString(1, name + "%");
@@ -142,10 +163,10 @@ public class LoginService extends Service {
 		return 0;
 	}
 	
-	public long getCharacterId(String name) {
-		Assert.notNull(name);
+	public long getCharacterId(@NotNull String name) {
+		Objects.requireNonNull(name);
 		name = name.trim().toLowerCase(Locale.US);
-		Assert.test(!name.isEmpty());
+		Arguments.validate(!name.isEmpty(), "name cannot be empty");
 		synchronized (getCharacter) {
 			try {
 				getCharacter.setString(1, name);
@@ -160,18 +181,6 @@ public class LoginService extends Service {
 		return 0;
 	}
 	
-	private void handlePacket(GalacticPacketIntent gpi, SWGPacket p) {
-		if (p instanceof LoginClientId) {
-			handleLogin(gpi.getPlayer(), (LoginClientId) p);
-		} else if (p instanceof DeleteCharacterRequest) {
-			handleCharDeletion(gpi, gpi.getPlayer(), (DeleteCharacterRequest) p);
-		} else if (p instanceof LagRequest) {
-			Player player = gpi.getPlayer();
-			if (player.getPlayerServer() == PlayerServer.LOGIN)
-				handleLagRequest(player);
-		}
-	}
-	
 	private String getServerString() {
 		Config c = DataManager.getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
@@ -183,8 +192,8 @@ public class LoginService extends Service {
 		player.sendPacket(new GameServerLagResponse());
 	}
 	
-	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
-		SWGObject obj = intent.getObjectManager().getObjectById(request.getPlayerId());
+	private void handleCharDeletion(Player player, DeleteCharacterRequest request) {
+		SWGObject obj = ObjectLookup.getObjectById(request.getPlayerId());
 		boolean success = obj != null && deleteCharacter(obj);
 		if (success) {
 			new DestroyObjectIntent(obj).broadcast();
@@ -196,13 +205,12 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		Assert.notNull(player);
 		if (player.getPlayerState() == PlayerState.LOGGED_IN) { // Client occasionally sends multiple login requests
 			sendLoginSuccessPacket(player);
 			return;
 		}
-		Assert.test(player.getPlayerState() == PlayerState.CONNECTED);
-		Assert.test(player.getPlayerServer() == PlayerServer.NONE);
+		assert player.getPlayerState() == PlayerState.CONNECTED;
+		assert player.getPlayerServer() == PlayerServer.NONE;
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = DataManager.getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
@@ -335,7 +343,7 @@ public class LoginService extends Service {
 	
 	private List <Galaxy> getGalaxies(Player p) {
 		List<Galaxy> galaxies = new ArrayList<>();
-		galaxies.add(CoreManager.getGalaxy());
+		galaxies.add(ProjectSWG.getGalaxy());
 		return galaxies;
 	}
 	
@@ -349,7 +357,7 @@ public class LoginService extends Service {
 						SWGCharacter c = new SWGCharacter();
 						c.setId(set.getInt("id"));
 						c.setName(set.getString("name"));
-						c.setGalaxyId(CoreManager.getGalaxyId());
+						c.setGalaxyId(ProjectSWG.getGalaxy().getId());
 						c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
 						c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
 						characters.add(c);

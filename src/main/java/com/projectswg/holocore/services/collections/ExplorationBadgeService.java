@@ -33,6 +33,7 @@ import com.projectswg.common.data.location.Point3D;
 import com.projectswg.holocore.intents.GrantBadgeIntent;
 import com.projectswg.holocore.intents.player.PlayerTransformedIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -50,9 +51,9 @@ public class ExplorationBadgeService extends Service {
 	
 	public ExplorationBadgeService(){
 		registerExplorationBadge();
-		registerForIntent(PlayerTransformedIntent.class, this::handlePlayerTransformedIntent);
 	}
 		
+	@IntentHandler
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti){
 		String badgeName = checkExplorationRegions(pti.getPlayer());
 		if (badgeName != null){

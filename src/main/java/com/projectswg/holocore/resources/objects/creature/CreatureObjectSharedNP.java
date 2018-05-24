@@ -42,6 +42,7 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.group.GroupInviterData;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -455,7 +456,7 @@ class CreatureObjectSharedNP implements Persistable {
 	public void putBuff(Buff buff, SWGObject target) {
 		synchronized (buffs) {
 			CRC crc = new CRC(buff.getCrc());
-			Assert.test(!buffs.containsKey(crc), "Cannot add a buff twice!");
+			assert !buffs.containsKey(crc) : "Cannot add a buff twice!";
 			buffs.put(crc, buff);
 			buffs.sendDeltaMessage(target);
 		}
@@ -491,7 +492,7 @@ class CreatureObjectSharedNP implements Persistable {
 	private void safeModifyBuff(CRC buffCrc, SWGObject target, Consumer<Buff> operation) {
 		synchronized (buffs) {
 			Buff buff = buffs.get(buffCrc);
-			Assert.notNull(buff);
+			Objects.requireNonNull(buff, "Buff cannot be null");
 			operation.accept(buff);
 			buffs.update(buffCrc, target);
 		}

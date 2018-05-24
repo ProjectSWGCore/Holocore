@@ -27,32 +27,32 @@
 package com.projectswg.holocore.intents.network;
 
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.holocore.resources.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class ConnectionClosedIntent extends Intent {
 	
-	private long networkId;
-	private ConnectionStoppedReason reason;
+	private final Player player;
+	private final ConnectionStoppedReason reason;
 	
-	public ConnectionClosedIntent(long networkId, ConnectionStoppedReason reason) {
-		setNetworkId(networkId);
-		setReason(reason);
-	}
-	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public void setReason(ConnectionStoppedReason reason) {
+	public ConnectionClosedIntent(@NotNull Player player, @NotNull ConnectionStoppedReason reason) {
+		this.player = player;
 		this.reason = reason;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	@NotNull
+	public Player getPlayer() {
+		return player;
 	}
 	
+	@NotNull
 	public ConnectionStoppedReason getReason() {
 		return reason;
+	}
+	
+	public static void broadcast(@NotNull Player player, @NotNull ConnectionStoppedReason reason) {
+		new ConnectionClosedIntent(player, reason).broadcast();
 	}
 	
 }

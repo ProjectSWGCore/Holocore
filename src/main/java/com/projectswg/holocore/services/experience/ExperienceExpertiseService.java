@@ -34,7 +34,7 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ExpertiseRequestMessage;
 import com.projectswg.holocore.intents.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.experience.LevelChangedIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.server_info.StandardLog;
@@ -161,7 +161,7 @@ public class ExperienceExpertiseService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		
 		if (!(packet instanceof ExpertiseRequestMessage)) {

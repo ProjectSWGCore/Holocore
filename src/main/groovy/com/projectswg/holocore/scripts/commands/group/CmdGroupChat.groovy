@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.scripts.commands.group
 
+import com.projectswg.holocore.ProjectSWG
 import com.projectswg.holocore.intents.chat.ChatRoomUpdateIntent
 import com.projectswg.holocore.resources.objects.SWGObject
 import com.projectswg.holocore.resources.player.Player
@@ -34,7 +35,7 @@ import com.projectswg.holocore.services.CoreManager
 import com.projectswg.holocore.services.galaxy.GalacticManager
 import com.projectswg.holocore.utilities.IntentFactory
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	if (args.isEmpty()) {
 		// Should there for some reason be no actual message to display, do nothing
 		return
@@ -47,7 +48,7 @@ static def execute(GalacticManager galacticManager, Player player, SWGObject tar
 		return
 	}
 
-	def galaxy = CoreManager.getGalaxy().getName()
+	def galaxy = ProjectSWG.getGalaxy().getName()
 	def groupChatPath = "SWG." + galaxy + ".group." + groupObjectId + ".GroupChat"
 
 	new ChatRoomUpdateIntent(player, groupChatPath, groupObjectId as String, null, args,

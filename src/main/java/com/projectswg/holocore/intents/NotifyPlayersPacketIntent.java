@@ -35,32 +35,32 @@ import java.util.List;
 
 public class NotifyPlayersPacketIntent extends Intent {
 	
-	private SWGPacket SWGPacket;
+	private SWGPacket packet;
 	private Terrain terrain;
 	private List<Long> networkIds;
 	private ConditionalNotify condition;
 	
-	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
-		this.SWGPacket = SWGPacket;
+	public NotifyPlayersPacketIntent(SWGPacket packet, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
+		this.packet = packet;
 		this.terrain = terrain;
 		this.condition = condition;
 		this.networkIds = networkIds;
 	}
 	
-	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain, ConditionalNotify condition) {
-		this(SWGPacket, terrain, condition, null);
+	public NotifyPlayersPacketIntent(SWGPacket packet, Terrain terrain, ConditionalNotify condition) {
+		this(packet, terrain, condition, null);
 	}
 	
-	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, ConditionalNotify condition, List<Long> networkIds) {
-		this(SWGPacket, null, condition, networkIds);
+	public NotifyPlayersPacketIntent(SWGPacket packet, ConditionalNotify condition, List<Long> networkIds) {
+		this(packet, null, condition, networkIds);
 	}
 	
-	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, List<Long> networkIds) {
-		this(SWGPacket, null, null, networkIds);
+	public NotifyPlayersPacketIntent(SWGPacket packet, List<Long> networkIds) {
+		this(packet, null, null, networkIds);
 	}
 	
-	public NotifyPlayersPacketIntent(SWGPacket SWGPacket, Terrain terrain) {
-		this(SWGPacket, terrain, null);
+	public NotifyPlayersPacketIntent(SWGPacket packet, Terrain terrain) {
+		this(packet, terrain, null);
 	}
 	
 	public NotifyPlayersPacketIntent(SWGPacket p) {
@@ -68,7 +68,7 @@ public class NotifyPlayersPacketIntent extends Intent {
 	}
 	
 	public SWGPacket getPacket() {
-		return SWGPacket;
+		return packet;
 	}
 	
 	public Terrain getTerrain() {

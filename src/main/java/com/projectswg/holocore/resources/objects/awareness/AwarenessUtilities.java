@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.objects.awareness;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 class AwarenessUtilities {
 	

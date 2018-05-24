@@ -33,7 +33,7 @@ import com.projectswg.holocore.resources.player.Player
 import com.projectswg.holocore.services.galaxy.GalacticManager
 import com.projectswg.holocore.utilities.IntentFactory
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	def argSplit = args.split(" ")
 	if (argSplit.length < 2) {
 		IntentFactory.sendSystemMessage(player, "Invalid Arguments: " + args)

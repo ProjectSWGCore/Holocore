@@ -71,6 +71,7 @@ public class CreatureObject extends TangibleObject {
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private long	lastTransform			= 0;
+	private long	lastCombat				= 0;
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
@@ -279,6 +280,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public double getTimeSinceLastTransform() {
 		return (System.nanoTime()-lastTransform)/1E6;
+	}
+	
+	public double getTimeSinceLastCombat() {
+		return (System.nanoTime() - lastCombat) / 1E6;
 	}
 	
 	public PlayerObject getPlayerObject() {
@@ -519,6 +524,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public void updateLastTransformTime() {
 		lastTransform = System.nanoTime();
+	}
+	
+	public void updateLastCombatTime() {
+		lastCombat = System.nanoTime();
 	}
 	
 	public String getMoodAnimation() {

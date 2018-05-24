@@ -39,7 +39,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
 public class SitOnObjectCmdCallback implements ICmdCallback {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player,SWGObject target, String args) {
+	public void execute(Player player,SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		
 		if (creature.getPosture() == Posture.DEAD || creature.getPosture() == Posture.INCAPACITATED)

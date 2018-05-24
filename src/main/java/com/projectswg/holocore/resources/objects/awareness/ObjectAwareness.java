@@ -32,6 +32,7 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureState;
+import org.jetbrains.annotations.NotNull;
 
 public class ObjectAwareness {
 	

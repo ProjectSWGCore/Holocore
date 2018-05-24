@@ -41,9 +41,11 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
-import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
+import me.joshlarson.jlcommon.utilities.Arguments;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -51,7 +53,7 @@ import java.util.stream.Collectors;
 public class GroupObject extends SWGObject {
 	
 	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
-	private final Map<Long, GroupMember>memberMap			= new SynchronizedMap<>();
+	private final Map<Long, GroupMember>memberMap			= new ConcurrentHashMap<>();
 	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
 
 	private CreatureObject	leader		= null;
@@ -134,10 +136,9 @@ public class GroupObject extends SWGObject {
 		return leader.getOwner();
 	}
 	
-	public void setLeader(CreatureObject object) {
-		Assert.notNull(object);
+	public void setLeader(@NotNull CreatureObject object) {
 		GroupMember member = memberMap.get(object.getObjectId());
-		Assert.notNull(member);
+		Arguments.validate(member != null, "Proposed leader is not in group");
 		setLeader(member);
 	}
 	
@@ -216,12 +217,11 @@ public class GroupObject extends SWGObject {
 		removeGroupMembers(creatures);
 	}
 	
-	private void setLeader(GroupMember member) {
-		Assert.notNull(member);
+	private void setLeader(@NotNull GroupMember member) {
 		this.leader = member.getCreature();
 		synchronized (groupMembers) {
-			Assert.test(groupMembers.contains(member));
 			int swapIndex = groupMembers.indexOf(member);
+			assert swapIndex != -1 : "proposed leader is not within group";
 			GroupMember tmp = groupMembers.get(0);
 			groupMembers.set(0, member);
 			groupMembers.set(swapIndex, tmp);
@@ -243,9 +243,9 @@ public class GroupObject extends SWGObject {
 	
 	private void addGroupMembers(CreatureObject ... creatures) {
 		for (CreatureObject creature : creatures) {
-			Assert.test(creature.getGroupId() == 0);
+			Arguments.validate(creature.getGroupId() == 0, "Creature is already in a group");
 			GroupMember member = new GroupMember(creature);
-			Assert.isNull(memberMap.put(creature.getObjectId(), member));
+			memberMap.put(creature.getObjectId(), member);
 			groupMembers.add(member);
 			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 			creature.setGroupId(getObjectId());
@@ -255,9 +255,8 @@ public class GroupObject extends SWGObject {
 	
 	private void removeGroupMembers(CreatureObject ... creatures) {
 		for (CreatureObject creature : creatures) {
-			Assert.test(creature.getGroupId() == getObjectId());
+			Arguments.validate(creature.getGroupId() == getObjectId(), "Creature isn't in this group");
 			GroupMember member = memberMap.remove(creature.getObjectId());
-			Assert.notNull(member);
 			creature.setGroupId(0);
 			groupMembers.remove(member);
 			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));

@@ -24,21 +24,21 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.galaxy;
+package com.projectswg.holocore.services.player;
 
 import com.projectswg.common.network.packets.swg.zone.HeartBeat;
 import com.projectswg.common.utilities.ThreadUtilities;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.PlayerEventIntent;
 import com.projectswg.holocore.intents.connection.ForceLogoutIntent;
 import com.projectswg.holocore.intents.network.CloseConnectionIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.network.DisconnectReason;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerEvent;
 import com.projectswg.holocore.resources.player.PlayerFlags;
-import com.projectswg.holocore.services.CoreManager;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -107,7 +107,7 @@ public class ConnectionService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		Player p = gpi.getPlayer();
 		p.updateLastPacketTimestamp();
 		if (gpi.getPacket() instanceof HeartBeat)
@@ -137,7 +137,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void zoneIn(Player p) {
-		CoreManager.getGalaxy().incrementPopulationCount();
+		ProjectSWG.getGalaxy().incrementPopulationCount();
 		clearPlayerFlag(p, PlayerFlags.LD);
 		removeFromDisappear(p);
 		boolean unique = zonedInPlayers.add(p);
@@ -148,7 +148,7 @@ public class ConnectionService extends Service {
 		if (!zonedInPlayers.remove(p))
 			return;
 		Log.i("Logged out %s with character %s", p.getUsername(), p.getCharacterName());
-		CoreManager.getGalaxy().decrementPopulationCount();
+		ProjectSWG.getGalaxy().decrementPopulationCount();
 		setPlayerFlag(p, PlayerFlags.LD);
 		removeFromDisappear(p);
 		updatePlayTime(p);

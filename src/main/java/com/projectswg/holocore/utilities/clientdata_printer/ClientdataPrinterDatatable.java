@@ -35,7 +35,7 @@ import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 public class ClientdataPrinterDatatable {
 	
 	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new ConsoleLogWrapper());
 		printTable("datatables/buildout/areas_tatooine.iff");
 	}
 	

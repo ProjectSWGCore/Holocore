@@ -30,19 +30,19 @@ import com.projectswg.common.network.packets.swg.zone.spatial.AttributeListMessa
 import com.projectswg.holocore.resources.commands.ICmdCallback;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 
 public class AttributesCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		String[] cmd = args.split(" ");
 		
 		for (String s : cmd) {
 			if (s.equals("-255") || s.length() == 0)
 				continue;
 			
-			SWGObject obj = galacticManager.getObjectManager().getObjectById(Long.parseLong(s));
+			SWGObject obj = ObjectLookup.getObjectById(Long.parseLong(s));
 			if (obj != null)
 				handleSendItemAttributes(obj, player);
 		}

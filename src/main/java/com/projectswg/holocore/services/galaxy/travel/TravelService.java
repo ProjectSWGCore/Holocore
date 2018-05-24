@@ -36,7 +36,7 @@ import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListReque
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint;
 import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
 import com.projectswg.holocore.intents.travel.TicketPurchaseIntent;
 import com.projectswg.holocore.intents.travel.TicketUseIntent;
@@ -52,6 +52,7 @@ import com.projectswg.holocore.resources.server_info.DataManager;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -66,12 +67,6 @@ public class TravelService extends Service {
 	
 	public TravelService() {
 		this.travel = new TravelHelper();
-		
-		registerForIntent(TravelPointSelectionIntent.class, this::handlePointSelection);
-		registerForIntent(GalacticPacketIntent.class, this::handleTravelPointRequest);
-		registerForIntent(TicketPurchaseIntent.class, this::handleTicketPurchase);
-		registerForIntent(TicketUseIntent.class, this::handleTicketUse);
-		registerForIntent(ObjectCreatedIntent.class, this::handleObjectCreation);
 	}
 	
 	@Override
@@ -86,39 +81,20 @@ public class TravelService extends Service {
 		return super.stop();
 	}
 	
-	private List<Integer> getAdditionalCosts(TravelPoint departure, Collection<TravelPoint> points) {
-		List<Integer> additionalCosts = new ArrayList<>();
-		
-		for (TravelPoint point : points) {
-			if (point == departure)
-				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()));
-			else
-				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()) + getTravelCost(departure.getTerrain(), point.getTerrain()));
-		}
-		
-		return additionalCosts;
-	}
-	
-	private int getClientCost(Terrain departure, Terrain destination) {
-		return travel.getTravelFee(departure, destination) - 50;
-	}
-	
-	private int getTravelCost(Terrain departure, Terrain destination) {
-		return (int) (travel.getTravelFee(departure, destination) * getTicketPriceFactor());
-	}
-	
-	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
+	@IntentHandler
+	private void handleTravelPointSelectionIntent(TravelPointSelectionIntent tpsi) {
 		CreatureObject traveler = tpsi.getCreature();
 		
 		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName(), tpsi.isInstant()));
 	}
 	
-	private void handleTravelPointRequest(GalacticPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
+		SWGPacket p = ipi.getPacket();
 		
 		if (p instanceof PlanetTravelPointListRequest) {
 			String planetName = ((PlanetTravelPointListRequest) p).getPlanetName();
-			Player player = gpi.getPlayer();
+			Player player = ipi.getPlayer();
 			Terrain to = Terrain.getTerrainFromName(planetName);
 			if (to == null) {
 				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", planetName);
@@ -142,11 +118,12 @@ public class TravelService extends Service {
 		}
 	}
 	
-	private void handleTicketPurchase(TicketPurchaseIntent i) {
-		CreatureObject purchaser = i.getPurchaser();
+	@IntentHandler
+	private void handleTicketPurchaseIntent(TicketPurchaseIntent tpi) {
+		CreatureObject purchaser = tpi.getPurchaser();
 		TravelPoint nearestPoint = travel.getNearestTravelPoint(purchaser);
-		TravelPoint destinationPoint = travel.getDestinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
-		boolean roundTrip = i.isRoundTrip();
+		TravelPoint destinationPoint = travel.getDestinationPoint(Terrain.getTerrainFromName(tpi.getDestinationPlanet()), tpi.getDestinationName());
+		boolean roundTrip = tpi.isRoundTrip();
 		
 		if (nearestPoint == null || destinationPoint == null || !travel.isValidRoute(nearestPoint.getTerrain(), destinationPoint.getTerrain())) {
 			Log.w("Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
@@ -167,8 +144,9 @@ public class TravelService extends Service {
 		showMessageBox(purchaser, "ticket_purchase_complete");
 	}
 	
-	private void handleTicketUse(TicketUseIntent i) {
-		CreatureObject creature = i.getPlayer().getCreatureObject();
+	@IntentHandler
+	private void handleTicketUseIntent(TicketUseIntent tui) {
+		CreatureObject creature = tui.getPlayer().getCreatureObject();
 		
 		TravelPoint nearestPoint = travel.getNearestTravelPoint(creature);
 		if (nearestPoint == null || nearestPoint.getShuttle() == null || !nearestPoint.isWithinRange(creature)) {
@@ -178,10 +156,10 @@ public class TravelService extends Service {
 		
 		switch (nearestPoint.getGroup().getStatus()) {
 			case GROUNDED:
-				if (i.getTicket() == null)
-					handleTicketUseSui(i.getPlayer());
+				if (tui.getTicket() == null)
+					handleTicketUseSui(tui.getPlayer());
 				else
-					travel.handleTicketUse(i.getPlayer(), i.getTicket(), travel.getNearestTravelPoint(i.getTicket()), travel.getDestinationPoint(i.getTicket()));
+					travel.handleTicketUse(tui.getPlayer(), tui.getTicket(), travel.getNearestTravelPoint(tui.getTicket()), travel.getDestinationPoint(tui.getTicket()));
 				break;
 			case LANDING:
 				sendTravelMessage(creature, "@travel/travel:shuttle_begin_boarding");
@@ -193,6 +171,58 @@ public class TravelService extends Service {
 				sendTravelMessage(creature, "@travel/travel:shuttle_board_delay", "DI", nearestPoint.getGroup().getTimeRemaining());
 				break;
 		}
+	}
+	
+	@IntentHandler
+	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
+		SWGObject object = oci.getObject();
+		
+		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
+		if (travel.getTravelGroup(object.getTemplate()) != null && !(object instanceof StaticObject)) {
+			TravelPoint pointForShuttle = travel.getNearestTravelPoint(object);
+			CreatureObject shuttle = (CreatureObject) object;
+			
+			if (pointForShuttle == null) {
+				Log.w("No point for shuttle at location: " + object.getWorldLocation());
+				return;
+			}
+			// Assign the shuttle to the nearest travel point
+			pointForShuttle.setShuttle(shuttle);
+			
+			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
+			shuttle.setPosture(Posture.UPRIGHT);
+			shuttle.setShownOnRadar(false);
+		} else if (object.getTemplate().equals(SpecificObject.SO_TICKET_COLLETOR.getTemplate())) {
+			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
+			
+			if (pointForCollector == null) {
+				Log.w("No point for collector at location: " + object.getWorldLocation());
+				return;
+			}
+			
+			pointForCollector.setCollector(object);
+		}
+	}
+	
+	private List<Integer> getAdditionalCosts(TravelPoint departure, Collection<TravelPoint> points) {
+		List<Integer> additionalCosts = new ArrayList<>();
+		
+		for (TravelPoint point : points) {
+			if (point == departure)
+				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()));
+			else
+				additionalCosts.add(-getClientCost(departure.getTerrain(), point.getTerrain()) + getTravelCost(departure.getTerrain(), point.getTerrain()));
+		}
+		
+		return additionalCosts;
+	}
+	
+	private int getClientCost(Terrain departure, Terrain destination) {
+		return travel.getTravelFee(departure, destination) - 50;
+	}
+	
+	private int getTravelCost(Terrain departure, Terrain destination) {
+		return (int) (travel.getTravelFee(departure, destination) * getTicketPriceFactor());
 	}
 	
 	private void handleTicketUseSui(Player player) {
@@ -227,36 +257,6 @@ public class TravelService extends Service {
 			totalPrice += getTravelCost(arrivalPlanet, departurePlanet);
 		
 		return totalPrice;
-	}
-	
-	private void handleObjectCreation(ObjectCreatedIntent i) {
-		SWGObject object = i.getObject();
-		
-		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
-		if (travel.getTravelGroup(object.getTemplate()) != null && !(object instanceof StaticObject)) {
-			TravelPoint pointForShuttle = travel.getNearestTravelPoint(object);
-			CreatureObject shuttle = (CreatureObject) object;
-			
-			if (pointForShuttle == null) {
-				Log.w("No point for shuttle at location: " + object.getWorldLocation());
-				return;
-			}
-			// Assign the shuttle to the nearest travel point
-			pointForShuttle.setShuttle(shuttle);
-			
-			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
-			shuttle.setPosture(Posture.UPRIGHT);
-			shuttle.setShownOnRadar(false);
-		} else if (object.getTemplate().equals(SpecificObject.SO_TICKET_COLLETOR.getTemplate())) {
-			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
-			
-			if (pointForCollector == null) {
-				Log.w("No point for collector at location: " + object.getWorldLocation());
-				return;
-			}
-			
-			pointForCollector.setCollector(object);
-		}
 	}
 	
 	private double getTicketPriceFactor() {

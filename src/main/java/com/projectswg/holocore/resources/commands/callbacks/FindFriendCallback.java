@@ -41,7 +41,7 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.player.PlayerState;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 
 import java.util.Locale;
 import java.util.Map;
@@ -51,7 +51,7 @@ import java.util.Map;
  */
 public class FindFriendCallback implements ICmdCallback {
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		PlayerObject ghost = player.getPlayerObject();
 
 		if (ghost == null || args.isEmpty())

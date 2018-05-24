@@ -38,6 +38,7 @@ import com.projectswg.holocore.resources.objects.custom.AIObject;
 import com.projectswg.holocore.resources.objects.weapon.WeaponObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.services.galaxy.GalacticManager;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 
 /**
  * This callback is used for all three kinds of transfer commands. The commands
@@ -47,7 +48,7 @@ import com.projectswg.holocore.services.galaxy.GalacticManager;
  */
 public class TransferItemCallback implements ICmdCallback {
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		// There must always be a target for transfer
 		if (target == null) {
 			new SystemMessageIntent(player, "@container_error_message:container29").broadcast();
@@ -69,7 +70,7 @@ public class TransferItemCallback implements ICmdCallback {
 		boolean weapon = target instanceof WeaponObject;
 
 		try {
-			SWGObject newContainer = galacticManager.getObjectManager().getObjectById(Long.valueOf(args.split(" ")[1]));
+			SWGObject newContainer = ObjectLookup.getObjectById(Long.valueOf(args.split(" ")[1]));
 
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
 			if (newContainer == null) {
@@ -93,8 +94,7 @@ public class TransferItemCallback implements ICmdCallback {
 			}
 
 			SWGObject appearanceInventory = actor.getSlottedObject("appearance_inventory");
-
-			Assert.notNull(appearanceInventory);
+			assert appearanceInventory != null : "actor does not have an appearance inventory";
 
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {

@@ -43,7 +43,7 @@ import com.projectswg.holocore.resources.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 import com.projectswg.holocore.utilities.IntentFactory;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;

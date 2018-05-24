@@ -36,6 +36,7 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.object.ContainerTransferIntent;
 import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
 import com.projectswg.holocore.resources.containers.ContainerResult;
@@ -50,7 +51,6 @@ import com.projectswg.holocore.resources.objects.cell.CellObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.CoreManager;
 import com.projectswg.holocore.services.objects.ObjectCreator;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.log.Log;
@@ -793,7 +793,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(CoreManager.getGalaxyId()); // 0
+		bb.addInt(ProjectSWG.getGalaxy().getId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);

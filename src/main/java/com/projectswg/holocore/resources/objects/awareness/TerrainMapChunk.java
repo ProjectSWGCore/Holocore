@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.objects.awareness;
 
 import com.projectswg.holocore.resources.objects.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;

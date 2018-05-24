@@ -39,6 +39,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 @ManagerStructure(children = {
 		ExperienceRoleService.class,
 		ExperienceExpertiseService.class,
+		ExperienceLevelService.class,
 		SkillManager.class
 })
 public class ExperienceManager extends Manager {

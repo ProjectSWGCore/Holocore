@@ -27,32 +27,32 @@
 package com.projectswg.holocore.intents.network;
 
 import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.holocore.resources.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class InboundPacketIntent extends Intent {
 	
-	private SWGPacket SWGPacket;
-	private long networkId;
+	private final Player player;
+	private final SWGPacket packet;
 	
-	public InboundPacketIntent(SWGPacket p, long networkId) {
-		setPacket(p);
-		setNetworkId(networkId);
+	public InboundPacketIntent(@NotNull Player player, @NotNull SWGPacket packet) {
+		this.player = player;
+		this.packet = packet;
 	}
 	
-	public void setPacket(SWGPacket p) {
-		this.SWGPacket = p;
+	@NotNull
+	public Player getPlayer() {
+		return player;
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
+	@NotNull
 	public SWGPacket getPacket() {
-		return SWGPacket;
+		return packet;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	public static void broadcast(@NotNull Player player, @NotNull SWGPacket packet) {
+		new InboundPacketIntent(player, packet).broadcast();
 	}
 	
 }

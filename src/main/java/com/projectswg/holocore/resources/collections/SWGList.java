@@ -31,16 +31,12 @@ import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import me.joshlarson.jlcommon.concurrency.SynchronizedList;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.AbstractList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -92,8 +88,8 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 		this.strType = strType;
 		this.dataSize = 0;
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new SynchronizedList<>(new LinkedList<>());
-		this.data = new SynchronizedList<>();
+		this.deltas = Collections.synchronizedList(new LinkedList<>());
+		this.data = new ArrayList<>();
 		this.deltaSize = 0;
 	}
 	

@@ -32,7 +32,6 @@ import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiListBox;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
 
 import java.util.Locale;
 import java.util.Set;
@@ -42,11 +41,11 @@ public class StartDanceCallback implements ICmdCallback {
 	private static final String ABILITY_NAME_PREFIX = "startDance+";
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		handleCommand(galacticManager, player, target, args, false);
+	public void execute(Player player, SWGObject target, String args) {
+		handleCommand(player, target, args, false);
 	}
 	
-	protected void handleCommand(GalacticManager galacticManager, Player player, SWGObject target, String args, boolean changeDance) {
+	protected void handleCommand(Player player, SWGObject target, String args, boolean changeDance) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		
 		// Not sure if args can ever actually be null. Better safe than sorry.

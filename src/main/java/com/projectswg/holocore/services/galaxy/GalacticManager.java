@@ -26,12 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.galaxy;
 
-import com.projectswg.holocore.intents.network.ConnectionClosedIntent;
-import com.projectswg.holocore.intents.network.ConnectionOpenedIntent;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
-import com.projectswg.holocore.intents.network.InboundPacketIntent;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.services.CoreManager;
 import com.projectswg.holocore.services.chat.ChatManager;
 import com.projectswg.holocore.services.dev.DeveloperService;
 import com.projectswg.holocore.services.galaxy.travel.TravelService;
@@ -39,69 +33,23 @@ import com.projectswg.holocore.services.objects.ObjectManager;
 import com.projectswg.holocore.services.objects.UniformBoxService;
 import com.projectswg.holocore.services.player.PlayerManager;
 import com.projectswg.holocore.services.trade.TradeService;
-import me.joshlarson.jlcommon.control.IntentChain;
-import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Manager;
+import me.joshlarson.jlcommon.control.ManagerStructure;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
+@ManagerStructure(children = {
+		ObjectManager.class,
+		PlayerManager.class,
+		GameManager.class,
+		ChatManager.class,
+		TravelService.class,
+		DeveloperService.class,
+		UniformBoxService.class,
+		TradeService.class
+})
 public class GalacticManager extends Manager {
 	
-	private final ObjectManager objectManager;
-	private final PlayerManager playerManager;
-	private final Map<Long, IntentChain> prevIntentMap;
-	
 	public GalacticManager() {
-		objectManager = new ObjectManager();
-		playerManager = new PlayerManager();
-		prevIntentMap = new ConcurrentHashMap<>();
 		
-		addChildService(objectManager);
-		addChildService(playerManager);
-		addChildService(new GameManager());
-		addChildService(new ChatManager());
-		addChildService(new TravelService());
-		addChildService(new DeveloperService());
-		addChildService(new UniformBoxService());
-		addChildService(new TradeService());
-	}
-	
-	@Override
-	public boolean initialize() {
-		resetPopulationCount();
-		return super.initialize();
-	}
-	
-	@IntentHandler
-	private void handleInboundPacketIntent(InboundPacketIntent ipi){
-		Player player = playerManager.getPlayerFromNetworkId(ipi.getNetworkId());
-		Assert.notNull(player);
-		GalacticPacketIntent g = new GalacticPacketIntent(ipi.getPacket(), player);
-		g.setGalacticManager(this);
-		prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
-	}
-	
-	@IntentHandler
-	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi){
-		prevIntentMap.put(coi.getNetworkId(), new IntentChain(coi));
-	}
-	
-	@IntentHandler
-	private void handleConnectionClosedIntent(ConnectionClosedIntent cci){
-		prevIntentMap.remove(cci.getNetworkId()).reset();
-	}
-	
-	public ObjectManager getObjectManager() {
-		return objectManager;
-	}
-	
-	public PlayerManager getPlayerManager() {
-		return playerManager;
-	}
-	
-	private void resetPopulationCount() {
-		CoreManager.getGalaxy().setPopulation(0);
 	}
 	
 }

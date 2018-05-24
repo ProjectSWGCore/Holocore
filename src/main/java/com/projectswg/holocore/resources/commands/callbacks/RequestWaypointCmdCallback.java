@@ -42,7 +42,7 @@ import com.projectswg.holocore.services.objects.ObjectCreator;
 public class RequestWaypointCmdCallback implements ICmdCallback {
 	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	public void execute(Player player, SWGObject target, String args) {
 		String[] cmd = args.split(" ", 6);
 		if (cmd.length < 5) {
 			SystemMessageIntent.broadcastPersonal(player, "Invalid number of arguments for waypoint! Expected 5 or 6");

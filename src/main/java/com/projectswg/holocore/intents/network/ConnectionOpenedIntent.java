@@ -26,22 +26,25 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.network;
 
+import com.projectswg.holocore.resources.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class ConnectionOpenedIntent extends Intent {
 	
-	private long networkId;
+	private final Player player;
 	
-	public ConnectionOpenedIntent(long networkId) {
-		setNetworkId(networkId);
+	public ConnectionOpenedIntent(@NotNull Player player) {
+		this.player = player;
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
+	@NotNull
+	public Player getPlayer() {
+		return player;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	public static void broadcast(@NotNull Player player) {
+		new ConnectionOpenedIntent(player).broadcast();
 	}
 	
 }

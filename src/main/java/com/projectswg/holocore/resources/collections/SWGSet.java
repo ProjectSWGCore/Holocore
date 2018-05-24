@@ -31,8 +31,6 @@ import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import me.joshlarson.jlcommon.concurrency.SynchronizedList;
-import me.joshlarson.jlcommon.concurrency.SynchronizedSet;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.lang.reflect.InvocationTargetException;
@@ -83,8 +81,8 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 		this.strType = strType;
 		this.dataSize = 0;
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new SynchronizedList<>(new LinkedList<>());
-		this.data = new SynchronizedSet<>();
+		this.deltas = new LinkedList<>();
+		this.data = new HashSet<>();
 		this.deltaSize = 0;
 	}
 	

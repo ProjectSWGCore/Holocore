@@ -57,8 +57,9 @@ import com.projectswg.holocore.resources.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.spawn.Spawner.SpawnerFlag;
 import com.projectswg.holocore.resources.spawn.SpawnerType;
 import com.projectswg.holocore.services.objects.ObjectCreator;
-import com.projectswg.holocore.services.objects.ObjectManager.ObjectLookup;
+import com.projectswg.holocore.services.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -78,33 +79,25 @@ public final class SpawnerService extends Service {
 	public SpawnerService() {
 		this.spawnerMap = new HashMap<>();
 		this.executor = new ScheduledThreadPool(1, "spawner-service");
-		
-		registerForIntent(ConfigChangedIntent.class, this::handleConfigChangedIntent);
-		registerForIntent(DestroyObjectIntent.class, this::handleDestroyObjectIntent);
 	}
 	
 	@Override
 	public boolean initialize() {
 		executor.start();
-		if(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
+		if (DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
 			loadSpawners();
 		
-		return super.initialize();
-	}
-	
-	@Override
-	public boolean start() {
-		
-		return super.start();
+		return true;
 	}
 	
 	@Override
 	public boolean terminate() {
 		executor.stop();
-		
-		return super.terminate();
+		executor.awaitTermination(1000);
+		return true;
 	}
 	
+	@IntentHandler
 	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
 		String newValue, oldValue;
 		
@@ -122,6 +115,7 @@ public final class SpawnerService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject destroyedObject = doi.getObject();
 		if (!(destroyedObject instanceof AIObject))

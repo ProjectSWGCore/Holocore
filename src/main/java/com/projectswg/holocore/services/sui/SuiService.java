@@ -34,9 +34,10 @@ import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification;
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiForceClosePage;
-import com.projectswg.holocore.intents.network.GalacticPacketIntent;
+import com.projectswg.holocore.intents.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.sui.SuiWindowIntent;
 import com.projectswg.holocore.resources.player.Player;
+import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -51,13 +52,11 @@ public class SuiService extends Service {
 	private final Map<Long, List<SuiBaseWindow>> windows;
 
 	public SuiService() {
-		windows = new ConcurrentHashMap<>();
-		
-		registerForIntent(GalacticPacketIntent.class, this::handleGalacticPacketIntent);
-		registerForIntent(SuiWindowIntent.class, this::handleSuiWindowIntent);
+		this.windows = new ConcurrentHashMap<>();
 	}
 	
-	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		switch (packet.getPacketType()) {
 			case SUI_EVENT_NOTIFICATION:
@@ -69,6 +68,7 @@ public class SuiService extends Service {
 		}
 	}
 	
+	@IntentHandler
 	private void handleSuiWindowIntent(SuiWindowIntent swi) {
 		switch(swi.getEvent()) {
 			case NEW: displayWindow(swi.getPlayer(), swi.getWindow()); break;

@@ -32,9 +32,8 @@ import com.projectswg.holocore.intents.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.objects.SWGObject;
 import com.projectswg.holocore.resources.objects.creature.CreatureObject;
 import com.projectswg.holocore.resources.objects.player.PlayerObject;
-import com.projectswg.holocore.services.player.PlayerManager;
 import me.joshlarson.jlcommon.control.IntentChain;
-import me.joshlarson.jlcommon.control.Service;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,6 @@ public class Player implements Comparable<Player> {
 	private final List<DeltasMessage> bufferedDeltas;
 	private final AtomicBoolean bufferedDeltasSent;
 	private final IntentChain packetChain;
-	private final Service playerManager;
 	private final Object sendingLock;
 	private final long networkId;
 	
@@ -60,20 +58,15 @@ public class Player implements Comparable<Player> {
 	private int				userId				= 0;
 	
 	public Player() {
-		this(null, 0);
+		this(0);
 	}
 	
-	public Player(Service playerManager, long networkId) {
+	public Player(long networkId) {
 		this.bufferedDeltas = new ArrayList<>();
 		this.bufferedDeltasSent = new AtomicBoolean(false);
 		this.packetChain = new IntentChain();
-		this.playerManager = playerManager;
 		this.sendingLock = new Object();
 		this.networkId = networkId;
-	}
-
-	public PlayerManager getPlayerManager() {
-		return (PlayerManager) playerManager;
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -192,7 +185,7 @@ public class Player implements Comparable<Player> {
 		DeltasMessage [] packets;
 		synchronized (bufferedDeltas) {
 			bufferedDeltasSent.set(true);
-			packets = bufferedDeltas.toArray(new DeltasMessage[bufferedDeltas.size()]);
+			packets = bufferedDeltas.toArray(new DeltasMessage[0]);
 			bufferedDeltas.clear();
 		}
 		sendPacket(packets);
@@ -201,7 +194,7 @@ public class Player implements Comparable<Player> {
 	public void sendPacket(SWGPacket ... packets) {
 		synchronized (getSendingLock()) {
 			for (SWGPacket p : packets) {
-				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+				packetChain.broadcastAfter(new OutboundPacketIntent(this, p));
 			}
 		}
 	}
@@ -216,7 +209,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	@Override
-	public int compareTo(Player p) {
+	public int compareTo(@NotNull Player p) {
 		if (creatureObject == null)
 			return p.getCreatureObject() == null ? 0 : -1;
 		else if (p.getCreatureObject() == null)
@@ -235,7 +228,7 @@ public class Player implements Comparable<Player> {
 		if (creatureObject == null)
 			return false;
 		CreatureObject oCreature = ((Player) o).getCreatureObject();
-		return oCreature != null && creatureObject.equals(oCreature);
+		return creatureObject.equals(oCreature);
 	}
 	
 	@Override

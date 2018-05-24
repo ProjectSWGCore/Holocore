@@ -31,11 +31,11 @@ import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.objects.SWGObject;
-import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -63,8 +63,8 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		this.updateType = updateType;
 		this.strType = strType;
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new SynchronizedMap<>();
-		this.data = new SynchronizedMap<>();
+		this.deltas = new HashMap<>();
+		this.data = new HashMap<>();
 		this.deltaSize = 0;
 		this.dataSize = 0;
 	}

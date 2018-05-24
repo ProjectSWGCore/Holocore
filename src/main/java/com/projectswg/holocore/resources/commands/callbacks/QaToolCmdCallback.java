@@ -47,9 +47,7 @@ import com.projectswg.holocore.resources.player.Player;
 import com.projectswg.holocore.resources.sui.SuiButtons;
 import com.projectswg.holocore.resources.sui.SuiMessageBox;
 import com.projectswg.holocore.scripts.commands.admin.qatool.QaToolDetails;
-import com.projectswg.holocore.services.galaxy.GalacticManager;
-import com.projectswg.holocore.services.objects.ObjectManager;
-import com.projectswg.holocore.services.player.PlayerManager.PlayerLookup;
+import com.projectswg.holocore.services.player.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.log.Log;
 
 /**
@@ -57,13 +55,8 @@ import me.joshlarson.jlcommon.log.Log;
  */
 public class QaToolCmdCallback implements ICmdCallback {
 	
-	private GalacticManager galacticManager;
-	
 	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		if (this.galacticManager == null)
-			this.galacticManager = galacticManager;
-		
+	public void execute(Player player, SWGObject target, String args) {
 		if (args != null && !args.isEmpty()) {
 			String[] command = args.split(" ");
 			String commandName = command[0];
@@ -73,7 +66,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					displayHelp(player);
 					break;
 				case "force-delete":
-					forceDelete(galacticManager.getObjectManager(), player, target);
+					forceDelete(player, target);
 					break;
 				case "recover":
 					recoverPlayer(player, args.substring(args.indexOf(' ') + 1));
@@ -103,7 +96,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	
 	/* Handlers */
 	
-	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
+	private void forceDelete(final Player player, final SWGObject target) {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
 		inputBox.addOkButtonCallback("handleDeleteObject", (event, parameters) -> {
 			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {

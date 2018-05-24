@@ -29,11 +29,11 @@ package com.projectswg.holocore.resources.server_info;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.holocore.resources.config.ConfigFile;
-import me.joshlarson.jlcommon.concurrency.SynchronizedMap;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -47,7 +47,7 @@ public class DataManager {
 	private final AtomicBoolean initialized;
 	
 	private DataManager() {
-		this.configs = new SynchronizedMap<>();
+		this.configs = new HashMap<>();
 		this.watcher = new ConfigWatcher(configs);
 		this.initialized = new AtomicBoolean(false);
 	}
@@ -71,7 +71,7 @@ public class DataManager {
 	}
 	
 	private void initializeConfig() {
-		Assert.test(configs.isEmpty(), "Internal error in DataManager!");
+		assert configs.isEmpty() : "double initialize";
 		for (ConfigFile file : ConfigFile.values()) {
 			File f = new File(file.getFilename());
 			if (!createConfig(f)) {

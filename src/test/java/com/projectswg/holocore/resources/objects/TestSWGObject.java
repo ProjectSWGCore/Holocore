@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,12 +35,11 @@ import org.junit.runners.JUnit4;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import me.joshlarson.jlcommon.log.Assert.AssertionException;
 
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
-public class TestSWGObject {
+public class TestSWGObject extends TestRunnerNoIntents {
 	
 	@Test
 	public void testWorldLocation() {
@@ -79,7 +79,7 @@ public class TestSWGObject {
 		Assert.assertEquals(Terrain.TATOOINE, child.getTerrain());
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent1() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericCreatureObject(2);
@@ -89,7 +89,7 @@ public class TestSWGObject {
 		child.setTerrain(Terrain.TATOOINE);
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent2() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericCreatureObject(2);
@@ -99,7 +99,7 @@ public class TestSWGObject {
 		child.setPosition(Terrain.CORELLIA, 0, 0, 0);
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent3() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericCreatureObject(2);
