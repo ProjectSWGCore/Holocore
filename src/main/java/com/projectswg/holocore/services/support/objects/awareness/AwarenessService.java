@@ -97,6 +97,7 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
+		oci.getObject().updateLoadRange();
 		awareness.createObject(oci.getObject());
 	}
 	

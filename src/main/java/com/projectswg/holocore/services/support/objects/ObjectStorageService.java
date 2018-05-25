@@ -6,12 +6,6 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject.ObjectClassification;
-import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
-import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
@@ -19,6 +13,11 @@ import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.AreaLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.BuildoutLoader;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -33,11 +32,15 @@ public class ObjectStorageService extends Service {
 	
 	private final ObjectDatabase<SWGObject> database;
 	private final Map<Long, SWGObject> objectMap;
+	private final Map<Long, SWGObject> buildouts;
+	private final Set<AIObject> aiObjects;
 	private final AtomicBoolean started;
 	
 	public ObjectStorageService() {
 		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
+		this.buildouts = new ConcurrentHashMap<>(256*1024, 0.8f, 1);
+		this.aiObjects = ConcurrentHashMap.newKeySet();
 		this.started = new AtomicBoolean(false);
 	}
 	
@@ -47,7 +50,7 @@ public class ObjectStorageService extends Service {
 		
 		{
 			long startTime = StandardLog.onStartLoad("client objects");
-			Map<Long, SWGObject> buildouts = BuildoutLoader.load(AreaLoader.load(createEventList())).getObjects();
+			buildouts.putAll(BuildoutLoader.load(AreaLoader.load(createEventList())).getObjects());
 			objectMap.putAll(buildouts);
 			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
 		}
@@ -65,27 +68,20 @@ public class ObjectStorageService extends Service {
 	
 	@Override
 	public boolean start() {
+		buildouts.values().forEach(ObjectCreatedIntent::broadcast);
 		synchronized (database) {
 			database.traverse(this::loadObject);
 		}
-		objectMap.forEach((id, obj) -> {
-			if (obj instanceof AIObject)
-				((AIObject) obj).aiStart();
-			if (obj.getParent() == null && obj.getClassification() != ObjectClassification.GENERATED) 
-				broadcast(obj);
-		});
 		
 		started.set(true);
+		aiObjects.forEach(AIObject::aiStart);
 		return true;
 	}
 	
 	@Override
 	public boolean stop() {
 		started.set(false);
-		for (SWGObject obj : objectMap.values()) {
-			if (obj instanceof AIObject)
-				((AIObject) obj).aiStop();
-		}
+		aiObjects.forEach(AIObject::aiStop);
 		return true;
 	}
 	
@@ -139,19 +135,22 @@ public class ObjectStorageService extends Service {
 					database.save();
 			}
 		}
-		if (!(obj instanceof AIObject))
-			return;
-		if (started.get())
-			((AIObject) obj).aiStart();
+		if (obj instanceof AIObject) {
+			aiObjects.add((AIObject) obj);
+			if (started.get())
+				((AIObject) obj).aiStart();
+		}
 	}
 	
 	@IntentHandler
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
-		destroyObject(doi.getObject());
-		if (!(doi.getObject() instanceof AIObject))
-			return;
-		if (started.get())
-			((AIObject) doi.getObject()).aiStop();
+		SWGObject obj = doi.getObject();
+		destroyObject(obj);
+		if (obj instanceof AIObject) {
+			aiObjects.remove(obj);
+			if (started.get())
+				((AIObject) obj).aiStop();
+		}
 	}
 	
 	@IntentHandler
@@ -202,12 +201,6 @@ public class ObjectStorageService extends Service {
 			events.add(event.toLowerCase(Locale.US));
 		}
 		return events;
-	}
-	
-	private static void broadcast(SWGObject obj) {
-		ObjectCreatedIntent.broadcast(obj);
-		obj.getContainedObjects().forEach(ObjectStorageService::broadcast);
-		obj.getSlottedObjects().forEach(ObjectStorageService::broadcast);
 	}
 	
 	public static class ObjectLookup {

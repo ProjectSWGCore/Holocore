@@ -134,7 +134,6 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		Assert.assertEquals(0, player.getLoadRange());
 		
 		moveNoAssert(TestLocation.SSI);
-		System.out.println(player.getObjectsAware());
 		assertAware(Collections.singletonList(player));
 		
 		player.setHasOwner(true);

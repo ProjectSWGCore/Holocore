@@ -103,8 +103,11 @@ public class BuildoutLoader {
 					CellObject cell = building.getCellByNumber((int) set.getInt(13));
 					obj.systemMove(cell);
 				}
-				if (obj instanceof BuildingObject)
+				if (obj instanceof BuildingObject) {
 					((BuildingObject) obj).populateCells();
+					for (SWGObject cell : obj.getContainedObjects())
+						objectMap.put(cell.getObjectId(), cell);
+				}
 				objectMap.put(set.getInt(0), obj);
 			}
 		} catch (IOException e) {

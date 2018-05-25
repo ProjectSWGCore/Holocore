@@ -80,22 +80,19 @@ public class TerrainMap {
 	private Collection<SWGObject> getAware(SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
 		Set<SWGObject> aware;
-		if (!AwarenessUtilities.isInAwareness(obj))
+		if (AwarenessUtilities.notInAwareness(obj))
 			aware = new HashSet<>();
 		else if (superParent == null)
 			aware = getNearbyAware(obj);
 		else
 			aware = superParent.getAware(AwarenessType.OBJECT);
-		aware.removeIf(a -> !AwarenessUtilities.isInAwareness(a));
+		aware.removeIf(AwarenessUtilities::notInAwareness);
 		recursiveAdd(aware, obj);
 		return aware;
 	}
 	
 	@NotNull
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
-		if (obj.getAwareness().getTerrainMapChunk() == null || !AwarenessUtilities.isInAwareness(obj))
-			return new HashSet<>();
-		
 		int countAcross = CHUNK_COUNT_ACROSS;
 		int sX = ((obj.getTruncX()+8192) >> INDEX_FACTOR) - 1;
 		int sZ = ((obj.getTruncZ()+8192) >> INDEX_FACTOR) - 1;
@@ -119,9 +116,11 @@ public class TerrainMap {
 			eZ = countAcross-1;
 		
 		Set<SWGObject> aware = new HashSet<>();
-		for (int z = sZ; z <= eZ; ++z) {
-			for (int x = sX; x <= eX; ++x) {
-				chunks[z][x].getWithinAwareness(obj, aware);
+		if (obj.getAwareness().getTerrainMapChunk() != null) {
+			for (int z = sZ; z <= eZ; ++z) {
+				for (int x = sX; x <= eX; ++x) {
+					chunks[z][x].getWithinAwareness(obj, aware);
+				}
 			}
 		}
 		return aware;

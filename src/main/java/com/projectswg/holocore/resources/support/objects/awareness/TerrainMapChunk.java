@@ -61,14 +61,14 @@ class TerrainMapChunk {
 			int d = dTmp * dTmp;
 			dTmp = truncZ - test.getTruncZ();
 			
+			int testInstance = test.getInstanceLocation().getInstanceNumber();
 			int range = test.getLoadRange();
 			if (range < loadRange)
 				range = loadRange;
-			range = range * range;
 			
-			// Must be within load range and the same instance
-			if ((d + dTmp * dTmp) < range && instance == test.getInstanceLocation().getInstanceNumber()) {
-				recursiveAdd(withinRange, obj, test);
+			if (instance == testInstance) {
+				if (range >= 16384 || (d + dTmp * dTmp) < range*range)
+					recursiveAdd(withinRange, obj, test);
 			}
 		}
 	}

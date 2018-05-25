@@ -33,6 +33,10 @@ import org.jetbrains.annotations.NotNull;
 
 class AwarenessUtilities {
 	
+	public static boolean notInAwareness(@NotNull SWGObject obj) {
+		return !isInAwareness(obj);
+	}
+	
 	public static boolean isInAwareness(@NotNull SWGObject obj) {
 		switch (obj.getBaselineType()) {
 			case WAYP:
