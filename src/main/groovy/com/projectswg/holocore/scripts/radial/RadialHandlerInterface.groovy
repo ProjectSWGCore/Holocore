@@ -29,8 +29,8 @@ package com.projectswg.holocore.scripts.radial
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 
 interface RadialHandlerInterface {
 	def getOptions(List<RadialOption> options, Player player, SWGObject target)

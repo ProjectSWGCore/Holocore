@@ -29,10 +29,10 @@ package com.projectswg.holocore.scripts.radial.collection
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.GrantClickyCollectionIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.collections.CollectionItem
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.intents.gameplay.player.collections.GrantClickyCollectionIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.gameplay.player.collections.CollectionItem
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
 class WorldItemRadial implements RadialHandlerInterface {

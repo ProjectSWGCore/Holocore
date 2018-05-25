@@ -27,13 +27,12 @@
 
 package com.projectswg.holocore.scripts.commands.admin
 
-import com.projectswg.holocore.intents.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.object.CreateStaticItemIntent
-import com.projectswg.holocore.resources.containers.ContainerPermissionsType
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
-import com.projectswg.holocore.services.objects.StaticItemService
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.services.support.objects.items.StaticItemService
 
 static def execute(Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()

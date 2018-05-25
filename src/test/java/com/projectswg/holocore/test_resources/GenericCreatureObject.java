@@ -27,21 +27,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test_resources;
 
-import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
-import com.projectswg.holocore.resources.objects.GameObjectType;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.objects.player.PlayerObject;
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.resources.player.PlayerState;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.objects.GameObjectType;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerState;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class GenericCreatureObject extends CreatureObject {

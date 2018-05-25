@@ -28,12 +28,12 @@
 package com.projectswg.holocore.scripts.commands.admin.qatool
 
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
-import com.projectswg.holocore.intents.combat.IncapacitateCreatureIntent
-import com.projectswg.holocore.intents.combat.KillCreatureIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.intents.gameplay.combat.IncapacitateCreatureIntent
+import com.projectswg.holocore.intents.gameplay.combat.KillCreatureIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.utilities.IntentFactory
 
 static def sendDetails(Player player, SWGObject object, String [] args) {

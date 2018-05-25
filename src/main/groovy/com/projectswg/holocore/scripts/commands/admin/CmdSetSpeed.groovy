@@ -27,11 +27,9 @@
 
 package com.projectswg.holocore.scripts.commands.admin
 
-import com.projectswg.holocore.intents.chat.SystemMessageIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.AccessLevel
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 
 static def execute(Player player, SWGObject target, String args) {
 	def creature = player.getCreatureObject()

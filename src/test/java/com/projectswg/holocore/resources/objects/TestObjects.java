@@ -31,8 +31,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.holocore.resources.objects.awareness.TestAwareness;
-import com.projectswg.holocore.resources.objects.quadtree.TestQuadTree;
+import com.projectswg.holocore.resources.support.objects.awareness.TestAwareness;
+import com.projectswg.holocore.resources.support.objects.quadtree.TestQuadTree;
 
 @RunWith(Suite.class)
 @SuiteClasses({

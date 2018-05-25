@@ -29,9 +29,9 @@ package com.projectswg.holocore.scripts.radial.terminal
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.travel.TicketUseIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.intents.gameplay.world.travel.TicketUseIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 
 class TerminalTicketCollectorRadial implements RadialHandlerInterface {

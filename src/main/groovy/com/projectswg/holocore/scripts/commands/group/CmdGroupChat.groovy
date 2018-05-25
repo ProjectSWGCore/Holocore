@@ -28,11 +28,9 @@
 package com.projectswg.holocore.scripts.commands.group
 
 import com.projectswg.holocore.ProjectSWG
-import com.projectswg.holocore.intents.chat.ChatRoomUpdateIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.CoreManager
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.utilities.IntentFactory
 
 static def execute(Player player, SWGObject target, String args) {

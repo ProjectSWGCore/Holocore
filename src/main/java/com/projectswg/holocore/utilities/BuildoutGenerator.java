@@ -32,11 +32,11 @@ import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.buildouts.BuildoutLoader;
-import com.projectswg.holocore.resources.objects.buildouts.SnapshotLoader;
-import com.projectswg.holocore.resources.objects.buildouts.SwgBuildoutArea;
-import com.projectswg.holocore.resources.objects.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.utilities.buildouts.BuildoutLoader;
+import com.projectswg.holocore.utilities.buildouts.SnapshotLoader;
+import com.projectswg.holocore.utilities.buildouts.SwgBuildoutArea;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 
 import java.io.File;
 import java.io.IOException;

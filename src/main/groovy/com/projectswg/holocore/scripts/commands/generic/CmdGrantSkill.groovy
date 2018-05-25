@@ -27,11 +27,10 @@
 
 package com.projectswg.holocore.scripts.commands.generic
 
-import com.projectswg.holocore.intents.experience.GrantSkillIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.player.Player
 
 static def execute(Player player, SWGObject target, String args) {
 	new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, args, target as CreatureObject, true).broadcast()

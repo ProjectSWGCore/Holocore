@@ -35,7 +35,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import me.joshlarson.jlcommon.control.IntentManager;
 
 import com.projectswg.holocore.resources.TestResources;
-import com.projectswg.holocore.resources.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.TestServices;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 

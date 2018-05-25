@@ -28,7 +28,7 @@
 package com.projectswg.holocore.utilities.namegen;
 
 import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.holocore.resources.zone.NameFilter;
+import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.BufferedReader;

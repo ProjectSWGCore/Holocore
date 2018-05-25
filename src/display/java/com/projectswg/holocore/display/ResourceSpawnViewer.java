@@ -27,8 +27,8 @@
 package com.projectswg.holocore.display;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceLoader;
-import com.projectswg.holocore.services.crafting.resource.galactic.GalacticResourceSpawn;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceLoader;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawn;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;

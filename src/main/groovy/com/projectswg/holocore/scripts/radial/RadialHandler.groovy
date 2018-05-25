@@ -29,15 +29,15 @@ package com.projectswg.holocore.scripts.radial
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.resources.objects.GameObjectType
-import com.projectswg.holocore.resources.objects.GameObjectTypeMask
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.custom.LoiterAIObject
-import com.projectswg.holocore.resources.objects.custom.PatrolAIObject
-import com.projectswg.holocore.resources.objects.custom.RandomAIObject
-import com.projectswg.holocore.resources.objects.custom.TurningAIObject
-import com.projectswg.holocore.resources.objects.tangible.CreditObject
-import com.projectswg.holocore.resources.player.Player
+import com.projectswg.holocore.resources.support.objects.GameObjectType
+import com.projectswg.holocore.resources.support.objects.GameObjectTypeMask
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.LoiterAIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.PatrolAIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.RandomAIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.TurningAIObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.scripts.radial.object.AIObjectRadial
 import com.projectswg.holocore.scripts.radial.object.CreditObjectRadial
 import com.projectswg.holocore.scripts.radial.object.SWGObjectRadial

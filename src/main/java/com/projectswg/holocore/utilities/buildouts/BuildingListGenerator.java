@@ -27,11 +27,11 @@
 package com.projectswg.holocore.utilities.buildouts;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.building.BuildingObject;
-import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.resources.server_info.loader.buildouts.AreaLoader;
-import com.projectswg.holocore.resources.server_info.loader.buildouts.BuildoutLoader;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.AreaLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.BuildoutLoader;
 import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;

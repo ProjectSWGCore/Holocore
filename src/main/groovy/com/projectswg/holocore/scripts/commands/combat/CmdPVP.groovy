@@ -28,10 +28,9 @@
 package com.projectswg.holocore.scripts.commands.combat
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction
-import com.projectswg.holocore.intents.FactionIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.utilities.IntentFactory
 
 

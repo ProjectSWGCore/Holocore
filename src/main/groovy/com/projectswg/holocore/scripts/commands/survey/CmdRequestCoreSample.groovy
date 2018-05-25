@@ -27,12 +27,11 @@
 
 package com.projectswg.holocore.scripts.commands.survey
 
-import com.projectswg.holocore.intents.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.crafting.survey.SampleResourceIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.crafting.resource.galactic.storage.GalacticResourceContainer
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.gameplay.crafting.survey.SampleResourceIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer
 
 static def execute(Player player, SWGObject target, String args) {
 	def resource = GalacticResourceContainer.getContainer().getGalacticResourceByName(args)

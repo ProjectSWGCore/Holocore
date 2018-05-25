@@ -26,8 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities;
 
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.global.player.Player;
 
 import java.util.Set;
 
