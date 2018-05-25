@@ -104,6 +104,7 @@ public class ProjectSWG {
 	
 	private static void startupStaticClasses() {
 		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()));
+		assert IntentManager.getInstance() != null;
 		IntentManager.getInstance().initialize();
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
@@ -111,12 +112,14 @@ public class ProjectSWG {
 	}
 	
 	private static void shutdownStaticClasses() {
+		assert IntentManager.getInstance() != null;
 		DataManager.terminate();
 		IntentManager.getInstance().terminate();
 		ScheduledUtilities.shutdown();
 	}
 	
 	private static void printFinalPswgState() {
+		assert IntentManager.getInstance() != null;
 		ThreadUtilities.printActiveThreads();
 		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
 		Collections.sort(intentTimes);
