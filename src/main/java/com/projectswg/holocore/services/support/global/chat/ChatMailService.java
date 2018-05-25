@@ -60,14 +60,10 @@ import java.util.concurrent.atomic.AtomicReference;
 public class ChatMailService extends Service {
 	
 	private final ObjectDatabase<Mail> mails;
-	private final RelationalServerData chatLogs;
-	private final PreparedStatement insertChatLog;
 	private int maxMailId;
 	
 	public ChatMailService() {
 		mails = new CachedObjectDatabase<>("odb/mails.db", Mail::create, Mail::saveMail);
-		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
-		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
 	}
@@ -154,9 +150,6 @@ public class ChatMailService extends Service {
 		
 		if (recipient != null) {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
-			SWGObject sendObj = sender.getCreatureObject();
-			SWGObject recvObj = recipient.getCreatureObject();
-			logChat(sendObj.getObjectId(), sendObj.getObjectName(), recvObj.getObjectId(), recvObj.getObjectName(), mail.getSubject(), mail.getMessage());
 		}
 	}
 	
@@ -249,26 +242,6 @@ public class ChatMailService extends Service {
 		mails.remove(getMail(mailId));
 	}
 	
-	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {
-		try {
-			synchronized (insertChatLog) {
-				insertChatLog.setLong(1, System.currentTimeMillis());
-				insertChatLog.setLong(2, sendId);
-				insertChatLog.setString(3, sendName);
-				insertChatLog.setLong(4, recvId);
-				insertChatLog.setString(5, recvName);
-				insertChatLog.setString(6, ChatType.MAIL.name());
-				insertChatLog.setString(7, ChatRange.PERSONAL.name());
-				insertChatLog.setString(8, "");
-				insertChatLog.setString(9, subject);
-				insertChatLog.setString(10, message);
-				insertChatLog.executeUpdate();
-			}
-		} catch (SQLException e) {
-			Log.e(e);
-		}
-	}
-
 	private enum MailFlagType {
 		FULL_MESSAGE,
 		HEADER_ONLY
