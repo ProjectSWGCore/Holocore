@@ -54,11 +54,13 @@ public class ServerStatusService extends Service {
 	private final ScheduledThreadPool executor;
 	private final AtomicLong shutdownTime;
 	private final AtomicBoolean operational;
+	private final AtomicBoolean displayedShutdown;
 	
 	public ServerStatusService() {
 		this.executor = new ScheduledThreadPool(1, Thread.MAX_PRIORITY, "shutdown-service");
 		this.shutdownTime = new AtomicLong(0);
 		this.operational = new AtomicBoolean(true);
+		this.displayedShutdown = new AtomicBoolean(false);
 	}
 	
 	@Override
@@ -132,12 +134,13 @@ public class ServerStatusService extends Service {
 	private void updateShutdownClock() {
 		long shutdownTime = this.shutdownTime.get();
 		long currentTime = System.nanoTime();
-		long remainingSeconds = (long) ((shutdownTime - currentTime) / 1E9);
+		long remainingSeconds = (long) ((shutdownTime - currentTime) / 1E9 + 0.5);
 		assert shutdownTime != 0;
-		if (currentTime >= shutdownTime) { // time's up
+		if (remainingSeconds < 0) { // time's up
 			operational.set(false);
-		} else if (remainingSeconds < 2) {
-			SystemMessageIntent.broadcastGalaxy(SHUTDOWN_MESSAGE);
+		} else if (remainingSeconds == 0) {
+			if (!displayedShutdown.getAndSet(true))
+				SystemMessageIntent.broadcastGalaxy(SHUTDOWN_MESSAGE);
 		} else {
 			String message = buildShutdownMessage(remainingSeconds);
 			if (message != null)
