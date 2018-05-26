@@ -55,7 +55,6 @@ public class Player implements Comparable<Player> {
 	private PlayerState		state				= PlayerState.DISCONNECTED;
 	private CreatureObject	creatureObject		= null;
 	private long			lastInboundMessage	= 0;
-	private int				userId				= 0;
 	
 	public Player() {
 		this(0);
@@ -79,10 +78,6 @@ public class Player implements Comparable<Player> {
 	
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 	
 	public void setAccessLevel(AccessLevel accessLevel) {
@@ -137,10 +132,6 @@ public class Player implements Comparable<Player> {
 	
 	public String getCharacterChatName() {
 		return getCharacterFirstName().toLowerCase(Locale.US);
-	}
-	
-	public int getUserId() {
-		return userId;
 	}
 	
 	public AccessLevel getAccessLevel() {
@@ -202,7 +193,7 @@ public class Player implements Comparable<Player> {
 	@Override
 	public String toString() {
 		String str = "Player[";
-		str += "ID=" + userId + " / " + (creatureObject==null?"null":creatureObject.getObjectId());
+		str += (creatureObject==null?"null":creatureObject.getObjectId());
 		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
 		return str + "]";
@@ -210,32 +201,17 @@ public class Player implements Comparable<Player> {
 	
 	@Override
 	public int compareTo(@NotNull Player p) {
-		if (creatureObject == null)
-			return p.getCreatureObject() == null ? 0 : -1;
-		else if (p.getCreatureObject() == null)
-			return 1;
-		return creatureObject.compareTo(p.getCreatureObject());
+		return Long.compare(networkId, p.getNetworkId());
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if (o == null)
-			return false;
-		if (!(o instanceof Player))
-			return false;
-		if (this == o)
-			return true;
-		if (creatureObject == null)
-			return false;
-		CreatureObject oCreature = ((Player) o).getCreatureObject();
-		return creatureObject.equals(oCreature);
+		return o instanceof Player && ((Player) o).getNetworkId() == getNetworkId();
 	}
 	
 	@Override
 	public int hashCode() {
-		if (creatureObject == null)
-			return getUserId();
-		return Long.valueOf(creatureObject.getObjectId()).hashCode() ^ getUserId();
+		return Long.hashCode(networkId);
 	}
 	
 	public enum PlayerServer {

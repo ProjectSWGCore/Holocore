@@ -27,8 +27,6 @@
 package com.projectswg.holocore.services.support.global.zone.creation;
 
 import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -36,27 +34,27 @@ import com.projectswg.common.network.packets.swg.login.creation.*;
 import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
+import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
-import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation;
-import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreationRestriction;
 import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion;
 import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion.SpawnInformation;
+import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation;
+import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreationRestriction;
+import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -65,41 +63,28 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CharacterCreationService extends Service {
 	
-	private static final String CREATE_CHARACTER_SQL = "INSERT INTO players (id, name, race, userId) VALUES (?, ?, ?, ?)";
-	private static final String GET_CHARACTER_SQL = "SELECT * FROM players WHERE name == ?";
-	private static final String GET_LIKE_CHARACTER_SQL = "SELECT name FROM players WHERE LOWER(name) LIKE ?";
-	private static final String GET_CHARACTER_COUNT_SQL = "SELECT count(*) FROM players WHERE userId = ?";
-	
 	private final Map <String, Player> lockedNames;
 	private final Map <String, ProfTemplateData> profTemplates;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
 	private final CharacterCreationRestriction creationRestriction;
 	private final TerrainZoneInsertion insertion;
-	
-	private RelationalDatabase database;
-	private PreparedStatement createCharacter;
-	private PreparedStatement getCharacter;
-	private PreparedStatement getLikeCharacterName;
-	private PreparedStatement getCharacterCount;
+	private final PswgUserDatabase userDatabase;
 	
 	public CharacterCreationService() {
-		lockedNames = new HashMap<>();
-		profTemplates = new ConcurrentHashMap<>();
+		this.lockedNames = new HashMap<>();
+		this.profTemplates = new ConcurrentHashMap<>();
 		
-		nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
-		nameGenerator = new SWGNameGenerator(nameFilter);
-		creationRestriction = new CharacterCreationRestriction(2);
-		insertion = new TerrainZoneInsertion();
+		this.nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
+		this.nameGenerator = new SWGNameGenerator(nameFilter);
+		this.creationRestriction = new CharacterCreationRestriction(2);
+		this.insertion = new TerrainZoneInsertion();
+		this.userDatabase = new PswgUserDatabase();
 	}
 	
 	@Override
 	public boolean initialize() {
-		database = RelationalServerFactory.getServerDatabase("login/login.db");
-		createCharacter = database.prepareStatement(CREATE_CHARACTER_SQL);
-		getCharacter = database.prepareStatement(GET_CHARACTER_SQL);
-		getLikeCharacterName = database.prepareStatement(GET_LIKE_CHARACTER_SQL);
-		getCharacterCount = database.prepareStatement(GET_CHARACTER_COUNT_SQL);
+		userDatabase.initialize();
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
@@ -115,7 +100,7 @@ public class CharacterCreationService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		database.close();
+		userDatabase.terminate();
 		return super.terminate();
 	}
 	
@@ -131,33 +116,12 @@ public class CharacterCreationService extends Service {
 			handleCharCreation(player, (ClientCreateCharacter) p);
 	}
 	
-	public boolean characterExistsForName(String name) {
-		synchronized (getCharacter) {
-			ResultSet set = null;
-			try {
-				String nameSplitStr[] = name.toLowerCase(Locale.US).split(" ");
-				String charExistsPrepStmtStr = nameSplitStr[0] + "%"; //Only the first name should be unique.
-				getLikeCharacterName.setString(1, charExistsPrepStmtStr);
-				set = getLikeCharacterName.executeQuery();
-				while (set.next()){
-					String dbName = set.getString("name");
-					if(nameSplitStr[0].equalsIgnoreCase(dbName.split(" ")[0])){
-						return true;
-					}
-				}
-				return false;
-			} catch (SQLException e) {
-				Log.e(e);
-				return false;
-			} finally {
-				try {
-					if (set != null)
-						set.close();
-				} catch (SQLException e) {
-					Log.e(e);
-				}
-			}
-		}
+	private boolean characterExistsForName(String name) {
+		name = name.toLowerCase(Locale.US);
+		int spaceIndex = name.indexOf(' ');
+		if (spaceIndex != -1)
+			name = name.substring(0, spaceIndex);
+		return userDatabase.isCharacter(name);
 	}
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
@@ -178,7 +142,7 @@ public class CharacterCreationService extends Service {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
-		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
+		if (max != 0 && getCharacterCount(player.getUsername()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
@@ -211,7 +175,7 @@ public class CharacterCreationService extends Service {
 		}
 		// Too many characters
 		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
-		if (max != 0 && getCharacterCount(player.getUserId()) >= max) {
+		if (max != 0 && getCharacterCount(player.getUsername()) >= max) {
 			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS);
 			return null;
 		}
@@ -234,7 +198,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		// Test for successful database insertion
-		if (!createCharacterInDb(creature, create.getName(), player)) {
+		if (!createCharacterInDb(creature, player)) {
 			Log.e("Failed to create character %s for user %s with server error from %s", create.getName(), player.getUsername(), create.getSocketAddress());
 			new DestroyObjectIntent(creature).broadcast();
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
@@ -266,36 +230,20 @@ public class CharacterCreationService extends Service {
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
-	private boolean createCharacterInDb(CreatureObject creature, String name, Player player) {
-		if (characterExistsForName(name))
-			return false;
-		synchronized (createCharacter) {
-			try {
-				createCharacter.setLong(1, creature.getObjectId());
-				createCharacter.setString(2, name);
-				createCharacter.setString(3, creature.getRace().getFilename());
-				createCharacter.setInt(4, player.getUserId());
-				return createCharacter.executeUpdate() == 1;
-			} catch (SQLException e) {
-				Log.e(e);
-				return false;
-			}
+	private boolean createCharacterInDb(CreatureObject creature, Player player) {
+		String name = creature.getObjectName();
+		String firstName = name;
+		{
+			int spaceIndex = firstName.indexOf(' ');
+			if (spaceIndex != -1)
+				firstName = firstName.substring(0, spaceIndex);
+			firstName = firstName.toLowerCase(Locale.US);
 		}
+		return userDatabase.insertCharacter(player.getUsername(), new CharacterMetadata(creature.getObjectId(), firstName, name, creature.getRace().getFilename()));
 	}
 	
-	private int getCharacterCount(int userId) {
-		synchronized (getCharacterCount) {
-			try {
-				getCharacterCount.setInt(1, userId);
-				try (ResultSet set = getCharacterCount.executeQuery()) {
-					if (set.next())
-						return set.getInt(1);
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
-		return 0;
+	private int getCharacterCount(String username) {
+		return userDatabase.getCharacters(username).size();
 	}
 	
 	private ErrorMessage getNameValidity(String name, boolean admin) {
@@ -371,12 +319,12 @@ public class CharacterCreationService extends Service {
 		}
 	}
 	
-	private boolean isLocked(Player assignedTo, String firstName) {
+	private boolean isLocked(@NotNull Player assignedTo, String firstName) {
 		Player player;
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}
-		if (player == null || assignedTo.getUserId() == player.getUserId())
+		if (player == null || assignedTo.equals(player))
 			return false;
 		PlayerState state = player.getPlayerState();
 		return state != PlayerState.DISCONNECTED;

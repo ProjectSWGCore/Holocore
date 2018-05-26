@@ -30,8 +30,6 @@ import com.projectswg.common.data.BCrypt;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.Config;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
 import com.projectswg.common.network.packets.swg.login.*;
@@ -45,84 +43,46 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent.LoginEvent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
+import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.UserMetadata;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.utilities.Arguments;
-import org.jetbrains.annotations.NotNull;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class LoginService extends Service {
 	
 	private static final String REQUIRED_VERSION = "20111130-15:46";
 	private static final byte [] SESSION_TOKEN = new byte[24];
 	
-	private RelationalDatabase database;
-	private PreparedStatement getUser;
-	private PreparedStatement getCharacter;
-	private PreparedStatement getCharacterFirstName;
-	private PreparedStatement getCharacters;
-	private PreparedStatement deleteCharacter;
+	private final PswgUserDatabase userDatabase;
 	
 	public LoginService() {
-		
+		this.userDatabase = new PswgUserDatabase();
 	}
 	
 	@Override
 	public boolean initialize() {
-		database = RelationalServerFactory.getServerDatabase("login/login.db");
-		getUser = database.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
-		getCharacterFirstName = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ? OR LOWER(name) LIKE ?");
-		getCharacters = database.prepareStatement("SELECT * FROM players WHERE userid = ?");
-		deleteCharacter = database.prepareStatement("DELETE FROM players WHERE id = ?");
+		userDatabase.initialize();
 		return super.initialize();
 	}
 	
 	@Override
-	public boolean start() {
-		synchronized (deleteCharacter) {
-			try (ResultSet set = database.executeQuery("SELECT id FROM players")) {
-				while (set.next()) {
-					long id = set.getLong(1);
-					if (ObjectLookup.getObjectById(id) != null)
-						continue;
-					
-					try {
-						deleteCharacter.setLong(1, id);
-						deleteCharacter.executeUpdate();
-						Log.d("Deleted character with id: %d", id);
-					} catch (SQLException e) {
-						Log.e(e);
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
-		return super.start();
-	}
-	
-	@Override
 	public boolean terminate() {
-		database.close();
+		userDatabase.terminate();
 		return super.terminate();
 	}
 	
@@ -143,42 +103,6 @@ public class LoginService extends Service {
 			if (player.getPlayerServer() == PlayerServer.LOGIN)
 				handleLagRequest(player);
 		}
-	}
-	
-	public long getCharacterIdByFirstName(@NotNull String name) {
-		Objects.requireNonNull(name);
-		name = name.trim().toLowerCase(Locale.US);
-		Arguments.validate(!name.isEmpty(), "name cannot be empty");
-		synchronized (getCharacterFirstName) {
-			try {
-				getCharacterFirstName.setString(1, name + "%");
-				try (ResultSet set = getCharacterFirstName.executeQuery()) {
-					if (set.next())
-						return set.getLong("id");
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
-		return 0;
-	}
-	
-	public long getCharacterId(@NotNull String name) {
-		Objects.requireNonNull(name);
-		name = name.trim().toLowerCase(Locale.US);
-		Arguments.validate(!name.isEmpty(), "name cannot be empty");
-		synchronized (getCharacter) {
-			try {
-				getCharacter.setString(1, name);
-				try (ResultSet set = getCharacter.executeQuery()) {
-					if (set.next())
-						return set.getLong("id");
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
-		return 0;
 	}
 	
 	private String getServerString() {
@@ -218,25 +142,15 @@ public class LoginService extends Service {
 			onLoginClientVersionError(player, id);
 			return;
 		}
-		synchronized (getUser) {
-			try {
-				getUser.setString(1, id.getUsername());
-				try (ResultSet user = getUser.executeQuery()) {
-					if (user.next()) {
-						if (isUserValid(user, id.getPassword()))
-							onSuccessfulLogin(user, player, id);
-						else if (user.getBoolean("banned"))
-							onLoginBanned(player, id);
-						else
-							onInvalidUserPass(player, id, user);
-					} else
-						onInvalidUserPass(player, id, null);
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-				onLoginServerError(player, id);
-			}
-		}
+		UserMetadata user = userDatabase.getUser(id.getUsername());
+		if (user == null)
+			onInvalidUserPass(player, id, false);
+		else if (user.isBanned())
+			onLoginBanned(player, id);
+		else if (isUserValid(user, id.getPassword()))
+			onSuccessfulLogin(user, player, id);
+		else
+			onInvalidUserPass(player, id, true);
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
@@ -248,10 +162,9 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
 	}
 	
-	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
-		player.setUsername(user.getString("username"));
-		player.setUserId(user.getInt("id"));
-		switch(user.getString("access_level")) {
+	private void onSuccessfulLogin(UserMetadata user, Player player, LoginClientId id) {
+		player.setUsername(user.getUsername());
+		switch(user.getAccessLevel()) {
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
 			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
 			case "csr": player.setAccessLevel(AccessLevel.CSR); break;
@@ -274,9 +187,9 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
 	
-	private void onInvalidUserPass(Player player, LoginClientId id, ResultSet set) throws SQLException {
+	private void onInvalidUserPass(Player player, LoginClientId id, boolean usernameValid) {
 		String type = "Login Failed!";
-		String message = getUserPassError(set, id.getUsername(), id.getPassword());
+		String message = usernameValid ? "Incorrect password" : "Incorrect username";
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		Log.i("%s cannot login due to invalid user/pass from %s", id.getUsername(), id.getSocketAddress());
@@ -284,22 +197,12 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
 	
-	private void onLoginServerError(Player player, LoginClientId id) {
-		String type = "Login Failed!";
-		String message = "Server Error.";
-		player.sendPacket(new ErrorMessage(type, message, false));
-		player.setPlayerState(PlayerState.DISCONNECTED);
-		Log.e("%s cannot login due to server error, from %s", id.getUsername(), id.getSocketAddress());
-		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
-	}
-	
 	private void sendLoginSuccessPacket(Player player) {
-		LoginClientToken token = new LoginClientToken(SESSION_TOKEN, player.getUserId(), player.getUsername());
+		LoginClientToken token = new LoginClientToken(SESSION_TOKEN, 0, player.getUsername());
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
-		List <Galaxy> galaxies = getGalaxies(player);
-		List<SWGCharacter> characters = getCharacters(player.getUserId());
-		for (Galaxy g : galaxies) {
+		List<SWGCharacter> characters = getCharacters(player.getUsername());
+		for (Galaxy g : getGalaxies()) {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
@@ -312,74 +215,32 @@ public class LoginService extends Service {
 		player.sendPacket(clusterStatus);
 	}
 	
-	private boolean isUserValid(ResultSet set, String password) throws SQLException {
+	private boolean isUserValid(UserMetadata user, String password) {
 		if (password.isEmpty())
 			return false;
-		if (set.getBoolean("banned"))
-			return false;
-		String psqlPass = set.getString("password");
-		if (psqlPass.length() != 60 && !psqlPass.startsWith("$2"))
-			return psqlPass.equals(password);
-		password = BCrypt.hashpw(BCrypt.hashpw(password, psqlPass), psqlPass);
-		return psqlPass.equals(password);
+		String dbPass = user.getPassword();
+		if (dbPass.length() != 60 && !dbPass.startsWith("$2"))
+			return dbPass.equals(password);
+		password = BCrypt.hashpw(BCrypt.hashpw(password, dbPass), dbPass);
+		return dbPass.equals(password);
 	}
 	
-	private String getUserPassError(ResultSet set, String username, String password) throws SQLException {
-		if (set == null)
-			return "No username found";
-		if (password.isEmpty())
-			return "No password specified!";
-		String psqlPass = set.getString("password");
-		if (psqlPass.length() != 60 && !psqlPass.startsWith("$2")) {
-			if (psqlPass.equals(password))
-				return "Server Error.\n\nPassword appears to be correct. [Plaintext]";
-			return "Invalid password";
-		}
-		password = BCrypt.hashpw(BCrypt.hashpw(password, psqlPass), psqlPass);
-		if (psqlPass.equals(password))
-			return "Server Error.\n\nPassword appears to be correct. [Hashed]";
-		return "Invalid password";
-	}
-	
-	private List <Galaxy> getGalaxies(Player p) {
+	private List <Galaxy> getGalaxies() {
 		List<Galaxy> galaxies = new ArrayList<>();
 		galaxies.add(ProjectSWG.getGalaxy());
 		return galaxies;
 	}
 	
-	private List<SWGCharacter> getCharacters(int userId) {
+	private List<SWGCharacter> getCharacters(String username) {
 		List <SWGCharacter> characters = new ArrayList<>();
-		synchronized (getCharacters) {
-			try {
-				getCharacters.setInt(1, userId);
-				try (ResultSet set = getCharacters.executeQuery()) {
-					while (set.next()) {
-						SWGCharacter c = new SWGCharacter();
-						c.setId(set.getInt("id"));
-						c.setName(set.getString("name"));
-						c.setGalaxyId(ProjectSWG.getGalaxy().getId());
-						c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
-						c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
-						characters.add(c);
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
+		for (CharacterMetadata meta : userDatabase.getCharacters(username)) {
+			characters.add(new SWGCharacter(meta.getName(), Race.getRaceByFile(meta.getRace()).getCrc(), meta.getId(), ProjectSWG.getGalaxy().getId(), 1));
 		}
 		return characters;
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {
-		synchronized (deleteCharacter) {
-			try {
-				deleteCharacter.setLong(1, obj.getObjectId());
-				return deleteCharacter.executeUpdate() > 0;
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-			return false;
-		}
+		return userDatabase.deleteCharacter(obj.getObjectId());
 	}
 	
 }

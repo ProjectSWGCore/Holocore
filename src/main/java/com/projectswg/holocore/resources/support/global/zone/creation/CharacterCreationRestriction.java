@@ -36,7 +36,7 @@ public class CharacterCreationRestriction {
 	
 	private static final long TIME_INCREMENT = TimeUnit.MINUTES.toMillis(15);
 	
-	private final Map <Integer, PlayerRestriction> restrictions;
+	private final Map <String, PlayerRestriction> restrictions;
 	private int creationsPerPeriod;
 	
 	public CharacterCreationRestriction(int creationsPerPeriod) {
@@ -65,12 +65,12 @@ public class CharacterCreationRestriction {
 	private PlayerRestriction getRestriction(Player player) {
 		PlayerRestriction pr;
 		synchronized (restrictions) {
-			pr = restrictions.get(player.getUserId());
+			pr = restrictions.get(player.getUsername());
 		}
 		if (pr == null) {
 			pr = new PlayerRestriction(creationsPerPeriod);
 			synchronized (restrictions) {
-				restrictions.put(player.getUserId(), pr);
+				restrictions.put(player.getUsername(), pr);
 			}
 		}
 		return pr;
@@ -113,7 +113,7 @@ public class CharacterCreationRestriction {
 				final boolean hackSuccess = hitMax && isWithinPeriod(lastCreations.getLast());
 				final long time = now();
 				if (hackSuccess) {
-					final String state = Arrays.toString(lastCreations.toArray(new Long[lastCreations.size()]));
+					final String state = Arrays.toString(lastCreations.toArray(new Long[0]));
 					Log.e("Character created when not allowed! Current time/state: %s/%s", time, state);
 				}
 				if (hitMax)
