@@ -27,17 +27,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
+import com.projectswg.holocore.resources.support.objects.awareness.TestAwareness;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.holocore.resources.objects.awareness.TestAwareness;
-import com.projectswg.holocore.resources.objects.quadtree.TestQuadTree;
-
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestSWGObject.class,
-	TestQuadTree.class,
 	TestAwareness.class
 })
 public class TestObjects {

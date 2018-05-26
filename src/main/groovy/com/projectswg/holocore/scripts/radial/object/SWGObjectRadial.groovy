@@ -29,15 +29,15 @@ package com.projectswg.holocore.scripts.radial.object
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.object.ContainerTransferIntent
-import com.projectswg.holocore.intents.object.ObjectCreatedIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.resources.sui.SuiInputBox
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiInputBox
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
-import com.projectswg.holocore.services.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
 
 class SWGObjectRadial implements RadialHandlerInterface {
 	

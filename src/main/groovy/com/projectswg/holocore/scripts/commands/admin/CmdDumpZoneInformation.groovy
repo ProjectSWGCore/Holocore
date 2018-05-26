@@ -27,14 +27,13 @@
 
 package com.projectswg.holocore.scripts.commands.admin
 
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.building.BuildingObject
-import com.projectswg.holocore.resources.objects.cell.CellObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.utilities.IntentFactory
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	args = args.trim()
 	def split = args.split(" ")
 	if (split.size().intValue() == 0 || split[0].isEmpty()) {

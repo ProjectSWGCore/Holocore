@@ -28,9 +28,9 @@
 package com.projectswg.holocore.scripts.commands.combat
 
 import com.projectswg.common.data.combat.CombatStatus
-import com.projectswg.holocore.resources.commands.CombatCommand
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.commands.CombatCommand
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 
 static def canPerform(CreatureObject source, SWGObject target, CombatCommand command) {
 	return CombatStatus.SUCCESS

@@ -27,18 +27,18 @@
 
 package com.projectswg.holocore.scripts.commands.group
 
-import com.projectswg.holocore.intents.GroupEventIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService
 import com.projectswg.holocore.utilities.IntentFactory
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	def farAwayTarget
 
 	if (args) {
-		farAwayTarget = galacticManager.getPlayerManager().getPlayerByFirstName(args)
+		farAwayTarget = CharacterLookupService.PlayerLookup.getPlayerByFirstName(args)
 	}
 
 	if (farAwayTarget != null) {

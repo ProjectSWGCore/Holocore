@@ -27,7 +27,7 @@
 
 package com.projectswg.holocore.runners;
 
-import com.projectswg.common.control.IntentManager;
+import me.joshlarson.jlcommon.control.IntentManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;

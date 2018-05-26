@@ -27,7 +27,7 @@
 
 package com.projectswg.holocore.test_resources;
 
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 public class GenericTangibleObject extends TangibleObject {
 	

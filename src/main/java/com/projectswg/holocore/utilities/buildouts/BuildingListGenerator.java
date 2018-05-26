@@ -26,6 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities.buildouts;
 
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.AreaLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.BuildoutLoader;
+import com.projectswg.holocore.utilities.SdbGenerator;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,20 +41,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import com.projectswg.common.data.location.Terrain;
-
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.building.BuildingObject;
-import com.projectswg.holocore.resources.server_info.DataManager;
-import com.projectswg.holocore.services.objects.ClientBuildoutService;
-import com.projectswg.holocore.utilities.SdbGenerator;
-
 public class BuildingListGenerator {
 	
 	public static void main(String [] args) throws IOException {
 		DataManager.initialize();
-		ClientBuildoutService buildouts = new ClientBuildoutService();
-		Collection<SWGObject> objects = buildouts.getClientObjects();
+		Collection<SWGObject> objects = BuildoutLoader.load(AreaLoader.load()).getObjects().values();
 		System.out.println("Organizing data...");
 		List<BuildingObject> buildings = new ArrayList<>();
 		SdbGenerator gen = new SdbGenerator(new File("serverdata/building/buildings.sdb"));

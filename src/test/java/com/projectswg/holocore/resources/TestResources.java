@@ -31,12 +31,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.holocore.resources.collections.TestSWGBitSet;
-import com.projectswg.holocore.resources.collections.TestSWGFlag;
-import com.projectswg.holocore.resources.collections.TestSWGList;
-import com.projectswg.holocore.resources.network.TestLittleEndianDataOutputStream;
+import com.projectswg.holocore.resources.support.data.collections.TestSWGBitSet;
+import com.projectswg.holocore.resources.support.data.collections.TestSWGFlag;
+import com.projectswg.holocore.resources.support.data.collections.TestSWGList;
+import com.projectswg.holocore.resources.support.global.network.TestLittleEndianDataOutputStream;
 import com.projectswg.holocore.resources.objects.TestObjects;
-import com.projectswg.holocore.resources.persistable.TestPersistable;
+import com.projectswg.holocore.resources.support.data.persistable.TestPersistable;
 import com.projectswg.holocore.resources.services.TestConfig;
 
 @RunWith(Suite.class)

@@ -1,14 +1,16 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 buildscript {
 	repositories {
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
 	}
 }
 
 plugins {
-	id 'com.github.johnrengelman.shadow' version '2.0.2'
+	id 'com.github.johnrengelman.shadow' version '2.0.3'
 	id 'application'
 	id 'java'
 	id 'groovy'
@@ -18,8 +20,8 @@ plugins {
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
-sourceCompatibility = 9
-targetCompatibility = 9
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 sourceSets {
 	// https://stackoverflow.com/questions/22159699/gradle-groovy-and-java-class-dependency-compile
@@ -32,11 +34,8 @@ sourceSets {
 			srcDirs = [] // don't compile Java code twice 
 		}
 	}
-	display {
-		java {
-			
-		}
-	}
+	display { }
+	utility { }
 }
 
 test {
@@ -62,20 +61,23 @@ repositories {
 }
 
 dependencies {
-	compile project(':PSWGCommon')
+	compile project(':pswgcommon')
 	
 	compile group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.0-alpha-1'
-	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
-	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0'
+	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
 	
 	testCompile 'junit:junit:4.12'
 	
-	displayCompile project(':PSWGCommon')
+	displayCompile project(':pswgcommon')
 	displayCompile sourceSets.main.output
+	
+	utilityCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0'
+	utilityCompile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = "4.4.1"
+	gradleVersion = "4.7"
 }
 
 tasks.withType(FindBugs) {
@@ -83,6 +85,14 @@ tasks.withType(FindBugs) {
 		xml.enabled = false
 		html.enabled = true
 	}
+}
+
+task CreateConvertLoginJar(type: ShadowJar) {
+	archiveName = 'ConvertLogin.jar'
+	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
+	from sourceSets.utility.output
+	configurations = [project.configurations.utilityRuntime]
+	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
 }
 
 checkstyle {

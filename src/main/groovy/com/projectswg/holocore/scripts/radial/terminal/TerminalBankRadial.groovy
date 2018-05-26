@@ -31,11 +31,11 @@ import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.objects.creature.CreatureObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.resources.sui.SuiButtons
-import com.projectswg.holocore.resources.sui.SuiWindow
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow
 import com.projectswg.holocore.scripts.radial.RadialHandlerInterface
 import com.projectswg.holocore.utilities.IntentFactory
 

@@ -27,12 +27,11 @@
 
 package com.projectswg.holocore.scripts.commands.chat.friend
 
-import com.projectswg.holocore.intents.chat.ChatAvatarRequestIntent
-import com.projectswg.holocore.resources.objects.SWGObject
-import com.projectswg.holocore.resources.player.Player
-import com.projectswg.holocore.services.galaxy.GalacticManager
+import com.projectswg.holocore.intents.support.global.chat.ChatAvatarRequestIntent
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.global.player.Player
 
-static def execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+static def execute(Player player, SWGObject target, String args) {
 	if (args == null)
 		return
 
