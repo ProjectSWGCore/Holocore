@@ -51,7 +51,7 @@ public class GenericCreatureObject extends CreatureObject {
 	
 	public GenericCreatureObject(long objectId) {
 		super(objectId);
-		player = new Player() {
+		player = new Player(objectId) {
 			@Override
 			public void sendPacket(SWGPacket ... packets) {
 				// Nah
