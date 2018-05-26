@@ -3,6 +3,7 @@ package com.projectswg.holocore.resources.support.data.server_info.mongodb.users
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.*;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
+import org.bson.BsonType;
 import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +27,7 @@ public class PswgUserDatabase extends PswgDatabase {
 		this.collection = getCollectionByName("users");
 		
 		collection.createIndex(Indexes.ascending("username"), new IndexOptions().unique(true));
-		collection.createIndex(Indexes.ascending("characters.firstName"), new IndexOptions().unique(true));
+		collection.createIndex(Indexes.ascending("characters.firstName"), new IndexOptions().unique(true).partialFilterExpression(Filters.type("characters.firstName", "string")));
 		collection.count();
 	}
 	

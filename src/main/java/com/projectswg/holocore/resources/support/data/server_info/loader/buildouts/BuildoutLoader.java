@@ -135,6 +135,11 @@ public class BuildoutLoader {
 			obj.setHeading(set.getReal("heading"));
 			obj.setClassification(ObjectClassification.BUILDOUT);
 			checkParent(obj, set.getText("building_name"), (int) set.getInt("cell_id"));
+			if (obj instanceof BuildingObject) {
+				((BuildingObject) obj).populateCells();
+				for (SWGObject cell : obj.getContainedObjects())
+					objectMap.put(cell.getObjectId(), cell);
+			}
 			objectMap.put(obj.getObjectId(), obj);
 		} catch (ObjectCreationException e) {
 			Log.e("Invalid additional object: %s", set.getText("template"));
