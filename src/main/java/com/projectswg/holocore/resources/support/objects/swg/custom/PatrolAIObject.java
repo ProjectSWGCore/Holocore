@@ -28,7 +28,7 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 
 import java.util.List;

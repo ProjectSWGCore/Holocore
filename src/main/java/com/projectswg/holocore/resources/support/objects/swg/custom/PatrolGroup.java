@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
-import com.projectswg.holocore.resources.support.data.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
 
 import java.util.ArrayList;
 import java.util.Collections;

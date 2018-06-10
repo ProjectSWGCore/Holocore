@@ -11,8 +11,7 @@ import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDa
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.AreaLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.buildouts.BuildoutLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -50,7 +49,7 @@ public class ObjectStorageService extends Service {
 		
 		{
 			long startTime = StandardLog.onStartLoad("client objects");
-			buildouts.putAll(BuildoutLoader.load(AreaLoader.load(createEventList())).getObjects());
+			buildouts.putAll(DataLoader.buildouts(createEventList()).getObjects());
 			objectMap.putAll(buildouts);
 			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
 		}

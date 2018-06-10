@@ -20,8 +20,8 @@ plugins {
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 9
+targetCompatibility = 9
 
 sourceSets {
 	// https://stackoverflow.com/questions/22159699/gradle-groovy-and-java-class-dependency-compile
@@ -72,6 +72,8 @@ dependencies {
 	displayCompile project(':pswgcommon')
 	displayCompile sourceSets.main.output
 	
+	utilityCompile project(':pswgcommon')
+	utilityCompile sourceSets.main.output
 	utilityCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0'
 	utilityCompile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
 }

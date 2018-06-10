@@ -26,13 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects;
 
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
 import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.holocore.resources.support.objects.GameObjectType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -55,6 +55,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -62,31 +63,23 @@ public final class ObjectCreator {
 	
 	private static final AtomicLong OBJECT_ID = new AtomicLong(0);
 	
-	private static void updateMaxObjectId(long objectId) {
-		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
-	}
-	
-	private static long getNextObjectId() {
-		return OBJECT_ID.incrementAndGet();
-	}
-	
 	@NotNull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + "'";
 		template = ClientFactory.formatToSharedFile(template);
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template);
+		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
 		if (attributes == null)
-			throw new ObjectCreationException(template, "Template not found: " + template);
-		SWGObject obj = createObjectFromType(objectId, template, attributes);
+			throw new ObjectCreationException(template, "Does not exist");
+		SWGObject obj = createObjectFromType(objectId, template, ((Number) attributes.get(ObjectDataAttribute.GAME_OBJECT_TYPE)).intValue());
 		obj.setTemplate(template);
-
+		
 		handlePostCreation(obj, attributes);
 		updateMaxObjectId(objectId);
 		return obj;
 	}
 	
 	@NotNull
-	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
+	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class<T> c) {
 		T obj;
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
@@ -95,8 +88,8 @@ public final class ObjectCreator {
 		}
 		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
-
-		handlePostCreation(obj, (ObjectData) ClientFactory.getInfoFromFile(template));
+		
+		handlePostCreation(obj, DataLoader.objectData().getAttributes(template));
 		updateMaxObjectId(objectId);
 		return obj;
 	}
@@ -107,17 +100,13 @@ public final class ObjectCreator {
 	}
 	
 	@NotNull
-	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
+	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class<T> c) {
 		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
 	@NotNull
-	private static SWGObject createObjectFromType(long objectId, String template, ObjectData attributes) {
-		Integer gotInt = (Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
-		if (gotInt == null)
-			throw new ObjectCreationException(template, "No GOT");
-		
-		BaselineType baseline = GameObjectType.getTypeFromId(gotInt).getBaselineType();
+	private static SWGObject createObjectFromType(long objectId, String template, int got) {
+		BaselineType baseline = GameObjectType.getTypeFromId(got).getBaselineType();
 		if (baseline == null) {
 			return createSlowFromType(objectId, template);
 		}
@@ -172,60 +161,66 @@ public final class ObjectCreator {
 		}
 	}
 	
-	private static void handlePostCreation(SWGObject object, ObjectData attributes) {
+	private static void handlePostCreation(SWGObject object, Map<ObjectDataAttribute, Object> attributes) {
 		addObjectAttributes(object, attributes);
 		createObjectSlots(object);
-		Object got = object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
-		if (got != null)
-			object.setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
+		object.setGameObjectType(GameObjectType.getTypeFromId(object.getDataIntAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
 	}
-
-	private static void addObjectAttributes(SWGObject obj, ObjectData attributes) {
-		if (attributes == null)
-			return;
-
-		for (Entry<ObjectDataAttribute, Object> e : attributes.getAttributes().entrySet()) {
-			setObjectAttribute(e.getKey(), e.getValue(), obj);
+	
+	private static void addObjectAttributes(SWGObject obj, Map<ObjectDataAttribute, Object> attributes) {
+		if (obj.getTemplate().equals("object/tangible/terminal/shared_terminal_mission.iff"))
+			System.out.println(attributes);
+		for (Entry<ObjectDataAttribute, Object> e : attributes.entrySet()) {
+			Object value = e.getValue();
+			obj.setDataAttribute(e.getKey(), value);
+			
+			switch (e.getKey()) {
+				case OBJECT_NAME: obj.setStringId((StringId) value); break;
+				case DETAILED_DESCRIPTION: obj.setDetailStf((StringId) value); break;
+				case CONTAINER_TYPE: obj.setContainerType(((Number) value).intValue()); break;
+				default: break;
+			}
 		}
 	}
-
-	private static void setObjectAttribute(ObjectDataAttribute key, Object value, SWGObject object) {
-		object.setDataAttribute(key, value);
-		switch (key) {
-			case OBJECT_NAME: object.setStringId(value.toString()); break;
-			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
-			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
-			default: break;
-		}
-	}
-
+	
 	private static void createObjectSlots(SWGObject object) {
-		if (object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
+		String slotDescriptor = object.getDataTextAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME);
+		String arrangementDescriptor = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
+		
+		if (!slotDescriptor.isEmpty()) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME));
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile(slotDescriptor);
 			if (descriptor == null)
 				return;
-
+			
 			for (String slotName : descriptor.getSlots()) {
 				object.setSlot(slotName, null);
 			}
 		}
 		
-		if (object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
+		if (!arrangementDescriptor.isEmpty()) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME));
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile(arrangementDescriptor);
 			if (arrangementData == null)
 				return;
-
+			
 			object.setArrangement(arrangementData.getArrangement());
 		}
 	}
-
+	
 	/*
 		Misc helper methods
 	 */
 	private static String getObjectType(String template) {
 		return template.substring(7, template.indexOf('/', 8));
+	}
+	
+	private static void updateMaxObjectId(long objectId) {
+		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
+	}
+	
+	private static long getNextObjectId() {
+		return OBJECT_ID.incrementAndGet();
 	}
 	
 	public static class ObjectCreationException extends RuntimeException {

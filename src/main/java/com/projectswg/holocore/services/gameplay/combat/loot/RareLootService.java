@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.loot;
 
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
@@ -88,7 +89,7 @@ public class RareLootService extends Service {
 		SWGObject inventory = killer.getSlottedObject("inventory");
 		
 		chest.setStf("loot_n", chestIdForTemplate(template) + "_n");
-		chest.setDetailStf("loot_n", chestIdForTemplate(template) + "_d");    // Not located in loot_d, for whatever reason...
+		chest.setDetailStf(new StringId("loot_n", chestIdForTemplate(template) + "_d"));    // Not located in loot_d, for whatever reason...
 		
 		chest.moveToContainer(inventory);
 		sendSuccessPackets(chest, corpse, killer);

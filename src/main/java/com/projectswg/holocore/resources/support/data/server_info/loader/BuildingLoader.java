@@ -29,22 +29,17 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
-public class BuildingLoader {
-	
-	private static final AtomicReference<SoftReference<BuildingLoader>> CACHED_LOADER = new AtomicReference<>(null);
+public final class BuildingLoader extends DataLoader {
 	
 	private final Map<String, BuildingLoaderInfo> buildingMap;
 	
-	private BuildingLoader() {
+	BuildingLoader() {
 		this.buildingMap = new HashMap<>();
 	}
 	
@@ -52,25 +47,13 @@ public class BuildingLoader {
 		return buildingMap.get(buildingName);
 	}
 	
-	private void loadFromFile() {
+	@Override
+	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/building/buildings.sdb"))) {
 			while (set.next()) {
 				buildingMap.put(set.getText(0), new BuildingLoaderInfo(set));
 			}
-		} catch (IOException e) {
-			Log.e(e);
 		}
-	}
-	
-	public static BuildingLoader load() {
-		SoftReference<BuildingLoader> ref = CACHED_LOADER.get();
-		BuildingLoader loader = (ref == null) ? null : ref.get();
-		if (loader == null) {
-			loader = new BuildingLoader();
-			loader.loadFromFile();
-			CACHED_LOADER.set(new SoftReference<>(loader));
-		}
-		return loader;
 	}
 	
 	public static class BuildingLoaderInfo {

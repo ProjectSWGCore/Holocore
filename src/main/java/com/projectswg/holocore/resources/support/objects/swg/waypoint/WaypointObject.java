@@ -37,6 +37,7 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 public class WaypointObject extends IntangibleObject implements Encodable, Persistable {
 	
@@ -70,6 +71,7 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 		return waypoint.getObjectId();
 	}
 	
+	@NotNull
 	@Override
 	public Terrain getTerrain() {
 		return waypoint.getTerrain();
@@ -96,7 +98,7 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 	}
 	
 	@Override
-	public void setTerrain(Terrain terrain) {
+	public void setTerrain(@NotNull Terrain terrain) {
 		waypoint.setTerrain(terrain);
 	}
 	

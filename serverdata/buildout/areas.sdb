@@ -1,5 +1,5 @@
 id	terrain	area_name	event	min_x	min_z	max_x	max_z	adjust_coordinates	translate_x	translate_z
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL DEFAULT ""	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	INTEGER NOT NULL DEFAULT 0	REAL NOT NULL	REAL NOT NULL
+
 -67	yavin4	yavin4_global		-8196	-8196	8196	8196	0	0	0
 -66	watertabletest	watertabletest_global		-8196	-8196	8196	8196	0	0	0
 -65	umbra	umbra_global		-8196	-8196	8196	8196	0	0	0

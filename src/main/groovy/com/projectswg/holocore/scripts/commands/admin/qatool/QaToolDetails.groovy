@@ -71,7 +71,7 @@ static def sendDetails(Player player, SWGObject object, String [] args) {
 	sendPersonal(player, "    STR:            %s / %s", object.getStringId(), object.getDetailStringId())
 	sendPersonal(player, "    Template:       %s", object.getTemplate())
 	sendPersonal(player, "    GOT:            %s", object.getGameObjectType())
-	sendPersonal(player, "    Classification: %s", object.getClassification())
+	sendPersonal(player, "    Classification: %s", object.getGenerated())
 	sendPersonal(player, "    Load Range:     %.0f", object.getLoadRange())
 	if (object instanceof CreatureObject) {
 		sendPersonal(player, "    Health:         %d / %d", object.getHealth(), object.getMaxHealth())

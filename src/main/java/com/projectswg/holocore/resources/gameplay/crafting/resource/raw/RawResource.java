@@ -28,37 +28,47 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
+import me.joshlarson.jlcommon.utilities.Arguments;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RawResource {
 	
 	private final long id;
 	private final StringId name;
+	private final RawResource parent;
+	private final RawResourceType type;
+	private final String crateTemplate;
+	private final int minTypes;
+	private final int maxTypes;
+	private final int minPools;
+	private final int maxPools;
+	private final boolean recycled;
 	private final List<RawResource> children;
 	
-	private RawResource parent;
-	private RawResourceType type;
-	private String crateTemplate;
-	private int minTypes;
-	private int maxTypes;
-	private int minPools;
-	private int maxPools;
-	private boolean recycled;
-	
-	public RawResource(long id) {
-		this.id = id;
-		this.parent = null;
-		this.type = RawResourceType.RESOURCE;
-		this.children = new ArrayList<>();
-		this.crateTemplate = "";
-		this.name = new StringId("resource/resource_names", "");
-		this.minTypes = 0;
-		this.maxTypes = 0;
-		this.minPools = 0;
-		this.maxPools = 0;
+	private RawResource(RawResourceBuilder builder) {
+		this.id = builder.id;
+		this.children = new CopyOnWriteArrayList<>();
+		
+		this.parent = builder.parent;
+		this.crateTemplate = Objects.requireNonNull(builder.crateTemplate, "crateTemplate");
+		this.name = Objects.requireNonNull(builder.name, "name");
+		this.minTypes = builder.minTypes;
+		this.maxTypes = builder.maxTypes;
+		this.minPools = builder.minPools;
+		this.maxPools = builder.maxPools;
+		this.recycled = builder.recycled;
+		
+		Arguments.validate(minTypes != -1, "minTypes must be initialized");
+		Arguments.validate(maxTypes != -1, "maxTypes must be initialized");
+		Arguments.validate(minPools != -1, "minPools must be initialized");
+		Arguments.validate(maxPools != -1, "maxPools must be initialized");
+		this.type = RawResourceType.getRawResourceType(this);
+		if (parent != null)
+			parent.children.add(this);
 	}
 	
 	public long getId() {
@@ -105,61 +115,69 @@ public class RawResource {
 		return recycled;
 	}
 	
+	public static RawResourceBuilder builder(long id) {
+		return new RawResourceBuilder(id);
+	}
+	
 	public static class RawResourceBuilder {
 		
-		private final RawResource resource;
+		private final long id;
+		
+		private StringId name = null;
+		private RawResource parent = null;
+		private String crateTemplate = null;
+		private int minTypes = -1;
+		private int maxTypes = -1;
+		private int minPools = -1;
+		private int maxPools = -1;
+		private boolean recycled = false;
 		
 		public RawResourceBuilder(long id) {
-			resource = new RawResource(id);
+			this.id = id;
 		}
 		
 		public RawResourceBuilder setName(String name) {
-			resource.name.setKey(name);
+			this.name = new StringId("resource/resource_names", name);
 			return this;
 		}
 		
 		public RawResourceBuilder setParent(RawResource parent) {
-			if (resource.parent != null)
-				resource.parent.children.remove(resource);
-			resource.parent = parent;
-			if (parent != null)
-				parent.children.add(resource);
+			this.parent = parent;
 			return this;
 		}
 		
 		public RawResourceBuilder setCrateTemplate(String crateTemplate) {
-			resource.crateTemplate = crateTemplate;
+			this.crateTemplate = crateTemplate;
 			return this;
 		}
 		
 		public RawResourceBuilder setMinTypes(int minTypes) {
-			resource.minTypes = minTypes;
+			this.minTypes = minTypes;
 			return this;
 		}
 		
 		public RawResourceBuilder setMaxTypes(int maxTypes) {
-			resource.maxTypes = maxTypes;
+			this.maxTypes = maxTypes;
 			return this;
 		}
 		
 		public RawResourceBuilder setMinPools(int minPools) {
-			resource.minPools = minPools;
+			this.minPools = minPools;
 			return this;
 		}
 		
 		public RawResourceBuilder setMaxPools(int maxPools) {
-			resource.maxPools = maxPools;
+			this.maxPools = maxPools;
 			return this;
 		}
 		
 		public RawResourceBuilder setRecycled(boolean recycled) {
-			resource.recycled = recycled;
+			this.recycled = recycled;
 			return this;
 		}
 		
 		public RawResource build() {
-			resource.type = RawResourceType.getRawResourceType(resource);
-			return resource;
+			return new RawResource(this);
 		}
 		
 	}
