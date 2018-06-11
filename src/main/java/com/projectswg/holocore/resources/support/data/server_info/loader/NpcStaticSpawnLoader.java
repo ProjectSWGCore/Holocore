@@ -96,8 +96,9 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 			this.patrolId = (int) set.getInt("patrol_id");
 			this.patrolFormation = parsePatrolFormation(set.getText("patrol_formation"));
 			this.loiterRadius = (int) set.getInt("loiter_radius");
-			this.minSpawnTime = (int) set.getInt("min_spawn_time");
-			this.maxSpawnTime = (int) set.getInt("max_spawn_time");
+			int spawnTime = (int) set.getInt("respawn");
+			this.minSpawnTime = (int) (spawnTime * 0.9);
+			this.maxSpawnTime = (int) (spawnTime * 1.1);
 			this.amount = (int) set.getInt("amount");
 		}
 		
