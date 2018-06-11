@@ -32,31 +32,29 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
-import com.projectswg.holocore.resources.support.global.commands.*;
-import com.projectswg.holocore.resources.support.global.commands.callbacks.*;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.BasicLogStream;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.global.commands.*;
+import com.projectswg.holocore.resources.support.global.commands.CommandLauncher.EnqueuedCommand;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.admin.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.admin.qatool.CmdQaTool;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.friend.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.flags.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.generic.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.group.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestCoreSample;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestSurvey;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.data.server_info.BasicLogStream;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.scripts.commands.admin.*;
-import com.projectswg.holocore.scripts.commands.chat.*;
-import com.projectswg.holocore.scripts.commands.chat.friend.*;
-import com.projectswg.holocore.scripts.commands.combat.CmdCoupDeGrace;
-import com.projectswg.holocore.scripts.commands.combat.CmdDuel;
-import com.projectswg.holocore.scripts.commands.combat.CmdEndDuel;
-import com.projectswg.holocore.scripts.commands.combat.CmdPVP;
-import com.projectswg.holocore.scripts.commands.flags.*;
-import com.projectswg.holocore.scripts.commands.generic.*;
-import com.projectswg.holocore.scripts.commands.group.*;
-import com.projectswg.holocore.scripts.commands.survey.CmdRequestCoreSample;
-import com.projectswg.holocore.scripts.commands.survey.CmdRequestSurvey;
-import com.projectswg.holocore.resources.support.global.commands.CommandLauncher.EnqueuedCommand;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -360,93 +358,96 @@ public class CommandService extends Service {
 		registerCallback("logout", new LogoutCmdCallback());
 		registerCallback("requestDraftSlots", new RequestDraftSlotsCallback());
 		
-		// Scripts
 		addAdminScripts();
 		addChatScripts();
 		addCombatScripts();
 		addFlagScripts();
+		addGenericScripts();
 		addGroupScripts();
 		addSurveyScripts();
-		registerCallback("stopDance", CmdStopDance::execute);
-		registerCallback("stopwatching", CmdStopWatching::execute);
-		registerCallback("watch", CmdWatch::execute);
-		registerCallback("openContainer", CmdOpenContainer::execute);
-		registerCallback("purchaseTicket", CmdPurchaseTicket::execute);
-		registerCallback("setBiography", CmdSetBiography::execute);
-		registerCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::execute);
-		registerCallback("setMoodInternal", CmdSetMoodInternal::execute);
-		registerCallback("setWaypointActiveStatus", CmdSetWaypointActiveStatus::execute);
-		registerCallback("setWaypointName", CmdSetWaypointName::execute);
 	}
 	
 	private void addAdminScripts() {
-		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::execute);
-		registerCallback("goto", new GotoCmdCallback());
-		registerCallback("grantSkill", CmdGrantSkill::execute);
-		registerCallback("qatool", new QaToolCmdCallback());
-		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
-		registerCallback("setGodMode", CmdSetGodMode::execute);
-		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
-		registerCallback("server", new ServerCmdCallback());
+		registerCallback("dumpZoneInformation", new CmdDumpZoneInformation());
+		registerCallback("goto", new CmdGoto());
+		registerCallback("qatool", new CmdQaTool());
+		registerCallback("revertPlayerAppearance", new CmdRevertPlayerAppearance());
+		registerCallback("setGodMode", new CmdSetGodMode());
+		registerCallback("setPlayerAppearance", new CmdSetPlayerAppearance());
+		registerCallback("server", new CmdServer());
 		
-		registerCallback("createStaticItem", CmdCreateStaticItem::execute);
-		registerCallback("credits", CmdMoney::execute);
-		registerCallback("setSpeed", CmdSetSpeed::execute);
+		registerCallback("createStaticItem", new CmdCreateStaticItem());
+		registerCallback("credits", new CmdMoney());
+		registerCallback("setSpeed", new CmdSetSpeed());
 	}
 	
 	private void addChatScripts() {
-		registerCallback("broadcast", CmdBroadcast::execute);
-		registerCallback("broadcastArea", CmdBroadcastArea::execute);
-		registerCallback("broadcastGalaxy", CmdBroadcastGalaxy::execute);
-		registerCallback("broadcastPlanet", CmdBroadcastPlanet::execute);
-		registerCallback("planet", CmdPlanetChat::execute);
-		registerCallback("spatialChatInternal", CmdSpatialChatInternal::execute);
+		registerCallback("broadcast", new CmdBroadcast());
+		registerCallback("broadcastArea", new CmdBroadcastArea());
+		registerCallback("broadcastGalaxy", new CmdBroadcastGalaxy());
+		registerCallback("broadcastPlanet", new CmdBroadcastPlanet());
+		registerCallback("planet", new CmdPlanetChat());
+		registerCallback("spatialChatInternal", new CmdSpatialChatInternal());
 		addChatFriendScripts();
 	}
 	
 	private void addChatFriendScripts() {
-		registerCallback("addFriend", CmdAddFriend::execute);
-		registerCallback("addIgnore", CmdAddIgnore::execute);
-		registerCallback("getFriendList", CmdGetFriendList::execute);
-		registerCallback("removeFriend", CmdRemoveFriend::execute);
-		registerCallback("removeIgnore", CmdRemoveIgnore::execute);
+		registerCallback("addFriend", new CmdAddFriend());
+		registerCallback("addIgnore", new CmdAddIgnore());
+		registerCallback("getFriendList", new CmdGetFriendList());
+		registerCallback("removeFriend", new CmdRemoveFriend());
+		registerCallback("removeIgnore", new CmdRemoveIgnore());
 	}
 	
 	private void addCombatScripts() {
-		registerCallback("coupDeGrace", CmdCoupDeGrace::execute);
-		registerCallback("deathBlow", CmdCoupDeGrace::execute);
-		registerCallback("duel", CmdDuel::execute);
-		registerCallback("endDuel", CmdEndDuel::execute);
-		registerCallback("pvp", CmdPVP::execute);
+		registerCallback("coupDeGrace", new CmdCoupDeGrace());
+		registerCallback("deathBlow", new CmdCoupDeGrace());
+		registerCallback("duel", new CmdDuel());
+		registerCallback("endDuel", new CmdEndDuel());
+		registerCallback("pvp", new CmdPVP());
 	}
 	
 	private void addFlagScripts() {
-		registerCallback("toggleAwayFromKeyBoard", CmdToggleAwayFromKeyBoard::execute);
-		registerCallback("toggleDisplayingFactionRank", CmdToggleDisplayingFactionRank::execute);
-		registerCallback("newbiehelper", CmdToggleHelper::execute);
-		registerCallback("lfg", CmdToggleLookingForGroup::execute);
-		registerCallback("lfw", CmdToggleLookingForWork::execute);
-		registerCallback("ooc", CmdToggleOutOfCharacter::execute);
-		registerCallback("rolePlay", CmdToggleRolePlay::execute);
+		registerCallback("toggleAwayFromKeyBoard", new CmdToggleAwayFromKeyboard());
+		registerCallback("toggleDisplayingFactionRank", new CmdToggleDisplayingFactionRank());
+		registerCallback("newbiehelper", new CmdToggleHelper());
+		registerCallback("lfg", new CmdToggleLookingForGroup());
+		registerCallback("lfw", new CmdToggleLookingForWork());
+		registerCallback("ooc", new CmdToggleOutOfCharacter());
+		registerCallback("rolePlay", new CmdToggleRolePlay());
+	}
+	
+	private void addGenericScripts() {
+		registerCallback("grantSkill", new CmdGrantSkill());
+		registerCallback("stopDance", new CmdStopDance());
+		registerCallback("stopwatching", new CmdStopWatching());
+		registerCallback("watch", new CmdWatch());
+		registerCallback("openContainer", new CmdOpenContainer());
+		registerCallback("purchaseTicket", new CmdPurchaseTicket());
+		registerCallback("setBiography", new CmdSetBiography());
+		registerCallback("setCurrentSkillTitle", new CmdSetCurrentSkillTitle());
+		registerCallback("setMoodInternal", new CmdSetMoodInternal());
+		registerCallback("setWaypointActiveStatus", new CmdSetWaypointActiveStatus());
+		registerCallback("setWaypointName", new CmdSetWaypointName());
 	}
 	
 	private void addGroupScripts() {
-		registerCallback("groupChat", CmdGroupChat::execute);
-		registerCallback("decline", CmdGroupDecline::execute);
-		registerCallback("disband", CmdGroupDisband::execute);
-		registerCallback("invite", CmdGroupInvite::execute);
-		registerCallback("join", CmdGroupJoin::execute);
-		registerCallback("dismissGroupMember", CmdGroupKick::execute);
-		registerCallback("leaveGroup", CmdGroupLeave::execute);
-		registerCallback("groupLoot", CmdGroupLootSet::execute);
-		registerCallback("makeLeader", CmdGroupMakeLeader::execute);
-		registerCallback("makeMasterLooter", CmdGroupMakeMasterLooter::execute);
-		registerCallback("uninvite", CmdGroupUninvite::execute);
+		registerCallback("groupChat", new CmdGroupChat());
+		registerCallback("decline", new CmdGroupDecline());
+		registerCallback("disband", new CmdGroupDisband());
+		registerCallback("invite", new CmdGroupInvite());
+		registerCallback("join", new CmdGroupJoin());
+		registerCallback("dismissGroupMember", new CmdGroupKick());
+		registerCallback("leaveGroup", new CmdGroupLeave());
+		registerCallback("groupLoot", new CmdGroupLootSet());
+		registerCallback("makeLeader", new CmdGroupMakeLeader());
+		registerCallback("makeMasterLooter", new CmdGroupMakeMasterLooter());
+		registerCallback("uninvite", new CmdGroupUninvite());
 	}
 	
 	private void addSurveyScripts() {
-		registerCallback("requestCoreSample", CmdRequestCoreSample::execute);
-		registerCallback("requestSurvey", CmdRequestSurvey::execute);
+		registerCallback("requestCoreSample", new CmdRequestCoreSample());
+		registerCallback("requestSurvey", new CmdRequestSurvey());
 	}
 	
 }

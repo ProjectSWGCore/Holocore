@@ -33,6 +33,7 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.intents.support.data.config.ConfigChangedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -41,17 +42,12 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.NpcInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolRouteWaypoint;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.DetailNpcStatInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.spawn.StaticSpawnLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.spawn.StaticSpawnLoader.StaticSpawnInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolRouteWaypoint;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.DetailNpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.NpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.StaticSpawnInfo;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.SpawnerFlag;
@@ -152,7 +148,7 @@ public final class SpawnerService extends Service {
 	}
 	
 	private static void createPatrolRouteWaypoints() {
-		NpcPatrolRouteLoader npcPatrolRouteLoader = NpcPatrolRouteLoader.load();
+		NpcPatrolRouteLoader npcPatrolRouteLoader = DataLoader.npcPatrolRoutes();
 		npcPatrolRouteLoader.forEach(route -> {
 			for (PatrolRouteWaypoint waypoint : route) {
 				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
@@ -178,7 +174,7 @@ public final class SpawnerService extends Service {
 			return null;
 		}
 		
-		BuildingLoaderInfo buildingInfo = BuildingLoader.load().getBuilding(waypoint.getBuildingId());
+		BuildingLoaderInfo buildingInfo = DataLoader.buildings().getBuilding(waypoint.getBuildingId());
 		if (buildingInfo == null) {
 			Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
 			return null;
@@ -210,7 +206,7 @@ public final class SpawnerService extends Service {
 		private BuildingLoader buildingLoader;
 		private NpcStatLoader npcStatLoader;
 		private NpcLoader npcLoader;
-		private StaticSpawnLoader staticSpawnLoader;
+		private NpcStaticSpawnLoader npcStaticSpawnLoader;
 		private NpcPatrolRouteLoader npcPatrolRouteLoader;
 		
 		// Spawn info
@@ -224,7 +220,7 @@ public final class SpawnerService extends Service {
 			this.buildingLoader = null;
 			this.npcStatLoader = null;
 			this.npcLoader = null;
-			this.staticSpawnLoader = null;
+			this.npcStaticSpawnLoader = null;
 			this.npcPatrolRouteLoader = null;
 			
 			this.building = null;
@@ -234,13 +230,13 @@ public final class SpawnerService extends Service {
 		}
 		
 		public void load() {
-			buildingLoader = BuildingLoader.load();
-			npcStatLoader = NpcStatLoader.load();
-			npcLoader = NpcLoader.load();
-			staticSpawnLoader = StaticSpawnLoader.load();
-			npcPatrolRouteLoader = NpcPatrolRouteLoader.load();
+			buildingLoader = DataLoader.buildings();
+			npcStatLoader = DataLoader.npcStats();
+			npcLoader = DataLoader.npcs();
+			npcStaticSpawnLoader = DataLoader.npcStaticSpawns();
+			npcPatrolRouteLoader = DataLoader.npcPatrolRoutes();
 			
-			staticSpawnLoader.iterate(this::loadStaticSpawn);
+			npcStaticSpawnLoader.iterate(this::loadStaticSpawn);
 		}
 		
 		private void loadStaticSpawn(StaticSpawnInfo spawn) {

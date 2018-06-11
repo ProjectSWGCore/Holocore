@@ -32,29 +32,11 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Function;
 
 public class SdbLoader {
 	
 	private SdbLoader() {
 		
-	}
-	
-	private enum DataType {
-		TEXT	(str -> str),
-		INTEGER	(Long::valueOf),
-		REAL	(Double::valueOf),
-		BOOLEAN	(Boolean::valueOf);
-		
-		private final Function<String, Object> transformer;
-		
-		DataType(Function<String, Object> transformer) {
-			this.transformer = transformer;
-		}
-		
-		public Function<String, Object> getTransformer() {
-			return transformer;
-		}
 	}
 	
 	public static SdbResultSet load(File file) throws IOException {
@@ -199,18 +181,20 @@ public class SdbLoader {
 	private static class SingleSdbResultSet implements SdbResultSet {
 		
 		private final File file;
-		private final Map<String, Integer> columnNames;
+		private final Map<String, Integer> columnIndices;
 		private final AtomicLong lineNumber;
 		private final BasicStringBuilder lineBuffer;
+		private String [] columnNames;
 		private String [] columnValues;
 		private BufferedInputStream input;
 		private FileInputStream inputFile;
 		
 		private SingleSdbResultSet(File file) {
 			this.file = file;
-			this.columnNames = new HashMap<>();
+			this.columnIndices = new HashMap<>();
 			this.lineNumber = new AtomicLong(0);
 			this.lineBuffer = new BasicStringBuilder(256);
+			this.columnNames = null;
 			this.columnValues = null;
 			this.input = null;
 			this.inputFile = null;
@@ -240,7 +224,7 @@ public class SdbLoader {
 		
 		@Override
 		public List<String> getColumns() {
-			return new ArrayList<>(columnNames.keySet());
+			return Arrays.asList(columnNames);
 		}
 		
 		@Override
@@ -250,7 +234,7 @@ public class SdbLoader {
 		
 		@Override
 		public String getText(String columnName) {
-			return columnValues[columnNames.get(columnName)];
+			return columnValues[columnIndices.get(columnName)];
 		}
 		
 		@Override
@@ -264,7 +248,7 @@ public class SdbLoader {
 		
 		@Override
 		public long getInt(String columnName) {
-			return getInt(columnNames.get(columnName));
+			return getInt(columnIndices.get(columnName));
 		}
 		
 		@Override
@@ -278,7 +262,7 @@ public class SdbLoader {
 		
 		@Override
 		public double getReal(String columnName) {
-			return getReal(columnNames.get(columnName));
+			return getReal(columnIndices.get(columnName));
 		}
 		
 		@Override
@@ -288,7 +272,7 @@ public class SdbLoader {
 		
 		@Override
 		public boolean getBoolean(String columnName) {
-			return getBoolean(columnNames.get(columnName));
+			return getBoolean(columnIndices.get(columnName));
 		}
 		
 		private String fetchValue(boolean endsNewline) throws EOFException {
@@ -359,10 +343,10 @@ public class SdbLoader {
 				Log.e("Invalid SDB header: %s - nonexistent", file);
 				return;
 			}
-			String [] columns = columnsStr.split("\t");
-			columnValues = new String[columns.length];
-			for (int i = 0; i < columns.length; i++) {
-				columnNames.put(columns[i], i);
+			columnNames = columnsStr.split("\t");
+			columnValues = new String[columnNames.length];
+			for (int i = 0; i < columnNames.length; i++) {
+				columnIndices.put(columnNames[i], i);
 			}
 			lineNumber.set(2);
 		}

@@ -47,6 +47,7 @@ import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemInt
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
@@ -57,8 +58,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObje
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.NpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
@@ -173,7 +174,7 @@ public final class LootService extends Service {
 		String what = "NPC loot links";
 		long startTime = StandardLog.onStartLoad(what);
 		
-		NpcLoader npcLoader = NpcLoader.load();
+		NpcLoader npcLoader = DataLoader.npcs();
 		npcLoader.iterate(this::loadNPCLoot);
 		
 		StandardLog.onEndLoad(npcLoot.size(), what, startTime);

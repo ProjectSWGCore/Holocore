@@ -47,6 +47,7 @@ public class TestRawResource {
 				.setMinTypes(45)
 				.setMaxTypes(60)
 				.setRecycled(false)
+				.setCrateTemplate("")
 				.build();
 		Assert.assertEquals("resource/resource_names", resource.getName().getFile());
 		Assert.assertEquals("resource_name", resource.getName().getKey());
@@ -55,6 +56,7 @@ public class TestRawResource {
 		Assert.assertEquals(30, resource.getMaxPools());
 		Assert.assertEquals(45, resource.getMinTypes());
 		Assert.assertEquals(60, resource.getMaxTypes());
+		Assert.assertEquals("", resource.getCrateTemplate());
 		Assert.assertFalse(resource.isRecycled());
 		
 		RawResource child = new RawResourceBuilder(2)
@@ -65,6 +67,7 @@ public class TestRawResource {
 				.setMinTypes(7)
 				.setMaxTypes(8)
 				.setRecycled(true)
+				.setCrateTemplate("")
 				.build();
 		Assert.assertEquals("resource/resource_names", child.getName().getFile());
 		Assert.assertEquals("child_name", child.getName().getKey());
@@ -73,6 +76,7 @@ public class TestRawResource {
 		Assert.assertEquals(6, child.getMaxPools());
 		Assert.assertEquals(7, child.getMinTypes());
 		Assert.assertEquals(8, child.getMaxTypes());
+		Assert.assertEquals("", child.getCrateTemplate());
 		Assert.assertTrue(child.isRecycled());
 	}
 	

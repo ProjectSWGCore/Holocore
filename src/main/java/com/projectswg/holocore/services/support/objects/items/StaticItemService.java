@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.support.objects.items;
 
 import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.customization.CustomizationVariable;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
@@ -283,10 +284,10 @@ public class StaticItemService extends Service {
 			// apply global attributes
 			if (itemName.startsWith("survey_tool")) {
 				object.setStf("item_n", itemName);
-				object.setDetailStf("item_d", itemName);
+				object.setDetailStf(new StringId("item_d", itemName));
 			} else {
 				object.setStf("static_item_n", itemName);
-				object.setDetailStf("static_item_d", itemName);
+				object.setDetailStf(new StringId("static_item_d", itemName));
 			}
 			if (noTrade)
 				object.addAttribute("no_trade", "1");

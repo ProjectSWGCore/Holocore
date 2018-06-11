@@ -75,7 +75,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
-	private ObjectClassification		classification	= ObjectClassification.GENERATED;
 	private GameObjectType gameObjectType	= GameObjectType.GOT_NONE;
 	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
 	private List <List <String>>		arrangement		= new ArrayList<>();
@@ -93,6 +92,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private int     	containerType	= 0;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
+	private boolean		generated		= true;
 	
 	public SWGObject() {
 		this(0, null);
@@ -376,16 +376,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.stringId = new StringId(stfFile, stfKey);
 	}
 	
-	public void setStringId(String stringId) {
-		this.stringId = new StringId(stringId);
+	public void setStringId(StringId stringId) {
+		this.stringId = stringId;
 	}
 	
-	public void setDetailStf(String stfFile, String stfKey) {
-		this.detailStringId = new StringId(stfFile, stfKey);
-	}
-	
-	public void setDetailStringId(String stf) {
-		this.detailStringId = new StringId(stf);
+	public void setDetailStf(StringId detailStringId) {
+		this.detailStringId = detailStringId;
 	}
 	
 	public void setTemplate(String template) {
@@ -522,6 +518,26 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public Object getDataAttribute(ObjectDataAttribute key) {
 		return dataAttributes.get(key);
 	}
+	
+	public int getDataIntAttribute(ObjectDataAttribute key) {
+		return ((Number) dataAttributes.get(key)).intValue();
+	}
+	
+	public long getDataLongAttribute(ObjectDataAttribute key) {
+		return ((Number) dataAttributes.get(key)).longValue();
+	}
+	
+	public double getDataDoubleAttribute(ObjectDataAttribute key) {
+		return ((Number) dataAttributes.get(key)).doubleValue();
+	}
+	
+	public String getDataTextAttribute(ObjectDataAttribute key) {
+		return (String) dataAttributes.get(key);
+	}
+	
+	public StringId getDataStfAttribute(ObjectDataAttribute key) {
+		return (StringId) dataAttributes.get(key);
+	}
 
 	public void setDataAttribute(ObjectDataAttribute key, Object value) {
 		dataAttributes.put(key, value);
@@ -564,24 +580,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public int getMaxContainerSize() {
-		Object maxContents = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
-		if (maxContents == null) {
-			Log.w("Volume is null!");
-			return 0;
-		}
-		return (Integer) maxContents;
+		return getDataIntAttribute(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
 	}
 	
 	public int getNextUpdateCount() {
 		return updateCounter.getAndIncrement();
 	}
 	
-	public void setClassification(ObjectClassification classification) {
-		this.classification = classification;
-	}
-	
-	public ObjectClassification getClassification() {
-		return classification;
+	public void setGenerated(boolean generated) {
+		this.generated = generated;
 	}
 	
 	public GameObjectType getGameObjectType() {
@@ -599,17 +606,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setContainerPermissions(ContainerPermissionsType permissions) {
 		this.permissions = permissions;
 	}
-
-	public boolean isBuildout() {
-		return classification == ObjectClassification.BUILDOUT;
-	}
-	
-	public boolean isSnapshot() {
-		return classification == ObjectClassification.SNAPSHOT;
-	}
 	
 	public boolean isGenerated() {
-		return classification == ObjectClassification.GENERATED;
+		return generated;
 	}
 	
 	public final int getLoadRange() {
@@ -757,7 +756,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (parent == null)
 			return false;
 		parent = parent.getParent();
-		return parent != null && parent instanceof BuildingObject;
+		return parent instanceof BuildingObject;
 	}
 
 	@Override
@@ -834,7 +833,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(7);
+		stream.addByte(8);
 		location.save(stream);
 		boolean hasParent = parent != null;
 		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
@@ -849,7 +848,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				stream.addInt(((CellObject) parent).getNumber());
 		}
 		stream.addAscii(permissions.name());
-		stream.addAscii(classification.name());
+		stream.addBoolean(generated);
 		stream.addUnicode(objectName);
 		stringId.save(stream);
 		detailStringId.save(stream);
@@ -870,6 +869,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
 			default:
+			case 8:
+				readVersion8(stream);
+				break;
 			case 7:
 				readVersion7(stream);
 				break;
@@ -897,6 +899,27 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
+	private void readVersion8(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		generated = stream.getBoolean();
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
+	}
+	
 	private void readVersion7(NetBufferStream stream) {
 		location.read(stream);
 		if (stream.getBoolean()) {
@@ -909,7 +932,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -930,7 +953,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -955,7 +978,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -980,7 +1003,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -998,7 +1021,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -1015,7 +1038,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
 		detailStringId.read(stream);
@@ -1032,7 +1055,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
@@ -1047,7 +1070,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
-		classification = ObjectClassification.valueOf(stream.getAscii());
+		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		// Ignore the saved volume - this is now set automagically in addObject() and removeObject()
 		stream.getInt();
@@ -1057,9 +1080,4 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
-	public enum ObjectClassification {
-		GENERATED,
-		BUILDOUT,
-		SNAPSHOT
-	}
 }

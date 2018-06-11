@@ -6,6 +6,7 @@ import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.collections.GrantClickyCollectionIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.gameplay.player.collections.ClickyCollectionItem;

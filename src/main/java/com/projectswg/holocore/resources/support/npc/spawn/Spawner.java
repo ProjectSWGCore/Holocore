@@ -31,8 +31,8 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
-import com.projectswg.holocore.resources.support.data.server_info.loader.spawn.StaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
 
 import java.util.List;
 import java.util.Random;
