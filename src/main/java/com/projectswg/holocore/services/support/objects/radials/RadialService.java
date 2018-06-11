@@ -33,10 +33,10 @@ import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandler;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.scripts.radial.RadialHandler;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -49,12 +49,6 @@ public class RadialService extends Service {
 	
 	public RadialService() {
 		
-	}
-	
-	@Override
-	public boolean initialize() {
-		RadialHandler.initialize();
-		return super.initialize();
 	}
 	
 	@IntentHandler
@@ -83,7 +77,7 @@ public class RadialService extends Service {
 		}
 		
 		List<RadialOption> options = new ArrayList<>();
-		RadialHandler.getOptions(options, player, target);
+		RadialHandler.INSTANCE.getOptions(options, player, target);
 		sendResponse(player, target, options, request.getCounter());
 	}
 	
@@ -104,7 +98,7 @@ public class RadialService extends Service {
 			return;
 		}
 		
-		RadialHandler.handleSelection(player, target, selection);
+		RadialHandler.INSTANCE.handleSelection(player, target, selection);
 	}
 	
 	private static void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {

@@ -168,8 +168,6 @@ public final class ObjectCreator {
 	}
 	
 	private static void addObjectAttributes(SWGObject obj, Map<ObjectDataAttribute, Object> attributes) {
-		if (obj.getTemplate().equals("object/tangible/terminal/shared_terminal_mission.iff"))
-			System.out.println(attributes);
 		for (Entry<ObjectDataAttribute, Object> e : attributes.entrySet()) {
 			Object value = e.getValue();
 			obj.setDataAttribute(e.getKey(), value);

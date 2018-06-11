@@ -32,8 +32,8 @@ import com.projectswg.holocore.resources.gameplay.player.collections.CollectionI
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.scripts.radial.RadialHandler;
-import com.projectswg.holocore.scripts.radial.collection.WorldItemRadial;
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandler;
+import com.projectswg.holocore.resources.support.objects.radial.collection.WorldItemRadial;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -55,7 +55,7 @@ public class CollectionService extends Service {
 				String iff = set.getText("iff_template");
 				String slotName = set.getText("collection_slot_name");
 				String collectionName = set.getText("collection_name");
-				RadialHandler.registerHandler(iff, new WorldItemRadial(new CollectionItem(slotName, collectionName, iff)));
+				RadialHandler.INSTANCE.registerHandler(iff, new WorldItemRadial(new CollectionItem(slotName, collectionName, iff)));
 				count++;
 			}
 		} catch (IOException e) {
@@ -71,7 +71,7 @@ public class CollectionService extends Service {
 				double x = set.getReal("x");
 				double y = set.getReal("y");
 				String sharedFile = ClientFactory.formatToSharedFile(iff);
-				RadialHandler.registerHandler(sharedFile, new WorldItemRadial(new ClickyCollectionItem(slotName, collectionName, objectId, iff, terrain, x, y)));
+				RadialHandler.INSTANCE.registerHandler(sharedFile, new WorldItemRadial(new ClickyCollectionItem(slotName, collectionName, objectId, iff, terrain, x, y)));
 				count++;
 			}
 		} catch (IOException e) {
