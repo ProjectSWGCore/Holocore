@@ -1,0 +1,92 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+1140003	DUNGEON1	du1_corvette_neutral_1	AREA	1	-41.50	0.00	2.60	-170	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140004	DUNGEON1	du1_corvette_neutral_1	AREA	3	0.07	0.00	30.49	-176	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140005	DUNGEON1	du1_corvette_neutral_1	AREA	3	-0.40	0.00	10.00	88	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140006	DUNGEON1	du1_corvette_neutral_1	AREA	4	-10.05	0.00	5.90	1	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140007	DUNGEON1	du1_corvette_neutral_1	AREA	7	-3.98	0.00	49.70	97	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140008	DUNGEON1	du1_corvette_neutral_1	AREA	7	-4.74	0.00	56.88	-173	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140009	DUNGEON1	du1_corvette_neutral_1	AREA	7	8.44	0.00	59.23	-180	1	a CorSec Special Ops Sergeant	corsec_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140010	DUNGEON1	du1_corvette_neutral_1	AREA	7	8.74	0.00	48.53	93	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140011	DUNGEON1	du1_corvette_neutral_1	AREA	10	25.20	0.00	12.95	85	1	a CorSec Special Ops Sergeant	corsec_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140012	DUNGEON1	du1_corvette_neutral_1	AREA	10	19.92	0.00	16.15	0	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140013	DUNGEON1	du1_corvette_neutral_1	AREA	11	36.43	0.00	-0.04	-91	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140014	DUNGEON1	du1_corvette_neutral_1	AREA	12	10.44	0.00	28.28	168	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140015	DUNGEON1	du1_corvette_neutral_1	AREA	13	-10.09	0.00	-11.80	0	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140016	DUNGEON1	du1_corvette_neutral_1	AREA	14	20.10	0.00	-11.16	0	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140017	DUNGEON1	du1_corvette_neutral_1	AREA	17	4.77	0.00	-20.87	-180	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140018	DUNGEON1	du1_corvette_neutral_1	AREA	17	4.76	0.00	-32.88	1	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140019	DUNGEON1	du1_corvette_neutral_1	AREA	20	0.87	12.00	24.52	-114	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140020	DUNGEON1	du1_corvette_neutral_1	AREA	20	-2.99	12.00	-8.84	178	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140021	DUNGEON1	du1_corvette_neutral_1	AREA	21	4.55	12.00	-7.40	-55	1	a CorSec Special Ops Trainee	corsec_cadet_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140022	DUNGEON1	du1_corvette_neutral_1	AREA	21	3.14	12.00	-0.95	178	1	a CorSec Special Ops Captain	corsec_captain_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140023	DUNGEON1	du1_corvette_neutral_1	AREA	22	2.97	12.00	14.25	-160	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140024	DUNGEON1	du1_corvette_neutral_1	AREA	22	2.83	3.48	-5.00	-24	1	a CorSec Special Ops Captain	corsec_captain_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140025	DUNGEON1	du1_corvette_neutral_1	AREA	23	2.03	15.00	33.44	-170	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140026	DUNGEON1	du1_corvette_neutral_1	AREA	23	5.20	15.00	36.61	-3	1	a CorSec Special Ops Inspector	corsec_inspector_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140027	DUNGEON1	du1_corvette_neutral_1	AREA	23	9.72	15.00	34.54	111	1	a CorSec Special Ops Inspector	corsec_inspector_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140028	DUNGEON1	du1_corvette_neutral_1	AREA	24	2.00	0.00	-39.61	-90	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140029	DUNGEON1	du1_corvette_neutral_1	AREA	24	-2.00	0.00	-40.90	92	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140030	DUNGEON1	du1_corvette_neutral_1	AREA	24	-5.83	0.00	-36.90	-96	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140031	DUNGEON1	du1_corvette_neutral_1	AREA	24	15.87	-12.00	-44.88	95	1	A Battle Droid	battle_droid_corsec_83_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140032	DUNGEON1	du1_corvette_neutral_1	AREA	24	27.19	-12.00	-56.71	0	1	A Battle Droid	battle_droid_corsec_83_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140033	DUNGEON1	du1_corvette_neutral_1	AREA	24	-21.48	-12.00	-59.01	-29	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140034	DUNGEON1	du1_corvette_neutral_1	AREA	24	7.29	-14.00	-50.23	2	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140035	DUNGEON1	du1_corvette_neutral_1	AREA	24	-7.42	-14.00	-46.00	-2	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140036	DUNGEON1	du1_corvette_neutral_1	AREA	24	-12.29	-12.00	-38.91	-89	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140037	DUNGEON1	du1_corvette_neutral_1	AREA	24	12.49	-12.00	-60.45	4	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140038	DUNGEON1	du1_corvette_neutral_1	AREA	24	-6.71	-14.00	-54.59	95	1	an R2 unit	r2_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140039	DUNGEON1	du1_corvette_neutral_1	AREA	27	0.97	-6.70	-40.21	5	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140040	DUNGEON1	du1_corvette_neutral_1	AREA	27	0.75	-6.70	-36.40	153	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140041	DUNGEON1	du1_corvette_neutral_1	AREA	27	-0.81	-6.70	-36.36	-120	1	an R5 unit	r5_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140042	DUNGEON1	du1_corvette_neutral_1	AREA	28	7.84	-14.00	-36.00	0	1	A Super Battle Droid	super_battle_droid_corsec_86_d_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140043	DUNGEON1	du1_corvette_neutral_1	AREA	28	5.58	-14.00	-36.82	0	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140044	DUNGEON1	du1_corvette_neutral_1	AREA	31	-0.13	-12.00	28.30	-1	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140045	DUNGEON1	du1_corvette_neutral_1	AREA	33	4.76	-12.00	1.88	89	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140046	DUNGEON1	du1_corvette_neutral_1	AREA	33	10.39	-12.00	15.81	-177	1	a CorSec Special Ops Lieutenant	corsec_lieutenant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140047	DUNGEON1	du1_corvette_neutral_1	AREA	33	3.17	-12.00	6.62	91	1	a 3PO protocol droid	protocol_droid_3po_silver_100_d_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140048	DUNGEON1	du1_corvette_neutral_1	AREA	34	21.36	-12.00	27.69	-167	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140049	DUNGEON1	du1_corvette_neutral_1	AREA	34	11.88	-12.00	-15.89	-90	1	an R4 unit	r4_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140050	DUNGEON1	du1_corvette_neutral_1	AREA	38	-6.72	-12.00	0.70	178	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140051	DUNGEON1	du1_corvette_neutral_1	AREA	38	-5.46	-12.00	15.46	-14	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140052	DUNGEON1	du1_corvette_neutral_1	AREA	38	-8.67	-12.00	14.60	26	1	a CorSec Special Ops Sergeant	corsec_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140053	DUNGEON1	du1_corvette_neutral_1	AREA	39	-12.25	-12.00	-16.05	90	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140054	DUNGEON1	du1_corvette_neutral_1	AREA	40	4.45	-12.00	49.96	113	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140055	DUNGEON1	du1_corvette_neutral_1	AREA	42	-7.64	-12.00	40.32	34	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140056	DUNGEON1	du1_corvette_neutral_1	AREA	44	-21.15	-12.00	56.75	108	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140057	DUNGEON1	du1_corvette_neutral_1	AREA	45	18.19	-12.00	70.21	-3	1	a CorSec Special Ops Sergeant	corsec_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140058	DUNGEON1	du1_corvette_neutral_1	AREA	45	24.35	-12.00	61.70	178	1	a CorSec Special Ops Captain	corsec_captain_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140059	DUNGEON1	du1_corvette_neutral_1	AREA	46	-23.52	-12.00	70.22	-1	1	a CorSec Security Specialist	corsec_detective_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140060	DUNGEON1	du1_corvette_neutral_1	AREA	46	-24.35	-12.00	61.87	178	1	a CorSec Special Ops Sergeant	corsec_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140061	DUNGEON1	du1_corvette_neutral_1	AREA	46	-17.39	-12.00	70.50	8	1	a CorSec Special Ops Inspector	corsec_inspector_sergeant_aggro_81_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140062	DUNGEON1	du1_corvette_neutral_1	AREA	46	-17.84	-12.00	61.70	180	1	a Corsec Special Ops Comissioner	corsec_comissioner_aggro_84_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140063	DUNGEON1	du1_corvette_neutral_1	AREA	46	-18.86	-12.00	66.59	86	1	an R2 unit	r2_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140064	DUNGEON1	du1_corvette_neutral_1	AREA	47	-2.06	-12.00	72.17	129	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140065	DUNGEON1	du1_corvette_neutral_1	AREA	47	-3.73	-12.00	66.70	-170	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140066	DUNGEON1	du1_corvette_neutral_1	AREA	48	-21.33	-12.00	51.32	11	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140067	DUNGEON1	du1_corvette_neutral_1	AREA	49	20.61	-12.00	50.32	-178	1	a 3PO protocol droid	protocol_droid_3po_red_100_d_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140068	DUNGEON1	du1_corvette_neutral_1	AREA	52	-0.18	-12.00	78.19	0	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140069	DUNGEON1	du1_corvette_neutral_1	AREA	53	-2.89	-12.00	111.90	178	1	a CorSec Special Ops Trainee	corsec_cadet_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140070	DUNGEON1	du1_corvette_neutral_1	AREA	53	3.40	-12.00	111.90	-173	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140071	DUNGEON1	du1_corvette_neutral_1	AREA	54	-10.67	-12.00	117.57	91	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140072	DUNGEON1	du1_corvette_neutral_1	AREA	54	10.65	-12.00	120.96	-4	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140073	DUNGEON1	du1_corvette_neutral_1	AREA	54	3.68	-12.00	125.46	3	1	a CorSec Special Ops Major	corsec_major_aggro_83_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140074	DUNGEON1	du1_corvette_neutral_1	AREA	55	9.27	-12.00	130.65	-86	1	a CorSec Special Ops Trainee	corsec_cadet_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140075	DUNGEON1	du1_corvette_neutral_1	AREA	55	0.90	-12.00	135.86	-93	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140076	DUNGEON1	du1_corvette_neutral_1	AREA	58	-1.70	-24.00	111.04	80	1	a CorSec Special Ops Trainee	corsec_cadet_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140077	DUNGEON1	du1_corvette_neutral_1	AREA	60	-4.24	-27.00	77.07	-106	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140078	DUNGEON1	du1_corvette_neutral_1	AREA	60	3.78	-27.00	75.90	132	1	a CorSec Special Ops Major	corsec_major_aggro_83_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140079	DUNGEON1	du1_corvette_neutral_1	AREA	61	-17.01	0.00	111.87	-2	1	a CorSec Special Ops Trainee	corsec_cadet_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140080	DUNGEON1	du1_corvette_neutral_1	AREA	61	18.26	0.04	115.54	-155	1	a Corsec Special Ops Comissioner	corsec_comissioner_aggro_84_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140081	DUNGEON1	du1_corvette_neutral_1	AREA	62	-0.08	0.00	115.90	178	1	a CorSec Soldier	corsec_trooper_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140082	DUNGEON1	du1_corvette_neutral_1	AREA	63	20.46	0.00	121.82	23	1	a commoner	commoner_100_h_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140083	DUNGEON1	du1_corvette_neutral_1	AREA	63	15.49	0.00	122.78	179	1	Imo Vledmo	imo_vledmo_100_h_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140084	DUNGEON1	du1_corvette_neutral_1	AREA	64	6.11	0.00	125.03	7	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140085	DUNGEON1	du1_corvette_neutral_1	AREA	64	5.73	0.00	133.93	154	1	a CorSec Special Ops Major	corsec_major_aggro_83_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140086	DUNGEON1	du1_corvette_neutral_1	AREA	65	-6.26	0.00	126.47	76	1	a CorSec Special Agent	corsec_agent_aggro_80_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140087	DUNGEON1	du1_corvette_neutral_1	AREA	65	-6.15	0.00	134.00	3	1	a CorSec Special Ops Chief	corsec_chief_aggro_83_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140088	DUNGEON1	du1_corvette_neutral_1	AREA	66	5.11	0.00	146.59	104	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140089	DUNGEON1	du1_corvette_neutral_1	AREA	66	-0.17	0.00	149.98	2	1	a CorSec Special Ops Captain	corsec_captain_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140090	DUNGEON1	du1_corvette_neutral_1	AREA	66	-3.00	0.20	151.41	-13	1	a CorSec Special Ops Captain	corsec_captain_aggro_82_h_agg_e	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140091	DUNGEON1	du1_corvette_neutral_1	AREA	66	3.00	0.20	151.41	-6	1	a 3PO protocol droid	protocol_droid_3po_100_d_inv_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600
+1140092	DUNGEON1	du1_corvette_neutral_1	AREA	66	-4.68	0.00	146.70	0	1	an R3 unit	r3_droid_4_d_att_n	Dungeon	Corvette Instance - Neutral	1	IDLE	0	0	-	idle	0	0	0	600

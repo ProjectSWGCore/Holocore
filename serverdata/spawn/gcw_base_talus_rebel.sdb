@@ -1,0 +1,24 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+3500003	TALUS	tal_gcw_base_bunker	AREA	10	18.30	-13.80	-13.70	-18	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500004	TALUS	tal_gcw_base_bunker	AREA	9	16.30	-13.80	4.50	-22	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500005	TALUS	tal_gcw_base_bunker	AREA	9	16.30	-13.80	13.30	-111	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500006	TALUS	tal_gcw_base_bunker	AREA	8	4.70	-13.80	9.70	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500007	TALUS	tal_gcw_base_bunker	AREA	8	-1.20	-13.80	9.70	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500008	TALUS	tal_gcw_base_bunker	AREA	7	-5.40	-13.70	1.90	129	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500009	TALUS	tal_gcw_base_bunker	AREA	7	-3.50	13.70	-8.60	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500010	TALUS	tal_gcw_base_bunker	AREA	5	2.50	-6.80	-9.20	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500011	TALUS	tal_world	AREA	0	-4945.30	66.00	-3127.30	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500012	TALUS	tal_world	AREA	0	-4936.50	66.00	-3115.40	128	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500013	TALUS	tal_world	AREA	0	-4930.80	66.00	-3112.00	128	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500014	TALUS	tal_world	AREA	0	-4912.30	70.00	-3041.40	-133	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500015	TALUS	tal_world	AREA	0	-4955.50	66.00	-3079.00	35	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500016	TALUS	tal_world	AREA	0	-4929.40	66.00	-3077.60	163	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500017	TALUS	tal_world	AREA	0	-4914.60	66.00	-3117.70	-11	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500018	TALUS	tal_world	AREA	0	-4926.80	66.00	-3140.10	-32	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500019	TALUS	tal_world	AREA	0	-4934.50	66.00	-3131.20	70	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500020	TALUS	tal_world	AREA	0	-4919.70	66.00	-3099.70	-18	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500021	TALUS	tal_world	AREA	0	-4970.90	66.00	-3090.50	-75	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500022	TALUS	tal_world	AREA	0	-4970.20	66.00	-3135.50	-35	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500023	TALUS	tal_world	AREA	0	-4957.30	66.00	-3166.10	54	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+3500024	TALUS	tal_gcw_base_bunker	AREA	10	12.10	-13.80	-15.30	15	1	Rebel Logistics Officer	gcw_base_rebel_talus_reward_officer_100_h_inv_n	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
