@@ -30,6 +30,7 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Set;
@@ -50,15 +51,8 @@ public abstract class AIObject extends CreatureObject {
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
+		setRunSpeed(7.3);
 		aiInitialize();
-	}
-	
-	/**
-	 * Called upon object creation.  If overridden, you must call this
-	 * function via super.aiInitialize()
-	 */
-	protected void aiInitialize() {
-		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
 	}
 	
 	@Override
@@ -72,34 +66,16 @@ public abstract class AIObject extends CreatureObject {
 		}
 	}
 	
-	/**
-	 * Sets scheduler properties for how often aiLoop runs
-	 * @param initialDelay the initial delay
-	 * @param delay the delay between each loop
-	 * @param unit the time unit for both delays
-	 */
-	protected void setSchedulerProperties(long initialDelay, long delay, TimeUnit unit) {
-		this.initialDelay = initialDelay;
-		this.delay = delay;
-		this.unit = unit;
+	public String getCreatureId() {
+		return creatureId;
 	}
 	
-	protected void disableScheduler() {
-		setSchedulerProperties(0, 0, null);
-	}
-	
-	protected void requestNextLoop(long delay, TimeUnit unit) {
-		ScheduledUtilities.run(this::aiLoop, delay, unit);
-	}
-	
-	public void setSpeed(double speed) {
-		setWalkSpeed(speed);
-		setRunSpeed(speed);
+	public void setCreatureId(String creatureId) {
+		this.creatureId = creatureId;
 	}
 	
 	/**
-	 * Called when Holocore is starting.  If overridden, you must call this
-	 * function via super.aiStart()
+	 * Called when Holocore is starting.  If overridden, you must call this function via super.aiStart()
 	 */
 	public void aiStart() {
 		if (future != null) {
@@ -110,13 +86,7 @@ public abstract class AIObject extends CreatureObject {
 	}
 	
 	/**
-	 * Called periodically for move updates, etc.
-	 */
-	protected abstract void aiLoop();
-	
-	/**
-	 * Called when Holocore is stopping.  If overridden, you must call this
-	 * function via super.aiStop()
+	 * Called when Holocore is stopping.  If overridden, you must call this function via super.aiStop()
 	 */
 	public void aiStop() {
 		if (future == null) {
@@ -125,16 +95,49 @@ public abstract class AIObject extends CreatureObject {
 		future.cancel(true);
 		future = null;
 	}
-
-	public String getCreatureId() {
-		return creatureId;
-	}
-
-	public void setCreatureId(String creatureId) {
-		this.creatureId = creatureId;
+	
+	/**
+	 * Called upon object creation. Also sets up the default periodic scheduler
+	 */
+	protected void aiInitialize() {
+		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
 	}
 	
-	protected final boolean canAiMove() {
+	/**
+	 * Sets scheduler properties for how often aiLoop runs
+	 *
+	 * @param initialDelay the initial delay
+	 * @param delay        the delay between each loop
+	 * @param unit         the time unit for both delays
+	 */
+	protected final void setSchedulerProperties(long initialDelay, long delay, @NotNull TimeUnit unit) {
+		this.initialDelay = initialDelay;
+		this.delay = delay;
+		this.unit = unit;
+	}
+	
+	protected final void disableScheduler() {
+		setSchedulerProperties(0, 0, null);
+	}
+	
+	protected final void requestNextLoop(long delay, TimeUnit unit) {
+		ScheduledUtilities.run(this::aiLoop, delay, unit);
+	}
+	
+	protected final double calculateWalkSpeed() {
+		return getMovementPercent() * getMovementScale() * getWalkSpeed();
+	}
+	
+	protected final double calculateRunSpeed() {
+		return getMovementPercent() * getMovementScale() * getRunSpeed();
+	}
+	
+	/**
+	 * Called periodically for move updates, etc.
+	 */
+	protected abstract void aiLoop();
+	
+	protected final boolean isRooted() {
 		switch (getPosture()) {
 			case DEAD:
 			case INCAPACITATED:
@@ -142,7 +145,7 @@ public abstract class AIObject extends CreatureObject {
 			case KNOCKED_DOWN:
 			case LYING_DOWN:
 			case SITTING:
-				return false;
+				return true;
 			case BLOCKING:
 			case CLIMBING:
 			case CROUCHED:
@@ -153,17 +156,18 @@ public abstract class AIObject extends CreatureObject {
 			case SKILL_ANIMATING:
 			case SNEAKING:
 			case UPRIGHT:
-				return true;
+			default:
+				// Rooted if there are no nearby players
+				return playersNearby.isEmpty();
 		}
-		return true;
-	}
-	
-	protected final boolean hasNearbyPlayers() {
-		return !playersNearby.isEmpty();
 	}
 	
 	protected final Set<CreatureObject> getNearbyPlayers() {
 		return Collections.unmodifiableSet(playersNearby);
+	}
+	
+	private void handleStandardAiLoop() {
+		
 	}
 	
 }

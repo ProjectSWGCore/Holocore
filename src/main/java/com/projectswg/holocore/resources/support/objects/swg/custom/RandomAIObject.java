@@ -51,7 +51,6 @@ public class RandomAIObject extends AIObject {
 	
 	@Override
 	protected void aiInitialize() {
-		super.aiInitialize();
 		long delay = (long) (30E3 + Math.random() * 10E3);
 		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
 	}
