@@ -36,7 +36,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -46,14 +45,12 @@ public class PatrolAIObject extends AIObject {
 	
 	private final List<ResolvedPatrolWaypoint> waypoints;
 	private final AtomicReference<PatrolType> patrolType;
-	private final AtomicInteger updateCounter;
 	private final Queue<Runnable> plannedRoute;
 	
 	public PatrolAIObject(long objectId) {
 		super(objectId);
 		this.waypoints = new CopyOnWriteArrayList<>();
 		this.patrolType = new AtomicReference<>(PatrolType.LOOP);
-		this.updateCounter = new AtomicInteger(0);
 		this.plannedRoute = new LinkedList<>();
 	}
 	
@@ -91,11 +88,11 @@ public class PatrolAIObject extends AIObject {
 		}
 		
 		// Creates a route in reverse for flip patrol types
-//		if (patrolType.get() == PatrolType.FLIP) {
-//			List<Runnable> reversed = new ArrayList<>(plannedRoute);
-//			Collections.reverse(reversed);
-//			plannedRoute.addAll(reversed);
-//		}
+		if (patrolType.get() == PatrolType.FLIP) {
+			List<Runnable> reversed = new ArrayList<>(plannedRoute);
+			Collections.reverse(reversed);
+			plannedRoute.addAll(reversed);
+		}
 	}
 	
 	private void appendPlannedRouteWaypoint(SWGObject prevParent, Location prevLocation, ResolvedPatrolWaypoint waypoint) {
@@ -116,7 +113,7 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void addToPlannedRoute(SWGObject parent, Location location) {
-		plannedRoute.add(() -> MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), updateCounter.incrementAndGet()));
+		plannedRoute.add(() -> MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount()));
 	}
 	
 	private void addNopToPlannedRoute() {

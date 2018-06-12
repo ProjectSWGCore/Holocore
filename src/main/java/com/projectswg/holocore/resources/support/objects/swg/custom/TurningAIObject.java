@@ -30,18 +30,14 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * AI object that loiters the area
  */
 public class TurningAIObject extends RandomAIObject {
 	
-	private final AtomicInteger updateCounter;
-	
 	public TurningAIObject(long objectId) {
 		super(objectId);
-		this.updateCounter = new AtomicInteger(0);
 	}
 	
 	@Override
@@ -52,7 +48,7 @@ public class TurningAIObject extends RandomAIObject {
 		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
 		double theta = r.nextDouble() * 360;
-		new MoveObjectIntent(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, updateCounter.getAndIncrement()).broadcast();
+		new MoveObjectIntent(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, getNextUpdateCount()).broadcast();
 	}
 	
 }
