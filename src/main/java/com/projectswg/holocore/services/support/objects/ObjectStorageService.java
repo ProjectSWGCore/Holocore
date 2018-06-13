@@ -16,13 +16,15 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -32,14 +34,12 @@ public class ObjectStorageService extends Service {
 	private final ObjectDatabase<SWGObject> database;
 	private final Map<Long, SWGObject> objectMap;
 	private final Map<Long, SWGObject> buildouts;
-	private final Set<AIObject> aiObjects;
 	private final AtomicBoolean started;
 	
 	public ObjectStorageService() {
 		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		this.buildouts = new ConcurrentHashMap<>(256*1024, 0.8f, 1);
-		this.aiObjects = ConcurrentHashMap.newKeySet();
 		this.started = new AtomicBoolean(false);
 	}
 	
@@ -73,14 +73,12 @@ public class ObjectStorageService extends Service {
 		}
 		
 		started.set(true);
-		aiObjects.forEach(AIObject::aiStart);
 		return true;
 	}
 	
 	@Override
 	public boolean stop() {
 		started.set(false);
-		aiObjects.forEach(AIObject::aiStop);
 		return true;
 	}
 	
@@ -134,22 +132,12 @@ public class ObjectStorageService extends Service {
 					database.save();
 			}
 		}
-		if (obj instanceof AIObject) {
-			aiObjects.add((AIObject) obj);
-			if (started.get())
-				((AIObject) obj).aiStart();
-		}
 	}
 	
 	@IntentHandler
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
 		destroyObject(obj);
-		if (obj instanceof AIObject) {
-			aiObjects.remove(obj);
-			if (started.get())
-				((AIObject) obj).aiStop();
-		}
 	}
 	
 	@IntentHandler

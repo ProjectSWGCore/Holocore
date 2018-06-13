@@ -41,14 +41,17 @@ public class TurningAIObject extends RandomAIObject {
 	}
 	
 	@Override
-	protected void aiLoop() {
+	protected void defaultModeLoop() {
+		if (isRooted())
+			return;
+		super.defaultModeLoop();
 		Random r = new Random();
 		if (r.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
 		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
 		double theta = r.nextDouble() * 360;
-		new MoveObjectIntent(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, getNextUpdateCount()).broadcast();
+		MoveObjectIntent.broadcast(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, getNextUpdateCount());
 	}
 	
 }

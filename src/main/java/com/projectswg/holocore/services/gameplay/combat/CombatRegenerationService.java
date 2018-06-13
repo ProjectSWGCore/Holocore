@@ -96,7 +96,7 @@ public class CombatRegenerationService extends Service {
 			return;
 		}
 		
-		int modification = creature.getSkillModValue("action_regen");
+		int modification = creature.isPlayer() ? creature.getSkillModValue("action_regen") : creature.getMaxAction() / 10;
 		
 		if (!creature.isInCombat())
 			modification *= 4;
@@ -111,7 +111,7 @@ public class CombatRegenerationService extends Service {
 			return;
 		}
 		
-		int modification = creature.getSkillModValue("health_regen");
+		int modification = creature.isPlayer() ? creature.getSkillModValue("health_regen") : creature.getMaxHealth() / 10;
 		
 		if (!creature.isInCombat())
 			modification *= 4;

@@ -35,7 +35,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -62,12 +61,14 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	@Override
-	protected void aiInitialize() {
-		setSchedulerProperties((int) (Math.random()*1000), 1000, TimeUnit.MILLISECONDS);
+	protected long getDefaultModeInterval() {
+		return 1000;
 	}
 	
 	@Override
-	protected void aiLoop() {
+	protected void defaultModeLoop() {
+		if (isRooted())
+			return;
 		if (plannedRoute.isEmpty()) {
 			createPlannedRoute();
 		}

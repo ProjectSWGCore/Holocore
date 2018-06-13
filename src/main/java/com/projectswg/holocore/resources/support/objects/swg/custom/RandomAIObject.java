@@ -50,23 +50,16 @@ public class RandomAIObject extends AIObject {
 	}
 	
 	@Override
-	protected void aiInitialize() {
-		long delay = (long) (30E3 + Math.random() * 10E3);
-		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
+	protected long getDefaultModeInterval() {
+		return (long) (30E3 + Math.random() * 10E3);
 	}
 	
 	@Override
-	public void aiStart() {
-		super.aiStart();
+	protected void defaultModeLoop() {
 		if (mainLocation == null) {
 			// If no location is given, then use object location
 			setMainLocation(getLocation());
 		}
-	}
-	
-	@Override
-	protected void aiLoop() {
-		
 	}
 	
 }

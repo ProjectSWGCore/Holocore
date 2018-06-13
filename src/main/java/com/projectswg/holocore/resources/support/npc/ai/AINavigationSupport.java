@@ -14,14 +14,14 @@ public class AINavigationSupport {
 	}
 	
 	/**
-	 * Returns a queue of locations to traverse on the path to within the min/max range of the specified destination, at the specified speed.
-	 * If the source is already within range of the destination, this function returns an empty queue
-	 * 
-	 * @param source the source location
+	 * Returns a queue of locations to traverse on the path to within the min/max range of the specified destination, at the specified speed. If the source is already within range of the destination,
+	 * this function returns an empty queue
+	 *
+	 * @param source      the source location
 	 * @param destination the destination location
-	 * @param minRange the minimum range from target
-	 * @param maxRange the maximum range from target
-	 * @param speed the speed to travel at
+	 * @param minRange    the minimum range from target
+	 * @param maxRange    the maximum range from target
+	 * @param speed       the speed to travel at
 	 * @return a queue of locations to travel
 	 */
 	@NotNull
@@ -44,13 +44,13 @@ public class AINavigationSupport {
 	}
 	
 	/**
-	 * Returns a queue of locations to traverse on the path to within range of the specified destination, at the specified speed
-	 * If the source is already within range of the destination, this function returns an empty queue
-	 * 
-	 * @param source the source location
+	 * Returns a queue of locations to traverse on the path to within range of the specified destination, at the specified speed If the source is already within range of the destination, this function
+	 * returns an empty queue
+	 *
+	 * @param source      the source location
 	 * @param destination the destination location
-	 * @param range the range to travel within
-	 * @param speed the speed to travel at
+	 * @param range       the range to travel within
+	 * @param speed       the speed to travel at
 	 * @return a queue of locations to travel
 	 */
 	@NotNull
@@ -70,10 +70,10 @@ public class AINavigationSupport {
 	
 	/**
 	 * Returns a queue of locations to traverse on the path to the specified destination, at the specified speed
-	 * 
-	 * @param source the source location
+	 *
+	 * @param source      the source location
 	 * @param destination the destination location
-	 * @param speed the speed to travel at
+	 * @param speed       the speed to travel at
 	 * @return a queue of locations to travel
 	 */
 	public static Queue<Location> navigateTo(@NotNull Location source, @NotNull Location destination, double speed) {
@@ -84,6 +84,58 @@ public class AINavigationSupport {
 			path.offer(interpolate(source, destination, currentDistance / totalDistance));
 		}
 		return path;
+	}
+	
+	/**
+	 * Returns the next location on the path to destination, with the given speed, unless source is within the target range
+	 *
+	 * @param source      the source location
+	 * @param destination the destination location
+	 * @param minRange    the minimum range from target
+	 * @param maxRange    the maximum range from target
+	 * @param speed       the speed to travel at
+	 * @return the next location to move to
+	 */
+	public static Location getNextStepTo(@NotNull Location source, @NotNull Location destination, double minRange, double maxRange, double speed) {
+		double currentDistance = source.distanceTo(destination);
+		if (currentDistance < minRange)
+			return interpolate(source, destination, -speed / currentDistance);
+		if (currentDistance > maxRange)
+			return interpolate(source, destination, speed / currentDistance);
+		return source;
+	}
+	
+	/**
+	 * Returns the next location on the path to destination, with the given speed, up until the given range
+	 *
+	 * @param source      the source location
+	 * @param destination the destination location
+	 * @param range       the range to travel within 
+	 * @param speed       the speed to travel at
+	 * @return the next location to move to
+	 */
+	public static Location getNextStepTo(@NotNull Location source, @NotNull Location destination, double range, double speed) {
+		double currentDistance = source.distanceTo(destination);
+		if (currentDistance <= range)
+			return source;
+		if (currentDistance <= speed)
+			return destination;
+		return interpolate(source, destination, speed / currentDistance);
+	}
+	
+	/**
+	 * Returns the next location on the path to destination, with the given speed
+	 *
+	 * @param source      the source location
+	 * @param destination the destination location
+	 * @param speed       the speed to travel at
+	 * @return the next location to move to
+	 */
+	public static Location getNextStepTo(@NotNull Location source, @NotNull Location destination, double speed) {
+		double currentDistance = source.distanceTo(destination);
+		if (currentDistance <= speed)
+			return destination;
+		return interpolate(source, destination, speed / currentDistance);
 	}
 	
 	private static Location interpolate(Location l1, Location l2, double percentage) {
