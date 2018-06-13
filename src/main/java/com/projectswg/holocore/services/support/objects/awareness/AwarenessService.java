@@ -112,7 +112,16 @@ public class AwarenessService extends Service {
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject obj = oti.getObject();
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
-			handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
+			if (oti.getNewLocation().getTerrain() == obj.getTerrain() && oti.getNewLocation().distanceTo(obj.getLocation()) <= 1024) {
+				obj.systemMove(oti.getParent(), oti.getNewLocation());
+				awareness.updateObject(obj);
+				if (oti.getParent() != null)
+					obj.getOwner().sendPacket(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), oti.getNewLocation(), 7.3f));
+				else
+					obj.getOwner().sendPacket(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), oti.getNewLocation(), 7.3f));
+			} else {
+				handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
+			}
 		} else {
 			obj.systemMove(oti.getParent(), oti.getNewLocation());
 			awareness.updateObject(obj);

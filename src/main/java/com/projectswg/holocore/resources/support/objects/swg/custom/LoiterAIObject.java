@@ -31,19 +31,16 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * AI object that loiters the area
  */
 public class LoiterAIObject extends RandomAIObject {
 	
-	private final AtomicInteger updateCounter;
 	private double radius;
 	
 	public LoiterAIObject(long objectId) {
 		super(objectId);
-		this.updateCounter = new AtomicInteger(0);
 		this.radius = 0;
 	}
 	
@@ -56,9 +53,10 @@ public class LoiterAIObject extends RandomAIObject {
 	}
 	
 	@Override
-	protected void aiLoop() {
-		if (isInCombat() || !canAiMove() || !hasNearbyPlayers())
+	protected void defaultModeLoop() {
+		if (isRooted())
 			return;
+		super.defaultModeLoop();
 		Random r = new Random();
 		if (r.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
@@ -74,7 +72,7 @@ public class LoiterAIObject extends RandomAIObject {
 			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
 		} while (!l.isWithinFlatDistance(getMainLocation(), radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		MoveObjectIntent.broadcast(this, getParent(), l.build(), 1.37, updateCounter.getAndIncrement());
+		MoveObjectIntent.broadcast(this, getParent(), l.build(), 1.37, getNextUpdateCount());
 	}
 	
 }

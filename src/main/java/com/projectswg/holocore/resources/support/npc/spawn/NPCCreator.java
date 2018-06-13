@@ -59,7 +59,7 @@ public class NPCCreator {
 		object.setAction(spawner.getMaxAction());
 		object.setMoodAnimation(spawner.getMoodAnimation());
 		object.setCreatureId(spawner.getCreatureId());
-		object.setSpeed(spawner.getMovementSpeed());
+		object.setWalkSpeed(spawner.getMovementSpeed());
 		setFlags(object, spawner.getSpawnerFlag());
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		

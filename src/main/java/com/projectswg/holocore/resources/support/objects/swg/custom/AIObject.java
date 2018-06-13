@@ -27,38 +27,38 @@
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.support.npc.ai.AICombatSupport;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 public abstract class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
+	private final List<ScheduledFuture<?>> scheduledTasks;
+	private final AICombatSupport combatSupport;
 	
-	private transient ScheduledFuture<?> future;
-	private long initialDelay;
-	private long delay;
-	private TimeUnit unit;
+	private ScheduledThreadPool executor;
+	private ScheduledMode mode;
 	private String creatureId;
 	
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
-		aiInitialize();
-	}
-	
-	/**
-	 * Called upon object creation.  If overridden, you must call this
-	 * function via super.aiInitialize()
-	 */
-	protected void aiInitialize() {
-		setSchedulerProperties(0, 5, TimeUnit.SECONDS);
+		this.scheduledTasks = new ArrayList<>();
+		this.combatSupport = new AICombatSupport(this);
+		
+		this.executor = null;
+		this.mode = null;
+		this.creatureId = null;
+		setRunSpeed(7.3);
 	}
 	
 	@Override
@@ -72,69 +72,48 @@ public abstract class AIObject extends CreatureObject {
 		}
 	}
 	
-	/**
-	 * Sets scheduler properties for how often aiLoop runs
-	 * @param initialDelay the initial delay
-	 * @param delay the delay between each loop
-	 * @param unit the time unit for both delays
-	 */
-	protected void setSchedulerProperties(long initialDelay, long delay, TimeUnit unit) {
-		this.initialDelay = initialDelay;
-		this.delay = delay;
-		this.unit = unit;
-	}
-	
-	protected void disableScheduler() {
-		setSchedulerProperties(0, 0, null);
-	}
-	
-	protected void requestNextLoop(long delay, TimeUnit unit) {
-		ScheduledUtilities.run(this::aiLoop, delay, unit);
-	}
-	
-	public void setSpeed(double speed) {
-		setWalkSpeed(speed);
-		setRunSpeed(speed);
-	}
-	
-	/**
-	 * Called when Holocore is starting.  If overridden, you must call this
-	 * function via super.aiStart()
-	 */
-	public void aiStart() {
-		if (future != null) {
-			return;
-		}
-		if (unit != null)
-			future = ScheduledUtilities.scheduleAtFixedRate(this::aiLoop, initialDelay, delay, unit);
-	}
-	
-	/**
-	 * Called periodically for move updates, etc.
-	 */
-	protected abstract void aiLoop();
-	
-	/**
-	 * Called when Holocore is stopping.  If overridden, you must call this
-	 * function via super.aiStop()
-	 */
-	public void aiStop() {
-		if (future == null) {
-			return;
-		}
-		future.cancel(true);
-		future = null;
-	}
-
 	public String getCreatureId() {
 		return creatureId;
 	}
-
+	
 	public void setCreatureId(String creatureId) {
 		this.creatureId = creatureId;
 	}
 	
-	protected final boolean canAiMove() {
+	public final synchronized void scheduleDefaultMode(ScheduledThreadPool executor) {
+		if (mode == ScheduledMode.DEFAULT)
+			return;
+		mode = ScheduledMode.DEFAULT;
+		this.executor = executor;
+		
+		disableScheduler();
+		scheduledTasks.add(executor.executeWithFixedRate(0, getDefaultModeInterval(), this::defaultModeLoop));
+	}
+	
+	public final synchronized void scheduleCombatMode(ScheduledThreadPool executor) {
+		if (mode == ScheduledMode.COMBAT)
+			return;
+		mode = ScheduledMode.COMBAT;
+		this.executor = executor;
+		
+		disableScheduler();
+		scheduledTasks.add(executor.executeWithFixedRate(0, 500, this::combatModeLoop));
+	}
+	
+	public final synchronized void disableScheduler() {
+		scheduledTasks.forEach(sf -> sf.cancel(false));
+		scheduledTasks.clear();
+	}
+	
+	public double calculateWalkSpeed() {
+		return getMovementPercent() * getMovementScale() * getWalkSpeed();
+	}
+	
+	public double calculateRunSpeed() {
+		return getMovementPercent() * getMovementScale() * getRunSpeed();
+	}
+	
+	protected final boolean isRooted() {
 		switch (getPosture()) {
 			case DEAD:
 			case INCAPACITATED:
@@ -142,7 +121,7 @@ public abstract class AIObject extends CreatureObject {
 			case KNOCKED_DOWN:
 			case LYING_DOWN:
 			case SITTING:
-				return false;
+				return true;
 			case BLOCKING:
 			case CLIMBING:
 			case CROUCHED:
@@ -153,17 +132,31 @@ public abstract class AIObject extends CreatureObject {
 			case SKILL_ANIMATING:
 			case SNEAKING:
 			case UPRIGHT:
-				return true;
+			default:
+				// Rooted if there are no nearby players
+				return playersNearby.isEmpty();
 		}
-		return true;
-	}
-	
-	protected final boolean hasNearbyPlayers() {
-		return !playersNearby.isEmpty();
 	}
 	
 	protected final Set<CreatureObject> getNearbyPlayers() {
 		return Collections.unmodifiableSet(playersNearby);
+	}
+	
+	protected abstract long getDefaultModeInterval();
+	
+	protected abstract void defaultModeLoop();
+	
+	private void combatModeLoop() {
+		combatSupport.act();
+		if (!combatSupport.isExecuting()) {
+			combatSupport.reset();
+			scheduleDefaultMode(executor);
+		}
+	}
+	
+	private enum ScheduledMode {
+		DEFAULT,
+		COMBAT
 	}
 	
 }
