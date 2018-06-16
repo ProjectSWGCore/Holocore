@@ -164,7 +164,7 @@ public class ConnectionService extends Service {
 		IntentChain.broadcastChain(
 				new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR),
 				new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED),
-				new CloseConnectionIntent(p.getNetworkId(), DisconnectReason.APPLICATION));
+				new CloseConnectionIntent(p, DisconnectReason.APPLICATION));
 	}
 	
 	private void updatePlayTime(Player p) {

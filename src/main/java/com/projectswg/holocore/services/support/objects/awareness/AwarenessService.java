@@ -173,7 +173,7 @@ public class AwarenessService extends Service {
 		PlayerState state = player.getPlayerState();
 		boolean firstZone = (state == PlayerState.LOGGED_IN);
 		if (!firstZone && state != PlayerState.ZONED_IN) {
-			new CloseConnectionIntent(player.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+			CloseConnectionIntent.broadcast(player, DisconnectReason.SUSPECTED_HACK);
 			return;
 		}
 		

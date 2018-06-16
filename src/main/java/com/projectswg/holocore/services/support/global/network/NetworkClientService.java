@@ -143,7 +143,7 @@ public class NetworkClientService extends Service {
 	
 	@IntentHandler
 	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
-		disconnect(ccii.getNetworkId());
+		disconnect(ccii.getPlayer().getNetworkId());
 	}
 	
 	@IntentHandler
