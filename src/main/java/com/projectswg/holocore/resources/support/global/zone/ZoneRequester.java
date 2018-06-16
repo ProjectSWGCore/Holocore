@@ -28,9 +28,12 @@ package com.projectswg.holocore.resources.support.global.zone;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
+import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -66,6 +69,12 @@ public class ZoneRequester {
 		if (((CreatureObject) creatureObject).getPlayerObject() == null) {
 			Log.e("Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			sendClientFatal(player, "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one");
+			return false;
+		}
+		Player currentOwner = creatureObject.getOwner();
+		if (currentOwner != null && currentOwner.getPlayerState() != PlayerState.DISCONNECTED) {
+			Log.e("Failed to start zone - Player is already logged in [Character: %d  User: %s", characterId, player.getUsername());
+			player.sendPacket(new ErrorMessage("Failed to zone", "Character is already in the game.\nPlease choose another character", false));
 			return false;
 		}
 		return true;
