@@ -1,0 +1,919 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+11000100	11000100	FLIP	TATOOINE	tat_cave_08	19	16.9	-13.5	-17.9	0	feeder_tusken_patrol_10751313
+11000101	11000100		TATOOINE	tat_cave_08	19	18.7	-20.3	-41.6	0	
+11000102	11000100		TATOOINE	tat_cave_08	19	15.9	-26.3	-59.0	0	
+11000103	11000100		TATOOINE	tat_cave_08	20	17.2	-27.2	-78.0	0	
+11000104	11000100		TATOOINE	tat_cave_08	20	0.4	-27.8	-81.5	0	
+11000105	11000100		TATOOINE	tat_cave_08	20	-11.1	-27.2	-76.9	0	
+11000106	11000100		TATOOINE	tat_cave_08	21	-27.0	-27.3	-68.1	0	
+11000200	11000200	FLIP	TATOOINE	tat_cave_08	22	-13.0	-35.8	-97.9	0	feeder_tusken_patrol_02_10752370
+11000201	11000200		TATOOINE	tat_cave_08	22	-32.7	-35.9	-94.7	0	
+11000202	11000200		TATOOINE	tat_cave_08	22	-53.3	-41.7	-105.8	0	
+11000203	11000200		TATOOINE	tat_cave_08	22	-62.5	-44.6	-113.3	0	
+11000204	11000200		TATOOINE	tat_cave_08	9	-89.9	-45.8	-114.0	0	
+11000205	11000200		TATOOINE	tat_cave_08	23	-128.6	-45.8	-112.6	0	
+11000206	11000200		TATOOINE	tat_cave_08	23	-131.2	-50.6	-128.9	0	
+11000207	11000200		TATOOINE	tat_cave_08	24	-125.7	-52.4	-139.0	0	
+11000208	11000200		TATOOINE	tat_cave_08	24	-105.0	-58.9	-136.4	0	
+11000300	11000300	FLIP	TATOOINE	tat_cave_08	25	-49.1	-61.1	-115.7	0	feeder_tusken_patrol_04_10764530
+11000301	11000300		TATOOINE	tat_cave_08	25	-49.9	-60.3	-135.5	0	
+11000302	11000300		TATOOINE	tat_cave_08	25	-62.5	-57.9	-140.2	0	
+11000303	11000300		TATOOINE	tat_cave_08	28	-66.6	-58.2	-176.6	0	
+11000304	11000300		TATOOINE	tat_cave_08	28	-82.8	-58.4	-190.4	0	
+11000305	11000300		TATOOINE	tat_cave_08	28	-69.8	-57.8	-198.5	0	
+11000306	11000300		TATOOINE	tat_cave_08	28	-56.1	-57.9	-198.1	0	
+11000307	11000300		TATOOINE	tat_cave_08	29	-56.3	-57.6	-219.4	0	
+11000308	11000300		TATOOINE	tat_cave_08	28	-50.4	-58.6	-179.6	0	
+11000309	11000300		TATOOINE	tat_cave_08	28	-43.4	-58.5	-164.4	0	
+11000310	11000300		TATOOINE	tat_cave_08	28	-48.2	-58.7	-156.9	0	
+11000311	11000300		TATOOINE	tat_cave_08	28	-64.6	-57.8	-151.7	0	
+11000312	11000300		TATOOINE	tat_cave_08	25	-65.0	-58.2	-139.5	0	
+11000313	11000300		TATOOINE	tat_cave_08	25	-76.6	-59.1	-135.0	0	
+11000314	11000300		TATOOINE	tat_cave_08	9	-85.5	-64.1	-105.6	0	
+11000315	11000300		TATOOINE	tat_cave_08	9	-108.5	-61.6	-106.1	0	
+11000400	11000400	FLIP	TATOOINE	tat_cave_08	27	38.7	-58.3	-85.1	0	feeder_tusken_patrol_03_10764350
+11000401	11000400		TATOOINE	tat_cave_08	27	37.9	-58.9	-68.5	0	
+11000402	11000400		TATOOINE	tat_cave_08	20	3.9	-59.5	-66.0	0	
+11000403	11000400		TATOOINE	tat_cave_08	26	2.2	-62.9	-102.6	0	
+11000404	11000400		TATOOINE	tat_cave_08	26	-19.2	-60.0	-107.8	0	
+11000500	11000500	LOOP	TATOOINE	tat_world	0	-5119.0	75.0	-6450.4	0	Wayfar - Commoner #1
+11000501	11000500		TATOOINE	tat_world	0	-5148.5	75.0	-6459.7	0	
+11000502	11000500		TATOOINE	tat_world	0	-5174.2	75.0	-6461.5	0	
+11000503	11000500		TATOOINE	tat_world	0	-5157.7	75.0	-6453.2	0	
+11000504	11000500		TATOOINE	tat_world	0	-5195.4	75.0	-6449.1	0	
+11000505	11000500		TATOOINE	tat_world	0	-5156.4	75.0	-6446.6	0	
+11000600	11000600	LOOP	TATOOINE	tat_world	0	-5210.8	75.0	-6487.5	0	Wayfar - Bounty Hunter
+11000601	11000600		TATOOINE	tat_world	0	-5185.4	75.0	-6488.4	0	
+11000602	11000600		TATOOINE	tat_world	0	-5151.4	75.0	-6488.0	0	
+11000603	11000600		TATOOINE	tat_world	0	-5151.9	75.0	-6504.2	0	
+11000604	11000600		TATOOINE	tat_world	0	-5186.2	75.0	-6507.5	0	
+11000605	11000600		TATOOINE	tat_world	0	-5187.6	75.0	-6498.8	0	
+11000606	11000600		TATOOINE	tat_world	0	-5211.7	75.0	-6499.6	0	
+11000700	11000700	FLIP	TATOOINE	tat_world	0	-5136.8	79.8	-6982.2	0	tatooine_hutt_assassin_camp_10058276
+11000701	11000700		TATOOINE	tat_world	0	-5170.4	79.8	-6977.4	0	
+11000702	11000700		TATOOINE	tat_world	0	-5162.5	79.8	-6969.1	0	
+11000703	11000700		TATOOINE	tat_world	0	-5150.1	79.8	-6942.6	0	
+11000704	11000700		TATOOINE	tat_world	0	-5130.3	79.8	-6954.9	0	
+11000705	11000700		TATOOINE	tat_world	0	-5180.9	77.7	-6960.2	0	
+11000800	11000800	LOOP	TATOOINE	tat_world	0	-5041.5	39.8	-6136.0	0	Valarian's thief camp
+11000801	11000800		TATOOINE	tat_world	0	-5038.3	39.8	-6110.5	0	
+11000802	11000800		TATOOINE	tat_world	0	-5006.0	39.5	-6144.1	0	
+11000803	11000800		TATOOINE	tat_world	0	-4985.6	35.1	-6126.8	0	
+11000804	11000800		TATOOINE	tat_world	0	-5053.0	41.8	-6116.5	0	
+11000805	11000800		TATOOINE	tat_world	0	-5047.0	40.5	-6154.2	0	
+11000900	11000900	FLIP	TATOOINE	tat_valarian_strategic_bunker	5	3.4	-12.0	60.2	0	Valarian Bunker - Valarian's blood vandal
+11000901	11000900		TATOOINE	tat_valarian_strategic_bunker	5	9.8	-12.0	53.6	0	
+11000902	11000900		TATOOINE	tat_valarian_strategic_bunker	5	12.9	-12.0	47.9	0	
+11000903	11000900		TATOOINE	tat_valarian_strategic_bunker	5	10.4	-12.0	40.6	0	
+11000904	11000900		TATOOINE	tat_valarian_strategic_bunker	5	4.5	-12.0	37.6	0	
+11000905	11000900		TATOOINE	tat_valarian_strategic_bunker	5	-3.4	-12.0	40.6	0	
+11000906	11000900		TATOOINE	tat_valarian_strategic_bunker	5	-5.6	-12.0	47.2	0	
+11000907	11000900		TATOOINE	tat_valarian_strategic_bunker	5	-3.0	-12.0	53.9	0	
+11001000	11001000	FLIP	TATOOINE	tat_valarian_strategic_bunker	7	-51.4	-20.0	61.1	0	valarian_enforcer_04_10518264
+11001001	11001000		TATOOINE	tat_valarian_strategic_bunker	7	-54.7	-20.0	65.6	0	
+11001002	11001000		TATOOINE	tat_valarian_strategic_bunker	7	-65.0	-20.0	67.0	0	
+11001003	11001000		TATOOINE	tat_valarian_strategic_bunker	7	-69.3	-20.0	63.7	0	
+11001100	11001100	FLIP	TATOOINE	tat_valarian_strategic_bunker	10	27.0	-12.0	34.8	0	valarian_vandal_05_10520297
+11001101	11001100		TATOOINE	tat_valarian_strategic_bunker	10	35.3	-12.0	35.3	0	
+11001102	11001100		TATOOINE	tat_valarian_strategic_bunker	10	35.6	-12.0	42.7	0	
+11001103	11001100		TATOOINE	tat_valarian_strategic_bunker	10	35.4	-12.0	58.3	0	
+11001200	11001200	FLIP	TATOOINE	tat_valarian_strategic_bunker	10	35.4	-12.0	87.8	0	valarian_vandal_06_10520369
+11001201	11001200		TATOOINE	tat_valarian_strategic_bunker	10	35.3	-12.0	73.9	0	
+11001202	11001200		TATOOINE	tat_valarian_strategic_bunker	10	35.4	-12.0	62.0	0	
+11001300	11001300	FLIP	TATOOINE	tat_valarian_strategic_bunker	12	72.1	-12.0	59.4	0	valarian_enforcer_09_10519929
+11001301	11001300		TATOOINE	tat_valarian_strategic_bunker	12	60.8	-12.0	59.2	0	
+11001302	11001300		TATOOINE	tat_valarian_strategic_bunker	12	47.7	-12.0	59.1	0	
+11001400	11001400	FLIP	TATOOINE	tat_valarian_strategic_bunker	13	17.8	-20.0	122.2	0	valarian_executioner_04_10519172
+11001401	11001400		TATOOINE	tat_valarian_strategic_bunker	13	27.6	-20.0	122.8	0	
+11001402	11001400		TATOOINE	tat_valarian_strategic_bunker	13	35.9	-20.0	123.2	0	
+11001500	11001500	FLIP	TATOOINE	tat_valarian_strategic_bunker	13	36.4	-20.0	143.7	0	valarian_executioner_05_10519236
+11001501	11001500		TATOOINE	tat_valarian_strategic_bunker	13	36.7	-20.0	135.5	0	
+11001502	11001500		TATOOINE	tat_valarian_strategic_bunker	13	37.0	-20.0	124.9	0	
+11001600	11001600	FLIP	TATOOINE	tat_valarian_strategic_bunker	14	55.5	-12.0	-0.3	0	valarian_executioner_07_10520123
+11001601	11001600		TATOOINE	tat_valarian_strategic_bunker	14	42.0	-12.0	-0.3	0	
+11001602	11001600		TATOOINE	tat_valarian_strategic_bunker	14	31.1	-12.0	1.1	0	
+11001700	11001700	FLIP	TATOOINE	tat_valarian_strategic_bunker	14	56.5	-12.0	21.2	0	valarian_executioner_08_10520199
+11001701	11001700		TATOOINE	tat_valarian_strategic_bunker	14	46.3	-12.0	20.9	0	
+11001702	11001700		TATOOINE	tat_valarian_strategic_bunker	14	31.6	-12.0	21.1	0	
+11001800	11001800	FLIP	TATOOINE	tat_valarian_strategic_bunker	18	-30.9	-20.0	69.0	0	valarian_enforcer_06_10519713
+11001801	11001800		TATOOINE	tat_valarian_strategic_bunker	18	-30.7	-20.0	54.1	0	
+11001802	11001800		TATOOINE	tat_valarian_strategic_bunker	18	-30.8	-20.0	41.5	0	
+11001803	11001800		TATOOINE	tat_valarian_strategic_bunker	18	-30.8	-20.0	29.0	0	
+11001900	11001900	FLIP	TATOOINE	tat_valarian_strategic_bunker	19	-31.8	-20.0	100.7	0	valarian_executioner_03_10519043
+11001901	11001900		TATOOINE	tat_valarian_strategic_bunker	19	-23.1	-20.0	100.9	0	
+11001902	11001900		TATOOINE	tat_valarian_strategic_bunker	19	-14.5	-20.0	101.0	0	
+11002000	11002000	LOOP	TATOOINE	tat_world	0	-3937.3	5.0	-3990.2	0	Valarians blood vandal outside base
+11002001	11002000		TATOOINE	tat_world	0	-3935.7	5.2	-4003.0	0	
+11002002	11002000		TATOOINE	tat_world	0	-3931.8	6.3	-4014.8	0	
+11002003	11002000		TATOOINE	tat_world	0	-3923.8	6.7	-4024.3	0	
+11002600	11002600	LOOP	TATOOINE	tat_world	0	-3534.6	14.0	2065.7	0	Jawa Camp - Jawa #1
+11002601	11002600		TATOOINE	tat_world	0	-3503.7	14.0	2071.0	0	
+11002602	11002600		TATOOINE	tat_world	0	-3500.9	14.0	2060.9	0	
+11002603	11002600		TATOOINE	tat_world	0	-3516.6	14.0	2048.4	0	
+11002700	11002700	LOOP	TATOOINE	tat_world	0	-3407.1	7.3	2467.4	0	Mos Espa - Jabba's scouts in camp
+11002701	11002700		TATOOINE	tat_world	0	-3386.4	7.2	2489.0	0	
+11002702	11002700		TATOOINE	tat_world	0	-3379.2	9.8	2463.5	0	
+11002703	11002700		TATOOINE	tat_world	0	-3409.6	6.9	2496.7	0	
+11002704	11002700		TATOOINE	tat_world	0	-3421.8	6.3	2474.8	0	
+11002705	11002700		TATOOINE	tat_world	0	-3372.3	8.6	2478.0	0	
+11002900	11002900	FLIP	TATOOINE	tat_hoverdale_cave	5	-76.8	-30.2	-40.5	0	hoverdale_ban_15707319
+11002901	11002900		TATOOINE	tat_hoverdale_cave	5	-71.1	-30.8	-47.4	0	
+11002902	11002900		TATOOINE	tat_hoverdale_cave	5	-70.8	-30.9	-73.4	0	
+11002903	11002900		TATOOINE	tat_hoverdale_cave	9	-71.6	-38.1	-117.2	0	
+11002904	11002900		TATOOINE	tat_hoverdale_cave	9	-97.2	-37.7	-122.8	0	
+11002905	11002900		TATOOINE	tat_hoverdale_cave	11	-104.8	-38.9	-85.1	0	
+11002906	11002900		TATOOINE	tat_hoverdale_cave	11	-124.7	-37.7	-79.2	0	
+11002907	11002900		TATOOINE	tat_hoverdale_cave	6	-129.3	-33.8	-66.6	0	
+11002908	11002900		TATOOINE	tat_hoverdale_cave	6	-109.9	-35.5	-64.4	0	
+11002909	11002900		TATOOINE	tat_hoverdale_cave	16	-103.0	-42.2	-35.9	0	
+11002910	11002900		TATOOINE	tat_hoverdale_cave	17	-107.7	-43.0	-12.1	0	
+11002911	11002900		TATOOINE	tat_hoverdale_cave	18	-135.3	-54.1	-11.8	0	
+11003000	11003000	FLIP	TATOOINE	tat_hoverdale_cave	6	-126.5	-49.7	-59.7	0	hoverdale_ban_15707901
+11003001	11003000		TATOOINE	tat_hoverdale_cave	5	-68.9	-46.7	-57.3	0	
+11003002	11003000		TATOOINE	tat_hoverdale_cave	4	-65.8	-46.5	-32.8	0	
+11003003	11003000		TATOOINE	tat_hoverdale_cave	4	-59.3	-43.0	-16.4	0	
+11003004	11003000		TATOOINE	tat_hoverdale_cave	4	-54.0	-39.7	-9.2	0	
+11003005	11003000		TATOOINE	tat_hoverdale_cave	2	-28.3	-29.9	-22.8	0	
+11003100	11003100	FLIP	TATOOINE	tat_hoverdale_cave	6	-129.4	-49.6	-61.7	0	hoverdale_ban_15707716
+11003101	11003100		TATOOINE	tat_hoverdale_cave	8	-140.4	-49.6	-51.5	0	
+11003102	11003100		TATOOINE	tat_hoverdale_cave	8	-149.9	-51.0	-41.1	0	
+11003103	11003100		TATOOINE	tat_hoverdale_cave	8	-166.9	-49.7	-40.0	0	
+11003104	11003100		TATOOINE	tat_hoverdale_cave	10	-167.7	-49.7	-67.6	0	
+11003105	11003100		TATOOINE	tat_hoverdale_cave	12	-171.3	-53.0	-111.4	0	
+11003106	11003100		TATOOINE	tat_hoverdale_cave	12	-156.5	-55.9	-122.0	0	
+11003107	11003100		TATOOINE	tat_hoverdale_cave	12	-144.9	-53.9	-118.8	0	
+11003108	11003100		TATOOINE	tat_hoverdale_cave	12	-143.1	-54.3	-96.4	0	
+11003109	11003100		TATOOINE	tat_hoverdale_cave	11	-121.5	-54.4	-84.4	0	
+11003110	11003100		TATOOINE	tat_hoverdale_cave	11	-98.5	-55.0	-86.1	0	
+11003200	11003200	FLIP	TATOOINE	tat_hoverdale_cave	9	-80.5	-71.6	-123.4	0	hoverdale_enf_15706792
+11003201	11003200		TATOOINE	tat_hoverdale_cave	25	-80.3	-67.6	-133.9	0	
+11003202	11003200		TATOOINE	tat_hoverdale_cave	25	-67.3	-66.5	-139.4	0	
+11003203	11003200		TATOOINE	tat_hoverdale_cave	25	-48.9	-68.4	-135.7	0	
+11003204	11003200		TATOOINE	tat_hoverdale_cave	25	-48.0	-69.2	-115.9	0	
+11003205	11003200		TATOOINE	tat_hoverdale_cave	22	-31.3	-68.1	-110.9	0	
+11003206	11003200		TATOOINE	tat_hoverdale_cave	25	-45.6	-69.2	-116.0	0	
+11003207	11003200		TATOOINE	tat_hoverdale_cave	25	-50.3	-68.1	-133.5	0	
+11003208	11003200		TATOOINE	tat_hoverdale_cave	25	-63.4	-65.8	-142.5	0	
+11003209	11003200		TATOOINE	tat_hoverdale_cave	25	-77.2	-67.2	-133.2	0	
+11003210	11003200		TATOOINE	tat_hoverdale_cave	9	-81.9	-72.0	-119.5	0	
+11003211	11003200		TATOOINE	tat_hoverdale_cave	9	-101.2	-69.8	-118.6	0	
+11003212	11003200		TATOOINE	tat_hoverdale_cave	24	-107.1	-66.7	-133.8	0	
+11003213	11003200		TATOOINE	tat_hoverdale_cave	24	-125.3	-60.3	-137.7	0	
+11003214	11003200		TATOOINE	tat_hoverdale_cave	23	-131.3	-54.4	-116.6	0	
+11003215	11003200		TATOOINE	tat_hoverdale_cave	22	-63.9	-52.7	-112.8	0	
+11003300	11003300	FLIP	TATOOINE	tat_hoverdale_cave	18	-135.3	-54.1	-11.8	0	hoverdale_ban_15707466
+11003301	11003300		TATOOINE	tat_hoverdale_cave	18	-135.2	-57.6	-24.8	0	
+11003302	11003300		TATOOINE	tat_hoverdale_cave	16	-104.6	-58.2	-31.2	0	
+11003303	11003300		TATOOINE	tat_hoverdale_cave	14	-84.2	-57.5	-39.6	0	
+11003304	11003300		TATOOINE	tat_hoverdale_cave	14	-84.7	-57.1	-81.7	0	
+11003305	11003300		TATOOINE	tat_hoverdale_cave	11	-98.0	-55.0	-81.3	0	
+11003400	11003400	FLIP	TATOOINE	tat_hoverdale_cave	20	-2.3	-35.3	-81.5	0	hoverdale_ban_15708334
+11003401	11003400		TATOOINE	tat_hoverdale_cave	20	16.4	-35.2	-78.7	0	
+11003402	11003400		TATOOINE	tat_hoverdale_cave	20	17.5	-34.9	-61.7	0	
+11003403	11003400		TATOOINE	tat_hoverdale_cave	19	19.0	-26.2	-34.4	0	
+11003404	11003400		TATOOINE	tat_hoverdale_cave	19	15.4	-21.4	-20.3	0	
+11003600	11003600	FLIP	TATOOINE	tat_legacy_darklighter_cave	2	8.7	-21.8	-39.1	0	legacy_darklighter_hauler1_17656498
+11003601	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-5.1	-23.4	-41.1	0	
+11003602	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-11.5	-24.5	-41.5	0	
+11003603	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-26.9	-33.7	-51.5	0	
+11003604	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-27.2	-39.1	-67.6	0	
+11003605	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-29.2	-43.3	-77.1	0	
+11003606	11003600		TATOOINE	tat_legacy_darklighter_cave	3	-53.8	-47.2	-94.1	0	
+11003607	11003600		TATOOINE	tat_legacy_darklighter_cave	4	-53.1	-45.7	-101.0	0	
+11003608	11003600		TATOOINE	tat_legacy_darklighter_cave	4	-32.8	-49.9	-111.8	0	
+11003609	11003600		TATOOINE	tat_legacy_darklighter_cave	4	-16.2	-53.8	-123.3	0	
+11003610	11003600		TATOOINE	tat_legacy_darklighter_cave	4	-9.2	-51.3	-131.8	0	
+11003611	11003600		TATOOINE	tat_legacy_darklighter_cave	4	-11.2	-48.2	-143.7	0	
+11003612	11003600		TATOOINE	tat_legacy_darklighter_cave	5	-15.7	-48.5	-158.8	0	
+11003613	11003600		TATOOINE	tat_legacy_darklighter_cave	5	-20.2	-48.4	-159.8	0	
+11003700	11003700	FLIP	TATOOINE	tat_legacy_darklighter_cave	3	-21.1	-29.4	-45.6	0	legacy_darklighter_area1_17417975
+11003701	11003700		TATOOINE	tat_legacy_darklighter_cave	3	-26.0	-34.1	-52.6	0	
+11003702	11003700		TATOOINE	tat_legacy_darklighter_cave	3	-26.8	-39.4	-68.7	0	
+11003703	11003700		TATOOINE	tat_legacy_darklighter_cave	3	-27.9	-41.8	-75.8	0	
+11003704	11003700		TATOOINE	tat_legacy_darklighter_cave	3	-43.2	-48.2	-86.8	0	
+11003800	11003800	FLIP	TATOOINE	tat_legacy_darklighter_cave	4	-44.0	-46.7	-106.7	0	legacy_darkligher_area2_17418525
+11003801	11003800		TATOOINE	tat_legacy_darklighter_cave	4	-22.9	-53.0	-115.8	0	
+11003802	11003800		TATOOINE	tat_legacy_darklighter_cave	4	-11.5	-53.3	-125.9	0	
+11003803	11003800		TATOOINE	tat_legacy_darklighter_cave	4	-7.7	-50.7	-133.2	0	
+11003900	11003900	FLIP	TATOOINE	tat_legacy_darklighter_cave	5	-17.1	-48.7	-161.1	0	legacy_darklighter_hauler3_17715339
+11003901	11003900		TATOOINE	tat_legacy_darklighter_cave	5	-3.3	-48.6	-160.1	0	
+11003902	11003900		TATOOINE	tat_legacy_darklighter_cave	6	25.5	-50.5	-159.1	0	
+11003903	11003900		TATOOINE	tat_legacy_darklighter_cave	6	41.3	-58.7	-161.2	0	
+11003904	11003900		TATOOINE	tat_legacy_darklighter_cave	6	53.3	-64.0	-171.2	0	
+11003905	11003900		TATOOINE	tat_legacy_darklighter_cave	7	50.8	-66.6	-178.3	0	
+11003906	11003900		TATOOINE	tat_legacy_darklighter_cave	7	39.8	-71.3	-186.7	0	
+11003907	11003900		TATOOINE	tat_legacy_darklighter_cave	7	29.9	-77.8	-202.6	0	
+11003908	11003900		TATOOINE	tat_legacy_darklighter_cave	11	33.8	-78.8	-223.6	0	
+11003909	11003900		TATOOINE	tat_legacy_darklighter_cave	11	42.8	-79.7	-231.8	0	
+11003910	11003900		TATOOINE	tat_legacy_darklighter_cave	11	39.7	-81.2	-240.3	0	
+11004000	11004000	FLIP	TATOOINE	tat_legacy_darklighter_cave	6	34.1	-55.2	-160.2	0	legacy_darklighter_area4_17419211
+11004001	11004000		TATOOINE	tat_legacy_darklighter_cave	6	50.2	-61.9	-164.8	0	
+11004002	11004000		TATOOINE	tat_legacy_darklighter_cave	6	53.2	-65.0	-173.1	0	
+11004100	11004100	FLIP	TATOOINE	tat_legacy_darklighter_cave	7	44.9	-69.1	-183.8	0	legacy_darklighter_area5_17419478
+11004101	11004100		TATOOINE	tat_legacy_darklighter_cave	7	34.3	-74.9	-191.4	0	
+11004102	11004100		TATOOINE	tat_legacy_darklighter_cave	7	29.3	-78.9	-207.4	0	
+11004200	11004200	FLIP	TATOOINE	tat_legacy_darklighter_cave	8	-27.7	-50.5	-192.6	0	legacy_darkligher_area11_17514799
+11004201	11004200		TATOOINE	tat_legacy_darklighter_cave	8	-34.5	-59.5	-211.6	0	
+11004202	11004200		TATOOINE	tat_legacy_darklighter_cave	8	-36.3	-59.9	-211.1	0	
+11004300	11004300	FLIP	TATOOINE	tat_legacy_darklighter_cave	9	-47.5	-63.1	-205.7	0	legacy_darklighter_area12_17515245
+11004301	11004300		TATOOINE	tat_legacy_darklighter_cave	9	-53.6	-64.4	-202.5	0	
+11004302	11004300		TATOOINE	tat_legacy_darklighter_cave	9	-71.8	-68.9	-196.9	0	
+11004303	11004300		TATOOINE	tat_legacy_darklighter_cave	9	-92.9	-74.5	-198.9	0	
+11004304	11004300		TATOOINE	tat_legacy_darklighter_cave	9	-102.7	-77.3	-207.7	0	
+11004305	11004300		TATOOINE	tat_legacy_darklighter_cave	9	-110.0	-78.0	-213.6	0	
+11004400	11004400	FLIP	TATOOINE	tat_legacy_darklighter_cave	10	-132.1	-86.3	-255.7	0	legacy_darklighter_hauler2_17694159
+11004401	11004400		TATOOINE	tat_legacy_darklighter_cave	10	-124.2	-84.5	-254.0	0	
+11004402	11004400		TATOOINE	tat_legacy_darklighter_cave	10	-111.3	-82.1	-245.2	0	
+11004403	11004400		TATOOINE	tat_legacy_darklighter_cave	10	-108.4	-77.9	-233.9	0	
+11004404	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-108.8	-78.2	-213.7	0	
+11004405	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-101.0	-76.6	-203.9	0	
+11004406	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-92.7	-74.6	-199.8	0	
+11004407	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-78.5	-70.9	-194.6	0	
+11004408	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-63.1	-67.0	-197.2	0	
+11004409	11004400		TATOOINE	tat_legacy_darklighter_cave	9	-50.5	-63.9	-204.1	0	
+11004410	11004400		TATOOINE	tat_legacy_darklighter_cave	8	-33.9	-59.3	-209.4	0	
+11004411	11004400		TATOOINE	tat_legacy_darklighter_cave	8	-28.6	-55.0	-206.7	0	
+11004412	11004400		TATOOINE	tat_legacy_darklighter_cave	8	-29.2	-53.8	-199.8	0	
+11004413	11004400		TATOOINE	tat_legacy_darklighter_cave	8	-27.0	-48.5	-186.3	0	
+11004414	11004400		TATOOINE	tat_legacy_darklighter_cave	5	-23.5	-48.7	-171.9	0	
+11004415	11004400		TATOOINE	tat_legacy_darklighter_cave	5	-21.5	-48.3	-166.1	0	
+11004500	11004500	FLIP	TATOOINE	tat_legacy_darklighter_cave	10	-109.5	-78.7	-236.3	0	legacy_darklighter_cross1_17528454
+11004501	11004500		TATOOINE	tat_legacy_darklighter_cave	10	-111.3	-77.8	-224.1	0	
+11004502	11004500		TATOOINE	tat_legacy_darklighter_cave	9	-107.0	-78.1	-210.9	0	
+11004503	11004500		TATOOINE	tat_legacy_darklighter_cave	9	-101.0	-76.8	-205.1	0	
+11004600	11004600	FLIP	TATOOINE	tat_legacy_darklighter_cave	10	-108.8	-77.4	-230.6	0	legacy_darklighter_area16_17524162
+11004601	11004600		TATOOINE	tat_legacy_darklighter_cave	10	-109.5	-80.4	-240.1	0	
+11004602	11004600		TATOOINE	tat_legacy_darklighter_cave	10	-120.7	-84.8	-251.2	0	
+11004603	11004600		TATOOINE	tat_legacy_darklighter_cave	10	-134.0	-86.2	-257.8	0	
+11004604	11004600		TATOOINE	tat_legacy_darklighter_cave	10	-140.1	-85.8	-258.3	0	
+11004700	11004700	FLIP	TATOOINE	tat_legacy_darklighter_cave	11	23.9	-79.1	-245.5	0	legacy_darklighter_hauler4_17718048
+11004701	11004700		TATOOINE	tat_legacy_darklighter_cave	13	18.4	-79.6	-258.8	0	
+11004702	11004700		TATOOINE	tat_legacy_darklighter_cave	13	6.1	-80.4	-281.3	0	
+11004703	11004700		TATOOINE	tat_legacy_darklighter_cave	14	-6.7	-78.6	-280.2	0	
+11004704	11004700		TATOOINE	tat_legacy_darklighter_cave	14	-17.2	-80.0	-274.6	0	
+11004705	11004700		TATOOINE	tat_legacy_darklighter_cave	14	-28.8	-87.1	-259.3	0	
+11004706	11004700		TATOOINE	tat_legacy_darklighter_cave	14	-36.3	-89.1	-247.4	0	
+11004707	11004700		TATOOINE	tat_legacy_darklighter_cave	15	-56.4	-92.2	-241.0	0	
+11004708	11004700		TATOOINE	tat_legacy_darklighter_cave	15	-75.2	-95.6	-231.1	0	
+11004709	11004700		TATOOINE	tat_legacy_darklighter_cave	15	-85.7	-99.6	-240.1	0	
+11004710	11004700		TATOOINE	tat_legacy_darklighter_cave	15	-79.1	-102.7	-255.6	0	
+11004711	11004700		TATOOINE	tat_legacy_darklighter_cave	15	-69.5	-107.1	-274.0	0	
+11004712	11004700		TATOOINE	tat_legacy_darklighter_cave	16	-66.5	-107.3	-290.0	0	
+11004713	11004700		TATOOINE	tat_legacy_darklighter_cave	16	-74.0	-107.3	-308.0	0	
+11004714	11004700		TATOOINE	tat_legacy_darklighter_cave	16	-90.8	-107.8	-320.4	0	
+11004715	11004700		TATOOINE	tat_legacy_darklighter_cave	17	-113.4	-107.9	-333.6	0	
+11004716	11004700		TATOOINE	tat_legacy_darklighter_cave	17	-131.8	-111.5	-334.1	0	
+11004717	11004700		TATOOINE	tat_legacy_darklighter_cave	17	-158.8	-111.0	-335.4	0	
+11004718	11004700		TATOOINE	tat_legacy_darklighter_cave	17	-165.7	-108.4	-332.8	0	
+11004800	11004800	FLIP	TATOOINE	tat_legacy_darklighter_cave	13	9.8	-79.7	-269.9	0	legacy_darkligher_area61_17504223
+11004801	11004800		TATOOINE	tat_legacy_darklighter_cave	13	19.1	-80.2	-263.9	0	
+11004802	11004800		TATOOINE	tat_legacy_darklighter_cave	13	26.7	-80.0	-271.5	0	
+11004803	11004800		TATOOINE	tat_legacy_darklighter_cave	13	18.7	-80.3	-282.2	0	
+11004804	11004800		TATOOINE	tat_legacy_darklighter_cave	13	9.3	-80.2	-279.6	0	
+11004900	11004900	FLIP	TATOOINE	tat_legacy_darklighter_cave	14	-9.1	-78.4	-280.4	0	legacy_darklighter_area7_17508192
+11004901	11004900		TATOOINE	tat_legacy_darklighter_cave	14	-16.6	-79.3	-277.4	0	
+11004902	11004900		TATOOINE	tat_legacy_darklighter_cave	14	-27.1	-86.4	-259.9	0	
+11004903	11004900		TATOOINE	tat_legacy_darklighter_cave	14	-32.5	-89.0	-252.7	0	
+11005000	11005000	FLIP	TATOOINE	tat_legacy_darklighter_cave	15	-50.9	-91.3	-242.1	0	legacy_darklighter_area8_17508722
+11005001	11005000		TATOOINE	tat_legacy_darklighter_cave	15	-66.9	-93.8	-236.5	0	
+11005002	11005000		TATOOINE	tat_legacy_darklighter_cave	15	-80.8	-96.6	-229.8	0	
+11005003	11005000		TATOOINE	tat_legacy_darklighter_cave	15	-81.2	-99.7	-241.8	0	
+11005004	11005000		TATOOINE	tat_legacy_darklighter_cave	15	-75.2	-104.5	-263.5	0	
+11005005	11005000		TATOOINE	tat_legacy_darklighter_cave	15	-67.4	-107.1	-279.5	0	
+11005100	11005100	FLIP	TATOOINE	tat_legacy_darklighter_cave	16	-66.3	-107.3	-294.9	0	legacy_darkligher_area9_17509228
+11005101	11005100		TATOOINE	tat_legacy_darklighter_cave	16	-70.2	-107.5	-304.5	0	
+11005102	11005100		TATOOINE	tat_legacy_darklighter_cave	16	-83.5	-107.9	-316.0	0	
+11005103	11005100		TATOOINE	tat_legacy_darklighter_cave	16	-92.7	-107.7	-320.3	0	
+11005200	11005200	FLIP	TATOOINE	tat_legacy_darklighter_cave	17	-172.8	-108.2	-329.4	0	legacy_darklighter_pallet2_17512238
+11005201	11005200		TATOOINE	tat_legacy_darklighter_cave	17	-176.5	-108.7	-332.9	0	
+11005202	11005200		TATOOINE	tat_legacy_darklighter_cave	17	-178.0	-108.7	-319.7	0	
+11005203	11005200		TATOOINE	tat_legacy_darklighter_cave	17	-172.0	-108.9	-320.1	0	
+11005300	11005300	FLIP	TATOOINE	tat_legacy_darklighter_cave	17	-122.3	-108.2	-317.3	0	legacy_darklighter_area10_17509656
+11005301	11005300		TATOOINE	tat_legacy_darklighter_cave	17	-113.6	-108.5	-321.9	0	
+11005302	11005300		TATOOINE	tat_legacy_darklighter_cave	17	-111.4	-107.8	-330.4	0	
+11005303	11005300		TATOOINE	tat_legacy_darklighter_cave	17	-120.5	-107.8	-341.9	0	
+11005304	11005300		TATOOINE	tat_legacy_darklighter_cave	17	-125.8	-109.7	-350.5	0	
+11005400	11005400	LOOP	TATOOINE	tat_world	0	-1347.0	12.0	-3664.0	0	Bestine - commoner near cantina
+11005401	11005400		TATOOINE	tat_world	0	-1368.2	12.0	-3649.3	0	
+11005402	11005400		TATOOINE	tat_world	0	-1376.7	12.0	-3639.6	0	
+11005403	11005400		TATOOINE	tat_world	0	-1369.8	12.0	-3659.6	0	
+11005500	11005500	FLIP	TATOOINE	tat_world	0	-909.0	19.5	-4027.0	0	Bestine - recon mercenaries
+11005501	11005500		TATOOINE	tat_world	0	-918.1	19.4	-4024.3	0	
+11005502	11005500		TATOOINE	tat_world	0	-929.1	19.3	-4021.0	0	
+11005503	11005500		TATOOINE	tat_world	0	-943.4	19.7	-4016.8	0	
+11005504	11005500		TATOOINE	tat_world	0	-962.5	21.4	-4012.2	0	
+11005505	11005500		TATOOINE	tat_world	0	-985.1	22.8	-4008.2	0	
+11005506	11005500		TATOOINE	tat_world	0	-1015.8	28.9	-4002.9	0	
+11005507	11005500		TATOOINE	tat_world	0	-1042.2	35.6	-3993.5	0	
+11005508	11005500		TATOOINE	tat_world	0	-1060.6	42.7	-3980.4	0	
+11005509	11005500		TATOOINE	tat_world	0	-1078.4	52.5	-3964.6	0	
+11005600	11005600	FLIP	TATOOINE	tat_world	0	-904.4	19.4	-4028.6	0	Bestine - Recon Commandos
+11005601	11005600		TATOOINE	tat_world	0	-923.6	19.4	-4022.7	0	
+11005602	11005600		TATOOINE	tat_world	0	-952.4	20.5	-4014.0	0	
+11005603	11005600		TATOOINE	tat_world	0	-976.1	22.0	-4009.8	0	
+11005604	11005600		TATOOINE	tat_world	0	-1000.1	25.5	-4005.4	0	
+11005605	11005600		TATOOINE	tat_world	0	-1027.5	31.5	-3998.2	0	
+11005606	11005600		TATOOINE	tat_world	0	-1050.0	38.6	-3990.2	0	
+11005607	11005600		TATOOINE	tat_world	0	-1064.5	43.8	-3976.9	0	
+11005608	11005600		TATOOINE	tat_world	0	-1077.4	51.5	-3965.6	0	
+11005700	11005700	FLIP	TATOOINE	tat_world	0	-1427.9	12.0	-3630.5	0	Bestine - Smuggler near cantina
+11005701	11005700		TATOOINE	tat_world	0	-1410.5	12.0	-3632.2	0	
+11005702	11005700		TATOOINE	tat_world	0	-1367.3	12.0	-3647.1	0	
+11005703	11005700		TATOOINE	tat_world	0	-1365.4	12.0	-3655.2	0	
+11005704	11005700		TATOOINE	tat_world	0	-1380.4	12.0	-3641.3	0	
+11005705	11005700		TATOOINE	tat_world	0	-1419.7	12.0	-3625.6	0	
+11005800	11005800	LOOP	TATOOINE	tat_world	0	-1805.6	11.6	-3845.1	0	Outback - Roaming dune bantha
+11005801	11005800		TATOOINE	tat_world	0	-1844.4	9.3	-3870.0	0	
+11005802	11005800		TATOOINE	tat_world	0	-1805.4	8.2	-3910.8	0	
+11005803	11005800		TATOOINE	tat_world	0	-1801.6	11.6	-3854.6	0	
+11005804	11005800		TATOOINE	tat_world	0	-1866.4	9.2	-3904.1	0	
+11005805	11005800		TATOOINE	tat_world	0	-1826.9	6.9	-3941.1	0	
+11005806	11005800		TATOOINE	tat_world	0	-1797.4	7.9	-3913.7	0	
+11005807	11005800		TATOOINE	tat_world	0	-1800.8	11.6	-3842.8	0	
+11005808	11005800		TATOOINE	tat_world	0	-1837.9	8.7	-3911.5	0	
+11005809	11005800		TATOOINE	tat_world	0	-1848.9	8.5	-3881.1	0	
+11005900	11005900	LOOP	TATOOINE	tat_world	0	-1755.9	30.7	-3323.3	0	Valarian Depot - a CLL-8 binary load lifter
+11005901	11005900		TATOOINE	tat_world	0	-1755.6	31.5	-3330.6	0	
+11005902	11005900		TATOOINE	tat_world	0	-1770.0	31.5	-3332.9	0	
+11005903	11005900		TATOOINE	tat_world	0	-1778.1	31.5	-3327.4	0	
+11005904	11005900		TATOOINE	tat_world	0	-1774.0	31.5	-3319.1	0	
+11005905	11005900		TATOOINE	tat_world	0	-1763.7	31.5	-3324.9	0	
+11005906	11005900		TATOOINE	tat_world	0	-1755.9	31.5	-3323.3	0	
+11006200	11006200	LOOP	TATOOINE	tat_world	0	19.6	9.1	-5080.8	0	Imperial camp Anchorhead - an Imperial cadet
+11006201	11006200		TATOOINE	tat_world	0	15.7	9.4	-5062.0	0	
+11006202	11006200		TATOOINE	tat_world	0	11.4	9.1	-5080.0	0	
+11006203	11006200		TATOOINE	tat_world	0	36.2	8.6	-5067.7	0	
+11006204	11006200		TATOOINE	tat_world	0	18.0	9.5	-5092.9	0	
+11006700	11006700	FLIP	TATOOINE	tat_world	0	998.9	12.6	2499.7	0	tatooine_imperial_stormtrooper_squadleader_10042172
+11006701	11006700		TATOOINE	tat_world	0	1008.5	12.6	2517.3	0	
+11006702	11006700		TATOOINE	tat_world	0	996.3	12.6	2533.8	0	
+11006703	11006700		TATOOINE	tat_world	0	988.1	12.6	2516.1	0	
+11006704	11006700		TATOOINE	tat_world	0	989.7	12.6	2535.3	0	
+11006705	11006700		TATOOINE	tat_world	0	968.1	12.4	2529.5	0	
+11006706	11006700		TATOOINE	tat_world	0	977.8	12.6	2498.9	0	
+11006800	11006800	FLIP	TATOOINE	tat_world	0	969.8	12.6	2513.4	0	tatooine_imperial_stormtrooper_patrol_10040800
+11006801	11006800		TATOOINE	tat_world	0	979.1	13.1	2539.9	0	
+11006802	11006800		TATOOINE	tat_world	0	1010.1	14.4	2533.8	0	
+11006803	11006800		TATOOINE	tat_world	0	1008.8	12.7	2497.6	0	
+11006804	11006800		TATOOINE	tat_world	0	976.4	10.8	2489.1	0	
+11006805	11006800		TATOOINE	tat_world	0	983.4	12.6	2500.1	0	
+11006900	11006900	FLIP	TATOOINE	tat_world	0	3278.6	4.1	-4598.9	0	Smuggler_Enemy_patrol_10029562
+11006901	11006900		TATOOINE	tat_world	0	3243.5	4.8	-4574.1	0	
+11006902	11006900		TATOOINE	tat_world	0	3226.8	5.0	-4604.1	0	
+11006903	11006900		TATOOINE	tat_world	0	3204.9	5.0	-4634.4	0	
+11006904	11006900		TATOOINE	tat_world	0	3222.9	4.6	-4659.6	0	
+11006905	11006900		TATOOINE	tat_world	0	3246.9	5.0	-4664.2	0	
+11007000	11007000	FLIP	TATOOINE	tat_world	0	3242.6	4.1	-4667.4	0	Smuggler_Enemy_PAtrol_10030794
+11007001	11007000		TATOOINE	tat_world	0	3202.5	5.0	-4638.0	0	
+11007002	11007000		TATOOINE	tat_world	0	3215.7	5.0	-4621.8	0	
+11007003	11007000		TATOOINE	tat_world	0	3196.1	4.9	-4641.0	0	
+11007100	11007100	FLIP	TATOOINE	tat_world	0	3163.7	5.0	-4752.1	0	Mos Eisley - a swoop gang punk
+11007101	11007100		TATOOINE	tat_world	0	3150.3	5.0	-4755.4	0	
+11007102	11007100		TATOOINE	tat_world	0	3136.8	5.5	-4761.6	0	
+11007103	11007100		TATOOINE	tat_world	0	3114.0	8.9	-4767.2	0	
+11007200	11007200	FLIP	TATOOINE	tat_world	0	3187.5	5.0	-4660.5	0	Mos Eisley - a swoop gang thug
+11007201	11007200		TATOOINE	tat_world	0	3185.7	5.0	-4670.6	0	
+11007202	11007200		TATOOINE	tat_world	0	3179.9	5.0	-4686.8	0	
+11007203	11007200		TATOOINE	tat_world	0	3173.5	5.0	-4700.8	0	
+11007204	11007200		TATOOINE	tat_world	0	3163.7	5.0	-4720.7	0	
+11007205	11007200		TATOOINE	tat_world	0	3155.6	5.0	-4737.5	0	
+11007206	11007200		TATOOINE	tat_world	0	3153.5	5.0	-4754.6	0	
+11007207	11007200		TATOOINE	tat_world	0	3158.8	5.0	-4766.3	0	
+11007208	11007200		TATOOINE	tat_world	0	3170.8	5.0	-4773.4	0	
+11007209	11007200		TATOOINE	tat_world	0	3181.8	5.0	-4778.5	0	
+11007210	11007200		TATOOINE	tat_world	0	3192.1	5.0	-4769.9	0	
+11007300	11007300	FLIP	TATOOINE	tat_world	0	3189.0	5.0	-4706.4	0	Mos Eisley - a swoop gang rogue
+11007301	11007300		TATOOINE	tat_world	0	3178.6	5.0	-4713.0	0	
+11007302	11007300		TATOOINE	tat_world	0	3168.5	5.0	-4716.5	0	
+11007303	11007300		TATOOINE	tat_world	0	3160.7	5.0	-4729.4	0	
+11007304	11007300		TATOOINE	tat_world	0	3159.0	5.0	-4748.0	0	
+11007305	11007300		TATOOINE	tat_world	0	3159.8	5.0	-4763.2	0	
+11007306	11007300		TATOOINE	tat_world	0	3168.1	5.0	-4777.8	0	
+11007307	11007300		TATOOINE	tat_world	0	3181.7	5.0	-4780.5	0	
+11007308	11007300		TATOOINE	tat_world	0	3191.4	5.0	-4769.2	0	
+11007400	11007400	FLIP	TATOOINE	tat_world	0	3205.7	5.0	-4786.1	0	Mos Eisley - a swoop gang rogue
+11007401	11007400		TATOOINE	tat_world	0	3213.8	5.0	-4796.9	0	
+11007402	11007400		TATOOINE	tat_world	0	3218.2	5.0	-4812.4	0	
+11007403	11007400		TATOOINE	tat_world	0	3211.6	5.0	-4826.0	0	
+11007404	11007400		TATOOINE	tat_world	0	3200.6	5.0	-4839.7	0	
+11007405	11007400		TATOOINE	tat_world	0	3189.8	5.0	-4853.0	0	
+11007406	11007400		TATOOINE	tat_world	0	3171.1	5.0	-4879.6	0	
+11007700	11007700	FLIP	TATOOINE	tat_world	0	2762.4	7.2	-4563.1	0	Mos Eisley - a smuggler cargo loader
+11007701	11007700		TATOOINE	tat_world	0	2754.0	7.0	-4567.5	0	
+11007702	11007700		TATOOINE	tat_world	0	2746.0	6.0	-4575.2	0	
+11007703	11007700		TATOOINE	tat_world	0	2735.4	7.2	-4568.5	0	
+11007704	11007700		TATOOINE	tat_world	0	2734.9	7.9	-4556.5	0	
+11007705	11007700		TATOOINE	tat_world	0	2751.1	7.5	-4556.1	0	
+11007706	11007700		TATOOINE	tat_world	0	2751.5	7.7	-4551.3	0	
+11007707	11007700		TATOOINE	tat_world	0	2755.8	7.4	-4551.8	0	
+11007708	11007700		TATOOINE	tat_world	0	2764.7	7.0	-4545.3	0	
+11007709	11007700		TATOOINE	tat_world	0	2774.4	6.9	-4549.6	0	
+11007710	11007700		TATOOINE	tat_world	0	2775.6	7.3	-4556.6	0	
+11007711	11007700		TATOOINE	tat_world	0	2771.5	7.4	-4561.1	0	
+11007712	11007700		TATOOINE	tat_world	0	2766.8	7.3	-4559.8	0	
+11007713	11007700		TATOOINE	tat_world	0	2767.2	7.1	-4553.0	0	
+11007900	11007900	FLIP	TATOOINE	tat_world	0	2909.5	5.8	-4572.3	0	Mos Eisley - a gunrunner sentry
+11007901	11007900		TATOOINE	tat_world	0	2932.0	7.0	-4523.3	0	
+11007902	11007900		TATOOINE	tat_world	0	2987.1	5.7	-4537.7	0	
+11007903	11007900		TATOOINE	tat_world	0	3007.1	8.8	-4597.4	0	
+11007904	11007900		TATOOINE	tat_world	0	2943.0	13.0	-4626.7	0	
+11008000	11008000	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	1	0.1	-5.7	13.0	0	legacy_kraytcult_10_10020061
+11008001	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	1	-6.1	-7.9	0.4	0	
+11008002	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	1	-7.4	-8.6	-4.7	0	
+11008003	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	-6.1	-9.0	-9.1	0	
+11008004	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	3.6	-11.3	-18.7	0	
+11008005	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	8.6	-12.8	-22.0	0	
+11008006	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	15.2	-16.3	-28.9	0	
+11008007	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	14.6	-19.9	-35.4	0	
+11008008	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	9.7	-21.5	-38.1	0	
+11008009	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	2	2.6	-23.6	-41.2	0	
+11008010	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-4.7	-23.5	-41.4	0	
+11008011	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-14.5	-25.2	-41.3	0	
+11008012	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-19.9	-27.3	-43.4	0	
+11008013	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-26.4	-33.7	-51.8	0	
+11008014	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-27.1	-37.7	-61.0	0	
+11008015	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-26.8	-39.5	-69.4	0	
+11008016	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-27.6	-41.1	-74.7	0	
+11008017	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-33.7	-44.9	-78.8	0	
+11008018	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	3	-48.8	-48.2	-91.5	0	
+11008019	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-53.3	-46.9	-99.4	0	
+11008020	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-49.6	-46.7	-103.4	0	
+11008021	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-40.5	-47.0	-107.8	0	
+11008022	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-17.9	-53.5	-120.6	0	
+11008023	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-9.5	-52.4	-127.9	0	
+11008024	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-9.1	-50.1	-137.1	0	
+11008025	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	4	-12.1	-48.6	-143.5	0	
+11008026	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	5	-12.6	-48.8	-147.7	0	
+11008027	11008000		TATOOINE	tat_moseisley_legacy_cult_cave	5	-11.9	-49.2	-151.7	0	
+11008100	11008100	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	5	3.6	-51.8	-171.2	0	legacy_kraytcult_10_10020175
+11008101	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-4.1	-50.8	-168.4	0	
+11008102	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-11.2	-50.9	-161.8	0	
+11008103	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-19.0	-50.8	-160.5	0	
+11008104	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-28.2	-52.3	-165.4	0	
+11008105	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-36.1	-53.8	-170.2	0	
+11008106	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-44.6	-54.8	-172.3	0	
+11008107	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-48.1	-54.9	-173.1	0	
+11008108	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-52.4	-56.5	-173.4	0	
+11008109	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-58.0	-57.3	-171.6	0	
+11008110	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-64.1	-57.6	-171.3	0	
+11008111	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-69.5	-57.2	-173.0	0	
+11008112	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-75.3	-56.2	-175.3	0	
+11008113	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-78.3	-55.9	-180.6	0	
+11008114	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-77.2	-56.5	-188.0	0	
+11008115	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-75.3	-56.8	-194.8	0	
+11008116	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-70.4	-55.5	-199.4	0	
+11008117	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-66.5	-55.3	-202.4	0	
+11008118	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-64.1	-55.7	-204.5	0	
+11008119	11008100		TATOOINE	tat_moseisley_legacy_cult_cave	5	-60.1	-56.9	-214.2	0	
+11008200	11008200	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	5	-12.5	-49.9	-213.5	0	legacy_Kraytcult_12_10020128
+11008201	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.3	-49.0	-222.8	0	
+11008202	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-13.7	-50.2	-230.8	0	
+11008203	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-12.9	-51.7	-235.6	0	
+11008204	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-8.7	-54.4	-241.4	0	
+11008205	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	9	-1.0	-55.9	-244.0	0	
+11008206	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	7.8	-54.4	-246.3	0	
+11008207	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.3	-55.9	-251.3	0	
+11008208	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	14.4	-58.3	-258.6	0	
+11008209	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	12.7	-60.6	-267.6	0	
+11008210	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	8.1	-63.3	-274.0	0	
+11008211	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	4.0	-64.1	-276.3	0	
+11008212	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-1.2	-64.8	-278.1	0	
+11008213	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	10	-5.9	-63.9	-279.3	0	
+11008214	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-10.9	-63.6	-277.1	0	
+11008215	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-15.1	-64.7	-275.7	0	
+11008216	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-18.2	-65.8	-277.1	0	
+11008217	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.5	-67.4	-279.4	0	
+11008218	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.3	-70.6	-285.3	0	
+11008219	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.7	-71.9	-291.4	0	
+11008220	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-21.7	-74.2	-299.7	0	
+11008221	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-20.8	-75.3	-309.7	0	
+11008222	11008200		TATOOINE	tat_moseisley_legacy_cult_cave	11	-19.6	-76.7	-318.2	0	
+11008300	11008300	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	5	-70.1	-55.7	-184.2	0	legacy_kraytcult_10_10020090
+11008301	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-59.4	-55.5	-196.9	0	
+11008302	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-53.0	-56.3	-203.4	0	
+11008303	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-54.4	-57.3	-212.3	0	
+11008304	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	5	-56.5	-56.9	-223.8	0	
+11008305	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-57.6	-57.0	-231.2	0	
+11008306	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-62.4	-60.8	-243.0	0	
+11008307	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-67.5	-66.5	-250.8	0	
+11008308	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-72.8	-71.7	-256.8	0	
+11008309	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-82.9	-75.5	-258.9	0	
+11008310	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	12	-92.3	-77.0	-260.1	0	
+11008311	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	13	-101.9	-75.9	-261.8	0	
+11008312	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	13	-107.2	-76.5	-267.7	0	
+11008313	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	13	-106.2	-79.5	-276.4	0	
+11008314	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	13	-103.4	-82.1	-284.7	0	
+11008315	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	13	-92.9	-87.1	-289.3	0	
+11008316	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	14	-87.4	-88.4	-289.2	0	
+11008317	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	14	-83.3	-90.0	-292.8	0	
+11008318	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	14	-78.8	-88.5	-300.1	0	
+11008319	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	14	-80.1	-84.8	-309.1	0	
+11008320	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	17	-83.5	-82.6	-321.5	0	
+11008321	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	17	-88.9	-82.9	-330.0	0	
+11008322	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	17	-93.8	-84.5	-334.8	0	
+11008323	11008300		TATOOINE	tat_moseisley_legacy_cult_cave	17	-91.6	-82.6	-344.2	0	
+11008400	11008400	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	16	-41.1	-77.9	-365.3	0	legacy_bonegnasher_10020154
+11008401	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-35.4	-78.5	-364.9	0	
+11008402	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-31.1	-78.6	-361.1	0	
+11008403	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-29.0	-78.5	-356.4	0	
+11008404	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-26.3	-78.5	-350.6	0	
+11008405	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-27.6	-78.6	-346.1	0	
+11008406	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-26.6	-77.8	-342.7	0	
+11008407	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-23.4	-77.6	-340.7	0	
+11008408	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-18.3	-78.1	-340.3	0	
+11008409	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-14.1	-78.1	-342.6	0	
+11008410	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-11.8	-78.0	-347.2	0	
+11008411	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-8.3	-78.0	-352.5	0	
+11008412	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-4.2	-77.8	-354.8	0	
+11008413	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-2.3	-77.8	-359.0	0	
+11008414	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-5.9	-78.3	-365.1	0	
+11008415	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-12.5	-78.3	-367.2	0	
+11008416	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-19.8	-78.7	-367.9	0	
+11008417	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-25.6	-77.8	-367.8	0	
+11008418	11008400		TATOOINE	tat_moseisley_legacy_cult_cave	16	-32.1	-77.8	-368.0	0	
+11008500	11008500	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	17	-110.5	-82.4	-320.6	0	legacy_kraytcult_12_10020115
+11008501	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-112.2	-83.2	-324.9	0	
+11008502	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-116.2	-83.9	-329.4	0	
+11008503	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-121.8	-84.1	-331.3	0	
+11008504	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-127.9	-84.3	-334.5	0	
+11008505	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-129.0	-85.2	-339.3	0	
+11008506	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-124.9	-84.4	-344.2	0	
+11008507	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-116.0	-83.5	-342.7	0	
+11008508	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-110.6	-83.0	-341.8	0	
+11008509	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-105.5	-83.5	-339.5	0	
+11008510	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-99.6	-84.6	-337.1	0	
+11008511	11008500		TATOOINE	tat_moseisley_legacy_cult_cave	17	-100.6	-85.0	-335.8	0	
+11008600	11008600	FLIP	TATOOINE	tat_moseisley_legacy_cult_cave	20	8.8	-118.8	-357.9	0	legacy_kraytcult_12_10020233
+11008601	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	20	25.8	-119.2	-352.8	0	
+11008602	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	20	30.1	-118.5	-352.1	0	
+11008603	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	36.4	-118.8	-350.9	0	
+11008604	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	42.7	-118.0	-349.7	0	
+11008605	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	44.8	-117.7	-350.2	0	
+11008606	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	48.8	-116.7	-351.9	0	
+11008607	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	52.0	-115.3	-353.3	0	
+11008608	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	56.3	-113.9	-356.4	0	
+11008609	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	58.3	-111.8	-359.0	0	
+11008610	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	61.2	-110.3	-362.8	0	
+11008611	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	63.7	-108.7	-365.9	0	
+11008612	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	19	67.1	-106.8	-369.9	0	
+11008613	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	70.0	-106.1	-372.3	0	
+11008614	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	72.0	-104.9	-372.2	0	
+11008615	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	76.6	-103.5	-371.7	0	
+11008616	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	82.5	-102.1	-368.8	0	
+11008617	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	86.6	-98.5	-364.2	0	
+11008618	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	88.2	-97.8	-361.8	0	
+11008619	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	88.1	-96.6	-358.1	0	
+11008620	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	86.8	-94.6	-353.1	0	
+11008621	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	18	85.9	-92.1	-348.6	0	
+11008622	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	15	86.1	-90.6	-344.4	0	
+11008623	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	15	88.1	-90.1	-341.2	0	
+11008624	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	15	90.5	-90.2	-337.1	0	
+11008625	11008600		TATOOINE	tat_moseisley_legacy_cult_cave	15	95.3	-90.1	-335.9	0	
+11008700	11008700	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	5	7.5	-12.0	35.0	0	legacy_wt_tech_8_10118056
+11008701	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	7.2	-12.0	39.7	0	
+11008702	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	7.4	-12.0	51.8	0	
+11008703	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	7.2	-12.0	52.9	0	
+11008704	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	0.8	-12.0	54.0	0	
+11008705	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	-1.8	-12.0	51.9	0	
+11008706	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	0.2	-12.0	47.8	0	
+11008707	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	0.5	-12.0	36.4	0	
+11008708	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	-2.0	-12.0	36.0	0	
+11008709	11008700		TATOOINE	tat_legacy_swoop_gang_bunker	5	3.8	-12.0	34.5	0	
+11008800	11008800	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	7	21.1	-16.0	71.8	0	legacy_wt_guard_11_p_10530599
+11008801	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	7	17.4	-16.0	76.9	0	
+11008802	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	7	17.4	-16.0	83.6	0	
+11008803	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	8	17.4	-16.0	87.8	0	
+11008804	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	8	17.4	-16.0	92.8	0	
+11008805	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	9	9.9	-16.0	93.1	0	
+11008806	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	9	-0.6	-12.0	93.0	0	
+11008807	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	18	-10.4	-12.0	93.2	0	
+11008808	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	18	-19.3	-12.0	93.2	0	
+11008809	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	19	-25.8	-12.0	93.1	0	
+11008810	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-31.5	-12.0	93.0	0	
+11008811	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-32.8	-12.0	99.3	0	
+11008812	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.0	-12.0	105.5	0	
+11008813	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.0	-12.0	112.1	0	
+11008814	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-36.5	-12.0	114.3	0	
+11008815	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	20	-36.5	-12.0	119.1	0	
+11008816	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	21	-36.7	-12.0	122.6	0	
+11008817	11008800		TATOOINE	tat_legacy_swoop_gang_bunker	21	-36.8	-12.0	126.2	0	
+11008900	11008900	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	7	22.1	-16.0	82.8	0	legacy_wh_tech_10_10070271
+11008901	11008900		TATOOINE	tat_legacy_swoop_gang_bunker	7	13.9	-16.0	83.0	0	
+11008902	11008900		TATOOINE	tat_legacy_swoop_gang_bunker	7	10.9	-16.0	79.1	0	
+11009000	11009000	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	10	9.6	-16.0	109.4	0	legacy_wh_tech_10_10070325
+11009001	11009000		TATOOINE	tat_legacy_swoop_gang_bunker	10	7.2	-16.0	113.6	0	
+11009002	11009000		TATOOINE	tat_legacy_swoop_gang_bunker	10	1.3	-16.0	113.9	0	
+11009003	11009000		TATOOINE	tat_legacy_swoop_gang_bunker	10	-2.6	-16.0	114.1	0	
+11009004	11009000		TATOOINE	tat_legacy_swoop_gang_bunker	10	-15.0	-16.0	119.6	0	
+11009005	11009000		TATOOINE	tat_legacy_swoop_gang_bunker	10	-16.9	-16.0	116.0	0	
+11009100	11009100	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	10	-15.4	-16.0	123.3	0	legacy_wh_tech_13_10070333
+11009101	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-4.4	-16.0	125.7	0	
+11009102	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.8	-16.0	130.0	0	
+11009103	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.8	-16.0	132.0	0	
+11009104	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	6.9	-16.0	132.6	0	
+11009105	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	9.5	-16.0	127.8	0	
+11009106	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	13.5	-16.0	126.4	0	
+11009107	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	25.1	-16.0	126.5	0	
+11009108	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	25.3	-16.0	116.2	0	
+11009109	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	11.9	-16.0	115.7	0	
+11009110	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	5.0	-16.0	110.7	0	
+11009111	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-0.8	-16.0	99.9	0	
+11009112	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-3.0	-16.0	112.4	0	
+11009113	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-4.5	-16.0	116.2	0	
+11009114	11009100		TATOOINE	tat_legacy_swoop_gang_bunker	10	-10.7	-16.0	116.0	0	
+11009200	11009200	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	12	-23.0	-12.0	145.1	0	legacy_wt_tech_13_10418413
+11009201	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	12	-29.4	-12.0	150.7	0	
+11009202	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	13	-37.1	-12.0	151.0	0	
+11009203	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	13	-45.1	-15.2	151.1	0	
+11009204	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	13	-54.7	-20.0	151.2	0	
+11009205	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	15	-62.8	-20.0	151.3	0	
+11009206	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	15	-71.1	-24.0	151.1	0	
+11009207	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-76.9	-24.0	151.0	0	
+11009208	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-78.9	-24.0	150.9	0	
+11009209	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-81.2	-24.0	150.1	0	
+11009210	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.7	-24.0	148.3	0	
+11009211	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.5	-24.0	142.2	0	
+11009212	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.5	-26.9	135.6	0	
+11009213	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	16	-80.6	-28.0	131.0	0	
+11009214	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.6	-28.0	126.4	0	
+11009215	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.2	-28.0	109.9	0	
+11009216	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-80.2	-28.0	109.9	0	
+11009217	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-85.6	-28.0	110.0	0	
+11009218	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-92.0	-28.0	110.5	0	
+11009219	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-91.6	-28.0	106.5	0	
+11009220	11009200		TATOOINE	tat_legacy_swoop_gang_bunker	17	-91.5	-28.0	102.7	0	
+11009300	11009300	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	18	-17.9	-12.0	94.2	0	legacy_wh_tech_10_10070280
+11009301	11009300		TATOOINE	tat_legacy_swoop_gang_bunker	18	-15.9	-12.0	90.7	0	
+11009302	11009300		TATOOINE	tat_legacy_swoop_gang_bunker	18	-8.3	-12.0	93.7	0	
+11009303	11009300		TATOOINE	tat_legacy_swoop_gang_bunker	18	-6.3	-12.0	96.4	0	
+11009304	11009300		TATOOINE	tat_legacy_swoop_gang_bunker	18	-16.7	-12.0	95.5	0	
+11009400	11009400	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	18	-8.8	-12.0	99.5	0	legacy_wh_tech_10_10070276
+11009401	11009400		TATOOINE	tat_legacy_swoop_gang_bunker	18	-16.5	-12.0	99.0	0	
+11009402	11009400		TATOOINE	tat_legacy_swoop_gang_bunker	18	-18.1	-12.0	96.7	0	
+11009500	11009500	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	20	-32.9	-12.0	115.0	0	legacy_wh_tech_13_10070313
+11009501	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.1	-12.0	113.8	0	
+11009502	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.9	-12.0	110.1	0	
+11009503	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.5	-12.0	104.2	0	
+11009504	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-38.4	-12.0	98.2	0	
+11009505	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.4	-12.0	98.1	0	
+11009506	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-41.0	-12.0	87.0	0	
+11009507	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.5	-12.0	87.1	0	
+11009508	11009500		TATOOINE	tat_legacy_swoop_gang_bunker	20	-33.0	-12.0	110.5	0	
+11009600	11009600	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	29	-145.1	-44.0	97.2	0	legacy_wh_guard_14_10267932
+11009601	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-151.6	-44.0	92.6	0	
+11009602	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-158.1	-44.0	92.5	0	
+11009603	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.3	-44.0	91.4	0	
+11009604	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.8	-44.0	87.2	0	
+11009605	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.7	-44.0	82.2	0	
+11009606	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-161.0	-44.0	76.9	0	
+11009607	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-155.1	-44.0	73.8	0	
+11009608	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-150.2	-44.0	73.6	0	
+11009609	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-140.1	-44.0	72.5	0	
+11009610	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-140.1	-44.0	72.5	0	
+11009611	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-138.8	-44.0	75.4	0	
+11009612	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-139.1	-44.0	77.4	0	
+11009613	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-139.8	-44.0	78.3	0	
+11009614	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-142.2	-44.0	77.5	0	
+11009615	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-144.4	-44.0	76.4	0	
+11009616	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-157.3	-44.0	77.1	0	
+11009617	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.3	-44.0	78.6	0	
+11009618	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-164.9	-44.0	89.1	0	
+11009619	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-155.7	-44.0	92.5	0	
+11009620	11009600		TATOOINE	tat_legacy_swoop_gang_bunker	29	-148.7	-44.0	92.7	0	
+11009700	11009700	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	29	-137.3	-44.0	85.0	0	legacy_wh_guard_14_10268535
+11009701	11009700		TATOOINE	tat_legacy_swoop_gang_bunker	29	-144.4	-44.0	85.3	0	
+11009702	11009700		TATOOINE	tat_legacy_swoop_gang_bunker	29	-151.7	-44.0	85.3	0	
+11009703	11009700		TATOOINE	tat_legacy_swoop_gang_bunker	29	-163.1	-44.0	85.4	0	
+11009800	11009800	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	29	-166.1	-44.0	97.7	0	legacy_wt_dren_10532491
+11009801	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.6	-44.0	97.6	0	
+11009802	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-162.8	-44.0	95.3	0	
+11009803	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-165.1	-44.0	83.4	0	
+11009804	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-159.1	-44.0	73.6	0	
+11009805	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-142.7	-44.0	75.6	0	
+11009806	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	29	-138.9	-44.0	77.0	0	
+11009807	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	33	-129.4	-42.7	77.5	0	
+11009808	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	33	-118.5	-36.7	77.0	0	
+11009809	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	28	-112.0	-36.0	77.0	0	
+11009810	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	28	-102.9	-33.3	76.8	0	
+11009811	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	28	-93.5	-28.2	76.7	0	
+11009812	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	28	-90.0	-28.0	76.8	0	
+11009813	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	26	-88.0	-28.0	76.8	0	
+11009814	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	26	-83.6	-28.0	76.8	0	
+11009815	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	26	-83.2	-28.0	62.7	0	
+11009816	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	30	-89.0	-28.0	61.1	0	
+11009817	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	30	-93.5	-28.0	61.0	0	
+11009818	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	30	-94.7	-28.0	58.2	0	
+11009819	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.6	-28.0	52.0	0	
+11009820	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.5	-32.5	42.2	0	
+11009821	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	31	-94.4	-36.0	32.6	0	
+11009822	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.4	-36.0	26.9	0	
+11009823	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.5	-41.5	16.4	0	
+11009824	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	34	-94.4	-44.0	8.2	0	
+11009825	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-94.4	-44.0	5.8	0	
+11009826	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-94.3	-44.0	2.3	0	
+11009827	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-76.9	-44.0	-1.4	0	
+11009828	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-63.3	-44.0	-1.0	0	
+11009829	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-58.0	-44.0	-4.6	0	
+11009830	11009800		TATOOINE	tat_legacy_swoop_gang_bunker	32	-57.7	-44.0	-5.6	0	
+11009900	11009900	FLIP	TATOOINE	tat_legacy_swoop_gang_bunker	32	-77.6	-44.0	4.3	0	legacy_wh_guard_15_2_10070458
+11009901	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-83.3	-44.0	2.3	0	
+11009902	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-89.7	-44.0	1.2	0	
+11009903	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-98.4	-44.0	-7.6	0	
+11009904	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-98.6	-44.0	-20.8	0	
+11009905	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-80.6	-44.0	-20.5	0	
+11009906	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-61.3	-44.0	-19.7	0	
+11009907	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-66.6	-44.0	-15.2	0	
+11009908	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-67.2	-44.0	-4.3	0	
+11009909	11009900		TATOOINE	tat_legacy_swoop_gang_bunker	32	-72.7	-44.0	1.9	0	
+11010000	11010000	LOOP	TATOOINE	tat_world	0	3914.0	41.5	2316.8	0	Mos Taike - criminal
+11010001	11010000		TATOOINE	tat_world	0	3948.4	54.2	2280.9	0	
+11010002	11010000		TATOOINE	tat_world	0	3930.1	46.1	2315.2	0	
+11010003	11010000		TATOOINE	tat_world	0	3906.6	33.0	2359.7	0	
+11010004	11010000		TATOOINE	tat_world	0	3885.9	33.0	2358.1	0	
+11010005	11010000		TATOOINE	tat_world	0	3862.0	27.5	2332.3	0	
+11010006	11010000		TATOOINE	tat_world	0	3881.1	32.8	2341.0	0	
+11010100	11010100	LOOP	TATOOINE	tat_world	0	3819.9	17.9	2367.0	0	Mos Taike - bounty hunter
+11010101	11010100		TATOOINE	tat_world	0	3819.4	16.9	2342.1	0	
+11010102	11010100		TATOOINE	tat_world	0	3781.2	8.5	2345.9	0	
+11010103	11010100		TATOOINE	tat_world	0	3790.6	11.6	2378.8	0	
+11010200	11010200	LOOP	TATOOINE	tat_world	0	4270.5	8.8	2485.0	0	tatooine_tusken_guard_10072680
+11010201	11010200		TATOOINE	tat_world	0	4267.9	8.8	2502.9	0	
+11010202	11010200		TATOOINE	tat_world	0	4251.1	7.9	2517.9	0	
+11010203	11010200		TATOOINE	tat_world	0	4229.8	8.8	2502.9	0	
+11010204	11010200		TATOOINE	tat_world	0	4226.7	14.4	2468.2	0	
+11010205	11010200		TATOOINE	tat_world	0	4253.2	15.3	2452.8	0	
+11010300	11010300	LOOP	TATOOINE	tat_world	0	3529.0	4.0	-4799.9	0	Mos Eisley - Mos Eisley Police Officer
+11010301	11010300		TATOOINE	tat_world	0	3523.8	4.0	-4781.9	0	
+11010302	11010300		TATOOINE	tat_world	0	3505.2	5.0	-4767.8	0	
+11010303	11010300		TATOOINE	tat_world	0	3480.5	5.0	-4749.0	0	
+11010304	11010300		TATOOINE	tat_world	0	3441.5	4.0	-4765.2	0	
+11010305	11010300		TATOOINE	tat_world	0	3433.6	4.0	-4776.0	0	
+11010306	11010300		TATOOINE	tat_world	0	3396.6	4.1	-4760.4	0	
+11010307	11010300		TATOOINE	tat_world	0	3367.3	4.0	-4816.0	0	
+11010308	11010300		TATOOINE	tat_world	0	3368.5	5.0	-4842.0	0	
+11010309	11010300		TATOOINE	tat_world	0	3386.9	5.0	-4856.8	0	
+11010310	11010300		TATOOINE	tat_world	0	3445.8	5.0	-4859.0	0	
+11010311	11010300		TATOOINE	tat_world	0	3449.6	5.0	-4876.2	0	
+11010312	11010300		TATOOINE	tat_world	0	3536.0	5.0	-4852.5	0	
+11010313	11010300		TATOOINE	tat_world	0	3544.8	5.0	-4838.5	0	
+11010314	11010300		TATOOINE	tat_world	0	3525.3	4.0	-4816.9	0	
+11010400	11010400	LOOP	TATOOINE	tat_world	0	-1144.4	98.0	-3903.6	0	Bestine - Sand trooper imperial base on hill
+11010401	11010400		TATOOINE	tat_world	0	-1137.0	98.1	-3888.8	0	
+11010402	11010400		TATOOINE	tat_world	0	-1137.0	98.9	-3884.6	0	
+11010403	11010400		TATOOINE	tat_world	0	-1164.7	95.2	-3884.7	0	
+11010404	11010400		TATOOINE	tat_world	0	-1164.8	98.2	-3921.5	0	
+11010405	11010400		TATOOINE	tat_world	0	-1153.6	98.1	-3919.5	0	
+11010500	11010500	LOOP	TATOOINE	tat_world	0	-1142.5	98.1	-3922.9	0	Bestine - Dark Trooper imperial base on hill
+11010501	11010500		TATOOINE	tat_world	0	-1120.9	96.5	-3921.9	0	
+11010502	11010500		TATOOINE	tat_world	0	-1121.5	97.8	-3888.0	0	
+11010503	11010500		TATOOINE	tat_world	0	-1135.8	99.0	-3884.0	0	
+11010504	11010500		TATOOINE	tat_world	0	-1144.9	98.0	-3903.9	0	
+11010505	11010500		TATOOINE	tat_world	0	-1144.6	97.9	-3920.9	0	
+11010600	11010600	LOOP	TATOOINE	tat_world	0	-2921.6	5.0	2107.7	0	Mos Espa - Power droid in front of starport
+11010601	11010600		TATOOINE	tat_world	0	-2927.4	5.0	2061.6	0	
+11010602	11010600		TATOOINE	tat_world	0	-2906.2	5.0	1982.5	0	
+11010603	11010600		TATOOINE	tat_world	0	-2886.9	5.3	1931.8	0	
+11010604	11010600		TATOOINE	tat_world	0	-2941.5	5.0	2106.5	0	
+11010605	11010600		TATOOINE	tat_world	0	-2909.9	5.0	2112.7	0	
+11010700	11010700	LOOP	TATOOINE	tat_world	0	-2932.0	5.0	2441.3	0	Mos Espa - Power droid near Watto's shop
+11010701	11010700		TATOOINE	tat_world	0	-2968.4	5.0	2409.5	0	
+11010702	11010700		TATOOINE	tat_world	0	-2976.4	5.5	2358.3	0	
+11010703	11010700		TATOOINE	tat_world	0	-2970.8	5.5	2353.5	0	
+11010704	11010700		TATOOINE	tat_world	0	-2987.5	5.5	2338.2	0	
+11010705	11010700		TATOOINE	tat_world	0	-2990.5	5.5	2363.2	0	
+11010706	11010700		TATOOINE	tat_world	0	-2986.4	5.5	2363.6	0	
+11010707	11010700		TATOOINE	tat_world	0	-2983.5	5.5	2361.6	0	
+11010708	11010700		TATOOINE	tat_world	0	-2932.7	5.0	2363.1	0	
+11010709	11010700		TATOOINE	tat_world	0	-2920.3	5.0	2404.8	0	
+11010710	11010700		TATOOINE	tat_world	0	-2925.6	5.0	2410.3	0	
+11010800	11010800	LOOP	TATOOINE	tat_world	0	-2881.3	5.0	2405.9	0	Mos Espa - Thug near Watto's shop
+11010801	11010800		TATOOINE	tat_world	0	-2860.7	5.0	2411.6	0	
+11010802	11010800		TATOOINE	tat_world	0	-2851.2	5.0	2429.0	0	
+11010803	11010800		TATOOINE	tat_world	0	-2860.1	5.0	2443.2	0	
+11010804	11010800		TATOOINE	tat_world	0	-2852.9	5.0	2458.6	0	
+11010805	11010800		TATOOINE	tat_world	0	-2866.3	5.0	2474.0	0	
+11010806	11010800		TATOOINE	tat_world	0	-2879.7	5.0	2500.2	0	
+11010807	11010800		TATOOINE	tat_world	0	-2900.7	5.0	2495.9	0	
+11010808	11010800		TATOOINE	tat_world	0	-2921.8	5.0	2449.4	0	
+11010809	11010800		TATOOINE	tat_world	0	-2918.6	5.0	2400.6	0	
+11010900	11010900	LOOP	TATOOINE	tat_world	0	-1272.0	12.0	-3582.9	0	Bestine - ATST
+11010901	11010900		TATOOINE	tat_world	0	-1285.4	12.0	-3574.2	0	
+11010902	11010900		TATOOINE	tat_world	0	-1292.7	12.0	-3611.0	0	
+11010903	11010900		TATOOINE	tat_world	0	-1335.1	12.0	-3658.0	0	
+11010904	11010900		TATOOINE	tat_world	0	-1315.4	12.0	-3669.9	0	
+11010905	11010900		TATOOINE	tat_world	0	-1311.5	12.0	-3641.5	0	
+11010907	11010900		TATOOINE	tat_world	0	-1277.7	12.0	-3618.3	0	
+11010908	11010900		TATOOINE	tat_world	0	-1277.9	12.1	-3593.9	0	
+11011000	11011000	FLIP	TATOOINE	tat_world	0	-1273.2	12.0	-3619.5	0	gcw_wp_starport
+11011001	11011000		TATOOINE	tat_world	0	-1210.1	12.0	-3628.6	0	gcw_wp_defhqa
+11011002	11011000		TATOOINE	tat_world	0	-1202.7	12.0	-3544.2	0	gcw_wp_guildsq
+11011003	11011000		TATOOINE	tat_world	0	-1108.8	12.0	-3636.9	0	gcw_wp_capitol
+11011100	11011100	FLIP	TATOOINE	tat_world	0	-1284.3	48.3	-3353.9	0	gcw_wp_nw_guildsq_1
+11011101	11011100		TATOOINE	tat_world	0	-1256.8	14.6	-3423.9	0	gcw_wp_nw_guildsq_2
+11011102	11011100		TATOOINE	tat_world	0	-1233.4	13.7	-3478.9	0	gcw_wp_nw_guildsq_3
+11011103	11011100		TATOOINE	tat_world	0	-1214.9	12.0	-3518.2	0	gcw_wp_nw_guildsq_4
+11011104	11011100		TATOOINE	tat_world	0	-1195.0	12.0	-3534.0	0	gcw_wp_nw_guildsq_5
+11011200	11011200	FLIP	TATOOINE	tat_world	0	-1152.6	53.3	-3344.5	0	gcw_wp_ne_guildsq_1
+11011201	11011200		TATOOINE	tat_world	0	-1117.3	23.0	-3437.0	0	gcw_wp_ne_guildsq_2
+11011202	11011200		TATOOINE	tat_world	0	-1091.0	20.6	-3472.6	0	gcw_wp_ne_guildsq_3
+11011203	11011200		TATOOINE	tat_world	0	-1089.0	12.0	-3504.6	0	gcw_wp_ne_guildsq_4
+11011204	11011200		TATOOINE	tat_world	0	-1088.1	12.0	-3531.6	0	gcw_wp_ne_guildsq_5
+11011205	11011200		TATOOINE	tat_world	0	-1115.1	12.0	-3566.2	0	gcw_wp_ne_guildsq_6
+11011206	11011200		TATOOINE	tat_world	0	-1164.5	12.0	-3526.0	0	gcw_wp_ne_guildsq_7
+11011207	11011200		TATOOINE	tat_world	0	-1175.2	12.0	-3536.4	0	gcw_wp_ne_guildsq_8
+11011208	11011200		TATOOINE	tat_world	0	-1183.0	12.0	-3544.7	0	gcw_wp_ne_guildsq_9
+11011209	11011200		TATOOINE	tat_world	0	-1194.3	12.0	-3533.9	0	gcw_wp_ne_guildsq_10
+11011300	11011300	FLIP	TATOOINE	tat_world	0	-1222.3	12.0	-3568.8	0	gcw_wp_guildsq_starport_1
+11011301	11011300		TATOOINE	tat_world	0	-1244.5	12.0	-3550.4	0	gcw_wp_guildsq_starport_2
+11011302	11011300		TATOOINE	tat_world	0	-1271.6	12.0	-3574.5	0	gcw_wp_guildsq_starport_3
+11011303	11011300		TATOOINE	tat_world	0	-1282.2	12.0	-3607.2	0	gcw_wp_guildsq_starport_4
+11011400	11011400	FLIP	TATOOINE	tat_world	0	-1254.2	12.0	-3625.6	0	gcw_wp_starport_defhq_1
+11011401	11011400		TATOOINE	tat_world	0	-1239.9	12.0	-3636.4	0	gcw_wp_starport_defhq_2
+11011402	11011400		TATOOINE	tat_world	0	-1227.9	12.0	-3626.6	0	gcw_wp_starport_defhq_3
+11011500	11011500	FLIP	TATOOINE	tat_world	0	-1395.1	24.1	-3907.7	0	gcw_wp_sw_starport_1
+11011501	11011500		TATOOINE	tat_world	0	-1400.2	18.2	-3844.3	0	gcw_wp_sw_starport_2
+11011502	11011500		TATOOINE	tat_world	0	-1379.0	10.7	-3818.3	0	gcw_wp_sw_starport_3
+11011503	11011500		TATOOINE	tat_world	0	-1376.9	10.5	-3782.1	0	gcw_wp_sw_starport_4
+11011504	11011500		TATOOINE	tat_world	0	-1351.6	13.1	-3736.7	0	gcw_wp_sw_starport_5
+11011505	11011500		TATOOINE	tat_world	0	-1326.3	12.0	-3701.1	0	gcw_wp_sw_starport_6
+11011506	11011500		TATOOINE	tat_world	0	-1319.0	12.0	-3658.4	0	gcw_wp_sw_starport_7
+11011507	11011500		TATOOINE	tat_world	0	-1300.3	12.0	-3627.3	0	gcw_wp_sw_starport_8
+11011600	11011600	FLIP	TATOOINE	tat_world	0	-905.7	24.2	-3777.5	0	gcw_wp_se_capitol_1
+11011601	11011600		TATOOINE	tat_world	0	-952.5	19.0	-3760.9	0	gcw_wp_se_capitol_2
+11011602	11011600		TATOOINE	tat_world	0	-983.2	12.0	-3743.2	0	gcw_wp_se_capitol_3
+11011603	11011600		TATOOINE	tat_world	0	-995.1	12.0	-3728.1	0	gcw_wp_se_capitol_4
+11011604	11011600		TATOOINE	tat_world	0	-1003.9	12.0	-3707.8	0	gcw_wp_se_capitol_5
+11011605	11011600		TATOOINE	tat_world	0	-1050.9	12.0	-3666.9	0	gcw_wp_se_capitol_6
+11011606	11011600		TATOOINE	tat_world	0	-1066.2	12.0	-3671.2	0	gcw_wp_se_capitol_7
+11011607	11011600		TATOOINE	tat_world	0	-1086.1	12.0	-3648.8	0	gcw_wp_se_capitol_8
+11011700	11011700	FLIP	TATOOINE	tat_world	0	-1133.0	12.0	-3653.7	0	gcw_wp_capitol_defhq_1
+11011701	11011700		TATOOINE	tat_world	0	-1151.2	12.0	-3663.1	0	gcw_wp_capitol_defhq_2
+11011702	11011700		TATOOINE	tat_world	0	-1186.8	12.0	-3629.2	0	gcw_wp_capitol_defhq_3
+11011800	11011800	FLIP	TATOOINE	tat_world	0	-956.7	32.7	-3630.3	0	gcw_wp_e_capitol_1
+11011801	11011800		TATOOINE	tat_world	0	-1017.4	15.0	-3591.7	0	gcw_wp_e_capitol_2
+11011802	11011800		TATOOINE	tat_world	0	-1047.5	9.7	-3569.8	0	gcw_wp_e_capitol_3
+11011803	11011800		TATOOINE	tat_world	0	-1065.6	12.0	-3590.1	0	gcw_wp_e_capitol_4
+11011804	11011800		TATOOINE	tat_world	0	-1074.1	12.0	-3585.0	0	gcw_wp_e_capitol_5
+11011805	11011800		TATOOINE	tat_world	0	-1080.0	12.0	-3584.5	0	gcw_wp_e_capitol_6
+11011806	11011800		TATOOINE	tat_world	0	-1081.6	12.0	-3599.3	0	gcw_wp_e_capitol_7
+11011900	11011900	FLIP	TATOOINE	tat_world	0	-1260.3	44.8	-3371.2	0	gcw_wp_nw_guildsq_1_2
+11011901	11011900		TATOOINE	tat_world	0	-1223.8	16.6	-3424.7	0	gcw_wp_nw_guildsq_2_2
+11011902	11011900		TATOOINE	tat_world	0	-1218.3	15.3	-3481.8	0	gcw_wp_nw_guildsq_3_2
+11011903	11011900		TATOOINE	tat_world	0	-1222.9	12.0	-3511.3	0	gcw_wp_nw_guildsq_4_2
+11011904	11011900		TATOOINE	tat_world	0	-1196.3	12.0	-3532.5	0	gcw_wp_nw_guildsq_5_2
+11012000	11012000	FLIP	TATOOINE	tat_world	0	-1131.1	57.4	-3348.4	0	gcw_wp_ne_guildsq_1_2
+11012001	11012000		TATOOINE	tat_world	0	-1097.6	25.9	-3435.4	0	gcw_wp_ne_guildsq_2_2
+11012002	11012000		TATOOINE	tat_world	0	-1099.8	20.4	-3472.8	0	gcw_wp_ne_guildsq_3_2
+11012003	11012000		TATOOINE	tat_world	0	-1085.8	12.0	-3505.3	0	gcw_wp_ne_guildsq_4_2
+11012004	11012000		TATOOINE	tat_world	0	-1093.5	12.0	-3531.3	0	gcw_wp_ne_guildsq_5_2
+11012005	11012000		TATOOINE	tat_world	0	-1111.6	12.0	-3565.9	0	gcw_wp_ne_guildsq_6_2
+11012006	11012000		TATOOINE	tat_world	0	-1167.4	12.0	-3529.0	0	gcw_wp_ne_guildsq_7_2
+11012007	11012000		TATOOINE	tat_world	0	-1176.4	12.0	-3536.3	0	gcw_wp_ne_guildsq_8_2
+11012008	11012000		TATOOINE	tat_world	0	-1181.8	12.0	-3543.6	0	gcw_wp_ne_guildsq_9_2
+11012009	11012000		TATOOINE	tat_world	0	-1193.4	12.0	-3534.8	0	gcw_wp_ne_guildsq_10_2
+11012100	11012100	FLIP	TATOOINE	tat_world	0	-1220.5	12.0	-3566.2	0	gcw_wp_guildsq_starport_1_2
+11012101	11012100		TATOOINE	tat_world	0	-1244.7	12.0	-3552.6	0	gcw_wp_guildsq_starport_2_2
+11012102	11012100		TATOOINE	tat_world	0	-1278.5	12.0	-3576.4	0	gcw_wp_guildsq_starport_3_2
+11012103	11012100		TATOOINE	tat_world	0	-1288.5	12.0	-3609.3	0	gcw_wp_guildsq_starport_4_2
+11012200	11012200	FLIP	TATOOINE	tat_world	0	-1251.5	12.0	-3622.3	0	gcw_wp_starport_defhq_1_2
+11012201	11012200		TATOOINE	tat_world	0	-1232.0	12.0	-3620.5	0	gcw_wp_starport_defhq_2_2
+11012202	11012200		TATOOINE	tat_world	0	-1220.5	12.0	-3617.0	0	gcw_wp_starport_defhq_3_2
+11012300	11012300	FLIP	TATOOINE	tat_world	0	-1200.4	43.0	-3784.3	0	gcw_wp_s_defhq_1
+11012301	11012300		TATOOINE	tat_world	0	-1198.8	33.0	-3769.4	0	gcw_wp_s_defhq_1_2
+11012400	11012400	FLIP	TATOOINE	tat_world	0	-1148.5	9.8	-3734.2	0	gcw_wp_s_defhq_2
+11012401	11012400		TATOOINE	tat_world	0	-1155.6	8.1	-3723.4	0	gcw_wp_s_defhq_2_2
+11012500	11012500	FLIP	TATOOINE	tat_world	0	-1119.1	12.0	-3695.0	0	gcw_wp_s_defhq_3
+11012501	11012500		TATOOINE	tat_world	0	-1125.8	12.0	-3695.5	0	gcw_wp_s_defhq_3_2
+11012600	11012600	FLIP	TATOOINE	tat_world	0	-1387.2	23.4	-3905.6	0	gcw_wp_sw_starport_1_2
+11012601	11012600		TATOOINE	tat_world	0	-1408.0	18.7	-3847.2	0	gcw_wp_sw_starport_2_2
+11012602	11012600		TATOOINE	tat_world	0	-1384.0	10.1	-3821.9	0	gcw_wp_sw_starport_3_2
+11012603	11012600		TATOOINE	tat_world	0	-1385.3	10.0	-3769.5	0	gcw_wp_sw_starport_4_2
+11012604	11012600		TATOOINE	tat_world	0	-1376.6	12.0	-3730.9	0	gcw_wp_sw_starport_5_2
+11012605	11012600		TATOOINE	tat_world	0	-1369.3	12.0	-3709.7	0	gcw_wp_sw_starport_6_2
+11012606	11012600		TATOOINE	tat_world	0	-1316.1	12.0	-3662.3	0	gcw_wp_sw_starport_7_2
+11012607	11012600		TATOOINE	tat_world	0	-1302.1	12.0	-3621.6	0	gcw_wp_sw_starport_8_2
+11012700	11012700	FLIP	TATOOINE	tat_world	0	-926.6	29.0	-3798.4	0	gcw_wp_se_capitol_1_2
+11012701	11012700		TATOOINE	tat_world	0	-966.2	15.2	-3763.7	0	gcw_wp_se_capitol_2_2
+11012702	11012700		TATOOINE	tat_world	0	-983.6	12.0	-3743.7	0	gcw_wp_se_capitol_3_2
+11012703	11012700		TATOOINE	tat_world	0	-993.9	12.0	-3723.7	0	gcw_wp_se_capitol_4_2
+11012704	11012700		TATOOINE	tat_world	0	-1004.4	12.0	-3708.3	0	gcw_wp_se_capitol_5_2
+11012705	11012700		TATOOINE	tat_world	0	-1041.1	12.0	-3673.3	0	gcw_wp_se_capitol_6_2
+11012706	11012700		TATOOINE	tat_world	0	-1068.5	12.0	-3664.6	0	gcw_wp_se_capitol_7_2
+11012707	11012700		TATOOINE	tat_world	0	-1093.8	12.0	-3647.4	0	gcw_wp_se_capitol_8_2
+11012800	11012800	FLIP	TATOOINE	tat_world	0	-1121.5	12.0	-3645.7	0	gcw_wp_capitol_defhq_1_2
+11012801	11012800		TATOOINE	tat_world	0	-1151.3	12.0	-3655.6	0	gcw_wp_capitol_defhq_2_2
+11012802	11012800		TATOOINE	tat_world	0	-1186.8	12.0	-3629.9	0	gcw_wp_capitol_defhq_3_2
+11012900	11012900	FLIP	TATOOINE	tat_world	0	-948.2	30.1	-3617.1	0	gcw_wp_e_capitol_1_2
+11012901	11012900		TATOOINE	tat_world	0	-1029.1	14.1	-3593.1	0	gcw_wp_e_capitol_2_2
+11012902	11012900		TATOOINE	tat_world	0	-1056.4	12.0	-3583.5	0	gcw_wp_e_capitol_3_2
+11012903	11012900		TATOOINE	tat_world	0	-1070.0	12.0	-3587.5	0	gcw_wp_e_capitol_4_2
+11012904	11012900		TATOOINE	tat_world	0	-1074.6	12.0	-3585.6	0	gcw_wp_e_capitol_5_2
+11012905	11012900		TATOOINE	tat_world	0	-1089.2	12.0	-3585.2	0	gcw_wp_e_capitol_6_2
+11012906	11012900		TATOOINE	tat_world	0	-1086.9	12.0	-3602.6	0	gcw_wp_e_capitol_7_2
+11013000	11013000	FLIP	TATOOINE	tat_world	0	-1285.0	12.0	-3526.0	0	gcw_demoralized_1_1
+11013001	11013000		TATOOINE	tat_world	0	-1217.0	12.0	-3589.0	0	gcw_demoralized_1_2
+11013002	11013000		TATOOINE	tat_world	0	-1240.0	12.0	-3616.0	0	gcw_demoralized_1_3
+11013003	11013000		TATOOINE	tat_world	0	-1348.0	12.0	-3661.0	0	gcw_demoralized_1_4
+11013004	11013000		TATOOINE	tat_world	0	-1238.0	12.0	-3669.0	0	gcw_demoralized_1_5
+11013005	11013000		TATOOINE	tat_world	0	-1236.0	12.0	-3645.0	0	gcw_demoralized_1_6

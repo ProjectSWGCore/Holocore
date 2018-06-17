@@ -1,11 +1,18 @@
-/.gradle
-/.settings
-/bin
-/build
-/cfg/*.cfg
-/clientdata
-/odb
-/serverdata/**/*.iff
-/serverdata/**/*.db
-/log
-*.db-journal
+.settings
+
+# IDE-based
+Launcher.iml
+out
+.idea
+
+# Gradle
+build
+.gradle
+
+# Holocore
+clientdata/
+log/
+cfg/
+odb/
+*.db
+*.iff

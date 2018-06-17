@@ -1,5 +1,6 @@
-npc_id	attackable	difficulty	combat_level	npc_name	stf_name	niche	comment	iff_template	planet	offers_mission	social_group	faction	spec_force	scale_min	scale_max	hue	grant_skill	ignore_player	attack_speed	movement_speed	primary_weapon	primary_weapon_speed	primary_weapon_specials	secondary_weapon	secondary_weapon_speed	secondary_weapon_specials	aggressive	assist	stalker	herd	death_blow	skillmods	Damagelevelmodifier	StatLevelModifier	ToHitLevelModifier	ArmorLevelModifier	armor_blast	armor_stun	armor_kinetic	armor_energy	armor_heat	armor_cold	armor_electric	armor_acid	immune_mez	immune_root	immune_snare	immune_stun	immune_taunt	canNotPunish	minDrainModifier	maxDrainModifier	minFaucetModifier	maxFaucetModifier	min_cash	max_cash	loot_table1_chance	loot_table1	loot_table2_chance	loot_table2	loot_table3_chance	loot_table3	collectionRoll	collectionLoot	col_faction	chronicleLootChance	chronicleLootCategory	resources	milk_type	meat_amount	meat_type	hide_amount	hide_type	bone_amount	bone_type	extractable_dna	geneProfile	canTame	wildAbilityList
-TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT	TEXT	TEXT	TEXT	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	REAL NOT NULL	REAL NOT NULL	INTEGER	TEXT	TEXT NOT NULL	REAL	REAL	TEXT	REAL NOT NULL	TEXT	TEXT	REAL	TEXT	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	REAL	INTEGER	REAL	REAL	INTEGER	INTEGER	INTEGER	TEXT	INTEGER	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	INTEGER	TEXT	TEXT NOT NULL	TEXT NOT NULL	INTEGER	TEXT NOT NULL	INTEGER	TEXT NOT NULL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT	REAL	TEXT
-npc_creature.sdb	TRUE																																																																														
-npc_droid.sdb	TRUE																																																																														
-npc_humanoid.sdb	TRUE																																																																														
+file	enabled
+TEXT	BOOLEAN
+npc_creature.sdb	TRUE
+npc_droid.sdb	TRUE
+npc_humanoid_1.sdb	TRUE
+npc_humanoid_2.sdb	TRUE
