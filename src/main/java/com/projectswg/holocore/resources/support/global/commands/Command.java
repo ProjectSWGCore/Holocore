@@ -26,21 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.TargetType;
+
+import java.util.Locale;
 
 public class Command {
 	
-	private int crc;
+	private final String name;
+	private final int crc;
 	
-	private String name;
 	private DefaultPriority defaultPriority;
-	private String scriptHook;
-
-	// fail
-	private String cppHook;
+	
 	private ICmdCallback javaCallback;
 	// fail
-	private float defaultTime;
+	private double defaultTime;
 	private String characterAbility;
 	// posture booleans x63
 	// temp script
@@ -51,7 +51,7 @@ public class Command {
 	private boolean callOnTarget;
 	// command group
 	// disabled
-	private float maxRange;
+	private double maxRange;
 	private int godLevel;
 	// display group
 	private boolean combatCommand;
@@ -59,70 +59,188 @@ public class Command {
 	private int validWeapon;
 	private int invalidWeapon;
 	private String cooldownGroup;
-	private float warmupTime;
-	private float executeTime;
-	private float cooldownTime;
+	private double warmupTime;
+	private double executeTime;
+	private double cooldownTime;
 	private String cooldownGroup2;
-	private float cooldownTime2;
+	private double cooldownTime2;
 	// toolbarOnly
 	// fromServerOnly
 	private boolean autoAddToToolbar;
 	
 	public Command(String name) {
+		assert name.equals(name.toLowerCase(Locale.US));
 		this.name = name;
+		this.crc = CRC.getCrc(name);
 	}
 	
-	public int getCrc() { return crc; }
-	public void setCrc(int crc) { this.crc = crc; }
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
-	public DefaultPriority getDefaultPriority() { return defaultPriority; }
-	public void setDefaultPriority(DefaultPriority defaultPriority) { this.defaultPriority = defaultPriority; }
-	public String getScriptHook() { return scriptHook; }
-	public void setScriptHook(String scriptHook) { this.scriptHook = scriptHook; }
-	public String getCppHook() { return cppHook; }
-	public void setCppHook(String cppHook) { this.cppHook = cppHook; }
-	public ICmdCallback getJavaCallback() { return javaCallback; }
-	public void setJavaCallback(ICmdCallback javaCallback) { this.javaCallback = javaCallback; }
-	public boolean hasJavaCallback() { return javaCallback != null; }
-	public float getDefaultTime() { return defaultTime; }
-	public void setDefaultTime(float defaultTime) { this.defaultTime = defaultTime; }
-	public String getCharacterAbility() { return characterAbility; }
-	public void setCharacterAbility(String characterAbility) { this.characterAbility = characterAbility; }
-	public int getTarget() { return target; }
-	public void setTarget(int target) { this.target = target; }
-	public TargetType getTargetType() { return targetType; }
-	public void setTargetType(TargetType targetType) { this.targetType = targetType; }
-	public boolean isCallOnTarget() { return callOnTarget; }
-	public void setCallOnTarget(boolean callOnTarget) { this.callOnTarget = callOnTarget; }
-	public float getMaxRange() { return maxRange; }
-	public void setMaxRange(float maxRange) { this.maxRange = maxRange; }
-	public int getGodLevel() { return godLevel; }
-	public void setGodLevel(int godLevel) { this.godLevel = godLevel; }
-	public boolean isCombatCommand() { return combatCommand; }
-	public void setCombatCommand(boolean combatCommand) { this.combatCommand = combatCommand; }
-	public boolean isAddToCombatQueue() { return addToCombatQueue; }
-	public void setAddToCombatQueue(boolean addToCombatQueue) { this.addToCombatQueue = addToCombatQueue; }
-	public int getValidWeapon() { return validWeapon; }
-	public void setValidWeapon(int validWeapon) { this.validWeapon = validWeapon; }
-	public int getInvalidWeapon() { return invalidWeapon; }
-	public void setInvalidWeapon(int invalidWeapon) { this.invalidWeapon = invalidWeapon; }
-	public String getCooldownGroup() { return cooldownGroup; }
-	public void setCooldownGroup(String cooldownGroup) { this.cooldownGroup = cooldownGroup; }
-	public float getWarmupTime() { return warmupTime; }
-	public void setWarmupTime(float warmupTime) { this.warmupTime = warmupTime; }
-	public float getExecuteTime() { return executeTime; }
-	public void setExecuteTime(float executeTime) { this.executeTime = executeTime; }
-	public float getCooldownTime() { return cooldownTime; }
-	public void setCooldownTime(float cooldownTime) { this.cooldownTime = cooldownTime; }
-	public String getCooldownGroup2() { return cooldownGroup2; }
-	public void setCooldownGroup2(String cooldownGroup2) { this.cooldownGroup2 = cooldownGroup2; }
-	public float getCooldownTime2() { return cooldownTime2; }
-	public void setCooldownTime2(float cooldownTime2) { this.cooldownTime2 = cooldownTime2; }
-	public boolean isAutoAddToToolbar() { return autoAddToToolbar; }
-	public void setAutoAddToToolbar(boolean autoAddToToolbar) { this.autoAddToToolbar = autoAddToToolbar; }
-
-	public String getDefaultScriptCallback(){ return (scriptHook == null || scriptHook.isEmpty()) ? cppHook : scriptHook; }
+	public String getName() {
+		return name;
+	}
+	
+	public int getCrc() {
+		return crc;
+	}
+	
+	public DefaultPriority getDefaultPriority() {
+		return defaultPriority;
+	}
+	
+	public void setDefaultPriority(DefaultPriority defaultPriority) {
+		this.defaultPriority = defaultPriority;
+	}
+	
+	public ICmdCallback getJavaCallback() {
+		return javaCallback;
+	}
+	
+	public void setJavaCallback(ICmdCallback javaCallback) {
+		this.javaCallback = javaCallback;
+	}
+	
+	public double getDefaultTime() {
+		return defaultTime;
+	}
+	
+	public void setDefaultTime(double defaultTime) {
+		this.defaultTime = defaultTime;
+	}
+	
+	public String getCharacterAbility() {
+		return characterAbility;
+	}
+	
+	public void setCharacterAbility(String characterAbility) {
+		this.characterAbility = characterAbility;
+	}
+	
+	public int getTarget() {
+		return target;
+	}
+	
+	public void setTarget(int target) {
+		this.target = target;
+	}
+	
+	public TargetType getTargetType() {
+		return targetType;
+	}
+	
+	public void setTargetType(TargetType targetType) {
+		this.targetType = targetType;
+	}
+	
+	public boolean isCallOnTarget() {
+		return callOnTarget;
+	}
+	
+	public void setCallOnTarget(boolean callOnTarget) {
+		this.callOnTarget = callOnTarget;
+	}
+	
+	public double getMaxRange() {
+		return maxRange;
+	}
+	
+	public void setMaxRange(double maxRange) {
+		this.maxRange = maxRange;
+	}
+	
+	public int getGodLevel() {
+		return godLevel;
+	}
+	
+	public void setGodLevel(int godLevel) {
+		this.godLevel = godLevel;
+	}
+	
+	public boolean isCombatCommand() {
+		return combatCommand;
+	}
+	
+	public void setCombatCommand(boolean combatCommand) {
+		this.combatCommand = combatCommand;
+	}
+	
+	public boolean isAddToCombatQueue() {
+		return addToCombatQueue;
+	}
+	
+	public void setAddToCombatQueue(boolean addToCombatQueue) {
+		this.addToCombatQueue = addToCombatQueue;
+	}
+	
+	public int getValidWeapon() {
+		return validWeapon;
+	}
+	
+	public void setValidWeapon(int validWeapon) {
+		this.validWeapon = validWeapon;
+	}
+	
+	public int getInvalidWeapon() {
+		return invalidWeapon;
+	}
+	
+	public void setInvalidWeapon(int invalidWeapon) {
+		this.invalidWeapon = invalidWeapon;
+	}
+	
+	public String getCooldownGroup() {
+		return cooldownGroup;
+	}
+	
+	public void setCooldownGroup(String cooldownGroup) {
+		this.cooldownGroup = cooldownGroup;
+	}
+	
+	public double getWarmupTime() {
+		return warmupTime;
+	}
+	
+	public void setWarmupTime(double warmupTime) {
+		this.warmupTime = warmupTime;
+	}
+	
+	public double getExecuteTime() {
+		return executeTime;
+	}
+	
+	public void setExecuteTime(double executeTime) {
+		this.executeTime = executeTime;
+	}
+	
+	public double getCooldownTime() {
+		return cooldownTime;
+	}
+	
+	public void setCooldownTime(double cooldownTime) {
+		this.cooldownTime = cooldownTime;
+	}
+	
+	public String getCooldownGroup2() {
+		return cooldownGroup2;
+	}
+	
+	public void setCooldownGroup2(String cooldownGroup2) {
+		this.cooldownGroup2 = cooldownGroup2;
+	}
+	
+	public double getCooldownTime2() {
+		return cooldownTime2;
+	}
+	
+	public void setCooldownTime2(double cooldownTime2) {
+		this.cooldownTime2 = cooldownTime2;
+	}
+	
+	public boolean isAutoAddToToolbar() {
+		return autoAddToToolbar;
+	}
+	
+	public void setAutoAddToToolbar(boolean autoAddToToolbar) {
+		this.autoAddToToolbar = autoAddToToolbar;
+	}
 	
 	@Override
 	public String toString() {

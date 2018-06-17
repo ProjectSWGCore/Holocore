@@ -9,11 +9,12 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
+import org.jetbrains.annotations.NotNull;
 
 public final class CmdCreateStaticItem implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
 		TangibleObject inventory = (TangibleObject) creature.getSlottedObject("inventory");
 		

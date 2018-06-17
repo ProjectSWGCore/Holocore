@@ -13,7 +13,8 @@ enum CachedLoader {
 	NPC_PATROL_ROUTES	(NpcPatrolRouteLoader::new),
 	NPC_STATS			(NpcStatLoader::new),
 	STATIC_SPAWNS		(NpcStaticSpawnLoader::new),
-	OBJECT_DATA			(ObjectDataLoader::new);
+	OBJECT_DATA			(ObjectDataLoader::new),
+	COMMANDS			(CommandLoader::new);
 	
 	private final AtomicReference<SoftReference<DataLoader>> cachedLoader;
 	private final Supplier<DataLoader> supplier;

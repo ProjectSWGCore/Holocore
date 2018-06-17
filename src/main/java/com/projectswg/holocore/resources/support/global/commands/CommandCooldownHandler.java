@@ -58,8 +58,8 @@ public class CommandCooldownHandler {
 			Command command = enqueued.getCommand();
 			String cooldownGroup1 = command.getCooldownGroup();
 			String cooldownGroup2 = command.getCooldownGroup2();
-			float cooldownTime1 = command.getCooldownTime();
-			float cooldownTime2 = command.getCooldownTime2();
+			double cooldownTime1 = command.getCooldownTime();
+			double cooldownTime2 = command.getCooldownTime2();
 			if (!addValidCooldowns(creature, cooldownGroup1, cooldownGroup2))
 				return false;
 			if (isValidCooldownGroup(cooldownGroup1))
@@ -74,10 +74,10 @@ public class CommandCooldownHandler {
 		return !cooldownGroup.isEmpty() && !cooldownGroup.equals("defaultCooldownGroup");
 	}
 	
-	private void startCooldownGroup(CreatureObject creature, EnqueuedCommand enqueued, String cooldownGroup, float cooldownTime) {
+	private void startCooldownGroup(CreatureObject creature, EnqueuedCommand enqueued, String cooldownGroup, double cooldownTime) {
 		CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 		commandTimer.setCooldownGroupCrc(CRC.getCrc(cooldownGroup));
-		commandTimer.setCooldownMax(cooldownTime);
+		commandTimer.setCooldownMax((float) cooldownTime);
 		commandTimer.setCommandNameCrc(enqueued.getCommand().getCrc());
 		commandTimer.setSequenceId(enqueued.getRequest().getCounter());
 		creature.sendSelf(commandTimer);

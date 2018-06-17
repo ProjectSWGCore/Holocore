@@ -41,6 +41,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 import java.util.Map;
@@ -50,7 +51,7 @@ import java.util.Map;
  */
 public class FindFriendCallback implements ICmdCallback {
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		PlayerObject ghost = player.getPlayerObject();
 
 		if (ghost == null || args.isEmpty())

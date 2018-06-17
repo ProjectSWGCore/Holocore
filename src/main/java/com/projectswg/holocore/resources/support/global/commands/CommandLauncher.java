@@ -125,7 +125,7 @@ public class CommandLauncher {
 		dequeue.setCounter(request.getCounter());
 		dequeue.setAction(action);
 		dequeue.setError(error);
-		dequeue.setTimer(command.getExecuteTime());
+		dequeue.setTimer((float) command.getExecuteTime());
 		player.sendPacket(dequeue);
 	}
 	
@@ -157,9 +157,9 @@ public class CommandLauncher {
 		// TODO: Handle for different target
 		// TODO: Handle for different targetType
 		
-		if (command.hasJavaCallback()) {
+		ICmdCallback callback = command.getJavaCallback();
+		if (callback != null)
 			command.getJavaCallback().execute(player, enqueued.getTarget(), enqueued.getRequest().getArguments());
-		}
 	}
 	
 	public static class EnqueuedCommand implements Comparable<EnqueuedCommand> {

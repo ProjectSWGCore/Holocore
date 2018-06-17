@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands;
 
-import com.projectswg.holocore.resources.support.global.commands.Command;
-
 import java.util.*;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -37,13 +35,11 @@ public class CommandContainer {
 	private final ReadWriteLock					commandLock;
 	private final Map <Integer, Command>		crcToCommand;
 	private final Map <String, Command>			nameToCommand;
-	private final Map <String, List<Command>>	scriptToCommand;
 	
 	public CommandContainer() {
 		this.commandLock = new ReentrantReadWriteLock(true);
 		this.crcToCommand = new HashMap<>();
 		this.nameToCommand = new HashMap<>();
-		this.scriptToCommand = new HashMap<>();
 	}
 	
 	public void clearCommands() {
@@ -51,7 +47,6 @@ public class CommandContainer {
 			commandLock.writeLock().lock();
 			crcToCommand.clear();
 			nameToCommand.clear();
-			scriptToCommand.clear();
 		} finally {
 			commandLock.writeLock().unlock();
 		}
@@ -62,9 +57,6 @@ public class CommandContainer {
 			commandLock.writeLock().lock();
 			crcToCommand.remove(c.getCrc());
 			nameToCommand.remove(c.getName());
-			List<Command> scriptList = getScriptListRaw(c.getDefaultScriptCallback());
-			if (scriptList != null)
-				scriptList.remove(c);
 		} finally {
 			commandLock.writeLock().unlock();
 		}
@@ -73,20 +65,15 @@ public class CommandContainer {
 	public void addCommand(Command c) {
 		try {
 			commandLock.writeLock().lock();
-			createScriptCommandList(c.getDefaultScriptCallback());
 			
 			int crc = c.getCrc();
 			String name = c.getName();
-			List<Command> scriptCommandList = getScriptListRaw(c.getDefaultScriptCallback());
-			
 			assert !crcToCommand.containsKey(crc) : "Command is already in crc table! CRC="+crc + "  Name="+name;
 			assert !nameToCommand.containsKey(name) : "Command is already in name table! CRC="+crc + "  Name="+name;
-			assert !scriptCommandList.contains(c) : "Command is already in scripts table! CRC="+crc + "  Name="+name;
 			assert name.equals(name.toLowerCase(Locale.US)) : "Invalid command name - must be all lowercase";
 			
 			crcToCommand.put(crc, c);
 			nameToCommand.put(name, c);
-			scriptCommandList.add(c);
 		} finally {
 			commandLock.writeLock().unlock();
 		}
@@ -116,25 +103,6 @@ public class CommandContainer {
 		} finally {
 			commandLock.readLock().unlock();
 		}
-	}
-	
-	public List<Command> getScriptCommandList(String script) {
-		try {
-			commandLock.readLock().lock();
-			return new ArrayList<>(getScriptListRaw(script));
-		} finally {
-			commandLock.readLock().unlock();
-		}
-	}
-	
-	/** Note: Not Thread-Safe */
-	private void createScriptCommandList(String script) {
-		scriptToCommand.computeIfAbsent(script, k -> new ArrayList<>());
-	}
-	
-	/** Note: Not Thread-Safe */
-	private List<Command> getScriptListRaw(String script) {
-		return scriptToCommand.get(script);
 	}
 	
 }

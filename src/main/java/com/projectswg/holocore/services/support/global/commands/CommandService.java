@@ -45,7 +45,10 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 import com.projectswg.holocore.resources.support.global.commands.callbacks.admin.qatool.CmdQaTool;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.friend.*;
-import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdCoupDeGrace;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdDuel;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdEndDuel;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdPVP;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.flags.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.generic.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.group.*;
@@ -61,7 +64,6 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
-import java.util.List;
 import java.util.Locale;
 
 public class CommandService extends Service {
@@ -137,7 +139,7 @@ public class CommandService extends Service {
 		long targetId = request.getTargetId();
 		SWGObject target = targetId != 0 ? ObjectLookup.getObjectById(targetId) : null;
 		if (isCommandLogging())
-			commandLogger.log("%-25s[from: %s, script: %s, target: %s]", command.getName(), player.getCreatureObject().getObjectName(), command.getDefaultScriptCallback(), target);
+			commandLogger.log("%-25s[from: %s, target: %s]", command.getName(), player.getCreatureObject().getObjectName(), target);
 		
 		EnqueuedCommand enqueued = new EnqueuedCommand(command, target, request);
 		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
@@ -183,10 +185,18 @@ public class CommandService extends Service {
 			
 			Command command = new Command(commandName);
 			
-			command.setCrc(CRC.getCrc(commandName));
-			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
-			command.setScriptHook((String) cmdRow[2]);
-			command.setCppHook((String) cmdRow[4]);
+			switch ((int) cmdRow[1]) {
+				case 0:
+					command.setDefaultPriority(DefaultPriority.IMMEDIATE);
+					break;
+				case 1:
+					command.setDefaultPriority(DefaultPriority.FRONT);
+					break;
+				case 2:
+				default:
+					command.setDefaultPriority(DefaultPriority.NORMAL);
+					break;
+			}
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
@@ -194,7 +204,24 @@ public class CommandService extends Service {
 			command.setCooldownGroup2((String) cmdRow[cooldownGroup2]);
 			command.setCooldownTime((float) cmdRow[cooldownTime]);
 			command.setCooldownTime2((float) cmdRow[cooldownTime2]);
-			command.setTargetType(TargetType.getTargetType((int) cmdRow[targetType]));
+			// e(none=0,required=1,optional=2)[none]
+			switch ((int) cmdRow[targetType]) {
+				case 0:
+				default:
+					command.setTargetType(TargetType.NONE);
+					break;
+				case 1:
+					command.setTargetType(TargetType.REQUIRED);
+					break;
+				case 2:
+					command.setTargetType(TargetType.OPTIONAL);
+					break;
+				case 3:
+					command.setTargetType(TargetType.LOCATION);
+				case 4:
+					command.setTargetType(TargetType.ALL);
+					break;
+			}
 			
 			// Ziggy: The amount of columns in the table seems to change for each row
 			if (cmdRow.length >= 83) {
@@ -216,9 +243,6 @@ public class CommandService extends Service {
 	
 	private CombatCommand createAsCombatCommand(Command c) {
 		CombatCommand cc = new CombatCommand(c.getName());
-		cc.setCrc(c.getCrc());
-		cc.setScriptHook(c.getScriptHook());
-		cc.setCppHook(c.getScriptHook());
 		cc.setDefaultTime(c.getDefaultTime());
 		cc.setCharacterAbility(c.getCharacterAbility());
 		cc.setGodLevel(c.getGodLevel());
@@ -316,22 +340,11 @@ public class CommandService extends Service {
 		return cell.split(",");
 	}
 	
-	private void registerCallback(String command, ICmdCallback callback) {
-		command = command.toLowerCase(Locale.ENGLISH);
-		Command comand = commandContainer.getCommand(command);
-		registerCallback(comand, callback);
-	}
-	
-	private void registerCallback(Command command, ICmdCallback callback) {
+	private void registerCallback(String commandName, ICmdCallback callback) {
+		commandName = commandName.toLowerCase(Locale.ENGLISH);
+		Command command = commandContainer.getCommand(commandName);
+		assert command != null;
 		command.setJavaCallback(callback);
-		
-		List<Command> scriptCommands = commandContainer.getScriptCommandList(command.getDefaultScriptCallback());
-		for (Command unregistered : scriptCommands) {
-			if (unregistered != command && !unregistered.hasJavaCallback()) {
-				registerCallback(unregistered, command.getJavaCallback());
-			}
-		}
-		
 	}
 	
 	private void registerCallbacks() {
