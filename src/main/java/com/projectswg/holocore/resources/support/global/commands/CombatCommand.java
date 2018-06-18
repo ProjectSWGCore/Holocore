@@ -28,40 +28,70 @@ package com.projectswg.holocore.resources.support.global.commands;
 
 import com.projectswg.common.data.combat.*;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CombatCommand extends Command {
 	
-	private ValidTarget validTarget;
-	private boolean forceCombat;
-	private Map<WeaponType, String[]> animations;
-	private String [] defaultAnimation;
-	private AttackType attackType;
-	private double healthCost;
-	private double actionCost;
-	private DamageType damageType;
-	private boolean ignoreDistance;
-	private boolean pvpOnly;
-	private int attackRolls;
-	private float percentAddFromWeapon;
-	private int addedDamage;
-	private String buffNameTarget;
-	private String buffNameSelf;
-	private HitType hitType;
-	private String delayAttackEggTemplate;
-	private String delayAttackParticle;
-	private float initialDelayAttackInterval;
-	private float delayAttackInterval;
-	private int delayAttackLoops;
-	private DelayAttackEggPosition eggPosition;
-	private float coneLength;
-	private HealAttrib healAttrib;
+	private final ValidTarget validTarget;
+	private final boolean forceCombat;
+	private final Map<WeaponType, String[]> animations;
+	private final String [] defaultAnimation;
+	private final AttackType attackType;
+	private final double healthCost;
+	private final double actionCost;
+	private final DamageType damageType;
+	private final boolean ignoreDistance;
+	private final boolean pvpOnly;
+	private final int attackRolls;
+	private final double percentAddFromWeapon;
+	private final int addedDamage;
+	private final String buffNameTarget;
+	private final String buffNameSelf;
+	private final HitType hitType;
+	private final String delayAttackEggTemplate;
+	private final String delayAttackParticle;
+	private final double initialDelayAttackInterval;
+	private final double delayAttackInterval;
+	private final int delayAttackLoops;
+	private final DelayAttackEggPosition eggPosition;
+	private final double coneLength;
+	private final HealAttrib healAttrib;
 	
-	public CombatCommand(String name) {
-		super(name);
-		animations = new HashMap<>();
+	private CombatCommand(CombatCommandBuilder builder) {
+		super(builder);
+		this.validTarget = builder.validTarget;
+		this.forceCombat = builder.forceCombat;
+		this.animations = builder.animations;
+		this.defaultAnimation = Objects.requireNonNull(builder.defaultAnimation, "defaultAnimation");
+		this.attackType = builder.attackType;
+		this.healthCost = builder.healthCost;
+		this.actionCost = builder.actionCost;
+		this.damageType = builder.damageType;
+		this.ignoreDistance = builder.ignoreDistance;
+		this.pvpOnly = builder.pvpOnly;
+		this.attackRolls = builder.attackRolls;
+		this.percentAddFromWeapon = builder.percentAddFromWeapon;
+		this.addedDamage = builder.addedDamage;
+		this.buffNameTarget = builder.buffNameTarget;
+		this.buffNameSelf = builder.buffNameSelf;
+		this.hitType = builder.hitType;
+		this.delayAttackEggTemplate = builder.delayAttackEggTemplate;
+		this.delayAttackParticle = builder.delayAttackParticle;
+		this.initialDelayAttackInterval = builder.initialDelayAttackInterval;
+		this.delayAttackInterval = builder.delayAttackInterval;
+		this.delayAttackLoops = builder.delayAttackLoops;
+		this.eggPosition = builder.eggPosition;
+		this.coneLength = builder.coneLength;
+		this.healAttrib = builder.healAttrib;
+	}
+	
+	@Override
+	public boolean isCombatCommand() {
+		return true;
 	}
 	
 	public ValidTarget getValidTarget() {
@@ -70,6 +100,26 @@ public class CombatCommand extends Command {
 	
 	public boolean isForceCombat() {
 		return forceCombat;
+	}
+	
+	@NotNull
+	public String[] getAnimations(WeaponType type) {
+		return animations.getOrDefault(type, new String[0]);
+	}
+	
+	@NotNull
+	public String getRandomAnimation(WeaponType type) {
+		String [] animations = this.animations.get(type);
+		if (animations == null || animations.length == 0)
+			animations = defaultAnimation;
+		if (animations == null || animations.length == 0)
+			return "";
+		return animations[(int) (Math.random() * animations.length)];
+	}
+	
+	@NotNull
+	public String[] getDefaultAnimation() {
+		return defaultAnimation;
 	}
 	
 	public AttackType getAttackType() {
@@ -100,165 +150,226 @@ public class CombatCommand extends Command {
 		return attackRolls;
 	}
 	
-	public String [] getDefaultAnimations() {
-		return defaultAnimation;
-	}
-	
-	public String getRandomAnimation(WeaponType type) {
-		String [] animations = this.animations.get(type);
-		if (animations == null || animations.length == 0)
-			animations = defaultAnimation;
-		if (animations == null || animations.length == 0)
-			return "";
-		return animations[(int) (Math.random() * animations.length)];
-	}
-	
-	public void setValidTarget(ValidTarget validTarget) {
-		this.validTarget = validTarget;
-	}
-	
-	public void setForceCombat(boolean forceCombat) {
-		this.forceCombat = forceCombat;
-	}
-	
-	public void setAttackType(AttackType attackType) {
-		this.attackType = attackType;
-	}
-	
-	public void setHealthCost(double healthCost) {
-		this.healthCost = healthCost;
-	}
-	
-	public void setActionCost(double actionCost) {
-		this.actionCost = actionCost;
-	}
-	
-	public void setDamageType(DamageType damageType) {
-		this.damageType = damageType;
-	}
-	
-	public void setIgnoreDistance(boolean ignoreDistance) {
-		this.ignoreDistance = ignoreDistance;
-	}
-	
-	public void setPvpOnly(boolean pvpOnly) {
-		this.pvpOnly = pvpOnly;
-	}
-	
-	public void setAttackRolls(int attackRolls) {
-		this.attackRolls = attackRolls;
-	}
-	
-	public void setDefaultAnimation(String [] animations) {
-		this.defaultAnimation = animations;
-	}
-	
-	public void setAnimations(WeaponType type, String [] animations) {
-		this.animations.put(type, animations);
-	}
-
-	public float getPercentAddFromWeapon() {
+	public double getPercentAddFromWeapon() {
 		return percentAddFromWeapon;
 	}
-
-	public void setPercentAddFromWeapon(float percentAddFromWeapon) {
-		this.percentAddFromWeapon = percentAddFromWeapon;
-	}
-
+	
 	public int getAddedDamage() {
 		return addedDamage;
 	}
 	
-	public void setAddedDamage(int addedDamage) {
-		this.addedDamage = addedDamage;
-	}
-
 	public String getBuffNameTarget() {
 		return buffNameTarget;
 	}
-
-	public void setBuffNameTarget(String buffNameTarget) {
-		this.buffNameTarget = buffNameTarget;
-	}
-
+	
 	public String getBuffNameSelf() {
 		return buffNameSelf;
 	}
-
-	public void setBuffNameSelf(String buffNameSelf) {
-		this.buffNameSelf = buffNameSelf;
-	}
-
+	
 	public HitType getHitType() {
 		return hitType;
 	}
-
-	public void setHitType(HitType hitType) {
-		this.hitType = hitType;
-	}
-
+	
 	public String getDelayAttackEggTemplate() {
 		return delayAttackEggTemplate;
 	}
-
-	public void setDelayAttackEggTemplate(String delayAttackEggTemplate) {
-		this.delayAttackEggTemplate = delayAttackEggTemplate;
-	}
-
+	
 	public String getDelayAttackParticle() {
 		return delayAttackParticle;
 	}
-
-	public void setDelayAttackParticle(String delayAttackParticle) {
-		this.delayAttackParticle = delayAttackParticle;
-	}
-
-	public float getInitialDelayAttackInterval() {
+	
+	public double getInitialDelayAttackInterval() {
 		return initialDelayAttackInterval;
 	}
-
-	public void setInitialDelayAttackInterval(float initialDelayAttackInterval) {
-		this.initialDelayAttackInterval = initialDelayAttackInterval;
-	}
-
-	public float getDelayAttackInterval() {
+	
+	public double getDelayAttackInterval() {
 		return delayAttackInterval;
 	}
-
-	public void setDelayAttackInterval(float delayAttackInterval) {
-		this.delayAttackInterval = delayAttackInterval;
-	}
-
-	public float getDelayAttackLoops() {
+	
+	public int getDelayAttackLoops() {
 		return delayAttackLoops;
 	}
-
-	public void setDelayAttackLoops(int delayAttackLoops) {
-		this.delayAttackLoops = delayAttackLoops;
-	}
-
+	
 	public DelayAttackEggPosition getEggPosition() {
 		return eggPosition;
 	}
-
-	public void setEggPosition(DelayAttackEggPosition eggPosition) {
-		this.eggPosition = eggPosition;
-	}
-
-	public float getConeLength() {
+	
+	public double getConeLength() {
 		return coneLength;
 	}
-
-	public void setConeLength(float coneLength) {
-		this.coneLength = coneLength;
-	}
-
+	
 	public HealAttrib getHealAttrib() {
 		return healAttrib;
 	}
 	
-	public void setHealAttrib(HealAttrib healAttrib) {
-		this.healAttrib = healAttrib;
+	public static CombatCommandBuilder builder() {
+		return new CombatCommandBuilder();
 	}
 	
+	public static CombatCommandBuilder builder(Command source) {
+		return new CombatCommandBuilder(source);
+	}
+	
+	public static class CombatCommandBuilder extends CommandBuilder {
+		
+		private final Map<WeaponType, String[]> animations;
+		
+		private ValidTarget validTarget;
+		private boolean forceCombat;
+		private String [] defaultAnimation;
+		private AttackType attackType;
+		private double healthCost;
+		private double actionCost;
+		private DamageType damageType;
+		private boolean ignoreDistance;
+		private boolean pvpOnly;
+		private int attackRolls;
+		private double percentAddFromWeapon;
+		private int addedDamage;
+		private String buffNameTarget;
+		private String buffNameSelf;
+		private HitType hitType;
+		private String delayAttackEggTemplate;
+		private String delayAttackParticle;
+		private double initialDelayAttackInterval;
+		private double delayAttackInterval;
+		private int delayAttackLoops;
+		private DelayAttackEggPosition eggPosition;
+		private double coneLength;
+		private HealAttrib healAttrib;
+		
+		private CombatCommandBuilder() {
+			this.animations = new HashMap<>();
+		}
+		
+		private CombatCommandBuilder(Command command) {
+			super(command);
+			this.animations = new HashMap<>();
+		}
+		
+		public CombatCommandBuilder withValidTarget(ValidTarget validTarget) {
+			this.validTarget = validTarget;
+			return this;
+		}
+		
+		public CombatCommandBuilder withForceCombat(boolean forceCombat) {
+			this.forceCombat = forceCombat;
+			return this;
+		}
+		
+		public CombatCommandBuilder withAnimations(WeaponType type, String[] animations) {
+			this.animations.put(type, animations);
+			return this;
+		}
+		
+		public CombatCommandBuilder withDefaultAnimation(String[] defaultAnimation) {
+			this.defaultAnimation = defaultAnimation;
+			return this;
+		}
+		
+		public CombatCommandBuilder withAttackType(AttackType attackType) {
+			this.attackType = attackType;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHealthCost(double healthCost) {
+			this.healthCost = healthCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withActionCost(double actionCost) {
+			this.actionCost = actionCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withDamageType(DamageType damageType) {
+			this.damageType = damageType;
+			return this;
+		}
+		
+		public CombatCommandBuilder withIgnoreDistance(boolean ignoreDistance) {
+			this.ignoreDistance = ignoreDistance;
+			return this;
+		}
+		
+		public CombatCommandBuilder withPvpOnly(boolean pvpOnly) {
+			this.pvpOnly = pvpOnly;
+			return this;
+		}
+		
+		public CombatCommandBuilder withAttackRolls(int attackRolls) {
+			this.attackRolls = attackRolls;
+			return this;
+		}
+		
+		public CombatCommandBuilder withPercentAddFromWeapon(double percentAddFromWeapon) {
+			this.percentAddFromWeapon = percentAddFromWeapon;
+			return this;
+		}
+		
+		public CombatCommandBuilder withAddedDamage(int addedDamage) {
+			this.addedDamage = addedDamage;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBuffNameTarget(String buffNameTarget) {
+			this.buffNameTarget = buffNameTarget;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBuffNameSelf(String buffNameSelf) {
+			this.buffNameSelf = buffNameSelf;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHitType(HitType hitType) {
+			this.hitType = hitType;
+			return this;
+		}
+		
+		public CombatCommandBuilder withDelayAttackEggTemplate(String delayAttackEggTemplate) {
+			this.delayAttackEggTemplate = delayAttackEggTemplate;
+			return this;
+		}
+		
+		public CombatCommandBuilder withDelayAttackParticle(String delayAttackParticle) {
+			this.delayAttackParticle = delayAttackParticle;
+			return this;
+		}
+		
+		public CombatCommandBuilder withInitialDelayAttackInterval(double initialDelayAttackInterval) {
+			this.initialDelayAttackInterval = initialDelayAttackInterval;
+			return this;
+		}
+		
+		public CombatCommandBuilder withDelayAttackInterval(double delayAttackInterval) {
+			this.delayAttackInterval = delayAttackInterval;
+			return this;
+		}
+		
+		public CombatCommandBuilder withDelayAttackLoops(int delayAttackLoops) {
+			this.delayAttackLoops = delayAttackLoops;
+			return this;
+		}
+		
+		public CombatCommandBuilder withEggPosition(DelayAttackEggPosition eggPosition) {
+			this.eggPosition = eggPosition;
+			return this;
+		}
+		
+		public CombatCommandBuilder withConeLength(double coneLength) {
+			this.coneLength = coneLength;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHealAttrib(HealAttrib healAttrib) {
+			this.healAttrib = healAttrib;
+			return this;
+		}
+		
+		public CombatCommand build() {
+			return new CombatCommand(this);
+		}
+		
+	}
 }

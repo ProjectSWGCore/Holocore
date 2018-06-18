@@ -36,18 +36,24 @@ import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
-import com.projectswg.holocore.intents.support.global.command.ChatCommandIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
+import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
@@ -55,12 +61,6 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -275,22 +275,22 @@ public final class LootService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleChatCommand(ChatCommandIntent cci) {
+	private void handleExecuteCommandIntent(ExecuteCommandIntent eci) {
 		
-		if (!cci.getCommand().getName().equalsIgnoreCase("loot")) {
+		if (!eci.getCommand().getName().equalsIgnoreCase("loot")) {
 			return;
 		}
 		
-		SWGObject target = cci.getTarget();
+		SWGObject target = eci.getTarget();
 		
 		if (target == null) {
 			return;
 		}
 		
-		if (!getLootPermission(cci.getSource(), target))
+		if (!getLootPermission(eci.getSource(), target))
 			return;
 		
-		lootAll(cci.getSource(), target);
+		lootAll(eci.getSource(), target);
 	}
 	
 	@IntentHandler

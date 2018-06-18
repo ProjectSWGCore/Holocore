@@ -47,4 +47,8 @@ public abstract class DataLoader {
 		return (ObjectDataLoader) CachedLoader.OBJECT_DATA.load();
 	}
 	
+	public static CommandLoader commands() {
+		return (CommandLoader) CachedLoader.COMMANDS.load();
+	}
+	
 }
