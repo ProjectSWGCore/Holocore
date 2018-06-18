@@ -99,9 +99,9 @@ public class AINavigationSupport {
 	public static Location getNextStepTo(@NotNull Location source, @NotNull Location destination, double minRange, double maxRange, double speed) {
 		double currentDistance = source.distanceTo(destination);
 		if (currentDistance < minRange)
-			return interpolate(source, destination, -speed / currentDistance);
+			return interpolate(source, destination, Math.min(speed, currentDistance - minRange) / currentDistance);
 		if (currentDistance > maxRange)
-			return interpolate(source, destination, speed / currentDistance);
+			return interpolate(source, destination, Math.min(speed, currentDistance - maxRange) / currentDistance);
 		return source;
 	}
 	
@@ -118,9 +118,7 @@ public class AINavigationSupport {
 		double currentDistance = source.distanceTo(destination);
 		if (currentDistance <= range)
 			return source;
-		if (currentDistance <= speed)
-			return destination;
-		return interpolate(source, destination, speed / currentDistance);
+		return interpolate(source, destination, Math.min(speed, currentDistance - range) / currentDistance);
 	}
 	
 	/**
