@@ -31,6 +31,7 @@ import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
+import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
@@ -49,6 +50,7 @@ import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.OffsetTime;
 import java.util.*;
 
@@ -108,7 +110,17 @@ public class ProjectSWG {
 		IntentManager.getInstance().initialize();
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
+		initializeServerFactory();
 		setupGalaxy();
+	}
+	
+	// TODO: Replace all iffs with sdbs
+	private static void initializeServerFactory() {
+		try {
+			ServerFactory.getInstance().updateServerIffs();
+		} catch (IOException e) {
+			Log.e(e);
+		}
 	}
 	
 	private static void shutdownStaticClasses() {
