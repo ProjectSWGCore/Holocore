@@ -10,9 +10,9 @@ build
 .gradle
 
 # Holocore
-clientdata/
-log/
-cfg/
-odb/
+/clientdata/
+/log/
+/cfg/
+/odb/
 *.db
 *.iff
