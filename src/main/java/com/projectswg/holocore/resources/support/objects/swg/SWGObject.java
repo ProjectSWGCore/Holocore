@@ -308,9 +308,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public List<SWGObject> getSlottedObjects() {
-		return slots.values().stream()
-				.filter(Objects::nonNull)
-				.collect(Collectors.toList());
+		List<SWGObject> slots = new ArrayList<>(this.slots.values());
+		slots.removeIf(Objects::isNull);
+		return slots;
 	}
 	
 	public void setOwner(Player player) {
@@ -413,8 +413,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (owner != null)
 			return owner;
 
-		if (getParent() != null)
-			return getParent().getOwner();
+		SWGObject parent = this.parent;
+		assert parent != this;
+		if (parent != null)
+			return parent.getOwner();
 		
 		return null;
 	}

@@ -44,11 +44,11 @@ droid_union_sentry_2	object/weapon/ranged/droid/droid_union_sentry_02.iff
 ewok_melee	object/weapon/melee/polearm/lance_staff_wood_s1.iff;object/weapon/melee/polearm/lance_staff_wood_s2.iff
 ewok_ranged	object/weapon/ranged/rifle/rifle_ewok_crossbow.iff
 force_maul	object/weapon/melee/2h_sword/2h_sword_maul_force.iff
-force_nyax	object/weapon/melee/sword/sword_nyax_force.iff
+force_nyax	object/weapon/melee/sword/sword_nyax.iff
 force_polearm	object/weapon/melee/polearm/lance_staff_janta.iff;object/weapon/melee/polearm/lance_vibrolance.iff;object/weapon/melee/polearm/lance_staff_metal.iff;object/weapon/melee/polearm/polearm_vibro_axe.iff
 force_sword	object/weapon/melee/sword/sword_01.iff;object/weapon/melee/sword/sword_02.iff;object/weapon/melee/2h_sword/2h_sword_maul.iff;object/weapon/melee/sword/sword_nyax.iff
-force_sword_melee	object/weapon/melee/sword/sword_01_force.iff
-force_sword_ranged	object/weapon/melee/sword/sword_02_ranged_donotuse_force.iff
+force_sword_melee	object/weapon/melee/sword/sword_01.iff
+force_sword_ranged	object/weapon/melee/sword/sword_02.iff
 general_carbine	object/weapon/ranged/carbine/carbine_laser.iff;object/weapon/ranged/carbine/carbine_ee3.iff;object/weapon/ranged/carbine/carbine_dxr6.iff;object/weapon/ranged/carbine/carbine_e11.iff
 general_grievous	object/weapon/melee/polearm/lance_lightsaber_01.iff
 general_pistol	object/weapon/ranged/pistol/pistol_d18.iff;object/weapon/ranged/pistol/pistol_dl44_metal.iff;object/weapon/ranged/pistol/pistol_power5.iff;object/weapon/ranged/pistol/pistol_striker.iff
@@ -113,8 +113,8 @@ sword_special	object/weapon/melee/sword/sword_acid.iff
 tusken_melee	object/weapon/melee/baton/baton_gaderiffi.iff
 tusken_ranged	object/weapon/ranged/rifle/rifle_tusken.iff
 unarmed	object/weapon/melee/unarmed/unarmed_default.iff
-undead_melee_01	object/weapon/melee/sword/sword_02.iff;object/weapon/melee/baton/baton_stun.iff;object/weapon/melee/sword/sword_nyax_force.iff;object/weapon/melee/baton/baton_gaderiffi.iff
-undead_melee_02	object/weapon/melee/sword/sword_01.iff;object/weapon/melee/knife/knife_stone.iff;object/weapon/melee/sword/sword_nyax_force.iff;object/weapon/melee/knife/knife_survival.iff
+undead_melee_01	object/weapon/melee/sword/sword_02.iff;object/weapon/melee/baton/baton_stun.iff;object/weapon/melee/sword/sword_nyax.iff;object/weapon/melee/baton/baton_gaderiffi.iff
+undead_melee_02	object/weapon/melee/sword/sword_01.iff;object/weapon/melee/knife/knife_stone.iff;object/weapon/melee/sword/sword_nyax.iff;object/weapon/melee/knife/knife_survival.iff
 undead_weapon_imp	object/weapon/ranged/carbine/carbine_e11.iff;object/weapon/ranged/rifle/rifle_t21.iff;object/weapon/ranged/rifle/rifle_dlt20a.iff;object/weapon/ranged/rifle/rifle_e11.iff
 undead_weapon_reb	object/weapon/ranged/rifle/rifle_t21.iff;object/weapon/ranged/rifle/rifle_dlt20a.iff;object/weapon/ranged/rifle/rifle_laser.iff;object/weapon/ranged/rifle/rifle_sg82.iff
 vehicle_atst	object/weapon/ranged/vehicle/vehicle_atst_ranged.iff

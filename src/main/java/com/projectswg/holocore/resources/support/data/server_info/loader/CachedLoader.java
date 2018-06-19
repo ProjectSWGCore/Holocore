@@ -12,6 +12,7 @@ enum CachedLoader {
 	NPC_LOADER			(NpcLoader::new),
 	NPC_PATROL_ROUTES	(NpcPatrolRouteLoader::new),
 	NPC_STATS			(NpcStatLoader::new),
+	NPC_WEAPONS			(NpcWeaponLoader::new),
 	STATIC_SPAWNS		(NpcStaticSpawnLoader::new),
 	OBJECT_DATA			(ObjectDataLoader::new),
 	COMMANDS			(CommandLoader::new);

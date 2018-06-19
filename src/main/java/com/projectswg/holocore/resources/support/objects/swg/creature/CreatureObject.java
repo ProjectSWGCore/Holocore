@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFacto
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -127,6 +128,13 @@ public class CreatureObject extends TangibleObject {
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
 		removeEquipment(obj);
+	}
+	
+	@NotNull
+	public SWGObject getInventory() {
+		SWGObject inventory = getSlottedObject("inventory");
+		assert inventory != null;
+		return inventory;
 	}
 	
 	@Override

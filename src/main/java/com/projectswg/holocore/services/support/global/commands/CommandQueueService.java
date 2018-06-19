@@ -64,19 +64,18 @@ public class CommandQueueService extends Service {
 		} else if (p instanceof LookAtTarget) {
 			if (((LookAtTarget) p).getTargetId() == 0)
 				combatQueueMap.remove(gpi.getPlayer().getCreatureObject());
-		} else if (p instanceof IntendedTarget) {
-			if (((IntendedTarget) p).getTargetId() == 0)
-				combatQueueMap.remove(gpi.getPlayer().getCreatureObject());
 		}
 	}
 	
 	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		CreatureObject creature = pei.getPlayer().getCreatureObject();
 		switch (pei.getEvent()) {
 			case PE_LOGGED_OUT:
 				// No reason to keep their combat queue in the map if they log out
 				// This also prevents queued commands from executing after the player logs out
-				combatQueueMap.remove(pei.getPlayer().getCreatureObject());
+				if (creature != null)
+					combatQueueMap.remove(creature);
 				break;
 			default:
 				break;

@@ -34,7 +34,7 @@ public class CommandLoader extends DataLoader {
 	}
 	
 	public Command getCommand(String command) {
-		return commandNameMap.get(command);
+		return commandNameMap.get(command.toLowerCase(Locale.US));
 	}
 	
 	public List<Command> getCommandByCallback(String callback) {

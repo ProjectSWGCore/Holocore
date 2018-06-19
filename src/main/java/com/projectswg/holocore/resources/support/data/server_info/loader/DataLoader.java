@@ -35,6 +35,10 @@ public abstract class DataLoader {
 		return (NpcPatrolRouteLoader) CachedLoader.NPC_PATROL_ROUTES.load();
 	}
 	
+	public static NpcWeaponLoader npcWeapons() {
+		return (NpcWeaponLoader) CachedLoader.NPC_WEAPONS.load();
+	}
+	
 	public static NpcStatLoader npcStats() {
 		return (NpcStatLoader) CachedLoader.NPC_STATS.load();
 	}
