@@ -36,8 +36,6 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.*;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
