@@ -52,6 +52,7 @@ import me.joshlarson.jlcommon.log.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TravelHelper {
 	
@@ -61,7 +62,7 @@ public class TravelHelper {
 	private final TravelPointManager pointManager;
 	
 	public TravelHelper() {
-		this.travel = new HashMap<>();
+		this.travel = new ConcurrentHashMap<>();
 		this.travelExecutor = new ThreadPool(3, "travel-shuttles-%d");
 		this.routeManager = new AllowedRouteManager();
 		this.pointManager = new TravelPointManager();
@@ -268,11 +269,11 @@ public class TravelHelper {
 		private final Map<Terrain, Map<Terrain, Integer>> routeCosts;
 		
 		public AllowedRouteManager() {
-			this.routeCosts = new HashMap<>();
+			this.routeCosts = new ConcurrentHashMap<>();
 		}
 		
 		public void addRoute(Terrain departure, Terrain destination, int fee) {
-			Map<Terrain, Integer> departureCosts = routeCosts.computeIfAbsent(departure, k -> new HashMap<>());
+			Map<Terrain, Integer> departureCosts = routeCosts.computeIfAbsent(departure, k -> new ConcurrentHashMap<>());
 			departureCosts.put(destination, fee);
 		}
 		

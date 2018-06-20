@@ -4,6 +4,8 @@
 Holocore.iml
 out
 .idea
+.classpath
+.project
 
 # Gradle
 build
@@ -14,5 +16,6 @@ build
 /log/
 /cfg/
 /odb/
+/bin/
 *.db
 *.iff
