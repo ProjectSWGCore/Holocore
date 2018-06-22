@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TravelPointManager {
 	
@@ -40,8 +41,8 @@ public class TravelPointManager {
 	private final Map<Terrain, List<TravelPoint>> starportPoints;
 	
 	public TravelPointManager() {
-		this.shuttlePoints = new HashMap<>();
-		this.starportPoints = new HashMap<>();
+		this.shuttlePoints = new ConcurrentHashMap<>();
+		this.starportPoints = new ConcurrentHashMap<>();
 	}
 	
 	public void addTravelPoint(TravelPoint point) {
