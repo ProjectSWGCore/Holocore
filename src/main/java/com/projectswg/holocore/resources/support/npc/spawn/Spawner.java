@@ -239,6 +239,10 @@ public final class Spawner {
 		return npc.getSecondaryWeaponSpeed();
 	}
 	
+	public boolean isDeathblow() {
+		return npc.isDeathblow();
+	}
+	
 	public String getLootTable1() {
 		return npc.getLootTable1();
 	}

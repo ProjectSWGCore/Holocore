@@ -33,6 +33,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
@@ -58,6 +59,7 @@ public class NPCCreator {
 		object.setObjectName(spawner.getName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getDifficulty());
+		object.setDeathblow(spawner.isDeathblow());
 		object.setMaxHealth(spawner.getHealth());
 		object.setHealth(spawner.getHealth());
 		object.setMaxAction(spawner.getAction());
@@ -180,6 +182,11 @@ public class NPCCreator {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
 			weapon.setMinDamage(spawner.getDamagePerSecond());
 			weapon.setMaxDamage(spawner.getDamagePerSecond());
+			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
+			if (range == -1)
+				Log.w("Failed to load weapon range for: %s", template);
+			weapon.setMinRange(range);
+			weapon.setMaxRange(range);
 			return weapon;
 		} catch (ObjectCreationException e) {
 			Log.w("Weapon template does not exist: %s", template);

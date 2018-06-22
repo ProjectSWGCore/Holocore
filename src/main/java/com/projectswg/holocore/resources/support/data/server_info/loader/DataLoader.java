@@ -39,6 +39,10 @@ public abstract class DataLoader {
 		return (NpcWeaponLoader) CachedLoader.NPC_WEAPONS.load();
 	}
 	
+	public static NpcWeaponRangeLoader npcWeaponRanges() {
+		return (NpcWeaponRangeLoader) CachedLoader.NPC_WEAPON_RANGES.load();
+	}
+	
 	public static NpcStatLoader npcStats() {
 		return (NpcStatLoader) CachedLoader.NPC_STATS.load();
 	}

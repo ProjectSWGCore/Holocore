@@ -97,6 +97,8 @@ public class AINavigationSupport {
 	 * @return the next location to move to
 	 */
 	public static Location getNextStepTo(@NotNull Location source, @NotNull Location destination, double minRange, double maxRange, double speed) {
+		assert minRange <= maxRange : "min range must be less than max range";
+		assert minRange >= 0 : "min range must be greater than or equal to zero";
 		double currentDistance = source.distanceTo(destination);
 		if (currentDistance < minRange)
 			return interpolate(source, destination, Math.min(speed, currentDistance - minRange) / currentDistance);

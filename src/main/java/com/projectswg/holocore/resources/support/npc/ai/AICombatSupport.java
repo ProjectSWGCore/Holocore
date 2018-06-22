@@ -1,9 +1,8 @@
 package com.projectswg.holocore.resources.support.npc.ai;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -24,10 +23,12 @@ public class AICombatSupport {
 	
 	private final AIObject obj;
 	private final AtomicReference<Location> returnLocation;
+	private final AtomicReference<CreatureObject> previousTarget;
 	
 	public AICombatSupport(AIObject obj) {
 		this.obj = obj;
 		this.returnLocation = new AtomicReference<>(null);
+		this.previousTarget = new AtomicReference<>(null);
 	}
 	
 	public boolean isExecuting() {
@@ -37,26 +38,37 @@ public class AICombatSupport {
 	
 	public void reset() {
 		returnLocation.set(null);
+		previousTarget.set(null);
 	}
 	
 	public void act() {
 		returnLocation.compareAndSet(null, obj.getLocation());
-		if (obj.isInCombat()) {
+		Log.d("Has Vendetta: %b", hasVendetta());
+		if (obj.isInCombat() || hasVendetta()) {
 			performCombatAction();
 		} else {
 			performResetAction();
 		}
 	}
 	
+	private boolean hasVendetta() {
+		CreatureObject previousTarget = this.previousTarget.get();
+		return previousTarget != null && previousTarget.hasBuff("incapWeaken") && obj.isDeathblow();
+	}
+	
 	private void performCombatAction() {
 		CreatureObject target = getPrimaryTarget();
 		if (target == null)
 			return;
+		previousTarget.set(target);
+		
 		WeaponObject weapon = obj.getEquippedWeapon();
 		double speed = obj.getRunSpeed() * SPEED_MOD;
-		Location nextStep = AINavigationSupport.getNextStepTo(obj.getLocation(), target.getLocation(), Math.max(1, weapon.getMinRange()+1), Math.min(1, weapon.getMaxRange()-1), speed);
+		Location nextStep = AINavigationSupport.getNextStepTo(obj.getLocation(), target.getLocation(), 1, Math.max(1, weapon.getMaxRange()-1), speed);
 		MoveObjectIntent.broadcast(obj, obj.getParent(), nextStep, speed, obj.getNextUpdateCount());
-		attack(target, weapon);
+		
+		if (target.getPosture() != Posture.INCAPACITATED && target.getPosture() != Posture.DEAD)
+			attack(target, weapon);
 	}
 	
 	private void performResetAction() {
@@ -71,6 +83,10 @@ public class AICombatSupport {
 			return;
 		obj.setIntendedTargetId(target.getObjectId());
 		obj.setLookAtTargetId(target.getObjectId());
+		if (target.getPosture() == Posture.INCAPACITATED) {
+			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0);
+			return;
+		}
 		switch (weapon.getType()) {
 			case PISTOL:
 				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("rangedShotPistol"), 0);

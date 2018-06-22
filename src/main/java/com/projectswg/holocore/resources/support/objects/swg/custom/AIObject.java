@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AIObject extends CreatureObject {
 	
@@ -52,6 +53,7 @@ public abstract class AIObject extends CreatureObject {
 	private final List<WeaponObject> primaryWeapons;
 	private final List<WeaponObject> secondaryWeapons;
 	private final SWGObject hiddenInventory;
+	private final AtomicBoolean deathblow;
 	
 	private ScheduledThreadPool executor;
 	private ScheduledMode mode;
@@ -65,6 +67,7 @@ public abstract class AIObject extends CreatureObject {
 		this.primaryWeapons = new ArrayList<>();
 		this.secondaryWeapons = new ArrayList<>();
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
+		this.deathblow = new AtomicBoolean(false);
 		
 		this.executor = null;
 		this.mode = null;
@@ -90,6 +93,14 @@ public abstract class AIObject extends CreatureObject {
 			return false;
 		Posture theirPosture = ((CreatureObject) obj).getPosture();
 		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
+	}
+	
+	public void setDeathblow(boolean deathblow) {
+		this.deathblow.set(deathblow);
+	}
+	
+	public boolean isDeathblow() {
+		return deathblow.get();
 	}
 	
 	public void addPrimaryWeapon(WeaponObject weapon) {
