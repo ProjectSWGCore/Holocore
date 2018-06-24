@@ -29,7 +29,6 @@ package com.projectswg.holocore.utilities.clientdata_printer;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.Log.LogLevel;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 
 public class ClientdataPrinterDatatable {
@@ -42,7 +41,7 @@ public class ClientdataPrinterDatatable {
 	private static void printTable(String table) {
 		DatatableData data = (DatatableData) ClientFactory.getInfoFromFile(table);
 		for (int col = 0; col < data.getColumnCount(); col++) {
-			System.out.print(data.getColumnName(col) + ",");
+			System.out.print(data.getColumnName(col) + ',');
 		}
 		System.out.println();
 		for (int row = 0; row < data.getRowCount(); row++) {

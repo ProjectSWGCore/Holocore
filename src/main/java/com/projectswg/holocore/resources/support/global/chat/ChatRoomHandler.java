@@ -266,7 +266,7 @@ public class ChatRoomHandler {
 		
 		String galaxy = ProjectSWG.getGalaxy().getName();
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar();
-		String basePath = "SWG." + galaxy + ".";
+		String basePath = "SWG." + galaxy + '.';
 		
 		DatatableData rooms = ServerFactory.getDatatable("chat/default_rooms.iff");
 		rooms.handleRows((r) -> createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false));
@@ -281,7 +281,7 @@ public class ChatRoomHandler {
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {
 		DatatableData planets = ServerFactory.getDatatable("chat/planets.iff");
 		planets.handleRows((r) -> {
-			String path = basePath + planets.getCell(r, 0) + ".";
+			String path = basePath + planets.getCell(r, 0) + '.';
 			createRoom(systemAvatar, true, false, path + "Planet", "public chat for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "system", "system messages for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "Chat", "public chat for this planet, can create rooms here", false);

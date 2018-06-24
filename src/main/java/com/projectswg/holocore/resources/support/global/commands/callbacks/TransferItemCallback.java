@@ -236,19 +236,18 @@ public class TransferItemCallback implements ICmdCallback {
 	}
 
 	private static String cleanProfessionString(String profession) {
-		return profession.substring(0, profession.lastIndexOf("_"));
+		return profession.substring(0, profession.lastIndexOf('_'));
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {
 		if (equip) {
 			// The equipped weapon must now be set to the target object
 			actor.setEquippedWeapon((WeaponObject) target);
-			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 		} else {
 			// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 			actor.setEquippedWeapon(null);
-			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 		}
+		actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 	}
 	
 	private static void applyEffect(CreatureObject actor, SWGObject target, boolean equip) {

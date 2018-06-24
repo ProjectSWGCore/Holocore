@@ -20,6 +20,7 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.TurningAIObj
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,8 @@ public enum RadialHandler {
 	INSTANCE;
 	
 	private final Map<String, RadialHandlerInterface> handlers = new HashMap<>();
-	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new HashMap<>();
-	private final Map<GameObjectTypeMask, RadialHandlerInterface> gotmHandlers = new HashMap<>();
+	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new EnumMap<>(GameObjectType.class);
+	private final Map<GameObjectTypeMask, RadialHandlerInterface> gotmHandlers = new EnumMap<>(GameObjectTypeMask.class);
 	private final Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>();
 	private final SWGObjectRadial genericRadialHandler = new SWGObjectRadial();
 	

@@ -1,7 +1,5 @@
 package com.projectswg.holocore.services.support.global.commands;
 
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
@@ -20,14 +18,12 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.gener
 import com.projectswg.holocore.resources.support.global.commands.callbacks.group.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestCoreSample;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestSurvey;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 

@@ -167,7 +167,7 @@ public class CreatureObjectAwareness {
 				target.sendPacket(new UpdatePostureMessage(creature.getPosture().getId(), id));
 				
 				Set<PvpFlag> flags = PvpFlag.getFlags(creature.getPvpFlags());
-				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, flags.toArray(new PvpFlag[flags.size()])));
+				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, flags.toArray(new PvpFlag[0])));
 			}
 			if (obj instanceof TangibleObject) {
 				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();

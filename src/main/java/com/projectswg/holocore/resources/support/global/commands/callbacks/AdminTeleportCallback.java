@@ -70,7 +70,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 		if (cmd.length > 4) {
 			teleportObject = PlayerLookup.getCharacterByFirstName(cmd[0]);
 			if (teleportObject == null) {
-				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+"'");
+				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+ '\'');
 				return;
 			}
 		}

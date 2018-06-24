@@ -18,23 +18,29 @@ public final class CmdCreateStaticItem implements ICmdCallback {
 		CreatureObject creature = player.getCreatureObject();
 		TangibleObject inventory = (TangibleObject) creature.getSlottedObject("inventory");
 		
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.ObjectCreationHandler() {
-			
-			@Override
-			public void success(SWGObject[] createdObjects) {
-				new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
-			}
-			
-			@Override
-			public void containerFull() {
-				new SystemMessageIntent(player, "@system_msg:give_item_failure").broadcast();
-			}
-			
-			@Override
-			public boolean isIgnoreVolume() {
-				return true;    // This is an admin command - coontainer restrictions is for peasants!
-			}
-		}, ContainerPermissionsType.DEFAULT, args).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new CreateStaticItemCallback(player), ContainerPermissionsType.DEFAULT, args).broadcast();
 	}
 	
+	private static class CreateStaticItemCallback extends StaticItemService.ObjectCreationHandler {
+		
+		@NotNull
+		private final Player player;
+		
+		public CreateStaticItemCallback(@NotNull Player player) {this.player = player;}
+		
+		@Override
+		public void success(SWGObject[] createdObjects) {
+			new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
+		}
+		
+		@Override
+		public void containerFull() {
+			new SystemMessageIntent(player, "@system_msg:give_item_failure").broadcast();
+		}
+		
+		@Override
+		public boolean isIgnoreVolume() {
+			return true;    // This is an admin command - coontainer restrictions is for peasants!
+		}
+	}
 }

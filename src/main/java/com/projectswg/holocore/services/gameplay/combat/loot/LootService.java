@@ -544,18 +544,7 @@ public final class LootService extends Service {
 					
 					lootGenerated = true;
 				} else {
-					new CreateStaticItemIntent(killer, lootInventory, new StaticItemService.ObjectCreationHandler() {
-						
-						@Override
-						public void success(SWGObject[] createdObjects) {
-							// do nothing - loot disc is created on the return of the generateLoot method
-						}
-						
-						@Override
-						public boolean isIgnoreVolume() {
-							return true;
-						}
-					}, ContainerPermissionsType.LOOT, itemName).broadcast();
+					new CreateStaticItemIntent(killer, lootInventory, new CreateStaticItemCallback(), ContainerPermissionsType.LOOT, itemName).broadcast();
 					
 					lootGenerated = true;
 				}
@@ -692,4 +681,16 @@ public final class LootService extends Service {
 		}
 	}
 	
+	private static class CreateStaticItemCallback extends StaticItemService.ObjectCreationHandler {
+		
+		@Override
+		public void success(SWGObject[] createdObjects) {
+			// do nothing - loot disc is created on the return of the generateLoot method
+		}
+		
+		@Override
+		public boolean isIgnoreVolume() {
+			return true;
+		}
+	}
 }

@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public final class ObjectDataLoader extends DataLoader {
 					j++;
 				}
 				if (j >= mapping.length)
-					System.err.println("Could not find " + columns.get(0));
+					Log.e("ObjectDataLoader could not find " + columns.get(0));
 				ObjectDataAttribute tmp = mapping[j];
 				mapping[j] = mapping[i];
 				mapping[i] = tmp;

@@ -172,7 +172,7 @@ public class Command {
 	
 	@Override
 	public String toString() {
-		return name + ":" + crc;
+		return name + ':' + crc;
 	}
 	
 	@Override

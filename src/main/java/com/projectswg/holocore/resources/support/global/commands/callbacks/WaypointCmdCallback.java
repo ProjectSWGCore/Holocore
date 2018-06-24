@@ -171,11 +171,11 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (differentPlanetMessage) {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
 					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
-					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ')').broadcast();
 		} else {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
 					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
-					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+					+ ", "+ String.format("%.0f", location.getZ()) + ')').broadcast();
 		}
 	}
 

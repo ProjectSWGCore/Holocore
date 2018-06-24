@@ -413,7 +413,7 @@ public class EntertainmentService extends Service {
 	/**
 	 * Data pulled from the performance.iff table
 	 */
-	private class PerformanceData {
+	private static class PerformanceData {
 		
 		private final String performanceId;
 		private final int flourishXpMod;

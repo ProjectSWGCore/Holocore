@@ -30,7 +30,7 @@ import com.projectswg.common.data.combat.*;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -239,12 +239,12 @@ public class CombatCommand extends Command {
 		private HealAttrib healAttrib;
 		
 		private CombatCommandBuilder() {
-			this.animations = new HashMap<>();
+			this.animations = new EnumMap<>(WeaponType.class);
 		}
 		
 		private CombatCommandBuilder(Command command) {
 			super(command);
-			this.animations = new HashMap<>();
+			this.animations = new EnumMap<>(WeaponType.class);
 		}
 		
 		public CombatCommandBuilder withValidTarget(ValidTarget validTarget) {

@@ -87,7 +87,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(e.encode());
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			Log.e(ex);
 		}
 	}
 	

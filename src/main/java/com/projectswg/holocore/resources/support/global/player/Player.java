@@ -192,7 +192,7 @@ public class Player implements Comparable<Player> {
 		str += (creatureObject==null?"null":creatureObject.getObjectId());
 		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
-		return str + "]";
+		return str + ']';
 	}
 	
 	@Override

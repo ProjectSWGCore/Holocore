@@ -137,7 +137,7 @@ public class GuildObject extends SWGObject {
 		
 		@Override
 		public String toString() {
-			return lastUpdateTime + ":" + percentage + "%";
+			return lastUpdateTime + ":" + percentage + '%';
 		}
 	}
 	
@@ -167,7 +167,7 @@ public class GuildObject extends SWGObject {
 		
 		@Override
 		public String toString() {
-			return zone + ":" + percentage + "%";
+			return zone + ':' + percentage + '%';
 		}
 	}
 	

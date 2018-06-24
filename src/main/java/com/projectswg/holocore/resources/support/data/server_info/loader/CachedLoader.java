@@ -43,4 +43,8 @@ enum CachedLoader {
 		return loader;
 	}
 	
+	public void freeMemory() {
+		cachedLoader.set(null);
+	}
+	
 }

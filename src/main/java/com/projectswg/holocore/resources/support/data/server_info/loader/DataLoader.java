@@ -11,6 +11,12 @@ public abstract class DataLoader {
 	
 	protected abstract void load() throws IOException;
 	
+	public static void freeMemory() {
+		for (CachedLoader loader : CachedLoader.values()) {
+			loader.freeMemory();
+		}
+	}
+	
 	public static BuildoutLoader buildouts() {
 		return BuildoutLoader.load(AreaLoader.load());
 	}

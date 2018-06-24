@@ -59,10 +59,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -308,9 +308,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public List<SWGObject> getSlottedObjects() {
-		List<SWGObject> slots = new ArrayList<>(this.slots.values());
-		slots.removeIf(Objects::isNull);
-		return slots;
+		synchronized (this.slots) {
+			List<SWGObject> slots = new ArrayList<>(this.slots.size());
+			SWGObject obj;
+			for (Entry<String,SWGObject> e : this.slots.entrySet()) {
+				obj = e.getValue();
+				if (obj != null)
+					slots.add(obj);
+			}
+			return slots;
+		}
 	}
 	
 	public void setOwner(Player player) {
@@ -767,7 +774,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	public int compareTo(SWGObject obj) {
+	public int compareTo(@NotNull SWGObject obj) {
 		return Long.compare(objectId, obj.getObjectId());
 	}
 	

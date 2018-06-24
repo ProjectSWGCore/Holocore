@@ -109,7 +109,7 @@ public class LoginService extends Service {
 		Config c = DataManager.getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
-		return name + ":" + id;
+		return name + ':' + id;
 	}
 	
 	private void handleLagRequest(Player player) {

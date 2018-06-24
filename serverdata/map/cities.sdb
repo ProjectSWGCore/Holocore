@@ -21,7 +21,7 @@ INTEGER PRIMARY KEY AUTOINCREMENT	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	I
 19	@kashyyyk_region_names:kachirho	kashyyyk	-530	-90	225
 20	@lok_region_names:lok_nyms_stronghold	lok	436	5120	429
 21	@lok_region_names:lok_imperial_outpost	lok	-1920	-3084	201
-22	@naboo_region_names:kaadara	circle	5168	6704	320
+22	@naboo_region_names:kaadara	naboo	5168	6704	320
 23	@naboo_region_names:keren	naboo	336	2140	2512
 24	@naboo_region_names:moenia	naboo	4800	-4784	336
 25	@naboo_region_names:theed	naboo	-6160	3920	-4480

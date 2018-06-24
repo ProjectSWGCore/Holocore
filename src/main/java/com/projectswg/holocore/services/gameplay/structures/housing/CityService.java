@@ -26,38 +26,36 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.structures.housing;
 
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class CityService extends Service {
 	
-	private static final String GET_ALL_CITIES = "SELECT * FROM cities";
-	
 	private final Map<Terrain, List<City>> cities;
 	
 	public CityService() {
-		cities = new HashMap<>();
+		cities = new EnumMap<>(Terrain.class);
 	}
 	
 	@Override
@@ -96,15 +94,13 @@ public class CityService extends Service {
 	
 	private void loadCities() {
 		cities.clear();
-		try (RelationalDatabase db = RelationalServerFactory.getServerData("map/cities.db", "cities")) {
-			try (ResultSet set = db.executeQuery(GET_ALL_CITIES)) {
-				while (set.next()) {
-					Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-					List<City> list = cities.computeIfAbsent(t, k -> new ArrayList<>());
-					list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
-				}
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/map/cities.sdb"))) {
+			while (set.next()) {
+				Terrain t = Terrain.getTerrainFromName(set.getText("terrain"));
+				List<City> list = cities.computeIfAbsent(t, k -> new ArrayList<>());
+				list.add(new City(set.getText("city"), (int) set.getInt("x"), (int) set.getInt("z"), (int) set.getInt("radius")));
 			}
-		} catch (SQLException e) {
+		} catch (IOException e) {
 			Log.e(e);
 		}
 	}

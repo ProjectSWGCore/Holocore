@@ -32,6 +32,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatr
 import com.projectswg.holocore.resources.support.npc.ai.AINavigationSupport;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -114,7 +115,10 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void addToPlannedRoute(SWGObject parent, Location location) {
-		plannedRoute.add(() -> MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount()));
+		plannedRoute.add(() -> {
+			MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount());
+			Log.d("AI Log: %s moving to %s @ %s", this, location, parent);
+		});
 	}
 	
 	private void addNopToPlannedRoute() {

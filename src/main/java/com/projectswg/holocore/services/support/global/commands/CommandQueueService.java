@@ -7,7 +7,6 @@ import com.projectswg.holocore.intents.support.global.command.ExecuteCommandInte
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.player.Player;

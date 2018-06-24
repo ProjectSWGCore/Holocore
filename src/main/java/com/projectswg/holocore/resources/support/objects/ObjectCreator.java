@@ -65,7 +65,7 @@ public final class ObjectCreator {
 	
 	@NotNull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
-		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + "'";
+		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + '\'';
 		template = ClientFactory.formatToSharedFile(template);
 		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
 		if (attributes == null)

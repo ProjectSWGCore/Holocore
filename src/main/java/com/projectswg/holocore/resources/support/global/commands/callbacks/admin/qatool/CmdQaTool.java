@@ -119,7 +119,7 @@ public class CmdQaTool implements ICmdCallback {
 		args = args.trim();
 		CreatureObject recoveree = PlayerLookup.getCharacterByFirstName(args);
 		if (recoveree == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + "'");
+			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + '\'');
 			return;
 		}
 		
