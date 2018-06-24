@@ -290,7 +290,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableCollection(containedObjects);
+		return Collections.unmodifiableSet(containedObjects);
 	}
 	
 	public void setSlots(@NotNull Collection<String> slots) {
@@ -304,6 +304,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setSlot(@NotNull String name, @NotNull SWGObject value) {
 		slots.put(name, value);
+	}
+	
+	public void clearSlot(@NotNull String name) {
+		slots.remove(name);
 	}
 	
 	@NotNull
@@ -370,8 +374,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		Terrain terrain = getTerrain();
 		containedObjects.forEach(child -> child.setTerrain(terrain));
 		for (SWGObject child : slots.values()) {
-			if (child != null)
-				child.setTerrain(terrain);
+			child.setTerrain(terrain);
 		}
 	}
 	
@@ -644,7 +647,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return Arrangement ID for the object
 	 */
 	public int getArrangementId(SWGObject object) {
-		if (slots.size() == 0 || object.getArrangement() == null)
+		if (slotsAvailable.isEmpty() || object.getArrangement() == null)
 			return -1;
 
 		int arrangementId = 4;
