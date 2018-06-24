@@ -32,7 +32,6 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatr
 import com.projectswg.holocore.resources.support.npc.ai.AINavigationSupport;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -79,21 +78,21 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void createPlannedRoute() {
-		{ // Creates the full route
-			Location prevLocation = getLocation();
-			SWGObject prevParent = getParent();
-			for (ResolvedPatrolWaypoint waypoint : waypoints) {
+		Location prevLocation = getLocation();
+		SWGObject prevParent = getParent();
+		for (ResolvedPatrolWaypoint waypoint : waypoints) {
+			appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
+			prevParent = waypoint.getParent();
+			prevLocation = waypoint.getLocation();
+		}
+		if (patrolType.get() == PatrolType.FLIP) {
+			List<ResolvedPatrolWaypoint> waypointsReverse = new ArrayList<>(waypoints);
+			Collections.reverse(waypointsReverse);
+			for (ResolvedPatrolWaypoint waypoint : waypointsReverse) {
 				appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
 				prevParent = waypoint.getParent();
 				prevLocation = waypoint.getLocation();
 			}
-		}
-		
-		// Creates a route in reverse for flip patrol types
-		if (patrolType.get() == PatrolType.FLIP) {
-			List<Runnable> reversed = new ArrayList<>(plannedRoute);
-			Collections.reverse(reversed);
-			plannedRoute.addAll(reversed);
 		}
 	}
 	
@@ -115,10 +114,7 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void addToPlannedRoute(SWGObject parent, Location location) {
-		plannedRoute.add(() -> {
-			MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount());
-			Log.d("AI Log: %s moving to %s @ %s", this, location, parent);
-		});
+		plannedRoute.add(() -> MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount()));
 	}
 	
 	private void addNopToPlannedRoute() {
