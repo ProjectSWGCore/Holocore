@@ -26,9 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +57,7 @@ public class ObjectAware {
 	
 	public void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
 		Set<SWGObject> oldAware = awareness.put(type, createSet(objects));
+		assert oldAware != null : "initialized in constructor";
 		Map<SWGObject, Integer> awareCounts = getAwareCounts();
 		oldAware.removeAll(objects);
 		for (SWGObject removed : oldAware) {
@@ -89,7 +90,7 @@ public class ObjectAware {
 	
 	@NotNull
 	public Set<SWGObject> getAware(@NotNull AwarenessType type) {
-		return awareness.getOrDefault(type, EMPTY_SET);
+		return Collections.unmodifiableSet(awareness.getOrDefault(type, EMPTY_SET));
 	}
 	
 	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {

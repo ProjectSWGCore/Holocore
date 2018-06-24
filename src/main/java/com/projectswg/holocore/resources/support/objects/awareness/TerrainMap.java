@@ -48,6 +48,7 @@ public class TerrainMap {
 				chunks[z][x] = new TerrainMapChunk();
 			}
 		}
+		connectChunkNeighbors();
 	}
 	
 	public void add(SWGObject obj) {
@@ -67,7 +68,13 @@ public class TerrainMap {
 	}
 	
 	public void move(SWGObject obj) {
-		TerrainMapChunk chunk = chunks[calculateIndex(obj.getTruncZ())][calculateIndex(obj.getTruncX())];
+		int chunkCount = CHUNK_COUNT_ACROSS;
+		int indX = (obj.getTruncX()+8192) >> INDEX_FACTOR;
+		int indZ = (obj.getTruncZ()+8192) >> INDEX_FACTOR;
+		indX = (indX < 0) ? 0 : (indX >= chunkCount ? chunkCount-1 : indX);
+		indZ = (indZ < 0) ? 0 : (indZ >= chunkCount ? chunkCount-1 : indZ);
+		
+		TerrainMapChunk chunk = chunks[indZ][indX];
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
 		if (current != chunk) {
 			if (current != null)
@@ -77,7 +84,7 @@ public class TerrainMap {
 	}
 	
 	@NotNull
-	private Collection<SWGObject> getAware(SWGObject obj) {
+	private static Collection<SWGObject> getAware(SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
 		Set<SWGObject> aware;
 		if (AwarenessUtilities.notInAwareness(obj))
@@ -85,45 +92,33 @@ public class TerrainMap {
 		else if (superParent == null)
 			aware = getNearbyAware(obj);
 		else
-			aware = superParent.getAware(AwarenessType.OBJECT);
+			aware = new HashSet<>(superParent.getAware(AwarenessType.OBJECT));
 		aware.removeIf(AwarenessUtilities::notInAwareness);
 		recursiveAdd(aware, obj);
 		return aware;
 	}
 	
 	@NotNull
-	private Set<SWGObject> getNearbyAware(SWGObject obj) {
-		int countAcross = CHUNK_COUNT_ACROSS;
-		int sX = ((obj.getTruncX()+8192) >> INDEX_FACTOR) - 1;
-		int sZ = ((obj.getTruncZ()+8192) >> INDEX_FACTOR) - 1;
-		int eX = sX + 2;
-		int eZ = sZ + 2;
-		if (sX < 0)
-			sX = 0;
-		if (sZ < 0)
-			sZ = 0;
-		if (eX < 0)
-			eX = 0;
-		if (eZ < 0)
-			eZ = 0;
-		if (sX >= countAcross)
-			sX = countAcross-1;
-		if (sZ >= countAcross)
-			sZ = countAcross-1;
-		if (eX >= countAcross)
-			eX = countAcross-1;
-		if (eZ >= countAcross)
-			eZ = countAcross-1;
-		
-		Set<SWGObject> aware = new HashSet<>();
-		if (obj.getAwareness().getTerrainMapChunk() != null) {
-			for (int z = sZ; z <= eZ; ++z) {
-				for (int x = sX; x <= eX; ++x) {
-					chunks[z][x].getWithinAwareness(obj, aware);
+	private static Set<SWGObject> getNearbyAware(SWGObject obj) {
+		TerrainMapChunk chunk = obj.getAwareness().getTerrainMapChunk();
+		return chunk == null ? new HashSet<>() : chunk.getWithinAwareness(obj);
+	}
+	
+	private void connectChunkNeighbors() {
+		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
+			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
+				TerrainMapChunk chunk = chunks[z][x];
+				for (int tmpZ = z-1; tmpZ <= z+1 && tmpZ < CHUNK_COUNT_ACROSS; tmpZ++) {
+					if (tmpZ < 0)
+						continue;
+					for (int tmpX = x-1; tmpX <= x+1 && tmpX < CHUNK_COUNT_ACROSS; tmpX++) {
+						if (tmpX < 0)
+							continue;
+						chunk.link(chunks[tmpZ][tmpX]);
+					}
 				}
 			}
 		}
-		return aware;
 	}
 	
 	private static void recursiveAdd(@NotNull Collection<SWGObject> aware, @NotNull SWGObject obj) {
@@ -134,15 +129,6 @@ public class TerrainMap {
 		for (SWGObject child : obj.getContainedObjects()) {
 			recursiveAdd(aware, child);
 		}
-	}
-	
-	private static int calculateIndex(int x) {
-		int i = (x+8192) >> INDEX_FACTOR;
-		if (i < 0)
-			return 0;
-		if (i >= CHUNK_COUNT_ACROSS)
-			return CHUNK_COUNT_ACROSS-1;
-		return i;
 	}
 	
 }

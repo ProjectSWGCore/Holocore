@@ -82,7 +82,7 @@ public class NPCCreator {
 		setFlags(object, spawner.getSpawnerFlag());
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
-		object.moveToContainer(spawner.getEgg().getParent());
+		object.systemMove(spawner.getEgg().getParent());
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
 	}

@@ -104,8 +104,10 @@ public class AwarenessService extends Service {
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		obj.systemMove(null, GONE_LOCATION);
-		awareness.destroyObject(doi.getObject());
+		synchronized (obj.getAwarenessLock()) {
+			obj.systemMove(null, GONE_LOCATION);
+			awareness.destroyObject(doi.getObject());
+		}
 	}
 	
 	@IntentHandler
@@ -113,8 +115,10 @@ public class AwarenessService extends Service {
 		SWGObject obj = oti.getObject();
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
 			if (oti.getNewLocation().getTerrain() == obj.getTerrain() && oti.getNewLocation().distanceTo(obj.getLocation()) <= 1024) {
-				obj.systemMove(oti.getParent(), oti.getNewLocation());
-				awareness.updateObject(obj);
+				synchronized (obj.getAwarenessLock()) {
+					obj.systemMove(oti.getParent(), oti.getNewLocation());
+					awareness.updateObject(obj);
+				}
 				if (oti.getParent() != null)
 					obj.getOwner().sendPacket(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), oti.getNewLocation(), 7.3f));
 				else
@@ -123,8 +127,10 @@ public class AwarenessService extends Service {
 				handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
 			}
 		} else {
-			obj.systemMove(oti.getParent(), oti.getNewLocation());
-			awareness.updateObject(obj);
+			synchronized (obj.getAwarenessLock()) {
+				obj.systemMove(oti.getParent(), oti.getNewLocation());
+				awareness.updateObject(obj);
+			}
 		}
 	}
 	
@@ -177,14 +183,16 @@ public class AwarenessService extends Service {
 			return;
 		}
 		
-		creature.systemMove(parent, loc);
-		creature.setOwner(null);
-		creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		creature.resetObjectsAware();
-		creature.setOwner(player);
-		startZone(creature, firstZone);
-		creature.addObjectsAware();
-		awareness.updateObject(creature);
+		synchronized (creature.getAwarenessLock()) {
+			creature.systemMove(parent, loc);
+			creature.setOwner(null);
+			creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
+			creature.resetObjectsAware();
+			creature.setOwner(player);
+			startZone(creature, firstZone);
+			creature.addObjectsAware();
+			awareness.updateObject(creature);
+		}
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {
@@ -248,8 +256,10 @@ public class AwarenessService extends Service {
 //			dataTransformHandler.handleMove(vehicle, speed, update);
 //			awareness.moveObject(obj, null, requestedLocation);
 		} else {
-			obj.systemMove(parent, requestedLocation);
-			awareness.updateObject(obj);
+			synchronized (obj.getAwarenessLock()) {
+				obj.systemMove(parent, requestedLocation);
+				awareness.updateObject(obj);
+			}
 			if (parent == null) {
 				dataTransformHandler.handleMove(obj, speed, update);
 			} else {
