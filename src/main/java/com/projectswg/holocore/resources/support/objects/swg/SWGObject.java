@@ -60,6 +60,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -69,8 +70,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
 	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
-	private final Map <String, SWGObject>			slots			= Collections.synchronizedMap(new HashMap<>());
+	private final Map <String, SWGObject>			slots			= new ConcurrentHashMap<>();
 	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
+	private final Set<String>						slotsAvailable	= new CopyOnWriteArraySet<>();
 	private final ObjectAware						awareness		= new ObjectAware(this);
 	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
@@ -139,7 +141,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			setVolume(getVolume() - object.getVolume() - 1);
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
-				setSlot(requiredSlot, null);
+				slots.remove(requiredSlot);
 			}
 		}
 		
@@ -288,36 +290,30 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableSet(containedObjects);
-	}
-
-	public boolean hasSlot(String slotName) {
-		return slots.containsKey(slotName);
+		return Collections.unmodifiableCollection(containedObjects);
 	}
 	
-	public void setSlot(String name, SWGObject value) {
+	public void setSlots(@NotNull Collection<String> slots) {
+		this.slotsAvailable.clear();
+		this.slotsAvailable.addAll(slots);
+	}
+
+	public boolean hasSlot(@NotNull String slotName) {
+		return slotsAvailable.contains(slotName);
+	}
+	
+	public void setSlot(@NotNull String name, @NotNull SWGObject value) {
 		slots.put(name, value);
 	}
-
-	public boolean hasSlottedObject(SWGObject obj) {
-		return slots.containsValue(obj);
-	}
 	
+	@NotNull
 	public Map<String, SWGObject> getSlots() {
-		return new HashMap<>(slots);
+		return Collections.unmodifiableMap(slots);
 	}
 	
-	public List<SWGObject> getSlottedObjects() {
-		synchronized (this.slots) {
-			List<SWGObject> slots = new ArrayList<>(this.slots.size());
-			SWGObject obj;
-			for (Entry<String,SWGObject> e : this.slots.entrySet()) {
-				obj = e.getValue();
-				if (obj != null)
-					slots.add(obj);
-			}
-			return slots;
-		}
+	@NotNull
+	public Collection<SWGObject> getSlottedObjects() {
+		return Collections.unmodifiableCollection(slots.values());
 	}
 	
 	public void setOwner(Player player) {

@@ -191,9 +191,7 @@ public final class ObjectCreator {
 			if (descriptor == null)
 				return;
 			
-			for (String slotName : descriptor.getSlots()) {
-				object.setSlot(slotName, null);
-			}
+			object.setSlots(descriptor.getSlots());
 		}
 		
 		if (!arrangementDescriptor.isEmpty()) {
