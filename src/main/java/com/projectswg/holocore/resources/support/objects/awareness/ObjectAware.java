@@ -58,24 +58,26 @@ public class ObjectAware {
 	public void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
 		Set<SWGObject> oldAware = awareness.put(type, createSet(objects));
 		assert oldAware != null : "initialized in constructor";
-		Map<SWGObject, Integer> awareCounts = getAwareCounts();
-		oldAware.removeAll(objects);
+		
+		boolean flush = false;
 		for (SWGObject removed : oldAware) {
-			removed.getAwareness().removeAware(type, object);
-			if (!awareCounts.containsKey(removed)) {
+			if (objects.contains(removed))
+				continue;
+			if (removed.getAwareness().removeAware(type, object)) {
 				object.onObjectLeaveAware(removed);
+				flush = true;
 			}
 		}
 		
 		for (SWGObject added : objects) {
-			added.getAwareness().addAware(type, object);
-			Integer count = awareCounts.get(added);
-			if (count != null && count == 1) {
+			if (added.getAwareness().addAware(type, object)) {
 				object.onObjectEnterAware(added);
+				flush = true;
 			}
 		}
 		
-		attemptFlush();
+		if (flush)
+			attemptFlush();
 	}
 	
 	@NotNull
@@ -102,27 +104,23 @@ public class ObjectAware {
 		return chunk.get();
 	}
 	
-	private void addAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.add(obj)) {
-			Map<SWGObject, Integer> awareCounts = getAwareCounts();
-			Integer count = awareCounts.get(obj);
-			if (count != null && count == 1) {
-				object.onObjectEnterAware(obj);
-				attemptFlush();
-			}
+	private boolean addAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
+		boolean added = notAware(obj);
+		if (awareness.get(type).add(obj) && added) {
+			object.onObjectEnterAware(obj);
+			attemptFlush();
+			return true;
 		}
-		
+		return false;
 	}
 	
-	private void removeAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.remove(obj)) {
-			if (getAwareStream().noneMatch(test -> test.equals(obj))) {
-				object.onObjectLeaveAware(obj);
-				attemptFlush();
-			}
+	private boolean removeAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
+		if (awareness.get(type).remove(obj) && notAware(obj)) {
+			object.onObjectLeaveAware(obj);
+			attemptFlush();
+			return true;
 		}
+		return false;
 	}
 	
 	private void attemptFlush() {
@@ -134,8 +132,24 @@ public class ObjectAware {
 		return awareness.values().stream().flatMap(Collection::stream);
 	}
 	
+	private boolean notAware(SWGObject test) {
+		for (Collection<SWGObject> aware : awareness.values()) {
+			for (SWGObject obj : aware) {
+				if (obj == test)
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	private Map<SWGObject, Integer> getAwareCounts() {
-		return awareness.values().stream().flatMap(Collection::stream).collect(Collectors.toMap(obj -> obj, obj -> 1, (prev, next) -> prev + next));
+		Map<SWGObject, Integer> counts = new HashMap<>();
+		for (Collection<SWGObject> aware : awareness.values()) {
+			for (SWGObject obj : aware) {
+				counts.put(obj, counts.getOrDefault(obj, 0) + 1);
+			}
+		}
+		return counts;
 	}
 	
 	private static Set<SWGObject> createSet() {
@@ -143,7 +157,7 @@ public class ObjectAware {
 	}
 	
 	private static Set<SWGObject> createSet(Collection<SWGObject> objects) {
-		Set<SWGObject> set = ConcurrentHashMap.newKeySet();
+		Set<SWGObject> set = ConcurrentHashMap.newKeySet(objects.size());
 		set.addAll(objects);
 		return set;
 	}
