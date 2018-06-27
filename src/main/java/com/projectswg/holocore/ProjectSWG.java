@@ -38,6 +38,7 @@ import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedRecord;
 import me.joshlarson.jlcommon.control.Manager;
@@ -86,32 +87,28 @@ public class ProjectSWG {
 		
 		Log.i("Holocore version: %s", VERSION);
 		
-		startupStaticClasses();
-		setupParameters(args);
-		List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager());
-		managers.forEach(m -> m.setIntentManager(IntentManager.getInstance()));
-		
-		setStatus(ServerStatus.INITIALIZING);
-		if (Manager.start(managers)) {
-			setStatus(ServerStatus.OPEN);
-			Manager.run(managers, 50);
-		}
-		setStatus(ServerStatus.TERMINATING);
-		Manager.stop(managers);
-		
-		shutdownStaticClasses();
-		printFinalPswgState();
-		return 0;
-	}
-	
-	private static void startupStaticClasses() {
-		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()));
-		assert IntentManager.getInstance() != null;
-		IntentManager.getInstance().initialize();
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
 		initializeServerFactory();
 		setupGalaxy();
+		setupParameters(args);
+		try (IntentManager intentManager = new IntentManager(false, Runtime.getRuntime().availableProcessors(), 8)) {
+			IntentManager.setInstance(intentManager);
+			List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager());
+			managers.forEach(m -> m.setIntentManager(intentManager));
+			
+			setStatus(ServerStatus.INITIALIZING);
+			if (Manager.start(managers)) {
+				setStatus(ServerStatus.OPEN);
+				Manager.run(managers, 50);
+			}
+			setStatus(ServerStatus.TERMINATING);
+			Manager.stop(managers);
+		}
+		
+		shutdownStaticClasses();
+		printFinalPswgState();
+		return 0;
 	}
 	
 	// TODO: Replace all iffs with sdbs
@@ -124,9 +121,7 @@ public class ProjectSWG {
 	}
 	
 	private static void shutdownStaticClasses() {
-		assert IntentManager.getInstance() != null;
 		DataManager.terminate();
-		IntentManager.getInstance().terminate();
 		ScheduledUtilities.shutdown();
 	}
 	
