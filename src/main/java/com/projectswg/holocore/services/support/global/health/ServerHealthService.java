@@ -12,10 +12,13 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
+import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.lang.management.OperatingSystemMXBean;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class ServerHealthService extends Service {
 	
@@ -23,14 +26,19 @@ public class ServerHealthService extends Service {
 	
 	private final ScheduledThreadPool executor;
 	private final BasicLogStream performanceOutput;
+	private final AtomicLong previousGcCollection;
+	private final AtomicLong previousGcTime;
 	
 	public ServerHealthService() {
 		this.executor = new ScheduledThreadPool(1, 3, "server-health-service");
+		this.previousGcCollection = new AtomicLong(0);
+		this.previousGcTime = new AtomicLong(0);
+		
 		Config debugConfig = DataManager.getConfig(ConfigFile.DEBUG);
 		if (debugConfig.getBoolean("PERFORMANCE-LOG", false)) {
 			this.performanceOutput = new BasicLogStream(new File("log/performance.txt"));
 			executor.start();
-			performanceOutput.log("%s\t%s\t%s\t%s", "cpu", "memory-used", "memory-max", "intents");
+			performanceOutput.log("%s\t%s\t%s\t%s\t%s\t%s", "cpu", "memory-used", "memory-max", "gc-collectionRate", "gc-time", "intents");
 			executor.executeWithFixedRate(0, 1000, this::updatePerformanceLog);
 		} else {
 			this.performanceOutput = null;
@@ -41,7 +49,7 @@ public class ServerHealthService extends Service {
 	public boolean start() {
 		if (!executor.isRunning())
 			executor.start();
-		executor.executeWithFixedRate(0, TimeUnit.MINUTES.toMillis(10), this::updateServerHealth);
+		executor.executeWithFixedRate(5000, TimeUnit.MINUTES.toMillis(10), this::updateServerHealth);
 		return true;
 	}
 	
@@ -54,15 +62,26 @@ public class ServerHealthService extends Service {
 	private void updatePerformanceLog() {
 		OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
 		MemoryUsage heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+		List<GarbageCollectorMXBean> gc = ManagementFactory.getGarbageCollectorMXBeans();
 		
 		double cpu = (os instanceof com.sun.management.OperatingSystemMXBean) ? ((com.sun.management.OperatingSystemMXBean) os).getProcessCpuLoad()*100 : -1;
 		
 		long heapUsed = heapUsage.getUsed();
 		long heapTotal = heapUsage.getCommitted();
+		long gcCollectionRate, gcTime;
+		{
+			long collected = gc.stream().mapToLong(GarbageCollectorMXBean::getCollectionCount).sum();
+			long collectionTime = gc.stream().mapToLong(GarbageCollectorMXBean::getCollectionTime).sum();
+			long previousCollected = previousGcCollection.getAndSet(collected);
+			long previousTime = previousGcTime.getAndSet(collectionTime);
+			gcCollectionRate = collected - previousCollected;
+			gcTime = collectionTime - previousTime;
+		}
+		
 		IntentManager intentManager = IntentManager.getInstance();
 		long intents = intentManager == null ? -1 : intentManager.getIntentCount();
 		
-		performanceOutput.log("%.2f\t%.2f%s\t%.2f%s\t%d", cpu, getBinarySize(heapUsed), getBinarySuffix(heapUsed), getBinarySize(heapTotal), getBinarySuffix(heapTotal), intents);
+		performanceOutput.log("%.2f\t%.2f%s\t%.2f%s\t%d\t%d\t%d", cpu, getBinarySize(heapUsed), getBinarySuffix(heapUsed), getBinarySize(heapTotal), getBinarySuffix(heapTotal), gcCollectionRate, gcTime, intents);
 	}
 	
 	private void updateServerHealth() {
