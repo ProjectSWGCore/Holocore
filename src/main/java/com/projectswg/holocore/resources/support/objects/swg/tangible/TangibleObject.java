@@ -41,9 +41,9 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -347,16 +347,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		return super.equals(o);
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
 	}
 	
 	@Override

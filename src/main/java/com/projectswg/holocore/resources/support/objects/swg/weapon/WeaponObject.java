@@ -31,8 +31,8 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -145,22 +145,6 @@ public class WeaponObject extends TangibleObject {
 
 	public void setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (!super.equals(o))
-			return false;
-		if (o instanceof WeaponObject) {
-			WeaponObject w = (WeaponObject) o;
-			return w.type == type;
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode() * 7 + type.getNum();
 	}
 	
 	@Override

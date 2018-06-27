@@ -987,16 +987,6 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode() * 20 + race.toString().hashCode();
-	}
-	
-	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
