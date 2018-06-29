@@ -43,7 +43,9 @@ public class AICombatSupport {
 	
 	public void act() {
 		returnLocation.compareAndSet(null, obj.getLocation());
-		Log.d("Has Vendetta: %b", hasVendetta());
+		if (obj.isRooted())
+			return;
+		Log.d("AIObject Combat [%s -> %s] Vendetta: %b", obj, previousTarget.get(), hasVendetta());
 		if (obj.isInCombat() || hasVendetta()) {
 			performCombatAction();
 		} else {

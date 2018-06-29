@@ -128,7 +128,6 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 	public void testValidTicketCreated() {
 		TravelHelper helper = new TravelHelper();
 		GenericCreatureObject creature = new GenericCreatureObject(1);
-		creature.setupAsCharacter();
 		creature.setPosition(Terrain.YAVIN4, 4054, 0, -6216);
 		TravelPoint imperialBase = helper.getDestinationPoint(Terrain.YAVIN4, "Imperial Base");
 		TravelPoint coronet = helper.getDestinationPoint(Terrain.CORELLIA, "Coronet Starport");

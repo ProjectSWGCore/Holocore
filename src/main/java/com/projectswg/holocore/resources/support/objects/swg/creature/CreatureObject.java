@@ -35,18 +35,18 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
+import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
+import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
+import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
-import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -90,38 +90,24 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void onObjectEnterAware(SWGObject aware) {
-		if (isPlayer())
-			awareness.addAware(aware);
+		awareness.addAware(aware);
 	}
 	
 	@Override
 	public void onObjectLeaveAware(SWGObject aware) {
-		if (isPlayer())
-			awareness.removeAware(aware);
+		awareness.removeAware(aware);
 	}
 	
 	public void flushObjectsAware() {
-		if (isPlayer())
-			awareness.flushAware();
+		awareness.flushAware();
 	}
 	
 	public void resetObjectsAware() {
-		if (isPlayer())
-			awareness.resetObjectsAware();
-	}
-	
-	public void addObjectsAware() {
-		if (isPlayer()) {
-			for (SWGObject obj : getAware()) {
-				awareness.addAware(obj);
-			}
-		}
+		awareness.resetObjectsAware();
 	}
 	
 	@Override
 	public void addObject(SWGObject obj) {
-		if (obj instanceof PlayerObject)
-			getAware().forEach(awareness::addAware);
 		super.addObject(obj);
 		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
 			addEquipment(obj);
@@ -155,21 +141,30 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void onAddedChild(SWGObject child) {
 		super.onAddedChild(child);
-		if (isPlayer()) {
-			List<SWGObject> children = new ArrayList<>(getAwareness().getAware(AwarenessType.SELF));
-			children.add(child);
-			getAwareness().setAware(AwarenessType.SELF, children);
-		}
+		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
+		getAllChildren(children, child);
+		getAwareness().setAware(AwarenessType.SELF, children);
 	}
 	
 	@Override
 	protected void onRemovedChild(SWGObject child) {
 		super.onRemovedChild(child);
-		if (isPlayer()) {
-			List<SWGObject> children = new ArrayList<>(getAwareness().getAware(AwarenessType.SELF));
-			children.remove(child);
-			getAwareness().setAware(AwarenessType.SELF, children);
+		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
+		{
+			Set<SWGObject> removed = new HashSet<>();
+			getAllChildren(removed, child);
+			children.removeAll(removed);
+			assert !removed.contains(this);
 		}
+		getAwareness().setAware(AwarenessType.SELF, children);
+	}
+	
+	private void getAllChildren(Collection<SWGObject> children, SWGObject child) {
+		children.add(child);
+		for (SWGObject obj : child.getSlottedObjects())
+			getAllChildren(children, obj);
+		for (SWGObject obj : child.getContainedObjects())
+			getAllChildren(children, obj);
 	}
 	
 	@Override

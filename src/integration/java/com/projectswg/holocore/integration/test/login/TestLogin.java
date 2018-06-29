@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses(value = {
-		TestCharacterCreation.class
+		TestCharacterCreation.class,
+		TestExistingLogin.class
 })
 public class TestLogin {
 	

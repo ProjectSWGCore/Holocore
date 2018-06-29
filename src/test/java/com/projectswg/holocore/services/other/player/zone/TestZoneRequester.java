@@ -72,7 +72,6 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 		ZoneRequester zr = new ZoneRequester();
 		TZRPlayer player = new TZRPlayer();
 		GenericCreatureObject creature = new GenericCreatureObject(5);
-		creature.setupAsCharacter();
 		creature.setOwner(null);
 		Assert.assertTrue(zr.onZoneRequested(creature, player, 5));
 		Assert.assertFalse(player.isSentError());

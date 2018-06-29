@@ -171,7 +171,7 @@ public abstract class AIObject extends CreatureObject {
 		return getMovementPercent() * getMovementScale() * getRunSpeed();
 	}
 	
-	protected final boolean isRooted() {
+	public final boolean isRooted() {
 		switch (getPosture()) {
 			case DEAD:
 			case INCAPACITATED:

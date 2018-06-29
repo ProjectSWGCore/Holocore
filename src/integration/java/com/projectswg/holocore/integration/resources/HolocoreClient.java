@@ -26,6 +26,7 @@ import org.junit.Assert;
 
 import java.net.InetSocketAddress;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
@@ -76,6 +77,10 @@ public class HolocoreClient {
 	
 	public void addCharacter(long id, String name) {
 		this.characters.put(id, name);
+	}
+	
+	public long getRandomCharacter() {
+		return characters.keySet().iterator().next();
 	}
 	
 	public boolean login(String username, String password) {

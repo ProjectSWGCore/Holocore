@@ -95,16 +95,17 @@ public class CreatureObjectAwareness {
 				createObject(obj, target);
 			}
 			popStackUntil(target, createStack, null);
+			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
 		}
 		
 		assert aware.contains(creature) : "not aware of creature";
-		assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
 	}
 	
 	public synchronized void resetObjectsAware() {
 		aware.clear();
 		pendingAdd.clear();
 		pendingRemove.clear();
+		pendingAdd.addAll(creature.getAware());
 	}
 	
 	List<SWGObject> getCreateList() {

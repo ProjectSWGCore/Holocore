@@ -84,9 +84,6 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		testCell1.setNumber(1);
 		testCell2.setNumber(1);
 		
-		player.setupAsCharacter();
-		testPlayer.setupAsCharacter();
-		
 		testCell1.moveToContainer(testBuilding1);
 		testCell2.moveToContainer(testBuilding2);
 		inventoryObject.setArrangement(List.of(List.of("inventory")));

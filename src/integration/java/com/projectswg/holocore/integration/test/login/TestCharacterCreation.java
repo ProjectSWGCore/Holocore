@@ -9,11 +9,12 @@ public class TestCharacterCreation extends ClientRunner {
 	
 	@Test
 	public void testCreateCharacter() {
-		ClientUtilities.createCharacter(client);
-		System.out.println("Created character: " + client.getCharacterName() + " with id " + client.getCharacterId());
-		client.waitForZoneIn();
-		System.out.println("Zoned in");
-		client.send(new DeleteCharacterRequest(0, client.getCharacterId()));
+		try {
+			ClientUtilities.createCharacter(client);
+			client.waitForZoneIn();
+		} finally {
+			client.send(new DeleteCharacterRequest(0, client.getCharacterId()));
+		}
 	}
 	
 }

@@ -56,6 +56,7 @@ public class ObjectAware {
 	}
 	
 	public void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
+		boolean wasNotSelfAware = notAware(object);
 		Set<SWGObject> oldAware = awareness.put(type, createSet(objects));
 		assert oldAware != null : "initialized in constructor";
 		
@@ -63,7 +64,7 @@ public class ObjectAware {
 		for (SWGObject removed : oldAware) {
 			if (objects.contains(removed))
 				continue;
-			if (removed == object || removed.getAwareness().removeAware(type, object)) {
+			if (removed.getAwareness().removeAware(type, object) && notAware(removed)) {
 				object.onObjectLeaveAware(removed);
 				flush = true;
 			}
@@ -72,7 +73,7 @@ public class ObjectAware {
 		for (SWGObject added : objects) {
 			if (oldAware.contains(added))
 				continue;
-			if (added == object || added.getAwareness().addAware(type, object)) {
+			if ((added == object && wasNotSelfAware) || added.getAwareness().addAware(type, object)) {
 				object.onObjectEnterAware(added);
 				flush = true;
 			}

@@ -58,6 +58,7 @@ public class GenericCreatureObject extends CreatureObject {
 		};
 		player.setPlayerState(PlayerState.ZONED_IN);
 		setHasOwner(true);
+		setupAsCharacter();
 		loadRange = -1;
 	}
 	
@@ -74,7 +75,7 @@ public class GenericCreatureObject extends CreatureObject {
 		}
 	}
 	
-	public void setupAsCharacter() {
+	private void setupAsCharacter() {
 		setSlots(List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r"));
 		
 		setArrangement(List.of(List.of("rider")));
