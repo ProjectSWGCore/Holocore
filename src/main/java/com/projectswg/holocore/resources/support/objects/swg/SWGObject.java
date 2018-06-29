@@ -178,12 +178,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public boolean systemMove(SWGObject newParent, Location newLocation) {
 		SWGObject oldParent = parent;
 		Location oldLocation = getLocation();
-		setLocation(newLocation);
 		if (oldParent != newParent) {
 			if (oldParent != null)
 				oldParent.removeObject(this);
+			setLocation(newLocation);
 			if (newParent != null)
 				newParent.addObject(this);
+		} else {
+			setLocation(newLocation);
 		}
 		return oldParent != newParent || !oldLocation.equals(newLocation);
 	}

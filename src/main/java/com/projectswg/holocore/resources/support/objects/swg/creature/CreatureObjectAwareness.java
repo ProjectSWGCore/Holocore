@@ -67,10 +67,7 @@ public class CreatureObjectAwareness {
 		assert obj != creature;
 		if (pendingAdd.remove(obj) || !aware.contains(obj))
 			return;
-		if (pendingRemove.add(obj)) {
-			obj.getSlottedObjects().forEach(this::removeAware);
-			obj.getContainedObjects().forEach(this::removeAware);
-		}
+		pendingRemove.add(obj);
 	}
 	
 	public synchronized void flushAware() {
