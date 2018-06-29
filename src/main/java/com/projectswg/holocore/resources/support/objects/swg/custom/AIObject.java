@@ -105,19 +105,19 @@ public abstract class AIObject extends CreatureObject {
 	
 	public void addPrimaryWeapon(WeaponObject weapon) {
 		this.primaryWeapons.add(weapon);
-		weapon.moveToContainer(hiddenInventory);
+		weapon.systemMove(hiddenInventory);
 	}
 	
 	public void addSecondaryWeapon(WeaponObject weapon) {
 		this.secondaryWeapons.add(weapon);
-		weapon.moveToContainer(hiddenInventory);
+		weapon.systemMove(hiddenInventory);
 	}
 	
 	@Override
 	public void setEquippedWeapon(WeaponObject weapon) {
 		WeaponObject equipped = getEquippedWeapon();
 		if (equipped != null)
-			equipped.moveToContainer(hiddenInventory);
+			equipped.systemMove(hiddenInventory);
 		weapon.moveToContainer(this);
 		super.setEquippedWeapon(weapon);
 	}

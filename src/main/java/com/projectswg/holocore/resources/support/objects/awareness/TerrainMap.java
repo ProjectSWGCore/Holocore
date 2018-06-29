@@ -94,7 +94,6 @@ public class TerrainMap {
 		else
 			aware = new HashSet<>(superParent.getAware(AwarenessType.OBJECT));
 		aware.removeIf(AwarenessUtilities::notInAwareness);
-		recursiveAdd(aware, obj);
 		return aware;
 	}
 	
@@ -118,16 +117,6 @@ public class TerrainMap {
 					}
 				}
 			}
-		}
-	}
-	
-	private static void recursiveAdd(@NotNull Collection<SWGObject> aware, @NotNull SWGObject obj) {
-		aware.add(obj);
-		for (SWGObject child : obj.getSlottedObjects()) {
-			recursiveAdd(aware, child);
-		}
-		for (SWGObject child : obj.getContainedObjects()) {
-			recursiveAdd(aware, child);
 		}
 	}
 	

@@ -78,7 +78,7 @@ public class ProjectSWG {
 		return GALAXY;
 	}
 	
-	private static int run(String [] args) {
+	static int run(String [] args) {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");

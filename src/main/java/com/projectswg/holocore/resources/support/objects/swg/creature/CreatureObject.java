@@ -38,6 +38,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.PostureU
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
+import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -56,7 +57,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
-	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness();
+	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness(this);
 	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
 	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
 	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
@@ -84,6 +85,7 @@ public class CreatureObject extends TangibleObject {
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initBaseAttributes();
+		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
 	@Override
@@ -100,7 +102,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void flushObjectsAware() {
 		if (isPlayer())
-			awareness.flushAware(getOwner());
+			awareness.flushAware();
 	}
 	
 	public void resetObjectsAware() {
@@ -118,6 +120,8 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void addObject(SWGObject obj) {
+		if (obj instanceof PlayerObject)
+			getAware().forEach(awareness::addAware);
 		super.addObject(obj);
 		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
 			addEquipment(obj);
@@ -145,6 +149,26 @@ public class CreatureObject extends TangibleObject {
 			if (slotObj != null) {
 				slotObj.moveToContainer(inventory);
 			}
+		}
+	}
+	
+	@Override
+	protected void onAddedChild(SWGObject child) {
+		super.onAddedChild(child);
+		if (isPlayer()) {
+			List<SWGObject> children = new ArrayList<>(getAwareness().getAware(AwarenessType.SELF));
+			children.add(child);
+			getAwareness().setAware(AwarenessType.SELF, children);
+		}
+	}
+	
+	@Override
+	protected void onRemovedChild(SWGObject child) {
+		super.onRemovedChild(child);
+		if (isPlayer()) {
+			List<SWGObject> children = new ArrayList<>(getAwareness().getAware(AwarenessType.SELF));
+			children.remove(child);
+			getAwareness().setAware(AwarenessType.SELF, children);
 		}
 	}
 	

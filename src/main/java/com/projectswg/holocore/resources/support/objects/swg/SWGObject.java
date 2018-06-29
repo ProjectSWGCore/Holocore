@@ -123,6 +123,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				setSlot(requiredSlot, object);
 			}
 		}
+		
+		onAddedChild(object);
 		object.parent = this;
 		object.setTerrain(getTerrain());
 	}
@@ -145,6 +147,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		// Remove as parent
+		onRemovedChild(object);
 		object.parent = null;
 		object.slotArrangement = -1;
 	}
@@ -249,6 +252,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (slotObj != null)
 				slotObj.moveToContainer(oldParent);
 		}
+	}
+	
+	protected void onAddedChild(SWGObject child) {
+		SWGObject parent = this.parent;
+		if (parent != null)
+			parent.onAddedChild(child);
+	}
+	
+	protected void onRemovedChild(SWGObject child) {
+		SWGObject parent = this.parent;
+		if (parent != null)
+			parent.onRemovedChild(child);
 	}
 	
 	public boolean isVisible(SWGObject target) {

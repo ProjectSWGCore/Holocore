@@ -37,8 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
@@ -57,7 +56,7 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		tangible2 = new GenericTangibleObject(2);
 		creature1 = new GenericCreatureObject(3);
 		creature2 = new GenericCreatureObject(4);
-		assertNotObservingSelf();
+		assertObservingSelf();
 		assertFalse(tangible1.getAware().contains(tangible2));
 		assertFalse(tangible2.getAware().contains(tangible1));
 		assertFalse(creature1.getObservers().contains(creature2.getOwner()));
@@ -73,29 +72,26 @@ public class TestObjectAware extends TestRunnerNoIntents {
 			@Override public void onObjectEnterAware(SWGObject aware) { onEnter.incrementAndGet(); }
 			@Override public void onObjectLeaveAware(SWGObject aware) { onLeave.incrementAndGet(); }
 		};
-		test.setSlot("ghost", ghost);
+		ghost.systemMove(test);
+		onEnter.set(0);
 		
-		tangible1.setAware(AwarenessType.OBJECT, Arrays.asList(test, ghost));
+		tangible1.setAware(AwarenessType.OBJECT, List.of(test, ghost));
 		assertEquals(1, onEnter.get());
-		tangible1.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertEquals(1, onEnter.get());
 		assertEquals(1, onLeave.get());
 		
 		onEnter.set(0);
 		onLeave.set(0);
 		
-		test.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible1));
-		ghost.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible1));
+		test.setAware(AwarenessType.OBJECT, List.of(tangible1));
+		ghost.setAware(AwarenessType.OBJECT, List.of(tangible1));
 		assertEquals(1, onEnter.get());
-		test.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		ghost.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		assertEquals(1, onEnter.get());
-		assertEquals(1, onLeave.get());
 	}
 	
 	@Test
 	public void testSingleBucketAware() {
-		tangible1.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible2));
+		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		assertTrue(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
@@ -103,7 +99,7 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		assertFalse(tangible1.getAware(AwarenessType.GROUP).contains(tangible2));
 		assertFalse(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
 		
-		tangible1.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertFalse(tangible1.getAware().contains(tangible2));
 		assertFalse(tangible2.getAware().contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
@@ -112,59 +108,59 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		assertFalse(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
 		
 		// Add both directions
-		tangible1.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible2));
+		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		
-		tangible2.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible1));
+		tangible2.setAware(AwarenessType.OBJECT, List.of(tangible1));
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		
-		tangible1.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertFalse(tangible1.getAware().contains(tangible2));
 		assertFalse(tangible2.getAware().contains(tangible1));
 	}
 	
 	@Test
 	public void testSingleBucketObservers() {
-		creature1.setAware(AwarenessType.OBJECT, Collections.singletonList(creature2));
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of(creature2));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
 		
-		creature1.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of());
+		assertObservingSelf();
 		assertFalse(creature1.getObservers().contains(creature2.getOwner()));
 		assertFalse(creature2.getObservers().contains(creature1.getOwner()));
 		
 		// Add both directions
-		creature1.setAware(AwarenessType.OBJECT, Collections.singletonList(creature2));
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of(creature2));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
 		
-		creature2.setAware(AwarenessType.OBJECT, Collections.singletonList(creature1));
-		assertNotObservingSelf();
+		creature2.setAware(AwarenessType.OBJECT, List.of(creature1));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
 		
-		creature1.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of());
+		assertObservingSelf();
 		assertFalse(creature1.getObservers().contains(creature2.getOwner()));
 		assertFalse(creature2.getObservers().contains(creature1.getOwner()));
 	}
 	
 	@Test
 	public void testDoubleBucketAware() {
-		tangible1.setAware(AwarenessType.OBJECT, Collections.singletonList(tangible2));
+		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		
-		tangible1.setAware(AwarenessType.GROUP, Collections.singletonList(tangible2));
+		tangible1.setAware(AwarenessType.GROUP, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		
-		tangible1.setAware(AwarenessType.OBJECT, Collections.emptyList());
+		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertTrue(tangible1.getAware().contains(tangible2));
 		assertTrue(tangible2.getAware().contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
@@ -172,7 +168,7 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		assertTrue(tangible1.getAware(AwarenessType.GROUP).contains(tangible2));
 		assertTrue(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
 		
-		tangible2.setAware(AwarenessType.GROUP, Collections.emptyList());
+		tangible2.setAware(AwarenessType.GROUP, List.of());
 		assertFalse(tangible1.getAware().contains(tangible2));
 		assertFalse(tangible2.getAware().contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
@@ -183,49 +179,49 @@ public class TestObjectAware extends TestRunnerNoIntents {
 	
 	@Test
 	public void testDoubleBucketObservers() {
-		creature1.setAware(AwarenessType.OBJECT, Collections.singletonList(creature2));
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of(creature2));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
-		creature1.setAware(AwarenessType.GROUP, Collections.singletonList(creature2));
-		assertNotObservingSelf();
-		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
-		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
-		
-		creature1.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.GROUP, List.of(creature2));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
 		
-		creature2.setAware(AwarenessType.GROUP, Collections.emptyList());
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of());
+		assertObservingSelf();
+		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
+		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
+		
+		creature2.setAware(AwarenessType.GROUP, List.of());
+		assertObservingSelf();
 		assertFalse(creature1.getObservers().contains(creature2.getOwner()));
 		assertFalse(creature2.getObservers().contains(creature1.getOwner()));
 		
 		// Add both directions
-		creature1.setAware(AwarenessType.OBJECT, Collections.singletonList(creature2));
-		assertNotObservingSelf();
+		creature1.setAware(AwarenessType.OBJECT, List.of(creature2));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
-		creature2.setAware(AwarenessType.GROUP, Collections.singletonList(creature1));
-		assertNotObservingSelf();
-		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
-		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
-		
-		creature2.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		assertNotObservingSelf();
+		creature2.setAware(AwarenessType.GROUP, List.of(creature1));
+		assertObservingSelf();
 		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
 		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
 		
-		creature1.setAware(AwarenessType.GROUP, Collections.emptyList());
-		assertNotObservingSelf();
+		creature2.setAware(AwarenessType.OBJECT, List.of());
+		assertObservingSelf();
+		assertTrue(creature1.getObservers().contains(creature2.getOwner()));
+		assertTrue(creature2.getObservers().contains(creature1.getOwner()));
+		
+		creature1.setAware(AwarenessType.GROUP, List.of());
+		assertObservingSelf();
 		assertFalse(creature1.getObservers().contains(creature2.getOwner()));
 		assertFalse(creature2.getObservers().contains(creature1.getOwner()));
 	}
 	
-	private void assertNotObservingSelf() {
-		assertFalse(creature1.getObservers().contains(creature1.getOwner()));
-		assertFalse(creature2.getObservers().contains(creature2.getOwner()));
+	private void assertObservingSelf() {
+		assertTrue(creature1.getObservers().contains(creature1.getOwner()));
+		assertTrue(creature2.getObservers().contains(creature2.getOwner()));
 	}
 	
 }

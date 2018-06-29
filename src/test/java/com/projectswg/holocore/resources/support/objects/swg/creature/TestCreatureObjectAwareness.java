@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.test_resources.GenericCreatureObject;
 import com.projectswg.holocore.test_resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,16 +42,18 @@ import org.junit.runners.JUnit4;
 public class TestCreatureObjectAwareness {
 	
 	private CreatureObjectAwareness awareness;
+	private CreatureObject creature;
 	private TangibleObject testObject1;
 	private TangibleObject testObject2;
 	private Player dummy;
 	
 	@Before
 	public void initialize() {
-		awareness = new CreatureObjectAwareness();
-		testObject1 = new GenericTangibleObject(1);
-		testObject2 = new GenericTangibleObject(2);
-		dummy = new Player();
+		creature = new GenericCreatureObject(1);
+		creature.setOwner(new Player());
+		awareness = new CreatureObjectAwareness(creature);
+		testObject1 = new GenericTangibleObject(2);
+		testObject2 = new GenericTangibleObject(3);
 	}
 	
 	@Test
@@ -69,7 +72,7 @@ public class TestCreatureObjectAwareness {
 	@Test
 	public void testSingleObjectAddFlushRemove() {
 		awareness.addAware(testObject1);
-		awareness.flushAware(dummy);
+		awareness.flushAware();
 		assertCreate();
 		assertDestroy();
 		awareness.removeAware(testObject1);
@@ -88,7 +91,7 @@ public class TestCreatureObjectAwareness {
 		testObject1.moveToContainer(testObject2);
 		awareness.addAware(testObject1);
 		awareness.addAware(testObject2);
-		awareness.flushAware(dummy);
+		awareness.flushAware();
 		assertCreate();
 		assertDestroy();
 		awareness.removeAware(testObject1);
@@ -108,7 +111,7 @@ public class TestCreatureObjectAwareness {
 		testObject1.moveToContainer(testObject2);
 		awareness.addAware(testObject1);
 		awareness.addAware(testObject2);
-		awareness.flushAware(dummy);
+		awareness.flushAware();
 		assertCreate();
 		assertDestroy();
 		awareness.removeAware(testObject1);
@@ -121,11 +124,11 @@ public class TestCreatureObjectAwareness {
 		testObject1.moveToContainer(testObject2);
 		awareness.addAware(testObject1);
 		awareness.addAware(testObject2);
-		awareness.flushAware(dummy);
+		awareness.flushAware();
 		assertCreate();
 		assertDestroy();
 		awareness.removeAware(testObject2);
-		awareness.flushAware(dummy);
+		awareness.flushAware();
 		awareness.removeAware(testObject1);
 		assertDestroy();
 	}

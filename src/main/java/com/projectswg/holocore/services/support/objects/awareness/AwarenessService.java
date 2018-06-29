@@ -66,6 +66,7 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.Collections;
+import java.util.List;
 
 public class AwarenessService extends Service {
 	
@@ -184,11 +185,13 @@ public class AwarenessService extends Service {
 		}
 		
 		synchronized (creature.getAwarenessLock()) {
-			creature.systemMove(parent, loc);
+			// Safely clear awareness
 			creature.setOwner(null);
-			creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
+			creature.setAware(AwarenessType.OBJECT, List.of());
 			creature.resetObjectsAware();
 			creature.setOwner(player);
+			
+			creature.systemMove(parent, loc);
 			startZone(creature, firstZone);
 			creature.addObjectsAware();
 			awareness.updateObject(creature);

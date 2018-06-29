@@ -63,14 +63,16 @@ public class ObjectAware {
 		for (SWGObject removed : oldAware) {
 			if (objects.contains(removed))
 				continue;
-			if (removed.getAwareness().removeAware(type, object)) {
+			if (removed == object || removed.getAwareness().removeAware(type, object)) {
 				object.onObjectLeaveAware(removed);
 				flush = true;
 			}
 		}
 		
 		for (SWGObject added : objects) {
-			if (added.getAwareness().addAware(type, object)) {
+			if (oldAware.contains(added))
+				continue;
+			if (added == object || added.getAwareness().addAware(type, object)) {
 				object.onObjectEnterAware(added);
 				flush = true;
 			}
@@ -134,22 +136,10 @@ public class ObjectAware {
 	
 	private boolean notAware(SWGObject test) {
 		for (Collection<SWGObject> aware : awareness.values()) {
-			for (SWGObject obj : aware) {
-				if (obj == test)
-					return false;
-			}
+			if (aware.contains(test))
+				return false;
 		}
 		return true;
-	}
-	
-	private Map<SWGObject, Integer> getAwareCounts() {
-		Map<SWGObject, Integer> counts = new HashMap<>();
-		for (Collection<SWGObject> aware : awareness.values()) {
-			for (SWGObject obj : aware) {
-				counts.put(obj, counts.getOrDefault(obj, 0) + 1);
-			}
-		}
-		return counts;
 	}
 	
 	private static Set<SWGObject> createSet() {

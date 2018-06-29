@@ -42,11 +42,13 @@ import java.util.*;
 
 public class CreatureObjectAwareness {
 	
+	private final CreatureObject creature;
 	private final Set<SWGObject> aware;
 	private final Set<SWGObject> pendingAdd;
 	private final Set<SWGObject> pendingRemove;
 	
-	public CreatureObjectAwareness() {
+	public CreatureObjectAwareness(CreatureObject creature) {
+		this.creature = creature;
 		this.aware = new HashSet<>();
 		this.pendingAdd = new HashSet<>();
 		this.pendingRemove = new HashSet<>();
@@ -62,6 +64,7 @@ public class CreatureObjectAwareness {
 	}
 	
 	public synchronized void removeAware(@NotNull SWGObject obj) {
+		assert obj != creature;
 		if (pendingAdd.remove(obj) || !aware.contains(obj))
 			return;
 		if (pendingRemove.add(obj)) {
@@ -70,7 +73,8 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
-	public synchronized void flushAware(Player target) {
+	public synchronized void flushAware() {
+		Player target = creature.getOwner();
 		List<SWGObject> create = getCreateList();
 		List<SWGObject> destroy = getDestroyList();
 		
@@ -92,6 +96,9 @@ public class CreatureObjectAwareness {
 			}
 			popStackUntil(target, createStack, null);
 		}
+		
+		assert aware.contains(creature) : "not aware of creature";
+		assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
 	}
 	
 	public synchronized void resetObjectsAware() {

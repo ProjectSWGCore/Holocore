@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public enum AwarenessType {
+	SELF,
 	OBJECT,
 	GROUP,
 	TRADE;
