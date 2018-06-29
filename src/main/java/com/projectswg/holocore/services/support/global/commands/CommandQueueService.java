@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.support.global.commands;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.*;
+import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
@@ -84,6 +85,11 @@ public class CommandQueueService extends Service {
 	@IntentHandler
 	private void handleQueueCommandIntent(QueueCommandIntent qci) {
 		getQueue(qci.getSource()).startCommand(new EnqueuedCommand(qci.getSource(), qci.getCommand(), qci.getTarget(), qci.getArguments(), qci.getCounter()));
+	}
+	
+	@IntentHandler
+	private void handleExitCombatIntent(ExitCombatIntent eci) {
+		combatQueueMap.remove(eci.getSource());
 	}
 	
 	private void executeQueuedCommands() {
