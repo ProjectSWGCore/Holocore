@@ -1,0 +1,16 @@
+plugins {
+	id 'java'
+}
+
+sourceCompatibility = 9
+targetCompatibility = 9
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile project(':pswgcommon')
+	testCompile 'junit:junit:4.12'
+}
+

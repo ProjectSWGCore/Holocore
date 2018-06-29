@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.network;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -38,7 +40,7 @@ public class LittleEndianDataOutputStream extends OutputStream {  // phew, what 
 		this.stream = new DataOutputStream(out);
 	}
 	
-	public void write(byte [] b) throws IOException {
+	public void write(@NotNull byte [] b) throws IOException {
 		stream.write(b);
 	}
 	

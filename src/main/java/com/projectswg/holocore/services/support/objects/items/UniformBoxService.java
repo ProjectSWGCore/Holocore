@@ -103,7 +103,7 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[staticItems.size()])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[0])).broadcast();
 	}
 	
 }

@@ -31,8 +31,8 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -111,7 +111,20 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	public WeaponType getType() {
-		return type;
+		switch (getGameObjectType()) {
+			case GOT_WEAPON_HEAVY_MINE:		return WeaponType.HEAVY;
+			case GOT_WEAPON_HEAVY_MISC:		return WeaponType.HEAVY;
+			case GOT_WEAPON_HEAVY_SPECIAL:	return WeaponType.HEAVY;
+			case GOT_WEAPON_MELEE_1H:		return WeaponType.ONE_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_2H:		return WeaponType.TWO_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_MISC:		return WeaponType.ONE_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_POLEARM:	return WeaponType.POLEARM_MELEE;
+			case GOT_WEAPON_RANGED_CARBINE:	return WeaponType.CARBINE;
+			case GOT_WEAPON_RANGED_PISTOL:	return WeaponType.PISTOL;
+			case GOT_WEAPON_RANGED_RIFLE:	return WeaponType.RIFLE;
+			case GOT_WEAPON_RANGED_THROWN:	return WeaponType.THROWN;
+		}
+		return WeaponType.UNARMED;
 	}
 	
 	public void setType(WeaponType type) {
@@ -132,22 +145,6 @@ public class WeaponObject extends TangibleObject {
 
 	public void setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (!super.equals(o))
-			return false;
-		if (o instanceof WeaponObject) {
-			WeaponObject w = (WeaponObject) o;
-			return w.type == type;
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode() * 7 + type.getNum();
 	}
 	
 	@Override

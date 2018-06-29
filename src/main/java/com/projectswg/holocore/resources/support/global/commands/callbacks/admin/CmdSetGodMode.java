@@ -6,11 +6,12 @@ import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 public final class CmdSetGodMode implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		if (player.getAccessLevel() == AccessLevel.PLAYER) {
 			SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(");
 			return;

@@ -29,7 +29,6 @@ package com.projectswg.holocore.utilities.clientdata_printer;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.Log.LogLevel;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 
 import java.util.*;

@@ -123,7 +123,7 @@ public class NetworkClient extends TCPSession {
 	
 	@Override
 	public String toString() {
-		return "NetworkClient[" + getRemoteAddress() + "]";
+		return "NetworkClient[" + getRemoteAddress() + ']';
 	}
 	
 	@Override

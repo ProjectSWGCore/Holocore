@@ -131,7 +131,7 @@ public class SuiTableWindow extends SuiWindow {
 	}
 	
 	public void setScrollExtent(int x, int z) {
-		setProperty("comp.TablePage.header", "ScrollExtent", String.valueOf(x) + "," + String.valueOf(z));
+		setProperty("comp.TablePage.header", "ScrollExtent", String.valueOf(x) + ',' + String.valueOf(z));
 	}
 	
 	public long getCellId(int column, int row) {

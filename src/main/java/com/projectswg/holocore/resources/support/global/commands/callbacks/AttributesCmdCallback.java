@@ -31,11 +31,12 @@ import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import org.jetbrains.annotations.NotNull;
 
 public class AttributesCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String[] cmd = args.split(" ");
 		
 		for (String s : cmd) {

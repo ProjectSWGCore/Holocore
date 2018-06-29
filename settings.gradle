@@ -1,2 +1,3 @@
 rootProject.name = 'holocore'
-include 'pswgcommon'
+include ':pswgcommon'
+include ':client-holocore'

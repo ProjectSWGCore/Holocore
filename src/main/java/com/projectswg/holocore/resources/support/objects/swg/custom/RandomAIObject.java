@@ -28,8 +28,6 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.data.location.Location;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Boring AI object that just sits in the same location.  aiLoop() can be extended for other AI objects that want random movements
  */

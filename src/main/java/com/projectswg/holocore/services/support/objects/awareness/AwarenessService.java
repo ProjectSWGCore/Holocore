@@ -40,32 +40,32 @@ import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
+import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
 import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.intents.support.objects.swg.*;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
-import com.projectswg.holocore.resources.support.objects.awareness.DataTransformHandler;
-import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
+import com.projectswg.holocore.resources.support.objects.awareness.DataTransformHandler;
+import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.Collections;
+import java.util.List;
 
 public class AwarenessService extends Service {
 	
@@ -104,8 +104,10 @@ public class AwarenessService extends Service {
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObject();
-		obj.systemMove(null, GONE_LOCATION);
-		awareness.destroyObject(doi.getObject());
+		synchronized (obj.getAwarenessLock()) {
+			obj.systemMove(null, GONE_LOCATION);
+			awareness.destroyObject(doi.getObject());
+		}
 	}
 	
 	@IntentHandler
@@ -113,8 +115,10 @@ public class AwarenessService extends Service {
 		SWGObject obj = oti.getObject();
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
 			if (oti.getNewLocation().getTerrain() == obj.getTerrain() && oti.getNewLocation().distanceTo(obj.getLocation()) <= 1024) {
-				obj.systemMove(oti.getParent(), oti.getNewLocation());
-				awareness.updateObject(obj);
+				synchronized (obj.getAwarenessLock()) {
+					obj.systemMove(oti.getParent(), oti.getNewLocation());
+					awareness.updateObject(obj);
+				}
 				if (oti.getParent() != null)
 					obj.getOwner().sendPacket(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), oti.getNewLocation(), 7.3f));
 				else
@@ -123,8 +127,10 @@ public class AwarenessService extends Service {
 				handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
 			}
 		} else {
-			obj.systemMove(oti.getParent(), oti.getNewLocation());
-			awareness.updateObject(obj);
+			synchronized (obj.getAwarenessLock()) {
+				obj.systemMove(oti.getParent(), oti.getNewLocation());
+				awareness.updateObject(obj);
+			}
 		}
 	}
 	
@@ -173,18 +179,21 @@ public class AwarenessService extends Service {
 		PlayerState state = player.getPlayerState();
 		boolean firstZone = (state == PlayerState.LOGGED_IN);
 		if (!firstZone && state != PlayerState.ZONED_IN) {
-			new CloseConnectionIntent(player.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+			CloseConnectionIntent.broadcast(player, DisconnectReason.SUSPECTED_HACK);
 			return;
 		}
 		
-		creature.systemMove(parent, loc);
-		creature.setOwner(null);
-		creature.setAware(AwarenessType.OBJECT, Collections.emptyList());
-		creature.resetObjectsAware();
-		creature.setOwner(player);
-		startZone(creature, firstZone);
-		creature.addObjectsAware();
-		awareness.updateObject(creature);
+		synchronized (creature.getAwarenessLock()) {
+			// Safely clear awareness
+			creature.setOwner(null);
+			creature.setAware(AwarenessType.OBJECT, List.of());
+			creature.setOwner(player);
+			
+			creature.systemMove(parent, loc);
+			creature.resetObjectsAware();
+			startZone(creature, firstZone);
+			awareness.updateObject(creature);
+		}
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {
@@ -248,8 +257,10 @@ public class AwarenessService extends Service {
 //			dataTransformHandler.handleMove(vehicle, speed, update);
 //			awareness.moveObject(obj, null, requestedLocation);
 		} else {
-			obj.systemMove(parent, requestedLocation);
-			awareness.updateObject(obj);
+			synchronized (obj.getAwarenessLock()) {
+				obj.systemMove(parent, requestedLocation);
+				awareness.updateObject(obj);
+			}
 			if (parent == null) {
 				dataTransformHandler.handleMove(obj, speed, update);
 			} else {

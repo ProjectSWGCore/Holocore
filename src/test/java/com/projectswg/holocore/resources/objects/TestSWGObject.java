@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.objects;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test_resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class TestSWGObject extends TestRunnerNoIntents {
 	@Test
 	public void testWorldLocation() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		child.moveToContainer(parent);
 		
 		Location worldLocation = new Location(15, 17, 19, Terrain.NABOO);
@@ -65,7 +66,7 @@ public class TestSWGObject extends TestRunnerNoIntents {
 	@Test
 	public void testChildTerrainUpdates() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		
 		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
@@ -83,7 +84,7 @@ public class TestSWGObject extends TestRunnerNoIntents {
 	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent1() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
@@ -93,7 +94,7 @@ public class TestSWGObject extends TestRunnerNoIntents {
 	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent2() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
@@ -103,7 +104,7 @@ public class TestSWGObject extends TestRunnerNoIntents {
 	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent3() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		

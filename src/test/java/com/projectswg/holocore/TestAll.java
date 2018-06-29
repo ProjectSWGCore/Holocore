@@ -55,7 +55,7 @@ public class TestAll {
 	public static void terminateLog() {
 		DataManager.terminate();
 		if (IntentManager.getInstance() != null)
-			IntentManager.getInstance().terminate();
+			IntentManager.getInstance().close();
 		ScheduledUtilities.shutdown();
 	}
 	

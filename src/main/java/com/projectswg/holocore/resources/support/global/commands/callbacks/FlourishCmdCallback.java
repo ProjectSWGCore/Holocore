@@ -31,6 +31,7 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -39,7 +40,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 public class FlourishCmdCallback implements ICmdCallback  {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		// No performance, no flourish!
 		if (!player.getCreatureObject().isPerforming()) {
 			new SystemMessageIntent(player, "@performance:flourish_not_performing").broadcast();

@@ -30,11 +30,12 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class ChangeDanceCallback extends StartDanceCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject actor = player.getCreatureObject();
 		
 		if(actor.isPerforming()) {	// They need to be dancing in the first place!

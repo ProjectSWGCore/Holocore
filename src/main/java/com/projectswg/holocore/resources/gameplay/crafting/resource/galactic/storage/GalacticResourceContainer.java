@@ -218,7 +218,7 @@ public class GalacticResourceContainer {
 		private final Map<Terrain, ResourceSpawnTreePlanet> planetSpawnTree;
 		
 		public ResourceSpawnTreeResource() {
-			this.planetSpawnTree = new HashMap<>();
+			this.planetSpawnTree = new EnumMap<>(Terrain.class);
 		}
 		
 		public boolean addSpawn(GalacticResourceSpawn spawn) {

@@ -78,21 +78,21 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void createPlannedRoute() {
-		{ // Creates the full route
-			Location prevLocation = getLocation();
-			SWGObject prevParent = getParent();
-			for (ResolvedPatrolWaypoint waypoint : waypoints) {
+		Location prevLocation = getLocation();
+		SWGObject prevParent = getParent();
+		for (ResolvedPatrolWaypoint waypoint : waypoints) {
+			appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
+			prevParent = waypoint.getParent();
+			prevLocation = waypoint.getLocation();
+		}
+		if (patrolType.get() == PatrolType.FLIP) {
+			List<ResolvedPatrolWaypoint> waypointsReverse = new ArrayList<>(waypoints);
+			Collections.reverse(waypointsReverse);
+			for (ResolvedPatrolWaypoint waypoint : waypointsReverse) {
 				appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
 				prevParent = waypoint.getParent();
 				prevLocation = waypoint.getLocation();
 			}
-		}
-		
-		// Creates a route in reverse for flip patrol types
-		if (patrolType.get() == PatrolType.FLIP) {
-			List<Runnable> reversed = new ArrayList<>(plannedRoute);
-			Collections.reverse(reversed);
-			plannedRoute.addAll(reversed);
 		}
 	}
 	

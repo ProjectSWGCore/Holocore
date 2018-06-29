@@ -225,7 +225,7 @@ public class TradeSession {
 		}
 		
 		public boolean isCreature(CreatureObject creature) {
-			return creature != null && this.creature.equals(creature);
+			return this.creature.equals(creature);
 		}
 		
 		public boolean offerItem(SWGObject item) {

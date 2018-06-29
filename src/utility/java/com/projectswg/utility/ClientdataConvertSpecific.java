@@ -5,7 +5,7 @@ import com.projectswg.utility.clientdata.Converters;
 public class ClientdataConvertSpecific {
 	
 	public static void main(String [] args) {
-		Converters.OBJECTS_OBJECT_DATA.load();
+		Converters.BUILDOUT_OBJECTS.load();
 	}
 	
 }

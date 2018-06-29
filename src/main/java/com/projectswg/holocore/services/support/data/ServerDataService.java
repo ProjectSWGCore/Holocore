@@ -3,19 +3,17 @@ package com.projectswg.holocore.services.support.data;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ServerDataService extends Service {
 	
 	public ServerDataService() {
-		initializeServerFactory();
+		
 	}
 	
 	@Override
@@ -48,15 +46,6 @@ public class ServerDataService extends Service {
 					Log.e("Failed to delete ODB: %s", f);
 				}
 			}
-		}
-	}
-
-
-	private void initializeServerFactory() {
-		try {
-			ServerFactory.getInstance().updateServerIffs();
-		} catch (IOException e) {
-			Log.e(e);
 		}
 	}
 	

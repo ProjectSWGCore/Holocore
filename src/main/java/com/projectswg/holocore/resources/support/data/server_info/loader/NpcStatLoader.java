@@ -173,7 +173,7 @@ public final class NpcStatLoader extends DataLoader{
 		private static int get(SdbResultSet set, String prefix, String name) {
 			if (prefix == null)
 				return (int) set.getInt(name);
-			return (int) set.getInt(prefix + "_" + name);
+			return (int) set.getInt(prefix + '_' + name);
 		}
 		
 	}

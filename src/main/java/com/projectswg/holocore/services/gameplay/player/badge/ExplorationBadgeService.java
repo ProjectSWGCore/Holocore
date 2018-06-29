@@ -100,7 +100,7 @@ public class ExplorationBadgeService extends Service {
 		}
 	}	
 	
-	private class ExplorationRegion {
+	private static class ExplorationRegion {
 		
 		public Point3D location;
 		public float range;

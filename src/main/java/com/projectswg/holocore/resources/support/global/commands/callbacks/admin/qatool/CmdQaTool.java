@@ -48,6 +48,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -55,8 +56,8 @@ import me.joshlarson.jlcommon.log.Log;
 public class CmdQaTool implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
-		if (args != null && !args.isEmpty()) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
+		if (!args.isEmpty()) {
 			String[] command = args.split(" ");
 			String commandName = command[0];
 			
@@ -103,7 +104,7 @@ public class CmdQaTool implements ICmdCallback {
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();
 				if (owner != null)
-					new CloseConnectionIntent(owner.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+					CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
 				return;
 			}
 			Log.i("[%s] Requested deletion of object: %s", player.getUsername(), target);
@@ -118,7 +119,7 @@ public class CmdQaTool implements ICmdCallback {
 		args = args.trim();
 		CreatureObject recoveree = PlayerLookup.getCharacterByFirstName(args);
 		if (recoveree == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + "'");
+			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + '\'');
 			return;
 		}
 		

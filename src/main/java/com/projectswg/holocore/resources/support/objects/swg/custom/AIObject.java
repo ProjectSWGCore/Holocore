@@ -26,10 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.npc.ai.AICombatSupport;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 
 import java.util.ArrayList;
@@ -38,12 +43,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
 	private final List<ScheduledFuture<?>> scheduledTasks;
 	private final AICombatSupport combatSupport;
+	private final List<WeaponObject> primaryWeapons;
+	private final List<WeaponObject> secondaryWeapons;
+	private final SWGObject hiddenInventory;
+	private final AtomicBoolean deathblow;
 	
 	private ScheduledThreadPool executor;
 	private ScheduledMode mode;
@@ -54,6 +64,10 @@ public abstract class AIObject extends CreatureObject {
 		this.playersNearby = new CopyOnWriteArraySet<>();
 		this.scheduledTasks = new ArrayList<>();
 		this.combatSupport = new AICombatSupport(this);
+		this.primaryWeapons = new ArrayList<>();
+		this.secondaryWeapons = new ArrayList<>();
+		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
+		this.deathblow = new AtomicBoolean(false);
 		
 		this.executor = null;
 		this.mode = null;
@@ -70,6 +84,50 @@ public abstract class AIObject extends CreatureObject {
 		} else {
 			playersNearby.remove(aware);
 		}
+	}
+	
+	@Override
+	public boolean isEnemyOf(TangibleObject obj) {
+		Posture myPosture = getPosture();
+		if (myPosture == Posture.INCAPACITATED || myPosture == Posture.DEAD || !(obj instanceof CreatureObject))
+			return false;
+		Posture theirPosture = ((CreatureObject) obj).getPosture();
+		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
+	}
+	
+	public void setDeathblow(boolean deathblow) {
+		this.deathblow.set(deathblow);
+	}
+	
+	public boolean isDeathblow() {
+		return deathblow.get();
+	}
+	
+	public void addPrimaryWeapon(WeaponObject weapon) {
+		this.primaryWeapons.add(weapon);
+		weapon.systemMove(hiddenInventory);
+	}
+	
+	public void addSecondaryWeapon(WeaponObject weapon) {
+		this.secondaryWeapons.add(weapon);
+		weapon.systemMove(hiddenInventory);
+	}
+	
+	@Override
+	public void setEquippedWeapon(WeaponObject weapon) {
+		WeaponObject equipped = getEquippedWeapon();
+		if (equipped != null)
+			equipped.systemMove(hiddenInventory);
+		weapon.moveToContainer(this);
+		super.setEquippedWeapon(weapon);
+	}
+	
+	public List<WeaponObject> getPrimaryWeapons() {
+		return Collections.unmodifiableList(primaryWeapons);
+	}
+	
+	public List<WeaponObject> getSecondaryWeapons() {
+		return Collections.unmodifiableList(secondaryWeapons);
 	}
 	
 	public String getCreatureId() {
@@ -113,7 +171,7 @@ public abstract class AIObject extends CreatureObject {
 		return getMovementPercent() * getMovementScale() * getRunSpeed();
 	}
 	
-	protected final boolean isRooted() {
+	public final boolean isRooted() {
 		switch (getPosture()) {
 			case DEAD:
 			case INCAPACITATED:

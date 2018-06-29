@@ -28,7 +28,9 @@ package com.projectswg.holocore.resources.support.global.commands;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface ICmdCallback {
-	void execute(Player player, SWGObject target, String args);
+	void execute(@NotNull Player player, @Nullable SWGObject target, @NotNull String args);
 }

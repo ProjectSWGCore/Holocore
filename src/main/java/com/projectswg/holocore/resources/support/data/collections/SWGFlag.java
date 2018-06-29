@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.support.data.collections;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
@@ -49,8 +48,6 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	 * Creates a new {@link SWGFlag} for the defined baseline with the given view and update. Note
 	 * that this is an extension of {@link BitSet}
 	 * 
-	 * @param baseline {@link Baseline.BaselineType} for this BitSet, should be the same as the
-	 *            parent class this list resides in
 	 * @param view The baseline number this BitSet resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that
 	 *            this BitSet resides at within the baseline

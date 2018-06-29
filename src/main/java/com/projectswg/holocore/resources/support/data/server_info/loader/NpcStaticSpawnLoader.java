@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +74,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		private final String npcId;
 		private final String buildingId;
 		private final String mood;
-		private final String behavior;
+		private final AIBehavior behavior;
 		private final int patrolId;
 		private final PatrolFormation patrolFormation;
 		private final int loiterRadius;
@@ -91,8 +92,8 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 			this.spawnerType = set.getText("spawner_type").intern();
 			this.npcId = set.getText("npc_id").intern();
 			this.buildingId = set.getText("building_id").intern();
-			this.mood = set.getText("mood").intern();
-			this.behavior = set.getText("behaviour").intern();
+			this.mood = parseMood(set.getText("mood")).intern();
+			this.behavior = AIBehavior.valueOf(set.getText("behaviour"));
 			this.patrolId = (int) set.getInt("patrol_id");
 			this.patrolFormation = parsePatrolFormation(set.getText("patrol_formation"));
 			this.loiterRadius = (int) set.getInt("loiter_radius");
@@ -142,7 +143,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 			return mood;
 		}
 		
-		public String getBehavior() {
+		public AIBehavior getBehavior() {
 			return behavior;
 		}
 		
@@ -184,6 +185,10 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 				default:
 					return PatrolFormation.NONE;
 			}
+		}
+		
+		private static String parseMood(String mood) {
+			return mood.equals("idle") ? "neutral" : mood;
 		}
 		
 	}

@@ -37,11 +37,12 @@ import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import org.jetbrains.annotations.NotNull;
 
 public class RequestWaypointCmdCallback implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String[] cmd = args.split(" ", 6);
 		if (cmd.length < 5) {
 			SystemMessageIntent.broadcastPersonal(player, "Invalid number of arguments for waypoint! Expected 5 or 6");

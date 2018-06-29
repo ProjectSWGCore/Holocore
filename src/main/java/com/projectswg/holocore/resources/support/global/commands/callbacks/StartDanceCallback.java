@@ -33,6 +33,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class StartDanceCallback implements ICmdCallback {
 	private static final String ABILITY_NAME_PREFIX = "startDance+";
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		handleCommand(player, target, args, false);
 	}
 	

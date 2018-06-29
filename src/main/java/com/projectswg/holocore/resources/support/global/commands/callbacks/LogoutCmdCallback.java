@@ -39,13 +39,14 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
 public class LogoutCmdCallback implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
 		creature.setPosture(Posture.SITTING);
 		Log.i("Logout command called for %s - 30s timer started", creature.getObjectName());

@@ -24,66 +24,41 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.command;
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import com.projectswg.holocore.resources.support.global.commands.Command;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 
-public class ChatCommandIntent extends Intent {
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
+public final class NpcWeaponLoader extends DataLoader {
 	
-	private CreatureObject source;
-	private SWGObject target;
-	private Command command;
-	private String [] arguments;
+	private final Map<String, List<String>> weapons;
 	
-	public ChatCommandIntent() {
-		setSource(null);
-		setTarget(null);
-		setCommand(null);
-		setArguments(new String[0]);
+	NpcWeaponLoader() {
+		this.weapons = new HashMap<>();
 	}
 	
-	public ChatCommandIntent(CreatureObject source, SWGObject target, Command command, String [] arguments) {
-		setSource(source);
-		setTarget(target);
-		setCommand(command);
-		setArguments(arguments);
+	public List<String> getWeapons(String weaponId) {
+		return weapons.get(weaponId);
 	}
 	
-	public void setSource(CreatureObject source) {
-		this.source = source;
+	public void forEach(Consumer<List<String>> c) {
+		weapons.values().forEach(c);
 	}
 	
-	public void setTarget(SWGObject target) {
-		this.target = target;
-	}
-	
-	public void setCommand(Command command) {
-		this.command = command;
-	}
-	
-	public void setArguments(String [] arguments) {
-		this.arguments = new String[arguments.length];
-		System.arraycopy(arguments, 0, this.arguments, 0, arguments.length);
-	}
-	
-	public CreatureObject getSource() {
-		return source;
-	}
-	
-	public SWGObject getTarget() {
-		return target;
-	}
-	
-	public Command getCommand() {
-		return command;
-	}
-	
-	public String [] getArguments() {
-		// I do purposefully return this so you can modify the memory.. but in the future it may be good to change
-		return arguments;
+	@Override
+	public void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_weapon.sdb"))) {
+			while (set.next()) {
+				weapons.put(set.getText("weapon_id"), List.of(set.getText("weapons").split(";")));
+			}
+		}
 	}
 	
 }

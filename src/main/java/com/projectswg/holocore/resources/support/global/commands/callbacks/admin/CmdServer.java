@@ -36,6 +36,7 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiInputBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -43,7 +44,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CmdServer implements ICmdCallback {
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
 		
 		listBox.addListItem("Kick Player");

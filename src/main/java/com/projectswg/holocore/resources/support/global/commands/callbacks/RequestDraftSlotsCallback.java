@@ -31,11 +31,12 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.DraftSlo
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class RequestDraftSlotsCallback implements ICmdCallback{
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		DraftSchematic schematic = new DraftSchematic();		
 		player.sendPacket(new DraftSlotsQueryResponse(schematic));
 	}

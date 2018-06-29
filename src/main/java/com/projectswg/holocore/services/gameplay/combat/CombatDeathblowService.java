@@ -66,6 +66,7 @@ public class CombatDeathblowService extends Service {
 		
 		if (incapacitationTimer != null) {
 			if (incapacitationTimer.cancel(false)) {    // If the task is running, let them get back up
+				new BuffIntent("incapWeaken", killer, corpse, true).broadcast();
 				killCreature(killer, corpse);
 			}
 		} else {

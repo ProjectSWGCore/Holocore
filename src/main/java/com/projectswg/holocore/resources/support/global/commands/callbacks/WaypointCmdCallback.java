@@ -39,11 +39,12 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import org.jetbrains.annotations.NotNull;
 
 public class WaypointCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
@@ -170,11 +171,11 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (differentPlanetMessage) {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
 					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
-					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ')').broadcast();
 		} else {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
 					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
-					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+					+ ", "+ String.format("%.0f", location.getZ()) + ')').broadcast();
 		}
 	}
 

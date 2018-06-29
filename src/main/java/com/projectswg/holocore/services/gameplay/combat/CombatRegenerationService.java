@@ -1,9 +1,9 @@
 package com.projectswg.holocore.services.gameplay.combat;
 
-import com.projectswg.holocore.intents.support.global.command.ChatCommandIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureRevivedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
+import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -40,11 +40,11 @@ public class CombatRegenerationService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleChatCommandIntent(ChatCommandIntent cci) {
-		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
+	private void handleExecuteCommandIntent(ExecuteCommandIntent eci) {
+		if (!eci.getCommand().isCombatCommand() || !(eci.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand command = (CombatCommand) cci.getCommand();
-		CreatureObject source = cci.getSource();
+		CombatCommand command = (CombatCommand) eci.getCommand();
+		CreatureObject source = eci.getSource();
 		
 		double actionCost = command.getActionCost() * command.getAttackRolls();
 		int currentAction = source.getAction();

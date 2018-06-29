@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.objects.buildout;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import org.jetbrains.annotations.NotNull;
 
 public class BuildoutArea implements Comparable<BuildoutArea> {
 	
@@ -107,7 +108,7 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (o == null || !(o instanceof BuildoutArea))
+		if (!(o instanceof BuildoutArea))
 			return false;
 		BuildoutArea area = (BuildoutArea) o;
 		if (!terrain.equals(area.terrain))
@@ -120,7 +121,7 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	}
 	
 	@Override
-	public int compareTo(BuildoutArea area) {
+	public int compareTo(@NotNull BuildoutArea area) {
 		int comp = terrain.getName().compareTo(area.terrain.getName());
 		if (comp != 0)
 			return comp;
