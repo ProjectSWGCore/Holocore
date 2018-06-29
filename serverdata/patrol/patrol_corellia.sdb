@@ -23,27 +23,10 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1000205	1000200		CORELLIA	cor_weather_station	18	-30.3	-20.0	30.2	0	
 1000206	1000200		CORELLIA	cor_weather_station	19	-30.7	-20.0	95.8	10	
 1000300	1000300	LOOP	CORELLIA	cor_slavers_bunker	3	93.8	-36.0	60.3	0	Corellian Slaver Bunker - a technician
-1000301	1000300		CORELLIA	cor_slavers_bunker	3	95.2	-36.0	70.5	0	
-1000302	1000300		CORELLIA	cor_slavers_bunker	3	93.2	-36.0	70.5	0	
-1000303	1000300		CORELLIA	cor_slavers_bunker	3	92.6	-36.0	70.5	0	
-1000304	1000300		CORELLIA	cor_slavers_bunker	3	92.6	-36.0	70.5	0	
-1000305	1000300		CORELLIA	cor_slavers_bunker	3	94.6	-36.0	70.8	0	
-1000306	1000300		CORELLIA	cor_slavers_bunker	3	95.6	-36.0	79.3	0	
-1000307	1000300		CORELLIA	cor_slavers_bunker	2	105.8	-36.0	78.8	0	
-1000308	1000300		CORELLIA	cor_slavers_bunker	2	105.9	-36.0	94.8	0	
-1000309	1000300		CORELLIA	cor_slavers_bunker	2	105.7	-36.0	110.3	0	
-1000310	1000300		CORELLIA	cor_slavers_bunker	2	101.1	-36.0	112.3	0	
-1000311	1000300		CORELLIA	cor_slavers_bunker	1	97.0	-36.0	109.9	0	
-1000312	1000300		CORELLIA	cor_slavers_bunker	1	96.9	-36.0	113.7	0	
-1000313	1000300		CORELLIA	cor_slavers_bunker	1	97.5	-36.0	114.0	0	
-1000314	1000300		CORELLIA	cor_slavers_bunker	1	80.1	-36.0	111.5	0	
-1000315	1000300		CORELLIA	cor_slavers_bunker	1	77.3	-36.0	107.0	0	
-1000316	1000300		CORELLIA	cor_slavers_bunker	1	77.6	-36.0	105.2	0	
-1000317	1000300		CORELLIA	cor_slavers_bunker	1	76.2	-36.0	111.8	0	
-1000318	1000300		CORELLIA	cor_slavers_bunker	2	105.5	-36.0	111.0	0	
-1000319	1000300		CORELLIA	cor_slavers_bunker	2	105.8	-36.0	79.5	0	
-1000320	1000300		CORELLIA	cor_slavers_bunker	3	94.4	-36.0	79.1	0	
-1000321	1000300		CORELLIA	cor_slavers_bunker	3	93.9	-36.0	65.2	0	
+1000301	1000300		CORELLIA	cor_slavers_bunker	3	98.3	-36.0	78.8	0	
+1000302	1000300		CORELLIA	cor_slavers_bunker	3	84.0	-36.0	81.1	0	
+1000303	1000300		CORELLIA	cor_slavers_bunker	3	69.3	-36.0	78.9	0	
+1000304	1000300		CORELLIA	cor_slavers_bunker	3	70.3	-36.0	58.9	0	
 1000400	1000400	FLIP	CORELLIA	cor_weather_station	20	-2.1	-20.0	84.9	0	Weather Station - a helper droid
 1000401	1000400		CORELLIA	cor_weather_station	20	-14.6	-20.0	84.9	0	
 1000402	1000400		CORELLIA	cor_weather_station	19	-15.4	-20.0	99.2	0	
@@ -57,15 +40,13 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1000503	1000500		CORELLIA	cor_weather_station	10	35.4	-12.0	70.9	0	
 1000504	1000500		CORELLIA	cor_weather_station	10	35.4	-12.0	46.7	0	
 1000505	1000500		CORELLIA	cor_weather_station	5	26.6	-12.0	47.0	0	
-1000600	1000600	FLIP	CORELLIA	cor_slavers_bunker	4	33.7	-36.0	74.1	0	Corellian Slaver Bunker - a technician
-1000601	1000600		CORELLIA	cor_slavers_bunker	4	48.7	-36.0	73.8	0	
-1000602	1000600		CORELLIA	cor_slavers_bunker	4	48.7	-36.0	72.8	0	
-1000603	1000600		CORELLIA	cor_slavers_bunker	4	52.0	-36.0	73.9	0	
-1000604	1000600		CORELLIA	cor_slavers_bunker	4	52.5	-36.0	74.2	0	
-1000605	1000600		CORELLIA	cor_slavers_bunker	4	53.5	-36.0	82.9	0	
-1000606	1000600		CORELLIA	cor_slavers_bunker	4	49.7	-36.0	83.2	0	
-1000607	1000600		CORELLIA	cor_slavers_bunker	4	49.6	-36.0	85.1	0	
-1000700	1000700	LOOP	CORELLIA	cor_slavers_bunker	11	-48.4	-36.0	70.9	0	Corellian Slaver Bunker - a technician
+1000600	1000600	FLIP	CORELLIA	cor_slavers_bunker	4	28.7	-36.0	73.8	0	Corellian Slaver Bunker - a technician
+1000601	1000600		CORELLIA	cor_slavers_bunker	4	49.6	-36.0	73.8	0	
+1000602	1000600		CORELLIA	cor_slavers_bunker	4	53.1	-36.0	82.8	0	
+1000603	1000600		CORELLIA	cor_slavers_bunker	4	49.4	-36.0	85.9	0	
+1000604	1000600		CORELLIA	cor_slavers_bunker	4	46.8	-36.0	84.1	0	
+1000605	1000600		CORELLIA	cor_slavers_bunker	4	29.6	-36.0	83.9	0	
+1000700	1000700	LOOP	CORELLIA	cor_slavers_bunker	11	-48.4	-36.0	70.9	0	Corellian Slaver Bunker - a helper droid
 1000701	1000700		CORELLIA	cor_slavers_bunker	11	-48.4	-36.0	81.8	0	
 1000702	1000700		CORELLIA	cor_slavers_bunker	11	-69.9	-36.0	81.2	0	
 1000703	1000700		CORELLIA	cor_slavers_bunker	11	-70.8	-36.0	81.0	0	
@@ -80,7 +61,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1000803	1000800		CORELLIA	cor_slavers_bunker	11	-52.7	-36.0	73.2	0	
 1000804	1000800		CORELLIA	cor_slavers_bunker	11	-70.7	-36.0	73.4	0	
 1000805	1000800		CORELLIA	cor_slavers_bunker	11	-72.1	-36.0	79.9	0	
-1000900	1000900	LOOP	CORELLIA	cor_slavers_bunker	12	-50.9	-36.0	192.3	0	corellia_slaver_slave_10818931
+1000900	1000900	LOOP	CORELLIA	cor_slavers_bunker	12	-50.9	-36.0	192.3	0	Corellian Slaver Bunker - a slave
 1000901	1000900		CORELLIA	cor_slavers_bunker	12	-54.6	-36.0	188.2	0	
 1000902	1000900		CORELLIA	cor_slavers_bunker	12	-70.8	-36.0	190.1	0	
 1000903	1000900		CORELLIA	cor_slavers_bunker	12	-89.4	-36.0	190.1	0	
@@ -92,27 +73,27 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1000909	1000900		CORELLIA	cor_slavers_bunker	12	-95.8	-36.0	179.5	0	
 1000910	1000900		CORELLIA	cor_slavers_bunker	12	-67.5	-36.0	180.8	0	
 1000911	1000900		CORELLIA	cor_slavers_bunker	12	-51.5	-36.0	186.8	0	
-1001000	1001000	LOOP	CORELLIA	cor_slavers_bunker	12	-120.7	-36.0	152.9	0	corellian_slaver_guard_area_2_10866601
+1001000	1001000	LOOP	CORELLIA	cor_slavers_bunker	12	-120.7	-36.0	152.9	0	Corellian Slaver Bunker - an elite slaver guard
 1001001	1001000		CORELLIA	cor_slavers_bunker	12	-120.5	-36.0	163.1	0	
 1001002	1001000		CORELLIA	cor_slavers_bunker	12	-104.4	-36.0	162.9	0	
 1001003	1001000		CORELLIA	cor_slavers_bunker	12	-91.0	-36.0	163.0	0	
 1001004	1001000		CORELLIA	cor_slavers_bunker	12	-74.4	-36.0	163.2	0	
 1001005	1001000		CORELLIA	cor_slavers_bunker	12	-59.9	-36.0	163.3	0	
 1001006	1001000		CORELLIA	cor_slavers_bunker	12	-47.9	-36.0	158.6	0	
-1001100	1001100	FLIP	CORELLIA	cor_slavers_bunker	12	-122.6	-36.0	213.8	0	corellian_slaver_guard_area_2_10865754
+1001100	1001100	FLIP	CORELLIA	cor_slavers_bunker	12	-122.6	-36.0	213.8	0	Corellian Slaver Bunker - an elite slaver guard
 1001101	1001100		CORELLIA	cor_slavers_bunker	12	-122.4	-36.0	206.8	0	
 1001102	1001100		CORELLIA	cor_slavers_bunker	12	-112.5	-36.0	205.5	0	
 1001103	1001100		CORELLIA	cor_slavers_bunker	12	-93.2	-36.0	205.6	0	
 1001104	1001100		CORELLIA	cor_slavers_bunker	12	-74.1	-36.0	205.0	0	
 1001105	1001100		CORELLIA	cor_slavers_bunker	12	-56.0	-36.0	204.9	0	
 1001106	1001100		CORELLIA	cor_slavers_bunker	12	-47.3	-36.0	205.0	0	
-1001200	1001200	FLIP	CORELLIA	cor_slavers_bunker	12	-30.3	-36.0	160.9	0	corellian_slaver_guard_area_2_10866638
+1001200	1001200	FLIP	CORELLIA	cor_slavers_bunker	12	-30.3	-36.0	160.9	0	Corellian Slaver Bunker - an elite slaver guard
 1001201	1001200		CORELLIA	cor_slavers_bunker	12	-30.4	-36.0	173.6	0	
 1001202	1001200		CORELLIA	cor_slavers_bunker	12	-30.4	-36.0	183.5	0	
 1001203	1001200		CORELLIA	cor_slavers_bunker	12	-30.4	-36.0	193.9	0	
 1001204	1001200		CORELLIA	cor_slavers_bunker	12	-30.6	-36.0	201.8	0	
 1001205	1001200		CORELLIA	cor_slavers_bunker	12	-30.6	-36.0	206.8	0	
-1001300	1001300	FLIP	CORELLIA	cor_slavers_bunker	12	-31.1	-36.0	213.0	0	corellian_slaver_guard_area_2_10865563
+1001300	1001300	FLIP	CORELLIA	cor_slavers_bunker	12	-31.1	-36.0	213.0	0	Corellian Slaver Bunker - an elite slaver guard
 1001301	1001300		CORELLIA	cor_slavers_bunker	12	-45.9	-36.0	212.9	0	
 1001302	1001300		CORELLIA	cor_slavers_bunker	12	-47.3	-36.0	210.2	0	
 1001303	1001300		CORELLIA	cor_slavers_bunker	12	-47.1	-36.0	206.0	0	
@@ -121,7 +102,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001306	1001300		CORELLIA	cor_slavers_bunker	12	-100.7	-36.0	206.6	0	
 1001307	1001300		CORELLIA	cor_slavers_bunker	12	-113.0	-36.0	206.5	0	
 1001308	1001300		CORELLIA	cor_slavers_bunker	12	-121.7	-36.0	206.4	0	
-1001400	1001400	LOOP	CORELLIA	cor_slavers_bunker	12	-51.9	-36.0	181.5	0	corellia_slaver_slave_10818888
+1001400	1001400	LOOP	CORELLIA	cor_slavers_bunker	12	-51.9	-36.0	181.5	0	Corellian Slaver Bunker - a slave
 1001401	1001400		CORELLIA	cor_slavers_bunker	12	-61.8	-36.0	181.8	0	
 1001402	1001400		CORELLIA	cor_slavers_bunker	12	-69.3	-36.0	177.6	0	
 1001403	1001400		CORELLIA	cor_slavers_bunker	12	-66.8	-36.0	192.5	0	
@@ -129,7 +110,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001405	1001400		CORELLIA	cor_slavers_bunker	12	-77.4	-36.0	179.1	0	
 1001406	1001400		CORELLIA	cor_slavers_bunker	12	-56.5	-36.0	179.0	0	
 1001407	1001400		CORELLIA	cor_slavers_bunker	12	-52.7	-36.0	181.2	0	
-1001500	1001500	FLIP	CORELLIA	cor_slavers_bunker	12	-41.2	-36.0	214.3	0	corellian_slaver_guard_area_2_10866383
+1001500	1001500	FLIP	CORELLIA	cor_slavers_bunker	12	-41.2	-36.0	214.3	0	Corellian Slaver Bunker - an elite slaver guard
 1001501	1001500		CORELLIA	cor_slavers_bunker	12	-41.4	-36.0	199.9	0	
 1001502	1001500		CORELLIA	cor_slavers_bunker	12	-41.2	-36.0	194.8	0	
 1001503	1001500		CORELLIA	cor_slavers_bunker	12	-41.1	-36.0	192.2	0	
@@ -139,7 +120,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001507	1001500		CORELLIA	cor_slavers_bunker	12	-94.9	-36.0	183.7	0	
 1001508	1001500		CORELLIA	cor_slavers_bunker	12	-109.0	-36.0	183.5	0	
 1001509	1001500		CORELLIA	cor_slavers_bunker	12	-122.6	-36.0	183.1	0	
-1001600	1001600	FLIP	CORELLIA	cor_slavers_bunker	12	-29.7	-36.0	153.0	0	corellian_slaver_guard_area_2_10866534
+1001600	1001600	FLIP	CORELLIA	cor_slavers_bunker	12	-29.7	-36.0	153.0	0	Corellian Slaver Bunker - an elite slaver guard
 1001601	1001600		CORELLIA	cor_slavers_bunker	12	-43.2	-36.0	152.8	0	
 1001602	1001600		CORELLIA	cor_slavers_bunker	12	-47.8	-36.0	152.9	0	
 1001603	1001600		CORELLIA	cor_slavers_bunker	12	-47.6	-36.0	163.2	0	
@@ -148,7 +129,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001606	1001600		CORELLIA	cor_slavers_bunker	12	-98.1	-36.0	164.1	0	
 1001607	1001600		CORELLIA	cor_slavers_bunker	12	-109.3	-36.0	164.1	0	
 1001608	1001600		CORELLIA	cor_slavers_bunker	12	-122.6	-36.0	163.9	0	
-1001700	1001700	FLIP	CORELLIA	cor_slavers_bunker	12	-97.7	-36.0	191.8	0	corellia_slaver_slave_10818812
+1001700	1001700	FLIP	CORELLIA	cor_slavers_bunker	12	-97.7	-36.0	191.8	0	Corellian Slaver Bunker - a slave
 1001701	1001700		CORELLIA	cor_slavers_bunker	12	-100.2	-36.0	180.3	0	
 1001702	1001700		CORELLIA	cor_slavers_bunker	12	-111.7	-36.0	178.2	0	
 1001703	1001700		CORELLIA	cor_slavers_bunker	12	-112.7	-36.0	178.0	0	
@@ -157,7 +138,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001706	1001700		CORELLIA	cor_slavers_bunker	12	-113.0	-36.0	187.3	0	
 1001707	1001700		CORELLIA	cor_slavers_bunker	12	-120.3	-36.0	190.1	0	
 1001708	1001700		CORELLIA	cor_slavers_bunker	12	-121.0	-36.0	198.1	0	
-1001800	1001800	LOOP	CORELLIA	cor_slavers_bunker	15	-39.5	-36.0	237.6	0	corellian_slaver_medical_droid_11490688
+1001800	1001800	LOOP	CORELLIA	cor_slavers_bunker	15	-39.5	-36.0	237.6	0	Corellian Slaver Bunker - Probulator
 1001801	1001800		CORELLIA	cor_slavers_bunker	15	-36.0	-36.0	235.2	0	
 1001802	1001800		CORELLIA	cor_slavers_bunker	15	-32.0	-36.0	235.1	0	
 1001803	1001800		CORELLIA	cor_slavers_bunker	15	-28.1	-36.0	235.0	0	
@@ -180,7 +161,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001820	1001800		CORELLIA	cor_slavers_bunker	15	-45.4	-36.0	236.3	0	
 1001821	1001800		CORELLIA	cor_slavers_bunker	15	-46.4	-36.0	235.2	0	
 1001822	1001800		CORELLIA	cor_slavers_bunker	15	-42.9	-36.0	235.0	0	
-1001900	1001900	LOOP	CORELLIA	cor_slavers_bunker	16	-4.3	-36.0	257.7	0	corellian_slaver_elite_guard_area_2_10867144
+1001900	1001900	LOOP	CORELLIA	cor_slavers_bunker	16	-4.3	-36.0	257.7	0	Corellian Slaver Bunker - an elite slaver guard
 1001901	1001900		CORELLIA	cor_slavers_bunker	16	-4.1	-36.0	249.4	0	
 1001902	1001900		CORELLIA	cor_slavers_bunker	16	-4.0	-36.0	241.7	0	
 1001903	1001900		CORELLIA	cor_slavers_bunker	16	-3.9	-36.0	233.5	0	
@@ -189,22 +170,22 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1001906	1001900		CORELLIA	cor_slavers_bunker	16	2.6	-36.0	243.2	0	
 1001907	1001900		CORELLIA	cor_slavers_bunker	16	2.9	-36.0	251.9	0	
 1001908	1001900		CORELLIA	cor_slavers_bunker	16	0.5	-36.0	257.6	0	
-1002000	1002000	FLIP	CORELLIA	cor_slavers_bunker	18	5.9	-36.0	211.4	0	corellian_slaver_guard_area_2_10867243
+1002000	1002000	FLIP	CORELLIA	cor_slavers_bunker	18	5.9	-36.0	211.4	0	Corellian Slaver Bunker - a slaver guard
 1002001	1002000		CORELLIA	cor_slavers_bunker	18	5.3	-36.0	207.4	0	
 1002002	1002000		CORELLIA	cor_slavers_bunker	18	5.1	-36.0	201.1	0	
 1002003	1002000		CORELLIA	cor_slavers_bunker	18	4.8	-36.0	198.9	0	
 1002004	1002000		CORELLIA	cor_slavers_bunker	18	10.2	-36.0	199.3	0	
 1002005	1002000		CORELLIA	cor_slavers_bunker	18	18.5	-36.0	200.9	0	
 1002006	1002000		CORELLIA	cor_slavers_bunker	18	16.6	-36.0	194.0	0	
-1002100	1002100	FLIP	CORELLIA	cor_slavers_bunker	19	52.9	-36.0	225.7	0	corellian_slaver_guard_area_2_10867478
+1002100	1002100	FLIP	CORELLIA	cor_slavers_bunker	19	52.9	-36.0	225.7	0	Corellian Slaver Bunker - a slaver guard
 1002101	1002100		CORELLIA	cor_slavers_bunker	19	52.7	-36.0	242.2	0	
 1002102	1002100		CORELLIA	cor_slavers_bunker	19	47.0	-36.0	242.6	0	
 1002103	1002100		CORELLIA	cor_slavers_bunker	19	26.9	-36.0	243.1	0	
 1002104	1002100		CORELLIA	cor_slavers_bunker	19	26.8	-36.0	221.3	0	
-1002200	1002200	FLIP	CORELLIA	cor_slavers_bunker	21	30.8	-36.0	162.8	0	corellian_slaver_guard_area_2_10867589
+1002200	1002200	FLIP	CORELLIA	cor_slavers_bunker	21	30.8	-36.0	162.8	0	Corellian Slaver Bunker - an elite slaver guard
 1002201	1002200		CORELLIA	cor_slavers_bunker	21	47.3	-36.0	162.9	0	
 1002202	1002200		CORELLIA	cor_slavers_bunker	21	47.4	-36.0	176.3	0	
-1002300	1002300	LOOP	CORELLIA	cor_slavers_bunker	31	-36.6	-60.0	227.8	0	Corellian Slaver Bunker - a technician
+1002300	1002300	LOOP	CORELLIA	cor_slavers_bunker	31	-36.6	-60.0	227.8	0	Corellian Slaver Bunker - an elite slaver guard
 1002301	1002300		CORELLIA	cor_slavers_bunker	31	-36.8	-60.0	221.6	0	
 1002302	1002300		CORELLIA	cor_slavers_bunker	31	-29.5	-60.0	217.2	0	
 1002303	1002300		CORELLIA	cor_slavers_bunker	31	-26.3	-60.0	214.8	0	
@@ -222,13 +203,13 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1002315	1002300		CORELLIA	cor_slavers_bunker	31	-42.6	-60.0	217.4	0	
 1002316	1002300		CORELLIA	cor_slavers_bunker	31	-38.0	-60.0	219.5	0	
 1002317	1002300		CORELLIA	cor_slavers_bunker	31	-37.0	-60.0	225.3	0	
-1002400	1002400	FLIP	CORELLIA	cor_slavers_bunker	37	-136.7	-60.0	200.4	0	corellian_slaver_guard_area_3_10868241
+1002400	1002400	FLIP	CORELLIA	cor_slavers_bunker	37	-136.7	-60.0	200.4	0	Corellian Slaver Bunker - an elite slaver guard
 1002401	1002400		CORELLIA	cor_slavers_bunker	37	-136.7	-60.0	179.3	0	
 1002402	1002400		CORELLIA	cor_slavers_bunker	37	-138.7	-60.0	169.7	0	
 1002403	1002400		CORELLIA	cor_slavers_bunker	37	-138.7	-60.0	147.9	0	
 1002404	1002400		CORELLIA	cor_slavers_bunker	37	-137.0	-60.0	139.9	0	
 1002405	1002400		CORELLIA	cor_slavers_bunker	37	-136.6	-60.0	110.6	0	
-1002500	1002500	FLIP	CORELLIA	cor_slavers_bunker	37	-106.4	-60.0	147.5	0	corellia_slaver_slave_10820179
+1002500	1002500	FLIP	CORELLIA	cor_slavers_bunker	37	-106.4	-60.0	147.5	0	Corellian Slaver Bunker - a slave
 1002501	1002500		CORELLIA	cor_slavers_bunker	37	-106.8	-60.0	128.1	0	
 1002502	1002500		CORELLIA	cor_slavers_bunker	37	-106.5	-60.0	115.8	0	
 1002503	1002500		CORELLIA	cor_slavers_bunker	37	-113.2	-60.0	127.3	0	
@@ -237,25 +218,25 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1002506	1002500		CORELLIA	cor_slavers_bunker	37	-122.5	-60.0	144.1	0	
 1002507	1002500		CORELLIA	cor_slavers_bunker	37	-128.9	-60.0	109.8	0	
 1002508	1002500		CORELLIA	cor_slavers_bunker	37	-107.0	-60.0	109.6	0	
-1002600	1002600	FLIP	CORELLIA	cor_slavers_bunker	37	-136.4	-60.0	110.3	0	corellian_slaver_guard_area_3_10868164
+1002600	1002600	FLIP	CORELLIA	cor_slavers_bunker	37	-136.4	-60.0	110.3	0	Corellian Slaver Bunker - a slaver guard
 1002601	1002600		CORELLIA	cor_slavers_bunker	37	-136.5	-60.0	133.5	0	
 1002602	1002600		CORELLIA	cor_slavers_bunker	37	-135.2	-60.0	145.0	0	
 1002603	1002600		CORELLIA	cor_slavers_bunker	37	-135.0	-60.0	168.4	0	
 1002604	1002600		CORELLIA	cor_slavers_bunker	37	-136.6	-60.0	178.5	0	
 1002605	1002600		CORELLIA	cor_slavers_bunker	37	-136.7	-60.0	200.4	0	
-1002700	1002700	FLIP	CORELLIA	cor_slavers_bunker	37	-164.6	-60.0	195.9	0	corellian_slaver_elite_guard_area_3_10868454
+1002700	1002700	FLIP	CORELLIA	cor_slavers_bunker	37	-164.6	-60.0	195.9	0	Corellian Slaver Bunker - an elite slaver guard
 1002701	1002700		CORELLIA	cor_slavers_bunker	37	-149.7	-60.0	195.8	0	
 1002702	1002700		CORELLIA	cor_slavers_bunker	37	-132.0	-60.0	196.1	0	
 1002703	1002700		CORELLIA	cor_slavers_bunker	37	-119.6	-60.0	196.2	0	
 1002704	1002700		CORELLIA	cor_slavers_bunker	37	-108.1	-60.0	196.3	0	
-1002800	1002800	FLIP	CORELLIA	cor_slavers_bunker	37	-164.7	-60.0	177.3	0	corellia_slaver_slave_10819574
+1002800	1002800	FLIP	CORELLIA	cor_slavers_bunker	37	-164.7	-60.0	177.3	0	Corellian Slaver Bunker - a slave
 1002801	1002800		CORELLIA	cor_slavers_bunker	37	-160.2	-60.0	178.3	0	
 1002802	1002800		CORELLIA	cor_slavers_bunker	37	-145.5	-60.0	178.4	0	
 1002803	1002800		CORELLIA	cor_slavers_bunker	37	-145.0	-60.0	177.1	0	
 1002804	1002800		CORELLIA	cor_slavers_bunker	37	-145.2	-60.0	166.9	0	
 1002805	1002800		CORELLIA	cor_slavers_bunker	37	-148.7	-60.0	162.1	0	
 1002806	1002800		CORELLIA	cor_slavers_bunker	37	-147.7	-60.0	117.5	0	
-1002900	1002900	LOOP	CORELLIA	cor_slavers_bunker	37	-128.6	-60.0	187.1	0	corellia_slaver_slave_10820136
+1002900	1002900	LOOP	CORELLIA	cor_slavers_bunker	37	-128.6	-60.0	187.1	0	Corellian Slaver Bunker - a slave
 1002901	1002900		CORELLIA	cor_slavers_bunker	37	-128.3	-60.0	167.1	0	
 1002902	1002900		CORELLIA	cor_slavers_bunker	37	-109.2	-60.0	146.4	0	
 1002903	1002900		CORELLIA	cor_slavers_bunker	37	-108.4	-60.0	110.2	0	
@@ -265,7 +246,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1002907	1002900		CORELLIA	cor_slavers_bunker	37	-107.8	-60.0	173.7	0	
 1002908	1002900		CORELLIA	cor_slavers_bunker	37	-107.9	-60.0	186.6	0	
 1002909	1002900		CORELLIA	cor_slavers_bunker	37	-119.2	-60.0	188.6	0	
-1003000	1003000	FLIP	CORELLIA	cor_slavers_bunker	38	-74.2	-60.0	173.9	0	corellian_slaver_guard_area_3_10868542
+1003000	1003000	FLIP	CORELLIA	cor_slavers_bunker	38	-74.2	-60.0	173.9	0	Corellian Slaver Bunker - a slaver guard
 1003001	1003000		CORELLIA	cor_slavers_bunker	38	-61.8	-60.0	173.8	0	
 1003002	1003000		CORELLIA	cor_slavers_bunker	38	-45.3	-60.0	173.5	0	
 1003003	1003000		CORELLIA	cor_slavers_bunker	38	-29.6	-60.0	173.5	0	
@@ -274,7 +255,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003006	1003000		CORELLIA	cor_slavers_bunker	38	8.5	-60.0	173.3	0	
 1003007	1003000		CORELLIA	cor_slavers_bunker	38	8.8	-60.0	176.8	0	
 1003008	1003000		CORELLIA	cor_slavers_bunker	38	17.0	-60.0	181.1	0	
-1003100	1003100	LOOP	CORELLIA	cor_slavers_bunker	38	-23.0	-60.0	136.6	0	corellia_slaver_slave_10820686
+1003100	1003100	LOOP	CORELLIA	cor_slavers_bunker	38	-23.0	-60.0	136.6	0	Corellian Slaver Bunker - a slave
 1003101	1003100		CORELLIA	cor_slavers_bunker	38	-22.7	-60.0	152.0	0	
 1003102	1003100		CORELLIA	cor_slavers_bunker	38	-23.2	-60.0	160.7	0	
 1003103	1003100		CORELLIA	cor_slavers_bunker	38	-29.6	-60.0	165.8	0	
@@ -285,7 +266,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003108	1003100		CORELLIA	cor_slavers_bunker	38	-44.3	-60.0	154.7	0	
 1003109	1003100		CORELLIA	cor_slavers_bunker	38	-41.3	-60.0	140.1	0	
 1003110	1003100		CORELLIA	cor_slavers_bunker	38	-29.8	-60.0	138.8	0	
-1003200	1003200	LOOP	CORELLIA	cor_slavers_bunker	38	-61.0	-60.0	137.9	0	corellian_slaver_slavemaster_11193692
+1003200	1003200	LOOP	CORELLIA	cor_slavers_bunker	38	-61.0	-60.0	137.9	0	Corellian Slaver Bunker - a slavemaster
 1003201	1003200		CORELLIA	cor_slavers_bunker	38	-51.7	-60.0	141.0	0	
 1003202	1003200		CORELLIA	cor_slavers_bunker	38	-49.9	-60.0	145.7	0	
 1003203	1003200		CORELLIA	cor_slavers_bunker	38	-50.5	-60.0	153.9	0	
@@ -293,7 +274,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003205	1003200		CORELLIA	cor_slavers_bunker	38	-55.8	-60.0	167.1	0	
 1003206	1003200		CORELLIA	cor_slavers_bunker	38	-61.8	-60.0	165.9	0	
 1003207	1003200		CORELLIA	cor_slavers_bunker	38	-60.8	-60.0	143.8	0	
-1003300	1003300	FLIP	CORELLIA	cor_slavers_bunker	38	18.4	-60.0	124.3	0	corellian_slaver_elite_guard_area_3_10868737
+1003300	1003300	FLIP	CORELLIA	cor_slavers_bunker	38	18.4	-60.0	124.3	0	Chirq Elite Council 2 - an elite slaver guard
 1003301	1003300		CORELLIA	cor_slavers_bunker	38	8.7	-60.0	124.7	0	
 1003302	1003300		CORELLIA	cor_slavers_bunker	38	6.3	-60.0	127.3	0	
 1003303	1003300		CORELLIA	cor_slavers_bunker	38	-9.9	-60.0	128.5	0	
@@ -301,7 +282,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003305	1003300		CORELLIA	cor_slavers_bunker	38	-41.4	-60.0	128.5	0	
 1003306	1003300		CORELLIA	cor_slavers_bunker	38	-56.2	-60.0	128.5	0	
 1003307	1003300		CORELLIA	cor_slavers_bunker	38	-72.7	-60.0	128.3	0	
-1003400	1003400	LOOP	CORELLIA	cor_slavers_bunker	38	-42.7	-60.0	163.5	0	corellia_slaver_slave_10820810
+1003400	1003400	LOOP	CORELLIA	cor_slavers_bunker	38	-42.7	-60.0	163.5	0	Corellian Slaver Bunker - a slave
 1003401	1003400		CORELLIA	cor_slavers_bunker	38	-36.1	-60.0	160.3	0	
 1003402	1003400		CORELLIA	cor_slavers_bunker	38	-35.0	-60.0	154.4	0	
 1003403	1003400		CORELLIA	cor_slavers_bunker	38	-30.6	-60.0	145.7	0	
@@ -309,7 +290,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003405	1003400		CORELLIA	cor_slavers_bunker	38	-21.6	-60.0	153.1	0	
 1003406	1003400		CORELLIA	cor_slavers_bunker	38	-23.5	-60.0	161.9	0	
 1003407	1003400		CORELLIA	cor_slavers_bunker	38	-34.3	-60.0	164.8	0	
-1003500	1003500	LOOP	CORELLIA	cor_slavers_bunker	38	-21.8	-60.0	159.3	0	corellia_slaver_slave_10820745
+1003500	1003500	LOOP	CORELLIA	cor_slavers_bunker	38	-21.8	-60.0	159.3	0	Corellian Slaver Bunker - a slave
 1003501	1003500		CORELLIA	cor_slavers_bunker	38	-28.6	-60.0	161.7	0	
 1003502	1003500		CORELLIA	cor_slavers_bunker	38	-34.2	-60.0	158.4	0	
 1003503	1003500		CORELLIA	cor_slavers_bunker	38	-40.5	-60.0	160.3	0	
@@ -323,50 +304,43 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1003511	1003500		CORELLIA	cor_slavers_bunker	38	-25.5	-60.0	143.1	0	
 1003512	1003500		CORELLIA	cor_slavers_bunker	38	-23.5	-60.0	138.1	0	
 1003513	1003500		CORELLIA	cor_slavers_bunker	38	-22.5	-60.0	149.3	0	
-1003600	1003600	FLIP	CORELLIA	cor_slavers_bunker	41	45.6	-58.0	106.7	0	corellia_slaver_detention_guard_10372575
-1003601	1003600		CORELLIA	cor_slavers_bunker	41	45.7	-60.0	114.2	0	
-1003602	1003600		CORELLIA	cor_slavers_bunker	41	50.2	-60.0	118.1	0	
-1003603	1003600		CORELLIA	cor_slavers_bunker	41	46.0	-60.0	120.7	0	
-1003604	1003600		CORELLIA	cor_slavers_bunker	41	42.4	-60.0	117.9	0	
-1003605	1003600		CORELLIA	cor_slavers_bunker	41	45.1	-60.0	114.4	0	
-1003606	1003600		CORELLIA	cor_slavers_bunker	41	45.4	-58.0	103.0	0	
-1003607	1003600		CORELLIA	cor_slavers_bunker	41	45.3	-58.0	80.3	0	
-1003608	1003600		CORELLIA	cor_slavers_bunker	41	45.6	-58.0	99.4	0	
-1003700	1003700	FLIP	CORELLIA	cor_slavers_bunker	44	23.4	-76.0	114.1	0	corellian_slaver_elite_guard_area_4_10869719
-1003701	1003700		CORELLIA	cor_slavers_bunker	44	28.9	-76.0	113.2	0	
-1003702	1003700		CORELLIA	cor_slavers_bunker	44	37.6	-76.0	112.9	0	
-1003703	1003700		CORELLIA	cor_slavers_bunker	44	45.2	-76.0	113.2	0	
-1003704	1003700		CORELLIA	cor_slavers_bunker	44	47.7	-76.0	118.3	0	
-1003705	1003700		CORELLIA	cor_slavers_bunker	44	47.6	-76.0	136.2	0	
-1003706	1003700		CORELLIA	cor_slavers_bunker	44	36.5	-76.0	137.6	0	
-1003707	1003700		CORELLIA	cor_slavers_bunker	44	25.0	-76.0	137.0	0	
-1003708	1003700		CORELLIA	cor_slavers_bunker	44	23.0	-76.0	124.8	0	
-1003800	1003800	LOOP	CORELLIA	cor_slavers_bunker	44	46.8	-76.0	136.9	0	corellian_slaver_elite_guard_area_4_10869757
-1003801	1003800		CORELLIA	cor_slavers_bunker	44	32.6	-76.0	137.4	0	
-1003802	1003800		CORELLIA	cor_slavers_bunker	44	25.6	-76.0	137.2	0	
-1003803	1003800		CORELLIA	cor_slavers_bunker	44	23.1	-76.0	129.2	0	
-1003804	1003800		CORELLIA	cor_slavers_bunker	44	23.3	-76.0	114.6	0	
-1003805	1003800		CORELLIA	cor_slavers_bunker	44	33.8	-76.0	112.2	0	
-1003806	1003800		CORELLIA	cor_slavers_bunker	44	46.1	-76.0	113.5	0	
-1003807	1003800		CORELLIA	cor_slavers_bunker	44	48.8	-76.0	126.1	0	
-1003900	1003900	FLIP	CORELLIA	cor_slavers_bunker	45	-18.8	-28.0	85.1	0	corellian_slaver_guard_area_1_10119432
+1003600	1003600	LOOP	CORELLIA	cor_slavers_bunker	41	45.5	-58.0	77.6	0	Chirq Elite Council 2 - a prison guard
+1003601	1003600		CORELLIA	cor_slavers_bunker	41	45.4	-58.0	107.5	0	
+1003602	1003600		CORELLIA	cor_slavers_bunker	41	45.4	-60.0	114.5	0	
+1003603	1003600		CORELLIA	cor_slavers_bunker	41	50.5	-60.0	117.9	0	
+1003604	1003600		CORELLIA	cor_slavers_bunker	41	45.8	-60.0	120.7	0	
+1003605	1003600		CORELLIA	cor_slavers_bunker	41	42.2	-60.0	117.7	0	
+1003606	1003600		CORELLIA	cor_slavers_bunker	41	45.4	-60.0	114.5	0	
+1003607	1003600		CORELLIA	cor_slavers_bunker	41	45.4	-58.0	107.5	0	
+1003800	1003800	FLIP	CORELLIA	cor_slavers_bunker	43	43.7	-68.0	165.1	0	Chirq Elite Council 2 - an elite slaver guard
+1003801	1003800		CORELLIA	cor_slavers_bunker	43	43.5	-76.0	145.7	0	
+1003802	1003800		CORELLIA	cor_slavers_bunker	44	43.5	-76.0	137.3	0	
+1003803	1003800		CORELLIA	cor_slavers_bunker	44	46.8	-76.0	136.9	0	
+1003804	1003800		CORELLIA	cor_slavers_bunker	44	32.6	-76.0	137.4	0	
+1003805	1003800		CORELLIA	cor_slavers_bunker	44	25.6	-76.0	137.2	0	
+1003806	1003800		CORELLIA	cor_slavers_bunker	44	23.1	-76.0	129.2	0	
+1003807	1003800		CORELLIA	cor_slavers_bunker	44	23.3	-76.0	114.6	0	
+1003808	1003800		CORELLIA	cor_slavers_bunker	44	33.8	-76.0	112.2	0	
+1003809	1003800		CORELLIA	cor_slavers_bunker	44	46.1	-76.0	113.5	0	
+1003810	1003800		CORELLIA	cor_slavers_bunker	44	48.8	-76.0	126.1	0	
+1003900	1003900	FLIP	CORELLIA	cor_slavers_bunker	45	-18.8	-28.0	85.1	0	Chirq Elite Council 2 - an elite slaver guard
 1003901	1003900		CORELLIA	cor_slavers_bunker	45	-17.9	-28.0	96.0	0	
 1003902	1003900		CORELLIA	cor_slavers_bunker	45	-7.1	-28.0	95.7	0	
 1003903	1003900		CORELLIA	cor_slavers_bunker	45	-5.3	-28.0	91.2	0	
 1003904	1003900		CORELLIA	cor_slavers_bunker	45	-6.5	-28.0	85.0	0	
 1003905	1003900		CORELLIA	cor_slavers_bunker	45	-4.0	-28.0	78.0	0	
-1004000	1004000	FLIP	CORELLIA	cor_slavers_bunker	45	9.9	-28.0	163.2	0	corellian_slaver_guard_area_1_10119687
+1004000	1004000	FLIP	CORELLIA	cor_slavers_bunker	45	9.9	-28.0	163.2	0	Chirq Elite Council 2 - an elite slaver guard
 1004001	1004000		CORELLIA	cor_slavers_bunker	45	9.6	-28.0	146.2	0	
 1004002	1004000		CORELLIA	cor_slavers_bunker	45	10.0	-28.0	132.7	0	
 1004003	1004000		CORELLIA	cor_slavers_bunker	45	10.5	-28.0	114.8	0	
 1004004	1004000		CORELLIA	cor_slavers_bunker	45	11.0	-28.0	100.5	0	
 1004005	1004000		CORELLIA	cor_slavers_bunker	45	11.3	-28.0	89.2	0	
 1004006	1004000		CORELLIA	cor_slavers_bunker	45	11.7	-28.0	78.2	0	
-1004100	1004100	FLIP	CORELLIA	cor_slavers_bunker	45	40.4	-28.0	154.2	0	corellian_slaver_guard_area_1_10119649
+1004100	1004100	FLIP	CORELLIA	cor_slavers_bunker	45	40.4	-28.0	154.2	0	Chirq Elite Council 2 - an elite slaver guard
 1004101	1004100		CORELLIA	cor_slavers_bunker	45	20.8	-28.0	154.9	0	
 1004102	1004100		CORELLIA	cor_slavers_bunker	45	5.2	-28.0	132.3	0	
 1004103	1004100		CORELLIA	cor_slavers_bunker	45	6.1	-28.0	77.1	0	
-1004200	1004200	LOOP	CORELLIA	cor_slavers_bunker	45	35.7	-28.0	84.4	0	corellia_slaver_guard_area_1_10119330
+1004200	1004200	LOOP	CORELLIA	cor_slavers_bunker	45	35.7	-28.0	84.4	0	Chirq Elite Council 2 - an elite slaver guard
 1004201	1004200		CORELLIA	cor_slavers_bunker	45	28.6	-28.0	86.2	0	
 1004202	1004200		CORELLIA	cor_slavers_bunker	45	30.2	-28.0	91.7	0	
 1004203	1004200		CORELLIA	cor_slavers_bunker	45	38.7	-28.0	95.6	0	
@@ -384,20 +358,24 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1004215	1004200		CORELLIA	cor_slavers_bunker	45	21.9	-28.0	140.3	0	
 1004216	1004200		CORELLIA	cor_slavers_bunker	45	22.4	-28.0	85.0	0	
 1004217	1004200		CORELLIA	cor_slavers_bunker	45	35.2	-28.0	85.0	0	
-1004300	1004300	FLIP	CORELLIA	cor_world	0	-6163.3	36.5	-2827.3	0	corellia_cb_deflarian_courier_10012961
-1004301	1004300		CORELLIA	cor_world	0	-6212.9	18.6	-2872.6	0	
-1004302	1004300		CORELLIA	cor_world	0	-6229.9	0.5	-2925.5	0	
-1004303	1004300		CORELLIA	cor_world	0	-6232.0	0.5	-2981.5	0	
-1004304	1004300		CORELLIA	cor_world	0	-6299.6	0.5	-2969.7	0	
-1004305	1004300		CORELLIA	cor_world	0	-6353.5	0.6	-2948.6	0	
-1004306	1004300		CORELLIA	cor_world	0	-6379.7	2.5	-2952.0	0	
-1004307	1004300		CORELLIA	cor_world	0	-6381.6	2.6	-2949.4	0	
-1004400	1004400	FLIP	CORELLIA	cor_deflarian_bunker	8	78.8	-16.0	58.9	0	corellia_cb2_deflarian_henchman_10013811
-1004401	1004400		CORELLIA	cor_deflarian_bunker	8	52.1	-16.0	65.8	0	
-1004402	1004400		CORELLIA	cor_deflarian_bunker	8	40.8	-16.0	77.9	0	
-1004403	1004400		CORELLIA	cor_deflarian_bunker	7	21.6	-16.0	75.8	0	
-1004404	1004400		CORELLIA	cor_deflarian_bunker	7	3.6	-16.0	56.9	0	
-1004405	1004400		CORELLIA	cor_deflarian_bunker	10	3.3	0.0	-0.8	0	
+1004300	1004300	FLIP	CORELLIA	cor_world	0	-6160.7	36.5	-2825.5	0	Outback - a Deflarian Courier
+1004301	1004300		CORELLIA	cor_world	0	-6179.0	36.5	-2841.0	0	
+1004302	1004300		CORELLIA	cor_world	0	-6212.9	18.6	-2872.6	0	
+1004303	1004300		CORELLIA	cor_world	0	-6229.9	0.5	-2925.5	0	
+1004304	1004300		CORELLIA	cor_world	0	-6232.6	1.4	-2987.0	0	
+1004305	1004300		CORELLIA	cor_world	0	-6299.6	0.5	-2969.7	0	
+1004306	1004300		CORELLIA	cor_world	0	-6353.5	0.6	-2948.6	0	
+1004307	1004300		CORELLIA	cor_world	0	-6379.7	2.5	-2952.0	0	
+1004308	1004300		CORELLIA	cor_world	0	-6381.6	2.6	-2949.4	0	
+1004400	1004400	FLIP	CORELLIA	cor_deflarian_bunker	7	-16.4	-16.0	78.1	0	Deflarian Bunker - a Deflarian Henchman
+1004401	1004400		CORELLIA	cor_deflarian_bunker	7	3.5	-16.0	78.1	0	
+1004402	1004400		CORELLIA	cor_deflarian_bunker	7	3.5	-16.0	56.9	0	
+1004403	1004400		CORELLIA	cor_deflarian_bunker	7	3.5	-16.0	78.1	0	
+1004404	1004400		CORELLIA	cor_deflarian_bunker	7	29.5	-16.0	78.1	0	
+1004405	1004400		CORELLIA	cor_deflarian_bunker	8	38.9	-16.0	78.1	0	
+1004406	1004400		CORELLIA	cor_deflarian_bunker	8	60.6	-16.0	58.8	0	
+1004407	1004400		CORELLIA	cor_deflarian_bunker	8	79.4	-16.0	59.1	0	
+1004408	1004400		CORELLIA	cor_deflarian_bunker	8	79.4	-16.0	82.2	0	
 1004500	1004500	FLIP	CORELLIA	cor_droid_bunker	10	-106.7	-18.0	-58.3	0	battle_droid_patrol4_19250100
 1004501	1004500		CORELLIA	cor_droid_bunker	9	-105.9	-18.0	-72.3	0	
 1004502	1004500		CORELLIA	cor_droid_bunker	9	-90.1	-18.0	-71.6	0	
@@ -454,7 +432,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1005207	1005200		CORELLIA	cor_droid_bunker	36	-121.8	-33.8	-282.1	0	
 1005208	1005200		CORELLIA	cor_droid_bunker	36	-135.9	-33.8	-282.1	0	
 1005209	1005200		CORELLIA	cor_droid_bunker	37	-136.1	-33.8	-297.5	0	
-1005300	1005300	FLIP	CORELLIA	cor_droid_bunker	37	-135.9	-33.8	-316.6	0	droideka_patrol2_19253990
+1005300	1005300	FLIP	CORELLIA	cor_droid_bunker	37	-135.9	-33.8	-316.6	0	Droid Bunker - Battle Droid
 1005301	1005300		CORELLIA	cor_droid_bunker	37	-136.4	-33.8	-340.4	0	
 1005302	1005300		CORELLIA	cor_droid_bunker	38	-136.4	-34.3	-367.5	0	
 1005303	1005300		CORELLIA	cor_droid_bunker	38	-105.7	-34.2	-368.4	0	
@@ -590,19 +568,20 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1007401	1007400		CORELLIA	cor_world	0	-3296.8	86.0	3226.1	0	
 1007402	1007400		CORELLIA	cor_world	0	-3294.6	86.0	3265.2	0	
 1007403	1007400		CORELLIA	cor_world	0	-3324.2	86.0	3266.4	0	
-1007500	1007500	FLIP	CORELLIA	cor_korvella_frosch_research_station	5	4.8	-12.0	24.8	0	ac_frosch_guard_10717588
-1007501	1007500		CORELLIA	cor_korvella_frosch_research_station	4	3.7	-9.1	14.8	0	
-1007502	1007500		CORELLIA	cor_korvella_frosch_research_station	3	3.0	0.3	-3.6	0	
-1007503	1007500		CORELLIA	cor_korvella_frosch_research_station	2	-3.4	0.3	-3.6	0	
-1007504	1007500		CORELLIA	cor_korvella_frosch_research_station	2	-4.0	0.3	2.8	0	
-1007600	1007600	FLIP	CORELLIA	cor_korvella_frosch_research_station	7	-70.7	-20.0	26.7	0	ac_frosch_guard_10717611
+1007500	1007500	FLIP	CORELLIA	cor_korvella_frosch_research_station	5	3.5	-12.0	40.0	0	Frosch Research Station - a Frosch Guard
+1007501	1007500		CORELLIA	cor_korvella_frosch_research_station	4	3.5	-12.0	20.1	0	
+1007502	1007500		CORELLIA	cor_korvella_frosch_research_station	4	3.5	0.0	2.9	0	
+1007503	1007500		CORELLIA	cor_korvella_frosch_research_station	3	3.5	0.3	-3.8	0	
+1007504	1007500		CORELLIA	cor_korvella_frosch_research_station	2	-3.5	0.3	-3.9	0	
+1007505	1007500		CORELLIA	cor_korvella_frosch_research_station	2	-3.4	0.3	3.5	0	
+1007600	1007600	FLIP	CORELLIA	cor_korvella_frosch_research_station	7	-70.7	-20.0	26.7	0	Frosch Research Station - a Frosch Guard
 1007601	1007600		CORELLIA	cor_korvella_frosch_research_station	7	-54.0	-20.0	55.6	0	
-1007700	1007700	FLIP	CORELLIA	cor_korvella_frosch_research_station	7	-54.2	-20.0	37.0	0	ac_frosch_guard_10717631
+1007700	1007700	FLIP	CORELLIA	cor_korvella_frosch_research_station	7	-54.2	-20.0	37.0	0	Frosch Research Station - a Frosch Guard
 1007701	1007700		CORELLIA	cor_korvella_frosch_research_station	7	-53.3	-20.0	64.3	0	
 1007702	1007700		CORELLIA	cor_korvella_frosch_research_station	7	-69.1	-20.0	65.4	0	
 1007703	1007700		CORELLIA	cor_korvella_frosch_research_station	7	-68.5	-20.0	36.7	0	
 1007704	1007700		CORELLIA	cor_korvella_frosch_research_station	7	-61.0	-20.0	36.6	0	
-1007800	1007800	FLIP	CORELLIA	cor_korvella_frosch_research_station	11	47.0	-12.0	78.6	0	ac_frosch_guard_10717433
+1007800	1007800	FLIP	CORELLIA	cor_korvella_frosch_research_station	11	47.0	-12.0	78.6	0	Frosch Research Station - a Frosch Guard
 1007801	1007800		CORELLIA	cor_korvella_frosch_research_station	11	73.3	-12.0	77.1	0	
 1007802	1007800		CORELLIA	cor_korvella_frosch_research_station	11	72.6	-12.0	88.5	0	
 1007803	1007800		CORELLIA	cor_korvella_frosch_research_station	11	48.3	-12.0	89.1	0	
@@ -614,7 +593,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1007809	1007800		CORELLIA	cor_korvella_frosch_research_station	13	21.4	-20.0	125.1	0	
 1007810	1007800		CORELLIA	cor_korvella_frosch_research_station	13	21.8	-20.0	138.5	0	
 1007811	1007800		CORELLIA	cor_korvella_frosch_research_station	13	24.3	-20.0	144.4	0	
-1007900	1007900	LOOP	CORELLIA	cor_korvella_frosch_research_station	11	60.6	-12.0	83.9	0	ac_frosch_guard_10717815
+1007900	1007900	LOOP	CORELLIA	cor_korvella_frosch_research_station	11	60.6	-12.0	83.9	0	Frosch Research Station - a Frosch Guard
 1007901	1007900		CORELLIA	cor_korvella_frosch_research_station	11	60.0	-12.0	78.2	0	
 1007902	1007900		CORELLIA	cor_korvella_frosch_research_station	11	49.7	-12.0	76.6	0	
 1007903	1007900		CORELLIA	cor_korvella_frosch_research_station	11	48.6	-12.0	88.4	0	
@@ -623,7 +602,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1007906	1007900		CORELLIA	cor_korvella_frosch_research_station	11	71.4	-12.0	77.9	0	
 1007907	1007900		CORELLIA	cor_korvella_frosch_research_station	11	71.6	-12.0	88.3	0	
 1007908	1007900		CORELLIA	cor_korvella_frosch_research_station	11	61.4	-12.0	88.9	0	
-1008000	1008000	FLIP	CORELLIA	cor_korvella_frosch_research_station	13	35.4	-20.0	118.0	0	ac_frosch_guard_10717522
+1008000	1008000	FLIP	CORELLIA	cor_korvella_frosch_research_station	13	35.4	-20.0	118.0	0	Frosch Research Station - a Frosch Guard
 1008001	1008000		CORELLIA	cor_korvella_frosch_research_station	13	35.3	-12.0	92.3	0	
 1008002	1008000		CORELLIA	cor_korvella_frosch_research_station	10	35.7	-12.0	72.4	0	
 1008003	1008000		CORELLIA	cor_korvella_frosch_research_station	10	31.5	-12.0	70.9	0	
@@ -641,7 +620,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1008015	1008000		CORELLIA	cor_korvella_frosch_research_station	18	-31.3	-20.0	43.5	0	
 1008016	1008000		CORELLIA	cor_korvella_frosch_research_station	17	-30.6	-20.0	3.8	0	
 1008017	1008000		CORELLIA	cor_korvella_frosch_research_station	16	-19.5	-20.0	1.8	0	
-1008100	1008100	FLIP	CORELLIA	cor_korvella_frosch_research_station	16	-18.3	-20.0	5.3	0	ac_frosch_guard_10717560
+1008100	1008100	FLIP	CORELLIA	cor_korvella_frosch_research_station	16	-18.3	-20.0	5.3	0	Frosch Research Station - a Frosch Guard
 1008101	1008100		CORELLIA	cor_korvella_frosch_research_station	15	-7.6	-20.0	3.1	0	
 1008102	1008100		CORELLIA	cor_korvella_frosch_research_station	14	17.0	-12.0	2.6	0	
 1008103	1008100		CORELLIA	cor_korvella_frosch_research_station	14	26.6	-12.0	8.9	0	
@@ -650,7 +629,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1008106	1008100		CORELLIA	cor_korvella_frosch_research_station	10	35.9	-12.0	34.5	0	
 1008107	1008100		CORELLIA	cor_korvella_frosch_research_station	10	36.3	-12.0	47.3	0	
 1008108	1008100		CORELLIA	cor_korvella_frosch_research_station	5	19.2	-12.0	46.3	0	
-1008200	1008200	FLIP	CORELLIA	cor_world	0	-3661.6	101.0	3369.2	0	ac_frosch_gurd_12544011
+1008200	1008200	FLIP	CORELLIA	cor_world	0	-3661.6	101.0	3369.2	0	Frosch Research Station - a Frosch Guard
 1008201	1008200		CORELLIA	cor_world	0	-3650.4	101.0	3376.8	0	
 1008202	1008200		CORELLIA	cor_world	0	-3641.2	101.0	3393.6	0	
 1008203	1008200		CORELLIA	cor_world	0	-3641.8	101.0	3432.5	0	
@@ -660,7 +639,7 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1008207	1008200		CORELLIA	cor_world	0	-3711.6	101.0	3424.6	0	
 1008208	1008200		CORELLIA	cor_world	0	-3707.3	101.0	3391.1	0	
 1008209	1008200		CORELLIA	cor_world	0	-3673.8	101.0	3371.5	0	
-1008300	1008300	FLIP	CORELLIA	cor_world	0	-3673.8	101.0	3371.5	0	ac_frosch_guard_12544064
+1008300	1008300	FLIP	CORELLIA	cor_world	0	-3673.8	101.0	3371.5	0	Frosch Research Station - a Frosch Guard
 1008301	1008300		CORELLIA	cor_world	0	-3684.4	101.0	3373.0	0	
 1008302	1008300		CORELLIA	cor_world	0	-3705.4	101.0	3390.9	0	
 1008303	1008300		CORELLIA	cor_world	0	-3708.7	101.0	3428.1	0	
@@ -668,89 +647,68 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1008305	1008300		CORELLIA	cor_world	0	-3640.7	101.0	3428.1	0	
 1008306	1008300		CORELLIA	cor_world	0	-3645.1	101.0	3392.7	0	
 1008307	1008300		CORELLIA	cor_world	0	-3660.1	101.0	3364.4	0	
-1008400	1008400	LOOP	CORELLIA	cor_world	0	-3296.8	86.0	3294.9	0	smuggler_enemy_patrol_10014595
-1008401	1008400		CORELLIA	cor_world	0	-3319.4	86.0	3290.6	0	
-1008402	1008400		CORELLIA	cor_world	0	-3317.1	86.0	3266.1	0	
-1008403	1008400		CORELLIA	cor_world	0	-3292.3	86.0	3262.8	0	
-1008404	1008400		CORELLIA	cor_world	0	-3291.4	86.0	3286.1	0	
-1008500	1008500	FLIP	CORELLIA	cor_world	0	-477.5	28.0	-4465.4	0	smuggler_enemy_patrol_10064775
+1008400	1008400	LOOP	CORELLIA	cor_world	0	-3292.9	86.0	3265.5	0	Kor Vella - a Corsec inspector
+1008401	1008400		CORELLIA	cor_world	0	-3292.9	86.0	3292.2	0	
+1008402	1008400		CORELLIA	cor_world	0	-3319.2	86.0	3292.2	0	
+1008403	1008400		CORELLIA	cor_world	0	-3319.2	86.0	3265.5	0	
+1008500	1008500	FLIP	CORELLIA	cor_world	0	-477.5	28.0	-4465.4	0	Coronet - a Corsec inspector
 1008501	1008500		CORELLIA	cor_world	0	-524.2	28.0	-4464.6	0	
 1008502	1008500		CORELLIA	cor_world	0	-524.1	28.0	-4500.9	0	
 1008503	1008500		CORELLIA	cor_world	0	-525.3	28.0	-4463.1	0	
 1008504	1008500		CORELLIA	cor_world	0	-545.4	28.0	-4464.6	0	
-1008600	1008600	LOOP	CORELLIA	cor_world	0	-526.2	28.0	-4558.7	0	smuggler_enemy_patrol_10064712
+1008600	1008600	LOOP	CORELLIA	cor_world	0	-526.2	28.0	-4558.7	0	Coronet - a Corsec inspector
 1008601	1008600		CORELLIA	cor_world	0	-524.1	28.0	-4534.6	0	
 1008602	1008600		CORELLIA	cor_world	0	-471.0	28.0	-4534.0	0	
 1008603	1008600		CORELLIA	cor_world	0	-470.1	28.0	-4557.8	0	
 1008604	1008600		CORELLIA	cor_world	0	-503.9	28.0	-4556.6	0	
-1008700	1008700	LOOP	CORELLIA	cor_world	0	-396.4	29.2	-3592.8	0	ac_ms_trainer_10767418
-1008701	1008700		CORELLIA	cor_world	0	-385.8	29.4	-3574.4	0	
-1008702	1008700		CORELLIA	cor_world	0	-360.9	29.5	-3589.4	0	
-1008703	1008700		CORELLIA	cor_world	0	-343.9	28.0	-3599.6	0	
-1008704	1008700		CORELLIA	cor_world	0	-341.2	28.2	-3612.7	0	
-1008705	1008700		CORELLIA	cor_world	0	-348.2	29.0	-3620.9	0	
-1008706	1008700		CORELLIA	cor_world	0	-358.8	28.3	-3643.8	0	
-1008707	1008700		CORELLIA	cor_world	0	-388.0	28.7	-3631.0	0	
-1008708	1008700		CORELLIA	cor_world	0	-420.4	27.7	-3614.1	0	
-1008709	1008700		CORELLIA	cor_world	0	-435.6	27.7	-3626.3	0	
-1008710	1008700		CORELLIA	cor_world	0	-422.3	28.4	-3649.5	0	
-1008711	1008700		CORELLIA	cor_world	0	-396.4	29.0	-3611.1	0	
-1008800	1008800	FLIP	CORELLIA	cor_world	0	-388.2	28.7	-3642.5	0	ac_ms_trainer_10767482
-1008801	1008800		CORELLIA	cor_world	0	-407.8	28.5	-3630.3	0	
-1008802	1008800		CORELLIA	cor_world	0	-415.6	27.8	-3613.1	0	
-1008803	1008800		CORELLIA	cor_world	0	-393.8	29.3	-3599.5	0	
-1008804	1008800		CORELLIA	cor_world	0	-377.2	29.5	-3580.0	0	
-1008805	1008800		CORELLIA	cor_world	0	-393.0	29.3	-3578.2	0	
-1008806	1008800		CORELLIA	cor_world	0	-385.6	29.8	-3607.5	0	
-1008807	1008800		CORELLIA	cor_world	0	-376.3	28.5	-3641.4	0	
-1008808	1008800		CORELLIA	cor_world	0	-397.6	29.2	-3649.6	0	
-1008900	1008900	FLIP	CORELLIA	cor_world	0	3808.6	380.0	-4023.6	0	starships_patrol_02_21569112
+1008900	1008900	FLIP	CORELLIA	cor_world	0	3808.6	380.0	-4023.6	0	Outback - a stranded Imperial pilot
 1008901	1008900		CORELLIA	cor_world	0	3794.7	380.0	-4030.1	0	
 1008902	1008900		CORELLIA	cor_world	0	3788.5	380.0	-4037.8	0	
 1008903	1008900		CORELLIA	cor_world	0	3791.3	380.0	-4047.6	0	
 1008904	1008900		CORELLIA	cor_world	0	3805.0	380.0	-4050.0	0	
 1008905	1008900		CORELLIA	cor_world	0	3816.3	380.0	-4047.2	0	
-1009000	1009000	FLIP	CORELLIA	cor_imp_captured_starships	6	-54.8	-9.0	64.1	0	wedge_guard_05_21569201
-1009001	1009000		CORELLIA	cor_imp_captured_starships	6	-54.7	-9.0	55.4	0	
-1009002	1009000		CORELLIA	cor_imp_captured_starships	6	-54.6	-9.0	41.4	0	
-1009100	1009100	FLIP	CORELLIA	cor_world	0	3757.9	380.0	-4051.0	0	starships_patrol_01_21569091
+1009000	1009000	FLIP	CORELLIA	cor_imp_captured_starships	6	-75.7	-9.0	27.3	0	RTP - Imperial Captured Starships - a Stormtrooper guard
+1009001	1009000		CORELLIA	cor_imp_captured_starships	6	-54.5	-9.0	27.2	0	
+1009002	1009000		CORELLIA	cor_imp_captured_starships	6	-54.5	-9.0	62.8	0	
+1009003	1009000		CORELLIA	cor_imp_captured_starships	6	-54.5	-9.0	27.2	0	
+1009100	1009100	FLIP	CORELLIA	cor_world	0	3757.9	380.0	-4051.0	0	Outback - a miner
 1009101	1009100		CORELLIA	cor_world	0	3764.6	380.0	-4045.1	0	
 1009102	1009100		CORELLIA	cor_world	0	3772.1	380.0	-4026.5	0	
 1009103	1009100		CORELLIA	cor_world	0	3773.3	380.0	-4011.8	0	
-1009200	1009200	FLIP	CORELLIA	cor_world	0	3103.3	300.0	5141.6	0	smuggler_enemy_patrol_10014770
+1009200	1009200	FLIP	CORELLIA	cor_world	0	3103.3	300.0	5141.6	0	Doaba Guerfel - a Corsec inspector
 1009201	1009200		CORELLIA	cor_world	0	3098.9	300.0	5167.7	0	
 1009202	1009200		CORELLIA	cor_world	0	3125.4	300.0	5168.6	0	
 1009203	1009200		CORELLIA	cor_world	0	3120.5	300.0	5138.5	0	
-1009300	1009300	FLIP	CORELLIA	cor_world	0	3048.3	300.0	5196.8	0	smuggler_enemy_patrol_10014802
+1009300	1009300	FLIP	CORELLIA	cor_world	0	3048.3	300.0	5196.8	0	Doaba Guerfel - a Corsec inspector
 1009301	1009300		CORELLIA	cor_world	0	3050.7	299.9	5171.2	0	
 1009302	1009300		CORELLIA	cor_world	0	3062.1	300.0	5168.9	0	
 1009303	1009300		CORELLIA	cor_world	0	3065.4	298.2	5130.7	0	
 1009304	1009300		CORELLIA	cor_world	0	3103.7	300.0	5131.8	0	
 1009305	1009300		CORELLIA	cor_world	0	3104.7	300.0	5169.2	0	
 1009306	1009300		CORELLIA	cor_world	0	3052.7	300.0	5172.0	0	
-1009400	1009400	LOOP	CORELLIA	cor_doaba_pendretronics	5	3.3	-12.0	33.9	0	pendretronics_patrol_01_11700799
+1009400	1009400	FLIP	CORELLIA	cor_doaba_pendretronics	5	3.3	-12.0	33.9	0	Pendretronics - a Pendretronics security guard
 1009401	1009400		CORELLIA	cor_doaba_pendretronics	5	11.9	-12.0	42.8	0	
 1009402	1009400		CORELLIA	cor_doaba_pendretronics	5	12.2	-12.0	50.9	0	
 1009403	1009400		CORELLIA	cor_doaba_pendretronics	5	7.9	-12.0	55.3	0	
 1009404	1009400		CORELLIA	cor_doaba_pendretronics	5	-1.0	-12.0	55.0	0	
 1009405	1009400		CORELLIA	cor_doaba_pendretronics	5	-5.9	-12.0	50.8	0	
 1009406	1009400		CORELLIA	cor_doaba_pendretronics	5	-5.8	-12.0	42.8	0	
-1009500	1009500	FLIP	CORELLIA	cor_doaba_pendretronics	10	35.7	-12.0	87.5	0	pendretronics_patrol_02_11700735
+1009500	1009500	FLIP	CORELLIA	cor_doaba_pendretronics	10	35.7	-12.0	87.5	0	Pendretronics - a Pendretronics security guard
 1009501	1009500		CORELLIA	cor_doaba_pendretronics	10	35.2	-12.0	72.6	0	
 1009502	1009500		CORELLIA	cor_doaba_pendretronics	10	35.2	-12.0	52.5	0	
 1009503	1009500		CORELLIA	cor_doaba_pendretronics	10	35.0	-12.0	34.9	0	
 1009504	1009500		CORELLIA	cor_doaba_pendretronics	10	26.5	-12.0	34.9	0	
-1009600	1009600	FLIP	CORELLIA	cor_doaba_pendretronics	14	53.5	-12.0	0.1	0	pendretronics_patrol_03_11700747
+1009600	1009600	FLIP	CORELLIA	cor_doaba_pendretronics	14	53.5	-12.0	0.1	0	Pendretronics - a Pendretronics security guard
 1009601	1009600		CORELLIA	cor_doaba_pendretronics	14	31.9	-12.0	0.8	0	
 1009602	1009600		CORELLIA	cor_doaba_pendretronics	14	21.3	-12.0	5.2	0	
 1009603	1009600		CORELLIA	cor_doaba_pendretronics	14	21.2	-12.0	14.1	0	
 1009604	1009600		CORELLIA	cor_doaba_pendretronics	14	30.6	-12.0	19.2	0	
 1009605	1009600		CORELLIA	cor_doaba_pendretronics	14	53.0	-12.0	20.6	0	
-1009700	1009700	FLIP	CORELLIA	cor_chirq_council2	26	98.1	-20.0	111.4	0	chirq_braganti_hooge_11702059
+1009700	1009700	FLIP	CORELLIA	cor_chirq_council2	26	98.1	-20.0	111.4	0	Chirq Elite Council 2 - Braganti Hooge
 1009701	1009700		CORELLIA	cor_chirq_council2	23	84.6	-20.0	111.4	0	
 1009702	1009700		CORELLIA	cor_chirq_council2	27	72.9	-20.0	110.6	0	
 1009703	1009700		CORELLIA	cor_chirq_council2	27	67.0	-20.0	105.0	0	
-1009800	1009800	FLIP	CORELLIA	cor_world	0	4019.2	1.3	4821.6	0	chirq_sentinel_patrol_11701949
+1009800	1009800	LOOP	CORELLIA	cor_world	0	4019.2	1.3	4821.6	0	Chirq Elite Council 2 - Chirq Council sentinel
 1009801	1009800		CORELLIA	cor_world	0	4009.7	1.4	4813.6	0	
 1009802	1009800		CORELLIA	cor_world	0	3999.5	1.5	4821.1	0	
 1009900	1009900	FLIP	CORELLIA	cor_doaba_sb_cavern	5	24.8	-53.2	-176.8	0	ac_sb_penitent_11121897
@@ -839,3 +797,144 @@ INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER
 1011004	1011000		CORELLIA	cor_world	0	-450.0	28.0	-4750.8	0	
 1011005	1011000		CORELLIA	cor_world	0	-486.7	28.0	-4707.4	0	
 1011006	1011000		CORELLIA	cor_world	0	-504.0	28.0	-4707.0	0	
+1011200	1011200	FLIP	CORELLIA	cor_world	0	6746.0	315.0	-5598.0	0	Bela Vistal - a CorSec trooper
+1011201	1011200		CORELLIA	cor_world	0	6746.0	315.0	-5673.0	0	
+1011202	1011200		CORELLIA	cor_world	0	-3370.0	86.0	-3295.0	0	
+1011203	1011200		CORELLIA	cor_world	0	-3397.0	85.6	3303.0	0	
+1011204	1011200		CORELLIA	cor_world	0	-3417.0	78.3	3318.0	0	
+1011205	1011200		CORELLIA	cor_world	0	-3452.0	78.0	3350.0	0	
+1011206	1011200		CORELLIA	cor_world	0	-3426.0	77.2	3493.0	0	
+1011300	1011300	LOOP	CORELLIA	cor_world	0	-3684.9	86.0	3102.2	0	Kor Vella - an R3 unit
+1011301	1011300		CORELLIA	cor_world	0	-3691.5	86.2	3134.8	0	
+1011302	1011300		CORELLIA	cor_world	0	-3723.3	86.1	3184.6	0	
+1011303	1011300		CORELLIA	cor_world	0	-3771.3	86.0	3210.6	0	
+1011304	1011300		CORELLIA	cor_world	0	-3765.8	86.6	3239.0	0	
+1011305	1011300		CORELLIA	cor_world	0	-3726.3	86.1	3182.1	0	
+1011306	1011300		CORELLIA	cor_world	0	-3694.8	86.2	3133.4	0	
+1011400	1011400	FLIP	CORELLIA	cor_world	0	-3103.2	31.0	2800.8	0	Kor Vella - an R4 unit
+1011401	1011400		CORELLIA	cor_world	0	-3141.2	31.0	2791.2	0	
+1011402	1011400		CORELLIA	cor_world	0	-3163.7	31.0	2797.1	0	
+1011403	1011400		CORELLIA	cor_world	0	-3175.0	31.0	2797.0	0	
+1011500	1011500	FLIP	CORELLIA	cor_world	0	-3181.0	31.0	2778.0	0	Kor Vella - an R4 unit
+1011501	1011500		CORELLIA	cor_world	0	-3227.2	30.6	2807.1	0	
+1011502	1011500		CORELLIA	cor_world	0	-3257.9	47.3	2837.7	0	
+1011503	1011500		CORELLIA	cor_world	0	-3301.8	68.4	2882.6	0	
+1011504	1011500		CORELLIA	cor_world	0	-3340.9	72.7	2922.4	0	
+1011505	1011500		CORELLIA	cor_world	0	-3357.7	85.8	2938.5	0	
+1011506	1011500		CORELLIA	cor_world	0	-3383.1	86.0	2964.0	0	
+1011507	1011500		CORELLIA	cor_world	0	-3394.5	86.0	3010.3	0	
+1011600	1011600	LOOP	CORELLIA	cor_world	0	-5439.0	21.0	-2721.0	0	Tyrena - a Corsec inspector
+1011601	1011600		CORELLIA	cor_world	0	-5439.0	21.0	-2682.0	0	
+1011602	1011600		CORELLIA	cor_world	0	-5472.0	21.0	-2662.0	0	
+1011603	1011600		CORELLIA	cor_world	0	-5485.0	21.0	-2662.0	0	
+1011604	1011600		CORELLIA	cor_world	0	-5485.0	21.0	-2706.0	0	
+1011605	1011600		CORELLIA	cor_world	0	-5439.0	21.0	-2706.0	0	
+1011700	1011700	LOOP	CORELLIA	cor_world	0	-5272.6	4.0	-6414.0	0	Vreni Island - a Rebel security officer
+1011701	1011700		CORELLIA	cor_world	0	-5313.0	4.0	-6414.0	0	
+1011702	1011700		CORELLIA	cor_world	0	-5313.0	4.0	-6439.0	0	
+1011703	1011700		CORELLIA	cor_world	0	-5341.0	4.0	-6439.0	0	
+1011800	1011800	FLIP	CORELLIA	cor_world	0	-5157.0	4.2	-6426.0	0	Vreni Island - a Rebel security officer
+1011801	1011800		CORELLIA	cor_world	0	-5157.0	4.1	-6394.0	0	
+1011802	1011800		CORELLIA	cor_world	0	-5176.0	4.0	-6379.0	0	
+1011803	1011800		CORELLIA	cor_world	0	-5270.0	4.0	-6379.0	0	
+1011900	1011900	FLIP	CORELLIA	cor_chirq_council2	7	17.1	-12.0	47.2	0	Chirq Elite Council 2 - Chirq Council sentinel
+1011901	1011900		CORELLIA	cor_chirq_council2	8	17.1	-12.0	58.9	0	
+1011902	1011900		CORELLIA	cor_chirq_council2	9	26.8	-12.0	58.9	0	
+1011903	1011900		CORELLIA	cor_chirq_council2	9	56.4	-12.0	58.9	0	
+1011904	1011900		CORELLIA	cor_chirq_council2	8	26.8	-12.0	58.9	0	
+1011905	1011900		CORELLIA	cor_chirq_council2	8	17.1	-12.0	58.9	0	
+1011906	1011900		CORELLIA	cor_chirq_council2	10	8.6	-12.0	58.9	0	
+1011907	1011900		CORELLIA	cor_chirq_council2	10	-1.9	-12.0	68.3	0	
+1012000	1012000	LOOP	CORELLIA	cor_chirq_council2	13	3.5	-12.0	98.5	0	Chirq Elite Council 2 - Chirq Council sentinel
+1012001	1012000		CORELLIA	cor_chirq_council2	16	-10.1	-12.0	98.5	0	
+1012002	1012000		CORELLIA	cor_chirq_council2	13	3.5	-12.0	98.5	0	
+1012003	1012000		CORELLIA	cor_chirq_council2	15	3.5	-12.0	115.6	0	
+1012004	1012000		CORELLIA	cor_chirq_council2	13	3.5	-12.0	98.5	0	
+1012005	1012000		CORELLIA	cor_chirq_council2	14	18.9	-12.0	98.5	0	
+1012100	1012100	FLIP	CORELLIA	cor_chirq_council2	17	23.8	-12.0	75.1	0	Chirq Elite Council 2 - Chirq Council sentinel
+1012101	1012100		CORELLIA	cor_chirq_council2	17	33.6	-12.0	75.1	0	
+1012102	1012100		CORELLIA	cor_chirq_council2	18	33.6	-12.0	84.8	0	
+1012103	1012100		CORELLIA	cor_chirq_council2	18	33.6	-20.0	101.5	0	
+1012104	1012100		CORELLIA	cor_chirq_council2	18	33.6	-20.0	111.0	0	
+1012105	1012100		CORELLIA	cor_chirq_council2	19	48.0	-20.0	111.0	0	
+1012200	1012200	LOOP	CORELLIA	cor_chirq_council2	22	70.7	-20.0	150.9	0	Chirq Elite Council 2 - Chirq Council sentinel
+1012201	1012200		CORELLIA	cor_chirq_council2	21	53.2	-20.0	150.9	0	
+1012202	1012200		CORELLIA	cor_chirq_council2	21	41.6	-20.0	153.8	0	
+1012203	1012200		CORELLIA	cor_chirq_council2	21	41.6	-20.0	129.1	0	
+1012204	1012200		CORELLIA	cor_chirq_council2	21	53.9	-20.0	129.1	0	
+1012205	1012200		CORELLIA	cor_chirq_council2	21	53.9	-20.0	150.9	0	
+1012300	1012300	LOOP	CORELLIA	cor_chirq_council2	22	70.7	-20.0	150.9	0	Chirq Elite Council 2 - Chirq Council sentinel
+1012301	1012300		CORELLIA	cor_chirq_council2	23	83.6	-20.0	143.6	0	
+1012302	1012300		CORELLIA	cor_chirq_council2	23	83.6	-20.0	150.9	0	
+1012303	1012300		CORELLIA	cor_chirq_council2	23	83.6	-20.0	114.1	0	
+1012400	1012400	FLIP	CORELLIA	cor_murmurs_lab	7	17.7	-12.0	45.5	0	Murmurs Lab Bunker - a security officer
+1012401	1012400		CORELLIA	cor_murmurs_lab	6	17.5	-12.0	28.8	0	
+1012402	1012400		CORELLIA	cor_murmurs_lab	5	3.4	-12.0	28.8	0	
+1012403	1012400		CORELLIA	cor_murmurs_lab	4	3.4	-12.0	18.6	0	
+1012500	1012500	FLIP	CORELLIA	cor_murmurs_lab	8	17.5	-12.0	58.7	0	Murmurs Lab Bunker - a security officer
+1012501	1012500		CORELLIA	cor_murmurs_lab	9	27.0	-12.0	58.7	0	
+1012502	1012500		CORELLIA	cor_murmurs_lab	9	56.8	-12.0	58.7	0	
+1012600	1012600	FLIP	CORELLIA	cor_murmurs_lab	10	5.6	-12.0	60.1	0	Murmurs Lab Bunker - a security officer
+1012601	1012600		CORELLIA	cor_murmurs_lab	10	3.3	-12.0	52.9	0	
+1012602	1012600		CORELLIA	cor_murmurs_lab	10	-3.6	-12.0	54.2	0	
+1012603	1012600		CORELLIA	cor_murmurs_lab	10	3.3	-12.0	52.9	0	
+1012604	1012600		CORELLIA	cor_murmurs_lab	10	9.3	-12.0	68.2	0	
+1012605	1012600		CORELLIA	cor_murmurs_lab	10	3.5	-12.0	81.0	0	
+1012700	1012700	LOOP	CORELLIA	cor_murmurs_lab	17	33.5	-12.0	75.2	0	Murmurs Lab Bunker - a security officer
+1012701	1012700		CORELLIA	cor_murmurs_lab	17	11.7	-12.0	75.2	0	
+1012702	1012700		CORELLIA	cor_murmurs_lab	17	33.5	-12.0	75.2	0	
+1012703	1012700		CORELLIA	cor_murmurs_lab	17	33.5	-12.0	85.3	0	
+1012800	1012800	LOOP	CORELLIA	cor_murmurs_lab	18	33.4	-20.0	110.8	0	Murmurs Lab Bunker - a security officer
+1012801	1012800		CORELLIA	cor_murmurs_lab	19	47.7	-20.0	110.8	0	
+1012802	1012800		CORELLIA	cor_murmurs_lab	20	47.7	-20.0	123.0	0	
+1012803	1012800		CORELLIA	cor_murmurs_lab	21	47.7	-20.0	130.8	0	
+1012804	1012800		CORELLIA	cor_murmurs_lab	21	47.7	-20.0	149.0	0	
+1012900	1012900	LOOP	CORELLIA	cor_doaba_pendretronics	18	-30.3	-20.0	48.9	0	Pendretronics - a Pendretronics security guard
+1012901	1012900		CORELLIA	cor_doaba_pendretronics	18	-30.3	-20.0	91.8	0	
+1012902	1012900		CORELLIA	cor_doaba_pendretronics	18	-30.3	-20.0	48.9	0	
+1012903	1012900		CORELLIA	cor_doaba_pendretronics	18	-30.3	-20.0	13.3	0	
+1013000	1013000	FLIP	CORELLIA	cor_hidden_reb_base	2	19.0	1.0	8.1	0	Pendretronics - an MSE-6 "Mouse" droid
+1013001	1013000		CORELLIA	cor_hidden_reb_base	2	-7.4	1.0	-5.9	0	
+1013002	1013000		CORELLIA	cor_hidden_reb_base	9	-19.4	1.0	-1.1	0	
+1013003	1013000		CORELLIA	cor_hidden_reb_base	9	-17.6	1.0	2.0	0	
+1013004	1013000		CORELLIA	cor_hidden_reb_base	9	-12.8	3.4	1.9	0	
+1013005	1013000		CORELLIA	cor_hidden_reb_base	9	-11.0	3.4	0.3	0	
+1013006	1013000		CORELLIA	cor_hidden_reb_base	9	-11.0	7.0	-7.5	0	
+1013007	1013000		CORELLIA	cor_hidden_reb_base	10	-11.0	7.0	-14.1	0	
+1013008	1013000		CORELLIA	cor_hidden_reb_base	10	2.2	7.0	-15.6	0	
+1013100	1013100	LOOP	CORELLIA	cor_hidden_reb_base	2	-2.9	1.0	0.0	0	Pendretronics - an MSE-6 "Mouse" droid
+1013101	1013100		CORELLIA	cor_hidden_reb_base	2	11.7	1.0	9.3	0	
+1013102	1013100		CORELLIA	cor_hidden_reb_base	1	11.4	1.0	20.4	0	
+1013103	1013100		CORELLIA	cor_hidden_reb_base	1	6.7	1.0	20.3	0	
+1013104	1013100		CORELLIA	cor_hidden_reb_base	1	5.4	1.0	15.9	0	
+1013105	1013100		CORELLIA	cor_hidden_reb_base	1	-4.9	1.0	15.9	0	
+1013106	1013100		CORELLIA	cor_hidden_reb_base	1	-9.0	1.0	21.1	0	
+1013107	1013100		CORELLIA	cor_hidden_reb_base	1	11.8	1.0	18.5	0	
+1013108	1013100		CORELLIA	cor_hidden_reb_base	2	-11.5	1.0	8.5	0	
+1013200	1013200	LOOP	CORELLIA	cor_hidden_reb_base	2	-14.8	1.0	-12.0	0	Pendretronics - a Rebel trooper
+1013201	1013200		CORELLIA	cor_hidden_reb_base	2	17.0	1.0	-12.0	0	
+1013300	1013300	LOOP	CORELLIA	cor_hidden_reb_base	2	6.4	1.0	2.5	0	Pendretronics - a Rebel trooper
+1013301	1013300		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	-7.7	0	
+1013302	1013300		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	-7.7	0	
+1013303	1013300		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	8.1	0	
+1013304	1013300		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	8.1	0	
+1013400	1013400	LOOP	CORELLIA	cor_world	0	-6471.0	398.0	5958.0	0	Pendretronics - a CLL-8 binary load lifter
+1013401	1013400		CORELLIA	cor_world	0	-6471.0	398.0	5979.0	0	
+1013402	1013400		CORELLIA	cor_world	0	-6488.0	398.0	6029.0	0	
+1013403	1013400		CORELLIA	cor_world	0	-6535.0	398.0	6024.0	0	
+1013404	1013400		CORELLIA	cor_world	0	-6546.0	398.0	5979.0	0	
+1013405	1013400		CORELLIA	cor_world	0	-6495.0	398.0	5941.0	0	
+1013500	1013500	FLIP	CORELLIA	cor_world	0	-6475.4	398.0	5959.0	0	Pendretronics - an EG-6 power droid
+1013501	1013500		CORELLIA	cor_world	0	-6495.0	398.0	5944.0	0	
+1013502	1013500		CORELLIA	cor_world	0	-6518.0	398.0	5966.0	0	
+1013503	1013500		CORELLIA	cor_world	0	-6521.0	398.0	5960.0	0	
+1013504	1013500		CORELLIA	cor_world	0	-6546.0	398.0	5987.0	0	
+1013505	1013500		CORELLIA	cor_world	0	-6518.0	398.0	6043.0	0	
+1013600	1013600	LOOP	CORELLIA	cor_world	0	4585.5	25.0	-5754.0	0	Stronghold - AT AT
+1013601	1013600		CORELLIA	cor_world	0	4617.7	25.4	-5707.4	0	
+1013602	1013600		CORELLIA	cor_world	0	4701.8	25.0	-5710.5	0	
+1013603	1013600		CORELLIA	cor_world	0	4739.8	25.0	-5744.0	0	
+1013604	1013600		CORELLIA	cor_world	0	4736.7	25.0	-5717.0	0	
+1013605	1013600		CORELLIA	cor_world	0	4710.3	25.0	-5852.6	0	
+1013606	1013600		CORELLIA	cor_world	0	4628.6	25.0	-5863.3	0	
+1013607	1013600		CORELLIA	cor_world	0	4592.9	25.0	-5827.5	0	
