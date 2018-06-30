@@ -133,10 +133,6 @@ public class FactionFlagService extends Service {
 			
 			TangibleObject tangibleAware = (TangibleObject) objectAware;
 			
-			if (tangibleAware.getPvpFaction() == PvpFaction.NEUTRAL) {
-				continue;
-			}
-			
 			Player observerOwner = tangibleAware.getOwner();
 
 			int pvpBitmask = getPvpBitmask(target, tangibleAware);
@@ -209,7 +205,7 @@ public class FactionFlagService extends Service {
 	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
 		int pvpBitmask = 0;
 
-		if(target.isEnemyOf(observer)) {
+		if (target.isEnemyOf(observer) && target.getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		
