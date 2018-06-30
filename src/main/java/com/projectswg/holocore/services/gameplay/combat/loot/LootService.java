@@ -98,9 +98,8 @@ public final class LootService extends Service {
 	}
 	
 	/**
-	 * Loads loot tables from loot_table.db. Each "loot table" is in the form of a row.
-	 * Each row has an id and several "loot groups," which consist of actual items that can be dropped.
-	 * Each group has a different chance of being selected for loot.
+	 * Loads loot tables from loot_table.db. Each "loot table" is in the form of a row. Each row has an id and several "loot groups," which consist of actual items that can be dropped. Each group has
+	 * a different chance of being selected for loot.
 	 */
 	private void loadLootTables() {
 		String what = "loot tables";
@@ -191,7 +190,7 @@ public final class LootService extends Service {
 		String creatureId = info.getId();
 		NpcLoader.HumanoidNpcInfo humanoidInfo = info.getHumanoidInfo();
 		
-		if (humanoidInfo != null) {	// Humanoids may have cash
+		if (humanoidInfo != null) {    // Humanoids may have cash
 			minCash = humanoidInfo.getMinCash();
 			maxCash = humanoidInfo.getMaxCash();
 		}
@@ -255,7 +254,7 @@ public final class LootService extends Service {
 		SWGObject lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff");
 		lootInventory.setLocation(corpse.getLocation());
 		lootInventory.setContainerPermissions(ContainerPermissionsType.LOOT);
-		corpse.addObject(lootInventory);    // It's a slotted object and goes in the inventory slot
+		lootInventory.moveToContainer(corpse);
 		new ObjectCreatedIntent(lootInventory).broadcast();
 		
 		CreatureObject killer = cki.getKiller();
@@ -301,14 +300,18 @@ public final class LootService extends Service {
 		
 		switch (lri.getType()) {
 			case LOOT:
-				if (!getLootPermission(looter, target))
+				if (!getLootPermission(looter, target)) {
+					SystemMessageIntent.broadcastPersonal(player, "You don't have permission to loot '"+target.getObjectName()+ '\'');
 					return;
+				}
 				
 				lootBox(player, target);
 				break;
 			case LOOT_ALL:
-				if (!getLootPermission(looter, target))
+				if (!getLootPermission(looter, target)) {
+					SystemMessageIntent.broadcastPersonal(player, "You don't have permission to loot '"+target.getObjectName()+ '\'');
 					return;
+				}
 				
 				lootAll(looter, target);
 				break;
@@ -343,8 +346,7 @@ public final class LootService extends Service {
 				
 				if (item instanceof CreditObject) {
 					long cash = ((CreditObject) item).getAmount();
-					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash))
-							.broadcast();
+					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_coin_loot_no_target"), "DI", (int) cash)).broadcast();
 				} else {
 					new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
 				}
@@ -404,8 +406,7 @@ public final class LootService extends Service {
 		looter.addToBank(cash);
 		DestroyObjectIntent.broadcast(target);
 		
-		new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash))
-				.broadcast();
+		new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("base_player", "prose_transfer_success"), "DI", (int) cash)).broadcast();
 		
 		if (owner instanceof CreatureObject && container.getContainedObjects().isEmpty()) {
 			CreatureObject corpse = (CreatureObject) owner;
@@ -443,13 +444,11 @@ public final class LootService extends Service {
 			for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
 				Player player = creature.getOwner();
 				if (player != null) {
-					player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse
-							.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+					player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 				}
 			}
 		} else {
-			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse
-					.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 		}
 	}
 	
