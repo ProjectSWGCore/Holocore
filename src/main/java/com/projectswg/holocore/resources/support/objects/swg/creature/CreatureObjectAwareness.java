@@ -95,7 +95,7 @@ public class CreatureObjectAwareness {
 			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
 		}
 		
-		assert aware.contains(creature) : "not aware of creature";
+		assert aware.contains(creature) || pendingAdd.contains(creature): "not aware of creature";
 	}
 	
 	public synchronized void resetObjectsAware() {
