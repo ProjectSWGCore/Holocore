@@ -59,9 +59,6 @@ public class ChatRoomUpdateIntent extends Intent {
 			case CREATE:
 				this.title = title;
 				break;
-			case SEND_MESSAGE:
-				this.message = message;
-				break;
 			default:
 				this.target = target;
 				break;
@@ -135,7 +132,7 @@ public class ChatRoomUpdateIntent extends Intent {
 		BANNED_ADD_TARGET,
 		BANNED_REMOVE_TARGET,
 		INVITED_ADD_TARGET,
-		INVITED_REMOVE_TARGET,
-		SEND_MESSAGE
+		INVITED_REMOVE_TARGET
 	}
+	
 }

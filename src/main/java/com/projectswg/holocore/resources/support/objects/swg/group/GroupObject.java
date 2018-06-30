@@ -31,6 +31,7 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent.GroupEventType;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
@@ -126,6 +127,10 @@ public class GroupObject extends SWGObject {
 	
 	public boolean isFull() {
 		return size() >= 8;
+	}
+	
+	public String getChatRoomPath() {
+		return "SWG." + ProjectSWG.getGalaxy().getName() + ".group." + getObjectId() + ".GroupChat";
 	}
 	
 	public long getLeaderId() {
