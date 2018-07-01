@@ -105,7 +105,6 @@ public final class BuffLoader extends DataLoader {
 		private final String particleHardpoint;
 		private final int visible;
 		private final boolean debuff;
-		private final String stanceParticle;
 		private final boolean dispellPlayer;
 		private final boolean removeOnDeath;
 		private final boolean playerRemovable;
@@ -134,7 +133,6 @@ public final class BuffLoader extends DataLoader {
 			this.particleHardpoint = set.getText("particle_hardpoint");
 			this.visible = (int) set.getInt("visible");
 			this.debuff = set.getBoolean("debuff");
-			this.stanceParticle = set.getText("stance_particle");
 			this.dispellPlayer = set.getInt("dispell_player") != 0;
 			this.removeOnDeath = set.getInt("remove_on_death") != 0;
 			this.playerRemovable = set.getInt("player_removable") != 0;
@@ -149,7 +147,7 @@ public final class BuffLoader extends DataLoader {
 			assert this.effectNames.length == this.effectValues.length : "effect params and effect values differ in size";
 		}
 		
-		private BuffInfo(String name, int crc, String group1, String group2, String block, int priority, String icon, double duration, String[] effectNames, double[] effectValues, String state, String callback, String particle, String particleHardpoint, int visible, boolean debuff, String stanceParticle, boolean dispellPlayer, boolean removeOnDeath, boolean playerRemovable, boolean celestial, int maxStackCount, boolean persistent, boolean displayOrder, boolean removeOnRespec, boolean aiRemoveOnCombatEnd, boolean decayOnPvpDeath) {
+		private BuffInfo(String name, int crc, String group1, String group2, String block, int priority, String icon, double duration, String[] effectNames, double[] effectValues, String state, String callback, String particle, String particleHardpoint, int visible, boolean debuff, boolean dispellPlayer, boolean removeOnDeath, boolean playerRemovable, boolean celestial, int maxStackCount, boolean persistent, boolean displayOrder, boolean removeOnRespec, boolean aiRemoveOnCombatEnd, boolean decayOnPvpDeath) {
 			this.name = name;
 			this.crc = crc;
 			this.group1 = group1;
@@ -166,7 +164,6 @@ public final class BuffLoader extends DataLoader {
 			this.particleHardpoint = particleHardpoint;
 			this.visible = visible;
 			this.debuff = debuff;
-			this.stanceParticle = stanceParticle;
 			this.dispellPlayer = dispellPlayer;
 			this.removeOnDeath = removeOnDeath;
 			this.playerRemovable = playerRemovable;
@@ -255,10 +252,6 @@ public final class BuffLoader extends DataLoader {
 			return debuff;
 		}
 		
-		public String getStanceParticle() {
-			return stanceParticle;
-		}
-		
 		public boolean isDispellPlayer() {
 			return dispellPlayer;
 		}
@@ -323,7 +316,6 @@ public final class BuffLoader extends DataLoader {
 		private String particleHardpoint;
 		private int visible;
 		private boolean debuff;
-		private String stanceParticle;
 		private boolean dispellPlayer;
 		private boolean removeOnDeath;
 		private boolean playerRemovable;
@@ -352,7 +344,6 @@ public final class BuffLoader extends DataLoader {
 			this.particleHardpoint = buff.getParticleHardpoint();
 			this.visible = buff.getVisible();
 			this.debuff = buff.isDebuff();
-			this.stanceParticle = buff.getStanceParticle();
 			this.dispellPlayer = buff.isDispellPlayer();
 			this.removeOnDeath = buff.isRemoveOnDeath();
 			this.playerRemovable = buff.isPlayerRemovable();
@@ -431,11 +422,6 @@ public final class BuffLoader extends DataLoader {
 		
 		public BuffInfoBuilder setDebuff(boolean debuff) {
 			this.debuff = debuff;
-			return this;
-		}
-		
-		public BuffInfoBuilder setStanceParticle(String stanceParticle) {
-			this.stanceParticle = stanceParticle;
 			return this;
 		}
 		

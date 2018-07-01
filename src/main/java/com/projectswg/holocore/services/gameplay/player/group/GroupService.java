@@ -434,7 +434,7 @@ public class GroupService extends Service {
 	}
 	
 	private void clearInviteData(CreatureObject creature) {
-		creature.updateGroupInviteData(null, 0, "");
+		creature.updateGroupInviteData(null, 0);
 	}
 	
 	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
@@ -444,7 +444,7 @@ public class GroupService extends Service {
 		// Set the invite data to the current group ID
 		if (groupId == 0)
 			groupId = -1; // Client wants -1 for default
-		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
+		invitee.updateGroupInviteData(groupLeader, groupId);
 	}
 	
 	private void sendGroupSystemMessage(GroupObject group, String id) {

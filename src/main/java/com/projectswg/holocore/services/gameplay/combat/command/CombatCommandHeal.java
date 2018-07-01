@@ -205,15 +205,8 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		CombatSpam spam = new CombatSpam(healer.getObjectId());
 		
 		spam.setAttacker(healer.getObjectId());
-		spam.setAttackerPosition(healer.getLocation().getPosition());
 		spam.setDefender(healed.getObjectId());
-		spam.setDefenderPosition(healed.getLocation().getPosition());
-		spam.setInfo(new AttackInfo());
-		spam.setDataType((byte) 2);	// 2 means the combat log entry is a specified message
-		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "perform_heal_damage_success"), "TT", healer.getObjectName(), "TO", healed.getObjectName(), "DI", difference));
-		spam.setSpamMessage(oobp);
-		spam.setSpamType(CombatSpamType.MEDICAL);
-		
+
 		return spam;
 	}
 	

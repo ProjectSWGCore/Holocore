@@ -32,8 +32,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		SkillModService.class,
-		SkillService.class,
-		SkillTemplateService.class
+		SkillService.class
 })
 public final class SkillManager extends Manager {
 	

@@ -26,12 +26,10 @@
  */
 package com.projectswg.holocore.services.gameplay.player.experience.skills
 
-import com.projectswg.common.data.objects.GameObjectType
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.player.Profession
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 
@@ -85,14 +83,7 @@ class ProtectionService : Service() {
 	}
 	
 	private fun handleTransfer(item: SWGObject, creature: CreatureObject, arrangement: List<String>, equip: Boolean) {
-		val jedi = creature.playerObject?.profession == Profession.FORCE_SENSITIVE
-		val robe = item.gameObjectType == GameObjectType.GOT_CLOTHING_CLOAK
-		
-		if (jedi && robe) {
-			updateProtection(creature, equip) { attribute -> item.calculateProtection(attribute) }
-		} else if (!jedi && !robe) {
-			updateProtection(creature, equip) { attribute -> arrangement.sumBy { slot -> item.calculateProtection(attribute, armorSlotProtectionMap[slot] ?: 0) } }
-		}
+		updateProtection(creature, equip) { attribute -> arrangement.sumBy { slot -> item.calculateProtection(attribute, armorSlotProtectionMap[slot] ?: 0) } }
 	}
 	
 	private inline fun updateProtection(creature: CreatureObject, equip: Boolean, calculateProtection: (attribute: String) -> Int) {
@@ -102,7 +93,6 @@ class ProtectionService : Service() {
 		}
 	}
 	
-	private fun SWGObject.calculateProtection(attribute: String) = (getAttribute(attribute)?.toIntOrNull() ?: 0)
 	private fun SWGObject.calculateProtection(attribute: String, slotProtection: Int) = (getAttribute(attribute)?.toIntOrNull() ?: 0) * slotProtection / 100
 	
 	companion object {

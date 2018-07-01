@@ -87,7 +87,7 @@ public class TravelService extends Service {
 	private void handleTravelPointSelectionIntent(TravelPointSelectionIntent tpsi) {
 		CreatureObject traveler = tpsi.getCreature();
 		
-		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName(), tpsi.isInstant()));
+		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName()));
 	}
 	
 	@IntentHandler

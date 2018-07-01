@@ -37,18 +37,14 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent.FactionIntentType;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.gameplay.combat.EnemyProcessor;
-import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -69,9 +65,7 @@ public class TangibleObject extends SWGObject {
 	private int				counter			= 0;
 	private String			currentCity				= "";
 	
-	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
-	
-	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
+	private Set<Long>	defenders	= new HashSet<>();
 	
 	public TangibleObject(long objectId) {
 		this(objectId, BaselineType.TANO);
@@ -81,74 +75,7 @@ public class TangibleObject extends SWGObject {
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
 	}
-	
-	@Override
-	public void moveToContainer(SWGObject newParent) {
-		if (defaultMoveToContainer(newParent))
-			super.moveToContainer(newParent);    // Not stackable, use default behavior
-	}
-	
-	@Override
-	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
-		if (!getContainerPermissions().canMove(requester, newParent))
-			return ContainerResult.NO_PERMISSION;
-		return defaultMoveToContainer(newParent) ? super.moveToContainer(requester, newParent) : ContainerResult.SUCCESS;
-	}
-	
-	private boolean defaultMoveToContainer(SWGObject newParent) {
-		int counter = getCounter();
-		
-		// Check if object is stackable
-		if (newParent != null && counter > 0) {
-			// Scan container for matching stackable item
-			String ourTemplate = getTemplate();
-			Map<String, String> ourAttributes = new HashMap<>(getAttributes());
-			TangibleObject bestMatch = null;
-			ourAttributes.remove("charges");	// Don't compare charges count
-			
-			for (SWGObject candidate : newParent.getContainedObjects()) {
-				String theirTemplate = candidate.getTemplate();
-				Map<String, String> theirAttributes = new HashMap<>(candidate.getAttributes());
-				
-				theirAttributes.remove("charges");	// Don't compare charges count
-				
-				if (candidate == this)
-					continue; // Can't transfer into itself
-				if (!(candidate instanceof TangibleObject))
-					continue; // Item not the correct type
-				if (!ourTemplate.equals(theirTemplate) || !ourAttributes.equals(theirAttributes))
-					continue; // Not eligible for stacking
-				
-				TangibleObject tangibleMatch = (TangibleObject) candidate;
-				if (tangibleMatch.getCounter() >= tangibleMatch.getMaxCounter())
-					continue; // Can't add anything to this object
-				
-				bestMatch = tangibleMatch;
-			}
-			
-			if (bestMatch != null) {
-				int theirCounter = bestMatch.getCounter();
-				int transferAmount = Math.min(bestMatch.getMaxCounter() - theirCounter, counter);
-				int added = theirCounter + transferAmount;
-				int subtracted = counter - transferAmount;
-				
-				if (hasAttribute("charges")) {
-					addAttribute("charges", String.valueOf(subtracted));
-					bestMatch.addAttribute("charges", String.valueOf(added));
-				}
-				
-				bestMatch.setCounter(added);
-				setCounter(subtracted);
-				if (getCounter() > 0)
-					return true;
-				DestroyObjectIntent.broadcast(this);
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
+
 	public int getMaxHitPoints() {
 		return maxHitPoints;
 	}
@@ -168,7 +95,7 @@ public class TangibleObject extends SWGObject {
 	public void setPvpFlags(PvpFlag... pvpFlags) {
 		setPvpFlags(List.of(pvpFlags));
 	}
-	
+
 	public void setPvpFlags(Collection<PvpFlag> pvpFlags) {
 		this.pvpFlags.addAll(pvpFlags);
 		
@@ -178,7 +105,7 @@ public class TangibleObject extends SWGObject {
 	public void clearPvpFlags(PvpFlag ... pvpFlags) {
 		clearPvpFlags(List.of(pvpFlags));
 	}
-	
+
 	public void clearPvpFlags(Collection<PvpFlag> pvpFlags) {
 		this.pvpFlags.removeAll(pvpFlags);
 		
@@ -203,7 +130,7 @@ public class TangibleObject extends SWGObject {
 	public Faction getFaction() {
 		return faction;
 	}
-	
+
 	public PvpFaction getPvpFaction() {
 		Faction faction = this.faction;
 		if (faction == null)
@@ -242,7 +169,7 @@ public class TangibleObject extends SWGObject {
 	public Map<String, Integer> getCustomization() {
 		return appearanceData.getVariables();
 	}
-	
+
 	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
 		
@@ -260,7 +187,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setInCombat(boolean inCombat) {
 		this.inCombat = inCombat;
-		sendDelta(6, 2, inCombat);
 	}
 	
 	public void setCondition(int condition) {
@@ -304,7 +230,7 @@ public class TangibleObject extends SWGObject {
 		}
 		sendDelta(3, 8, optionFlags);
 	}
-	
+
 	public boolean hasOptionFlags(OptionFlag option) {
 		return (optionFlags & option.getFlag()) != 0;
 	}
@@ -320,32 +246,23 @@ public class TangibleObject extends SWGObject {
 	public Set<OptionFlag> getOptionFlags() {
 		return OptionFlag.toEnumSet(optionFlags);
 	}
-	
+
 	public void addDefender(CreatureObject creature) {
-		synchronized (defenders) {
-			if (defenders.add(creature.getObjectId()))
-				defenders.sendDeltaMessage(this);
-		}
+		defenders.add(creature.getObjectId());
 	}
-	
+
 	public void removeDefender(CreatureObject creature) {
-		synchronized (defenders) {
-			if (defenders.remove(creature.getObjectId()))
-				defenders.sendDeltaMessage(this);
-		}
+		defenders.remove(creature.getObjectId());
 	}
-	
+
 	public List<Long> getDefenders() {
 		return new ArrayList<>(defenders);
 	}
-	
+
 	public void clearDefenders() {
-		synchronized (defenders) {
-			defenders.clear();
-			defenders.sendDeltaMessage(this);
-		}
+		defenders.clear();
 	}
-	
+
 	public boolean hasDefenders() {
 		return !defenders.isEmpty();
 	}
@@ -356,13 +273,13 @@ public class TangibleObject extends SWGObject {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-		sendDelta(3, 9, counter);
+		sendDelta(3, 7, counter);
 	}
 	
 	public int getMaxCounter() {
 		return 100;
 	}
-	
+
 	/**
 	 *
 	 * @param otherObject
@@ -371,7 +288,7 @@ public class TangibleObject extends SWGObject {
 	public boolean isAttackable(TangibleObject otherObject) {
 		return EnemyProcessor.INSTANCE.isAttackable(this, otherObject);
 	}
-	
+
 	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
 		Set<PvpFlag> pvpFlags = EnumSet.noneOf(PvpFlag.class); // More efficient behind the scenes
 		
@@ -409,22 +326,7 @@ public class TangibleObject extends SWGObject {
 		
 		bb.incrementOperandCount(9);
 	}
-	
-	@Override
-	protected void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addBoolean(inCombat); // 2 - Combat flag
-		bb.addObject(defenders); // 3 - Defenders List (Set, Long)
-		bb.addInt(0); // 4 - Map color
-		bb.addInt(0); // 5 - Access List
-			bb.addInt(0);
-		bb.addInt(0); // 6 - Guild Access Set
-			bb.addInt(0);
-		bb.addObject(effectsMap); // 7 - Effects Map
-		
-		bb.incrementOperandCount(6);
-	}
-	
+
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
@@ -447,7 +349,6 @@ public class TangibleObject extends SWGObject {
 		buffer.getInt();
 		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
 		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
-		effectsMap = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII);
 	}
 	
 	@Override
@@ -465,10 +366,6 @@ public class TangibleObject extends SWGObject {
 		stream.addBoolean(visibleGmOnly);
 		stream.addArray(objectEffects);
 		stream.addInt(optionFlags);
-		stream.addMap(effectsMap, (e) -> {
-			stream.addAscii(e.getKey());
-			stream.addAscii(e.getValue());
-		});
 		stream.addInt(counter);
 	}
 	
@@ -488,12 +385,11 @@ public class TangibleObject extends SWGObject {
 		visibleGmOnly = stream.getBoolean();
 		objectEffects = stream.getArray();
 		optionFlags = stream.getInt();
-		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
 		if (version == 2) {
 			counter = stream.getInt();
 		}
 	}
-	
+
 	@Override
 	public void saveMongo(MongoData data) {
 		super.saveMongo(data);
@@ -508,10 +404,9 @@ public class TangibleObject extends SWGObject {
 		data.putBoolean("visibleGmOnly", visibleGmOnly);
 		data.putByteArray("objectEffects", objectEffects);
 		data.putInteger("optionFlags", optionFlags);
-		data.putMap("effectsMap", effectsMap);
 		data.putInteger("counter", counter);
 	}
-	
+
 	@Override
 	public void readMongo(MongoData data) {
 		super.readMongo(data);
@@ -525,7 +420,6 @@ public class TangibleObject extends SWGObject {
 		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
 		objectEffects = data.getByteArray("objectEffects");
 		optionFlags = data.getInteger("optionFlags", 0);
-		effectsMap.putAll(data.getMap("effectsMap", String.class, String.class));
 		counter = data.getInteger("counter", 0);
 	}
 }

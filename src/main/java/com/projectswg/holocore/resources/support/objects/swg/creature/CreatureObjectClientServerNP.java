@@ -69,8 +69,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	/** CREO4-12 */ private float								waterModPercent			= 0.75f;
 	/** CREO4-13 */ private SWGSet<GroupMissionCriticalObject>	missionCriticalObjects	= new SWGSet<>(4, 13);
 	/** CREO4-14 */ private SWGMap<String, Integer>				commands				= new SWGMap<>(4, 14, StringType.ASCII);
-	/** CREO4-15 */ private int									totalLevelXp			= 0;
-	
+
 	public CreatureObjectClientServerNP(@NotNull CreatureObject obj) {
 		this.obj = obj;
 		this.bonusAttributes = new AttributesMutable(obj, 4, 2);
@@ -93,14 +92,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		this.accelScale = accelScale;
 		sendDelta(1, accelScale);
 	}
-	
-	@NotNull
-	public Attributes getBonusAttributes() {
-		return bonusAttributes.getImmutable();
-	}
-	
-	// TODO: Add Bonus Attribute Setters
-	
+
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
 		skillModLock.lock();
 		try {
@@ -126,99 +118,99 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		SkillMod skillMod = skillMods.get(skillModName);
 		return skillMod != null ? skillMod.getValue() : 0;
 	}
-	
+
 	public float getMovementPercent() {
 		return movementPercent;
 	}
-	
+
 	public void setMovementPercent(float movementPercent) {
 		this.movementPercent = movementPercent;
 		sendDelta(4, movementPercent);
 	}
-	
+
 	public float getMovementScale() {
 		return movementScale;
 	}
-	
+
 	public void setMovementScale(float movementScale) {
 		this.movementScale = movementScale;
 		sendDelta(5, movementScale);
 	}
-	
+
 	public long getPerformanceListenTarget() {
 		return performanceListenTarget;
 	}
-	
+
 	public void setPerformanceListenTarget(long performanceListenTarget) {
 		this.performanceListenTarget = performanceListenTarget;
 		sendDelta(6, performanceListenTarget);
 	}
-	
+
 	public float getRunSpeed() {
 		return runSpeed;
 	}
-	
+
 	public void setRunSpeed(float runSpeed) {
 		this.runSpeed = runSpeed;
 		sendDelta(7, runSpeed);
 	}
-	
+
 	public float getSlopeModAngle() {
 		return slopeModAngle;
 	}
-	
+
 	public void setSlopeModAngle(float slopeModAngle) {
 		this.slopeModAngle = slopeModAngle;
 		sendDelta(8, slopeModAngle);
 	}
-	
+
 	public float getSlopeModPercent() {
 		return slopeModPercent;
 	}
-	
+
 	public void setSlopeModPercent(float slopeModPercent) {
 		this.slopeModPercent = slopeModPercent;
 		sendDelta(9, slopeModPercent);
 	}
-	
+
 	public float getTurnScale() {
 		return turnScale;
 	}
-	
+
 	public void setTurnScale(float turnScale) {
 		this.turnScale = turnScale;
 		sendDelta(10, turnScale);
 	}
-	
+
 	public float getWalkSpeed() {
 		return walkSpeed;
 	}
-	
+
 	public void setWalkSpeed(float walkSpeed) {
 		this.walkSpeed = walkSpeed;
 		sendDelta(11, walkSpeed);
 	}
-	
+
 	public float getWaterModPercent() {
 		return waterModPercent;
 	}
-	
+
 	public void setWaterModPercent(float waterModPercent) {
 		this.waterModPercent = waterModPercent;
 		sendDelta(12, waterModPercent);
 	}
-	
+
 	@NotNull
 	public Set<GroupMissionCriticalObject> getMissionCriticalObjects() {
 		return Collections.unmodifiableSet(missionCriticalObjects);
 	}
-	
+
 	public void setMissionCriticalObjects(@NotNull Set<GroupMissionCriticalObject> missionCriticalObjects) {
 		this.missionCriticalObjects.clear();
 		this.missionCriticalObjects.addAll(missionCriticalObjects);
 		this.missionCriticalObjects.sendDeltaMessage(obj);
 	}
-	
+
 	@NotNull
 	public Set<String> getCommands() {
 		return Collections.unmodifiableSet(commands.keySet());
@@ -229,7 +221,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		commands.put(command, commands.getOrDefault(command, 0)+1);
 		commands.sendDeltaMessage(obj);
 	}
-	
+
 	public void addCommands(@NotNull String ... commands) {
 		for (String command : commands)
 			this.commands.put(command, this.commands.getOrDefault(command, 0)+1);
@@ -245,18 +237,9 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 			commands.put(command, nVal);
 		commands.sendDeltaMessage(obj);
 	}
-	
+
 	public boolean hasCommand(@NotNull String command) {
 		return commands.containsKey(command);
-	}
-	
-	public int getTotalLevelXp() {
-		return totalLevelXp;
-	}
-	
-	public void setTotalLevelXp(int totalLevelXp) {
-		this.totalLevelXp = totalLevelXp;
-		sendDelta(15, totalLevelXp);
 	}
 	
 	public void createBaseline4(BaselineBuilder bb) {
@@ -275,16 +258,15 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		bb.addFloat(waterModPercent); // 12
 		bb.addObject(missionCriticalObjects); // 13
 		bb.addObject(commands); // 14
-		bb.addInt(totalLevelXp); // 15
-		
-		bb.incrementOperandCount(16);
+
+		bb.incrementOperandCount(15);
 	}
 	
 	public void parseBaseline4(NetBuffer buffer) {
 		skillMods.clear();
 		missionCriticalObjects.clear();
 		commands.clear();
-		
+
 		accelPercent = buffer.getFloat();
 		accelScale = buffer.getFloat();
 		bonusAttributes.decode(buffer);
@@ -300,7 +282,6 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		waterModPercent = buffer.getFloat();
 		missionCriticalObjects.addAll(SWGSet.getSwgSet(buffer, 4, 13, GroupMissionCriticalObject.class));
 		commands.putAll(SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class));
-		totalLevelXp = buffer.getInt();
 	}
 	
 	@Override
@@ -320,15 +301,14 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		data.putDouble("waterModPercent", waterModPercent);
 		data.putMap("commands", commands);
 		data.putArray("missionCriticalObjects", missionCriticalObjects);
-		data.putInteger("totalLevelXp", totalLevelXp);
 	}
-	
+
 	@Override
 	public void readMongo(MongoData data) {
 		commands.clear();
 		skillMods.clear();
 		missionCriticalObjects.clear();
-		
+
 		accelPercent = data.getFloat("accelPercent", accelPercent);
 		accelScale = data.getFloat("accelScale", accelScale);
 		data.getDocument("bonusAttributes", bonusAttributes);
@@ -344,9 +324,8 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		turnScale = data.getFloat("turnScale", turnScale);
 		commands.putAll(data.getMap("commands", String.class, Integer.class));
 		missionCriticalObjects.addAll(data.getArray("missionCriticalObjects", GroupMissionCriticalObject.class));
-		totalLevelXp = data.getInteger("totalLevelXp", totalLevelXp);
 	}
-	
+
 	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(1);
@@ -360,7 +339,6 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		stream.addFloat(turnScale);
 		stream.addFloat(walkSpeed);
 		stream.addFloat(waterModPercent);
-		stream.addInt(totalLevelXp);
 		bonusAttributes.save(stream);
 		stream.addMap(skillMods, (e) -> {
 			stream.addAscii(e.getKey());
@@ -385,7 +363,6 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		turnScale = stream.getFloat();
 		walkSpeed = stream.getFloat();
 		waterModPercent = stream.getFloat();
-		totalLevelXp = stream.getInt();
 		if (ver == 0) {
 			int [] array = new int[6];
 			stream.getList((i) -> array[i] = stream.getInt());
@@ -408,7 +385,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 			stream.getList(i -> stream.getAscii());
 		stream.getList((i) -> commands.put(stream.getAscii(), stream.getInt()));
 	}
-	
+
 	private void sendDelta(int update, Object o) {
 		obj.sendDelta(4, update, o);
 	}

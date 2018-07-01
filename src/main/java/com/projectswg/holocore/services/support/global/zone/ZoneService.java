@@ -60,10 +60,6 @@ public class ZoneService extends Service {
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof SetWaypointColor)
 			handleSetWaypointColor(player, (SetWaypointColor) p);
-		if(p instanceof ShowBackpack)
-			handleShowBackpack(player, (ShowBackpack) p);
-		if(p instanceof ShowHelmet)
-			handleShowHelmet(player, (ShowHelmet) p);
 		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
 			handleLagRequest(player);
 		if (p instanceof SelectCharacter)
@@ -85,14 +81,6 @@ public class ZoneService extends Service {
 			new SystemMessageIntent(player, message).broadcast();	// Send it
 	}
 	
-	private void handleShowBackpack(Player player, ShowBackpack p) {
-		player.getPlayerObject().setShowBackpack(p.showingBackpack());
-	}
-	
-	private void handleShowHelmet(Player player, ShowHelmet p) {
-		player.getPlayerObject().setShowHelmet(p.showingHelmet());
-	}
-
 	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
 		// TODO Should move this to a different service, maybe make a service for other SWGPackets similar to this (ie misc.)
 		PlayerObject ghost = player.getPlayerObject();

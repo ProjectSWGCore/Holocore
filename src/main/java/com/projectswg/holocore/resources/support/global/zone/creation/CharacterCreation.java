@@ -44,7 +44,6 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
@@ -53,7 +52,6 @@ import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -62,10 +60,12 @@ public class CharacterCreation {
 	
 	private final Player player;
 	private final ClientCreateCharacter create;
-	
-	public CharacterCreation(Player player, ClientCreateCharacter create) {
+	private final String biography;
+
+	public CharacterCreation(Player player, ClientCreateCharacter create, String biography) {
 		this.player = player;
 		this.create = create;
+		this.biography = biography;
 	}
 	
 	public CreatureObject createCharacter(AccessLevel accessLevel, ZoneInsertion info) {
@@ -78,7 +78,8 @@ public class CharacterCreation {
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(creatureObj, race, create.getClothes());
 		playerObj.setAdminTag(accessLevel);
-		
+		playerObj.setBiography(biography);
+
 		ObjectCreatedIntent.broadcast(playerObj);
 		ObjectCreatedIntent.broadcast(creatureObj);
 		return creatureObj;
@@ -154,15 +155,22 @@ public class CharacterCreation {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setBankBalance(1000);
 		creatureObj.setCashBalance(100);
-		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
+
+		// New characters are Novices in all basic professions in the Combat Upgrade
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
-		
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "social_entertainer_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "outdoors_scout_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "science_medic_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "crafting_artisan_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_brawler_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_marksman_novice", creatureObj, true).broadcast();
+
 		Collection<String> languages = languagesSkillsForRace(creatureObj.getRace());
-		
+
 		for (String language : languages) {
 			new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, language, creatureObj, true).broadcast();
 		}
-		
+
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		defWeapon.setMaxRange(5);
 		defWeapon.setType(WeaponType.UNARMED);
@@ -172,13 +180,11 @@ public class CharacterCreation {
 		creatureObj.setEquippedWeapon(defWeapon);
 		createDefaultObject(creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
 		createInventoryObject(creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
-		createInventoryObject(creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, Race race) {
-		playerObj.setProfession(Profession.getProfessionFromClient(create.getProfession()));
 		playerObj.setBornDate(Instant.now());
 		playerObj.setAccount(player.getUsername());
 		playerObj.setLanguageId(defaultLanguageForRace(race));
@@ -199,10 +205,10 @@ public class CharacterCreation {
 	
 	private Collection<String> languagesSkillsForRace(Race race) {
 		Collection<String> languages = new HashSet<>();
-		
+
 		languages.add("social_language_basic_comprehend");	// Anyone can comprehend Galactic Basic
 		languages.add("social_language_wookiee_comprehend");	// Anyone can comprehend Shyriiwook
-		
+
 		switch (race) {
 			case HUMAN_MALE:
 			case HUMAN_FEMALE:
@@ -257,10 +263,10 @@ public class CharacterCreation {
 				languages.add("social_language_wookiee_speak");
 				break;
 		}
-		
+
 		return languages;
 	}
-	
+
 	private static int defaultLanguageForRace(Race race) {
 		switch (race) {
 			case WOOKIEE_MALE:
@@ -270,7 +276,7 @@ public class CharacterCreation {
 				return 1;	// Galactic basic
 		}
 	}
-	
+
 	private static Location generateRandomLocation(ZoneInsertion info) {
 		return Location.builder()
 				.setTerrain(info.getTerrain())
@@ -283,5 +289,5 @@ public class CharacterCreation {
 				.setOrientationW(1)
 				.build();
 	}
-	
+
 }

@@ -36,7 +36,6 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
@@ -45,9 +44,6 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.CollectionLoader.CollectionSlotInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -175,8 +171,6 @@ public class SampleLoopSession {
 				sampleMultiplier *= 2;
 			} else if (roll < 0.75) { // 0.75
 				openConcentrationWindow();
-			} else {
-				openGambleWindow();
 			}
 		}
 		
@@ -214,44 +208,6 @@ public class SampleLoopSession {
 				createHighestConcentrationWaypoint();
 				stopSession();
 			}
-		});
-		window.addCancelButtonCallback("cancelButton", (event, parameters) -> this.sampleWindow = null);
-		if (this.sampleWindow == null) {
-			this.sampleWindow = window;
-			window.display(creature.getOwner());
-		}
-		paused = true;
-	}
-	
-	private void openGambleWindow() {
-		CollectionSlotInfo collection = DataLoader.Companion.collections().getSlotByName("col_resource_" + surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length() - 4) + "_01");
-		boolean hasCollectionListItem = collection != null && !creature.getPlayerObject().getCollectionFlag(collection.getBeginSlotId());
-		SuiListBox window = new SuiListBox(SuiButtons.OK_CANCEL, "@survey:gnode_t", "@survey:gnode_d");
-		window.addListItem("@survey:gnode_1");
-		window.addListItem("@survey:gnode_2");
-		if (hasCollectionListItem) {
-			window.addListItem("@survey:gnode_collection");
-		}
-		
-		window.addOkButtonCallback("okButton", (event, parameters) -> {
-			int index = SuiListBox.getSelectedRow(parameters);
-			this.sampleWindow = null;
-			if (index == 0) {
-				creature.modifyAction(-2000);
-				if (ThreadLocalRandom.current().nextDouble() < 0.75) {
-					sampleMultiplier *= 4;
-				}
-			} else if (index == 2) {
-				if (!hasCollectionListItem) {
-					StandardLog.onPlayerError(this, creature, "Attempted to select an inaccessible sampling list item");
-					Player owner = creature.getOwner();
-					if (owner != null)
-						CloseConnectionIntent.broadcast(owner, DisconnectReason.SUSPECTED_HACK);
-					return;
-				}
-				// TODO: Add collection
-			}
-			stopSession();
 		});
 		window.addCancelButtonCallback("cancelButton", (event, parameters) -> this.sampleWindow = null);
 		if (this.sampleWindow == null) {

@@ -163,7 +163,7 @@ public class ClientAwarenessService extends Service {
 			// If this is the primary rider, move the mount and all of the riders
 			CreatureObject mount = (CreatureObject) creature.getParent();
 			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
-			mount.sendObservers(new DataTransform(mount.getObjectId(), 0, mount.getNextUpdateCount(), mount.getLocation(), 0));
+			mount.sendObservers(new DataTransform(mount.getObjectId(), mount.getNextUpdateCount(), mount.getLocation(), 0));
 			DismountIntent.broadcast(creature, mount);
 		} else {
 			Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();

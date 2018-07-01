@@ -105,6 +105,7 @@ public class CommandExecutionService extends Service {
 
 		registerCallback("startDance", StartDanceCallback::new);
 		registerCallback("requestBiography", RequestBiographyCmdCallback::new);
+		registerCallback("requestBadges", RequestBadgesCallback::new);
 		registerCallback("flourish", FlourishCmdCallback::new);
 		registerCallback("changeDance", ChangeDanceCallback::new);
 		registerCallback("transferItemMisc", TransferItemCallback::new);
