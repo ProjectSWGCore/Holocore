@@ -107,7 +107,7 @@ public class NpcCombatMode extends NpcMode {
 		
 		if (target.getPosture() != Posture.INCAPACITATED && target.getPosture() != Posture.DEAD && attackCountdown.decrementAndGet() <= 0) {
 			attack(target, weapon);
-			attackCountdown.set((int) spawner.getAttackSpeed());
+			attackCountdown.set((int) spawner.getPrimaryWeaponSpeed()); // Only primary weapons enabled right now
 		}
 	}
 	
