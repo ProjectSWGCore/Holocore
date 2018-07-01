@@ -173,7 +173,7 @@ public class NPCCreator {
 	private static WeaponObject createWeapon(Spawner spawner, String template) {
 		try {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
-			weapon.setMinDamage(spawner.getDamagePerSecond());
+			weapon.setMinDamage((int) (spawner.getDamagePerSecond() * 0.90));
 			weapon.setMaxDamage(spawner.getDamagePerSecond());
 			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
 			if (range == -1)
