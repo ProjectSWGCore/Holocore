@@ -42,36 +42,22 @@ package com.projectswg.holocore.resources.support.global.player;
  * We can change the names/swap the values of these as needed. This is just a rough estimate on my part.
  */
 public enum AccessLevel {
-    PLAYER(0),
-    WARDEN(5),
-	CSR(10),
-    QA(15),
-    DEV(50);
-
+    PLAYER	(0),
+    WARDEN	(5),
+    QA		(10),
+	CSR		(15),
+	LEAD_QA	(20),
+	LEAD_CSR(20),
+    DEV		(25);
+	
 	private final int value;
-
+	
 	AccessLevel(int value){
 		this.value = value;
 	}
-
+	
 	public int getValue(){
 		return value;
 	}
-
-	public static AccessLevel getFromValue(int value){
-		switch(value){
-			case 0:
-				return PLAYER;
-			case 5:
-				return WARDEN;
-			case 10:
-				return CSR;
-			case 15:
-				return QA;
-			case 50:
-				return DEV;
-			default:
-				return PLAYER;
-		}
-	}
+	
 }
