@@ -239,6 +239,14 @@ public final class Spawner {
 		return npc.getSecondaryWeaponSpeed();
 	}
 	
+	public int getAggressiveRadius() {
+		return npc.getAggressiveRadius();
+	}
+	
+	public int getAssistRadius() {
+		return npc.getAssistRadius();
+	}
+	
 	public boolean isDeathblow() {
 		return npc.isDeathblow();
 	}

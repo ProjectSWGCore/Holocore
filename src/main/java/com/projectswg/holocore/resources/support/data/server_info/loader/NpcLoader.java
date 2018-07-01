@@ -109,8 +109,8 @@ public final class NpcLoader extends DataLoader {
 			secondary_weapon			TEXT
 			secondary_weapon_speed		REAL
 			secondary_weapon_specials*	TEXT
-			aggressive_radius		*	INTEGER
-			assist_radius			*	INTEGER
+			aggressive_radius			INTEGER
+			assist_radius				INTEGER
 			stalker					*	TEXT
 			herd					*	TEXT
 			death_blow					BOOLEAN
@@ -140,6 +140,8 @@ public final class NpcLoader extends DataLoader {
 		private final double movementSpeed;
 		private final double primaryWeaponSpeed;
 		private final double secondaryWeaponSpeed;
+		private final int aggressiveRadius;
+		private final int assistRadius;
 		private final boolean deathblow;
 		private final String lootTable1;
 		private final String lootTable2;
@@ -170,6 +172,8 @@ public final class NpcLoader extends DataLoader {
 			this.secondaryWeapons = parseWeapons(set.getText("secondary_weapon"));
 			this.primaryWeaponSpeed = set.getReal("primary_weapon_speed");
 			this.secondaryWeaponSpeed = set.getReal("secondary_weapon_speed");
+			this.aggressiveRadius = (int) set.getInt("aggressive_radius");
+			this.assistRadius = (int) set.getInt("assist_radius");
 			this.deathblow = set.getBoolean("death_blow");
 			this.lootTable1 = set.getText("loot_table1");
 			this.lootTable2 = set.getText("loot_table2");
@@ -287,6 +291,14 @@ public final class NpcLoader extends DataLoader {
 		
 		public double getSecondaryWeaponSpeed() {
 			return secondaryWeaponSpeed;
+		}
+		
+		public int getAggressiveRadius() {
+			return aggressiveRadius;
+		}
+		
+		public int getAssistRadius() {
+			return assistRadius;
 		}
 		
 		public boolean isDeathblow() {

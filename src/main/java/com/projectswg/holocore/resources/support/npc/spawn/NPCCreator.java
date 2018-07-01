@@ -34,16 +34,19 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.SpawnerFlag;
+import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.*;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
+import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
+import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.log.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -53,13 +56,12 @@ public class NPCCreator {
 	private static final Random RANDOM = new Random();
 	
 	public static long createNPC(Spawner spawner) {
-		AIObject object = createNPCFromBehavior(spawner);
+		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
 		object.setLocation(behaviorLocation(spawner));
 		object.setObjectName(spawner.getName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getDifficulty());
-		object.setDeathblow(spawner.isDeathblow());
 		object.setMaxHealth(spawner.getHealth());
 		object.setHealth(spawner.getHealth());
 		object.setMaxAction(spawner.getAction());
@@ -79,7 +81,20 @@ public class NPCCreator {
 			Log.w(t);
 		}
 		
-		setFlags(object, spawner.getSpawnerFlag());
+		switch (spawner.getBehavior()) {
+			case LOITER:
+				object.setDefaultMode(new NpcLoiterMode(spawner.getLoiterRadius()));
+				break;
+			case TURN:
+				object.setDefaultMode(new NpcTurningMode());
+				break;
+			case PATROL:
+				object.setDefaultMode(new NpcPatrolMode(spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
+				break;
+			default:
+				break;
+		}
+		setFlags(object, spawner);
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
 		object.systemMove(spawner.getEgg().getParent());
@@ -87,38 +102,15 @@ public class NPCCreator {
 		return object.getObjectId();
 	}
 	
-	private static AIObject createNPCFromBehavior(Spawner spawner) {
-		String template = spawner.getRandomIffTemplate();
-		switch (spawner.getBehavior()) {
-			case LOITER: {
-				LoiterAIObject object = ObjectCreator.createObjectFromTemplate(template, LoiterAIObject.class);
-				object.setLoiterRadius(spawner.getLoiterRadius());
-				object.setMainLocation(spawner.getLocation());
-				return object;
-			}
-			case PATROL: {
-				PatrolAIObject object = ObjectCreator.createObjectFromTemplate(template, PatrolAIObject.class);
-				if (spawner.getPatrolRoute() != null) {
-					object.setPatrolWaypoints(spawner.getPatrolRoute());
-				}
-				return object;
-			}
-			case TURN:
-				return ObjectCreator.createObjectFromTemplate(template, TurningAIObject.class);
-			case IDLE:
-			default:
-				return ObjectCreator.createObjectFromTemplate(template, RandomAIObject.class);
-		}
-	}
-	
-	private static void setFlags(CreatureObject creature, SpawnerFlag flags) {
-		switch (flags) {
+	private static void setFlags(AIObject creature, Spawner spawner) {
+		switch (spawner.getSpawnerFlag()) {
 			case AGGRESSIVE:
 				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
 				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
 			case ATTACKABLE:
 				creature.setPvpFlags(PvpFlag.ATTACKABLE);
 				creature.addOptionFlags(OptionFlag.HAM_BAR);
+				creature.setCombatMode(new NpcCombatMode(spawner));
 				break;
 			case INVULNERABLE:
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);

@@ -134,6 +134,7 @@ public final class SpawnerService extends Service {
 				spawn(spawn);
 			} catch (Throwable t) {
 				Log.e("Failed to load spawner. %s: %s", t.getClass().getName(), t.getMessage());
+				Log.e(t);
 			}
 		}
 		createPatrolRouteWaypoints();

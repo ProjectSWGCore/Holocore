@@ -13,10 +13,7 @@ import com.projectswg.holocore.resources.support.objects.radial.object.survey.Ob
 import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.LoiterAIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.PatrolAIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.RandomAIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.TurningAIObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,10 +38,7 @@ public enum RadialHandler {
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
-		classHandlers.put(LoiterAIObject.class, aiHandler);
-		classHandlers.put(PatrolAIObject.class, aiHandler);
-		classHandlers.put(RandomAIObject.class, aiHandler);
-		classHandlers.put(TurningAIObject.class, aiHandler);
+		classHandlers.put(AIObject.class, aiHandler);
 		classHandlers.put(CreditObject.class, new CreditObjectRadial());
 	}
 	

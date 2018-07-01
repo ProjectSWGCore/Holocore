@@ -29,60 +29,70 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.holocore.resources.support.npc.ai.AICombatSupport;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
+import me.joshlarson.jlcommon.log.Log;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class AIObject extends CreatureObject {
+public class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
-	private final List<ScheduledFuture<?>> scheduledTasks;
-	private final AICombatSupport combatSupport;
 	private final List<WeaponObject> primaryWeapons;
 	private final List<WeaponObject> secondaryWeapons;
+	private final EnumMap<ScheduledMode, NpcMode> modes;
 	private final SWGObject hiddenInventory;
-	private final AtomicBoolean deathblow;
 	
 	private ScheduledThreadPool executor;
+	private ScheduledFuture<?> previousScheduled;
 	private ScheduledMode mode;
 	private String creatureId;
 	
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
-		this.scheduledTasks = new ArrayList<>();
-		this.combatSupport = new AICombatSupport(this);
 		this.primaryWeapons = new ArrayList<>();
 		this.secondaryWeapons = new ArrayList<>();
+		this.modes = new EnumMap<>(ScheduledMode.class);
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
-		this.deathblow = new AtomicBoolean(false);
 		
 		this.executor = null;
-		this.mode = null;
+		this.previousScheduled = null;
+		this.mode = ScheduledMode.DEFAULT;
 		this.creatureId = null;
 		setRunSpeed(7.3);
 	}
 	
 	@Override
 	public void onObjectMoveInAware(SWGObject aware) {
-		if (aware.getBaselineType() != BaselineType.CREO || !((CreatureObject) aware).isLoggedInPlayer())
+		if (aware.getBaselineType() != BaselineType.CREO)
 			return;
-		if (getLocation().distanceTo(aware.getLocation()) <= 300) {
-			playersNearby.add((CreatureObject) aware);
+		CreatureObject player = (CreatureObject) aware;
+		if (!player.isLoggedInPlayer())
+			return;
+		double distance = getWorldLocation().flatDistanceTo(aware.getWorldLocation());
+		if (distance <= 300) {
+			if (playersNearby.add(player)) {
+				for (NpcMode mode : modes.values()) {
+					mode.onPlayerEnterAware(player, distance);
+				}
+			} else {
+				for (NpcMode mode : modes.values()) {
+					mode.onPlayerMoveInAware(player, distance);
+				}
+			}
 		} else {
-			playersNearby.remove(aware);
+			if (playersNearby.remove(player)) {
+				for (NpcMode mode : modes.values()) {
+					mode.onPlayerExitAware(player);
+				}
+			}
 		}
 	}
 	
@@ -93,14 +103,6 @@ public abstract class AIObject extends CreatureObject {
 			return false;
 		Posture theirPosture = ((CreatureObject) obj).getPosture();
 		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
-	}
-	
-	public void setDeathblow(boolean deathblow) {
-		this.deathblow.set(deathblow);
-	}
-	
-	public boolean isDeathblow() {
-		return deathblow.get();
 	}
 	
 	public void addPrimaryWeapon(WeaponObject weapon) {
@@ -138,81 +140,86 @@ public abstract class AIObject extends CreatureObject {
 		this.creatureId = creatureId;
 	}
 	
-	public final synchronized void scheduleDefaultMode(ScheduledThreadPool executor) {
-		if (mode == ScheduledMode.DEFAULT)
-			return;
-		mode = ScheduledMode.DEFAULT;
-		this.executor = executor;
-		
-		disableScheduler();
-		scheduledTasks.add(executor.executeWithFixedRate(0, getDefaultModeInterval(), this::defaultModeLoop));
+	public void setDefaultMode(NpcMode mode) {
+		this.modes.put(ScheduledMode.DEFAULT, mode);
+		mode.attach(this, ScheduledMode.DEFAULT);
 	}
 	
-	public final synchronized void scheduleCombatMode(ScheduledThreadPool executor) {
-		if (mode == ScheduledMode.COMBAT)
-			return;
-		mode = ScheduledMode.COMBAT;
-		this.executor = executor;
-		
-		disableScheduler();
-		scheduledTasks.add(executor.executeWithFixedRate(0, 500, this::combatModeLoop));
+	public void setCombatMode(NpcMode mode) {
+		this.modes.put(ScheduledMode.COMBAT, mode);
+		mode.attach(this, ScheduledMode.COMBAT);
 	}
 	
-	public final synchronized void disableScheduler() {
-		scheduledTasks.forEach(sf -> sf.cancel(false));
-		scheduledTasks.clear();
-	}
-	
-	public double calculateWalkSpeed() {
-		return getMovementPercent() * getMovementScale() * getWalkSpeed();
-	}
-	
-	public double calculateRunSpeed() {
-		return getMovementPercent() * getMovementScale() * getRunSpeed();
-	}
-	
-	public final boolean isRooted() {
-		switch (getPosture()) {
-			case DEAD:
-			case INCAPACITATED:
-			case INVALID:
-			case KNOCKED_DOWN:
-			case LYING_DOWN:
-			case SITTING:
-				return true;
-			case BLOCKING:
-			case CLIMBING:
-			case CROUCHED:
-			case DRIVING_VEHICLE:
-			case FLYING:
-			case PRONE:
-			case RIDING_CREATURE:
-			case SKILL_ANIMATING:
-			case SNEAKING:
-			case UPRIGHT:
-			default:
-				// Rooted if there are no nearby players
-				return playersNearby.isEmpty();
+	public void startCombatMode() {
+		if (modes.containsKey(ScheduledMode.COMBAT)) {
+			requestModeStart(ScheduledMode.COMBAT);
 		}
 	}
 	
-	protected final Set<CreatureObject> getNearbyPlayers() {
+	public void start(ScheduledThreadPool executor) {
+		this.executor = executor;
+		queueNextLoop(1000);
+	}
+	
+	public void stop() {
+		ScheduledFuture<?> prev = this.previousScheduled;
+		if (prev != null)
+			prev.cancel(false);
+		this.executor = null;
+	}
+	
+	void requestModeStart(ScheduledMode mode) {
+		if (mode == this.mode)
+			return;
+		this.mode = mode;
+		NpcMode activeMode = modes.get(mode);
+		if (activeMode != null)
+			activeMode.onModeStart();
+		queueNextLoop(0);
+	}
+	
+	void requestModeEnd(ScheduledMode mode) {
+		if (mode != this.mode && mode != ScheduledMode.DEFAULT)
+			return;
+		NpcMode inactiveMode = modes.get(this.mode);
+		if (inactiveMode != null)
+			inactiveMode.onModeEnd();
+		requestModeStart(ScheduledMode.DEFAULT);
+	}
+	
+	NpcMode getMode(ScheduledMode mode) {
+		return modes.get(mode);
+	}
+	
+	void queueNextLoop(long delay) {
+		ScheduledFuture<?> prev = this.previousScheduled;
+		if (prev != null)
+			prev.cancel(false);
+		previousScheduled = executor.execute(delay, this::loop);
+	}
+	
+	ScheduledMode getActiveMode() {
+		return mode;
+	}
+	
+	final Set<CreatureObject> getNearbyPlayers() {
 		return Collections.unmodifiableSet(playersNearby);
 	}
 	
-	protected abstract long getDefaultModeInterval();
-	
-	protected abstract void defaultModeLoop();
-	
-	private void combatModeLoop() {
-		combatSupport.act();
-		if (!combatSupport.isExecuting()) {
-			combatSupport.reset();
-			scheduleDefaultMode(executor);
+	private void loop() {
+		try {
+			NpcMode mode = this.modes.get(this.mode);
+			if (mode == null)
+				return;
+			mode.act();
+		} catch (Throwable t) {
+			Log.w(t);
+			mode = ScheduledMode.DEFAULT;
+			queueNextLoop(1000);
 		}
 	}
 	
-	private enum ScheduledMode {
+	enum ScheduledMode {
 		DEFAULT,
 		COMBAT
 	}
