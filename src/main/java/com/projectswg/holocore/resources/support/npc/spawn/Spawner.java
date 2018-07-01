@@ -79,7 +79,8 @@ public final class Spawner {
 		if (spawn.getPatrolId() < 1000) {
 			this.waypoints = null;
 		} else {
-			this.waypoints = DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()).stream().map(ResolvedPatrolWaypoint::new).collect(Collectors.toList());
+			List<PatrolRouteWaypoint> waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()), "Invalid patrol route: " + spawn.getPatrolId());
+			this.waypoints = waypoints.stream().map(ResolvedPatrolWaypoint::new).collect(Collectors.toList());
 		}
 		this.egg = Objects.requireNonNull(egg, "egg");
 		this.random = new Random();

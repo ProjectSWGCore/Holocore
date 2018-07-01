@@ -58,6 +58,7 @@ public class NPCCreator {
 	public static long createNPC(Spawner spawner) {
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
+		object.setSpawner(spawner);
 		object.setLocation(behaviorLocation(spawner));
 		object.setObjectName(spawner.getName());
 		object.setLevel(spawner.getCombatLevel());
@@ -110,7 +111,7 @@ public class NPCCreator {
 			case ATTACKABLE:
 				creature.setPvpFlags(PvpFlag.ATTACKABLE);
 				creature.addOptionFlags(OptionFlag.HAM_BAR);
-				creature.setCombatMode(new NpcCombatMode(spawner));
+				creature.setCombatMode(new NpcCombatMode());
 				break;
 			case INVULNERABLE:
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);

@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -49,6 +50,7 @@ public class AIObject extends CreatureObject {
 	private final EnumMap<ScheduledMode, NpcMode> modes;
 	private final SWGObject hiddenInventory;
 	
+	private Spawner spawner;
 	private ScheduledThreadPool executor;
 	private ScheduledFuture<?> previousScheduled;
 	private ScheduledMode mode;
@@ -62,6 +64,7 @@ public class AIObject extends CreatureObject {
 		this.modes = new EnumMap<>(ScheduledMode.class);
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
 		
+		this.spawner = null;
 		this.executor = null;
 		this.previousScheduled = null;
 		this.mode = ScheduledMode.DEFAULT;
@@ -105,6 +108,10 @@ public class AIObject extends CreatureObject {
 		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
 	}
 	
+	public void setSpawner(Spawner spawner) {
+		this.spawner = spawner;
+	}
+	
 	public void addPrimaryWeapon(WeaponObject weapon) {
 		this.primaryWeapons.add(weapon);
 		weapon.systemMove(hiddenInventory);
@@ -122,6 +129,10 @@ public class AIObject extends CreatureObject {
 			equipped.systemMove(hiddenInventory);
 		weapon.moveToContainer(this);
 		super.setEquippedWeapon(weapon);
+	}
+	
+	public Spawner getSpawner() {
+		return spawner;
 	}
 	
 	public List<WeaponObject> getPrimaryWeapons() {

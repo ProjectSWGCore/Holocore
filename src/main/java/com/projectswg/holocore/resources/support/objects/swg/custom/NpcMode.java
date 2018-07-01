@@ -2,6 +2,7 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
@@ -86,6 +87,10 @@ public abstract class NpcMode {
 	
 	public final Random getRandom() {
 		return random;
+	}
+	
+	public final Spawner getSpawner() {
+		return obj.getSpawner();
 	}
 	
 	@Nullable

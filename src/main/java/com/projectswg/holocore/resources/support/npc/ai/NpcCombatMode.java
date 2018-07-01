@@ -4,7 +4,6 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
@@ -27,25 +26,25 @@ public class NpcCombatMode extends NpcMode {
 	private final AtomicReference<Location> returnLocation;
 	private final Collection<CreatureObject> targets;
 	private final AtomicInteger attackCountdown;
-	private final Spawner spawner;
 	
-	public NpcCombatMode(Spawner spawner) {
+	public NpcCombatMode() {
 		this.returnLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
 		this.attackCountdown = new AtomicInteger(0);
-		this.spawner = spawner;
 	}
 	
 	@Override
 	public void onPlayerMoveInAware(CreatureObject player, double distance) {
-		if (distance < spawner.getAggressiveRadius()) {
+		if (distance < getSpawner().getAggressiveRadius()) {
 			if (targets.add(player)) {
 				requestAssistance();
 				if (!isExecuting())
 					requestModeStart();
 			}
 		} else {
-			targets.remove(player);
+			// If out of aggressive range, and not actively fighting
+			if (!getAI().getDefenders().contains(player.getObjectId()))
+				targets.remove(player);
 		}
 	}
 	
@@ -68,7 +67,7 @@ public class NpcCombatMode extends NpcMode {
 		}
 		
 		syncTargets();
-		if (isInActiveCombat()) {
+		if (!targets.isEmpty()) {
 			performCombatAction();
 			queueNextLoop(1000);
 		} else if (isReturning()) {
@@ -84,17 +83,6 @@ public class NpcCombatMode extends NpcMode {
 		return getAI().isInCombat() || ret == null || getAI().getLocation().distanceTo(ret) >= RETURN_THRESHOLD;
 	}
 	
-	private boolean isInActiveCombat() {
-		if (getAI().isInCombat())
-			return true;
-		
-		for (CreatureObject target : targets) {
-			if (!target.hasBuff("incapWeaken") || spawner.isDeathblow())
-				return true;
-		}
-		return false;
-	}
-	
 	private void performCombatAction() {
 		CreatureObject target = getPrimaryTarget();
 		if (target == null)
@@ -108,9 +96,9 @@ public class NpcCombatMode extends NpcMode {
 		if (target.getPosture() != Posture.INCAPACITATED && target.getPosture() != Posture.DEAD && attackCountdown.decrementAndGet() <= 0) {
 			attack(target, weapon);
 			if (getAI().getPrimaryWeapons().contains(weapon))
-				attackCountdown.set((int) spawner.getPrimaryWeaponSpeed());
+				attackCountdown.set((int) getSpawner().getPrimaryWeaponSpeed());
 			else
-				attackCountdown.set((int) spawner.getSecondaryWeaponSpeed());
+				attackCountdown.set((int) getSpawner().getSecondaryWeaponSpeed());
 		}
 	}
 	
@@ -161,15 +149,8 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Nullable
 	private CreatureObject getPrimaryTarget() {
-		if (spawner.isDeathblow()) {
-			return targets.stream()
-					.filter(creo -> creo.getHealth() > 0) // Don't attack if they're already dead
-					.min(Comparator.comparingInt(CreatureObject::getHealth)).orElse(null);
-		}
-		
 		return targets.stream()
 				.filter(creo -> creo.getHealth() > 0) // Don't attack if they're already dead
-				.filter(creo -> !creo.hasBuff("incapWeaken")) // Don't attack if it'll be a DB
 				.min(Comparator.comparingInt(CreatureObject::getHealth)).orElse(null);
 	}
 	
@@ -184,7 +165,7 @@ public class NpcCombatMode extends NpcMode {
 	
 	private void requestAssistance() {
 		Location myLocation = getAI().getWorldLocation();
-		double assistRange = spawner.getAssistRadius();
+		double assistRange = getSpawner().getAssistRadius();
 		getAI().getAware().stream()
 				.filter(AIObject.class::isInstance) // get nearby AI
 				.filter(ai -> ai.getWorldLocation().flatDistanceTo(myLocation) < assistRange) // that can assist
