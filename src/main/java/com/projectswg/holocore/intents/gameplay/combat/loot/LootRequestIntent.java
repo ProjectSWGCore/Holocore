@@ -27,42 +27,48 @@
 
 package com.projectswg.holocore.intents.gameplay.combat.loot;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * Requests a particular high-level action on a corpse
+ */
 public class LootRequestIntent extends Intent {
 	
 	private final Player player;
-	private final SWGObject target;
+	private final CreatureObject target;
 	private final LootType type;
 	
-	public LootRequestIntent(Player player, SWGObject target, LootType type) {
+	public LootRequestIntent(@NotNull Player player, @NotNull CreatureObject target, @NotNull LootType type) {
 		this.player = player;
 		this.target = target;
 		this.type = type;
 	}
 	
+	@NotNull
 	public Player getPlayer() {
 		return player;
 	}
 	
-	public SWGObject getTarget() {
+	@NotNull
+	public CreatureObject getTarget() {
 		return target;
 	}
 	
+	@NotNull
 	public LootType getType() {
 		return type;
 	}
 	
-	public static void broadcast(Player player, SWGObject target, LootType type) {
+	public static void broadcast(@NotNull Player player, @NotNull CreatureObject target, @NotNull LootType type) {
 		new LootRequestIntent(player, target, type).broadcast();
 	}
 	
 	public enum LootType {
 		LOOT,
-		LOOT_ALL,
-		CREDITS
+		LOOT_ALL
 	}
 	
 }

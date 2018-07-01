@@ -40,10 +40,10 @@ public class AIObjectRadial implements RadialHandlerInterface {
 		
 		switch (selection) {
 			case LOOT:
-				LootRequestIntent.broadcast(player, target, LootRequestIntent.LootType.LOOT);
+				LootRequestIntent.broadcast(player, ai, LootRequestIntent.LootType.LOOT);
 				break;
 			case LOOT_ALL:
-				LootRequestIntent.broadcast(player, target, LootRequestIntent.LootType.LOOT_ALL);
+				LootRequestIntent.broadcast(player, ai, LootRequestIntent.LootType.LOOT_ALL);
 				break;
 		}
 	}

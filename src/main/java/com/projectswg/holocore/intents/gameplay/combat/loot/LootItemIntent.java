@@ -28,29 +28,44 @@ package com.projectswg.holocore.intents.gameplay.combat.loot;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.utilities.Arguments;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * Requests to transfer a particular item from a corpse
+ */
 public class LootItemIntent extends Intent {
 	
-	private final Player looter;
+	private final CreatureObject looter;
+	private final CreatureObject corpse;
 	private final SWGObject item;
-	private final SWGObject container;
 	
-	public LootItemIntent(Player looter, SWGObject item, SWGObject container) {
+	public LootItemIntent(@NotNull CreatureObject looter, @NotNull CreatureObject corpse, @NotNull SWGObject item) {
+		Arguments.validate(corpse instanceof AIObject, "Attempting to loot a non-AI object");
 		this.looter = looter;
+		this.corpse = corpse;
 		this.item = item;
-		this.container = container;
 	}
 	
-	public Player getLooter() {
+	@NotNull
+	public CreatureObject getLooter() {
 		return looter;
 	}
 	
+	@NotNull
+	public CreatureObject getCorpse() {
+		return corpse;
+	}
+	
+	@NotNull
 	public SWGObject getItem() {
 		return item;
 	}
 	
-	public SWGObject getContainer() {
-		return container;
+	public static void broadcast(@NotNull CreatureObject looter, @NotNull CreatureObject corpse, @NotNull SWGObject item) {
+		new LootItemIntent(looter, corpse, item).broadcast();
 	}
 }

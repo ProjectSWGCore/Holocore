@@ -159,22 +159,6 @@ public class GroupObject extends SWGObject {
 		return lootRule;
 	}
 	
-	public CreatureObject getRandomPlayer(){
-		Random random = new Random();
-		int randomSlot = random.nextInt(groupMembers.size());	
-		CreatureObject randomPlayer = null;
-		
-		while (randomPlayer == null){
-			if (groupMembers.get(randomSlot).getCreature().isPlayer()){
-				randomPlayer = groupMembers.get(randomSlot).getCreature();
-			}else{
-				randomSlot = random.nextInt(groupMembers.size());
-			}
-		}
-		
-		return randomPlayer;
-	}
-	
 	public void setLevel(short level) {
 		this.level = level;
 		sendDelta(6, 5, level);
