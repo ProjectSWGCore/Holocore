@@ -49,15 +49,7 @@ sourceSets {
 			implementation(project(":pswgcommon"))
 		}
 	}
-	create("utility") {
-		dependencies {
-			implementation(project(":pswgcommon"))
-			implementation(group="org.jetbrains.kotlin", name="kotlin-stdlib", version="1.3.50")
-			implementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
-			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="me.joshlarson", name="fast-json", version="3.0.0")
-		}
-	}
+	create("utility")
 	create("integration") {
 		dependencies {
 			implementation(project(":pswgcommon"))
@@ -67,6 +59,19 @@ sourceSets {
 			implementation(group="junit", name="junit", version="4.12")
 		}
 	}
+}
+
+val utilityImplementation by configurations.getting {
+	extendsFrom(configurations.implementation.get())
+}
+
+dependencies {
+	utilityImplementation(project(":"))	// Root project, which would be holocore itself
+	utilityImplementation(project(":pswgcommon"))
+	utilityImplementation(group="org.jetbrains.kotlin", name="kotlin-stdlib", version="1.3.50")
+	utilityImplementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
+	utilityImplementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
+	utilityImplementation(group="me.joshlarson", name="fast-json", version="3.0.0")
 }
 
 idea {

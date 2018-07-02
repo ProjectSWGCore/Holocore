@@ -53,9 +53,9 @@ class ConvertSlotDescriptor implements Converter {
 	public void convertFile(SdbGenerator sdb, File file) throws IOException {
 		SlotDescriptorParser descriptor = SWGParser.parse(file);
 		Objects.requireNonNull(descriptor, "Failed to load clientdata");
-		
-		String iff = file.getAbsolutePath();
-		sdb.writeLine(iff.substring(iff.lastIndexOf('/')+1, iff.lastIndexOf('.')), String.join(";", descriptor.getSlots()));
+
+		String iff = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
+		sdb.writeLine(iff, String.join(";", descriptor.getSlots()));
 	}
 	
 }

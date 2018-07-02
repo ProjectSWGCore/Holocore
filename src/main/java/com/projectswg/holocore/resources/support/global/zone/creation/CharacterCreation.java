@@ -197,10 +197,6 @@ public class CharacterCreation {
 				createDefaultObject(creature, itemTemplate);
 			}
 		}
-		
-		SWGObject inventory = creature.getSlottedObject("inventory");
-		assert inventory != null : "inventory is not defined";
-		createDefaultObject(inventory, "object/tangible/npe/shared_npe_uniform_box.iff");
 	}
 	
 	private Collection<String> languagesSkillsForRace(Race race) {

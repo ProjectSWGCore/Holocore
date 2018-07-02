@@ -53,7 +53,7 @@ class ConvertBuildingCells implements Converter {
 			return;
 		}
 		
-		String building = file.getAbsolutePath().replace(CLIENTDATA.getAbsolutePath() + '/', "");
+		String building = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
 		List<PortalLayoutCellTemplate> cells = portalLayoutData.getCells();
 		List<IndexedTriangleList> portals = portalLayoutData.getPortals();
 		
