@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 enum CachedLoader {
+	BUILDING_CELLS		(BuildingCellLoader::new),
 	BUILDOUT_BUILDINGS	(BuildingLoader::new),
 	NPC_LOADER			(NpcLoader::new),
 	NPC_PATROL_ROUTES	(NpcPatrolRouteLoader::new),

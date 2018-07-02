@@ -26,35 +26,33 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.building;
 
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.CellInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class BuildingObject extends TangibleObject {
 	
 	private final Map<String, CellObject> nameToCell;
 	private final Map<Integer, CellObject> idToCell;
 	
-	private WeakReference<PortalLayoutData> portalLayoutData;
 	private int loadRange;
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
 		this.nameToCell = new HashMap<>();
 		this.idToCell = new HashMap<>();
-		this.portalLayoutData = null;
 		this.loadRange = 0;
 	}
 	
@@ -73,32 +71,23 @@ public class BuildingObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject object) {
 		assert object instanceof CellObject : "Object added to building is not a cell!";
-		super.addObject(object);
 		
-		CellObject cell = (CellObject) object;
-		assert cell.getNumber() > 0 : "Cell Number must be greater than 0";
-		assert cell.getNumber() < getCellCount() : "Cell Number must be less than the cell count!";
-		assert idToCell.get(cell.getNumber()) == null : "Multiple cells have the same number!";
-		
-		cell.setCellName(getCellName(cell.getNumber()));
-		idToCell.put(cell.getNumber(), cell);
-		nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		return loadRange != 0 ? loadRange : super.calculateLoadRange();
+		List<CellInfo> cellInfos = DataLoader.buildingCells().getBuilding(getTemplate());
+		assert cellInfos != null : "No cells exist in this building";
+		addObject((CellObject) object, cellInfos);
 	}
 	
 	public void populateCells() {
-		int cells = getCellCount();
-		for (int i = 1; i < cells; i++) { // 0 is world
-			if (idToCell.get(i) != null)
+		List<CellInfo> cellInfos = DataLoader.buildingCells().getBuilding(getTemplate());
+		if (cellInfos == null)
+			return; // No cells to populate
+		for (CellInfo cellInfo : cellInfos) { // 0 is world
+			if (idToCell.get(cellInfo.getId()) != null || cellInfo.getId() == 0)
 				continue;
 			CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-			cell.setNumber(i);
+			cell.setNumber(cellInfo.getId());
 			cell.setTerrain(getTerrain());
-			addObject(cell);
+			addObject(cell, cellInfos);
 		}
 	}
 	
@@ -111,34 +100,6 @@ public class BuildingObject extends TangibleObject {
 			loadRange = Integer.MAX_VALUE;
 	}
 	
-	private int getCellCount() {
-		PortalLayoutData data = getPortalLayoutData();
-		if (data == null)
-			return 0;
-		return data.getCells().size();
-	}
-	
-	private String getCellName(int cell) {
-		PortalLayoutData data = getPortalLayoutData();
-		if (data == null)
-			return "";
-		return data.getCells().get(cell).getName();
-	}
-	
-	private PortalLayoutData getPortalLayoutData() {
-		PortalLayoutData portalLayoutData = (this.portalLayoutData == null) ? null : this.portalLayoutData.get();
-		if (portalLayoutData == null) {
-			String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
-			if (portalFile == null || portalFile.isEmpty())
-				return null;
-			
-			portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
-			this.portalLayoutData = new WeakReference<>(portalLayoutData);
-		}
-		assert portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0 : "Invalid portal layout data!";
-		return portalLayoutData;
-	}
-	
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
@@ -149,6 +110,33 @@ public class BuildingObject extends TangibleObject {
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		stream.getByte();
+	}
+	
+	@Override
+	protected int calculateLoadRange() {
+		return loadRange != 0 ? loadRange : super.calculateLoadRange();
+	}
+	
+	private void addObject(CellObject cell, List<CellInfo> cellInfos) {
+		super.addObject(cell);
+		assert cell.getNumber() > 0 : "Cell Number must be greater than 0";
+		assert cell.getNumber() < cellInfos.size() : "Cell Number must be less than the cell count!";
+		assert idToCell.get(cell.getNumber()) == null : "Multiple cells have the same number!";
+		
+		CellInfo cellInfo = cellInfos.get(cell.getNumber());
+		cell.setCellName(cellInfo.getName());
+		for (Entry<Point3D, Integer> portal : cellInfo.getNeighbors().entrySet()) {
+			if (portal.getValue() == 0) {
+				cell.connectToNeighbor(null, portal.getKey());
+			} else {
+				CellObject neighbor = idToCell.get(portal.getValue());
+				if (neighbor == null)
+					continue;
+				cell.connectToNeighbor(neighbor, portal.getKey());
+			}
+		}
+		idToCell.put(cell.getNumber(), cell);
+		nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
 	}
 	
 }

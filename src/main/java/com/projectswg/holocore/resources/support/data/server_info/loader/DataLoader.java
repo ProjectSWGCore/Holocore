@@ -33,6 +33,10 @@ public abstract class DataLoader {
 		return (BuildingLoader) CachedLoader.BUILDOUT_BUILDINGS.load();
 	}
 	
+	public static BuildingCellLoader buildingCells() {
+		return (BuildingCellLoader) CachedLoader.BUILDING_CELLS.load();
+	}
+	
 	public static NpcLoader npcs() {
 		return (NpcLoader) CachedLoader.NPC_LOADER.load();
 	}
