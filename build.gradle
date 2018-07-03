@@ -54,6 +54,7 @@ dependencies {
 	
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
+	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	
 	testCompile 'junit:junit:4.12'
 	
