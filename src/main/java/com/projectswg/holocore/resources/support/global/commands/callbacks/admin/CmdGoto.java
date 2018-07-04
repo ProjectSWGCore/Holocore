@@ -54,6 +54,10 @@ public class CmdGoto implements ICmdCallback  {
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
 		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(parts[0].trim());
+		if (building == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + parts[0]);
+			return;
+		}
 		int cell = 1;
 		try {
 			if (parts.length >= 2)
