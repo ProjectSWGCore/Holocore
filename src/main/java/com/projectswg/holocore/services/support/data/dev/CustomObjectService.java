@@ -24,6 +24,7 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -104,7 +105,7 @@ public class CustomObjectService extends Service {
 			if (file.isDirectory()) {
 				mapping.put(file.getName(), createListBoxRecursive(file));
 			} else if (file.isFile() && file.getName().startsWith("shared_") && file.getName().endsWith(".iff")) {
-				String iff = file.getAbsolutePath().replace(new File("clientdata").getAbsolutePath()+'/', "");
+				String iff = file.getAbsolutePath().replace(new File("clientdata").getAbsolutePath()+File.separator, "");
 				mapping.put(prettyIff(iff), iff);
 			}
 		}
@@ -112,8 +113,9 @@ public class CustomObjectService extends Service {
 	}
 	
 	private String prettyIff(String iff) {
-		String specific = iff.substring(iff.lastIndexOf('/')+1).replace("shared_", "").replace(".iff", "");
-		String folder = iff.substring(iff.lastIndexOf('/', iff.lastIndexOf('/')-1)+1, iff.lastIndexOf('/'));
+		char sep = File.separatorChar;
+		String specific = iff.substring(iff.lastIndexOf(sep)+1).replace("shared_", "").replace(".iff", "");
+		String folder = iff.substring(iff.lastIndexOf(sep, iff.lastIndexOf(sep)-1)+1, iff.lastIndexOf(sep));
 		StringBuilder parts = new StringBuilder();
 		for (String part : specific.split("_")) {
 			if (part.equals(folder) || part.isEmpty())
