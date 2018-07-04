@@ -106,7 +106,7 @@ public class CustomObjectService extends Service {
 				mapping.put(file.getName(), createListBoxRecursive(file));
 			} else if (file.isFile() && file.getName().startsWith("shared_") && file.getName().endsWith(".iff")) {
 				String iff = file.getAbsolutePath().replace(new File("clientdata").getAbsolutePath()+File.separator, "");
-				mapping.put(prettyIff(iff), iff);
+				mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
 			}
 		}
 		return new ListBoxRecursive(mapping);
