@@ -44,6 +44,7 @@ import com.projectswg.common.network.packets.swg.zone.ServerNowEpochTime;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent.LoginEvent;
+import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
@@ -52,6 +53,7 @@ import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.UserMetadata;
+import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
@@ -269,7 +271,14 @@ public class LoginService extends Service {
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {
-		return userDatabase.deleteCharacter(obj.getObjectId());
+		boolean success = userDatabase.deleteCharacter(obj.getObjectId());
+		if (success) {
+			Player owner = obj.getOwner();
+			if (owner != null)
+				CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
+			DestroyObjectIntent.broadcast(obj);
+		}
+		return success;
 	}
 	
 }

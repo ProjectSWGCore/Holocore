@@ -26,14 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.cell;
 
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CellObject extends SWGObject {
+	
+	private final Map<Point3D, CellObject> portals;
 	
 	private boolean	isPublic	= true;
 	private int		number		= 0;
@@ -45,6 +54,11 @@ public class CellObject extends SWGObject {
 
 	public CellObject(long objectId) {
 		super(objectId, BaselineType.SCLT);
+		this.portals = new HashMap<>();
+	}
+	
+	public Map<Point3D, CellObject> getPortals() {
+		return Collections.unmodifiableMap(portals);
 	}
 	
 	public boolean isPublic() {
@@ -61,6 +75,12 @@ public class CellObject extends SWGObject {
 	
 	public String getCellName() {
 		return name;
+	}
+	
+	public void connectToNeighbor(@Nullable CellObject cell, @NotNull Point3D portal) {
+		if (portals.put(portal, cell) == null && cell != null) {
+			cell.connectToNeighbor(this, portal);
+		}
 	}
 	
 	public void setPublic(boolean isPublic) {

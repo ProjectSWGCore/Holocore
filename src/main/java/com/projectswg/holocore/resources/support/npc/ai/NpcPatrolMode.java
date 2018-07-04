@@ -24,68 +24,56 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.custom;
+package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
-import com.projectswg.holocore.resources.support.npc.ai.AINavigationSupport;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * AI object that patrols the specified route
  */
-public class PatrolAIObject extends AIObject {
+public class NpcPatrolMode extends NpcMode {
 	
 	private final List<ResolvedPatrolWaypoint> waypoints;
-	private final AtomicReference<PatrolType> patrolType;
+	private final PatrolType patrolType;
 	private final Queue<Runnable> plannedRoute;
 	
-	public PatrolAIObject(long objectId) {
-		super(objectId);
-		this.waypoints = new CopyOnWriteArrayList<>();
-		this.patrolType = new AtomicReference<>(PatrolType.LOOP);
+	public NpcPatrolMode(List<ResolvedPatrolWaypoint> waypoints) {
+		this.waypoints = new ArrayList<>(waypoints);
+		this.patrolType = !waypoints.isEmpty() ? waypoints.get(0).getPatrolType() : PatrolType.LOOP;
 		this.plannedRoute = new LinkedList<>();
 	}
 	
-	public void setPatrolWaypoints(List<ResolvedPatrolWaypoint> waypoints) {
-		if (!waypoints.isEmpty())
-			this.patrolType.set(waypoints.get(0).getPatrolType());
-		this.waypoints.clear();
-		this.waypoints.addAll(waypoints);
-	}
-	
 	@Override
-	protected long getDefaultModeInterval() {
-		return 1000;
-	}
-	
-	@Override
-	protected void defaultModeLoop() {
-		if (isRooted())
+	public void act() {
+		if (isRooted()) {
+			queueNextLoop(1000);
 			return;
-		if (plannedRoute.isEmpty()) {
-			createPlannedRoute();
 		}
+		if (plannedRoute.isEmpty())
+			createPlannedRoute();
+		
 		Runnable nextAction = plannedRoute.poll();
 		if (nextAction != null)
 			nextAction.run();
+		
+		queueNextLoop(1000);
 	}
 	
 	private void createPlannedRoute() {
-		Location prevLocation = getLocation();
-		SWGObject prevParent = getParent();
+		Location prevLocation = getAI().getLocation();
+		SWGObject prevParent = getAI().getParent();
 		for (ResolvedPatrolWaypoint waypoint : waypoints) {
 			appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
 			prevParent = waypoint.getParent();
 			prevLocation = waypoint.getLocation();
 		}
-		if (patrolType.get() == PatrolType.FLIP) {
+		if (patrolType == PatrolType.FLIP) {
 			List<ResolvedPatrolWaypoint> waypointsReverse = new ArrayList<>(waypoints);
 			Collections.reverse(waypointsReverse);
 			for (ResolvedPatrolWaypoint waypoint : waypointsReverse) {
@@ -98,7 +86,7 @@ public class PatrolAIObject extends AIObject {
 	
 	private void appendPlannedRouteWaypoint(SWGObject prevParent, Location prevLocation, ResolvedPatrolWaypoint waypoint) {
 		if (prevParent == waypoint.getParent()) {
-			Queue<Location> route = AINavigationSupport.navigateTo(prevLocation, waypoint.getLocation(), calculateWalkSpeed());
+			Queue<Location> route = AINavigationSupport.navigateTo(prevLocation, waypoint.getLocation(), getWalkSpeed());
 			while (!route.isEmpty()) {
 				Location l = route.poll();
 				assert l != null;
@@ -114,7 +102,7 @@ public class PatrolAIObject extends AIObject {
 	}
 	
 	private void addToPlannedRoute(SWGObject parent, Location location) {
-		plannedRoute.add(() -> MoveObjectIntent.broadcast(this, parent, location, calculateWalkSpeed(), getNextUpdateCount()));
+		plannedRoute.add(() -> walkTo(parent, location));
 	}
 	
 	private void addNopToPlannedRoute() {

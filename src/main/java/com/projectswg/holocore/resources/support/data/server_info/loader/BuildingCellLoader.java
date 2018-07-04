@@ -24,34 +24,67 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.custom;
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
-/**
- * AI object that loiters the area
- */
-public class TurningAIObject extends RandomAIObject {
+public final class BuildingCellLoader extends DataLoader {
 	
-	public TurningAIObject(long objectId) {
-		super(objectId);
+	private final Map<String, List<CellInfo>> buildingMap;
+	
+	BuildingCellLoader() {
+		this.buildingMap = new HashMap<>();
+	}
+	
+	@Nullable
+	public List<CellInfo> getBuilding(String buildingIff) {
+		return buildingMap.get(buildingIff);
 	}
 	
 	@Override
-	protected void defaultModeLoop() {
-		if (isRooted())
-			return;
-		super.defaultModeLoop();
-		Random r = new Random();
-		if (r.nextDouble() > 0.25) // Only a 25% movement chance
-			return;
-		if (getObservers().isEmpty()) // No need to dance if nobody is watching
-			return;
-		double theta = r.nextDouble() * 360;
-		MoveObjectIntent.broadcast(this, getParent(), Location.builder(getMainLocation()).setHeading(theta).build(), 1.37, getNextUpdateCount());
+	public final void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/objects/building_cells.sdb"))) {
+			while (set.next()) {
+				buildingMap.computeIfAbsent(set.getText(0), b -> new ArrayList<>()).add(new CellInfo(set));
+			}
+		}
+	}
+	
+	public static class CellInfo {
+		
+		private final int id;
+		private final String name;
+		private final Map<Point3D, Integer> neighbors;
+		
+		public CellInfo(SdbResultSet set) {
+			this.id = (int) set.getInt(1);
+			this.name = set.getText(2).intern();
+			this.neighbors = new HashMap<>();
+			for (String neighbor : set.getText(3).split(";")) {
+				String [] neighborSplit = neighbor.split(",", 4);
+				int neighborId = Integer.parseInt(neighborSplit[0]);
+				neighbors.put(new Point3D(Double.parseDouble(neighborSplit[1]), Double.parseDouble(neighborSplit[2]), Double.parseDouble(neighborSplit[3])), neighborId);
+			}
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getId() {
+			return id;
+		}
+		
+		public Map<Point3D, Integer> getNeighbors() {
+			return Collections.unmodifiableMap(neighbors);
+		}
 	}
 	
 }

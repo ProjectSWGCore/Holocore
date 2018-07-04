@@ -29,20 +29,23 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.Map.Entry;
 
 public class CmdGoto implements ICmdCallback  {
 	
@@ -72,7 +75,7 @@ public class CmdGoto implements ICmdCallback  {
 				if (!set.next())
 					return "No such location found: " + loc;
 				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
-				return teleportToGoto(obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
+				return teleportToGoto(obj, set.getLong("object_id"), cell);
 			} catch (SQLException e) {
 				Log.e(e);
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
@@ -80,7 +83,7 @@ public class CmdGoto implements ICmdCallback  {
 		}
 	}
 	
-	private String teleportToGoto(SWGObject obj, long buildingId, int cellNumber, Location l) {
+	private String teleportToGoto(SWGObject obj, long buildingId, int cellNumber) {
 		SWGObject parent = ObjectLookup.getObjectById(buildingId);
 		if (!(parent instanceof BuildingObject)) {
 			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
@@ -93,7 +96,13 @@ public class CmdGoto implements ICmdCallback  {
 			Log.e(err);
 			return err;
 		}
-		new ObjectTeleportIntent(obj, cell, l).broadcast();
+		Point3D portal;
+		if (cell.getPortals().containsValue(null)) // World portal
+			portal = cell.getPortals().entrySet().stream().filter(e -> e.getValue() == null).map(Entry::getKey).findFirst().orElse(new Point3D(0, 0, 0));
+		else
+			portal = cell.getPortals().entrySet().stream().min(Comparator.comparingInt(e -> e.getValue().getNumber())).map(Entry::getKey).orElse(new Point3D(0, 0, 0));
+		
+		ObjectTeleportIntent.broadcast(obj, cell, Location.builder().setPosition(portal.getX(), portal.getY(), portal.getZ()).setTerrain(parent.getTerrain()).build());
 		return "Successfully teleported "+obj.getObjectName()+" to "+buildingId;
 	}
 	

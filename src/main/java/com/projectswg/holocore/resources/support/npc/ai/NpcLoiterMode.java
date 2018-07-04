@@ -24,55 +24,49 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.custom;
+package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
-
-import java.util.Random;
+import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 /**
  * AI object that loiters the area
  */
-public class LoiterAIObject extends RandomAIObject {
+public class NpcLoiterMode extends NpcMode {
 	
+	private Location mainLocation;
 	private double radius;
 	
-	public LoiterAIObject(long objectId) {
-		super(objectId);
-		this.radius = 0;
-	}
-	
-	public double getLoiterRadius() {
-		return radius;
-	}
-	
-	public void setLoiterRadius(double radius) {
+	public NpcLoiterMode(double radius) {
+		this.mainLocation = null;
 		this.radius = radius;
 	}
 	
 	@Override
-	protected void defaultModeLoop() {
-		if (isRooted())
+	public void act() {
+		if (isRooted()) {
+			queueNextLoop(10000+getRandom().nextInt(5));
 			return;
-		super.defaultModeLoop();
-		Random r = new Random();
-		if (r.nextDouble() > 0.25) // Only a 25% movement chance
-			return;
-		if (getObservers().isEmpty()) // No need to dance if nobody is watching
+		}
+		Location currentLocation = getAI().getLocation();
+		if (mainLocation == null)
+			mainLocation = currentLocation;
+		
+		if (getRandom().nextDouble() > 0.25) // Only a 25% movement chance
 			return;
 		double dist = Math.sqrt(radius);
 		double theta;
-		Location currentLocation = getLocation();
 		LocationBuilder l = Location.builder(currentLocation);
 		do {
-			theta = r.nextDouble() * Math.PI * 2;
+			theta = getRandom().nextDouble() * Math.PI * 2;
 			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
 			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
-		} while (!l.isWithinFlatDistance(getMainLocation(), radius));
+		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		MoveObjectIntent.broadcast(this, getParent(), l.build(), 1.37, getNextUpdateCount());
+		
+		walkTo(l.build());
+		queueNextLoop(30 + getRandom().nextInt(10));
 	}
 	
 }

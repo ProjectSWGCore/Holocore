@@ -2,6 +2,7 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.LootLotteryStartedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -47,8 +48,20 @@ public class CombatNpcService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleCorpseLootedIntent(CorpseLootedIntent i) {
-		CreatureObject corpse = i.getCorpse();
+	private void handleLootLotteryStartedIntent(LootLotteryStartedIntent llsi) {
+		CreatureObject corpse = llsi.getCorpse();
+		assert !corpse.isPlayer() : "Cannot (shouldn't) loot a player";
+		
+		ScheduledFuture<?> task = deleteCorpseTasks.get(corpse.getObjectId());
+		assert task != null;
+		
+		if (task.getDelay(TimeUnit.SECONDS) < 35 && task.cancel(false))
+			executor.execute(35000, () -> deleteCorpse(corpse));
+	}
+	
+	@IntentHandler
+	private void handleCorpseLootedIntent(CorpseLootedIntent cli) {
+		CreatureObject corpse = cli.getCorpse();
 		assert !corpse.isPlayer() : "Cannot (shouldn't) loot a player";
 		
 		ScheduledFuture<?> task = deleteCorpseTasks.get(corpse.getObjectId());

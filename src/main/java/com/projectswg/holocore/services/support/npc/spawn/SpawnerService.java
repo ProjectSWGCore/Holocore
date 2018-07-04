@@ -27,7 +27,6 @@
 package com.projectswg.holocore.services.support.npc.spawn;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.intents.support.data.config.ConfigChangedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
@@ -52,17 +51,13 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class SpawnerService extends Service {
 	
-	private final Map<Long, Spawner> spawnerMap;
 	private final ScheduledThreadPool executor;
 	
 	public SpawnerService() {
-		this.spawnerMap = new HashMap<>();
 		this.executor = new ScheduledThreadPool(1, "spawner-service");
 	}
 	
@@ -83,69 +78,44 @@ public final class SpawnerService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
-		String newValue, oldValue;
-		
-		if (cci.getChangedConfig().equals(ConfigFile.FEATURES) && cci.getKey().equals("SPAWN-EGGS-ENABLED")) {
-			newValue = cci.getNewValue();
-			oldValue = cci.getOldValue();
-
-			if (!newValue.equals(oldValue)) {
-				if (Boolean.valueOf(newValue) && spawnerMap.isEmpty()) { // If nothing's been spawned, create it.
-					loadSpawners();
-				} else { // If anything's been spawned, delete it.
-					removeSpawners();
-				}
-			}
-		}
-	}
-	
-	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject destroyedObject = doi.getObject();
 		if (!(destroyedObject instanceof AIObject))
 			return;
 		
-		Spawner spawner = spawnerMap.remove(destroyedObject.getObjectId());
+		Spawner spawner = ((AIObject) destroyedObject).getSpawner();
 		
 		if (spawner == null) {
 			Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", destroyedObject);
 			return;
 		}
 		
-		executor.execute(spawner.getRespawnDelay() * 1000, () -> spawnNPC(spawner));
-	}
-	
-	private void removeSpawners() {
-		spawnerMap.values().forEach(spawner -> new DestroyObjectIntent(spawner.getEgg()).broadcast());
-		spawnerMap.clear();
-	}
-	
-	private void spawnNPC(Spawner spawner) {
-		spawnerMap.put(NPCCreator.createNPC(spawner), spawner);
+		executor.execute(spawner.getRespawnDelay() * 1000, () -> NPCCreator.createNPC(spawner));
 	}
 	
 	private void loadSpawners() {
 		long startTime = StandardLog.onStartLoad("spawners");
 		
 		List<DataLoader> forceNoGC = List.of(DataLoader.npcs(), DataLoader.npcWeapons(), DataLoader.npcStaticSpawns(), DataLoader.npcStats(), DataLoader.npcPatrolRoutes());
+		int count = 0;
 		for (StaticSpawnInfo spawn : DataLoader.npcStaticSpawns().getSpawns()) {
 			try {
 				spawn(spawn);
+				count++;
 			} catch (Throwable t) {
 				Log.e("Failed to load spawner. %s: %s", t.getClass().getName(), t.getMessage());
 			}
 		}
 		createPatrolRouteWaypoints();
 		
-		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
+		StandardLog.onEndLoad(count, "spawners", startTime);
 	}
 	
 	private void spawn(StaticSpawnInfo spawn) {
 		Spawner spawner = new Spawner(spawn, createEgg(spawn));
 		
 		for (int i = 0; i < spawner.getAmount(); i++) {
-			spawnNPC(spawner);
+			NPCCreator.createNPC(spawner);
 		}
 	}
 	

@@ -24,40 +24,33 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.custom;
+package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 /**
- * Boring AI object that just sits in the same location.  aiLoop() can be extended for other AI objects that want random movements
+ * AI object that loiters the area
  */
-public class RandomAIObject extends AIObject {
+public class NpcTurningMode extends NpcMode {
 	
-	private Location mainLocation;
-	
-	public RandomAIObject(long objectId) {
-		super(objectId);
-	}
-	
-	public Location getMainLocation() {
-		return mainLocation;
-	}
-	
-	public void setMainLocation(Location mainLocation) {
-		this.mainLocation = mainLocation;
+	public NpcTurningMode() {
+		
 	}
 	
 	@Override
-	protected long getDefaultModeInterval() {
-		return (long) (30E3 + Math.random() * 10E3);
-	}
-	
-	@Override
-	protected void defaultModeLoop() {
-		if (mainLocation == null) {
-			// If no location is given, then use object location
-			setMainLocation(getLocation());
+	public void act() {
+		if (isRooted()) {
+			queueNextLoop(10000+getRandom().nextInt(5));
+			return;
 		}
+		
+		if (getRandom().nextDouble() > 0.25) // Only a 25% movement chance
+			return;
+		double theta = getRandom().nextDouble() * 360;
+		
+		walkTo(Location.builder(getAI().getLocation()).setHeading(theta).build());
+		queueNextLoop(30 + getRandom().nextInt(10));
 	}
 	
 }

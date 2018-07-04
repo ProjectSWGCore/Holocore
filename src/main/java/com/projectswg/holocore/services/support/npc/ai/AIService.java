@@ -29,7 +29,7 @@ public class AIService extends Service {
 		executor.start();
 		started.set(true);
 		for (AIObject obj : aiObjects) {
-			obj.scheduleDefaultMode(executor);
+			obj.start(executor);
 		}
 		return true;
 	}
@@ -48,7 +48,7 @@ public class AIService extends Service {
 			return;
 		AIObject obj = (AIObject) oci.getObject();
 		if (aiObjects.add(obj) && started.get())
-			obj.scheduleDefaultMode(executor);
+			obj.start(executor);
 	}
 	
 	@IntentHandler
@@ -57,7 +57,7 @@ public class AIService extends Service {
 			return;
 		AIObject obj = (AIObject) doi.getObject();
 		if (aiObjects.remove(obj) && started.get())
-			obj.disableScheduler();
+			obj.stop();
 	}
 	
 	@IntentHandler
@@ -65,7 +65,7 @@ public class AIService extends Service {
 		if (!(eci.getSource() instanceof AIObject))
 			return;
 		AIObject obj = (AIObject) eci.getSource();
-		obj.scheduleCombatMode(executor);
+		obj.startCombatMode();
 	}
 	
 }

@@ -307,7 +307,6 @@ public class CloningService extends Service {
 		}
 		
 		ObjectTeleportIntent.broadcast(corpse, cellObject, cloneLocation);
-		new ObjectTeleportIntent(corpse, cellObject, cloneLocation).broadcast();
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);

@@ -24,9 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.custom;
+package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 
 import java.util.ArrayList;
 import java.util.Collections;

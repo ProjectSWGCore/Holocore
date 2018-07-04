@@ -31,6 +31,7 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent.GroupEventType;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
@@ -128,6 +129,10 @@ public class GroupObject extends SWGObject {
 		return size() >= 8;
 	}
 	
+	public String getChatRoomPath() {
+		return "SWG." + ProjectSWG.getGalaxy().getName() + ".group." + getObjectId() + ".GroupChat";
+	}
+	
 	public long getLeaderId() {
 		return leader.getObjectId();
 	}
@@ -152,22 +157,6 @@ public class GroupObject extends SWGObject {
 	
 	public LootRule getLootRule() {
 		return lootRule;
-	}
-	
-	public CreatureObject getRandomPlayer(){
-		Random random = new Random();
-		int randomSlot = random.nextInt(groupMembers.size());	
-		CreatureObject randomPlayer = null;
-		
-		while (randomPlayer == null){
-			if (groupMembers.get(randomSlot).getCreature().isPlayer()){
-				randomPlayer = groupMembers.get(randomSlot).getCreature();
-			}else{
-				randomSlot = random.nextInt(groupMembers.size());
-			}
-		}
-		
-		return randomPlayer;
 	}
 	
 	public void setLevel(short level) {
