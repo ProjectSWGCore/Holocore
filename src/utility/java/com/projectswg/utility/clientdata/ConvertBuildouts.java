@@ -34,7 +34,7 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 import com.projectswg.utility.clientdata.buildouts.BuildoutLoader;
 import com.projectswg.utility.clientdata.buildouts.SnapshotLoader;
 import com.projectswg.utility.clientdata.buildouts.SwgBuildoutArea;

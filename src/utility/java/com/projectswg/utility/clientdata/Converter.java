@@ -1,6 +1,6 @@
 package com.projectswg.utility.clientdata;
 
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;
 import java.io.IOException;

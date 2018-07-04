@@ -3,7 +3,7 @@ package com.projectswg.utility.clientdata;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.SlotDefinitionData;
 import com.projectswg.common.data.swgfile.visitors.SlotDefinitionData.SlotDefinition;
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;
 import java.io.IOException;

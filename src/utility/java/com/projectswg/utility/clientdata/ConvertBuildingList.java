@@ -30,7 +30,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;
 import java.io.IOException;

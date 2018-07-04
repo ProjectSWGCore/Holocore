@@ -6,7 +6,7 @@ import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
 import com.projectswg.common.data.swgfile.visitors.PortalLayoutData.Cell;
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;
 import java.io.IOException;

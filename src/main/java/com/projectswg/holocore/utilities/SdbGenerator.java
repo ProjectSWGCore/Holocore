@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.utility;
+package com.projectswg.holocore.utilities;
 
 import java.io.*;
 import java.nio.charset.Charset;
