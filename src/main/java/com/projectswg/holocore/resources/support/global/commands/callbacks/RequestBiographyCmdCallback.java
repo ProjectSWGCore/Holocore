@@ -32,6 +32,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -40,7 +41,7 @@ import me.joshlarson.jlcommon.log.Log;
 public class RequestBiographyCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		if(target != null) {
 			if(target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {

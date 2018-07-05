@@ -27,19 +27,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.other.player.zone;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.ZoneRequester;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test_resources.GenericCreatureObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.ErrorMessage;
-
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TestZoneRequester extends TestRunnerNoIntents {
 	
@@ -64,7 +62,7 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 		ZoneRequester zr = new ZoneRequester();
 		TZRPlayer player = new TZRPlayer();
 		GenericCreatureObject creature = new GenericCreatureObject(5);
-		creature.setSlot("ghost", null);
+		creature.clearSlot("ghost");
 		Assert.assertFalse(zr.onZoneRequested(creature, player, 5));
 		Assert.assertTrue(player.isSentError());
 	}
@@ -74,7 +72,7 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 		ZoneRequester zr = new ZoneRequester();
 		TZRPlayer player = new TZRPlayer();
 		GenericCreatureObject creature = new GenericCreatureObject(5);
-		creature.setupAsCharacter();
+		creature.setOwner(null);
 		Assert.assertTrue(zr.onZoneRequested(creature, player, 5));
 		Assert.assertFalse(player.isSentError());
 	}

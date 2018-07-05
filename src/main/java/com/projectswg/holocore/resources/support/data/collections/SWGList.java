@@ -323,7 +323,7 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	
 	@Override
 	public String toString() {
-		return "SWGList[0" + view + ":" + updateType + "]";
+		return "SWGList[0" + view + ':' + updateType + ']';
 	}
 	
 	public static SWGList<String> getSwgList(NetBuffer buffer, int num, int var, StringType type) {

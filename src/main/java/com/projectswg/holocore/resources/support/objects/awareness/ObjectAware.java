@@ -26,9 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,20 +56,22 @@ public class ObjectAware {
 	}
 	
 	public void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
+		boolean wasNotSelfAware = notAware(object);
 		Set<SWGObject> oldAware = awareness.put(type, createSet(objects));
-		Map<SWGObject, Integer> awareCounts = getAwareCounts();
-		oldAware.removeAll(objects);
+		assert oldAware != null : "initialized in constructor";
+		
 		for (SWGObject removed : oldAware) {
-			removed.getAwareness().removeAware(type, object);
-			if (!awareCounts.containsKey(removed)) {
+			if (objects.contains(removed))
+				continue;
+			if (removed.getAwareness().removeAware(type, object) && notAware(removed)) {
 				object.onObjectLeaveAware(removed);
 			}
 		}
 		
 		for (SWGObject added : objects) {
-			added.getAwareness().addAware(type, object);
-			Integer count = awareCounts.get(added);
-			if (count != null && count == 1) {
+			if (oldAware.contains(added))
+				continue;
+			if ((added == object && wasNotSelfAware) || added.getAwareness().addAware(type, object)) {
 				object.onObjectEnterAware(added);
 			}
 		}
@@ -89,7 +91,7 @@ public class ObjectAware {
 	
 	@NotNull
 	public Set<SWGObject> getAware(@NotNull AwarenessType type) {
-		return awareness.getOrDefault(type, EMPTY_SET);
+		return Collections.unmodifiableSet(awareness.getOrDefault(type, EMPTY_SET));
 	}
 	
 	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
@@ -101,27 +103,23 @@ public class ObjectAware {
 		return chunk.get();
 	}
 	
-	private void addAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.add(obj)) {
-			Map<SWGObject, Integer> awareCounts = getAwareCounts();
-			Integer count = awareCounts.get(obj);
-			if (count != null && count == 1) {
-				object.onObjectEnterAware(obj);
-				attemptFlush();
-			}
+	private boolean addAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
+		boolean added = notAware(obj);
+		if (awareness.get(type).add(obj) && added) {
+			object.onObjectEnterAware(obj);
+			attemptFlush();
+			return true;
 		}
-		
+		return false;
 	}
 	
-	private void removeAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
-		Set<SWGObject> aware = awareness.get(type);
-		if (aware.remove(obj)) {
-			if (getAwareStream().noneMatch(test -> test.equals(obj))) {
-				object.onObjectLeaveAware(obj);
-				attemptFlush();
-			}
+	private boolean removeAware(@NotNull AwarenessType type, @NotNull SWGObject obj) {
+		if (awareness.get(type).remove(obj) && notAware(obj)) {
+			object.onObjectLeaveAware(obj);
+			attemptFlush();
+			return true;
 		}
+		return false;
 	}
 	
 	private void attemptFlush() {
@@ -133,8 +131,12 @@ public class ObjectAware {
 		return awareness.values().stream().flatMap(Collection::stream);
 	}
 	
-	private Map<SWGObject, Integer> getAwareCounts() {
-		return awareness.values().stream().flatMap(Collection::stream).collect(Collectors.toMap(obj -> obj, obj -> 1, (prev, next) -> prev + next));
+	private boolean notAware(SWGObject test) {
+		for (Collection<SWGObject> aware : awareness.values()) {
+			if (aware.contains(test))
+				return false;
+		}
+		return true;
 	}
 	
 	private static Set<SWGObject> createSet() {
@@ -142,7 +144,7 @@ public class ObjectAware {
 	}
 	
 	private static Set<SWGObject> createSet(Collection<SWGObject> objects) {
-		Set<SWGObject> set = ConcurrentHashMap.newKeySet();
+		Set<SWGObject> set = ConcurrentHashMap.newKeySet(objects.size());
 		set.addAll(objects);
 		return set;
 	}

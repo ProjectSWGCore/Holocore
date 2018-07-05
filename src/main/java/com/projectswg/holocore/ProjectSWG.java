@@ -31,12 +31,14 @@ import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
+import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedRecord;
 import me.joshlarson.jlcommon.control.Manager;
@@ -49,12 +51,13 @@ import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.OffsetTime;
 import java.util.*;
 
 public class ProjectSWG {
 	
-	public static final String VERSION = "APR18";
+	public static final String VERSION = "JUN18";
 	
 	private static final Galaxy GALAXY = new Galaxy();
 	
@@ -75,7 +78,7 @@ public class ProjectSWG {
 		return GALAXY;
 	}
 	
-	private static int run(String [] args) {
+	static int run(String [] args) {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
@@ -84,37 +87,41 @@ public class ProjectSWG {
 		
 		Log.i("Holocore version: %s", VERSION);
 		
-		startupStaticClasses();
+		DataManager.initialize();
+		Thread.currentThread().setPriority(10);
+		initializeServerFactory();
+		setupGalaxy();
 		setupParameters(args);
-		List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager());
-		managers.forEach(m -> m.setIntentManager(IntentManager.getInstance()));
-		
-		setStatus(ServerStatus.INITIALIZING);
-		if (Manager.start(managers)) {
-			setStatus(ServerStatus.OPEN);
-			Manager.run(managers, 50);
+		try (IntentManager intentManager = new IntentManager(false, Runtime.getRuntime().availableProcessors(), 8)) {
+			IntentManager.setInstance(intentManager);
+			List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager());
+			managers.forEach(m -> m.setIntentManager(intentManager));
+			
+			setStatus(ServerStatus.INITIALIZING);
+			if (Manager.start(managers)) {
+				setStatus(ServerStatus.OPEN);
+				Manager.run(managers, 50);
+			}
+			setStatus(ServerStatus.TERMINATING);
+			Manager.stop(managers);
 		}
-		setStatus(ServerStatus.TERMINATING);
-		Manager.stop(managers);
 		
 		shutdownStaticClasses();
 		printFinalPswgState();
 		return 0;
 	}
 	
-	private static void startupStaticClasses() {
-		IntentManager.setInstance(new IntentManager(Runtime.getRuntime().availableProcessors()));
-		assert IntentManager.getInstance() != null;
-		IntentManager.getInstance().initialize();
-		DataManager.initialize();
-		Thread.currentThread().setPriority(10);
-		setupGalaxy();
+	// TODO: Replace all iffs with sdbs
+	private static void initializeServerFactory() {
+		try {
+			ServerFactory.getInstance().updateServerIffs();
+		} catch (IOException e) {
+			Log.e(e);
+		}
 	}
 	
 	private static void shutdownStaticClasses() {
-		assert IntentManager.getInstance() != null;
 		DataManager.terminate();
-		IntentManager.getInstance().terminate();
 		ScheduledUtilities.shutdown();
 	}
 	

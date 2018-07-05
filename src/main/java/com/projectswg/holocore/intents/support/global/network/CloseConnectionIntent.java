@@ -27,36 +27,32 @@
 package com.projectswg.holocore.intents.support.global.network;
 
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class CloseConnectionIntent extends Intent {
 	
-	private long networkId;
-	private DisconnectReason reason;
+	private final Player player;
+	private final DisconnectReason reason;
 	
-	public CloseConnectionIntent(long networkId, DisconnectReason reason) {
-		setNetworkId(networkId);
-		setDisconnectReason(reason);
-	}
-	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public void setDisconnectReason(DisconnectReason reason) {
+	public CloseConnectionIntent(@NotNull Player player, @NotNull DisconnectReason reason) {
+		this.player = player;
 		this.reason = reason;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	@NotNull
+	public Player getPlayer() {
+		return player;
 	}
 	
+	@NotNull
 	public DisconnectReason getDisconnectReason() {
 		return reason;
 	}
 	
-	public static void broadcast(long networkId, DisconnectReason reason) {
-		new CloseConnectionIntent(networkId, reason).broadcast();
+	public static void broadcast(@NotNull Player player, @NotNull DisconnectReason reason) {
+		new CloseConnectionIntent(player, reason).broadcast();
 	}
 	
 }

@@ -102,7 +102,7 @@ public class BuffService extends Service {
 	private void handleBuffIntent(BuffIntent bi) {
 		BuffData buffData = getBuff(bi.getBuffName());
 		Objects.requireNonNull(buffData, "No known buff: " + bi.getBuffName());
-		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+"]";
+		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+ ']';
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {

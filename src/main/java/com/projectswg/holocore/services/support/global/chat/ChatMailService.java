@@ -28,17 +28,12 @@ package com.projectswg.holocore.services.support.global.chat;
 
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.player.Mail;
-import com.projectswg.common.data.info.RelationalServerData;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.resources.support.global.chat.ChatRange;
-import com.projectswg.holocore.resources.support.global.chat.ChatType;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -47,10 +42,7 @@ import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;

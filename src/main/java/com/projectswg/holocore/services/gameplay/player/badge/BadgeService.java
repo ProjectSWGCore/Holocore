@@ -6,7 +6,6 @@ import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.collections.GrantClickyCollectionIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.gameplay.player.collections.ClickyCollectionItem;
@@ -255,11 +254,10 @@ public class BadgeService extends Service {
 		
 		if (hidden) {
 			sendSystemMessage(thisplayer, "@collection:player_hidden_slot_added", "TO", "@collection_n:" + collectionName);
-			thisplayer.sendPacket(new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		} else {
 			sendSystemMessage(thisplayer, "@collection:player_slot_added", "TU", "@collection_n:" + slotName, "TO", "@collection_n:" + collectionName);
-			thisplayer.sendPacket(new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		}
+		thisplayer.sendPacket(new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		if (collectionComplete) {
 			sendSystemMessage(thisplayer, "@collection:player_collection_complete", "TO", "@collection_n:" + collectionName);
 		}
@@ -387,7 +385,7 @@ public class BadgeService extends Service {
 		}
 	}
 	
-	private class CollectionRowData {
+	private static class CollectionRowData {
 		
 		private int bookRow;
 		private int pageRow;

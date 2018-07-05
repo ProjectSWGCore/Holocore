@@ -362,15 +362,13 @@ public class GroupService extends Service {
 		
 		new ObjectCreatedIntent(group).broadcast();
 		
-		String galaxy = leader.getGalaxyName();
-		new ChatRoomUpdateIntent(leader, new ChatAvatar(leader.getCharacterChatName()), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
+		new ChatRoomUpdateIntent(leader, new ChatAvatar(leader.getCharacterChatName()), group.getChatRoomPath(), String.valueOf(group.getObjectId()), false).broadcast();
 		sendSystemMessage(leader, "formed_self", "TT", leader.getCreatureObject().getObjectId());
 		onJoinGroup(member.getCreatureObject(), group);
 	}
 	
 	private void destroyGroup(GroupObject group, Player player) {
-		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null, new ChatAvatar(player.getCharacterChatName()), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+		new ChatRoomUpdateIntent(group.getChatRoomPath(), String.valueOf(group.getObjectId()), null, new ChatAvatar(player.getCharacterChatName()), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
 		
 		sendGroupSystemMessage(group, "disbanded");
 		group.disbandGroup();
@@ -422,7 +420,7 @@ public class GroupService extends Service {
 	}
 	
 	private void updateChatRoom(Player player, GroupObject group, UpdateType updateType) {
-		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), player.getGalaxyName()), updateType).broadcast();
+		new ChatRoomUpdateIntent(player, group.getChatRoomPath(), updateType).broadcast();
 	}
 	
 	private void clearInviteData(CreatureObject creature) {
@@ -455,10 +453,6 @@ public class GroupService extends Service {
 			Objects.requireNonNull(member.getOwner());
 			sendSystemMessage(member.getOwner(), id, objects);
 		}
-	}
-	
-	private String getGroupChatPath(long groupId, String galaxy) {
-		return "SWG." + galaxy + ".group." + groupId + ".GroupChat";
 	}
 	
 	private GroupObject getGroup(long groupId) {

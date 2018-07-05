@@ -194,7 +194,7 @@ public final class SkillTemplateService extends Service {
 			
 			// No reason to broadcast this intent if we don't need new static items anyways
 			if (!staticItems.isEmpty())
-				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[staticItems.size()])).broadcast();
+				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[0])).broadcast();
 		}
 	}
 

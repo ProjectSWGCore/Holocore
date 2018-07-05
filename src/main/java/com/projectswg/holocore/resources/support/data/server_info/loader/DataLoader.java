@@ -11,6 +11,12 @@ public abstract class DataLoader {
 	
 	protected abstract void load() throws IOException;
 	
+	public static void freeMemory() {
+		for (CachedLoader loader : CachedLoader.values()) {
+			loader.freeMemory();
+		}
+	}
+	
 	public static BuildoutLoader buildouts() {
 		return BuildoutLoader.load(AreaLoader.load());
 	}
@@ -27,12 +33,24 @@ public abstract class DataLoader {
 		return (BuildingLoader) CachedLoader.BUILDOUT_BUILDINGS.load();
 	}
 	
+	public static BuildingCellLoader buildingCells() {
+		return (BuildingCellLoader) CachedLoader.BUILDING_CELLS.load();
+	}
+	
 	public static NpcLoader npcs() {
 		return (NpcLoader) CachedLoader.NPC_LOADER.load();
 	}
 	
 	public static NpcPatrolRouteLoader npcPatrolRoutes() {
 		return (NpcPatrolRouteLoader) CachedLoader.NPC_PATROL_ROUTES.load();
+	}
+	
+	public static NpcWeaponLoader npcWeapons() {
+		return (NpcWeaponLoader) CachedLoader.NPC_WEAPONS.load();
+	}
+	
+	public static NpcWeaponRangeLoader npcWeaponRanges() {
+		return (NpcWeaponRangeLoader) CachedLoader.NPC_WEAPON_RANGES.load();
 	}
 	
 	public static NpcStatLoader npcStats() {
@@ -45,6 +63,10 @@ public abstract class DataLoader {
 	
 	public static ObjectDataLoader objectData() {
 		return (ObjectDataLoader) CachedLoader.OBJECT_DATA.load();
+	}
+	
+	public static CommandLoader commands() {
+		return (CommandLoader) CachedLoader.COMMANDS.load();
 	}
 	
 }

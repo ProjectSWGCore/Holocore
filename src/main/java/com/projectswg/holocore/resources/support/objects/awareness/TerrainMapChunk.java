@@ -29,16 +29,23 @@ package com.projectswg.holocore.resources.support.objects.awareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 class TerrainMapChunk {
 	
 	private final List<SWGObject> objects;
+	private TerrainMapChunk [] neighbors;
 	
 	public TerrainMapChunk() {
 		this.objects = new CopyOnWriteArrayList<>();
+		this.neighbors = new TerrainMapChunk[0];
+	}
+	
+	public void link(TerrainMapChunk neighbor) {
+		int length = neighbors.length;
+		neighbors = Arrays.copyOf(neighbors, length+1);
+		neighbors[length] = neighbor;
 	}
 	
 	public void addObject(@NotNull SWGObject obj) {
@@ -48,6 +55,15 @@ class TerrainMapChunk {
 	
 	public void removeObject(@NotNull SWGObject obj) {
 		objects.remove(obj);
+	}
+	
+	public Set<SWGObject> getWithinAwareness(@NotNull SWGObject obj) {
+		Set<SWGObject> withinRange = new HashSet<>();
+		getWithinAwareness(obj, withinRange);
+		for (TerrainMapChunk neighbor : neighbors) {
+			neighbor.getWithinAwareness(obj, withinRange);
+		}
+		return withinRange;
 	}
 	
 	public void getWithinAwareness(@NotNull SWGObject obj, @NotNull Collection<SWGObject> withinRange) {
@@ -77,9 +93,8 @@ class TerrainMapChunk {
 		if (!test.isVisible(obj))
 			return;
 		withinRange.add(test);
-		for (SWGObject child : test.getSlots().values()) {
-			if (child != null)
-				recursiveAdd(withinRange, obj, child);
+		for (SWGObject child : test.getSlottedObjects()) {
+			recursiveAdd(withinRange, obj, child);
 		}
 		for (SWGObject child : test.getContainedObjects()) {
 			recursiveAdd(withinRange, obj, child);

@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.global.player;
 
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
+import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -49,7 +50,6 @@ public class Player implements Comparable<Player> {
 	private final long networkId;
 	
 	private String			username			= "";
-	private String			galaxyName			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
 	private PlayerServer	server				= PlayerServer.NONE;
 	private PlayerState		state				= PlayerState.DISCONNECTED;
@@ -82,10 +82,6 @@ public class Player implements Comparable<Player> {
 	
 	public void setAccessLevel(AccessLevel accessLevel) {
 		this.accessLevel = accessLevel;
-	}
-	
-	public void setGalaxyName(String galaxyName) {
-		this.galaxyName = galaxyName;
 	}
 	
 	public void setCreatureObject(CreatureObject obj) {
@@ -139,7 +135,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public String getGalaxyName() {
-		return galaxyName;
+		return ProjectSWG.getGalaxy().getName();
 	}
 	
 	public CreatureObject getCreatureObject() {
@@ -196,7 +192,7 @@ public class Player implements Comparable<Player> {
 		str += (creatureObject==null?"null":creatureObject.getObjectId());
 		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
-		return str + "]";
+		return str + ']';
 	}
 	
 	@Override

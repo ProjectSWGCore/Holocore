@@ -27,25 +27,27 @@
 package com.projectswg.holocore.resources.support.global.commands;
 
 public enum DefaultPriority {
-	NORMAL							(0),
-	IMMEDIATE						(1),
-	FRONT							(2);
+	NORMAL							("normal"),
+	IMMEDIATE						("immediate"),
+	FRONT							("front");
 	
 	private static final DefaultPriority [] VALUES = values();
 	
-	private final int num;
+	private final String name;
 	
-	DefaultPriority(int num) {
-		this.num = num;
+	DefaultPriority(String name) {
+		this.name = name;
 	}
 	
-	public int getNum() {
-		return num;
+	public String getName() {
+		return name;
 	}
 	
-	public static DefaultPriority getDefaultPriority(int num) {
-		if (num < 0 || num >= VALUES.length)
-			return DefaultPriority.NORMAL;
-		return VALUES[num];
+	public static DefaultPriority getDefaultPriority(String name) {
+		for (DefaultPriority p : VALUES) {
+			if (p.getName().equals(name))
+				return p;
+		}
+		return NORMAL;
 	}
 }

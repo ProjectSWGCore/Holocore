@@ -79,11 +79,11 @@ public class SuiWindow extends SuiBaseWindow {
 	}
 
 	public void setLocation(int x, int y) {
-		setProperty("this", "Location", String.valueOf(x) + "," + String.valueOf(y));
+		setProperty("this", "Location", String.valueOf(x) + ',' + String.valueOf(y));
 	}
 
 	public void setSize(int width, int height) {
-		setProperty("this", "Size", String.valueOf(width) + "," + String.valueOf(height));
+		setProperty("this", "Size", String.valueOf(width) + ',' + String.valueOf(height));
 	}
 
 	protected void setOkButtonText() {

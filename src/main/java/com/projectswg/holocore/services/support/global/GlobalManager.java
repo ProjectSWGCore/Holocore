@@ -1,7 +1,7 @@
 package com.projectswg.holocore.services.support.global;
 
 import com.projectswg.holocore.services.support.global.chat.ChatManager;
-import com.projectswg.holocore.services.support.global.commands.CommandService;
+import com.projectswg.holocore.services.support.global.commands.CommandManager;
 import com.projectswg.holocore.services.support.global.health.ServerHealthService;
 import com.projectswg.holocore.services.support.global.network.NetworkClientService;
 import com.projectswg.holocore.services.support.global.zone.ZoneManager;
@@ -11,7 +11,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 @ManagerStructure(children = {
 		ChatManager.class,
 		
-		CommandService.class,
+		CommandManager.class,
 		
 		ServerHealthService.class,
 		

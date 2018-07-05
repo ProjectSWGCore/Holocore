@@ -7,6 +7,7 @@ import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -66,6 +67,7 @@ public class CombatDeathblowService extends Service {
 		
 		if (incapacitationTimer != null) {
 			if (incapacitationTimer.cancel(false)) {    // If the task is running, let them get back up
+				new BuffIntent("incapWeaken", killer, corpse, true).broadcast();
 				killCreature(killer, corpse);
 			}
 		} else {
@@ -90,11 +92,16 @@ public class CombatDeathblowService extends Service {
 		corpse.setHealth(0);
 		corpse.setTurnScale(0);
 		corpse.setMovementScale(0);
+		CreatureObject killer = rcdi.getKiller();
 		
-		if (corpse.isPlayer() && !corpse.hasBuff("incapWeaken")) {
-			incapacitatePlayer(rcdi.getKiller(), corpse);
-		} else {
+		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff("incapWeaken");
+		if (!deathblow && killer instanceof AIObject)
+			deathblow = ((AIObject) killer).getSpawner().isDeathblow();
+		
+		if (deathblow) {
 			killCreature(rcdi.getKiller(), corpse);
+		} else {
+			incapacitatePlayer(rcdi.getKiller(), corpse);
 		}
 		
 		ExitCombatIntent.broadcast(corpse);

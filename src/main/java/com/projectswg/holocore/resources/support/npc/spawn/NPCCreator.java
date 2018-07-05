@@ -33,13 +33,22 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.*;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
+import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
+import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner.SpawnerFlag;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import me.joshlarson.jlcommon.log.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class NPCCreator {
@@ -47,59 +56,62 @@ public class NPCCreator {
 	private static final Random RANDOM = new Random();
 	
 	public static long createNPC(Spawner spawner) {
-		AIObject object = createNPCFromBehavior(spawner);
+		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
+		object.setSpawner(spawner);
 		object.setLocation(behaviorLocation(spawner));
-		object.setObjectName(spawner.getCreatureName());
+		object.setObjectName(spawner.getName());
 		object.setLevel(spawner.getCombatLevel());
-		object.setDifficulty(spawner.getCreatureDifficulty());
-		object.setMaxHealth(spawner.getMaxHealth());
-		object.setHealth(spawner.getMaxHealth());
-		object.setMaxAction(spawner.getMaxAction());
-		object.setAction(spawner.getMaxAction());
-		object.setMoodAnimation(spawner.getMoodAnimation());
-		object.setCreatureId(spawner.getCreatureId());
+		object.setDifficulty(spawner.getDifficulty());
+		object.setMaxHealth(spawner.getHealth());
+		object.setHealth(spawner.getHealth());
+		object.setMaxAction(spawner.getAction());
+		object.setAction(spawner.getAction());
+		object.setMoodAnimation(spawner.getMood());
+		object.setCreatureId(spawner.getNpcId());
 		object.setWalkSpeed(spawner.getMovementSpeed());
-		setFlags(object, spawner.getSpawnerFlag());
+		
+		// Assign weapons
+		try {
+			spawner.getPrimaryWeapons().stream().map(w -> createWeapon(spawner, w)).filter(Objects::nonNull).forEach(object::addPrimaryWeapon);
+			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(spawner, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
+			List<WeaponObject> primaryWeapons = object.getPrimaryWeapons();
+			if (!primaryWeapons.isEmpty())
+				object.setEquippedWeapon(primaryWeapons.get(RANDOM.nextInt(primaryWeapons.size())));
+		} catch (Throwable t) {
+			Log.w(t);
+		}
+		
+		switch (spawner.getBehavior()) {
+			case LOITER:
+				object.setDefaultMode(new NpcLoiterMode(spawner.getLoiterRadius()));
+				break;
+			case TURN:
+				object.setDefaultMode(new NpcTurningMode());
+				break;
+			case PATROL:
+				object.setDefaultMode(new NpcPatrolMode(spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
+				break;
+			default:
+				break;
+		}
+		setFlags(object, spawner);
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
-		object.moveToContainer(spawner.getSpawnerObject().getParent());
+		object.systemMove(spawner.getEgg().getParent());
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
 	}
 	
-	private static AIObject createNPCFromBehavior(Spawner spawner) {
-		String template = spawner.getRandomIffTemplate();
-		switch (spawner.getAIBehavior()) {
-			case LOITER: {
-				LoiterAIObject object = ObjectCreator.createObjectFromTemplate(template, LoiterAIObject.class);
-				object.setLoiterRadius(spawner.getFloatRadius());
-				object.setMainLocation(spawner.getLocation());
-				return object;
-			}
-			case PATROL: {
-				PatrolAIObject object = ObjectCreator.createObjectFromTemplate(template, PatrolAIObject.class);
-				if (spawner.getPatrolRoute() != null) {
-					object.setPatrolWaypoints(spawner.getPatrolRoute());
-				}
-				return object;
-			}
-			case TURN:
-				return ObjectCreator.createObjectFromTemplate(template, TurningAIObject.class);
-			case IDLE:
-			default:
-				return ObjectCreator.createObjectFromTemplate(template, RandomAIObject.class);
-		}
-	}
-	
-	private static void setFlags(CreatureObject creature, SpawnerFlag flags) {
-		switch (flags) {
+	private static void setFlags(AIObject creature, Spawner spawner) {
+		switch (spawner.getSpawnerFlag()) {
 			case AGGRESSIVE:
 				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
 				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
 			case ATTACKABLE:
 				creature.setPvpFlags(PvpFlag.ATTACKABLE);
 				creature.addOptionFlags(OptionFlag.HAM_BAR);
+				creature.setCombatMode(new NpcCombatMode());
 				break;
 			case INVULNERABLE:
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);
@@ -108,7 +120,7 @@ public class NPCCreator {
 	}
 
 	private static void setNPCFaction(TangibleObject object, PvpFaction faction, boolean specForce) {
-		if (faction == null) {
+		if (faction == PvpFaction.NEUTRAL) {
 			return;
 		}
 
@@ -126,14 +138,13 @@ public class NPCCreator {
 	private static Location behaviorLocation(Spawner spawner) {
 		LocationBuilder builder = Location.builder(spawner.getLocation());
 		
-		switch (spawner.getAIBehavior()) {
+		switch (spawner.getBehavior()) {
 			case LOITER:
 				// Random location within float radius of spawner and 
-				int floatRadius = spawner.getFloatRadius();
+				int floatRadius = spawner.getLoiterRadius();
 				int offsetX = randomBetween(0, floatRadius);
 				int offsetZ = randomBetween(0, floatRadius);
 				
-				spawner.setFloatRadius(floatRadius);
 				builder.translatePosition(offsetX, 0, offsetZ);
 	
 				// Doesn't break here - LOITER NPCs also have TURN behavior
@@ -157,6 +168,23 @@ public class NPCCreator {
 	 */
 	private static int randomBetween(int from, int to) {
 		return RANDOM.nextInt((to - from) + 1) + from;
+	}
+	
+	private static WeaponObject createWeapon(Spawner spawner, String template) {
+		try {
+			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
+			weapon.setMinDamage((int) (spawner.getDamagePerSecond() * 0.90));
+			weapon.setMaxDamage(spawner.getDamagePerSecond());
+			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
+			if (range == -1)
+				Log.w("Failed to load weapon range for: %s", template);
+			weapon.setMinRange(range);
+			weapon.setMaxRange(range);
+			return weapon;
+		} catch (ObjectCreationException e) {
+			Log.w("Weapon template does not exist: %s", template);
+			return null;
+		}
 	}
 	
 }

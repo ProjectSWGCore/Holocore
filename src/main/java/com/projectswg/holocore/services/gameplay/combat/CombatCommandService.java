@@ -13,18 +13,18 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
-import com.projectswg.holocore.intents.support.global.command.ChatCommandIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
+import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -63,12 +63,12 @@ public class CombatCommandService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleChatCommandIntent(ChatCommandIntent cci) {
-		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
+	private void handleChatCommandIntent(ExecuteCommandIntent eci) {
+		if (!eci.getCommand().isCombatCommand() || !(eci.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) cci.getCommand();
-		CreatureObject source = cci.getSource();
-		SWGObject target = cci.getTarget();
+		CombatCommand c = (CombatCommand) eci.getCommand();
+		CreatureObject source = eci.getSource();
+		SWGObject target = eci.getTarget();
 		
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
@@ -82,7 +82,7 @@ public class CombatCommandService extends Service {
 				handleHeal(source, target, c);
 				break;
 			case DELAY_ATTACK:
-				handleDelayAttack(source, target, c, cci.getArguments());
+				handleDelayAttack(source, target, c, eci.getArguments());
 				break;
 			default:
 				handleStatus(source, CombatStatus.UNKNOWN);
@@ -214,7 +214,7 @@ public class CombatCommandService extends Service {
 			
 			case AREA: {
 				// Targets are never supplied for AoE heals
-				float range = combatCommand.getConeLength();
+				double range = combatCommand.getConeLength();
 				Location sourceLocation = source.getWorldLocation();
 				
 				for (SWGObject nearbyObject : source.getAware()) {
@@ -240,16 +240,17 @@ public class CombatCommandService extends Service {
 		}
 	}
 	
-	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
+	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments) {
+		String [] argSplit = arguments.split(" ");
 		Location eggLocation;
 		SWGObject eggParent;
 		
 		switch (combatCommand.getEggPosition()) {
 			case LOCATION:
-				if (arguments[0].equals("a") || arguments[0].equals("c")) {    // is "c" in free-targeting mode
+				if (argSplit[0].equals("a") || argSplit[0].equals("c")) {    // is "c" in free-targeting mode
 					eggLocation = source.getLocation();
 				} else {
-					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
+					eggLocation = new Location(Float.parseFloat(argSplit[0]), Float.parseFloat(argSplit[1]), Float.parseFloat(argSplit[2]), source.getTerrain());
 				}
 				
 				eggParent = source.getParent();
@@ -372,7 +373,7 @@ public class CombatCommandService extends Service {
 	}
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
-		float aoeRange = command.getConeLength();
+		double aoeRange = command.getConeLength();
 		SWGObject originParent = origin.getParent();
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
 		

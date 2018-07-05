@@ -30,10 +30,18 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CellObject extends SWGObject {
+	
+	private final Set<Portal> portals;
 	
 	private boolean	isPublic	= true;
 	private int		number		= 0;
@@ -45,6 +53,11 @@ public class CellObject extends SWGObject {
 
 	public CellObject(long objectId) {
 		super(objectId, BaselineType.SCLT);
+		this.portals = new HashSet<>();
+	}
+	
+	public Collection<Portal> getPortals() {
+		return Collections.unmodifiableCollection(portals);
 	}
 	
 	public boolean isPublic() {
@@ -61,6 +74,10 @@ public class CellObject extends SWGObject {
 	
 	public String getCellName() {
 		return name;
+	}
+	
+	public void addPortal(@NotNull Portal portal) {
+		portals.add(portal);
 	}
 	
 	public void setPublic(boolean isPublic) {
@@ -140,4 +157,5 @@ public class CellObject extends SWGObject {
 		labelX = stream.getFloat();
 		labelZ = stream.getFloat();
 	}
+	
 }

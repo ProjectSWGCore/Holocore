@@ -40,7 +40,7 @@ import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -60,7 +60,7 @@ public final class WeatherService extends Service {
 	public WeatherService() {
 		cycleDuration = 600;	// Ziggy: 10 minutes, 600 seconds
 		terrains = Terrain.values();
-		weatherForTerrain = new HashMap<>();
+		weatherForTerrain = new EnumMap<>(Terrain.class);
 		weatherTypes = WeatherType.values();
 		random = new Random();
 	}

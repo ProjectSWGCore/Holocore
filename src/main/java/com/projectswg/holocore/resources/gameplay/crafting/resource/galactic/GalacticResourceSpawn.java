@@ -234,7 +234,7 @@ public class GalacticResourceSpawn implements Persistable {
 	
 	@Override
 	public String toString() {
-		return "GalacticResourceSpawn[Resource ID=" + resourceId + "  Concentration=(" + minConcentration + ", " + maxConcentration + ")  Position=(" + x + ", " + z + ", " + terrain + "]";
+		return "GalacticResourceSpawn[Resource ID=" + resourceId + "  Concentration=(" + minConcentration + ", " + maxConcentration + ")  Position=(" + x + ", " + z + ", " + terrain + ']';
 	}
 	
 	@Override

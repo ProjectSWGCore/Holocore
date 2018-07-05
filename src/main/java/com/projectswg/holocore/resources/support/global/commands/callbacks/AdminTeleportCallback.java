@@ -34,12 +34,17 @@ import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 public class AdminTeleportCallback implements ICmdCallback {
 
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String [] cmd = args.split(" ");
 		if (cmd.length < 4 || cmd.length > 5) {
 			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
@@ -59,17 +64,28 @@ public class AdminTeleportCallback implements ICmdCallback {
 			return;
 		}
 		
-		Terrain terrain = Terrain.getTerrainFromName(cmd[cmdOffset]);
-		if (terrain == null) {
+		Terrain terrain;
+		try {
+			terrain = Terrain.valueOf(cmd[cmdOffset].toUpperCase(Locale.US));
+		} catch (IllegalArgumentException e) {
 			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Invalid terrain: " + cmd[cmdOffset]);
 			return;
 		}
 		
 		CreatureObject teleportObject = player.getCreatureObject();
 		if (cmd.length > 4) {
+			if (cmd[0].equalsIgnoreCase("group")) {
+				GroupObject group = (GroupObject) ObjectLookup.getObjectById(teleportObject.getGroupId());
+				if (group != null) {
+					for (CreatureObject member: group.getGroupMemberObjects()) {
+						ObjectTeleportIntent.broadcast(member, new Location(x, y, z, terrain));
+					}
+					return;
+				}
+			}
 			teleportObject = PlayerLookup.getCharacterByFirstName(cmd[0]);
 			if (teleportObject == null) {
-				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+"'");
+				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+ '\'');
 				return;
 			}
 		}

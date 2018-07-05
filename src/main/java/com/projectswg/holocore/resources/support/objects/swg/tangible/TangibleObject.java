@@ -41,9 +41,9 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -350,16 +350,6 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		return super.equals(o);
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-	
-	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addInt(pvpFaction.getCrc()); // Faction - 4
@@ -419,11 +409,10 @@ public class TangibleObject extends SWGObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(0);
+		stream.addByte(1);
 		appearanceData.save(stream);
 		stream.addInt(maxHitPoints);
 		stream.addInt(components);
-		stream.addBoolean(inCombat);
 		stream.addInt(condition);
 		stream.addInt(pvpFlags);
 		stream.addAscii(pvpStatus.name());
@@ -440,11 +429,12 @@ public class TangibleObject extends SWGObject {
 	@Override
 	public void read(NetBufferStream stream) {
 		super.read(stream);
-		stream.getByte();
+		byte version = stream.getByte();
 		appearanceData.read(stream);
 		maxHitPoints = stream.getInt();
 		components = stream.getInt();
-		inCombat = stream.getBoolean();
+		if (version == 0)
+			stream.getBoolean();
 		condition = stream.getInt();
 		pvpFlags = stream.getInt();
 		pvpStatus = PvpStatus.valueOf(stream.getAscii());

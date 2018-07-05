@@ -8,13 +8,14 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.sto
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public final class CmdRequestSurvey implements ICmdCallback {
 	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		GalacticResource resource = GalacticResourceContainer.getContainer().getGalacticResourceByName(args);
 		if (resource == null) {
 			SystemMessageIntent.broadcastPersonal(player, "Unknown resource: " + args);

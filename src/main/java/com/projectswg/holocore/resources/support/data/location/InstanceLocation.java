@@ -36,17 +36,14 @@ import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class InstanceLocation implements Persistable {
 	
-	private final AtomicReference<Location> location;
-	
+	private Location location;
 	private InstanceType instanceType;
 	private int instanceNumber;
 	
 	public InstanceLocation() {
-		this.location = new AtomicReference<>(new Location(0, 0, 0, Terrain.GONE));
+		this.location = new Location(0, 0, 0, Terrain.GONE);
 		this.instanceType = InstanceType.NONE;
 		this.instanceNumber = 0;
 	}
@@ -54,45 +51,44 @@ public class InstanceLocation implements Persistable {
 	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(0);
-		location.get().save(stream);
+		location.save(stream);
 	}
 	
 	@Override
 	public void read(NetBufferStream stream) {
 		stream.getByte();
-		location.get().read(stream);
+		location.read(stream);
 	}
 	
 	public void setLocation(Location location) {
-		this.location.set(location);
+		this.location = location;
 	}
 	
 	public void setPosition(Terrain terrain, double x, double y, double z) {
 		assert terrain != null : "terrain is null";
-		Location location = Location.builder(getLocation())
+		this.location = Location.builder(this.location)
 				.setTerrain(terrain)
 				.setPosition(x, y, z)
 				.build();
-		setLocation(location);
 	}
 	
 	public void setTerrain(Terrain terrain) {
 		assert terrain != null : "terrain is null";
-		if (getLocation().getTerrain() == terrain)
+		if (location.getTerrain() == terrain)
 			return;
-		setLocation(Location.builder(getLocation()).setTerrain(terrain).build());
+		setLocation(Location.builder(location).setTerrain(terrain).build());
 	}
 	
 	public void setPosition(double x, double y, double z) {
-		setLocation(Location.builder(getLocation()).setPosition(x, y, z).build());
+		setLocation(Location.builder(location).setPosition(x, y, z).build());
 	}
 	
 	public void setOrientation(double x, double y, double z, double w) {
-		setLocation(Location.builder(getLocation()).setOrientation(x, y, z, w).build());
+		setLocation(Location.builder(location).setOrientation(x, y, z, w).build());
 	}
 	
 	public void setHeading(double heading) {
-		setLocation(Location.builder(getLocation()).setHeading(heading).build());
+		setLocation(Location.builder(location).setHeading(heading).build());
 	}
 	
 	public void setInstance(InstanceType instanceType, int instanceNumber) {
@@ -106,49 +102,49 @@ public class InstanceLocation implements Persistable {
 	
 	@NotNull
 	public Location getLocation() {
-		return location.get();
+		return location;
 	}
 	
 	@NotNull
 	public Point3D getPosition() {
-		return getLocation().getPosition();
+		return location.getPosition();
 	}
 	
 	@NotNull
 	public Terrain getTerrain() {
-		return getLocation().getTerrain();
+		return location.getTerrain();
 	}
 	
 	public Quaternion getOrientation() {
-		return getLocation().getOrientation();
+		return location.getOrientation();
 	}
 	
 	public double getPositionX() {
-		return getLocation().getX();
+		return location.getX();
 	}
 	
 	public double getPositionY() {
-		return getLocation().getY();
+		return location.getY();
 	}
 	
 	public double getPositionZ() {
-		return getLocation().getZ();
+		return location.getZ();
 	}
 	
 	public double getOrientationX() {
-		return getLocation().getOrientationX();
+		return location.getOrientationX();
 	}
 	
 	public double getOrientationY() {
-		return getLocation().getOrientationY();
+		return location.getOrientationY();
 	}
 	
 	public double getOrientationZ() {
-		return getLocation().getOrientationZ();
+		return location.getOrientationZ();
 	}
 	
 	public double getOrientationW() {
-		return getLocation().getOrientationW();
+		return location.getOrientationW();
 	}
 	
 	public InstanceType getInstanceType() {
@@ -161,9 +157,9 @@ public class InstanceLocation implements Persistable {
 	
 	public Location getWorldLocation(SWGObject self) {
 		SWGObject parent = self.getParent();
-		LocationBuilder builder = Location.builder(getLocation());
+		LocationBuilder builder = Location.builder(location);
 		while (parent != null) {
-			builder.translateLocation(parent.getInstanceLocation().getLocation());
+			builder.translateLocation(parent.getInstanceLocation().location);
 			builder.setTerrain(parent.getTerrain());
 			parent = parent.getParent();
 		}

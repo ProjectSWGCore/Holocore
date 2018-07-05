@@ -26,18 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This callback is used for all three kinds of transfer commands. The commands
@@ -46,8 +49,11 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
  * @author mads
  */
 public class TransferItemCallback implements ICmdCallback {
+	
 	@Override
-	public void execute(Player player, SWGObject target, String args) {
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
+		Log.d("Transfer item %s to '%s'", target, args);
+		
 		// There must always be a target for transfer
 		if (target == null) {
 			new SystemMessageIntent(player, "@container_error_message:container29").broadcast();
@@ -72,7 +78,7 @@ public class TransferItemCallback implements ICmdCallback {
 			SWGObject newContainer = ObjectLookup.getObjectById(Long.valueOf(args.split(" ")[1]));
 
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
-			if (newContainer == null) {
+			if (newContainer == null || oldContainer == null) {
 				new SystemMessageIntent(player, "@container_error_message:container15").broadcast();
 				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
@@ -86,7 +92,7 @@ public class TransferItemCallback implements ICmdCallback {
 			}
 
 			// You can't move an object to a container that it's already inside
-			if (oldContainer.equals(newContainer)) {
+			if (oldContainer == newContainer) {
 				new SystemMessageIntent(player, "@container_error_message:container11").broadcast();
 				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
@@ -159,7 +165,7 @@ public class TransferItemCallback implements ICmdCallback {
 			
 			// check if this is loot
 			if (oldContainerParent instanceof AIObject && ((AIObject) oldContainerParent).getHealth() <= 0) {
-				new LootItemIntent(player, target, oldContainer).broadcast();
+				LootItemIntent.broadcast(actor, (CreatureObject) oldContainerParent, target);
 				return;
 			}
 			
@@ -231,19 +237,18 @@ public class TransferItemCallback implements ICmdCallback {
 	}
 
 	private static String cleanProfessionString(String profession) {
-		return profession.substring(0, profession.lastIndexOf("_"));
+		return profession.substring(0, profession.lastIndexOf('_'));
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {
 		if (equip) {
 			// The equipped weapon must now be set to the target object
 			actor.setEquippedWeapon((WeaponObject) target);
-			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 		} else {
 			// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 			actor.setEquippedWeapon(null);
-			actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 		}
+		actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
 	}
 	
 	private static void applyEffect(CreatureObject actor, SWGObject target, boolean equip) {

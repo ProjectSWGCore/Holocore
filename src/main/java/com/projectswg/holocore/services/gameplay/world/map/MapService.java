@@ -175,34 +175,31 @@ public class MapService extends Service {
 	public void addStaticMapLocation(String planet, MapLocation location) {
 		if (staticMapLocations.containsKey(planet)) {
 			location.setId(staticMapLocations.get(planet).size() + 1);
-			staticMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
 			staticMapLocations.put(planet, new ArrayList<>());
-			staticMapLocations.get(planet).add(location);
 		}
+		staticMapLocations.get(planet).add(location);
 	}
 
 	public void addDynamicMapLocation(String planet, MapLocation location) {
 		if (dynamicMapLocations.containsKey(planet)) {
 			location.setId(dynamicMapLocations.get(planet).size() + 1);
-			dynamicMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
 			dynamicMapLocations.put(planet, new ArrayList<>());
-			dynamicMapLocations.get(planet).add(location);
 		}
+		dynamicMapLocations.get(planet).add(location);
 	}
 
 	public void addPersistentMapLocation(String planet, MapLocation location) {
 		if (persistentMapLocations.containsKey(planet)) {
 			location.setId(persistentMapLocations.get(planet).size() + 1);
-			persistentMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
 			persistentMapLocations.put(planet, new ArrayList<>());
-			persistentMapLocations.get(planet).add(location);
 		}
+		persistentMapLocations.get(planet).add(location);
 	}
 
 	public enum MapType {

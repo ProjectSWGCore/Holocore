@@ -34,6 +34,7 @@ import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
+import com.projectswg.holocore.intents.support.global.chat.ChatRoomMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
@@ -142,12 +143,14 @@ public class ChatRoomService extends Service {
 			case LEAVE:
 				chatRoomHandler.leaveChatChannel(crui.getPlayer(), crui.getPath());
 				break;
-			case SEND_MESSAGE:
-				chatRoomHandler.sendMessageToRoom(crui.getPlayer(), crui.getPath(), 0, crui.getMessage(), new OutOfBandPackage());
-				break;
 			default:
 				break;
 		}
+	}
+	
+	@IntentHandler
+	private void handleChatRoomMessageIntent(ChatRoomMessageIntent crmi) {
+		chatRoomHandler.sendMessageToRoom(crmi.getPlayer(), crmi.getRoomPath(), 0, crmi.getMessage(), new OutOfBandPackage());
 	}
 	
 	/* Chat Rooms */

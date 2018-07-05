@@ -148,7 +148,7 @@ public class SWGNameGenerator {
 				name = getNameByRule(ruleMap.get(race));
 			
 			if (surname)
-				name += (shouldGenerateSurname(ruleMap.get(race)) ? " " + generateRandomName(race, false) : "");
+				name += (shouldGenerateSurname(ruleMap.get(race)) ? ' ' + generateRandomName(race, false) : "");
 			
 			name = firstCharUppercase(name);
 		}
@@ -177,7 +177,7 @@ public class SWGNameGenerator {
 	}
 	
 	private String getNameByRule(RaceNameRule rule) {
-		StringBuilder buffer = new StringBuilder("");
+		StringBuilder buffer = new StringBuilder();
 		String instructions = getRandomInstruction(rule);
 		int l = instructions.length();
 		
@@ -197,7 +197,7 @@ public class SWGNameGenerator {
 							.getEndConsonants())));
 					break;
 				case '/':
-					buffer.append("'");
+					buffer.append('\'');
 					break;
 				default:
 					break;

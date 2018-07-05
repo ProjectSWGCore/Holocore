@@ -28,58 +28,75 @@ package com.projectswg.holocore.resources.support.npc.spawn;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.*;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolRouteWaypoint;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.DetailNpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.NpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.StaticSpawnInfo;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public final class Spawner {
 	
-	private final Random random;
-	private final AtomicReference<Location> location;
-	private final int id;
-	private String creatureId;
-	private SWGObject eggObject;
-	private String creatureName;
-	private String[] iffTemplates;
-	private CreatureDifficulty creatureDifficulty;
-	private int minRespawnDelay;
-	private int maxRespawnDelay;
-	private short combatLevel;
-	private AIBehavior aiBehavior;
-	private int floatRadius;
-	private String moodAnimation;
-	private int maxHealth;
-	private int maxAction;
-	private SpawnerFlag flags;
-	private PvpFaction faction;
-	private boolean specForce;
-	private double attackSpeed;
-	private double movementSpeed;
-	private List<ResolvedPatrolWaypoint> patrolRoute;
-	private PatrolFormation formation;
+	private final StaticSpawnInfo spawn;
+	private final NpcInfo npc;
+	private final NpcStatInfo npcStat;
+	private final DetailNpcStatInfo npcDetailStat;
 	
-	public Spawner(int id) {
-		this.id = id;
+	private final Location location;
+	private final List<ResolvedPatrolWaypoint> waypoints;
+	private final SWGObject egg;
+	private final Random random;
+	
+	public Spawner(@NotNull StaticSpawnInfo spawn, @NotNull SWGObject egg) {
+		this.spawn = Objects.requireNonNull(spawn, "spawn");
+		this.npc = DataLoader.npcs().getNpc(spawn.getNpcId());
+		Objects.requireNonNull(npc, "Invalid npc id: " + spawn.getNpcId());
+		this.npcStat = DataLoader.npcStats().getNpcStats(npc.getCombatLevel());
+		Objects.requireNonNull(npcStat, "Invalid npc combat lebel: " + npc.getCombatLevel());
+		
+		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(spawn.getBuildingId());
+		Objects.requireNonNull(building, "Invalid building id: " + spawn.getBuildingId());
+		this.location = Location.builder()
+					.setTerrain(building.getTerrain())
+					.setPosition(spawn.getX(), spawn.getY(), spawn.getZ())
+					.setHeading(spawn.getHeading())
+					.build();
+		if (spawn.getPatrolId() < 1000) {
+			this.waypoints = null;
+		} else {
+			List<PatrolRouteWaypoint> waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()), "Invalid patrol route: " + spawn.getPatrolId());
+			this.waypoints = waypoints.stream().map(ResolvedPatrolWaypoint::new).collect(Collectors.toList());
+		}
+		this.egg = Objects.requireNonNull(egg, "egg");
 		this.random = new Random();
-		this.location = new AtomicReference<>(null);
-	}
-
-	public void setCreatureId(String creatureId) {
-		this.creatureId = creatureId;
-	}
-
-	public String getCreatureId() {
-		return creatureId;
-	}
-
-	public int getSpawnerId() {
-		return id;
+		
+		switch (npc.getDifficulty()) {
+			case NORMAL:
+			default:
+				this.npcDetailStat = npcStat.getNormalDetailStat();
+				break;
+			case ELITE:
+				this.npcDetailStat = npcStat.getEliteDetailStat();
+				break;
+			case BOSS:
+				this.npcDetailStat = npcStat.getBossDetailStat();
+				break;
+		}
 	}
 	
 	/**
@@ -89,174 +106,242 @@ public final class Spawner {
 	 * {@code maxRespawnDelay}
 	 */
 	public int getRespawnDelay() {
-		return random.nextInt((maxRespawnDelay - minRespawnDelay) + 1) + minRespawnDelay;
-	}
-	
-	public SWGObject getSpawnerObject() {
-		return eggObject;
-	}
-	
-	public void setSpawnerObject(SWGObject egg) {
-		this.eggObject = egg;
-	}
-	
-	public Location getLocation() {
-		return location.get();
-	}
-	
-	public void setLocation(Location loc) {
-		this.location.set(loc);
+		return random.nextInt((getMaxSpawnTime() - getMinSpawnTime()) + 1) + getMinSpawnTime();
 	}
 	
 	/**
-	 * Returns a random IFF template 
-	 * @return 
+	 * @return a random IFF template
 	 */
 	public String getRandomIffTemplate() {
-		return iffTemplates[random.nextInt(iffTemplates.length)];
-	}
-
-	public void setIffTemplates(String[] iffTemplates) {
-		this.iffTemplates = iffTemplates;
-	}
-
-	public String getCreatureName() {
-		return creatureName;
-	}
-
-	public void setCreatureName(String creatureName) {
-		this.creatureName = creatureName;
-	}
-
-	public CreatureDifficulty getCreatureDifficulty() {
-		return creatureDifficulty;
-	}
-
-	public void setCreatureDifficulty(CreatureDifficulty creatureDifficulty) {
-		this.creatureDifficulty = creatureDifficulty;
-	}
-
-	public int getMinRespawnDelay() {
-		return minRespawnDelay;
-	}
-
-	public void setMinRespawnDelay(int minRespawnDelay) {
-		this.minRespawnDelay = minRespawnDelay;
-	}
-
-	public int getMaxRespawnDelay() {
-		return maxRespawnDelay;
-	}
-
-	public void setMaxRespawnDelay(int maxRespawnDelay) {
-		this.maxRespawnDelay = maxRespawnDelay;
-	}
-
-	public short getCombatLevel() {
-		return combatLevel;
-	}
-
-	public void setCombatLevel(short combatLevel) {
-		this.combatLevel = combatLevel;
-	}
-
-	public AIBehavior getAIBehavior() {
-		return aiBehavior;
-	}
-
-	public void setAIBehavior(AIBehavior aiBehavior) {
-		this.aiBehavior = aiBehavior;
-	}
-
-	public int getFloatRadius() {
-		return floatRadius;
-	}
-
-	public void setFloatRadius(int floatRadius) {
-		this.floatRadius = floatRadius;
-	}
-
-	public String getMoodAnimation() {
-		return moodAnimation;
-	}
-
-	public void setMoodAnimation(String moodAnimation) {
-		this.moodAnimation = moodAnimation;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
-
-	public int getMaxAction() {
-		return maxAction;
-	}
-
-	public void setMaxAction(int maxAction) {
-		this.maxAction = maxAction;
-	}
-
-	public SpawnerFlag getSpawnerFlag() {
-		return flags;
-	}
-
-	public void setSpawnerFlag(SpawnerFlag flags) {
-		this.flags = flags;
-	}
-
-	public void setFaction(PvpFaction faction, boolean specForce) {
-		this.faction = faction;
-		this.specForce = specForce;
-	}
-
-	public PvpFaction getFaction() {
-		return faction;
-	}
-
-	public boolean isSpecForce() {
-		return specForce;
+		return getRandom(getIffs());
 	}
 	
-	public double getAttackSpeed() {
-		return attackSpeed;
+	public String getRandomPrimaryWeapon() {
+		return getRandom(getPrimaryWeapons());
 	}
 	
-	public void setAttackSpeed(double attackSpeed) {
-		this.attackSpeed = attackSpeed;
-	}
-	
-	public double getMovementSpeed() {
-		return movementSpeed;
-	}
-	
-	public void setMovementSpeed(double movementSpeed) {
-		this.movementSpeed = movementSpeed;
-	}
-	
-	public void setPatrolRoute(List<ResolvedPatrolWaypoint> patrolRoute) {
-		this.patrolRoute = patrolRoute;
+	public String getRandomSecondaryWeapon() {
+		return getRandom(getSecondaryWeapons());
 	}
 	
 	public List<ResolvedPatrolWaypoint> getPatrolRoute() {
-		return patrolRoute;
+		return waypoints;
 	}
 	
-	public PatrolFormation getFormation() {
-		return formation;
+	public SWGObject getEgg() {
+		return egg;
 	}
 	
-	public void setFormation(PatrolFormation formation) {
-		this.formation = formation;
+	public Location getLocation() {
+		return location;
 	}
 	
-	public enum SpawnerFlag {
-		AGGRESSIVE,
-		ATTACKABLE,
-		INVULNERABLE
+	public int getId() {
+		return spawn.getId();
+	}
+	
+	public String getSpawnerType() {
+		return spawn.getSpawnerType();
+	}
+	
+	public String getNpcId() {
+		return spawn.getNpcId();
+	}
+	
+	public String getBuildingId() {
+		return spawn.getBuildingId();
+	}
+	
+	public String getMood() {
+		return spawn.getMood();
+	}
+	
+	public AIBehavior getBehavior() {
+		return spawn.getBehavior();
+	}
+	
+	public int getPatrolId() {
+		return spawn.getPatrolId();
+	}
+	
+	public PatrolFormation getPatrolFormation() {
+		return spawn.getPatrolFormation();
+	}
+	
+	public int getLoiterRadius() {
+		return spawn.getLoiterRadius();
+	}
+	
+	public int getMinSpawnTime() {
+		return spawn.getMinSpawnTime();
+	}
+	
+	public int getMaxSpawnTime() {
+		return spawn.getMaxSpawnTime();
+	}
+	
+	public int getAmount() {
+		return spawn.getAmount();
+	}
+	
+	public SpawnerFlag getSpawnerFlag() {
+		return npc.getSpawnerFlag();
+	}
+	
+	public CreatureDifficulty getDifficulty() {
+		return npc.getDifficulty();
+	}
+	
+	public int getCombatLevel() {
+		return npc.getCombatLevel();
+	}
+	
+	public String getName() {
+		return npc.getName();
+	}
+	
+	public String getStfName() {
+		return npc.getStfName();
+	}
+	
+	public List<String> getIffs() {
+		return npc.getIffs();
+	}
+	
+	public PvpFaction getFaction() {
+		return npc.getFaction();
+	}
+	
+	public boolean isSpecForce() {
+		return npc.isSpecForce();
+	}
+	
+	public double getAttackSpeed() {
+		return npc.getAttackSpeed();
+	}
+	
+	public double getMovementSpeed() {
+		return npc.getMovementSpeed();
+	}
+	
+	public List<String> getPrimaryWeapons() {
+		return npc.getPrimaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
+	}
+	
+	public List<String> getSecondaryWeapons() {
+		return npc.getSecondaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
+	}
+	
+	public double getPrimaryWeaponSpeed() {
+		return npc.getPrimaryWeaponSpeed();
+	}
+	
+	public double getSecondaryWeaponSpeed() {
+		return npc.getSecondaryWeaponSpeed();
+	}
+	
+	public int getAggressiveRadius() {
+		return npc.getAggressiveRadius();
+	}
+	
+	public int getAssistRadius() {
+		return npc.getAssistRadius();
+	}
+	
+	public boolean isDeathblow() {
+		return npc.isDeathblow();
+	}
+	
+	public String getLootTable1() {
+		return npc.getLootTable1();
+	}
+	
+	public String getLootTable2() {
+		return npc.getLootTable2();
+	}
+	
+	public String getLootTable3() {
+		return npc.getLootTable3();
+	}
+	
+	public int getLootTable1Chance() {
+		return npc.getLootTable1Chance();
+	}
+	
+	public int getLootTable2Chance() {
+		return npc.getLootTable2Chance();
+	}
+	
+	public int getLootTable3Chance() {
+		return npc.getLootTable3Chance();
+	}
+	
+	public HumanoidNpcInfo getHumanoidInfo() {
+		return npc.getHumanoidInfo();
+	}
+	
+	public DroidNpcInfo getDroidInfo() {
+		return npc.getDroidInfo();
+	}
+	
+	public CreatureNpcInfo getCreatureInfo() {
+		return npc.getCreatureInfo();
+	}
+	
+	public int getLevel() {
+		return npcStat.getLevel();
+	}
+	
+	public int getHealthRegen() {
+		return npcStat.getHealthRegen();
+	}
+	
+	public int getActionRegen() {
+		return npcStat.getActionRegen();
+	}
+	
+	public int getMindRegen() {
+		return npcStat.getMindRegen();
+	}
+	
+	public int getHealth() {
+		return npcDetailStat.getHealth();
+	}
+	
+	public int getAction() {
+		return npcDetailStat.getAction();
+	}
+	
+	public int getRegen() {
+		return npcDetailStat.getRegen();
+	}
+	
+	public int getCombatRegen() {
+		return npcDetailStat.getCombatRegen();
+	}
+	
+	public int getDamagePerSecond() {
+		return npcDetailStat.getDamagePerSecond();
+	}
+	
+	public int getToHit() {
+		return npcDetailStat.getToHit();
+	}
+	
+	public int getDef() {
+		return npcDetailStat.getDef();
+	}
+	
+	public int getArmor() {
+		return npcDetailStat.getArmor();
+	}
+	
+	public int getXp() {
+		return npcDetailStat.getXp();
+	}
+	
+	private <T> T getRandom(List<T> list) {
+		return list.get(random.nextInt(list.size()));
 	}
 	
 	public static class ResolvedPatrolWaypoint {
@@ -266,11 +351,11 @@ public final class Spawner {
 		private final double delay;
 		private final PatrolType patrolType;
 		
-		public ResolvedPatrolWaypoint(SWGObject parent, Location location, double delay, PatrolType patrolType) {
-			this.parent = null;
-			this.location = location;
-			this.delay = delay;
-			this.patrolType = patrolType;
+		private ResolvedPatrolWaypoint(PatrolRouteWaypoint waypoint) {
+			this.parent = getPatrolWaypointParent(waypoint);
+			this.location = getPatrolWaypointLocation(waypoint);
+			this.delay = waypoint.getDelay();
+			this.patrolType = waypoint.getPatrolType();
 		}
 		
 		public SWGObject getParent() {
@@ -287,6 +372,44 @@ public final class Spawner {
 		
 		public PatrolType getPatrolType() {
 			return patrolType;
+		}
+		
+		private static Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {
+			return Location.builder()
+					.setTerrain(waypoint.getTerrain())
+					.setX(waypoint.getX())
+					.setY(waypoint.getY())
+					.setZ(waypoint.getZ()).build();
+		}
+		
+		private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint) {
+			if (waypoint.getBuildingId().isEmpty()) {
+				Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			
+			BuildingLoaderInfo buildingInfo = DataLoader.buildings().getBuilding(waypoint.getBuildingId());
+			if (buildingInfo == null) {
+				Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			
+			if (buildingInfo.getId() == 0)
+				return null;
+			
+			SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
+			if (!(building instanceof BuildingObject)) {
+				Log.w("PatrolRouteWaypoint: Invalid building [%d] for patrol id: %d and group id: %d", buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			
+			SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
+			if (cell == null) {
+				Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+				return null;
+			}
+			
+			return cell;
 		}
 		
 	}

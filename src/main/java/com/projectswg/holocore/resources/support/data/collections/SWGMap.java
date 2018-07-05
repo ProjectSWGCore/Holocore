@@ -32,6 +32,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -79,7 +80,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public V put(K key, V value) {
+	public V put(@NotNull K key, @NotNull V value) {
 		V old = super.put(key, value);
 		updateCount.incrementAndGet();
 		if (old != null) {
@@ -91,7 +92,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public V remove(Object key) {
+	public V remove(@NotNull Object key) {
 		V old = super.remove(key);
 		updateCount.incrementAndGet();
 		removeData(key);

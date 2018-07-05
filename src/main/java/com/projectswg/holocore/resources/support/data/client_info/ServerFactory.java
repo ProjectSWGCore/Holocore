@@ -65,20 +65,21 @@ public final class ServerFactory extends DataFactory {
 	public void updateServerIffs() throws IOException {
 		File root = new File(getFolder());
 
-		Files.walkFileTree(root.toPath(), new FileVisitor<Path>() {
+		Files.walkFileTree(root.toPath(), new FileVisitor<>() {
+			
 			@Override
 			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) {
 				return FileVisitResult.CONTINUE;
 			}
-
+			
 			@Override
 			public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) {
 				if (path.toString().endsWith("sdf")) {
 					String name = path.toString();
 					name = name.substring(0, name.length() - 4) + ".iff";
-
+					
 					File iff = new File(name);
-
+					
 					if (!iff.exists()) {
 						convertSdf(path, name);
 						Log.i("Created Server Datatable: %s", name);
@@ -92,12 +93,12 @@ public final class ServerFactory extends DataFactory {
 				}
 				return FileVisitResult.CONTINUE;
 			}
-
+			
 			@Override
 			public FileVisitResult visitFileFailed(Path path, IOException e) {
 				return FileVisitResult.CONTINUE;
 			}
-
+			
 			@Override
 			public FileVisitResult postVisitDirectory(Path path, IOException e) {
 				return FileVisitResult.CONTINUE;
