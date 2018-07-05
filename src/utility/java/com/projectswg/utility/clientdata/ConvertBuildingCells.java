@@ -6,7 +6,7 @@ import com.projectswg.common.data.swgfile.visitors.ObjectData;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.PortalLayoutData;
 import com.projectswg.common.data.swgfile.visitors.PortalLayoutData.Cell;
-import com.projectswg.utility.SdbGenerator;
+import com.projectswg.holocore.utilities.SdbGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,24 +51,17 @@ class ConvertBuildingCells implements Converter {
 		}
 		
 		List<Point3D> doorframes = portalLayoutData.getRadarPoints();
-		List<Point3D> doorPoints = new ArrayList<>(doorframes.size()/4);
+		List<Portal> doorPoints = new ArrayList<>(doorframes.size()/4);
 		for (int i = 0; i+3 < doorframes.size(); i+=4) {
-			double x = 0;
-			double y = Double.MAX_VALUE;
-			double z = 0;
+			List<Point3D> door = new ArrayList<>();
 			for (int j = i; j < i+4; j++) {
-				Point3D p = doorframes.get(j);
-				x += p.getX();
-				if (p.getY() < y)
-					y = p.getY();
-				z += p.getZ();
+				door.add(doorframes.get(j));
 			}
-			x /= 4;
-			z /= 4;
-			doorPoints.add(new Point3D(x, y, z));
+			door.sort(Comparator.comparingDouble(Point3D::getY));
+			doorPoints.add(new Portal(door.get(0), door.get(1), door.get(2).getY() - door.get(0).getY()));
 		}
 		List<Cell> cells = portalLayoutData.getCells();
-		Map<Point3D, List<Cell>> doors = new HashMap<>();
+		Map<Portal, List<Cell>> doors = new HashMap<>();
 		for (Cell cell : cells) {
 			for (int portal : cell.getPortals()) {
 				doors.computeIfAbsent(doorPoints.get(portal), k -> new ArrayList<>()).add(cell);
@@ -78,21 +71,55 @@ class ConvertBuildingCells implements Converter {
 		
 		String building = file.getAbsolutePath().replace(CLIENTDATA.getAbsolutePath() + '/', "");
 		for (Cell cell : cells) {
-			StringBuilder neighbors = new StringBuilder();
+			StringBuilder neighbors = new StringBuilder("[");
 			boolean first = true;
 			for (int portal : cell.getPortals()) {
-				Point3D portalLocation = doorPoints.get(portal);
+				Portal portalLocation = doorPoints.get(portal);
 				assert doors.get(portalLocation).size() == 2;
 				for (Cell neighbor : doors.get(portalLocation)) {
 					if (neighbor == cell)
 						continue;
 					if (!first)
-						neighbors.append(';');
+						neighbors.append(',');
 					first = false;
-					neighbors.append(String.format("%d,%.2f,%.2f,%.2f",cells.indexOf(neighbor), portalLocation.getX(), portalLocation.getY(), portalLocation.getZ()));
+					neighbors.append(String.format("[%d,%.2f,%s,%s]", cells.indexOf(neighbor), portalLocation.getHeight(), toString(portalLocation.getFrame1()), toString(portalLocation.getFrame2())));
 				}
 			}
-			sdb.writeLine(building, cells.indexOf(cell), cell.getName(), neighbors);
+			sdb.writeLine(building, cells.indexOf(cell), cell.getName(), neighbors.append(']').toString());
+		}
+	}
+	
+	private static String toString(Point3D point) {
+		return String.format("[%.2f,%.2f,%.2f]", point.getX(), point.getY(), point.getZ());
+	}
+	
+	private static class Portal {
+		
+		private final Point3D frame1;
+		private final Point3D frame2;
+		private final double height;
+		
+		public Portal(Point3D frame1, Point3D frame2, double height) {
+			this.frame1 = frame1;
+			this.frame2 = frame2;
+			this.height = height;
+		}
+		
+		public Point3D getFrame1() {
+			return frame1;
+		}
+		
+		public Point3D getFrame2() {
+			return frame2;
+		}
+		
+		public double getHeight() {
+			return height;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("[[%.2f,%.2f,%.2f],[%.2f,%.2f,%.2f],%.2f]", frame1.getX(), frame1.getY(), frame1.getZ(), frame2.getX(), frame2.getY(), frame2.getZ(), height);
 		}
 	}
 	

@@ -39,6 +39,8 @@ import com.projectswg.holocore.services.support.global.zone.CharacterLookupServi
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 public class AdminTeleportCallback implements ICmdCallback {
 
 	@Override
@@ -62,8 +64,10 @@ public class AdminTeleportCallback implements ICmdCallback {
 			return;
 		}
 		
-		Terrain terrain = Terrain.getTerrainFromName(cmd[cmdOffset]);
-		if (terrain == null) {
+		Terrain terrain;
+		try {
+			terrain = Terrain.valueOf(cmd[cmdOffset].toUpperCase(Locale.US));
+		} catch (IllegalArgumentException e) {
 			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Invalid terrain: " + cmd[cmdOffset]);
 			return;
 		}

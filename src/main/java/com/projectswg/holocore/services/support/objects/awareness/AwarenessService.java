@@ -122,9 +122,9 @@ public class AwarenessService extends Service {
 					awareness.updateObject(obj);
 				}
 				if (oti.getParent() != null)
-					obj.getOwner().sendPacket(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), newLocation, 0));
+					obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), newLocation, 0));
 				else
-					obj.getOwner().sendPacket(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), newLocation, 0));
+					obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), newLocation, 0));
 			} else {
 				handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
 			}
@@ -133,6 +133,10 @@ public class AwarenessService extends Service {
 				obj.systemMove(oti.getParent(), oti.getNewLocation());
 				awareness.updateObject(obj);
 			}
+			if (oti.getParent() != null)
+				obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), oti.getNewLocation(), 0));
+			else
+				obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), oti.getNewLocation(), 0));
 		}
 	}
 	

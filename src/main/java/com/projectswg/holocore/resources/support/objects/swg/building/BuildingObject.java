@@ -26,21 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.building;
 
-import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.CellInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.PortalInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class BuildingObject extends TangibleObject {
 	
@@ -125,15 +125,18 @@ public class BuildingObject extends TangibleObject {
 		
 		CellInfo cellInfo = cellInfos.get(cell.getNumber());
 		cell.setCellName(cellInfo.getName());
-		for (Entry<Point3D, Integer> portal : cellInfo.getNeighbors().entrySet()) {
-			if (portal.getValue() == 0) {
-				cell.connectToNeighbor(null, portal.getKey());
-			} else {
-				CellObject neighbor = idToCell.get(portal.getValue());
+		for (PortalInfo portalInfo : cellInfo.getNeighbors()) {
+			int otherCell = portalInfo.getOtherCell(cellInfo.getId());
+			CellObject neighbor = null;
+			if (otherCell != 0) {
+				neighbor = idToCell.get(otherCell);
 				if (neighbor == null)
 					continue;
-				cell.connectToNeighbor(neighbor, portal.getKey());
 			}
+			Portal portal = new Portal(cell, neighbor, portalInfo.getFrame1(), portalInfo.getFrame2(), portalInfo.getHeight());
+			cell.addPortal(portal);
+			if (neighbor != null)
+				neighbor.addPortal(portal);
 		}
 		idToCell.put(cell.getNumber(), cell);
 		nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name

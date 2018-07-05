@@ -29,6 +29,10 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.json.JSON;
+import me.joshlarson.json.JSONArray;
+import me.joshlarson.json.JSONException;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -61,16 +65,24 @@ public final class BuildingCellLoader extends DataLoader {
 		
 		private final int id;
 		private final String name;
-		private final Map<Point3D, Integer> neighbors;
+		private final List<PortalInfo> neighbors;
 		
 		public CellInfo(SdbResultSet set) {
 			this.id = (int) set.getInt(1);
 			this.name = set.getText(2).intern();
-			this.neighbors = new HashMap<>();
-			for (String neighbor : set.getText(3).split(";")) {
-				String [] neighborSplit = neighbor.split(",", 4);
-				int neighborId = Integer.parseInt(neighborSplit[0]);
-				neighbors.put(new Point3D(Double.parseDouble(neighborSplit[1]), Double.parseDouble(neighborSplit[2]), Double.parseDouble(neighborSplit[3])), neighborId);
+			this.neighbors = new ArrayList<>();
+			try {
+				JSONArray parts = JSON.readArray(set.getText(3));
+				for (int i = 0; i < parts.size(); i++) {
+					JSONArray neighbor = new JSONArray(parts.getArray(i));
+					JSONArray portal1 = new JSONArray(neighbor.getArray(2));
+					JSONArray portal2 = new JSONArray(neighbor.getArray(3));
+					Point3D p1 = new Point3D(portal1.getDouble(0), portal1.getDouble(1), portal1.getDouble(2));
+					Point3D p2 = new Point3D(portal2.getDouble(0), portal2.getDouble(1), portal2.getDouble(2));
+					neighbors.add(new PortalInfo(id, neighbor.getInt(0), p1, p2, neighbor.getDouble(1)));
+				}
+			} catch (IOException | JSONException e) {
+				Log.w("Invalid cell info: %s", set.getText(3));
 			}
 		}
 		
@@ -82,9 +94,51 @@ public final class BuildingCellLoader extends DataLoader {
 			return id;
 		}
 		
-		public Map<Point3D, Integer> getNeighbors() {
-			return Collections.unmodifiableMap(neighbors);
+		public List<PortalInfo> getNeighbors() {
+			return Collections.unmodifiableList(neighbors);
 		}
 	}
 	
+	public static class PortalInfo {
+		
+		private final int cell1;
+		private final int cell2;
+		private final Point3D frame1;
+		private final Point3D frame2;
+		private final double height;
+		
+		public PortalInfo(int cell1, int cell2, Point3D frame1, Point3D frame2, double height) {
+			this.cell1 = cell1;
+			this.cell2 = cell2;
+			this.frame1 = frame1;
+			this.frame2 = frame2;
+			this.height = height;
+		}
+		
+		public int getOtherCell(int cell) {
+			assert cell1 == cell || cell2 == cell;
+			return cell1 == cell ? cell2 : cell1;
+		}
+		
+		public int getCell1() {
+			return cell1;
+		}
+		
+		public int getCell2() {
+			return cell2;
+		}
+		
+		public Point3D getFrame1() {
+			return frame1;
+		}
+		
+		public Point3D getFrame2() {
+			return frame2;
+		}
+		
+		public double getHeight() {
+			return height;
+		}
+		
+	}
 }

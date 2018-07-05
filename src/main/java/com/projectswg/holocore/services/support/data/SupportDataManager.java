@@ -1,11 +1,13 @@
 package com.projectswg.holocore.services.support.data;
 
+import com.projectswg.holocore.services.support.data.dev.CustomObjectService;
 import com.projectswg.holocore.services.support.data.dev.DeveloperService;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		DeveloperService.class,
+		CustomObjectService.class,
 		
 		PacketRecordingService.class,
 		ServerDataService.class,
