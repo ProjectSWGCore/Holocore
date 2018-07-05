@@ -6,7 +6,7 @@ public enum Converters {
 	BUILDOUT_BUILDING_LIST	(ConvertBuildingList::new),
 	BUILDOUT_OBJECTS		(ConvertBuildouts::new),
 	OBJECTS_OBJECT_DATA		(ConvertObjectData::new),
-	OBJETS_BUILDING_CELLS	(ConvertBuildingCells::new),
+	OBJECTS_BUILDING_CELLS	(ConvertBuildingCells::new),
 	ABSTRACT_SLOT_DEFINITION(ConvertSlotDefinition::new);
 	
 	private final Supplier<Converter> converter;
