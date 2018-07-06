@@ -35,7 +35,7 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Override
 	public void onPlayerMoveInAware(CreatureObject player, double distance) {
-		if (distance < getSpawner().getAggressiveRadius()) {
+		if (distance < getSpawner().getAggressiveRadius() && player.isEnemyOf(getAI())) {
 			if (targets.add(player)) {
 				requestAssistance();
 				if (!isExecuting())
