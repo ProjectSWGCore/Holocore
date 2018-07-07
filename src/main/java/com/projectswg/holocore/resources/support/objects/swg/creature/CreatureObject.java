@@ -242,7 +242,24 @@ public class CreatureObject extends TangibleObject {
 	public boolean isVisible(CreatureObject target) {
 		return !isLoggedOutPlayer() && super.isVisible(target);
 	}
-
+	
+	@Override
+	public boolean isInCombat() {
+		// CreatureObjects use CreatureState
+		
+		return isStatesBitmask(CreatureState.COMBAT);
+	}
+	
+	@Override
+	public void setInCombat(boolean inCombat) {
+		// CreatureObjects use CreatureState
+		if (inCombat) {
+			setStatesBitmask(CreatureState.COMBAT);
+		} else {
+			clearStatesBitmask(CreatureState.COMBAT);
+		}
+	}
+	
 	private void addEquipment(SWGObject obj) {
 		creo6.addEquipment(obj, this);
 	}
