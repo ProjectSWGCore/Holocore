@@ -26,61 +26,98 @@
  ***********************************************************************************/
 package com.projectswg.holocore.utilities;
 
-import java.io.BufferedWriter;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-public class SdbGenerator implements Closeable {
+public class SdbGenerator implements Closeable, AutoCloseable {
 	
 	private static final Charset ASCII = Charset.forName("ASCII");
 	
-	private final File file;
 	private BufferedWriter writer;
 	
-	public SdbGenerator(File file) {
+	public SdbGenerator(File file) throws FileNotFoundException {
 		if (file == null)
 			throw new NullPointerException("File cannot be null!");
-		this.file = file;
-		this.writer = null;
-	}
-	
-	public void open() throws FileNotFoundException {
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), ASCII));
+		this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), ASCII));
 	}
 	
 	public void close() throws IOException {
 		writer.close();
 	}
 	
-	public void setColumnNames(String ... names) throws IOException {
+	public void writeColumnNames(String ... names) throws IOException {
 		for (int i = 0; i < names.length; i++) {
 			writer.write(names[i]);
 			if (i+1 < names.length)
 				writer.write('\t');
 		}
+		writer.newLine();
+		writer.newLine(); // No column types
 	}
 	
-	public void setColumnTypes(String ... types) throws IOException {
-		writer.newLine();
-		for (int i = 0; i < types.length; i++) {
-			writer.write(types[i]);
-			if (i+1 < types.length)
+	public void writeColumnNames(List<String> names) throws IOException {
+		boolean writeTab = false;
+		for (String name : names) {
+			if (writeTab)
 				writer.write('\t');
+			writer.write(name);
+			writeTab = true;
 		}
+		writer.newLine();
+		writer.newLine(); // No column types
 	}
 	
 	public void writeLine(Object ... line) throws IOException {
-		writer.newLine();
 		for (int i = 0; i < line.length; i++) {
-			writer.write(line[i].toString());
-			if (i+1 < line.length)
+			if (i != 0)
 				writer.write('\t');
+			writer.write(convertToString(line[i]));
 		}
+		writer.newLine();
+	}
+	
+	public void writeAllLines(List<Object[]> lines) throws IOException {
+		for (Object [] line : lines) {
+			writeLine(line);
+		}
+	}
+	
+	private static String listToString(Collection<?> list) {
+		StringBuilder str = new StringBuilder();
+		int index = 0;
+		for (Object o : list) {
+			if (index++ != 0)
+				str.append(';');
+			str.append(convertToString(o));
+		}
+		return str.toString();
+	}
+	
+	private static String mapToString(Map<String, ?> map) {
+		StringBuilder str = new StringBuilder();
+		int index = 0;
+		for (Entry<String, ?> e : map.entrySet()) {
+			if (index++ != 0)
+				str.append(',');
+			str.append(e.getKey());
+			str.append('=');
+			str.append(convertToString(e.getValue()));
+		}
+		return str.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static String convertToString(Object o) {
+		if (o instanceof Collection)
+			return listToString((Collection) o);
+		else if (o instanceof Map)
+			return mapToString((Map<String, ?>) o);
+		else
+			return o == null ? "" : o.toString();
 	}
 	
 }

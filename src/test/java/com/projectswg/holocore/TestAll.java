@@ -32,10 +32,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.projectswg.common.control.IntentManager;
+import me.joshlarson.jlcommon.control.IntentManager;
 
 import com.projectswg.holocore.resources.TestResources;
-import com.projectswg.holocore.resources.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.TestServices;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 
@@ -55,7 +55,7 @@ public class TestAll {
 	public static void terminateLog() {
 		DataManager.terminate();
 		if (IntentManager.getInstance() != null)
-			IntentManager.getInstance().terminate();
+			IntentManager.getInstance().close();
 		ScheduledUtilities.shutdown();
 	}
 	

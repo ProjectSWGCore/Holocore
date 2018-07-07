@@ -1,18 +1,21 @@
 .settings
 
 # IDE-based
-Launcher.iml
+Holocore.iml
 out
 .idea
+.classpath
+.project
 
 # Gradle
 build
 .gradle
 
 # Holocore
-clientdata/
-log/
-cfg/
-odb/
+/clientdata/
+/log/
+/cfg/
+/odb/
+/bin/
 *.db
 *.iff

@@ -1,0 +1,1166 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+800003	TALUS	tal_aakuan_cave	AREA	2	24.36	-38.96	-37.38	0	1	an Aa'kuan defender	aakuan_defender_47_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800004	TALUS	tal_aakuan_cave	AREA	2	43.73	-47.09	-7.73	0	1	an Aa'kuan keeper	aakuan_keeper_42_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800005	TALUS	tal_aakuan_cave	AREA	2	56.34	-68.50	-38.23	0	1	an Aa'kuan steward	aakuan_steward_43_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800006	TALUS	tal_aakuan_cave	AREA	3	77.33	-67.42	-34.10	0	1	an Aa'kuan follower	aakuan_follower_39_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800007	TALUS	tal_aakuan_cave	AREA	3	69.80	-57.12	-9.55	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800008	TALUS	tal_aakuan_cave	AREA	3	81.75	-63.37	-19.60	0	1	an Aa'kuan steward	aakuan_steward_43_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800009	TALUS	tal_aakuan_cave	AREA	4	92.28	-76.33	-79.79	0	1	an Aa'kuan follower	aakuan_follower_39_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800010	TALUS	tal_aakuan_cave	AREA	4	85.23	-74.67	-53.57	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800011	TALUS	tal_aakuan_cave	AREA	4	92.12	-76.16	-64.28	0	1	an Aa'kuan steward	aakuan_steward_43_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800012	TALUS	tal_aakuan_cave	AREA	5	93.53	-46.48	-120.68	0	1	an Aa'kuan warder	aakuan_warder_52_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800013	TALUS	tal_aakuan_cave	AREA	6	53.28	-76.02	-85.65	0	1	an Aa'kuan warder	aakuan_warder_52_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800014	TALUS	tal_aakuan_cave	AREA	7	70.18	-66.36	-138.43	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800015	TALUS	tal_aakuan_cave	AREA	8	154.33	-65.69	-128.24	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800016	TALUS	tal_aakuan_cave	AREA	8	138.86	-67.28	-93.63	0	1	an Aa'kuan spice guard	aakuan_spiceguard_48_h_att_n	POI	Aa'kuan Champion's Cave	5	LOITER	10	0	-	idle	0	0	0	600
+800017	TALUS	tal_aakuan_cave	AREA	8	112.50	-66.85	-94.55	0	1	an Aa'kuan steward	aakuan_steward_43_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800018	TALUS	tal_aakuan_cave	AREA	8	153.00	-65.90	-96.78	0	1	an Aa'kuan warder	aakuan_warder_52_h_att_n	POI	Aa'kuan Champion's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+800019	TALUS	tal_aakuan_cave	AREA	9	188.71	-66.15	-98.42	0	1	an Aa'kuan anarchist	aakuan_anarchist_53_h_att_n	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle	0	0	0	1800
+800020	TALUS	tal_aakuan_cave	AREA	9	186.07	-65.39	-109.83	0	1	an Aa'kuan assassin	aakuan_assassin_53_h_att_n	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle	0	0	0	1800
+800021	TALUS	tal_aakuan_cave	AREA	9	180.40	-66.13	-96.75	0	1	an Aa'kuan champion	aakuan_champion_53_h_att_n	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle	0	0	0	1800
+800022	TALUS	tal_world	AREA	0	5933.70	40.10	4649.49	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	POI	Aa'kuan Champion's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+800023	TALUS	tal_world	AREA	0	-1619.65	23.58	622.49	0	1	a Binayre chief	binayre_chief_47_h_agg_n	POI	Binayre Camp	1	TURN	0	0	-	idle	0	0	0	300
+800024	TALUS	tal_world	AREA	0	-1640.73	22.44	625.97	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	POI	Binayre Camp	4	LOITER	8	0	-	idle	0	0	0	300
+800025	TALUS	tal_world	AREA	0	-1625.97	22.72	605.04	0	1	a Binayre smuggler	binayre_smuggler_45_h_agg_n	POI	Binayre Camp	5	LOITER	10	0	-	idle	0	0	0	300
+800026	TALUS	tal_world	AREA	0	-1619.43	24.90	648.96	0	1	a Binayre swindler	binayre_swindler_46_h_agg_n	POI	Binayre Camp	7	LOITER	14	0	-	idle	0	0	0	300
+800027	TALUS	tal_binayre_bunker	AREA	10	13.69	-11.50	-20.85	0	1	a Binayre chief	binayre_chief_47_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800028	TALUS	tal_binayre_bunker	AREA	10	15.46	-13.75	-10.66	0	1	a Binayre swindler	binayre_swindler_46_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800029	TALUS	tal_binayre_bunker	AREA	2	3.72	0.25	-4.03	0	1	a Binayre hooligan	binayre_hooligan_36_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800030	TALUS	tal_binayre_bunker	AREA	4	-3.39	-3.25	4.81	179	1	a Binayre scalawag	binayre_scalawag_39_h_agg_n	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle	0	0	0	600
+800031	TALUS	tal_binayre_bunker	AREA	5	4.56	-6.75	-4.67	0	1	a Binayre scalawag	binayre_scalawag_39_h_agg_n	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	600
+800032	TALUS	tal_binayre_bunker	AREA	6	4.49	-10.25	-18.42	-90	1	a Binayre ruffian	binayre_ruffian_42_h_agg_n	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle	0	0	0	600
+800033	TALUS	tal_binayre_bunker	AREA	7	-5.84	-13.74	3.45	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800034	TALUS	tal_binayre_bunker	AREA	7	-2.52	-13.74	-6.40	0	1	a Binayre ruffian	binayre_ruffian_42_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800035	TALUS	tal_binayre_bunker	AREA	8	3.17	-13.75	11.65	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	POI	Binayre Pirate Bunker	3	LOITER	6	0	-	idle	0	0	0	600
+800036	TALUS	tal_binayre_bunker	AREA	9	15.67	-13.75	9.06	0	1	a Binayre smuggler	binayre_smuggler_45_h_agg_n	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
+800037	TALUS	tal_binayre_bunker	AREA	9	13.91	-13.75	0.26	0	1	a Binayre swindler	binayre_swindler_46_h_agg_n	POI	Binayre Pirate Bunker	1	LOITER	0	0	-	idle	0	0	0	600
+800038	TALUS	tal_world	AREA	0	5567.60	102.00	-4079.78	0	1	a Binayre hooligan	binayre_hooligan_36_h_agg_n	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800039	TALUS	tal_world	AREA	0	5618.00	105.84	-4131.00	0	1	Seth	smuggler_fence_seth_100_h_inv_n	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800040	TALUS	tal_world	AREA	0	5658.87	109.37	-4140.96	0	1	a pirate	smuggler_patrol_thief_13_65_h_att_n	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800041	TALUS	tal_world	AREA	0	5621.90	105.40	-4161.84	0	1	a pirate	smuggler_patrol_thief_13_65_h_att_n	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800042	TALUS	tal_world	AREA	0	5587.84	103.44	-4127.98	0	1	a pirate	smuggler_patrol_thief_13_65_h_att_n	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800043	TALUS	tal_brood10_cave	AREA	10	-38.10	-81.40	-147.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800044	TALUS	tal_brood10_cave	AREA	10	-17.80	-79.10	-144.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800045	TALUS	tal_brood10_cave	AREA	10	-25.40	-77.60	-131.40	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800046	TALUS	tal_brood10_cave	AREA	11	-98.80	-100.20	-114.80	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800047	TALUS	tal_brood10_cave	AREA	11	-92.20	-100.90	-98.60	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800048	TALUS	tal_brood10_cave	AREA	11	-84.90	-102.40	-116.00	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800049	TALUS	tal_brood10_cave	AREA	11	-82.50	-99.80	-91.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800050	TALUS	tal_brood10_cave	AREA	2	-9.20	-30.50	-24.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800051	TALUS	tal_brood10_cave	AREA	3	-8.20	-40.30	-59.50	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800052	TALUS	tal_brood10_cave	AREA	3	12.80	-40.20	-78.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800053	TALUS	tal_brood10_cave	AREA	3	26.20	-44.70	-57.40	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800054	TALUS	tal_brood10_cave	AREA	3	-3.60	-40.20	-70.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800055	TALUS	tal_brood10_cave	AREA	4	31.50	-45.90	-105.50	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800056	TALUS	tal_brood10_cave	AREA	4	31.40	-45.20	-58.10	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800057	TALUS	tal_brood10_cave	AREA	4	50.10	-45.70	-100.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800058	TALUS	tal_brood10_cave	AREA	4	40.40	-46.00	-54.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800059	TALUS	tal_brood10_cave	AREA	5	48.30	-54.80	-150.00	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800060	TALUS	tal_brood10_cave	AREA	5	65.10	-58.40	-168.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800061	TALUS	tal_brood10_cave	AREA	5	54.70	-56.30	-156.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800062	TALUS	tal_brood10_cave	AREA	5	46.30	-48.40	-130.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800063	TALUS	tal_brood10_cave	AREA	5	41.00	-55.40	-155.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800064	TALUS	tal_brood10_cave	AREA	5	-10.80	-44.60	-141.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800065	TALUS	tal_brood10_cave	AREA	5	29.80	-59.60	-175.10	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800066	TALUS	tal_brood10_cave	AREA	5	23.50	-45.90	-115.90	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800067	TALUS	tal_brood10_cave	AREA	5	-2.20	-45.00	-140.30	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800068	TALUS	tal_brood10_cave	AREA	7	-7.90	-64.10	-231.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800069	TALUS	tal_brood10_cave	AREA	7	-21.30	-63.20	-259.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800070	TALUS	tal_brood10_cave	AREA	7	-16.90	-65.50	-215.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800071	TALUS	tal_brood10_cave	AREA	8	-96.10	-70.70	-115.60	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800072	TALUS	tal_brood10_cave	AREA	8	-89.60	-102.80	-129.80	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800073	TALUS	tal_brood10_cave	AREA	8	-71.20	-98.40	-159.10	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800074	TALUS	tal_brood10_cave	AREA	8	-56.30	-71.10	-183.00	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800075	TALUS	tal_brood10_cave	AREA	8	-81.60	-70.20	-122.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800076	TALUS	tal_brood10_cave	AREA	8	-79.00	-99.40	-160.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800077	TALUS	tal_brood10_cave	AREA	8	-67.80	-69.80	-164.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800078	TALUS	tal_brood10_cave	AREA	8	-61.00	-70.00	-196.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800079	TALUS	tal_brood10_cave	AREA	8	-118.50	-69.00	-170.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800080	TALUS	tal_brood10_cave	AREA	8	-109.60	-68.60	-113.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800081	TALUS	tal_brood10_cave	AREA	8	-93.00	-73.50	-170.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800082	TALUS	tal_brood10_cave	AREA	8	-72.60	-98.20	-151.30	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800083	TALUS	tal_brood10_cave	AREA	8	-118.70	-69.30	-128.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800084	TALUS	tal_brood10_cave	AREA	9	-33.30	-70.40	-110.30	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800085	TALUS	tal_brood10_cave	AREA	9	-62.80	-70.10	-89.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800086	TALUS	tal_brood10_cave	AREA	9	-40.90	-70.00	-100.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800087	TALUS	tal_brood10_cave	AREA	9	-18.10	-68.80	-101.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 10	1	TURN	0	0	-	idle	0	0	0	300
+800088	TALUS	tal_brood2_cave	AREA	1	-2.20	-13.00	-6.70	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800089	TALUS	tal_brood2_cave	AREA	2	9.20	-23.90	-26.80	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800090	TALUS	tal_brood2_cave	AREA	2	-7.80	-30.60	-28.30	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800091	TALUS	tal_brood2_cave	AREA	3	29.40	-45.10	-59.60	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800092	TALUS	tal_brood2_cave	AREA	3	-9.60	-39.50	-55.10	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800093	TALUS	tal_brood2_cave	AREA	3	15.30	-40.10	-77.30	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800094	TALUS	tal_brood2_cave	AREA	3	22.40	-44.40	-52.10	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800095	TALUS	tal_brood2_cave	AREA	3	-4.60	-40.20	-68.80	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800096	TALUS	tal_brood2_cave	AREA	4	44.20	-46.50	-102.20	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800097	TALUS	tal_brood2_cave	AREA	4	40.90	-46.10	-56.10	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800098	TALUS	tal_brood2_cave	AREA	4	30.00	-44.80	-96.60	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800099	TALUS	tal_brood2_cave	AREA	5	30.30	-59.90	-178.00	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800100	TALUS	tal_brood2_cave	AREA	5	23.80	-46.00	-119.30	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800101	TALUS	tal_brood2_cave	AREA	5	55.20	-56.30	-155.70	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800102	TALUS	tal_brood2_cave	AREA	5	46.70	-48.50	-131.10	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800103	TALUS	tal_brood2_cave	AREA	5	42.80	-55.30	-155.50	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800104	TALUS	tal_brood2_cave	AREA	5	-7.60	-45.00	-142.60	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800105	TALUS	tal_brood2_cave	AREA	5	65.10	-58.20	-170.00	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800106	TALUS	tal_brood2_cave	AREA	5	49.50	-47.40	-117.90	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800107	TALUS	tal_brood2_cave	AREA	5	32.70	-55.70	-152.10	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800108	TALUS	tal_brood2_cave	AREA	5	2.30	-44.50	-119.90	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800109	TALUS	tal_brood2_cave	AREA	7	-24.20	-63.10	-259.50	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800110	TALUS	tal_brood2_cave	AREA	7	-14.00	-63.60	-225.90	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800111	TALUS	tal_brood2_cave	AREA	7	0.40	-63.80	-237.20	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800112	TALUS	tal_brood2_cave	AREA	7	-18.50	-65.50	-213.20	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800113	TALUS	tal_brood2_cave	AREA	8	-98.30	-70.30	-116.10	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800114	TALUS	tal_brood2_cave	AREA	8	-94.60	-73.80	-170.40	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800115	TALUS	tal_brood2_cave	AREA	8	-58.60	-70.90	-185.30	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800116	TALUS	tal_brood2_cave	AREA	8	-94.90	-73.70	-170.60	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800117	TALUS	tal_brood2_cave	AREA	8	-80.30	-69.60	-120.40	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800118	TALUS	tal_brood2_cave	AREA	8	-118.40	-69.30	-205.10	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800119	TALUS	tal_brood2_cave	AREA	8	-108.00	-68.50	-111.90	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800120	TALUS	tal_brood2_cave	AREA	8	-92.20	-70.40	-123.00	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800121	TALUS	tal_brood2_cave	AREA	8	-71.40	-68.80	-177.20	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800122	TALUS	tal_brood2_cave	AREA	8	-60.20	-69.30	-160.40	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800123	TALUS	tal_brood2_cave	AREA	8	-49.00	-69.80	-193.60	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800124	TALUS	tal_brood2_cave	AREA	8	-117.80	-68.90	-170.20	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800125	TALUS	tal_brood2_cave	AREA	8	-117.60	-69.10	-129.50	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800126	TALUS	tal_brood2_cave	AREA	8	-102.40	-69.00	-205.20	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Dungeon	Brood Cave 2	1	TURN	0	0	-	idle	0	0	0	300
+800127	TALUS	tal_brood5_cave	AREA	10	-160.80	-50.00	-80.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800128	TALUS	tal_brood5_cave	AREA	10	-172.80	-49.70	-82.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800129	TALUS	tal_brood5_cave	AREA	11	-98.10	-54.90	-88.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800130	TALUS	tal_brood5_cave	AREA	11	-143.20	-54.00	-81.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800131	TALUS	tal_brood5_cave	AREA	11	-101.30	-38.90	-88.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800132	TALUS	tal_brood5_cave	AREA	11	-127.70	-38.20	-81.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800133	TALUS	tal_brood5_cave	AREA	11	-110.80	-54.40	-81.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800134	TALUS	tal_brood5_cave	AREA	12	-171.90	-53.20	-113.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800135	TALUS	tal_brood5_cave	AREA	14	-79.70	-61.60	-63.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800136	TALUS	tal_brood5_cave	AREA	14	-79.70	-58.10	-41.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800137	TALUS	tal_brood5_cave	AREA	16	-107.00	-58.00	-27.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800138	TALUS	tal_brood5_cave	AREA	17	-108.90	-43.30	-9.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800139	TALUS	tal_brood5_cave	AREA	18	-136.00	-57.40	-25.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800140	TALUS	tal_brood5_cave	AREA	19	16.00	-21.60	-17.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800141	TALUS	tal_brood5_cave	AREA	2	-31.50	-30.00	-24.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800142	TALUS	tal_brood5_cave	AREA	2	-15.50	-28.10	-27.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800143	TALUS	tal_brood5_cave	AREA	2	-12.20	-30.20	-50.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800144	TALUS	tal_brood5_cave	AREA	20	17.50	-35.10	-82.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800145	TALUS	tal_brood5_cave	AREA	20	0.40	-67.50	-67.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800146	TALUS	tal_brood5_cave	AREA	20	17.50	-35.40	-67.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800147	TALUS	tal_brood5_cave	AREA	20	-9.80	-35.10	-78.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800148	TALUS	tal_brood5_cave	AREA	21	-31.10	-35.50	-64.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800149	TALUS	tal_brood5_cave	AREA	22	-57.70	-51.50	-112.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800150	TALUS	tal_brood5_cave	AREA	22	-13.60	-43.50	-107.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800151	TALUS	tal_brood5_cave	AREA	22	-49.10	-48.00	-98.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800152	TALUS	tal_brood5_cave	AREA	22	-18.20	-43.00	-90.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800153	TALUS	tal_brood5_cave	AREA	23	-129.40	-53.80	-112.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800154	TALUS	tal_brood5_cave	AREA	24	-124.20	-60.40	-141.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800155	TALUS	tal_brood5_cave	AREA	24	-104.20	-67.00	-135.30	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800156	TALUS	tal_brood5_cave	AREA	25	-46.60	-68.70	-114.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800157	TALUS	tal_brood5_cave	AREA	26	8.60	-72.00	-111.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800158	TALUS	tal_brood5_cave	AREA	27	54.40	-66.10	-90.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800159	TALUS	tal_brood5_cave	AREA	27	44.70	-67.40	-69.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800160	TALUS	tal_brood5_cave	AREA	27	40.30	-69.00	-113.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800161	TALUS	tal_brood5_cave	AREA	27	24.10	-68.20	-97.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800162	TALUS	tal_brood5_cave	AREA	27	53.90	-66.10	-81.90	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800163	TALUS	tal_brood5_cave	AREA	27	40.80	-67.30	-94.10	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800164	TALUS	tal_brood5_cave	AREA	28	-76.90	-65.90	-157.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800165	TALUS	tal_brood5_cave	AREA	28	-47.60	-66.70	-156.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800166	TALUS	tal_brood5_cave	AREA	28	-44.30	-66.00	-185.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800167	TALUS	tal_brood5_cave	AREA	28	-86.30	-66.10	-170.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800168	TALUS	tal_brood5_cave	AREA	29	-63.30	-66.40	-236.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800169	TALUS	tal_brood5_cave	AREA	29	-60.70	-65.30	-229.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800170	TALUS	tal_brood5_cave	AREA	3	-44.80	-29.60	-41.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800171	TALUS	tal_brood5_cave	AREA	4	-59.30	-43.40	-24.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800172	TALUS	tal_brood5_cave	AREA	4	-54.30	-39.80	-9.70	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800173	TALUS	tal_brood5_cave	AREA	5	-77.10	-47.30	-68.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800174	TALUS	tal_brood5_cave	AREA	5	-76.70	-30.10	-41.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800175	TALUS	tal_brood5_cave	AREA	5	-71.60	-47.20	-40.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800176	TALUS	tal_brood5_cave	AREA	5	-64.30	-30.40	-71.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800177	TALUS	tal_brood5_cave	AREA	5	-64.40	-31.10	-55.40	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800178	TALUS	tal_brood5_cave	AREA	6	-117.70	-49.30	-63.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800179	TALUS	tal_brood5_cave	AREA	6	-106.50	-36.20	-64.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800180	TALUS	tal_brood5_cave	AREA	6	-92.60	-49.90	-63.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800181	TALUS	tal_brood5_cave	AREA	8	-169.90	-49.50	-40.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800182	TALUS	tal_brood5_cave	AREA	8	-136.70	-49.30	-40.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800183	TALUS	tal_brood5_cave	AREA	8	-164.40	-49.70	-52.40	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800184	TALUS	tal_brood5_cave	AREA	9	-76.80	-71.30	-110.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800185	TALUS	tal_brood5_cave	AREA	9	-106.60	-69.60	-109.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800186	TALUS	tal_brood5_cave	AREA	9	-70.50	-38.20	-114.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Brood Cave 5	1	TURN	0	0	-	idle	0	0	0	300
+800187	TALUS	tal_chunker_bunker	AREA	3	3.59	0.25	-3.43	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800188	TALUS	tal_chunker_bunker	AREA	4	2.29	-12.00	35.41	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800189	TALUS	tal_chunker_bunker	AREA	4	-0.18	-12.00	27.36	0	1	a Chunker pest	chunker_pest_52_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800190	TALUS	tal_chunker_bunker	AREA	5	31.57	-12.00	27.91	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800191	TALUS	tal_chunker_bunker	AREA	5	27.48	-12.00	34.67	0	1	a Chunker pest	chunker_pest_52_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800192	TALUS	tal_chunker_bunker	AREA	7	-16.54	-16.00	75.31	0	1	a Chunker bruiser	chunker_bruiser_54_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800193	TALUS	tal_chunker_bunker	AREA	7	23.43	-16.00	82.42	0	1	a Chunker bruiser	chunker_bruiser_54_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800194	TALUS	tal_chunker_bunker	AREA	7	8.73	-16.00	57.63	0	1	a Chunker creep	chunker_creep_41_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800195	TALUS	tal_chunker_bunker	AREA	7	-7.10	-16.00	83.20	0	1	a Chunker creep	chunker_creep_41_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800196	TALUS	tal_chunker_bunker	AREA	7	14.86	-16.00	73.47	0	1	a Chunker creep	chunker_creep_41_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800197	TALUS	tal_chunker_bunker	AREA	7	8.97	-16.00	63.40	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800198	TALUS	tal_chunker_bunker	AREA	7	-1.38	-16.00	57.78	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800199	TALUS	tal_chunker_bunker	AREA	7	3.86	-16.00	78.03	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800200	TALUS	tal_chunker_bunker	AREA	8	57.21	-16.00	65.48	0	1	a Chunker braggart	chunker_braggart_58_h_att_n	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800201	TALUS	tal_chunker_bunker	AREA	8	69.19	-16.00	82.65	0	1	a Chunker bruiser	chunker_bruiser_54_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800202	TALUS	tal_chunker_bunker	AREA	8	44.67	-16.00	59.72	0	1	a Chunker bruiser	chunker_bruiser_54_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800203	TALUS	tal_chunker_bunker	AREA	8	80.43	-16.00	64.17	0	1	a Chunker bruiser	chunker_bruiser_54_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800204	TALUS	tal_chunker_bunker	AREA	8	57.15	-16.00	75.34	0	1	a Chunker creep	chunker_creep_41_h_agg_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800205	TALUS	tal_chunker_bunker	AREA	8	69.70	-16.00	59.38	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800206	TALUS	tal_chunker_bunker	AREA	8	46.75	-16.00	83.04	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800207	TALUS	tal_chunker_bunker	AREA	9	-39.31	-14.00	75.98	0	1	a Chunker braggart	chunker_braggart_58_h_att_n	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800208	TALUS	tal_chunker_bunker	AREA	9	-37.82	-14.00	83.02	0	1	a Chunker braggart	chunker_braggart_58_h_att_n	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800209	TALUS	tal_world	AREA	0	1369.50	29.00	1465.60	0	1	a Chunker goon	chunker_goon_48_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800210	TALUS	tal_world	AREA	0	1406.56	29.00	1446.33	0	1	a Chunker pest	chunker_pest_52_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800211	TALUS	tal_world	AREA	0	1375.41	29.00	1425.99	0	1	a Chunker pest	chunker_pest_52_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800212	TALUS	tal_world	AREA	0	1356.36	29.00	1446.01	0	1	a Chunker pest	chunker_pest_52_h_att_n	Dungeon	Chunker Bunker	3	LOITER	6	0	-	idle	0	0	0	300
+800213	TALUS	tal_coa_aclo_office	AREA	10	-14.40	7.00	-13.20	-3	1	A.C.L.O. officer	talus_dearic_coa_aclo_officer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800214	TALUS	tal_coa_aclo_office	AREA	10	-13.60	7.00	-15.00	33	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800215	TALUS	tal_coa_aclo_office	AREA	10	7.00	7.00	-2.40	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800216	TALUS	tal_coa_aclo_office	AREA	10	6.00	7.00	-13.50	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800217	TALUS	tal_coa_aclo_office	AREA	10	5.50	7.00	-10.10	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800218	TALUS	tal_coa_aclo_office	AREA	10	4.90	7.00	-6.40	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800219	TALUS	tal_coa_aclo_office	AREA	10	1.00	7.00	-8.10	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800220	TALUS	tal_coa_aclo_office	AREA	10	-3.90	7.00	-8.90	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800221	TALUS	tal_coa_aclo_office	AREA	10	3.00	7.00	-0.40	-1	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800222	TALUS	tal_coa_aclo_office	AREA	10	11.90	7.00	-4.50	91	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800223	TALUS	tal_coa_aclo_office	AREA	10	-8.30	7.00	-15.40	172	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800224	TALUS	tal_coa_aclo_office	AREA	10	-5.50	7.00	-4.60	-89	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800225	TALUS	tal_coa_aclo_office	AREA	10	-12.70	7.00	-13.50	-148	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800226	TALUS	tal_coa_aclo_office	AREA	11	-12.10	7.00	9.20	89	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800227	TALUS	tal_coa_aclo_office	AREA	11	-0.70	7.00	7.70	93	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800228	TALUS	tal_coa_aclo_office	AREA	11	-10.20	7.00	9.30	-91	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800229	TALUS	tal_coa_aclo_office	AREA	11	-0.30	7.00	11.30	101	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800230	TALUS	tal_coa_aclo_office	AREA	12	4.60	7.00	8.00	57	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800231	TALUS	tal_coa_aclo_office	AREA	12	13.50	7.00	12.20	-149	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800232	TALUS	tal_coa_aclo_office	AREA	12	11.80	7.00	10.00	89	1	Leeta Poandeu	talus_dearic_coa_aclo_top_slicer_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800233	TALUS	tal_coa_aclo_office	AREA	2	0.20	2.00	4.30	0	1	A.C.L.O. officer	talus_dearic_coa_aclo_officer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800234	TALUS	tal_coa_aclo_office	AREA	2	6.00	1.00	-4.50	91	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800235	TALUS	tal_coa_aclo_office	AREA	2	3.50	2.00	3.20	99	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800236	TALUS	tal_coa_aclo_office	AREA	2	-1.70	1.00	-2.80	-94	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800237	TALUS	tal_coa_aclo_office	AREA	2	-3.80	1.00	-3.00	86	1	A.C.L.O. saboteur	talus_dearic_coa_aclo_saboteur_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800238	TALUS	tal_coa_aclo_office	AREA	2	-6.70	1.00	10.90	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800239	TALUS	tal_coa_aclo_office	AREA	2	1.90	1.00	-2.80	-28	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800240	TALUS	tal_coa_aclo_office	AREA	2	0.24	1.01	-10.49	4	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800241	TALUS	tal_coa_aclo_office	AREA	2	0.30	1.00	0.00	-64	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800242	TALUS	tal_coa_aclo_office	AREA	2	-2.10	2.00	4.20	-52	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800243	TALUS	tal_coa_aclo_office	AREA	3	16.50	1.00	18.20	-91	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800244	TALUS	tal_coa_aclo_office	AREA	3	18.60	1.00	21.00	-9	1	A.C.L.O. saboteur	talus_dearic_coa_aclo_saboteur_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800245	TALUS	tal_coa_aclo_office	AREA	3	16.60	1.00	14.30	-79	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800246	TALUS	tal_coa_aclo_office	AREA	4	-18.60	1.00	21.10	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800247	TALUS	tal_coa_aclo_office	AREA	4	-15.90	1.00	14.70	81	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800248	TALUS	tal_coa_aclo_office	AREA	4	-20.00	1.00	16.40	-81	1	A.C.L.O. saboteur	talus_dearic_coa_aclo_saboteur_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800249	TALUS	tal_coa_aclo_office	AREA	4	-17.00	1.00	20.30	0	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800250	TALUS	tal_coa_aclo_office	AREA	5	15.50	1.00	-5.10	-35	1	A.C.L.O. saboteur	talus_dearic_coa_aclo_saboteur_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800251	TALUS	tal_coa_aclo_office	AREA	5	16.60	1.00	-5.50	177	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800252	TALUS	tal_coa_aclo_office	AREA	6	8.80	1.00	-18.60	69	1	A.C.L.O. officer	talus_dearic_coa_aclo_officer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800253	TALUS	tal_coa_aclo_office	AREA	6	16.00	1.00	-21.90	-9	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800254	TALUS	tal_coa_aclo_office	AREA	6	9.30	1.00	-22.50	27	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800255	TALUS	tal_coa_aclo_office	AREA	6	20.50	1.00	-19.70	86	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800256	TALUS	tal_coa_aclo_office	AREA	7	-3.70	1.00	-21.70	41	1	Mark Hieks	talus_dearic_coa_mark_hieks_100_h_inv_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800257	TALUS	tal_coa_aclo_office	AREA	8	-18.00	1.00	-17.70	-48	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800258	TALUS	tal_coa_aclo_office	AREA	8	-14.10	1.00	-21.20	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800259	TALUS	tal_coa_aclo_office	AREA	8	-10.00	1.00	-22.40	-10	1	A.C.L.O. saboteur	talus_dearic_coa_aclo_saboteur_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800260	TALUS	tal_coa_aclo_office	AREA	8	-18.90	1.00	-16.90	130	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800261	TALUS	tal_coa_aclo_office	AREA	8	-19.70	1.00	-22.00	46	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800262	TALUS	tal_coa_aclo_office	AREA	8	-10.50	1.00	-19.90	168	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800263	TALUS	tal_coa_aclo_office	AREA	8	-17.60	1.00	-19.80	-134	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800264	TALUS	tal_coa_aclo_office	AREA	9	-17.40	1.00	-4.50	-24	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800265	TALUS	tal_coa_aclo_office	AREA	9	-18.20	1.00	-2.80	153	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800266	TALUS	tal_world	PATROL	0	1307.81	42.43	-3160.25	0	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	PATROL	0	0	column	idle	0	0	0	300
+800267	TALUS	tal_world	PATROL	0	1280.90	42.20	-3138.79	0	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	1	PATROL	0	0	column	idle	0	0	0	300
+800268	TALUS	tal_world	AREA	0	1286.51	35.76	-3068.41	-73	1	A.C.L.O. officer	talus_dearic_coa_aclo_officer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800269	TALUS	tal_world	AREA	0	1294.13	35.82	-3123.84	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	2	LOITER	4	0	-	idle	0	0	0	300
+800270	TALUS	tal_world	AREA	0	1291.14	42.11	-3187.46	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800271	TALUS	tal_world	AREA	0	1266.80	42.02	-3164.59	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	1	TURN	0	0	-	idle	0	0	0	300
+800272	TALUS	tal_world	AREA	0	1251.94	32.64	-3140.38	0	1	A.C.L.O. personnel	talus_dearic_coa_aclo_personnel_30_h_agg_n	Dungeon	COA Aclo Office	2	LOITER	4	0	-	idle	0	0	0	300
+800273	TALUS	tal_world	AREA	0	1260.91	42.00	-3139.28	-61	1	A.C.L.O. slicer	talus_dearic_coa_aclo_slicer_41_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800274	TALUS	tal_world	AREA	0	1278.80	34.43	-3117.37	0	1	A.C.L.O. soldier	talus_dearic_coa_aclo_soldier_41_h_agg_n	Dungeon	COA Aclo Office	4	LOITER	8	0	-	idle	0	0	0	300
+800275	TALUS	tal_world	AREA	0	1291.64	34.42	-3189.81	-19	1	A.C.L.O. technician	talus_dearic_coa_aclo_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800276	TALUS	tal_world	AREA	0	1290.97	34.43	-3187.89	161	1	N.S.H. technician	talus_dearic_coa_lag_technician_35_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800277	TALUS	tal_world	AREA	0	1295.60	35.87	-3065.90	0	1	Rebel Investigator	talus_dearic_coa_rebel_investigator_42_h_agg_n	Dungeon	COA Aclo Office	4	LOITER	8	0	-	idle	0	0	0	300
+800278	TALUS	tal_world	AREA	0	1255.30	34.48	-3077.15	0	1	Rebel Investigator	talus_dearic_coa_rebel_investigator_42_h_agg_n	Dungeon	COA Aclo Office	4	LOITER	8	0	-	idle	0	0	0	300
+800279	TALUS	tal_world	AREA	0	1283.94	35.76	-3075.79	36	1	Rebel Investigator	talus_dearic_coa_rebel_investigator_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800280	TALUS	tal_world	AREA	0	1278.85	35.76	-3063.39	81	1	Rebel Investigator	talus_dearic_coa_rebel_investigator_42_h_agg_n	Dungeon	COA Aclo Office	1	IDLE	0	0	-	idle	0	0	0	300
+800281	TALUS	tal_world	AREA	0	2968.46	16.85	6038.48	0	1	a CorSec Captain	corsec_captain_33_h_att_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800282	TALUS	tal_world	AREA	0	3014.58	19.17	6061.25	0	1	a CorSec Sergeant	corsec_sergeant_32_h_att_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800283	TALUS	tal_world	AREA	0	2991.24	31.75	6087.75	0	1	a CorSec Sergeant	corsec_sergeant_32_h_att_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800284	TALUS	tal_world	AREA	0	3041.34	30.83	6055.31	0	1	a CorSec Sergeant	corsec_sergeant_32_h_att_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800285	TALUS	tal_world	AREA	0	2964.66	17.50	6044.79	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800286	TALUS	tal_world	AREA	0	3009.73	19.77	6064.56	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800287	TALUS	tal_world	AREA	0	2992.79	30.47	6085.03	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800288	TALUS	tal_world	AREA	0	3044.97	31.46	6056.28	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800289	TALUS	tal_world	AREA	0	3006.10	20.80	6071.41	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800290	TALUS	tal_world	AREA	0	3077.89	35.00	6140.21	0	1	a Flail butcher	flail_butcher_31_h_agg_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800291	TALUS	tal_world	AREA	0	3073.57	35.00	6141.72	0	1	a Flail cutthroat	flail_cutthroat_30_h_agg_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800292	TALUS	tal_world	AREA	0	3071.99	42.58	6093.75	0	1	a Flail cutthroat	flail_cutthroat_30_h_agg_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800293	TALUS	tal_world	AREA	0	3040.31	34.24	6121.26	0	1	a Flail cutthroat	flail_cutthroat_30_h_agg_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800294	TALUS	tal_world	AREA	0	3062.95	32.24	6109.61	0	1	a Flail cutthroat	flail_cutthroat_30_h_agg_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800295	TALUS	tal_world	AREA	0	3057.30	32.42	6111.63	0	1	a Flail cutthroat	flail_cutthroat_30_h_agg_n	POI	CorSec vs. Flail Battle	2	LOITER	4	0	-	idle	0	0	0	300
+800296	TALUS	tal_world	AREA	0	3044.17	33.79	6117.80	0	1	a Flail enforcer	flail_enforcer_30_h_agg_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800297	TALUS	tal_world	AREA	0	3063.69	31.78	6104.48	0	1	a Flail enforcer	flail_enforcer_30_h_agg_n	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle	0	0	0	300
+800298	TALUS	tal_dearic_cantina	AREA	3	3.20	-0.89	5.70	90	1	Mort	clone_mort_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	npc_standing_drinking	0	999	0	300
+800299	TALUS	tal_dearic_cantina	AREA	3	-4.32	-0.89	5.71	179	1	Radlee Mathiss	radlee_mathiss_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800300	TALUS	tal_dearic_cantina	AREA	4	20.02	-0.89	-19.77	3	1	Kathikiis Ruwahurr	kathikiis_ruwahurr_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800301	TALUS	tal_dearic_cantina	AREA	6	0.70	-0.89	-18.50	1	1	Thom Steele	ep3_mining_thom_steele_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300
+800302	TALUS	tal_dearic_cantina	AREA	8	-3.75	-0.89	-19.57	-16	1	Nurla Slinthiss	nurla_slinthiss_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800303	TALUS	tal_dearic_capitol	AREA	2	-1.55	3.14	22.87	176	1	Minister Haleen Snowline	haleen_snowline_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800304	TALUS	tal_dearic_capitol	AREA	7	-35.10	1.29	-2.78	81	1	Prime Minister Hagrin Zeed	hagrin_zeed_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800305	TALUS	tal_dearic_hospital	AREA	2	2.73	0.18	3.94	178	1	Ambassador Champhra Biahin	ambassador_champhra_biahin_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	999	0	300
+800306	TALUS	tal_dearic_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800307	TALUS	tal_dearic_hotel	AREA	10	-24.80	1.00	-13.70	0	1	Claw Droid	clone_claw_droid_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	300
+800308	TALUS	tal_dearic_hotel	AREA	4	-8.20	1.00	2.00	0	1	Claw Thug	clone_claw_thug_20_h_att_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800309	TALUS	tal_dearic_hotel	AREA	4	8.90	1.00	-4.30	0	1	Claw Thug	clone_claw_thug_20_h_att_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800310	TALUS	tal_dearic_hotel	AREA	4	5.60	1.00	-14.30	0	1	Claw Thug	clone_claw_thug_20_h_att_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800311	TALUS	tal_dearic_hotel	AREA	5	18.30	1.30	10.60	0	1	Claw Thug	clone_claw_thug_20_h_att_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800312	TALUS	tal_dearic_hotel	AREA	7	-19.50	1.60	-6.50	0	1	Claw Bodyguard	clone_claw_bodyguard_i_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800313	TALUS	tal_dearic_hotel	AREA	7	-19.50	1.60	-9.70	0	1	Claw Bodyguard	clone_claw_bodyguard_ii_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800314	TALUS	tal_dearic_starport	AREA	1	-0.03	0.64	73.02	0	1	Chassis Dealer	chassis_dealer_iii_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800315	TALUS	tal_dearic_starport	AREA	4	10.70	0.60	68.30	163	1	Omkoo	talus_omkoo_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800316	TALUS	tal_dearic_theater	AREA	1	7.16	0.60	-3.22	178	1	a storyteller vendor	storyteller_vendor_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800317	TALUS	tal_dearic_theater	AREA	8	22.08	2.13	63.70	0	1	a theater manager	quest_crowd_pleaser_theater_manager_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800318	TALUS	tal_dearic_theater	AREA	9	-25.33	2.13	74.17	90	1	Brother Extok Evin (Rebel Pilot Trainer)	reb_brother_extok_evin_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair	0	999	0	300
+800319	TALUS	tal_dearic_theater	AREA	9	-19.33	2.13	76.16	166	1	Mourno Draver	mourno_draver_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800320	TALUS	tal_dearic_trins_evnar_house	AREA	3	1.90	0.70	-1.90	111	1	Sul Prine (a speeder bike racer)	mtp_quest_bike_racer_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800321	TALUS	tal_world	AREA	0	323.34	6.00	-3097.68	85	1	a commoner	commoner_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800322	TALUS	tal_world	AREA	0	378.73	6.00	-2756.49	-1	1	a commoner	commoner_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800323	TALUS	tal_world	AREA	0	152.66	6.00	-2931.97	84	1	a commoner	commoner_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800324	TALUS	tal_world	AREA	0	433.15	6.00	-3040.97	-178	1	Erisi Plmary	rtp_leia_bothan_spy_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800325	TALUS	tal_world	AREA	0	731.00	6.00	-3081.00	105	1	Shane	smuggler_broker_shane_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800326	TALUS	tal_world	AREA	0	431.00	6.00	-3014.00	-38	1	Dak Ralter	syren5_rebel_questgiver_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800327	TALUS	tal_world	AREA	0	649.03	6.00	-3190.21	-136	1	Dathnaeya Loessin	talus_dearic_coa_dathnaeya_loessin_100_h_inv_n	City	Dearic	1	IDLE	0	0	-	idle	0	0	0	300
+800328	TALUS	tal_detainment_center	AREA	10	32.97	-22.99	114.04	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800329	TALUS	tal_detainment_center	AREA	10	41.75	-22.99	114.42	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800330	TALUS	tal_detainment_center	AREA	10	38.13	-20.98	143.35	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800331	TALUS	tal_detainment_center	AREA	11	-68.32	-22.99	117.38	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800332	TALUS	tal_detainment_center	AREA	11	-67.00	-20.99	134.10	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800333	TALUS	tal_detainment_center	AREA	11	-66.39	-20.98	147.53	0	1	an Imperial Corporal	imp_corporal_16_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800334	TALUS	tal_detainment_center	AREA	12	20.01	-22.99	223.83	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800335	TALUS	tal_detainment_center	AREA	12	20.15	-22.99	214.67	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800336	TALUS	tal_detainment_center	AREA	12	47.44	-20.98	219.12	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800337	TALUS	tal_detainment_center	AREA	14	-19.53	-22.98	229.09	0	1	an Imperial Army Captain	imp_army_captain_100_h_inv_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800338	TALUS	tal_detainment_center	AREA	14	-3.06	-22.98	236.23	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800339	TALUS	tal_detainment_center	AREA	15	-76.48	-22.98	259.22	0	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800340	TALUS	tal_detainment_center	AREA	15	-60.57	-22.98	259.72	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800341	TALUS	tal_detainment_center	AREA	15	-38.91	-22.98	259.37	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800342	TALUS	tal_detainment_center	AREA	16	-2.67	-22.98	269.09	0	1	an Imperial Army Captain	imp_army_captain_100_h_inv_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800343	TALUS	tal_detainment_center	AREA	16	6.70	-22.98	280.28	0	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800344	TALUS	tal_detainment_center	AREA	16	5.78	-22.98	255.12	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	4	LOITER	8	0	-	idle	0	0	0	300
+800345	TALUS	tal_detainment_center	AREA	17	4.85	-22.98	246.88	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800346	TALUS	tal_detainment_center	AREA	17	44.65	-22.98	257.05	0	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800347	TALUS	tal_detainment_center	AREA	17	40.06	-22.98	272.39	0	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800348	TALUS	tal_detainment_center	AREA	2	-0.18	0.25	3.15	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800349	TALUS	tal_detainment_center	AREA	4	5.97	-8.98	22.84	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800350	TALUS	tal_detainment_center	AREA	4	-1.38	-8.98	30.48	0	1	an Imperial Staff Corporal	imp_staff_corporal_17_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800351	TALUS	tal_detainment_center	AREA	5	-37.48	-8.98	26.86	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800352	TALUS	tal_detainment_center	AREA	6	-55.44	-8.98	9.93	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800353	TALUS	tal_detainment_center	AREA	6	-55.31	-8.989	45.53	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800354	TALUS	tal_detainment_center	AREA	6	-51.21	-8.98	9.09	0	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800355	TALUS	tal_detainment_center	AREA	6	-78.12	-8.98	21.70	0	1	an Imperial noncom	imp_noncom_14_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800356	TALUS	tal_detainment_center	AREA	6	-53.49	-8.98	60.92	0	1	an Imperial noncom	imp_noncom_14_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800357	TALUS	tal_detainment_center	AREA	6	-50.50	-8.98	-5.57	0	1	a special missions engineer	special_missions_engineer_16_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800358	TALUS	tal_detainment_center	AREA	7	32.39	-16.98	60.95	0	1	an Imperial High General	imp_high_general_29_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800359	TALUS	tal_detainment_center	AREA	7	23.93	-16.98	66.41	0	1	an Imperial Staff Corporal	imp_staff_corporal_17_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800360	TALUS	tal_detainment_center	AREA	7	13.13	-16.98	60.65	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	1	TURN	0	0	-	idle	0	0	0	300
+800361	TALUS	tal_detainment_center	AREA	8	-10.44	-16.98	75.68	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	2	LOITER	4	0	-	idle	0	0	0	300
+800362	TALUS	tal_detainment_center	AREA	9	-42.68	-22.98	112.56	86	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	POI	Detainment Center	1	IDLE	0	0	-	idle	0	0	0	300
+800363	TALUS	tal_detainment_center	AREA	9	13.99	-22.98	112.51	-91	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	POI	Detainment Center	1	IDLE	0	0	-	idle	0	0	0	300
+800364	TALUS	tal_detainment_center	AREA	9	13.69	-22.98	202.12	-99	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	POI	Detainment Center	1	IDLE	0	0	-	idle	0	0	0	300
+800365	TALUS	tal_detainment_center	AREA	9	-42.69	-22.98	202.15	91	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	POI	Detainment Center	1	IDLE	0	0	-	idle	0	0	0	300
+800366	TALUS	tal_detainment_center	AREA	9	-13.70	-22.98	118.85	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800367	TALUS	tal_detainment_center	AREA	9	7.60	-22.98	156.22	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800368	TALUS	tal_detainment_center	AREA	9	-15.95	-22.98	194.22	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800369	TALUS	tal_detainment_center	AREA	9	-36.71	-22.98	155.53	0	1	a Stormtrooper	stormtrooper_25_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800370	TALUS	tal_world	AREA	0	4988.11	450.13	-6009.44	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800371	TALUS	tal_world	AREA	0	4970.00	450.10	-6017.91	0	1	a detention security guard	imp_security_guard_detention_15_h_att_n	POI	Detainment Center	3	LOITER	6	0	-	idle	0	0	0	300
+800372	TALUS	tal_traitor_erran	AREA	2	-3.74	0.25	-1.02	-90	1	a Sif mercenary	trandoshan_sif_02_43_h_agg_n	POI	Erran Sif	1	IDLE	0	0	-	idle	0	0	0	300
+800373	TALUS	tal_traitor_erran	AREA	4	3.81	-3.25	5.06	-179	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	IDLE	0	0	-	idle	0	0	0	300
+800374	TALUS	tal_traitor_erran	AREA	5	-7.45	-6.75	-6.58	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800375	TALUS	tal_traitor_erran	AREA	5	-2.40	-6.75	-6.82	0	1	a Sif mercenary	trandoshan_sif_02_43_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800376	TALUS	tal_traitor_erran	AREA	6	-4.27	-6.76	-15.23	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800377	TALUS	tal_traitor_erran	AREA	6	6.57	-6.76	-16.04	0	1	a Sif mercenary	trandoshan_sif_02_43_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800378	TALUS	tal_traitor_erran	AREA	7	5.17	-6.75	-2.12	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800379	TALUS	tal_traitor_erran	AREA	7	5.31	-6.75	-7.81	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800380	TALUS	tal_traitor_erran	AREA	9	-5.53	-13.75	0.49	0	1	a Sif mercenary	trandoshan_sif_02_43_h_agg_n	POI	Erran Sif	1	LOITER	2	0	-	idle	0	0	0	300
+800381	TALUS	tal_traitor_erran	AREA	9	1.42	-13.75	-14.79	0	1	Doak Sif	doak_sif_48_h_agg_n	POI	Erran Sif	1	IDLE	0	0	-	idle	0	0	0	1800
+800382	TALUS	tal_traitor_erran	AREA	9	-4.02	-13.75	-16.55	0	1	Erran Sif	erran_sif_67_h_agg_n	POI	Erran Sif	1	IDLE	0	0	-	idle	0	0	0	1800
+800383	TALUS	tal_traitor_erran	AREA	9	-6.90	-13.75	-13.07	0	1	Hirsch Sif	hirsch_sif_57_h_agg_n	POI	Erran Sif	1	IDLE	0	0	-	idle	0	0	0	1800
+800384	TALUS	tal_traitor_erran	AREA	9	0.25	-13.75	0.77	0	1	a Sif mercenary	trandoshan_sif_02_43_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800385	TALUS	tal_world	AREA	0	2143.43	122.00	-5609.57	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800386	TALUS	tal_world	AREA	0	2151.51	122.00	-5612.75	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800387	TALUS	tal_world	AREA	0	2166.47	122.00	-5628.96	0	1	a Sif mercenary	trandoshan_sif_36_h_agg_n	POI	Erran Sif	1	TURN	0	0	-	idle	0	0	0	300
+800388	TALUS	tal_genetech_syndicate	AREA	10	-1.00	-12.00	79.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800389	TALUS	tal_genetech_syndicate	AREA	10	-0.60	-12.00	55.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800390	TALUS	tal_genetech_syndicate	AREA	10	9.40	-12.00	68.10	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800391	TALUS	tal_genetech_syndicate	AREA	14	11.90	-12.00	99.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800392	TALUS	tal_genetech_syndicate	AREA	15	-0.80	-12.00	116.80	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800393	TALUS	tal_genetech_syndicate	AREA	16	-4.40	-12.00	98.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800394	TALUS	tal_genetech_syndicate	AREA	19	51.80	-20.00	106.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800395	TALUS	tal_genetech_syndicate	AREA	21	52.30	-20.00	153.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800396	TALUS	tal_genetech_syndicate	AREA	21	41.60	-20.00	138.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800397	TALUS	tal_genetech_syndicate	AREA	23	83.60	-20.00	140.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle	0	0	0	300
+800398	TALUS	tal_genetech_syndicate	AREA	24	105.50	-20.00	154.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800399	TALUS	tal_genetech_syndicate	AREA	24	95.30	-20.00	150.30	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800400	TALUS	tal_genetech_syndicate	AREA	25	105.30	-20.00	133.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800401	TALUS	tal_genetech_syndicate	AREA	25	96.20	-20.00	126.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800402	TALUS	tal_genetech_syndicate	AREA	26	105.10	-20.00	114.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800403	TALUS	tal_genetech_syndicate	AREA	26	99.10	-20.00	108.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800404	TALUS	tal_genetech_syndicate	AREA	27	61.70	-20.00	106.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800405	TALUS	tal_genetech_syndicate	AREA	27	71.80	-20.00	111.10	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800406	TALUS	tal_genetech_syndicate	AREA	28	66.70	-20.00	133.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800407	TALUS	tal_genetech_syndicate	AREA	28	68.80	-20.00	124.00	0	1	6-POC	reb_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800408	TALUS	tal_genetech_syndicate	AREA	29	40.10	-20.00	54.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800409	TALUS	tal_genetech_syndicate	AREA	29	35.70	-20.00	62.30	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800410	TALUS	tal_genetech_syndicate	AREA	29	16.30	-20.00	40.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800411	TALUS	tal_genetech_syndicate	AREA	29	0.00	-20.00	56.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800412	TALUS	tal_genetech_syndicate	AREA	31	2.30	-20.00	117.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800413	TALUS	tal_genetech_syndicate	AREA	31	-16.00	-20.00	103.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800414	TALUS	tal_genetech_syndicate	AREA	31	19.40	-20.00	102.50	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800415	TALUS	tal_genetech_syndicate	AREA	34	68.70	-20.00	16.50	-42	1	an arachne brood mate	arachne_brood_mate_45_c_agg_n	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle	0	0	0	300
+800416	TALUS	tal_genetech_syndicate	AREA	34	47.70	-20.00	15.20	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800417	TALUS	tal_genetech_syndicate	AREA	34	65.00	-20.00	27.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800418	TALUS	tal_genetech_syndicate	AREA	34	45.50	-20.00	25.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800419	TALUS	tal_genetech_syndicate	AREA	34	55.60	-20.00	23.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800420	TALUS	tal_genetech_syndicate	AREA	35	56.50	-20.00	59.10	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800421	TALUS	tal_genetech_syndicate	AREA	37	68.90	-50.00	51.00	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800422	TALUS	tal_genetech_syndicate	AREA	37	58.80	-50.00	39.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800423	TALUS	tal_genetech_syndicate	AREA	37	63.90	-50.00	63.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800424	TALUS	tal_genetech_syndicate	AREA	39	63.50	-50.00	-2.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle	0	0	0	300
+800425	TALUS	tal_genetech_syndicate	AREA	40	37.50	-50.00	0.70	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800426	TALUS	tal_genetech_syndicate	AREA	40	46.10	-50.00	-4.70	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800427	TALUS	tal_genetech_syndicate	AREA	41	27.20	-50.00	21.10	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800428	TALUS	tal_genetech_syndicate	AREA	41	42.90	-50.00	28.30	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800429	TALUS	tal_genetech_syndicate	AREA	43	8.80	-50.00	92.40	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800430	TALUS	tal_genetech_syndicate	AREA	43	27.60	-50.00	72.20	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800431	TALUS	tal_genetech_syndicate	AREA	43	12.00	-50.00	60.50	0	1	a brood X aurek arachne	arachne_brood_x_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800432	TALUS	tal_genetech_syndicate	AREA	45	-121.10	-50.00	31.20	65	1	an arachne brood queen	arachne_brood_queen_45_c_agg_n	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle	0	0	0	300
+800433	TALUS	tal_genetech_syndicate	AREA	45	-132.00	-50.00	82.40	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800434	TALUS	tal_genetech_syndicate	AREA	45	-120.70	-50.00	61.60	0	1	a brood X arachne	arachne_brood_x_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800435	TALUS	tal_genetech_syndicate	AREA	45	-116.00	-50.00	81.50	0	1	a brood X aurek arachne	arachne_brood_x_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800436	TALUS	tal_genetech_syndicate	AREA	45	-94.50	-50.00	61.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800437	TALUS	tal_genetech_syndicate	AREA	45	-85.50	-50.00	48.50	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800438	TALUS	tal_genetech_syndicate	AREA	45	-84.70	-50.00	32.40	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800439	TALUS	tal_genetech_syndicate	AREA	45	-59.80	-50.00	33.90	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800440	TALUS	tal_genetech_syndicate	AREA	45	-74.50	-50.00	76.70	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800441	TALUS	tal_genetech_syndicate	AREA	45	-72.10	-50.00	38.60	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800442	TALUS	tal_genetech_syndicate	AREA	45	-69.40	-50.00	72.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800443	TALUS	tal_genetech_syndicate	AREA	45	-65.70	-50.00	56.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800444	TALUS	tal_genetech_syndicate	AREA	9	51.90	-12.00	55.60	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800445	TALUS	tal_genetech_syndicate	AREA	9	39.90	-12.00	63.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle	0	0	0	300
+800446	TALUS	tal_world	AREA	0	7.39	42.83	-3543.46	-48	1	Jana T'bayr	talus_dearic_genetech_syndicate_jana_100_h_inv_n	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle	0	0	0	300
+800447	TALUS	tal_giant_decay_mite_cave	AREA	10	-56.86	-83.61	-145.39	0	1	a giant decay mite guardian	mite_giant_decay_guardian_19_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	1800
+800448	TALUS	tal_giant_decay_mite_cave	AREA	10	-27.08	-68.80	-129.12	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800449	TALUS	tal_giant_decay_mite_cave	AREA	10	-29.01	-72.17	-148.64	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800450	TALUS	tal_giant_decay_mite_cave	AREA	11	-87.27	-91.71	-90.55	0	1	a giant decay mite queen	mite_giant_decay_queen_22_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	1800
+800451	TALUS	tal_giant_decay_mite_cave	AREA	11	-102.51	-91.65	-118.69	0	1	a giant decay mite guardian	mite_giant_decay_guardian_19_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	900
+800452	TALUS	tal_giant_decay_mite_cave	AREA	11	-93.96	-92.86	-107.44	0	1	a giant decay mite guardian	mite_giant_decay_guardian_19_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	900
+800453	TALUS	tal_giant_decay_mite_cave	AREA	2	7.20	-15.98	-25.66	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800454	TALUS	tal_giant_decay_mite_cave	AREA	3	0.00	-32.33	-63.37	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800455	TALUS	tal_giant_decay_mite_cave	AREA	3	15.70	-32.05	-78.30	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800456	TALUS	tal_giant_decay_mite_cave	AREA	3	-9.81	-32.42	-80.83	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800457	TALUS	tal_giant_decay_mite_cave	AREA	4	41.42	-37.86	-63.00	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800458	TALUS	tal_giant_decay_mite_cave	AREA	4	45.87	-38.57	-90.75	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800459	TALUS	tal_giant_decay_mite_cave	AREA	4	43.15	-38.02	-95.17	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800460	TALUS	tal_giant_decay_mite_cave	AREA	4	48.20	-38.57	-59.00	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800461	TALUS	tal_giant_decay_mite_cave	AREA	4	50.05	-38.12	-96.70	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800462	TALUS	tal_giant_decay_mite_cave	AREA	5	23.16	-37.90	-120.73	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800463	TALUS	tal_giant_decay_mite_cave	AREA	5	0.18	-37.66	-148.43	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800464	TALUS	tal_giant_decay_mite_cave	AREA	5	-8.57	-36.73	-140.30	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800465	TALUS	tal_giant_decay_mite_cave	AREA	5	50.42	-40.03	-123.23	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800466	TALUS	tal_giant_decay_mite_cave	AREA	5	65.67	-46.41	-146.69	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800467	TALUS	tal_giant_decay_mite_cave	AREA	5	35.85	-46.93	-150.52	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800468	TALUS	tal_giant_decay_mite_cave	AREA	5	54.76	-48.87	-181.75	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800469	TALUS	tal_giant_decay_mite_cave	AREA	6	-0.71	-55.99	-180.88	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800470	TALUS	tal_giant_decay_mite_cave	AREA	6	-34.43	-58.50	-180.37	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800471	TALUS	tal_giant_decay_mite_cave	AREA	7	0.91	-55.44	-231.24	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800472	TALUS	tal_giant_decay_mite_cave	AREA	7	-7.90	-56.71	-237.60	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800473	TALUS	tal_giant_decay_mite_cave	AREA	7	-21.96	-55.21	-259.61	0	1	a giant decay mite hatchling	mite_giant_decay_hatchling_2_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800474	TALUS	tal_giant_decay_mite_cave	AREA	7	-13.03	-57.77	-213.07	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800475	TALUS	tal_giant_decay_mite_cave	AREA	7	-21.78	-57.51	-243.57	0	1	a giant decay mite protector	mite_giant_decay_protector_13_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800476	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.87	-89.39	-141.39	0	1	a giant decay mite guardian	mite_giant_decay_guardian_19_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	900
+800477	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.64	-94.30	-139.37	0	1	a giant decay mite guardian	mite_giant_decay_guardian_19_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	900
+800478	TALUS	tal_giant_decay_mite_cave	AREA	8	-85.56	-61.59	-100.03	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800479	TALUS	tal_giant_decay_mite_cave	AREA	8	-83.27	-62.27	-90.03	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800480	TALUS	tal_giant_decay_mite_cave	AREA	8	-57.17	-62.11	-193.58	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800481	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.10	-61.73	-167.21	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800482	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.74	-65.32	-173.49	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800483	TALUS	tal_giant_decay_mite_cave	AREA	8	-121.48	-60.77	-165.67	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800484	TALUS	tal_giant_decay_mite_cave	AREA	8	-100.31	-62.14	-128.71	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800485	TALUS	tal_giant_decay_mite_cave	AREA	8	-99.67	-61.46	-100.33	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800486	TALUS	tal_giant_decay_mite_cave	AREA	9	-44.79	-61.66	-86.89	0	1	a giant decay mite harvester	mite_giant_decay_harvester_10_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800487	TALUS	tal_giant_decay_mite_cave	AREA	9	-23.33	-61.45	-95.82	0	1	a giant decay mite harvester	mite_giant_decay_harvester_10_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800488	TALUS	tal_giant_decay_mite_cave	AREA	9	-43.27	-61.68	-108.75	0	1	a giant decay mite harvester	mite_giant_decay_harvester_10_c_att_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800489	TALUS	tal_giant_decay_mite_cave	AREA	9	-22.11	-61.79	-88.48	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800490	TALUS	tal_giant_decay_mite_cave	AREA	9	-56.78	-60.43	-112.77	0	1	a giant decay mite sentry	mite_giant_decay_sentry_16_c_agg_n	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle	0	0	0	300
+800491	TALUS	tal_world	AREA	0	-5527.68	35.91	-4702.48	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800492	TALUS	tal_world	AREA	0	-5515.20	36.81	-4715.94	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800493	TALUS	tal_world	AREA	0	-5555.06	47.02	-4707.26	0	1	a giant decay mite soldier	mite_giant_decay_soldier_15_c_agg_n	POI	Giant Decay Mite Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800494	TALUS	tal_giant_fynock_cave	AREA	11	-83.49	-93.59	-112.69	0	1	a berserk kahmurra	kahmurra_berserk_46_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800495	TALUS	tal_giant_fynock_cave	AREA	11	-101.86	-91.10	-110.99	0	1	a berserk kahmurra	kahmurra_berserk_46_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800496	TALUS	tal_giant_fynock_cave	AREA	11	-91.17	-92.67	-95.88	0	1	a rabid mutant kahmurra	kahmurra_mutant_rabid_40_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800497	TALUS	tal_giant_fynock_cave	AREA	4	49.48	-38.08	-97.02	0	1	a decay mite	mite_decay_36_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	900
+800498	TALUS	tal_giant_fynock_cave	AREA	4	39.96	-38.14	-70.24	0	1	a putrid decay mite hatchling	mite_decay_hatchling_putrid_4_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	900
+800499	TALUS	tal_giant_fynock_cave	AREA	4	40.82	-37.97	-98.59	0	1	a rot mite	mite_rot_39_c_att_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	900
+800500	TALUS	tal_giant_fynock_cave	AREA	5	65.03	-50.22	-165.98	0	1	a clipped fynock	fynock_clipped_36_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	900
+800501	TALUS	tal_giant_fynock_cave	AREA	5	56.71	-46.23	-146.29	0	1	a feared fynock youth	fynock_youth_feared_50_c_att_n	POI	Giant Fynock Cave	3	LOITER	6	0	-	idle	0	0	0	900
+800502	TALUS	tal_giant_fynock_cave	AREA	5	30.15	-52.00	-179.02	0	1	a feared fynock youth	fynock_youth_feared_50_c_att_n	POI	Giant Fynock Cave	3	LOITER	6	0	-	idle	0	0	0	900
+800503	TALUS	tal_giant_fynock_cave	AREA	5	35.65	-49.55	-164.27	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	600
+800504	TALUS	tal_giant_fynock_cave	AREA	5	-7.75	-36.81	-139.23	0	1	a minor sludge panther	sludge_panther_minor_37_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800505	TALUS	tal_giant_fynock_cave	AREA	5	-2.07	-37.37	-144.19	0	1	a sludge panther	sludge_panther_44_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	900
+800506	TALUS	tal_giant_fynock_cave	AREA	5	46.36	-48.29	-180.84	0	1	a thug	thug_100_h_inv_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	300
+800507	TALUS	tal_giant_fynock_cave	AREA	7	-8.56	-56.08	-231.76	0	1	a guf drolg	guf_drolg_42_c_att_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800508	TALUS	tal_giant_fynock_cave	AREA	7	-22.34	-55.36	-258.39	0	1	a guf drolg female	guf_drolg_female_43_c_att_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800509	TALUS	tal_giant_fynock_cave	AREA	7	-13.64	-57.72	-216.31	0	1	a minor guf drolg	guf_drolg_minor_36_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800510	TALUS	tal_giant_fynock_cave	AREA	8	-92.41	-94.43	-136.31	0	1	a berserk kahmurra	kahmurra_berserk_46_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800511	TALUS	tal_giant_fynock_cave	AREA	8	-116.13	-61.66	-200.17	0	1	a clipped fynock	fynock_clipped_36_c_att_n	POI	Giant Fynock Cave	3	LOITER	6	0	-	idle	0	0	0	1200
+800512	TALUS	tal_giant_fynock_cave	AREA	8	-66.97	-61.93	-196.64	0	1	a feared fynock youth	fynock_youth_feared_50_c_att_n	POI	Giant Fynock Cave	3	LOITER	6	0	-	idle	0	0	0	1200
+800513	TALUS	tal_giant_fynock_cave	AREA	8	-100.44	-62.22	-127.66	0	1	a frenzied fynock guardian	fynock_frenzied_guardian_11_c_agg_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800514	TALUS	tal_giant_fynock_cave	AREA	8	-63.32	-62.00	-171.58	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800515	TALUS	tal_giant_fynock_cave	AREA	8	-121.09	-61.41	-171.44	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800516	TALUS	tal_giant_fynock_cave	AREA	8	-97.36	-62.11	-105.42	0	1	a glutted fynock queen	fynock_glutted_queen_14_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800517	TALUS	tal_giant_fynock_cave	AREA	8	-85.22	-93.14	-142.44	0	1	a Chunker punk	chunker_punk_2_h_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800518	TALUS	tal_giant_fynock_cave	AREA	9	-44.37	-61.90	-84.30	0	1	a clipped fynock	fynock_clipped_36_c_att_n	POI	Giant Fynock Cave	3	LOITER	6	0	-	idle	0	0	0	1200
+800519	TALUS	tal_giant_fynock_cave	AREA	9	-8.02	-60.33	-96.64	0	1	a frenzied fynock guardian	fynock_frenzied_guardian_11_c_agg_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800520	TALUS	tal_giant_fynock_cave	AREA	9	-45.89	-61.26	-111.47	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	1200
+800521	TALUS	tal_giant_fynock_cave	AREA	9	-52.72	-60.70	-97.86	0	1	a giant fynock	fynock_giant_40_c_agg_n	POI	Giant Fynock Cave	1	TURN	0	0	-	idle	0	0	0	1200
+800522	TALUS	tal_world	AREA	0	1542.70	43.28	-878.87	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800523	TALUS	tal_world	AREA	0	1542.59	41.23	-847.75	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800524	TALUS	tal_world	AREA	0	1547.39	40.00	-894.80	0	1	a fynock	fynock_40_c_att_n	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800525	TALUS	tal_dearic_imp_office	AREA	4	-0.30	2.50	7.70	176	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	Dungeon	Imperial Office	1	IDLE	0	0	-	idle	0	0	0	300
+800526	TALUS	tal_dearic_imp_office	AREA	7	8.50	1.10	-13.20	24	1	Colonel Braedic Ekirk	talus_dearic_coa_colonel_braedic_ekirk_100_h_inv_n	Dungeon	Imperial Office	1	IDLE	0	0	-	idle	0	0	0	300
+800527	TALUS	tal_dearic_imp_office	AREA	7	13.10	1.10	-9.10	-119	1	Galiir Ac Yandar	talus_dearic_coa_galiir_ac_yandar_100_h_inv_n	Dungeon	Imperial Office	1	IDLE	0	0	-	idle	0	0	0	300
+800528	TALUS	tal_dearic_imp_office	AREA	8	3.00	1.10	-13.30	-55	1	a Stormtrooper	stormtrooper_25_h_att_n	Dungeon	Imperial Office	1	IDLE	0	0	-	idle	0	0	0	300
+800529	TALUS	tal_imp_outpost_hospital	AREA	4	2.96	0.13	0.31	-35	1	Lethin Bludder	lethin_bludder_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800530	TALUS	tal_imp_outpost_officer_shed	AREA	3	0.05	0.13	-5.79	-1	1	Hakasha Sireen (Imperial Pilot Trainer)	imp_hakasha_sireen_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	999	0	300
+800531	TALUS	tal_imp_outpost_officer_shed	AREA	5	3.64	0.13	-2.86	-118	1	Commander Xalux Guul	xalox_guul_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800532	TALUS	tal_imp_outpost_officer_shed	AREA	6	-4.47	0.13	-4.18	76	1	Prisk Kith'Vys (Imperial Pilot Trainer)	prisk_kith_vys_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	999	0	300
+800533	TALUS	tal_world	PATROL	0	-2186.76	20.00	2280.64	0	1	an Imperial Colonel	imp_colonel_23_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800534	TALUS	tal_world	PATROL	0	-2231.63	20.00	2337.41	0	1	an Imperial Corporal	imp_corporal_16_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800535	TALUS	tal_world	PATROL	0	-2200.86	20.00	2299.18	0	1	an Imperial Major	imp_major_21_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800536	TALUS	tal_world	PATROL	0	-2184.15	20.00	2278.64	0	1	an Imperial noncom	imp_noncom_14_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800537	TALUS	tal_world	PATROL	0	-2200.99	20.00	2301.09	0	1	an Imperial Sergeant Major	imp_sergeant_major_19_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800538	TALUS	tal_world	PATROL	0	-2216.67	20.00	2372.17	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800539	TALUS	tal_world	PATROL	0	-2215.49	20.00	2369.89	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800540	TALUS	tal_world	PATROL	0	-2175.89	20.00	2323.47	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800541	TALUS	tal_world	PATROL	0	-2176.08	20.00	2321.38	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800542	TALUS	tal_world	PATROL	0	-2144.86	20.00	2343.70	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800543	TALUS	tal_world	PATROL	0	-2142.01	20.00	2341.93	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800544	TALUS	tal_world	PATROL	0	-2149.05	20.00	2267.63	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800545	TALUS	tal_world	PATROL	0	-2147.66	20.00	2270.81	0	1	a pirate	pirate_11_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800546	TALUS	tal_world	PATROL	0	-2132.14	20.00	2414.49	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800547	TALUS	tal_world	PATROL	0	-2133.05	20.00	2417.30	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800548	TALUS	tal_world	PATROL	0	-2208.73	20.00	2336.18	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800549	TALUS	tal_world	PATROL	0	-2207.81	20.00	2336.70	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800550	TALUS	tal_world	PATROL	0	-2221.24	20.00	2353.53	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800551	TALUS	tal_world	PATROL	0	-2220.26	20.00	2354.91	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800552	TALUS	tal_world	PATROL	0	-2227.98	20.00	2338.89	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800553	TALUS	tal_world	PATROL	0	-2185.06	20.00	2318.83	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800554	TALUS	tal_world	PATROL	0	-2139.27	20.00	2243.23	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800555	TALUS	tal_world	PATROL	0	-2139.46	20.00	2243.10	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800556	TALUS	tal_world	PATROL	0	-2183.97	20.00	2278.79	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800557	TALUS	tal_world	PATROL	0	-2174.36	20.00	2300.63	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800558	TALUS	tal_world	PATROL	0	-2175.68	20.00	2300.68	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800559	TALUS	tal_world	PATROL	0	-2202.01	20.00	2285.46	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800560	TALUS	tal_world	PATROL	0	-2203.46	20.00	2283.43	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800561	TALUS	tal_world	PATROL	0	-2197.97	20.00	2279.52	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800562	TALUS	tal_world	PATROL	0	-2196.88	20.00	2281.06	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800563	TALUS	tal_world	PATROL	0	-2209.37	20.00	2257.89	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800564	TALUS	tal_world	PATROL	0	-2209.60	20.00	2257.90	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800565	TALUS	tal_world	PATROL	0	-2181.69	20.00	2318.93	0	1	a Stormtrooper Medic	stormtrooper_medic_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800566	TALUS	tal_world	PATROL	0	-2228.87	20.00	2340.64	0	1	a Stormtrooper Rifleman	stormtrooper_rifleman_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800567	TALUS	tal_world	PATROL	0	-2196.95	20.00	2300.30	0	1	a Stormtrooper Rifleman	stormtrooper_rifleman_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800568	TALUS	tal_world	PATROL	0	-2197.67	20.00	2302.29	0	1	a Stormtrooper Rifleman	stormtrooper_rifleman_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800569	TALUS	tal_world	PATROL	0	-2138.06	20.00	2240.36	0	1	a Stormtrooper Sniper	stormtrooper_sniper_25_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800570	TALUS	tal_world	PATROL	0	-2126.90	20.00	2415.79	0	1	a Stormtrooper Squad Leader	stormtrooper_squad_leader_27_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800571	TALUS	tal_world	PATROL	0	-2141.49	20.00	2246.39	0	1	a Stormtrooper Squad Leader	stormtrooper_squad_leader_27_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800572	TALUS	tal_world	PATROL	0	-2182.17	20.00	2315.34	0	1	a Veteran Imperial Corporal	veteran_imperial_corporal_35_h_att_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800573	TALUS	tal_world	PATROL	0	-2209.25	20.00	2301.35	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800574	TALUS	tal_world	PATROL	0	-2213.06	20.00	2300.99	0	1	an R3 unit	r3_droid_100_d_inv_n	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	300
+800575	TALUS	tal_world	AREA	0	-2154.97	20.00	2426.44	0	1	an AT-ST	imp_atst_150_c_agg_b	City	Imperial Outpost	1	LOITER	30	0	-	idle	0	0	0	300
+800576	TALUS	tal_world	AREA	0	-2297.36	20.00	2260.72	0	1	an AT-ST	imp_atst_150_c_agg_b	City	Imperial Outpost	1	LOITER	30	0	-	idle	0	0	0	300
+800577	TALUS	tal_world	AREA	0	-2063.72	20.00	2236.59	0	1	an AT-ST	imp_atst_150_c_agg_b	City	Imperial Outpost	1	LOITER	30	0	-	idle	0	0	0	300
+800578	TALUS	tal_world	AREA	0	-2178.96	20.00	2272.57	-4	1	Captain Ceth Laike	imp_cpt_ceth_laike_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800579	TALUS	tal_world	AREA	0	-2152.12	20.00	2304.31	71	1	Gravin Attal	gravin_attal_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800580	TALUS	tal_world	AREA	0	-2191.68	20.00	2268.60	-91	1	an Imperial recruiter	imp_recruiter_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800581	TALUS	tal_world	AREA	0	-2333.47	6.63	2200.62	0	1	Commando Horchoba Tuain	itp_hethrir_rebel_commando_88_h_att_e	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800582	TALUS	tal_world	AREA	0	-2351.08	6.22	2223.41	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800583	TALUS	tal_world	AREA	0	-2346.86	1.95	2190.41	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800584	TALUS	tal_world	AREA	0	-2334.49	14.32	2239.20	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800585	TALUS	tal_world	AREA	0	-2327.92	13.09	2220.29	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800586	TALUS	tal_world	AREA	0	-2324.59	1.68	2171.24	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800587	TALUS	tal_world	AREA	0	-2319.25	10.46	2197.13	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800588	TALUS	tal_world	AREA	0	-2313.02	19.06	2236.53	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800589	TALUS	tal_world	AREA	0	-2305.14	17.76	2211.51	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800590	TALUS	tal_world	AREA	0	-2302.61	11.45	2181.77	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800591	TALUS	tal_world	AREA	0	-2291.18	18.21	2197.54	0	1	a Rebel trooper	itp_rebel_trooper_elite_88_h_att_e	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	300
+800592	TALUS	tal_world	AREA	0	-2231.94	20.00	2221.08	22	1	Staff Sergeant Rothax	pvp_bf_imperial_vendor_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800593	TALUS	tal_world	AREA	0	-2123.43	20.00	2364.45	-52	1	Simon	smuggler_fence_simon_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800594	TALUS	tal_world	AREA	0	-2171.04	20.00	2314.00	-95	1	Officer Edgar	syren5_imperial_questgiver_100_h_inv_n	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	300
+800595	TALUS	tal_imp_vs_reb_barracks1	AREA	3	0.10	0.10	-3.90	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800596	TALUS	tal_imp_vs_reb_barracks2	AREA	3	0.20	0.10	-4.80	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800597	TALUS	tal_imp_vs_reb_base	AREA	1	11.30	1.00	21.70	-125	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800598	TALUS	tal_imp_vs_reb_base	AREA	1	-11.00	1.00	21.50	119	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800599	TALUS	tal_imp_vs_reb_base	AREA	10	3.50	7.00	-10.70	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800600	TALUS	tal_imp_vs_reb_base	AREA	11	-4.40	7.00	8.80	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800601	TALUS	tal_imp_vs_reb_base	AREA	12	6.50	7.00	8.90	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800602	TALUS	tal_imp_vs_reb_base	AREA	12	13.30	7.00	9.10	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800603	TALUS	tal_imp_vs_reb_base	AREA	2	-1.60	2.00	3.60	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800604	TALUS	tal_imp_vs_reb_base	AREA	4	-18.50	1.00	17.40	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800605	TALUS	tal_imp_vs_reb_base	AREA	5	15.00	1.00	-1.50	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800606	TALUS	tal_imp_vs_reb_base	AREA	6	13.00	1.00	-21.90	16	1	an Imperial sergeant	rtp_imperial_sergeant_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800607	TALUS	tal_imp_vs_reb_base	AREA	7	-0.40	1.00	-20.60	0	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800608	TALUS	tal_imp_vs_reb_base	AREA	8	-16.70	1.00	-20.70	58	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800609	TALUS	tal_imp_vs_reb_base	AREA	9	-18.50	1.00	-3.90	90	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800610	TALUS	tal_world	AREA	0	-2403.30	38.00	3695.10	60	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800611	TALUS	tal_world	AREA	0	-2473.41	38.00	3754.52	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800612	TALUS	tal_world	AREA	0	-2472.20	38.00	3693.03	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800613	TALUS	tal_world	AREA	0	-2462.19	38.00	3784.61	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800614	TALUS	tal_world	AREA	0	-2431.74	38.00	3769.00	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800615	TALUS	tal_world	AREA	0	-2419.27	38.00	3648.40	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800616	TALUS	tal_world	AREA	0	-2382.27	38.00	3715.18	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	300
+800617	TALUS	tal_world	AREA	0	-2489.38	45.01	3725.55	-121	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800618	TALUS	tal_world	AREA	0	-2486.67	45.01	3733.68	-36	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800619	TALUS	tal_world	AREA	0	-2452.56	45.01	3659.41	-137	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800620	TALUS	tal_world	AREA	0	-2444.67	45.01	3657.18	137	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800621	TALUS	tal_world	AREA	0	-2401.85	38.00	3751.54	-126	1	a Stormtrooper	rtp_stormtrooper_elite_86_h_att_e	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	300
+800622	TALUS	tal_reb_tactical_center	AREA	10	5.90	-20.80	23.20	-98	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800623	TALUS	tal_reb_tactical_center	AREA	10	-2.60	-20.80	19.70	88	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800624	TALUS	tal_reb_tactical_center	AREA	10	1.40	-20.80	30.90	-179	1	Major Dare Nekor	itp_veers_rebel_commander_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800625	TALUS	tal_reb_tactical_center	AREA	2	0.20	0.30	2.20	0	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800626	TALUS	tal_reb_tactical_center	AREA	4	-4.40	-6.80	5.10	92	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800627	TALUS	tal_reb_tactical_center	PATROL	6	3.40	-13.80	-0.30	0	1	a Rebel trooper	itp_rebel_trooper_elite_84_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	PATROL	0	0	column	idle	0	0	0	300
+800628	TALUS	tal_reb_tactical_center	AREA	7	4.60	-13.80	8.00	0	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	LOITER	2	0	-	idle	0	0	0	300
+800629	TALUS	tal_reb_tactical_center	AREA	7	-9.30	-13.80	6.20	0	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	LOITER	2	0	-	idle	0	0	0	300
+800630	TALUS	tal_reb_tactical_center	AREA	7	-2.10	-13.80	5.70	0	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	LOITER	2	0	-	idle	0	0	0	300
+800631	TALUS	tal_reb_tactical_center	AREA	9	4.90	-20.70	5.20	-137	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800632	TALUS	tal_reb_tactical_center	AREA	9	-1.80	-20.70	4.70	76	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800633	TALUS	tal_reb_tactical_center	AREA	9	-1.60	-20.70	7.30	98	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800634	TALUS	tal_world	AREA	0	-3480.04	21.99	-3246.98	-45	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800635	TALUS	tal_world	AREA	0	-3475.76	22.00	-3242.65	-45	1	a Rebel trooper	itp_rebel_trooper_elite_90_h_att_e	Dungeon	ITP - Rebel Tactical Center	1	IDLE	0	0	-	idle	0	0	0	300
+800636	TALUS	tal_kahmurra_bunker	AREA	2	-3.95	0.25	-0.90	0	1	a mutated kahmurra	kahmurra_mutated_50_c_agg_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800637	TALUS	tal_kahmurra_bunker	AREA	4	-4.58	-6.75	4.95	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced_30_c_agg_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800638	TALUS	tal_kahmurra_bunker	AREA	5	-4.58	-6.75	-8.94	0	1	a frenzied kahmurra	kahmurra_frenzied_33_c_agg_n	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	1200
+800639	TALUS	tal_kahmurra_bunker	AREA	5	-5.89	-6.75	-5.41	0	1	a kahmurra bio engineer	kahmurra_bio_engineer_1_h_att_n	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	1200
+800640	TALUS	tal_kahmurra_bunker	AREA	6	8.99	-6.76	-15.11	0	1	a frenzied kahmurra	kahmurra_frenzied_33_c_agg_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800641	TALUS	tal_kahmurra_bunker	AREA	7	6.39	-6.75	-1.77	0	1	a frenzied kahmurra	kahmurra_frenzied_33_c_agg_n	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	1200
+800642	TALUS	tal_kahmurra_bunker	AREA	7	6.96	-6.75	-5.65	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced_30_c_agg_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800643	TALUS	tal_kahmurra_bunker	AREA	9	1.08	-13.75	-0.72	0	1	a frenzied kahmurra	kahmurra_frenzied_33_c_agg_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800644	TALUS	tal_kahmurra_bunker	AREA	9	-1.86	-13.75	-7.42	0	1	a rabid mutant kahmurra	kahmurra_mutant_rabid_40_c_agg_n	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	1200
+800645	TALUS	tal_kahmurra_bunker	AREA	9	0.08	-13.75	-14.16	0	1	a kahmurra bio engineer	kahmurra_bio_engineer_1_h_att_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800646	TALUS	tal_kahmurra_bunker	AREA	9	-5.29	-13.75	-14.17	0	1	a kahmurra bio engineer	kahmurra_bio_engineer_1_h_att_n	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	1200
+800647	TALUS	tal_world	AREA	0	-4799.13	16.63	-4752.81	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced_30_c_agg_n	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	900
+800648	TALUS	tal_world	AREA	0	-4804.96	16.54	-4746.65	0	1	a kahmurra blanca	murra_blanca_30_c_agg_e	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	300
+800649	TALUS	tal_world	AREA	0	-4776.74	16.87	-4751.61	0	1	a mutated kahmurra	kahmurra_mutated_50_c_agg_n	POI	Kahmurra Biogenetic Research Station	4	LOITER	8	0	-	idle	0	0	0	300
+800650	TALUS	tal_hegemony_base	AREA	15	9.70	-12.00	117.70	0	1	an injured prisoner	talus_dearic_coa_aclo_prisoner_100_h_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800651	TALUS	tal_hegemony_base	AREA	15	3.40	-12.00	119.60	0	1	an injured prisoner	talus_dearic_coa_aclo_prisoner_100_h_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800652	TALUS	tal_hegemony_base	AREA	15	-2.70	-12.00	116.20	0	1	an injured prisoner	talus_dearic_coa_aclo_prisoner_100_h_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800653	TALUS	tal_hegemony_base	AREA	15	6.20	-12.00	109.30	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800654	TALUS	tal_hegemony_base	AREA	15	1.60	-12.00	109.10	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800655	TALUS	tal_hegemony_base	AREA	15	2.60	-12.00	115.05	172	1	Syirlabradawk	talus_dearic_coa_syirlabradawk_100_h_inv_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800656	TALUS	tal_hegemony_base	AREA	16	-12.00	-12.00	99.30	0	1	an injured prisoner	talus_dearic_coa_aclo_prisoner_100_h_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800657	TALUS	tal_hegemony_base	AREA	16	-7.00	-12.00	102.30	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800658	TALUS	tal_hegemony_base	AREA	16	-6.70	-12.00	96.80	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800659	TALUS	tal_hegemony_base	AREA	16	-12.10	-12.00	93.60	0	1	N.S.H. torture officer	talus_dearic_coa_lag_torture_officer_43_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800660	TALUS	tal_hegemony_base	AREA	17	34.80	-12.00	74.50	-90	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800661	TALUS	tal_hegemony_base	AREA	18	33.20	-20.00	112.30	179	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800662	TALUS	tal_hegemony_base	AREA	19	54.20	-20.00	111.00	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800663	TALUS	tal_hegemony_base	AREA	19	50.20	-20.00	107.20	179	1	N.S.H. supply officer	talus_dearic_coa_lag_supply_officer_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	npc_consoling	0	0	0	300
+800664	TALUS	tal_hegemony_base	AREA	21	51.70	-20.00	155.60	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800665	TALUS	tal_hegemony_base	AREA	21	43.80	-20.00	149.90	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800666	TALUS	tal_hegemony_base	AREA	21	55.70	-20.00	133.70	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800667	TALUS	tal_hegemony_base	AREA	23	76.80	-20.00	149.70	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800668	TALUS	tal_hegemony_base	AREA	24	106.50	-20.00	151.00	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800669	TALUS	tal_hegemony_base	AREA	24	100.40	-20.00	158.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800670	TALUS	tal_hegemony_base	AREA	24	98.70	-20.00	143.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800671	TALUS	tal_hegemony_base	AREA	25	106.80	-20.00	131.10	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800672	TALUS	tal_hegemony_base	AREA	25	102.10	-20.00	138.30	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800673	TALUS	tal_hegemony_base	AREA	25	99.60	-20.00	123.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800674	TALUS	tal_hegemony_base	AREA	26	98.50	-20.00	103.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800675	TALUS	tal_hegemony_base	AREA	26	99.80	-20.00	118.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800676	TALUS	tal_hegemony_base	AREA	26	106.30	-20.00	114.90	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800677	TALUS	tal_hegemony_base	AREA	27	68.30	-20.00	103.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800678	TALUS	tal_hegemony_base	AREA	27	68.00	-20.00	118.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800679	TALUS	tal_hegemony_base	AREA	27	60.00	-20.00	110.20	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800680	TALUS	tal_hegemony_base	AREA	28	67.10	-20.00	123.50	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800681	TALUS	tal_hegemony_base	AREA	28	73.40	-20.00	136.90	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800682	TALUS	tal_hegemony_base	AREA	28	60.00	-20.00	131.30	0	1	N.S.H. combat droid	imp_restuss_load_lifter_launchers_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800683	TALUS	tal_hegemony_base	AREA	3	4.10	0.30	-4.10	-110	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800684	TALUS	tal_hegemony_base	AREA	3	2.10	0.30	-5.00	60	1	N.S.H. technician	talus_dearic_coa_lag_technician_35_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800685	TALUS	tal_hegemony_base	AREA	6	23.10	-12.00	26.40	0	1	N.S.H. officer	talus_dearic_coa_lag_officer_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800686	TALUS	tal_hegemony_base	AREA	6	24.10	-12.00	30.20	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800687	TALUS	tal_hegemony_base	AREA	6	21.90	-12.00	23.20	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800688	TALUS	tal_hegemony_base	AREA	6	21.60	-12.00	34.80	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800689	TALUS	tal_hegemony_base	AREA	6	18.30	-12.00	29.40	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800690	TALUS	tal_hegemony_base	AREA	6	16.70	-12.00	28.20	-90	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800691	TALUS	tal_hegemony_base	AREA	9	44.40	-12.00	57.70	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800692	TALUS	tal_hegemony_base	AREA	9	57.70	-12.00	64.90	0	1	N.S.H. personnel	talus_dearic_coa_lag_personnel_30_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800693	TALUS	tal_hegemony_base	AREA	9	35.50	-12.00	54.00	0	1	N.S.H. technician	talus_dearic_coa_lag_technician_35_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800694	TALUS	tal_hegemony_base	AREA	9	43.90	-12.00	61.70	0	1	N.S.H. technician	talus_dearic_coa_lag_technician_35_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800695	TALUS	tal_hegemony_base	AREA	9	32.60	-12.00	59.00	0	1	Broadside	reb_restuss_load_lifter_carbines_100_d_inv_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800696	TALUS	tal_hegemony_base_guard_house	AREA	2	4.10	0.50	4.50	179	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800697	TALUS	tal_hegemony_base_guard_house	AREA	2	-2.50	4.00	-2.20	89	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800698	TALUS	tal_world	PATROL	0	-4629.03	18.00	-3247.01	0	1	N.S.H. sergeant	talus_dearic_coa_lag_enforcer_sergeant_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	PATROL	0	0	column	idle	0	0	0	300
+800699	TALUS	tal_world	AREA	0	-4614.18	25.30	-3248.15	-98	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800700	TALUS	tal_world	AREA	0	-4611.48	25.30	-3243.66	-52	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800701	TALUS	tal_world	AREA	0	-4608.20	25.30	-3239.57	172	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800702	TALUS	tal_world	AREA	0	-4605.69	25.30	-3254.69	-52	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800703	TALUS	tal_world	AREA	0	-4604.55	25.30	-3253.26	-52	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800704	TALUS	tal_world	AREA	0	-4602.14	18.80	-3253.63	128	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800705	TALUS	tal_world	AREA	0	-4599.81	18.37	-3249.74	128	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800706	TALUS	tal_world	AREA	0	-4599.35	25.30	-3246.77	-97	1	Imperial Stormtrooper Escort	talus_dearic_coa_imperial_escort_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800707	TALUS	tal_world	AREA	0	-4608.93	25.30	-3250.03	-15	1	Imperial Captain	talus_dearic_coa_imperial_officer_43_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800708	TALUS	tal_world	AREA	0	-4668.37	32.61	-3271.23	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800709	TALUS	tal_world	AREA	0	-4644.09	18.00	-3220.40	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800710	TALUS	tal_world	AREA	0	-4628.86	18.00	-3254.16	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800711	TALUS	tal_world	AREA	0	-4626.70	18.00	-3206.48	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800712	TALUS	tal_world	AREA	0	-4616.31	18.00	-3241.19	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800713	TALUS	tal_world	AREA	0	-4614.57	23.27	-3278.83	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800714	TALUS	tal_world	AREA	0	-4612.62	21.60	-3196.00	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800715	TALUS	tal_world	AREA	0	-4603.98	18.00	-3225.93	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800716	TALUS	tal_world	AREA	0	-4582.96	19.03	-3226.85	0	1	N.S.H. enforcer	talus_dearic_coa_lag_enforcer_41_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle	0	0	0	300
+800717	TALUS	tal_world	AREA	0	-4609.46	25.30	-3247.64	164	1	N.S.H. officer	talus_dearic_coa_lag_officer_42_h_agg_n	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle	0	0	0	300
+800718	TALUS	tal_aqualish_cave	AREA	1	2.62	-4.96	9.18	0	1	a Lost Aqualish commando	lost_aqualish_commando_43_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800719	TALUS	tal_aqualish_cave	AREA	10	-30.42	-80.05	-144.53	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800720	TALUS	tal_aqualish_cave	AREA	10	-26.72	-79.85	-146.53	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800721	TALUS	tal_aqualish_cave	AREA	11	-93.75	-101.47	-116.18	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800722	TALUS	tal_aqualish_cave	AREA	11	-86.89	-102.30	-113.95	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800723	TALUS	tal_aqualish_cave	AREA	11	-86.80	-100.66	-104.26	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800724	TALUS	tal_aqualish_cave	AREA	11	-91.98	-100.90	-100.11	0	1	a Lost Aqualish warchief	lost_aqualish_warchief_52_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800725	TALUS	tal_aqualish_cave	AREA	2	9.56	-23.83	-26.90	0	1	a Lost Aqualish commando	lost_aqualish_commando_43_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800726	TALUS	tal_aqualish_cave	AREA	3	7.80	-40.70	-73.61	0	1	a Lost Aqualish commando	lost_aqualish_commando_43_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800727	TALUS	tal_aqualish_cave	AREA	3	-11.12	-40.40	-60.60	0	1	a Lost Aqualish commando	lost_aqualish_commando_43_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	4	0	-	idle	0	0	0	300
+800728	TALUS	tal_aqualish_cave	AREA	3	12.00	-40.30	-77.77	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800729	TALUS	tal_aqualish_cave	AREA	4	32.81	-45.26	-52.55	0	1	a Lost Aqualish bomber	lost_aqualish_bomber_43_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800730	TALUS	tal_aqualish_cave	AREA	4	46.56	-46.40	-92.24	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800731	TALUS	tal_aqualish_cave	AREA	5	27.68	-60.33	-178.71	0	1	a Lost Aqualish bomber	lost_aqualish_bomber_43_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800732	TALUS	tal_aqualish_cave	AREA	5	-7.21	-44.94	-138.23	0	1	a Lost Aqualish bomber	lost_aqualish_bomber_43_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800733	TALUS	tal_aqualish_cave	AREA	5	64.10	-54.89	-153.01	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800734	TALUS	tal_aqualish_cave	AREA	5	28.45	-59.70	-184.47	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800735	TALUS	tal_aqualish_cave	AREA	5	49.50	-48.18	-125.46	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800736	TALUS	tal_aqualish_cave	AREA	6	-9.93	-64.68	-199.29	0	1	a Lost Aqualish bomber	lost_aqualish_bomber_43_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800737	TALUS	tal_aqualish_cave	AREA	7	-14.92	-64.87	-220.37	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800738	TALUS	tal_aqualish_cave	AREA	7	-13.79	-63.87	-224.33	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800739	TALUS	tal_aqualish_cave	AREA	7	-22.45	-64.11	-254.41	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800740	TALUS	tal_aqualish_cave	AREA	7	-16.92	-62.88	-261.22	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800741	TALUS	tal_aqualish_cave	AREA	8	-121.34	-70.02	-177.62	0	1	a Lost Aqualish bomber	lost_aqualish_bomber_43_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800742	TALUS	tal_aqualish_cave	AREA	8	-81.17	-99.86	-148.53	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800743	TALUS	tal_aqualish_cave	AREA	8	-88.69	-69.85	-99.62	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800744	TALUS	tal_aqualish_cave	AREA	8	-84.17	-100.80	-145.42	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800745	TALUS	tal_aqualish_cave	AREA	8	-91.40	-69.86	-97.07	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800746	TALUS	tal_aqualish_cave	AREA	8	-120.45	-68.90	-166.35	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	300
+800747	TALUS	tal_aqualish_cave	AREA	8	-62.29	-70.36	-179.69	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800748	TALUS	tal_aqualish_cave	AREA	8	-63.38	-70.54	-175.33	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800749	TALUS	tal_aqualish_cave	AREA	9	-37.65	-70.79	-87.31	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800750	TALUS	tal_aqualish_cave	AREA	9	-56.28	-68.42	-108.47	0	1	a Lost Aqualish Captain	lost_aqualish_captain_47_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800751	TALUS	tal_aqualish_cave	AREA	9	-42.39	-70.16	-85.79	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800752	TALUS	tal_aqualish_cave	AREA	9	-60.45	-68.36	-106.62	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator_45_h_agg_n	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	300
+800753	TALUS	tal_world	AREA	0	-4349.98	30.89	-1429.86	0	1	a Lost Aqualish commando	lost_aqualish_commando_43_h_agg_n	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	300
+800754	TALUS	tal_world	AREA	0	-4347.61	31.01	-1418.26	0	1	a Lost Aqualish lookout	lost_aqualish_lookout_37_h_agg_n	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	300
+800755	TALUS	tal_world	AREA	0	4285.96	35.59	886.60	0	1	a berserk kahmurra	kahmurra_berserk_46_c_agg_n	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	300
+800756	TALUS	tal_world	AREA	0	4191.01	6.00	1008.06	0	1	a famished sludge panther	panther_sludge_famished_46_c_agg_n	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	300
+800757	TALUS	tal_world	AREA	0	4265.25	6.00	1011.81	0	1	a famished sludge panther	panther_sludge_famished_46_c_agg_n	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	300
+800758	TALUS	tal_world	AREA	0	4145.13	6.00	983.55	0	1	a famished sludge panther	panther_sludge_famished_46_c_agg_n	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	300
+800759	TALUS	tal_world	AREA	0	4219.38	6.00	1012.16	0	1	a greater sludge panther	panther_greater_sludge_49_c_agg_n	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	300
+800760	TALUS	tal_world	AREA	0	4300.74	6.00	1029.52	0	1	a greater sludge panther	panther_greater_sludge_49_c_agg_n	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	300
+800761	TALUS	tal_world	AREA	0	4147.16	6.00	943.22	0	1	a greater sludge panther	panther_greater_sludge_49_c_agg_n	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	300
+800762	TALUS	tal_world	AREA	0	4199.27	6.00	985.92	0	1	a sludge panther	sludge_panther_44_c_agg_n	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	300
+800763	TALUS	tal_world	AREA	0	4287.96	6.00	998.08	0	1	a sludge panther	sludge_panther_44_c_agg_n	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	300
+800764	TALUS	tal_world	AREA	0	4122.62	6.00	976.65	0	1	a sludge panther	sludge_panther_44_c_agg_n	POI	Lost Village of Durbin	4	LOITER	8	0	-	idle	0	0	0	300
+800765	TALUS	tal_nashal_association_hall	AREA	11	10.98	1.75	-19.62	-62	1	Chief Administrator Slooni Jong	slooni_jong_100_h_inv_n	City	Narmle	1	IDLE	0	0	-	idle	0	999	0	300
+800766	TALUS	tal_nashal_cantina	AREA	13	-25.20	-0.50	8.50	0	1	Durge	clone_durge_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800767	TALUS	tal_nashal_cantina	AREA	3	-0.50	-0.90	3.40	0	1	Oecax	clone_oecax_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800768	TALUS	tal_nashal_cantina	AREA	3	17.71	-0.89	-7.37	61	1	Sigrix Slix	sigrix_slix_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	300
+800769	TALUS	tal_nashal_cantina	AREA	7	9.76	-0.89	18.97	-125	1	Green Laser	green_laser_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800770	TALUS	tal_nashal_cloning	AREA	2	2.51	-0.05	5.52	-126	1	Durgur Pyne	durgur_pyne_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	300
+800771	TALUS	tal_nashal_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800772	TALUS	tal_nashal_hotel	AREA	5	19.09	1.28	0.08	-126	1	Jusani Zhord	jusani_zhord_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair	0	999	0	300
+800773	TALUS	tal_nashal_starport	AREA	1	-0.03	0.64	73.02	0	1	Chassis Dealer	chassis_dealer_iii_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800774	TALUS	tal_nashal_starport	AREA	7	54.70	-0.50	34.20	-50	1	a TTLP Soldier	talus_ttlp_soldier_35_h_att_e	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800775	TALUS	tal_world	PATROL	0	4109.54	2.00	5306.85	0	1	a pirate	pirate_11_h_att_n	City	Nashal	1	PATROL	0	0	column	idle	0	0	0	300
+800776	TALUS	tal_world	PATROL	0	4114.44	2.00	5307.16	0	1	a pirate	pirate_11_h_att_n	City	Nashal	1	PATROL	0	0	column	idle	0	0	0	300
+800777	TALUS	tal_world	PATROL	0	4102.99	2.00	5302.18	0	1	a pirate	pirate_11_h_att_n	City	Nashal	1	PATROL	0	0	column	idle	0	0	0	300
+800778	TALUS	tal_world	PATROL	0	4096.83	2.00	5296.73	0	1	a pirate	pirate_11_h_att_n	City	Nashal	1	PATROL	0	0	column	idle	0	0	0	300
+800779	TALUS	tal_world	AREA	0	4174.89	2.00	5110.46	75	1	an Aa'kuan champion	aakuan_champion_53_h_att_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800780	TALUS	tal_world	AREA	0	4379.07	2.00	5283.15	-179	1	Amyva Va'new	amyva_vanew_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800781	TALUS	tal_world	AREA	0	4333.76	9.90	5371.99	78	1	a commoner	commoner_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800782	TALUS	tal_world	AREA	0	4541.42	2.00	5069.12	-166	1	Igbi Freemo	igbi_freemo_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	300
+800783	TALUS	tal_world	AREA	0	4520.61	2.00	5236.48	110	1	an Imperial operative	itp_hethrir_operative_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800784	TALUS	tal_world	AREA	0	4570.00	2.00	5455.00	-104	1	a Selonian advocate	itp_hethrir_selonian_advocate_89_h_att_e	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800785	TALUS	tal_world	AREA	0	4268.41	0.56	5264.28	0	1	Nomi (an advocate)	rtp_leia_selonian_corpse_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800786	TALUS	tal_world	AREA	0	4272.18	0.64	5265.90	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800787	TALUS	tal_world	AREA	0	4263.42	0.51	5263.01	0	1	a Stormtrooper	rtp_stormtrooper_elite_85_h_att_e	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800788	TALUS	tal_world	AREA	0	4098.67	2.00	5314.81	145	1	Norris	smuggler_fence_norris_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	300
+800789	TALUS	tal_world	AREA	0	4375.96	2.00	5177.21	170	1	Taarna (a CorSec agent)	talus_nashal_smuggler_corsec_agent_100_h_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	300
+800790	TALUS	tal_world	AREA	0	4196.81	2.00	5284.36	82	1	Race Coordinator	race_coordinator_protocol_100_d_inv_n	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	300
+800791	TALUS	tal_dearic_reb_office	AREA	3	4.50	0.70	2.20	-179	1	a Rebel recruiter	rebel_recruiter_100_h_inv_n	Dungeon	Rebel Office	1	IDLE	0	0	-	idle	0	0	0	300
+800792	TALUS	tal_dearic_reb_office	AREA	4	-2.30	0.70	-2.20	92	1	Trezya Nenei	talus_dearic_coa_trezya_nenei_100_h_inv_n	Dungeon	Rebel Office	1	IDLE	0	0	-	idle	0	0	0	300
+800793	TALUS	tal_dearic_reb_office	AREA	4	-1.10	0.70	4.40	166	1	Captain Vayde Quellium	talus_dearic_coa_vayde_quellium_100_h_inv_n	Dungeon	Rebel Office	1	IDLE	0	0	-	idle	0	0	0	300
+800794	TALUS	tal_underground_bunker	AREA	5	-5.90	-6.80	-5.10	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800795	TALUS	tal_underground_bunker	AREA	5	-5.60	-6.80	-7.50	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800796	TALUS	tal_underground_bunker	AREA	6	3.00	-6.80	-14.90	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800797	TALUS	tal_underground_bunker	AREA	6	-0.90	-6.80	-14.70	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800798	TALUS	tal_underground_bunker	AREA	7	5.80	-6.80	-1.90	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800799	TALUS	tal_underground_bunker	AREA	7	5.50	-6.80	-6.40	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800800	TALUS	tal_underground_bunker	AREA	9	-4.80	-13.80	-8.50	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800801	TALUS	tal_underground_bunker	AREA	9	-3.60	-13.80	-0.20	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800802	TALUS	tal_underground_bunker	AREA	9	-0.30	-13.80	-5.00	0	1	a cultist	exar_intro_cultist_90_h_agg_n	Dungeon	Red Circle Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800803	TALUS	tal_world	AREA	0	-1835.14	34.00	6625.32	-162	1	Magnus Grenz (a cultist coadjutor)	exar_intro_magnus_grenz_100_h_inv_n	Dungeon	Red Circle Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800804	TALUS	tal_nashal_selonian_smugglers_cave	PATROL	1	-0.85	-7.09	4.96	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	PATROL	0	0	column	idle	0	0	0	300
+800805	TALUS	tal_nashal_selonian_smugglers_cave	PATROL	1	1.66	-8.71	2.06	0	1	A Talusian smuggler taskmaster	talus_nashal_smuggler_taskmaster_40_h_agg_n	Dungeon	Selonian Smugglers	1	PATROL	0	0	column	idle	0	0	0	300
+800806	TALUS	tal_nashal_selonian_smugglers_cave	PATROL	11	-91.57	-101.15	-109.08	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	PATROL	0	0	column	idle	0	0	0	300
+800807	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-98.00	-100.10	-104.40	127	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800808	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-96.90	-100.50	-102.00	127	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800809	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-95.60	-100.10	-90.10	162	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800810	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-95.50	-100.80	-99.30	127	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800811	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-94.60	-101.00	-97.30	127	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800812	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-89.40	-100.60	-97.20	-142	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800813	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-88.50	-100.70	-99.60	-142	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800814	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-88.00	-99.90	-91.40	-157	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800815	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-87.60	-100.70	-102.10	-142	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800816	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-86.70	-100.80	-105.20	-142	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800817	TALUS	tal_nashal_selonian_smugglers_cave	AREA	11	-91.90	-100.80	-96.30	-179	1	a Selonian den mother	talus_nashal_smuggler_selonian_mother_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800818	TALUS	tal_nashal_selonian_smugglers_cave	AREA	3	2.70	-40.50	-68.50	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	3	LOITER	6	0	-	idle	0	0	0	300
+800819	TALUS	tal_nashal_selonian_smugglers_cave	AREA	3	-13.40	-40.70	-80.20	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	2	LOITER	4	0	-	idle	0	0	0	300
+800820	TALUS	tal_nashal_selonian_smugglers_cave	AREA	3	19.10	-39.40	-80.10	-43	1	A Talusian smuggler taskmaster	talus_nashal_smuggler_taskmaster_40_h_agg_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	1800
+800821	TALUS	tal_nashal_selonian_smugglers_cave	AREA	4	46.00	-46.20	-98.30	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	2	LOITER	4	0	-	idle	0	0	0	300
+800822	TALUS	tal_nashal_selonian_smugglers_cave	AREA	4	42.70	-46.50	-50.90	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	TURN	0	0	-	idle	0	0	0	300
+800823	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	53.90	-53.00	-143.10	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	3	LOITER	6	0	-	idle	0	0	0	300
+800824	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	53.60	-56.60	-168.30	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	2	LOITER	4	0	-	idle	0	0	0	300
+800825	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	23.00	-45.90	-112.80	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	2	LOITER	4	0	-	idle	0	0	0	300
+800826	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	75.40	-54.90	-154.10	-111	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800827	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	70.10	-45.00	-122.10	-141	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800828	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	47.10	-56.50	-183.20	-6	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800829	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	2.90	-45.10	-146.30	99	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800830	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	-12.30	-44.10	-138.50	56	1	Kiki Dorente	talus_nashal_smuggler_selonian_kiki_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800831	TALUS	tal_nashal_selonian_smugglers_cave	PATROL	7	-21.51	-63.25	-259.60	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	PATROL	0	0	column	idle	0	0	0	300
+800832	TALUS	tal_nashal_selonian_smugglers_cave	AREA	7	-16.80	-63.40	-260.40	173	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800833	TALUS	tal_nashal_selonian_smugglers_cave	AREA	7	-0.70	-63.60	-233.90	106	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800834	TALUS	tal_nashal_selonian_smugglers_cave	AREA	7	-21.50	-65.20	-211.00	96	1	Ravi Thienta	talus_nashal_smuggler_selonian_ravi_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800835	TALUS	tal_nashal_selonian_smugglers_cave	AREA	7	0.40	-64.60	-209.40	-123	1	A Talusian smuggler taskmaster	talus_nashal_smuggler_taskmaster_40_h_agg_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	1800
+800836	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-93.30	-70.10	-98.90	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	2	LOITER	4	0	-	idle	0	0	0	300
+800837	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-61.30	-69.90	-193.80	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	3	LOITER	6	0	-	idle	0	0	0	300
+800838	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-96.10	-71.90	-183.00	177	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800839	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-82.10	-69.90	-119.90	-144	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800840	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-69.20	-97.80	-161.60	-67	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800841	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-119.50	-68.80	-162.90	54	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800842	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-112.20	-69.00	-132.70	174	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800843	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-81.40	-99.10	-161.60	44	1	Lika Fimente	talus_nashal_smuggler_selonian_lika_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800844	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-80.70	-70.40	-125.60	-89	1	Tika Sileste	talus_nashal_smuggler_selonian_tika_100_h_inv_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	300
+800845	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-66.00	-95.00	-155.40	-117	1	A Talusian smuggler taskmaster	talus_nashal_smuggler_taskmaster_40_h_agg_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	1800
+800846	TALUS	tal_nashal_selonian_smugglers_cave	AREA	8	-127.10	-68.90	-139.50	91	1	A Talusian smuggler taskmaster	talus_nashal_smuggler_taskmaster_40_h_agg_n	Dungeon	Selonian Smugglers	1	IDLE	0	0	-	idle	0	0	0	1800
+800847	TALUS	tal_nashal_selonian_smugglers_cave	AREA	9	-60.70	-68.20	-103.80	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	4	LOITER	8	0	-	idle	0	0	0	300
+800848	TALUS	tal_nashal_selonian_smugglers_cave	AREA	9	-34.00	-70.00	-97.40	0	1	a Selonian	talus_nashal_smuggler_selonian_100_h_inv_n	Dungeon	Selonian Smugglers	3	LOITER	6	0	-	idle	0	0	0	300
+800849	TALUS	tal_imp_weapons_research_facility1	PATROL	10	35.73	-12.00	64.40	0	1	an Elite Novatrooper	syren_5_imperial_stormtrooper_novatrooper_elite_commander_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800850	TALUS	tal_imp_weapons_research_facility1	PATROL	11	58.22	-20.00	82.75	0	1	an Elite Novatrooper	syren_5_imperial_stormtrooper_novatrooper_elite_commander_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800851	TALUS	tal_imp_weapons_research_facility1	PATROL	13	35.65	-12.00	94.04	0	1	an Imperial exterminator	syren_5_imperial_imperial_exterminator_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800852	TALUS	tal_imp_weapons_research_facility1	PATROL	13	30.70	-20.00	129.72	0	1	an Elite Novatrooper	syren_5_imperial_stormtrooper_novatrooper_elite_commander_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800853	TALUS	tal_imp_weapons_research_facility1	PATROL	13	23.17	-20.00	130.30	0	1	an Imperial sharpshooter	syren_5_imperial_stormtrooper_rifleman_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800854	TALUS	tal_imp_weapons_research_facility1	AREA	13	35.63	-20.00	139.86	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800855	TALUS	tal_imp_weapons_research_facility1	AREA	13	30.38	-20.00	125.31	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800856	TALUS	tal_imp_weapons_research_facility1	AREA	14	23.14	-12.00	21.32	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800857	TALUS	tal_imp_weapons_research_facility1	AREA	14	26.20	-12.00	2.94	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800858	TALUS	tal_imp_weapons_research_facility1	AREA	14	25.58	-12.00	20.82	0	1	an Imperial sand trooper	syren_5_imperial_sand_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800859	TALUS	tal_imp_weapons_research_facility1	AREA	14	39.77	-12.00	0.72	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800860	TALUS	tal_imp_weapons_research_facility1	AREA	14	55.58	-12.00	10.93	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	LOITER	2	0	-	idle	0	0	0	300
+800861	TALUS	tal_imp_weapons_research_facility1	AREA	14	39.28	-12.00	21.31	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800862	TALUS	tal_imp_weapons_research_facility1	AREA	14	20.44	-12.00	2.38	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800863	TALUS	tal_imp_weapons_research_facility1	AREA	14	50.11	-12.00	21.27	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800864	TALUS	tal_imp_weapons_research_facility1	PATROL	15	14.47	-12.00	2.96	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800865	TALUS	tal_imp_weapons_research_facility1	AREA	16	-16.85	-20.00	8.05	0	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800866	TALUS	tal_imp_weapons_research_facility1	AREA	16	-16.85	-20.00	3.10	0	1	an Imperial sharpshooter	syren_5_imperial_stormtrooper_rifleman_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800867	TALUS	tal_imp_weapons_research_facility1	PATROL	17	-28.01	-20.00	2.77	0	1	an Imperial sharpshooter	syren_5_imperial_stormtrooper_rifleman_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800868	TALUS	tal_imp_weapons_research_facility1	PATROL	18	-30.65	-20.00	86.09	0	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800869	TALUS	tal_imp_weapons_research_facility1	PATROL	19	-35.97	-20.00	110.89	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800870	TALUS	tal_imp_weapons_research_facility1	PATROL	19	-18.31	-20.00	124.10	0	1	an Imperial sand trooper	syren_5_imperial_sand_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800871	TALUS	tal_imp_weapons_research_facility1	AREA	19	-33.87	-20.00	97.48	0	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800872	TALUS	tal_imp_weapons_research_facility1	AREA	19	-13.07	-20.00	98.83	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800873	TALUS	tal_imp_weapons_research_facility1	PATROL	20	-2.68	-20.00	81.06	0	1	an Imperial exterminator	syren_5_imperial_imperial_exterminator_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800874	TALUS	tal_imp_weapons_research_facility1	AREA	21	-2.28	-20.00	75.43	0	1	an Imperial sharpshooter	syren_5_imperial_stormtrooper_rifleman_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800875	TALUS	tal_imp_weapons_research_facility1	AREA	21	2.14	-20.00	69.09	0	1	an Imperial sniper	syren_5_imperial_stormtrooper_sniper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800876	TALUS	tal_imp_weapons_research_facility1	PATROL	22	28.08	-12.00	70.49	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800877	TALUS	tal_imp_weapons_research_facility1	PATROL	5	7.96	-12.00	25.97	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800878	TALUS	tal_imp_weapons_research_facility1	PATROL	5	-1.10	-12.00	25.74	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800879	TALUS	tal_imp_weapons_research_facility1	AREA	5	23.36	-12.00	50.76	0	1	an Imperial sand trooper	syren_5_imperial_sand_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800880	TALUS	tal_imp_weapons_research_facility1	AREA	5	20.78	-12.00	44.95	0	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800881	TALUS	tal_imp_weapons_research_facility1	AREA	5	3.45	-12.00	57.23	0	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800882	TALUS	tal_imp_weapons_research_facility1	AREA	5	-14.24	-12.00	47.17	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800883	TALUS	tal_imp_weapons_research_facility1	AREA	5	3.45	-12.00	35.97	0	1	an Imperial sniper	syren_5_imperial_stormtrooper_sniper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800884	TALUS	tal_imp_weapons_research_facility1	PATROL	6	-41.91	-20.00	47.14	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800885	TALUS	tal_imp_weapons_research_facility1	PATROL	7	-73.49	-20.00	31.05	0	1	an Imperial exterminator	syren_5_imperial_imperial_exterminator_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800886	TALUS	tal_imp_weapons_research_facility1	PATROL	7	-72.45	-20.00	48.07	0	1	an Elite Novatrooper	syren_5_imperial_stormtrooper_novatrooper_elite_commander_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800887	TALUS	tal_imp_weapons_research_facility1	AREA	7	-67.87	-20.00	30.46	0	1	an Imperial sand trooper	syren_5_imperial_sand_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800888	TALUS	tal_imp_weapons_research_facility1	AREA	7	-67.99	-20.00	46.67	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800889	TALUS	tal_imp_weapons_research_facility1	AREA	7	-65.08	-20.00	54.53	0	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800890	TALUS	tal_imp_weapons_research_facility1	AREA	7	-69.52	-20.00	64.66	0	1	an Imperial sharpshooter	syren_5_imperial_stormtrooper_rifleman_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800891	TALUS	tal_imp_weapons_research_facility1	AREA	7	-60.90	-20.00	48.80	0	1	an Imperial sniper	syren_5_imperial_stormtrooper_sniper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800892	TALUS	tal_imp_weapons_research_facility1	AREA	8	-59.30	-20.00	13.00	0	1	an Imperial Inquisitor	syren_5_imperial_inquisitor_83_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800893	TALUS	tal_imp_weapons_research_facility1	AREA	8	-70.63	-20.00	12.99	0	1	an Imperial stormtrooper	syren_5_imperial_stormtrooper_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800894	TALUS	tal_imp_weapons_research_facility1	AREA	9	-71.98	-20.00	81.00	90	1	an Imperial exterminator	syren_5_imperial_imperial_exterminator_hard_84_h_agg_e	Dungeon	Syren Imperial Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800895	TALUS	tal_imp_weapons_research_facility1	AREA	9	-77.60	-20.00	73.94	44	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800896	TALUS	tal_imp_weapons_research_facility1	AREA	9	-77.60	-20.00	88.03	133	1	an Imperial scout trooper	syren_5_imperial_scout_trooper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800897	TALUS	tal_imp_weapons_research_facility1	AREA	9	-49.45	-20.00	86.02	-90	1	an Imperial surgeon	syren_5_imperial_stormtrooper_medic_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800898	TALUS	tal_imp_weapons_research_facility1	AREA	9	-49.48	-20.00	76.25	-84	1	an Imperial sniper	syren_5_imperial_stormtrooper_sniper_hard_85_h_agg_e	Dungeon	Syren Imperial Bunker	1	IDLE	0	0	-	idle	0	0	0	300
+800899	TALUS	tal_imp_weapons_research_facility2	PATROL	10	35.57	-12.00	64.05	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800900	TALUS	tal_imp_weapons_research_facility2	PATROL	11	71.78	-12.00	82.95	0	1	an elite Rebel soldier	syren_5_rebel_soldier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800901	TALUS	tal_imp_weapons_research_facility2	PATROL	12	70.96	-12.00	58.62	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800902	TALUS	tal_imp_weapons_research_facility2	PATROL	13	35.45	-12.00	93.47	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800903	TALUS	tal_imp_weapons_research_facility2	AREA	13	36.69	-20.00	120.00	0	1	a Rebel commander	syren_5_rebel_rebel_admiral_83_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800904	TALUS	tal_imp_weapons_research_facility2	AREA	13	35.77	-20.00	140.30	0	1	a Rebel rifleman	syren_5_rebel_rifleman_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800905	TALUS	tal_imp_weapons_research_facility2	AREA	14	26.93	-12.00	2.76	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800906	TALUS	tal_imp_weapons_research_facility2	AREA	14	38.77	-20.00	0.99	0	1	a Rebel grenadier	syren_5_rebel_grenadier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800907	TALUS	tal_imp_weapons_research_facility2	AREA	14	23.70	-12.00	20.68	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800908	TALUS	tal_imp_weapons_research_facility2	AREA	14	36.88	-12.00	10.72	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800909	TALUS	tal_imp_weapons_research_facility2	AREA	14	19.83	-12.00	0.95	0	1	a Rebel commander	syren_5_rebel_rebel_admiral_83_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800910	TALUS	tal_imp_weapons_research_facility2	AREA	14	55.11	-12.00	20.83	0	1	a Rebel rifleman	syren_5_rebel_rifleman_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800911	TALUS	tal_imp_weapons_research_facility2	AREA	14	42.61	-20.00	10.87	0	1	an elite Rebel soldier	syren_5_rebel_soldier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800912	TALUS	tal_imp_weapons_research_facility2	AREA	16	-13.47	-12.00	2.84	0	1	a Rebel guardsman	syren_5_rebel_guardsman_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800913	TALUS	tal_imp_weapons_research_facility2	PATROL	17	-29.31	-20.00	3.28	0	1	a Rebel grenadier	syren_5_rebel_grenadier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800914	TALUS	tal_imp_weapons_research_facility2	PATROL	18	-30.31	-20.00	86.06	0	1	a Rebel liberator	syren_5_rebel_liberator_hard_84_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800915	TALUS	tal_imp_weapons_research_facility2	AREA	19	-12.48	-20.00	98.26	0	1	a Rebel grenadier	syren_5_rebel_grenadier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800916	TALUS	tal_imp_weapons_research_facility2	AREA	19	-32.67	-20.00	99.46	0	1	a Rebel rifleman	syren_5_rebel_rifleman_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800917	TALUS	tal_imp_weapons_research_facility2	AREA	19	-17.46	-20.00	103.19	0	1	a Rebel rifleman	syren_5_rebel_rifleman_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800918	TALUS	tal_imp_weapons_research_facility2	PATROL	20	-2.30	-20.00	85.22	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800919	TALUS	tal_imp_weapons_research_facility2	AREA	21	1.49	-20.00	68.46	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800920	TALUS	tal_imp_weapons_research_facility2	AREA	21	-2.48	-20.00	74.91	0	1	a Rebel liberator	syren_5_rebel_liberator_hard_84_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800921	TALUS	tal_imp_weapons_research_facility2	PATROL	5	3.58	-12.00	25.61	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800922	TALUS	tal_imp_weapons_research_facility2	AREA	5	3.39	-12.00	32.99	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800923	TALUS	tal_imp_weapons_research_facility2	AREA	5	21.58	-12.00	46.53	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800924	TALUS	tal_imp_weapons_research_facility2	AREA	5	-15.04	-12.00	47.39	0	1	a Rebel grenadier	syren_5_rebel_grenadier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800925	TALUS	tal_imp_weapons_research_facility2	AREA	5	23.45	-12.00	51.74	0	1	a Rebel liberator	syren_5_rebel_liberator_hard_84_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800926	TALUS	tal_imp_weapons_research_facility2	AREA	5	-10.49	-12.00	46.74	0	1	a Rebel commander	syren_5_rebel_rebel_admiral_83_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800927	TALUS	tal_imp_weapons_research_facility2	AREA	5	3.94	-12.00	59.38	0	1	an elite Rebel soldier	syren_5_rebel_soldier_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800928	TALUS	tal_imp_weapons_research_facility2	PATROL	7	-69.62	-20.00	64.98	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800929	TALUS	tal_imp_weapons_research_facility2	AREA	7	-65.89	-20.00	48.13	0	1	a Rebel guardsman	syren_5_rebel_guardsman_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	2	LOITER	4	0	-	idle	0	0	0	300
+800930	TALUS	tal_imp_weapons_research_facility2	AREA	8	-56.16	-20.00	12.94	0	1	an elite Rebel cadet	syren_5_rebel_cadet_hard_85_h_agg_e	Dungeon	Syren Rebel Bunker	1	TURN	0	0	-	idle	0	0	0	300
+800931	TALUS	tal_imp_weapons_research_facility2	PATROL	9	-66.10	-20.00	73.72	0	1	a Rebel heavy trooper	syren_5_rebel_heavy_trooper_hard_86_h_agg_e	Dungeon	Syren Rebel Bunker	1	PATROL	0	0	column	idle	0	0	0	600
+800932	TALUS	tal_small_base_landing_pad	AREA	1	-3.80	0.20	-17.50	-85	1	a Talusian smuggler elite guard	talus_nashal_smuggler_guard_elite_42_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800933	TALUS	tal_small_base_shed1	AREA	6	-3.80	0.10	-3.80	90	1	a nervous Talusian smuggler	talus_nashal_smuggler_informant_100_h_inv_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800934	TALUS	tal_world	AREA	0	-4915.92	4.48	-4498.27	0	1	an agriculturalist	farmer_agriculturist_8_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800935	TALUS	tal_world	AREA	0	-4909.06	4.02	-4497.92	0	1	a mercenary	mercenary_aggro_11_h_agg_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+800936	TALUS	tal_world	AREA	0	-4067.33	36.30	3662.69	0	1	a Binayre chief	binayre_chief_47_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800937	TALUS	tal_world	AREA	0	-4069.00	35.99	3669.61	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+800938	TALUS	tal_world	AREA	0	5555.40	562.15	7057.79	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800939	TALUS	tal_world	AREA	0	5525.20	575.45	7110.45	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800940	TALUS	tal_world	AREA	0	5521.51	557.14	7030.08	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800941	TALUS	tal_world	AREA	0	5520.67	546.54	7062.56	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800942	TALUS	tal_world	AREA	0	5491.18	556.70	7067.31	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800943	TALUS	tal_world	AREA	0	5095.90	91.99	6382.28	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800944	TALUS	tal_world	AREA	0	5080.63	80.76	6415.96	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800945	TALUS	tal_world	AREA	0	5069.80	84.87	6367.88	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800946	TALUS	tal_world	AREA	0	5049.24	93.89	6405.29	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800947	TALUS	tal_world	AREA	0	5569.07	575.09	7072.20	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800948	TALUS	tal_world	AREA	0	5546.80	574.98	7019.11	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800949	TALUS	tal_world	AREA	0	5523.92	577.74	7111.96	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800950	TALUS	tal_world	AREA	0	5476.29	576.76	7036.04	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800951	TALUS	tal_world	AREA	0	5470.79	569.47	7066.47	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800952	TALUS	tal_world	AREA	0	5098.87	99.57	6404.18	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800953	TALUS	tal_world	AREA	0	5084.94	88.15	6375.71	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800954	TALUS	tal_world	AREA	0	5067.33	88.79	6405.18	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800955	TALUS	tal_world	AREA	0	5039.81	95.69	6391.00	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800956	TALUS	tal_world	AREA	0	6812.98	610.85	7385.93	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800957	TALUS	tal_world	AREA	0	6810.53	593.83	7432.26	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800958	TALUS	tal_world	AREA	0	6800.45	602.54	7457.85	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800959	TALUS	tal_world	AREA	0	6792.50	606.86	7418.67	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800960	TALUS	tal_world	AREA	0	6640.43	678.95	7314.78	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800961	TALUS	tal_world	AREA	0	6637.33	659.54	7348.90	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800962	TALUS	tal_world	AREA	0	6620.37	670.00	7305.13	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800963	TALUS	tal_world	AREA	0	6601.08	671.83	7335.65	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800964	TALUS	tal_world	AREA	0	6586.49	688.15	7325.99	0	1	a brood II arachne	arachne_brood_ii_41_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800965	TALUS	tal_world	AREA	0	6648.31	668.76	7330.47	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800966	TALUS	tal_world	AREA	0	6637.61	686.94	7302.51	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800967	TALUS	tal_world	AREA	0	6595.81	683.77	7344.27	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800968	TALUS	tal_world	AREA	0	6588.36	677.72	7322.19	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800969	TALUS	tal_world	AREA	0	6812.89	593.29	7431.72	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800970	TALUS	tal_world	AREA	0	6801.18	617.82	7381.39	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800971	TALUS	tal_world	AREA	0	6794.79	607.70	7469.04	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800972	TALUS	tal_world	AREA	0	6783.37	618.96	7410.55	0	1	a brood II aurek arachne	arachne_brood_ii_aurek_42_c_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+800973	TALUS	tal_world	AREA	0	6399.44	630.13	7369.53	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800974	TALUS	tal_world	AREA	0	6393.65	627.55	7345.07	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800975	TALUS	tal_world	AREA	0	6373.89	633.81	7339.95	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800976	TALUS	tal_world	AREA	0	6216.77	675.16	7217.12	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800977	TALUS	tal_world	AREA	0	6139.18	688.90	7121.42	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800978	TALUS	tal_world	AREA	0	6063.34	668.70	7034.85	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800979	TALUS	tal_world	AREA	0	6043.33	660.98	6998.20	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800980	TALUS	tal_world	AREA	0	6004.33	672.39	7010.91	0	1	a brood V arachne	arachne_brood_v_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800981	TALUS	tal_world	AREA	0	6402.70	627.22	7332.09	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800982	TALUS	tal_world	AREA	0	6384.04	630.43	7369.62	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800983	TALUS	tal_world	AREA	0	6366.20	639.87	7346.15	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800984	TALUS	tal_world	AREA	0	6236.53	673.49	7229.41	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800985	TALUS	tal_world	AREA	0	6204.36	667.11	7221.28	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800986	TALUS	tal_world	AREA	0	6140.28	686.01	7128.43	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800987	TALUS	tal_world	AREA	0	6137.80	684.66	7115.06	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800988	TALUS	tal_world	AREA	0	6061.10	665.47	7016.78	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800989	TALUS	tal_world	AREA	0	6035.87	658.89	6991.80	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800990	TALUS	tal_world	AREA	0	6006.46	670.07	7000.51	0	1	a brood V aurek arachne	arachne_brood_v_aurek_45_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800991	TALUS	tal_world	AREA	0	-5114.33	19.60	3219.20	0	1	a sickly decay mite queen	mite_sickly_decay_queen_19_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800992	TALUS	tal_world	AREA	0	-5120.63	19.54	3222.97	0	1	an oozing dung mite guardian	mite_dung_oozing_guardian_16_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800993	TALUS	tal_world	AREA	0	-5143.29	19.10	3236.03	0	1	a puss-covered decay mite soldier	mite_decay_soldier_pusscovered_14_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800994	TALUS	tal_world	AREA	0	-5150.41	13.013	3192.60	0	1	a puss-covered decay mite soldier	mite_decay_soldier_pusscovered_14_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800995	TALUS	tal_world	AREA	0	-5117.46	17.58	3205.93	0	1	a putrid decay mite hatchling	mite_decay_hatchling_putrid_4_c_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800996	TALUS	tal_world	AREA	0	-4989.03	41.92	5755.79	0	1	a sickly decay mite queen	mite_sickly_decay_queen_19_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+800997	TALUS	tal_world	AREA	0	-4977.84	42.67	5754.89	0	1	an oozing dung mite guardian	mite_dung_oozing_guardian_16_c_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+800998	TALUS	tal_world	AREA	0	7331.12	615.76	7543.55	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+800999	TALUS	tal_world	AREA	0	7325.99	595.00	7584.72	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801000	TALUS	tal_world	AREA	0	7311.41	595.00	7549.99	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801001	TALUS	tal_world	AREA	0	7304.11	595.34	7535.14	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801002	TALUS	tal_world	AREA	0	7284.64	609.17	7584.84	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801003	TALUS	tal_world	AREA	0	7276.16	610.30	7550.88	0	1	a brood I arachne	arachne_brood_i_41_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801004	TALUS	tal_world	AREA	0	7328.57	595.00	7592.37	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801005	TALUS	tal_world	AREA	0	7327.22	605.16	7532.20	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801006	TALUS	tal_world	AREA	0	7317.83	598.87	7541.20	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801007	TALUS	tal_world	AREA	0	7294.51	606.29	7595.33	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801008	TALUS	tal_world	AREA	0	7275.76	614.15	7569.41	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801009	TALUS	tal_world	AREA	0	7272.70	608.77	7539.36	0	1	a brood I aurek arachne	arachne_brood_i_aurek_42_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801010	TALUS	tal_world	AREA	0	-2406.00	23.00	2044.00	0	1	Black Sun Initiate	black_sun_initiate_50_h_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801011	TALUS	tal_world	AREA	0	-2384.36	24.04	2033.47	0	1	Black Sun Minion	black_sun_minion_54_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801012	TALUS	tal_world	AREA	0	-2412.28	27.52	2024.94	0	1	Black Sun Smuggler	black_sun_smuggler_52_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801013	TALUS	tal_world	AREA	0	5964.97	2.18	-1184.88	0	1	an Imperial Warrant Officer I	imp_warrant_officer_i_19_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801014	TALUS	tal_world	AREA	0	5965.84	2.18	-1190.70	0	1	a Stormtrooper Rifleman	stormtrooper_rifleman_25_h_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801015	TALUS	tal_world	AREA	0	5981.08	3.48	-1205.62	0	1	a Stormtrooper Sniper	stormtrooper_sniper_25_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801016	TALUS	tal_world	AREA	0	609.90	43.17	1111.46	0	1	a pathfinder	pathfinder_19_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801017	TALUS	tal_world	AREA	0	618.33	40.85	1087.86	0	1	a warder	warder_100_h_inv_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801018	TALUS	tal_world	AREA	0	3889.64	29.87	3392.41	0	1	a frontiersman	frontiersman_17_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801019	TALUS	tal_world	AREA	0	3880.92	30.04	3390.06	0	1	a warder	warder_100_h_inv_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801020	TALUS	tal_world	AREA	0	4796.70	637.39	-6236.78	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801021	TALUS	tal_world	AREA	0	4795.90	636.46	-6245.48	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801022	TALUS	tal_world	AREA	0	4788.19	636.80	-6234.30	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801023	TALUS	tal_world	AREA	0	4783.89	637.18	-6245.68	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal_50_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801024	TALUS	tal_world	AREA	0	4791.47	637.94	-6240.60	0	1	a Lost Aqualish warchief	lost_aqualish_warchief_52_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801025	TALUS	tal_world	AREA	0	-3635.02	56.44	6327.26	0	1	a bodyguard	bodyguard_100_h_inv_n	Outback	Talus	5	LOITER	10	0	-	idle	0	0	0	300
+801026	TALUS	tal_world	AREA	0	-3631.88	56.49	6328.00	0	1	a scientist	scientist_1_h_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801027	TALUS	tal_world	AREA	0	-3448.85	43.47	6187.27	0	1	a smuggler	smuggler_100_h_inv_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801028	TALUS	tal_world	AREA	0	3960.22	6.08	5061.24	0	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801029	TALUS	tal_world	AREA	0	3973.00	2.02	5083.31	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801030	TALUS	tal_world	AREA	0	3954.97	16.18	5085.72	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801031	TALUS	tal_world	AREA	0	3013.11	181.89	6393.05	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801032	TALUS	tal_world	AREA	0	3012.94	179.38	6373.12	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801033	TALUS	tal_world	AREA	0	3000.79	196.73	6410.56	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801034	TALUS	tal_world	AREA	0	3000.59	176.18	6358.40	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801035	TALUS	tal_world	AREA	0	2995.77	181.37	6388.63	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801036	TALUS	tal_world	AREA	0	2982.81	181.48	6379.87	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801037	TALUS	tal_world	AREA	0	2980.02	176.24	6341.58	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801038	TALUS	tal_world	AREA	0	2979.36	197.40	6406.30	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801039	TALUS	tal_world	AREA	0	2974.70	181.53	6377.33	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801040	TALUS	tal_world	AREA	0	2961.72	180.52	6336.18	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801041	TALUS	tal_world	AREA	0	2959.65	196.65	6393.18	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801042	TALUS	tal_world	AREA	0	2957.09	182.53	6362.00	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801043	TALUS	tal_world	AREA	0	2954.08	212.18	6410.56	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801044	TALUS	tal_world	AREA	0	2949.41	182.01	6336.22	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801045	TALUS	tal_world	AREA	0	2948.80	196.53	6380.19	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801046	TALUS	tal_world	AREA	0	2937.80	212.14	6395.89	0	1	a Meatlump moop	mtp_quest_farles_meatlump_high_90_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801047	TALUS	tal_world	AREA	0	4096.18	8.27	-55.45	0	1	a comm operator	imp_comm_operator_14_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801048	TALUS	tal_world	AREA	0	4096.14	8.48	-48.01	0	1	a Rebel scout	rebel_scout_15_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801049	TALUS	tal_world	AREA	0	4791.00	22.80	5437.42	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801050	TALUS	tal_world	AREA	0	4783.75	24.07	5427.61	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801051	TALUS	tal_world	AREA	0	4779.76	24.00	5434.19	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801052	TALUS	tal_world	AREA	0	4759.66	33.46	5358.38	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801053	TALUS	tal_world	AREA	0	4756.86	33.30	5368.16	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801054	TALUS	tal_world	AREA	0	4751.61	33.14	5360.36	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801055	TALUS	tal_world	AREA	0	4745.70	22.74	5552.11	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801056	TALUS	tal_world	AREA	0	4737.33	21.43	5564.88	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801057	TALUS	tal_world	AREA	0	4732.74	21.35	5553.05	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801058	TALUS	tal_world	AREA	0	4712.37	29.94	5425.61	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801059	TALUS	tal_world	AREA	0	4705.37	28.83	5420.20	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801060	TALUS	tal_world	AREA	0	4700.62	27.71	5430.53	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801061	TALUS	tal_world	AREA	0	4662.69	22.35	5524.91	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801062	TALUS	tal_world	AREA	0	4657.43	18.55	5512.92	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801063	TALUS	tal_world	AREA	0	4652.05	19.69	5521.07	0	1	a Rebel sentry	itp_hethrir_rebel_nashal_camper_88_h_att_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801064	TALUS	tal_world	AREA	0	-1732.09	18.06	-2883.22	0	1	a frenzied fynock guardian	fynock_frenzied_guardian_11_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801065	TALUS	tal_world	AREA	0	-1727.56	17.66	-2885.56	0	1	a glutted fynock queen	fynock_glutted_queen_14_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801066	TALUS	tal_world	AREA	0	-2256.95	5.26	900.69	0	1	a minor sludge panther	sludge_panther_minor_37_c_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801067	TALUS	tal_world	AREA	0	-2253.59	5.45	897.94	0	1	a sludge panther	sludge_panther_44_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801068	TALUS	tal_world	AREA	0	7541.33	443.37	876.83	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801069	TALUS	tal_world	AREA	0	7539.51	444.73	886.27	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801070	TALUS	tal_world	AREA	0	7533.44	443.26	879.29	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801071	TALUS	tal_world	AREA	0	3101.34	65.92	-4063.30	0	1	a SpecForce marine	specforce_marine_18_h_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801072	TALUS	tal_world	AREA	0	3089.87	65.86	-4017.90	0	1	a SpecForce wilderness operative	specforce_wilderness_operative_18_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801073	TALUS	tal_world	AREA	0	-4460.37	6.35	4064.20	0	1	a berserk kahmurra	kahmurra_berserk_46_c_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801074	TALUS	tal_world	AREA	0	5173.18	32.14	-1738.56	0	1	a crazed roba	roba_crazed_40_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801075	TALUS	tal_world	AREA	0	1638.14	7.00	5435.90	0	1	a crazed roba	roba_crazed_40_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801076	TALUS	tal_world	AREA	0	4842.20	94.00	-4729.86	0	1	a fynock	fynock_40_c_att_n	Outback	Talus	8	LOITER	16	0	-	idle	0	0	0	300
+801077	TALUS	tal_world	AREA	0	-3491.27	39.99	3701.20	0	1	a greater sludge panther	panther_greater_sludge_49_c_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801078	TALUS	tal_world	AREA	0	-5679.59	7.12	5285.85	0	1	a guf drolg	guf_drolg_42_c_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801079	TALUS	tal_world	AREA	0	-4597.10	40.43	5701.30	0	1	a hilltop kima	kima_hilltop_47_c_att_n	Outback	Talus	5	LOITER	10	0	-	idle	0	0	0	300
+801080	TALUS	tal_world	AREA	0	5438.07	141.20	5581.09	0	1	a hilltop kima	kima_hilltop_47_c_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801081	TALUS	tal_world	AREA	0	-5218.80	48.52	4603.69	0	1	a huf dun	huf_dun_47_c_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801082	TALUS	tal_world	AREA	0	-5226.41	48.62	4596.66	0	1	a huf dun bull	huf_dun_bull_48_c_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801083	TALUS	tal_world	AREA	0	-1397.15	22.38	2118.89	0	1	a sludge panther	sludge_panther_44_c_agg_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801084	TALUS	tal_world	AREA	0	82.42	11.53	1580.18	0	1	a tortur bull	tortur_bull_50_c_att_n	Outback	Talus	1	LOITER	30	0	-	idle	0	0	0	300
+801085	TALUS	tal_world	AREA	0	4971.39	63.88	3847.52	0	1	a tortur bull	tortur_bull_50_c_att_n	Outback	Talus	1	LOITER	30	0	-	idle	0	0	0	300
+801086	TALUS	tal_world	AREA	0	-4001.90	1.36	971.43	0	1	a vicious huf dun	huf_dun_vicious_46_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801087	TALUS	tal_world	AREA	0	-4759.85	15.79	3932.91	0	1	a wolf kima	kima_wolf_45_c_agg_n	Outback	Talus	3	LOITER	3	0	-	idle	0	0	0	300
+801088	TALUS	tal_world	AREA	0	-5097.89	9.33	1266.56	0	1	a wolf kima	kima_wolf_45_c_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801089	TALUS	tal_world	AREA	0	5473.74	43.03	1097.49	0	1	a woodland kima	kima_woodland_45_c_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801090	TALUS	tal_world	AREA	0	5407.53	57.28	2662.19	0	1	a kahmurra	kahmurra_43_c_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801091	TALUS	tal_world	AREA	0	-4480.24	22.67	64.07	0	1	a kahmurra blanca	murra_blanca_30_c_agg_e	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	900
+801092	TALUS	tal_world	AREA	0	-3810.48	2.73	-6486.62	0	1	a kahmurra blanca	murra_blanca_30_c_agg_e	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	900
+801093	TALUS	tal_world	AREA	0	-4475.02	24.32	56.07	0	1	a mutated kahmurra	kahmurra_mutated_50_c_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801094	TALUS	tal_world	AREA	0	2119.40	27.94	1275.18	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	900
+801095	TALUS	tal_world	AREA	0	911.50	80.68	4643.62	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	900
+801096	TALUS	tal_world	AREA	0	5199.15	30.53	-1739.00	0	1	a painted spat	spat_painted_30_c_agg_e	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	900
+801097	TALUS	tal_world	AREA	0	-5143.26	36.77	3705.02	0	1	a puss-covered decay mite soldier	mite_decay_soldier_pusscovered_14_c_agg_n	Outback	Talus	5	LOITER	10	0	-	idle	0	0	0	300
+801098	TALUS	tal_world	AREA	0	1112.96	58.30	1487.97	0	1	a puss-covered decay mite soldier	mite_decay_soldier_pusscovered_14_c_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801099	TALUS	tal_world	AREA	0	-5476.13	41.15	5821.53	0	1	a female roba	roba_female_44_c_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801100	TALUS	tal_world	AREA	0	-5481.98	39.77	5820.47	0	1	a male roba	roba_male_43_c_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801101	TALUS	tal_world	AREA	0	-3676.99	35.00	-554.04	0	1	an Aa'kuan guardian	aakuan_guardian_48_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801102	TALUS	tal_world	AREA	0	-3682.28	35.35	-543.34	0	1	an Aa'kuan keeper	aakuan_keeper_42_h_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801103	TALUS	tal_world	AREA	0	-3332.33	76.37	5170.76	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801104	TALUS	tal_world	AREA	0	1731.60	6.80	777.85	0	1	a Binayre pirate	binayre_pirate_43_h_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801105	TALUS	tal_world	AREA	0	-567.06	53.49	1272.76	0	1	a Binayre smuggler	binayre_smuggler_45_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801106	TALUS	tal_world	AREA	0	-3365.83	32.23	-3812.11	0	1	a Binayre smuggler	binayre_smuggler_45_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801107	TALUS	tal_world	AREA	0	-1836.10	7.92	1433.41	0	1	a Chadra Fan assassin	chadra_fan_assassin_19_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801108	TALUS	tal_world	AREA	0	-456.15	31.00	4455.92	-144	1	a dead researcher	exar_intro_dead_researcher_100_h_inv_n	Outback	Talus	1	IDLE	0	0	-	npc_dead_02	0	0	0	300
+801109	TALUS	tal_world	AREA	0	-3009.68	0.19	1947.25	0	1	a hermit	hermit_1_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801110	TALUS	tal_world	AREA	0	-127.03	2.58	325.49	0	1	a highwayman	highwayman_8_h_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801111	TALUS	tal_world	AREA	0	-4555.49	140.34	-2903.24	0	1	a Talus Liberation Party patriot	liberation_patriot_43_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801112	TALUS	tal_world	AREA	0	-3383.05	38.16	-6016.87	0	1	a Lost Aqualish marksman	lost_aqualish_marksman_43_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801113	TALUS	tal_world	AREA	0	-2722.35	33.33	-2265.00	0	1	a Lost Aqualish scout	lost_aqualish_scout_36_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801114	TALUS	tal_world	AREA	0	5350.72	1.08	4544.20	0	1	a Lost Aqualish scout	lost_aqualish_scout_36_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801115	TALUS	tal_world	AREA	0	-100.89	73.30	2603.95	0	1	a Lost Aqualish warrior	lost_aqualish_warrior_42_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801116	TALUS	tal_world	AREA	0	13.82	6.14	-902.64	0	1	a Lost Aqualish warrior	lost_aqualish_warrior_42_h_agg_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801117	TALUS	tal_world	AREA	0	-4021.08	30.06	4621.34	0	1	an Aa'kuan sentinel	mission_bounty_aakuan_sentinal_20_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801118	TALUS	tal_world	AREA	0	1116.61	26.90	-1771.71	0	1	a pathfinder	pathfinder_19_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801119	TALUS	tal_world	AREA	0	-2595.22	47.01	101.25	0	1	a Rebel commando	rebel_commando_25_h_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801120	TALUS	tal_world	AREA	0	-3194.31	50.10	4758.00	0	1	a Rebel SpecForce urban guerrilla	rebel_specforce_guerrilla_18_h_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801121	TALUS	tal_world	AREA	0	3214.75	8.43	1259.73	0	1	a Scout Trooper	scout_trooper_23_h_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801122	TALUS	tal_world	AREA	0	-6024.07	66.57	-1185.96	0	1	a Scout Trooper	scout_trooper_23_h_att_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801123	TALUS	tal_world	AREA	0	2340.56	38.83	2932.72	0	1	a Sleemo scamp	sleemo_scamp_5_h_att_n	Outback	Talus	6	LOITER	12	0	-	idle	0	0	0	300
+801124	TALUS	tal_world	AREA	0	2381.78	125.03	-4995.11	0	1	a SpecOps trooper	specops_trooper_17_h_att_n	Outback	Talus	4	LOITER	8	0	-	idle	0	0	0	300
+801125	TALUS	tal_world	AREA	0	1725.78	22.90	1626.42	0	1	a Stormtrooper Rifleman	stormtrooper_rifleman_25_h_att_n	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801126	TALUS	tal_world	AREA	0	-4593.02	0.62	4347.52	0	1	a TTLP Soldier	talus_ttlp_soldier_35_h_att_e	Outback	Talus	3	LOITER	6	0	-	idle	0	0	0	300
+801127	TALUS	tal_world	AREA	0	-54.26	7.62	979.88	0	1	a thug	thug_human_female_4_h_att_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801128	TALUS	tal_world	AREA	0	-6681.98	680.50	7267.21	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801129	TALUS	tal_world	AREA	0	-5808.94	5.12	-6401.20	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801130	TALUS	tal_world	AREA	0	-3165.21	689.69	6827.62	0	1	a Jedi Padawan	treasure_guard_padawan_58_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801131	TALUS	tal_world	AREA	0	-3151.39	5.35	-926.84	0	1	a warder	warder_100_h_inv_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801132	TALUS	tal_world	AREA	0	4317.45	49.44	4707.03	64	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801133	TALUS	tal_world	AREA	0	4310.33	49.44	4769.79	-171	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801134	TALUS	tal_world	AREA	0	4307.22	49.44	4750.66	-84	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801135	TALUS	tal_world	AREA	0	4287.09	49.44	4725.35	0	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801136	TALUS	tal_world	AREA	0	4266.67	49.44	4706.57	59	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801137	TALUS	tal_world	AREA	0	4264.41	49.44	4771.31	157	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801138	TALUS	tal_world	AREA	0	4260.41	49.44	4720.64	-116	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801139	TALUS	tal_world	AREA	0	4257.02	49.44	4760.63	-167	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801140	TALUS	tal_world	AREA	0	4352.73	69.26	4674.95	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801141	TALUS	tal_world	AREA	0	4335.38	68.09	4668.93	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801142	TALUS	tal_world	AREA	0	4287.27	63.55	4864.08	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801143	TALUS	tal_world	AREA	0	4274.87	59.18	4833.55	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801144	TALUS	tal_world	AREA	0	4273.49	60.60	4847.03	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801145	TALUS	tal_world	AREA	0	4260.70	62.49	4884.91	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801146	TALUS	tal_world	AREA	0	4218.98	63.28	4721.40	0	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	2	LOITER	4	0	-	idle	0	0	0	300
+801147	TALUS	tal_world	AREA	0	4284.18	49.44	4769.17	-175	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801148	TALUS	tal_world	AREA	0	4267.12	49.44	4745.66	94	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801149	TALUS	tal_world	AREA	0	4334.85	49.44	4732.38	-69	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801150	TALUS	tal_world	AREA	0	4334.40	49.44	4741.29	-144	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801151	TALUS	tal_world	AREA	0	4333.15	49.44	4751.82	-55	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801152	TALUS	tal_world	AREA	0	4329.71	49.44	4760.64	-150	1	a Talusian smuggler guard	talus_nashal_smuggler_guard_40_h_agg_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801153	TALUS	tal_world	AREA	0	4349.93	67.65	4684.41	0	1	a Talusian smuggler elite guard	talus_nashal_smuggler_guard_elite_42_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801154	TALUS	tal_world	AREA	0	4215.60	66.79	4743.87	0	1	a Talusian smuggler elite guard	talus_nashal_smuggler_guard_elite_42_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801155	TALUS	tal_world	AREA	0	4208.57	62.81	4702.15	0	1	a Talusian smuggler elite guard	talus_nashal_smuggler_guard_elite_42_h_agg_n	Outback	Talus	1	TURN	0	0	-	idle	0	0	0	300
+801156	TALUS	tal_world	AREA	0	4319.89	49.44	4708.27	-119	1	a CLL-8 binary load lifter	robo_bartender_1_d_att_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801157	TALUS	tal_world	AREA	0	4258.23	49.44	4719.59	61	1	a CLL-8 binary load lifter	robo_bartender_1_d_att_n	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801158	TALUS	tal_world	AREA	0	4304.71	49.44	4751.07	96	1	an EG-6 power droid	rtp_imp_dark_trooper_assault_92_d_att_e	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801159	TALUS	tal_world	AREA	0	4256.61	49.44	4759.43	18	1	an EG-6 power droid	rtp_imp_dark_trooper_assault_92_d_att_e	Outback	Talus	1	IDLE	0	0	-	idle	0	0	0	300
+801160	TALUS	tal_world	PATROL	0	4305.50	49.44	4706.01	0	1	a CLL-8 binary load lifter	talus_nashal_load_lifter_30_d_att_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801161	TALUS	tal_world	PATROL	0	4317.54	49.44	4735.19	0	1	a CLL-8 binary load lifter	talus_nashal_load_lifter_30_d_att_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801162	TALUS	tal_world	PATROL	0	4296.44	49.44	4713.67	0	1	an EG-6 power droid	talus_nashal_power_droid_30_d_att_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801163	TALUS	tal_world	PATROL	0	4307.86	49.44	4760.30	0	1	an EG-6 power droid	talus_nashal_power_droid_30_d_att_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801164	TALUS	tal_world	PATROL	0	4318.21	49.44	4763.32	0	1	a Talusian smuggler	talus_nashal_smuggler_40_h_agg_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801165	TALUS	tal_world	PATROL	0	4291.11	49.44	4760.54	0	1	a Talusian smuggler elite guard	talus_nashal_smuggler_guard_elite_42_h_agg_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300
+801166	TALUS	tal_world	PATROL	0	4307.12	49.44	4740.63	0	1	a Talusian smuggler leader	talus_nashal_smuggler_leader_42_h_agg_n	Outback	Talusian Smuggler Base	1	PATROL	0	0	column	idle	0	0	0	300

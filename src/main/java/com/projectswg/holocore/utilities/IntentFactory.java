@@ -32,14 +32,13 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
-
-import com.projectswg.holocore.intents.chat.PersistentMessageIntent;
-import com.projectswg.holocore.intents.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.waypoint.WaypointObject;
-import com.projectswg.holocore.resources.player.Player;
+import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import me.joshlarson.jlcommon.log.Log;
 
 /**
  * @author Mads

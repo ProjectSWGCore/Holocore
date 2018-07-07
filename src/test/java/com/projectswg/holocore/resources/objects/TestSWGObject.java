@@ -27,6 +27,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test_resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,17 +37,16 @@ import org.junit.runners.JUnit4;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.debug.Assert.AssertionException;
 
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
-public class TestSWGObject {
+public class TestSWGObject extends TestRunnerNoIntents {
 	
 	@Test
 	public void testWorldLocation() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		child.moveToContainer(parent);
 		
 		Location worldLocation = new Location(15, 17, 19, Terrain.NABOO);
@@ -64,7 +66,7 @@ public class TestSWGObject {
 	@Test
 	public void testChildTerrainUpdates() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		
 		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
@@ -79,30 +81,30 @@ public class TestSWGObject {
 		Assert.assertEquals(Terrain.TATOOINE, child.getTerrain());
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent1() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
 		child.setTerrain(Terrain.TATOOINE);
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent2() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
 		child.setPosition(Terrain.CORELLIA, 0, 0, 0);
 	}
 	
-	@Test(expected=AssertionException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testChildTerrainInvalidParent3() {
 		SWGObject parent = new GenericCreatureObject(1);
-		SWGObject child = new GenericCreatureObject(2);
+		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		

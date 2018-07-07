@@ -27,17 +27,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test_resources;
 
-import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.holocore.intents.object.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.containers.ContainerPermissionsType;
-import com.projectswg.holocore.resources.objects.GameObjectType;
-import com.projectswg.holocore.resources.objects.SWGObject;
-import com.projectswg.holocore.resources.objects.creature.CreatureObject;
-import com.projectswg.holocore.resources.objects.player.PlayerObject;
-import com.projectswg.holocore.resources.objects.tangible.TangibleObject;
-import com.projectswg.holocore.resources.player.Player;
-import com.projectswg.holocore.resources.player.PlayerState;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerState;
+import com.projectswg.holocore.resources.support.objects.GameObjectType;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -52,7 +50,7 @@ public class GenericCreatureObject extends CreatureObject {
 	
 	public GenericCreatureObject(long objectId) {
 		super(objectId);
-		player = new Player() {
+		player = new Player(objectId) {
 			@Override
 			public void sendPacket(SWGPacket ... packets) {
 				// Nah
@@ -60,6 +58,7 @@ public class GenericCreatureObject extends CreatureObject {
 		};
 		player.setPlayerState(PlayerState.ZONED_IN);
 		setHasOwner(true);
+		setupAsCharacter();
 		loadRange = -1;
 	}
 	
@@ -76,10 +75,8 @@ public class GenericCreatureObject extends CreatureObject {
 		}
 	}
 	
-	public void setupAsCharacter() {
-		for (String slotName : List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r")) {
-			setSlot(slotName, null);
-		}
+	private void setupAsCharacter() {
+		setSlots(List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r"));
 		
 		setArrangement(List.of(List.of("rider")));
 		setGameObjectType(GameObjectType.GOT_CREATURE_CHARACTER);
