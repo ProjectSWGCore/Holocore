@@ -1,6 +1,7 @@
 package com.projectswg.holocore.services.support.npc.ai;
 
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
+import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -9,6 +10,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -65,7 +67,7 @@ public class AIService extends Service {
 		if (!(eci.getSource() instanceof AIObject))
 			return;
 		AIObject obj = (AIObject) eci.getSource();
-		obj.startCombatMode();
+		StartNpcCombatIntent.broadcast(obj, List.of(eci.getTarget()));
 	}
 	
 }

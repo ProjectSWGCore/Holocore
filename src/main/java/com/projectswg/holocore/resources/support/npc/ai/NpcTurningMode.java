@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 /**
@@ -37,7 +36,7 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 public class NpcTurningMode extends NpcMode {
 	
 	public NpcTurningMode(AIObject obj) {
-		super(obj, ScheduledMode.DEFAULT);
+		super(obj);
 	}
 	
 	@Override

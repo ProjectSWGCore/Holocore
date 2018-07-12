@@ -5,24 +5,18 @@ import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.Random;
 
 public abstract class NpcMode {
 	
 	private final Random random;
-	
 	private final AIObject obj;
-	private final ScheduledMode mode;
 	
-	public NpcMode(AIObject obj, ScheduledMode mode) {
+	public NpcMode(AIObject obj) {
 		this.random = new Random();
 		this.obj = obj;
-		this.mode = mode;
 	}
 	
 	public abstract void act();
@@ -88,25 +82,8 @@ public abstract class NpcMode {
 		return obj.getSpawner();
 	}
 	
-	@Nullable
-	public final NpcMode requestPeerMode(AIObject obj) {
-		return obj.getMode(mode);
-	}
-	
 	public final void queueNextLoop(long delay) {
 		obj.queueNextLoop(delay);
-	}
-	
-	public final boolean isExecuting() {
-		return obj.getActiveMode() == mode;
-	}
-	
-	public final void requestModeStart() {
-		obj.requestModeStart(mode);
-	}
-	
-	public final void requestModeEnd() {
-		obj.requestModeEnd(mode);
 	}
 	
 	public final double getWalkSpeed() {
@@ -131,10 +108,6 @@ public abstract class NpcMode {
 	
 	public final void runTo(Location location) {
 		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed(), obj.getNextUpdateCount());
-	}
-	
-	ScheduledMode getMode() {
-		return mode;
 	}
 	
 }

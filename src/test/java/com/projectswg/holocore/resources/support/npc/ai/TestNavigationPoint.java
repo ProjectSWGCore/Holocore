@@ -21,8 +21,8 @@ public class TestNavigationPoint {
 	
 	@Test
 	public void testDistanceTo() {
-		NavigationPoint src = new NavigationPoint(null, Location.builder().setPosition(0, 0, 0).build(), 0);
-		NavigationPoint dst = new NavigationPoint(null, Location.builder().setPosition(0, 0, 10).build(), 0);
+		NavigationPoint src = NavigationPoint.at(null, Location.builder().setPosition(0, 0, 0).build(), 0);
+		NavigationPoint dst = NavigationPoint.at(null, Location.builder().setPosition(0, 0, 10).build(), 0);
 		
 		Assert.assertEquals(10, src.distanceTo(dst), 1E-7);
 		Assert.assertEquals(10, dst.distanceTo(src), 1E-7);
@@ -147,11 +147,12 @@ public class TestNavigationPoint {
 			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
 			currentDistance += speed;
 		}
+		path.add(NavigationPoint.at(parent, destination, speed));
 		return path;
 	}
 	
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
-		return new NavigationPoint(parent, Location.builder()
+		return NavigationPoint.at(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
 				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
 				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)

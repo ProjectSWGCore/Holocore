@@ -20,7 +20,7 @@ public class NavigationPoint {
 	private final Location location;
 	private final double speed;
 	
-	public NavigationPoint(SWGObject parent, Location location, double speed) {
+	private NavigationPoint(SWGObject parent, Location location, double speed) {
 		this.parent = parent;
 		this.location = location;
 		this.speed = speed;
@@ -39,12 +39,16 @@ public class NavigationPoint {
 	}
 	
 	public void move(SWGObject obj) {
-		if (location == null || speed == 0)
+		if (isNoOperation())
 			return;
 		if (parent == null)
 			MoveObjectIntent.broadcast(obj, location, speed, obj.getNextUpdateCount());
 		else
 			MoveObjectIntent.broadcast(obj, parent, location, speed, obj.getNextUpdateCount());
+	}
+	
+	public boolean isNoOperation() {
+		return location == null || speed == 0;
 	}
 	
 	public double distanceTo(SWGObject otherParent, Location otherLocation) {
@@ -89,6 +93,10 @@ public class NavigationPoint {
 		return nop;
 	}
 	
+	public static NavigationPoint at(@Nullable SWGObject parent, @NotNull Location location, double speed) {
+		return new NavigationPoint(parent, location, speed);
+	}
+	
 	public static List<NavigationPoint> from(@Nullable SWGObject sourceParent, @NotNull Location source, @Nullable SWGObject destinationParent, @NotNull Location destination, double speed) {
 		assert sourceParent == null || sourceParent instanceof CellObject;
 		assert destinationParent == null || destinationParent instanceof CellObject;
@@ -122,6 +130,7 @@ public class NavigationPoint {
 			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
 			currentDistance += speed;
 		}
+		path.add(NavigationPoint.at(parent, destination, speed));
 		return path;
 	}
 	

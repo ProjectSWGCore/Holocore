@@ -34,13 +34,12 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
@@ -84,13 +83,13 @@ public class NPCCreator {
 		
 		switch (spawner.getBehavior()) {
 			case LOITER:
-				object.addMode(new NpcLoiterMode(object, spawner.getLoiterRadius()));
+				object.setDefaultMode(new NpcLoiterMode(object, spawner.getLoiterRadius()));
 				break;
 			case TURN:
-				object.addMode(new NpcTurningMode(object));
+				object.setDefaultMode(new NpcTurningMode(object));
 				break;
 			case PATROL:
-				object.addMode(new NpcPatrolMode(object, spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
+				object.setDefaultMode(new NpcPatrolMode(object, spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
 				break;
 			default:
 				break;
@@ -111,7 +110,6 @@ public class NPCCreator {
 			case ATTACKABLE:
 				object.setPvpFlags(PvpFlag.ATTACKABLE);
 				object.addOptionFlags(OptionFlag.HAM_BAR);
-				object.addMode(new NpcCombatMode(object));
 				break;
 			case INVULNERABLE:
 				object.addOptionFlags(OptionFlag.INVULNERABLE);

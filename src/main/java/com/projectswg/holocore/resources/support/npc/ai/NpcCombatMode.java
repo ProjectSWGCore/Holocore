@@ -3,53 +3,42 @@ package com.projectswg.holocore.resources.support.npc.ai;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
+import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
+import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
+import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
+import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 public class NpcCombatMode extends NpcMode {
 	
-	private static final double RETURN_THRESHOLD = 3;
-	
 	private final AtomicReference<NavigationPoint> returnLocation;
 	private final Collection<CreatureObject> targets;
-	private final List<NavigationPoint> movementPoints;
 	
 	private double lastAttack;
-	private int movementIndex;
 	
 	public NpcCombatMode(AIObject obj) {
-		super(obj, ScheduledMode.COMBAT);
+		super(obj);
 		this.returnLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
-		this.movementPoints = new ArrayList<>();
 		
 		this.lastAttack = 0;
-		this.movementIndex = 0;
 	}
 	
 	@Override
 	public void onPlayerMoveInAware(CreatureObject player, double distance) {
-		if (distance < getSpawner().getAggressiveRadius() && player.isEnemyOf(getAI())) {
-			if (getAI().isLineOfSight(player) && targets.add(player)) {
-				requestAssistance();
-				if (!isExecuting())
-					requestModeStart();
-			}
-		} else {
+		if (distance > getSpawner().getAggressiveRadius() && !getAI().getDefenders().contains(player.getObjectId())) {
 			// If out of aggressive range, and not actively fighting
-			if (!getAI().getDefenders().contains(player.getObjectId()))
-				targets.remove(player);
+			targets.remove(player);
 		}
 	}
 	
@@ -60,8 +49,7 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Override
 	public void onModeStart() {
-		returnLocation.set(new NavigationPoint(getAI().getParent(), getAI().getLocation(), getRunSpeed()));
-		movementPoints.clear();
+		returnLocation.set(NavigationPoint.at(getAI().getParent(), getAI().getLocation(), getRunSpeed()));
 	}
 	
 	@Override
@@ -71,21 +59,17 @@ public class NpcCombatMode extends NpcMode {
 			return;
 		}
 		
-		syncTargets();
 		if (!targets.isEmpty()) {
 			performCombatAction();
 			queueNextLoop(1000);
-		} else if (isReturning()) {
-			performResetAction();
-			queueNextLoop(1000);
 		} else {
-			requestModeEnd();
+			ScheduleNpcModeIntent.broadcast(getAI(), new NpcNavigateMode(getAI(), returnLocation.get()));
 		}
 	}
 	
-	private boolean isReturning() {
-		NavigationPoint ret = returnLocation.get();
-		return ret.distanceTo(getAI()) >= RETURN_THRESHOLD;
+	public void addTargets(Collection<CreatureObject> targets) {
+		if (this.targets.addAll(targets))
+			requestAssistance();
 	}
 	
 	private void performCombatAction() {
@@ -97,15 +81,10 @@ public class NpcCombatMode extends NpcMode {
 		WeaponObject weapon = obj.getEquippedWeapon();
 		double targetRange = Math.max(1, weapon.getMaxRange()/2);
 		boolean lineOfSight = obj.isLineOfSight(target);
-		if (obj.getWorldLocation().distanceTo(target.getWorldLocation()) >= targetRange || !lineOfSight) { 
-			// Recalculate path, since we won't get within range using the existing path
-			if (movementPoints.isEmpty() || movementPoints.get(movementPoints.size()-1).distanceTo(target) >= targetRange) {
-				movementPoints.clear();
-				movementPoints.addAll(NavigationPoint.from(getAI().getParent(), getAI().getLocation(), target.getParent(), target.getLocation(), getRunSpeed()));
-				movementIndex = 0;
-			}
-			assert movementIndex < movementPoints.size();
-			movementPoints.get(movementIndex++).move(getAI());
+		if (obj.getWorldLocation().distanceTo(target.getWorldLocation()) >= targetRange || !lineOfSight) {
+			StartNpcMovementIntent.broadcast(obj, target.getParent(), target.getLocation(), getRunSpeed());
+		} else {
+			StopNpcMovementIntent.broadcast(obj);
 		}
 		
 		if (lineOfSight) {
@@ -115,17 +94,6 @@ public class NpcCombatMode extends NpcMode {
 				attack(target, weapon);
 			}
 		}
-	}
-	
-	private void performResetAction() {
-		if (movementPoints.isEmpty() || movementPoints.get(movementPoints.size()-1).distanceTo(returnLocation.get()) >= RETURN_THRESHOLD) {
-			movementPoints.clear();
-			movementPoints.addAll(NavigationPoint.from(getAI().getParent(), getAI().getLocation(), returnLocation.get().getParent(), returnLocation.get().getLocation(), getRunSpeed()));
-			movementIndex = 0;
-		}
-		
-		assert movementIndex < movementPoints.size();
-		movementPoints.get(movementIndex++).move(getAI());
 	}
 	
 	private void attack(CreatureObject target, WeaponObject weapon) {
@@ -171,17 +139,9 @@ public class NpcCombatMode extends NpcMode {
 	@Nullable
 	private CreatureObject getPrimaryTarget() {
 		return targets.stream()
+				.filter(creo -> creo.isEnemyOf(getAI()))
 				.filter(creo -> creo.getHealth() > 0) // Don't attack if they're already dead
 				.min(Comparator.comparingInt(CreatureObject::getHealth)).orElse(null);
-	}
-	
-	private void syncTargets() {
-		List<Long> defenders = getAI().getDefenders();
-		boolean added = targets.addAll(getNearbyPlayers().stream()
-				.filter(creo -> defenders.contains(creo.getObjectId()))
-				.collect(Collectors.toList()));
-		if (added)
-			requestAssistance();
 	}
 	
 	private void requestAssistance() {
@@ -189,17 +149,10 @@ public class NpcCombatMode extends NpcMode {
 		double assistRange = getSpawner().getAssistRadius();
 		getAI().getAware().stream()
 				.filter(AIObject.class::isInstance) // get nearby AI
-				.filter(ai -> ai.getWorldLocation().flatDistanceTo(myLocation) < assistRange) // that can assist
+				.filter(ai -> ai.getWorldLocation().distanceTo(myLocation) < assistRange) // that can assist
 				.map(AIObject.class::cast)
-				.map(this::requestPeerMode)
-				.filter(Objects::nonNull) // not all nearby AI are able to attack
-				.map(NpcCombatMode.class::cast)
-				.forEach(ai -> ai.assist(this)); // halp
-	}
-	
-	private void assist(NpcCombatMode peer) {
-		if (targets.addAll(peer.targets) && !isExecuting())
-			requestModeStart();
+				.filter(ai -> targets.stream().anyMatch(ai::isEnemyOf))
+				.forEach(ai -> StartNpcCombatIntent.broadcast(ai, targets));
 	}
 	
 }

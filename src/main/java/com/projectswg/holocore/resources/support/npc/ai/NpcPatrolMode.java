@@ -26,12 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai;
 
-import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 import java.util.ArrayList;
@@ -45,58 +43,54 @@ public class NpcPatrolMode extends NpcMode {
 	
 	private final List<NavigationPoint> waypoints;
 	
-	private int movementIndex;
-	
 	public NpcPatrolMode(AIObject obj, List<ResolvedPatrolWaypoint> waypoints) {
-		super(obj, ScheduledMode.DEFAULT);
+		super(obj);
 		this.waypoints = new ArrayList<>(waypoints.size());
 		
-		this.movementIndex = 0;
-		buildRoute(waypoints);
+		if (!waypoints.isEmpty()) {
+			waypoints = new ArrayList<>(waypoints);
+			if (waypoints.get(0).getPatrolType() == PatrolType.LOOP) {
+				waypoints.add(0, last(waypoints));
+			} else if (waypoints.get(0).getPatrolType() == PatrolType.FLIP) {
+				List<ResolvedPatrolWaypoint> reversed = new ArrayList<>(waypoints);
+				Collections.reverse(reversed);
+				waypoints.addAll(reversed);
+			} else {
+				assert false;
+			}
+		}
+		for (ResolvedPatrolWaypoint waypoint : waypoints) {
+			NavigationPoint point = NavigationPoint.at(waypoint.getParent(), waypoint.getLocation(), getWalkSpeed());
+			this.waypoints.add(point);
+			this.waypoints.addAll(NavigationPoint.nop(point, (int) waypoint.getDelay()));
+		}
+	}
+	
+	@Override
+	public void onModeStart() {
+		if (!waypoints.isEmpty()) {
+			int index = 0;
+			double closestDistance = waypoints.get(0).distanceTo(getAI());
+			for (int i = 1; i < waypoints.size(); i++) {
+				double distance = waypoints.get(i).distanceTo(getAI());
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					index = i;
+				}
+			}
+			List<NavigationPoint> rearranged = new ArrayList<>(waypoints.size());
+			rearranged.addAll(waypoints.subList(index, waypoints.size()));
+			rearranged.addAll(waypoints.subList(0, index));
+			
+			waypoints.clear();
+			waypoints.addAll(rearranged);
+		}
+		CompileNpcMovementIntent.broadcast(getAI(), waypoints, NavigationRouteType.LOOP, getWalkSpeed());
 	}
 	
 	@Override
 	public void act() {
-		if (isRooted() || waypoints.isEmpty()) {
-			queueNextLoop(1000);
-			return;
-		}
-		waypoints.get(movementIndex).move(getAI());
-		movementIndex = (movementIndex + 1) % waypoints.size();
 		
-		queueNextLoop(1000);
-	}
-	
-	private void buildRoute(List<ResolvedPatrolWaypoint> waypoints) {
-		if (waypoints.isEmpty())
-			return;
-		PatrolType type = waypoints.get(0).getPatrolType();
-		if (type == PatrolType.LOOP) // Connect the beginning and end
-			waypoints.add(0, last(waypoints));
-		
-		for (ResolvedPatrolWaypoint waypoint : waypoints) {
-			appendRoutePoint(waypoint);
-		}
-		
-		if (type == PatrolType.FLIP) {
-			List<ResolvedPatrolWaypoint> waypointsReverse = new ArrayList<>(waypoints);
-			Collections.reverse(waypointsReverse);
-			for (ResolvedPatrolWaypoint waypoint : waypointsReverse) {
-				appendRoutePoint(waypoint);
-			}
-		}
-	}
-	
-	private void appendRoutePoint(ResolvedPatrolWaypoint waypoint) {
-		NavigationPoint prev = waypoints.isEmpty() ? null : waypoints.get(waypoints.size()-1);
-		if (prev == null) {
-			waypoints.add(new NavigationPoint(waypoint.getParent(), waypoint.getLocation(), getWalkSpeed()));
-		} else {
-			if (prev.getLocation().equals(waypoint.getLocation()) && prev.getParent() == waypoint.getParent())
-				return;
-			waypoints.addAll(NavigationPoint.from(prev.getParent(), prev.getLocation(), waypoint.getParent(), waypoint.getLocation(), getWalkSpeed()));
-		}
-		waypoints.addAll(NavigationPoint.nop(last(waypoints), (int) waypoint.getDelay()));
 	}
 	
 	private static <T> T last(List<T> list) {
