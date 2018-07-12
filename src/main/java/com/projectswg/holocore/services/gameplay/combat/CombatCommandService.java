@@ -471,6 +471,9 @@ public class CombatCommandService extends Service {
 			return CombatStatus.INVALID_TARGET;
 		}
 		
+		if (!source.isLineOfSight(target))
+			return CombatStatus.TOO_FAR;
+		
 		if (target instanceof CreatureObject) {
 			switch (((CreatureObject) target).getPosture()) {
 				case DEAD:

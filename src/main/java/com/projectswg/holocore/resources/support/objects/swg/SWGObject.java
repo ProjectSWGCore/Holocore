@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.objects.swg;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.network.NetBuffer;
@@ -52,6 +53,7 @@ import com.projectswg.holocore.resources.support.objects.permissions.ContainerPe
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.log.Log;
@@ -276,6 +278,42 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (getParent() != null)
 			return getParent().isVisible(target);
 		return true;
+	}
+	
+	public boolean isLineOfSight(@NotNull SWGObject target) {
+		SWGObject myParent = parent;
+		SWGObject theirParent = target.parent;
+		SWGObject superParent = null;
+		if (myParent == theirParent)
+			return true;
+		
+		Portal portal = null;
+		if (myParent instanceof CellObject) {
+			portal = theirParent instanceof CellObject ? ((CellObject) myParent).getPortalTo((CellObject) theirParent) : ((CellObject) myParent).getPortalTo(null);
+			superParent = myParent.getParent();
+		} else if (theirParent instanceof CellObject) {
+			portal = ((CellObject) theirParent).getPortalTo(null);
+			superParent = theirParent.getParent();
+		}
+		if (portal == null)
+			return false; // If no portal, and they aren't in the same parent, then they can't see each other
+		assert superParent != null;
+		
+		Point3D p1 = portal.getFrame1();
+		Point3D p2 = portal.getFrame2();
+		double headingToTarget = getWorldLocation().getHeadingTo(target.getWorldLocation());
+		double headingToPortalLeft = getWorldLocation().getHeadingTo(Location.builder().setPosition(p1.getX(), p1.getY(), p1.getZ()).translateLocation(superParent.getLocation()).build());
+		double headingToPortalRight = getWorldLocation().getHeadingTo(Location.builder().setPosition(p2.getX(), p2.getY(), p2.getZ()).translateLocation(superParent.getLocation()).build());
+		if (headingToPortalLeft-headingToPortalRight > 180)
+			headingToPortalRight += 360;
+		if (headingToPortalLeft-headingToPortalRight < -180)
+			headingToPortalLeft += 360;
+		if (Math.abs(headingToPortalLeft-headingToTarget) > 180)
+			headingToTarget += 360;
+		
+		if (headingToTarget > headingToPortalLeft)
+			return headingToTarget < headingToPortalRight;
+		return headingToTarget > headingToPortalRight;
 	}
 	
 	/**

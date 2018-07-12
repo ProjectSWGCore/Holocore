@@ -151,14 +151,8 @@ public class AIObject extends CreatureObject {
 		this.creatureId = creatureId;
 	}
 	
-	public void setDefaultMode(NpcMode mode) {
-		this.modes.put(ScheduledMode.DEFAULT, mode);
-		mode.attach(this, ScheduledMode.DEFAULT);
-	}
-	
-	public void setCombatMode(NpcMode mode) {
-		this.modes.put(ScheduledMode.COMBAT, mode);
-		mode.attach(this, ScheduledMode.COMBAT);
+	public void addMode(NpcMode mode) {
+		this.modes.put(mode.getMode(), mode);
 	}
 	
 	public void startCombatMode() {
@@ -230,7 +224,7 @@ public class AIObject extends CreatureObject {
 		}
 	}
 	
-	enum ScheduledMode {
+	public enum ScheduledMode {
 		DEFAULT,
 		COMBAT
 	}

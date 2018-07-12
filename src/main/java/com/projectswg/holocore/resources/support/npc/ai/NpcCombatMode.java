@@ -6,16 +6,14 @@ import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject.ScheduledMode;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -23,20 +21,27 @@ public class NpcCombatMode extends NpcMode {
 	
 	private static final double RETURN_THRESHOLD = 3;
 	
-	private final AtomicReference<Location> returnLocation;
+	private final AtomicReference<NavigationPoint> returnLocation;
 	private final Collection<CreatureObject> targets;
-	private final AtomicInteger attackCountdown;
+	private final List<NavigationPoint> movementPoints;
 	
-	public NpcCombatMode() {
+	private double lastAttack;
+	private int movementIndex;
+	
+	public NpcCombatMode(AIObject obj) {
+		super(obj, ScheduledMode.COMBAT);
 		this.returnLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
-		this.attackCountdown = new AtomicInteger(0);
+		this.movementPoints = new ArrayList<>();
+		
+		this.lastAttack = 0;
+		this.movementIndex = 0;
 	}
 	
 	@Override
 	public void onPlayerMoveInAware(CreatureObject player, double distance) {
 		if (distance < getSpawner().getAggressiveRadius() && player.isEnemyOf(getAI())) {
-			if (targets.add(player)) {
+			if (getAI().isLineOfSight(player) && targets.add(player)) {
 				requestAssistance();
 				if (!isExecuting())
 					requestModeStart();
@@ -55,12 +60,12 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Override
 	public void onModeStart() {
-		returnLocation.set(null);
+		returnLocation.set(new NavigationPoint(getAI().getParent(), getAI().getLocation(), getRunSpeed()));
+		movementPoints.clear();
 	}
 	
 	@Override
 	public void act() {
-		returnLocation.compareAndSet(null, getAI().getLocation());
 		if (isRooted()) {
 			queueNextLoop(1000);
 			return;
@@ -79,8 +84,8 @@ public class NpcCombatMode extends NpcMode {
 	}
 	
 	private boolean isReturning() {
-		Location ret = returnLocation.get();
-		return getAI().isInCombat() || ret == null || getAI().getLocation().distanceTo(ret) >= RETURN_THRESHOLD;
+		NavigationPoint ret = returnLocation.get();
+		return ret.distanceTo(getAI()) >= RETURN_THRESHOLD;
 	}
 	
 	private void performCombatAction() {
@@ -90,21 +95,37 @@ public class NpcCombatMode extends NpcMode {
 		
 		AIObject obj = getAI();
 		WeaponObject weapon = obj.getEquippedWeapon();
-		Location nextStep = AINavigationSupport.getNextStepTo(obj.getLocation(), target.getLocation(), 1, Math.max(1, weapon.getMaxRange()/2), getRunSpeed());
-		runTo(nextStep);
+		double targetRange = Math.max(1, weapon.getMaxRange()/2);
+		boolean lineOfSight = obj.isLineOfSight(target);
+		if (obj.getWorldLocation().distanceTo(target.getWorldLocation()) >= targetRange || !lineOfSight) { 
+			// Recalculate path, since we won't get within range using the existing path
+			if (movementPoints.isEmpty() || movementPoints.get(movementPoints.size()-1).distanceTo(target) >= targetRange) {
+				movementPoints.clear();
+				movementPoints.addAll(NavigationPoint.from(getAI().getParent(), getAI().getLocation(), target.getParent(), target.getLocation(), getRunSpeed()));
+				movementIndex = 0;
+			}
+			assert movementIndex < movementPoints.size();
+			movementPoints.get(movementIndex++).move(getAI());
+		}
 		
-		if (target.getPosture() != Posture.INCAPACITATED && target.getPosture() != Posture.DEAD && attackCountdown.decrementAndGet() <= 0) {
-			attack(target, weapon);
-			if (getAI().getPrimaryWeapons().contains(weapon))
-				attackCountdown.set((int) getSpawner().getPrimaryWeaponSpeed());
-			else
-				attackCountdown.set((int) getSpawner().getSecondaryWeaponSpeed());
+		if (lineOfSight) {
+			double attackSpeed = getAI().getPrimaryWeapons().contains(weapon) ? getSpawner().getPrimaryWeaponSpeed() : getSpawner().getSecondaryWeaponSpeed();
+			if (System.nanoTime() - lastAttack >= attackSpeed * 1E9) {
+				lastAttack = System.nanoTime();
+				attack(target, weapon);
+			}
 		}
 	}
 	
 	private void performResetAction() {
-		Location nextStep = AINavigationSupport.getNextStepTo(getAI().getLocation(), returnLocation.get(), getRunSpeed());
-		runTo(nextStep);
+		if (movementPoints.isEmpty() || movementPoints.get(movementPoints.size()-1).distanceTo(returnLocation.get()) >= RETURN_THRESHOLD) {
+			movementPoints.clear();
+			movementPoints.addAll(NavigationPoint.from(getAI().getParent(), getAI().getLocation(), returnLocation.get().getParent(), returnLocation.get().getLocation(), getRunSpeed()));
+			movementIndex = 0;
+		}
+		
+		assert movementIndex < movementPoints.size();
+		movementPoints.get(movementIndex++).move(getAI());
 	}
 	
 	private void attack(CreatureObject target, WeaponObject weapon) {
@@ -142,7 +163,7 @@ public class NpcCombatMode extends NpcMode {
 			case ONE_HANDED_SABER:
 			case TWO_HANDED_SABER:
 			case POLEARM_SABER:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("meleeHit"), 0);
+				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("creatureMeleeHit"), 0);
 				break;
 		}
 	}

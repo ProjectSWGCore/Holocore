@@ -16,16 +16,11 @@ public abstract class NpcMode {
 	
 	private final Random random;
 	
-	private AIObject obj;
-	private ScheduledMode mode;
+	private final AIObject obj;
+	private final ScheduledMode mode;
 	
-	public NpcMode() {
+	public NpcMode(AIObject obj, ScheduledMode mode) {
 		this.random = new Random();
-		this.obj = null;
-		this.mode = null;
-	}
-	
-	void attach(AIObject obj, ScheduledMode mode) {
 		this.obj = obj;
 		this.mode = mode;
 	}
@@ -82,7 +77,7 @@ public abstract class NpcMode {
 	}
 	
 	public final AIObject getAI() {
-		return Objects.requireNonNull(obj);
+		return obj;
 	}
 	
 	public final Random getRandom() {
@@ -136,6 +131,10 @@ public abstract class NpcMode {
 	
 	public final void runTo(Location location) {
 		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed(), obj.getNextUpdateCount());
+	}
+	
+	ScheduledMode getMode() {
+		return mode;
 	}
 	
 }

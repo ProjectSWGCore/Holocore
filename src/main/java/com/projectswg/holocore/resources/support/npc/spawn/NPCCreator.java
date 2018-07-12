@@ -84,13 +84,13 @@ public class NPCCreator {
 		
 		switch (spawner.getBehavior()) {
 			case LOITER:
-				object.setDefaultMode(new NpcLoiterMode(spawner.getLoiterRadius()));
+				object.addMode(new NpcLoiterMode(object, spawner.getLoiterRadius()));
 				break;
 			case TURN:
-				object.setDefaultMode(new NpcTurningMode());
+				object.addMode(new NpcTurningMode(object));
 				break;
 			case PATROL:
-				object.setDefaultMode(new NpcPatrolMode(spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
+				object.addMode(new NpcPatrolMode(object, spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
 				break;
 			default:
 				break;
@@ -103,18 +103,18 @@ public class NPCCreator {
 		return object.getObjectId();
 	}
 	
-	private static void setFlags(AIObject creature, Spawner spawner) {
+	private static void setFlags(AIObject object, Spawner spawner) {
 		switch (spawner.getSpawnerFlag()) {
 			case AGGRESSIVE:
-				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
-				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
+				object.setPvpFlags(PvpFlag.AGGRESSIVE);
+				object.addOptionFlags(OptionFlag.AGGRESSIVE);
 			case ATTACKABLE:
-				creature.setPvpFlags(PvpFlag.ATTACKABLE);
-				creature.addOptionFlags(OptionFlag.HAM_BAR);
-				creature.setCombatMode(new NpcCombatMode());
+				object.setPvpFlags(PvpFlag.ATTACKABLE);
+				object.addOptionFlags(OptionFlag.HAM_BAR);
+				object.addMode(new NpcCombatMode(object));
 				break;
 			case INVULNERABLE:
-				creature.addOptionFlags(OptionFlag.INVULNERABLE);
+				object.addOptionFlags(OptionFlag.INVULNERABLE);
 				break;
 		}
 	}

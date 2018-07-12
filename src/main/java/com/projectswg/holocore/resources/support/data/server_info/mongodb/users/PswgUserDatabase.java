@@ -73,6 +73,10 @@ public class PswgUserDatabase extends PswgDatabase {
 		return collection.aggregate(Arrays.asList(Aggregates.match(Filters.eq("username", username)), Aggregates.unwind("$characters"))).map(CharacterMetadata::new).into(new ArrayList<>());
 	}
 	
+	public boolean deleteCharacter(String username, long id) {
+		return collection.updateOne(Filters.and(Filters.eq("username", username), Filters.eq("characters.id", id)), Updates.pull("characters", Filters.eq("id", id))).getModifiedCount() > 0;
+	}
+	
 	public boolean deleteCharacter(long id) {
 		return collection.updateOne(Filters.eq("characters.id", id), Updates.pull("characters", Filters.eq("id", id))).getModifiedCount() > 0;
 	}

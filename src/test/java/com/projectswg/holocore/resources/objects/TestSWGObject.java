@@ -27,7 +27,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.objects;
 
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test_resources.GenericTangibleObject;
 import org.junit.Assert;
@@ -40,8 +43,64 @@ import com.projectswg.common.data.location.Terrain;
 
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 @RunWith(JUnit4.class)
 public class TestSWGObject extends TestRunnerNoIntents {
+	
+	@Test
+	public void testLineOfSight() {
+		SWGObject a = new GenericTangibleObject(1);
+		SWGObject b = new GenericTangibleObject(2);
+		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(3, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		buio.setPosition(Terrain.TATOOINE, 10, 0, 10);
+		buio.setHeading(45);
+		buio.populateCells();
+		a.setTerrain(Terrain.TATOOINE);
+		b.setTerrain(Terrain.TATOOINE);
+		
+		/*
+		 * Portal[CellObject[7 '' cell/shared_cell.iff] -> CellObject[6 '' cell/shared_cell.iff]  [Point3D[-7.23, 0.64, 0.22], Point3D[-4.71, 0.64, 0.22]] height=3.91]
+		 * Portal[CellObject[6 '' cell/shared_cell.iff] -> CellObject[5 '' cell/shared_cell.iff]  [Point3D[-4.42, 0.70, 4.30], Point3D[-4.42, 0.70, 6.30]] height=3.35]
+		 * Portal[CellObject[5 '' cell/shared_cell.iff] -> null  [Point3D[0.05, 0.63, 6.76], Point3D[2.04, 0.63, 6.76]] height=3.41]]
+		 */
+		
+		// Testing portal 6-7
+		a.systemMove(buio.getCellByNumber(2));
+		b.systemMove(buio.getCellByNumber(3));
+		a.setPosition(-5.97, 0.64, 1);	// Center of portal
+		b.setPosition(-5.97, 0.64, -1);
+		Assert.assertTrue(a.isLineOfSight(b));
+		Assert.assertTrue(b.isLineOfSight(a));
+		a.setPosition(-7.20, 0.64, 1);	// Edge of portal
+		b.setPosition(-7.20, 0.64, -1);
+		Assert.assertTrue(a.isLineOfSight(b));
+		Assert.assertTrue(b.isLineOfSight(a));
+		a.setPosition(-10, 0.64, 1);	// Far beyond portal's view
+		b.setPosition(-7.20, 0.64, -1);
+		Assert.assertFalse(a.isLineOfSight(b));
+		Assert.assertFalse(b.isLineOfSight(a));
+		
+		// Testing portal null-5
+		a.systemMove(null);
+		b.systemMove(buio.getCellByNumber(1));
+		// Center of portal
+		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(1, 0.63, 7.5).translateLocation(buio.getLocation()).build());
+		b.setPosition(1, 0.63, 5.5);
+		Assert.assertTrue(a.isLineOfSight(b));
+		Assert.assertTrue(b.isLineOfSight(a));
+		// Edge of portal
+		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(2, 0.63, 7.5).translateLocation(buio.getLocation()).build());
+		b.setPosition(2, 0.63, 5.5);
+		Assert.assertTrue(a.isLineOfSight(b));
+		Assert.assertTrue(b.isLineOfSight(a));
+		// Just beyond portal's view
+		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(3, 0.63, 7.5).translateLocation(buio.getLocation()).build());
+		b.setPosition(2, 0.63, 5.5);
+		Assert.assertFalse(a.isLineOfSight(b));
+		Assert.assertFalse(b.isLineOfSight(a));
+	}
 	
 	@Test
 	public void testWorldLocation() {
