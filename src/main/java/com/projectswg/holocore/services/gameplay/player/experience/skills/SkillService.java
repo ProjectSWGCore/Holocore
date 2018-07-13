@@ -89,7 +89,11 @@ public class SkillService extends Service {
 			return;
 		}
 
+		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(surrenderedSkill);
+
 		target.removeSkill(surrenderedSkill);
+		target.removeCommands(skillInfo.getCommands());
+		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
 	}
 	
 	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {

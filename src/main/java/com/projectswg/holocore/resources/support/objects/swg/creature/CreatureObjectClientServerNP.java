@@ -238,6 +238,19 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		commands.sendDeltaMessage(obj);
 	}
 
+	public void removeCommands(@NotNull String... commands) {
+		// TODO: Replace with compute
+		for (String command : commands) {
+			int nVal = this.commands.getOrDefault(command, 0)-1;
+			if (nVal <= 0)
+				this.commands.remove(command);
+			else
+				this.commands.put(command, nVal);
+		}
+
+		this.commands.sendDeltaMessage(obj);
+	}
+
 	public boolean hasCommand(@NotNull String command) {
 		return commands.containsKey(command);
 	}

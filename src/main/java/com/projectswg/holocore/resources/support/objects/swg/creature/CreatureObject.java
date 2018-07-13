@@ -597,6 +597,10 @@ public class CreatureObject extends TangibleObject {
 		creo4.removeCommand(command);
 	}
 
+	public void removeCommands(@NotNull String... commands) {
+		creo4.removeCommands(commands);
+	}
+
 	public boolean hasCommand(@NotNull String command) {
 		return creo4.hasCommand(command);
 	}
