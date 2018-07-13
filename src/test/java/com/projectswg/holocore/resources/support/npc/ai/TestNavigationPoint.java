@@ -143,11 +143,10 @@ public class TestNavigationPoint {
 		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
 		
 		double currentDistance = speed;
-		for (int i = 0; i < totalIntervals; i++) {
+		for (int i = 0; i <= totalIntervals; i++) {
 			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
 			currentDistance += speed;
 		}
-		path.add(NavigationPoint.at(parent, destination, speed));
 		return path;
 	}
 	
