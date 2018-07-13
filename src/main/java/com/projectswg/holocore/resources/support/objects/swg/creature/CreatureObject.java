@@ -308,7 +308,14 @@ public class CreatureObject extends TangibleObject {
 			skills.sendDeltaMessage(this);
 		return added;
 	}
-	
+
+	public boolean removeSkill(String skill) {
+		boolean removed = skills.remove(skill);
+		if (removed)
+			skills.sendDeltaMessage(this);
+		return removed;
+	}
+
 	public boolean hasSkill(String skillName) {
 		return skills.contains(skillName);
 	}

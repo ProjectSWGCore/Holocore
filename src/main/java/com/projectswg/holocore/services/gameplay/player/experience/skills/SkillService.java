@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.gameplay.player.experience.skills;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
@@ -10,7 +11,11 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLo
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class SkillService extends Service {
 	
@@ -49,6 +54,42 @@ public class SkillService extends Service {
 		}
 		
 		sti.getRequester().setTitle(title);
+	}
+
+	@IntentHandler
+	private void handleSurrenderSkillIntent(SurrenderSkillIntent ssi) {
+		CreatureObject target = ssi.getTarget();
+		String surrenderedSkill = ssi.getSurrenderedSkill();
+
+		if (!target.hasSkill(surrenderedSkill)) {
+			// They don't even have this skill. Do nothing.
+
+			Log.w("%s could not surrender skill %s because they do not have it", target, surrenderedSkill);
+
+			return;
+		}
+
+		Optional<String[]> dependentSkills = target.getSkills().stream()
+				.map(skill -> DataLoader.Companion.skills().getSkillByName(skill))
+				.map(SkillInfo::getSkillsRequired)
+				.filter(requiredSkills -> {
+					for (String requiredSkill : requiredSkills) {
+						if (requiredSkill.equals(surrenderedSkill)) {
+							return true;
+						}
+					}
+
+					return false;
+				})
+				.findAny();
+
+		if (dependentSkills.isPresent()) {
+			Log.d("%s could not surrender skill %s because these skills depend on it: ",
+					target, Arrays.toString(dependentSkills.get()));
+			return;
+		}
+
+		target.removeSkill(surrenderedSkill);
 	}
 	
 	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {
