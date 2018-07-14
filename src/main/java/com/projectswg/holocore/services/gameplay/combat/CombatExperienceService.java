@@ -28,25 +28,25 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -109,51 +109,58 @@ public class CombatExperienceService extends Service {
 		
 		CreatureObject killer = i.getKiller();
 		GroupObject group = groupObjects.get(killer.getGroupId());
-		
-		// Ungrouped entertainer
-		if (group == null && isEntertainer(killer)) {
-			return;
-		}
-		
+
 		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
 		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
-		boolean xpMultiply = experienceGained > 1;
-		
+
 		if (experienceGained <= 0) {
 			return;
 		}
 		
 		if (group == null) {
-			new ExperienceIntent(killer, "combat", experienceGained, true).broadcast();
+			grantXp(killer, corpse, experienceGained);
 		} else {
 			group.getGroupMemberObjects().stream()
-					.filter(groupMember -> !isEntertainer(groupMember))	// Entertainers don't receive combat XP
-					.filter(groupMember -> !isTrader(groupMember))	// Traders don't receive combat XP
-					.filter(groupMember -> isMemberNearby(corpse, groupMember))	// Must be within range
-					.filter(groupMember -> corpse.getDamageMap().containsKey(groupMember))	// Only members who have done damage receive XP
-					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained, xpMultiply).broadcast());
+					.filter(groupMember -> isMemberNearby(corpse, groupMember))	// Only nearby members gain XP
+					.filter(groupMember -> corpse.getDamageMap().containsKey(groupMember))	// Only members who have dealt damage gain XP
+					.forEach(eligibleMember -> grantXp(eligibleMember, corpse, experienceGained));
 		}
 	}
-	
-	private boolean isEntertainer(CreatureObject creature) {
-		return creature.hasSkill("class_entertainer_phase1_novice");
+
+	private void grantXp(CreatureObject receiver, CreatureObject corpse, int experienceGained) {
+		WeaponType weaponType =receiver.getEquippedWeapon().getType();
+		String xpType = xpTypeForWeaponType(weaponType);
+
+		if (xpType == null) {
+			Log.w("%s did not receive %d xp because the used weapon %s had unrecognized type", receiver, experienceGained, weaponType);
+			return;
+		}
+
+		// Scouts gain trapping XP by killing creatures
+		if (receiver.hasSkill("outdoors_scout_novice") && corpse.getGameObjectType() == GameObjectType.GOT_CREATURE) {
+			new ExperienceIntent(receiver, "trapping", (int) Math.ceil(experienceGained / 10f)).broadcast();
+		}
+
+		boolean xpMultiply = experienceGained > 1;
+
+		new ExperienceIntent(receiver, xpType, experienceGained, xpMultiply).broadcast();
 	}
 	
-	private boolean isTrader(CreatureObject creature) {
-		List<String> traderSkills = Arrays.asList(
-				"class_domestics_phase1_novice",
-				"class_structures_phase1_novice",
-				"class_munitions_phase1_novice",
-				"class_engineering_phase1_novice"
-		);
-		
-		for (String traderSkill : traderSkills) {
-			if (creature.hasSkill(traderSkill)) {
-				return true;
-			}
+	private String xpTypeForWeaponType(WeaponType weaponType) {
+		switch (weaponType) {
+			case UNARMED: return "combat_meleespecialize_unarmed";
+			case TWO_HANDED_MELEE: return "combat_meleespecialize_twohand";
+			case ONE_HANDED_MELEE: return "combat_meleespecialize_onehand";
+			case POLEARM_MELEE: return "combat_meleespecialize_polearm";
+			case RIFLE: return "combat_rangedspecialize_rifle";
+			case CARBINE: return "combat_rangedspecialize_carbine";
+			case PISTOL: return "combat_rangedspecialize_pistol";
+			case HEAVY: return "combat_rangedspecialize_heavy";
+			case ONE_HANDED_SABER: return "combat_meleespecialize_onehandlightsaber";
+			case POLEARM_SABER: return "combat_meleespecialize_polearmlightsaber";
+			case TWO_HANDED_SABER: return "combat_meleespecialize_twohandlightsaber";
+			default: return null;
 		}
-		
-		return false;
 	}
 	
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
