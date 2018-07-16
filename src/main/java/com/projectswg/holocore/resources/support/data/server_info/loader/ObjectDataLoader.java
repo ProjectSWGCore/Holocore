@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import me.joshlarson.jlcommon.log.Log;
@@ -165,6 +166,10 @@ public final class ObjectDataLoader extends DataLoader {
 				if (stf.isEmpty())
 					return new StringId();
 				return new StringId(stf);
+			}
+			case BASELINE_TYPE: {
+				String type = set.getText(index);
+				return type == null || type.isEmpty() ? null : BaselineType.valueOf(type);
 			}
 			default:
 				throw new RuntimeException("Unknown attribute: " + attribute);

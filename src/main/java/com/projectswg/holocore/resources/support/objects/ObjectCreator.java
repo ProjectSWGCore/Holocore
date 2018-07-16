@@ -47,7 +47,6 @@ import com.projectswg.holocore.resources.support.objects.swg.mission.MissionObje
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.resource.ResourceContainerObject;
 import com.projectswg.holocore.resources.support.objects.swg.ship.ShipObject;
-import com.projectswg.holocore.resources.support.objects.swg.sound.SoundObject;
 import com.projectswg.holocore.resources.support.objects.swg.staticobject.StaticObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
@@ -70,7 +69,7 @@ public final class ObjectCreator {
 		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
 		if (attributes == null)
 			throw new ObjectCreationException(template, "Does not exist");
-		SWGObject obj = createObjectFromType(objectId, template, ((Number) attributes.get(ObjectDataAttribute.GAME_OBJECT_TYPE)).intValue());
+		SWGObject obj = createObjectFromType(objectId, template, (BaselineType) attributes.get(ObjectDataAttribute.BASELINE_TYPE));
 		obj.setTemplate(template);
 		
 		handlePostCreation(obj, attributes);
@@ -105,12 +104,7 @@ public final class ObjectCreator {
 	}
 	
 	@NotNull
-	private static SWGObject createObjectFromType(long objectId, String template, int got) {
-		BaselineType baseline = GameObjectType.getTypeFromId(got).getBaselineType();
-		if (baseline == null) {
-			return createSlowFromType(objectId, template);
-		}
-		
+	private static SWGObject createObjectFromType(long objectId, String template, BaselineType baseline) {
 		switch (baseline) {
 			case BUIO:	return new BuildingObject(objectId);
 			case CREO:	return new CreatureObject(objectId);
@@ -134,40 +128,7 @@ public final class ObjectCreator {
 		}
 	}
 	
-	@NotNull
-	private static SWGObject createSlowFromType(long objectId, String template) {
-		String type = getObjectType(template);
-		switch (type) {
-			case "building":				return new BuildingObject(objectId);
-			case "cell":					return new CellObject(objectId);
-			case "creature":				return new CreatureObject(objectId);
-			case "factory":					return new FactoryObject(objectId);
-			case "group":					return new GroupObject(objectId);
-			case "guild":					return new GuildObject(objectId);
-			case "installation":			return new InstallationObject(objectId);
-			case "intangible":				return new IntangibleObject(objectId);
-			case "manufacture_schematic":	return new ManufactureSchematicObject(objectId);
-			case "mission":					return new MissionObject(objectId);
-			case "mobile":					return new CreatureObject(objectId);
-			case "player":					return new PlayerObject(objectId);
-			case "resource_container":		return new ResourceContainerObject(objectId);
-			case "ship":					return new ShipObject(objectId);
-			case "soundobject":				return new SoundObject(objectId);
-			case "static":					return new StaticObject(objectId);
-			case "tangible":				return new TangibleObject(objectId);
-			case "waypoint":				return new WaypointObject(objectId);
-			case "weapon":					return new WeaponObject(objectId);
-			default:						throw new ObjectCreationException(template, "Unknown type: " + type);
-		}
-	}
-	
-	private static void handlePostCreation(SWGObject object, Map<ObjectDataAttribute, Object> attributes) {
-		addObjectAttributes(object, attributes);
-		createObjectSlots(object);
-		object.setGameObjectType(GameObjectType.getTypeFromId(object.getDataIntAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
-	}
-	
-	private static void addObjectAttributes(SWGObject obj, Map<ObjectDataAttribute, Object> attributes) {
+	private static void handlePostCreation(SWGObject obj, Map<ObjectDataAttribute, Object> attributes) {
 		for (Entry<ObjectDataAttribute, Object> e : attributes.entrySet()) {
 			Object value = e.getValue();
 			obj.setDataAttribute(e.getKey(), value);
@@ -179,6 +140,9 @@ public final class ObjectCreator {
 				default: break;
 			}
 		}
+		
+		obj.setGameObjectType(GameObjectType.getTypeFromId(obj.getDataIntAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
+		createObjectSlots(obj);
 	}
 	
 	private static void createObjectSlots(SWGObject object) {
@@ -207,10 +171,6 @@ public final class ObjectCreator {
 	/*
 		Misc helper methods
 	 */
-	private static String getObjectType(String template) {
-		return template.substring(7, template.indexOf('/', 8));
-	}
-	
 	private static void updateMaxObjectId(long objectId) {
 		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
 	}

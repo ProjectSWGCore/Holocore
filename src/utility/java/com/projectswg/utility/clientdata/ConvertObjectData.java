@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 class ConvertObjectData implements Converter {
 	
-	private static final ObjectDataAttribute[] ATTRIBUTES = Arrays.stream(ObjectDataAttribute.values()).filter(a -> a != ObjectDataAttribute.UNKNOWN).collect(Collectors.toList()).toArray(new ObjectDataAttribute[0]);
+	private static final ObjectDataAttribute[] ATTRIBUTES = Arrays.stream(ObjectDataAttribute.values()).filter(a -> a != ObjectDataAttribute.UNKNOWN).toArray(ObjectDataAttribute[]::new);
 	private static final File CLIENTDATA = new File("clientdata");
 	
 	private final Object [] line;
