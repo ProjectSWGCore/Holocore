@@ -167,7 +167,7 @@ public final class ObjectDataLoader extends DataLoader {
 					return new StringId();
 				return new StringId(stf);
 			}
-			case BASELINE_TYPE: {
+			case HOLOCORE_BASELINE_TYPE: {
 				String type = set.getText(index);
 				return type == null || type.isEmpty() ? null : BaselineType.valueOf(type);
 			}
