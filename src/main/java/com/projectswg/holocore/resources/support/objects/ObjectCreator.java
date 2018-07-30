@@ -69,7 +69,7 @@ public final class ObjectCreator {
 		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
 		if (attributes == null)
 			throw new ObjectCreationException(template, "Does not exist");
-		SWGObject obj = createObjectFromType(objectId, template, (BaselineType) attributes.get(ObjectDataAttribute.BASELINE_TYPE));
+		SWGObject obj = createObjectFromType(objectId, template, (BaselineType) attributes.get(ObjectDataAttribute.HOLOCORE_BASELINE_TYPE));
 		obj.setTemplate(template);
 		
 		handlePostCreation(obj, attributes);
