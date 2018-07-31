@@ -128,10 +128,12 @@ public class NpcCombatMode extends NpcMode {
 			case UNARMED:
 			case POLEARM_MELEE:
 			case THROWN:
+				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("creatureMeleeAttack"), 0);
+				break;
 			case ONE_HANDED_SABER:
 			case TWO_HANDED_SABER:
 			case POLEARM_SABER:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("creatureMeleeHit"), 0);
+				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("saberHit"), 0);
 				break;
 		}
 	}

@@ -2,7 +2,10 @@ package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.*;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
+import com.projectswg.common.network.packets.swg.zone.object_controller.LookAtTarget;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
@@ -21,7 +24,10 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CommandQueueService extends Service {
@@ -37,7 +43,7 @@ public class CommandQueueService extends Service {
 	@Override
 	public boolean initialize() {
 		executor.start();
-		executor.executeWithFixedDelay(1000, 1000, this::executeQueuedCommands);
+		executor.executeWithFixedRate(1000, 1000, this::executeQueuedCommands);
 		return true;
 	}
 	
@@ -107,7 +113,7 @@ public class CommandQueueService extends Service {
 		
 		public CreatureCombatQueue() {
 			this.commandQueue = new PriorityQueue<>();
-			this.activeCooldownGroups = new HashSet<>();
+			this.activeCooldownGroups = ConcurrentHashMap.newKeySet();
 		}
 		
 		public synchronized void executeNextCommand() {
@@ -117,6 +123,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void startCommand(EnqueuedCommand command) {
+			Log.t("%s: start command %s", command.getSource().getObjectName(), command.getCommand());
 			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue())
 				commandQueue.offer(command);
 			else
@@ -124,9 +131,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void execute(EnqueuedCommand command) {
-			Player player = command.getSource().getOwner();
-			if (player != null)
-				player.sendPacket(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), 0, 0));
+			Log.t("%s: execute command %s", command.getSource().getObjectName(), command.getCommand());
 			
 			Command rootCommand = command.getCommand();
 			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
@@ -140,9 +145,17 @@ public class CommandQueueService extends Service {
 					startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter());
 				}
 				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter());
+			} else {
+				sendQueueRemove(command);
 			}
 			
 			ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
+		}
+		
+		private void sendQueueRemove(EnqueuedCommand command) {
+			Player player = command.getSource().getOwner();
+			if (player != null)
+				player.sendPacket(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), 0, 0));
 		}
 		
 		private boolean isValidCooldownGroup(String group) {
