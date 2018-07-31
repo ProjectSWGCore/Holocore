@@ -4,12 +4,13 @@ import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
+import org.jetbrains.annotations.NotNull;
 
 public class NpcNavigateMode extends NpcMode {
 	
 	private final NavigationPoint destination;
 	
-	public NpcNavigateMode(AIObject obj, NavigationPoint destination) {
+	public NpcNavigateMode(@NotNull AIObject obj, @NotNull NavigationPoint destination) {
 		super(obj);
 		this.destination = destination;
 	}
