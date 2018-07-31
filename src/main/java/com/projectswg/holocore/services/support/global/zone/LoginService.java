@@ -59,6 +59,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -92,7 +93,13 @@ public class LoginService extends Service {
 	
 	@IntentHandler
 	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
-		deleteCharacter(dci.getCreature());
+		SWGObject obj = dci.getCreature();
+		if (userDatabase.deleteCharacter(obj.getObjectId())) {
+			DestroyObjectIntent.broadcast(obj);
+			Player owner = obj.getOwner();
+			if (owner != null)
+				CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
+		}
 	}
 	
 	@IntentHandler
@@ -151,14 +158,17 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(Player player, DeleteCharacterRequest request) {
 		SWGObject obj = ObjectLookup.getObjectById(request.getPlayerId());
-		boolean success = obj != null && deleteCharacter(obj);
+		boolean success = obj instanceof CreatureObject && userDatabase.deleteCharacter(player.getUsername(), obj.getObjectId());
+		player.sendPacket(new DeleteCharacterResponse(success));
 		if (success) {
-			new DestroyObjectIntent(obj).broadcast();
+			DestroyObjectIntent.broadcast(obj);
+			Player owner = obj.getOwner();
+			if (owner != null)
+				CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
 			Log.i("Deleted character %s for user %s", obj.getObjectName(), player.getUsername());
 		} else {
 			Log.e("Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		}
-		player.sendPacket(new DeleteCharacterResponse(success));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
@@ -268,17 +278,6 @@ public class LoginService extends Service {
 			characters.add(new SWGCharacter(meta.getName(), Race.getRaceByFile(meta.getRace()).getCrc(), meta.getId(), ProjectSWG.getGalaxy().getId(), 1));
 		}
 		return characters;
-	}
-	
-	private boolean deleteCharacter(SWGObject obj) {
-		boolean success = userDatabase.deleteCharacter(obj.getObjectId());
-		if (success) {
-			Player owner = obj.getOwner();
-			if (owner != null)
-				CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
-			DestroyObjectIntent.broadcast(obj);
-		}
-		return success;
 	}
 	
 }

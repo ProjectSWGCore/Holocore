@@ -147,6 +147,14 @@ public class InstanceLocation implements Persistable {
 		return location.getOrientationW();
 	}
 	
+	public double getHeadingTo(Location target) {
+		return location.getHeadingTo(target);
+	}
+	
+	public double getHeadingTo(Point3D target) {
+		return location.getHeadingTo(target);
+	}
+	
 	public InstanceType getInstanceType() {
 		return instanceType;
 	}
@@ -156,14 +164,10 @@ public class InstanceLocation implements Persistable {
 	}
 	
 	public Location getWorldLocation(SWGObject self) {
-		SWGObject parent = self.getParent();
-		LocationBuilder builder = Location.builder(location);
-		while (parent != null) {
-			builder.translateLocation(parent.getInstanceLocation().location);
-			builder.setTerrain(parent.getTerrain());
-			parent = parent.getParent();
-		}
-		return builder.build();
+		SWGObject parent = self.getSuperParent();
+		if (parent == null)
+			return location;
+		return Location.builder(location).translateLocation(parent.getLocation()).setTerrain(parent.getTerrain()).build();
 	}
 	
 }

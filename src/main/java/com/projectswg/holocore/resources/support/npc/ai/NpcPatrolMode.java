@@ -26,87 +26,75 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai;
 
-import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * AI object that patrols the specified route
  */
 public class NpcPatrolMode extends NpcMode {
 	
-	private final List<ResolvedPatrolWaypoint> waypoints;
-	private final PatrolType patrolType;
-	private final Queue<Runnable> plannedRoute;
+	private final List<NavigationPoint> waypoints;
 	
-	public NpcPatrolMode(List<ResolvedPatrolWaypoint> waypoints) {
-		this.waypoints = new ArrayList<>(waypoints);
-		this.patrolType = !waypoints.isEmpty() ? waypoints.get(0).getPatrolType() : PatrolType.LOOP;
-		this.plannedRoute = new LinkedList<>();
+	public NpcPatrolMode(AIObject obj, List<ResolvedPatrolWaypoint> waypoints) {
+		super(obj);
+		this.waypoints = new ArrayList<>(waypoints.size());
+		
+		if (!waypoints.isEmpty()) {
+			waypoints = new ArrayList<>(waypoints);
+			if (waypoints.get(0).getPatrolType() == PatrolType.LOOP) {
+				waypoints.add(0, last(waypoints));
+			} else if (waypoints.get(0).getPatrolType() == PatrolType.FLIP) {
+				List<ResolvedPatrolWaypoint> reversed = new ArrayList<>(waypoints);
+				Collections.reverse(reversed);
+				waypoints.addAll(reversed);
+			} else {
+				assert false;
+			}
+		}
+		for (ResolvedPatrolWaypoint waypoint : waypoints) {
+			NavigationPoint point = NavigationPoint.at(waypoint.getParent(), waypoint.getLocation(), getWalkSpeed());
+			this.waypoints.add(point);
+			this.waypoints.addAll(NavigationPoint.nop(point, (int) waypoint.getDelay()));
+		}
+	}
+	
+	@Override
+	public void onModeStart() {
+		if (!waypoints.isEmpty()) {
+			int index = 0;
+			double closestDistance = waypoints.get(0).distanceTo(getAI());
+			for (int i = 1; i < waypoints.size(); i++) {
+				double distance = waypoints.get(i).distanceTo(getAI());
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					index = i;
+				}
+			}
+			List<NavigationPoint> rearranged = new ArrayList<>(waypoints.size());
+			rearranged.addAll(waypoints.subList(index, waypoints.size()));
+			rearranged.addAll(waypoints.subList(0, index));
+			
+			waypoints.clear();
+			waypoints.addAll(rearranged);
+		}
+		CompileNpcMovementIntent.broadcast(getAI(), waypoints, NavigationRouteType.LOOP, getWalkSpeed());
 	}
 	
 	@Override
 	public void act() {
-		if (isRooted()) {
-			queueNextLoop(1000);
-			return;
-		}
-		if (plannedRoute.isEmpty())
-			createPlannedRoute();
 		
-		Runnable nextAction = plannedRoute.poll();
-		if (nextAction != null)
-			nextAction.run();
-		
-		queueNextLoop(1000);
 	}
 	
-	private void createPlannedRoute() {
-		Location prevLocation = getAI().getLocation();
-		SWGObject prevParent = getAI().getParent();
-		for (ResolvedPatrolWaypoint waypoint : waypoints) {
-			appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
-			prevParent = waypoint.getParent();
-			prevLocation = waypoint.getLocation();
-		}
-		if (patrolType == PatrolType.FLIP) {
-			List<ResolvedPatrolWaypoint> waypointsReverse = new ArrayList<>(waypoints);
-			Collections.reverse(waypointsReverse);
-			for (ResolvedPatrolWaypoint waypoint : waypointsReverse) {
-				appendPlannedRouteWaypoint(prevParent, prevLocation, waypoint);
-				prevParent = waypoint.getParent();
-				prevLocation = waypoint.getLocation();
-			}
-		}
-	}
-	
-	private void appendPlannedRouteWaypoint(SWGObject prevParent, Location prevLocation, ResolvedPatrolWaypoint waypoint) {
-		if (prevParent == waypoint.getParent()) {
-			Queue<Location> route = AINavigationSupport.navigateTo(prevLocation, waypoint.getLocation(), getWalkSpeed());
-			while (!route.isEmpty()) {
-				Location l = route.poll();
-				assert l != null;
-				addToPlannedRoute(prevParent, l);
-			}
-		} else {
-			// Simple teleport to the location within/out of the cell
-			addToPlannedRoute(waypoint.getParent(), waypoint.getLocation());
-		}
-		for (int i = 0; i < waypoint.getDelay(); i++) {
-			addNopToPlannedRoute();
-		}
-	}
-	
-	private void addToPlannedRoute(SWGObject parent, Location location) {
-		plannedRoute.add(() -> walkTo(parent, location));
-	}
-	
-	private void addNopToPlannedRoute() {
-		plannedRoute.add(() -> {});
+	private static <T> T last(List<T> list) {
+		return list.isEmpty() ? null : list.get(list.size()-1);
 	}
 	
 }
