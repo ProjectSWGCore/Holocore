@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 class ConvertObjectData implements Converter {
 	
-	private static final ObjectDataAttribute[] ATTRIBUTES = Arrays.stream(ObjectDataAttribute.values()).filter(a -> a != ObjectDataAttribute.UNKNOWN).collect(Collectors.toList()).toArray(new ObjectDataAttribute[0]);
+	private static final ObjectDataAttribute[] ATTRIBUTES = Arrays.stream(ObjectDataAttribute.values()).filter(a -> a != ObjectDataAttribute.UNKNOWN).toArray(ObjectDataAttribute[]::new);
 	private static final File CLIENTDATA = new File("clientdata");
 	
 	private final Object [] line;
@@ -44,8 +44,6 @@ class ConvertObjectData implements Converter {
 			System.err.println("Failed to load object: " + file);
 			return;
 		}
-		if (file.getName().equals(""))
-		System.out.println(objectData.getAttribute(ObjectDataAttribute.OBJECT_NAME));
 		line[0] = file.getAbsolutePath().replace(CLIENTDATA.getAbsolutePath()+'/', "");
 		for (int i = 0; i < ATTRIBUTES.length; i++) {
 			ObjectDataAttribute attr = ATTRIBUTES[i];

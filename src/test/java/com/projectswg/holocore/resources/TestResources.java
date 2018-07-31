@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package com.projectswg.holocore.resources;
 
+import com.projectswg.holocore.resources.support.npc.ai.TestNavigationPoint;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -50,6 +51,7 @@ import com.projectswg.holocore.resources.services.TestConfig;
 	TestPoint3D.class,
 	TestQuaternion.class,
 	TestLittleEndianDataOutputStream.class,
+	TestNavigationPoint.class,
 	TestObjects.class
 })
 public class TestResources {

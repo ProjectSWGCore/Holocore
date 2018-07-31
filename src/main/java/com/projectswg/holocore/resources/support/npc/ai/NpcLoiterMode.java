@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
 /**
@@ -38,7 +39,8 @@ public class NpcLoiterMode extends NpcMode {
 	private Location mainLocation;
 	private double radius;
 	
-	public NpcLoiterMode(double radius) {
+	public NpcLoiterMode(AIObject obj, double radius) {
+		super(obj);
 		this.mainLocation = null;
 		this.radius = radius;
 	}

@@ -170,7 +170,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected int calculateLoadRange() {
 		if (isLoggedInPlayer())
-			return 1024;
+			return 300;
 		return super.calculateLoadRange();
 	}
 	

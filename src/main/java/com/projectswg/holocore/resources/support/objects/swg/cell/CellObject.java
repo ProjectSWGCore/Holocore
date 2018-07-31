@@ -60,6 +60,14 @@ public class CellObject extends SWGObject {
 		return Collections.unmodifiableCollection(portals);
 	}
 	
+	public Portal getPortalTo(CellObject neighbor) {
+		for (Portal portal : portals) {
+			if (portal.getOtherCell(this) == neighbor)
+				return portal;
+		}
+		return null;
+	}
+	
 	public boolean isPublic() {
 		return isPublic;
 	}

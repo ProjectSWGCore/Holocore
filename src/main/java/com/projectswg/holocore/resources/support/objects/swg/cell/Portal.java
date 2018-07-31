@@ -42,4 +42,9 @@ public class Portal {
 		return height;
 	}
 	
+	@Override
+	public String toString() {
+		return "Portal["+cell1 + " -> " + cell2 + "  [" + frame1 + ", " + frame2 + "] height=" + height + "]";
+	}
+	
 }

@@ -37,15 +37,13 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BuildingObject extends TangibleObject {
 	
 	private final Map<String, CellObject> nameToCell;
 	private final Map<Integer, CellObject> idToCell;
+	private final List<Portal> portals;
 	
 	private int loadRange;
 	
@@ -53,6 +51,7 @@ public class BuildingObject extends TangibleObject {
 		super(objectId, BaselineType.BUIO);
 		this.nameToCell = new HashMap<>();
 		this.idToCell = new HashMap<>();
+		this.portals = new ArrayList<>();
 		this.loadRange = 0;
 	}
 	
@@ -66,6 +65,10 @@ public class BuildingObject extends TangibleObject {
 	
 	public List<CellObject> getCells() {
 		return new ArrayList<>(idToCell.values());
+	}
+	
+	public List<Portal> getPortals() {
+		return Collections.unmodifiableList(portals);
 	}
 	
 	@Override
@@ -134,6 +137,7 @@ public class BuildingObject extends TangibleObject {
 					continue;
 			}
 			Portal portal = new Portal(cell, neighbor, portalInfo.getFrame1(), portalInfo.getFrame2(), portalInfo.getHeight());
+			portals.add(portal);
 			cell.addPortal(portal);
 			if (neighbor != null)
 				neighbor.addPortal(portal);
