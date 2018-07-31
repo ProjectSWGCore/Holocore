@@ -2,11 +2,14 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
+import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -17,21 +20,24 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class NpcCombatMode extends NpcMode {
 	
 	private final AtomicReference<NavigationPoint> returnLocation;
+	private final AtomicReference<Location> previousTargetLocation;
 	private final Collection<CreatureObject> targets;
-	
-	private double lastAttack;
+	private final AtomicLong iteration;
+	private final double runSpeed;
 	
 	public NpcCombatMode(AIObject obj) {
 		super(obj);
 		this.returnLocation = new AtomicReference<>(null);
+		this.previousTargetLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
-		
-		this.lastAttack = 0;
+		this.iteration = new AtomicLong(0);
+		this.runSpeed = DataManager.getConfig(ConfigFile.PRIMARY).getDouble("NPC-RUN-SPEED", 9);
 	}
 	
 	@Override
@@ -49,19 +55,19 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Override
 	public void onModeStart() {
-		returnLocation.set(NavigationPoint.at(getAI().getParent(), getAI().getLocation(), getRunSpeed()));
+		returnLocation.set(NavigationPoint.at(getAI().getParent(), getAI().getLocation(), runSpeed));
 	}
 	
 	@Override
 	public void act() {
 		if (isRooted()) {
-			queueNextLoop(1000);
+			queueNextLoop(500);
 			return;
 		}
 		
 		if (!targets.isEmpty()) {
 			performCombatAction();
-			queueNextLoop(1000);
+			queueNextLoop(500);
 		} else {
 			ScheduleNpcModeIntent.broadcast(getAI(), new NpcNavigateMode(getAI(), returnLocation.get()));
 		}
@@ -76,23 +82,32 @@ public class NpcCombatMode extends NpcMode {
 		CreatureObject target = getPrimaryTarget();
 		if (target == null)
 			return;
+		iteration.incrementAndGet();
 		
 		AIObject obj = getAI();
 		WeaponObject weapon = obj.getEquippedWeapon();
-		double targetRange = Math.max(1, weapon.getMaxRange()/2);
+		double targetRange = Math.max(1, weapon.getMaxRange()/3);
 		boolean lineOfSight = obj.isLineOfSight(target);
-		if (obj.getWorldLocation().distanceTo(target.getWorldLocation()) >= targetRange || !lineOfSight) {
-			StartNpcMovementIntent.broadcast(obj, target.getParent(), target.getLocation(), getRunSpeed());
+		Location targetLocation = target.getWorldLocation();
+		if (obj.getWorldLocation().distanceTo(targetLocation) >= targetRange || !lineOfSight) {
+			Location prev = previousTargetLocation.getAndSet(targetLocation);
+			if (prev == null) {
+				StartNpcMovementIntent.broadcast(obj, target.getParent(), target.getLocation(), runSpeed);
+			} else if (prev.distanceTo(targetLocation) >= 1 || !lineOfSight) {
+				Point3D delta = targetLocation.getPosition();
+				delta.translate(-prev.getX(), -prev.getY(), -prev.getZ());
+				Location destination = target.getLocation();
+				if (delta.flatDistanceTo(0, 0) < 50) {
+					destination = Location.builder(destination).translatePosition(delta.getX()*2, delta.getY()*2, delta.getZ()*2).build();
+				}
+				StartNpcMovementIntent.broadcast(obj, target.getParent(), destination, runSpeed);
+			}
 		} else {
 			StopNpcMovementIntent.broadcast(obj);
 		}
 		
-		if (lineOfSight) {
-			double attackSpeed = getAI().getPrimaryWeapons().contains(weapon) ? getSpawner().getPrimaryWeaponSpeed() : getSpawner().getSecondaryWeaponSpeed();
-			if (System.nanoTime() - lastAttack >= attackSpeed * 1E9) {
-				lastAttack = System.nanoTime();
-				attack(target, weapon);
-			}
+		if (lineOfSight && iteration.get() % 4 == 0) {
+			attack(target, weapon);
 		}
 	}
 	
