@@ -11,6 +11,8 @@ import com.projectswg.holocore.resources.support.objects.radial.object.SWGObject
 import com.projectswg.holocore.resources.support.objects.radial.object.UsableObjectRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
+import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
+import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleMountRadial;
 import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -34,6 +36,7 @@ public enum RadialHandler {
 	RadialHandler() {
 		initializeTerminalRadials();
 		initializeSurveyRadials();
+		initializePetRadials();
 		initializeMiscRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
@@ -98,6 +101,11 @@ public enum RadialHandler {
 	
 	private void initializeSurveyRadials() {
 		registerHandler(GameObjectType.GOT_TOOL_SURVEY, new ObjectSurveyToolRadial());
+	}
+	
+	private void initializePetRadials() {
+		registerHandler(GameObjectType.GOT_DATA_VEHICLE_CONTROL_DEVICE, new PetDeviceRadial());
+		registerHandler(GameObjectType.GOT_VEHICLE_HOVER, new VehicleMountRadial());
 	}
 	
 	private void initializeMiscRadials() {

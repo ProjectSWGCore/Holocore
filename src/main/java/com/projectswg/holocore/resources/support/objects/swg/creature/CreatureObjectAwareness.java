@@ -71,7 +71,7 @@ public class CreatureObjectAwareness {
 	}
 	
 	public synchronized void flushAware() {
-		Player target = creature.getOwner();
+		Player target = creature.getOwnerShallow();
 		List<SWGObject> create = getCreateList();
 		List<SWGObject> destroy = getDestroyList();
 		
@@ -92,7 +92,7 @@ public class CreatureObjectAwareness {
 				createObject(obj, target);
 			}
 			popStackUntil(target, createStack, null);
-			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
+			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost " + creature;
 		}
 		
 		assert aware.contains(creature) || pendingAdd.contains(creature): "not aware of creature";

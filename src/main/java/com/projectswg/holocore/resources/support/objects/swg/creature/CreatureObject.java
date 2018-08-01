@@ -45,6 +45,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import org.jetbrains.annotations.NotNull;
@@ -109,7 +110,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
+		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject) && !super.hasOptionFlags(OptionFlag.MOUNT)) {
 			addEquipment(obj);
 		}
 	}

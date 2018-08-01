@@ -45,6 +45,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Wearables");
 				listBox.addListItem("Tools");
 				listBox.addListItem("Travel");
+				listBox.addListItem("Vehicles");
 				listBox.addListItem("Stack test");
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
@@ -63,7 +64,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 2: handleWearables(player); break;
 			case 3: handleTools(player); break;
 			case 4: handleTravel(player); break;
-			case 5: handleStackTest(player); break;
+			case 5: handleVehicles(player); break;
+			case 6: handleStackTest(player); break;
 		}
 	}
 	
@@ -1373,6 +1375,13 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	private static void handleYavGeoCave(Player player) {
 		new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6485d, 83d, -446d, Terrain.YAVIN4)).broadcast();
+	}
+	
+	private static void handleVehicles(Player player) {
+		spawnItems(player,
+				"item_deed_light_bend_barc_06_01",
+				"item_deed_grievous_wheel_bike",
+				"item_roadmap_deed_speederbike_swoop_01_02");
 	}
 	
 	private static void handleStackTest(Player player) {
