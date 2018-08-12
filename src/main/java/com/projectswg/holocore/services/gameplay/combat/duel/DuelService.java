@@ -26,11 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.duel;
 
+
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.DeathblowIntent;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -64,8 +67,40 @@ public class DuelService extends Service {
 			case REQUEST:
 				handleRequestDuel(dpi.getSender(), dpi.getReciever());
 				break;
+			default:
+				break;
 		}
 	}
+	
+	@IntentHandler
+	private void handleDeathblowIntent(DeathblowIntent di) {
+		CreatureObject killer = di.getKiller();
+		CreatureObject corpse = di.getCorpse();
+		
+		if (!corpse.isPlayer()) {
+			return;
+		}
+		
+		if (corpse.isDuelingPlayer(killer)) {
+			handleEndDuel(corpse, killer);
+		}
+		
+	}	
+	
+	@IntentHandler
+	private void handlCreatureKilledIntent(CreatureKilledIntent cki) {
+		CreatureObject killer = cki.getKiller();
+		CreatureObject corpse = cki.getCorpse();
+		
+		if (!corpse.isPlayer()) {
+			return;
+		}
+		
+		if (corpse.isDuelingPlayer(killer)) {
+			handleEndDuel(corpse, killer);
+		}
+		
+	}	
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
 		if (!isLocationValidToDuel(accepter, target)) {
@@ -78,11 +113,17 @@ public class DuelService extends Service {
 			sendSystemMessage(accepter, target, "already_dueling");
 			return;
 		}
+		
 		accepter.addPlayerToSentDuels(target);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
 		accepter.setPvpFlags(PvpFlag.DUEL);
 		target.setPvpFlags(PvpFlag.DUEL);
+		accepter.setInCombat(true);
+		target.setInCombat(true);
+
+		new DuelPlayerIntent(accepter, target, DuelPlayerIntent.DuelEventType.BEGINDUEL).broadcast();
+
 	}
 	
 	private void endDuel(CreatureObject ender, CreatureObject target) {
@@ -92,6 +133,7 @@ public class DuelService extends Service {
 		target.removePlayerFromSentDuels(ender);
 		ender.setInCombat(false);
 		target.setInCombat(false);
+
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
