@@ -34,6 +34,8 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.DeathblowIntent;
+import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
+import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -119,8 +121,9 @@ public class DuelService extends Service {
 		sendSystemMessage(target, accepter, "accept_target");
 		accepter.setPvpFlags(PvpFlag.DUEL);
 		target.setPvpFlags(PvpFlag.DUEL);
-		accepter.setInCombat(true);
-		target.setInCombat(true);
+		
+		EnterCombatIntent.broadcast(accepter, target);
+		EnterCombatIntent.broadcast(target, accepter);
 
 		new DuelPlayerIntent(accepter, target, DuelPlayerIntent.DuelEventType.BEGINDUEL).broadcast();
 
@@ -131,8 +134,9 @@ public class DuelService extends Service {
 		target.clearPvpFlags(PvpFlag.DUEL);
 		ender.removePlayerFromSentDuels(target);
 		target.removePlayerFromSentDuels(ender);
-		ender.setInCombat(false);
-		target.setInCombat(false);
+		
+		ExitCombatIntent.broadcast(ender);
+		ExitCombatIntent.broadcast(target);
 
 	}
 	
