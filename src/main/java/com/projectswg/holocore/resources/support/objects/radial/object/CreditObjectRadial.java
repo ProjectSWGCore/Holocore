@@ -20,7 +20,7 @@ public class CreditObjectRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		options.add(new RadialOption(RadialItem.TRANSFER_CREDITS_TO_BANK_ACCOUNT));
+		options.add(RadialOption.create(RadialItem.ITEM_USE, "@space/space_loot:use_credit_chip"));
 	}
 	
 	@Override

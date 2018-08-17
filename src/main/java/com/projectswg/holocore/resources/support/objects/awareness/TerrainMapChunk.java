@@ -83,21 +83,20 @@ class TerrainMapChunk {
 				range = loadRange;
 			
 			if (instance == testInstance) {
-				if (range >= 16384 || (d + dTmp * dTmp) < range*range)
-					recursiveAdd(withinRange, obj, test);
+				if (range >= 16384 || (d + dTmp * dTmp) < range*range) {
+					recursiveAdd(withinRange, test);
+				}
 			}
 		}
 	}
 	
-	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject obj, @NotNull SWGObject test) {
-		if (!test.isVisible(obj))
-			return;
+	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject test) {
 		withinRange.add(test);
 		for (SWGObject child : test.getSlottedObjects()) {
-			recursiveAdd(withinRange, obj, child);
+			recursiveAdd(withinRange, child);
 		}
 		for (SWGObject child : test.getContainedObjects()) {
-			recursiveAdd(withinRange, obj, child);
+			recursiveAdd(withinRange, child);
 		}
 	}
 	

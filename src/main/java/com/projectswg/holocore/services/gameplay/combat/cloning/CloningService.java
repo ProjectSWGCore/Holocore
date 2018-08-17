@@ -306,7 +306,7 @@ public class CloningService extends Service {
 			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
 		}
 		
-		ObjectTeleportIntent.broadcast(corpse, cellObject, cloneLocation);
+		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);

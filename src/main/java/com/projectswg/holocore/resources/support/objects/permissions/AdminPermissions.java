@@ -27,28 +27,62 @@
 
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
-class AdminPermissions extends DefaultPermissions {
+public class AdminPermissions implements ContainerPermissions {
 	
-	@Override
-	public boolean canView(SWGObject requester, SWGObject container) {
-		return isAdmin(requester);
-	}
-
-	@Override
-	public boolean canEnter(SWGObject requester, SWGObject container) {
-		return isAdmin(requester);
-	}
+	private static final AdminPermissions PERMISSIONS = new AdminPermissions();
 	
-	private boolean isAdmin(SWGObject requester) {
-		if (requester == null)
-			return false;
-		if (!(requester instanceof CreatureObject)) {
-			return false;
-		}
+	private AdminPermissions() {
 		
-		return ((CreatureObject) requester).hasAbility("admin");
 	}
+	
+	@NotNull
+	@Override
+	public ContainerPermissionType getType() {
+		return ContainerPermissionType.ADMIN;
+	}
+	
+	@Override
+	public boolean canView(@NotNull CreatureObject viewer, @NotNull SWGObject container) {
+		return isAdmin(viewer);
+	}
+	
+	@Override
+	public boolean canEnter(@NotNull CreatureObject requester, @NotNull SWGObject container) {
+		return container instanceof CellObject && isAdmin(requester);
+	}
+	
+	@Override
+	public boolean canMove(@NotNull CreatureObject requester, @NotNull SWGObject container) {
+		return isAdmin(requester);
+	}
+	
+	@Override
+	public final void save(NetBufferStream stream) {
+		stream.addByte(0);
+	}
+	
+	@Override
+	public final void read(NetBufferStream stream) {
+		stream.getByte();
+	}
+	
+	private static boolean isAdmin(CreatureObject requester) {
+		return requester.hasAbility("admin");
+	}
+	
+	public static AdminPermissions getPermissions() {
+		return PERMISSIONS;
+	}
+	
+	public static AdminPermissions from(NetBufferStream stream) {
+		stream.getByte();
+		return PERMISSIONS;
+	}
+	
 }

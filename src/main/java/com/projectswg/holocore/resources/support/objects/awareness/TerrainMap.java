@@ -27,9 +27,11 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +39,8 @@ public class TerrainMap {
 	
 	private static final int CHUNK_COUNT_ACROSS = 16;
 	private static final int MAP_WIDTH = 16384;
-	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
+	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / (double) CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
+	private static final Set<SWGObject> EMPTY_SET = Collections.emptySet();
 	
 	private final TerrainMapChunk [][] chunks;
 	
@@ -85,22 +88,28 @@ public class TerrainMap {
 	
 	@NotNull
 	private static Collection<SWGObject> getAware(SWGObject obj) {
+		CreatureObject creo = null;
+		if (obj instanceof CreatureObject)
+			creo = (CreatureObject) obj;
+		
 		SWGObject superParent = obj.getSuperParent();
-		Set<SWGObject> aware;
-		if (AwarenessUtilities.notInAwareness(obj))
-			aware = new HashSet<>();
-		else if (superParent == null)
-			aware = getNearbyAware(obj);
-		else
-			aware = new HashSet<>(superParent.getAware(AwarenessType.OBJECT));
-		aware.removeIf(AwarenessUtilities::notInAwareness);
-		return aware;
+		if (superParent != null)
+			obj = superParent;
+		
+		return getNearbyAware(creo, obj);
 	}
 	
 	@NotNull
-	private static Set<SWGObject> getNearbyAware(SWGObject obj) {
+	private static Set<SWGObject> getNearbyAware(CreatureObject creo, SWGObject obj) {
 		TerrainMapChunk chunk = obj.getAwareness().getTerrainMapChunk();
-		return chunk == null ? new HashSet<>() : chunk.getWithinAwareness(obj);
+		if (chunk == null)
+			return EMPTY_SET;
+		
+		Set<SWGObject> aware = chunk.getWithinAwareness(obj);
+		if (creo != null)
+			aware.removeIf(o -> !o.isVisible(creo));
+		aware.removeIf(o -> !AwarenessUtilities.isInAwareness(o));
+		return aware;
 	}
 	
 	private void connectChunkNeighbors() {

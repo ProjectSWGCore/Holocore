@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services;
 
+import com.projectswg.holocore.services.gameplay.TestGameplay;
 import com.projectswg.holocore.services.gameplay.gcw.faction.TestCivilWarService;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -43,7 +44,8 @@ import com.projectswg.holocore.services.other.player.TestPlayer;
 	TestRareLootService.class,
 	TestCrafting.class,
 	TestPlayer.class,
-	TestGalaxy.class
+	TestGalaxy.class,
+	TestGameplay.class
 })
 public class TestServices {
 

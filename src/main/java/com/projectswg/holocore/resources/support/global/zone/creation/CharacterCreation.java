@@ -34,7 +34,9 @@ import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.global.player.AccessLevel;
+import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion.SpawnInformation;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -43,10 +45,7 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
-import com.projectswg.holocore.resources.support.global.player.AccessLevel;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion.SpawnInformation;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
@@ -96,8 +95,7 @@ public class CharacterCreation {
 		
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof CreatureObject;
-		obj.setLocation(info.location);
-		obj.moveToContainer(cell);
+		obj.moveToContainer(cell, info.location);
 		return (CreatureObject) obj;
 	}
 	
@@ -111,10 +109,9 @@ public class CharacterCreation {
 	}
 	
 	@NotNull
-	private TangibleObject createTangible(SWGObject container, ContainerPermissionsType type, String template) {
+	private TangibleObject createTangible(SWGObject container, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof TangibleObject;
-		obj.setContainerPermissions(type);
 		obj.moveToContainer(container);
 		new ObjectCreatedIntent(obj).broadcast();
 		return (TangibleObject) obj;
@@ -123,13 +120,13 @@ public class CharacterCreation {
 	/** Creates an object with default world visibility */
 	@NotNull
 	private TangibleObject createDefaultObject(SWGObject container, String template) {
-		return createTangible(container, ContainerPermissionsType.DEFAULT, template);
+		return createTangible(container, template);
 	}
 	
 	/** Creates an object with inventory-level world visibility (only the owner) */
 	@NotNull
 	private TangibleObject createInventoryObject(SWGObject container, String template) {
-		return createTangible(container, ContainerPermissionsType.INVENTORY, template);
+		return createTangible(container, template);
 	}
 	
 	private void createHair(CreatureObject creatureObj, String hair, CustomizationString customization) {

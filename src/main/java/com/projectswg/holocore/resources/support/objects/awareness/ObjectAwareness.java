@@ -28,10 +28,7 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import org.jetbrains.annotations.NotNull;
 
 public class ObjectAwareness {
@@ -90,10 +87,6 @@ public class ObjectAwareness {
 	@NotNull
 	private TerrainMap getTerrainMap(SWGObject obj) {
 		return terrains[obj.getTerrain().ordinal()];
-	}
-	
-	private static boolean isRider(@NotNull SWGObject obj, SWGObject parent) {
-		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
 	}
 	
 }

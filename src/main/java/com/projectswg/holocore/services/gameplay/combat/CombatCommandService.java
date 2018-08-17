@@ -272,8 +272,7 @@ public class CombatCommandService extends Service {
 		SWGObject delayEgg = eggTemplate.endsWith("generic_egg_small.iff") ? null : ObjectCreator.createObjectFromTemplate(eggTemplate);
 		
 		if (delayEgg != null) {
-			delayEgg.setLocation(eggLocation);
-			delayEgg.moveToContainer(eggParent);
+			delayEgg.moveToContainer(eggParent, eggLocation);
 			ObjectCreatedIntent.broadcast(delayEgg);
 		}
 		

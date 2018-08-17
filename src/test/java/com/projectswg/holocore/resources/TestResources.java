@@ -28,6 +28,7 @@
 package com.projectswg.holocore.resources;
 
 import com.projectswg.holocore.resources.support.npc.ai.TestNavigationPoint;
+import com.projectswg.holocore.resources.support.objects.permissions.TestContainerPermissions;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -36,7 +37,7 @@ import com.projectswg.holocore.resources.support.data.collections.TestSWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.TestSWGFlag;
 import com.projectswg.holocore.resources.support.data.collections.TestSWGList;
 import com.projectswg.holocore.resources.support.global.network.TestLittleEndianDataOutputStream;
-import com.projectswg.holocore.resources.objects.TestObjects;
+import com.projectswg.holocore.resources.support.objects.TestObjects;
 import com.projectswg.holocore.resources.support.data.persistable.TestPersistable;
 import com.projectswg.holocore.resources.services.TestConfig;
 
@@ -52,7 +53,8 @@ import com.projectswg.holocore.resources.services.TestConfig;
 	TestQuaternion.class,
 	TestLittleEndianDataOutputStream.class,
 	TestNavigationPoint.class,
-	TestObjects.class
+	TestObjects.class,
+	TestContainerPermissions.class
 })
 public class TestResources {
 	

@@ -39,7 +39,6 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.intents.support.data.config.ConfigChangedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -171,7 +170,6 @@ public class StaticItemService extends Service {
 		String[] itemNames = csii.getItemNames();
 		Player requesterOwner = csii.getRequester().getOwner();
 		ObjectCreationHandler objectCreationHandler = csii.getObjectCreationHandler();
-		ContainerPermissionsType permissions = csii.getPermissions();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
@@ -194,7 +192,6 @@ public class StaticItemService extends Service {
 
 					// Global attributes and type-specific attributes are applied
 					objectAttributes.applyAttributes(object);
-					object.setContainerPermissions(permissions);
 					object.moveToContainer(container);
 					Log.d("Successfully moved %s into container %s", itemName, container);
 					createdObjects[j] = object;

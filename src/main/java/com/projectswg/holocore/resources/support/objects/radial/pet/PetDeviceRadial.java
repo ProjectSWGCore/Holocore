@@ -29,7 +29,8 @@ package com.projectswg.holocore.resources.support.objects.radial.pet;
 
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.pet.PetCallIntent;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceCallIntent;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceStoreIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -44,18 +45,18 @@ public class PetDeviceRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		// Call if stored
-		options.add(new RadialOption(RadialItem.PET_CALL));
-		options.add(new RadialOption(RadialItem.PET_STORE));
+		options.add(RadialOption.create(RadialItem.PET_CALL));
+		options.add(RadialOption.create(RadialItem.PET_STORE));
 	}
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		switch (selection) {
 			case PET_CALL:
-				PetCallIntent.broadcast(player, target);
+				PetDeviceCallIntent.broadcast(player, target);
 				break;
 			case PET_STORE:
+				PetDeviceStoreIntent.broadcast(player, target);
 				break;
 			default:
 				break;

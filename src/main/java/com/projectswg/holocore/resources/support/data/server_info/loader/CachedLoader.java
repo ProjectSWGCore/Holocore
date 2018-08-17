@@ -17,7 +17,8 @@ enum CachedLoader {
 	NPC_WEAPON_RANGES	(NpcWeaponRangeLoader::new),
 	STATIC_SPAWNS		(NpcStaticSpawnLoader::new),
 	OBJECT_DATA			(ObjectDataLoader::new),
-	COMMANDS			(CommandLoader::new);
+	COMMANDS			(CommandLoader::new),
+	SLOT_DEFINITIONS	(SlotDefinitionLoader::new);
 	
 	private final AtomicReference<SoftReference<DataLoader>> cachedLoader;
 	private final Supplier<DataLoader> supplier;

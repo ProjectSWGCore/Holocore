@@ -159,7 +159,7 @@ public class CmdQaTool implements ICmdCallback {
 		}
 		
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
-		ObjectTeleportIntent.broadcast(recoveree, loc);
+		recoveree.moveToLocation(loc);
 		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
 	}
 	

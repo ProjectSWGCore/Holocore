@@ -13,6 +13,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.utilities.IntentFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,30 +25,31 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		RadialOption use = new RadialOption(RadialItem.ITEM_USE);
 		CreatureObject creature = player.getCreatureObject();
 		
-		options.add(use);
-		options.add(new RadialOption(RadialItem.EXAMINE));
-		
-		// Bank Transfer/Safety Deposit
-		use.addChildWithOverriddenText(RadialItem.SERVER_MENU1, "@sui:bank_credits");
-		use.addChildWithOverriddenText(RadialItem.SERVER_MENU2, "@sui:bank_items");
-		// Withdraw/Deposit
-		if (creature.getBankBalance() > 0)
-			use.addChildWithOverriddenText(RadialItem.SERVER_MENU4, "@sui:bank_withdrawall");
-		if (creature.getCashBalance() > 0)
-			use.addChildWithOverriddenText(RadialItem.SERVER_MENU3, "@sui:bank_depositall");
+		{
+			List<RadialOption> useOptions = new ArrayList<>();
+			
+			// Bank Transfer/Safety Deposit
+			useOptions.add(RadialOption.create(RadialItem.SERVER_MENU1, "@sui:bank_credits"));
+			useOptions.add(RadialOption.create(RadialItem.SERVER_MENU2, "@sui:bank_items"));
+			// Withdraw/Deposit
+			if (creature.getBankBalance() > 0)
+				useOptions.add(RadialOption.create(RadialItem.SERVER_MENU4, "@sui:bank_withdrawall"));
+			if (creature.getCashBalance() > 0)
+				useOptions.add(RadialOption.create(RadialItem.SERVER_MENU3, "@sui:bank_depositall"));
+			
+			options.add(RadialOption.createSilent(RadialItem.ITEM_USE, useOptions));
+		}
 		
 		if (isInGalacticReserveCity(creature)) {
-			RadialOption reserve = new RadialOption(RadialItem.SERVER_MENU50);
-			reserve.setOverriddenText("@sui:bank_galactic_reserve");
-			
+			List<RadialOption> reserveOptions = new ArrayList<>();
 			if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
-				reserve.addChildWithOverriddenText(RadialItem.SERVER_MENU49, "@sui:bank_galactic_reserve_deposit");
+				reserveOptions.add(RadialOption.create(RadialItem.SERVER_MENU49, "@sui:bank_galactic_reserve_deposit"));
 			if (creature.getReserveBalance() > 0)
-				reserve.addChildWithOverriddenText(RadialItem.SERVER_MENU48, "@sui:bank_galactic_reserve_withdraw");
-			options.add(reserve);
+				reserveOptions.add(RadialOption.create(RadialItem.SERVER_MENU48, "@sui:bank_galactic_reserve_withdraw"));
+			
+			options.add(RadialOption.createSilent(RadialItem.SERVER_MENU50, "@sui:bank_galactic_reserve", reserveOptions));
 		}
 	}
 	
@@ -73,6 +75,8 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 				break;
 			case SERVER_MENU48:
 				handleGalacticReserveWithdraw(player, creature);
+				break;
+			default:
 				break;
 		}
 	}

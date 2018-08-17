@@ -91,7 +91,7 @@ public class CmdGoto implements ICmdCallback  {
 			y = (portal.getFrame1().getY() + portal.getFrame2().getY()) / 2;
 			z = (portal.getFrame1().getZ() + portal.getFrame2().getZ()) / 2;
 		}
-		ObjectTeleportIntent.broadcast(obj, cell, Location.builder().setPosition(x, y, z).setTerrain(building.getTerrain()).build());
+		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.getTerrain()).build());
 		return "Successfully teleported "+obj.getObjectName()+" to "+building.getId();
 	}
 	

@@ -49,8 +49,8 @@ public class CreditObject extends TangibleObject {
 	 * @return {@link ContainerResult}
 	 */
 	@Override
-	public ContainerResult moveToContainer(@NotNull SWGObject requester, SWGObject container) {
-		if (!(requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()))
+	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject container) {
+		if (!requester.isPlayer())
 			return super.moveToContainer(requester, container);
 		
 		assert amount > 0 : "amount must be set";
@@ -64,7 +64,7 @@ public class CreditObject extends TangibleObject {
 		if (result != ContainerResult.SUCCESS)
 			return result;
 		
-		((CreatureObject) requester).addToCash(amount);
+		requester.addToCash(amount);
 		
 //		Set<Player> oldObservers = getObserversAndParent();
 //		if (parent != null)
@@ -76,7 +76,7 @@ public class CreditObject extends TangibleObject {
 		return ContainerResult.SUCCESS;
 	}
 	
-	protected ContainerResult moveToAccountChecks(SWGObject requester) {
+	protected ContainerResult moveToAccountChecks(CreatureObject requester) {
 		if (requester == null)
 			return ContainerResult.SUCCESS;
 		

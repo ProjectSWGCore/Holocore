@@ -29,43 +29,77 @@ package com.projectswg.holocore.intents.support.objects.swg;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ObjectTeleportIntent extends Intent {
 	
 	private final SWGObject object;
-	private final SWGObject parent;
+	private final SWGObject oldParent;
+	private final SWGObject newParent;
 	private final Location newLocation;
 	
-	public ObjectTeleportIntent(SWGObject object, Location newLocation) {
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location newLocation) {
+		this(object, oldParent, null, newLocation);
+	}
+	
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location newLocation) {
 		this.object = object;
-		this.parent = null;
+		this.oldParent = oldParent;
+		this.newParent = newParent;
 		this.newLocation = newLocation;
 	}
 	
-	public ObjectTeleportIntent(SWGObject object, SWGObject parent, Location newLocation) {
-		this.object = object;
-		this.parent = parent;
-		this.newLocation = newLocation;
-	}
-	
+	@NotNull
 	public SWGObject getObject() {
 		return object;
 	}
 	
-	public SWGObject getParent() {
-		return parent;
+	@Nullable
+	public SWGObject getOldParent() {
+		return oldParent;
 	}
 	
+	@Nullable
+	public SWGObject getNewParent() {
+		return newParent;
+	}
+	
+	@NotNull
 	public Location getNewLocation() {
 		return newLocation;
 	}
 	
-	public static void broadcast(SWGObject object, Location newLocation) {
-		new ObjectTeleportIntent(object, newLocation).broadcast();
+	public static void broadcast(SWGObject object, SWGObject oldParent, Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, newLocation).broadcast();
 	}
 	
-	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation) {
-		new ObjectTeleportIntent(object, parent, newLocation).broadcast();
+	public static void broadcast(SWGObject object, SWGObject oldParent, SWGObject newParent, Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, newParent, newLocation).broadcast();
+	}
+	
+	/**
+	 * Teleports the specified object to the specified coordinates within the same parent and terrain
+	 * @param object the object to teleport
+	 * @param x the new x location
+	 * @param y the new y location
+	 * @param z the new z location
+	 */
+	public static void broadcast(SWGObject object, double x, double y, double z) {
+		new ObjectTeleportIntent(object, object.getParent(), object.getParent(), Location.builder(object.getLocation()).setPosition(x, y, z).build());
+	}
+	
+	/**
+	 * Teleports the specified object to the specified coordinates within the specified parent and terrain
+	 * @param object the object to teleport
+	 * @param oldParent the previous object parent
+	 * @param newParent the object to teleport into
+	 * @param x the new x location
+	 * @param y the new y location
+	 * @param z the new z location
+	 */
+	public static void broadcast(SWGObject object, SWGObject oldParent, SWGObject newParent, double x, double y, double z) {
+		new ObjectTeleportIntent(object, oldParent, newParent, Location.builder(object.getLocation()).setPosition(x, y, z).build());
 	}
 	
 }

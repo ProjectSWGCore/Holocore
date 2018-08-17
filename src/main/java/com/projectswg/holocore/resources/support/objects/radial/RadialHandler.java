@@ -3,8 +3,7 @@ package com.projectswg.holocore.resources.support.objects.radial;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.GameObjectType;
-import com.projectswg.holocore.resources.support.objects.GameObjectTypeMask;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.radial.object.AIObjectRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.CreditObjectRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.SWGObjectRadial;
@@ -12,6 +11,8 @@ import com.projectswg.holocore.resources.support.objects.radial.object.UsableObj
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
+import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeedRadial;
+import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeviceRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleMountRadial;
 import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -29,7 +30,6 @@ public enum RadialHandler {
 	
 	private final Map<String, RadialHandlerInterface> handlers = new HashMap<>();
 	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new EnumMap<>(GameObjectType.class);
-	private final Map<GameObjectTypeMask, RadialHandlerInterface> gotmHandlers = new EnumMap<>(GameObjectTypeMask.class);
 	private final Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>();
 	private final SWGObjectRadial genericRadialHandler = new SWGObjectRadial();
 	
@@ -53,10 +53,6 @@ public enum RadialHandler {
 		gotHandlers.put(got, handler);
 	}
 	
-	public void registerHandler(GameObjectTypeMask gotm, RadialHandlerInterface handler) {
-		gotmHandlers.put(gotm, handler);
-	}
-	
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
 		getHandler(target).getOptions(options, player, target);
 	}
@@ -72,20 +68,17 @@ public enum RadialHandler {
 		if (handler != null)
 			return handler;
 		
-		if (target != null) {
-			handler = gotHandlers.get(target.getGameObjectType());
-			if (handler != null)
-				return handler;
-			
-			handler = gotmHandlers.get(target.getGameObjectType().getMask());
-			if (handler != null)
-				return handler;
-			
-			handler = classHandlers.get(target.getClass());
-			
-			if (handler != null)
-				return handler;
-		}
+		handler = gotHandlers.get(target.getGameObjectType());
+		if (handler != null)
+			return handler;
+		
+		handler = gotHandlers.get(target.getGameObjectType().getMask());
+		if (handler != null)
+			return handler;
+		
+		handler = classHandlers.get(target.getClass());
+		if (handler != null)
+			return handler;
 		
 		return genericRadialHandler;
 	}
@@ -104,7 +97,9 @@ public enum RadialHandler {
 	}
 	
 	private void initializePetRadials() {
-		registerHandler(GameObjectType.GOT_DATA_VEHICLE_CONTROL_DEVICE, new PetDeviceRadial());
+		registerHandler(GameObjectType.GOT_DEED_VEHICLE, new VehicleDeedRadial());
+		registerHandler(GameObjectType.GOT_DATA_VEHICLE_CONTROL_DEVICE, new VehicleDeviceRadial());
+		registerHandler(GameObjectType.GOT_DATA_PET_CONTROL_DEVICE, new PetDeviceRadial());
 		registerHandler(GameObjectType.GOT_VEHICLE_HOVER, new VehicleMountRadial());
 	}
 	

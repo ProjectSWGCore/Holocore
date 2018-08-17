@@ -7,70 +7,57 @@
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
  *                                                                                 *
- * This file is part of Holocore.                                                  *
+ * This file is part of PSWGCommon.                                                *
  *                                                                                 *
  * --------------------------------------------------------------------------------*
  *                                                                                 *
- * Holocore is free software: you can redistribute it and/or modify                *
+ * PSWGCommon is free software: you can redistribute it and/or modify              *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
  *                                                                                 *
- * Holocore is distributed in the hope that it will be useful,                     *
+ * PSWGCommon is distributed in the hope that it will be useful,                   *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
  *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.objects.permissions;
+package com.projectswg.holocore.resources.support.objects.radial.pet;
 
-
+import com.projectswg.common.data.radial.RadialItem;
+import com.projectswg.common.data.radial.RadialOption;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.VehicleDeedGenerateIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import me.joshlarson.jlcommon.log.Log;
 
-class LootPermissions extends ContainerPermissions {
-	
-	@Override
-	public boolean canView(SWGObject requester, SWGObject container) {
-		return true;
-	}
-	
-	@Override
-	public boolean canEnter(SWGObject requester, SWGObject container) {
-		return true;
-	}
-	
-	@Override
-	public boolean canRemove(SWGObject requester, SWGObject container) {
-		return false;
-	}
-	
-	@Override
-	public boolean canMove(SWGObject requester, SWGObject container) {
-		if (requester == null)
-			return true;
+import java.util.List;
 
-		if (requester.getOwner() == null || requester.getParent() == null)
-			return true;
-
-		if (container.getParent() == null)
-			return defaultCanMove(requester, container);
-
-		if (!(container.getParent().getParent() instanceof AIObject))
-			return defaultCanMove(requester, container);
+public class VehicleDeedRadial implements RadialHandlerInterface {
+	
+	public VehicleDeedRadial() {
 		
-		return true;
 	}
 	
 	@Override
-	public boolean canAdd(SWGObject requester, SWGObject container) {
-		return false;
+	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+		options.add(RadialOption.create(RadialItem.VEHICLE_GENERATE));
 	}
 	
-	private boolean defaultCanMove(SWGObject requester, SWGObject container){
-		return requester.getOwner() != null && requester.getOwner().equals(container.getOwner());
+	@Override
+	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+		Log.t("VehicleDeedRadial - selection: %s", selection);
+		switch (selection) {
+			case VEHICLE_GENERATE:
+				VehicleDeedGenerateIntent.broadcast(player, target);
+				break;
+			default:
+				break;
+		}
 	}
+	
 }

@@ -28,15 +28,18 @@
 package com.projectswg.holocore.test_resources;
 
 import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.SceneCreateObjectByCrc;
+import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.objects.GameObjectType;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import me.joshlarson.jlcommon.log.Log;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -53,6 +56,10 @@ public class GenericCreatureObject extends CreatureObject {
 		player = new Player(objectId) {
 			@Override
 			public void sendPacket(SWGPacket ... packets) {
+				if (packets[0] instanceof SceneDestroyObject)
+					Log.d("%d Destroy: %d", objectId, ((SceneDestroyObject) packets[0]).getObjectId());
+				if (packets[0] instanceof SceneCreateObjectByCrc)
+					Log.d("%d Create: %d", objectId, ((SceneCreateObjectByCrc) packets[0]).getObjectId());
 				// Nah
 			}
 		};
@@ -101,8 +108,7 @@ public class GenericCreatureObject extends CreatureObject {
 	private void createInventoryObject(String slot) {
 		SWGObject obj = new TangibleObject(GENERATED_IDS.incrementAndGet());
 		obj.setArrangement(List.of(List.of(slot)));
-		obj.setContainerPermissions(ContainerPermissionsType.INVENTORY);
-		obj.moveToContainer(this);
+		obj.systemMove(this);
 	}
 	
 }

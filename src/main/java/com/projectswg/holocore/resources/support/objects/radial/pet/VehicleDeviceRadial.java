@@ -29,56 +29,36 @@ package com.projectswg.holocore.resources.support.objects.radial.pet;
 
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.MountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.StoreMountIntent;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceCallIntent;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceStoreIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
 
-public class VehicleMountRadial implements RadialHandlerInterface {
+public class VehicleDeviceRadial implements RadialHandlerInterface {
 	
-	public VehicleMountRadial() {
+	public VehicleDeviceRadial() {
 		
 	}
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		if (!(target instanceof CreatureObject))
-			return;
-		
-		CreatureObject mount = (CreatureObject) target;
-		
-		if (mount.getOwnerId() != player.getCreatureObject().getObjectId()) {	// Only an owner can enter/exit
-			// TODO group members can enter the vehicle
-			return;
-		}
-		
-		if (player.getCreatureObject().getParent() == target)
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:dismount"));
-		else
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:mount"));
-		options.add(RadialOption.create(RadialItem.PET_STORE));
+		options.add(RadialOption.create(RadialItem.VEHICLE_GENERATE));
+		options.add(RadialOption.create(RadialItem.VEHICLE_STORE));
 	}
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof CreatureObject))
-			return;
-		Log.t("VehicleMountRadial - selection: %s", selection);
+		Log.t("VehicleDeviceRadial - selection: %s", selection);
 		switch (selection) {
-			case SERVER_VEHICLE_ENTER_EXIT:
-				if (player.getCreatureObject().getParent() == target)
-					DismountIntent.broadcast(player, (CreatureObject) target);
-				else
-					MountIntent.broadcast(player, (CreatureObject) target);
+			case VEHICLE_GENERATE:
+				PetDeviceCallIntent.broadcast(player, target);
 				break;
-			case PET_STORE:
-				StoreMountIntent.broadcast(player, (CreatureObject) target);
+			case VEHICLE_STORE:
+				PetDeviceStoreIntent.broadcast(player, target);
 				break;
 			default:
 				break;

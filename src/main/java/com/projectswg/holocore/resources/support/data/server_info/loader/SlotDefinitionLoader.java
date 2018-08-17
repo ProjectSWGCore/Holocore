@@ -24,65 +24,85 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-package com.projectswg.holocore.resources.support.objects.radial.pet;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 
-import com.projectswg.common.data.radial.RadialItem;
-import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.MountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.StoreMountIntent;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.log.Log;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.List;
-
-public class VehicleMountRadial implements RadialHandlerInterface {
+public final class SlotDefinitionLoader extends DataLoader {
 	
-	public VehicleMountRadial() {
-		
+	private final Map<String, SlotDefinition> buildingMap;
+	
+	SlotDefinitionLoader() {
+		this.buildingMap = new HashMap<>();
+	}
+	
+	public SlotDefinition getSlotDefinition(String slotName) {
+		return buildingMap.get(slotName);
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		if (!(target instanceof CreatureObject))
-			return;
-		
-		CreatureObject mount = (CreatureObject) target;
-		
-		if (mount.getOwnerId() != player.getCreatureObject().getObjectId()) {	// Only an owner can enter/exit
-			// TODO group members can enter the vehicle
-			return;
+	public final void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/abstract/slot_definitions.sdb"))) {
+			while (set.next()) {
+				SlotDefinition def = new SlotDefinition(set);
+				buildingMap.put(def.getName(), def);
+			}
 		}
-		
-		if (player.getCreatureObject().getParent() == target)
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:dismount"));
-		else
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:mount"));
-		options.add(RadialOption.create(RadialItem.PET_STORE));
 	}
 	
-	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof CreatureObject))
-			return;
-		Log.t("VehicleMountRadial - selection: %s", selection);
-		switch (selection) {
-			case SERVER_VEHICLE_ENTER_EXIT:
-				if (player.getCreatureObject().getParent() == target)
-					DismountIntent.broadcast(player, (CreatureObject) target);
-				else
-					MountIntent.broadcast(player, (CreatureObject) target);
-				break;
-			case PET_STORE:
-				StoreMountIntent.broadcast(player, (CreatureObject) target);
-				break;
-			default:
-				break;
+	public static class SlotDefinition {
+		
+		private final String name;
+		private final boolean global;
+		private final boolean modifiable;
+		private final boolean observeWithParent;
+		private final boolean exposeToWorld;
+		
+		private SlotDefinition(SdbResultSet set) {
+			// slotName	global	modifiable	observeWithParent	exposeToWorld
+			this.name = set.getText("slotName");
+			this.global = set.getBoolean("global");
+			this.modifiable = set.getBoolean("modifiable");
+			this.observeWithParent = set.getBoolean("observeWithParent");
+			this.exposeToWorld = set.getBoolean("exposeToWorld");
 		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public boolean isGlobal() {
+			return global;
+		}
+		
+		public boolean isModifiable() {
+			return modifiable;
+		}
+		
+		public boolean isObserveWithParent() {
+			return observeWithParent;
+		}
+		
+		public boolean isExposeToWorld() {
+			return exposeToWorld;
+		}
+		
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			return o instanceof SlotDefinition && ((SlotDefinition) o).name.equals(name);
+		}
+		
 	}
 	
 }

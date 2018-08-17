@@ -39,14 +39,8 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 			return;
 		}
 		
-		RadialOption splitOption = new RadialOption(RadialItem.SERVER_MENU49);
-		RadialOption stackOption = new RadialOption(RadialItem.SERVER_MENU50);
-		
-		splitOption.setOverriddenText("@autostack:unstack");
-		stackOption.setOverriddenText("@autostack:stack");
-		
-		options.add(splitOption);
-		options.add(stackOption);
+		options.add(RadialOption.create(RadialItem.SERVER_MENU49, "@autostack:unstack"));
+		options.add(RadialOption.create(RadialItem.SERVER_MENU50, "@autostack:stack"));
 	}
 	
 	@Override
@@ -57,6 +51,8 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 				break;
 			case SERVER_MENU50:
 				stack(target);
+				break;
+			default:
 				break;
 		}
 	}

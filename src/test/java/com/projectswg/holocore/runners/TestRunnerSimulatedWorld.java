@@ -25,64 +25,78 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.objects.radial.pet;
+package com.projectswg.holocore.runners;
 
-import com.projectswg.common.data.radial.RadialItem;
-import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.MountIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.StoreMountIntent;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.log.Log;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
+import me.joshlarson.jlcommon.concurrency.Delay;
+import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.control.IntentManager;
+import me.joshlarson.jlcommon.control.ServiceBase;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
-public class VehicleMountRadial implements RadialHandlerInterface {
+@RunWith(JUnit4.class)
+public class TestRunnerSimulatedWorld {
 	
-	public VehicleMountRadial() {
-		
+	private static final AtomicLong UNIQUE_ID = new AtomicLong(1);
+	
+	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
+	private IntentManager intentManager = null;
+	
+	@BeforeClass
+	public static void initializeStatic() {
+		DataManager.initialize();
 	}
 	
-	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		if (!(target instanceof CreatureObject))
-			return;
-		
-		CreatureObject mount = (CreatureObject) target;
-		
-		if (mount.getOwnerId() != player.getCreatureObject().getObjectId()) {	// Only an owner can enter/exit
-			// TODO group members can enter the vehicle
-			return;
-		}
-		
-		if (player.getCreatureObject().getParent() == target)
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:dismount"));
-		else
-			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:mount"));
-		options.add(RadialOption.create(RadialItem.PET_STORE));
+	@Before
+	public void setupServices() {
+		intentManager = new IntentManager(1);
+		IntentManager.setInstance(intentManager);
+		registerService(new AwarenessService());
 	}
 	
-	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof CreatureObject))
-			return;
-		Log.t("VehicleMountRadial - selection: %s", selection);
-		switch (selection) {
-			case SERVER_VEHICLE_ENTER_EXIT:
-				if (player.getCreatureObject().getParent() == target)
-					DismountIntent.broadcast(player, (CreatureObject) target);
-				else
-					MountIntent.broadcast(player, (CreatureObject) target);
-				break;
-			case PET_STORE:
-				StoreMountIntent.broadcast(player, (CreatureObject) target);
-				break;
-			default:
-				break;
+	@After
+	public void cleanupServices() {
+		for (ServiceBase service : instantiatedServices) {
+			service.setIntentManager(null);
+			service.stop();
+			service.terminate();
 		}
+		intentManager.close();
+		IntentManager.setInstance(null);
+	}
+	
+	protected final void registerService(ServiceBase service) {
+		service.setIntentManager(Objects.requireNonNull(intentManager));
+		service.initialize();
+		service.start();
+		this.instantiatedServices.add(service);
+	}
+	
+	protected final void broadcastAndWait(Intent i) {
+		i.broadcast();
+		while (!i.isComplete()) {
+			boolean uninterrupted = Delay.sleepMicro(10);
+			assert uninterrupted;
+		}
+		while (intentManager.getIntentCount() > 0) {
+			boolean uninterrupted = Delay.sleepMicro(10);
+			assert uninterrupted;
+		}
+	}
+	
+	protected static long getUniqueId() {
+		return UNIQUE_ID.getAndIncrement();
 	}
 	
 }

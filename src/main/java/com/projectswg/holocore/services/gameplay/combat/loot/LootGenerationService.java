@@ -1,7 +1,6 @@
 package com.projectswg.holocore.services.gameplay.combat.loot;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
@@ -18,7 +17,6 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoad
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -76,10 +74,8 @@ public final class LootGenerationService extends Service {
 		}
 		
 		SWGObject lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff");
-		lootInventory.setLocation(corpse.getLocation());
-		lootInventory.setContainerPermissions(ContainerPermissionsType.LOOT);
-		lootInventory.moveToContainer(corpse);
-		new ObjectCreatedIntent(lootInventory).broadcast();
+		lootInventory.moveToContainer(corpse, corpse.getLocation());
+		ObjectCreatedIntent.broadcast(lootInventory);
 		
 		CreatureObject killer = cki.getKiller();
 		
@@ -243,7 +239,6 @@ public final class LootGenerationService extends Service {
 		CreditObject cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", CreditObject.class);
 		
 		cashObject.setAmount(cashAmount);
-		cashObject.setContainerPermissions(ContainerPermissionsType.LOOT);
 		cashObject.moveToContainer(lootInventory);
 		
 		ObjectCreatedIntent.broadcast(cashObject);
@@ -288,13 +283,12 @@ public final class LootGenerationService extends Service {
 					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + itemName).broadcast();
 				} else if (itemName.endsWith(".iff")) {
 					SWGObject object = ObjectCreator.createObjectFromTemplate(itemName);
-					object.setContainerPermissions(ContainerPermissionsType.LOOT);
 					object.moveToContainer(lootInventory);
 					ObjectCreatedIntent.broadcast(object);
 					
 					lootGenerated = true;
 				} else {
-					new CreateStaticItemIntent(killer, lootInventory, new CreateStaticItemCallback(), ContainerPermissionsType.LOOT, itemName).broadcast();
+					new CreateStaticItemIntent(killer, lootInventory, new CreateStaticItemCallback(), itemName).broadcast();
 					
 					lootGenerated = true;
 				}

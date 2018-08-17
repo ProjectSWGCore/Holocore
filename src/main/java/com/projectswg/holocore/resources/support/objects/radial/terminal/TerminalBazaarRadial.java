@@ -16,8 +16,8 @@ public class TerminalBazaarRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		options.add(new RadialOption(RadialItem.ITEM_USE));
-		options.add(new RadialOption(RadialItem.EXAMINE));
+		options.add(RadialOption.create(RadialItem.ITEM_USE));
+		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 	}
 	
 	@Override

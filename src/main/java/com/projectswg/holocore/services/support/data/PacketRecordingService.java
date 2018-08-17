@@ -2,6 +2,9 @@ package com.projectswg.holocore.services.support.data;
 
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformMessage;
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformWithParentMessage;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
@@ -54,19 +57,37 @@ public class PacketRecordingService extends Service {
 			return createDeltaInformation((DeltasMessage) p);
 		if (p instanceof ObjectController)
 			return createControllerInformation((ObjectController) p);
+		if (p instanceof UpdateContainmentMessage)
+			return createContainmentInformation((UpdateContainmentMessage) p);
+		if (p instanceof UpdateTransformMessage)
+			return createTransformInformation((UpdateTransformMessage) p);
+		if (p instanceof UpdateTransformWithParentMessage)
+			return createTransformInformation((UpdateTransformWithParentMessage) p);
 		return p.getClass().getSimpleName();
 	}
 	
-	private String createBaselineInformation(Baseline b) {
+	private static String createBaselineInformation(Baseline b) {
 		return "Baseline:"+b.getType()+b.getNum()+"  ID="+b.getObjectId();
 	}
 	
-	private String createDeltaInformation(DeltasMessage d) {
+	private static String createDeltaInformation(DeltasMessage d) {
 		return "Delta:"+d.getType()+d.getNum()+"  Var="+d.getUpdate()+"  ID="+d.getObjectId();
 	}
 	
-	private String createControllerInformation(ObjectController c) {
+	private static String createControllerInformation(ObjectController c) {
 		return "ObjectController:0x"+Integer.toHexString(c.getControllerCrc())+"  ID="+c.getObjectId();
+	}
+	
+	private static String createContainmentInformation(UpdateContainmentMessage u) {
+		return String.format("UpdateContainmentMessage ID=%d  parent=%d  slot=%d", u.getObjectId(), u.getContainerId(), u.getSlotIndex());
+	}
+	
+	private static String createTransformInformation(UpdateTransformMessage u) {
+		return String.format("UpdateTransformMessage ID=%d  x=%d y=%d z=%d", u.getObjectId(), u.getX(), u.getY(), u.getZ());
+	}
+	
+	private static String createTransformInformation(UpdateTransformWithParentMessage u) {
+		return String.format("UpdateTransformWithParentMessage ID=%d  CELL=%d  x=%d y=%d z=%d", u.getObjectId(), u.getCellId(), u.getX(), u.getY(), u.getZ());
 	}
 	
 }

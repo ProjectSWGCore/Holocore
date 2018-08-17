@@ -58,12 +58,13 @@ import com.projectswg.holocore.resources.support.objects.awareness.DataTransform
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -112,32 +113,24 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject obj = oti.getObject();
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer()) {
-			Location newLocation = oti.getNewLocation();
-			// If we're on the same terrain and within the minimum terrain load range (1024m), or we're aware of the parent we're about to go to
-			if ((newLocation.getTerrain() == obj.getTerrain() && oti.getParent() == null && newLocation.distanceTo(obj.getWorldLocation()) <= 1024) || (oti.getParent() != null && obj.getAware().contains(oti.getParent()))) {
-				synchronized (obj.getAwarenessLock()) {
-					obj.systemMove(oti.getParent(), newLocation);
-					awareness.updateObject(obj);
-				}
-				if (oti.getParent() != null)
-					obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), newLocation, 0));
-				else
-					obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), newLocation, 0));
-			} else {
-				handleZoneIn((CreatureObject) obj, oti.getNewLocation(), oti.getParent());
-			}
+		@NotNull SWGObject obj = oti.getObject();
+		@Nullable SWGObject oldParent = obj.getParent();
+		@Nullable SWGObject newParent = oti.getNewParent();
+		@NotNull Location oldLocation = obj.getLocation();
+		@NotNull Location newLocation = oti.getNewLocation();
+		
+		if (isPlayerZoneInRequired(obj, newParent, newLocation)) {
+			handleZoneIn((CreatureObject) obj, newLocation, newParent);
 		} else {
 			synchronized (obj.getAwarenessLock()) {
-				obj.systemMove(oti.getParent(), oti.getNewLocation());
+				obj.systemMove(newParent, newLocation);
+				sendTeleportPackets(obj, newParent, newLocation);
 				awareness.updateObject(obj);
 			}
-			if (oti.getParent() != null)
-				obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), oti.getParent().getObjectId(), oti.getNewLocation(), 0));
-			else
-				obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), oti.getNewLocation(), 0));
 		}
+		
+		update(oldParent);
+		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation);
 	}
 	
 	@IntentHandler
@@ -154,23 +147,25 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void processMoveObjectIntent(MoveObjectIntent moi) {
-		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed(), moi.getUpdateCounter());
+		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed());
 	}
 	
 	@IntentHandler
 	private void processContainerTransferIntent(ContainerTransferIntent cti) {
-		SWGObject obj = cti.getObject();
-		SWGObject oldContainer = cti.getOldContainer();
-		SWGObject newContainer = cti.getContainer();
-		if (oldContainer != null)
-			awareness.updateObject(oldContainer);
-		awareness.updateObject(cti.getObject());
+		@NotNull SWGObject obj = cti.getObject();
+		@Nullable SWGObject oldContainer = cti.getOldContainer();
+		@Nullable SWGObject newContainer = cti.getContainer();
+		
+		update(cti.getObject());
+		update(oldContainer);
+		
 		obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newContainer == null ? 0 : newContainer.getObjectId(), obj.getSlotArrangement()));
+		onObjectMoved(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation());
 	}
 	
 	@IntentHandler
 	private void handleForceAwarenessUpdateIntent(ForceAwarenessUpdateIntent faui) {
-		awareness.updateObject(faui.getObject());
+		update(faui.getObject());
 	}
 	
 	@IntentHandler
@@ -189,6 +184,8 @@ public class AwarenessService extends Service {
 			return;
 		}
 		
+		SWGObject oldParent = creature.getParent();
+		Location oldLocation = creature.getLocation();
 		synchronized (creature.getAwarenessLock()) {
 			// Safely clear awareness
 			creature.setOwner(null);
@@ -200,6 +197,7 @@ public class AwarenessService extends Service {
 			startZone(creature, firstZone);
 			awareness.updateObject(creature);
 		}
+		onObjectMoved(creature, oldParent, parent, oldLocation, loc);
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {
@@ -237,7 +235,7 @@ public class AwarenessService extends Service {
 			return;
 		}
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
-		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
+		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed());
 	}
 	
 	private void handleDataTransformWithParent(DataTransformWithParent dt) {
@@ -252,32 +250,77 @@ public class AwarenessService extends Service {
 			return;
 		}
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
-		moveObjectWithTransform(obj, parent, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
+		moveObjectWithTransform(obj, parent, requestedLocation, dt.getSpeed());
 	}
 	
-	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			SWGObject vehicle = obj.getParent();
-			assert vehicle != null : "vehicle is null";
-			obj.systemMove(vehicle, requestedLocation);	// This makes buildings disappear, BUT the vehicle moves as it should
-			vehicle.systemMove(null, requestedLocation);
-			awareness.updateObject(obj);
-			awareness.updateObject(vehicle);
+	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
+		if (obj.isExposeWithWorld()) {
+			parent = obj.getParent();
+			assert parent != null : "expose parent is null";
 			
-			dataTransformHandler.handleMove(vehicle, speed, update);
+			synchronized (parent.getAwarenessLock()) {
+				parent.systemMove(null, requestedLocation);
+				awareness.updateObject(parent);
+			}
+			for (SWGObject child : parent.getSlottedObjects()) {
+				SWGObject oldParent = child.getParent();
+				Location oldLocation = child.getLocation();
+				synchronized (child.getAwarenessLock()) {
+					child.systemMove(parent, requestedLocation);
+				}
+				onObjectMoved(child, oldParent, parent, oldLocation, requestedLocation);
+			}
+			dataTransformHandler.handleMove(parent, speed);
 		} else {
+			SWGObject oldParent = obj.getParent();
+			Location oldLocation = obj.getLocation();
 			synchronized (obj.getAwarenessLock()) {
 				obj.systemMove(parent, requestedLocation);
 				awareness.updateObject(obj);
 			}
 			if (parent == null) {
-				dataTransformHandler.handleMove(obj, speed, update);
+				dataTransformHandler.handleMove(obj, speed);
 			} else {
-				dataTransformHandler.handleMove(obj, parent, speed, update);
+				dataTransformHandler.handleMove(obj, parent, speed);
+			}
+			
+			if (oldParent != parent)
+				update(oldParent);
+			onObjectMoved(obj, oldParent, parent, oldLocation, requestedLocation);
+		}
+	}
+	
+	private void update(@Nullable SWGObject obj) {
+		if (obj != null) {
+			synchronized (obj.getAwarenessLock()) {
+				awareness.updateObject(obj);
 			}
 		}
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())	// TODO don't the other passengers in the vehicle move as well?
-			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
+	}
+	
+	private static boolean isPlayerZoneInRequired(@NotNull SWGObject obj, @Nullable SWGObject parent, @NotNull Location newLocation) {
+		if (!(obj instanceof CreatureObject))
+			return false;
+		if (!((CreatureObject) obj).isLoggedInPlayer())
+			return false;
+		if (parent == null)
+			return newLocation.getTerrain() != obj.getTerrain() || newLocation.distanceTo(obj.getWorldLocation()) > 1024;
+		return !obj.getAware().contains(parent);
+	}
+	
+	private static void sendTeleportPackets(@NotNull SWGObject obj, @Nullable SWGObject parent, @NotNull Location location) {
+		if (parent != null) {
+			obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), parent.getObjectId(), location, 0));
+			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
+		} else {
+			obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), location, 0));
+			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
+		}
+	}
+	
+	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+			new PlayerTransformedIntent((CreatureObject) obj, oldParent, newParent, oldLocation, newLocation).broadcast();
 	}
 	
 }

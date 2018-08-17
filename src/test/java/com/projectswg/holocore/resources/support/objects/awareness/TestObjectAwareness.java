@@ -133,6 +133,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		player.setLoadRange(-1);
 		player.setHasOwner(false);
+		testPlayer.setLoadRange(0);
 		Assert.assertEquals(0, player.getLoadRange());
 		
 		moveNoAssert(TestLocation.SSI);
@@ -172,14 +173,13 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	}
 	
 	private void moveNoAssert(TestLocation location) {
-		player.moveToContainer(getParent(location.getParent()));
-		player.setLocation(location.getLocation());
+		player.systemMove(getParent(location.getParent()), location.getLocation());
+		
 		awareness.updateObject(player);
 	}
 	
 	private void move(TestLocation location) {
-		player.moveToContainer(getParent(location.getParent()));
-		player.setLocation(location.getLocation());
+		player.systemMove(getParent(location.getParent()), location.getLocation());
 		awareness.updateObject(player);
 		
 		assertAware(getExpectedAware(location.getAwareSet()));

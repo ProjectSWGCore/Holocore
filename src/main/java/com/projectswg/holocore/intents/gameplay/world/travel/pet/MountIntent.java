@@ -1,16 +1,16 @@
-package com.projectswg.holocore.intents.pet;
+package com.projectswg.holocore.intents.gameplay.world.travel.pet;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
-public class PetMountIntent extends Intent {
+public class MountIntent extends Intent {
 	
 	private final Player player;
 	private final CreatureObject pet;
 	
-	public PetMountIntent(@NotNull Player player, @NotNull CreatureObject pet) {
+	public MountIntent(@NotNull Player player, @NotNull CreatureObject pet) {
 		this.player = player;
 		this.pet = pet;
 	}
@@ -26,7 +26,7 @@ public class PetMountIntent extends Intent {
 	}
 	
 	public static void broadcast(@NotNull Player player, @NotNull CreatureObject pet) {
-		new PetMountIntent(player, pet).broadcast();
+		new MountIntent(player, pet).broadcast();
 	}
 	
 }

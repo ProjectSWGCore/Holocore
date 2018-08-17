@@ -128,12 +128,19 @@ public class CreatureObject extends TangibleObject {
 		return inventory;
 	}
 	
+	@NotNull
+	public SWGObject getDatapad() {
+		SWGObject datapad = getSlottedObject("datapad");
+		assert datapad != null;
+		return datapad;
+	}
+	
 	@Override
 	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
 		SWGObject inventory = getSlottedObject("inventory");
 		for (String slot : obj.getArrangement().get(arrangement-4)) {
 			SWGObject slotObj = getSlottedObject(slot);
-			if (slotObj != null) {
+			if (slotObj != null && slotObj != inventory) {
 				slotObj.moveToContainer(inventory);
 			}
 		}
@@ -176,7 +183,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	public boolean isVisible(SWGObject target) {
+	public boolean isVisible(CreatureObject target) {
 		return !isLoggedOutPlayer() && super.isVisible(target);
 	}
 

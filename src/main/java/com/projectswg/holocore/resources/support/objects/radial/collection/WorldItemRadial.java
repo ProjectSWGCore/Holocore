@@ -19,24 +19,10 @@ public class WorldItemRadial implements RadialHandlerInterface {
 	}
 	
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		RadialOption use = null;
-		for (RadialOption option : options) {
-			if (option.getOptionType() == RadialItem.ITEM_USE.getId()) {
-				use = option;
-				break;
-			}
-		}
-		if (use == null) {
-			use = new RadialOption(RadialItem.ITEM_USE);
-			options.add(0, use);
-		}
-		use.setOverriddenText("@collection:consume_item");
+		options.add(RadialOption.create(RadialItem.ITEM_USE, "@collection:consume_item"));
 	}
 	
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (selection != RadialItem.ITEM_USE)
-			return;
-		
 		new GrantClickyCollectionIntent(player.getCreatureObject(), target, details).broadcast();
 	}
 	

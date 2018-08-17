@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects;
 
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;

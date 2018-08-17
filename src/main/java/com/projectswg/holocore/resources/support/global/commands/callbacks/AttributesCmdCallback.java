@@ -28,9 +28,10 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeListMessage;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 public class AttributesCmdCallback implements ICmdCallback {
@@ -39,17 +40,15 @@ public class AttributesCmdCallback implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String[] cmd = args.split(" ");
 		
-		for (String s : cmd) {
-			if (s.equals("-255") || s.length() == 0)
-				continue;
+		for (int i = 0; i+1 < cmd.length; i+=2) {
+			long objectId = Long.parseLong(cmd[i]);
+			int clientRevision = Integer.parseInt(cmd[i+1]);
 			
-			SWGObject obj = ObjectLookup.getObjectById(Long.parseLong(s));
+			SWGObject obj = ObjectLookup.getObjectById(objectId);
+			Log.t("%s submitted attribute request. Ver=%d  Object=%s", player.getCharacterName(), clientRevision, obj);
 			if (obj != null)
-				handleSendItemAttributes(obj, player);
+				player.sendPacket(new AttributeListMessage(obj.getObjectId(), obj.getAttributes(), clientRevision));
 		}
 	}
-
-	private void handleSendItemAttributes(SWGObject object, Player player) {
-		player.sendPacket(new AttributeListMessage(object.getObjectId(), object.getAttributes()));
-	}
+	
 }

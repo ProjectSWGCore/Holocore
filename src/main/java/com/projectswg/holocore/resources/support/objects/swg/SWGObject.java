@@ -31,6 +31,7 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -39,18 +40,19 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.data.location.InstanceType;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SlotDefinitionLoader.SlotDefinition;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.network.BaselineObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAware;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
+import com.projectswg.holocore.resources.support.objects.permissions.*;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
@@ -73,13 +75,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
 	private final Map <String, SWGObject>			slots			= new ConcurrentHashMap<>();
 	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
-	private final Set<String>						slotsAvailable	= new CopyOnWriteArraySet<>();
+	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
 	private final ObjectAware						awareness		= new ObjectAware(this);
 	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
-	private GameObjectType gameObjectType	= GameObjectType.GOT_NONE;
-	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
+	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
+	private ContainerPermissions		permissions		= DefaultPermissions.getPermissions();
 	private List <List <String>>		arrangement		= new ArrayList<>();
 	private Player						owner			= null;
 	
@@ -95,6 +97,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private int     	containerType	= 0;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
+	private boolean		exposeWithWorld	= false;
+	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
 	
 	public SWGObject() {
@@ -112,22 +116,31 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 */
 	public void addObject(SWGObject object) {
 		int arrangementId = getArrangementId(object);
-		object.setSlotArrangement(arrangementId);
 		if (arrangementId == -1) {
 			containedObjects.add(object);
-			updateLoadRange();
 			
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() + object.getVolume() + 1);
+			object.exposeWithWorld = false;
+			object.observeWithParent = true;
 		} else {
+			boolean exposeWithWorld = false;
+			boolean observeWithParent = false;
 			handleSlotReplacement(object.parent, object, arrangementId);
 			for (String requiredSlot : object.getArrangement().get(arrangementId - 4)) {
 				setSlot(requiredSlot, object);
+				SlotDefinition def = slotsAvailable.get(requiredSlot);
+				exposeWithWorld |= def.isExposeToWorld();
+				observeWithParent |= def.isObserveWithParent();
 			}
+			object.exposeWithWorld = exposeWithWorld;
+			object.observeWithParent = observeWithParent;
 		}
+		updateLoadRange();
 		
 		onAddedChild(object);
 		object.parent = this;
+		object.slotArrangement = arrangementId;
 		object.setTerrain(getTerrain());
 	}
 	
@@ -138,7 +151,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object);
-			updateLoadRange();
 			
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() - object.getVolume() - 1);
@@ -147,9 +159,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				slots.remove(requiredSlot);
 			}
 		}
+		updateLoadRange();
 		
 		// Remove as parent
 		onRemovedChild(object);
+		object.exposeWithWorld = false;
+		object.observeWithParent = true;
 		object.parent = null;
 		object.slotArrangement = -1;
 	}
@@ -195,12 +210,42 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	/**
 	 * Attempts to move this object to the defined container without checking for permissions
 	 * @param newParent the container to move this object to
-	 * @return {@link ContainerResult}
 	 */
-	public void moveToContainer(SWGObject newParent) {
+	public void moveToContainer(@Nullable SWGObject newParent) {
 		SWGObject oldParent = parent;
 		if (systemMove(newParent))
 			ContainerTransferIntent.broadcast(this, oldParent, newParent);
+	}
+	
+	/**
+	 * Attempts to move this object to the defined container and location without checking for permissions
+	 * @param newParent the container to move this object to
+	 * @param newLocation the location to move this object to
+	 */
+	public void moveToContainer(@Nullable SWGObject newParent, @NotNull Location newLocation) {
+		assert newParent != this;
+		SWGObject oldParent = parent;
+		if (systemMove(newParent, newLocation))
+			ObjectTeleportIntent.broadcast(this, oldParent, newParent, newLocation);
+	}
+	
+	/**
+	 * Attempts to move this object to the defined container and location without checking for permissions
+	 * @param newParent the container to move this object to
+	 * @param x the x location to move this object to
+	 * @param y the y location to move this object to
+	 * @param z the z location to move this object to
+	 */
+	public void moveToContainer(@Nullable SWGObject newParent, double x, double y, double z) {
+		moveToContainer(newParent, Location.builder(getLocation()).setPosition(x, y, z).build());
+	}
+	
+	/**
+	 * Attempts to move this object to the specified location within the current parent
+	 * @param location the location to move this object to
+	 */
+	public void moveToLocation(@NotNull Location location) {
+		moveToContainer(parent, location);
 	}
 	
 	/**
@@ -210,7 +255,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param newParent Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	public ContainerResult moveToContainer(@NotNull SWGObject requester, SWGObject newParent) {
+	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
 		ContainerResult result = isAllowedToMove(requester, newParent);
 		if (result == ContainerResult.SUCCESS) {
 			moveToContainer(newParent);
@@ -225,7 +270,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
-	protected ContainerResult isAllowedToMove(@NotNull SWGObject requester, SWGObject container) {
+	protected ContainerResult isAllowedToMove(@NotNull CreatureObject requester, SWGObject container) {
 		if (!permissions.canMove(requester, this)) {
 			Log.w("No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
@@ -259,6 +304,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	protected void onAddedChild(SWGObject child) {
+		assert child != this;
 		SWGObject parent = this.parent;
 		if (parent != null)
 			parent.onAddedChild(child);
@@ -270,14 +316,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			parent.onRemovedChild(child);
 	}
 	
-	public boolean isVisible(SWGObject target) {
+	public boolean isVisible(CreatureObject target) {
 		if (target == null)
 			return true;
 		if (!permissions.canView(target, this))
 			return false;
-		if (getParent() != null)
-			return getParent().isVisible(target);
-		return true;
+		
+		SWGObject parent = this.parent;
+		return parent == null || parent.isVisible(target);
 	}
 	
 	public boolean isLineOfSight(@NotNull SWGObject target) {
@@ -349,11 +395,34 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setSlots(@NotNull Collection<String> slots) {
 		this.slotsAvailable.clear();
-		this.slotsAvailable.addAll(slots);
+		for (String slot : slots)
+			this.slotsAvailable.put(slot, DataLoader.slotDefinitions().getSlotDefinition(slot));
+	}
+	
+	@NotNull
+	public Collection<SlotDefinition> getSlotDefinitions() {
+		return Collections.unmodifiableCollection(slotsAvailable.values());
+	}
+	
+	@Nullable
+	public SlotDefinition getSlotDefinition(String slot) {
+		return slotsAvailable.get(slot);
 	}
 
 	public boolean hasSlot(@NotNull String slotName) {
-		return slotsAvailable.contains(slotName);
+		return slotsAvailable.containsKey(slotName);
+	}
+	
+	public boolean isExposeWithWorld() {
+		return exposeWithWorld;
+	}
+	
+	public boolean isObserveWithParent() {
+		if (observeWithParent) {
+			SWGObject parent = this.parent;
+			return parent == null || parent.isObserveWithParent();
+		}
+		return false;
 	}
 	
 	public void setSlot(@NotNull String name, @NotNull SWGObject value) {
@@ -610,7 +679,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public List<List<String>> getArrangement() {
-		return arrangement;
+		return Collections.unmodifiableList(arrangement);
 	}
 
 	public String getAttribute(String attribute) {
@@ -661,11 +730,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.gameObjectType = gameObjectType;
 	}
 	
-	public ContainerPermissionsType getContainerPermissions() {
+	public ContainerPermissions getContainerPermissions() {
 		return permissions;
 	}
 	
-	public void setContainerPermissions(ContainerPermissionsType permissions) {
+	public void setContainerPermissions(ContainerPermissions permissions) {
 		this.permissions = permissions;
 	}
 	
@@ -704,35 +773,43 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	/**
 	 * Gets the arrangementId for the {@link SWGObject} for the current instance
-	 * @param object
+	 * @param child
 	 * @return Arrangement ID for the object
 	 */
-	public int getArrangementId(SWGObject object) {
-		if (slotsAvailable.isEmpty() || object.getArrangement() == null)
+	protected int getArrangementId(SWGObject child) {
+		if (slotsAvailable.isEmpty() || child.getArrangement() == null)
 			return -1;
-
-		int arrangementId = 4;
+		
+		int arrangementId = -1;
+		int slotSize = Integer.MAX_VALUE;
+		
 		int filledId = -1;
-
-		for (List<String> arrangementList : object.getArrangement()) {
-			boolean passesCompletely = true;
-			boolean isValid = true;
-			for (String slot : arrangementList) {
-				if (!hasSlot(slot)) {
-					isValid = false;
-					break;
-				}  else if (getSlottedObject(slot) != null) {
-					passesCompletely = false;
-				}
+		int displaced = Integer.MAX_VALUE;
+		
+		int index = 3;
+		
+		for (List<String> arrangementList : child.getArrangement()) {
+			index++;
+			if (!slotsAvailable.keySet().containsAll(arrangementList))
+				continue;
+			
+			if (arrangementList.size() < slotSize) {
+				slotSize = arrangementList.size();
+				arrangementId = index;
 			}
-			if (isValid && passesCompletely)
-				return arrangementId;
-			else if (isValid)
-				filledId = arrangementId;
-
-			arrangementId++;
+			
+			int calculatedDisplaced = 0;
+			for (String slot : arrangementList) {
+				if (slots.containsKey(slot))
+					calculatedDisplaced++;
+			}
+			if (calculatedDisplaced < displaced || (calculatedDisplaced == displaced && child.getArrangement().get(filledId).size() > arrangementList.size())) {
+				displaced = calculatedDisplaced;
+				filledId = displaced;
+			}
 		}
-		return filledId;
+		
+		return arrangementId != -1 ? arrangementId : filledId;
 	}
 	
 	public void setAware(AwarenessType type, Collection<SWGObject> aware) {
@@ -909,7 +986,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(8);
+		stream.addByte(9);
 		location.save(stream);
 		boolean hasParent = parent != null;
 		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
@@ -923,7 +1000,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (hasGrandparent)
 				stream.addInt(((CellObject) parent).getNumber());
 		}
-		stream.addAscii(permissions.name());
+		ContainerPermissions.save(stream, permissions);
 		stream.addBoolean(generated);
 		stream.addUnicode(objectName);
 		stringId.save(stream);
@@ -945,6 +1022,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
 			default:
+			case 9:
+				readVersion9(stream);
+				break;
 			case 8:
 				readVersion8(stream);
 				break;
@@ -975,6 +1055,27 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
+	private void readVersion9(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissions.create(stream);
+		generated = stream.getBoolean();
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
+	}
+	
 	private void readVersion8(NetBufferStream stream) {
 		location.read(stream);
 		if (stream.getBoolean()) {
@@ -986,7 +1087,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				parent = cell;
 			}
 		}
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getBoolean();
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1007,7 +1108,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				parent = cell;
 			}
 		}
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1028,7 +1129,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				parent = cell;
 			}
 		}
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1053,7 +1154,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				parent = cell;
 			}
 		}
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1078,7 +1179,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				parent = cell;
 			}
 		}
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1096,7 +1197,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		new Location().read(stream); // ignored now
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1113,7 +1214,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		location.setLocation(loc);
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		stringId.read(stream);
@@ -1130,7 +1231,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		location.setLocation(loc);
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		complexity = stream.getFloat();
@@ -1145,7 +1246,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		location.setLocation(loc);
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
-		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		permissions = readOldPermissions(stream);
 		generated = stream.getAscii().equals("GENERATED");
 		objectName = stream.getUnicode();
 		// Ignore the saved volume - this is now set automagically in addObject() and removeObject()
@@ -1154,6 +1255,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.getFloat(); // loadRange
 		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
+	}
+	
+	private ContainerPermissions readOldPermissions(NetBufferStream stream) {
+		switch (stream.getAscii()) {
+			case "DEFAULT":
+			case "INVENTORY":
+			case "LOOT":
+			default:
+				return DefaultPermissions.getPermissions();
+			case "ADMIN":
+				return AdminPermissions.getPermissions();
+		}
 	}
 	
 }

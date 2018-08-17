@@ -69,4 +69,8 @@ public abstract class DataLoader {
 		return (CommandLoader) CachedLoader.COMMANDS.load();
 	}
 	
+	public static SlotDefinitionLoader slotDefinitions() {
+		return (SlotDefinitionLoader) CachedLoader.SLOT_DEFINITIONS.load();
+	}
+	
 }

@@ -41,17 +41,17 @@ public class DataTransformHandler {
 		
 	}
 	
-	public boolean handleMove(SWGObject obj, double speed, int update) {
-		obj.sendObservers(createTransform(obj, speed, update));
+	public boolean handleMove(SWGObject obj, double speed) {
+		obj.sendObservers(createTransform(obj, speed));
 		return true;
 	}
 	
-	public boolean handleMove(SWGObject obj, SWGObject parent, double speed, int update) {
-		obj.sendObservers(createTransform(obj, parent.getObjectId(), speed, update));
+	public boolean handleMove(SWGObject obj, SWGObject parent, double speed) {
+		obj.sendObservers(createTransform(obj, parent.getObjectId(), speed));
 		return true;
 	}
 	
-	private UpdateTransformMessage createTransform(SWGObject obj, double speed, int update) {
+	private UpdateTransformMessage createTransform(SWGObject obj, double speed) {
 		Location loc = obj.getLocation();
 		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(obj.getObjectId());
@@ -66,7 +66,7 @@ public class DataTransformHandler {
 		return transform;
 	}
 	
-	private UpdateTransformWithParentMessage createTransform(SWGObject obj, long cellId, double speed, int update) {
+	private UpdateTransformWithParentMessage createTransform(SWGObject obj, long cellId, double speed) {
 		Location loc = obj.getLocation();
 		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(cellId, obj.getObjectId());
 		transform.setLocation(loc);

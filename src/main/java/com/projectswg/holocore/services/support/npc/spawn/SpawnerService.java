@@ -41,7 +41,7 @@ import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -50,8 +50,6 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
-
-import java.util.List;
 
 public final class SpawnerService extends Service {
 	
@@ -96,7 +94,6 @@ public final class SpawnerService extends Service {
 	private void loadSpawners() {
 		long startTime = StandardLog.onStartLoad("spawners");
 		
-		List<DataLoader> forceNoGC = List.of(DataLoader.npcs(), DataLoader.npcWeapons(), DataLoader.npcStaticSpawns(), DataLoader.npcStats(), DataLoader.npcPatrolRoutes());
 		int count = 0;
 		for (StaticSpawnInfo spawn : DataLoader.npcStaticSpawns().getSpawns()) {
 			try {
@@ -123,9 +120,8 @@ public final class SpawnerService extends Service {
 		SpawnerType spawnerType = SpawnerType.valueOf(spawn.getSpawnerType());
 		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(spawn.getBuildingId());
 		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
-		egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
-		egg.setLocation(Location.builder().setTerrain(building.getTerrain()).setPosition(spawn.getX(), spawn.getY(), spawn.getZ()).setHeading(spawn.getHeading()).build());
-		egg.moveToContainer(getCell(spawn.getId(), spawn.getCellId(), building));
+		egg.setContainerPermissions(AdminPermissions.getPermissions());
+		egg.systemMove(getCell(spawn.getId(), spawn.getCellId(), building), Location.builder().setTerrain(building.getTerrain()).setPosition(spawn.getX(), spawn.getY(), spawn.getZ()).setHeading(spawn.getHeading()).build());
 		ObjectCreatedIntent.broadcast(egg);
 		return egg;
 	}
@@ -158,9 +154,8 @@ public final class SpawnerService extends Service {
 		npcPatrolRouteLoader.forEach(route -> {
 			for (PatrolRouteWaypoint waypoint : route) {
 				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
-				obj.setContainerPermissions(ContainerPermissionsType.ADMIN);
-				obj.setLocation(getPatrolWaypointLocation(waypoint));
-				obj.moveToContainer(getPatrolWaypointParent(waypoint));
+				obj.setContainerPermissions(AdminPermissions.getPermissions());
+				obj.moveToContainer(getPatrolWaypointParent(waypoint), getPatrolWaypointLocation(waypoint));
 				ObjectCreatedIntent.broadcast(obj);
 			}
 		});

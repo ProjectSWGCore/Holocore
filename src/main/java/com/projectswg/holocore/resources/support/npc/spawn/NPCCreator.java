@@ -58,7 +58,7 @@ public class NPCCreator {
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
 		object.setSpawner(spawner);
-		object.setLocation(behaviorLocation(spawner));
+		object.systemMove(spawner.getEgg().getParent(), behaviorLocation(spawner));
 		object.setObjectName(spawner.getName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getDifficulty());
@@ -97,7 +97,6 @@ public class NPCCreator {
 		setFlags(object, spawner);
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
-		object.systemMove(spawner.getEgg().getParent());
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
 	}

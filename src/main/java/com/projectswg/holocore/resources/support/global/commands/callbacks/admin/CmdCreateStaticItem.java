@@ -4,7 +4,6 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -18,7 +17,7 @@ public final class CmdCreateStaticItem implements ICmdCallback {
 		CreatureObject creature = player.getCreatureObject();
 		TangibleObject inventory = (TangibleObject) creature.getSlottedObject("inventory");
 		
-		new CreateStaticItemIntent(creature, inventory, new CreateStaticItemCallback(player), ContainerPermissionsType.DEFAULT, args).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new CreateStaticItemCallback(player), args).broadcast();
 	}
 	
 	private static class CreateStaticItemCallback extends StaticItemService.ObjectCreationHandler {

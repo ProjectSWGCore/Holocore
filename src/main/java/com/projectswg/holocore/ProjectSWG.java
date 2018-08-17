@@ -38,9 +38,8 @@ import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
-import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
-import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedRecord;
+import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedStatistics;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.SafeMain;
 import me.joshlarson.jlcommon.control.ServiceBase;
@@ -128,19 +127,20 @@ public class ProjectSWG {
 	private static void printFinalPswgState() {
 		assert IntentManager.getInstance() != null;
 		ThreadUtilities.printActiveThreads();
-		List<IntentSpeedRecord> intentTimes = IntentManager.getInstance().getSpeedRecorder().getAllTimes();
-		Collections.sort(intentTimes);
+		List<IntentSpeedStatistics> intentTimes = IntentManager.getInstance().getSpeedRecorder();
+		intentTimes.sort(Comparator.comparingLong(IntentSpeedStatistics::getTotalTime).reversed());
 		Log.i("    Intent Times: [%d]", intentTimes.size());
-		Log.i("        %-30s%-40s%-10s%-20s", "Intent", "Receiver", "Count", "Time");
-		for (IntentSpeedRecord record : intentTimes) {
-			String receiverName = record.getConsumer().getClass().getName();
+		Log.i("        %-30s%-60s%-40s%-10s%-20s", "Intent", "Receiver Class", "Receiver Method", "Count", "Time");
+		for (IntentSpeedStatistics record : intentTimes) {
+			String receiverName = record.getKey().toString();
 			if (receiverName.indexOf('$') != -1)
 				receiverName = receiverName.substring(0, receiverName.indexOf('$'));
 			receiverName = receiverName.replace("com.projectswg.holocore.services.", "");
 			String intentName = record.getIntent().getSimpleName();
 			String recordCount = Long.toString(record.getCount());
-			String recordTime = String.format("%.6fms", record.getTime() / 1E6);
-			Log.i("        %-30s%-40s%-10s%-20s", intentName, receiverName, recordCount, recordTime);
+			String recordTime = String.format("%.6fms", record.getTotalTime() / 1E6);
+			String [] receiverSplit = receiverName.split("#", 2);
+			Log.i("        %-30s%-60s%-40s%-10s%-20s", intentName, receiverSplit[0], receiverSplit[1], recordCount, recordTime);
 		}
 	}
 	

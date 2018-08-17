@@ -32,7 +32,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		TravelService.class,
-		ControlDeviceService.class
+		PlayerMountService.class
 })
 public class TravelManager extends Manager {
 	

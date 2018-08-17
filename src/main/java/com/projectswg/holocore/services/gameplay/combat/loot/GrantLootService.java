@@ -43,12 +43,11 @@ import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -120,15 +119,18 @@ public final class GrantLootService extends Service {
 			}
 			if (group.getLootRule() == LootRule.LOTTERY) {
 				lootRestrictions.put(corpse, new LotteryLootRestrictions(corpse, looters));
+				corpse.getInventory().setContainerPermissions(ReadWritePermissions.from(looters));
 				return;
 			} else if (group.getLootRule() == LootRule.RANDOM) {
 				lootRestrictions.put(corpse, new RandomLootRestrictions(corpse, looters));
+				corpse.getInventory().setContainerPermissions(ReadWritePermissions.from(looters));
 				return;
 			}
 		} else {
 			looters.add(highestDamageDealer);
 		}
 		lootRestrictions.put(corpse, new StandardLootRestrictions(corpse, looters));
+		corpse.getInventory().setContainerPermissions(ReadWritePermissions.from(looters));
 	}
 	
 	@IntentHandler
@@ -158,19 +160,6 @@ public final class GrantLootService extends Service {
 		if (!(restriction instanceof LotteryLootRestrictions))
 			return;
 		((LotteryLootRestrictions) restriction).updatePreferences(player.getCreatureObject(), request.getRequestedItems().stream().map(ObjectLookup::getObjectById).filter(Objects::nonNull).collect(Collectors.toList()));
-	}
-	
-	@IntentHandler
-	private void handleContainerTransfer(ContainerTransferIntent cti) {
-		// Only check transfers into players
-		SWGObject container = cti.getContainer();
-		if (container == null || container.getOwner() == null)
-			return;
-		
-		// If this is a looted item, reset the container permissions to default
-		SWGObject object = cti.getObject();
-		if (object.getContainerPermissions() == ContainerPermissionsType.LOOT)
-			object.setContainerPermissions(ContainerPermissionsType.DEFAULT);
 	}
 	
 	@IntentHandler
