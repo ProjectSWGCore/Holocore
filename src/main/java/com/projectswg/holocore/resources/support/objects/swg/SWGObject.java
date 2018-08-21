@@ -52,7 +52,10 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAware;
-import com.projectswg.holocore.resources.support.objects.permissions.*;
+import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissions;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
+import com.projectswg.holocore.resources.support.objects.permissions.DefaultPermissions;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
@@ -77,7 +80,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
 	private final ObjectAware						awareness		= new ObjectAware(this);
-	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
+	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
+	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
@@ -136,12 +140,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			object.exposeWithWorld = exposeWithWorld;
 			object.observeWithParent = observeWithParent;
 		}
-		updateLoadRange();
 		
-		onAddedChild(object);
 		object.parent = this;
 		object.slotArrangement = arrangementId;
 		object.setTerrain(getTerrain());
+		
+		updateLoadRange();
+		onAddedChild(object);
 	}
 	
 	/**
@@ -159,14 +164,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				slots.remove(requiredSlot);
 			}
 		}
-		updateLoadRange();
 		
 		// Remove as parent
-		onRemovedChild(object);
+		object.parent = null;
 		object.exposeWithWorld = false;
 		object.observeWithParent = true;
-		object.parent = null;
 		object.slotArrangement = -1;
+		
+		updateLoadRange();
+		onRemovedChild(object);
 	}
 	
 	/**
@@ -495,7 +501,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void updateChildrenTerrain() {
 		Terrain terrain = getTerrain();
-		containedObjects.forEach(child -> child.setTerrain(terrain));
+		for (SWGObject child : containedObjects) {
+			child.setTerrain(terrain);
+		}
 		for (SWGObject child : slots.values()) {
 			child.setTerrain(terrain);
 		}
@@ -646,6 +654,34 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return areaId;
 	}
 	
+	public Object getServerAttribute(ServerAttribute key) {
+		return serverAttributes.get(key);
+	}
+	
+	public int getServerIntAttribute(ServerAttribute key) {
+		return ((Number) serverAttributes.get(key)).intValue();
+	}
+	
+	public long getServerLongAttribute(ServerAttribute key) {
+		return ((Number) serverAttributes.get(key)).longValue();
+	}
+	
+	public double getServerDoubleAttribute(ServerAttribute key) {
+		return ((Number) serverAttributes.get(key)).doubleValue();
+	}
+	
+	public String getServerTextAttribute(ServerAttribute key) {
+		return (String) serverAttributes.get(key);
+	}
+	
+	public StringId getServerStfAttribute(ServerAttribute key) {
+		return (StringId) serverAttributes.get(key);
+	}
+
+	public void setServerAttribute(ServerAttribute key, Object value) {
+		serverAttributes.put(key, value);
+	}
+	
 	public Object getDataAttribute(ObjectDataAttribute key) {
 		return dataAttributes.get(key);
 	}
@@ -776,7 +812,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param child
 	 * @return Arrangement ID for the object
 	 */
-	protected int getArrangementId(SWGObject child) {
+	public int getArrangementId(SWGObject child) {
 		if (slotsAvailable.isEmpty() || child.getArrangement() == null)
 			return -1;
 		
@@ -986,7 +1022,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(9);
+		stream.addByte(10);
 		location.save(stream);
 		boolean hasParent = parent != null;
 		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
@@ -1012,6 +1048,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				stream.addAscii(e.getValue());
 			});
 		}
+		stream.addMap(serverAttributes, e -> {
+			stream.addAscii(e.getKey().getKey());
+			stream.addAscii(e.getKey().store(e.getValue()));
+		});
 		Set<SWGObject> contained = new HashSet<>(containedObjects);
 		contained.addAll(slots.values());
 		contained.remove(null);
@@ -1022,6 +1062,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
 			default:
+			case 10:
+				readVersion10(stream);
+				break;
 			case 9:
 				readVersion9(stream);
 				break;
@@ -1053,6 +1096,31 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				readVersion0(stream);
 				break;
 		}
+	}
+	
+	private void readVersion10(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissions.create(stream);
+		generated = stream.getBoolean();
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> {
+			ServerAttribute attr = ServerAttribute.getFromKey(stream.getAscii());
+			serverAttributes.put(attr, attr.retrieve(stream.getAscii()));
+		});
+		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
 	private void readVersion9(NetBufferStream stream) {

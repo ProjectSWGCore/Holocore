@@ -29,10 +29,7 @@ package com.projectswg.holocore.services.support.objects.awareness;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
-import com.projectswg.common.network.packets.swg.zone.HeartBeat;
-import com.projectswg.common.network.packets.swg.zone.ParametersMessage;
-import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage;
+import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus;
@@ -47,14 +44,11 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedInte
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
 import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.intents.support.objects.swg.*;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
-import com.projectswg.holocore.resources.support.objects.awareness.DataTransformHandler;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -73,12 +67,9 @@ public class AwarenessService extends Service {
 	private static final Location GONE_LOCATION = Location.builder().setTerrain(Terrain.GONE).setPosition(0, 0, 0).build();
 	
 	private final ObjectAwareness awareness;
-	private final DataTransformHandler dataTransformHandler;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
-		dataTransformHandler = new DataTransformHandler();
-		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 	}
 	
 	@IntentHandler
@@ -124,7 +115,7 @@ public class AwarenessService extends Service {
 		} else {
 			synchronized (obj.getAwarenessLock()) {
 				obj.systemMove(newParent, newLocation);
-				sendTeleportPackets(obj, newParent, newLocation);
+				sendTeleportPackets(obj, newParent, 0, true);
 				awareness.updateObject(obj);
 			}
 		}
@@ -262,15 +253,18 @@ public class AwarenessService extends Service {
 				parent.systemMove(null, requestedLocation);
 				awareness.updateObject(parent);
 			}
+			
 			for (SWGObject child : parent.getSlottedObjects()) {
 				SWGObject oldParent = child.getParent();
 				Location oldLocation = child.getLocation();
 				synchronized (child.getAwarenessLock()) {
 					child.systemMove(parent, requestedLocation);
+//					sendTeleportPackets(child, parent, speed, false);
 				}
 				onObjectMoved(child, oldParent, parent, oldLocation, requestedLocation);
 			}
-			dataTransformHandler.handleMove(parent, speed);
+			
+			sendTeleportPackets(parent, null, speed, false);
 		} else {
 			SWGObject oldParent = obj.getParent();
 			Location oldLocation = obj.getLocation();
@@ -278,11 +272,8 @@ public class AwarenessService extends Service {
 				obj.systemMove(parent, requestedLocation);
 				awareness.updateObject(obj);
 			}
-			if (parent == null) {
-				dataTransformHandler.handleMove(obj, speed);
-			} else {
-				dataTransformHandler.handleMove(obj, parent, speed);
-			}
+			
+			sendTeleportPackets(obj, parent, speed, false);
 			
 			if (oldParent != parent)
 				update(oldParent);
@@ -308,12 +299,18 @@ public class AwarenessService extends Service {
 		return !obj.getAware().contains(parent);
 	}
 	
-	private static void sendTeleportPackets(@NotNull SWGObject obj, @Nullable SWGObject parent, @NotNull Location location) {
+	private static void sendTeleportPackets(@NotNull SWGObject obj, @Nullable SWGObject parent, double speed, boolean forceSelfUpdate) {
+		@NotNull Location location = obj.getLocation();
+		int counter = obj.getNextUpdateCount();
 		if (parent != null) {
-			obj.sendObservers(new DataTransformWithParent(obj.getObjectId(), obj.getNextUpdateCount(), parent.getObjectId(), location, 0));
+			if (forceSelfUpdate)
+				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, parent.getObjectId(), location, (byte) speed));
+			obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), parent.getObjectId(), counter, location, (byte) speed));
 			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
 		} else {
-			obj.sendObservers(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), location, 0));
+			if (forceSelfUpdate)
+				obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, location, (byte) speed));
+			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, location, (byte) speed));
 			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
 		}
 	}

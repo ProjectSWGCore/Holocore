@@ -34,6 +34,7 @@ import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceStoreI
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 
 import java.util.List;
 
@@ -51,12 +52,15 @@ public class PetDeviceRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+		if (!(target instanceof IntangibleObject))
+			return;
+		
 		switch (selection) {
 			case PET_CALL:
-				PetDeviceCallIntent.broadcast(player, target);
+				PetDeviceCallIntent.broadcast(player, (IntangibleObject) target);
 				break;
 			case PET_STORE:
-				PetDeviceStoreIntent.broadcast(player, target);
+				PetDeviceStoreIntent.broadcast(player, (IntangibleObject) target);
 				break;
 			default:
 				break;

@@ -50,7 +50,6 @@ public class VehicleDeedRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		Log.t("VehicleDeedRadial - selection: %s", selection);
 		switch (selection) {
 			case VEHICLE_GENERATE:
 				VehicleDeedGenerateIntent.broadcast(player, target);

@@ -29,15 +29,16 @@ package com.projectswg.holocore.intents.gameplay.world.travel.pet;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
 public class PetDeviceStoreIntent extends Intent {
 	
 	private final Player player;
-	private final SWGObject controlDevice;
+	private final IntangibleObject controlDevice;
 	
-	public PetDeviceStoreIntent(@NotNull Player player, @NotNull SWGObject controlDevice) {
+	public PetDeviceStoreIntent(@NotNull Player player, @NotNull IntangibleObject controlDevice) {
 		this.player = player;
 		this.controlDevice = controlDevice;
 	}
@@ -48,11 +49,11 @@ public class PetDeviceStoreIntent extends Intent {
 	}
 	
 	@NotNull
-	public SWGObject getControlDevice() {
+	public IntangibleObject getControlDevice() {
 		return controlDevice;
 	}
 	
-	public static void broadcast(@NotNull Player player, @NotNull SWGObject controlDevice) {
+	public static void broadcast(@NotNull Player player, @NotNull IntangibleObject controlDevice) {
 		new PetDeviceStoreIntent(player, controlDevice).broadcast();
 	}
 	

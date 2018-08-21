@@ -120,7 +120,6 @@ public class NavigationPoint {
 	 * @return a queue of locations to travel
 	 */
 	public static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination, double speed) {
-		speed -= 0.5; // Makes the animation more smooth on the client
 		double totalDistance = source.distanceTo(destination);
 		int totalIntervals = (int) (totalDistance / speed);
 		List<NavigationPoint> path = new ArrayList<>(totalIntervals);

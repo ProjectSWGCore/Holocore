@@ -33,7 +33,6 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
@@ -62,8 +61,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private WaypointObject testWaypoint;
 	private CellObject testCell1;
 	private CellObject testCell2;
-	private TangibleObject inventoryObject;
-	private TangibleObject testInventoryObject;
+	private SWGObject inventoryObject;
 	
 	private void initialize() {
 		awareness = new ObjectAwareness();
@@ -75,8 +73,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		testCell1 = new CellObject(6);
 		testCell2 = new CellObject(7);
 		testWaypoint = new WaypointObject(8);
-		inventoryObject = new TangibleObject(9);
-		testInventoryObject = new TangibleObject(10);
+		inventoryObject = player.getInventory();
 		
 		player.setLoadRange(100);
 		testPlayer.setLoadRange(100);
@@ -84,12 +81,8 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		testCell1.setNumber(1);
 		testCell2.setNumber(1);
 		
-		testCell1.moveToContainer(testBuilding1);
-		testCell2.moveToContainer(testBuilding2);
-		inventoryObject.setArrangement(List.of(List.of("inventory")));
-		testInventoryObject.setArrangement(List.of(List.of("inventory")));
-		inventoryObject.moveToContainer(player);
-		testInventoryObject.moveToContainer(testPlayer);
+		testCell1.systemMove(testBuilding1);
+		testCell2.systemMove(testBuilding2);
 		
 		testPlayer.setLocation(buildTatooine(40, 40));
 		testTangible.setLocation(buildTatooine(50, 50));

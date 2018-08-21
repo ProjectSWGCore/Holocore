@@ -35,8 +35,9 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.runners.TestRunnerSimulatedWorld;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
 import me.joshlarson.jlcommon.log.Log;
@@ -78,16 +79,14 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		CreatureObject creature = createCreature();
 		ObjectCreatedIntent.broadcast(creature);
 		
-		SWGObject pcd = ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/intangible/vehicle/shared_speederbike_swoop_pcd.iff");
-		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/mobile/vehicle/shared_speederbike_swoop.iff");
+		IntangibleObject pcd = (IntangibleObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/intangible/vehicle/shared_speederbike_swoop_pcd.iff");
 		ObjectCreatedIntent.broadcast(creature);
 		ObjectCreatedIntent.broadcast(pcd);
-		ObjectCreatedIntent.broadcast(vehicle);
-		vehicle.systemMove(pcd);
 		pcd.systemMove(creature.getDatapad());
-		vehicle.addOptionFlags(OptionFlag.MOUNT);
+		pcd.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, "object/mobile/vehicle/shared_speederbike_swoop.iff");
 		
 		broadcastAndWait(new PetDeviceCallIntent(creature.getOwner(), pcd));
+		CreatureObject vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		assertCorrectDismount(creature, vehicle);
 		
 		// Vehicle [object/mobile/vehicle/shared_speederbike_swoop.iff] should now be in the world alongside the player, and aware of eachother
@@ -107,7 +106,7 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		// Make the deed 
 		SWGObject deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/tangible/deed/vehicle_deed/shared_speederbike_swoop_deed.iff");
 		broadcastAndWait(new VehicleDeedGenerateIntent(creature.getOwner(), deed));
-		SWGObject pcd = creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/intangible/vehicle/shared_speederbike_swoop_pcd.iff")).findFirst().orElseThrow();
+		IntangibleObject pcd = (IntangibleObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/intangible/vehicle/shared_speederbike_swoop_pcd.iff")).findFirst().orElseThrow();
 		CreatureObject vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		
 		assertCorrectDismount(creature, vehicle, friend);
@@ -116,6 +115,7 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		assertCorrectStored(creature, vehicle, friend);
 		
 		broadcastAndWait(new PetDeviceCallIntent(creature.getOwner(), pcd));
+		vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		assertCorrectDismount(creature, vehicle, friend);
 		
 		broadcastAndWait(new MountIntent(creature.getOwner(), vehicle));
@@ -141,12 +141,11 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	
 	private void assertCorrectStored(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
 		Assert.assertNull(creature.getParent());
-		Assert.assertEquals(creature, vehicle.getSuperParent());
 		
 		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
 		Assert.assertFalse(vehicle.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
-		Assert.assertTrue(creature.getAware(AwarenessType.SELF).contains(vehicle));
-		Assert.assertTrue(vehicle.getAware(AwarenessType.SELF).contains(creature));
+		Assert.assertFalse(creature.getAware(AwarenessType.SELF).contains(vehicle));
+		Assert.assertFalse(vehicle.getAware(AwarenessType.SELF).contains(creature));
 	}
 	
 	private void assertCorrectMount(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {

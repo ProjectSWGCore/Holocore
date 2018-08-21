@@ -35,6 +35,9 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 
 public class IntangibleObject extends SWGObject {
 	
+	public static final int COUNT_PCD_STORED = 0;
+	public static final int COUNT_PCD_CALLED = 1;
+	
 	private int	count	= 0;
 	
 	public IntangibleObject(long objectId) {

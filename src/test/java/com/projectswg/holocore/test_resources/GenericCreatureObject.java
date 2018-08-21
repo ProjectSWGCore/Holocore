@@ -27,19 +27,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test_resources;
 
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.SceneCreateObjectByCrc;
-import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.log.Log;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -53,18 +48,10 @@ public class GenericCreatureObject extends CreatureObject {
 	
 	public GenericCreatureObject(long objectId) {
 		super(objectId);
-		player = new Player(objectId) {
-			@Override
-			public void sendPacket(SWGPacket ... packets) {
-				if (packets[0] instanceof SceneDestroyObject)
-					Log.d("%d Destroy: %d", objectId, ((SceneDestroyObject) packets[0]).getObjectId());
-				if (packets[0] instanceof SceneCreateObjectByCrc)
-					Log.d("%d Create: %d", objectId, ((SceneCreateObjectByCrc) packets[0]).getObjectId());
-				// Nah
-			}
-		};
+		player = new GenericPlayer();
 		player.setPlayerState(PlayerState.ZONED_IN);
 		setHasOwner(true);
+		setTemplate("object/creature/player/shared_human_male.iff");
 		setupAsCharacter();
 		loadRange = -1;
 	}
@@ -90,7 +77,7 @@ public class GenericCreatureObject extends CreatureObject {
 		
 		PlayerObject playerObject = new PlayerObject(-getObjectId());
 		playerObject.setArrangement(List.of(List.of("ghost")));
-		playerObject.moveToContainer(this);
+		playerObject.systemMove(this);
 		createInventoryObject("inventory");
 		createInventoryObject("datapad");
 		createInventoryObject("appearance_inventory");

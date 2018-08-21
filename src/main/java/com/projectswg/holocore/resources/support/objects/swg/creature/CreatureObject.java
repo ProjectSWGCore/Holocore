@@ -30,6 +30,7 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -100,6 +101,8 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void flushObjectsAware() {
+		if (getTerrain() == Terrain.GONE)
+			return;
 		awareness.flushAware();
 	}
 	
@@ -470,6 +473,20 @@ public class CreatureObject extends TangibleObject {
 	
 	public void updateLastGalacticReserveTime() {
 		lastReserveOperation = System.nanoTime();
+	}
+	
+	public void inheritMovement(CreatureObject vehicle) {
+		setWalkSpeed(vehicle.getRunSpeed() / 2);
+		setRunSpeed(vehicle.getRunSpeed());
+		setAccelScale(vehicle.getAccelScale());
+		setTurnScale(vehicle.getTurnScale());
+	}
+	
+	public void resetMovement() {
+		setWalkSpeed(1.549);
+		setRunSpeed(7.3);
+		setAccelScale(1);
+		setTurnScale(1);
 	}
 	
 	public void setMovementScale(double movementScale) {

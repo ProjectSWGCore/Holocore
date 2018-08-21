@@ -25,77 +25,62 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.runners;
+package com.projectswg.holocore.resources.support.objects.swg;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
-import me.joshlarson.jlcommon.concurrency.Delay;
-import me.joshlarson.jlcommon.control.Intent;
-import me.joshlarson.jlcommon.control.IntentManager;
-import me.joshlarson.jlcommon.control.ServiceBase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import me.joshlarson.jlcommon.data.EnumLookup;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
 
-@RunWith(JUnit4.class)
-public class TestRunnerSimulatedWorld {
+public enum ServerAttribute {
+	PCD_PET_TEMPLATE	("pcd.pet.template", String.class, s -> s, s -> s);
 	
-	private static final AtomicLong UNIQUE_ID = new AtomicLong(1);
+	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);
 	
-	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
-	private IntentManager intentManager = null;
+	private final String key;
+	private final Storage<?> storage;
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		DataManager.initialize();
+	<T> ServerAttribute(String key, Class<T> requiredClass, Function<T, String> storeFunction, Function<String, T> retrieveFunction) {
+		this.key = key;
+		this.storage = new Storage<>(requiredClass, storeFunction, retrieveFunction);
 	}
 	
-	@Before
-	public void setupServices() {
-		intentManager = new IntentManager(1);
-		IntentManager.setInstance(intentManager);
-		registerService(new AwarenessService());
+	public String getKey() {
+		return key;
 	}
 	
-	@After
-	public void cleanupServices() {
-		for (ServiceBase service : instantiatedServices) {
-			service.setIntentManager(null);
-			service.stop();
-			service.terminate();
+	public String store(Object obj) {
+		return storage.store(obj);
+	}
+	
+	public Object retrieve(String str) {
+		return storage.retrieve(str);
+	}
+	
+	public static ServerAttribute getFromKey(String key) {
+		return KEY_LOOKUP.getEnum(key, null);
+	}
+	
+	private static class Storage<T> {
+		
+		private final Class<T> requiredClass;
+		private final Function<T, String> storeFunction;
+		private final Function<String, T> retrieveFunction;
+		
+		Storage(Class<T> requiredClass, Function<T, String> storeFunction, Function<String, T> retrieveFunction) {
+			this.requiredClass = requiredClass;
+			this.storeFunction = storeFunction;
+			this.retrieveFunction = retrieveFunction;
 		}
-		intentManager.close();
-		IntentManager.setInstance(null);
-	}
-	
-	protected final void registerService(ServiceBase service) {
-		service.setIntentManager(Objects.requireNonNull(intentManager));
-		service.initialize();
-		service.start();
-		this.instantiatedServices.add(service);
-	}
-	
-	protected final void broadcastAndWait(Intent i) {
-		i.broadcast();
-		while (!i.isComplete()) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
+		
+		public String store(Object obj) {
+			assert requiredClass.isInstance(obj);
+			return storeFunction.apply(requiredClass.cast(obj));
 		}
-		while (intentManager.getIntentCount() > 0) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
+		
+		public Object retrieve(String str) {
+			return retrieveFunction.apply(str);
 		}
-	}
-	
-	protected static long getUniqueId() {
-		return UNIQUE_ID.getAndIncrement();
+		
 	}
 	
 }

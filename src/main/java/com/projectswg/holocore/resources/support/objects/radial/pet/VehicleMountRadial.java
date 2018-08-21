@@ -69,7 +69,6 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		if (!(target instanceof CreatureObject))
 			return;
-		Log.t("VehicleMountRadial - selection: %s", selection);
 		switch (selection) {
 			case SERVER_VEHICLE_ENTER_EXIT:
 				if (player.getCreatureObject().getParent() == target)

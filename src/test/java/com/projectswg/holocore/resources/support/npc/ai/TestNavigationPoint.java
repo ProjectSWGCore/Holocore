@@ -137,7 +137,7 @@ public class TestNavigationPoint {
 	}
 	
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {
-		double speed = 0.5;
+		double speed = 1;
 		double totalDistance = source.distanceTo(destination);
 		int totalIntervals = (int) (totalDistance / speed);
 		List<NavigationPoint> path = new ArrayList<>(totalIntervals);

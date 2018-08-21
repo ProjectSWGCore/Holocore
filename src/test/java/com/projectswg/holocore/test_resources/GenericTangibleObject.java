@@ -35,6 +35,7 @@ public class GenericTangibleObject extends TangibleObject {
 	
 	public GenericTangibleObject(long objectId) {
 		super(objectId);
+		setTemplate("");
 		loadRange = -1;
 	}
 	
