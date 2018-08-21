@@ -259,7 +259,7 @@ public class AwarenessService extends Service {
 				Location oldLocation = child.getLocation();
 				synchronized (child.getAwarenessLock()) {
 					child.systemMove(parent, requestedLocation);
-//					sendTeleportPackets(child, parent, speed, false);
+					awareness.updateObject(child);
 				}
 				onObjectMoved(child, oldParent, parent, oldLocation, requestedLocation);
 			}
