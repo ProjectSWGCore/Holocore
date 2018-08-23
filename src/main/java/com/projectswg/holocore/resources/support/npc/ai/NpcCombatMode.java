@@ -11,6 +11,7 @@ import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
@@ -82,17 +83,19 @@ public class NpcCombatMode extends NpcMode {
 		CreatureObject target = getPrimaryTarget();
 		if (target == null)
 			return;
-		iteration.incrementAndGet();
 		
 		AIObject obj = getAI();
 		WeaponObject weapon = obj.getEquippedWeapon();
 		double targetRange = Math.max(1, weapon.getMaxRange()/3);
 		boolean lineOfSight = obj.isLineOfSight(target);
 		Location targetLocation = target.getWorldLocation();
+		
 		if (obj.getWorldLocation().distanceTo(targetLocation) >= targetRange || !lineOfSight) {
 			Location prev = previousTargetLocation.getAndSet(targetLocation);
+			SWGObject targetParent = target.getEffectiveParent();
+			
 			if (prev == null) {
-				StartNpcMovementIntent.broadcast(obj, target.getParent(), target.getLocation(), runSpeed);
+				StartNpcMovementIntent.broadcast(obj, targetParent, target.getLocation(), runSpeed);
 			} else if (prev.distanceTo(targetLocation) >= 1 || !lineOfSight) {
 				Point3D delta = targetLocation.getPosition();
 				delta.translate(-prev.getX(), -prev.getY(), -prev.getZ());
@@ -100,7 +103,7 @@ public class NpcCombatMode extends NpcMode {
 				if (delta.flatDistanceTo(0, 0) < 50) {
 					destination = Location.builder(destination).translatePosition(delta.getX()*2, delta.getY()*2, delta.getZ()*2).build();
 				}
-				StartNpcMovementIntent.broadcast(obj, target.getParent(), destination, runSpeed);
+				StartNpcMovementIntent.broadcast(obj, targetParent, destination, runSpeed);
 			}
 		} else {
 			StopNpcMovementIntent.broadcast(obj);
@@ -109,6 +112,7 @@ public class NpcCombatMode extends NpcMode {
 		if (lineOfSight && iteration.get() % 4 == 0) {
 			attack(target, weapon);
 		}
+		iteration.incrementAndGet();
 	}
 	
 	private void attack(CreatureObject target, WeaponObject weapon) {

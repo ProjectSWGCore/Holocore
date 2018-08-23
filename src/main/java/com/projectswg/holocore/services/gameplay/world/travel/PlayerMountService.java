@@ -27,12 +27,14 @@
 package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -230,7 +232,7 @@ public class PlayerMountService extends Service {
 	}
 	
 	private void enterMount(Player player, CreatureObject vehicle) {
-		if (!isMountable(vehicle) || vehicle.getParent() != null || vehicle.getOwnerId() != player.getCreatureObject().getObjectId()) {
+		if (!isMountable(vehicle) || vehicle.getParent() != null) {
 			Log.d("%s attempted to mount %s but it's not mountable", player, vehicle);
 			return;
 		}
@@ -238,11 +240,33 @@ public class PlayerMountService extends Service {
 		CreatureObject requester = player.getCreatureObject();
 		
 		if (requester.getParent() != null) {
-			Log.d("%s attempted to mount an object when inside a container", requester);
+			Log.d("%s attempted to mount a vehicle when inside a container", requester);
 			return;
 		}
 		
-		requester.moveToContainer(vehicle);
+		if (requester.getObjectId() == vehicle.getOwnerId()) {
+			requester.setLocation(Location.zero());
+			requester.moveToSlot(vehicle, "rider", vehicle.getArrangementId(requester));
+		} else if (vehicle.getSlottedObject("rider") != null) {
+			boolean added = false;
+			for (int i = 1; i <= 7; i++) {
+				if (!vehicle.hasSlot("rider" + i)) {
+					Log.d("%s attempted to mount a vehicle when no slots remain", requester);
+					return;
+				}
+				if (vehicle.getSlottedObject("rider" + i) == null) {
+					requester.setLocation(Location.zero());
+					requester.moveToSlot(vehicle, "rider" + i, vehicle.getArrangementId(requester));
+					added = true;
+					break;
+				}
+			}
+			if (!added) {
+				Log.d("%s attempted to mount a vehicle when no slots remain", requester);
+				return;
+			}
+		}
+		
 		requester.setStatesBitmask(CreatureState.RIDING_MOUNT);
 		vehicle.setPosture(Posture.DRIVING_VEHICLE);    // TODO RIDING_CREATURE for animals
 		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
@@ -267,7 +291,7 @@ public class PlayerMountService extends Service {
 				assert child instanceof CreatureObject;
 				((CreatureObject) child).resetMovement();
 				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
-				child.moveToContainer(null);
+				child.moveToContainer(null, vehicle.getLocation());
 			}
 			vehicle.setPosture(Posture.UPRIGHT);
 			vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
@@ -294,6 +318,7 @@ public class PlayerMountService extends Service {
 		Collection<Mount> mounts = calledMounts.get(player);
 		if (mounts != null)
 			mounts.removeIf(p -> p.getMount().equals(mount));
+		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
 		
 		DestroyObjectIntent.broadcast(mount);
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);

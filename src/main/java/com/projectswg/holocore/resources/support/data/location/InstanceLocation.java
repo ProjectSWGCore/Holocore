@@ -167,6 +167,8 @@ public class InstanceLocation implements Persistable {
 		SWGObject parent = self.getSuperParent();
 		if (parent == null)
 			return location;
+		if (self.getSlotArrangement() != -1)
+			return parent.getWorldLocation();
 		return Location.builder(location).translateLocation(parent.getLocation()).setTerrain(parent.getTerrain()).build();
 	}
 	

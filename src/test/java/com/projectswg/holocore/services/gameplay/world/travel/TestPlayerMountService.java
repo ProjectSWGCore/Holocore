@@ -29,7 +29,9 @@ package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
@@ -73,8 +75,12 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	}
 	
 	@Test
-	public void testCall() {
+	public void testCallStore() {
 		registerService(new PlayerMountService());
+		
+		CreatureObject friend = createCreature();
+		friend.systemMove(null, Location.builder(friend.getLocation()).setPosition(110, 110, 110).build());
+		ObjectCreatedIntent.broadcast(friend);
 		
 		CreatureObject creature = createCreature();
 		ObjectCreatedIntent.broadcast(creature);
@@ -87,10 +93,13 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		
 		broadcastAndWait(new PetDeviceCallIntent(creature.getOwner(), pcd));
 		CreatureObject vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
-		assertCorrectDismount(creature, vehicle);
+		assertCorrectDismount(creature, vehicle, friend);
 		
 		// Vehicle [object/mobile/vehicle/shared_speederbike_swoop.iff] should now be in the world alongside the player, and aware of eachother
 		Assert.assertEquals(creature.getLocation(), vehicle.getLocation());
+		
+		broadcastAndWait(new PetDeviceStoreIntent(creature.getOwner(), pcd));
+		assertCorrectStored(creature, vehicle, friend);
 	}
 	
 	@Test
@@ -121,9 +130,6 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		broadcastAndWait(new MountIntent(creature.getOwner(), vehicle));
 		assertCorrectMount(creature, vehicle, friend);
 		
-		broadcastAndWait(new MoveObjectIntent(creature, creature.getLocation(), 7.3, creature.getNextUpdateCount()));
-		assertCorrectMount(creature, vehicle, friend);
-		
 		broadcastAndWait(new DismountIntent(creature.getOwner(), vehicle));
 		assertCorrectDismount(creature, vehicle, friend);
 	}
@@ -151,7 +157,6 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	private void assertCorrectMount(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
 		Assert.assertEquals(vehicle, creature.getParent());
 		Assert.assertNull(vehicle.getParent());
-		Assert.assertTrue(creature.isExposeWithWorld());
 		Assert.assertTrue(creature.isObserveWithParent());
 		
 		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
@@ -163,7 +168,6 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	private void assertCorrectDismount(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
 		Assert.assertNull(creature.getParent());
 		Assert.assertNull(vehicle.getParent());
-		Assert.assertFalse(creature.isExposeWithWorld());
 		Assert.assertTrue(creature.isObserveWithParent());
 		
 		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));

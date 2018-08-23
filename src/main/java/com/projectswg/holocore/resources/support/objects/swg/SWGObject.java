@@ -60,7 +60,9 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -101,7 +103,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private int     	containerType	= 0;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
-	private boolean		exposeWithWorld	= false;
 	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
 	
@@ -121,30 +122,38 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void addObject(SWGObject object) {
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
-			containedObjects.add(object);
-			
-			// We need to adjust the volume of our container accordingly!
-			setVolume(getVolume() + object.getVolume() + 1);
-			object.exposeWithWorld = false;
-			object.observeWithParent = true;
+			addContainedObject(object);
 		} else {
-			boolean exposeWithWorld = false;
-			boolean observeWithParent = false;
-			handleSlotReplacement(object.parent, object, arrangementId);
-			for (String requiredSlot : object.getArrangement().get(arrangementId - 4)) {
-				setSlot(requiredSlot, object);
-				SlotDefinition def = slotsAvailable.get(requiredSlot);
-				exposeWithWorld |= def.isExposeToWorld();
-				observeWithParent |= def.isObserveWithParent();
-			}
-			object.exposeWithWorld = exposeWithWorld;
-			object.observeWithParent = observeWithParent;
+			addSlottedObject(object, object.getArrangement().get(arrangementId - 4), arrangementId);
 		}
+	}
+	
+	private void addContainedObject(SWGObject object) {
+		containedObjects.add(object);
 		
+		// We need to adjust the volume of our container accordingly!
+		setVolume(getVolume() + object.getVolume() + 1);
+		
+		object.observeWithParent = true;
+		object.slotArrangement = -1;
 		object.parent = this;
-		object.slotArrangement = arrangementId;
 		object.setTerrain(getTerrain());
-		
+		updateLoadRange();
+		onAddedChild(object);
+	}
+	
+	private void addSlottedObject(SWGObject object, List<String> slots, int arrangementId) {
+		boolean observeWithParent = false;
+		handleSlotReplacement(object.parent, object, slots);
+		for (String requiredSlot : slots) {
+			this.slots.put(requiredSlot, object);
+			SlotDefinition def = slotsAvailable.get(requiredSlot);
+			observeWithParent |= def.isObserveWithParent();
+		}
+		object.observeWithParent = observeWithParent;
+		object.slotArrangement = arrangementId;
+		object.parent = this;
+		object.setTerrain(getTerrain());
 		updateLoadRange();
 		onAddedChild(object);
 	}
@@ -167,7 +176,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		// Remove as parent
 		object.parent = null;
-		object.exposeWithWorld = false;
 		object.observeWithParent = true;
 		object.slotArrangement = -1;
 		
@@ -220,7 +228,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void moveToContainer(@Nullable SWGObject newParent) {
 		SWGObject oldParent = parent;
 		if (systemMove(newParent))
-			ContainerTransferIntent.broadcast(this, oldParent, newParent);
+			broadcast(new ContainerTransferIntent(this, oldParent, newParent));
+	}
+	
+	public void moveToSlot(@NotNull SWGObject newParent, String slot, int arrangementId) {
+		SWGObject oldParent = parent;
+		if (oldParent != newParent) {
+			if (oldParent != null)
+				oldParent.removeObject(this);
+			newParent.addSlottedObject(this, List.of(slot), arrangementId);
+			broadcast(new ContainerTransferIntent(this, oldParent, newParent));
+		}
 	}
 	
 	/**
@@ -232,7 +250,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		assert newParent != this;
 		SWGObject oldParent = parent;
 		if (systemMove(newParent, newLocation))
-			ObjectTeleportIntent.broadcast(this, oldParent, newParent, newLocation);
+			broadcast(new ObjectTeleportIntent(this, oldParent, newParent, newLocation));
 	}
 	
 	/**
@@ -301,8 +319,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return ContainerResult.SUCCESS;
 	}
 	
-	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
-		for (String slot : obj.getArrangement().get(arrangement-4)) {
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, List<String> slots) {
+		for (String slot : slots) {
 			SWGObject slotObj = getSlottedObject(slot);
 			if (slotObj != null)
 				slotObj.moveToContainer(oldParent);
@@ -322,6 +340,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			parent.onRemovedChild(child);
 	}
 	
+	public void broadcast(Intent intent) {
+		Player owner = getOwner();
+		if (owner != null)
+			owner.broadcast(intent);
+		else
+			intent.broadcast();
+	}
+	
 	public boolean isVisible(CreatureObject target) {
 		if (target == null)
 			return true;
@@ -333,8 +359,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public boolean isLineOfSight(@NotNull SWGObject target) {
-		SWGObject myParent = parent;
-		SWGObject theirParent = target.parent;
+		SWGObject myParent = getEffectiveParent();
+		SWGObject theirParent = target.getEffectiveParent();
 		SWGObject superParent = null;
 		if (myParent == theirParent)
 			return true;
@@ -419,24 +445,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return slotsAvailable.containsKey(slotName);
 	}
 	
-	public boolean isExposeWithWorld() {
-		return exposeWithWorld;
-	}
-	
 	public boolean isObserveWithParent() {
 		if (observeWithParent) {
 			SWGObject parent = this.parent;
 			return parent == null || parent.isObserveWithParent();
 		}
 		return false;
-	}
-	
-	public void setSlot(@NotNull String name, @NotNull SWGObject value) {
-		slots.put(name, value);
-	}
-	
-	public void clearSlot(@NotNull String name) {
-		slots.remove(name);
 	}
 	
 	@NotNull
@@ -567,6 +581,19 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return parent;
 	}
 	
+	/**
+	 * Gets the effective parent, which is the true parent unless mounted. When mounted, the effective parent is NULL
+	 * @return the effective parent
+	 */
+	@Nullable
+	public SWGObject getEffectiveParent() {
+		return parent;
+	}
+	
+	/**
+	 * Gets the highest level parent, which does not have a parent itself
+	 * @return the super parent
+	 */
 	@Nullable
 	public SWGObject getSuperParent() {
 		SWGObject sParent = parent;

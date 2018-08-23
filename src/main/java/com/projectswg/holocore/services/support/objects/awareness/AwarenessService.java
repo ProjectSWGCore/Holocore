@@ -52,6 +52,7 @@ import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -115,13 +116,12 @@ public class AwarenessService extends Service {
 		} else {
 			synchronized (obj.getAwarenessLock()) {
 				obj.systemMove(newParent, newLocation);
-				sendTeleportPackets(obj, newParent, 0, true);
 				awareness.updateObject(obj);
 			}
 		}
 		
 		update(oldParent);
-		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation);
+		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, true, 0);
 	}
 	
 	@IntentHandler
@@ -150,8 +150,7 @@ public class AwarenessService extends Service {
 		update(cti.getObject());
 		update(oldContainer);
 		
-		obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newContainer == null ? 0 : newContainer.getObjectId(), obj.getSlotArrangement()));
-		onObjectMoved(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation());
+		onObjectMoved(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), false, 0);
 	}
 	
 	@IntentHandler
@@ -188,7 +187,7 @@ public class AwarenessService extends Service {
 			startZone(creature, firstZone);
 			awareness.updateObject(creature);
 		}
-		onObjectMoved(creature, oldParent, parent, oldLocation, loc);
+		onObjectMoved(creature, oldParent, parent, oldLocation, loc, false, 0);
 	}
 	
 	private void startZone(CreatureObject creature, boolean firstZone) {
@@ -226,7 +225,22 @@ public class AwarenessService extends Service {
 			return;
 		}
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
-		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed());
+		double speed = dt.getSpeed();
+		
+		if (((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
+			// If this is the primary rider, move the mount and all of the riders
+			CreatureObject mount = (CreatureObject) obj.getParent();
+			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
+			
+			if (mount.getOwnerId() == obj.getObjectId()) {
+				moveObjectWithTransform(mount, null, requestedLocation, speed);
+				for (SWGObject child : mount.getSlottedObjects()) {
+					moveObjectWithTransform(child, mount, requestedLocation, speed);
+				}
+			}
+		} else {
+			moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed());
+		}
 	}
 	
 	private void handleDataTransformWithParent(DataTransformWithParent dt) {
@@ -245,40 +259,17 @@ public class AwarenessService extends Service {
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
-		if (obj.isExposeWithWorld()) {
-			parent = obj.getParent();
-			assert parent != null : "expose parent is null";
-			
-			synchronized (parent.getAwarenessLock()) {
-				parent.systemMove(null, requestedLocation);
-				awareness.updateObject(parent);
-			}
-			
-			for (SWGObject child : parent.getSlottedObjects()) {
-				SWGObject oldParent = child.getParent();
-				Location oldLocation = child.getLocation();
-				synchronized (child.getAwarenessLock()) {
-					child.systemMove(parent, requestedLocation);
-					awareness.updateObject(child);
-				}
-				onObjectMoved(child, oldParent, parent, oldLocation, requestedLocation);
-			}
-			
-			sendTeleportPackets(parent, null, speed, false);
-		} else {
-			SWGObject oldParent = obj.getParent();
-			Location oldLocation = obj.getLocation();
-			synchronized (obj.getAwarenessLock()) {
-				obj.systemMove(parent, requestedLocation);
-				awareness.updateObject(obj);
-			}
-			
-			sendTeleportPackets(obj, parent, speed, false);
-			
-			if (oldParent != parent)
-				update(oldParent);
-			onObjectMoved(obj, oldParent, parent, oldLocation, requestedLocation);
+		SWGObject oldParent = obj.getParent();
+		Location oldLocation = obj.getLocation();
+		synchronized (obj.getAwarenessLock()) {
+			obj.systemMove(parent, requestedLocation);
+			awareness.updateObject(obj);
 		}
+		
+		if (oldParent != parent)
+			update(oldParent);
+		
+		onObjectMoved(obj, oldParent, parent, oldLocation, requestedLocation, false, speed);
 	}
 	
 	private void update(@Nullable SWGObject obj) {
@@ -299,25 +290,46 @@ public class AwarenessService extends Service {
 		return !obj.getAware().contains(parent);
 	}
 	
-	private static void sendTeleportPackets(@NotNull SWGObject obj, @Nullable SWGObject parent, double speed, boolean forceSelfUpdate) {
-		@NotNull Location location = obj.getLocation();
-		int counter = obj.getNextUpdateCount();
-		if (parent != null) {
-			if (forceSelfUpdate)
-				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, parent.getObjectId(), location, (byte) speed));
-			obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), parent.getObjectId(), counter, location, (byte) speed));
-			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
-		} else {
-			if (forceSelfUpdate)
-				obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, location, (byte) speed));
-			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, location, (byte) speed));
-			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
-		}
-	}
-	
-	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, oldParent, newParent, oldLocation, newLocation).broadcast();
+		
+		if (newParent != null) {
+			onObjectMovedInParent(obj, oldParent, newParent, oldLocation, newLocation, forceSelfUpdate, speed);
+		} else {
+			onObjectMovedInWorld(obj, oldParent, oldLocation, newLocation, forceSelfUpdate, speed);
+		}
+		
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+			new PlayerTransformedIntent((CreatureObject) obj, oldParent, null, oldLocation, newLocation).broadcast();
+	}
+	
+	private static void onObjectMovedInParent(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+		// Slotted objects don't get position updates - they inherit their parent's location, plus a client-defined offset (e.g. armor, mounts)
+		if (obj.getSlotArrangement() == -1) {
+			int counter = obj.getNextUpdateCount();
+			if (forceSelfUpdate)
+				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, newParent.getObjectId(), newLocation, (byte) speed));
+			
+			if (!oldLocation.equals(newLocation))
+				obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), newParent.getObjectId(), counter, newLocation, (byte) speed));
+		}
+		
+		if (oldParent != newParent)
+			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newParent.getObjectId(), obj.getSlotArrangement()));
+	}
+	
+	private static void onObjectMovedInWorld(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+		int counter = obj.getNextUpdateCount();
+		
+		if (forceSelfUpdate)
+			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, newLocation, (byte) speed));
+		
+		if (!oldLocation.equals(newLocation))
+			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, newLocation, (byte) speed));
+		
+		if (oldParent != null)
+			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
 	}
 	
 }

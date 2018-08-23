@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -82,6 +83,11 @@ public class AIObject extends CreatureObject {
 	public void onObjectMoveInAware(SWGObject aware) {
 		if (aware.getBaselineType() != BaselineType.CREO)
 			return;
+		if (((CreatureObject) aware).isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			aware = aware.getSlottedObject("rider");
+			if (aware == null)
+				return;
+		}
 		CreatureObject player = (CreatureObject) aware;
 		if (!player.isLoggedInPlayer())
 			return;
@@ -94,10 +100,8 @@ public class AIObject extends CreatureObject {
 			} else {
 				if (activeMode != null) {
 					activeMode.onPlayerMoveInAware(player, distance);
-					if (distance < getSpawner().getAggressiveRadius() && isEnemyOf(player)) {
-						if (isLineOfSight(player)) {
-							StartNpcCombatIntent.broadcast(this, List.of(player));
-						}
+					if (distance < getSpawner().getAggressiveRadius() && isEnemyOf(player) && isLineOfSight(player)) {
+						StartNpcCombatIntent.broadcast(this, List.of(player));
 					}
 					
 				}

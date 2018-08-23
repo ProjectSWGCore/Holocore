@@ -33,6 +33,7 @@ import com.projectswg.holocore.intents.support.global.network.OutboundPacketInte
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +46,7 @@ public class Player implements Comparable<Player> {
 	
 	private final List<DeltasMessage> bufferedDeltas;
 	private final AtomicBoolean bufferedDeltasSent;
-	private final IntentChain packetChain;
+	private final IntentChain intentChain;
 	private final Object sendingLock;
 	private final long networkId;
 	
@@ -63,7 +64,7 @@ public class Player implements Comparable<Player> {
 	public Player(long networkId) {
 		this.bufferedDeltas = new ArrayList<>();
 		this.bufferedDeltasSent = new AtomicBoolean(false);
-		this.packetChain = new IntentChain();
+		this.intentChain = new IntentChain();
 		this.sendingLock = new Object();
 		this.networkId = networkId;
 	}
@@ -89,7 +90,7 @@ public class Player implements Comparable<Player> {
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
 		if (obj == null)
-			packetChain.reset();
+			intentChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -181,9 +182,17 @@ public class Player implements Comparable<Player> {
 	public void sendPacket(SWGPacket ... packets) {
 		synchronized (getSendingLock()) {
 			for (SWGPacket p : packets) {
-				packetChain.broadcastAfter(new OutboundPacketIntent(this, p));
+				if (state == PlayerState.ZONING_IN && p instanceof DeltasMessage) {
+					addBufferedDelta((DeltasMessage) p);
+					continue;
+				}
+				intentChain.broadcastAfter(new OutboundPacketIntent(this, p));
 			}
 		}
+	}
+	
+	public void broadcast(Intent intent) {
+		intentChain.broadcastAfter(intent);
 	}
 	
 	@Override

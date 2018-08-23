@@ -180,7 +180,7 @@ public class BaselineObject {
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
 		}
-		new DeltaBuilder((SWGObject) this, this.type, type, update, value).send();
+		DeltaBuilder.send((SWGObject) this, this.type, type, update, value);
 	}
 	
 	public final void sendDelta(int type, int update, Object value, StringType strType) {
@@ -188,7 +188,7 @@ public class BaselineObject {
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
 		}
-		new DeltaBuilder((SWGObject) this, this.type, type, update, value, strType).send();
+		DeltaBuilder.send((SWGObject) this, this.type, type, update, value, strType);
 	}
 	
 	private Baseline createBaseline(Player target, int num, BaselineCreator bc) {

@@ -29,56 +29,56 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 import java.util.EnumSet;
 
 public enum CreatureState {
-	INVALID						(0),
-	COVER						(1),
-	COMBAT						(1<<1),
-	PEACE						(1<<2),
-	AIMING						(1<<3),
-	ALERT						(1<<4),
-	BERSERK						(1<<5),
-	FEIGN_DEATH					(1<<6),
-	COMBAT_ATTITUDE_EVASIVE		(1<<7),
-	COMBAT_ATTITUDE_NORMAL		(1<<8),
-	COMBAT_ATTITUDE_AGGRESSIVE	(1<<9),
-	TUMBLING					(1<<10),
-	RALLIED						(1<<11),
-	STUNNED						(1<<12),
-	BLINDED						(1<<13),
-	DIZZY						(1<<14),
-	INTIMIDATED					(1<<15),
-	IMMOBILIZED					(1<<16),
-	FROZEN						(1<<17),
-	SWIMMING					(1<<18),
-	SITTING_ON_CHAIR			(1<<19),
-	CRAFTING					(1<<20),
-	GLOWING_JEDI				(1<<21),
-	MASK_SCENT					(1<<22),
-	POISONED					(1<<23),
-	BLEEDING					(1<<24),
-	DISEASED					(1<<25),
-	ON_FIRE						(1<<26),
-	RIDING_MOUNT				(1<<27),
-	MOUNTED_CREATURE			(1<<28),
-	PILOTING_SHIP				(1<<29),
-	SHIP_OPERATIONS				(1<<30),
-	SHIP_GUNNER					(1<<31),
-	SHIP_INTERIOR				(1<<32),
-	PILOTING_POB_SHIP			(1<<33),
-	PERFORMING_DEATH_BLOW		(1<<34),
-	DISGUISED					(1<<35),
-	ELECTRIC_BURNED				(1<<36),
-	COLD_BURNED					(1<<37),
-	ACID_BURNED					(1<<38),
-	ENERGY_BURNED				(1<<39),
-	KINETIC_BURNED				(1<<40);
+	INVALID						(0L),
+	COVER						(1L),
+	COMBAT						(1L<<1),
+	PEACE						(1L<<2),
+	AIMING						(1L<<3),
+	ALERT						(1L<<4),
+	BERSERK						(1L<<5),
+	FEIGN_DEATH					(1L<<6),
+	COMBAT_ATTITUDE_EVASIVE		(1L<<7),
+	COMBAT_ATTITUDE_NORMAL		(1L<<8),
+	COMBAT_ATTITUDE_AGGRESSIVE	(1L<<9),
+	TUMBLING					(1L<<10),
+	RALLIED						(1L<<11),
+	STUNNED						(1L<<12),
+	BLINDED						(1L<<13),
+	DIZZY						(1L<<14),
+	INTIMIDATED					(1L<<15),
+	IMMOBILIZED					(1L<<16),
+	FROZEN						(1L<<17),
+	SWIMMING					(1L<<18),
+	SITTING_ON_CHAIR			(1L<<19),
+	CRAFTING					(1L<<20),
+	GLOWING_JEDI				(1L<<21),
+	MASK_SCENT					(1L<<22),
+	POISONED					(1L<<23),
+	BLEEDING					(1L<<24),
+	DISEASED					(1L<<25),
+	ON_FIRE						(1L<<26),
+	RIDING_MOUNT				(1L<<27),
+	MOUNTED_CREATURE			(1L<<28),
+	PILOTING_SHIP				(1L<<29),
+	SHIP_OPERATIONS				(1L<<30),
+	SHIP_GUNNER					(1L<<31),
+	SHIP_INTERIOR				(1L<<32),
+	PILOTING_POB_SHIP			(1L<<33),
+	PERFORMING_DEATH_BLOW		(1L<<34),
+	DISGUISED					(1L<<35),
+	ELECTRIC_BURNED				(1L<<36),
+	COLD_BURNED					(1L<<37),
+	ACID_BURNED					(1L<<38),
+	ENERGY_BURNED				(1L<<39),
+	KINETIC_BURNED				(1L<<40);
 	
-	private int bitmask;
+	private long bitmask;
 	
-	CreatureState(int bitmask) {
+	CreatureState(long bitmask) {
 		this.bitmask = bitmask;
 	}
 	
-	public int getBitmask() {
+	public long getBitmask() {
 		return bitmask;
 	}
 	

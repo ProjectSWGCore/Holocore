@@ -50,6 +50,7 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -139,9 +140,15 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
+	@Nullable
+	public SWGObject getEffectiveParent() {
+		return isStatesBitmask(CreatureState.RIDING_MOUNT) ? null : getParent();
+	}
+	
+	@Override
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, List<String> slots) {
 		SWGObject inventory = getSlottedObject("inventory");
-		for (String slot : obj.getArrangement().get(arrangement-4)) {
+		for (String slot : slots) {
 			SWGObject slotObj = getSlottedObject(slot);
 			if (slotObj != null && slotObj != inventory) {
 				slotObj.moveToContainer(inventory);

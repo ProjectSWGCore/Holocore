@@ -35,56 +35,26 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 
 public class DeltaBuilder {
 	
-	private final SWGObject object;
-	private final BaselineType type;
-	private final int num;
-	private final int updateType;
-	private final byte[] data;
-	
-	public DeltaBuilder(SWGObject object, BaselineType type, int num, int updateType, Object change) {
-		this.object = object;
-		this.type = type;
-		this.num = num;
-		this.data = (change instanceof byte[] ? (byte[]) change : Encoder.encode(change));
-		this.updateType = updateType;
+	public static boolean send(SWGObject object, BaselineType type, int num, int updateType, Object change) {
+		return send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change)));
 	}
 	
-	public DeltaBuilder(SWGObject object, BaselineType type, int num, int updateType, Object change, StringType strType) {
-		this.object = object;
-		this.type = type;
-		this.num = num;
-		this.data = (change instanceof byte[] ? (byte[]) change : Encoder.encode(change, strType));
-		this.updateType = updateType;
+	public static boolean send(SWGObject object, BaselineType type, int num, int updateType, Object change, StringType strType) {
+		return send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change, strType)));
 	}
 	
-	public boolean send() {
-		DeltasMessage message = getBuiltMessage();
-		Player owner = object.getOwner();
-		boolean sent = false;
-		if (owner != null) {
-			switch (owner.getPlayerState()) {
-				case ZONED_IN:
-					owner.sendPacket(message);
-					sent = true;
-					break;
-				case ZONING_IN:
-					owner.addBufferedDelta(message);
-					sent = true;
-					break;
-			}
-		}
+	private static boolean send(SWGObject object, BaselineType type, int num, int updateType, byte [] data) {
+		DeltasMessage message = new DeltasMessage(object.getObjectId(), type, num, updateType, data);
 		if (num == 3 || num == 6) { // Shared Objects
-			sent = object.sendObservers(message) > 0 || sent;
+			return object.sendObservers(message) > 0;
+		} else {
+			Player owner = object.getOwner();
+			if (owner != null) {
+				owner.sendPacket(message);
+				return true;
+			}
+			return false;
 		}
-		return sent;
-	}
-	
-	public DeltasMessage getBuiltMessage() {
-		return new DeltasMessage(object.getObjectId(), type, num, updateType, data);
-	}
-	
-	public byte [] getEncodedData() {
-		return data;
 	}
 	
 }
