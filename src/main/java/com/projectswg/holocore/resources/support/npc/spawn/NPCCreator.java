@@ -48,11 +48,9 @@ import me.joshlarson.jlcommon.log.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCCreator {
-	
-	private static final Random RANDOM = new Random();
 	
 	public static long createNPC(Spawner spawner) {
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
@@ -76,7 +74,7 @@ public class NPCCreator {
 			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(spawner, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
 			List<WeaponObject> primaryWeapons = object.getPrimaryWeapons();
 			if (!primaryWeapons.isEmpty())
-				object.setEquippedWeapon(primaryWeapons.get(RANDOM.nextInt(primaryWeapons.size())));
+				object.setEquippedWeapon(primaryWeapons.get(ThreadLocalRandom.current().nextInt(primaryWeapons.size())));
 		} catch (Throwable t) {
 			Log.w(t);
 		}
@@ -164,7 +162,7 @@ public class NPCCreator {
 	 * @return a random number between the two, both inclusive
 	 */
 	private static int randomBetween(int from, int to) {
-		return RANDOM.nextInt((to - from) + 1) + from;
+		return ThreadLocalRandom.current().nextInt((to - from) + 1) + from;
 	}
 	
 	private static WeaponObject createWeapon(Spawner spawner, String template) {
