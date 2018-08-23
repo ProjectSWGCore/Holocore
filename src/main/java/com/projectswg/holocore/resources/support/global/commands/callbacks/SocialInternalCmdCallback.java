@@ -28,8 +28,8 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.network.packets.swg.zone.object_controller.PlayerEmote;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import org.jetbrains.annotations.NotNull;
 

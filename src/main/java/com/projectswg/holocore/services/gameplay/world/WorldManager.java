@@ -2,7 +2,6 @@ package com.projectswg.holocore.services.gameplay.world;
 
 import com.projectswg.holocore.services.gameplay.world.map.MapService;
 import com.projectswg.holocore.services.gameplay.world.travel.TravelManager;
-import com.projectswg.holocore.services.gameplay.world.travel.TravelService;
 import com.projectswg.holocore.services.gameplay.world.weather.WeatherService;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;

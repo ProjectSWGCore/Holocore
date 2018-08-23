@@ -1,9 +1,9 @@
 package com.projectswg.holocore.resources.support.objects.radial;
 
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.objects.radial.object.AIObjectRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.CreditObjectRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.SWGObjectRadial;

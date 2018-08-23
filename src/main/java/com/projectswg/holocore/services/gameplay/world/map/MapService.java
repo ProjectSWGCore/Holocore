@@ -11,8 +11,8 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.map.MapCategory;
 import com.projectswg.holocore.resources.gameplay.world.map.MappingTemplate;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 

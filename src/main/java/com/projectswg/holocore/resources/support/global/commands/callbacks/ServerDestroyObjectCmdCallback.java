@@ -29,10 +29,10 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class ServerDestroyObjectCmdCallback implements ICmdCallback {

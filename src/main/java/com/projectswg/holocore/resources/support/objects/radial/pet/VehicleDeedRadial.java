@@ -33,7 +33,6 @@ import com.projectswg.holocore.intents.gameplay.world.travel.pet.VehicleDeedGene
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
 

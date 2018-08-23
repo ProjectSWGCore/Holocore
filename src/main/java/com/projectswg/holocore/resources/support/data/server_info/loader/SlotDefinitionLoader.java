@@ -59,7 +59,6 @@ public final class SlotDefinitionLoader extends DataLoader {
 	public static class SlotDefinition {
 		
 		private final String name;
-		private final String slot;
 		private final boolean global;
 		private final boolean modifiable;
 		private final boolean observeWithParent;
@@ -68,7 +67,6 @@ public final class SlotDefinitionLoader extends DataLoader {
 		private SlotDefinition(SdbResultSet set) {
 			// slotName	global	modifiable	observeWithParent	exposeToWorld
 			this.name = set.getText("slotName");
-			this.slot = set.getText("allowedSlot");
 			this.global = set.getBoolean("global");
 			this.modifiable = set.getBoolean("modifiable");
 			this.observeWithParent = set.getBoolean("observeWithParent");
@@ -77,10 +75,6 @@ public final class SlotDefinitionLoader extends DataLoader {
 		
 		public String getName() {
 			return name;
-		}
-		
-		public String getSlot() {
-			return slot;
 		}
 		
 		public boolean isGlobal() {

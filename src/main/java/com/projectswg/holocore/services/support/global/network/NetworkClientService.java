@@ -35,11 +35,11 @@ import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIn
 import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.global.network.UDPServer;
-import com.projectswg.holocore.resources.support.global.network.UDPServer.UDPPacket;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.global.network.AdminNetworkClient;
 import com.projectswg.holocore.resources.support.global.network.NetworkClient;
+import com.projectswg.holocore.resources.support.global.network.UDPServer;
+import com.projectswg.holocore.resources.support.global.network.UDPServer.UDPPacket;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;

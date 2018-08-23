@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.data.location;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;

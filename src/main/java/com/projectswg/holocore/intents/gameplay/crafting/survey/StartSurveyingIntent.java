@@ -26,8 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.crafting.survey;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class StartSurveyingIntent extends Intent {

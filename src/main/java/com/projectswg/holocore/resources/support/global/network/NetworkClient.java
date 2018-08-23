@@ -38,10 +38,10 @@ import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIn
 import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.HolocoreSessionException;
 import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
 import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.SessionStatus;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.network.TCPServer.TCPSession;

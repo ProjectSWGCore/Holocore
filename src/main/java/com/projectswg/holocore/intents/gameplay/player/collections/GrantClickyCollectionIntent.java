@@ -26,8 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.player.collections;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.gameplay.player.collections.CollectionItem;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 

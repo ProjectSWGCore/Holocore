@@ -26,10 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
+import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource.RawResourceBuilder;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource.RawResourceBuilder;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;

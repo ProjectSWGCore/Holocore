@@ -26,8 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.world.travel;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class TicketUseIntent extends Intent {

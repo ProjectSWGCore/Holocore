@@ -55,7 +55,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;

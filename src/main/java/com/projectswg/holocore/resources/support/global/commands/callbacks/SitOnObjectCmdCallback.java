@@ -30,10 +30,10 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.object_controller.SitOnObject;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class SitOnObjectCmdCallback implements ICmdCallback {

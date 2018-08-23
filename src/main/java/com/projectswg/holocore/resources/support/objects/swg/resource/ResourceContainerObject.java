@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.objects.swg.resource;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 public class ResourceContainerObject extends TangibleObject {
 	

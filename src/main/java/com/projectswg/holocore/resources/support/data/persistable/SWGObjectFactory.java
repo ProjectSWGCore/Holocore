@@ -27,8 +27,8 @@
 package com.projectswg.holocore.resources.support.data.persistable;
 
 import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 public class SWGObjectFactory {
 	

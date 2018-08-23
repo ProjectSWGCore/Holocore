@@ -1,7 +1,7 @@
 package com.projectswg.holocore.services.gameplay.combat;
 
-import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootLotteryStartedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
