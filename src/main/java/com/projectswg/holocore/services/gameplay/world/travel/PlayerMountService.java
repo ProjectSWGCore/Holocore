@@ -322,13 +322,13 @@ public class PlayerMountService extends Service {
 		}
 		
 		Collection<Mount> mounts = calledMounts.get(player);
-		if (mounts != null)
-			mounts.removeIf(p -> p.getMount().equals(mount));
-		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+		if (mounts != null && mounts.removeIf(p -> p.getMount().equals(mount))) {
+			calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+			DestroyObjectIntent.broadcast(mount);
+			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
+			Log.d("Stored mount %s in control device %s", mount, mountControlDevice);
+		}
 		
-		DestroyObjectIntent.broadcast(mount);
-		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-		Log.d("Stored mount %s in control device %s", mount, mountControlDevice);
 	}
 	
 	private void storeMounts(CreatureObject player) {
