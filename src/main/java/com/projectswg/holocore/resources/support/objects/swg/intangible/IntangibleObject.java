@@ -54,6 +54,7 @@ public class IntangibleObject extends SWGObject {
 	
 	public void setCount(int count) {
 		this.count = count;
+		sendDelta(3, 4, count);
 	}
 
 	@Override
