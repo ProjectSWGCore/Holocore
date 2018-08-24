@@ -36,6 +36,10 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
 
@@ -47,29 +51,29 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		if (!(target instanceof CreatureObject))
+		CreatureObject creature = player.getCreatureObject();
+		if (!(target instanceof CreatureObject) || !isValidTarget(creature, (CreatureObject) target))
 			return;
 		
 		CreatureObject mount = (CreatureObject) target;
 		
-		if (mount.getOwnerId() != player.getCreatureObject().getObjectId()) {	// Only an owner can enter/exit
-			// TODO group members can enter the vehicle
-			return;
-		}
-		
-		if (player.getCreatureObject().getParent() == target)
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT) && creature.getParent() == target)
 			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:dismount"));
 		else
 			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:mount"));
-		options.add(RadialOption.create(RadialItem.PET_STORE));
+		
+		if (creature.getObjectId() == mount.getOwnerId())
+			options.add(RadialOption.create(RadialItem.PET_STORE));
 	}
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof CreatureObject))
+		CreatureObject creature = player.getCreatureObject();
+		if (!(target instanceof CreatureObject) || !isValidTarget(creature, (CreatureObject) target))
 			return;
+		
 		switch (selection) {
-			case SERVER_VEHICLE_ENTER_EXIT:
+			case ITEM_USE:
 				if (player.getCreatureObject().getParent() == target)
 					DismountIntent.broadcast(player, (CreatureObject) target);
 				else
@@ -81,6 +85,25 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 			default:
 				break;
 		}
+	}
+	
+	private static boolean isValidTarget(CreatureObject creature, CreatureObject mount) {
+		// Owner of the vehicle
+		if (creature.getObjectId() == mount.getOwnerId())
+			return true;
+		
+		// Already mounted
+		if (creature.getParent() == mount && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) && creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			return true;
+		
+		// Within the same group
+		GroupObject group = (GroupObject) ObjectLookup.getObjectById(creature.getGroupId());
+		if (group == null || !group.getGroupMembers().values().contains(mount.getOwnerId())) {
+			return false;
+		}
+		
+		// Owner is already mounted
+		return mount.getSlottedObject("rider") != null;
 	}
 	
 }
