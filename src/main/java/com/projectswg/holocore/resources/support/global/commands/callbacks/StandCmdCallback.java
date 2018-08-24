@@ -42,6 +42,8 @@ public class StandCmdCallback implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
 		
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			return;
 		if(creature.isPerforming()) {
 			// Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
 			new DanceIntent(player.getCreatureObject()).broadcast();

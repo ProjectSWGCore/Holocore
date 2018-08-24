@@ -42,7 +42,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 	public void execute(@NotNull Player player,SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
 		
-		if (creature.getPosture() == Posture.DEAD || creature.getPosture() == Posture.INCAPACITATED)
+		if (creature.getPosture() == Posture.DEAD || creature.getPosture() == Posture.INCAPACITATED || creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
 			return;
 		long objectID = creature.getObjectId();
 		SitOnObject sot;

@@ -42,8 +42,10 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -247,6 +249,11 @@ public class PlayerMountService extends Service {
 			requester.setLocation(Location.zero());
 			requester.moveToSlot(vehicle, "rider", vehicle.getArrangementId(requester));
 		} else if (vehicle.getSlottedObject("rider") != null) {
+			GroupObject group = (GroupObject) ObjectLookup.getObjectById(requester.getGroupId());
+			if (group == null || !group.getGroupMembers().values().contains(vehicle.getOwnerId())) {
+				Log.d("%s attempted to mount a vehicle when not in the same group as the owner!", requester);
+				return;
+			}
 			boolean added = false;
 			for (int i = 1; i <= 7; i++) {
 				if (!vehicle.hasSlot("rider" + i)) {
