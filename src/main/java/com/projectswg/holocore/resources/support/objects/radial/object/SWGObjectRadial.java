@@ -12,7 +12,7 @@ import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInt
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class SWGObjectRadial implements RadialHandlerInterface {
 	
@@ -21,7 +21,7 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		// Verify that target is a tangible
 		if (target == null || target.getClass() != TangibleObject.class)
 			return;

@@ -36,7 +36,7 @@ import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInt
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class VehicleDeviceRadial implements RadialHandlerInterface {
 	
@@ -45,15 +45,30 @@ public class VehicleDeviceRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		options.add(RadialOption.create(RadialItem.VEHICLE_GENERATE));
-		options.add(RadialOption.create(RadialItem.VEHICLE_STORE));
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+		if (!(target instanceof IntangibleObject))
+			return;
+		
+		IntangibleObject pcd = (IntangibleObject) target;
+		
+		switch (pcd.getCount()) {
+			case IntangibleObject.COUNT_PCD_STORED:
+				options.add(RadialOption.create(RadialItem.VEHICLE_GENERATE));
+				break;
+			case IntangibleObject.COUNT_PCD_CALLED:
+				options.add(RadialOption.create(RadialItem.VEHICLE_STORE));
+				break;
+		}
+		
+		options.add(RadialOption.create(RadialItem.ITEM_DESTROY));
+		options.add(RadialOption.create(RadialItem.EXAMINE));
 	}
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof IntangibleObject))
+		if (!(target instanceof IntangibleObject) || selection == RadialItem.ITEM_USE)
 			return;
+		
 		switch (selection) {
 			case VEHICLE_GENERATE:
 				PetDeviceCallIntent.broadcast(player, (IntangibleObject) target);

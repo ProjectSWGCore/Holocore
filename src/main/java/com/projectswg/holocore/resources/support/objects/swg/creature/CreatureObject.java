@@ -487,6 +487,7 @@ public class CreatureObject extends TangibleObject {
 		setRunSpeed(vehicle.getRunSpeed());
 		setAccelScale(vehicle.getAccelScale());
 		setTurnScale(vehicle.getTurnScale());
+		setMovementScale(vehicle.getMovementScale());
 	}
 	
 	public void resetMovement() {
@@ -494,6 +495,7 @@ public class CreatureObject extends TangibleObject {
 		setRunSpeed(7.3);
 		setAccelScale(1);
 		setTurnScale(1);
+		setMovementScale(1);
 	}
 	
 	public void setMovementScale(double movementScale) {

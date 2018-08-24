@@ -10,7 +10,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class CreditObjectRadial implements RadialHandlerInterface {
 	
@@ -19,7 +19,7 @@ public class CreditObjectRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		options.add(RadialOption.create(RadialItem.ITEM_USE, "@space/space_loot:use_credit_chip"));
 	}
 	

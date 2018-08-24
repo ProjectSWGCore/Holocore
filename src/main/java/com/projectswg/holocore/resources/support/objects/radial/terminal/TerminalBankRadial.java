@@ -14,6 +14,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.utilities.IntentFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		CreatureObject creature = player.getCreatureObject();
 		
 		{

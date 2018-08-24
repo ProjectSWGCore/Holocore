@@ -20,9 +20,9 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public enum RadialHandler {
@@ -53,7 +53,7 @@ public enum RadialHandler {
 		gotHandlers.put(got, handler);
 	}
 	
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		getHandler(target).getOptions(options, player, target);
 	}
 	

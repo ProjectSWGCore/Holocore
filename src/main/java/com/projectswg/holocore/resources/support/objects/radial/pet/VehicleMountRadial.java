@@ -39,9 +39,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import me.joshlarson.jlcommon.log.Log;
 
-import java.util.List;
+import java.util.Collection;
 
 public class VehicleMountRadial implements RadialHandlerInterface {
 	
@@ -50,13 +49,14 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		CreatureObject creature = player.getCreatureObject();
 		if (!(target instanceof CreatureObject) || !isValidTarget(creature, (CreatureObject) target))
 			return;
 		
 		CreatureObject mount = (CreatureObject) target;
 		
+		options.add(RadialOption.create(RadialItem.EXAMINE));
 		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT) && creature.getParent() == target)
 			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:dismount"));
 		else

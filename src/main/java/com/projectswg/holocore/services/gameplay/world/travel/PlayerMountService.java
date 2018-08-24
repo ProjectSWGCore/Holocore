@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.world.travel;
 
-import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
@@ -245,6 +244,9 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		
+		requester.setStatesBitmask(CreatureState.RIDING_MOUNT);
+		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		
 		if (requester.getObjectId() == vehicle.getOwnerId()) {
 			requester.setLocation(Location.zero());
 			requester.moveToSlot(vehicle, "rider", vehicle.getArrangementId(requester));
@@ -258,6 +260,7 @@ public class PlayerMountService extends Service {
 			for (int i = 1; i <= 7; i++) {
 				if (!vehicle.hasSlot("rider" + i)) {
 					Log.d("%s attempted to mount a vehicle when no slots remain", requester);
+					requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 					return;
 				}
 				if (vehicle.getSlottedObject("rider" + i) == null) {
@@ -269,13 +272,14 @@ public class PlayerMountService extends Service {
 			}
 			if (!added) {
 				Log.d("%s attempted to mount a vehicle when no slots remain", requester);
+				requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				return;
 			}
+		} else {
+			requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+			vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+			return;
 		}
-		
-		requester.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		vehicle.setPosture(Posture.DRIVING_VEHICLE);    // TODO RIDING_CREATURE for animals
-		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		
 		requester.inheritMovement(vehicle);
 		Log.d("%s mounted %s", requester, vehicle);
@@ -291,19 +295,20 @@ public class PlayerMountService extends Service {
 		
 		boolean primary = vehicle.getSlottedObject("rider") == requester;
 		requester.moveToContainer(null);
+		requester.moveToLocation(vehicle.getLocation());
 		requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+		requester.resetMovement();
 		if (primary) {
 			for (SWGObject child : vehicle.getSlottedObjects()) {
 				assert child instanceof CreatureObject;
-				((CreatureObject) child).resetMovement();
+				child.moveToContainer(null);
+				child.moveToLocation(vehicle.getLocation());
 				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
-				child.moveToContainer(null, vehicle.getLocation());
+				((CreatureObject) child).resetMovement();
 			}
-			vehicle.setPosture(Posture.UPRIGHT);
 			vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		}
 		
-		requester.resetMovement();
 		Log.d("%s dismounted %s", requester, vehicle);
 	}
 	
@@ -352,10 +357,6 @@ public class PlayerMountService extends Service {
 	
 	private boolean isMountable(CreatureObject mount) {
 		return mount.hasOptionFlags(OptionFlag.MOUNT);
-	}
-	
-	private boolean isMounted(CreatureObject mount, CreatureObject rider) {
-		return mount.getSlots().containsValue(rider);
 	}
 	
 	private static class Mount {

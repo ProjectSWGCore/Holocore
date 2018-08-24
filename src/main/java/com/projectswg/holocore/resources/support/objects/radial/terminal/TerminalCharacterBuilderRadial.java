@@ -17,7 +17,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
@@ -27,7 +27,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		options.add(RadialOption.create(RadialItem.ITEM_USE));
 		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 	}

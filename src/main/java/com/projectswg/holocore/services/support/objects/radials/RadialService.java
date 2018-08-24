@@ -42,8 +42,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RadialService extends Service {
 	
@@ -76,7 +75,7 @@ public class RadialService extends Service {
 			return;
 		}
 		
-		List<RadialOption> options = new ArrayList<>();
+		Set<RadialOption> options = new LinkedHashSet<>(request.getOptions());
 		RadialHandler.INSTANCE.getOptions(options, player, target);
 		sendResponse(player, target, options, request.getCounter());
 	}
@@ -101,11 +100,11 @@ public class RadialService extends Service {
 		RadialHandler.INSTANCE.handleSelection(player, target, selection);
 	}
 	
-	private static void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
+	private static void sendResponse(Player player, SWGObject target, Collection<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
 		menuResponse.setTargetId(target.getObjectId());
 		menuResponse.setRequestorId(player.getCreatureObject().getObjectId());
-		menuResponse.setRadialOptions(options);
+		menuResponse.setRadialOptions(new ArrayList<>(options));
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
 	}

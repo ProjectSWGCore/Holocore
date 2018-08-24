@@ -8,7 +8,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class WorldItemRadial implements RadialHandlerInterface {
 	
@@ -18,7 +18,7 @@ public class WorldItemRadial implements RadialHandlerInterface {
 		this.details = details;
 	}
 	
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		options.add(RadialOption.create(RadialItem.ITEM_USE, "@collection:consume_item"));
 	}
 	

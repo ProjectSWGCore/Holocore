@@ -1,15 +1,12 @@
 package com.projectswg.holocore.services.support.global.health;
 
 import com.projectswg.common.data.info.Config;
-import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.BasicLogStream;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.lang.management.GarbageCollectorMXBean;
@@ -17,7 +14,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.lang.management.OperatingSystemMXBean;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ServerHealthService extends Service {
@@ -43,14 +39,6 @@ public class ServerHealthService extends Service {
 		} else {
 			this.performanceOutput = null;
 		}
-	}
-	
-	@Override
-	public boolean start() {
-		if (!executor.isRunning())
-			executor.start();
-		executor.executeWithFixedRate(5000, TimeUnit.MINUTES.toMillis(10), this::updateServerHealth);
-		return true;
 	}
 	
 	@Override
@@ -82,17 +70,6 @@ public class ServerHealthService extends Service {
 		long intents = intentManager == null ? -1 : intentManager.getIntentCount();
 		
 		performanceOutput.log("%.2f\t%.2f%s\t%.2f%s\t%d\t%d\t%d", cpu, getBinarySize(heapUsed), getBinarySuffix(heapUsed), getBinarySize(heapTotal), getBinarySuffix(heapTotal), gcCollectionRate, gcTime, intents);
-	}
-	
-	private void updateServerHealth() {
-		Runtime rt = Runtime.getRuntime();
-		long total = rt.totalMemory();
-		long usedBefore = total - rt.freeMemory();
-		ClientFactory.freeMemory();
-		DataLoader.freeMemory();
-		System.gc();
-		long usedAfter = total - rt.freeMemory();
-		Log.d("Memory cleanup. Total: %.1fGB  Before: %.2f%%  After: %.2f%%", total/1073741824.0, usedBefore/(double)total*100, usedAfter/(double)total*100);
 	}
 	
 	private static double getBinarySize(long count) {
