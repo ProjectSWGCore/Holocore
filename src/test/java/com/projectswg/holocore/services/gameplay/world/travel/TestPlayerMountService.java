@@ -29,10 +29,7 @@ package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
@@ -66,7 +63,7 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		ObjectCreatedIntent.broadcast(creature);
 		ObjectCreatedIntent.broadcast(deed);
 		
-		broadcastAndWait(new VehicleDeedGenerateIntent(creature.getOwner(), deed));
+		broadcastAndWait(new VehicleDeedGenerateIntent(creature, deed));
 		
 		// PCD [object/intangible/vehicle/shared_speederbike_swoop_pcd.iff] should be in the datapad
 		Collection<SWGObject> datapadData = creature.getDatapad().getContainedObjects();
@@ -91,14 +88,14 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		pcd.systemMove(creature.getDatapad());
 		pcd.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, "object/mobile/vehicle/shared_speederbike_swoop.iff");
 		
-		broadcastAndWait(new PetDeviceCallIntent(creature.getOwner(), pcd));
+		broadcastAndWait(new PetDeviceCallIntent(creature, pcd));
 		CreatureObject vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		assertCorrectDismount(creature, vehicle, friend);
 		
 		// Vehicle [object/mobile/vehicle/shared_speederbike_swoop.iff] should now be in the world alongside the player, and aware of eachother
 		Assert.assertEquals(creature.getLocation(), vehicle.getLocation());
 		
-		broadcastAndWait(new PetDeviceStoreIntent(creature.getOwner(), pcd));
+		broadcastAndWait(new PetDeviceStoreIntent(creature, pcd));
 		assertCorrectStored(creature, vehicle, friend);
 	}
 	
@@ -114,23 +111,23 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		ObjectCreatedIntent.broadcast(creature);
 		// Make the deed 
 		SWGObject deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/tangible/deed/vehicle_deed/shared_speederbike_swoop_deed.iff");
-		broadcastAndWait(new VehicleDeedGenerateIntent(creature.getOwner(), deed));
+		broadcastAndWait(new VehicleDeedGenerateIntent(creature, deed));
 		IntangibleObject pcd = (IntangibleObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/intangible/vehicle/shared_speederbike_swoop_pcd.iff")).findFirst().orElseThrow();
 		CreatureObject vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		
 		assertCorrectDismount(creature, vehicle, friend);
 		
-		broadcastAndWait(new PetDeviceStoreIntent(creature.getOwner(), pcd));
+		broadcastAndWait(new PetDeviceStoreIntent(creature, pcd));
 		assertCorrectStored(creature, vehicle, friend);
 		
-		broadcastAndWait(new PetDeviceCallIntent(creature.getOwner(), pcd));
+		broadcastAndWait(new PetDeviceCallIntent(creature, pcd));
 		vehicle = (CreatureObject) creature.getAware().stream().filter(obj -> obj.getTemplate().equals("object/mobile/vehicle/shared_speederbike_swoop.iff")).findFirst().orElseThrow();
 		assertCorrectDismount(creature, vehicle, friend);
 		
-		broadcastAndWait(new MountIntent(creature.getOwner(), vehicle));
+		broadcastAndWait(new MountIntent(creature, vehicle));
 		assertCorrectMount(creature, vehicle, friend);
 		
-		broadcastAndWait(new DismountIntent(creature.getOwner(), vehicle));
+		broadcastAndWait(new DismountIntent(creature, vehicle));
 		assertCorrectDismount(creature, vehicle, friend);
 	}
 	

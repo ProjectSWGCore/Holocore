@@ -27,24 +27,23 @@
 
 package com.projectswg.holocore.intents.gameplay.world.travel.pet;
 
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
 public class StoreMountIntent extends Intent {
 	
-	private final Player player;
+	private final CreatureObject creature;
 	private final CreatureObject pet;
 	
-	public StoreMountIntent(@NotNull Player player, @NotNull CreatureObject pet) {
-		this.player = player;
+	public StoreMountIntent(@NotNull CreatureObject creature, @NotNull CreatureObject pet) {
+		this.creature = creature;
 		this.pet = pet;
 	}
 	
 	@NotNull
-	public Player getPlayer() {
-		return player;
+	public CreatureObject getCreature() {
+		return creature;
 	}
 	
 	@NotNull
@@ -52,8 +51,8 @@ public class StoreMountIntent extends Intent {
 		return pet;
 	}
 	
-	public static void broadcast(@NotNull Player player, @NotNull CreatureObject pet) {
-		new StoreMountIntent(player, pet).broadcast();
+	public static void broadcast(@NotNull CreatureObject creature, @NotNull CreatureObject pet) {
+		new StoreMountIntent(creature, pet).broadcast();
 	}
 	
 }

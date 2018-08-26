@@ -27,24 +27,24 @@
 
 package com.projectswg.holocore.intents.gameplay.world.travel.pet;
 
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
 public class VehicleDeedGenerateIntent extends Intent {
 	
-	private final Player player;
+	private final CreatureObject creature;
 	private final SWGObject deed;
 	
-	public VehicleDeedGenerateIntent(@NotNull Player player, @NotNull SWGObject deed) {
-		this.player = player;
+	public VehicleDeedGenerateIntent(@NotNull CreatureObject creature, @NotNull SWGObject deed) {
+		this.creature = creature;
 		this.deed = deed;
 	}
 	
 	@NotNull
-	public Player getPlayer() {
-		return player;
+	public CreatureObject getCreature() {
+		return creature;
 	}
 	
 	@NotNull
@@ -52,8 +52,8 @@ public class VehicleDeedGenerateIntent extends Intent {
 		return deed;
 	}
 	
-	public static void broadcast(@NotNull Player player, @NotNull SWGObject deed) {
-		new VehicleDeedGenerateIntent(player, deed).broadcast();
+	public static void broadcast(@NotNull CreatureObject creature, @NotNull SWGObject deed) {
+		new VehicleDeedGenerateIntent(creature, deed).broadcast();
 	}
 	
 }

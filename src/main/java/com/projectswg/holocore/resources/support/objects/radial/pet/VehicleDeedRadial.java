@@ -33,6 +33,7 @@ import com.projectswg.holocore.intents.gameplay.world.travel.pet.VehicleDeedGene
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 import java.util.Collection;
 
@@ -51,9 +52,13 @@ public class VehicleDeedRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature == null)
+			return;
+		
 		switch (selection) {
 			case VEHICLE_GENERATE:
-				VehicleDeedGenerateIntent.broadcast(player, target);
+				VehicleDeedGenerateIntent.broadcast(creature, target);
 				break;
 			default:
 				break;

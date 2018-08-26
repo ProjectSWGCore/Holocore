@@ -26,7 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info;
 
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 public class StandardLog {
 	
@@ -37,6 +40,36 @@ public class StandardLog {
 	
 	public static void onEndLoad(int quantity, String what, long startTime) {
 		Log.i("Finished loading %d %s. Took %.3fms", quantity, what, (System.nanoTime() - startTime) / 1E6);
+	}
+	
+	public static void onPlayerTrace(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
+		Player owner = player.getOwner();
+		String account = owner == null ? "NULL" : owner.getUsername();
+		Log.t("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+	}
+	
+	public static void onPlayerTrace(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
+		Log.t("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+	}
+	
+	public static void onPlayerEvent(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
+		Player owner = player.getOwner();
+		String account = owner == null ? "NULL" : owner.getUsername();
+		Log.d("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+	}
+	
+	public static void onPlayerEvent(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
+		Log.d("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+	}
+	
+	public static void onPlayerError(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
+		Player owner = player.getOwner();
+		String account = owner == null ? "NULL" : owner.getUsername();
+		Log.e("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+	}
+	
+	public static void onPlayerError(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
+		Log.e("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
 	}
 	
 }

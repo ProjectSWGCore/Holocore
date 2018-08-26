@@ -75,12 +75,12 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 		switch (selection) {
 			case ITEM_USE:
 				if (player.getCreatureObject().getParent() == target)
-					DismountIntent.broadcast(player, (CreatureObject) target);
+					DismountIntent.broadcast(creature, (CreatureObject) target);
 				else
-					MountIntent.broadcast(player, (CreatureObject) target);
+					MountIntent.broadcast(creature, (CreatureObject) target);
 				break;
 			case PET_STORE:
-				StoreMountIntent.broadcast(player, (CreatureObject) target);
+				StoreMountIntent.broadcast(creature, (CreatureObject) target);
 				break;
 			default:
 				break;

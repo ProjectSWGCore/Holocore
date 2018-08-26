@@ -28,14 +28,17 @@ package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
@@ -91,14 +94,13 @@ public class PlayerMountService extends Service {
 		String cmdName = eci.getCommand().getName();
 		SWGObject target = eci.getTarget();
 		
-		Log.t("Execute: '%s' with target: '%s' and args: '%s'", eci.getCommand().getName(), eci.getTarget(), eci.getArguments());
 		if (!(target instanceof CreatureObject))
 			return;
 		
 		if (cmdName.equals("mount"))
-			enterMount(eci.getSource().getOwner(), (CreatureObject) target);
+			enterMount(eci.getSource(), (CreatureObject) target);
 		else if (cmdName.equals("dismount"))
-			exitMount(eci.getSource().getOwner(), (CreatureObject) target);
+			exitMount(eci.getSource(), (CreatureObject) target);
 	}
 	
 	@IntentHandler
@@ -116,77 +118,82 @@ public class PlayerMountService extends Service {
 	
 	@IntentHandler
 	private void handleMount(MountIntent pmi) {
-		enterMount(pmi.getPlayer(), pmi.getPet());
+		enterMount(pmi.getCreature(), pmi.getPet());
 	}
 	
 	@IntentHandler
 	private void handleDismount(DismountIntent pmi) {
-		exitMount(pmi.getPlayer(), pmi.getPet());
+		exitMount(pmi.getCreature(), pmi.getPet());
 	}
 	
 	@IntentHandler
 	private void handlePetDeviceCall(PetDeviceCallIntent pci) {
-		callMount(pci.getPlayer().getCreatureObject(), pci.getControlDevice());
+		callMount(pci.getCreature(), pci.getControlDevice());
 	}
 	
 	@IntentHandler
 	private void handlePetStore(StoreMountIntent psi) {
-		CreatureObject creature = psi.getPlayer().getCreatureObject();
+		CreatureObject creature = psi.getCreature();
 		CreatureObject mount = psi.getPet();
 		
 		Collection<Mount> mounts = calledMounts.get(creature);
-		if (mounts == null)
-			return;
-		
-		for (Mount p : mounts) {
-			if (p.getMount() == mount) {
-				storeMount(creature, mount, p.getPetControlDevice());
-				return;
+		if (mounts != null) {
+			for (Mount p : mounts) {
+				if (p.getMount() == mount) {
+					storeMount(creature, mount, p.getPetControlDevice());
+					return;
+				}
 			}
 		}
+		SystemMessageIntent.broadcastPersonal(psi.getCreature().getOwner(), "Could not find mount to store!");
 	}
 	
 	@IntentHandler
 	private void handlePetDeviceStore(PetDeviceStoreIntent psi) {
-		CreatureObject creature = psi.getPlayer().getCreatureObject();
+		CreatureObject creature = psi.getCreature();
 		IntangibleObject pcd = psi.getControlDevice();
 		
 		Collection<Mount> mounts = calledMounts.get(creature);
-		if (mounts == null)
-			return;
-		
-		for (Mount mount : mounts) {
-			if (mount.getPetControlDevice() == pcd) {
-				storeMount(creature, mount.getMount(), pcd);
-				return;
+		if (mounts != null) {
+			for (Mount mount : mounts) {
+				if (mount.getPetControlDevice() == pcd) {
+					storeMount(creature, mount.getMount(), pcd);
+					return;
+				}
 			}
 		}
+		pcd.setCount(IntangibleObject.COUNT_PCD_STORED);
 	}
 	
 	@IntentHandler
 	private void handleVehicleDeedGenerate(VehicleDeedGenerateIntent vdgi) {
-		if (!vdgi.getDeed().getTemplate().startsWith("object/tangible/deed/vehicle_deed/"))
+		if (!vdgi.getDeed().getTemplate().startsWith("object/tangible/deed/vehicle_deed/")) {
+			SystemMessageIntent.broadcastPersonal(vdgi.getCreature().getOwner(), "Invalid vehicle deed!");
 			return;
-		generateVehicle(vdgi.getPlayer(), vdgi.getDeed());
+		}
+		generateVehicle(vdgi.getCreature(), vdgi.getDeed());
 	}
 	
 	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		CreatureObject creature = pei.getPlayer().getCreatureObject();
+		if (creature == null)
+			return;
 		switch (pei.getEvent()) {
 			case PE_LOGGED_OUT:
-				if (creature != null)
-					storeMounts(creature);
-				break;    // Store mounts when logging out
+			case PE_DISAPPEAR:
+			case PE_DESTROYED:
+			case PE_SERVER_KICKED:
+				storeMounts(creature);
+				break;
 			default:
 				break;
 		}
 	}
 	
-	private void generateVehicle(Player player, SWGObject deed) {
+	private void generateVehicle(CreatureObject creator, SWGObject deed) {
 		String deedTemplate = deed.getTemplate();
 		String pcdTemplate = pcdForVehicleDeed(deedTemplate);
-		CreatureObject creator = player.getCreatureObject();
 		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
 		
 		DestroyObjectIntent.broadcast(deed);
@@ -199,149 +206,147 @@ public class PlayerMountService extends Service {
 		callMount(creator, vehicleControlDevice);	// Once generated, the vehicle is called
 	}
 	
-	private void callMount(CreatureObject caller, IntangibleObject mountControlDevice) {
-		if (caller.getParent() != null || caller.isInCombat()) {
+	private void callMount(CreatureObject player, IntangibleObject mountControlDevice) {
+		if (player.getParent() != null || player.isInCombat()) {
 			return;
 		}
-		if (caller.getDatapad() != mountControlDevice.getParent()) {
-			Log.w("Disconnecting %s - attempted to call mount of another player [%s]", caller.getOwner(), mountControlDevice.getOwner());
-			CloseConnectionIntent.broadcast(caller.getOwner(), DisconnectReason.SUSPECTED_HACK);
+		if (player.getDatapad() != mountControlDevice.getParent()) {
+			StandardLog.onPlayerError(this, player, "disconnecting - attempted to call another player's mount [%s]", mountControlDevice);
+			CloseConnectionIntent.broadcast(player.getOwner(), DisconnectReason.SUSPECTED_HACK);
 			return;
 		}
 		
 		String template = mountControlDevice.getServerTextAttribute(ServerAttribute.PCD_PET_TEMPLATE);
-		assert template != null : "mount control device doesn't have vehicle template attribute";
-		CreatureObject vehicle = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
-		vehicle.systemMove(null, caller.getLocation());
-		vehicle.addOptionFlags(OptionFlag.MOUNT);	// The vehicle won't appear properly if this isn't set
-		vehicle.setPvpFaction(caller.getPvpFaction());
-		vehicle.setOwnerId(caller.getObjectId());	// Client crash if this isn't set before making anyone aware
+		assert template != null : "mount control device doesn't have mount template attribute";
+		CreatureObject mount = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
+		mount.systemMove(null, player.getLocation());
+		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
+		mount.setPvpFaction(player.getPvpFaction());
+		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
 		
 		// TODO after combat there's a delay
 		// TODO update faction status on mount if necessary
 		
-		Mount mount = new Mount(mountControlDevice, vehicle);
-		if (mountControlDevice.getCount() == IntangibleObject.COUNT_PCD_CALLED || !calledMounts.computeIfAbsent(caller, c -> new CopyOnWriteArraySet<>()).add(mount)) {
-			Log.d("Not calling mount, already called [%s]", caller);
+		Mount mountRecord = new Mount(mountControlDevice, mount);
+		Set<Mount> mounts = calledMounts.computeIfAbsent(player, c -> new CopyOnWriteArraySet<>());
+		if (mountControlDevice.getCount() == IntangibleObject.COUNT_PCD_CALLED || !mounts.add(mountRecord)) {
+			StandardLog.onPlayerTrace(this, player, "already called mount %s", mount);
+			return;
+		}
+		if (mounts.size() > getMountLimit()) {
+			mounts.remove(mountRecord);
+			StandardLog.onPlayerTrace(this, player, "hit mount limit of %d", getMountLimit());
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
 		
-		ObjectCreatedIntent.broadcast(vehicle);
-		Log.t("Called mount %s for %s to %s", mount.getMount(), caller, caller.getLocation());
+		ObjectCreatedIntent.broadcast(mount);
+		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
+		cleanupCalledMounts();
 	}
 	
-	private void enterMount(Player player, CreatureObject vehicle) {
-		if (!isMountable(vehicle) || vehicle.getParent() != null) {
-			Log.d("%s attempted to mount %s but it's not mountable", player, vehicle);
+	private void enterMount(CreatureObject player, CreatureObject mount) {
+		if (!isMountable(mount) || mount.getParent() != null) {
+			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when it's not mountable", mount);
 			return;
 		}
 		
-		CreatureObject requester = player.getCreatureObject();
-		
-		if (requester.getParent() != null) {
-			Log.d("%s attempted to mount a vehicle when inside a container", requester);
+		if (player.getParent() != null) {
+			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when inside a container", mount);
 			return;
 		}
 		
-		requester.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		vehicle.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		player.setStatesBitmask(CreatureState.RIDING_MOUNT);
+		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		
-		if (requester.getObjectId() == vehicle.getOwnerId()) {
-			requester.setLocation(Location.zero());
-			requester.moveToSlot(vehicle, "rider", vehicle.getArrangementId(requester));
-		} else if (vehicle.getSlottedObject("rider") != null) {
-			GroupObject group = (GroupObject) ObjectLookup.getObjectById(requester.getGroupId());
-			if (group == null || !group.getGroupMembers().values().contains(vehicle.getOwnerId())) {
-				Log.d("%s attempted to mount a vehicle when not in the same group as the owner!", requester);
+		if (player.getObjectId() == mount.getOwnerId()) {
+			player.setLocation(Location.zero());
+			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
+		} else if (mount.getSlottedObject("rider") != null) {
+			GroupObject group = (GroupObject) ObjectLookup.getObjectById(player.getGroupId());
+			if (group == null || !group.getGroupMembers().values().contains(mount.getOwnerId())) {
+				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when not in the same group as the owner", mount);
 				return;
 			}
 			boolean added = false;
 			for (int i = 1; i <= 7; i++) {
-				if (!vehicle.hasSlot("rider" + i)) {
-					Log.d("%s attempted to mount a vehicle when no slots remain", requester);
-					requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+				if (!mount.hasSlot("rider" + i)) {
+					StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
+					player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 					return;
 				}
-				if (vehicle.getSlottedObject("rider" + i) == null) {
-					requester.setLocation(Location.zero());
-					requester.moveToSlot(vehicle, "rider" + i, vehicle.getArrangementId(requester));
+				if (mount.getSlottedObject("rider" + i) == null) {
+					player.setLocation(Location.zero());
+					player.moveToSlot(mount, "rider" + i, mount.getArrangementId(player));
 					added = true;
 					break;
 				}
 			}
 			if (!added) {
-				Log.d("%s attempted to mount a vehicle when no slots remain", requester);
-				requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
+				player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				return;
 			}
 		} else {
-			requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-			vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+			player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 			return;
 		}
 		
-		requester.inheritMovement(vehicle);
-		Log.d("%s mounted %s", requester, vehicle);
+		player.inheritMovement(mount);
+		StandardLog.onPlayerEvent(this, player, "mounted %s", mount);
 	}
 	
-	private void exitMount(Player player, CreatureObject vehicle) {
-		if (!isMountable(vehicle)) {
-			Log.d("%s attempted to dismount %s but it's not mountable", player, vehicle);
+	private void exitMount(CreatureObject player, CreatureObject mount) {
+		if (!isMountable(mount)) {
+			StandardLog.onPlayerTrace(this, player, "attempted to dismount %s when it's not mountable", mount);
 			return;
 		}
 		
-		CreatureObject requester = player.getCreatureObject();
-		
-		boolean primary = vehicle.getSlottedObject("rider") == requester;
-		requester.moveToContainer(null);
-		requester.moveToLocation(vehicle.getLocation());
-		requester.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		requester.resetMovement();
+		boolean primary = mount.getSlottedObject("rider") == player;
+		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+		player.resetMovement();
+		player.moveToContainer(null, mount.getLocation());
 		if (primary) {
-			for (SWGObject child : vehicle.getSlottedObjects()) {
+			for (SWGObject child : mount.getSlottedObjects()) {
 				assert child instanceof CreatureObject;
-				child.moveToContainer(null);
-				child.moveToLocation(vehicle.getLocation());
 				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				((CreatureObject) child).resetMovement();
+				child.moveToContainer(null, mount.getLocation());
 			}
-			vehicle.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		}
 		
-		Log.d("%s dismounted %s", requester, vehicle);
+		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
 	private void storeMount(@NotNull CreatureObject player, @NotNull CreatureObject mount, @NotNull IntangibleObject mountControlDevice) {
+		Collection<Mount> mounts = calledMounts.get(player);
+		if (mounts != null)
+			mounts.removeIf(p -> p.getMount().equals(mount));
+		
 		if (isMountable(mount)) {
+			mount.removeOptionFlags(OptionFlag.MOUNT);
+			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
+			
 			// Dismount anyone riding the mount about to be stored
 			Collection<SWGObject> riders = mount.getSlots().values();
 			
 			for (SWGObject rider : riders) {
-				if (rider == null) {
-					continue;
-				}
-				
-				exitMount(rider.getOwner(), mount);
+				if (rider instanceof CreatureObject)
+					exitMount((CreatureObject) rider, mount);
 			}
-		}
-		
-		Collection<Mount> mounts = calledMounts.get(player);
-		if (mounts != null && mounts.removeIf(p -> p.getMount().equals(mount))) {
-			calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+			
 			DestroyObjectIntent.broadcast(mount);
-			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			Log.d("Stored mount %s in control device %s", mount, mountControlDevice);
+			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		}
-		
+		cleanupCalledMounts();
 	}
 	
 	private void storeMounts(CreatureObject player) {
 		Collection<Mount> mounts = calledMounts.remove(player);
-		if (mounts == null) {
-			Log.d("No mounts called for %s, no action taken", player);
+		if (mounts == null)
 			return;
-		}
 		
 		for (Mount mount : mounts) {
 			storeMount(player, mount.getMount(), mount.getPetControlDevice());
@@ -355,8 +360,19 @@ public class PlayerMountService extends Service {
 		calledMounts.keySet().forEach(this::storeMounts);
 	}
 	
-	private boolean isMountable(CreatureObject mount) {
+	/**
+	 * Removes mount records where there are no mounts called
+	 */
+	private void cleanupCalledMounts() {
+		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+	}
+	
+	private static boolean isMountable(CreatureObject mount) {
 		return mount.hasOptionFlags(OptionFlag.MOUNT);
+	}
+	
+	private static int getMountLimit() {
+		return DataManager.getConfig(ConfigFile.FEATURES).getInt("MOUNT-LIMIT", 1);
 	}
 	
 	private static class Mount {

@@ -34,6 +34,7 @@ import com.projectswg.holocore.intents.gameplay.world.travel.pet.PetDeviceStoreI
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 
 import java.util.Collection;
@@ -66,15 +67,16 @@ public class VehicleDeviceRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		if (!(target instanceof IntangibleObject) || selection == RadialItem.ITEM_USE)
+		CreatureObject creature = player.getCreatureObject();
+		if (!(target instanceof IntangibleObject) || creature == null)
 			return;
 		
 		switch (selection) {
 			case VEHICLE_GENERATE:
-				PetDeviceCallIntent.broadcast(player, (IntangibleObject) target);
+				PetDeviceCallIntent.broadcast(creature, (IntangibleObject) target);
 				break;
 			case VEHICLE_STORE:
-				PetDeviceStoreIntent.broadcast(player, (IntangibleObject) target);
+				PetDeviceStoreIntent.broadcast(creature, (IntangibleObject) target);
 				break;
 			default:
 				break;

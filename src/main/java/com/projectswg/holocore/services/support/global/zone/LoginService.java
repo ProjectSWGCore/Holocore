@@ -50,6 +50,7 @@ import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharac
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.UserMetadata;
@@ -138,15 +139,19 @@ public class LoginService extends Service {
 		UserMetadata user = userDatabase.getUser(loginRequest.getUsername());
 		player.setUsername(loginRequest.getUsername());
 		if (user == null) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username]");
 			onInvalidUserPass(player, loginRequest);
 			player.sendPacket(new HoloLoginResponsePacket(false, "Incorrect username"));
 		} else if (user.isBanned()) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [banned]");
 			onLoginBanned(player, loginRequest);
 			player.sendPacket(new HoloLoginResponsePacket(false, "Sorry, you're banned!"));
 		} else if (isUserValid(user, loginRequest.getPassword())) {
+			StandardLog.onPlayerEvent(this, player, "logged in");
 			onSuccessfulLogin(user, player, loginRequest);
 			player.sendPacket(new HoloLoginResponsePacket(true, "", getGalaxies(), getCharacters(user.getUsername())));
 		} else {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password]");
 			onInvalidUserPass(player, loginRequest);
 			player.sendPacket(new HoloLoginResponsePacket(false, "Incorrect password"));
 		}
@@ -165,9 +170,12 @@ public class LoginService extends Service {
 			Player owner = obj.getOwner();
 			if (owner != null)
 				CloseConnectionIntent.broadcast(owner, DisconnectReason.APPLICATION);
-			Log.i("Deleted character %s for user %s", obj.getObjectName(), player.getUsername());
+			StandardLog.onPlayerEvent(this, player, "deleted character %s", obj);
 		} else {
-			Log.e("Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
+			if (obj == null)
+				StandardLog.onPlayerError(this, player, "failed to delete character %d", request.getPlayerId());
+			else
+				StandardLog.onPlayerError(this, player, "failed to delete character %s", obj);
 		}
 	}
 	
@@ -182,6 +190,7 @@ public class LoginService extends Service {
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = DataManager.getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect version: %s]", id.getVersion());
 			onLoginClientVersionError(player, id);
 			return;
 		}
@@ -189,16 +198,20 @@ public class LoginService extends Service {
 		UserMetadata user = userDatabase.getUser(id.getUsername());
 		player.setUsername(id.getUsername());
 		if (user == null) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username]");
 			onInvalidUserPass(player, id);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect username", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		} else if (user.isBanned()) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [banned]");
 			onLoginBanned(player, id);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Sorry, you're banned!", false));
 		} else if (isUserValid(user, id.getPassword())) {
+			StandardLog.onPlayerEvent(this, player, "logged in");
 			onSuccessfulLogin(user, player, id);
 			sendLoginSuccessPacket(player);
 		} else {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password]");
 			onInvalidUserPass(player, id);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect password", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
@@ -206,7 +219,6 @@ public class LoginService extends Service {
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
-		Log.i("%s cannot login due to invalid version code: %s, expected %s from %s", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getSocketAddress());
 		player.sendPacket(new ErrorMessage("Login Failed!", "Invalid Client Version Code: " + id.getVersion(), false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
@@ -222,18 +234,15 @@ public class LoginService extends Service {
 			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
 		player.setPlayerState(PlayerState.LOGGED_IN);
-		Log.i("%s connected to the login server from %s", player.getUsername(), loginRequest.getSocketAddress());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
 	private void onLoginBanned(Player player, SWGPacket loginRequest) {
-		Log.i("%s cannot login due to a ban, from %s", player.getUsername(), loginRequest.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
 	
 	private void onInvalidUserPass(Player player, SWGPacket loginRequest) {
-		Log.i("%s cannot login due to invalid user/pass from %s", player.getUsername(), loginRequest.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
