@@ -89,7 +89,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 			}
 		}
 		
-		teleportObject.moveToLocation(new Location(x, y, z, terrain));
+		teleportObject.moveToContainer(null, new Location(x, y, z, terrain));
 	}
 
 }

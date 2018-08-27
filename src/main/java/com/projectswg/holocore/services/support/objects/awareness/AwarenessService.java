@@ -44,6 +44,7 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedInte
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
 import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.intents.support.objects.swg.*;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
@@ -57,7 +58,6 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -128,9 +128,9 @@ public class AwarenessService extends Service {
 	private void processGalacticPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		if (packet instanceof DataTransform) {
-			handleDataTransform((DataTransform) packet);
+			handleDataTransform(gpi.getPlayer(), (DataTransform) packet);
 		} else if (packet instanceof DataTransformWithParent) {
-			handleDataTransformWithParent((DataTransformWithParent) packet);
+			handleDataTransformWithParent(gpi.getPlayer(), (DataTransformWithParent) packet);
 		} else if (packet instanceof CmdSceneReady) {
 			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
 		}
@@ -205,57 +205,66 @@ public class AwarenessService extends Service {
 		}
 		Location loc = creature.getWorldLocation();
 		player.sendPacket(new CmdStartScene(true, creature.getObjectId(), creature.getRace(), loc, ProjectSWG.getGalacticTime(), (int) (System.currentTimeMillis() / 1E3)));
-		Log.i("Zoning in %s with character %s to %s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), loc.getTerrain());
+		StandardLog.onPlayerEvent(this, player, "zoning in at %s %s", loc.getTerrain(), loc.getPosition());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcastAfterIntent(firstZoneIntent);
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		assert player.getPlayerState() == PlayerState.ZONING_IN;
 		player.setPlayerState(PlayerState.ZONED_IN);
-		Log.i("%s with character %s zoned in from %s", player.getUsername(), player.getCharacterName(), p.getSocketAddress());
+		StandardLog.onPlayerEvent(this, player, "zoned in from %s", p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
 		player.sendBufferedDeltas();
 	}
 	
-	private void handleDataTransform(DataTransform dt) {
-		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
-		if (!(obj instanceof CreatureObject)) {
-			Log.w("DataTransform object not CreatureObject! Was: " + (obj == null ? "null" : obj.getClass()));
+	private void handleDataTransform(Player player, DataTransform dt) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature == null) {
+			StandardLog.onPlayerError(this, player, "sent a DataTransform without being logged in");
 			return;
 		}
-		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
+		if (creature.getObjectId() != dt.getObjectId()) {
+			StandardLog.onPlayerError(this, player, "sent a DataTransform for another object [%d]", dt.getObjectId());
+			return;
+		}
+		
+		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
 		double speed = dt.getSpeed();
 		
-		if (((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT)) {
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
 			// If this is the primary rider, move the mount and all of the riders
-			CreatureObject mount = (CreatureObject) obj.getParent();
+			CreatureObject mount = (CreatureObject) creature.getParent();
 			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
 			
-			if (mount.getOwnerId() == obj.getObjectId()) {
+			if (mount.getOwnerId() == creature.getObjectId()) {
 				moveObjectWithTransform(mount, null, requestedLocation, speed);
 				for (SWGObject child : mount.getSlottedObjects()) {
 					moveObjectWithTransform(child, mount, requestedLocation, speed);
 				}
 			}
 		} else {
-			moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed());
+			moveObjectWithTransform(creature, null, requestedLocation, dt.getSpeed());
 		}
 	}
 	
-	private void handleDataTransformWithParent(DataTransformWithParent dt) {
-		SWGObject obj = ObjectLookup.getObjectById(dt.getObjectId());
+	private void handleDataTransformWithParent(Player player, DataTransformWithParent dt) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature == null) {
+			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent without being logged in");
+			return;
+		}
+		if (creature.getObjectId() != dt.getObjectId()) {
+			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent for another object [%d]", dt.getObjectId());
+			return;
+		}
 		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
-		if (!(obj instanceof CreatureObject)) {
-			Log.w("DataTransformWithParent object not CreatureObject! Was: " + (obj == null ? "null" : obj.getClass()));
-			return;
-		}
 		if (parent == null) {
-			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
+			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent with an unknown parent [%d]", dt.getCellId());
 			return;
 		}
-		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(obj.getTerrain()).build();
-		moveObjectWithTransform(obj, parent, requestedLocation, dt.getSpeed());
+		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
+		moveObjectWithTransform(creature, parent, requestedLocation, dt.getSpeed());
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {

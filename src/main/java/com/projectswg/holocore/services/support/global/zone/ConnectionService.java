@@ -33,6 +33,7 @@ import com.projectswg.holocore.intents.support.global.network.CloseConnectionInt
 import com.projectswg.holocore.intents.support.global.network.ForceLogoutIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
@@ -71,7 +72,7 @@ public class ConnectionService extends Service {
 				while (iter.hasNext()) {
 					DisappearPlayer p = iter.next();
 					if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-						disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
+						disappear(p.getPlayer());
 						iter.remove();
 					}
 				}
@@ -119,26 +120,26 @@ public class ConnectionService extends Service {
 		Player player = fli.getPlayer();
 		Objects.requireNonNull(player.getCreatureObject(), "ForceLogoutIntent must have a valid player with creature object!");
 		logOut(player);
-		disappear(player, false, DisconnectReason.APPLICATION);
+		disappear(player);
 	}
 	
-	private void setPlayerFlag(Player p, PlayerFlags flag) {
+	private void setPlayerFlag(Player p) {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.setFlagBitmask(flag);
+		player.setFlagBitmask(PlayerFlags.LD);
 	}
 	
-	private void clearPlayerFlag(Player p, PlayerFlags flag) {
+	private void clearPlayerFlag(Player p) {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.clearFlagBitmask(flag);
+		player.clearFlagBitmask(PlayerFlags.LD);
 	}
 	
 	private void zoneIn(Player p) {
 		ProjectSWG.getGalaxy().incrementPopulationCount();
-		clearPlayerFlag(p, PlayerFlags.LD);
+		clearPlayerFlag(p);
 		removeFromDisappear(p);
 		boolean unique = zonedInPlayers.add(p);
 		assert unique;
@@ -147,18 +148,18 @@ public class ConnectionService extends Service {
 	private void logOut(Player p) {
 		if (!zonedInPlayers.remove(p))
 			return;
-		Log.i("Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		StandardLog.onPlayerEvent(this, p, "logged out");
 		ProjectSWG.getGalaxy().decrementPopulationCount();
-		setPlayerFlag(p, PlayerFlags.LD);
+		setPlayerFlag(p);
 		removeFromDisappear(p);
 		updatePlayTime(p);
 		addToDisappear(p);
 	}
 	
-	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
+	private void disappear(Player p) {
 		if (p.getCreatureObject() == null)
 			return;
-		Log.i("Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
+		StandardLog.onPlayerEvent(this, p, "disappeared");
 		
 		removeFromDisappear(p);
 		IntentChain.broadcastChain(

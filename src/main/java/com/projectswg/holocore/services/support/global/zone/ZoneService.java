@@ -15,6 +15,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.zone.ZoneRequester;
@@ -115,7 +116,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		Log.i("%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
+		StandardLog.onPlayerEvent(this, player, "connected to zone server from %s", clientId.getSocketAddress());
 		player.setPlayerServer(PlayerServer.ZONE);
 		player.sendPacket(new HeartBeat());
 		player.sendPacket(new AccountFeatureBits());
