@@ -49,7 +49,11 @@ public class StandardLog {
 	}
 	
 	public static void onPlayerTrace(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		Log.t("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		String characterName = player.getCharacterName();
+		if (characterName.isEmpty())
+			Log.t("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		else
+			Log.t("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
 	}
 	
 	public static void onPlayerEvent(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
@@ -59,7 +63,11 @@ public class StandardLog {
 	}
 	
 	public static void onPlayerEvent(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		Log.d("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		String characterName = player.getCharacterName();
+		if (characterName.isEmpty())
+			Log.d("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		else
+			Log.d("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
 	}
 	
 	public static void onPlayerError(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
@@ -69,7 +77,11 @@ public class StandardLog {
 	}
 	
 	public static void onPlayerError(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		Log.e("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		String characterName = player.getCharacterName();
+		if (characterName.isEmpty())
+			Log.e("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
+		else
+			Log.e("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
 	}
 	
 }

@@ -113,6 +113,7 @@ public class Player implements Comparable<Player> {
 		return username;
 	}
 	
+	@NotNull
 	public String getCharacterName() {
 		if (creatureObject != null)
 			return creatureObject.getObjectName();
