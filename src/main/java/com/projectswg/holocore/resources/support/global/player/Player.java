@@ -40,12 +40,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player implements Comparable<Player> {
 	
 	private final List<DeltasMessage> bufferedDeltas;
-	private final AtomicBoolean bufferedDeltasSent;
 	private final IntentChain intentChain;
 	private final Object sendingLock;
 	private final long networkId;
@@ -63,7 +61,6 @@ public class Player implements Comparable<Player> {
 	
 	public Player(long networkId) {
 		this.bufferedDeltas = new ArrayList<>();
-		this.bufferedDeltasSent = new AtomicBoolean(false);
 		this.intentChain = new IntentChain();
 		this.sendingLock = new Object();
 		this.networkId = networkId;
@@ -161,19 +158,9 @@ public class Player implements Comparable<Player> {
 		return sendingLock;
 	}
 	
-	public void addBufferedDelta(DeltasMessage packet) {
-		synchronized (bufferedDeltas) {
-			if (bufferedDeltasSent.get())
-				sendPacket(packet);
-			else
-				bufferedDeltas.add(packet);
-		}
-	}
-	
 	public void sendBufferedDeltas() {
 		DeltasMessage [] packets;
 		synchronized (bufferedDeltas) {
-			bufferedDeltasSent.set(true);
 			packets = bufferedDeltas.toArray(new DeltasMessage[0]);
 			bufferedDeltas.clear();
 		}
@@ -183,8 +170,10 @@ public class Player implements Comparable<Player> {
 	public void sendPacket(SWGPacket ... packets) {
 		synchronized (getSendingLock()) {
 			for (SWGPacket p : packets) {
-				if (state == PlayerState.ZONING_IN && p instanceof DeltasMessage) {
-					addBufferedDelta((DeltasMessage) p);
+				if (state != PlayerState.ZONED_IN && p instanceof DeltasMessage) {
+					synchronized (bufferedDeltas) {
+						bufferedDeltas.add((DeltasMessage) p);
+					}
 					continue;
 				}
 				intentChain.broadcastAfter(new OutboundPacketIntent(this, p));
