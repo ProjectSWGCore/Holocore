@@ -50,7 +50,6 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -306,13 +305,15 @@ public class PlayerMountService extends Service {
 		boolean primary = mount.getSlottedObject("rider") == player;
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 		player.resetMovement();
-		player.moveToContainer(null, mount.getLocation());
+		player.moveToContainer(null);
+		player.moveToLocation(mount.getLocation());
 		if (primary) {
 			for (SWGObject child : mount.getSlottedObjects()) {
 				assert child instanceof CreatureObject;
 				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				((CreatureObject) child).resetMovement();
-				child.moveToContainer(null, mount.getLocation());
+				child.moveToContainer(null);
+				child.moveToLocation(mount.getLocation());
 			}
 			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		}
@@ -321,22 +322,22 @@ public class PlayerMountService extends Service {
 	}
 	
 	private void storeMount(@NotNull CreatureObject player, @NotNull CreatureObject mount, @NotNull IntangibleObject mountControlDevice) {
-		Collection<Mount> mounts = calledMounts.get(player);
-		if (mounts != null)
-			mounts.removeIf(p -> p.getMount().equals(mount));
-		
-		if (isMountable(mount)) {
-			mount.removeOptionFlags(OptionFlag.MOUNT);
-			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			
+		if (isMountable(mount) && mount.getOwnerId() == player.getObjectId()) {
 			// Dismount anyone riding the mount about to be stored
-			Collection<SWGObject> riders = mount.getSlots().values();
-			
-			for (SWGObject rider : riders) {
-				if (rider instanceof CreatureObject)
-					exitMount((CreatureObject) rider, mount);
+			if (mount.getSlottedObject("rider") != null) {
+				exitMount(player, mount); // Should automatically dismount all other riders, if applicable
+				assert mount.getSlottedObjects().isEmpty();
+				return;
 			}
 			
+			// Remove the record of the mount
+			Collection<Mount> mounts = calledMounts.get(player);
+			if (mounts != null)
+				mounts.remove(new Mount(mountControlDevice, mount));
+			
+			// Destroy the mount
+			mount.removeOptionFlags(OptionFlag.MOUNT);
+			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
 			DestroyObjectIntent.broadcast(mount);
 			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		}

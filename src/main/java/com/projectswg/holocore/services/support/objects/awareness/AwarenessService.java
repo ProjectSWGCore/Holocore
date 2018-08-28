@@ -314,31 +314,31 @@ public class AwarenessService extends Service {
 	}
 	
 	private static void onObjectMovedInParent(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+		if (oldParent != newParent)
+			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newParent.getObjectId(), obj.getSlotArrangement()));
+		
 		// Slotted objects don't get position updates - they inherit their parent's location, plus a client-defined offset (e.g. armor, mounts)
 		if (obj.getSlotArrangement() == -1) {
 			int counter = obj.getNextUpdateCount();
 			if (forceSelfUpdate)
-				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, newParent.getObjectId(), newLocation, (byte) speed));
+				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, newParent.getObjectId(), newLocation, (byte) Math.round(speed)));
 			
 			if (!oldLocation.equals(newLocation))
-				obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), newParent.getObjectId(), counter, newLocation, (byte) speed));
+				obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), newParent.getObjectId(), counter, newLocation, (byte) Math.round(speed)));
 		}
-		
-		if (oldParent != newParent)
-			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newParent.getObjectId(), obj.getSlotArrangement()));
 	}
 	
 	private static void onObjectMovedInWorld(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
 		int counter = obj.getNextUpdateCount();
 		
-		if (forceSelfUpdate)
-			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, newLocation, (byte) speed));
-		
-		if (!oldLocation.equals(newLocation))
-			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, newLocation, (byte) speed));
-		
 		if (oldParent != null)
 			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
+		
+		if (forceSelfUpdate)
+			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, newLocation, (byte) Math.round(speed)));
+		
+		if (!oldLocation.equals(newLocation))
+			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, newLocation, (byte) Math.round(speed)));
 	}
 	
 }
