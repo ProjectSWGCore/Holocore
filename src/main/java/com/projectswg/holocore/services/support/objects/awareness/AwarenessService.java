@@ -37,6 +37,7 @@ import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.holocore.ProjectSWG;
+import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -261,8 +262,17 @@ public class AwarenessService extends Service {
 			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent with an unknown parent [%d]", dt.getCellId());
 			return;
 		}
-		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
-		moveObjectWithTransform(creature, parent, requestedLocation, dt.getSpeed());
+		
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
+			// If this is the primary rider, move the mount and all of the riders
+			CreatureObject mount = (CreatureObject) creature.getParent();
+			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
+			mount.sendObservers(new DataTransform(mount.getObjectId(), 0, mount.getNextUpdateCount(), mount.getLocation(), 0));
+			DismountIntent.broadcast(creature, mount);
+		} else {
+			Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
+			moveObjectWithTransform(creature, parent, requestedLocation, dt.getSpeed());
+		}
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
