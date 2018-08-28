@@ -38,6 +38,7 @@ import com.projectswg.holocore.intents.support.global.zone.creation.CreatedChara
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
@@ -161,7 +162,7 @@ public class CharacterCreationService extends Service {
 		assert creature.getPlayerObject() != null;
 		assert creature.isPlayer();
 		assert creature.getObjectId() > 0;
-		Log.i("%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
+		StandardLog.onPlayerEvent(this, player, "created character '%s' from %s", create.getName(), create.getSocketAddress());
 		player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 		new CreatedCharacterIntent(creature).broadcast(); //Replaced PlayerEventIntent(PE_CREATE_CHARACTER)
 	}
@@ -170,44 +171,42 @@ public class CharacterCreationService extends Service {
 		// Valid Name
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err != ErrorMessage.NAME_APPROVED) {
-			sendCharCreationFailure(player, create, err);
+			sendCharCreationFailure(player, create, err, "bad name");
 			return null;
 		}
 		// Too many characters
 		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
 		if (max != 0 && getCharacterCount(player.getUsername()) >= max) {
-			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS);
+			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS, "too many characters");
 			return null;
 		}
 		// Created too quickly
 		if (!creationRestriction.isAbleToCreate(player)) {
-			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_TOO_FAST);
+			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_TOO_FAST, "created characters too frequently");
 			return null;
 		}
 		// Test for successful creation
 		CreatureObject creature = createCharacter(player, create);
 		if (creature == null) {
-			Log.e("Failed to create CreatureObject!");
-			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
+			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "can't create CreatureObject");
 			return null;
 		}
 		// Test for hacking
 		if (!creationRestriction.createdCharacter(player)) {
-			new DestroyObjectIntent(creature).broadcast();
-			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
+			DestroyObjectIntent.broadcast(creature);
+			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "too many attempts - hacked");
 			return null;
 		}
 		// Test for successful database insertion
 		if (!createCharacterInDb(creature, player)) {
-			Log.e("Failed to create character %s for user %s with server error from %s", create.getName(), player.getUsername(), create.getSocketAddress());
-			new DestroyObjectIntent(creature).broadcast();
-			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
+			DestroyObjectIntent.broadcast(creature);
+			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "failed to insert into DB");
 			return null;
 		}
 		return creature;
 	}
 	
-	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
+	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err, String actualReason) {
 		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
 		switch (err) {
 			case NAME_APPROVED:
@@ -226,7 +225,7 @@ public class CharacterCreationService extends Service {
 			default:
 				break;
 		}
-		Log.e("Failed to create character %s for user %s with error %s and reason %s from %s", create.getName(), player.getUsername(), err, reason, create.getSocketAddress());
+		StandardLog.onPlayerError(this, player, "failed to create character '%s' with server error [%s] from %s", create.getName(), actualReason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
@@ -297,7 +296,7 @@ public class CharacterCreationService extends Service {
 		synchronized (lockedNames) {
 			unlockName(player);
 			lockedNames.put(firstName, player);
-			Log.i("Locked name %s for user %s", firstName, player.getUsername());
+			StandardLog.onPlayerTrace(this, player, "locked name '%s' [full: '%s']", firstName, name);
 		}
 		return true;
 	}
@@ -314,7 +313,7 @@ public class CharacterCreationService extends Service {
 			}
 			if (fName != null) {
 				if (lockedNames.remove(fName) != null)
-					Log.i("Unlocked name %s for user %s", fName, player.getUsername());
+					StandardLog.onPlayerTrace(this, player, "unlocked name '%s'", fName);
 			}
 		}
 	}
