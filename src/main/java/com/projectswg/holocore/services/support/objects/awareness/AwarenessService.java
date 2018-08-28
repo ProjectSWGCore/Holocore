@@ -106,21 +106,19 @@ public class AwarenessService extends Service {
 	@IntentHandler
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		@NotNull SWGObject obj = oti.getObject();
-		@Nullable SWGObject oldParent = obj.getParent();
+		@Nullable SWGObject oldParent = oti.getOldParent();
 		@Nullable SWGObject newParent = oti.getNewParent();
-		@NotNull Location oldLocation = obj.getLocation();
+		@NotNull Location oldLocation = oti.getOldLocation();
 		@NotNull Location newLocation = oti.getNewLocation();
 		
 		if (isPlayerZoneInRequired(obj, newParent, newLocation)) {
 			handleZoneIn((CreatureObject) obj, newLocation, newParent);
-		} else {
-			synchronized (obj.getAwarenessLock()) {
-				obj.systemMove(newParent, newLocation);
-				awareness.updateObject(obj);
-			}
+			return;
 		}
 		
+		update(obj);
 		update(oldParent);
+		
 		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, true, 0);
 	}
 	

@@ -305,15 +305,13 @@ public class PlayerMountService extends Service {
 		boolean primary = mount.getSlottedObject("rider") == player;
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 		player.resetMovement();
-		player.moveToContainer(null);
-		player.moveToLocation(mount.getLocation());
+		player.moveToContainer(null, mount.getLocation());
 		if (primary) {
 			for (SWGObject child : mount.getSlottedObjects()) {
 				assert child instanceof CreatureObject;
 				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				((CreatureObject) child).resetMovement();
-				child.moveToContainer(null);
-				child.moveToLocation(mount.getLocation());
+				child.moveToContainer(null, mount.getLocation());
 			}
 			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		}

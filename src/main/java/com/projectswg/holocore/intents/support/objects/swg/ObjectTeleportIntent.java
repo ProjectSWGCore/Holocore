@@ -37,16 +37,18 @@ public class ObjectTeleportIntent extends Intent {
 	private final SWGObject object;
 	private final SWGObject oldParent;
 	private final SWGObject newParent;
+	private final Location oldLocation;
 	private final Location newLocation;
 	
-	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location newLocation) {
-		this(object, oldParent, null, newLocation);
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		this(object, oldParent, null, oldLocation, newLocation);
 	}
 	
-	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location newLocation) {
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
 		this.object = object;
 		this.oldParent = oldParent;
 		this.newParent = newParent;
+		this.oldLocation = oldLocation;
 		this.newLocation = newLocation;
 	}
 	
@@ -66,40 +68,21 @@ public class ObjectTeleportIntent extends Intent {
 	}
 	
 	@NotNull
+	public Location getOldLocation() {
+		return oldLocation;
+	}
+	
+	@NotNull
 	public Location getNewLocation() {
 		return newLocation;
 	}
 	
-	public static void broadcast(SWGObject object, SWGObject oldParent, Location newLocation) {
-		new ObjectTeleportIntent(object, oldParent, newLocation).broadcast();
+	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, oldLocation, newLocation).broadcast();
 	}
 	
-	public static void broadcast(SWGObject object, SWGObject oldParent, SWGObject newParent, Location newLocation) {
-		new ObjectTeleportIntent(object, oldParent, newParent, newLocation).broadcast();
-	}
-	
-	/**
-	 * Teleports the specified object to the specified coordinates within the same parent and terrain
-	 * @param object the object to teleport
-	 * @param x the new x location
-	 * @param y the new y location
-	 * @param z the new z location
-	 */
-	public static void broadcast(SWGObject object, double x, double y, double z) {
-		new ObjectTeleportIntent(object, object.getParent(), object.getParent(), Location.builder(object.getLocation()).setPosition(x, y, z).build());
-	}
-	
-	/**
-	 * Teleports the specified object to the specified coordinates within the specified parent and terrain
-	 * @param object the object to teleport
-	 * @param oldParent the previous object parent
-	 * @param newParent the object to teleport into
-	 * @param x the new x location
-	 * @param y the new y location
-	 * @param z the new z location
-	 */
-	public static void broadcast(SWGObject object, SWGObject oldParent, SWGObject newParent, double x, double y, double z) {
-		new ObjectTeleportIntent(object, oldParent, newParent, Location.builder(object.getLocation()).setPosition(x, y, z).build());
+	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, newParent, oldLocation, newLocation).broadcast();
 	}
 	
 }

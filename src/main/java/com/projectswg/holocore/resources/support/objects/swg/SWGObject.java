@@ -247,9 +247,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 */
 	public void moveToContainer(@Nullable SWGObject newParent, @NotNull Location newLocation) {
 		assert newParent != this;
+		Location oldLocation = getLocation();
 		SWGObject oldParent = parent;
 		if (systemMove(newParent, newLocation))
-			broadcast(new ObjectTeleportIntent(this, oldParent, newParent, newLocation));
+			broadcast(new ObjectTeleportIntent(this, oldParent, newParent, oldLocation, newLocation));
 	}
 	
 	/**
