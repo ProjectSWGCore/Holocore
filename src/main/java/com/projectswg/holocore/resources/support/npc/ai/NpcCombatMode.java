@@ -16,6 +16,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -87,31 +88,18 @@ public class NpcCombatMode extends NpcMode {
 	}
 	
 	private void performCombatAction() {
-		CreatureObject target = getPrimaryTarget();
+		final CreatureObject target = getPrimaryTarget();
 		if (target == null)
 			return;
 		
-		AIObject obj = getAI();
-		WeaponObject weapon = obj.getEquippedWeapon();
-		double targetRange = Math.max(1, weapon.getMaxRange()/3);
-		boolean lineOfSight = obj.isLineOfSight(target);
-		Location targetLocation = target.getWorldLocation();
+		final AIObject obj = getAI();
+		final WeaponObject weapon = obj.getEquippedWeapon();
+		final double targetRange = Math.max(1, weapon.getMaxRange()/3);
+		final boolean lineOfSight = obj.isLineOfSight(target);
+		final Location targetLocation = target.getWorldLocation();
 		
 		if (obj.getWorldLocation().distanceTo(targetLocation) >= targetRange || !lineOfSight) {
-			Location prev = previousTargetLocation.getAndSet(targetLocation);
-			SWGObject targetParent = target.getEffectiveParent();
-			
-			if (prev == null) {
-				StartNpcMovementIntent.broadcast(obj, targetParent, target.getLocation(), runSpeed);
-			} else if (prev.distanceTo(targetLocation) >= 1 || !lineOfSight) {
-				Point3D delta = targetLocation.getPosition();
-				delta.translate(-prev.getX(), -prev.getY(), -prev.getZ());
-				Location destination = target.getLocation();
-				if (delta.flatDistanceTo(0, 0) < 50) {
-					destination = Location.builder(destination).translatePosition(delta.getX()*2, delta.getY()*2, delta.getZ()*2).build();
-				}
-				StartNpcMovementIntent.broadcast(obj, targetParent, destination, runSpeed);
-			}
+			updateMovement(target, targetLocation, lineOfSight);
 		} else {
 			StopNpcMovementIntent.broadcast(obj);
 		}
@@ -120,6 +108,21 @@ public class NpcCombatMode extends NpcMode {
 			attack(target, weapon);
 		}
 		iteration.incrementAndGet();
+	}
+	
+	private void updateMovement(CreatureObject target, Location targetLocation, boolean lineOfSight) {
+		final AIObject obj = getAI();
+		final Location prev = previousTargetLocation.getAndSet(targetLocation);
+		final SWGObject targetParent = target.getEffectiveParent();
+		
+		if (prev == null) {
+			StartNpcMovementIntent.broadcast(obj, targetParent, target.getLocation(), runSpeed);
+		} else if (prev.distanceTo(targetLocation) >= 1 || !lineOfSight) {
+			Point3D delta = targetLocation.getPosition();
+			delta.translate(-prev.getX(), -prev.getY(), -prev.getZ());
+			Location destination = delta.flatDistanceTo(0, 0) < 50 ? Location.builder(target.getLocation()).translatePosition(delta.getX() * 2, delta.getY() * 2, delta.getZ() * 2).build() : target.getLocation();
+			StartNpcMovementIntent.broadcast(obj, targetParent, destination, runSpeed);
+		}
 	}
 	
 	private void attack(CreatureObject target, WeaponObject weapon) {
@@ -133,42 +136,15 @@ public class NpcCombatMode extends NpcMode {
 			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0);
 			return;
 		}
-		switch (weapon.getType()) {
-			case PISTOL:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("rangedShotPistol"), 0);
-				break;
-			case RIFLE:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("rangedShotRifle"), 0);
-				break;
-			case LIGHT_RIFLE:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("rangedShotLightRifle"), 0);
-				break;
-			case CARBINE:
-			case HEAVY:
-			case HEAVY_WEAPON:
-			case DIRECTIONAL_TARGET_WEAPON:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("rangedShot"), 0);
-				break;
-			case ONE_HANDED_MELEE:
-			case TWO_HANDED_MELEE:
-			case UNARMED:
-			case POLEARM_MELEE:
-			case THROWN:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("creatureMeleeAttack"), 0);
-				break;
-			case ONE_HANDED_SABER:
-			case TWO_HANDED_SABER:
-			case POLEARM_SABER:
-				QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("saberHit"), 0);
-				break;
-		}
+		
+		QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand(getWeaponCommand(weapon)), 0);
 	}
 	
 	@Nullable
 	private CreatureObject getPrimaryTarget() {
 		return targets.stream()
 				.filter(creo -> creo.isEnemyOf(getAI()))
-				.filter(creo -> creo.getHealth() > 0) // Don't attack if they're already dead
+				.filter(creo -> (creo.getPosture() != Posture.INCAPACITATED || getSpawner().isDeathblow()) && creo.getPosture() != Posture.DEAD) // Don't attack if they're already dead
 				.min(Comparator.comparingInt(CreatureObject::getHealth)).orElse(null);
 	}
 	
@@ -181,6 +157,34 @@ public class NpcCombatMode extends NpcMode {
 				.map(AIObject.class::cast)
 				.filter(ai -> targets.stream().anyMatch(ai::isEnemyOf))
 				.forEach(ai -> StartNpcCombatIntent.broadcast(ai, targets));
+	}
+	
+	@NotNull
+	private static String getWeaponCommand(WeaponObject weapon) {
+		switch (weapon.getType()) {
+			case PISTOL:
+				return "rangedShotPistol";
+			case RIFLE:
+				return "rangedShotRifle";
+			case LIGHT_RIFLE:
+				return "rangedShotLightRifle";
+			case CARBINE:
+			case HEAVY:
+			case HEAVY_WEAPON:
+			case DIRECTIONAL_TARGET_WEAPON:
+				return "rangedShot";
+			case ONE_HANDED_MELEE:
+			case TWO_HANDED_MELEE:
+			case UNARMED:
+			case POLEARM_MELEE:
+			case THROWN:
+			default:
+				return "creatureMeleeAttack";
+			case ONE_HANDED_SABER:
+			case TWO_HANDED_SABER:
+			case POLEARM_SABER:
+				return "saberHit";
+		}
 	}
 	
 }
