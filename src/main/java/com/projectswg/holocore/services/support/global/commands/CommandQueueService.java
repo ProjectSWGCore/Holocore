@@ -11,6 +11,7 @@ import com.projectswg.holocore.intents.support.global.command.ExecuteCommandInte
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -123,7 +124,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void startCommand(EnqueuedCommand command) {
-			Log.t("%s: start command %s", command.getSource().getObjectName(), command.getCommand());
+			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "started command %s", command.getCommand().getName());
 			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue())
 				commandQueue.offer(command);
 			else
@@ -131,7 +132,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void execute(EnqueuedCommand command) {
-			Log.t("%s: execute command %s", command.getSource().getObjectName(), command.getCommand());
+			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "execute command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
 			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
