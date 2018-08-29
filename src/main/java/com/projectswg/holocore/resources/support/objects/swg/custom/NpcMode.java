@@ -7,15 +7,12 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 import java.util.Collection;
-import java.util.Random;
 
 public abstract class NpcMode {
 	
-	private final Random random;
 	private final AIObject obj;
 	
 	public NpcMode(AIObject obj) {
-		this.random = new Random();
 		this.obj = obj;
 	}
 	
@@ -72,10 +69,6 @@ public abstract class NpcMode {
 	
 	public final AIObject getAI() {
 		return obj;
-	}
-	
-	public final Random getRandom() {
-		return random;
 	}
 	
 	public final Spawner getSpawner() {
