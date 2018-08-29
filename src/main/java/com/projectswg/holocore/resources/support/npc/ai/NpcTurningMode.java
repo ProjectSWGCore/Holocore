@@ -30,6 +30,9 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * AI object that loiters the area
  */
@@ -41,17 +44,18 @@ public class NpcTurningMode extends NpcMode {
 	
 	@Override
 	public void act() {
+		Random random = ThreadLocalRandom.current();
 		if (isRooted()) {
-			queueNextLoop(10000+getRandom().nextInt(5));
+			queueNextLoop(10000+ random.nextInt(5));
 			return;
 		}
 		
-		if (getRandom().nextDouble() > 0.25) // Only a 25% movement chance
+		if (random.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
-		double theta = getRandom().nextDouble() * 360;
+		double theta = random.nextDouble() * 360;
 		
 		walkTo(Location.builder(getAI().getLocation()).setHeading(theta).build());
-		queueNextLoop(30 + getRandom().nextInt(10));
+		queueNextLoop(30 + random.nextInt(10));
 	}
 	
 }
