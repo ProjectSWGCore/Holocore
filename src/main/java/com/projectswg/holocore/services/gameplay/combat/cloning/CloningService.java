@@ -324,6 +324,7 @@ public class CloningService extends Service {
 			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
 		}
 		
+		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", cellObject, cloneLocation);
 		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
