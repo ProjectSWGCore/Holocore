@@ -9,7 +9,6 @@ import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -226,13 +225,10 @@ public class CloningService extends Service {
 	}
 	
 	private void showSuiWindow(CreatureObject corpse) {
-		Terrain corpseTerrain = corpse.getTerrain();
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
 		
-		if (availableFacilities.isEmpty()) {
-			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
-			return;
-		}
+		if (availableFacilities.isEmpty())
+			availableFacilities.add(defaultCloner);
 		
 		createSuiWindow(availableFacilities, corpse).display(corpse.getOwner());
 	}
@@ -274,7 +270,7 @@ public class CloningService extends Service {
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
-			Log.e("%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", corpse, selectedFacility);
+			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the object template is not in cloning_respawn.sdb", selectedFacility);
 			return CloneResult.TEMPLATE_MISSING;
 		}
 
@@ -282,7 +278,7 @@ public class CloningService extends Service {
 		CellObject cellObject = selectedFacility.getCellByName(cellName);
 
 		if (cellObject == null) {
-			Log.e("Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
+			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the target cell is invalid", selectedFacility);
 			return CloneResult.INVALID_CELL;
 		}
 		
@@ -369,7 +365,7 @@ public class CloningService extends Service {
 			suiWindow.close(corpseOwner);
 			forceClone(corpse, facilitiesInTerrain);
 		} else {
-			Log.w("Could not expire timer for %s because none was active", corpse);
+			StandardLog.onPlayerError(this, corpse, "could not be force cloned because no timer was active");
 		}
 	}
 	
