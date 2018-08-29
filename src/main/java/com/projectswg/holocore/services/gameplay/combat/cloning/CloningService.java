@@ -39,6 +39,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -51,18 +52,12 @@ public class CloningService extends Service {
 	private final Map<String, FacilityData> facilityDataMap;
 	private final List<BuildingObject> cloningFacilities;
 	private final ScheduledThreadPool executor;
-	private final Random random;
-	
-	private BuildingObject defaultCloner;
 	
 	public CloningService() {
 		this.reviveTimers = new HashMap<>();
 		this.facilityDataMap = new HashMap<>();
 		this.cloningFacilities = new ArrayList<>();
 		this.executor = new ScheduledThreadPool(1, "combat-cloning-service");
-		this.random = new Random();
-		
-		this.defaultCloner = null;
 	}
 	
 	@Override
@@ -74,15 +69,6 @@ public class CloningService extends Service {
 	@Override
 	public boolean start() {
 		executor.start();
-		
-		long clonerId = DataLoader.buildings().getBuilding("tat_moseisley_cloning1").getId();
-		if (clonerId != 0) {
-			defaultCloner = (BuildingObject) ObjectLookup.getObjectById(clonerId);
-		}
-		if (defaultCloner == null) {
-			Log.e("No default cloner found with building id: 'tat_moseisley_cloning1'");
-			return false;
-		}
 		return true;
 	}
 	
@@ -213,8 +199,11 @@ public class CloningService extends Service {
 	
 	private void scheduleCloneTimer(CreatureObject corpse) {
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
-		if (availableFacilities.isEmpty())
-			availableFacilities.add(defaultCloner);
+		if (availableFacilities.isEmpty()) {
+			BuildingObject defaultCloner = getDefaultCloner();
+			if (defaultCloner != null)
+				availableFacilities.add(defaultCloner);
+		}
 		
 		SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
@@ -227,8 +216,11 @@ public class CloningService extends Service {
 	private void showSuiWindow(CreatureObject corpse) {
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
 		
-		if (availableFacilities.isEmpty())
-			availableFacilities.add(defaultCloner);
+		if (availableFacilities.isEmpty()) {
+			BuildingObject defaultCloner = getDefaultCloner();
+			if (defaultCloner != null)
+				availableFacilities.add(defaultCloner);
+		}
 		
 		createSuiWindow(availableFacilities, corpse).display(corpse.getOwner());
 	}
@@ -305,7 +297,7 @@ public class CloningService extends Service {
 		int tubeCount = tubeData.length;
 
 		if (tubeCount > 0) {
-			TubeData randomData = tubeData[random.nextInt(tubeCount)];
+			TubeData randomData = tubeData[ThreadLocalRandom.current().nextInt(tubeCount)];
 			cloneLocation.setTerrain(facilityLocation.getTerrain());
 			cloneLocation.setPosition(randomData.getTubeX(), 0, randomData.getTubeZ());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
@@ -398,6 +390,15 @@ public class CloningService extends Service {
 		PvpFaction factionRestriction = facilityData.getFactionRestriction();
 		
 		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
+	}
+	
+	private static BuildingObject getDefaultCloner() {
+		long clonerId = DataLoader.buildings().getBuilding("tat_moseisley_cloning1").getId();
+		BuildingObject defaultCloner = (clonerId == 0) ? null : (BuildingObject) ObjectLookup.getObjectById(clonerId);
+		if (defaultCloner == null)
+			Log.e("No default cloner found with building id: 'tat_moseisley_cloning1'");
+		
+		return defaultCloner;
 	}
 	
 	private static class FacilityData {
