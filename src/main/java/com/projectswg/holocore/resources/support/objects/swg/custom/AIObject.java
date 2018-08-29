@@ -91,9 +91,9 @@ public class AIObject extends CreatureObject {
 		CreatureObject player = (CreatureObject) aware;
 		if (!player.isLoggedInPlayer())
 			return;
-		double distance = getWorldLocation().flatDistanceTo(aware.getWorldLocation());
+		double distance = getLocation().flatDistanceTo(aware.getLocation());
 		NpcMode activeMode = this.activeMode;
-		if (distance <= 300) {
+		if (distance <= 100) {
 			if (playersNearby.add(player)) {
 				if (activeMode != null)
 					activeMode.onPlayerEnterAware(player, distance);
