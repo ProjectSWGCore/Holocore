@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.world.travel;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
@@ -263,10 +264,8 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		
-		if (player.getParent() != null) {
-			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when inside a container", mount);
+		if (player.getParent() != null || player.getPosture() != Posture.UPRIGHT)
 			return;
-		}
 		
 		player.setStatesBitmask(CreatureState.RIDING_MOUNT);
 		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
