@@ -6,6 +6,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -98,6 +100,8 @@ public class NavigationPoint {
 	}
 	
 	public static List<NavigationPoint> from(@Nullable SWGObject sourceParent, @NotNull Location source, @Nullable SWGObject destinationParent, @NotNull Location destination, double speed) {
+		if (destinationParent instanceof CreatureObject && ((CreatureObject) destinationParent).hasOptionFlags(OptionFlag.MOUNT))
+			destinationParent = null;
 		assert sourceParent == null || sourceParent instanceof CellObject;
 		assert destinationParent == null || destinationParent instanceof CellObject;
 		List<Portal> route = getBuildingRoute((CellObject) sourceParent, (CellObject) destinationParent, source, destination);
