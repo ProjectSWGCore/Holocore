@@ -213,13 +213,9 @@ public class CloningService extends Service {
 	}
 	
 	private void scheduleCloneTimer(CreatureObject corpse) {
-		Terrain corpseTerrain = corpse.getTerrain();
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
-		
-		if (availableFacilities.isEmpty()) {
-			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
-			return;
-		}
+		if (availableFacilities.isEmpty())
+			availableFacilities.add(defaultCloner);
 		
 		SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
