@@ -8,6 +8,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.Collection;
 
@@ -25,8 +26,7 @@ public class AIObjectRadial implements RadialHandlerInterface {
 			return;
 		}
 		
-		options.add(RadialOption.create(RadialItem.LOOT,
-				RadialOption.create(RadialItem.LOOT)));
+		options.add(RadialOption.create(RadialItem.LOOT, RadialOption.create(RadialItem.LOOT_ALL)));
 	}
 	
 	@Override

@@ -33,6 +33,7 @@ import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandler;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -75,9 +76,17 @@ public class RadialService extends Service {
 			return;
 		}
 		
-		Set<RadialOption> options = new LinkedHashSet<>(request.getOptions());
-		RadialHandler.INSTANCE.getOptions(options, player, target);
-		sendResponse(player, target, options, request.getCounter());
+		StandardLog.onPlayerTrace(this, player, "requested radials for %s", target);
+		LinkedHashMap<RadialItem, RadialOption> options = new LinkedHashMap<>();
+		for (RadialOption option : request.getOptions())
+			options.put(option.getType(), option);
+		
+		Set<RadialOption> serverOptions = new LinkedHashSet<>();
+		RadialHandler.INSTANCE.getOptions(serverOptions, player, target);
+		for (RadialOption option : serverOptions)
+			options.put(option.getType(), option);
+		
+		sendResponse(player, target, options.values(), request.getCounter());
 	}
 	
 	private void onSelection(Player player, ObjectMenuSelect select) {
@@ -97,6 +106,7 @@ public class RadialService extends Service {
 			return;
 		}
 		
+		StandardLog.onPlayerTrace(this, player, "selected radial %s for %s", selection, target);
 		RadialHandler.INSTANCE.handleSelection(player, target, selection);
 	}
 	
