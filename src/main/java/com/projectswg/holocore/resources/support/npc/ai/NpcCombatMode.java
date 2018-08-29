@@ -60,6 +60,13 @@ public class NpcCombatMode extends NpcMode {
 	}
 	
 	@Override
+	public void onModeEnd() {
+		final AIObject obj = getAI();
+		obj.setIntendedTargetId(0);
+		obj.setLookAtTargetId(0);
+	}
+	
+	@Override
 	public void act() {
 		if (isRooted()) {
 			queueNextLoop(500);
