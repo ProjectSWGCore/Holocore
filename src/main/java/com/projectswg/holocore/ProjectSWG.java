@@ -93,7 +93,7 @@ public class ProjectSWG {
 		setupParameters(args);
 		try (IntentManager intentManager = new IntentManager(false, Runtime.getRuntime().availableProcessors(), 8)) {
 			IntentManager.setInstance(intentManager);
-			List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager());
+			List<ServiceBase> managers = Arrays.asList(new SupportManager(), new GameplayManager());
 			managers.forEach(m -> m.setIntentManager(intentManager));
 			
 			setStatus(ServerStatus.INITIALIZING);

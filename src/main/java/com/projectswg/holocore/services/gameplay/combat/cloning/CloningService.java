@@ -21,6 +21,7 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -29,6 +30,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -52,12 +54,16 @@ public class CloningService extends Service {
 	private final ScheduledThreadPool executor;
 	private final Random random;
 	
+	private BuildingObject defaultCloner;
+	
 	public CloningService() {
 		this.reviveTimers = new HashMap<>();
 		this.facilityDataMap = new HashMap<>();
 		this.cloningFacilities = new ArrayList<>();
 		this.executor = new ScheduledThreadPool(1, "combat-cloning-service");
 		this.random = new Random();
+		
+		this.defaultCloner = null;
 	}
 	
 	@Override
@@ -69,6 +75,15 @@ public class CloningService extends Service {
 	@Override
 	public boolean start() {
 		executor.start();
+		
+		long clonerId = DataLoader.buildings().getBuilding("tat_moseisley_cloning1").getId();
+		if (clonerId != 0) {
+			defaultCloner = (BuildingObject) ObjectLookup.getObjectById(clonerId);
+		}
+		if (defaultCloner == null) {
+			Log.e("No default cloner found with building id: 'tat_moseisley_cloning1'");
+			return false;
+		}
 		return true;
 	}
 	
@@ -170,9 +185,9 @@ public class CloningService extends Service {
 	
 	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		CreatureObject creature = i.getPlayer().getCreatureObject();
 		switch(i.getEvent()) {
 			case PE_DISAPPEAR: {
-				CreatureObject creature = i.getPlayer().getCreatureObject();
 				Future<?> reviveTimer = reviveTimers.remove(creature);
 				
 				if (reviveTimer != null) {
@@ -182,16 +197,16 @@ public class CloningService extends Service {
 				break;
 			}
 			
-			case PE_FIRST_ZONE: {
-				CreatureObject creature = i.getPlayer().getCreatureObject();
-
-				if (creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
+			case PE_FIRST_ZONE:
+				if (creature.getPosture() == Posture.DEAD) {
 					// They're dead but they have no active revive timer.
 					// In this case, they didn't clone before the application was shut down and started back up.
-					scheduleCloneTimer(creature);
+					if (reviveTimers.containsKey(creature))
+						showSuiWindow(creature);
+					else
+						scheduleCloneTimer(creature);
 				}
 				break;
-			}
 			default:
 				break;
 		}
@@ -205,13 +220,25 @@ public class CloningService extends Service {
 			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
 			return;
 		}
-
+		
 		SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
 		cloningWindow.display(corpse.getOwner());
 		synchronized (reviveTimers) {
 			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER), () -> expireCloneTimer(corpse, availableFacilities, cloningWindow)));
 		}
+	}
+	
+	private void showSuiWindow(CreatureObject corpse) {
+		Terrain corpseTerrain = corpse.getTerrain();
+		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
+		
+		if (availableFacilities.isEmpty()) {
+			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
+			return;
+		}
+		
+		createSuiWindow(availableFacilities, corpse).display(corpse.getOwner());
 	}
 	
 	private SuiWindow createSuiWindow(List<BuildingObject> availableFacilities, CreatureObject corpse) {

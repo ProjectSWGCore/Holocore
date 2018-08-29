@@ -27,6 +27,8 @@
 package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
@@ -58,14 +60,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * Created by Mads on 19-06-2017.
- */
 public class PlayerMountService extends Service {
 	
 	// TODO no-vehicle zones (does not affect creature mounts)
 	
-	private final Map<CreatureObject, Set<Mount>> calledMounts;	// TODO rename Mount class and this field
+	private final Map<CreatureObject, Set<Mount>> calledMounts;
 	
 	public PlayerMountService() {
 		this.calledMounts = new ConcurrentHashMap<>();
@@ -86,6 +85,20 @@ public class PlayerMountService extends Service {
 	String pcdForVehicleDeed(String deedTemplate) {
 		assert deedTemplate.startsWith("object/tangible/deed/") : "invalid vehicle deed";
 		return deedTemplate.replace("tangible/deed/vehicle_deed", "intangible/vehicle").replace("deed", "pcd");
+	}
+	
+	@IntentHandler
+	private void handleCreatureIncapacitatedIntent(CreatureIncapacitatedIntent cii) {
+		CreatureObject player = cii.getIncappee();
+		if (player.isPlayer())
+			exitMount(player);
+	}
+	
+	@IntentHandler
+	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
+		CreatureObject player = cki.getCorpse();
+		if (player.isPlayer())
+			exitMount(player);
 	}
 	
 	@IntentHandler
@@ -296,36 +309,48 @@ public class PlayerMountService extends Service {
 		StandardLog.onPlayerEvent(this, player, "mounted %s", mount);
 	}
 	
+	private void exitMount(CreatureObject player) {
+		if (!player.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			return;
+		SWGObject parent = player.getParent();
+		if (!(parent instanceof CreatureObject))
+			return;
+		CreatureObject mount = (CreatureObject) parent;
+		if (isMountable(mount) && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE))
+			exitMount(player, mount);
+	}
+	
 	private void exitMount(CreatureObject player, CreatureObject mount) {
 		if (!isMountable(mount)) {
 			StandardLog.onPlayerTrace(this, player, "attempted to dismount %s when it's not mountable", mount);
 			return;
 		}
 		
-		boolean primary = mount.getSlottedObject("rider") == player;
-		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		player.resetMovement();
-		player.moveToContainer(null, mount.getLocation());
-		if (primary) {
-			for (SWGObject child : mount.getSlottedObjects()) {
-				assert child instanceof CreatureObject;
-				((CreatureObject) child).clearStatesBitmask(CreatureState.RIDING_MOUNT);
-				((CreatureObject) child).resetMovement();
-				child.moveToContainer(null, mount.getLocation());
+		clearPlayerMountState(player);
+		if (player.getParent() == mount) {
+			player.moveToContainer(null, mount.getLocation());
+			if (mount.getSlottedObject("rider") == null) {
+				for (SWGObject child : mount.getSlottedObjects()) {
+					assert child instanceof CreatureObject;
+					clearPlayerMountState((CreatureObject) child);
+					child.moveToContainer(null, mount.getLocation());
+				}
+				mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 			}
-			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		}
 		
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
 	private void storeMount(@NotNull CreatureObject player, @NotNull CreatureObject mount, @NotNull IntangibleObject mountControlDevice) {
+		if (player.isInCombat())
+			return;
+		
 		if (isMountable(mount) && mount.getOwnerId() == player.getObjectId()) {
 			// Dismount anyone riding the mount about to be stored
 			if (mount.getSlottedObject("rider") != null) {
 				exitMount(player, mount); // Should automatically dismount all other riders, if applicable
 				assert mount.getSlottedObjects().isEmpty();
-				return;
 			}
 			
 			// Remove the record of the mount
@@ -334,9 +359,8 @@ public class PlayerMountService extends Service {
 				mounts.remove(new Mount(mountControlDevice, mount));
 			
 			// Destroy the mount
-			mount.removeOptionFlags(OptionFlag.MOUNT);
 			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			DestroyObjectIntent.broadcast(mount);
+			player.broadcast(new DestroyObjectIntent(mount));
 			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		}
 		cleanupCalledMounts();
@@ -364,6 +388,11 @@ public class PlayerMountService extends Service {
 	 */
 	private void cleanupCalledMounts() {
 		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+	}
+	
+	private static void clearPlayerMountState(CreatureObject player) {
+		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+		player.resetMovement();
 	}
 	
 	private static boolean isMountable(CreatureObject mount) {
