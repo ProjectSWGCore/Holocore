@@ -55,26 +55,17 @@ public class RadialService extends Service {
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
-			onRequest((ObjectMenuRequest) p);
+			onRequest(gpi.getPlayer(), (ObjectMenuRequest) p);
 		} else if (p instanceof ObjectMenuSelect) {
 			onSelection(gpi.getPlayer(), (ObjectMenuSelect) p);
 		}
 	}
 	
-	private void onRequest(ObjectMenuRequest request) {
-		SWGObject requestor = ObjectLookup.getObjectById(request.getRequestorId());
+	private void onRequest(Player player, ObjectMenuRequest request) {
+		CreatureObject requestor = player.getCreatureObject();
 		SWGObject target = ObjectLookup.getObjectById(request.getTargetId());
-		if (target == null)
+		if (requestor == null || target == null)
 			return;
-		if (!(requestor instanceof CreatureObject)) {
-			Log.w("Requestor of target: %s is not a creature object! %s", target, requestor);
-			return;
-		}
-		Player player = requestor.getOwner();
-		if (player == null) {
-			Log.w("Requestor of target: %s does not have an owner! %s", target, requestor);
-			return;
-		}
 		
 		StandardLog.onPlayerTrace(this, player, "requested radials for %s", target);
 		LinkedHashMap<RadialItem, RadialOption> options = new LinkedHashMap<>();
