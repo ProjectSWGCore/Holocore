@@ -188,7 +188,7 @@ public class TravelHelper {
 	
 	private void teleportAndDestroyTicket(TravelPoint destination, SWGObject ticket, CreatureObject traveler) {
 		DestroyObjectIntent.broadcast(ticket);
-		traveler.moveToLocation(destination.getLocation());
+		traveler.moveToContainer(destination.getCollector().getParent(), destination.getLocation());
 	}
 	
 	private void loadAllowedRoutesAndPrices() {
