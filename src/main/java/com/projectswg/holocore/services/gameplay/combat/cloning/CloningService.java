@@ -317,16 +317,14 @@ public class CloningService extends Service {
 			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
 		}
 		
-		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
 		corpse.setHealth(corpse.getMaxHealth());
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
-		
-		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
-		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
-		cloningSickness.broadcast();
+		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));
+		corpse.broadcast(new BuffIntent("incapWeaken", corpse, corpse, true));
+		corpse.moveToContainer(cellObject, cloneLocation);
 	}
 	
 	/**

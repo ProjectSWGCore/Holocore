@@ -124,15 +124,16 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void startCommand(EnqueuedCommand command) {
-			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "started command %s", command.getCommand().getName());
-			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue())
+			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue()) {
+				StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "queued command %s", command.getCommand().getName());
 				commandQueue.offer(command);
-			else
+			} else {
 				execute(command);
+			}
 		}
 		
 		public synchronized void execute(EnqueuedCommand command) {
-			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "execute command %s", command.getCommand().getName());
+			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "executed command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
 			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {

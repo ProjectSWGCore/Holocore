@@ -108,7 +108,7 @@ public class CreatureObjectAwareness {
 	List<SWGObject> getCreateList() {
 		List<SWGObject> list = new ArrayList<>();
 		List<SWGObject> sortedDepth = new ArrayList<>(pendingAdd);
-		sortedDepth.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth));
+		sortedDepth.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).thenComparingDouble(this::getDistance));
 		for (SWGObject obj : sortedDepth) {
 			SWGObject parent = obj.getParent();
 			if (parent == null || aware.contains(parent)) {
@@ -125,8 +125,26 @@ public class CreatureObjectAwareness {
 	
 	List<SWGObject> getDestroyList() {
 		List<SWGObject> list = new ArrayList<>(pendingRemove);
+		list.removeIf(this::isParent);
 		list.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).reversed());
 		return list;
+	}
+	
+	private boolean isParent(SWGObject obj) {
+		SWGObject parent = creature.getParent();
+		while (parent != null) {
+			if (parent == obj)
+				return true;
+			parent = parent.getParent();
+		}
+		return false;
+	}
+	
+	private double getDistance(SWGObject obj) {
+		if (obj.getParent() != null)
+			return 0;
+		
+		return creature.getWorldLocation().distanceTo(obj.getLocation());
 	}
 	
 	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {

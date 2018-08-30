@@ -36,6 +36,7 @@ import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
+import com.projectswg.common.network.packets.swg.zone.object_controller.TeleportAck;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
@@ -63,15 +64,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AwarenessService extends Service {
 	
 	private static final Location GONE_LOCATION = Location.builder().setTerrain(Terrain.GONE).setPosition(0, 0, 0).build();
 	
 	private final ObjectAwareness awareness;
+	private final Set<SWGObject> teleporting;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
+		this.teleporting = ConcurrentHashMap.newKeySet();
 	}
 	
 	@IntentHandler
@@ -112,11 +117,13 @@ public class AwarenessService extends Service {
 		@NotNull Location oldLocation = oti.getOldLocation();
 		@NotNull Location newLocation = oti.getNewLocation();
 		
-		if (isPlayerZoneInRequired(obj, newParent, newLocation)) {
+		if (isPlayerZoneInRequired(obj, oldLocation, newLocation)) {
 			handleZoneIn((CreatureObject) obj, newLocation, newParent);
 			return;
 		}
 		
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+			teleporting.add(obj);
 		update(obj);
 		update(oldParent);
 		
@@ -124,7 +131,7 @@ public class AwarenessService extends Service {
 	}
 	
 	@IntentHandler
-	private void processGalacticPacketIntent(InboundPacketIntent gpi) {
+	private void processInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
 		if (packet instanceof DataTransform) {
 			handleDataTransform(gpi.getPlayer(), (DataTransform) packet);
@@ -132,6 +139,8 @@ public class AwarenessService extends Service {
 			handleDataTransformWithParent(gpi.getPlayer(), (DataTransformWithParent) packet);
 		} else if (packet instanceof CmdSceneReady) {
 			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
+		} else if (packet instanceof TeleportAck) {
+			teleporting.remove(gpi.getPlayer().getCreatureObject());
 		}
 	}
 	
@@ -227,6 +236,8 @@ public class AwarenessService extends Service {
 			StandardLog.onPlayerError(this, player, "sent a DataTransform for another object [%d]", dt.getObjectId());
 			return;
 		}
+		if (teleporting.contains(creature))
+			return;
 		
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
 		double speed = dt.getSpeed();
@@ -262,6 +273,8 @@ public class AwarenessService extends Service {
 			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent with an unknown parent [%d]", dt.getCellId());
 			return;
 		}
+		if (teleporting.contains(creature))
+			return;
 		
 		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
 			// If this is the primary rider, move the mount and all of the riders
@@ -297,14 +310,12 @@ public class AwarenessService extends Service {
 		}
 	}
 	
-	private static boolean isPlayerZoneInRequired(@NotNull SWGObject obj, @Nullable SWGObject parent, @NotNull Location newLocation) {
+	private static boolean isPlayerZoneInRequired(@NotNull SWGObject obj, @NotNull Location oldLocation, @NotNull Location newLocation) {
 		if (!(obj instanceof CreatureObject))
 			return false;
 		if (!((CreatureObject) obj).isLoggedInPlayer())
 			return false;
-		if (parent == null)
-			return newLocation.getTerrain() != obj.getTerrain() || newLocation.distanceTo(obj.getWorldLocation()) > 1024;
-		return !obj.getAware().contains(parent);
+		return oldLocation.getTerrain() != newLocation.getTerrain();
 	}
 	
 	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
@@ -316,9 +327,6 @@ public class AwarenessService extends Service {
 		} else {
 			onObjectMovedInWorld(obj, oldParent, oldLocation, newLocation, forceSelfUpdate, speed);
 		}
-		
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
-			new PlayerTransformedIntent((CreatureObject) obj, oldParent, null, oldLocation, newLocation).broadcast();
 	}
 	
 	private static void onObjectMovedInParent(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
