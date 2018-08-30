@@ -45,7 +45,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RunWith(JUnit4.class)
-public class TestRunnerSimulatedWorld extends TestRunner {
+public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	
 	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
 	private IntentManager intentManager = null;
@@ -59,7 +59,6 @@ public class TestRunnerSimulatedWorld extends TestRunner {
 	public void setupServices() {
 		intentManager = new IntentManager(1);
 		IntentManager.setInstance(intentManager);
-		registerService(new AwarenessService());
 	}
 	
 	@After

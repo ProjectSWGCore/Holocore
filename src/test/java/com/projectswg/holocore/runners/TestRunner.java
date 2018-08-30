@@ -28,68 +28,18 @@
 package com.projectswg.holocore.runners;
 
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
-import me.joshlarson.jlcommon.concurrency.Delay;
-import me.joshlarson.jlcommon.control.Intent;
-import me.joshlarson.jlcommon.control.IntentManager;
-import me.joshlarson.jlcommon.control.ServiceBase;
-import org.junit.After;
-import org.junit.Before;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
-
-@RunWith(JUnit4.class)
-public class TestRunnerSimulatedWorld extends TestRunner {
-	
-	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
-	private IntentManager intentManager = null;
+public abstract class TestRunner {
 	
 	@BeforeClass
 	public static void initializeStatic() {
 		DataManager.initialize();
 	}
 	
-	@Before
-	public void setupServices() {
-		intentManager = new IntentManager(1);
-		IntentManager.setInstance(intentManager);
-		registerService(new AwarenessService());
-	}
-	
-	@After
-	public void cleanupServices() {
-		for (ServiceBase service : instantiatedServices) {
-			service.setIntentManager(null);
-			service.stop();
-			service.terminate();
-		}
-		intentManager.close();
-		IntentManager.setInstance(null);
-	}
-	
-	protected final void registerService(ServiceBase service) {
-		service.setIntentManager(Objects.requireNonNull(intentManager));
-		service.initialize();
-		service.start();
-		this.instantiatedServices.add(service);
-	}
-	
-	protected final void broadcastAndWait(Intent i) {
-		i.broadcast();
-		while (!i.isComplete()) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
-		}
-		while (intentManager.getIntentCount() > 0) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
-		}
+	protected static long getUniqueId() {
+		return ObjectCreator.getNextObjectId();
 	}
 	
 }

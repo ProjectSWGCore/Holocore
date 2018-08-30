@@ -63,6 +63,21 @@ public final class ObjectCreator {
 	
 	private static final AtomicLong OBJECT_ID = new AtomicLong(0);
 	
+	/*
+		Misc helper methods
+	 */
+	public static void updateMaxObjectId(long objectId) {
+		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
+	}
+	
+	public static long getNextObjectId() {
+		return OBJECT_ID.incrementAndGet();
+	}
+	
+	/*
+		Object creation methods
+	 */
+	
 	@NotNull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + '\'';
@@ -165,17 +180,6 @@ public final class ObjectCreator {
 			
 			object.setArrangement(arrangementData.getArrangement());
 		}
-	}
-	
-	/*
-		Misc helper methods
-	 */
-	private static void updateMaxObjectId(long objectId) {
-		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
-	}
-	
-	private static long getNextObjectId() {
-		return OBJECT_ID.incrementAndGet();
 	}
 	
 	public static class ObjectCreationException extends RuntimeException {
