@@ -7,22 +7,22 @@
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
  *                                                                                 *
- * This file is part of PSWGCommon.                                                *
+ * This file is part of Holocore.                                                  *
  *                                                                                 *
  * --------------------------------------------------------------------------------*
  *                                                                                 *
- * PSWGCommon is free software: you can redistribute it and/or modify              *
+ * Holocore is free software: you can redistribute it and/or modify                *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
  *                                                                                 *
- * PSWGCommon is distributed in the hope that it will be useful,                   *
+ * Holocore is distributed in the hope that it will be useful,                     *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
  *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
 package com.projectswg.holocore.services.gameplay.world.travel;
