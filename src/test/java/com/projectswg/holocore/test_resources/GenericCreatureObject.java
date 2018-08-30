@@ -42,7 +42,7 @@ public class GenericCreatureObject extends CreatureObject {
 	
 	private static final AtomicLong GENERATED_IDS = new AtomicLong(1000000);
 	
-	private Player player;
+	private GenericPlayer player;
 	
 	private int loadRange;
 	
@@ -83,6 +83,11 @@ public class GenericCreatureObject extends CreatureObject {
 		createInventoryObject("appearance_inventory");
 		createInventoryObject("bank");
 		createInventoryObject("mission_bag");
+	}
+	
+	@Override
+	public GenericPlayer getOwner() {
+		return (GenericPlayer) super.getOwner();
 	}
 	
 	@Override

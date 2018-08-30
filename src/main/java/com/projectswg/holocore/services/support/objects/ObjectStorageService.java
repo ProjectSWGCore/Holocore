@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 public class ObjectStorageService extends Service {
 	
@@ -45,7 +46,7 @@ public class ObjectStorageService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		ObjectLookup.setAuthority(this);
+		ObjectLookup.setObjectAuthority(this::getObjectById);
 		
 		{
 			long startTime = StandardLog.onStartLoad("client objects");
@@ -87,7 +88,7 @@ public class ObjectStorageService extends Service {
 		synchronized (database) {
 			database.close();
 		}
-		ObjectLookup.setAuthority(null);
+		ObjectLookup.setObjectAuthority(null);
 		return true;
 	}
 	
@@ -192,15 +193,15 @@ public class ObjectStorageService extends Service {
 	
 	public static class ObjectLookup {
 		
-		private static final AtomicReference<ObjectStorageService> AUTHORITY = new AtomicReference<>(null);
+		private static final AtomicReference<Function<Long, SWGObject>> AUTHORITY = new AtomicReference<>(null);
 		
-		private static void setAuthority(ObjectStorageService authority) {
+		static void setObjectAuthority(Function<Long, SWGObject> authority) {
 			AUTHORITY.set(authority);
 		}
 		
 		@Nullable
 		public static SWGObject getObjectById(long id) {
-			return AUTHORITY.get().getObjectById(id);
+			return AUTHORITY.get().apply(id);
 		}
 		
 	}

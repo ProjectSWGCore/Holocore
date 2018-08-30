@@ -27,7 +27,9 @@
 
 package com.projectswg.holocore.runners;
 
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
 import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.Intent;
@@ -50,13 +52,8 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
 	private IntentManager intentManager = null;
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		DataManager.initialize();
-	}
-	
 	@Before
-	public void setupServices() {
+	public void setupSynchronous() {
 		intentManager = new IntentManager(1);
 		IntentManager.setInstance(intentManager);
 	}
@@ -77,6 +74,11 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 		service.initialize();
 		service.start();
 		this.instantiatedServices.add(service);
+	}
+	
+	protected final void registerObject(SWGObject ... objects) {
+		for (SWGObject object : objects)
+			broadcastAndWait(new ObjectCreatedIntent(object));
 	}
 	
 	protected final void broadcastAndWait(Intent i) {

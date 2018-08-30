@@ -27,70 +27,51 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.other.player.zone;
 
-import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.ZoneRequester;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test_resources.GenericCreatureObject;
+import com.projectswg.holocore.test_resources.GenericPlayer;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TestZoneRequester extends TestRunnerNoIntents {
 	
 	@Test
 	public void testNullCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();
-		TZRPlayer player = new TZRPlayer();
+		GenericPlayer player = new GenericPlayer();
 		Assert.assertFalse(zr.onZoneRequested(null, player, 0));
-		Assert.assertTrue(player.isSentError());
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
 	public void testInvalidCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();
-		TZRPlayer player = new TZRPlayer();
+		GenericPlayer player = new GenericPlayer();
 		Assert.assertFalse(zr.onZoneRequested(new PlayerObject(1), player, 0));
-		Assert.assertTrue(player.isSentError());
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
 	public void testNullPlayerObject() {
 		ZoneRequester zr = new ZoneRequester();
-		TZRPlayer player = new TZRPlayer();
-		GenericCreatureObject creature = new GenericCreatureObject(5);
+		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
+		GenericPlayer player = creature.getOwner();
 		creature.getSlottedObject("ghost").systemMove(null);
-		Assert.assertFalse(zr.onZoneRequested(creature, player, 5));
-		Assert.assertTrue(player.isSentError());
+		Assert.assertFalse(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
 	public void testValidCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();
-		TZRPlayer player = new TZRPlayer();
-		GenericCreatureObject creature = new GenericCreatureObject(5);
+		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
+		GenericPlayer player = creature.getOwner();
 		creature.setOwner(null);
-		Assert.assertTrue(zr.onZoneRequested(creature, player, 5));
-		Assert.assertFalse(player.isSentError());
-	}
-	
-	private static class TZRPlayer extends Player {
-		
-		private final AtomicBoolean sentError = new AtomicBoolean(false);
-		
-		@Override
-		public void sendPacket(SWGPacket ... packets) {
-			if (packets.length == 1 && packets[0] instanceof ErrorMessage)
-				sentError.set(true);
-		}
-		
-		public boolean isSentError() {
-			return sentError.get();
-		}
-		
+		Assert.assertTrue(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		Assert.assertNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 }

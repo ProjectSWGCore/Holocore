@@ -65,14 +65,14 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	
 	private void initialize() {
 		awareness = new ObjectAwareness();
-		player = new GenericCreatureObject(1);
-		testPlayer = new GenericCreatureObject(2);
-		testTangible = new GenericTangibleObject(3);
-		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
-		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(5, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
-		testCell1 = new CellObject(6);
-		testCell2 = new CellObject(7);
-		testWaypoint = new WaypointObject(8);
+		player = new GenericCreatureObject(getUniqueId());
+		testPlayer = new GenericCreatureObject(getUniqueId());
+		testTangible = new GenericTangibleObject(getUniqueId());
+		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testCell1 = new CellObject(getUniqueId());
+		testCell2 = new CellObject(getUniqueId());
+		testWaypoint = new WaypointObject(getUniqueId());
 		inventoryObject = player.getInventory();
 		
 		player.setLoadRange(100);

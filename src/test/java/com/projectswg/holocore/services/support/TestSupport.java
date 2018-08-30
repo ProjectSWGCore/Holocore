@@ -25,25 +25,21 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.runners;
+package com.projectswg.holocore.services.support;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
-import org.junit.BeforeClass;
+import com.projectswg.holocore.services.support.objects.radials.TestRadialService;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-public abstract class TestRunner {
+@RunWith(Suite.class)
+@SuiteClasses({
+		TestRadialService.class
+})
+public class TestSupport {
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		Log.clearWrappers();
-		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
-	}
-	
-	protected static long getUniqueId() {
-		return ObjectCreator.getNextObjectId();
+	public TestSupport() {
+		
 	}
 	
 }

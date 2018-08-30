@@ -25,25 +25,45 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.runners;
+package com.projectswg.holocore.services.support.objects;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
-import org.junit.BeforeClass;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
 
-public abstract class TestRunner {
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class SimulatedObjectStorage extends Service {
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		Log.clearWrappers();
-		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
+	private final Map<Long, SWGObject> objects;
+	
+	public SimulatedObjectStorage() {
+		this.objects = new ConcurrentHashMap<>();
 	}
 	
-	protected static long getUniqueId() {
-		return ObjectCreator.getNextObjectId();
+	@Override
+	public boolean initialize() {
+		ObjectLookup.setObjectAuthority(this::getObjectById);
+		return true;
+	}
+	
+	@Override
+	public boolean terminate() {
+		ObjectLookup.setObjectAuthority(null);
+		return true;
+	}
+	
+	@IntentHandler
+	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
+		SWGObject obj = oci.getObject();
+		objects.put(obj.getObjectId(), obj);
+	}
+	
+	private SWGObject getObjectById(long id) {
+		return objects.get(id);
 	}
 	
 }

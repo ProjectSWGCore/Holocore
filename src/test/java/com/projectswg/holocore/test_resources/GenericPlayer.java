@@ -44,7 +44,11 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -58,19 +62,42 @@ public class GenericPlayer extends Player {
 	
 	private final Map<Long, SWGObject> loadingObjects;
 	private final Map<Long, SWGObject> objects;
+	private final List<SWGPacket> packets;
 	private final AtomicBoolean zoning;
 	
 	public GenericPlayer() {
 		super(UNIQUE_ID.incrementAndGet());
 		this.loadingObjects = new ConcurrentHashMap<>();
 		this.objects = new ConcurrentHashMap<>();
+		this.packets = new ArrayList<>();
 		this.zoning = new AtomicBoolean(false);
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket... packets) {
-		for (SWGPacket packet : packets)
+		for (SWGPacket packet : packets) {
+			this.packets.add(packet);
 			handlePacket(packet);
+		}
+	}
+	
+	@Nullable
+	public SWGPacket getNextPacket() {
+		if (packets.isEmpty())
+			return null;
+		return packets.remove(0);
+	}
+	
+	@Nullable
+	public <T extends SWGPacket> T getNextPacket(Class<T> type) {
+		for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
+			SWGPacket next = it.next();
+			if (type.isInstance(next)) {
+				it.remove();
+				return type.cast(next);
+			}
+		}
+		return null;
 	}
 	
 	private void handlePacket(SWGPacket packet) {

@@ -81,10 +81,12 @@ public class RadialService extends Service {
 		for (RadialOption option : request.getOptions())
 			options.put(option.getType(), option);
 		
-		Set<RadialOption> serverOptions = new LinkedHashSet<>();
-		RadialHandler.INSTANCE.getOptions(serverOptions, player, target);
-		for (RadialOption option : serverOptions)
-			options.put(option.getType(), option);
+		{ // Load server radials
+			List<RadialOption> serverOptions = new ArrayList<>();
+			RadialHandler.INSTANCE.getOptions(serverOptions, player, target);
+			for (RadialOption option : serverOptions)
+				options.put(option.getType(), option);
+		}
 		
 		sendResponse(player, target, options.values(), request.getCounter());
 	}
