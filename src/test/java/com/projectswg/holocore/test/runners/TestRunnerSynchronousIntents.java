@@ -46,13 +46,13 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	private IntentManager intentManager = null;
 	
 	@Before
-	public void setupSynchronous() {
+	public final void setupSynchronous() {
 		intentManager = new IntentManager(1);
 		IntentManager.setInstance(intentManager);
 	}
 	
 	@After
-	public void cleanupServices() {
+	public final void cleanupServices() {
 		for (ServiceBase service : instantiatedServices) {
 			service.setIntentManager(null);
 			service.stop();

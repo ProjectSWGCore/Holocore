@@ -27,21 +27,14 @@
 
 package com.projectswg.holocore.test.runners;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage;
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
 import org.junit.Before;
-import org.junit.BeforeClass;
 
 public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousIntents {
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		DataManager.initialize();
-	}
-	
 	@Before
-	public void setupSimulatedServices() {
+	public final void setupSimulatedServices() {
 		registerService(new SimulatedObjectStorage());
 		registerService(new AwarenessService());
 	}
