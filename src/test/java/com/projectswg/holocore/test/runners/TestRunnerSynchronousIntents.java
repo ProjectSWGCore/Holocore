@@ -25,25 +25,65 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.runners;
+package com.projectswg.holocore.test.runners;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
-import org.junit.BeforeClass;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import me.joshlarson.jlcommon.concurrency.Delay;
+import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.control.IntentManager;
+import me.joshlarson.jlcommon.control.ServiceBase;
+import org.junit.After;
+import org.junit.Before;
 
-public abstract class TestRunner {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
+public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	
-	@BeforeClass
-	public static void initializeStatic() {
-		Log.clearWrappers();
-		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
+	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
+	private IntentManager intentManager = null;
+	
+	@Before
+	public void setupSynchronous() {
+		intentManager = new IntentManager(1);
+		IntentManager.setInstance(intentManager);
 	}
 	
-	protected static long getUniqueId() {
-		return ObjectCreator.getNextObjectId();
+	@After
+	public void cleanupServices() {
+		for (ServiceBase service : instantiatedServices) {
+			service.setIntentManager(null);
+			service.stop();
+			service.terminate();
+		}
+		intentManager.close();
+		IntentManager.setInstance(null);
+	}
+	
+	protected final void registerService(ServiceBase service) {
+		service.setIntentManager(Objects.requireNonNull(intentManager));
+		service.initialize();
+		service.start();
+		this.instantiatedServices.add(service);
+	}
+	
+	protected final void registerObject(SWGObject ... objects) {
+		for (SWGObject object : objects)
+			broadcastAndWait(new ObjectCreatedIntent(object));
+	}
+	
+	protected final void broadcastAndWait(Intent i) {
+		i.broadcast();
+		while (!i.isComplete()) {
+			boolean uninterrupted = Delay.sleepMicro(10);
+			assert uninterrupted;
+		}
+		while (intentManager.getIntentCount() > 0) {
+			boolean uninterrupted = Delay.sleepMicro(10);
+			assert uninterrupted;
+		}
 	}
 	
 }

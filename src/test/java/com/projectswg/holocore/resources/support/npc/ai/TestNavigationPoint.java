@@ -6,18 +6,16 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(JUnit4.class)
-public class TestNavigationPoint {
+public class TestNavigationPoint extends TestRunnerNoIntents {
 	
 	@Test
 	public void testDistanceTo() {

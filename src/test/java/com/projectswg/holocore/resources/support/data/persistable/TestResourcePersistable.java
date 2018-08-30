@@ -27,22 +27,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.persistable;
 
+import com.projectswg.common.persistable.InputPersistenceStream;
+import com.projectswg.common.persistable.OutputPersistenceStream;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import com.projectswg.common.persistable.InputPersistenceStream;
-import com.projectswg.common.persistable.OutputPersistenceStream;
-
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
-
-@RunWith(JUnit4.class)
-public class TestResourcePersistable {
+public class TestResourcePersistable extends TestRunnerNoIntents {
 	
 	@Test
 	public void testGalacticResourcePersistable() throws IOException {

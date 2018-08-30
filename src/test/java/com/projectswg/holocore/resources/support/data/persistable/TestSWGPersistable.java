@@ -27,25 +27,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.persistable;
 
+import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.persistable.InputPersistenceStream;
+import com.projectswg.common.persistable.OutputPersistenceStream;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.persistable.InputPersistenceStream;
-import com.projectswg.common.persistable.OutputPersistenceStream;
-
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-
-@RunWith(JUnit4.class)
-public class TestSWGPersistable {
+public class TestSWGPersistable extends TestRunnerNoIntents {
 	
 	@Test
 	public void testCreatureObject() throws IOException {

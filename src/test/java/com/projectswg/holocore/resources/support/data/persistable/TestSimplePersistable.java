@@ -27,25 +27,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.persistable;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
 import com.projectswg.common.persistable.Persistable;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(JUnit4.class)
-public class TestSimplePersistable {
+import java.io.*;
+
+public class TestSimplePersistable extends TestRunnerNoIntents {
 	
 	@Test
 	public void testInputPersistenceStream() throws IOException {

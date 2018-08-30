@@ -28,17 +28,14 @@
 package com.projectswg.holocore.resources.support.objects.permissions;
 
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
-import com.projectswg.holocore.test_resources.GenericTangibleObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
 public class TestContainerPermissions extends TestRunnerNoIntents {
 	
 	@Test

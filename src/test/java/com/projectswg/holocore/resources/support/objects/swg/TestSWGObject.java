@@ -30,17 +30,14 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
-import com.projectswg.holocore.test_resources.GenericTangibleObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.List;
 
-@RunWith(JUnit4.class)
 public class TestSWGObject extends TestRunnerNoIntents {
 	
 	@Test

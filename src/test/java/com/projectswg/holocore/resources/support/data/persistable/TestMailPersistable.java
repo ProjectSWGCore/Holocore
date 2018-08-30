@@ -27,28 +27,24 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.persistable;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
-
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(JUnit4.class)
-public class TestMailPersistable {
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+public class TestMailPersistable extends TestRunnerNoIntents {
 	
 	@Test
 	public void testMailStringIdPersistable() throws IOException {

@@ -28,7 +28,7 @@
 package com.projectswg.holocore.services.gameplay.combat.loot;
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 

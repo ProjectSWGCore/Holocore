@@ -24,19 +24,30 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects;
+package com.projectswg.holocore.resources.support.data.common;
 
-import com.projectswg.holocore.resources.support.objects.swg.TestSWGObject;
-import com.projectswg.holocore.resources.support.objects.awareness.TestAwareness;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Quaternion;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestSWGObject.class,
-	TestAwareness.class
-})
-public class TestObjects {
+public class TestPoint3D extends TestRunnerNoIntents {
+	
+	@Test
+	public void testRotation() {
+		Point3D p = new Point3D(0, 0, 1);
+		Quaternion q = new Quaternion(0, 1, 0, 0);
+		p.rotateAround(0, 0, 0, q);
+		Assert.assertEquals(0, p.getX(), 1E-7);
+		Assert.assertEquals(0, p.getY(), 1E-7);
+		Assert.assertEquals(-1, p.getZ(), 1E-7);
+		p.set(0, 0, 1);
+		q.setHeading(45);
+		p.rotateAround(0, 0, 0, q);
+		Assert.assertEquals(Math.sqrt(2)/2, p.getX(), 1E-7);
+		Assert.assertEquals(0, p.getY(), 1E-7);
+		Assert.assertEquals(Math.sqrt(2)/2, p.getZ(), 1E-7);
+	}
 	
 }

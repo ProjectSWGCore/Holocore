@@ -1,16 +1,13 @@
 package com.projectswg.holocore.resources.support.global.network;
 
-import java.nio.charset.StandardCharsets;
-
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-import com.projectswg.common.network.NetBufferStream;
+import java.nio.charset.StandardCharsets;
 
-@RunWith(JUnit4.class)
-public class TestNetBufferStream {
+public class TestNetBufferStream extends TestRunnerNoIntents {
 	
 	@Test
 	public void testExpansionSingle() {

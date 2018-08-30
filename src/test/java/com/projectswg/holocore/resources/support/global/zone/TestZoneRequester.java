@@ -24,73 +24,52 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.global.zone;
 
-package com.projectswg.holocore.runners;
+import com.projectswg.common.network.packets.swg.ErrorMessage;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericPlayer;
+import org.junit.Assert;
+import org.junit.Test;
 
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
-import me.joshlarson.jlcommon.concurrency.Delay;
-import me.joshlarson.jlcommon.control.Intent;
-import me.joshlarson.jlcommon.control.IntentManager;
-import me.joshlarson.jlcommon.control.ServiceBase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
-
-@RunWith(JUnit4.class)
-public abstract class TestRunnerSynchronousIntents extends TestRunner {
+public class TestZoneRequester extends TestRunnerNoIntents {
 	
-	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
-	private IntentManager intentManager = null;
-	
-	@Before
-	public void setupSynchronous() {
-		intentManager = new IntentManager(1);
-		IntentManager.setInstance(intentManager);
+	@Test
+	public void testNullCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		GenericPlayer player = new GenericPlayer();
+		Assert.assertFalse(zr.onZoneRequested(null, player, 0));
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
-	@After
-	public void cleanupServices() {
-		for (ServiceBase service : instantiatedServices) {
-			service.setIntentManager(null);
-			service.stop();
-			service.terminate();
-		}
-		intentManager.close();
-		IntentManager.setInstance(null);
+	@Test
+	public void testInvalidCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		GenericPlayer player = new GenericPlayer();
+		Assert.assertFalse(zr.onZoneRequested(new PlayerObject(1), player, 0));
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
-	protected final void registerService(ServiceBase service) {
-		service.setIntentManager(Objects.requireNonNull(intentManager));
-		service.initialize();
-		service.start();
-		this.instantiatedServices.add(service);
+	@Test
+	public void testNullPlayerObject() {
+		ZoneRequester zr = new ZoneRequester();
+		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
+		GenericPlayer player = creature.getOwner();
+		creature.getSlottedObject("ghost").systemMove(null);
+		Assert.assertFalse(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
-	protected final void registerObject(SWGObject ... objects) {
-		for (SWGObject object : objects)
-			broadcastAndWait(new ObjectCreatedIntent(object));
-	}
-	
-	protected final void broadcastAndWait(Intent i) {
-		i.broadcast();
-		while (!i.isComplete()) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
-		}
-		while (intentManager.getIntentCount() > 0) {
-			boolean uninterrupted = Delay.sleepMicro(10);
-			assert uninterrupted;
-		}
+	@Test
+	public void testValidCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
+		GenericPlayer player = creature.getOwner();
+		creature.setOwner(null);
+		Assert.assertTrue(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		Assert.assertNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 }

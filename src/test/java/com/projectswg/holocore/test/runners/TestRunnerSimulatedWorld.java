@@ -25,18 +25,15 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.runners;
+package com.projectswg.holocore.test.runners;
 
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage;
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-@RunWith(JUnit4.class)
-public class TestRunnerSimulatedWorld extends TestRunnerSynchronousIntents {
+public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousIntents {
 	
 	@BeforeClass
 	public static void initializeStatic() {

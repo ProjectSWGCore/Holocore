@@ -37,20 +37,17 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
-import com.projectswg.holocore.runners.TestRunnerSimulatedWorld;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
+import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.Collection;
 import java.util.List;
 
-@RunWith(JUnit4.class)
 public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	
 	@Test

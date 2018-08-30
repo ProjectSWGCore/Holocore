@@ -24,18 +24,29 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.data.common;
 
-package com.projectswg.holocore.services.gameplay;
+import com.projectswg.common.data.WeatherType;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Test;
 
-import com.projectswg.holocore.services.gameplay.world.travel.TestPlayerMountService;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-		TestPlayerMountService.class
-})
-public class TestGameplay {
+public class TestWeatherType extends TestRunnerNoIntents {
+
+	/**
+	 * Tests if the chance of each weather type sum up to 100%
+	 */
+	@Test
+	public void verifyChances() {
+		float expected = 1;
+		float actual = 0;
+		
+		for(WeatherType type : WeatherType.values())
+			actual += type.getChance();
+		
+		assertEquals(expected, actual, 0);
+		
+	}
 	
 }

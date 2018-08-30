@@ -27,15 +27,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
+import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource.RawResourceBuilder;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource.RawResourceBuilder;
-
-@RunWith(JUnit4.class)
-public class TestRawResource {
+public class TestRawResource extends TestRunnerNoIntents {
 	
 	@Test
 	public void testBuilder() {

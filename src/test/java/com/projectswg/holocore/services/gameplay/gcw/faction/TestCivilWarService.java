@@ -30,7 +30,7 @@ package com.projectswg.holocore.services.gameplay.gcw.faction;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -27,20 +27,17 @@
 
 package com.projectswg.holocore.resources.support.data.collections;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.projectswg.common.encoding.StringType;
-
-/**
- * Created by Waverunner on 6/7/2015
- */
-public class TestSWGList {
-
+public class TestSWGList extends TestRunnerNoIntents {
+	
 	@Test
 	public void testAdd() {
 		int size = 24;
@@ -48,28 +45,18 @@ public class TestSWGList {
 		for (int i = 0; i < size; i++) {
 			strings[i] = "test" + String.valueOf(i);
 		}
-
+		
 		SWGList<String> swgList = new SWGList<>(3, 6, StringType.ASCII);
 		Collections.addAll(swgList, strings);
-
+		
 		Assert.assertArrayEquals(strings, swgList.toArray());
-
+		
 		List<String> list = new ArrayList<>();
 		Collections.addAll(list, strings);
-
+		
 		Assert.assertArrayEquals(swgList.toArray(), list.toArray());
 	}
-
-	@Test
-	public void testSet() {
-
-	}
-
-	@Test
-	public void testRemove() {
-
-	}
-
+	
 	@Test
 	public void testEncode() {
 		int size = 24;
@@ -77,10 +64,10 @@ public class TestSWGList {
 		for (int i = 0; i < size; i++) {
 			strings[i] = "test" + String.valueOf(i);
 		}
-
+		
 		SWGList<String> swgList = new SWGList<>(3, 6, StringType.ASCII);
 		Collections.addAll(swgList, strings);
 		swgList.encode();
-
+		
 	}
 }

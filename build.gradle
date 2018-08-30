@@ -28,15 +28,11 @@ sourceSets {
 }
 
 test {
-	testLogging {
-		events "skipped", "failed" // just good to know in terms of what failed
-	}
 	afterSuite { TestDescriptor td, TestResult tr ->
 		if (td.parent == null) {
 			println 'Tests run: (' + tr.getTestCount() + '), Failures: (' + tr.getFailedTestCount() + ')' // IMPORTANT - this is required for Lightspeed
 		}
 	}
-	include 'com/projectswg/holocore/TestAll.class' // to run only a single test case
 }
 
 shadowJar {

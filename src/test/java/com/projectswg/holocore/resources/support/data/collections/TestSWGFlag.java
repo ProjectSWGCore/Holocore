@@ -1,12 +1,10 @@
 package com.projectswg.holocore.resources.support.data.collections;
 
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-@RunWith(JUnit4.class)
-public class TestSWGFlag {
+public class TestSWGFlag extends TestRunnerNoIntents {
 	
 	@Test
 	public void testFlag() {

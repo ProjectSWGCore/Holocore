@@ -7,48 +7,43 @@
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
  *                                                                                 *
- * This file is part of Holocore.                                                  *
+ * This file is part of PSWGCommon.                                                *
  *                                                                                 *
  * --------------------------------------------------------------------------------*
  *                                                                                 *
- * Holocore is free software: you can redistribute it and/or modify                *
+ * PSWGCommon is free software: you can redistribute it and/or modify              *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
  *                                                                                 *
- * Holocore is distributed in the hope that it will be useful,                     *
+ * PSWGCommon is distributed in the hope that it will be useful,                   *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
  *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.test_resources;
+package com.projectswg.holocore.test.runners;
 
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+import org.junit.BeforeClass;
 
-public class GenericTangibleObject extends TangibleObject {
+public abstract class TestRunner {
 	
-	private int loadRange;
-	
-	public GenericTangibleObject(long objectId) {
-		super(objectId);
-		setTemplate("");
-		loadRange = -1;
+	@BeforeClass
+	public static void initializeStatic() {
+		Log.clearWrappers();
+		Log.addWrapper(new ConsoleLogWrapper());
+		DataManager.initialize();
 	}
 	
-	public void setLoadRange(int loadRange) {
-		this.loadRange = loadRange;
-		updateLoadRange();
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		if (loadRange == -1)
-			return super.calculateLoadRange();
-		return loadRange;
+	protected static long getUniqueId() {
+		return ObjectCreator.getNextObjectId();
 	}
 	
 }

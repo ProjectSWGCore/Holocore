@@ -34,13 +34,11 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
-import com.projectswg.holocore.test_resources.GenericTangibleObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,7 +47,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
 public class TestObjectAwareness extends TestRunnerNoIntents {
 	
 	private ObjectAwareness awareness;

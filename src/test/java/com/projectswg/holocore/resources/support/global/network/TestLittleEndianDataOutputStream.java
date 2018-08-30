@@ -1,17 +1,15 @@
 package com.projectswg.holocore.resources.support.global.network;
 
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-@RunWith(JUnit4.class)
-public class TestLittleEndianDataOutputStream {
+public class TestLittleEndianDataOutputStream extends TestRunnerNoIntents {
 	
 	@Test
 	public void test() throws IOException {

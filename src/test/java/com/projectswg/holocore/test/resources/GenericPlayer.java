@@ -25,7 +25,7 @@
  * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
  ***********************************************************************************/
 
-package com.projectswg.holocore.test_resources;
+package com.projectswg.holocore.test.resources;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.tangible.Posture;
