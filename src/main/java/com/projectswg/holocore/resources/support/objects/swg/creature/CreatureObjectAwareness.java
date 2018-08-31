@@ -111,7 +111,7 @@ public class CreatureObjectAwareness {
 		sortedDepth.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).thenComparingDouble(this::getDistance));
 		for (SWGObject obj : sortedDepth) {
 			SWGObject parent = obj.getParent();
-			if (parent == null || aware.contains(parent)) {
+			if (parent == null || aware.contains(parent) || obj.getSlotArrangement() != -1) {
 				list.add(obj);
 			} else {
 				int parentIndex = list.indexOf(parent);
