@@ -4,6 +4,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
+import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -65,6 +66,25 @@ public class FactionFlagService extends Service {
 				break;
 		}
 	}
+	
+	@IntentHandler
+	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
+		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
+			return;
+		}
+		
+		switch (dpi.getEventType()) {
+			case BEGINDUEL:
+				handleBeginDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case END:
+				handleEndDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			default:
+				break;
+		}
+	}
+		
 	
 	private void handleTypeChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
@@ -134,9 +154,9 @@ public class FactionFlagService extends Service {
 			TangibleObject tangibleAware = (TangibleObject) objectAware;
 			
 			Player observerOwner = tangibleAware.getOwner();
-
-			int pvpBitmask = getPvpBitmask(target, tangibleAware);
 			
+			int pvpBitmask = getPvpBitmask(target, tangibleAware);
+
 			if (targetOwner != null) // Send the PvP information about this observer to the owner
 				targetOwner.sendPacket(createPvpStatusMessage(tangibleAware, tangibleAware.getPvpFlags() | pvpBitmask));
 			
@@ -144,6 +164,24 @@ public class FactionFlagService extends Service {
 				observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
 		}
 	}
+	
+	private void handleBeginDuel(CreatureObject accepter, CreatureObject target) {
+		int pvpBitmask = 0;
+		
+		pvpBitmask = getPvpBitmask(accepter,target);
+
+		accepter.getOwner().sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+		target.getOwner().sendPacket(createPvpStatusMessage(accepter, accepter.getPvpFlags()| pvpBitmask));
+	}
+	
+	private void handleEndDuel(CreatureObject accepter, CreatureObject target) {
+		int pvpBitmask = 0;
+		
+		pvpBitmask = getPvpBitmask(accepter,target);
+
+		accepter.getOwner().sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+		target.getOwner().sendPacket(createPvpStatusMessage(accepter, accepter.getPvpFlags()| pvpBitmask));
+	}	
 	
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
 		statusChangers.remove(target);
@@ -209,7 +247,13 @@ public class FactionFlagService extends Service {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		
+		if(target instanceof CreatureObject && observer instanceof CreatureObject) {
+			if (((CreatureObject) target).isDuelingPlayer((CreatureObject) observer)) {
+				pvpBitmask |= PvpFlag.DUEL.getBitmask();
+			}
+		}
+		
 		return pvpBitmask;
 	}
-	
+
 }

@@ -63,6 +63,7 @@ public class DuelPlayerIntent extends Intent {
 		CANCEL,
 		DECLINE,
 		END,
-		REQUEST
+		REQUEST,
+		BEGINDUEL
 	}
 }
