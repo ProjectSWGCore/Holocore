@@ -245,12 +245,11 @@ public class FactionFlagService extends Service {
 
 		if (target.isEnemyOf(observer) && target.getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
 			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
+		}
+		
+		if(target instanceof CreatureObject && observer instanceof CreatureObject) {
 			if (((CreatureObject) target).isDuelingPlayer((CreatureObject) observer)) {
 				pvpBitmask |= PvpFlag.DUEL.getBitmask();
-			}
-		}else if(target instanceof CreatureObject && observer instanceof CreatureObject) {
-			if (((CreatureObject) target).isDuelingPlayer((CreatureObject) observer)) {
-				pvpBitmask |= PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.DUEL.getBitmask();
 			}
 		}
 		
