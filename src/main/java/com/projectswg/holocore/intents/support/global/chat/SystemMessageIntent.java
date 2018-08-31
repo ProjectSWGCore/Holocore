@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class SystemMessageIntent extends Intent {
 	
@@ -46,7 +47,7 @@ public class SystemMessageIntent extends Intent {
 	 * @param message the message to send
 	 * @param type the broadcast type
 	 */
-	public SystemMessageIntent(Player receiver, String message, BroadcastType type) {
+	public SystemMessageIntent(@NotNull Player receiver, @NotNull String message, @NotNull BroadcastType type) {
 		this.broadcastType = type;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -74,7 +75,7 @@ public class SystemMessageIntent extends Intent {
 	 * @param receiver the receiver
 	 * @param prose the prose package to send
 	 */
-	public SystemMessageIntent(Player receiver, ProsePackage prose) {
+	public SystemMessageIntent(@NotNull Player receiver, @NotNull ProsePackage prose) {
 		this.broadcastType = BroadcastType.PERSONAL;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -88,7 +89,7 @@ public class SystemMessageIntent extends Intent {
 	 * @param receiver the receiver
 	 * @param message the message
 	 */
-	public SystemMessageIntent(Player receiver, String message) {
+	public SystemMessageIntent(@NotNull Player receiver, @NotNull String message) {
 		this.broadcastType = BroadcastType.PERSONAL;
 		this.receiver = receiver;
 		this.terrain = null;
@@ -100,7 +101,7 @@ public class SystemMessageIntent extends Intent {
 	 * @param message the message
 	 * @param type the broadcast type
 	 */
-	public SystemMessageIntent(String message, BroadcastType type) {
+	public SystemMessageIntent(@NotNull String message, @NotNull BroadcastType type) {
 		this.broadcastType = type;
 		this.receiver = null;
 		this.terrain = null;
@@ -128,23 +129,23 @@ public class SystemMessageIntent extends Intent {
 		return prose;
 	}
 	
-	public static void broadcastPersonal(Player receiver, String message) {
+	public static void broadcastPersonal(@NotNull Player receiver, @NotNull String message) {
 		new SystemMessageIntent(receiver, message).broadcast();
 	}
 	
-	public static void broadcastPersonal(Player receiver, ProsePackage prose) {
+	public static void broadcastPersonal(@NotNull Player receiver, @NotNull ProsePackage prose) {
 		new SystemMessageIntent(receiver, prose).broadcast();
 	}
 	
-	public static void broadcastArea(Player receiver, String message) {
+	public static void broadcastArea(@NotNull Player receiver, @NotNull String message) {
 		new SystemMessageIntent(receiver, message, BroadcastType.AREA).broadcast();
 	}
 	
-	public static void broadcastPlanet(Terrain terrain, String message) {
+	public static void broadcastPlanet(@NotNull Terrain terrain, @NotNull String message) {
 		new SystemMessageIntent(terrain, message).broadcast();
 	}
 	
-	public static void broadcastGalaxy(String message) {
+	public static void broadcastGalaxy(@NotNull String message) {
 		new SystemMessageIntent(message, BroadcastType.GALAXY).broadcast();
 	}
 	

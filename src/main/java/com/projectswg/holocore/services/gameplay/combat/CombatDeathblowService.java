@@ -6,6 +6,7 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -117,8 +118,14 @@ public class CombatDeathblowService extends Service {
 		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
 		
 		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
-		new SystemMessageIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
-		new SystemMessageIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		Player incapacitatorOwner = incapacitator.getOwner();
+		if (incapacitatorOwner != null) { // This will be NPCs most of the time
+			new SystemMessageIntent(incapacitatorOwner, new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
+		}
+		Player incapacitatedOwner = incapacitated.getOwner();
+		if (incapacitatedOwner != null) { // Logged out player
+			new SystemMessageIntent(incapacitatedOwner, new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		}
 		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
 	}
 	
