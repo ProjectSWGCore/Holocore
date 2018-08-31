@@ -118,6 +118,7 @@ public class AwarenessService extends Service {
 		@NotNull Location newLocation = oti.getNewLocation();
 		
 		if (isPlayerZoneInRequired(obj, oldLocation, newLocation)) {
+			assert obj instanceof CreatureObject;
 			handleZoneIn((CreatureObject) obj, newLocation, newParent);
 			return;
 		}

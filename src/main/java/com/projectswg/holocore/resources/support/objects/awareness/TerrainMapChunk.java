@@ -49,7 +49,6 @@ class TerrainMapChunk {
 	}
 	
 	public void addObject(@NotNull SWGObject obj) {
-		assert !objects.contains(obj) : "the chunk already contains this object";
 		objects.add(obj);
 	}
 	

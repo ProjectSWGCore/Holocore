@@ -100,8 +100,6 @@ public class NavigationPoint {
 	}
 	
 	public static List<NavigationPoint> from(@Nullable SWGObject sourceParent, @NotNull Location source, @Nullable SWGObject destinationParent, @NotNull Location destination, double speed) {
-		if (destinationParent instanceof CreatureObject && ((CreatureObject) destinationParent).hasOptionFlags(OptionFlag.MOUNT))
-			destinationParent = null;
 		assert sourceParent == null || sourceParent instanceof CellObject;
 		assert destinationParent == null || destinationParent instanceof CellObject;
 		List<Portal> route = getBuildingRoute((CellObject) sourceParent, (CellObject) destinationParent, source, destination);
