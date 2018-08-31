@@ -49,19 +49,19 @@ public class ObjectStorageService extends Service {
 		ObjectLookup.setObjectAuthority(this::getObjectById);
 		
 		{
-			long startTime = StandardLog.onStartLoad("client objects");
-			buildouts.putAll(DataLoader.buildouts(createEventList()).getObjects());
-			objectMap.putAll(buildouts);
-			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
-		}
-		
-		{
 			long startTime = StandardLog.onStartLoad("players");
 			synchronized (database) {
 				if (!database.load() && database.fileExists())
 					return false;
 			}
 			StandardLog.onEndLoad(database.size(), "players", startTime);
+		}
+		
+		{
+			long startTime = StandardLog.onStartLoad("client objects");
+			buildouts.putAll(DataLoader.buildouts(createEventList()).getObjects());
+			objectMap.putAll(buildouts);
+			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
 		}
 		return true;
 	}
