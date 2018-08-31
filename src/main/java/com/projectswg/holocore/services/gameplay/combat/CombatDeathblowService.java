@@ -6,6 +6,7 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -112,7 +113,7 @@ public class CombatDeathblowService extends Service {
 		incapacitated.setPosture(Posture.INCAPACITATED);
 		incapacitated.setCounter(INCAP_TIMER);
 		
-		Log.i("%s was incapacitated", incapacitated);
+		StandardLog.onPlayerEvent(this, incapacitated, "was incapacitated by %s", incapacitator);
 		
 		// Once the incapacitation counter expires, revive them.
 		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
@@ -148,7 +149,7 @@ public class CombatDeathblowService extends Service {
 		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));    // Restores 10% health of their base health
 		CreatureRevivedIntent.broadcast(revivedCreature);
 		
-		Log.i("%s was revived", revivedCreature);
+		StandardLog.onPlayerEvent(this, revivedCreature, "was revived");
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
@@ -157,6 +158,8 @@ public class CombatDeathblowService extends Service {
 			return;
 		
 		corpse.setPosture(Posture.DEAD);
+		if (corpse.isPlayer())
+			StandardLog.onPlayerEvent(this, corpse, "was killed by %s", killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
