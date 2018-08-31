@@ -61,6 +61,7 @@ dependencies {
 	utilityCompile sourceSets.main.output
 	utilityCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	utilityCompile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
+	utilityCompile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	
 	integrationCompile project(':pswgcommon')
 	integrationCompile project(':client-holocore')
@@ -73,6 +74,14 @@ dependencies {
 task CreateConvertLoginJar(type: ShadowJar) {
 	archiveName = 'ConvertLogin.jar'
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
+	from sourceSets.utility.output
+	configurations = [project.configurations.utilityRuntime]
+	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
+}
+
+task CreatePacketCaptureProcessor(type: ShadowJar) {
+	archiveName = 'PacketCaptureProcessor.jar'
+	manifest.attributes 'Main-Class': 'com.projectswg.utility.packets.ProcessPacketCapture'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
 	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
