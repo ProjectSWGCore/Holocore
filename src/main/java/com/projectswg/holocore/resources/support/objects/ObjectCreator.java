@@ -61,7 +61,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public final class ObjectCreator {
 	
-	private static final AtomicLong OBJECT_ID = new AtomicLong(0);
+	private static final AtomicLong OBJECT_ID = new AtomicLong(150000);
 	
 	/*
 		Misc helper methods

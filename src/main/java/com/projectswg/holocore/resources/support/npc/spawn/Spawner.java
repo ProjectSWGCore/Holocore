@@ -28,7 +28,6 @@ package com.projectswg.holocore.resources.support.npc.spawn;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolRouteWaypoint;
@@ -41,7 +40,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,10 +68,8 @@ public final class Spawner {
 		this.npcStat = DataLoader.npcStats().getNpcStats(npc.getCombatLevel());
 		Objects.requireNonNull(npcStat, "Invalid npc combat lebel: " + npc.getCombatLevel());
 		
-		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(spawn.getBuildingId());
-		Objects.requireNonNull(building, "Invalid building id: " + spawn.getBuildingId());
 		this.location = Location.builder()
-					.setTerrain(building.getTerrain())
+					.setTerrain(spawn.getTerrain())
 					.setPosition(spawn.getX(), spawn.getY(), spawn.getZ())
 					.setHeading(spawn.getHeading())
 					.build();
@@ -383,29 +380,18 @@ public final class Spawner {
 		}
 		
 		private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint) {
-			if (waypoint.getBuildingId().isEmpty()) {
-				Log.w("PatrolRouteWaypoint: Undefined building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
+			if (waypoint.getBuildingId().isEmpty() || waypoint.getBuildingId().endsWith("_world"))
 				return null;
-			}
 			
-			BuildingLoaderInfo buildingInfo = DataLoader.buildings().getBuilding(waypoint.getBuildingId());
-			if (buildingInfo == null) {
+			BuildingObject building = BuildingLookup.getBuildingByTag(waypoint.getBuildingId());
+			if (building == null) {
 				Log.w("PatrolRouteWaypoint: Invalid building id for patrol id: %d and group id: %d", waypoint.getPatrolId(), waypoint.getGroupId());
 				return null;
 			}
 			
-			if (buildingInfo.getId() == 0)
-				return null;
-			
-			SWGObject building = ObjectLookup.getObjectById(buildingInfo.getId());
-			if (!(building instanceof BuildingObject)) {
-				Log.w("PatrolRouteWaypoint: Invalid building [%d] for patrol id: %d and group id: %d", buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
-				return null;
-			}
-			
-			SWGObject cell = ((BuildingObject) building).getCellByNumber(waypoint.getCellId());
+			SWGObject cell = building.getCellByNumber(waypoint.getCellId());
 			if (cell == null) {
-				Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %d, patrol id: %d and group id: %d", waypoint.getCellId(), buildingInfo.getId(), waypoint.getPatrolId(), waypoint.getGroupId());
+				Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %s, patrol id: %d and group id: %d", waypoint.getCellId(), waypoint.getBuildingId(), waypoint.getPatrolId(), waypoint.getGroupId());
 				return null;
 			}
 			

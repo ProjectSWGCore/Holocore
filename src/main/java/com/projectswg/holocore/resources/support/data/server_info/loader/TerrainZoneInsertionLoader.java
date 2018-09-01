@@ -24,6 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.common.data.location.Terrain;
@@ -33,51 +34,94 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbR
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
-public final class BuildingLoader extends DataLoader {
+public class TerrainZoneInsertionLoader extends DataLoader {
 	
-	private final Map<String, BuildingLoaderInfo> buildingMap;
+	private final Map<String, ZoneInsertion> zoneInsertions;
 	
-	BuildingLoader() {
-		this.buildingMap = new HashMap<>();
+	TerrainZoneInsertionLoader() {
+		this.zoneInsertions = new HashMap<>();
 	}
 	
-	public BuildingLoaderInfo getBuilding(String buildingName) {
-		return buildingMap.get(buildingName);
+	public ZoneInsertion getInsertion(String id) {
+		return zoneInsertions.get(id);
 	}
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/building/buildings.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/player_spawns.sdb"))) {
 			while (set.next()) {
-				buildingMap.put(set.getText(0), new BuildingLoaderInfo(set));
+				ZoneInsertion def = new ZoneInsertion(set);
+				zoneInsertions.put(def.getId(), def);
 			}
 		}
 	}
 	
-	public static class BuildingLoaderInfo {
+	public static class ZoneInsertion {
 		
-		private final String name;
-		private final long id;
+		private final String id;
 		private final Terrain terrain;
+		private final String buildingId;
+		private final String cell;
+		private final double x;
+		private final double y;
+		private final double z;
+		private final double radius;
 		
-		public BuildingLoaderInfo(SdbResultSet set) {
-			this.name = set.getText(0).intern();
-			this.id = set.getInt(2);
-			this.terrain = Terrain.valueOf(set.getText(1));
+		private ZoneInsertion(SdbResultSet set) {
+			// id	terrain	building_id	cell	x	y	z	radius
+			this.id = set.getText("id");
+			this.terrain = Terrain.valueOf(set.getText("terrain").toUpperCase(Locale.US));
+			this.buildingId = set.getText("building_id");
+			this.cell = set.getText("cell");
+			this.x = set.getReal("x");
+			this.y = set.getReal("y");
+			this.z = set.getReal("z");
+			this.radius = set.getReal("radius");
 		}
 		
-		public String getName() {
-			return name;
-		}
-		
-		public long getId() {
+		public String getId() {
 			return id;
 		}
 		
 		public Terrain getTerrain() {
 			return terrain;
+		}
+		
+		public String getBuildingId() {
+			return buildingId;
+		}
+		
+		public String getCell() {
+			return cell;
+		}
+		
+		public double getX() {
+			return x;
+		}
+		
+		public double getY() {
+			return y;
+		}
+		
+		public double getZ() {
+			return z;
+		}
+		
+		public double getRadius() {
+			return radius;
+		}
+		
+		@Override
+		public int hashCode() {
+			return id.hashCode();
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			return o instanceof ZoneInsertion && ((ZoneInsertion) o).id.equals(id);
 		}
 		
 	}

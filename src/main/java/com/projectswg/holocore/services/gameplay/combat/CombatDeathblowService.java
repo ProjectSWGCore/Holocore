@@ -110,8 +110,8 @@ public class CombatDeathblowService extends Service {
 	}
 	
 	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitated) {
-		incapacitated.setPosture(Posture.INCAPACITATED);
 		incapacitated.setCounter(INCAP_TIMER);
+		incapacitated.setPosture(Posture.INCAPACITATED);
 		
 		StandardLog.onPlayerEvent(this, incapacitated, "was incapacitated by %s", incapacitator);
 		

@@ -26,66 +26,99 @@
  ***********************************************************************************/
 package com.projectswg.utility.clientdata.buildouts;
 
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class BuildoutLoader {
 	
 	private static final CrcStringTableData crcTable = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
+	private static final String BASE_PATH = "datatables/buildout/";
 	
-	private final Map <Long, SWGObject> objectTable;
-	private final Map<String, List <SWGObject>> objects;
+	private final Map<Long, Long> idMapping;
+	private final Set<SWGObject> objects;
+	private final AtomicLong objectIdGenerator;
+	private final AtomicLong cellIdGenerator;
 	
-	public BuildoutLoader() {
-		objectTable = new HashMap<>();
-		objects = new Hashtable<>();
+	public BuildoutLoader(AtomicLong objectIdGenerator, AtomicLong cellIdGenerator) {
+		this.idMapping = new HashMap<>();
+		this.objects = new HashSet<>();
+		this.objectIdGenerator = objectIdGenerator;
+		this.cellIdGenerator = cellIdGenerator;
 	}
 	
 	public void loadAllBuildouts() {
-		for (Terrain t : getTerrainsToLoad())
-			loadBuildoutsForTerrain(t);
-	}
-	
-	public void loadBuildoutsForTerrain(Terrain terrain) {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/buildout/buildout_scenes.iff");
-		for (int row = 0; row < table.getRowCount(); row++) {
-			if (table.getCell(row, 0).equals(terrain.name().toLowerCase(Locale.ENGLISH))) {
-				TerrainBuildoutLoader loader = new TerrainBuildoutLoader(crcTable, terrain);
-				loader.load(row);
-				objects.putAll(loader.getObjects());
-				objectTable.putAll(loader.getObjectTable());
-				return;
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile(BASE_PATH+"buildout_scenes.iff");
+		int areaId = 1;
+		for (int sceneRow = 0; sceneRow < table.getRowCount(); sceneRow++) {
+			Terrain t = Terrain.getTerrainFromName((String) table.getCell(sceneRow, 0));
+			
+			String file = "datatables/buildout/areas_"+t.getName()+".iff";
+			DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
+			for (int row = 0; row < areaTable.getRowCount(); row++) {
+				SwgBuildoutArea area = new SwgBuildoutArea();
+				area.load(areaTable.getRow(row), sceneRow, row);
+				loadArea(area, t, areaId);
+				areaId++;
 			}
 		}
-		System.err.println("Could not find buildouts for terrain: " + terrain);
-		Log.e("Could not find buildouts for terrain: %s", terrain);
 	}
 	
-	public Map <Long, SWGObject> getObjectTable() {
-		return objectTable;
+	public long getPreviousId(long id) {
+		return idMapping.getOrDefault(id, 0L);
 	}
 	
-	public Map<String, List <SWGObject>> getObjects() {
-		return objects;
+	public Set<SWGObject> getObjects() {
+		return Collections.unmodifiableSet(objects);
 	}
 	
-	private static List <Terrain> getTerrainsToLoad() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/buildout/buildout_scenes.iff");
-		List <Terrain> terrains = new LinkedList<>();
-		for (int row = 0; row < table.getRowCount(); row++) {
-			Terrain t = Terrain.getTerrainFromName((String) table.getCell(row, 0));
-			if (t != null)
-				terrains.add(t);
-			else
-				System.err.println("Couldn't find terrain: " + table.getCell(row, 0));
+	private void loadArea(SwgBuildoutArea area, Terrain terrain, int areaId) {
+		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(BASE_PATH+terrain.getName()+"/"+area.getName().replace("server", "client")+".iff");
+		
+		SwgBuildoutRow buildoutRow = new SwgBuildoutRow(area);
+		Map<Long, SWGObject> officialBuildoutTable = new HashMap<>();
+		for (int row = 0; row < areaTable.getRowCount(); row++) {
+			buildoutRow.load(areaTable.getRow(row), crcTable);
+			
+			long id = buildoutRow.getTemplate().equals("object/cell/shared_cell.iff") ? cellIdGenerator.getAndIncrement() : objectIdGenerator.getAndIncrement();
+			SWGObject object = ObjectCreator.createObjectFromTemplate(id, buildoutRow.getTemplate());
+			Location l = buildoutRow.getLocation();
+			object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
+			object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
+			object.setBuildoutAreaId(areaId);
+			object.setBuildoutEvent(area.getEventRequired());
+			
+			setCellInformation(object, buildoutRow.getCellIndex());
+			addObject(officialBuildoutTable, object, buildoutRow.getObjectId(), buildoutRow.getContainerId());
 		}
-		return terrains;
+	}
+	
+	private void setCellInformation(SWGObject object, int cellIndex) {
+		if (!(object instanceof CellObject))
+			return;
+		CellObject cell = (CellObject) object;
+		cell.setNumber(cellIndex);
+	}
+	
+	private void addObject(Map<Long, SWGObject> objectTable, SWGObject object, long objectId, long containerId) {
+		objects.add(object);
+		idMapping.put(object.getObjectId(), objectId);
+		objectTable.put(objectId, object);
+		if (containerId != 0) {
+			SWGObject container = objectTable.get(containerId);
+			object.systemMove(container);
+			if (container == null)
+				Log.e("Failed to load object: " + object.getTemplate());
+		}
 	}
 	
 }

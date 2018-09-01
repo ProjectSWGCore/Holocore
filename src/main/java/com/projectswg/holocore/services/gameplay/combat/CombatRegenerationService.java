@@ -4,6 +4,7 @@ import com.projectswg.holocore.intents.gameplay.combat.CreatureRevivedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -35,8 +36,22 @@ public class CombatRegenerationService extends Service {
 	@Override
 	public boolean stop() {
 		executor.stop();
-		executor.awaitTermination(1000);
-		return true;
+		return executor.awaitTermination(1000);
+	}
+	
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		CreatureObject creature = pei.getPlayer().getCreatureObject();
+		switch (pei.getEvent()) {
+			case PE_ZONE_IN_SERVER:
+				if (!creature.isInCombat()) {
+					startHealthRegeneration(creature);
+					startActionRegeneration(creature);
+				}
+				break;
+			default:
+				break;
+		}
 	}
 	
 	@IntentHandler

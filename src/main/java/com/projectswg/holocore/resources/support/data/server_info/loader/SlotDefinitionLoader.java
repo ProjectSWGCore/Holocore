@@ -36,14 +36,14 @@ import java.util.Map;
 
 public final class SlotDefinitionLoader extends DataLoader {
 	
-	private final Map<String, SlotDefinition> buildingMap;
+	private final Map<String, SlotDefinition> slotDefinitions;
 	
 	SlotDefinitionLoader() {
-		this.buildingMap = new HashMap<>();
+		this.slotDefinitions = new HashMap<>();
 	}
 	
 	public SlotDefinition getSlotDefinition(String slotName) {
-		return buildingMap.get(slotName);
+		return slotDefinitions.get(slotName);
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public final class SlotDefinitionLoader extends DataLoader {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/abstract/slot_definitions.sdb"))) {
 			while (set.next()) {
 				SlotDefinition def = new SlotDefinition(set);
-				buildingMap.put(def.getName(), def);
+				slotDefinitions.put(def.getName(), def);
 			}
 		}
 	}

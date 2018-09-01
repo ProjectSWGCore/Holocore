@@ -101,6 +101,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private float		complexity		= 1;
 	private int     	containerType	= 0;
 	private int			areaId			= -1;
+	private String		buildoutEvent	= "";
+	private String		buildoutTag		= "";
 	private int     	slotArrangement	= -1;
 	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
@@ -556,6 +558,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.areaId = areaId;
 	}
 	
+	public void setBuildoutEvent(String event) {
+		this.buildoutEvent = event;
+	}
+	
+	public void setBuildoutTag(String tag) {
+		this.buildoutTag = tag;
+	}
+	
 	public void setArrangement(List<List<String>> arrangement) {
 		this.arrangement = arrangement;
 	}
@@ -679,6 +689,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public int getBuildoutAreaId() {
 		return areaId;
+	}
+	
+	public String getBuildoutEvent() {
+		return buildoutEvent;
+	}
+	
+	public String getBuildoutTag() {
+		return buildoutTag;
 	}
 	
 	public Object getServerAttribute(ServerAttribute key) {

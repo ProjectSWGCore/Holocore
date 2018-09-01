@@ -11,6 +11,7 @@ import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDa
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuildoutLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -21,10 +22,7 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -35,18 +33,21 @@ public class ObjectStorageService extends Service {
 	private final ObjectDatabase<SWGObject> database;
 	private final Map<Long, SWGObject> objectMap;
 	private final Map<Long, SWGObject> buildouts;
+	private final Map<String, BuildingObject> buildingLookup;
 	private final AtomicBoolean started;
 	
 	public ObjectStorageService() {
 		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		this.buildouts = new ConcurrentHashMap<>(256*1024, 0.8f, 1);
+		this.buildingLookup = new HashMap<>();
 		this.started = new AtomicBoolean(false);
 	}
 	
 	@Override
 	public boolean initialize() {
 		ObjectLookup.setObjectAuthority(this::getObjectById);
+		BuildingLookup.setBuildingAuthority(buildingLookup::get);
 		
 		{
 			long startTime = StandardLog.onStartLoad("players");
@@ -59,8 +60,10 @@ public class ObjectStorageService extends Service {
 		
 		{
 			long startTime = StandardLog.onStartLoad("client objects");
-			buildouts.putAll(DataLoader.buildouts(createEventList()).getObjects());
+			BuildoutLoader loader = DataLoader.buildouts(createEventList());
+			buildouts.putAll(loader.getObjects());
 			objectMap.putAll(buildouts);
+			buildingLookup.putAll(loader.getBuildings());
 			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
 		}
 		return true;
@@ -202,6 +205,21 @@ public class ObjectStorageService extends Service {
 		@Nullable
 		public static SWGObject getObjectById(long id) {
 			return AUTHORITY.get().apply(id);
+		}
+		
+	}
+	
+	public static class BuildingLookup {
+		
+		private static final AtomicReference<Function<String, BuildingObject>> AUTHORITY = new AtomicReference<>(null);
+		
+		static void setBuildingAuthority(Function<String, BuildingObject> authority) {
+			AUTHORITY.set(authority);
+		}
+		
+		@Nullable
+		public static BuildingObject getBuildingByTag(String buildoutTag) {
+			return AUTHORITY.get().apply(buildoutTag);
 		}
 		
 	}

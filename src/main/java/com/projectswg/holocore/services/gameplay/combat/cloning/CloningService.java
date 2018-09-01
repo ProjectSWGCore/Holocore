@@ -20,7 +20,6 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -29,7 +28,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -391,8 +390,7 @@ public class CloningService extends Service {
 	}
 	
 	private static BuildingObject getDefaultCloner() {
-		long clonerId = DataLoader.buildings().getBuilding("tat_moseisley_cloning1").getId();
-		BuildingObject defaultCloner = (clonerId == 0) ? null : (BuildingObject) ObjectLookup.getObjectById(clonerId);
+		BuildingObject defaultCloner = BuildingLookup.getBuildingByTag("tat_moseisley_cloning1");
 		if (defaultCloner == null)
 			Log.e("No default cloner found with building id: 'tat_moseisley_cloning1'");
 		

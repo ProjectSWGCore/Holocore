@@ -28,15 +28,13 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +50,7 @@ public class CmdGoto implements ICmdCallback  {
 		String [] parts = args.split(" ");
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
-		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(parts[0].trim());
+		BuildingObject building = BuildingLookup.getBuildingByTag(parts[0].trim());
 		if (building == null) {
 			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + parts[0]);
 			return;
@@ -69,16 +67,10 @@ public class CmdGoto implements ICmdCallback  {
 		new SystemMessageIntent(player, err).broadcast();
 	}
 	
-	private String teleportToGoto(SWGObject obj, BuildingLoaderInfo building, int cellNumber) {
-		SWGObject parent = ObjectLookup.getObjectById(building.getId());
-		if (!(parent instanceof BuildingObject)) {
-			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, building.getId());
-			Log.e(err);
-			return err;
-		}
-		CellObject cell = ((BuildingObject) parent).getCellByNumber(cellNumber);
+	private String teleportToGoto(SWGObject obj, BuildingObject building, int cellNumber) {
+		CellObject cell = building.getCellByNumber(cellNumber);
 		if (cell == null) {
-			String err = String.format("Building '%s' does not have cell %d", building.getName(), cellNumber);
+			String err = String.format("Building '%s' does not have cell %d", building, cellNumber);
 			Log.e(err);
 			return err;
 		}
@@ -91,7 +83,7 @@ public class CmdGoto implements ICmdCallback  {
 			z = (portal.getFrame1().getZ() + portal.getFrame2().getZ()) / 2;
 		}
 		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.getTerrain()).build());
-		return "Successfully teleported "+obj.getObjectName()+" to "+building.getId();
+		return "Successfully teleported "+obj.getObjectName()+" to "+building.getBuildoutTag();
 	}
 	
 }

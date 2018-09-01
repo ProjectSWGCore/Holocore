@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
@@ -65,6 +66,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 	public static class StaticSpawnInfo {
 		
 		private final int id;
+		private final Terrain terrain;
 		private final double x;
 		private final double y;
 		private final double z;
@@ -84,6 +86,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		
 		private StaticSpawnInfo(SdbResultSet set) {
 			this.id = (int) set.getInt("spawn_id");
+			this.terrain = Terrain.valueOf(set.getText("terrain"));
 			this.x = set.getReal("x");
 			this.y = set.getReal("y");
 			this.z = set.getReal("z");
@@ -105,6 +108,10 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		
 		public int getId() {
 			return id;
+		}
+		
+		public Terrain getTerrain() {
+			return terrain;
 		}
 		
 		public double getX() {

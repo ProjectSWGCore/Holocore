@@ -39,13 +39,13 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion;
-import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion.SpawnInformation;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreationRestriction;
 import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
@@ -69,7 +69,6 @@ public class CharacterCreationService extends Service {
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
 	private final CharacterCreationRestriction creationRestriction;
-	private final TerrainZoneInsertion insertion;
 	private final PswgUserDatabase userDatabase;
 	
 	public CharacterCreationService() {
@@ -79,7 +78,6 @@ public class CharacterCreationService extends Service {
 		this.nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
 		this.nameGenerator = new SWGNameGenerator(nameFilter);
 		this.creationRestriction = new CharacterCreationRestriction(2);
-		this.insertion = new TerrainZoneInsertion();
 		this.userDatabase = new PswgUserDatabase();
 	}
 	
@@ -270,7 +268,7 @@ public class CharacterCreationService extends Service {
 	
 	private CreatureObject createCharacter(Player player, ClientCreateCharacter create) {
 		String spawnLocation = DataManager.getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
-		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
+		ZoneInsertion info = DataLoader.zoneInsertions().getInsertion(spawnLocation);
 		if (info == null) {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
