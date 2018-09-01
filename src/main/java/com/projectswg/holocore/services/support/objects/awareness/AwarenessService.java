@@ -125,6 +125,9 @@ public class AwarenessService extends Service {
 		
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			teleporting.add(obj);
+		
+		obj.sendSelf(new DataTransform(obj.getObjectId(), 0, obj.getNextUpdateCount(), obj.getWorldLocation(), 0));
+		
 		update(obj);
 		update(oldParent);
 		
@@ -316,7 +319,7 @@ public class AwarenessService extends Service {
 			return false;
 		if (!((CreatureObject) obj).isLoggedInPlayer())
 			return false;
-		return oldLocation.getTerrain() != newLocation.getTerrain();
+		return !oldLocation.getTerrain().getFile().equals(newLocation.getTerrain().getFile());
 	}
 	
 	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
