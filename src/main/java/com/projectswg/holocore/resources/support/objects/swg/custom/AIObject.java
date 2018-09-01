@@ -89,7 +89,7 @@ public class AIObject extends CreatureObject {
 				return;
 		}
 		CreatureObject player = (CreatureObject) aware;
-		if (!player.isLoggedInPlayer())
+		if (!player.isLoggedInPlayer() || player.getPosture() == Posture.INCAPACITATED || player.getPosture() == Posture.DEAD)
 			return;
 		double distance = getLocation().flatDistanceTo(aware.getLocation());
 		NpcMode activeMode = this.activeMode;
