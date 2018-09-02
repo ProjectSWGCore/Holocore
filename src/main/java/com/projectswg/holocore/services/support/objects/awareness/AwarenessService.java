@@ -126,8 +126,6 @@ public class AwarenessService extends Service {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			teleporting.add(obj);
 		
-		obj.sendSelf(new DataTransform(obj.getObjectId(), 0, obj.getNextUpdateCount(), obj.getWorldLocation(), 0));
-		
 		update(obj);
 		update(oldParent);
 		
@@ -189,11 +187,6 @@ public class AwarenessService extends Service {
 		SWGObject oldParent = creature.getParent();
 		Location oldLocation = creature.getLocation();
 		synchronized (creature.getAwarenessLock()) {
-			// Safely clear awareness
-			creature.setOwner(null);
-			creature.setAware(AwarenessType.OBJECT, List.of());
-			creature.setOwner(player);
-			
 			creature.systemMove(parent, loc);
 			creature.resetObjectsAware();
 			startZone(creature, firstZone);
