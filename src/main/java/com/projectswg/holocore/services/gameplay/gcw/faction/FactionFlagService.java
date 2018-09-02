@@ -16,7 +16,6 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
@@ -134,14 +133,12 @@ public class FactionFlagService extends Service {
 			TangibleObject tangibleAware = (TangibleObject) objectAware;
 			
 			Player observerOwner = tangibleAware.getOwner();
-
-			int pvpBitmask = getPvpBitmask(target, tangibleAware);
 			
 			if (targetOwner != null) // Send the PvP information about this observer to the owner
-				targetOwner.sendPacket(createPvpStatusMessage(tangibleAware, tangibleAware.getPvpFlags() | pvpBitmask));
+				targetOwner.sendPacket(new UpdatePvpStatusMessage(tangibleAware.getPvpFaction(), tangibleAware.getObjectId(), target.getPvpFlagsFor(tangibleAware)));
 			
 			if (observerOwner != null)	// Send the pvp information about the owner to this observer
-				observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+				observerOwner.sendPacket(new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), tangibleAware.getPvpFlagsFor(target)));
 		}
 	}
 	
@@ -195,21 +192,6 @@ public class FactionFlagService extends Service {
 			delay = 300;
 		
 		return delay;
-	}
-	
-	private static UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject target, int flags) {
-		Set<PvpFlag> flagSet = PvpFlag.getFlags(flags);
-		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), flagSet.toArray(new PvpFlag[0]));
-	}
-	
-	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
-		int pvpBitmask = 0;
-
-		if (target.isEnemyOf(observer) && target.getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
-			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
-		}
-		
-		return pvpBitmask;
 	}
 	
 }

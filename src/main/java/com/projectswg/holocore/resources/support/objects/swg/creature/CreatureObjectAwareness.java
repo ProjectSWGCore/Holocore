@@ -27,19 +27,15 @@
 
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CreatureObjectAwareness {
 	
@@ -152,13 +148,7 @@ public class CreatureObjectAwareness {
 		return creature.getWorldLocation().distanceTo(obj.getLocation());
 	}
 	
-	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {
-		while (!createStack.isEmpty() && createStack.getLast() != parent) {
-			target.sendPacket(new SceneEndBaselines(createStack.pollLast().getObjectId()));
-		}
-	}
-	
-	private static void createObject(@NotNull SWGObject obj, @NotNull Player target) {
+	private void createObject(@NotNull SWGObject obj, @NotNull Player target) {
 		long id = obj.getObjectId();
 		{ // SceneCreateObjectByCrc
 			SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
@@ -193,18 +183,19 @@ public class CreatureObjectAwareness {
 			if (obj instanceof CreatureObject && obj.isGenerated()) {
 				CreatureObject creature = (CreatureObject) obj;
 				target.sendPacket(new UpdatePostureMessage(creature.getPosture().getId(), id));
-				
-				Set<PvpFlag> flags = PvpFlag.getFlags(creature.getPvpFlags());
-				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, flags.toArray(new PvpFlag[0])));
-			}
-			if (obj instanceof TangibleObject) {
-				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();
+				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, this.creature.getPvpFlagsFor(creature)));
 			}
 		}
 		{ // UpdateContainmentMessage
 			SWGObject parent = obj.getParent();
 			if (parent != null)
 				target.sendPacket(new UpdateContainmentMessage(obj.getObjectId(), parent.getObjectId(), obj.getSlotArrangement()));
+		}
+	}
+	
+	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {
+		while (!createStack.isEmpty() && createStack.getLast() != parent) {
+			target.sendPacket(new SceneEndBaselines(createStack.pollLast().getObjectId()));
 		}
 	}
 	
