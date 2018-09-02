@@ -267,6 +267,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	/**
+	 * Attempts to move this object to the specified location within the current parent
+	 * @param location the location to move this object to
+	 */
+	public void moveToLocation(@NotNull Location location) {
+		moveToContainer(parent, location);
+	}
+	
+	/**
 	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 *
 	 * @param requester Object that is requesting to move the object, used for permission checking
