@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin.qatool;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
@@ -158,6 +159,7 @@ public class CmdQaTool implements ICmdCallback {
 		}
 		
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
+		recoveree.setPosture(Posture.UPRIGHT);
 		recoveree.moveToContainer(null, loc);
 		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
 	}
