@@ -1039,6 +1039,10 @@ public class CreatureObject extends TangibleObject {
 		return super.isEnemyOf(otherObject);	// Default
 	}
 	
+	public boolean isBaselinesSent(SWGObject obj) {
+		return awareness.isAware(obj);
+	}
+	
 	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables

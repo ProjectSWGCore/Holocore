@@ -81,7 +81,7 @@ public class ObjectAware {
 	
 	@NotNull
 	public Set<Player> getObservers() {
-		return getAwareStream().map(SWGObject::getOwnerShallow).filter(Objects::nonNull).collect(Collectors.toSet());
+		return getAwareStream().map(SWGObject::getOwnerShallow).filter(Objects::nonNull).filter(player -> player.isBaselinesSent(object)).collect(Collectors.toSet());
 	}
 	
 	@NotNull

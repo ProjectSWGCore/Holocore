@@ -39,6 +39,7 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CreatureObjectAwareness {
 	
@@ -103,6 +104,10 @@ public class CreatureObjectAwareness {
 		pendingAdd.clear();
 		pendingRemove.clear();
 		pendingAdd.addAll(creature.getAware());
+	}
+	
+	public synchronized boolean isAware(SWGObject obj) {
+		return aware.contains(obj);
 	}
 	
 	List<SWGObject> getCreateList() {

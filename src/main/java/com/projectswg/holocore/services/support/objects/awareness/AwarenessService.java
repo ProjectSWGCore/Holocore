@@ -227,7 +227,6 @@ public class AwarenessService extends Service {
 		StandardLog.onPlayerEvent(this, player, "zoned in from %s", p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
-		player.sendBufferedDeltas();
 	}
 	
 	private void handleDataTransform(Player player, DataTransform dt) {

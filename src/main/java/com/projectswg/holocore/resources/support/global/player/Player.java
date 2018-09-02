@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.global.player;
 
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -37,13 +36,10 @@ import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class Player implements Comparable<Player> {
 	
-	private final List<DeltasMessage> bufferedDeltas;
 	private final IntentChain intentChain;
 	private final Object sendingLock;
 	private final long networkId;
@@ -60,7 +56,6 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Player(long networkId) {
-		this.bufferedDeltas = new ArrayList<>();
 		this.intentChain = new IntentChain();
 		this.sendingLock = new Object();
 		this.networkId = networkId;
@@ -158,24 +153,14 @@ public class Player implements Comparable<Player> {
 		return sendingLock;
 	}
 	
-	public void sendBufferedDeltas() {
-		DeltasMessage [] packets;
-		synchronized (bufferedDeltas) {
-			packets = bufferedDeltas.toArray(new DeltasMessage[0]);
-			bufferedDeltas.clear();
-		}
-		sendPacket(packets);
+	public boolean isBaselinesSent(SWGObject obj) {
+		CreatureObject creature = this.creatureObject;
+		return creature == null || creature.isBaselinesSent(obj);
 	}
 	
 	public void sendPacket(SWGPacket ... packets) {
 		synchronized (getSendingLock()) {
 			for (SWGPacket p : packets) {
-				if (state != PlayerState.ZONED_IN && p instanceof DeltasMessage) {
-					synchronized (bufferedDeltas) {
-						bufferedDeltas.add((DeltasMessage) p);
-					}
-					continue;
-				}
 				intentChain.broadcastAfter(new OutboundPacketIntent(this, p));
 			}
 		}
