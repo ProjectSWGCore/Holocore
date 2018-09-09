@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.network;
 
+import com.projectswg.common.data.info.Config;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import com.projectswg.holocore.ProjectSWG;
@@ -40,28 +41,41 @@ import com.projectswg.holocore.resources.support.global.network.AdminNetworkClie
 import com.projectswg.holocore.resources.support.global.network.NetworkClient;
 import com.projectswg.holocore.resources.support.global.network.UDPServer;
 import com.projectswg.holocore.resources.support.global.network.UDPServer.UDPPacket;
+import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.network.TCPServer;
+import org.jetbrains.annotations.NotNull;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.BindException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.security.KeyStore;
 
 public class NetworkClientService extends Service {
 	
+	private final ThreadPool securityExecutor;
 	private final TCPServer<NetworkClient> tcpServer;
 	private final TCPServer<AdminNetworkClient> adminServer;
 	private final UDPServer udpServer;
+	private final SSLContext sslContext;
 	
 	public NetworkClientService() {
+		this.securityExecutor = new ThreadPool(3, "network-client-security-%d");
+		this.sslContext = initializeSecurity();
 		{
 			int bindPort = getBindPort();
 			int bufferSize = getBufferSize();
-			tcpServer = new TCPServer<>(bindPort, bufferSize, NetworkClient::new);
+			tcpServer = new TCPServer<>(bindPort, bufferSize, channel -> new NetworkClient(channel, sslContext, securityExecutor));
 			try {
 				udpServer = new UDPServer(bindPort, bufferSize);
 			} catch (SocketException e) {
@@ -71,15 +85,13 @@ public class NetworkClientService extends Service {
 		}
 		{
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
-			if (adminServerPort <= 0)
-				adminServer = null;
-			else
-				adminServer = new TCPServer<>(new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort), 1024, AdminNetworkClient::new);
+			adminServer = adminServerPort <= 0 ? null : new TCPServer<>(new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort), 1024, channel -> new AdminNetworkClient(channel, sslContext));
 		}
 	}
 	
 	@Override
 	public boolean start() {
+		securityExecutor.start();
 		int bindPort = -1;
 		try {
 			bindPort = getBindPort();
@@ -88,11 +100,11 @@ public class NetworkClientService extends Service {
 			if (adminServer != null) {
 				adminServer.bind();
 			}
+		} catch (BindException e) {
+			Log.e("Failed to bind to %d", bindPort);
+			return false;
 		} catch (IOException e) {
-			if (e instanceof BindException)
-				Log.e("Failed to bind to %d", bindPort);
-			else
-				Log.e(e);
+			Log.e(e);
 			return false;
 		}
 		return super.start();
@@ -104,7 +116,8 @@ public class NetworkClientService extends Service {
 		if (adminServer != null) {
 			adminServer.close();
 		}
-		return super.stop();
+		securityExecutor.stop(false);
+		return securityExecutor.awaitTermination(3000);
 	}
 	
 	@Override
@@ -165,6 +178,35 @@ public class NetworkClientService extends Service {
 		if (client != null || adminServer == null)
 			return client;
 		return adminServer.getSession(id);
+	}
+	
+	@NotNull
+	private SSLContext initializeSecurity() {
+		Log.t("Initializing encryption...");
+		Config config = DataManager.getConfig(ConfigFile.NETWORK);
+		File keystoreFile = new File(config.getString("KEYSTORE-FILE", ""));
+		if (!keystoreFile.isFile()) {
+			Log.w("Failed to enable security! Keystore file does not exist: %s", keystoreFile);
+			throw new RuntimeException("Failed to enable TLS. Keystore file does not exist: " + keystoreFile);
+		}
+		try {
+			char[] passphrase = config.getString("KEYSTORE-PASS", "").toCharArray();
+			KeyStore keystore = KeyStore.getInstance("PKCS12");
+			InputStream keystoreStream = new FileInputStream(keystoreFile);
+
+			keystore.load(keystoreStream, passphrase);
+			KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+			keyManagerFactory.init(keystore, passphrase);
+			TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+			trustManagerFactory.init(keystore);
+			SSLContext ctx = SSLContext.getInstance("TLSv1.2");
+			ctx.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
+			Log.i("Enabled TLS encryption");
+			return ctx;
+		} catch (Exception e) {
+			Log.a("Failed to enable security! %s: %s", e.getClass(), e.getMessage());
+			throw new RuntimeException("Failed to enable TLS", e);
+		}
 	}
 	
 	@IntentHandler

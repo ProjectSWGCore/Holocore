@@ -34,85 +34,74 @@ import com.projectswg.common.network.packets.swg.admin.AdminPacket;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import com.projectswg.common.network.packets.swg.holo.HoloSetProtocolVersion;
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
-import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.HolocoreSessionException;
-import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.HolocoreSessionException.SessionExceptionReason;
-import com.projectswg.holocore.resources.support.global.network.HolocoreSessionManager.SessionStatus;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.network.TCPServer.TCPSession;
+import me.joshlarson.jlcommon.network.TCPServer.SecureTCPSession;
 import org.jetbrains.annotations.NotNull;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SocketChannel;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class NetworkClient extends TCPSession {
+public class NetworkClient extends SecureTCPSession {
 	
 	private static final int DEFAULT_BUFFER = 1024;
 	
-	private final SocketChannel socket;
 	private final IntentChain intentChain;
 	private final NetBufferStream buffer;
-	private final HolocoreSessionManager sessionManager;
-	private final Lock inboundLock;
-	private final Lock outboundLock;
 	private final AtomicBoolean requestedProcessInbound;
+	private final AtomicReference<SessionStatus> status;
 	private final Player player;
 	
-	public NetworkClient(SocketChannel socket) {
-		super(socket);
-		this.socket = socket;
+	public NetworkClient(SocketChannel socket, SSLContext sslContext, ThreadPool securityExecutor) {
+		super(socket, createEngine(sslContext), DEFAULT_BUFFER, securityExecutor::execute);
 		this.intentChain = new IntentChain();
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
-		this.sessionManager = new HolocoreSessionManager();
-		this.inboundLock = new ReentrantLock(false);
-		this.outboundLock = new ReentrantLock(true);
 		this.requestedProcessInbound = new AtomicBoolean(false);
+		this.status = new AtomicReference<>(SessionStatus.DISCONNECTED);
 		this.player = new Player(getSessionId());
-		
-		this.sessionManager.setCallback(this::onSessionInitialized);
 	}
 	
 	public void close(ConnectionStoppedReason reason) {
-		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
+		if (status.getAndSet(SessionStatus.DISCONNECTED) != SessionStatus.DISCONNECTED) {
 			sendPacket(new HoloConnectionStopped(reason));
-			sessionManager.onSessionDestroyed();
 			intentChain.broadcastAfter(new ConnectionClosedIntent(player, reason));
-			try {
-				socket.close();
-			} catch (IOException e) {
-				Log.e("Failed to close connection. IOException: %s", e.getMessage());
-			}
+			startSSLClose();
 		}
 	}
 	
 	public void processInbound() {
-		inboundLock.lock();
-		requestedProcessInbound.set(false);
-		try {
-			while (NetworkProtocol.canDecode(buffer)) {
-				SWGPacket p = NetworkProtocol.decode(buffer);
-				if (p == null || !allowInbound(p))
-					continue;
-				p.setSocketAddress(getRemoteAddress());
-				sessionManager.onInbound(p);
-				intentChain.broadcastAfter(new InboundPacketIntent(player, p));
+		synchronized (buffer) {
+			requestedProcessInbound.set(false);
+			try {
+				while (NetworkProtocol.canDecode(buffer)) {
+					SWGPacket p = NetworkProtocol.decode(buffer);
+					if (p == null || !allowInbound(p))
+						continue;
+					p.setSocketAddress(getRemoteAddress());
+					processPacket(p);
+					intentChain.broadcastAfter(new InboundPacketIntent(player, p));
+				}
+			} catch (HolocoreSessionException e) {
+				onSessionError(e);
+			} catch (IOException e) {
+				Log.w("Failed to process inbound packets. IOException: %s", e.getMessage());
+				close(ConnectionStoppedReason.NETWORK);
 			}
-		} catch (HolocoreSessionException e) {
-			onSessionError(e);
-		} catch (IOException e) {
-			Log.w("Failed to process inbound packets. IOException: %s", e.getMessage());
-			close(ConnectionStoppedReason.NETWORK);
-		} finally {
-			inboundLock.unlock();
 		}
 	}
 	
@@ -127,31 +116,27 @@ public class NetworkClient extends TCPSession {
 	}
 	
 	@Override
-	protected void onIncomingData(@NotNull byte[] data) {
-		inboundLock.lock();
-		try {
-			buffer.write(data);
-			if (!requestedProcessInbound.getAndSet(true) && NetworkProtocol.canDecode(buffer))
-				InboundPacketPendingIntent.broadcast(this);
-		} catch (IOException e) {
-			close(ConnectionStoppedReason.NETWORK);
-		} finally {
-			inboundLock.unlock();
+	protected void onIncomingData(@NotNull ByteBuffer data) {
+		synchronized (buffer) {
+			try {
+				buffer.write(data);
+				if (NetworkProtocol.canDecode(buffer) && !requestedProcessInbound.getAndSet(true))
+					InboundPacketPendingIntent.broadcast(this);
+			} catch (IOException e) {
+				close(ConnectionStoppedReason.NETWORK);
+			}
 		}
 	}
 	
 	@Override
 	protected void onConnected() {
-		sessionManager.onSessionCreated();
+		status.set(SessionStatus.CONNECTING);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(player));
 	}
 	
 	@Override
 	protected void onDisconnected() {
-		if (sessionManager.getStatus() != SessionStatus.DISCONNECTED) {
-			sessionManager.onSessionDestroyed();
-			intentChain.broadcastAfter(new ConnectionClosedIntent(player, ConnectionStoppedReason.UNKNOWN));
-		}
+		close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
 	}
 	
 	protected boolean allowInbound(SWGPacket packet) {
@@ -162,38 +147,80 @@ public class NetworkClient extends TCPSession {
 		return !(packet instanceof AdminPacket);
 	}
 	
-	private void onSessionInitialized() {
-		sendPacket(new HoloConnectionStarted());
-	}
-	
 	private void onSessionError(HolocoreSessionException e) {
-		if (e.getReason() != SessionExceptionReason.DISCONNECT_REQUESTED)
-			Log.w("HolocoreSessionException with %s and error: %s", getRemoteAddress(), e.getReason());
-		
 		switch (e.getReason()) {
 			case NO_PROTOCOL:
 				sendPacket(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
+				sendPacket(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
 				break;
 			case PROTOCOL_INVALID:
 				sendPacket(new HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL));
 				break;
-			case DISCONNECT_REQUESTED:
+		}
+	}
+	
+	private void processPacket(SWGPacket p) throws HolocoreSessionException {
+		switch (p.getPacketType()) {
+			case HOLO_SET_PROTOCOL_VERSION:
+				if (!((HoloSetProtocolVersion) p).getProtocol().equals(NetworkProtocol.VERSION))
+					throw new HolocoreSessionException(SessionExceptionReason.PROTOCOL_INVALID);
+				
+				status.set(SessionStatus.CONNECTED);
+				sendPacket(new HoloConnectionStarted());
+				break;
+			case HOLO_CONNECTION_STOPPED:
 				close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
+				break;
+			default:
+				if (status.get() != SessionStatus.CONNECTED)
+					throw new HolocoreSessionException(SessionExceptionReason.NO_PROTOCOL);
 				break;
 		}
 	}
 	
 	private void sendPacket(SWGPacket p) {
-		ByteBuffer data = NetworkProtocol.encode(p).getBuffer();
-		outboundLock.lock();
+		if (!isConnected())
+			return;
 		try {
-			while (data.hasRemaining())
-				socket.write(data);
+			writeToChannel(NetworkProtocol.encode(p).getBuffer());
+		} catch (ClosedChannelException e) {
+			close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
 		} catch (IOException e) {
-			Log.e("Failed to send packet. IOException: %s", e.getMessage());
-		} finally {
-			outboundLock.unlock();
+			Log.e("Failed to send packet. %s: %s", e.getClass().getName(), e.getMessage());
 		}
+	}
+	
+	private static SSLEngine createEngine(SSLContext sslContext) {
+		SSLEngine engine = sslContext.createSSLEngine();
+		engine.setUseClientMode(false);
+		engine.setNeedClientAuth(false);
+		return engine;
+	}
+	
+	private enum SessionStatus {
+		DISCONNECTED,
+		CONNECTING,
+		CONNECTED
+		
+	}
+	
+	private enum SessionExceptionReason {
+		NO_PROTOCOL,
+		PROTOCOL_INVALID
+	}
+	
+	private static class HolocoreSessionException extends Exception {
+		
+		private final SessionExceptionReason reason;
+		
+		public HolocoreSessionException(SessionExceptionReason reason) {
+			this.reason = reason;
+		}
+		
+		public SessionExceptionReason getReason() {
+			return reason;
+		}
+		
 	}
 	
 }

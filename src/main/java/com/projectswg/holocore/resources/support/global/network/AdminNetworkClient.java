@@ -29,12 +29,13 @@ package com.projectswg.holocore.resources.support.global.network;
 
 import com.projectswg.common.network.packets.SWGPacket;
 
+import javax.net.ssl.SSLContext;
 import java.nio.channels.SocketChannel;
 
 public class AdminNetworkClient extends NetworkClient {
 	
-	public AdminNetworkClient(SocketChannel socket) {
-		super(socket);
+	public AdminNetworkClient(SocketChannel socket, SSLContext sslContext) {
+		super(socket, sslContext);
 	}
 	
 	@Override
