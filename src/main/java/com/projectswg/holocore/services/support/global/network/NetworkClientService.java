@@ -46,7 +46,6 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.network.TCPServer;
-import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -180,20 +179,25 @@ public class NetworkClientService extends Service {
 		return adminServer.getSession(id);
 	}
 	
-	@NotNull
 	private SSLContext initializeSecurity() {
 		Log.t("Initializing encryption...");
 		Config config = DataManager.getConfig(ConfigFile.NETWORK);
-		File keystoreFile = new File(config.getString("KEYSTORE-FILE", ""));
-		if (!keystoreFile.isFile()) {
-			Log.w("Failed to enable security! Keystore file does not exist: %s", keystoreFile);
-			throw new RuntimeException("Failed to enable TLS. Keystore file does not exist: " + keystoreFile);
-		}
 		try {
-			char[] passphrase = config.getString("KEYSTORE-PASS", "").toCharArray();
-			KeyStore keystore = KeyStore.getInstance("PKCS12");
-			InputStream keystoreStream = new FileInputStream(keystoreFile);
-
+			File keystoreFile = new File(config.getString("KEYSTORE-FILE", ""));
+			InputStream keystoreStream;
+			char[] passphrase;
+			KeyStore keystore;
+			if (!keystoreFile.isFile()) {
+				Log.w("Failed to enable security! Keystore file does not exist: %s", keystoreFile);
+				keystoreStream = getClass().getResourceAsStream("/security/Holocore.p12");
+				passphrase = new char[]{'p', 'a', 's', 's'};
+				keystore = KeyStore.getInstance("PKCS12");
+			} else {
+				keystoreStream = new FileInputStream(keystoreFile);
+				passphrase = config.getString("KEYSTORE-PASS", "").toCharArray();
+				keystore = KeyStore.getInstance(config.getString("KEYSTORE-TYPE", "PKCS12"));
+			}
+			
 			keystore.load(keystoreStream, passphrase);
 			KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 			keyManagerFactory.init(keystore, passphrase);

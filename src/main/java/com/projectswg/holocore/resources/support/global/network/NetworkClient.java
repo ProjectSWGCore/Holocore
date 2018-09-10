@@ -40,7 +40,6 @@ import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIn
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
@@ -53,12 +52,25 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SocketChannel;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class NetworkClient extends SecureTCPSession {
 	
+	private static final String[] ENABLED_CIPHERS = new String[] {
+			"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+			"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+			"TLS_RSA_WITH_AES_256_GCM_SHA384",
+			"TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384",
+			"TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384",
+			"TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+			"TLS_DHE_DSS_WITH_AES_256_GCM_SHA384",
+			"TLS_DH_anon_WITH_AES_256_GCM_SHA384",
+			"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+			"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+			"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384",
+			"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384"
+	};
 	private static final int DEFAULT_BUFFER = 1024;
 	
 	private final IntentChain intentChain;
@@ -194,6 +206,7 @@ public class NetworkClient extends SecureTCPSession {
 		SSLEngine engine = sslContext.createSSLEngine();
 		engine.setUseClientMode(false);
 		engine.setNeedClientAuth(false);
+		engine.setEnabledCipherSuites(ENABLED_CIPHERS);
 		return engine;
 	}
 	
