@@ -66,36 +66,21 @@ class TerrainMapChunk {
 	}
 	
 	public void getWithinAwareness(@NotNull SWGObject obj, @NotNull Collection<SWGObject> withinRange) {
-		int truncX = obj.getTruncX();
-		int truncZ = obj.getTruncZ();
-		int instance = obj.getInstanceLocation().getInstanceNumber();
-		int loadRange = obj.getLoadRange();
 		for (SWGObject test : objects) {
-			// Calculate distance
-			int dTmp = truncX - test.getTruncX();
-			int d = dTmp * dTmp;
-			dTmp = truncZ - test.getTruncZ();
-			
-			int testInstance = test.getInstanceLocation().getInstanceNumber();
-			int range = test.getLoadRange();
-			if (range < loadRange)
-				range = loadRange;
-			
-			if (instance == testInstance) {
-				if (range >= 16384 || (d + dTmp * dTmp) < range*range) {
-					recursiveAdd(withinRange, test);
-				}
-			}
+			if (obj.isWithinAwarenessRange(test))
+				recursiveAdd(withinRange, obj, test);
 		}
 	}
 	
-	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject test) {
+	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject obj, @NotNull SWGObject test) {
+		if (!obj.isWithinAwarenessRange(test))
+			return;
 		withinRange.add(test);
 		for (SWGObject child : test.getSlottedObjects()) {
-			recursiveAdd(withinRange, child);
+			recursiveAdd(withinRange, obj, child);
 		}
 		for (SWGObject child : test.getContainedObjects()) {
-			recursiveAdd(withinRange, child);
+			recursiveAdd(withinRange, obj, child);
 		}
 	}
 	

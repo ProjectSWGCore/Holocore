@@ -27,10 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -65,7 +62,9 @@ public class TerrainMap {
 	}
 	
 	public void update(SWGObject obj) {
-		obj.setAware(AwarenessType.OBJECT, getAware(obj));
+		SWGObject superParent = obj.getSuperParent();
+		TerrainMapChunk chunk = (superParent != null ? superParent : obj).getAwareness().getTerrainMapChunk();
+		obj.setAware(AwarenessType.OBJECT, chunk == null ? EMPTY_SET : chunk.getWithinAwareness(obj));
 		obj.onObjectMoved();
 	}
 	
@@ -83,32 +82,6 @@ public class TerrainMap {
 				current.removeObject(obj);
 			chunk.addObject(obj);
 		}
-	}
-	
-	@NotNull
-	private static Collection<SWGObject> getAware(SWGObject obj) {
-		CreatureObject creo = null;
-		if (obj instanceof CreatureObject)
-			creo = (CreatureObject) obj;
-		
-		SWGObject superParent = obj.getSuperParent();
-		if (superParent != null)
-			obj = superParent;
-		
-		return getNearbyAware(creo, obj);
-	}
-	
-	@NotNull
-	private static Set<SWGObject> getNearbyAware(CreatureObject creo, SWGObject obj) {
-		TerrainMapChunk chunk = obj.getAwareness().getTerrainMapChunk();
-		if (chunk == null)
-			return EMPTY_SET;
-		
-		Set<SWGObject> aware = chunk.getWithinAwareness(obj);
-		if (creo != null)
-			aware.removeIf(o -> !o.isVisible(creo));
-		aware.removeIf(o -> !AwarenessUtilities.isInAwareness(o));
-		return aware;
 	}
 	
 	private void connectChunkNeighbors() {

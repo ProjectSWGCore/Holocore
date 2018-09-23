@@ -350,6 +350,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			intent.broadcast();
 	}
 	
+	public boolean isWithinAwarenessRange(SWGObject target) {
+		if (target instanceof CreatureObject)
+			return target.isWithinAwarenessRange(this);
+		return false;
+	}
+	
 	public boolean isVisible(CreatureObject target) {
 		if (target == null)
 			return true;

@@ -62,9 +62,9 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	
 	private void initialize() {
 		awareness = new ObjectAwareness();
-		player = new GenericCreatureObject(getUniqueId());
-		testPlayer = new GenericCreatureObject(getUniqueId());
-		testTangible = new GenericTangibleObject(getUniqueId());
+		player = new GenericCreatureObject(getUniqueId(), "player");
+		testPlayer = new GenericCreatureObject(getUniqueId(), "testPlayer");
+		testTangible = new GenericTangibleObject(getUniqueId(), "testTangible");
 		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
 		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
 		testCell1 = new CellObject(getUniqueId());
@@ -127,7 +127,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		Assert.assertEquals(0, player.getLoadRange());
 		
 		moveNoAssert(TestLocation.SSI);
-		assertAware(List.of(player));
+		assertAware(List.of(player, testPlayer));
 		
 		player.setHasOwner(true);
 		Assert.assertNotEquals(0, player.getLoadRange());
@@ -232,8 +232,8 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private enum TestLocation {
 		SSI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(25, 25)),
 		SDI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(-10, -10)),
-		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(150, 150)),
-		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-150, -150)),
+		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(1500, 1500)),
+		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-1500, -1500)),
 		BSSI(TestParent.BUIO1,	TestAwareSet.TATOOINE, buildTatooine(0, 0)),
 		DDO	(TestParent.NONE,	TestAwareSet.NABOO, buildNaboo(25, 25)),
 		BDDO(TestParent.BUIO2,	TestAwareSet.NABOO, buildNaboo(0, 0)),

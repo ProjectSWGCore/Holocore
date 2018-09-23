@@ -186,6 +186,38 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
+	public boolean isWithinAwarenessRange(SWGObject target) {
+		if (isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			SWGObject rider = getSlottedObject("rider");
+			if (rider != null)
+				return rider.isWithinAwarenessRange(target);
+		}
+		if (!isLoggedInPlayer()) {
+			if (target instanceof CreatureObject && ((CreatureObject) target).isLoggedInPlayer())
+				return target.isWithinAwarenessRange(this);
+			return false;
+		}
+		if (getInstanceLocation().getInstanceNumber() != target.getInstanceLocation().getInstanceNumber())
+			return false;
+		if (target.getParent() != null && !target.isVisible(this))
+			return false;
+		
+		double distance = target.getWorldLocation().flatDistanceTo(getWorldLocation());
+		switch (target.getBaselineType()) {
+			case WAYP:
+				return false;
+			case SCLT:
+				return true;
+			case BUIO:
+				return distance <= 1024;
+			case CREO:
+				return distance <= 200;
+			default:
+				return distance <= 400;
+		}
+	}
+	
+	@Override
 	protected int calculateLoadRange() {
 		if (isLoggedInPlayer())
 			return 300;

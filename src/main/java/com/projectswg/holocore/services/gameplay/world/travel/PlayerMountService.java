@@ -271,7 +271,6 @@ public class PlayerMountService extends Service {
 		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		
 		if (player.getObjectId() == mount.getOwnerId()) {
-			player.setLocation(Location.zero());
 			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
 		} else if (mount.getSlottedObject("rider") != null) {
 			GroupObject group = (GroupObject) ObjectLookup.getObjectById(player.getGroupId());
@@ -287,7 +286,6 @@ public class PlayerMountService extends Service {
 					return;
 				}
 				if (mount.getSlottedObject("rider" + i) == null) {
-					player.setLocation(Location.zero());
 					player.moveToSlot(mount, "rider" + i, mount.getArrangementId(player));
 					added = true;
 					break;

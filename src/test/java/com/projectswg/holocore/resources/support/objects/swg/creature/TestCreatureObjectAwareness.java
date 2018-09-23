@@ -115,7 +115,7 @@ public class TestCreatureObjectAwareness extends TestRunnerNoIntents {
 		assertDestroy();
 		awareness.removeAware(testObject1);
 		awareness.removeAware(testObject2);
-		assertDestroy(testObject1, testObject2);
+		assertDestroy(testObject2);
 	}
 	
 	@Test

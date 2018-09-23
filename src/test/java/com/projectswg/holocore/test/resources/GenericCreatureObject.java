@@ -45,10 +45,15 @@ public class GenericCreatureObject extends CreatureObject {
 	private int loadRange;
 	
 	public GenericCreatureObject(long objectId) {
+		this(objectId, "");
+	}
+	
+	public GenericCreatureObject(long objectId, String name) {
 		super(objectId);
 		player = new GenericPlayer();
 		player.setPlayerState(PlayerState.ZONED_IN);
 		setHasOwner(true);
+		setObjectName(name);
 		setTemplate("object/creature/player/shared_human_male.iff");
 		setupAsCharacter();
 		loadRange = -1;

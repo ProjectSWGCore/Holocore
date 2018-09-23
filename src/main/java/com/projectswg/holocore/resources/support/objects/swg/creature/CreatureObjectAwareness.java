@@ -28,6 +28,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.network.packets.swg.zone.*;
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -62,7 +63,7 @@ public class CreatureObjectAwareness {
 	
 	public synchronized void removeAware(@NotNull SWGObject obj) {
 		assert obj != creature;
-		if (pendingAdd.remove(obj) || !aware.contains(obj))
+		if (pendingAdd.remove(obj) || !aware.contains(obj) || obj.getBaselineType() == BaselineType.SCLT)
 			return;
 		pendingRemove.add(obj);
 	}
@@ -84,7 +85,7 @@ public class CreatureObjectAwareness {
 			
 			LinkedList<SWGObject> createStack = new LinkedList<>();
 			for (SWGObject obj : create) {
-				popStackUntil(target, createStack, obj.getParent());
+				popStackUntil(target, createStack, obj.getSlotArrangement() == -1 ? obj.getParent() : null);
 				createStack.add(obj);
 				createObject(obj, target);
 			}
@@ -115,6 +116,8 @@ public class CreatureObjectAwareness {
 			if (parent == null || aware.contains(parent) || obj.getSlotArrangement() != -1) {
 				list.add(obj);
 			} else {
+				if (!aware.contains(parent) && !pendingAdd.contains(parent))
+					continue;
 				int parentIndex = list.indexOf(parent);
 				if (parentIndex == -1)
 					continue;
@@ -128,6 +131,12 @@ public class CreatureObjectAwareness {
 		List<SWGObject> list = new ArrayList<>(pendingRemove);
 		list.removeIf(this::isParent);
 		list.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).reversed());
+		for (Iterator<SWGObject> it = list.iterator(); it.hasNext(); ) {
+			SWGObject obj = it.next();
+			SWGObject parent = obj.getParent();
+			if (list.contains(parent))
+				it.remove();
+		}
 		return list;
 	}
 	
