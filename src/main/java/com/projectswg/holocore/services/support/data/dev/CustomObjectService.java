@@ -223,7 +223,7 @@ public class CustomObjectService extends Service {
 		Location world = source.getWorldLocation();
 		return source.getObjectsAware().stream()
 				.filter(objects::contains)
-				.filter(tar -> Math.abs(heading(world, tar.getLocation()) - world.getOrientation().getYaw()) <= 30)
+				.filter(tar -> Math.abs(heading(world, tar.getLocation()) - world.getOrientation().getHeading()) <= 30)
 				.min(Comparator.comparingDouble(tar -> world.flatDistanceTo(tar.getLocation())))
 				.orElse(null);
 	}

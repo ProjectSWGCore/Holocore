@@ -24,36 +24,35 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.common;
 
-import com.projectswg.common.data.location.Quaternion;
+package com.projectswg.holocore.pswgcommon;
+
+import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
 import org.junit.Test;
 
-public class TestQuaternion extends TestRunnerNoIntents {
+import static org.junit.Assert.assertEquals;
+
+public class TestLocation extends TestRunnerNoIntents {
 	
 	@Test
-	public void testRotation() {
-		test(30, -210, 0, -1, 0, 0);
-		test(30, 150, 0, 1, 0, 0);
-		test(-90, -90, 0, -1, 0, 0);
-		test(90, 90, 0, 1, 0, 0);
-		test(90, -45, 0, Math.sin(Math.PI/8), 0, Math.cos(Math.PI/8));
-//		test(180, -45, 0, Math.sin(-Math.PI/8), 0, Math.cos(-Math.PI/8));
+	public void testHeadingConsistent() {
+		Location origin = Location.builder().setPosition(0, 0, 0).build();
+		Location pointNorth = Location.builder().setPosition(0, 0, 10).build();
+		Location pointEast = Location.builder().setPosition(10, 0, 0).build();
+		Location pointWest = Location.builder().setPosition(-10, 0, 0).build();
+		Location pointSouth = Location.builder().setPosition(0, 0, -10).build();
+		
+		assertEquals(0, origin.getHeadingTo(pointNorth), 1E-7);
+		assertEquals(0, pointSouth.getHeadingTo(pointNorth), 1E-7);
+		assertEquals(90, origin.getHeadingTo(pointEast), 1E-7);
+		assertEquals(180, origin.getHeadingTo(pointSouth), 1E-7);
+		assertEquals(270, origin.getHeadingTo(pointWest), 1E-7);
+		
+		assertEquals(0, Location.builder(origin).setHeading(0).build().getYaw(), 1E-7);
+		assertEquals(90, Location.builder(origin).setHeading(90).build().getYaw(), 1E-7);
+		assertEquals(180, Location.builder(origin).setHeading(180).build().getYaw(), 1E-7);
+		assertEquals(270, Location.builder(origin).setHeading(270).build().getYaw(), 1E-7);
 	}
 	
-	private void test(double heading1, double heading2, double x, double y, double z, double w) {
-		Quaternion q1 = new Quaternion(0, 0, 0, 1);
-		q1.setHeading(heading1);
-		Quaternion q2 = new Quaternion(0, 0, 0, 1);
-		q2.setHeading(heading2);
-		Quaternion ret = new Quaternion(q1);
-		ret.rotateByQuaternion(q2);
-		Assert.assertEquals(x, ret.getX(), 1E-7);
-		Assert.assertEquals(y, ret.getY(), 1E-7);
-		Assert.assertEquals(z, ret.getZ(), 1E-7);
-		Assert.assertEquals(w, ret.getW(), 1E-7);
-//		Assert.assertEquals((heading1+heading2+360)%360, (ret.getHeading()+360)%360, 1E-7);
-	}
 }
