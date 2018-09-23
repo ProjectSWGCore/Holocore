@@ -6,8 +6,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -123,18 +121,22 @@ public class NavigationPoint {
 	 */
 	public static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination, double speed) {
 		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) (totalDistance / speed);
+		int totalIntervals = (int) Math.ceil(totalDistance / speed);
 		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
 		
 		double currentDistance = speed;
-		for (int i = 0; i <= totalIntervals; i++) {
-			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
+		for (int i = 0; i < totalIntervals; i++) {
+			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
 			currentDistance += speed;
 		}
 		return path;
 	}
 	
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
+		if (percentage <= 0)
+			return new NavigationPoint(parent, l1, speed);
+		if (percentage >= 1)
+			return new NavigationPoint(parent, l2, speed);
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
 				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)

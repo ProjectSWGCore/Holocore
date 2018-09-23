@@ -164,18 +164,22 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {
 		double speed = 1;
 		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) (totalDistance / speed);
+		int totalIntervals = (int) Math.ceil(totalDistance / speed);
 		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
 		
 		double currentDistance = speed;
-		for (int i = 0; i <= totalIntervals; i++) {
-			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
+		for (int i = 0; i < totalIntervals; i++) {
+			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
 			currentDistance += speed;
 		}
 		return path;
 	}
 	
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
+		if (percentage <= 0)
+			return NavigationPoint.at(parent, l1, speed);
+		if (percentage >= 1)
+			return NavigationPoint.at(parent, l2, speed);
 		return NavigationPoint.at(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
 				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)

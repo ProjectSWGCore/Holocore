@@ -7,11 +7,9 @@ import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
-import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
@@ -22,13 +20,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class NpcCombatMode extends NpcMode {
 	
 	private final AtomicReference<NavigationPoint> returnLocation;
-	private final AtomicReference<Location> previousTargetLocation;
 	private final Collection<CreatureObject> targets;
 	private final AtomicLong iteration;
 	private final double runSpeed;
@@ -36,7 +34,6 @@ public class NpcCombatMode extends NpcMode {
 	public NpcCombatMode(AIObject obj) {
 		super(obj);
 		this.returnLocation = new AtomicReference<>(null);
-		this.previousTargetLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
 		this.iteration = new AtomicLong(0);
 		this.runSpeed = DataManager.getConfig(ConfigFile.PRIMARY).getDouble("NPC-RUN-SPEED", 9);
@@ -94,35 +91,25 @@ public class NpcCombatMode extends NpcMode {
 		
 		final AIObject obj = getAI();
 		final WeaponObject weapon = obj.getEquippedWeapon();
-		final double targetRange = Math.max(1, weapon.getMaxRange()/3);
+		final double targetDistance = target.getWorldLocation().distanceTo(obj.getWorldLocation());
+		final double attackRange = weapon.getMaxRange();
+		final double actionRange = attackRange / 2;
 		final boolean lineOfSight = obj.isLineOfSight(target);
-		final Location targetLocation = target.getWorldLocation();
 		
-		if (obj.getWorldLocation().distanceTo(targetLocation) >= targetRange || !lineOfSight) {
-			updateMovement(target, targetLocation, lineOfSight);
-		} else {
-			StopNpcMovementIntent.broadcast(obj);
+		if (targetDistance > actionRange || !lineOfSight) {
+			final Location targetLocation = target.getLocation();
+			final double targetHeading = target.getLocation().getYaw() + ThreadLocalRandom.current().nextDouble(-45, 45);
+			final double targetRange = actionRange / 2;
+			double moveX = targetLocation.getX() + Math.cos(targetHeading) * targetRange;
+			double moveZ = targetLocation.getZ() + Math.sin(targetHeading) * targetRange;
+			double moveHeading = targetLocation.getHeadingTo(new Point3D(moveX, targetLocation.getY(), moveZ)) + 180;
+			StartNpcMovementIntent.broadcast(obj, target.getEffectiveParent(), Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), runSpeed);
 		}
 		
 		if (lineOfSight && iteration.get() % 4 == 0) {
 			attack(target, weapon);
 		}
 		iteration.incrementAndGet();
-	}
-	
-	private void updateMovement(CreatureObject target, Location targetLocation, boolean lineOfSight) {
-		final AIObject obj = getAI();
-		final Location prev = previousTargetLocation.getAndSet(targetLocation);
-		final SWGObject targetParent = target.getEffectiveParent();
-		
-		if (prev == null) {
-			StartNpcMovementIntent.broadcast(obj, targetParent, target.getLocation(), runSpeed);
-		} else if (prev.distanceTo(targetLocation) >= 1 || !lineOfSight) {
-			Point3D delta = targetLocation.getPosition();
-			delta.translate(-prev.getX(), -prev.getY(), -prev.getZ());
-			Location destination = delta.flatDistanceTo(0, 0) < 50 ? Location.builder(target.getLocation()).translatePosition(delta.getX() * 2, delta.getY() * 2, delta.getZ() * 2).build() : target.getLocation();
-			StartNpcMovementIntent.broadcast(obj, targetParent, destination, runSpeed);
-		}
 	}
 	
 	private void attack(CreatureObject target, WeaponObject weapon) {
