@@ -96,7 +96,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private String		template		= "";
 	private int			crc				= 0;
 	private String		objectName		= "";
-	private int			loadRange		= 0;
 	private int			volume			= 0;
 	private float		complexity		= 1;
 	private int     	containerType	= 0;
@@ -139,7 +138,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.slotArrangement = -1;
 		object.parent = this;
 		object.setTerrain(getTerrain());
-		updateLoadRange();
 		onAddedChild(object);
 	}
 	
@@ -155,7 +153,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.slotArrangement = arrangementId;
 		object.parent = this;
 		object.setTerrain(getTerrain());
-		updateLoadRange();
 		onAddedChild(object);
 	}
 	
@@ -180,7 +177,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.observeWithParent = true;
 		object.slotArrangement = -1;
 		
-		updateLoadRange();
 		onRemovedChild(object);
 	}
 	
@@ -479,7 +475,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.owner = player;
 		if (player != null && this instanceof CreatureObject)
 			player.setCreatureObject((CreatureObject) this);
-		updateLoadRange();
 	}
 	
 	public void setLocation(Location location) {
@@ -827,35 +822,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public boolean isGenerated() {
 		return generated;
-	}
-	
-	public final int getLoadRange() {
-		return loadRange;
-	}
-	
-	public final void updateLoadRange() {
-		loadRange = calculateLoadRange();
-		SWGObject parent = this.parent;
-		if (parent != null)
-			parent.updateLoadRange();
-	}
-	
-	protected int calculateLoadRange() {
-		int loadRange = 0;
-		int containedRange;
-		for (SWGObject slot : slots.values()) {
-			if (slot == null)
-				continue;
-			containedRange = slot.getLoadRange();
-			if (containedRange > loadRange)
-				loadRange = containedRange;
-		}
-		for (SWGObject contained : containedObjects) {
-			containedRange = contained.getLoadRange();
-			if (containedRange > loadRange)
-				loadRange = containedRange;
-		}
-		return loadRange;
 	}
 	
 	/**

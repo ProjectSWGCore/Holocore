@@ -31,31 +31,15 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 
 public class GenericTangibleObject extends TangibleObject {
 	
-	private int loadRange;
-	
 	public GenericTangibleObject(long objectId) {
 		super(objectId);
 		setTemplate("");
-		loadRange = -1;
 	}
 	
 	public GenericTangibleObject(long objectId, String tag) {
 		super(objectId);
 		setTemplate("");
 		setObjectName(tag);
-		loadRange = -1;
-	}
-	
-	public void setLoadRange(int loadRange) {
-		this.loadRange = loadRange;
-		updateLoadRange();
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		if (loadRange == -1)
-			return super.calculateLoadRange();
-		return loadRange;
 	}
 	
 }

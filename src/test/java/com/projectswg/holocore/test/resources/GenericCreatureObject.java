@@ -42,8 +42,6 @@ public class GenericCreatureObject extends CreatureObject {
 	
 	private GenericPlayer player;
 	
-	private int loadRange;
-	
 	public GenericCreatureObject(long objectId) {
 		this(objectId, "");
 	}
@@ -56,12 +54,6 @@ public class GenericCreatureObject extends CreatureObject {
 		setObjectName(name);
 		setTemplate("object/creature/player/shared_human_male.iff");
 		setupAsCharacter();
-		loadRange = -1;
-	}
-	
-	public void setLoadRange(int loadRange) {
-		this.loadRange = loadRange;
-		updateLoadRange();
 	}
 	
 	public void setHasOwner(boolean hasOwner) {
@@ -91,13 +83,6 @@ public class GenericCreatureObject extends CreatureObject {
 	@Override
 	public GenericPlayer getOwner() {
 		return (GenericPlayer) super.getOwner();
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		if (loadRange == -1)
-			return super.calculateLoadRange();
-		return loadRange;
 	}
 	
 	private void createInventoryObject(String slot) {

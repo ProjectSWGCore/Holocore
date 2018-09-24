@@ -207,21 +207,13 @@ public class CreatureObject extends TangibleObject {
 			case WAYP:
 				return false;
 			case SCLT:
-				return true;
 			case BUIO:
-				return distance <= 1024;
+				return true;
 			case CREO:
 				return distance <= 200;
 			default:
 				return distance <= 400;
 		}
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		if (isLoggedInPlayer())
-			return 300;
-		return super.calculateLoadRange();
 	}
 	
 	@Override

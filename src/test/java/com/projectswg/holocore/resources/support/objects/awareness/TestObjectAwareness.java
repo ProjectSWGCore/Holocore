@@ -34,17 +34,15 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
-import org.junit.Assert;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestObjectAwareness extends TestRunnerNoIntents {
@@ -72,9 +70,8 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		testWaypoint = new WaypointObject(getUniqueId());
 		inventoryObject = player.getInventory();
 		
-		player.setLoadRange(100);
-		testPlayer.setLoadRange(100);
-		testTangible.setLoadRange(0);
+		testBuilding1.setObjectName("building1");
+		testBuilding2.setObjectName("building2");
 		testCell1.setNumber(1);
 		testCell2.setNumber(1);
 		
@@ -121,18 +118,12 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	@Test
 	public void testPlayerZoneIn() {
 		initialize();
-		player.setLoadRange(-1);
 		player.setHasOwner(false);
-		testPlayer.setLoadRange(0);
-		Assert.assertEquals(0, player.getLoadRange());
 		
 		moveNoAssert(TestLocation.SSI);
 		assertAware(List.of(player, testPlayer));
 		
 		player.setHasOwner(true);
-		Assert.assertNotEquals(0, player.getLoadRange());
-		player.setLoadRange(100);
-		Assert.assertEquals(100, player.getLoadRange());
 		move(TestLocation.SSI);
 		move(TestLocation.SSO);
 	}
@@ -157,9 +148,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	public void testLoadRangeUpdate() {
 		initialize();
 		move(TestLocation.SSI);
-		assertEquals(0, testBuilding1.getLoadRange());
 		player.moveToContainer(testCell1);
-		assertEquals(player.getLoadRange(), testBuilding1.getLoadRange());
 	}
 	
 	private void moveNoAssert(TestLocation location) {
@@ -232,8 +221,8 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private enum TestLocation {
 		SSI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(25, 25)),
 		SDI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(-10, -10)),
-		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(1500, 1500)),
-		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-1500, -1500)),
+		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(3000, 3000)),
+		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-3000, -3000)),
 		BSSI(TestParent.BUIO1,	TestAwareSet.TATOOINE, buildTatooine(0, 0)),
 		DDO	(TestParent.NONE,	TestAwareSet.NABOO, buildNaboo(25, 25)),
 		BDDO(TestParent.BUIO2,	TestAwareSet.NABOO, buildNaboo(0, 0)),

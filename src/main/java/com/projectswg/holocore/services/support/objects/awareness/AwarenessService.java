@@ -51,7 +51,6 @@ import com.projectswg.holocore.resources.support.global.network.DisconnectReason
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -63,7 +62,6 @@ import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -96,7 +94,6 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		oci.getObject().updateLoadRange();
 		awareness.createObject(oci.getObject());
 	}
 	
@@ -127,7 +124,6 @@ public class AwarenessService extends Service {
 			teleporting.add(obj);
 		
 		update(obj);
-		update(oldParent);
 		
 		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, true, 0);
 	}
@@ -158,7 +154,6 @@ public class AwarenessService extends Service {
 		@Nullable SWGObject newContainer = cti.getContainer();
 		
 		update(cti.getObject());
-		update(oldContainer);
 		
 		onObjectMoved(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), false, 0);
 	}
@@ -291,9 +286,6 @@ public class AwarenessService extends Service {
 			obj.systemMove(parent, requestedLocation);
 			awareness.updateObject(obj);
 		}
-		
-		if (oldParent != parent)
-			update(oldParent);
 		
 		onObjectMoved(obj, oldParent, parent, oldLocation, requestedLocation, false, speed);
 	}
