@@ -24,36 +24,61 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat;
 
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
-import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
-import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
-import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+package com.projectswg.holocore.services.gameplay.combat.command;
 
-@ManagerStructure(children = {
-		BuffService.class,
-		
-		CloningService.class,
-		
-		DuelService.class,
-		
-		LootManager.class,
-		
-		CombatCommandService.class,
-		CombatDeathblowService.class,
-		CombatExperienceService.class,
-		CombatNpcService.class,
-		CombatRegenerationService.class,
-		CombatStatusService.class,
-})
-public class CombatManager extends Manager {
+import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.common.data.combat.HitType;
+import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
+import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import me.joshlarson.jlcommon.control.IntentHandler;
+import me.joshlarson.jlcommon.control.Service;
+
+import java.util.EnumMap;
+import java.util.Map;
+
+import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus;
+
+public class CombatCommandService extends Service {
 	
-	public CombatManager() {
+	private final Map<HitType, CombatCommandHitType> hitTypeMap;
+	
+	public CombatCommandService() {
+		this.hitTypeMap = new EnumMap<>(HitType.class);
+		hitTypeMap.put(HitType.ATTACK, CombatCommandAttack.INSTANCE);
+		hitTypeMap.put(HitType.BUFF, CombatCommandBuff.INSTANCE);
+//		hitTypeMap.put(HitType.DEBUFF, null);
+		hitTypeMap.put(HitType.HEAL, CombatCommandHeal.INSTANCE);
+		hitTypeMap.put(HitType.DELAY_ATTACK, CombatCommandDelayAttack.INSTANCE);
+//		hitTypeMap.put(HitType.REVIVE, null);
+		// TODO: Add in other hit types (DEBUFF/REVIVE)
+	}
+	
+	@Override
+	public boolean start() {
+		for (CombatCommandHitType hitType : hitTypeMap.values())
+			hitType.initialize();
+		return true;
+	}
+	
+	@Override
+	public boolean stop() {
+		for (CombatCommandHitType hitType : hitTypeMap.values())
+			hitType.terminate();
+		return true;
+	}
+	
+	@IntentHandler
+	private void handleChatCommandIntent(ExecuteCommandIntent eci) {
+		if (!eci.getCommand().isCombatCommand() || !(eci.getCommand() instanceof CombatCommand))
+			return;
+		CombatCommand c = (CombatCommand) eci.getCommand();
 		
+		CombatCommandHitType hitType = hitTypeMap.get(c.getHitType());
+		if (hitType != null)
+			hitType.handle(eci.getSource(), eci.getTarget(), c, eci.getArguments());
+		else
+			handleStatus(eci.getSource(), CombatStatus.UNKNOWN);
 	}
 	
 }

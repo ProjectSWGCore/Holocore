@@ -24,36 +24,47 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat;
 
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
-import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
-import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
-import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+package com.projectswg.holocore.services.gameplay.combat.command;
 
-@ManagerStructure(children = {
-		BuffService.class,
-		
-		CloningService.class,
-		
-		DuelService.class,
-		
-		LootManager.class,
-		
-		CombatCommandService.class,
-		CombatDeathblowService.class,
-		CombatExperienceService.class,
-		CombatNpcService.class,
-		CombatRegenerationService.class,
-		CombatStatusService.class,
-})
-public class CombatManager extends Manager {
+import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.HitLocation;
+import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+
+import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff;
+import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
+import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatSpam;
+
+enum CombatCommandBuff implements CombatCommandHitType {
+	INSTANCE;
 	
-	public CombatManager() {
+	public void handle(CreatureObject source, SWGObject targetPrecheck, CombatCommand combatCommand, String arguments) {
+		// TODO group buffs
+		addBuff(source, source, combatCommand.getBuffNameSelf());
 		
+		if (!(targetPrecheck instanceof CreatureObject))
+			return;    // Only CreatureObjects have buffs
+		CreatureObject target = (CreatureObject) targetPrecheck;
+		
+		String buffNameTarget = combatCommand.getBuffNameTarget();
+		
+		addBuff(source, target, buffNameTarget);
+		
+		WeaponObject weapon = source.getEquippedWeapon();
+		CombatAction combatAction = createCombatAction(source, weapon, TrailLocation.RIGHT_HAND, combatCommand);
+		combatAction.addDefender(new Defender(source.getObjectId(), source.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+		
+		if (!buffNameTarget.isEmpty()) {
+			combatAction.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+		}
+		
+		source.sendObservers(combatAction, createCombatSpam(source, target, weapon, new AttackInfo(), combatCommand));
 	}
 	
 }

@@ -24,36 +24,21 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat;
 
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
-import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
-import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
-import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+package com.projectswg.holocore.services.gameplay.combat.command;
 
-@ManagerStructure(children = {
-		BuffService.class,
-		
-		CloningService.class,
-		
-		DuelService.class,
-		
-		LootManager.class,
-		
-		CombatCommandService.class,
-		CombatDeathblowService.class,
-		CombatExperienceService.class,
-		CombatNpcService.class,
-		CombatRegenerationService.class,
-		CombatStatusService.class,
-})
-public class CombatManager extends Manager {
+import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+
+public interface CombatCommandHitType {
 	
-	public CombatManager() {
+	default void initialize() {
 		
 	}
+	default void terminate() {
+		
+	}
+	void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments);
 	
 }

@@ -166,7 +166,7 @@ public class NpcCombatMode extends NpcMode {
 			case POLEARM_MELEE:
 			case THROWN:
 			default:
-				return "creatureMeleeAttack";
+				return "meleeHit";
 			case ONE_HANDED_SABER:
 			case TWO_HANDED_SABER:
 			case POLEARM_SABER:
