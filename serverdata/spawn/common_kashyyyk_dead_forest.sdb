@@ -1,150 +1,150 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-1200003	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	-1.98	-11.86	-7.08	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200004	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	23.17	-28.13	-10.18	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200005	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	26.47	-26.43	-6.26	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200006	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	-15.52	-4.57	-8.02	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200007	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	50.83	-48.00	-68.31	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200008	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	28.01	-43.10	-65.82	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200009	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	45.18	-47.65	-39.21	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200010	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	57.30	-68.39	-36.90	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200011	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	23.03	-37.26	-29.91	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200012	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	24.02	-40.95	-50.58	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200013	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	55.70	-49.64	-15.51	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200014	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	50.82	-67.49	-47.37	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200015	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	20.84	-41.79	-65.70	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200016	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	52.18	-67.97	-36.79	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200017	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	44.34	-47.18	-10.10	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200018	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	41.22	-46.31	-28.54	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200019	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	52.34	-48.89	-61.43	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200020	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	56.73	-68.41	-43.42	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200021	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	3	83.18	-68.70	-41.07	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200022	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	3	84.87	-62.92	-18.54	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200023	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	80.00	-76.20	-65.02	0	1	Mother Ves'ad	ep3_webweaver_motherves'ad_40_c_agg_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200024	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	67.63	-75.41	-59.71	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200025	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	90.57	-76.20	-66.70	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200026	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	84.01	-76.64	-89.12	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200027	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	63.76	-76.64	-82.24	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200028	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.24	-66.14	-115.17	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200029	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	93.42	-45.84	-100.16	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200030	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	71.96	-46.44	-107.32	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200031	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.60	-66.59	-105.82	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200032	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.75	-46.84	-113.25	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200033	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	84.62	-46.60	-116.12	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200034	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	6	53.00	-75.65	-98.31	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200035	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	6	55.41	-71.35	-115.08	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200036	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	7	69.78	-66.19	-139.04	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200037	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	7	89.21	-67.07	-133.90	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200038	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	140.03	-67.13	-91.29	0	1	a great mouf	ep3_forest_aveso_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200039	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	135.74	-66.23	-109.19	0	1	Cryl Kydris	ep3_forest_cryl_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200040	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	113.63	-66.43	-118.86	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200041	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	130.18	-66.64	-104.88	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200042	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	151.90	-66.62	-123.97	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200043	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	155.32	-66.36	-96.12	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200044	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	131.94	-66.91	-86.92	0	1	Rhuiw (Junk Dealer)	ep3_forest_outcast_dealer_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200045	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	146.52	-67.23	-123.67	0	1	Rhiek Okina	ep3_forest_rhiek_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200046	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	9	180.14	-66.12	-96.73	0	1	Dahlia Damask	ep3_forest_dahlia_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200047	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	49.68	-51.66	-90.87	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200048	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	62.97	-47.21	-106.43	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200049	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	48.82	-48.91	-101.05	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200050	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	92.30	-46.92	-137.27	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200051	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	79.00	-46.55	-141.93	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200052	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	90.01	-46.37	-147.79	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200053	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	82.37	-46.21	-138.22	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200054	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	73.61	-46.10	-141.44	0	1	an Outcast Assassin	ep3_forest_outcast_assassin_38_h_att_e	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200055	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	82.90	-46.41	-143.16	0	1	Risyl	ep3_forest_risyl_100_h_inv_n	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
-1200056	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	401.29	26.95	-452.14	0	1	Sawtooth	uller_sawtooth_60_c_att_e	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200057	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	138.59	4.19	-8.38	0	1	a great mouf	ep3_mouf_great_34_c_att_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200058	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	192.60	8.67	-59.59	0	1	a great mouf	ep3_mouf_great_34_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200059	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	345.58	26.91	-278.84	0	1	a great mouf	ep3_mouf_great_34_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200060	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	198.16	12.32	-135.86	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200061	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	15.67	12.86	186.25	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200062	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-226.88	1.39	60.34	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200063	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	37.03	4.80	131.54	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200064	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	108.48	1.38	121.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200065	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	196.24	21.51	-289.63	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200066	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	274.94	26.94	-464.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200067	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	314.95	13.77	-103.35	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200068	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	156.96	1.90	56.06	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200069	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-155.34	35.03	400.25	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200070	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-215.91	-0.97	124.26	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200071	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-313.82	-0.97	42.84	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200072	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-49.26	-0.97	13.45	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200073	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	34.65	-0.97	55.90	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200074	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	23.61	-0.97	237.79	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200075	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-425.58	-0.97	-172.06	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200076	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-116.48	-0.97	207.03	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200077	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-179.67	-0.97	0.83	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200078	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	90.97	-0.97	77.01	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200079	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	205.86	-0.97	123.76	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200080	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-375.58	-0.97	-74.16	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200081	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-417.76	-0.97	-306.34	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
-1200082	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	96.21	3.76	-14.55	0	1	Steel Claw	ep3_mouf_steelclaw_36_c_att_e	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200083	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	160.88	6.04	235.02	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200084	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	211.08	1.39	278.03	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200085	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	153.19	1.39	163.36	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200086	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	192.55	3.76	247.94	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger_38_c_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200087	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-188.23	31.63	-122.64	20	1	Ardon	ep3_forest_ardon_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200088	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-297.65	38.72	-209.83	-108	1	Hwroarca (an Arena Guardian)	ep3_forest_arena_guard_outer_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200089	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-293.65	23.82	-393.31	0	1	a blackscale guard	ep3_forest_blackscale_guard_37_h_agg_e	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200090	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-139.52	33.08	-96.85	-144	1	Chief Kerritamba	ep3_forest_chief_kerritamba_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200091	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	7.26	1.38	218.22	0	1	Exemplar Zheus (Outcast)	ep3_forest_exemplar_zheus_39_h_att_e	Outback	Shadow Forest	1	LOITER	3	0	-	idle	0	0	0	600
-1200092	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-161.23	31.64	-171.69	0	1	a Junk Dealer	ep3_forest_kerritamba_dealer_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200093	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-152.36	16.51	-254.21	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200094	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-142.31	17.59	-232.57	-168	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200095	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-129.21	17.50	-243.24	-119	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200096	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-75.51	27.35	-196.73	-129	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200097	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-91.68	27.46	-195.22	-157	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200098	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-186.28	31.64	-169.12	67	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200099	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-190.18	31.64	-154.35	69	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200100	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-192.15	31.71	-145.60	69	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200101	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-267.83	38.79	-181.11	-19	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200102	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-270.22	38.42	-173.04	161	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200103	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-294.73	38.42	-184.77	36	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200104	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-289.36	38.42	-189.15	36	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200105	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-299.33	38.64	-204.28	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200106	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-304.92	38.42	-199.71	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200107	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-239.72	1.39	-104.39	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200108	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	22.70	26.40	-352.80	145	1	Shaey Kayr (Kashyyyk Explorer)	ep3_forest_npc_greeter_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200109	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-114.63	31.96	-165.83	0	1	Zhadran (Outcast Informant)	ep3_forest_outcast_informant_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200110	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-206.35	17.48	-159.91	0	1	Sertild (Outcast Informant)	ep3_forest_outcast_male_02_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200111	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	133.74	8.17	-113.00	2	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200112	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	444.81	26.95	-256.66	0	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200113	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	255.15	26.95	-386.76	0	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200114	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	131.90	14.97	-221.67	0	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200115	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	135.79	14.95	-245.68	-43	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200116	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	185.21	20.13	-275.94	0	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200117	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	432.62	26.94	-123.41	0	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200118	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	379.04	26.95	-108.43	174	1	Sayormi Queen	ep3_forest_sayormi_queen_33_h_agg_e	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200119	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	129.33	8.17	-110.43	38	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200120	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	148.47	9.73	-111.36	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200121	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	139.78	8.92	-92.91	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200122	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	381.25	26.91	-148.29	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200123	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	398.78	26.87	-130.25	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200124	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	130.56	14.95	-247.90	4	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200125	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	136.92	14.95	-241.43	-77	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200126	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	322.01	26.95	-338.96	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200127	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	157.84	12.12	-153.26	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200128	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	333.31	26.94	-416.16	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200129	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	347.72	26.94	-126.98	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200130	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	338.09	26.94	-146.76	0	1	a sayormi warrior	ep3_forest_sayormi_warrior_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200131	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	128.66	8.17	-104.01	95	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200132	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	387.01	26.95	-111.28	-147	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200133	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	372.61	26.95	-113.41	138	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200134	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	393.09	26.95	-116.95	-114	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200135	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	368.44	26.95	-120.63	99	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200136	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	444.14	26.95	-353.12	0	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200137	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	241.80	5.02	21.38	0	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200138	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	449.86	26.94	-178.59	0	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200139	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	353.06	26.94	-195.31	0	1	a sayormi witch	ep3_forest_sayormi_witch_32_h_agg_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200140	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-138.51	31.64	-161.25	0	1	Meust (Kerritamba Villager)	ep3_forest_shoartu_mystic_01_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200141	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-177.65	31.63	-172.17	40	1	Athnalu (Kerritamba Villager)	ep3_forest_shoartu_mystic_02_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200142	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-184.71	31.63	-115.61	158	1	Perusta (Kerritamba Villager)	ep3_forest_shoartu_mystic_03_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200143	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	67.81	38.94	176.78	0	1	Spirit Guide	ep3_forest_wookiee_spirit_healer_01_100_h_inv_n	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
-1200144	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-292.87	23.82	-383.40	0	1	Myssith	ep3_qst_myssith_38_h_agg_n	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
-1200145	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	367.71	7.10	212.72	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged_34_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200146	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	341.40	2.70	239.59	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged_34_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200147	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	315.85	2.08	218.94	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged_34_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200148	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	366.52	6.10	168.61	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged_34_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200149	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	332.97	3.43	158.43	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged_34_h_agg_n	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
-1200150	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	276.29	8.48	-24.20	0	1	a Scout Trooper	scout_trooper_23_h_att_n	Outback	Shadow Forest	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+1200003	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-188.2	31.6	-122.6	20	1	Ardon	ep3_forest_ardon	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200004	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-297.7	38.7	-209.8	-108	1	Hwroarca (an Arena Guardian)	ep3_forest_arena_guard_outer	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200005	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-293.7	23.8	-393.3	0	1	a blackscale guard	ep3_forest_blackscale_guard	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200006	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-139.5	33.1	-96.9	-144	1	Chief Kerritamba	ep3_forest_chief_kerritamba	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200007	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	7.3	1.4	218.2	0	1	Exemplar Zheus (Outcast)	ep3_forest_exemplar_zheus	ATTACKABLE	B	40	50	Outback	Shadow Forest	1	LOITER	3	0	-	idle	0	0	0	600
+1200008	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-161.2	31.6	-171.7	0	1	a Junk Dealer	ep3_forest_kerritamba_dealer	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200009	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-152.4	16.5	-254.2	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200010	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-142.3	17.6	-232.6	-168	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200011	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-129.2	17.5	-243.2	-119	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200012	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-75.5	27.4	-196.7	-129	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200013	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-91.7	27.5	-195.2	-157	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200014	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-186.3	31.6	-169.1	67	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200015	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-190.2	31.6	-154.4	69	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200016	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-192.2	31.7	-145.6	69	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200017	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-267.8	38.8	-181.1	-19	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200018	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-270.2	38.4	-173.0	161	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200019	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-294.7	38.4	-184.8	36	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200020	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-289.4	38.4	-189.2	36	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200021	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-299.3	38.6	-204.3	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200022	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-304.9	38.4	-199.7	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200023	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-239.7	1.4	-104.4	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200024	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	22.7	26.4	-352.8	145	1	Shaey Kayr (Kashyyyk Explorer)	ep3_forest_npc_greeter	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200025	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-114.6	32.0	-165.8	0	1	Zhadran (Outcast Informant)	ep3_forest_outcast_informant	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200026	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-206.4	17.5	-159.9	0	1	Sertild (Outcast Informant)	ep3_forest_outcast_male_02	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200027	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	133.7	8.2	-113.0	2	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200028	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	444.8	27.0	-256.7	0	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200029	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	255.2	27.0	-386.8	0	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200030	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	131.9	15.0	-221.7	0	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200031	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	135.8	15.0	-245.7	-43	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200032	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	185.2	20.1	-275.9	0	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200033	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	432.6	26.9	-123.4	0	1	a sayormi monk	ep3_forest_sayormi_monk	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200034	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	379.0	27.0	-108.4	174	1	Sayormi Queen	ep3_forest_sayormi_queen	AGGRESSIVE	B	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200035	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	129.3	8.2	-110.4	38	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200036	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	148.5	9.7	-111.4	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200037	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	139.8	8.9	-92.9	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200038	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	381.3	26.9	-148.3	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200039	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	398.8	26.9	-130.3	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200040	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	130.6	15.0	-247.9	4	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200041	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	136.9	15.0	-241.4	-77	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200042	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	322.0	27.0	-339.0	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200043	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	157.8	12.1	-153.3	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200044	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	333.3	26.9	-416.2	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200045	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	347.7	26.9	-127.0	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200046	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	338.1	26.9	-146.8	0	1	a sayormi warrior	ep3_forest_sayormi_warrior	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200047	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	128.7	8.2	-104.0	95	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200048	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	387.0	27.0	-111.3	-147	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200049	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	372.6	27.0	-113.4	138	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200050	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	393.1	27.0	-117.0	-114	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200051	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	368.4	27.0	-120.6	99	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200052	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	444.1	27.0	-353.1	0	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200053	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	241.8	5.0	21.4	0	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200054	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	449.9	26.9	-178.6	0	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200055	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	353.1	26.9	-195.3	0	1	a sayormi witch	ep3_forest_sayormi_witch	AGGRESSIVE	E	40	50	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200056	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-138.5	31.6	-161.3	0	1	Meust (Kerritamba Villager)	ep3_forest_shoartu_mystic_01	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200057	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-177.7	31.6	-172.2	40	1	Athnalu (Kerritamba Villager)	ep3_forest_shoartu_mystic_02	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200058	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-184.7	31.6	-115.6	158	1	Perusta (Kerritamba Villager)	ep3_forest_shoartu_mystic_03	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200059	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	67.8	38.9	176.8	0	1	Spirit Guide	ep3_forest_wookiee_spirit_healer_01	INVULNERABLE	N	100	100	Outback	Shadow Forest	1	IDLE	0	0	-	idle	0	0	0	600
+1200060	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	198.2	12.3	-135.9	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200061	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	15.7	12.9	186.3	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200062	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-226.9	1.4	60.3	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200063	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	37.0	4.8	131.5	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200064	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	108.5	1.4	121.6	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200065	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	196.2	21.5	-289.6	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200066	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	274.9	26.9	-464.6	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200067	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	315.0	13.8	-103.4	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200068	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	157.0	1.9	56.1	0	1	a mouf	ep3_mouf	ATTACKABLE	N	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200069	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	138.6	4.2	-8.4	0	1	a great mouf	ep3_mouf_great	ATTACKABLE	E	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200070	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	192.6	8.7	-59.6	0	1	a great mouf	ep3_mouf_great	ATTACKABLE	E	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200071	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	345.6	26.9	-278.8	0	1	a great mouf	ep3_mouf_great	ATTACKABLE	E	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200072	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	96.2	3.8	-14.6	0	1	Steel Claw	ep3_mouf_steelclaw	ATTACKABLE	B	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200073	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-292.9	23.8	-383.4	0	1	Myssith	ep3_qst_myssith	AGGRESSIVE	B	40	50	Outback	Shadow Forest	1	TURN	0	0	-	idle	0	0	0	600
+1200074	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	367.7	7.1	212.7	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200075	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	341.4	2.7	239.6	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200076	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	315.9	2.1	218.9	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200077	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	366.5	6.1	168.6	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200078	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	333.0	3.4	158.4	0	1	a tagged Wookiee	ep3_qst_wookiee_tagged	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200079	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-155.3	35.0	400.3	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200080	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-215.9	-1.0	124.3	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200081	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-313.8	-1.0	42.8	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200082	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-49.3	-1.0	13.5	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200083	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	34.7	-1.0	55.9	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200084	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	23.6	-1.0	237.8	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200085	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-425.6	-1.0	-172.1	0	1	a shadevale stalker	ep3_shadevale_stalker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200086	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-116.5	-1.0	207.0	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200087	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-179.7	-1.0	0.8	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200088	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	91.0	-1.0	77.0	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200089	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	205.9	-1.0	123.8	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200090	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-375.6	-1.0	-74.2	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200091	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-417.8	-1.0	-306.3	0	1	a shadevale venomsting	ep3_shadevale_venomsting	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	10	0	-	idle	0	0	0	600
+1200092	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	160.9	6.0	235.0	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200093	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	211.1	1.4	278.0	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200094	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	153.2	1.4	163.4	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200095	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	192.6	3.8	247.9	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200096	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	276.3	8.5	-24.2	0	1	a Scout Trooper	scout_trooper	ATTACKABLE	N	40	50	Outback	Shadow Forest	3	LOITER	9	0	-	idle	0	0	0	600
+1200097	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	401.3	27.0	-452.1	0	1	Sawtooth	uller_sawtooth	ATTACKABLE	B	50	55	Outback	Shadow Forest	1	LOITER	5	0	-	idle	0	0	0	600
+1200098	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	26.5	-26.4	-6.3	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200099	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	-15.5	-4.6	-8.0	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200100	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	-2.0	-11.9	-7.1	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200101	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	1	23.2	-28.1	-10.2	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200102	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	20.8	-41.8	-65.7	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200103	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	52.2	-68.0	-36.8	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200104	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	44.3	-47.2	-10.1	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200105	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	41.2	-46.3	-28.5	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200106	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	52.3	-48.9	-61.4	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200107	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	56.7	-68.4	-43.4	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200108	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	50.8	-48.0	-68.3	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200109	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	28.0	-43.1	-65.8	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200110	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	45.2	-47.7	-39.2	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200111	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	57.3	-68.4	-36.9	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200112	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	23.0	-37.3	-29.9	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200113	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	24.0	-41.0	-50.6	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200114	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	55.7	-49.6	-15.5	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200115	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	2	50.8	-67.5	-47.4	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200116	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	3	83.2	-68.7	-41.1	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200117	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	3	84.9	-62.9	-18.5	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200118	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	67.6	-75.4	-59.7	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200119	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	90.6	-76.2	-66.7	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200120	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	84.0	-76.6	-89.1	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200121	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	80.0	-76.2	-65.0	0	1	Mother Ves'ad	ep3_webweaver_motherves'ad	AGGRESSIVE	B	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200122	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	4	63.8	-76.6	-82.2	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200123	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.6	-66.6	-105.8	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200124	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.8	-46.8	-113.3	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200125	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	84.6	-46.6	-116.1	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200126	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	94.2	-66.1	-115.2	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200127	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	93.4	-45.8	-100.2	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200128	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	5	72.0	-46.4	-107.3	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200129	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	6	53.0	-75.7	-98.3	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200130	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	6	55.4	-71.4	-115.1	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200131	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	7	69.8	-66.2	-139.0	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200132	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	7	89.2	-67.1	-133.9	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200133	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	140.0	-67.1	-91.3	0	1	a great mouf	ep3_forest_aveso	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200134	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	135.7	-66.2	-109.2	0	1	Cryl Kydris	ep3_forest_cryl	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200135	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	113.6	-66.4	-118.9	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200136	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	130.2	-66.6	-104.9	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200137	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	151.9	-66.6	-124.0	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200138	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	155.3	-66.4	-96.1	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200139	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	131.9	-66.9	-86.9	0	1	Rhuiw (Junk Dealer)	ep3_forest_outcast_dealer	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200140	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	8	146.5	-67.2	-123.7	0	1	Rhiek Okina	ep3_forest_rhiek	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200141	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	9	180.1	-66.1	-96.7	0	1	Dahlia Damask	ep3_forest_dahlia	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200142	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	48.8	-48.9	-101.1	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200143	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	49.7	-51.7	-90.9	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200144	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	10	63.0	-47.2	-106.4	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200145	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	90.0	-46.4	-147.8	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200146	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	82.4	-46.2	-138.2	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200147	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	73.6	-46.1	-141.4	0	1	an Outcast Assassin	ep3_forest_outcast_assassin	ATTACKABLE	E	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200148	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	82.9	-46.4	-143.2	0	1	Risyl	ep3_forest_risyl	INVULNERABLE	N	100	100	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200149	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	92.3	-46.9	-137.3	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
+1200150	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowweave_caverns	AREA	11	79.0	-46.6	-141.9	0	1	a webweaver tombsinger	ep3_webweaver_tombsinger	AGGRESSIVE	N	40	50	POI	ShadowWeave Cavern	1	TURN	0	0	-	idle	0	0	0	600
