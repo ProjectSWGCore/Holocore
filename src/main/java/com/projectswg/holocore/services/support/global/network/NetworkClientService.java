@@ -81,13 +81,17 @@ public class NetworkClientService extends Service {
 		}
 		{
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
-			InetSocketAddress localhost;
-			try {
-				localhost = new InetSocketAddress(InetAddress.getLocalHost(), ProjectSWG.getGalaxy().getAdminServerPort());
-			} catch (UnknownHostException e) {
-				throw new CoreException("Failed to resolve localhost address", e);
+			if (adminServerPort > 0) {
+				InetSocketAddress localhost;
+				try {
+					localhost = new InetSocketAddress(InetAddress.getLocalHost(), ProjectSWG.getGalaxy().getAdminServerPort());
+				} catch (UnknownHostException e) {
+					throw new CoreException("Failed to resolve localhost address", e);
+				}
+				adminServer = new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
+			} else {
+				adminServer = null;
 			}
-			adminServer = adminServerPort <= 0 ? null : new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
 		}
 	}
 	
