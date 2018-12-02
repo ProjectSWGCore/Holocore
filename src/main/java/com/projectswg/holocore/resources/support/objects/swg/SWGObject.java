@@ -347,7 +347,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public boolean isWithinAwarenessRange(SWGObject target) {
-		if (target instanceof CreatureObject)
+		if (target instanceof CreatureObject && ((CreatureObject) target).isLoggedInPlayer())
 			return target.isWithinAwarenessRange(this);
 		return false;
 	}
@@ -571,6 +571,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.arrangement = arrangement;
 	}
 	
+	@Nullable
 	public Player getOwner() {
 		if (owner != null)
 			return owner;
@@ -645,6 +646,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public Location getWorldLocation() {
 		return location.getWorldLocation(this);
+	}
+	
+	public double distanceTo(@NotNull SWGObject obj) {
+		if (parent == obj.getParent())
+			return getLocation().distanceTo(obj.getLocation());
+		return getWorldLocation().distanceTo(obj.getWorldLocation());
+	}
+	
+	public double flatDistanceTo(@NotNull SWGObject obj) {
+		if (parent == obj.getParent())
+			return getLocation().flatDistanceTo(obj.getLocation());
+		return getWorldLocation().flatDistanceTo(obj.getWorldLocation());
 	}
 	
 	public double getX() {

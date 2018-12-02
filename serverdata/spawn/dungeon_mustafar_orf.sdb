@@ -1,44 +1,44 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-1440003	MUSTAFAR	mus_old_rep_fac_1	AREA	5	72.6	0.0	-12.4	-95	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440004	MUSTAFAR	mus_old_rep_fac_1	AREA	6	91.0	0.0	31.9	91	1	Ancient Xandank	xandank_ancient	AGGRESSIVE	B	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	1800
-1440005	MUSTAFAR	mus_old_rep_fac_1	AREA	9	83.2	0.0	-20.3	-1	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440006	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.6	0.0	-20.4	0	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440007	MUSTAFAR	mus_old_rep_fac_1	AREA	9	116.0	-15.4	-14.9	-89	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440008	MUSTAFAR	mus_old_rep_fac_1	AREA	9	116.0	-15.4	-20.1	-93	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440009	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.2	-33.6	-12.8	89	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	84	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440010	MUSTAFAR	mus_old_rep_fac_1	AREA	9	117.0	-49.0	-18.6	-90	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440011	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.7	-67.2	-19.1	91	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440012	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.8	-67.2	-13.0	86	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440013	MUSTAFAR	mus_old_rep_fac_1	AREA	10	96.6	0.0	23.8	180	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	86	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440014	MUSTAFAR	mus_old_rep_fac_1	AREA	13	71.4	-33.6	-57.3	-90	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440015	MUSTAFAR	mus_old_rep_fac_1	AREA	13	65.8	-33.6	-63.8	-1	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440016	MUSTAFAR	mus_old_rep_fac_1	AREA	13	60.0	-33.6	-57.4	89	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440017	MUSTAFAR	mus_old_rep_fac_1	AREA	15	71.7	-33.6	46.2	-90	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440018	MUSTAFAR	mus_old_rep_fac_1	AREA	16	65.9	-33.6	-5.9	179	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440019	MUSTAFAR	mus_old_rep_fac_1	AREA	16	65.8	-33.6	-19.6	0	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440020	MUSTAFAR	mus_old_rep_fac_1	AREA	18	43.4	-33.6	3.4	180	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440021	MUSTAFAR	mus_old_rep_fac_1	AREA	20	80.2	-33.6	52.0	179	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440022	MUSTAFAR	mus_old_rep_fac_1	AREA	20	82.8	-33.6	54.3	178	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440023	MUSTAFAR	mus_old_rep_fac_1	AREA	20	88.4	-33.6	40.7	-5	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440024	MUSTAFAR	mus_old_rep_fac_1	AREA	21	35.3	-33.6	40.6	83	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440025	MUSTAFAR	mus_old_rep_fac_1	AREA	21	37.4	-33.6	38.0	90	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440026	MUSTAFAR	mus_old_rep_fac_1	AREA	21	48.7	-33.6	38.3	-79	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440027	MUSTAFAR	mus_old_rep_fac_1	AREA	21	50.0	-33.6	40.9	-94	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440028	MUSTAFAR	mus_old_rep_fac_1	AREA	22	43.4	-33.6	70.5	-179	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440029	MUSTAFAR	mus_old_rep_fac_1	AREA	22	43.3	-33.6	74.1	-2	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440030	MUSTAFAR	mus_old_rep_fac_1	AREA	22	47.3	-33.6	74.2	-92	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440031	MUSTAFAR	mus_old_rep_fac_1	AREA	23	65.8	-33.6	63.4	0	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440032	MUSTAFAR	mus_old_rep_fac_1	AREA	26	42.4	-67.2	17.0	-94	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440033	MUSTAFAR	mus_old_rep_fac_1	AREA	27	57.0	-67.2	46.4	89	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	85	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440034	MUSTAFAR	mus_old_rep_fac_1	AREA	28	42.8	-67.2	-7.0	178	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440035	MUSTAFAR	mus_old_rep_fac_1	AREA	28	39.5	-67.2	-4.6	-91	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440036	MUSTAFAR	mus_old_rep_fac_1	AREA	28	35.2	-67.2	-31.6	-1	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440037	MUSTAFAR	mus_old_rep_fac_1	AREA	28	35.0	-67.2	-40.2	0	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440038	MUSTAFAR	mus_old_rep_fac_1	AREA	29	65.9	-67.2	-6.3	179	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440039	MUSTAFAR	mus_old_rep_fac_1	AREA	31	90.5	-67.2	39.8	49	1	Ancient Tulrus	tulrus_ancient	AGGRESSIVE	B	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	1800
-1440040	MUSTAFAR	mus_old_rep_fac_1	AREA	33	75.5	-67.2	46.3	-91	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	85	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440041	MUSTAFAR	mus_old_rep_fac_1	AREA	34	56.4	-67.2	76.3	-96	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440042	MUSTAFAR	mus_old_rep_fac_1	AREA	34	41.6	-67.2	76.2	89	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440043	MUSTAFAR	mus_old_rep_fac_1	AREA	34	42.1	-67.2	61.4	92	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
-1440044	MUSTAFAR	mus_old_rep_fac_1	AREA	34	56.8	-67.2	61.3	-93	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+mus_orf_001	MUSTAFAR	mus_old_rep_fac_1	AREA	5	72.6	0.0	-12.4	-95	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_002	MUSTAFAR	mus_old_rep_fac_1	AREA	6	91.0	0.0	31.9	91	1	Ancient Xandank	xandank_ancient	AGGRESSIVE	B	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	1800
+mus_orf_003	MUSTAFAR	mus_old_rep_fac_1	AREA	9	83.2	0.0	-20.3	-1	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_004	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.6	0.0	-20.4	0	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_005	MUSTAFAR	mus_old_rep_fac_1	AREA	9	116.0	-15.4	-14.9	-89	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_006	MUSTAFAR	mus_old_rep_fac_1	AREA	9	116.0	-15.4	-20.1	-93	1	an ancient patrol drone	som_orf_ancient_partrol_drone	AGGRESSIVE	E	83	85	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_007	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.2	-33.6	-12.8	89	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	84	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_008	MUSTAFAR	mus_old_rep_fac_1	AREA	9	117.0	-49.0	-18.6	-90	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_009	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.7	-67.2	-19.1	91	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_010	MUSTAFAR	mus_old_rep_fac_1	AREA	9	79.8	-67.2	-13.0	86	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	85	87	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_011	MUSTAFAR	mus_old_rep_fac_1	AREA	10	96.6	0.0	23.8	180	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	86	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_012	MUSTAFAR	mus_old_rep_fac_1	AREA	13	71.4	-33.6	-57.3	-90	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_013	MUSTAFAR	mus_old_rep_fac_1	AREA	13	65.8	-33.6	-63.8	-1	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_014	MUSTAFAR	mus_old_rep_fac_1	AREA	13	60.0	-33.6	-57.4	89	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_015	MUSTAFAR	mus_old_rep_fac_1	AREA	15	71.7	-33.6	46.2	-90	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_016	MUSTAFAR	mus_old_rep_fac_1	AREA	16	65.9	-33.6	-5.9	179	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_017	MUSTAFAR	mus_old_rep_fac_1	AREA	16	65.8	-33.6	-19.6	0	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_018	MUSTAFAR	mus_old_rep_fac_1	AREA	18	43.4	-33.6	3.4	180	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_019	MUSTAFAR	mus_old_rep_fac_1	AREA	20	80.2	-33.6	52.0	179	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_020	MUSTAFAR	mus_old_rep_fac_1	AREA	20	82.8	-33.6	54.3	178	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_021	MUSTAFAR	mus_old_rep_fac_1	AREA	20	88.4	-33.6	40.7	-5	1	a starving lava flea	som_flea_lava_starving	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_022	MUSTAFAR	mus_old_rep_fac_1	AREA	21	35.3	-33.6	40.6	83	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_023	MUSTAFAR	mus_old_rep_fac_1	AREA	21	37.4	-33.6	38.0	90	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_024	MUSTAFAR	mus_old_rep_fac_1	AREA	21	48.7	-33.6	38.3	-79	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_025	MUSTAFAR	mus_old_rep_fac_1	AREA	21	50.0	-33.6	40.9	-94	1	a lava flea hatchling	som_flea_lava_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_026	MUSTAFAR	mus_old_rep_fac_1	AREA	22	43.4	-33.6	70.5	-179	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_027	MUSTAFAR	mus_old_rep_fac_1	AREA	22	43.3	-33.6	74.1	-2	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_028	MUSTAFAR	mus_old_rep_fac_1	AREA	22	47.3	-33.6	74.2	-92	1	a lava flea juvenile	som_flea_lava_juvenile	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_029	MUSTAFAR	mus_old_rep_fac_1	AREA	23	65.8	-33.6	63.4	0	1	an ancient security drone	som_orf_ancient_security_drone	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_030	MUSTAFAR	mus_old_rep_fac_1	AREA	26	42.4	-67.2	17.0	-94	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_031	MUSTAFAR	mus_old_rep_fac_1	AREA	27	57.0	-67.2	46.4	89	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	85	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_032	MUSTAFAR	mus_old_rep_fac_1	AREA	28	42.8	-67.2	-7.0	178	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_033	MUSTAFAR	mus_old_rep_fac_1	AREA	28	39.5	-67.2	-4.6	-91	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_034	MUSTAFAR	mus_old_rep_fac_1	AREA	28	35.2	-67.2	-31.6	-1	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_035	MUSTAFAR	mus_old_rep_fac_1	AREA	28	35.0	-67.2	-40.2	0	1	a kubaza beetle hatchling	som_beetle_kubaza_hatchling	AGGRESSIVE	N	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_036	MUSTAFAR	mus_old_rep_fac_1	AREA	29	65.9	-67.2	-6.3	179	1	an ancient sentinel droid	som_orf_ancient_sentinel_droid	AGGRESSIVE	E	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_037	MUSTAFAR	mus_old_rep_fac_1	AREA	31	90.5	-67.2	39.8	49	1	Ancient Tulrus	tulrus_ancient	AGGRESSIVE	B	83	86	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	1800
+mus_orf_038	MUSTAFAR	mus_old_rep_fac_1	AREA	33	75.5	-67.2	46.3	-91	1	an ancient guard droid	som_orf_ancient_guard_droid	AGGRESSIVE	E	85	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_039	MUSTAFAR	mus_old_rep_fac_1	AREA	34	56.4	-67.2	76.3	-96	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_040	MUSTAFAR	mus_old_rep_fac_1	AREA	34	41.6	-67.2	76.2	89	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_041	MUSTAFAR	mus_old_rep_fac_1	AREA	34	42.1	-67.2	61.4	92	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900
+mus_orf_042	MUSTAFAR	mus_old_rep_fac_1	AREA	34	56.8	-67.2	61.3	-93	1	a kubaza beetle soldier	som_beetle_kubaza_soldier	AGGRESSIVE	N	83	88	Dungeon	Old Republic Facility	1	IDLE	0	0	-	idle	0	0	0	900

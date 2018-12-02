@@ -51,7 +51,7 @@ public class ExperienceLevelService extends Service {
 		PlayerObject playerObject = creatureObject.getPlayerObject();
 		
 		if (playerObject != null) {
-			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
+			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained(), ei.isMultiply());
 			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();
@@ -66,9 +66,9 @@ public class ExperienceLevelService extends Service {
 		}
 	}
 	
-	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
+	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
 		int currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal = currentXp + (int) (xpGained * xpMultiplier);
+		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);

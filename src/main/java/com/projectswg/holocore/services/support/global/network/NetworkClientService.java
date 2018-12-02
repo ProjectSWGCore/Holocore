@@ -54,10 +54,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.BindException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.security.KeyStore;
 
 public class NetworkClientService extends Service {
@@ -84,7 +81,13 @@ public class NetworkClientService extends Service {
 		}
 		{
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
-			adminServer = adminServerPort <= 0 ? null : new TCPServer<>(new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort), 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
+			InetSocketAddress localhost;
+			try {
+				localhost = new InetSocketAddress(InetAddress.getLocalHost(), ProjectSWG.getGalaxy().getAdminServerPort());
+			} catch (UnknownHostException e) {
+				throw new CoreException("Failed to resolve localhost address", e);
+			}
+			adminServer = adminServerPort <= 0 ? null : new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
 		}
 	}
 	

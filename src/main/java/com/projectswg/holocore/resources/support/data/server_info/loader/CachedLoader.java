@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 enum CachedLoader {
 	BUILDING_CELLS		(BuildingCellLoader::new),
 	NPC_LOADER			(NpcLoader::new),
+	NPC_COMBAT_PROFILES	(NpcCombatProfileLoader::new),
 	NPC_PATROL_ROUTES	(NpcPatrolRouteLoader::new),
 	NPC_STATS			(NpcStatLoader::new),
 	NPC_WEAPONS			(NpcWeaponLoader::new),

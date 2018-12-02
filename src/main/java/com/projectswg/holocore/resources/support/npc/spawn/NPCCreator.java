@@ -34,18 +34,21 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.DetailNpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.NpcStatInfo;
 import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.utilities.Arguments;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
@@ -53,25 +56,29 @@ import java.util.concurrent.ThreadLocalRandom;
 public class NPCCreator {
 	
 	public static long createNPC(Spawner spawner) {
+		Arguments.validate(spawner.getMinLevel() <= spawner.getMaxLevel(), "min level must be less than max level");
+		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
+		NpcStatInfo npcStats = DataLoader.npcStats().getNpcStats(combatLevel);
+		DetailNpcStatInfo detailNpcStat = getDetailedNpcStats(npcStats, spawner.getDifficulty());
 		object.setSpawner(spawner);
 		object.systemMove(spawner.getEgg().getParent(), behaviorLocation(spawner));
 		object.setObjectName(spawner.getName());
-		object.setLevel(spawner.getCombatLevel());
+		object.setLevel(combatLevel);
 		object.setDifficulty(spawner.getDifficulty());
-		object.setMaxHealth(spawner.getHealth());
-		object.setHealth(spawner.getHealth());
-		object.setMaxAction(spawner.getAction());
-		object.setAction(spawner.getAction());
+		object.setMaxHealth(detailNpcStat.getHealth());
+		object.setHealth(detailNpcStat.getHealth());
+		object.setMaxAction(detailNpcStat.getAction());
+		object.setAction(detailNpcStat.getAction());
 		object.setMoodAnimation(spawner.getMood());
 		object.setCreatureId(spawner.getNpcId());
 		object.setWalkSpeed(spawner.getMovementSpeed());
 		
 		// Assign weapons
 		try {
-			spawner.getPrimaryWeapons().stream().map(w -> createWeapon(spawner, w)).filter(Objects::nonNull).forEach(object::addPrimaryWeapon);
-			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(spawner, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
+			spawner.getPrimaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addPrimaryWeapon);
+			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
 			List<WeaponObject> primaryWeapons = object.getPrimaryWeapons();
 			if (!primaryWeapons.isEmpty())
 				object.setEquippedWeapon(primaryWeapons.get(ThreadLocalRandom.current().nextInt(primaryWeapons.size())));
@@ -87,7 +94,7 @@ public class NPCCreator {
 				object.setDefaultMode(new NpcTurningMode(object));
 				break;
 			case PATROL:
-				object.setDefaultMode(new NpcPatrolMode(object, spawner.getPatrolRoute() == null ? new ArrayList<>() : spawner.getPatrolRoute()));
+				object.setDefaultMode(new NpcPatrolMode(object, spawner.getPatrolRoute() == null ? List.of() : spawner.getPatrolRoute()));
 				break;
 			default:
 				break;
@@ -155,6 +162,18 @@ public class NPCCreator {
 		return builder.build();
 	}
 	
+	private static DetailNpcStatInfo getDetailedNpcStats(NpcStatInfo npcStats, CreatureDifficulty difficulty) {
+		switch (difficulty) {
+			case NORMAL:
+			default:
+				return npcStats.getNormalDetailStat();
+			case ELITE:
+				return npcStats.getEliteDetailStat();
+			case BOSS:
+				return npcStats.getBossDetailStat();
+		}
+	}
+	
 	/**
 	 * Generates a random number between from (inclusive) and to (inclusive)
 	 * @param from a positive minimum value
@@ -165,11 +184,11 @@ public class NPCCreator {
 		return ThreadLocalRandom.current().nextInt((to - from) + 1) + from;
 	}
 	
-	private static WeaponObject createWeapon(Spawner spawner, String template) {
+	private static WeaponObject createWeapon(DetailNpcStatInfo detailNpcStat, String template) {
 		try {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
-			weapon.setMinDamage((int) (spawner.getDamagePerSecond() * 0.90));
-			weapon.setMaxDamage(spawner.getDamagePerSecond());
+			weapon.setMinDamage((int) (detailNpcStat.getDamagePerSecond() * 0.90));
+			weapon.setMaxDamage(detailNpcStat.getDamagePerSecond());
 			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
 			if (range == -1)
 				Log.w("Failed to load weapon range for: %s", template);

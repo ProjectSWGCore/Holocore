@@ -1,41 +1,41 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-2200003	TATOOINE	tat_world	AREA	0	-5054.9	75.0	-6563.3	-143	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200004	TATOOINE	tat_world	AREA	0	-5052.2	75.0	-6562.9	-142	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200005	TATOOINE	tat_world	AREA	0	-5054.8	75.0	-6560.6	-142	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200006	TATOOINE	tat_world	AREA	0	-5054.3	75.0	-6557.8	-142	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200007	TATOOINE	tat_world	AREA	0	-5051.9	75.0	-6559.8	-137	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
-2200008	TATOOINE	tat_world	AREA	0	-5048.8	75.0	-6561.9	-132	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200009	TATOOINE	tat_world	AREA	0	-5047.4	75.0	-6564.5	-63	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
-2200010	TATOOINE	tat_world	AREA	0	-5212.3	75.0	-6570.6	-94	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200011	TATOOINE	tat_world	AREA	0	-5209.5	75.0	-6572.1	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200012	TATOOINE	tat_world	AREA	0	-5209.7	75.0	-6569.2	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200013	TATOOINE	tat_world	AREA	0	-5097.7	75.0	-6570.1	175	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200014	TATOOINE	tat_world	AREA	0	-5099.5	75.0	-6568.5	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200015	TATOOINE	tat_world	AREA	0	-5096.1	75.0	-6568.2	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200016	TALUS	tal_world	AREA	0	741.6	6.0	-3089.0	-81	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200017	TALUS	tal_world	AREA	0	744.4	6.0	-3090.5	-81	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200018	TALUS	tal_world	AREA	0	744.6	6.0	-3087.7	-79	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200019	TALUS	tal_world	AREA	0	746.9	6.0	-3086.6	-92	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200020	TALUS	tal_world	AREA	0	746.9	6.0	-3089.6	-85	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
-2200021	TALUS	tal_world	AREA	0	746.1	6.0	-3092.4	-83	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200022	TALUS	tal_world	AREA	0	743.3	6.0	-3097.5	2	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
-2200023	TALUS	tal_world	AREA	0	480.8	6.0	-2907.8	46	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200024	TALUS	tal_world	AREA	0	478.5	6.0	-2907.9	46	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200025	TALUS	tal_world	AREA	0	480.4	6.0	-2909.7	41	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200026	TALUS	tal_world	AREA	0	720.3	6.0	-3082.0	-45	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200027	TALUS	tal_world	AREA	0	720.5	6.0	-3084.4	-39	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200028	TALUS	tal_world	AREA	0	723.1	6.0	-3081.6	-63	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200029	CORELLIA	cor_world	AREA	0	3418.3	308.1	5516.4	-123	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200030	CORELLIA	cor_world	AREA	0	3422.5	308.1	5517.0	-114	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200031	CORELLIA	cor_world	AREA	0	3420.8	308.1	5518.1	-125	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200032	CORELLIA	cor_world	AREA	0	3419.6	308.1	5519.7	-129	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2200033	CORELLIA	cor_world	AREA	0	3421.4	308.1	5514.4	-113	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
-2200034	CORELLIA	cor_world	AREA	0	3417.8	308.1	5521.1	-149	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2200035	CORELLIA	cor_world	AREA	0	3421.0	308.1	5507.7	-17	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
-2200036	CORELLIA	cor_world	AREA	0	3280.0	300.0	5363.0	45	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200037	CORELLIA	cor_world	AREA	0	3279.5	300.0	5360.0	45	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200038	CORELLIA	cor_world	AREA	0	3276.6	300.0	5363.3	45	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200039	CORELLIA	cor_world	AREA	0	3123.7	285.0	5001.4	-130	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200040	CORELLIA	cor_world	AREA	0	3126.5	285.0	5002.3	-140	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2200041	CORELLIA	cor_world	AREA	0	3123.2	285.0	5005.0	-140	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_001	TATOOINE	tat_world	AREA	0	-5054.9	75.0	-6563.3	-143	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_002	TATOOINE	tat_world	AREA	0	-5052.2	75.0	-6562.9	-142	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_003	TATOOINE	tat_world	AREA	0	-5054.8	75.0	-6560.6	-142	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_004	TATOOINE	tat_world	AREA	0	-5054.3	75.0	-6557.8	-142	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_005	TATOOINE	tat_world	AREA	0	-5051.9	75.0	-6559.8	-137	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
+eve_lif_006	TATOOINE	tat_world	AREA	0	-5048.8	75.0	-6561.9	-132	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_007	TATOOINE	tat_world	AREA	0	-5047.4	75.0	-6564.5	-63	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
+eve_lif_008	TATOOINE	tat_world	AREA	0	-5212.3	75.0	-6570.6	-94	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_009	TATOOINE	tat_world	AREA	0	-5209.5	75.0	-6572.1	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_010	TATOOINE	tat_world	AREA	0	-5209.7	75.0	-6569.2	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_011	TATOOINE	tat_world	AREA	0	-5097.7	75.0	-6570.1	175	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_012	TATOOINE	tat_world	AREA	0	-5099.5	75.0	-6568.5	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_013	TATOOINE	tat_world	AREA	0	-5096.1	75.0	-6568.2	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_014	TALUS	tal_world	AREA	0	741.6	6.0	-3089.0	-81	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_015	TALUS	tal_world	AREA	0	744.4	6.0	-3090.5	-81	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_016	TALUS	tal_world	AREA	0	744.6	6.0	-3087.7	-79	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_017	TALUS	tal_world	AREA	0	746.9	6.0	-3086.6	-92	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_018	TALUS	tal_world	AREA	0	746.9	6.0	-3089.6	-85	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
+eve_lif_019	TALUS	tal_world	AREA	0	746.1	6.0	-3092.4	-83	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_020	TALUS	tal_world	AREA	0	743.3	6.0	-3097.5	2	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
+eve_lif_021	TALUS	tal_world	AREA	0	480.8	6.0	-2907.8	46	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_022	TALUS	tal_world	AREA	0	478.5	6.0	-2907.9	46	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_023	TALUS	tal_world	AREA	0	480.4	6.0	-2909.7	41	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_024	TALUS	tal_world	AREA	0	720.3	6.0	-3082.0	-45	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_025	TALUS	tal_world	AREA	0	720.5	6.0	-3084.4	-39	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_026	TALUS	tal_world	AREA	0	723.1	6.0	-3081.6	-63	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_027	CORELLIA	cor_world	AREA	0	3418.3	308.1	5516.4	-123	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_028	CORELLIA	cor_world	AREA	0	3422.5	308.1	5517.0	-114	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_029	CORELLIA	cor_world	AREA	0	3420.8	308.1	5518.1	-125	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_030	CORELLIA	cor_world	AREA	0	3419.6	308.1	5519.7	-129	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_lif_031	CORELLIA	cor_world	AREA	0	3421.4	308.1	5514.4	-113	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
+eve_lif_032	CORELLIA	cor_world	AREA	0	3417.8	308.1	5521.1	-149	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_lif_033	CORELLIA	cor_world	AREA	0	3421.0	308.1	5507.7	-17	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
+eve_lif_034	CORELLIA	cor_world	AREA	0	3280.0	300.0	5363.0	45	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_035	CORELLIA	cor_world	AREA	0	3279.5	300.0	5360.0	45	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_036	CORELLIA	cor_world	AREA	0	3276.6	300.0	5363.3	45	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_037	CORELLIA	cor_world	AREA	0	3123.7	285.0	5001.4	-130	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_038	CORELLIA	cor_world	AREA	0	3126.5	285.0	5002.3	-140	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_lif_039	CORELLIA	cor_world	AREA	0	3123.2	285.0	5005.0	-140	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600

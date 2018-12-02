@@ -34,11 +34,17 @@ public final class ExperienceIntent extends Intent {
 	private final CreatureObject creatureObject;
 	private final String xpType;
 	private final int experienceGained;
+	private final boolean multiply;
 	
 	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained) {
+		this(creatureObject, xpType, experienceGained, false);
+	}
+	
+	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained, boolean multiply) {
 		this.creatureObject = creatureObject;
 		this.xpType = xpType;
 		this.experienceGained = experienceGained;
+		this.multiply = false;
 	}
 	
 	public CreatureObject getCreatureObject() {
@@ -51,6 +57,10 @@ public final class ExperienceIntent extends Intent {
 	
 	public int getExperienceGained() {
 		return experienceGained;
+	}
+	
+	public boolean isMultiply() {
+		return multiply;
 	}
 	
 }

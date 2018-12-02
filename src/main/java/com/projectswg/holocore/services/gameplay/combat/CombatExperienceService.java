@@ -115,6 +115,7 @@ public class CombatExperienceService extends Service {
 		
 		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
 		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
+		boolean xpMultiply = experienceGained > 1;
 		
 		if (experienceGained <= 0) {
 			return;
@@ -125,7 +126,7 @@ public class CombatExperienceService extends Service {
 		} else {
 			group.getGroupMemberObjects().stream()
 					.filter(groupMember -> !isEntertainer(groupMember) && isMemberNearby(corpse, groupMember))
-					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained).broadcast());
+					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained, xpMultiply).broadcast());
 		}
 	}
 	

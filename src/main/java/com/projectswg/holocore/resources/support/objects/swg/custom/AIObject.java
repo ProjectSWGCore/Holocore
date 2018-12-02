@@ -31,7 +31,9 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
+import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -100,7 +102,7 @@ public class AIObject extends CreatureObject {
 			} else {
 				if (activeMode != null) {
 					activeMode.onPlayerMoveInAware(player, distance);
-					if (distance < getSpawner().getAggressiveRadius() && isEnemyOf(player) && isLineOfSight(player)) {
+					if (getSpawner().getSpawnerFlag() == SpawnerFlag.AGGRESSIVE && distance < getSpawner().getAggressiveRadius() && isEnemyOf(player) && isLineOfSight(player)) {
 						StartNpcCombatIntent.broadcast(this, List.of(player));
 					}
 					

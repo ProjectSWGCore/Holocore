@@ -24,129 +24,84 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
 
-public final class NpcPatrolRouteLoader extends DataLoader {
+public final class NpcCombatProfileLoader extends DataLoader {
 	
-	private final Map<String, List<PatrolRouteWaypoint>> patrolRouteMap;
+	private final Map<String, List<CombatProfile>> profiles;
 	
-	NpcPatrolRouteLoader() {
-		this.patrolRouteMap = new HashMap<>();
+	NpcCombatProfileLoader() {
+		this.profiles = new HashMap<>();
 	}
 	
-	public List<PatrolRouteWaypoint> getPatrolRoute(String groupId) {
-		return patrolRouteMap.get(groupId);
-	}
-	
-	public int getPatrolRouteCount() {
-		return patrolRouteMap.size();
-	}
-	
-	public void forEach(Consumer<List<PatrolRouteWaypoint>> c) {
-		patrolRouteMap.values().forEach(c);
+	@NotNull
+	public Set<String> getAbilities(@Nullable String id, @NotNull CreatureDifficulty difficulty, int level) {
+		List<CombatProfile> subprofiles = Objects.requireNonNull(profiles.get(id), "unknown profile id");
+		Set<String> abilities = new HashSet<>();
+		for (CombatProfile profile : subprofiles) {
+			if (profile.getDifficulty().equals(difficulty) && level >= profile.getMinLevel() && level <= profile.getMaxLevel())
+				abilities.addAll(profile.getAbilities());
+		}
+		return abilities;
 	}
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/patrol/patrol_id.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
 			while (set.next()) {
-				PatrolRouteWaypoint waypoint = new PatrolRouteWaypoint(set);
-				List<PatrolRouteWaypoint> route = patrolRouteMap.computeIfAbsent(waypoint.getGroupId(), k -> new ArrayList<>());
-				route.add(waypoint);
+				CombatProfile profile = new CombatProfile(set);
+				profiles.computeIfAbsent(profile.getId(), p -> new ArrayList<>()).add(profile);
 			}
 		}
 	}
 	
-	public static class PatrolRouteWaypoint {
+	private static class CombatProfile {
 		
-		private final String groupId;
-		private final String patrolId;
-		private final PatrolType patrolType;
-		private final Terrain terrain;
-		private final String buildingId;
-		private final int cellId;
-		private final double x;
-		private final double y;
-		private final double z;
-		private final double delay;
+		private final String id;
+		private final CreatureDifficulty difficulty;
+		private final int minLevel;
+		private final int maxLevel;
+		private final Set<String> abilities;
 		
-		public PatrolRouteWaypoint(SdbResultSet set) {
-			this.groupId = set.getText("patrol_group");
-			this.patrolId = set.getText("patrol_id");
-			this.patrolType = parsePatrolType(set.getText("patrol_type"));
-			this.terrain = Terrain.valueOf(set.getText("terrain"));
-			this.buildingId = set.getText("building_id");
-			this.cellId = (int) set.getInt("cell_id");
-			this.x = set.getReal("x");
-			this.y = set.getReal("y");
-			this.z = set.getReal("z");
-			this.delay = set.getReal("pause");
+		public CombatProfile(SdbResultSet set) {
+			this.id = set.getText("profile_id");
+			this.difficulty = CreatureDifficulty.valueOf(set.getText("difficulty"));
+			this.minLevel = (int) set.getInt("min_cl");
+			this.maxLevel = (int) set.getInt("max_cl");
+			this.abilities = Set.of(set.getText("action").split(";"));
 		}
 		
-		public String getGroupId() {
-			return groupId;
+		public String getId() {
+			return id;
 		}
 		
-		public String getPatrolId() {
-			return patrolId;
+		public CreatureDifficulty getDifficulty() {
+			return difficulty;
 		}
 		
-		public PatrolType getPatrolType() {
-			return patrolType;
+		public int getMinLevel() {
+			return minLevel;
 		}
 		
-		public Terrain getTerrain() {
-			return terrain;
+		public int getMaxLevel() {
+			return maxLevel;
 		}
 		
-		public String getBuildingId() {
-			return buildingId;
+		public Set<String> getAbilities() {
+			return abilities;
 		}
 		
-		public int getCellId() {
-			return cellId;
-		}
-		
-		public double getX() {
-			return x;
-		}
-		
-		public double getY() {
-			return y;
-		}
-		
-		public double getZ() {
-			return z;
-		}
-		
-		public double getDelay() {
-			return delay;
-		}
-		
-		private static PatrolType parsePatrolType(String str) {
-			switch (str.toUpperCase(Locale.US)) {
-				case "FLIP":
-					return PatrolType.FLIP;
-				case "LOOP":
-				default:
-					return PatrolType.LOOP;
-			}
-		}
-		
-	}
-	
-	public enum PatrolType {
-		LOOP,
-		FLIP
 	}
 	
 }

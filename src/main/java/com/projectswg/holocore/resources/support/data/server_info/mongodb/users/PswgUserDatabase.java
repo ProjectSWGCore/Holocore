@@ -27,7 +27,7 @@ public class PswgUserDatabase extends PswgDatabase {
 		
 		collection.createIndex(Indexes.ascending("username"), new IndexOptions().unique(true));
 		collection.createIndex(Indexes.ascending("characters.firstName"), new IndexOptions().unique(true).partialFilterExpression(Filters.type("characters.firstName", "string")));
-		collection.count();
+		collection.countDocuments();
 	}
 	
 	@Override

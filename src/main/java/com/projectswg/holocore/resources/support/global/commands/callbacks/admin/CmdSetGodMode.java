@@ -1,6 +1,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin;
 
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -26,6 +27,7 @@ public final class CmdSetGodMode implements ICmdCallback {
 			creatureObject.addAbility("admin");
 			SystemMessageIntent.broadcastPersonal(player, "God Mode Enabled");
 		}
+		ForceAwarenessUpdateIntent.broadcast(creatureObject);
 	}
 	
 }

@@ -29,12 +29,14 @@ package com.projectswg.holocore.resources.support.npc.spawn;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.*;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.CreatureNpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.DroidNpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.HumanoidNpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolRouteWaypoint;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.DetailNpcStatInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.NpcStatInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.StaticSpawnInfo;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -53,8 +55,6 @@ public final class Spawner {
 	
 	private final StaticSpawnInfo spawn;
 	private final NpcInfo npc;
-	private final NpcStatInfo npcStat;
-	private final DetailNpcStatInfo npcDetailStat;
 	
 	private final Location location;
 	private final List<ResolvedPatrolWaypoint> waypoints;
@@ -65,15 +65,13 @@ public final class Spawner {
 		this.spawn = Objects.requireNonNull(spawn, "spawn");
 		this.npc = DataLoader.npcs().getNpc(spawn.getNpcId());
 		Objects.requireNonNull(npc, "Invalid npc id: " + spawn.getNpcId());
-		this.npcStat = DataLoader.npcStats().getNpcStats(npc.getCombatLevel());
-		Objects.requireNonNull(npcStat, "Invalid npc combat lebel: " + npc.getCombatLevel());
 		
 		this.location = Location.builder()
 					.setTerrain(spawn.getTerrain())
 					.setPosition(spawn.getX(), spawn.getY(), spawn.getZ())
 					.setHeading(spawn.getHeading())
 					.build();
-		if (spawn.getPatrolId() < 1000) {
+		if (spawn.getPatrolId().isEmpty() || spawn.getPatrolId().equals("0")) { // TODO: Replace the latter with empty string
 			this.waypoints = null;
 		} else {
 			List<PatrolRouteWaypoint> waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()), "Invalid patrol route: " + spawn.getPatrolId());
@@ -81,19 +79,6 @@ public final class Spawner {
 		}
 		this.egg = Objects.requireNonNull(egg, "egg");
 		this.random = new Random();
-		
-		switch (npc.getDifficulty()) {
-			case NORMAL:
-			default:
-				this.npcDetailStat = npcStat.getNormalDetailStat();
-				break;
-			case ELITE:
-				this.npcDetailStat = npcStat.getEliteDetailStat();
-				break;
-			case BOSS:
-				this.npcDetailStat = npcStat.getBossDetailStat();
-				break;
-		}
 	}
 	
 	/**
@@ -133,7 +118,7 @@ public final class Spawner {
 		return location;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return spawn.getId();
 	}
 	
@@ -157,7 +142,7 @@ public final class Spawner {
 		return spawn.getBehavior();
 	}
 	
-	public int getPatrolId() {
+	public String getPatrolId() {
 		return spawn.getPatrolId();
 	}
 	
@@ -182,15 +167,19 @@ public final class Spawner {
 	}
 	
 	public SpawnerFlag getSpawnerFlag() {
-		return npc.getSpawnerFlag();
+		return spawn.getSpawnerFlag();
 	}
 	
 	public CreatureDifficulty getDifficulty() {
-		return npc.getDifficulty();
+		return spawn.getDifficulty();
 	}
 	
-	public int getCombatLevel() {
-		return npc.getCombatLevel();
+	public int getMinLevel() {
+		return spawn.getMinLevel();
+	}
+	
+	public int getMaxLevel() {
+		return spawn.getMaxLevel();
 	}
 	
 	public String getName() {
@@ -227,14 +216,6 @@ public final class Spawner {
 	
 	public List<String> getSecondaryWeapons() {
 		return npc.getSecondaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
-	}
-	
-	public double getPrimaryWeaponSpeed() {
-		return npc.getPrimaryWeaponSpeed();
-	}
-	
-	public double getSecondaryWeaponSpeed() {
-		return npc.getSecondaryWeaponSpeed();
 	}
 	
 	public int getAggressiveRadius() {
@@ -283,58 +264,6 @@ public final class Spawner {
 	
 	public CreatureNpcInfo getCreatureInfo() {
 		return npc.getCreatureInfo();
-	}
-	
-	public int getLevel() {
-		return npcStat.getLevel();
-	}
-	
-	public int getHealthRegen() {
-		return npcStat.getHealthRegen();
-	}
-	
-	public int getActionRegen() {
-		return npcStat.getActionRegen();
-	}
-	
-	public int getMindRegen() {
-		return npcStat.getMindRegen();
-	}
-	
-	public int getHealth() {
-		return npcDetailStat.getHealth();
-	}
-	
-	public int getAction() {
-		return npcDetailStat.getAction();
-	}
-	
-	public int getRegen() {
-		return npcDetailStat.getRegen();
-	}
-	
-	public int getCombatRegen() {
-		return npcDetailStat.getCombatRegen();
-	}
-	
-	public int getDamagePerSecond() {
-		return npcDetailStat.getDamagePerSecond();
-	}
-	
-	public int getToHit() {
-		return npcDetailStat.getToHit();
-	}
-	
-	public int getDef() {
-		return npcDetailStat.getDef();
-	}
-	
-	public int getArmor() {
-		return npcDetailStat.getArmor();
-	}
-	
-	public int getXp() {
-		return npcDetailStat.getXp();
 	}
 	
 	private <T> T getRandom(List<T> list) {

@@ -192,17 +192,16 @@ public class CreatureObject extends TangibleObject {
 			if (rider != null)
 				return rider.isWithinAwarenessRange(target);
 		}
-		if (!isLoggedInPlayer()) {
-			if (target instanceof CreatureObject && ((CreatureObject) target).isLoggedInPlayer())
-				return target.isWithinAwarenessRange(this);
-			return false;
-		}
+		// Don't treat this as a player if not logged in - treat it as an object
+		if (!isLoggedInPlayer())
+			return super.isWithinAwarenessRange(target);
+		// Must be within the same instance
 		if (getInstanceLocation().getInstanceNumber() != target.getInstanceLocation().getInstanceNumber())
 			return false;
-		if (target.getParent() != null && !target.isVisible(this))
+		// Must be otherwise visible according to player access
+		if (!target.isVisible(this))
 			return false;
 		
-		double distance = target.getWorldLocation().flatDistanceTo(getWorldLocation());
 		switch (target.getBaselineType()) {
 			case WAYP:
 				return false;
@@ -210,9 +209,9 @@ public class CreatureObject extends TangibleObject {
 			case BUIO:
 				return true;
 			case CREO:
-				return distance <= 200;
+				return flatDistanceTo(target) <= 200;
 			default:
-				return distance <= 400;
+				return flatDistanceTo(target) <= 400;
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.projectswg.holocore.services.gameplay.combat.loot;
 
+import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
@@ -32,11 +33,9 @@ import me.joshlarson.jlcommon.log.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class LootGenerationService extends Service {
-	
-	private static final float CASH_LOOT_CHANCE_NORMAL = 0.6f;
-	private static final float CASH_LOOT_CHANCE_ELITE = 0.8f;
 	
 	private final Map<String, LootTable> lootTables;    // K: loot_id, V: table contents
 	private final Map<String, NPCLoot> npcLoot;    // K: npc_id, V: possible loot
@@ -83,7 +82,7 @@ public final class LootGenerationService extends Service {
 		boolean lootGenerated = false;
 		
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", true))
-			cashGenerated = generateCreditChip(loot, lootInventory, corpse.getDifficulty());
+			cashGenerated = generateCreditChip(loot, lootInventory, corpse.getDifficulty(), corpse.getLevel());
 		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
 			lootGenerated = generateLoot(loot, killer, lootInventory);
 		
@@ -139,16 +138,7 @@ public final class LootGenerationService extends Service {
 		
 		NpcLoader npcLoader = DataLoader.npcs();
 		for (NpcInfo info : npcLoader.getNpcs()) {
-			int minCash = 0;
-			int maxCash = 0;
-			NpcLoader.HumanoidNpcInfo humanoidInfo = info.getHumanoidInfo();
-			
-			if (humanoidInfo != null) {    // Humanoids may have cash
-				minCash = humanoidInfo.getMinCash();
-				maxCash = humanoidInfo.getMaxCash();
-			}
-			
-			NPCLoot loot = new NPCLoot(minCash, maxCash);
+			NPCLoot loot = new NPCLoot(info.getHumanoidInfo() != null);
 			
 			// load each loot table (up to 3) and add to loot object
 			loadNPCTable(loot, info.getLootTable1(), info.getLootTable1Chance());
@@ -201,44 +191,42 @@ public final class LootGenerationService extends Service {
 		}
 	}
 	
-	private boolean generateCreditChip(NPCLoot loot, SWGObject lootInventory, CreatureDifficulty difficulty) {
-		float cashLootRoll = random.nextFloat();
-		int multiplier;
+	private boolean generateCreditChip(NPCLoot loot, SWGObject lootInventory, CreatureDifficulty difficulty, int combatLevel) {
+		if (!loot.isDropCredits())
+			return false;
+		
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		Config lootConfig = DataManager.getConfig(ConfigFile.LOOTOPTIONS);
+		
+		double range = lootConfig.getDouble("LOOT-CASH-HUMAN-RANGE", 0.05);
+		double cashLootRoll = random.nextDouble();
+		int credits;
 		
 		switch (difficulty) {
 			default:
 			case NORMAL:
-				if (cashLootRoll > CASH_LOOT_CHANCE_NORMAL)
+				if (cashLootRoll > lootConfig.getDouble("LOOT-CASH-HUMAN-NORMAL-CHANCE", 0.60))
 					return false;
-				multiplier = 1;
+				credits = lootConfig.getInt("LOOT-CASH-HUMAN-NORMAL", 2);
 				break;
 			case ELITE:
-				if (cashLootRoll > CASH_LOOT_CHANCE_ELITE)
+				if (cashLootRoll > lootConfig.getDouble("LOOT-CASH-HUMAN-ELITE-CHANCE", 0.80))
 					return false;
-				multiplier = 2;
+				credits = lootConfig.getInt("LOOT-CASH-HUMAN-ELITE", 5);
 				break;
 			case BOSS:
 				// bosses always drop cash loot, so no need to check
-				multiplier = 3;
+				credits = lootConfig.getInt("LOOT-CASH-HUMAN-BOSS", 9);
 				break;
 		}
-		
-		int maxCash = loot.getMaxCash();
-		
-		if (maxCash == 0) {
-			// No cash is ever dropped on this creature
-			return false;
-		}
-		
-		int minCash = loot.getMinCash();
-		int cashAmount = random.nextInt((maxCash - minCash) + 1) + minCash;
-		cashAmount *= multiplier;
+		credits *= combatLevel;
+		credits *= 1 + random.nextDouble(0, 2*range-range);
 		
 		// TODO scale with group size?
 		
 		CreditObject cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", CreditObject.class);
 		
-		cashObject.setAmount(cashAmount);
+		cashObject.setAmount(credits);
 		cashObject.moveToContainer(lootInventory);
 		
 		ObjectCreatedIntent.broadcast(cashObject);
@@ -302,26 +290,20 @@ public final class LootGenerationService extends Service {
 	
 	private static class NPCLoot {
 		
-		private final int minCash;
-		private final int maxCash;
 		private final Collection<NPCTable> npcTables;
+		private final boolean canDropCredits;
 		
-		public NPCLoot(int minCash, int maxCash) {
-			this.minCash = minCash;
-			this.maxCash = maxCash;
+		public NPCLoot(boolean canDropCredits) {
 			this.npcTables = new ArrayList<>();
+			this.canDropCredits = canDropCredits;
 		}
 		
-		public int getMinCash() {
-			return minCash;
-		}
-		
-		public int getMaxCash() {
-			return maxCash;
+		public boolean isDropCredits() {
+			return canDropCredits;
 		}
 		
 		public Collection<NPCTable> getNPCTables() {
-			return npcTables;
+			return Collections.unmodifiableCollection(npcTables);
 		}
 		
 		public void addNPCTable(NPCTable npcTable) {

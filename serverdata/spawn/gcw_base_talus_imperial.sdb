@@ -1,24 +1,24 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-3500003	TALUS	tal_gcw_base_bunker	AREA	10	18.3	-13.8	-13.7	-18	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500004	TALUS	tal_gcw_base_bunker	AREA	9	16.3	-13.8	4.5	-22	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500005	TALUS	tal_gcw_base_bunker	AREA	9	16.3	-13.8	13.3	-111	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500006	TALUS	tal_gcw_base_bunker	AREA	8	4.7	-13.8	9.7	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500007	TALUS	tal_gcw_base_bunker	AREA	8	-1.2	-13.8	9.7	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500008	TALUS	tal_gcw_base_bunker	AREA	7	-5.4	-13.7	1.9	129	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500009	TALUS	tal_gcw_base_bunker	AREA	7	-3.5	13.7	-8.6	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500010	TALUS	tal_gcw_base_bunker	AREA	5	2.5	-6.8	-9.2	0	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500011	TALUS	tal_world	AREA	0	-4945.3	66.0	-3127.3	90	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500012	TALUS	tal_world	AREA	0	-4936.5	66.0	-3115.4	128	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500013	TALUS	tal_world	AREA	0	-4930.8	66.0	-3112.0	128	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500014	TALUS	tal_world	AREA	0	-4912.3	70.0	-3041.4	-133	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500015	TALUS	tal_world	AREA	0	-4955.5	66.0	-3079.0	35	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500016	TALUS	tal_world	AREA	0	-4929.4	66.0	-3077.6	163	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500017	TALUS	tal_world	AREA	0	-4914.6	66.0	-3117.7	-11	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500018	TALUS	tal_world	AREA	0	-4926.8	66.0	-3140.1	-32	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500019	TALUS	tal_world	AREA	0	-4934.5	66.0	-3131.2	70	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500020	TALUS	tal_world	AREA	0	-4919.7	66.0	-3099.7	-18	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500021	TALUS	tal_world	AREA	0	-4970.9	66.0	-3090.5	-75	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500022	TALUS	tal_world	AREA	0	-4970.2	66.0	-3135.5	-35	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500023	TALUS	tal_world	AREA	0	-4957.3	66.0	-3166.1	54	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
-3500024	TALUS	tal_gcw_base_bunker	AREA	10	12.1	-13.8	-15.3	15	1	Imperial Logistics Officer	gcw_base_imperial_talus_reward_officer	INVULNERABLE	N	100	100	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+gcw_tal_base_imp_001	TALUS	tal_gcw_base_bunker	AREA	10	18.3	-13.8	-13.7	-18	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_002	TALUS	tal_gcw_base_bunker	AREA	9	16.3	-13.8	4.5	-22	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_003	TALUS	tal_gcw_base_bunker	AREA	9	16.3	-13.8	13.3	-111	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_004	TALUS	tal_gcw_base_bunker	AREA	8	4.7	-13.8	9.7	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_005	TALUS	tal_gcw_base_bunker	AREA	8	-1.2	-13.8	9.7	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_006	TALUS	tal_gcw_base_bunker	AREA	7	-5.4	-13.7	1.9	129	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_007	TALUS	tal_gcw_base_bunker	AREA	7	-3.5	13.7	-8.6	-180	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_008	TALUS	tal_gcw_base_bunker	AREA	5	2.5	-6.8	-9.2	0	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_009	TALUS	tal_world	AREA	0	-4945.3	66.0	-3127.3	90	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_010	TALUS	tal_world	AREA	0	-4936.5	66.0	-3115.4	128	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_011	TALUS	tal_world	AREA	0	-4930.8	66.0	-3112.0	128	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_012	TALUS	tal_world	AREA	0	-4912.3	70.0	-3041.4	-133	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_013	TALUS	tal_world	AREA	0	-4955.5	66.0	-3079.0	35	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_014	TALUS	tal_world	AREA	0	-4929.4	66.0	-3077.6	163	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_015	TALUS	tal_world	AREA	0	-4914.6	66.0	-3117.7	-11	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_016	TALUS	tal_world	AREA	0	-4926.8	66.0	-3140.1	-32	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_017	TALUS	tal_world	AREA	0	-4934.5	66.0	-3131.2	70	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_018	TALUS	tal_world	AREA	0	-4919.7	66.0	-3099.7	-18	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_019	TALUS	tal_world	AREA	0	-4970.9	66.0	-3090.5	-75	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_020	TALUS	tal_world	AREA	0	-4970.2	66.0	-3135.5	-35	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_021	TALUS	tal_world	AREA	0	-4957.3	66.0	-3166.1	54	1	an Imperial stormtrooper	gcw_base_stormtrooper	ATTACKABLE	E	90	95	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_tal_base_imp_022	TALUS	tal_gcw_base_bunker	AREA	10	12.1	-13.8	-15.3	15	1	Imperial Logistics Officer	gcw_base_imperial_talus_reward_officer	INVULNERABLE	N	100	100	GCW	Talus GCW Base	1	IDLE	0	0	-	idle	0	0	0	300

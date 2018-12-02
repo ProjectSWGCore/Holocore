@@ -132,6 +132,8 @@ public class ProjectSWG {
 		Log.i("    Intent Times: [%d]", intentTimes.size());
 		Log.i("        %-30s%-60s%-40s%-10s%-20s", "Intent", "Receiver Class", "Receiver Method", "Count", "Time");
 		for (IntentSpeedStatistics record : intentTimes) {
+			if (record.getCount() == 0)
+				continue;
 			String receiverName = record.getKey().toString();
 			if (receiverName.indexOf('$') != -1)
 				receiverName = receiverName.substring(0, receiverName.indexOf('$'));

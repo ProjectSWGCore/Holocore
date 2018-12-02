@@ -62,6 +62,7 @@ import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -93,13 +94,28 @@ public class AwarenessService extends Service {
 	}
 	
 	@IntentHandler
+	private void processInboundPacketIntent(InboundPacketIntent gpi) {
+		SWGPacket packet = gpi.getPacket();
+		if (packet instanceof DataTransform) {
+			handleDataTransform(gpi.getPlayer(), (DataTransform) packet);
+		} else if (packet instanceof DataTransformWithParent) {
+			handleDataTransformWithParent(gpi.getPlayer(), (DataTransformWithParent) packet);
+		} else if (packet instanceof CmdSceneReady) {
+			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
+		} else if (packet instanceof TeleportAck) {
+			teleporting.remove(gpi.getPlayer().getCreatureObject());
+		}
+	}
+	
+	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		awareness.createObject(oci.getObject());
 	}
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		SWGObject obj = doi.getObject();
+		@NotNull SWGObject obj = doi.getObject();
+		
 		synchronized (obj.getAwarenessLock()) {
 			obj.systemMove(null, GONE_LOCATION);
 			awareness.destroyObject(doi.getObject());
@@ -123,23 +139,9 @@ public class AwarenessService extends Service {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			teleporting.add(obj);
 		
-		update(obj);
+		awareness.updateObject(obj);
 		
 		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, true, 0);
-	}
-	
-	@IntentHandler
-	private void processInboundPacketIntent(InboundPacketIntent gpi) {
-		SWGPacket packet = gpi.getPacket();
-		if (packet instanceof DataTransform) {
-			handleDataTransform(gpi.getPlayer(), (DataTransform) packet);
-		} else if (packet instanceof DataTransformWithParent) {
-			handleDataTransformWithParent(gpi.getPlayer(), (DataTransformWithParent) packet);
-		} else if (packet instanceof CmdSceneReady) {
-			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
-		} else if (packet instanceof TeleportAck) {
-			teleporting.remove(gpi.getPlayer().getCreatureObject());
-		}
 	}
 	
 	@IntentHandler
@@ -153,14 +155,14 @@ public class AwarenessService extends Service {
 		@Nullable SWGObject oldContainer = cti.getOldContainer();
 		@Nullable SWGObject newContainer = cti.getContainer();
 		
-		update(cti.getObject());
+		awareness.updateObject(cti.getObject());
 		
 		onObjectMoved(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), false, 0);
 	}
 	
 	@IntentHandler
 	private void handleForceAwarenessUpdateIntent(ForceAwarenessUpdateIntent faui) {
-		update(faui.getObject());
+		awareness.updateObject(faui.getObject());
 	}
 	
 	@IntentHandler
@@ -169,29 +171,28 @@ public class AwarenessService extends Service {
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Location loc, SWGObject parent) {
-		Player player = creature.getOwner();
+		@NotNull Player player = Objects.requireNonNull(creature.getOwner(), "Player zoning in without an owner");
+		PlayerState state = player.getPlayerState();
 		
 		// Fresh login or teleport/travel
-		PlayerState state = player.getPlayerState();
 		boolean firstZone = (state == PlayerState.LOGGED_IN);
 		if (!firstZone && state != PlayerState.ZONED_IN) {
 			CloseConnectionIntent.broadcast(player, DisconnectReason.SUSPECTED_HACK);
 			return;
 		}
 		
-		SWGObject oldParent = creature.getParent();
-		Location oldLocation = creature.getLocation();
+		@Nullable SWGObject oldParent = creature.getParent();
+		@NotNull Location oldLocation = creature.getLocation();
 		synchronized (creature.getAwarenessLock()) {
 			creature.systemMove(parent, loc);
 			creature.resetObjectsAware();
-			startZone(creature, firstZone);
+			startZone(player, creature, firstZone);
 			awareness.updateObject(creature);
 		}
 		onObjectMoved(creature, oldParent, parent, oldLocation, loc, false, 0);
 	}
 	
-	private void startZone(CreatureObject creature, boolean firstZone) {
-		Player player = creature.getOwner();
+	private void startZone(Player player, CreatureObject creature, boolean firstZone) {
 		player.setPlayerState(PlayerState.ZONING_IN);
 		Intent firstZoneIntent = null;
 		if (firstZone) {
@@ -288,14 +289,6 @@ public class AwarenessService extends Service {
 		}
 		
 		onObjectMoved(obj, oldParent, parent, oldLocation, requestedLocation, false, speed);
-	}
-	
-	private void update(@Nullable SWGObject obj) {
-		if (obj != null) {
-			synchronized (obj.getAwarenessLock()) {
-				awareness.updateObject(obj);
-			}
-		}
 	}
 	
 	private static boolean isPlayerZoneInRequired(@NotNull SWGObject obj, @NotNull Location oldLocation, @NotNull Location newLocation) {

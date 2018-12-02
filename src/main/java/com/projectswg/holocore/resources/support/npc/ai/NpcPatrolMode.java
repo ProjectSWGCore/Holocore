@@ -31,6 +31,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatr
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class NpcPatrolMode extends NpcMode {
 	
 	private final List<NavigationPoint> waypoints;
 	
-	public NpcPatrolMode(AIObject obj, List<ResolvedPatrolWaypoint> waypoints) {
+	public NpcPatrolMode(@NotNull AIObject obj, @NotNull List<ResolvedPatrolWaypoint> waypoints) {
 		super(obj);
 		this.waypoints = new ArrayList<>(waypoints.size());
 		

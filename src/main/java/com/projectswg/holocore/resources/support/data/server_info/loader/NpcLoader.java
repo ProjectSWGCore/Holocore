@@ -30,7 +30,6 @@ import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
@@ -73,12 +72,6 @@ public final class NpcLoader extends DataLoader {
 		}
 	}
 	
-	public enum SpawnerFlag {
-		AGGRESSIVE,
-		ATTACKABLE,
-		INVULNERABLE
-	}
-	
 	public static class NpcInfo {
 		
 		/*
@@ -104,10 +97,8 @@ public final class NpcLoader extends DataLoader {
 			attack_speed				REAL
 			movement_speed				REAL
 			primary_weapon				TEXT
-			primary_weapon_speed		REAL
 			primary_weapon_specials	*	TEXT
 			secondary_weapon			TEXT
-			secondary_weapon_speed		REAL
 			secondary_weapon_specials*	TEXT
 			aggressive_radius			INTEGER
 			assist_radius				INTEGER
@@ -128,9 +119,6 @@ public final class NpcLoader extends DataLoader {
 			chronicle_loot_category	*	TEXT
 		 */
 		private final String id;
-		private final SpawnerFlag spawnerFlag;
-		private final CreatureDifficulty difficulty;
-		private final int combatLevel;
 		private final String name;
 		private final String stfName;
 		private final String niche;
@@ -138,8 +126,8 @@ public final class NpcLoader extends DataLoader {
 		private final boolean specForce;
 		private final double attackSpeed;
 		private final double movementSpeed;
-		private final double primaryWeaponSpeed;
-		private final double secondaryWeaponSpeed;
+		private final String primaryWeaponSpecials;
+		private final String secondaryWeaponSpecials;
 		private final int aggressiveRadius;
 		private final int assistRadius;
 		private final boolean deathblow;
@@ -159,8 +147,6 @@ public final class NpcLoader extends DataLoader {
 		
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
-			this.spawnerFlag = SpawnerFlag.valueOf(set.getText("attackable"));
-			this.combatLevel = (int) set.getInt("combat_level");
 			this.name = set.getText("npc_name").intern();
 			this.stfName = set.getText("stf_name");
 			this.niche = set.getText("niche").intern();
@@ -169,9 +155,9 @@ public final class NpcLoader extends DataLoader {
 			this.attackSpeed = set.getReal("attack_speed");
 			this.movementSpeed = set.getReal("movement_speed");
 			this.primaryWeapons = parseWeapons(set.getText("primary_weapon"));
+			this.primaryWeaponSpecials = set.getText("primary_weapon_specials");
 			this.secondaryWeapons = parseWeapons(set.getText("secondary_weapon"));
-			this.primaryWeaponSpeed = set.getReal("primary_weapon_speed");
-			this.secondaryWeaponSpeed = set.getReal("secondary_weapon_speed");
+			this.secondaryWeaponSpecials = set.getText("secondary_weapon_specials");
 			this.aggressiveRadius = (int) set.getInt("aggressive_radius");
 			this.assistRadius = (int) set.getInt("assist_radius");
 			this.deathblow = set.getBoolean("death_blow");
@@ -181,20 +167,6 @@ public final class NpcLoader extends DataLoader {
 			this.lootTable1Chance = (int) set.getInt("loot_table1_chance");
 			this.lootTable2Chance = (int) set.getInt("loot_table2_chance");
 			this.lootTable3Chance = (int) set.getInt("loot_table3_chance");
-			
-			switch (set.getText("difficulty")) {
-				default:
-					Log.w("Unknown difficulty: %s", set.getText("difficulty"));
-				case "N":
-					this.difficulty = CreatureDifficulty.NORMAL;
-					break;
-				case "E":
-					this.difficulty = CreatureDifficulty.ELITE;
-					break;
-				case "B":
-					this.difficulty = CreatureDifficulty.BOSS;
-					break;
-			}
 			
 			switch (set.getText("faction")) {
 				case "rebel":
@@ -237,18 +209,6 @@ public final class NpcLoader extends DataLoader {
 			return id;
 		}
 		
-		public SpawnerFlag getSpawnerFlag() {
-			return spawnerFlag;
-		}
-		
-		public CreatureDifficulty getDifficulty() {
-			return difficulty;
-		}
-		
-		public int getCombatLevel() {
-			return combatLevel;
-		}
-		
 		public String getName() {
 			return name;
 		}
@@ -258,7 +218,7 @@ public final class NpcLoader extends DataLoader {
 		}
 		
 		public List<String> getIffs() {
-			return iffs;
+			return Collections.unmodifiableList(iffs);
 		}
 		
 		public PvpFaction getFaction() {
@@ -281,16 +241,16 @@ public final class NpcLoader extends DataLoader {
 			return primaryWeapons;
 		}
 		
+		public String getPrimaryWeaponSpecials() {
+			return primaryWeaponSpecials;
+		}
+		
 		public List<String> getSecondaryWeapons() {
 			return secondaryWeapons;
 		}
 		
-		public double getPrimaryWeaponSpeed() {
-			return primaryWeaponSpeed;
-		}
-		
-		public double getSecondaryWeaponSpeed() {
-			return secondaryWeaponSpeed;
+		public String getSecondaryWeaponSpecials() {
+			return secondaryWeaponSpecials;
 		}
 		
 		public int getAggressiveRadius() {
@@ -351,20 +311,8 @@ public final class NpcLoader extends DataLoader {
 	
 	public static class HumanoidNpcInfo {
 		
-		private final int minCash;
-		private final int maxCash;
-		
 		public HumanoidNpcInfo(SdbResultSet set) {
-			this.minCash = (int) set.getInt("min_cash");
-			this.maxCash = (int) set.getInt("max_cash");
-		}
-		
-		public int getMinCash() {
-			return minCash;
-		}
-		
-		public int getMaxCash() {
-			return maxCash;
+			
 		}
 		
 	}

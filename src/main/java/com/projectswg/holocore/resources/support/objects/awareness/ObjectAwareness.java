@@ -50,8 +50,10 @@ public class ObjectAwareness {
 	public void createObject(@NotNull SWGObject obj) {
 		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
 			TerrainMap map = getTerrainMap(obj);
-			map.add(obj);
-			map.update(obj);
+			synchronized (obj.getAwarenessLock()) {
+				map.add(obj);
+				map.update(obj);
+			}
 		}
 	}
 	
@@ -62,8 +64,10 @@ public class ObjectAwareness {
 	 */
 	public void destroyObject(@NotNull SWGObject obj) {
 		TerrainMap map = getTerrainMap(obj);
-		map.remove(obj);
-		map.update(obj);
+		synchronized (obj.getAwarenessLock()) {
+			map.remove(obj);
+			map.update(obj);
+		}
 	}
 	
 	/**
@@ -74,14 +78,16 @@ public class ObjectAwareness {
 	public void updateObject(@NotNull SWGObject obj) {
 		SWGObject superParent = obj.getSuperParent();
 		TerrainMap map = getTerrainMap(obj);
-		if (superParent != null) {
-			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
-			map.remove(obj);
-			map.update(superParent);
-		} else {
-			map.move(obj);
+		synchronized (obj.getAwarenessLock()) {
+			if (superParent != null) {
+				assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
+				map.remove(obj);
+				map.update(superParent);
+			} else {
+				map.move(obj);
+			}
+			map.update(obj);
 		}
-		map.update(obj);
 	}
 	
 	@NotNull

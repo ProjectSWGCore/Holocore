@@ -99,7 +99,7 @@ public final class SpawnerService extends Service {
 				spawn(spawn);
 				count++;
 			} catch (Throwable t) {
-				Log.e("Failed to load spawner. %s: %s", t.getClass().getName(), t.getMessage());
+				Log.e("Failed to load spawner[%s]/npc[%s]. %s: %s", spawn.getId(), spawn.getNpcId(), t.getClass().getName(), t.getMessage());
 			}
 		}
 		createPatrolRouteWaypoints();
@@ -124,18 +124,18 @@ public final class SpawnerService extends Service {
 		return egg;
 	}
 	
-	private static SWGObject getCell(int spawnId, int cellId, String buildingTag) {
+	private static SWGObject getCell(String spawnId, int cellId, String buildingTag) {
 		if (buildingTag.isEmpty() || buildingTag.endsWith("_world"))
 			return null;
 		BuildingObject building = BuildingLookup.getBuildingByTag(buildingTag);
 		if (building == null) {
-			Log.w("Skipping spawner with ID %d - building_id %s didn't reference a BuildingObject!", spawnId, buildingTag);
+			Log.w("Skipping spawner with ID %s - building_id %s didn't reference a BuildingObject!", spawnId, buildingTag);
 			return null;
 		}
 		
 		SWGObject cellObject = building.getCellByNumber(cellId);
 		if (cellObject == null) {
-			Log.e("Spawner with ID %d - building %s didn't have cell ID %d!", spawnId, buildingTag, cellId);
+			Log.e("Spawner with ID %s - building %s didn't have cell ID %d!", spawnId, buildingTag, cellId);
 		}
 		return cellObject;
 	}

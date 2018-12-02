@@ -1,15 +1,15 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-2000003	TATOOINE	tat_world	AREA	0	-5043.3	73.2	-6531.3	0	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2000004	TATOOINE	tat_world	AREA	0	-5041.3	73.2	-6533.3	0	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2000005	TATOOINE	tat_world	AREA	0	-5045.3	73.2	-6533.3	0	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2000006	TATOOINE	tat_world	AREA	0	-5039.3	73.2	-6535.3	0	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
-2000007	TATOOINE	tat_world	AREA	0	-5047.3	73.2	-6535.3	0	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
-2000008	TATOOINE	tat_world	AREA	0	-5043.3	73.2	-6535.3	0	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
-2000009	TATOOINE	tat_world	AREA	0	-5050.3	73.2	-6533.1	45	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
-2000010	TATOOINE	tat_world	AREA	0	-5212.3	75.0	-6570.6	-94	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2000011	TATOOINE	tat_world	AREA	0	-5209.5	75.0	-6572.1	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2000012	TATOOINE	tat_world	AREA	0	-5209.7	75.0	-6569.2	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2000013	TATOOINE	tat_world	AREA	0	-5097.7	75.0	-6570.1	175	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2000014	TATOOINE	tat_world	AREA	0	-5099.5	75.0	-6568.5	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
-2000015	TATOOINE	tat_world	AREA	0	-5096.1	75.0	-6568.2	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+eve_emp_001	TATOOINE	tat_world	AREA	0	-5043.3	73.2	-6531.3	0	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_emp_002	TATOOINE	tat_world	AREA	0	-5041.3	73.2	-6533.3	0	1	Tech Mo'r	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_emp_003	TATOOINE	tat_world	AREA	0	-5045.3	73.2	-6533.3	0	1	Tedn Dahai	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_emp_004	TATOOINE	tat_world	AREA	0	-5039.3	73.2	-6535.3	0	1	Doikk Na'ts	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+eve_emp_005	TATOOINE	tat_world	AREA	0	-5047.3	73.2	-6535.3	0	1	Nalan Cheel	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
+eve_emp_006	TATOOINE	tat_world	AREA	0	-5043.3	73.2	-6535.3	0	1	Ickabel G'ont	event_lifeday_figrin_dan_band	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	themepark_music_2	0	0	0	600
+eve_emp_007	TATOOINE	tat_world	AREA	0	-5050.3	73.2	-6533.1	45	1	Saun Dann	event_lifeday_saun_dann	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	entertained	0	0	0	600
+eve_emp_008	TATOOINE	tat_world	AREA	0	-5212.3	75.0	-6570.6	-94	1	Oolovv	event_lifeday_oolovv	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_emp_009	TATOOINE	tat_world	AREA	0	-5209.5	75.0	-6572.1	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_emp_010	TATOOINE	tat_world	AREA	0	-5209.7	75.0	-6569.2	-94	1	a Rebel Soldier	event_lifeday_rebel_soldier	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_emp_011	TATOOINE	tat_world	AREA	0	-5097.7	75.0	-6570.1	175	1	Sstrigge	event_lifeday_sstrigge	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_emp_012	TATOOINE	tat_world	AREA	0	-5099.5	75.0	-6568.5	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600
+eve_emp_013	TATOOINE	tat_world	AREA	0	-5096.1	75.0	-6568.2	175	1	a Stormtrooper	event_lifeday_stormtrooper	INVULNERABLE	N	100	100	event	Lifeday	1	IDLE	0	0	-	idle	0	0	0	600

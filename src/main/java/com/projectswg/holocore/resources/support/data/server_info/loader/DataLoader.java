@@ -38,6 +38,10 @@ public abstract class DataLoader {
 		return (NpcLoader) CachedLoader.NPC_LOADER.load();
 	}
 	
+	public static NpcCombatProfileLoader npcCombatProfiles() {
+		return (NpcCombatProfileLoader) CachedLoader.NPC_COMBAT_PROFILES.load();
+	}
+	
 	public static NpcPatrolRouteLoader npcPatrolRoutes() {
 		return (NpcPatrolRouteLoader) CachedLoader.NPC_PATROL_ROUTES.load();
 	}
