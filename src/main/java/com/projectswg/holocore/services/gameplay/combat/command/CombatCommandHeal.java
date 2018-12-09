@@ -151,7 +151,6 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			default:
 				return;
 		}
-		StandardLog.onPlayerTrace(this, healer, "Healed %s by %d %s", healed, difference, attribName);
 		
 		WeaponObject weapon = healer.getEquippedWeapon();
 		CombatAction combatAction = createCombatAction(healer, weapon, TrailLocation.RIGHT_HAND, combatCommand);
