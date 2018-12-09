@@ -37,6 +37,7 @@ import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointOb
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -47,16 +48,16 @@ import static org.junit.Assert.assertTrue;
 
 public class TestObjectAwareness extends TestRunnerNoIntents {
 	
-	private ObjectAwareness awareness;
-	private GenericCreatureObject player;
-	private GenericCreatureObject testPlayer;
-	private GenericTangibleObject testTangible;
-	private BuildingObject testBuilding1;
-	private BuildingObject testBuilding2;
-	private WaypointObject testWaypoint;
-	private CellObject testCell1;
-	private CellObject testCell2;
-	private SWGObject inventoryObject;
+	private ObjectAwareness awareness = null;
+	private GenericCreatureObject player = null;
+	private GenericCreatureObject testPlayer = null;
+	private GenericTangibleObject testTangible = null;
+	private BuildingObject testBuilding1 = null;
+	private BuildingObject testBuilding2 = null;
+	private WaypointObject testWaypoint = null;
+	private CellObject testCell1 = null;
+	private CellObject testCell2 = null;
+	private SWGObject inventoryObject = null;
 	
 	private void initialize() {
 		awareness = new ObjectAwareness();
@@ -120,12 +121,22 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		player.setHasOwner(false);
 		
-		moveNoAssert(TestLocation.SSI);
-		assertAware(List.of(player, testPlayer));
+		Assert.assertFalse(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		
+		// Shouldn't be aware of anything else because it's a logged out player
+		for (TestLocation loc : TestLocation.values()) {
+			moveNoAssert(loc);
+			assertAware(List.of(player));
+		}
 		
 		player.setHasOwner(true);
-		move(TestLocation.SSI);
-		move(TestLocation.SSO);
+		Assert.assertTrue(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		
+		for (TestLocation loc : TestLocation.values()) {
+			move(loc);
+		}
 	}
 	
 	@Test

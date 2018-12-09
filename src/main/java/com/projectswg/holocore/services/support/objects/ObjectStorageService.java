@@ -39,7 +39,7 @@ public class ObjectStorageService extends Service {
 	public ObjectStorageService() {
 		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
-		this.buildouts = new ConcurrentHashMap<>(256*1024, 0.8f, 1);
+		this.buildouts = new HashMap<>(128*1024, 1f);
 		this.buildingLookup = new HashMap<>();
 		this.started = new AtomicBoolean(false);
 	}
@@ -49,24 +49,7 @@ public class ObjectStorageService extends Service {
 		ObjectLookup.setObjectAuthority(this::getObjectById);
 		BuildingLookup.setBuildingAuthority(buildingLookup::get);
 		
-		{
-			long startTime = StandardLog.onStartLoad("players");
-			synchronized (database) {
-				if (!database.load() && database.fileExists())
-					return false;
-			}
-			StandardLog.onEndLoad(database.size(), "players", startTime);
-		}
-		
-		{
-			long startTime = StandardLog.onStartLoad("client objects");
-			BuildoutLoader loader = DataLoader.buildouts(createEventList());
-			buildouts.putAll(loader.getObjects());
-			objectMap.putAll(buildouts);
-			buildingLookup.putAll(loader.getBuildings());
-			StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
-		}
-		return true;
+		return initializePlayers() && initializeClientObjects();
 	}
 	
 	@Override
@@ -92,6 +75,26 @@ public class ObjectStorageService extends Service {
 			database.close();
 		}
 		ObjectLookup.setObjectAuthority(null);
+		return true;
+	}
+	
+	private boolean initializePlayers() {
+		long startTime = StandardLog.onStartLoad("players");
+		synchronized (database) {
+			if (!database.load() && database.fileExists())
+				return false;
+		}
+		StandardLog.onEndLoad(database.size(), "players", startTime);
+		return true;
+	}
+	
+	private boolean initializeClientObjects() {
+		long startTime = StandardLog.onStartLoad("client objects");
+		BuildoutLoader loader = DataLoader.buildouts(createEventList());
+		buildouts.putAll(loader.getObjects());
+		objectMap.putAll(buildouts);
+		buildingLookup.putAll(loader.getBuildings());
+		StandardLog.onEndLoad(buildouts.size(), "client objects", startTime);
 		return true;
 	}
 	

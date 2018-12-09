@@ -118,8 +118,13 @@ public class NetworkClientService extends Service {
 	
 	@Override
 	public boolean stop() {
+		for (NetworkClient client : tcpServer.getSessions())
+			client.close(ConnectionStoppedReason.APPLICATION);
+		
 		tcpServer.close();
 		if (adminServer != null) {
+			for (NetworkClient client : adminServer.getSessions())
+				client.close(ConnectionStoppedReason.APPLICATION);
 			adminServer.close();
 		}
 		securityExecutor.stop(false);
@@ -210,7 +215,7 @@ public class NetworkClientService extends Service {
 			keyManagerFactory.init(keystore, passphrase);
 			TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 			trustManagerFactory.init(keystore);
-			SSLContext ctx = SSLContext.getInstance("TLSv1.2");
+			SSLContext ctx = SSLContext.getInstance("TLSv1.3");
 			ctx.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
 			Log.i("Enabled TLS encryption");
 			return ctx;

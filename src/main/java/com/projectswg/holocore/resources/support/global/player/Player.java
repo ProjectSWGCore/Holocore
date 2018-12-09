@@ -40,9 +40,8 @@ import java.util.Locale;
 
 public class Player implements Comparable<Player> {
 	
-	private final IntentChain intentChain;
-	private final Object sendingLock;
 	private final long networkId;
+	private final IntentChain intentChain;
 	
 	private String			username			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
@@ -56,9 +55,8 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Player(long networkId) {
-		this.intentChain = new IntentChain();
-		this.sendingLock = new Object();
 		this.networkId = networkId;
+		this.intentChain = new IntentChain();
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -81,8 +79,6 @@ public class Player implements Comparable<Player> {
 		this.creatureObject = obj;
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
-		if (obj == null)
-			intentChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -149,25 +145,23 @@ public class Player implements Comparable<Player> {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
 	
-	public Object getSendingLock() {
-		return sendingLock;
-	}
-	
 	public boolean isBaselinesSent(SWGObject obj) {
 		CreatureObject creature = this.creatureObject;
 		return creature == null || creature.isBaselinesSent(obj);
 	}
 	
 	public void sendPacket(SWGPacket ... packets) {
-		synchronized (getSendingLock()) {
-			for (SWGPacket p : packets) {
-				intentChain.broadcastAfter(new OutboundPacketIntent(this, p));
-			}
+		for (SWGPacket p : packets) {
+			broadcast(new OutboundPacketIntent(this, p));
 		}
 	}
 	
 	public void broadcast(Intent intent) {
-		intentChain.broadcastAfter(intent);
+		CreatureObject creatureObject = this.creatureObject;
+		if (creatureObject != null)
+			creatureObject.broadcast(intent);
+		else
+			intentChain.broadcastAfter(intent);
 	}
 	
 	@Override

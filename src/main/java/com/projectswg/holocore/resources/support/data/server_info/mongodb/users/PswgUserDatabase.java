@@ -51,7 +51,7 @@ public class PswgUserDatabase extends PswgDatabase {
 	}
 	
 	public boolean isCharacter(@NotNull String firstName) {
-		return collection.count(Filters.eq("characters.firstName", firstName.toLowerCase(Locale.US)), new CountOptions().limit(1)) > 0;
+		return collection.countDocuments(Filters.eq("characters.firstName", firstName.toLowerCase(Locale.US)), new CountOptions().limit(1)) > 0;
 	}
 	
 	@NotNull

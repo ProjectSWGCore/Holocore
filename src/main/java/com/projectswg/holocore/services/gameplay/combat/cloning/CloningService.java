@@ -282,9 +282,6 @@ public class CloningService extends Service {
 			}
 		}
 		
-		// We're put on leave when we're revived at a cloning facility
-		new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-		
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.getLocation());
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility));
 		return CloneResult.SUCCESS;
@@ -312,10 +309,7 @@ public class CloningService extends Service {
 	}
 	
 	private void teleport(CreatureObject corpse, CellObject cellObject, Location cloneLocation) {
-		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
-			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-		}
-		
+		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
@@ -323,7 +317,9 @@ public class CloningService extends Service {
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
 		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));
 		corpse.broadcast(new BuffIntent("incapWeaken", corpse, corpse, true));
-		corpse.moveToContainer(cellObject, cloneLocation);
+		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
+			corpse.broadcast(new FactionIntent(corpse, PvpStatus.ONLEAVE));
+		}
 	}
 	
 	/**

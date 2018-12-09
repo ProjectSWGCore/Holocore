@@ -62,6 +62,7 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.control.Intent;
+import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,6 +85,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
+	private final IntentChain						intentChain		= new IntentChain();
 	
 	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
 	private ContainerPermissions		permissions		= DefaultPermissions.getPermissions();
@@ -339,11 +341,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void broadcast(Intent intent) {
-		Player owner = getOwner();
-		if (owner != null)
-			owner.broadcast(intent);
-		else
-			intent.broadcast();
+		intentChain.broadcastAfter(intent);
 	}
 	
 	public boolean isWithinAwarenessRange(SWGObject target) {

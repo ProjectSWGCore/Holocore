@@ -1,6 +1,7 @@
 package com.projectswg.holocore.services.support.objects;
 
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
+import com.projectswg.holocore.services.support.objects.awareness.ClientAwarenessService;
 import com.projectswg.holocore.services.support.objects.buildouts.StaticService;
 import com.projectswg.holocore.services.support.objects.items.ItemManager;
 import com.projectswg.holocore.services.support.objects.radials.RadialService;
@@ -9,6 +10,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		AwarenessService.class,
+		ClientAwarenessService.class,
 		
 		StaticService.class,
 		

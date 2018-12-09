@@ -4,7 +4,9 @@ plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
-	id "com.github.johnrengelman.shadow" version "4.0.2"
+	id "com.github.johnrengelman.shadow" version "4.0.3"
+	id "org.javamodularity.moduleplugin" version "1.2.1"
+	id "org.beryx.jlink" version "2.1.8"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'

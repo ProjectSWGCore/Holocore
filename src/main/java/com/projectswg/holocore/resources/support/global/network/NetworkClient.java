@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.network;
 
-import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetworkProtocol;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
@@ -39,6 +39,7 @@ import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIn
 import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.control.IntentChain;
@@ -71,21 +72,21 @@ public class NetworkClient extends SecureTCPSession {
 			"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384",
 			"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384"
 	};
-	private static final int DEFAULT_BUFFER = 1024;
+	private static final int DEFAULT_BUFFER = 2048;
 	
 	private final IntentChain intentChain;
-	private final NetBufferStream buffer;
 	private final AtomicBoolean requestedProcessInbound;
 	private final AtomicReference<SessionStatus> status;
+	private final NetBuffer buffer;
 	private final Player player;
 	
 	public NetworkClient(SocketChannel socket, SSLContext sslContext, ThreadPool securityExecutor) {
 		super(socket, createEngine(sslContext), DEFAULT_BUFFER, securityExecutor::execute);
 		this.intentChain = new IntentChain();
-		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.requestedProcessInbound = new AtomicBoolean(false);
 		this.status = new AtomicReference<>(SessionStatus.DISCONNECTED);
 		this.player = new Player(getSessionId());
+		this.buffer = NetBuffer.allocateDirect(DEFAULT_BUFFER);
 	}
 	
 	public void close(ConnectionStoppedReason reason) {
@@ -98,8 +99,11 @@ public class NetworkClient extends SecureTCPSession {
 	
 	public void processInbound() {
 		synchronized (buffer) {
+			if (status.get() == SessionStatus.DISCONNECTED)
+				return;
 			requestedProcessInbound.set(false);
 			try {
+				buffer.flip();
 				while (NetworkProtocol.canDecode(buffer)) {
 					SWGPacket p = NetworkProtocol.decode(buffer);
 					if (p == null || !allowInbound(p))
@@ -108,6 +112,7 @@ public class NetworkClient extends SecureTCPSession {
 					processPacket(p);
 					intentChain.broadcastAfter(new InboundPacketIntent(player, p));
 				}
+				buffer.compact();
 			} catch (HolocoreSessionException e) {
 				onSessionError(e);
 			} catch (IOException e) {
@@ -130,10 +135,19 @@ public class NetworkClient extends SecureTCPSession {
 	@Override
 	protected void onIncomingData(@NotNull ByteBuffer data) {
 		synchronized (buffer) {
+			if (status.get() == SessionStatus.DISCONNECTED)
+				return;
 			try {
-				buffer.write(data);
+				if (data.remaining() > buffer.remaining()) {
+					StandardLog.onPlayerError(this, player, "Possible hack attempt detected with buffer overflow.  Closing connection to %s", getRemoteAddress());
+					close(ConnectionStoppedReason.APPLICATION);
+					return;
+				}
+				buffer.add(data);
+				buffer.flip();
 				if (NetworkProtocol.canDecode(buffer) && !requestedProcessInbound.getAndSet(true))
 					InboundPacketPendingIntent.broadcast(this);
+				buffer.compact();
 			} catch (IOException e) {
 				close(ConnectionStoppedReason.NETWORK);
 			}

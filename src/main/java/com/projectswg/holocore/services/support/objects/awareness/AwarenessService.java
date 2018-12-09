@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.support.objects.awareness;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
@@ -36,11 +35,8 @@ import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
-import com.projectswg.common.network.packets.swg.zone.object_controller.TeleportAck;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
@@ -54,8 +50,6 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -63,19 +57,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class AwarenessService extends Service {
 	
 	private static final Location GONE_LOCATION = Location.builder().setTerrain(Terrain.GONE).setPosition(0, 0, 0).build();
 	
 	private final ObjectAwareness awareness;
-	private final Set<SWGObject> teleporting;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
-		this.teleporting = ConcurrentHashMap.newKeySet();
 	}
 	
 	@IntentHandler
@@ -90,20 +80,6 @@ public class AwarenessService extends Service {
 				break;
 			default:
 				break;
-		}
-	}
-	
-	@IntentHandler
-	private void processInboundPacketIntent(InboundPacketIntent gpi) {
-		SWGPacket packet = gpi.getPacket();
-		if (packet instanceof DataTransform) {
-			handleDataTransform(gpi.getPlayer(), (DataTransform) packet);
-		} else if (packet instanceof DataTransformWithParent) {
-			handleDataTransformWithParent(gpi.getPlayer(), (DataTransformWithParent) packet);
-		} else if (packet instanceof CmdSceneReady) {
-			handleCmdSceneReady(gpi.getPlayer(), (CmdSceneReady) packet);
-		} else if (packet instanceof TeleportAck) {
-			teleporting.remove(gpi.getPlayer().getCreatureObject());
 		}
 	}
 	
@@ -123,7 +99,7 @@ public class AwarenessService extends Service {
 	}
 	
 	@IntentHandler
-	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
+	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
 		@NotNull SWGObject obj = oti.getObject();
 		@Nullable SWGObject oldParent = oti.getOldParent();
 		@Nullable SWGObject newParent = oti.getNewParent();
@@ -136,8 +112,9 @@ public class AwarenessService extends Service {
 			return;
 		}
 		
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
-			teleporting.add(obj);
+		// Client appears to effectively wipe awareness when doing a long range teleport
+		if (oldParent != null && newParent != null && oldParent != newParent && obj instanceof CreatureObject)
+			((CreatureObject) obj).resetObjectsAware();
 		
 		awareness.updateObject(obj);
 		
@@ -145,12 +122,12 @@ public class AwarenessService extends Service {
 	}
 	
 	@IntentHandler
-	private void processMoveObjectIntent(MoveObjectIntent moi) {
+	private void handleMoveObjectIntent(MoveObjectIntent moi) {
 		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed());
 	}
 	
 	@IntentHandler
-	private void processContainerTransferIntent(ContainerTransferIntent cti) {
+	private void handleContainerTransferIntent(ContainerTransferIntent cti) {
 		@NotNull SWGObject obj = cti.getObject();
 		@Nullable SWGObject oldContainer = cti.getOldContainer();
 		@Nullable SWGObject newContainer = cti.getContainer();
@@ -172,7 +149,7 @@ public class AwarenessService extends Service {
 	
 	private void handleZoneIn(CreatureObject creature, Location loc, SWGObject parent) {
 		@NotNull Player player = Objects.requireNonNull(creature.getOwner(), "Player zoning in without an owner");
-		PlayerState state = player.getPlayerState();
+		@NotNull PlayerState state = player.getPlayerState();
 		
 		// Fresh login or teleport/travel
 		boolean firstZone = (state == PlayerState.LOGGED_IN);
@@ -193,6 +170,8 @@ public class AwarenessService extends Service {
 	}
 	
 	private void startZone(Player player, CreatureObject creature, boolean firstZone) {
+		@NotNull Location loc = creature.getWorldLocation();
+		
 		player.setPlayerState(PlayerState.ZONING_IN);
 		Intent firstZoneIntent = null;
 		if (firstZone) {
@@ -204,85 +183,15 @@ public class AwarenessService extends Service {
 			firstZoneIntent = new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE);
 			firstZoneIntent.broadcast();
 		}
-		Location loc = creature.getWorldLocation();
 		player.sendPacket(new CmdStartScene(true, creature.getObjectId(), creature.getRace(), loc, ProjectSWG.getGalacticTime(), (int) (System.currentTimeMillis() / 1E3)));
 		StandardLog.onPlayerEvent(this, player, "zoning in at %s %s", loc.getTerrain(), loc.getPosition());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcastAfterIntent(firstZoneIntent);
 	}
 	
-	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
-		assert player.getPlayerState() == PlayerState.ZONING_IN;
-		player.setPlayerState(PlayerState.ZONED_IN);
-		StandardLog.onPlayerEvent(this, player, "zoned in from %s", p.getSocketAddress());
-		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
-		player.sendPacket(new CmdSceneReady());
-	}
-	
-	private void handleDataTransform(Player player, DataTransform dt) {
-		CreatureObject creature = player.getCreatureObject();
-		if (creature == null) {
-			StandardLog.onPlayerError(this, player, "sent a DataTransform without being logged in");
-			return;
-		}
-		if (creature.getObjectId() != dt.getObjectId()) {
-			StandardLog.onPlayerError(this, player, "sent a DataTransform for another object [%d]", dt.getObjectId());
-			return;
-		}
-		if (teleporting.contains(creature))
-			return;
-		
-		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
-		double speed = dt.getSpeed();
-		
-		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			// If this is the primary rider, move the mount and all of the riders
-			CreatureObject mount = (CreatureObject) creature.getParent();
-			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
-			
-			if (mount.getOwnerId() == creature.getObjectId()) {
-				moveObjectWithTransform(mount, null, requestedLocation, speed);
-				for (SWGObject child : mount.getSlottedObjects()) {
-					moveObjectWithTransform(child, mount, requestedLocation, speed);
-				}
-			}
-		} else {
-			moveObjectWithTransform(creature, null, requestedLocation, dt.getSpeed());
-		}
-	}
-	
-	private void handleDataTransformWithParent(Player player, DataTransformWithParent dt) {
-		CreatureObject creature = player.getCreatureObject();
-		if (creature == null) {
-			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent without being logged in");
-			return;
-		}
-		if (creature.getObjectId() != dt.getObjectId()) {
-			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent for another object [%d]", dt.getObjectId());
-			return;
-		}
-		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
-		if (parent == null) {
-			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent with an unknown parent [%d]", dt.getCellId());
-			return;
-		}
-		if (teleporting.contains(creature))
-			return;
-		
-		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			// If this is the primary rider, move the mount and all of the riders
-			CreatureObject mount = (CreatureObject) creature.getParent();
-			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
-			mount.sendObservers(new DataTransform(mount.getObjectId(), 0, mount.getNextUpdateCount(), mount.getLocation(), 0));
-			DismountIntent.broadcast(creature, mount);
-		} else {
-			Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
-			moveObjectWithTransform(creature, parent, requestedLocation, dt.getSpeed());
-		}
-	}
-	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
-		SWGObject oldParent = obj.getParent();
-		Location oldLocation = obj.getLocation();
+		@Nullable SWGObject oldParent = obj.getParent();
+		@NotNull Location oldLocation = obj.getLocation();
+		
 		synchronized (obj.getAwarenessLock()) {
 			obj.systemMove(parent, requestedLocation);
 			awareness.updateObject(obj);
