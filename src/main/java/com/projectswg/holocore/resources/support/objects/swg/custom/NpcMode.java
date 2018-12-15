@@ -88,19 +88,19 @@ public abstract class NpcMode {
 	}
 	
 	public final void walkTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed());
 	}
 	
 	public final void walkTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getWalkSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getWalkSpeed());
 	}
 	
 	public final void runTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getRunSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, parent, location, getRunSpeed());
 	}
 	
 	public final void runTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed());
 	}
 	
 }

@@ -72,6 +72,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -82,6 +83,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
 	private final ObjectAware						awareness		= new ObjectAware(this);
+	private final Set<CreatureObject>				observers		= ConcurrentHashMap.newKeySet();
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
@@ -344,12 +346,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		intentChain.broadcastAfter(intent);
 	}
 	
-	public boolean isWithinAwarenessRange(SWGObject target) {
-		if (target instanceof CreatureObject && ((CreatureObject) target).isLoggedInPlayer())
-			return target.isWithinAwarenessRange(this);
-		return false;
-	}
-	
 	public boolean isVisible(CreatureObject target) {
 		if (target == null)
 			return true;
@@ -417,7 +413,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public SWGObject getSlottedObject(String slotName) {
 		return slots.get(slotName);
 	}
-
+	
 	/**
 	 * Gets a list of all the objects in the current container. This should only be used for viewing the objects
 	 * in the current container.
@@ -936,12 +932,20 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 	}
 	
-	public Object getAwarenessLock() {
-		return awareness;
+	public Set<CreatureObject> getObserverCreatures() {
+		return Collections.unmodifiableSet(observers);
 	}
 	
 	public Set<Player> getObservers() {
-		return awareness.getObservers();
+		return observers.stream().map(CreatureObject::getOwnerShallow).filter(Objects::nonNull).collect(Collectors.toSet());
+	}
+	
+	public void addObserver(CreatureObject player) {
+		observers.add(player);
+	}
+	
+	public void removeObserver(CreatureObject player) {
+		observers.remove(player);
 	}
 	
 	public Set<SWGObject> getAware() {
@@ -952,21 +956,22 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.getAware(type);
 	}
 	
-	public int sendObservers(SWGPacket ... SWGPackets) {
+	public boolean isAwareOf(SWGObject obj) {
+		return awareness.isAwareOf(obj);
+	}
+	
+	public int sendObservers(SWGPacket ... packets) {
 		int sent = 0;
-		synchronized (getAwarenessLock()) {
-			for (Player observer : getObservers()) {
-				observer.sendPacket(SWGPackets);
-				sent++;
-			}
+		for (CreatureObject observer : observers) {
+			sent += observer.sendSelf(packets);
 		}
 		return sent;
 	}
 	
-	public int sendSelf(SWGPacket ... SWGPackets) {
+	public int sendSelf(SWGPacket ... packets) {
 		Player owner = getOwner();
 		if (owner != null)
-			owner.sendPacket(SWGPackets);
+			owner.sendPacket(packets);
 		return owner != null ? 1 : 0;
 	}
 	

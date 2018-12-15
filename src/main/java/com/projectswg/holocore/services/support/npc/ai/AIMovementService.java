@@ -58,6 +58,9 @@ public class AIMovementService extends Service {
 		for (NavigationPoint point : snmi.getPoints()) {
 			appendRoutePoint(route, point, snmi.getSpeed());
 		}
+		if (snmi.getType() == NavigationRouteType.LOOP && !snmi.getPoints().isEmpty())
+			appendRoutePoint(route, snmi.getPoints().get(0), snmi.getSpeed());
+		
 		if (route.isEmpty())
 			routes.remove(obj);
 		else

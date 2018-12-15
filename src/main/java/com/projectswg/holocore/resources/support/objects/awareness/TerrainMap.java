@@ -26,17 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 public class TerrainMap {
 	
 	private static final int CHUNK_COUNT_ACROSS = 16;
 	private static final int MAP_WIDTH = 16384;
 	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / (double) CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
-	private static final Set<SWGObject> EMPTY_SET = Collections.emptySet();
 	
 	private final TerrainMapChunk [][] chunks;
 	
@@ -50,55 +50,114 @@ public class TerrainMap {
 		connectChunkNeighbors();
 	}
 	
+	public void updateChunks() {
+		for (TerrainMapChunk [] chunkRow : chunks) {
+			for (TerrainMapChunk chunk : chunkRow) {
+				TerrainMap.updateNearby(chunk);
+			}
+		}
+	}
+	
 	public void add(SWGObject obj) {
-		if (obj.getAwareness().getTerrainMapChunk() == null)
-			move(obj);
+		move(obj);
 	}
 	
 	public void remove(SWGObject obj) {
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(null);
-		if (current != null)
+		if (current != null) {
 			current.removeObject(obj);
-	}
-	
-	public void update(SWGObject obj) {
-		SWGObject superParent = obj.getSuperParent();
-		TerrainMapChunk chunk = (superParent != null ? superParent : obj).getAwareness().getTerrainMapChunk();
-		obj.setAware(AwarenessType.OBJECT, chunk == null ? EMPTY_SET : chunk.getWithinAwareness(obj));
-		obj.onObjectMoved();
+			obj.setAware(AwarenessType.OBJECT, List.of());
+			
+			for (SWGObject child : obj.getContainedObjects())
+				remove(child);
+			for (SWGObject child : obj.getSlottedObjects())
+				remove(child);
+		}
 	}
 	
 	public void move(SWGObject obj) {
+		SWGObject superParent = obj.getSuperParent();
+		if (superParent != null)
+			moveInParent(obj, superParent);
+		else
+			moveInWorld(obj);
+	}
+	
+	private void moveInParent(SWGObject obj, SWGObject superParent) {
+		TerrainMapChunk chunk = superParent.getAwareness().getTerrainMapChunk();
+		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
+		if (chunk == null)
+			return; // If the parent hasn't been added to awareness yet
+		
+		if (current != chunk) {
+			if (current != null) {
+				current.removeObject(obj);
+			}
+			chunk.addObject(obj);
+			
+			for (SWGObject child : obj.getContainedObjects())
+				moveInParent(child, superParent);
+			for (SWGObject child : obj.getSlottedObjects())
+				moveInParent(child, superParent);
+		}
+	}
+	
+	private void moveInWorld(SWGObject obj) {
 		int chunkCount = CHUNK_COUNT_ACROSS;
 		int indX = (obj.getTruncX()+8192) >> INDEX_FACTOR;
 		int indZ = (obj.getTruncZ()+8192) >> INDEX_FACTOR;
 		indX = (indX < 0) ? 0 : (indX >= chunkCount ? chunkCount-1 : indX);
 		indZ = (indZ < 0) ? 0 : (indZ >= chunkCount ? chunkCount-1 : indZ);
-		
 		TerrainMapChunk chunk = chunks[indZ][indX];
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
+		
 		if (current != chunk) {
-			if (current != null)
+			if (current != null) {
 				current.removeObject(obj);
+			}
 			chunk.addObject(obj);
+			for (SWGObject child : obj.getContainedObjects())
+				moveInParent(child, obj);
+			for (SWGObject child : obj.getSlottedObjects())
+				moveInParent(child, obj);
 		}
+	}
+	
+	private static void update(SWGObject objUncasted) {
+		CreatureObject obj = (CreatureObject) objUncasted; 
+		TerrainMapChunk chunk = obj.getAwareness().getTerrainMapChunk();
+		if (chunk == null) {
+			SWGObject superParent = obj.getSuperParent();
+			if (superParent == null)
+				return;
+			chunk = superParent.getAwareness().getTerrainMapChunk();
+			obj.getAwareness().setTerrainMapChunk(chunk);
+		}
+		assert chunk != null;
+		obj.setAware(AwarenessType.OBJECT, chunk.getWithinAwareness(obj));
+	}
+	
+	private static void updateNearby(TerrainMapChunk chunk) {
+		chunk.scan(TerrainMap::update);
 	}
 	
 	private void connectChunkNeighbors() {
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
 				TerrainMapChunk chunk = chunks[z][x];
-				for (int tmpZ = z-1; tmpZ <= z+1 && tmpZ < CHUNK_COUNT_ACROSS; tmpZ++) {
-					if (tmpZ < 0)
-						continue;
-					for (int tmpX = x-1; tmpX <= x+1 && tmpX < CHUNK_COUNT_ACROSS; tmpX++) {
-						if (tmpX < 0)
+				for (int tmpZ = cappedZero(z-1); tmpZ <= z+1 && tmpZ < CHUNK_COUNT_ACROSS; tmpZ++) {
+					for (int tmpX = cappedZero(x-1); tmpX <= x+1 && tmpX < CHUNK_COUNT_ACROSS; tmpX++) {
+						if (x == tmpX && z == tmpZ)
 							continue;
 						chunk.link(chunks[tmpZ][tmpX]);
 					}
 				}
 			}
 		}
+	}
+	
+	private static int cappedZero(int x) {
+		return x < 0 ? 0 : x;
 	}
 	
 }

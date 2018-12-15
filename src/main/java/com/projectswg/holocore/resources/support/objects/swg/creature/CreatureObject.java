@@ -43,6 +43,7 @@ import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
@@ -102,7 +103,8 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void flushObjectsAware() {
-		if (getTerrain() == Terrain.GONE)
+		Player owner = getOwnerShallow();
+		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
 			return;
 		awareness.flushAware();
 	}
@@ -158,6 +160,8 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	protected void onAddedChild(SWGObject child) {
+		if (!isPlayer())
+			return;
 		super.onAddedChild(child);
 		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
 		getAllChildren(children, child);
@@ -166,6 +170,8 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	protected void onRemovedChild(SWGObject child) {
+		if (!isPlayer())
+			return;
 		super.onRemovedChild(child);
 		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
 		{
@@ -185,22 +191,20 @@ public class CreatureObject extends TangibleObject {
 			getAllChildren(children, obj);
 	}
 	
-	@Override
 	public boolean isWithinAwarenessRange(SWGObject target) {
-		if (isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
-			SWGObject rider = getSlottedObject("rider");
-			if (rider != null)
-				return rider.isWithinAwarenessRange(target);
+		if (!isPlayer()) {
+			//noinspection SuspiciousMethodCalls
+			return getObserverCreatures().contains(target) && target.isVisible(this);
 		}
-		// Don't treat this as a player if not logged in - treat it as an object
-		if (!isLoggedInPlayer())
-			return super.isWithinAwarenessRange(target);
-		// Must be within the same instance
-		if (getInstanceLocation().getInstanceNumber() != target.getInstanceLocation().getInstanceNumber())
+		
+		Player owner = getOwnerShallow();
+		if (owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED || !target.isVisible(this))
 			return false;
-		// Must be otherwise visible according to player access
-		if (!target.isVisible(this))
-			return false;
+		
+		SWGObject myParent = getSuperParent();
+		SWGObject targetParent = target.getSuperParent();
+		if (myParent != null && myParent == targetParent)
+			return true;
 		
 		switch (target.getBaselineType()) {
 			case WAYP:
@@ -363,7 +367,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean isLoggedInPlayer() {
-		return getOwner() != null && isPlayer();
+		return getOwnerShallow() != null && isPlayer();
 	}
 	
 	public boolean isLoggedOutPlayer() {

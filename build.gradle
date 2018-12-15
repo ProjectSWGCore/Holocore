@@ -27,6 +27,12 @@ test {
 	}
 }
 
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
 shadowJar {
 	baseName = "Holocore"
 	classifier = null

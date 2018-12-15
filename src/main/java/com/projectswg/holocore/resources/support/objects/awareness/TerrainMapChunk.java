@@ -26,23 +26,27 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.function.Consumer;
 
 class TerrainMapChunk {
 	
-	private final List<SWGObject> objects;
+	private final Set<SWGObject> objects;
 	private TerrainMapChunk [] neighbors;
 	
 	public TerrainMapChunk() {
-		this.objects = new CopyOnWriteArrayList<>();
-		this.neighbors = new TerrainMapChunk[0];
+		this.objects = new CopyOnWriteArraySet<>();
+		this.neighbors = new TerrainMapChunk[]{this};
 	}
 	
 	public void link(TerrainMapChunk neighbor) {
+		assert this != neighbor;
 		int length = neighbors.length;
 		neighbors = Arrays.copyOf(neighbors, length+1);
 		neighbors[length] = neighbor;
@@ -56,32 +60,24 @@ class TerrainMapChunk {
 		objects.remove(obj);
 	}
 	
-	public Set<SWGObject> getWithinAwareness(@NotNull SWGObject obj) {
-		Set<SWGObject> withinRange = new HashSet<>();
-		getWithinAwareness(obj, withinRange);
-		for (TerrainMapChunk neighbor : neighbors) {
-			neighbor.getWithinAwareness(obj, withinRange);
-		}
-		return withinRange;
-	}
-	
-	public void getWithinAwareness(@NotNull SWGObject obj, @NotNull Collection<SWGObject> withinRange) {
+	public void scan(Consumer<SWGObject> consumer) {
 		for (SWGObject test : objects) {
-			if (obj.isWithinAwarenessRange(test))
-				recursiveAdd(withinRange, obj, test);
+			if (test.getBaselineType() == BaselineType.CREO)
+				consumer.accept(test);
 		}
 	}
 	
-	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject obj, @NotNull SWGObject test) {
-		if (!obj.isWithinAwarenessRange(test))
-			return;
-		withinRange.add(test);
-		for (SWGObject child : test.getSlottedObjects()) {
-			recursiveAdd(withinRange, obj, child);
+	public Collection<SWGObject> getWithinAwareness(@NotNull CreatureObject obj) {
+		Set<SWGObject> withinRange = new HashSet<>();
+		
+		for (TerrainMapChunk neighbor : neighbors) {
+			for (SWGObject test : neighbor.objects) {
+				if (obj.isWithinAwarenessRange(test))
+					withinRange.add(test);
+			}
 		}
-		for (SWGObject child : test.getContainedObjects()) {
-			recursiveAdd(withinRange, obj, child);
-		}
+		
+		return withinRange;
 	}
 	
 }

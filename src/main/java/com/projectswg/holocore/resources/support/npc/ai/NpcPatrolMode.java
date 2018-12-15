@@ -48,18 +48,13 @@ public class NpcPatrolMode extends NpcMode {
 		super(obj);
 		this.waypoints = new ArrayList<>(waypoints.size());
 		
-		if (!waypoints.isEmpty()) {
+		if (!waypoints.isEmpty() && waypoints.get(0).getPatrolType() == PatrolType.FLIP) {
 			waypoints = new ArrayList<>(waypoints);
-			if (waypoints.get(0).getPatrolType() == PatrolType.LOOP) {
-				waypoints.add(0, last(waypoints));
-			} else if (waypoints.get(0).getPatrolType() == PatrolType.FLIP) {
-				List<ResolvedPatrolWaypoint> reversed = new ArrayList<>(waypoints);
-				Collections.reverse(reversed);
-				waypoints.addAll(reversed);
-			} else {
-				assert false;
-			}
+			List<ResolvedPatrolWaypoint> reversed = new ArrayList<>(waypoints);
+			Collections.reverse(reversed);
+			waypoints.addAll(reversed);
 		}
+		
 		for (ResolvedPatrolWaypoint waypoint : waypoints) {
 			NavigationPoint point = NavigationPoint.at(waypoint.getParent(), waypoint.getLocation(), getWalkSpeed());
 			this.waypoints.add(point);

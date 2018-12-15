@@ -44,6 +44,8 @@ import java.util.List;
 
 public class TestNavigationPoint extends TestRunnerNoIntents {
 	
+	private static final double SPEED = 1.5;
+	
 	@Test
 	public void testDistanceTo() {
 		NavigationPoint src = NavigationPoint.at(null, Location.builder().setPosition(0, 0, 0).build(), 0);
@@ -60,7 +62,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		Location end = location(10, 0, 0);
 		List<NavigationPoint> route = from(null, start, end);
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, end, SPEED));
 	}
 	
 	@Test
@@ -79,7 +81,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(null, start, worldPortal));
 		route.addAll(from(buio.getCellByNumber(1), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	@Test
@@ -98,7 +100,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), end, portal));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -119,7 +121,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), portal1, portal2));
 		route.addAll(from(buio.getCellByNumber(2), portal2, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, SPEED));
 	}
 	
 	@Test
@@ -140,7 +142,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), portal2, portal1));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -158,35 +160,11 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), start, portal));
 		route.addAll(from(buio.getCellByNumber(2), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, SPEED));
 	}
 	
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {
-		double speed = 1;
-		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) Math.ceil(totalDistance / speed);
-		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
-		
-		double currentDistance = speed;
-		for (int i = 0; i < totalIntervals; i++) {
-			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
-			currentDistance += speed;
-		}
-		return path;
-	}
-	
-	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
-		if (percentage <= 0)
-			return NavigationPoint.at(parent, l1, speed);
-		if (percentage >= 1)
-			return NavigationPoint.at(parent, l2, speed);
-		return NavigationPoint.at(parent, Location.builder()
-				.setTerrain(l1.getTerrain())
-				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
-				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
-				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
-				.setHeading(Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ())))
-				.build(), speed);
+		return NavigationPoint.from(parent, source, destination, SPEED);
 	}
 	
 	private static Location buildPortalLocation(Portal portal) {

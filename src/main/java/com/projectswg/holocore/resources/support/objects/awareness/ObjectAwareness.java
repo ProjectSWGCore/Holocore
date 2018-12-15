@@ -31,6 +31,8 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public class ObjectAwareness {
 	
 	private final TerrainMap[] terrains;
@@ -48,13 +50,7 @@ public class ObjectAwareness {
 	 * @param obj the object created
 	 */
 	public void createObject(@NotNull SWGObject obj) {
-		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
-			TerrainMap map = terrains[obj.getTerrain().ordinal()];
-			synchronized (obj.getAwarenessLock()) {
-				map.add(obj);
-				map.update(obj);
-			}
-		}
+		terrains[obj.getTerrain().ordinal()].add(obj);
 	}
 	
 	/**
@@ -63,11 +59,7 @@ public class ObjectAwareness {
 	 * @param obj the object destroyed
 	 */
 	public void destroyObject(@NotNull SWGObject obj) {
-		TerrainMap map = terrains[obj.getTerrain().ordinal()];
-		synchronized (obj.getAwarenessLock()) {
-			map.remove(obj);
-			map.update(obj);
-		}
+		terrains[obj.getTerrain().ordinal()].remove(obj);
 	}
 	
 	/**
@@ -76,15 +68,14 @@ public class ObjectAwareness {
 	 * @param obj the object to update
 	 */
 	public void updateObject(@NotNull SWGObject obj) {
-		TerrainMap map = terrains[obj.getTerrain().ordinal()];
-		synchronized (obj.getAwarenessLock()) {
-			if (obj.getParent() == null)
-				map.move(obj);
-			else
-				map.remove(obj);
-			
-			map.update(obj);
-		}
+		terrains[obj.getTerrain().ordinal()].move(obj);
+	}
+	
+	/**
+	 * Updates all affected chunks
+	 */
+	public void updateChunks() {
+		Arrays.stream(terrains).parallel().forEach(TerrainMap::updateChunks);
 	}
 	
 }

@@ -168,7 +168,7 @@ public class CmdQaTool implements ICmdCallback {
 		try {
 			CreatureObject creature = player.getCreatureObject();
 			if (creature.getParent() != null) {
-				new MoveObjectIntent(creature, creature.getWorldLocation(), 0, 0).broadcast();
+				new MoveObjectIntent(creature, creature.getWorldLocation(), 0).broadcast();
 			}
 			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
 			new ForceAwarenessUpdateIntent(creature).broadcast();

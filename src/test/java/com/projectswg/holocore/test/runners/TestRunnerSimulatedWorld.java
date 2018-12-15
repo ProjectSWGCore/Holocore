@@ -33,10 +33,16 @@ import org.junit.Before;
 
 public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousIntents {
 	
+	private AwarenessService awareness;
+	
 	@Before
 	public final void setupSimulatedServices() {
 		registerService(new SimulatedObjectStorage());
-		registerService(new AwarenessService());
+		registerService(awareness = new AwarenessService());
+	}
+	
+	public final void updateAwareness() {
+		awareness.update();
 	}
 	
 }

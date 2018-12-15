@@ -61,38 +61,12 @@ public class TestObjectAware extends TestRunnerNoIntents {
 	}
 	
 	@Test
-	public void testAwarenessCallbacks() {
-		AtomicInteger onEnter = new AtomicInteger(0);
-		AtomicInteger onLeave = new AtomicInteger(0);
-		SWGObject test = new GenericCreatureObject(5);
-		PlayerObject ghost = new PlayerObject(-5) {
-			@Override public void onObjectEnterAware(SWGObject aware) { onEnter.incrementAndGet(); }
-			@Override public void onObjectLeaveAware(SWGObject aware) { onLeave.incrementAndGet(); }
-		};
-		ghost.systemMove(test);
-		onEnter.set(0);
-		
-		tangible1.setAware(AwarenessType.OBJECT, List.of(test, ghost));
-		assertEquals(1, onEnter.get());
-		tangible1.setAware(AwarenessType.OBJECT, List.of());
-		assertEquals(1, onEnter.get());
-		assertEquals(1, onLeave.get());
-		
-		onEnter.set(0);
-		onLeave.set(0);
-		
-		test.setAware(AwarenessType.OBJECT, List.of(tangible1));
-		ghost.setAware(AwarenessType.OBJECT, List.of(tangible1));
-		assertEquals(1, onEnter.get());
-	}
-	
-	@Test
 	public void testSingleBucketAware() {
 		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
-		assertTrue(tangible2.getAware().contains(tangible1));
+		assertFalse(tangible2.getAware().contains(tangible1));
 		assertTrue(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
-		assertTrue(tangible2.getAware(AwarenessType.OBJECT).contains(tangible1));
+		assertFalse(tangible2.getAware(AwarenessType.OBJECT).contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.GROUP).contains(tangible2));
 		assertFalse(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
 		
@@ -107,7 +81,7 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		// Add both directions
 		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
-		assertTrue(tangible2.getAware().contains(tangible1));
+		assertFalse(tangible2.getAware().contains(tangible1));
 		
 		tangible2.setAware(AwarenessType.OBJECT, List.of(tangible1));
 		assertTrue(tangible1.getAware().contains(tangible2));
@@ -115,28 +89,28 @@ public class TestObjectAware extends TestRunnerNoIntents {
 		
 		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertFalse(tangible1.getAware().contains(tangible2));
-		assertFalse(tangible2.getAware().contains(tangible1));
+		assertTrue(tangible2.getAware().contains(tangible1));
 	}
 	
 	@Test
 	public void testDoubleBucketAware() {
 		tangible1.setAware(AwarenessType.OBJECT, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
-		assertTrue(tangible2.getAware().contains(tangible1));
+		assertFalse(tangible2.getAware().contains(tangible1));
 		
 		tangible1.setAware(AwarenessType.GROUP, List.of(tangible2));
 		assertTrue(tangible1.getAware().contains(tangible2));
-		assertTrue(tangible2.getAware().contains(tangible1));
+		assertFalse(tangible2.getAware().contains(tangible1));
 		
 		tangible1.setAware(AwarenessType.OBJECT, List.of());
 		assertTrue(tangible1.getAware().contains(tangible2));
-		assertTrue(tangible2.getAware().contains(tangible1));
+		assertFalse(tangible2.getAware().contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));
 		assertFalse(tangible2.getAware(AwarenessType.OBJECT).contains(tangible1));
 		assertTrue(tangible1.getAware(AwarenessType.GROUP).contains(tangible2));
-		assertTrue(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
+		assertFalse(tangible2.getAware(AwarenessType.GROUP).contains(tangible1));
 		
-		tangible2.setAware(AwarenessType.GROUP, List.of());
+		tangible1.setAware(AwarenessType.GROUP, List.of());
 		assertFalse(tangible1.getAware().contains(tangible2));
 		assertFalse(tangible2.getAware().contains(tangible1));
 		assertFalse(tangible1.getAware(AwarenessType.OBJECT).contains(tangible2));

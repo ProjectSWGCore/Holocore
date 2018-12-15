@@ -41,8 +41,11 @@ import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.CellInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentManager;
@@ -59,7 +62,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PacketCaptureAnalysis {
 	
 	private final Map<Long, SWGObject> objects;
-	private final Map<Long, SWGObject> loadingObjects;
+	private final LinkedList<SWGObject> loadingObjects;
 	private final List<PacketCaptureAssertion> errors;
 	private final List<CreatureObject> players;
 	private final AtomicReference<Terrain> currentTerrain;
@@ -73,7 +76,7 @@ public class PacketCaptureAnalysis {
 	
 	private PacketCaptureAnalysis() {
 		this.objects = new HashMap<>();
-		this.loadingObjects = new HashMap<>();
+		this.loadingObjects = new LinkedList<>();
 		this.errors = new ArrayList<>();
 		this.players = new ArrayList<>();
 		this.currentTerrain = new AtomicReference<>(null);
@@ -183,7 +186,7 @@ public class PacketCaptureAnalysis {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(p.getObjectId(), CRC.getString(p.getObjectCrc()));
 		p.setLocation(Location.builder(p.getLocation()).setTerrain(currentTerrain.get()).build());
 		obj.setLocation(p.getLocation());
-		assertNull(p, loadingObjects.put(p.getObjectId(), obj), "object already exists [loading]");
+		loadingObjects.add(obj);
 		assertFalse(p, objects.containsKey(p.getObjectId()), "object already exists [initialized]");
 	}
 	
@@ -193,31 +196,46 @@ public class PacketCaptureAnalysis {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(p.getObjectId(), p.getTemplate());
 		p.setLocation(Location.builder(p.getLocation()).setTerrain(currentTerrain.get()).build());
 		obj.setLocation(p.getLocation());
-		assertNull(p, loadingObjects.put(p.getObjectId(), obj), "object already exists [loading]");
+		loadingObjects.add(obj);
 		assertFalse(p, objects.containsKey(p.getObjectId()), "object already exists [initialized]");
 	}
 	
 	private void handleBaseline(Baseline p) {
-		assertTrue(p, loadingObjects.containsKey(p.getObjectId()), "unknown object");
+		assertEquals(p, loadingObjects.getLast().getObjectId(), p.getObjectId(), "baseline sent for non-loading object");
 		assertFalse(p, objects.containsKey(p.getObjectId()), "already-initialized object");
 	}
 	
 	private void handleDeltasMessage(DeltasMessage p) {
-		assertFalse(p, loadingObjects.containsKey(p.getObjectId()), "uninitialized object for delta");
 		assertTrue(p, objects.containsKey(p.getObjectId()), "unknown object");
 	}
 	
 	private void handleSceneEndBaselines(SceneEndBaselines p) {
-		SWGObject obj = loadingObjects.remove(p.getObjectId());
-		assertNotNull(p, obj, "unknown object");
+		SWGObject obj = loadingObjects.pollLast();
+		assertNotNull(p, obj, "object was not loading");
+		assertEquals(p, obj.getObjectId(), p.getObjectId(), "object end baseline was not sent in order");
 		assertNull(p, objects.put(obj.getObjectId(), obj), "object already exists");
+		
+		if (obj instanceof BuildingObject) {
+			List<CellInfo> cellGoal = DataLoader.buildingCells().getBuilding(obj.getTemplate());
+			if (cellGoal != null) {
+				Collection<SWGObject> cells = obj.getContainedObjects();
+				assertEquals(p, cellGoal.size(), cells.size(), "Cells are not fully populated within building");
+			}
+		}
 	}
 	
 	private void handleSceneDestroyObject(SceneDestroyObject p) {
 		objectDeletions.incrementAndGet();
 		objectDeletionsImplicit.incrementAndGet();
-		loadingObjects.remove(p.getObjectId());
-		assertNotNull(p, objects.remove(p.getObjectId()), "destroyed object that didn't exist");
+		SWGObject obj = objects.remove(p.getObjectId());
+		assertNotNull(p, obj, "destroyed object that didn't exist");
+		handleDestroyObjectChildren(obj);
+	}
+	
+	private void handleDestroyObjectChildren(SWGObject obj) {
+		objects.remove(obj.getObjectId());
+		obj.getContainedObjects().forEach(this::handleDestroyObjectChildren);
+		obj.getSlottedObjects().forEach(this::handleDestroyObjectChildren);
 	}
 	
 	private void handleCommandStartScene(CmdStartScene p) {
@@ -313,8 +331,12 @@ public class PacketCaptureAnalysis {
 	@Nullable
 	private SWGObject getObject(long id) {
 		SWGObject obj = objects.get(id);
-		if (obj == null)
-			return loadingObjects.get(id);
+		if (obj == null) {
+			for (SWGObject loading : loadingObjects) {
+				if (loading.getObjectId() == id)
+					return loading;
+			}
+		}
 		return obj;
 	}
 	

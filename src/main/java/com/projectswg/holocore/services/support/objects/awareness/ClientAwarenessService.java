@@ -103,8 +103,6 @@ public class ClientAwarenessService extends Service {
 			StandardLog.onPlayerError(this, player, "sent a DataTransform for another object [%d]", dt.getObjectId());
 			return;
 		}
-		if (teleporting.contains(creature))
-			return;
 		
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
 		double speed = dt.getSpeed();
@@ -162,7 +160,7 @@ public class ClientAwarenessService extends Service {
 	}
 	
 	private static void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
-		MoveObjectIntent.broadcast(obj, parent, requestedLocation, speed, obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, parent, requestedLocation, speed);
 	}
 	
 }

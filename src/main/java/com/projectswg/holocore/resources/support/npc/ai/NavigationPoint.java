@@ -42,9 +42,9 @@ public class NavigationPoint {
 		if (isNoOperation())
 			return;
 		if (parent == null)
-			MoveObjectIntent.broadcast(obj, location, speed, obj.getNextUpdateCount());
+			obj.broadcast(new MoveObjectIntent(obj, location, speed));
 		else
-			MoveObjectIntent.broadcast(obj, parent, location, speed, obj.getNextUpdateCount());
+			obj.broadcast(new MoveObjectIntent(obj, parent, location, speed));
 	}
 	
 	public boolean isNoOperation() {
@@ -120,29 +120,32 @@ public class NavigationPoint {
 	 * @return a queue of locations to travel
 	 */
 	public static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination, double speed) {
-		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) Math.ceil(totalDistance / speed);
-		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
+		byte adjSpeed = (byte) speed;
+		assert adjSpeed > 0 : "speed too slow";
 		
-		double currentDistance = speed;
-		for (int i = 0; i < totalIntervals; i++) {
+		double totalDistance = source.distanceTo(destination);
+		List<NavigationPoint> path = new ArrayList<>();
+		
+		double currentDistance = adjSpeed - 0.5;
+		while (currentDistance <= totalDistance) {
 			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
-			currentDistance += speed;
+			currentDistance += adjSpeed - 0.5;
 		}
 		return path;
 	}
 	
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
+		double heading = Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ()));
 		if (percentage <= 0)
-			return new NavigationPoint(parent, l1, speed);
+			return new NavigationPoint(parent, Location.builder(l1).setHeading(heading).build(), speed);
 		if (percentage >= 1)
-			return new NavigationPoint(parent, l2, speed);
+			return new NavigationPoint(parent, Location.builder(l2).setHeading(heading).build(), speed);
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
 				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
 				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
 				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
-				.setHeading(Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ())))
+				.setHeading(heading)
 				.build(), speed);
 	}
 	

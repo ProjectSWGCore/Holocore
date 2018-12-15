@@ -29,10 +29,12 @@ package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
@@ -44,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestObjectAwareness extends TestRunnerNoIntents {
@@ -51,6 +54,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private ObjectAwareness awareness = null;
 	private GenericCreatureObject player = null;
 	private GenericCreatureObject testPlayer = null;
+	private GenericCreatureObject testNpc = null;
 	private GenericTangibleObject testTangible = null;
 	private BuildingObject testBuilding1 = null;
 	private BuildingObject testBuilding2 = null;
@@ -63,6 +67,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		awareness = new ObjectAwareness();
 		player = new GenericCreatureObject(getUniqueId(), "player");
 		testPlayer = new GenericCreatureObject(getUniqueId(), "testPlayer");
+		testNpc = new GenericCreatureObject(getUniqueId(), "testNPC");
 		testTangible = new GenericTangibleObject(getUniqueId(), "testTangible");
 		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
 		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
@@ -79,6 +84,10 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		testCell1.systemMove(testBuilding1);
 		testCell2.systemMove(testBuilding2);
 		
+		testNpc.getSlottedObject("ghost").systemMove(null);
+		testNpc.setHasOwner(false);
+		testNpc.systemMove(testCell1);
+		
 		testPlayer.setLocation(buildTatooine(40, 40));
 		testTangible.setLocation(buildTatooine(50, 50));
 		testBuilding1.setLocation(buildTatooine(45, 45));
@@ -87,6 +96,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		awareness.createObject(testPlayer);
 		awareness.createObject(testTangible);
+		awareness.createObject(testNpc);
 		awareness.createObject(testBuilding1);
 		awareness.createObject(testBuilding2);
 		awareness.createObject(testCell1);
@@ -121,7 +131,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		player.setHasOwner(false);
 		
-		Assert.assertFalse(player.isLoggedInPlayer());
+		assertFalse(player.isLoggedInPlayer());
 		Assert.assertTrue(testPlayer.isLoggedInPlayer());
 		
 		// Shouldn't be aware of anything else because it's a logged out player
@@ -135,8 +145,41 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		Assert.assertTrue(testPlayer.isLoggedInPlayer());
 		
 		for (TestLocation loc : TestLocation.values()) {
-			move(loc);
+			try {
+				move(loc);
+			} catch (AssertionError e) {
+				throw new AssertionError("Failed " + loc, e);
+			}
 		}
+	}
+	
+	@Test
+	public void testNpcMove() {
+		initialize();
+		
+		move(TestLocation.BSSI);
+		
+		Assert.assertTrue(player.getAware().contains(testNpc));
+		testNpc.systemMove(testCell2);
+		update(testNpc);
+		assertFalse(player.getAware().contains(testNpc));
+		
+		testNpc.systemMove(testCell1);
+		Assert.assertTrue(testNpc.isVisible(player));
+		update(testNpc);
+		Assert.assertTrue(player.getAware().contains(testNpc));
+		
+		{
+			SWGPacket packet;
+			assert player.getOwner() != null;
+			do {
+				packet = player.getOwner().getNextPacket();
+			} while (packet != null);
+		}
+		
+		testNpc.systemMove(testCell1);
+		update(testNpc);
+		Assert.assertNull(player.getOwner().getNextPacket());
 	}
 	
 	@Test
@@ -152,6 +195,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		move(TestLocation.SSI);
 		awareness.destroyObject(testBuilding1);
+		awareness.updateChunks();
 		assertAware(List.of(player, testPlayer, testTangible));
 	}
 	
@@ -162,15 +206,20 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		player.moveToContainer(testCell1);
 	}
 	
+	private void update(CreatureObject obj) {
+		awareness.updateObject(obj);
+		awareness.updateChunks();
+	}
+	
 	private void moveNoAssert(TestLocation location) {
 		player.systemMove(getParent(location.getParent()), location.getLocation());
 		
-		awareness.updateObject(player);
+		update(player);
 	}
 	
 	private void move(TestLocation location) {
 		player.systemMove(getParent(location.getParent()), location.getLocation());
-		awareness.updateObject(player);
+		update(player);
 		
 		assertAware(getExpectedAware(location.getAwareSet()));
 	}
@@ -180,6 +229,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		// Ensure it doesn't contain the unexpected
 		for (SWGObject a : awareActual) {
+			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
 			if (a.getParent() != null)
 				continue;
 			assertTrue("Not supposed to be aware of object: " + a, awareExpected.contains(a));
@@ -187,6 +237,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		// Ensure it contains the expected
 		for (SWGObject a : awareExpected) {
+			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
 			assertTrue("Supposed to be aware of object: " + a, awareActual.contains(a));
 		}
 	}
@@ -203,7 +254,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private Collection<SWGObject> getExpectedAware(TestAwareSet awareSet) {
 		switch (awareSet) {
 			case NONE:		return List.of(player, inventoryObject);
-			case TATOOINE:	return List.of(player, inventoryObject, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"));
+			case TATOOINE:	return List.of(player, inventoryObject, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"), testNpc);
 			case NABOO:		return List.of(player, inventoryObject, testBuilding2);
 		}
 		throw new RuntimeException("Invalid test aware set: " + awareSet);

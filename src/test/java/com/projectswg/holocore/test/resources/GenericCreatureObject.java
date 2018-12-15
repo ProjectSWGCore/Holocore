@@ -53,7 +53,7 @@ public class GenericCreatureObject extends CreatureObject {
 		setHasOwner(true);
 		setObjectName(name);
 		setTemplate("object/creature/player/shared_human_male.iff");
-		setupAsCharacter();
+		setupAsCharacter(name);
 	}
 	
 	public void setHasOwner(boolean hasOwner) {
@@ -64,7 +64,7 @@ public class GenericCreatureObject extends CreatureObject {
 		}
 	}
 	
-	private void setupAsCharacter() {
+	private void setupAsCharacter(String name) {
 		setSlots(List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r"));
 		
 		setArrangement(List.of(List.of("rider")));
@@ -73,6 +73,7 @@ public class GenericCreatureObject extends CreatureObject {
 		PlayerObject playerObject = new PlayerObject(-getObjectId());
 		playerObject.setArrangement(List.of(List.of("ghost")));
 		playerObject.systemMove(this);
+		playerObject.setObjectName(name);
 		createInventoryObject("inventory");
 		createInventoryObject("datapad");
 		createInventoryObject("appearance_inventory");
