@@ -108,8 +108,8 @@ public class AwarenessService extends Service {
 				awareness.destroyObject(creature);
 				break;
 			case PE_LOGGED_OUT:
-				assert creature != null;
-				awareness.updateObject(creature);
+				if (creature != null)
+					awareness.updateObject(creature);
 				break;
 			default:
 				break;

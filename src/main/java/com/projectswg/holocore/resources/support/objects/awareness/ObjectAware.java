@@ -71,12 +71,8 @@ public class ObjectAware {
 			object.onObjectEnterAware(added);
 		}
 		
-		attemptFlush();
-	}
-	
-	@NotNull
-	public Set<Player> getObservers() {
-		return getAwareStream().map(SWGObject::getOwnerShallow).filter(Objects::nonNull).filter(player -> player.isBaselinesSent(object)).collect(Collectors.toSet());
+		if (object instanceof CreatureObject)
+			((CreatureObject) object).flushObjectsAware();
 	}
 	
 	@NotNull
@@ -100,11 +96,6 @@ public class ObjectAware {
 	@Nullable
 	protected TerrainMapChunk getTerrainMapChunk() {
 		return chunk.get();
-	}
-	
-	private void attemptFlush() {
-		if (object instanceof CreatureObject)
-			((CreatureObject) object).flushObjectsAware();
 	}
 	
 	private Stream<SWGObject> getAwareStream() {

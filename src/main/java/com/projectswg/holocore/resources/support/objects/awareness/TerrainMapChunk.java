@@ -26,22 +26,24 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.Consumer;
 
 class TerrainMapChunk {
 	
 	private final Set<SWGObject> objects;
+	private final Set<CreatureObject> creatures;
 	private TerrainMapChunk [] neighbors;
 	
 	public TerrainMapChunk() {
 		this.objects = new CopyOnWriteArraySet<>();
+		this.creatures = ConcurrentHashMap.newKeySet();
 		this.neighbors = new TerrainMapChunk[]{this};
 	}
 	
@@ -54,17 +56,18 @@ class TerrainMapChunk {
 	
 	public void addObject(@NotNull SWGObject obj) {
 		objects.add(obj);
+		if (obj instanceof CreatureObject)
+			creatures.add((CreatureObject) obj);
 	}
 	
 	public void removeObject(@NotNull SWGObject obj) {
 		objects.remove(obj);
+		if (obj instanceof CreatureObject)
+			creatures.remove(obj);
 	}
 	
 	public void scan(Consumer<SWGObject> consumer) {
-		for (SWGObject test : objects) {
-			if (test.getBaselineType() == BaselineType.CREO)
-				consumer.accept(test);
-		}
+		creatures.forEach(consumer);
 	}
 	
 	public Collection<SWGObject> getWithinAwareness(@NotNull CreatureObject obj) {
@@ -72,8 +75,9 @@ class TerrainMapChunk {
 		
 		for (TerrainMapChunk neighbor : neighbors) {
 			for (SWGObject test : neighbor.objects) {
-				if (obj.isWithinAwarenessRange(test))
+				if (obj.isWithinAwarenessRange(test)) {
 					withinRange.add(test);
+				}
 			}
 		}
 		

@@ -131,7 +131,9 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		player.setHasOwner(false);
 		
-		assertFalse(player.isLoggedInPlayer());
+		Assert.assertTrue(player.isPlayer());
+		Assert.assertFalse(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isPlayer());
 		Assert.assertTrue(testPlayer.isLoggedInPlayer());
 		
 		// Shouldn't be aware of anything else because it's a logged out player
@@ -141,7 +143,9 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		}
 		
 		player.setHasOwner(true);
+		Assert.assertTrue(player.isPlayer());
 		Assert.assertTrue(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isPlayer());
 		Assert.assertTrue(testPlayer.isLoggedInPlayer());
 		
 		for (TestLocation loc : TestLocation.values()) {
