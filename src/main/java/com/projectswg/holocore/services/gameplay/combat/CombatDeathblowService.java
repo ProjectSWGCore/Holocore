@@ -91,9 +91,6 @@ public class CombatDeathblowService extends Service {
 	@IntentHandler
 	private void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
 		CreatureObject corpse = rcdi.getCorpse();
-		corpse.setHealth(0);
-		corpse.setTurnScale(0);
-		corpse.setMovementScale(0);
 		CreatureObject killer = rcdi.getKiller();
 		
 		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff("incapWeaken");
@@ -105,6 +102,9 @@ public class CombatDeathblowService extends Service {
 		} else {
 			incapacitatePlayer(rcdi.getKiller(), corpse);
 		}
+		corpse.setHealth(0);
+		corpse.setTurnScale(0);
+		corpse.setMovementScale(0);
 		
 		ExitCombatIntent.broadcast(corpse);
 	}
