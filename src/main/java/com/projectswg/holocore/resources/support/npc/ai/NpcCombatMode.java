@@ -7,6 +7,7 @@ import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
+import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
@@ -54,6 +55,7 @@ public class NpcCombatMode extends NpcMode {
 	
 	@Override
 	public void onModeStart() {
+		StopNpcMovementIntent.broadcast(getAI());
 		returnLocation.set(NavigationPoint.at(getAI().getParent(), getAI().getLocation(), runSpeed));
 	}
 	
