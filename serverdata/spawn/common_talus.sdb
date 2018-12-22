@@ -97,7 +97,7 @@ tal_00094	TALUS	tal_world	PATROL	0	-2141.5	20.0	2246.4	0	1	a Stormtrooper Squad 
 tal_00095	TALUS	tal_world	AREA	0	-2171.0	20.0	2314.0	-95	1	Officer Edgar	syren5_imperial_questgiver	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 tal_00096	TALUS	tal_world	PATROL	0	-2182.2	20.0	2315.3	0	1	a Veteran Imperial Corporal	veteran_imperial_corporal	ATTACKABLE	E	40	60	City	Imperial Outpost	1	PATROL	0	0	column	idle	0	0	0	600
 tal_00097	TALUS	tal_nashal_association_hall	AREA	11	11.0	1.8	-19.6	-62	1	Chief Administrator Slooni Jong	slooni_jong	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle	0	999	0	600
-tal_00098	TALUS	tal_nashal_cantina	AREA	13	-25.2	-0.5	8.5	0	1	Durge	clone_durge	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	600
+tal_00098	TALUS	tal_nashal_cantina	AREA	13	-25.2	-0.5	8.5	0	1	Durge	clone_durge_01	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	600
 tal_00099	TALUS	tal_nashal_cantina	AREA	3	-0.5	-0.9	3.4	0	1	Oecax	clone_oecax	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	600
 tal_00100	TALUS	tal_nashal_cantina	AREA	3	17.7	-0.9	-7.4	61	1	Sigrix Slix	sigrix_slix	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle	0	999	0	600
 tal_00101	TALUS	tal_nashal_cantina	AREA	7	9.8	-0.9	19.0	-125	1	Green Laser	green_laser	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle	0	0	0	600

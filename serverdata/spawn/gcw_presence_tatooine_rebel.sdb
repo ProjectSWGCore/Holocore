@@ -182,8 +182,14 @@ gcw_tat_pres_reb_179	TATOOINE	tat_world	PATROL	0	3829.7	19.3	2351.7	-68	1	a Mos 
 gcw_tat_pres_reb_180	TATOOINE	tat_world	AREA	0	3888.2	33.0	2350.0	-92	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
 gcw_tat_pres_reb_181	TATOOINE	tat_world	PATROL	0	3909.9	33.0	2342.2	96	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	11019000	column	idle	0	0	0	600
 gcw_tat_pres_reb_182	TATOOINE	tat_world	PATROL	0	3927.4	47.0	2294.7	-24	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	11019100	column	idle	0	0	0	600
-gcw_tat_pres_reb_183	TATOOINE	tat_world	AREA	0	3757.8	8.3	2343.7	-38	1	a fresh Rebel rifleman	reb_rifleman_fresh	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
+gcw_tat_pres_reb_183	TATOOINE	tat_world	AREA	0	3757.8	8.3	2343.7	0	1	a fresh Rebel rifleman	reb_rifleman_fresh	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
 gcw_tat_pres_reb_184	TATOOINE	tat_world	AREA	0	3856.3	27.5	2325.3	-63	1	a fresh Rebel rifleman	reb_rifleman_fresh	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
 gcw_tat_pres_reb_185	TATOOINE	tat_world	AREA	0	3760.8	6.5	2373.7	-97	1	a Rebel soldier	reb_soldier	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
 gcw_tat_pres_reb_186	TATOOINE	tat_world	AREA	0	3786.1	11.6	2378.4	177	1	a Rebel soldier	reb_soldier	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
 gcw_tat_pres_reb_187	TATOOINE	tat_world	AREA	0	3951.4	53.5	2265.1	-106	1	a Rebel squad leader	reb_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	600
+gcw_tat_pres_reb_188	TATOOINE	tat_world	PATROL	0	3715.5	5.0	-4734.9	176	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	11004500	column	idle	0	0	0	300
+gcw_tat_pres_reb_189	TATOOINE	tat_world	PATROL	0	3475.6	5.0	-4761.9	-52	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	11004600	column	idle	0	0	0	300
+gcw_tat_pres_reb_190	TATOOINE	tat_world	PATROL	0	-2818.0	5.0	1880.7	74	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	11004700	column	idle	0	0	0	600
+gcw_tat_pres_reb_191	TATOOINE	tat_world	PATROL	0	-2957.6	5.0	2549.4	-131	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	11004800	column	idle	0	0	0	600
+gcw_tat_pres_reb_192	TATOOINE	tat_world	PATROL	0	-3042.5	5.0	2296.9	75	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	11004900	column	idle	0	0	0	600
+gcw_tat_pres_reb_193	TATOOINE	tat_world	PATROL	0	-2819.3	5.0	2190.9	150	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	11005000	column	idle	0	0	0	600
