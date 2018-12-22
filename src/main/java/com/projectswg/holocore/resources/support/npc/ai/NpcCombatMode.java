@@ -73,6 +73,7 @@ public class NpcCombatMode extends NpcMode {
 			return;
 		}
 		
+		targets.removeIf(creo -> creo.getPosture() == Posture.INCAPACITATED || creo.getPosture() == Posture.DEAD);
 		if (!targets.isEmpty()) {
 			performCombatAction();
 			queueNextLoop(500);
