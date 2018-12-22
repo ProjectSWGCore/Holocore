@@ -126,7 +126,7 @@ public class AIObject extends CreatureObject {
 		if (myPosture == Posture.INCAPACITATED || myPosture == Posture.DEAD || !(obj instanceof CreatureObject))
 			return false;
 		Posture theirPosture = ((CreatureObject) obj).getPosture();
-		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
+		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD && super.isEnemyOf(obj);
 	}
 	
 	public void setSpawner(Spawner spawner) {

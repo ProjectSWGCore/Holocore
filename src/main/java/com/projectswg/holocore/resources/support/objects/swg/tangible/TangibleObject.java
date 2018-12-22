@@ -259,13 +259,17 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void addDefender(CreatureObject creature) {
-		if (defenders.add(creature.getObjectId()))
-			defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			if (defenders.add(creature.getObjectId()))
+				defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public void removeDefender(CreatureObject creature) {
-		if (defenders.remove(creature.getObjectId()))
-			defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			if (defenders.remove(creature.getObjectId()))
+				defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public List<Long> getDefenders() {
@@ -273,8 +277,10 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void clearDefenders() {
-		defenders.clear();
-		defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			defenders.clear();
+			defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public boolean hasDefenders() {
@@ -308,8 +314,8 @@ public class TangibleObject extends SWGObject {
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
 		if (ourFaction == PvpFaction.NEUTRAL || otherFaction == PvpFaction.NEUTRAL) {
-			// Neutrals are always excluded from factional combat
-			return false;
+			// Neutrals are always excluded from factional combat, unless they're both neutral
+			return ourFaction == otherFaction;
 		}
 		
 		// At this point, neither are neutral
