@@ -34,6 +34,9 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
@@ -44,27 +47,50 @@ public class CmdGoto implements ICmdCallback  {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		SWGObject teleportee = player.getCreatureObject();
+		CreatureObject teleportee = player.getCreatureObject();
 		if (teleportee == null)
 			return;
 		String [] parts = args.split(" ");
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
-		BuildingObject building = BuildingLookup.getBuildingByTag(parts[0].trim());
+		
+		String destination = parts[0].trim();
+		String message = PlayerLookup.doesCharacterExistByFirstName(destination) ? teleportToPlayer(player, teleportee, destination) : teleportToBuilding(player, teleportee, destination, parts);
+		
+		if (message != null)
+			SystemMessageIntent.broadcastPersonal(player, message);
+	}
+	
+	private String teleportToPlayer(Player player, CreatureObject teleportee, String playerName) {
+		CreatureObject destinationPlayer = PlayerLookup.getCharacterByFirstName(playerName);
+		if (destinationPlayer == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Unknown player: " + playerName);
+			return null;
+		}
+		
+		if (destinationPlayer.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			teleportee.moveToContainer(null, destinationPlayer.getWorldLocation());
+		else
+			teleportee.moveToContainer(destinationPlayer.getParent(), destinationPlayer.getLocation());
+		
+		return "Successfully teleported "+teleportee.getObjectName()+" to "+destinationPlayer.getObjectName();
+	}
+	
+	private String teleportToBuilding(Player player, CreatureObject teleportee, String buildingName, String [] args) {
+		BuildingObject building = BuildingLookup.getBuildingByTag(buildingName);
 		if (building == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + parts[0]);
-			return;
+			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + buildingName);
+			return null;
 		}
 		int cell = 1;
 		try {
-			if (parts.length >= 2)
-				cell = Integer.parseInt(parts[1]);
+			if (args.length >= 2)
+				cell = Integer.parseInt(args[1]);
 		} catch (NumberFormatException e) {
 			SystemMessageIntent.broadcastPersonal(player, "Invalid cell number");
-			return;
+			return null;
 		}
-		String err = teleportToGoto(teleportee, building, cell);
-		new SystemMessageIntent(player, err).broadcast();
+		return teleportToGoto(teleportee, building, cell);
 	}
 	
 	private String teleportToGoto(SWGObject obj, BuildingObject building, int cellNumber) {
