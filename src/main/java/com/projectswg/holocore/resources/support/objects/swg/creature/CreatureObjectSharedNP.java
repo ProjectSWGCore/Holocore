@@ -40,6 +40,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.Equipment;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -346,6 +347,8 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	public void setHealth(int health, SWGObject target) {
 		synchronized(attributes) {
+			if (health == attributes.get(0))
+				return;
 			attributes.set(0, health);
 			attributes.sendDeltaMessage(target);
 		}
@@ -364,11 +367,7 @@ class CreatureObjectSharedNP implements Persistable {
 				newHealthValue = 0;
 			}
 			
-			// We don't send deltas unnecessarily
-			if (newHealthValue != oldHealth) {
-				attributes.set(0, newHealthValue);
-				attributes.sendDeltaMessage(target);
-			}
+			setHealth(newHealthValue, target);
 		}
 	}
 	

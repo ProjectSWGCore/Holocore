@@ -89,9 +89,11 @@ public class CombatDeathblowService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
+	private synchronized void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
 		CreatureObject corpse = rcdi.getCorpse();
 		CreatureObject killer = rcdi.getKiller();
+		if (corpse.getPosture() == Posture.INCAPACITATED || corpse.getPosture() == Posture.DEAD)
+			return;
 		
 		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff("incapWeaken");
 		if (!deathblow && killer instanceof AIObject)
@@ -104,7 +106,7 @@ public class CombatDeathblowService extends Service {
 		}
 		corpse.setHealth(0);
 		corpse.setTurnScale(0);
-		corpse.setMovementScale(0);
+		corpse.setMovementPercent(0);
 		
 		ExitCombatIntent.broadcast(corpse);
 	}
@@ -143,7 +145,7 @@ public class CombatDeathblowService extends Service {
 		
 		// The creature is now able to turn around and move
 		revivedCreature.setTurnScale(1);
-		revivedCreature.setMovementScale(1);
+		revivedCreature.setMovementPercent(1);
 		
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
 		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));    // Restores 10% health of their base health

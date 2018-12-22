@@ -312,7 +312,7 @@ public class CloningService extends Service {
 		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
-		corpse.setMovementScale(1);
+		corpse.setMovementPercent(1);
 		corpse.setHealth(corpse.getMaxHealth());
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
 		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));

@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.services.support.objects.awareness;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
@@ -103,6 +104,15 @@ public class ClientAwarenessService extends Service {
 			StandardLog.onPlayerError(this, player, "sent a DataTransform for another object [%d]", dt.getObjectId());
 			return;
 		}
+		switch (creature.getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+				return;
+			default:
+				break;
+		}
+		if (teleporting.contains(creature))
+			return;
 		
 		Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
 		double speed = dt.getSpeed();
@@ -133,6 +143,13 @@ public class ClientAwarenessService extends Service {
 		if (creature.getObjectId() != dt.getObjectId()) {
 			StandardLog.onPlayerError(this, player, "sent a DataTransformWithParent for another object [%d]", dt.getObjectId());
 			return;
+		}
+		switch (creature.getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+				return;
+			default:
+				break;
 		}
 		SWGObject parent = ObjectLookup.getObjectById(dt.getCellId());
 		if (parent == null) {
