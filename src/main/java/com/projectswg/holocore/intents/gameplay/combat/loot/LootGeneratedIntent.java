@@ -24,71 +24,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.utilities.Arguments;
+package com.projectswg.holocore.intents.gameplay.combat.loot;
+
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
-public class CreditObject extends TangibleObject {
-	private long amount;
-
-	public CreditObject(long objectId) {
-		super(objectId);
+public class LootGeneratedIntent extends Intent {
+	
+	private final @NotNull AIObject corpse;
+	
+	public LootGeneratedIntent(@NotNull AIObject corpse) {
+		this.corpse = corpse;
 	}
 	
-	/**
-	 * Moves this object to the passed container if the requester has the MOVE permission for the container
-	 * @param requester Object that is requesting to move the object, used for permission checking
-	 * @param container Where this object should be moved to
-	 * @return {@link ContainerResult}
-	 */
-	@Override
-	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject container) {
-		if (!requester.isPlayer())
-			return super.moveToContainer(requester, container);
-		
-		assert amount > 0 : "amount must be set";
-		
-		SWGObject parent = getParent();
-		
-		if (parent == container) // One could be null, and this is specifically an instance-based check
-			return ContainerResult.SUCCESS;
-		
-		ContainerResult result = moveToAccountChecks(requester);
-		if (result != ContainerResult.SUCCESS)
-			return result;
-		
-		requester.addToCash(amount);
-		
-		systemMove(null);
-		DestroyObjectIntent.broadcast(this);
-		return ContainerResult.SUCCESS;
+	@NotNull
+	public AIObject getCorpse() {
+		return corpse;
 	}
 	
-	protected ContainerResult moveToAccountChecks(CreatureObject requester) {
-		if (requester == null)
-			return ContainerResult.SUCCESS;
-		
-		if (!getContainerPermissions().canMove(requester, this)) {
-			Log.w("No permission 'MOVE' for requestor %s with object %s", requester, this);
-			return ContainerResult.NO_PERMISSION;
-		}
-		
-		return ContainerResult.SUCCESS;
-	}
-	
-	public long getAmount() {
-		return amount;
-	}
-	
-	public void setAmount(long amount) {
-		Arguments.validate(amount > 0, "Amount must be greater than 0");
-		this.amount = amount;
-		setObjectName(amount + " cr");
+	public static void broadcast(@NotNull AIObject corpse) {
+		new LootGeneratedIntent(corpse).broadcast();
 	}
 }

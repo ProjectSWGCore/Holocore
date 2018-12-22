@@ -36,16 +36,15 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.loot.Gro
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupOpenLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupRequestLotteryItems;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootLotteryStartedIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.*;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -58,6 +57,7 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.utilities.Arguments;
 
 import java.util.*;
@@ -91,10 +91,8 @@ public final class GrantLootService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
-		CreatureObject corpse = cki.getCorpse();
-		if (corpse.isPlayer())
-			return;
+	private void handleLootGeneratedIntent(LootGeneratedIntent lgi) {
+		AIObject corpse = lgi.getCorpse();
 		
 		Location corpseWorldLocation = corpse.getWorldLocation();
 		CreatureObject highestDamageDealer = corpse.getHighestDamageDealer();
@@ -130,7 +128,10 @@ public final class GrantLootService extends Service {
 			looters.add(highestDamageDealer);
 		}
 		lootRestrictions.put(corpse, new StandardLootRestrictions(corpse, looters));
-		corpse.getInventory().setContainerPermissions(ReadWritePermissions.from(looters));
+		SWGObject inventory = corpse.getInventory();
+		inventory.setContainerPermissions(ReadWritePermissions.from(looters));
+		for (SWGObject loot : inventory.getContainedObjects())
+			loot.setContainerPermissions(ReadWritePermissions.from(looters));
 	}
 	
 	@IntentHandler
@@ -247,8 +248,9 @@ public final class GrantLootService extends Service {
 				return;
 			}
 			Player player = looter.getOwner();
+			assert player != null;
 			
-			switch (item.moveToContainer(looter, looter.getSlottedObject("inventory"))) {
+			switch (item.moveToContainer(looter, looter.getInventory())) {
 				case SUCCESS: {
 					String itemName = item.getObjectName();
 					
@@ -333,11 +335,11 @@ public final class GrantLootService extends Service {
 			switch (type) {
 				case LOOT: // Open loot box
 					if (!lootItems.isEmpty())
-						looter.getOwner().sendPacket(new ClientOpenContainerMessage(lootInventory.getObjectId(), ""));
+						OpenContainerIntent.broadcast(looter, lootInventory);
 					break;
 				case LOOT_ALL: // Request to loot all items
 					for (SWGObject loot : lootItems)
-						LootItemIntent.broadcast(looter, getCorpse(), loot);
+						loot(looter, loot);
 					break;
 			}
 		}
@@ -361,7 +363,7 @@ public final class GrantLootService extends Service {
 		public synchronized void handle(CreatureObject looter, LootType type) {
 			Collection<SWGObject> lootItems = getCorpse().getInventory().getContainedObjects();
 			for (SWGObject loot : lootItems)
-				LootItemIntent.broadcast(looter, getCorpse(), loot);
+				loot(looter, loot);
 		}
 		
 	}

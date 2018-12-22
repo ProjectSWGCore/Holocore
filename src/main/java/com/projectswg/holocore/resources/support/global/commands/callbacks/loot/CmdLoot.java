@@ -12,10 +12,19 @@ public class CmdLoot implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		if (!(target instanceof CreatureObject))
+		CreatureObject creature = player.getCreatureObject();
+		if (!(target instanceof CreatureObject) || creature == null)
 			return;
 		
-		LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT);
+		CreatureObject targetCreature = (CreatureObject) target;
+		SWGObject targetInventory = targetCreature.getSlottedObject("inventory");
+		if (targetInventory == null)
+			return;
+		
+		if (creature.isContainerOpen(targetInventory, "") || args.trim().equals("all"))
+			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT_ALL);
+		else
+			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT);
 	}
 	
 }

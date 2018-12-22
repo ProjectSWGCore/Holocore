@@ -172,6 +172,10 @@ public class AIObject extends CreatureObject {
 		return defaultMode;
 	}
 	
+	public NpcMode getActiveMode() {
+		return activeMode;
+	}
+	
 	public void setCreatureId(String creatureId) {
 		this.creatureId = creatureId;
 	}

@@ -54,6 +54,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -61,10 +62,12 @@ public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
-	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness(this);
-	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
-	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
+	private final CreatureObjectAwareness		awareness		= new CreatureObjectAwareness(this);
+	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP();
+	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP();
+	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
+	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
+	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
@@ -84,7 +87,6 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer> baseAttributes			= new SWGList<>(1, 2);
 	
-	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -238,6 +240,24 @@ public class CreatureObject extends TangibleObject {
 
 	public void removeAppearanceItem(SWGObject obj) {
 		creo6.removeAppearanceItem(obj, this);
+	}
+	
+	public boolean isContainerOpen(SWGObject obj, String slot) {
+		return containersOpen.contains(new Container(obj, slot));
+	}
+	
+	public boolean openContainer(SWGObject obj, String slot) {
+		return containersOpen.add(new Container(obj, slot));
+	}
+	
+	public boolean closeAllContainers() {
+		boolean empty = containersOpen.isEmpty();
+		containersOpen.clear();
+		return !empty;
+	}
+	
+	public boolean closeContainer(SWGObject obj, String slot) {
+		return containersOpen.remove(new Container(obj, slot));
 	}
 	
 	public void addSkill(String ... skillList) {
@@ -1218,6 +1238,34 @@ public class CreatureObject extends TangibleObject {
 		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
 		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+	}
+	
+	private static class Container {
+		
+		private final SWGObject container;
+		private final String slot;
+		private final int hash;
+		
+		public Container(SWGObject container, String slot) {
+			this.container = container;
+			this.slot = slot;
+			this.hash = Objects.hash(container, slot);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			Container container1 = (Container) o;
+			return Objects.equals(container, container1.container) && Objects.equals(slot, container1.slot);
+		}
+		
+		@Override
+		public int hashCode() {
+			return hash;
+		}
 	}
 	
 }

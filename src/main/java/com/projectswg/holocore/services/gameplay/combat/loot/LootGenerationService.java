@@ -5,6 +5,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.LootGeneratedIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
@@ -18,6 +19,8 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoad
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissions;
+import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -57,14 +60,20 @@ public final class LootGenerationService extends Service {
 	
 	@IntentHandler
 	private void handleCreatureKilled(CreatureKilledIntent cki) {
-		CreatureObject corpse = cki.getCorpse();
-		
-		if (corpse.isPlayer()) {
-			// Players don't drop loot
-			return;
+		AIObject corpse;
+		{
+			CreatureObject corpseRaw = cki.getCorpse();
+			if (corpseRaw.isPlayer()) {
+				// Players don't drop loot
+				return;
+			}
+			
+			if (!(corpseRaw instanceof AIObject))
+				return;
+			corpse = (AIObject) corpseRaw;
 		}
 		
-		String creatureId = ((AIObject) corpse).getCreatureId();
+		String creatureId = corpse.getCreatureId();
 		NPCLoot loot = npcLoot.get(creatureId);
 		
 		if (loot == null) {
@@ -169,7 +178,7 @@ public final class LootGenerationService extends Service {
 		loot.addNPCTable(new NPCTable(chance, lootTable));
 	}
 	
-	private void showLootDisc(CreatureObject requester, SWGObject corpse) {
+	private void showLootDisc(CreatureObject requester, AIObject corpse) {
 		assert requester.isPlayer();
 		
 		Location effectLocation = Location.builder(corpse.getLocation()).setPosition(0, 0.5, 0).build();
@@ -181,14 +190,12 @@ public final class LootGenerationService extends Service {
 			assert requesterGroupObject != null;
 			
 			for (CreatureObject creature : requesterGroupObject.getGroupMemberObjects()) {
-				Player player = creature.getOwner();
-				if (player != null) {
-					player.sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
-				}
+				creature.sendSelf(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 			}
 		} else {
-			requester.getOwner().sendPacket(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
+			requester.sendSelf(new PlayClientEffectObjectTransformMessage(corpse.getObjectId(), "appearance/pt_loot_disc.prt", effectLocation, "lootMe"));
 		}
+		LootGeneratedIntent.broadcast(corpse);
 	}
 	
 	private boolean generateCreditChip(NPCLoot loot, SWGObject lootInventory, CreatureDifficulty difficulty, int combatLevel) {
