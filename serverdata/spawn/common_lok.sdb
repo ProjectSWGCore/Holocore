@@ -282,7 +282,7 @@ lok_00279	LOK	lok_ntp_pirate_cave	AREA	11	-139.7	-53.9	-80.1	0	1	a Sulfur Lake a
 lok_00280	LOK	lok_ntp_pirate_cave	AREA	12	-177.5	-53.8	-122.6	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
 lok_00281	LOK	lok_ntp_pirate_cave	AREA	14	-80.9	-57.9	-41.9	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
 lok_00282	LOK	lok_ntp_pirate_cave	AREA	14	-79.4	-57.6	-81.1	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
-lok_00283	LOK	lok_ntp_pirate_cave	AREA	15	-104.5	-39.6	-44.9	4	1	Bridge Troll	bridge_troll_58_c	AGGRESSIVE	B	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	IDLE	0	0	-	idle	0	0	0	600
+lok_00283	LOK	lok_ntp_pirate_cave	AREA	15	-104.5	-39.6	-44.9	4	1	Bridge Troll	bridge_troll	AGGRESSIVE	B	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	IDLE	0	0	-	idle	0	0	0	600
 lok_00284	LOK	lok_ntp_pirate_cave	AREA	16	-103.4	-42.1	-32.1	0	1	a Sulfur Lake cutthroat	u13_nym_slp_cutthroat	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
 lok_00285	LOK	lok_ntp_pirate_cave	AREA	16	-113.9	-57.9	-25.8	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
 lok_00286	LOK	lok_ntp_pirate_cave	AREA	18	-135.2	-57.4	-26.4	0	1	a Sulfur Lake pirate	u13_nym_slp_pirate	AGGRESSIVE	N	50	70	Dungeon	NTP - Sulfur Pirate Cave	1	LOITER	3	0	-	idle	0	0	0	600
