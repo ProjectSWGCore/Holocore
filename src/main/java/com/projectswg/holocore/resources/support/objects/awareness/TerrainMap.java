@@ -26,9 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 import java.util.List;
 
@@ -53,7 +51,7 @@ public class TerrainMap {
 	public void updateChunks() {
 		for (TerrainMapChunk [] chunkRow : chunks) {
 			for (TerrainMapChunk chunk : chunkRow) {
-				TerrainMap.updateNearby(chunk);
+				chunk.update();
 			}
 		}
 	}
@@ -121,24 +119,6 @@ public class TerrainMap {
 			for (SWGObject child : obj.getSlottedObjects())
 				moveInParent(child, obj);
 		}
-	}
-	
-	private static void update(SWGObject objUncasted) {
-		CreatureObject obj = (CreatureObject) objUncasted; 
-		TerrainMapChunk chunk = obj.getAwareness().getTerrainMapChunk();
-		if (chunk == null) {
-			SWGObject superParent = obj.getSuperParent();
-			if (superParent == null)
-				return;
-			chunk = superParent.getAwareness().getTerrainMapChunk();
-			obj.getAwareness().setTerrainMapChunk(chunk);
-		}
-		assert chunk != null;
-		obj.setAware(AwarenessType.OBJECT, chunk.getWithinAwareness(obj));
-	}
-	
-	private static void updateNearby(TerrainMapChunk chunk) {
-		chunk.scan(TerrainMap::update);
 	}
 	
 	private void connectChunkNeighbors() {

@@ -55,33 +55,30 @@ class TerrainMapChunk {
 	}
 	
 	public void addObject(@NotNull SWGObject obj) {
-		objects.add(obj);
+		for (TerrainMapChunk neighbor : neighbors)
+			neighbor.objects.add(obj);
+		
 		if (obj instanceof CreatureObject)
 			creatures.add((CreatureObject) obj);
 	}
 	
 	public void removeObject(@NotNull SWGObject obj) {
-		objects.remove(obj);
+		for (TerrainMapChunk neighbor : neighbors)
+			neighbor.objects.remove(obj);
+		
 		if (obj instanceof CreatureObject)
 			creatures.remove(obj);
 	}
 	
-	public void scan(Consumer<SWGObject> consumer) {
-		creatures.forEach(consumer);
-	}
-	
-	public Collection<SWGObject> getWithinAwareness(@NotNull CreatureObject obj) {
-		Set<SWGObject> withinRange = new HashSet<>();
-		
-		for (TerrainMapChunk neighbor : neighbors) {
-			for (SWGObject test : neighbor.objects) {
-				if (obj.isWithinAwarenessRange(test)) {
+	public void update() {
+		for (CreatureObject creature : creatures) {
+			List<SWGObject> withinRange = new ArrayList<>();
+			for (SWGObject test : objects) {
+				if (creature.isWithinAwarenessRange(test))
 					withinRange.add(test);
-				}
 			}
+			creature.setAware(AwarenessType.OBJECT, withinRange);
 		}
-		
-		return withinRange;
 	}
 	
 }
