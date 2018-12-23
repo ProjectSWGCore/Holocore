@@ -2,10 +2,7 @@ package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
-import com.projectswg.common.network.packets.swg.zone.object_controller.LookAtTarget;
+import com.projectswg.common.network.packets.swg.zone.object_controller.*;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
@@ -25,10 +22,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CommandQueueService extends Service {
@@ -68,8 +62,8 @@ public class CommandQueueService extends Service {
 			long targetId = request.getTargetId();
 			SWGObject target = targetId != 0 ? ObjectLookup.getObjectById(targetId) : null;
 			QueueCommandIntent.broadcast(gpi.getPlayer().getCreatureObject(), target, request.getArguments(), command, request.getCounter());
-		} else if (p instanceof LookAtTarget) {
-			if (((LookAtTarget) p).getTargetId() == 0)
+		} else if (p instanceof IntendedTarget) {
+			if (((IntendedTarget) p).getTargetId() == 0)
 				combatQueueMap.remove(gpi.getPlayer().getCreatureObject());
 		}
 	}
@@ -126,7 +120,8 @@ public class CommandQueueService extends Service {
 		public synchronized void startCommand(EnqueuedCommand command) {
 			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue()) {
 				StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "queued command %s", command.getCommand().getName());
-				commandQueue.offer(command);
+				if (!commandQueue.contains(command))
+					commandQueue.offer(command);
 			} else {
 				execute(command);
 			}
@@ -196,6 +191,21 @@ public class CommandQueueService extends Service {
 		@Override
 		public int compareTo(@NotNull EnqueuedCommand o) {
 			return command.getDefaultPriority().compareTo(o.getCommand().getDefaultPriority());
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			EnqueuedCommand that = (EnqueuedCommand) o;
+			return Objects.equals(command, that.command);
+		}
+		
+		@Override
+		public int hashCode() {
+			return command.hashCode();
 		}
 		
 		@NotNull
