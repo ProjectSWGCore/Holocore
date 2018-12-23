@@ -317,10 +317,7 @@ public class EntertainmentService extends Service {
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
 		
-		// Only entertainers get XP
-		if (isEntertainer(dancer))
-			scheduleExperienceTask(dancer, danceName);
-		
+		scheduleExperienceTask(dancer, danceName);
 		new SystemMessageIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
 	}
 	
@@ -457,7 +454,8 @@ public class EntertainmentService extends Service {
 			int xpGained = performanceCounter * flourishXpMod;
 			
 			if (xpGained > 0) {
-				new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
+				if (isEntertainer(performer))
+					new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
 				performer.setPerformanceCounter(performanceCounter - 1);
 			}
 		}
