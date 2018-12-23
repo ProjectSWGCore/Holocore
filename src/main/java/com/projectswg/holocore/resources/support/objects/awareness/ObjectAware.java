@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.awareness;
 
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;

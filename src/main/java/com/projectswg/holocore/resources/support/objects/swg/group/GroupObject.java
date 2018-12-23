@@ -45,10 +45,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -239,7 +236,7 @@ public class GroupObject extends SWGObject {
 			GroupMember member = new GroupMember(creature);
 			memberMap.put(creature.getObjectId(), member);
 			groupMembers.add(member);
-			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
+			creature.setAware(AwarenessType.GROUP, List.of(this));
 			creature.setGroupId(getObjectId());
 		}
 		groupMembers.sendDeltaMessage(this);
@@ -251,6 +248,7 @@ public class GroupObject extends SWGObject {
 			GroupMember member = memberMap.remove(creature.getObjectId());
 			creature.setGroupId(0);
 			groupMembers.remove(member);
+			creature.setAware(AwarenessType.GROUP, List.of());
 			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 		}
 		groupMembers.sendDeltaMessage(this);
