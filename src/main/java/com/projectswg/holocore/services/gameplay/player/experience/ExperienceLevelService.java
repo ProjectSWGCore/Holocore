@@ -75,7 +75,7 @@ public class ExperienceLevelService extends Service {
 		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
 		
 		// Show flytext above the creature that received XP, but only to them
-		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", (int) (xpGained*xpMultiplier))), Scale.MEDIUM, new RGB(255, 0, 255)));
+		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", newXpTotal-currentXp)), Scale.MEDIUM, new RGB(255, 0, 255)));
 		
 		return newXpTotal;
 	}
