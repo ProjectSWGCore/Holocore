@@ -33,22 +33,24 @@ import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolRouteWaypoint;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.StaticSpawnInfo;
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+
+import java.util.List;
 
 public final class SpawnerService extends Service {
 	
@@ -102,9 +104,21 @@ public final class SpawnerService extends Service {
 				Log.e("Failed to load spawner[%s]/npc[%s]. %s: %s", spawn.getId(), spawn.getNpcId(), t.getClass().getName(), t.getMessage());
 			}
 		}
-		createPatrolRouteWaypoints();
 		
 		StandardLog.onEndLoad(count, "spawners", startTime);
+	}
+	
+	private static Location buildPortalLocation(Portal portal) {
+		return Location.builder()
+				.setX(average(portal.getFrame1().getX(), portal.getFrame2().getX()))
+				.setY(average(portal.getFrame1().getY(), portal.getFrame2().getY()))
+				.setZ(average(portal.getFrame1().getZ(), portal.getFrame2().getZ()))
+				.setTerrain(portal.getCell1().getTerrain())
+				.build();
+	}
+	
+	private static double average(double x, double y) {
+		return (x+y) / 2;
 	}
 	
 	private void spawn(StaticSpawnInfo spawn) {
@@ -113,12 +127,26 @@ public final class SpawnerService extends Service {
 		for (int i = 0; i < spawner.getAmount(); i++) {
 			NPCCreator.createNPC(spawner);
 		}
+		
+		List<ResolvedPatrolWaypoint> patrolRoute = spawner.getPatrolRoute();
+		if (patrolRoute != null) {
+			for (ResolvedPatrolWaypoint waypoint : patrolRoute) {
+				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
+				obj.setContainerPermissions(AdminPermissions.getPermissions());
+				//noinspection HardcodedLineSeparator
+				obj.setObjectName("G: " + waypoint.getGroupId() + "\nP: " + waypoint.getPatrolId() + "\nNPC: " + spawn.getNpcId());
+				obj.moveToContainer(waypoint.getParent(), waypoint.getLocation());
+				ObjectCreatedIntent.broadcast(obj);
+			}
+		}
 	}
 	
 	private static SWGObject createEgg(StaticSpawnInfo spawn) {
 		SpawnerType spawnerType = SpawnerType.valueOf(spawn.getSpawnerType());
 		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
 		egg.setContainerPermissions(AdminPermissions.getPermissions());
+		//noinspection HardcodedLineSeparator
+		egg.setObjectName(String.format("%s\nNPC: %s\n", spawn.getId(), spawn.getNpcId()));
 		egg.systemMove(getCell(spawn.getId(), spawn.getCellId(), spawn.getBuildingId()), Location.builder().setTerrain(spawn.getTerrain()).setPosition(spawn.getX(), spawn.getY(), spawn.getZ()).setHeading(spawn.getHeading()).build());
 		ObjectCreatedIntent.broadcast(egg);
 		return egg;
@@ -138,45 +166,6 @@ public final class SpawnerService extends Service {
 			Log.e("Spawner with ID %s - building %s didn't have cell ID %d!", spawnId, buildingTag, cellId);
 		}
 		return cellObject;
-	}
-	
-	private static void createPatrolRouteWaypoints() {
-		NpcPatrolRouteLoader npcPatrolRouteLoader = DataLoader.npcPatrolRoutes();
-		npcPatrolRouteLoader.forEach(route -> {
-			for (PatrolRouteWaypoint waypoint : route) {
-				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
-				obj.setContainerPermissions(AdminPermissions.getPermissions());
-				obj.moveToContainer(getPatrolWaypointParent(waypoint), getPatrolWaypointLocation(waypoint));
-				ObjectCreatedIntent.broadcast(obj);
-			}
-		});
-	}
-	
-	private static Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {
-		return Location.builder()
-				.setTerrain(waypoint.getTerrain())
-				.setX(waypoint.getX())
-				.setY(waypoint.getY())
-				.setZ(waypoint.getZ()).build();
-	}
-
-	private static SWGObject getPatrolWaypointParent(PatrolRouteWaypoint waypoint) {
-		if (waypoint.getBuildingId().isEmpty() || waypoint.getBuildingId().endsWith("_world"))
-			return null;
-		
-		BuildingObject building = BuildingLookup.getBuildingByTag(waypoint.getBuildingId());
-		if (building == null) {
-			Log.w("PatrolRouteWaypoint: Invalid building [%s] for patrol id: %d and group id: %d", waypoint.getBuildingId(), waypoint.getPatrolId(), waypoint.getGroupId());
-			return null;
-		}
-
-		SWGObject cell = building.getCellByNumber(waypoint.getCellId());
-		if (cell == null) {
-			Log.w("PatrolRouteWaypoint: Invalid cell [%d] for building: %s, patrol id: %d and group id: %d", waypoint.getCellId(), waypoint.getBuildingId(), waypoint.getPatrolId(), waypoint.getGroupId());
-			return null;
-		}
-
-		return cell;
 	}
 	
 }

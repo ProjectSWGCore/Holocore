@@ -272,16 +272,14 @@ public final class Spawner {
 	
 	public static class ResolvedPatrolWaypoint {
 		
+		private final PatrolRouteWaypoint waypoint;
 		private final SWGObject parent;
 		private final Location location;
-		private final double delay;
-		private final PatrolType patrolType;
 		
 		private ResolvedPatrolWaypoint(PatrolRouteWaypoint waypoint) {
+			this.waypoint = waypoint;
 			this.parent = getPatrolWaypointParent(waypoint);
 			this.location = getPatrolWaypointLocation(waypoint);
-			this.delay = waypoint.getDelay();
-			this.patrolType = waypoint.getPatrolType();
 		}
 		
 		public SWGObject getParent() {
@@ -293,11 +291,19 @@ public final class Spawner {
 		}
 		
 		public double getDelay() {
-			return delay;
+			return waypoint.getDelay();
 		}
 		
 		public PatrolType getPatrolType() {
-			return patrolType;
+			return waypoint.getPatrolType();
+		}
+		
+		public String getGroupId() {
+			return waypoint.getGroupId();
+		}
+		
+		public String getPatrolId() {
+			return waypoint.getPatrolId();
 		}
 		
 		private static Location getPatrolWaypointLocation(PatrolRouteWaypoint waypoint) {

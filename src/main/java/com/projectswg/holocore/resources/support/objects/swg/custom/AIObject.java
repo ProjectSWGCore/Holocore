@@ -117,7 +117,8 @@ public class AIObject extends CreatureObject {
 	
 	@Override
 	public boolean isWithinAwarenessRange(SWGObject target) {
-		return target instanceof CreatureObject && getObserverCreatures().contains(target);
+		//noinspection SuspiciousMethodCalls
+		return target.getBaselineType() == BaselineType.CREO && getObserverCreatures().contains(target);
 	}
 	
 	@Override

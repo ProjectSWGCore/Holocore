@@ -125,6 +125,29 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 	}
 	
 	@Test
+	public void testIntoWithinBuilding2() {
+		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		buio.setPosition(Terrain.TATOOINE, -10, 0, 0);
+		buio.setHeading(45);
+		buio.populateCells();
+		
+		Location start = location(0, 0, 0);
+		Location portal1 = buildPortalLocation(buio.getCellByNumber(1).getPortalTo(null));
+		Location portal2 = buildPortalLocation(buio.getCellByNumber(1).getPortalTo(buio.getCellByNumber(2)));
+		Location portal3 = buildPortalLocation(buio.getCellByNumber(2).getPortalTo(buio.getCellByNumber(3)));
+		Location worldPortal = Location.builder(portal1).translateLocation(buio.getLocation()).build();
+		Location end = location(0, 0, 0);
+		
+		List<NavigationPoint> route = new ArrayList<>();
+		route.addAll(from(null, start, worldPortal));
+		route.addAll(from(buio.getCellByNumber(1), portal1, portal2));
+		route.addAll(from(buio.getCellByNumber(2), portal2, portal3));
+		route.addAll(from(buio.getCellByNumber(3), portal3, end));
+		
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(3), end, SPEED));
+	}
+	
+	@Test
 	public void testOutOfWithinBuilding() {
 		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
 		buio.setPosition(Terrain.TATOOINE, -10, 0, 0);
@@ -161,6 +184,19 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(2), portal, end));
 		
 		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, SPEED));
+	}
+	
+	@Test
+	public void testWithinBuildingSimple() {
+		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		buio.setPosition(Terrain.TATOOINE, -10, 0, 0);
+		buio.setHeading(270);
+		buio.populateCells();
+		
+		Location start = location(5, 0, 5);
+		Location end = location(-5, 0, -5);
+		
+		Assert.assertEquals(from(buio.getCellByNumber(1), start, end), NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {

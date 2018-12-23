@@ -19,6 +19,7 @@ public class Portal {
 	}
 	
 	public CellObject getOtherCell(CellObject cell) {
+		assert cell == cell1 || cell == cell2;
 		return cell1 == cell ? cell2 : cell1;
 	}
 	

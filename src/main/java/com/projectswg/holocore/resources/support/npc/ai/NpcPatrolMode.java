@@ -26,16 +26,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai;
 
+import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * AI object that patrols the specified route
@@ -46,13 +49,15 @@ public class NpcPatrolMode extends NpcMode {
 	
 	public NpcPatrolMode(@NotNull AIObject obj, @NotNull List<ResolvedPatrolWaypoint> waypoints) {
 		super(obj);
+		waypoints = new ArrayList<>(waypoints);
 		this.waypoints = new ArrayList<>(waypoints.size());
 		
 		if (!waypoints.isEmpty() && waypoints.get(0).getPatrolType() == PatrolType.FLIP) {
-			waypoints = new ArrayList<>(waypoints);
 			List<ResolvedPatrolWaypoint> reversed = new ArrayList<>(waypoints);
 			Collections.reverse(reversed);
 			waypoints.addAll(reversed);
+		} else if (!waypoints.isEmpty() && waypoints.get(0).getPatrolType() == PatrolType.LOOP) {
+			waypoints.add(waypoints.get(0));
 		}
 		
 		for (ResolvedPatrolWaypoint waypoint : waypoints) {
@@ -64,33 +69,36 @@ public class NpcPatrolMode extends NpcMode {
 	
 	@Override
 	public void onModeStart() {
+		List<NavigationPoint> compiledWaypoints;
 		if (!waypoints.isEmpty()) {
 			int index = 0;
 			double closestDistance = waypoints.get(0).distanceTo(getAI());
 			for (int i = 1; i < waypoints.size(); i++) {
+				if (waypoints.get(i).isNoOperation())
+					continue;
+				
 				double distance = waypoints.get(i).distanceTo(getAI());
 				if (distance < closestDistance) {
 					closestDistance = distance;
 					index = i;
 				}
 			}
-			List<NavigationPoint> rearranged = new ArrayList<>(waypoints.size());
-			rearranged.addAll(waypoints.subList(index, waypoints.size()));
-			rearranged.addAll(waypoints.subList(0, index));
-			
-			waypoints.clear();
-			waypoints.addAll(rearranged);
+			compiledWaypoints = new ArrayList<>(waypoints.size());
+			for (int i = index; i < waypoints.size(); i++) {
+				compiledWaypoints.add(waypoints.get(i));
+			}
+			for (int i = 0; i < index; i++) {
+				compiledWaypoints.add(waypoints.get(i));
+			}
+		} else {
+			compiledWaypoints = waypoints;
 		}
-		CompileNpcMovementIntent.broadcast(getAI(), waypoints, NavigationRouteType.LOOP, getWalkSpeed());
+		CompileNpcMovementIntent.broadcast(getAI(), compiledWaypoints, NavigationRouteType.LOOP, getWalkSpeed());
 	}
 	
 	@Override
 	public void act() {
 		
-	}
-	
-	private static <T> T last(List<T> list) {
-		return list.isEmpty() ? null : list.get(list.size()-1);
 	}
 	
 }

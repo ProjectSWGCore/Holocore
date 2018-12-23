@@ -194,10 +194,8 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean isWithinAwarenessRange(SWGObject target) {
-		if (!isPlayer()) {
-			//noinspection SuspiciousMethodCalls
-			return getObserverCreatures().contains(target) && target.isVisible(this);
-		}
+		if (!isPlayer())
+			return false;
 		
 		Player owner = getOwnerShallow();
 		if (owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED || !target.isVisible(this))

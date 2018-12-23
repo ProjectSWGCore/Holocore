@@ -10,4 +10,5 @@ open module holocore {
 	requires me.joshlarson.jlcommon;
 	
 	requires pswgcommon;
+	requires fast.json;
 }

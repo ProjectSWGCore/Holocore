@@ -9,21 +9,20 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class NavigationPoint {
 	
 	private final SWGObject parent;
 	private final Location location;
 	private final double speed;
+	private final int hash;
 	
 	private NavigationPoint(SWGObject parent, Location location, double speed) {
 		this.parent = parent;
 		this.location = location;
 		this.speed = speed;
+		this.hash = Objects.hash(parent, location);
 	}
 	
 	public SWGObject getParent() {
@@ -73,12 +72,12 @@ public class NavigationPoint {
 		if (!(o instanceof NavigationPoint))
 			return false;
 		NavigationPoint point = (NavigationPoint) o;
-		return parent == point.parent && (location == null ? point.location == null : location.equals(point.location));
+		return hash == point.hash && parent == point.parent && Objects.equals(location, point.location);
 	}
 	
 	@Override
 	public int hashCode() {
-		return (location == null ? 0 : location.hashCode()) * 17 + (parent == null ? 0 : parent.hashCode());
+		return hash;
 	}
 	
 	@Override
@@ -120,16 +119,14 @@ public class NavigationPoint {
 	 * @return a queue of locations to travel
 	 */
 	public static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination, double speed) {
-		byte adjSpeed = (byte) speed;
-		assert adjSpeed > 0 : "speed too slow";
-		
+		speed = Math.floor(speed);
 		double totalDistance = source.distanceTo(destination);
 		List<NavigationPoint> path = new ArrayList<>();
 		
-		double currentDistance = adjSpeed - 0.5;
+		double currentDistance = speed;
 		while (currentDistance <= totalDistance) {
 			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
-			currentDistance += adjSpeed - 0.5;
+			currentDistance += speed;
 		}
 		return path;
 	}
@@ -164,10 +161,16 @@ public class NavigationPoint {
 	
 	private static List<Portal> getBuildingRoute(CellObject from, CellObject to, Location start, Location destination) {
 		if (from == to)
-			return new ArrayList<>();
+			return List.of();
+		if (from != null) {
+			for (Portal fromPortal : from.getPortals()) {
+				if (fromPortal.getOtherCell(from) == to)
+					return List.of(fromPortal);
+			}
+		}
 		
 		PriorityQueue<NavigationRouteNode> nodes = new PriorityQueue<>(getNearbyPortals(new NavigationRouteNode(new ArrayList<>(), from, start, destination), to, start, destination));
-		for (int i = 0; i < 50 && !nodes.isEmpty(); i++) { // 50 iterations until giving up
+		while (!nodes.isEmpty()) {
 			NavigationRouteNode node = nodes.poll();
 			assert node != null : "loop precondition";
 			
