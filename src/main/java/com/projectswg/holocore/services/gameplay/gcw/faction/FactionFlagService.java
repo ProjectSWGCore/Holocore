@@ -4,6 +4,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
+import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -64,6 +65,25 @@ public class FactionFlagService extends Service {
 				break;
 		}
 	}
+	
+	@IntentHandler
+	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
+		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
+			return;
+		}
+		
+		switch (dpi.getEventType()) {
+			case BEGINDUEL:
+				handleBeginDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			case END:
+				handleEndDuel(dpi.getSender(), dpi.getReciever());
+				break;
+			default:
+				break;
+		}
+	}
+		
 	
 	private void handleTypeChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
@@ -135,12 +155,22 @@ public class FactionFlagService extends Service {
 			Player observerOwner = tangibleAware.getOwner();
 			
 			if (targetOwner != null) // Send the PvP information about this observer to the owner
-				targetOwner.sendPacket(new UpdatePvpStatusMessage(tangibleAware.getPvpFaction(), tangibleAware.getObjectId(), target.getPvpFlagsFor(tangibleAware)));
+				targetOwner.sendPacket(createPvpStatusMessage(target, tangibleAware));
 			
 			if (observerOwner != null)	// Send the pvp information about the owner to this observer
-				observerOwner.sendPacket(new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), tangibleAware.getPvpFlagsFor(target)));
+				observerOwner.sendPacket(createPvpStatusMessage(tangibleAware, target));
 		}
 	}
+	
+	private void handleBeginDuel(CreatureObject accepter, CreatureObject target) {
+		accepter.sendSelf(createPvpStatusMessage(accepter, target));
+		target.sendSelf(createPvpStatusMessage(target, accepter));
+	}
+	
+	private void handleEndDuel(CreatureObject accepter, CreatureObject target) {
+		accepter.sendSelf(createPvpStatusMessage(accepter, target));
+		target.sendSelf(createPvpStatusMessage(target, accepter));
+	}	
 	
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
 		statusChangers.remove(target);
@@ -192,6 +222,10 @@ public class FactionFlagService extends Service {
 			delay = 300;
 		
 		return delay;
+	}
+	
+	private static UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject self, TangibleObject target) {
+		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), self.getPvpFlagsFor(target));
 	}
 	
 }

@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
@@ -1082,6 +1083,19 @@ public class CreatureObject extends TangibleObject {
 		}
 		
 		return super.isEnemyOf(otherObject);	// Default
+	}
+	
+	@Override
+	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
+		Set<PvpFlag> flags = super.getPvpFlagsFor(observer);
+		
+		if (observer instanceof CreatureObject) {
+			if (isDuelingPlayer((CreatureObject) observer)) {
+				flags.add(PvpFlag.DUEL);
+			}
+		}
+		
+		return flags;
 	}
 	
 	public boolean isBaselinesSent(SWGObject obj) {
