@@ -9,27 +9,26 @@ import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -39,6 +38,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -51,14 +51,12 @@ public class CloningService extends Service {
 	private final Map<String, FacilityData> facilityDataMap;
 	private final List<BuildingObject> cloningFacilities;
 	private final ScheduledThreadPool executor;
-	private final Random random;
 	
 	public CloningService() {
 		this.reviveTimers = new HashMap<>();
 		this.facilityDataMap = new HashMap<>();
 		this.cloningFacilities = new ArrayList<>();
 		this.executor = new ScheduledThreadPool(1, "combat-cloning-service");
-		this.random = new Random();
 	}
 	
 	@Override
@@ -171,9 +169,9 @@ public class CloningService extends Service {
 	
 	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		CreatureObject creature = i.getPlayer().getCreatureObject();
 		switch(i.getEvent()) {
 			case PE_DISAPPEAR: {
-				CreatureObject creature = i.getPlayer().getCreatureObject();
 				Future<?> reviveTimer = reviveTimers.remove(creature);
 				
 				if (reviveTimer != null) {
@@ -183,36 +181,47 @@ public class CloningService extends Service {
 				break;
 			}
 			
-			case PE_FIRST_ZONE: {
-				CreatureObject creature = i.getPlayer().getCreatureObject();
-
-				if (creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
+			case PE_FIRST_ZONE:
+				if (creature.getPosture() == Posture.DEAD) {
 					// They're dead but they have no active revive timer.
 					// In this case, they didn't clone before the application was shut down and started back up.
-					scheduleCloneTimer(creature);
+					if (reviveTimers.containsKey(creature))
+						showSuiWindow(creature);
+					else
+						scheduleCloneTimer(creature);
 				}
 				break;
-			}
 			default:
 				break;
 		}
 	}
 	
 	private void scheduleCloneTimer(CreatureObject corpse) {
-		Terrain corpseTerrain = corpse.getTerrain();
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
-		
 		if (availableFacilities.isEmpty()) {
-			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
-			return;
+			BuildingObject defaultCloner = getDefaultCloner();
+			if (defaultCloner != null)
+				availableFacilities.add(defaultCloner);
 		}
-
+		
 		SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
 		cloningWindow.display(corpse.getOwner());
 		synchronized (reviveTimers) {
 			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER), () -> expireCloneTimer(corpse, availableFacilities, cloningWindow)));
 		}
+	}
+	
+	private void showSuiWindow(CreatureObject corpse) {
+		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
+		
+		if (availableFacilities.isEmpty()) {
+			BuildingObject defaultCloner = getDefaultCloner();
+			if (defaultCloner != null)
+				availableFacilities.add(defaultCloner);
+		}
+		
+		createSuiWindow(availableFacilities, corpse).display(corpse.getOwner());
 	}
 	
 	private SuiWindow createSuiWindow(List<BuildingObject> availableFacilities, CreatureObject corpse) {
@@ -252,7 +261,7 @@ public class CloningService extends Service {
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
-			Log.e("%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", corpse, selectedFacility);
+			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the object template is not in cloning_respawn.sdb", selectedFacility);
 			return CloneResult.TEMPLATE_MISSING;
 		}
 
@@ -260,7 +269,7 @@ public class CloningService extends Service {
 		CellObject cellObject = selectedFacility.getCellByName(cellName);
 
 		if (cellObject == null) {
-			Log.e("Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
+			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the target cell is invalid", selectedFacility);
 			return CloneResult.INVALID_CELL;
 		}
 		
@@ -273,9 +282,7 @@ public class CloningService extends Service {
 			}
 		}
 		
-		// We're put on leave when we're revived at a cloning facility
-		new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-		
+		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.getLocation());
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility));
 		return CloneResult.SUCCESS;
 	}
@@ -287,7 +294,7 @@ public class CloningService extends Service {
 		int tubeCount = tubeData.length;
 
 		if (tubeCount > 0) {
-			TubeData randomData = tubeData[random.nextInt(tubeCount)];
+			TubeData randomData = tubeData[ThreadLocalRandom.current().nextInt(tubeCount)];
 			cloneLocation.setTerrain(facilityLocation.getTerrain());
 			cloneLocation.setPosition(randomData.getTubeX(), 0, randomData.getTubeZ());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
@@ -302,20 +309,17 @@ public class CloningService extends Service {
 	}
 	
 	private void teleport(CreatureObject corpse, CellObject cellObject, Location cloneLocation) {
-		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
-			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-		}
-		
-		ObjectTeleportIntent.broadcast(corpse, cellObject, cloneLocation);
+		corpse.moveToContainer(cellObject, cloneLocation);
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
-		corpse.setMovementScale(1);
+		corpse.setMovementPercent(1);
 		corpse.setHealth(corpse.getMaxHealth());
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
-		
-		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
-		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
-		cloningSickness.broadcast();
+		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));
+		corpse.broadcast(new BuffIntent("incapWeaken", corpse, corpse, true));
+		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
+			corpse.broadcast(new FactionIntent(corpse, PvpStatus.ONLEAVE));
+		}
 	}
 	
 	/**
@@ -347,7 +351,7 @@ public class CloningService extends Service {
 			suiWindow.close(corpseOwner);
 			forceClone(corpse, facilitiesInTerrain);
 		} else {
-			Log.w("Could not expire timer for %s because none was active", corpse);
+			StandardLog.onPlayerError(this, corpse, "could not be force cloned because no timer was active");
 		}
 	}
 	
@@ -379,6 +383,14 @@ public class CloningService extends Service {
 		PvpFaction factionRestriction = facilityData.getFactionRestriction();
 		
 		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
+	}
+	
+	private static BuildingObject getDefaultCloner() {
+		BuildingObject defaultCloner = BuildingLookup.getBuildingByTag("tat_moseisley_cloning1");
+		if (defaultCloner == null)
+			Log.e("No default cloner found with building id: 'tat_moseisley_cloning1'");
+		
+		return defaultCloner;
 	}
 	
 	private static class FacilityData {

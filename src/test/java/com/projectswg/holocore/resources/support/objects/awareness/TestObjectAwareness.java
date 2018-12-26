@@ -29,67 +29,64 @@ package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.runners.TestRunnerNoIntents;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
-import com.projectswg.holocore.test_resources.GenericTangibleObject;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericTangibleObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
 public class TestObjectAwareness extends TestRunnerNoIntents {
 	
-	private ObjectAwareness awareness;
-	private GenericCreatureObject player;
-	private GenericCreatureObject testPlayer;
-	private GenericTangibleObject testTangible;
-	private BuildingObject testBuilding1;
-	private BuildingObject testBuilding2;
-	private WaypointObject testWaypoint;
-	private CellObject testCell1;
-	private CellObject testCell2;
-	private TangibleObject inventoryObject;
-	private TangibleObject testInventoryObject;
+	private ObjectAwareness awareness = null;
+	private GenericCreatureObject player = null;
+	private GenericCreatureObject testPlayer = null;
+	private GenericCreatureObject testNpc = null;
+	private GenericTangibleObject testTangible = null;
+	private BuildingObject testBuilding1 = null;
+	private BuildingObject testBuilding2 = null;
+	private WaypointObject testWaypoint = null;
+	private CellObject testCell1 = null;
+	private CellObject testCell2 = null;
+	private SWGObject inventoryObject = null;
 	
 	private void initialize() {
 		awareness = new ObjectAwareness();
-		player = new GenericCreatureObject(1);
-		testPlayer = new GenericCreatureObject(2);
-		testTangible = new GenericTangibleObject(3);
-		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
-		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(5, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
-		testCell1 = new CellObject(6);
-		testCell2 = new CellObject(7);
-		testWaypoint = new WaypointObject(8);
-		inventoryObject = new TangibleObject(9);
-		testInventoryObject = new TangibleObject(10);
+		player = new GenericCreatureObject(getUniqueId(), "player");
+		testPlayer = new GenericCreatureObject(getUniqueId(), "testPlayer");
+		testNpc = new GenericCreatureObject(getUniqueId(), "testNPC");
+		testTangible = new GenericTangibleObject(getUniqueId(), "testTangible");
+		testBuilding1 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testBuilding2 = (BuildingObject) ObjectCreator.createObjectFromTemplate(getUniqueId(), "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		testCell1 = new CellObject(getUniqueId());
+		testCell2 = new CellObject(getUniqueId());
+		testWaypoint = new WaypointObject(getUniqueId());
+		inventoryObject = player.getInventory();
 		
-		player.setLoadRange(100);
-		testPlayer.setLoadRange(100);
-		testTangible.setLoadRange(0);
+		testBuilding1.setObjectName("building1");
+		testBuilding2.setObjectName("building2");
 		testCell1.setNumber(1);
 		testCell2.setNumber(1);
 		
-		testCell1.moveToContainer(testBuilding1);
-		testCell2.moveToContainer(testBuilding2);
-		inventoryObject.setArrangement(List.of(List.of("inventory")));
-		testInventoryObject.setArrangement(List.of(List.of("inventory")));
-		inventoryObject.moveToContainer(player);
-		testInventoryObject.moveToContainer(testPlayer);
+		testCell1.systemMove(testBuilding1);
+		testCell2.systemMove(testBuilding2);
+		
+		testNpc.getSlottedObject("ghost").systemMove(null);
+		testNpc.setHasOwner(false);
+		testNpc.systemMove(testCell1);
 		
 		testPlayer.setLocation(buildTatooine(40, 40));
 		testTangible.setLocation(buildTatooine(50, 50));
@@ -99,6 +96,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		awareness.createObject(testPlayer);
 		awareness.createObject(testTangible);
+		awareness.createObject(testNpc);
 		awareness.createObject(testBuilding1);
 		awareness.createObject(testBuilding2);
 		awareness.createObject(testCell1);
@@ -131,19 +129,61 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	@Test
 	public void testPlayerZoneIn() {
 		initialize();
-		player.setLoadRange(-1);
 		player.setHasOwner(false);
-		Assert.assertEquals(0, player.getLoadRange());
 		
-		moveNoAssert(TestLocation.SSI);
-		assertAware(List.of(player));
+		Assert.assertTrue(player.isPlayer());
+		Assert.assertFalse(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isPlayer());
+		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		
+		// Shouldn't be aware of anything else because it's a logged out player
+		for (TestLocation loc : TestLocation.values()) {
+			moveNoAssert(loc);
+			assertAware(List.of(player));
+		}
 		
 		player.setHasOwner(true);
-		Assert.assertNotEquals(0, player.getLoadRange());
-		player.setLoadRange(100);
-		Assert.assertEquals(100, player.getLoadRange());
-		move(TestLocation.SSI);
-		move(TestLocation.SSO);
+		Assert.assertTrue(player.isPlayer());
+		Assert.assertTrue(player.isLoggedInPlayer());
+		Assert.assertTrue(testPlayer.isPlayer());
+		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		
+		for (TestLocation loc : TestLocation.values()) {
+			try {
+				move(loc);
+			} catch (AssertionError e) {
+				throw new AssertionError("Failed " + loc, e);
+			}
+		}
+	}
+	
+	@Test
+	public void testNpcMove() {
+		initialize();
+		
+		move(TestLocation.BSSI);
+		
+		Assert.assertTrue(player.getAware().contains(testNpc));
+		testNpc.systemMove(testCell2);
+		update(testNpc);
+		assertFalse(player.getAware().contains(testNpc));
+		
+		testNpc.systemMove(testCell1);
+		Assert.assertTrue(testNpc.isVisible(player));
+		update(testNpc);
+		Assert.assertTrue(player.getAware().contains(testNpc));
+		
+		{
+			SWGPacket packet;
+			assert player.getOwner() != null;
+			do {
+				packet = player.getOwner().getNextPacket();
+			} while (packet != null);
+		}
+		
+		testNpc.systemMove(testCell1);
+		update(testNpc);
+		Assert.assertNull(player.getOwner().getNextPacket());
 	}
 	
 	@Test
@@ -159,6 +199,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		move(TestLocation.SSI);
 		awareness.destroyObject(testBuilding1);
+		awareness.updateChunks();
 		assertAware(List.of(player, testPlayer, testTangible));
 	}
 	
@@ -166,21 +207,23 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	public void testLoadRangeUpdate() {
 		initialize();
 		move(TestLocation.SSI);
-		assertEquals(0, testBuilding1.getLoadRange());
 		player.moveToContainer(testCell1);
-		assertEquals(player.getLoadRange(), testBuilding1.getLoadRange());
+	}
+	
+	private void update(CreatureObject obj) {
+		awareness.updateObject(obj);
+		awareness.updateChunks();
 	}
 	
 	private void moveNoAssert(TestLocation location) {
-		player.moveToContainer(getParent(location.getParent()));
-		player.setLocation(location.getLocation());
-		awareness.updateObject(player);
+		player.systemMove(getParent(location.getParent()), location.getLocation());
+		
+		update(player);
 	}
 	
 	private void move(TestLocation location) {
-		player.moveToContainer(getParent(location.getParent()));
-		player.setLocation(location.getLocation());
-		awareness.updateObject(player);
+		player.systemMove(getParent(location.getParent()), location.getLocation());
+		update(player);
 		
 		assertAware(getExpectedAware(location.getAwareSet()));
 	}
@@ -190,6 +233,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		// Ensure it doesn't contain the unexpected
 		for (SWGObject a : awareActual) {
+			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
 			if (a.getParent() != null)
 				continue;
 			assertTrue("Not supposed to be aware of object: " + a, awareExpected.contains(a));
@@ -197,6 +241,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		// Ensure it contains the expected
 		for (SWGObject a : awareExpected) {
+			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
 			assertTrue("Supposed to be aware of object: " + a, awareActual.contains(a));
 		}
 	}
@@ -213,7 +258,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private Collection<SWGObject> getExpectedAware(TestAwareSet awareSet) {
 		switch (awareSet) {
 			case NONE:		return List.of(player, inventoryObject);
-			case TATOOINE:	return List.of(player, inventoryObject, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"));
+			case TATOOINE:	return List.of(player, inventoryObject, testPlayer, testTangible, testBuilding1, testPlayer.getSlottedObject("ghost"), testNpc);
 			case NABOO:		return List.of(player, inventoryObject, testBuilding2);
 		}
 		throw new RuntimeException("Invalid test aware set: " + awareSet);
@@ -242,8 +287,8 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private enum TestLocation {
 		SSI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(25, 25)),
 		SDI	(TestParent.NONE,	TestAwareSet.TATOOINE, buildTatooine(-10, -10)),
-		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(150, 150)),
-		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-150, -150)),
+		SSO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(3000, 3000)),
+		SDO	(TestParent.NONE,	TestAwareSet.NONE, buildTatooine(-3000, -3000)),
 		BSSI(TestParent.BUIO1,	TestAwareSet.TATOOINE, buildTatooine(0, 0)),
 		DDO	(TestParent.NONE,	TestAwareSet.NABOO, buildNaboo(25, 25)),
 		BDDO(TestParent.BUIO2,	TestAwareSet.NABOO, buildNaboo(0, 0)),

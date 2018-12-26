@@ -11,9 +11,9 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -51,7 +51,7 @@ public class ExperienceLevelService extends Service {
 		PlayerObject playerObject = creatureObject.getPlayerObject();
 		
 		if (playerObject != null) {
-			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
+			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained(), ei.isMultiply());
 			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();
@@ -66,16 +66,16 @@ public class ExperienceLevelService extends Service {
 		}
 	}
 	
-	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
+	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
 		int currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal = currentXp + (int) (xpGained * xpMultiplier);
+		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);
 		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
 		
 		// Show flytext above the creature that received XP, but only to them
-		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained)), Scale.MEDIUM, new RGB(255, 0, 255)));
+		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", newXpTotal-currentXp)), Scale.MEDIUM, new RGB(255, 0, 255)));
 		
 		return newXpTotal;
 	}

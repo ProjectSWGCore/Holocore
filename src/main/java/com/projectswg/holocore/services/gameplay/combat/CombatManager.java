@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
 import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
+import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
 import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
 import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
 import me.joshlarson.jlcommon.control.Manager;

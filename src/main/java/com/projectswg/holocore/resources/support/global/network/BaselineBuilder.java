@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.global.network;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.ByteArrayOutputStream;

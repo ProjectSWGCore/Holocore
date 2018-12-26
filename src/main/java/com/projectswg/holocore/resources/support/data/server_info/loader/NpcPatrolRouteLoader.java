@@ -37,13 +37,13 @@ import java.util.function.Consumer;
 
 public final class NpcPatrolRouteLoader extends DataLoader {
 	
-	private final Map<Integer, List<PatrolRouteWaypoint>> patrolRouteMap;
+	private final Map<String, List<PatrolRouteWaypoint>> patrolRouteMap;
 	
 	NpcPatrolRouteLoader() {
 		this.patrolRouteMap = new HashMap<>();
 	}
 	
-	public List<PatrolRouteWaypoint> getPatrolRoute(int groupId) {
+	public List<PatrolRouteWaypoint> getPatrolRoute(String groupId) {
 		return patrolRouteMap.get(groupId);
 	}
 	
@@ -68,8 +68,8 @@ public final class NpcPatrolRouteLoader extends DataLoader {
 	
 	public static class PatrolRouteWaypoint {
 		
-		private final int groupId;
-		private final int patrolId;
+		private final String groupId;
+		private final String patrolId;
 		private final PatrolType patrolType;
 		private final Terrain terrain;
 		private final String buildingId;
@@ -80,8 +80,8 @@ public final class NpcPatrolRouteLoader extends DataLoader {
 		private final double delay;
 		
 		public PatrolRouteWaypoint(SdbResultSet set) {
-			this.groupId = (int) set.getInt("patrol_group");
-			this.patrolId = (int) set.getInt("patrol_id");
+			this.groupId = set.getText("patrol_group");
+			this.patrolId = set.getText("patrol_id");
 			this.patrolType = parsePatrolType(set.getText("patrol_type"));
 			this.terrain = Terrain.valueOf(set.getText("terrain"));
 			this.buildingId = set.getText("building_id");
@@ -92,11 +92,11 @@ public final class NpcPatrolRouteLoader extends DataLoader {
 			this.delay = set.getReal("pause");
 		}
 		
-		public int getGroupId() {
+		public String getGroupId() {
 			return groupId;
 		}
 		
-		public int getPatrolId() {
+		public String getPatrolId() {
 			return patrolId;
 		}
 		

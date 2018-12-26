@@ -29,43 +29,60 @@ package com.projectswg.holocore.intents.support.objects.swg;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ObjectTeleportIntent extends Intent {
 	
 	private final SWGObject object;
-	private final SWGObject parent;
+	private final SWGObject oldParent;
+	private final SWGObject newParent;
+	private final Location oldLocation;
 	private final Location newLocation;
 	
-	public ObjectTeleportIntent(SWGObject object, Location newLocation) {
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		this(object, oldParent, null, oldLocation, newLocation);
+	}
+	
+	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
 		this.object = object;
-		this.parent = null;
+		this.oldParent = oldParent;
+		this.newParent = newParent;
+		this.oldLocation = oldLocation;
 		this.newLocation = newLocation;
 	}
 	
-	public ObjectTeleportIntent(SWGObject object, SWGObject parent, Location newLocation) {
-		this.object = object;
-		this.parent = parent;
-		this.newLocation = newLocation;
-	}
-	
+	@NotNull
 	public SWGObject getObject() {
 		return object;
 	}
 	
-	public SWGObject getParent() {
-		return parent;
+	@Nullable
+	public SWGObject getOldParent() {
+		return oldParent;
 	}
 	
+	@Nullable
+	public SWGObject getNewParent() {
+		return newParent;
+	}
+	
+	@NotNull
+	public Location getOldLocation() {
+		return oldLocation;
+	}
+	
+	@NotNull
 	public Location getNewLocation() {
 		return newLocation;
 	}
 	
-	public static void broadcast(SWGObject object, Location newLocation) {
-		new ObjectTeleportIntent(object, newLocation).broadcast();
+	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, oldLocation, newLocation).broadcast();
 	}
 	
-	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation) {
-		new ObjectTeleportIntent(object, parent, newLocation).broadcast();
+	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
+		new ObjectTeleportIntent(object, oldParent, newParent, oldLocation, newLocation).broadcast();
 	}
 	
 }

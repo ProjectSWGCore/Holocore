@@ -28,11 +28,10 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 
 public class ObjectAwareness {
 	
@@ -51,11 +50,7 @@ public class ObjectAwareness {
 	 * @param obj the object created
 	 */
 	public void createObject(@NotNull SWGObject obj) {
-		if (AwarenessUtilities.isInAwareness(obj) && obj.getParent() == null) {
-			TerrainMap map = getTerrainMap(obj);
-			map.add(obj);
-			map.update(obj);
-		}
+		terrains[obj.getTerrain().ordinal()].add(obj);
 	}
 	
 	/**
@@ -64,9 +59,7 @@ public class ObjectAwareness {
 	 * @param obj the object destroyed
 	 */
 	public void destroyObject(@NotNull SWGObject obj) {
-		TerrainMap map = getTerrainMap(obj);
-		map.remove(obj);
-		map.update(obj);
+		terrains[obj.getTerrain().ordinal()].remove(obj);
 	}
 	
 	/**
@@ -75,25 +68,14 @@ public class ObjectAwareness {
 	 * @param obj the object to update
 	 */
 	public void updateObject(@NotNull SWGObject obj) {
-		SWGObject superParent = obj.getSuperParent();
-		TerrainMap map = getTerrainMap(obj);
-		if (superParent != null) {
-			assert getTerrainMap(superParent) == map : "super parent terrain must match child terrain";
-			map.remove(obj);
-			map.update(superParent);
-		} else {
-			map.move(obj);
-		}
-		map.update(obj);
+		terrains[obj.getTerrain().ordinal()].move(obj);
 	}
 	
-	@NotNull
-	private TerrainMap getTerrainMap(SWGObject obj) {
-		return terrains[obj.getTerrain().ordinal()];
-	}
-	
-	private static boolean isRider(@NotNull SWGObject obj, SWGObject parent) {
-		return obj.getParent() != parent && !(obj.getBaselineType() == BaselineType.CREO && ((CreatureObject) obj).isStatesBitmask(CreatureState.RIDING_MOUNT));
+	/**
+	 * Updates all affected chunks
+	 */
+	public void updateChunks() {
+		Arrays.stream(terrains).parallel().forEach(TerrainMap::updateChunks);
 	}
 	
 }

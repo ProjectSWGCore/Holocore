@@ -29,11 +29,10 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
@@ -78,7 +77,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 				GroupObject group = (GroupObject) ObjectLookup.getObjectById(teleportObject.getGroupId());
 				if (group != null) {
 					for (CreatureObject member: group.getGroupMemberObjects()) {
-						ObjectTeleportIntent.broadcast(member, new Location(x, y, z, terrain));
+						member.moveToLocation(new Location(x, y, z, terrain));
 					}
 					return;
 				}
@@ -90,7 +89,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 			}
 		}
 		
-		ObjectTeleportIntent.broadcast(teleportObject, new Location(x, y, z, terrain));
+		teleportObject.moveToContainer(null, new Location(x, y, z, terrain));
 	}
 
 }

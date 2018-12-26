@@ -6,7 +6,6 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -24,7 +23,6 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -139,8 +137,7 @@ public class CustomObjectService extends Service {
 			for (SWGObject child : obj.getContainedObjects())
 				ObjectCreatedIntent.broadcast(child);
 		}
-		obj.setLocation(source.getLocation());
-		obj.systemMove(source.getParent());
+		obj.systemMove(source.getParent(), source.getLocation());
 		objects.add(obj);
 		ObjectCreatedIntent.broadcast(obj);
 	}
@@ -205,7 +202,7 @@ public class CustomObjectService extends Service {
 				return;
 		}
 		SystemMessageIntent.broadcastPersonal(source.getOwner(), "Moved '"+target.getTemplate()+"' " + amount + "m " + direction);
-		ObjectTeleportIntent.broadcast(target, location);
+		target.moveToLocation(location);
 	}
 	
 	private void handleRotate(CreatureObject source, SWGObject target, String headingStr) {
@@ -213,8 +210,7 @@ public class CustomObjectService extends Service {
 			return;
 		try {
 			double heading = Double.parseDouble(headingStr);
-			Location location = Location.builder(target.getLocation()).setHeading(heading).build();
-			ObjectTeleportIntent.broadcast(target, location);
+			target.moveToLocation(Location.builder(target.getLocation()).setHeading(heading).build());
 			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Changed '"+target.getTemplate()+"' heading to " + heading);
 		} catch (NumberFormatException e) {
 			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Invalid heading");
@@ -227,7 +223,7 @@ public class CustomObjectService extends Service {
 		Location world = source.getWorldLocation();
 		return source.getObjectsAware().stream()
 				.filter(objects::contains)
-				.filter(tar -> Math.abs(heading(world, tar.getLocation()) - world.getOrientation().getYaw()) <= 30)
+				.filter(tar -> Math.abs(heading(world, tar.getLocation()) - world.getOrientation().getHeading()) <= 30)
 				.min(Comparator.comparingDouble(tar -> world.flatDistanceTo(tar.getLocation())))
 				.orElse(null);
 	}

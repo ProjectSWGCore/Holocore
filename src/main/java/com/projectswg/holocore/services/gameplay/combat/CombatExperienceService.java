@@ -33,11 +33,11 @@ import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -115,6 +115,7 @@ public class CombatExperienceService extends Service {
 		
 		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
 		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
+		boolean xpMultiply = experienceGained > 1;
 		
 		if (experienceGained <= 0) {
 			return;
@@ -125,7 +126,7 @@ public class CombatExperienceService extends Service {
 		} else {
 			group.getGroupMemberObjects().stream()
 					.filter(groupMember -> !isEntertainer(groupMember) && isMemberNearby(corpse, groupMember))
-					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained).broadcast());
+					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained, xpMultiply).broadcast());
 		}
 	}
 	

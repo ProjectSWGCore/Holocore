@@ -41,8 +41,8 @@ import com.projectswg.holocore.intents.gameplay.world.travel.TravelPointSelectio
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelHelper;
+import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.global.player.Player;

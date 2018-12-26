@@ -9,21 +9,20 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class NavigationPoint {
 	
 	private final SWGObject parent;
 	private final Location location;
 	private final double speed;
+	private final int hash;
 	
 	private NavigationPoint(SWGObject parent, Location location, double speed) {
 		this.parent = parent;
 		this.location = location;
 		this.speed = speed;
+		this.hash = Objects.hash(parent, location);
 	}
 	
 	public SWGObject getParent() {
@@ -42,9 +41,9 @@ public class NavigationPoint {
 		if (isNoOperation())
 			return;
 		if (parent == null)
-			MoveObjectIntent.broadcast(obj, location, speed, obj.getNextUpdateCount());
+			obj.broadcast(new MoveObjectIntent(obj, location, speed));
 		else
-			MoveObjectIntent.broadcast(obj, parent, location, speed, obj.getNextUpdateCount());
+			obj.broadcast(new MoveObjectIntent(obj, parent, location, speed));
 	}
 	
 	public boolean isNoOperation() {
@@ -73,12 +72,12 @@ public class NavigationPoint {
 		if (!(o instanceof NavigationPoint))
 			return false;
 		NavigationPoint point = (NavigationPoint) o;
-		return parent == point.parent && (location == null ? point.location == null : location.equals(point.location));
+		return hash == point.hash && parent == point.parent && Objects.equals(location, point.location);
 	}
 	
 	@Override
 	public int hashCode() {
-		return (location == null ? 0 : location.hashCode()) * 17 + (parent == null ? 0 : parent.hashCode());
+		return hash;
 	}
 	
 	@Override
@@ -120,26 +119,30 @@ public class NavigationPoint {
 	 * @return a queue of locations to travel
 	 */
 	public static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination, double speed) {
-		speed -= 0.5; // Makes the animation more smooth on the client
+		speed = Math.floor(speed);
 		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) (totalDistance / speed);
-		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
+		List<NavigationPoint> path = new ArrayList<>();
 		
 		double currentDistance = speed;
-		for (int i = 0; i <= totalIntervals; i++) {
-			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
+		while (currentDistance <= totalDistance) {
+			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
 			currentDistance += speed;
 		}
 		return path;
 	}
 	
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
+		double heading = Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ()));
+		if (percentage <= 0)
+			return new NavigationPoint(parent, Location.builder(l1).setHeading(heading).build(), speed);
+		if (percentage >= 1)
+			return new NavigationPoint(parent, Location.builder(l2).setHeading(heading).build(), speed);
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
 				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
 				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
 				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
-				.setHeading(Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ())))
+				.setHeading(heading)
 				.build(), speed);
 	}
 	
@@ -158,10 +161,16 @@ public class NavigationPoint {
 	
 	private static List<Portal> getBuildingRoute(CellObject from, CellObject to, Location start, Location destination) {
 		if (from == to)
-			return new ArrayList<>();
+			return List.of();
+		if (from != null) {
+			for (Portal fromPortal : from.getPortals()) {
+				if (fromPortal.getOtherCell(from) == to)
+					return List.of(fromPortal);
+			}
+		}
 		
 		PriorityQueue<NavigationRouteNode> nodes = new PriorityQueue<>(getNearbyPortals(new NavigationRouteNode(new ArrayList<>(), from, start, destination), to, start, destination));
-		for (int i = 0; i < 50 && !nodes.isEmpty(); i++) { // 50 iterations until giving up
+		while (!nodes.isEmpty()) {
 			NavigationRouteNode node = nodes.poll();
 			assert node != null : "loop precondition";
 			

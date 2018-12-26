@@ -31,15 +31,16 @@ import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
+import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
+import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.Equipment;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
+import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -346,6 +347,8 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	public void setHealth(int health, SWGObject target) {
 		synchronized(attributes) {
+			if (health == attributes.get(0))
+				return;
 			attributes.set(0, health);
 			attributes.sendDeltaMessage(target);
 		}
@@ -364,11 +367,7 @@ class CreatureObjectSharedNP implements Persistable {
 				newHealthValue = 0;
 			}
 			
-			// We don't send deltas unnecessarily
-			if (newHealthValue != oldHealth) {
-				attributes.set(0, newHealthValue);
-				attributes.sendDeltaMessage(target);
-			}
+			setHealth(newHealthValue, target);
 		}
 	}
 	

@@ -1,10 +1,6 @@
 package com.projectswg.holocore.services.support.data;
 
 import com.projectswg.common.data.info.Config;
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
-import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
@@ -29,14 +25,14 @@ public class PacketRecordingService extends Service {
 	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
 		if (!isPacketDebug())
 			return;
-		printPacketStream(true, ipi.getPlayer().getNetworkId(), createExtendedPacketInformation(ipi.getPacket()));
+		printPacketStream(true, ipi.getPlayer().getNetworkId(), ipi.getPacket().toString());
 	}
 	
 	@IntentHandler
 	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
 		if (!isPacketDebug())
 			return;
-		printPacketStream(false, opi.getPlayer().getNetworkId(), createExtendedPacketInformation(opi.getPacket()));
+		printPacketStream(false, opi.getPlayer().getNetworkId(), opi.getPacket().toString());
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {
@@ -45,28 +41,6 @@ public class PacketRecordingService extends Service {
 	
 	private boolean isPacketDebug() {
 		return debugConfig.getBoolean("PACKET-LOGGING", false);
-	}
-	
-	private String createExtendedPacketInformation(SWGPacket p) {
-		if (p instanceof Baseline)
-			return createBaselineInformation((Baseline) p);
-		if (p instanceof DeltasMessage)
-			return createDeltaInformation((DeltasMessage) p);
-		if (p instanceof ObjectController)
-			return createControllerInformation((ObjectController) p);
-		return p.getClass().getSimpleName();
-	}
-	
-	private String createBaselineInformation(Baseline b) {
-		return "Baseline:"+b.getType()+b.getNum()+"  ID="+b.getObjectId();
-	}
-	
-	private String createDeltaInformation(DeltasMessage d) {
-		return "Delta:"+d.getType()+d.getNum()+"  Var="+d.getUpdate()+"  ID="+d.getObjectId();
-	}
-	
-	private String createControllerInformation(ObjectController c) {
-		return "ObjectController:0x"+Integer.toHexString(c.getControllerCrc())+"  ID="+c.getObjectId();
 	}
 	
 }

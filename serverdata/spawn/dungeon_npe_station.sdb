@@ -1,145 +1,145 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-1100003	DUNGEON1	du1_npe_station_1	AREA	30	-103.90	28.98	-4.68	0	1	Arslynd	npe_bounty_2_2_h_att_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100004	DUNGEON1	du1_npe_station_1	AREA	30	-103.74	28.98	-2.35	0	1	Bodyguard	npe_bounty_guard_1_h_att_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100005	DUNGEON1	du1_npe_station_1	AREA	29	-5.81	28.96	-68.97	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone_3_c_att_n	Dungeon	NPE Station	2	LOITER	3	0	-	idle	0	0	0	180
-1100006	DUNGEON1	du1_npe_station_1	AREA	29	-19.24	28.97	-68.37	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone_3_c_att_n	Dungeon	NPE Station	2	LOITER	3	0	-	idle	0	0	0	180
-1100007	DUNGEON1	du1_npe_station_1	AREA	29	-11.54	28.94	-88.28	0	1	Giant Tanc Mite Queen	npe_mite_giant_tanc_queen_4_c_agg_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100008	DUNGEON1	du1_npe_station_1	AREA	29	-11.18	29.01	-56.86	0	1	a Giant Tanc Mite	npe_mite_giant_tanc_2_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100009	DUNGEON1	du1_npe_station_1	AREA	28	-10.28	29.01	-30.24	0	1	a Giant Tanc Mite	npe_mite_giant_tanc_2_c_att_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100010	DUNGEON1	du1_npe_station_1	AREA	28	-13.93	29.01	-40.84	0	1	a Giant Tanc Mite	npe_mite_giant_tanc_2_c_att_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100011	DUNGEON1	du1_npe_station_1	AREA	28	3.64	31.01	47.66	0	1	Fidaval	npe_bounty_1_h_att_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100012	DUNGEON1	du1_npe_station_1	AREA	28	-24.58	31.01	-40.57	0	1	Terry	npe_commando_1_h_att_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100013	DUNGEON1	du1_npe_station_1	AREA	28	43.45	31.01	-10.78	0	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100014	DUNGEON1	du1_npe_station_1	AREA	28	6.06	29.01	-8.02	0	1	an Exotic Flit	npe_flit_exotic_2_c_att_n	Dungeon	NPE Station	4	LOITER	8	0	-	idle	0	0	0	180
-1100015	DUNGEON1	du1_npe_station_1	AREA	28	-12.75	29.01	17.80	0	1	an Exotic Flit	npe_flit_exotic_2_c_att_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100016	DUNGEON1	du1_npe_station_1	AREA	28	-33.90	29.01	0.78	0	1	an Exotic Flit	npe_flit_exotic_2_c_att_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100017	DUNGEON1	du1_npe_station_1	AREA	28	-39.42	31.01	46.76	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone_3_c_att_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100018	DUNGEON1	du1_npe_station_1	AREA	28	-49.88	31.01	42.27	0	1	Valley Scyk Ancient	npe_scykn_valley_ancient_5_c_agg_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100019	DUNGEON1	du1_npe_station_1	AREA	28	-56.82	31.01	35.29	0	1	a Valley Scyk Breeder	npe_scyk_valley_breeder_3_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100020	DUNGEON1	du1_npe_station_1	AREA	28	36.58	31.01	28.11	0	1	a Valley Scyk	npe_scyk_valley_1_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100021	DUNGEON1	du1_npe_station_1	AREA	28	22.31	31.01	43.97	0	1	a Valley Scyk	npe_scyk_valley_1_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100022	DUNGEON1	du1_npe_station_1	AREA	28	30.70	31.01	-34.27	0	1	a Valley Scyk	npe_scyk_valley_1_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100023	DUNGEON1	du1_npe_station_1	AREA	28	-51.21	31.01	-37.81	0	1	Alpha Flit	npe_flit_alpha_5_c_agg_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100024	DUNGEON1	du1_npe_station_1	AREA	28	19.55	31.01	-43.76	0	1	a Valley Scyk	npe_scyk_valley_1_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100025	DUNGEON1	du1_npe_station_1	AREA	28	-46.31	31.01	-46.53	0	1	an Exotic Flit Soldier	npe_flit_exotic_soldier_3_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100026	DUNGEON1	du1_npe_station_1	AREA	28	-59.62	31.01	-27.33	0	1	an Exotic Flit Soldier	npe_flit_exotic_soldier_3_c_agg_n	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
-1100027	DUNGEON1	du1_npe_station_1	AREA	28	5.56	31.01	47.37	0	1	Bodyguard	npe_bounty_guard_1_h_att_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100028	DUNGEON1	du1_npe_station_1	AREA	26	-14.96	-29.39	-47.58	0	1	a Hutt thug	npe_thug_01_1_h_att_n	Dungeon	NPE Station	2	LOITER	4	0	-	idle	0	0	0	180
-1100029	DUNGEON1	du1_npe_station_1	AREA	25	-37.50	-29.39	-27.64	47	1	Injured Technician	npe_injured_technician_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_dead_03	0	0	0	180
-1100030	DUNGEON1	du1_npe_station_1	AREA	25	-38.49	-29.39	-26.13	60	1	Car'das Guard	npe_cardas_guard_2_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100031	DUNGEON1	du1_npe_station_1	AREA	24	-12.43	-29.20	47.76	0	1	a Genesis Red Officer	npe_genesis_red_officer_3_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100032	DUNGEON1	du1_npe_station_1	AREA	24	-13.18	-29.20	54.01	0	1	Genesis Red	npe_genesis_red_crimelord_5_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100033	DUNGEON1	du1_npe_station_1	AREA	24	-17.75	-29.20	45.75	0	1	a Genesis Red Officer	npe_genesis_red_officer_3_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100034	DUNGEON1	du1_npe_station_1	AREA	23	-57.10	-31.05	18.30	0	1	a Black Sun Slicer	npe_slicer_3_h_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100035	DUNGEON1	du1_npe_station_1	AREA	22	-50.07	-31.03	-7.18	0	1	a Black Sun Slicer	npe_slicer_3_h_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100036	DUNGEON1	du1_npe_station_1	AREA	22	-68.68	-31.02	-6.74	0	1	a Black Sun Slicer	npe_slicer_3_h_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100037	DUNGEON1	du1_npe_station_1	AREA	22	-59.13	-31.03	7.15	0	1	a Master Level Slicer	npe_slicer_boss_5_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100038	DUNGEON1	du1_npe_station_1	AREA	22	-73.45	-30.99	-3.12	0	1	a Master Level Slicer	npe_slicer_boss_5_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100039	DUNGEON1	du1_npe_station_1	AREA	21	35.02	-29.20	48.74	0	1	a Hutt thug	npe_thug_03_3_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100040	DUNGEON1	du1_npe_station_1	AREA	21	53.98	-29.20	38.19	0	1	Hutt Boss	npe_thug_boss_5_h_agg_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100041	DUNGEON1	du1_npe_station_1	AREA	21	56.01	-29.20	65.84	0	1	a Hutt thug	npe_thug_01_1_h_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100042	DUNGEON1	du1_npe_station_1	AREA	21	84.42	-29.20	41.23	0	1	a Hutt thug	npe_thug_02_2_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100043	DUNGEON1	du1_npe_station_1	AREA	21	70.95	-29.20	28.96	0	1	a Hutt thug	npe_thug_03_3_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100044	DUNGEON1	du1_npe_station_1	AREA	21	47.06	-29.20	50.09	0	1	a Hutt thug	npe_thug_01_1_h_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100045	DUNGEON1	du1_npe_station_1	AREA	21	56.84	-29.20	16.20	0	1	a Hutt thug	npe_thug_02_2_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100046	DUNGEON1	du1_npe_station_1	AREA	21	50.50	-29.20	29.81	0	1	a Hutt thug	npe_thug_03_3_h_agg_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100047	DUNGEON1	du1_npe_station_1	AREA	20	40.35	-30.00	-29.96	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100048	DUNGEON1	du1_npe_station_1	AREA	20	32.85	-30.00	-42.05	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100049	DUNGEON1	du1_npe_station_1	AREA	20	52.47	-30.00	-27.52	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100050	DUNGEON1	du1_npe_station_1	AREA	20	67.95	-30.00	-43.98	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100051	DUNGEON1	du1_npe_station_1	AREA	20	50.03	-30.00	-44.78	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100052	DUNGEON1	du1_npe_station_1	AREA	20	42.62	-29.20	-38.39	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100053	DUNGEON1	du1_npe_station_1	AREA	20	58.43	-29.20	-35.19	0	1	a Bocatt	npe_bocatt_3_c_att_n	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
-1100054	DUNGEON1	du1_npe_station_1	AREA	18	24.12	-29.20	-22.91	23	1	Car'das Guard	npe_hurt_guard_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100055	DUNGEON1	du1_npe_station_1	AREA	17	-9.02	-29.20	-33.36	-25	1	TK-363	npe_tk363_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100056	DUNGEON1	du1_npe_station_1	AREA	16	-10.34	-29.20	31.02	0	1	a Genesis Red Cronie	npe_genesis_red_cronie_2_h_att_n	Dungeon	NPE Station	3	LOITER	4	0	-	idle	0	0	0	180
-1100057	DUNGEON1	du1_npe_station_1	AREA	15	-0.75	-31.00	-14.53	0	1	a malfunctioning inquiry droid	npe_crazy_droid_01_malfunc_inq_droid_2_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100058	DUNGEON1	du1_npe_station_1	AREA	15	-13.86	-31.00	4.97	0	1	a rewired server protocol droid	npe_crazy_droid_02_rewired_server_prot_2_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100059	DUNGEON1	du1_npe_station_1	AREA	15	10.29	-31.00	8.30	0	1	a rogue probot	npe_crazy_droid_03_rogue_probot_3_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100060	DUNGEON1	du1_npe_station_1	AREA	15	-14.33	-30.00	-14.08	0	1	a short-circuiting sentry droid	npe_crazy_droid_04_shortcircuit_sentry_3_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100061	DUNGEON1	du1_npe_station_1	AREA	15	-15.02	-30.00	12.76	0	1	a corrupted tracking droid	npe_crazy_droid_05_corrupt_tracking_4_d_agg_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100062	DUNGEON1	du1_npe_station_1	AREA	15	12.37	-30.00	15.38	0	1	a short-circuiting attack droid	npe_crazy_droid_06_shortcircuit_attack_5_d_agg_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100063	DUNGEON1	du1_npe_station_1	AREA	15	-4.78	-31.68	-3.70	0	1	an aggressive probe droid	npe_crazy_droid_07_aggr_probe_5_d_agg_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100064	DUNGEON1	du1_npe_station_1	AREA	15	11.68	-30.00	-13.89	0	1	a damaged MSE-6	npe_damaged_mouse_droid_1_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100065	DUNGEON1	du1_npe_station_1	AREA	15	16.82	-31.03	-0.25	0	1	a 7-PL Defender	npe_droid_7pl_defender_generator_2_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100066	DUNGEON1	du1_npe_station_1	AREA	15	7.06	-31.68	-4.31	0	1	the Construct's Guardian	npe_droid_construct_guardian_6_d_agg_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100067	DUNGEON1	du1_npe_station_1	AREA	15	-13.32	-31.00	-5.20	0	1	an ESPY E.R. Droid	npe_droid_espy_er_droid_3_d_att_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100068	DUNGEON1	du1_npe_station_1	AREA	15	-0.87	-31.00	13.38	0	1	an IT-4 Warning Droid	npe_droid_it4_warning_4_d_agg_n	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
-1100069	DUNGEON1	du1_npe_station_1	AREA	14	-22.08	0.76	-41.97	0	1	missing	npe_revived_1_100_h_inv_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100070	DUNGEON1	du1_npe_station_1	AREA	14	-17.60	0.76	-54.79	0	1	missing	npe_revived_2_100_h_inv_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100071	DUNGEON1	du1_npe_station_1	AREA	14	-15.68	0.77	-38.53	111	1	E-4LK	npe_dungeon_e4lk_medical_100_d_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100072	DUNGEON1	du1_npe_station_1	AREA	13	-40.34	0.75	-21.65	120	1	Raylen Finn	npe_scout_questgiver_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100073	DUNGEON1	du1_npe_station_1	AREA	13	-33.04	0.76	-32.07	-4	1	Loche Crestingsky	npe_marksman_questgiver_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100074	DUNGEON1	du1_npe_station_1	AREA	13	-35.77	0.61	-28.07	38	1	Sergeant Snopel (Commando)	npe_sergeant_snopel_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100075	DUNGEON1	du1_npe_station_1	AREA	13	-47.25	0.78	-35.40	50	1	missing	npe_unknown2_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100076	DUNGEON1	du1_npe_station_1	AREA	12	-43.41	-0.97	-7.42	0	1	Officer Dreryn	npe_brawler_officer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100077	DUNGEON1	du1_npe_station_1	AREA	12	-49.22	-1.17	-5.04	0	1	missing	npe_medic_questgiver_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100078	DUNGEON1	du1_npe_station_1	AREA	12	-45.11	-1.18	-0.08	88	1	Billingsly (Medic)	npe_billingsly_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100079	DUNGEON1	du1_npe_station_1	AREA	12	-51.07	-1.18	-4.70	0	1	Injured Mechanic	npe_injured_mechanic_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_meditate	0	0	0	180
-1100080	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-1.06	-6.01	-90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100081	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-0.98	-8.89	-90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100082	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-1.06	-5.91	90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100083	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-0.98	-8.87	90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100084	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-1.06	6.01	90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100085	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-0.98	8.82	90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100086	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-1.05	6.05	-90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100087	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-0.98	8.87	-90	1	patient	npe_hostage_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100088	DUNGEON1	du1_npe_station_1	PATROL	12	-55.18	-1.06	-5.96	0	1	Alisia (Station Nurse)	npe_alisia_100_h_inv_n	Dungeon	NPE Station	1	PATROL	0	999	column	idle	0	0	0	180
-1100089	DUNGEON1	du1_npe_station_1	AREA	11	-37.54	0.78	20.23	71	1	Security Director	npe_security_director_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100090	DUNGEON1	du1_npe_station_1	AREA	11	-36.05	0.73	25.11	119	1	Nos'lyn (Jedi)	npe_noslyn_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100091	DUNGEON1	du1_npe_station_1	AREA	11	-36.88	0.76	36.87	-146	1	Rydel Delan	npe_brawler_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100092	DUNGEON1	du1_npe_station_1	AREA	11	-48.95	0.77	28.47	102	1	a Car'das Officer	npe_cardas_guard_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100093	DUNGEON1	du1_npe_station_1	AREA	10	-8.81	0.76	43.22	-100	1	Inalda's Lieutenant (Job Requisitions)	npe_inaldras_lieutenant_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100094	DUNGEON1	du1_npe_station_1	AREA	10	-22.68	0.78	40.45	0	1	Garek	npe_garek_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100095	DUNGEON1	du1_npe_station_1	AREA	10	-13.91	0.61	44.07	161	1	Antom Moria (Officer)	npe_officer_trainer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100096	DUNGEON1	du1_npe_station_1	AREA	10	-16.40	0.77	55.69	-112	1	Inaldra	npe_inaldra_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100097	DUNGEON1	du1_npe_station_1	AREA	9	90.85	0.80	-18.05	-55	1	R2-D2	npe_r2_d2_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100098	DUNGEON1	du1_npe_station_1	AREA	9	89.88	0.80	-17.31	127	1	Jolka	npe_jolka_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100099	DUNGEON1	du1_npe_station_1	AREA	8	55.16	0.80	-42.92	-49	1	Chewbacca	npe_chewbacca_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100100	DUNGEON1	du1_npe_station_1	AREA	8	31.70	0.80	-33.50	63	1	Yawse Felsiy (Collector)	npe_collector_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100101	DUNGEON1	du1_npe_station_1	AREA	8	44.25	0.80	-26.87	-81	1	Han Solo	npe_han_solo_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100102	DUNGEON1	du1_npe_station_1	AREA	8	37.94	0.80	-37.18	19	1	Raine Taske (Trader)	npe_raine_taske_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100103	DUNGEON1	du1_npe_station_1	AREA	8	37.07	0.80	-36.79	30	1	Veteran Explorer	npe_veteran_explorer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100104	DUNGEON1	du1_npe_station_1	AREA	8	45.46	0.80	-16.52	-147	1	a traveller	traveller_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100105	DUNGEON1	du1_npe_station_1	AREA	7	94.31	0.80	19.65	-62	1	Aleas Rans'ery (Ace Car'das Pilot)	npe_pilot_medium_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100106	DUNGEON1	du1_npe_station_1	AREA	7	89.14	0.80	15.92	-55	1	Laetin A'shera (Trained Car'das Pilot)	npe_pilot_easy_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100107	DUNGEON1	du1_npe_station_1	AREA	7	99.41	0.80	26.88	-126	1	an Imperial officer	imp_officer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100108	DUNGEON1	du1_npe_station_1	AREA	7	91.74	0.80	17.78	-47	1	Dartas Pytin (Elite Car'das Pilot)	npe_pilot_hard_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100109	DUNGEON1	du1_npe_station_1	AREA	6	42.31	0.80	28.00	-9	1	Serissu (Rookie Pilot Trainer)	npe_pilot_train_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100110	DUNGEON1	du1_npe_station_1	AREA	6	36.15	0.80	37.54	124	1	Deavyn Gils	npe_deavyn_gils_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100111	DUNGEON1	du1_npe_station_1	AREA	6	45.55	0.80	12.37	9	1	Adery Shrial	npe_adery_shrial_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100112	DUNGEON1	du1_npe_station_1	AREA	6	57.09	0.90	21.91	-36	1	Head Mechanic	npe_head_mechanic_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100113	DUNGEON1	du1_npe_station_1	AREA	6	51.85	0.90	46.98	129	1	a Car'das Pilot	npe_cardas_pilot_i_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100114	DUNGEON1	du1_npe_station_1	AREA	6	77.32	0.80	44.27	-127	1	a Car'das Pilot	npe_cardas_pilot_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100115	DUNGEON1	du1_npe_station_1	AREA	6	67.17	0.80	57.14	145	1	a Car'das Pilot	npe_cardas_pilot_ii_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100116	DUNGEON1	du1_npe_station_1	AREA	5	29.97	0.80	17.69	-71	1	Delo (Travel Agent)	npe_brochure_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100117	DUNGEON1	du1_npe_station_1	PATROL	4	33.65	-0.99	-0.14	0	1	Car'das Guard	npe_hurt_guard_100_h_inv_n	Dungeon	NPE Station	1	PATROL	0	999	column	idle	0	0	0	180
-1100118	DUNGEON1	du1_npe_station_1	AREA	4	25.72	0.80	-23.28	-90	1	a Junk Dealer	junk_dealer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100119	DUNGEON1	du1_npe_station_1	AREA	3	-15.01	0.80	-31.40	-161	1	Idau	npe_idau_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100120	DUNGEON1	du1_npe_station_1	AREA	2	-32.56	0.80	11.44	106	1	a Junk Dealer	junk_dealer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100121	DUNGEON1	du1_npe_station_1	AREA	1	2.46	-0.50	2.44	16	1	Tiarsis (Cantina Owner)	npe_brawler_tiasris_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100122	DUNGEON1	du1_npe_station_1	AREA	1	8.08	-0.50	2.00	79	1	Lercer Gaia (Spy)	npe_spy_trainer_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100123	DUNGEON1	du1_npe_station_1	AREA	1	13.48	0.00	14.25	-136	1	Mako	nova_orion_band_member_03_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_2	0	0	0	180
-1100124	DUNGEON1	du1_npe_station_1	AREA	1	17.12	0.00	8.37	-113	1	Alisia	nova_orion_band_member_04_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_1	0	0	0	180
-1100125	DUNGEON1	du1_npe_station_1	AREA	1	8.76	0.00	17.26	-160	1	Mestral	nova_orion_band_member_05_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_3	0	0	0	180
-1100126	DUNGEON1	du1_npe_station_1	AREA	1	-8.14	0.00	18.36	126	1	Agent Falrey	npe_imp_agent_questgiver_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100127	DUNGEON1	du1_npe_station_1	AREA	1	7.90	-0.50	6.17	31	1	Mira T'rani (Entertainer)	npe_mira_trani_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
-1100128	DUNGEON1	du1_npe_station_1	AREA	1	18.87	0.00	-5.06	-105	1	Anvar Keyis	npe_anvar_keyis_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100129	DUNGEON1	du1_npe_station_1	AREA	1	20.36	0.00	-11.68	0	1	Frelka (Battered Explorer)	npe_emergence_helper_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	angry	0	0	0	180
-1100130	DUNGEON1	du1_npe_station_1	AREA	1	0.98	-0.50	-4.00	-177	1	Bartender	npe_bartender_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100131	DUNGEON1	du1_npe_station_1	AREA	1	-10.05	-0.50	-0.48	0	1	Irving	npe_irving_100_h_inv_n	Dungeon	NPE Station	1	LOITER	2	0	-	npc_standing_drinking	999	0	0	180
-1100132	DUNGEON1	du1_npe_station_1	AREA	1	-18.45	0.00	9.15	152	1	Ryzer (Cantina Bully)	npe_cantina_bully_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100133	DUNGEON1	du1_npe_station_1	AREA	1	-6.93	0.00	-18.24	28	1	Trace	npe_trace_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100134	DUNGEON1	du1_npe_station_1	AREA	1	-3.71	-1.00	-12.48	0	1	missing	npe_sullustan_m_100_h_inv_n	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
-1100135	DUNGEON1	du1_npe_station_1	AREA	1	12.40	0.00	-18.48	0	1	missing	npe_old_human_m_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100136	DUNGEON1	du1_npe_station_1	AREA	1	-0.35	-0.50	7.00	0	1	Ysanna	npe_ysanna_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100137	DUNGEON1	du1_npe_station_1	AREA	1	-15.71	0.00	-15.77	0	1	a Car'das Officer	npe_cardas_guard_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100138	DUNGEON1	du1_npe_station_1	AREA	1	6.06	0.00	-22.68	0	1	Boba Fett	boba_fett_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
-1100139	DUNGEON1	du1_npe_station_1	AREA	1	18.85	0.00	6.05	-111	1	Alitra	nova_orion_band_member_02_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
-1100140	DUNGEON1	du1_npe_station_1	AREA	1	-21.41	0.00	-5.02	98	1	Jake Felan (Smuggler)	npe_jake_felan_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100141	DUNGEON1	du1_npe_station_1	AREA	1	-12.85	0.00	19.10	-155	1	missing	npe_devaronian_m_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100142	DUNGEON1	du1_npe_station_1	AREA	1	7.22	-0.50	-0.35	-92	1	missing	npe_old_zabrak_f_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
-1100143	DUNGEON1	du1_npe_station_1	AREA	1	10.24	-0.50	-0.15	-178	1	Mot Draken	npe_mot_draken_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	conversation	0	0	0	180
-1100144	DUNGEON1	du1_npe_station_1	AREA	1	10.19	-0.50	-1.31	1	1	Bun'Del	npe_bundel_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	conversation	0	0	0	180
-1100145	DUNGEON1	du1_npe_station_1	AREA	1	6.20	0.00	18.51	-163	1	O'choa Detera	nova_orion_band_member_01_100_h_inv_n	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+du1_npe_sta_001	DUNGEON1	du1_npe_station_1	AREA	1	6.06	0.00	-22.68	0	1	Boba Fett	boba_fett	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_002	DUNGEON1	du1_npe_station_1	AREA	7	99.41	0.80	26.88	-126	1	an Imperial officer	imp_officer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_003	DUNGEON1	du1_npe_station_1	AREA	4	25.72	0.80	-23.28	-90	1	a Junk Dealer	junk_dealer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_004	DUNGEON1	du1_npe_station_1	AREA	2	-32.56	0.80	11.44	106	1	a Junk Dealer	junk_dealer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_005	DUNGEON1	du1_npe_station_1	AREA	1	6.20	0.00	18.51	-163	1	O'choa Detera	nova_orion_band_member_01	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
+du1_npe_sta_006	DUNGEON1	du1_npe_station_1	AREA	1	18.85	0.00	6.05	-111	1	Alitra	nova_orion_band_member_02	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
+du1_npe_sta_007	DUNGEON1	du1_npe_station_1	AREA	1	13.48	0.00	14.25	-136	1	Mako	nova_orion_band_member_03	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_2	0	0	0	180
+du1_npe_sta_008	DUNGEON1	du1_npe_station_1	AREA	1	17.12	0.00	8.37	-113	1	Alisia	nova_orion_band_member_04	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_1	0	0	0	180
+du1_npe_sta_009	DUNGEON1	du1_npe_station_1	AREA	1	8.76	0.00	17.26	-160	1	Mestral	nova_orion_band_member_05	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_music_3	0	0	0	180
+du1_npe_sta_010	DUNGEON1	du1_npe_station_1	AREA	6	45.55	0.80	12.37	9	1	Adery Shrial	npe_adery_shrial	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_011	DUNGEON1	du1_npe_station_1	PATROL	12	-55.18	-1.06	-5.96	0	1	Alisia (Station Nurse)	npe_alisia	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	PATROL	0	999	column	idle	0	0	0	180
+du1_npe_sta_012	DUNGEON1	du1_npe_station_1	AREA	1	18.87	0.00	-5.06	-105	1	Anvar Keyis	npe_anvar_keyis	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_013	DUNGEON1	du1_npe_station_1	AREA	1	0.98	-0.50	-4.00	-177	1	Bartender	npe_bartender	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_014	DUNGEON1	du1_npe_station_1	AREA	12	-45.11	-1.18	-0.08	88	1	Billingsly (Medic)	npe_billingsly	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_015	DUNGEON1	du1_npe_station_1	AREA	20	40.35	-30.00	-29.96	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_016	DUNGEON1	du1_npe_station_1	AREA	20	32.85	-30.00	-42.05	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_017	DUNGEON1	du1_npe_station_1	AREA	20	52.47	-30.00	-27.52	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_018	DUNGEON1	du1_npe_station_1	AREA	20	67.95	-30.00	-43.98	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_019	DUNGEON1	du1_npe_station_1	AREA	20	50.03	-30.00	-44.78	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_020	DUNGEON1	du1_npe_station_1	AREA	20	42.62	-29.20	-38.39	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_021	DUNGEON1	du1_npe_station_1	AREA	20	58.43	-29.20	-35.19	0	1	a Bocatt	npe_bocatt	ATTACKABLE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_022	DUNGEON1	du1_npe_station_1	AREA	28	3.64	31.01	47.66	0	1	Fidaval	npe_bounty	ATTACKABLE	B	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_023	DUNGEON1	du1_npe_station_1	AREA	30	-103.90	28.98	-4.68	0	1	Arslynd	npe_bounty_2	ATTACKABLE	B	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_024	DUNGEON1	du1_npe_station_1	AREA	30	-103.74	28.98	-2.35	0	1	Bodyguard	npe_bounty_guard	ATTACKABLE	E	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_025	DUNGEON1	du1_npe_station_1	AREA	28	5.56	31.01	47.37	0	1	Bodyguard	npe_bounty_guard	ATTACKABLE	E	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_026	DUNGEON1	du1_npe_station_1	AREA	11	-36.88	0.76	36.87	-146	1	Rydel Delan	npe_brawler	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_027	DUNGEON1	du1_npe_station_1	AREA	12	-43.41	-0.97	-7.42	0	1	Officer Dreryn	npe_brawler_officer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_028	DUNGEON1	du1_npe_station_1	AREA	1	2.46	-0.50	2.44	16	1	Tiarsis (Cantina Owner)	npe_brawler_tiasris	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_029	DUNGEON1	du1_npe_station_1	AREA	5	29.97	0.80	17.69	-71	1	Delo (Travel Agent)	npe_brochure	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_030	DUNGEON1	du1_npe_station_1	AREA	1	10.19	-0.50	-1.31	1	1	Bun'Del	npe_bundel	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	conversation	0	0	0	180
+du1_npe_sta_031	DUNGEON1	du1_npe_station_1	AREA	1	-18.45	0.00	9.15	152	1	Ryzer (Cantina Bully)	npe_cantina_bully	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_032	DUNGEON1	du1_npe_station_1	AREA	11	-48.95	0.77	28.47	102	1	a Car'das Officer	npe_cardas_guard	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_033	DUNGEON1	du1_npe_station_1	AREA	1	-15.71	0.00	-15.77	0	1	a Car'das Officer	npe_cardas_guard	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_034	DUNGEON1	du1_npe_station_1	AREA	25	-38.49	-29.39	-26.13	60	1	Car'das Guard	npe_cardas_guard_2	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_035	DUNGEON1	du1_npe_station_1	AREA	6	77.32	0.80	44.27	-127	1	a Car'das Pilot	npe_cardas_pilot	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_036	DUNGEON1	du1_npe_station_1	AREA	6	51.85	0.90	46.98	129	1	a Car'das Pilot	npe_cardas_pilot_i	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_037	DUNGEON1	du1_npe_station_1	AREA	6	67.17	0.80	57.14	145	1	a Car'das Pilot	npe_cardas_pilot_ii	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_038	DUNGEON1	du1_npe_station_1	AREA	8	55.16	0.80	-42.92	-49	1	Chewbacca	npe_chewbacca	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_039	DUNGEON1	du1_npe_station_1	AREA	8	31.70	0.80	-33.50	63	1	Yawse Felsiy (Collector)	npe_collector	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_040	DUNGEON1	du1_npe_station_1	AREA	28	-24.58	31.01	-40.57	0	1	Terry	npe_commando	ATTACKABLE	B	2	4	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_041	DUNGEON1	du1_npe_station_1	AREA	15	-0.75	-31.00	-14.53	0	1	a malfunctioning inquiry droid	npe_crazy_droid_01_malfunc_inq_droid	ATTACKABLE	N	2	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_042	DUNGEON1	du1_npe_station_1	AREA	15	-13.86	-31.00	4.97	0	1	a rewired server protocol droid	npe_crazy_droid_02_rewired_server_prot	ATTACKABLE	N	2	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_043	DUNGEON1	du1_npe_station_1	AREA	15	10.29	-31.00	8.30	0	1	a rogue probot	npe_crazy_droid_03_rogue_probot	ATTACKABLE	N	3	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_044	DUNGEON1	du1_npe_station_1	AREA	15	-14.33	-30.00	-14.08	0	1	a short-circuiting sentry droid	npe_crazy_droid_04_shortcircuit_sentry	ATTACKABLE	N	3	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_045	DUNGEON1	du1_npe_station_1	AREA	15	-15.02	-30.00	12.76	0	1	a corrupted tracking droid	npe_crazy_droid_05_corrupt_tracking	AGGRESSIVE	N	4	5	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_046	DUNGEON1	du1_npe_station_1	AREA	15	12.37	-30.00	15.38	0	1	a short-circuiting attack droid	npe_crazy_droid_06_shortcircuit_attack	AGGRESSIVE	N	4	5	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_047	DUNGEON1	du1_npe_station_1	AREA	15	-4.78	-31.68	-3.70	0	1	an aggressive probe droid	npe_crazy_droid_07_aggr_probe	AGGRESSIVE	N	4	5	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_048	DUNGEON1	du1_npe_station_1	AREA	15	11.68	-30.00	-13.89	0	1	a damaged MSE-6	npe_damaged_mouse_droid	ATTACKABLE	N	2	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_049	DUNGEON1	du1_npe_station_1	AREA	6	36.15	0.80	37.54	124	1	Deavyn Gils	npe_deavyn_gils	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_050	DUNGEON1	du1_npe_station_1	AREA	1	-12.85	0.00	19.10	-155	1	missing	npe_devaronian_m	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_051	DUNGEON1	du1_npe_station_1	AREA	15	16.82	-31.03	-0.25	0	1	a 7-PL Defender	npe_droid_7pl_defender_generator	ATTACKABLE	N	3	4	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_052	DUNGEON1	du1_npe_station_1	AREA	15	7.06	-31.68	-4.31	0	1	the Construct's Guardian	npe_droid_construct_guardian	ATTACKABLE	N	3	6	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_053	DUNGEON1	du1_npe_station_1	AREA	15	-13.32	-31.00	-5.20	0	1	an ESPY E.R. Droid	npe_droid_espy_er_droid	ATTACKABLE	N	3	5	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_054	DUNGEON1	du1_npe_station_1	AREA	15	-0.87	-31.00	13.38	0	1	an IT-4 Warning Droid	npe_droid_it4_warning	ATTACKABLE	N	3	5	Dungeon	NPE Station	2	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_055	DUNGEON1	du1_npe_station_1	AREA	14	-15.68	0.77	-38.53	111	1	E-4LK	npe_dungeon_e4lk_medical	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_056	DUNGEON1	du1_npe_station_1	AREA	1	20.36	0.00	-11.68	0	1	Frelka (Battered Explorer)	npe_emergence_helper	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	angry	0	0	0	180
+du1_npe_sta_057	DUNGEON1	du1_npe_station_1	AREA	28	-51.21	31.01	-37.81	0	1	Alpha Flit	npe_flit_alpha	AGGRESSIVE	B	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_058	DUNGEON1	du1_npe_station_1	AREA	28	6.06	29.01	-8.02	0	1	an Exotic Flit	npe_flit_exotic	ATTACKABLE	N	3	5	Dungeon	NPE Station	4	LOITER	8	0	-	idle	0	0	0	180
+du1_npe_sta_059	DUNGEON1	du1_npe_station_1	AREA	28	-12.75	29.01	17.80	0	1	an Exotic Flit	npe_flit_exotic	ATTACKABLE	N	3	5	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_060	DUNGEON1	du1_npe_station_1	AREA	28	-33.90	29.01	0.78	0	1	an Exotic Flit	npe_flit_exotic	ATTACKABLE	N	3	5	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_061	DUNGEON1	du1_npe_station_1	AREA	28	-46.31	31.01	-46.53	0	1	an Exotic Flit Soldier	npe_flit_exotic_soldier	AGGRESSIVE	E	3	5	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_062	DUNGEON1	du1_npe_station_1	AREA	28	-59.62	31.01	-27.33	0	1	an Exotic Flit Soldier	npe_flit_exotic_soldier	AGGRESSIVE	E	3	5	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_063	DUNGEON1	du1_npe_station_1	AREA	10	-22.68	0.78	40.45	0	1	Garek	npe_garek	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_064	DUNGEON1	du1_npe_station_1	AREA	24	-13.18	-29.20	54.01	0	1	Genesis Red	npe_genesis_red_crimelord	AGGRESSIVE	B	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_065	DUNGEON1	du1_npe_station_1	AREA	16	-10.34	-29.20	31.02	0	1	a Genesis Red Cronie	npe_genesis_red_cronie	AGGRESSIVE	N	3	5	Dungeon	NPE Station	3	LOITER	4	0	-	idle	0	0	0	180
+du1_npe_sta_066	DUNGEON1	du1_npe_station_1	AREA	24	-12.43	-29.20	47.76	0	1	a Genesis Red Officer	npe_genesis_red_officer	AGGRESSIVE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_067	DUNGEON1	du1_npe_station_1	AREA	24	-17.75	-29.20	45.75	0	1	a Genesis Red Officer	npe_genesis_red_officer	AGGRESSIVE	N	3	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_068	DUNGEON1	du1_npe_station_1	AREA	8	44.25	0.80	-26.87	-81	1	Han Solo	npe_han_solo	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_069	DUNGEON1	du1_npe_station_1	AREA	6	57.09	0.90	21.91	-36	1	Head Mechanic	npe_head_mechanic	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_070	DUNGEON1	du1_npe_station_1	AREA	28	43.45	31.01	-10.78	0	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_071	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-1.06	-6.01	-90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_072	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-0.98	-8.89	-90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_073	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-1.06	-5.91	90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_074	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-0.98	-8.87	90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_075	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-1.06	6.01	90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_076	DUNGEON1	du1_npe_station_1	AREA	12	-60.40	-0.98	8.82	90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_077	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-1.05	6.05	-90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_078	DUNGEON1	du1_npe_station_1	AREA	12	-54.15	-0.98	8.87	-90	1	patient	npe_hostage	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_079	DUNGEON1	du1_npe_station_1	AREA	18	24.12	-29.20	-22.91	23	1	Car'das Guard	npe_hurt_guard	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_080	DUNGEON1	du1_npe_station_1	PATROL	4	33.65	-0.99	-0.14	0	1	Car'das Guard	npe_hurt_guard	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	PATROL	0	999	column	idle	0	0	0	180
+du1_npe_sta_081	DUNGEON1	du1_npe_station_1	AREA	3	-15.01	0.80	-31.40	-161	1	Idau	npe_idau	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_082	DUNGEON1	du1_npe_station_1	AREA	1	-8.14	0.00	18.36	126	1	Agent Falrey	npe_imp_agent_questgiver	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_083	DUNGEON1	du1_npe_station_1	AREA	10	-16.40	0.77	55.69	-112	1	Inaldra	npe_inaldra	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_084	DUNGEON1	du1_npe_station_1	AREA	10	-8.81	0.76	43.22	-100	1	Inalda's Lieutenant (Job Requisitions)	npe_inaldras_lieutenant	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_085	DUNGEON1	du1_npe_station_1	AREA	12	-51.07	-1.18	-4.70	0	1	Injured Mechanic	npe_injured_mechanic	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_meditate	0	0	0	180
+du1_npe_sta_086	DUNGEON1	du1_npe_station_1	AREA	25	-37.50	-29.39	-27.64	47	1	Injured Technician	npe_injured_technician	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_dead_03	0	0	0	180
+du1_npe_sta_087	DUNGEON1	du1_npe_station_1	AREA	1	-10.05	-0.50	-0.48	0	1	Irving	npe_irving	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	LOITER	2	0	-	npc_standing_drinking	999	0	0	180
+du1_npe_sta_088	DUNGEON1	du1_npe_station_1	AREA	1	-21.41	0.00	-5.02	98	1	Jake Felan (Smuggler)	npe_jake_felan	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_089	DUNGEON1	du1_npe_station_1	AREA	9	89.88	0.80	-17.31	127	1	Jolka	npe_jolka	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_090	DUNGEON1	du1_npe_station_1	AREA	13	-33.04	0.76	-32.07	-4	1	Loche Crestingsky	npe_marksman_questgiver	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_091	DUNGEON1	du1_npe_station_1	AREA	12	-49.22	-1.17	-5.04	0	1	missing	npe_medic_questgiver	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_092	DUNGEON1	du1_npe_station_1	AREA	1	7.90	-0.50	6.17	31	1	Mira T'rani (Entertainer)	npe_mira_trani	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	themepark_oola	0	0	0	180
+du1_npe_sta_093	DUNGEON1	du1_npe_station_1	AREA	29	-11.18	29.01	-56.86	0	1	a Giant Tanc Mite	npe_mite_giant_tanc	ATTACKABLE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_094	DUNGEON1	du1_npe_station_1	AREA	28	-10.28	29.01	-30.24	0	1	a Giant Tanc Mite	npe_mite_giant_tanc	ATTACKABLE	N	2	4	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_095	DUNGEON1	du1_npe_station_1	AREA	28	-13.93	29.01	-40.84	0	1	a Giant Tanc Mite	npe_mite_giant_tanc	ATTACKABLE	N	2	4	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_096	DUNGEON1	du1_npe_station_1	AREA	29	-5.81	28.96	-68.97	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone	ATTACKABLE	N	3	4	Dungeon	NPE Station	2	LOITER	3	0	-	idle	0	0	0	180
+du1_npe_sta_097	DUNGEON1	du1_npe_station_1	AREA	29	-19.24	28.97	-68.37	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone	ATTACKABLE	N	3	4	Dungeon	NPE Station	2	LOITER	3	0	-	idle	0	0	0	180
+du1_npe_sta_098	DUNGEON1	du1_npe_station_1	AREA	28	-39.42	31.01	46.76	0	1	a Giant Tanc Mite Drone	npe_mite_giant_tanc_drone	ATTACKABLE	N	3	4	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_099	DUNGEON1	du1_npe_station_1	AREA	29	-11.54	28.94	-88.28	0	1	Giant Tanc Mite Queen	npe_mite_giant_tanc_queen	AGGRESSIVE	B	3	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_100	DUNGEON1	du1_npe_station_1	AREA	1	10.24	-0.50	-0.15	-178	1	Mot Draken	npe_mot_draken	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	conversation	0	0	0	180
+du1_npe_sta_101	DUNGEON1	du1_npe_station_1	AREA	11	-36.05	0.73	25.11	119	1	Nos'lyn (Jedi)	npe_noslyn	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_102	DUNGEON1	du1_npe_station_1	AREA	10	-13.91	0.61	44.07	161	1	Antom Moria (Officer)	npe_officer_trainer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_103	DUNGEON1	du1_npe_station_1	AREA	1	12.40	0.00	-18.48	0	1	missing	npe_old_human_m	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_104	DUNGEON1	du1_npe_station_1	AREA	1	7.22	-0.50	-0.35	-92	1	missing	npe_old_zabrak_f	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	180
+du1_npe_sta_105	DUNGEON1	du1_npe_station_1	AREA	7	89.14	0.80	15.92	-55	1	Laetin A'shera (Trained Car'das Pilot)	npe_pilot_easy	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_106	DUNGEON1	du1_npe_station_1	AREA	7	91.74	0.80	17.78	-47	1	Dartas Pytin (Elite Car'das Pilot)	npe_pilot_hard	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_107	DUNGEON1	du1_npe_station_1	AREA	7	94.31	0.80	19.65	-62	1	Aleas Rans'ery (Ace Car'das Pilot)	npe_pilot_medium	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_108	DUNGEON1	du1_npe_station_1	AREA	6	42.31	0.80	28.00	-9	1	Serissu (Rookie Pilot Trainer)	npe_pilot_train	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_109	DUNGEON1	du1_npe_station_1	AREA	9	90.85	0.80	-18.05	-55	1	R2-D2	npe_r2_d2	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_110	DUNGEON1	du1_npe_station_1	AREA	8	37.94	0.80	-37.18	19	1	Raine Taske (Trader)	npe_raine_taske	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_111	DUNGEON1	du1_npe_station_1	AREA	14	-22.08	0.76	-41.97	0	1	missing	npe_revived_1	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_112	DUNGEON1	du1_npe_station_1	AREA	14	-17.60	0.76	-54.79	0	1	missing	npe_revived_2	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_113	DUNGEON1	du1_npe_station_1	AREA	13	-40.34	0.75	-21.65	120	1	Raylen Finn	npe_scout_questgiver	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_114	DUNGEON1	du1_npe_station_1	AREA	28	36.58	31.01	28.11	0	1	a Valley Scyk	npe_scyk_valley	AGGRESSIVE	N	1	2	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_115	DUNGEON1	du1_npe_station_1	AREA	28	22.31	31.01	43.97	0	1	a Valley Scyk	npe_scyk_valley	AGGRESSIVE	N	1	2	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_116	DUNGEON1	du1_npe_station_1	AREA	28	30.70	31.01	-34.27	0	1	a Valley Scyk	npe_scyk_valley	AGGRESSIVE	N	1	2	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_117	DUNGEON1	du1_npe_station_1	AREA	28	19.55	31.01	-43.76	0	1	a Valley Scyk	npe_scyk_valley	AGGRESSIVE	N	1	2	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_118	DUNGEON1	du1_npe_station_1	AREA	28	-56.82	31.01	35.29	0	1	a Valley Scyk Breeder	npe_scyk_valley_breeder	AGGRESSIVE	E	2	3	Dungeon	NPE Station	3	LOITER	6	0	-	idle	0	0	0	180
+du1_npe_sta_119	DUNGEON1	du1_npe_station_1	AREA	28	-49.88	31.01	42.27	0	1	Valley Scyk Ancient	npe_scykn_valley_ancient	AGGRESSIVE	E	4	5	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_120	DUNGEON1	du1_npe_station_1	AREA	11	-37.54	0.78	20.23	71	1	Security Director	npe_security_director	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_121	DUNGEON1	du1_npe_station_1	AREA	13	-35.77	0.61	-28.07	38	1	Sergeant Snopel (Commando)	npe_sergeant_snopel	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_122	DUNGEON1	du1_npe_station_1	AREA	23	-57.10	-31.05	18.30	0	1	a Black Sun Slicer	npe_slicer	ATTACKABLE	N	2	3	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_123	DUNGEON1	du1_npe_station_1	AREA	22	-50.07	-31.03	-7.18	0	1	a Black Sun Slicer	npe_slicer	ATTACKABLE	N	2	3	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_124	DUNGEON1	du1_npe_station_1	AREA	22	-68.68	-31.02	-6.74	0	1	a Black Sun Slicer	npe_slicer	ATTACKABLE	N	2	3	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_125	DUNGEON1	du1_npe_station_1	AREA	22	-59.13	-31.03	7.15	0	1	a Master Level Slicer	npe_slicer_boss	AGGRESSIVE	B	4	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_126	DUNGEON1	du1_npe_station_1	AREA	22	-73.45	-30.99	-3.12	0	1	a Master Level Slicer	npe_slicer_boss	AGGRESSIVE	B	4	5	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_127	DUNGEON1	du1_npe_station_1	AREA	1	8.08	-0.50	2.00	79	1	Lercer Gaia (Spy)	npe_spy_trainer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_128	DUNGEON1	du1_npe_station_1	AREA	1	-3.71	-1.00	-12.48	0	1	missing	npe_sullustan_m	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_129	DUNGEON1	du1_npe_station_1	AREA	26	-14.96	-29.39	-47.58	0	1	a Hutt thug	npe_thug_01	ATTACKABLE	N	1	3	Dungeon	NPE Station	2	LOITER	4	0	-	idle	0	0	0	180
+du1_npe_sta_130	DUNGEON1	du1_npe_station_1	AREA	21	56.01	-29.20	65.84	0	1	a Hutt thug	npe_thug_01	ATTACKABLE	N	1	3	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_131	DUNGEON1	du1_npe_station_1	AREA	21	47.06	-29.20	50.09	0	1	a Hutt thug	npe_thug_01	ATTACKABLE	N	1	3	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_132	DUNGEON1	du1_npe_station_1	AREA	21	84.42	-29.20	41.23	0	1	a Hutt thug	npe_thug_02	AGGRESSIVE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_133	DUNGEON1	du1_npe_station_1	AREA	21	56.84	-29.20	16.20	0	1	a Hutt thug	npe_thug_02	AGGRESSIVE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_134	DUNGEON1	du1_npe_station_1	AREA	21	35.02	-29.20	48.74	0	1	a Hutt thug	npe_thug_03	AGGRESSIVE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_135	DUNGEON1	du1_npe_station_1	AREA	21	70.95	-29.20	28.96	0	1	a Hutt thug	npe_thug_03	AGGRESSIVE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_136	DUNGEON1	du1_npe_station_1	AREA	21	50.50	-29.20	29.81	0	1	a Hutt thug	npe_thug_03	AGGRESSIVE	N	2	4	Dungeon	NPE Station	1	LOITER	2	0	-	idle	0	0	0	180
+du1_npe_sta_137	DUNGEON1	du1_npe_station_1	AREA	21	53.98	-29.20	38.19	0	1	Hutt Boss	npe_thug_boss	AGGRESSIVE	B	4	6	Dungeon	NPE Station	1	TURN	0	0	-	idle	0	0	0	180
+du1_npe_sta_138	DUNGEON1	du1_npe_station_1	AREA	17	-9.02	-29.20	-33.36	-25	1	TK-363	npe_tk363	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_139	DUNGEON1	du1_npe_station_1	AREA	1	-6.93	0.00	-18.24	28	1	Trace	npe_trace	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_140	DUNGEON1	du1_npe_station_1	AREA	13	-47.25	0.78	-35.40	50	1	missing	npe_unknown2	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_141	DUNGEON1	du1_npe_station_1	AREA	8	37.07	0.80	-36.79	30	1	Veteran Explorer	npe_veteran_explorer	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_142	DUNGEON1	du1_npe_station_1	AREA	1	-0.35	-0.50	7.00	0	1	Ysanna	npe_ysanna	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180
+du1_npe_sta_143	DUNGEON1	du1_npe_station_1	AREA	8	45.46	0.80	-16.52	-147	1	a traveller	traveller	INVULNERABLE	N	100	100	Dungeon	NPE Station	1	IDLE	0	0	-	idle	0	0	0	180

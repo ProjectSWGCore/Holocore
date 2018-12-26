@@ -39,9 +39,14 @@ public class AISchedulingService extends Service {
 	
 	@IntentHandler
 	private void handleStartNpcCombatIntent(StartNpcCombatIntent snci) {
-		AIObject obj = snci.getObject();
-		NpcCombatMode mode = (NpcCombatMode) modes.compute(obj, this::computeCombatMode);
-		mode.addTargets(snci.getTargets());
+		modes.compute(snci.getObject(), (o, prev) -> {
+			if (prev instanceof NpcCombatMode)
+				return prev;
+			NpcCombatMode mode = new NpcCombatMode(o);
+			mode.addTargets(snci.getTargets());
+			start(o, mode);
+			return mode;
+		});
 	}
 	
 	private void start(@NotNull AIObject obj, @Nullable NpcMode mode) {
@@ -58,14 +63,6 @@ public class AISchedulingService extends Service {
 		
 		obj.setActiveMode(null);
 		mode.onModeEnd();
-	}
-	
-	private NpcMode computeCombatMode(AIObject obj, NpcMode prev) {
-		if (prev instanceof NpcCombatMode)
-			return prev;
-		NpcCombatMode mode = new NpcCombatMode(obj);
-		start(obj, mode);
-		return mode;
 	}
 	
 }

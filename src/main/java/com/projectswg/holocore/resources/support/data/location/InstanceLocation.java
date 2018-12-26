@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.data.location;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;
@@ -167,6 +166,8 @@ public class InstanceLocation implements Persistable {
 		SWGObject parent = self.getSuperParent();
 		if (parent == null)
 			return location;
+		if (self.getSlotArrangement() != -1)
+			return parent.getWorldLocation();
 		return Location.builder(location).translateLocation(parent.getLocation()).setTerrain(parent.getTerrain()).build();
 	}
 	

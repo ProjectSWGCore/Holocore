@@ -27,49 +27,83 @@
 
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Default set of permissions that allows anyone to view or enter the container. These permissions are used
  * for every new object.
  * @author Waverunner
  */
-class DefaultPermissions extends ContainerPermissions {
+public class DefaultPermissions implements ContainerPermissions {
 	
+	private static final DefaultPermissions PERMISSIONS = new DefaultPermissions();
+	
+	DefaultPermissions() {
+		
+	}
+	
+	@NotNull
 	@Override
-	public boolean canView(SWGObject requester, SWGObject container) {
-		return true;
+	public ContainerPermissionType getType() {
+		return ContainerPermissionType.DEFAULT;
 	}
 	
 	@Override
-	public boolean canEnter(SWGObject requester, SWGObject container) {
-		return true;
-	}
-	
-	@Override
-	public boolean canRemove(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
+	public boolean canView(@NotNull CreatureObject requester, @NotNull SWGObject container) {
+		if (requester.getOwner() == container.getOwner())
 			return true;
-		if (container.getOwner() == null)
-			return false;
-		return requester.getOwner().equals(container.getOwner());
+		SWGObject containerParent = container.getParent();
+		return requester.isObserveWithParent() && (containerParent == null || containerParent.isObserveWithParent());
 	}
 	
 	@Override
-	public boolean canMove(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
-			return true;
-		if (container.getOwner() == null)
-			return false;
-		return requester.getOwner().equals(container.getOwner());
+	public boolean canEnter(@NotNull CreatureObject requester, @NotNull SWGObject container) {
+		return container instanceof CellObject && requester.getOwner() == container.getOwner();
 	}
 	
 	@Override
-	public boolean canAdd(SWGObject requester, SWGObject container) {
-		if (requester == null || requester.getOwner() == null)
+	public boolean canMove(@NotNull CreatureObject requester, @NotNull SWGObject container) {
+		if (requester.getOwner() == container.getOwner())
 			return true;
-		if (container.getOwner() == null)
-			return false;
-		return requester.getOwner().equals(container.getOwner());
+		return requester.getOwner() == container.getOwner() || canTradePartnerView(requester, container);
 	}
+	
+	@Override
+	public final void save(NetBufferStream stream) {
+		stream.addByte(0);
+	}
+	
+	@Override
+	public final void read(NetBufferStream stream) {
+		stream.getByte();
+	}
+	
+	private boolean canTradePartnerView(SWGObject requester, SWGObject object) {
+		Player owner = object.getOwner();
+		if (owner == null)
+			return false;
+		CreatureObject creature = object.getOwner().getCreatureObject();
+		if (!(requester instanceof CreatureObject))
+			return false;
+		TradeSession session = creature.getTradeSession();
+		if (session == null || !session.isValidSession() || !session.isItemTraded(creature, object))
+			return false;
+		return ((CreatureObject) requester).getTradeSession() == session; // must be the same instance
+	}
+	
+	public static DefaultPermissions getPermissions() {
+		return PERMISSIONS;
+	}
+	
+	public static DefaultPermissions from(NetBufferStream stream) {
+		stream.getByte();
+		return PERMISSIONS;
+	}
+	
 }

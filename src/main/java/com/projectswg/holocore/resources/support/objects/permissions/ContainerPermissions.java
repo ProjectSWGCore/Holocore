@@ -26,38 +26,38 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class ContainerPermissions {
+public interface ContainerPermissions extends Persistable {
 	
-	public ContainerPermissions() {
-		
+	@NotNull
+	ContainerPermissionType getType();
+	boolean canView(@NotNull CreatureObject viewer, @NotNull SWGObject container);
+	boolean canEnter(@NotNull CreatureObject requester, @NotNull SWGObject container);
+	boolean canMove(@NotNull CreatureObject requester, @NotNull SWGObject container);
+	
+	static void save(NetBufferStream stream, ContainerPermissions permissions) {
+		stream.addAscii(permissions.getType().name());
+		permissions.save(stream);
 	}
 	
-	public abstract boolean canView(SWGObject viewer, SWGObject container);
-	public abstract boolean canEnter(SWGObject requester, SWGObject container);
-	public abstract boolean canRemove(SWGObject requester, SWGObject container);
-	public abstract boolean canMove(SWGObject requester, SWGObject container);
-	public abstract boolean canAdd(SWGObject requester, SWGObject container);
-	
-	public boolean canView(SWGObject container) {
-		return canView(null, container);
-	}
-	
-	public boolean canEnter(SWGObject container) {
-		return canEnter(null, container);
-	}
-	
-	public boolean canRemove(SWGObject container) {
-		return canRemove(null, container);
-	}
-	
-	public boolean canMove(SWGObject container) {
-		return canMove(null, container);
-	}
-	
-	public boolean canAdd(SWGObject container) {
-		return canAdd(null, container);
+	static ContainerPermissions create(NetBufferStream stream) {
+		ContainerPermissionType type = ContainerPermissionType.valueOf(stream.getAscii());
+		switch (type) {
+			case DEFAULT:
+			default:
+				return DefaultPermissions.from(stream);
+			case ADMIN:
+				return AdminPermissions.from(stream);
+			case READ_ONLY:
+				return ReadOnlyPermissions.from(stream);
+			case READ_WRITE:
+				return ReadWritePermissions.from(stream);
+		}
 	}
 	
 }

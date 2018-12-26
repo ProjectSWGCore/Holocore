@@ -2,6 +2,7 @@ package com.projectswg.holocore.intents.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,7 @@ public class StartNpcMovementIntent extends Intent {
 	private final double speed;;
 	
 	public StartNpcMovementIntent(@NotNull AIObject obj, @Nullable SWGObject parent, @NotNull Location destination, double speed) {
+		assert parent == null || parent instanceof CellObject : "parent was: " + parent;
 		this.obj = obj;
 		this.parent = parent;
 		this.destination = destination;

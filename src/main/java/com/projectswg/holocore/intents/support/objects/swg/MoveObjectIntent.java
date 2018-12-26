@@ -36,22 +36,19 @@ public class MoveObjectIntent extends Intent {
 	private final SWGObject parent;
 	private final Location newLocation;
 	private final double speed;
-	private final int updateCounter;
 	
-	public MoveObjectIntent(SWGObject object, Location newLocation, double speed, int updateCounter) {
+	public MoveObjectIntent(SWGObject object, Location newLocation, double speed) {
 		this.object = object;
 		this.parent = null;
 		this.newLocation = newLocation;
 		this.speed = speed;
-		this.updateCounter = updateCounter;
 	}
 	
-	public MoveObjectIntent(SWGObject object, SWGObject parent, Location newLocation, double speed, int updateCounter) {
+	public MoveObjectIntent(SWGObject object, SWGObject parent, Location newLocation, double speed) {
 		this.object = object;
 		this.parent = parent;
 		this.newLocation = newLocation;
 		this.speed = speed;
-		this.updateCounter = updateCounter;
 	}
 	
 	public SWGObject getObject() {
@@ -70,16 +67,12 @@ public class MoveObjectIntent extends Intent {
 		return speed;
 	}
 	
-	public int getUpdateCounter() {
-		return updateCounter;
+	public static void broadcast(SWGObject object, Location newLocation, double speed) {
+		new MoveObjectIntent(object, newLocation, speed).broadcast();
 	}
 	
-	public static void broadcast(SWGObject object, Location newLocation, double speed, int updateCounter) {
-		new MoveObjectIntent(object, newLocation, speed, updateCounter).broadcast();
-	}
-	
-	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation, double speed, int updateCounter) {
-		new MoveObjectIntent(object, parent, newLocation, speed, updateCounter).broadcast();
+	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation, double speed) {
+		new MoveObjectIntent(object, parent, newLocation, speed).broadcast();
 	}
 	
 }

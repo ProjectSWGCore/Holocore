@@ -2,6 +2,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class DataLoader {
 	
@@ -18,19 +19,15 @@ public abstract class DataLoader {
 	}
 	
 	public static BuildoutLoader buildouts() {
-		return BuildoutLoader.load(AreaLoader.load());
+		return BuildoutLoader.load(List.of());
 	}
 	
 	public static BuildoutLoader buildouts(String ... events) {
-		return BuildoutLoader.load(AreaLoader.load(events));
+		return BuildoutLoader.load(List.of(events));
 	}
 	
 	public static BuildoutLoader buildouts(Collection<String> events) {
-		return BuildoutLoader.load(AreaLoader.load(events));
-	}
-	
-	public static BuildingLoader buildings() {
-		return (BuildingLoader) CachedLoader.BUILDOUT_BUILDINGS.load();
+		return BuildoutLoader.load(events);
 	}
 	
 	public static BuildingCellLoader buildingCells() {
@@ -39,6 +36,10 @@ public abstract class DataLoader {
 	
 	public static NpcLoader npcs() {
 		return (NpcLoader) CachedLoader.NPC_LOADER.load();
+	}
+	
+	public static NpcCombatProfileLoader npcCombatProfiles() {
+		return (NpcCombatProfileLoader) CachedLoader.NPC_COMBAT_PROFILES.load();
 	}
 	
 	public static NpcPatrolRouteLoader npcPatrolRoutes() {
@@ -67,6 +68,14 @@ public abstract class DataLoader {
 	
 	public static CommandLoader commands() {
 		return (CommandLoader) CachedLoader.COMMANDS.load();
+	}
+	
+	public static SlotDefinitionLoader slotDefinitions() {
+		return (SlotDefinitionLoader) CachedLoader.SLOT_DEFINITIONS.load();
+	}
+	
+	public static TerrainZoneInsertionLoader zoneInsertions() {
+		return (TerrainZoneInsertionLoader) CachedLoader.ZONE_INSERTIONS.load();
 	}
 	
 }

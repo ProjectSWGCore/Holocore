@@ -128,7 +128,7 @@ public class DeveloperService extends Service {
 	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
 		T obj = ObjectCreator.createObjectFromTemplate(template, c);
 		obj.setLocation(l);
-		new ObjectCreatedIntent(obj).broadcast();
+		ObjectCreatedIntent.broadcast(obj);
 		return obj;
 	}
 	

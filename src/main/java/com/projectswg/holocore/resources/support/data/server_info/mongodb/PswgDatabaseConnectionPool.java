@@ -1,6 +1,7 @@
 package com.projectswg.holocore.resources.support.data.server_info.mongodb;
 
-import com.mongodb.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.projectswg.common.data.info.Config;
@@ -33,17 +34,11 @@ class PswgDatabaseConnectionPool {
 		if (initializeVotes.getAndIncrement() > 0)
 			return;
 		Config primary = DataManager.getConfig(ConfigFile.PRIMARY);
-		String database = primary.getString("LOCAL-DB", "nge");
+		String database = primary.getString("MONGODB-DB", "nge");
 		
-		if (primary.getBoolean("LOCAL-AUTH", false)) {
-			String username = primary.getString("LOCAL-USER", "nge");
-			String password = primary.getString("LOCAL-PASS", "nge");
-			this.client = new MongoClient(new ServerAddress(), MongoCredential.createScramSha1Credential(username, database, password.toCharArray()), createClientOptions());
-		} else {
-			this.client = new MongoClient(new ServerAddress(), createClientOptions());
-		}
 		setupMongoLogging();
 		
+		this.client = MongoClients.create(primary.getString("MONGODB", "mongodb://localhost"));
 		this.database = client.getDatabase(database);
 		
 		// Blocking operation to force setup the connection
@@ -61,15 +56,6 @@ class PswgDatabaseConnectionPool {
 	
 	public MongoCollection<Document> getCollectionByName(String name) {
 		return database.getCollection(name);
-	}
-	
-	private static MongoClientOptions createClientOptions() {
-		return MongoClientOptions.builder()
-				.connectTimeout(10000)
-				.readConcern(ReadConcern.LOCAL)
-				.writeConcern(WriteConcern.JOURNALED)
-				.retryWrites(true)
-				.build();
 	}
 	
 	private static void setupMongoLogging() {

@@ -26,8 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.survey;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 import java.util.HashMap;
 import java.util.Map;

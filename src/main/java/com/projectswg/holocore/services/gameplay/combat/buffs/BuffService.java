@@ -29,15 +29,16 @@ package com.projectswg.holocore.services.gameplay.combat.buffs;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
 import com.projectswg.holocore.resources.gameplay.combat.buff.BuffMap;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -286,7 +287,11 @@ public class BuffService extends Service {
 		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
 		int stackCount = 1;
 		int buffDuration = (int) buffData.getDefaultDuration();
-		Log.d("buff %s applied to %s from %s; applyTime: %d, buffDuration: %d", buffData.getName(), receiver.getObjectName(), buffer.getObjectName(), applyTime, buffDuration);
+		{
+			Player bufferPlayer = buffer.getOwner();
+			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();
+			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
+		}
 		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
 		
 		checkSkillMods(buffData, receiver, 1);

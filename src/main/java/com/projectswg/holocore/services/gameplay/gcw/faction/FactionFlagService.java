@@ -7,17 +7,16 @@ import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
@@ -155,32 +154,22 @@ public class FactionFlagService extends Service {
 			
 			Player observerOwner = tangibleAware.getOwner();
 			
-			int pvpBitmask = getPvpBitmask(target, tangibleAware);
-
 			if (targetOwner != null) // Send the PvP information about this observer to the owner
-				targetOwner.sendPacket(createPvpStatusMessage(tangibleAware, tangibleAware.getPvpFlags() | pvpBitmask));
+				targetOwner.sendPacket(createPvpStatusMessage(target, tangibleAware));
 			
 			if (observerOwner != null)	// Send the pvp information about the owner to this observer
-				observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+				observerOwner.sendPacket(createPvpStatusMessage(tangibleAware, target));
 		}
 	}
 	
 	private void handleBeginDuel(CreatureObject accepter, CreatureObject target) {
-		int pvpBitmask = 0;
-		
-		pvpBitmask = getPvpBitmask(accepter,target);
-
-		accepter.getOwner().sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
-		target.getOwner().sendPacket(createPvpStatusMessage(accepter, accepter.getPvpFlags()| pvpBitmask));
+		accepter.sendSelf(createPvpStatusMessage(accepter, target));
+		target.sendSelf(createPvpStatusMessage(target, accepter));
 	}
 	
 	private void handleEndDuel(CreatureObject accepter, CreatureObject target) {
-		int pvpBitmask = 0;
-		
-		pvpBitmask = getPvpBitmask(accepter,target);
-
-		accepter.getOwner().sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
-		target.getOwner().sendPacket(createPvpStatusMessage(accepter, accepter.getPvpFlags()| pvpBitmask));
+		accepter.sendSelf(createPvpStatusMessage(accepter, target));
+		target.sendSelf(createPvpStatusMessage(target, accepter));
 	}	
 	
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
@@ -235,25 +224,8 @@ public class FactionFlagService extends Service {
 		return delay;
 	}
 	
-	private static UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject target, int flags) {
-		Set<PvpFlag> flagSet = PvpFlag.getFlags(flags);
-		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), flagSet.toArray(new PvpFlag[0]));
+	private static UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject self, TangibleObject target) {
+		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), self.getPvpFlagsFor(target));
 	}
 	
-	private static int getPvpBitmask(TangibleObject target, TangibleObject observer) {
-		int pvpBitmask = 0;
-
-		if (target.isEnemyOf(observer) && target.getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
-			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
-		}
-		
-		if(target instanceof CreatureObject && observer instanceof CreatureObject) {
-			if (((CreatureObject) target).isDuelingPlayer((CreatureObject) observer)) {
-				pvpBitmask |= PvpFlag.DUEL.getBitmask();
-			}
-		}
-		
-		return pvpBitmask;
-	}
-
 }

@@ -75,11 +75,11 @@ public final class BuildingCellLoader extends DataLoader {
 				JSONArray parts = JSON.readArray(set.getText(3));
 				for (int i = 0; i < parts.size(); i++) {
 					JSONArray neighbor = new JSONArray(parts.getArray(i));
-					JSONArray portal1 = new JSONArray(neighbor.getArray(2));
-					JSONArray portal2 = new JSONArray(neighbor.getArray(3));
-					Point3D p1 = new Point3D(portal1.getDouble(0), portal1.getDouble(1), portal1.getDouble(2));
-					Point3D p2 = new Point3D(portal2.getDouble(0), portal2.getDouble(1), portal2.getDouble(2));
-					neighbors.add(new PortalInfo(id, neighbor.getInt(0), p1, p2, neighbor.getDouble(1)));
+					JSONArray min = new JSONArray(neighbor.getArray(1));
+					JSONArray max = new JSONArray(neighbor.getArray(2));
+					Point3D p1 = new Point3D(min.getDouble(0), min.getDouble(1), min.getDouble(2));
+					Point3D p2 = new Point3D(max.getDouble(0), min.getDouble(1), max.getDouble(2));
+					neighbors.add(new PortalInfo(id, neighbor.getInt(0), p1, p2, max.getDouble(1) - min.getDouble(1)));
 				}
 			} catch (IOException | JSONException e) {
 				Log.w("Invalid cell info: %s", set.getText(3));

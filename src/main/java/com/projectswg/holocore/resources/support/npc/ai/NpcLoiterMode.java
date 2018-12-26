@@ -31,6 +31,9 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * AI object that loiters the area
  */
@@ -47,28 +50,29 @@ public class NpcLoiterMode extends NpcMode {
 	
 	@Override
 	public void act() {
+		Random random = ThreadLocalRandom.current();
 		if (isRooted()) {
-			queueNextLoop(10000+getRandom().nextInt(5));
+			queueNextLoop(10000 + random.nextInt(5));
 			return;
 		}
 		Location currentLocation = getAI().getLocation();
 		if (mainLocation == null)
 			mainLocation = currentLocation;
 		
-		if (getRandom().nextDouble() > 0.25) // Only a 25% movement chance
+		if (random.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
 		double dist = Math.sqrt(radius);
 		double theta;
 		LocationBuilder l = Location.builder(currentLocation);
 		do {
-			theta = getRandom().nextDouble() * Math.PI * 2;
+			theta = random.nextDouble() * Math.PI * 2;
 			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
 			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
 		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		
 		walkTo(l.build());
-		queueNextLoop(30 + getRandom().nextInt(10));
+		queueNextLoop(30 + random.nextInt(10));
 	}
 	
 }

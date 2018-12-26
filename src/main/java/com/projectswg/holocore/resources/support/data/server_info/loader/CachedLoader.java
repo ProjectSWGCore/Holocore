@@ -9,15 +9,17 @@ import java.util.function.Supplier;
 
 enum CachedLoader {
 	BUILDING_CELLS		(BuildingCellLoader::new),
-	BUILDOUT_BUILDINGS	(BuildingLoader::new),
 	NPC_LOADER			(NpcLoader::new),
+	NPC_COMBAT_PROFILES	(NpcCombatProfileLoader::new),
 	NPC_PATROL_ROUTES	(NpcPatrolRouteLoader::new),
 	NPC_STATS			(NpcStatLoader::new),
 	NPC_WEAPONS			(NpcWeaponLoader::new),
 	NPC_WEAPON_RANGES	(NpcWeaponRangeLoader::new),
 	STATIC_SPAWNS		(NpcStaticSpawnLoader::new),
 	OBJECT_DATA			(ObjectDataLoader::new),
-	COMMANDS			(CommandLoader::new);
+	COMMANDS			(CommandLoader::new),
+	SLOT_DEFINITIONS	(SlotDefinitionLoader::new),
+	ZONE_INSERTIONS		(TerrainZoneInsertionLoader::new);
 	
 	private final AtomicReference<SoftReference<DataLoader>> cachedLoader;
 	private final Supplier<DataLoader> supplier;

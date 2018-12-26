@@ -6,6 +6,8 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -87,12 +89,11 @@ public class CombatDeathblowService extends Service {
 	}
 	
 	@IntentHandler
-	private void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
+	private synchronized void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
 		CreatureObject corpse = rcdi.getCorpse();
-		corpse.setHealth(0);
-		corpse.setTurnScale(0);
-		corpse.setMovementScale(0);
 		CreatureObject killer = rcdi.getKiller();
+		if (corpse.getPosture() == Posture.INCAPACITATED || corpse.getPosture() == Posture.DEAD)
+			return;
 		
 		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff("incapWeaken");
 		if (!deathblow && killer instanceof AIObject)
@@ -103,22 +104,31 @@ public class CombatDeathblowService extends Service {
 		} else {
 			incapacitatePlayer(rcdi.getKiller(), corpse);
 		}
+		corpse.setHealth(0);
+		corpse.setTurnScale(0);
+		corpse.setMovementPercent(0);
 		
 		ExitCombatIntent.broadcast(corpse);
 	}
 	
 	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitated) {
-		incapacitated.setPosture(Posture.INCAPACITATED);
 		incapacitated.setCounter(INCAP_TIMER);
+		incapacitated.setPosture(Posture.INCAPACITATED);
 		
-		Log.i("%s was incapacitated", incapacitated);
+		StandardLog.onPlayerEvent(this, incapacitated, "was incapacitated by %s", incapacitator);
 		
 		// Once the incapacitation counter expires, revive them.
 		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
 		
 		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
-		new SystemMessageIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
-		new SystemMessageIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		Player incapacitatorOwner = incapacitator.getOwner();
+		if (incapacitatorOwner != null) { // This will be NPCs most of the time
+			new SystemMessageIntent(incapacitatorOwner, new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
+		}
+		Player incapacitatedOwner = incapacitated.getOwner();
+		if (incapacitatedOwner != null) { // Logged out player
+			new SystemMessageIntent(incapacitatedOwner, new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		}
 		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
 	}
 	
@@ -135,13 +145,13 @@ public class CombatDeathblowService extends Service {
 		
 		// The creature is now able to turn around and move
 		revivedCreature.setTurnScale(1);
-		revivedCreature.setMovementScale(1);
+		revivedCreature.setMovementPercent(1);
 		
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
 		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));    // Restores 10% health of their base health
 		CreatureRevivedIntent.broadcast(revivedCreature);
 		
-		Log.i("%s was revived", revivedCreature);
+		StandardLog.onPlayerEvent(this, revivedCreature, "was revived");
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
@@ -150,6 +160,8 @@ public class CombatDeathblowService extends Service {
 			return;
 		
 		corpse.setPosture(Posture.DEAD);
+		if (corpse.isPlayer())
+			StandardLog.onPlayerEvent(this, corpse, "was killed by %s", killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	

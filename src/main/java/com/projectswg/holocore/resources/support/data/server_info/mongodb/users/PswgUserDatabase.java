@@ -27,7 +27,7 @@ public class PswgUserDatabase extends PswgDatabase {
 		
 		collection.createIndex(Indexes.ascending("username"), new IndexOptions().unique(true));
 		collection.createIndex(Indexes.ascending("characters.firstName"), new IndexOptions().unique(true).partialFilterExpression(Filters.type("characters.firstName", "string")));
-		collection.count();
+		collection.countDocuments();
 	}
 	
 	@Override
@@ -40,20 +40,6 @@ public class PswgUserDatabase extends PswgDatabase {
 		return collection;
 	}
 	
-/*
-		getUser = database.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
-		getCharacterFirstName = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ? OR LOWER(name) LIKE ?");
-		getCharacters = database.prepareStatement("SELECT * FROM players WHERE userid = ?");
-		deleteCharacter = database.prepareStatement("DELETE FROM players WHERE id = ?");
- */
-/*
-						c.setId(set.getInt("id"));
-						c.setName(set.getString("name"));
-						c.setGalaxyId(ProjectSWG.getGalaxy().getId());
-						c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
- */
-	
 	@Nullable
 	public UserMetadata getUser(@NotNull String username) {
 		return collection.find(Filters.eq("username", username)).map(UserMetadata::new).first();
@@ -65,12 +51,16 @@ public class PswgUserDatabase extends PswgDatabase {
 	}
 	
 	public boolean isCharacter(@NotNull String firstName) {
-		return collection.count(Filters.eq("characters.firstName", firstName.toLowerCase(Locale.US)), new CountOptions().limit(1)) > 0;
+		return collection.countDocuments(Filters.eq("characters.firstName", firstName.toLowerCase(Locale.US)), new CountOptions().limit(1)) > 0;
 	}
 	
 	@NotNull
 	public List<CharacterMetadata> getCharacters(@NotNull String username) {
 		return collection.aggregate(Arrays.asList(Aggregates.match(Filters.eq("username", username)), Aggregates.unwind("$characters"))).map(CharacterMetadata::new).into(new ArrayList<>());
+	}
+	
+	public boolean deleteCharacters() {
+		return collection.updateMany(Filters.exists("characters"), Updates.unset("characters")).getModifiedCount() > 0;
 	}
 	
 	public boolean deleteCharacter(String username, long id) {

@@ -1,3 +1,30 @@
+/***********************************************************************************
+ * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
+
 package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
@@ -6,18 +33,18 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(JUnit4.class)
-public class TestNavigationPoint {
+public class TestNavigationPoint extends TestRunnerNoIntents {
+	
+	private static final double SPEED = 1.5;
 	
 	@Test
 	public void testDistanceTo() {
@@ -35,7 +62,7 @@ public class TestNavigationPoint {
 		Location end = location(10, 0, 0);
 		List<NavigationPoint> route = from(null, start, end);
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, end, SPEED));
 	}
 	
 	@Test
@@ -54,7 +81,7 @@ public class TestNavigationPoint {
 		route.addAll(from(null, start, worldPortal));
 		route.addAll(from(buio.getCellByNumber(1), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	@Test
@@ -73,7 +100,7 @@ public class TestNavigationPoint {
 		route.addAll(from(buio.getCellByNumber(1), end, portal));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -94,7 +121,30 @@ public class TestNavigationPoint {
 		route.addAll(from(buio.getCellByNumber(1), portal1, portal2));
 		route.addAll(from(buio.getCellByNumber(2), portal2, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, SPEED));
+	}
+	
+	@Test
+	public void testIntoWithinBuilding2() {
+		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		buio.setPosition(Terrain.TATOOINE, -10, 0, 0);
+		buio.setHeading(45);
+		buio.populateCells();
+		
+		Location start = location(0, 0, 0);
+		Location portal1 = buildPortalLocation(buio.getCellByNumber(1).getPortalTo(null));
+		Location portal2 = buildPortalLocation(buio.getCellByNumber(1).getPortalTo(buio.getCellByNumber(2)));
+		Location portal3 = buildPortalLocation(buio.getCellByNumber(2).getPortalTo(buio.getCellByNumber(3)));
+		Location worldPortal = Location.builder(portal1).translateLocation(buio.getLocation()).build();
+		Location end = location(0, 0, 0);
+		
+		List<NavigationPoint> route = new ArrayList<>();
+		route.addAll(from(null, start, worldPortal));
+		route.addAll(from(buio.getCellByNumber(1), portal1, portal2));
+		route.addAll(from(buio.getCellByNumber(2), portal2, portal3));
+		route.addAll(from(buio.getCellByNumber(3), portal3, end));
+		
+		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(3), end, SPEED));
 	}
 	
 	@Test
@@ -115,7 +165,7 @@ public class TestNavigationPoint {
 		route.addAll(from(buio.getCellByNumber(1), portal2, portal1));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -133,31 +183,24 @@ public class TestNavigationPoint {
 		route.addAll(from(buio.getCellByNumber(1), start, portal));
 		route.addAll(from(buio.getCellByNumber(2), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, 1));
+		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, SPEED));
+	}
+	
+	@Test
+	public void testWithinBuildingSimple() {
+		BuildingObject buio = (BuildingObject) ObjectCreator.createObjectFromTemplate(4, "object/building/player/shared_player_house_tatooine_small_style_01.iff");
+		buio.setPosition(Terrain.TATOOINE, -10, 0, 0);
+		buio.setHeading(270);
+		buio.populateCells();
+		
+		Location start = location(5, 0, 5);
+		Location end = location(-5, 0, -5);
+		
+		Assert.assertEquals(from(buio.getCellByNumber(1), start, end), NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {
-		double speed = 0.5;
-		double totalDistance = source.distanceTo(destination);
-		int totalIntervals = (int) (totalDistance / speed);
-		List<NavigationPoint> path = new ArrayList<>(totalIntervals);
-		
-		double currentDistance = speed;
-		for (int i = 0; i <= totalIntervals; i++) {
-			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
-			currentDistance += speed;
-		}
-		return path;
-	}
-	
-	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
-		return NavigationPoint.at(parent, Location.builder()
-				.setTerrain(l1.getTerrain())
-				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
-				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
-				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
-				.setHeading(Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ())))
-				.build(), speed);
+		return NavigationPoint.from(parent, source, destination, SPEED);
 	}
 	
 	private static Location buildPortalLocation(Portal portal) {

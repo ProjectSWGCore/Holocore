@@ -2,10 +2,10 @@ package com.projectswg.holocore.services.support.global.zone;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.holocore.intents.support.global.zone.NotifyPlayersPacketIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIntent;
+import com.projectswg.holocore.intents.support.global.zone.NotifyPlayersPacketIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;

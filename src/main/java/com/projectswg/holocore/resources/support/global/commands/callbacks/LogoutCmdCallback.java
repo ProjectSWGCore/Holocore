@@ -32,10 +32,11 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.ForceLogoutIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
@@ -48,6 +49,8 @@ public class LogoutCmdCallback implements ICmdCallback {
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			return;
 		creature.setPosture(Posture.SITTING);
 		Log.i("Logout command called for %s - 30s timer started", creature.getObjectName());
 		updateLogout(player, creature, 30);

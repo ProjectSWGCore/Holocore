@@ -29,12 +29,15 @@ package com.projectswg.holocore.resources.support.global.zone.creation;
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
+import com.projectswg.holocore.resources.support.global.player.AccessLevel;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -43,10 +46,7 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
-import com.projectswg.holocore.resources.support.global.player.AccessLevel;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import com.projectswg.holocore.resources.support.global.zone.TerrainZoneInsertion.SpawnInformation;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +62,7 @@ public class CharacterCreation {
 		this.create = create;
 	}
 	
-	public CreatureObject createCharacter(AccessLevel accessLevel, SpawnInformation info) {
+	public CreatureObject createCharacter(AccessLevel accessLevel, ZoneInsertion info) {
 		Race			race		= Race.getRaceByFile(create.getRace());
 		CreatureObject	creatureObj	= createCreature(race.getFilename(), info);
 		PlayerObject	playerObj	= createPlayer(creatureObj);
@@ -77,27 +77,26 @@ public class CharacterCreation {
 	}
 	
 	@NotNull
-	private CreatureObject createCreature(String template, SpawnInformation info) {
-		if (info.building)
+	private CreatureObject createCreature(String template, ZoneInsertion info) {
+		if (!info.getBuildingId().isEmpty())
 			return createCreatureBuilding(template, info);
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof CreatureObject;
-		obj.setLocation(info.location);
+		obj.setLocation(generateRandomLocation(info));
 		return (CreatureObject) obj;
 	}
 	
 	@NotNull
-	private CreatureObject createCreatureBuilding(String template, SpawnInformation info) {
-		SWGObject parent = ObjectLookup.getObjectById(info.buildingId);
-		Arguments.validate(parent instanceof BuildingObject, String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId));
+	private CreatureObject createCreatureBuilding(String template, ZoneInsertion info) {
+		BuildingObject building = BuildingLookup.getBuildingByTag(info.getBuildingId());
+		Arguments.validate(building != null, String.format("Invalid building: %s", info.getBuildingId()));
 		
-		CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
-		Arguments.validate(cell != null, String.format("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId));
+		CellObject cell = building.getCellByName(info.getCell());
+		Arguments.validate(cell != null, String.format("Invalid cell! Cell does not exist: %s  Building: %s", info.getCell(), building));
 		
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof CreatureObject;
-		obj.setLocation(info.location);
-		obj.moveToContainer(cell);
+		obj.moveToContainer(cell, generateRandomLocation(info));
 		return (CreatureObject) obj;
 	}
 	
@@ -111,10 +110,9 @@ public class CharacterCreation {
 	}
 	
 	@NotNull
-	private TangibleObject createTangible(SWGObject container, ContainerPermissionsType type, String template) {
+	private TangibleObject createTangible(SWGObject container, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof TangibleObject;
-		obj.setContainerPermissions(type);
 		obj.moveToContainer(container);
 		new ObjectCreatedIntent(obj).broadcast();
 		return (TangibleObject) obj;
@@ -123,13 +121,13 @@ public class CharacterCreation {
 	/** Creates an object with default world visibility */
 	@NotNull
 	private TangibleObject createDefaultObject(SWGObject container, String template) {
-		return createTangible(container, ContainerPermissionsType.DEFAULT, template);
+		return createTangible(container, template);
 	}
 	
 	/** Creates an object with inventory-level world visibility (only the owner) */
 	@NotNull
 	private TangibleObject createInventoryObject(SWGObject container, String template) {
-		return createTangible(container, ContainerPermissionsType.INVENTORY, template);
+		return createTangible(container, template);
 	}
 	
 	private void createHair(CreatureObject creatureObj, String hair, CustomizationString customization) {
@@ -179,6 +177,19 @@ public class CharacterCreation {
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		assert inventory != null : "inventory is not defined";
 		createDefaultObject(inventory, "object/tangible/npe/shared_npe_uniform_box.iff");
+	}
+	
+	private static Location generateRandomLocation(ZoneInsertion info) {
+		return Location.builder()
+				.setTerrain(info.getTerrain())
+				.setX(info.getX() + (Math.random()-.5) * info.getRadius())
+				.setY(info.getY())
+				.setZ(info.getZ() + (Math.random()-.5) * info.getRadius())
+				.setOrientationX(0)
+				.setOrientationY(0)
+				.setOrientationZ(0)
+				.setOrientationW(1)
+				.build();
 	}
 	
 }

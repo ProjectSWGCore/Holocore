@@ -5,6 +5,7 @@ import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -29,9 +30,10 @@ public class ServerDataService extends Service {
 	}
 	
 	private void wipeCharacterDatabase() {
-		try (RelationalDatabase database = RelationalServerFactory.getServerDatabase("login/login.db")) {
-			database.executeQuery("DELETE FROM players");
-		}
+		PswgUserDatabase db = new PswgUserDatabase();
+		db.initialize();
+		db.deleteCharacters();
+		db.terminate();
 	}
 	
 	private void wipeOdbFiles() {

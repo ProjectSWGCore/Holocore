@@ -98,6 +98,7 @@ public class CommandExecutionService extends Service {
 	private void addAdminScripts() {
 		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::new);
 		registerCallback("goto", CmdGoto::new);
+		registerCallback("console_npc", CmdNpc::new);
 		registerCallback("qatool", CmdQaTool::new);
 		registerCallback("revertPlayerAppearance", CmdRevertPlayerAppearance::new);
 		registerCallback("setGodMode", CmdSetGodMode::new);
@@ -154,6 +155,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("stopwatching", CmdStopWatching::new);
 		registerCallback("watch", CmdWatch::new);
 		registerCallback("openContainer", CmdOpenContainer::new);
+		registerCallback("closeContainer", CmdCloseContainer::new);
 		registerCallback("purchaseTicket", CmdPurchaseTicket::new);
 		registerCallback("setBiography", CmdSetBiography::new);
 		registerCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::new);

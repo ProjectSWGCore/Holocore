@@ -27,11 +27,11 @@
 package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
+import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 

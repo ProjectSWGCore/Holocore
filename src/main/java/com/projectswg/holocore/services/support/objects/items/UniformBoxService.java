@@ -31,10 +31,9 @@ import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.items.OpenUniformBoxIntent;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -103,7 +102,7 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), ContainerPermissionsType.DEFAULT, staticItems.toArray(new String[0])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), staticItems.toArray(new String[0])).broadcast();
 	}
 	
 }

@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects;
 
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
@@ -60,7 +61,22 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public final class ObjectCreator {
 	
-	private static final AtomicLong OBJECT_ID = new AtomicLong(0);
+	private static final AtomicLong OBJECT_ID = new AtomicLong(150000);
+	
+	/*
+		Misc helper methods
+	 */
+	public static void updateMaxObjectId(long objectId) {
+		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
+	}
+	
+	public static long getNextObjectId() {
+		return OBJECT_ID.incrementAndGet();
+	}
+	
+	/*
+		Object creation methods
+	 */
 	
 	@NotNull
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
@@ -152,10 +168,8 @@ public final class ObjectCreator {
 		if (!slotDescriptor.isEmpty()) {
 			// These are the slots that the object *HAS*
 			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile(slotDescriptor);
-			if (descriptor == null)
-				return;
-			
-			object.setSlots(descriptor.getSlots());
+			if (descriptor != null)
+				object.setSlots(descriptor.getSlots());
 		}
 		
 		if (!arrangementDescriptor.isEmpty()) {
@@ -166,17 +180,6 @@ public final class ObjectCreator {
 			
 			object.setArrangement(arrangementData.getArrangement());
 		}
-	}
-	
-	/*
-		Misc helper methods
-	 */
-	private static void updateMaxObjectId(long objectId) {
-		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
-	}
-	
-	private static long getNextObjectId() {
-		return OBJECT_ID.incrementAndGet();
 	}
 	
 	public static class ObjectCreationException extends RuntimeException {

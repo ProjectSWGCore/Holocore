@@ -1,93 +1,93 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-10000003	TATOOINE	tat_world	AREA	0	-1208.68	12.00	-3625.98	90	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000004	TATOOINE	tat_world	AREA	0	-1214.02	12.00	-3628.53	179	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000005	TATOOINE	tat_world	AREA	0	-1218.18	12.00	-3623.91	-90	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000006	TATOOINE	tat_world	AREA	0	-1136.78	12.00	-3703.81	-157	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000007	TATOOINE	tat_world	AREA	0	-1134.43	12.00	-3705.10	-148	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000008	TATOOINE	tat_world	AREA	0	-1131.94	12.00	-3706.21	-139	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000009	TATOOINE	tat_world	AREA	0	-1129.83	12.00	-3708.84	-128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000010	TATOOINE	tat_world	AREA	0	-1128.09	12.00	-3711.13	-127	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000011	TATOOINE	tat_world	AREA	0	-1248.07	12.00	-3693.44	167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000012	TATOOINE	tat_world	AREA	0	-1245.63	12.00	-3692.33	158	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000013	TATOOINE	tat_world	AREA	0	-1243.25	12.00	-3690.99	164	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000014	TATOOINE	tat_world	AREA	0	-1239.88	12.00	-3690.88	177	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000015	TATOOINE	tat_world	AREA	0	-1237.00	12.00	-3690.85	171	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000016	TATOOINE	tat_world	AREA	0	-1047.20	12.00	-3593.68	94	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000017	TATOOINE	tat_world	AREA	0	-1143.35	12.00	-3543.97	-131	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000018	TATOOINE	tat_world	AREA	0	-976.85	12.00	-3739.94	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000019	TATOOINE	tat_world	AREA	0	-976.15	12.00	-3744.26	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000020	TATOOINE	tat_world	AREA	0	-978.58	12.00	-3746.80	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000021	TATOOINE	tat_world	AREA	0	-980.80	12.00	-3749.07	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000022	TATOOINE	tat_world	AREA	0	-983.53	12.00	-3751.66	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000023	TATOOINE	tat_world	AREA	0	-1050.00	11.69	-3586.15	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000024	TATOOINE	tat_world	AREA	0	-1045.57	11.20	-3584.10	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000025	TATOOINE	tat_world	AREA	0	-1036.91	11.45	-3577.09	146	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000026	TATOOINE	tat_world	AREA	0	-1033.41	11.42	-3575.16	146	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000027	TATOOINE	tat_world	AREA	0	-1090.54	12.00	-3495.46	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000028	TATOOINE	tat_world	AREA	0	-1093.92	12.00	-3495.31	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000029	TATOOINE	tat_world	AREA	0	-1097.69	12.00	-3494.70	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000030	TATOOINE	tat_world	AREA	0	-1101.22	12.00	-3494.27	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000031	TATOOINE	tat_world	AREA	0	-1231.43	12.00	-3495.86	-5	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000032	TATOOINE	tat_world	AREA	0	-1227.34	12.00	-3495.55	-5	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000033	TATOOINE	tat_world	AREA	0	-1218.26	12.00	-3494.37	-3	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000034	TATOOINE	tat_world	AREA	0	-1213.29	12.00	-3494.11	-4	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000035	TATOOINE	tat_world	AREA	0	-1326.59	12.00	-3679.40	-172	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000036	TATOOINE	tat_world	AREA	0	-1323.60	12.00	-3679.64	-172	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000037	TATOOINE	tat_world	AREA	0	-1335.64	12.00	-3676.78	-167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000038	TATOOINE	tat_world	AREA	0	-1339.19	12.00	-3676.28	-167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000039	TATOOINE	tat_world	AREA	0	-1314.39	12.00	-3680.50	-173	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000040	TATOOINE	tat_world	AREA	0	-1311.61	12.00	-3680.81	-173	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000041	TATOOINE	tat_world	AREA	0	-1281.48	12.00	-3572.41	21	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000042	TATOOINE	tat_world	AREA	0	-1271.88	12.00	-3576.58	34	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000043	TATOOINE	tat_world	AREA	0	-1262.96	12.00	-3613.02	-69	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000044	TATOOINE	tat_world	AREA	0	-1264.73	12.00	-3623.33	-83	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000045	TATOOINE	tat_world	AREA	0	-1227.53	12.00	-3650.66	-142	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000046	TATOOINE	tat_world	AREA	0	-1235.70	12.00	-3643.78	-135	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000047	TATOOINE	tat_world	AREA	0	-1241.92	12.00	-3620.50	-135	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000048	TATOOINE	tat_world	AREA	0	-1171.02	12.00	-3646.67	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000049	TATOOINE	tat_world	AREA	0	-1164.23	12.00	-3638.28	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000050	TATOOINE	tat_world	AREA	0	-1109.61	12.00	-3637.31	130	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000051	TATOOINE	tat_world	AREA	0	-1102.82	12.00	-3628.92	130	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000052	TATOOINE	tat_world	AREA	0	-1010.42	12.00	-3699.71	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000053	TATOOINE	tat_world	AREA	0	-1012.39	12.00	-3701.75	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt_90_h_agg_e	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000054	TATOOINE	tat_world	AREA	0	-1233.00	12.00	-3678.00	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000055	TATOOINE	tat_world	AREA	0	-1213.22	12.00	-3575.25	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000056	TATOOINE	tat_world	AREA	0	-1140.00	12.00	-3508.00	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000057	TATOOINE	tat_world	AREA	0	-1156.00	12.00	-3681.00	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000058	TATOOINE	tat_world	AREA	0	-1059.00	12.00	-3620.00	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000059	TATOOINE	tat_world	AREA	0	-1371.00	12.00	-3646.00	0	1	Demoralized Imperial	gcw_city_demoralized_imperial_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000060	TATOOINE	tat_world	PATROL	0	-1272.00	12.00	-3582.90	0	1	an AT-ST	crackdown_atst_80_d_att_n	GCW Bestine - Imperial	GCW Bestine	1	PATROL	0	11010900	column	idle	0	0	0	300
-10000061	TATOOINE	tat_world	AREA	0	-1214.00	12.00	-3626.00	0	1	Imperial Defense Force General	gcw_city_imperial_general_110_h_agg_b	GCW Bestine - Imperial	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
-10000062	TATOOINE	tat_world	AREA	0	-1198.00	12.00	-3620.00	0	1	an Imperial Field Commander	gcw_planet_base_imperial_officer_100_h_inv_n	GCW Bestine - Imperial	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
-10000063	TATOOINE	tat_world	PATROL	0	-875.37	28.37	-3652.41	-60	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011800	column	idle	0	0	0	120
-10000064	TATOOINE	tat_world	PATROL	0	-893.40	26.92	-3670.45	-42	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011800	column	idle	0	0	0	120
-10000065	TATOOINE	tat_world	PATROL	0	-1130.54	62.71	-3287.16	-178	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012000	column	idle	0	0	0	120
-10000066	TATOOINE	tat_world	PATROL	0	-1110.40	67.49	-3295.45	-174	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012000	column	idle	0	0	0	120
-10000067	TATOOINE	tat_world	PATROL	0	-1285.14	69.01	-3292.26	178	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011100	column	idle	0	0	0	120
-10000068	TATOOINE	tat_world	PATROL	0	-1274.23	67.33	-3299.34	172	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011900	column	idle	0	0	0	120
-10000069	TATOOINE	tat_world	PATROL	0	-1251.79	55.98	-3800.96	44	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	0	-	idle	0	0	0	120
-10000070	TATOOINE	tat_world	PATROL	0	-1237.01	56.30	-3812.64	37	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	0	-	idle	0	0	0	120
-10000071	TATOOINE	tat_world	PATROL	0	-878.46	15.03	-3846.55	-72	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012700	column	idle	0	0	0	120
-10000072	TATOOINE	tat_world	PATROL	0	-886.51	15.51	-3849.61	-53	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012700	column	idle	0	0	0	120
-10000073	TATOOINE	tat_world	PATROL	0	-1404.13	30.61	-3947.04	0	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011500	column	idle	0	0	0	120
-10000074	TATOOINE	tat_world	PATROL	0	-1380.45	29.45	-3954.18	0	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012600	column	idle	0	0	0	120
-10000075	TATOOINE	tat_world	AREA	0	-883.74	27.46	-3656.63	-58	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000076	TATOOINE	tat_world	AREA	0	-889.04	26.91	-3663.09	-60	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000077	TATOOINE	tat_world	AREA	0	-1155.64	63.96	-3296.01	-179	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000078	TATOOINE	tat_world	AREA	0	-1136.04	65.91	-3295.81	180	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000079	TATOOINE	tat_world	AREA	0	-1299.84	69.53	-3304.97	178	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000080	TATOOINE	tat_world	AREA	0	-1292.05	69.02	-3308.21	-179	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000081	TATOOINE	tat_world	AREA	0	-1239.96	57.53	-3803.26	33	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000082	TATOOINE	tat_world	AREA	0	-1222.68	56.79	-3808.91	46	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000083	TATOOINE	tat_world	AREA	0	-880.78	15.99	-3836.41	-56	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000084	TATOOINE	tat_world	AREA	0	-877.35	18.59	-3815.55	-51	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000085	TATOOINE	tat_world	AREA	0	-1395.50	30.36	-3953.26	0	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000086	TATOOINE	tat_world	AREA	0	-1386.19	29.22	-3950.34	0	1	AT-XT	imp_gcw_city_atxt_90_c_agg_e	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
-10000087	TATOOINE	tat_world	AREA	0	-1419.00	12.00	-3714.00	0	1	Demoralized Rebel	gcw_city_demoralized_rebel_100_h_inv_n	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000088	TATOOINE	tat_world	AREA	0	-1009.00	12.00	-3651.00	0	1	Demoralized Rebel	gcw_city_demoralized_rebel_100_h_inv_n	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000089	TATOOINE	tat_world	AREA	0	-1289.00	12.00	-3503.00	0	1	Demoralized Rebel	gcw_city_demoralized_rebel_100_h_inv_n	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000090	TATOOINE	tat_world	AREA	0	-1015.00	10.00	-3488.00	0	1	Demoralized Rebel	gcw_city_demoralized_rebel_100_h_inv_n	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
-10000091	TATOOINE	tat_world	AREA	0	-900.00	24.20	-3782.00	0	1	Rebel Offensive Force General	gcw_city_offensive_rebel_general_110_h_agg_b	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
-10000092	TATOOINE	tat_world	AREA	0	-1253.00	44.80	-3348.00	0	1	Rebel Captain	gcw_city_rebel_captain_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
-10000093	TATOOINE	tat_world	AREA	0	-1184.00	63.00	-3821.00	0	1	Rebel Captain	gcw_city_rebel_captain_90_h_agg_e	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+gcw_best_001	TATOOINE	tat_world	AREA	0	-1208.7	12.0	-3626.0	90	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_002	TATOOINE	tat_world	AREA	0	-1214.0	12.0	-3628.5	179	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_003	TATOOINE	tat_world	AREA	0	-1218.2	12.0	-3623.9	-90	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_004	TATOOINE	tat_world	AREA	0	-1136.8	12.0	-3703.8	-157	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_005	TATOOINE	tat_world	AREA	0	-1134.4	12.0	-3705.1	-148	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_006	TATOOINE	tat_world	AREA	0	-1131.9	12.0	-3706.2	-139	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_007	TATOOINE	tat_world	AREA	0	-1129.8	12.0	-3708.8	-128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_008	TATOOINE	tat_world	AREA	0	-1128.1	12.0	-3711.1	-127	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_009	TATOOINE	tat_world	AREA	0	-1248.1	12.0	-3693.4	167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_010	TATOOINE	tat_world	AREA	0	-1245.6	12.0	-3692.3	158	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_011	TATOOINE	tat_world	AREA	0	-1243.3	12.0	-3691.0	164	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_012	TATOOINE	tat_world	AREA	0	-1239.9	12.0	-3690.9	177	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_013	TATOOINE	tat_world	AREA	0	-1237.0	12.0	-3690.9	171	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_014	TATOOINE	tat_world	AREA	0	-1047.2	12.0	-3593.7	94	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_015	TATOOINE	tat_world	AREA	0	-1143.4	12.0	-3544.0	-131	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_016	TATOOINE	tat_world	AREA	0	-976.9	12.0	-3739.9	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_017	TATOOINE	tat_world	AREA	0	-976.2	12.0	-3744.3	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_018	TATOOINE	tat_world	AREA	0	-978.6	12.0	-3746.8	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_019	TATOOINE	tat_world	AREA	0	-980.8	12.0	-3749.1	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_020	TATOOINE	tat_world	AREA	0	-983.5	12.0	-3751.7	128	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_021	TATOOINE	tat_world	AREA	0	-1050.0	11.7	-3586.2	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_022	TATOOINE	tat_world	AREA	0	-1045.6	11.2	-3584.1	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_023	TATOOINE	tat_world	AREA	0	-1036.9	11.5	-3577.1	146	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_024	TATOOINE	tat_world	AREA	0	-1033.4	11.4	-3575.2	146	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_025	TATOOINE	tat_world	AREA	0	-1090.5	12.0	-3495.5	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_026	TATOOINE	tat_world	AREA	0	-1093.9	12.0	-3495.3	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_027	TATOOINE	tat_world	AREA	0	-1097.7	12.0	-3494.7	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_028	TATOOINE	tat_world	AREA	0	-1101.2	12.0	-3494.3	0	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_029	TATOOINE	tat_world	AREA	0	-1231.4	12.0	-3495.9	-5	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_030	TATOOINE	tat_world	AREA	0	-1227.3	12.0	-3495.6	-5	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_031	TATOOINE	tat_world	AREA	0	-1218.3	12.0	-3494.4	-3	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_032	TATOOINE	tat_world	AREA	0	-1213.3	12.0	-3494.1	-4	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_033	TATOOINE	tat_world	AREA	0	-1326.6	12.0	-3679.4	-172	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_034	TATOOINE	tat_world	AREA	0	-1323.6	12.0	-3679.6	-172	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_035	TATOOINE	tat_world	AREA	0	-1335.6	12.0	-3676.8	-167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_036	TATOOINE	tat_world	AREA	0	-1339.2	12.0	-3676.3	-167	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_037	TATOOINE	tat_world	AREA	0	-1314.4	12.0	-3680.5	-173	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_038	TATOOINE	tat_world	AREA	0	-1311.6	12.0	-3680.8	-173	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_039	TATOOINE	tat_world	AREA	0	-1281.5	12.0	-3572.4	21	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_040	TATOOINE	tat_world	AREA	0	-1271.9	12.0	-3576.6	34	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_041	TATOOINE	tat_world	AREA	0	-1263.0	12.0	-3613.0	-69	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_042	TATOOINE	tat_world	AREA	0	-1264.7	12.0	-3623.3	-83	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_043	TATOOINE	tat_world	AREA	0	-1227.5	12.0	-3650.7	-142	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_044	TATOOINE	tat_world	AREA	0	-1235.7	12.0	-3643.8	-135	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_045	TATOOINE	tat_world	AREA	0	-1241.9	12.0	-3620.5	-135	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_046	TATOOINE	tat_world	AREA	0	-1171.0	12.0	-3646.7	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_047	TATOOINE	tat_world	AREA	0	-1164.2	12.0	-3638.3	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_048	TATOOINE	tat_world	AREA	0	-1109.6	12.0	-3637.3	130	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_049	TATOOINE	tat_world	AREA	0	-1102.8	12.0	-3628.9	130	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_050	TATOOINE	tat_world	AREA	0	-1010.4	12.0	-3699.7	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_051	TATOOINE	tat_world	AREA	0	-1012.4	12.0	-3701.8	132	1	a Stormtrooper	gcw_city_imperial_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_052	TATOOINE	tat_world	AREA	0	-1233.0	12.0	-3678.0	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_053	TATOOINE	tat_world	AREA	0	-1213.2	12.0	-3575.3	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_054	TATOOINE	tat_world	AREA	0	-1140.0	12.0	-3508.0	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_055	TATOOINE	tat_world	AREA	0	-1156.0	12.0	-3681.0	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_056	TATOOINE	tat_world	AREA	0	-1059.0	12.0	-3620.0	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_057	TATOOINE	tat_world	AREA	0	-1371.0	12.0	-3646.0	0	1	Demoralized Imperial	gcw_city_demoralized_imperial	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_058	TATOOINE	tat_world	PATROL	0	-1272.0	12.0	-3582.9	0	1	an AT-ST	crackdown_atst	AGGRESSIVE	B	90	90	GCW Bestine - Imperial	GCW Bestine	1	PATROL	0	11010900	column	idle	0	0	0	300
+gcw_best_059	TATOOINE	tat_world	AREA	0	-1214.0	12.0	-3626.0	0	1	Imperial Defense Force General	gcw_city_imperial_general	AGGRESSIVE	B	150	150	GCW Bestine - Imperial	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
+gcw_best_060	TATOOINE	tat_world	AREA	0	-1198.0	12.0	-3620.0	0	1	an Imperial Field Commander	gcw_planet_base_imperial_officer	INVULNERABLE	N	100	100	GCW Bestine - Imperial	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
+gcw_best_061	TATOOINE	tat_world	PATROL	0	-875.4	28.4	-3652.4	-60	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011800	column	idle	0	0	0	120
+gcw_best_062	TATOOINE	tat_world	PATROL	0	-893.4	26.9	-3670.5	-42	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011800	column	idle	0	0	0	120
+gcw_best_063	TATOOINE	tat_world	PATROL	0	-1130.5	62.7	-3287.2	-178	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012000	column	idle	0	0	0	120
+gcw_best_064	TATOOINE	tat_world	PATROL	0	-1110.4	67.5	-3295.5	-174	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012000	column	idle	0	0	0	120
+gcw_best_065	TATOOINE	tat_world	PATROL	0	-1285.1	69.0	-3292.3	178	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011100	column	idle	0	0	0	120
+gcw_best_066	TATOOINE	tat_world	PATROL	0	-1274.2	67.3	-3299.3	172	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011900	column	idle	0	0	0	120
+gcw_best_067	TATOOINE	tat_world	PATROL	0	-1251.8	56.0	-3801.0	44	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	0	-	idle	0	0	0	120
+gcw_best_068	TATOOINE	tat_world	PATROL	0	-1237.0	56.3	-3812.6	37	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	0	-	idle	0	0	0	120
+gcw_best_069	TATOOINE	tat_world	PATROL	0	-878.5	15.0	-3846.6	-72	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012700	column	idle	0	0	0	120
+gcw_best_070	TATOOINE	tat_world	PATROL	0	-886.5	15.5	-3849.6	-53	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012700	column	idle	0	0	0	120
+gcw_best_071	TATOOINE	tat_world	PATROL	0	-1404.1	30.6	-3947.0	0	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11011500	column	idle	0	0	0	120
+gcw_best_072	TATOOINE	tat_world	PATROL	0	-1380.5	29.5	-3954.2	0	1	Rebel Assault SpecForce	gcw_city_rebel_specforce_assault	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	PATROL	0	11012600	column	idle	0	0	0	120
+gcw_best_073	TATOOINE	tat_world	AREA	0	-883.7	27.5	-3656.6	-58	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_074	TATOOINE	tat_world	AREA	0	-889.0	26.9	-3663.1	-60	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_075	TATOOINE	tat_world	AREA	0	-1155.6	64.0	-3296.0	-179	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_076	TATOOINE	tat_world	AREA	0	-1136.0	65.9	-3295.8	180	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_077	TATOOINE	tat_world	AREA	0	-1299.8	69.5	-3305.0	178	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_078	TATOOINE	tat_world	AREA	0	-1292.1	69.0	-3308.2	-179	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_079	TATOOINE	tat_world	AREA	0	-1240.0	57.5	-3803.3	33	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_080	TATOOINE	tat_world	AREA	0	-1222.7	56.8	-3808.9	46	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_081	TATOOINE	tat_world	AREA	0	-880.8	16.0	-3836.4	-56	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_082	TATOOINE	tat_world	AREA	0	-877.4	18.6	-3815.6	-51	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_083	TATOOINE	tat_world	AREA	0	-1395.5	30.4	-3953.3	0	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_084	TATOOINE	tat_world	AREA	0	-1386.2	29.2	-3950.3	0	1	AT-XT	imp_gcw_city_atxt	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
+gcw_best_085	TATOOINE	tat_world	AREA	0	-1419.0	12.0	-3714.0	0	1	Demoralized Rebel	gcw_city_demoralized_rebel	INVULNERABLE	N	100	100	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_086	TATOOINE	tat_world	AREA	0	-1009.0	12.0	-3651.0	0	1	Demoralized Rebel	gcw_city_demoralized_rebel	INVULNERABLE	N	100	100	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_087	TATOOINE	tat_world	AREA	0	-1289.0	12.0	-3503.0	0	1	Demoralized Rebel	gcw_city_demoralized_rebel	INVULNERABLE	N	100	100	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_088	TATOOINE	tat_world	AREA	0	-1015.0	10.0	-3488.0	0	1	Demoralized Rebel	gcw_city_demoralized_rebel	INVULNERABLE	N	100	100	GCW Bestine - Rebel	GCW Bestine	3	LOITER	1	0	-	idle	0	0	0	120
+gcw_best_089	TATOOINE	tat_world	AREA	0	-900.0	24.2	-3782.0	0	1	Rebel Offensive Force General	gcw_city_offensive_rebel_general	AGGRESSIVE	B	150	150	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
+gcw_best_090	TATOOINE	tat_world	AREA	0	-1253.0	44.8	-3348.0	0	1	Rebel Captain	gcw_city_rebel_captain	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120
+gcw_best_091	TATOOINE	tat_world	AREA	0	-1184.0	63.0	-3821.0	0	1	Rebel Captain	gcw_city_rebel_captain	AGGRESSIVE	E	90	90	GCW Bestine - Rebel	GCW Bestine	1	TURN	0	0	-	idle	0	0	0	120

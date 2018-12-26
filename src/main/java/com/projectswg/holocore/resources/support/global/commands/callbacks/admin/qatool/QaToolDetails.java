@@ -50,7 +50,6 @@ public final class QaToolDetails {
 		sendPersonal(player, "    STR:            %s / %s", target.getStringId(), target.getDetailStringId());
 		sendPersonal(player, "    Template:       %s", target.getTemplate());
 		sendPersonal(player, "    GOT:            %s", target.getGameObjectType());
-		sendPersonal(player, "    Load Range:     %.0f", target.getLoadRange());
 		if (target instanceof CreatureObject) {
 			CreatureObject creo = (CreatureObject) target; 
 			sendPersonal(player, "    Health:         %d / %d", creo.getHealth(), creo.getMaxHealth());

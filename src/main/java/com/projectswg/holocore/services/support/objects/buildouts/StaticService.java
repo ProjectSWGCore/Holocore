@@ -29,12 +29,12 @@ package com.projectswg.holocore.services.support.objects.buildouts;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -145,24 +145,14 @@ public class StaticService extends Service {
 		private SWGObject createObjectInParent(SWGObject parent) {
 			assert parent != null;
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
-			obj.setLocation(Location.builder()
-					.setPosition(x, y, z)
-					.setTerrain(parent.getTerrain())
-					.setHeading(heading)
-					.build());
-			obj.moveToContainer(parent);
+			obj.systemMove(parent, Location.builder().setPosition(x, y, z).setTerrain(parent.getTerrain()).setHeading(heading).build());
 			ObjectCreatedIntent.broadcast(obj);
 			return obj;
 		}
 		
 		private SWGObject createObject(Location parentLocation) {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
-			obj.setLocation(Location.builder()
-					.setPosition(x, y, z)
-					.setTerrain(parentLocation.getTerrain())
-					.setHeading(heading)
-					.translateLocation(parentLocation)
-					.build());
+			obj.setLocation(Location.builder().setPosition(x, y, z).setTerrain(parentLocation.getTerrain()).setHeading(heading).translateLocation(parentLocation).build());
 			ObjectCreatedIntent.broadcast(obj);
 			return obj;
 		}

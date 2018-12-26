@@ -29,35 +29,33 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 import com.projectswg.common.data.CrcDatabase;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.resources.support.objects.buildout.BuildoutArea;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class BuildoutLoader {
 	
 	private static final CrcDatabase CRC_DATABASE = CrcDatabase.getInstance();
 	
 	private final Map<Long, SWGObject> objectMap;
+	private final Map<String, BuildingObject> buildingMap;
 	private final EnumMap<Terrain, Map<Long, SWGObject>> terrainMap;
-	private final AreaLoader areaLoader;
+	private final Set<String> events;
 	
-	private BuildoutLoader(AreaLoader areaLoader) {
+	private BuildoutLoader(Collection<String> events) {
 		this.objectMap = new HashMap<>();
+		this.buildingMap = new HashMap<>();
 		this.terrainMap = new EnumMap<>(Terrain.class);
-		this.areaLoader = areaLoader;
+		this.events = new HashSet<>(events);
 		
 		for (Terrain terrain : Terrain.values()) {
 			terrainMap.put(terrain, new HashMap<>());
@@ -65,7 +63,11 @@ public final class BuildoutLoader {
 	}
 	
 	public Map<Long, SWGObject> getObjects() {
-		return objectMap;
+		return Collections.unmodifiableMap(objectMap);
+	}
+	
+	public Map<String, BuildingObject> getBuildings() {
+		return Collections.unmodifiableMap(buildingMap);
 	}
 	
 	public Map<Long, SWGObject> getObjects(Terrain terrain) {
@@ -78,32 +80,29 @@ public final class BuildoutLoader {
 	}
 	
 	private void loadStandardBuildouts() {
-		int areaId;
-		AreaLoader areaLoader = this.areaLoader;
-		BuildoutArea currentArea = areaLoader.getAreaList().get(0);
+		Set<String> events = this.events;
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
 			while (set.next()) {
-				areaId = (int) set.getInt(1);
-				if (currentArea.getId() != areaId) {
-					BuildoutArea area = areaLoader.getArea(areaId);
-					if (area == null) { // usually for events
-						continue;
-					}
-					currentArea = area;
-				}
+				// "id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"
+				String event = set.getText(3);
+				if (!event.isEmpty() && !events.contains(event))
+					continue;
 				
-				SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(2)));
+				SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(1)));
 				obj.setGenerated(false);
-				obj.setLocation(Location.builder().setPosition(set.getReal(4), set.getReal(5), set.getReal(6)).setOrientation(set.getReal(7), set.getReal(8), set.getReal(9), set.getReal(10))
-						.setTerrain(currentArea.getTerrain()).build());
+				obj.setLocation(Location.builder().setPosition(set.getReal(5), set.getReal(6), set.getReal(7)).setOrientation(set.getReal(8), set.getReal(9), set.getReal(10), set.getReal(11))
+						.setTerrain(Terrain.valueOf(set.getText(4))).build());
+				obj.setBuildoutTag(set.getText(13));
 				if (set.getInt(12) != 0) {
-					BuildingObject building = (BuildingObject) objectMap.get(set.getInt(3));
+					BuildingObject building = (BuildingObject) objectMap.get(set.getInt(2));
 					CellObject cell = building.getCellByNumber((int) set.getInt(12));
 					obj.systemMove(cell);
 				} else if (obj instanceof BuildingObject) {
 					((BuildingObject) obj).populateCells();
 					for (SWGObject cell : obj.getContainedObjects())
 						objectMap.put(cell.getObjectId(), cell);
+					if (!obj.getBuildoutTag().isEmpty())
+						buildingMap.put(obj.getBuildoutTag(), (BuildingObject) obj);
 				}
 				objectMap.put(set.getInt(0), obj);
 			}
@@ -144,25 +143,15 @@ public final class BuildoutLoader {
 	}
 	
 	private void checkParent(SWGObject obj, String buildingName, int cellId) {
-		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(buildingName);
+		if (buildingName.endsWith("_world"))
+			return;
+		BuildingObject building = buildingMap.get(buildingName);
 		if (building == null) {
 			Log.e("Building not found in map: %s", buildingName);
 			return;
 		}
-		long buildingId = building.getId();
-		if (buildingId == 0)
-			return; // World
 		
-		SWGObject buildingUncasted = objectMap.get(buildingId);
-		if (buildingUncasted == null) {
-			Log.e("Building not found in map: %s", buildingName);
-			return;
-		}
-		if (!(buildingUncasted instanceof BuildingObject)) {
-			Log.e("Building is not an instance of BuildingObject: %s", buildingName);
-			return;
-		}
-		CellObject cell = ((BuildingObject) buildingUncasted).getCellByNumber(cellId);
+		CellObject cell = building.getCellByNumber(cellId);
 		if (cell == null) {
 			Log.e("Cell is not found! Building: %s Cell: %d", buildingName, cellId);
 			return;
@@ -170,8 +159,8 @@ public final class BuildoutLoader {
 		obj.systemMove(cell);
 	}
 	
-	static BuildoutLoader load(AreaLoader areaLoader) {
-		BuildoutLoader loader = new BuildoutLoader(areaLoader);
+	static BuildoutLoader load(Collection<String> events) {
+		BuildoutLoader loader = new BuildoutLoader(events);
 		loader.loadFromFile();
 		return loader;
 	}

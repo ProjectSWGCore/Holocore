@@ -45,26 +45,23 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TangibleObject extends SWGObject {
 	
 	private CustomizationString	appearanceData	= new CustomizationString();
-	private int		maxHitPoints	= 1000;
-	private int		components		= 0;
-	private boolean	inCombat		= false;
-	private int		condition		= 0;
-	private int		pvpFlags		= 0;
-	private PvpStatus pvpStatus = PvpStatus.COMBATANT;
-	private PvpFaction pvpFaction = PvpFaction.NEUTRAL;
-	private boolean	visibleGmOnly	= true;
-	private byte []	objectEffects	= new byte[0];
-	private int     optionFlags     = 0;
-	private int		counter			= 0;
-	private String	currentCity				= "";
+	private int				maxHitPoints	= 1000;
+	private int				components		= 0;
+	private boolean			inCombat		= false;
+	private int				condition		= 0;
+	private Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
+	private PvpStatus		pvpStatus = PvpStatus.COMBATANT;
+	private PvpFaction		pvpFaction = PvpFaction.NEUTRAL;
+	private boolean			visibleGmOnly	= true;
+	private byte []			objectEffects	= new byte[0];
+	private int    			optionFlags     = 0;
+	private int				counter			= 0;
+	private String			currentCity				= "";
 	
 	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
 	
@@ -124,21 +121,27 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void setPvpFlags(PvpFlag... pvpFlags) {
-		for(PvpFlag pvpFlag : pvpFlags)
-			this.pvpFlags |= pvpFlag.getBitmask();
+		setPvpFlags(List.of(pvpFlags));
+	}
+	
+	public void setPvpFlags(Collection<PvpFlag> pvpFlags) {
+		this.pvpFlags.addAll(pvpFlags);
 		
 		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
 	}
 	
-	public void clearPvpFlags(PvpFlag... pvpFlags) {
-		for(PvpFlag pvpFlag : pvpFlags)
-			this.pvpFlags  &= ~pvpFlag.getBitmask();
+	public void clearPvpFlags(PvpFlag ... pvpFlags) {
+		clearPvpFlags(List.of(pvpFlags));
+	}
+	
+	public void clearPvpFlags(Collection<PvpFlag> pvpFlags) {
+		this.pvpFlags.removeAll(pvpFlags);
 		
 		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
 	}
 	
 	public boolean hasPvpFlag(PvpFlag pvpFlag) {
-		return (pvpFlags & pvpFlag.getBitmask()) != 0;
+		return pvpFlags.contains(pvpFlag);
 	}
 	
 	public PvpStatus getPvpStatus() {
@@ -161,8 +164,8 @@ public class TangibleObject extends SWGObject {
 		sendDelta(3, 4, pvpFaction.getCrc());
 	}
 	
-	public int getPvpFlags() {
-		return pvpFlags;
+	public Set<PvpFlag> getPvpFlags() {
+		return Collections.unmodifiableSet(pvpFlags);
 	}
 	
 	public boolean isVisibleGmOnly() {
@@ -256,13 +259,17 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void addDefender(CreatureObject creature) {
-		if (defenders.add(creature.getObjectId()))
-			defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			if (defenders.add(creature.getObjectId()))
+				defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public void removeDefender(CreatureObject creature) {
-		if (defenders.remove(creature.getObjectId()))
-			defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			if (defenders.remove(creature.getObjectId()))
+				defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public List<Long> getDefenders() {
@@ -270,8 +277,10 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void clearDefenders() {
-		defenders.clear();
-		defenders.sendDeltaMessage(this);
+		synchronized (defenders) {
+			defenders.clear();
+			defenders.sendDeltaMessage(this);
+		}
 	}
 	
 	public boolean hasDefenders() {
@@ -305,8 +314,8 @@ public class TangibleObject extends SWGObject {
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
 		if (ourFaction == PvpFaction.NEUTRAL || otherFaction == PvpFaction.NEUTRAL) {
-			// Neutrals are always excluded from factional combat
-			return false;
+			// Neutrals are always excluded from factional combat, unless they're both neutral
+			return ourFaction == otherFaction;
 		}
 		
 		// At this point, neither are neutral
@@ -339,6 +348,18 @@ public class TangibleObject extends SWGObject {
 			// In this case, they just need to not be on leave and we've already established this
 			return true;
 		}
+	}
+	
+	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
+		Set<PvpFlag> pvpFlags = EnumSet.copyOf(observer.pvpFlags); // More efficient behind the scenes
+		
+		if (isEnemyOf(observer) && getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
+			pvpFlags.add(PvpFlag.AGGRESSIVE);
+			pvpFlags.add(PvpFlag.ATTACKABLE);
+			pvpFlags.add(PvpFlag.ENEMY);
+		}
+		
+		return pvpFlags;
 	}
 	
 	public String getCurrentCity() {
@@ -414,7 +435,7 @@ public class TangibleObject extends SWGObject {
 		stream.addInt(maxHitPoints);
 		stream.addInt(components);
 		stream.addInt(condition);
-		stream.addInt(pvpFlags);
+		stream.addInt(pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
 		stream.addAscii(pvpStatus.name());
 		stream.addAscii(pvpFaction.name());
 		stream.addBoolean(visibleGmOnly);
@@ -436,7 +457,7 @@ public class TangibleObject extends SWGObject {
 		if (version == 0)
 			stream.getBoolean();
 		condition = stream.getInt();
-		pvpFlags = stream.getInt();
+		pvpFlags = PvpFlag.getFlags(stream.getInt());
 		pvpStatus = PvpStatus.valueOf(stream.getAscii());
 		pvpFaction = PvpFaction.valueOf(stream.getAscii());
 		visibleGmOnly = stream.getBoolean();

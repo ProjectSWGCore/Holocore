@@ -31,10 +31,12 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -82,22 +84,25 @@ public class AIObject extends CreatureObject {
 	public void onObjectMoveInAware(SWGObject aware) {
 		if (aware.getBaselineType() != BaselineType.CREO)
 			return;
+		if (((CreatureObject) aware).isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			aware = aware.getSlottedObject("rider");
+			if (aware == null)
+				return;
+		}
 		CreatureObject player = (CreatureObject) aware;
 		if (!player.isLoggedInPlayer())
 			return;
-		double distance = getWorldLocation().flatDistanceTo(aware.getWorldLocation());
+		double distance = getLocation().flatDistanceTo(aware.getLocation());
 		NpcMode activeMode = this.activeMode;
-		if (distance <= 300) {
+		if (distance <= 100 && player.getPosture() != Posture.INCAPACITATED && player.getPosture() != Posture.DEAD) {
 			if (playersNearby.add(player)) {
 				if (activeMode != null)
 					activeMode.onPlayerEnterAware(player, distance);
 			} else {
 				if (activeMode != null) {
 					activeMode.onPlayerMoveInAware(player, distance);
-					if (distance < getSpawner().getAggressiveRadius() && isEnemyOf(player)) {
-						if (isLineOfSight(player)) {
-							StartNpcCombatIntent.broadcast(this, List.of(player));
-						}
+					if (getSpawner().getSpawnerFlag() == SpawnerFlag.AGGRESSIVE && distance < getSpawner().getAggressiveRadius() && isEnemyOf(player) && isLineOfSight(player)) {
+						StartNpcCombatIntent.broadcast(this, List.of(player));
 					}
 					
 				}
@@ -111,12 +116,18 @@ public class AIObject extends CreatureObject {
 	}
 	
 	@Override
+	public boolean isWithinAwarenessRange(SWGObject target) {
+		//noinspection SuspiciousMethodCalls
+		return target.getBaselineType() == BaselineType.CREO && getObserverCreatures().contains(target);
+	}
+	
+	@Override
 	public boolean isEnemyOf(TangibleObject obj) {
 		Posture myPosture = getPosture();
 		if (myPosture == Posture.INCAPACITATED || myPosture == Posture.DEAD || !(obj instanceof CreatureObject))
 			return false;
 		Posture theirPosture = ((CreatureObject) obj).getPosture();
-		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD;
+		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD && super.isEnemyOf(obj);
 	}
 	
 	public void setSpawner(Spawner spawner) {
@@ -160,6 +171,10 @@ public class AIObject extends CreatureObject {
 	
 	public NpcMode getDefaultMode() {
 		return defaultMode;
+	}
+	
+	public NpcMode getActiveMode() {
+		return activeMode;
 	}
 	
 	public void setCreatureId(String creatureId) {

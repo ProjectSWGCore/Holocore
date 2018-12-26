@@ -36,12 +36,12 @@ import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent.GroupEventType;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
+import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
@@ -236,7 +236,7 @@ public class GroupObject extends SWGObject {
 			GroupMember member = new GroupMember(creature);
 			memberMap.put(creature.getObjectId(), member);
 			groupMembers.add(member);
-			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
+			creature.setAware(AwarenessType.GROUP, List.of(this));
 			creature.setGroupId(getObjectId());
 		}
 		groupMembers.sendDeltaMessage(this);
@@ -248,6 +248,7 @@ public class GroupObject extends SWGObject {
 			GroupMember member = memberMap.remove(creature.getObjectId());
 			creature.setGroupId(0);
 			groupMembers.remove(member);
+			creature.setAware(AwarenessType.GROUP, List.of());
 			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 		}
 		groupMembers.sendDeltaMessage(this);

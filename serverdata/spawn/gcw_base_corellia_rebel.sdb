@@ -1,24 +1,24 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-3300003	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300004	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300005	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300006	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300007	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300008	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300009	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300010	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300011	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300012	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300013	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300014	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300015	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300016	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300017	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300018	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300019	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300020	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300021	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300022	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300023	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3300024	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Rebel Logistics Officer	gcw_base_rebel_corellia_reward_officer_100_h_inv_n	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+gcw_cor_base_reb_001	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.2	-13.8	-0.9	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_002	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.7	-13.8	-1.0	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_003	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.9	-13.8	-12.8	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_004	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.5	-6.8	-2.1	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_005	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.6	-6.8	-1.9	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_006	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.1	-6.8	-17.6	0	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_007	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.4	-6.8	-17.1	0	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_008	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.5	-6.8	-6.5	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_009	CORELLIA	cor_world	AREA	0	4761.8	95.0	-5244.0	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_010	CORELLIA	cor_world	AREA	0	4761.8	95.0	-5236.4	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_011	CORELLIA	cor_world	AREA	0	4770.6	95.0	-5215.9	-180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_012	CORELLIA	cor_world	AREA	0	4782.7	95.0	-5215.9	-180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_013	CORELLIA	cor_world	AREA	0	4792.6	95.0	-5206.8	-135	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_014	CORELLIA	cor_world	AREA	0	4805.1	95.0	-5253.9	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_015	CORELLIA	cor_world	AREA	0	4800.8	95.0	-5278.7	-45	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_016	CORELLIA	cor_world	AREA	0	4812.5	99.0	-5285.0	-135	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_017	CORELLIA	cor_world	AREA	0	4766.7	95.0	-5274.2	30	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_018	CORELLIA	cor_world	AREA	0	4752.7	95.0	-5209.0	135	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_019	CORELLIA	cor_world	AREA	0	4818.8	95.0	-5210.8	-140	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_020	CORELLIA	cor_world	AREA	0	4782.0	95.0	-5246.2	0	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_021	CORELLIA	cor_world	AREA	0	4782.0	95.0	-5229.7	180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_cor_base_reb_022	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.2	-13.8	-12.9	17	1	Rebel Logistics Officer	gcw_base_rebel_corellia_reward_officer	INVULNERABLE	N	100	100	GCW	Corellia GCW Base	1	IDLE	0	0	-	idle	0	0	0	300

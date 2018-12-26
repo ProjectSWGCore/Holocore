@@ -7,7 +7,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class TerminalTicketRadial implements RadialHandlerInterface {
 	
@@ -16,9 +16,9 @@ public class TerminalTicketRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
-		options.add(new RadialOption(RadialItem.ITEM_USE));
-		options.add(new RadialOption(RadialItem.EXAMINE));
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+		options.add(RadialOption.create(RadialItem.ITEM_USE));
+		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 	}
 	
 	@Override
@@ -26,6 +26,8 @@ public class TerminalTicketRadial implements RadialHandlerInterface {
 		switch (selection) {
 			case ITEM_USE:
 				new TicketUseIntent(player, target).broadcast();
+				break;
+			default:
 				break;
 		}
 	}

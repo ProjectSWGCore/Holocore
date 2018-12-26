@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin.qatool;
 
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
@@ -37,7 +38,6 @@ import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharac
 import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -159,7 +159,8 @@ public class CmdQaTool implements ICmdCallback {
 		}
 		
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
-		ObjectTeleportIntent.broadcast(recoveree, loc);
+		recoveree.setPosture(Posture.UPRIGHT);
+		recoveree.moveToContainer(null, loc);
 		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
 	}
 	
@@ -167,7 +168,7 @@ public class CmdQaTool implements ICmdCallback {
 		try {
 			CreatureObject creature = player.getCreatureObject();
 			if (creature.getParent() != null) {
-				new MoveObjectIntent(creature, creature.getWorldLocation(), 0, 0).broadcast();
+				new MoveObjectIntent(creature, creature.getWorldLocation(), 0).broadcast();
 			}
 			creature.setInstance(creature.getInstanceLocation().getInstanceType(), Integer.parseInt(args));
 			new ForceAwarenessUpdateIntent(creature).broadcast();

@@ -1,25 +1,17 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath 'com.github.jengelman.gradle.plugins:shadow:+'
-	}
-}
-
 plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
+	id "com.github.johnrengelman.shadow" version "4.0.3"
+	id "org.javamodularity.moduleplugin" version "1.2.1"
+	id "org.beryx.jlink" version "2.1.8"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
-sourceCompatibility = 10
-targetCompatibility = 10
-
-apply plugin: 'com.github.johnrengelman.shadow'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 sourceSets {
 	display { }
@@ -28,15 +20,17 @@ sourceSets {
 }
 
 test {
-	testLogging {
-		events "skipped", "failed" // just good to know in terms of what failed
-	}
 	afterSuite { TestDescriptor td, TestResult tr ->
 		if (td.parent == null) {
 			println 'Tests run: (' + tr.getTestCount() + '), Failures: (' + tr.getFailedTestCount() + ')' // IMPORTANT - this is required for Lightspeed
 		}
 	}
-	include 'com/projectswg/holocore/TestAll.class' // to run only a single test case
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
 }
 
 shadowJar {
@@ -53,7 +47,7 @@ dependencies {
 	compile project(':pswgcommon')
 	
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
-	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
+	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	
 	testCompile 'junit:junit:4.12'
@@ -65,6 +59,7 @@ dependencies {
 	utilityCompile sourceSets.main.output
 	utilityCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	utilityCompile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
+	utilityCompile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	
 	integrationCompile project(':pswgcommon')
 	integrationCompile project(':client-holocore')
@@ -77,6 +72,14 @@ dependencies {
 task CreateConvertLoginJar(type: ShadowJar) {
 	archiveName = 'ConvertLogin.jar'
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
+	from sourceSets.utility.output
+	configurations = [project.configurations.utilityRuntime]
+	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
+}
+
+task CreatePacketCaptureProcessor(type: ShadowJar) {
+	archiveName = 'PacketCaptureProcessor.jar'
+	manifest.attributes 'Main-Class': 'com.projectswg.utility.packets.ProcessPacketCapture'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
 	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')

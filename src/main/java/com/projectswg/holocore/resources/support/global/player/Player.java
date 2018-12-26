@@ -27,27 +27,21 @@
 package com.projectswg.holocore.resources.support.global.player;
 
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player implements Comparable<Player> {
 	
-	private final List<DeltasMessage> bufferedDeltas;
-	private final AtomicBoolean bufferedDeltasSent;
-	private final IntentChain packetChain;
-	private final Object sendingLock;
 	private final long networkId;
+	private final IntentChain intentChain;
 	
 	private String			username			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
@@ -61,11 +55,8 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Player(long networkId) {
-		this.bufferedDeltas = new ArrayList<>();
-		this.bufferedDeltasSent = new AtomicBoolean(false);
-		this.packetChain = new IntentChain();
-		this.sendingLock = new Object();
 		this.networkId = networkId;
+		this.intentChain = new IntentChain();
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -88,8 +79,6 @@ public class Player implements Comparable<Player> {
 		this.creatureObject = obj;
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
-		if (obj == null)
-			packetChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -112,6 +101,7 @@ public class Player implements Comparable<Player> {
 		return username;
 	}
 	
+	@NotNull
 	public String getCharacterName() {
 		if (creatureObject != null)
 			return creatureObject.getObjectName();
@@ -155,35 +145,23 @@ public class Player implements Comparable<Player> {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
 	
-	public Object getSendingLock() {
-		return sendingLock;
-	}
-	
-	public void addBufferedDelta(DeltasMessage packet) {
-		synchronized (bufferedDeltas) {
-			if (bufferedDeltasSent.get())
-				sendPacket(packet);
-			else
-				bufferedDeltas.add(packet);
-		}
-	}
-	
-	public void sendBufferedDeltas() {
-		DeltasMessage [] packets;
-		synchronized (bufferedDeltas) {
-			bufferedDeltasSent.set(true);
-			packets = bufferedDeltas.toArray(new DeltasMessage[0]);
-			bufferedDeltas.clear();
-		}
-		sendPacket(packets);
+	public boolean isBaselinesSent(SWGObject obj) {
+		CreatureObject creature = this.creatureObject;
+		return creature == null || creature.isBaselinesSent(obj);
 	}
 	
 	public void sendPacket(SWGPacket ... packets) {
-		synchronized (getSendingLock()) {
-			for (SWGPacket p : packets) {
-				packetChain.broadcastAfter(new OutboundPacketIntent(this, p));
-			}
+		for (SWGPacket p : packets) {
+			broadcast(new OutboundPacketIntent(this, p));
 		}
+	}
+	
+	public void broadcast(Intent intent) {
+		CreatureObject creatureObject = this.creatureObject;
+		if (creatureObject != null)
+			creatureObject.broadcast(intent);
+		else
+			intentChain.broadcastAfter(intent);
 	}
 	
 	@Override

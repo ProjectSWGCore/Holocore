@@ -35,14 +35,14 @@ import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.FlourishIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.WatchIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -317,10 +317,7 @@ public class EntertainmentService extends Service {
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
 		
-		// Only entertainers get XP
-		if (isEntertainer(dancer))
-			scheduleExperienceTask(dancer, danceName);
-		
+		scheduleExperienceTask(dancer, danceName);
 		new SystemMessageIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
 	}
 	
@@ -457,7 +454,8 @@ public class EntertainmentService extends Service {
 			int xpGained = performanceCounter * flourishXpMod;
 			
 			if (xpGained > 0) {
-				new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
+				if (isEntertainer(performer))
+					new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
 				performer.setPerformanceCounter(performanceCounter - 1);
 			}
 		}

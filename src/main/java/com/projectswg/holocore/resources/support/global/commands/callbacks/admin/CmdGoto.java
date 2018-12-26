@@ -28,16 +28,16 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingLoader.BuildingLoaderInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,39 +47,56 @@ public class CmdGoto implements ICmdCallback  {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		SWGObject teleportee = player.getCreatureObject();
+		CreatureObject teleportee = player.getCreatureObject();
 		if (teleportee == null)
 			return;
 		String [] parts = args.split(" ");
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
-		BuildingLoaderInfo building = DataLoader.buildings().getBuilding(parts[0].trim());
+		
+		String destination = parts[0].trim();
+		String message = PlayerLookup.doesCharacterExistByFirstName(destination) ? teleportToPlayer(player, teleportee, destination) : teleportToBuilding(player, teleportee, destination, parts);
+		
+		if (message != null)
+			SystemMessageIntent.broadcastPersonal(player, message);
+	}
+	
+	private String teleportToPlayer(Player player, CreatureObject teleportee, String playerName) {
+		CreatureObject destinationPlayer = PlayerLookup.getCharacterByFirstName(playerName);
+		if (destinationPlayer == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Unknown player: " + playerName);
+			return null;
+		}
+		
+		if (destinationPlayer.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			teleportee.moveToContainer(null, destinationPlayer.getWorldLocation());
+		else
+			teleportee.moveToContainer(destinationPlayer.getParent(), destinationPlayer.getLocation());
+		
+		return "Successfully teleported "+teleportee.getObjectName()+" to "+destinationPlayer.getObjectName();
+	}
+	
+	private String teleportToBuilding(Player player, CreatureObject teleportee, String buildingName, String [] args) {
+		BuildingObject building = BuildingLookup.getBuildingByTag(buildingName);
 		if (building == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + parts[0]);
-			return;
+			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + buildingName);
+			return null;
 		}
 		int cell = 1;
 		try {
-			if (parts.length >= 2)
-				cell = Integer.parseInt(parts[1]);
+			if (args.length >= 2)
+				cell = Integer.parseInt(args[1]);
 		} catch (NumberFormatException e) {
 			SystemMessageIntent.broadcastPersonal(player, "Invalid cell number");
-			return;
+			return null;
 		}
-		String err = teleportToGoto(teleportee, building, cell);
-		new SystemMessageIntent(player, err).broadcast();
+		return teleportToGoto(teleportee, building, cell);
 	}
 	
-	private String teleportToGoto(SWGObject obj, BuildingLoaderInfo building, int cellNumber) {
-		SWGObject parent = ObjectLookup.getObjectById(building.getId());
-		if (!(parent instanceof BuildingObject)) {
-			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, building.getId());
-			Log.e(err);
-			return err;
-		}
-		CellObject cell = ((BuildingObject) parent).getCellByNumber(cellNumber);
+	private String teleportToGoto(SWGObject obj, BuildingObject building, int cellNumber) {
+		CellObject cell = building.getCellByNumber(cellNumber);
 		if (cell == null) {
-			String err = String.format("Building '%s' does not have cell %d", building.getName(), cellNumber);
+			String err = String.format("Building '%s' does not have cell %d", building, cellNumber);
 			Log.e(err);
 			return err;
 		}
@@ -91,8 +108,8 @@ public class CmdGoto implements ICmdCallback  {
 			y = (portal.getFrame1().getY() + portal.getFrame2().getY()) / 2;
 			z = (portal.getFrame1().getZ() + portal.getFrame2().getZ()) / 2;
 		}
-		ObjectTeleportIntent.broadcast(obj, cell, Location.builder().setPosition(x, y, z).setTerrain(building.getTerrain()).build());
-		return "Successfully teleported "+obj.getObjectName()+" to "+building.getId();
+		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.getTerrain()).build());
+		return "Successfully teleported "+obj.getObjectName()+" to "+building.getBuildoutTag();
 	}
 	
 }

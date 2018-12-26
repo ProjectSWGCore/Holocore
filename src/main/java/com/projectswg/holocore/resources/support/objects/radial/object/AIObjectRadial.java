@@ -8,8 +8,9 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import me.joshlarson.jlcommon.log.Log;
 
-import java.util.List;
+import java.util.Collection;
 
 public class AIObjectRadial implements RadialHandlerInterface {
 	
@@ -18,16 +19,14 @@ public class AIObjectRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		AIObject ai = (AIObject) target;
 		
 		if (ai.getPosture() != Posture.DEAD) {
 			return;
 		}
 		
-		RadialOption loot = new RadialOption(RadialItem.LOOT);
-		loot.addChild(RadialItem.LOOT_ALL);
-		options.add(loot);
+		options.add(RadialOption.create(RadialItem.LOOT, RadialOption.create(RadialItem.LOOT_ALL)));
 	}
 	
 	@Override

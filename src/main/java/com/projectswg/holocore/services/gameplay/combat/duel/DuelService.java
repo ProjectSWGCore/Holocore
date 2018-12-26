@@ -26,17 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.duel;
 
-
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.DeathblowIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;

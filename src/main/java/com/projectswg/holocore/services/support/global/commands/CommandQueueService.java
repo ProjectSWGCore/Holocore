@@ -2,15 +2,13 @@ package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
-import com.projectswg.common.network.packets.swg.zone.object_controller.LookAtTarget;
+import com.projectswg.common.network.packets.swg.zone.object_controller.*;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -24,10 +22,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CommandQueueService extends Service {
@@ -67,8 +62,8 @@ public class CommandQueueService extends Service {
 			long targetId = request.getTargetId();
 			SWGObject target = targetId != 0 ? ObjectLookup.getObjectById(targetId) : null;
 			QueueCommandIntent.broadcast(gpi.getPlayer().getCreatureObject(), target, request.getArguments(), command, request.getCounter());
-		} else if (p instanceof LookAtTarget) {
-			if (((LookAtTarget) p).getTargetId() == 0)
+		} else if (p instanceof IntendedTarget) {
+			if (((IntendedTarget) p).getTargetId() == 0)
 				combatQueueMap.remove(gpi.getPlayer().getCreatureObject());
 		}
 	}
@@ -123,15 +118,17 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void startCommand(EnqueuedCommand command) {
-			Log.t("%s: start command %s", command.getSource().getObjectName(), command.getCommand());
-			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue())
-				commandQueue.offer(command);
-			else
+			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue()) {
+				StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "queued command %s", command.getCommand().getName());
+				if (!commandQueue.contains(command))
+					commandQueue.offer(command);
+			} else {
 				execute(command);
+			}
 		}
 		
 		public synchronized void execute(EnqueuedCommand command) {
-			Log.t("%s: execute command %s", command.getSource().getObjectName(), command.getCommand());
+			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "executed command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
 			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
@@ -194,6 +191,21 @@ public class CommandQueueService extends Service {
 		@Override
 		public int compareTo(@NotNull EnqueuedCommand o) {
 			return command.getDefaultPriority().compareTo(o.getCommand().getDefaultPriority());
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			EnqueuedCommand that = (EnqueuedCommand) o;
+			return Objects.equals(command, that.command);
+		}
+		
+		@Override
+		public int hashCode() {
+			return command.hashCode();
 		}
 		
 		@NotNull

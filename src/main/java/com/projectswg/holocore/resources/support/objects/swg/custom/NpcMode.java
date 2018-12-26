@@ -7,15 +7,12 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 import java.util.Collection;
-import java.util.Random;
 
 public abstract class NpcMode {
 	
-	private final Random random;
 	private final AIObject obj;
 	
 	public NpcMode(AIObject obj) {
-		this.random = new Random();
 		this.obj = obj;
 	}
 	
@@ -74,10 +71,6 @@ public abstract class NpcMode {
 		return obj;
 	}
 	
-	public final Random getRandom() {
-		return random;
-	}
-	
 	public final Spawner getSpawner() {
 		return obj.getSpawner();
 	}
@@ -95,19 +88,19 @@ public abstract class NpcMode {
 	}
 	
 	public final void walkTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed());
 	}
 	
 	public final void walkTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getWalkSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getWalkSpeed());
 	}
 	
 	public final void runTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getRunSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, parent, location, getRunSpeed());
 	}
 	
 	public final void runTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed(), obj.getNextUpdateCount());
+		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed());
 	}
 	
 }

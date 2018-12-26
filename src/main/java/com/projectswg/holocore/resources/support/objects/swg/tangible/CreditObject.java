@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
-import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -49,8 +48,8 @@ public class CreditObject extends TangibleObject {
 	 * @return {@link ContainerResult}
 	 */
 	@Override
-	public ContainerResult moveToContainer(@NotNull SWGObject requester, SWGObject container) {
-		if (!(requester instanceof CreatureObject && ((CreatureObject) requester).isPlayer()))
+	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject container) {
+		if (!requester.isPlayer())
 			return super.moveToContainer(requester, container);
 		
 		assert amount > 0 : "amount must be set";
@@ -64,19 +63,14 @@ public class CreditObject extends TangibleObject {
 		if (result != ContainerResult.SUCCESS)
 			return result;
 		
-		((CreatureObject) requester).addToCash(amount);
+		requester.addToCash(amount);
 		
-//		Set<Player> oldObservers = getObserversAndParent();
-//		if (parent != null)
-//			parent.removeObject(this);
-//		AwarenessUtilities.callForOldObserver(oldObservers, Collections.emptySet(), this::destroyObject);
-		new ContainerTransferIntent(this, parent, null).broadcast();
-		new DestroyObjectIntent(this).broadcast();
-		
+		systemMove(null);
+		DestroyObjectIntent.broadcast(this);
 		return ContainerResult.SUCCESS;
 	}
 	
-	protected ContainerResult moveToAccountChecks(SWGObject requester) {
+	protected ContainerResult moveToAccountChecks(CreatureObject requester) {
 		if (requester == null)
 			return ContainerResult.SUCCESS;
 		

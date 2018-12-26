@@ -1,31 +1,31 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-INTEGER PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-3400003	NABOO	nab_gcw_base	AREA	23	83.60	-20.00	151.10	-90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400004	NABOO	nab_gcw_base	AREA	24	102.90	-20.00	154.10	-104	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400005	NABOO	nab_gcw_base	AREA	23	83.30	-20.00	130.90	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400006	NABOO	nab_gcw_base	AREA	28	64.40	-20.00	130.80	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400007	NABOO	nab_gcw_base	AREA	25	101.60	-20.00	127.00	-68	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400008	NABOO	nab_gcw_base	AREA	23	78.50	-20.00	111.00	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400009	NABOO	nab_gcw_base	AREA	26	101.50	-20.00	116.00	-112	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400010	NABOO	nab_gcw_base	AREA	21	51.60	-20.00	141.30	180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400011	NABOO	nab_gcw_base	AREA	21	42.60	-20.00	141.30	180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400012	NABOO	nab_gcw_base	AREA	19	46.80	-20.00	106.40	-56	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400013	NABOO	nab_gcw_base	AREA	16	-10.60	-12.00	96.20	71	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400014	NABOO	nab_gcw_base	AREA	16	-10.30	-12.00	102.10	107	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400015	NABOO	nab_gcw_base	AREA	14	17.50	-12.00	94.90	-66	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400016	NABOO	nab_gcw_base	AREA	15	7.80	-12.00	115.30	-152	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400017	NABOO	nab_gcw_base	AREA	15	-0.10	-12.00	115.00	158	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400018	NABOO	nab_gcw_base	AREA	10	-3.70	-12.00	59.20	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400019	NABOO	nab_gcw_base	AREA	10	-0.90	-12.00	70.60	116	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400020	NABOO	nab_gcw_base	AREA	9	40.30	-12.00	53.40	-65	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400021	NABOO	nab_gcw_base	AREA	9	40.30	-12.00	63.00	-101	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400022	NABOO	nab_gcw_base	AREA	6	17.40	-12.00	33.30	-117	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400023	NABOO	nab_world	AREA	0	998.60	298.00	-1485.80	-180	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400024	NABOO	nab_world	AREA	0	1006.90	298.00	-1494.90	-135	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400025	NABOO	nab_world	AREA	0	962.90	298.00	-1490.50	90	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400026	NABOO	nab_world	AREA	0	953.40	298.00	-1521.20	0	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400027	NABOO	nab_world	AREA	0	1002.00	298.00	-1505.10	172	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400028	NABOO	nab_world	AREA	0	1008.00	298.00	-1526.80	125	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400029	NABOO	nab_world	AREA	0	978.90	298.00	-1487.30	179	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400030	NABOO	nab_world	AREA	0	947.80	298.00	-1497.70	131	1	a Rebel commando	gcw_base_rebel_commando_90_h_att_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
-3400031	NABOO	nab_gcw_base	AREA	27	67.10	-20.00	110.80	90	1	Rebel Logistics Officer	gcw_base_rebel_naboo_reward_officer_100_h_inv_n	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+gcw_nab_base_reb_001	NABOO	nab_gcw_base	AREA	23	83.6	-20.0	151.1	-90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_002	NABOO	nab_gcw_base	AREA	24	102.9	-20.0	154.1	-104	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_003	NABOO	nab_gcw_base	AREA	23	83.3	-20.0	130.9	0	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_004	NABOO	nab_gcw_base	AREA	28	64.4	-20.0	130.8	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_005	NABOO	nab_gcw_base	AREA	25	101.6	-20.0	127.0	-68	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_006	NABOO	nab_gcw_base	AREA	23	78.5	-20.0	111.0	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_007	NABOO	nab_gcw_base	AREA	26	101.5	-20.0	116.0	-112	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_008	NABOO	nab_gcw_base	AREA	21	51.6	-20.0	141.3	180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_009	NABOO	nab_gcw_base	AREA	21	42.6	-20.0	141.3	180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_010	NABOO	nab_gcw_base	AREA	19	46.8	-20.0	106.4	-56	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_011	NABOO	nab_gcw_base	AREA	16	-10.6	-12.0	96.2	71	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_012	NABOO	nab_gcw_base	AREA	16	-10.3	-12.0	102.1	107	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_013	NABOO	nab_gcw_base	AREA	14	17.5	-12.0	94.9	-66	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_014	NABOO	nab_gcw_base	AREA	15	7.8	-12.0	115.3	-152	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_015	NABOO	nab_gcw_base	AREA	15	-0.1	-12.0	115.0	158	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_016	NABOO	nab_gcw_base	AREA	10	-3.7	-12.0	59.2	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_017	NABOO	nab_gcw_base	AREA	10	-0.9	-12.0	70.6	116	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_018	NABOO	nab_gcw_base	AREA	9	40.3	-12.0	53.4	-65	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_019	NABOO	nab_gcw_base	AREA	9	40.3	-12.0	63.0	-101	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_020	NABOO	nab_gcw_base	AREA	6	17.4	-12.0	33.3	-117	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_021	NABOO	nab_world	AREA	0	998.6	298.0	-1485.8	-180	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_022	NABOO	nab_world	AREA	0	1006.9	298.0	-1494.9	-135	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_023	NABOO	nab_world	AREA	0	962.9	298.0	-1490.5	90	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_024	NABOO	nab_world	AREA	0	953.4	298.0	-1521.2	0	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_025	NABOO	nab_world	AREA	0	1002.0	298.0	-1505.1	172	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_026	NABOO	nab_world	AREA	0	1008.0	298.0	-1526.8	125	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_027	NABOO	nab_world	AREA	0	978.9	298.0	-1487.3	179	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_028	NABOO	nab_world	AREA	0	947.8	298.0	-1497.7	131	1	a Rebel commando	gcw_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300
+gcw_nab_base_reb_029	NABOO	nab_gcw_base	AREA	27	67.1	-20.0	110.8	90	1	Rebel Logistics Officer	gcw_base_rebel_naboo_reward_officer	INVULNERABLE	N	100	100	GCW	Naboo GCW Base	1	IDLE	0	0	-	idle	0	0	0	300

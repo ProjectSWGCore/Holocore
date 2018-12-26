@@ -27,15 +27,12 @@
 
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -58,25 +55,31 @@ public class CreatureObjectAwareness {
 		if (pendingRemove.remove(obj) || aware.contains(obj))
 			return;
 		pendingAdd.add(obj);
-		if (obj instanceof BuildingObject) { // Client is picky about buildings - just need to ensure the cells are sent with the building no matter what
-			obj.getContainedObjects().forEach(this::addAware);
-		}
 	}
 	
 	public synchronized void removeAware(@NotNull SWGObject obj) {
 		assert obj != creature;
-		if (pendingAdd.remove(obj) || !aware.contains(obj))
+		if (pendingAdd.removeIf(add -> add == obj || isParent(add, obj)) || !aware.contains(obj))
 			return;
 		pendingRemove.add(obj);
 	}
 	
 	public synchronized void flushAware() {
-		Player target = creature.getOwner();
-		List<SWGObject> create = getCreateList();
+		Player target = creature.getOwnerShallow();
 		List<SWGObject> destroy = getDestroyList();
+		for (Iterator<SWGObject> it = aware.iterator(); it.hasNext(); ) {
+			SWGObject a = it.next();
+			for (SWGObject destroyObject : destroy) {
+				if (isParent(a, destroyObject)) {
+					a.removeObserver(creature);
+					it.remove();
+					break;
+				}
+			}
+		}
+		List<SWGObject> create = getCreateList();
 		
 		aware.addAll(create);
-		aware.removeAll(destroy);
 		pendingAdd.removeAll(create);
 		pendingRemove.clear();
 		
@@ -87,14 +90,20 @@ public class CreatureObjectAwareness {
 			
 			LinkedList<SWGObject> createStack = new LinkedList<>();
 			for (SWGObject obj : create) {
-				popStackUntil(target, createStack, obj.getParent());
+				if (obj.getSlotArrangement() == -1)
+					popStackUntil(target, createStack, obj.getParent());
+				else
+					popStackAll(target, createStack);
 				createStack.add(obj);
 				createObject(obj, target);
 			}
-			popStackUntil(target, createStack, null);
-			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost";
+			popStackAll(target, createStack);
+			assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost " + creature;
 		}
 		
+		for (SWGObject a : create) {
+			a.addObserver(creature);
+		}
 		assert aware.contains(creature) || pendingAdd.contains(creature): "not aware of creature";
 	}
 	
@@ -105,18 +114,26 @@ public class CreatureObjectAwareness {
 		pendingAdd.addAll(creature.getAware());
 	}
 	
+	public synchronized boolean isAware(SWGObject obj) {
+		return aware.contains(obj);
+	}
+	
 	List<SWGObject> getCreateList() {
 		List<SWGObject> list = new ArrayList<>();
 		List<SWGObject> sortedDepth = new ArrayList<>(pendingAdd);
-		sortedDepth.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth));
+		sortedDepth.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).thenComparingDouble(this::getDistance));
 		for (SWGObject obj : sortedDepth) {
 			SWGObject parent = obj.getParent();
-			if (parent == null || aware.contains(parent)) {
+			if (parent != null && !aware.contains(parent) && !list.contains(parent)) {
+				assert !(obj instanceof CellObject);
+				continue;
+			}
+			assert !(obj instanceof BuildingObject) || pendingAdd.containsAll(obj.getContainedObjects()) : "All cells must be sent with the building";
+			if (parent == null || obj.getSlotArrangement() != -1 || aware.contains(parent)) {
 				list.add(obj);
 			} else {
 				int parentIndex = list.indexOf(parent);
-				if (parentIndex == -1)
-					continue;
+				assert parentIndex != -1 : "parent isn't added along with child";
 				list.add(parentIndex+1, obj);
 			}
 		}
@@ -125,17 +142,25 @@ public class CreatureObjectAwareness {
 	
 	List<SWGObject> getDestroyList() {
 		List<SWGObject> list = new ArrayList<>(pendingRemove);
-		list.sort(Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).reversed());
+		// Don't delete our own parent
+		list.removeIf(this::isParent);
+		// Optimization to only send high-level destroys
+		list.removeIf(obj -> pendingRemove.contains(obj.getParent()));
 		return list;
 	}
 	
-	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {
-		while (!createStack.isEmpty() && createStack.getLast() != parent) {
-			target.sendPacket(new SceneEndBaselines(createStack.pollLast().getObjectId()));
-		}
+	private boolean isParent(SWGObject obj) {
+		return isParent(creature, obj);
 	}
 	
-	private static void createObject(@NotNull SWGObject obj, @NotNull Player target) {
+	private double getDistance(SWGObject obj) {
+		if (obj.getParent() != null)
+			return 0;
+		
+		return creature.getWorldLocation().distanceTo(obj.getLocation());
+	}
+	
+	private void createObject(@NotNull SWGObject obj, @NotNull Player target) {
 		long id = obj.getObjectId();
 		{ // SceneCreateObjectByCrc
 			SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
@@ -163,19 +188,14 @@ public class CreatureObjectAwareness {
 				target.sendPacket(obj.createBaseline9(target));
 			}
 		}
-		{ // Miscelaneous
+		{ // Miscellaneous
 			if (obj instanceof CellObject)
 				target.sendPacket(new UpdateCellPermissionMessage((byte) 1, id));
 			// ? UpdatePostureMessage for PlayerObject ?
 			if (obj instanceof CreatureObject && obj.isGenerated()) {
 				CreatureObject creature = (CreatureObject) obj;
 				target.sendPacket(new UpdatePostureMessage(creature.getPosture().getId(), id));
-				
-				Set<PvpFlag> flags = PvpFlag.getFlags(creature.getPvpFlags());
-				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, flags.toArray(new PvpFlag[0])));
-			}
-			if (obj instanceof TangibleObject) {
-				new FactionIntent((TangibleObject) obj, FactionIntent.FactionIntentType.FLAGUPDATE).broadcast();
+				target.sendPacket(new UpdatePvpStatusMessage(creature.getPvpFaction(), id, this.creature.getPvpFlagsFor(creature)));
 			}
 		}
 		{ // UpdateContainmentMessage
@@ -185,12 +205,39 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
+	private static void popStackAll(Player target, LinkedList<SWGObject> createStack) {
+		SWGObject parent;
+		while ((parent = createStack.pollLast()) != null) {
+			target.sendPacket(new SceneEndBaselines(parent.getObjectId()));
+		}
+	}
+	
+	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {
+		SWGObject last;
+		while (!createStack.isEmpty() && (last = createStack.getLast()) != null) {
+			if (last == parent)
+				break;
+			createStack.pollLast();
+			target.sendPacket(new SceneEndBaselines(last.getObjectId()));
+		}
+	}
+	
 	private static void destroyObject(@NotNull SWGObject obj, @NotNull Player target) {
 		target.sendPacket(new SceneDestroyObject(obj.getObjectId()));
 	}
 	
 	private static int getObjectDepth(SWGObject obj) {
 		return obj == null ? 0 : 1 + getObjectDepth(obj.getParent());
+	}
+	
+	private static boolean isParent(SWGObject child, SWGObject testParent) {
+		SWGObject parent = child;
+		while (parent != null) {
+			if (parent == testParent)
+				return true;
+			parent = parent.getParent();
+		}
+		return false;
 	}
 	
 }

@@ -30,9 +30,10 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import org.jetbrains.annotations.NotNull;
 
 public class KneelCmdCallback implements ICmdCallback {
@@ -40,6 +41,8 @@ public class KneelCmdCallback implements ICmdCallback {
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+			return;
 		if (creature.isPerforming()) {
 			new DanceIntent(player.getCreatureObject()).broadcast();
 		} else {

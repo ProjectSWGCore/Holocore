@@ -44,9 +44,10 @@ public class ConvertBuildingList implements Converter {
 		System.out.println("Converting building list...");
 		Collection<SWGObject> objects = DataLoader.buildouts().getObjects().values();
 		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/building/buildings.sdb"))) {
-			gen.writeColumnNames("building_id", "terrain_name", "object_id", "iff", "building_name", "total_cells", "x", "y", "z");
+			gen.writeColumnNames("building_id", "terrain_name", "object_id");
 			for (SWGObject obj : objects) {
 				if (obj instanceof BuildingObject) {
+					
 					String template = obj.getTemplate().substring(obj.getTemplate().lastIndexOf('/') + 1);
 					Terrain terrain = obj.getTerrain();
 					String name = terrain.name().charAt(0) + terrain.name().toLowerCase(Locale.US).substring(1);

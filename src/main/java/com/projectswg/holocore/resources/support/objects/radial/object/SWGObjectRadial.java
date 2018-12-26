@@ -12,7 +12,7 @@ import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInt
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
-import java.util.List;
+import java.util.Collection;
 
 public class SWGObjectRadial implements RadialHandlerInterface {
 	
@@ -21,7 +21,7 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(List<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		// Verify that target is a tangible
 		if (target == null || target.getClass() != TangibleObject.class)
 			return;
@@ -39,14 +39,8 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 			return;
 		}
 		
-		RadialOption splitOption = new RadialOption(RadialItem.SERVER_MENU49);
-		RadialOption stackOption = new RadialOption(RadialItem.SERVER_MENU50);
-		
-		splitOption.setOverriddenText("@autostack:unstack");
-		stackOption.setOverriddenText("@autostack:stack");
-		
-		options.add(splitOption);
-		options.add(stackOption);
+		options.add(RadialOption.create(RadialItem.SERVER_MENU49, "@autostack:unstack"));
+		options.add(RadialOption.create(RadialItem.SERVER_MENU50, "@autostack:stack"));
 	}
 	
 	@Override
@@ -57,6 +51,8 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 				break;
 			case SERVER_MENU50:
 				stack(target);
+				break;
+			default:
 				break;
 		}
 	}

@@ -29,7 +29,9 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -42,14 +44,18 @@ import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -57,10 +63,12 @@ public class CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	
-	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness(this);
-	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP();
-	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();	
+	private final CreatureObjectAwareness		awareness		= new CreatureObjectAwareness(this);
+	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP();
+	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP();
+	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
+	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
+	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
@@ -80,7 +88,6 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer> baseAttributes			= new SWGList<>(1, 2);
 	
-	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -99,6 +106,9 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void flushObjectsAware() {
+		Player owner = getOwnerShallow();
+		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
+			return;
 		awareness.flushAware();
 	}
 	
@@ -109,7 +119,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
+		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject) && !super.hasOptionFlags(OptionFlag.MOUNT)) {
 			addEquipment(obj);
 		}
 	}
@@ -127,12 +137,25 @@ public class CreatureObject extends TangibleObject {
 		return inventory;
 	}
 	
+	@NotNull
+	public SWGObject getDatapad() {
+		SWGObject datapad = getSlottedObject("datapad");
+		assert datapad != null;
+		return datapad;
+	}
+	
 	@Override
-	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
+	@Nullable
+	public SWGObject getEffectiveParent() {
+		return isStatesBitmask(CreatureState.RIDING_MOUNT) ? null : getParent();
+	}
+	
+	@Override
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, List<String> slots) {
 		SWGObject inventory = getSlottedObject("inventory");
-		for (String slot : obj.getArrangement().get(arrangement-4)) {
+		for (String slot : slots) {
 			SWGObject slotObj = getSlottedObject(slot);
-			if (slotObj != null) {
+			if (slotObj != null && slotObj != inventory) {
 				slotObj.moveToContainer(inventory);
 			}
 		}
@@ -140,6 +163,8 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	protected void onAddedChild(SWGObject child) {
+		if (!isPlayer())
+			return;
 		super.onAddedChild(child);
 		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
 		getAllChildren(children, child);
@@ -148,6 +173,8 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	protected void onRemovedChild(SWGObject child) {
+		if (!isPlayer())
+			return;
 		super.onRemovedChild(child);
 		Set<SWGObject> children = new HashSet<>(getAwareness().getAware(AwarenessType.SELF));
 		{
@@ -167,15 +194,34 @@ public class CreatureObject extends TangibleObject {
 			getAllChildren(children, obj);
 	}
 	
-	@Override
-	protected int calculateLoadRange() {
-		if (isLoggedInPlayer())
-			return 300;
-		return super.calculateLoadRange();
+	public boolean isWithinAwarenessRange(SWGObject target) {
+		if (!isPlayer())
+			return false;
+		
+		Player owner = getOwnerShallow();
+		if (owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED || !target.isVisible(this))
+			return false;
+		
+		SWGObject myParent = getSuperParent();
+		SWGObject targetParent = target.getSuperParent();
+		if (myParent != null && myParent == targetParent)
+			return true;
+		
+		switch (target.getBaselineType()) {
+			case WAYP:
+				return false;
+			case SCLT:
+			case BUIO:
+				return true;
+			case CREO:
+				return flatDistanceTo(target) <= 200;
+			default:
+				return flatDistanceTo(target) <= 400;
+		}
 	}
 	
 	@Override
-	public boolean isVisible(SWGObject target) {
+	public boolean isVisible(CreatureObject target) {
 		return !isLoggedOutPlayer() && super.isVisible(target);
 	}
 
@@ -193,6 +239,24 @@ public class CreatureObject extends TangibleObject {
 
 	public void removeAppearanceItem(SWGObject obj) {
 		creo6.removeAppearanceItem(obj, this);
+	}
+	
+	public boolean isContainerOpen(SWGObject obj, String slot) {
+		return containersOpen.contains(new Container(obj, slot));
+	}
+	
+	public boolean openContainer(SWGObject obj, String slot) {
+		return containersOpen.add(new Container(obj, slot));
+	}
+	
+	public boolean closeAllContainers() {
+		boolean empty = containersOpen.isEmpty();
+		containersOpen.clear();
+		return !empty;
+	}
+	
+	public boolean closeContainer(SWGObject obj, String slot) {
+		return containersOpen.remove(new Container(obj, slot));
 	}
 	
 	public void addSkill(String ... skillList) {
@@ -322,7 +386,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean isLoggedInPlayer() {
-		return getOwner() != null && isPlayer();
+		return getOwnerShallow() != null && isPlayer();
 	}
 	
 	public boolean isLoggedOutPlayer() {
@@ -339,9 +403,9 @@ public class CreatureObject extends TangibleObject {
 
 	public void setPosture(Posture posture) {
 		this.posture = posture;
-		sendDelta(3, 13, posture.getId());
 		if (isPlayer())
 			sendObservers(new PostureUpdate(getObjectId(), posture));
+		sendDelta(3, 13, posture.getId());
 	}
 	
 	public void setRace(Race race) {
@@ -462,6 +526,22 @@ public class CreatureObject extends TangibleObject {
 	
 	public void updateLastGalacticReserveTime() {
 		lastReserveOperation = System.nanoTime();
+	}
+	
+	public void inheritMovement(CreatureObject vehicle) {
+		setWalkSpeed(vehicle.getRunSpeed() / 2);
+		setRunSpeed(vehicle.getRunSpeed());
+		setAccelScale(vehicle.getAccelScale());
+		setTurnScale(vehicle.getTurnScale());
+		setMovementScale(vehicle.getMovementScale());
+	}
+	
+	public void resetMovement() {
+		setWalkSpeed(1.549);
+		setRunSpeed(7.3);
+		setAccelScale(1);
+		setTurnScale(1);
+		setMovementScale(1);
 	}
 	
 	public void setMovementScale(double movementScale) {
@@ -1006,6 +1086,23 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
+	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
+		Set<PvpFlag> flags = super.getPvpFlagsFor(observer);
+		
+		if (observer instanceof CreatureObject) {
+			if (isDuelingPlayer((CreatureObject) observer)) {
+				flags.add(PvpFlag.DUEL);
+			}
+		}
+		
+		return flags;
+	}
+	
+	public boolean isBaselinesSent(SWGObject obj) {
+		return awareness.isAware(obj);
+	}
+	
+	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -1153,6 +1250,34 @@ public class CreatureObject extends TangibleObject {
 		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
 		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+	}
+	
+	private static class Container {
+		
+		private final SWGObject container;
+		private final String slot;
+		private final int hash;
+		
+		public Container(SWGObject container, String slot) {
+			this.container = container;
+			this.slot = slot;
+			this.hash = Objects.hash(container, slot);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			Container container1 = (Container) o;
+			return Objects.equals(container, container1.container) && Objects.equals(slot, container1.slot);
+		}
+		
+		@Override
+		public int hashCode() {
+			return hash;
+		}
 	}
 	
 }

@@ -27,33 +27,32 @@
 
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
+import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.test_resources.GenericCreatureObject;
-import com.projectswg.holocore.test_resources.GenericTangibleObject;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-@RunWith(JUnit4.class)
-public class TestCreatureObjectAwareness {
+import java.util.List;
+
+public class TestCreatureObjectAwareness extends TestRunnerNoIntents {
 	
 	private CreatureObjectAwareness awareness;
 	private CreatureObject creature;
 	private TangibleObject testObject1;
 	private TangibleObject testObject2;
-	private Player dummy;
 	
 	@Before
 	public void initialize() {
-		creature = new GenericCreatureObject(1);
-		creature.setOwner(new Player());
+		creature = new GenericCreatureObject(getUniqueId());
 		awareness = new CreatureObjectAwareness(creature);
-		testObject1 = new GenericTangibleObject(2);
-		testObject2 = new GenericTangibleObject(3);
+		testObject1 = new GenericTangibleObject(getUniqueId(), "obj1");
+		testObject2 = new GenericTangibleObject(getUniqueId(), "obj2");
+		syncSelfAware();
 	}
 	
 	@Test
@@ -116,21 +115,7 @@ public class TestCreatureObjectAwareness {
 		assertDestroy();
 		awareness.removeAware(testObject1);
 		awareness.removeAware(testObject2);
-		assertDestroy(testObject1, testObject2);
-	}
-	
-	@Test
-	public void testParentObjectRemoveAlreadyGone() {
-		testObject1.moveToContainer(testObject2);
-		awareness.addAware(testObject1);
-		awareness.addAware(testObject2);
-		awareness.flushAware();
-		assertCreate();
-		assertDestroy();
-		awareness.removeAware(testObject2);
-		awareness.flushAware();
-		awareness.removeAware(testObject1);
-		assertDestroy();
+		assertDestroy(testObject2);
 	}
 	
 	@Test
@@ -143,11 +128,17 @@ public class TestCreatureObjectAwareness {
 	}
 	
 	private void assertCreate(SWGObject ... objects) {
-		Assert.assertArrayEquals(objects, awareness.getCreateList().toArray());
+		Assert.assertEquals(List.of(objects), awareness.getCreateList());
 	}
 	
 	private void assertDestroy(SWGObject ... objects) {
-		Assert.assertArrayEquals(objects, awareness.getDestroyList().toArray());
+		Assert.assertEquals(List.of(objects), awareness.getDestroyList());
+	}
+	
+	private void syncSelfAware() {
+		for (SWGObject self : creature.getAware(AwarenessType.SELF))
+			awareness.addAware(self);
+		awareness.flushAware();
 	}
 	
 }

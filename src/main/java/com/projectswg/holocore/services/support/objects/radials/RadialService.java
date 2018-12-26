@@ -33,6 +33,7 @@ import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandler;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -42,8 +43,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RadialService extends Service {
 	
@@ -55,30 +55,31 @@ public class RadialService extends Service {
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof ObjectMenuRequest) {
-			onRequest((ObjectMenuRequest) p);
+			onRequest(gpi.getPlayer(), (ObjectMenuRequest) p);
 		} else if (p instanceof ObjectMenuSelect) {
 			onSelection(gpi.getPlayer(), (ObjectMenuSelect) p);
 		}
 	}
 	
-	private void onRequest(ObjectMenuRequest request) {
-		SWGObject requestor = ObjectLookup.getObjectById(request.getRequestorId());
+	private void onRequest(Player player, ObjectMenuRequest request) {
+		CreatureObject requestor = player.getCreatureObject();
 		SWGObject target = ObjectLookup.getObjectById(request.getTargetId());
-		if (target == null)
+		if (requestor == null || target == null)
 			return;
-		if (!(requestor instanceof CreatureObject)) {
-			Log.w("Requestor of target: %s is not a creature object! %s", target, requestor);
-			return;
-		}
-		Player player = requestor.getOwner();
-		if (player == null) {
-			Log.w("Requestor of target: %s does not have an owner! %s", target, requestor);
-			return;
+		
+		StandardLog.onPlayerTrace(this, player, "requested radials for %s", target);
+		LinkedHashMap<RadialItem, RadialOption> options = new LinkedHashMap<>();
+		for (RadialOption option : request.getOptions())
+			options.put(option.getType(), option);
+		
+		{ // Load server radials
+			List<RadialOption> serverOptions = new ArrayList<>();
+			RadialHandler.INSTANCE.getOptions(serverOptions, player, target);
+			for (RadialOption option : serverOptions)
+				options.put(option.getType(), option);
 		}
 		
-		List<RadialOption> options = new ArrayList<>();
-		RadialHandler.INSTANCE.getOptions(options, player, target);
-		sendResponse(player, target, options, request.getCounter());
+		sendResponse(player, target, options.values(), request.getCounter());
 	}
 	
 	private void onSelection(Player player, ObjectMenuSelect select) {
@@ -98,14 +99,15 @@ public class RadialService extends Service {
 			return;
 		}
 		
+		StandardLog.onPlayerTrace(this, player, "selected radial %s for %s", selection, target);
 		RadialHandler.INSTANCE.handleSelection(player, target, selection);
 	}
 	
-	private static void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
+	private static void sendResponse(Player player, SWGObject target, Collection<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
 		menuResponse.setTargetId(target.getObjectId());
 		menuResponse.setRequestorId(player.getCreatureObject().getObjectId());
-		menuResponse.setRadialOptions(options);
+		menuResponse.setRadialOptions(new ArrayList<>(options));
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
 	}

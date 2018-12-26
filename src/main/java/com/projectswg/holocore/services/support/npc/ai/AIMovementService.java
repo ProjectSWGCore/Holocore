@@ -1,15 +1,16 @@
 package com.projectswg.holocore.services.support.npc.ai;
 
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class AIMovementService extends Service {
 		for (NavigationPoint point : snmi.getPoints()) {
 			appendRoutePoint(route, point, snmi.getSpeed());
 		}
+		
 		if (route.isEmpty())
 			routes.remove(obj);
 		else
@@ -67,6 +69,13 @@ public class AIMovementService extends Service {
 	@IntentHandler
 	private void handleStopNpcMovementIntent(StopNpcMovementIntent snmi) {
 		routes.remove(snmi.getObject());
+	}
+	
+	@IntentHandler
+	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
+		CreatureObject corpse = cki.getCorpse();
+		if (corpse instanceof AIObject)
+			routes.remove(corpse);
 	}
 	
 	private void executeRoutes() {

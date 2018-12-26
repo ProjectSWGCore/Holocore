@@ -45,14 +45,11 @@ public class BuildingObject extends TangibleObject {
 	private final Map<Integer, CellObject> idToCell;
 	private final List<Portal> portals;
 	
-	private int loadRange;
-	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
 		this.nameToCell = new HashMap<>();
 		this.idToCell = new HashMap<>();
 		this.portals = new ArrayList<>();
-		this.loadRange = 0;
 	}
 	
 	public CellObject getCellByName(String cellName) {
@@ -95,15 +92,6 @@ public class BuildingObject extends TangibleObject {
 	}
 	
 	@Override
-	public void setTemplate(String template) {
-		super.setTemplate(template);
-		if (template.equals("object/building/tatooine/shared_palace_tatooine_jabba.iff"))
-			loadRange = Integer.MAX_VALUE;
-		if (template.equals("object/building/tatooine/shared_tower_jabbas_palace.iff"))
-			loadRange = Integer.MAX_VALUE;
-	}
-	
-	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
 		stream.addByte(0);
@@ -113,11 +101,6 @@ public class BuildingObject extends TangibleObject {
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		stream.getByte();
-	}
-	
-	@Override
-	protected int calculateLoadRange() {
-		return loadRange != 0 ? loadRange : super.calculateLoadRange();
 	}
 	
 	private void addObject(CellObject cell, List<CellInfo> cellInfos) {

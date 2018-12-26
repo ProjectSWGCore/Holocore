@@ -27,77 +27,57 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.function.Consumer;
 
 class TerrainMapChunk {
 	
-	private final List<SWGObject> objects;
+	private final Set<SWGObject> objects;
+	private final Set<CreatureObject> creatures;
 	private TerrainMapChunk [] neighbors;
 	
 	public TerrainMapChunk() {
-		this.objects = new CopyOnWriteArrayList<>();
-		this.neighbors = new TerrainMapChunk[0];
+		this.objects = new CopyOnWriteArraySet<>();
+		this.creatures = ConcurrentHashMap.newKeySet();
+		this.neighbors = new TerrainMapChunk[]{this};
 	}
 	
 	public void link(TerrainMapChunk neighbor) {
+		assert this != neighbor;
 		int length = neighbors.length;
 		neighbors = Arrays.copyOf(neighbors, length+1);
 		neighbors[length] = neighbor;
 	}
 	
 	public void addObject(@NotNull SWGObject obj) {
-		assert !objects.contains(obj) : "the chunk already contains this object";
-		objects.add(obj);
+		for (TerrainMapChunk neighbor : neighbors)
+			neighbor.objects.add(obj);
+		
+		if (obj instanceof CreatureObject)
+			creatures.add((CreatureObject) obj);
 	}
 	
 	public void removeObject(@NotNull SWGObject obj) {
-		objects.remove(obj);
+		for (TerrainMapChunk neighbor : neighbors)
+			neighbor.objects.remove(obj);
+		
+		if (obj instanceof CreatureObject)
+			creatures.remove(obj);
 	}
 	
-	public Set<SWGObject> getWithinAwareness(@NotNull SWGObject obj) {
-		Set<SWGObject> withinRange = new HashSet<>();
-		getWithinAwareness(obj, withinRange);
-		for (TerrainMapChunk neighbor : neighbors) {
-			neighbor.getWithinAwareness(obj, withinRange);
-		}
-		return withinRange;
-	}
-	
-	public void getWithinAwareness(@NotNull SWGObject obj, @NotNull Collection<SWGObject> withinRange) {
-		int truncX = obj.getTruncX();
-		int truncZ = obj.getTruncZ();
-		int instance = obj.getInstanceLocation().getInstanceNumber();
-		int loadRange = obj.getLoadRange();
-		for (SWGObject test : objects) {
-			// Calculate distance
-			int dTmp = truncX - test.getTruncX();
-			int d = dTmp * dTmp;
-			dTmp = truncZ - test.getTruncZ();
-			
-			int testInstance = test.getInstanceLocation().getInstanceNumber();
-			int range = test.getLoadRange();
-			if (range < loadRange)
-				range = loadRange;
-			
-			if (instance == testInstance) {
-				if (range >= 16384 || (d + dTmp * dTmp) < range*range)
-					recursiveAdd(withinRange, obj, test);
+	public void update() {
+		for (CreatureObject creature : creatures) {
+			List<SWGObject> withinRange = new ArrayList<>();
+			for (SWGObject test : objects) {
+				if (creature.isWithinAwarenessRange(test))
+					withinRange.add(test);
 			}
-		}
-	}
-	
-	private static void recursiveAdd(@NotNull Collection<SWGObject> withinRange, @NotNull SWGObject obj, @NotNull SWGObject test) {
-		if (!test.isVisible(obj))
-			return;
-		withinRange.add(test);
-		for (SWGObject child : test.getSlottedObjects()) {
-			recursiveAdd(withinRange, obj, child);
-		}
-		for (SWGObject child : test.getContainedObjects()) {
-			recursiveAdd(withinRange, obj, child);
+			creature.setAware(AwarenessType.OBJECT, withinRange);
 		}
 	}
 	

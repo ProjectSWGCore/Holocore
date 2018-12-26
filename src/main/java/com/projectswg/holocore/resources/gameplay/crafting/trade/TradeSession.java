@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.gameplay.crafting.trade;
 
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.trade.*;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;

@@ -36,22 +36,24 @@ import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
+import com.projectswg.holocore.resources.gameplay.world.travel.TravelGroup.ShuttleStatus;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.SpecificObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.gameplay.world.travel.TravelGroup.ShuttleStatus;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.SpecificObject;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TravelHelper {
@@ -185,8 +187,8 @@ public class TravelHelper {
 	}
 	
 	private void teleportAndDestroyTicket(TravelPoint destination, SWGObject ticket, CreatureObject traveler) {
-		new DestroyObjectIntent(ticket).broadcast();
-		new ObjectTeleportIntent(traveler, destination.getLocation()).broadcast();
+		DestroyObjectIntent.broadcast(ticket);
+		traveler.moveToContainer(destination.getCollector().getParent(), destination.getLocation());
 	}
 	
 	private void loadAllowedRoutesAndPrices() {

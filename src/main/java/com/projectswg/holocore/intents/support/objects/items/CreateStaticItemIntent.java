@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.support.objects.items;
 
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissionsType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService.ObjectCreationHandler;
 import me.joshlarson.jlcommon.control.Intent;
@@ -36,14 +35,12 @@ public final class CreateStaticItemIntent extends Intent {
 	private final SWGObject requester;
 	private final SWGObject container;
 	private final ObjectCreationHandler objectCreationHandler;
-	private final ContainerPermissionsType permissions;
 	private final String[] itemNames;
 	
-	public CreateStaticItemIntent(SWGObject requester, SWGObject container, ObjectCreationHandler objectCreationHandler, ContainerPermissionsType permissions, String... itemNames) {
+	public CreateStaticItemIntent(SWGObject requester, SWGObject container, ObjectCreationHandler objectCreationHandler, String... itemNames) {
 		this.requester = requester;
 		this.container = container;
 		this.objectCreationHandler = objectCreationHandler;
-		this.permissions = permissions;
 		this.itemNames = itemNames;
 	}
 	
@@ -57,10 +54,6 @@ public final class CreateStaticItemIntent extends Intent {
 	
 	public SWGObject getRequester() {
 		return requester;
-	}
-	
-	public ContainerPermissionsType getPermissions(){
-		return permissions;
 	}
 	
 	public ObjectCreationHandler getObjectCreationHandler() {
