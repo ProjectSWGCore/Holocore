@@ -56,7 +56,7 @@ import java.util.*;
 
 public class ProjectSWG {
 	
-	public static final String VERSION = "JUN18";
+	public static final String VERSION = "DEC18";
 	
 	private static final Galaxy GALAXY = new Galaxy();
 	
