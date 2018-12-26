@@ -187,8 +187,8 @@ public class NPCCreator {
 	private static WeaponObject createWeapon(DetailNpcStatInfo detailNpcStat, String template) {
 		try {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
-			weapon.setMinDamage((int) (detailNpcStat.getDamagePerSecond() * 0.90));
-			weapon.setMaxDamage(detailNpcStat.getDamagePerSecond());
+			weapon.setMinDamage((int) (detailNpcStat.getDamagePerSecond() * 2 * 0.90));
+			weapon.setMaxDamage(detailNpcStat.getDamagePerSecond() * 2);
 			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
 			if (range == -1)
 				Log.w("Failed to load weapon range for: %s", template);
