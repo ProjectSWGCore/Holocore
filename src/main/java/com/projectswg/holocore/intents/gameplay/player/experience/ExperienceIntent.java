@@ -44,7 +44,7 @@ public final class ExperienceIntent extends Intent {
 		this.creatureObject = creatureObject;
 		this.xpType = xpType;
 		this.experienceGained = experienceGained;
-		this.multiply = false;
+		this.multiply = multiply;
 	}
 	
 	public CreatureObject getCreatureObject() {
