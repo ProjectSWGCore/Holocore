@@ -33,6 +33,16 @@ idea {
     }
 }
 
+jlink {
+	imageDir.set(file("$buildDir/holocore"))
+	imageZip.set(file("$buildDir/holocore.zip"))
+	launcher {
+		name = 'holocore'
+		jvmArgs = []
+		unixScriptTemplate = file('src/main/resources/jlink-unix-launch-template.txt')
+	}
+}
+
 shadowJar {
 	baseName = "Holocore"
 	classifier = null
