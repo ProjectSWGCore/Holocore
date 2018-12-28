@@ -81,7 +81,7 @@ public class ProjectSWG {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		Log.addWrapper(new ConsoleLogWrapper(LogLevel.DATA));
+		Log.addWrapper(new ConsoleLogWrapper());
 		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
 		
 		Log.i("Holocore version: %s", VERSION);
