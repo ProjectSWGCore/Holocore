@@ -73,6 +73,22 @@ public class FactionIntent extends Intent {
 		return newStatus;
 	}
 	
+	public static void broadcastUpdateFlags(TangibleObject target) {
+		new FactionIntent(target, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	public static void broadcastStartSwitch(TangibleObject target) {
+		new FactionIntent(target, FactionIntentType.STATUSUPDATE).broadcast();
+	}
+	
+	public static void broadcastUpdateFaction(TangibleObject target, PvpFaction newFaction) {
+		new FactionIntent(target, newFaction).broadcast();
+	}
+	
+	public static void broadcastUpdateStatus(TangibleObject target, PvpStatus newStatus) {
+		new FactionIntent(target, newStatus).broadcast();
+	}
+	
 	public enum FactionIntentType {
 		FLAGUPDATE,
 		SWITCHUPDATE,

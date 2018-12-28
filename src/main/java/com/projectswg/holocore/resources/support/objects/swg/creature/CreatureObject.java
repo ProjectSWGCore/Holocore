@@ -1091,6 +1091,8 @@ public class CreatureObject extends TangibleObject {
 		
 		if (observer instanceof CreatureObject) {
 			if (isDuelingPlayer((CreatureObject) observer)) {
+				flags.add(PvpFlag.ATTACKABLE);
+				flags.add(PvpFlag.ENEMY);
 				flags.add(PvpFlag.DUEL);
 			}
 		}
