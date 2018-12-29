@@ -84,9 +84,11 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		V old = super.put(key, value);
 		updateCount.incrementAndGet();
 		if (old != null) {
-			removeData(key);
+			if (old != value)
+				addData(key, value, (byte) 2);
+		} else {
+			addData(key, value, (byte) 0);
 		}
-		addData(key, value, (byte) 0);
 		
 		return old;
 	}

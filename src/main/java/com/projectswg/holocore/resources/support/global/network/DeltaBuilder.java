@@ -48,12 +48,7 @@ public class DeltaBuilder {
 		if (num == 3 || num == 6) { // Shared Objects
 			return object.sendObservers(message) > 0;
 		} else {
-			Player owner = object.getOwner();
-			if (owner != null) {
-				owner.sendPacket(message);
-				return true;
-			}
-			return false;
+			return object.sendSelf(message) > 0;
 		}
 	}
 	
