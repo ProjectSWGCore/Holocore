@@ -90,7 +90,7 @@ public class CreatureObjectAwareness {
 			
 			LinkedList<SWGObject> createStack = new LinkedList<>();
 			for (SWGObject obj : create) {
-				if (obj.getSlotArrangement() == -1)
+				if (obj.getSlotArrangement() == -1 || isParent(obj, creature))
 					popStackUntil(target, createStack, obj.getParent());
 				else
 					popStackAll(target, createStack);
@@ -129,7 +129,7 @@ public class CreatureObjectAwareness {
 				continue;
 			}
 			assert !(obj instanceof BuildingObject) || pendingAdd.containsAll(obj.getContainedObjects()) : "All cells must be sent with the building";
-			if (parent == null || obj.getSlotArrangement() != -1 || aware.contains(parent)) {
+			if (parent == null || (!isParent(obj, creature) && obj.getSlotArrangement() != -1) || aware.contains(parent)) {
 				list.add(obj);
 			} else {
 				int parentIndex = list.indexOf(parent);
@@ -214,7 +214,7 @@ public class CreatureObjectAwareness {
 	
 	private static void popStackUntil(Player target, LinkedList<SWGObject> createStack, SWGObject parent) {
 		SWGObject last;
-		while (!createStack.isEmpty() && (last = createStack.getLast()) != null) {
+		while ((last = createStack.peekLast()) != null) {
 			if (last == parent)
 				break;
 			createStack.pollLast();

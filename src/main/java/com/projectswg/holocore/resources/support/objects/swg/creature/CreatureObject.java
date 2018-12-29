@@ -50,6 +50,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1091,6 +1092,8 @@ public class CreatureObject extends TangibleObject {
 		
 		if (observer instanceof CreatureObject) {
 			if (isDuelingPlayer((CreatureObject) observer)) {
+				flags.add(PvpFlag.ATTACKABLE);
+				flags.add(PvpFlag.ENEMY);
 				flags.add(PvpFlag.DUEL);
 			}
 		}

@@ -28,13 +28,13 @@ package com.projectswg.holocore.services.gameplay.combat.duel;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.DeathblowIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
+import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -86,7 +86,7 @@ public class DuelService extends Service {
 			handleEndDuel(corpse, killer);
 		}
 		
-	}	
+	}
 	
 	@IntentHandler
 	private void handlCreatureKilledIntent(CreatureKilledIntent cki) {
@@ -101,7 +101,7 @@ public class DuelService extends Service {
 			handleEndDuel(corpse, killer);
 		}
 		
-	}	
+	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
 		if (!isLocationValidToDuel(accepter, target)) {
@@ -118,25 +118,26 @@ public class DuelService extends Service {
 		accepter.addPlayerToSentDuels(target);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
-		accepter.setPvpFlags(PvpFlag.DUEL);
-		target.setPvpFlags(PvpFlag.DUEL);
 		
 		EnterCombatIntent.broadcast(accepter, target);
 		EnterCombatIntent.broadcast(target, accepter);
-
+		
+		FactionIntent.broadcastUpdateFlags(accepter);
+		FactionIntent.broadcastUpdateFlags(target);
+		
 		new DuelPlayerIntent(accepter, target, DuelPlayerIntent.DuelEventType.BEGINDUEL).broadcast();
-
+		
 	}
 	
 	private void endDuel(CreatureObject ender, CreatureObject target) {
-		ender.clearPvpFlags(PvpFlag.DUEL);
-		target.clearPvpFlags(PvpFlag.DUEL);
 		ender.removePlayerFromSentDuels(target);
 		target.removePlayerFromSentDuels(ender);
 		
 		ExitCombatIntent.broadcast(ender);
 		ExitCombatIntent.broadcast(target);
-
+		
+		FactionIntent.broadcastUpdateFlags(ender);
+		FactionIntent.broadcastUpdateFlags(target);
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
@@ -186,6 +187,6 @@ public class DuelService extends Service {
 	}
 	
 	private void sendSystemMessage(CreatureObject playerToMessage, CreatureObject playerToMessageAbout, String message) {
-		new SystemMessageIntent(playerToMessage.getOwner() , new ProsePackage(new StringId("duel", message), "TT", playerToMessageAbout.getObjectName())).broadcast();
+		new SystemMessageIntent(playerToMessage.getOwner(), new ProsePackage(new StringId("duel", message), "TT", playerToMessageAbout.getObjectName())).broadcast();
 	}
 }

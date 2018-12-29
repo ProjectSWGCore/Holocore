@@ -82,7 +82,7 @@ public class NetworkClientService extends Service {
 		{
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
 			if (adminServerPort > 0) {
-				InetSocketAddress localhost = new InetSocketAddress(InetAddress.getLoopbackAddress(), ProjectSWG.getGalaxy().getAdminServerPort());
+				InetSocketAddress localhost = new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort);
 				adminServer = new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
 			} else {
 				adminServer = null;

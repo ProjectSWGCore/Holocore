@@ -25,7 +25,7 @@ public class ChatSpatialService extends Service {
 		String senderName = sender.getCharacterFirstName();
 		
 		// Send to self
-		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, spi.getMessage(), (short) spi.getChatType(), (short) spi.getMoodId());
+		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, spi.getMessage(), (short) spi.getChatType(), (short) 0);
 		
 		// Notify observers of the chat message
 		for (Player owner : actor.getObservers()) {

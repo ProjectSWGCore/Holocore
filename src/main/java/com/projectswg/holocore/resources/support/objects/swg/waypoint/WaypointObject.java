@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.objects.swg.waypoint;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage.Type;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.Encodable;
@@ -98,8 +99,25 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 	}
 	
 	@Override
+	public void setLocation(Location location) {
+		waypoint.setTerrain(location.getTerrain());
+		waypoint.setPosition(location.getPosition());
+	}
+	
+	@Override
+	public void setPosition(@NotNull Terrain terrain, double x, double y, double z) {
+		waypoint.setTerrain(terrain);
+		waypoint.setPosition(new Point3D(x, y, z));
+	}
+	
+	@Override
 	public void setTerrain(@NotNull Terrain terrain) {
 		waypoint.setTerrain(terrain);
+	}
+	
+	@Override
+	public void setPosition(double x, double y, double z) {
+		waypoint.setPosition(new Point3D(x, y, z));
 	}
 	
 	public void setCellId(long cellId) {
