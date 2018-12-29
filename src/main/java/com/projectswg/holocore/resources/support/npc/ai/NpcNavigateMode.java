@@ -13,27 +13,26 @@ import java.util.concurrent.atomic.AtomicReference;
 public class NpcNavigateMode extends NpcMode {
 	
 	private final NavigationPoint destination;
-	private final AtomicBoolean startedMovement;
-	private final AtomicReference<Location> previousLocation;
+	private final Location destinationWorldLocation;
 	
 	public NpcNavigateMode(@NotNull AIObject obj, @NotNull NavigationPoint destination) {
 		super(obj);
 		this.destination = destination;
-		this.startedMovement = new AtomicBoolean(false);
-		this.previousLocation = new AtomicReference<>(obj.getWorldLocation());
+		this.destinationWorldLocation = (destination.getParent() == null) ? destination.getLocation() : Location.builder(destination.getLocation()).translateLocation(destination.getParent().getWorldLocation()).build();
+	}
+	
+	@Override
+	public void onModeStart() {
+		runTo(destination.getParent(), destination.getLocation());
 	}
 	
 	@Override
 	public void act() {
 		Location cur = getAI().getWorldLocation();
-		Location prev = previousLocation.getAndSet(cur);
-		if (prev.distanceTo(cur) > 1E-3) {
-			if (!startedMovement.getAndSet(true)) {
-				StartNpcMovementIntent.broadcast(getAI(), destination.getParent(), destination.getLocation(), destination.getSpeed());
-			}
-			queueNextLoop(1000);
-		} else {
+		if (cur.distanceTo(destinationWorldLocation) < 1E-3) {
 			ScheduleNpcModeIntent.broadcast(getAI(), null);
+		} else {
+			queueNextLoop(500);
 		}
 	}
 }
