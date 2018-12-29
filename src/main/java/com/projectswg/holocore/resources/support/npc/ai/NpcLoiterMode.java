@@ -49,15 +49,22 @@ public class NpcLoiterMode extends NpcMode {
 	}
 	
 	@Override
+	public void onModeStart() {
+		Location currentLocation = getAI().getLocation();
+		if (mainLocation == null)
+			mainLocation = currentLocation;
+		if (mainLocation.distanceTo(currentLocation) >= 1)
+			runTo(mainLocation);
+	}
+	
+	@Override
 	public void act() {
 		Random random = ThreadLocalRandom.current();
 		if (isRooted()) {
 			queueNextLoop(10000 + random.nextInt(5));
 			return;
 		}
-		Location currentLocation = getAI().getLocation();
-		if (mainLocation == null)
-			mainLocation = currentLocation;
+		Location currentLocation = mainLocation;
 		
 		if (random.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
@@ -71,7 +78,7 @@ public class NpcLoiterMode extends NpcMode {
 		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		
-		walkTo(l.build());
+		moveTo(l.build());
 		queueNextLoop(30 + random.nextInt(10));
 	}
 	

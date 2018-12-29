@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
+import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -82,6 +83,10 @@ public class NpcPatrolMode extends NpcMode {
 					closestDistance = distance;
 					index = i;
 				}
+			}
+			if (closestDistance >= 2) {
+				ScheduleNpcModeIntent.broadcast(getAI(), new NpcNavigateMode(getAI(), waypoints.get(index)));
+				return;
 			}
 			compiledWaypoints = new ArrayList<>(waypoints.size());
 			for (int i = index; i < waypoints.size(); i++) {

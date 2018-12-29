@@ -38,8 +38,20 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class NpcTurningMode extends NpcMode {
 	
+	private Location mainLocation;
+	
 	public NpcTurningMode(AIObject obj) {
 		super(obj);
+		this.mainLocation = null;
+	}
+	
+	@Override
+	public void onModeStart() {
+		Location currentLocation = getAI().getLocation();
+		if (mainLocation == null)
+			mainLocation = currentLocation;
+		if (mainLocation.distanceTo(currentLocation) >= 1)
+			runTo(mainLocation);
 	}
 	
 	@Override
@@ -54,7 +66,7 @@ public class NpcTurningMode extends NpcMode {
 			return;
 		double theta = random.nextDouble() * 360;
 		
-		walkTo(Location.builder(getAI().getLocation()).setHeading(theta).build());
+		moveTo(Location.builder(mainLocation).setHeading(theta).build());
 		queueNextLoop(30 + random.nextInt(10));
 	}
 	

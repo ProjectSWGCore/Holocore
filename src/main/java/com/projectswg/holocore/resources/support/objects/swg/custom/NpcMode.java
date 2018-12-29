@@ -1,7 +1,10 @@
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint;
+import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -87,20 +90,28 @@ public abstract class NpcMode {
 		return obj.getMovementPercent() * obj.getMovementScale() * obj.getRunSpeed();
 	}
 	
-	public final void walkTo(SWGObject parent, Location location) {
+	public final void moveTo(SWGObject parent, Location location) {
 		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed());
 	}
 	
+	public final void moveTo(Location location) {
+		MoveObjectIntent.broadcast(obj, location, getWalkSpeed());
+	}
+	
+	public final void walkTo(SWGObject parent, Location location) {
+		CompileNpcMovementIntent.broadcast(obj, NavigationPoint.from(obj.getParent(), obj.getLocation(), parent, location, getWalkSpeed()), NavigationRouteType.TERMINATE, getWalkSpeed());
+	}
+	
 	public final void walkTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getWalkSpeed());
+		CompileNpcMovementIntent.broadcast(obj, NavigationPoint.from(obj.getParent(), obj.getLocation(), location, getWalkSpeed()), NavigationRouteType.TERMINATE, getWalkSpeed());
 	}
 	
 	public final void runTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getRunSpeed());
+		CompileNpcMovementIntent.broadcast(obj, NavigationPoint.from(obj.getParent(), obj.getLocation(), parent, location, getRunSpeed()), NavigationRouteType.TERMINATE, getRunSpeed());
 	}
 	
 	public final void runTo(Location location) {
-		MoveObjectIntent.broadcast(obj, obj.getParent(), location, getRunSpeed());
+		CompileNpcMovementIntent.broadcast(obj, NavigationPoint.from(obj.getParent(), obj.getLocation(), location, getRunSpeed()), NavigationRouteType.TERMINATE, getRunSpeed());
 	}
 	
 }

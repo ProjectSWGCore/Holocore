@@ -124,10 +124,11 @@ public class NavigationPoint {
 		List<NavigationPoint> path = new ArrayList<>();
 		
 		double currentDistance = speed;
-		while (currentDistance <= totalDistance) {
-			path.add(interpolate(parent, source, destination, speed, Math.min(1, currentDistance / totalDistance)));
+		while (currentDistance < totalDistance) {
+			path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance));
 			currentDistance += speed;
 		}
+		path.add(interpolate(parent, source, destination, speed, 1));
 		return path;
 	}
 	
