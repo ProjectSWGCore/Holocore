@@ -4,10 +4,7 @@ import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.radial.object.AIObjectRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.CreditObjectRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.SWGObjectRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.UsableObjectRadial;
+import com.projectswg.holocore.resources.support.objects.radial.object.*;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
 import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
@@ -38,6 +35,7 @@ public enum RadialHandler {
 		initializeSurveyRadials();
 		initializePetRadials();
 		initializeMiscRadials();
+		initializeContainerRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
@@ -106,5 +104,11 @@ public enum RadialHandler {
 	private void initializeMiscRadials() {
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
+	}
+	
+	private void initializeContainerRadials() {
+		registerHandler(GameObjectType.GOT_MISC_CONTAINER, new ContainerObjectRadial());
+		registerHandler(GameObjectType.GOT_MISC_CONTAINER_PUBLIC, new ContainerObjectRadial());
+		registerHandler(GameObjectType.GOT_MISC_CONTAINER_WEARABLE, new ContainerObjectRadial());
 	}
 }
