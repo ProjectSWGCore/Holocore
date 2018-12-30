@@ -108,6 +108,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("createStaticItem", CmdCreateStaticItem::new);
 		registerCallback("credits", CmdMoney::new);
 		registerCallback("setSpeed", CmdSetSpeed::new);
+		registerCallback("setExperience", CmdSetExperience::new);
 	}
 	
 	private void addChatScripts() {

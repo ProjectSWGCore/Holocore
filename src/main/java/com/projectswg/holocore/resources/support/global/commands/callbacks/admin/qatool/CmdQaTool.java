@@ -184,14 +184,7 @@ public class CmdQaTool implements ICmdCallback {
 	}
 	
 	private void grantXp(Player player, String xpType, String xpGainedArg) {
-		try {
-			int xpGained = Integer.valueOf(xpGainedArg);
-			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
-			Log.i("XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
-		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, String.format("XP command: %s is not a number", xpGainedArg));
-			Log.e("XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
-		}
+
 	}
 	
 	private void grantGcw(Player player, String pointsArg) {
