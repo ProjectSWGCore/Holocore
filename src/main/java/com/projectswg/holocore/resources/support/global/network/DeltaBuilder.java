@@ -32,23 +32,32 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 
 public class DeltaBuilder {
 	
-	public static boolean send(SWGObject object, BaselineType type, int num, int updateType, Object change) {
-		return send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change)));
+	public static void send(SWGObject object, BaselineType type, int num, int updateType, Object change) {
+		send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change)));
 	}
 	
-	public static boolean send(SWGObject object, BaselineType type, int num, int updateType, Object change, StringType strType) {
-		return send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change, strType)));
+	public static void send(SWGObject object, BaselineType type, int num, int updateType, Object change, StringType strType) {
+		send(object, type, num, updateType, (change instanceof byte[] ? (byte[]) change : Encoder.encode(change, strType)));
 	}
 	
-	private static boolean send(SWGObject object, BaselineType type, int num, int updateType, byte [] data) {
-		DeltasMessage message = new DeltasMessage(object.getObjectId(), type, num, updateType, data);
+	private static void send(SWGObject object, BaselineType type, int num, int updateType, byte [] data) {
+		DeltasMessage delta = new DeltasMessage(object.getObjectId(), type, num, updateType, data);
 		if (num == 3 || num == 6) { // Shared Objects
-			return object.sendObservers(message) > 0;
+			for (CreatureObject observer : object.getObserverCreatures()) {
+				observer.addDelta(delta);
+			}
 		} else {
-			return object.sendSelf(message) > 0;
+			Player owner = object.getOwner();
+			if (owner != null) {
+				CreatureObject observerSelf = owner.getCreatureObject();
+				if (observerSelf != null) {
+					observerSelf.addDelta(delta);
+				}
+			}
 		}
 	}
 	

@@ -36,18 +36,20 @@ import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Player implements Comparable<Player> {
 	
 	private final long networkId;
 	private final IntentChain intentChain;
+	private final AtomicReference<CreatureObject> creatureObject;
 	
 	private String			username			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
 	private PlayerServer	server				= PlayerServer.NONE;
 	private PlayerState		state				= PlayerState.DISCONNECTED;
-	private CreatureObject	creatureObject		= null;
 	private long			lastInboundMessage	= 0;
 	
 	public Player() {
@@ -57,6 +59,7 @@ public class Player implements Comparable<Player> {
 	public Player(long networkId) {
 		this.networkId = networkId;
 		this.intentChain = new IntentChain();
+		this.creatureObject = new AtomicReference<>(null);
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -76,9 +79,13 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public void setCreatureObject(CreatureObject obj) {
-		this.creatureObject = obj;
-		if (obj != null && obj.getOwner() != this)
-			obj.setOwner(this);
+		CreatureObject previous = creatureObject.getAndSet(obj);
+		if (obj != previous) {
+			if (previous != null)
+				previous.setOwner(null);
+			if (obj != null)
+				obj.setOwner(this);
+		}
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -103,6 +110,7 @@ public class Player implements Comparable<Player> {
 	
 	@NotNull
 	public String getCharacterName() {
+		CreatureObject creatureObject = getCreatureObject();
 		if (creatureObject != null)
 			return creatureObject.getObjectName();
 		return "";
@@ -129,14 +137,15 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public CreatureObject getCreatureObject() {
-		return creatureObject;
+		return creatureObject.get();
 	}
 	
 	public PlayerObject getPlayerObject() {
+		CreatureObject creatureObject = getCreatureObject();
 		if(creatureObject != null){
 			SWGObject player = creatureObject.getSlottedObject("ghost");
 			if (player instanceof PlayerObject)
-				return (PlayerObject) player;			
+				return (PlayerObject) player;
 		}
 		return null;
 	}
@@ -146,18 +155,48 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public boolean isBaselinesSent(SWGObject obj) {
-		CreatureObject creature = this.creatureObject;
+		CreatureObject creature = getCreatureObject();
 		return creature == null || creature.isBaselinesSent(obj);
 	}
 	
-	public void sendPacket(SWGPacket ... packets) {
+	public void sendPacket(SWGPacket packet) {
+		broadcast(new OutboundPacketIntent(this, packet));
+	}
+	
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
+		broadcast(new OutboundPacketIntent(this, packet1));
+		broadcast(new OutboundPacketIntent(this, packet2));
+	}
+	
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
+		broadcast(new OutboundPacketIntent(this, packet1));
+		broadcast(new OutboundPacketIntent(this, packet2));
+		broadcast(new OutboundPacketIntent(this, packet3));
+	}
+	
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
+		broadcast(new OutboundPacketIntent(this, packet1));
+		broadcast(new OutboundPacketIntent(this, packet2));
+		broadcast(new OutboundPacketIntent(this, packet3));
+		broadcast(new OutboundPacketIntent(this, packet4));
+	}
+	
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
+		broadcast(new OutboundPacketIntent(this, packet1));
+		broadcast(new OutboundPacketIntent(this, packet2));
+		broadcast(new OutboundPacketIntent(this, packet3));
+		broadcast(new OutboundPacketIntent(this, packet4));
+		broadcast(new OutboundPacketIntent(this, packet5));
+	}
+	
+	public void sendPacket(Collection<? extends SWGPacket> packets) {
 		for (SWGPacket p : packets) {
 			broadcast(new OutboundPacketIntent(this, p));
 		}
 	}
 	
 	public void broadcast(Intent intent) {
-		CreatureObject creatureObject = this.creatureObject;
+		CreatureObject creatureObject = getCreatureObject();
 		if (creatureObject != null)
 			creatureObject.broadcast(intent);
 		else
@@ -166,6 +205,7 @@ public class Player implements Comparable<Player> {
 	
 	@Override
 	public String toString() {
+		CreatureObject creatureObject = getCreatureObject();
 		String str = "Player[";
 		str += (creatureObject==null?"null":creatureObject.getObjectId());
 		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());

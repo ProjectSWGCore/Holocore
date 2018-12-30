@@ -54,21 +54,7 @@ public class ObjectAware {
 	}
 	
 	public synchronized void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
-		Collection<SWGObject> prevAware = objects.isEmpty() ? EMPTY_SET : getAware();
-		Collection<SWGObject> oldAware = awareness.put(type, objects);
-		assert oldAware != null : "initialized in constructor";
-		
-		for (SWGObject removed : oldAware) {
-			if (notAware(removed)) {
-				object.onObjectLeaveAware(removed);
-			}
-		}
-		
-		for (SWGObject added : objects) {
-			if (prevAware.contains(added))
-				continue;
-			object.onObjectEnterAware(added);
-		}
+		awareness.put(type, objects);
 		
 		if (object instanceof CreatureObject)
 			((CreatureObject) object).flushObjectsAware();

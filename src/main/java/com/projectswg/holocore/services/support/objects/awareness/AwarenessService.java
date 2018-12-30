@@ -58,7 +58,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class AwarenessService extends Service {
@@ -68,15 +70,18 @@ public class AwarenessService extends Service {
 	private final ObjectAwareness awareness;
 	private final ScheduledThreadPool chunkUpdater;
 	private final BlockingQueue<Runnable> positionUpdates;
+	private final Set<CreatureObject> onlinePlayers;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
 		this.chunkUpdater = new ScheduledThreadPool(1, 8, "awareness-chunk-updater");
 		this.positionUpdates = new LinkedBlockingQueue<>();
+		this.onlinePlayers = ConcurrentHashMap.newKeySet();
 	}
 	
 	@Override
 	public boolean initialize() {
+		awareness.startThreadPool();
 		chunkUpdater.start();
 		chunkUpdater.executeWithFixedDelay(0, 100, this::update);
 		return true;
@@ -85,7 +90,7 @@ public class AwarenessService extends Service {
 	@Override
 	public boolean terminate() {
 		chunkUpdater.stop();
-		return chunkUpdater.awaitTermination(1000);
+		return awareness.stopThreadPool() && chunkUpdater.awaitTermination(1000);
 	}
 	
 	public void update() {
@@ -94,6 +99,7 @@ public class AwarenessService extends Service {
 			Runnable r = positionUpdates.poll();
 			r.run();
 		}
+		onlinePlayers.forEach(CreatureObject::sendAndFlushAllDeltas);
 	}
 	
 	@IntentHandler
@@ -108,8 +114,14 @@ public class AwarenessService extends Service {
 				awareness.destroyObject(creature);
 				break;
 			case PE_LOGGED_OUT:
-				if (creature != null)
+				if (creature != null) {
 					awareness.updateObject(creature);
+					onlinePlayers.remove(creature);
+				}
+				break;
+			case PE_FIRST_ZONE:
+				assert creature != null;
+				onlinePlayers.add(creature);
 				break;
 			default:
 				break;
@@ -198,6 +210,7 @@ public class AwarenessService extends Service {
 		
 		creature.systemMove(parent, loc);
 		creature.resetObjectsAware();
+		creature.clearDeltas();
 		startZone(player, creature, firstZone);
 		awareness.updateObject(creature);
 		sendObjectUpdates(creature, oldParent, parent, oldLocation, loc, false, 0);

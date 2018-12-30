@@ -461,16 +461,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return Collections.unmodifiableCollection(slots.values());
 	}
 	
-	public void setOwner(Player player) {
-		if (owner == player)
-			return;
-		if (owner != null)
-			owner.setCreatureObject(null);
-		this.owner = player;
-		if (player != null && this instanceof CreatureObject)
-			player.setCreatureObject((CreatureObject) this);
-	}
-	
 	public void setLocation(Location location) {
 		if (parent != null && location.getTerrain() != parent.getTerrain())
 			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
@@ -567,19 +557,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Nullable
 	public Player getOwner() {
-		if (owner != null)
-			return owner;
-
 		SWGObject parent = this.parent;
-		assert parent != this;
-		if (parent != null)
-			return parent.getOwner();
-		
-		return null;
+		return parent != null ? parent.getOwner() : null;
 	}
 	
 	public Player getOwnerShallow() {
-		return owner;
+		return null;
 	}
 	
 	@Nullable
@@ -887,41 +870,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void onObjectMoved() {
 		if (!isGenerated())
 			return;
-		Set<SWGObject> aware = getAware();
-		// Running on a different thread to make sure this doesn't slow down awareness
-		ScheduledUtilities.run(() -> onObjectMoved(aware), 0, TimeUnit.MILLISECONDS);
-	}
-	
-	private void onObjectMoved(Set<SWGObject> aware) {
-		for (SWGObject a : aware) {
+		for (SWGObject a : getAware()) {
 			try {
 				a.onObjectMoveInAware(this);
 			} catch (Throwable t) {
 				Log.e(t);
 			}
 		}
-		for (SWGObject child : getContainedObjects()) {
-			child.onObjectMoved(aware);
-		}
-		for (SWGObject slot : getSlottedObjects()) {
-			slot.onObjectMoved(aware);
-		}
-	}
-	
-	/**
-	 * Called when an object enters this object's awareness
-	 * @param aware the object entering awareness
-	 */
-	public void onObjectEnterAware(SWGObject aware) {
-		
-	}
-	
-	/**
-	 * Called when an object enters this object's awareness
-	 * @param aware the object entering awareness
-	 */
-	public void onObjectLeaveAware(SWGObject aware) {
-		
 	}
 	
 	/**
@@ -960,19 +915,64 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.isAwareOf(obj);
 	}
 	
-	public int sendObservers(SWGPacket ... packets) {
-		int sent = 0;
+	public void sendObservers(SWGPacket packet) {
 		for (CreatureObject observer : observers) {
-			sent += observer.sendSelf(packets);
+			observer.sendSelf(packet);
 		}
-		return sent;
 	}
 	
-	public int sendSelf(SWGPacket ... packets) {
+	public void sendObservers(SWGPacket packet1, SWGPacket packet2) {
+		for (CreatureObject observer : observers) {
+			observer.sendSelf(packet1, packet2);
+		}
+	}
+	
+	public void sendObservers(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
+		for (CreatureObject observer : observers) {
+			observer.sendSelf(packet1, packet2, packet3);
+		}
+	}
+	
+	public void sendObservers(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
+		for (CreatureObject observer : observers) {
+			observer.sendSelf(packet1, packet2, packet3, packet4);
+		}
+	}
+	
+	public void sendObservers(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
+		for (CreatureObject observer : observers) {
+			observer.sendSelf(packet1, packet2, packet3, packet4, packet5);
+		}
+	}
+	
+	public void sendSelf(SWGPacket packet) {
 		Player owner = getOwner();
 		if (owner != null)
-			owner.sendPacket(packets);
-		return owner != null ? 1 : 0;
+			owner.sendPacket(packet);
+	}
+	
+	public void sendSelf(SWGPacket packet1, SWGPacket packet2) {
+		Player owner = getOwner();
+		if (owner != null)
+			owner.sendPacket(packet1, packet2);
+	}
+	
+	public void sendSelf(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
+		Player owner = getOwner();
+		if (owner != null)
+			owner.sendPacket(packet1, packet2, packet3);
+	}
+	
+	public void sendSelf(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
+		Player owner = getOwner();
+		if (owner != null)
+			owner.sendPacket(packet1, packet2, packet3, packet4);
+	}
+	
+	public void sendSelf(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
+		Player owner = getOwner();
+		if (owner != null)
+			owner.sendPacket(packet1, packet2, packet3, packet4, packet5);
 	}
 	
 	public boolean isInBuilding() {

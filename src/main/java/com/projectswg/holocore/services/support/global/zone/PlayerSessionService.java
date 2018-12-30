@@ -58,68 +58,68 @@ public class PlayerSessionService extends Service {
 		}
 	}
 	
-	private void notifyPlayers(SWGPacket ... packets) {
+	private void notifyPlayers(SWGPacket packet) {
 		iteratePlayers((key, p) -> {
 			if (p.getCreatureObject() != null)
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayers(NotifyPlayersPacketIntent.ConditionalNotify conditional, SWGPacket ... packets) {
+	private void notifyPlayers(NotifyPlayersPacketIntent.ConditionalNotify conditional, SWGPacket packet) {
 		if (conditional == null) {
-			notifyPlayers(packets);
+			notifyPlayers(packet);
 			return;
 		}
 		
 		iteratePlayers((key, p) -> {
 			if (conditional.meetsCondition(p))
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayers(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditionalNotify, SWGPacket ... packets) {
+	private void notifyPlayers(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditionalNotify, SWGPacket packet) {
 		if (conditionalNotify == null) {
-			notifyPlayers(networkIds, packets);
+			notifyPlayers(networkIds, packet);
 			return;
 		}
 		
 		networkIds.forEach(id -> {
 			Player p = getPlayerFromNetworkId(id);
 			if (p.getCreatureObject() != null && conditionalNotify.meetsCondition(p))
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayers(List<Long> networkIds, SWGPacket... packets) {
+	private void notifyPlayers(List<Long> networkIds, SWGPacket packet) {
 		networkIds.forEach(id -> {
 			Player p = getPlayerFromNetworkId(id);
 			if (p.getCreatureObject() != null)
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayersAtPlanet(NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, SWGPacket ... packets) {
+	private void notifyPlayersAtPlanet(NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, SWGPacket packet) {
 		if (conditional == null) {
-			notifyPlayersAtPlanet(terrain, packets);
+			notifyPlayersAtPlanet(terrain, packet);
 			return;
 		}
 		
 		iteratePlayers((key, p) -> {
 			if (p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain && conditional.meetsCondition(p))
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayersAtPlanet(Terrain terrain, SWGPacket ... packets) {
+	private void notifyPlayersAtPlanet(Terrain terrain, SWGPacket packet) {
 		iteratePlayers((key, p) -> {
 			if (p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain)
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayersAtPlanet(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, SWGPacket ... packets) {
+	private void notifyPlayersAtPlanet(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, SWGPacket packet) {
 		if (conditional == null) {
-			notifyPlayersAtPlanet(networkIds, terrain, packets);
+			notifyPlayersAtPlanet(networkIds, terrain, packet);
 			return;
 		}
 		
@@ -127,16 +127,16 @@ public class PlayerSessionService extends Service {
 			Player p = getPlayerFromNetworkId(id);
 			assert p != null;
 			if (p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain && conditional.meetsCondition(p))
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	
-	private void notifyPlayersAtPlanet(List<Long> networkIds, Terrain terrain, SWGPacket ... packets) {
+	private void notifyPlayersAtPlanet(List<Long> networkIds, Terrain terrain, SWGPacket packet) {
 		networkIds.forEach(id -> {
 			Player p = getPlayerFromNetworkId(id);
 			assert p != null;
 			if (p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain)
-				p.sendPacket(packets);
+				p.sendPacket(packet);
 		});
 	}
 	

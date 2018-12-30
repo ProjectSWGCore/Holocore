@@ -36,6 +36,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
@@ -50,13 +51,13 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -70,6 +71,8 @@ public class CreatureObject extends TangibleObject {
 	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
 	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
 	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
+	private final List<DeltasMessage>			pendingDeltas	= new ArrayList<>();
+	private final AtomicReference<Player>		owner			= new AtomicReference<>(null);
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
@@ -96,16 +99,6 @@ public class CreatureObject extends TangibleObject {
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
-	@Override
-	public void onObjectEnterAware(SWGObject aware) {
-		awareness.addAware(aware);
-	}
-	
-	@Override
-	public void onObjectLeaveAware(SWGObject aware) {
-		awareness.removeAware(aware);
-	}
-	
 	public void flushObjectsAware() {
 		Player owner = getOwnerShallow();
 		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
@@ -129,6 +122,26 @@ public class CreatureObject extends TangibleObject {
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
 		removeEquipment(obj);
+	}
+	
+	public void setOwner(@Nullable Player owner) {
+		Player previous = this.owner.getAndSet(owner);
+		if (previous != null)
+			previous.setCreatureObject(null);
+		if (owner != null)
+			owner.setCreatureObject(this);
+	}
+	
+	@Override
+	@Nullable
+	public Player getOwner() {
+		return owner.get();
+	}
+	
+	@Override
+	@Nullable
+	public Player getOwnerShallow() {
+		return owner.get();
 	}
 	
 	@NotNull
@@ -195,9 +208,8 @@ public class CreatureObject extends TangibleObject {
 			getAllChildren(children, obj);
 	}
 	
-	public boolean isWithinAwarenessRange(SWGObject target) {
-		if (!isPlayer())
-			return false;
+	public final boolean isWithinAwarenessRange(SWGObject target) {
+		assert isPlayer();
 		
 		Player owner = getOwnerShallow();
 		if (owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED || !target.isVisible(this))
@@ -258,6 +270,35 @@ public class CreatureObject extends TangibleObject {
 	
 	public boolean closeContainer(SWGObject obj, String slot) {
 		return containersOpen.remove(new Container(obj, slot));
+	}
+	
+	public void addDelta(DeltasMessage delta) {
+		synchronized (pendingDeltas) {
+			pendingDeltas.add(delta);
+		}
+	}
+	
+	public void clearDeltas() {
+		if (pendingDeltas.isEmpty())
+			return;
+		synchronized (pendingDeltas) {
+			pendingDeltas.clear();
+		}
+	}
+	
+	public void sendAndFlushAllDeltas() {
+		if (pendingDeltas.isEmpty())
+			return;
+		synchronized (pendingDeltas) {
+			Player owner = getOwner();
+			if (owner != null) {
+				for (DeltasMessage delta : pendingDeltas) {
+					if (awareness.isAware(delta.getObjectId()))
+						owner.sendPacket(delta);
+				}
+			}
+			pendingDeltas.clear();
+		}
 	}
 	
 	public void addSkill(String ... skillList) {
@@ -404,8 +445,7 @@ public class CreatureObject extends TangibleObject {
 
 	public void setPosture(Posture posture) {
 		this.posture = posture;
-		if (isPlayer())
-			sendObservers(new PostureUpdate(getObjectId(), posture));
+		sendObservers(new PostureUpdate(getObjectId(), posture));
 		sendDelta(3, 13, posture.getId());
 	}
 	
