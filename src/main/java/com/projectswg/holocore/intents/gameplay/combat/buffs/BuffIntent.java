@@ -28,6 +28,7 @@ package com.projectswg.holocore.intents.gameplay.combat.buffs;
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class BuffIntent extends Intent {
 	
@@ -35,27 +36,34 @@ public class BuffIntent extends Intent {
 	private final CreatureObject buffer, receiver;
 	private final boolean remove;
 	
-	public BuffIntent(String buffName, CreatureObject buffer, CreatureObject receiver, boolean remove) {
+	public BuffIntent(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
 		this.buffName = buffName;
 		this.buffer = buffer;
 		this.receiver = receiver;
 		this.remove = remove;
 	}
 	
+	@NotNull
 	public CreatureObject getReceiver() {
 		return receiver;
 	}
 	
+	@NotNull
 	public CreatureObject getBuffer() {
 		return buffer;
 	}
 	
+	@NotNull
 	public String getBuffName() {
 		return buffName;
 	}
 	
 	public boolean isRemove() {
 		return remove;
+	}
+	
+	public static void broadcast(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
+		new BuffIntent(buffName, buffer, receiver, remove).broadcast();
 	}
 	
 }
