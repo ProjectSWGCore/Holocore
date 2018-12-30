@@ -78,12 +78,6 @@ public class CmdQaTool implements ICmdCallback {
 			case "details":
 				QaToolDetails.sendDetails(player, target, args);
 				break;
-			case "xp":
-				if(command.length == 3)
-					grantXp(player, command[1], command[2]);
-				else
-					SystemMessageIntent.broadcastPersonal(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
-				break;
 			case "gcw":
 				grantGcw(player, command[1]);
 				break;
@@ -181,10 +175,6 @@ public class CmdQaTool implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
-	}
-	
-	private void grantXp(Player player, String xpType, String xpGainedArg) {
-
 	}
 	
 	private void grantGcw(Player player, String pointsArg) {
