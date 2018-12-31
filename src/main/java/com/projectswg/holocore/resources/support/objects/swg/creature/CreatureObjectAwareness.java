@@ -31,7 +31,6 @@ import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -53,23 +52,10 @@ public class CreatureObjectAwareness {
 		this.objectComparator = Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).thenComparingDouble(this::getDistance);
 	}
 	
-	public synchronized void flushAware() {
-		Player target = creature.getOwner();
-		// If we're disconnected, no need to worry about awareness
-		if (target == null || target.getPlayerState() == PlayerState.DISCONNECTED) {
-			for (SWGObject obj : aware) {
-				obj.removeObserver(creature);
-			}
-			aware.clear();
-			awareIds.clear();
-			return;
-		}
-		
+	public synchronized void flushCreates(@NotNull Player target) {
 		Set<SWGObject> newAware = creature.getAware();
 		List<SWGObject> create = new ArrayList<>();
-		List<SWGObject> destroy = new ArrayList<>();
 		List<SWGObject> added = new ArrayList<>();
-		List<SWGObject> removed = new ArrayList<>();
 		
 		// Create Deltas
 		for (SWGObject createCandidate : newAware) {
@@ -78,31 +64,6 @@ public class CreatureObjectAwareness {
 			added.add(createCandidate);
 		}
 		getCreateList(create, added);
-		
-		for (SWGObject destroyCandidate : aware) {
-			if (newAware.contains(destroyCandidate))
-				continue;
-			removed.add(destroyCandidate);
-		}
-		getDestroyList(destroy, removed);
-		
-		// Remove destroyed objects so that nobody tries to send a packet to us after we send the destroy
-		for (Iterator<SWGObject> it = aware.iterator(); it.hasNext(); ) {
-			SWGObject currentAware = it.next();
-			for (SWGObject remove : destroy) { // Since the "create" is filtered, aware could also have been filtered
-				if (isParent(currentAware, remove)) {
-					it.remove();
-					awareIds.remove(currentAware.getObjectId());
-					remove.removeObserver(creature);
-					break;
-				}
-			}
-		}
-		
-		// Destroy the objects on the client
-		for (SWGObject obj : destroy) {
-			destroyObject(obj, target);
-		}
 		
 		// Create the objects on the client
 		LinkedList<SWGObject> createStack = new LinkedList<>();
@@ -128,6 +89,42 @@ public class CreatureObjectAwareness {
 		assert aware.contains(creature) : "not aware of creature";
 	}
 	
+	public synchronized void flushDestroys(@NotNull Player target) {
+		Set<SWGObject> newAware = creature.getAware();
+		List<SWGObject> destroy = new ArrayList<>();
+		List<SWGObject> removed = new ArrayList<>();
+		
+		// Create Deltas
+		for (SWGObject destroyCandidate : aware) {
+			if (newAware.contains(destroyCandidate))
+				continue;
+			removed.add(destroyCandidate);
+		}
+		getDestroyList(destroy, removed);
+		
+		// Remove destroyed objects so that nobody tries to send a packet to us after we send the destroy
+		for (Iterator<SWGObject> it = aware.iterator(); it.hasNext(); ) {
+			SWGObject currentAware = it.next();
+			for (SWGObject remove : destroy) { // Since the "create" is filtered, aware could also have been filtered
+				if (isParent(currentAware, remove)) {
+					it.remove();
+					awareIds.remove(currentAware.getObjectId());
+					remove.removeObserver(creature);
+					break;
+				}
+			}
+		}
+		
+		// Destroy the objects on the client
+		for (SWGObject obj : destroy) {
+			destroyObject(obj, target);
+		}
+		
+		// Hope we didn't screw anything up
+		assert aware.contains(creature.getSlottedObject("ghost")) : "not aware of ghost " + creature;
+		assert aware.contains(creature) : "not aware of creature";
+	}
+	
 	public synchronized void resetObjectsAware() {
 		for (SWGObject obj : aware) {
 			obj.removeObserver(creature);
@@ -144,7 +141,7 @@ public class CreatureObjectAwareness {
 		return aware.contains(obj);
 	}
 	
-	void getCreateList(List<SWGObject> list, List<SWGObject> added) {
+	private void getCreateList(List<SWGObject> list, List<SWGObject> added) {
 		added.sort(objectComparator);
 		for (SWGObject obj : added) {
 			SWGObject parent = obj.getParent();
@@ -163,7 +160,7 @@ public class CreatureObjectAwareness {
 		}
 	}
 	
-	void getDestroyList(List<SWGObject> list, List<SWGObject> removed) {
+	private void getDestroyList(List<SWGObject> list, List<SWGObject> removed) {
 		removed.sort(objectComparator);
 		for (SWGObject obj : removed) {
 			// Don't delete our own parent nor child objects if we're deleting their parent (optimization)
@@ -185,7 +182,7 @@ public class CreatureObjectAwareness {
 	}
 	
 	private boolean isBundledObject(SWGObject obj, SWGObject parent) {
-		return parent != null && (obj.getSlotArrangement() == -1 || obj.getBaselineType() == BaselineType.PLAY);
+		return parent != null && (obj.getSlotArrangement() == -1 || obj.getBaselineType() == BaselineType.PLAY || parent == creature);
 	}
 	
 	private void createObject(@NotNull SWGObject obj, @NotNull Player target) {

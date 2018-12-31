@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,12 +39,10 @@ public class ObjectAware {
 	
 	private static final Collection<SWGObject> EMPTY_SET = Collections.emptyList();
 	
-	private final SWGObject object;
 	private final EnumMap<AwarenessType, Collection<SWGObject>> awareness;
 	private final AtomicReference<TerrainMapChunk> chunk;
 	
-	public ObjectAware(@NotNull SWGObject obj) {
-		this.object = obj;
+	public ObjectAware() {
 		this.awareness = new EnumMap<>(AwarenessType.class);
 		this.chunk = new AtomicReference<>(null);
 		for (AwarenessType type : AwarenessType.getValues()) {
@@ -55,9 +52,6 @@ public class ObjectAware {
 	
 	public synchronized void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
 		awareness.put(type, objects);
-		
-		if (object instanceof CreatureObject)
-			((CreatureObject) object).flushObjectsAware();
 	}
 	
 	@NotNull

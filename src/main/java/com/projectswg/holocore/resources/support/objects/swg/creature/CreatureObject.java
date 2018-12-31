@@ -99,11 +99,18 @@ public class CreatureObject extends TangibleObject {
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
-	public void flushObjectsAware() {
+	public void flushObjectCreates() {
 		Player owner = getOwnerShallow();
 		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
 			return;
-		awareness.flushAware();
+		awareness.flushCreates(owner);
+	}
+	
+	public void flushObjectDestroys() {
+		Player owner = getOwnerShallow();
+		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
+			return;
+		awareness.flushDestroys(owner);
 	}
 	
 	public void resetObjectsAware() {

@@ -82,7 +82,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <String, SWGObject>			slots			= new ConcurrentHashMap<>();
 	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
-	private final ObjectAware						awareness		= new ObjectAware(this);
+	private final ObjectAware						awareness		= new ObjectAware();
 	private final Set<CreatureObject>				observers		= ConcurrentHashMap.newKeySet();
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);

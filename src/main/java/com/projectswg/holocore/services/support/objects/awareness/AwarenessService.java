@@ -95,10 +95,12 @@ public class AwarenessService extends Service {
 	
 	public void update() {
 		awareness.updateChunks();
+		onlinePlayers.forEach(CreatureObject::flushObjectCreates);
 		while (!positionUpdates.isEmpty()) {
 			Runnable r = positionUpdates.poll();
 			r.run();
 		}
+		onlinePlayers.forEach(CreatureObject::flushObjectDestroys);
 		onlinePlayers.forEach(CreatureObject::sendAndFlushAllDeltas);
 	}
 	
@@ -115,8 +117,8 @@ public class AwarenessService extends Service {
 				break;
 			case PE_LOGGED_OUT:
 				if (creature != null) {
-					awareness.updateObject(creature);
 					onlinePlayers.remove(creature);
+					creature.resetObjectsAware();
 				}
 				break;
 			case PE_FIRST_ZONE:
