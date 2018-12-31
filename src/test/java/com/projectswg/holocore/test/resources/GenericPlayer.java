@@ -46,10 +46,7 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
@@ -74,11 +71,50 @@ public class GenericPlayer extends Player {
 	}
 	
 	@Override
-	public void sendPacket(SWGPacket... packets) {
-		for (SWGPacket packet : packets) {
-			this.packets.add(packet);
+	public void sendPacket(SWGPacket packet) {
+		this.packets.add(packet);
+		handlePacket(packet);
+	}
+	
+	@Override
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
+		this.packets.addAll(List.of(packet1, packet2));
+		handlePacket(packet1);
+		handlePacket(packet2);
+	}
+	
+	@Override
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
+		this.packets.addAll(List.of(packet1, packet2, packet3));
+		handlePacket(packet1);
+		handlePacket(packet2);
+		handlePacket(packet3);
+	}
+	
+	@Override
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
+		this.packets.addAll(List.of(packet1, packet2, packet3, packet4));
+		handlePacket(packet1);
+		handlePacket(packet2);
+		handlePacket(packet3);
+		handlePacket(packet4);
+	}
+	
+	@Override
+	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
+		this.packets.addAll(List.of(packet1, packet2, packet3, packet4, packet5));
+		handlePacket(packet1);
+		handlePacket(packet2);
+		handlePacket(packet3);
+		handlePacket(packet4);
+		handlePacket(packet5);
+	}
+	
+	@Override
+	public void sendPacket(Collection<? extends SWGPacket> packets) {
+		this.packets.addAll(packets);
+		for (SWGPacket packet : packets)
 			handlePacket(packet);
-		}
 	}
 	
 	@Nullable

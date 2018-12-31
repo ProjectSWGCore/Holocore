@@ -58,7 +58,7 @@ class TerrainMapChunk {
 		for (TerrainMapChunk neighbor : neighbors)
 			neighbor.objects.add(obj);
 		
-		if (obj instanceof CreatureObject)
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
 			creatures.add((CreatureObject) obj);
 	}
 	

@@ -363,10 +363,10 @@ public class ChatRoomService extends Service {
 		player.sendPacket(new ChatRoomList(chatRoomHandler.getRoomList(player)));
 	}
 	
-	private static void sendPacketToMembers(@NotNull ChatRoom room, SWGPacket... packets) {
+	private static void sendPacketToMembers(@NotNull ChatRoom room, SWGPacket packet) {
 		for (ChatAvatar member : room.getMembers()) {
 			Player player = PlayerLookup.getPlayerByFirstName(member.getName());
-			player.sendPacket(packets);
+			player.sendPacket(packet);
 		}
 	}
 	

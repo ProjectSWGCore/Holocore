@@ -317,9 +317,9 @@ public class ChatRoomHandler {
 		}
 	}
 	
-	private static void sendPacketToMembers(ChatRoom room, SWGPacket... packets) {
+	private static void sendPacketToMembers(ChatRoom room, SWGPacket packet) {
 		for (ChatAvatar member : room.getMembers()) {
-			getPlayer(member).sendPacket(packets);
+			getPlayer(member).sendPacket(packet);
 		}
 	}
 	

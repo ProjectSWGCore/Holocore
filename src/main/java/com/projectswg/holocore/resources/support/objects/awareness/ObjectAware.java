@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.objects.awareness;
 
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,12 +39,10 @@ public class ObjectAware {
 	
 	private static final Collection<SWGObject> EMPTY_SET = Collections.emptyList();
 	
-	private final SWGObject object;
 	private final EnumMap<AwarenessType, Collection<SWGObject>> awareness;
 	private final AtomicReference<TerrainMapChunk> chunk;
 	
-	public ObjectAware(@NotNull SWGObject obj) {
-		this.object = obj;
+	public ObjectAware() {
 		this.awareness = new EnumMap<>(AwarenessType.class);
 		this.chunk = new AtomicReference<>(null);
 		for (AwarenessType type : AwarenessType.getValues()) {
@@ -54,24 +51,7 @@ public class ObjectAware {
 	}
 	
 	public synchronized void setAware(@NotNull AwarenessType type, @NotNull Collection<SWGObject> objects) {
-		Collection<SWGObject> prevAware = objects.isEmpty() ? EMPTY_SET : getAware();
-		Collection<SWGObject> oldAware = awareness.put(type, objects);
-		assert oldAware != null : "initialized in constructor";
-		
-		for (SWGObject removed : oldAware) {
-			if (notAware(removed)) {
-				object.onObjectLeaveAware(removed);
-			}
-		}
-		
-		for (SWGObject added : objects) {
-			if (prevAware.contains(added))
-				continue;
-			object.onObjectEnterAware(added);
-		}
-		
-		if (object instanceof CreatureObject)
-			((CreatureObject) object).flushObjectsAware();
+		awareness.put(type, objects);
 	}
 	
 	@NotNull

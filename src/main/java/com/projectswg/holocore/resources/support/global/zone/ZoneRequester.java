@@ -48,7 +48,7 @@ public class ZoneRequester {
 			return false;
 		if (!debugChecks(creatureObject, player))
 			return false;
-		creatureObject.setOwner(player);
+		((CreatureObject) creatureObject).setOwner(player);
 		new RequestZoneInIntent((CreatureObject) creatureObject).broadcast();
 		return true;
 	}

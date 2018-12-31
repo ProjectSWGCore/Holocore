@@ -29,6 +29,7 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
+import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -253,14 +254,23 @@ public final class LootGenerationService extends Service {
 		
 		int tableRoll = random.nextInt(100) + 1;
 		
+		// Admin Variables
+		boolean admin = killer.hasAbility("admin");
+		StringBuilder adminOutput1 = new StringBuilder(tableRoll + " //");
+		StringBuilder adminOutput2 = new StringBuilder();
+		int tableId = 0;
+		
 		for (NPCTable npcTable : loot.getNPCTables()) {
 			LootTable lootTable = npcTable.getLootTable();
 			int tableChance = npcTable.getChance();
+			tableId++;
 			
 			if (tableRoll > tableChance) {
 				// Skip ahead if there's no drop chance
+				adminOutput1.append("/ \\#FF0000 loot_table").append(tableId);
 				continue;
 			}
+			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId);
 			
 			int groupRoll = random.nextInt(100) + 1;
 			
@@ -273,6 +283,7 @@ public final class LootGenerationService extends Service {
 				String[] itemNames = group.getItemNames();
 				String itemName = itemNames[random.nextInt(itemNames.length)];
 				
+				adminOutput2.append(itemName).append('\n');
 				if (itemName.startsWith("dynamic_")) {
 					// TODO dynamic item handling
 					new SystemMessageIntent(killer.getOwner(), "We don't support this loot item yet: " + itemName).broadcast();
@@ -290,6 +301,12 @@ public final class LootGenerationService extends Service {
 				
 				break;
 			}
+		}
+		if (admin) {
+			IntentChain.broadcastChain(
+					new SystemMessageIntent(killer.getOwner(), adminOutput1.toString()),
+					new SystemMessageIntent(killer.getOwner(), adminOutput2.toString())
+			);
 		}
 		
 		return lootGenerated;

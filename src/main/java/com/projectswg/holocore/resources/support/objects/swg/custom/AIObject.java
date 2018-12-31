@@ -116,12 +116,6 @@ public class AIObject extends CreatureObject {
 	}
 	
 	@Override
-	public boolean isWithinAwarenessRange(SWGObject target) {
-		//noinspection SuspiciousMethodCalls
-		return target.getBaselineType() == BaselineType.CREO && getObserverCreatures().contains(target);
-	}
-	
-	@Override
 	public boolean isEnemyOf(TangibleObject obj) {
 		Posture myPosture = getPosture();
 		if (myPosture == Posture.INCAPACITATED || myPosture == Posture.DEAD || !(obj instanceof CreatureObject))

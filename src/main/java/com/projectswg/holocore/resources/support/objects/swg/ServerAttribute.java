@@ -27,12 +27,14 @@
 
 package com.projectswg.holocore.resources.support.objects.swg;
 
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import me.joshlarson.jlcommon.data.EnumLookup;
 
 import java.util.function.Function;
 
 public enum ServerAttribute {
-	PCD_PET_TEMPLATE	("pcd.pet.template", String.class, s -> s, s -> s);
+	PCD_PET_TEMPLATE	("pcd.pet.template", String.class, s -> s, s -> s),
+	EGG_SPAWNER			("egg.spawner", Spawner.class, s -> null, s -> null);
 	
 	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);
 	

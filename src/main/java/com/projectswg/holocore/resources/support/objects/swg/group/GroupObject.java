@@ -49,7 +49,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class GroupObject extends SWGObject {
 	
@@ -249,7 +248,6 @@ public class GroupObject extends SWGObject {
 			creature.setGroupId(0);
 			groupMembers.remove(member);
 			creature.setAware(AwarenessType.GROUP, List.of());
-			setAware(AwarenessType.GROUP, groupMembers.stream().map(GroupMember::getCreature).collect(Collectors.toList()));
 		}
 		groupMembers.sendDeltaMessage(this);
 	}

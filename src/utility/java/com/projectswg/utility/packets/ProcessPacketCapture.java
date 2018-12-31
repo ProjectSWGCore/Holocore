@@ -49,16 +49,6 @@ public class ProcessPacketCapture {
 			Map<String, Object> information = readSystemInformation(version, packetCapture);
 			List<PacketRecord> packets = readPackets(packetCapture);
 			System.out.println("Read " + packets.size() + " packets");
-			PacketCaptureAnalysis analysis = PacketCaptureAnalysis.from(packets);
-			System.out.println("Analysis:");
-			System.out.println("    Objects Created: " + analysis.getObjectCreations());
-			System.out.println("    Objects Deleted: " + analysis.getObjectDeletions() + " [Implicit: " + analysis.getObjectDeletionsImplicit() + "]");
-			System.out.println("    Zone-ins:        " + analysis.getCharacterZoneIns() + " " + analysis.getPlayers());
-			System.out.println("    Errors:          " + analysis.getErrors().size());
-			for (PacketCaptureAssertion e : analysis.getErrors()) {
-				System.err.println("        " + e.getMessage());
-				System.err.println("            " + e.getPacket());
-			}
 			
 			if (args.length > 1 && args[1].equalsIgnoreCase("--printPackets")) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss.SSS").withZone((ZoneId) information.get("time.time_zone"));
@@ -67,6 +57,17 @@ public class ProcessPacketCapture {
 				for (PacketRecord packet : packets) {
 					System.out.printf("%s [%0"+packetPadding+"d] %s %s%n", formatter.format(packet.getTime()), packetNumber, (packet.isServer() ? "OUT: " : "IN:  "), packet.parse());
 					packetNumber++;
+				}
+			} else {
+				PacketCaptureAnalysis analysis = PacketCaptureAnalysis.from(packets);
+				System.out.println("Analysis:");
+				System.out.println("    Objects Created: " + analysis.getObjectCreations());
+				System.out.println("    Objects Deleted: " + analysis.getObjectDeletions() + " [Implicit: " + analysis.getObjectDeletionsImplicit() + "]");
+				System.out.println("    Zone-ins:        " + analysis.getCharacterZoneIns() + " " + analysis.getPlayers());
+				System.out.println("    Errors:          " + analysis.getErrors().size());
+				for (PacketCaptureAssertion e : analysis.getErrors()) {
+					System.err.println("        " + e.getMessage());
+					System.err.println("            " + e.getPacket());
 				}
 			}
 		}

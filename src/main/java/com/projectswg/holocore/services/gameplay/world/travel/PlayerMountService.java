@@ -27,9 +27,10 @@
 package com.projectswg.holocore.services.gameplay.world.travel;
 
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.*;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
@@ -41,6 +42,8 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -51,6 +54,7 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
@@ -205,13 +209,17 @@ public class PlayerMountService extends Service {
 	}
 	
 	private void generateVehicle(CreatureObject creator, SWGObject deed) {
-		String deedTemplate = deed.getTemplate();
-		String pcdTemplate = pcdForVehicleDeed(deedTemplate);
+		String pcdTemplate = pcdForVehicleDeed(deed.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromPcdIff(pcdTemplate);
+		if (vehicleInfo == null) {
+			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.getTemplate());
+			return;
+		}
 		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
 		
 		DestroyObjectIntent.broadcast(deed);
 		
-		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, mobileForVehicleDeed(deedTemplate));
+		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, vehicleInfo.getObjectTemplate());
 		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
 		vehicleControlDevice.moveToContainer(creator.getDatapad());
 		ObjectCreatedIntent.broadcast(vehicleControlDevice);
@@ -252,6 +260,13 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
+		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		if (vehicleInfo != null) {
+			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
+			mount.setRunSpeed(vehicleInfo.getSpeed());
+			mount.setAccelScale(vehicleInfo.getAccelMax());
+			mount.setTurnScale(vehicleInfo.getTurnRateMax());
+		}
 		
 		ObjectCreatedIntent.broadcast(mount);
 		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
@@ -267,9 +282,6 @@ public class PlayerMountService extends Service {
 		if (player.getParent() != null || player.getPosture() != Posture.UPRIGHT)
 			return;
 		
-		player.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
-		
 		if (player.getObjectId() == mount.getOwnerId()) {
 			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
 		} else if (mount.getSlottedObject("rider") != null) {
@@ -282,7 +294,6 @@ public class PlayerMountService extends Service {
 			for (int i = 1; i <= 7; i++) {
 				if (!mount.hasSlot("rider" + i)) {
 					StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
-					player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 					return;
 				}
 				if (mount.getSlottedObject("rider" + i) == null) {
@@ -293,13 +304,24 @@ public class PlayerMountService extends Service {
 			}
 			if (!added) {
 				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
-				player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 				return;
 			}
 		} else {
-			player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
 			return;
+		}
+		
+		player.setStatesBitmask(CreatureState.RIDING_MOUNT);
+		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		mount.setPosture(Posture.DRIVING_VEHICLE);
+		
+		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		if (vehicleInfo != null) {
+			if (!vehicleInfo.getPlayerBuff().isEmpty())
+				BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, player, false);
+			if (!vehicleInfo.getVehicleBuff().isEmpty())
+				BuffIntent.broadcast(vehicleInfo.getVehicleBuff(), player, mount, false);
+			if (!vehicleInfo.getBuffClientEffect().isEmpty())
+				player.sendObservers(new PlayClientEffectObjectMessage(vehicleInfo.getBuffClientEffect(), "", mount.getObjectId(), ""));
 		}
 		
 		player.inheritMovement(mount);
@@ -323,20 +345,21 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		
-		clearPlayerMountState(player);
-		if (player.getParent() == mount) {
-			player.moveToContainer(null, mount.getLocation());
-			if (mount.getSlottedObject("rider") == null) {
-				for (SWGObject child : mount.getSlottedObjects()) {
-					assert child instanceof CreatureObject;
-					clearPlayerMountState((CreatureObject) child);
-					child.moveToContainer(null, mount.getLocation());
-				}
-				mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
-			}
-		}
 		
-		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
+		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		if (player.getParent() == mount)
+			dismount(player, mount, vehicleInfo);
+		
+		if (mount.getSlottedObject("rider") == null) {
+			for (SWGObject child : mount.getSlottedObjects()) {
+				assert child instanceof CreatureObject;
+				dismount((CreatureObject) child, mount, vehicleInfo);
+			}
+			if (vehicleInfo != null && !vehicleInfo.getVehicleBuff().isEmpty())
+				BuffIntent.broadcast(vehicleInfo.getVehicleBuff(), player, mount, true);
+			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+			mount.setPosture(Posture.UPRIGHT);
+		}
 	}
 	
 	private void storeMount(@NotNull CreatureObject player, @NotNull CreatureObject mount, @NotNull IntangibleObject mountControlDevice) {
@@ -345,10 +368,11 @@ public class PlayerMountService extends Service {
 		
 		if (isMountable(mount) && mount.getOwnerId() == player.getObjectId()) {
 			// Dismount anyone riding the mount about to be stored
-			if (mount.getSlottedObject("rider") != null) {
-				exitMount(player, mount); // Should automatically dismount all other riders, if applicable
-				assert mount.getSlottedObjects().isEmpty();
+			for (SWGObject rider : mount.getSlottedObjects()) {
+				assert rider instanceof CreatureObject;
+				exitMount((CreatureObject) rider, mount);
 			}
+			assert mount.getSlottedObjects().isEmpty();
 			
 			// Remove the record of the mount
 			Collection<Mount> mounts = calledMounts.get(player);
@@ -387,9 +411,14 @@ public class PlayerMountService extends Service {
 		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
 	}
 	
-	private static void clearPlayerMountState(CreatureObject player) {
+	private void dismount(CreatureObject player, CreatureObject mount, VehicleInfo vehicleInfo) {
+		assert player.getParent() == mount;
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+		player.moveToContainer(null, mount.getLocation());
 		player.resetMovement();
+		if (vehicleInfo != null && !vehicleInfo.getPlayerBuff().isEmpty())
+			BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, mount, true);
+		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
 	private static boolean isMountable(CreatureObject mount) {

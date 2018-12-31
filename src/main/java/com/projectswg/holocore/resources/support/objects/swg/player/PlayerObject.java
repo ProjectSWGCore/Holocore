@@ -69,8 +69,8 @@ public class PlayerObject extends IntangibleObject {
 		return play8.getWaypoints();
 	}
 
-	public void updateWaypoint(WaypointObject obj) {
-		play8.updateWaypoint(obj, this);
+	public void updateWaypoint(WaypointObject waypoint) {
+		play8.addWaypoint(waypoint, this);
 	}
 	
 	public void removeWaypoint(long objId) {

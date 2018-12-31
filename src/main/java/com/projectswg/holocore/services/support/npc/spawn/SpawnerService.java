@@ -27,6 +27,12 @@
 package com.projectswg.holocore.services.support.npc.spawn;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.CreateClientPathMessage;
+import com.projectswg.common.network.packets.swg.zone.DestroyClientPathMessage;
+import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
@@ -34,6 +40,8 @@ import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.StaticSpawnInfo;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
@@ -41,23 +49,31 @@ import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public final class SpawnerService extends Service {
 	
 	private final ScheduledThreadPool executor;
+	private final Set<CreatureObject> adminsWithRoutes;
 	
 	public SpawnerService() {
 		this.executor = new ScheduledThreadPool(1, "spawner-service");
+		this.adminsWithRoutes = ConcurrentHashMap.newKeySet();
 	}
 	
 	@Override
@@ -74,6 +90,36 @@ public final class SpawnerService extends Service {
 		executor.stop();
 		executor.awaitTermination(1000);
 		return true;
+	}
+	
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
+		CreatureObject player = ipi.getPlayer().getCreatureObject();
+		SWGPacket packet = ipi.getPacket();
+		if (!(packet instanceof IntendedTarget) || player == null)
+			return;
+		long intendedTargetId = ((IntendedTarget) packet).getTargetId();
+		SWGObject intendedTarget = ObjectLookup.getObjectById(intendedTargetId);
+		if (intendedTarget == null && adminsWithRoutes.remove(player)) {
+			player.sendSelf(new DestroyClientPathMessage());
+		} else if (intendedTarget != null && player.hasAbility("admin")) {
+			Spawner spawner = (Spawner) intendedTarget.getServerAttribute(ServerAttribute.EGG_SPAWNER);
+			if (spawner != null) {
+				List<ResolvedPatrolWaypoint> waypoints = spawner.getPatrolRoute();
+				player.sendSelf(new CreateClientPathMessage(waypoints.stream()
+						.map(wayp -> wayp.getParent() == null ? wayp.getLocation() : Location.builder(wayp.getLocation()).translateLocation(wayp.getParent().getWorldLocation()).build())
+						.map(Location::getPosition)
+						.collect(Collectors.toList())));
+				adminsWithRoutes.add(player);
+			}
+		}
+	}
+	
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		CreatureObject player = pei.getPlayer().getCreatureObject();
+		if (pei.getEvent() == PlayerEvent.PE_LOGGED_OUT && player != null && adminsWithRoutes.remove(player))
+			player.sendSelf(new DestroyClientPathMessage());
 	}
 	
 	@IntentHandler
@@ -108,21 +154,10 @@ public final class SpawnerService extends Service {
 		StandardLog.onEndLoad(count, "spawners", startTime);
 	}
 	
-	private static Location buildPortalLocation(Portal portal) {
-		return Location.builder()
-				.setX(average(portal.getFrame1().getX(), portal.getFrame2().getX()))
-				.setY(average(portal.getFrame1().getY(), portal.getFrame2().getY()))
-				.setZ(average(portal.getFrame1().getZ(), portal.getFrame2().getZ()))
-				.setTerrain(portal.getCell1().getTerrain())
-				.build();
-	}
-	
-	private static double average(double x, double y) {
-		return (x+y) / 2;
-	}
-	
 	private void spawn(StaticSpawnInfo spawn) {
-		Spawner spawner = new Spawner(spawn, createEgg(spawn));
+		SWGObject egg = createEgg(spawn);
+		Spawner spawner = new Spawner(spawn, egg);
+		egg.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner);
 		
 		for (int i = 0; i < spawner.getAmount(); i++) {
 			NPCCreator.createNPC(spawner);
@@ -133,20 +168,24 @@ public final class SpawnerService extends Service {
 			for (ResolvedPatrolWaypoint waypoint : patrolRoute) {
 				SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff");
 				obj.setContainerPermissions(AdminPermissions.getPermissions());
+				obj.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner);
 				//noinspection HardcodedLineSeparator
-				obj.setObjectName("G: " + waypoint.getGroupId() + "\nP: " + waypoint.getPatrolId() + "\nNPC: " + spawn.getNpcId());
+				obj.setObjectName(String.format("P: %s\nG: %s\nNPC:%s\nID:%s", waypoint.getPatrolId(), waypoint.getGroupId(), spawn.getNpcId(), spawn.getId()));
 				obj.moveToContainer(waypoint.getParent(), waypoint.getLocation());
 				ObjectCreatedIntent.broadcast(obj);
 			}
 		}
 	}
 	
+	@SuppressWarnings("HardcodedLineSeparator")
 	private static SWGObject createEgg(StaticSpawnInfo spawn) {
 		SpawnerType spawnerType = SpawnerType.valueOf(spawn.getSpawnerType());
 		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
 		egg.setContainerPermissions(AdminPermissions.getPermissions());
-		//noinspection HardcodedLineSeparator
-		egg.setObjectName(String.format("%s\nNPC: %s\n", spawn.getId(), spawn.getNpcId()));
+		if (spawn.getPatrolId().isEmpty() || spawn.getPatrolId().equals("0"))
+			egg.setObjectName(String.format("%s\nNPC: %s", spawn.getId(), spawn.getNpcId()));
+		else
+			egg.setObjectName(String.format("%s\nNPC: %s\nG: %s", spawn.getId(), spawn.getNpcId(), spawn.getPatrolId()));
 		egg.systemMove(getCell(spawn.getId(), spawn.getCellId(), spawn.getBuildingId()), Location.builder().setTerrain(spawn.getTerrain()).setPosition(spawn.getX(), spawn.getY(), spawn.getZ()).setHeading(spawn.getHeading()).build());
 		ObjectCreatedIntent.broadcast(egg);
 		return egg;

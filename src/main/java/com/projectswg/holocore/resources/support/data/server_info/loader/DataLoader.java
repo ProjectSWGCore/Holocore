@@ -78,4 +78,8 @@ public abstract class DataLoader {
 		return (TerrainZoneInsertionLoader) CachedLoader.ZONE_INSERTIONS.load();
 	}
 	
+	public static VehicleLoader vehicles() {
+		return (VehicleLoader) CachedLoader.VEHICLES.load();
+	}
+	
 }

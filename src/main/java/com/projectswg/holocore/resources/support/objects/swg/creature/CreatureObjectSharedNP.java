@@ -30,6 +30,8 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.network.packets.swg.zone.object_controller.BuffAddUpdate;
+import com.projectswg.common.network.packets.swg.zone.object_controller.BuffRemoveUpdate;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
@@ -40,7 +42,6 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.Equipment;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -457,6 +458,7 @@ class CreatureObjectSharedNP implements Persistable {
 			CRC crc = new CRC(buff.getCrc());
 			assert !buffs.containsKey(crc) : "Cannot add a buff twice!";
 			buffs.put(crc, buff);
+			target.sendObservers(new BuffAddUpdate(target.getObjectId(), crc.getCrc(), buff.getDuration()));
 			buffs.sendDeltaMessage(target);
 		}
 	}
@@ -464,8 +466,10 @@ class CreatureObjectSharedNP implements Persistable {
 	public Buff removeBuff(CRC buffCrc, SWGObject target) {
 		synchronized (buffs) {
 			Buff removedBuff = buffs.remove(buffCrc);
-			if (removedBuff != null)
+			if (removedBuff != null) {
+				target.sendObservers(new BuffRemoveUpdate(target.getObjectId(), buffCrc.getCrc()));
 				buffs.sendDeltaMessage(target);
+			}
 			
 			return removedBuff;
 		}
