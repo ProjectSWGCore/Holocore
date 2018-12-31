@@ -347,19 +347,18 @@ public class PlayerMountService extends Service {
 		
 		
 		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
-		if (player.getParent() == mount) {
+		if (player.getParent() == mount)
 			dismount(player, mount, vehicleInfo);
-			
-			if (mount.getSlottedObject("rider") == null) {
-				for (SWGObject child : mount.getSlottedObjects()) {
-					assert child instanceof CreatureObject;
-					dismount((CreatureObject) child, mount, vehicleInfo);
-				}
-				if (vehicleInfo != null && !vehicleInfo.getVehicleBuff().isEmpty())
-					BuffIntent.broadcast(vehicleInfo.getVehicleBuff(), player, mount, true);
-				mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
-				mount.setPosture(Posture.UPRIGHT);
+		
+		if (mount.getSlottedObject("rider") == null) {
+			for (SWGObject child : mount.getSlottedObjects()) {
+				assert child instanceof CreatureObject;
+				dismount((CreatureObject) child, mount, vehicleInfo);
 			}
+			if (vehicleInfo != null && !vehicleInfo.getVehicleBuff().isEmpty())
+				BuffIntent.broadcast(vehicleInfo.getVehicleBuff(), player, mount, true);
+			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+			mount.setPosture(Posture.UPRIGHT);
 		}
 	}
 	
@@ -369,10 +368,11 @@ public class PlayerMountService extends Service {
 		
 		if (isMountable(mount) && mount.getOwnerId() == player.getObjectId()) {
 			// Dismount anyone riding the mount about to be stored
-			if (mount.getSlottedObject("rider") != null) {
-				exitMount(player, mount); // Should automatically dismount all other riders, if applicable
-				assert mount.getSlottedObjects().isEmpty();
+			for (SWGObject rider : mount.getSlottedObjects()) {
+				assert rider instanceof CreatureObject;
+				exitMount((CreatureObject) rider, mount);
 			}
+			assert mount.getSlottedObjects().isEmpty();
 			
 			// Remove the record of the mount
 			Collection<Mount> mounts = calledMounts.get(player);
