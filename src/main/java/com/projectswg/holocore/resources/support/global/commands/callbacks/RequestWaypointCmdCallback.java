@@ -55,7 +55,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		Point3D position = new Point3D();
 		position.set(Double.parseDouble(cmd[2]), Double.parseDouble(cmd[3]), Double.parseDouble(cmd[4]));
 		
-		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
+		String name = (cmd.length == 6 && !cmd[5].isBlank() ? cmd[5] : "@planet_n:" + terrain.getName());
 		
 		createWaypoint(player, terrain, position, color, name);
 	}
