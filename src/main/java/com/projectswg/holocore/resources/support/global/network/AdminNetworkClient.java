@@ -32,11 +32,12 @@ import me.joshlarson.jlcommon.concurrency.ThreadPool;
 
 import javax.net.ssl.SSLContext;
 import java.nio.channels.SocketChannel;
+import java.util.Collection;
 
 public class AdminNetworkClient extends NetworkClient {
 	
-	public AdminNetworkClient(SocketChannel socket, SSLContext sslContext, ThreadPool securityExecutor) {
-		super(socket, sslContext, securityExecutor);
+	public AdminNetworkClient(SocketChannel socket, SSLContext sslContext, ThreadPool securityExecutor, Collection<NetworkClient> flushList) {
+		super(socket, sslContext, securityExecutor, flushList);
 	}
 	
 	@Override

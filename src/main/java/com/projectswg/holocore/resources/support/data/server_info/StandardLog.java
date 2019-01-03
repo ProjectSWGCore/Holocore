@@ -43,45 +43,51 @@ public class StandardLog {
 	}
 	
 	public static void onPlayerTrace(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
-		Player owner = player.getOwner();
-		String account = owner == null ? "NULL" : owner.getUsername();
-		Log.t("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+		Log.t("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
 	}
 	
 	public static void onPlayerTrace(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		String characterName = player.getCharacterName();
-		if (characterName.isEmpty())
-			Log.t("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
-		else
-			Log.t("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
+		Log.t("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
 	}
 	
 	public static void onPlayerEvent(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
-		Player owner = player.getOwner();
-		String account = owner == null ? "NULL" : owner.getUsername();
-		Log.d("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+		Log.d("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
 	}
 	
 	public static void onPlayerEvent(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		String characterName = player.getCharacterName();
-		if (characterName.isEmpty())
-			Log.d("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
-		else
-			Log.d("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
+		Log.d("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
 	}
 	
 	public static void onPlayerError(@NotNull Object service, @NotNull CreatureObject player, @NotNull String event, Object ... args) {
-		Player owner = player.getOwner();
-		String account = owner == null ? "NULL" : owner.getUsername();
-		Log.e("[%s] %s/%s %s", service.getClass().getSimpleName(), account, player.getObjectName(), String.format(event, args));
+		Log.e("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
 	}
 	
 	public static void onPlayerError(@NotNull Object service, @NotNull Player player, @NotNull String event, Object ... args) {
-		String characterName = player.getCharacterName();
+		Log.e("[%s] %s %s", service.getClass().getSimpleName(), getInfo(player), String.format(event, args));
+	}
+	
+	private static String getInfo(CreatureObject creature) {
+		Player player = creature.getOwner();
+		if (player == null)
+			return "NULL/"+creature.getObjectName();
+		
+		String username = player.getUsername();
+		String characterName = creature.getObjectName();
+		if (username.isEmpty() && characterName.isEmpty())
+			return String.valueOf(player.getAddress());
 		if (characterName.isEmpty())
-			Log.e("[%s] %s %s", service.getClass().getSimpleName(), player.getUsername(), String.format(event, args));
-		else
-			Log.e("[%s] %s/%s %s", service.getClass().getSimpleName(), player.getUsername(), characterName, String.format(event, args));
+			return username;
+		return username + "/" + characterName;
+	}
+	
+	private static String getInfo(Player player) {
+		String username = player.getUsername();
+		String characterName = player.getCharacterName();
+		if (username.isEmpty() && characterName.isEmpty())
+			return String.valueOf(player.getAddress());
+		if (characterName.isEmpty())
+			return username;
+		return username + "/" + characterName;
 	}
 	
 }

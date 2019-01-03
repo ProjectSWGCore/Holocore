@@ -63,7 +63,7 @@ public class GenericPlayer extends Player {
 	private final AtomicBoolean zoning;
 	
 	public GenericPlayer() {
-		super(UNIQUE_ID.incrementAndGet());
+		super(UNIQUE_ID.incrementAndGet(), null, p -> {});
 		this.loadingObjects = new ConcurrentHashMap<>();
 		this.objects = new ConcurrentHashMap<>();
 		this.packets = new ArrayList<>();

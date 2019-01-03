@@ -343,7 +343,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void broadcast(Intent intent) {
-		intentChain.broadcastAfter(intent);
+		intent.broadcast();
 	}
 	
 	public boolean isVisible(CreatureObject target) {

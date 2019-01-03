@@ -33,7 +33,6 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketPendingIntent;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
@@ -41,6 +40,7 @@ import com.projectswg.holocore.resources.support.global.network.AdminNetworkClie
 import com.projectswg.holocore.resources.support.global.network.NetworkClient;
 import com.projectswg.holocore.resources.support.global.network.UDPServer;
 import com.projectswg.holocore.resources.support.global.network.UDPServer.UDPPacket;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -54,24 +54,35 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.*;
+import java.net.BindException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
 import java.security.KeyStore;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NetworkClientService extends Service {
 	
 	private final ThreadPool securityExecutor;
 	private final TCPServer<NetworkClient> tcpServer;
 	private final TCPServer<AdminNetworkClient> adminServer;
+	private final ScheduledThreadPool networkFlushPeriodic;
+	private final List<NetworkClient> clients;
 	private final UDPServer udpServer;
 	private final SSLContext sslContext;
+	private final int flushRate;
 	
 	public NetworkClientService() {
+		this.flushRate = getFlushRate();
 		this.securityExecutor = new ThreadPool(3, "network-client-security-%d");
 		this.sslContext = initializeSecurity();
+		this.networkFlushPeriodic = new ScheduledThreadPool(1, "network-client-flush");
+		this.clients = new CopyOnWriteArrayList<>();
 		{
 			int bindPort = getBindPort();
 			int bufferSize = getBufferSize();
-			tcpServer = new TCPServer<>(bindPort, bufferSize, channel -> new NetworkClient(channel, sslContext, securityExecutor));
+			tcpServer = new TCPServer<>(bindPort, bufferSize, channel ->  new NetworkClient(channel, sslContext, securityExecutor, clients));
 			try {
 				udpServer = new UDPServer(bindPort, bufferSize);
 			} catch (SocketException e) {
@@ -83,7 +94,7 @@ public class NetworkClientService extends Service {
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
 			if (adminServerPort > 0) {
 				InetSocketAddress localhost = new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort);
-				adminServer = new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor));
+				adminServer = new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor, clients));
 			} else {
 				adminServer = null;
 			}
@@ -93,6 +104,8 @@ public class NetworkClientService extends Service {
 	@Override
 	public boolean start() {
 		securityExecutor.start();
+		networkFlushPeriodic.start();
+		networkFlushPeriodic.executeWithFixedRate(0, 1000 / flushRate, this::flush);
 		int bindPort = -1;
 		try {
 			bindPort = getBindPort();
@@ -122,14 +135,22 @@ public class NetworkClientService extends Service {
 				client.close(ConnectionStoppedReason.APPLICATION);
 			adminServer.close();
 		}
+		networkFlushPeriodic.stop();
 		securityExecutor.stop(false);
-		return securityExecutor.awaitTermination(3000);
+		return securityExecutor.awaitTermination(3000) && networkFlushPeriodic.awaitTermination(1000);
 	}
 	
 	@Override
 	public boolean terminate() {
 		udpServer.close();
 		return super.terminate();
+	}
+	
+	/**
+	 * Requests a flush for each network client
+	 */
+	private void flush() {
+		clients.forEach(NetworkClient::flush);
 	}
 	
 	private void disconnect(long networkId) {
@@ -172,11 +193,7 @@ public class NetworkClientService extends Service {
 	
 	@IntentHandler
 	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
-		NetworkClient client = getClient(opi.getPlayer().getNetworkId());
-		if (client == null)
-			return;
-		
-		client.addToOutbound(opi.getPacket());
+		opi.getPlayer().sendPacket(opi.getPacket());
 	}
 	
 	private NetworkClient getClient(long id) {
@@ -220,17 +237,16 @@ public class NetworkClientService extends Service {
 		}
 	}
 	
-	@IntentHandler
-	private static void handleInboundPacketPendingIntent(InboundPacketPendingIntent ippi) {
-		ippi.getClient().processInbound();
-	}
-	
 	private static int getBindPort() {
 		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
 	private static int getBufferSize() {
 		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+	}
+	
+	private static int getFlushRate() {
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("FLUSH-RATE", 10);
 	}
 	
 }
