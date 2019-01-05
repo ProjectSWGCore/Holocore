@@ -60,9 +60,7 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.control.Intent;
-import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +68,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -87,12 +84,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
-	private final IntentChain						intentChain		= new IntentChain();
 	
 	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
 	private ContainerPermissions		permissions		= DefaultPermissions.getPermissions();
 	private List <List <String>>		arrangement		= new ArrayList<>();
-	private Player						owner			= null;
 	
 	private SWGObject	parent			= null;
 	private StringId 	stringId		= new StringId("", "");
