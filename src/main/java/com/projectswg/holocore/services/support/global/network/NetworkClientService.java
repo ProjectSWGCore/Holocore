@@ -58,6 +58,7 @@ import java.net.BindException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.nio.channels.SocketChannel;
 import java.security.KeyStore;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -82,7 +83,11 @@ public class NetworkClientService extends Service {
 		{
 			int bindPort = getBindPort();
 			int bufferSize = getBufferSize();
-			tcpServer = new TCPServer<>(bindPort, bufferSize, channel ->  new NetworkClient(channel, sslContext, securityExecutor, clients));
+			tcpServer = TCPServer.<NetworkClient>builder()
+					.setAddr(new InetSocketAddress((InetAddress) null, bindPort))
+					.setBufferSize(bufferSize)
+					.setSessionCreator(this::createStandardClient)
+					.createTCPServer();
 			try {
 				udpServer = new UDPServer(bindPort, bufferSize);
 			} catch (SocketException e) {
@@ -94,7 +99,11 @@ public class NetworkClientService extends Service {
 			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
 			if (adminServerPort > 0) {
 				InetSocketAddress localhost = new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort);
-				adminServer = new TCPServer<>(localhost, 1024, channel -> new AdminNetworkClient(channel, sslContext, securityExecutor, clients));
+				adminServer = TCPServer.<AdminNetworkClient>builder()
+						.setAddr(localhost)
+						.setBufferSize(1024)
+						.setSessionCreator(this::createAdminClient)
+						.createTCPServer();
 			} else {
 				adminServer = null;
 			}
@@ -179,6 +188,14 @@ public class NetworkClientService extends Service {
 		data.addByte(1);
 		data.addAscii(status);
 		udpServer.send(port, addr, data.array());
+	}
+	
+	private NetworkClient createStandardClient(SocketChannel channel) {
+		return new NetworkClient(channel, sslContext, securityExecutor, clients);
+	}
+	
+	private AdminNetworkClient createAdminClient(SocketChannel channel) {
+		return new AdminNetworkClient(channel, sslContext, securityExecutor, clients);
 	}
 	
 	@IntentHandler

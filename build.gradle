@@ -4,9 +4,9 @@ plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
-	id "com.github.johnrengelman.shadow" version "4.0.3"
-	id "org.javamodularity.moduleplugin" version "1.2.1"
-	id "org.beryx.jlink" version "2.1.8"
+	id "com.github.johnrengelman.shadow" version "4.0.4"
+	id "org.javamodularity.moduleplugin" version "1.4.0"
+	id "org.beryx.jlink" version "2.4.0"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
@@ -44,9 +44,9 @@ jlink {
 }
 
 shadowJar {
-	baseName = "Holocore"
-	classifier = null
-	version = null
+	archiveBaseName.set("Holocore")
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 }
 
 repositories {
@@ -59,6 +59,7 @@ dependencies {
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
+	compile group: 'me.joshlarson', name: 'jlcommon-network', version: '1.0.0'
 	
 	testCompile 'junit:junit:4.12'
 	
@@ -80,7 +81,9 @@ dependencies {
 }
 
 task CreateConvertLoginJar(type: ShadowJar) {
-	archiveName = 'ConvertLogin.jar'
+	archiveBaseName.set("ConvertLogin")
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
@@ -88,7 +91,9 @@ task CreateConvertLoginJar(type: ShadowJar) {
 }
 
 task CreatePacketCaptureProcessor(type: ShadowJar) {
-	archiveName = 'PacketCaptureProcessor.jar'
+	archiveBaseName.set("PacketCaptureProcessor")
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.packets.ProcessPacketCapture'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
