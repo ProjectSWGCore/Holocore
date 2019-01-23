@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.location;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Quaternion;
@@ -35,7 +37,7 @@ import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
 
-public class InstanceLocation implements Persistable {
+public class InstanceLocation implements Persistable, MongoPersistable {
 	
 	private Location location;
 	private InstanceType instanceType;
@@ -57,6 +59,20 @@ public class InstanceLocation implements Persistable {
 	public void read(NetBufferStream stream) {
 		stream.getByte();
 		location.read(stream);
+	}
+	
+	@Override
+	public void read(MongoData data) {
+		instanceNumber = data.getInteger("number", 0);
+		instanceType = InstanceType.valueOf(data.getString("type", "NONE"));
+		location = data.getDocument("location", new Location());
+	}
+	
+	@Override
+	public void save(MongoData data) {
+		data.putInteger("number", instanceNumber);
+		data.putString("type", instanceType.name());
+		data.putDocument("location", location);
 	}
 	
 	public void setLocation(Location location) {

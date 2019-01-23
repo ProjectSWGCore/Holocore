@@ -119,30 +119,65 @@ public class BaselineObject {
 		return createBaseline(target, 9, this::createBaseline9);
 	}
 	
+	/**
+	 * Creates the first baseline for the specified target.  Only sent if the target has full permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline1(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the third baseline for the specified target.  This baseline is public and is always set.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline3(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the fourth baseline for the specified target.  Only sent if the target has full permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline4(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the sixth baseline for the specified target.  This baseline is public and is always set.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline6(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the seventh baseline for the specified target.  This baseline is sent when the object is used.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline7(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the eighth baseline for the specified target.  Only sent if the target has some permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline8(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the ninth baseline for the specified target.  Only sent if the target has some permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline9(Player target, BaselineBuilder data) {
 		
 	}

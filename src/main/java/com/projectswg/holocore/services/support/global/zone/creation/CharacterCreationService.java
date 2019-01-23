@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.zone.creation;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
@@ -37,6 +38,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
+import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
@@ -54,6 +56,7 @@ import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -236,7 +239,8 @@ public class CharacterCreationService extends Service {
 				firstName = firstName.substring(0, spaceIndex);
 			firstName = firstName.toLowerCase(Locale.US);
 		}
-		return userDatabase.insertCharacter(player.getUsername(), new CharacterMetadata(creature.getObjectId(), firstName, name, creature.getRace().getFilename()));
+		Document characterData = SWGObjectFactory.save(creature, new MongoData()).toDocument();
+		return userDatabase.insertCharacter(player.getUsername(), new CharacterMetadata(creature.getObjectId(), firstName, name, creature.getRace().getFilename(), characterData));
 	}
 	
 	private int getCharacterCount(String username) {

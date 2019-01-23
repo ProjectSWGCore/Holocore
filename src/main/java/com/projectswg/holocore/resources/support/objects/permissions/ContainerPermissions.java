@@ -26,13 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
-public interface ContainerPermissions extends Persistable {
+public interface ContainerPermissions extends Persistable, MongoPersistable {
 	
 	@NotNull
 	ContainerPermissionType getType();
@@ -57,6 +59,27 @@ public interface ContainerPermissions extends Persistable {
 				return ReadOnlyPermissions.from(stream);
 			case READ_WRITE:
 				return ReadWritePermissions.from(stream);
+		}
+	}
+	
+	static MongoData save(MongoData data, ContainerPermissions permissions) {
+		data.putString("type", permissions.getType().name());
+		permissions.save(data);
+		return data;
+	}
+	
+	static ContainerPermissions create(MongoData data) {
+		ContainerPermissionType type = ContainerPermissionType.valueOf(data.getString("type", ContainerPermissionType.DEFAULT.name()));
+		switch (type) {
+			case DEFAULT:
+			default:
+				return DefaultPermissions.from(data);
+			case ADMIN:
+				return AdminPermissions.from(data);
+			case READ_ONLY:
+				return ReadOnlyPermissions.from(data);
+			case READ_WRITE:
+				return ReadWritePermissions.from(data);
 		}
 	}
 	

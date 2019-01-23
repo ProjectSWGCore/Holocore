@@ -7,10 +7,7 @@ import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class PswgUserDatabase extends PswgDatabase {
 	
@@ -112,6 +109,7 @@ public class PswgUserDatabase extends PswgDatabase {
 		private final String firstName;
 		private final String name;
 		private final String race;
+		private final Document detailedData;
 		
 		public CharacterMetadata(Document doc) {
 			doc = doc.get("characters", Document.class);
@@ -119,13 +117,15 @@ public class PswgUserDatabase extends PswgDatabase {
 			this.firstName = doc.getString("firstName");
 			this.name = doc.getString("name");
 			this.race = doc.getString("race");
+			this.detailedData = doc.get("detail", Document.class);
 		}
 		
-		public CharacterMetadata(long id, String firstName, String name, String race) {
+		public CharacterMetadata(long id, String firstName, String name, String race, Document detailedData) {
 			this.id = id;
 			this.firstName = firstName;
 			this.name = name;
 			this.race = race;
+			this.detailedData = detailedData;
 		}
 		
 		public Document toDocument() {
@@ -134,6 +134,7 @@ public class PswgUserDatabase extends PswgDatabase {
 			doc.put("firstName", firstName);
 			doc.put("name", name);
 			doc.put("race", race);
+			doc.put("detailedData", detailedData);
 			return doc;
 		}
 		
@@ -152,6 +153,11 @@ public class PswgUserDatabase extends PswgDatabase {
 		public String getRace() {
 			return race;
 		}
+		
+		public Map<String, Object> getDetailedData() {
+			return Collections.unmodifiableMap(detailedData);
+		}
+		
 	}
 	
 }

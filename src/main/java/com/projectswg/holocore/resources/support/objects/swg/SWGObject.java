@@ -27,6 +27,8 @@
 package com.projectswg.holocore.resources.support.objects.swg;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
@@ -71,7 +73,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable, MongoPersistable {
 	
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
@@ -82,7 +84,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final ObjectAware						awareness		= new ObjectAware();
 	private final Set<CreatureObject>				observers		= ConcurrentHashMap.newKeySet();
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
-	private final Map<ServerAttribute, Object>	serverAttributes= new EnumMap<>(ServerAttribute.class);
+	private final Map<ServerAttribute, Object>		serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
@@ -1034,21 +1036,65 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId = buffer.getEncodable(StringId.class);
 	}
 	
-	/* Baseline send permissions based on SWGPacket observations:
-	 * 
-	 * Baseline1 sent if you have full permissions to the object.
-	 * Baseline4 sent if you have full permissions to the object.
-	 * 
-	 * Baseline8 sent if you have some permissions to the object.
-	 * Baseline9 sent if you have some permissions to the object.
-	 * 
-	 * Baseline3 always sent.
-	 * Baseline6 always sent.
-	 * 
-	 * Baseline7 sent on using the object.
-	 * 
-	 * Only sent if they are defined (can still be empty if defined).
-	 */
+	@Override
+	public void read(MongoData data) {
+		{
+			MongoData base3 = data.getDocument("base3");
+			complexity = base3.getFloat("complexity", 0);
+			stringId = base3.getDocument("stringId", new StringId());
+			objectName = base3.getString("objectName", "");
+			volume = base3.getInteger("volume", 0);
+		}
+		{
+			MongoData base6 = data.getDocument("base6");
+			// galaxyId
+			detailStringId = base6.getDocument("detailStringId", new StringId());
+		}
+	}
+	
+	@Override
+	public void save(MongoData data) {
+		{
+			MongoData base3 = new MongoData();
+			base3.putFloat("complexity", complexity);
+			base3.putDocument("stringId", stringId);
+			base3.putString("objectName", objectName);
+			base3.putInteger("volume", volume);
+			data.putDocument("base3", base3);
+		}
+		{
+			MongoData base6 = new MongoData();
+			// galaxyId
+			base6.putDocument("detailStringId", detailStringId);
+		}
+		{
+			SWGObject parent = this.parent;
+			if (parent != null) {
+				SWGObject grandparent = parent.getParent();
+				if (parent instanceof CellObject && grandparent instanceof BuildingObject) {
+					data.putLong("parentId", grandparent.getObjectId());
+					data.putInteger("cell", ((CellObject) parent).getNumber());
+				} else {
+					data.putLong("parentId", parent.getObjectId());
+				}
+			} else {
+				data.putLong("parentId", 0);
+			}
+		}
+		data.putDocument("location", location);
+		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
+		data.putString("name", objectName);
+		data.putDocument("stringId", stringId);
+		data.putDocument("detailStringId", detailStringId);
+		data.putFloat("complexity", complexity);
+		data.putMap("attributes", attributes);
+		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, ServerAttribute::store);
+		
+		Set<SWGObject> contained = new HashSet<>(containedObjects);
+		contained.addAll(slots.values());
+		contained.remove(null);
+		data.putArray("children", new ArrayList<>(contained), obj -> SWGObjectFactory.save(obj, new MongoData()));
+	}
 	
 	@Override
 	public void save(NetBufferStream stream) {

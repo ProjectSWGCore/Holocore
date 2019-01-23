@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -40,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
  * for every new object.
  * @author Waverunner
  */
-public class DefaultPermissions implements ContainerPermissions {
+public final class DefaultPermissions implements ContainerPermissions {
 	
 	private static final DefaultPermissions PERMISSIONS = new DefaultPermissions();
 	
@@ -75,13 +76,23 @@ public class DefaultPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public final void save(NetBufferStream stream) {
+	public void save(NetBufferStream stream) {
 		stream.addByte(0);
 	}
 	
 	@Override
-	public final void read(NetBufferStream stream) {
+	public void read(NetBufferStream stream) {
 		stream.getByte();
+	}
+	
+	@Override
+	public void read(MongoData data) {
+		
+	}
+	
+	@Override
+	public void save(MongoData data) {
+		
 	}
 	
 	private boolean canTradePartnerView(SWGObject requester, SWGObject object) {
@@ -103,6 +114,10 @@ public class DefaultPermissions implements ContainerPermissions {
 	
 	public static DefaultPermissions from(NetBufferStream stream) {
 		stream.getByte();
+		return PERMISSIONS;
+	}
+	
+	public static DefaultPermissions from(MongoData data) {
 		return PERMISSIONS;
 	}
 	
