@@ -31,10 +31,7 @@ import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
@@ -219,6 +216,8 @@ public class SWGNameGenerator {
 		
 		RaceNameRule rule = null;
 		try(InputStream stream = getClass().getResourceAsStream("/namegen/" + species + ".txt")) {
+			if (stream == null)
+				throw new FileNotFoundException("/namegen/"+species+".txt");
 			rule = createRaceRule(stream);
 			
 			if (rule != null)

@@ -11,16 +11,15 @@ import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemInt
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbIntegerColumnArraySet;
+import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbTextColumnArraySet;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcLoader.NpcInfo;
-import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissions;
-import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -110,6 +109,8 @@ public final class LootGenerationService extends Service {
 		long startTime = StandardLog.onStartLoad("loot tables");
 		
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/loot/loot_table.sdb"))) {
+			SdbTextColumnArraySet itemGroups = set.getTextArrayParser("items_group_([0-9]+)");
+			SdbIntegerColumnArraySet chanceGroups = set.getIntegerArrayParser("chance_group_([0-9]+)");
 			while (set.next()) {
 				String tableName = set.getText("loot_id");
 				if (tableName.equals("-"))
@@ -118,13 +119,16 @@ public final class LootGenerationService extends Service {
 				LootTable table = new LootTable();
 				int totalChance = 0;    // Must not be above 100. Also used to convert chances in the form of "33, 33, 34" to "33, 66, 100"
 				
-				for (int groupNum = 1; groupNum <= 16 && totalChance < 100; groupNum++) {
-					int groupChance = (int) set.getInt("chance_group_" + groupNum);
-					if (groupChance == 0)
+				String [] itemGroupsArray = itemGroups.getArray();
+				int [] chanceGroupsArray = chanceGroups.getArray();
+				assert itemGroupsArray.length == chanceGroupsArray.length;
+				for (int groupNum = 0; groupNum < chanceGroupsArray.length && totalChance < 100; groupNum++) {
+					int groupChance = chanceGroupsArray[groupNum];
+					if (groupChance == 0 || groupChance == Integer.MAX_VALUE)
 						continue;
 					groupChance += totalChance;
 					
-					table.addLootGroup(new LootGroup(groupChance, set.getText("items_group_" + groupNum).split(";")));
+					table.addLootGroup(new LootGroup(groupChance, itemGroupsArray[groupNum].split(";")));
 					totalChance = groupChance;
 				}
 				

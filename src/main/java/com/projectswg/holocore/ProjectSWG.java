@@ -86,6 +86,10 @@ public class ProjectSWG {
 		
 		Log.i("Holocore version: %s", VERSION);
 		
+		if (ProjectSWG.class.getResourceAsStream("/marker.txt") == null) {
+			Log.a("Failed to read Holocore resources - aborting");
+			return -1;
+		}
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
 		initializeServerFactory();

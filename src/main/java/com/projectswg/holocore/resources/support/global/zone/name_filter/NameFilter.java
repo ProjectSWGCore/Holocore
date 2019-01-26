@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.global.zone.name_filter;
 
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +37,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Objects;
 
 public class NameFilter {
 	
@@ -49,10 +50,10 @@ public class NameFilter {
 	private final InputStream reservedStream;
 	private final InputStream fictionStream;
 	
-	public NameFilter(InputStream profaneStream, InputStream reservedStream, InputStream fictionStream) {
-		this.profaneStream = profaneStream;
-		this.reservedStream = reservedStream;
-		this.fictionStream = fictionStream;
+	public NameFilter(@NotNull InputStream profaneStream, @NotNull InputStream reservedStream, @NotNull InputStream fictionStream) {
+		this.profaneStream = Objects.requireNonNull(profaneStream, "profaneStream");
+		this.reservedStream = Objects.requireNonNull(reservedStream, "reservedStream");
+		this.fictionStream = Objects.requireNonNull(fictionStream, "fictionStream");
 		this.profaneWords = new ArrayList<>();
 		this.reservedWords = new ArrayList<>();
 		this.fictionNames = new ArrayList<>();

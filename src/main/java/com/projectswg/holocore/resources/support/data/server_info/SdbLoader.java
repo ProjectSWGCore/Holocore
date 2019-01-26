@@ -26,7 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info;
 
+import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.*;
 import me.joshlarson.jlcommon.log.Log;
+import org.intellij.lang.annotations.Language;
 
 import java.io.*;
 import java.util.*;
@@ -65,6 +67,11 @@ public class SdbLoader {
 		void close() throws IOException;
 		boolean next() throws IOException;
 		List<String> getColumns();
+		SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex);
+		SdbIntegerColumnArraySet getIntegerArrayParser(@Language("RegExp") String regex);
+		SdbLongColumnArraySet getLongArrayParser(@Language("RegExp") String regex);
+		SdbRealColumnArraySet getRealArrayParser(@Language("RegExp") String regex);
+		SdbBooleanColumnArraySet getBooleanArrayParser(@Language("RegExp") String regex);
 		
 		String getText(int index);
 		String getText(String columnName);
@@ -83,10 +90,12 @@ public class SdbLoader {
 		
 		private final Iterator<SdbResultSet> sdbs;
 		private final AtomicReference<SdbResultSet> sdb;
+		private final Set<SdbColumnArraySet> arraySets;
 		
 		private MasterSdbResultSet(Iterator<SdbResultSet> sdbs) {
 			this.sdbs = sdbs;
 			this.sdb = new AtomicReference<>(sdbs.hasNext() ? sdbs.next() : null);
+			this.arraySets = new HashSet<>();
 		}
 		
 		@Override
@@ -109,6 +118,8 @@ public class SdbLoader {
 				}
 				set = sdbs.next();
 				sdb.set(set);
+				for (SdbColumnArraySet arraySet : arraySets)
+					arraySet.loadColumnInfo(set);
 				if (set == null)
 					return false; // shouldn't be possible anyways
 			}
@@ -118,6 +129,36 @@ public class SdbLoader {
 		@Override
 		public List<String> getColumns() {
 			return getResultSet().getColumns();
+		}
+		
+		private <T extends SdbColumnArraySet> T registerArrayParser(T instance) {
+			arraySets.add(instance);
+			return instance;
+		}
+		
+		@Override
+		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex) {
+			return registerArrayParser(new SdbTextColumnArraySet(this, regex));
+		}
+		
+		@Override
+		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex) {
+			return registerArrayParser(new SdbIntegerColumnArraySet(this, regex));
+		}
+		
+		@Override
+		public SdbLongColumnArraySet getLongArrayParser(String regex) {
+			return registerArrayParser(new SdbLongColumnArraySet(this, regex));
+		}
+		
+		@Override
+		public SdbRealColumnArraySet getRealArrayParser(String regex) {
+			return registerArrayParser(new SdbRealColumnArraySet(this, regex));
+		}
+		
+		@Override
+		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex) {
+			return registerArrayParser(new SdbBooleanColumnArraySet(this, regex));
 		}
 		
 		@Override
@@ -228,6 +269,31 @@ public class SdbLoader {
 		}
 		
 		@Override
+		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex) {
+			return new SdbTextColumnArraySet(this, regex);
+		}
+		
+		@Override
+		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex) {
+			return new SdbIntegerColumnArraySet(this, regex);
+		}
+		
+		@Override
+		public SdbLongColumnArraySet getLongArrayParser(String regex) {
+			return new SdbLongColumnArraySet(this, regex);
+		}
+		
+		@Override
+		public SdbRealColumnArraySet getRealArrayParser(String regex) {
+			return new SdbRealColumnArraySet(this, regex);
+		}
+		
+		@Override
+		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex) {
+			return new SdbBooleanColumnArraySet(this, regex);
+		}
+		
+		@Override
 		public String getText(int index) {
 			return columnValues[index];
 		}
@@ -279,33 +345,44 @@ public class SdbLoader {
 			lineBuffer.clear();
 			
 			try {
-				int b;
-				readLoop:
-				while (true) {
-					b = input.read();
-					switch (b) {
-						case -1:
-							throw new EOFException();
-						case '\n':
-							if (!endsNewline)
-								throw new EOFException();
-						case '\t':
-							break readLoop;
-						case '\r':
-							continue;
-						default:
-							lineBuffer.pushBack((char) b);
-							break;
-					}
-				}
+				fillLineBuffer(endsNewline);
+			} catch (EOFException e) {
+				if (lineBuffer.isEmpty())
+					throw e;
 			} catch (IOException e) {
 				if (lineBuffer.isEmpty())
-					throw new EOFException();
+					throw new EOFException("Expected data, got " + e.getClass().getName() + ": " + e.getMessage());
 			}
 			
 			return lineBuffer.toString();
 		}
 		
+		@SuppressWarnings("HardcodedLineSeparator") // ignores \r
+		private void fillLineBuffer(boolean endsNewline) throws IOException {
+			BasicStringBuilder lineBuffer = this.lineBuffer;
+			int b;
+			readLoop:
+			while (true) {
+				b = input.read();
+				switch (b) {
+					case -1:
+						throw new EOFException("Expected data, got EOF");
+					case '\n':
+						if (!endsNewline)
+							throw new EOFException("Expected data, got newline");
+					case '\t':
+						break readLoop;
+					case '\r':
+						continue;
+					default:
+						lineBuffer.pushBack((char) b);
+						break;
+				}
+			}
+			
+		}
+		
+		@SuppressWarnings("HardcodedLineSeparator") // ignores \r
 		private String fetchLine() {
 			lineBuffer.clear();
 			try {
