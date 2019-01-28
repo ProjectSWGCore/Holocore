@@ -62,15 +62,10 @@ public class ContainerObjectRadial extends SWGObjectRadial {
 			return;
 		}
 		
-		switch (selection) {
-			case SET_NAME:
-				SuiInputBox sui = new SuiInputBox(SuiButtons.OK_CANCEL, "@sui:set_name_title", "@sui:set_name_prompt");
-				
-				sui.addOkButtonCallback("rename_ok", (event, parameters) -> handleRename(parameters, target));
-				sui.setPropertyText("txtInput", target.getObjectName());	// Insert the current name into the text field
-				
-				sui.display(player);
-				break;
+		if (selection == RadialItem.SET_NAME) {
+			SuiInputBox sui = new SuiInputBox(SuiButtons.OK_CANCEL, "@sui:set_name_title", "@sui:set_name_prompt");
+			sui.addOkButtonCallback("rename_ok", (event, parameters) -> handleRename(parameters, target));
+			sui.setPropertyText("txtInput", target.getObjectName());    // Insert the current name into the text fieldsui.display(player);
 		}
 	}
 	
