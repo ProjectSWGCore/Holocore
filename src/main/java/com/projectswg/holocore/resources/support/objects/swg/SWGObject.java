@@ -35,6 +35,7 @@ import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -526,6 +527,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void setObjectName(String name) {
 		this.objectName = name;
+		sendDelta(3, 2, objectName, StringType.UNICODE);
 	}
 	
 	public void setVolume(int volume) {
