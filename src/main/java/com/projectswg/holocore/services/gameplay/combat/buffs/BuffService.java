@@ -33,16 +33,15 @@ import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
-import com.projectswg.holocore.resources.gameplay.combat.buff.BuffMap;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,8 +51,8 @@ import java.util.stream.Stream;
 public class BuffService extends Service {
 	
 	/*
-	 * TODO allow removal of buffs with BuffData where PLAYER_REMOVABLE == 1
-	 * TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where
+	 * TODO allow removal of buffs with BuffInfo where PLAYER_REMOVABLE == 1
+	 * TODO remove buffs on respec. Listen for respec event and remove buffs with BuffInfo where
 	 *      REMOVE_ON_RESPEC == 1
 	 * TODO remove group buff(s) from receiver when distance between caster and receiver is 100m.
 	 *      Perform same check upon zoning in. Skillmod1 effect name is "group"
@@ -61,20 +60,10 @@ public class BuffService extends Service {
 	
 	private final BasicScheduledThread timerCheckThread;
 	private final Set<CreatureObject> monitored;
-	private final BuffMap dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
 		timerCheckThread = new BasicScheduledThread("buff-timer-check", this::checkBuffTimers);
 		monitored = new HashSet<>();
-		dataMap = new BuffMap();
-	}
-	
-	@Override
-	public boolean initialize() {
-		long startTime = StandardLog.onStartLoad("buffs");
-		dataMap.load();
-		StandardLog.onEndLoad(dataMap.size(), "buffs", startTime);
-		return super.initialize();
 	}
 	
 	@Override
@@ -101,9 +90,9 @@ public class BuffService extends Service {
 	
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
-		BuffData buffData = getBuff(bi.getBuffName());
+		BuffInfo buffData = getBuff(bi.getBuffName());
 		Objects.requireNonNull(buffData, "No known buff: " + bi.getBuffName());
-		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+ ']';
+		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffInfo name ["+buffData.getName()+ ']';
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -186,11 +175,11 @@ public class BuffService extends Service {
 	}
 	
 	private boolean isBuffRemovedOnDeath(Buff buff) {
-		return getBuff(buff).isRemovedOnDeath();
+		return getBuff(buff).isRemoveOnDeath();
 	}
 	
-	private boolean isBuffInfinite(BuffData buffData) {
-		return buffData.getDefaultDuration() < 0;
+	private boolean isBuffInfinite(BuffInfo buffData) {
+		return buffData.getDuration() < 0;
 	}
 	
 	private boolean isCreatureBuffed(CreatureObject creature) {
@@ -207,9 +196,9 @@ public class BuffService extends Service {
 		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff), true));
 	}
 	
-	private void addBuff(CreatureObject receiver, @NotNull BuffData buffData, CreatureObject buffer) {
-		String groupName = buffData.getGroupName();
-		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroupName())).findAny();
+	private void addBuff(CreatureObject receiver, @NotNull BuffInfo buffData, CreatureObject buffer) {
+		String groupName = buffData.getGroup1();
+		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroup1())).findAny();
 		
 		int applyTime = calculatePlayTime(receiver);
 		
@@ -224,8 +213,8 @@ public class BuffService extends Service {
 					checkStackCount(receiver, buff, applyTime, 1);
 				}
 			} else {
-				BuffData oldBuff = getBuff(buff);
-				if (buffData.getGroupPriority() >= oldBuff.getGroupPriority()) {
+				BuffInfo oldBuff = getBuff(buff);
+				if (buffData.getPriority() >= oldBuff.getPriority()) {
 					removeBuff(receiver, oldBuff, true);
 					applyBuff(receiver, buffer, buffData, applyTime);
 				}
@@ -235,7 +224,7 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, @NotNull BuffData buffData, boolean expired) {
+	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData, boolean expired) {
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
 		if (!optionalEntry.isPresent())
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
@@ -257,7 +246,7 @@ public class BuffService extends Service {
 	}
 	
 	private void checkStackCount(CreatureObject receiver, Buff buff, int applyTime, int stackMod) {
-		BuffData buffData = getBuff(buff);
+		BuffInfo buffData = getBuff(buff);
 		
 		Objects.requireNonNull(buffData, "No known buff: " + buff.getCrc());
 		// If it's the same buff, we need to check for stacks
@@ -279,26 +268,26 @@ public class BuffService extends Service {
 		
 		// If the stack count was incremented, also renew the duration
 		if (stackMod > 0) {
-			receiver.setBuffDuration(crc, applyTime, (int) buffData.getDefaultDuration());
+			receiver.setBuffDuration(crc, applyTime, (int) buffData.getDuration());
 		}
 	}
 	
-	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffData buffData, int applyTime) {
+	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData, int applyTime) {
 		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
 		int stackCount = 1;
-		int buffDuration = (int) buffData.getDefaultDuration();
+		int buffDuration = (int) buffData.getDuration();
 		{
 			Player bufferPlayer = buffer.getOwner();
 			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();
 			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
 		}
-		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
+		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, (float) buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
 		
 		checkSkillMods(buffData, receiver, 1);
 		receiver.addBuff(buff);
 		
-		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
-		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
+		sendParticleEffect(buffData.getParticle(), receiver, buffData.getParticleHardpoint());
+		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardpoint());
 		
 		addToMonitored(receiver);
 	}
@@ -309,19 +298,19 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void checkCallback(BuffData buffData, CreatureObject creature) {
+	private void checkCallback(BuffInfo buffData, CreatureObject creature) {
 		String callback = buffData.getCallback();
 		
 		if (callback.equals("none")) {
 			return;
 		}
 		
-		if (dataMap.containsBuff(callback)) {
+		if (DataLoader.buffs().containsBuff(callback)) {
 			addBuff(creature, getBuff(callback), creature);
 		}
 	}
 	
-	private void checkSkillMods(BuffData buffData, CreatureObject creature, int valueFactor) {
+	private void checkSkillMods(BuffInfo buffData, CreatureObject creature, int valueFactor) {
 		/*
 		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
@@ -331,19 +320,19 @@ public class BuffService extends Service {
 			sendSkillModIntent(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
 	}
 	
-	private void sendSkillModIntent(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
+	private void sendSkillModIntent(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
 		if (!effectName.isEmpty())
 			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
 	}
 	
 	@Nullable
-	private BuffData getBuff(String name) {
-		return dataMap.getBuff(name);
+	private BuffInfo getBuff(String name) {
+		return DataLoader.buffs().getBuff(name);
 	}
 	
 	@Nullable
-	private BuffData getBuff(@NotNull Buff buff) {
-		return dataMap.getBuff(buff.getCrc());
+	private BuffInfo getBuff(@NotNull Buff buff) {
+		return DataLoader.buffs().getBuff(buff.getCrc());
 	}
 	
 }

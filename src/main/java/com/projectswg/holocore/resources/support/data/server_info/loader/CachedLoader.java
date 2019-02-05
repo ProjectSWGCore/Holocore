@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 enum CachedLoader {
+	BUFFS				(BuffLoader::new),
 	BUILDING_CELLS		(BuildingCellLoader::new),
 	NPC_LOADER			(NpcLoader::new),
 	NPC_COMBAT_PROFILES	(NpcCombatProfileLoader::new),
@@ -17,10 +18,12 @@ enum CachedLoader {
 	NPC_WEAPON_RANGES	(NpcWeaponRangeLoader::new),
 	STATIC_SPAWNS		(NpcStaticSpawnLoader::new),
 	OBJECT_DATA			(ObjectDataLoader::new),
+	PERFORMANCES		(PerformanceLoader::new),
 	COMMANDS			(CommandLoader::new),
 	SLOT_DEFINITIONS	(SlotDefinitionLoader::new),
 	ZONE_INSERTIONS		(TerrainZoneInsertionLoader::new),
-	VEHICLES			(VehicleLoader::new);
+	VEHICLES			(VehicleLoader::new),
+	TRAVEL_COSTS		(TravelCostLoader::new);
 	
 	private final AtomicReference<SoftReference<DataLoader>> cachedLoader;
 	private final Supplier<DataLoader> supplier;

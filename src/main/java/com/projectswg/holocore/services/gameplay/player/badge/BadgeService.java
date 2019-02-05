@@ -63,15 +63,12 @@ public class BadgeService extends Service {
 	}
 	
 	private void grantBadge(PlayerObject player, int beginSlotId, String collectionName, boolean isHidden, String slotName) {
-		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
-		
-		collections.set(beginSlotId);
-		player.setCollectionBadges(collections.toByteArray());
+		player.setCollectionFlag(beginSlotId);
 		handleMessage(player, hasCompletedCollection(player, collectionName), collectionName, isHidden, slotName);
 	}
 	
 	private void grantBadgeIncrement(PlayerObject player, int beginSlotId, int endSlotId, int maxSlotValue) {
-		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
+		BitSet collections = player.getCollectionBadges();
 		
 		int binaryValue = 1;
 		int curValue = 0;
@@ -94,7 +91,7 @@ public class BadgeService extends Service {
 					collections.clear(beginSlotId + i);
 				}
 			}
-			player.setCollectionBadges(collections.toByteArray());
+			player.setCollectionFlags(collections);
 		}
 	}
 	
@@ -264,15 +261,12 @@ public class BadgeService extends Service {
 	}
 	
 	private boolean hasBadge(PlayerObject player, int badgeBeginSlotId) {
-		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
-		
-		return collections.get(badgeBeginSlotId);
+		return player.getCollectionFlag(badgeBeginSlotId);
 	}
 	
 	private boolean hasCompletedCollection(PlayerObject player, String collectionTitle) {
-		
 		String collectionName = "";
-		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
+		BitSet collections = player.getCollectionBadges();
 		
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
 			int beginSlotId = (int) collectionTable.getCell(row, 4);

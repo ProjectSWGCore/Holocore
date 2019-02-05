@@ -117,7 +117,7 @@ public class ChatFriendService extends Service {
 	}
 	
 	private void handleRequestFriendList(Player player) {
-		player.getPlayerObject().sendFriendsList();
+		player.getPlayerObject().sendFriendList();
 	}
 	
 	/* Ignore List */

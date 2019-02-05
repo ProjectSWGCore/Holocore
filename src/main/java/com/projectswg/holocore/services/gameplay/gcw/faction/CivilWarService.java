@@ -208,7 +208,7 @@ public class CivilWarService extends Service {
 	private void changeRank(PlayerObject playerObject, int newRank) {
 		assert (newRank < 1 || newRank > 12);
 		
-		int oldRank = playerObject.getCurrentRank();
+		int oldRank = playerObject.getCurrentGcwRank();
 		
 		assert (oldRank > 1);
 		
@@ -218,7 +218,7 @@ public class CivilWarService extends Service {
 		PvpFaction faction = creature.getPvpFaction();
 		int abilityIndex = faction == PvpFaction.IMPERIAL ? IMPERIAL_INDEX : REBEL_INDEX;
 		
-		playerObject.setCurrentRank(newRank);
+		playerObject.setCurrentGcwRank(newRank);
 		
 		if (oldRank > newRank) {
 			// They've been demoted
@@ -258,8 +258,8 @@ public class CivilWarService extends Service {
 	}
 	
 	private void updateRank(PlayerObject playerObject) {
-		int currentRank = playerObject.getCurrentRank();
-		float oldProgress = playerObject.getRankProgress();
+		int currentRank = playerObject.getCurrentGcwRank();
+		float oldProgress = playerObject.getCurrentGcwRankProgress();
 		int points = playerObject.getGcwPoints();
 		float decay = 0;
 		
@@ -270,10 +270,10 @@ public class CivilWarService extends Service {
 		float newProgress = rankProgress(oldProgress, decay, currentRank, points);
 		
 		if (newProgress >= 100) {
-			int promotion = playerObject.getCurrentRank() + 1;
+			int promotion = playerObject.getCurrentGcwRank() + 1;
 			
 			if (promotion > 12) {	// 12 is the max rank
-				playerObject.setRankProgress(99.99F);
+				playerObject.setCurrentGcwRankProgress(99.99F);
 				moveToLifetime(playerObject, points);
 				return;
 			}
@@ -292,17 +292,17 @@ public class CivilWarService extends Service {
 				return;
 			} else {
 				// They've ranked up, but cannot rank up again
-				playerObject.setRankProgress(nextRankProgress);
+				playerObject.setCurrentGcwRankProgress(nextRankProgress);
 			}
 			
 		} else if (newProgress > 0) {
 			// Set their new progress
-			playerObject.setRankProgress(newProgress);
+			playerObject.setCurrentGcwRankProgress(newProgress);
 		} else if (newProgress < 0 && isRankDown(oldProgress, newProgress)) {
-			int demotion = playerObject.getCurrentRank() - 1;
+			int demotion = playerObject.getCurrentGcwRank() - 1;
 			
 			if (demotion < 1) {	// 1 is the minimum rank
-				playerObject.setRankProgress(0);
+				playerObject.setCurrentGcwRankProgress(0);
 				return;
 			}
 			
@@ -321,7 +321,7 @@ public class CivilWarService extends Service {
 				return;
 			} else {
 				// They've ranked down, but cannot rank down again
-				playerObject.setRankProgress(nextRankProgress);
+				playerObject.setCurrentGcwRankProgress(nextRankProgress);
 			}
 		}
 		
@@ -330,7 +330,7 @@ public class CivilWarService extends Service {
 	
 	private void updateRanks() {
 		playerObjects.forEach(playerObject -> {
-			if (playerObject.getCurrentRank() > 0)
+			if (playerObject.getCurrentGcwRank() > 0)
 				updateRank(playerObject);
 		});
 		
@@ -431,14 +431,14 @@ public class CivilWarService extends Service {
 		
 		if (fi.getNewFaction() == PvpFaction.NEUTRAL) {
 			// They've left the imperials or rebels and must have rank removed
-			playerObject.setCurrentRank(0);
+			playerObject.setCurrentGcwRank(0);
 			
 			int points = playerObject.getGcwPoints();
 			
 			moveToLifetime(playerObject, points);
 		} else {
 			// They've joined the imperials or rebels and become Privates
-			playerObject.setCurrentRank(1);
+			playerObject.setCurrentGcwRank(1);
 		}
 	}
 	

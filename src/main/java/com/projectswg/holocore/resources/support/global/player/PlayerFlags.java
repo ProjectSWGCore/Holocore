@@ -26,23 +26,43 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.player;
 
+import java.util.BitSet;
+import java.util.EnumSet;
+import java.util.Set;
+
 public enum PlayerFlags {
 	/** Marks as Looking for a Group */
-	LFG			(0),
+	LFG							(0),
 	/** Marks as Helper */
-	HELPER		(1),
+	HELPER						(1),
 	/** Marks as Roleplayer */
-	ROLEPLAYER	(2),
+	ROLEPLAYER					(2),
+	/** - */
+	FACTION						(3),
+	/** - */
+	SPECIES						(4),
+	/** - */
+	TITLE						(5),
+	/** - */
+	FRIEND						(6),
 	/** Away from Keyboard */
-	AFK			(7),
-	/** Logged Out */
-	LD			(8),
+	AFK							(7),
+	/** Logged Out / Link Dead */
+	LD							(8),
 	/** Display the Faction Rank */
-	FACTIONRANK	(9),
+	FACTIONRANK					(9),
+	/** Display the player's location in the matchmaking search */
+	DISPLAY_LOCATION_IN_SEARCH	(10),
 	/** Marks as Out of Character */
-	OOC			(11),
+	OOC							(11),
+	/** - */
+	SEARCH_BY_SOURCE_GALAXY		(12),
 	/** Marks as Looking for Work */
-	LFW			(13);
+	LFW							(13),
+	/** - */
+	ANONYMOUS					(127);
+	
+	private static final PlayerFlags [] FLAGS = values();
 	
 	private int flag;
 	
@@ -53,4 +73,22 @@ public enum PlayerFlags {
 	public int getFlag() {
 		return flag;
 	}
+	
+	public static BitSet bitsetFromFlags(Set<PlayerFlags> flags) {
+		BitSet ret = new BitSet(128);
+		for (PlayerFlags flag : flags) {
+			ret.set(flag.flag);
+		}
+		return ret;
+	}
+	
+	public static Set<PlayerFlags> flagsFromBitset(BitSet bitset) {
+		Set<PlayerFlags> ret = EnumSet.noneOf(PlayerFlags.class);
+		for (PlayerFlags flag : FLAGS) {
+			if (bitset.get(flag.flag))
+				ret.add(flag);
+		}
+		return ret;
+	}
+	
 }

@@ -27,14 +27,18 @@
 
 package com.projectswg.holocore.resources.support.data.collections;
 
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.IntBuffer;
+import java.util.BitSet;
+
 public class TestSWGFlag extends TestRunnerNoIntents {
 	
 	@Test
-	public void testFlag() {
+	public void testFlagAccuracy() {
 		SWGFlag flag = new SWGFlag(3, 16);
 		flag.set(1);
 		flag.set(4);
@@ -47,6 +51,24 @@ public class TestSWGFlag extends TestRunnerNoIntents {
 		Assert.assertEquals(1, ints[1]);
 		Assert.assertEquals(1, ints[2]);
 		Assert.assertEquals(1, ints[3]);
+		SWGFlag decoded = new SWGFlag(3, 16);
+		decoded.decode(NetBuffer.wrap(flag.encode()));
+		Assert.assertArrayEquals(flag.encode(), decoded.encode());
+	}
+	
+	@Test
+	public void testFlagSize() {
+		byte [] encoded;
+		SWGFlag flag = new SWGFlag(3, 16);
+		
+		encoded = flag.encode();
+		Assert.assertEquals(4, encoded.length);
+		
+		flag.set(1);
+		encoded = flag.encode();
+		Assert.assertEquals(8, encoded.length);
+		Assert.assertEquals(1, encoded[0]);
+		Assert.assertEquals(2, encoded[4]);
 	}
 	
 }

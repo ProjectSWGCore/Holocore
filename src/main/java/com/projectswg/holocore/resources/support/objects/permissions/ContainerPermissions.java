@@ -64,7 +64,7 @@ public interface ContainerPermissions extends Persistable, MongoPersistable {
 	
 	static MongoData save(MongoData data, ContainerPermissions permissions) {
 		data.putString("type", permissions.getType().name());
-		permissions.save(data);
+		permissions.saveMongo(data);
 		return data;
 	}
 	

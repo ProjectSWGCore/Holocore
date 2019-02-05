@@ -6,6 +6,7 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -92,21 +93,24 @@ public class CustomObjectService extends Service {
 	}
 	
 	private ListBoxRecursive createListBoxRecursive() {
-		return createListBoxRecursive(new File("clientdata/object"));
+		return createListBoxRecursive(DataLoader.objectData().getObjects());
 	}
 	
-	private ListBoxRecursive createListBoxRecursive(File start) {
+	private ListBoxRecursive createListBoxRecursive(Collection<String> objects) {
 		Map<String, Object> mapping = new TreeMap<>();
-		File [] children = start.listFiles();
-		assert children != null;
-		for (File file : children) {
-			if (file.isDirectory()) {
-				mapping.put(file.getName(), createListBoxRecursive(file));
-			} else if (file.isFile() && file.getName().startsWith("shared_") && file.getName().endsWith(".iff")) {
-				String iff = file.getAbsolutePath().replace(new File("clientdata").getAbsolutePath()+File.separator, "");
-				mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
-			}
+		for (String iff : objects) {
+			mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
 		}
+//		File [] children = start.listFiles();
+//		assert children != null;
+//		for (File file : children) {
+//			if (file.isDirectory()) {
+//				mapping.put(file.getName(), createListBoxRecursive(file));
+//			} else if (file.isFile() && file.getName().startsWith("shared_") && file.getName().endsWith(".iff")) {
+//				String iff = file.getAbsolutePath().replace(new File("clientdata").getAbsolutePath()+File.separator, "");
+//				mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
+//			}
+//		}
 		return new ListBoxRecursive(mapping);
 	}
 	

@@ -50,7 +50,7 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Bui
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Calendar;
+import java.time.Instant;
 
 public class CharacterCreation {
 	
@@ -165,8 +165,7 @@ public class CharacterCreation {
 	
 	private void setPlayerObjectValues(PlayerObject playerObj) {
 		playerObj.setProfession(create.getProfession());
-		Calendar date = Calendar.getInstance();
-		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
+		playerObj.setBornDate(Instant.now());
 	}
 	
 	private void createStarterClothing(CreatureObject creature, String race) {

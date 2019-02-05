@@ -68,7 +68,7 @@ public final class ReadWritePermissions implements ContainerPermissions {
 	private ReadWritePermissions(MongoData data) {
 		this.allowed = new HashSet<>();
 		this.locked = false;
-		read(data);
+		readMongo(data);
 		this.locked = true;
 	}
 	
@@ -112,14 +112,14 @@ public final class ReadWritePermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void read(MongoData data) {
+	public void readMongo(MongoData data) {
 		if (locked)
 			throw new IllegalStateException("Permissions is already locked");
 		allowed.addAll(data.getArray("allowed", Long.class));
 	}
 	
 	@Override
-	public void save(MongoData data) {
+	public void saveMongo(MongoData data) {
 		data.putArray("allowed", new ArrayList<>(allowed));
 	}
 	

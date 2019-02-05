@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,32 +24,75 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities.clientdata_printer;
 
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-public class ClientdataPrinterDatatable {
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.Map;
+
+public final class TravelCostLoader extends DataLoader {
 	
-	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper());
-		printTable("datatables/buildout/areas_tatooine.iff");
+	private final Map<Terrain, Map<Terrain, Integer>> costs;
+	
+	TravelCostLoader() {
+		this.costs = new EnumMap<>(Terrain.class);
 	}
 	
-	private static void printTable(String table) {
-		DatatableData data = (DatatableData) ClientFactory.getInfoFromFile(table);
-		for (int col = 0; col < data.getColumnCount(); col++) {
-			System.out.print(data.getColumnName(col) + ',');
-		}
-		System.out.println();
-		for (int row = 0; row < data.getRowCount(); row++) {
-			for (int col = 0; col < data.getColumnCount(); col++) {
-				System.out.print(data.getCell(row, col) + ",");
+	public boolean isCostDefined(Terrain source) {
+		return costs.containsKey(source);
+	}
+	
+	public int getCost(Terrain source, Terrain destination) {
+		Map<Terrain, Integer> costMap = costs.get(source);
+		if (costMap == null)
+			return 0;
+		return costMap.getOrDefault(destination, 0);
+	}
+	
+	@Override
+	public final void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/travel/travel_costs.sdb"))) {
+			while (set.next()) {
+				TravelCostInfo travel = new TravelCostInfo(set);
+				costs.put(travel.getPlanet(), travel.getCosts());
 			}
-			System.out.println();
+		}
+		for (Terrain key : costs.keySet()) {
+			for (Map<Terrain, Integer> costMap : costs.values()) {
+				assert costMap.keySet().equals(costs.keySet()) : "planet "+key+" is improperly defined in travel_costs.sdb";
+			}
 		}
 	}
 	
+	public static class TravelCostInfo {
+		
+		private final Terrain planet;
+		private final EnumMap<Terrain, Integer> costs;
+		
+		public TravelCostInfo(SdbResultSet set) {
+			this.planet = Terrain.getTerrainFromName(set.getText("planet"));
+			this.costs = new EnumMap<>(Terrain.class);
+			for (String col : set.getColumns()) {
+				if (col.equalsIgnoreCase("planet"))
+					continue;
+				costs.put(Terrain.getTerrainFromName(col), (int) set.getInt(col));
+			}
+		}
+		
+		public Terrain getPlanet() {
+			return planet;
+		}
+		
+		public Map<Terrain, Integer> getCosts() {
+			return Collections.unmodifiableMap(costs);
+		}
+		
+	}
 }

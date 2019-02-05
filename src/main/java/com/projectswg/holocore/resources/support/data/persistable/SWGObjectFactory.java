@@ -39,8 +39,12 @@ public class SWGObjectFactory {
 		obj.save(stream);
 	}
 	
+	public static MongoData save(SWGObject obj) {
+		return save(obj, new MongoData());
+	}
+	
 	public static MongoData save(SWGObject obj, MongoData data) {
-		obj.save(data);
+		obj.saveMongo(data);
 		assert data.containsKey("id") : "serialized MongoData does not contain the objectId";
 		assert data.containsKey("template") : "serialized MongoData does not contain the template";
 		return data;
@@ -60,7 +64,7 @@ public class SWGObjectFactory {
 		assert objectId != 0 : "objectId is not defined in MongoData";
 		assert template != null : "template is not defined in MongoData";
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.read(data);
+		obj.readMongo(data);
 		return obj;
 	}
 	

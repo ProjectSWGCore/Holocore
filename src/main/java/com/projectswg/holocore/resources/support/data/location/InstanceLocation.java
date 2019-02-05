@@ -62,14 +62,14 @@ public class InstanceLocation implements Persistable, MongoPersistable {
 	}
 	
 	@Override
-	public void read(MongoData data) {
+	public void readMongo(MongoData data) {
 		instanceNumber = data.getInteger("number", 0);
 		instanceType = InstanceType.valueOf(data.getString("type", "NONE"));
 		location = data.getDocument("location", new Location());
 	}
 	
 	@Override
-	public void save(MongoData data) {
+	public void saveMongo(MongoData data) {
 		data.putInteger("number", instanceNumber);
 		data.putString("type", instanceType.name());
 		data.putDocument("location", location);

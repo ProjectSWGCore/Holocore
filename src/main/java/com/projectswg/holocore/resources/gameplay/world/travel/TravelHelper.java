@@ -31,8 +31,6 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
@@ -41,6 +39,7 @@ import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -60,16 +59,13 @@ public class TravelHelper {
 	
 	private final Map<String, TravelGroup> travel;
 	private final ThreadPool travelExecutor;
-	private final AllowedRouteManager routeManager;
 	private final TravelPointManager pointManager;
 	
 	public TravelHelper() {
 		this.travel = new ConcurrentHashMap<>();
 		this.travelExecutor = new ThreadPool(3, "travel-shuttles-%d");
-		this.routeManager = new AllowedRouteManager();
 		this.pointManager = new TravelPointManager();
 		
-		loadAllowedRoutesAndPrices();
 		createGalaxyTravels();
 		loadTravelPoints();
 	}
@@ -89,11 +85,11 @@ public class TravelHelper {
 	}
 	
 	public boolean isValidRoute(Terrain departure, Terrain destination) {
-		return routeManager.isRouteAvailable(departure, destination);
+		return getTravelFee(departure, destination) != 0;
 	}
 	
 	public int getTravelFee(Terrain departure, Terrain destination) {
-		return routeManager.getRouteFee(departure, destination);
+		return DataLoader.travelCosts().getCost(departure, destination);
 	}
 	
 	public TravelGroup getTravelGroup(String template) {
@@ -191,25 +187,6 @@ public class TravelHelper {
 		traveler.moveToContainer(destination.getCollector().getParent(), destination.getLocation());
 	}
 	
-	private void loadAllowedRoutesAndPrices() {
-		DatatableData travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
-		// Sets up the travelPlanets array to be in the order of the datatable
-		Terrain [] travelPlanets = new Terrain[travelFeeTable.getRowCount()];
-		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, "Planet")));
-		
-		for (int rowIndex = 0; rowIndex < travelPlanets.length; rowIndex++) {
-			for (int columnIndex = rowIndex; columnIndex < travelPlanets.length; columnIndex++) {
-				int price = (int) travelFeeTable.getCell(rowIndex, columnIndex+1);
-				
-				if (price <= 0)	// If price is below or equal to 0 then this is an invalid route and isn't an option.
-					continue;
-				
-				routeManager.addRoute(travelPlanets[rowIndex], travelPlanets[columnIndex], price);
-				routeManager.addRoute(travelPlanets[columnIndex], travelPlanets[rowIndex], price);
-			}
-		}
-	}
-	
 	private void createGalaxyTravels() {
 		Config config = DataManager.getConfig(ConfigFile.FEATURES);
 		long groundTime = config.getInt("SHUTTLE-GROUND-TIME", 120);
@@ -263,31 +240,6 @@ public class TravelHelper {
 			default:
 				Log.w("Invalid travel point type: %s", type);
 				return null;
-		}
-	}
-	
-	private static class AllowedRouteManager {
-		
-		private final Map<Terrain, Map<Terrain, Integer>> routeCosts;
-		
-		public AllowedRouteManager() {
-			this.routeCosts = new ConcurrentHashMap<>();
-		}
-		
-		public void addRoute(Terrain departure, Terrain destination, int fee) {
-			Map<Terrain, Integer> departureCosts = routeCosts.computeIfAbsent(departure, k -> new ConcurrentHashMap<>());
-			departureCosts.put(destination, fee);
-		}
-		
-		public boolean isRouteAvailable(Terrain departure, Terrain destination) {
-			return routeCosts.get(departure) != null && routeCosts.get(departure).get(destination) != null;
-		}
-		
-		public int getRouteFee(Terrain departure, Terrain destination) {
-			Integer fee = routeCosts.get(departure).get(destination);
-			if (fee == null)
-				return 0;
-			return fee;
 		}
 	}
 	

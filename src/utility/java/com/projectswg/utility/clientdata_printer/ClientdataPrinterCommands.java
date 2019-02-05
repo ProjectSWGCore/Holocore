@@ -24,74 +24,73 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.combat.buff;
+package com.projectswg.utility.clientdata_printer;
 
-import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
-public class BuffMap {
+public class ClientdataPrinterCommands {
 	
-	private final Map<Integer, BuffData> buffMap;
-	
-	public BuffMap() {
-		this.buffMap = new ConcurrentHashMap<>();
-	}
-	
-	public void load() {
-		DatatableData buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
-		int rows = buffTable.getRowCount();
-		
-		buffMap.clear();
-		for (int row = 0; row < rows; ++row) {
-			BuffData buff = new BuffData(buffTable.getString(row, "NAME"), buffTable.getString(row, "GROUP1"), buffTable.getInt(row, "PRIORITY"));
-			buff.setMaxStackCount(buffTable.getInt(row, "MAX_STACKS"));
-			for (int i = 0; i < 5; i++) {
-				buff.setEffectName(i, buffTable.getString(row, "EFFECT"+(i+1)+"_PARAM"));
-				buff.setEffectValue(i, buffTable.getFloat(row, "EFFECT"+(i+1)+"_VALUE"));
-			}
-			buff.setDefaultDuration(buffTable.getFloat(row, "DURATION"));
-			buff.setEffectFileName(buffTable.getString(row, "PARTICLE"));
-			buff.setParticleHardPoint(buffTable.getString(row, "PARTICLE_HARDPOINT"));
-			buff.setStanceParticle(buffTable.getString(row, "STANCE_PARTICLE"));
-			buff.setCallback(buffTable.getString(row, "CALLBACK"));
-			buff.setPersistent(buffTable.getInt(row, "IS_PERSISTENT") == 1);
-			buff.setRemovedOnDeath(buffTable.getInt(row, "REMOVE_ON_DEATH") == 1);
-			buff.setDecayOnPvpDeath(buffTable.getInt(row, "DECAY_ON_PVP_DEATH") == 1);
-			buffMap.put(buff.getCrc(), buff);
+	public static void main(String [] args) {
+		Log.addWrapper(new ConsoleLogWrapper());
+		List<Command> commands = loadBaseCommands();
+		for (Command command : commands) {
+			System.out.println(command);
 		}
 	}
 	
-	public int size() {
-		return buffMap.size();
+	private static List<Command> loadBaseCommands() {
+		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
+		String [] commandTables = new String[] {
+				"command_table", "command_table_ground", "client_command_table",
+				"command_table_space", "client_command_table_ground", "client_command_table_space"
+		};
+		
+		Set<Command> commands = new HashSet<>();
+		for (String table : commandTables) {
+			loadBaseCommands(commands, table);
+		}
+		List<Command> commandsSorted = new ArrayList<>(commands);
+		commandsSorted.sort(Comparator.comparing(a -> a.name));
+		return commandsSorted;
 	}
 	
-	public BuffData getBuff(int crc) {
-		return buffMap.get(crc);
+	private static void loadBaseCommands(Set<Command> commands, String table) {
+		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/" + table + ".iff");
+		
+		System.out.println("Table: " + table);
+		System.out.print("    [");
+		for (int col = 0; col < baseCommands.getColumnCount(); col++) {
+			System.out.print(baseCommands.getColumnName(col));
+			if (col+1 < baseCommands.getColumnCount())
+				System.out.print(", ");
+		}
+		System.out.println("]");
+		
+		for (int row = 0; row < baseCommands.getRowCount(); row++) {
+			commands.add(new Command(baseCommands.getString(row, "commandName"), baseCommands.getString(row, "scriptHook")));
+		}
 	}
 	
-	public BuffData getBuff(CRC crc) {
-		return getBuff(crc.getCrc());
-	}
-	
-	public BuffData getBuff(String name) {
-		return getBuff(getCrc(name));
-	}
-	
-	public boolean containsBuff(int crc) {
-		return buffMap.containsKey(crc);
-	}
-	
-	public boolean containsBuff(String name) {
-		return containsBuff(getCrc(name));
-	}
-	
-	private int getCrc(String name) {
-		return CRC.getCrc(name.toLowerCase(Locale.ENGLISH));
+	private static class Command {
+		
+		private final String name;
+		private final String scriptHook;
+		
+		public Command(String name, String scriptHook) {
+			this.name = name;
+			this.scriptHook = scriptHook;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("Command: %-25s\t%s", name, scriptHook);
+		}
+		
 	}
 	
 }

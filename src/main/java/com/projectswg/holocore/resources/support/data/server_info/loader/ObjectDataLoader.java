@@ -35,10 +35,7 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class ObjectDataLoader extends DataLoader {
 	
@@ -50,6 +47,10 @@ public final class ObjectDataLoader extends DataLoader {
 	
 	public Map<ObjectDataAttribute, Object> getAttributes(String iff) {
 		return attributes.get(iff);
+	}
+	
+	public Collection<String> getObjects() {
+		return Collections.unmodifiableCollection(attributes.keySet());
 	}
 	
 	@Override

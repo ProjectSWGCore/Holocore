@@ -64,7 +64,7 @@ public final class ReadOnlyPermissions implements ContainerPermissions {
 	private ReadOnlyPermissions(MongoData data) {
 		this.exempt = new HashSet<>();
 		this.locked = false;
-		read(data);
+		readMongo(data);
 		this.locked = true;
 	}
 	
@@ -108,7 +108,7 @@ public final class ReadOnlyPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void read(MongoData data) {
+	public void readMongo(MongoData data) {
 		if (locked)
 			throw new IllegalStateException("Permissions is already locked");
 		for (long id : data.getArray("exempt", Long.class))
@@ -116,7 +116,7 @@ public final class ReadOnlyPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void save(MongoData data) {
+	public void saveMongo(MongoData data) {
 		data.putArray("exempt", exempt.stream().map(SWGObject::getObjectId).collect(Collectors.toList()));
 	}
 	

@@ -74,12 +74,12 @@ public final class AdminPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void read(MongoData data) {
+	public void readMongo(MongoData data) {
 		
 	}
 	
 	@Override
-	public void save(MongoData data) {
+	public void saveMongo(MongoData data) {
 		
 	}
 	

@@ -27,111 +27,82 @@
 
 package com.projectswg.utility.packets;
 
+import com.projectswg.common.network.hcap.HcapInputStream;
+import com.projectswg.common.network.hcap.PacketRecord;
+import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.utility.packets.PacketCaptureAnalysis.PacketCaptureAssertion;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.time.Instant;
+import java.io.*;
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-@SuppressWarnings("UseOfSystemOutOrSystemErr")
+@SuppressWarnings({ "UseOfSystemOutOrSystemErr", "CallToPrintStackTrace" })
 public class ProcessPacketCapture {
 	
-	public static void main(String [] args) throws IOException {
-		try (DataInputStream packetCapture = new DataInputStream(new FileInputStream(new File(args[0])))) {
-			byte version = packetCapture.readByte();
-			assert version == 2;
-			Map<String, Object> information = readSystemInformation(version, packetCapture);
-			List<PacketRecord> packets = readPackets(packetCapture);
-			System.out.println("Read " + packets.size() + " packets");
+	public static void main(String [] args) {
+		for (String arg : args) {
+			if (!arg.endsWith(".hcap")) {
+				System.out.println("Skipping " + arg + " - does not have .hcap extension");
+				continue;
+			}
 			
-			if (args.length > 1 && args[1].equalsIgnoreCase("--printPackets")) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss.SSS").withZone((ZoneId) information.get("time.time_zone"));
-				int packetNumber = 0;
-				int packetPadding = (int) Math.floor(Math.log10(packets.size())) + 1;
-				for (PacketRecord packet : packets) {
-					System.out.printf("%s [%0"+packetPadding+"d] %s %s%n", formatter.format(packet.getTime()), packetNumber, (packet.isServer() ? "OUT: " : "IN:  "), packet.parse());
-					packetNumber++;
+			try (HcapInputStream packetCapture = new HcapInputStream(new FileInputStream(new File(arg)))) {
+				try (BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(arg.replace(".hcap", ".txt"))), StandardCharsets.UTF_8))) {
+					Map<String, Object> information = packetCapture.getSystemInformation();
+					List<PacketRecord> packets = readPackets(packetCapture);
+					
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss.SSS").withZone((ZoneId) information.get("time.time_zone"));
+					int packetNumber = 0;
+					int packetPadding = (int) Math.floor(Math.log10(packets.size())) + 1;
+					for (PacketRecord packet : packets) {
+						SWGPacket parsed = packet.parse();
+						String parsedInfo = (parsed == null) ? String.format("%08X", ByteBuffer.wrap(packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getInt(2)) : parsed.toString();
+						output.write(String.format("%s [%0"+packetPadding+"d] %s %s%n", formatter.format(packet.getTime()), packetNumber, (packet.isServer() ? "OUT: " : "IN:  "), parsedInfo));
+						packetNumber++;
+					}
+					
+					PacketCaptureAnalysis analysis = PacketCaptureAnalysis.from(packets);
+					output.write(String.format("Read %d packets%n", packets.size()));
+					output.write(String.format("Analysis:%n"));
+					output.write(String.format("    Objects Created: %d%n", analysis.getObjectCreations()));
+					output.write(String.format("    Objects Deleted: %d [Implicit: %d]%n", analysis.getObjectDeletions(), analysis.getObjectDeletionsImplicit()));
+					output.write(String.format("    Zone-ins:        %d %s%n", analysis.getCharacterZoneIns(), analysis.getPlayers()));
+					output.write(String.format("    Errors:          %d%n", analysis.getErrors().size()));
+					for (PacketCaptureAssertion e : analysis.getErrors()) {
+						output.write("        " + e.getMessage() + System.lineSeparator());
+						output.write("            " + e.getPacket() + System.lineSeparator());
+					}
+					System.out.println("Wrote " + packets.size() + " packets with analysis to " + arg.replace(".hcap", ".txt"));
 				}
-			} else {
-				PacketCaptureAnalysis analysis = PacketCaptureAnalysis.from(packets);
-				System.out.println("Analysis:");
-				System.out.println("    Objects Created: " + analysis.getObjectCreations());
-				System.out.println("    Objects Deleted: " + analysis.getObjectDeletions() + " [Implicit: " + analysis.getObjectDeletionsImplicit() + "]");
-				System.out.println("    Zone-ins:        " + analysis.getCharacterZoneIns() + " " + analysis.getPlayers());
-				System.out.println("    Errors:          " + analysis.getErrors().size());
-				for (PacketCaptureAssertion e : analysis.getErrors()) {
-					System.err.println("        " + e.getMessage());
-					System.err.println("            " + e.getPacket());
-				}
+			} catch (Throwable t) {
+				t.printStackTrace();
 			}
 		}
 	}
 	
-	private static Map<String, Object> readSystemInformation(byte version, DataInputStream packetCapture) throws IOException {
-		int count = packetCapture.readByte();
-		System.out.println("System Information:");
-		Map<String, Object> information = new LinkedHashMap<>();
-		for (int i = 0; i < count; i++) {
-			Map.Entry<String, Object> entry = parseEntry(version, packetCapture.readUTF());
-			information.put(entry.getKey(), entry.getValue());
-		}
-		
-		int maxLength = information.keySet().stream().mapToInt(String::length).max().orElse(10);
-		for (Entry<String, Object> e : information.entrySet()) {
-			System.out.printf("    %-"+maxLength+"s = %s%n", e.getKey(), e.getValue().toString());
-		}
-		return information;
-	}
-	
-	private static List<PacketRecord> readPackets(DataInputStream packetCapture) throws IOException {
+	private static List<PacketRecord> readPackets(HcapInputStream packetCapture) throws IOException {
 		List<PacketRecord> packets = new ArrayList<>(1024);
-		while (packetCapture.available() >= 11) {
-			boolean server = packetCapture.readBoolean();
-			Instant time = Instant.ofEpochMilli(packetCapture.readLong());
-			int dataLength = packetCapture.readUnsignedShort();
-			byte [] data = new byte[dataLength];
-			int n = packetCapture.read(data);
-			while (n < dataLength)
-				n += packetCapture.read(data, n, dataLength - n);
-			assert n == dataLength;
-			packets.add(new PacketRecord(server, time, data));
+		PacketRecord record;
+		while ((record = packetCapture.readPacket()) != null) {
+			try {
+				if (record.getData().length < 6)
+					continue;
+				record.parse();
+				packets.add(record);
+			} catch (BufferUnderflowException e) {
+				System.err.printf("Packet parser failed for packet of length %d at %s%n", record.getData().length, record.getTime());
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
 		}
 		return packets;
-	}
-	
-	private static Map.Entry<String, Object> parseEntry(byte version, String str) {
-		String [] keyValue = str.split("=", 2);
-		assert keyValue.length == 2;
-		String key = keyValue[0].toLowerCase(Locale.US);
-		String value = keyValue[1];
-		
-		if (version == 2) {
-			switch (key) {
-				case "time.current_time":
-					return Map.entry(key, Instant.ofEpochMilli(Long.parseLong(value)));
-				case "time.time_zone":
-					return Map.entry(key, ZoneId.of(value.split(":")[0]));
-				default:
-					return Map.entry(key, value);
-			}
-		} else if (version == 3) {
-			switch (key) {
-				case "time.current_time":
-					return Map.entry(key, Instant.parse(value));
-				case "time.time_zone":
-					return Map.entry(key, ZoneId.of(value));
-				default:
-					return Map.entry(key, value);
-			}
-		} else {
-			return Map.entry(key, value);
-		}
 	}
 	
 }

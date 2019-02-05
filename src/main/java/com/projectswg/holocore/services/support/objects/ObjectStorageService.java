@@ -13,10 +13,12 @@ import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildoutLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -24,6 +26,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -31,6 +35,9 @@ import java.util.function.Function;
 public class ObjectStorageService extends Service {
 	
 	private final ObjectDatabase<SWGObject> database;
+	private final PswgUserDatabase userDatabase;
+	private final ScheduledThreadPool persistenceThread;
+	private final Set<SWGObject> persistedObjects;
 	private final Map<Long, SWGObject> objectMap;
 	private final Map<Long, SWGObject> buildouts;
 	private final Map<String, BuildingObject> buildingLookup;
@@ -38,6 +45,9 @@ public class ObjectStorageService extends Service {
 	
 	public ObjectStorageService() {
 		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
+		this.userDatabase = new PswgUserDatabase();
+		this.persistenceThread = new ScheduledThreadPool(1, 3, "object-storage-service");
+		this.persistedObjects = new CopyOnWriteArraySet<>();
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		this.buildouts = new HashMap<>(128*1024, 1f);
 		this.buildingLookup = new HashMap<>();
@@ -59,14 +69,17 @@ public class ObjectStorageService extends Service {
 			database.traverse(this::loadObject);
 		}
 		
+		persistenceThread.start();
+		persistenceThread.executeWithFixedDelay(TimeUnit.MINUTES.toMillis(5), TimeUnit.MINUTES.toMillis(5), this::saveObjects);
 		started.set(true);
 		return true;
 	}
 	
 	@Override
 	public boolean stop() {
+		persistenceThread.stop();
 		started.set(false);
-		return true;
+		return persistenceThread.awaitTermination(1000);
 	}
 	
 	@Override
@@ -75,6 +88,7 @@ public class ObjectStorageService extends Service {
 			database.close();
 		}
 		ObjectLookup.setObjectAuthority(null);
+		saveObjects();
 		return true;
 	}
 	
@@ -84,6 +98,7 @@ public class ObjectStorageService extends Service {
 			if (!database.load() && database.fileExists())
 				return false;
 		}
+		database.traverse(persistedObjects::add);
 		StandardLog.onEndLoad(database.size(), "players", startTime);
 		return true;
 	}
@@ -126,6 +141,12 @@ public class ObjectStorageService extends Service {
 		}
 		for (SWGObject child : obj.getContainedObjects()) {
 			addChildrenObjects(child);
+		}
+	}
+	
+	private void saveObjects() {
+		for (SWGObject obj : persistedObjects) {
+			
 		}
 	}
 	
@@ -203,6 +224,10 @@ public class ObjectStorageService extends Service {
 		
 		static void setObjectAuthority(Function<Long, SWGObject> authority) {
 			AUTHORITY.set(authority);
+		}
+		
+		public static boolean isDefined() {
+			return AUTHORITY.get() != null;
 		}
 		
 		@Nullable

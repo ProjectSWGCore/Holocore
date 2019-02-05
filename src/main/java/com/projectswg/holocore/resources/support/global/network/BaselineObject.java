@@ -75,9 +75,6 @@ public class BaselineObject {
 				case 6:
 					parseBaseline6(buffer);
 					break;
-				case 7:
-					parseBaseline7(buffer);
-					break;
 				case 8:
 					parseBaseline8(buffer);
 					break;
@@ -105,10 +102,6 @@ public class BaselineObject {
 	
 	public Baseline createBaseline6(Player target) {
 		return createBaseline(target, 6, this::createBaseline6);
-	}
-	
-	public Baseline createBaseline7(Player target) {
-		return createBaseline(target, 7, this::createBaseline7);
 	}
 	
 	public Baseline createBaseline8(Player target) {
@@ -156,15 +149,6 @@ public class BaselineObject {
 	}
 	
 	/**
-	 * Creates the seventh baseline for the specified target.  This baseline is sent when the object is used.
-	 * @param target the target to prepare the baseline for
-	 * @param data the baseline to build
-	 */
-	protected void createBaseline7(Player target, BaselineBuilder data) {
-		
-	}
-	
-	/**
 	 * Creates the eighth baseline for the specified target.  Only sent if the target has some permissions.
 	 * @param target the target to prepare the baseline for
 	 * @param data the baseline to build
@@ -195,10 +179,6 @@ public class BaselineObject {
 	}
 	
 	protected void parseBaseline6(NetBuffer buffer) {
-		
-	}
-	
-	protected void parseBaseline7(NetBuffer buffer) {
 		
 	}
 	

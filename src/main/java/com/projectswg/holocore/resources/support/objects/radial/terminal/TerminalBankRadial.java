@@ -11,6 +11,7 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.utilities.IntentFactory;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 	@Override
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		CreatureObject creature = player.getCreatureObject();
+		PlayerObject playerObject = player.getPlayerObject();
 		
 		{
 			List<RadialOption> useOptions = new ArrayList<>();
@@ -47,7 +49,7 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 			List<RadialOption> reserveOptions = new ArrayList<>();
 			if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
 				reserveOptions.add(RadialOption.create(RadialItem.SERVER_MENU49, "@sui:bank_galactic_reserve_deposit"));
-			if (creature.getReserveBalance() > 0)
+			if (playerObject != null && playerObject.getGalacticReserveDeposit() > 0)
 				reserveOptions.add(RadialOption.create(RadialItem.SERVER_MENU48, "@sui:bank_galactic_reserve_withdraw"));
 			
 			options.add(RadialOption.createSilent(RadialItem.SERVER_MENU50, "@sui:bank_galactic_reserve", reserveOptions));
@@ -133,15 +135,19 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 			SystemMessageIntent.broadcastPersonal(player, "You have to wait to perform another Galactic Reserve transaction");
 			return;
 		}
-		long amount = creature.getBankBalance();
-		if (amount > 1E9)
-			amount = (long) 1E9;
-		if (creature.getReserveBalance() + amount > 3E9 || amount == 0) {
+		PlayerObject playerObject = player.getPlayerObject();
+		if (playerObject == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Internal server error with loading your player");
+			return;
+		}
+		long updatedBank = creature.getBankBalance() - 1_000_000_000L;
+		byte reserveBalance = playerObject.getGalacticReserveDeposit();
+		if (reserveBalance >= 3 || updatedBank < 0) {
 			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_deposit");
 			return;
 		}
-		creature.setBankBalance((creature.getBankBalance() - amount));
-		creature.setReserveBalance((creature.getReserveBalance() + amount));
+		creature.setBankBalance(updatedBank);
+		playerObject.setGalacticReserveDeposit((byte) (reserveBalance + 1));
 		creature.updateLastGalacticReserveTime();
 	}
 	
@@ -150,15 +156,19 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 			SystemMessageIntent.broadcastPersonal(player, "You have to wait to perform another Galactic Reserve transaction");
 			return;
 		}
-		long amount = creature.getReserveBalance();
-		if (amount > 1E9)
-			amount = (long) 1E9;
-		if (creature.getBankBalance() + amount > 2E9 || amount == 0) {
-			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_withdraw");
+		PlayerObject playerObject = player.getPlayerObject();
+		if (playerObject == null) {
+			SystemMessageIntent.broadcastPersonal(player, "Internal server error with loading your player");
 			return;
 		}
-		creature.setBankBalance(creature.getBankBalance() + amount);
-		creature.setReserveBalance(creature.getReserveBalance() - amount);
+		long updatedBank = creature.getBankBalance() + 1_000_000_000L;
+		byte reserveBalance = playerObject.getGalacticReserveDeposit();
+		if (reserveBalance <= 0 || updatedBank >= 2_000_000_000L) {
+			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_deposit");
+			return;
+		}
+		creature.setBankBalance(updatedBank);
+		playerObject.setGalacticReserveDeposit((byte) (reserveBalance - 1));
 		creature.updateLastGalacticReserveTime();
 	}
 	

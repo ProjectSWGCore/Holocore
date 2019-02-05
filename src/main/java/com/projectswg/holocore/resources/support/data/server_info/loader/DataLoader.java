@@ -18,6 +18,10 @@ public abstract class DataLoader {
 		}
 	}
 	
+	public static BuffLoader buffs() {
+		return (BuffLoader) CachedLoader.BUFFS.load();
+	}
+	
 	public static BuildoutLoader buildouts() {
 		return BuildoutLoader.load(List.of());
 	}
@@ -66,6 +70,10 @@ public abstract class DataLoader {
 		return (ObjectDataLoader) CachedLoader.OBJECT_DATA.load();
 	}
 	
+	public static PerformanceLoader performances() {
+		return (PerformanceLoader) CachedLoader.PERFORMANCES.load();
+	}
+	
 	public static CommandLoader commands() {
 		return (CommandLoader) CachedLoader.COMMANDS.load();
 	}
@@ -76,6 +84,10 @@ public abstract class DataLoader {
 	
 	public static TerrainZoneInsertionLoader zoneInsertions() {
 		return (TerrainZoneInsertionLoader) CachedLoader.ZONE_INSERTIONS.load();
+	}
+	
+	public static TravelCostLoader travelCosts() {
+		return (TravelCostLoader) CachedLoader.TRAVEL_COSTS.load();
 	}
 	
 	public static VehicleLoader vehicles() {
