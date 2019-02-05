@@ -100,7 +100,7 @@ public class SWGList<E> extends CopyOnWriteArrayList<E> implements Encodable {
 	@Override
 	public boolean add(E e) {
 		add(size(), e);
-		return get(size() - 1).equals(e);
+		return true;
 	}
 	
 	@Override

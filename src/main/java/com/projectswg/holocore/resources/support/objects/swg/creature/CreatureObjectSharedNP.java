@@ -28,6 +28,8 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.object_controller.BuffAddUpdate;
@@ -49,7 +51,9 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-class CreatureObjectSharedNP implements Persistable {
+class CreatureObjectSharedNP implements Persistable, MongoPersistable {
+	
+	private final CreatureObject obj;
 	
 	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
 	private transient long groupId			= 0;
@@ -80,7 +84,8 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
 	
-	public CreatureObjectSharedNP() {
+	public CreatureObjectSharedNP(CreatureObject obj) {
+		this.obj = obj;
 		initCurrentAttributes();
 		initMaxAttributes();
 	}
@@ -298,6 +303,10 @@ class CreatureObjectSharedNP implements Persistable {
 		this.performing = performing;
 	}
 	
+	public HologramColour getHologramColor() {
+		return hologramColour;
+	}
+	
 	public void setHologramColour(HologramColour hologramColour) {
 		this.hologramColour = hologramColour;
 	}
@@ -497,7 +506,8 @@ class CreatureObjectSharedNP implements Persistable {
 			Buff buff = buffs.get(buffCrc);
 			Objects.requireNonNull(buff, "Buff cannot be null");
 			operation.accept(buff);
-			buffs.update(buffCrc, target);
+			buffs.update(buffCrc);
+			buffs.sendDeltaMessage(target);
 		}
 	}
 	
@@ -588,6 +598,62 @@ class CreatureObjectSharedNP implements Persistable {
 				break;
 			}
 		}
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putInteger("level", level);
+		data.putInteger("levelHealthGranted", levelHealthGranted);
+		data.putString("animation", animation);
+		data.putString("moodAnimation", moodAnimation);
+		data.putInteger("guildId", guildId);
+		data.putLong("lookAtTargetId", lookAtTargetId);
+		data.putLong("intendedTargetId", intendedTargetId);
+		data.putInteger("moodId", moodId);
+		data.putString("costume", costume);
+		data.putBoolean("visible", visible);
+		data.putBoolean("shownOnRadar", shownOnRadar);
+		data.putBoolean("beast", beast);
+		data.putString("difficulty", difficulty.name());
+		data.putString("hologramColor", hologramColour.name());
+		{
+			SWGObject weapon = this.equippedWeapon;
+			if (weapon != null)
+				data.putLong("equippedWeapon", weapon.getObjectId());
+		}
+		synchronized (maxAttributes) { data.putArray("maxAttributes", maxAttributes); }
+		synchronized (buffs) { data.putMap("buffs", buffs, CRC::getString); }
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		level = (short) data.getInteger("level", 1);
+		levelHealthGranted = data.getInteger("levelHealthGranted", 0);
+		animation = data.getString("animation", "");
+		moodAnimation = data.getString("moodAnimation", "neutral");
+		guildId = data.getInteger("guildId", 0);
+		lookAtTargetId = data.getLong("lookAtTargetId", 0);
+		intendedTargetId = data.getLong("intendedTargetId", 0);
+		moodId = (byte) data.getInteger("moodId", 0);
+		costume = data.getString("costume", "");
+		visible = data.getBoolean("visible", true);
+		shownOnRadar = data.getBoolean("shownOnRadar", true);
+		beast = data.getBoolean("beast", false);
+		difficulty = CreatureDifficulty.valueOf(data.getString("difficulty", "NORMAL"));
+		hologramColour = HologramColour.valueOf(data.getString("hologramColor", "DEFAULT"));
+		if (data.containsKey("equippedWeapon")) {
+			long equippedWeaponId = data.getLong("equippedWeapon", 0);
+			equippedWeapon = Stream.concat(obj.getContainedObjects().stream(), obj.getSlottedObjects().stream())
+					.filter(o -> o.getObjectId() == equippedWeaponId)
+					.filter(WeaponObject.class::isInstance)
+					.map(WeaponObject.class::cast)
+					.findFirst()
+					.orElse(null);
+		}
+		maxAttributes.clear();
+		buffs.clear();
+		maxAttributes.addAll(data.getArray("maxAttributes", Integer.class));
+		buffs.putAll(data.getMap("buffs", MongoData.class, CRC::new, doc -> MongoData.create(doc, Buff::new)));
 	}
 	
 	@Override

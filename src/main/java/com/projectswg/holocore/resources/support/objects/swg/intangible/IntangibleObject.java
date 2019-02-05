@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.intangible;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -69,6 +70,24 @@ public class IntangibleObject extends SWGObject {
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		count = buffer.getInt();
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		{
+			MongoData base3 = data.getDocument("base3");
+			base3.putInteger("count", count);
+		}
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		{
+			MongoData base3 = data.getDocument("base3");
+			count = base3.getInteger("count", 0);
+		}
 	}
 	
 	@Override

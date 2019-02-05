@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
@@ -67,7 +68,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private final CreatureObjectAwareness		awareness		= new CreatureObjectAwareness(this);
 	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP();
+	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP(this);
 	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
 	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
 	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
@@ -77,9 +78,6 @@ public class CreatureObject extends TangibleObject {
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
 	private double	height					= 0;
-	private int		cashBalance				= 0;
-	private int		bankBalance				= 0;
-	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -330,18 +328,6 @@ public class CreatureObject extends TangibleObject {
 		adjustSkillmod(modName, 0, modValue);
 	}
 	
-	public int getCashBalance() {
-		return cashBalance;
-	}
-
-	public int getBankBalance() {
-		return bankBalance;
-	}
-	
-	public long getReserveBalance() {
-		return reserveBalance;
-	}
-
 	public Posture getPosture() {
 		return posture;
 	}
@@ -458,114 +444,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setRace(Race race) {
 		this.race = race;
-	}
-	
-	public void setCashBalance(long cashBalance) {
-		if (cashBalance < 0)
-			cashBalance = 0;
-		if (cashBalance > 2E9) { // 2 billion cap
-			long leftover = cashBalance - (long)2E9;
-			cashBalance = (long) 2E9;
-			long bank = bankBalance + leftover;
-			long reserve = reserveBalance;
-			leftover = bank - (long) 2E9;
-			if (leftover > 0) {
-				bank = (long)2E9;
-				reserve += leftover;
-			}
-			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, (int) cashBalance);
-			setBankBalance(bank);
-			setReserveBalance(reserve);
-		} else {
-			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, (int) cashBalance);
-		}
-	}
-
-	public void setBankBalance(long bankBalance) {
-		if (bankBalance < 0)
-			bankBalance = 0;
-		if (bankBalance > 2E9) { // 2 billion cap
-			long leftover = bankBalance - (long)2E9;
-			bankBalance = (long) 2E9;
-			long cash = cashBalance + leftover;
-			long reserve = reserveBalance;
-			leftover = cash - (long) 2E9;
-			if (leftover > 0) {
-				cash = (long)2E9;
-				reserve += leftover;
-			}
-			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, (int) bankBalance);
-			setCashBalance(cash);
-			setReserveBalance(reserve);
-		} else {
-			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, (int) bankBalance);
-		}
-	}
-	
-	public void setReserveBalance(long reserveBalance) {
-		if (reserveBalance < 0)
-			reserveBalance = 0;
-		else if (reserveBalance > 3E9)
-			reserveBalance = (long) 3E9; // 3 billion cap
-		this.reserveBalance = reserveBalance;
-	}
-	
-	/**
-	 * Removes amount from cash first, then bank after. Returns true if the
-	 * operation was successful
-	 * @param amount the amount to remove
-	 * @return TRUE if successfully withdrawn, FALSE otherwise
-	 */
-	public boolean removeFromCashAndBank(long amount) {
-		long amountBalance = bankBalance + cashBalance;
-		if (amountBalance < amount)
-			return false;
-		if (cashBalance < amount) {
-			setBankBalance(bankBalance - (amount - cashBalance));
-			setCashBalance(0);
-		} else {
-			setCashBalance(cashBalance - amount);
-		}
-		return true;
-	}
-	
-	/**
-	 * Removes amount from bank first, then cash after. Returns true if the
-	 * operation was successful
-	 * @param amount the amount to remove
-	 * @return TRUE if successfully withdrawn, FALSE otherwise
-	 */
-	public boolean removeFromBankAndCash(long amount) {
-		long amountBalance = bankBalance + cashBalance;
-		if (amountBalance < amount)
-			return false;
-		if (bankBalance < amount) {
-			setCashBalance(cashBalance - (amount - bankBalance));
-			setBankBalance(0);
-		} else {
-			setBankBalance(bankBalance - amount);
-		}
-		return true;
-	}
-	
-	/**
-	 * Adds amount to cash balance.
-	 * @param amount the amount to add
-	 */
-	public void addToCash(long amount) {
-		setCashBalance(cashBalance + amount);
-	}
-	
-	/**
-	 * Adds amount to bank balance.
-	 * @param amount the amount to add
-	 */
-	public void addToBank(long amount) {
-		setBankBalance(bankBalance + amount);
 	}
 	
 	public boolean canPerformGalacticReserveTransaction() {
@@ -912,6 +790,10 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 27, performing);
 	}
 	
+	public HologramColour getHologramColor() {
+		return creo6.getHologramColor();
+	}
+	
 	public void setHologramColour(HologramColour hologramColour) {
 		creo6.setHologramColour(hologramColour);
 		sendDelta(6, 29, hologramColour.getValue());
@@ -1154,15 +1036,11 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
-		super.createBaseline1(target, bb); // 0 variables
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
-		bb.addInt(bankBalance); // 0
-		bb.addInt(cashBalance); // 1
+		super.createBaseline1(target, bb); // 2 variables
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
 		bb.addObject(skills); // 3
 		
-		bb.incrementOperandCount(4);
+		bb.incrementOperandCount(2);
 	}
 	
 	@Override
@@ -1199,10 +1077,6 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline1(NetBuffer buffer) {
 		super.parseBaseline1(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
-		bankBalance = buffer.getInt();
-		cashBalance = buffer.getInt();
 		baseAttributes = SWGList.getSwgList(buffer, 1, 2, Integer.class);
 		skills = SWGSet.getSwgSet(buffer, 1, 3, StringType.ASCII);
 	}
@@ -1231,18 +1105,48 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		creo4.saveMongo(data.getDocument("base4"));
+		creo6.saveMongo(data.getDocument("base6"));
+		data.putString("posture", posture.name());
+		data.putString("race", race.name());
+		data.putDouble("height", height);
+		data.putInteger("battleFatigue", battleFatigue);
+		data.putLong("ownerId", ownerId);
+		data.putLong("statesBitmask", statesBitmask);
+		data.putInteger("factionRank", factionRank);
+		data.putArray("skills", skills);
+		data.putArray("baseAttributes", baseAttributes);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		posture = Posture.valueOf(data.getString("posture", posture.name()));
+		race = Race.valueOf(data.getString("race", race.name()));
+		battleFatigue = data.getInteger("battleFatigue", battleFatigue);
+		ownerId = data.getLong("ownerId", ownerId);
+		statesBitmask = data.getLong("statesBitmask", statesBitmask);
+		factionRank = (byte) data.getInteger("factionRank", factionRank);
+		skills.clear();
+		baseAttributes.clear();
+		skills.addAll(data.getArray("skills", String.class));
+		baseAttributes.addAll(data.getArray("baseAttributes", Integer.class));
+	}
+	
+	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(1);
+		stream.addByte(2);
 		creo4.save(stream);
 		creo6.save(stream);
 		stream.addAscii(posture.name());
 		stream.addAscii(race.name());
 		stream.addFloat((float) height);
 		stream.addInt(battleFatigue);
-		stream.addInt(cashBalance);
-		stream.addInt(bankBalance);
-		stream.addLong(reserveBalance);
+		stream.addInt(getCashBalance());
+		stream.addInt(getBankBalance());
 		stream.addLong(ownerId);
 		stream.addLong(statesBitmask);
 		stream.addByte(factionRank);
@@ -1260,6 +1164,7 @@ public class CreatureObject extends TangibleObject {
 		switch(stream.getByte()) {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
+			case 2: readVersion2(stream); break;
 		}
 		
 	}
@@ -1271,9 +1176,9 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(stream.getAscii());
 		height = stream.getFloat();
 		battleFatigue = stream.getInt();
-		cashBalance = stream.getInt();
-		bankBalance = stream.getInt();
-		reserveBalance = stream.getLong();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		stream.getLong();
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
@@ -1292,9 +1197,25 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(stream.getAscii());
 		height = stream.getFloat();
 		battleFatigue = stream.getInt();
-		cashBalance = stream.getInt();
-		bankBalance = stream.getInt();
-		reserveBalance = stream.getLong();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		stream.getLong();
+		ownerId = stream.getLong();
+		statesBitmask = stream.getLong();
+		factionRank = stream.getByte();
+		stream.getList((i) -> skills.add(stream.getAscii()));
+		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+	}
+	
+	private void readVersion2(NetBufferStream stream) {
+		creo4.read(stream);
+		creo6.read(stream);
+		posture = Posture.valueOf(stream.getAscii());
+		race = Race.valueOf(stream.getAscii());
+		height = stream.getFloat();
+		battleFatigue = stream.getInt();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();

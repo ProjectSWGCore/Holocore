@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.tangible.SkillMod;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
@@ -41,7 +43,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import java.util.HashSet;
 import java.util.Set;
 
-class CreatureObjectClientServerNP implements Persistable {
+class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	
 	private double movementScale = 1;
 	private double movementPercent = 1;
@@ -178,7 +180,8 @@ class CreatureObjectClientServerNP implements Persistable {
 // SWGMap
 				skillMod.adjustBase(base);
 				skillMod.adjustModifier(modifier);
-				skillMods.update(skillModName, target);
+				skillMods.update(skillModName);
+				skillMods.sendDeltaMessage(target);
 			}
 		}
 	}
@@ -261,6 +264,44 @@ class CreatureObjectClientServerNP implements Persistable {
 		missionCriticalObjs.addAll(SWGSet.getSwgSet(buffer, 4, 13, StringType.ASCII));
 		abilities.putAll(SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class));
 		totalLevelXp = buffer.getInt();
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putDouble("accelPercent", accelPercent);
+		data.putDouble("accelScale", accelScale);
+		data.putDouble("movementPercent", movementPercent);
+		data.putDouble("movementScale", movementScale);
+		data.putDouble("slopeModPercent", slopeModPercent);
+		data.putDouble("slopeModAngle", slopeModAngle);
+		data.putDouble("waterModPercent", waterModPercent);
+		data.putDouble("runSpeed", runSpeed);
+		data.putDouble("walkSpeed", walkSpeed);
+		data.putDouble("turnScale", turnScale);
+		data.putInteger("totalLevelXp", totalLevelXp);
+		synchronized (abilities) { data.putMap("abilities", abilities); }
+		synchronized (skillMods) { data.putMap("skillMods", skillMods); }
+		synchronized (hamEncumbList) { data.putArray("hamEncumbList", hamEncumbList); }
+		synchronized (missionCriticalObjs) { data.putArray("missionCriticalObjs", missionCriticalObjs); }
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		accelPercent = data.getDouble("accelPercent", 1);
+		accelScale = data.getDouble("accelScale", accelScale);
+		movementPercent = data.getDouble("movementPercent", 1);
+		movementScale = data.getDouble("movementScale", accelScale);
+		slopeModPercent = data.getDouble("slopeModPercent", 1);
+		slopeModAngle = data.getDouble("slopeModAngle", accelScale);
+		waterModPercent = data.getDouble("waterModPercent", waterModPercent);
+		runSpeed = data.getDouble("runSpeed", 7.3);
+		walkSpeed = data.getDouble("walkSpeed", 1.549);
+		turnScale = data.getDouble("turnScale", 1);
+		totalLevelXp = data.getInteger("totalLevelXp", 0);
+		abilities.putAll(data.getMap("abilities", Integer.class));
+		skillMods.putAll(data.getMap("skillMods", SkillMod.class, SkillMod::new));
+		hamEncumbList.addAll(data.getArray("hamEncumbList", Integer.class));
+		missionCriticalObjs.addAll(data.getArray("missionCriticalObjs", String.class));
 	}
 	
 	@Override

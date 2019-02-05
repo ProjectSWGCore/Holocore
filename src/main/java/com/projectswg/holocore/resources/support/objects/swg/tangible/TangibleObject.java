@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.customization.CustomizationVariable;
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -182,6 +183,10 @@ public class TangibleObject extends SWGObject {
 	
 	public CustomizationVariable getCustomization(String name) {
 		return appearanceData.get(name);
+	}
+	
+	public Map<String, CustomizationVariable> getCustomization() {
+		return appearanceData.getVariables();
 	}
 	
 	public void setAppearanceData(CustomizationString appearanceData) {
@@ -465,5 +470,36 @@ public class TangibleObject extends SWGObject {
 		optionFlags = stream.getInt();
 		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
 	}
-
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		data.putDocument("appearance", appearanceData);
+		data.putInteger("maxHitPoints", maxHitPoints);
+		data.putInteger("components", components);
+		data.putInteger("condition", condition);
+		data.putInteger("pvpFlags", pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
+		data.putString("pvpStatus", pvpStatus.name());
+		data.putString("pvpFaction", pvpFaction.name());
+		data.putBoolean("visibleGmOnly", visibleGmOnly);
+		data.putByteArray("objectEffects", objectEffects);
+		data.putInteger("optionFlags", optionFlags);
+		data.putMap("effectsMap", effectsMap);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		appearanceData.readMongo(data.getDocument("appearance"));
+		maxHitPoints = data.getInteger("maxHitPoints", 1000);
+		components = data.getInteger("components", 0);
+		condition = data.getInteger("condition", 0);
+		pvpFlags.addAll(PvpFlag.getFlags(data.getInteger("pvpFlags", 0)));
+		pvpStatus = PvpStatus.valueOf(data.getString("pvpStatus", "COMBATANT"));
+		pvpFaction = PvpFaction.valueOf(data.getString("pvpFaction", "NEUTRAL"));
+		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
+		objectEffects = data.getByteArray("objectEffects");
+		optionFlags = data.getInteger("optionFlags", 0);
+		effectsMap.putAll(data.getMap("effectsMap", String.class));
+	}
 }

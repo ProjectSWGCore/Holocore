@@ -44,6 +44,8 @@ import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
+import com.projectswg.holocore.resources.support.data.collections.SWGList;
+import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.data.location.InstanceType;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
@@ -63,6 +65,7 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
@@ -97,6 +100,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private StringId 	detailStringId	= new StringId("", "");
 	private String		template		= "";
 	private int			crc				= 0;
+	private int			cashBalance		= 0;
+	private int			bankBalance		= 0;
 	private String		objectName		= "";
 	private int			volume			= 0;
 	private float		complexity		= 1;
@@ -412,6 +417,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return slots.get(slotName);
 	}
 	
+	public Collection<SWGObject> getChildObjects() {
+		Set<SWGObject> ret = new HashSet<>(containedObjects.size() + slots.size());
+		ret.addAll(containedObjects);
+		ret.addAll(slots.values());
+		ret.remove(null);
+		return ret;
+	}
+	
 	/**
 	 * Gets a list of all the objects in the current container. This should only be used for viewing the objects
 	 * in the current container.
@@ -506,6 +519,108 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		for (SWGObject child : slots.values()) {
 			child.setTerrain(terrain);
 		}
+	}
+	
+	public int getCashBalance() {
+		return cashBalance;
+	}
+	
+	public void setCashBalance(long cashBalance) {
+		if (cashBalance < 0)
+			cashBalance = 0;
+		if (cashBalance > 2_000_000_000L) { // 2 billion cap
+			long leftover = cashBalance - 2_000_000_000L;
+			cashBalance = 2_000_000_000L;
+			long bank = bankBalance + leftover;
+			leftover = bank - 2_000_000_000L;
+			if (leftover > 0) {
+				bank = 2_000_000_000L;
+			}
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, (int) cashBalance);
+			setBankBalance(bank);
+		} else {
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, (int) cashBalance);
+		}
+	}
+	
+	public int getBankBalance() {
+		return bankBalance;
+	}
+
+	public void setBankBalance(long bankBalance) {
+		if (bankBalance < 0)
+			bankBalance = 0;
+		if (bankBalance > 2_000_000_000L) { // 2 billion cap
+			long leftover = bankBalance - 2_000_000_000L;
+			bankBalance = 2_000_000_000L;
+			long cash = cashBalance + leftover;
+			leftover = cash - 2_000_000_000L;
+			if (leftover > 0) {
+				cash = 2_000_000_000L;
+			}
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, (int) bankBalance);
+			setCashBalance(cash);
+		} else {
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, (int) bankBalance);
+		}
+	}
+	
+	/**
+	 * Removes amount from cash first, then bank after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromCashAndBank(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (cashBalance < amount) {
+			setBankBalance(bankBalance - (amount - cashBalance));
+			setCashBalance(0);
+		} else {
+			setCashBalance(cashBalance - amount);
+		}
+		return true;
+	}
+	
+	/**
+	 * Removes amount from bank first, then cash after. Returns true if the
+	 * operation was successful
+	 * @param amount the amount to remove
+	 * @return TRUE if successfully withdrawn, FALSE otherwise
+	 */
+	public boolean removeFromBankAndCash(long amount) {
+		long amountBalance = bankBalance + cashBalance;
+		if (amountBalance < amount)
+			return false;
+		if (bankBalance < amount) {
+			setCashBalance(cashBalance - (amount - bankBalance));
+			setBankBalance(0);
+		} else {
+			setBankBalance(bankBalance - amount);
+		}
+		return true;
+	}
+	
+	/**
+	 * Adds amount to cash balance.
+	 * @param amount the amount to add
+	 */
+	public void addToCash(long amount) {
+		setCashBalance(cashBalance + amount);
+	}
+	
+	/**
+	 * Adds amount to bank balance.
+	 * @param amount the amount to add
+	 */
+	public void addToBank(long amount) {
+		setBankBalance(bankBalance + amount);
 	}
 	
 	public void setStf(String stfFile, String stfKey) {
@@ -1003,6 +1118,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
+	public void createBaseline1(Player target, BaselineBuilder bb) {
+		super.createBaseline1(target, bb); // 0 variables
+//		if (getStringId().toString().equals("@obj_n:unknown_object"))
+//			return;
+		bb.addInt(bankBalance); // 0
+		bb.addInt(cashBalance); // 1
+		
+		bb.incrementOperandCount(2);
+	}
+	
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addFloat(complexity); // 0
@@ -1023,6 +1149,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
+	protected void parseBaseline1(NetBuffer buffer) {
+		super.parseBaseline1(buffer);
+//		if (getStringId().toString().equals("@obj_n:unknown_object"))
+//			return;
+		bankBalance = buffer.getInt();
+		cashBalance = buffer.getInt();
+	}
+	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		complexity = buffer.getFloat();
@@ -1039,7 +1174,62 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	public void read(MongoData data) {
+	public void saveMongo(MongoData data) {
+		data.putDocument("base1", new MongoData());
+		data.putDocument("base3", new MongoData());
+		data.putDocument("base4", new MongoData());
+		data.putDocument("base6", new MongoData());
+		data.putDocument("base8", new MongoData());
+		data.putDocument("base9", new MongoData());
+		{
+			MongoData base1 = data.getDocument("base1");
+			base1.putInteger("cashBalance", cashBalance);
+			base1.putInteger("bankBalance", bankBalance);
+		}
+		{
+			MongoData base3 = data.getDocument("base3");
+			base3.putFloat("complexity", complexity);
+			base3.putDocument("stringId", stringId);
+			base3.putString("objectName", objectName);
+			base3.putInteger("volume", volume);
+		}
+		{
+			MongoData base6 = data.getDocument("base6");
+			// galaxyId
+			base6.putDocument("detailStringId", detailStringId);
+		}
+		{
+			SWGObject parent = this.parent;
+			if (parent != null) {
+				SWGObject grandparent = parent.getParent();
+				if (parent instanceof CellObject && grandparent instanceof BuildingObject) {
+					data.putLong("parent", grandparent.getObjectId());
+					data.putInteger("parentCell", ((CellObject) parent).getNumber());
+				} else {
+					data.putLong("parent", parent.getObjectId());
+				}
+			}
+		}
+		data.putLong("id", objectId);
+		data.putString("template", template);
+		data.putDocument("location", location);
+		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
+		data.putMap("attributes", attributes);
+		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, ServerAttribute::store);
+		
+		Set<SWGObject> contained = new HashSet<>(containedObjects);
+		contained.addAll(slots.values());
+		contained.remove(null);
+		data.putArray("children", contained);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		{
+			MongoData base1 = data.getDocument("base1");
+			cashBalance = base1.getInteger("cashBalance", cashBalance);
+			bankBalance = base1.getInteger("bankBalance", bankBalance);
+		}
 		{
 			MongoData base3 = data.getDocument("base3");
 			complexity = base3.getFloat("complexity", 0);
@@ -1052,50 +1242,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// galaxyId
 			detailStringId = base6.getDocument("detailStringId", new StringId());
 		}
-	}
-	
-	@Override
-	public void save(MongoData data) {
-		{
-			MongoData base3 = new MongoData();
-			base3.putFloat("complexity", complexity);
-			base3.putDocument("stringId", stringId);
-			base3.putString("objectName", objectName);
-			base3.putInteger("volume", volume);
-			data.putDocument("base3", base3);
-		}
-		{
-			MongoData base6 = new MongoData();
-			// galaxyId
-			base6.putDocument("detailStringId", detailStringId);
-		}
-		{
-			SWGObject parent = this.parent;
+		if (data.containsKey("parent") && ObjectLookup.isDefined()) {
+			SWGObject parent = ObjectLookup.getObjectById(data.getLong("parent", 0));
 			if (parent != null) {
-				SWGObject grandparent = parent.getParent();
-				if (parent instanceof CellObject && grandparent instanceof BuildingObject) {
-					data.putLong("parentId", grandparent.getObjectId());
-					data.putInteger("cell", ((CellObject) parent).getNumber());
-				} else {
-					data.putLong("parentId", parent.getObjectId());
-				}
-			} else {
-				data.putLong("parentId", 0);
+				//noinspection IfMayBeConditional - maintains clarity
+				if (data.containsKey("parentCell") && parent instanceof BuildingObject)
+					this.parent = ((BuildingObject) parent).getCellByNumber(data.getInteger("parentCell", 1));
+				else
+					this.parent = parent;
 			}
 		}
-		data.putDocument("location", location);
-		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
-		data.putString("name", objectName);
-		data.putDocument("stringId", stringId);
-		data.putDocument("detailStringId", detailStringId);
-		data.putFloat("complexity", complexity);
-		data.putMap("attributes", attributes);
-		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, ServerAttribute::store);
-		
-		Set<SWGObject> contained = new HashSet<>(containedObjects);
-		contained.addAll(slots.values());
-		contained.remove(null);
-		data.putArray("children", new ArrayList<>(contained), obj -> SWGObjectFactory.save(obj, new MongoData()));
+		location.readMongo(data.getDocument("location"));
+		permissions = ContainerPermissions.create(data.getDocument("permissions"));
+		attributes.putAll(data.getMap("attributes", String.class));
+		serverAttributes.putAll(data.getMap("serverAttributes", String.class, ServerAttribute::getFromKey, ServerAttribute::retrieve));
+		data.getArray("children", SWGObjectFactory::create).forEach(this::addObject);
 	}
 	
 	@Override

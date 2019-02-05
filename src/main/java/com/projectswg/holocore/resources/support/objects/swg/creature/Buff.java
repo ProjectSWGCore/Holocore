@@ -26,12 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
-public class Buff implements Encodable, Persistable {
+public class Buff implements Encodable, Persistable, MongoPersistable {
 	
 	private int crc;
 	private int endTime;
@@ -76,6 +78,26 @@ public class Buff implements Encodable, Persistable {
 	@Override
 	public int getLength() {
 		return 24;
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putInteger("crc", crc);
+		data.putInteger("endTime", endTime);
+		data.putFloat("value", value);
+		data.putInteger("duration", duration);
+		data.putLong("bufferId", bufferId);
+		data.putInteger("stackCount", stackCount);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		crc = data.getInteger("crc", 0);
+		endTime = data.getInteger("endTime", 0);
+		value = data.getFloat("value", 0);
+		duration = data.getInteger("duration", 0);
+		bufferId = data.getLong("bufferId", 0);
+		stackCount = data.getInteger("stackCount", 0);
 	}
 	
 	@Override

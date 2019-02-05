@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.waypoint;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage.Type;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
@@ -40,7 +42,7 @@ import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import org.jetbrains.annotations.NotNull;
 
-public class WaypointObject extends IntangibleObject implements Encodable, Persistable {
+public class WaypointObject extends IntangibleObject implements Encodable, Persistable, MongoPersistable {
 	
 	private WaypointPackage waypoint;
 	
@@ -48,6 +50,11 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 		super(objectId, BaselineType.WAYP);
 		this.waypoint = new WaypointPackage();
 		this.waypoint.setObjectId(objectId);
+	}
+	
+	public WaypointObject(WaypointPackage oob) {
+		super(oob.getObjectId(), BaselineType.WAYP);
+		this.waypoint = oob;
 	}
 	
 	public void setOOB(WaypointPackage oob) {
@@ -154,7 +161,17 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 	public int getLength() {
 		return waypoint.getLength();
 	}
-
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		waypoint.saveMongo(data);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		waypoint.readMongo(data);
+	}
+	
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
