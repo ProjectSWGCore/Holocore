@@ -35,13 +35,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class PlayerLevelLoader extends DataLoader {
 	
 	private final Map<Integer, PlayerLevelInfo> levels;
+	private final AtomicInteger maxLevel;
 	
 	PlayerLevelLoader() {
 		this.levels = new HashMap<>();
+		this.maxLevel = new AtomicInteger(0);
+	}
+	
+	public int getMaxLevel() {
+		return maxLevel.get();
 	}
 	
 	@Nullable
@@ -55,6 +62,7 @@ public final class PlayerLevelLoader extends DataLoader {
 			while (set.next()) {
 				PlayerLevelInfo levelInfo = new PlayerLevelInfo(set);
 				levels.put(levelInfo.getLevel(), levelInfo);
+				maxLevel.updateAndGet(prev -> prev >= levelInfo.getLevel() ? prev : levelInfo.getLevel());
 			}
 		}
 	}
