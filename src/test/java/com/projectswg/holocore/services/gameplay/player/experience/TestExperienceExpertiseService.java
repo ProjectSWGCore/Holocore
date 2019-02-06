@@ -31,7 +31,9 @@ import com.projectswg.common.network.packets.swg.zone.ExpertiseRequestMessage;
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ExpertiseAbilityLoader.ExpertiseAbilityInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ExpertiseLoader.ExpertiseInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
@@ -149,19 +151,28 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 					.collect(Collectors.toList());
 			Set<String> expectedExpertise = new HashSet<>(); // the list we verify with
 			List<String> requestExpertise = new ArrayList<>(); // the list sent to the service
+			Set<String> abilities = new HashSet<>();
 			int usedPoints = 0;
 			
 			expectedExpertise.add("expertise");
 			for (ExpertiseInfo expertise : sortedExpertise) {
+				SkillInfo skillInfo = DataLoader.skills().getSkillByName(expertise.getName());
+				ExpertiseAbilityInfo abilityInfo = DataLoader.expertiseAbilities().getBySkill(expertise.getName());
+				Assert.assertNotNull(skillInfo);
+				
 				expectedExpertise.add(expertise.getName());
 				requestExpertise.add(expertise.getName());
+				abilities.addAll(Set.of(skillInfo.getCommands()));
+				if (abilityInfo != null) // not all expertise have abilities
+					abilities.addAll(abilityInfo.getChains().stream().flatMap(Collection::stream).collect(Collectors.toSet()));
 				usedPoints++;
 				if (usedPoints >= 45)
 					break;
 			}
 			
 			broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(requestExpertise.toArray(String[]::new), false)));
-			Assert.assertEquals("Failed on: " + profession, new HashSet<>(expectedExpertise), creature.getSkills());
+			Assert.assertEquals("Failed on: " + profession, expectedExpertise, creature.getSkills());
+			Assert.assertEquals("Failed on: " + profession, abilities, creature.getAbilityNames());
 		}
 	}
 	

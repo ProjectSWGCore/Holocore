@@ -41,6 +41,10 @@ public abstract class DataLoader {
 		return getInstance(ExpertiseTreeLoader.class, ExpertiseTreeLoader::new);
 	}
 	
+	public static ExpertiseAbilityLoader expertiseAbilities() {
+		return getInstance(ExpertiseAbilityLoader.class, ExpertiseAbilityLoader::new);
+	}
+	
 	public static SkillLoader skills() {
 		return getInstance(SkillLoader.class, SkillLoader::new);
 	}

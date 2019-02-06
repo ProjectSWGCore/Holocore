@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience;
 
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ExpertiseRequestMessage;
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
@@ -36,6 +34,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSk
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ExpertiseAbilityLoader.ExpertiseAbilityInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ExpertiseLoader.ExpertiseInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PlayerLevelLoader.PlayerLevelInfo;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -45,11 +44,10 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -57,47 +55,8 @@ import java.util.stream.Collectors;
  */
 public class ExperienceExpertiseService extends Service {
 	
-	private static final String EXPERTISE_ABILITIES_QUERY = "SELECT * FROM expertise_abilities";
-	
-	private final Map<String, Collection<String[]>> expertiseAbilities;    // Expertise skill to abilities
-	
 	public ExperienceExpertiseService() {
-		this.expertiseAbilities = new HashMap<>();
-	}
-	
-	@Override
-	public boolean initialize() {
-		return loadAbilities();
-	}
-	
-	private boolean loadAbilities() {
-		long startTime = StandardLog.onStartLoad("expertise abilities");
-		int abilityCount = 0;
 		
-		try (RelationalDatabase abilityDatabase = RelationalServerFactory.getServerData("player/expertise_abilities.db", "expertise_abilities")) {
-			try (ResultSet set = abilityDatabase.executeQuery(EXPERTISE_ABILITIES_QUERY)) {
-				while (set.next()) {
-					String skill = set.getString("skill");
-					String[] chains = set.getString("chains").split("\\|");
-					
-					Collection<String[]> abilityChains = new ArrayList<>();
-					
-					for (String chain : chains) {
-						String[] abilities = chain.split(";");
-						
-						abilityChains.add(abilities);
-						abilityCount += abilities.length;
-					}
-					
-					expertiseAbilities.put(skill, abilityChains);
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-				return false;
-			}
-		}
-		StandardLog.onEndLoad(abilityCount, "expertise abilities", startTime);
-		return true;
 	}
 	
 	@IntentHandler
@@ -184,7 +143,8 @@ public class ExperienceExpertiseService extends Service {
 	}
 	
 	private void checkExtraAbilities(CreatureObject creatureObject) {
-		creatureObject.getSkills().stream().filter(expertiseAbilities::containsKey)    // We only want to check skills that give additional abilities
+		creatureObject.getSkills().stream()
+				.filter(DataLoader.expertiseAbilities()::containsSkill)    // We only want to check skills that give additional abilities
 				.forEach(expertise -> grantExtraAbilities(creatureObject, expertise));
 	}
 	
@@ -207,15 +167,18 @@ public class ExperienceExpertiseService extends Service {
 	}
 	
 	private void grantExtraAbilities(CreatureObject creatureObject, String expertise) {
-		expertiseAbilities.get(expertise).forEach(chain -> {
-			for (int abilityIndex = 0; abilityIndex < chain.length; abilityIndex++) {
-				String ability = chain[abilityIndex];
+		ExpertiseAbilityInfo abilityInfo = DataLoader.expertiseAbilities().getBySkill(expertise);
+		assert abilityInfo != null : "verified in checkExtraAbilities";
+		
+		for (List<String> chain : abilityInfo.getChains()) {
+			for (int abilityIndex = 0; abilityIndex < chain.size(); abilityIndex++) {
+				String ability = chain.get(abilityIndex);
 				
 				if (isQualified(creatureObject, abilityIndex) && !creatureObject.hasAbility(ability)) {
 					creatureObject.addAbility(ability);
 				}
 			}
-		});
+		}
 	}
 	
 	private int getAvailablePoints(CreatureObject creatureObject) {
