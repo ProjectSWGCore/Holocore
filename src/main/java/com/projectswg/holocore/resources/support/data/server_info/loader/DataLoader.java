@@ -22,6 +22,22 @@ public abstract class DataLoader {
 		return (BuffLoader) CachedLoader.BUFFS.load();
 	}
 	
+	public static ExpertiseLoader expertise() {
+		return (ExpertiseLoader) CachedLoader.EXPERTISE.load();
+	}
+	
+	public static ExpertiseTreeLoader expertiseTrees() {
+		return (ExpertiseTreeLoader) CachedLoader.EXPERTISE_TREES.load();
+	}
+	
+	public static SkillLoader skills() {
+		return (SkillLoader) CachedLoader.SKILLS.load();
+	}
+	
+	public static PlayerLevelLoader playerLevels() {
+		return (PlayerLevelLoader) CachedLoader.PLAYER_LEVELS.load();
+	}
+	
 	public static BuildoutLoader buildouts() {
 		return BuildoutLoader.load(List.of());
 	}

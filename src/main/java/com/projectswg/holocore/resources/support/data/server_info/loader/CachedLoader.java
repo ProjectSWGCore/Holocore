@@ -8,7 +8,13 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 enum CachedLoader {
+	// Player
 	BUFFS				(BuffLoader::new),
+	EXPERTISE			(ExpertiseLoader::new),
+	EXPERTISE_TREES		(ExpertiseTreeLoader::new),
+	SKILLS				(SkillLoader::new),
+	PLAYER_LEVELS		(PlayerLevelLoader::new),
+	// Other
 	BUILDING_CELLS		(BuildingCellLoader::new),
 	NPC_LOADER			(NpcLoader::new),
 	NPC_COMBAT_PROFILES	(NpcCombatProfileLoader::new),

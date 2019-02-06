@@ -1,8 +1,10 @@
 .settings
+scripts/
 
 # IDE-based
 Holocore.iml
 out
+classes/
 .idea
 .classpath
 .project
@@ -10,6 +12,7 @@ out
 # Gradle
 build
 .gradle
+gradle.properties
 
 # Holocore
 /clientdata/
