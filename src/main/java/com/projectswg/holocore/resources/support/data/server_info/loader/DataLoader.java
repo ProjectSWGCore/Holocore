@@ -105,6 +105,10 @@ public abstract class DataLoader {
 		return getInstance(PerformanceLoader.class, PerformanceLoader::new);
 	}
 	
+	public static PlanetMapCategoryLoader planetMapCategories() {
+		return getInstance(PlanetMapCategoryLoader.class, PlanetMapCategoryLoader::new);
+	}
+	
 	public static CommandLoader commands() {
 		return getInstance(CommandLoader.class, CommandLoader::new);
 	}

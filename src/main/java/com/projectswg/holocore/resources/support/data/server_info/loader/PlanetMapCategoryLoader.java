@@ -29,27 +29,37 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public final class PlanetMapLoader extends DataLoader {
+public final class PlanetMapCategoryLoader extends DataLoader {
 	
-	PlanetMapLoader() {
-		
+	private final Map<String, PlanetMapCategoryInfo> categoriesByName;
+	
+	PlanetMapCategoryLoader() {
+		this.categoriesByName = new HashMap<>();
+	}
+	
+	@Nullable
+	public PlanetMapCategoryInfo getCategoryByName(String name) {
+		return categoriesByName.get(name);
 	}
 	
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/planet_map_cat.sdb"))) {
 			while (set.next()) {
-				PlanetMapInfo mapInfo = new PlanetMapInfo(set);
-				// TODO: Store information
+				PlanetMapCategoryInfo mapInfo = new PlanetMapCategoryInfo(set);
+				categoriesByName.put(mapInfo.getName(), mapInfo);
 			}
 		}
 	}
 	
-	public static class PlanetMapInfo {
+	public static class PlanetMapCategoryInfo {
 		
 		private final String name;
 		private final int index;
@@ -59,7 +69,7 @@ public final class PlanetMapLoader extends DataLoader {
 		private final String faction;
 		private final boolean factionVisibleOnly;
 		
-		public PlanetMapInfo(SdbResultSet set) {
+		public PlanetMapCategoryInfo(SdbResultSet set) {
 			this.name = set.getText("name");
 			this.index = (int) set.getInt("index");
 			this.category = set.getBoolean("iscategory");
@@ -68,5 +78,34 @@ public final class PlanetMapLoader extends DataLoader {
 			this.faction = set.getText("faction");
 			this.factionVisibleOnly = set.getBoolean("faction_visible_only");
 		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getIndex() {
+			return index;
+		}
+		
+		public boolean isCategory() {
+			return category;
+		}
+		
+		public boolean isSubcategory() {
+			return subcategory;
+		}
+		
+		public boolean isCanBeActive() {
+			return canBeActive;
+		}
+		
+		public String getFaction() {
+			return faction;
+		}
+		
+		public boolean isFactionVisibleOnly() {
+			return factionVisibleOnly;
+		}
+		
 	}
 }
