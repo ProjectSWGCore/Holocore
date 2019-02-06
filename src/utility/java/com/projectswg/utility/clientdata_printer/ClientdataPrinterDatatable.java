@@ -46,7 +46,7 @@ public class ClientdataPrinterDatatable {
 	
 	public static void main(String [] args) throws IOException {
 		Log.addWrapper(new ConsoleLogWrapper());
-		printTable("datatables/travel/travel.iff");
+		printTable("path/to/iff.iff");
 	}
 	
 	@SuppressWarnings("UseOfSystemOutOrSystemErr")
