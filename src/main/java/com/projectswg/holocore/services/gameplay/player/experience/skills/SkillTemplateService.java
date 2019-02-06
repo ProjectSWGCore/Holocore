@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.objects.items.RoadmapReward;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -116,8 +117,8 @@ public final class SkillTemplateService extends Service {
 			// Skills are only awarded every third or fourth level
 			if ((level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
 				PlayerObject playerObject = creatureObject.getPlayerObject();
-				String profession = playerObject.getProfession();
-				String[] templates = skillTemplates.get(profession);
+				Profession profession = playerObject.getProfession();
+				String[] templates = skillTemplates.get(profession.getClientName());
 
 				if (templates == null) {
 					Log.w("%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
@@ -213,14 +214,14 @@ public final class SkillTemplateService extends Service {
 		}
 	}
 	
-	private void grantMasteryBadge(CreatureObject creature, String profession, String skillName) {
+	private void grantMasteryBadge(CreatureObject creature, Profession profession, String skillName) {
 		Log.d("grantMasteryBadge - skillName: %s", skillName);
 		
 		if (!skillName.endsWith("_phase4_master")) {
 			return;
 		}
 		
-		String[] badges = badgeNames.get(profession);
+		String[] badges = badgeNames.get(profession.getClientName());
 		
 		if (badges == null) {
 			Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);

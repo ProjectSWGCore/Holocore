@@ -141,7 +141,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 				// If the character doesn't have the right profession, reject it
 				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
-					String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
+					String profession = actor.getPlayerObject().getProfession().getName();
 					if (!target.getAttribute("class_required").contains(profession)) {
 						new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
 						player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
@@ -233,10 +233,6 @@ public class TransferItemCallback implements ICmdCallback {
 		}
 
 		return true;
-	}
-
-	private static String cleanProfessionString(String profession) {
-		return profession.substring(0, profession.lastIndexOf('_'));
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {

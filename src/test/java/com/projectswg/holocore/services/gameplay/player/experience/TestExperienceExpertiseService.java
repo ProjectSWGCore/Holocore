@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 import com.projectswg.holocore.resources.support.data.server_info.loader.ExpertiseLoader.ExpertiseInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents;
@@ -57,7 +58,7 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		Assert.assertNotNull(player);
 		Assert.assertNotNull(owner);
 		
-		player.setProfession("medic_1a");
+		player.setProfession(Profession.MEDIC);
 		// Nothing defined
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
@@ -88,7 +89,7 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		Assert.assertNotNull(player);
 		Assert.assertNotNull(owner);
 		
-		player.setProfession("force_sensitive_1a");
+		player.setProfession(Profession.FORCE_SENSITIVE);
 		// Nothing defined
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
@@ -127,8 +128,10 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		registerService(new ExperienceExpertiseService());
 		registerService(new SkillService());
 		
-		for (String profession : new String[]{"bounty_hunter_1a", "commando_1a", "entertainer_1a", "force_sensitive_1a", "medic_1a", "officer_1a", "smuggler_1a", "spy_1a", "trader_1a", "trader_1b", "trader_1c", "trader_1d"}) {
-			GenericCreatureObject creature = new GenericCreatureObject(1, profession);
+		for (Profession profession : Profession.values()) {
+			if (profession == Profession.UNKNOWN)
+				continue;
+			GenericCreatureObject creature = new GenericCreatureObject(1, profession.name());
 			PlayerObject player = creature.getPlayerObject();
 			Player owner = creature.getOwner();
 			
@@ -140,11 +143,11 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 			broadcastAndWait(new LevelChangedIntent(creature, (short) 1, (short) 90));
 			
 			List<ExpertiseInfo> sortedExpertise = DataLoader.expertise().getAllExpertise().stream()
-					.filter(e -> e.getRequiredProfession().equals(profession))
+					.filter(e -> e.getRequiredProfession().equals(profession.getClientName()))
 					.filter(e -> e.getTree().getUiBackgroundId().equals("left"))
 					.sorted(Comparator.comparingInt(ExpertiseInfo::getTier).thenComparing(ExpertiseInfo::getGrid).thenComparing(ExpertiseInfo::getRank))
 					.collect(Collectors.toList());
-			List<String> expectedExpertise = new ArrayList<>(); // the list we verify with
+			Set<String> expectedExpertise = new HashSet<>(); // the list we verify with
 			List<String> requestExpertise = new ArrayList<>(); // the list sent to the service
 			int usedPoints = 0;
 			

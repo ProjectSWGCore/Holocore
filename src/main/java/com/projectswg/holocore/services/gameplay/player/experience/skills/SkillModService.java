@@ -37,6 +37,7 @@ import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferInte
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.utilities.IntentFactory;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -45,6 +46,7 @@ import me.joshlarson.jlcommon.log.Log;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Map;
 
 public class SkillModService extends Service {
@@ -113,8 +115,7 @@ public class SkillModService extends Service {
 	private void handleCreatedCharacterIntent(CreatedCharacterIntent cci){
 		CreatureObject creature = cci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
-		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);
+		Profession profession = playerObject.getProfession();
 		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = creature.getLevel();
 
@@ -126,8 +127,7 @@ public class SkillModService extends Service {
 	private void handleLevelChangedIntent(LevelChangedIntent lci){
 		CreatureObject creature = lci.getCreatureObject();
 		PlayerObject playerObject = creature.getPlayerObject();
-		String profession = playerObject.getProfession();
-		profession = profession.substring(0,profession.length()-3);
+		Profession profession = playerObject.getProfession();
 		String race = getRaceColumnAbbr(creature.getRace());
 		int newLevel = lci.getNewLevel();
 
@@ -146,9 +146,9 @@ public class SkillModService extends Service {
 		}
 	}
 	
-	private void updateLevelHAMValues(CreatureObject creature, int level, String profession){
-		int newHealth = getLevelSkillModValue(level, profession + "_health", "") - creature.getBaseHealth();
-		int newAction = getLevelSkillModValue(level, profession + "_action", "") - creature.getBaseAction();
+	private void updateLevelHAMValues(CreatureObject creature, int level, Profession profession) {
+		int newHealth = getLevelSkillModValue(level, profession.getName() + "_health", "") - creature.getBaseHealth();
+		int newAction = getLevelSkillModValue(level, profession.getName() + "_action", "") - creature.getBaseAction();
 		
 		creature.setMaxHealth(creature.getMaxHealth() + newHealth);
 		creature.setHealth(creature.getMaxHealth());
@@ -185,7 +185,7 @@ public class SkillModService extends Service {
 		}
 	}
 	
-	private void updateLevelSkillModValues(CreatureObject creature, int level, String profession, String race){
+	private void updateLevelSkillModValues(CreatureObject creature, int level, Profession profession, String race){
 		int oldSkillModValue;
 		int skillModValue;
 		
@@ -194,24 +194,21 @@ public class SkillModService extends Service {
 		}		
 		
 		for(SkillModTypes type : SkillModTypes.values()){
-			if (type.isRaceModDefined()){
-				skillModValue = getLevelSkillModValue(level, profession + type.getProfession(),  race + type.getRace());
-			}else{
-				skillModValue = getLevelSkillModValue(level, profession + type.getProfession(), "");
-			}
+			String raceModName = type.isRaceModDefined() ? race + type.getRace() : "";
+			skillModValue = getLevelSkillModValue(level, profession.getName() + type.getProfession(),  raceModName);
 			
 			if (skillModValue <= 0){
 				continue;
 			}
 			
-			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase());
+			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase(Locale.US));
 			
 			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods(type.toString().toLowerCase(), -creature.getSkillModValue(type.toString().toLowerCase()));
-				creature.handleLevelSkillMods(type.toString().toLowerCase(), skillModValue);
+				creature.handleLevelSkillMods(type.toString().toLowerCase(Locale.US), -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
+				creature.handleLevelSkillMods(type.toString().toLowerCase(Locale.US), skillModValue);
 
 				if (type == SkillModTypes.CONSTITUTION_MODIFIED || type == SkillModTypes.STAMINA_MODIFIED)
-					updateSkillModHamValues(creature, type.toString().toLowerCase(),skillModValue - oldSkillModValue);
+					updateSkillModHamValues(creature, type.toString().toLowerCase(Locale.US),skillModValue - oldSkillModValue);
 					
 				if (type.isLevelUpMessageDefined())
 					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);

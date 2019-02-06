@@ -134,9 +134,7 @@ public class ExperienceExpertiseService extends Service {
 			
 			// TODO do anything with clearAllExpertisesFirst?
 			PlayerObject playerObject = creatureObject.getPlayerObject();
-			String profession = playerObject.getProfession();
-			
-			if (!expertise.getRequiredProfession().equals(profession)) {
+			if (!expertise.getRequiredProfession().equals(playerObject.getProfession().getClientName())) {
 				StandardLog.onPlayerError(this, creatureObject, "attempted to train expertise skill %s as the wrong profession", expertise.getName());
 				continue;
 			}

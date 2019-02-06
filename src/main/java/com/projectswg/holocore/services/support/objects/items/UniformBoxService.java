@@ -34,6 +34,7 @@ import com.projectswg.holocore.intents.support.objects.items.OpenUniformBoxInten
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -72,15 +73,15 @@ public class UniformBoxService extends Service {
 		Player player = oubi.getPlayer();
 		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
-		String profession = creature.getPlayerObject().getProfession();
+		Profession profession = creature.getPlayerObject().getProfession();
 		
 		handleCreateItems(inventory, profession, creature);
 	}
 	
-	private void handleCreateItems(SWGObject inventory, String profession, CreatureObject creature) {
+	private void handleCreateItems(SWGObject inventory, Profession profession, CreatureObject creature) {
 		synchronized (getUniformBoxStatement) {
 			try {
-				getUniformBoxStatement.setString(1, profession);
+				getUniformBoxStatement.setString(1, profession.getClientName());
 				getUniformBoxStatement.setString(2, creature.getRace().name());
 				
 				try (ResultSet set = getUniformBoxStatement.executeQuery()) {

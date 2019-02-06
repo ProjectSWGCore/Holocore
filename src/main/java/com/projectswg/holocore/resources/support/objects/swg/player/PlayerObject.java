@@ -36,6 +36,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -192,12 +193,13 @@ public class PlayerObject extends IntangibleObject {
 		play3.setProfessionIcon(professionIcon);
 	}
 	
-	public String getProfession() {
-		return play3.getProfession();
+	@NotNull
+	public Profession getProfession() {
+		return Profession.getProfessionFromClient(play3.getProfession());
 	}
 	
-	public void setProfession(String profession) {
-		play3.setProfession(profession);
+	public void setProfession(@NotNull Profession profession) {
+		play3.setProfession(profession.getClientName());
 	}
 	
 	public int getGcwPoints() {
