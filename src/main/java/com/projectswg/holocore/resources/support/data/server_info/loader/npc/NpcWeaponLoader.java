@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,84 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-package com.projectswg.holocore.resources.support.data.server_info.loader;
+package com.projectswg.holocore.resources.support.data.server_info.loader.npc;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
-public final class NpcCombatProfileLoader extends DataLoader {
+public final class NpcWeaponLoader extends DataLoader {
 	
-	private final Map<String, List<CombatProfile>> profiles;
+	private final Map<String, List<String>> weapons;
 	
-	NpcCombatProfileLoader() {
-		this.profiles = new HashMap<>();
+	public NpcWeaponLoader() {
+		this.weapons = new HashMap<>();
 	}
 	
-	@NotNull
-	public Set<String> getAbilities(@Nullable String id, @NotNull CreatureDifficulty difficulty, int level) {
-		List<CombatProfile> subprofiles = Objects.requireNonNull(profiles.get(id), "unknown profile id");
-		Set<String> abilities = new HashSet<>();
-		for (CombatProfile profile : subprofiles) {
-			if (profile.getDifficulty().equals(difficulty) && level >= profile.getMinLevel() && level <= profile.getMaxLevel())
-				abilities.addAll(profile.getAbilities());
-		}
-		return abilities;
+	public List<String> getWeapons(String weaponId) {
+		return weapons.get(weaponId);
+	}
+	
+	public void forEach(Consumer<List<String>> c) {
+		weapons.values().forEach(c);
 	}
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_weapon.sdb"))) {
 			while (set.next()) {
-				CombatProfile profile = new CombatProfile(set);
-				profiles.computeIfAbsent(profile.getId(), p -> new ArrayList<>()).add(profile);
+				weapons.put(set.getText("weapon_id"), List.of(set.getText("weapons").split(";")));
 			}
 		}
-	}
-	
-	private static class CombatProfile {
-		
-		private final String id;
-		private final CreatureDifficulty difficulty;
-		private final int minLevel;
-		private final int maxLevel;
-		private final Set<String> abilities;
-		
-		public CombatProfile(SdbResultSet set) {
-			this.id = set.getText("profile_id");
-			this.difficulty = CreatureDifficulty.valueOf(set.getText("difficulty"));
-			this.minLevel = (int) set.getInt("min_cl");
-			this.maxLevel = (int) set.getInt("max_cl");
-			this.abilities = Set.of(set.getText("action").split(";"));
-		}
-		
-		public String getId() {
-			return id;
-		}
-		
-		public CreatureDifficulty getDifficulty() {
-			return difficulty;
-		}
-		
-		public int getMinLevel() {
-			return minLevel;
-		}
-		
-		public int getMaxLevel() {
-			return maxLevel;
-		}
-		
-		public Set<String> getAbilities() {
-			return abilities;
-		}
-		
 	}
 	
 }

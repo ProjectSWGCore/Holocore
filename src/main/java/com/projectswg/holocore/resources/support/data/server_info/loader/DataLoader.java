@@ -1,41 +1,52 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*;
+import me.joshlarson.jlcommon.log.Log;
+
 import java.io.IOException;
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public abstract class DataLoader {
 	
-	DataLoader() {
+	private static final Map<Class<?>, Reference<?>> CACHED_INSTANCES = new ConcurrentHashMap<>();
+	
+	public DataLoader() {
 		
 	}
 	
 	protected abstract void load() throws IOException;
 	
 	public static void freeMemory() {
-		for (CachedLoader loader : CachedLoader.values()) {
-			loader.freeMemory();
-		}
+		CACHED_INSTANCES.values().forEach(Reference::enqueue);
+		CACHED_INSTANCES.clear();
 	}
 	
 	public static BuffLoader buffs() {
-		return (BuffLoader) CachedLoader.BUFFS.load();
+		return getInstance(BuffLoader.class, BuffLoader::new);
 	}
 	
 	public static ExpertiseLoader expertise() {
-		return (ExpertiseLoader) CachedLoader.EXPERTISE.load();
+		return getInstance(ExpertiseLoader.class, ExpertiseLoader::new);
 	}
 	
 	public static ExpertiseTreeLoader expertiseTrees() {
-		return (ExpertiseTreeLoader) CachedLoader.EXPERTISE_TREES.load();
+		return getInstance(ExpertiseTreeLoader.class, ExpertiseTreeLoader::new);
 	}
 	
 	public static SkillLoader skills() {
-		return (SkillLoader) CachedLoader.SKILLS.load();
+		return getInstance(SkillLoader.class, SkillLoader::new);
 	}
 	
 	public static PlayerLevelLoader playerLevels() {
-		return (PlayerLevelLoader) CachedLoader.PLAYER_LEVELS.load();
+		return getInstance(PlayerLevelLoader.class, PlayerLevelLoader::new);
 	}
 	
 	public static BuildoutLoader buildouts() {
@@ -51,63 +62,87 @@ public abstract class DataLoader {
 	}
 	
 	public static BuildingCellLoader buildingCells() {
-		return (BuildingCellLoader) CachedLoader.BUILDING_CELLS.load();
+		return getInstance(BuildingCellLoader.class, BuildingCellLoader::new);
 	}
 	
 	public static NpcLoader npcs() {
-		return (NpcLoader) CachedLoader.NPC_LOADER.load();
+		return getInstanceWeakCaching(NpcLoader.class, NpcLoader::new);
 	}
 	
 	public static NpcCombatProfileLoader npcCombatProfiles() {
-		return (NpcCombatProfileLoader) CachedLoader.NPC_COMBAT_PROFILES.load();
+		return getInstanceWeakCaching(NpcCombatProfileLoader.class, NpcCombatProfileLoader::new);
 	}
 	
 	public static NpcPatrolRouteLoader npcPatrolRoutes() {
-		return (NpcPatrolRouteLoader) CachedLoader.NPC_PATROL_ROUTES.load();
+		return getInstanceWeakCaching(NpcPatrolRouteLoader.class, NpcPatrolRouteLoader::new);
 	}
 	
 	public static NpcWeaponLoader npcWeapons() {
-		return (NpcWeaponLoader) CachedLoader.NPC_WEAPONS.load();
+		return getInstanceWeakCaching(NpcWeaponLoader.class, NpcWeaponLoader::new);
 	}
 	
 	public static NpcWeaponRangeLoader npcWeaponRanges() {
-		return (NpcWeaponRangeLoader) CachedLoader.NPC_WEAPON_RANGES.load();
+		return getInstanceWeakCaching(NpcWeaponRangeLoader.class, NpcWeaponRangeLoader::new);
 	}
 	
 	public static NpcStatLoader npcStats() {
-		return (NpcStatLoader) CachedLoader.NPC_STATS.load();
+		return getInstanceWeakCaching(NpcStatLoader.class, NpcStatLoader::new);
 	}
 	
 	public static NpcStaticSpawnLoader npcStaticSpawns() {
-		return (NpcStaticSpawnLoader) CachedLoader.STATIC_SPAWNS.load();
+		return getInstanceWeakCaching(NpcStaticSpawnLoader.class, NpcStaticSpawnLoader::new);
 	}
 	
 	public static ObjectDataLoader objectData() {
-		return (ObjectDataLoader) CachedLoader.OBJECT_DATA.load();
+		return getInstance(ObjectDataLoader.class, ObjectDataLoader::new);
 	}
 	
 	public static PerformanceLoader performances() {
-		return (PerformanceLoader) CachedLoader.PERFORMANCES.load();
+		return getInstance(PerformanceLoader.class, PerformanceLoader::new);
 	}
 	
 	public static CommandLoader commands() {
-		return (CommandLoader) CachedLoader.COMMANDS.load();
+		return getInstance(CommandLoader.class, CommandLoader::new);
 	}
 	
 	public static SlotDefinitionLoader slotDefinitions() {
-		return (SlotDefinitionLoader) CachedLoader.SLOT_DEFINITIONS.load();
+		return getInstance(SlotDefinitionLoader.class, SlotDefinitionLoader::new);
 	}
 	
 	public static TerrainZoneInsertionLoader zoneInsertions() {
-		return (TerrainZoneInsertionLoader) CachedLoader.ZONE_INSERTIONS.load();
+		return getInstance(TerrainZoneInsertionLoader.class, TerrainZoneInsertionLoader::new);
 	}
 	
 	public static TravelCostLoader travelCosts() {
-		return (TravelCostLoader) CachedLoader.TRAVEL_COSTS.load();
+		return getInstance(TravelCostLoader.class, TravelCostLoader::new);
 	}
 	
 	public static VehicleLoader vehicles() {
-		return (VehicleLoader) CachedLoader.VEHICLES.load();
+		return getInstance(VehicleLoader.class, VehicleLoader::new);
+	}
+	
+	private static <T extends DataLoader> T getInstance(Class<T> klass, Supplier<T> fallback) {
+		return getInstance(klass, fallback, SoftReference::new);
+	}
+	
+	private static <T extends DataLoader> T getInstanceWeakCaching(Class<T> klass, Supplier<T> fallback) {
+		return getInstance(klass, fallback, WeakReference::new);
+	}
+	
+	private static <T extends DataLoader> T getInstance(Class<T> klass, Supplier<T> fallback, Function<DataLoader, Reference<DataLoader>> referenceCreator) {
+		Reference<?> ref = CACHED_INSTANCES.get(klass);
+		DataLoader loader = (DataLoader) ((ref == null) ? null : ref.get());
+		if (loader == null) {
+			loader = fallback.get();
+			try {
+				loader.load();
+			} catch (IOException e) {
+				Log.e("Failed to load DataLoader: "+klass.getSimpleName());
+				throw new RuntimeException(e);
+			}
+			CACHED_INSTANCES.put(klass, referenceCreator.apply(loader));
+		}
+		return klass.cast(loader);
 	}
 	
 }

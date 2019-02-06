@@ -29,13 +29,12 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class SkillLoader extends DataLoader {
 	
@@ -48,6 +47,11 @@ public final class SkillLoader extends DataLoader {
 	@Nullable
 	public SkillInfo getSkillByName(String name) {
 		return skillsByName.get(name);
+	}
+	
+	@NotNull
+	public Collection<SkillInfo> getSkills() {
+		return Collections.unmodifiableCollection(skillsByName.values());
 	}
 	
 	@Override

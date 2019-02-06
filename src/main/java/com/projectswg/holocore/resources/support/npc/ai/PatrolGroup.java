@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai;
 
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.PatrolFormation;
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.PatrolFormation;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 
 import java.util.ArrayList;
