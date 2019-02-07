@@ -99,16 +99,14 @@ public class CustomObjectService extends Service {
 	private ListBoxRecursive createListBoxRecursive(Collection<String> objects) {
 		Map<String, Object> mapping = new TreeMap<>();
 		for (String iff : objects) {
-			Log.t("Custom Object Service loading IFF: '%s'", iff);
-			mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
+			mapping.put(prettyIff(iff), iff);
 		}
 		return new ListBoxRecursive(mapping);
 	}
 	
 	private String prettyIff(String iff) {
-		char sep = File.separatorChar;
-		String specific = iff.substring(iff.lastIndexOf(sep)+1).replace("shared_", "").replace(".iff", "");
-		String folder = iff.substring(iff.lastIndexOf(sep, iff.lastIndexOf(sep)-1)+1, iff.lastIndexOf(sep));
+		String specific = iff.substring(iff.lastIndexOf('/')+1).replace("shared_", "").replace(".iff", "");
+		String folder = iff.substring(iff.lastIndexOf('/', iff.lastIndexOf('/')-1)+1, iff.lastIndexOf('/'));
 		StringBuilder parts = new StringBuilder();
 		for (String part : specific.split("_")) {
 			if (part.equals(folder) || part.isEmpty())
