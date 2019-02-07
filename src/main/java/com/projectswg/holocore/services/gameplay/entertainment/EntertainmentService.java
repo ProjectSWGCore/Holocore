@@ -436,7 +436,7 @@ public class EntertainmentService extends Service {
 			
 			if (xpGained > 0) {
 				if (isEntertainer(performer))
-					new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
+					new ExperienceIntent(performer, "entertainer", xpGained, true).broadcast();
 				performer.setPerformanceCounter(performanceCounter - 1);
 			}
 		}

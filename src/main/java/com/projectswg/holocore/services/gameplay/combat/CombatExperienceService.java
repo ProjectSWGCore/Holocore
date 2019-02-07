@@ -122,7 +122,7 @@ public class CombatExperienceService extends Service {
 		}
 		
 		if (group == null) {
-			new ExperienceIntent(killer, "combat", experienceGained).broadcast();
+			new ExperienceIntent(killer, "combat", experienceGained, true).broadcast();
 		} else {
 			group.getGroupMemberObjects().stream()
 					.filter(groupMember -> !isEntertainer(groupMember) && isMemberNearby(corpse, groupMember))
