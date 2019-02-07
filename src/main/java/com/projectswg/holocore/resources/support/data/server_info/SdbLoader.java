@@ -67,6 +67,9 @@ public class SdbLoader {
 		void close() throws IOException;
 		boolean next() throws IOException;
 		List<String> getColumns();
+		File getFile();
+		int getLine();
+		
 		SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex);
 		SdbIntegerColumnArraySet getIntegerArrayParser(@Language("RegExp") String regex);
 		SdbLongColumnArraySet getLongArrayParser(@Language("RegExp") String regex);
@@ -129,6 +132,16 @@ public class SdbLoader {
 		@Override
 		public List<String> getColumns() {
 			return getResultSet().getColumns();
+		}
+		
+		@Override
+		public File getFile() {
+			return getResultSet().getFile();
+		}
+		
+		@Override
+		public int getLine() {
+			return getResultSet().getLine();
 		}
 		
 		private <T extends SdbColumnArraySet> T registerArrayParser(T instance) {
@@ -266,6 +279,16 @@ public class SdbLoader {
 		@Override
 		public List<String> getColumns() {
 			return Arrays.asList(columnNames);
+		}
+		
+		@Override
+		public File getFile() {
+			return file;
+		}
+		
+		@Override
+		public int getLine() {
+			return (int) lineNumber.get();
 		}
 		
 		@Override
