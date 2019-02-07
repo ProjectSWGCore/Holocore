@@ -50,10 +50,27 @@ public class ExperienceLevelService extends Service {
 	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
 		int currentXp = playerObject.getExperiencePoints(xpType);
 		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
-		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
-		creatureObject.setTotalLevelXp(newXpTotal);
 		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
+		
+		switch (playerObject.getProfession()) {
+			case TRADER_DOMESTIC:
+			case TRADER_STRUCTURES:
+			case TRADER_MUNITIONS:
+			case TRADER_ENGINEER:
+				if (!"crafting".equals(xpType))
+					return playerObject.getExperiencePoints("crafting");
+				break;
+			case ENTERTAINER:
+				if (!"entertainer".equals(xpType))
+					return playerObject.getExperiencePoints("entertainer");
+				break;
+			default:
+				if (!"combat".equals(xpType))
+					return playerObject.getExperiencePoints("combat");
+				break;
+		}
+		creatureObject.setTotalLevelXp(newXpTotal);
 		
 		// Show flytext above the creature that received XP, but only to them
 		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", newXpTotal - currentXp)), Scale.MEDIUM, new RGB(255, 0, 255)));
