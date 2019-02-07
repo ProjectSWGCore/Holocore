@@ -10,6 +10,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PlayerLevelLoader.PlayerLevelInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -51,7 +52,7 @@ public class ExperienceLevelService extends Service {
 		int currentXp = playerObject.getExperiencePoints(xpType);
 		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
 		playerObject.setExperiencePoints(xpType, newXpTotal);
-		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
+		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", xpGained, xpType);
 		
 		switch (playerObject.getProfession()) {
 			case TRADER_DOMESTIC:
