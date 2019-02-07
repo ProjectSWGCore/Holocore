@@ -26,7 +26,6 @@ public class SkillService extends Service {
 		String skillName = gsi.getSkillName();
 		CreatureObject target = gsi.getTarget();
 		SkillInfo skillData = DataLoader.skills().getSkillByName(skillName);
-		Log.t("skillData=%s", skillData);
 		if (skillData == null)
 			return;
 		
