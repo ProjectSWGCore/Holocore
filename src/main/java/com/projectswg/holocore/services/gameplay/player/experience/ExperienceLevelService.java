@@ -44,6 +44,7 @@ public class ExperienceLevelService extends Service {
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i("%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
+				StandardLog.onPlayerTrace(this, creatureObject, "leveled from %d to %d", oldLevel, newLevel);
 			}
 		}
 	}
