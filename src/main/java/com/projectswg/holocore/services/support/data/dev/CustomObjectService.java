@@ -99,6 +99,7 @@ public class CustomObjectService extends Service {
 	private ListBoxRecursive createListBoxRecursive(Collection<String> objects) {
 		Map<String, Object> mapping = new TreeMap<>();
 		for (String iff : objects) {
+			Log.t("Custom Object Service loading IFF: '%s'", iff);
 			mapping.put(prettyIff(iff), iff.replace(File.separatorChar, '/'));
 		}
 		return new ListBoxRecursive(mapping);
