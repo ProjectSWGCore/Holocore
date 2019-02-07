@@ -29,46 +29,95 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class SkillTemplateLoader extends DataLoader {
 	
+	private final Map<String, SkillTemplateInfo> templateFromName;
+	
 	SkillTemplateLoader() {
-		
+		this.templateFromName = new HashMap<>();
+	}
+	
+	@Nullable
+	public SkillTemplateInfo getTemplateFromName(String name) {
+		return templateFromName.get(name);
 	}
 	
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/skill/skill_template.sdb"))) {
 			while (set.next()) {
-				SkillTemplateInfo skillTemplate = new SkillTemplateInfo(set);
-				// TODO: Store information
+				SkillTemplateInfo templateInfo = new SkillTemplateInfo(set);
+				templateFromName.put(templateInfo.getName(), templateInfo);
 			}
 		}
 	}
 	
 	public static class SkillTemplateInfo {
 		
-		private final String templateName;
-		private final String startingTemplateName;
-		private final String strClassName;
-		private final int userInterfacePriority;
-		private final String template;
+		private final String name;
+		private final String startingName;
+		private final String className;
+		private final int uiPriority;
+		private final String [] templates;
 		private final boolean levelBased;
 		private final String expertiseTrees;
-		private final int respecAllowed;
+		private final boolean respecAllowed;
 		
 		public SkillTemplateInfo(SdbResultSet set) {
-			this.templateName = set.getText("template_name");
-			this.startingTemplateName = set.getText("starting_template_name");
-			this.strClassName = set.getText("str_class_name");
-			this.userInterfacePriority = (int) set.getInt("user_interface_priority");
-			this.template = set.getText("template");
+			this.name = set.getText("template_name");
+			this.startingName = set.getText("starting_template_name");
+			this.className = set.getText("str_class_name");
+			this.uiPriority = (int) set.getInt("user_interface_priority");
+			this.templates = splitCsv(set.getText("template"));
 			this.levelBased = set.getBoolean("level_based");
 			this.expertiseTrees = set.getText("expertise_trees");
-			this.respecAllowed = (int) set.getInt("respec_allowed");
+			this.respecAllowed = set.getInt("respec_allowed") != 0;
 		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public String getStartingName() {
+			return startingName;
+		}
+		
+		public String getClassName() {
+			return className;
+		}
+		
+		public int getUiPriority() {
+			return uiPriority;
+		}
+		
+		public String [] getTemplates() {
+			return templates.clone();
+		}
+		
+		public boolean isLevelBased() {
+			return levelBased;
+		}
+		
+		public String getExpertiseTrees() {
+			return expertiseTrees;
+		}
+		
+		public boolean isRespecAllowed() {
+			return respecAllowed;
+		}
+		
+		private static String [] splitCsv(String val) {
+			if (val.isBlank())
+				return new String[0];
+			return val.split(",");
+		}
+		
 	}
 }

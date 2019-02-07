@@ -1,5 +1,6 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.SkillTemplateLoader.SkillTemplateInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -49,8 +50,20 @@ public abstract class DataLoader {
 		return getInstance(SkillLoader.class, SkillLoader::new);
 	}
 	
+	public static SkillTemplateLoader skillTemplates() {
+		return getInstance(SkillTemplateLoader.class, SkillTemplateLoader::new);
+	}
+	
 	public static PlayerLevelLoader playerLevels() {
 		return getInstance(PlayerLevelLoader.class, PlayerLevelLoader::new);
+	}
+	
+	public static PlayerRoleLoader playerRoles() {
+		return getInstance(PlayerRoleLoader.class, PlayerRoleLoader::new);
+	}
+	
+	public static RoadmapRewardLoader roadmapRewards() {
+		return getInstance(RoadmapRewardLoader.class, RoadmapRewardLoader::new);
 	}
 	
 	public static BuildoutLoader buildouts() {

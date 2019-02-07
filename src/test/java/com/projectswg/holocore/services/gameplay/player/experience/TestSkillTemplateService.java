@@ -25,71 +25,34 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.data.server_info.loader;
+package com.projectswg.holocore.services.gameplay.player.experience;
 
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import org.jetbrains.annotations.Nullable;
+import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
+import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService;
+import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillTemplateService;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
+import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents;
+import org.junit.Assert;
+import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-public final class PlayerRoleLoader extends DataLoader {
+public class TestSkillTemplateService extends TestRunnerSynchronousIntents {
 	
-	private final Map<Integer, RoleInfo> rolesByIndex;
-	private final Map<String, RoleInfo> rolesBySkill;
-	
-	PlayerRoleLoader() {
-		this.rolesByIndex = new HashMap<>();
-		this.rolesBySkill = new HashMap<>();
+	@Test
+	public void testStartingProfessionIcon() {
+		registerService(new SkillService());
+		registerService(new SkillTemplateService());
+		registerService(new ExperienceRoleService());
+		
+		GenericCreatureObject creature = new GenericCreatureObject(1);
+		creature.setLevel(0);
+		creature.getPlayerObject().setProfession(Profession.SMUGGLER);
+		Assert.assertEquals(0, creature.getPlayerObject().getProfessionIcon());
+		
+		creature.setLevel(1);
+		broadcastAndWait(new LevelChangedIntent(creature, (short) 0, (short) 1));
+		Assert.assertEquals(25, creature.getPlayerObject().getProfessionIcon());
+		Assert.assertTrue(creature.getSkills().contains("class_smuggler_phase1_novice"));
 	}
 	
-	@Nullable
-	public RoleInfo getRoleByIndex(int index) {
-		return rolesByIndex.get(index);
-	}
-	
-	@Nullable
-	public RoleInfo getRoleBySkill(String skill) {
-		return rolesBySkill.get(skill);
-	}
-	
-	@Override
-	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/role.sdb"))) {
-			while (set.next()) {
-				RoleInfo role = new RoleInfo(set);
-				rolesByIndex.put(role.getIndex(), role);
-				rolesBySkill.put(role.getQualifyingSkill(), role);
-			}
-		}
-	}
-	
-	public static class RoleInfo {
-		
-		private final int index;
-		private final String roleIcon;
-		private final String qualifyingSkill;
-		
-		public RoleInfo(SdbResultSet set) {
-			this.index = (int) set.getInt("index");
-			this.roleIcon = set.getText("role_icon");
-			this.qualifyingSkill = set.getText("qualifying_skill");
-		}
-		
-		public int getIndex() {
-			return index;
-		}
-		
-		public String getRoleIcon() {
-			return roleIcon;
-		}
-		
-		public String getQualifyingSkill() {
-			return qualifyingSkill;
-		}
-		
-	}
 }

@@ -1,7 +1,6 @@
 package com.projectswg.holocore.services.gameplay.player.experience.skills;
 
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
@@ -10,6 +9,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLo
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
 public class SkillService extends Service {
 	
@@ -26,6 +26,7 @@ public class SkillService extends Service {
 		String skillName = gsi.getSkillName();
 		CreatureObject target = gsi.getTarget();
 		SkillInfo skillData = DataLoader.skills().getSkillByName(skillName);
+		Log.t("skillData=%s", skillData);
 		if (skillData == null)
 			return;
 		
@@ -58,11 +59,6 @@ public class SkillService extends Service {
 		}
 		
 		sti.getRequester().setTitle(title);
-	}
-	
-	@IntentHandler
-	private void handleLevelChangedIntent(LevelChangedIntent lci) {
-		
 	}
 	
 	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {

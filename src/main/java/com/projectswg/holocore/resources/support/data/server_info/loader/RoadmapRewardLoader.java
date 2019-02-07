@@ -29,14 +29,25 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class RoadmapRewardLoader extends DataLoader {
 	
+	private final Map<String, RoadmapRewardInfo> rewardsBySkillName;
+	
 	RoadmapRewardLoader() {
-		
+		this.rewardsBySkillName = new HashMap<>();
+	}
+	
+	@Nullable
+	public RoadmapRewardInfo getRewardBySkillName(String skillName) {
+		return rewardsBySkillName.get(skillName);
 	}
 	
 	@Override
@@ -44,29 +55,71 @@ public final class RoadmapRewardLoader extends DataLoader {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/roadmap/item_rewards.sdb"))) {
 			while (set.next()) {
 				RoadmapRewardInfo rewardInfo = new RoadmapRewardInfo(set);
-				// TODO: Store information
+				rewardsBySkillName.put(rewardInfo.getSkillName(), rewardInfo);
 			}
 		}
 	}
 	
 	public static class RoadmapRewardInfo {
 		
-		private final String roadmapTemplateName;
-		private final String roadmapSkillName;
+		private final String templateName;
+		private final String skillName;
 		private final String appearanceName;
 		private final String stringId;
-		private final String itemDefault;
-		private final String itemWookiee;
-		private final String itemIthorian;
+		private final String [] defaultItems;
+		private final String [] wookieeItems;
+		private final String [] ithorianItems;
 		
 		public RoadmapRewardInfo(SdbResultSet set) {
-			this.roadmapTemplateName = set.getText("roadmap_template_name");
-			this.roadmapSkillName = set.getText("roadmap_skill_name");
+			this.templateName = set.getText("roadmap_template_name");
+			this.skillName = set.getText("roadmap_skill_name");
 			this.appearanceName = set.getText("appearance_name");
 			this.stringId = set.getText("string_id");
-			this.itemDefault = set.getText("item_default");
-			this.itemWookiee = set.getText("item_wookiee");
-			this.itemIthorian = set.getText("item_ithorian");
+			this.defaultItems = splitCsv(set.getText("item_default"));
+			this.wookieeItems = splitCsv(set.getText("item_wookiee"));
+			this.ithorianItems = splitCsv(set.getText("item_ithorian"));
 		}
+		
+		@NotNull
+		public String getTemplateName() {
+			return templateName;
+		}
+		
+		@NotNull
+		public String getSkillName() {
+			return skillName;
+		}
+		
+		@NotNull
+		public String getAppearanceName() {
+			return appearanceName;
+		}
+		
+		@NotNull
+		public String getStringId() {
+			return stringId;
+		}
+		
+		@NotNull
+		public String[] getDefaultItems() {
+			return defaultItems.clone();
+		}
+		
+		@NotNull
+		public String[] getWookieeItems() {
+			return wookieeItems.clone();
+		}
+		
+		@NotNull
+		public String[] getIthorianItems() {
+			return ithorianItems.clone();
+		}
+		
+		private static String [] splitCsv(String val) {
+			if (val.isBlank())
+				return new String[0];
+			return val.split(",");
+		}
+		
 	}
 }
