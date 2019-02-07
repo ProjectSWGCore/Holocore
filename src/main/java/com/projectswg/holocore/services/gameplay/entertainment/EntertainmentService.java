@@ -38,6 +38,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PerformanceLoader.PerformanceInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -418,12 +419,17 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if (performance == null) {
-				Log.e("Performer %s wasn't in performermap", performer);
+				StandardLog.onPlayerError(this, performer, "is not in performerMap");
 				return;
 			}
 			
 			String performanceName = performance.getPerformanceName();
 			PerformanceInfo performanceData = DataLoader.performances().getPerformanceByName(performanceName);
+			if (performanceData == null) {
+				StandardLog.onPlayerError(this, performer, "was performing unknown performance: '%s'", performanceName);
+				return;
+			}
+			
 			int flourishXpMod = performanceData.getFlourishXpMod();
 			int performanceCounter = performer.getPerformanceCounter();
 			int xpGained = performanceCounter * flourishXpMod;
