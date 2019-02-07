@@ -27,7 +27,6 @@
 package com.projectswg.holocore.services.support.objects.items;
 
 import com.projectswg.common.data.combat.DamageType;
-import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
@@ -431,10 +430,7 @@ public class StaticItemService extends Service {
 		
 		private void applyColor(TangibleObject tangible, String variable, int colorIndex) {
 			if (colorIndex >= 0) {
-				CustomizationVariable color = new CustomizationVariable();
-				
-				color.setValue(colorIndex);
-				tangible.putCustomization(variable, color);
+				tangible.putCustomization(variable, colorIndex);
 			}
 		}
 	}

@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.support.objects.swg;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
@@ -44,10 +43,11 @@ import org.bson.types.Binary;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TestSWGPersistence {
 	
@@ -142,7 +142,7 @@ public class TestSWGPersistence {
 		testSWGObject(obj);
 		
 		Document expected = map(
-				"appearance", Map.ofEntries(obj.getCustomization().entrySet().stream().map(e -> Map.entry(e.getKey(), e.getValue().getValue())).toArray(Entry[]::new)),
+				"appearance", Map.ofEntries(obj.getCustomization().entrySet().stream().map(e -> Map.entry(e.getKey(), e.getValue())).toArray(Entry[]::new)),
 				"maxHitPoints", obj.getMaxHitPoints(),
 				"components", obj.getComponents(),
 				"condition", obj.getCondition(),

@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
 import com.projectswg.common.data.customization.CustomizationString;
-import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
@@ -177,15 +176,15 @@ public class TangibleObject extends SWGObject {
 		return objectEffects;
 	}
 	
-	public void putCustomization(String name, CustomizationVariable value) {
+	public void putCustomization(String name, int value) {
 		appearanceData.put(name, value);
 	}
 	
-	public CustomizationVariable getCustomization(String name) {
+	public Integer getCustomization(String name) {
 		return appearanceData.get(name);
 	}
 	
-	public Map<String, CustomizationVariable> getCustomization() {
+	public Map<String, Integer> getCustomization() {
 		return appearanceData.getVariables();
 	}
 	
