@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,7 @@ public final class SlotArrangementLoader extends DataLoader {
 		this.arrangements = new HashMap<>();
 	}
 	
+	@Nullable
 	public List<List<String>> getArrangement(String slotName) {
 		return arrangements.get(slotName);
 	}
