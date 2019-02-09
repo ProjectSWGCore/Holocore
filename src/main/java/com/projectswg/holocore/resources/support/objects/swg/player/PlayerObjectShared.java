@@ -35,7 +35,9 @@ import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGFlag;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 /**
  * PLAY 3
@@ -219,8 +221,25 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		sendDelta(15, lifetimePvpKills);
 	}
 	
+	public List<Integer> getCollectionBadgeIds() {
+		List<Integer> flags = new ArrayList<>();
+		for (int flag = collectionBadges.nextSetBit(0); flag >= 0; flag = collectionBadges.nextSetBit(flag+1)) {
+			if (flag == Integer.MAX_VALUE)
+				break;
+			flags.add(flag);
+		}
+		for (int flag = collectionBadges2.nextSetBit(0); flag >= 0; flag = collectionBadges2.nextSetBit(flag+1)) {
+			if (flag == Integer.MAX_VALUE)
+				break;
+			flags.add(flag);
+		}
+		return flags;
+	}
+	
 	public BitSet getCollectionBadges() {
-		return (BitSet) collectionBadges.clone();
+		BitSet ret = (BitSet) collectionBadges.clone();
+		ret.or(collectionBadges2);
+		return ret;
 	}
 	
 	public boolean getCollectionFlag(int flag) {
@@ -228,71 +247,77 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 	}
 	
 	public void setCollectionFlag(int flag) {
-		collectionBadges.set(flag);
-		collectionBadges.sendDeltaMessage(obj);
+		SWGBitSet set = getCollections(flag);
+		if (!set.get(flag)) {
+			set.set(flag);
+			set.sendDeltaMessage(obj);
+		}
 	}
 	
 	public void clearCollectionFlag(int flag) {
-		collectionBadges.clear(flag);
-		collectionBadges.sendDeltaMessage(obj);
+		SWGBitSet set = getCollections(flag);
+		if (set.get(flag)) {
+			set.clear(flag);
+			set.sendDeltaMessage(obj);
+		}
 	}
 	
 	public void toggleCollectionFlag(int flag) {
-		collectionBadges.flip(flag);
-		collectionBadges.sendDeltaMessage(obj);
+		SWGBitSet set = getCollections(flag);
+		set.flip(flag);
+		set.sendDeltaMessage(obj);
 	}
 	
 	public void setCollectionFlags(BitSet flags) {
-		collectionBadges.or(flags);
-		collectionBadges.sendDeltaMessage(obj);
+		boolean triggeredCollection1 = false;
+		boolean triggeredCollection2 = false;
+		for (int flag = flags.nextSetBit(0); flag >= 0; flag = flags.nextSetBit(flag+1)) {
+			if (flag == Integer.MAX_VALUE)
+				break;
+			SWGBitSet set = getCollections(flag);
+			set.set(flag);
+			triggeredCollection1 |= set == collectionBadges;
+			triggeredCollection2 |= set == collectionBadges2;
+		}
+		if (triggeredCollection1)
+			collectionBadges.sendDeltaMessage(obj);
+		if (triggeredCollection2)
+			collectionBadges2.sendDeltaMessage(obj);
 	}
 	
 	public void clearCollectionFlags(BitSet flags) {
-		collectionBadges.andNot(flags);
-		collectionBadges.sendDeltaMessage(obj);
+		boolean triggeredCollection1 = false;
+		boolean triggeredCollection2 = false;
+		for (int flag = flags.nextSetBit(0); flag >= 0; flag = flags.nextSetBit(flag+1)) {
+			if (flag == Integer.MAX_VALUE)
+				break;
+			SWGBitSet set = getCollections(flag);
+			set.clear(flag);
+			triggeredCollection1 |= set == collectionBadges;
+			triggeredCollection2 |= set == collectionBadges2;
+		}
+		if (triggeredCollection1)
+			collectionBadges.sendDeltaMessage(obj);
+		if (triggeredCollection2)
+			collectionBadges2.sendDeltaMessage(obj);
 	}
 	
 	public void toggleCollectionFlags(BitSet flags) {
-		collectionBadges.xor(flags);
-		collectionBadges.sendDeltaMessage(obj);
-	}
-	
-	public BitSet getCollectionBadges2() {
-		return (BitSet) collectionBadges2.clone();
-	}
-	
-	public boolean getCollection2Flag(int flag) {
-		return collectionBadges2.get(flag);
-	}
-	
-	public void setCollection2Flag(int flag) {
-		collectionBadges2.set(flag);
-		collectionBadges2.sendDeltaMessage(obj);
-	}
-	
-	public void clearCollection2Flag(int flag) {
-		collectionBadges2.clear(flag);
-		collectionBadges2.sendDeltaMessage(obj);
-	}
-	
-	public void toggleCollection2Flag(int flag) {
-		collectionBadges2.flip(flag);
-		collectionBadges2.sendDeltaMessage(obj);
-	}
-	
-	public void setCollection2Flags(BitSet flags) {
-		collectionBadges2.or(flags);
-		collectionBadges2.sendDeltaMessage(obj);
-	}
-	
-	public void clearCollection2Flags(BitSet flags) {
-		collectionBadges2.andNot(flags);
-		collectionBadges2.sendDeltaMessage(obj);
-	}
-	
-	public void toggleCollection2Flags(BitSet flags) {
-		collectionBadges2.xor(flags);
-		collectionBadges2.sendDeltaMessage(obj);
+		boolean triggeredCollection1 = false;
+		boolean triggeredCollection2 = false;
+		for (int flag = flags.nextSetBit(0); flag >= 0; flag = flags.nextSetBit(flag+1)) {
+			if (flag == Integer.MAX_VALUE)
+				break;
+			SWGBitSet set = getCollections(flag);
+			set.flip(flag);
+			
+			triggeredCollection1 |= set == collectionBadges;
+			triggeredCollection2 |= set == collectionBadges2;
+		}
+		if (triggeredCollection1)
+			collectionBadges.sendDeltaMessage(obj);
+		if (triggeredCollection2)
+			collectionBadges2.sendDeltaMessage(obj);
 	}
 	
 	public boolean isShowBackpack() {
@@ -388,6 +413,12 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		lifetimeGcwPoints = stream.getLong();
 		showBackpack = stream.getBoolean();
 		showHelmet = stream.getBoolean();
+	}
+	
+	private SWGBitSet getCollections(int beginSlotId) {
+		int index = beginSlotId / 16000;
+		assert index >= 0 && index <= 1;
+		return index == 0 ? collectionBadges : collectionBadges2;
 	}
 	
 	private void sendDelta(int update, Object o) {

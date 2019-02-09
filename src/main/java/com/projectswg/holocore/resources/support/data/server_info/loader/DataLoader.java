@@ -34,6 +34,10 @@ public abstract class DataLoader {
 		return getInstance(BuffLoader.class, BuffLoader::new);
 	}
 	
+	public static CollectionLoader collections() {
+		return getInstance(CollectionLoader.class, CollectionLoader::new);
+	}
+	
 	public static ExpertiseLoader expertise() {
 		return getInstance(ExpertiseLoader.class, ExpertiseLoader::new);
 	}

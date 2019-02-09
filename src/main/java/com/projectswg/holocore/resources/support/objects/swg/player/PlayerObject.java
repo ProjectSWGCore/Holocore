@@ -234,6 +234,10 @@ public class PlayerObject extends IntangibleObject {
 		play3.setLifetimePvpKills(lifetimePvpKills);
 	}
 	
+	public List<Integer> getCollectionBadgeIds() {
+		return play3.getCollectionBadgeIds();
+	}
+	
 	public BitSet getCollectionBadges() {
 		return play3.getCollectionBadges();
 	}
@@ -264,38 +268,6 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void toggleCollectionFlags(BitSet flags) {
 		play3.toggleCollectionFlags(flags);
-	}
-	
-	public BitSet getCollectionBadges2() {
-		return play3.getCollectionBadges2();
-	}
-	
-	public boolean getCollection2Flag(int flag) {
-		return play3.getCollection2Flag(flag);
-	}
-	
-	public void setCollection2Flag(int flag) {
-		play3.setCollection2Flag(flag);
-	}
-	
-	public void clearCollection2Flag(int flag) {
-		play3.clearCollection2Flag(flag);
-	}
-	
-	public void toggleCollection2Flag(int flag) {
-		play3.toggleCollection2Flag(flag);
-	}
-	
-	public void setCollection2Flags(BitSet flags) {
-		play3.setCollection2Flags(flags);
-	}
-	
-	public void clearCollection2Flags(BitSet flags) {
-		play3.clearCollection2Flags(flags);
-	}
-	
-	public void toggleCollection2Flags(BitSet flags) {
-		play3.toggleCollection2Flags(flags);
 	}
 	
 	public boolean isShowBackpack() {
