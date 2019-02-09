@@ -53,6 +53,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
@@ -164,11 +165,15 @@ public final class ObjectCreator {
 		String slotArrangement = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
 		
 		if (!slotDescriptor.isEmpty()) {
-			object.setSlots(DataLoader.slotDescriptors().getSlots(slotDescriptor)); // The slots an object has
+			List<String> descriptor = DataLoader.slotDescriptors().getSlots(slotDescriptor);
+			if (descriptor != null)
+				object.setSlots(descriptor); // The slots an object has
 		}
 		
 		if (!slotArrangement.isEmpty()) {
-			object.setArrangement(DataLoader.slotArrangements().getArrangement(slotArrangement)); // The slots this object can go into
+			List<List<String>> arrangement = DataLoader.slotArrangements().getArrangement(slotArrangement);
+			if (arrangement != null)
+				object.setArrangement(arrangement); // The slots this object can go into
 		}
 	}
 	
