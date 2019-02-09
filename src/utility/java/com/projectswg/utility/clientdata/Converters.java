@@ -8,7 +8,9 @@ public enum Converters {
 	OBJECTS_OBJECT_APPEARANCE	(ConvertAppearances::new),
 	OBJECTS_OBJECT_DATA			(ConvertObjectData::new),
 	OBJECTS_BUILDING_CELLS		(ConvertBuildingCells::new),
-	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new);
+	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
+	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
+	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new);
 	
 	private final Supplier<Converter> converter;
 	
