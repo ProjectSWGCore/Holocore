@@ -66,6 +66,10 @@ public abstract class DataLoader {
 		return getInstance(PlayerRoleLoader.class, PlayerRoleLoader::new);
 	}
 	
+	public static StartClothingLoader playerStartClothing() {
+		return getInstance(StartClothingLoader.class, StartClothingLoader::new);
+	}
+	
 	public static RoadmapRewardLoader roadmapRewards() {
 		return getInstance(RoadmapRewardLoader.class, RoadmapRewardLoader::new);
 	}

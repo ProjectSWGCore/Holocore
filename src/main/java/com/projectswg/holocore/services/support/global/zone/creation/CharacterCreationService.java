@@ -28,8 +28,6 @@ package com.projectswg.holocore.services.support.global.zone.creation;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.login.creation.*;
 import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
@@ -63,12 +61,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class CharacterCreationService extends Service {
 	
 	private final Map <String, Player> lockedNames;
-	private final Map <String, ProfTemplateData> profTemplates;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
 	private final CharacterCreationRestriction creationRestriction;
@@ -76,7 +72,6 @@ public class CharacterCreationService extends Service {
 	
 	public CharacterCreationService() {
 		this.lockedNames = new HashMap<>();
-		this.profTemplates = new ConcurrentHashMap<>();
 		
 		this.nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
 		this.nameGenerator = new SWGNameGenerator(nameFilter);
@@ -88,7 +83,6 @@ public class CharacterCreationService extends Service {
 	public boolean initialize() {
 		userDatabase.initialize();
 		nameGenerator.loadAllRules();
-		loadProfTemplates();
 		if (!nameFilter.load())
 			Log.e("Failed to load name filter!");
 		return super.initialize();
@@ -211,7 +205,6 @@ public class CharacterCreationService extends Service {
 		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
 		switch (err) {
 			case NAME_APPROVED:
-				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 				reason = NameFailureReason.NAME_RETRY;
 				break;
 			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE:
@@ -277,18 +270,8 @@ public class CharacterCreationService extends Service {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
-		CharacterCreation creation = new CharacterCreation(profTemplates.get(create.getClothes()), create);
+		CharacterCreation creation = new CharacterCreation(create);
 		return creation.createCharacter(player.getAccessLevel(), info);
-	}
-	
-	private void loadProfTemplates() {
-		profTemplates.put("crafting_artisan", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_crafting_artisan.iff"));
-		profTemplates.put("combat_brawler", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
-		profTemplates.put("social_entertainer", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
-		profTemplates.put("combat_marksman", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_marksman.iff"));
-		profTemplates.put("science_medic", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
-		profTemplates.put("outdoors_scout", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
-		profTemplates.put("jedi", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_jedi.iff"));
 	}
 	
 	private boolean lockName(String name, Player player) {
