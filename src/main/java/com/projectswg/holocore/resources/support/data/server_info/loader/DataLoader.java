@@ -134,6 +134,14 @@ public abstract class DataLoader {
 		return getInstance(SlotDefinitionLoader.class, SlotDefinitionLoader::new);
 	}
 	
+	public static SlotDescriptorLoader slotDescriptors() {
+		return getInstance(SlotDescriptorLoader.class, SlotDescriptorLoader::new);
+	}
+	
+	public static SlotArrangementLoader slotArrangements() {
+		return getInstance(SlotArrangementLoader.class, SlotArrangementLoader::new);
+	}
+	
 	public static TerrainZoneInsertionLoader zoneInsertions() {
 		return getInstance(TerrainZoneInsertionLoader.class, TerrainZoneInsertionLoader::new);
 	}

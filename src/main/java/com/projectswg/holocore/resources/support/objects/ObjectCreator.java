@@ -30,8 +30,6 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
-import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -163,22 +161,14 @@ public final class ObjectCreator {
 	
 	private static void createObjectSlots(SWGObject object) {
 		String slotDescriptor = object.getDataTextAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME);
-		String arrangementDescriptor = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
+		String slotArrangement = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
 		
 		if (!slotDescriptor.isEmpty()) {
-			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile(slotDescriptor);
-			if (descriptor != null)
-				object.setSlots(descriptor.getSlots());
+			object.setSlots(DataLoader.slotDescriptors().getSlots(slotDescriptor)); // The slots an object has
 		}
 		
-		if (!arrangementDescriptor.isEmpty()) {
-			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile(arrangementDescriptor);
-			if (arrangementData == null)
-				return;
-			
-			object.setArrangement(arrangementData.getArrangement());
+		if (!slotArrangement.isEmpty()) {
+			object.setArrangement(DataLoader.slotArrangements().getArrangement(slotArrangement)); // The slots this object can go into
 		}
 	}
 	
