@@ -4,7 +4,6 @@ pipelines:
   default:
     - step:
         caches:
-          - docker
           - gradle
           - gradlewrapper
         script:
