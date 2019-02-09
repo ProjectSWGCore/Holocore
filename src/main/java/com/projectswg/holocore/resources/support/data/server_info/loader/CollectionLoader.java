@@ -68,7 +68,7 @@ public final class CollectionLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/collection/collection.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/collections/collections.sdb"))) {
 			SdbTextColumnArraySet categoryArray = set.getTextArrayParser("category(\\d+)");
 			SdbTextColumnArraySet prereqArray = set.getTextArrayParser("prereq_slot_name(\\d+)");
 			SdbTextColumnArraySet alternateTitleArray = set.getTextArrayParser("alternate_title(\\d+)");
