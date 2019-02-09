@@ -8,22 +8,6 @@ pipelines:
           - pswgcommon/**
           - client-holocore/**
     - step:
-        name: build
-        image: openjdk:11-jdk-slim
-        caches:
-          - docker
-          - gradle
-          - gradlewrapper
-        script:
-          - ./gradlew classes testClasses
-        artifacts:
-          - pswgcommon/**
-          - client-holocore/**
-          - .gradle/**
-          - build/**
-        services:
-          - docker
-    - step:
         name: test
         image: openjdk:11-jdk-slim
         caches:
