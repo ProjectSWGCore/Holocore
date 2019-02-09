@@ -27,9 +27,6 @@ pipelines:
           - gradle
           - gradlewrapper
         script:
-          - apt-get update
-          - apt-get install -y git
-          - git submodule update --init
           - ./gradlew test
         artifacts:
           - pswgcommon/**
@@ -40,3 +37,4 @@ pipelines:
 definitions:
   caches:
     gradlewrapper: ~/.gradle/wrapper
+
