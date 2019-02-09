@@ -4,6 +4,9 @@ pipelines:
         name: fetch code
         script:
           - git submodule update --init
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
     - step:
         name: build
         image: openjdk:11-jdk-slim
@@ -11,7 +14,12 @@ pipelines:
           - gradle
           - gradlewrapper
         script:
-          - ./gradlew compileJava
+          - ./gradlew classes testClasses
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
+          - .gradle/**
+          - build/**
     - step:
         name: test
         image: openjdk:11-jdk-slim
@@ -23,6 +31,11 @@ pipelines:
           - apt-get install -y git
           - git submodule update --init
           - ./gradlew test
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
+          - .gradle/**
+          - build/**
 
 definitions:
   caches:
