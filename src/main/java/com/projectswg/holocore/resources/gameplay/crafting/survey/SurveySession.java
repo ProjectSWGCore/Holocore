@@ -37,37 +37,54 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Raw
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class SurveySession {
 	
 	private final CreatureObject creature;
 	private final GalacticResource resource;
+	private final AtomicReference<ScheduledFuture<?>> surveyRequest;
 	
 	public SurveySession(CreatureObject creature, GalacticResource resource) {
 		this.creature = creature;
 		this.resource = resource;
+		this.surveyRequest = new AtomicReference<>(null);
 	}
 	
 	public GalacticResource getResource() {
 		return resource;
 	}
 	
-	public void startSession() {
-		SurveyMessage surveyMessage = new SurveyMessage();
-		loadResourcePoints(surveyMessage, creature, resource, 320);
-		creature.getOwner().sendPacket(surveyMessage);
-		creature.getOwner().sendPacket(new PlayMusicMessage(0, getMusicFile(), 1, false));
+	public synchronized void startSession() {
+		ScheduledFuture<?> prev = surveyRequest.get();
+		if (prev != null && !prev.isDone())
+			return;
+		
+		surveyRequest.set(ScheduledUtilities.run(this::performSurvey, 5, SECONDS));
+		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
 	
-	public void stopSession() {
-		
+	public synchronized void stopSession() {
+		ScheduledFuture<?> surveyRequest = this.surveyRequest.get();
+		if (surveyRequest != null)
+			surveyRequest.cancel(false);
 	}
 	
-	private void loadResourcePoints(SurveyMessage surveyMessage, CreatureObject creature, GalacticResource resource, int range) {
+	private void performSurvey() {
+		sendSurveyMessage(creature, resource, 320);
+		surveyRequest.set(null);
+	}
+	
+	private void sendSurveyMessage(CreatureObject creature, GalacticResource resource, int range) {
+		SurveyMessage surveyMessage = new SurveyMessage();
 		double baseLocationX = creature.getX();
 		double baseLocationZ = creature.getZ();
 		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain());
@@ -78,6 +95,7 @@ public class SurveySession {
 				surveyMessage.addConcentration(new ResourceConcentration(x, z, getConcentration(spawns, creature.getTerrain(), x, z)));
 			}
 		}
+		creature.sendSelf(surveyMessage);
 	}
 	
 	private double getConcentration(List<GalacticResourceSpawn> spawns, Terrain terrain, double x, double z) {
