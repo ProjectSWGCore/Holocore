@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
 import com.projectswg.common.data.combat.DamageType;
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -36,16 +37,16 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 
 public class WeaponObject extends TangibleObject {
 	
-	private int minDamage;
-	private int maxDamage;
+	private int			minDamage		= 0;
+	private int			maxDamage		= 0;
 	// WEAO03
-	private float attackSpeed = 0.5f;
-	private int accuracy;
-	private float minRange = 0f;
-	private float maxRange = 5f;
-	private DamageType damageType = DamageType.KINETIC;
-	private DamageType elementalType;
-	private int elementalValue;
+	private float		attackSpeed		= 0.5f;
+	private int			accuracy		= 0;
+	private float		minRange		= 0f;
+	private float		maxRange		= 5f;
+	private DamageType	damageType		= DamageType.KINETIC;
+	private DamageType	elementalType	= null;
+	private int			elementalValue	= 0;
 	// WEAO06
 	private WeaponType type = WeaponType.UNARMED;
 	
@@ -188,7 +189,35 @@ public class WeaponObject extends TangibleObject {
 		super.parseBaseline6(buffer);
 		type = WeaponType.getWeaponType(buffer.getInt());
 	}
-
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		data.putInteger("minDamage", minDamage);
+		data.putInteger("maxDamage", maxDamage);
+		data.putString("damageType", damageType.name());
+		if (elementalType != null)
+			data.putString("elementalType", elementalType.name());
+		data.putInteger("elementalValue", elementalValue);
+		data.putFloat("attackSpeed", attackSpeed);
+		data.putFloat("maxRange", maxRange);
+		data.putString("weaponType", type.name());
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		minDamage = data.getInteger("minDamage", minDamage);
+		maxDamage = data.getInteger("maxDamage", maxDamage);
+		damageType = DamageType.valueOf(data.getString("damageType", damageType.name()));
+		if (data.containsKey("elementalType"))
+			elementalType = DamageType.valueOf(data.getString("elementalType"));
+		elementalValue = data.getInteger("elementalValue", elementalValue);
+		attackSpeed = data.getFloat("attackSpeed", attackSpeed);
+		maxRange = data.getFloat("maxRange", maxRange);
+		type = WeaponType.valueOf(data.getString("weaponType", type.name()));
+	}
+	
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
