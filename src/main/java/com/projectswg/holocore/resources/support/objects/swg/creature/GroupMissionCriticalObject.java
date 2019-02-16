@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,50 +24,55 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.persistable;
+
+package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 
-public class SWGObjectFactory {
+public class GroupMissionCriticalObject implements MongoPersistable {
 	
-	public static void save(SWGObject obj, NetBufferStream stream) {
-		stream.addLong(obj.getObjectId());
-		stream.addAscii(obj.getTemplate());
-		obj.save(stream);
+	private long sourceCreature;
+	private long object;
+	
+	public GroupMissionCriticalObject(long sourceCreature, long object) {
+		this.sourceCreature = sourceCreature;
+		this.object = object;
 	}
 	
-	public static MongoData save(SWGObject obj) {
-		return save(obj, new MongoData());
+	public long getSourceCreature() {
+		return sourceCreature;
 	}
 	
-	public static MongoData save(SWGObject obj, MongoData data) {
-		obj.saveMongo(data);
-		assert data.containsKey("id") : "serialized MongoData does not contain the objectId";
-		assert data.containsKey("parent") : "serialized MongoData does not contain the parent id";
-		assert data.containsKey("parentCell") : "serialized MongoData does not contain the parent cell number";
-		assert data.containsKey("template") : "serialized MongoData does not contain the template";
-		return data;
+	public long getObject() {
+		return object;
 	}
 	
-	public static SWGObject create(NetBufferStream stream) {
-		long objectId = stream.getLong();
-		String template = stream.getAscii();
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.read(stream);
-		return obj;
+	@Override
+	public void readMongo(MongoData data) {
+		sourceCreature = data.getLong("source", sourceCreature);
+		object = data.getLong("object", object);
 	}
 	
-	public static SWGObject create(MongoData data) {
-		long objectId = data.getLong("id", 0);
-		String template = data.getString("template");
-		assert objectId != 0 : "objectId is not defined in MongoData";
-		assert template != null : "template is not defined in MongoData";
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.readMongo(data);
-		return obj;
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putLong("source", sourceCreature);
+		data.putLong("object", object);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		GroupMissionCriticalObject that = (GroupMissionCriticalObject) o;
+		return sourceCreature == that.sourceCreature && object == that.object;
+	}
+	
+	@Override
+	public int hashCode() {
+		return (31 + Long.hashCode(sourceCreature)) * 31 + Long.hashCode(object);
 	}
 	
 }

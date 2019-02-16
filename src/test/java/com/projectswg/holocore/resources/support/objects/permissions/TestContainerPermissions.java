@@ -73,7 +73,7 @@ public class TestContainerPermissions extends TestRunnerNoIntents {
 		inventoryB.systemMove(b.getInventory());
 		
 		b.setContainerPermissions(AdminPermissions.getPermissions());
-		b.addAbility("admin");
+		b.addCommand("admin");
 		
 		assertTrue(a.isVisible(b));
 		assertFalse(b.isVisible(a));

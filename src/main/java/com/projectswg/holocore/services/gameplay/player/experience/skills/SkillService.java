@@ -9,7 +9,6 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLo
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 public class SkillService extends Service {
 	
@@ -96,7 +95,7 @@ public class SkillService extends Service {
 	
 	private void grantSkill(SkillInfo skillData, CreatureObject target) {
 		target.addSkill(skillData.getName());
-		target.addAbility(skillData.getCommands());
+		target.addCommand(skillData.getCommands());
 		
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillData.getName(), target, false).broadcast();

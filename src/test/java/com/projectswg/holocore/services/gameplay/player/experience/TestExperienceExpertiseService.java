@@ -64,19 +64,19 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		// Nothing defined
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 		
 		// No expertise yet
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{"expertise_fs_general_enhanced_strength_1"}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 		
 		// Wrong profession
 		creature.setLevel(90);
 		broadcastAndWait(new LevelChangedIntent(creature, (short) 1, (short) 90));
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{"expertise_fs_general_enhanced_strength_1"}, false)));
 		Assert.assertEquals(Set.of("expertise"), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 	}
 	
 	@Test
@@ -95,19 +95,19 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		// Nothing defined
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 		
 		// No expertise yet
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{"expertise_fs_general_enhanced_strength_1"}, false)));
 		Assert.assertEquals(Set.of(), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 		
 		// Haven't unlocked tier
 		creature.setLevel(10);
 		broadcastAndWait(new LevelChangedIntent(creature, (short) 1, (short) 10));
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(new String[]{"expertise_fs_general_improved_force_throw_1"}, false)));
 		Assert.assertEquals(Set.of("expertise"), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 		
 		// Success
 		creature.setLevel(90);
@@ -122,7 +122,7 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 		};
 		broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(expertiseRequest, false)));
 		Assert.assertEquals(Set.of(expertiseRequest), creature.getSkills());
-		Assert.assertEquals(Set.of(), creature.getAbilityNames());
+		Assert.assertEquals(Set.of(), creature.getCommands());
 	}
 	
 	@Test
@@ -172,7 +172,7 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 			
 			broadcastAndWait(new InboundPacketIntent(owner, new ExpertiseRequestMessage(requestExpertise.toArray(String[]::new), false)));
 			Assert.assertEquals("Failed on: " + profession, expectedExpertise, creature.getSkills());
-			Assert.assertEquals("Failed on: " + profession, abilities, creature.getAbilityNames());
+			Assert.assertEquals("Failed on: " + profession, abilities, creature.getCommands());
 		}
 	}
 	

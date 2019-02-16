@@ -100,7 +100,7 @@ public final class SpawnerService extends Service {
 		SWGObject intendedTarget = ObjectLookup.getObjectById(intendedTargetId);
 		if (intendedTarget == null && adminsWithRoutes.remove(player)) {
 			player.sendSelf(new DestroyClientPathMessage());
-		} else if (intendedTarget != null && player.hasAbility("admin")) {
+		} else if (intendedTarget != null && player.hasCommand("admin")) {
 			Spawner spawner = (Spawner) intendedTarget.getServerAttribute(ServerAttribute.EGG_SPAWNER);
 			if (spawner != null) {
 				List<ResolvedPatrolWaypoint> waypoints = spawner.getPatrolRoute();

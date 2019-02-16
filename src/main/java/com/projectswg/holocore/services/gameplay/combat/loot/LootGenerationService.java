@@ -259,7 +259,7 @@ public final class LootGenerationService extends Service {
 		int tableRoll = random.nextInt(100) + 1;
 		
 		// Admin Variables
-		boolean admin = killer.hasAbility("admin");
+		boolean admin = killer.hasCommand("admin");
 		StringBuilder adminOutput1 = new StringBuilder(tableRoll + " //");
 		StringBuilder adminOutput2 = new StringBuilder();
 		int tableId = 0;

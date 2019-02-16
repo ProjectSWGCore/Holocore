@@ -94,7 +94,7 @@ public class EntertainmentService extends Service {
 				new SystemMessageIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
 			} else if (DataLoader.performances().getPerformanceByName(danceName) != null) {
 				// The dance name is valid.
-				if (dancer.hasAbility("startDance+" + danceName)) {
+				if (dancer.hasCommand("startDance+" + danceName)) {
 					
 					if (changeDance) {    // If they're changing dance, we just need to change their animation.
 						changeDance(dancer, danceName);

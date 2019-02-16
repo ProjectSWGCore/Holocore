@@ -120,7 +120,7 @@ public class TransferItemCallback implements ICmdCallback {
 			// Check if item is being equipped
 			if (newContainer.equals(actor)) {
 				// If armor, they must have the "wear_all_armor" ability
-				if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
+				if (target.getAttribute("armor_category") != null && !actor.hasCommand("wear_all_armor")) {
 					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
 					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					return;

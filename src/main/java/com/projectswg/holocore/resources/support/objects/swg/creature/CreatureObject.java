@@ -49,6 +49,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -67,7 +68,7 @@ public class CreatureObject extends TangibleObject {
 	private transient long lastReserveOperation		= 0;
 	
 	private final CreatureObjectAwareness		awareness		= new CreatureObjectAwareness(this);
-	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP();
+	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP(this);
 	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP(this);
 	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
 	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
@@ -324,10 +325,6 @@ public class CreatureObject extends TangibleObject {
 		return Collections.unmodifiableSet(skills);
 	}
 	
-	public void handleLevelSkillMods(String modName, int modValue){
-		adjustSkillmod(modName, 0, modValue);
-	}
-	
 	public Posture getPosture() {
 		return posture;
 	}
@@ -336,52 +333,8 @@ public class CreatureObject extends TangibleObject {
 		return race;
 	}
 	
-	public double getMovementScale() {
-		return creo4.getMovementScale();
-	}
-	
-	public double getMovementPercent() {
-		return creo4.getMovementPercent();
-	}
-	
-	public double getWalkSpeed() {
-		return creo4.getWalkSpeed();
-	}
-	
-	public double getRunSpeed() {
-		return creo4.getRunSpeed();
-	}
-	
-	public double getAccelScale() {
-		return creo4.getAccelScale();
-	}
-	
-	public double getAccelPercent() {
-		return creo4.getAccelPercent();
-	}
-	
-	public double getTurnScale() {
-		return creo4.getTurnScale();
-	}
-	
-	public double getSlopeModAngle() {
-		return creo4.getSlopeModAngle();
-	}
-	
-	public double getSlopeModPercent() {
-		return creo4.getSlopeModPercent();
-	}
-	
-	public double getWaterModPercent() {
-		return creo4.getWaterModPercent();
-	}
-	
 	public double getHeight() {
 		return height;
-	}
-	
-	public long getPerformanceListenTarget() {
-		return creo4.getPerformanceListenTarget();
 	}
 	
 	public int getGuildId() {
@@ -394,10 +347,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public int getLevelHealthGranted() {
 		return creo6.getLevelHealthGranted();
-	}
-	
-	public int getTotalLevelXp() {
-		return creo4.getTotalLevelXp();
 	}
 	
 	public CreatureDifficulty getDifficulty() {
@@ -470,64 +419,154 @@ public class CreatureObject extends TangibleObject {
 		setMovementScale(1);
 	}
 	
-	public void setMovementScale(double movementScale) {
-		creo4.setMovementScale(movementScale);
-		sendDelta(4, 5, movementScale);
-	}
+	/*
+	 * =====-----  -----=====
+	 * ===== Baseline 4 =====
+	 * =====-----  -----=====
+	 */
 	
-	public void setMovementPercent(double movementPercent) {
-		creo4.setMovementPercent(movementPercent);
-		sendDelta(4, 4, movementPercent);
-	}
-	
-	public void setWalkSpeed(double walkSpeed) {
-		creo4.setWalkSpeed(walkSpeed);
-		sendDelta(4, 11, walkSpeed);
-	}
-	
-	public void setRunSpeed(double runSpeed) {
-		creo4.setRunSpeed(runSpeed);
-		sendDelta(4, 7, runSpeed);
-	}
-	
-	public void setAccelScale(double accelScale) {
-		creo4.setAccelScale(accelScale);
-		sendDelta(4, 1, accelScale);
+	public double getAccelPercent() {
+		return creo4.getAccelPercent();
 	}
 	
 	public void setAccelPercent(double accelPercent) {
-		creo4.setAccelPercent(accelPercent);
-		sendDelta(4, 0, accelPercent);
+		creo4.setAccelPercent((float) accelPercent);
 	}
 	
-	public void setTurnScale(double turnScale) {
-		creo4.setTurnScale(turnScale);
-		sendDelta(4, 10, turnScale);
+	public float getAccelScale() {
+		return creo4.getAccelScale();
+	}
+	
+	public void setAccelScale(double accelScale) {
+		creo4.setAccelScale((float) accelScale);
+	}
+	
+	@NotNull
+	public Attributes getBonusAttributes() {
+		return creo4.getBonusAttributes();
+	}
+	
+	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
+		creo4.adjustSkillmod(skillModName, base, modifier);
+	}
+	
+	public int getSkillModValue(@NotNull String skillModName) {
+		return creo4.getSkillModValue(skillModName);
+	}
+	
+	public float getMovementPercent() {
+		return creo4.getMovementPercent();
+	}
+	
+	public void setMovementPercent(double movementPercent) {
+		creo4.setMovementPercent((float) movementPercent);
+	}
+	
+	public float getMovementScale() {
+		return creo4.getMovementScale();
+	}
+	
+	public void setMovementScale(double movementScale) {
+		creo4.setMovementScale((float) movementScale);
+	}
+	
+	public long getPerformanceListenTarget() {
+		return creo4.getPerformanceListenTarget();
+	}
+	
+	public void setPerformanceListenTarget(long performanceListenTarget) {
+		creo4.setPerformanceListenTarget(performanceListenTarget);
+	}
+	
+	public float getRunSpeed() {
+		return creo4.getRunSpeed();
+	}
+	
+	public void setRunSpeed(double runSpeed) {
+		creo4.setRunSpeed((float) runSpeed);
+	}
+	
+	public float getSlopeModAngle() {
+		return creo4.getSlopeModAngle();
 	}
 	
 	public void setSlopeModAngle(double slopeModAngle) {
-		creo4.setSlopeModAngle(slopeModAngle);
-		sendDelta(4, 8, slopeModAngle);
+		creo4.setSlopeModAngle((float) slopeModAngle);
+	}
+	
+	public float getSlopeModPercent() {
+		return creo4.getSlopeModPercent();
 	}
 	
 	public void setSlopeModPercent(double slopeModPercent) {
-		creo4.setSlopeModPercent(slopeModPercent);
-		sendDelta(4, 9, slopeModPercent);
+		creo4.setSlopeModPercent((float) slopeModPercent);
+	}
+	
+	public float getTurnScale() {
+		return creo4.getTurnScale();
+	}
+	
+	public void setTurnScale(double turnScale) {
+		creo4.setTurnScale((float) turnScale);
+	}
+	
+	public float getWalkSpeed() {
+		return creo4.getWalkSpeed();
+	}
+	
+	public void setWalkSpeed(double walkSpeed) {
+		creo4.setWalkSpeed((float) walkSpeed);
+	}
+	
+	public float getWaterModPercent() {
+		return creo4.getWaterModPercent();
 	}
 	
 	public void setWaterModPercent(double waterModPercent) {
-		creo4.setWaterModPercent(waterModPercent);
-		sendDelta(4, 12, waterModPercent);
+		creo4.setWaterModPercent((float) waterModPercent);
+	}
+	
+	@NotNull
+	public Set<GroupMissionCriticalObject> getMissionCriticalObjects() {
+		return creo4.getMissionCriticalObjects();
+	}
+	
+	public void setMissionCriticalObjects(@NotNull Set<GroupMissionCriticalObject> missionCriticalObjects) {
+		creo4.setMissionCriticalObjects(missionCriticalObjects);
+	}
+	
+	@NotNull
+	public Set<String> getCommands() {
+		return creo4.getCommands();
+	}
+	
+	public void addCommand(@NotNull String command) {
+		creo4.addCommand(command);
+	}
+	
+	public void addCommand(@NotNull String... commands) {
+		creo4.addCommands(commands);
+	}
+	
+	public void removeCommand(@NotNull String command) {
+		creo4.removeCommand(command);
+	}
+	
+	public boolean hasCommand(@NotNull String command) {
+		return creo4.hasCommand(command);
+	}
+	
+	public int getTotalLevelXp() {
+		return creo4.getTotalLevelXp();
+	}
+	
+	public void setTotalLevelXp(int totalLevelXp) {
+		creo4.setTotalLevelXp(totalLevelXp);
 	}
 	
 	public void setHeight(double height) {
 		this.height = height;
 		sendDelta(3, 16, height);
-	}
-	
-	public void setPerformanceListenTarget(long performanceListenTarget) {
-		creo4.setPerformanceListenTarget(performanceListenTarget);
-		sendDelta(4, 6, performanceListenTarget);
 	}
 	
 	public void setGuildId(int guildId) {
@@ -543,11 +582,6 @@ public class CreatureObject extends TangibleObject {
 	public void setLevelHealthGranted(int levelHealthGranted) {
 		creo6.setLevelHealthGranted(levelHealthGranted);
 		sendDelta(6, 9, levelHealthGranted);
-	}
-	
-	public void setTotalLevelXp(int totalLevelXp) {
-		creo4.setTotalLevelXp(totalLevelXp);
-		sendDelta(4, 15, totalLevelXp);
 	}
 	
 	public void setDifficulty(CreatureDifficulty difficulty) {
@@ -591,7 +625,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public WeaponObject getEquippedWeapon() {
-		return creo6.getEquippedWeapon();
+		return getSlottedObjects().stream().filter(obj -> obj.getObjectId() == creo6.getEquippedWeapon()).map(WeaponObject.class::cast).findFirst().orElse(null);
 	}
 
 	public void setEquippedWeapon(WeaponObject weapon) {
@@ -602,7 +636,7 @@ public class CreatureObject extends TangibleObject {
 		else
 			equippedWeapon = weapon;
 		
-		creo6.setEquippedWeapon(equippedWeapon);
+		creo6.setEquippedWeapon(equippedWeapon.getObjectId());
 		sendDelta(6, 12, equippedWeapon.getObjectId());
 	}
 
@@ -739,14 +773,6 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = 0;
 		sendDelta(3, 18, statesBitmask);
 	}
-
-	public synchronized void adjustSkillmod(String skillModName, int base, int modifier) {
-		creo4.adjustSkillmod(skillModName, base, modifier, this);
-	}
-	
-	public int getSkillModValue(String skillModName) {
-		return creo4.getSkillModValue(skillModName);
-	}
 	
 	public void addBuff(Buff buff) {
 		creo6.putBuff(buff, this);
@@ -849,23 +875,7 @@ public class CreatureObject extends TangibleObject {
 			return baseAttributes.get(4);
 		}
 	}
-
-	public void addAbility(String ... abilities) {
-		creo4.addAbility(this, abilities);
-	}
 	
-	public void removeAbility(String abilityName) {
-		creo4.removeAbility(abilityName);
-	}
-	
-	public boolean hasAbility(String abilityName) {
-		return creo4.hasAbility(abilityName);
-	}
-	
-	public Set<String> getAbilityNames() {
-		return creo4.getAbilityNames();
-	}
-
 	public void setBaseHealth(int baseHealth) {
 		synchronized(baseAttributes) {
 			baseAttributes.set(0, baseHealth);
@@ -1063,7 +1073,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline4(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
-		creo4.createBaseline4(target, bb);
+		creo4.createBaseline4(bb);
 	}
 	
 	@Override
@@ -1123,14 +1133,17 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void readMongo(MongoData data) {
 		super.readMongo(data);
+		skills.clear();
+		baseAttributes.clear();
+		
+		creo4.readMongo(data.getDocument("base4"));
+		creo6.readMongo(data.getDocument("base6"));
 		posture = Posture.valueOf(data.getString("posture", posture.name()));
 		race = Race.valueOf(data.getString("race", race.name()));
 		battleFatigue = data.getInteger("battleFatigue", battleFatigue);
 		ownerId = data.getLong("ownerId", ownerId);
 		statesBitmask = data.getLong("statesBitmask", statesBitmask);
 		factionRank = (byte) data.getInteger("factionRank", factionRank);
-		skills.clear();
-		baseAttributes.clear();
 		skills.addAll(data.getArray("skills", String.class));
 		baseAttributes.addAll(data.getArray("baseAttributes", Integer.class));
 	}

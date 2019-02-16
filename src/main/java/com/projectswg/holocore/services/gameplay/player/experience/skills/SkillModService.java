@@ -141,7 +141,7 @@ public class SkillModService extends Service {
 			int adjustModifier = smi.getAdjustModifier();
 			String skillModName = smi.getSkillModName();
 
-			creature.handleLevelSkillMods(skillModName, adjustModifier);
+			creature.adjustSkillmod(skillModName, 0, adjustModifier);
 			updateSkillModHamValues(creature, skillModName,adjustModifier);
 		}
 	}
@@ -204,8 +204,8 @@ public class SkillModService extends Service {
 			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase(Locale.US));
 			
 			if (skillModValue > oldSkillModValue){
-				creature.handleLevelSkillMods(type.toString().toLowerCase(Locale.US), -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
-				creature.handleLevelSkillMods(type.toString().toLowerCase(Locale.US), skillModValue);
+				creature.adjustSkillmod(type.toString().toLowerCase(Locale.US), 0, -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
+				creature.adjustSkillmod(type.toString().toLowerCase(Locale.US), 0, skillModValue);
 
 				if (type == SkillModTypes.CONSTITUTION_MODIFIED || type == SkillModTypes.STAMINA_MODIFIED)
 					updateSkillModHamValues(creature, type.toString().toLowerCase(Locale.US),skillModValue - oldSkillModValue);

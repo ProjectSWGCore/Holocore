@@ -54,7 +54,7 @@ public class StartDanceCallback implements ICmdCallback {
 		if (args == null || args.isEmpty()) {
 			// If no args are given, then bring up the SUI window for dance selection.
 			SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "@performance:select_dance", "@performance:available_dances");
-			Set<String> abilityNames = creatureObject.getAbilityNames();
+			Set<String> abilityNames = creatureObject.getCommands();
 
 			for (String abilityName : abilityNames) {
 				if (abilityName.startsWith(ABILITY_NAME_PREFIX)) {

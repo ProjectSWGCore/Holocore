@@ -174,8 +174,8 @@ public class ExperienceExpertiseService extends Service {
 			for (int abilityIndex = 0; abilityIndex < chain.size(); abilityIndex++) {
 				String ability = chain.get(abilityIndex);
 				
-				if (isQualified(creatureObject, abilityIndex) && !creatureObject.hasAbility(ability)) {
-					creatureObject.addAbility(ability);
+				if (isQualified(creatureObject, abilityIndex) && !creatureObject.hasCommand(ability)) {
+					creatureObject.addCommand(ability);
 				}
 			}
 		}

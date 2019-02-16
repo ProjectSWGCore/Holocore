@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,50 +24,60 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.persistable;
 
-import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+package com.projectswg.holocore.resources.support.objects.swg.creature.attributes;
 
-public class SWGObjectFactory {
+public class AttributesImmutable implements Attributes {
 	
-	public static void save(SWGObject obj, NetBufferStream stream) {
-		stream.addLong(obj.getObjectId());
-		stream.addAscii(obj.getTemplate());
-		obj.save(stream);
+	private final int health;
+	private final int healthRegen;
+	private final int action;
+	private final int actionRegen;
+	private final int mind;
+	private final int mindRegen;
+	
+	AttributesImmutable(Attributes a) {
+		this.health = a.getHealth();
+		this.healthRegen = a.getHealthRegen();
+		this.action = a.getAction();
+		this.actionRegen = a.getActionRegen();
+		this.mind = a.getMind();
+		this.mindRegen = a.getMindRegen();
 	}
 	
-	public static MongoData save(SWGObject obj) {
-		return save(obj, new MongoData());
+	@Override
+	public int getHealth() {
+		return health;
 	}
 	
-	public static MongoData save(SWGObject obj, MongoData data) {
-		obj.saveMongo(data);
-		assert data.containsKey("id") : "serialized MongoData does not contain the objectId";
-		assert data.containsKey("parent") : "serialized MongoData does not contain the parent id";
-		assert data.containsKey("parentCell") : "serialized MongoData does not contain the parent cell number";
-		assert data.containsKey("template") : "serialized MongoData does not contain the template";
-		return data;
+	@Override
+	public int getHealthRegen() {
+		return healthRegen;
 	}
 	
-	public static SWGObject create(NetBufferStream stream) {
-		long objectId = stream.getLong();
-		String template = stream.getAscii();
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.read(stream);
-		return obj;
+	@Override
+	public int getAction() {
+		return action;
 	}
 	
-	public static SWGObject create(MongoData data) {
-		long objectId = data.getLong("id", 0);
-		String template = data.getString("template");
-		assert objectId != 0 : "objectId is not defined in MongoData";
-		assert template != null : "template is not defined in MongoData";
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.readMongo(data);
-		return obj;
+	@Override
+	public int getActionRegen() {
+		return actionRegen;
+	}
+	
+	@Override
+	public int getMind() {
+		return mind;
+	}
+	
+	@Override
+	public int getMindRegen() {
+		return mindRegen;
+	}
+	
+	@Override
+	public Attributes getImmutable() {
+		return this;
 	}
 	
 }

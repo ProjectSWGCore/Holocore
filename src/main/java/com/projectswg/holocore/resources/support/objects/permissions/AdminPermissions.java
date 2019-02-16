@@ -84,7 +84,7 @@ public final class AdminPermissions implements ContainerPermissions {
 	}
 	
 	private static boolean isAdmin(CreatureObject requester) {
-		return requester.hasAbility("admin");
+		return requester.hasCommand("admin");
 	}
 	
 	public static AdminPermissions getPermissions() {

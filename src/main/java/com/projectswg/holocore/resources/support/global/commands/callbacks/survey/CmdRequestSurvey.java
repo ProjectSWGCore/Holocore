@@ -21,7 +21,7 @@ public final class CmdRequestSurvey implements ICmdCallback {
 			SystemMessageIntent.broadcastPersonal(player, "Unknown resource: " + args);
 			return;
 		}
-		if (player.getCreatureObject().hasAbility("admin")) {
+		if (player.getCreatureObject().hasCommand("admin")) {
 			List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, player.getCreatureObject().getTerrain());
 			for (GalacticResourceSpawn spawn : spawns) {
 				SystemMessageIntent.broadcastPersonal(player, "Spawn: " + spawn);

@@ -229,7 +229,7 @@ public class CivilWarService extends Service {
 				
 				String ability = rankAbilities.get(rank)[abilityIndex];
 				
-				creature.removeAbility(ability);
+				creature.removeCommand(ability);
 			}
 		} else if (oldRank < newRank) {
 			// They've been promoted
@@ -240,7 +240,7 @@ public class CivilWarService extends Service {
 				
 				String ability = rankAbilities.get(rank)[abilityIndex];
 				
-				creature.addAbility(ability);
+				creature.addCommand(ability);
 			}
 		}
 	}

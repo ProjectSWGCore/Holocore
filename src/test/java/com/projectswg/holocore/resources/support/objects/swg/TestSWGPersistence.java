@@ -47,7 +47,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public class TestSWGPersistence {
 	
@@ -88,7 +87,7 @@ public class TestSWGPersistence {
 	}
 	
 	private void testSWGObject(SWGObject obj) {
-		System.out.println(obj);
+		System.out.println(obj + "  " + SWGObjectFactory.save(obj).toDocument());
 		obj.getChildObjects().stream()
 						.map(SWGObjectFactory::save)
 						.map(MongoData::toDocument)
@@ -129,11 +128,7 @@ public class TestSWGPersistence {
 				),
 				"permissions", map("type", obj.getContainerPermissions().getType().name()),
 				"attributes", map(),
-				"serverAttributes", map(),
-				"children", obj.getChildObjects().stream()
-						.map(SWGObjectFactory::save)
-						.map(MongoData::toDocument)
-						.collect(Collectors.toList())
+				"serverAttributes", map()
 		);
 		test(obj, expected);
 	}
@@ -188,7 +183,7 @@ public class TestSWGPersistence {
 						"beast", obj.isBeast(),
 						"difficulty", obj.getDifficulty().name(),
 						"hologramColor", obj.getHologramColor().name(),
-						"equippedWeapon", obj.getEquippedWeapon() == null ? null : obj.getEquippedWeapon().getObjectId(),
+						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
 						"maxAttributes", List.of(obj.getMaxHealth(), 0, obj.getMaxAction(), 0, obj.getMaxMind(), 0),
 						"buffs", Map.ofEntries(obj.getBuffEntries(b -> true).map(b -> Map.entry(CRC.getString(b.getCrc()), MongoData.store(b).toDocument())).toArray(Entry[]::new))
 				),
