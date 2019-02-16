@@ -60,6 +60,8 @@ public class SurveyService extends Service {
 	@IntentHandler
 	private void handleStartSurveyToolIntent(StartSurveyToolIntent ssti) {
 		CreatureObject creature = ssti.getCreature();
+		creature.sendSelf(new PlayMusicMessage(0, "sound/item_surveypad_lp.snd", 1, false));
+		
 		SWGObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
@@ -70,8 +72,7 @@ public class SurveyService extends Service {
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
-		creature.getOwner().sendPacket(new PlayMusicMessage(0, "sound/item_surveypad_lp.snd", 1, false));
-		creature.getOwner().sendPacket(survey);
+		creature.sendSelf(survey);
 	}
 	
 	@IntentHandler
