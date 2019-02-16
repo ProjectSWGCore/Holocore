@@ -130,10 +130,10 @@ public final class SkillTemplateService extends Service {
 		}
 		
 		creatureObject.sendObservers(new PlayClientEffectObjectMessage(effectFile, "", objectId, ""));
-		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
+		creatureObject.sendSelf(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
 		if (skillUp)
-			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+			creatureObject.sendSelf(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
