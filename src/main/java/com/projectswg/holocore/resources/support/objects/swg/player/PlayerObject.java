@@ -60,6 +60,7 @@ public class PlayerObject extends IntangibleObject {
 	private long	startPlayTime		= 0;
 	private long	lastUpdatePlayTime	= 0;
 	private String	biography			= "";
+	private String	account				= "";
 	
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
@@ -72,6 +73,14 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+	
+	public String getAccount() {
+		return account;
+	}
+	
+	public void setAccount(String account) {
+		this.account = account;
 	}
 	
 	public List<String> getJoinedChannels() {
@@ -530,6 +539,7 @@ public class PlayerObject extends IntangibleObject {
 	public void setProfWheelPosition(String profWheelPosition) {
 		play8.setProfWheelPosition(profWheelPosition);
 	}
+	
 	/*
 	 * =====-----  -----=====
 	 * ===== Baseline 9 =====
@@ -834,6 +844,7 @@ public class PlayerObject extends IntangibleObject {
 		play8.saveMongo(data.getDocument("base8"));
 		play9.saveMongo(data.getDocument("base9"));
 		data.putString("biography", biography);
+		data.putString("account", account);
 	}
 	
 	@Override
@@ -844,6 +855,7 @@ public class PlayerObject extends IntangibleObject {
 		play8.readMongo(data.getDocument("base8"));
 		play9.readMongo(data.getDocument("base9"));
 		biography = data.getString("biography", biography);
+		account = data.getString("account", "");
 	}
 	
 	@Override

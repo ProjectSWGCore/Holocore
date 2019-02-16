@@ -1,5 +1,6 @@
 package com.projectswg.holocore.services.support.objects;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
@@ -7,16 +8,13 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
-import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildoutLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.database.PswgObjectDatabase;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
-import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -28,78 +26,92 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
 public class ObjectStorageService extends Service {
 	
-	private final ObjectDatabase<SWGObject> database;
-	private final PswgUserDatabase userDatabase;
+	private final PswgObjectDatabase objectDatabase;
 	private final ScheduledThreadPool persistenceThread;
 	private final Set<SWGObject> persistedObjects;
 	private final Map<Long, SWGObject> objectMap;
 	private final Map<Long, SWGObject> buildouts;
 	private final Map<String, BuildingObject> buildingLookup;
-	private final AtomicBoolean started;
 	
 	public ObjectStorageService() {
-		this.database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
-		this.userDatabase = new PswgUserDatabase();
+		this.objectDatabase = new PswgObjectDatabase();
 		this.persistenceThread = new ScheduledThreadPool(1, 3, "object-storage-service");
 		this.persistedObjects = new CopyOnWriteArraySet<>();
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
 		this.buildouts = new HashMap<>(128*1024, 1f);
 		this.buildingLookup = new HashMap<>();
-		this.started = new AtomicBoolean(false);
 	}
 	
 	@Override
 	public boolean initialize() {
+		this.objectDatabase.initialize();
 		ObjectLookup.setObjectAuthority(this::getObjectById);
 		BuildingLookup.setBuildingAuthority(buildingLookup::get);
 		
-		return initializePlayers() && initializeClientObjects();
+		return initializeSavedObjects() && initializeClientObjects();
 	}
 	
 	@Override
 	public boolean start() {
 		buildouts.values().forEach(ObjectCreatedIntent::broadcast);
-		synchronized (database) {
-			database.traverse(this::loadObject);
-		}
 		
 		persistenceThread.start();
 		persistenceThread.executeWithFixedDelay(TimeUnit.MINUTES.toMillis(5), TimeUnit.MINUTES.toMillis(5), this::saveObjects);
-		started.set(true);
 		return true;
 	}
 	
 	@Override
 	public boolean stop() {
 		persistenceThread.stop();
-		started.set(false);
 		return persistenceThread.awaitTermination(1000);
 	}
 	
 	@Override
 	public boolean terminate() {
-		synchronized (database) {
-			database.close();
-		}
 		ObjectLookup.setObjectAuthority(null);
 		saveObjects();
+		this.objectDatabase.terminate();
 		return true;
 	}
 	
-	private boolean initializePlayers() {
-		long startTime = StandardLog.onStartLoad("players");
-		synchronized (database) {
-			if (!database.load() && database.fileExists())
-				return false;
+	private boolean initializeSavedObjects() {
+		long startTime = StandardLog.onStartLoad("server objects");
+		List<MongoData> objectDocuments = objectDatabase.getObjects();
+		Map<Long, SWGObject> objects = new HashMap<>();
+		for (MongoData doc : objectDocuments) {
+			SWGObject obj = SWGObjectFactory.create(doc);
+			objects.put(obj.getObjectId(), obj);
 		}
-		database.traverse(persistedObjects::add);
-		StandardLog.onEndLoad(database.size(), "players", startTime);
+		for (MongoData doc : objectDocuments) {
+			long id = doc.getLong("id", 0);
+			long parentId = doc.getLong("parent", 0);
+			int cellNumber = doc.getInteger("parentCell", 0);
+			assert id != 0;
+			
+			SWGObject obj = objects.get(id);
+			if (parentId != 0) {
+				SWGObject parent = objects.get(parentId);
+				if (parent instanceof BuildingObject) {
+					if (cellNumber != 0)
+						obj.moveToContainer(((BuildingObject) parent).getCellByNumber(cellNumber));
+				} else {
+					obj.moveToContainer(parent);
+				}
+			}
+			objects.put(obj.getObjectId(), obj);
+			if (obj.isPersisted())
+				persistedObjects.add(obj);
+		}
+		
+		objects.values().forEach(ObjectCreatedIntent::broadcast);
+		this.objectMap.putAll(objects);
+		// TODO: Clear unreferenced objects from database
+		StandardLog.onEndLoad(objects.size(), "players", startTime);
 		return true;
 	}
 	
@@ -113,52 +125,28 @@ public class ObjectStorageService extends Service {
 		return true;
 	}
 	
-	private void loadObject(SWGObject obj) {
-		updateBuildoutParent(obj);
-		addChildrenObjects(obj);
-	}
-	
-	private void updateBuildoutParent(SWGObject obj) {
-		if (obj.getParent() != null) {
-			long id = obj.getParent().getObjectId();
-			SWGObject parent = getObjectById(id);
-			if (obj.getParent() instanceof CellObject && obj.getParent().getParent() != null) {
-				BuildingObject building = (BuildingObject) obj.getParent().getParent();
-				parent = ((BuildingObject) getObjectById(building.getObjectId())).getCellByNumber(((CellObject) obj.getParent()).getNumber());
-			}
-			obj.moveToContainer(parent);
-			if (parent == null)
-				Log.e("Parent for %s is null! ParentID: %d", obj, id);
-		}
-	}
-	
-	private void addChildrenObjects(SWGObject obj) {
-		ObjectCreatedIntent.broadcast(obj);
-		putObject(obj);
-		for (SWGObject child : obj.getSlots().values()) {
-			if (child != null)
-				addChildrenObjects(child);
-		}
-		for (SWGObject child : obj.getContainedObjects()) {
-			addChildrenObjects(child);
-		}
-	}
-	
 	private void saveObjects() {
-		for (SWGObject obj : persistedObjects) {
-			
-		}
+		persistedObjects.forEach(this::saveChildren);
+	}
+	
+	private void saveChildren(@Nullable SWGObject obj) {
+		if (obj == null)
+			return;
+		objectDatabase.addObject(obj);
+		
+		obj.getContainedObjects().forEach(this::saveChildren);
+		obj.getSlottedObjects().forEach(this::saveChildren);
 	}
 	
 	@IntentHandler
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		SWGObject obj = intent.getObject();
-		putObject(obj);
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer()) {
-			synchronized (database) {
-				if (database.add(obj))
-					database.save();
-			}
+		SWGObject replaced = objectMap.put(obj.getObjectId(), obj);
+		if (replaced != null && replaced != obj)
+			Log.e("Replaced object in object map! Old: %s  New: %s", replaced, obj);
+		if (obj.isPersisted()) {
+			if (persistedObjects.add(obj))
+				objectDatabase.addObject(obj);
 		}
 	}
 	
@@ -185,12 +173,6 @@ public class ObjectStorageService extends Service {
 		return objectMap.get(objectId);
 	}
 	
-	private void putObject(SWGObject object) {
-		SWGObject replaced = objectMap.put(object.getObjectId(), object);
-		if (replaced != null && replaced != object)
-			Log.e("Replaced object in object map! Old: %s  New: %s", replaced, object);
-	}
-
 	private void destroyObject(SWGObject object) {
 		for (SWGObject slottedObj : object.getSlots().values()) {
 			if (slottedObj != null)
@@ -201,10 +183,9 @@ public class ObjectStorageService extends Service {
 			if (contained != null)
 				destroyObject(contained);
 		}
-		synchronized (database) {
-			if (database.remove(object))
-				database.save();
-		}
+		if (object.isPersisted())
+			persistedObjects.remove(object);
+		objectDatabase.removeObject(object.getObjectId());
 		objectMap.remove(object.getObjectId());
 	}
 	

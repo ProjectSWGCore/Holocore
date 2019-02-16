@@ -54,6 +54,7 @@ public class Player implements Comparable<Player> {
 	private final Consumer<SWGPacket> packetSender;
 	private final InetSocketAddress address;
 	
+	private String			accountId			= "";
 	private String			username			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
 	private PlayerServer	server				= PlayerServer.NONE;
@@ -74,6 +75,10 @@ public class Player implements Comparable<Player> {
 	
 	public void setPlayerServer(PlayerServer server) {
 		this.server = server;
+	}
+	
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
 	}
 	
 	public void setUsername(String username) {
@@ -112,6 +117,10 @@ public class Player implements Comparable<Player> {
 	
 	public PlayerServer getPlayerServer() {
 		return server;
+	}
+	
+	public String getAccountId() {
+		return accountId;
 	}
 	
 	public String getUsername() {

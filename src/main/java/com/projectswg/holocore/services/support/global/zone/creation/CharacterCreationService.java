@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.zone.creation;
 
-import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.login.creation.*;
@@ -36,13 +35,11 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.CharacterMetadata;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
@@ -54,7 +51,6 @@ import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
-import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -192,12 +188,6 @@ public class CharacterCreationService extends Service {
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "too many attempts - hacked");
 			return null;
 		}
-		// Test for successful database insertion
-		if (!createCharacterInDb(creature, player)) {
-			DestroyObjectIntent.broadcast(creature);
-			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "failed to insert into DB");
-			return null;
-		}
 		return creature;
 	}
 	
@@ -221,19 +211,6 @@ public class CharacterCreationService extends Service {
 		}
 		StandardLog.onPlayerError(this, player, "failed to create character '%s' with server error [%s] from %s", create.getName(), actualReason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
-	}
-	
-	private boolean createCharacterInDb(CreatureObject creature, Player player) {
-		String name = creature.getObjectName();
-		String firstName = name;
-		{
-			int spaceIndex = firstName.indexOf(' ');
-			if (spaceIndex != -1)
-				firstName = firstName.substring(0, spaceIndex);
-			firstName = firstName.toLowerCase(Locale.US);
-		}
-		Document characterData = SWGObjectFactory.save(creature, new MongoData()).toDocument();
-		return userDatabase.insertCharacter(player.getUsername(), new CharacterMetadata(creature.getObjectId(), firstName, name, creature.getRace().getFilename(), characterData));
 	}
 	
 	private int getCharacterCount(String username) {
@@ -270,7 +247,7 @@ public class CharacterCreationService extends Service {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
-		CharacterCreation creation = new CharacterCreation(create);
+		CharacterCreation creation = new CharacterCreation(player, create);
 		return creation.createCharacter(player.getAccessLevel(), info);
 	}
 	

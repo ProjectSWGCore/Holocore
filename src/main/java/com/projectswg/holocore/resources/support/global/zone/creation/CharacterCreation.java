@@ -37,6 +37,7 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -56,9 +57,11 @@ import java.util.List;
 
 public class CharacterCreation {
 	
+	private final Player player;
 	private final ClientCreateCharacter create;
 	
-	public CharacterCreation(ClientCreateCharacter create) {
+	public CharacterCreation(Player player, ClientCreateCharacter create) {
+		this.player = player;
 		this.create = create;
 	}
 	
@@ -72,7 +75,9 @@ public class CharacterCreation {
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(creatureObj, create.getRace(), create.getClothes());
 		playerObj.setAdminTag(accessLevel);
-		new ObjectCreatedIntent(creatureObj).broadcast();
+		
+		ObjectCreatedIntent.broadcast(playerObj);
+		ObjectCreatedIntent.broadcast(creatureObj);
 		return creatureObj;
 	}
 	
@@ -82,6 +87,7 @@ public class CharacterCreation {
 			return createCreatureBuilding(template, info);
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof CreatureObject;
+		obj.setPersisted(true);
 		obj.setLocation(generateRandomLocation(info));
 		return (CreatureObject) obj;
 	}
@@ -105,7 +111,6 @@ public class CharacterCreation {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate("object/player/shared_player.iff");
 		assert obj instanceof PlayerObject;
 		obj.moveToContainer(creatureObj);
-		new ObjectCreatedIntent(obj).broadcast();
 		return (PlayerObject) obj;
 	}
 	
@@ -166,6 +171,7 @@ public class CharacterCreation {
 	private void setPlayerObjectValues(PlayerObject playerObj) {
 		playerObj.setProfession(Profession.getProfessionFromClient(create.getProfession()));
 		playerObj.setBornDate(Instant.now());
+		playerObj.setAccount(player.getUsername());
 	}
 	
 	private void createStarterClothing(CreatureObject creature, String race, String clothing) {

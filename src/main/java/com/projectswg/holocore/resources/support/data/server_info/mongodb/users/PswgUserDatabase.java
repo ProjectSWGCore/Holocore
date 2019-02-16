@@ -74,16 +74,22 @@ public class PswgUserDatabase extends PswgDatabase {
 	
 	public static class UserMetadata {
 		
+		private final String accountId;
 		private final String username;
 		private final String password;
 		private final String accessLevel;
 		private final boolean banned;
 		
 		public UserMetadata(Document doc) {
+			this.accountId = doc.getObjectId("_id").toHexString();
 			this.username = doc.getString("username");
 			this.password = doc.getString("password");
 			this.accessLevel = doc.getString("accessLevel");
 			this.banned = doc.getBoolean("banned");
+		}
+		
+		public String getAccountId() {
+			return accountId;
 		}
 		
 		public String getUsername() {
@@ -101,6 +107,7 @@ public class PswgUserDatabase extends PswgDatabase {
 		public boolean isBanned() {
 			return banned;
 		}
+		
 	}
 	
 	public static class CharacterMetadata {

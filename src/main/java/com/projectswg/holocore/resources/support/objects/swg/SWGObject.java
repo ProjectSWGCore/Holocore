@@ -44,8 +44,6 @@ import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
-import com.projectswg.holocore.resources.support.data.collections.SWGList;
-import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.data.location.InstanceType;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
@@ -112,6 +110,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private int     	slotArrangement	= -1;
 	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
+	private boolean		persisted		= false;
 	
 	public SWGObject() {
 		this(0, null);
@@ -928,6 +927,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return generated;
 	}
 	
+	public boolean isPersisted() {
+		return persisted;
+	}
+	
+	public void setPersisted(boolean persisted) {
+		this.persisted = persisted;
+	}
+	
 	/**
 	 * Gets the arrangementId for the {@link SWGObject} for the current instance
 	 * @param child
@@ -1207,7 +1214,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					data.putInteger("parentCell", ((CellObject) parent).getNumber());
 				} else {
 					data.putLong("parent", parent.getObjectId());
+					data.putInteger("parentCell", 0);
 				}
+			} else {
+				data.putLong("parent", 0);
+				data.putInteger("parentCell", 0);
 			}
 		}
 		data.putLong("id", objectId);
@@ -1216,11 +1227,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
 		data.putMap("attributes", attributes);
 		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, ServerAttribute::store);
-		
-		Set<SWGObject> contained = new HashSet<>(containedObjects);
-		contained.addAll(slots.values());
-		contained.remove(null);
-		data.putArray("children", contained);
+		data.putBoolean("persisted", persisted);
 	}
 	
 	@Override
@@ -1256,7 +1263,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));
 		attributes.putAll(data.getMap("attributes", String.class));
 		serverAttributes.putAll(data.getMap("serverAttributes", String.class, ServerAttribute::getFromKey, ServerAttribute::retrieve));
-		data.getArray("children", SWGObjectFactory::create).forEach(this::addObject);
+		persisted = data.getBoolean("persisted", false);
 	}
 	
 	@Override
