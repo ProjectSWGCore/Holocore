@@ -122,6 +122,10 @@ public class SurveySession {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "No survey tool resolution has been set"));
 			return;
 		}
+		if (surveyTool.getParent() != creature.getInventory()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The survey tool is not in your inventory"));
+			return;
+		}
 		
 		sendSurveyMessage(resolution);
 		surveyRequest.set(null);
