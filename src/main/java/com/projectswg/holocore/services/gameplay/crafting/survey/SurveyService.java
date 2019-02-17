@@ -27,6 +27,8 @@
 package com.projectswg.holocore.services.gameplay.crafting.survey;
 
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
 import com.projectswg.holocore.intents.gameplay.crafting.survey.SampleResourceIntent;
@@ -38,21 +40,26 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.sto
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.gameplay.crafting.survey.InProgressSampleManager;
 import com.projectswg.holocore.resources.gameplay.crafting.survey.InProgressSurveyManager;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * In charge of responding to survey requests
  */
 public class SurveyService extends Service {
 	
+	private final Map<CreatureObject, TangibleObject> activeSurveyTool;
 	private final InProgressSurveyManager inProgressSurveyManager;
 	private final InProgressSampleManager inProgressSampleManager;
 	
 	public SurveyService() {
+		this.activeSurveyTool = new HashMap<>();
 		this.inProgressSurveyManager = new InProgressSurveyManager();
 		this.inProgressSampleManager = new InProgressSampleManager();
 	}
@@ -62,7 +69,7 @@ public class SurveyService extends Service {
 		CreatureObject creature = ssti.getCreature();
 		creature.sendSelf(new PlayMusicMessage(0, "sound/item_surveypad_lp.snd", 1, false));
 		
-		SWGObject surveyTool = ssti.getSurveyTool();
+		TangibleObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
 		RawResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
@@ -72,17 +79,31 @@ public class SurveyService extends Service {
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
+		activeSurveyTool.put(creature, surveyTool);
 		creature.sendSelf(survey);
 	}
 	
 	@IntentHandler
 	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
-		inProgressSurveyManager.startSession(ssi.getCreature(), ssi.getResource());
+		CreatureObject creature = ssi.getCreature();
+		TangibleObject surveyTool = activeSurveyTool.get(creature);
+		if (surveyTool == null) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "Unable to survey, no survey tool has been opened yet"));
+			return;
+		}
+		inProgressSurveyManager.startSession(creature, surveyTool, ssi.getResource());
 	}
 	
 	@IntentHandler
 	private void handleStartSamplingIntent(SampleResourceIntent sri) {
-		inProgressSampleManager.startSession(sri.getCreature(), sri.getResource());
+		CreatureObject creature = sri.getCreature();
+		TangibleObject surveyTool = activeSurveyTool.get(creature);
+		if (surveyTool == null) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "Unable to sample, no survey tool has been opened yet"));
+			return;
+		}
+		
+		inProgressSampleManager.startSession(creature, sri.getResource());
 	}
 	
 	private RawResourceType getTypeFromSurveyTool(String surveyTool) {

@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.gameplay.crafting.survey;
 
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,13 +41,13 @@ public class InProgressSurveyManager {
 		this.surveySessions = new HashMap<>();
 	}
 	
-	public void startSession(CreatureObject creature, GalacticResource resource) {
+	public void startSession(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource) {
 		SurveySession session;
 		synchronized (surveySessions) {
-			session = surveySessions.computeIfAbsent(creature, c -> new SurveySession(c, resource));
+			session = surveySessions.computeIfAbsent(creature, c -> new SurveySession(c, surveyTool, resource));
 			if (!session.getResource().equals(resource)) {
 				session.stopSession();
-				surveySessions.put(creature, session = new SurveySession(creature, resource));
+				surveySessions.put(creature, session = new SurveySession(creature, surveyTool, resource));
 			}
 		}
 		session.startSession();

@@ -26,9 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.survey;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import com.projectswg.common.network.packets.swg.zone.crafting.surveying.SurveyMessage;
 import com.projectswg.common.network.packets.swg.zone.crafting.surveying.SurveyMessage.ResourceConcentration;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
@@ -36,7 +40,10 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -49,11 +56,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class SurveySession {
 	
 	private final CreatureObject creature;
+	private final TangibleObject surveyTool;
 	private final GalacticResource resource;
 	private final AtomicReference<ScheduledFuture<?>> surveyRequest;
 	
-	public SurveySession(CreatureObject creature, GalacticResource resource) {
+	public SurveySession(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource) {
 		this.creature = creature;
+		this.surveyTool = surveyTool;
 		this.resource = resource;
 		this.surveyRequest = new AtomicReference<>(null);
 	}
@@ -67,7 +76,8 @@ public class SurveySession {
 		if (prev != null && !prev.isDone())
 			return;
 		
-		surveyRequest.set(ScheduledUtilities.run(this::performSurvey, 5, SECONDS));
+		surveyRequest.set(ScheduledUtilities.run(this::performSurvey, 4, SECONDS));
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
@@ -79,31 +89,78 @@ public class SurveySession {
 	}
 	
 	private void performSurvey() {
-		sendSurveyMessage(creature, resource, 320);
+		// Verify that we are able to survey
+		switch (creature.getPosture()) {
+			case SITTING:
+				sendErrorMessage(creature, "survey_sitting");
+				return;
+			case UPRIGHT:
+				break;
+			default:
+				sendErrorMessage(creature, "survey_standing");
+				break;
+		}
+		if (creature.getInstanceLocation().getInstanceNumber() != 0) {
+			sendErrorMessage(creature, "no_survey_instance");
+			return;
+		}
+		if (creature.getParent() != null) {
+			if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+				sendErrorMessage(creature, "survey_on_mount");
+			else
+				sendErrorMessage(creature, "survey_in_structure");
+			return;
+		}
+		SurveyToolResolution resolution = getCurrentResolution();
+		if (resolution == null) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "No survey tool resolution has been set"));
+			return;
+		}
+		
+		sendSurveyMessage(resolution);
 		surveyRequest.set(null);
 	}
 	
-	private void sendSurveyMessage(CreatureObject creature, GalacticResource resource, int range) {
+	private void sendSurveyMessage(SurveyToolResolution resolution) {
+		final double baseLocationX = creature.getX();
+		final double baseLocationZ = creature.getZ();
+		final double rangeHalf = resolution.getRange()/2.0;
+		final double rangeInc = resolution.getRange()/(resolution.getResolution()-1.0);
+		
 		SurveyMessage surveyMessage = new SurveyMessage();
-		double baseLocationX = creature.getX();
-		double baseLocationZ = creature.getZ();
 		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain());
-		double interval = range / 4;
-		double halfWidth = interval * 2;
-		for (double x = baseLocationX - halfWidth; x <= baseLocationX + halfWidth; x += interval) {
-			for (double z = baseLocationZ - halfWidth; z <= baseLocationZ + halfWidth; z += interval) {
+		for (double x = baseLocationX - rangeHalf, xIndex = 0; xIndex < resolution.getResolution(); x += rangeInc, xIndex++) {
+			for (double z = baseLocationZ - rangeHalf, zIndex = 0; zIndex < resolution.getResolution(); z += rangeInc, zIndex++) {
 				surveyMessage.addConcentration(new ResourceConcentration(x, z, getConcentration(spawns, creature.getTerrain(), x, z)));
 			}
 		}
 		creature.sendSelf(surveyMessage);
 	}
 	
-	private double getConcentration(List<GalacticResourceSpawn> spawns, Terrain terrain, double x, double z) {
-		double concentration = 0;
-		for (GalacticResourceSpawn spawn : spawns) {
-			concentration += spawn.getConcentration(terrain, x, z) / 100.0;
+	private SurveyToolResolution getCurrentResolution() {
+		Integer counterSetting = (Integer) surveyTool.getServerAttribute(ServerAttribute.SURVEY_TOOL_RANGE);
+		if (counterSetting == null)
+			return null; // Must be set before using - invariant enforced within ObjectSurveyToolRadial.java
+		int counter = counterSetting;
+		
+		List<SurveyToolResolution> resolutions = SurveyToolResolution.getOptions(creature);
+		for (SurveyToolResolution resolution : resolutions) {
+			if (resolution.getCounter() == counter)
+				return resolution;
 		}
-		return concentration;
+		
+		// Attempted to set a resolution that wasn't valid
+		return resolutions.isEmpty() ? null : resolutions.get(resolutions.size()-1);
+	}
+	
+	private double getConcentration(List<GalacticResourceSpawn> spawns, Terrain terrain, double x, double z) {
+		int concentration = 0;
+		for (GalacticResourceSpawn spawn : spawns) {
+			concentration += spawn.getConcentration(terrain, x, z);
+		}
+		if (concentration < 10) // Minimum density
+			return 0;
+		return concentration / 100.0;
 	}
 	
 	private String getMusicFile() {
@@ -144,6 +201,10 @@ public class SurveySession {
 			return "clienteffect/survey_tool_moisture.cef";
 		Log.w("Unknown raw resource survey effect file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
+	}
+	
+	private static void sendErrorMessage(CreatureObject creature, String key) {
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("error_message", key))));
 	}
 	
 }
