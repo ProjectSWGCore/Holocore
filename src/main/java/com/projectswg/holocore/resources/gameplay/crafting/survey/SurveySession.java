@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.gameplay.crafting.survey;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -87,7 +88,7 @@ public class SurveySession {
 			return;
 		SurveyToolResolution resolution = getCurrentResolution();
 		Location location = creature.getWorldLocation();
-		if (!isAllowedToSurvey(resolution))
+		if (!isAllowedToSurvey(location, resolution, resource))
 			return;
 		assert resolution != null : "verified in isAllowedToSurvey";
 		
@@ -159,7 +160,8 @@ public class SurveySession {
 		return concentration / 100.0;
 	}
 	
-	private boolean isAllowedToSurvey(SurveyToolResolution resolution) {
+	private boolean isAllowedToSurvey(Location location, SurveyToolResolution resolution, GalacticResource resource) {
+		// Player must be standing
 		switch (creature.getPosture()) {
 			case SITTING:
 				sendErrorMessage(creature, "error_message", "survey_sitting");
@@ -170,10 +172,22 @@ public class SurveySession {
 				sendErrorMessage(creature, "error_message", "survey_standing");
 				return false;
 		}
+		// Player cannot be in an instance
 		if (creature.getInstanceLocation().getInstanceNumber() != 0) {
 			sendErrorMessage(creature, "error_message", "no_survey_instance");
 			return false;
 		}
+		// Player cannot be in combat or dead
+		if (creature.isInCombat() || creature.getPosture() == Posture.INCAPACITATED || creature.getPosture() == Posture.DEAD) {
+			sendErrorMessage(creature, "error_message", "survey_cant");
+			return false;
+		}
+		// No survey tool resolution - could be because the player is not a trader or because the survey tool somehow didn't have it's range set
+		if (resolution == null) {
+			sendErrorMessage(creature, "error_message", "survey_cant");
+			return false;
+		}
+		// Player cannot be within a building
 		if (creature.getParent() != null) {
 			if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
 				sendErrorMessage(creature, "error_message", "survey_on_mount");
@@ -181,12 +195,14 @@ public class SurveySession {
 				sendErrorMessage(creature, "error_message", "survey_in_structure");
 			return false;
 		}
-		if (resolution == null) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "No survey tool resolution has been set"));
-			return false;
-		}
+		// Survey tool not within inventory
 		if (surveyTool.getParent() != creature.getInventory()) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The survey tool is not in your inventory"));
+			return false;
+		}
+		// The specified resource no longer exists (or the player changed planets)
+		if (!GalacticResourceContainer.getContainer().getSpawnedResources(location.getTerrain()).contains(resource)) {
+			sendErrorMessage(creature, "error_message", "survey_error");
 			return false;
 		}
 		return true;
