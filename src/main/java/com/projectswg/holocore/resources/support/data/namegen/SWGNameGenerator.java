@@ -56,9 +56,7 @@ public class SWGNameGenerator {
 	public String generateName(Race race) {
 		if (!nameFilter.isLoaded())
 			nameFilter.load();
-		String species = race.getSpecies();
-		species = species.substring(0, species.indexOf('_'));
-		return generateName("race_" + species);
+		return generateName("race_" + race.getSpecies());
 	}
 	
 	@NotNull
