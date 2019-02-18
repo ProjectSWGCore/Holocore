@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,10 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.global.zone.name_filter;
+package com.projectswg.holocore.resources.support.data.namegen;
 
 import me.joshlarson.jlcommon.log.Log;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,9 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 public class NameFilter {
 	
+	private static final Pattern WHITESPACE = Pattern.compile(" +");
 	private static final char [] ALLOWED = new char[] {' ', '-', '\''};
 	private static final int [] MAX_ALLOWED = new int[] {1 , 1, 1};
 	private final List <String> profaneWords;
@@ -49,17 +51,25 @@ public class NameFilter {
 	private final InputStream profaneStream;
 	private final InputStream reservedStream;
 	private final InputStream fictionStream;
+	private final AtomicBoolean loaded;
 	
-	public NameFilter(@NotNull InputStream profaneStream, @NotNull InputStream reservedStream, @NotNull InputStream fictionStream) {
-		this.profaneStream = Objects.requireNonNull(profaneStream, "profaneStream");
-		this.reservedStream = Objects.requireNonNull(reservedStream, "reservedStream");
-		this.fictionStream = Objects.requireNonNull(fictionStream, "fictionStream");
+	public NameFilter() {
+		this.profaneStream = Objects.requireNonNull(getClass().getResourceAsStream("/namegen/filter/bad_word_list.txt"), "profaneStream");
+		this.reservedStream = Objects.requireNonNull(getClass().getResourceAsStream("/namegen/filter/reserved_words.txt"), "reservedStream");
+		this.fictionStream = Objects.requireNonNull(getClass().getResourceAsStream("/namegen/filter/fiction_reserved.txt"), "fictionStream");
 		this.profaneWords = new ArrayList<>();
 		this.reservedWords = new ArrayList<>();
 		this.fictionNames = new ArrayList<>();
+		this.loaded = new AtomicBoolean(false);
+	}
+	
+	public boolean isLoaded() {
+		return loaded.get();
 	}
 	
 	public boolean load() {
+		if (loaded.getAndSet(true))
+			return true;
 		boolean success = load(profaneWords, profaneStream);
 		success = load(reservedWords, reservedStream) && success;
 		success = load(fictionNames, fictionStream) && success;
@@ -96,15 +106,12 @@ public class NameFilter {
 			return false;
 		if (isReserved(modified))
 			return false;
-		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
-			return false;
-		return true;
+		
+		return modified.equals(name); // If we needed to remove double spaces, trim the ends, etc
 	}
 	
 	public String cleanName(String name) {
-		while (name.contains("  "))
-			name = name.replaceAll("  ", " ");
-		return name.trim();
+		return WHITESPACE.matcher(name).replaceAll(" ").trim();
 	}
 	
 	public boolean passesFilter(String name) {

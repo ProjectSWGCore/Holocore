@@ -48,9 +48,9 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreationRestriction;
-import com.projectswg.holocore.resources.support.global.zone.name_filter.NameFilter;
+import com.projectswg.holocore.resources.support.data.namegen.NameFilter;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.utilities.namegen.SWGNameGenerator;
+import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -65,16 +65,16 @@ import java.util.Map.Entry;
 public class CharacterCreationService extends Service {
 	
 	private final Map <String, Player> lockedNames;
-	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
+	private final NameFilter nameFilter;
 	private final CharacterCreationRestriction creationRestriction;
 	private final PswgUserDatabase userDatabase;
 	
 	public CharacterCreationService() {
 		this.lockedNames = new HashMap<>();
 		
-		this.nameFilter = new NameFilter(getClass().getResourceAsStream("/namegen/bad_word_list.txt"), getClass().getResourceAsStream("/namegen/reserved_words.txt"), getClass().getResourceAsStream("/namegen/fiction_reserved.txt"));
-		this.nameGenerator = new SWGNameGenerator(nameFilter);
+		this.nameGenerator = new SWGNameGenerator();
+		this.nameFilter = new NameFilter();
 		this.creationRestriction = new CharacterCreationRestriction(2);
 		this.userDatabase = new PswgUserDatabase();
 	}
@@ -82,9 +82,6 @@ public class CharacterCreationService extends Service {
 	@Override
 	public boolean initialize() {
 		userDatabase.initialize();
-		nameGenerator.loadAllRules();
-		if (!nameFilter.load())
-			Log.e("Failed to load name filter!");
 		return super.initialize();
 	}
 	
@@ -122,10 +119,9 @@ public class CharacterCreationService extends Service {
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
 		RandomNameResponse response = new RandomNameResponse(request.getRace(), "");
-		String race = Race.getRaceByFile(request.getRace()).getSpecies();
 		String randomName = null;
 		while (randomName == null) {
-			randomName = nameGenerator.generateRandomName(race);
+			randomName = nameGenerator.generateName(Race.getRaceByFile(request.getRace()));
 			if (getNameValidity(randomName, player.getAccessLevel() != AccessLevel.PLAYER) != ErrorMessage.NAME_APPROVED) {
 				randomName = null;
 			}

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities.namegen;
+package com.projectswg.holocore.resources.support.data.namegen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ public class RaceNameRule {
 	private List<String> endConsonants = new ArrayList<>();
 	private List<String> instructions = new ArrayList<>();
 	private int surnameChance = 0;
+	private int maxLength = 15;
 	
 	public RaceNameRule() { }
 	
@@ -58,8 +59,16 @@ public class RaceNameRule {
 		this.surnameChance = chance;
 	}
 	
+	public void setMaxLength(int maxLength) {
+		this.maxLength = maxLength;
+	}
+	
 	public int getSurnameChance() {
 		return surnameChance;
+	}
+	
+	public int getMaxLength() {
+		return maxLength;
 	}
 	
 	public List<String> getVowels() {
