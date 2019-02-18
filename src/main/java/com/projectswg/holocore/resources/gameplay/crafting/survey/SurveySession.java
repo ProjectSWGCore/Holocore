@@ -63,29 +63,16 @@ public class SurveySession {
 	
 	private final CreatureObject creature;
 	private final TangibleObject surveyTool;
-	private final GalacticResource resource;
 	private final AtomicReference<ScheduledFuture<?>> surveyRequest;
 	
-	public SurveySession(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource) {
+	public SurveySession(CreatureObject creature, TangibleObject surveyTool) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
-		this.resource = resource;
 		this.surveyRequest = new AtomicReference<>(null);
 	}
 	
-	public GalacticResource getResource() {
-		return resource;
-	}
-	
 	public synchronized void startSession() {
-		ScheduledFuture<?> prev = surveyRequest.get();
-		if (prev != null && !prev.isDone())
-			return;
 		
-		surveyRequest.set(ScheduledUtilities.run(this::performSurvey, 4, SECONDS));
-		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
-		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
-		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
 	
 	public synchronized void stopSession() {
@@ -94,58 +81,37 @@ public class SurveySession {
 			surveyRequest.cancel(false);
 	}
 	
-	private void performSurvey() {
-		// Verify that we are able to survey
-		switch (creature.getPosture()) {
-			case SITTING:
-				sendErrorMessage(creature, "error_message", "survey_sitting");
-				return;
-			case UPRIGHT:
-				break;
-			default:
-				sendErrorMessage(creature, "error_message", "survey_standing");
-				break;
-		}
-		if (creature.getInstanceLocation().getInstanceNumber() != 0) {
-			sendErrorMessage(creature, "error_message", "no_survey_instance");
+	public synchronized void startSurvey(GalacticResource resource) {
+		ScheduledFuture<?> prev = surveyRequest.get();
+		if (prev != null && !prev.isDone())
 			return;
-		}
-		if (creature.getParent() != null) {
-			if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
-				sendErrorMessage(creature, "error_message", "survey_on_mount");
-			else
-				sendErrorMessage(creature, "error_message", "survey_in_structure");
-			return;
-		}
 		SurveyToolResolution resolution = getCurrentResolution();
-		if (resolution == null) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "No survey tool resolution has been set"));
+		Location location = creature.getWorldLocation();
+		if (!isAllowedToSurvey(resolution))
 			return;
-		}
-		if (surveyTool.getParent() != creature.getInventory()) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The survey tool is not in your inventory"));
-			return;
-		}
+		assert resolution != null : "verified in isAllowedToSurvey";
 		
-		sendSurveyMessage(resolution);
-		surveyRequest.set(null);
+		surveyRequest.set(ScheduledUtilities.run(() -> sendSurveyMessage(resolution, location, resource), 4, SECONDS));
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
+		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
+		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
 	}
 	
-	private void sendSurveyMessage(SurveyToolResolution resolution) {
-		final double baseLocationX = creature.getX();
-		final double baseLocationZ = creature.getZ();
+	private void sendSurveyMessage(SurveyToolResolution resolution, Location location, GalacticResource resource) {
+		final double baseLocationX = location.getX();
+		final double baseLocationZ = location.getZ();
 		final double rangeHalf = resolution.getRange()/2.0;
 		final double rangeInc = resolution.getRange()/(resolution.getResolution()-1.0);
 		
 		SurveyMessage surveyMessage = new SurveyMessage();
-		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain());
+		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, location.getTerrain());
 		double highestX = baseLocationX;
 		double highestZ = baseLocationX;
 		double highestConcentration = 0;
 		
 		for (double x = baseLocationX - rangeHalf, xIndex = 0; xIndex < resolution.getResolution(); x += rangeInc, xIndex++) {
 			for (double z = baseLocationZ - rangeHalf, zIndex = 0; zIndex < resolution.getResolution(); z += rangeInc, zIndex++) {
-				double concentration = getConcentration(spawns, creature.getTerrain(), x, z);
+				double concentration = getConcentration(spawns, location.getTerrain(), x, z);
 				surveyMessage.addConcentration(new ResourceConcentration(x, z, concentration));
 				if (concentration > highestConcentration) {
 					highestX = x;
@@ -159,10 +125,10 @@ public class SurveySession {
 			creature.getPlayerObject().getWaypoints().entrySet().stream()
 					.filter(e -> "Resource Survey".equals(e.getValue().getName()))
 					.filter(e -> e.getValue().getColor() == WaypointColor.ORANGE)
-					.filter(e -> e.getValue().getTerrain() == creature.getTerrain())
+					.filter(e -> e.getValue().getTerrain() == location.getTerrain())
 					.map(Entry::getKey)
 					.forEach(creature.getPlayerObject()::removeWaypoint);
-			createResourceWaypoint(creature, Location.builder(creature.getLocation()).setX(highestX).setZ(highestZ).build());
+			createResourceWaypoint(creature, Location.builder(location).setX(highestX).setZ(highestZ).build());
 			sendErrorMessage(creature, "survey", "survey_waypoint");
 		}
 	}
@@ -193,7 +159,40 @@ public class SurveySession {
 		return concentration / 100.0;
 	}
 	
-	private String getMusicFile() {
+	private boolean isAllowedToSurvey(SurveyToolResolution resolution) {
+		switch (creature.getPosture()) {
+			case SITTING:
+				sendErrorMessage(creature, "error_message", "survey_sitting");
+				return false;
+			case UPRIGHT:
+				break;
+			default:
+				sendErrorMessage(creature, "error_message", "survey_standing");
+				return false;
+		}
+		if (creature.getInstanceLocation().getInstanceNumber() != 0) {
+			sendErrorMessage(creature, "error_message", "no_survey_instance");
+			return false;
+		}
+		if (creature.getParent() != null) {
+			if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT))
+				sendErrorMessage(creature, "error_message", "survey_on_mount");
+			else
+				sendErrorMessage(creature, "error_message", "survey_in_structure");
+			return false;
+		}
+		if (resolution == null) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "No survey tool resolution has been set"));
+			return false;
+		}
+		if (surveyTool.getParent() != creature.getInventory()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The survey tool is not in your inventory"));
+			return false;
+		}
+		return true;
+	}
+	
+	private static String getMusicFile(GalacticResource resource) {
 		RawResource rawResource = resource.getRawResource();
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "sound/item_mineral_tool_survey.snd";
@@ -213,7 +212,7 @@ public class SurveySession {
 		return "";
 	}
 	
-	private String getEffectFile() {
+	private static String getEffectFile(GalacticResource resource) {
 		RawResource rawResource = resource.getRawResource();
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "clienteffect/survey_tool_mineral.cef";

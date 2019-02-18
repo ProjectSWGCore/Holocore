@@ -39,7 +39,7 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Raw
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.gameplay.crafting.survey.InProgressSampleManager;
-import com.projectswg.holocore.resources.gameplay.crafting.survey.InProgressSurveyManager;
+import com.projectswg.holocore.resources.gameplay.crafting.survey.SurveySession;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -48,6 +48,7 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * In charge of responding to survey requests
@@ -55,12 +56,12 @@ import java.util.Map;
 public class SurveyService extends Service {
 	
 	private final Map<CreatureObject, TangibleObject> activeSurveyTool;
-	private final InProgressSurveyManager inProgressSurveyManager;
+	private final Map<CreatureObject, SurveySession> surveySessions;
 	private final InProgressSampleManager inProgressSampleManager;
 	
 	public SurveyService() {
 		this.activeSurveyTool = new HashMap<>();
-		this.inProgressSurveyManager = new InProgressSurveyManager();
+		this.surveySessions = new ConcurrentHashMap<>();
 		this.inProgressSampleManager = new InProgressSampleManager();
 	}
 	
@@ -80,18 +81,25 @@ public class SurveyService extends Service {
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
 		activeSurveyTool.put(creature, surveyTool);
+		SurveySession session = new SurveySession(creature, surveyTool);
+		SurveySession prevSession = surveySessions.put(creature, session);
+		if (prevSession != null)
+			prevSession.stopSession();
+		session.startSession();
+		
 		creature.sendSelf(survey);
 	}
 	
 	@IntentHandler
 	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
 		CreatureObject creature = ssi.getCreature();
-		TangibleObject surveyTool = activeSurveyTool.get(creature);
-		if (surveyTool == null) {
+		SurveySession session = surveySessions.get(creature);
+		if (session == null) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "Unable to survey, no survey tool has been opened yet"));
 			return;
 		}
-		inProgressSurveyManager.startSession(creature, surveyTool, ssi.getResource());
+		
+		session.startSurvey(ssi.getResource());
 	}
 	
 	@IntentHandler
