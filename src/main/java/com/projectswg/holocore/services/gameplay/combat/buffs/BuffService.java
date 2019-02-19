@@ -316,8 +316,10 @@ public class BuffService extends Service {
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
 		 *      removal
 		 */
-		for (int i = 0; i < 5; i++)
-			sendSkillModIntent(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
+		for (int i = 0; i < buffData.getEffects(); i++) {
+			if (buffData.getEffectName(i) != null)
+				sendSkillModIntent(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
+		}
 	}
 	
 	private void sendSkillModIntent(CreatureObject creature, String effectName, double effectValue, int valueFactor) {

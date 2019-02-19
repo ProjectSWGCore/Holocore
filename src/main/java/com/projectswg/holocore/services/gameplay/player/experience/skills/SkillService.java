@@ -5,10 +5,12 @@ import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSk
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import org.jetbrains.annotations.NotNull;
 
 public class SkillService extends Service {
 	
@@ -24,21 +26,11 @@ public class SkillService extends Service {
 		
 		String skillName = gsi.getSkillName();
 		CreatureObject target = gsi.getTarget();
-		SkillInfo skillData = DataLoader.skills().getSkillByName(skillName);
-		if (skillData == null)
+		SkillInfo skill = DataLoader.skills().getSkillByName(skillName);
+		if (skill == null)
 			return;
 		
-		String parentSkillName = skillData.getParent();
-		
-		if (gsi.isGrantRequiredSkills()) {
-			grantParentSkills(parentSkillName, target);
-			grantRequiredSkills(skillData, target);
-		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
-			StandardLog.onPlayerError(this, target, "lacks required skill %s before being granted skill %s", parentSkillName, skillName);
-			return;
-		}
-		
-		grantSkill(skillData, target);
+		grantSkill(target, skill, gsi.isGrantRequiredSkills());
 	}
 	
 	@IntentHandler
@@ -59,16 +51,15 @@ public class SkillService extends Service {
 		sti.getRequester().setTitle(title);
 	}
 	
-	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {
-		String[] requiredSkills = skillData.getSkillsRequired();
-		if (requiredSkills == null)
-			return true;
+	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {
+		String parentSkillName = skill.getParent();
 		
-		for (String required : requiredSkills) {
-			if (!creatureObject.hasSkill(required))
-				return false;
+		if (grantRequired) {
+			grantParentSkills(parentSkillName, target);
+			grantRequiredSkills(skill, target);
 		}
-		return true;
+		
+		grantSkill(target, skill);
 	}
 	
 	private void grantParentSkills(String skillName, CreatureObject target) {
@@ -82,7 +73,7 @@ public class SkillService extends Service {
 		}
 		
 		grantParentSkills(skillInfo.getParent(), target);
-		grantSkill(skillInfo, target);
+		grantSkill(target, skillInfo);
 	}
 	
 	private void grantRequiredSkills(SkillInfo skillData, CreatureObject target) {
@@ -90,15 +81,37 @@ public class SkillService extends Service {
 		if (requiredSkills == null)
 			return;
 		
-		target.addSkill(requiredSkills);
+		SkillLoader skills = DataLoader.skills();
+		for (String requiredSkillName : requiredSkills) {
+			SkillInfo requiredSkill = skills.getSkillByName(requiredSkillName);
+			if (requiredSkill != null)
+				grantSkill(target, requiredSkill, true);
+		}
 	}
 	
-	private void grantSkill(SkillInfo skillData, CreatureObject target) {
-		target.addSkill(skillData.getName());
-		target.addCommand(skillData.getCommands());
+	private void grantSkill(CreatureObject target, SkillInfo skill) {
+		if ((!skill.getParent().isEmpty() && !target.hasSkill(skill.getParent())) || !hasRequiredSkills(skill, target)) {
+			StandardLog.onPlayerError(this, target, "lacks required skill %s before being granted skill %s", skill.getParent(), skill.getName());
+			return;
+		}
+		if (!target.addSkill(skill.getName()))
+			return;
+		target.addCommand(skill.getCommands());
 		
-		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
-		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillData.getName(), target, false).broadcast();
+		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
+	}
+	
+	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {
+		String[] requiredSkills = skillData.getSkillsRequired();
+		if (requiredSkills == null)
+			return true;
+		
+		for (String required : requiredSkills) {
+			if (!creatureObject.hasSkill(required))
+				return false;
+		}
+		return true;
 	}
 	
 }

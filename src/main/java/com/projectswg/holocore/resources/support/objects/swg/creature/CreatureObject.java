@@ -307,14 +307,11 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	public void addSkill(String ... skillList) {
-		synchronized (skills) {
-			boolean delta = false;
-			for (String skillName : skillList)
-				delta |= skills.add(skillName);
-			if (delta)
-				skills.sendDeltaMessage(this);
-		}
+	public boolean addSkill(String skill) {
+		boolean added = skills.add(skill);
+		if (added)
+			skills.sendDeltaMessage(this);
+		return added;
 	}
 	
 	public boolean hasSkill(String skillName) {

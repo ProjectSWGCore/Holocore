@@ -138,11 +138,10 @@ public class SkillModService extends Service {
 	@IntentHandler
 	private void handleSkillModIntent(SkillModIntent smi) {
 		for (CreatureObject creature : smi.getAffectedCreatures()) {
-			int adjustModifier = smi.getAdjustModifier();
 			String skillModName = smi.getSkillModName();
-
-			creature.adjustSkillmod(skillModName, 0, adjustModifier);
-			updateSkillModHamValues(creature, skillModName,adjustModifier);
+			
+			creature.adjustSkillmod(skillModName, smi.getAdjustBase(), smi.getAdjustModifier());
+			updateSkillModHamValues(creature, skillModName, smi.getAdjustBase() + smi.getAdjustModifier());
 		}
 	}
 	
@@ -152,17 +151,17 @@ public class SkillModService extends Service {
 		
 		creature.setMaxHealth(creature.getMaxHealth() + newHealth);
 		creature.setHealth(creature.getMaxHealth());
-		creature.setBaseHealth(getLevelSkillModValue(level, profession + "_health", ""));
+		creature.setBaseHealth(getLevelSkillModValue(level, profession.getName() + "_health", ""));
 		
 		creature.setMaxAction(creature.getMaxAction() + newAction);
 		creature.setAction(creature.getMaxAction());	
-		creature.setBaseAction(getLevelSkillModValue(level, profession + "_action", ""));	
+		creature.setBaseAction(getLevelSkillModValue(level, profession.getName() + "_action", ""));	
 		
 		sendSystemMessage(creature.getOwner(), "level_up_stat_gain_6", "DI", newHealth);
 		sendSystemMessage(creature.getOwner(), "level_up_stat_gain_7", "DI", newAction);
 	}
 	
-	private void updateSkillModHamValues(CreatureObject creature, String skillModName, int modifer){
+	private void updateSkillModHamValues(CreatureObject creature, String skillModName, int modifer) {
 		int newHealth = 0;
 		int newAction = 0;
 

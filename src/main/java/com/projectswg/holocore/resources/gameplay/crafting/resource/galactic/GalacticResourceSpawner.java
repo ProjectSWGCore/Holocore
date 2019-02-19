@@ -30,6 +30,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
+import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import me.joshlarson.jlcommon.log.Log;
@@ -58,9 +59,11 @@ public class GalacticResourceSpawner {
 	
 	private final Random random;
 	private final AtomicLong resourceIdMax;
+	private final SWGNameGenerator resourceNameGenerator;
 	
 	public GalacticResourceSpawner() {
 		this.random = new Random();
+		this.resourceNameGenerator = new SWGNameGenerator();
 		this.resourceIdMax = new AtomicLong(0);
 	}
 	
@@ -172,10 +175,12 @@ public class GalacticResourceSpawner {
 	
 	private GalacticResource createNewResource(RawResource raw) {
 		long newId = resourceIdMax.incrementAndGet();
-		String newName = createRandomName(raw) + ' ' + newId;
-		GalacticResource resource = new GalacticResource(newId, newName, raw.getId());
-		resource.setRawResource(raw);
-		GalacticResourceContainer.getContainer().addGalacticResource(resource);
+		GalacticResource resource;
+		do {
+			String newName = resourceNameGenerator.generateName("resources");
+			resource = new GalacticResource(newId, newName, raw.getId());
+			resource.setRawResource(raw);
+		} while (!GalacticResourceContainer.getContainer().addGalacticResource(resource));
 		return resource;
 	}
 	
@@ -183,10 +188,6 @@ public class GalacticResourceSpawner {
 		GalacticResourceSpawn spawn = new GalacticResourceSpawn(resource.getId());
 		spawn.setRandomValues(terrain);
 		GalacticResourceContainer.getContainer().addResourceSpawn(spawn);
-	}
-	
-	private String createRandomName(RawResource raw) {
-		return raw.getName().getKey();
 	}
 	
 	private void updateSpawns() {

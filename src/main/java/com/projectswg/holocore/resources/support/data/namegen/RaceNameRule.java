@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,32 +24,67 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.crafting.survey;
+package com.projectswg.holocore.resources.support.data.namegen;
 
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class InProgressSurveyManager {
+public class RaceNameRule {
+	private List<String> vowels = new ArrayList<>();
+	private List<String> startConsonants = new ArrayList<>();
+	private List<String> endConsonants = new ArrayList<>();
+	private List<String> instructions = new ArrayList<>();
+	private int surnameChance = 0;
+	private int maxLength = 15;
 	
-	private final Map<CreatureObject, SurveySession> surveySessions;
+	public RaceNameRule() { }
 	
-	public InProgressSurveyManager() {
-		this.surveySessions = new HashMap<>();
+	public void addVowel(String s) {
+		vowels.add(s);
 	}
 	
-	public void startSession(CreatureObject creature, GalacticResource resource) {
-		SurveySession session;
-		synchronized (surveySessions) {
-			session = surveySessions.computeIfAbsent(creature, c -> new SurveySession(c, resource));
-			if (!session.getResource().equals(resource)) {
-				session.stopSession();
-				surveySessions.put(creature, session = new SurveySession(creature, resource));
-			}
-		}
-		session.startSession();
+	public void addStartConsonant(String s) {
+		startConsonants.add(s);
+	}
+	
+	public void addEndConsant(String s) {
+		endConsonants.add(s);
+	}
+	
+	public void addInstruction(String s) {
+		instructions.add(s);
+	}
+	
+	public void setSurnameChance(int chance) {
+		this.surnameChance = chance;
+	}
+	
+	public void setMaxLength(int maxLength) {
+		this.maxLength = maxLength;
+	}
+	
+	public int getSurnameChance() {
+		return surnameChance;
+	}
+	
+	public int getMaxLength() {
+		return maxLength;
+	}
+	
+	public List<String> getVowels() {
+		return vowels;
+	}
+	
+	public List<String> getStartConsonants() {
+		return startConsonants;
+	}
+
+	public List<String> getEndConsonants() {
+		return endConsonants;
+	}
+
+	public List<String> getInstructions() {
+		return instructions;
 	}
 	
 }

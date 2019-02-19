@@ -43,12 +43,14 @@ public class GalacticResourceContainer {
 	
 	private final Map<Long, RawResource> rawResources;
 	private final Map<Long, GalacticResource> galacticResources;
+	private final Map<String, GalacticResource> galacticResourcesByName;
 	private final Map<RawResource, List<GalacticResource>> rawToGalactic;
 	private final ResourceSpawnTreeGlobal resourceSpawns;
 	
 	public GalacticResourceContainer() {
 		this.rawResources = new ConcurrentHashMap<>();
 		this.galacticResources = new ConcurrentHashMap<>();
+		this.galacticResourcesByName = new ConcurrentHashMap<>();
 		this.rawToGalactic = new ConcurrentHashMap<>();
 		this.resourceSpawns = new ResourceSpawnTreeGlobal();
 	}
@@ -62,11 +64,7 @@ public class GalacticResourceContainer {
 	}
 	
 	public GalacticResource getGalacticResourceByName(String resourceName) {
-		for (GalacticResource gr : galacticResources.values()) {
-			if (gr.getName().equals(resourceName))
-				return gr;
-		}
-		return null;
+		return galacticResourcesByName.get(resourceName);
 	}
 	
 	public List<RawResource> getRawResources() {
@@ -89,15 +87,18 @@ public class GalacticResourceContainer {
 		assert replaced == null : "raw resource overwritten";
 	}
 	
-	public void addGalacticResource(GalacticResource resource) {
+	public boolean addGalacticResource(GalacticResource resource) {
 		RawResource raw = getRawResource(resource.getRawResourceId());
 		Objects.requireNonNull(raw, "Invalid raw resource ID in GalacticResource!");
-		assert raw == resource.getRawResource() : "RawResource invalid with galactic resource";
-		{
-			GalacticResource replaced = galacticResources.put(resource.getId(), resource);
-			assert replaced == null : "Duplicate galactic resource!";
+		if (galacticResources.putIfAbsent(resource.getId(), resource) == null) {
+			if (galacticResourcesByName.putIfAbsent(resource.getName(), resource) == null) {
+				rawToGalactic.computeIfAbsent(raw, k -> new ArrayList<>()).add(resource);
+				return true;
+			} else {
+				galacticResources.remove(resource.getId());
+			}
 		}
-		rawToGalactic.computeIfAbsent(raw, k -> new ArrayList<>()).add(resource);
+		return false;
 	}
 	
 	public List<GalacticResource> getAllResources() {
@@ -137,11 +138,11 @@ public class GalacticResourceContainer {
 	private static <T> List<T> copyImmutable(Collection<T> list) {
 		if (list == null)
 			return Collections.unmodifiableList(new ArrayList<>());
-		return Collections.unmodifiableList(new ArrayList<>(list));
+		return List.copyOf(list);
 	}
 	
 	private static <T> List<T> createImmutable() {
-		return Collections.unmodifiableList(new ArrayList<>());
+		return List.of();
 	}
 	
 	private static class ResourceSpawnTreeGlobal {

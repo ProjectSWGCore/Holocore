@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,58 +24,70 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities.namegen;
+
+package com.projectswg.holocore.resources.gameplay.crafting.survey;
+
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaceNameRule {
-	private List<String> vowels = new ArrayList<>();
-	private List<String> startConsonants = new ArrayList<>();
-	private List<String> endConsonants = new ArrayList<>();
-	private List<String> instructions = new ArrayList<>();
-	private int surnameChance = 0;
+public class SurveyToolResolution {
 	
-	public RaceNameRule() { }
+	private static final double RANGE_START = 64;
+	private static final double RANGE_INCREMENT = 64;
+	private static final double RESOLUTION_START = 3.5;
+	private static final double RESOLUTION_INCREMENT = 0.5;
 	
-	public void addVowel(String s) {
-		vowels.add(s);
+	private final int counter;
+	private final int range;
+	private final int resolution;
+	
+	public SurveyToolResolution(int counter, int range, int resolution) {
+		this.counter = counter;
+		this.range = range;
+		this.resolution = resolution;
 	}
 	
-	public void addStartConsonant(String s) {
-		startConsonants.add(s);
+	/**
+	 * Returns the skill mod increment required. If the player's skill mod for "surveying" is 20,
+	 * the caller should ensure this method does not return a number greater than 1. If the
+	 * player's skill mod is 40, the value should be no higher than 2, etc.
+	 * @return the surveying skill mod increment
+	 */
+	public int getCounter() {
+		return counter;
 	}
 	
-	public void addEndConsant(String s) {
-		endConsonants.add(s);
+	/**
+	 * Gets the survey range
+	 * @return the range, in meters
+	 */
+	public int getRange() {
+		return range;
 	}
 	
-	public void addInstruction(String s) {
-		instructions.add(s);
+	/**
+	 * Gets the survey resolution
+	 * @return the survey resolution, in horizontal/vertical points
+	 */
+	public int getResolution() {
+		return resolution;
 	}
 	
-	public void setSurnameChance(int chance) {
-		this.surnameChance = chance;
-	}
-	
-	public int getSurnameChance() {
-		return surnameChance;
-	}
-	
-	public List<String> getVowels() {
-		return vowels;
-	}
-	
-	public List<String> getStartConsonants() {
-		return startConsonants;
-	}
-
-	public List<String> getEndConsonants() {
-		return endConsonants;
-	}
-
-	public List<String> getInstructions() {
-		return instructions;
+	public static List<SurveyToolResolution> getOptions(@NotNull CreatureObject creature) {
+		List<SurveyToolResolution> resolutions = new ArrayList<>();
+		int surveyIncrements = creature.getSkillModValue("surveying") / 20;
+		
+		double range = RANGE_START;
+		double resolution = RESOLUTION_START;
+		for (int i = 1; i <= surveyIncrements; i++) {
+			resolutions.add(new SurveyToolResolution(i, (int) range, (int) resolution));
+			range += RANGE_INCREMENT;
+			resolution += RESOLUTION_INCREMENT;
+		}
+		return resolutions;
 	}
 	
 }

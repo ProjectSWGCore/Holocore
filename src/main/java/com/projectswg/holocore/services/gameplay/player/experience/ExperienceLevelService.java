@@ -8,6 +8,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
+import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
@@ -25,6 +27,11 @@ public class ExperienceLevelService extends Service {
 	
 	public ExperienceLevelService() {
 		xpMultiplier = DataManager.getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
+	}
+	
+	@IntentHandler
+	private void handleCreatedCharacterIntent(CreatedCharacterIntent cci) {
+		new LevelChangedIntent(cci.getCreatureObject(), (short) 0, (short) 1).broadcast();
 	}
 	
 	@IntentHandler
