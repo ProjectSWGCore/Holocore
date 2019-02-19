@@ -92,6 +92,7 @@ public class SurveySession {
 			return;
 		assert resolution != null : "verified in isAllowedToSurvey";
 		
+		creature.modifyAction((int) (-creature.getMaxAction() / 10.0 * resolution.getCounter()));
 		surveyRequest.set(ScheduledUtilities.run(() -> sendSurveyMessage(resolution, location, resource), 4, SECONDS));
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
@@ -203,6 +204,10 @@ public class SurveySession {
 		// The specified resource no longer exists (or the player changed planets)
 		if (!GalacticResourceContainer.getContainer().getSpawnedResources(location.getTerrain()).contains(resource)) {
 			sendErrorMessage(creature, "error_message", "survey_error");
+			return false;
+		}
+		if (creature.getAction() < creature.getMaxAction() / 10.0 * resolution.getCounter()) {
+			sendErrorMessage(creature, "error_message", "survey_mind");
 			return false;
 		}
 		return true;
