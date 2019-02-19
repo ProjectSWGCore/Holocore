@@ -78,7 +78,7 @@ public class AwarenessService extends Service {
 	}
 	
 	@Override
-	public boolean initialize() {
+	public boolean start() {
 		awareness.startThreadPool();
 		chunkUpdater.start();
 		chunkUpdater.executeWithFixedDelay(0, 100, this::update);
@@ -86,7 +86,7 @@ public class AwarenessService extends Service {
 	}
 	
 	@Override
-	public boolean terminate() {
+	public boolean stop() {
 		chunkUpdater.stop();
 		return awareness.stopThreadPool() && chunkUpdater.awaitTermination(1000);
 	}
