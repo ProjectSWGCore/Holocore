@@ -126,15 +126,17 @@ public class ObjectStorageService extends Service {
 	}
 	
 	private void saveObjects() {
-		persistedObjects.forEach(this::saveChildren);
+		List<SWGObject> saveList = new ArrayList<>();
+		persistedObjects.forEach(obj -> saveChildren(saveList, obj));
+		objectDatabase.addObjects(saveList);
 	}
 	
-	private void saveChildren(@Nullable SWGObject obj) {
+	private void saveChildren(Collection<SWGObject> saveList, @Nullable SWGObject obj) {
 		if (obj == null)
 			return;
-		objectDatabase.addObject(obj);
+		saveList.add(obj);
 		
-		obj.getChildObjects().forEach(this::saveChildren);
+		obj.getChildObjects().forEach(child -> saveChildren(saveList, child));
 	}
 	
 	@IntentHandler
@@ -144,8 +146,11 @@ public class ObjectStorageService extends Service {
 		if (replaced != null && replaced != obj)
 			Log.e("Replaced object in object map! Old: %s  New: %s", replaced, obj);
 		if (obj.isPersisted()) {
-			if (persistedObjects.add(obj))
-				objectDatabase.addObject(obj);
+			if (persistedObjects.add(obj)) {
+				List<SWGObject> saveList = new ArrayList<>();
+				saveChildren(saveList, obj);
+				objectDatabase.addObjects(saveList);
+			}
 		}
 	}
 	

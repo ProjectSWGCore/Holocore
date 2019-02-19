@@ -29,10 +29,7 @@ package com.projectswg.holocore.resources.support.data.server_info.mongodb.datab
 
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.IndexOptions;
-import com.mongodb.client.model.Indexes;
-import com.mongodb.client.model.ReplaceOptions;
+import com.mongodb.client.model.*;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
@@ -41,7 +38,9 @@ import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PswgObjectDatabase extends PswgDatabase {
 	
@@ -73,6 +72,17 @@ public class PswgObjectDatabase extends PswgDatabase {
 	
 	public void addObject(@NotNull SWGObject obj) {
 		collection.replaceOne(Filters.eq("id", obj.getObjectId()), SWGObjectFactory.save(obj, new MongoData()).toDocument(), new ReplaceOptions().upsert(true));
+	}
+	
+	public void addObjects(@NotNull Collection<SWGObject> objects) {
+		collection.bulkWrite(objects.stream()
+				.map(obj -> new ReplaceOneModel<>(
+						Filters.eq("id", obj.getObjectId()),
+						SWGObjectFactory.save(obj).toDocument(),
+						new ReplaceOptions().upsert(true)
+				))
+				.collect(Collectors.toList()),
+				new BulkWriteOptions().ordered(false));
 	}
 	
 	public void removeObject(long id) {
