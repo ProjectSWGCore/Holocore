@@ -74,6 +74,7 @@ public class CombatCommandService extends Service {
 			return;
 		CombatCommand c = (CombatCommand) eci.getCommand();
 		
+		eci.getSource().modifyAction(-(int) c.getActionCost());
 		CombatCommandHitType hitType = hitTypeMap.get(c.getHitType());
 		if (hitType != null)
 			hitType.handle(eci.getSource(), eci.getTarget(), c, eci.getArguments());
