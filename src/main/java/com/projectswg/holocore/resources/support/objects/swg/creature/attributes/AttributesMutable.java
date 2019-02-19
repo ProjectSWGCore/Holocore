@@ -55,66 +55,103 @@ public class AttributesMutable implements Attributes, Encodable, Persistable, Mo
 		this.ham = new SWGList<>(type, update);
 		for (int i = 0; i < 6; i++)
 			ham.add(0);
+		ham.clearDeltaQueue();
 	}
 	
 	@Override
-	public final int getHealth() {
+	public final synchronized int getHealth() {
 		return ham.get(0);
 	}
 	
-	public final void setHealth(int health) {
+	public final synchronized void setHealth(int health) {
+		if (getHealth() == health)
+			return;
 		ham.set(0, health);
 		ham.sendDeltaMessage(obj);
 	}
 	
-	@Override
-	public final int getHealthRegen() {
-		return ham.get(0);
+	public final synchronized void modifyHealth(int health, int max) {
+		setHealth(Math.max(0, Math.min(max, getHealth()+health)));
 	}
 	
-	public final void setHealthRegen(int healthRegen) {
+	@Override
+	public final synchronized int getHealthRegen() {
+		return ham.get(1);
+	}
+	
+	public final synchronized void setHealthRegen(int healthRegen) {
+		if (getHealthRegen() == healthRegen)
+			return;
 		ham.set(1, healthRegen);
 		ham.sendDeltaMessage(obj);
 	}
 	
+	public final synchronized void modifyHealthRegen(int healthRegen, int max) {
+		setHealthRegen(Math.max(0, Math.min(max, getHealthRegen()+healthRegen)));
+	}
+	
 	@Override
-	public final int getAction() {
+	public final synchronized int getAction() {
 		return ham.get(2);
 	}
 	
-	public final void setAction(int health) {
-		ham.set(2, health);
+	public final synchronized void setAction(int action) {
+		if (getAction() == action)
+			return;
+		ham.set(2, action);
 		ham.sendDeltaMessage(obj);
 	}
 	
+	public final synchronized void modifyAction(int action, int max) {
+		setAction(Math.max(0, Math.min(max, getAction()+action)));
+	}
+	
 	@Override
-	public final int getActionRegen() {
+	public final synchronized int getActionRegen() {
 		return ham.get(3);
 	}
 	
-	public final void setActionRegen(int healthRegen) {
-		ham.set(3, healthRegen);
+	public final synchronized void setActionRegen(int actionRegen) {
+		if (getActionRegen() == actionRegen)
+			return;
+		ham.set(3, actionRegen);
 		ham.sendDeltaMessage(obj);
 	}
 	
+	public final synchronized void modifyActionRegen(int actionRegen, int max) {
+		setActionRegen(Math.max(0, Math.min(max, getActionRegen()+actionRegen)));
+	}
+	
 	@Override
-	public final int getMind() {
+	public final synchronized int getMind() {
 		return ham.get(4);
 	}
 	
-	public final void setMind(int health) {
-		ham.set(4, health);
+	public final synchronized void setMind(int mind) {
+		if (getMind() == mind)
+			return;
+		ham.set(4, mind);
 		ham.sendDeltaMessage(obj);
+	}
+	
+	public final synchronized void modifyMind(int mind, int max) {
+		setMind(Math.max(0, Math.min(max, getMind()+mind)));
 	}
 	
 	@Override
-	public final int getMindRegen() {
+	public final synchronized int getMindRegen() {
 		return ham.get(5);
 	}
 	
-	public final void setMindRegen(int healthRegen) {
-		ham.set(5, healthRegen);
+	public final synchronized void setMindRegen(int mindRegen) {
+		if (getMindRegen() == mindRegen)
+			return;
+		ham.set(5, mindRegen);
 		ham.sendDeltaMessage(obj);
+	}
+	
+	public final synchronized void modifyMindRegen(int mindRegen, int max) {
+		setMindRegen(Math.max(0, Math.min(max, getMindRegen()+mindRegen)));
 	}
 	
 	@Override

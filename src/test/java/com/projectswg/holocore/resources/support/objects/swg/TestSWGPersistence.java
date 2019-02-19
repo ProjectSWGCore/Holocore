@@ -92,11 +92,6 @@ public class TestSWGPersistence {
 	}
 	
 	private void testSWGObject(SWGObject obj) {
-		System.out.println(obj + "  " + SWGObjectFactory.save(obj).toDocument());
-		obj.getChildObjects().stream()
-						.map(SWGObjectFactory::save)
-						.map(MongoData::toDocument)
-						.forEach(System.out::println);
 		Document expected = map(
 				"id", obj.getObjectId(),
 				"template", obj.getTemplate(),
@@ -189,7 +184,20 @@ public class TestSWGPersistence {
 						"difficulty", obj.getDifficulty().name(),
 						"hologramColor", obj.getHologramColor().name(),
 						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
-						"maxAttributes", List.of(obj.getMaxHealth(), 0, obj.getMaxAction(), 0, obj.getMaxMind(), 0),
+						"attributes", map(
+								"health", obj.getHealth(),
+								"healthRegen", 0,
+								"action", obj.getAction(),
+								"actionRegen", 0,
+								"mind", obj.getMind(),
+								"mindRegen", 0),
+						"maxAttributes", map(
+								"health", obj.getMaxHealth(),
+								"healthRegen", 0,
+								"action", obj.getMaxAction(),
+								"actionRegen", 0,
+								"mind", obj.getMaxMind(),
+								"mindRegen", 0),
 						"buffs", obj.getBuffEntries(b -> true).map(b -> new Document(Map.of("key", MongoData.store(new CRC(b.getCrc())).toDocument(), "val", MongoData.store(b).toDocument()))).collect(Collectors.toList())
 				),
 				"posture", obj.getPosture().name(),
@@ -200,7 +208,13 @@ public class TestSWGPersistence {
 				"statesBitmask", obj.getStatesBitmask(),
 				"factionRank", (int) obj.getFactionRank(),
 				"skills", obj.getSkills(),
-				"baseAttributes", List.of(obj.getBaseHealth(), 0, obj.getBaseAction(), 0, obj.getBaseMind(), 0)
+				"baseAttributes", map(
+						"health", obj.getBaseHealth(),
+						"healthRegen", 0,
+						"action", obj.getBaseAction(),
+						"actionRegen", 0,
+						"mind", obj.getBaseMind(),
+						"mindRegen", 0)
 		);
 		test(obj, expected);
 	}

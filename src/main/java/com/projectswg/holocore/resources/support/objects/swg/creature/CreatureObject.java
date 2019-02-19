@@ -50,6 +50,7 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
+import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -88,12 +89,12 @@ public class CreatureObject extends TangibleObject {
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
-	
-	private SWGList<Integer> baseAttributes			= new SWGList<>(1, 2);
+	private AttributesMutable baseAttributes;
 	
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
+		this.baseAttributes = new AttributesMutable(this, 1, 2);
 		initBaseAttributes();
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
@@ -840,9 +841,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseHealth() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(0);
-		}
+		return baseAttributes.getHealth();
 	}
 	
 	public int getAction() {
@@ -854,9 +853,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseAction() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(2);
-		}
+		return baseAttributes.getAction();
 	}
 	
 	public int getMind() {
@@ -868,69 +865,57 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseMind() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(4);
-		}
+		return baseAttributes.getMind();
 	}
 	
 	public void setBaseHealth(int baseHealth) {
-		synchronized(baseAttributes) {
-			baseAttributes.set(0, baseHealth);
-			baseAttributes.sendDeltaMessage(this);
-		}
+		baseAttributes.setHealth(baseHealth);
 	}
 	
 	public void setHealth(int health) {
-		creo6.setHealth(health, this);
+		creo6.setHealth(health);
 	}
 	
 	public void modifyHealth(int mod) {
-		creo6.modifyHealth(mod, this);
+		creo6.modifyHealth(mod);
 	}
 	
 	public void setMaxHealth(int maxHealth) {
-		creo6.setMaxHealth(maxHealth, this);
+		creo6.setMaxHealth(maxHealth);
 	}
 	
 	public void setBaseAction(int baseAction) {
-		synchronized(baseAttributes) {
-			baseAttributes.set(2, baseAction);
-			baseAttributes.sendDeltaMessage(this);
-		}
+		baseAttributes.setAction(baseAction);
 	}
 	
 	public void setAction(int action) {
-		creo6.setAction(action, this);
+		creo6.setAction(action);
 	}
 	
 	public void modifyAction(int mod) {
-		creo6.modifyAction(mod, this);
+		creo6.modifyAction(mod);
 	}
 	
 	public void setMaxAction(int maxAction) {
-		creo6.setMaxAction(maxAction, this);
+		creo6.setMaxAction(maxAction);
 	}
 	
 	public void setMind(int mind) {
-		creo6.setMind(mind, this);
+		creo6.setMind(mind);
 	}
 	
-	public int modifyMind(int mod) {
-		return creo6.modifyMind(mod, this);
+	public void modifyMind(int mod) {
+		creo6.modifyMind(mod);
 	}
 	
 	public void setMaxMind(int maxMind) {
-		creo6.setMaxMind(maxMind, this);
+		creo6.setMaxMind(maxMind);
 	}
 	
 	private void initBaseAttributes() {
-		baseAttributes.add(0, 1000); // Health
-		baseAttributes.add(1, 0);
-		baseAttributes.add(2, 300); // Action
-		baseAttributes.add(3, 0);
-		baseAttributes.add(4, 300); // Mind
-		baseAttributes.add(5, 0);
-		baseAttributes.clearDeltaQueue();
+		baseAttributes.setHealth(1000);
+		baseAttributes.setAction(300);
+		baseAttributes.setMind(300);
 	}
 	
 	public Collection<SWGObject> getItemsByTemplate(String slotName, String template) {
@@ -1084,7 +1069,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline1(NetBuffer buffer) {
 		super.parseBaseline1(buffer);
-		baseAttributes = SWGList.getSwgList(buffer, 1, 2, Integer.class);
+		baseAttributes.decode(buffer);
 		skills = SWGSet.getSwgSet(buffer, 1, 3, StringType.ASCII);
 	}
 	
@@ -1124,14 +1109,13 @@ public class CreatureObject extends TangibleObject {
 		data.putLong("statesBitmask", statesBitmask);
 		data.putInteger("factionRank", factionRank);
 		data.putArray("skills", skills);
-		data.putArray("baseAttributes", baseAttributes);
+		data.putDocument("baseAttributes", baseAttributes);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
 		super.readMongo(data);
 		skills.clear();
-		baseAttributes.clear();
 		
 		creo4.readMongo(data.getDocument("base4"));
 		creo6.readMongo(data.getDocument("base6"));
@@ -1143,13 +1127,13 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = data.getLong("statesBitmask", statesBitmask);
 		factionRank = (byte) data.getInteger("factionRank", factionRank);
 		skills.addAll(data.getArray("skills", String.class));
-		baseAttributes.addAll(data.getArray("baseAttributes", Integer.class));
+		data.getDocument("baseAttributes", baseAttributes);
 	}
 	
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(2);
+		stream.addByte(3);
 		creo4.save(stream);
 		creo6.save(stream);
 		stream.addAscii(posture.name());
@@ -1164,9 +1148,7 @@ public class CreatureObject extends TangibleObject {
 		synchronized (skills) {
 			stream.addList(skills, stream::addAscii);
 		}
-		synchronized (baseAttributes) {
-			stream.addList(baseAttributes, stream::addInt);
-		}
+		baseAttributes.save(stream);
 	}
 	
 	@Override
@@ -1176,6 +1158,7 @@ public class CreatureObject extends TangibleObject {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
 			case 2: readVersion2(stream); break;
+			case 3: readVersion3(stream); break;
 		}
 		
 	}
@@ -1198,7 +1181,7 @@ public class CreatureObject extends TangibleObject {
 			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
 		}
 		stream.getList((i) -> skills.add(stream.getAscii()));
-		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+		readAttributes((byte) 0, baseAttributes, stream);
 	}
 	
 	private void readVersion1(NetBufferStream stream) {
@@ -1215,7 +1198,7 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
-		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+		readAttributes((byte) 1, baseAttributes, stream);
 	}
 	
 	private void readVersion2(NetBufferStream stream) {
@@ -1231,7 +1214,39 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
-		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+		readAttributes((byte) 2, baseAttributes, stream);
+	}
+	
+	private void readVersion3(NetBufferStream stream) {
+		creo4.read(stream);
+		creo6.read(stream);
+		posture = Posture.valueOf(stream.getAscii());
+		race = Race.valueOf(stream.getAscii());
+		height = stream.getFloat();
+		battleFatigue = stream.getInt();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		ownerId = stream.getLong();
+		statesBitmask = stream.getLong();
+		factionRank = stream.getByte();
+		stream.getList((i) -> skills.add(stream.getAscii()));
+		baseAttributes.read(stream);
+	}
+	
+	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
+		if (ver <= 2) {
+			int [] array = new int[6];
+			stream.getList((i) -> array[i] = stream.getInt());
+			attributes.setHealth(array[0]);
+			attributes.setHealthRegen(array[1]);
+			attributes.setAction(array[2]);
+			attributes.setActionRegen(array[3]);
+			attributes.setMind(array[4]);
+			attributes.setMindRegen(array[5]);
+		} else {
+			attributes.read(stream);
+		}
+		
 	}
 	
 	private static class Container {
