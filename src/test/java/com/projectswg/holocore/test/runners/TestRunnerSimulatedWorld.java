@@ -38,9 +38,9 @@ public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousInte
 	
 	@Before
 	public final void setupSimulatedServices() {
+		registerService(new CharacterLookupService());
 		registerService(new SimulatedObjectStorage());
 		registerService(awareness = new AwarenessService());
-		registerService(new CharacterLookupService());
 	}
 	
 	public final void updateAwareness() {

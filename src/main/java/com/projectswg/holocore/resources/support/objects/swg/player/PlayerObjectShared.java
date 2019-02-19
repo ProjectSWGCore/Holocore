@@ -360,6 +360,17 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 	
 	@Override
 	public void saveMongo(MongoData data) {
+		data.putString("title", title);
+		data.putString("profession", profession);
+		data.putInteger("bornDate", bornDate);
+		data.putInteger("playTime", playTime);
+		data.putInteger("professionIcon", professionIcon);
+		data.putInteger("gcwPoints", gcwPoints);
+		data.putInteger("pvpKills", pvpKills);
+		data.putInteger("lifetimePvpKills", lifetimePvpKills);
+		data.putLong("lifetimeGcwPoints", lifetimeGcwPoints);
+		data.putBoolean("showBackpack", showBackpack);
+		data.putBoolean("showHelmet", showHelmet);
 	}
 	
 	@Override

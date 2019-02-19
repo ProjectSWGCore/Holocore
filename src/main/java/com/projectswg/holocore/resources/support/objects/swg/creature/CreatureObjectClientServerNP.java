@@ -54,7 +54,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	/** CREO4-00 */ private float								accelPercent			= 1;
 	/** CREO4-01 */ private float								accelScale				= 1;
 	/** CREO4-02 */ private AttributesMutable					bonusAttributes;
-	/** CREO4-03 */ private SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3);
+	/** CREO4-03 */ private SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3, StringType.ASCII);
 	/** CREO4-04 */ private	float								movementPercent			= 1;
 	/** CREO4-05 */ private float								movementScale			= 1;
 	/** CREO4-06 */ private long								performanceListenTarget	= 0;
@@ -324,7 +324,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		accelPercent = data.getFloat("accelPercent", accelPercent);
 		accelScale = data.getFloat("accelScale", accelScale);
 		data.getDocument("bonusAttributes", bonusAttributes);
-		skillMods.putAll(data.getMap("skillMods", SkillMod.class, SkillMod::new));
+		skillMods.putAll(data.getMap("skillMods", String.class, SkillMod.class));
 		movementPercent = data.getFloat("movementPercent", movementPercent);
 		movementScale = data.getFloat("movementScale", accelScale);
 		// performance listen target
@@ -334,7 +334,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		runSpeed = data.getFloat("runSpeed", runSpeed);
 		walkSpeed = data.getFloat("walkSpeed", walkSpeed);
 		turnScale = data.getFloat("turnScale", turnScale);
-		commands.putAll(data.getMap("commands", Integer.class));
+		commands.putAll(data.getMap("commands", String.class, Integer.class));
 		missionCriticalObjects.addAll(data.getArray("missionCriticalObjects", GroupMissionCriticalObject.class));
 		totalLevelXp = data.getInteger("totalLevelXp", totalLevelXp);
 	}

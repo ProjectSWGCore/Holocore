@@ -73,6 +73,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable, MongoPersistable {
@@ -1226,7 +1227,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		data.putDocument("location", location);
 		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
 		data.putMap("attributes", attributes);
-		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, ServerAttribute::store);
+		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, Function.identity());
 		data.putBoolean("persisted", persisted);
 	}
 	
@@ -1261,8 +1262,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		location.readMongo(data.getDocument("location"));
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));
-		attributes.putAll(data.getMap("attributes", String.class));
-		serverAttributes.putAll(data.getMap("serverAttributes", String.class, ServerAttribute::getFromKey, ServerAttribute::retrieve));
+		attributes.putAll(data.getMap("attributes", String.class, String.class));
+		data.getMap("serverAttributes", String.class, Object.class).forEach((key, val) -> serverAttributes.put(ServerAttribute.getFromKey(key), val));
 		persisted = data.getBoolean("persisted", false);
 	}
 	

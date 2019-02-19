@@ -33,19 +33,14 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-import com.projectswg.common.utilities.ByteUtilities;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 
-import java.time.Instant;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -499,7 +494,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		data.putInteger("craftingLevel", craftingLevel);
 		data.putInteger("craftingStage", craftingStage);
 		data.putLong("nearbyCraftStation", nearbyCraftStation);
-		data.putMap("draftSchematics", draftSchematics, String::valueOf);
+		data.putMap("draftSchematics", draftSchematics);
 		data.putLong("craftingComponentBioLink", craftingComponentBioLink);
 		data.putInteger("experimentPoints", experimentPoints);
 		data.putInteger("expModified", expModified);
@@ -543,7 +538,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		craftingLevel = data.getInteger("craftingLevel", craftingLevel);
 		craftingStage = data.getInteger("craftingStage", craftingStage);
 		nearbyCraftStation = data.getLong("nearbyCraftStation", nearbyCraftStation);
-		draftSchematics.putAll(data.getMap("draftSchematics", Integer.class, Long::valueOf, Function.identity()));
+		draftSchematics.putAll(data.getMap("draftSchematics", Long.class, Integer.class));
 		craftingComponentBioLink = data.getLong("craftingComponentBioLink", craftingComponentBioLink);
 		experimentPoints = data.getInteger("experimentPoints", experimentPoints);
 		expModified = data.getInteger("expModified", expModified);

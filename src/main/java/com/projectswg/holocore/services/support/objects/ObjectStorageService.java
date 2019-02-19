@@ -134,8 +134,7 @@ public class ObjectStorageService extends Service {
 			return;
 		objectDatabase.addObject(obj);
 		
-		obj.getContainedObjects().forEach(this::saveChildren);
-		obj.getSlottedObjects().forEach(this::saveChildren);
+		obj.getChildObjects().forEach(this::saveChildren);
 	}
 	
 	@IntentHandler

@@ -47,6 +47,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class TestSWGPersistence {
 	
@@ -56,6 +57,10 @@ public class TestSWGPersistence {
 			if (actual.get(e.getKey()) instanceof Map) {
 				assertContains((Map<String, Object>) e.getValue(), (Map<String, Object>) actual.get(e.getKey()));
 			} else if (actual.get(e.getKey()) instanceof Collection) {
+				if (!(e.getValue() instanceof Collection))
+					Assert.fail("expected value is not a collection for key: " + e.getKey());
+				if (!(actual.get(e.getKey()) instanceof Collection))
+					Assert.fail("actual value is not a collection for key: " + e.getKey());
 				Collection<Object> expectedCollection = (Collection<Object>) e.getValue();
 				Collection<Object> actualCollection = (Collection<Object>) actual.get(e.getKey());
 				Assert.assertEquals("Key: '"+e.getKey()+"' Size mismatch.", expectedCollection.size(), actualCollection.size());
@@ -127,8 +132,8 @@ public class TestSWGPersistence {
 						)
 				),
 				"permissions", map("type", obj.getContainerPermissions().getType().name()),
-				"attributes", map(),
-				"serverAttributes", map()
+				"attributes", List.of(),
+				"serverAttributes", List.of()
 		);
 		test(obj, expected);
 	}
@@ -185,7 +190,7 @@ public class TestSWGPersistence {
 						"hologramColor", obj.getHologramColor().name(),
 						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
 						"maxAttributes", List.of(obj.getMaxHealth(), 0, obj.getMaxAction(), 0, obj.getMaxMind(), 0),
-						"buffs", Map.ofEntries(obj.getBuffEntries(b -> true).map(b -> Map.entry(CRC.getString(b.getCrc()), MongoData.store(b).toDocument())).toArray(Entry[]::new))
+						"buffs", obj.getBuffEntries(b -> true).map(b -> new Document(Map.of("key", MongoData.store(new CRC(b.getCrc())).toDocument(), "val", MongoData.store(b).toDocument()))).collect(Collectors.toList())
 				),
 				"posture", obj.getPosture().name(),
 				"race", obj.getRace().name(),
@@ -264,6 +269,7 @@ public class TestSWGPersistence {
 		creature.setDetailStf(new StringId("file-d", "key-d"));
 		creature.setComplexity(2);
 		creature.setVolume(3);
+		creature.setHeight(1.05);
 		
 		test(creature);
 	}

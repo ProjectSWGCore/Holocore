@@ -609,8 +609,8 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		data.putString("difficulty", difficulty.name());
 		data.putString("hologramColor", hologramColour.name());
 		data.putLong("equippedWeapon", equippedWeapon);
-		synchronized (maxAttributes) { data.putArray("maxAttributes", maxAttributes); }
-		synchronized (buffs) { data.putMap("buffs", buffs, CRC::getString); }
+		data.putArray("maxAttributes", maxAttributes);
+		data.putMap("buffs", buffs);
 	}
 	
 	@Override
@@ -618,23 +618,23 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		maxAttributes.clear();
 		buffs.clear();
 		
-		level = (short) data.getInteger("level", 1);
-		levelHealthGranted = data.getInteger("levelHealthGranted", 0);
-		animation = data.getString("animation", "");
-		moodAnimation = data.getString("moodAnimation", "neutral");
-		guildId = data.getInteger("guildId", 0);
-		lookAtTargetId = data.getLong("lookAtTargetId", 0);
-		intendedTargetId = data.getLong("intendedTargetId", 0);
-		moodId = (byte) data.getInteger("moodId", 0);
-		costume = data.getString("costume", "");
-		visible = data.getBoolean("visible", true);
-		shownOnRadar = data.getBoolean("shownOnRadar", true);
-		beast = data.getBoolean("beast", false);
-		difficulty = CreatureDifficulty.valueOf(data.getString("difficulty", "NORMAL"));
-		hologramColour = HologramColour.valueOf(data.getString("hologramColor", "DEFAULT"));
+		level = (short) data.getInteger("level", level);
+		levelHealthGranted = data.getInteger("levelHealthGranted", levelHealthGranted);
+		animation = data.getString("animation", animation);
+		moodAnimation = data.getString("moodAnimation", moodAnimation);
+		guildId = data.getInteger("guildId", guildId);
+		lookAtTargetId = data.getLong("lookAtTargetId", lookAtTargetId);
+		intendedTargetId = data.getLong("intendedTargetId", intendedTargetId);
+		moodId = (byte) data.getInteger("moodId", moodId);
+		costume = data.getString("costume", costume);
+		visible = data.getBoolean("visible", visible);
+		shownOnRadar = data.getBoolean("shownOnRadar", shownOnRadar);
+		beast = data.getBoolean("beast", beast);
+		difficulty = CreatureDifficulty.valueOf(data.getString("difficulty", difficulty.name()));
+		hologramColour = HologramColour.valueOf(data.getString("hologramColor", hologramColour.name()));
 		equippedWeapon = data.getLong("equippedWeapon", equippedWeapon);
 		maxAttributes.addAll(data.getArray("maxAttributes", Integer.class));
-		buffs.putAll(data.getMap("buffs", MongoData.class, CRC::new, doc -> MongoData.create(doc, Buff::new)));
+		buffs.putAll(data.getMap("buffs", CRC.class, Buff.class));
 	}
 	
 	@Override

@@ -1137,6 +1137,7 @@ public class CreatureObject extends TangibleObject {
 		creo6.readMongo(data.getDocument("base6"));
 		posture = Posture.valueOf(data.getString("posture", posture.name()));
 		race = Race.valueOf(data.getString("race", race.name()));
+		height = data.getDouble("height", height);
 		battleFatigue = data.getInteger("battleFatigue", battleFatigue);
 		ownerId = data.getLong("ownerId", ownerId);
 		statesBitmask = data.getLong("statesBitmask", statesBitmask);

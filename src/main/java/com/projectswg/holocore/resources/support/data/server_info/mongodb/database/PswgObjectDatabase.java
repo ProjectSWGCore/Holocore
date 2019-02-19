@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.data.server_info.mongodb.database;
 
+import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.IndexOptions;
@@ -53,7 +54,7 @@ public class PswgObjectDatabase extends PswgDatabase {
 	@Override
 	public void initialize() {
 		super.initialize();
-		this.collection = getCollectionByName("objects");
+		this.collection = getCollectionByName("objects").withWriteConcern(WriteConcern.JOURNALED);
 		
 		this.collection.countDocuments();
 		this.collection.createIndex(Indexes.ascending("id"), new IndexOptions().unique(true));

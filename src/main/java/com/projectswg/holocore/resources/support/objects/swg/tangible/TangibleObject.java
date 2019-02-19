@@ -499,6 +499,6 @@ public class TangibleObject extends SWGObject {
 		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
 		objectEffects = data.getByteArray("objectEffects");
 		optionFlags = data.getInteger("optionFlags", 0);
-		effectsMap.putAll(data.getMap("effectsMap", String.class));
+		effectsMap.putAll(data.getMap("effectsMap", String.class, String.class));
 	}
 }

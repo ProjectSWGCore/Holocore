@@ -38,13 +38,13 @@ import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedStatistics;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.SafeMain;
 import me.joshlarson.jlcommon.control.ServiceBase;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.Log.LogLevel;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
@@ -105,6 +105,7 @@ public class ProjectSWG {
 				setStatus(ServerStatus.OPEN);
 				Manager.run(managers, 50);
 			}
+			Delay.clearInterrupted();
 			setStatus(ServerStatus.TERMINATING);
 			Manager.stop(managers);
 		}

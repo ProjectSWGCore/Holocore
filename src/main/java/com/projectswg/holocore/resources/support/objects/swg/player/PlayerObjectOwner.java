@@ -41,7 +41,6 @@ import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointOb
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -208,7 +207,7 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		data.putByteArray("completedQuests", completedQuests.toByteArray());
 		data.putByteArray("activeQuests", activeQuests.toByteArray());
 		data.putInteger("activeQuest", activeQuest);
-		data.putMap("quests", quests, String::valueOf);
+		data.putMap("quests", quests);
 		data.putString("profWheelPosition", profWheelPosition);
 	}
 	
@@ -221,14 +220,14 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		activeQuests.clear();
 		quests.clear();
 		
-		experience.putAll(data.getMap("experience", Integer.class));
+		experience.putAll(data.getMap("experience", String.class, Integer.class));
 		data.getArray("waypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> waypoints.put(obj.getObjectId(), obj));
 		forcePower = data.getInteger("forcePower", forcePower);
 		maxForcePower = data.getInteger("maxForcePower", maxForcePower);
 		completedQuests.xor(BitSet.valueOf(data.getByteArray("completedQuests", emptyByteArray)));
 		activeQuests.xor(BitSet.valueOf(data.getByteArray("activeQuests", emptyByteArray)));
 		activeQuest = data.getInteger("activeQuest", activeQuest);
-		quests.putAll(data.getMap("quests", Integer.class, Integer::valueOf, Function.identity()));
+		quests.putAll(data.getMap("quests", Integer.class, Integer.class));
 		profWheelPosition = data.getString("profWheelPosition", profWheelPosition);
 	}
 	

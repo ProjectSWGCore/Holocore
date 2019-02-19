@@ -28,18 +28,19 @@ public class CharacterLookupService extends Service {
 		this.charactersByFirstName = new ConcurrentHashMap<>();
 		this.loggedInPlayers = new CopyOnWriteArraySet<>();
 		this.loggedInPlayersView = Collections.unmodifiableSet(loggedInPlayers);
+		PlayerLookup.setAuthority(this);
 	}
 	
 	@Override
 	public boolean initialize() {
 		PlayerLookup.setAuthority(this);
-		return super.initialize();
+		return true;
 	}
 	
 	@Override
 	public boolean terminate() {
 		PlayerLookup.setAuthority(null);
-		return super.terminate();
+		return true;
 	}
 	
 	@IntentHandler
