@@ -1,5 +1,6 @@
 package com.projectswg.holocore.services.support.global.zone;
 
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -10,20 +11,23 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CharacterLookupService extends Service {
 	
 	private final Map<String, CreatureObject> charactersByFullName;
 	private final Map<String, CreatureObject> charactersByFirstName;
+	private final Set<CreatureObject> loggedInPlayers;
+	private final Set<CreatureObject> loggedInPlayersView;
 	
 	public CharacterLookupService() {
 		this.charactersByFullName = new ConcurrentHashMap<>();
 		this.charactersByFirstName = new ConcurrentHashMap<>();
+		this.loggedInPlayers = new CopyOnWriteArraySet<>();
+		this.loggedInPlayersView = Collections.unmodifiableSet(loggedInPlayers);
 	}
 	
 	@Override
@@ -36,6 +40,24 @@ public class CharacterLookupService extends Service {
 	public boolean terminate() {
 		PlayerLookup.setAuthority(null);
 		return super.terminate();
+	}
+	
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		switch (pei.getEvent()) {
+			case PE_FIRST_ZONE:
+				loggedInPlayers.add(pei.getPlayer().getCreatureObject());
+				break;
+			case PE_LOGGED_OUT:
+				loggedInPlayers.remove(pei.getPlayer().getCreatureObject());
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private Collection<CreatureObject> getLoggedInCharacters() {
+		return loggedInPlayersView;
 	}
 	
 	private Player getPlayerByFullName(@NotNull String name) {
@@ -132,6 +154,10 @@ public class CharacterLookupService extends Service {
 		
 		public static CreatureObject getCharacterByFirstName(String name) {
 			return AUTHORITY.get().getCharacterByFirstName(name);
+		}
+		
+		public static Collection<CreatureObject> getLoggedInCharacters() {
+			return AUTHORITY.get().getLoggedInCharacters();
 		}
 		
 	}

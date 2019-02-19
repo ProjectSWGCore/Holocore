@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.test.runners;
 
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService;
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage;
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
 import org.junit.Before;
@@ -39,6 +40,7 @@ public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousInte
 	public final void setupSimulatedServices() {
 		registerService(new SimulatedObjectStorage());
 		registerService(awareness = new AwarenessService());
+		registerService(new CharacterLookupService());
 	}
 	
 	public final void updateAwareness() {

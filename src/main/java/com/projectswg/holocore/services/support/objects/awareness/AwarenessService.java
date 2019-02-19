@@ -50,6 +50,7 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -57,10 +58,9 @@ import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class AwarenessService extends Service {
@@ -70,13 +70,11 @@ public class AwarenessService extends Service {
 	private final ObjectAwareness awareness;
 	private final ScheduledThreadPool chunkUpdater;
 	private final BlockingQueue<Runnable> positionUpdates;
-	private final Set<CreatureObject> onlinePlayers;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
 		this.chunkUpdater = new ScheduledThreadPool(1, 8, "awareness-chunk-updater");
 		this.positionUpdates = new LinkedBlockingQueue<>();
-		this.onlinePlayers = ConcurrentHashMap.newKeySet();
 	}
 	
 	@Override
@@ -94,14 +92,15 @@ public class AwarenessService extends Service {
 	}
 	
 	public void update() {
+		Collection<CreatureObject> players = PlayerLookup.getLoggedInCharacters();
 		awareness.updateChunks();
-		onlinePlayers.forEach(CreatureObject::flushObjectCreates);
+		players.forEach(CreatureObject::flushObjectCreates);
 		while (!positionUpdates.isEmpty()) {
 			Runnable r = positionUpdates.poll();
 			r.run();
 		}
-		onlinePlayers.forEach(CreatureObject::flushObjectDestroys);
-		onlinePlayers.forEach(CreatureObject::sendAndFlushAllDeltas);
+		players.forEach(CreatureObject::flushObjectDestroys);
+		players.forEach(CreatureObject::sendAndFlushAllDeltas);
 	}
 	
 	@IntentHandler
@@ -116,14 +115,8 @@ public class AwarenessService extends Service {
 				awareness.destroyObject(creature);
 				break;
 			case PE_LOGGED_OUT:
-				if (creature != null) {
-					onlinePlayers.remove(creature);
+				if (creature != null)
 					creature.resetObjectsAware();
-				}
-				break;
-			case PE_FIRST_ZONE:
-				assert creature != null;
-				onlinePlayers.add(creature);
 				break;
 			default:
 				break;
