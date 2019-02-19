@@ -283,7 +283,9 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	private void removeDataSize(Object key) {
 		synchronized (data) {
-			dataSize -= data.get(key).length;
+			byte [] removed = data.get(key);
+			if (removed != null)
+				dataSize -= removed.length;
 		}
 	}
 	
