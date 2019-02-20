@@ -13,9 +13,12 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildoutLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.database.PswgObjectDatabase;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -26,6 +29,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -83,9 +88,17 @@ public class ObjectStorageService extends Service {
 		long startTime = StandardLog.onStartLoad("server objects");
 		List<MongoData> objectDocuments = objectDatabase.getObjects();
 		Map<Long, SWGObject> objects = new HashMap<>();
+		AtomicLong highestId = new AtomicLong(0);
 		for (MongoData doc : objectDocuments) {
 			SWGObject obj = SWGObjectFactory.create(doc);
 			objects.put(obj.getObjectId(), obj);
+			highestId.updateAndGet(prevHighest -> prevHighest > obj.getObjectId() ? prevHighest : obj.getObjectId());
+			if (obj instanceof PlayerObject) {
+				for (WaypointObject waypoint : ((PlayerObject) obj).getWaypoints().values()) {
+					objects.put(waypoint.getObjectId(), waypoint);
+					highestId.updateAndGet(prevHighest -> prevHighest > waypoint.getObjectId() ? prevHighest : waypoint.getObjectId());
+				}
+			}
 		}
 		for (MongoData doc : objectDocuments) {
 			long id = doc.getLong("id", 0);
@@ -108,10 +121,11 @@ public class ObjectStorageService extends Service {
 				persistedObjects.add(obj);
 		}
 		
+		objects.values().forEach(obj -> ObjectCreator.updateMaxObjectId(obj.getObjectId()));
 		objects.values().forEach(ObjectCreatedIntent::broadcast);
 		this.objectMap.putAll(objects);
 		// TODO: Clear unreferenced objects from database
-		StandardLog.onEndLoad(objects.size(), "players", startTime);
+		StandardLog.onEndLoad(objects.size(), "server objects", startTime);
 		return true;
 	}
 	
