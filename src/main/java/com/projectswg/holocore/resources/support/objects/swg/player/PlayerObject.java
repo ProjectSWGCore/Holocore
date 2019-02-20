@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.player;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -56,6 +57,7 @@ public class PlayerObject extends IntangibleObject {
 	private final PlayerObjectOwner		play8			= new PlayerObjectOwner(this);
 	private final PlayerObjectOwnerNP	play9			= new PlayerObjectOwnerNP(this);
 	private final Set<String>			joinedChannels	= ConcurrentHashMap.newKeySet();
+	private final Map<Integer, Mail>	mails			= new ConcurrentHashMap<>();
 	
 	private long	startPlayTime		= 0;
 	private long	lastUpdatePlayTime	= 0;
@@ -97,6 +99,30 @@ public class PlayerObject extends IntangibleObject {
 	
 	public long getStartPlayTime() {
 		return startPlayTime;
+	}
+	
+	public Map<Integer, Mail> getMailMap() {
+		return Collections.unmodifiableMap(mails);
+	}
+	
+	public Collection<Mail> getMail() {
+		return Collections.unmodifiableCollection(mails.values());
+	}
+	
+	public Mail getMail(int id) {
+		return mails.get(id);
+	}
+	
+	public void addMail(Mail m) {
+		this.mails.put(m.getId(), m);
+	}
+	
+	public void removeMail(int id) {
+		this.mails.remove(id);
+	}
+	
+	public void removeMail(Mail m) {
+		removeMail(m.getId());
 	}
 	
 	/*
@@ -845,17 +871,21 @@ public class PlayerObject extends IntangibleObject {
 		play9.saveMongo(data.getDocument("base9"));
 		data.putString("biography", biography);
 		data.putString("account", account);
+		data.putMap("mail", mails);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
 		super.readMongo(data);
+		mails.clear();
+		
 		play3.readMongo(data.getDocument("base3"));
 		play6.readMongo(data.getDocument("base6"));
 		play8.readMongo(data.getDocument("base8"));
 		play9.readMongo(data.getDocument("base9"));
 		biography = data.getString("biography", biography);
 		account = data.getString("account", "");
+		mails.putAll(data.getMap("mail", Integer.class, Mail.class));
 	}
 	
 	@Override
