@@ -213,8 +213,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 	private void update(CreatureObject obj) {
 		awareness.updateObject(obj);
 		awareness.updateChunks();
-		obj.flushObjectCreates();
-		obj.flushObjectDestroys();
+		obj.flushAwareness();
 	}
 	
 	private void moveNoAssert(TestLocation location) {

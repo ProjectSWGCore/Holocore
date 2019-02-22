@@ -89,6 +89,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map<ObjectDataAttribute, Object>	dataAttributes	= new EnumMap<>(ObjectDataAttribute.class);
 	private final Map<ServerAttribute, Object>		serverAttributes= new EnumMap<>(ServerAttribute.class);
 	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
+	private final Set<SWGObject>					containedObjectsView	= Collections.unmodifiableSet(containedObjects);
+	private final Collection<SWGObject>				slottedObjectsView		= Collections.unmodifiableCollection(slots.values());
 	
 	private GameObjectType 				gameObjectType	= GameObjectType.GOT_NONE;
 	private ContainerPermissions		permissions		= DefaultPermissions.getPermissions();
@@ -431,7 +433,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableSet(containedObjects);
+		return containedObjectsView;
 	}
 	
 	public void setSlots(@NotNull Collection<String> slots) {
@@ -469,7 +471,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@NotNull
 	public Collection<SWGObject> getSlottedObjects() {
-		return Collections.unmodifiableCollection(slots.values());
+		return slottedObjectsView;
 	}
 	
 	public void setLocation(Location location) {

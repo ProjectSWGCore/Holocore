@@ -32,6 +32,7 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
@@ -41,7 +42,6 @@ import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
-import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -99,18 +99,12 @@ public class CreatureObject extends TangibleObject {
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
-	public void flushObjectCreates() {
+	public void flushAwareness() {
 		Player owner = getOwnerShallow();
 		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
 			return;
-		awareness.flushCreates(owner);
-	}
-	
-	public void flushObjectDestroys() {
-		Player owner = getOwnerShallow();
-		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
-			return;
-		awareness.flushDestroys(owner);
+		awareness.flush(owner);
+		sendAndFlushAllDeltas();
 	}
 	
 	public void resetObjectsAware() {
@@ -277,6 +271,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public boolean closeContainer(SWGObject obj, String slot) {
 		return containersOpen.remove(new Container(obj, slot));
+	}
+	
+	public void setTeleportDestination(SWGObject parent, Location location) {
+		awareness.setTeleportDestination(parent, location);
 	}
 	
 	public void addDelta(DeltasMessage delta) {

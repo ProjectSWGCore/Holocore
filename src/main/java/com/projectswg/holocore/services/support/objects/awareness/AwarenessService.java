@@ -34,7 +34,6 @@ import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
-import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -50,7 +49,6 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -58,10 +56,7 @@ import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class AwarenessService extends Service {
 	
@@ -69,12 +64,10 @@ public class AwarenessService extends Service {
 	
 	private final ObjectAwareness awareness;
 	private final ScheduledThreadPool chunkUpdater;
-	private final BlockingQueue<Runnable> positionUpdates;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
 		this.chunkUpdater = new ScheduledThreadPool(1, 8, "awareness-chunk-updater");
-		this.positionUpdates = new LinkedBlockingQueue<>();
 	}
 	
 	@Override
@@ -92,15 +85,11 @@ public class AwarenessService extends Service {
 	}
 	
 	public void update() {
-		Collection<CreatureObject> players = PlayerLookup.getLoggedInCharacters();
+//		PlayerLookup.getLoggedInCharacters().forEach(CreatureObject::flush);
+	}
+	
+	public void updateChunks() {
 		awareness.updateChunks();
-		players.forEach(CreatureObject::flushObjectCreates);
-		while (!positionUpdates.isEmpty()) {
-			Runnable r = positionUpdates.poll();
-			r.run();
-		}
-		players.forEach(CreatureObject::flushObjectDestroys);
-		players.forEach(CreatureObject::sendAndFlushAllDeltas);
 	}
 	
 	@IntentHandler
@@ -139,7 +128,6 @@ public class AwarenessService extends Service {
 	@IntentHandler
 	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
 		@NotNull SWGObject obj = oti.getObject();
-		@Nullable SWGObject oldParent = oti.getOldParent();
 		@Nullable SWGObject newParent = oti.getNewParent();
 		@NotNull Location oldLocation = oti.getOldLocation();
 		@NotNull Location newLocation = oti.getNewLocation();
@@ -154,14 +142,11 @@ public class AwarenessService extends Service {
 			Location newWorldLocation = newLocation;
 			if (newParent != null)
 				newWorldLocation = Location.builder(newWorldLocation).translateLocation(newParent.getWorldLocation()).build();
-			if (obj instanceof CreatureObject)
-				((CreatureObject) obj).setMovementPercent(0);
 			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, obj.getNextUpdateCount(), newWorldLocation, 0));
 		}
 		awareness.updateObject(obj);
-		sendObjectUpdates(obj, oldParent, newParent, oldLocation, newLocation, true, 0);
 		if (obj instanceof CreatureObject)
-			positionUpdates.add(() -> ((CreatureObject) obj).setMovementPercent(1));
+			((CreatureObject) obj).setTeleportDestination(newParent, newLocation);
 	}
 	
 	@IntentHandler
@@ -176,7 +161,7 @@ public class AwarenessService extends Service {
 		@Nullable SWGObject newContainer = cti.getContainer();
 		
 		awareness.updateObject(cti.getObject());
-		sendObjectUpdates(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), false, 0);
+		sendObjectUpdates(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), 0);
 	}
 	
 	@IntentHandler
@@ -208,7 +193,7 @@ public class AwarenessService extends Service {
 		creature.clearDeltas();
 		startZone(player, creature, firstZone);
 		awareness.updateObject(creature);
-		sendObjectUpdates(creature, oldParent, parent, oldLocation, loc, false, 0);
+		sendObjectUpdates(creature, oldParent, parent, oldLocation, loc, 0);
 	}
 	
 	private void startZone(Player player, CreatureObject creature, boolean firstZone) {
@@ -236,7 +221,7 @@ public class AwarenessService extends Service {
 		
 		obj.systemMove(parent, requestedLocation);
 		awareness.updateObject(obj);
-		sendObjectUpdates(obj, oldParent, parent, oldLocation, requestedLocation, false, speed);
+		sendObjectUpdates(obj, oldParent, parent, oldLocation, requestedLocation, speed);
 	}
 	
 	private static boolean isPlayerZoneInRequired(@NotNull SWGObject obj, @NotNull Location oldLocation, @NotNull Location newLocation) {
@@ -247,45 +232,42 @@ public class AwarenessService extends Service {
 		return !oldLocation.getTerrain().getFile().equals(newLocation.getTerrain().getFile());
 	}
 	
-	private void sendObjectUpdates(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
-		positionUpdates.add(() -> onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, forceSelfUpdate, speed));
-		positionUpdates.add(obj::onObjectMoved);
+	private void sendObjectUpdates(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, double speed) {
+		onObjectMoved(obj, oldParent, newParent, oldLocation, newLocation, speed);
+		obj.onObjectMoved();
 	}
 	
-	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, double speed) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, oldParent, newParent, oldLocation, newLocation).broadcast();
+		else if (obj.getObserverCreatures().isEmpty())
+			return; // If a tree falls in the forest and nobody is there to hear it...
 		
 		if (newParent != null) {
-			onObjectMovedInParent(obj, oldParent, newParent, oldLocation, newLocation, forceSelfUpdate, speed);
+			onObjectMovedInParent(obj, oldParent, newParent, oldLocation, newLocation, speed);
 		} else {
-			onObjectMovedInWorld(obj, oldParent, oldLocation, newLocation, forceSelfUpdate, speed);
+			onObjectMovedInWorld(obj, oldParent, oldLocation, newLocation, speed);
 		}
 	}
 	
-	private static void onObjectMovedInParent(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+	private static void onObjectMovedInParent(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, double speed) {
 		if (oldParent != newParent)
 			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), newParent.getObjectId(), obj.getSlotArrangement()));
 		
 		// Slotted objects don't get position updates - they inherit their parent's location, plus a client-defined offset (e.g. armor, mounts)
 		if (obj.getSlotArrangement() == -1) {
 			int counter = obj.getNextUpdateCount();
-			if (forceSelfUpdate)
-				obj.sendSelf(new DataTransformWithParent(obj.getObjectId(), 0, counter, newParent.getObjectId(), newLocation, (byte) speed));
 			
 			if (!oldLocation.equals(newLocation))
 				obj.sendObservers(new UpdateTransformWithParentMessage(obj.getObjectId(), newParent.getObjectId(), counter, newLocation, (byte) speed));
 		}
 	}
 	
-	private static void onObjectMovedInWorld(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation, boolean forceSelfUpdate, double speed) {
+	private static void onObjectMovedInWorld(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation, double speed) {
 		int counter = obj.getNextUpdateCount();
 		
 		if (oldParent != null)
 			obj.sendObservers(new UpdateContainmentMessage(obj.getObjectId(), 0, obj.getSlotArrangement()));
-		
-		if (forceSelfUpdate)
-			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, counter, newLocation, (byte) speed));
 		
 		if (!oldLocation.equals(newLocation))
 			obj.sendObservers(new UpdateTransformMessage(obj.getObjectId(), counter, newLocation, (byte) speed));

@@ -30,20 +30,22 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 class TerrainMapChunk {
 	
-	private final Set<SWGObject> objects;
-	private final Set<CreatureObject> creatures;
+	private static final List<SWGObject> EMPTY_AWARENESS = List.of();
+	
+	private final CopyOnWriteArrayList<SWGObject> objects;
+	private final CopyOnWriteArrayList<CreatureObject> creatures;
 	private TerrainMapChunk [] neighbors;
 	
 	public TerrainMapChunk() {
-		this.objects = new CopyOnWriteArraySet<>();
-		this.creatures = ConcurrentHashMap.newKeySet();
+		this.objects = new CopyOnWriteArrayList<>();
+		this.creatures = new CopyOnWriteArrayList<>();
 		this.neighbors = new TerrainMapChunk[]{this};
 	}
 	
@@ -56,7 +58,7 @@ class TerrainMapChunk {
 	
 	public void addObject(@NotNull SWGObject obj) {
 		for (TerrainMapChunk neighbor : neighbors)
-			neighbor.objects.add(obj);
+			neighbor.objects.addIfAbsent(obj);
 		
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
 			creatures.add((CreatureObject) obj);
@@ -71,14 +73,45 @@ class TerrainMapChunk {
 	}
 	
 	public void update() {
+		if (creatures.isEmpty())
+			return;
+		List<CreatureAware> aware = new ArrayList<>(creatures.size());
 		for (CreatureObject creature : creatures) {
-			List<SWGObject> withinRange = new ArrayList<>();
-			for (SWGObject test : objects) {
-				if (creature.isWithinAwarenessRange(test))
-					withinRange.add(test);
-			}
-			creature.setAware(AwarenessType.OBJECT, withinRange);
+			if (creature.isLoggedInPlayer())
+				aware.add(new CreatureAware(creature));
+			else
+				creature.setAware(AwarenessType.OBJECT, EMPTY_AWARENESS);
 		}
+		
+		final CreatureAware [] awareCompiled = aware.toArray(new CreatureAware[0]);
+		for (SWGObject test : objects) {
+			for (CreatureAware creatureAware : awareCompiled)
+				creatureAware.test(test);
+		}
+		
+		aware.forEach(CreatureAware::commit);
+	}
+	
+	private static class CreatureAware {
+		
+		private final CreatureObject creature;
+		private final List<SWGObject> aware;
+		
+		public CreatureAware(CreatureObject creature) {
+			this.creature = creature;
+			this.aware = new ArrayList<>();
+		}
+		
+		public void test(SWGObject test) {
+			if (creature.isWithinAwarenessRange(test))
+				aware.add(test);
+		}
+		
+		public void commit() {
+			creature.setAware(AwarenessType.OBJECT, aware);
+			creature.flushAwareness();
+		}
+		
 	}
 	
 }

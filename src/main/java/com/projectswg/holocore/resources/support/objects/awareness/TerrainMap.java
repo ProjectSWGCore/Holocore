@@ -36,23 +36,21 @@ public class TerrainMap {
 	private static final int MAP_WIDTH = 16384;
 	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / (double) CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
 	
-	private final TerrainMapChunk [][] chunks;
+	private final TerrainMapChunk [] chunks;
 	
 	public TerrainMap() {
-		this.chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
+		this.chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS*CHUNK_COUNT_ACROSS];
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
-				chunks[z][x] = new TerrainMapChunk();
+				chunks[z*CHUNK_COUNT_ACROSS+x] = new TerrainMapChunk();
 			}
 		}
 		connectChunkNeighbors();
 	}
 	
 	public void updateChunks() {
-		for (TerrainMapChunk [] chunkRow : chunks) {
-			for (TerrainMapChunk chunk : chunkRow) {
-				chunk.update();
-			}
+		for (TerrainMapChunk chunk : chunks) {
+			chunk.update();
 		}
 	}
 	
@@ -106,7 +104,7 @@ public class TerrainMap {
 		int indZ = (obj.getTruncZ()+8192) >> INDEX_FACTOR;
 		indX = (indX < 0) ? 0 : (indX >= chunkCount ? chunkCount-1 : indX);
 		indZ = (indZ < 0) ? 0 : (indZ >= chunkCount ? chunkCount-1 : indZ);
-		TerrainMapChunk chunk = chunks[indZ][indX];
+		TerrainMapChunk chunk = chunks[indZ*CHUNK_COUNT_ACROSS+indX];
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
 		
 		if (current != chunk) {
@@ -124,12 +122,12 @@ public class TerrainMap {
 	private void connectChunkNeighbors() {
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
-				TerrainMapChunk chunk = chunks[z][x];
+				TerrainMapChunk chunk = chunks[z*CHUNK_COUNT_ACROSS+x];
 				for (int tmpZ = cappedZero(z-1); tmpZ <= z+1 && tmpZ < CHUNK_COUNT_ACROSS; tmpZ++) {
 					for (int tmpX = cappedZero(x-1); tmpX <= x+1 && tmpX < CHUNK_COUNT_ACROSS; tmpX++) {
 						if (x == tmpX && z == tmpZ)
 							continue;
-						chunk.link(chunks[tmpZ][tmpX]);
+						chunk.link(chunks[tmpZ*CHUNK_COUNT_ACROSS+tmpX]);
 					}
 				}
 			}

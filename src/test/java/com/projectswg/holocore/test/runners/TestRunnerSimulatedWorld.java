@@ -45,6 +45,7 @@ public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousInte
 	
 	public final void updateAwareness() {
 		awareness.update();
+		awareness.updateChunks();
 	}
 	
 }
