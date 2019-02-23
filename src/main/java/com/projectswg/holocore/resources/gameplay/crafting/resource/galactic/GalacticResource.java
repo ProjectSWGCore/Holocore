@@ -26,11 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 
-public class GalacticResource implements Persistable {
+public class GalacticResource implements Persistable, MongoPersistable {
 	
 	private final GalacticResourceStats stats;
 	
@@ -80,6 +82,15 @@ public class GalacticResource implements Persistable {
 	}
 	
 	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		id = stream.getLong();
+		name = stream.getAscii();
+		rawId = stream.getLong();
+		stats.read(stream);
+	}
+	
+	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(0);
 		stream.addLong(id);
@@ -89,12 +100,19 @@ public class GalacticResource implements Persistable {
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		id = stream.getLong();
-		name = stream.getAscii();
-		rawId = stream.getLong();
-		stats.read(stream);
+	public void readMongo(MongoData data) {
+		id = data.getLong("id", id);
+		name = data.getString("name", name);
+		rawId = data.getLong("rawId", rawId);
+		data.getDocument("stats", stats);
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putLong("id", id);
+		data.putString("name", name);
+		data.putLong("rawId", rawId);
+		data.putDocument("stats", stats);
 	}
 	
 	@Override
