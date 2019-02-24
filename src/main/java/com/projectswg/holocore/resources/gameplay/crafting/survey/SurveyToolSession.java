@@ -51,7 +51,7 @@ public class SurveyToolSession {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
 		this.surveyHandler = new SurveyHandler(creature, surveyTool, executor);
-		this.sampleHandler = new SampleHandler(creature, executor);
+		this.sampleHandler = new SampleHandler(creature, surveyTool, executor);
 	}
 	
 	public synchronized void startSession() {

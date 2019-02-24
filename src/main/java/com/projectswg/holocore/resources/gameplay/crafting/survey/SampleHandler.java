@@ -61,12 +61,14 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SampleHandler {
 	
 	private final CreatureObject creature;
+	private final TangibleObject surveyTool;
 	private final AtomicReference<Location> sampleLocation;
 	private final AtomicReference<ScheduledFuture<?>> sampleLoop;
 	private final ScheduledThreadPool executor;
 	
-	public SampleHandler(CreatureObject creature, ScheduledThreadPool executor) {
+	public SampleHandler(CreatureObject creature, TangibleObject surveyTool, ScheduledThreadPool executor) {
 		this.creature = creature;
+		this.surveyTool = surveyTool;
 		this.sampleLocation = new AtomicReference<>(null);
 		this.sampleLoop = new AtomicReference<>(null);
 		this.executor = executor;
@@ -125,13 +127,30 @@ public class SampleHandler {
 	}
 	
 	private void sample(GalacticResource resource, Location location) {
+		if (GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain()).isEmpty()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_empty"));
+			stopSampleLoop();
+			return;
+		}
+		if (!creature.getInventory().getContainedObjects().contains(surveyTool)) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_gone"));
+			stopSampleLoop();
+			return;
+		}
 		double concentration = getConcentration(resource, location);
 		if (concentration <= 0.3) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:density_below_threshold"), "TO", resource.getName())));
+			stopSampleLoop();
 			return;
 		}
 		
-		int resourceAmount = ThreadLocalRandom.current().nextInt(19, 25);
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		if (random.nextDouble() > concentration) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_failed"), "TO", resource.getName())));
+			return;
+		}
+		
+		int resourceAmount = random.nextInt(19, 25);
 		ResourceContainerObject resourceObject = createResourceObject(resource, resourceAmount);
 		ContainerResult result = resourceObject.moveToContainer(creature, creature.getInventory());
 		switch (result) {
@@ -148,6 +167,7 @@ public class SampleHandler {
 				break;
 			case SUCCESS:
 				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
+				creature.sendSelf(new PlayMusicMessage(0, "sound/item_internalstorage_open.snd", 1, false));
 				ObjectCreatedIntent.broadcast(resourceObject);
 				break;
 		}
