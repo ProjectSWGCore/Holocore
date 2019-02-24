@@ -91,6 +91,7 @@ public class SampleHandler {
 		creature.setPosture(Posture.CROUCHED);
 		creature.setMovementPercent(0);
 		creature.setTurnScale(0);
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:start_sampling"), "TO", resource.getName())));
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
 		Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
@@ -143,6 +144,7 @@ public class SampleHandler {
 			case CONTAINER_FULL:
 				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:no_inv_space"));
 				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
+				stopSampleLoop();
 				break;
 			case SUCCESS:
 				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
@@ -180,7 +182,6 @@ public class SampleHandler {
 		ResourceContainerObject resourceObject = (ResourceContainerObject) ObjectCreator.createObjectFromTemplate(resource.getRawResource().getCrateTemplate());
 		resourceObject.setQuantity(amount);
 		resourceObject.setParentName(resource.getRawResource().getParent().getName().toString());
-		resourceObject.setResourceNameId(resource.getRawResource().getName());
 		resourceObject.setResourceType(resource.getRawResourceId());
 		resourceObject.setResourceName(resource.getName());
 		assignStats(resourceObject, resource);
