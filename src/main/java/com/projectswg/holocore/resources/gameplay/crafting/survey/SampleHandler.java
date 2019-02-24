@@ -204,6 +204,7 @@ public class SampleHandler {
 		resourceObject.setParentName(resource.getRawResource().getParent().getName().toString());
 		resourceObject.setResourceType(resource.getRawResourceId());
 		resourceObject.setResourceName(resource.getName());
+		resourceObject.setObjectName(resource.getName());
 		assignStats(resourceObject, resource);
 		resourceObject.setContainerPermissions(ReadWritePermissions.from(creature));
 		return resourceObject;
