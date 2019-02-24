@@ -42,8 +42,10 @@ import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -78,30 +80,59 @@ public class TangibleObject extends SWGObject {
 	
 	@Override
 	public void moveToContainer(SWGObject newParent) {
+		if (defaultMoveToContainer(newParent))
+			super.moveToContainer(newParent);    // Not stackable, use default behavior
+	}
+	
+	@Override
+	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
+		if (!getContainerPermissions().canMove(requester, newParent))
+			return ContainerResult.NO_PERMISSION;
+		return defaultMoveToContainer(newParent) ? super.moveToContainer(requester, newParent) : ContainerResult.SUCCESS;
+	}
+	
+	private boolean defaultMoveToContainer(SWGObject newParent) {
+		int counter = getCounter();
+		
 		// Check if object is stackable
 		if (newParent != null && counter > 0) {
 			// Scan container for matching stackable item
 			String ourTemplate = getTemplate();
 			Map<String, String> ourAttributes = getAttributes();
+			TangibleObject bestMatch = null;
 			
 			for (SWGObject candidate : newParent.getContainedObjects()) {
 				String theirTemplate = candidate.getTemplate();
 				Map<String, String> theirAttributes = candidate.getAttributes();
 				
-				if (this != candidate && candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
-					DestroyObjectIntent.broadcast(this);
-					
-					// Increase stack count on matching stackable item
-					TangibleObject tangibleMatch = (TangibleObject) candidate;
-					int theirCounter = tangibleMatch.getCounter();
-					
-					tangibleMatch.setCounter(theirCounter + counter);
-					return;	// Stackable and matching item was found
-				}
+				if (candidate == this)
+					continue; // Can't transfer into itself
+				if (!(candidate instanceof TangibleObject))
+					continue; // Item not the correct type
+				if (!ourTemplate.equals(theirTemplate) || !ourAttributes.equals(theirAttributes))
+					continue; // Not eligible for stacking
+				
+				TangibleObject tangibleMatch = (TangibleObject) candidate;
+				if (tangibleMatch.getCounter() >= tangibleMatch.getMaxCounter())
+					continue; // Can't add anything to this object
+				
+				bestMatch = tangibleMatch;
+			}
+			
+			if (bestMatch != null) {
+				int theirCounter = bestMatch.getCounter();
+				int transferAmount = Math.min(bestMatch.getMaxCounter() - theirCounter, counter);
+				
+				bestMatch.setCounter(theirCounter + transferAmount);
+				setCounter(counter - transferAmount);
+				if (getCounter() > 0)
+					return true;
+				DestroyObjectIntent.broadcast(this);
+				return false;
 			}
 		}
 		
-		super.moveToContainer(newParent);    // Not stackable, use default behavior
+		return true;
 	}
 	
 	public int getMaxHitPoints() {
@@ -298,6 +329,10 @@ public class TangibleObject extends SWGObject {
 	public void setCounter(int counter) {
 		this.counter = counter;
 		sendDelta(3, 9, counter);
+	}
+	
+	public int getMaxCounter() {
+		return 100;
 	}
 	
 	/**

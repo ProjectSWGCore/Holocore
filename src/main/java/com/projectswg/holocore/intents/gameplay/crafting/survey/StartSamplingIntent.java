@@ -24,32 +24,28 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.crafting.survey;
+package com.projectswg.holocore.intents.gameplay.crafting.survey;
 
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import me.joshlarson.jlcommon.control.Intent;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class InProgressSampleManager {
+public class StartSamplingIntent extends Intent {
 	
-	private final Map<CreatureObject, SampleSession> surveySessions;
+	private final CreatureObject creature;
+	private final GalacticResource resource;
 	
-	public InProgressSampleManager() {
-		this.surveySessions = new HashMap<>();
+	public StartSamplingIntent(CreatureObject creature, GalacticResource resource) {
+		this.creature = creature;
+		this.resource = resource;
 	}
 	
-	public void startSession(CreatureObject creature, GalacticResource resource) {
-		SampleSession session;
-		synchronized (surveySessions) {
-			session = surveySessions.computeIfAbsent(creature, c -> new SampleSession(c, resource));
-			if (!session.getResource().equals(resource)) {
-				session.stopSession();
-				surveySessions.put(creature, session = new SampleSession(creature, resource));
-			}
-		}
-		session.startSession();
+	public CreatureObject getCreature() {
+		return creature;
+	}
+	
+	public GalacticResource getResource() {
+		return resource;
 	}
 	
 }

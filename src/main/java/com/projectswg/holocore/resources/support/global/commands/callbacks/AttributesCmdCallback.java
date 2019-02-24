@@ -45,7 +45,6 @@ public class AttributesCmdCallback implements ICmdCallback {
 			int clientRevision = Integer.parseInt(cmd[i+1]);
 			
 			SWGObject obj = ObjectLookup.getObjectById(objectId);
-			Log.t("%s submitted attribute request. Ver=%d  Object=%s", player.getCharacterName(), clientRevision, obj);
 			if (obj != null)
 				player.sendPacket(new AttributeListMessage(obj.getObjectId(), obj.getAttributes(), clientRevision));
 		}

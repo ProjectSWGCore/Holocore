@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.network.packets.swg.zone.object_controller.JumpUpdate;
+import com.projectswg.holocore.intents.gameplay.crafting.survey.StopSamplingIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -39,6 +40,7 @@ public class JumpCmdCallback implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		CreatureObject creature = player.getCreatureObject();
 		creature.sendObservers(new JumpUpdate(creature.getObjectId()));
+		StopSamplingIntent.broadcast(creature);
 	}
 
 }

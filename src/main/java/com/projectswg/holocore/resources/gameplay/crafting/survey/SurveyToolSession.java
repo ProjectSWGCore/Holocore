@@ -24,53 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.crafting.survey;
+package com.projectswg.holocore.resources.gameplay.crafting.survey;
 
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage;
 import com.projectswg.common.network.packets.swg.zone.crafting.resources.ResourceListForSurveyMessage.ResourceItem;
-import com.projectswg.holocore.intents.gameplay.crafting.survey.SampleResourceIntent;
-import com.projectswg.holocore.intents.gameplay.crafting.survey.StartSurveyToolIntent;
-import com.projectswg.holocore.intents.gameplay.crafting.survey.StartSurveyingIntent;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
-import com.projectswg.holocore.resources.gameplay.crafting.survey.InProgressSampleManager;
-import com.projectswg.holocore.resources.gameplay.crafting.survey.SurveySession;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-/**
- * In charge of responding to survey requests
- */
-public class SurveyService extends Service {
+public class SurveyToolSession {
 	
-	private final Map<CreatureObject, TangibleObject> activeSurveyTool;
-	private final Map<CreatureObject, SurveySession> surveySessions;
-	private final InProgressSampleManager inProgressSampleManager;
+	private final CreatureObject creature;
+	private final TangibleObject surveyTool;
+	private final SurveyHandler surveyHandler;
+	private final SampleHandler sampleHandler;
 	
-	public SurveyService() {
-		this.activeSurveyTool = new HashMap<>();
-		this.surveySessions = new ConcurrentHashMap<>();
-		this.inProgressSampleManager = new InProgressSampleManager();
+	public SurveyToolSession(CreatureObject creature, TangibleObject surveyTool, ScheduledThreadPool executor) {
+		this.creature = creature;
+		this.surveyTool = surveyTool;
+		this.surveyHandler = new SurveyHandler(creature, surveyTool, executor);
+		this.sampleHandler = new SampleHandler(creature, executor);
 	}
 	
-	@IntentHandler
-	private void handleStartSurveyToolIntent(StartSurveyToolIntent ssti) {
-		CreatureObject creature = ssti.getCreature();
+	public synchronized void startSession() {
+		surveyHandler.startSession();
+		sampleHandler.startSession();
+		
 		creature.sendSelf(new PlayMusicMessage(0, "sound/item_surveypad_lp.snd", 1, false));
 		
-		TangibleObject surveyTool = ssti.getSurveyTool();
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
 		RawResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
@@ -80,41 +69,43 @@ public class SurveyService extends Service {
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));
 		}
-		activeSurveyTool.put(creature, surveyTool);
-		SurveySession session = new SurveySession(creature, surveyTool);
-		SurveySession prevSession = surveySessions.put(creature, session);
-		if (prevSession != null)
-			prevSession.stopSession();
-		session.startSession();
-		
 		creature.sendSelf(survey);
 	}
 	
-	@IntentHandler
-	private void handleStartSurveyingIntent(StartSurveyingIntent ssi) {
-		CreatureObject creature = ssi.getCreature();
-		SurveySession session = surveySessions.get(creature);
-		if (session == null) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "Unable to survey, no survey tool has been opened yet"));
-			return;
-		}
-		
-		session.startSurvey(ssi.getResource());
+	public synchronized void stopSession() {
+		surveyHandler.stopSession();
+		sampleHandler.stopSession();
 	}
 	
-	@IntentHandler
-	private void handleStartSamplingIntent(SampleResourceIntent sri) {
-		CreatureObject creature = sri.getCreature();
-		TangibleObject surveyTool = activeSurveyTool.get(creature);
-		if (surveyTool == null) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "Unable to sample, no survey tool has been opened yet"));
-			return;
-		}
-		
-		inProgressSampleManager.startSession(creature, sri.getResource());
+	public synchronized void onPlayerMoved() {
+		sampleHandler.onPlayerMoved();
 	}
 	
-	private RawResourceType getTypeFromSurveyTool(String surveyTool) {
+	public synchronized void startSurvey(GalacticResource resource) {
+		if (sampleHandler.isSampling()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:survey_sample")); // "You can't take a survey while you are collecting samples."
+			return;
+		}
+		surveyHandler.startSurvey(resource);
+	}
+	
+	public synchronized void startSample(GalacticResource resource) {
+		if (surveyHandler.isSurveying()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_survey")); // "You can't take resource samples while you are surveying"
+			return;
+		}
+		if (surveyHandler.getLastResourceSurveyed() != resource) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "You can't get a sample without having scanned the area first"));
+			return;
+		}
+		sampleHandler.startSampleLoop(resource);
+	}
+	
+	public synchronized void stopSample() {
+		sampleHandler.stopSampleLoop();
+	}
+	
+	private static RawResourceType getTypeFromSurveyTool(String surveyTool) {
 		switch (surveyTool) {
 			case "mineral":
 				return RawResourceType.MINERAL;

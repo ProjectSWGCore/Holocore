@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,26 +26,25 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.crafting.survey;
 
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
-public class SampleResourceIntent extends Intent {
+public class StopSamplingIntent extends Intent {
 	
 	private final CreatureObject creature;
-	private final GalacticResource resource;
 	
-	public SampleResourceIntent(CreatureObject creature, GalacticResource resource) {
+	public StopSamplingIntent(@NotNull CreatureObject creature) {
 		this.creature = creature;
-		this.resource = resource;
 	}
 	
+	@NotNull
 	public CreatureObject getCreature() {
 		return creature;
 	}
 	
-	public GalacticResource getResource() {
-		return resource;
+	public static void broadcast(@NotNull CreatureObject creature) {
+		new StopSamplingIntent(creature).broadcast();
 	}
 	
 }

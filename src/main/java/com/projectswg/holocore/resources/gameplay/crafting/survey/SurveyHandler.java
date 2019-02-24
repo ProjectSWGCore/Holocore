@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,6 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.gameplay.crafting.survey;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
@@ -50,7 +51,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.List;
@@ -58,33 +59,43 @@ import java.util.Map.Entry;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-public class SurveySession {
+class SurveyHandler {
 	
 	private final CreatureObject creature;
 	private final TangibleObject surveyTool;
 	private final AtomicReference<ScheduledFuture<?>> surveyRequest;
+	private final AtomicReference<GalacticResource> lastSurveyCompleted;
+	private final ScheduledThreadPool executor;
 	
-	public SurveySession(CreatureObject creature, TangibleObject surveyTool) {
+	public SurveyHandler(CreatureObject creature, TangibleObject surveyTool, ScheduledThreadPool executor) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
 		this.surveyRequest = new AtomicReference<>(null);
+		this.lastSurveyCompleted = new AtomicReference<>(null);
+		this.executor = executor;
 	}
 	
-	public synchronized void startSession() {
+	public void startSession() {
 		
 	}
 	
-	public synchronized void stopSession() {
+	public void stopSession() {
 		ScheduledFuture<?> surveyRequest = this.surveyRequest.get();
 		if (surveyRequest != null)
 			surveyRequest.cancel(false);
 	}
 	
-	public synchronized void startSurvey(GalacticResource resource) {
+	public boolean isSurveying() {
 		ScheduledFuture<?> prev = surveyRequest.get();
-		if (prev != null && !prev.isDone())
+		return prev != null && !prev.isDone();
+	}
+	
+	public GalacticResource getLastResourceSurveyed() {
+		return lastSurveyCompleted.get();
+	}
+	
+	public void startSurvey(GalacticResource resource) {
+		if (isSurveying())
 			return;
 		SurveyToolResolution resolution = getCurrentResolution();
 		Location location = creature.getWorldLocation();
@@ -93,7 +104,7 @@ public class SurveySession {
 		assert resolution != null : "verified in isAllowedToSurvey";
 		
 		creature.modifyAction((int) (-creature.getMaxAction() / 10.0 * resolution.getCounter()));
-		surveyRequest.set(ScheduledUtilities.run(() -> sendSurveyMessage(resolution, location, resource), 4, SECONDS));
+		surveyRequest.set(executor.execute(4000, () -> sendSurveyMessage(resolution, location, resource)));
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
@@ -123,6 +134,7 @@ public class SurveySession {
 			}
 		}
 		creature.sendSelf(surveyMessage);
+		lastSurveyCompleted.set(resource);
 		if (highestConcentration > 0.1) {
 			creature.getPlayerObject().getWaypoints().entrySet().stream()
 					.filter(e -> "Resource Survey".equals(e.getValue().getName()))

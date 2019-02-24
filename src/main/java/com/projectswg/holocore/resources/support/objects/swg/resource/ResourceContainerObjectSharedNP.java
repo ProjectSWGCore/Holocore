@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,123 +24,102 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+
 package com.projectswg.holocore.resources.support.objects.swg.resource;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
-public class ResourceContainerObject extends TangibleObject {
+public class ResourceContainerObjectSharedNP implements MongoPersistable {
 	
-	private final ResourceContainerObjectShared		base3	= new ResourceContainerObjectShared(this);
-	private final ResourceContainerObjectSharedNP	base6	= new ResourceContainerObjectSharedNP(this);
+	private final ResourceContainerObject obj;
 	
-	public ResourceContainerObject(long objectId) {
-		super(objectId, BaselineType.RCNO);
-	}
+	/** RCNO6-08 */ private int			maxQuantity		= 100_000;
+	/** RCNO6-09 */ private String		parentName		= "";
+	/** RCNO6-10 */ private String		resourceName	= "";
+	/** RCNO6-11 */ private StringId resourceNameId = new StringId();
 	
-	@Override
-	public int getCounter() {
-		return base3.getQuantity();
-	}
-	
-	@Override
-	public void setCounter(int counter) {
-		super.setCounter(counter);
-		base3.setQuantity(counter);
-	}
-	
-	@Override
-	public int getMaxCounter() {
-		return base6.getMaxQuantity();
-	}
-	
-	public int getQuantity() {
-		return base3.getQuantity();
-	}
-	
-	public void setQuantity(int quantity) {
-		base3.setQuantity(quantity);
-	}
-	
-	public long getResourceType() {
-		return base3.getResourceType();
-	}
-	
-	public void setResourceType(long resourceType) {
-		base3.setResourceType(resourceType);
+	public ResourceContainerObjectSharedNP(ResourceContainerObject obj) {
+		this.obj = obj;
 	}
 	
 	public int getMaxQuantity() {
-		return base6.getMaxQuantity();
+		return maxQuantity;
 	}
 	
 	public void setMaxQuantity(int maxQuantity) {
-		base6.setMaxQuantity(maxQuantity);
+		this.maxQuantity = maxQuantity;
+		sendDelta(8, maxQuantity);
 	}
 	
 	public String getParentName() {
-		return base6.getParentName();
+		return parentName;
 	}
 	
 	public void setParentName(String parentName) {
-		base6.setParentName(parentName);
+		this.parentName = parentName;
+		sendDelta(9, parentName, StringType.ASCII);
 	}
 	
 	public String getResourceName() {
-		return base6.getResourceName();
+		return resourceName;
 	}
 	
 	public void setResourceName(String resourceName) {
-		base6.setResourceName(resourceName);
+		this.resourceName = resourceName;
+		sendDelta(10, resourceName, StringType.UNICODE);
 	}
 	
 	public StringId getResourceNameId() {
-		return base6.getResourceNameId();
+		return new StringId(resourceNameId.getFile(), resourceNameId.getKey());
 	}
 	
 	public void setResourceNameId(StringId resourceNameId) {
-		base6.setResourceNameId(resourceNameId);
+		this.resourceNameId = resourceNameId;
+		sendDelta(11, this.resourceNameId);
 	}
 	
-	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
-		base3.createBaseline3(bb);
+	public void createBaseline6(BaselineBuilder bb) {
+		bb.addInt(maxQuantity);
+		bb.addAscii(parentName);
+		bb.addUnicode(resourceName);
+		bb.addObject(resourceNameId);
+		bb.incrementOperandCount(4);
 	}
 	
-	@Override
-	public void parseBaseline3(NetBuffer data) {
-		base3.parseBaseline3(data);
-	}
-	
-	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		base6.createBaseline6(bb);
-	}
-	
-	@Override
 	public void parseBaseline6(NetBuffer data) {
-		base6.parseBaseline6(data);
-	}
-	
-	@Override
-	public void saveMongo(MongoData data) {
-		super.saveMongo(data);
-		base3.saveMongo(data.getDocument("base3"));
-		base6.saveMongo(data.getDocument("base6"));
+		maxQuantity = data.getInt();
+		parentName = data.getAscii();
+		resourceName = data.getUnicode();
+		resourceNameId = data.getEncodable(StringId.class);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
-		super.readMongo(data);
-		base3.readMongo(data.getDocument("base3"));
-		base6.readMongo(data.getDocument("base6"));
+		maxQuantity = data.getInteger("maxQuantity", maxQuantity);
+		parentName = data.getString("parentName", parentName);
+		resourceName = data.getString("resourceName", resourceName);
+		data.getDocument("resourceNameId", resourceNameId);
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putInteger("maxQuantity", maxQuantity);
+		data.putString("parentName", parentName);
+		data.putString("resourceName", resourceName);
+		data.putDocument("resourceNameId", resourceNameId);
+	}
+	
+	private void sendDelta(int update, Object o) {
+		obj.sendDelta(6, update, o);
+	}
+	
+	private void sendDelta(int update, String o, StringType stringType) {
+		obj.sendDelta(6, update, o, stringType);
 	}
 	
 }
