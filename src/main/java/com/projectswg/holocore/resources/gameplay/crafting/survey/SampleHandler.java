@@ -86,19 +86,17 @@ public class SampleHandler {
 		Location location = creature.getWorldLocation();
 		double concentration = getConcentration(resource, location);
 		
-		sampleLocation.set(location);
 		if (!isAllowedToSample(resource, concentration))
 			return;
 		
-		creature.setPosture(Posture.CROUCHED);
-		creature.setMovementPercent(0);
-		creature.setTurnScale(0);
-		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:start_sampling"), "TO", resource.getName())));
-		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
-		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
-		Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
-		
-		sampleLoop.set(executor.executeWithFixedRate(5000, 5000, () -> sample(resource, location)));
+		if (sampleLoop.compareAndSet(null, executor.executeWithFixedRate(5000, 5000, () -> sample(resource, location)))) {
+			sampleLocation.set(location);
+			creature.setPosture(Posture.CROUCHED);
+			creature.setMovementPercent(0);
+			creature.setTurnScale(0);
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:start_sampling"), "TO", resource.getName())));
+			Log.d("%s started a sample session with %s and concentration %.1f", creature.getObjectName(), resource.getName(), concentration);
+		}
 	}
 	
 	public void onPlayerMoved() {
@@ -171,6 +169,8 @@ public class SampleHandler {
 				ObjectCreatedIntent.broadcast(resourceObject);
 				break;
 		}
+		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
+		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
 	}
 	
 	private boolean isAllowedToSample(GalacticResource resource, double concentration) {
