@@ -56,12 +56,15 @@ import me.joshlarson.jlcommon.log.Log;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class SampleHandler {
 	
 	private final CreatureObject creature;
 	private final TangibleObject surveyTool;
+	private final AtomicBoolean running;
 	private final AtomicReference<Location> sampleLocation;
 	private final AtomicReference<ScheduledFuture<?>> sampleLoop;
 	private final ScheduledThreadPool executor;
@@ -69,6 +72,7 @@ public class SampleHandler {
 	public SampleHandler(CreatureObject creature, TangibleObject surveyTool, ScheduledThreadPool executor) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
+		this.running = new AtomicBoolean(false);
 		this.sampleLocation = new AtomicReference<>(null);
 		this.sampleLoop = new AtomicReference<>(null);
 		this.executor = executor;
@@ -89,7 +93,9 @@ public class SampleHandler {
 		if (!isAllowedToSample(resource, concentration))
 			return;
 		
-		if (sampleLoop.compareAndSet(null, executor.executeWithFixedRate(5000, 5000, () -> sample(resource, location)))) {
+		if (!running.getAndSet(true)) {
+			ScheduledFuture<?> prevLoop = sampleLoop.getAndSet(executor.executeWithFixedRate(5000, 5000, () -> sample(resource, location)));
+			stopSampleLoop(prevLoop);
 			sampleLocation.set(location);
 			creature.setPosture(Posture.CROUCHED);
 			creature.setMovementPercent(0);
@@ -110,7 +116,12 @@ public class SampleHandler {
 	}
 	
 	public void stopSampleLoop() {
-		ScheduledFuture<?> loop = this.sampleLoop.getAndSet(null);
+		if (!running.getAndSet(false))
+			return;
+		stopSampleLoop(sampleLoop.getAndSet(null));
+	}
+	
+	private void stopSampleLoop(ScheduledFuture<?> loop) {
 		if (loop != null && loop.cancel(false)) {
 			creature.setPosture(Posture.UPRIGHT);
 			creature.setMovementPercent(1);
