@@ -210,6 +210,10 @@ public final class Spawner {
 		return npc.getMovementSpeed();
 	}
 	
+	public int getHue() {
+		return npc.getHue();
+	}
+	
 	public List<String> getPrimaryWeapons() {
 		return npc.getPrimaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
 	}
