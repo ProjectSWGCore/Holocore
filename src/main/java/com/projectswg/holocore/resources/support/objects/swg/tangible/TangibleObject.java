@@ -178,6 +178,7 @@ public class TangibleObject extends SWGObject {
 	
 	public void putCustomization(String name, CustomizationVariable value) {
 		appearanceData.put(name, value);
+		sendDelta(3, 6, appearanceData);
 	}
 	
 	public CustomizationVariable getCustomization(String name) {

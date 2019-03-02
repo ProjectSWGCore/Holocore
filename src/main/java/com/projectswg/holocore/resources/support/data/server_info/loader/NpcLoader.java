@@ -126,6 +126,7 @@ public final class NpcLoader extends DataLoader {
 		private final boolean specForce;
 		private final double attackSpeed;
 		private final double movementSpeed;
+		private final int hue;
 		private final String primaryWeaponSpecials;
 		private final String secondaryWeaponSpecials;
 		private final int aggressiveRadius;
@@ -148,6 +149,7 @@ public final class NpcLoader extends DataLoader {
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
 			this.name = set.getText("npc_name").intern();
+			this.hue = (int) set.getInt("hue");
 			this.stfName = set.getText("stf_name");
 			this.niche = set.getText("niche").intern();
 			this.iffs = List.of(set.getText("iff_template").split(";")).stream().map(s -> "object/mobile/"+s).map(ClientFactory::formatToSharedFile).collect(Collectors.toUnmodifiableList());
@@ -235,6 +237,10 @@ public final class NpcLoader extends DataLoader {
 		
 		public double getMovementSpeed() {
 			return movementSpeed;
+		}
+		
+		public int getHue() {
+			return hue;
 		}
 		
 		public List<String> getPrimaryWeapons() {

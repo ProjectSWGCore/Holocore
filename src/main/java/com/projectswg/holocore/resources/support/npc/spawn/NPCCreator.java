@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.spawn;
 
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -74,6 +75,11 @@ public class NPCCreator {
 		object.setMoodAnimation(spawner.getMood());
 		object.setCreatureId(spawner.getNpcId());
 		object.setWalkSpeed(spawner.getMovementSpeed());
+		int hue = spawner.getHue();
+		if (hue != 0) {
+			// No reason to add color customization if the value is default anyways
+			object.putCustomization("/private/index_color_1", new CustomizationVariable(spawner.getHue()));
+		}
 		
 		// Assign weapons
 		try {
