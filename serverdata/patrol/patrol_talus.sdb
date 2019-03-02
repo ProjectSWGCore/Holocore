@@ -1,0 +1,637 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_tal_100	patrol_tal_100	FLIP	TALUS	tal_world	0	-4631.04	18.00	-3242.87	0	talus_lag_enf_srgt_pat_gs1_11356743
+patrol_tal_101	patrol_tal_100		TALUS	tal_world	0	-4631.39	18.00	-3252.38	0	
+patrol_tal_102	patrol_tal_100		TALUS	tal_world	0	-4652.38	18.02	-3236.40	0	
+patrol_tal_103	patrol_tal_100		TALUS	tal_world	0	-4643.80	18.00	-3223.63	0	
+patrol_tal_104	patrol_tal_100		TALUS	tal_world	0	-4629.86	18.00	-3210.74	0	
+patrol_tal_105	patrol_tal_100		TALUS	tal_world	0	-4624.93	18.00	-3226.22	0	
+patrol_tal_106	patrol_tal_100		TALUS	tal_world	0	-4626.37	18.00	-3233.70	0	
+patrol_tal_107	patrol_tal_100		TALUS	tal_world	0	-4621.97	18.00	-3237.50	0	
+patrol_tal_108	patrol_tal_100		TALUS	tal_world	0	-4624.56	18.00	-3242.49	0	
+patrol_tal_109	patrol_tal_100		TALUS	tal_world	0	-4615.56	18.00	-3252.73	0	
+patrol_tal_110	patrol_tal_100		TALUS	tal_world	0	-4618.03	22.97	-3272.07	0	
+patrol_tal_111	patrol_tal_100		TALUS	tal_world	0	-4663.73	31.00	-3271.51	0	
+patrol_tal_112	patrol_tal_100		TALUS	tal_world	0	-4657.36	21.77	-3223.27	0	
+patrol_tal_113	patrol_tal_100		TALUS	tal_world	0	-4626.73	22.84	-3191.07	0	
+patrol_tal_114	patrol_tal_100		TALUS	tal_world	0	-4590.46	19.05	-3222.35	0	
+patrol_tal_115	patrol_tal_100		TALUS	tal_world	0	-4598.73	18.00	-3241.85	0	
+patrol_tal_116	patrol_tal_100		TALUS	tal_world	0	-4617.45	18.00	-3232.75	0	
+patrol_tal_117	patrol_tal_100		TALUS	tal_world	0	-4630.05	18.00	-3242.89	0	
+patrol_tal_200	patrol_tal_200	FLIP	TALUS	tal_hegemony_base	2	-0.13	0.25	2.06	0	talus_lag_patrol_gs1_12357623
+patrol_tal_201	patrol_tal_200		TALUS	tal_hegemony_base	6	12.60	-12.00	29.17	0	
+patrol_tal_202	patrol_tal_200		TALUS	tal_hegemony_base	8	17.59	-12.00	58.65	0	
+patrol_tal_203	patrol_tal_200		TALUS	tal_hegemony_base	10	6.15	-12.00	59.00	0	
+patrol_tal_204	patrol_tal_200		TALUS	tal_hegemony_base	12	4.28	-12.00	87.86	0	
+patrol_tal_205	patrol_tal_200		TALUS	tal_hegemony_base	10	3.91	-12.00	75.19	0	
+patrol_tal_206	patrol_tal_200		TALUS	tal_hegemony_base	19	46.01	-20.00	111.50	0	
+patrol_tal_207	patrol_tal_200		TALUS	tal_hegemony_base	21	49.83	-20.00	150.91	0	
+patrol_tal_300	patrol_tal_300	FLIP	TALUS	tal_hegemony_base	10	3.39	-12.00	53.01	0	talus_lag_elite_patrol_gs1_12357675
+patrol_tal_301	patrol_tal_300		TALUS	tal_hegemony_base	10	3.25	-12.00	75.43	0	
+patrol_tal_302	patrol_tal_300		TALUS	tal_hegemony_base	12	2.89	-12.00	87.87	0	
+patrol_tal_400	patrol_tal_400	FLIP	TALUS	tal_hegemony_base	15	0.75	-12.00	115.34	0	talus_syir_patrol_gs_12357823
+patrol_tal_401	patrol_tal_400		TALUS	tal_hegemony_base	15	3.67	-12.00	118.14	0	
+patrol_tal_402	patrol_tal_400		TALUS	tal_hegemony_base	15	7.19	-12.00	117.63	0	
+patrol_tal_403	patrol_tal_400		TALUS	tal_hegemony_base	15	3.54	-12.00	112.65	0	
+patrol_tal_500	patrol_tal_500	FLIP	TALUS	tal_hegemony_base	19	49.93	-20.00	114.78	0	talus_lag_tech_pat_gs2_10008239
+patrol_tal_501	patrol_tal_500		TALUS	tal_hegemony_base	19	51.71	-20.00	112.56	0	
+patrol_tal_502	patrol_tal_500		TALUS	tal_hegemony_base	19	52.18	-20.00	112.52	0	
+patrol_tal_503	patrol_tal_500		TALUS	tal_hegemony_base	19	52.18	-20.00	112.52	0	
+patrol_tal_504	patrol_tal_500		TALUS	tal_hegemony_base	19	52.18	-20.00	112.52	0	
+patrol_tal_505	patrol_tal_500		TALUS	tal_hegemony_base	19	50.19	-20.00	114.46	0	
+patrol_tal_506	patrol_tal_500		TALUS	tal_hegemony_base	19	50.15	-20.00	114.88	0	
+patrol_tal_507	patrol_tal_500		TALUS	tal_hegemony_base	19	50.15	-20.00	114.88	0	
+patrol_tal_600	patrol_tal_600	FLIP	TALUS	tal_hegemony_base	21	52.95	-20.00	143.18	0	talus_lag_tech_pat_gs1_10008185
+patrol_tal_601	patrol_tal_600		TALUS	tal_hegemony_base	21	53.23	-20.00	135.50	0	
+patrol_tal_602	patrol_tal_600		TALUS	tal_hegemony_base	21	49.73	-20.00	135.88	0	
+patrol_tal_603	patrol_tal_600		TALUS	tal_hegemony_base	21	47.15	-20.00	157.52	0	
+patrol_tal_604	patrol_tal_600		TALUS	tal_hegemony_base	21	51.35	-20.00	156.64	0	
+patrol_tal_700	patrol_tal_700	FLIP	TALUS	tal_imp_weapons_research_facility1	5	7.46	-12.00	26.81	0	bigroompatrol_10001052
+patrol_tal_701	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	8.71	-12.00	38.02	0	
+patrol_tal_702	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	11.45	-12.00	40.57	0	
+patrol_tal_703	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	22.13	-12.00	41.45	0	
+patrol_tal_704	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	25.30	-12.00	52.46	0	
+patrol_tal_705	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	13.41	-12.00	53.12	0	
+patrol_tal_706	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	8.70	-12.00	55.08	0	
+patrol_tal_707	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	8.07	-12.00	65.96	0	
+patrol_tal_708	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	0.15	-12.00	67.15	0	
+patrol_tal_709	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-2.25	-12.00	56.14	0	
+patrol_tal_710	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-4.20	-12.00	52.59	0	
+patrol_tal_711	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-16.26	-12.00	52.78	0	
+patrol_tal_712	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-16.47	-12.00	42.42	0	
+patrol_tal_713	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-5.69	-12.00	41.74	0	
+patrol_tal_714	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-2.11	-12.00	38.93	0	
+patrol_tal_715	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	-1.48	-12.00	26.99	0	
+patrol_tal_716	patrol_tal_700		TALUS	tal_imp_weapons_research_facility1	5	1.58	-12.00	27.20	0	
+patrol_tal_800	patrol_tal_800	FLIP	TALUS	tal_imp_weapons_research_facility1	6	-21.97	-12.00	46.93	0	bigroomhallpatrol1_10001273
+patrol_tal_801	patrol_tal_800		TALUS	tal_imp_weapons_research_facility1	6	-27.15	-13.07	46.84	0	
+patrol_tal_802	patrol_tal_800		TALUS	tal_imp_weapons_research_facility1	6	-44.02	-20.00	47.00	0	
+patrol_tal_803	patrol_tal_800		TALUS	tal_imp_weapons_research_facility1	6	-44.02	-20.00	47.00	0	
+patrol_tal_900	patrol_tal_900	FLIP	TALUS	tal_imp_weapons_research_facility1	7	-52.83	-20.00	29.61	0	storageroompatrol_10001305
+patrol_tal_901	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-50.99	-20.00	50.09	0	
+patrol_tal_902	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-59.67	-20.00	53.30	0	
+patrol_tal_903	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-61.53	-20.00	54.00	0	
+patrol_tal_904	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-60.76	-20.00	63.74	0	
+patrol_tal_905	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-72.29	-20.00	65.80	0	
+patrol_tal_906	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-71.93	-20.00	62.74	0	
+patrol_tal_907	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-69.01	-20.00	58.67	0	
+patrol_tal_908	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-69.54	-20.00	56.03	0	
+patrol_tal_909	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-73.08	-20.00	52.19	0	
+patrol_tal_910	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-71.73	-20.00	28.09	0	
+patrol_tal_911	patrol_tal_900		TALUS	tal_imp_weapons_research_facility1	7	-58.58	-20.00	29.05	0	
+patrol_tal_1000	patrol_tal_1000	FLIP	TALUS	tal_imp_weapons_research_facility1	10	30.38	-12.00	71.00	0	bighallpatrol2_10001864
+patrol_tal_1001	patrol_tal_1000		TALUS	tal_imp_weapons_research_facility1	22	25.20	-12.00	70.55	0	
+patrol_tal_1002	patrol_tal_1000		TALUS	tal_imp_weapons_research_facility1	22	7.41	-20.00	71.22	0	
+patrol_tal_1100	patrol_tal_1100	FLIP	TALUS	tal_imp_weapons_research_facility1	10	23.51	-12.00	29.16	0	bighallpatrol1_10001823
+patrol_tal_1101	patrol_tal_1100		TALUS	tal_imp_weapons_research_facility1	10	23.26	-12.00	35.85	0	
+patrol_tal_1102	patrol_tal_1100		TALUS	tal_imp_weapons_research_facility1	10	35.48	-12.00	34.87	0	
+patrol_tal_1103	patrol_tal_1100		TALUS	tal_imp_weapons_research_facility1	10	35.31	-12.00	45.80	0	
+patrol_tal_1104	patrol_tal_1100		TALUS	tal_imp_weapons_research_facility1	10	35.41	-12.00	57.35	0	
+patrol_tal_1105	patrol_tal_1100		TALUS	tal_imp_weapons_research_facility1	10	35.27	-12.00	88.14	0	
+patrol_tal_1200	patrol_tal_1200	FLIP	TALUS	tal_imp_weapons_research_facility1	11	45.31	-12.00	82.91	0	zoopatrol2_10001949
+patrol_tal_1201	patrol_tal_1200		TALUS	tal_imp_weapons_research_facility1	11	72.62	-12.00	83.13	0	
+patrol_tal_1300	patrol_tal_1300	FLIP	TALUS	tal_imp_weapons_research_facility1	13	35.38	-12.00	91.87	0	bighallpatrol3_10001979
+patrol_tal_1301	patrol_tal_1300		TALUS	tal_imp_weapons_research_facility1	13	35.43	-13.94	99.23	0	
+patrol_tal_1302	patrol_tal_1300		TALUS	tal_imp_weapons_research_facility1	13	35.20	-20.00	113.59	0	
+patrol_tal_1400	patrol_tal_1400	FLIP	TALUS	tal_imp_weapons_research_facility1	13	18.07	-20.00	118.05	0	labpatrol1_10002017
+patrol_tal_1401	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	18.16	-20.00	133.01	0	
+patrol_tal_1402	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	18.33	-20.00	144.22	0	
+patrol_tal_1403	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	23.93	-20.00	144.72	0	
+patrol_tal_1404	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	23.38	-20.00	140.67	0	
+patrol_tal_1405	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	23.38	-20.00	129.24	0	
+patrol_tal_1406	patrol_tal_1400		TALUS	tal_imp_weapons_research_facility1	13	23.48	-20.00	119.02	0	
+patrol_tal_1500	patrol_tal_1500	FLIP	TALUS	tal_imp_weapons_research_facility1	15	-7.19	-20.00	3.02	0	weaponsroomhallpatrol1_10002450
+patrol_tal_1501	patrol_tal_1500		TALUS	tal_imp_weapons_research_facility1	15	13.78	-12.00	3.19	0	
+patrol_tal_1600	patrol_tal_1600	FLIP	TALUS	tal_imp_weapons_research_facility1	17	-30.53	-20.00	9.30	0	longhallpatrol2_10002392
+patrol_tal_1601	patrol_tal_1600		TALUS	tal_imp_weapons_research_facility1	17	-30.40	-20.00	2.60	0	
+patrol_tal_1602	patrol_tal_1600		TALUS	tal_imp_weapons_research_facility1	17	-25.77	-20.00	2.91	0	
+patrol_tal_1700	patrol_tal_1700	FLIP	TALUS	tal_imp_weapons_research_facility1	18	-30.56	-20.00	91.31	0	longhallpatrol1_10002361
+patrol_tal_1701	patrol_tal_1700		TALUS	tal_imp_weapons_research_facility1	18	-29.93	-20.00	64.58	0	
+patrol_tal_1702	patrol_tal_1700		TALUS	tal_imp_weapons_research_facility1	18	-30.29	-20.00	14.41	0	
+patrol_tal_1800	patrol_tal_1800	FLIP	TALUS	tal_imp_weapons_research_facility1	19	-9.08	-20.00	101.63	0	shieldpatrol1_10002214
+patrol_tal_1801	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-9.01	-20.00	123.75	0	
+patrol_tal_1802	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-17.86	-20.00	123.90	0	
+patrol_tal_1803	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-27.08	-20.00	124.35	0	
+patrol_tal_1804	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-37.35	-20.00	123.32	0	
+patrol_tal_1805	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-35.93	-20.00	104.58	0	
+patrol_tal_1806	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-34.10	-20.00	102.80	0	
+patrol_tal_1807	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-24.97	-20.00	102.33	0	
+patrol_tal_1808	patrol_tal_1800		TALUS	tal_imp_weapons_research_facility1	19	-15.39	-20.00	101.92	0	
+patrol_tal_1900	patrol_tal_1900	FLIP	TALUS	tal_imp_weapons_research_facility1	20	-2.09	-20.00	80.80	0	littlehallpatrol1_10002184
+patrol_tal_1901	patrol_tal_1900		TALUS	tal_imp_weapons_research_facility1	20	-2.61	-20.00	85.83	0	
+patrol_tal_1902	patrol_tal_1900		TALUS	tal_imp_weapons_research_facility1	20	-14.93	-20.00	84.42	0	
+patrol_tal_1903	patrol_tal_1900		TALUS	tal_imp_weapons_research_facility1	20	-14.98	-20.00	89.84	0	
+patrol_tal_2000	patrol_tal_2000	FLIP	TALUS	tal_world	0	-2178.19	20.00	2282.07	0	smuggler_patrol_13_04_11511120
+patrol_tal_2001	patrol_tal_2000		TALUS	tal_world	0	-2180.28	20.00	2329.27	0	
+patrol_tal_2002	patrol_tal_2000		TALUS	tal_world	0	-2200.50	20.00	2329.71	0	
+patrol_tal_2003	patrol_tal_2000		TALUS	tal_world	0	-2200.33	20.00	2300.98	0	
+patrol_tal_2004	patrol_tal_2000		TALUS	tal_world	0	-2218.56	20.00	2287.42	0	
+patrol_tal_2005	patrol_tal_2000		TALUS	tal_world	0	-2232.70	20.00	2283.20	0	
+patrol_tal_2006	patrol_tal_2000		TALUS	tal_world	0	-2234.82	20.00	2272.87	0	
+patrol_tal_2007	patrol_tal_2000		TALUS	tal_world	0	-2207.76	20.00	2271.73	0	
+patrol_tal_2008	patrol_tal_2000		TALUS	tal_world	0	-2188.84	20.00	2278.13	0	
+patrol_tal_2100	patrol_tal_2100	FLIP	TALUS	tal_world	0	-2217.02	20.00	2369.85	0	smuggler_patrol_13_02_11511006
+patrol_tal_2101	patrol_tal_2100		TALUS	tal_world	0	-2205.40	20.00	2348.00	0	
+patrol_tal_2102	patrol_tal_2100		TALUS	tal_world	0	-2201.91	20.00	2340.60	0	
+patrol_tal_2103	patrol_tal_2100		TALUS	tal_world	0	-2183.40	20.00	2339.66	0	
+patrol_tal_2104	patrol_tal_2100		TALUS	tal_world	0	-2166.04	20.00	2340.84	0	
+patrol_tal_2105	patrol_tal_2100		TALUS	tal_world	0	-2159.47	20.00	2353.69	0	
+patrol_tal_2106	patrol_tal_2100		TALUS	tal_world	0	-2151.60	20.00	2366.98	0	
+patrol_tal_2200	patrol_tal_2200	FLIP	TALUS	tal_world	0	-2140.65	20.00	2362.89	0	smuggler_patrol_13_01_11510909
+patrol_tal_2201	patrol_tal_2200		TALUS	tal_world	0	-2148.51	20.00	2348.74	0	
+patrol_tal_2202	patrol_tal_2200		TALUS	tal_world	0	-2127.63	20.00	2334.79	0	
+patrol_tal_2203	patrol_tal_2200		TALUS	tal_world	0	-2124.70	20.00	2318.33	0	
+patrol_tal_2204	patrol_tal_2200		TALUS	tal_world	0	-2123.36	20.00	2302.72	0	
+patrol_tal_2205	patrol_tal_2200		TALUS	tal_world	0	-2107.55	20.00	2302.36	0	
+patrol_tal_2206	patrol_tal_2200		TALUS	tal_world	0	-2095.63	20.00	2302.10	0	
+patrol_tal_2300	patrol_tal_2300	FLIP	TALUS	tal_world	0	-2440.17	45.01	3686.80	0	leia_talus_13_22062745
+patrol_tal_2301	patrol_tal_2300		TALUS	tal_world	0	-2423.69	45.01	3695.62	0	
+patrol_tal_2302	patrol_tal_2300		TALUS	tal_world	0	-2406.06	45.01	3705.94	0	
+patrol_tal_2400	patrol_tal_2400	FLIP	TALUS	tal_world	0	-2156.47	20.00	2340.83	0	smuggler_patrol_13_03_11511071
+patrol_tal_2401	patrol_tal_2400		TALUS	tal_world	0	-2145.49	20.00	2328.72	0	
+patrol_tal_2402	patrol_tal_2400		TALUS	tal_world	0	-2144.26	20.00	2308.92	0	
+patrol_tal_2403	patrol_tal_2400		TALUS	tal_world	0	-2145.08	20.00	2278.84	0	
+patrol_tal_2404	patrol_tal_2400		TALUS	tal_world	0	-2150.90	20.00	2256.31	0	
+patrol_tal_2405	patrol_tal_2400		TALUS	tal_world	0	-2145.58	20.00	2239.41	0	
+patrol_tal_2406	patrol_tal_2400		TALUS	tal_world	0	-2139.31	20.00	2228.49	0	
+patrol_tal_2500	patrol_tal_2500	FLIP	TALUS	tal_world	0	-2425.56	45.01	3744.69	0	leia_talus_12_22062724
+patrol_tal_2501	patrol_tal_2500		TALUS	tal_world	0	-2438.76	45.01	3737.50	0	
+patrol_tal_2502	patrol_tal_2500		TALUS	tal_world	0	-2461.34	45.01	3724.18	0	
+patrol_tal_2600	patrol_tal_2600	FLIP	TALUS	tal_genetech_syndicate	8	17.26	-12.00	59.69	0	genetech_broodIIa_arachne_11456546
+patrol_tal_2601	patrol_tal_2600		TALUS	tal_genetech_syndicate	7	17.36	-12.00	51.79	0	
+patrol_tal_2602	patrol_tal_2600		TALUS	tal_genetech_syndicate	7	17.29	-12.00	45.38	0	
+patrol_tal_2603	patrol_tal_2600		TALUS	tal_genetech_syndicate	7	17.77	-12.00	39.79	0	
+patrol_tal_2604	patrol_tal_2600		TALUS	tal_genetech_syndicate	6	17.43	-12.00	34.23	0	
+patrol_tal_2700	patrol_tal_2700	FLIP	TALUS	tal_dearic_imp_office	5	8.78	1.13	4.57	0	coa_stormtrooper_01_10309831
+patrol_tal_2701	patrol_tal_2700		TALUS	tal_dearic_imp_office	5	14.74	1.13	4.80	0	
+patrol_tal_2702	patrol_tal_2700		TALUS	tal_dearic_imp_office	5	14.88	1.13	1.06	0	
+patrol_tal_2800	patrol_tal_2800	FLIP	TALUS	tal_dearic_imp_office	9	-9.27	1.13	-12.78	0	coa_stormtrooper_02_10309852
+patrol_tal_2801	patrol_tal_2800		TALUS	tal_dearic_imp_office	9	-10.89	1.13	-10.91	0	
+patrol_tal_2802	patrol_tal_2800		TALUS	tal_dearic_imp_office	9	-10.97	1.13	-7.00	0	
+patrol_tal_2803	patrol_tal_2800		TALUS	tal_dearic_imp_office	4	-12.08	1.13	-2.82	0	
+patrol_tal_2804	patrol_tal_2800		TALUS	tal_dearic_imp_office	6	-12.74	1.13	2.76	0	
+patrol_tal_2805	patrol_tal_2800		TALUS	tal_dearic_imp_office	6	-14.34	1.13	4.88	0	
+patrol_tal_2900	patrol_tal_2900	FLIP	TALUS	tal_world	0	1270.06	42.02	-3184.66	0	talus_aclo_sold_pat_gs2_10110628
+patrol_tal_2901	patrol_tal_2900		TALUS	tal_world	0	1310.15	42.43	-3177.29	0	
+patrol_tal_2902	patrol_tal_2900		TALUS	tal_world	0	1309.53	42.45	-3159.42	0	
+patrol_tal_2903	patrol_tal_2900		TALUS	tal_world	0	1303.32	42.43	-3135.32	0	
+patrol_tal_2904	patrol_tal_2900		TALUS	tal_world	0	1264.18	42.03	-3141.21	0	
+patrol_tal_2905	patrol_tal_2900		TALUS	tal_world	0	1269.76	42.02	-3182.88	0	
+patrol_tal_3000	patrol_tal_3000	FLIP	TALUS	tal_world	0	1304.26	42.44	-3134.37	0	talus_aclo_sold_pat_gs1_10110580
+patrol_tal_3001	patrol_tal_3000		TALUS	tal_world	0	1264.36	42.03	-3141.11	0	
+patrol_tal_3002	patrol_tal_3000		TALUS	tal_world	0	1269.57	42.02	-3183.39	0	
+patrol_tal_3003	patrol_tal_3000		TALUS	tal_world	0	1310.09	42.43	-3177.44	0	
+patrol_tal_3004	patrol_tal_3000		TALUS	tal_world	0	1309.54	42.45	-3159.54	0	
+patrol_tal_3100	patrol_tal_3100	FLIP	TALUS	tal_coa_aclo_office	1	1.42	1.01	19.36	0	talus_aclo_cmndo_gs1_10110878
+patrol_tal_3101	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	6.15	1.01	15.56	0	
+patrol_tal_3102	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	6.55	1.01	21.69	0	
+patrol_tal_3103	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	11.47	1.01	21.38	0	
+patrol_tal_3104	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	11.23	1.01	8.14	0	
+patrol_tal_3105	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	18.88	1.01	6.83	0	
+patrol_tal_3106	patrol_tal_3100		TALUS	tal_coa_aclo_office	3	18.62	1.01	16.03	0	
+patrol_tal_3107	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	19.07	1.01	7.12	0	
+patrol_tal_3108	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	6.08	1.01	6.66	0	
+patrol_tal_3109	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	6.12	1.01	1.55	0	
+patrol_tal_3110	patrol_tal_3100		TALUS	tal_coa_aclo_office	5	12.02	1.01	-1.06	0	
+patrol_tal_3111	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	6.53	1.01	0.48	0	
+patrol_tal_3112	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	4.58	1.01	-5.07	0	
+patrol_tal_3113	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	5.56	1.01	-10.86	0	
+patrol_tal_3114	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	14.32	1.01	-11.45	0	
+patrol_tal_3115	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	0.41	1.01	-14.54	0	
+patrol_tal_3116	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-12.95	1.01	-9.88	0	
+patrol_tal_3117	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-13.90	1.01	-13.97	0	
+patrol_tal_3118	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-5.82	1.01	-10.46	0	
+patrol_tal_3119	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-6.47	1.01	7.19	0	
+patrol_tal_3120	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-19.17	1.01	9.55	0	
+patrol_tal_3121	patrol_tal_3100		TALUS	tal_coa_aclo_office	2	-10.63	1.01	10.25	0	
+patrol_tal_3122	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	-11.42	1.01	20.20	0	
+patrol_tal_3123	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	-5.59	1.01	15.83	0	
+patrol_tal_3124	patrol_tal_3100		TALUS	tal_coa_aclo_office	1	-1.88	1.01	19.13	0	
+patrol_tal_3200	patrol_tal_3200	FLIP	TALUS	tal_coa_aclo_office	9	-11.10	1.01	-4.37	0	talus_aclo_cmndo_gs2_10110943
+patrol_tal_3201	patrol_tal_3200		TALUS	tal_coa_aclo_office	9	-18.62	1.01	-0.52	0	
+patrol_tal_3202	patrol_tal_3200		TALUS	tal_coa_aclo_office	9	-19.79	1.01	2.01	0	
+patrol_tal_3203	patrol_tal_3200		TALUS	tal_coa_aclo_office	9	-10.67	3.41	2.18	0	
+patrol_tal_3204	patrol_tal_3200		TALUS	tal_coa_aclo_office	10	-11.04	7.01	-8.98	0	
+patrol_tal_3300	patrol_tal_3300	FLIP	TALUS	tal_imp_weapons_research_facility2	2	-0.26	0.25	3.18	0	patrol1_10001283
+patrol_tal_3301	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	2	-3.87	0.25	3.18	0	
+patrol_tal_3302	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	2	-3.80	0.25	-4.33	0	
+patrol_tal_3303	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	3	3.86	0.25	-4.37	0	
+patrol_tal_3304	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	4	3.46	-12.00	20.87	0	
+patrol_tal_3305	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	5	3.21	-12.00	25.77	0	
+patrol_tal_3306	patrol_tal_3300		TALUS	tal_imp_weapons_research_facility2	5	3.21	-12.00	25.77	0	
+patrol_tal_3400	patrol_tal_3400	FLIP	TALUS	tal_imp_weapons_research_facility2	7	-71.75	-20.00	30.65	0	patrol4_10001665
+patrol_tal_3401	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-55.61	-20.00	30.99	0	
+patrol_tal_3402	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-53.33	-20.00	45.26	0	
+patrol_tal_3403	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-63.15	-20.00	55.09	0	
+patrol_tal_3404	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-62.36	-20.00	62.68	0	
+patrol_tal_3405	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-68.85	-20.00	65.05	0	
+patrol_tal_3406	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-67.52	-20.00	58.13	0	
+patrol_tal_3407	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-70.55	-20.00	52.49	0	
+patrol_tal_3408	patrol_tal_3400		TALUS	tal_imp_weapons_research_facility2	7	-71.59	-20.00	36.96	0	
+patrol_tal_3500	patrol_tal_3500	FLIP	TALUS	tal_imp_weapons_research_facility2	9	-75.28	-20.00	81.02	0	patrolhigh1_10001840
+patrol_tal_3501	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-75.42	-20.00	76.80	0	
+patrol_tal_3502	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-73.38	-20.00	74.74	0	
+patrol_tal_3503	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-53.90	-20.00	73.79	0	
+patrol_tal_3504	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-48.93	-20.00	79.45	0	
+patrol_tal_3505	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-50.73	-20.00	86.37	0	
+patrol_tal_3506	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-54.01	-20.00	87.64	0	
+patrol_tal_3507	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-72.06	-20.00	87.48	0	
+patrol_tal_3508	patrol_tal_3500		TALUS	tal_imp_weapons_research_facility2	9	-73.49	-20.00	84.75	0	
+patrol_tal_3600	patrol_tal_3600	FLIP	TALUS	tal_imp_weapons_research_facility2	10	23.56	-12.00	29.73	0	patrolhall1_10001884
+patrol_tal_3601	patrol_tal_3600		TALUS	tal_imp_weapons_research_facility2	10	23.37	-12.00	34.75	0	
+patrol_tal_3602	patrol_tal_3600		TALUS	tal_imp_weapons_research_facility2	10	35.99	-12.00	34.66	0	
+patrol_tal_3603	patrol_tal_3600		TALUS	tal_imp_weapons_research_facility2	10	35.91	-12.00	59.47	0	
+patrol_tal_3604	patrol_tal_3600		TALUS	tal_imp_weapons_research_facility2	10	35.70	-12.00	86.60	0	
+patrol_tal_3605	patrol_tal_3600		TALUS	tal_imp_weapons_research_facility2	10	35.70	-12.00	86.60	0	
+patrol_tal_3700	patrol_tal_3700	FLIP	TALUS	tal_imp_weapons_research_facility2	11	44.86	-12.00	82.74	0	zoopatrol1_10002272
+patrol_tal_3701	patrol_tal_3700		TALUS	tal_imp_weapons_research_facility2	11	52.81	-12.00	82.83	0	
+patrol_tal_3702	patrol_tal_3700		TALUS	tal_imp_weapons_research_facility2	11	71.01	-12.00	83.19	0	
+patrol_tal_3703	patrol_tal_3700		TALUS	tal_imp_weapons_research_facility2	11	71.01	-12.00	83.19	0	
+patrol_tal_3800	patrol_tal_3800	FLIP	TALUS	tal_imp_weapons_research_facility2	12	44.20	-12.00	58.91	0	zoopatrol2_10002329
+patrol_tal_3801	patrol_tal_3800		TALUS	tal_imp_weapons_research_facility2	12	71.48	-12.00	58.96	0	
+patrol_tal_3802	patrol_tal_3800		TALUS	tal_imp_weapons_research_facility2	12	71.55	-12.00	58.97	0	
+patrol_tal_3900	patrol_tal_3900	FLIP	TALUS	tal_imp_weapons_research_facility2	13	35.69	-12.00	92.73	0	patrolhall2_10001948
+patrol_tal_3901	patrol_tal_3900		TALUS	tal_imp_weapons_research_facility2	13	35.66	-15.35	101.82	0	
+patrol_tal_3902	patrol_tal_3900		TALUS	tal_imp_weapons_research_facility2	13	35.63	-20.00	111.86	0	
+patrol_tal_3903	patrol_tal_3900		TALUS	tal_imp_weapons_research_facility2	13	35.63	-20.00	112.38	0	
+patrol_tal_4000	patrol_tal_4000	FLIP	TALUS	tal_imp_weapons_research_facility2	17	-30.55	-20.00	10.16	0	shieldhallpatrol2_10002834
+patrol_tal_4001	patrol_tal_4000		TALUS	tal_imp_weapons_research_facility2	17	-30.59	-20.00	3.13	0	
+patrol_tal_4002	patrol_tal_4000		TALUS	tal_imp_weapons_research_facility2	17	-26.62	-20.00	2.91	0	
+patrol_tal_4003	patrol_tal_4000		TALUS	tal_imp_weapons_research_facility2	16	-22.99	-20.00	3.06	0	
+patrol_tal_4100	patrol_tal_4100	FLIP	TALUS	tal_imp_weapons_research_facility2	18	-30.56	-20.00	90.50	0	shieldhallpatrol1_10002790
+patrol_tal_4101	patrol_tal_4100		TALUS	tal_imp_weapons_research_facility2	18	-30.28	-20.00	77.88	0	
+patrol_tal_4102	patrol_tal_4100		TALUS	tal_imp_weapons_research_facility2	18	-30.02	-20.00	56.71	0	
+patrol_tal_4103	patrol_tal_4100		TALUS	tal_imp_weapons_research_facility2	18	-30.31	-20.00	26.40	0	
+patrol_tal_4104	patrol_tal_4100		TALUS	tal_imp_weapons_research_facility2	18	-30.51	-20.00	15.81	0	
+patrol_tal_4200	patrol_tal_4200	FLIP	TALUS	tal_imp_weapons_research_facility2	20	-2.34	-20.00	80.11	0	hallpatrol4_10002492
+patrol_tal_4201	patrol_tal_4200		TALUS	tal_imp_weapons_research_facility2	20	-2.41	-20.00	85.73	0	
+patrol_tal_4202	patrol_tal_4200		TALUS	tal_imp_weapons_research_facility2	20	-13.90	-20.00	84.89	0	
+patrol_tal_4203	patrol_tal_4200		TALUS	tal_imp_weapons_research_facility2	20	-14.43	-20.00	89.46	0	
+patrol_tal_4204	patrol_tal_4200		TALUS	tal_imp_weapons_research_facility2	20	-14.43	-20.00	89.46	0	
+patrol_tal_4300	patrol_tal_4300	FLIP	TALUS	tal_world	0	4074.12	2.00	5282.92	0	smuggler_patrol_13_04_11311260
+patrol_tal_4301	patrol_tal_4300		TALUS	tal_world	0	4092.17	2.00	5261.45	0	
+patrol_tal_4302	patrol_tal_4300		TALUS	tal_world	0	4095.92	2.00	5254.26	0	
+patrol_tal_4303	patrol_tal_4300		TALUS	tal_world	0	4091.36	2.00	5243.35	0	
+patrol_tal_4304	patrol_tal_4300		TALUS	tal_world	0	4078.66	2.00	5231.79	0	
+patrol_tal_4305	patrol_tal_4300		TALUS	tal_world	0	4066.99	2.00	5231.98	0	
+patrol_tal_4306	patrol_tal_4300		TALUS	tal_world	0	4049.22	2.00	5250.23	0	
+patrol_tal_4307	patrol_tal_4300		TALUS	tal_world	0	4034.91	2.00	5261.66	0	
+patrol_tal_4400	patrol_tal_4400	FLIP	TALUS	tal_world	0	4098.14	2.00	5297.72	0	smuggler_patrol_13_01_11311137
+patrol_tal_4401	patrol_tal_4400		TALUS	tal_world	0	4082.90	2.00	5283.48	0	
+patrol_tal_4402	patrol_tal_4400		TALUS	tal_world	0	4080.85	2.00	5274.26	0	
+patrol_tal_4403	patrol_tal_4400		TALUS	tal_world	0	4089.37	2.00	5266.93	0	
+patrol_tal_4404	patrol_tal_4400		TALUS	tal_world	0	4104.77	2.00	5276.05	0	
+patrol_tal_4405	patrol_tal_4400		TALUS	tal_world	0	4115.41	2.00	5281.62	0	
+patrol_tal_4500	patrol_tal_4500	FLIP	TALUS	tal_world	0	5653.60	104.97	-4105.70	0	Smuggler_Enemy_Patrol_10160942
+patrol_tal_4501	patrol_tal_4500		TALUS	tal_world	0	5627.00	102.17	-4101.15	0	
+patrol_tal_4502	patrol_tal_4500		TALUS	tal_world	0	5609.73	102.44	-4107.48	0	
+patrol_tal_4503	patrol_tal_4500		TALUS	tal_world	0	5607.54	104.20	-4121.60	0	
+patrol_tal_4504	patrol_tal_4500		TALUS	tal_world	0	5632.60	103.78	-4124.76	0	
+patrol_tal_4600	patrol_tal_4600	FLIP	TALUS	tal_world	0	4439.04	2.00	5278.87	0	rebel_patrol_1_10050120
+patrol_tal_4601	patrol_tal_4600		TALUS	tal_world	0	4453.53	2.00	5243.85	0	
+patrol_tal_4602	patrol_tal_4600		TALUS	tal_world	0	4465.85	2.00	5212.64	0	
+patrol_tal_4603	patrol_tal_4600		TALUS	tal_world	0	4478.80	2.00	5182.70	0	
+patrol_tal_4604	patrol_tal_4600		TALUS	tal_world	0	4477.03	2.00	5161.84	0	
+patrol_tal_4605	patrol_tal_4600		TALUS	tal_world	0	4483.56	2.00	5146.94	0	
+patrol_tal_4700	patrol_tal_4700	FLIP	TALUS	tal_world	0	4317.76	2.00	5287.02	0	rebel_patrol_4_10050287
+patrol_tal_4701	patrol_tal_4700		TALUS	tal_world	0	4230.38	2.00	5286.99	0	
+patrol_tal_4702	patrol_tal_4700		TALUS	tal_world	0	4227.57	2.00	5327.11	0	
+patrol_tal_4703	patrol_tal_4700		TALUS	tal_world	0	4206.65	2.00	5290.94	0	
+patrol_tal_4800	patrol_tal_4800	FLIP	TALUS	tal_world	0	4117.45	2.00	5308.11	0	smuggler_patrol_13_02_11311178
+patrol_tal_4801	patrol_tal_4800		TALUS	tal_world	0	4134.41	2.00	5306.04	0	
+patrol_tal_4802	patrol_tal_4800		TALUS	tal_world	0	4137.81	2.00	5293.34	0	
+patrol_tal_4803	patrol_tal_4800		TALUS	tal_world	0	4127.81	2.00	5287.27	0	
+patrol_tal_4804	patrol_tal_4800		TALUS	tal_world	0	4117.49	2.00	5282.81	0	
+patrol_tal_4900	patrol_tal_4900	FLIP	TALUS	tal_world	0	4302.53	49.44	4744.67	0	selonian_smugglers_lifter_droid_10360475
+patrol_tal_4901	patrol_tal_4900		TALUS	tal_world	0	4307.67	49.44	4737.83	0	
+patrol_tal_4902	patrol_tal_4900		TALUS	tal_world	0	4310.89	49.44	4729.11	0	
+patrol_tal_4903	patrol_tal_4900		TALUS	tal_world	0	4313.73	49.44	4714.47	0	
+patrol_tal_4904	patrol_tal_4900		TALUS	tal_world	0	4315.28	49.44	4708.18	0	
+patrol_tal_4905	patrol_tal_4900		TALUS	tal_world	0	4299.74	49.44	4698.89	0	
+patrol_tal_4906	patrol_tal_4900		TALUS	tal_world	0	4294.97	49.44	4693.25	0	
+patrol_tal_4907	patrol_tal_4900		TALUS	tal_world	0	4298.69	49.44	4698.60	0	
+patrol_tal_4908	patrol_tal_4900		TALUS	tal_world	0	4305.42	49.44	4716.44	0	
+patrol_tal_4909	patrol_tal_4900		TALUS	tal_world	0	4306.44	49.44	4731.90	0	
+patrol_tal_4910	patrol_tal_4900		TALUS	tal_world	0	4304.97	49.44	4737.93	0	
+patrol_tal_5000	patrol_tal_5000	FLIP	TALUS	tal_nashal_selonian_smugglers_cave	1	-2.20	-5.07	9.76	0	selonian_10486889
+patrol_tal_5001	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	1	-2.15	-13.14	-7.14	0	
+patrol_tal_5002	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	1	5.27	-16.08	-11.50	0	
+patrol_tal_5003	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	1	7.61	-17.60	-13.25	0	
+patrol_tal_5004	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	7.51	-21.57	-19.42	0	
+patrol_tal_5005	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	5.51	-23.57	-22.81	0	
+patrol_tal_5006	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	-2.84	-28.54	-24.13	0	
+patrol_tal_5007	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	-11.92	-30.51	-25.29	0	
+patrol_tal_5008	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	-12.67	-31.78	-33.37	0	
+patrol_tal_5009	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	2	-12.60	-37.70	-48.72	0	
+patrol_tal_5010	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	3	-13.15	-40.61	-62.50	0	
+patrol_tal_5011	patrol_tal_5000		TALUS	tal_nashal_selonian_smugglers_cave	3	-13.44	-40.75	-75.52	0	
+patrol_tal_5100	patrol_tal_5100	FLIP	TALUS	tal_nashal_selonian_smugglers_cave	1	1.83	-5.37	7.88	0	selonian_smuggler_taskmaster_10055588
+patrol_tal_5101	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	1	1.85	-10.91	-1.28	0	
+patrol_tal_5102	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	1	6.48	-14.42	-6.98	0	
+patrol_tal_5103	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	1	10.81	-17.25	-12.23	0	
+patrol_tal_5104	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	2	11.35	-23.40	-25.21	0	
+patrol_tal_5105	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	2	3.02	-25.68	-27.89	0	
+patrol_tal_5106	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	2	-7.07	-30.64	-31.15	0	
+patrol_tal_5107	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	2	-8.35	-36.27	-41.50	0	
+patrol_tal_5108	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	3	-6.96	-39.42	-55.14	0	
+patrol_tal_5109	patrol_tal_5100		TALUS	tal_nashal_selonian_smugglers_cave	3	-3.55	-40.20	-70.08	0	
+patrol_tal_5200	patrol_tal_5200	FLIP	TALUS	tal_nashal_selonian_smugglers_cave	7	-21.97	-63.39	-258.27	0	selonian_10486613
+patrol_tal_5201	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-20.79	-65.19	-247.27	0	
+patrol_tal_5202	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-19.44	-65.64	-242.81	0	
+patrol_tal_5203	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-14.56	-65.44	-239.47	0	
+patrol_tal_5204	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-9.43	-64.86	-235.56	0	
+patrol_tal_5205	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-10.62	-63.89	-230.23	0	
+patrol_tal_5206	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-13.20	-64.42	-222.30	0	
+patrol_tal_5207	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-12.52	-65.83	-213.04	0	
+patrol_tal_5208	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	7	-12.10	-64.97	-204.25	0	
+patrol_tal_5209	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	6	-11.30	-64.30	-194.88	0	
+patrol_tal_5210	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	6	-10.81	-64.04	-187.16	0	
+patrol_tal_5211	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	6	-10.95	-64.00	-182.83	0	
+patrol_tal_5212	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	6	-23.38	-64.29	-180.69	0	
+patrol_tal_5213	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	6	-33.27	-66.27	-180.77	0	
+patrol_tal_5214	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-44.01	-69.09	-182.31	0	
+patrol_tal_5215	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-53.94	-70.68	-181.47	0	
+patrol_tal_5216	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-64.08	-69.89	-180.02	0	
+patrol_tal_5217	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-72.46	-69.05	-173.49	0	
+patrol_tal_5218	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-81.30	-70.66	-170.47	0	
+patrol_tal_5219	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-89.49	-72.90	-172.37	0	
+patrol_tal_5220	patrol_tal_5200		TALUS	tal_nashal_selonian_smugglers_cave	8	-95.03	-72.62	-179.72	0	
+patrol_tal_5300	patrol_tal_5300	FLIP	TALUS	tal_nashal_selonian_smugglers_cave	10	-23.32	-79.39	-141.75	0	selonian_10055791
+patrol_tal_5301	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	10	-45.29	-84.95	-144.67	0	
+patrol_tal_5302	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	8	-64.52	-95.11	-147.05	0	
+patrol_tal_5303	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	8	-73.81	-99.32	-159.62	0	
+patrol_tal_5304	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	8	-86.43	-101.35	-140.99	0	
+patrol_tal_5305	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	11	-87.85	-103.08	-127.95	0	
+patrol_tal_5306	patrol_tal_5300		TALUS	tal_nashal_selonian_smugglers_cave	11	-91.77	-100.91	-101.23	0	
+patrol_tal_5400	patrol_tal_5400	FLIP	TALUS	tal_world	0	4268.93	49.44	4705.90	0	selonian_smuggler_leader_10055555
+patrol_tal_5401	patrol_tal_5400		TALUS	tal_world	0	4261.51	49.44	4718.21	0	
+patrol_tal_5402	patrol_tal_5400		TALUS	tal_world	0	4275.99	49.44	4741.08	0	
+patrol_tal_5403	patrol_tal_5400		TALUS	tal_world	0	4261.08	49.44	4764.98	0	
+patrol_tal_5404	patrol_tal_5400		TALUS	tal_world	0	4289.87	49.44	4755.66	0	
+patrol_tal_5405	patrol_tal_5400		TALUS	tal_world	0	4312.82	49.44	4765.73	0	
+patrol_tal_5406	patrol_tal_5400		TALUS	tal_world	0	4313.59	49.44	4750.04	0	
+patrol_tal_5407	patrol_tal_5400		TALUS	tal_world	0	4304.02	49.44	4748.26	0	
+patrol_tal_5408	patrol_tal_5400		TALUS	tal_world	0	4304.76	49.44	4737.48	0	
+patrol_tal_5409	patrol_tal_5400		TALUS	tal_world	0	4309.23	49.44	4734.11	0	
+patrol_tal_5410	patrol_tal_5400		TALUS	tal_world	0	4307.88	49.44	4722.25	0	
+patrol_tal_5411	patrol_tal_5400		TALUS	tal_world	0	4280.19	49.44	4716.68	0	
+patrol_tal_5412	patrol_tal_5400		TALUS	tal_world	0	4271.81	49.44	4707.68	0	
+patrol_tal_5500	patrol_tal_5500	FLIP	TALUS	tal_world	0	4098.14	2.00	5297.72	0	smuggler_patrol_13_01_11311137
+patrol_tal_5501	patrol_tal_5500		TALUS	tal_world	0	4082.90	2.00	5283.48	0	
+patrol_tal_5502	patrol_tal_5500		TALUS	tal_world	0	4080.85	2.00	5274.26	0	
+patrol_tal_5503	patrol_tal_5500		TALUS	tal_world	0	4089.37	2.00	5266.93	0	
+patrol_tal_5504	patrol_tal_5500		TALUS	tal_world	0	4104.77	2.00	5276.05	0	
+patrol_tal_5505	patrol_tal_5500		TALUS	tal_world	0	4115.41	2.00	5281.62	0	
+patrol_tal_5600	patrol_tal_5600	FLIP	TALUS	tal_world	0	4323.80	49.44	4742.05	0	selonian_elite_guard_10360789
+patrol_tal_5601	patrol_tal_5600		TALUS	tal_world	0	4318.13	49.44	4751.04	0	
+patrol_tal_5602	patrol_tal_5600		TALUS	tal_world	0	4309.68	49.44	4759.84	0	
+patrol_tal_5603	patrol_tal_5600		TALUS	tal_world	0	4293.40	49.44	4761.07	0	
+patrol_tal_5604	patrol_tal_5600		TALUS	tal_world	0	4280.05	49.44	4761.30	0	
+patrol_tal_5605	patrol_tal_5600		TALUS	tal_world	0	4276.78	49.44	4755.11	0	
+patrol_tal_5606	patrol_tal_5600		TALUS	tal_world	0	4274.00	49.44	4743.18	0	
+patrol_tal_5607	patrol_tal_5600		TALUS	tal_world	0	4272.67	49.44	4730.34	0	
+patrol_tal_5608	patrol_tal_5600		TALUS	tal_world	0	4279.92	49.44	4721.66	0	
+patrol_tal_5609	patrol_tal_5600		TALUS	tal_world	0	4291.44	49.44	4717.55	0	
+patrol_tal_5610	patrol_tal_5600		TALUS	tal_world	0	4297.61	49.44	4717.29	0	
+patrol_tal_5611	patrol_tal_5600		TALUS	tal_world	0	4315.14	49.44	4728.61	0	
+patrol_tal_5700	patrol_tal_5700	FLIP	TALUS	tal_world	0	4219.05	63.21	4675.63	0	selonian_elite_guard_10360900
+patrol_tal_5701	patrol_tal_5700		TALUS	tal_world	0	4235.13	60.13	4667.06	0	
+patrol_tal_5702	patrol_tal_5700		TALUS	tal_world	0	4247.71	56.63	4659.68	0	
+patrol_tal_5703	patrol_tal_5700		TALUS	tal_world	0	4262.03	52.64	4657.09	0	
+patrol_tal_5704	patrol_tal_5700		TALUS	tal_world	0	4276.94	51.86	4654.69	0	
+patrol_tal_5705	patrol_tal_5700		TALUS	tal_world	0	4290.79	56.59	4653.57	0	
+patrol_tal_5706	patrol_tal_5700		TALUS	tal_world	0	4306.71	61.40	4655.82	0	
+patrol_tal_5707	patrol_tal_5700		TALUS	tal_world	0	4321.48	65.06	4662.06	0	
+patrol_tal_5800	patrol_tal_5800	FLIP	TALUS	tal_world	0	4328.60	66.28	4673.51	0	selonian_elite_guard_10360870
+patrol_tal_5801	patrol_tal_5800		TALUS	tal_world	0	4313.36	59.78	4672.14	0	
+patrol_tal_5802	patrol_tal_5800		TALUS	tal_world	0	4306.82	53.71	4679.63	0	
+patrol_tal_5803	patrol_tal_5800		TALUS	tal_world	0	4297.86	51.12	4682.34	0	
+patrol_tal_5804	patrol_tal_5800		TALUS	tal_world	0	4286.66	49.91	4684.27	0	
+patrol_tal_5805	patrol_tal_5800		TALUS	tal_world	0	4272.64	49.92	4691.43	0	
+patrol_tal_5806	patrol_tal_5800		TALUS	tal_world	0	4255.64	48.96	4699.27	0	
+patrol_tal_5807	patrol_tal_5800		TALUS	tal_world	0	4247.73	49.46	4714.40	0	
+patrol_tal_5808	patrol_tal_5800		TALUS	tal_world	0	4242.74	49.85	4728.78	0	
+patrol_tal_5809	patrol_tal_5800		TALUS	tal_world	0	4243.60	49.20	4752.09	0	
+patrol_tal_5900	patrol_tal_5900	FLIP	TALUS	tal_world	0	4564.76	2.03	5483.35	0	rebel_patrol_8_10050445
+patrol_tal_5901	patrol_tal_5900		TALUS	tal_world	0	4554.35	2.00	5440.44	0	
+patrol_tal_5902	patrol_tal_5900		TALUS	tal_world	0	4469.42	2.00	5461.27	0	
+patrol_tal_5903	patrol_tal_5900		TALUS	tal_world	0	4415.69	2.00	5447.54	0	
+patrol_tal_5904	patrol_tal_5900		TALUS	tal_world	0	4400.01	2.00	5440.17	0	
+patrol_tal_5905	patrol_tal_5900		TALUS	tal_world	0	4380.95	2.00	5415.84	0	
+patrol_tal_5906	patrol_tal_5900		TALUS	tal_world	0	4409.10	2.00	5395.23	0	
+patrol_tal_5907	patrol_tal_5900		TALUS	tal_world	0	4389.13	2.00	5425.12	0	
+patrol_tal_5908	patrol_tal_5900		TALUS	tal_world	0	4405.96	2.00	5444.51	0	
+patrol_tal_5909	patrol_tal_5900		TALUS	tal_world	0	4452.30	2.00	5453.38	0	
+patrol_tal_5910	patrol_tal_5900		TALUS	tal_world	0	4487.19	2.00	5487.38	0	
+patrol_tal_5911	patrol_tal_5900		TALUS	tal_world	0	4499.51	2.00	5504.42	0	
+patrol_tal_5912	patrol_tal_5900		TALUS	tal_world	0	4545.56	2.00	5485.80	0	
+patrol_tal_6000	patrol_tal_6000	FLIP	TALUS	tal_world	0	4259.85	49.44	4733.34	0	selonian_smuggler_10055482
+patrol_tal_6001	patrol_tal_6000		TALUS	tal_world	0	4267.47	49.44	4712.13	0	
+patrol_tal_6002	patrol_tal_6000		TALUS	tal_world	0	4282.55	49.44	4724.50	0	
+patrol_tal_6003	patrol_tal_6000		TALUS	tal_world	0	4286.64	49.44	4722.10	0	
+patrol_tal_6004	patrol_tal_6000		TALUS	tal_world	0	4300.42	49.44	4724.94	0	
+patrol_tal_6005	patrol_tal_6000		TALUS	tal_world	0	4306.40	49.44	4728.54	0	
+patrol_tal_6006	patrol_tal_6000		TALUS	tal_world	0	4329.74	49.44	4736.12	0	
+patrol_tal_6007	patrol_tal_6000		TALUS	tal_world	0	4321.65	49.44	4744.58	0	
+patrol_tal_6008	patrol_tal_6000		TALUS	tal_world	0	4328.36	49.44	4754.13	0	
+patrol_tal_6009	patrol_tal_6000		TALUS	tal_world	0	4324.37	49.44	4760.35	0	
+patrol_tal_6010	patrol_tal_6000		TALUS	tal_world	0	4316.86	49.44	4766.14	0	
+patrol_tal_6011	patrol_tal_6000		TALUS	tal_world	0	4310.61	49.44	4768.59	0	
+patrol_tal_6012	patrol_tal_6000		TALUS	tal_world	0	4306.66	49.44	4765.29	0	
+patrol_tal_6013	patrol_tal_6000		TALUS	tal_world	0	4286.02	49.44	4766.31	0	
+patrol_tal_6014	patrol_tal_6000		TALUS	tal_world	0	4275.24	49.44	4766.28	0	
+patrol_tal_6015	patrol_tal_6000		TALUS	tal_world	0	4271.54	49.44	4769.98	0	
+patrol_tal_6016	patrol_tal_6000		TALUS	tal_world	0	4266.41	49.44	4769.03	0	
+patrol_tal_6017	patrol_tal_6000		TALUS	tal_world	0	4263.23	49.44	4767.88	0	
+patrol_tal_6018	patrol_tal_6000		TALUS	tal_world	0	4259.52	49.44	4761.80	0	
+patrol_tal_6019	patrol_tal_6000		TALUS	tal_world	0	4268.64	49.44	4756.25	0	
+patrol_tal_6020	patrol_tal_6000		TALUS	tal_world	0	4270.29	49.44	4746.09	0	
+patrol_tal_6021	patrol_tal_6000		TALUS	tal_world	0	4269.51	49.44	4735.01	0	
+patrol_tal_6100	patrol_tal_6100	FLIP	TALUS	tal_world	0	4385.96	2.00	5268.61	0	rebel_patrol_3_10050230
+patrol_tal_6101	patrol_tal_6100		TALUS	tal_world	0	4342.96	2.00	5301.08	0	
+patrol_tal_6102	patrol_tal_6100		TALUS	tal_world	0	4368.96	2.00	5333.09	0	
+patrol_tal_6103	patrol_tal_6100		TALUS	tal_world	0	4383.06	2.00	5396.32	0	
+patrol_tal_6104	patrol_tal_6100		TALUS	tal_world	0	4356.07	10.02	5398.78	0	
+patrol_tal_6105	patrol_tal_6100		TALUS	tal_world	0	4341.65	9.90	5398.34	0	
+patrol_tal_6106	patrol_tal_6100		TALUS	tal_world	0	4337.67	9.90	5365.63	0	
+patrol_tal_6107	patrol_tal_6100		TALUS	tal_world	0	4287.81	9.90	5358.78	0	
+patrol_tal_6200	patrol_tal_6200	FLIP	TALUS	tal_world	0	4269.82	49.44	4772.30	0	selonian_power_droid_10360600
+patrol_tal_6201	patrol_tal_6200		TALUS	tal_world	0	4269.35	49.44	4753.49	0	
+patrol_tal_6202	patrol_tal_6200		TALUS	tal_world	0	4268.37	49.44	4738.27	0	
+patrol_tal_6203	patrol_tal_6200		TALUS	tal_world	0	4255.35	49.44	4738.22	0	
+patrol_tal_6204	patrol_tal_6200		TALUS	tal_world	0	4256.36	49.44	4725.02	0	
+patrol_tal_6205	patrol_tal_6200		TALUS	tal_world	0	4264.65	49.44	4716.29	0	
+patrol_tal_6206	patrol_tal_6200		TALUS	tal_world	0	4280.52	49.44	4714.58	0	
+patrol_tal_6207	patrol_tal_6200		TALUS	tal_world	0	4298.50	49.44	4706.97	0	
+patrol_tal_6208	patrol_tal_6200		TALUS	tal_world	0	4324.66	49.44	4717.82	0	
+patrol_tal_6209	patrol_tal_6200		TALUS	tal_world	0	4325.83	49.44	4742.49	0	
+patrol_tal_6210	patrol_tal_6200		TALUS	tal_world	0	4321.52	49.44	4760.93	0	
+patrol_tal_6211	patrol_tal_6200		TALUS	tal_world	0	4301.83	49.44	4766.14	0	
+patrol_tal_6212	patrol_tal_6200		TALUS	tal_world	0	4276.40	49.44	4767.48	0	
+patrol_tal_6300	patrol_tal_6300	FLIP	TALUS	tal_world	0	4324.92	49.44	4762.54	0	selonian_smuggler_10052698
+patrol_tal_6301	patrol_tal_6300		TALUS	tal_world	0	4319.09	49.44	4759.66	0	
+patrol_tal_6302	patrol_tal_6300		TALUS	tal_world	0	4306.75	49.44	4761.76	0	
+patrol_tal_6303	patrol_tal_6300		TALUS	tal_world	0	4295.56	49.44	4762.78	0	
+patrol_tal_6304	patrol_tal_6300		TALUS	tal_world	0	4283.15	49.44	4763.57	0	
+patrol_tal_6305	patrol_tal_6300		TALUS	tal_world	0	4267.83	49.44	4763.74	0	
+patrol_tal_6306	patrol_tal_6300		TALUS	tal_world	0	4261.31	49.44	4766.92	0	
+patrol_tal_6400	patrol_tal_6400	FLIP	TALUS	tal_world	0	4501.62	2.00	5266.24	0	rebel_patrol_7_10050378
+patrol_tal_6401	patrol_tal_6400		TALUS	tal_world	0	4550.64	2.00	5305.08	0	
+patrol_tal_6402	patrol_tal_6400		TALUS	tal_world	0	4551.89	2.00	5336.57	0	
+patrol_tal_6403	patrol_tal_6400		TALUS	tal_world	0	4551.29	2.00	5311.51	0	
+patrol_tal_6404	patrol_tal_6400		TALUS	tal_world	0	4522.91	2.00	5273.30	0	
+patrol_tal_6405	patrol_tal_6400		TALUS	tal_world	0	4500.33	2.00	5252.42	0	
+patrol_tal_6500	patrol_tal_6500	FLIP	TALUS	tal_world	0	4271.89	49.44	4704.30	0	selonian_power_droid_10360563
+patrol_tal_6501	patrol_tal_6500		TALUS	tal_world	0	4277.90	49.44	4712.98	0	
+patrol_tal_6502	patrol_tal_6500		TALUS	tal_world	0	4292.71	49.44	4720.98	0	
+patrol_tal_6503	patrol_tal_6500		TALUS	tal_world	0	4311.77	49.44	4707.16	0	
+patrol_tal_6504	patrol_tal_6500		TALUS	tal_world	0	4301.71	49.44	4700.29	0	
+patrol_tal_6600	patrol_tal_6600	FLIP	TALUS	tal_world	0	4142.14	2.00	5311.14	0	smuggler_patrol_13_03_11311228
+patrol_tal_6601	patrol_tal_6600		TALUS	tal_world	0	4143.08	2.00	5285.52	0	
+patrol_tal_6602	patrol_tal_6600		TALUS	tal_world	0	4148.44	2.00	5278.90	0	
+patrol_tal_6603	patrol_tal_6600		TALUS	tal_world	0	4164.20	2.00	5280.36	0	
+patrol_tal_6604	patrol_tal_6600		TALUS	tal_world	0	4163.22	2.00	5294.46	0	
+patrol_tal_6605	patrol_tal_6600		TALUS	tal_world	0	4162.86	2.00	5307.50	0	
+patrol_tal_6700	patrol_tal_6700	FLIP	TALUS	tal_world	0	4195.63	71.64	4760.54	0	selonian_smuggler_guard_elite_10361102
+patrol_tal_6701	patrol_tal_6700		TALUS	tal_world	0	4187.42	69.89	4808.32	0	
+patrol_tal_6702	patrol_tal_6700		TALUS	tal_world	0	4168.10	71.75	4822.26	0	
+patrol_tal_6703	patrol_tal_6700		TALUS	tal_world	0	4154.15	74.39	4811.69	0	
+patrol_tal_6704	patrol_tal_6700		TALUS	tal_world	0	4150.20	75.71	4782.73	0	
+patrol_tal_6705	patrol_tal_6700		TALUS	tal_world	0	4152.25	68.85	4752.13	0	
+patrol_tal_6706	patrol_tal_6700		TALUS	tal_world	0	4153.77	63.02	4726.53	0	
+patrol_tal_6707	patrol_tal_6700		TALUS	tal_world	0	4157.50	61.79	4698.46	0	
+patrol_tal_6708	patrol_tal_6700		TALUS	tal_world	0	4172.12	62.75	4679.96	0	
+patrol_tal_6709	patrol_tal_6700		TALUS	tal_world	0	4183.58	63.36	4669.14	0	
+patrol_tal_6710	patrol_tal_6700		TALUS	tal_world	0	4203.14	62.24	4659.17	0	
+patrol_tal_6711	patrol_tal_6700		TALUS	tal_world	0	4218.47	60.88	4654.66	0	
+patrol_tal_6800	patrol_tal_6800	FLIP	TALUS	tal_world	0	4298.83	49.44	4728.20	0	selonian_lifter_droid_10360508
+patrol_tal_6801	patrol_tal_6800		TALUS	tal_world	0	4295.97	49.44	4723.02	0	
+patrol_tal_6802	patrol_tal_6800		TALUS	tal_world	0	4277.31	49.44	4724.63	0	
+patrol_tal_6803	patrol_tal_6800		TALUS	tal_world	0	4268.70	49.44	4710.00	0	
+patrol_tal_6900	patrol_tal_6900	FLIP	TALUS	tal_world	0	4398.48	2.00	5016.84	0	rebel_patrol_2_10050164
+patrol_tal_6901	patrol_tal_6900		TALUS	tal_world	0	4363.03	2.00	5082.27	0	
+patrol_tal_6902	patrol_tal_6900		TALUS	tal_world	0	4366.19	2.00	5164.24	0	
+patrol_tal_6903	patrol_tal_6900		TALUS	tal_world	0	4360.68	2.00	5200.00	0	
+patrol_tal_6904	patrol_tal_6900		TALUS	tal_world	0	4297.50	2.00	5199.21	0	
+patrol_tal_6905	patrol_tal_6900		TALUS	tal_world	0	4264.73	2.00	5153.14	0	
+patrol_tal_6906	patrol_tal_6900		TALUS	tal_world	0	4231.65	2.00	5128.22	0	
+patrol_tal_6907	patrol_tal_6900		TALUS	tal_world	0	4210.89	2.00	5149.12	0	
+patrol_tal_6908	patrol_tal_6900		TALUS	tal_world	0	4146.28	2.00	5122.10	0	
+patrol_tal_7000	patrol_tal_7000	FLIP	TALUS	tal_brood5_cave	1	0.46	-20.26	-14.23	0	arachne_brood_lair_Va_10104094
+patrol_tal_7001	patrol_tal_7000		TALUS	tal_brood5_cave	1	-1.25	-14.69	-5.93	0	
+patrol_tal_7002	patrol_tal_7000		TALUS	tal_brood5_cave	1	-0.13	-10.13	3.39	0	
+patrol_tal_7003	patrol_tal_7000		TALUS	tal_brood5_cave	1	0.14	-5.27	13.64	0	
+patrol_tal_7004	patrol_tal_7000		TALUS	tal_world	0	6408.07	632.05	7364.59	0	
+patrol_tal_7005	patrol_tal_7000		TALUS	tal_world	0	6395.38	628.93	7362.18	0	
+patrol_tal_7006	patrol_tal_7000		TALUS	tal_world	0	6386.06	628.88	7355.44	0	
+patrol_tal_7007	patrol_tal_7000		TALUS	tal_world	0	6384.79	628.48	7339.14	0	
+patrol_tal_7008	patrol_tal_7000		TALUS	tal_world	0	6394.11	624.91	7325.15	0	
+patrol_tal_7009	patrol_tal_7000		TALUS	tal_world	0	6399.09	619.72	7311.33	0	
+patrol_tal_7100	patrol_tal_7100	FLIP	TALUS	tal_brood5_cave	9	-111.12	-69.72	-115.74	0	arachne_brood_lair_Va_10104177
+patrol_tal_7101	patrol_tal_7100		TALUS	tal_brood5_cave	9	-97.94	-70.31	-110.65	0	
+patrol_tal_7102	patrol_tal_7100		TALUS	tal_brood5_cave	9	-87.71	-71.86	-106.54	0	
+patrol_tal_7103	patrol_tal_7100		TALUS	tal_brood5_cave	9	-74.52	-71.04	-107.20	0	
+patrol_tal_7104	patrol_tal_7100		TALUS	tal_brood5_cave	9	-75.58	-71.39	-120.57	0	
+patrol_tal_7105	patrol_tal_7100		TALUS	tal_brood5_cave	9	-85.47	-71.92	-119.44	0	
+patrol_tal_7106	patrol_tal_7100		TALUS	tal_brood5_cave	9	-96.04	-70.33	-117.72	0	
+patrol_tal_7107	patrol_tal_7100		TALUS	tal_brood5_cave	9	-100.85	-69.86	-117.60	0	
+patrol_tal_7200	patrol_tal_7200	FLIP	TALUS	tal_brood5_cave	22	-23.76	-68.14	-112.61	0	arachne_brood_lair_Va_10104200
+patrol_tal_7201	patrol_tal_7200		TALUS	tal_brood5_cave	26	-13.15	-68.09	-111.21	0	
+patrol_tal_7202	patrol_tal_7200		TALUS	tal_brood5_cave	26	-2.23	-70.69	-109.86	0	
+patrol_tal_7203	patrol_tal_7200		TALUS	tal_brood5_cave	26	8.69	-70.87	-102.56	0	
+patrol_tal_7204	patrol_tal_7200		TALUS	tal_brood5_cave	26	6.83	-68.70	-95.41	0	
+patrol_tal_7205	patrol_tal_7200		TALUS	tal_brood5_cave	26	3.51	-67.99	-91.99	0	
+patrol_tal_7206	patrol_tal_7200		TALUS	tal_brood5_cave	20	3.31	-67.13	-76.81	0	
+patrol_tal_7207	patrol_tal_7200		TALUS	tal_brood5_cave	20	11.60	-67.21	-70.93	0	
+patrol_tal_7208	patrol_tal_7200		TALUS	tal_brood5_cave	27	24.34	-66.99	-68.71	0	
+patrol_tal_7209	patrol_tal_7200		TALUS	tal_brood5_cave	27	29.39	-66.80	-74.97	0	
+patrol_tal_7210	patrol_tal_7200		TALUS	tal_brood5_cave	27	34.38	-67.02	-77.00	0	
+patrol_tal_7211	patrol_tal_7200		TALUS	tal_brood5_cave	27	41.12	-66.99	-75.03	0	
+patrol_tal_7212	patrol_tal_7200		TALUS	tal_brood5_cave	27	53.76	-66.15	-80.41	0	
+patrol_tal_7213	patrol_tal_7200		TALUS	tal_brood5_cave	27	46.68	-66.33	-90.52	0	
+patrol_tal_7214	patrol_tal_7200		TALUS	tal_brood5_cave	27	35.90	-68.65	-100.24	0	
+patrol_tal_7215	patrol_tal_7200		TALUS	tal_brood5_cave	27	37.24	-66.42	-88.02	0	
+patrol_tal_7216	patrol_tal_7200		TALUS	tal_brood5_cave	27	25.61	-66.78	-89.92	0	
+patrol_tal_7300	patrol_tal_7300	FLIP	TALUS	tal_brood5_cave	28	-80.68	-66.31	-194.24	0	arachne_brood_lair_V_10103892
+patrol_tal_7301	patrol_tal_7300		TALUS	tal_brood5_cave	28	-71.16	-65.95	-197.24	0	
+patrol_tal_7302	patrol_tal_7300		TALUS	tal_brood5_cave	28	-61.47	-66.16	-198.22	0	
+patrol_tal_7303	patrol_tal_7300		TALUS	tal_brood5_cave	28	-56.29	-66.05	-199.01	0	
+patrol_tal_7304	patrol_tal_7300		TALUS	tal_brood5_cave	28	-54.54	-65.37	-192.24	0	
+patrol_tal_7305	patrol_tal_7300		TALUS	tal_brood5_cave	28	-53.13	-66.57	-182.43	0	
+patrol_tal_7306	patrol_tal_7300		TALUS	tal_brood5_cave	28	-57.97	-65.88	-178.45	0	
+patrol_tal_7307	patrol_tal_7300		TALUS	tal_brood5_cave	28	-64.71	-66.33	-175.80	0	
+patrol_tal_7308	patrol_tal_7300		TALUS	tal_brood5_cave	28	-65.25	-66.17	-165.30	0	
+patrol_tal_7309	patrol_tal_7300		TALUS	tal_brood5_cave	28	-66.21	-65.67	-158.10	0	
+patrol_tal_7310	patrol_tal_7300		TALUS	tal_brood5_cave	28	-64.79	-65.48	-145.53	0	
+patrol_tal_7311	patrol_tal_7300		TALUS	tal_brood5_cave	25	-65.03	-66.04	-140.53	0	
+patrol_tal_7312	patrol_tal_7300		TALUS	tal_brood5_cave	28	-65.59	-65.87	-153.42	0	
+patrol_tal_7313	patrol_tal_7300		TALUS	tal_brood5_cave	28	-65.09	-66.20	-169.57	0	
+patrol_tal_7314	patrol_tal_7300		TALUS	tal_brood5_cave	28	-66.78	-66.17	-176.14	0	
+patrol_tal_7315	patrol_tal_7300		TALUS	tal_brood5_cave	28	-75.63	-65.72	-176.74	0	
+patrol_tal_7316	patrol_tal_7300		TALUS	tal_brood5_cave	28	-84.70	-66.32	-180.93	0	
+patrol_tal_7317	patrol_tal_7300		TALUS	tal_brood5_cave	28	-82.34	-66.45	-189.02	0	
+patrol_tal_7400	patrol_tal_7400	FLIP	TALUS	tal_brood5_cave	29	-53.47	-65.36	-231.55	0	arachne_brood_lair_V_10103935
+patrol_tal_7401	patrol_tal_7400		TALUS	tal_brood5_cave	29	-52.98	-65.54	-222.73	0	
+patrol_tal_7402	patrol_tal_7400		TALUS	tal_brood5_cave	29	-53.36	-65.77	-214.35	0	
+patrol_tal_7403	patrol_tal_7400		TALUS	tal_brood5_cave	29	-54.09	-66.24	-207.54	0	
+patrol_tal_7404	patrol_tal_7400		TALUS	tal_brood5_cave	28	-54.24	-65.42	-196.62	0	
+patrol_tal_7405	patrol_tal_7400		TALUS	tal_brood5_cave	28	-53.94	-65.90	-187.02	0	
+patrol_tal_7406	patrol_tal_7400		TALUS	tal_brood5_cave	28	-48.97	-66.31	-177.63	0	
+patrol_tal_7407	patrol_tal_7400		TALUS	tal_brood5_cave	28	-43.29	-66.21	-172.84	0	
+patrol_tal_7408	patrol_tal_7400		TALUS	tal_brood5_cave	28	-44.46	-66.61	-162.67	0	
+patrol_tal_7500	patrol_tal_7500	FLIP	TALUS	tal_brood2_cave	5	-0.31	-44.85	-130.48	0	arachne_brood_lair_II_patrol_11978692
+patrol_tal_7501	patrol_tal_7500		TALUS	tal_brood2_cave	5	7.57	-45.35	-129.57	0	
+patrol_tal_7502	patrol_tal_7500		TALUS	tal_brood2_cave	5	17.61	-47.36	-132.69	0	
+patrol_tal_7503	patrol_tal_7500		TALUS	tal_brood2_cave	5	23.73	-50.05	-138.94	0	
+patrol_tal_7504	patrol_tal_7500		TALUS	tal_brood2_cave	5	36.68	-53.23	-144.58	0	
+patrol_tal_7505	patrol_tal_7500		TALUS	tal_brood2_cave	5	50.23	-53.42	-144.54	0	
+patrol_tal_7506	patrol_tal_7500		TALUS	tal_brood2_cave	5	62.67	-53.93	-145.92	0	
+patrol_tal_7507	patrol_tal_7500		TALUS	tal_brood2_cave	5	69.27	-54.40	-154.57	0	
+patrol_tal_7508	patrol_tal_7500		TALUS	tal_brood2_cave	5	60.85	-57.01	-164.26	0	
+patrol_tal_7509	patrol_tal_7500		TALUS	tal_brood2_cave	5	55.77	-56.56	-169.38	0	
+patrol_tal_7510	patrol_tal_7500		TALUS	tal_brood2_cave	5	60.46	-57.31	-181.95	0	
+patrol_tal_7511	patrol_tal_7500		TALUS	tal_brood2_cave	5	55.65	-57.28	-185.40	0	
+patrol_tal_7512	patrol_tal_7500		TALUS	tal_brood2_cave	5	50.11	-56.49	-186.01	0	
+patrol_tal_7513	patrol_tal_7500		TALUS	tal_brood2_cave	5	44.62	-56.54	-184.84	0	
+patrol_tal_7514	patrol_tal_7500		TALUS	tal_brood2_cave	5	31.43	-59.91	-180.88	0	
+patrol_tal_7515	patrol_tal_7500		TALUS	tal_brood2_cave	6	12.49	-63.53	-181.67	0	
+patrol_tal_7516	patrol_tal_7500		TALUS	tal_brood2_cave	6	0.40	-63.98	-179.48	0	
+patrol_tal_7517	patrol_tal_7500		TALUS	tal_brood2_cave	6	-14.82	-64.08	-180.47	0	
+patrol_tal_7518	patrol_tal_7500		TALUS	tal_brood2_cave	6	-27.88	-65.10	-180.40	0	
+patrol_tal_7519	patrol_tal_7500		TALUS	tal_brood2_cave	8	-41.84	-68.32	-181.63	0	
+patrol_tal_7520	patrol_tal_7500		TALUS	tal_brood2_cave	8	-52.06	-70.87	-185.44	0	
+patrol_tal_7521	patrol_tal_7500		TALUS	tal_brood2_cave	8	-62.65	-69.84	-193.56	0	
+patrol_tal_7522	patrol_tal_7500		TALUS	tal_brood2_cave	8	-72.25	-69.80	-199.24	0	
+patrol_tal_7523	patrol_tal_7500		TALUS	tal_brood2_cave	8	-77.87	-69.49	-203.73	0	
+patrol_tal_7524	patrol_tal_7500		TALUS	tal_brood2_cave	8	-79.89	-69.34	-200.45	0	
+patrol_tal_7600	patrol_tal_7600	FLIP	TALUS	tal_brood2_cave	7	-3.94	-66.18	-212.39	0	arachne_brood_lair_II_patrol_11978773
+patrol_tal_7601	patrol_tal_7600		TALUS	tal_brood2_cave	7	-9.24	-65.64	-207.95	0	
+patrol_tal_7602	patrol_tal_7600		TALUS	tal_brood2_cave	7	-12.17	-64.79	-202.83	0	
+patrol_tal_7603	patrol_tal_7600		TALUS	tal_brood2_cave	6	-10.95	-64.36	-194.44	0	
+patrol_tal_7604	patrol_tal_7600		TALUS	tal_brood2_cave	6	-10.17	-63.93	-183.83	0	
+patrol_tal_7605	patrol_tal_7600		TALUS	tal_brood2_cave	6	-8.52	-64.08	-179.54	0	
+patrol_tal_7606	patrol_tal_7600		TALUS	tal_brood2_cave	6	2.25	-64.14	-181.19	0	
+patrol_tal_7607	patrol_tal_7600		TALUS	tal_brood2_cave	6	8.24	-63.81	-182.07	0	
+patrol_tal_7608	patrol_tal_7600		TALUS	tal_brood2_cave	5	20.42	-62.57	-176.52	0	
+patrol_tal_7609	patrol_tal_7600		TALUS	tal_brood2_cave	5	33.13	-58.52	-166.70	0	
+patrol_tal_7700	patrol_tal_7700	FLIP	TALUS	tal_brood2_cave	8	-99.96	-68.81	-136.14	0	arachne_brood_lair_II_patrol_11978638
+patrol_tal_7701	patrol_tal_7700		TALUS	tal_brood2_cave	8	-100.53	-71.28	-148.81	0	
+patrol_tal_7702	patrol_tal_7700		TALUS	tal_brood2_cave	8	-100.44	-72.88	-160.13	0	
+patrol_tal_7703	patrol_tal_7700		TALUS	tal_brood2_cave	8	-90.81	-73.44	-168.13	0	
+patrol_tal_7704	patrol_tal_7700		TALUS	tal_brood2_cave	8	-82.52	-71.13	-169.99	0	
+patrol_tal_7705	patrol_tal_7700		TALUS	tal_brood2_cave	8	-70.86	-69.80	-168.13	0	
+patrol_tal_7706	patrol_tal_7700		TALUS	tal_brood2_cave	8	-51.00	-70.24	-182.07	0	
+patrol_tal_7707	patrol_tal_7700		TALUS	tal_brood2_cave	6	-37.12	-67.08	-180.81	0	
+patrol_tal_7708	patrol_tal_7700		TALUS	tal_brood2_cave	6	-22.31	-63.96	-181.95	0	
+patrol_tal_7709	patrol_tal_7700		TALUS	tal_brood2_cave	6	-12.34	-64.06	-181.85	0	
+patrol_tal_7710	patrol_tal_7700		TALUS	tal_brood2_cave	6	5.18	-63.94	-181.93	0	
+patrol_tal_7711	patrol_tal_7700		TALUS	tal_brood2_cave	6	15.57	-63.22	-180.94	0	
+patrol_tal_7712	patrol_tal_7700		TALUS	tal_brood2_cave	5	29.99	-59.46	-174.36	0	
+patrol_tal_7713	patrol_tal_7700		TALUS	tal_brood2_cave	5	40.90	-57.44	-169.48	0	
+patrol_tal_7714	patrol_tal_7700		TALUS	tal_brood2_cave	5	47.70	-56.70	-165.88	0	
+patrol_tal_7715	patrol_tal_7700		TALUS	tal_brood2_cave	5	48.02	-55.31	-155.51	0	
+patrol_tal_7716	patrol_tal_7700		TALUS	tal_brood2_cave	5	47.12	-52.92	-143.83	0	
+patrol_tal_7717	patrol_tal_7700		TALUS	tal_brood2_cave	5	31.48	-54.19	-146.64	0	
+patrol_tal_7718	patrol_tal_7700		TALUS	tal_brood2_cave	5	25.83	-48.90	-136.36	0	
+patrol_tal_7719	patrol_tal_7700		TALUS	tal_brood2_cave	5	21.32	-45.74	-118.99	0	
+patrol_tal_7720	patrol_tal_7700		TALUS	tal_brood2_cave	4	29.80	-45.92	-107.44	0	
