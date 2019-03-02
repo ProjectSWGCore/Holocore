@@ -127,6 +127,8 @@ public final class NpcLoader extends DataLoader {
 		private final double attackSpeed;
 		private final double movementSpeed;
 		private final int hue;
+		private final double scaleMin;
+		private final double scaleMax;
 		private final String primaryWeaponSpecials;
 		private final String secondaryWeaponSpecials;
 		private final int aggressiveRadius;
@@ -149,6 +151,8 @@ public final class NpcLoader extends DataLoader {
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
 			this.name = set.getText("npc_name").intern();
+			this.scaleMin = set.getReal("scale_min");
+			this.scaleMax = set.getReal("scale_max");
 			this.hue = (int) set.getInt("hue");
 			this.stfName = set.getText("stf_name");
 			this.niche = set.getText("niche").intern();
@@ -237,6 +241,14 @@ public final class NpcLoader extends DataLoader {
 		
 		public double getMovementSpeed() {
 			return movementSpeed;
+		}
+		
+		public double getScaleMin() {
+			return scaleMin;
+		}
+		
+		public double getScaleMax() {
+			return scaleMax;
 		}
 		
 		public int getHue() {
