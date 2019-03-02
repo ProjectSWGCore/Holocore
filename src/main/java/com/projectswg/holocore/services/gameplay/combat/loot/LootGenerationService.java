@@ -173,8 +173,10 @@ public final class LootGenerationService extends Service {
 			return;
 		
 		LootTable lootTable = lootTables.get(table);
-		if (lootTable == null)
+		if (lootTable == null) {
+			Log.w("Loot table not found: %s", table);
 			return;
+		}
 		
 		loot.addNPCTable(new NPCTable(chance, lootTable));
 	}
