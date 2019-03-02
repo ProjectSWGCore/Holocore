@@ -78,7 +78,7 @@ public class NPCCreator {
 		int hue = spawner.getHue();
 		if (hue != 0) {
 			// No reason to add color customization if the value is default anyways
-			object.putCustomization("/private/index_color_1", new CustomizationVariable(spawner.getHue()));
+			object.putCustomization("/private/index_color_1", new CustomizationVariable(hue));
 		}
 		
 		// Assign weapons
