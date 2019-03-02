@@ -742,16 +742,16 @@ public class StaticItemService extends Service {
 		return mods;
 	}
 	
-	public static abstract class ObjectCreationHandler {
-		public abstract void success(SWGObject[] createdObjects);
-		public abstract boolean isIgnoreVolume();
+	public static interface ObjectCreationHandler {
+		void success(SWGObject[] createdObjects);
+		boolean isIgnoreVolume();
 		
-		public void containerFull() {
+		default void containerFull() {
 			
 		}
 	}
 	
-	public static final class LootBoxHandler extends ObjectCreationHandler {
+	public static final class LootBoxHandler implements ObjectCreationHandler {
 
 		private final CreatureObject receiver;
 

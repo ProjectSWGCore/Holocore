@@ -391,7 +391,7 @@ public final class LootGenerationService extends Service {
 		}
 	}
 	
-	private static class CreateStaticItemCallback extends StaticItemService.ObjectCreationHandler {
+	private static class CreateStaticItemCallback implements StaticItemService.ObjectCreationHandler {
 		
 		@Override
 		public void success(SWGObject[] createdObjects) {

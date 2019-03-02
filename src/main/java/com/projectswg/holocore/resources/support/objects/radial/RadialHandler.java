@@ -15,6 +15,7 @@ import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
+import com.projectswg.holocore.services.gameplay.combat.loot.RareLootService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -104,6 +105,9 @@ public enum RadialHandler {
 	private void initializeMiscRadials() {
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
+		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
+		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
+		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
 	}
 	
 	private void initializeContainerRadials() {
