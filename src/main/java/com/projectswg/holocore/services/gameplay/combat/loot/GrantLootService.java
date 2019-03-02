@@ -171,7 +171,11 @@ public final class GrantLootService extends Service {
 		
 		Arguments.validate(corpse instanceof AIObject, "Attempted to loot a non-AI object");
 		CorpseLootRestrictions restrictions = lootRestrictions.get(corpse);
-		if (restrictions == null || !restrictions.canLoot(looter)) {
+		if (restrictions == null) {
+			// No loot was generated. Do nothing.
+			return;
+		}
+		if (!restrictions.canLoot(looter)) {
 			SystemMessageIntent.broadcastPersonal(player, "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
 			return;
 		}
@@ -197,7 +201,11 @@ public final class GrantLootService extends Service {
 		
 		Arguments.validate(corpse instanceof AIObject, "Attempted to loot a non-AI object");
 		CorpseLootRestrictions restrictions = lootRestrictions.get(corpse);
-		if (restrictions == null || !restrictions.canLoot(looter)) {
+		if (restrictions == null) {
+			// No loot was generated. Do nothing.
+			return;
+		}
+		if (!restrictions.canLoot(looter)) {
 			SystemMessageIntent.broadcastPersonal(looter.getOwner(), "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
 			return;
 		}
