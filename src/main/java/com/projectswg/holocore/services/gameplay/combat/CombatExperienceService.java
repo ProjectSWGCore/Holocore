@@ -44,7 +44,9 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -125,13 +127,33 @@ public class CombatExperienceService extends Service {
 			new ExperienceIntent(killer, "combat", experienceGained).broadcast();
 		} else {
 			group.getGroupMemberObjects().stream()
-					.filter(groupMember -> !isEntertainer(groupMember) && isMemberNearby(corpse, groupMember))
+					.filter(groupMember -> !isEntertainer(groupMember))	// Entertainers don't receive combat XP
+					.filter(groupMember -> !isTrader(groupMember))	// Traders don't receive combat XP
+					.filter(groupMember -> isMemberNearby(corpse, groupMember))	// Must be within range
+					.filter(groupMember -> corpse.getDamageMap().containsKey(groupMember))	// Only members who have done damage receive XP
 					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained, xpMultiply).broadcast());
 		}
 	}
 	
 	private boolean isEntertainer(CreatureObject creature) {
 		return creature.hasSkill("class_entertainer_phase1_novice");
+	}
+	
+	private boolean isTrader(CreatureObject creature) {
+		List<String> traderSkills = Arrays.asList(
+				"class_domestics_phase1_novice",
+				"class_structures_phase1_novice",
+				"class_munitions_phase1_novice",
+				"class_engineering_phase1_novice"
+		);
+		
+		for (String traderSkill : traderSkills) {
+			if (creature.hasSkill(traderSkill)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
@@ -166,10 +188,12 @@ public class CombatExperienceService extends Service {
 	}
 	
 	/**
-	 * @return true if {@code groupMember} is an observer of {@code corpse}
+	 * @param corpse of the NPC that was killed
+	 * @param groupMember of the group that killed the NPC
+	 * @return true if {@code groupMember} is close enough to the corpse to gain XP
 	 */
 	private boolean isMemberNearby(CreatureObject corpse, CreatureObject groupMember) {
-		return corpse.getObservers().contains(groupMember.getOwner());
+		return corpse.distanceTo(groupMember) <= 128;
 	}
 	
 	private static class XpData {
