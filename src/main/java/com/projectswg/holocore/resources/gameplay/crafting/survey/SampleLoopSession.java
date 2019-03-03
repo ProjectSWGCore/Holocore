@@ -128,7 +128,7 @@ public class SampleLoopSession {
 		if (!isAllowedToSample(concentration))
 			return false;
 		
-		loopFuture = executor.executeWithFixedRate(5000, 5000, this::sample);
+		loopFuture = executor.executeWithFixedRate(30_000, 30_000, this::sample);
 		creature.setPosture(Posture.CROUCHED);
 		creature.setMovementPercent(0);
 		creature.setTurnScale(0);
