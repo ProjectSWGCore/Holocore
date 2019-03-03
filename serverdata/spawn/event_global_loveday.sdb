@@ -1,43 +1,43 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-eve_lov_001	CORELLIA	cor_world	AREA	0	-5173.9	21.0	-2560.6	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_002	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2566.1	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_003	CORELLIA	cor_world	AREA	0	-5181.9	21.0	-2552.6	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_004	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2560.6	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_005	CORELLIA	cor_world	AREA	0	-5183.9	21.0	-2576.1	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_006	CORELLIA	cor_world	AREA	0	-5178.4	21.0	-2556.1	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_007	CORELLIA	cor_world	AREA	0	-5175.4	21.0	-2556.1	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_008	CORELLIA	cor_world	AREA	0	-5182.4	21.0	-2565.1	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_009	CORELLIA	cor_world	AREA	0	-5175.4	21.0	-2565.1	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_010	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2555.1	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_011	CORELLIA	cor_world	AREA	0	-5170.5	21.0	-2561.7	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_012	CORELLIA	cor_world	AREA	0	-5184.8	21.0	-2549.3	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_013	CORELLIA	cor_world	AREA	0	-5187.8	21.0	-2565.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_014	CORELLIA	cor_world	AREA	0	-5187.2	21.0	-2556.9	0	1	L-O53 (a matchmaking droid)	event_loveday_lo53_matchmaker_droid	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_015	ENDOR	end_world	AREA	0	-663.5	0.5	-5036.6	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_016	ENDOR	end_world	AREA	0	-661.0	0.5	-5015.2	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_017	ENDOR	end_world	AREA	0	-668.3	0.5	-5018.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_018	ENDOR	end_world	AREA	0	-658.1	0.5	-5025.1	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_019	ENDOR	end_world	AREA	0	-663.1	0.5	-5030.6	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_020	ENDOR	end_world	AREA	0	-666.1	0.5	-5017.1	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_021	ENDOR	end_world	AREA	0	-668.1	0.5	-5025.1	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_022	ENDOR	end_world	AREA	0	-662.6	0.5	-5030.6	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_023	ENDOR	end_world	AREA	0	-659.6	0.5	-5020.6	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_024	ENDOR	end_world	AREA	0	-666.6	0.5	-5020.6	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_025	ENDOR	end_world	AREA	0	-666.6	0.5	-5029.6	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_026	ENDOR	end_world	AREA	0	-659.6	0.5	-5029.6	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_027	ENDOR	end_world	AREA	0	-663.1	0.5	-5019.6	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_028	NABOO	nab_world	AREA	0	5238.7	-192.0	6736.6	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_029	NABOO	nab_world	AREA	0	5233.7	-192.0	6750.1	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_030	NABOO	nab_world	AREA	0	5230.7	-192.0	6742.1	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_031	NABOO	nab_world	AREA	0	5228.7	-192.0	6726.6	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_032	NABOO	nab_world	AREA	0	5234.2	-192.0	6746.6	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_033	NABOO	nab_world	AREA	0	5237.2	-192.0	6746.6	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_034	NABOO	nab_world	AREA	0	5230.2	-192.0	6737.6	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_035	NABOO	nab_world	AREA	0	5230.2	-192.0	6737.6	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_036	NABOO	nab_world	AREA	0	5237.2	-192.0	6737.6	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
-eve_lov_037	NABOO	nab_world	AREA	0	5233.7	-192.0	6742.1	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
-eve_lov_038	NABOO	nab_world	AREA	0	5244.3	-192.0	6742.5	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_039	NABOO	nab_world	AREA	0	5238.6	-192.0	6733.3	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_040	NABOO	nab_world	AREA	0	5225.7	-192.0	6745.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
-eve_lov_041	NABOO	nab_world	AREA	0	5242.7	-192.0	6737.4	0	1	L-O53 (a matchmaking droid)	event_loveday_lo53_matchmaker_droid	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+spawn_eve_lov_1	CORELLIA	cor_world	AREA	0	-5173.9	21.0	-2560.6	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_2	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2566.1	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_3	CORELLIA	cor_world	AREA	0	-5181.9	21.0	-2552.6	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_4	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2560.6	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_5	CORELLIA	cor_world	AREA	0	-5183.9	21.0	-2576.1	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_6	CORELLIA	cor_world	AREA	0	-5178.4	21.0	-2556.1	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_7	CORELLIA	cor_world	AREA	0	-5175.4	21.0	-2556.1	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_8	CORELLIA	cor_world	AREA	0	-5182.4	21.0	-2565.1	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_9	CORELLIA	cor_world	AREA	0	-5175.4	21.0	-2565.1	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_10	CORELLIA	cor_world	AREA	0	-5178.9	21.0	-2555.1	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_11	CORELLIA	cor_world	AREA	0	-5170.5	21.0	-2561.7	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_12	CORELLIA	cor_world	AREA	0	-5184.8	21.0	-2549.3	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_13	CORELLIA	cor_world	AREA	0	-5187.8	21.0	-2565.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_14	CORELLIA	cor_world	AREA	0	-5187.2	21.0	-2556.9	0	1	L-O53 (a matchmaking droid)	event_loveday_lo53_matchmaker_droid	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_15	ENDOR	end_world	AREA	0	-663.5	0.5	-5036.6	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_16	ENDOR	end_world	AREA	0	-661.0	0.5	-5015.2	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_17	ENDOR	end_world	AREA	0	-668.3	0.5	-5018.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_18	ENDOR	end_world	AREA	0	-658.1	0.5	-5025.1	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_19	ENDOR	end_world	AREA	0	-663.1	0.5	-5030.6	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_20	ENDOR	end_world	AREA	0	-666.1	0.5	-5017.1	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_21	ENDOR	end_world	AREA	0	-668.1	0.5	-5025.1	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_22	ENDOR	end_world	AREA	0	-662.6	0.5	-5030.6	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_23	ENDOR	end_world	AREA	0	-659.6	0.5	-5020.6	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_24	ENDOR	end_world	AREA	0	-666.6	0.5	-5020.6	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_25	ENDOR	end_world	AREA	0	-666.6	0.5	-5029.6	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_26	ENDOR	end_world	AREA	0	-659.6	0.5	-5029.6	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_27	ENDOR	end_world	AREA	0	-663.1	0.5	-5019.6	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_28	NABOO	nab_world	AREA	0	5238.7	-192.0	6736.6	90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_29	NABOO	nab_world	AREA	0	5233.7	-192.0	6750.1	180	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_30	NABOO	nab_world	AREA	0	5230.7	-192.0	6742.1	45	1	Logray	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_31	NABOO	nab_world	AREA	0	5228.7	-192.0	6726.6	-90	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_32	NABOO	nab_world	AREA	0	5234.2	-192.0	6746.6	0	1	Chief Chirpa	event_loveday_chief	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_33	NABOO	nab_world	AREA	0	5237.2	-192.0	6746.6	45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_34	NABOO	nab_world	AREA	0	5230.2	-192.0	6737.6	-45	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_35	NABOO	nab_world	AREA	0	5230.2	-192.0	6737.6	-135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_36	NABOO	nab_world	AREA	0	5237.2	-192.0	6737.6	135	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_1	0	0	0	600
+spawn_eve_lov_37	NABOO	nab_world	AREA	0	5233.7	-192.0	6742.1	0	1	an Ewok Dancer	event_loveday_dancer	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	dance_2	0	0	0	600
+spawn_eve_lov_38	NABOO	nab_world	AREA	0	5244.3	-192.0	6742.5	0	1	a Festival of Love vendor	event_loveday_vendor	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_39	NABOO	nab_world	AREA	0	5238.6	-192.0	6733.3	0	1	an Ewok child	event_loveday_child	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_40	NABOO	nab_world	AREA	0	5225.7	-192.0	6745.4	0	1	Disciple of Benjamin	event_loveday_herald	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_eve_lov_41	NABOO	nab_world	AREA	0	5242.7	-192.0	6737.4	0	1	L-O53 (a matchmaking droid)	event_loveday_lo53_matchmaker_droid	INVULNERABLE	N	100	100	event	Loveday	1	IDLE	0	0	-	idle	0	0	0	600

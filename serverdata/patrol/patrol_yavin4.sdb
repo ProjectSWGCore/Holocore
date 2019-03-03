@@ -1,61 +1,61 @@
 patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
-INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-12000100	12000100	LOOP	YAVIN4	yav_world	0	-262.40	35.00	4874.40	0	Mining outpost - an R5 unit
-12000101	12000100		YAVIN4	yav_world	0	-260.10	35.00	4856.30	0	
-12000102	12000100		YAVIN4	yav_world	0	-303.50	35.00	4857.70	0	
-12000103	12000100		YAVIN4	yav_world	0	-303.60	35.00	4834.40	0	
-12000104	12000100		YAVIN4	yav_world	0	-318.30	35.00	4839.80	0	
-12000105	12000100		YAVIN4	yav_world	0	-319.00	35.00	4849.20	0	
-12000106	12000100		YAVIN4	yav_world	0	-326.20	35.00	4852.90	0	
-12000107	12000100		YAVIN4	yav_world	0	-305.90	35.00	4885.70	0	
-12000108	12000100		YAVIN4	yav_world	0	-284.00	35.00	4887.40	0	
-12000200	12000200	LOOP	YAVIN4	yav_world	0	-254.80	35.00	4872.80	0	Mining outpost - a technician
-12000201	12000200		YAVIN4	yav_world	0	-252.60	35.00	4844.60	0	
-12000202	12000200		YAVIN4	yav_world	0	-253.40	35.00	4856.20	0	
-12000203	12000200		YAVIN4	yav_world	0	-302.90	35.00	4856.10	0	
-12000204	12000200		YAVIN4	yav_world	0	-329.20	35.00	4869.90	0	
-12000205	12000200		YAVIN4	yav_world	0	-320.00	35.00	4855.70	0	
-12000206	12000200		YAVIN4	yav_world	0	-259.70	35.00	4867.60	0	
-12000300	12000300	FLIP	YAVIN4	yav_world	0	-351.10	35.00	4858.40	0	Mining outpost - a settler
-12000301	12000300		YAVIN4	yav_world	0	-321.90	35.00	4849.30	0	
-12000302	12000300		YAVIN4	yav_world	0	-310.10	35.00	4847.00	0	
-12000303	12000300		YAVIN4	yav_world	0	-309.70	35.00	4838.20	0	
-12000304	12000300		YAVIN4	yav_world	0	-293.90	35.00	4820.40	0	
-12000305	12000300		YAVIN4	yav_world	0	-281.90	35.00	4838.50	0	
-12000306	12000300		YAVIN4	yav_world	0	-281.70	35.00	4857.80	0	
-12000400	12000400	LOOP	YAVIN4	yav_world	0	-6875.10	73.00	-5716.80	0	Labor Outpost - a settler
-12000401	12000400		YAVIN4	yav_world	0	-6876.30	73.00	-5703.10	0	
-12000402	12000400		YAVIN4	yav_world	0	-6880.20	73.00	-5703.90	0	
-12000403	12000400		YAVIN4	yav_world	0	-6913.30	73.00	-5748.60	0	
-12000404	12000400		YAVIN4	yav_world	0	-6985.90	73.00	-5750.20	0	
-12000405	12000400		YAVIN4	yav_world	0	-6981.10	73.00	-5661.00	0	
-12000406	12000400		YAVIN4	yav_world	0	-6977.70	73.00	-5673.00	0	
-12000407	12000400		YAVIN4	yav_world	0	-6913.60	73.00	5673.10	0	
-12000408	12000400		YAVIN4	yav_world	0	-6887.50	73.00	-5718.30	0	
-12000409	12000400		YAVIN4	yav_world	0	-6877.70	73.00	-5702.80	0	
-12000410	12000400		YAVIN4	yav_world	0	-6875.80	73.00	-5704.80	0	
-12000500	12000500	FLIP	YAVIN4	yav_world	0	-6883.30	73.00	-5685.00	0	Labor Outpost - a miner
-12000501	12000500		YAVIN4	yav_world	0	-6930.40	73.00	-5656.90	0	
-12000502	12000500		YAVIN4	yav_world	0	-6886.30	73.00	-5691.30	0	
-12000600	12000600	FLIP	YAVIN4	yav_world	0	-6929.90	73.00	-5709.80	0	Labor Outpost - a pilot
-12000601	12000600		YAVIN4	yav_world	0	-6927.30	73.00	-5721.00	0	
-12000602	12000600		YAVIN4	yav_world	0	-6921.90	73.00	-5721.70	0	
-12000603	12000600		YAVIN4	yav_world	0	-6918.70	73.00	-5736.80	0	
-12000604	12000600		YAVIN4	yav_world	0	-6975.40	73.00	-5704.00	0	
-12000605	12000600		YAVIN4	yav_world	0	-6981.00	73.00	-5660.90	0	
-12000606	12000600		YAVIN4	yav_world	0	-6976.30	73.00	-5674.70	0	
-12000700	12000700	LOOP	YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	Imperial Outpost - AT-ST
-12000701	12000700		YAVIN4	yav_world	0	4081.60	37.00	-6280.30	0	
-12000702	12000700		YAVIN4	yav_world	0	4083.50	37.00	-6173.20	0	
-12000703	12000700		YAVIN4	yav_world	0	3977.10	37.00	-6174.10	0	
-12000704	12000700		YAVIN4	yav_world	0	3981.50	37.00	-6280.30	0	
-12000705	12000700		YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	
-12000800	12000800	FLIP	YAVIN4	yav_world	0	4026.60	18.50	-6501.60	0	Imperial Outpost - a Novatrooper Captain
-12000801	12000800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
-12000802	12000800		YAVIN4	yav_world	0	3950.30	10.10	-6585.70	0	
-12000803	12000800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
-12000804	12000800		YAVIN4	yav_world	0	4028.40	19.80	-6481.50	0	
-12000805	12000800		YAVIN4	yav_world	0	4027.70	31.90	-6414.00	0	
-12000806	12000800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	
-12000807	12000800		YAVIN4	yav_world	0	4030.80	37.00	-6265.60	0	
-12000808	12000800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_yav_100	patrol_yav_100	LOOP	YAVIN4	yav_world	0	-262.40	35.00	4874.40	0	Mining outpost - an R5 unit
+patrol_yav_101	patrol_yav_100		YAVIN4	yav_world	0	-260.10	35.00	4856.30	0	
+patrol_yav_102	patrol_yav_100		YAVIN4	yav_world	0	-303.50	35.00	4857.70	0	
+patrol_yav_103	patrol_yav_100		YAVIN4	yav_world	0	-303.60	35.00	4834.40	0	
+patrol_yav_104	patrol_yav_100		YAVIN4	yav_world	0	-318.30	35.00	4839.80	0	
+patrol_yav_105	patrol_yav_100		YAVIN4	yav_world	0	-319.00	35.00	4849.20	0	
+patrol_yav_106	patrol_yav_100		YAVIN4	yav_world	0	-326.20	35.00	4852.90	0	
+patrol_yav_107	patrol_yav_100		YAVIN4	yav_world	0	-305.90	35.00	4885.70	0	
+patrol_yav_108	patrol_yav_100		YAVIN4	yav_world	0	-284.00	35.00	4887.40	0	
+patrol_yav_200	patrol_yav_200	LOOP	YAVIN4	yav_world	0	-254.80	35.00	4872.80	0	Mining outpost - a technician
+patrol_yav_201	patrol_yav_200		YAVIN4	yav_world	0	-252.60	35.00	4844.60	0	
+patrol_yav_202	patrol_yav_200		YAVIN4	yav_world	0	-253.40	35.00	4856.20	0	
+patrol_yav_203	patrol_yav_200		YAVIN4	yav_world	0	-302.90	35.00	4856.10	0	
+patrol_yav_204	patrol_yav_200		YAVIN4	yav_world	0	-329.20	35.00	4869.90	0	
+patrol_yav_205	patrol_yav_200		YAVIN4	yav_world	0	-320.00	35.00	4855.70	0	
+patrol_yav_206	patrol_yav_200		YAVIN4	yav_world	0	-259.70	35.00	4867.60	0	
+patrol_yav_300	patrol_yav_300	FLIP	YAVIN4	yav_world	0	-351.10	35.00	4858.40	0	Mining outpost - a settler
+patrol_yav_301	patrol_yav_300		YAVIN4	yav_world	0	-321.90	35.00	4849.30	0	
+patrol_yav_302	patrol_yav_300		YAVIN4	yav_world	0	-310.10	35.00	4847.00	0	
+patrol_yav_303	patrol_yav_300		YAVIN4	yav_world	0	-309.70	35.00	4838.20	0	
+patrol_yav_304	patrol_yav_300		YAVIN4	yav_world	0	-293.90	35.00	4820.40	0	
+patrol_yav_305	patrol_yav_300		YAVIN4	yav_world	0	-281.90	35.00	4838.50	0	
+patrol_yav_306	patrol_yav_300		YAVIN4	yav_world	0	-281.70	35.00	4857.80	0	
+patrol_yav_400	patrol_yav_400	LOOP	YAVIN4	yav_world	0	-6875.10	73.00	-5716.80	0	Labor Outpost - a settler
+patrol_yav_401	patrol_yav_400		YAVIN4	yav_world	0	-6876.30	73.00	-5703.10	0	
+patrol_yav_402	patrol_yav_400		YAVIN4	yav_world	0	-6880.20	73.00	-5703.90	0	
+patrol_yav_403	patrol_yav_400		YAVIN4	yav_world	0	-6913.30	73.00	-5748.60	0	
+patrol_yav_404	patrol_yav_400		YAVIN4	yav_world	0	-6985.90	73.00	-5750.20	0	
+patrol_yav_405	patrol_yav_400		YAVIN4	yav_world	0	-6981.10	73.00	-5661.00	0	
+patrol_yav_406	patrol_yav_400		YAVIN4	yav_world	0	-6977.70	73.00	-5673.00	0	
+patrol_yav_407	patrol_yav_400		YAVIN4	yav_world	0	-6913.60	73.00	5673.10	0	
+patrol_yav_408	patrol_yav_400		YAVIN4	yav_world	0	-6887.50	73.00	-5718.30	0	
+patrol_yav_409	patrol_yav_400		YAVIN4	yav_world	0	-6877.70	73.00	-5702.80	0	
+patrol_yav_410	patrol_yav_400		YAVIN4	yav_world	0	-6875.80	73.00	-5704.80	0	
+patrol_yav_500	patrol_yav_500	FLIP	YAVIN4	yav_world	0	-6883.30	73.00	-5685.00	0	Labor Outpost - a miner
+patrol_yav_501	patrol_yav_500		YAVIN4	yav_world	0	-6930.40	73.00	-5656.90	0	
+patrol_yav_502	patrol_yav_500		YAVIN4	yav_world	0	-6886.30	73.00	-5691.30	0	
+patrol_yav_600	patrol_yav_600	FLIP	YAVIN4	yav_world	0	-6929.90	73.00	-5709.80	0	Labor Outpost - a pilot
+patrol_yav_601	patrol_yav_600		YAVIN4	yav_world	0	-6927.30	73.00	-5721.00	0	
+patrol_yav_602	patrol_yav_600		YAVIN4	yav_world	0	-6921.90	73.00	-5721.70	0	
+patrol_yav_603	patrol_yav_600		YAVIN4	yav_world	0	-6918.70	73.00	-5736.80	0	
+patrol_yav_604	patrol_yav_600		YAVIN4	yav_world	0	-6975.40	73.00	-5704.00	0	
+patrol_yav_605	patrol_yav_600		YAVIN4	yav_world	0	-6981.00	73.00	-5660.90	0	
+patrol_yav_606	patrol_yav_600		YAVIN4	yav_world	0	-6976.30	73.00	-5674.70	0	
+patrol_yav_700	patrol_yav_700	LOOP	YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	Imperial Outpost - AT-ST
+patrol_yav_701	patrol_yav_700		YAVIN4	yav_world	0	4081.60	37.00	-6280.30	0	
+patrol_yav_702	patrol_yav_700		YAVIN4	yav_world	0	4083.50	37.00	-6173.20	0	
+patrol_yav_703	patrol_yav_700		YAVIN4	yav_world	0	3977.10	37.00	-6174.10	0	
+patrol_yav_704	patrol_yav_700		YAVIN4	yav_world	0	3981.50	37.00	-6280.30	0	
+patrol_yav_705	patrol_yav_700		YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	
+patrol_yav_800	patrol_yav_800	FLIP	YAVIN4	yav_world	0	4026.60	18.50	-6501.60	0	Imperial Outpost - a Novatrooper Captain
+patrol_yav_801	patrol_yav_800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
+patrol_yav_802	patrol_yav_800		YAVIN4	yav_world	0	3950.30	10.10	-6585.70	0	
+patrol_yav_803	patrol_yav_800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
+patrol_yav_804	patrol_yav_800		YAVIN4	yav_world	0	4028.40	19.80	-6481.50	0	
+patrol_yav_805	patrol_yav_800		YAVIN4	yav_world	0	4027.70	31.90	-6414.00	0	
+patrol_yav_806	patrol_yav_800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	
+patrol_yav_807	patrol_yav_800		YAVIN4	yav_world	0	4030.80	37.00	-6265.60	0	
+patrol_yav_808	patrol_yav_800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	

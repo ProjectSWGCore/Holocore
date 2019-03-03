@@ -36,13 +36,13 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
 import com.projectswg.holocore.resources.gameplay.combat.buff.BuffMap;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -253,7 +253,7 @@ public class BuffService extends Service {
 			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
 			Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
 			
-			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
+			checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
 			checkCallback(buffData, creature);
 		}
 		
@@ -281,7 +281,7 @@ public class BuffService extends Service {
 		
 		CRC crc = new CRC(buff.getCrc());
 		receiver.adjustBuffStackCount(crc, stackMod);
-		checkSkillMods(buffData, receiver, stackMod);
+		checkBuffEffects(buffData, receiver, stackMod);
 		
 		// If the stack count was incremented, also renew the duration
 		if (stackMod > 0) {
@@ -300,7 +300,7 @@ public class BuffService extends Service {
 		}
 		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
 		
-		checkSkillMods(buffData, receiver, 1);
+		checkBuffEffects(buffData, receiver, 1);
 		receiver.addBuff(buff);
 		
 		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
@@ -327,19 +327,32 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void checkSkillMods(BuffData buffData, CreatureObject creature, int valueFactor) {
+	private void checkBuffEffects(BuffData buffData, CreatureObject creature, int valueFactor) {
 		/*
 		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
 		 *      removal
 		 */
 		for (int i = 0; i < 5; i++)
-			sendSkillModIntent(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
+			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
 	}
 	
-	private void sendSkillModIntent(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
-		if (effectName != null && !effectName.isEmpty())
-			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+	private void checkBuffEffect(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
+		if (effectName != null &&  !effectName.isEmpty()) {
+			if (DataLoader.commands().isCommand(effectName) && effectValue == 1.0) {
+				// This effect is an ability
+				if (valueFactor > 0) {
+					// Buff is being added. Grant the ability.
+					creature.addAbility(effectName);
+				} else {
+					// Buff is being removed. Remove the ability.
+					creature.removeAbility(effectName);
+				}
+			} else {
+				// This effect is a skill mod
+				new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+			}
+		}
 	}
 	
 	@Nullable

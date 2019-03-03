@@ -1,0 +1,491 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_nab_100	patrol_nab_100	FLIP	NABOO	nab_world	0	-5503.8	-150.0	-41.8	0	Amidalas Beach - an RSF security officer
+patrol_nab_101	patrol_nab_100		NABOO	nab_world	0	-5498.4	-150.0	-65.6	0	
+patrol_nab_102	patrol_nab_100		NABOO	nab_world	0	-5479.3	-150.0	-68.1	0	
+patrol_nab_103	patrol_nab_100		NABOO	nab_world	0	-5479.0	-150.0	-41.7	0	
+patrol_nab_200	patrol_nab_200	FLIP	NABOO	nab_world	0	-5497.5	-150.0	-101.1	0	Amidalas Beach - an RSF security officer
+patrol_nab_201	patrol_nab_200		NABOO	nab_world	0	-5476.2	-150.1	-89.2	0	
+patrol_nab_202	patrol_nab_200		NABOO	nab_world	0	-5442.5	-151.8	-82.0	0	
+patrol_nab_203	patrol_nab_200		NABOO	nab_world	0	-5476.2	-150.0	-84.2	0	
+patrol_nab_300	patrol_nab_300	FLIP	NABOO	nab_mystril_safehouse	4	-9.6	1.1	-7.6	0	Mystril Safehouse - a Mystril Skirmisher
+patrol_nab_301	patrol_nab_300		NABOO	nab_mystril_safehouse	4	-2.9	1.1	-7.7	0	
+patrol_nab_302	patrol_nab_300		NABOO	nab_mystril_safehouse	2	-0.9	1.1	-0.5	0	
+patrol_nab_303	patrol_nab_300		NABOO	nab_mystril_safehouse	3	-2.2	1.1	9.2	0	
+patrol_nab_304	patrol_nab_300		NABOO	nab_mystril_safehouse	3	-10.2	-1.9	10.7	0	
+patrol_nab_305	patrol_nab_300		NABOO	nab_mystril_safehouse	3	-10.6	-4.9	0.3	0	
+patrol_nab_306	patrol_nab_300		NABOO	nab_mystril_safehouse	6	-5.4	-4.9	-0.5	0	
+patrol_nab_307	patrol_nab_300		NABOO	nab_mystril_safehouse	6	-9.2	-4.9	-8.8	0	
+patrol_nab_400	patrol_nab_400	FLIP	NABOO	nab_mystril_safehouse	5	-7.5	6.1	-9.2	0	Mystril Safehouse - a Mystril Slicer
+patrol_nab_401	patrol_nab_400		NABOO	nab_mystril_safehouse	5	-3.1	6.1	-8.2	0	
+patrol_nab_402	patrol_nab_400		NABOO	nab_mystril_safehouse	2	-1.8	6.1	-5.2	0	
+patrol_nab_403	patrol_nab_400		NABOO	nab_mystril_safehouse	7	9.2	6.1	-4.4	0	
+patrol_nab_404	patrol_nab_400		NABOO	nab_mystril_safehouse	7	9.8	6.1	-8.6	0	
+patrol_nab_405	patrol_nab_400		NABOO	nab_mystril_safehouse	7	9.2	6.1	-4.1	0	
+patrol_nab_406	patrol_nab_400		NABOO	nab_mystril_safehouse	2	-8.1	6.1	-4.0	0	
+patrol_nab_407	patrol_nab_400		NABOO	nab_mystril_safehouse	2	-10.5	6.1	1.0	0	
+patrol_nab_408	patrol_nab_400		NABOO	nab_mystril_safehouse	2	-6.4	6.1	6.2	0	
+patrol_nab_409	patrol_nab_400		NABOO	nab_mystril_safehouse	2	5.6	4.1	7.0	0	
+patrol_nab_410	patrol_nab_400		NABOO	nab_mystril_safehouse	2	5.8	1.1	-4.0	0	
+patrol_nab_411	patrol_nab_400		NABOO	nab_mystril_safehouse	1	9.2	1.1	-4.1	0	
+patrol_nab_412	patrol_nab_400		NABOO	nab_mystril_safehouse	1	10.1	1.1	-5.7	0	
+patrol_nab_500	patrol_nab_500	FLIP	NABOO	nab_world	0	-5418.8	11.3	3611.9	0	Mystril Safehouse - a Mystril Skirmisher
+patrol_nab_501	patrol_nab_500		NABOO	nab_world	0	-5441.9	12.6	3599.2	0	
+patrol_nab_502	patrol_nab_500		NABOO	nab_world	0	-5455.7	13.1	3567.8	0	
+patrol_nab_503	patrol_nab_500		NABOO	nab_world	0	-5441.9	13.3	3547.5	0	
+patrol_nab_504	patrol_nab_500		NABOO	nab_world	0	-5418.0	13.4	3543.4	0	
+patrol_nab_505	patrol_nab_500		NABOO	nab_world	0	-5398.1	11.0	3570.7	0	
+patrol_nab_506	patrol_nab_500		NABOO	nab_world	0	-5397.1	10.1	3593.1	0	
+patrol_nab_507	patrol_nab_500		NABOO	nab_world	0	-5407.7	10.6	3606.9	0	
+patrol_nab_600	patrol_nab_600	FLIP	NABOO	nab_world	0	-4173.4	43.7	3879.5	0	Borvo Bunker - Borvo's thug
+patrol_nab_601	patrol_nab_600		NABOO	nab_world	0	-4171.3	44.4	3892.8	0	
+patrol_nab_602	patrol_nab_600		NABOO	nab_world	0	-4170.9	44.7	3901.4	0	
+patrol_nab_603	patrol_nab_600		NABOO	nab_world	0	-4177.4	44.7	3903.6	0	
+patrol_nab_700	patrol_nab_700	FLIP	NABOO	nab_world	0	-4657.5	7.6	3631.7	0	Outback - a wild-eyed fambaa
+patrol_nab_701	patrol_nab_700		NABOO	nab_world	0	-4676.0	7.6	3612.4	0	
+patrol_nab_702	patrol_nab_700		NABOO	nab_world	0	-4717.3	6.0	3573.1	0	
+patrol_nab_703	patrol_nab_700		NABOO	nab_world	0	-4757.8	6.0	3521.9	0	
+patrol_nab_704	patrol_nab_700		NABOO	nab_world	0	-4805.0	6.0	3484.3	0	
+patrol_nab_705	patrol_nab_700		NABOO	nab_world	0	-4830.5	7.7	3434.2	0	
+patrol_nab_706	patrol_nab_700		NABOO	nab_world	0	-4835.9	11.4	3373.0	0	
+patrol_nab_707	patrol_nab_700		NABOO	nab_world	0	-4830.6	10.6	3334.0	0	
+patrol_nab_800	patrol_nab_800	FLIP	NABOO	nab_world	0	-4884.1	5.0	3238.8	0	Outback - a wild-eyed fambaa
+patrol_nab_801	patrol_nab_800		NABOO	nab_world	0	-4893.5	5.8	3222.8	0	
+patrol_nab_802	patrol_nab_800		NABOO	nab_world	0	-4928.7	6.5	3195.8	0	
+patrol_nab_803	patrol_nab_800		NABOO	nab_world	0	-4976.2	5.6	3160.7	0	
+patrol_nab_804	patrol_nab_800		NABOO	nab_world	0	-5038.8	6.9	3121.7	0	
+patrol_nab_805	patrol_nab_800		NABOO	nab_world	0	-5088.6	4.1	3087.6	0	
+patrol_nab_806	patrol_nab_800		NABOO	nab_world	0	-5109.6	6.2	3052.0	0	
+patrol_nab_900	patrol_nab_900	FLIP	NABOO	nab_world	0	-5401.0	10.7	3585.9	0	Mystril Safehouse - a Mystril Skirmisher
+patrol_nab_901	patrol_nab_900		NABOO	nab_world	0	-5405.1	11.9	3565.9	0	
+patrol_nab_902	patrol_nab_900		NABOO	nab_world	0	-5419.1	13.3	3547.2	0	
+patrol_nab_903	patrol_nab_900		NABOO	nab_world	0	-5439.0	13.3	3554.9	0	
+patrol_nab_904	patrol_nab_900		NABOO	nab_world	0	-5448.5	13.0	3577.5	0	
+patrol_nab_905	patrol_nab_900		NABOO	nab_world	0	-5438.0	12.6	3598.3	0	
+patrol_nab_906	patrol_nab_900		NABOO	nab_world	0	-5412.2	10.9	3606.6	0	
+patrol_nab_1000	patrol_nab_1000	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - an Imperial stormtrooper
+patrol_nab_1001	patrol_nab_1000		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	
+patrol_nab_1002	patrol_nab_1000		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	
+patrol_nab_1003	patrol_nab_1000		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	
+patrol_nab_1004	patrol_nab_1000		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	
+patrol_nab_1005	patrol_nab_1000		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	
+patrol_nab_1006	patrol_nab_1000		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	
+patrol_nab_1007	patrol_nab_1000		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	
+patrol_nab_1008	patrol_nab_1000		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	
+patrol_nab_1009	patrol_nab_1000		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	
+patrol_nab_1100	patrol_nab_1100	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - an Imperial stormtrooper
+patrol_nab_1101	patrol_nab_1100		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	
+patrol_nab_1102	patrol_nab_1100		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	
+patrol_nab_1103	patrol_nab_1100		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	
+patrol_nab_1104	patrol_nab_1100		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	
+patrol_nab_1105	patrol_nab_1100		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	
+patrol_nab_1200	patrol_nab_1200	FLIP	NABOO	nab_world	0	-5645.8	6.0	4229.4	0	Theed - an Imperial stormtrooper
+patrol_nab_1201	patrol_nab_1200		NABOO	nab_world	0	-5623.2	6.0	4177.7	0	
+patrol_nab_1202	patrol_nab_1200		NABOO	nab_world	0	-5625.6	6.0	4092.5	0	
+patrol_nab_1203	patrol_nab_1200		NABOO	nab_world	0	-5677.5	6.0	4092.8	0	
+patrol_nab_1204	patrol_nab_1200		NABOO	nab_world	0	-5681.1	6.0	4130.2	0	
+patrol_nab_1205	patrol_nab_1200		NABOO	nab_world	0	-5671.2	6.0	4146.8	0	
+patrol_nab_1206	patrol_nab_1200		NABOO	nab_world	0	-5670.7	6.0	4194.6	0	
+patrol_nab_1300	patrol_nab_1300	FLIP	NABOO	nab_world	0	-4913.4	6.0	4154.8	0	Theed - an Imperial stormtrooper
+patrol_nab_1301	patrol_nab_1300		NABOO	nab_world	0	-4919.1	6.0	4180.7	0	
+patrol_nab_1302	patrol_nab_1300		NABOO	nab_world	0	-4979.1	6.0	4233.5	0	
+patrol_nab_1303	patrol_nab_1300		NABOO	nab_world	0	-5029.4	6.0	4236.9	0	
+patrol_nab_1304	patrol_nab_1300		NABOO	nab_world	0	-5156.7	6.0	4334.4	0	
+patrol_nab_1305	patrol_nab_1300		NABOO	nab_world	0	-5212.1	6.0	4304.7	0	
+patrol_nab_1306	patrol_nab_1300		NABOO	nab_world	0	-5265.2	6.0	4223.3	0	
+patrol_nab_1307	patrol_nab_1300		NABOO	nab_world	0	-5204.8	6.0	4190.9	0	
+patrol_nab_1400	patrol_nab_1400	FLIP	NABOO	nab_world	0	-5459.1	6.0	4443.6	0	Theed - an Imperial stormtrooper
+patrol_nab_1401	patrol_nab_1400		NABOO	nab_world	0	-5460.9	6.0	4370.4	0	
+patrol_nab_1402	patrol_nab_1400		NABOO	nab_world	0	-5408.2	6.0	4369.8	0	
+patrol_nab_1403	patrol_nab_1400		NABOO	nab_world	0	-5409.8	6.0	4327.1	0	
+patrol_nab_1404	patrol_nab_1400		NABOO	nab_world	0	-5391.6	6.0	4319.9	0	
+patrol_nab_1405	patrol_nab_1400		NABOO	nab_world	0	-5394.1	6.0	4252.0	0	
+patrol_nab_1406	patrol_nab_1400		NABOO	nab_world	0	-5407.4	6.0	4231.9	0	
+patrol_nab_1407	patrol_nab_1400		NABOO	nab_world	0	-5408.9	6.0	4163.5	0	
+patrol_nab_1408	patrol_nab_1400		NABOO	nab_world	0	-5330.5	6.0	4174.5	0	
+patrol_nab_1409	patrol_nab_1400		NABOO	nab_world	0	-5344.6	6.0	4096.6	0	
+patrol_nab_1410	patrol_nab_1400		NABOO	nab_world	0	-5445.3	6.0	6087.6	0	
+patrol_nab_1411	patrol_nab_1400		NABOO	nab_world	0	-5426.1	6.0	4138.3	0	
+patrol_nab_1412	patrol_nab_1400		NABOO	nab_world	0	-5455.1	6.0	4147.9	0	
+patrol_nab_1500	patrol_nab_1500	FLIP	NABOO	nab_world	0	-5355.3	6.0	4347.9	0	Theed - a Naboo security inspector
+patrol_nab_1501	patrol_nab_1500		NABOO	nab_world	0	-5327.9	6.0	4393.7	0	
+patrol_nab_1502	patrol_nab_1500		NABOO	nab_world	0	-5343.6	6.0	4417.1	0	
+patrol_nab_1503	patrol_nab_1500		NABOO	nab_world	0	-5343.2	6.0	4377.8	0	
+patrol_nab_1600	patrol_nab_1600	FLIP	NABOO	nab_world	0	-5586.6	7.0	4763.4	0	Theed - an Imperial stormtrooper
+patrol_nab_1601	patrol_nab_1600		NABOO	nab_world	0	-5608.3	7.0	4698.6	0	
+patrol_nab_1602	patrol_nab_1600		NABOO	nab_world	0	-5626.0	6.0	4601.1	0	
+patrol_nab_1603	patrol_nab_1600		NABOO	nab_world	0	-5612.1	6.0	4521.1	0	
+patrol_nab_1604	patrol_nab_1600		NABOO	nab_world	0	-5574.5	6.0	4469.9	0	
+patrol_nab_1605	patrol_nab_1600		NABOO	nab_world	0	-5538.7	6.0	4465.2	0	
+patrol_nab_1606	patrol_nab_1600		NABOO	nab_world	0	-5536.4	6.0	4406.1	0	
+patrol_nab_1607	patrol_nab_1600		NABOO	nab_world	0	-5517.9	6.0	4405.6	0	
+patrol_nab_1700	patrol_nab_1700	FLIP	NABOO	nab_world	0	-4758.8	-196.4	4872.2	0	Blacksun Outpost - a Skaak Tipper bruiser
+patrol_nab_1701	patrol_nab_1700		NABOO	nab_world	0	-4746.8	-196.4	4859.7	0	
+patrol_nab_1702	patrol_nab_1700		NABOO	nab_world	0	-4764.5	-196.4	4880.1	0	
+patrol_nab_1703	patrol_nab_1700		NABOO	nab_world	0	-4773.3	-196.7	4895.4	0	
+patrol_nab_1800	patrol_nab_1800	FLIP	NABOO	nab_world	0	-5708.8	6.0	4310.9	0	Theed - an Imperial stormtrooper
+patrol_nab_1801	patrol_nab_1800		NABOO	nab_world	0	-5737.8	6.0	4287.9	0	
+patrol_nab_1802	patrol_nab_1800		NABOO	nab_world	0	-5827.0	6.0	4294.2	0	
+patrol_nab_1803	patrol_nab_1800		NABOO	nab_world	0	-5872.1	6.0	4347.6	0	
+patrol_nab_1804	patrol_nab_1800		NABOO	nab_world	0	-5930.1	6.0	4333.5	0	
+patrol_nab_1805	patrol_nab_1800		NABOO	nab_world	0	-5974.8	6.0	4289.7	0	
+patrol_nab_1806	patrol_nab_1800		NABOO	nab_world	0	-5969.8	6.0	4246.8	0	
+patrol_nab_1807	patrol_nab_1800		NABOO	nab_world	0	-5841.4	6.0	4268.5	0	
+patrol_nab_1808	patrol_nab_1800		NABOO	nab_world	0	-5714.1	6.0	4271.3	0	
+patrol_nab_1809	patrol_nab_1800		NABOO	nab_world	0	-5711.3	6.0	4294.5	0	
+patrol_nab_1900	patrol_nab_1900	FLIP	NABOO	nab_world	0	-6062.3	-196.2	4747.5	0	Theed Pirate Outpost - Hunnos Jarkey
+patrol_nab_1901	patrol_nab_1900		NABOO	nab_world	0	-6052.7	-196.1	4738.0	0	
+patrol_nab_1902	patrol_nab_1900		NABOO	nab_world	0	-6047.5	-196.0	4733.4	0	
+patrol_nab_1903	patrol_nab_1900		NABOO	nab_world	0	-6041.3	-196.7	4759.1	0	
+patrol_nab_1904	patrol_nab_1900		NABOO	nab_world	0	-6055.7	-196.4	4774.7	0	
+patrol_nab_1905	patrol_nab_1900		NABOO	nab_world	0	-6078.4	-196.2	4771.9	0	
+patrol_nab_1906	patrol_nab_1900		NABOO	nab_world	0	-6086.5	-197.1	4745.1	0	
+patrol_nab_1907	patrol_nab_1900		NABOO	nab_world	0	-6078.9	-196.4	4731.5	0	
+patrol_nab_1908	patrol_nab_1900		NABOO	nab_world	0	-6070.9	-196.1	4741.3	0	
+patrol_nab_2000	patrol_nab_2000	FLIP	NABOO	nab_world	0	-5728.0	6.0	4125.7	0	Theed - an Imperial stormtrooper
+patrol_nab_2001	patrol_nab_2000		NABOO	nab_world	0	-5803.2	6.0	4129.5	0	
+patrol_nab_2002	patrol_nab_2000		NABOO	nab_world	0	-5850.4	6.0	4152.6	0	
+patrol_nab_2003	patrol_nab_2000		NABOO	nab_world	0	-5850.7	6.0	4212.8	0	
+patrol_nab_2004	patrol_nab_2000		NABOO	nab_world	0	-5832.2	6.0	4265.4	0	
+patrol_nab_2005	patrol_nab_2000		NABOO	nab_world	0	-5761.0	6.0	4268.6	0	
+patrol_nab_2006	patrol_nab_2000		NABOO	nab_world	0	-5751.0	6.0	4203.5	0	
+patrol_nab_2007	patrol_nab_2000		NABOO	nab_world	0	-5745.2	6.0	4149.4	0	
+patrol_nab_2100	patrol_nab_2100	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - an Imperial stormtrooper
+patrol_nab_2101	patrol_nab_2100		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	
+patrol_nab_2102	patrol_nab_2100		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	
+patrol_nab_2103	patrol_nab_2100		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	
+patrol_nab_2104	patrol_nab_2100		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	
+patrol_nab_2105	patrol_nab_2100		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	
+patrol_nab_2106	patrol_nab_2100		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	
+patrol_nab_2107	patrol_nab_2100		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	
+patrol_nab_2108	patrol_nab_2100		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	
+patrol_nab_2109	patrol_nab_2100		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	
+patrol_nab_2200	patrol_nab_2200	FLIP	NABOO	nab_world	0	-5283.9	6.0	4336.2	0	Theed - an Imperial stormtrooper
+patrol_nab_2201	patrol_nab_2200		NABOO	nab_world	0	-5286.4	6.0	4385.3	0	
+patrol_nab_2202	patrol_nab_2200		NABOO	nab_world	0	-5288.7	6.0	4427.9	0	
+patrol_nab_2203	patrol_nab_2200		NABOO	nab_world	0	-5286.6	6.0	4444.9	0	
+patrol_nab_2204	patrol_nab_2200		NABOO	nab_world	0	-5320.8	6.0	4490.1	0	
+patrol_nab_2205	patrol_nab_2200		NABOO	nab_world	0	-5315.6	6.0	4543.6	0	
+patrol_nab_2206	patrol_nab_2200		NABOO	nab_world	0	-5352.6	6.0	4702.3	0	
+patrol_nab_2207	patrol_nab_2200		NABOO	nab_world	0	-5421.7	6.0	4824.4	0	
+patrol_nab_2208	patrol_nab_2200		NABOO	nab_world	0	-5492.5	6.0	4849.2	0	
+patrol_nab_2209	patrol_nab_2200		NABOO	nab_world	0	-5566.0	6.0	4816.8	0	
+patrol_nab_2210	patrol_nab_2200		NABOO	nab_world	0	-5587.6	6.0	4787.3	0	
+patrol_nab_2300	patrol_nab_2300	FLIP	NABOO	nab_world	0	-4711.1	-196.6	4606.8	0	Outback - a nesting kaadu
+patrol_nab_2301	patrol_nab_2300		NABOO	nab_world	0	-4711.1	-195.8	4500.2	0	
+patrol_nab_2302	patrol_nab_2300		NABOO	nab_world	0	-4673.6	-196.9	4508.2	0	
+patrol_nab_2303	patrol_nab_2300		NABOO	nab_world	0	-4657.3	-197.5	4543.1	0	
+patrol_nab_2304	patrol_nab_2300		NABOO	nab_world	0	-4675.0	-196.8	4585.9	0	
+patrol_nab_2305	patrol_nab_2300		NABOO	nab_world	0	-4612.4	-198.2	4554.8	0	
+patrol_nab_2306	patrol_nab_2300		NABOO	nab_world	0	-4718.8	-196.7	4600.3	0	
+patrol_nab_2400	patrol_nab_2400	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - an Imperial stormtrooper
+patrol_nab_2401	patrol_nab_2400		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	
+patrol_nab_2402	patrol_nab_2400		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	
+patrol_nab_2403	patrol_nab_2400		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	
+patrol_nab_2404	patrol_nab_2400		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	
+patrol_nab_2405	patrol_nab_2400		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	
+patrol_nab_2500	patrol_nab_2500	FLIP	NABOO	nab_world	0	-5323.3	6.0	4431.5	0	Theed - a Naboo security inspector
+patrol_nab_2501	patrol_nab_2500		NABOO	nab_world	0	-5332.7	6.0	4425.1	0	
+patrol_nab_2502	patrol_nab_2500		NABOO	nab_world	0	-5331.0	6.0	4399.6	0	
+patrol_nab_2503	patrol_nab_2500		NABOO	nab_world	0	-5331.2	6.0	4364.5	0	
+patrol_nab_2504	patrol_nab_2500		NABOO	nab_world	0	-5290.0	6.0	4357.0	0	
+patrol_nab_2505	patrol_nab_2500		NABOO	nab_world	0	-5288.8	6.0	4436.5	0	
+patrol_nab_2600	patrol_nab_2600	FLIP	NABOO	nab_world	0	-5167.7	6.0	4235.7	0	Theed - an Imperial stormtrooper
+patrol_nab_2601	patrol_nab_2600		NABOO	nab_world	0	-5140.3	6.0	4213.7	0	
+patrol_nab_2602	patrol_nab_2600		NABOO	nab_world	0	-5111.2	6.0	4251.6	0	
+patrol_nab_2603	patrol_nab_2600		NABOO	nab_world	0	-5149.4	6.0	4292.3	0	
+patrol_nab_2604	patrol_nab_2600		NABOO	nab_world	0	-5142.0	6.0	4266.5	0	
+patrol_nab_2700	patrol_nab_2700	FLIP	NABOO	nab_nikto_cavern	1	22.9	-27.9	-9.3	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_2701	patrol_nab_2700		NABOO	nab_nikto_cavern	2	23.2	-42.3	-67.3	0	
+patrol_nab_2702	patrol_nab_2700		NABOO	nab_nikto_cavern	2	47.9	-48.4	-65.5	0	
+patrol_nab_2703	patrol_nab_2700		NABOO	nab_nikto_cavern	10	50.3	-48.7	-103.2	0	
+patrol_nab_2800	patrol_nab_2800	FLIP	NABOO	nab_nikto_cavern	3	88.3	-61.5	-9.5	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_2801	patrol_nab_2800		NABOO	nab_nikto_cavern	2	52.8	-48.7	-14.5	0	
+patrol_nab_2802	patrol_nab_2800		NABOO	nab_nikto_cavern	2	44.5	-47.4	-30.1	0	
+patrol_nab_2803	patrol_nab_2800		NABOO	nab_nikto_cavern	2	44.9	-47.6	-62.5	0	
+patrol_nab_2804	patrol_nab_2800		NABOO	nab_nikto_cavern	10	51.2	-49.1	-77.5	0	
+patrol_nab_2805	patrol_nab_2800		NABOO	nab_nikto_cavern	10	54.4	-48.3	-107.6	0	
+patrol_nab_2806	patrol_nab_2800		NABOO	nab_nikto_cavern	5	88.0	-46.9	-107.7	0	
+patrol_nab_2900	patrol_nab_2900	FLIP	NABOO	nab_nikto_cavern	5	88.0	-46.9	-107.7	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_2901	patrol_nab_2900		NABOO	nab_nikto_cavern	11	93.2	-46.4	-131.3	0	
+patrol_nab_2902	patrol_nab_2900		NABOO	nab_nikto_cavern	11	85.3	-46.6	-143.3	0	
+patrol_nab_2903	patrol_nab_2900		NABOO	nab_nikto_cavern	11	77.3	-46.6	-141.9	0	
+patrol_nab_3000	patrol_nab_3000	FLIP	NABOO	nab_nikto_cavern	9	178.3	-66.1	-98.3	0	Nikto Cavern - a Nikto Blood Cult Overseer
+patrol_nab_3001	patrol_nab_3000		NABOO	nab_nikto_cavern	9	158.2	-67.0	-100.6	0	
+patrol_nab_3002	patrol_nab_3000		NABOO	nab_nikto_cavern	8	151.2	-66.3	-107.2	0	
+patrol_nab_3003	patrol_nab_3000		NABOO	nab_nikto_cavern	8	153.3	-66.5	-114.9	0	
+patrol_nab_3004	patrol_nab_3000		NABOO	nab_nikto_cavern	8	140.4	-66.6	-119.7	0	
+patrol_nab_3005	patrol_nab_3000		NABOO	nab_nikto_cavern	8	129.4	-66.7	-108.1	0	
+patrol_nab_3006	patrol_nab_3000		NABOO	nab_nikto_cavern	8	117.3	-66.0	-107.8	0	
+patrol_nab_3007	patrol_nab_3000		NABOO	nab_nikto_cavern	8	114.9	-66.5	-98.4	0	
+patrol_nab_3008	patrol_nab_3000		NABOO	nab_nikto_cavern	8	115.6	-66.0	-124.0	0	
+patrol_nab_3009	patrol_nab_3000		NABOO	nab_nikto_cavern	8	136.7	-66.6	-123.3	0	
+patrol_nab_3010	patrol_nab_3000		NABOO	nab_nikto_cavern	8	134.0	-66.5	-98.6	0	
+patrol_nab_3011	patrol_nab_3000		NABOO	nab_nikto_cavern	8	154.6	-66.2	-97.6	0	
+patrol_nab_3100	patrol_nab_3100	FLIP	NABOO	nab_nikto_cavern	10	52.3	-48.8	-103.3	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_3101	patrol_nab_3100		NABOO	nab_nikto_cavern	2	50.9	-47.5	-72.5	0	
+patrol_nab_3102	patrol_nab_3100		NABOO	nab_nikto_cavern	2	41.7	-46.5	-59.1	0	
+patrol_nab_3103	patrol_nab_3100		NABOO	nab_nikto_cavern	2	44.2	-46.2	-19.3	0	
+patrol_nab_3104	patrol_nab_3100		NABOO	nab_nikto_cavern	3	87.0	-62.1	-12.4	0	
+patrol_nab_3105	patrol_nab_3100		NABOO	nab_nikto_cavern	3	83.8	-70.2	-45.2	0	
+patrol_nab_3200	patrol_nab_3200	FLIP	NABOO	nab_world	0	59.2	61.1	-635.8	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_3201	patrol_nab_3200		NABOO	nab_world	0	25.7	63.7	-634.2	0	
+patrol_nab_3202	patrol_nab_3200		NABOO	nab_world	0	18.8	73.5	-670.8	0	
+patrol_nab_3203	patrol_nab_3200		NABOO	nab_world	0	31.0	88.2	-702.0	0	
+patrol_nab_3204	patrol_nab_3200		NABOO	nab_world	0	77.7	95.1	-705.4	0	
+patrol_nab_3205	patrol_nab_3200		NABOO	nab_world	0	142.8	91.5	-703.3	0	
+patrol_nab_3206	patrol_nab_3200		NABOO	nab_world	0	182.2	65.0	-656.3	0	
+patrol_nab_3207	patrol_nab_3200		NABOO	nab_world	0	78.1	61.0	-624.4	0	
+patrol_nab_3208	patrol_nab_3200		NABOO	nab_world	0	60.3	61.1	-647.8	0	
+patrol_nab_3300	patrol_nab_3300	FLIP	NABOO	nab_world	0	87.8	61.0	-632.0	0	Nikto Cavern - a Nikto Blood Cult Fanatic
+patrol_nab_3301	patrol_nab_3300		NABOO	nab_world	0	127.9	62.4	-633.8	0	
+patrol_nab_3302	patrol_nab_3300		NABOO	nab_world	0	146.3	69.8	-646.5	0	
+patrol_nab_3303	patrol_nab_3300		NABOO	nab_world	0	153.7	90.3	-705.1	0	
+patrol_nab_3304	patrol_nab_3300		NABOO	nab_world	0	118.9	103.8	-741.4	0	
+patrol_nab_3305	patrol_nab_3300		NABOO	nab_world	0	47.9	99.4	-734.7	0	
+patrol_nab_3306	patrol_nab_3300		NABOO	nab_world	0	2029.6	73.4	-684.1	0	
+patrol_nab_3307	patrol_nab_3300		NABOO	nab_world	0	1999.7	65.0	-660.9	0	
+patrol_nab_3308	patrol_nab_3300		NABOO	nab_world	0	1986.9	57.0	-632.1	0	
+patrol_nab_3309	patrol_nab_3300		NABOO	nab_world	0	2.3	55.0	-604.6	0	
+patrol_nab_3310	patrol_nab_3300		NABOO	nab_world	0	50.7	57.3	-598.1	0	
+patrol_nab_3311	patrol_nab_3300		NABOO	nab_world	0	73.7	61.0	-633.1	0	
+patrol_nab_3312	patrol_nab_3300		NABOO	nab_world	0	84.2	61.0	-637.9	0	
+patrol_nab_3400	patrol_nab_3400	FLIP	NABOO	nab_drennic_bunker	2	1.1	0.3	3.6	0	Drennic Bunker - a Drennic guardian
+patrol_nab_3401	patrol_nab_3400		NABOO	nab_drennic_bunker	2	3.1	0.3	2.6	0	
+patrol_nab_3402	patrol_nab_3400		NABOO	nab_drennic_bunker	2	3.7	0.3	-3.5	0	
+patrol_nab_3403	patrol_nab_3400		NABOO	nab_drennic_bunker	3	-2.6	0.3	-4.2	0	
+patrol_nab_3404	patrol_nab_3400		NABOO	nab_drennic_bunker	4	-3.2	-3.3	4.0	0	
+patrol_nab_3405	patrol_nab_3400		NABOO	nab_drennic_bunker	4	4.2	-6.8	4.9	0	
+patrol_nab_3406	patrol_nab_3400		NABOO	nab_drennic_bunker	5	4.7	-6.8	-4.4	0	
+patrol_nab_3500	patrol_nab_3500	FLIP	NABOO	nab_drennic_bunker	9	15.7	-13.8	0.3	0	Drennic Bunker - a Drennic guardian
+patrol_nab_3501	patrol_nab_3500		NABOO	nab_drennic_bunker	9	15.7	-13.8	12.5	0	
+patrol_nab_3502	patrol_nab_3500		NABOO	nab_drennic_bunker	8	-3.2	-13.8	11.5	0	
+patrol_nab_3503	patrol_nab_3500		NABOO	nab_drennic_bunker	6	-2.9	-13.8	-19.0	0	
+patrol_nab_3504	patrol_nab_3500		NABOO	nab_drennic_bunker	6	5.0	-10.3	-18.6	0	
+patrol_nab_3505	patrol_nab_3500		NABOO	nab_drennic_bunker	5	4.7	-6.8	-5.2	0	
+patrol_nab_3600	patrol_nab_3600	FLIP	NABOO	nab_world	0	391.6	12.6	2010.5	0	Drennic Bunker - a Drennic Hunter
+patrol_nab_3601	patrol_nab_3600		NABOO	nab_world	0	373.7	12.5	2000.0	0	
+patrol_nab_3602	patrol_nab_3600		NABOO	nab_world	0	349.7	12.6	1973.8	0	
+patrol_nab_3603	patrol_nab_3600		NABOO	nab_world	0	327.7	11.4	1971.7	0	
+patrol_nab_3604	patrol_nab_3600		NABOO	nab_world	0	291.4	6.9	1985.1	0	
+patrol_nab_3605	patrol_nab_3600		NABOO	nab_world	0	286.8	7.6	2013.7	0	
+patrol_nab_3606	patrol_nab_3600		NABOO	nab_world	0	292.9	9.7	2034.6	0	
+patrol_nab_3607	patrol_nab_3600		NABOO	nab_world	0	309.0	12.9	2062.1	0	
+patrol_nab_3608	patrol_nab_3600		NABOO	nab_world	0	336.9	12.8	2070.1	0	
+patrol_nab_3609	patrol_nab_3600		NABOO	nab_world	0	336.4	10.0	2104.5	0	
+patrol_nab_3610	patrol_nab_3600		NABOO	nab_world	0	372.5	9.4	2083.0	0	
+patrol_nab_3611	patrol_nab_3600		NABOO	nab_world	0	380.5	11.2	2077.8	0	
+patrol_nab_3612	patrol_nab_3600		NABOO	nab_world	0	391.0	12.7	2035.3	0	
+patrol_nab_3613	patrol_nab_3600		NABOO	nab_world	0	376.0	12.5	2010.9	0	
+patrol_nab_3700	patrol_nab_3700	FLIP	NABOO	nab_world	0	366.7	12.2	2009.1	0	Drennic Bunker - a Drennic Hunter
+patrol_nab_3701	patrol_nab_3700		NABOO	nab_world	0	344.4	11.3	2005.2	0	
+patrol_nab_3702	patrol_nab_3700		NABOO	nab_world	0	310.5	9.7	1971.6	0	
+patrol_nab_3703	patrol_nab_3700		NABOO	nab_world	0	243.9	5.5	1966.5	0	
+patrol_nab_3704	patrol_nab_3700		NABOO	nab_world	0	204.1	7.0	1989.9	0	
+patrol_nab_3705	patrol_nab_3700		NABOO	nab_world	0	225.3	9.9	2045.6	0	
+patrol_nab_3706	patrol_nab_3700		NABOO	nab_world	0	276.2	12.9	2064.3	0	
+patrol_nab_3707	patrol_nab_3700		NABOO	nab_world	0	286.0	15.6	2095.8	0	
+patrol_nab_3708	patrol_nab_3700		NABOO	nab_world	0	270.3	13.5	2129.9	0	
+patrol_nab_3709	patrol_nab_3700		NABOO	nab_world	0	298.4	15.3	2144.9	0	
+patrol_nab_3710	patrol_nab_3700		NABOO	nab_world	0	353.9	12.3	2122.5	0	
+patrol_nab_3711	patrol_nab_3700		NABOO	nab_world	0	388.5	11.7	2097.2	0	
+patrol_nab_3712	patrol_nab_3700		NABOO	nab_world	0	358.5	12.8	2065.1	0	
+patrol_nab_3713	patrol_nab_3700		NABOO	nab_world	0	328.9	10.7	2032.6	0	
+patrol_nab_3714	patrol_nab_3700		NABOO	nab_world	0	342.3	11.2	2013.4	0	
+patrol_nab_3800	patrol_nab_3800	FLIP	NABOO	nab_world	0	493.9	18.5	1885.6	0	Outback - a Mauler apprentice
+patrol_nab_3801	patrol_nab_3800		NABOO	nab_world	0	520.4	19.4	1897.7	0	
+patrol_nab_3802	patrol_nab_3800		NABOO	nab_world	0	514.6	24.7	1926.1	0	
+patrol_nab_3803	patrol_nab_3800		NABOO	nab_world	0	481.7	21.6	1932.0	0	
+patrol_nab_3804	patrol_nab_3800		NABOO	nab_world	0	493.9	18.5	1910.6	0	
+patrol_nab_3805	patrol_nab_3800		NABOO	nab_world	0	484.0	13.3	1869.2	0	
+patrol_nab_3806	patrol_nab_3800		NABOO	nab_world	0	465.9	16.9	1895.4	0	
+patrol_nab_3900	patrol_nab_3900	FLIP	NABOO	nab_world	0	4962.8	3.8	-4831.6	0	Moenia - a Naboo security inspector
+patrol_nab_3901	patrol_nab_3900		NABOO	nab_world	0	4935.6	3.8	-4801.4	0	
+patrol_nab_3902	patrol_nab_3900		NABOO	nab_world	0	4905.0	3.8	-4833.0	0	
+patrol_nab_3903	patrol_nab_3900		NABOO	nab_world	0	4946.8	4.0	-4875.5	0	
+patrol_nab_3904	patrol_nab_3900		NABOO	nab_world	0	4974.5	3.8	-4862.7	0	
+patrol_nab_3905	patrol_nab_3900		NABOO	nab_world	0	4982.7	3.4	-4840.8	0	
+patrol_nab_4000	patrol_nab_4000	FLIP	NABOO	nab_world	0	4939.2	3.8	-4861.9	0	Moenia - a Naboo security inspector
+patrol_nab_4001	patrol_nab_4000		NABOO	nab_world	0	4911.2	3.8	-4832.1	0	
+patrol_nab_4002	patrol_nab_4000		NABOO	nab_world	0	4882.7	3.8	-4808.9	0	
+patrol_nab_4003	patrol_nab_4000		NABOO	nab_world	0	4875.7	3.8	-4830.2	0	
+patrol_nab_4004	patrol_nab_4000		NABOO	nab_world	0	4906.9	3.8	-4832.8	0	
+patrol_nab_4100	patrol_nab_4100	FLIP	NABOO	nab_world	0	4964.4	360.0	-1518.1	0	Deeja Peak - an R4 unit
+patrol_nab_4101	patrol_nab_4100		NABOO	nab_world	0	4976.9	360.0	-1496.4	0	
+patrol_nab_4102	patrol_nab_4100		NABOO	nab_world	0	4979.0	360.0	-1445.9	0	
+patrol_nab_4103	patrol_nab_4100		NABOO	nab_world	0	4962.9	360.0	-1434.5	0	
+patrol_nab_4104	patrol_nab_4100		NABOO	nab_world	0	4972.5	360.0	-1474.9	0	
+patrol_nab_4200	patrol_nab_4200	FLIP	NABOO	nab_world	0	5824.5	229.0	-1975.0	0	Stonewall Labs - a Stonewall Labs ZH-28 guard
+patrol_nab_4201	patrol_nab_4200		NABOO	nab_world	0	5842.0	229.0	-1963.8	0	
+patrol_nab_4202	patrol_nab_4200		NABOO	nab_world	0	5850.9	228.9	-1953.7	0	
+patrol_nab_4300	patrol_nab_4300	FLIP	NABOO	nab_world	0	5806.7	229.0	-1968.9	0	Stonewall Labs - a Stonewall Labs watchman droid
+patrol_nab_4301	patrol_nab_4300		NABOO	nab_world	0	5815.2	229.0	-1960.4	0	
+patrol_nab_4302	patrol_nab_4300		NABOO	nab_world	0	5836.4	229.0	-1976.0	0	
+patrol_nab_4400	patrol_nab_4400	FLIP	NABOO	nab_world	0	4980.6	360.0	-1408.9	0	Deeja Peak - an R4 unit
+patrol_nab_4401	patrol_nab_4400		NABOO	nab_world	0	4968.0	360.0	-1432.0	0	
+patrol_nab_4402	patrol_nab_4400		NABOO	nab_world	0	4984.7	360.0	-1473.2	0	
+patrol_nab_4403	patrol_nab_4400		NABOO	nab_world	0	4971.5	360.0	-1486.7	0	
+patrol_nab_4404	patrol_nab_4400		NABOO	nab_world	0	4965.4	360.0	-1434.1	0	
+patrol_nab_4500	patrol_nab_4500	FLIP	NABOO	nab_deeja_stonewall_labs	10	24.0	-12.0	35.1	0	Stonewall Labs - a Stonewall Labs SWL-5 overseer
+patrol_nab_4501	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	10	35.7	-12.0	35.1	0	
+patrol_nab_4502	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	10	35.7	-12.0	51.8	0	
+patrol_nab_4503	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	10	35.8	-12.0	70.6	0	
+patrol_nab_4504	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	10	35.8	-12.0	84.0	0	
+patrol_nab_4505	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	13	35.1	-12.0	92.8	0	
+patrol_nab_4506	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	13	35.5	-20.0	110.3	0	
+patrol_nab_4507	patrol_nab_4500		NABOO	nab_deeja_stonewall_labs	13	35.5	-20.0	117.5	0	
+patrol_nab_4600	patrol_nab_4600	FLIP	NABOO	nab_deeja_stonewall_labs	14	42.7	-12.0	-0.7	0	Stonewall Labs - a Stonewall Labs surveillance droid
+patrol_nab_4601	patrol_nab_4600		NABOO	nab_deeja_stonewall_labs	14	31.5	-12.0	1.8	0	
+patrol_nab_4602	patrol_nab_4600		NABOO	nab_deeja_stonewall_labs	14	22.1	-12.0	14.6	0	
+patrol_nab_4700	patrol_nab_4700	FLIP	NABOO	nab_deeja_stonewall_labs	14	42.0	-12.0	22.5	0	Stonewall Labs - a Stonewall Labs surveillance droid
+patrol_nab_4701	patrol_nab_4700		NABOO	nab_deeja_stonewall_labs	14	29.7	-12.0	17.6	0	
+patrol_nab_4702	patrol_nab_4700		NABOO	nab_deeja_stonewall_labs	14	25.8	-12.0	1.6	0	
+patrol_nab_4800	patrol_nab_4800	FLIP	NABOO	nab_deeja_stonewall_labs	18	-30.0	-20.0	20.3	0	Stonewall Labs - a Stonewall Labs surveillance droid
+patrol_nab_4801	patrol_nab_4800		NABOO	nab_deeja_stonewall_labs	18	-30.4	-20.0	41.9	0	
+patrol_nab_4802	patrol_nab_4800		NABOO	nab_deeja_stonewall_labs	18	-30.3	-20.0	62.1	0	
+patrol_nab_4803	patrol_nab_4800		NABOO	nab_deeja_stonewall_labs	18	-30.3	-20.0	81.4	0	
+patrol_nab_4900	patrol_nab_4900	FLIP	NABOO	nab_world	0	5005.6	90.8	-927.7	0	Outback - a Skaak Tipper thug
+patrol_nab_4901	patrol_nab_4900		NABOO	nab_world	0	5028.4	91.7	-942.4	0	
+patrol_nab_4902	patrol_nab_4900		NABOO	nab_world	0	5021.0	91.9	-960.8	0	
+patrol_nab_4903	patrol_nab_4900		NABOO	nab_world	0	5000.4	90.8	-937.1	0	
+patrol_nab_4904	patrol_nab_4900		NABOO	nab_world	0	4976.3	88.4	-927.5	0	
+patrol_nab_4905	patrol_nab_4900		NABOO	nab_world	0	5016.8	93.6	-911.1	0	
+patrol_nab_5400	patrol_nab_5400	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	5	5.9	-12.0	55.6	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_5401	patrol_nab_5400		NABOO	nab_kaadara_skaak_tipper_bunker	5	11.2	-12.0	52.8	0	
+patrol_nab_5402	patrol_nab_5400		NABOO	nab_kaadara_skaak_tipper_bunker	5	10.3	-12.0	40.6	0	
+patrol_nab_5403	patrol_nab_5400		NABOO	nab_kaadara_skaak_tipper_bunker	5	7.3	-12.0	27.8	0	
+patrol_nab_5500	patrol_nab_5500	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	5	4.3	-12.0	55.7	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_5501	patrol_nab_5500		NABOO	nab_kaadara_skaak_tipper_bunker	5	-4.1	-12.0	53.1	0	
+patrol_nab_5502	patrol_nab_5500		NABOO	nab_kaadara_skaak_tipper_bunker	5	-4.1	-12.0	40.7	0	
+patrol_nab_5503	patrol_nab_5500		NABOO	nab_kaadara_skaak_tipper_bunker	5	0.3	-12.0	27.7	0	
+patrol_nab_5600	patrol_nab_5600	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	10	35.3	-12.0	82.7	0	Skaak Tipper Bunker - an MSE-6 'Mouse' droid
+patrol_nab_5601	patrol_nab_5600		NABOO	nab_kaadara_skaak_tipper_bunker	10	35.5	-12.0	63.6	0	
+patrol_nab_5602	patrol_nab_5600		NABOO	nab_kaadara_skaak_tipper_bunker	10	35.6	-12.0	43.9	0	
+patrol_nab_5603	patrol_nab_5600		NABOO	nab_kaadara_skaak_tipper_bunker	10	35.6	-12.0	35.3	0	
+patrol_nab_5604	patrol_nab_5600		NABOO	nab_kaadara_skaak_tipper_bunker	10	24.0	-12.0	35.2	0	
+patrol_nab_5605	patrol_nab_5600		NABOO	nab_kaadara_skaak_tipper_bunker	10	23.6	-12.0	31.6	0	
+patrol_nab_5700	patrol_nab_5700	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	13	17.3	-20.0	135.3	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_5701	patrol_nab_5700		NABOO	nab_kaadara_skaak_tipper_bunker	13	17.5	-20.0	120.0	0	
+patrol_nab_5702	patrol_nab_5700		NABOO	nab_kaadara_skaak_tipper_bunker	13	28.3	-20.0	120.4	0	
+patrol_nab_5703	patrol_nab_5700		NABOO	nab_kaadara_skaak_tipper_bunker	13	28.2	-20.0	143.9	0	
+patrol_nab_5704	patrol_nab_5700		NABOO	nab_kaadara_skaak_tipper_bunker	13	16.7	-20.0	144.1	0	
+patrol_nab_5800	patrol_nab_5800	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	14	25.1	-12.0	18.3	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_5801	patrol_nab_5800		NABOO	nab_kaadara_skaak_tipper_bunker	14	37.3	-12.0	20.0	0	
+patrol_nab_5802	patrol_nab_5800		NABOO	nab_kaadara_skaak_tipper_bunker	14	60.0	-12.0	21.0	0	
+patrol_nab_5900	patrol_nab_5900	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	14	59.7	-12.0	10.8	0	Skaak Tipper Bunker - an MSE-6 'Mouse' droid
+patrol_nab_5901	patrol_nab_5900		NABOO	nab_kaadara_skaak_tipper_bunker	14	42.2	-12.0	11.0	0	
+patrol_nab_5902	patrol_nab_5900		NABOO	nab_kaadara_skaak_tipper_bunker	14	26.8	-12.0	10.8	0	
+patrol_nab_6000	patrol_nab_6000	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	14	25.3	-12.0	2.5	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_6001	patrol_nab_6000		NABOO	nab_kaadara_skaak_tipper_bunker	14	33.4	-12.0	2.7	0	
+patrol_nab_6002	patrol_nab_6000		NABOO	nab_kaadara_skaak_tipper_bunker	14	39.4	-12.0	1.1	0	
+patrol_nab_6003	patrol_nab_6000		NABOO	nab_kaadara_skaak_tipper_bunker	14	58.5	-12.0	1.0	0	
+patrol_nab_6100	patrol_nab_6100	FLIP	NABOO	nab_kaadara_skaak_tipper_bunker	18	-30.6	-20.0	89.4	0	Skaak Tipper Bunker - a Skaak Tipper scrounger
+patrol_nab_6101	patrol_nab_6100		NABOO	nab_kaadara_skaak_tipper_bunker	18	-30.7	-20.0	70.1	0	
+patrol_nab_6102	patrol_nab_6100		NABOO	nab_kaadara_skaak_tipper_bunker	18	-30.5	-20.0	49.9	0	
+patrol_nab_6103	patrol_nab_6100		NABOO	nab_kaadara_skaak_tipper_bunker	18	-30.3	-20.0	28.7	0	
+patrol_nab_6104	patrol_nab_6100		NABOO	nab_kaadara_skaak_tipper_bunker	18	-30.4	-20.0	17.1	0	
+patrol_nab_6200	patrol_nab_6200	FLIP	NABOO	nab_world	0	-5533.0	-149.8	-72.0	0	Amidalas Beach - an RSF security guard
+patrol_nab_6201	patrol_nab_6200		NABOO	nab_world	0	-5548.4	-150.0	-68.9	0	
+patrol_nab_6202	patrol_nab_6200		NABOO	nab_world	0	-5574.4	-150.0	-58.5	0	
+patrol_nab_6203	patrol_nab_6200		NABOO	nab_world	0	-5588.2	-150.1	-58.4	0	
+patrol_nab_6204	patrol_nab_6200		NABOO	nab_world	0	-5598.2	-157.0	-58.4	0	
+patrol_nab_6205	patrol_nab_6200		NABOO	nab_world	0	-5636.4	-157.4	-58.4	0	
+patrol_nab_6206	patrol_nab_6200		NABOO	nab_world	0	-5636.4	-157.4	-34.3	0	
+patrol_nab_6207	patrol_nab_6200		NABOO	nab_world	0	-5619.3	-157.4	-34.0	0	
+patrol_nab_6300	patrol_nab_6300	FLIP	NABOO	nab_world	0	-5491.1	-149.5	-72.8	0	Amidalas Beach - a Naboo security inspector
+patrol_nab_6301	patrol_nab_6300		NABOO	nab_world	0	-5497.0	-150.0	-60.4	0	
+patrol_nab_6302	patrol_nab_6300		NABOO	nab_world	0	-5497.1	-150.0	-1.3	0	
+patrol_nab_6303	patrol_nab_6300		NABOO	nab_world	0	-5499.3	-150.0	24.7	0	
+patrol_nab_6400	patrol_nab_6400	FLIP	NABOO	nab_world	0	5312.8	326.0	-1592.0	0	Deeja Peak - a CLL-8 binary load lifter
+patrol_nab_6401	patrol_nab_6400		NABOO	nab_world	0	5310.3	326.0	-1583.0	0	
+patrol_nab_6402	patrol_nab_6400		NABOO	nab_world	0	5253.6	326.1	-1569.2	0	
+patrol_nab_6403	patrol_nab_6400		NABOO	nab_world	0	5177.0	326.0	-1550.2	0	
+patrol_nab_6404	patrol_nab_6400		NABOO	nab_world	0	5177.1	346.4	-1492.9	0	
+patrol_nab_6405	patrol_nab_6400		NABOO	nab_world	0	5167.6	346.5	-1491.0	0	
+patrol_nab_6406	patrol_nab_6400		NABOO	nab_world	0	5151.1	346.5	-1521.6	0	
+patrol_nab_6500	patrol_nab_6500	FLIP	NABOO	nab_world	0	4737.3	329.7	-1415.5	0	Deeja Peak - an elite Imperial stormtrooper
+patrol_nab_6501	patrol_nab_6500		NABOO	nab_world	0	4738.2	328.8	-1441.5	0	
+patrol_nab_6502	patrol_nab_6500		NABOO	nab_world	0	4737.2	326.0	-1451.7	0	
+patrol_nab_6503	patrol_nab_6500		NABOO	nab_world	0	4733.8	306.6	-1497.2	0	
+patrol_nab_6504	patrol_nab_6500		NABOO	nab_world	0	4732.3	301.6	-1527.7	0	
+patrol_nab_6505	patrol_nab_6500		NABOO	nab_world	0	4746.2	295.8	-1567.6	0	
+patrol_nab_6506	patrol_nab_6500		NABOO	nab_world	0	4721.3	297.4	-1605.2	0	
+patrol_nab_6507	patrol_nab_6500		NABOO	nab_world	0	4696.0	295.8	-1632.2	0	
+patrol_nab_6508	patrol_nab_6500		NABOO	nab_world	0	4694.1	296.1	-1659.7	0	
+patrol_nab_6509	patrol_nab_6500		NABOO	nab_world	0	4691.9	293.5	-1708.5	0	
+patrol_nab_6600	patrol_nab_6600	FLIP	NABOO	nab_world	0	5139.8	-192.0	6761.8	0	Kaadara - a Naboo security inspector
+patrol_nab_6601	patrol_nab_6600		NABOO	nab_world	0	5108.9	-1920	6730.1	0	
+patrol_nab_6700	patrol_nab_6700	FLIP	NABOO	nab_world	0	5139.8	-192.0	6761.8	0	Kaadara - a Naboo security inspector
+patrol_nab_6701	patrol_nab_6700		NABOO	nab_world	0	5174.1	-192.0	6796.1	0	
+patrol_nab_6800	patrol_nab_6800	FLIP	NABOO	nab_world	0	4856.7	3.8	-4927.9	0	Moenia - a CLL-8 binary load lifter
+patrol_nab_6801	patrol_nab_6800		NABOO	nab_world	0	4839.5	4.1	-4918.4	0	
+patrol_nab_6802	patrol_nab_6800		NABOO	nab_world	0	4818.2	3.8	-4918.5	0	
+patrol_nab_6803	patrol_nab_6800		NABOO	nab_world	0	4749.4	3.8	-4867.1	0	
+patrol_nab_6804	patrol_nab_6800		NABOO	nab_world	0	4695.0	3.9	-4814.1	0	
+patrol_nab_6805	patrol_nab_6800		NABOO	nab_world	0	4666.8	3.8	-4776.5	0	
+patrol_nab_6806	patrol_nab_6800		NABOO	nab_world	0	4649.7	5.0	-4779.3	0	
+patrol_nab_6900	patrol_nab_6900	FLIP	NABOO	nab_world	0	4729.6	3.8	-4938.5	0	Moenia - a CLL-8 binary load lifter
+patrol_nab_6901	patrol_nab_6900		NABOO	nab_world	0	4807.9	3.8	-4961.2	0	
+patrol_nab_6902	patrol_nab_6900		NABOO	nab_world	0	4841.6	4.0	-4936.1	0	
+patrol_nab_6903	patrol_nab_6900		NABOO	nab_world	0	4858.5	3.8	-4939.9	0	
+patrol_nab_7000	patrol_nab_7000	FLIP	NABOO	nab_world	0	4822.1	4.2	-4722.7	0	Moenia - an elite Rebel commando
+patrol_nab_7001	patrol_nab_7000		NABOO	nab_world	0	4845.7	4.2	-4704.2	0	
+patrol_nab_7002	patrol_nab_7000		NABOO	nab_world	0	4823.7	4.2	-4583.7	0	
+patrol_nab_7100	patrol_nab_7100	LOOP	NABOO	nab_world	0	4826.2	3.8	-4918.4	0	Moenia - a Skaak Tipper prowler
+patrol_nab_7101	patrol_nab_7100		NABOO	nab_world	0	4842.9	3.8	-4918.4	0	
+patrol_nab_7102	patrol_nab_7100		NABOO	nab_world	0	4842.0	4.0	-4936.2	0	
+patrol_nab_7103	patrol_nab_7100		NABOO	nab_world	0	4823.7	3.8	-4949.3	0	
+patrol_nab_7104	patrol_nab_7100		NABOO	nab_world	0	4798.3	3.8	-4954.2	0	
+patrol_nab_7105	patrol_nab_7100		NABOO	nab_world	0	4806.2	3.8	-4929.6	0	
+patrol_nab_7200	patrol_nab_7200	LOOP	NABOO	nab_world	0	4855.6	4.3	-4803.2	0	Moenia - a Naboo security inspector
+patrol_nab_7201	patrol_nab_7200		NABOO	nab_world	0	4868.6	3.8	-4803.2	0	
+patrol_nab_7202	patrol_nab_7200		NABOO	nab_world	0	4873.1	3.8	-4832.3	0	
+patrol_nab_7203	patrol_nab_7200		NABOO	nab_world	0	4809.1	3.8	-4912.1	0	
+patrol_nab_7204	patrol_nab_7200		NABOO	nab_world	0	4755.7	3.8	-4869.4	0	
+patrol_nab_7205	patrol_nab_7200		NABOO	nab_world	0	4795.7	3.8	-4818.9	0	
+patrol_nab_7206	patrol_nab_7200		NABOO	nab_world	0	4856.7	3.8	-4853.9	0	
+patrol_nab_7207	patrol_nab_7200		NABOO	nab_world	0	4895.5	3.8	-4816.1	0	
+patrol_nab_7300	patrol_nab_7300	LOOP	NABOO	nab_pirate_bunker	10	3.4	-12.0	20.3	0	Pirate Bunker - an MSE-6 ''Mouse'' droid
+patrol_nab_7301	patrol_nab_7300		NABOO	nab_pirate_bunker	4	6.6	-12.0	31.0	0	
+patrol_nab_7302	patrol_nab_7300		NABOO	nab_pirate_bunker	5	27.0	-12.0	30.9	0	
+patrol_nab_7303	patrol_nab_7300		NABOO	nab_pirate_bunker	4	6.6	-12.0	31.0	0	
+patrol_nab_7304	patrol_nab_7300		NABOO	nab_pirate_bunker	6	3.5	-12.0	42.2	0	
+patrol_nab_7305	patrol_nab_7300		NABOO	nab_pirate_bunker	4	0.7	-12.0	30.9	0	
+patrol_nab_7400	patrol_nab_7400	LOOP	NABOO	nab_rtp_imp_small_spy	6	3.5	-13.8	0.0	0	RTP - Imperial Small Spy Bunker - an MSE-6 ''Mouse'' droid
+patrol_nab_7401	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	5	3.5	-13.8	-5.9	0	
+patrol_nab_7402	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	5	-4.5	-10.3	-5.9	0	
+patrol_nab_7403	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	4	-4.6	-6.8	4.5	0	
+patrol_nab_7404	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	4	4.1	-3.3	4.7	0	
+patrol_nab_7405	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	3	3.8	0.3	-3.7	0	
+patrol_nab_7406	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	2	-4.2	0.3	-3.7	0	
+patrol_nab_7407	patrol_nab_7400		NABOO	nab_rtp_imp_small_spy	2	-3.9	0.3	3.1	0	
+patrol_nab_7500	patrol_nab_7500	FLIP	NABOO	nab_emperors_retreat	4	24.7	0.2	-38.9	0	Emperor's Retreat - an MSE-6 ''Mouse'' droid
+patrol_nab_7501	patrol_nab_7500		NABOO	nab_emperors_retreat	3	23.0	0.2	-32.3	0	
+patrol_nab_7502	patrol_nab_7500		NABOO	nab_emperors_retreat	3	15.5	0.2	-24.6	0	
+patrol_nab_7503	patrol_nab_7500		NABOO	nab_emperors_retreat	3	2.8	0.2	-31.0	0	
+patrol_nab_7504	patrol_nab_7500		NABOO	nab_emperors_retreat	5	3.4	0.2	-38.9	0	
+patrol_nab_7600	patrol_nab_7600	FLIP	NABOO	nab_emperors_retreat	7	-8.5	0.2	-17.2	0	Emperor's Retreat - an MSE-6 ''Mouse'' droid
+patrol_nab_7601	patrol_nab_7600		NABOO	nab_emperors_retreat	8	-8.6	0.2	-12.5	0	
+patrol_nab_7602	patrol_nab_7600		NABOO	nab_emperors_retreat	8	-47.0	0.2	-12.5	0	
+patrol_nab_7700	patrol_nab_7700	FLIP	NABOO	nab_mauler_stronghold	13	-45.9	-15.7	151.7	0	Mauler Stronghold - a Mauler Guard
+patrol_nab_7701	patrol_nab_7700		NABOO	nab_mauler_stronghold	13	-38.0	-12.0	150.9	0	
+patrol_nab_7702	patrol_nab_7700		NABOO	nab_mauler_stronghold	11	-14.5	-12.0	151.0	0	
+patrol_nab_7703	patrol_nab_7700		NABOO	nab_mauler_stronghold	11	3.6	-16.0	151.0	0	
+patrol_nab_7800	patrol_nab_7800	FLIP	NABOO	nab_mauler_stronghold	16	-80.9	-28.0	129.3	0	Mauler Stronghold - a Mauler Guard
+patrol_nab_7801	patrol_nab_7800		NABOO	nab_mauler_stronghold	16	-80.6	-24.0	140.7	0	
+patrol_nab_7802	patrol_nab_7800		NABOO	nab_mauler_stronghold	16	-80.6	-24.0	150.8	0	
+patrol_nab_7803	patrol_nab_7800		NABOO	nab_mauler_stronghold	15	-71.5	-24.0	150.8	0	
+patrol_nab_7900	patrol_nab_7900	FLIP	NABOO	nab_mauler_stronghold	17	-86.3	-28.0	123.0	0	Mauler Stronghold - a Mauler Guard
+patrol_nab_7901	patrol_nab_7900		NABOO	nab_mauler_stronghold	17	-82.3	-28.0	123.0	0	
+patrol_nab_7902	patrol_nab_7900		NABOO	nab_mauler_stronghold	17	-82.3	-28.0	99.0	0	
+patrol_nab_7903	patrol_nab_7900		NABOO	nab_mauler_stronghold	17	-86.0	-28.0	99.0	0	
+patrol_nab_8000	patrol_nab_8000	FLIP	NABOO	nab_weapon_development_facility	5	2.8	-12.0	36.8	0	Weapon Development Facility - a Veteran Stormtrooper
+patrol_nab_8001	patrol_nab_8000		NABOO	nab_weapon_development_facility	5	10.1	-12.0	41.0	0	
+patrol_nab_8002	patrol_nab_8000		NABOO	nab_weapon_development_facility	5	10.0	-12.0	53.8	0	
+patrol_nab_8003	patrol_nab_8000		NABOO	nab_weapon_development_facility	5	-3.1	-12.0	53.7	0	
+patrol_nab_8004	patrol_nab_8000		NABOO	nab_weapon_development_facility	5	-2.9	-12.0	39.8	0	
+patrol_nab_8100	patrol_nab_8100	FLIP	NABOO	nab_weapon_development_facility	10	35.4	-12.0	88.7	0	Weapon Development Facility - a Veteran Stormtrooper
+patrol_nab_8101	patrol_nab_8100		NABOO	nab_weapon_development_facility	10	35.4	-12.0	35.0	0	
+patrol_nab_8200	patrol_nab_8200	FLIP	NABOO	nab_weapon_development_facility	18	-30.3	-20.0	54.4	0	Weapon Development Facility - a Veteran Stormtrooper
+patrol_nab_8201	patrol_nab_8200		NABOO	nab_weapon_development_facility	18	-30.5	-20.0	13.1	0	
+patrol_nab_8202	patrol_nab_8200		NABOO	nab_weapon_development_facility	18	-30.5	-20.0	91.5	0	

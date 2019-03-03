@@ -1,0 +1,59 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_ror_100	patrol_ror_100	FLIP	RORI	ror_world	0	-5607.9	75.6	-5794.5	0	Imperial Encampment - a thief
+patrol_ror_101	patrol_ror_100		RORI	ror_world	0	-5596.3	75.6	-5776.4	0	
+patrol_ror_102	patrol_ror_100		RORI	ror_world	0	-5578.9	75.4	-5771.7	0	
+patrol_ror_103	patrol_ror_100		RORI	ror_world	0	-5556.3	75.4	-5792.0	0	
+patrol_ror_104	patrol_ror_100		RORI	ror_world	0	-5566.9	75.7	-5839.5	0	
+patrol_ror_200	patrol_ror_200	FLIP	RORI	ror_world	0	-5553.2	75.6	-5815.4	0	Imperial Encampment - a thief
+patrol_ror_201	patrol_ror_200		RORI	ror_world	0	-5576.6	75.5	-5797.7	0	
+patrol_ror_202	patrol_ror_200		RORI	ror_world	0	-5620.4	75.5	-5799.6	0	
+patrol_ror_203	patrol_ror_200		RORI	ror_world	0	-5616.4	75.7	-5830.6	0	
+patrol_ror_300	patrol_ror_300	FLIP	RORI	ror_world	0	-4850.2	79.8	-2266.4	0	Narmle - a thief
+patrol_ror_301	patrol_ror_300		RORI	ror_world	0	-4823.7	76.7	-2286.3	0	
+patrol_ror_302	patrol_ror_300		RORI	ror_world	0	-4840.8	78.3	-2325.4	0	
+patrol_ror_303	patrol_ror_300		RORI	ror_world	0	-4869.7	77.6	-2301.2	0	
+patrol_ror_400	patrol_ror_400	FLIP	RORI	ror_world	0	-4795.0	75.8	-2324.2	0	Narmle - a thief
+patrol_ror_401	patrol_ror_400		RORI	ror_world	0	-4803.5	76.2	-2302.1	0	
+patrol_ror_402	patrol_ror_400		RORI	ror_world	0	-4799.1	76.2	-2253.7	0	
+patrol_ror_403	patrol_ror_400		RORI	ror_world	0	-4765.7	75.3	-2239.2	0	
+patrol_ror_404	patrol_ror_400		RORI	ror_world	0	-4767.0	81.1	-2273.7	0	
+patrol_ror_500	patrol_ror_500	FLIP	RORI	ror_world	0	-5224.4	76.5	5041.2	0	Outback - a thief
+patrol_ror_501	patrol_ror_500		RORI	ror_world	0	-5211.7	75.9	5062.3	0	
+patrol_ror_502	patrol_ror_500		RORI	ror_world	0	-5212.0	76.5	5081.2	0	
+patrol_ror_503	patrol_ror_500		RORI	ror_world	0	-5240.9	76.1	5101.5	0	
+patrol_ror_504	patrol_ror_500		RORI	ror_world	0	-5248.3	76.2	5075.0	0	
+patrol_ror_600	patrol_ror_600	FLIP	RORI	ror_world	0	-5232.9	75.8	5108.5	0	Outback - a thief
+patrol_ror_601	patrol_ror_600		RORI	ror_world	0	-5210.3	76.5	5081.0	0	
+patrol_ror_602	patrol_ror_600		RORI	ror_world	0	-5187.0	76.2	5097.2	0	
+patrol_ror_603	patrol_ror_600		RORI	ror_world	0	-5176.2	75.9	5128.5	0	
+patrol_ror_700	patrol_ror_700	FLIP	RORI	ror_world	0	-1084.7	76.4	4463.7	0	POI - Hyperdrive Research Facility - a thief
+patrol_ror_701	patrol_ror_700		RORI	ror_world	0	-1095.5	75.3	4430.1	0	
+patrol_ror_702	patrol_ror_700		RORI	ror_world	0	-1089.3	76.2	4389.9	0	
+patrol_ror_703	patrol_ror_700		RORI	ror_world	0	-1124.0	78.3	4374.6	0	
+patrol_ror_704	patrol_ror_700		RORI	ror_world	0	-1123.1	78.2	4406.3	0	
+patrol_ror_705	patrol_ror_700		RORI	ror_world	0	-1127.5	81.2	4427.2	0	
+patrol_ror_800	patrol_ror_800	FLIP	RORI	ror_world	0	2850.7	105.8	-1253.3	0	Outback - a thief
+patrol_ror_801	patrol_ror_800		RORI	ror_world	0	2870.5	106.6	-1264.9	0	
+patrol_ror_802	patrol_ror_800		RORI	ror_world	0	2903.2	107.5	-1263.6	0	
+patrol_ror_803	patrol_ror_800		RORI	ror_world	0	2903.3	107.4	-1289.2	0	
+patrol_ror_804	patrol_ror_800		RORI	ror_world	0	2872.7	106.7	-1297.4	0	
+patrol_ror_805	patrol_ror_800		RORI	ror_world	0	2853.7	106.1	-1280.4	0	
+patrol_ror_900	patrol_ror_900	FLIP	RORI	ror_world	0	2899.4	107.2	-1305.3	0	Outback - a thief
+patrol_ror_901	patrol_ror_900		RORI	ror_world	0	2888.0	107.3	-1289.0	0	
+patrol_ror_902	patrol_ror_900		RORI	ror_world	0	2861.4	106.4	-1293.4	0	
+patrol_ror_903	patrol_ror_900		RORI	ror_world	0	2864.9	106.1	-1320.0	0	
+patrol_ror_1000	patrol_ror_1000	FLIP	RORI	ror_world	0	5404.4	84.0	6152.5	0	Restuss Starport - a thief
+patrol_ror_1001	patrol_ror_1000		RORI	ror_world	0	5388.7	82.0	6138.7	0	
+patrol_ror_1002	patrol_ror_1000		RORI	ror_world	0	5365.1	80.1	6113.5	0	
+patrol_ror_1003	patrol_ror_1000		RORI	ror_world	0	5395.8	80.0	6093.2	0	
+patrol_ror_1004	patrol_ror_1000		RORI	ror_world	0	5404.6	80.0	6115.3	0	
+patrol_ror_1005	patrol_ror_1000		RORI	ror_world	0	5426.1	79.7	6141.2	0	
+patrol_ror_1100	patrol_ror_1100	FLIP	RORI	ror_world	0	3682.4	96.0	-6462.8	0	Rebel Outpost - a CLL-8 binary load lifter
+patrol_ror_1101	patrol_ror_1100		RORI	ror_world	0	3669.9	96.0	-6473.9	0	
+patrol_ror_1102	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6446.5	0	
+patrol_ror_1103	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6412.0	0	
+patrol_ror_1104	patrol_ror_1100		RORI	ror_world	0	3665.3	96.0	-6409.1	0	
+patrol_ror_1105	patrol_ror_1100		RORI	ror_world	0	3665.2	96.0	-6404.3	0	
+patrol_ror_1200	patrol_ror_1200	FLIP	RORI	ror_imp_weapons_research_facility	10	35.5	-12.0	35.9	0	Weapon Research Facility - a Meatlump pronk
+patrol_ror_1201	patrol_ror_1200		RORI	ror_imp_weapons_research_facility	10	35.5	-12.0	70.8	0	
