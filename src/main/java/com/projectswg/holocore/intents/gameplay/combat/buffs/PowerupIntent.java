@@ -26,63 +26,32 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.combat.buffs;
 
-import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class BuffIntent extends Intent {
+public class PowerupIntent extends Intent {
 	
-	private String buffName;
-	private BuffData buffData;
-	private final CreatureObject buffer, receiver;
-	private final boolean remove;
+	private final CreatureObject actor;
+	private final TangibleObject powerupObject;
 	
-	public BuffIntent(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		this.buffName = buffName;
-		this.buffer = buffer;
-		this.receiver = receiver;
-		this.remove = remove;
-	}
-	
-	public BuffIntent(@NotNull BuffData buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		this.buffData = buffData;
-		this.buffer = buffer;
-		this.receiver = receiver;
-		this.remove = remove;
+	private PowerupIntent(CreatureObject actor, TangibleObject powerupObject) {
+		this.actor = actor;
+		this.powerupObject = powerupObject;
 	}
 	
 	@NotNull
-	public CreatureObject getReceiver() {
-		return receiver;
+	public CreatureObject getActor() {
+		return actor;
 	}
 	
 	@NotNull
-	public CreatureObject getBuffer() {
-		return buffer;
+	public TangibleObject getPowerupObject() {
+		return powerupObject;
 	}
 	
-	@Nullable
-	public String getBuffName() {
-		return buffName;
+	public static void broadcast(@NotNull CreatureObject actor, @NotNull TangibleObject powerupObject) {
+		new PowerupIntent(actor, powerupObject).broadcast();
 	}
-	
-	@Nullable
-	public BuffData getBuffData() {
-		return buffData;
-	}
-	
-	public boolean isRemove() {
-		return remove;
-	}
-	
-	public static void broadcast(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		new BuffIntent(buffName, buffer, receiver, remove).broadcast();
-	}
-	
-	public static void broadcast(@NotNull BuffData buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		new BuffIntent(buffData, buffer, receiver, remove).broadcast();
-	}
-	
 }
