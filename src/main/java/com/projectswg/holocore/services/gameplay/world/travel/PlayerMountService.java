@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.world.travel;
 
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
@@ -262,10 +263,25 @@ public class PlayerMountService extends Service {
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
 		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
+			mount.setRunSpeed(vehicleInfo.getSpeed() * 5);
 			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
-			mount.setRunSpeed(vehicleInfo.getSpeed());
-			mount.setAccelScale(vehicleInfo.getAccelMax());
 			mount.setTurnScale(vehicleInfo.getTurnRateMax());
+			mount.setAccelScale(vehicleInfo.getAccelMax());
+			mount.putCustomization("/private/index_speed_max", new CustomizationVariable((int) (vehicleInfo.getSpeed() * 10d)));
+			mount.putCustomization("/private/index_speed_min", new CustomizationVariable((int) (vehicleInfo.getMinSpeed() * 10d)));
+			mount.putCustomization("/private/index_turn_rate_min", new CustomizationVariable(vehicleInfo.getTurnRate()));
+			mount.putCustomization("/private/index_turn_rate_max", new CustomizationVariable(vehicleInfo.getTurnRateMax()));
+			mount.putCustomization("/private/index_accel_min", new CustomizationVariable((int) (vehicleInfo.getAccelMin() * 10d)));
+			mount.putCustomization("/private/index_accel_max", new CustomizationVariable((int) (vehicleInfo.getAccelMax() * 10d)));
+			mount.putCustomization("/private/index_decel", new CustomizationVariable((int) (vehicleInfo.getDecel() * 10d)));
+			mount.putCustomization("/private/index_damp_roll", new CustomizationVariable((int) (vehicleInfo.getDampingRoll() * 10d)));
+			mount.putCustomization("/private/index_damp_pitch", new CustomizationVariable((int) (vehicleInfo.getDampingPitch() * 10d)));
+			mount.putCustomization("/private/index_damp_height", new CustomizationVariable((int) (vehicleInfo.getDampingHeight() * 10d)));
+			mount.putCustomization("/private/index_glide", new CustomizationVariable((int) (vehicleInfo.getGlide() * 10d)));
+			mount.putCustomization("/private/index_banking", new CustomizationVariable((int) vehicleInfo.getBankingAngle()));
+			mount.putCustomization("/private/index_hover_height", new CustomizationVariable((int) (vehicleInfo.getHoverHeight() * 10d)));
+			mount.putCustomization("/private/index_auto_level", new CustomizationVariable((int) (vehicleInfo.getAutoLevel() * 100d)));
+			mount.putCustomization("/private/index_strafe", new CustomizationVariable(vehicleInfo.isStrafe() ? 1 : 0));
 		}
 		
 		ObjectCreatedIntent.broadcast(mount);
