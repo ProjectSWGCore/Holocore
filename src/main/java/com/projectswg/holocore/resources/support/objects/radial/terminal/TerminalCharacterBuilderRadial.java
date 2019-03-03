@@ -1394,23 +1394,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","constitution_modified", "100");	// Breastplate
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "constitution_modified", "100");	// Shirt
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "constitution_modified", "100");	// Weapon
-		/*
-		String powerUpLabel = "item_reverse_engineering_powerup_armor_02_01";
-		String powerUpDescription = "item_reverse_engineering_powerup_armor_02_01";
-		String powerUpTemplate = "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff";
-		
-		if (profession.equals("trader_0a")){ // Domestic
-			powerUpLabel = "item_reverse_engineering_powerup_clothing_02_01";
-			powerUpDescription = "item_reverse_engineering_powerup_clothing_02_01";
-			powerUpTemplate = "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff";
-			
-		}
-		if (profession.equals("trader_0d")){ // Engineer
-			powerUpLabel = "item_reverse_engineering_powerup_weapon_02_01";
-			powerUpDescription = "item_reverse_engineering_powerup_weapon_02_01";
-			powerUpTemplate = "object/tangible/powerup/base/shared_weapon_base.iff";
-		}
-		*/
 	}
 	
 	private static void spawnPowerup(Player player, String template, String stfKey, String modifier, String value) {
