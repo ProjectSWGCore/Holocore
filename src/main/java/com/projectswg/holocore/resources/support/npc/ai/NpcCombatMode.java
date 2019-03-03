@@ -3,6 +3,7 @@ package com.projectswg.holocore.resources.support.npc.ai;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
@@ -11,6 +12,7 @@ import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
 import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
@@ -151,29 +153,36 @@ public class NpcCombatMode extends NpcMode {
 	
 	@NotNull
 	private static String getWeaponCommand(WeaponObject weapon) {
-		switch (weapon.getType()) {
-			case PISTOL:
-				return "rangedShotPistol";
-			case RIFLE:
-				return "rangedShotRifle";
-			case LIGHT_RIFLE:
-				return "rangedShotLightRifle";
-			case CARBINE:
-			case HEAVY:
-			case HEAVY_WEAPON:
-			case DIRECTIONAL_TARGET_WEAPON:
-				return "rangedShot";
-			case ONE_HANDED_MELEE:
-			case TWO_HANDED_MELEE:
-			case UNARMED:
-			case POLEARM_MELEE:
-			case THROWN:
-			default:
-				return "meleeHit";
-			case ONE_HANDED_SABER:
-			case TWO_HANDED_SABER:
-			case POLEARM_SABER:
-				return "saberHit";
+		AIObject ai = (AIObject) weapon.getParent();
+		
+		if (ai != null && GameObjectType.GOT_CREATURE == ai.getGameObjectType()) {
+			// Creatures use different default attack abilities than humanoids do
+			return "creatureMeleeAttack";	// TODO this is a bit simple as there are ranged attacks available for some creatures as well.
+		} else {
+			switch (weapon.getType()) {
+				case PISTOL:
+					return "rangedShotPistol";
+				case RIFLE:
+					return "rangedShotRifle";
+				case LIGHT_RIFLE:
+					return "rangedShotLightRifle";
+				case CARBINE:
+				case HEAVY:
+				case HEAVY_WEAPON:
+				case DIRECTIONAL_TARGET_WEAPON:
+					return "rangedShot";
+				case ONE_HANDED_MELEE:
+				case TWO_HANDED_MELEE:
+				case UNARMED:
+				case POLEARM_MELEE:
+				case THROWN:
+				default:
+					return "meleeHit";
+				case ONE_HANDED_SABER:
+				case TWO_HANDED_SABER:
+				case POLEARM_SABER:
+					return "saberHit";
+			}
 		}
 	}
 	

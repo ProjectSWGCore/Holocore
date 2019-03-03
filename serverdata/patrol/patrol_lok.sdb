@@ -1,147 +1,147 @@
 patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
-INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-6000100	6000100	FLIP	LOK	lok_world	0	429.00	5.50	5457.10	0	Nym Stronghold - Nym's guard #1
-6000101	6000100		LOK	lok_world	0	422.90	1.60	5428.20	0	
-6000102	6000100		LOK	lok_world	0	423.00	1.20	5318.90	0	
-6000103	6000100		LOK	lok_world	0	421.60	7.30	5272.20	0	
-6000104	6000100		LOK	lok_world	0	424.20	12.00	5206.50	0	
-6000200	6000200	FLIP	LOK	lok_world	0	421.50	5.50	5461.40	0	Nym Stronghold - Nym's guard #2
-6000201	6000200		LOK	lok_world	0	416.70	1.60	5427.40	0	
-6000202	6000200		LOK	lok_world	0	417.80	1.30	5318.70	0	
-6000203	6000200		LOK	lok_world	0	414.40	7.30	5271.20	0	
-6000204	6000200		LOK	lok_world	0	415.00	12.00	5207.30	0	
-6000300	6000300	LOOP	LOK	lok_world	0	483.20	8.60	5485.30	0	Nym Stronghold - Nym's guard #3
-6000301	6000300		LOK	lok_world	0	483.20	9.00	5509.90	0	
-6000302	6000300		LOK	lok_world	0	467.20	10.70	5522.00	0	
-6000303	6000300		LOK	lok_world	0	436.90	10.50	5521.30	0	
-6000304	6000300		LOK	lok_world	0	429.80	7.90	5484.20	0	
-6000305	6000300		LOK	lok_world	0	442.00	6.00	5464.80	0	
-6000306	6000300		LOK	lok_world	0	454.10	3.00	5444.20	0	
-6000307	6000300		LOK	lok_world	0	463.50	3.00	5440.30	0	
-6000308	6000300		LOK	lok_world	0	454.10	3.00	5444.20	0	
-6000309	6000300		LOK	lok_world	0	444.70	5.90	5462.80	0	
-6000310	6000300		LOK	lok_world	0	483.20	8.60	5485.30	0	
-6000400	6000400	LOOP	LOK	lok_world	0	-1929.32	11.98	-3359.97	0	Imperial Outpost - Nym's elite enforcer
-6000401	6000400		LOK	lok_world	0	-1917.30	11.95	-3404.94	0	
-6000402	6000400		LOK	lok_world	0	-1961.69	11.87	-3382.92	0	
-6000403	6000400		LOK	lok_world	0	-1975.15	11.86	-3392.57	0	
-6000404	6000400		LOK	lok_world	0	-2001.56	8.50	-3367.26	0	
-6000405	6000400		LOK	lok_world	0	-1965.62	12.05	-3338.43	0	
-6000500	6000500	FLIP	LOK	lok_world	0	660.91	11.68	5075.32	0	Nym's Stronghold - a kusak mauler #1
-6000501	6000500		LOK	lok_world	0	627.98	9.49	5177.52	0	
-6000502	6000500		LOK	lok_world	0	548.66	10.16	5211.53	0	
-6000503	6000500		LOK	lok_world	0	418.85	10.50	5232.89	0	
-6000504	6000500		LOK	lok_world	0	309.09	10.68	5213.76	0	
-6000505	6000500		LOK	lok_world	0	258.15	11.82	5156.93	0	
-6000506	6000500		LOK	lok_world	0	242.71	12.00	5059.81	0	
-6000507	6000500		LOK	lok_world	0	194.44	12.05	4987.33	0	
-6000508	6000500		LOK	lok_world	0	150.46	11.98	4997.86	0	
-6000509	6000500		LOK	lok_world	0	133.11	11.91	4922.55	0	
-6000510	6000500		LOK	lok_world	0	154.89	12.08	4883.35	0	
-6000511	6000500		LOK	lok_world	0	207.61	12.22	4852.74	0	
-6000512	6000500		LOK	lok_world	0	316.06	12.28	4831.58	0	
-6000513	6000500		LOK	lok_world	0	381.80	12.00	4768.20	0	
-6000514	6000500		LOK	lok_world	0	431.58	11.83	4730.45	0	
-6000515	6000500		LOK	lok_world	0	489.85	12.05	4724.19	0	
-6000516	6000500		LOK	lok_world	0	553.87	12.06	4752.31	0	
-6000517	6000500		LOK	lok_world	0	582.72	11.94	4809.27	0	
-6000518	6000500		LOK	lok_world	0	635.84	12.12	4878.61	0	
-6000519	6000500		LOK	lok_world	0	681.21	12.02	4924.60	0	
-6000520	6000500		LOK	lok_world	0	634.51	12.52	4966.69	0	
-6000521	6000500		LOK	lok_world	0	552.84	11.90	4954.29	0	
-6000600	6000600	FLIP	LOK	lok_world	0	307.64	11.98	4910.76	0	Nym's Stronghold - a kusak mauler #2
-6000601	6000600		LOK	lok_world	0	319.35	11.91	4878.38	0	
-6000602	6000600		LOK	lok_world	0	339.88	11.99	4888.79	0	
-6000603	6000600		LOK	lok_world	0	340.89	12.05	4940.23	0	
-6000604	6000600		LOK	lok_world	0	321.03	11.96	5037.24	0	
-6000605	6000600		LOK	lok_world	0	300.98	12.04	5080.95	0	
-6000606	6000600		LOK	lok_world	0	298.40	11.88	5133.39	0	
-6000607	6000600		LOK	lok_world	0	312.37	11.82	5161.65	0	
-6000608	6000600		LOK	lok_world	0	356.21	11.95	5163.80	0	
-6000609	6000600		LOK	lok_world	0	400.66	11.95	5175.64	0	
-6000610	6000600		LOK	lok_world	0	471.99	12.25	5188.26	0	
-6000611	6000600		LOK	lok_world	0	521.47	11.99	5185.57	0	
-6000612	6000600		LOK	lok_world	0	548.60	11.99	5124.75	0	
-6000700	6000700	FLIP	LOK	lok_world	0	557.09	12.02	5011.26	0	Nym's Stronghold - a kusak mauler #3
-6000701	6000700		LOK	lok_world	0	588.20	12.13	5019.22	0	
-6000702	6000700		LOK	lok_world	0	666.75	11.85	5063.64	0	
-6000703	6000700		LOK	lok_world	0	655.52	11.89	4977.39	0	
-6000704	6000700		LOK	lok_world	0	684.00	12.09	4909.84	0	
-6000705	6000700		LOK	lok_world	0	620.71	12.13	4827.96	0	
-6000706	6000700		LOK	lok_world	0	548.00	30.29	4817.61	0	
-6000707	6000700		LOK	lok_world	0	507.48	33.87	4764.23	0	
-6000800	6000800	FLIP	LOK	lok_world	0	372.88	11.96	4927.03	0	Nym's Stronghold - a kusak mauler #4
-6000801	6000800		LOK	lok_world	0	377.83	12.07	4908.28	0	
-6000802	6000800		LOK	lok_world	0	391.78	30.69	4855.40	0	
-6000803	6000800		LOK	lok_world	0	366.93	12.1	4801.92	0	
-6000804	6000800		LOK	lok_world	0	311.31	12.44	4862.23	0	
-6000805	6000800		LOK	lok_world	0	339.43	11.99	4900.92	0	
-6000806	6000800		LOK	lok_world	0	328.47	12.04	5041.70	0	
-6000807	6000800		LOK	lok_world	0	377.55	11.85	5043.91	0	
-6000808	6000800		LOK	lok_world	0	378.55	11.97	5123.12	0	
-6000809	6000800		LOK	lok_world	0	413.38	12.00	5144.87	0	
-6000810	6000800		LOK	lok_world	0	441.91	12.00	5139.98	0	
-6000811	6000800		LOK	lok_world	0	474.24	12.53	5121.42	0	
-6000812	6000800		LOK	lok_world	0	543.95	11.98	5122.1	0	
-6000813	6000800		LOK	lok_world	0	543.25	11.87	5180.35	0	
-6000900	6000900	FLIP	LOK	lok_world	0	2943.00	326.85	-4515.65	0	Mount Chaolt - Nym's elite enforcer #1
-6000901	6000900		LOK	lok_world	0	2942.88	321.57	-4490.48	0	
-6000902	6000900		LOK	lok_world	0	2954.51	320.22	-4481.34	0	
-6000903	6000900		LOK	lok_world	0	2974.58	325.57	-4489.21	0	
-6001000	6001000	FLIP	LOK	lok_world	0	2970.19	330.36	-4513.97	0	Mount Chaolt - Nym's elite enforcer #2
-6001001	6001000		LOK	lok_world	0	2979.06	329.80	-4500.16	0	
-6001002	6001000		LOK	lok_world	0	2990.17	336.47	-4518.51	0	
-6001003	6001000		LOK	lok_world	0	2989.12	340.50	-4538.22	0	
-6001004	6001000		LOK	lok_world	0	2960.10	334.73	-4543.84	0	
-6001100	6001100	FLIP	LOK	lok_world	0	2955.11	330.36	-4524.31	0	Mount Chaolt - Nym's elite enforcer #3
-6001101	6001100		LOK	lok_world	0	2943.92	333.27	-4545.15	0	
-6001102	6001100		LOK	lok_world	0	2932.20	323.53	-4530.92	0	
-6001103	6001100		LOK	lok_world	0	2918.19	312.95	-4501.42	0	
-6001200	6001200	LOOP	LOK	lok_world	0	3470.06	19.33	2120.26	0	Downed Blood Razor Transport - Nym's elite enforcer #1
-6001201	6001200		LOK	lok_world	0	3491.49	11.17	2107.80	0	
-6001202	6001200		LOK	lok_world	0	3509.68	4.64	2142.72	0	
-6001203	6001200		LOK	lok_world	0	3551.62	0.71	2119.51	0	
-6001204	6001200		LOK	lok_world	0	3569.14	0.91	2081.63	0	
-6001205	6001200		LOK	lok_world	0	3519.95	6.74	2065.19	0	
-6001206	6001200		LOK	lok_world	0	3483.40	21.21	2058.68	0	
-6001300	6001300	FLIP	LOK	lok_world	0	6035.19	18.18	5200.40	0	Outback - a criminal #1
-6001301	6001300		LOK	lok_world	0	6030.65	18.34	5192.81	0	
-6001302	6001300		LOK	lok_world	0	6034.94	17.98	5181.24	0	
-6001303	6001300		LOK	lok_world	0	6060.54	20.32	5164.96	0	
-6001304	6001300		LOK	lok_world	0	6067.72	18.56	5153.70	0	
-6001400	6001400	FLIP	LOK	lok_world	0	6035.76	11.93	5166.78	0	Outback - a criminal #2
-6001401	6001400		LOK	lok_world	0	6034.62	11.99	5140.37	0	
-6001402	6001400		LOK	lok_world	0	6016.81	11.87	5134.97	0	
-6001403	6001400		LOK	lok_world	0	6001.65	12.02	5145.02	0	
-6001500	6001500	FLIP	LOK	lok_world	0	6015.54	12.05	5201.01	0	Outback - a criminal #3
-6001501	6001500		LOK	lok_world	0	5997.82	12.01	5197.39	0	
-6001502	6001500		LOK	lok_world	0	6002.52	12.09	5176.29	0	
-6001503	6001500		LOK	lok_world	0	5992.36	11.99	5153.04	0	
-6001600	6001600	LOOP	LOK	lok_world	0	-1866.30	12.00	-3114.80	0	Imperial Outpost - Stormtrooper #1
-6001601	6001600		LOK	lok_world	0	-1835.80	12.00	-3114.40	0	
-6001602	6001600		LOK	lok_world	0	-1835.80	12.00	-3039.60	0	
-6001603	6001600		LOK	lok_world	0	-1907.30	12.00	-3039.60	0	
-6001604	6001600		LOK	lok_world	0	-1907.30	12.00	-3114.80	0	
-6001700	6001700	LOOP	LOK	lok_world	0	-1947.90	12.00	-2975.00	0	Imperial Outpost - Stormtrooper #2
-6001701	6001700		LOK	lok_world	0	-1947.90	12.00	-2987.60	0	
-6001702	6001700		LOK	lok_world	0	-1995.90	12.00	-3043.50	0	
-6001703	6001700		LOK	lok_world	0	-1911.70	12.00	-3043.50	0	
-6001704	6001700		LOK	lok_world	0	-1911.70	12.00	-3016.10	0	
-6001705	6001700		LOK	lok_world	0	-1951.40	12.00	-3016.10	0	
-6001800	6001800	LOOP	LOK	lok_world	0	-1939.90	12.00	-2949.30	0	Imperial Outpost - AT ST
-6001801	6001800		LOK	lok_world	0	-1976.30	12.00	-2949.30	0	
-6001802	6001800		LOK	lok_world	0	-2049.00	11.90	-3013.40	0	
-6001803	6001800		LOK	lok_world	0	-2043.00	11.90	-3107.30	0	
-6001804	6001800		LOK	lok_world	0	-2020.30	11.90	-3172.20	0	
-6001805	6001800		LOK	lok_world	0	-1972.90	12.10	-3214.30	0	
-6001806	6001800		LOK	lok_world	0	-1868.50	12.10	-3214.30	0	
-6001807	6001800		LOK	lok_world	0	-1790.80	11.80	-3135.80	0	
-6001808	6001800		LOK	lok_world	0	-1790.80	12.10	-3035.20	0	
-6001809	6001800		LOK	lok_world	0	-1878.30	12.00	-2949.30	0	
-6001900	6001900	FLIP	LOK	lok_world	0	469.10	8.80	5503.60	0	Nym's Stronghold - an R4 unit
-6001901	6001900		LOK	lok_world	0	453.60	8.80	5487.80	0	
-6001902	6001900		LOK	lok_world	0	417.60	1.60	5427.60	0	
-6001903	6001900		LOK	lok_world	0	417.60	1.00	5320.90	0	
-6001904	6001900		LOK	lok_world	0	421.80	12.00	5206.60	0	
-6001905	6001900		LOK	lok_world	0	436.00	12.00	5184.00	0	
-6001906	6001900		LOK	lok_world	0	503.00	12.00	5192.00	0	
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_lok_100	patrol_lok_100	FLIP	LOK	lok_world	0	429.00	5.50	5457.10	0	Nym Stronghold - Nym's guard #1
+patrol_lok_101	patrol_lok_100		LOK	lok_world	0	422.90	1.60	5428.20	0	
+patrol_lok_102	patrol_lok_100		LOK	lok_world	0	423.00	1.20	5318.90	0	
+patrol_lok_103	patrol_lok_100		LOK	lok_world	0	421.60	7.30	5272.20	0	
+patrol_lok_104	patrol_lok_100		LOK	lok_world	0	424.20	12.00	5206.50	0	
+patrol_lok_200	patrol_lok_200	FLIP	LOK	lok_world	0	421.50	5.50	5461.40	0	Nym Stronghold - Nym's guard #2
+patrol_lok_201	patrol_lok_200		LOK	lok_world	0	416.70	1.60	5427.40	0	
+patrol_lok_202	patrol_lok_200		LOK	lok_world	0	417.80	1.30	5318.70	0	
+patrol_lok_203	patrol_lok_200		LOK	lok_world	0	414.40	7.30	5271.20	0	
+patrol_lok_204	patrol_lok_200		LOK	lok_world	0	415.00	12.00	5207.30	0	
+patrol_lok_300	patrol_lok_300	LOOP	LOK	lok_world	0	483.20	8.60	5485.30	0	Nym Stronghold - Nym's guard #3
+patrol_lok_301	patrol_lok_300		LOK	lok_world	0	483.20	9.00	5509.90	0	
+patrol_lok_302	patrol_lok_300		LOK	lok_world	0	467.20	10.70	5522.00	0	
+patrol_lok_303	patrol_lok_300		LOK	lok_world	0	436.90	10.50	5521.30	0	
+patrol_lok_304	patrol_lok_300		LOK	lok_world	0	429.80	7.90	5484.20	0	
+patrol_lok_305	patrol_lok_300		LOK	lok_world	0	442.00	6.00	5464.80	0	
+patrol_lok_306	patrol_lok_300		LOK	lok_world	0	454.10	3.00	5444.20	0	
+patrol_lok_307	patrol_lok_300		LOK	lok_world	0	463.50	3.00	5440.30	0	
+patrol_lok_308	patrol_lok_300		LOK	lok_world	0	454.10	3.00	5444.20	0	
+patrol_lok_309	patrol_lok_300		LOK	lok_world	0	444.70	5.90	5462.80	0	
+patrol_lok_310	patrol_lok_300		LOK	lok_world	0	483.20	8.60	5485.30	0	
+patrol_lok_400	patrol_lok_400	LOOP	LOK	lok_world	0	-1929.32	11.98	-3359.97	0	Imperial Outpost - Nym's elite enforcer
+patrol_lok_401	patrol_lok_400		LOK	lok_world	0	-1917.30	11.95	-3404.94	0	
+patrol_lok_402	patrol_lok_400		LOK	lok_world	0	-1961.69	11.87	-3382.92	0	
+patrol_lok_403	patrol_lok_400		LOK	lok_world	0	-1975.15	11.86	-3392.57	0	
+patrol_lok_404	patrol_lok_400		LOK	lok_world	0	-2001.56	8.50	-3367.26	0	
+patrol_lok_405	patrol_lok_400		LOK	lok_world	0	-1965.62	12.05	-3338.43	0	
+patrol_lok_500	patrol_lok_500	FLIP	LOK	lok_world	0	660.91	11.68	5075.32	0	Nym's Stronghold - a kusak mauler #1
+patrol_lok_501	patrol_lok_500		LOK	lok_world	0	627.98	9.49	5177.52	0	
+patrol_lok_502	patrol_lok_500		LOK	lok_world	0	548.66	10.16	5211.53	0	
+patrol_lok_503	patrol_lok_500		LOK	lok_world	0	418.85	10.50	5232.89	0	
+patrol_lok_504	patrol_lok_500		LOK	lok_world	0	309.09	10.68	5213.76	0	
+patrol_lok_505	patrol_lok_500		LOK	lok_world	0	258.15	11.82	5156.93	0	
+patrol_lok_506	patrol_lok_500		LOK	lok_world	0	242.71	12.00	5059.81	0	
+patrol_lok_507	patrol_lok_500		LOK	lok_world	0	194.44	12.05	4987.33	0	
+patrol_lok_508	patrol_lok_500		LOK	lok_world	0	150.46	11.98	4997.86	0	
+patrol_lok_509	patrol_lok_500		LOK	lok_world	0	133.11	11.91	4922.55	0	
+patrol_lok_510	patrol_lok_500		LOK	lok_world	0	154.89	12.08	4883.35	0	
+patrol_lok_511	patrol_lok_500		LOK	lok_world	0	207.61	12.22	4852.74	0	
+patrol_lok_512	patrol_lok_500		LOK	lok_world	0	316.06	12.28	4831.58	0	
+patrol_lok_513	patrol_lok_500		LOK	lok_world	0	381.80	12.00	4768.20	0	
+patrol_lok_514	patrol_lok_500		LOK	lok_world	0	431.58	11.83	4730.45	0	
+patrol_lok_515	patrol_lok_500		LOK	lok_world	0	489.85	12.05	4724.19	0	
+patrol_lok_516	patrol_lok_500		LOK	lok_world	0	553.87	12.06	4752.31	0	
+patrol_lok_517	patrol_lok_500		LOK	lok_world	0	582.72	11.94	4809.27	0	
+patrol_lok_518	patrol_lok_500		LOK	lok_world	0	635.84	12.12	4878.61	0	
+patrol_lok_519	patrol_lok_500		LOK	lok_world	0	681.21	12.02	4924.60	0	
+patrol_lok_520	patrol_lok_500		LOK	lok_world	0	634.51	12.52	4966.69	0	
+patrol_lok_521	patrol_lok_500		LOK	lok_world	0	552.84	11.90	4954.29	0	
+patrol_lok_600	patrol_lok_600	FLIP	LOK	lok_world	0	307.64	11.98	4910.76	0	Nym's Stronghold - a kusak mauler #2
+patrol_lok_601	patrol_lok_600		LOK	lok_world	0	319.35	11.91	4878.38	0	
+patrol_lok_602	patrol_lok_600		LOK	lok_world	0	339.88	11.99	4888.79	0	
+patrol_lok_603	patrol_lok_600		LOK	lok_world	0	340.89	12.05	4940.23	0	
+patrol_lok_604	patrol_lok_600		LOK	lok_world	0	321.03	11.96	5037.24	0	
+patrol_lok_605	patrol_lok_600		LOK	lok_world	0	300.98	12.04	5080.95	0	
+patrol_lok_606	patrol_lok_600		LOK	lok_world	0	298.40	11.88	5133.39	0	
+patrol_lok_607	patrol_lok_600		LOK	lok_world	0	312.37	11.82	5161.65	0	
+patrol_lok_608	patrol_lok_600		LOK	lok_world	0	356.21	11.95	5163.80	0	
+patrol_lok_609	patrol_lok_600		LOK	lok_world	0	400.66	11.95	5175.64	0	
+patrol_lok_610	patrol_lok_600		LOK	lok_world	0	471.99	12.25	5188.26	0	
+patrol_lok_611	patrol_lok_600		LOK	lok_world	0	521.47	11.99	5185.57	0	
+patrol_lok_612	patrol_lok_600		LOK	lok_world	0	548.60	11.99	5124.75	0	
+patrol_lok_700	patrol_lok_700	FLIP	LOK	lok_world	0	557.09	12.02	5011.26	0	Nym's Stronghold - a kusak mauler #3
+patrol_lok_701	patrol_lok_700		LOK	lok_world	0	588.20	12.13	5019.22	0	
+patrol_lok_702	patrol_lok_700		LOK	lok_world	0	666.75	11.85	5063.64	0	
+patrol_lok_703	patrol_lok_700		LOK	lok_world	0	655.52	11.89	4977.39	0	
+patrol_lok_704	patrol_lok_700		LOK	lok_world	0	684.00	12.09	4909.84	0	
+patrol_lok_705	patrol_lok_700		LOK	lok_world	0	620.71	12.13	4827.96	0	
+patrol_lok_706	patrol_lok_700		LOK	lok_world	0	548.00	30.29	4817.61	0	
+patrol_lok_707	patrol_lok_700		LOK	lok_world	0	507.48	33.87	4764.23	0	
+patrol_lok_800	patrol_lok_800	FLIP	LOK	lok_world	0	372.88	11.96	4927.03	0	Nym's Stronghold - a kusak mauler #4
+patrol_lok_801	patrol_lok_800		LOK	lok_world	0	377.83	12.07	4908.28	0	
+patrol_lok_802	patrol_lok_800		LOK	lok_world	0	391.78	30.69	4855.40	0	
+patrol_lok_803	patrol_lok_800		LOK	lok_world	0	366.93	12.1	4801.92	0	
+patrol_lok_804	patrol_lok_800		LOK	lok_world	0	311.31	12.44	4862.23	0	
+patrol_lok_805	patrol_lok_800		LOK	lok_world	0	339.43	11.99	4900.92	0	
+patrol_lok_806	patrol_lok_800		LOK	lok_world	0	328.47	12.04	5041.70	0	
+patrol_lok_807	patrol_lok_800		LOK	lok_world	0	377.55	11.85	5043.91	0	
+patrol_lok_808	patrol_lok_800		LOK	lok_world	0	378.55	11.97	5123.12	0	
+patrol_lok_809	patrol_lok_800		LOK	lok_world	0	413.38	12.00	5144.87	0	
+patrol_lok_810	patrol_lok_800		LOK	lok_world	0	441.91	12.00	5139.98	0	
+patrol_lok_811	patrol_lok_800		LOK	lok_world	0	474.24	12.53	5121.42	0	
+patrol_lok_812	patrol_lok_800		LOK	lok_world	0	543.95	11.98	5122.1	0	
+patrol_lok_813	patrol_lok_800		LOK	lok_world	0	543.25	11.87	5180.35	0	
+patrol_lok_900	patrol_lok_900	FLIP	LOK	lok_world	0	2943.00	326.85	-4515.65	0	Mount Chaolt - Nym's elite enforcer #1
+patrol_lok_901	patrol_lok_900		LOK	lok_world	0	2942.88	321.57	-4490.48	0	
+patrol_lok_902	patrol_lok_900		LOK	lok_world	0	2954.51	320.22	-4481.34	0	
+patrol_lok_903	patrol_lok_900		LOK	lok_world	0	2974.58	325.57	-4489.21	0	
+patrol_lok_1000	patrol_lok_1000	FLIP	LOK	lok_world	0	2970.19	330.36	-4513.97	0	Mount Chaolt - Nym's elite enforcer #2
+patrol_lok_1001	patrol_lok_1000		LOK	lok_world	0	2979.06	329.80	-4500.16	0	
+patrol_lok_1002	patrol_lok_1000		LOK	lok_world	0	2990.17	336.47	-4518.51	0	
+patrol_lok_1003	patrol_lok_1000		LOK	lok_world	0	2989.12	340.50	-4538.22	0	
+patrol_lok_1004	patrol_lok_1000		LOK	lok_world	0	2960.10	334.73	-4543.84	0	
+patrol_lok_1100	patrol_lok_1100	FLIP	LOK	lok_world	0	2955.11	330.36	-4524.31	0	Mount Chaolt - Nym's elite enforcer #3
+patrol_lok_1101	patrol_lok_1100		LOK	lok_world	0	2943.92	333.27	-4545.15	0	
+patrol_lok_1102	patrol_lok_1100		LOK	lok_world	0	2932.20	323.53	-4530.92	0	
+patrol_lok_1103	patrol_lok_1100		LOK	lok_world	0	2918.19	312.95	-4501.42	0	
+patrol_lok_1200	patrol_lok_1200	LOOP	LOK	lok_world	0	3470.06	19.33	2120.26	0	Downed Blood Razor Transport - Nym's elite enforcer #1
+patrol_lok_1201	patrol_lok_1200		LOK	lok_world	0	3491.49	11.17	2107.80	0	
+patrol_lok_1202	patrol_lok_1200		LOK	lok_world	0	3509.68	4.64	2142.72	0	
+patrol_lok_1203	patrol_lok_1200		LOK	lok_world	0	3551.62	0.71	2119.51	0	
+patrol_lok_1204	patrol_lok_1200		LOK	lok_world	0	3569.14	0.91	2081.63	0	
+patrol_lok_1205	patrol_lok_1200		LOK	lok_world	0	3519.95	6.74	2065.19	0	
+patrol_lok_1206	patrol_lok_1200		LOK	lok_world	0	3483.40	21.21	2058.68	0	
+patrol_lok_1300	patrol_lok_1300	FLIP	LOK	lok_world	0	6035.19	18.18	5200.40	0	Outback - a criminal #1
+patrol_lok_1301	patrol_lok_1300		LOK	lok_world	0	6030.65	18.34	5192.81	0	
+patrol_lok_1302	patrol_lok_1300		LOK	lok_world	0	6034.94	17.98	5181.24	0	
+patrol_lok_1303	patrol_lok_1300		LOK	lok_world	0	6060.54	20.32	5164.96	0	
+patrol_lok_1304	patrol_lok_1300		LOK	lok_world	0	6067.72	18.56	5153.70	0	
+patrol_lok_1400	patrol_lok_1400	FLIP	LOK	lok_world	0	6035.76	11.93	5166.78	0	Outback - a criminal #2
+patrol_lok_1401	patrol_lok_1400		LOK	lok_world	0	6034.62	11.99	5140.37	0	
+patrol_lok_1402	patrol_lok_1400		LOK	lok_world	0	6016.81	11.87	5134.97	0	
+patrol_lok_1403	patrol_lok_1400		LOK	lok_world	0	6001.65	12.02	5145.02	0	
+patrol_lok_1500	patrol_lok_1500	FLIP	LOK	lok_world	0	6015.54	12.05	5201.01	0	Outback - a criminal #3
+patrol_lok_1501	patrol_lok_1500		LOK	lok_world	0	5997.82	12.01	5197.39	0	
+patrol_lok_1502	patrol_lok_1500		LOK	lok_world	0	6002.52	12.09	5176.29	0	
+patrol_lok_1503	patrol_lok_1500		LOK	lok_world	0	5992.36	11.99	5153.04	0	
+patrol_lok_1600	patrol_lok_1600	LOOP	LOK	lok_world	0	-1866.30	12.00	-3114.80	0	Imperial Outpost - Stormtrooper #1
+patrol_lok_1601	patrol_lok_1600		LOK	lok_world	0	-1835.80	12.00	-3114.40	0	
+patrol_lok_1602	patrol_lok_1600		LOK	lok_world	0	-1835.80	12.00	-3039.60	0	
+patrol_lok_1603	patrol_lok_1600		LOK	lok_world	0	-1907.30	12.00	-3039.60	0	
+patrol_lok_1604	patrol_lok_1600		LOK	lok_world	0	-1907.30	12.00	-3114.80	0	
+patrol_lok_1700	patrol_lok_1700	LOOP	LOK	lok_world	0	-1947.90	12.00	-2975.00	0	Imperial Outpost - Stormtrooper #2
+patrol_lok_1701	patrol_lok_1700		LOK	lok_world	0	-1947.90	12.00	-2987.60	0	
+patrol_lok_1702	patrol_lok_1700		LOK	lok_world	0	-1995.90	12.00	-3043.50	0	
+patrol_lok_1703	patrol_lok_1700		LOK	lok_world	0	-1911.70	12.00	-3043.50	0	
+patrol_lok_1704	patrol_lok_1700		LOK	lok_world	0	-1911.70	12.00	-3016.10	0	
+patrol_lok_1705	patrol_lok_1700		LOK	lok_world	0	-1951.40	12.00	-3016.10	0	
+patrol_lok_1800	patrol_lok_1800	LOOP	LOK	lok_world	0	-1939.90	12.00	-2949.30	0	Imperial Outpost - AT ST
+patrol_lok_1801	patrol_lok_1800		LOK	lok_world	0	-1976.30	12.00	-2949.30	0	
+patrol_lok_1802	patrol_lok_1800		LOK	lok_world	0	-2049.00	11.90	-3013.40	0	
+patrol_lok_1803	patrol_lok_1800		LOK	lok_world	0	-2043.00	11.90	-3107.30	0	
+patrol_lok_1804	patrol_lok_1800		LOK	lok_world	0	-2020.30	11.90	-3172.20	0	
+patrol_lok_1805	patrol_lok_1800		LOK	lok_world	0	-1972.90	12.10	-3214.30	0	
+patrol_lok_1806	patrol_lok_1800		LOK	lok_world	0	-1868.50	12.10	-3214.30	0	
+patrol_lok_1807	patrol_lok_1800		LOK	lok_world	0	-1790.80	11.80	-3135.80	0	
+patrol_lok_1808	patrol_lok_1800		LOK	lok_world	0	-1790.80	12.10	-3035.20	0	
+patrol_lok_1809	patrol_lok_1800		LOK	lok_world	0	-1878.30	12.00	-2949.30	0	
+patrol_lok_1900	patrol_lok_1900	FLIP	LOK	lok_world	0	469.10	8.80	5503.60	0	Nym's Stronghold - an R4 unit
+patrol_lok_1901	patrol_lok_1900		LOK	lok_world	0	453.60	8.80	5487.80	0	
+patrol_lok_1902	patrol_lok_1900		LOK	lok_world	0	417.60	1.60	5427.60	0	
+patrol_lok_1903	patrol_lok_1900		LOK	lok_world	0	417.60	1.00	5320.90	0	
+patrol_lok_1904	patrol_lok_1900		LOK	lok_world	0	421.80	12.00	5206.60	0	
+patrol_lok_1905	patrol_lok_1900		LOK	lok_world	0	436.00	12.00	5184.00	0	
+patrol_lok_1906	patrol_lok_1900		LOK	lok_world	0	503.00	12.00	5192.00	0	

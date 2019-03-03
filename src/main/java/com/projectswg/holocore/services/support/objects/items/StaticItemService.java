@@ -231,6 +231,10 @@ public class StaticItemService extends Service {
 		// TODO bio-link
 		private final String itemName;
 		private final String iffTemplate;
+		private int colorIndex0;
+		private int colorIndex1;
+		private int colorIndex2;
+		private int colorIndex3;
 
 		public ObjectAttributes(String itemName, String iffTemplate) {
 			this.itemName = itemName;
@@ -256,7 +260,12 @@ public class StaticItemService extends Service {
 			volume = resultSet.getInt("volume");
 			
 			stringName = resultSet.getString("string_name");
-
+			
+			colorIndex0 = resultSet.getInt("index_color_0");
+			colorIndex1 = resultSet.getInt("index_color_1");
+			colorIndex2 = resultSet.getInt("index_color_2");
+			colorIndex3 = resultSet.getInt("index_color_3");
+			
 			// load type-specific attributes
 			return loadTypeAttributes(resultSet);
 		}
@@ -294,6 +303,15 @@ public class StaticItemService extends Service {
 			
 			object.setObjectName(stringName);
 			
+			if (object instanceof TangibleObject) {
+				TangibleObject tangible = (TangibleObject) object;
+				
+				applyColor(tangible, "/private/index_color_0", colorIndex0);
+				applyColor(tangible, "/private/index_color_1", colorIndex1);
+				applyColor(tangible, "/private/index_color_2", colorIndex2);
+				applyColor(tangible, "/private/index_color_3", colorIndex3);
+			}
+			
 			// apply type-specific attributes
 			applyTypeAttributes(object);
 		}
@@ -307,7 +325,13 @@ public class StaticItemService extends Service {
 		 * @param object to apply the type-specific attributes to.
 		 */
 		protected abstract void applyTypeAttributes(SWGObject object);
-
+		
+		private void applyColor(TangibleObject tangible, String variable, int colorIndex) {
+			if (colorIndex >= 0) {
+				tangible.putCustomization(variable, colorIndex);
+			}
+		}
+		
 		public final String getIffTemplate() {
 			return iffTemplate;
 		}
@@ -325,10 +349,6 @@ public class StaticItemService extends Service {
 		private boolean wearableByRodians;
 		private boolean wearableByTrandoshans;
 		private boolean wearableByRest;
-		private int colorIndex0;
-		private int colorIndex1;
-		private int colorIndex2;
-		private int colorIndex3;
 
 		public WearableAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
@@ -372,10 +392,6 @@ public class StaticItemService extends Service {
 			wearableByRodians = resultSet.getInt("race_rodian") != 0;
 			wearableByTrandoshans = resultSet.getInt("race_trandoshan") != 0;
 			wearableByRest = resultSet.getInt("race_rest") != 0;
-			colorIndex0 = resultSet.getInt("index_color_0");
-			colorIndex1 = resultSet.getInt("index_color_1");
-			colorIndex2 = resultSet.getInt("index_color_2");
-			colorIndex3 = resultSet.getInt("index_color_3");
 
 			return true;
 		}
@@ -398,17 +414,6 @@ public class StaticItemService extends Service {
 			// Add the race restrictions only if there are any
 			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
-			
-			if (!(object instanceof TangibleObject)) {
-				return;
-			}
-			
-			TangibleObject tangible = (TangibleObject) object;
-			
-			applyColor(tangible, "/private/index_color_0", colorIndex0);
-			applyColor(tangible, "/private/index_color_1", colorIndex1);
-			applyColor(tangible, "/private/index_color_2", colorIndex2);
-			applyColor(tangible, "/private/index_color_3", colorIndex3);
 		}
 
 		private String buildRaceRestrictionString() {
@@ -738,16 +743,16 @@ public class StaticItemService extends Service {
 		return mods;
 	}
 	
-	public static abstract class ObjectCreationHandler {
-		public abstract void success(SWGObject[] createdObjects);
-		public abstract boolean isIgnoreVolume();
+	public static interface ObjectCreationHandler {
+		void success(SWGObject[] createdObjects);
+		boolean isIgnoreVolume();
 		
-		public void containerFull() {
+		default void containerFull() {
 			
 		}
 	}
 	
-	public static final class LootBoxHandler extends ObjectCreationHandler {
+	public static final class LootBoxHandler implements ObjectCreationHandler {
 
 		private final CreatureObject receiver;
 

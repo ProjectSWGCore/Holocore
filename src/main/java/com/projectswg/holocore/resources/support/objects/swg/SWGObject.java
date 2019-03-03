@@ -409,6 +409,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 
 		attributes.put(attribute, value);
 	}
+	
+	public String removeAttribute(String attribute) {
+		return attributes.remove(attribute);
+	}
 
 	/**
 	 * Gets the object that occupies the specified slot
@@ -434,6 +438,19 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 */
 	public Collection<SWGObject> getContainedObjects() {
 		return containedObjectsView;
+	}
+	
+	public Collection<SWGObject> getChildObjectsRecursively() {
+		Collection<SWGObject> combined = new ArrayList<>();
+		
+		combined.addAll(getSlottedObjects());
+		combined.addAll(getContainedObjects());
+		
+		for (SWGObject object : new ArrayList<>(combined)) {
+			combined.addAll(object.getChildObjectsRecursively());
+		}
+		
+		return combined;
 	}
 	
 	public void setSlots(@NotNull Collection<String> slots) {

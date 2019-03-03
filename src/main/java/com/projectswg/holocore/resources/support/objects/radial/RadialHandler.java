@@ -15,6 +15,8 @@ import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
+import com.projectswg.holocore.services.gameplay.combat.loot.RareLootService;
+import com.projectswg.holocore.services.gameplay.combat.buffs.PowerupService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -36,6 +38,7 @@ public enum RadialHandler {
 		initializePetRadials();
 		initializeMiscRadials();
 		initializeContainerRadials();
+		initializePowerupRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
@@ -104,11 +107,20 @@ public enum RadialHandler {
 	private void initializeMiscRadials() {
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
 		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
+		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
+		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
+		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
 	}
 	
 	private void initializeContainerRadials() {
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER, new ContainerObjectRadial());
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER_PUBLIC, new ContainerObjectRadial());
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER_WEARABLE, new ContainerObjectRadial());
+	}
+	
+	private void initializePowerupRadials() {
+		registerHandler(PowerupService.BREASTPLATE, new PowerupRadial());
+		registerHandler(PowerupService.SHIRT, new PowerupRadial());
+		registerHandler(PowerupService.WEAPON, new PowerupRadial());
 	}
 }

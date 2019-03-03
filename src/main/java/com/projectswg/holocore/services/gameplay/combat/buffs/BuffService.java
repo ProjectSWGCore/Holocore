@@ -90,9 +90,15 @@ public class BuffService extends Service {
 	
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
-		BuffInfo buffData = getBuff(bi.getBuffName());
-		Objects.requireNonNull(buffData, "No known buff: " + bi.getBuffName());
-		assert buffData.getName().equalsIgnoreCase(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffInfo name ["+buffData.getName()+ ']';
+		String buffName = bi.getBuffName();
+		BuffInfo buffData = bi.getBuffData();
+		
+		if (buffData == null) {
+			buffData = getBuff(buffName);
+		}
+		
+		Objects.requireNonNull(buffData, "No known buff: " + buffName);
+		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -236,7 +242,7 @@ public class BuffService extends Service {
 			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
 			Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
 			
-			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
+			checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
 			checkCallback(buffData, creature);
 		}
 		
@@ -264,7 +270,7 @@ public class BuffService extends Service {
 		
 		CRC crc = new CRC(buff.getCrc());
 		receiver.adjustBuffStackCount(crc, stackMod);
-		checkSkillMods(buffData, receiver, stackMod);
+		checkBuffEffects(buffData, receiver, stackMod);
 		
 		// If the stack count was incremented, also renew the duration
 		if (stackMod > 0) {
@@ -283,7 +289,7 @@ public class BuffService extends Service {
 		}
 		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, (float) buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
 		
-		checkSkillMods(buffData, receiver, 1);
+		checkBuffEffects(buffData, receiver, 1);
 		receiver.addBuff(buff);
 		
 		sendParticleEffect(buffData.getParticle(), receiver, buffData.getParticleHardpoint());
@@ -293,7 +299,7 @@ public class BuffService extends Service {
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
-		if (!effectFileName.isEmpty()) {
+		if (effectFileName != null && !effectFileName.isEmpty()) {
 			receiver.sendObservers(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
 		}
 	}
@@ -310,21 +316,32 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void checkSkillMods(BuffInfo buffData, CreatureObject creature, int valueFactor) {
+	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, int valueFactor) {
 		/*
 		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
 		 *      removal
 		 */
-		for (int i = 0; i < buffData.getEffects(); i++) {
-			if (buffData.getEffectName(i) != null)
-				sendSkillModIntent(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
-		}
+		for (int i = 0; i < 5; i++)
+			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
 	}
 	
-	private void sendSkillModIntent(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
-		if (!effectName.isEmpty())
-			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
+		if (effectName != null &&  !effectName.isEmpty()) {
+			if (DataLoader.commands().isCommand(effectName) && effectValue == 1.0) {
+				// This effect is an ability
+				if (valueFactor > 0) {
+					// Buff is being added. Grant the ability.
+					creature.addCommand(effectName);
+				} else {
+					// Buff is being removed. Remove the ability.
+					creature.removeCommand(effectName);
+				}
+			} else {
+				// This effect is a skill mod
+				new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+			}
+		}
 	}
 	
 	@Nullable

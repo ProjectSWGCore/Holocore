@@ -109,6 +109,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("credits", CmdMoney::new);
 		registerCallback("setSpeed", CmdSetSpeed::new);
 		registerCallback("setExperience", CmdSetExperience::new);
+		registerCallback("invulnerable", CmdInvulnerable::new);
 	}
 	
 	private void addChatScripts() {

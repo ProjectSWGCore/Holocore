@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.spawn;
 
+import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -74,6 +75,13 @@ public class NPCCreator {
 		object.setMoodAnimation(spawner.getMood());
 		object.setCreatureId(spawner.getNpcId());
 		object.setWalkSpeed(spawner.getMovementSpeed());
+		object.setHeight(getScale(spawner));
+		
+		int hue = spawner.getHue();
+		if (hue != 0) {
+			// No reason to add color customization if the value is default anyways
+			object.putCustomization("/private/index_color_1", new CustomizationVariable(hue));
+		}
 		
 		// Assign weapons
 		try {
@@ -134,6 +142,18 @@ public class NPCCreator {
 
 		if (specForce) {
 			new FactionIntent(object, PvpStatus.SPECIALFORCES).broadcast();
+		}
+	}
+	
+	private static double getScale(Spawner spawner) {
+		double scaleMin = spawner.getScaleMin();
+		double scaleMax = spawner.getScaleMax();
+		if (scaleMin == scaleMax) {
+			// Min and max are the same. Using either of them is fine.
+			return scaleMin;
+		} else {
+			// There's a gap between min and max. Let's generate a random number between them (both inclusive)
+			return ThreadLocalRandom.current().nextDouble(scaleMin, scaleMax + 0.1d);	// +0.1 to make scaleMax inclusive
 		}
 	}
 	
