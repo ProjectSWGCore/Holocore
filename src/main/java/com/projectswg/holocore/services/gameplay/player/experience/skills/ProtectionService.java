@@ -75,7 +75,7 @@ public class ProtectionService extends Service {
 				.mapToInt(Integer::intValue)
 				.sum();
 		
-		return super.initialize() && Objects.equals(88, armorProtectionPercentage);
+		return super.initialize() && armorProtectionPercentage == 100;
 	}
 	
 	@IntentHandler
