@@ -263,7 +263,7 @@ public class PlayerMountService extends Service {
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
 		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
-			mount.setRunSpeed(vehicleInfo.getSpeed() * 5);
+			mount.setRunSpeed(vehicleInfo.getSpeed());
 			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
 			mount.setTurnScale(vehicleInfo.getTurnRateMax());
 			mount.setAccelScale(vehicleInfo.getAccelMax());
