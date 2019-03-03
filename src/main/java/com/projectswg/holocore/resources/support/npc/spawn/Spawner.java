@@ -210,6 +210,14 @@ public final class Spawner {
 		return npc.getMovementSpeed();
 	}
 	
+	public double getScaleMin() {
+		return npc.getScaleMin();
+	}
+	
+	public double getScaleMax() {
+		return npc.getScaleMax();
+	}
+	
 	public int getHue() {
 		return npc.getHue();
 	}
