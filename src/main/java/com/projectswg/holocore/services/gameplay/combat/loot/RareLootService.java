@@ -31,34 +31,82 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.combat.loot.OpenRareChestIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
+import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RareLootService extends Service {
+	
+	public static final String RARE_CHEST = "object/tangible/item/shared_rare_loot_chest_1.iff";
+	public static final String EXCEPTIONAL_CHEST = "object/tangible/item/shared_rare_loot_chest_2.iff";
+	public static final String LEGENDARY_CHEST = "object/tangible/item/shared_rare_loot_chest_3.iff";
 	
 	// TODO these two could be config options
 	private static final short MAX_LEVEL_DIFFERENCE = 6;    // +-6 difference is allowed between killer and corpse
 	private static final int DROP_CHANCE = 1;    // One in a hundred eligible kills will drop a chest
 	
 	private final Random random;
+	private final List<String> rareItems;
+	private final List<String> exceptionalItems;
+	private final List<String> legendaryItems;
 	
 	public RareLootService() {
 		random = new Random();
 		
-		// TODO handle chest opening
+		rareItems = new ArrayList<>();
+		exceptionalItems = new ArrayList<>();
+		legendaryItems = new ArrayList<>();
 	}
 	
 	@Override
 	public boolean initialize() {
-		// TODO load dataset
+		String what = "Rare Loot System items";
+		long start = StandardLog.onStartLoad(what);
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/loot/rls_items.sdb"))) {
+			while (set.next()) {
+				String rarity = set.getText("rarity");
+				String staticItemId = set.getText("static_item_id");
+				
+				switch (rarity) {
+					case "RARE":
+						rareItems.add(staticItemId);
+						break;
+					case "EXCEPTIONAL":
+						exceptionalItems.add(staticItemId);
+						break;
+					case "LEGENDARY":
+						legendaryItems.add(staticItemId);
+						break;
+				}
+			}
+		} catch (IOException e) {
+			Log.e(e);
+		}
+		
+		int quantity = rareItems.size() + exceptionalItems.size() + legendaryItems.size();
+		
+		StandardLog.onEndLoad(quantity, what, start);
 		
 		return super.initialize();
 	}
@@ -95,6 +143,45 @@ public class RareLootService extends Service {
 		sendSuccessPackets(chest, corpse, killer);
 	}
 	
+	@IntentHandler
+	private void handleOpenRareChestIntent(OpenRareChestIntent intent) {
+		CreatureObject actor = intent.getActor();
+		TangibleObject chest = intent.getChest();
+		
+		// Figure out rarity of the chest
+		String chestTemplate = chest.getTemplate();
+		String chosenItem;
+		
+		switch (chestTemplate) {
+			case RARE_CHEST:
+				chosenItem = randomItem(rareItems);
+				break;
+			case EXCEPTIONAL_CHEST:
+				chosenItem = randomItem(exceptionalItems);
+				break;
+			case LEGENDARY_CHEST:
+				chosenItem = randomItem(legendaryItems);
+				break;
+			default:
+				Log.e("%s tried to open a Rare Loot System chest with an unrecognized object template", actor, chestTemplate);
+				return;
+		}
+		
+		StandardLog.onPlayerEvent(this, actor, "opened a RLS chest and received static item: %s", chosenItem);
+		
+		// Destroy the chest
+		DestroyObjectIntent.broadcast(chest);
+		
+		// Give the player the item
+		new CreateStaticItemIntent(
+				actor,	// The object requesting the item transfer
+				actor.getInventory(),	// The item should land in the inventory of the player who opened the chest
+				new RareLootCreationHandler(actor),	// Show a loot box window with the item
+				chosenItem
+		).broadcast();
+		
+	}
+	
 	boolean isPlayerEligible(boolean killerPlayer, boolean corpsePlayer) {
 		return killerPlayer && !corpsePlayer;
 	}
@@ -115,11 +202,11 @@ public class RareLootService extends Service {
 	String templateForDifficulty(CreatureDifficulty difficulty) {
 		switch (difficulty) {
 			case NORMAL:
-				return "object/tangible/item/shared_rare_loot_chest_1.iff";
+				return RARE_CHEST;
 			case ELITE:
-				return "object/tangible/item/shared_rare_loot_chest_2.iff";
+				return EXCEPTIONAL_CHEST;
 			case BOSS:
-				return "object/tangible/item/shared_rare_loot_chest_3.iff";
+				return LEGENDARY_CHEST;
 			default:
 				throw new IllegalArgumentException("Unknown CreatureDifficulty: " + difficulty);
 		}
@@ -138,5 +225,48 @@ public class RareLootService extends Service {
 		
 		killer.getOwner().sendPacket(effect, sound, box);
 	}
+
+	private String randomItem(List<String> items) {
+		int availableItems = items.size();
+		int randomIndex = ThreadLocalRandom.current().nextInt(availableItems);
+		
+		return items.get(randomIndex);
+	}
 	
+	private static class RareLootCreationHandler implements StaticItemService.ObjectCreationHandler {
+		
+		private final CreatureObject actor;
+		
+		public RareLootCreationHandler(CreatureObject actor) {
+			this.actor = actor;
+		}
+		
+		@Override
+		public void success(SWGObject[] createdObjects) {
+			// Apply rarity item attribute to the created RLS item
+			for (SWGObject createdObject : createdObjects) {
+				createdObject.addAttribute("@obj_attr_n:rare_loot_category", "Rare Item");
+			}
+			
+			// Show items in loot box window
+			new StaticItemService.LootBoxHandler(actor).success(createdObjects);
+		}
+		
+		@Override
+		public boolean isIgnoreVolume() {
+			return false;
+		}
+		
+		@Override
+		public void containerFull() {
+			Player owner = actor.getOwner();
+			
+			if (owner == null) {
+				return;
+			}
+			
+			SystemMessageIntent.broadcastPersonal(owner, "@container_error_message:container03");
+			
+		}
+	}
 }
