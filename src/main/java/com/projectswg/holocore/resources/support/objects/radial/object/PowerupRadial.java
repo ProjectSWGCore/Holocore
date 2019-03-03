@@ -3,7 +3,6 @@ package com.projectswg.holocore.resources.support.objects.radial.object;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.PowerupIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.OpenRareChestIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
