@@ -1,274 +1,274 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-kas_hun_00001	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	221.5	23.0	567.7	95	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00002	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-104.5	8.6	353.5	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00003	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-125.3	8.3	647.7	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00004	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-143.8	6.6	425.2	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	6	LOITER	15	0	-	idle	0	0	0	600
-kas_hun_00005	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-15.4	8.3	311.7	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00006	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-166.6	26.8	545.3	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00007	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-169.0	6.1	140.1	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00008	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-283.9	6.4	345.2	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00009	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-375.7	28.3	505.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	5	LOITER	15	0	-	idle	0	0	0	600
-kas_hun_00010	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-50.0	27.2	260.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00011	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-64.7	6.4	142.8	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00012	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	0.2	10.7	349.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00013	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-277.1	44.3	482.9	0	1	Greyclimber (a Kashyyyk bantha)	ep3_bantha_kash_greyclimber	ATTACKABLE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00014	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-117.9	27.8	213.1	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00015	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-263.4	6.6	357.6	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00016	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-274.9	44.3	485.8	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00017	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-119.6	8.3	647.0	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00018	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-221.6	27.5	462.2	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	5	LOITER	15	0	-	idle	0	0	0	600
-kas_hun_00019	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-383.2	26.8	493.1	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00020	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-59.8	6.4	143.6	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00021	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-122.4	1.3	-782.5	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00022	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-126.8	1.3	-788.6	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00023	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-135.1	1.6	-776.5	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00024	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-147.0	2.4	-747.8	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00025	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-409.4	8.8	273.4	0	1	a Chiss poacher	ep3_chiss_poacher	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00026	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1068.3	1.0	121.9	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00027	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1085.1	3.6	-101.9	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00028	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1095.8	1.0	92.8	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00029	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1107.9	2.7	-60.8	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00030	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1108.0	3.6	-3.1	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00031	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1109.3	3.6	43.6	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00032	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1109.9	3.6	71.5	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00033	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1148.3	3.0	-169.4	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00034	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1171.7	2.7	-213.3	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00035	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1177.4	4.0	-136.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00036	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1182.0	12.5	-97.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00037	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1195.1	3.7	69.1	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00038	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1196.9	3.6	-124.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00039	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1199.5	3.6	44.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00040	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1201.6	3.6	84.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00041	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1202.5	3.6	-7.4	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00042	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1204.2	3.6	-133.1	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00043	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1206.7	3.6	-85.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00044	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1211.7	3.6	-21.9	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00045	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1216.1	3.6	-113.9	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00046	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1220.1	3.6	2.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00047	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1137.5	11.6	-141.8	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00048	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1139.1	3.9	20.0	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00049	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1140.1	3.8	62.4	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00050	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1145.5	3.6	-66.5	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00051	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1159.1	3.6	-70.1	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00052	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1162.6	3.9	63.6	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00053	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1178.8	3.6	-72.6	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00054	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1182.8	3.6	-41.3	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00055	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.5	8.4	592.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00056	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-224.5	26.8	586.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00057	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-269.8	8.4	257.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00058	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-71.2	28.7	254.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00059	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	172.9	4.0	-21.8	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00060	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	235.9	1.6	101.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00061	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	394.2	1.9	23.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00062	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	592.7	8.4	591.8	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00063	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	64.8	8.7	367.2	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00064	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1072.0	2.2	-499.6	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00065	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1157.1	2.0	-256.0	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00066	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-916.0	8.1	665.4	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00067	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-921.3	2.6	-566.5	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00068	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	228.0	8.1	-402.5	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00069	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	541.1	31.3	-586.0	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00070	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1213.0	3.6	-127.2	0	1	Laen Pieweto (Chiss poacher leader)	ep3_laen_pieweto	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00071	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1074.5	8.1	623.5	0	1	a mouf	ep3_mouf	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00072	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1096.5	6.9	712.7	0	1	a mouf	ep3_mouf	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00073	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1169.6	23.3	739.1	0	1	Brightclaw (a mouf)	ep3_mouf_brightclaw	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00074	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-922.6	13.0	921.3	0	1	Paleclaw (a mouf)	ep3_mouf_paleclaw	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00075	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1150.0	23.9	660.0	0	1	a mouf roarlord	ep3_mouf_roarlord	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00076	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1171.8	23.4	725.7	0	1	a mouf roarlord	ep3_mouf_roarlord	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00077	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-242.5	8.4	676.2	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00078	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-266.0	11.2	688.9	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00079	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-289.2	8.3	648.2	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00080	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.5	8.8	647.6	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00081	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-603.3	2.1	565.4	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00082	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-740.5	8.4	599.8	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00083	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-746.7	0.3	534.0	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00084	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-823.9	17.7	871.5	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00085	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-824.8	17.7	874.5	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00086	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-833.8	15.4	811.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00087	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-852.2	1.0	291.0	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00088	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-892.4	24.5	870.8	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00089	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-898.5	15.8	514.9	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00090	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-913.0	16.7	817.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00091	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-913.6	15.8	478.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00092	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-953.2	12.7	888.6	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00093	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-976.3	15.4	760.1	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00094	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-994.2	1.0	595.1	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00095	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1073.4	19.0	835.4	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00096	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1094.7	23.3	785.2	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00097	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1124.3	8.3	538.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00098	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1128.6	8.1	709.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00099	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1156.8	8.6	555.6	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00100	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1197.3	6.4	635.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00101	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1216.0	7.6	594.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00102	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1225.5	17.8	660.3	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00103	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1239.4	10.1	568.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00104	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-378.8	54.2	784.3	-94	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00105	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-390.6	53.9	779.7	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00106	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-400.2	54.2	807.4	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00107	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-480.9	33.9	808.8	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00108	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-575.8	8.8	910.2	-67	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00109	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-606.1	7.8	884.2	-120	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00110	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-609.4	7.8	879.5	16	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00111	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-612.2	7.8	884.0	103	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00112	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	176.2	24.4	459.5	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00113	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	191.1	25.7	465.6	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00114	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	194.3	26.1	467.7	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00115	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	214.6	32.3	511.5	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00116	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-64.8	4.6	-27.3	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00117	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	102.5	8.2	-78.7	-9	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00118	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.0	34.3	449.4	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00119	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.2	31.5	465.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00120	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	114.5	26.0	537.2	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00121	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	125.3	3.9	-56.3	-63	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00122	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	151.6	34.6	409.1	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00123	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	239.6	41.4	477.5	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00124	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	275.7	47.0	484.4	-74	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00125	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	281.9	49.0	511.2	-157	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00126	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	31.9	17.8	-229.0	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
-kas_hun_00127	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	312.4	43.2	537.6	76	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00128	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	314.6	43.1	538.0	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00129	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	34.5	17.9	-228.5	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00130	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	379.4	41.6	495.4	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00131	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	51.3	4.0	-55.1	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
-kas_hun_00132	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	52.8	4.0	-54.9	-98	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
-kas_hun_00133	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	561.5	24.0	536.5	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00134	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	564.7	23.1	528.1	-31	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00135	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	590.5	26.3	549.4	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00136	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	596.6	23.6	554.0	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00137	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	67.7	17.6	-121.9	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00138	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	69.4	34.8	-186.5	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00139	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	74.6	37.1	-183.7	-30	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00140	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	82.9	25.9	420.9	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00141	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	86.0	34.0	-193.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00142	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	87.4	16.2	-123.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00143	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	91.3	33.9	-199.7	66	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00144	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	164.3	44.1	609.9	133	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00145	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	175.7	44.2	608.5	-172	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00146	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	186.7	43.9	606.1	86	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00147	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	190.2	44.2	606.1	-89	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00148	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-36.4	17.4	-208.8	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00149	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-6.6	17.5	-194.0	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00150	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-84.2	26.9	-221.0	106	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
-kas_hun_00151	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	268.2	46.6	489.2	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00152	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	403.0	48.4	525.3	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00153	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	404.5	47.3	508.5	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	999	column	idle	0	0	0	600
-kas_hun_00154	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	409.8	48.3	528.2	177	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00155	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	410.7	46.2	494.0	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00156	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	429.1	46.6	499.3	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00157	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1016.6	1.0	670.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00158	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1023.4	3.7	622.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00159	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-128.2	1.3	-664.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00160	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-198.5	4.0	85.0	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00161	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-230.3	1.6	-615.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00162	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-239.3	1.3	-692.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00163	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-260.5	3.3	127.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00164	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-397.2	8.7	197.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00165	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-637.5	2.0	611.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00166	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-730.6	11.3	718.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00167	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-842.3	1.3	631.9	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00168	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-869.5	2.6	723.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00169	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	306.8	1.6	7.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00170	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	310.1	1.6	88.0	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00171	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	33.2	3.3	197.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00172	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	451.9	3.6	-90.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00173	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.8	1.3	-782.0	0	1	Slaver Master Klesk	ep3_qst_slavemaster_klesk	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00174	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-156.2	8.1	608.0	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00175	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-188.0	26.8	223.8	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00176	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-221.5	26.8	482.7	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00177	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-347.4	8.6	244.1	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00178	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-354.6	8.4	435.5	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00179	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-48.3	7.8	342.2	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00180	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	111.6	4.0	10.3	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00181	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	32.0	9.5	396.4	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00182	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	607.0	8.3	585.8	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00183	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-391.5	24.2	-637.7	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00184	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-396.4	24.2	-819.8	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00185	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-473.9	13.2	655.0	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00186	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-500.2	8.8	608.6	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00187	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-639.7	8.5	693.4	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00188	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	192.2	4.3	256.1	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00189	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	282.4	4.0	-183.8	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00190	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	292.4	7.7	-242.7	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00191	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	438.6	4.4	-170.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00192	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	537.3	4.7	-100.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00193	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	603.2	4.7	-163.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00194	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	704.9	1.7	0.9	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00195	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	621.8	4.2	-62.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00196	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	679.4	6.8	-128.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00197	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	682.8	4.9	50.4	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00198	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	732.8	7.8	-64.5	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00199	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	756.7	4.7	109.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00200	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	775.2	5.3	36.9	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00201	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	832.0	3.6	124.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00202	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	886.4	1.8	240.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00203	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	894.8	4.7	98.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00204	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	685.9	4.0	-56.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00205	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	759.1	6.9	135.2	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00206	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	824.4	4.3	227.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00207	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	824.6	4.3	63.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00208	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	827.4	3.6	124.5	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00209	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	896.4	3.5	106.6	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00210	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	944.3	2.7	138.0	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00211	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	966.4	2.6	174.7	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00212	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1095.8	5.6	161.8	0	1	Spiketop (an uller)	ep3_uller_spiketop	AGGRESSIVE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00213	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1029.7	2.9	187.5	0	1	an uller warhoof	ep3_uller_warhoof	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00214	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1057.2	2.5	152.5	0	1	an uller warhoof	ep3_uller_warhoof	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00215	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-316.2	24.2	-817.7	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00216	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-408.6	21.4	720.4	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00217	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.6	15.5	704.4	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00218	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-632.5	8.7	765.3	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00219	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	273.6	4.0	-109.9	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00220	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1116.1	1.7	-430.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00221	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1132.4	2.0	-370.0	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00222	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-292.9	1.8	-644.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00223	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-384.5	24.2	-516.4	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00224	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-401.2	24.2	-772.9	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00225	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-478.7	35.8	-791.4	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00226	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-495.0	35.8	-641.9	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00227	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.0	24.2	-510.1	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00228	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-572.8	35.8	-724.2	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00229	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-636.2	22.2	-680.2	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00230	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-666.2	24.3	-450.0	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00231	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-720.7	23.4	-769.6	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00232	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-846.8	24.2	-629.7	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00233	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-898.7	2.6	-499.1	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00234	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.1	2.6	-528.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00235	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.7	2.6	-544.7	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00236	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-508.0	35.8	-703.1	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00237	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-551.2	24.3	-590.3	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00238	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-572.3	24.2	-524.1	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00239	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-741.1	19.5	-451.0	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00240	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-781.7	24.2	-503.4	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00241	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-848.1	24.2	-627.4	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00242	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-545.0	35.8	-825.8	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00243	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-626.8	4.6	-602.9	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00244	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-688.1	3.7	-517.6	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00245	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-702.7	24.5	-596.4	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00246	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-718.2	3.6	-695.9	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00247	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-771.6	9.5	-573.1	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00248	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-682.1	3.4	-519.1	0	1	Stoneleg (a walluga)	ep3_walluga_stoneleg	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00249	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-52.4	1.6	-730.5	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00250	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	440.2	30.5	-494.0	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00251	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	584.9	12.2	-424.6	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00252	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1006.0	35.2	-615.0	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00253	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1074.6	35.8	-629.8	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00254	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1160.5	37.3	-604.9	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00255	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1216.3	38.1	-583.3	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00256	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1249.3	34.1	-549.6	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00257	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	435.3	14.6	-446.1	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00258	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	671.9	31.5	-474.7	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00259	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	764.6	31.5	-491.0	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00260	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	820.7	31.5	-472.5	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00261	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	889.3	31.1	-451.9	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00262	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1110.7	9.6	-422.8	0	1	Silkthrower (a webweaver)	ep3_webweaver_silkthrower	AGGRESSIVE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
-kas_hun_00263	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1042.1	3.6	-496.9	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
-kas_hun_00264	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1112.3	8.6	-428.1	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00265	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1181.3	5.3	-493.6	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00266	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	994.5	6.4	-543.7	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00267	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1015.3	4.5	-510.2	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00268	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1054.0	3.3	-550.3	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00269	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1128.9	3.4	-541.8	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00270	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1190.5	6.7	-530.6	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
-kas_hun_00271	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	461.9	11.2	-408.0	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
-kas_hun_00272	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	881.4	41.6	-488.1	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+spawn_kas_hun_1	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	221.5	23.0	567.7	95	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_2	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-95.3	8.2	373.4	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_3	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-125.3	8.3	647.7	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_4	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-143.8	6.6	425.2	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	15	0	-	idle	0	0	0	600
+spawn_kas_hun_5	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-15.4	8.3	311.7	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_6	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-166.6	26.8	545.3	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_7	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-169.0	6.1	140.1	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_8	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-283.9	6.4	345.2	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_9	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-375.7	28.3	505.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	15	0	-	idle	0	0	0	600
+spawn_kas_hun_10	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-50.0	27.2	260.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_11	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-64.7	6.4	142.8	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_12	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	0.2	10.7	349.0	0	1	a Kashyyyk bantha	ep3_bantha_kash	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_13	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-277.1	44.3	482.9	0	1	Greyclimber (a Kashyyyk bantha)	ep3_bantha_kash_greyclimber	ATTACKABLE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_14	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-117.9	27.8	213.1	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_15	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-263.4	6.6	357.6	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_16	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-274.9	44.3	485.8	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_17	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-119.6	8.3	647.0	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_18	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-221.6	27.5	462.2	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	5	LOITER	15	0	-	idle	0	0	0	600
+spawn_kas_hun_19	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-383.2	26.8	493.1	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_20	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-59.8	6.4	143.6	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch	ATTACKABLE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_21	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-122.4	1.3	-782.5	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_22	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-126.8	1.3	-788.6	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_23	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-135.1	1.6	-776.5	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_24	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-147.0	2.4	-747.8	0	1	a blackscale guard	ep3_blackscale_guard	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_25	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-409.4	8.8	273.4	0	1	a Chiss poacher	ep3_chiss_poacher	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_26	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1068.3	1.0	121.9	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_27	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1085.1	3.6	-101.9	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_28	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1095.8	1.0	92.8	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_29	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1107.9	2.7	-60.8	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_30	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1108.0	3.6	-3.1	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_31	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1109.3	3.6	43.6	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_32	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1109.9	3.6	71.5	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_33	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1148.3	3.0	-169.4	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_34	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1171.7	2.7	-213.3	0	1	a Chiss poacher defender	ep3_chiss_poacher_defender	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_35	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1177.4	4.0	-136.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_36	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1182.0	12.5	-97.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_37	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1195.1	3.7	69.1	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_38	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1196.9	3.6	-124.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_39	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1199.5	3.6	44.0	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_40	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1201.6	3.6	84.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_41	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1202.5	3.6	-7.4	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_42	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1204.2	3.6	-133.1	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_43	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1206.7	3.6	-85.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_44	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1211.7	3.6	-21.9	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_45	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1216.1	3.6	-113.9	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_46	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1220.1	3.6	2.2	0	1	a Chiss poacher hunt master	ep3_chiss_poacher_hunt_master	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_47	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1137.5	11.6	-141.8	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_48	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1139.1	3.9	20.0	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_49	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1140.1	3.8	62.4	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_50	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1145.5	3.6	-66.5	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_51	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1159.1	3.6	-70.1	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_52	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1162.6	3.9	63.6	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_53	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1178.8	3.6	-72.6	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_54	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1182.8	3.6	-41.3	0	1	a Chiss poacher smuggler	ep3_chiss_poacher_smuggler	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_55	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.5	8.4	592.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_56	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-224.5	26.8	586.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_57	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-269.8	8.4	257.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_58	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-71.2	28.7	254.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_59	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	172.9	4.0	-21.8	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_60	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	235.9	1.6	101.4	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_61	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	394.2	1.9	23.5	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_62	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	592.7	8.4	591.8	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_63	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	64.8	8.7	367.2	0	1	a fern bicker	ep3_fern_bicker	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_64	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1072.0	2.2	-499.6	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_65	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1157.1	2.0	-256.0	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_66	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-916.0	8.1	665.4	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_67	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-921.3	2.6	-566.5	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_68	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	228.0	8.1	-402.5	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_69	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	541.1	31.3	-586.0	0	1	a kkryytch	ep3_kkryytch	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_70	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1213.0	3.6	-127.2	0	1	Laen Pieweto (Chiss poacher leader)	ep3_laen_pieweto	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_71	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1074.5	8.1	623.5	0	1	a mouf	ep3_mouf	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_72	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1096.5	6.9	712.7	0	1	a mouf	ep3_mouf	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_73	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1169.6	23.3	739.1	0	1	Brightclaw (a mouf)	ep3_mouf_brightclaw	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_74	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-922.6	13.0	921.3	0	1	Paleclaw (a mouf)	ep3_mouf_paleclaw	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_75	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1150.0	23.9	660.0	0	1	a mouf roarlord	ep3_mouf_roarlord	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_76	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1171.8	23.4	725.7	0	1	a mouf roarlord	ep3_mouf_roarlord	ATTACKABLE	E	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_77	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-242.5	8.4	676.2	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_78	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-266.0	11.2	688.9	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_79	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-289.2	8.3	648.2	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_80	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.5	8.8	647.6	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_81	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-603.3	2.1	565.4	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_82	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-740.5	8.4	599.8	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_83	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-746.7	0.3	534.0	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_84	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-823.9	17.7	871.5	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_85	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-824.8	17.7	874.5	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_86	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-833.8	15.4	811.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_87	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-852.2	1.0	291.0	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_88	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-892.4	24.5	870.8	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_89	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-898.5	15.8	514.9	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_90	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-913.0	16.7	817.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_91	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-913.6	15.8	478.3	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_92	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-953.2	12.7	888.6	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_93	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-976.3	15.4	760.1	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_94	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-994.2	1.0	595.1	0	1	a vibrant mouf	ep3_mouf_vibrant	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_95	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1073.4	19.0	835.4	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_96	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1094.7	23.3	785.2	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_97	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1124.3	8.3	538.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_98	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1128.6	8.1	709.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_99	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1156.8	8.6	555.6	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_100	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1197.3	6.4	635.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_101	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1216.0	7.6	594.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_102	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1225.5	17.8	660.3	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_103	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1239.4	10.1	568.9	0	1	a vicious mouf	ep3_mouf_vicious	ATTACKABLE	N	45	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_104	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-378.8	54.2	784.3	-94	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_105	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-390.6	53.9	779.7	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_106	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-400.2	54.2	807.4	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	patrol_kas_hunting_500	column	idle	0	0	0	600
+spawn_kas_hun_107	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-480.9	33.9	808.8	0	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_108	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-575.8	8.8	910.2	-67	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_109	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-606.1	7.8	884.2	-120	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_110	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-609.4	7.8	879.5	16	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_111	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-612.2	7.8	884.0	103	1	a recovering Arcona	ep3_npc_arcona_addict	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_112	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	176.2	24.4	459.5	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_113	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	191.1	25.7	465.6	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_114	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	194.3	26.1	467.7	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_115	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	214.6	32.3	511.5	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	patrol_kas_hunting_600	column	idle	0	0	0	600
+spawn_kas_hun_116	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-64.8	4.6	-27.3	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	patrol_kas_hunting_700	column	idle	0	0	0	600
+spawn_kas_hun_117	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	102.5	8.2	-78.7	-9	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_118	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.0	33.5	449.4	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_119	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.2	31.5	465.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_120	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	114.5	26.0	537.2	-29	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_121	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	125.3	3.9	-56.3	-63	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_122	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	151.6	33.5	409.1	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_123	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	239.6	41.4	477.5	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_124	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	275.7	47.0	484.4	-74	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_125	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	281.9	49.0	511.2	-157	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_126	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	31.9	17.8	-229.0	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_kas_hun_127	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	312.4	43.2	537.6	76	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_128	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	314.6	43.1	538.0	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_129	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	34.5	17.9	-228.5	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_130	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	374.5	40.8	472.0	64	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_131	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	51.3	4.0	-55.1	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_kas_hun_132	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	52.8	4.0	-54.9	-98	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_kas_hun_129	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	558.8	24.6	538.6	-21	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_134	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	564.7	23.1	528.1	-31	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_135	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	590.5	26.3	549.4	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_136	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	596.6	23.6	554.0	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_137	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	67.7	17.6	-121.9	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_138	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	69.4	34.8	-186.5	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_139	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	74.6	36.2	-183.7	-30	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_140	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	82.9	25.9	420.9	-141	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_141	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	86.0	34.0	-193.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	patrol_kas_hunting_800	column	idle	0	0	0	600
+spawn_kas_hun_142	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	87.4	16.2	-123.6	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_143	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	91.3	33.9	-199.7	66	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_144	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	164.3	44.1	609.9	133	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_145	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	175.7	44.2	608.5	-172	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_146	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	186.7	43.9	606.1	86	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_147	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	190.2	44.2	606.1	-89	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_148	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-36.4	17.4	-208.8	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_149	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-6.6	17.5	-194.0	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_150	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-84.2	26.9	-221.0	106	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_151	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	268.2	46.6	489.2	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	PATROL	0	patrol_kas_hunting_900	column	idle	0	0	0	600
+spawn_kas_hun_152	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	401.7	48.2	527.4	-46	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_hun_153	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	414.2	47.3	510.9	71	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_kas_hun_154	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	409.8	48.3	528.2	177	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_155	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	410.7	46.2	494.0	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_156	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	429.1	46.6	499.3	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan	INVULNERABLE	N	100	100	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_157	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1016.6	1.0	670.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_158	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1023.4	3.7	622.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_159	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-128.2	1.3	-664.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_160	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-198.5	4.0	85.0	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_161	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-230.3	1.6	-615.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_162	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-239.3	1.3	-692.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_163	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-260.5	3.3	127.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_164	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-397.2	8.7	197.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_165	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-637.5	2.0	611.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_166	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-730.6	11.3	718.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_167	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-842.3	1.3	631.9	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_168	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-869.5	2.6	723.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_169	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	306.8	1.6	7.3	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_170	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	310.1	1.6	88.0	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_171	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	33.2	3.3	197.7	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_172	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	451.9	3.6	-90.8	0	1	a pug jumper	ep3_pug_jumper	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_173	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.8	1.3	-782.0	0	1	Slaver Master Klesk	ep3_qst_slavemaster_klesk	ATTACKABLE	B	45	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_174	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-156.2	8.1	608.0	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_175	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-188.0	26.8	223.8	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_176	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-221.5	26.8	482.7	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_177	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-347.4	8.6	244.1	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_178	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-354.6	8.4	435.5	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_179	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-48.3	7.8	342.2	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_180	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	111.6	4.0	10.3	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_181	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	32.0	9.5	396.4	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_182	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	607.0	8.3	585.8	0	1	a ro-roo	ep3_roroo	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_183	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-391.5	24.2	-637.7	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_184	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-396.4	24.2	-819.8	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_185	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-473.9	13.2	655.0	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_186	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-500.2	8.8	608.6	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_187	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-639.7	8.5	693.4	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_188	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	192.2	4.3	256.1	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_189	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	282.4	4.0	-183.8	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_190	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	292.4	7.7	-242.7	0	1	a sathog	ep3_sathog	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_191	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	438.6	4.4	-170.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_192	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	537.3	4.7	-100.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_193	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	603.2	4.7	-163.5	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_194	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	704.9	1.7	0.9	0	1	an uller	ep3_uller	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_195	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	621.8	4.2	-62.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_196	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	679.4	6.8	-128.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_197	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	682.8	4.9	50.4	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_198	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	732.8	7.8	-64.5	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_199	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	756.7	4.7	109.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_200	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	775.2	5.3	36.9	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_201	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	832.0	3.6	124.0	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_202	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	886.4	1.8	240.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_203	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	894.8	4.7	98.6	0	1	a diseased uller	ep3_uller_diseased	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_204	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	685.9	4.0	-56.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_205	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	759.1	6.9	135.2	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_206	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	824.4	4.3	227.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_207	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	824.6	4.3	63.8	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_208	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	827.4	3.6	124.5	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_209	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	896.4	3.5	106.6	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_210	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	944.3	2.7	138.0	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_211	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	966.4	2.6	174.7	0	1	an elder uller	ep3_uller_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_212	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1095.8	5.6	161.8	0	1	Spiketop (an uller)	ep3_uller_spiketop	AGGRESSIVE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_213	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1029.7	2.9	187.5	0	1	an uller warhoof	ep3_uller_warhoof	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_214	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1057.2	2.5	152.5	0	1	an uller warhoof	ep3_uller_warhoof	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_215	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-316.2	24.2	-817.7	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_216	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-408.6	21.4	720.4	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_217	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.6	15.5	704.4	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_218	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-632.5	8.7	765.3	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_219	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	273.6	4.0	-109.9	0	1	a jyykle vulture	ep3_vulture_jyykle	ATTACKABLE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_220	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1116.1	1.7	-430.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_221	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1132.4	2.0	-370.0	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_222	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-292.9	1.8	-644.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_223	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-384.5	24.2	-516.4	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_224	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-401.2	24.2	-772.9	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_225	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-478.7	35.8	-791.4	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_226	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-495.0	35.8	-641.9	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_227	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-528.0	24.2	-510.1	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_228	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-572.8	35.8	-724.2	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_229	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-636.2	22.2	-680.2	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_230	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-666.2	24.3	-450.0	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_231	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-720.7	23.4	-769.6	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_232	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-846.8	24.2	-629.7	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_233	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-898.7	2.6	-499.1	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_234	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.1	2.6	-528.5	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_235	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.7	2.6	-544.7	0	1	a walluga	ep3_walluga	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_236	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-508.0	35.8	-703.1	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_237	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-551.2	24.3	-590.3	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_238	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-572.3	24.2	-524.1	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_239	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-741.1	19.5	-451.0	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_240	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-781.7	24.2	-503.4	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_241	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-848.1	24.2	-627.4	0	1	an elder walluga	ep3_walluga_elder	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_242	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-545.0	35.8	-825.8	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_243	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-626.8	4.6	-602.9	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_244	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-688.1	3.7	-517.6	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_245	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-702.7	24.5	-596.4	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_246	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-718.2	3.6	-695.9	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_247	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-771.6	9.5	-573.1	0	1	a frenzied walluga	ep3_walluga_frenzied	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_248	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-682.1	3.4	-519.1	0	1	Stoneleg (a walluga)	ep3_walluga_stoneleg	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_249	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-52.4	1.6	-730.5	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_250	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	440.2	30.5	-494.0	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_251	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	584.9	12.2	-424.6	0	1	a webweaver	ep3_webweaver	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_252	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1006.0	35.2	-615.0	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_253	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1074.6	35.8	-629.8	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_254	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1160.5	37.3	-604.9	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_255	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1216.3	38.1	-583.3	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_256	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1249.3	34.1	-549.6	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_257	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	435.3	14.6	-446.1	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_258	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	671.9	31.5	-474.7	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_259	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	764.6	31.5	-491.0	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_260	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	820.7	31.5	-472.5	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_261	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	889.3	31.1	-451.9	0	1	a crazed webweaver	ep3_webweaver_crazed	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_262	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1110.7	9.6	-422.8	0	1	Silkthrower (a webweaver)	ep3_webweaver_silkthrower	AGGRESSIVE	B	40	50	Dungeon	Etyyy Hunting Grounds	1	TURN	0	0	-	idle	0	0	0	600
+spawn_kas_hun_263	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1042.1	3.6	-496.9	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_kas_hun_264	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1112.3	8.6	-428.1	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_265	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1181.3	5.3	-493.6	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_266	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	994.5	6.4	-543.7	0	1	a webweaver spiker	ep3_webweaver_spiker	AGGRESSIVE	N	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_267	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1015.3	4.5	-510.2	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_268	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1054.0	3.3	-550.3	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_269	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1128.9	3.4	-541.8	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_270	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1190.5	6.7	-530.6	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600
+spawn_kas_hun_271	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	461.9	11.2	-408.0	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_kas_hun_272	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	881.4	41.6	-488.1	0	1	a webweaver warrior	ep3_webweaver_warrior	AGGRESSIVE	E	40	50	Dungeon	Etyyy Hunting Grounds	3	LOITER	9	0	-	idle	0	0	0	600

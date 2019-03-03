@@ -20,7 +20,7 @@ public final class CmdCreateStaticItem implements ICmdCallback {
 		new CreateStaticItemIntent(creature, inventory, new CreateStaticItemCallback(player), args).broadcast();
 	}
 	
-	private static class CreateStaticItemCallback extends StaticItemService.ObjectCreationHandler {
+	private static class CreateStaticItemCallback implements StaticItemService.ObjectCreationHandler {
 		
 		@NotNull
 		private final Player player;

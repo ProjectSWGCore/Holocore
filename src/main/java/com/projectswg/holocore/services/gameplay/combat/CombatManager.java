@@ -27,6 +27,7 @@
 package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
+import com.projectswg.holocore.services.gameplay.combat.buffs.PowerupService;
 import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
 import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
@@ -36,19 +37,16 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		BuffService.class,
-		
 		CloningService.class,
-		
 		DuelService.class,
-		
 		LootManager.class,
-		
 		CombatCommandService.class,
 		CombatDeathblowService.class,
 		CombatExperienceService.class,
 		CombatNpcService.class,
 		CombatRegenerationService.class,
 		CombatStatusService.class,
+		PowerupService.class,
 })
 public class CombatManager extends Manager {
 	

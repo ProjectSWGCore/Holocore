@@ -1,5 +1,6 @@
 package com.projectswg.holocore.resources.support.objects.radial.terminal;
 
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
@@ -44,7 +45,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Tools");
 				listBox.addListItem("Travel");
 				listBox.addListItem("Vehicles");
-				listBox.addListItem("Stack test");
+				listBox.addListItem("Powerups");
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -63,7 +64,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 3: handleTools(player); break;
 			case 4: handleTravel(player); break;
 			case 5: handleVehicles(player); break;
-			case 6: handleStackTest(player); break;
+			case 6: handlePowerups(player); break;
 		}
 	}
 	
@@ -1389,15 +1390,26 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		}
 	}
 	
-	private static void handleStackTest(Player player) {
-		TangibleObject stackObject = ObjectCreator.createObjectFromTemplate("object/tangible/dice/shared_eqp_chance_cube.iff", TangibleObject.class);
+	private static void handlePowerups(Player player) {
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","constitution_modified", "100");	// Breastplate
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "constitution_modified", "100");	// Shirt
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "constitution_modified", "100");	// Weapon
+	}
+	
+	private static void spawnPowerup(Player player, String template, String stfKey, String modifier, String value) {
+		TangibleObject powerup = (TangibleObject) ObjectCreator.createObjectFromTemplate(template);
+		powerup.setStf("static_item_n", stfKey);
+		powerup.setDetailStf(new StringId("static_item_d", stfKey));
+		
+		powerup.addAttribute("@stat_n:" + modifier, value);
+		
 		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		
-		stackObject.setCounter(6);
-		stackObject.moveToContainer(inventory);
+		powerup.setCounter(250);
+		powerup.moveToContainer(inventory);
 		
-		ObjectCreatedIntent.broadcast(stackObject);
+		ObjectCreatedIntent.broadcast(powerup);
 	}
 	
 }
