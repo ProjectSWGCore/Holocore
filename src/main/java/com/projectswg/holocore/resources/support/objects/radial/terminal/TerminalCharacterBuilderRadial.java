@@ -46,6 +46,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Travel");
 				listBox.addListItem("Vehicles");
 				listBox.addListItem("Powerups");
+				listBox.addListItem("5* Sets");
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -65,6 +66,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 4: handleTravel(player); break;
 			case 5: handleVehicles(player); break;
 			case 6: handlePowerups(player); break;
+			case 7: handleJewelrySets(player); break;
 		}
 	}
 	
@@ -1394,6 +1396,44 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","constitution_modified", "100");	// Breastplate
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "constitution_modified", "100");	// Shirt
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "constitution_modified", "100");	// Weapon
+	}
+	
+	private static void handleJewelrySets(Player player) {
+		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of jewelry to receive.");
+		
+		listBox.addListItem("Bounty Hunter - Enforcer's Set");
+		
+		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSetSelection", (event, parameters) -> handleJewelrySelection(player, parameters));
+		listBox.display(player);
+	}
+	
+	private static void handleJewelrySelection(Player player, Map<String, String> parameters) {
+		int selectedRow = SuiListBox.getSelectedRow(parameters);
+		
+		switch (selectedRow) {
+			case 0:
+				CreatureObject creatureObject = player.getCreatureObject();
+				SWGObject inventory = creatureObject.getInventory();
+				
+				enforcersSetPiece(inventory, "object/tangible/wearables/ring/shared_ring_s01.iff");
+				enforcersSetPiece(inventory, "object/tangible/wearables/ring/shared_ring_s03.iff");
+				enforcersSetPiece(inventory, "object/tangible/wearables/necklace/shared_necklace_s01.iff");
+				enforcersSetPiece(inventory, "object/tangible/wearables/bracelet/shared_bracelet_s02_l.iff");
+				enforcersSetPiece(inventory, "object/tangible/wearables/bracelet/shared_bracelet_s02_r.iff");
+				break;
+		}
+	}
+	
+	private static void enforcersSetPiece(SWGObject destination, String template) {
+		SWGObject item = ObjectCreator.createObjectFromTemplate(template);
+		
+		item.addAttribute("@set_bonus:piece_bonus_count_3", "@set_bonus:set_bonus_bh_dps_1");
+		item.addAttribute("@set_bonus:piece_bonus_count_4", "@set_bonus:set_bonus_bh_dps_2");
+		item.addAttribute("@set_bonus:piece_bonus_count_5", "@set_bonus:set_bonus_bh_dps_3");
+		
+		ObjectCreatedIntent.broadcast(item);
+		
+		item.moveToContainer(destination);
 	}
 	
 	private static void spawnPowerup(Player player, String template, String stfKey, String modifier, String value) {

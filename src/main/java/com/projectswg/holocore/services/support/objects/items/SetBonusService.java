@@ -77,7 +77,7 @@ public class SetBonusService extends Service {
 			int bonus = findBonus(matchingPieces - 1, object, true);
 			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
 			
-			checkSetBonus(creature, object, attribute);
+			checkSetBonus(creature, object, attribute, false);
 		} else if (oldContainer instanceof CreatureObject) {
 			// They unequipped an object
 			CreatureObject creature = (CreatureObject) oldContainer;
@@ -89,23 +89,25 @@ public class SetBonusService extends Service {
 			int bonus = findBonus(matchingPieces, object, remove);	// Look for a lower rank of the set bonus to apply
 			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
 			
-			checkSetBonus(creature, object, attribute);
+			checkSetBonus(creature, object, attribute, remove);
 		}
 	}
 	
-	private void checkSetBonus(CreatureObject creature, SWGObject object, String attribute) {
+	private void checkSetBonus(CreatureObject creature, SWGObject object, String attribute, boolean remove) {
 		String attributeValue = object.getAttribute(attribute);
 		String buffName = buffName(attributeValue);
 		String message = sysMessage(attributeValue);
 		
-		// Grant the relevant buff
-		BuffIntent.broadcast(buffName, creature, creature, false);
+		// Grant or remove the relevant buff
+		BuffIntent.broadcast(buffName, creature, creature, remove);
 		
 		// Display relevant system message if they are a player
-		Player owner = creature.getOwner();
-		
-		if (owner != null) {
-			SystemMessageIntent.broadcastPersonal(owner, message);
+		if (!remove) {
+			Player owner = creature.getOwner();
+			
+			if (owner != null) {
+				SystemMessageIntent.broadcastPersonal(owner, message);
+			}
 		}
 	}
 	
@@ -143,7 +145,7 @@ public class SetBonusService extends Service {
 		int end = up ? MAX_SET_PIECES : matchingPieces;
 		int current = start;
 		
-		while (current++ <= end) {
+		while (++current <= end) {
 			String attribute = "@set_bonus:piece_bonus_count_" + current;
 			String bonus = object.getAttribute(attribute);
 			
