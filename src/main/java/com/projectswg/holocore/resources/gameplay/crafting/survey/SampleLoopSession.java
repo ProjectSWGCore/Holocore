@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.gameplay.crafting.survey;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
@@ -58,12 +59,14 @@ import com.projectswg.holocore.resources.support.objects.permissions.ContainerRe
 import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.resource.ResourceContainerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -72,65 +75,96 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SampleLoopSession {
 	
-	private final CreatureObject creature;
-	private final TangibleObject surveyTool;
-	private final GalacticResource resource;
+	private final @NotNull CreatureObject creature;
+	private final @NotNull TangibleObject surveyTool;
+	private final @NotNull GalacticResource resource;
+	private final @NotNull Location sampleLocation;
 	
 	private SuiWindow sampleWindow;
-	private Location sampleLocation;
 	private ScheduledFuture<?> loopFuture;
 	private boolean paused;
 	private int sampleMultiplier;
 	
-	public SampleLoopSession(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource) {
+	public SampleLoopSession(@NotNull CreatureObject creature, @NotNull TangibleObject surveyTool, @NotNull GalacticResource resource, @NotNull Location sampleLocation) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
 		this.resource = resource;
+		this.sampleLocation = sampleLocation;
 		
 		this.sampleWindow = null;
-		this.sampleLocation = null;
 		this.loopFuture = null;
 		this.paused = false;
 		this.sampleMultiplier = 1;
 	}
 	
-	public synchronized void startSession(ScheduledThreadPool executor, GalacticResource resource, Location sampleLocation) {
-		this.sampleLocation = sampleLocation;
+	public boolean isMatching(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource, Location sampleLocation) {
+		if (this.sampleLocation.distanceTo(sampleLocation) >= 0.5 || this.sampleLocation.getTerrain() != sampleLocation.getTerrain())
+			return false; // Too far away for the same session
+		return this.creature.equals(creature) && this.surveyTool.equals(surveyTool) && this.resource.equals(resource);
+	}
+	
+	public synchronized boolean isSampling() {
+		return loopFuture != null && !loopFuture.isDone();
+	}
+	
+	public synchronized void onPlayerMoved() {
+		Location oldLocation = sampleLocation;
+		Location newLocation = creature.getWorldLocation();
+		
+		if (oldLocation.distanceTo(newLocation) >= 0.5 || oldLocation.getTerrain() != newLocation.getTerrain())
+			stopSession();
+	}
+	
+	/**
+	 * Attempts to start the sample loop session with the specified executor.  If the loop is unable to start, this function returns false; otherwise this function returns true.
+	 * @param executor the executor for the loop to run on
+	 * @return TRUE if the sample loop has begin, FALSE otherwise
+	 */
+	public synchronized boolean startSession(ScheduledThreadPool executor) {
 		if (loopFuture != null) {
 			loopFuture.cancel(false);
 		}
+		double concentration = getConcentration();
+		if (!isAllowedToSample(concentration))
+			return false;
+		
 		loopFuture = executor.executeWithFixedRate(5000, 5000, this::sample);
+		creature.setPosture(Posture.CROUCHED);
+		creature.setMovementPercent(0);
+		creature.setTurnScale(0);
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:start_sampling"), "TO", resource.getName())));
+		StandardLog.onPlayerTrace(this, creature, "started a sample session with %s and concentration %.1f", resource.getName(), concentration);
+		return true;
 	}
 	
 	public synchronized void stopSession() {
 		if (loopFuture != null)
 			loopFuture.cancel(false);
+		else
+			return;
 		loopFuture = null;
+		if (sampleWindow != null) {
+			Player owner = creature.getOwner();
+			if (owner != null)
+				sampleWindow.close(owner);
+		}
+		sampleWindow = null;
+		
+		creature.setPosture(Posture.UPRIGHT);
+		creature.setMovementPercent(1);
+		creature.setTurnScale(1);
+		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_cancel"));
 	}
 	
-	private synchronized void sample() {
-		if (GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain()).isEmpty()) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_empty"));
-			stopSession();
-			return;
-		}
-		if (!creature.getInventory().getContainedObjects().contains(surveyTool)) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_gone"));
-			stopSession();
-			return;
-		}
-		double concentration = getConcentration();
-		if (concentration <= 0.3) {
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:density_below_threshold"), "TO", resource.getName())));
-			stopSession();
-			return;
-		}
-		if (paused)
+	private void sample() {
+		final double concentration = getConcentration();
+		if (!isAllowedToSample(concentration) || paused)
 			return;
 		
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		if (random.nextDouble() > concentration) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_failed"), "TO", resource.getName())));
+			sendSampleEffects();
 			return;
 		}
 		
@@ -167,8 +201,7 @@ public class SampleLoopSession {
 				ObjectCreatedIntent.broadcast(resourceObject);
 				break;
 		}
-		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
-		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
+		sendSampleEffects();
 	}
 	
 	private void openConcentrationWindow() {
@@ -230,9 +263,6 @@ public class SampleLoopSession {
 	}
 	
 	private void createHighestConcentrationWaypoint() {
-		if (sampleLocation == null)
-			return;
-		
 		double highestX = sampleLocation.getX();
 		double highestZ = sampleLocation.getZ();
 		double highest = 0;
@@ -256,6 +286,41 @@ public class SampleLoopSession {
 				.filter(e -> e.getValue().getTerrain() == sampleLocation.getTerrain()).map(Entry::getKey).forEach(creature.getPlayerObject()::removeWaypoint);
 		createResourceWaypoint(Location.builder(sampleLocation).setX(highestX).setZ(highestZ).build());
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:node_waypoint"));
+	}
+	
+	private boolean isAllowedToSample(double concentration) {
+		if (GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain()).isEmpty()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_empty"));
+			stopSession();
+			return false;
+		}
+		if (!creature.getInventory().getContainedObjects().contains(surveyTool)) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_gone"));
+			stopSession();
+			return false;
+		}
+		if (creature.getSkillModValue("surveying") < 20) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "You aren't allowed to sample without a surveying skillmod"));
+			return false;
+		}
+		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "You aren't allowed to sample while on a mount"));
+			return false;
+		}
+		if (creature.getParent() != null) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "You aren't allowed to sample while within a building"));
+			return false;
+		}
+		if (creature.isInCombat()) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_cancel_attack"));
+			return false;
+		}
+		if (concentration <= 0.3) {
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:density_below_threshold"), "TO", resource.getName())));
+			stopSession();
+			return false;
+		}
+		return true;
 	}
 	
 	private double getConcentration() {
@@ -295,8 +360,13 @@ public class SampleLoopSession {
 		transferStat(obj, "res_toughness", stats.getUnitToughness());
 	}
 	
-	private static void transferStat(TangibleObject obj, String name, int attr) {
+	private void transferStat(TangibleObject obj, String name, int attr) {
 		obj.addAttribute("@obj_attr_n:" + name, String.valueOf(attr));
+	}
+	
+	private void sendSampleEffects() {
+		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
+		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
 	
 	private String getMusicFile() {
