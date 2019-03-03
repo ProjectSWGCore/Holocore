@@ -40,6 +40,7 @@ import java.util.Objects;
 
 public class SetBonusService extends Service {
 	
+	private static final int MIN_SET_PIECES = 2;
 	private static final int MAX_SET_PIECES = 11;
 	
 	public SetBonusService() {
@@ -63,11 +64,9 @@ public class SetBonusService extends Service {
 			return;
 		}
 		
-		// TODO check if equip or unequip
 		if (newContainer instanceof CreatureObject) {
 			// They equipped an object
 			CreatureObject creature = (CreatureObject) newContainer;
-			
 			int matchingPieces = matchingPieces(creature, object);
 			
 			if (matchingPieces < minPiecesRequired) {
@@ -77,19 +76,8 @@ public class SetBonusService extends Service {
 			
 			int bonus = findBonus(matchingPieces - 1, object, true);
 			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
-			String attributeValue = object.getAttribute(attribute);
-			String buffName = buffName(attributeValue);
-			String message = sysMessage(attributeValue);
 			
-			// Grant the relevant buff
-			BuffIntent.broadcast(buffName, creature, creature, false);
-			
-			// Display relevant system message if they are a player
-			Player owner = newContainer.getOwner();
-			
-			if (owner != null) {
-				SystemMessageIntent.broadcastPersonal(owner, message);
-			}
+			checkSetBonus(creature, object, attribute);
 		} else if (oldContainer instanceof CreatureObject) {
 			// They unequipped an object
 			CreatureObject creature = (CreatureObject) oldContainer;
@@ -100,18 +88,24 @@ public class SetBonusService extends Service {
 			// They still have enough pieces of the set equipped to receive a bonus
 			int bonus = findBonus(matchingPieces, object, remove);	// Look for a lower rank of the set bonus to apply
 			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
-			String attributeValue = object.getAttribute(attribute);
-			String buffName = buffName(attributeValue);
-			String message = sysMessage(attributeValue);
 			
-			BuffIntent.broadcast(buffName, creature, creature, remove);
-			
-			// Display relevant system message if they are a player
-			Player owner = creature.getOwner();
-			
-			if (!remove && owner != null) {
-				SystemMessageIntent.broadcastPersonal(owner, message);
-			}
+			checkSetBonus(creature, object, attribute);
+		}
+	}
+	
+	private void checkSetBonus(CreatureObject creature, SWGObject object, String attribute) {
+		String attributeValue = object.getAttribute(attribute);
+		String buffName = buffName(attributeValue);
+		String message = sysMessage(attributeValue);
+		
+		// Grant the relevant buff
+		BuffIntent.broadcast(buffName, creature, creature, false);
+		
+		// Display relevant system message if they are a player
+		Player owner = creature.getOwner();
+		
+		if (owner != null) {
+			SystemMessageIntent.broadcastPersonal(owner, message);
 		}
 	}
 	
@@ -124,7 +118,7 @@ public class SetBonusService extends Service {
 	}
 	
 	private int minPiecesRequired(SWGObject object) {
-		for (int i = 2; i <= 11; i++) {
+		for (int i = MIN_SET_PIECES; i <= MAX_SET_PIECES; i++) {
 			String attribute = "@set_bonus:piece_bonus_count_" + i;
 			String bonus = object.getAttribute(attribute);
 			
@@ -136,6 +130,14 @@ public class SetBonusService extends Service {
 		return -1;
 	}
 	
+	/**
+	 * Finds the nearest bonus for the given amount of matching pieces. The search can go up or down.
+	 * @param matchingPieces amount of pieces equipped for this set
+	 * @param object to search for the nearest bonus on
+	 * @param up if {@code true} then the search will find the next available bonus. If {@code false} then the search
+	 *           will find the bonus that the creature should already have.
+	 * @return the number for the resulting bonus
+	 */
 	private int findBonus(int matchingPieces, SWGObject object, boolean up) {
 		int start = up ? matchingPieces : MAX_SET_PIECES;
 		int end = up ? MAX_SET_PIECES : matchingPieces;
@@ -168,7 +170,7 @@ public class SetBonusService extends Service {
 	}
 	
 	private boolean match(SWGObject object1, SWGObject object2) {
-		for (int i = 2; i <= MAX_SET_PIECES; i++) {
+		for (int i = MIN_SET_PIECES; i <= MAX_SET_PIECES; i++) {
 			String attribute = "@set_bonus:piece_bonus_count_" + i;
 			String o1Bonus = object1.getAttribute(attribute);
 			String o2Bonus = object2.getAttribute(attribute);
