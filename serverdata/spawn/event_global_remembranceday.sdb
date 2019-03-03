@@ -1,3 +1,3 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-eve_rem_001	TATOOINE	tat_world	AREA	0	0	0	0	0	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Remembrance Day	1	IDLE	0	0	-	themepark_music_3	0	0	0	600
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+spawn_eve_rem_1	TATOOINE	tat_world	AREA	0	0	0	0	0	1	Figrin D'an	event_lifeday_figrin_dan	INVULNERABLE	N	100	100	event	Remembrance Day	1	IDLE	0	0	-	themepark_music_3	0	0	0	600

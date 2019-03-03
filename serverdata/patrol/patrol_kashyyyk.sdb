@@ -1,0 +1,125 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_kas_dead_100	patrol_kas_dead_100	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	106.4	25.9	-352.0	0	Dead Forest - Cyrans the Unfeeling
+patrol_kas_dead_101	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	142.3	23.9	-351.3	0	
+patrol_kas_dead_102	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	182.2	23.8	-365.4	0	
+patrol_kas_dead_103	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	206.8	23.8	-405.5	0	
+patrol_kas_dead_104	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	240.8	23.8	-430.5	0	
+patrol_kas_dead_105	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	278.0	23.8	-421.6	0	
+patrol_kas_dead_106	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	330.7	23.8	-372.2	0	
+patrol_kas_dead_107	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	360.1	23.8	-357.9	0	
+patrol_kas_dead_108	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	406.6	25.9	-389.1	0	
+patrol_kas_dead_109	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	410.4	26.9	-440.3	0	
+patrol_kas_dead_200	patrol_kas_dead_200	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	87.6	29.4	-476.6	0	Dead Forest - a kerritamba warrior
+patrol_kas_dead_201	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	81.2	26.9	-437.7	0	
+patrol_kas_dead_202	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	46.9	26.4	-374.5	0	
+patrol_kas_dead_203	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	6.4	26.4	-300.0	0	
+patrol_kas_dead_204	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-18.7	26.4	289.9	0	
+patrol_kas_dead_205	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-56.7	26.4	-298.4	0	
+patrol_kas_dead_300	patrol_kas_dead_300	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-67.0	25.7	-297.2	0	Dead Forest - a kerritamba warrior
+patrol_kas_dead_301	patrol_kas_dead_300		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-153.2	16.5	-254.8	0	
+patrol_kas_dead_302	patrol_kas_dead_300		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-18.9	16.5	-233.7	0	
+patrol_kas_dead_303	patrol_kas_dead_300		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-215.0	9.7	-197.5	0	
+patrol_kas_dead_304	patrol_kas_dead_300		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-233.5	3.5	-144.1	0	
+patrol_kas_dead_305	patrol_kas_dead_300		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-239.6	1.4	-111.2	0	
+patrol_kas_dead_400	patrol_kas_dead_400	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-239.7	1.4	-104.4	0	Dead Forest - a kerritamba warrior
+patrol_kas_dead_401	patrol_kas_dead_400		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-272.4	1.4	-79.0	0	
+patrol_kas_dead_402	patrol_kas_dead_400		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-366.9	1.4	-109.7	0	
+patrol_kas_dead_403	patrol_kas_dead_400		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-379.2	1.4	-140.7	0	
+patrol_kas_dead_404	patrol_kas_dead_400		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-405.7	1.4	-97.1	0	
+patrol_kas_dead_405	patrol_kas_dead_400		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	-397.7	1.4	-69.1	0	
+patrol_kas_hunting_500	patrol_kas_hunting_500	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-400.2	54.2	807.4	0	Hunting - a recovering Arcona
+patrol_kas_hunting_501	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	-411.0	54.0	822.7	0	
+patrol_kas_hunting_502	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	-422.2	39.1	783.5	0	
+patrol_kas_hunting_503	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	-461.7	21.1	713.0	0	
+patrol_kas_hunting_600	patrol_kas_hunting_600	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	214.6	32.3	511.5	0	Hunting - a Rodian hunter (Ehartt's clan)
+patrol_kas_hunting_601	patrol_kas_hunting_600		KASHYYYK_HUNTING	kas_hunting_world	0	222.7	32.0	503.4	0	
+patrol_kas_hunting_602	patrol_kas_hunting_600		KASHYYYK_HUNTING	kas_hunting_world	0	205.3	26.2	464.7	0	
+patrol_kas_hunting_603	patrol_kas_hunting_600		KASHYYYK_HUNTING	kas_hunting_world	0	166.3	24.8	450.5	0	
+patrol_kas_hunting_604	patrol_kas_hunting_600		KASHYYYK_HUNTING	kas_hunting_world	0	124.8	31.3	459.8	0	
+patrol_kas_hunting_700	patrol_kas_hunting_700	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-64.8	4.6	-27.3	0	Hunting - a Rodian hunter (Sordaan's clan)
+patrol_kas_hunting_701	patrol_kas_hunting_700		KASHYYYK_HUNTING	kas_hunting_world	0	-35.7	5.3	-45.0	0	
+patrol_kas_hunting_702	patrol_kas_hunting_700		KASHYYYK_HUNTING	kas_hunting_world	0	11.6	5.0	-48.4	0	
+patrol_kas_hunting_703	patrol_kas_hunting_700		KASHYYYK_HUNTING	kas_hunting_world	0	97.2	4.0	-24.4	0	
+patrol_kas_hunting_800	patrol_kas_hunting_800	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	86.0	34.0	-193.6	0	Hunting - a Rodian hunter (Sordaan's clan)
+patrol_kas_hunting_801	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	120.0	30.7	-193.7	0	
+patrol_kas_hunting_802	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	27.8	-202.9	0	
+patrol_kas_hunting_803	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	161.7	24.2	-239.9	0	
+patrol_kas_hunting_804	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	21.8	-261.5	0	
+patrol_kas_hunting_805	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	115.8	19.1	-270.2	0	
+patrol_kas_hunting_806	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	89.8	18.0	-266.4	0	
+patrol_kas_hunting_807	patrol_kas_hunting_800		KASHYYYK_HUNTING	kas_hunting_world	0	45.5	18.5	-242.4	0	
+patrol_kas_hunting_900	patrol_kas_hunting_900	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	268.2	46.6	489.2	0	Hunting - a Rodian hunter (Ziven's clan)
+patrol_kas_hunting_901	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	253.2	43.5	467.6	0	
+patrol_kas_hunting_902	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	245.7	42.0	469.6	0	
+patrol_kas_hunting_903	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	246.3	40.3	486.6	0	
+patrol_kas_hunting_904	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	250.1	36.8	514.1	0	
+patrol_kas_hunting_905	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	268.1	40.0	528.4	0	
+patrol_kas_hunting_906	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	298.9	43.1	547.5	0	
+patrol_kas_hunting_907	patrol_kas_hunting_900		KASHYYYK_HUNTING	kas_hunting_world	0	318.1	43.6	544.6	0	
+patrol_kas_main_1000	patrol_kas_main_1000	FLIP	KASHYYYK_MAIN	kas_main_world	0	414.5	18.8	958.6	0	Kachirho - a blackscale guard
+patrol_kas_main_1001	patrol_kas_main_1000		KASHYYYK_MAIN	kas_main_world	0	408.6	18.2	916.8	0	
+patrol_kas_main_1002	patrol_kas_main_1000		KASHYYYK_MAIN	kas_main_world	0	430.3	18.0	879.3	0	
+patrol_kas_main_1003	patrol_kas_main_1000		KASHYYYK_MAIN	kas_main_world	0	422.1	17.9	824.1	0	
+patrol_kas_main_1004	patrol_kas_main_1000		KASHYYYK_MAIN	kas_main_world	0	417.8	18.3	770.0	0	
+patrol_kas_main_1005	patrol_kas_main_1000		KASHYYYK_MAIN	kas_main_world	0	389.2	17.9	719.3	0	
+patrol_kas_main_1100	patrol_kas_main_1100	FLIP	KASHYYYK_MAIN	kas_main_world	0	749.2	18.0	529.1	0	Kachirho - a Chiss poacher
+patrol_kas_main_1101	patrol_kas_main_1100		KASHYYYK_MAIN	kas_main_world	0	750.0	18.0	586.2	0	
+patrol_kas_main_1102	patrol_kas_main_1100		KASHYYYK_MAIN	kas_main_world	0	726.2	18.1	618.2	0	
+patrol_kas_main_1103	patrol_kas_main_1100		KASHYYYK_MAIN	kas_main_world	0	689.1	18.2	636.9	0	
+patrol_kas_main_1104	patrol_kas_main_1100		KASHYYYK_MAIN	kas_main_world	0	646.5	18.0	647.8	0	
+patrol_kas_main_1200	patrol_kas_main_1200	LOOP	KASHYYYK_MAIN	kas_main_world	0	-170.2	19.2	464.7	0	Kachirho - a Canopy bandit
+patrol_kas_main_1201	patrol_kas_main_1200		KASHYYYK_MAIN	kas_main_world	0	-145.8	18.3	468.4	0	
+patrol_kas_main_1202	patrol_kas_main_1200		KASHYYYK_MAIN	kas_main_world	0	-147.7	18.3	499.1	0	
+patrol_kas_main_1203	patrol_kas_main_1200		KASHYYYK_MAIN	kas_main_world	0	-166.9	20.8	485.7	0	
+patrol_kas_main_1204	patrol_kas_main_1200		KASHYYYK_MAIN	kas_main_world	0	-180.4	19.0	474.6	0	
+patrol_kas_main_1300	patrol_kas_main_1300	LOOP	KASHYYYK_MAIN	kas_main_world	0	-372.5	22.3	806.4	0	Kachirho - a Canopy bandit
+patrol_kas_main_1301	patrol_kas_main_1300		KASHYYYK_MAIN	kas_main_world	0	-400.0	23.6	770.6	0	
+patrol_kas_main_1302	patrol_kas_main_1300		KASHYYYK_MAIN	kas_main_world	0	-403.9	24.1	738.6	0	
+patrol_kas_main_1303	patrol_kas_main_1300		KASHYYYK_MAIN	kas_main_world	0	-393.4	20.3	702.6	0	
+patrol_kas_main_1304	patrol_kas_main_1300		KASHYYYK_MAIN	kas_main_world	0	-390.4	18.8	671.3	0	
+patrol_kas_main_1305	patrol_kas_main_1300		KASHYYYK_MAIN	kas_main_world	0	-401.0	20.8	624.6	0	
+patrol_kas_main_1400	patrol_kas_main_1400	LOOP	KASHYYYK_MAIN	kas_main_world	0	564.1	30.8	439.0	0	Kachirho - a Trandoshan slaver
+patrol_kas_main_1401	patrol_kas_main_1400		KASHYYYK_MAIN	kas_main_world	0	508.9	31.0	472.0	0	
+patrol_kas_main_1402	patrol_kas_main_1400		KASHYYYK_MAIN	kas_main_world	0	681.7	31.0	436.4	0	
+patrol_kas_main_1500	patrol_kas_main_1500	FLIP	KASHYYYK_MAIN	kas_main_world	0	532.9	24.7	431.4	0	Kachirho - a Trandoshan slaver
+patrol_kas_main_1501	patrol_kas_main_1500		KASHYYYK_MAIN	kas_main_world	0	526.9	24.7	360.9	0	
+patrol_kas_main_1502	patrol_kas_main_1500		KASHYYYK_MAIN	kas_main_world	0	541.4	24.7	254.5	0	
+patrol_kas_main_1600	patrol_kas_main_1600	FLIP	KASHYYYK_MAIN	kas_main_world	0	220.8	20.6	100.8	0	Kachirho - a Trandoshan slaver
+patrol_kas_main_1601	patrol_kas_main_1600		KASHYYYK_MAIN	kas_main_world	0	251.0	18.2	78.4	0	
+patrol_kas_main_1602	patrol_kas_main_1600		KASHYYYK_MAIN	kas_main_world	0	218.5	16.9	10.8	0	
+patrol_kas_main_1700	patrol_kas_main_1700	LOOP	KASHYYYK_MAIN	kas_main_world	0	198.5	21.8	117.3	0	Kachirho - a Trandoshan slaver
+patrol_kas_main_1701	patrol_kas_main_1700		KASHYYYK_MAIN	kas_main_world	0	203.7	26.1	114.6	0	
+patrol_kas_main_1702	patrol_kas_main_1700		KASHYYYK_MAIN	kas_main_world	0	205.2	26.1	113.9	0	
+patrol_kas_main_1703	patrol_kas_main_1700		KASHYYYK_MAIN	kas_main_world	0	138.0	19.0	144.7	0	
+patrol_kas_main_1800	patrol_kas_main_1800	LOOP	KASHYYYK_MAIN	kas_main_world	0	155.9	20.1	182.8	0	Kachirho - a Trandoshan slaver
+patrol_kas_main_1801	patrol_kas_main_1800		KASHYYYK_MAIN	kas_main_world	0	144.3	19.5	186.7	0	
+patrol_kas_main_1802	patrol_kas_main_1800		KASHYYYK_MAIN	kas_main_world	0	124.9	19.2	165.7	0	
+patrol_kas_main_1803	patrol_kas_main_1800		KASHYYYK_MAIN	kas_main_world	0	140.8	18.7	147.0	0	
+patrol_kas_main_1804	patrol_kas_main_1800		KASHYYYK_MAIN	kas_main_world	0	145.2	19.2	167.7	0	
+patrol_kas_main_1900	patrol_kas_main_1900	FLIP	KASHYYYK_MAIN	kas_main_world	0	-444.5	9.3	377.5	0	Kachirho - a Wookiee freedom fighter
+patrol_kas_main_1901	patrol_kas_main_1900		KASHYYYK_MAIN	kas_main_world	0	-456.5	7.6	359.8	0	
+patrol_kas_main_1902	patrol_kas_main_1900		KASHYYYK_MAIN	kas_main_world	0	-474.3	7.5	262.9	0	
+patrol_kas_main_1903	patrol_kas_main_1900		KASHYYYK_MAIN	kas_main_world	0	-542.1	7.5	188.7	0	
+patrol_kas_main_2000	patrol_kas_main_2000	FLIP	KASHYYYK_MAIN	kas_main_world	0	-522.3	7.5	146.0	0	Kachirho - a Wookiee freedom fighter
+patrol_kas_main_2001	patrol_kas_main_2000		KASHYYYK_MAIN	kas_main_world	0	-480.8	7.5	155.5	0	
+patrol_kas_main_2002	patrol_kas_main_2000		KASHYYYK_MAIN	kas_main_world	0	-419.1	7.1	158.1	0	
+patrol_kas_main_2100	patrol_kas_main_2100	FLIP	KASHYYYK_MAIN	kas_main_world	0	629.7	20.2	-251.7	0	Kachirho - a Wookiee guard
+patrol_kas_main_2101	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	610.3	22.3	-250.7	0	
+patrol_kas_main_2102	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	599.7	24.2	-256.3	0	
+patrol_kas_main_2103	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	558.3	30.5	-277.8	0	
+patrol_kas_main_2104	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	542.8	33.0	-279.8	0	
+patrol_kas_main_2105	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	521.1	34.0	-274.4	0	
+patrol_kas_main_2106	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	515.0	33.5	-268.1	0	
+patrol_kas_main_2107	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	495.8	28.2	-243.5	0	
+patrol_kas_main_2108	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	487.7	24.6	-211.7	0	
+patrol_kas_main_2109	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	477.1	24.0	-200.3	0	
+patrol_kas_main_2110	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	463.1	24.3	-192.1	0	
+patrol_kas_main_2111	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	440.8	22.6	-184.6	0	
+patrol_kas_main_2112	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	392.6	24.3	-196.4	0	
+patrol_kas_main_2113	patrol_kas_main_2100		KASHYYYK_MAIN	kas_main_world	0	375.7	31.8	-196.2	0	
+patrol_kas_main_2200	patrol_kas_main_2200	FLIP	KASHYYYK_MAIN	kas_main_world	0	303.0	32.0	-186.7	0	Kachirho - a Wookiee guard
+patrol_kas_main_2201	patrol_kas_main_2200		KASHYYYK_MAIN	kas_main_world	0	273.3	32.0	-171.2	0	
+patrol_kas_main_2202	patrol_kas_main_2200		KASHYYYK_MAIN	kas_main_world	0	228.7	32.1	-160.7	0	
+patrol_kas_main_2203	patrol_kas_main_2200		KASHYYYK_MAIN	kas_main_world	0	227.0	33.8	-158.6	0	
+patrol_kas_main_2204	patrol_kas_main_2200		KASHYYYK_MAIN	kas_main_world	0	226.1	33.8	-155.9	0	
