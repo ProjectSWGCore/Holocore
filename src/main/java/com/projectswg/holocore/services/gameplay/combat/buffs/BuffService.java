@@ -101,9 +101,15 @@ public class BuffService extends Service {
 	
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
-		BuffData buffData = getBuff(bi.getBuffName());
-		Objects.requireNonNull(buffData, "No known buff: " + bi.getBuffName());
-		assert buffData.getName().equals(bi.getBuffName()) : "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+ ']';
+		String buffName = bi.getBuffName();
+		BuffData buffData = bi.getBuffData();
+		
+		if (buffData == null) {
+			buffData = getBuff(buffName);
+		}
+		
+		Objects.requireNonNull(buffData, "No known buff: " + buffName);
+		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -304,7 +310,7 @@ public class BuffService extends Service {
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
-		if (!effectFileName.isEmpty()) {
+		if (effectFileName != null && !effectFileName.isEmpty()) {
 			receiver.sendObservers(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
 		}
 	}
@@ -332,7 +338,7 @@ public class BuffService extends Service {
 	}
 	
 	private void sendSkillModIntent(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
-		if (!effectName.isEmpty())
+		if (effectName != null && !effectName.isEmpty())
 			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
 	}
 	
