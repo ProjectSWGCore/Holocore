@@ -33,7 +33,8 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
@@ -262,19 +263,21 @@ public class PowerupService extends Service {
 		GameObjectType gameObjectType = object.getGameObjectType();
 		String powerupBuff = buffName(gameObjectType);
 		
-		if (powerupBuff == null) {
+		if (powerupBuff == null)
 			return;
-		}
 		
-		BuffData buffData = new BuffData(powerupBuff, powerupBuff, 1);	// The group name happens to be the same as the buff name
+		BuffInfo buffData = DataLoader.buffs().getBuff(powerupBuff);
+		if (buffData == null)
+			return;
+		
 		String modifier = object.getAttribute("@spam:pup_modifier").replace("@stat_n:", "");
 		int value = Integer.parseInt(object.getAttribute("@spam:pup_power"));
 		int timeMinutes = Integer.parseInt(object.getAttribute("@spam:pup_expire_time"));
 		int timeSeconds = (int) TimeUnit.MINUTES.toSeconds(timeMinutes);
 		
-		buffData.setDefaultDuration(timeSeconds);
-		buffData.setEffectName(0, modifier);
-		buffData.setEffectValue(0, value);
+//		buffData.setDefaultDuration(timeSeconds);
+//		buffData.setEffectName(0, modifier);
+//		buffData.setEffectValue(0, value);
 		
 		CreatureObject creatureObject = owner.getCreatureObject();
 		BuffIntent.broadcast(buffData, creatureObject, creatureObject, remove);

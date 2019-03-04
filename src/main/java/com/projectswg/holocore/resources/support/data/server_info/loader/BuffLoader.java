@@ -148,6 +148,36 @@ public final class BuffLoader extends DataLoader {
 			assert this.effectNames.length == this.effectValues.length : "effect params and effect values differ in size";
 		}
 		
+		private BuffInfo(String name, int crc, String group1, String group2, String block, int priority, String icon, double duration, String[] effectNames, double[] effectValues, String state, String callback, String particle, String particleHardpoint, int visible, boolean debuff, String stanceParticle, boolean dispellPlayer, boolean removeOnDeath, boolean playerRemovable, boolean celestial, int maxStackCount, boolean persistent, boolean displayOrder, boolean removeOnRespec, boolean aiRemoveOnCombatEnd, boolean decayOnPvpDeath) {
+			this.name = name;
+			this.crc = crc;
+			this.group1 = group1;
+			this.group2 = group2;
+			this.block = block;
+			this.priority = priority;
+			this.icon = icon;
+			this.duration = duration;
+			this.effectNames = effectNames;
+			this.effectValues = effectValues;
+			this.state = state;
+			this.callback = callback;
+			this.particle = particle;
+			this.particleHardpoint = particleHardpoint;
+			this.visible = visible;
+			this.debuff = debuff;
+			this.stanceParticle = stanceParticle;
+			this.dispellPlayer = dispellPlayer;
+			this.removeOnDeath = removeOnDeath;
+			this.playerRemovable = playerRemovable;
+			this.celestial = celestial;
+			this.maxStackCount = maxStackCount;
+			this.persistent = persistent;
+			this.displayOrder = displayOrder;
+			this.removeOnRespec = removeOnRespec;
+			this.aiRemoveOnCombatEnd = aiRemoveOnCombatEnd;
+			this.decayOnPvpDeath = decayOnPvpDeath;
+		}
+		
 		public String getName() {
 			return name;
 		}
@@ -266,6 +296,181 @@ public final class BuffLoader extends DataLoader {
 		
 		public boolean isDecayOnPvpDeath() {
 			return decayOnPvpDeath;
+		}
+	}
+	
+	public static class BuffInfoBuilder {
+		
+		private String name;
+		private int crc;
+		private String group1;
+		private String group2;
+		private String block;
+		private int priority;
+		private String icon;
+		private double duration;
+		private String[] effectNames;
+		private double[] effectValues;
+		private String state;
+		private String callback;
+		private String particle;
+		private String particleHardpoint;
+		private int visible;
+		private boolean debuff;
+		private String stanceParticle;
+		private boolean dispellPlayer;
+		private boolean removeOnDeath;
+		private boolean playerRemovable;
+		private boolean celestial;
+		private int maxStackCount;
+		private boolean persistent;
+		private boolean displayOrder;
+		private boolean removeOnRespec;
+		private boolean aiRemoveOnCombatEnd;
+		private boolean decayOnPvpDeath;
+		
+		private BuffInfoBuilder(BuffInfo buff) {
+			this.name = buff.getName();
+			this.crc = buff.getCrc();
+		}
+		
+		public BuffInfoBuilder setName(String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public BuffInfoBuilder setCrc(int crc) {
+			this.crc = crc;
+			return this;
+		}
+		
+		public BuffInfoBuilder setGroup1(String group1) {
+			this.group1 = group1;
+			return this;
+		}
+		
+		public BuffInfoBuilder setGroup2(String group2) {
+			this.group2 = group2;
+			return this;
+		}
+		
+		public BuffInfoBuilder setBlock(String block) {
+			this.block = block;
+			return this;
+		}
+		
+		public BuffInfoBuilder setPriority(int priority) {
+			this.priority = priority;
+			return this;
+		}
+		
+		public BuffInfoBuilder setIcon(String icon) {
+			this.icon = icon;
+			return this;
+		}
+		
+		public BuffInfoBuilder setDuration(double duration) {
+			this.duration = duration;
+			return this;
+		}
+		
+		public BuffInfoBuilder setEffectNames(String[] effectNames) {
+			this.effectNames = effectNames;
+			return this;
+		}
+		
+		public BuffInfoBuilder setEffectValues(double[] effectValues) {
+			this.effectValues = effectValues;
+			return this;
+		}
+		
+		public BuffInfoBuilder setState(String state) {
+			this.state = state;
+			return this;
+		}
+		
+		public BuffInfoBuilder setCallback(String callback) {
+			this.callback = callback;
+			return this;
+		}
+		
+		public BuffInfoBuilder setParticle(String particle) {
+			this.particle = particle;
+			return this;
+		}
+		
+		public BuffInfoBuilder setParticleHardpoint(String particleHardpoint) {
+			this.particleHardpoint = particleHardpoint;
+			return this;
+		}
+		
+		public BuffInfoBuilder setVisible(int visible) {
+			this.visible = visible;
+			return this;
+		}
+		
+		public BuffInfoBuilder setDebuff(boolean debuff) {
+			this.debuff = debuff;
+			return this;
+		}
+		
+		public BuffInfoBuilder setStanceParticle(String stanceParticle) {
+			this.stanceParticle = stanceParticle;
+			return this;
+		}
+		
+		public BuffInfoBuilder setDispellPlayer(boolean dispellPlayer) {
+			this.dispellPlayer = dispellPlayer;
+			return this;
+		}
+		
+		public BuffInfoBuilder setRemoveOnDeath(boolean removeOnDeath) {
+			this.removeOnDeath = removeOnDeath;
+			return this;
+		}
+		
+		public BuffInfoBuilder setPlayerRemovable(boolean playerRemovable) {
+			this.playerRemovable = playerRemovable;
+			return this;
+		}
+		
+		public BuffInfoBuilder setCelestial(boolean celestial) {
+			this.celestial = celestial;
+			return this;
+		}
+		
+		public BuffInfoBuilder setMaxStackCount(int maxStackCount) {
+			this.maxStackCount = maxStackCount;
+			return this;
+		}
+		
+		public BuffInfoBuilder setPersistent(boolean persistent) {
+			this.persistent = persistent;
+			return this;
+		}
+		
+		public BuffInfoBuilder setDisplayOrder(boolean displayOrder) {
+			this.displayOrder = displayOrder;
+			return this;
+		}
+		
+		public BuffInfoBuilder setRemoveOnRespec(boolean removeOnRespec) {
+			this.removeOnRespec = removeOnRespec;
+			return this;
+		}
+		
+		public BuffInfoBuilder setAiRemoveOnCombatEnd(boolean aiRemoveOnCombatEnd) {
+			this.aiRemoveOnCombatEnd = aiRemoveOnCombatEnd;
+			return this;
+		}
+		
+		public BuffInfoBuilder setDecayOnPvpDeath(boolean decayOnPvpDeath) {
+			this.decayOnPvpDeath = decayOnPvpDeath;
+			return this;
+		}
+		
+		public BuffInfo createBuffInfo() {
+			return null;
 		}
 	}
 }
