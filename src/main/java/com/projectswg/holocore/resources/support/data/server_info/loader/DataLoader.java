@@ -163,7 +163,7 @@ public abstract class DataLoader {
 	}
 	
 	private static <T extends DataLoader> T getInstanceWeakCaching(Class<T> klass, Supplier<T> fallback) {
-		return getInstance(klass, fallback, WeakReference::new);
+		return getInstance(klass, fallback, SoftReference::new);
 	}
 	
 	private static <T extends DataLoader> T getInstance(Class<T> klass, Supplier<T> fallback, Function<DataLoader, Reference<DataLoader>> referenceCreator) {

@@ -34,6 +34,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public final class NpcStatLoader extends DataLoader {
 	
@@ -54,10 +58,7 @@ public final class NpcStatLoader extends DataLoader {
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_stats.sdb"))) {
-			while (set.next()) {
-				NpcStatInfo stat = new NpcStatInfo(set);
-				npcStatMap.put(stat.getLevel(), stat);
-			}
+			npcStatMap.putAll(set.stream(NpcStatInfo::new).collect(toMap(NpcStatInfo::getLevel, Function.identity())));
 		}
 	}
 	

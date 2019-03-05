@@ -41,6 +41,7 @@ import me.joshlarson.jlcommon.log.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class BuildoutLoader {
 	
@@ -52,8 +53,8 @@ public final class BuildoutLoader {
 	private final Set<String> events;
 	
 	private BuildoutLoader(Collection<String> events) {
-		this.objectMap = new HashMap<>();
-		this.buildingMap = new HashMap<>();
+		this.objectMap = new ConcurrentHashMap<>();
+		this.buildingMap = new ConcurrentHashMap<>();
 		this.terrainMap = new EnumMap<>(Terrain.class);
 		this.events = new HashSet<>(events);
 		
@@ -87,7 +88,7 @@ public final class BuildoutLoader {
 				String event = set.getText(3);
 				if (!event.isEmpty() && !events.contains(event))
 					continue;
-				
+
 				SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(1)));
 				obj.setGenerated(false);
 				obj.setLocation(Location.builder().setPosition(set.getReal(5), set.getReal(6), set.getReal(7)).setOrientation(set.getReal(8), set.getReal(9), set.getReal(10), set.getReal(11))
@@ -163,6 +164,97 @@ public final class BuildoutLoader {
 		BuildoutLoader loader = new BuildoutLoader(events);
 		loader.loadFromFile();
 		return loader;
+	}
+	
+	private static class BuildoutInfo {
+		
+		private final long id;
+		private final int crc;
+		private final long containerId;
+		private final String event;
+		private final Terrain terrain;
+		private final double x;
+		private final double y;
+		private final double z;
+		private final double orientationX;
+		private final double orientationY;
+		private final double orientationZ;
+		private final double orientationW;
+		private final int cellIndex;
+		private final String tag;
+		
+		public BuildoutInfo(SdbResultSet set) {
+			this.id = set.getInt("id");
+			this.crc = (int) set.getInt("template_crc");
+			this.containerId = set.getInt("container_id");
+			this.event = set.getText("event");
+			this.terrain = Terrain.valueOf(set.getText("terrain"));
+			this.x = set.getReal("x");
+			this.y = set.getReal("y");
+			this.z = set.getReal("z");
+			this.orientationX = set.getReal("orientation_x");
+			this.orientationY = set.getReal("orientation_y");
+			this.orientationZ = set.getReal("orientation_z");
+			this.orientationW = set.getReal("orientation_w");
+			this.cellIndex = (int) set.getInt("cell_index");
+			this.tag = set.getText("tag");
+		}
+		
+		public long getId() {
+			return id;
+		}
+		
+		public int getCrc() {
+			return crc;
+		}
+		
+		public long getContainerId() {
+			return containerId;
+		}
+		
+		public String getEvent() {
+			return event;
+		}
+		
+		public Terrain getTerrain() {
+			return terrain;
+		}
+		
+		public double getX() {
+			return x;
+		}
+		
+		public double getY() {
+			return y;
+		}
+		
+		public double getZ() {
+			return z;
+		}
+		
+		public double getOrientationX() {
+			return orientationX;
+		}
+		
+		public double getOrientationY() {
+			return orientationY;
+		}
+		
+		public double getOrientationZ() {
+			return orientationZ;
+		}
+		
+		public double getOrientationW() {
+			return orientationW;
+		}
+		
+		public int getCellIndex() {
+			return cellIndex;
+		}
+		
+		public String getTag() {
+			return tag;
+		}
 	}
 	
 }

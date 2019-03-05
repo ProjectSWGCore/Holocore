@@ -29,10 +29,16 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 
+import java.io.File;
+
 public class SdbLoaderException extends RuntimeException {
 	
 	public SdbLoaderException(SdbResultSet set, Throwable cause) {
-		super("Failed to load line " + set.getLine() + " on SDB " + set.getFile(), cause);
+		this(set.getFile(), set.getLine(), cause);
+	}
+	
+	public SdbLoaderException(File file, long line, Throwable cause) {
+		super("Failed to load line " + line + " on SDB " + file, cause);
 	}
 	
 }

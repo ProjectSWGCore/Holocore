@@ -125,8 +125,8 @@ public final class BuffLoader extends DataLoader {
 			this.priority = (int) set.getInt("priority");
 			this.icon = set.getText("icon");
 			this.duration = set.getReal("duration");
-			this.effectNames = effectNames.getArray().clone();
-			this.effectValues = effectValues.getArray().clone();
+			this.effectNames = effectNames.getArray(set).clone();
+			this.effectValues = effectValues.getArray(set).clone();
 			this.state = set.getText("state");
 			this.callback = set.getText("callback");
 			this.particle = set.getText("particle");

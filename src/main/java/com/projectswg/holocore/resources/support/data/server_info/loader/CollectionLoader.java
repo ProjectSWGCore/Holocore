@@ -110,14 +110,14 @@ public final class CollectionLoader extends DataLoader {
 			this.beginSlotId = (int) set.getInt("begin_slot_id");
 			this.endSlotId = (int) set.getInt("end_slot_id");
 			this.maxSlotValue = (int) set.getInt("max_slot_value");
-			this.categories = categoryArray.getArray().clone();
-			this.prereqSlotNames = prereqArray.getArray().clone();
+			this.categories = categoryArray.getArray(set).clone();
+			this.prereqSlotNames = prereqArray.getArray(set).clone();
 			this.icon = set.getText("icon");
 			this.music = set.getText("music");
 			this.showIfNotYetEarned = parseShowIfNotYetEarned((int) set.getInt("show_if_not_yet_earned"));
 			this.hidden = set.getBoolean("hidden");
 			this.title = set.getBoolean("title");
-			this.alternateTitles = alternateTitleArray.getArray().clone();
+			this.alternateTitles = alternateTitleArray.getArray(set).clone();
 			this.noReward = set.getBoolean("no_reward");
 			this.trackServerFirst = set.getBoolean("track_server_first");
 		}

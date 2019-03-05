@@ -36,6 +36,8 @@ import me.joshlarson.jlcommon.log.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public final class ObjectDataLoader extends DataLoader {
 	
@@ -51,6 +53,25 @@ public final class ObjectDataLoader extends DataLoader {
 	
 	public Collection<String> getObjects() {
 		return Collections.unmodifiableCollection(attributes.keySet());
+	}
+	
+	public static void main(String [] args) {
+		// 721.813107	123.546451
+		// 415.357121	55.732692
+		long [] lastExecutions = new long[5];
+		for (int i = 0; i < 30; i++) {
+			ObjectDataLoader loader = new ObjectDataLoader();
+			long start = System.nanoTime();
+			try {
+				loader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			long end = System.nanoTime();
+			lastExecutions[i % lastExecutions.length] = end - start;
+			System.out.printf("%d,%.6f%n", i, (end-start)/1E6);
+		}
+		System.out.printf("AVG,%.6f%n", LongStream.of(lastExecutions).average().orElseThrow() / 1E6);
 	}
 	
 	@Override
@@ -71,14 +92,22 @@ public final class ObjectDataLoader extends DataLoader {
 				mapping[j] = mapping[i];
 				mapping[i] = tmp;
 			}
-			while (set.next()) {
+			attributes.putAll(set.stream(s -> {
 				Map<ObjectDataAttribute, Object> objectAttributes = new EnumMap<>(ObjectDataAttribute.class);
 				for (int i = 1; i < mapping.length; i++) {
 					ObjectDataAttribute attr = mapping[i];
-					objectAttributes.put(attr, parse(attr, set, i));
+					objectAttributes.put(attr, parse(attr, s, i));
 				}
-				attributes.put(set.getText(0), objectAttributes);
-			}
+				return Map.entry(s.getText(0), objectAttributes);
+			}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+//			while (set.next()) {
+//				Map<ObjectDataAttribute, Object> objectAttributes = new EnumMap<>(ObjectDataAttribute.class);
+//				for (int i = 1; i < mapping.length; i++) {
+//					ObjectDataAttribute attr = mapping[i];
+//					objectAttributes.put(attr, parse(attr, set, i));
+//				}
+//				attributes.put(set.getText(0), objectAttributes);
+//			}
 		}
 	}
 	

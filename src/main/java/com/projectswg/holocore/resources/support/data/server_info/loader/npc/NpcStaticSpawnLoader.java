@@ -30,7 +30,6 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SdbLoaderException;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import me.joshlarson.jlcommon.log.Log;
@@ -41,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public final class NpcStaticSpawnLoader extends DataLoader {
 	
@@ -61,13 +61,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
-			while (set.next()) {
-				try {
-					spawns.add(new StaticSpawnInfo(set));
-				} catch (Throwable t) {
-					throw new SdbLoaderException(set, t);
-				}
-			}
+			spawns.addAll(set.parallelStream(StaticSpawnInfo::new).collect(Collectors.toList()));
 		}
 	}
 	

@@ -35,20 +35,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toMap;
 
 public final class PlayerLevelLoader extends DataLoader {
 	
 	private final Map<Integer, PlayerLevelInfo> levels;
-	private final AtomicInteger maxLevel;
+	private int maxLevel;
 	
 	PlayerLevelLoader() {
 		this.levels = new HashMap<>();
-		this.maxLevel = new AtomicInteger(0);
+		this.maxLevel = 0;
 	}
 	
 	public int getMaxLevel() {
-		return maxLevel.get();
+		return maxLevel;
 	}
 	
 	@Nullable
@@ -59,11 +61,8 @@ public final class PlayerLevelLoader extends DataLoader {
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/player_level.sdb"))) {
-			while (set.next()) {
-				PlayerLevelInfo levelInfo = new PlayerLevelInfo(set);
-				levels.put(levelInfo.getLevel(), levelInfo);
-				maxLevel.updateAndGet(prev -> prev >= levelInfo.getLevel() ? prev : levelInfo.getLevel());
-			}
+			levels.putAll(set.stream(PlayerLevelInfo::new).collect(toMap(PlayerLevelInfo::getLevel, Function.identity())));
+			maxLevel = levels.keySet().stream().mapToInt(i -> i).max().orElse(0);
 		}
 	}
 	

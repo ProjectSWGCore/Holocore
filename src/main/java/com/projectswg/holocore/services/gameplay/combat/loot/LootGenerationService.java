@@ -119,8 +119,8 @@ public final class LootGenerationService extends Service {
 				LootTable table = new LootTable();
 				int totalChance = 0;    // Must not be above 100. Also used to convert chances in the form of "33, 33, 34" to "33, 66, 100"
 				
-				String [] itemGroupsArray = itemGroups.getArray();
-				int [] chanceGroupsArray = chanceGroups.getArray();
+				String [] itemGroupsArray = itemGroups.getArray(set);
+				int [] chanceGroupsArray = chanceGroups.getArray(set);
 				assert itemGroupsArray.length == chanceGroupsArray.length;
 				for (int groupNum = 0; groupNum < chanceGroupsArray.length && totalChance < 100; groupNum++) {
 					int groupChance = chanceGroupsArray[groupNum];

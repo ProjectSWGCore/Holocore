@@ -29,93 +29,51 @@ package com.projectswg.holocore.resources.support.data.server_info;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import org.intellij.lang.annotations.Language;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class SdbColumnArraySet {
 	
 	private final Pattern pattern;
-	private final Map<Integer, Integer> mappedColumns;
-	private final AtomicReference<SdbResultSet> set;
-	private final AtomicInteger arraySize;
+	private final Map<SdbResultSet, MappedInfo> mappedInfo;
 	
-	private SdbColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
+	private SdbColumnArraySet(@Language("RegExp") String regex) {
 		this.pattern = Pattern.compile(regex);
-		this.mappedColumns = new HashMap<>();
-		this.set = new AtomicReference<>(set);
-		this.arraySize = new AtomicInteger(0);
-		
-		loadColumnInfo(set);
+		this.mappedInfo = new ConcurrentHashMap<>();
 	}
 	
-	public int size() {
-		return arraySize.get();
+	public int size(SdbResultSet set) {
+		return mappedInfo.computeIfAbsent(set, MappedInfo::new).getSize();
 	}
 	
-	protected SdbResultSet getResultSet() {
-		return set.get();
-	}
-	
-	protected Collection<Entry<Integer, Integer>> getMappedEntries() {
-		return mappedColumns.entrySet();
-	}
-	
-	void loadColumnInfo(@Nullable SdbResultSet set) {
-		mappedColumns.clear();
-		arraySize.set(0);
-		this.set.getAndSet(set);
-		if (set == null)
-			return;
-		
-		int columnIndex = 0;
-		for (String column : set.getColumns()) {
-			Matcher matcher = pattern.matcher(column);
-			boolean match = matcher.matches();
-			if (match && matcher.groupCount() == 1) {
-				String arrayIndexStr = matcher.group(1);
-				try {
-					int arrayIndex = Integer.parseUnsignedInt(arrayIndexStr);
-					arraySize.updateAndGet(prevIndex -> arrayIndex >= prevIndex ? arrayIndex + 1 : prevIndex);
-					mappedColumns.put(arrayIndex, columnIndex);
-				} catch (NumberFormatException e) {
-					throw new IllegalArgumentException("invalid pattern. The first capturing group must be only digits");
-				}
-			} else if (match) {
-				throw new IllegalArgumentException("invalid pattern. Regex must have capturing group for array index");
-			}
-			columnIndex++;
-		}
+	protected Collection<Entry<Integer, Integer>> getMappedEntries(SdbResultSet set) {
+		return mappedInfo.computeIfAbsent(set, MappedInfo::new).getMappedColumns().entrySet();
 	}
 	
 	public static class SdbTextColumnArraySet extends SdbColumnArraySet {
 		
-		private String [] cachedArray;
+		private final ThreadLocal<String []> cachedArray;
 		
-		SdbTextColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
-			super(set, regex);
-			this.cachedArray = null;
+		SdbTextColumnArraySet(@Language("RegExp") String regex) {
+			super(regex);
+			this.cachedArray = new ThreadLocal<>();
 		}
 		
-		public String [] getArray() {
-			SdbResultSet set = getResultSet();
-			String [] cachedArray = this.cachedArray;
-			if (cachedArray == null || cachedArray.length != size()) {
-				cachedArray = new String[size()];
-				this.cachedArray = cachedArray;
+		public String [] getArray(SdbResultSet set) {
+			String [] cachedArray = this.cachedArray.get();
+			int size = size(set);
+			if (cachedArray == null || cachedArray.length != size) {
+				cachedArray = new String[size];
+				this.cachedArray.set(cachedArray);
 			}
 			
 			Arrays.fill(cachedArray, null);
 			if (set != null) {
-				for (Entry<Integer, Integer> e : getMappedEntries()) {
+				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getText(e.getValue());
 				}
 			}
@@ -126,24 +84,24 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbIntegerColumnArraySet extends SdbColumnArraySet {
 		
-		private int [] cachedArray;
+		private final ThreadLocal<int []> cachedArray;
 		
-		SdbIntegerColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
-			super(set, regex);
-			this.cachedArray = null;
+		SdbIntegerColumnArraySet(@Language("RegExp") String regex) {
+			super(regex);
+			this.cachedArray = new ThreadLocal<>();
 		}
 		
-		public int [] getArray() {
-			SdbResultSet set = getResultSet();
-			int [] cachedArray = this.cachedArray;
-			if (cachedArray == null || cachedArray.length != size()) {
-				cachedArray = new int[size()];
-				this.cachedArray = cachedArray;
+		public int [] getArray(SdbResultSet set) {
+			int [] cachedArray = this.cachedArray.get();
+			int size = size(set);
+			if (cachedArray == null || cachedArray.length != size) {
+				cachedArray = new int[size];
+				this.cachedArray.set(cachedArray);
 			}
 			
 			Arrays.fill(cachedArray, Integer.MAX_VALUE);
 			if (set != null) {
-				for (Entry<Integer, Integer> e : getMappedEntries()) {
+				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = (int) set.getInt(e.getValue());
 				}
 			}
@@ -154,24 +112,24 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbLongColumnArraySet extends SdbColumnArraySet {
 		
-		private long [] cachedArray;
+		private final ThreadLocal<long []> cachedArray;
 		
-		SdbLongColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
-			super(set, regex);
-			this.cachedArray = null;
+		SdbLongColumnArraySet(@Language("RegExp") String regex) {
+			super(regex);
+			this.cachedArray = new ThreadLocal<>();
 		}
 		
-		public long [] getArray() {
-			SdbResultSet set = getResultSet();
-			long [] cachedArray = this.cachedArray;
-			if (cachedArray == null || cachedArray.length != size()) {
-				cachedArray = new long[size()];
-				this.cachedArray = cachedArray;
+		public long [] getArray(SdbResultSet set) {
+			long [] cachedArray = this.cachedArray.get();
+			int size = size(set);
+			if (cachedArray == null || cachedArray.length != size) {
+				cachedArray = new long[size];
+				this.cachedArray.set(cachedArray);
 			}
 			
 			Arrays.fill(cachedArray, Long.MAX_VALUE);
 			if (set != null) {
-				for (Entry<Integer, Integer> e : getMappedEntries()) {
+				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getInt(e.getValue());
 				}
 			}
@@ -182,24 +140,24 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbRealColumnArraySet extends SdbColumnArraySet {
 		
-		private double [] cachedArray;
+		private final ThreadLocal<double []> cachedArray;
 		
-		SdbRealColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
-			super(set, regex);
-			this.cachedArray = null;
+		SdbRealColumnArraySet(@Language("RegExp") String regex) {
+			super(regex);
+			this.cachedArray = new ThreadLocal<>();
 		}
 		
-		public double [] getArray() {
-			SdbResultSet set = getResultSet();
-			double [] cachedArray = this.cachedArray;
-			if (cachedArray == null || cachedArray.length != size()) {
-				cachedArray = new double[size()];
-				this.cachedArray = cachedArray;
+		public double [] getArray(SdbResultSet set) {
+			double [] cachedArray = this.cachedArray.get();
+			int size = size(set);
+			if (cachedArray == null || cachedArray.length != size) {
+				cachedArray = new double[size];
+				this.cachedArray.set(cachedArray);
 			}
 			
 			Arrays.fill(cachedArray, Double.NaN);
 			if (set != null) {
-				for (Entry<Integer, Integer> e : getMappedEntries()) {
+				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getReal(e.getValue());
 				}
 			}
@@ -210,30 +168,71 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbBooleanColumnArraySet extends SdbColumnArraySet {
 		
-		private boolean [] cachedArray;
+		private final ThreadLocal<boolean []> cachedArray;
 		
-		SdbBooleanColumnArraySet(@Nullable SdbResultSet set, @Language("RegExp") String regex) {
-			super(set, regex);
-			this.cachedArray = null;
+		SdbBooleanColumnArraySet(@Language("RegExp") String regex) {
+			super(regex);
+			this.cachedArray = new ThreadLocal<>();
 		}
 		
-		public boolean [] getArray() {
-			SdbResultSet set = getResultSet();
-			boolean [] cachedArray = this.cachedArray;
-			if (cachedArray == null || cachedArray.length != size()) {
-				cachedArray = new boolean[size()];
-				this.cachedArray = cachedArray;
+		public boolean [] getArray(SdbResultSet set) {
+			boolean [] cachedArray = this.cachedArray.get();
+			int size = size(set);
+			if (cachedArray == null || cachedArray.length != size) {
+				cachedArray = new boolean[size];
+				this.cachedArray.set(cachedArray);
 			}
 			
 			Arrays.fill(cachedArray, false);
 			if (set != null) {
-				for (Entry<Integer, Integer> e : getMappedEntries()) {
+				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getBoolean(e.getValue());
 				}
 			}
 			return cachedArray;
 		}
 		
+	}
+	
+	private class MappedInfo {
+		
+		private final Map<Integer, Integer> mappedColumns;
+		private final int size;
+		
+		public MappedInfo(SdbResultSet set) {
+			Map<Integer, Integer> mappedColumns = new HashMap<>();
+			int size = 0;
+			int columnIndex = 0;
+			for (String column : set.getColumns()) {
+				Matcher matcher = pattern.matcher(column);
+				boolean match = matcher.matches();
+				if (match && matcher.groupCount() == 1) {
+					String arrayIndexStr = matcher.group(1);
+					try {
+						int arrayIndex = Integer.parseUnsignedInt(arrayIndexStr);
+						if (arrayIndex >= size)
+							size = arrayIndex+1;
+						mappedColumns.put(arrayIndex, columnIndex);
+					} catch (NumberFormatException e) {
+						throw new IllegalArgumentException("invalid pattern. The first capturing group must be only digits");
+					}
+				} else if (match) {
+					throw new IllegalArgumentException("invalid pattern. Regex must have capturing group for array index");
+				}
+				columnIndex++;
+			}
+			
+			this.mappedColumns = Collections.unmodifiableMap(mappedColumns);
+			this.size = size;
+		}
+		
+		public Map<Integer, Integer> getMappedColumns() {
+			return mappedColumns;
+		}
+		
+		public int getSize() {
+			return size;
+		}
 	}
 	
 }

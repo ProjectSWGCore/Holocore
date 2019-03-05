@@ -33,8 +33,12 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public final class NpcPatrolRouteLoader extends DataLoader {
 	
@@ -59,11 +63,7 @@ public final class NpcPatrolRouteLoader extends DataLoader {
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/patrol/patrol_id.msdb"))) {
-			while (set.next()) {
-				PatrolRouteWaypoint waypoint = new PatrolRouteWaypoint(set);
-				List<PatrolRouteWaypoint> route = patrolRouteMap.computeIfAbsent(waypoint.getGroupId(), k -> new ArrayList<>());
-				route.add(waypoint);
-			}
+			patrolRouteMap.putAll(set.stream(PatrolRouteWaypoint::new).collect(Collectors.groupingBy(PatrolRouteWaypoint::getGroupId)));
 		}
 	}
 	

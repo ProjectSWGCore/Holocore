@@ -31,13 +31,15 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public final class NpcLoader extends DataLoader {
 	
@@ -66,10 +68,7 @@ public final class NpcLoader extends DataLoader {
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc.msdb"))) {
-			while (set.next()) {
-				NpcInfo stat = new NpcInfo(set);
-				npcMap.put(stat.getId(), stat);
-			}
+			npcMap.putAll(set.parallelStream(NpcInfo::new).collect(toMap(NpcInfo::getId, Function.identity())));
 		}
 	}
 	
@@ -175,6 +174,9 @@ public final class NpcLoader extends DataLoader {
 			this.lootTable2Chance = (int) set.getInt("loot_table2_chance");
 			this.lootTable3Chance = (int) set.getInt("loot_table3_chance");
 			
+			if (scaleMax < scaleMin)
+				throw new IllegalArgumentException("scaleMax must be greater than scaleMin");
+			
 			switch (set.getText("faction")) {
 				case "rebel":
 					this.faction = PvpFaction.REBEL;
@@ -203,12 +205,13 @@ public final class NpcLoader extends DataLoader {
 					this.droidInfo = null;
 					this.creatureInfo = new CreatureNpcInfo(set);
 					break;
-				default:
-					Log.w("Unknown NPC niche: %s", niche);
+				case "vehicle":
 					this.humanoidInfo = null;
 					this.droidInfo = null;
 					this.creatureInfo = null;
 					break;
+				default:
+					throw new IllegalArgumentException("Unknown NPC niche: " + niche);
 			}
 		}
 		

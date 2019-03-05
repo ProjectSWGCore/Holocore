@@ -109,7 +109,7 @@ public final class PerformanceLoader extends DataLoader {
 			this.requiredSkillMod = set.getText("required_skill_mod");
 			this.requiredSkillModValue = (int) set.getInt("required_skill_mod_value");
 			this.mainloop = set.getText("mainloop");
-			this.flourishes = flourishes.getArray().clone();
+			this.flourishes = flourishes.getArray(set).clone();
 			this.intro = set.getText("intro");
 			this.outro = set.getText("outro");
 		}

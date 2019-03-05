@@ -38,6 +38,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static java.util.stream.Collectors.groupingBy;
+
 public final class NpcCombatProfileLoader extends DataLoader {
 	
 	private final Map<String, List<CombatProfile>> profiles;
@@ -60,10 +62,7 @@ public final class NpcCombatProfileLoader extends DataLoader {
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
-			while (set.next()) {
-				CombatProfile profile = new CombatProfile(set);
-				profiles.computeIfAbsent(profile.getId(), p -> new ArrayList<>()).add(profile);
-			}
+			profiles.putAll(set.stream(CombatProfile::new).collect(groupingBy(CombatProfile::getId)));
 		}
 	}
 	
