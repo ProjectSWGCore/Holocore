@@ -30,10 +30,7 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArray
 import me.joshlarson.jlcommon.log.Log;
 import org.intellij.lang.annotations.Language;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.Map.Entry;
@@ -554,6 +551,7 @@ public class SdbLoader {
 		
 		@Override
 		public String getText(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist";
 			return columnValues[columnIndices.get(columnName)];
 		}
 		
@@ -568,6 +566,7 @@ public class SdbLoader {
 		
 		@Override
 		public long getInt(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist";
 			return getInt(columnIndices.get(columnName));
 		}
 		
@@ -582,6 +581,7 @@ public class SdbLoader {
 		
 		@Override
 		public double getReal(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist";
 			return getReal(columnIndices.get(columnName));
 		}
 		
@@ -592,6 +592,7 @@ public class SdbLoader {
 		
 		@Override
 		public boolean getBoolean(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist";
 			return getBoolean(columnIndices.get(columnName));
 		}
 		
