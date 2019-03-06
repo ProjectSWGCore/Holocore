@@ -1,6 +1,14 @@
 file	enabled
 TEXT	BOOLEAN
 armor.sdb	TRUE
+collection.sdb	TRUE
+consumable.sdb	TRUE
+costume.sdb	TRUE
+dna.sdb	TRUE
+grant.sdb	TRUE
 item.sdb	TRUE
+object.sdb	TRUE
+schematic.sdb	TRUE
+storyteller.sdb	TRUE
 weapon.sdb	TRUE
 wearable.sdb	TRUE
