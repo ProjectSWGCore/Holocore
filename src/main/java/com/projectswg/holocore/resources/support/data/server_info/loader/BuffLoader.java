@@ -489,7 +489,7 @@ public final class BuffLoader extends DataLoader {
 			return this;
 		}
 		
-		public BuffInfo createBuffInfo() {
+		public BuffInfo build() {
 			return null;
 		}
 	}

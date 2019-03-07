@@ -278,7 +278,7 @@ public class PowerupService extends Service {
 		BuffInfo buff = buffOriginal.builder()
 				.setDuration(timeSeconds)
 				.addEffect(modifier, value)
-				.createBuffInfo();
+				.build();
 		
 		CreatureObject creatureObject = owner.getCreatureObject();
 		BuffIntent.broadcast(buff, creatureObject, creatureObject, remove);
