@@ -266,8 +266,8 @@ public class PowerupService extends Service {
 		if (powerupBuff == null)
 			return;
 		
-		BuffInfo buffData = DataLoader.buffs().getBuff(powerupBuff);
-		if (buffData == null)
+		BuffInfo buffOriginal = DataLoader.buffs().getBuff(powerupBuff);
+		if (buffOriginal == null)
 			return;
 		
 		String modifier = object.getAttribute("@spam:pup_modifier").replace("@stat_n:", "");
@@ -275,12 +275,13 @@ public class PowerupService extends Service {
 		int timeMinutes = Integer.parseInt(object.getAttribute("@spam:pup_expire_time"));
 		int timeSeconds = (int) TimeUnit.MINUTES.toSeconds(timeMinutes);
 		
-//		buffData.setDefaultDuration(timeSeconds);
-//		buffData.setEffectName(0, modifier);
-//		buffData.setEffectValue(0, value);
+		BuffInfo buff = buffOriginal.builder()
+				.setDuration(timeSeconds)
+				.addEffect(modifier, value)
+				.createBuffInfo();
 		
 		CreatureObject creatureObject = owner.getCreatureObject();
-		BuffIntent.broadcast(buffData, creatureObject, creatureObject, remove);
+		BuffIntent.broadcast(buff, creatureObject, creatureObject, remove);
 	}
 	
 	private String buffName(GameObjectType type) {

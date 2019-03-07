@@ -36,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -297,6 +298,11 @@ public final class BuffLoader extends DataLoader {
 		public boolean isDecayOnPvpDeath() {
 			return decayOnPvpDeath;
 		}
+		
+		public BuffInfoBuilder builder() {
+			return new BuffInfoBuilder(this);
+		}
+		
 	}
 	
 	public static class BuffInfoBuilder {
@@ -332,16 +338,31 @@ public final class BuffLoader extends DataLoader {
 		private BuffInfoBuilder(BuffInfo buff) {
 			this.name = buff.getName();
 			this.crc = buff.getCrc();
-		}
-		
-		public BuffInfoBuilder setName(String name) {
-			this.name = name;
-			return this;
-		}
-		
-		public BuffInfoBuilder setCrc(int crc) {
-			this.crc = crc;
-			return this;
+			this.group1 = buff.getGroup1();
+			this.group2 = buff.getGroup2();
+			this.block = buff.getBlock();
+			this.priority = buff.getPriority();
+			this.icon = buff.getIcon();
+			this.duration = buff.getDuration();
+			this.effectNames = buff.getEffectNames().clone();
+			this.effectValues = buff.getEffectValues().clone();
+			this.state = buff.getState();
+			this.callback = buff.getCallback();
+			this.particle = buff.getParticle();
+			this.particleHardpoint = buff.getParticleHardpoint();
+			this.visible = buff.getVisible();
+			this.debuff = buff.isDebuff();
+			this.stanceParticle = buff.getStanceParticle();
+			this.dispellPlayer = buff.isDispellPlayer();
+			this.removeOnDeath = buff.isRemoveOnDeath();
+			this.playerRemovable = buff.isPlayerRemovable();
+			this.celestial = buff.isCelestial();
+			this.maxStackCount = buff.getMaxStackCount();
+			this.persistent = buff.isPersistent();
+			this.displayOrder = buff.isDisplayOrder();
+			this.removeOnRespec = buff.isRemoveOnRespec();
+			this.aiRemoveOnCombatEnd = buff.isAiRemoveOnCombatEnd();
+			this.decayOnPvpDeath = buff.isDecayOnPvpDeath();
 		}
 		
 		public BuffInfoBuilder setGroup1(String group1) {
@@ -374,13 +395,12 @@ public final class BuffLoader extends DataLoader {
 			return this;
 		}
 		
-		public BuffInfoBuilder setEffectNames(String[] effectNames) {
-			this.effectNames = effectNames;
-			return this;
-		}
-		
-		public BuffInfoBuilder setEffectValues(double[] effectValues) {
-			this.effectValues = effectValues;
+		public BuffInfoBuilder addEffect(String param, double value) {
+			String [] names = Arrays.copyOf(effectNames, effectNames.length+1);
+			double [] values = Arrays.copyOf(effectValues, effectValues.length+1);
+			
+			names[names.length-1] = param;
+			values[values.length-1] = value;
 			return this;
 		}
 		
