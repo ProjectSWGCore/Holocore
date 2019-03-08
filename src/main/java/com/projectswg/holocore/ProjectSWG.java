@@ -45,6 +45,7 @@ import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.SafeMain;
 import me.joshlarson.jlcommon.control.ServiceBase;
 import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.log_wrapper.AnsiColorLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
@@ -81,11 +82,20 @@ public class ProjectSWG {
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		Log.addWrapper(new ConsoleLogWrapper());
+		if (List.of(args).contains("--print-colors"))
+			Log.addWrapper(new AnsiColorLogWrapper());
+		else
+			Log.addWrapper(new ConsoleLogWrapper());
+		Log.t("TESTING");
+		Log.d("TESTING");
+		Log.i("TESTING");
+		Log.w("TESTING");
+		Log.e("TESTING");
+		Log.a("TESTING");
 		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
-		
+
 		Log.i("Holocore version: %s", VERSION);
-		
+
 		if (ProjectSWG.class.getResourceAsStream("/marker.txt") == null) {
 			Log.a("Failed to read Holocore resources - aborting");
 			return -1;
@@ -99,7 +109,7 @@ public class ProjectSWG {
 			IntentManager.setInstance(intentManager);
 			List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager()); // Must be in this order to ensure Gameplay sees Support intents
 			managers.forEach(m -> m.setIntentManager(intentManager));
-			
+
 			setStatus(ServerStatus.INITIALIZING);
 			if (Manager.start(managers)) {
 				setStatus(ServerStatus.OPEN);
@@ -109,7 +119,7 @@ public class ProjectSWG {
 			setStatus(ServerStatus.TERMINATING);
 			Manager.stop(managers);
 		}
-		
+
 		shutdownStaticClasses();
 		printFinalPswgState();
 		return 0;
