@@ -86,12 +86,6 @@ public class ProjectSWG {
 			Log.addWrapper(new AnsiColorLogWrapper());
 		else
 			Log.addWrapper(new ConsoleLogWrapper());
-		Log.t("TESTING");
-		Log.d("TESTING");
-		Log.i("TESTING");
-		Log.w("TESTING");
-		Log.e("TESTING");
-		Log.a("TESTING");
 		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
 
 		Log.i("Holocore version: %s", VERSION);
