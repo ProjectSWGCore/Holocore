@@ -1,0 +1,62 @@
+
+							galaxyName						String	"Holocore"
+							galaxyMaxCharacters				Int		2
+							galaxyMaxOnline					Int		3000
+gameplay.combat.loot
+							lootRange						Int		64
+							cashLoot						Boolean	true
+							itemLoot						Boolean	true
+							lootCashHumanRange				Double	0.05
+							lootCashHumanNormalChance		Double	0.60
+							lootCashHumanNormal				Int		2
+							lootCashHumanElitechance		Double	0.80
+							lootCashHumanElite				Int		5
+							lootCashHumanBoss				Int		9
+gameplay.crafting.resource.galactic
+							resourceMinSpawnTime			Int		7
+							resourceMaxSpawnTime			Int		21
+							resourceMinSpawnRadius			Int		200
+							resourceMaxSpawnRadius			Int		500
+gameplay.player.experience
+							xpMultiplier					Double	1
+gameplay.world.travel
+							mountLimit						Int		1
+							ticketPriceFactor				Double	1
+							shuttleGroundTime				Int		120
+							shuttleAirTime					Int		60
+support.data
+							packetLogging					Boolean	false
+							cleanCharacterData				Int		0
+support.data.dev
+							characterBuilder				Boolean	false
+support.global.chat
+							spatialChatRange				Int		128
+support.global.health
+							performanceLog					Boolean	false
+support.global.network
+							keystoreFile					String	""
+							keystorePass					String	""
+							keystoreType					String	"PKCS12"
+							bindPort						Int		44463
+							bufferSize						Int		4096
+							flushRate						Int		10
+support.global.zone
+							loginServerName					String	"LoginServer"
+							loginServerId					Int		1
+							loginVersionChecks				Boolean	true
+						*	galaxyMaxCharacters				Int		2
+							firstZoneMessage				String	""
+							safeZoneIn						Boolean	false
+support.global.zone.creation
+							galaxyMaxCharactersPerPeriod	Int		2
+						*	galaxyMaxCharacters				Int		0
+							primarySpawnLocation			String	"tat_moseisley"
+support.npc.ai
+							npcRunSpeed						Double	9
+support.npc.spawn
+							spawnEggsEnabled				Boolean	true
+support.objects
+							events							String	""
+support.objects.items
+							staticItemsEnabled				Boolean	true
+
