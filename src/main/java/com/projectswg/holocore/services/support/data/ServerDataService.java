@@ -11,7 +11,7 @@ public class ServerDataService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		if (PswgDatabase.config().getInt(this, "cleanCharacterData", 0) == 1)
+		if (PswgDatabase.config().getBoolean(this, "cleanCharacterData", false))
 			wipeCharacterDatabase();
 		
 		return super.initialize();

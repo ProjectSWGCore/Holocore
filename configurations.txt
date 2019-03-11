@@ -26,7 +26,7 @@ gameplay.world.travel
 							shuttleAirTime					Int		60
 support.data
 							packetLogging					Boolean	false
-							cleanCharacterData				Int		0
+							cleanCharacterData				Boolean	false
 support.data.dev
 							characterBuilder				Boolean	false
 support.global.chat
