@@ -1,11 +1,9 @@
 package com.projectswg.holocore.services.support.data;
 
-import com.projectswg.common.data.info.Config;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.BasicLogStream;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -14,11 +12,9 @@ import java.io.File;
 public class PacketRecordingService extends Service {
 	
 	private final BasicLogStream packetLogger;
-	private final Config debugConfig;
 	
 	public PacketRecordingService() {
 		this.packetLogger = new BasicLogStream(new File("log/packets.txt"));
-		this.debugConfig = DataManager.getConfig(ConfigFile.DEBUG);
 	}
 	
 	@IntentHandler
@@ -40,7 +36,7 @@ public class PacketRecordingService extends Service {
 	}
 	
 	private boolean isPacketDebug() {
-		return debugConfig.getBoolean("PACKET-LOGGING", false);
+		return PswgDatabase.config().getBoolean(this, "packetLogging", false);
 	}
 	
 }

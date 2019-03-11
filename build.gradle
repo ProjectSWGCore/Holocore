@@ -6,16 +6,17 @@ plugins {
 	id 'idea'
 	id "com.github.johnrengelman.shadow" version "5.0.0"
 	id "org.javamodularity.moduleplugin" version "1.4.1"
-	id "org.beryx.jlink" version "2.6.5"
+	id "org.beryx.jlink" version "2.6.6"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
 sourceCompatibility = 11
 
 sourceSets {
-	display { }
-	utility { }
-	integration { }
+	main
+	display
+	utility
+	integration
 }
 
 test {
@@ -59,6 +60,7 @@ dependencies {
 	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	compile group: 'me.joshlarson', name: 'jlcommon-network', version: '1.0.0'
+	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
 	
 	testCompile 'junit:junit:4.12'
 	

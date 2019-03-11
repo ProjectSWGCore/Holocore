@@ -34,20 +34,18 @@ import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterF
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.namegen.NameFilter;
+import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation;
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreationRestriction;
-import com.projectswg.holocore.resources.support.data.namegen.NameFilter;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -64,7 +62,6 @@ public class CharacterCreationService extends Service {
 	private final SWGNameGenerator nameGenerator;
 	private final NameFilter nameFilter;
 	private final CharacterCreationRestriction creationRestriction;
-	private final PswgUserDatabase userDatabase;
 	
 	public CharacterCreationService() {
 		this.lockedNames = new HashMap<>();
@@ -72,25 +69,12 @@ public class CharacterCreationService extends Service {
 		this.nameGenerator = new SWGNameGenerator();
 		this.nameFilter = new NameFilter();
 		this.creationRestriction = new CharacterCreationRestriction(2);
-		this.userDatabase = new PswgUserDatabase();
-	}
-	
-	@Override
-	public boolean initialize() {
-		userDatabase.initialize();
-		return super.initialize();
 	}
 	
 	@Override
 	public boolean start() {
-		creationRestriction.setCreationsPerPeriod(DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS-PER-PERIOD", 2));
+		creationRestriction.setCreationsPerPeriod(PswgDatabase.config().getInt(this, "galaxyMaxCharactersPerPeriod", 2));
 		return super.start();
-	}
-	
-	@Override
-	public boolean terminate() {
-		userDatabase.terminate();
-		return super.terminate();
 	}
 	
 	@IntentHandler
@@ -110,7 +94,7 @@ public class CharacterCreationService extends Service {
 		int spaceIndex = name.indexOf(' ');
 		if (spaceIndex != -1)
 			name = name.substring(0, spaceIndex);
-		return userDatabase.isCharacter(name);
+		return PswgDatabase.users().isCharacter(name);
 	}
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
@@ -126,7 +110,7 @@ public class CharacterCreationService extends Service {
 	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
-		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
 		if (max != 0 && getCharacterCount(player.getUsername()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
@@ -159,7 +143,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		// Too many characters
-		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
 		if (max != 0 && getCharacterCount(player.getUsername()) >= max) {
 			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS, "too many characters");
 			return null;
@@ -207,7 +191,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private int getCharacterCount(String username) {
-		return userDatabase.getCharacters(username).size();
+		return PswgDatabase.users().getCharacters(username).size();
 	}
 	
 	private ErrorMessage getNameValidity(String name, boolean admin) {
@@ -234,7 +218,8 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private CreatureObject createCharacter(Player player, ClientCreateCharacter create) {
-		String spawnLocation = DataManager.getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
+		String spawnLocation = PswgDatabase.config().getString(this, "primarySpawnLocation", "tat_moseisley");
+		StandardLog.onPlayerTrace(this, player, "created player at spawn location %s", spawnLocation);
 		ZoneInsertion info = DataLoader.zoneInsertions().getInsertion(spawnLocation);
 		if (info == null) {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);

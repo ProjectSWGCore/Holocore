@@ -12,4 +12,5 @@ open module holocore {
 	
 	requires com.projectswg.common;
 	requires fast.json;
+	requires commons.cli;
 }

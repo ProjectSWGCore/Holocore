@@ -30,8 +30,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -88,7 +87,7 @@ public class ZoneRequester {
 	}
 	
 	private boolean isSafeZone() {
-		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-ZONE-SAFE", false);
+		return PswgDatabase.config().getBoolean(this, "safeZoneIn", false);
 	}
 	
 	private void sendClientFatal(Player player, String message) {

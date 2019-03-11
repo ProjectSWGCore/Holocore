@@ -6,13 +6,11 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.Intended
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildoutLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.database.PswgObjectDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -29,14 +27,12 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
 public class ObjectStorageService extends Service {
 	
-	private final PswgObjectDatabase objectDatabase;
 	private final ScheduledThreadPool persistenceThread;
 	private final Set<SWGObject> persistedObjects;
 	private final Map<Long, SWGObject> objectMap;
@@ -44,7 +40,6 @@ public class ObjectStorageService extends Service {
 	private final Map<String, BuildingObject> buildingLookup;
 	
 	public ObjectStorageService() {
-		this.objectDatabase = new PswgObjectDatabase();
 		this.persistenceThread = new ScheduledThreadPool(1, 3, "object-storage-service");
 		this.persistedObjects = new CopyOnWriteArraySet<>();
 		this.objectMap = new ConcurrentHashMap<>(256*1024, 0.8f, Runtime.getRuntime().availableProcessors());
@@ -54,7 +49,6 @@ public class ObjectStorageService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		this.objectDatabase.initialize();
 		ObjectLookup.setObjectAuthority(this::getObjectById);
 		BuildingLookup.setBuildingAuthority(buildingLookup::get);
 		
@@ -80,13 +74,12 @@ public class ObjectStorageService extends Service {
 	public boolean terminate() {
 		ObjectLookup.setObjectAuthority(null);
 		saveObjects();
-		this.objectDatabase.terminate();
 		return true;
 	}
 	
 	private boolean initializeSavedObjects() {
 		long startTime = StandardLog.onStartLoad("server objects");
-		List<MongoData> objectDocuments = objectDatabase.getObjects();
+		List<MongoData> objectDocuments = PswgDatabase.objects().getObjects();
 		Map<Long, SWGObject> objects = new HashMap<>();
 		AtomicLong highestId = new AtomicLong(0);
 		for (MongoData doc : objectDocuments) {
@@ -142,7 +135,7 @@ public class ObjectStorageService extends Service {
 	private void saveObjects() {
 		List<SWGObject> saveList = new ArrayList<>();
 		persistedObjects.forEach(obj -> saveChildren(saveList, obj));
-		objectDatabase.addObjects(saveList);
+		PswgDatabase.objects().addObjects(saveList);
 	}
 	
 	private void saveChildren(Collection<SWGObject> saveList, @Nullable SWGObject obj) {
@@ -163,7 +156,7 @@ public class ObjectStorageService extends Service {
 			if (persistedObjects.add(obj)) {
 				List<SWGObject> saveList = new ArrayList<>();
 				saveChildren(saveList, obj);
-				objectDatabase.addObjects(saveList);
+				PswgDatabase.objects().addObjects(saveList);
 			}
 		}
 	}
@@ -203,13 +196,13 @@ public class ObjectStorageService extends Service {
 		}
 		if (object.isPersisted())
 			persistedObjects.remove(object);
-		objectDatabase.removeObject(object.getObjectId());
+		PswgDatabase.objects().removeObject(object.getObjectId());
 		objectMap.remove(object.getObjectId());
 	}
 	
-	private static List<String> createEventList() {
+	private List<String> createEventList() {
 		List<String> events = new ArrayList<>();
-		for (String event : DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "").split(",")) {
+		for (String event : PswgDatabase.config().getString(this, "events", "").split(",")) {
 			if (event.isEmpty())
 				continue;
 			events.add(event.toLowerCase(Locale.US));

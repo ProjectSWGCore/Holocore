@@ -1,6 +1,5 @@
 package com.projectswg.holocore.services.gameplay.combat.loot;
 
-import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
@@ -9,8 +8,6 @@ import com.projectswg.holocore.intents.gameplay.combat.loot.LootGeneratedIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbIntegerColumnArraySet;
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbTextColumnArraySet;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
@@ -19,6 +16,7 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.NpcInfo;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
@@ -90,9 +88,9 @@ public final class LootGenerationService extends Service {
 		boolean cashGenerated = false;
 		boolean lootGenerated = false;
 		
-		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-CASH-LOOT", true))
+		if (PswgDatabase.config().getBoolean(this, "cashLoot", true))
 			cashGenerated = generateCreditChip(loot, lootInventory, corpse.getDifficulty(), corpse.getLevel());
-		if (DataManager.getConfig(ConfigFile.LOOTOPTIONS).getBoolean("ENABLE-ITEM-LOOT", true))
+		if (PswgDatabase.config().getBoolean(this, "itemLoot", true))
 			lootGenerated = generateLoot(loot, killer, lootInventory);
 		
 		if (!cashGenerated && !lootGenerated)
@@ -210,27 +208,26 @@ public final class LootGenerationService extends Service {
 			return false;
 		
 		ThreadLocalRandom random = ThreadLocalRandom.current();
-		Config lootConfig = DataManager.getConfig(ConfigFile.LOOTOPTIONS);
 		
-		double range = lootConfig.getDouble("LOOT-CASH-HUMAN-RANGE", 0.05);
+		double range = PswgDatabase.config().getDouble(this, "lootCashHumanRange", 0.05);
 		double cashLootRoll = random.nextDouble();
 		int credits;
 		
 		switch (difficulty) {
 			default:
 			case NORMAL:
-				if (cashLootRoll > lootConfig.getDouble("LOOT-CASH-HUMAN-NORMAL-CHANCE", 0.60))
+				if (cashLootRoll > PswgDatabase.config().getDouble(this, "lootCashHumanNormalChance", 0.60))
 					return false;
-				credits = lootConfig.getInt("LOOT-CASH-HUMAN-NORMAL", 2);
+				credits = PswgDatabase.config().getInt(this, "lootCashHumanNormal", 2);
 				break;
 			case ELITE:
-				if (cashLootRoll > lootConfig.getDouble("LOOT-CASH-HUMAN-ELITE-CHANCE", 0.80))
+				if (cashLootRoll > PswgDatabase.config().getDouble(this, "lootCashHumanElitechance", 0.80))
 					return false;
-				credits = lootConfig.getInt("LOOT-CASH-HUMAN-ELITE", 5);
+				credits = PswgDatabase.config().getInt(this, "lootCashHumanElite", 5);
 				break;
 			case BOSS:
 				// bosses always drop cash loot, so no need to check
-				credits = lootConfig.getInt("LOOT-CASH-HUMAN-BOSS", 9);
+				credits = PswgDatabase.config().getInt(this, "lootCashHumanBoss", 9);
 				break;
 		}
 		credits *= combatLevel;

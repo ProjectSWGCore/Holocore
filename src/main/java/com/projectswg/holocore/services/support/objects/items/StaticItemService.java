@@ -32,13 +32,11 @@ import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox;
-import com.projectswg.holocore.intents.support.data.config.ConfigChangedIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -61,7 +59,6 @@ import java.util.Map;
 public class StaticItemService extends Service {
 
 	private static final String GET_STATIC_ITEMS = "SELECT * FROM master_item";
-	private static final String CONFIG_OPTION_NAME = "STATIC-ITEMS-ENABLED";
 
 	// Map item_name to all object attributes. We do this because traversing the
 	// entire table every time an object is to be spawned is going to be VERY
@@ -74,7 +71,7 @@ public class StaticItemService extends Service {
 
 	@Override
 	public boolean initialize() {
-		boolean configEnable = DataManager.getConfig(ConfigFile.FEATURES).getBoolean(CONFIG_OPTION_NAME, true);
+		boolean configEnable = PswgDatabase.config().getBoolean(this, "staticItemsEnabled", true);
 		
 		if (configEnable) {
 			if (!loadStaticItems())
@@ -84,26 +81,7 @@ public class StaticItemService extends Service {
 		}
 		return super.initialize();
 	}
-
-	/**
-	 * Static items can be loaded/unloaded at runtime.
-	 */
-	@IntentHandler
-	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
-		if (cci.getKey().equals(CONFIG_OPTION_NAME)) {
-			boolean oldValue = Boolean.parseBoolean(cci.getOldValue());
-			boolean newValue = Boolean.parseBoolean(cci.getNewValue());
-			
-			if (newValue != oldValue) {    // If the value has changed
-				if (newValue) {    // If the new value is to enable static items
-					loadStaticItems();    // ... then load them!
-				} else {
-					unloadStaticItems();    // Otherwise, unload them
-				}
-			}
-		}
-	}
-
+	
 	private boolean loadStaticItems() {
 		long startTime = StandardLog.onStartLoad("static items");
 		try (RelationalServerData data = RelationalServerFactory.getServerData("items/master_item.db", "master_item")) {
@@ -158,11 +136,6 @@ public class StaticItemService extends Service {
 		}
 	}
 
-	private void unloadStaticItems() {
-		objectAttributesMap.clear();    // Clear the cache.
-		Log.i("Static items have been disabled");
-	}
-	
 	@IntentHandler
 	private void handleCreateStaticItemIntent(CreateStaticItemIntent csii) {
 		SWGObject container = csii.getContainer();

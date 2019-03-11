@@ -28,7 +28,7 @@ public final class CmdRequestSurvey implements ICmdCallback {
 			return;
 		}
 		if (player.getCreatureObject().hasCommand("admin")) {
-			List<GalacticResourceSpawn> spawns = new ArrayList<>(GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, player.getCreatureObject().getTerrain()));
+			List<GalacticResourceSpawn> spawns = new ArrayList<>(resource.getSpawns(player.getCreatureObject().getTerrain()));
 			spawns.sort(Comparator.comparingDouble(c -> player.getCreatureObject().getLocation().flatDistanceTo(c.getX(), c.getZ())));
 			for (GalacticResourceSpawn spawn : spawns) {
 				SystemMessageIntent.broadcastPersonal(player, "Spawn: " + spawn);

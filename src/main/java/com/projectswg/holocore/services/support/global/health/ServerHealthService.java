@@ -1,9 +1,7 @@
 package com.projectswg.holocore.services.support.global.health;
 
-import com.projectswg.common.data.info.Config;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.server_info.BasicLogStream;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.Service;
@@ -34,8 +32,7 @@ public class ServerHealthService extends Service {
 		this.previousGcTime = new AtomicLong(0);
 		this.completedInitialIntents = new AtomicBoolean(true);
 		
-		Config debugConfig = DataManager.getConfig(ConfigFile.DEBUG);
-		if (debugConfig.getBoolean("PERFORMANCE-LOG", false)) {
+		if (PswgDatabase.config().getBoolean(this, "performanceLog", false)) {
 			this.performanceOutput = new BasicLogStream(new File("log/performance.txt"));
 			executor.start();
 			performanceOutput.log("%s\t%s\t%s\t%s\t%s\t%s", "cpu", "memory-used", "memory-max", "gc-collectionRate", "gc-time", "intents");

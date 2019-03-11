@@ -26,16 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.network;
 
-import com.projectswg.common.data.info.Config;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent;
-import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.network.AdminNetworkClient;
 import com.projectswg.holocore.resources.support.global.network.NetworkClient;
 import com.projectswg.holocore.resources.support.global.network.UDPServer;
@@ -208,11 +205,6 @@ public class NetworkClientService extends Service {
 		disconnect(cci.getPlayer().getNetworkId());
 	}
 	
-	@IntentHandler
-	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
-		opi.getPlayer().sendPacket(opi.getPacket());
-	}
-	
 	private NetworkClient getClient(long id) {
 		NetworkClient client = tcpServer.getSession(id);
 		if (client != null || adminServer == null)
@@ -222,9 +214,8 @@ public class NetworkClientService extends Service {
 	
 	private SSLContext initializeSecurity() {
 		Log.t("Initializing encryption...");
-		Config config = DataManager.getConfig(ConfigFile.NETWORK);
 		try {
-			File keystoreFile = new File(config.getString("KEYSTORE-FILE", ""));
+			File keystoreFile = new File(PswgDatabase.config().getString(this, "keystoreFile", ""));
 			InputStream keystoreStream;
 			char[] passphrase;
 			KeyStore keystore;
@@ -235,8 +226,8 @@ public class NetworkClientService extends Service {
 				keystore = KeyStore.getInstance("PKCS12");
 			} else {
 				keystoreStream = new FileInputStream(keystoreFile);
-				passphrase = config.getString("KEYSTORE-PASS", "").toCharArray();
-				keystore = KeyStore.getInstance(config.getString("KEYSTORE-TYPE", "PKCS12"));
+				passphrase = PswgDatabase.config().getString(this, "keystorePass", "").toCharArray();
+				keystore = KeyStore.getInstance(PswgDatabase.config().getString(this, "keystoreType", "PKCS12"));
 			}
 			
 			keystore.load(keystoreStream, passphrase);
@@ -254,16 +245,16 @@ public class NetworkClientService extends Service {
 		}
 	}
 	
-	private static int getBindPort() {
-		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
+	private int getBindPort() {
+		return PswgDatabase.config().getInt(this, "bindPort", 44463);
 	}
 	
-	private static int getBufferSize() {
-		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+	private int getBufferSize() {
+		return PswgDatabase.config().getInt(this, "bufferSize", 4096);
 	}
 	
-	private static int getFlushRate() {
-		return DataManager.getConfig(ConfigFile.NETWORK).getInt("FLUSH-RATE", 10);
+	private int getFlushRate() {
+		return PswgDatabase.config().getInt(this, "flushRate", 10);
 	}
 	
 }

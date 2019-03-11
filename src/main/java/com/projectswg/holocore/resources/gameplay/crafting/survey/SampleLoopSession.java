@@ -43,7 +43,6 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawn;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceStats;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.CollectionLoader.CollectionSlotInfo;
@@ -269,7 +268,7 @@ public class SampleLoopSession {
 		
 		for (double x = sampleLocation.getX() - 5; x < sampleLocation.getX() + 5; x += 1) {
 			for (double z = sampleLocation.getZ() - 5; z < sampleLocation.getZ() + 5; z += 1) {
-				List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, sampleLocation.getTerrain());
+				List<GalacticResourceSpawn> spawns = resource.getSpawns(sampleLocation.getTerrain());
 				double concentration = 0;
 				for (GalacticResourceSpawn spawn : spawns) {
 					concentration += spawn.getConcentration(sampleLocation.getTerrain(), x, z);
@@ -289,7 +288,7 @@ public class SampleLoopSession {
 	}
 	
 	private boolean isAllowedToSample(double concentration) {
-		if (GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain()).isEmpty()) {
+		if (resource.getSpawns(creature.getTerrain()).isEmpty()) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_empty"));
 			stopSession();
 			return false;
@@ -324,7 +323,7 @@ public class SampleLoopSession {
 	}
 	
 	private double getConcentration() {
-		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, creature.getTerrain());
+		List<GalacticResourceSpawn> spawns = resource.getSpawns(creature.getTerrain());
 		double concentration = 0;
 		for (GalacticResourceSpawn spawn : spawns) {
 			concentration += spawn.getConcentration(sampleLocation.getTerrain(), sampleLocation.getX(), sampleLocation.getZ()) / 100.0;

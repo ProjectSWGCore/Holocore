@@ -35,14 +35,9 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.net.InetSocketAddress;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Locale;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
@@ -180,17 +175,27 @@ public class Player implements Comparable<Player> {
 	
 	public void sendPacket(SWGPacket packet) {
 		packetSender.accept(packet);
+		IntentChain.broadcastChain(new OutboundPacketIntent(this, packet));
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
 		packetSender.accept(packet1);
 		packetSender.accept(packet2);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
 		packetSender.accept(packet1);
 		packetSender.accept(packet2);
 		packetSender.accept(packet3);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
@@ -198,6 +203,12 @@ public class Player implements Comparable<Player> {
 		packetSender.accept(packet2);
 		packetSender.accept(packet3);
 		packetSender.accept(packet4);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3),
+				new OutboundPacketIntent(this, packet4)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
@@ -206,12 +217,13 @@ public class Player implements Comparable<Player> {
 		packetSender.accept(packet3);
 		packetSender.accept(packet4);
 		packetSender.accept(packet5);
-	}
-	
-	public void sendPacket(Collection<? extends SWGPacket> packets) {
-		for (SWGPacket p : packets) {
-			broadcast(new OutboundPacketIntent(this, p));
-		}
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3),
+				new OutboundPacketIntent(this, packet4),
+				new OutboundPacketIntent(this, packet5)
+		);
 	}
 	
 	public void broadcast(Intent intent) {

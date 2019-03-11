@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.support.global.zone;
 
 import com.projectswg.common.data.BCrypt;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
-import com.projectswg.common.data.info.Config;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
 import com.projectswg.common.network.packets.swg.holo.login.HoloLoginRequestPacket;
@@ -48,11 +47,9 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase.UserMetadata;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgUserDatabase.UserMetadata;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -76,24 +73,10 @@ public class LoginService extends Service {
 	private static final String REQUIRED_VERSION = "20111130-15:46";
 	private static final byte [] SESSION_TOKEN = new byte[24];
 	
-	private final PswgUserDatabase userDatabase;
 	private final Map<String, List<CreatureObject>> players;
 	
 	public LoginService() {
-		this.userDatabase = new PswgUserDatabase();
 		this.players = new HashMap<>();
-	}
-	
-	@Override
-	public boolean initialize() {
-		userDatabase.initialize();
-		return super.initialize();
-	}
-	
-	@Override
-	public boolean terminate() {
-		userDatabase.terminate();
-		return super.terminate();
 	}
 	
 	@IntentHandler
@@ -111,7 +94,7 @@ public class LoginService extends Service {
 	@IntentHandler
 	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
 		SWGObject obj = dci.getCreature();
-		if (userDatabase.deleteCharacter(obj.getObjectId())) {
+		if (PswgDatabase.users().deleteCharacter(obj.getObjectId())) {
 			DestroyObjectIntent.broadcast(obj);
 			Player owner = obj.getOwner();
 			if (owner != null)
@@ -136,9 +119,8 @@ public class LoginService extends Service {
 	}
 	
 	private String getServerString() {
-		Config c = DataManager.getConfig(ConfigFile.NETWORK);
-		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
-		int id = c.getInt("LOGIN-SERVER-ID", 1);
+		String name = PswgDatabase.config().getString(this, "loginServerName", "LoginServer");
+		int id = PswgDatabase.config().getInt(this, "loginServerId", 1);
 		return name + ':' + id;
 	}
 	
@@ -152,7 +134,7 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		
-		UserMetadata user = userDatabase.getUser(loginRequest.getUsername());
+		UserMetadata user = PswgDatabase.users().getUser(loginRequest.getUsername());
 		player.setUsername(loginRequest.getUsername());
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", loginRequest.getSocketAddress());
@@ -179,7 +161,7 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(Player player, DeleteCharacterRequest request) {
 		SWGObject obj = ObjectLookup.getObjectById(request.getPlayerId());
-		boolean success = obj instanceof CreatureObject && userDatabase.deleteCharacter(player.getUsername(), obj.getObjectId());
+		boolean success = obj instanceof CreatureObject && PswgDatabase.users().deleteCharacter(player.getUsername(), obj.getObjectId());
 		player.sendPacket(new DeleteCharacterResponse(success));
 		if (success) {
 			DestroyObjectIntent.broadcast(obj);
@@ -204,14 +186,14 @@ public class LoginService extends Service {
 		assert player.getPlayerServer() == PlayerServer.NONE;
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
-		final boolean doClientCheck = DataManager.getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
+		final boolean doClientCheck = PswgDatabase.config().getBoolean(this, "loginVersionChecks", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect version: %s] from %s", id.getVersion(), id.getSocketAddress());
 			onLoginClientVersionError(player, id);
 			return;
 		}
 		
-		UserMetadata user = userDatabase.getUser(id.getUsername());
+		UserMetadata user = PswgDatabase.users().getUser(id.getUsername());
 		player.setUsername(id.getUsername());
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", id.getSocketAddress());
@@ -273,7 +255,7 @@ public class LoginService extends Service {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
-		cluster.setMaxCharacters(DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		cluster.setMaxCharacters(PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 2));
 		player.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		player.sendPacket(token);
 		player.sendPacket(cluster);

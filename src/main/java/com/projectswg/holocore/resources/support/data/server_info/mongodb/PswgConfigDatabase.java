@@ -25,44 +25,32 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.data.server_info.mongodb.database;
+package com.projectswg.holocore.resources.support.data.server_info.mongodb;
 
-import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.*;
-import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
+import me.joshlarson.jlcommon.log.Log;
 import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
-public class PswgObjectDatabase extends PswgDatabase {
+public class PswgConfigDatabase implements PswgDatabase {
 	
 	private MongoCollection<Document> collection;
 	
-	public PswgObjectDatabase() {
+	PswgConfigDatabase() {
 		this.collection = null;
 	}
 	
 	@Override
-	public void initialize() {
-		super.initialize();
-		this.collection = getCollectionByName("objects").withWriteConcern(WriteConcern.JOURNALED);
-		
-		this.collection.countDocuments();
-		this.collection.createIndex(Indexes.ascending("id"), new IndexOptions().unique(true));
-	}
-	
-	@Override
-	public void terminate() {
-		super.terminate();
-		this.collection = null;
+	public void open(MongoCollection<Document> collection) {
+		this.collection = collection;
+		collection.createIndex(Indexes.ascending("package"), new IndexOptions().unique(true));
 	}
 	
 	@NotNull
@@ -70,28 +58,68 @@ public class PswgObjectDatabase extends PswgDatabase {
 		return collection;
 	}
 	
-	public void addObject(@NotNull SWGObject obj) {
-		collection.replaceOne(Filters.eq("id", obj.getObjectId()), SWGObjectFactory.save(obj, new MongoData()).toDocument(), new ReplaceOptions().upsert(true));
+	public String getString(Object o, String key, String def) {
+		for (Document config : getConfigurations(o)) {
+			if (config.containsKey(key))
+				return config.getString(key);
+		}
+		return def;
 	}
 	
-	public void addObjects(@NotNull Collection<SWGObject> objects) {
-		collection.bulkWrite(objects.stream()
-				.map(obj -> new ReplaceOneModel<>(
-						Filters.eq("id", obj.getObjectId()),
-						SWGObjectFactory.save(obj).toDocument(),
-						new ReplaceOptions().upsert(true)
-				))
-				.collect(Collectors.toList()),
-				new BulkWriteOptions().ordered(false));
+	public boolean getBoolean(Object o, String key, boolean def) {
+		for (Document config : getConfigurations(o)) {
+			if (config.containsKey(key))
+				return config.getBoolean(key);
+		}
+		return def;
 	}
 	
-	public void removeObject(long id) {
-		collection.deleteOne(Filters.eq("id", id));
+	public int getInt(Object o, String key, int def) {
+		for (Document config : getConfigurations(o)) {
+			if (config.containsKey(key))
+				return config.getInteger(key);
+		}
+		return def;
 	}
 	
-	@NotNull
-	public List<MongoData> getObjects() {
-		return collection.find().map(MongoData::new).into(new ArrayList<>());
+	public double getDouble(Object o, String key, double def) {
+		for (Document config : getConfigurations(o)) {
+			if (config.containsKey(key))
+				return config.getDouble(key);
+		}
+		return def;
+	}
+	
+	public double getLong(Object o, String key, long def) {
+		for (Document config : getConfigurations(o)) {
+			if (config.containsKey(key))
+				return config.getLong(key);
+		}
+		return def;
+	}
+	
+	private List<Document> getConfigurations(Object o) {
+		String packageKey = o instanceof Class ? ((Class<?>) o).getPackageName() : Objects.requireNonNull(o).getClass().getPackageName();
+		if (!packageKey.startsWith("com.projectswg.holocore."))
+			throw new IllegalArgumentException("package lookup object does not belong to holocore");
+		
+		packageKey = packageKey.substring(24);
+		if (packageKey.startsWith("intents."))
+			throw new IllegalArgumentException("intents should not be querying configs");
+		
+		if (packageKey.startsWith("resources.") || packageKey.startsWith("services."))
+			packageKey = packageKey.substring(packageKey.indexOf('.')+1);
+		
+		List<Document> configs = new ArrayList<>();
+		while (!packageKey.isEmpty()) {
+			Document doc = collection.find(Filters.eq("package", packageKey)).first();
+			if (doc != null)
+				configs.add(doc);
+			
+			int lastDot = packageKey.lastIndexOf('.');
+			packageKey = lastDot == -1 ? "" : packageKey.substring(0, lastDot);
+		}
+		return configs;
 	}
 	
 }

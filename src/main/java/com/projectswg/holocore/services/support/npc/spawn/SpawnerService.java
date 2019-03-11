@@ -35,11 +35,10 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.StaticSpawnInfo;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
@@ -77,7 +76,7 @@ public final class SpawnerService extends Service {
 	@Override
 	public boolean initialize() {
 		executor.start();
-		if (DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
+		if (PswgDatabase.config().getBoolean(this, "spawnEggsEnabled", true))
 			loadSpawners();
 		
 		return true;

@@ -9,10 +9,8 @@ import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
@@ -39,7 +37,7 @@ public class NpcCombatMode extends NpcMode {
 		this.returnLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
 		this.iteration = new AtomicLong(0);
-		this.runSpeed = DataManager.getConfig(ConfigFile.PRIMARY).getDouble("NPC-RUN-SPEED", 9);
+		this.runSpeed = PswgDatabase.config().getDouble(this, "npcRunSpeed", 9);
 	}
 	
 	@Override

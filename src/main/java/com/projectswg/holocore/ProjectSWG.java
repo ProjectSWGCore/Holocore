@@ -29,12 +29,11 @@ package com.projectswg.holocore;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
-import com.projectswg.common.data.info.Config;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
 import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
@@ -49,11 +48,14 @@ import me.joshlarson.jlcommon.log.log_wrapper.AnsiColorLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
+import org.apache.commons.cli.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.OffsetTime;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class ProjectSWG {
 	
@@ -79,26 +81,40 @@ public class ProjectSWG {
 	}
 	
 	static int run(String [] args) {
+		CommandLine arguments;
+		try {
+			arguments = new DefaultParser().parse(createArgumentOptions(), args);
+		} catch (Throwable t) {
+			//noinspection UseOfSystemOutOrSystemErr
+			System.err.println("Failed to parse arguments. Reason: " + t.getClass().getName() + ": " + t.getMessage());
+			new HelpFormatter().printHelp("java -jar Holocore.jar", createArgumentOptions());
+			return -1;
+		}
+		if (arguments.hasOption("help")) {
+			new HelpFormatter().printHelp("java -jar Holocore.jar", createArgumentOptions());
+			return 0;
+		}
+		
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		if (List.of(args).contains("--print-colors"))
+		if (arguments.hasOption("print-colors"))
 			Log.addWrapper(new AnsiColorLogWrapper());
 		else
 			Log.addWrapper(new ConsoleLogWrapper());
 		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
-
+		
 		Log.i("Holocore version: %s", VERSION);
-
+		
 		if (ProjectSWG.class.getResourceAsStream("/marker.txt") == null) {
 			Log.a("Failed to read Holocore resources - aborting");
 			return -1;
 		}
+		setupDatabase(arguments);
 		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
 		initializeServerFactory();
-		setupGalaxy();
-		setupParameters(args);
+		setupGalaxy(arguments);
 		try (IntentManager intentManager = new IntentManager(false, Runtime.getRuntime().availableProcessors(), 8)) {
 			IntentManager.setInstance(intentManager);
 			List<ServiceBase> managers = Arrays.asList(new GameplayManager(), new SupportManager()); // Must be in this order to ensure Gameplay sees Support intents
@@ -155,62 +171,47 @@ public class ProjectSWG {
 		}
 	}
 	
-	private static void setupParameters(String [] args) {
-		Map<String, String> params = getParameters(args);
-		GALAXY.setAdminServerPort(safeParseInt(params.get("-adminServerPort")));
-	}
-	
 	private static void setStatus(ServerStatus status) {
 		new ServerStatusIntent(status).broadcast();
 	}
 	
-	private static Map<String, String> getParameters(String [] args) {
-		Map<String, String> params = new HashMap<>();
-		for (int i = 0; i < args.length; i++) {
-			String arg = args[i];
-			String nextArg = (i+1 < args.length) ? args[i+1] : null;
-			if (arg.indexOf('=') != -1) {
-				String [] parts = arg.split("=", 2);
-				if (parts.length < 2)
-					params.put(parts[0], null);
-				else
-					params.put(parts[0], parts[1]);
-			} else if (arg.equalsIgnoreCase("-adminServerPort") && nextArg != null) {
-				params.put(arg, nextArg);
-				i++;
-			} else {
-				params.put(arg, null);
-			}
-		}
-		return params;
-	}
-	
-	private static int safeParseInt(String str) {
-		if (str == null)
-			return -1;
-		try {
-			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
-			return -1;
-		}
-	}
-	
-	private static void setupGalaxy() {
-		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
+	private static void setupGalaxy(CommandLine arguments) {
 		GALAXY.setId(1);
-		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
+		GALAXY.setName(PswgDatabase.config().getString(ProjectSWG.class, "galaxyName", "Holocore"));
 		GALAXY.setAddress("");
 		GALAXY.setPopulation(0);
 		GALAXY.setZoneOffset(OffsetTime.now().getOffset());
 		GALAXY.setZonePort(0);
 		GALAXY.setPingPort(0);
 		GALAXY.setStatus(GalaxyStatus.DOWN);
-		GALAXY.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-		GALAXY.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-		GALAXY.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setMaxCharacters(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxCharacters", 2));
+		GALAXY.setOnlinePlayerLimit(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
+		GALAXY.setOnlineFreeTrialLimit(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
 		GALAXY.setRecommended(true);
+		try {
+			GALAXY.setAdminServerPort(Integer.parseInt(arguments.getOptionValue("admin-port", "-1")));
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("admin server port must be an integer", e);
+		}
 		
 		ChatAvatar.setGalaxy(GALAXY.getName());
+	}
+	
+	private static void setupDatabase(CommandLine arguments) {
+		String dbStr = arguments.getOptionValue("database", "mongodb://localhost");
+		String db = arguments.getOptionValue("database", "nge");
+		
+		PswgDatabase.initialize(dbStr, db);
+	}
+	
+	private static Options createArgumentOptions() {
+		Options options = new Options();
+		options.addOption(Option.builder("h").longOpt("help").desc("print this message").build());
+		options.addOption(Option.builder("C").longOpt("print-colors").desc("print colors to signify various log levels").build());
+		options.addOption(Option.builder("a").longOpt("admin-port").argName("port").hasArg(true).desc("sets the admin server port").build());
+		options.addOption(Option.builder("c").longOpt("database").argName("str").hasArg(true).desc("sets the connection string for mongodb (default: mongodb://localhost)").build());
+		options.addOption(Option.builder("d").longOpt("dbName").argName("db").hasArg(true).desc("sets the mongodb database (default: nge)").build());
+		return options;
 	}
 	
 	public static class CoreException extends RuntimeException {

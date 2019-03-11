@@ -110,13 +110,6 @@ public class GenericPlayer extends Player {
 		handlePacket(packet5);
 	}
 	
-	@Override
-	public void sendPacket(Collection<? extends SWGPacket> packets) {
-		this.packets.addAll(packets);
-		for (SWGPacket packet : packets)
-			handlePacket(packet);
-	}
-	
 	@Nullable
 	public SWGPacket getNextPacket() {
 		if (packets.isEmpty())

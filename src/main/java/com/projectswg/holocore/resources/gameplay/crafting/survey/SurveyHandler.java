@@ -43,7 +43,6 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawn;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
@@ -117,7 +116,7 @@ class SurveyHandler {
 		final double rangeInc = resolution.getRange()/(resolution.getResolution()-1.0);
 		
 		SurveyMessage surveyMessage = new SurveyMessage();
-		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, location.getTerrain());
+		List<GalacticResourceSpawn> spawns = resource.getSpawns(location.getTerrain());
 		double highestX = baseLocationX;
 		double highestZ = baseLocationX;
 		double highestConcentration = 0;
@@ -214,7 +213,7 @@ class SurveyHandler {
 			return false;
 		}
 		// The specified resource no longer exists (or the player changed planets)
-		if (!GalacticResourceContainer.getContainer().getSpawnedResources(location.getTerrain()).contains(resource)) {
+		if (resource.getSpawns(location.getTerrain()).isEmpty()) {
 			sendErrorMessage(creature, "error_message", "survey_error");
 			return false;
 		}

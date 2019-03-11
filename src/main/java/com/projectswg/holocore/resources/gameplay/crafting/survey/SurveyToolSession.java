@@ -63,8 +63,8 @@ public class SurveyToolSession {
 		String resourceType = surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length()-4);
 		ResourceListForSurveyMessage survey = new ResourceListForSurveyMessage(creature.getObjectId(), surveyTool.getTemplate());
 		RawResourceType surveyToolType = getTypeFromSurveyTool(resourceType);
-		for (GalacticResource resource : GalacticResourceContainer.getContainer().getSpawnedResources(creature.getTerrain())) {
-			RawResource rawResource = GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId());
+		for (GalacticResource resource : GalacticResourceContainer.INSTANCE.getSpawnedResources(creature.getTerrain())) {
+			RawResource rawResource = GalacticResourceContainer.INSTANCE.getRawResource(resource.getRawResourceId());
 			if (!surveyToolType.isResourceType(rawResource) || rawResource.getResourceType().isResourceType(RawResourceType.CREATURE_RESOURCES))
 				continue;
 			survey.addResource(new ResourceItem(resource.getName(), rawResource.getName().getKey(), resource.getId()));

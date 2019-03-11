@@ -1,15 +1,7 @@
 package com.projectswg.holocore.services.support.data;
 
-import com.projectswg.common.data.info.Config;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.users.PswgUserDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
-
-import java.io.File;
 
 public class ServerDataService extends Service {
 	
@@ -19,36 +11,14 @@ public class ServerDataService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		Config config = DataManager.getConfig(ConfigFile.PRIMARY);
-		
-		if (config.getInt("CLEAN-CHARACTER-DATA", 0) == 1)
+		if (PswgDatabase.config().getInt(this, "cleanCharacterData", 0) == 1)
 			wipeCharacterDatabase();
-		if (config.getInt("WIPE-ODB-FILES", 0) == 1)
-			wipeOdbFiles();
-
+		
 		return super.initialize();
 	}
 	
 	private void wipeCharacterDatabase() {
-		PswgUserDatabase db = new PswgUserDatabase();
-		db.initialize();
-		db.deleteCharacters();
-		db.terminate();
-	}
-	
-	private void wipeOdbFiles() {
-		File directory = new File("./odb");
-		
-		File [] files = directory.listFiles();
-		if (files == null)
-			return;
-		for (File f : files) {
-			if (!f.isDirectory() && (f.getName().endsWith(".db") || f.getName().endsWith(".db.tmp"))) {
-				if (!f.delete()) {
-					Log.e("Failed to delete ODB: %s", f);
-				}
-			}
-		}
+		PswgDatabase.users().deleteCharacters();
 	}
 	
 }

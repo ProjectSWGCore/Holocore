@@ -39,11 +39,10 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -435,12 +434,12 @@ public class PlayerMountService extends Service {
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
-	private static boolean isMountable(CreatureObject mount) {
-		return mount.hasOptionFlags(OptionFlag.MOUNT);
+	private int getMountLimit() {
+		return PswgDatabase.config().getInt(this, "mountLimit", 1);
 	}
 	
-	private static int getMountLimit() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("MOUNT-LIMIT", 1);
+	private static boolean isMountable(CreatureObject mount) {
+		return mount.hasOptionFlags(OptionFlag.MOUNT);
 	}
 	
 	private static class Mount {

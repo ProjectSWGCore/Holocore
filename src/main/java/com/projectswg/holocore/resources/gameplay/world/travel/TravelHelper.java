@@ -28,18 +28,16 @@ package com.projectswg.holocore.resources.gameplay.world.travel;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.data.info.Config;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelGroup.ShuttleStatus;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -188,9 +186,8 @@ public class TravelHelper {
 	}
 	
 	private void createGalaxyTravels() {
-		Config config = DataManager.getConfig(ConfigFile.FEATURES);
-		long groundTime = config.getInt("SHUTTLE-GROUND-TIME", 120);
-		long airTime = config.getInt("SHUTTLE-AIR-TIME", 60);
+		long groundTime = PswgDatabase.config().getInt(this, "shuttleGroundTime", 120);
+		long airTime = PswgDatabase.config().getInt(this, "shuttleAirTime", 60);
 		
 		createGalaxyTravel(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate(), 17, groundTime, airTime);
 		createGalaxyTravel(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate(), 21, groundTime, airTime);
