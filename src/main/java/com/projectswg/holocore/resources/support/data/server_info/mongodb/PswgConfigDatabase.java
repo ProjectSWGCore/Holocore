@@ -100,10 +100,13 @@ public class PswgConfigDatabase implements PswgDatabase {
 	
 	private List<Document> getConfigurations(Object o) {
 		String packageKey = o instanceof Class ? ((Class<?>) o).getPackageName() : Objects.requireNonNull(o).getClass().getPackageName();
-		if (!packageKey.startsWith("com.projectswg.holocore."))
+		if (packageKey.startsWith("com.projectswg.holocore."))
+			packageKey = packageKey.substring(24);
+		else if (packageKey.startsWith("com.projectswg.holocore"))
+			packageKey = packageKey.substring(23);
+		else
 			throw new IllegalArgumentException("package lookup object does not belong to holocore");
 		
-		packageKey = packageKey.substring(24);
 		if (packageKey.startsWith("intents."))
 			throw new IllegalArgumentException("intents should not be querying configs");
 		
@@ -111,6 +114,8 @@ public class PswgConfigDatabase implements PswgDatabase {
 			packageKey = packageKey.substring(packageKey.indexOf('.')+1);
 		
 		List<Document> configs = new ArrayList<>();
+		if (collection == null)
+			return configs;
 		while (!packageKey.isEmpty()) {
 			Document doc = collection.find(Filters.eq("package", packageKey)).first();
 			if (doc != null)
