@@ -1,0 +1,3 @@
+line	cooldown	damage	critical	action_cost	freeshot	swift
+TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+fs_dm	expertise_cooldown_line_fs_dm	expertise_damage_line_fs_dm	expertise_critical_line_fs_dm	expertise_action_line_fs_dm	expertise_freeshot_fs_dm	-
