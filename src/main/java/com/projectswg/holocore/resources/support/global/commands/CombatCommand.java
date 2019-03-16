@@ -44,10 +44,12 @@ public class CombatCommand extends Command {
 	private final double healthCost;
 	private final double actionCost;
 	private final DamageType damageType;
+	private final DamageType elementalType;
 	private final boolean ignoreDistance;
 	private final boolean pvpOnly;
 	private final int attackRolls;
 	private final double percentAddFromWeapon;
+	private final double bypassArmor;
 	private final int addedDamage;
 	private final String buffNameTarget;
 	private final String buffNameSelf;
@@ -72,10 +74,12 @@ public class CombatCommand extends Command {
 		this.healthCost = builder.healthCost;
 		this.actionCost = builder.actionCost;
 		this.damageType = builder.damageType;
+		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
 		this.pvpOnly = builder.pvpOnly;
 		this.attackRolls = builder.attackRolls;
 		this.percentAddFromWeapon = builder.percentAddFromWeapon;
+		this.bypassArmor = builder.bypassArmor;
 		this.addedDamage = builder.addedDamage;
 		this.buffNameTarget = builder.buffNameTarget;
 		this.buffNameSelf = builder.buffNameSelf;
@@ -140,6 +144,10 @@ public class CombatCommand extends Command {
 		return damageType;
 	}
 	
+	public DamageType getElementalType() {
+		return elementalType;
+	}
+	
 	public boolean isIgnoreDistance() {
 		return ignoreDistance;
 	}
@@ -154,6 +162,10 @@ public class CombatCommand extends Command {
 	
 	public double getPercentAddFromWeapon() {
 		return percentAddFromWeapon;
+	}
+	
+	public double getBypassArmor() {
+		return bypassArmor;
 	}
 	
 	public int getAddedDamage() {
@@ -227,10 +239,12 @@ public class CombatCommand extends Command {
 		private double healthCost;
 		private double actionCost;
 		private DamageType damageType;
+		private DamageType elementalType;
 		private boolean ignoreDistance;
 		private boolean pvpOnly;
 		private int attackRolls;
 		private double percentAddFromWeapon;
+		private double bypassArmor;
 		private int addedDamage;
 		private String buffNameTarget;
 		private String buffNameSelf;
@@ -294,6 +308,11 @@ public class CombatCommand extends Command {
 			return this;
 		}
 		
+		public CombatCommandBuilder withElementalType(DamageType elementalType) {
+			this.elementalType = elementalType;
+			return this;
+		}
+		
 		public CombatCommandBuilder withIgnoreDistance(boolean ignoreDistance) {
 			this.ignoreDistance = ignoreDistance;
 			return this;
@@ -311,6 +330,11 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withPercentAddFromWeapon(double percentAddFromWeapon) {
 			this.percentAddFromWeapon = percentAddFromWeapon;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBypassArmor(double bypassArmor) {
+			this.bypassArmor = bypassArmor;
 			return this;
 		}
 		
