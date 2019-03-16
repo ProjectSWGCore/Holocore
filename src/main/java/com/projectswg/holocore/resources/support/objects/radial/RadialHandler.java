@@ -39,6 +39,7 @@ public enum RadialHandler {
 		initializeMiscRadials();
 		initializeContainerRadials();
 		initializePowerupRadials();
+		initializeSpecialEditionGoggleRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
@@ -122,5 +123,12 @@ public enum RadialHandler {
 		registerHandler(PowerupService.BREASTPLATE, new PowerupRadial());
 		registerHandler(PowerupService.SHIRT, new PowerupRadial());
 		registerHandler(PowerupService.WEAPON, new PowerupRadial());
+	}
+	
+	private void initializeSpecialEditionGoggleRadials() {
+		registerHandler("object/tangible/wearables/goggles/shared_goggles_s01.iff", new SpecialEditionGogglesRadial(true));
+		registerHandler("object/tangible/wearables/goggles/shared_goggles_s02.iff", new SpecialEditionGogglesRadial(false));
+		registerHandler("object/tangible/wearables/goggles/shared_goggles_s03.iff", new SpecialEditionGogglesRadial(false));
+		registerHandler("object/tangible/wearables/goggles/shared_goggles_s06.iff", new SpecialEditionGogglesRadial(false));
 	}
 }
