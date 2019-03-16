@@ -20,7 +20,8 @@ enum CachedLoader {
 	COMMANDS			(CommandLoader::new),
 	SLOT_DEFINITIONS	(SlotDefinitionLoader::new),
 	ZONE_INSERTIONS		(TerrainZoneInsertionLoader::new),
-	VEHICLES			(VehicleLoader::new);
+	VEHICLES			(VehicleLoader::new),
+	SPECIAL_LINES		(SpecialLineLoader::new);
 	
 	private final AtomicReference<SoftReference<DataLoader>> cachedLoader;
 	private final Supplier<DataLoader> supplier;
