@@ -82,4 +82,8 @@ public abstract class DataLoader {
 		return (VehicleLoader) CachedLoader.VEHICLES.load();
 	}
 	
+	public static SpecialLineLoader specialLines() {
+		return (SpecialLineLoader) CachedLoader.SPECIAL_LINES.load();
+	}
+	
 }

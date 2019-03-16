@@ -27,10 +27,7 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.combat.AttackInfo;
-import com.projectswg.common.data.combat.CombatStatus;
-import com.projectswg.common.data.combat.HitLocation;
-import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.combat.*;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
@@ -136,30 +133,98 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
 			
+			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
 			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
+			int finalDamage = rawDamage;
 			
 			info.setRawDamage(rawDamage);
-			info.setFinalDamage(rawDamage);    // Final damage will be modified by armour and defensive rolls later
-			info.setDamageType(weapon.getDamageType());
+			info.setDamageType(damageType);
 			
-			// TODO block roll for defenders
+			// The armor of the target will mitigate some of the damage
+			armorMitigate(info, damageType, target, command);
+			
+			// TODO block roll for defender
 			// TODO Critical hit roll for attacker
-			// TODO armour
+			
+			// End rolls
+			int targetHealth = target.getHealth();
+			boolean incapacitate = targetHealth <= finalDamage;
+			
+			if (incapacitate) {
+				finalDamage = targetHealth;	// Target took more damage than they had health left. Final damage becomes the amount of remaining health.
+				RequestCreatureDeathIntent.broadcast(target, source);
+			} else {
+				target.modifyHealth(-finalDamage);
+			}
+			
+			info.setFinalDamage(finalDamage);
 			
 			target.sendObservers(createCombatSpam(source, target, weapon, info, command));
-			
-			int finalDamage = info.getFinalDamage();
-			
 			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
 			
 			target.handleDamage(source, finalDamage);
-			
-			if (target.getHealth() <= finalDamage)
-				RequestCreatureDeathIntent.broadcast(target, source);
-			else
-				target.modifyHealth(-finalDamage);
 		}
 		
 		source.sendObservers(action);
 	}
+	
+	private static void armorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
+		// Armor mitigation
+		int armor = getArmor(damageType, target);
+		float armorReduction = getArmorReduction(target, damageType, command);
+		int currentDamage = info.getFinalDamage();
+		int armorAbsorbed = (int) (currentDamage * armorReduction);
+		currentDamage -= armorAbsorbed;
+		
+		info.setArmor(armor);	// Assumed to be the amount of armor points the defender has against the primary damage type
+		info.setBlockedDamage(armorAbsorbed);	// Describes how many points of damage the armor absorbed
+		
+		info.setFinalDamage(currentDamage);
+	}
+	
+	private static int getArmor(DamageType damageType, CreatureObject creature) {
+		switch (damageType) {
+			case KINETIC:				return creature.getSkillModValue("kinetic");
+			case ENERGY:				return creature.getSkillModValue("energy");
+			case ELEMENTAL_HEAT:		return creature.getSkillModValue("heat");
+			case ELEMENTAL_COLD:		return creature.getSkillModValue("cold");
+			case ELEMENTAL_ACID:		return creature.getSkillModValue("acid");
+			case ELEMENTAL_ELECTRICAL:	return creature.getSkillModValue("electricity");
+			default:					return 0;
+		}
+	}
+	
+	/**
+	 *
+	 * @param command to get the damage type of
+	 * @param weapon fallback in case the combat command does not provide its own {@code DamageType}
+	 * @return {@code DamageType} of either the {@code command} or the {@code weapon}.
+	 */
+	private static DamageType getDamageType(CombatCommand command, WeaponObject weapon) {
+		return command.getPercentAddFromWeapon() > 0 ? weapon.getDamageType() : command.getElementalType();
+	}
+	
+	/**
+	 *
+	 * @param target to read armor values from
+	 * @param damageType to get an armor value for
+	 * @param command that has been executed by an enemy of {@code target}
+	 * @return a number between 0.0 and 1.0
+	 */
+	private static float getArmorReduction(CreatureObject target, DamageType damageType, CombatCommand command) {
+		int baseArmor = getArmor(damageType, target);
+
+		double commandBypassArmor = command.getBypassArmor();
+		
+		if(commandBypassArmor > 0) {
+			// This command bypasses armor
+			baseArmor *= 1.0 - commandBypassArmor;
+		}
+		
+		float mitigation = (float) (90 * (1 - Math.exp(-0.000125 * baseArmor))) + baseArmor / 9000f;
+		
+		return mitigation / 100;
+		
+	}
+	
 }
