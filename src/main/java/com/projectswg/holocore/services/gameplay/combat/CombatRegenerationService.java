@@ -1,10 +1,15 @@
 package com.projectswg.holocore.services.gameplay.combat;
 
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureRevivedIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -13,6 +18,7 @@ import me.joshlarson.jlcommon.control.Service;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatRegenerationService extends Service {
 	
@@ -60,16 +66,24 @@ public class CombatRegenerationService extends Service {
 			return;
 		CombatCommand command = (CombatCommand) eci.getCommand();
 		CreatureObject source = eci.getSource();
-		
+		String lineName = command.getSpecialLine();
+		SpecialLineLoader lineLoader = DataLoader.specialLines();
+		SpecialLineLoader.SpecialLineInfo specialLine = lineLoader.getSpecialLine(lineName);
 		double actionCost = command.getActionCost() * command.getAttackRolls();
 		int currentAction = source.getAction();
+		
+		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
 		
 		if (actionCost <= 0 || actionCost > currentAction) {
 			return;
 		}
 		
-		source.modifyAction((int) -actionCost);
-		startActionRegeneration(source);
+		if (specialLine != null && !lineName.isEmpty()) {
+			// Roll for a freeshot
+			rollFreeshot(source, actionCost, specialLine);
+		} else {
+			deductActionPoints(source, actionCost);
+		}
 	}
 	
 	@IntentHandler
@@ -97,6 +111,28 @@ public class CombatRegenerationService extends Service {
 	private void handleCreatureRevivedIntent(CreatureRevivedIntent cri) {
 		startHealthRegeneration(cri.getCreature());
 		startActionRegeneration(cri.getCreature());
+	}
+	
+	private void rollFreeshot(CreatureObject source, double actionCost, SpecialLineLoader.SpecialLineInfo specialLine) {
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		String freeshotModName = specialLine.getFreeshotModName();
+		int skillModValue = source.getSkillModValue(freeshotModName);
+		int generated = random.nextInt(0, 100);
+		
+		if (skillModValue > generated) {
+			// They rolled a freeshot. This requires a skill mod value of at least 1.
+			ShowFlyText showFlyText = new ShowFlyText(source.getObjectId(), new StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT);
+			
+			source.sendSelf(showFlyText);
+		} else {
+			// Normal behavior
+			deductActionPoints(source, actionCost);
+		}
+	}
+	
+	private void deductActionPoints(CreatureObject source, double actionCost) {
+		source.modifyAction((int) -actionCost);
+		startActionRegeneration(source);
 	}
 	
 	private void periodicRegeneration() {

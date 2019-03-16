@@ -60,6 +60,7 @@ public class CombatCommand extends Command {
 	private final DelayAttackEggPosition eggPosition;
 	private final double coneLength;
 	private final HealAttrib healAttrib;
+	private final String specialLine;
 	
 	private CombatCommand(CombatCommandBuilder builder) {
 		super(builder);
@@ -87,6 +88,7 @@ public class CombatCommand extends Command {
 		this.eggPosition = builder.eggPosition;
 		this.coneLength = builder.coneLength;
 		this.healAttrib = builder.healAttrib;
+		this.specialLine = builder.specialLine;
 	}
 	
 	@Override
@@ -202,6 +204,10 @@ public class CombatCommand extends Command {
 		return healAttrib;
 	}
 	
+	public String getSpecialLine() {
+		return specialLine;
+	}
+	
 	public static CombatCommandBuilder builder() {
 		return new CombatCommandBuilder();
 	}
@@ -237,6 +243,7 @@ public class CombatCommand extends Command {
 		private DelayAttackEggPosition eggPosition;
 		private double coneLength;
 		private HealAttrib healAttrib;
+		private String specialLine;
 		
 		private CombatCommandBuilder() {
 			this.animations = new EnumMap<>(WeaponType.class);
@@ -364,6 +371,11 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withHealAttrib(HealAttrib healAttrib) {
 			this.healAttrib = healAttrib;
+			return this;
+		}
+		
+		public CombatCommandBuilder withSpecialLine(String specialLine) {
+			this.specialLine = specialLine;
 			return this;
 		}
 		

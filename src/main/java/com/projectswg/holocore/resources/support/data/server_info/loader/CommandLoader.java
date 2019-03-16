@@ -128,6 +128,7 @@ public class CommandLoader extends DataLoader {
 						.withConeLength(set.getReal("coneLength"))
 						.withAddedDamage((int) set.getInt("addedDamage"))
 						.withPercentAddFromWeapon(set.getReal("percentAddFromWeapon"))
+						.withSpecialLine(set.getText("specialLine"))
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
