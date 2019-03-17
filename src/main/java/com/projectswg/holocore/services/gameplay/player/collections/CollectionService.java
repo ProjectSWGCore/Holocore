@@ -50,7 +50,7 @@ public class CollectionService extends Service {
 	public boolean initialize() {
 		int count = 0;
 		long startTime = StandardLog.onStartLoad("collections");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/items/collection.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/items/items_collection.sdb"))) {
 			while (set.next()) {
 				String iff = set.getText("iff_template");
 				String slotName = set.getText("collection_slot_name");

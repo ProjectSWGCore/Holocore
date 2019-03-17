@@ -834,13 +834,13 @@ spawn_dat_831	DATHOMIR	dat_world	AREA	0	-7000.6	340.0	3932.0	0	1	a Dark Jedi Sen
 spawn_dat_832	DATHOMIR	dat_world	AREA	0	-7011.6	350.5	3956.2	0	1	a Dark Jedi Sentinel	treasure_guard_jedi_elite	AGGRESSIVE	E	90	95	Outback	Dathomir	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_833	DATHOMIR	dat_world	AREA	0	-7032.0	341.7	3932.1	0	1	a Dark Jedi Sentinel	treasure_guard_jedi_elite	AGGRESSIVE	E	90	95	Outback	Dathomir	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_834	DATHOMIR	dat_world	AREA	0	-2420.2	48.2	-5083.0	0	1	a Dark Jedi Sentinel	treasure_guard_jedi_elite	AGGRESSIVE	E	90	95	Outback	Dathomir	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_835	DATHOMIR	dat_world	AREA	0	5649.2	122.0	1866.2	0	1	a purbole	purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_836	DATHOMIR	dat_world	AREA	0	5706.7	122.0	1945.2	0	1	a purbole	purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_835	DATHOMIR	dat_world	AREA	0	5649.2	122.0	1866.2	0	1	a purbole	purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_836	DATHOMIR	dat_world	AREA	0	5706.7	122.0	1945.2	0	1	a purbole	purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle	0	0	0	600
 spawn_dat_837	DATHOMIR	dat_world	AREA	0	5702.9	122.0	1938.3	0	1	a purbole elder	purbole_elder	AGGRESSIVE	B	60	65	Outback	Downed Ship	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_838	DATHOMIR	dat_world	AREA	0	5652.6	125.0	1908.8	0	1	a purbole hunter	purbole_hunter	AGGRESSIVE	E	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_839	DATHOMIR	dat_world	AREA	0	5690.8	125.0	1954.4	0	1	a purbole hunter	purbole_hunter	AGGRESSIVE	E	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_840	DATHOMIR	dat_world	AREA	0	5681.6	125.0	1880.9	0	1	a purbole stalker	purbole_stalker	AGGRESSIVE	E	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_841	DATHOMIR	dat_world	AREA	0	5727.3	125.0	1924.7	0	1	a purbole stalker	purbole_stalker	AGGRESSIVE	E	60	65	Outback	Downed Ship	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_838	DATHOMIR	dat_world	AREA	0	5652.6	125.0	1908.8	0	1	a purbole hunter	purbole_hunter	AGGRESSIVE	E	60	65	Outback	Downed Ship	2	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_839	DATHOMIR	dat_world	AREA	0	5690.8	125.0	1954.4	0	1	a purbole hunter	purbole_hunter	AGGRESSIVE	E	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_840	DATHOMIR	dat_world	AREA	0	5681.6	125.0	1880.9	0	1	a purbole stalker	purbole_stalker	AGGRESSIVE	E	60	65	Outback	Downed Ship	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_841	DATHOMIR	dat_world	AREA	0	5727.3	125.0	1924.7	0	1	a purbole stalker	purbole_stalker	AGGRESSIVE	E	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle	0	0	0	600
 spawn_dat_842	DATHOMIR	dat_world	AREA	0	5711.0	125.0	1824.0	0	1	Kirby	smuggler_fence_kirby	INVULNERABLE	N	100	100	Outback	Downed Ship	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_843	DATHOMIR	dat_world	AREA	0	5693.5	127.8	1797.7	0	1	a pirate	smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle	0	0	0	600
 spawn_dat_844	DATHOMIR	dat_world	AREA	0	5727.3	121.7	1791.5	0	1	a pirate	smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle	0	0	0	600
