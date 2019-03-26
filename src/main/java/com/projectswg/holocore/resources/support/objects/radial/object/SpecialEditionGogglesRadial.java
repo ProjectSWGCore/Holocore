@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.radial.object;
 
-import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -66,6 +65,8 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 				showColorPicker(player, target, "/private/index_color_2");
 				break;
 			}
+			default:
+				break;
 		}
 	}
 	
@@ -77,7 +78,7 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 				TangibleObject tangibleTarget = (TangibleObject) target;
 				
 				int selectedIndex = SuiColorPicker.getSelectedIndex(parameters);
-				tangibleTarget.putCustomization(customizationVariable, new CustomizationVariable(selectedIndex));
+				tangibleTarget.putCustomization(customizationVariable, selectedIndex);
 			}
 		}));
 		
