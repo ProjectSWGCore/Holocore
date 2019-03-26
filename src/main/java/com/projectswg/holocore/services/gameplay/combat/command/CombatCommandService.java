@@ -27,15 +27,22 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
+import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitType;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader.SpecialLineInfo;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus;
 
@@ -72,14 +79,30 @@ public class CombatCommandService extends Service {
 	private void handleChatCommandIntent(ExecuteCommandIntent eci) {
 		if (!eci.getCommand().isCombatCommand() || !(eci.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) eci.getCommand();
+		CombatCommand command = (CombatCommand) eci.getCommand();
 		
-		eci.getSource().modifyAction(-(int) c.getActionCost());
-		CombatCommandHitType hitType = hitTypeMap.get(c.getHitType());
+		CreatureObject source = eci.getSource();
+		SpecialLineInfo specialLine = DataLoader.specialLines().getSpecialLine(command.getSpecialLine());
+		double actionCost = command.getActionCost() * command.getAttackRolls();
+		int currentAction = source.getAction();
+		
+		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
+		
+		if (actionCost <= 0 || actionCost > currentAction) {
+			return;
+		}
+		
+		if (specialLine != null && source.getSkillModValue(specialLine.getFreeshotModName()) > ThreadLocalRandom.current().nextInt(0, 100)) {
+			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT));
+		} else {
+			source.modifyAction(-(int) command.getActionCost());
+		}
+		
+		CombatCommandHitType hitType = hitTypeMap.get(command.getHitType());
 		if (hitType != null)
-			hitType.handle(eci.getSource(), eci.getTarget(), c, eci.getArguments());
+			hitType.handle(source, eci.getTarget(), command, eci.getArguments());
 		else
-			handleStatus(eci.getSource(), CombatStatus.UNKNOWN);
+			handleStatus(source, CombatStatus.UNKNOWN);
 	}
 	
 }

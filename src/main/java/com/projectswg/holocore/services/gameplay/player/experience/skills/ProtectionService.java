@@ -39,6 +39,7 @@ import java.util.Objects;
 
 /**
  * Manages protection granted to the player when equipping a Jedi robe or a piece of equipment.
+ * Also adds additional protection granted by innate armor.
  */
 public class ProtectionService extends Service {
 	
@@ -94,6 +95,21 @@ public class ProtectionService extends Service {
 		} else if (oldContainer instanceof CreatureObject) {
 			// They unequipped something
 			handleTransfer(item, (CreatureObject) oldContainer, false);	// oldContainer is a character
+		}
+	}
+	
+	@IntentHandler
+	private void handleSkillModIntent(SkillModIntent intent) {
+		// Modify protection values if an innate armor skillmod is being granted
+		String skillModName = intent.getSkillModName();
+		
+		if ("expertise_innate_protection_all".equals(skillModName)) {
+			new SkillModIntent("kinetic", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
+			new SkillModIntent("energy", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
+			new SkillModIntent("heat", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
+			new SkillModIntent("cold", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
+			new SkillModIntent("acid", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
+			new SkillModIntent("electricity", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
 		}
 	}
 	

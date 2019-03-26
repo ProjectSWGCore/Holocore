@@ -1,0 +1,80 @@
+set_id	count	buff_name	comment
+INTEGER	INTEGER	TEXT	TEXT
+10001	3	set_bonus_bh_dps_1	Enforcer Set
+10001	4	set_bonus_bh_dps_2	Enforcer Set
+10001	5	set_bonus_bh_dps_3	Enforcer Set
+10002	3	set_bonus_bh_utility_a_1	Flawless Accuracy Set
+10002	4	set_bonus_bh_utility_a_2	Flawless Accuracy Set
+10002	5	set_bonus_bh_utility_a_3	Flawless Accuracy Set
+10003	3	set_bonus_bh_utility_b_1	Dire Fate Set
+10003	4	set_bonus_bh_utility_b_2	Dire Fate Set
+10003	5	set_bonus_bh_utility_b_3	Dire Fate Set
+20001	3	set_bonus_medic_dps_1	Battle Medic Set
+20001	4	set_bonus_medic_dps_2	Battle Medic Set
+20001	5	set_bonus_medic_dps_3	Battle Medic Set
+20002	3	set_bonus_medic_utility_a_1	First Responder Set
+20002	4	set_bonus_medic_utility_a_2	First Responder Set
+20002	5	set_bonus_medic_utility_a_3	First Responder Set
+20003	3	set_bonus_medic_utility_b_1	Blackbar's DOOM Set
+20003	4	set_bonus_medic_utility_b_2	Blackbar's DOOM Set
+20003	5	set_bonus_medic_utility_b_3	Blackbar's DOOM Set
+30001	3	set_bonus_jedi_dps_1	Lightsaber Duelist Set
+30001	4	set_bonus_jedi_dps_2	Lightsaber Duelist Set
+30001	5	set_bonus_jedi_dps_3	Lightsaber Duelist Set
+30002	3	set_bonus_jedi_utility_a_1	Piece Dark Fury Set
+30002	4	set_bonus_jedi_utility_a_2	Piece Dark Fury Set
+30002	5	set_bonus_jedi_utility_a_3	Piece Dark Fury Set
+30003	3	set_bonus_jedi_utility_b_1	Jedi Protector Set
+30003	4	set_bonus_jedi_utility_b_2	Jedi Protector Set
+30003	5	set_bonus_jedi_utility_b_3	Jedi Protector Set
+40001	3	set_bonus_commando_dps_1	Grenadier Set
+40001	4	set_bonus_commando_dps_2	Grenadier Set
+40001	5	set_bonus_commando_dps_3	Grenadier Set
+40002	3	set_bonus_commando_utility_a_1	Frontman Set
+40002	4	set_bonus_commando_utility_a_2	Frontman Set
+40002	5	set_bonus_commando_utility_a_3	Frontman Set
+40003	3	set_bonus_commando_utility_b_1	Juggernaut Set
+40003	4	set_bonus_commando_utility_b_2	Juggernaut Set
+40003	5	set_bonus_commando_utility_b_3	Juggernaut Set
+50001	3	set_bonus_smuggler_dps_1	Scoundrel Set
+50001	4	set_bonus_smuggler_dps_2	Scoundrel Set
+50001	5	set_bonus_smuggler_dps_3	Scoundrel Set
+50002	3	set_bonus_smuggler_utility_a_1	Rogue Set
+50002	4	set_bonus_smuggler_utility_a_2	Rogue Set
+50002	5	set_bonus_smuggler_utility_a_3	Rogue Set
+50003	3	set_bonus_smuggler_utility_b_1	Gambler Set
+50003	4	set_bonus_smuggler_utility_b_2	Gambler Set
+50003	5	set_bonus_smuggler_utility_b_3	Gambler Set
+60001	3	set_bonus_spy_dps_1	Assassin Set
+60001	4	set_bonus_spy_dps_2	Assassin Set
+60001	5	set_bonus_spy_dps_3	Assassin Set
+60002	3	set_bonus_spy_utility_a_1	Ghost Set
+60002	4	set_bonus_spy_utility_a_2	Ghost Set
+60002	5	set_bonus_spy_utility_a_3	Ghost Set
+60003	3	set_bonus_spy_utility_b_1	Spy Razor Cat Set
+60003	4	set_bonus_spy_utility_b_2	Spy Razor Cat Set
+60003	5	set_bonus_spy_utility_b_3	Spy Razor Cat Set
+70001	3	set_bonus_officer_dps_1	Dead Eye Set
+70001	4	set_bonus_officer_dps_2	Dead Eye Set
+70001	5	set_bonus_officer_dps_3	Dead Eye Set
+70002	3	set_bonus_officer_utility_a_1	Hellstorm Set
+70002	4	set_bonus_officer_utility_a_2	Hellstorm Set
+70002	5	set_bonus_officer_utility_a_3	Hellstorm Set
+70003	3	set_bonus_officer_utility_b_1	General's Set
+70003	4	set_bonus_officer_utility_b_2	General's Set
+70003	5	set_bonus_officer_utility_b_3	General's Set
+80001	3	set_bonus_hero_1	Heroism Set
+80001	4	set_bonus_hero_2	Heroism Set
+80001	5	set_bonus_hero_3	Heroism Set
+90001	2	set_bonus_jedi_robe_1	Gift of the Krevaaki 
+100001	3	set_bonus_rebel_snow_armor_3	Alliance Armor Cold Resistance
+100001	5	set_bonus_rebel_snow_armor_5	Alliance Armor Cold Resistance
+100001	7	set_bonus_rebel_snow_armor_7	Alliance Armor Cold Resistance
+100001	9	set_bonus_rebel_snow_armor_9	Alliance Armor Cold Resistance
+100001	11	set_bonus_rebel_snow_armor_11	Alliance Armor Cold Resistance
+110001	3	set_bonus_imperial_snow_armor_3	Imperial Armor Cold Resistance
+110001	5	set_bonus_imperial_snow_armor_5	Imperial Armor Cold Resistance
+110001	7	set_bonus_imperial_snow_armor_7	Imperial Armor Cold Resistance
+110001	9	set_bonus_imperial_snow_armor_9	Imperial Armor Cold Resistance
+110001	11	set_bonus_imperial_snow_armor_11	Imperial Armor Cold Resistance
+120001	1	towHelmetAccuracy	Target Enhancement Helm

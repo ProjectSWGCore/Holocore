@@ -1,13 +1,11 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import com.projectswg.holocore.resources.support.data.server_info.loader.SkillTemplateLoader.SkillTemplateInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.IOException;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -156,6 +154,10 @@ public abstract class DataLoader {
 	
 	public static VehicleLoader vehicles() {
 		return getInstance(VehicleLoader.class, VehicleLoader::new);
+	}
+	
+	public static SpecialLineLoader specialLines() {
+		return getInstance(SpecialLineLoader.class, SpecialLineLoader::new);
 	}
 	
 	private static <T extends DataLoader> T getInstance(Class<T> klass, Supplier<T> fallback) {
