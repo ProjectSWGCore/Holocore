@@ -1,0 +1,34 @@
+armor	collection	consumable	costume	dna	grant	item	object	schematic	storyteller	weapon	wearable
+item_name	item_name	item_name	item_name	item_name	item_name	item_name	item_name	item_name	item_name	item_name	item_name
+type	type	type	type	type	type	type	type	type	type	type	type
+string_name	string_name	string_name	string_name	string_name	string_name	string_name	string_name	string_name	string_name	string_name	string_name
+volume	volume	volume	volume	volume	volume	volume	volume	volume	volume	volume	volume
+hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points
+armor_level	collection_beginSlotId	lifespan			grant_GCW_faction	index_color_0	index_color_0	schematic_id		min_damage	required_faction
+armor_category	collection_endSlotId	buff_name	buff_name		grant_GCW_value	index_color_1	index_color_1	schematic_type		max_damage	required_level
+protection	collection_name	hide_buff_identity			grant_vehicle	index_color_2	index_color_2	schematic_use		weapon_category	required_profession
+required_faction	collection_slot_name	cool_down_group			grant_mount	index_color_3	index_color_3	schematic_skill_needed		weapon_type	race_wookiee
+required_level	index_color_0	reuse_time			grant_greeter	value	value	required_level		damage_type	race_ithorian
+required_profession	index_color_1	healing_power			grant_holopet	isUnique	isUnique	required_profession		elemental_type	race_rodian
+race_wookiee	index_color_2	client_effect			grant_familiar					elemental_damage	race_trandoshan
+race_ithorian	index_color_3	client_animation			no_trade					attack_speed	race_rest
+race_rodian		required_level			skill_mods					special_attack_cost	no_trade
+race_trandoshan		required_profession			isUnique					min_range_distance	bio_link
+race_rest		no_trade								max_range_distance	worn_item_buff
+no_trade		bio_link								proc_effect	deconstruct
+bio_link		charges								target_dps	sockets
+worn_item_buff										actual_dps	skill_mods
+deconstruct										required_faction	index_color_0
+sockets										required_level	index_color_1
+skill_mods										required_profession	index_color_2
+index_color_0										race_wookiee	index_color_3
+index_color_1										race_ithorian	value
+index_color_2										race_rodian	
+index_color_3										race_trandoshan	
+value										race_rest	
+										no_trade	
+										bio_link	
+										deconstruct	
+										sockets	
+										skill_mods	
+										value	
