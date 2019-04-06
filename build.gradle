@@ -6,7 +6,8 @@ plugins {
 	id 'idea'
 	id "com.github.johnrengelman.shadow" version "5.0.0"
 	id "org.javamodularity.moduleplugin" version "1.4.1"
-	id "org.beryx.jlink" version "2.6.6"
+	id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+	id "org.beryx.jlink" version "2.9.0"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
@@ -34,6 +35,7 @@ idea {
 }
 
 jlink {
+	addOptions '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages'
 	imageDir.set(file("$buildDir/holocore"))
 	imageZip.set(file("$buildDir/holocore.zip"))
 	launcher {
@@ -44,7 +46,7 @@ jlink {
 }
 
 shadowJar {
-	archiveBaseName.set("Holocore")
+	archivesBaseName = 'Holocore'
 	archiveClassifier.set(null)
 	archiveVersion.set(null)
 }
@@ -56,6 +58,7 @@ repositories {
 dependencies {
 	compile project(':pswgcommon')
 	
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.21'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
@@ -81,8 +84,16 @@ dependencies {
 	integrationCompile 'junit:junit:4.12'
 }
 
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 task CreateConvertLoginJar(type: ShadowJar) {
-	archiveBaseName.set("ConvertLogin")
+	archivesBaseName = "ConvertLogin"
 	archiveClassifier.set(null)
 	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
@@ -92,7 +103,7 @@ task CreateConvertLoginJar(type: ShadowJar) {
 }
 
 task CreatePacketCaptureProcessor(type: ShadowJar) {
-	archiveBaseName.set("PacketCaptureProcessor")
+	archivesBaseName = "PacketCaptureProcessor"
 	archiveClassifier.set(null)
 	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.packets.ProcessPacketCapture'
