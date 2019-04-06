@@ -56,6 +56,10 @@ public abstract class DataLoader {
 		return getInstance(SkillTemplateLoader.class, SkillTemplateLoader::new);
 	}
 	
+	public static StaticItemLoader staticItems() {
+		return getInstance(StaticItemLoader.class, StaticItemLoader::new);
+	}
+	
 	public static PlayerLevelLoader playerLevels() {
 		return getInstance(PlayerLevelLoader.class, PlayerLevelLoader::new);
 	}

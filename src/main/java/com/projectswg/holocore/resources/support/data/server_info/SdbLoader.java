@@ -381,6 +381,7 @@ public class SdbLoader {
 		
 		@Override
 		public String getText(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist in sdb " + file;
 			return columnValues[columnIndices.get(columnName)];
 		}
 		
@@ -395,6 +396,7 @@ public class SdbLoader {
 		
 		@Override
 		public long getInt(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist in sdb " + file;
 			return getInt(columnIndices.get(columnName));
 		}
 		
@@ -409,6 +411,7 @@ public class SdbLoader {
 		
 		@Override
 		public double getReal(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist in sdb " + file;
 			return getReal(columnIndices.get(columnName));
 		}
 		
@@ -419,6 +422,7 @@ public class SdbLoader {
 		
 		@Override
 		public boolean getBoolean(String columnName) {
+			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist in sdb " + file;
 			return getBoolean(columnIndices.get(columnName));
 		}
 		
