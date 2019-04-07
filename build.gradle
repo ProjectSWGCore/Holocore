@@ -10,7 +10,7 @@ plugins {
 	id "org.beryx.jlink" version "2.9.0"
 }
 
-mainClassName = 'com.projectswg.holocore.ProjectSWG'
+mainClassName = 'holocore/com.projectswg.holocore.ProjectSWG'
 sourceCompatibility = 11
 
 sourceSets {

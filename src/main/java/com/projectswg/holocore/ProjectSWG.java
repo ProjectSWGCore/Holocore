@@ -83,7 +83,7 @@ public class ProjectSWG {
 	static int run(String [] args) {
 		CommandLine arguments;
 		try {
-			arguments = new DefaultParser().parse(createArgumentOptions(), args);
+			arguments = new DefaultParser().parse(createArgumentOptions(), args, true);
 		} catch (Throwable t) {
 			//noinspection UseOfSystemOutOrSystemErr
 			System.err.println("Failed to parse arguments. Reason: " + t.getClass().getName() + ": " + t.getMessage());
