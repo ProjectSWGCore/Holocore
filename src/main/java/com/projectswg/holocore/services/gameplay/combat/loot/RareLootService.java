@@ -242,7 +242,7 @@ public class RareLootService extends Service {
 		}
 		
 		@Override
-		public void success(SWGObject[] createdObjects) {
+		public void success(List<SWGObject> createdObjects) {
 			// Apply rarity item attribute to the created RLS item
 			for (SWGObject createdObject : createdObjects) {
 				createdObject.addAttribute("@obj_attr_n:rare_loot_category", "Rare Item");

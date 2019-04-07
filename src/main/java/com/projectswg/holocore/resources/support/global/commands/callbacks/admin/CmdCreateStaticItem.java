@@ -10,6 +10,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public final class CmdCreateStaticItem implements ICmdCallback {
 	
 	@Override
@@ -28,7 +30,7 @@ public final class CmdCreateStaticItem implements ICmdCallback {
 		public CreateStaticItemCallback(@NotNull Player player) {this.player = player;}
 		
 		@Override
-		public void success(SWGObject[] createdObjects) {
+		public void success(List<SWGObject> createdObjects) {
 			new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
 		}
 		

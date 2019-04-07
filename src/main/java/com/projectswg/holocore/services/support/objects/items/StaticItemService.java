@@ -44,6 +44,7 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +81,7 @@ public class StaticItemService extends Service {
 					SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName));
 			}
 		}
-		objectCreationHandler.success(objects.toArray(SWGObject[]::new));
+		objectCreationHandler.success(Collections.unmodifiableList(objects));
 	}
 	
 	private SWGObject createItem(String itemName, SWGObject container) {
@@ -301,7 +302,7 @@ public class StaticItemService extends Service {
 	}
 	
 	public interface ObjectCreationHandler {
-		void success(SWGObject[] createdObjects);
+		void success(List<SWGObject> createdObjects);
 		boolean isIgnoreVolume();
 		
 		default void containerFull() {
@@ -318,11 +319,11 @@ public class StaticItemService extends Service {
 		}
 		
 		@Override
-		public void success(SWGObject[] createdObjects) {
-			long[] objectIds = new long[createdObjects.length];
+		public void success(List<SWGObject> createdObjects) {
+			long[] objectIds = new long[createdObjects.size()];
 
 			for (int i = 0; i < objectIds.length; i++) {
-				objectIds[i] = createdObjects[i].getObjectId();
+				objectIds[i] = createdObjects.get(i).getObjectId();
 			}
 
 			receiver.sendSelf(new ShowLootBox(receiver.getObjectId(), objectIds));
