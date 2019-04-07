@@ -94,7 +94,7 @@ public class CharacterCreationService extends Service {
 		int spaceIndex = name.indexOf(' ');
 		if (spaceIndex != -1)
 			name = name.substring(0, spaceIndex);
-		return PswgDatabase.users().isCharacter(name);
+		return PswgDatabase.objects().isCharacter(name);
 	}
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
@@ -111,7 +111,7 @@ public class CharacterCreationService extends Service {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
-		if (max != 0 && getCharacterCount(player.getUsername()) >= max)
+		if (max != 0 && getCharacterCount(player.getAccountId()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
@@ -144,7 +144,7 @@ public class CharacterCreationService extends Service {
 		}
 		// Too many characters
 		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
-		if (max != 0 && getCharacterCount(player.getUsername()) >= max) {
+		if (max != 0 && getCharacterCount(player.getAccountId()) >= max) {
 			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS, "too many characters");
 			return null;
 		}
@@ -171,6 +171,7 @@ public class CharacterCreationService extends Service {
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err, String actualReason) {
 		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
 		switch (err) {
+			case NAME_DECLINED_INTERNAL_ERROR:
 			case NAME_APPROVED:
 				reason = NameFailureReason.NAME_RETRY;
 				break;
@@ -182,7 +183,6 @@ public class CharacterCreationService extends Service {
 			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
 			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
 			case SERVER_CHARACTER_CREATION_MAX_CHARS: reason = NameFailureReason.TOO_MANY_CHARACTERS; break;
-			case NAME_DECLINED_INTERNAL_ERROR: reason = NameFailureReason.NAME_RETRY;
 			default:
 				break;
 		}
@@ -191,7 +191,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private int getCharacterCount(String username) {
-		return PswgDatabase.users().getCharacters(username).size();
+		return PswgDatabase.objects().getCharacterCount(username);
 	}
 	
 	private ErrorMessage getNameValidity(String name, boolean admin) {

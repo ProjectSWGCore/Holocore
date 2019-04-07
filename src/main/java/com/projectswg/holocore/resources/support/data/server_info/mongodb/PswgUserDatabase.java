@@ -28,12 +28,12 @@
 package com.projectswg.holocore.resources.support.data.server_info.mongodb;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
 import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 public class PswgUserDatabase implements PswgDatabase {
 	
@@ -47,42 +47,11 @@ public class PswgUserDatabase implements PswgDatabase {
 	public void open(MongoCollection<Document> collection) {
 		this.collection = collection;
 		collection.createIndex(Indexes.ascending("username"), new IndexOptions().unique(true));
-		collection.createIndex(Indexes.ascending("characters.firstName"), new IndexOptions().unique(true).partialFilterExpression(Filters.type("characters.firstName", "string")));
 	}
 	
 	@Nullable
 	public UserMetadata getUser(@NotNull String username) {
 		return collection.find(Filters.eq("username", username)).map(UserMetadata::new).first();
-	}
-	
-	@Nullable
-	public CharacterMetadata getCharacter(long id) {
-		return collection.find(Filters.eq("characters.id", id)).map(CharacterMetadata::new).first();
-	}
-	
-	public boolean isCharacter(@NotNull String firstName) {
-		return collection.countDocuments(Filters.eq("characters.firstName", firstName.toLowerCase(Locale.US)), new CountOptions().limit(1)) > 0;
-	}
-	
-	@NotNull
-	public List<CharacterMetadata> getCharacters(@NotNull String username) {
-		return collection.aggregate(Arrays.asList(Aggregates.match(Filters.eq("username", username)), Aggregates.unwind("$characters"))).map(CharacterMetadata::new).into(new ArrayList<>());
-	}
-	
-	public boolean deleteCharacters() {
-		return collection.updateMany(Filters.exists("characters"), Updates.unset("characters")).getModifiedCount() > 0;
-	}
-	
-	public boolean deleteCharacter(String username, long id) {
-		return collection.updateOne(Filters.and(Filters.eq("username", username), Filters.eq("characters.id", id)), Updates.pull("characters", Filters.eq("id", id))).getModifiedCount() > 0;
-	}
-	
-	public boolean deleteCharacter(long id) {
-		return collection.updateOne(Filters.eq("characters.id", id), Updates.pull("characters", Filters.eq("id", id))).getModifiedCount() > 0;
-	}
-	
-	public boolean insertCharacter(@NotNull String username, @NotNull CharacterMetadata character) {
-		return collection.updateOne(Filters.eq("username", username), Updates.addToSet("characters", character.toDocument())).getModifiedCount() > 0;
 	}
 	
 	public static class UserMetadata {
@@ -119,63 +88,6 @@ public class PswgUserDatabase implements PswgDatabase {
 		
 		public boolean isBanned() {
 			return banned;
-		}
-		
-	}
-	
-	public static class CharacterMetadata {
-		
-		private final long id;
-		private final String firstName;
-		private final String name;
-		private final String race;
-		private final Document detailedData;
-		
-		public CharacterMetadata(Document doc) {
-			doc = doc.get("characters", Document.class);
-			this.id = doc.getLong("id");
-			this.firstName = doc.getString("firstName");
-			this.name = doc.getString("name");
-			this.race = doc.getString("race");
-			this.detailedData = doc.get("detail", Document.class);
-		}
-		
-		public CharacterMetadata(long id, String firstName, String name, String race, Document detailedData) {
-			this.id = id;
-			this.firstName = firstName;
-			this.name = name;
-			this.race = race;
-			this.detailedData = detailedData;
-		}
-		
-		public Document toDocument() {
-			Document doc = new Document();
-			doc.put("id", id);
-			doc.put("firstName", firstName);
-			doc.put("name", name);
-			doc.put("race", race);
-			doc.put("detailedData", detailedData);
-			return doc;
-		}
-		
-		public long getId() {
-			return id;
-		}
-		
-		public String getFirstName() {
-			return firstName;
-		}
-		
-		public String getName() {
-			return name;
-		}
-		
-		public String getRace() {
-			return race;
-		}
-		
-		public Map<String, Object> getDetailedData() {
-			return Collections.unmodifiableMap(detailedData);
 		}
 		
 	}

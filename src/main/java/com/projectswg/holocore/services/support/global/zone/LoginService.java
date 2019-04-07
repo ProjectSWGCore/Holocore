@@ -94,7 +94,7 @@ public class LoginService extends Service {
 	@IntentHandler
 	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
 		SWGObject obj = dci.getCreature();
-		if (PswgDatabase.users().deleteCharacter(obj.getObjectId())) {
+		if (PswgDatabase.objects().removeObject(obj.getObjectId())) {
 			DestroyObjectIntent.broadcast(obj);
 			Player owner = obj.getOwner();
 			if (owner != null)
@@ -161,7 +161,13 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(Player player, DeleteCharacterRequest request) {
 		SWGObject obj = ObjectLookup.getObjectById(request.getPlayerId());
-		boolean success = obj instanceof CreatureObject && PswgDatabase.users().deleteCharacter(player.getUsername(), obj.getObjectId());
+		boolean success;
+		if (obj instanceof CreatureObject) {
+			success = PswgDatabase.objects().removeObject(obj.getObjectId());
+			players.getOrDefault(player.getAccountId(), new ArrayList<>()).remove(obj);
+		} else {
+			success = false;
+		}
 		player.sendPacket(new DeleteCharacterResponse(success));
 		if (success) {
 			DestroyObjectIntent.broadcast(obj);
@@ -224,12 +230,12 @@ public class LoginService extends Service {
 	
 	private void onSuccessfulLogin(UserMetadata user, Player player) {
 		switch(user.getAccessLevel()) {
+			default:
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
 			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
 			case "csr": player.setAccessLevel(AccessLevel.CSR); break;
 			case "qa": player.setAccessLevel(AccessLevel.QA); break;
 			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
-			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
 		player.setAccountId(user.getUsername());
 		player.setPlayerState(PlayerState.LOGGED_IN);

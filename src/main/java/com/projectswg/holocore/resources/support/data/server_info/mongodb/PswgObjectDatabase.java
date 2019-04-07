@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class PswgObjectDatabase implements PswgDatabase {
@@ -74,8 +75,23 @@ public class PswgObjectDatabase implements PswgDatabase {
 				new BulkWriteOptions().ordered(false));
 	}
 	
-	public void removeObject(long id) {
-		collection.deleteOne(Filters.eq("id", id));
+	public boolean removeObject(long id) {
+		return collection.deleteOne(Filters.eq("id", id)).getDeletedCount() > 0;
+	}
+	
+	public int getCharacterCount(String account) {
+		return (int) collection.countDocuments(Filters.eq("account", account));
+	}
+	
+	public boolean isCharacter(String firstName) {
+		return collection.countDocuments(Filters.and(
+				Filters.regex("template", "object/creature/player/shared_.+\\.iff"),
+				Filters.regex("base3.objectName", Pattern.compile(Pattern.quote(firstName) + "( .+|$)", Pattern.CASE_INSENSITIVE))
+		)) > 0;
+	}
+	
+	public long clearObjects() {
+		return collection.deleteMany(Filters.exists("_id")).getDeletedCount();
 	}
 	
 	@NotNull
