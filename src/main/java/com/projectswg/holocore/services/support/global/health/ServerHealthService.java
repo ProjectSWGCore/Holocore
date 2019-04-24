@@ -32,7 +32,7 @@ public class ServerHealthService extends Service {
 		this.previousGcTime = new AtomicLong(0);
 		this.completedInitialIntents = new AtomicBoolean(true);
 		
-		if (PswgDatabase.config().getBoolean(this, "performanceLog", false)) {
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "performanceLog", false)) {
 			this.performanceOutput = new BasicLogStream(new File("log/performance.txt"));
 			executor.start();
 			performanceOutput.log("%s\t%s\t%s\t%s\t%s\t%s", "cpu", "memory-used", "memory-max", "gc-collectionRate", "gc-time", "intents");

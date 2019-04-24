@@ -79,7 +79,7 @@ public class ObjectStorageService extends Service {
 	
 	private boolean initializeSavedObjects() {
 		long startTime = StandardLog.onStartLoad("server objects");
-		List<MongoData> objectDocuments = PswgDatabase.objects().getObjects();
+		List<MongoData> objectDocuments = PswgDatabase.INSTANCE.getObjects().getObjects();
 		Map<Long, SWGObject> objects = new HashMap<>();
 		AtomicLong highestId = new AtomicLong(0);
 		for (MongoData doc : objectDocuments) {
@@ -135,7 +135,7 @@ public class ObjectStorageService extends Service {
 	private void saveObjects() {
 		List<SWGObject> saveList = new ArrayList<>();
 		persistedObjects.forEach(obj -> saveChildren(saveList, obj));
-		PswgDatabase.objects().addObjects(saveList);
+		PswgDatabase.INSTANCE.getObjects().addObjects(saveList);
 	}
 	
 	private void saveChildren(Collection<SWGObject> saveList, @Nullable SWGObject obj) {
@@ -156,7 +156,7 @@ public class ObjectStorageService extends Service {
 			if (persistedObjects.add(obj)) {
 				List<SWGObject> saveList = new ArrayList<>();
 				saveChildren(saveList, obj);
-				PswgDatabase.objects().addObjects(saveList);
+				PswgDatabase.INSTANCE.getObjects().addObjects(saveList);
 			}
 		}
 	}
@@ -196,13 +196,13 @@ public class ObjectStorageService extends Service {
 		}
 		if (object.isPersisted())
 			persistedObjects.remove(object);
-		PswgDatabase.objects().removeObject(object.getObjectId());
+		PswgDatabase.INSTANCE.getObjects().removeObject(object.getObjectId());
 		objectMap.remove(object.getObjectId());
 	}
 	
 	private List<String> createEventList() {
 		List<String> events = new ArrayList<>();
-		for (String event : PswgDatabase.config().getString(this, "events", "").split(",")) {
+		for (String event : PswgDatabase.INSTANCE.getConfig().getString(this, "events", "").split(",")) {
 			if (event.isEmpty())
 				continue;
 			events.add(event.toLowerCase(Locale.US));

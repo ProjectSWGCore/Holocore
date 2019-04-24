@@ -49,7 +49,7 @@ import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgUserDatabase.UserMetadata;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.UserMetadata;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -94,7 +94,7 @@ public class LoginService extends Service {
 	@IntentHandler
 	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
 		SWGObject obj = dci.getCreature();
-		if (PswgDatabase.objects().removeObject(obj.getObjectId())) {
+		if (PswgDatabase.INSTANCE.getObjects().removeObject(obj.getObjectId())) {
 			DestroyObjectIntent.broadcast(obj);
 			Player owner = obj.getOwner();
 			if (owner != null)
@@ -119,8 +119,8 @@ public class LoginService extends Service {
 	}
 	
 	private String getServerString() {
-		String name = PswgDatabase.config().getString(this, "loginServerName", "LoginServer");
-		int id = PswgDatabase.config().getInt(this, "loginServerId", 1);
+		String name = PswgDatabase.INSTANCE.getConfig().getString(this, "loginServerName", "LoginServer");
+		int id = PswgDatabase.INSTANCE.getConfig().getInt(this, "loginServerId", 1);
 		return name + ':' + id;
 	}
 	
@@ -134,7 +134,7 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		
-		UserMetadata user = PswgDatabase.users().getUser(loginRequest.getUsername());
+		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(loginRequest.getUsername());
 		player.setUsername(loginRequest.getUsername());
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", loginRequest.getSocketAddress());
@@ -163,7 +163,7 @@ public class LoginService extends Service {
 		SWGObject obj = ObjectLookup.getObjectById(request.getPlayerId());
 		boolean success;
 		if (obj instanceof CreatureObject) {
-			success = PswgDatabase.objects().removeObject(obj.getObjectId());
+			success = PswgDatabase.INSTANCE.getObjects().removeObject(obj.getObjectId());
 			players.getOrDefault(player.getAccountId(), new ArrayList<>()).remove(obj);
 		} else {
 			success = false;
@@ -192,14 +192,14 @@ public class LoginService extends Service {
 		assert player.getPlayerServer() == PlayerServer.NONE;
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
-		final boolean doClientCheck = PswgDatabase.config().getBoolean(this, "loginVersionChecks", true);
+		final boolean doClientCheck = PswgDatabase.INSTANCE.getConfig().getBoolean(this, "loginVersionChecks", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect version: %s] from %s", id.getVersion(), id.getSocketAddress());
 			onLoginClientVersionError(player, id);
 			return;
 		}
 		
-		UserMetadata user = PswgDatabase.users().getUser(id.getUsername());
+		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(id.getUsername());
 		player.setUsername(id.getUsername());
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", id.getSocketAddress());
@@ -261,7 +261,7 @@ public class LoginService extends Service {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
-		cluster.setMaxCharacters(PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 2));
+		cluster.setMaxCharacters(PswgDatabase.INSTANCE.getConfig().getInt(this, "galaxyMaxCharacters", 2));
 		player.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		player.sendPacket(token);
 		player.sendPacket(cluster);

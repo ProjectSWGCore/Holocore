@@ -76,7 +76,7 @@ public final class SpawnerService extends Service {
 	@Override
 	public boolean initialize() {
 		executor.start();
-		if (PswgDatabase.config().getBoolean(this, "spawnEggsEnabled", true))
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "spawnEggsEnabled", true))
 			loadSpawners();
 		
 		return true;

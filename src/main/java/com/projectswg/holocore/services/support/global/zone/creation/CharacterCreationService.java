@@ -73,7 +73,7 @@ public class CharacterCreationService extends Service {
 	
 	@Override
 	public boolean start() {
-		creationRestriction.setCreationsPerPeriod(PswgDatabase.config().getInt(this, "galaxyMaxCharactersPerPeriod", 2));
+		creationRestriction.setCreationsPerPeriod(PswgDatabase.INSTANCE.getConfig().getInt(this, "galaxyMaxCharactersPerPeriod", 2));
 		return super.start();
 	}
 	
@@ -94,7 +94,7 @@ public class CharacterCreationService extends Service {
 		int spaceIndex = name.indexOf(' ');
 		if (spaceIndex != -1)
 			name = name.substring(0, spaceIndex);
-		return PswgDatabase.objects().isCharacter(name);
+		return PswgDatabase.INSTANCE.getObjects().isCharacter(name);
 	}
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
@@ -110,7 +110,7 @@ public class CharacterCreationService extends Service {
 	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
-		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
+		int max = PswgDatabase.INSTANCE.getConfig().getInt(this, "galaxyMaxCharacters", 0);
 		if (max != 0 && getCharacterCount(player.getAccountId()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
@@ -143,7 +143,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		// Too many characters
-		int max = PswgDatabase.config().getInt(this, "galaxyMaxCharacters", 0);
+		int max = PswgDatabase.INSTANCE.getConfig().getInt(this, "galaxyMaxCharacters", 0);
 		if (max != 0 && getCharacterCount(player.getAccountId()) >= max) {
 			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS, "too many characters");
 			return null;
@@ -191,7 +191,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private int getCharacterCount(String username) {
-		return PswgDatabase.objects().getCharacterCount(username);
+		return PswgDatabase.INSTANCE.getObjects().getCharacterCount(username);
 	}
 	
 	private ErrorMessage getNameValidity(String name, boolean admin) {
@@ -218,7 +218,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private CreatureObject createCharacter(Player player, ClientCreateCharacter create) {
-		String spawnLocation = PswgDatabase.config().getString(this, "primarySpawnLocation", "tat_moseisley");
+		String spawnLocation = PswgDatabase.INSTANCE.getConfig().getString(this, "primarySpawnLocation", "tat_moseisley");
 		StandardLog.onPlayerTrace(this, player, "created player at spawn location %s", spawnLocation);
 		ZoneInsertion info = DataLoader.zoneInsertions().getInsertion(spawnLocation);
 		if (info == null) {

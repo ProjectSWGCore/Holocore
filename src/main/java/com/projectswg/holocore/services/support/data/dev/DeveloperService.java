@@ -47,7 +47,7 @@ public class DeveloperService extends Service {
 	public boolean start() {
 		setupDeveloperArea();
 		
-		if (PswgDatabase.config().getBoolean(this, "characterBuilder", false))
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "characterBuilder", false))
 			setupCharacterBuilders();
 		
 		return super.start();

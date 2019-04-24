@@ -87,7 +87,7 @@ public class ZoneRequester {
 	}
 	
 	private boolean isSafeZone() {
-		return PswgDatabase.config().getBoolean(this, "safeZoneIn", false);
+		return PswgDatabase.INSTANCE.getConfig().getBoolean(this, "safeZoneIn", false);
 	}
 	
 	private void sendClientFatal(Player player, String message) {

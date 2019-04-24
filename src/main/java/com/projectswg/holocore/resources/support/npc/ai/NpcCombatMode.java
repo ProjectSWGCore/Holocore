@@ -37,7 +37,7 @@ public class NpcCombatMode extends NpcMode {
 		this.returnLocation = new AtomicReference<>(null);
 		this.targets = new CopyOnWriteArraySet<>();
 		this.iteration = new AtomicLong(0);
-		this.runSpeed = PswgDatabase.config().getDouble(this, "npcRunSpeed", 9);
+		this.runSpeed = PswgDatabase.INSTANCE.getConfig().getDouble(this, "npcRunSpeed", 9);
 	}
 	
 	@Override

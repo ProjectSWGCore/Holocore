@@ -186,8 +186,8 @@ public class TravelHelper {
 	}
 	
 	private void createGalaxyTravels() {
-		long groundTime = PswgDatabase.config().getInt(this, "shuttleGroundTime", 120);
-		long airTime = PswgDatabase.config().getInt(this, "shuttleAirTime", 60);
+		long groundTime = PswgDatabase.INSTANCE.getConfig().getInt(this, "shuttleGroundTime", 120);
+		long airTime = PswgDatabase.INSTANCE.getConfig().getInt(this, "shuttleAirTime", 60);
 		
 		createGalaxyTravel(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate(), 17, groundTime, airTime);
 		createGalaxyTravel(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate(), 21, groundTime, airTime);

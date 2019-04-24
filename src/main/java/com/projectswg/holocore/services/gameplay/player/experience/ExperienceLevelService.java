@@ -24,7 +24,7 @@ public class ExperienceLevelService extends Service {
 	private final double xpMultiplier;
 	
 	public ExperienceLevelService() {
-		xpMultiplier = PswgDatabase.config().getDouble(this, "xpMultiplier", 1);
+		xpMultiplier = PswgDatabase.INSTANCE.getConfig().getDouble(this, "xpMultiplier", 1);
 	}
 	
 	@IntentHandler

@@ -29,13 +29,9 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
 import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 
 import java.util.List;
 import java.util.Random;
@@ -69,20 +65,6 @@ public class GalacticResourceSpawner {
 		this.resourceIdMax = new AtomicLong(0);
 	}
 	
-	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
-		RawResourceContainer container = new RawResourceContainer();
-		container.loadResources();
-		for (RawResource rawResource : container.getResources()) {
-			GalacticResourceContainer.getContainer().addRawResource(rawResource);
-		}
-		GalacticResourceSpawner spawner = new GalacticResourceSpawner();
-		spawner.initialize();
-		spawner.terminate();
-		DataManager.terminate();
-	}
-	
 	public void initialize() {
 		loadResources();
 		updateAllResources();
@@ -100,7 +82,7 @@ public class GalacticResourceSpawner {
 	private void loadResources() {
 		long startTime = StandardLog.onStartLoad("galactic resources");
 		int resourceCount = 0;
-		for (GalacticResource resource : PswgDatabase.resources().getResources()) {
+		for (GalacticResource resource : PswgDatabase.INSTANCE.getResources().getResources()) {
 			GalacticResourceContainer.getContainer().addGalacticResource(resource);
 			if (resource.getId() > resourceIdMax.get())
 				resourceIdMax.set(resource.getId());
@@ -112,7 +94,7 @@ public class GalacticResourceSpawner {
 	private void saveResources() {
 		GalacticResourceLoader loader = new GalacticResourceLoader();
 		loader.saveResources(GalacticResourceContainer.getContainer().getAllResources());
-		PswgDatabase.resources().addResources(GalacticResourceContainer.getContainer().getAllResources());
+		PswgDatabase.INSTANCE.getResources().setResources(GalacticResourceContainer.getContainer().getAllResources());
 	}
 	
 	private void updateUnusedPools() {

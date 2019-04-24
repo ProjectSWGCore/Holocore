@@ -261,7 +261,7 @@ public class TravelService extends Service {
 	}
 	
 	private double getTicketPriceFactor() {
-		return PswgDatabase.config().getDouble(this, "ticketPriceFactor", 1);
+		return PswgDatabase.INSTANCE.getConfig().getDouble(this, "ticketPriceFactor", 1);
 	}
 	
 	private void sendTravelMessage(CreatureObject creature, String message) {

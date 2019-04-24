@@ -79,7 +79,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void sendMessageOfTheDay(Player player) {
-		String message = PswgDatabase.config().getString(this, "firstZoneMessage", "");
+		String message = PswgDatabase.INSTANCE.getConfig().getString(this, "firstZoneMessage", "");
 		
 		if(!message.isEmpty())	// If the message isn't nothing
 			new SystemMessageIntent(player, message).broadcast();	// Send it

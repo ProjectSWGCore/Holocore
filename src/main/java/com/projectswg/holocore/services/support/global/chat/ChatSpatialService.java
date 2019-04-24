@@ -14,7 +14,7 @@ public class ChatSpatialService extends Service {
 	private final int chatRange;
 	
 	public ChatSpatialService() {
-		this.chatRange = PswgDatabase.config().getInt(this, "spatialChatRange", 128);
+		this.chatRange = PswgDatabase.INSTANCE.getConfig().getInt(this, "spatialChatRange", 128);
 	}
 	
 	@IntentHandler

@@ -32,7 +32,6 @@ import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
@@ -111,7 +110,6 @@ public class ProjectSWG {
 			return -1;
 		}
 		setupDatabase(arguments);
-		DataManager.initialize();
 		Thread.currentThread().setPriority(10);
 		initializeServerFactory();
 		setupGalaxy(arguments);
@@ -145,7 +143,6 @@ public class ProjectSWG {
 	}
 	
 	private static void shutdownStaticClasses() {
-		DataManager.terminate();
 		ScheduledUtilities.shutdown();
 	}
 	
@@ -177,16 +174,16 @@ public class ProjectSWG {
 	
 	private static void setupGalaxy(CommandLine arguments) {
 		GALAXY.setId(1);
-		GALAXY.setName(PswgDatabase.config().getString(ProjectSWG.class, "galaxyName", "Holocore"));
+		GALAXY.setName(PswgDatabase.INSTANCE.getConfig().getString(ProjectSWG.class, "galaxyName", "Holocore"));
 		GALAXY.setAddress("");
 		GALAXY.setPopulation(0);
 		GALAXY.setZoneOffset(OffsetTime.now().getOffset());
 		GALAXY.setZonePort(0);
 		GALAXY.setPingPort(0);
 		GALAXY.setStatus(GalaxyStatus.DOWN);
-		GALAXY.setMaxCharacters(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxCharacters", 2));
-		GALAXY.setOnlinePlayerLimit(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
-		GALAXY.setOnlineFreeTrialLimit(PswgDatabase.config().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
+		GALAXY.setMaxCharacters(PswgDatabase.INSTANCE.getConfig().getInt(ProjectSWG.class, "galaxyMaxCharacters", 2));
+		GALAXY.setOnlinePlayerLimit(PswgDatabase.INSTANCE.getConfig().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
+		GALAXY.setOnlineFreeTrialLimit(PswgDatabase.INSTANCE.getConfig().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
 		GALAXY.setRecommended(true);
 		try {
 			GALAXY.setAdminServerPort(Integer.parseInt(arguments.getOptionValue("admin-port", "-1")));
@@ -199,9 +196,9 @@ public class ProjectSWG {
 	
 	private static void setupDatabase(CommandLine arguments) {
 		String dbStr = arguments.getOptionValue("database", "mongodb://localhost");
-		String db = arguments.getOptionValue("database", "nge");
+		String db = arguments.getOptionValue("dbName", "nge");
 		
-		PswgDatabase.initialize(dbStr, db);
+		PswgDatabase.INSTANCE.initialize(dbStr, db);
 	}
 	
 	private static Options createArgumentOptions() {

@@ -31,8 +31,6 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 
 import java.time.Instant;
@@ -145,19 +143,19 @@ public class GalacticResourceSpawn implements Persistable, MongoPersistable {
 	}
 	
 	private int getMinSpawnTime() {
-		return PswgDatabase.config().getInt(this, "resourceMinSpawnTime", 7);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMinSpawnTime", 7);
 	}
 	
 	private int getMaxSpawnTime() {
-		return PswgDatabase.config().getInt(this, "resourceMaxSpawnTime", 21);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMaxSpawnTime", 21);
 	}
 	
 	private int getMinRadius() {
-		return PswgDatabase.config().getInt(this, "resourceMinSpawnRadius", 200);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMinSpawnRadius", 200);
 	}
 	
 	private int getMaxRadius() {
-		return PswgDatabase.config().getInt(this, "resourceMaxSpawnRadius", 500);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMaxSpawnRadius", 500);
 	}
 	
 	private int calculateRandomMaxConcentration(Random random, int min) {

@@ -36,7 +36,7 @@ public class PacketRecordingService extends Service {
 	}
 	
 	private boolean isPacketDebug() {
-		return PswgDatabase.config().getBoolean(this, "packetLogging", false);
+		return PswgDatabase.INSTANCE.getConfig().getBoolean(this, "packetLogging", false);
 	}
 	
 }

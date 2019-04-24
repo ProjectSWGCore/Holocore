@@ -435,7 +435,7 @@ public class PlayerMountService extends Service {
 	}
 	
 	private int getMountLimit() {
-		return PswgDatabase.config().getInt(this, "mountLimit", 1);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "mountLimit", 1);
 	}
 	
 	private static boolean isMountable(CreatureObject mount) {

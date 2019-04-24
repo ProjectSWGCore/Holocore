@@ -12,8 +12,8 @@ public class ServerDataService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		if (PswgDatabase.config().getBoolean(this, "wipeObjects", false)) {
-			Log.d("Cleared %d objects", PswgDatabase.objects().clearObjects());
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "wipeObjects", false)) {
+			Log.d("Cleared %d objects", PswgDatabase.INSTANCE.getObjects().clearObjects());
 		}
 		
 		return super.initialize();

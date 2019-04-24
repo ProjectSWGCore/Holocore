@@ -88,9 +88,9 @@ public final class LootGenerationService extends Service {
 		boolean cashGenerated = false;
 		boolean lootGenerated = false;
 		
-		if (PswgDatabase.config().getBoolean(this, "cashLoot", true))
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "cashLoot", true))
 			cashGenerated = generateCreditChip(loot, lootInventory, corpse.getDifficulty(), corpse.getLevel());
-		if (PswgDatabase.config().getBoolean(this, "itemLoot", true))
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "itemLoot", true))
 			lootGenerated = generateLoot(loot, killer, lootInventory);
 		
 		if (!cashGenerated && !lootGenerated)
@@ -209,25 +209,25 @@ public final class LootGenerationService extends Service {
 		
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		
-		double range = PswgDatabase.config().getDouble(this, "lootCashHumanRange", 0.05);
+		double range = PswgDatabase.INSTANCE.getConfig().getDouble(this, "lootCashHumanRange", 0.05);
 		double cashLootRoll = random.nextDouble();
 		int credits;
 		
 		switch (difficulty) {
 			default:
 			case NORMAL:
-				if (cashLootRoll > PswgDatabase.config().getDouble(this, "lootCashHumanNormalChance", 0.60))
+				if (cashLootRoll > PswgDatabase.INSTANCE.getConfig().getDouble(this, "lootCashHumanNormalChance", 0.60))
 					return false;
-				credits = PswgDatabase.config().getInt(this, "lootCashHumanNormal", 2);
+				credits = PswgDatabase.INSTANCE.getConfig().getInt(this, "lootCashHumanNormal", 2);
 				break;
 			case ELITE:
-				if (cashLootRoll > PswgDatabase.config().getDouble(this, "lootCashHumanElitechance", 0.80))
+				if (cashLootRoll > PswgDatabase.INSTANCE.getConfig().getDouble(this, "lootCashHumanElitechance", 0.80))
 					return false;
-				credits = PswgDatabase.config().getInt(this, "lootCashHumanElite", 5);
+				credits = PswgDatabase.INSTANCE.getConfig().getInt(this, "lootCashHumanElite", 5);
 				break;
 			case BOSS:
 				// bosses always drop cash loot, so no need to check
-				credits = PswgDatabase.config().getInt(this, "lootCashHumanBoss", 9);
+				credits = PswgDatabase.INSTANCE.getConfig().getInt(this, "lootCashHumanBoss", 9);
 				break;
 		}
 		credits *= combatLevel;

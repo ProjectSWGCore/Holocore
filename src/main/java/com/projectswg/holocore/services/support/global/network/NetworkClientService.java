@@ -32,118 +32,82 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.ProjectSWG.CoreException;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import com.projectswg.holocore.resources.support.global.network.AdminNetworkClient;
 import com.projectswg.holocore.resources.support.global.network.NetworkClient;
 import com.projectswg.holocore.resources.support.global.network.UDPServer;
 import com.projectswg.holocore.resources.support.global.network.UDPServer.UDPPacket;
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
-import me.joshlarson.jlcommon.concurrency.ThreadPool;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import me.joshlarson.jlcommon.concurrency.BasicThread;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.network.TCPServer;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.BindException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.security.KeyStore;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class NetworkClientService extends Service {
 	
-	private final ThreadPool securityExecutor;
-	private final TCPServer<NetworkClient> tcpServer;
-	private final TCPServer<AdminNetworkClient> adminServer;
-	private final ScheduledThreadPool networkFlushPeriodic;
-	private final List<NetworkClient> clients;
+	private static final int INBOUND_BUFFER_SIZE = 4096;
+	
+	private final ServerSocketChannel tcpServer;
+	private final BasicThread acceptThreadPool;
+	private final Map<Long, NetworkClient> clients;
+	private final ByteBuffer inboundBuffer;
 	private final UDPServer udpServer;
-	private final SSLContext sslContext;
-	private final int flushRate;
+	private volatile boolean operational;
 	
 	public NetworkClientService() {
-		this.flushRate = getFlushRate();
-		this.securityExecutor = new ThreadPool(3, "network-client-security-%d");
-		this.sslContext = initializeSecurity();
-		this.networkFlushPeriodic = new ScheduledThreadPool(1, "network-client-flush");
-		this.clients = new CopyOnWriteArrayList<>();
+		this.acceptThreadPool = new BasicThread("network-client-accept", this::acceptLoop);
+		this.clients = new ConcurrentHashMap<>();
+		this.inboundBuffer = ByteBuffer.allocate(INBOUND_BUFFER_SIZE);
+		this.operational = true;
 		{
 			int bindPort = getBindPort();
-			int bufferSize = getBufferSize();
-			tcpServer = TCPServer.<NetworkClient>builder()
-					.setAddr(new InetSocketAddress((InetAddress) null, bindPort))
-					.setBufferSize(bufferSize)
-					.setSessionCreator(this::createStandardClient)
-					.createTCPServer();
 			try {
-				udpServer = new UDPServer(bindPort, bufferSize);
-			} catch (SocketException e) {
-				throw new CoreException("Socket Exception on UDP bind: " + e);
+				tcpServer = ServerSocketChannel.open();
+				tcpServer.bind(new InetSocketAddress(bindPort), 64);
+				tcpServer.configureBlocking(false);
+				udpServer = new UDPServer(bindPort, 32);
+			} catch (IOException e) {
+				throw new CoreException("Failed to start networking", e);
 			}
 			udpServer.setCallback(this::onUdpPacket);
-		}
-		{
-			int adminServerPort = ProjectSWG.getGalaxy().getAdminServerPort();
-			if (adminServerPort > 0) {
-				InetSocketAddress localhost = new InetSocketAddress(InetAddress.getLoopbackAddress(), adminServerPort);
-				adminServer = TCPServer.<AdminNetworkClient>builder()
-						.setAddr(localhost)
-						.setBufferSize(1024)
-						.setSessionCreator(this::createAdminClient)
-						.createTCPServer();
-			} else {
-				adminServer = null;
-			}
 		}
 	}
 	
 	@Override
 	public boolean start() {
-		securityExecutor.start();
-		networkFlushPeriodic.start();
-		networkFlushPeriodic.executeWithFixedRate(0, 1000 / flushRate, this::flush);
-		int bindPort = -1;
-		try {
-			bindPort = getBindPort();
-			tcpServer.bind();
-			bindPort = ProjectSWG.getGalaxy().getAdminServerPort();
-			if (adminServer != null) {
-				adminServer.bind();
-			}
-		} catch (BindException e) {
-			Log.e("Failed to bind to %d", bindPort);
-			return false;
-		} catch (IOException e) {
-			Log.e(e);
-			return false;
-		}
-		return super.start();
+		acceptThreadPool.start();
+		return true;
+	}
+	
+	@Override
+	public boolean isOperational() {
+		return operational;
 	}
 	
 	@Override
 	public boolean stop() {
-		for (NetworkClient client : tcpServer.getSessions())
+		for (NetworkClient client : clients.values())
 			client.close(ConnectionStoppedReason.APPLICATION);
 		
-		tcpServer.close();
-		if (adminServer != null) {
-			for (NetworkClient client : adminServer.getSessions())
-				client.close(ConnectionStoppedReason.APPLICATION);
-			adminServer.close();
+		try {
+			tcpServer.close();
+		} catch (IOException e) {
+			Log.w("Failed to close TCP server");
 		}
-		networkFlushPeriodic.stop();
-		securityExecutor.stop(false);
-		return securityExecutor.awaitTermination(3000) && networkFlushPeriodic.awaitTermination(1000);
+		acceptThreadPool.stop(true);
+		return acceptThreadPool.awaitTermination(1000);
 	}
 	
 	@Override
@@ -152,15 +116,64 @@ public class NetworkClientService extends Service {
 		return super.terminate();
 	}
 	
-	/**
-	 * Requests a flush for each network client
-	 */
-	private void flush() {
-		clients.forEach(NetworkClient::flush);
+	private void acceptLoop() {
+		try (Selector selector = Selector.open()) {
+			tcpServer.register(selector, SelectionKey.OP_ACCEPT);
+			while (tcpServer.isOpen()) {
+				selector.select();
+				Iterator<SelectionKey> it = selector.selectedKeys().iterator();
+				while (it.hasNext()) {
+					SelectionKey key = it.next();
+					if (key.isAcceptable()) {
+						acceptConnection(selector);
+					}
+					if (key.isReadable()) {
+						read(key);
+					}
+					it.remove();
+				}
+			}
+		} catch (IOException e) {
+			Log.a(e);
+		} finally {
+			operational = false;
+		}
+	}
+	
+	private void acceptConnection(Selector selector) {
+		try {
+			SocketChannel client = tcpServer.accept();
+			if (client != null) {
+				client.configureBlocking(false);
+				NetworkClient networkClient = new NetworkClient(client);
+				client.register(selector, SelectionKey.OP_READ, networkClient);
+				clients.put(networkClient.getId(), networkClient);
+			}
+		} catch (Throwable t) {
+			Log.w("%s: Failed to accept connection", getClass().getSimpleName());
+		}
+	}
+	
+	private void read(SelectionKey key) {
+		Player player = null;
+		try {
+			SocketChannel channel = (SocketChannel) key.channel();
+			NetworkClient client = (NetworkClient) key.attachment();
+			player = client.getPlayer();
+			inboundBuffer.clear();
+			channel.read(inboundBuffer);
+			inboundBuffer.flip();
+			client.addToInbound(inboundBuffer);
+		} catch (Throwable t) {
+			if (player != null)
+				StandardLog.onPlayerError(this, player, "failed to read data");
+			else
+				Log.w("%s: Failed to read data", getClass().getSimpleName());
+		}
 	}
 	
 	private void disconnect(long networkId) {
-		disconnect(getClient(networkId));
+		disconnect(clients.get(networkId));
 	}
 	
 	private void disconnect(NetworkClient client) {
@@ -173,9 +186,8 @@ public class NetworkClientService extends Service {
 	private void onUdpPacket(UDPPacket packet) {
 		if (packet.getLength() <= 0)
 			return;
-		switch (packet.getData()[0]) {
-			case 1: sendState(packet.getAddress(), packet.getPort()); break;
-			default: break;
+		if (packet.getData()[0] == 1) {
+			sendState(packet.getAddress(), packet.getPort());
 		}
 	}
 	
@@ -185,14 +197,6 @@ public class NetworkClientService extends Service {
 		data.addByte(1);
 		data.addAscii(status);
 		udpServer.send(port, addr, data.array());
-	}
-	
-	private NetworkClient createStandardClient(SocketChannel channel) {
-		return new NetworkClient(channel, sslContext, securityExecutor, clients);
-	}
-	
-	private AdminNetworkClient createAdminClient(SocketChannel channel) {
-		return new AdminNetworkClient(channel, sslContext, securityExecutor, clients);
 	}
 	
 	@IntentHandler
@@ -205,56 +209,8 @@ public class NetworkClientService extends Service {
 		disconnect(cci.getPlayer().getNetworkId());
 	}
 	
-	private NetworkClient getClient(long id) {
-		NetworkClient client = tcpServer.getSession(id);
-		if (client != null || adminServer == null)
-			return client;
-		return adminServer.getSession(id);
-	}
-	
-	private SSLContext initializeSecurity() {
-		Log.t("Initializing encryption...");
-		try {
-			File keystoreFile = new File(PswgDatabase.config().getString(this, "keystoreFile", ""));
-			InputStream keystoreStream;
-			char[] passphrase;
-			KeyStore keystore;
-			if (!keystoreFile.isFile()) {
-				Log.w("Failed to enable security! Keystore file does not exist: %s", keystoreFile);
-				keystoreStream = getClass().getResourceAsStream("/security/Holocore.p12");
-				passphrase = new char[]{'p', 'a', 's', 's'};
-				keystore = KeyStore.getInstance("PKCS12");
-			} else {
-				keystoreStream = new FileInputStream(keystoreFile);
-				passphrase = PswgDatabase.config().getString(this, "keystorePass", "").toCharArray();
-				keystore = KeyStore.getInstance(PswgDatabase.config().getString(this, "keystoreType", "PKCS12"));
-			}
-			
-			keystore.load(keystoreStream, passphrase);
-			KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-			keyManagerFactory.init(keystore, passphrase);
-			TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-			trustManagerFactory.init(keystore);
-			SSLContext ctx = SSLContext.getInstance("TLSv1.3");
-			ctx.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
-			Log.i("Enabled TLS encryption");
-			return ctx;
-		} catch (Exception e) {
-			Log.a("Failed to enable security! %s: %s", e.getClass(), e.getMessage());
-			throw new RuntimeException("Failed to enable TLS", e);
-		}
-	}
-	
 	private int getBindPort() {
-		return PswgDatabase.config().getInt(this, "bindPort", 44463);
-	}
-	
-	private int getBufferSize() {
-		return PswgDatabase.config().getInt(this, "bufferSize", 4096);
-	}
-	
-	private int getFlushRate() {
-		return PswgDatabase.config().getInt(this, "flushRate", 10);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "bindPort", 44463);
 	}
 	
 }

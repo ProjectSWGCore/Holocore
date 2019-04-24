@@ -70,7 +70,7 @@ public final class GrantLootService extends Service {
 	public GrantLootService() {
 		this.lootRestrictions = new ConcurrentHashMap<>();
 		this.executor = new ScheduledThreadPool(1, "grant-loot-service");
-		this.lootRange = PswgDatabase.config().getInt(this, "lootRange", 64);
+		this.lootRange = PswgDatabase.INSTANCE.getConfig().getInt(this, "lootRange", 64);
 	}
 	
 	@Override
