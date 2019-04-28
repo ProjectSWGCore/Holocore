@@ -72,18 +72,44 @@ public class CombatRegenerationService extends Service {
 		double actionCost = command.getActionCost() * command.getAttackRolls();
 		int currentAction = source.getAction();
 		
-		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
+		// TODO future: reduce actionCost with general ACR weapon ACR
 		
-		if (actionCost <= 0 || actionCost > currentAction) {
+		if (actionCost <= 0) {
+			return;	// Ability had no action cost, no reason to calculate further
+		}
+		
+		// Perform special line specific logic relating to action cost
+		if (specialLine != null && !lineName.isEmpty()) {
+			// Roll for a freeshot
+			if (rollFreeshot(source, specialLine)) {
+				return;	// A freeshot was rolled - no reason to continue calculating action cost
+			}
+			
+			// Reduce action cost based on special line action cost reduction, e.g. Assault Action Cost for Bounty Hunters
+			actionCost = reduceActionCost(source, actionCost, specialLine.getActionCostModName());
+		}
+		
+		// Finally, check if the action cost is more than what the player can afford
+		if (actionCost > currentAction) {
+			// The action cost is higher than the amount of action points the source creature has
 			return;
 		}
 		
-		if (specialLine != null && !lineName.isEmpty()) {
-			// Roll for a freeshot
-			rollFreeshot(source, actionCost, specialLine);
-		} else {
-			deductActionPoints(source, actionCost);
-		}
+		deductActionPoints(source, actionCost);
+	}
+	
+	/**
+	 * Calculates a new action cost based on the given action cost and a skill mod name.
+	 * @param source to read the skillmod value from
+	 * @param actionCost that has been calculated so far
+	 * @param skillModName name of the skillmod to read from {@code source}
+	 * @return new action cost that has been increased or reduced, depending on whether the skillmod value is
+	 * positive or negative
+	 */
+	private double reduceActionCost(CreatureObject source, double actionCost, String skillModName) {
+		int actionCostModValue = source.getSkillModValue(skillModName);
+		
+		return actionCost + actionCost * actionCostModValue / 100;
 	}
 	
 	@IntentHandler
@@ -113,21 +139,19 @@ public class CombatRegenerationService extends Service {
 		startActionRegeneration(cri.getCreature());
 	}
 	
-	private void rollFreeshot(CreatureObject source, double actionCost, SpecialLineLoader.SpecialLineInfo specialLine) {
+	private boolean rollFreeshot(CreatureObject source, SpecialLineLoader.SpecialLineInfo specialLine) {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		String freeshotModName = specialLine.getFreeshotModName();
 		int skillModValue = source.getSkillModValue(freeshotModName);
 		int generated = random.nextInt(0, 100);
+		boolean success = skillModValue > generated;
 		
-		if (skillModValue > generated) {
+		if (success) {
 			// They rolled a freeshot. This requires a skill mod value of at least 1.
-			ShowFlyText showFlyText = new ShowFlyText(source.getObjectId(), new StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT);
-			
-			source.sendSelf(showFlyText);
-		} else {
-			// Normal behavior
-			deductActionPoints(source, actionCost);
+			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT));
 		}
+		
+		return success;
 	}
 	
 	private void deductActionPoints(CreatureObject source, double actionCost) {
