@@ -1,12 +1,19 @@
 package com.projectswg.holocore.services.gameplay.gcw.faction;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
+import com.projectswg.holocore.intents.gameplay.gcw.faction.RegisterPvpZoneIntent;
+import com.projectswg.holocore.intents.gameplay.gcw.faction.UnregisterPvpZoneIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.StaticPvpZoneLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -15,7 +22,9 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
@@ -24,10 +33,37 @@ public class FactionFlagService extends Service {
 	
 	private final Map<TangibleObject, Future<?>> statusChangers;
 	private final ScheduledThreadPool executor;
+	private final Map<String, PvpZone> pvpZones;
 	
 	public FactionFlagService() {
 		statusChangers = new ConcurrentHashMap<>();
 		executor = new ScheduledThreadPool(1, "faction-service");
+		pvpZones = new ConcurrentHashMap<>();
+	}
+	
+	@Override
+	public boolean initialize() {
+		Collection<StaticPvpZoneLoader.StaticPvpZoneInfo> staticPvpZones = DataLoader.staticPvpZones().getStaticPvpZones();
+		
+		for (StaticPvpZoneLoader.StaticPvpZoneInfo staticPvpZone : staticPvpZones) {
+			int id = staticPvpZone.getId();
+			Location location = staticPvpZone.getLocation();
+			double radius = staticPvpZone.getRadius();
+			
+			PvpZone previous = pvpZones.put(String.valueOf(id), new PvpZone(location, radius));
+			
+			if (previous != null) {
+				Log.w("Multiple static PvP zones with ID " + id);
+			}
+		}
+		
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		pvpZones.clear();
+		return super.terminate();
 	}
 	
 	@Override
@@ -83,7 +119,58 @@ public class FactionFlagService extends Service {
 				break;
 		}
 	}
+	
+	@IntentHandler
+	private void handleRegisterPvpZoneIntent(RegisterPvpZoneIntent intent) {
+		String id = intent.getId();
+		Location location = intent.getLocation();
+		double radius = intent.getRadius();
 		
+		pvpZones.put(id, new PvpZone(location, radius));
+	}
+	
+	@IntentHandler
+	private void handleUnregisterPvpZoneIntent(UnregisterPvpZoneIntent intent) {
+		pvpZones.remove(intent.getId());
+	}
+	
+	@IntentHandler
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent intent) {
+		Location newLocation = intent.getNewLocation();
+		Location oldLocation = intent.getOldLocation();
+		SWGObject oldParent = intent.getOldParent();
+		CreatureObject creature = intent.getPlayer();
+		
+		if (creature.getOwner() == null) {
+			return;
+		}
+		
+		// Check if the player is attempting to enter a PvP zone
+		if (!isInPvpZone(oldLocation) && isInPvpZone(newLocation)) {
+			// Prevent neutrals OR rebels and imperial that are on leave from entering
+			if (creature.getPvpFaction() == PvpFaction.NEUTRAL || creature.getPvpStatus() == PvpStatus.ONLEAVE) {
+				// Teleport them back
+				SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_not_allowed"));
+				creature.moveToContainer(oldParent, oldLocation);
+				return;
+			}
+			
+			// Prevent low level players from entering PvP zones
+			short level = creature.getLevel();
+			
+			if (level < 75) {
+				// Teleport them back
+				SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_level_low"));
+				creature.moveToContainer(oldParent, oldLocation);
+				return;
+			}
+			
+			// Make the player Special Forces, if they are not already. Also cancels active status changes, e.g. going on leave
+			handleStatusChange(creature, creature.getPvpStatus(), PvpStatus.SPECIALFORCES);
+			
+			SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_entered"));
+		}
+	}
 	
 	private void handleTypeChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
@@ -121,14 +208,26 @@ public class FactionFlagService extends Service {
 		TangibleObject target = fi.getTarget();
 		PvpStatus oldStatus = target.getPvpStatus();
 		PvpStatus newStatus = fi.getNewStatus();
+		Player owner = target.getOwner();
 		
+		if (owner != null && isInPvpZone(target.getLocation())) {
+			// Status changes inside a forced PvP zone are not allowed
+			SystemMessageIntent.broadcastPersonal(owner, new ProsePackage("gcw", "pvp_advanced_region_cannot_go_covert"));
+			return;
+		}
+		
+		handleStatusChange(target, oldStatus, newStatus);
+	}
+	
+	// Forces the target into the given PvpStatus
+	private void handleStatusChange(TangibleObject target, PvpStatus oldStatus, PvpStatus newStatus) {
 		// No reason to send deltas and all that if the status isn't effectively changing
 		if(oldStatus == newStatus)
 			return;
 		
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
 		Future<?> future = statusChangers.remove(target);
-
+		
 		if (future != null) {
 			if (future.cancel(false)) {
 				target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
@@ -171,6 +270,16 @@ public class FactionFlagService extends Service {
 		accepter.sendSelf(createPvpStatusMessage(accepter, target));
 		target.sendSelf(createPvpStatusMessage(target, accepter));
 	}	
+	
+	private boolean isInPvpZone(Location location) {
+		return pvpZones.values().stream()
+				.anyMatch(pvpZone -> {
+					Location zoneLocation = pvpZone.getLocation();
+					double radius = pvpZone.getRadius();
+					
+					return location.isWithinDistance(zoneLocation, radius);
+				});
+	}
 	
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
 		statusChangers.remove(target);
@@ -228,4 +337,21 @@ public class FactionFlagService extends Service {
 		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), self.getPvpFlagsFor(target));
 	}
 	
+	private static class PvpZone {
+		private final Location location;
+		private final double radius;
+		
+		public PvpZone(Location location, double radius) {
+			this.location = location;
+			this.radius = radius;
+		}
+		
+		public Location getLocation() {
+			return location;
+		}
+		
+		public double getRadius() {
+			return radius;
+		}
+	}
 }
