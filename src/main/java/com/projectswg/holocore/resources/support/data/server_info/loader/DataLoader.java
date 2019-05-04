@@ -86,4 +86,8 @@ public abstract class DataLoader {
 		return (SpecialLineLoader) CachedLoader.SPECIAL_LINES.load();
 	}
 	
+	public static StaticPvpZoneLoader staticPvpZones() {
+		return (StaticPvpZoneLoader) CachedLoader.STATIC_PVP_ZONES.load();
+	}
+	
 }
