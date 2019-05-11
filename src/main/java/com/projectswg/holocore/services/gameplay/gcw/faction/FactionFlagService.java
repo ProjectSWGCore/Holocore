@@ -180,10 +180,8 @@ public class FactionFlagService extends Service {
 		handleFlagChange(target);
 	}
 	
-	private void handleSwitchChange(FactionIntent fi) {
+	private void handleSwitchChange(TangibleObject target, PvpStatus oldStatus) {
 		final PvpFlag pvpFlag;
-		final TangibleObject target = fi.getTarget();
-		final PvpStatus oldStatus = target.getPvpStatus();
 		final PvpStatus newStatus;
 		
 		if(target.hasPvpFlag(PvpFlag.GOING_COVERT) || target.hasPvpFlag(PvpFlag.GOING_OVERT)) {
@@ -204,10 +202,9 @@ public class FactionFlagService extends Service {
 	}
 	
 	// Forces the target into the given PvpStatus
-	private void handleStatusChange(FactionIntent fi) {
+	private void handleSwitchChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
 		PvpStatus oldStatus = target.getPvpStatus();
-		PvpStatus newStatus = fi.getNewStatus();
 		Player owner = target.getOwner();
 		
 		if (owner != null && isInPvpZone(target.getLocation())) {
@@ -215,19 +212,27 @@ public class FactionFlagService extends Service {
 			SystemMessageIntent.broadcastPersonal(owner, new ProsePackage("gcw", "pvp_advanced_region_cannot_go_covert"));
 			return;
 		}
-		
+
+		handleSwitchChange(target, oldStatus);
+	}
+
+	// Forces the target into the given PvpStatus
+	private void handleStatusChange(FactionIntent fi) {
+		TangibleObject target = fi.getTarget();
+		PvpStatus newStatus = fi.getNewStatus();
+		PvpStatus oldStatus = target.getPvpStatus();
+
 		handleStatusChange(target, oldStatus, newStatus);
 	}
-	
-	// Forces the target into the given PvpStatus
+
 	private void handleStatusChange(TangibleObject target, PvpStatus oldStatus, PvpStatus newStatus) {
 		// No reason to send deltas and all that if the status isn't effectively changing
 		if(oldStatus == newStatus)
 			return;
-		
+
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
 		Future<?> future = statusChangers.remove(target);
-		
+
 		if (future != null) {
 			if (future.cancel(false)) {
 				target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
@@ -277,7 +282,7 @@ public class FactionFlagService extends Service {
 					Location zoneLocation = pvpZone.getLocation();
 					double radius = pvpZone.getRadius();
 					
-					return location.isWithinDistance(zoneLocation, radius);
+					return location.isWithinFlatDistance(zoneLocation, radius);
 				});
 	}
 	
