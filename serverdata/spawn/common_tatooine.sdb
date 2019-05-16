@@ -1710,7 +1710,7 @@ spawn_tat_1707	TATOOINE	tat_jabbas_palace	AREA	38	-0.7	-10.9	44.4	90	1	a rancor	
 spawn_tat_1708	TATOOINE	tat_jabbas_palace	AREA	4	-6.7	5.8	97.9	179	1	Bronell	bronell	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1709	TATOOINE	tat_jabbas_palace	AREA	4	-6.0	5.8	84.5	0	1	Ephant Mon	ephant_mon	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle	0	0	0	600
 spawn_tat_1710	TATOOINE	tat_jabbas_palace	PATROL	4	-11.2	5.8	87.5	0	1	Gartogg	gartogg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10100	column	idle	0	0	0	600
-spawn_tat_1711	TATOOINE	tat_jabbas_palace	AREA	4	-11.2	5.8	97.6	140	1	Rogua	rogua	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_tat_1711	TATOOINE	tat_jabbas_palace	AREA	4	-12.3	5.8	93.5	87	1	Rogua	rogua	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1712	TATOOINE	tat_jabbas_palace	AREA	4	-0.6	5.8	98.0	-162	1	Torrug	torrug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1713	TATOOINE	tat_jabbas_palace	AREA	5	9.9	5.8	71.2	-27	1	Grogur	grogur	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	threaten	0	0	0	600
 spawn_tat_1714	TATOOINE	tat_jabbas_palace	AREA	5	9.0	5.8	72.9	150	1	an outlaw	outlaw	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	nervous	0	0	0	600
