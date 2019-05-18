@@ -52,7 +52,7 @@ public class ObjectStorageService extends Service {
 		ObjectLookup.setObjectAuthority(this::getObjectById);
 		BuildingLookup.setBuildingAuthority(buildingLookup::get);
 		
-		return initializeSavedObjects() && initializeClientObjects();
+		return initializeClientObjects() && initializeSavedObjects();
 	}
 	
 	@Override
@@ -102,6 +102,9 @@ public class ObjectStorageService extends Service {
 			SWGObject obj = objects.get(id);
 			if (parentId != 0) {
 				SWGObject parent = objects.get(parentId);
+				if (parent == null)
+					parent = objectMap.get(parentId);
+				
 				if (parent instanceof BuildingObject) {
 					if (cellNumber != 0)
 						obj.moveToContainer(((BuildingObject) parent).getCellByNumber(cellNumber));

@@ -1269,16 +1269,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// galaxyId
 			detailStringId = base6.getDocument("detailStringId", new StringId());
 		}
-		if (data.containsKey("parent") && ObjectLookup.isDefined()) {
-			SWGObject parent = ObjectLookup.getObjectById(data.getLong("parent", 0));
-			if (parent != null) {
-				//noinspection IfMayBeConditional - maintains clarity
-				if (data.containsKey("parentCell") && parent instanceof BuildingObject)
-					this.parent = ((BuildingObject) parent).getCellByNumber(data.getInteger("parentCell", 1));
-				else
-					this.parent = parent;
-			}
-		}
 		location.readMongo(data.getDocument("location"));
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));
 		attributes.putAll(data.getMap("attributes", String.class, String.class));
