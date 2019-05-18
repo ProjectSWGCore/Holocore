@@ -1,6 +1,7 @@
 FROM debian:stretch-slim
 
 # Adds necessary Holocore files
+RUN mkdir /holocore
 ADD build/holocore/ /holocore
 ADD serverdata/ /holocore/serverdata
 
