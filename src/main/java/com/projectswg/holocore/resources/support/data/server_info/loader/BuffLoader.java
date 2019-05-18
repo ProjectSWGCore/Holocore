@@ -82,7 +82,7 @@ public final class BuffLoader extends DataLoader {
 			while (set.next()) {
 				BuffInfo buff = new BuffInfo(set, effectParams, effectValues);
 				buffsByCrc.put(buff.getCrc(), buff);
-				buffsByName.put(buff.getName(), buff);
+				buffsByName.put(buff.getName().toLowerCase(Locale.US), buff);
 			}
 		}
 	}
@@ -118,8 +118,8 @@ public final class BuffLoader extends DataLoader {
 		private final boolean decayOnPvpDeath;
 		
 		public BuffInfo(SdbResultSet set, SdbTextColumnArraySet effectNames, SdbRealColumnArraySet effectValues) {
-			this.name = set.getText("name").toLowerCase(Locale.US);
-			this.crc = CRC.getCrc(this.name);
+			this.name = set.getText("name");
+			this.crc = CRC.getCrc(this.name.toLowerCase(Locale.US));
 			this.group1 = set.getText("group1");
 			this.group2 = set.getText("group2");
 			this.block = set.getText("block");

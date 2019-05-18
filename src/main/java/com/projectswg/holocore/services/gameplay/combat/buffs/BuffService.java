@@ -165,7 +165,7 @@ public class BuffService extends Service {
 		}
 		
 		// NPC time is based on the current galactic time because NPCs don't have playTime
-		return (int)ProjectSWG.getGalacticTime();
+		return (int) ProjectSWG.getGalacticTime();
 	}
 	
 	private boolean isBuffExpired(CreatureObject creature, Buff buff) {
@@ -282,6 +282,7 @@ public class BuffService extends Service {
 		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
 		int stackCount = 1;
 		int buffDuration = (int) buffData.getDuration();
+		
 		{
 			Player bufferPlayer = buffer.getOwner();
 			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();

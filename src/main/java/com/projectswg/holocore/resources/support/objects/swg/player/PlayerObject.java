@@ -214,7 +214,7 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void updatePlayTime() {
 		long currentTime = System.nanoTime();
-		int additionalPlayTime = (int) ((currentTime - lastUpdatePlayTime) / 1E6);
+		int additionalPlayTime = (int) ((currentTime - lastUpdatePlayTime) / 1E9);
 		
 		lastUpdatePlayTime = currentTime;
 		play3.incrementPlayTime(additionalPlayTime);

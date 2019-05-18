@@ -22,6 +22,7 @@ import java.util.concurrent.Future;
 public class CombatDeathblowService extends Service {
 	
 	private static final byte INCAP_TIMER = 10;    // Amount of seconds to be incapacitated
+	private static final String INCAP_BUFF = "incapWeaken";
 	
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final ScheduledThreadPool executor;
@@ -69,7 +70,7 @@ public class CombatDeathblowService extends Service {
 		
 		if (incapacitationTimer != null) {
 			if (incapacitationTimer.cancel(false)) {    // If the task is running, let them get back up
-				new BuffIntent("incapWeaken", killer, corpse, true).broadcast();
+				new BuffIntent(INCAP_BUFF, killer, corpse, true).broadcast();
 				killCreature(killer, corpse);
 			}
 		} else {
@@ -95,7 +96,7 @@ public class CombatDeathblowService extends Service {
 		if (corpse.getPosture() == Posture.INCAPACITATED || corpse.getPosture() == Posture.DEAD)
 			return;
 		
-		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff("incapWeaken");
+		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff(INCAP_BUFF);
 		if (!deathblow && killer instanceof AIObject)
 			deathblow = ((AIObject) killer).getSpawner().isDeathblow();
 		
@@ -120,7 +121,7 @@ public class CombatDeathblowService extends Service {
 		// Once the incapacitation counter expires, revive them.
 		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
 		
-		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
+		new BuffIntent(INCAP_BUFF, incapacitator, incapacitated, false).broadcast();
 		Player incapacitatorOwner = incapacitator.getOwner();
 		if (incapacitatorOwner != null) { // This will be NPCs most of the time
 			new SystemMessageIntent(incapacitatorOwner, new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
