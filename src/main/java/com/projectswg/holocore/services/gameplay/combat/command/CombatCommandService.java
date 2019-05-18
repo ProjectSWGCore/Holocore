@@ -84,7 +84,6 @@ public class CombatCommandService extends Service {
 		CreatureObject source = eci.getSource();
 		SpecialLineInfo specialLine = DataLoader.specialLines().getSpecialLine(command.getSpecialLine());
 		double actionCost = command.getActionCost() * command.getAttackRolls();
-		int currentAction = source.getAction();
 		
 		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
 		
