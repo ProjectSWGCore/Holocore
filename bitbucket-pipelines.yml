@@ -1,7 +1,9 @@
+image: openjdk:12
 pipelines:
   default:
     - step:
         name: fetch code
+        image: alpine/git
         script:
           - git submodule update --init
         artifacts:
@@ -9,7 +11,7 @@ pipelines:
           - client-holocore/**
     - step:
         name: test, build, and deploy
-        image: openjdk:12
+        #image: openjdk:12
         caches:
           - docker
           - gradle
@@ -30,4 +32,3 @@ pipelines:
 definitions:
   caches:
     gradlewrapper: ~/.gradle/wrapper
-
