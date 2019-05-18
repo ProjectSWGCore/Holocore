@@ -127,7 +127,7 @@ class NetworkClient(private val socket: AsynchronousSocketChannel) {
 			
 			override fun failed(exc: Throwable?, attachment: Any?) {
 				if (exc != null) {
-					if (exc !is AsynchronousCloseException && exc !is ClosedChannelException)
+					if (exc !is IOException)
 						Log.w(exc)
 					close()
 				}
