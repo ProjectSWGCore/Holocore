@@ -1,61 +1,61 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-patrol_yav_100	patrol_yav_100	LOOP	YAVIN4	yav_world	0	-262.40	35.00	4874.40	0	Mining outpost - an R5 unit
-patrol_yav_101	patrol_yav_100		YAVIN4	yav_world	0	-260.10	35.00	4856.30	0	
-patrol_yav_102	patrol_yav_100		YAVIN4	yav_world	0	-303.50	35.00	4857.70	0	
-patrol_yav_103	patrol_yav_100		YAVIN4	yav_world	0	-303.60	35.00	4834.40	0	
-patrol_yav_104	patrol_yav_100		YAVIN4	yav_world	0	-318.30	35.00	4839.80	0	
-patrol_yav_105	patrol_yav_100		YAVIN4	yav_world	0	-319.00	35.00	4849.20	0	
-patrol_yav_106	patrol_yav_100		YAVIN4	yav_world	0	-326.20	35.00	4852.90	0	
-patrol_yav_107	patrol_yav_100		YAVIN4	yav_world	0	-305.90	35.00	4885.70	0	
-patrol_yav_108	patrol_yav_100		YAVIN4	yav_world	0	-284.00	35.00	4887.40	0	
-patrol_yav_200	patrol_yav_200	LOOP	YAVIN4	yav_world	0	-254.80	35.00	4872.80	0	Mining outpost - a technician
-patrol_yav_201	patrol_yav_200		YAVIN4	yav_world	0	-252.60	35.00	4844.60	0	
-patrol_yav_202	patrol_yav_200		YAVIN4	yav_world	0	-253.40	35.00	4856.20	0	
-patrol_yav_203	patrol_yav_200		YAVIN4	yav_world	0	-302.90	35.00	4856.10	0	
-patrol_yav_204	patrol_yav_200		YAVIN4	yav_world	0	-329.20	35.00	4869.90	0	
-patrol_yav_205	patrol_yav_200		YAVIN4	yav_world	0	-320.00	35.00	4855.70	0	
-patrol_yav_206	patrol_yav_200		YAVIN4	yav_world	0	-259.70	35.00	4867.60	0	
-patrol_yav_300	patrol_yav_300	FLIP	YAVIN4	yav_world	0	-351.10	35.00	4858.40	0	Mining outpost - a settler
-patrol_yav_301	patrol_yav_300		YAVIN4	yav_world	0	-321.90	35.00	4849.30	0	
-patrol_yav_302	patrol_yav_300		YAVIN4	yav_world	0	-310.10	35.00	4847.00	0	
-patrol_yav_303	patrol_yav_300		YAVIN4	yav_world	0	-309.70	35.00	4838.20	0	
-patrol_yav_304	patrol_yav_300		YAVIN4	yav_world	0	-293.90	35.00	4820.40	0	
-patrol_yav_305	patrol_yav_300		YAVIN4	yav_world	0	-281.90	35.00	4838.50	0	
-patrol_yav_306	patrol_yav_300		YAVIN4	yav_world	0	-281.70	35.00	4857.80	0	
-patrol_yav_400	patrol_yav_400	LOOP	YAVIN4	yav_world	0	-6875.10	73.00	-5716.80	0	Labor Outpost - a settler
-patrol_yav_401	patrol_yav_400		YAVIN4	yav_world	0	-6876.30	73.00	-5703.10	0	
-patrol_yav_402	patrol_yav_400		YAVIN4	yav_world	0	-6880.20	73.00	-5703.90	0	
-patrol_yav_403	patrol_yav_400		YAVIN4	yav_world	0	-6913.30	73.00	-5748.60	0	
-patrol_yav_404	patrol_yav_400		YAVIN4	yav_world	0	-6985.90	73.00	-5750.20	0	
-patrol_yav_405	patrol_yav_400		YAVIN4	yav_world	0	-6981.10	73.00	-5661.00	0	
-patrol_yav_406	patrol_yav_400		YAVIN4	yav_world	0	-6977.70	73.00	-5673.00	0	
-patrol_yav_407	patrol_yav_400		YAVIN4	yav_world	0	-6913.60	73.00	5673.10	0	
-patrol_yav_408	patrol_yav_400		YAVIN4	yav_world	0	-6887.50	73.00	-5718.30	0	
-patrol_yav_409	patrol_yav_400		YAVIN4	yav_world	0	-6877.70	73.00	-5702.80	0	
-patrol_yav_410	patrol_yav_400		YAVIN4	yav_world	0	-6875.80	73.00	-5704.80	0	
-patrol_yav_500	patrol_yav_500	FLIP	YAVIN4	yav_world	0	-6883.30	73.00	-5685.00	0	Labor Outpost - a miner
-patrol_yav_501	patrol_yav_500		YAVIN4	yav_world	0	-6930.40	73.00	-5656.90	0	
-patrol_yav_502	patrol_yav_500		YAVIN4	yav_world	0	-6886.30	73.00	-5691.30	0	
-patrol_yav_600	patrol_yav_600	FLIP	YAVIN4	yav_world	0	-6929.90	73.00	-5709.80	0	Labor Outpost - a pilot
-patrol_yav_601	patrol_yav_600		YAVIN4	yav_world	0	-6927.30	73.00	-5721.00	0	
-patrol_yav_602	patrol_yav_600		YAVIN4	yav_world	0	-6921.90	73.00	-5721.70	0	
-patrol_yav_603	patrol_yav_600		YAVIN4	yav_world	0	-6918.70	73.00	-5736.80	0	
-patrol_yav_604	patrol_yav_600		YAVIN4	yav_world	0	-6975.40	73.00	-5704.00	0	
-patrol_yav_605	patrol_yav_600		YAVIN4	yav_world	0	-6981.00	73.00	-5660.90	0	
-patrol_yav_606	patrol_yav_600		YAVIN4	yav_world	0	-6976.30	73.00	-5674.70	0	
-patrol_yav_700	patrol_yav_700	LOOP	YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	Imperial Outpost - AT-ST
-patrol_yav_701	patrol_yav_700		YAVIN4	yav_world	0	4081.60	37.00	-6280.30	0	
-patrol_yav_702	patrol_yav_700		YAVIN4	yav_world	0	4083.50	37.00	-6173.20	0	
-patrol_yav_703	patrol_yav_700		YAVIN4	yav_world	0	3977.10	37.00	-6174.10	0	
-patrol_yav_704	patrol_yav_700		YAVIN4	yav_world	0	3981.50	37.00	-6280.30	0	
-patrol_yav_705	patrol_yav_700		YAVIN4	yav_world	0	4031.30	37.00	-6280.30	0	
-patrol_yav_800	patrol_yav_800	FLIP	YAVIN4	yav_world	0	4026.60	18.50	-6501.60	0	Imperial Outpost - a Novatrooper Captain
-patrol_yav_801	patrol_yav_800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
-patrol_yav_802	patrol_yav_800		YAVIN4	yav_world	0	3950.30	10.10	-6585.70	0	
-patrol_yav_803	patrol_yav_800		YAVIN4	yav_world	0	4010.90	18.80	-6524.80	0	
-patrol_yav_804	patrol_yav_800		YAVIN4	yav_world	0	4028.40	19.80	-6481.50	0	
-patrol_yav_805	patrol_yav_800		YAVIN4	yav_world	0	4027.70	31.90	-6414.00	0	
-patrol_yav_806	patrol_yav_800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	
-patrol_yav_807	patrol_yav_800		YAVIN4	yav_world	0	4030.80	37.00	-6265.60	0	
-patrol_yav_808	patrol_yav_800		YAVIN4	yav_world	0	4027.90	38.10	-6331.00	0	
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
+patrol_yav_100	patrol_yav_100	LOOP	YAVIN4	yav_world	0	-262.4	35.0	4874.4	0
+patrol_yav_101	patrol_yav_100		YAVIN4	yav_world	0	-260.1	35.0	4856.3	0
+patrol_yav_102	patrol_yav_100		YAVIN4	yav_world	0	-303.5	35.0	4857.7	0
+patrol_yav_103	patrol_yav_100		YAVIN4	yav_world	0	-303.6	35.0	4834.4	0
+patrol_yav_104	patrol_yav_100		YAVIN4	yav_world	0	-318.3	35.0	4839.8	0
+patrol_yav_105	patrol_yav_100		YAVIN4	yav_world	0	-319.0	35.0	4849.2	0
+patrol_yav_106	patrol_yav_100		YAVIN4	yav_world	0	-326.2	35.0	4852.9	0
+patrol_yav_107	patrol_yav_100		YAVIN4	yav_world	0	-305.9	35.0	4885.7	0
+patrol_yav_108	patrol_yav_100		YAVIN4	yav_world	0	-284.0	35.0	4887.4	0
+patrol_yav_200	patrol_yav_200	LOOP	YAVIN4	yav_world	0	-254.8	35.0	4872.8	0
+patrol_yav_201	patrol_yav_200		YAVIN4	yav_world	0	-252.6	35.0	4844.6	0
+patrol_yav_202	patrol_yav_200		YAVIN4	yav_world	0	-253.4	35.0	4856.2	0
+patrol_yav_203	patrol_yav_200		YAVIN4	yav_world	0	-302.9	35.0	4856.1	0
+patrol_yav_204	patrol_yav_200		YAVIN4	yav_world	0	-329.2	35.0	4869.9	0
+patrol_yav_205	patrol_yav_200		YAVIN4	yav_world	0	-320.0	35.0	4855.7	0
+patrol_yav_206	patrol_yav_200		YAVIN4	yav_world	0	-259.7	35.0	4867.6	0
+patrol_yav_300	patrol_yav_300	FLIP	YAVIN4	yav_world	0	-351.1	35.0	4858.4	0
+patrol_yav_301	patrol_yav_300		YAVIN4	yav_world	0	-321.9	35.0	4849.3	0
+patrol_yav_302	patrol_yav_300		YAVIN4	yav_world	0	-310.1	35.0	4847.0	0
+patrol_yav_303	patrol_yav_300		YAVIN4	yav_world	0	-309.7	35.0	4838.2	0
+patrol_yav_304	patrol_yav_300		YAVIN4	yav_world	0	-293.9	35.0	4820.4	0
+patrol_yav_305	patrol_yav_300		YAVIN4	yav_world	0	-281.9	35.0	4838.5	0
+patrol_yav_306	patrol_yav_300		YAVIN4	yav_world	0	-281.7	35.0	4857.8	0
+patrol_yav_400	patrol_yav_400	LOOP	YAVIN4	yav_world	0	-6875.1	73.0	-5716.8	0
+patrol_yav_401	patrol_yav_400		YAVIN4	yav_world	0	-6876.3	73.0	-5703.1	0
+patrol_yav_402	patrol_yav_400		YAVIN4	yav_world	0	-6880.2	73.0	-5703.9	0
+patrol_yav_403	patrol_yav_400		YAVIN4	yav_world	0	-6913.3	73.0	-5748.6	0
+patrol_yav_404	patrol_yav_400		YAVIN4	yav_world	0	-6985.9	73.0	-5750.2	0
+patrol_yav_405	patrol_yav_400		YAVIN4	yav_world	0	-6981.1	73.0	-5661.0	0
+patrol_yav_406	patrol_yav_400		YAVIN4	yav_world	0	-6977.7	73.0	-5673.0	0
+patrol_yav_407	patrol_yav_400		YAVIN4	yav_world	0	-6913.6	73.0	5673.1	0
+patrol_yav_408	patrol_yav_400		YAVIN4	yav_world	0	-6887.5	73.0	-5718.3	0
+patrol_yav_409	patrol_yav_400		YAVIN4	yav_world	0	-6877.7	73.0	-5702.8	0
+patrol_yav_410	patrol_yav_400		YAVIN4	yav_world	0	-6875.8	73.0	-5704.8	0
+patrol_yav_500	patrol_yav_500	FLIP	YAVIN4	yav_world	0	-6883.3	73.0	-5685.0	0
+patrol_yav_501	patrol_yav_500		YAVIN4	yav_world	0	-6930.4	73.0	-5656.9	0
+patrol_yav_502	patrol_yav_500		YAVIN4	yav_world	0	-6886.3	73.0	-5691.3	0
+patrol_yav_600	patrol_yav_600	FLIP	YAVIN4	yav_world	0	-6929.9	73.0	-5709.8	0
+patrol_yav_601	patrol_yav_600		YAVIN4	yav_world	0	-6927.3	73.0	-5721.0	0
+patrol_yav_602	patrol_yav_600		YAVIN4	yav_world	0	-6921.9	73.0	-5721.7	0
+patrol_yav_603	patrol_yav_600		YAVIN4	yav_world	0	-6918.7	73.0	-5736.8	0
+patrol_yav_604	patrol_yav_600		YAVIN4	yav_world	0	-6975.4	73.0	-5704.0	0
+patrol_yav_605	patrol_yav_600		YAVIN4	yav_world	0	-6981.0	73.0	-5660.9	0
+patrol_yav_606	patrol_yav_600		YAVIN4	yav_world	0	-6976.3	73.0	-5674.7	0
+patrol_yav_700	patrol_yav_700	LOOP	YAVIN4	yav_world	0	4031.3	37.0	-6280.3	0
+patrol_yav_701	patrol_yav_700		YAVIN4	yav_world	0	4081.6	37.0	-6280.3	0
+patrol_yav_702	patrol_yav_700		YAVIN4	yav_world	0	4083.5	37.0	-6173.2	0
+patrol_yav_703	patrol_yav_700		YAVIN4	yav_world	0	3977.1	37.0	-6174.1	0
+patrol_yav_704	patrol_yav_700		YAVIN4	yav_world	0	3981.5	37.0	-6280.3	0
+patrol_yav_705	patrol_yav_700		YAVIN4	yav_world	0	4031.3	37.0	-6280.3	0
+patrol_yav_800	patrol_yav_800	FLIP	YAVIN4	yav_world	0	4026.6	18.5	-6501.6	0
+patrol_yav_801	patrol_yav_800		YAVIN4	yav_world	0	4010.9	18.8	-6524.8	0
+patrol_yav_802	patrol_yav_800		YAVIN4	yav_world	0	3950.3	10.1	-6585.7	0
+patrol_yav_803	patrol_yav_800		YAVIN4	yav_world	0	4010.9	18.8	-6524.8	0
+patrol_yav_804	patrol_yav_800		YAVIN4	yav_world	0	4028.4	19.8	-6481.5	0
+patrol_yav_805	patrol_yav_800		YAVIN4	yav_world	0	4027.7	31.9	-6414.0	0
+patrol_yav_806	patrol_yav_800		YAVIN4	yav_world	0	4027.9	38.1	-6331.0	0
+patrol_yav_807	patrol_yav_800		YAVIN4	yav_world	0	4030.8	37.0	-6265.6	0
+patrol_yav_808	patrol_yav_800		YAVIN4	yav_world	0	4027.9	38.1	-6331.0	0
