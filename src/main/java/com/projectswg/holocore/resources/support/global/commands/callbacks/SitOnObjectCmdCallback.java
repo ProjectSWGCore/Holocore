@@ -62,7 +62,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 			sot = new SitOnObject(objectID, 0, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ());
 		}
 		creature.setPosture(Posture.SITTING);
-		creature.setMovementScale(0);
+		creature.setMovementPercent(0);
 		creature.setTurnScale(0);
 		creature.sendObservers(new SitOnObject(creature.getObjectId(), sot));
 	}
