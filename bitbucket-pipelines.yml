@@ -9,7 +9,7 @@ pipelines:
           - client-holocore/**
     - step:
         name: test, build, and deploy
-        image: openjdk:12-jdk-slim
+        image: openjdk:12
         caches:
           - docker
           - gradle
