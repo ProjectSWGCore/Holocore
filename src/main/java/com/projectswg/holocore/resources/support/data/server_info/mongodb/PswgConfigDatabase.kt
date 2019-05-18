@@ -34,13 +34,17 @@ import com.mongodb.client.model.Indexes
 import org.bson.Document
 import java.util.*
 
-class PswgConfigDatabase(private val collection: MongoCollection<Document>){
+/**
+ * Empty config database that only returns the defaults
+ */
+class PswgConfigDatabase(private val collection: MongoCollection<Document>?) {
 	
 	init {
-		collection.createIndex(Indexes.ascending("package"), IndexOptions().unique(true))
+		collection?.createIndex(Indexes.ascending("package"), IndexOptions().unique(true))
 	}
 	
 	fun getString(o: Any, key: String, def: String): String {
+		collection ?: return def
 		for (config in getConfigurations(o)) {
 			if (config.containsKey(key))
 				return config.getString(key)
@@ -49,6 +53,7 @@ class PswgConfigDatabase(private val collection: MongoCollection<Document>){
 	}
 	
 	fun getBoolean(o: Any, key: String, def: Boolean): Boolean {
+		collection ?: return def
 		for (config in getConfigurations(o)) {
 			if (config.containsKey(key))
 				return config.getBoolean(key)!!
@@ -57,6 +62,7 @@ class PswgConfigDatabase(private val collection: MongoCollection<Document>){
 	}
 	
 	fun getInt(o: Any, key: String, def: Int): Int {
+		collection ?: return def
 		for (config in getConfigurations(o)) {
 			if (config.containsKey(key))
 				return config.getInteger(key)!!
@@ -65,6 +71,7 @@ class PswgConfigDatabase(private val collection: MongoCollection<Document>){
 	}
 	
 	fun getDouble(o: Any, key: String, def: Double): Double {
+		collection ?: return def
 		for (config in getConfigurations(o)) {
 			if (config.containsKey(key))
 				return config.getDouble(key)!!
@@ -72,15 +79,17 @@ class PswgConfigDatabase(private val collection: MongoCollection<Document>){
 		return def
 	}
 	
-	fun getLong(o: Any, key: String, def: Long): Double {
+	fun getLong(o: Any, key: String, def: Long): Long {
+		collection ?: return def
 		for (config in getConfigurations(o)) {
 			if (config.containsKey(key))
-				return config.getLong(key)!!.toDouble()
+				return config.getLong(key)!!
 		}
-		return def.toDouble()
+		return def
 	}
 	
 	private fun getConfigurations(o: Any): List<Document> {
+		collection!! // Should be verified in calling functions
 		var packageKey = if (o is Class<*>) o.packageName else o.javaClass.packageName
 		require(packageKey.startsWith("com.projectswg.holocore")) { "packageKey must be a part of holocore, was: $packageKey" }
 		

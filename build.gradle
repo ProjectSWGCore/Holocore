@@ -6,8 +6,8 @@ plugins {
 	id 'idea'
 	id "com.github.johnrengelman.shadow" version "5.0.0"
 	id "org.javamodularity.moduleplugin" version "1.5.0"
-	id 'org.jetbrains.kotlin.jvm' version '1.3.30'
-	id "org.beryx.jlink" version "2.10.1"
+	id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+	id "org.beryx.jlink" version "2.10.2"
 }
 
 mainClassName = 'holocore/com.projectswg.holocore.ProjectSWG'
@@ -58,7 +58,7 @@ repositories {
 dependencies {
 	compile project(':pswgcommon')
 	
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.30'
+	compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.31'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'

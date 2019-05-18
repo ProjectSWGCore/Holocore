@@ -25,59 +25,19 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.objects.swg.creature.attributes;
+package com.projectswg.holocore.resources.support.objects.swg
 
-public class AttributesImmutable implements Attributes {
+import kotlin.reflect.KProperty
+
+class BaselineDelegate<T>(private var value: T, private val page: Int, private val update: Int) {
 	
-	private final int health;
-	private final int healthRegen;
-	private final int action;
-	private final int actionRegen;
-	private final int mind;
-	private final int mindRegen;
-	
-	AttributesImmutable(Attributes a) {
-		this.health = a.getHealth();
-		this.healthRegen = a.getHealthRegen();
-		this.action = a.getAction();
-		this.actionRegen = a.getActionRegen();
-		this.mind = a.getMind();
-		this.mindRegen = a.getMindRegen();
+	operator fun getValue(thisRef: SWGObject, property: KProperty<*>): T {
+		return value
 	}
 	
-	@Override
-	public int getHealth() {
-		return health;
-	}
-	
-	@Override
-	public int getHealthRegen() {
-		return healthRegen;
-	}
-	
-	@Override
-	public int getAction() {
-		return action;
-	}
-	
-	@Override
-	public int getActionRegen() {
-		return actionRegen;
-	}
-	
-	@Override
-	public int getMind() {
-		return mind;
-	}
-	
-	@Override
-	public int getMindRegen() {
-		return mindRegen;
-	}
-	
-	@Override
-	public Attributes getImmutable() {
-		return this;
+	operator fun setValue(thisRef: SWGObject, property: KProperty<*>, value: T) {
+		this.value = value
+		thisRef.sendDelta(page, update, value)
 	}
 	
 }

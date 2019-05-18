@@ -79,8 +79,8 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	
 	private AttributesMutable	attributes;
 	private AttributesMutable	maxAttributes;
-	private SWGList<Equipment>	equipmentList 	= new SWGList<>(6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<>(6, 33);
+	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 23, Equipment::new);
+	private SWGList<Equipment>	appearanceList 	= SWGList.Companion.createEncodableList(6, 33, Equipment::new);
 	
 	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
 	

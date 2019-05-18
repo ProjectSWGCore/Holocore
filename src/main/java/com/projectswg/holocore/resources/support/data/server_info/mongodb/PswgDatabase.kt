@@ -12,7 +12,7 @@ import java.util.logging.Logger
 object PswgDatabase {
 	
 	var config: PswgConfigDatabase? = null
-		@NotNull get() = field!!
+		@NotNull get() = field ?: PswgConfigDatabase(null)
 		private set
 	var users: PswgUserDatabase? = null
 		@NotNull get() = field!!
