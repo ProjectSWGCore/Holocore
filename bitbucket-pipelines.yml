@@ -1,12 +1,12 @@
 pipelines:
   default:
-     - step:
-         name: fetch code
-         script:
-           - git submodule update --init
-         artifacts:
-           - pswgcommon/**
-           - client-holocore/**
+    - step:
+        name: fetch code
+        script:
+          - git submodule update --init
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
     - step:
         name: test, build, and deploy
         image: openjdk:12
