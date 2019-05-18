@@ -47,9 +47,7 @@ import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
-import java.nio.channels.AsynchronousCloseException
 import java.nio.channels.AsynchronousSocketChannel
-import java.nio.channels.ClosedChannelException
 import java.nio.channels.CompletionHandler
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
@@ -115,22 +113,21 @@ class NetworkClient(private val socket: AsynchronousSocketChannel) {
 						intentChain.broadcastAfter(InboundPacketIntent(player, p))
 					}
 					inboundBuffer.compact()
+					startRead()
 				} catch (e: HolocoreSessionException) {
 					onSessionError(e)
-				} catch (e: IOException) {
-					Log.w("Failed to process inbound packets. IOException: %s", e.message)
+				} catch (t: Throwable) {
+					Log.w("Failed to process inbound packets. ${t::class.qualifiedName}: ${t.message}")
 					close()
 				}
-				
-				startRead()
 			}
 			
 			override fun failed(exc: Throwable?, attachment: Any?) {
 				if (exc != null) {
 					if (exc !is IOException)
 						Log.w(exc)
-					close()
 				}
+				close()
 			}
 			
 		})
