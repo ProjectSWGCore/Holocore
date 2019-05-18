@@ -164,6 +164,10 @@ public abstract class DataLoader {
 		return getInstance(SpecialLineLoader.class, SpecialLineLoader::new);
 	}
 	
+	public static StaticPvpZoneLoader staticPvpZones() {
+		return getInstance(StaticPvpZoneLoader.class, StaticPvpZoneLoader::new);
+	}
+	
 	private static <T extends DataLoader> T getInstance(Class<T> klass, Supplier<T> fallback) {
 		return getInstance(klass, fallback, SoftReference::new);
 	}

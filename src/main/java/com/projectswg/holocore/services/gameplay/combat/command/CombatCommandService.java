@@ -88,13 +88,18 @@ public class CombatCommandService extends Service {
 		
 		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
 		
-		if (actionCost <= 0 || actionCost > currentAction) {
+		if (actionCost <= 0) {
 			return;
 		}
 		
 		if (specialLine != null && source.getSkillModValue(specialLine.getFreeshotModName()) > ThreadLocalRandom.current().nextInt(0, 100)) {
 			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT));
 		} else {
+			if (specialLine != null)
+				actionCost = reduceActionCost(source, actionCost, specialLine.getActionCostModName());
+			if (actionCost > source.getAction())
+				return;
+			
 			source.modifyAction(-(int) command.getActionCost());
 		}
 		
@@ -103,6 +108,20 @@ public class CombatCommandService extends Service {
 			hitType.handle(source, eci.getTarget(), command, eci.getArguments());
 		else
 			handleStatus(source, CombatStatus.UNKNOWN);
+	}
+	
+	/**
+	 * Calculates a new action cost based on the given action cost and a skill mod name.
+	 * @param source to read the skillmod value from
+	 * @param actionCost that has been calculated so far
+	 * @param skillModName name of the skillmod to read from {@code source}
+	 * @return new action cost that has been increased or reduced, depending on whether the skillmod value is
+	 * positive or negative
+	 */
+	private double reduceActionCost(CreatureObject source, double actionCost, String skillModName) {
+		int actionCostModValue = source.getSkillModValue(skillModName);
+		
+		return actionCost + actionCost * actionCostModValue / 100;
 	}
 	
 }
