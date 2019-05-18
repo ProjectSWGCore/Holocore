@@ -47,14 +47,16 @@ import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
-import java.nio.ByteBuffer
-import java.nio.channels.SocketChannel
+import java.nio.channels.AsynchronousCloseException
+import java.nio.channels.AsynchronousSocketChannel
+import java.nio.channels.ClosedChannelException
+import java.nio.channels.CompletionHandler
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 import java.util.function.Consumer
 
-class NetworkClient(private val socket: SocketChannel) {
+class NetworkClient(private val socket: AsynchronousSocketChannel) {
 	
 	private val remoteAddress: SocketAddress? = try { socket.remoteAddress } catch (e: IOException) { null }
 	private val inboundBuffer: NetBuffer
@@ -99,33 +101,39 @@ class NetworkClient(private val socket: SocketChannel) {
 		return "NetworkClient[$remoteAddress]"
 	}
 	
-	fun addToInbound(data: ByteBuffer) {
-		synchronized(inboundBuffer) {
-			if (data.remaining() > inboundBuffer.remaining()) {
-				StandardLog.onPlayerError(this, player, "Possible hack attempt detected with buffer overflow.  Closing connection to $remoteAddress")
-				close(ConnectionStoppedReason.APPLICATION)
-				return
-			}
-			try {
-				inboundBuffer.add(data)
-				inboundBuffer.flip()
-				while (NetworkProtocol.canDecode(inboundBuffer)) {
-					val p = NetworkProtocol.decode(inboundBuffer)
-					if (p == null || !allowInbound(p))
-						continue
-					p.socketAddress = remoteAddress
-					processPacket(p)
-					intentChain.broadcastAfter(InboundPacketIntent(player, p))
+	private fun startRead() {
+		socket.read(inboundBuffer.buffer, null, object : CompletionHandler<Int, Any?> {
+			override fun completed(result: Int?, attachment: Any?) {
+				try {
+					inboundBuffer.flip()
+					while (NetworkProtocol.canDecode(inboundBuffer)) {
+						val p = NetworkProtocol.decode(inboundBuffer)
+						if (p == null || !allowInbound(p))
+							continue
+						p.socketAddress = remoteAddress
+						processPacket(p)
+						intentChain.broadcastAfter(InboundPacketIntent(player, p))
+					}
+					inboundBuffer.compact()
+				} catch (e: HolocoreSessionException) {
+					onSessionError(e)
+				} catch (e: IOException) {
+					Log.w("Failed to process inbound packets. IOException: %s", e.message)
+					close()
 				}
-				inboundBuffer.compact()
-			} catch (e: HolocoreSessionException) {
-				onSessionError(e)
-			} catch (e: IOException) {
-				Log.w("Failed to process inbound packets. IOException: %s", e.message)
-				close()
+				
+				startRead()
 			}
 			
-		}
+			override fun failed(exc: Throwable?, attachment: Any?) {
+				if (exc != null) {
+					if (exc !is AsynchronousCloseException && exc !is ClosedChannelException)
+						Log.w(exc)
+					close()
+				}
+			}
+			
+		})
 	}
 	
 	private fun addToOutbound(p: SWGPacket) {
@@ -134,12 +142,12 @@ class NetworkClient(private val socket: SocketChannel) {
 				try {
 					val buffer = NetworkProtocol.encode(p).buffer
 					while (connected.get() && buffer.hasRemaining()) {
-						socket.write(buffer)
+						socket.write(buffer).get()
 						if (buffer.hasRemaining())
 							Delay.sleepMilli(1)
 					}
-				} catch (e: IOException) {
-					StandardLog.onPlayerError(this, player, "failed to write network data. ${e.javaClass.name}: ${e.message}")
+				} catch (t: Throwable) {
+					StandardLog.onPlayerError(this, player, "failed to write network data. ${t.javaClass.name}: ${t.message}")
 					close()
 				}
 			}
@@ -150,6 +158,7 @@ class NetworkClient(private val socket: SocketChannel) {
 		StandardLog.onPlayerTrace(this, player, "connecting")
 		status.set(SessionStatus.CONNECTING)
 		intentChain.broadcastAfter(ConnectionOpenedIntent(player))
+		startRead()
 	}
 	
 	private fun onConnected() {
