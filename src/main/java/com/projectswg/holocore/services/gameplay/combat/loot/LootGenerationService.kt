@@ -183,10 +183,10 @@ class LootGenerationService : Service() {
 			
 			if (tableRoll > tableChance) {
 				// Skip ahead if there's no drop chance
-				adminOutput1.append("/ \\#FF0000 loot_table").append(tableId)
+				adminOutput1.append("/ \\#FF0000 loot_table").append(tableId+1)
 				break
 			}
-			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId)
+			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId+1)
 			
 			val groupRoll = random.nextInt(100) + 1
 			val lootTableItem = lootTables.getLootTableItem(npcTable.lootTable, difficulty.name, level) ?: continue

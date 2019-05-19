@@ -46,7 +46,7 @@ class LootTableLoader : DataLoader() {
 	}
 	
 	@Throws(IOException::class)
-	public override fun load() {
+	override fun load() {
 		SdbLoader.load(File("serverdata/loot/loot_table.sdb")).use { set ->
 			val itemGroups = set.getTextArrayParser("items_group_([0-9]+)")
 			val chanceGroups = set.getIntegerArrayParser("chance_group_([0-9]+)")
