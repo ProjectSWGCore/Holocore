@@ -46,7 +46,7 @@ public class CommandLoader extends DataLoader {
 	}
 	
 	@Override
-	protected void load() throws IOException {
+	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/commands.sdb"))) {
 			while (set.next()) {
 				Command command = Command.builder()
