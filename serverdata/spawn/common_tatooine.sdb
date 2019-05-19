@@ -1739,10 +1739,10 @@ spawn_tat_1736	TATOOINE	tat_world	AREA	0	-6158.0	23.6	1836.0	-173	1	Protocol Dro
 spawn_tat_1737	TATOOINE	tat_world	AREA	0	-6152.0	23.6	1812.1	-166	1	Ji'Ni Sil	tatooine_watto_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1738	TATOOINE	tat_world	AREA	0	-6152.1	23.6	1810.5	0	1	C4-ZX	tatooine_watto_jawa_droid_c4zx	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1739	TATOOINE	tat_world	AREA	0	-5998.2	62.9	1806.0	0	1	Tusken Follower	tusken_raider	AGGRESSIVE	N	20	30	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1740	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1741	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1742	TATOOINE	tat_world	AREA	0	-6249.5	36.7	1961.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1743	TATOOINE	tat_world	AREA	0	-6285.1	44.7	1918.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1740	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1741	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1742	TATOOINE	tat_world	AREA	0	-6249.5	36.7	1961.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1743	TATOOINE	tat_world	AREA	0	-6285.1	44.7	1918.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_tat_1744	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
 spawn_tat_1745	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
 spawn_tat_1746	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
@@ -1751,10 +1751,10 @@ spawn_tat_1748	TATOOINE	tat_world	AREA	0	7428.0	5.7	4529.0	0	1	a grand krayt dra
 spawn_tat_1749	TATOOINE	tat_world	AREA	0	7428.0	5.7	4529.0	0	1	a grand krayt dragon	krayt_dragon_grand	AGGRESSIVE	B	90	120	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
 spawn_tat_1750	TATOOINE	tat_world	AREA	0	7358.0	14.6	4486.6	0	1	a juvenile canyon krayt dragon	krayt_dragon_juvenile_canyon	AGGRESSIVE	B	80	100	POI	Krayt Graveyard	1	LOITER	50	0	-	idle	0	0	0	600
 spawn_tat_1751	TATOOINE	tat_world	AREA	0	-2575.0	0.0	-5517.0	0	1	Zef Ando	legacy_zef_ando	INVULNERABLE	N	100	100	POI	Lars Homestead	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tat_1752	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	tatooine_lin_demolitionmech	AGGRESSIVE	E	5	20	POI	Lars Homestead	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tat_1753	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Lars Homestead	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tat_1754	TATOOINE	tat_world	AREA	0	-2455.2	0.0	-5384.6	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Lars Homestead	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tat_1755	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	5	20	POI	Lars Homestead	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tat_1752	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	tatooine_lin_demolitionmech	AGGRESSIVE	E	10	20	POI	Lars Homestead	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tat_1753	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_tat_1754	TATOOINE	tat_world	AREA	0	-2455.2	0.0	-5384.6	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_tat_1755	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_tat_1756	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinator	race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Old Mos Espa Arena Track	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1757	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	tusken_raider	AGGRESSIVE	N	20	30	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tat_1758	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	tusken_raider	AGGRESSIVE	N	20	30	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle	0	0	0	600
