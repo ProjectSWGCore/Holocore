@@ -152,7 +152,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			if (incapacitate) {
 				finalDamage = targetHealth;	// Target took more damage than they had health left. Final damage becomes the amount of remaining health.
-				RequestCreatureDeathIntent.broadcast(target, source);
+				RequestCreatureDeathIntent.broadcast(source, target);
 			} else {
 				target.modifyHealth(-finalDamage);
 			}
