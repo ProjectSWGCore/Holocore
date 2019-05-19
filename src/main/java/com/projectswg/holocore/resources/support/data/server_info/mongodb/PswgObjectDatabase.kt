@@ -37,20 +37,22 @@ import java.util.*
 import java.util.regex.Pattern
 import java.util.stream.Collectors.toList
 
-class PswgObjectDatabase(private val collection: MongoCollection<Document>) {
+class PswgObjectDatabase(private val collection: MongoCollection<Document>?) {
 	
 	val objects: List<MongoData>
-		get() = collection.find().map { MongoData(it) }.into(ArrayList())
+		get() = collection?.find()?.map { MongoData(it) }?.into(ArrayList()) ?: ArrayList()
 	
 	init {
-		collection.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
+		collection?.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
 	}
 	
 	fun addObject(obj: SWGObject) {
+		collection ?: return
 		collection.replaceOne(Filters.eq("id", obj.objectId), SWGObjectFactory.save(obj, MongoData()).toDocument(), ReplaceOptions().upsert(true))
 	}
 	
 	fun addObjects(objects: Collection<SWGObject>) {
+		collection ?: return
 		if (objects.isEmpty())
 			return
 		collection.bulkWrite(objects.stream()
@@ -66,14 +68,17 @@ class PswgObjectDatabase(private val collection: MongoCollection<Document>) {
 	}
 	
 	fun removeObject(id: Long): Boolean {
+		collection ?: return true
 		return collection.deleteOne(Filters.eq("id", id)).deletedCount > 0
 	}
 	
 	fun getCharacterCount(account: String): Int {
+		collection ?: return 0
 		return collection.countDocuments(Filters.eq("account", account)).toInt()
 	}
 	
 	fun isCharacter(firstName: String): Boolean {
+		collection ?: return false
 		return collection.countDocuments(Filters.and(
 				Filters.regex("template", "object/creature/player/shared_.+\\.iff"),
 				Filters.regex("base3.objectName", Pattern.compile(Pattern.quote(firstName) + "( .+|$)", Pattern.CASE_INSENSITIVE))
@@ -81,6 +86,7 @@ class PswgObjectDatabase(private val collection: MongoCollection<Document>) {
 	}
 	
 	fun clearObjects(): Long {
+		collection ?: return 0
 		return collection.deleteMany(Filters.exists("_id")).deletedCount
 	}
 	

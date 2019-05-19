@@ -33,17 +33,17 @@ import com.mongodb.client.model.IndexOptions
 import com.mongodb.client.model.Indexes
 import org.bson.Document
 
-class PswgUserDatabase(private val collection: MongoCollection<Document>) {
+class PswgUserDatabase(private val collection: MongoCollection<Document>?) {
 	
 	init {
-		collection.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
+		collection?.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
 	}
 	
 	fun getUser(username: String): UserMetadata? {
 		return collection
-				.find(Filters.eq("username", username))
-				.map { UserMetadata(it) }
-				.first()
+				?.find(Filters.eq("username", username))
+				?.map { UserMetadata(it) }
+				?.first()
 	}
 	
 }

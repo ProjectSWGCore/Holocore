@@ -40,11 +40,7 @@ import java.util.stream.Collectors.groupingBy
 
 class NpcCombatProfileLoader : DataLoader() {
 	
-	private val profiles: MutableMap<String, List<CombatProfile>>
-	
-	init {
-		this.profiles = HashMap()
-	}
+	private val profiles: MutableMap<String, List<CombatProfile>> = HashMap()
 	
 	fun getAbilities(id: String?, difficulty: CreatureDifficulty, level: Int): Set<String> {
 		val subprofiles = Objects.requireNonNull<List<CombatProfile>>(profiles[id], "unknown profile id")
@@ -58,24 +54,16 @@ class NpcCombatProfileLoader : DataLoader() {
 	
 	@Throws(IOException::class)
 	public override fun load() {
-		SdbLoader.load(File("serverdata/spawn/static.msdb")).use { set -> profiles.putAll(set.stream<CombatProfile>(Function<SdbResultSet, CombatProfile> { CombatProfile(it) }).collect<Map<String, List<CombatProfile>>, Any>(groupingBy(Function<CombatProfile, String> { it.getId() }))) }
+		SdbLoader.load(File("serverdata/spawn/static.msdb")).use { set -> profiles.putAll(set.stream { CombatProfile(it) }.collect(groupingBy { it.id })) }
 	}
 	
 	private class CombatProfile(set: SdbResultSet) {
 		
-		val id: String
-		val difficulty: CreatureDifficulty
-		val minLevel: Int
-		val maxLevel: Int
-		val abilities: Set<String>
-		
-		init {
-			this.id = set.getText("profile_id")
-			this.difficulty = CreatureDifficulty.valueOf(set.getText("difficulty"))
-			this.minLevel = set.getInt("min_cl").toInt()
-			this.maxLevel = set.getInt("max_cl").toInt()
-			this.abilities = Set.of<String>(*set.getText("action").split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
-		}
+		val id  = set.getText("profile_id")!!
+		val difficulty = CreatureDifficulty.valueOf(set.getText("difficulty"))
+		val minLevel = set.getInt("min_cl").toInt()
+		val maxLevel = set.getInt("max_cl").toInt()
+		val abilities = setOf(*set.getText("action").split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
 		
 	}
 	

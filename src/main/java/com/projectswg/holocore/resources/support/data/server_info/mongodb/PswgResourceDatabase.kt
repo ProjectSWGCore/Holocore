@@ -35,12 +35,12 @@ import org.bson.Document
 import java.util.*
 import java.util.stream.Collectors.toList
 
-class PswgResourceDatabase(private val collection: MongoCollection<Document>) {
+class PswgResourceDatabase(private val collection: MongoCollection<Document>?) {
 	
 	var resources: List<GalacticResource>
-		get() = collection.find().map { MongoData.create(it) { GalacticResource() } }.into(ArrayList())
+		get() = collection?.find()?.map { MongoData.create(it) { GalacticResource() } }?.into(ArrayList()) ?: ArrayList()
 		set(value) {
-			collection.bulkWrite(value.stream()
+			collection?.bulkWrite(value.stream()
 					.map { resource ->
 						ReplaceOneModel(
 								Filters.eq("id", resource.id), // match the resource id
@@ -53,7 +53,7 @@ class PswgResourceDatabase(private val collection: MongoCollection<Document>) {
 		}
 	
 	init {
-		collection.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
+		collection?.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
 	}
 	
 }

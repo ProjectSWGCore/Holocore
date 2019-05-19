@@ -68,7 +68,7 @@ public class SdbLoader {
 		return ext.substring(lastPeriod+1);
 	}
 	
-	public interface SdbResultSet extends AutoCloseable {
+	public interface SdbResultSet extends Closeable, AutoCloseable {
 		
 		@Override
 		void close() throws IOException;

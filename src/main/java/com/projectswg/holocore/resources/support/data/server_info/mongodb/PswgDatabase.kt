@@ -2,37 +2,30 @@ package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
 import com.mongodb.WriteConcern
 import com.mongodb.client.MongoClients
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.MongoDatabase
 import me.joshlarson.jlcommon.log.Log
-import org.jetbrains.annotations.NotNull
+import org.bson.Document
 import java.util.logging.Handler
 import java.util.logging.Level
 import java.util.logging.LogRecord
 import java.util.logging.Logger
+import kotlin.reflect.KProperty
 
 object PswgDatabase {
 	
-	var config: PswgConfigDatabase? = null
-		@NotNull get() = field ?: PswgConfigDatabase(null)
-		private set
-	var users: PswgUserDatabase? = null
-		@NotNull get() = field!!
-		private set
-	var objects: PswgObjectDatabase? = null
-		@NotNull get() = field!!
-		private set
-	var resources: PswgResourceDatabase? = null
-		@NotNull get() = field!!
-		private set
+	private val database = ObjectRef<MongoDatabase?>(null)
+	val config by DatabaseDelegate(database, "config") { PswgConfigDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
+	val users by DatabaseDelegate(database, "users") { PswgUserDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
+	val objects by DatabaseDelegate(database, "objects") { PswgObjectDatabase(it?.withWriteConcern(WriteConcern.JOURNALED)) }
+	val resources by DatabaseDelegate(database, "resources") { PswgResourceDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
 	
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
 		val client = MongoClients.create(connectionString)
 		val database = client.getDatabase(databaseName)
 		
-		config = PswgConfigDatabase(database.getCollection("config").withWriteConcern(WriteConcern.ACKNOWLEDGED))
-		users = PswgUserDatabase(database.getCollection("users").withWriteConcern(WriteConcern.ACKNOWLEDGED))
-		objects = PswgObjectDatabase(database.getCollection("objects").withWriteConcern(WriteConcern.JOURNALED))
-		resources = PswgResourceDatabase(database.getCollection("resources").withWriteConcern(WriteConcern.ACKNOWLEDGED))
+		this.database.element = database
 	}
 	
 	private fun setupMongoLogging() {
@@ -60,5 +53,23 @@ object PswgDatabase {
 			override fun close() {}
 		})
 	}
+	
+	private class DatabaseDelegate<T>(private val database: ObjectRef<MongoDatabase?>, private val collectionName: String, private var databaseSupplier: (MongoCollection<Document>?) -> T) {
+		
+		private var prevDatabase: MongoDatabase? = null
+		private var prevReturn: T = databaseSupplier(null)
+		
+		operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
+			val database = this.database.element
+			if (prevDatabase != database) {
+				this.prevDatabase = database
+				this.prevReturn = databaseSupplier(database?.getCollection(collectionName))
+			}
+			return prevReturn
+		}
+		
+	}
+	
+	private class ObjectRef<T: Any?>(var element: T)
 	
 }

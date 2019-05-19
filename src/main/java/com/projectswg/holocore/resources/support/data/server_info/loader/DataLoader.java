@@ -92,6 +92,10 @@ public abstract class DataLoader {
 		return getInstance(BuildingCellLoader.class, BuildingCellLoader::new);
 	}
 	
+	public static LootTableLoader lootTables() {
+		return getInstance(LootTableLoader.class, LootTableLoader::new);
+	}
+	
 	public static NpcLoader npcs() {
 		return getInstanceWeakCaching(NpcLoader.class, NpcLoader::new);
 	}
