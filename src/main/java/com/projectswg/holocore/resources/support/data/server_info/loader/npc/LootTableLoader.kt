@@ -42,7 +42,7 @@ class LootTableLoader : DataLoader() {
 	private var lootTables: Map<String, Map<String, List<LootTableItem>>> = HashMap()
 	
 	fun getLootTableItem(table: String, difficulty: String, level: Int): LootTableItem? {
-		return lootTables[table]?.get(difficulty)?.first { it.minLevel <= level && it.maxLevel > level }
+		return lootTables[table]?.get(difficulty)?.firstOrNull { it.minLevel <= level && it.maxLevel > level }
 	}
 	
 	@Throws(IOException::class)
