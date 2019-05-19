@@ -1739,10 +1739,10 @@ spawn_tat_1736	TATOOINE	tat_world	AREA	0	-6158.0	23.6	1836.0	-173	1	Protocol Dro
 spawn_tat_1737	TATOOINE	tat_world	AREA	0	-6152.0	23.6	1812.1	-166	1	Ji'Ni Sil	tatooine_watto_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1738	TATOOINE	tat_world	AREA	0	-6152.1	23.6	1810.5	0	1	C4-ZX	tatooine_watto_jawa_droid_c4zx	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_1739	TATOOINE	tat_world	AREA	0	-5998.2	62.9	1806.0	0	1	Tusken Follower	tusken_raider	AGGRESSIVE	N	20	30	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1740	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1741	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1742	TATOOINE	tat_world	AREA	0	-6249.5	36.7	1961.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_tat_1743	TATOOINE	tat_world	AREA	0	-6285.1	44.7	1918.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	10	5	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1740	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1741	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1742	TATOOINE	tat_world	AREA	0	-6249.5	36.7	1961.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_1743	TATOOINE	tat_world	AREA	0	-6285.1	44.7	1918.8	0	1	a greater desert womp rat	womprat_great_desert	AGGRESSIVE	E	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_tat_1744	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
 spawn_tat_1745	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
 spawn_tat_1746	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	krayt_dragon_ancient	AGGRESSIVE	B	120	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle	0	0	0	1800
