@@ -85,12 +85,12 @@ public class ExperienceLevelService extends Service {
 	}
 	
 	private short attemptLevelUp(short currentLevel, CreatureObject creatureObject, int newXpTotal) {
-		if (currentLevel >= DataLoader.playerLevels().getMaxLevel()) {
+		if (currentLevel >= DataLoader.Companion.playerLevels().getMaxLevel()) {
 			return currentLevel;
 		}
 		
 		short nextLevel = (short) (currentLevel + 1);
-		PlayerLevelInfo xpNextLevel = DataLoader.playerLevels().getFromLevel(nextLevel);
+		PlayerLevelInfo xpNextLevel = DataLoader.Companion.playerLevels().getFromLevel(nextLevel);
 		
 		if (xpNextLevel == null) {
 			Log.e("%s couldn't level up to %d because there's no XP requirement", creatureObject, nextLevel);

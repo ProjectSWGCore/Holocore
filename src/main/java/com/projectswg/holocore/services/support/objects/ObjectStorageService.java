@@ -127,7 +127,7 @@ public class ObjectStorageService extends Service {
 	
 	private boolean initializeClientObjects() {
 		long startTime = StandardLog.onStartLoad("client objects");
-		BuildoutLoader loader = DataLoader.buildouts(createEventList());
+		BuildoutLoader loader = DataLoader.Companion.buildouts(createEventList());
 		buildouts.putAll(loader.getObjects());
 		objectMap.putAll(buildouts);
 		buildingLookup.putAll(loader.getBuildings());

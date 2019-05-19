@@ -144,7 +144,7 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 			creature.setLevel(90);
 			broadcastAndWait(new LevelChangedIntent(creature, (short) 1, (short) 90));
 			
-			List<ExpertiseInfo> sortedExpertise = DataLoader.expertise().getAllExpertise().stream()
+			List<ExpertiseInfo> sortedExpertise = DataLoader.Companion.expertise().getAllExpertise().stream()
 					.filter(e -> e.getRequiredProfession().equals(profession.getClientName()))
 					.filter(e -> e.getTree().getUiBackgroundId().equals("left"))
 					.sorted(Comparator.comparingInt(ExpertiseInfo::getTier).thenComparing(ExpertiseInfo::getGrid).thenComparing(ExpertiseInfo::getRank))
@@ -156,8 +156,8 @@ public class TestExperienceExpertiseService extends TestRunnerSynchronousIntents
 			
 			expectedExpertise.add("expertise");
 			for (ExpertiseInfo expertise : sortedExpertise) {
-				SkillInfo skillInfo = DataLoader.skills().getSkillByName(expertise.getName());
-				ExpertiseAbilityInfo abilityInfo = DataLoader.expertiseAbilities().getBySkill(expertise.getName());
+				SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(expertise.getName());
+				ExpertiseAbilityInfo abilityInfo = DataLoader.Companion.expertiseAbilities().getBySkill(expertise.getName());
 				Assert.assertNotNull(skillInfo);
 				
 				expectedExpertise.add(expertise.getName());

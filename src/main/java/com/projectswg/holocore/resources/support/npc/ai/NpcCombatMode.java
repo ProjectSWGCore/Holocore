@@ -123,11 +123,11 @@ public class NpcCombatMode extends NpcMode {
 		obj.setIntendedTargetId(target.getObjectId());
 		obj.setLookAtTargetId(target.getObjectId());
 		if (target.getPosture() == Posture.INCAPACITATED) {
-			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0);
+			QueueCommandIntent.broadcast(obj, target, "", DataLoader.Companion.commands().getCommand("deathblow"), 0);
 			return;
 		}
 		
-		QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand(getWeaponCommand(weapon)), 0);
+		QueueCommandIntent.broadcast(obj, target, "", DataLoader.Companion.commands().getCommand(getWeaponCommand(weapon)), 0);
 	}
 	
 	@Nullable

@@ -81,7 +81,7 @@ public final class ObjectCreator {
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + '\'';
 		template = ClientFactory.formatToSharedFile(template);
-		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
+		Map<ObjectDataAttribute, Object> attributes = DataLoader.Companion.objectData().getAttributes(template);
 		if (attributes == null)
 			throw new ObjectCreationException(template, "Does not exist");
 		SWGObject obj = createObjectFromType(objectId, template, (BaselineType) attributes.get(ObjectDataAttribute.HOLOCORE_BASELINE_TYPE));
@@ -103,7 +103,7 @@ public final class ObjectCreator {
 		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
 		
-		handlePostCreation(obj, DataLoader.objectData().getAttributes(template));
+		handlePostCreation(obj, DataLoader.Companion.objectData().getAttributes(template));
 		updateMaxObjectId(objectId);
 		return obj;
 	}
@@ -165,13 +165,13 @@ public final class ObjectCreator {
 		String slotArrangement = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
 		
 		if (!slotDescriptor.isEmpty()) {
-			List<String> descriptor = DataLoader.slotDescriptors().getSlots(slotDescriptor);
+			List<String> descriptor = DataLoader.Companion.slotDescriptors().getSlots(slotDescriptor);
 			if (descriptor != null)
 				object.setSlots(descriptor); // The slots an object has
 		}
 		
 		if (!slotArrangement.isEmpty()) {
-			List<List<String>> arrangement = DataLoader.slotArrangements().getArrangement(slotArrangement);
+			List<List<String>> arrangement = DataLoader.Companion.slotArrangements().getArrangement(slotArrangement);
 			if (arrangement != null)
 				object.setArrangement(arrangement); // The slots this object can go into
 		}

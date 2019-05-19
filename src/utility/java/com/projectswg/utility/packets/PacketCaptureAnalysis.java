@@ -222,7 +222,7 @@ public class PacketCaptureAnalysis {
 		assertNull(p, objects.put(obj.getObjectId(), obj), "object already exists");
 		
 		if (obj instanceof BuildingObject) {
-			List<CellInfo> cellGoal = DataLoader.buildingCells().getBuilding(obj.getTemplate());
+			List<CellInfo> cellGoal = DataLoader.Companion.buildingCells().getBuilding(obj.getTemplate());
 			if (cellGoal != null) {
 				Collection<SWGObject> cells = obj.getContainedObjects();
 				assertEquals(p, cellGoal.size(), cells.size(), "Cells are not fully populated within building");

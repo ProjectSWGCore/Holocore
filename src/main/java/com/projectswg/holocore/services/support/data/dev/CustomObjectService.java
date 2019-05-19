@@ -93,7 +93,7 @@ public class CustomObjectService extends Service {
 	}
 	
 	private ListBoxRecursive createListBoxRecursive() {
-		return createListBoxRecursive(DataLoader.objectData().getObjects());
+		return createListBoxRecursive(DataLoader.Companion.objectData().getObjects());
 	}
 	
 	private ListBoxRecursive createListBoxRecursive(Collection<String> objects) {

@@ -92,7 +92,7 @@ public class EntertainmentService extends Service {
 			
 			if (!changeDance && dancer.isPerforming()) {
 				new SystemMessageIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
-			} else if (DataLoader.performances().getPerformanceByName(danceName) != null) {
+			} else if (DataLoader.Companion.performances().getPerformanceByName(danceName) != null) {
 				// The dance name is valid.
 				if (dancer.hasCommand("startDance+" + danceName)) {
 					
@@ -133,7 +133,7 @@ public class EntertainmentService extends Service {
 			case PE_ZONE_IN_SERVER:
 				// We need to check if they're dancing in order to start giving them XP
 				if (isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
-					scheduleExperienceTask(creature, DataLoader.performances().getPerformanceByDanceId(Integer.parseInt(creature.getAnimation().replace("dance_", ""))).getPerformanceName());
+					scheduleExperienceTask(creature, DataLoader.Companion.performances().getPerformanceByDanceId(Integer.parseInt(creature.getAnimation().replace("dance_", ""))).getPerformanceName());
 				}
 				
 				break;
@@ -287,7 +287,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void startDancing(CreatureObject dancer, String danceName) {
-		dancer.setAnimation("dance_" + DataLoader.performances().getPerformanceByName(danceName).getPerformanceName());
+		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(danceName).getPerformanceName());
 		dancer.setPerformanceId(0);    // 0 - anything else will make it look like we're playing music
 		dancer.setPerformanceCounter(0);
 		dancer.setPerforming(true);
@@ -318,7 +318,7 @@ public class EntertainmentService extends Service {
 	
 	private void changeDance(CreatureObject dancer, String newPerformanceName) {
 		performerMap.get(dancer.getObjectId()).setPerformanceName(newPerformanceName);
-		dancer.setAnimation("dance_" + DataLoader.performances().getPerformanceByName(newPerformanceName).getPerformanceName());
+		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(newPerformanceName).getPerformanceName());
 	}
 	
 	private void startWatching(CreatureObject actor, CreatureObject creature) {
@@ -424,7 +424,7 @@ public class EntertainmentService extends Service {
 			}
 			
 			String performanceName = performance.getPerformanceName();
-			PerformanceInfo performanceData = DataLoader.performances().getPerformanceByName(performanceName);
+			PerformanceInfo performanceData = DataLoader.Companion.performances().getPerformanceByName(performanceName);
 			if (performanceData == null) {
 				StandardLog.onPlayerError(this, performer, "was performing unknown performance: '%s'", performanceName);
 				return;

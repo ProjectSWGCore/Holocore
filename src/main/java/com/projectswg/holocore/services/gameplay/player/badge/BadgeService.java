@@ -46,7 +46,7 @@ public class BadgeService extends Service {
 		SWGObject inventoryItem = gcci.getInventoryItem();
 		CollectionItem collection = gcci.getCollection();
 		
-		CollectionSlotInfo slotInfo = DataLoader.collections().getSlotByName(collection.getSlotName());
+		CollectionSlotInfo slotInfo = DataLoader.Companion.collections().getSlotByName(collection.getSlotName());
 		if (slotInfo == null)
 			return;
 		
@@ -62,7 +62,7 @@ public class BadgeService extends Service {
 		PlayerObject player = creature.getPlayerObject();
 		String slotName = gbi.getCollectionBadgeName();
 		
-		CollectionLoader collectionLoader = DataLoader.collections();
+		CollectionLoader collectionLoader = DataLoader.Companion.collections();
 		// Grant the requested badge if allowed (checks within grantBadge)
 		CollectionSlotInfo slot = collectionLoader.getSlotByName(slotName);
 		if (slot == null)
@@ -75,7 +75,7 @@ public class BadgeService extends Service {
 		String title = sti.getTitle();
 		PlayerObject requester = sti.getRequester();
 		
-		CollectionSlotInfo slot = DataLoader.collections().getSlotByName(title);
+		CollectionSlotInfo slot = DataLoader.Companion.collections().getSlotByName(title);
 		if (slot == null || !hasCompletedCollection(requester, slot)) {
 			// You can't be assigned a title for a collection you haven't completed/doesn't exist
 			return;
@@ -86,7 +86,7 @@ public class BadgeService extends Service {
 	
 	private void grantAccumulationBadges(PlayerObject player) {
 		// Update the aggregation badges
-		CollectionLoader collections = DataLoader.collections();
+		CollectionLoader collections = DataLoader.Companion.collections();
 		List<CollectionSlotInfo> grantedSlots = player.getCollectionBadgeIds().stream().map(collections::getSlotByBeginSlot).collect(Collectors.toList());
 		
 		int badges = countSlots(grantedSlots, null);
@@ -158,7 +158,7 @@ public class BadgeService extends Service {
 	}
 	
 	private boolean hasPreReqComplete(PlayerObject player, CollectionSlotInfo slot) {
-		CollectionLoader collections = DataLoader.collections();
+		CollectionLoader collections = DataLoader.Companion.collections();
 		
 		for (String prereq : slot.getPrereqSlotNames()) {
 			if (prereq == null || prereq.isEmpty())
@@ -194,7 +194,7 @@ public class BadgeService extends Service {
 	}
 	
 	private boolean hasCompletedCollection(PlayerObject player, CollectionSlotInfo completedSlot) {
-		List<CollectionSlotInfo> slots = DataLoader.collections().getCollectionByName(completedSlot.getCollectionName());
+		List<CollectionSlotInfo> slots = DataLoader.Companion.collections().getCollectionByName(completedSlot.getCollectionName());
 		if (slots == null)
 			return true;
 		

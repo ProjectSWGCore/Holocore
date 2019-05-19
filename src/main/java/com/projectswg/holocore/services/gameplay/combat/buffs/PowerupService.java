@@ -266,7 +266,7 @@ public class PowerupService extends Service {
 		if (powerupBuff == null)
 			return;
 		
-		BuffInfo buffOriginal = DataLoader.buffs().getBuff(powerupBuff);
+		BuffInfo buffOriginal = DataLoader.Companion.buffs().getBuff(powerupBuff);
 		if (buffOriginal == null)
 			return;
 		

@@ -33,7 +33,7 @@ public class ExperienceRoleService extends Service {
 		if (gsi.getIntentType() != IntentType.GIVEN)
 			return;
 		
-		RoleInfo qualifyingSkills = DataLoader.playerRoles().getRoleBySkill(gsi.getSkillName());
+		RoleInfo qualifyingSkills = DataLoader.Companion.playerRoles().getRoleBySkill(gsi.getSkillName());
 		if (qualifyingSkills == null)
 			return;
 		
@@ -44,7 +44,7 @@ public class ExperienceRoleService extends Service {
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
-		RoleInfo qualifyingSkills = DataLoader.playerRoles().getRoleByIndex(chosenIcon);
+		RoleInfo qualifyingSkills = DataLoader.Companion.playerRoles().getRoleByIndex(chosenIcon);
 		if (qualifyingSkills == null) {
 			Log.w("%s tried to use undefined role icon %d", creature, chosenIcon);
 			return;

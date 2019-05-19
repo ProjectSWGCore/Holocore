@@ -139,7 +139,7 @@ public final class SpawnerService extends Service {
 		long startTime = StandardLog.onStartLoad("spawners");
 		
 		int count = 0;
-		for (StaticSpawnInfo spawn : DataLoader.npcStaticSpawns().getSpawns()) {
+		for (StaticSpawnInfo spawn : DataLoader.Companion.npcStaticSpawns().getSpawns()) {
 			try {
 				spawn(spawn);
 				count++;

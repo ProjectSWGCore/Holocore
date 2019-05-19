@@ -85,7 +85,7 @@ public class StaticItemService extends Service {
 	}
 	
 	private SWGObject createItem(String itemName, SWGObject container) {
-		StaticItemInfo info = DataLoader.staticItems().getItemByName(itemName);
+		StaticItemInfo info = DataLoader.Companion.staticItems().getItemByName(itemName);
 		if (info == null)
 			return null;
 		SWGObject swgObject = ObjectCreator.createObjectFromTemplate(info.getIffTemplate());

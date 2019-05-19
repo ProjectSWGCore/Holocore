@@ -73,7 +73,7 @@ public class ExperienceExpertiseService extends Service {
 		
 		ExpertiseRequestMessage request = (ExpertiseRequestMessage) packet;
 		RequestExpertiseIntent.broadcast(creatureObject, Arrays.stream(request.getRequestedSkills())
-				.map(DataLoader.expertise()::getByName)
+				.map(DataLoader.Companion.expertise()::getByName)
 				.filter(Objects::nonNull)
 				.collect(Collectors.toList()));
 	}
@@ -144,7 +144,7 @@ public class ExperienceExpertiseService extends Service {
 	
 	private void checkExtraAbilities(CreatureObject creatureObject) {
 		creatureObject.getSkills().stream()
-				.filter(DataLoader.expertiseAbilities()::containsSkill)    // We only want to check skills that give additional abilities
+				.filter(DataLoader.Companion.expertiseAbilities()::containsSkill)    // We only want to check skills that give additional abilities
 				.forEach(expertise -> grantExtraAbilities(creatureObject, expertise));
 	}
 	
@@ -167,7 +167,7 @@ public class ExperienceExpertiseService extends Service {
 	}
 	
 	private void grantExtraAbilities(CreatureObject creatureObject, String expertise) {
-		ExpertiseAbilityInfo abilityInfo = DataLoader.expertiseAbilities().getBySkill(expertise);
+		ExpertiseAbilityInfo abilityInfo = DataLoader.Companion.expertiseAbilities().getBySkill(expertise);
 		assert abilityInfo != null : "verified in checkExtraAbilities";
 		
 		for (List<String> chain : abilityInfo.getChains()) {
@@ -182,7 +182,7 @@ public class ExperienceExpertiseService extends Service {
 	}
 	
 	private int getAvailablePoints(CreatureObject creatureObject) {
-		PlayerLevelInfo levelInfo = DataLoader.playerLevels().getFromLevel(creatureObject.getLevel());
+		PlayerLevelInfo levelInfo = DataLoader.Companion.playerLevels().getFromLevel(creatureObject.getLevel());
 		int spentPoints = (int) creatureObject.getSkills().stream().filter(skill -> skill.startsWith("expertise_")).count();
 		
 		Objects.requireNonNull(levelInfo, "No player level defined for " + creatureObject.getLevel());
@@ -193,7 +193,7 @@ public class ExperienceExpertiseService extends Service {
 	 * @return the amount of expertise points invested in a given expertise tree
 	 */
 	private long getPointsInTree(ExpertiseInfo expertise, CreatureObject creatureObject) {
-		return DataLoader.expertise().getPeerExpertise(expertise).stream().map(ExpertiseInfo::getName).filter(creatureObject.getSkills()::contains).count();
+		return DataLoader.Companion.expertise().getPeerExpertise(expertise).stream().map(ExpertiseInfo::getName).filter(creatureObject.getSkills()::contains).count();
 	}
 	
 }

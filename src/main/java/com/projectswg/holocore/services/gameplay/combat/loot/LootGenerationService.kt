@@ -9,7 +9,7 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -75,8 +75,7 @@ class LootGenerationService : Service() {
 	private fun loadNPCLoot() {
 		val startTime = StandardLog.onStartLoad("NPC loot links")
 		
-		val npcLoader = DataLoader.npcs()
-		for (info in npcLoader.npcs) {
+		for (info in ServerData.npcs.npcs) {
 			val loot = NPCLoot(info.humanoidInfo != null)
 			
 			// load each loot table (up to 3) and add to loot object
@@ -178,6 +177,7 @@ class LootGenerationService : Service() {
 		val adminOutput1 = StringBuilder("$tableRoll //")
 		val adminOutput2 = StringBuilder()
 		
+		val lootTables = ServerData.lootTables
 		for ((tableId, npcTable) in loot.npcTables.withIndex()) {
 			val tableChance = npcTable.chance
 			
@@ -189,9 +189,7 @@ class LootGenerationService : Service() {
 			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId)
 			
 			val groupRoll = random.nextInt(100) + 1
-			Log.d("Loot Table Lookup: table=${npcTable.lootTable}  difficulty=${difficulty.name}  level=$level")
-			Log.d("Loot Table Item: ${DataLoader.lootTables().getLootTableItem(npcTable.lootTable, difficulty.name, level)}  groupRoll=$groupRoll")
-			val lootTableItem = DataLoader.lootTables().getLootTableItem(npcTable.lootTable, difficulty.name, level) ?: continue
+			val lootTableItem = lootTables.getLootTableItem(npcTable.lootTable, difficulty.name, level) ?: continue
 			
 			for ((chance, items) in lootTableItem.groups) { // group of items to be granted
 				if (groupRoll > chance)

@@ -208,7 +208,7 @@ public class PlayerMountService extends Service {
 	
 	private void generateVehicle(CreatureObject creator, SWGObject deed) {
 		String pcdTemplate = pcdForVehicleDeed(deed.getTemplate());
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromPcdIff(pcdTemplate);
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromPcdIff(pcdTemplate);
 		if (vehicleInfo == null) {
 			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.getTemplate());
 			return;
@@ -258,7 +258,7 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
 			mount.setRunSpeed(vehicleInfo.getSpeed());
 			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
@@ -327,7 +327,7 @@ public class PlayerMountService extends Service {
 		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		mount.setPosture(Posture.DRIVING_VEHICLE);
 		
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
 			if (!vehicleInfo.getPlayerBuff().isEmpty())
 				BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, player, false);
@@ -359,7 +359,7 @@ public class PlayerMountService extends Service {
 		}
 		
 		
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (player.getParent() == mount)
 			dismount(player, mount, vehicleInfo);
 		

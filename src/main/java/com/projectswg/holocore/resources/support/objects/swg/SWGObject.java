@@ -456,7 +456,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setSlots(@NotNull Collection<String> slots) {
 		this.slotsAvailable.clear();
 		for (String slot : slots)
-			this.slotsAvailable.put(slot, DataLoader.slotDefinitions().getSlotDefinition(slot));
+			this.slotsAvailable.put(slot, DataLoader.Companion.slotDefinitions().getSlotDefinition(slot));
 	}
 	
 	@NotNull

@@ -312,7 +312,7 @@ public class BuffService extends Service {
 			return;
 		}
 		
-		if (DataLoader.buffs().containsBuff(callback)) {
+		if (DataLoader.Companion.buffs().containsBuff(callback)) {
 			addBuff(creature, getBuff(callback), creature);
 		}
 	}
@@ -329,7 +329,7 @@ public class BuffService extends Service {
 	
 	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
 		if (effectName != null &&  !effectName.isEmpty()) {
-			if (DataLoader.commands().isCommand(effectName) && effectValue == 1.0) {
+			if (DataLoader.Companion.commands().isCommand(effectName) && effectValue == 1.0) {
 				// This effect is an ability
 				if (valueFactor > 0) {
 					// Buff is being added. Grant the ability.
@@ -347,12 +347,12 @@ public class BuffService extends Service {
 	
 	@Nullable
 	private BuffInfo getBuff(String name) {
-		return DataLoader.buffs().getBuff(name);
+		return DataLoader.Companion.buffs().getBuff(name);
 	}
 	
 	@Nullable
 	private BuffInfo getBuff(@NotNull Buff buff) {
-		return DataLoader.buffs().getBuff(buff.getCrc());
+		return DataLoader.Companion.buffs().getBuff(buff.getCrc());
 	}
 	
 }

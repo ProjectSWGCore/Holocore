@@ -63,7 +63,7 @@ public final class Spawner {
 	
 	public Spawner(@NotNull StaticSpawnInfo spawn, @NotNull SWGObject egg) {
 		this.spawn = Objects.requireNonNull(spawn, "spawn");
-		this.npc = DataLoader.npcs().getNpc(spawn.getNpcId());
+		this.npc = DataLoader.Companion.npcs().getNpc(spawn.getNpcId());
 		Objects.requireNonNull(npc, "Invalid npc id: " + spawn.getNpcId());
 		
 		this.location = Location.builder()
@@ -74,7 +74,7 @@ public final class Spawner {
 		if (spawn.getPatrolId().isEmpty() || spawn.getPatrolId().equals("0")) { // TODO: Replace the latter with empty string
 			this.waypoints = null;
 		} else {
-			List<PatrolRouteWaypoint> waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()), "Invalid patrol route: " + spawn.getPatrolId());
+			List<PatrolRouteWaypoint> waypoints = Objects.requireNonNull(DataLoader.Companion.npcPatrolRoutes().getPatrolRoute(spawn.getPatrolId()), "Invalid patrol route: " + spawn.getPatrolId());
 			this.waypoints = waypoints.stream().map(ResolvedPatrolWaypoint::new).collect(Collectors.toList());
 		}
 		this.egg = Objects.requireNonNull(egg, "egg");
@@ -223,11 +223,11 @@ public final class Spawner {
 	}
 	
 	public List<String> getPrimaryWeapons() {
-		return npc.getPrimaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
+		return npc.getPrimaryWeapons().stream().map(DataLoader.Companion.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
 	}
 	
 	public List<String> getSecondaryWeapons() {
-		return npc.getSecondaryWeapons().stream().map(DataLoader.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
+		return npc.getSecondaryWeapons().stream().map(DataLoader.Companion.npcWeapons()::getWeapons).filter(Objects::nonNull).flatMap(List::stream).collect(Collectors.toList());
 	}
 	
 	public int getAggressiveRadius() {

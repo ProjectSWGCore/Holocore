@@ -104,7 +104,7 @@ public class MapService extends Service {
 	private void loadStaticCityPoints() {
 		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
 		
-		PlanetMapCategoryInfo mapCategory = DataLoader.planetMapCategories().getCategoryByName("city");
+		PlanetMapCategoryInfo mapCategory = DataLoader.Companion.planetMapCategories().getCategoryByName("city");
 		assert mapCategory != null;
 		byte city = (byte) mapCategory.getIndex();
 		for (int row = 0; row < table.getRowCount(); row++) {
@@ -126,8 +126,8 @@ public class MapService extends Service {
 			return;
 
 		MappingTemplate mappingTemplate = mappingTemplates.get(object.getTemplate());
-		PlanetMapCategoryInfo category = DataLoader.planetMapCategories().getCategoryByName(mappingTemplate.getCategory());
-		PlanetMapCategoryInfo subcategory = DataLoader.planetMapCategories().getCategoryByName(mappingTemplate.getSubcategory());
+		PlanetMapCategoryInfo category = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getCategory());
+		PlanetMapCategoryInfo subcategory = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getSubcategory());
 
 		MapLocation mapLocation = new MapLocation();
 		mapLocation.setName(mappingTemplate.getName());

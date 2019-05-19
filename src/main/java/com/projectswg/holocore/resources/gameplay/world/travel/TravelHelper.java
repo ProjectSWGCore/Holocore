@@ -87,7 +87,7 @@ public class TravelHelper {
 	}
 	
 	public int getTravelFee(Terrain departure, Terrain destination) {
-		return DataLoader.travelCosts().getCost(departure, destination);
+		return DataLoader.Companion.travelCosts().getCost(departure, destination);
 	}
 	
 	public TravelGroup getTravelGroup(String template) {

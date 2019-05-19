@@ -220,7 +220,7 @@ public class CharacterCreationService extends Service {
 	private CreatureObject createCharacter(Player player, ClientCreateCharacter create) {
 		String spawnLocation = PswgDatabase.INSTANCE.getConfig().getString(this, "primarySpawnLocation", "tat_moseisley");
 		StandardLog.onPlayerTrace(this, player, "created player at spawn location %s", spawnLocation);
-		ZoneInsertion info = DataLoader.zoneInsertions().getInsertion(spawnLocation);
+		ZoneInsertion info = DataLoader.Companion.zoneInsertions().getInsertion(spawnLocation);
 		if (info == null) {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;

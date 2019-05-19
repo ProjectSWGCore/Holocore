@@ -224,7 +224,7 @@ public class SampleLoopSession {
 	}
 	
 	private void openGambleWindow() {
-		CollectionSlotInfo collection = DataLoader.collections().getSlotByName("col_resource_" + surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length() - 4) + "_01");
+		CollectionSlotInfo collection = DataLoader.Companion.collections().getSlotByName("col_resource_" + surveyTool.getTemplate().substring(47, surveyTool.getTemplate().length() - 4) + "_01");
 		boolean hasCollectionListItem = collection != null && !creature.getPlayerObject().getCollectionFlag(collection.getBeginSlotId());
 		SuiListBox window = new SuiListBox(SuiButtons.OK_CANCEL, "@survey:gnode_t", "@survey:gnode_d");
 		window.addListItem("@survey:gnode_1");

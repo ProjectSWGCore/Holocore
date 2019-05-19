@@ -26,7 +26,7 @@ public class SkillService extends Service {
 		
 		String skillName = gsi.getSkillName();
 		CreatureObject target = gsi.getTarget();
-		SkillInfo skill = DataLoader.skills().getSkillByName(skillName);
+		SkillInfo skill = DataLoader.Companion.skills().getSkillByName(skillName);
 		if (skill == null)
 			return;
 		
@@ -37,7 +37,7 @@ public class SkillService extends Service {
 	private void handleSetTitleIntent(SetTitleIntent sti) {
 		String title = sti.getTitle();
 		
-		SkillInfo skillData = DataLoader.skills().getSkillByName(title);
+		SkillInfo skillData = DataLoader.Companion.skills().getSkillByName(title);
 		if (skillData == null) {
 			// Might be a Collections title or someone playing tricks
 			return;
@@ -66,7 +66,7 @@ public class SkillService extends Service {
 		if (skillName.isEmpty() || target.hasSkill(skillName))
 			return; // Nothing to do here
 		
-		SkillInfo skillInfo = DataLoader.skills().getSkillByName(skillName);
+		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(skillName);
 		if (skillInfo == null) {
 			StandardLog.onPlayerTrace(this, target, "requires an invalid parent skill: %s", skillName);
 			return;
@@ -81,7 +81,7 @@ public class SkillService extends Service {
 		if (requiredSkills == null)
 			return;
 		
-		SkillLoader skills = DataLoader.skills();
+		SkillLoader skills = DataLoader.Companion.skills();
 		for (String requiredSkillName : requiredSkills) {
 			SkillInfo requiredSkill = skills.getSkillByName(requiredSkillName);
 			if (requiredSkill != null)

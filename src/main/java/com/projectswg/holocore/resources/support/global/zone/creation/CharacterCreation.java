@@ -175,7 +175,7 @@ public class CharacterCreation {
 	}
 	
 	private void createStarterClothing(CreatureObject creature, String race, String clothing) {
-		List<String> items = DataLoader.playerStartClothing().getClothing(Race.getRaceByFile(race), clothing);
+		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(Race.getRaceByFile(race), clothing);
 		if (items != null) {
 			for (String itemTemplate : items) {
 				createDefaultObject(creature, itemTemplate);

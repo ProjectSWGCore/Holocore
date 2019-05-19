@@ -71,7 +71,7 @@ public final class ExpertiseLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		ExpertiseTreeLoader trees = DataLoader.expertiseTrees();
+		ExpertiseTreeLoader trees = DataLoader.Companion.expertiseTrees();
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/expertise/expertise.sdb"))) {
 			while (set.next()) {
 				ExpertiseInfo expertise = new ExpertiseInfo(set, trees);

@@ -72,13 +72,13 @@ public class BuildingObject extends TangibleObject {
 	public void addObject(SWGObject object) {
 		assert object instanceof CellObject : "Object added to building is not a cell!";
 		
-		List<CellInfo> cellInfos = DataLoader.buildingCells().getBuilding(getTemplate());
+		List<CellInfo> cellInfos = DataLoader.Companion.buildingCells().getBuilding(getTemplate());
 		assert cellInfos != null : "No cells exist in this building";
 		addObject((CellObject) object, cellInfos);
 	}
 	
 	public void populateCells() {
-		List<CellInfo> cellInfos = DataLoader.buildingCells().getBuilding(getTemplate());
+		List<CellInfo> cellInfos = DataLoader.Companion.buildingCells().getBuilding(getTemplate());
 		if (cellInfos == null)
 			return; // No cells to populate
 		for (CellInfo cellInfo : cellInfos) { // 0 is world

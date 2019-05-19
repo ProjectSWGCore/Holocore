@@ -94,7 +94,7 @@ public final class SkillTemplateService extends Service {
 			if ((level == 1 || level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
 				PlayerObject playerObject = creatureObject.getPlayerObject();
 				Profession profession = playerObject.getProfession();
-				SkillTemplateInfo templates = DataLoader.skillTemplates().getTemplateFromName(profession.getClientName());
+				SkillTemplateInfo templates = DataLoader.Companion.skillTemplates().getTemplateFromName(profession.getClientName());
 
 				if (templates == null) {
 					Log.w("%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
@@ -137,7 +137,7 @@ public final class SkillTemplateService extends Service {
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
-		RoadmapRewardInfo reward = DataLoader.roadmapRewards().getRewardBySkillName(skillName);
+		RoadmapRewardInfo reward = DataLoader.Companion.roadmapRewards().getRewardBySkillName(skillName);
 		if (reward == null)
 			return; // No reward to give
 		

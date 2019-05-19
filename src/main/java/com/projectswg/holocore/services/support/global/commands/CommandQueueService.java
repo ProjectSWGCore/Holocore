@@ -60,7 +60,7 @@ public class CommandQueueService extends Service {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof CommandQueueEnqueue) {
 			CommandQueueEnqueue request = (CommandQueueEnqueue) p;
-			Command command = DataLoader.commands().getCommand(request.getCommandCrc());
+			Command command = DataLoader.Companion.commands().getCommand(request.getCommandCrc());
 			if (command == null) {
 				if (request.getCommandCrc() != 0)
 					Log.e("Invalid command crc: %x [%s]", request.getCommandCrc(), CRC.getString(request.getCommandCrc()));
