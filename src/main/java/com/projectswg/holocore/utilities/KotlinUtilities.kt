@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,20 +24,45 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat.loot;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
+package com.projectswg.holocore.utilities
 
-public class CorpseLootedIntent extends Intent {
-	
-	private final CreatureObject corpse;
-	
-	public CorpseLootedIntent(CreatureObject corpse) {
-		this.corpse = corpse;
+import me.joshlarson.jlcommon.log.Log
+
+/**
+ * Runs the given operation, catching any exception and logging it to Log.e
+ */
+inline fun <T> runSafe(op: () -> T) {
+	try {
+		op()
+	} catch (t: Throwable) {
+		Log.e(t)
 	}
-	
-	public CreatureObject getCorpse() {
-		return corpse;
+}
+
+/**
+ * Runs the given operation, catching any exception and suppressing it
+ */
+inline fun <T> runSafeIgnoreException(op: () -> T) {
+	try {
+		op()
+	} catch (t: Throwable) {
+		// ignored
 	}
+}
+
+/**
+ * Runs the given operation, catching any exception and suppressing it
+ */
+inline fun runSafeReturnException(op: () -> Any?): Throwable? {
+	try {
+		op()
+		return null
+	} catch (t: Throwable) {
+		return t
+	}
+}
+
+inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
+	handler(this ?: return)
 }

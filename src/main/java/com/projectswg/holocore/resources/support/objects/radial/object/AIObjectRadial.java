@@ -4,6 +4,7 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
+import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -39,10 +40,10 @@ public class AIObjectRadial implements RadialHandlerInterface {
 		
 		switch (selection) {
 			case LOOT:
-				LootRequestIntent.broadcast(player, ai, LootRequestIntent.LootType.LOOT);
+				LootRequestIntent.broadcast(player, ai, LootType.LOOT);
 				break;
 			case LOOT_ALL:
-				LootRequestIntent.broadcast(player, ai, LootRequestIntent.LootType.LOOT_ALL);
+				LootRequestIntent.broadcast(player, ai, LootType.LOOT_ALL);
 				break;
 		}
 	}

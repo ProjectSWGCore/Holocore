@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,47 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat.loot;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import me.joshlarson.jlcommon.control.Intent;
-import me.joshlarson.jlcommon.utilities.Arguments;
-import org.jetbrains.annotations.NotNull;
+package com.projectswg.holocore.resources.gameplay.combat.loot
 
-/**
- * Requests to transfer a particular item from a corpse
- */
-public class LootItemIntent extends Intent {
-	
-	private final CreatureObject looter;
-	private final CreatureObject corpse;
-	private final SWGObject item;
-	
-	public LootItemIntent(@NotNull CreatureObject looter, @NotNull CreatureObject corpse, @NotNull SWGObject item) {
-		Arguments.validate(corpse instanceof AIObject, "Attempting to loot a non-AI object");
-		this.looter = looter;
-		this.corpse = corpse;
-		this.item = item;
-	}
-	
-	@NotNull
-	public CreatureObject getLooter() {
-		return looter;
-	}
-	
-	@NotNull
-	public CreatureObject getCorpse() {
-		return corpse;
-	}
-	
-	@NotNull
-	public SWGObject getItem() {
-		return item;
-	}
-	
-	public static void broadcast(@NotNull CreatureObject looter, @NotNull CreatureObject corpse, @NotNull SWGObject item) {
-		new LootItemIntent(looter, corpse, item).broadcast();
-	}
+enum class LootType {
+	LOOT,
+	LOOT_ALL
 }

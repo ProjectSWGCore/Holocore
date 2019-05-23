@@ -35,11 +35,11 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.loot.Gro
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupOpenLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupRequestLotteryItems;
 import com.projectswg.holocore.intents.gameplay.combat.loot.*;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;

@@ -41,22 +41,17 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.player.Player
-import me.joshlarson.jlcommon.concurrency.Delay
 import me.joshlarson.jlcommon.control.IntentChain
-import me.joshlarson.jlcommon.log.Log
-import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
-import java.nio.channels.AsynchronousSocketChannel
-import java.nio.channels.CompletionHandler
+import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 import java.util.function.Consumer
 
-class NetworkClient(private val socket: AsynchronousSocketChannel) {
+class NetworkClient(private val remoteAddress: SocketAddress, private val write: (ByteBuffer) -> Unit, private val closeChannel: () -> Unit): TCPServerChannel {
 	
-	private val remoteAddress: SocketAddress? = try { socket.remoteAddress } catch (e: IOException) { null }
 	private val inboundBuffer: NetBuffer
 	private val intentChain: IntentChain
 	private val connected: AtomicBoolean
@@ -73,100 +68,58 @@ class NetworkClient(private val socket: AsynchronousSocketChannel) {
 		this.connected = AtomicBoolean(true)
 		this.status = AtomicReference(SessionStatus.DISCONNECTED)
 		this.player = Player(SESSION_ID.getAndIncrement(), remoteAddress as InetSocketAddress?, Consumer<SWGPacket> { this.addToOutbound(it) })
-		
-		onConnecting()
 	}
 	
 	@JvmOverloads
 	fun close(reason: ConnectionStoppedReason = ConnectionStoppedReason.OTHER_SIDE_TERMINATED) {
 		if (connected.getAndSet(false)) {
-			try {
-				socket.write(NetworkProtocol.encode(HoloConnectionStopped(reason)).buffer)
-			} catch (e: IOException) {
-				// Ignored - just give it a best effort
-			}
-			try {
-				socket.close()
-			} catch (e: IOException) {
-				// Ignored
-			}
-			
-			onDisconnected()
+			write(NetworkProtocol.encode(HoloConnectionStopped(reason)).buffer)
+			closeChannel()
 		}
+	}
+	
+	override fun getChannelBuffer(): ByteBuffer {
+		return inboundBuffer.buffer
+	}
+	
+	override fun onRead() {
+		inboundBuffer.flip()
+		while (NetworkProtocol.canDecode(inboundBuffer)) {
+			val p = NetworkProtocol.decode(inboundBuffer)
+			if (p == null || !allowInbound(p))
+				continue
+			p.socketAddress = remoteAddress
+			processPacket(p)
+			intentChain.broadcastAfter(InboundPacketIntent(player, p))
+		}
+		inboundBuffer.compact()
+	}
+	
+	override fun onOpened() {
+		StandardLog.onPlayerTrace(this, player, "connecting")
+		status.set(SessionStatus.CONNECTING)
+		intentChain.broadcastAfter(ConnectionOpenedIntent(player))
+	}
+	
+	override fun onClosed() {
+		StandardLog.onPlayerTrace(this, player, "disconnected")
+		intentChain.broadcastAfter(ConnectionClosedIntent(player, ConnectionStoppedReason.OTHER_SIDE_TERMINATED))
 	}
 	
 	override fun toString(): String {
 		return "NetworkClient[$remoteAddress]"
 	}
 	
-	private fun startRead() {
-		socket.read(inboundBuffer.buffer, null, object : CompletionHandler<Int, Any?> {
-			override fun completed(result: Int?, attachment: Any?) {
-				try {
-					inboundBuffer.flip()
-					while (NetworkProtocol.canDecode(inboundBuffer)) {
-						val p = NetworkProtocol.decode(inboundBuffer)
-						if (p == null || !allowInbound(p))
-							continue
-						p.socketAddress = remoteAddress
-						processPacket(p)
-						intentChain.broadcastAfter(InboundPacketIntent(player, p))
-					}
-					inboundBuffer.compact()
-					startRead()
-				} catch (e: HolocoreSessionException) {
-					onSessionError(e)
-				} catch (t: Throwable) {
-					Log.w("Failed to process inbound packets. ${t::class.qualifiedName}: ${t.message}")
-					close()
-				}
-			}
-			
-			override fun failed(exc: Throwable?, attachment: Any?) {
-				if (exc != null) {
-					if (exc !is IOException)
-						Log.w(exc)
-				}
-				close()
-			}
-			
-		})
-	}
-	
 	private fun addToOutbound(p: SWGPacket) {
 		if (allowOutbound(p) && connected.get()) {
-			synchronized (socket) {
-				try {
-					val buffer = NetworkProtocol.encode(p).buffer
-					while (connected.get() && buffer.hasRemaining()) {
-						socket.write(buffer).get()
-						if (buffer.hasRemaining())
-							Delay.sleepMilli(1)
-					}
-				} catch (t: Throwable) {
-					StandardLog.onPlayerError(this, player, "failed to write network data. ${t.javaClass.name}: ${t.message}")
-					close()
-				}
-			}
+			write(NetworkProtocol.encode(p).buffer)
 		}
-	}
-	
-	private fun onConnecting() {
-		StandardLog.onPlayerTrace(this, player, "connecting")
-		status.set(SessionStatus.CONNECTING)
-		intentChain.broadcastAfter(ConnectionOpenedIntent(player))
-		startRead()
 	}
 	
 	private fun onConnected() {
 		StandardLog.onPlayerTrace(this, player, "connected")
 		status.set(SessionStatus.CONNECTED)
 		addToOutbound(HoloConnectionStarted())
-	}
-	
-	private fun onDisconnected() {
-		StandardLog.onPlayerTrace(this, player, "disconnected")
-		intentChain.broadcastAfter(ConnectionClosedIntent(player, ConnectionStoppedReason.OTHER_SIDE_TERMINATED))
 	}
 	
 	private fun allowInbound(packet: SWGPacket): Boolean {
@@ -177,29 +130,21 @@ class NetworkClient(private val socket: AsynchronousSocketChannel) {
 		return packet !is AdminPacket || player.accessLevel > AccessLevel.WARDEN
 	}
 	
-	private fun onSessionError(e: HolocoreSessionException) {
-		when (e.reason) {
-			SessionExceptionReason.NO_PROTOCOL -> {
-				addToOutbound(ErrorMessage("Network Manager", "Upgrade your launcher!", false))
-				addToOutbound(HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL))
-			}
-			SessionExceptionReason.PROTOCOL_INVALID -> addToOutbound(HoloConnectionStopped(ConnectionStoppedReason.INVALID_PROTOCOL))
-		}
-	}
-	
-	@Throws(HolocoreSessionException::class)
 	private fun processPacket(p: SWGPacket) {
 		when (p) {
 			is HoloSetProtocolVersion -> {
-				if (p.protocol == NetworkProtocol.VERSION)
+				if (p.protocol == NetworkProtocol.VERSION) {
 					onConnected()
-				else
-					throw HolocoreSessionException(SessionExceptionReason.PROTOCOL_INVALID)
+				} else {
+					close(ConnectionStoppedReason.INVALID_PROTOCOL)
+				}
 			}
 			is HoloConnectionStopped -> close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED)
 			else -> {
-				if (status.get() != SessionStatus.CONNECTED)
-					throw HolocoreSessionException(SessionExceptionReason.NO_PROTOCOL)
+				if (status.get() != SessionStatus.CONNECTED) {
+					addToOutbound(ErrorMessage("Network Manager", "Upgrade your launcher!", false))
+					close(ConnectionStoppedReason.INVALID_PROTOCOL)
+				}
 			}
 		}
 	}
@@ -210,13 +155,6 @@ class NetworkClient(private val socket: AsynchronousSocketChannel) {
 		CONNECTED
 		
 	}
-	
-	private enum class SessionExceptionReason {
-		NO_PROTOCOL,
-		PROTOCOL_INVALID
-	}
-	
-	private class HolocoreSessionException(val reason: SessionExceptionReason) : Exception()
 	
 	companion object {
 		private val SESSION_ID = AtomicLong(1)

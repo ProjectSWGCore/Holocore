@@ -1,7 +1,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.loot;
 
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
+import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
