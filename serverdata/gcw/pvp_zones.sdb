@@ -1,0 +1,6 @@
+pvp_zone_id	terrain	comment	x	z	radius
+INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+1	CORELLIA	Corellia GCW base	4722	-5233	200
+2	NABOO	Naboo GCW base	1019	-1508	150
+3	RORI	Restuss	5318	5680	400
+4	TALUS	Talus GCW base	-4899	-3137	150
