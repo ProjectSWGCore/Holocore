@@ -48,6 +48,7 @@ import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -242,7 +243,7 @@ public class RareLootService extends Service {
 		}
 		
 		@Override
-		public void success(List<SWGObject> createdObjects) {
+		public void success(@NotNull List<? extends SWGObject> createdObjects) {
 			// Apply rarity item attribute to the created RLS item
 			for (SWGObject createdObject : createdObjects) {
 				createdObject.addAttribute("@obj_attr_n:rare_loot_category", "Rare Item");

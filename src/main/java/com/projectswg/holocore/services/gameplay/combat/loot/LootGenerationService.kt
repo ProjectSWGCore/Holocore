@@ -235,13 +235,12 @@ class LootGenerationService : Service() {
 	
 	private class CreateStaticItemCallback : StaticItemService.ObjectCreationHandler {
 		
+		override val isIgnoreVolume = true
+		
 		override fun success(createdObjects: List<SWGObject>) {
 			// do nothing - loot disc is created on the return of the generateLoot method
 		}
 		
-		override fun isIgnoreVolume(): Boolean {
-			return true
-		}
 	}
 	
 }

@@ -30,7 +30,7 @@ public final class CmdCreateStaticItem implements ICmdCallback {
 		public CreateStaticItemCallback(@NotNull Player player) {this.player = player;}
 		
 		@Override
-		public void success(List<SWGObject> createdObjects) {
+		public void success(@NotNull List<? extends SWGObject> createdObjects) {
 			new SystemMessageIntent(player, "@system_msg:give_item_success").broadcast();
 		}
 		

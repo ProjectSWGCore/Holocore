@@ -4,10 +4,10 @@ plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
-	id "com.github.johnrengelman.shadow" version "5.0.0"
+	id "com.github.johnrengelman.shadow" version "5.1.0"
 	id "org.javamodularity.moduleplugin" version "1.5.0"
-	id 'org.jetbrains.kotlin.jvm' version '1.3.31'
-	id "org.beryx.jlink" version "2.10.2"
+	id 'org.jetbrains.kotlin.jvm' version '1.3.40'
+	id "org.beryx.jlink" version "2.11.2"
 }
 
 mainClassName = 'holocore/com.projectswg.holocore.ProjectSWG'
@@ -58,9 +58,9 @@ repositories {
 dependencies {
 	compile project(':pswgcommon')
 	
-	compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.31'
+	compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.40'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
-	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
+	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.10.2'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
 	compile group: 'me.joshlarson', name: 'jlcommon-network', version: '1.0.0'
 	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
@@ -84,12 +84,10 @@ dependencies {
 	integrationCompile 'junit:junit:4.12'
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+		jvmTarget = "12"
+	}
 }
 
 task CreateConvertLoginJar(type: ShadowJar) {
@@ -110,4 +108,9 @@ task CreatePacketCaptureProcessor(type: ShadowJar) {
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
 	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
+}
+
+task execute(type:JavaExec) {
+   main = mainClass
+   classpath = sourceSets.utility.runtimeClasspath
 }

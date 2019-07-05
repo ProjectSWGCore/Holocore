@@ -43,11 +43,7 @@ import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.net.InetAddress
 import java.net.InetSocketAddress
-import java.net.SocketOptions
 import java.nio.ByteBuffer
-import java.nio.channels.AsynchronousServerSocketChannel
-import java.nio.channels.AsynchronousSocketChannel
-import java.nio.channels.CompletionHandler
 import java.util.concurrent.ConcurrentHashMap
 
 class NetworkClientService : Service() {
@@ -144,7 +140,7 @@ class NetworkClientService : Service() {
 	
 	companion object {
 		
-		private val INBOUND_BUFFER_SIZE = 4096
+		private const val INBOUND_BUFFER_SIZE = 4096
 	}
 	
 }
