@@ -96,8 +96,10 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	@Override
 	public V remove(@NotNull Object key) {
 		V old = super.remove(key);
-		updateCount.incrementAndGet();
-		removeData(key);
+		if (old != null) {
+			updateCount.incrementAndGet();
+			removeData(key);
+		}
 		
 		return old;
 	}
@@ -275,6 +277,8 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		byte [] value;
 		synchronized (data) {
 			value = data.remove(key);
+			if (value == null)
+				return;
 			dataSize -= value.length;
 		}
 		
