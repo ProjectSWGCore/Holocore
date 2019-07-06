@@ -6,11 +6,11 @@ plugins {
 	id 'idea'
 	id "com.github.johnrengelman.shadow" version "5.1.0"
 	id "org.javamodularity.moduleplugin" version "1.5.0"
-	id 'org.jetbrains.kotlin.jvm' version '1.3.40'
-	id "org.beryx.jlink" version "2.11.2"
+	id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+	id "org.beryx.jlink" version "2.10.2"
 }
 
-mainClassName = 'holocore/com.projectswg.holocore.ProjectSWG'
+mainClassName = 'com.projectswg.holocore.ProjectSWG'
 sourceCompatibility = 12
 
 sourceSets {
@@ -108,9 +108,4 @@ task CreatePacketCaptureProcessor(type: ShadowJar) {
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
 	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
-}
-
-task execute(type:JavaExec) {
-   main = mainClass
-   classpath = sourceSets.utility.runtimeClasspath
 }
