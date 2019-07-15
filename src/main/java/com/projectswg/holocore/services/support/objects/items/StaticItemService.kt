@@ -38,16 +38,22 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 
-/**
- * @author mads
- */
 class StaticItemService : Service() {
+	
+	private val scope = CoroutineScope(Dispatchers.Default)
+	
+	override fun stop(): Boolean {
+		scope.coroutineContext.cancel()
+		return true
+	}
 	
 	@IntentHandler
 	private fun handleCreateStaticItemIntent(csii: CreateStaticItemIntent) {
@@ -73,7 +79,11 @@ class StaticItemService : Service() {
 					SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName))
 			}
 		}
-		objectCreationHandler.success(Collections.unmodifiableList(objects))
+		
+		scope.launch {
+			delay(30)
+			objectCreationHandler.success(Collections.unmodifiableList(objects))
+		}
 	}
 	
 	private fun createItem(itemName: String, container: SWGObject): SWGObject? {
@@ -82,10 +92,10 @@ class StaticItemService : Service() {
 		
 		applyAttributes(swgObject, info)
 		
+		ObjectCreatedIntent.broadcast(swgObject)
 		swgObject.moveToContainer(container)
 		Log.d("Successfully moved %s into container %s", itemName, container)
 		
-		ObjectCreatedIntent.broadcast(swgObject)
 		return swgObject
 	}
 	

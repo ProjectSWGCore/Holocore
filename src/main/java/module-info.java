@@ -14,4 +14,5 @@ open module holocore {
 	requires fast.json;
 	requires commons.cli;
 	requires kotlin.stdlib;
+	requires kotlinx.coroutines.core;
 }
