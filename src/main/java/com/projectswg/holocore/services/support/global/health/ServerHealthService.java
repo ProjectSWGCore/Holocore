@@ -50,8 +50,11 @@ public class ServerHealthService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executor.stop();
-		return executor.awaitTermination(1000);
+		if (executor.isRunning()) {
+			executor.stop();
+			return executor.awaitTermination(1000);
+		}
+		return true;
 	}
 	
 	private void updatePerformanceLog() {
