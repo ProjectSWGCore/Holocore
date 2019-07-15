@@ -61,6 +61,9 @@ class NetworkClient(private val remoteAddress: SocketAddress, private val write:
 	val id: Long
 		get() = player.networkId
 	
+	private var clientDisconnectReason: ConnectionStoppedReason
+	private var serverDisconnectReason: ConnectionStoppedReason
+	
 	init {
 		this.inboundBuffer = NetBuffer.allocate(INBOUND_BUFFER_SIZE)
 		
@@ -68,11 +71,14 @@ class NetworkClient(private val remoteAddress: SocketAddress, private val write:
 		this.connected = AtomicBoolean(true)
 		this.status = AtomicReference(SessionStatus.DISCONNECTED)
 		this.player = Player(SESSION_ID.getAndIncrement(), remoteAddress as InetSocketAddress?, Consumer<SWGPacket> { this.addToOutbound(it) })
+		this.clientDisconnectReason = ConnectionStoppedReason.UNKNOWN
+		this.serverDisconnectReason = ConnectionStoppedReason.UNKNOWN
 	}
 	
 	@JvmOverloads
 	fun close(reason: ConnectionStoppedReason = ConnectionStoppedReason.OTHER_SIDE_TERMINATED) {
 		if (connected.getAndSet(false)) {
+			serverDisconnectReason = reason
 			write(NetworkProtocol.encode(HoloConnectionStopped(reason)).buffer)
 			closeChannel()
 		}
@@ -84,9 +90,9 @@ class NetworkClient(private val remoteAddress: SocketAddress, private val write:
 	
 	override fun onRead() {
 		inboundBuffer.flip()
-		while (NetworkProtocol.canDecode(inboundBuffer)) {
-			val p = NetworkProtocol.decode(inboundBuffer)
-			if (p == null || !allowInbound(p))
+		while (true) {
+			val p = NetworkProtocol.decode(inboundBuffer) ?: break
+			if (!allowInbound(p))
 				continue
 			p.socketAddress = remoteAddress
 			processPacket(p)
@@ -102,7 +108,7 @@ class NetworkClient(private val remoteAddress: SocketAddress, private val write:
 	}
 	
 	override fun onClosed() {
-		StandardLog.onPlayerTrace(this, player, "disconnected")
+		StandardLog.onPlayerTrace(this, player, "disconnected clientReason=$clientDisconnectReason serverReason=$serverDisconnectReason")
 		intentChain.broadcastAfter(ConnectionClosedIntent(player, ConnectionStoppedReason.OTHER_SIDE_TERMINATED))
 	}
 	
@@ -139,7 +145,10 @@ class NetworkClient(private val remoteAddress: SocketAddress, private val write:
 					close(ConnectionStoppedReason.INVALID_PROTOCOL)
 				}
 			}
-			is HoloConnectionStopped -> close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED)
+			is HoloConnectionStopped -> {
+				clientDisconnectReason = p.reason
+				close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED)
+			}
 			else -> {
 				if (status.get() != SessionStatus.CONNECTED) {
 					addToOutbound(ErrorMessage("Network Manager", "Upgrade your launcher!", false))
