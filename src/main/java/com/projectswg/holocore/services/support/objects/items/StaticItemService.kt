@@ -39,11 +39,12 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import kotlinx.coroutines.*
+import me.joshlarson.jlcommon.control.Intent
+import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
 import java.util.*
-import kotlin.coroutines.CoroutineContext
 import kotlin.math.floor
 
 class StaticItemService : Service() {
@@ -67,9 +68,10 @@ class StaticItemService : Service() {
 			return
 		}
 		
+		val intentChain = IntentChain()
 		val objects = ArrayList<SWGObject>()
 		for (itemName in itemNames) {
-			val obj = createItem(itemName, container)
+			val obj = createItem(intentChain, itemName, container)
 			if (obj != null) {
 				objects.add(obj)
 			} else {
@@ -80,19 +82,24 @@ class StaticItemService : Service() {
 			}
 		}
 		
+		intentChain.broadcastAfter(CompletedStaticItemCreatedCallbacks(objects, objectCreationHandler::success))
+	}
+	
+	@IntentHandler
+	private fun handleCompletedStaticItemCreatedCallbacks(csicc: CompletedStaticItemCreatedCallbacks) {
 		scope.launch {
-			delay(30)
-			objectCreationHandler.success(Collections.unmodifiableList(objects))
+			delay(60)
+			csicc.objectHandler(csicc.objects)
 		}
 	}
 	
-	private fun createItem(itemName: String, container: SWGObject): SWGObject? {
+	private fun createItem(intentChain: IntentChain, itemName: String, container: SWGObject): SWGObject? {
 		val info = DataLoader.staticItems().getItemByName(itemName) ?: return null
 		val swgObject = ObjectCreator.createObjectFromTemplate(info.iffTemplate) as? TangibleObject ?: return null
 		
 		applyAttributes(swgObject, info)
 		
-		ObjectCreatedIntent.broadcast(swgObject)
+		intentChain.broadcastAfter(ObjectCreatedIntent(swgObject))
 		swgObject.moveToContainer(container)
 		Log.d("Successfully moved %s into container %s", itemName, container)
 		
@@ -121,6 +128,8 @@ class StaticItemService : Service() {
 		if (info == null)
 			return
 		
+		if (info.requiredProfession.isNotEmpty())
+			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
 		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
 		val kineticMax: Int
 		val energyMax: Int
@@ -157,7 +166,8 @@ class StaticItemService : Service() {
 		if (info == null)
 			return
 		
-		obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
+		if (info.requiredProfession.isNotEmpty())
+			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
 		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
 		
 		if (info.requiredFaction.isNotEmpty())
@@ -177,18 +187,21 @@ class StaticItemService : Service() {
 		if (info == null)
 			return
 		
+		if (info.requiredProfession.isNotEmpty())
+			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
+		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
 		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
 		obj.addAttribute("cat_wpn_damage.wpn_category", "@obj_attr_n:wpn_category_" + info.weaponType.num)
-		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", info.attackSpeed.toString())
+		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())
 		obj.addAttribute("cat_wpn_damage.damage", "${info.minDamage}-${info.maxDamage}")
 		if (info.elementalType != null) {    // Not all weapons have elemental damage.
-			obj.addAttribute("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:elemental_" + info.elementalType!!)
+			obj.addAttribute("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:${info.elementalType.name.toLowerCase(Locale.US)}")
 			obj.addAttribute("cat_wpn_damage.wpn_elemental_value", info.elementalDamage.toString())
 		}
 		
 		obj.addAttribute("cat_wpn_damage.weapon_dps", info.actualDps.toString())
 		
-		if (!info.procEffect.isEmpty())
+		if (info.procEffect.isNotEmpty())
 		// Not all weapons have a proc effect
 			obj.addAttribute("proc_name", info.procEffect)
 		
@@ -293,7 +306,7 @@ class StaticItemService : Service() {
 	}
 	
 	private fun calculateProtection(max: Int, protection: Double): String {
-		return floor(max * protection).toString()
+		return floor(max * protection).toInt().toString()
 	}
 	
 	interface ObjectCreationHandler {
@@ -321,4 +334,6 @@ class StaticItemService : Service() {
 		}
 		
 	}
+	
+	private data class CompletedStaticItemCreatedCallbacks(val objects: List<SWGObject>, val objectHandler: (createdObjects: List<SWGObject>) -> Unit): Intent()
 }
