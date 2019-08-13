@@ -1,195 +1,195 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-spawn_gcw_tat_pres_imp_1	TATOOINE	tat_world	AREA	0	-2994.0	5.0	2547.0	-11	1	an AT-ST	crackdown_atst	ATTACKABLE	B	150	150	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_2	TATOOINE	tat_world	AREA	0	-1130.9	12.2	-3611.6	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_3	TATOOINE	tat_world	AREA	0	-1133.2	12.2	-3614.6	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_4	TATOOINE	tat_world	AREA	0	-1097.0	12.0	-3525.3	121	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_5	TATOOINE	tat_world	PATROL	0	-1105.8	12.0	-3573.1	168	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	PATROL	0	patrol_tat_11300	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_6	TATOOINE	tat_world	AREA	0	-1278.5	12.5	-3643.1	165	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_7	TATOOINE	tat_world	AREA	0	-1291.6	12.0	-3509.6	-125	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	LOITER	3	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_8	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	20.0	-11.0	-21.0	-20	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_9	TATOOINE	tat_world	AREA	0	-2781.0	5.0	2288.0	64	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_10	TATOOINE	tat_world	PATROL	0	-2922.0	5.0	2056.0	-15	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13300	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_11	TATOOINE	tat_world	PATROL	0	-2937.0	5.0	2098.0	91	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13400	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_12	TATOOINE	tat_world	AREA	0	-3077.0	5.0	2177.0	48	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_13	TATOOINE	tat_world	AREA	0	-2919.0	5.0	2107.0	-63	1	an Imperial 1st lieutenant	imp_1st_lieutenant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_14	TATOOINE	tat_world	AREA	0	-2804.0	5.0	1963.0	42	1	an Imperial bombardier	imp_bombardier	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_15	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-5.0	-13.0	-12.0	25	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_16	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_17	TATOOINE	tat_world	PATROL	0	-2714.0	5.0	2229.0	30	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13200	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_18	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	10.0	-11.0	-20.0	20	1	an Imperial colonel	imp_colonel	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_19	TATOOINE	tat_world	AREA	0	3427.5	7.5	-4728.6	-146	1	an Imperial comm op	imp_comm_op	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_20	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	15.0	-11.0	-21.0	-1	1	an Imperial comm op	imp_comm_op	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_21	TATOOINE	tat_world	AREA	0	-1292.8	12.0	-3585.5	133	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_22	TATOOINE	tat_world	PATROL	0	-1415.6	10.0	-3775.2	0	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Bestine	1	PATROL	0	patrol_tat_11400	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_23	TATOOINE	tat_world	AREA	0	1282.4	7.0	3133.1	28	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_24	TATOOINE	tat_world	AREA	0	1289.2	7.0	3128.0	26	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_25	TATOOINE	tat_world	AREA	0	1320.9	9.5	3382.9	90	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_26	TATOOINE	tat_world	AREA	0	1376.6	7.0	3267.5	133	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_27	TATOOINE	tat_world	AREA	0	1502.5	7.0	3156.9	-1	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_28	TATOOINE	tat_world	AREA	0	1593.3	7.0	3020.2	82	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_29	TATOOINE	tat_world	AREA	0	1618.9	11.0	3241.7	86	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_30	TATOOINE	tat_mosespa_barracks	AREA	3	0.0	0.0	-4.0	2	1	an Imperial master sergeant	imp_master_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_31	TATOOINE	tat_world	PATROL	0	-3013.0	5.0	2293.0	-130	1	an Imperial master sergeant	imp_master_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13500	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_32	TATOOINE	tat_world	AREA	0	-1413.0	10.0	-3780.9	-87	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_33	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	6.0	-13.0	11.0	-175	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_34	TATOOINE	tat_world	PATROL	0	-2699.0	5.0	2269.0	134	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13600	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_35	TATOOINE	tat_world	PATROL	0	-2921.0	5.0	2149.0	-65	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13700	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_36	TATOOINE	tat_world	AREA	0	-3155.0	5.0	2127.0	-35	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_37	TATOOINE	tat_world	AREA	0	-1016.9	12.0	-3741.2	97	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_38	TATOOINE	tat_world	AREA	0	-1018.3	12.0	-3736.2	-88	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_39	TATOOINE	tat_world	AREA	0	-1083.6	12.0	-3594.2	169	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_40	TATOOINE	tat_world	AREA	0	-1089.8	12.0	-3704.2	116	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_41	TATOOINE	tat_world	AREA	0	-1093.6	12.0	-3648.6	48	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	LOITER	3	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_42	TATOOINE	tat_world	AREA	0	-1169.8	12.0	-3692.1	-125	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_43	TATOOINE	tat_world	AREA	0	-1181.3	12.0	-3537.9	-162	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_44	TATOOINE	tat_world	AREA	0	-1275.6	12.0	-3479.9	0	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_45	TATOOINE	tat_world	AREA	0	-1283.8	12.0	-3480.4	0	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_46	TATOOINE	tat_world	AREA	0	-981.0	12.0	-3792.1	133	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_47	TATOOINE	tat_world	AREA	0	-983.8	12.0	-3746.5	116	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_48	TATOOINE	tat_world	AREA	0	3278.5	5.0	-4676.2	-56	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_49	TATOOINE	tat_world	AREA	0	3280.0	5.0	-4835.7	54	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_50	TATOOINE	tat_world	AREA	0	3288.7	5.0	-4636.1	124	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_51	TATOOINE	tat_world	AREA	0	3290.2	5.0	-4695.8	126	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_52	TATOOINE	tat_world	AREA	0	3304.5	5.0	-4602.5	122	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_53	TATOOINE	tat_world	AREA	0	3322.2	5.0	-4623.6	28	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_54	TATOOINE	tat_world	AREA	0	3360.2	5.0	-4742.2	-150	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_55	TATOOINE	tat_world	AREA	0	3418.0	5.0	-4974.5	-50	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_56	TATOOINE	tat_world	AREA	0	3427.1	5.0	-4952.9	56	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_57	TATOOINE	tat_world	AREA	0	3516.2	5.0	-4879.7	154	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_58	TATOOINE	tat_world	AREA	0	3538.0	5.1	-4806.5	-73	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_59	TATOOINE	tat_world	AREA	0	1181.3	7.0	3087.9	-79	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_60	TATOOINE	tat_world	AREA	0	1264.0	7.0	3159.3	-82	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_61	TATOOINE	tat_world	AREA	0	1272.7	7.0	3255.9	87	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_62	TATOOINE	tat_world	AREA	0	1286.3	7.7	2954.7	42	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_63	TATOOINE	tat_world	AREA	0	1333.6	7.0	3490.0	93	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_64	TATOOINE	tat_world	AREA	0	1380.4	9.5	3012.4	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_65	TATOOINE	tat_world	AREA	0	1431.6	9.5	3372.5	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_66	TATOOINE	tat_world	AREA	0	1444.6	7.0	3106.9	90	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_67	TATOOINE	tat_world	AREA	0	1508.1	7.0	3127.9	174	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_68	TATOOINE	tat_world	AREA	0	1557.7	9.5	3045.7	173	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_69	TATOOINE	tat_world	AREA	0	1637.2	7.0	2980.3	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_70	TATOOINE	tat_world	AREA	0	1663.0	7.0	3109.8	147	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_71	TATOOINE	tat_world	AREA	0	1688.8	7.0	3125.2	-2	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_72	TATOOINE	tat_world	AREA	0	1715.3	7.0	3147.1	176	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_73	TATOOINE	tat_world	AREA	0	1738.6	7.6	3191.1	178	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_74	TATOOINE	tat_world	AREA	0	1759.6	7.0	3186.1	78	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_75	TATOOINE	tat_world	PATROL	0	-2785.0	5.0	2339.0	-132	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13800	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_76	TATOOINE	tat_world	PATROL	0	-2797.0	5.0	2311.0	46	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13900	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_77	TATOOINE	tat_world	AREA	0	-2803.0	5.0	2322.0	4	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_78	TATOOINE	tat_world	AREA	0	-2871.0	5.0	2285.0	159	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_79	TATOOINE	tat_world	PATROL	0	-2878.0	5.0	2262.0	-88	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14000	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_80	TATOOINE	tat_world	AREA	0	-2881.0	5.0	2215.0	170	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_81	TATOOINE	tat_world	PATROL	0	-2942.0	5.0	2459.0	129	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_82	TATOOINE	tat_world	AREA	0	-2979.0	5.0	2327.0	-53	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_83	TATOOINE	tat_world	AREA	0	-2984.0	5.0	2352.0	-150	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_84	TATOOINE	tat_world	AREA	0	-3002.0	5.0	2322.0	34	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_85	TATOOINE	tat_world	AREA	0	-3008.0	5.0	2343.0	136	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_86	TATOOINE	tat_world	AREA	0	3760.8	6.5	2373.7	-97	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_87	TATOOINE	tat_world	AREA	0	3786.1	11.6	2378.4	177	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_88	TATOOINE	tat_world	AREA	0	3482.5	7.5	-4683.1	129	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_89	TATOOINE	tat_world	AREA	0	3496.8	5.5	-4923.1	-7	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_90	TATOOINE	tat_world	AREA	0	3757.8	8.3	2343.7	-38	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_91	TATOOINE	tat_world	AREA	0	3856.3	27.5	2325.3	-63	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_92	TATOOINE	tat_world	AREA	0	3288.1	5.0	-4842.1	36	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_93	TATOOINE	tat_world	AREA	0	3356.8	7.5	-4711.3	125	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_94	TATOOINE	tat_world	AREA	0	3585.8	5.0	-4720.0	-88	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_95	TATOOINE	tat_world	AREA	0	1455.2	7.0	3232.5	-172	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_96	TATOOINE	tat_world	AREA	0	1487.2	7.0	3240.8	-42	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_97	TATOOINE	tat_mosespa_barracks	AREA	6	-4.0	0.0	-3.0	96	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_98	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	2	0.0	0.0	3.5	4	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_99	TATOOINE	tat_world	AREA	0	-2766.0	5.0	2306.0	-123	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_100	TATOOINE	tat_world	AREA	0	-2854.0	5.0	2308.0	-12	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_101	TATOOINE	tat_world	AREA	0	-2875.0	5.0	1991.0	-125	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_102	TATOOINE	tat_world	PATROL	0	-2922.0	5.0	2515.0	-167	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14200	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_103	TATOOINE	tat_world	AREA	0	-2943.0	5.0	2510.0	28	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_104	TATOOINE	tat_world	AREA	0	-2965.0	5.0	2426.0	85	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_105	TATOOINE	tat_world	PATROL	0	-3021.0	5.0	2290.0	50	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14300	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_106	TATOOINE	tat_world	AREA	0	-3064.0	5.0	2156.0	166	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_107	TATOOINE	tat_world	AREA	0	-3072.0	5.0	2125.0	-7	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_108	TATOOINE	tat_world	AREA	0	1538.7	10.9	3219.9	-94	1	an Imperial sharpshooter	imp_sharpshooter	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_109	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	-4.0	-13.0	13.0	157	1	an Imperial sharpshooter	imp_sharpshooter	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_110	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.0	-13.0	-4.0	58	1	an Imperial specialist	imp_specialist	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_111	TATOOINE	tat_world	AREA	0	1400.2	7.0	3090.2	0	1	an Imperial stormcaptain	imp_stealth_operative	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_112	TATOOINE	tat_world	AREA	0	-2906.0	5.0	2455.0	-7	1	an Imperial stormcaptain	imp_stealth_operative	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_113	TATOOINE	tat_world	AREA	0	-1414.5	10.0	-3780.3	105	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_114	TATOOINE	tat_mosespa_barracks	AREA	4	4.0	0.0	1.5	-90	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_115	TATOOINE	tat_world	AREA	0	-2923.0	5.0	2405.0	23	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_116	TATOOINE	tat_world	AREA	0	1256.0	7.7	2954.3	-54	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_117	TATOOINE	tat_world	AREA	0	-2711.0	5.0	2027.0	144	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_118	TATOOINE	tat_world	AREA	0	-2716.0	5.0	2014.0	84	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_119	TATOOINE	tat_world	AREA	0	-2861.0	5.0	2468.0	132	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_120	TATOOINE	tat_world	AREA	0	-1093.7	14.0	-3660.2	41	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_121	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	1.0	-6.0	-6.0	115	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_122	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	7.0	-6.0	-7.0	-12	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_123	TATOOINE	tat_world	AREA	0	-2753.0	5.0	2214.0	35	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_124	TATOOINE	tat_world	AREA	0	-2755.0	5.0	2029.0	140	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_125	TATOOINE	tat_world	PATROL	0	-2893.0	5.0	1991.0	170	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14400	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_126	TATOOINE	tat_world	PATROL	0	-2956.0	5.0	2415.0	36	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14500	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_127	TATOOINE	tat_world	AREA	0	-3030.0	5.0	2130.0	101	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_128	TATOOINE	tat_world	AREA	0	-3060.0	5.0	2122.0	-66	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_129	TATOOINE	tat_world	AREA	0	1399.4	7.0	3094.3	178	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_130	TATOOINE	tat_world	AREA	0	1401.0	7.0	3094.3	176	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_131	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.0	-13.0	6.0	148	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_132	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	13.0	-13.0	2.0	17	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_133	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	17.0	-13.0	12.0	-88	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_134	TATOOINE	tat_world	AREA	0	-2683.0	5.0	2274.0	178	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_135	TATOOINE	tat_world	AREA	0	-2741.0	5.0	2258.0	96	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_136	TATOOINE	tat_world	AREA	0	-2774.0	5.0	2206.0	64	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_137	TATOOINE	tat_world	PATROL	0	-2900.0	5.0	2144.0	9	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14600	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_138	TATOOINE	tat_world	AREA	0	-2904.0	5.0	2120.0	-43	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_139	TATOOINE	tat_world	PATROL	0	-2914.0	5.0	2417.0	-34	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14700	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_140	TATOOINE	tat_world	AREA	0	-2949.0	5.0	1964.0	14	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_141	TATOOINE	tat_world	AREA	0	-2958.0	5.0	1982.0	86	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_142	TATOOINE	tat_world	AREA	0	-2959.0	5.0	2041.0	63	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_143	TATOOINE	tat_world	AREA	0	-2973.0	5.0	2570.0	-55	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_144	TATOOINE	tat_world	AREA	0	-2979.0	5.0	2493.0	154	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_145	TATOOINE	tat_world	PATROL	0	-3093.0	5.0	2162.0	-61	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14800	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_146	TATOOINE	tat_world	PATROL	0	-3099.0	5.0	2132.0	135	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14900	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_147	TATOOINE	tat_world	PATROL	0	-3101.0	5.0	2158.0	-42	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15000	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_148	TATOOINE	tat_world	PATROL	0	-3117.0	5.0	2143.0	-146	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_149	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	13.0	-13.0	-16.0	18	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_150	TATOOINE	tat_world	PATROL	0	-2776.0	5.0	1987.0	83	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15200	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_151	TATOOINE	tat_world	AREA	0	3951.4	53.5	2265.1	-106	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_152	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.0	0.0	-4.5	0	1	an Imperial warrant officer, 2nd class	imp_warrant_officer_2nd	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_153	TATOOINE	tat_world	PATROL	0	3288.1	5.0	-4842.1	-36	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11500	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_154	TATOOINE	tat_world	PATROL	0	3288.7	5.0	-4636.1	124	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11600	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_155	TATOOINE	tat_world	PATROL	0	3304.5	5.0	-4602.5	122	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11700	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_156	TATOOINE	tat_world	PATROL	0	3318.3	4.0	-4613.0	30	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11800	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_157	TATOOINE	tat_world	PATROL	0	3360.2	5.0	-4742.2	-150	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11900	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_158	TATOOINE	tat_world	PATROL	0	3427.1	5.0	-4952.9	56	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_12000	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_159	TATOOINE	tat_world	PATROL	0	3538.0	5.1	-4806.5	-73	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_7100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_160	TATOOINE	tat_world	PATROL	0	1209.9	7.0	2970.6	-68	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_161	TATOOINE	tat_world	PATROL	0	1254.9	4.0	3258.1	-96	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12200	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_162	TATOOINE	tat_world	PATROL	0	1344.7	7.0	3080.5	50	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12300	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_163	TATOOINE	tat_world	PATROL	0	1470.6	7.0	3249.8	93	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12400	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_164	TATOOINE	tat_world	PATROL	0	1482.8	7.0	3247.2	-66	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12500	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_165	TATOOINE	tat_world	PATROL	0	1486.9	7.0	3061.4	161	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12600	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_166	TATOOINE	tat_world	PATROL	0	1492.9	7.0	3441.9	98	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12700	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_167	TATOOINE	tat_world	PATROL	0	1568.5	11.0	3246.9	-84	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12800	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_168	TATOOINE	tat_world	PATROL	0	1632.0	7.0	3119.4	81	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12900	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_169	TATOOINE	tat_world	PATROL	0	1660.1	7.0	3127.5	-111	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_13000	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_170	TATOOINE	tat_world	PATROL	0	1747.0	7.0	3159.8	-176	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_13100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_171	TATOOINE	tat_world	PATROL	0	3750.0	6.1	2380.4	-32	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15300	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_172	TATOOINE	tat_world	PATROL	0	3829.7	19.3	2351.7	-68	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15400	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_173	TATOOINE	tat_world	AREA	0	3888.2	33.0	2350.0	-92	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_174	TATOOINE	tat_world	PATROL	0	3909.9	33.0	2342.2	96	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15500	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_175	TATOOINE	tat_world	PATROL	0	3927.4	47.0	2294.7	-24	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15600	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_176	TATOOINE	tat_world	AREA	0	123.6	52.0	-5368.0	-142	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_177	TATOOINE	tat_world	AREA	0	135.1	52.0	-5374.9	83	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_178	TATOOINE	tat_world	AREA	0	151.0	52.0	-5316.0	55	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_179	TATOOINE	tat_world	AREA	0	159.0	52.0	-5320.0	-13	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_180	TATOOINE	tat_world	AREA	0	31.0	51.0	-5337.0	-90	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_181	TATOOINE	tat_world	AREA	0	76.5	52.0	-5361.1	-88	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_182	TATOOINE	tat_world	AREA	0	89.9	52.0	-5393.8	-47	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_183	TATOOINE	tat_world	AREA	0	31.4	51.0	-5350.3	-75	1	a Rebel guard captain	reb_guard_captain	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_184	TATOOINE	tat_world	AREA	0	125.5	52.0	-5416.0	-81	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_185	TATOOINE	tat_world	AREA	0	55.2	52.6	-5332.5	-176	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_186	TATOOINE	tat_world	PATROL	0	77.0	52.0	-5372.0	-17	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	PATROL	0	patrol_tat_11100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_187	TATOOINE	tat_world	PATROL	0	81.0	52.0	-5333.0	83	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	PATROL	0	patrol_tat_11200	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_188	TATOOINE	tat_world	PATROL	0	3715.5	5.0	-4734.9	176	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11000	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_189	TATOOINE	tat_world	PATROL	0	3475.6	5.0	-4761.9	-52	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11100	column	idle	0	0	0	300
-spawn_gcw_tat_pres_imp_190	TATOOINE	tat_world	PATROL	0	-2818.0	5.0	1880.7	74	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_11200	column	idle	0	0	0	600
-spawn_gcw_tat_pres_imp_191	TATOOINE	tat_world	PATROL	0	-2957.6	5.0	2549.4	-131	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_11300	column	idle	0	0	0	600
-spawn_gcw_tat_pres_imp_192	TATOOINE	tat_world	PATROL	0	-3042.5	5.0	2296.9	75	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_11400	column	idle	0	0	0	600
-spawn_gcw_tat_pres_imp_193	TATOOINE	tat_world	PATROL	0	-2819.3	5.0	2190.9	150	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_11500	column	idle	0	0	0	600
+spawn_gcw_tat_pres_imp_1	TATOOINE	tat_world	AREA	0	123.6	52.0	-5368.0	-142	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_2	TATOOINE	tat_world	AREA	0	125.5	52.0	-5416.0	-81	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_3	TATOOINE	tat_world	AREA	0	135.1	52.0	-5374.9	83	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_4	TATOOINE	tat_world	AREA	0	151.0	52.0	-5316.0	55	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_5	TATOOINE	tat_world	AREA	0	159.0	52.0	-5320.0	-13	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_6	TATOOINE	tat_world	AREA	0	31.0	51.0	-5337.0	-90	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_7	TATOOINE	tat_world	AREA	0	31.4	51.0	-5350.3	-75	1	a Rebel guard captain	reb_guard_captain	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_8	TATOOINE	tat_world	AREA	0	55.2	52.6	-5332.5	-176	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_9	TATOOINE	tat_world	AREA	0	76.5	52.0	-5361.1	-88	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_10	TATOOINE	tat_world	PATROL	0	77.0	52.0	-5372.0	-17	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	PATROL	0	patrol_tat_11100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_11	TATOOINE	tat_world	PATROL	0	81.0	52.0	-5333.0	83	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	PATROL	0	patrol_tat_11200	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_12	TATOOINE	tat_world	AREA	0	89.9	52.0	-5393.8	-47	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Anchorhead	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_13	TATOOINE	tat_world	AREA	0	-1016.9	12.0	-3741.2	97	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_14	TATOOINE	tat_world	AREA	0	-1018.3	12.0	-3736.2	-88	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_15	TATOOINE	tat_world	AREA	0	-1083.6	12.0	-3594.2	169	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_16	TATOOINE	tat_world	AREA	0	-1089.8	12.0	-3704.2	116	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_17	TATOOINE	tat_world	AREA	0	-1093.6	12.0	-3648.6	48	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_18	TATOOINE	tat_world	AREA	0	-1093.7	14.0	-3660.2	41	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_19	TATOOINE	tat_world	AREA	0	-1097.0	12.0	-3525.3	121	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_20	TATOOINE	tat_world	PATROL	0	-1105.8	12.0	-3573.1	168	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	PATROL	0	patrol_tat_11300	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_21	TATOOINE	tat_world	AREA	0	-1130.9	12.2	-3611.6	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_22	TATOOINE	tat_world	AREA	0	-1133.2	12.2	-3614.6	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_23	TATOOINE	tat_world	AREA	0	-1169.8	12.0	-3692.1	-125	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_24	TATOOINE	tat_world	AREA	0	-1181.3	12.0	-3537.9	-162	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_25	TATOOINE	tat_world	AREA	0	-1275.6	12.0	-3479.9	0	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_26	TATOOINE	tat_world	AREA	0	-1278.5	12.5	-3643.1	165	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_27	TATOOINE	tat_world	AREA	0	-1283.8	12.0	-3480.4	0	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_28	TATOOINE	tat_world	AREA	0	-1291.6	12.0	-3509.6	-125	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Bestine	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_29	TATOOINE	tat_world	AREA	0	-1292.8	12.0	-3585.5	133	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_30	TATOOINE	tat_world	AREA	0	-1413.0	10.0	-3780.9	-87	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_31	TATOOINE	tat_world	AREA	0	-1414.5	10.0	-3780.3	105	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_32	TATOOINE	tat_world	PATROL	0	-1415.6	10.0	-3775.2	0	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Bestine	1	PATROL	0	patrol_tat_11400	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_33	TATOOINE	tat_world	AREA	0	-981.0	12.0	-3792.1	133	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_34	TATOOINE	tat_world	AREA	0	-983.8	12.0	-3746.5	116	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Bestine	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_35	TATOOINE	tat_world	AREA	0	3278.5	5.0	-4676.2	-56	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_36	TATOOINE	tat_world	AREA	0	3280.0	5.0	-4835.7	54	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_37	TATOOINE	tat_world	AREA	0	3288.1	5.0	-4842.1	36	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_38	TATOOINE	tat_world	PATROL	0	3288.1	5.0	-4842.1	-36	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_39	TATOOINE	tat_world	AREA	0	3288.7	5.0	-4636.1	124	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_40	TATOOINE	tat_world	PATROL	0	3288.7	5.0	-4636.1	124	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_41	TATOOINE	tat_world	AREA	0	3290.2	5.0	-4695.8	126	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_42	TATOOINE	tat_world	AREA	0	3304.5	5.0	-4602.5	122	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_43	TATOOINE	tat_world	PATROL	0	3304.5	5.0	-4602.5	122	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11700	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_44	TATOOINE	tat_world	PATROL	0	3318.3	4.0	-4613.0	30	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11800	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_45	TATOOINE	tat_world	AREA	0	3322.2	5.0	-4623.6	28	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_46	TATOOINE	tat_world	AREA	0	3356.8	7.5	-4711.3	125	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_47	TATOOINE	tat_world	AREA	0	3360.2	5.0	-4742.2	-150	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_48	TATOOINE	tat_world	PATROL	0	3360.2	5.0	-4742.2	-150	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_11900	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_49	TATOOINE	tat_world	AREA	0	3418.0	5.0	-4974.5	-50	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_50	TATOOINE	tat_world	AREA	0	3427.1	5.0	-4952.9	56	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_51	TATOOINE	tat_world	PATROL	0	3427.1	5.0	-4952.9	56	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_12000	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_52	TATOOINE	tat_world	AREA	0	3427.5	7.5	-4728.6	-146	1	an Imperial comm op	imp_comm_op	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_53	TATOOINE	tat_world	PATROL	0	3475.6	5.0	-4761.9	-52	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_2600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_54	TATOOINE	tat_world	AREA	0	3482.5	7.5	-4683.1	129	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_55	TATOOINE	tat_world	AREA	0	3496.8	5.5	-4923.1	-7	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_56	TATOOINE	tat_world	AREA	0	3516.2	5.0	-4879.7	154	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_57	TATOOINE	tat_world	AREA	0	3538.0	5.1	-4806.5	-73	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_58	TATOOINE	tat_world	PATROL	0	3538.0	5.1	-4806.5	-73	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_7100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_59	TATOOINE	tat_world	AREA	0	3585.8	5.0	-4720.0	-88	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_60	TATOOINE	tat_world	PATROL	0	3715.5	5.0	-4734.9	176	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	PATROL	0	patrol_tat_2500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_61	TATOOINE	tat_world	AREA	0	1181.3	7.0	3087.9	-79	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_62	TATOOINE	tat_world	PATROL	0	1209.9	7.0	2970.6	-68	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_63	TATOOINE	tat_world	PATROL	0	1254.9	4.0	3258.1	-96	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12200	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_64	TATOOINE	tat_world	AREA	0	1256.0	7.7	2954.3	-54	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_65	TATOOINE	tat_world	AREA	0	1264.0	7.0	3159.3	-82	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_66	TATOOINE	tat_world	AREA	0	1272.7	7.0	3255.9	87	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_67	TATOOINE	tat_world	AREA	0	1282.4	7.0	3133.1	28	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_68	TATOOINE	tat_world	AREA	0	1286.3	7.7	2954.7	42	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_69	TATOOINE	tat_world	AREA	0	1289.2	7.0	3128.0	26	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_70	TATOOINE	tat_world	AREA	0	1320.9	9.5	3382.9	90	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_71	TATOOINE	tat_world	AREA	0	1333.6	7.0	3490.0	93	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_72	TATOOINE	tat_world	PATROL	0	1344.7	7.0	3080.5	50	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12300	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_73	TATOOINE	tat_world	AREA	0	1376.6	7.0	3267.5	133	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_74	TATOOINE	tat_world	AREA	0	1380.4	9.5	3012.4	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_75	TATOOINE	tat_world	AREA	0	1399.4	7.0	3094.3	178	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_76	TATOOINE	tat_world	AREA	0	1400.2	7.0	3090.2	0	1	an Imperial stormcaptain	imp_stealth_operative	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_77	TATOOINE	tat_world	AREA	0	1401.0	7.0	3094.3	176	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_78	TATOOINE	tat_world	AREA	0	1431.6	9.5	3372.5	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_79	TATOOINE	tat_world	AREA	0	1444.6	7.0	3106.9	90	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_80	TATOOINE	tat_world	AREA	0	1455.2	7.0	3232.5	-172	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_81	TATOOINE	tat_world	PATROL	0	1470.6	7.0	3249.8	93	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12400	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_82	TATOOINE	tat_world	PATROL	0	1482.8	7.0	3247.2	-66	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_83	TATOOINE	tat_world	PATROL	0	1486.9	7.0	3061.4	161	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_84	TATOOINE	tat_world	AREA	0	1487.2	7.0	3240.8	-42	1	an Imperial scout trooper	imp_scout_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_85	TATOOINE	tat_world	PATROL	0	1492.9	7.0	3441.9	98	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12700	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_86	TATOOINE	tat_world	AREA	0	1502.5	7.0	3156.9	-1	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_87	TATOOINE	tat_world	AREA	0	1508.1	7.0	3127.9	174	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_88	TATOOINE	tat_world	AREA	0	1538.7	10.9	3219.9	-94	1	an Imperial sharpshooter	imp_sharpshooter	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_89	TATOOINE	tat_world	AREA	0	1557.7	9.5	3045.7	173	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_90	TATOOINE	tat_world	PATROL	0	1568.5	11.0	3246.9	-84	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12800	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_91	TATOOINE	tat_world	AREA	0	1593.3	7.0	3020.2	82	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_92	TATOOINE	tat_world	AREA	0	1618.9	11.0	3241.7	86	1	an Imperial exterminator	imp_exterminator	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_93	TATOOINE	tat_world	PATROL	0	1632.0	7.0	3119.4	81	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_12900	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_94	TATOOINE	tat_world	AREA	0	1637.2	7.0	2980.3	-179	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_95	TATOOINE	tat_world	PATROL	0	1660.1	7.0	3127.5	-111	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_13000	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_96	TATOOINE	tat_world	AREA	0	1663.0	7.0	3109.8	147	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_97	TATOOINE	tat_world	AREA	0	1688.8	7.0	3125.2	-2	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_98	TATOOINE	tat_world	AREA	0	1715.3	7.0	3147.1	176	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_99	TATOOINE	tat_world	AREA	0	1738.6	7.6	3191.1	178	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_100	TATOOINE	tat_world	PATROL	0	1747.0	7.0	3159.8	-176	1	a Mos Entha security officer	mos_entha_police_officer	ATTACKABLE	E	15	20	GCW	Mos Entha	1	PATROL	0	patrol_tat_13100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_101	TATOOINE	tat_world	AREA	0	1759.6	7.0	3186.1	78	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_102	TATOOINE	tat_mosespa_barracks	AREA	3	0.0	0.0	-4.0	2	1	an Imperial master sergeant	imp_master_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_103	TATOOINE	tat_mosespa_barracks	AREA	4	4.0	0.0	1.5	-90	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_104	TATOOINE	tat_mosespa_barracks	AREA	6	-4.0	0.0	-3.0	96	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_105	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	2	0.0	0.0	3.5	4	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_106	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	1.0	-6.0	-6.0	115	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_107	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	7.0	-6.0	-7.0	-12	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_108	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-5.0	-13.0	-12.0	25	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_109	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.0	-13.0	-4.0	58	1	an Imperial specialist	imp_specialist	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_110	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.0	-13.0	6.0	148	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_111	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	-4.0	-13.0	13.0	157	1	an Imperial sharpshooter	imp_sharpshooter	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_112	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	6.0	-13.0	11.0	-175	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_113	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	13.0	-13.0	2.0	17	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_114	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	17.0	-13.0	12.0	-88	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_115	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	10.0	-11.0	-20.0	20	1	an Imperial colonel	imp_colonel	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_116	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	13.0	-13.0	-16.0	18	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_117	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	15.0	-11.0	-21.0	-1	1	an Imperial comm op	imp_comm_op	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_118	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	20.0	-11.0	-21.0	-20	1	an Imperial command security guard	crackdown_imp_command_security_guard	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_119	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.0	0.0	-4.5	0	1	an Imperial warrant officer, 2nd class	imp_warrant_officer_2nd	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_120	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_121	TATOOINE	tat_world	AREA	0	-2683.0	5.0	2274.0	178	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_122	TATOOINE	tat_world	PATROL	0	-2699.0	5.0	2269.0	134	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_123	TATOOINE	tat_world	AREA	0	-2711.0	5.0	2027.0	144	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_124	TATOOINE	tat_world	PATROL	0	-2714.0	5.0	2229.0	30	1	an Imperial captain	imp_captain	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13200	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_125	TATOOINE	tat_world	AREA	0	-2716.0	5.0	2014.0	84	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_126	TATOOINE	tat_world	AREA	0	-2741.0	5.0	2258.0	96	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_127	TATOOINE	tat_world	AREA	0	-2753.0	5.0	2214.0	35	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_128	TATOOINE	tat_world	AREA	0	-2755.0	5.0	2029.0	140	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_129	TATOOINE	tat_world	AREA	0	-2766.0	5.0	2306.0	-123	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_130	TATOOINE	tat_world	AREA	0	-2774.0	5.0	2206.0	64	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_131	TATOOINE	tat_world	PATROL	0	-2776.0	5.0	1987.0	83	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15200	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_132	TATOOINE	tat_world	AREA	0	-2781.0	5.0	2288.0	64	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_133	TATOOINE	tat_world	PATROL	0	-2785.0	5.0	2339.0	-132	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13800	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_134	TATOOINE	tat_world	PATROL	0	-2797.0	5.0	2311.0	46	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13900	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_135	TATOOINE	tat_world	AREA	0	-2803.0	5.0	2322.0	4	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_136	TATOOINE	tat_world	AREA	0	-2804.0	5.0	1963.0	42	1	an Imperial bombardier	imp_bombardier	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_137	TATOOINE	tat_world	PATROL	0	-2818.0	5.0	1880.7	74	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_2700	column	idle	0	0	0	600
+spawn_gcw_tat_pres_imp_138	TATOOINE	tat_world	PATROL	0	-2819.3	5.0	2190.9	150	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_3000	column	idle	0	0	0	600
+spawn_gcw_tat_pres_imp_139	TATOOINE	tat_world	AREA	0	-2854.0	5.0	2308.0	-12	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_140	TATOOINE	tat_world	AREA	0	-2861.0	5.0	2468.0	132	1	an Imperial stormrifle	imp_stormrifle	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_141	TATOOINE	tat_world	AREA	0	-2871.0	5.0	2285.0	159	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_142	TATOOINE	tat_world	AREA	0	-2875.0	5.0	1991.0	-125	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_143	TATOOINE	tat_world	PATROL	0	-2878.0	5.0	2262.0	-88	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14000	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_144	TATOOINE	tat_world	AREA	0	-2881.0	5.0	2215.0	170	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_145	TATOOINE	tat_world	PATROL	0	-2893.0	5.0	1991.0	170	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14400	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_146	TATOOINE	tat_world	PATROL	0	-2900.0	5.0	2144.0	9	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_147	TATOOINE	tat_world	AREA	0	-2904.0	5.0	2120.0	-43	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_148	TATOOINE	tat_world	AREA	0	-2906.0	5.0	2455.0	-7	1	an Imperial stormcaptain	imp_stealth_operative	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_149	TATOOINE	tat_world	PATROL	0	-2914.0	5.0	2417.0	-34	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14700	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_150	TATOOINE	tat_world	AREA	0	-2919.0	5.0	2107.0	-63	1	an Imperial 1st lieutenant	imp_1st_lieutenant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_151	TATOOINE	tat_world	PATROL	0	-2921.0	5.0	2149.0	-65	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13700	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_152	TATOOINE	tat_world	PATROL	0	-2922.0	5.0	2056.0	-15	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13300	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_153	TATOOINE	tat_world	PATROL	0	-2922.0	5.0	2515.0	-167	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14200	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_154	TATOOINE	tat_world	AREA	0	-2923.0	5.0	2405.0	23	1	an Imperial stormmedic	imp_stormmedic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_155	TATOOINE	tat_world	PATROL	0	-2937.0	5.0	2098.0	91	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13400	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_156	TATOOINE	tat_world	PATROL	0	-2942.0	5.0	2459.0	129	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_157	TATOOINE	tat_world	AREA	0	-2943.0	5.0	2510.0	28	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_158	TATOOINE	tat_world	AREA	0	-2949.0	5.0	1964.0	14	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_159	TATOOINE	tat_world	PATROL	0	-2956.0	5.0	2415.0	36	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_160	TATOOINE	tat_world	PATROL	0	-2957.6	5.0	2549.4	-131	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_2800	column	idle	0	0	0	600
+spawn_gcw_tat_pres_imp_161	TATOOINE	tat_world	AREA	0	-2958.0	5.0	1982.0	86	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_162	TATOOINE	tat_world	AREA	0	-2959.0	5.0	2041.0	63	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_163	TATOOINE	tat_world	AREA	0	-2965.0	5.0	2426.0	85	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_164	TATOOINE	tat_world	AREA	0	-2973.0	5.0	2570.0	-55	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_165	TATOOINE	tat_world	AREA	0	-2979.0	5.0	2327.0	-53	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_166	TATOOINE	tat_world	AREA	0	-2979.0	5.0	2493.0	154	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_167	TATOOINE	tat_world	AREA	0	-2984.0	5.0	2352.0	-150	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_168	TATOOINE	tat_world	AREA	0	-2994.0	5.0	2547.0	-11	1	an AT-ST	crackdown_atst	ATTACKABLE	B	150	150	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_169	TATOOINE	tat_world	AREA	0	-3002.0	5.0	2322.0	34	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_170	TATOOINE	tat_world	AREA	0	-3008.0	5.0	2343.0	136	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_171	TATOOINE	tat_world	PATROL	0	-3013.0	5.0	2293.0	-130	1	an Imperial master sergeant	imp_master_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_13500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_172	TATOOINE	tat_world	PATROL	0	-3021.0	5.0	2290.0	50	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14300	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_173	TATOOINE	tat_world	AREA	0	-3030.0	5.0	2130.0	101	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_174	TATOOINE	tat_world	PATROL	0	-3042.5	5.0	2296.9	75	1	a Mos Espa security officer	mos_espa_police_officer	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_2900	column	idle	0	0	0	600
+spawn_gcw_tat_pres_imp_175	TATOOINE	tat_world	AREA	0	-3060.0	5.0	2122.0	-66	1	an Imperial stormsniper	imp_stormsniper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_176	TATOOINE	tat_world	AREA	0	-3064.0	5.0	2156.0	166	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_177	TATOOINE	tat_world	AREA	0	-3072.0	5.0	2125.0	-7	1	an Imperial sergeant	imp_sergeant	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_178	TATOOINE	tat_world	AREA	0	-3077.0	5.0	2177.0	48	1	an Imperial corporal	crackdown_imp_corporal	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_179	TATOOINE	tat_world	PATROL	0	-3093.0	5.0	2162.0	-61	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14800	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_180	TATOOINE	tat_world	PATROL	0	-3099.0	5.0	2132.0	135	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_14900	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_181	TATOOINE	tat_world	PATROL	0	-3101.0	5.0	2158.0	-42	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15000	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_182	TATOOINE	tat_world	PATROL	0	-3117.0	5.0	2143.0	-146	1	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	15	20	GCW	Mos Espa	1	PATROL	0	patrol_tat_15100	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_183	TATOOINE	tat_world	AREA	0	-3155.0	5.0	2127.0	-35	1	an Imperial medic	imp_medic	ATTACKABLE	E	15	20	GCW	Mos Espa	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_184	TATOOINE	tat_world	PATROL	0	3750.0	6.1	2380.4	-32	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15300	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_185	TATOOINE	tat_world	AREA	0	3757.8	8.3	2343.7	-38	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_186	TATOOINE	tat_world	AREA	0	3760.8	6.5	2373.7	-97	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_187	TATOOINE	tat_world	AREA	0	3786.1	11.6	2378.4	177	1	an Imperial sand trooper	imp_sand_trooper	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_188	TATOOINE	tat_world	PATROL	0	3829.7	19.3	2351.7	-68	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15400	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_189	TATOOINE	tat_world	AREA	0	3856.3	27.5	2325.3	-63	1	an elite sand trooper	imp_sand_trooper_elite	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_190	TATOOINE	tat_world	AREA	0	3888.2	33.0	2350.0	-92	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_191	TATOOINE	tat_world	PATROL	0	3909.9	33.0	2342.2	96	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15500	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_192	TATOOINE	tat_world	PATROL	0	3927.4	47.0	2294.7	-24	1	a Mos Taike security officer	mos_taike_police_officer	ATTACKABLE	E	15	20	GCW	Mos Taike	1	PATROL	0	patrol_tat_15600	column	idle	0	0	0	300
+spawn_gcw_tat_pres_imp_193	TATOOINE	tat_world	AREA	0	3951.4	53.5	2265.1	-106	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader	ATTACKABLE	E	15	20	GCW	Mos Taike	1	IDLE	0	0	-	idle	0	0	0	300
