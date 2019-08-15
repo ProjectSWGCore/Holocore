@@ -1,39 +1,49 @@
 package com.projectswg.holocore.services.gameplay.combat.loot
 
 import com.projectswg.common.data.location.Location
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootGeneratedIntent
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
-import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject
+import com.projectswg.holocore.services.gameplay.combat.loot.generation.CreditLootGenerator
+import com.projectswg.holocore.services.gameplay.combat.loot.generation.ItemLootGenerator
+import com.projectswg.holocore.services.gameplay.combat.loot.generation.NPCLootTable
+import com.projectswg.holocore.services.gameplay.combat.loot.generation.RareItemLootGenerator
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
-import com.projectswg.holocore.services.support.objects.items.StaticItemService
-import me.joshlarson.jlcommon.control.IntentChain
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
 import java.util.*
-import java.util.concurrent.ThreadLocalRandom
 
 class LootGenerationService : Service() {
 	
 	private val npcLoot: MutableMap<String, NPCLoot> = HashMap()    // K: npc_id, V: possible loot
+	private val creditGenerator = CreditLootGenerator()
+	private val itemGenerator = ItemLootGenerator()
+	private val rareItemLootGenerator = RareItemLootGenerator()
+	private val scope = CoroutineScope(Dispatchers.Default)
 	
 	override fun initialize(): Boolean {
 		loadNPCLoot()
 		
+		return true
+	}
+	
+	override fun stop(): Boolean {
+		scope.coroutineContext.cancel()
 		return true
 	}
 	
@@ -42,31 +52,48 @@ class LootGenerationService : Service() {
 		val corpse = cki.corpse as? AIObject ?: return
 		
 		val creatureId = corpse.creatureId
-		val loot = npcLoot[creatureId]
+		val lootRecord = npcLoot[creatureId]
 		
-		if (loot == null) {
+		if (lootRecord == null) {
 			Log.w("No NPCLoot associated with NPC ID: $creatureId")
 			return
 		}
 		
+		val loot = ArrayList<SWGObject>()
+		val killer = cki.killer
+		if (!killer.isPlayer)
+			return
+		
+		// Various kinds of loot
+		if (lootRecord.isDropCredits && PswgDatabase.config.getBoolean(this, "cashLoot", true))
+			creditGenerator.generate(corpse, loot)
+		if (PswgDatabase.config.getBoolean(this, "itemLoot", true))
+			itemGenerator.generate(corpse, killer, loot, lootRecord.npcTables)
+		rareItemLootGenerator.generate(corpse = corpse, killer = killer, loot = loot)
+		
+		if (loot.isEmpty()) {
+			CorpseLootedIntent(corpse).broadcast()
+			return
+		}
+		
 		val lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff")
+		loot.forEach { obj ->
+			obj.moveToContainer(lootInventory)
+			ObjectCreatedIntent.broadcast(obj)
+			
+			scope.launch {
+				delay(60)
+				when (obj.template) {
+					RareLootService.RARE_CHEST,
+					RareLootService.LEGENDARY_CHEST,
+					RareLootService.EXCEPTIONAL_CHEST -> sendRareLootPackets(obj, corpse, killer)
+				}
+			}
+		}
 		lootInventory.moveToContainer(corpse, corpse.location)
 		ObjectCreatedIntent.broadcast(lootInventory)
 		
-		val killer = cki.killer
-		
-		var cashGenerated = false
-		var lootGenerated = false
-		
-		if (PswgDatabase.config.getBoolean(this, "cashLoot", true))
-			cashGenerated = generateCreditChip(loot, lootInventory, corpse.difficulty, corpse.level.toInt())
-		if (PswgDatabase.config.getBoolean(this, "itemLoot", true))
-			lootGenerated = generateLoot(loot, killer, lootInventory, corpse.difficulty, corpse.level.toInt())
-		
-		if (!cashGenerated && !lootGenerated)
-			CorpseLootedIntent(corpse).broadcast()
-		else
-			showLootDisc(killer, corpse)
+		showLootDisc(killer, corpse)
 	}
 	
 	/**
@@ -100,7 +127,7 @@ class LootGenerationService : Service() {
 		if (chance <= 0)
 			return
 		
-		loot.npcTables.add(NPCTable(chance, table))
+		loot.npcTables.add(NPCLootTable(chance, table))
 	}
 	
 	private fun showLootDisc(requester: CreatureObject, corpse: AIObject) {
@@ -122,125 +149,14 @@ class LootGenerationService : Service() {
 		LootGeneratedIntent.broadcast(corpse)
 	}
 	
-	private fun generateCreditChip(loot: NPCLoot, lootInventory: SWGObject, difficulty: CreatureDifficulty, combatLevel: Int): Boolean {
-		if (!loot.isDropCredits)
-			return false
-		
-		val random = ThreadLocalRandom.current()
-		val config = PswgDatabase.config
-		
-		val range = config.getDouble(this, "lootCashHumanRange", 0.05)
-		val cashLootRoll = random.nextDouble()
-		
-		val credits = combatLevel * (1 + random.nextDouble(0.0, range)).toInt() * when (difficulty) {
-			CreatureDifficulty.NORMAL -> {
-				if (cashLootRoll > config.getDouble(this, "lootCashHumanNormalChance", 0.60))
-					return false
-				config.getInt(this, "lootCashHumanNormal", 2)
-			}
-			CreatureDifficulty.ELITE -> {
-				if (cashLootRoll > config.getDouble(this, "lootCashHumanElitechance", 0.80))
-					return false
-				config.getInt(this, "lootCashHumanElite", 5)
-			}
-			CreatureDifficulty.BOSS -> // bosses always drop cash loot, so no need to check
-				config.getInt(this, "lootCashHumanBoss", 9)
-		}
-		
-		// TODO scale with group size?
-		
-		val cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", CreditObject::class.java)
-		
-		cashObject.amount = credits.toLong()
-		cashObject.moveToContainer(lootInventory)
-		
-		ObjectCreatedIntent.broadcast(cashObject)
-		return true
+	private fun sendRareLootPackets(chest: SWGObject, corpse: CreatureObject, killer: CreatureObject) {
+		val effect = PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse.objectId, "")
+		val sound = PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false)
+		val box = ShowLootBox(killer.objectId, longArrayOf(chest.objectId))
+
+		killer.owner?.sendPacket(effect, sound, box)
 	}
 	
-	/**
-	 * Generates loot and places it in the inventory of the corpse.
-	 *
-	 * @param loot          the loot info of the creature killed
-	 * @param killer        the person that killed the NPC
-	 * @param lootInventory the inventory the loot will be placed in (corpse inventory)
-	 * @return whether loot was generated or not
-	 */
-	private fun generateLoot(loot: NPCLoot, killer: CreatureObject, lootInventory: SWGObject, difficulty: CreatureDifficulty, level: Int): Boolean {
-		val random = ThreadLocalRandom.current()
-		var lootGenerated = false
-		
-		val tableRoll = random.nextInt(100) + 1
-		
-		// Admin Variables
-		val admin = killer.hasCommand("admin")
-		val adminOutput1 = StringBuilder("$tableRoll //")
-		val adminOutput2 = StringBuilder()
-		
-		val lootTables = ServerData.lootTables
-		for ((tableId, npcTable) in loot.npcTables.withIndex()) {
-			val tableChance = npcTable.chance
-			
-			if (tableRoll > tableChance) {
-				// Skip ahead if there's no drop chance
-				adminOutput1.append("/ \\#FF0000 loot_table").append(tableId+1)
-				break
-			}
-			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId+1)
-			
-			val groupRoll = random.nextInt(100) + 1
-			val lootTableItem = lootTables.getLootTableItem(npcTable.lootTable, difficulty.name, level) ?: continue
-			
-			for ((chance, items) in lootTableItem.groups) { // group of items to be granted
-				if (groupRoll > chance)
-					continue
-				
-				val itemName = items[random.nextInt(items.size)]
-				
-				adminOutput2.append(itemName).append('\n')
-				when {
-					itemName.startsWith("dynamic_") -> { // TODO dynamic item handling
-						SystemMessageIntent(killer.owner!!, "We don't support this loot item yet: $itemName").broadcast()
-					}
-					itemName.endsWith(".iff") -> {
-						val obj = ObjectCreator.createObjectFromTemplate(itemName)
-						obj.moveToContainer(lootInventory)
-						ObjectCreatedIntent.broadcast(obj)
-						
-						lootGenerated = true
-					}
-					else -> {
-						CreateStaticItemIntent(killer, lootInventory, CreateStaticItemCallback(), itemName).broadcast()
-						
-						lootGenerated = true
-					}
-				}
-				
-				break
-			}
-		}
-		if (admin) {
-			IntentChain.broadcastChain(
-					SystemMessageIntent(killer.owner!!, adminOutput1.toString()),
-					SystemMessageIntent(killer.owner!!, adminOutput2.toString())
-			)
-		}
-		
-		return lootGenerated
-	}
-	
-	private class NPCLoot(val isDropCredits: Boolean, val npcTables: MutableCollection<NPCTable> = ArrayList())
-	
-	private class NPCTable(val chance: Int, val lootTable: String)
-	
-	private class CreateStaticItemCallback : StaticItemService.ObjectCreationHandler {
-		
-		override val isIgnoreVolume = true
-		
-		override fun success(createdObjects: List<SWGObject>) {
-			// do nothing - loot disc is created on the return of the generateLoot method
-		}
-		
-	}
+	private class NPCLoot(val isDropCredits: Boolean, val npcTables: MutableList<NPCLootTable> = ArrayList())
 	
 }

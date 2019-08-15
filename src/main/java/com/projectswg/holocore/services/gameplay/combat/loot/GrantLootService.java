@@ -256,6 +256,8 @@ public final class GrantLootService extends Service {
 			switch (item.moveToContainer(looter, looter.getInventory())) {
 				case SUCCESS: {
 					String itemName = item.getObjectName();
+					if (itemName.isEmpty())
+						itemName = item.getStringId().toString();
 					
 					if (item instanceof CreditObject) {
 						onLootedCredits(looter, ((CreditObject) item).getAmount());
