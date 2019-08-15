@@ -43,7 +43,7 @@ class RareItemLootGenerator {
 		if (abs(corpse.level.toInt() - killer.level.toInt()) > MAX_LEVEL_DIFFERENCE) // Levels can't be too far apart
 			return
 		
-		val roll = 0 //ThreadLocalRandom.current().nextInt(100) + 1    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
+		val roll = ThreadLocalRandom.current().nextInt(100) + 1    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
 		if (roll >= DROP_CHANCE) {
 			Log.d("No RLS drop from %s with roll %d", corpse, roll)
 			return
