@@ -40,7 +40,7 @@ import kotlin.math.abs
 class RareItemLootGenerator {
 	
 	fun generate(corpse: CreatureObject, killer: CreatureObject, loot: MutableList<SWGObject>) {
-		if (abs(corpse.level.toInt() - killer.level.toInt()) > MAX_LEVEL_DIFFERENCE) // Levels can't be too far apart
+		if (!isEligibleForRareLoot(corpse.level.toInt(), killer.level.toInt()))
 			return
 		
 		val roll = ThreadLocalRandom.current().nextInt(100) + 1    // Rolls from 0 to 99, then we add 1 and it becomes 1 to 100
@@ -56,6 +56,10 @@ class RareItemLootGenerator {
 		chest.setDetailStf(StringId("loot_n", chestIdForTemplate(template) + "_d"))    // Not located in loot_d, for whatever reason...
 		
 		loot.add(chest)
+	}
+	
+	private fun isEligibleForRareLoot(corpseLevel: Int, killerLevel: Int): Boolean {
+		return abs(corpseLevel - killerLevel) <= MAX_LEVEL_DIFFERENCE || (killerLevel >= 85 && corpseLevel >= 90)
 	}
 	
 	private fun chestIdForTemplate(template: String): String {
