@@ -16,15 +16,7 @@ public class CmdLoot implements ICmdCallback {
 		if (!(target instanceof CreatureObject) || creature == null)
 			return;
 		
-		CreatureObject targetCreature = (CreatureObject) target;
-		SWGObject targetInventory = targetCreature.getSlottedObject("inventory");
-		if (targetInventory == null)
-			return;
-		
-		if (creature.isContainerOpen(targetInventory, "") || args.trim().equals("all"))
-			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT_ALL);
-		else
-			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT);
+		LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT_ALL);
 	}
 	
 }
