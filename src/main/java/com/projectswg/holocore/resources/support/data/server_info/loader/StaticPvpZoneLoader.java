@@ -69,6 +69,7 @@ public class StaticPvpZoneLoader extends DataLoader {
 			
 			location = Location.builder()
 					.setX(set.getInt("x"))
+					.setY(0)
 					.setZ(set.getInt("z"))
 					.setTerrain(Terrain.getTerrainFromName(set.getText("terrain")))
 					.build();
