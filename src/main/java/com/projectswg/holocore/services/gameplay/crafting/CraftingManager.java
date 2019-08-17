@@ -27,7 +27,7 @@
 package com.projectswg.holocore.services.gameplay.crafting;
 
 import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceService;
-import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyService;
+import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyToolService;
 import com.projectswg.holocore.services.gameplay.crafting.trade.TradeService;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
@@ -35,7 +35,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 @ManagerStructure(children = {
 		ResourceService.class,
 		
-		SurveyService.class,
+		SurveyToolService.class,
 		
 		TradeService.class
 })

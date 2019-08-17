@@ -26,7 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.resource;
 
-import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -34,133 +36,111 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 
 public class ResourceContainerObject extends TangibleObject {
 	
-	private long	resourceType	= 0;
-	private String	resourceName	= "";
-	private int		quantity		= 0;
-	private int		maxQuantity		= 0;
-	private String	parentName		= "";
-	private String	displayName		= "";
+	private final ResourceContainerObjectShared		base3	= new ResourceContainerObjectShared(this);
+	private final ResourceContainerObjectSharedNP	base6	= new ResourceContainerObjectSharedNP(this);
 	
 	public ResourceContainerObject(long objectId) {
 		super(objectId, BaselineType.RCNO);
 	}
 	
-	public long getResourceType() {
-		return resourceType;
+	@Override
+	public int getCounter() {
+		return base3.getQuantity();
 	}
 	
-	public String getResourceName() {
-		return resourceName;
+	@Override
+	public void setCounter(int counter) {
+		super.setCounter(counter);
+		base3.setQuantity(counter);
+	}
+	
+	@Override
+	public int getMaxCounter() {
+		return base6.getMaxQuantity();
 	}
 	
 	public int getQuantity() {
-		return quantity;
-	}
-	
-	public int getMaxQuantity() {
-		return maxQuantity;
-	}
-	
-	public String getParentName() {
-		return parentName;
-	}
-	
-	public String getDisplayName() {
-		return displayName;
-	}
-	
-	public void setResourceType(long resourceType) {
-		this.resourceType = resourceType;
-	}
-	
-	public void setResourceName(String resourceName) {
-		this.resourceName = resourceName;
+		return base3.getQuantity();
 	}
 	
 	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+		base3.setQuantity(quantity);
+	}
+	
+	public long getResourceType() {
+		return base3.getResourceType();
+	}
+	
+	public void setResourceType(long resourceType) {
+		base3.setResourceType(resourceType);
+	}
+	
+	public int getMaxQuantity() {
+		return base6.getMaxQuantity();
 	}
 	
 	public void setMaxQuantity(int maxQuantity) {
-		this.maxQuantity = maxQuantity;
+		base6.setMaxQuantity(maxQuantity);
+	}
+	
+	public String getParentName() {
+		return base6.getParentName();
 	}
 	
 	public void setParentName(String parentName) {
-		this.parentName = parentName;
+		base6.setParentName(parentName);
 	}
 	
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public String getResourceName() {
+		return base6.getResourceName();
+	}
+	
+	public void setResourceName(String resourceName) {
+		base6.setResourceName(resourceName);
+	}
+	
+	public StringId getResourceNameId() {
+		return base6.getResourceNameId();
+	}
+	
+	public void setResourceNameId(StringId resourceNameId) {
+		base6.setResourceNameId(resourceNameId);
 	}
 	
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		bb.addInt(quantity);
-		bb.addLong(resourceType);
-		bb.incrementOperandCount(2);
+		base3.createBaseline3(bb);
+	}
+	
+	@Override
+	public void parseBaseline3(NetBuffer data) {
+		base3.parseBaseline3(data);
 	}
 	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(maxQuantity);
-		bb.addAscii(parentName);
-		bb.addUnicode(resourceName);
-		bb.addLong(0); // Resource Id
-		bb.incrementOperandCount(4);
+		base6.createBaseline6(bb);
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		if (!(o instanceof ResourceContainerObject))
-			return super.equals(o);
-		ResourceContainerObject rcno = (ResourceContainerObject) o;
-		if (!super.equals(o))
-			return false;
-		return maxQuantity == rcno.maxQuantity && parentName.equals(rcno.parentName) && resourceName.equals(rcno.resourceName);
+	public void parseBaseline6(NetBuffer data) {
+		base6.parseBaseline6(data);
 	}
 	
 	@Override
-	public int hashCode() {
-		int hash = super.hashCode();
-		hash ^= maxQuantity;
-		hash ^= parentName.hashCode();
-		hash ^= resourceName.hashCode();
-		return hash;
-	}
-	
-	/*
-	private long	resourceType	= 0;
-	private String	resourceName	= "";
-	private int		quantity		= 0;
-	private int		maxQuantity		= 0;
-	private String	parentName		= "";
-	private String	displayName		= "";
-	 */
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		stream.addInt(quantity);
-		stream.addInt(maxQuantity);
-		stream.addLong(resourceType);
-		stream.addAscii(parentName);
-		stream.addUnicode(resourceName);
-		stream.addUnicode(displayName);
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		base3.saveMongo(data.getDocument("base3"));
+		base6.saveMongo(data.getDocument("base6"));
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		quantity = stream.getInt();
-		maxQuantity = stream.getInt();
-		resourceType = stream.getLong();
-		parentName = stream.getAscii();
-		resourceName = stream.getUnicode();
-		displayName = stream.getUnicode();
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		base3.readMongo(data.getDocument("base3"));
+		base6.readMongo(data.getDocument("base6"));
 	}
 	
 }

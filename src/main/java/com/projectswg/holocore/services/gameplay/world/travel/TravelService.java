@@ -43,8 +43,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelHelper;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -262,7 +261,7 @@ public class TravelService extends Service {
 	}
 	
 	private double getTicketPriceFactor() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
+		return PswgDatabase.INSTANCE.getConfig().getDouble(this, "ticketPriceFactor", 1);
 	}
 	
 	private void sendTravelMessage(CreatureObject creature, String message) {

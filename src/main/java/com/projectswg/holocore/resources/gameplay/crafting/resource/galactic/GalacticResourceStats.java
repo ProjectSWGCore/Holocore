@@ -26,12 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
 import java.util.Random;
 
-public class GalacticResourceStats implements Persistable {
+public class GalacticResourceStats implements Persistable, MongoPersistable {
 	
 	private int coldResistance;
 	private int conductivity;
@@ -75,6 +77,22 @@ public class GalacticResourceStats implements Persistable {
 	}
 	
 	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		this.coldResistance		= stream.getShort();
+		this.conductivity		= stream.getShort();
+		this.decayResistance	= stream.getShort();
+		this.entangleResistance	= stream.getShort();
+		this.flavor				= stream.getShort();
+		this.heatResistance		= stream.getShort();
+		this.malleability		= stream.getShort();
+		this.overallQuality		= stream.getShort();
+		this.potentialEnergy	= stream.getShort();
+		this.shockResistance	= stream.getShort();
+		this.unitToughness		= stream.getShort();
+	}
+	
+	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(0);
 		stream.addShort(coldResistance);
@@ -91,19 +109,33 @@ public class GalacticResourceStats implements Persistable {
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		this.coldResistance		= stream.getShort();
-		this.conductivity		= stream.getShort();
-		this.decayResistance	= stream.getShort();
-		this.entangleResistance	= stream.getShort();
-		this.flavor				= stream.getShort();
-		this.heatResistance		= stream.getShort();
-		this.malleability		= stream.getShort();
-		this.overallQuality		= stream.getShort();
-		this.potentialEnergy	= stream.getShort();
-		this.shockResistance	= stream.getShort();
-		this.unitToughness		= stream.getShort();
+	public void readMongo(MongoData data) {
+		coldResistance = (short) data.getInteger("coldResistance", coldResistance);
+		conductivity = (short) data.getInteger("conductivity", conductivity);
+		decayResistance = (short) data.getInteger("decayResistance", decayResistance);
+		entangleResistance = (short) data.getInteger("entangleResistance", entangleResistance);
+		flavor = (short) data.getInteger("flavor", flavor);
+		heatResistance = (short) data.getInteger("heatResistance", heatResistance);
+		malleability = (short) data.getInteger("malleability", malleability);
+		overallQuality = (short) data.getInteger("overallQuality", overallQuality);
+		potentialEnergy = (short) data.getInteger("potentialEnergy", potentialEnergy);
+		shockResistance = (short) data.getInteger("shockResistance", shockResistance);
+		unitToughness = (short) data.getInteger("unitToughness", unitToughness);
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putInteger("coldResistance", coldResistance);
+		data.putInteger("conductivity", conductivity);
+		data.putInteger("decayResistance", decayResistance);
+		data.putInteger("entangleResistance", entangleResistance);
+		data.putInteger("flavor", flavor);
+		data.putInteger("heatResistance", heatResistance);
+		data.putInteger("malleability", malleability);
+		data.putInteger("overallQuality", overallQuality);
+		data.putInteger("potentialEnergy", potentialEnergy);
+		data.putInteger("shockResistance", shockResistance);
+		data.putInteger("unitToughness", unitToughness);
 	}
 	
 	private int generateRandomNumber(Random random) {

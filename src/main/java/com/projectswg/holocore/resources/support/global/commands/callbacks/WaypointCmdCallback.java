@@ -166,7 +166,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (name == null || name.isEmpty())
 			name = "Waypoint";
 
-		ghost.addWaypoint(createWaypoint(color, name, location.build()));
+		if (!ghost.addWaypoint(createWaypoint(color, name, location.build())))
+			SystemMessageIntent.broadcastPersonal(player, "@base_player:too_many_waypoints");
 
 		if (differentPlanetMessage) {
 			new SystemMessageIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "

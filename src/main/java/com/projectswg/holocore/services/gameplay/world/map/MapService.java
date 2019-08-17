@@ -3,15 +3,15 @@ package com.projectswg.holocore.services.gameplay.world.map;
 import com.projectswg.common.data.encodables.map.MapLocation;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
-import com.projectswg.common.network.packets.PacketType;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.gameplay.world.map.MapCategory;
 import com.projectswg.holocore.resources.gameplay.world.map.MappingTemplate;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.PlanetMapCategoryLoader.PlanetMapCategoryInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapService extends Service {
 	
-	private final Map<String, MapCategory> mapCategories;
 	private final Map<String, MappingTemplate> mappingTemplates;
 
 	private final Map<String, List<MapLocation>> staticMapLocations; // ex: NPC cities and buildings
@@ -41,7 +40,6 @@ public class MapService extends Service {
 	private final AtomicInteger persistMapVersion = new AtomicInteger(1);
 	
 	public MapService() {
-		mapCategories = new HashMap<>();
 		mappingTemplates = new HashMap<>();
 
 		staticMapLocations = new ConcurrentHashMap<>();
@@ -49,7 +47,6 @@ public class MapService extends Service {
 		persistentMapLocations = new ConcurrentHashMap<>();
 		// Needs to be done here as ObjectManager is initialized before MapService otherwise there won't be any map locations
 		// for objects loaded from the databases, snapshots, buildouts.
-		loadMapCategories();
 		loadMappingTemplates();
 	}
 
@@ -88,22 +85,7 @@ public class MapService extends Service {
 
 		player.sendPacket(responseMessage);
 	}
-
-	private void loadMapCategories() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/planet_map_cat.iff");
-		for (int row = 0; row < table.getRowCount(); row++) {
-			MapCategory category = new MapCategory();
-			category.setName(table.getCell(row, 0).toString());
-			category.setIndex((Integer) table.getCell(row, 1));
-			category.setIsCategory(Boolean.valueOf(table.getCell(row, 2).toString()));
-			category.setIsSubCategory(Boolean.valueOf(table.getCell(row, 3).toString()));
-			category.setCanBeActive(Boolean.valueOf(table.getCell(row, 4).toString()));
-			category.setFaction(table.getCell(row, 5).toString());
-			category.setFactionVisibleOnly(Boolean.valueOf(table.getCell(row, 6).toString()));
-			mapCategories.put(category.getName(), category);
-		}
-	}
-
+	
 	private void loadMappingTemplates() {
 		DatatableData table = ServerFactory.getDatatable("map/map_locations.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
@@ -121,8 +103,10 @@ public class MapService extends Service {
 
 	private void loadStaticCityPoints() {
 		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
-
-		byte city = (byte) mapCategories.get("city").getIndex();
+		
+		PlanetMapCategoryInfo mapCategory = DataLoader.Companion.planetMapCategories().getCategoryByName("city");
+		assert mapCategory != null;
+		byte city = (byte) mapCategory.getIndex();
 		for (int row = 0; row < table.getRowCount(); row++) {
 			List<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0).toString());
 			if (locations == null) {
@@ -142,14 +126,13 @@ public class MapService extends Service {
 			return;
 
 		MappingTemplate mappingTemplate = mappingTemplates.get(object.getTemplate());
+		PlanetMapCategoryInfo category = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getCategory());
+		PlanetMapCategoryInfo subcategory = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getSubcategory());
 
 		MapLocation mapLocation = new MapLocation();
 		mapLocation.setName(mappingTemplate.getName());
-		mapLocation.setCategory((byte) mapCategories.get(mappingTemplate.getCategory()).getIndex());
-		if (mappingTemplate.getSubcategory() != null && !mappingTemplate.getSubcategory().isEmpty())
-			mapLocation.setSubcategory((byte) mapCategories.get(mappingTemplate.getSubcategory()).getIndex());
-		else
-			mapLocation.setSubcategory((byte) 0);
+		mapLocation.setCategory((byte) (category == null ? 0 : category.getIndex()));
+		mapLocation.setSubcategory((byte) (subcategory == null ? 0 : subcategory.getIndex()));
 		mapLocation.setX((float) object.getX());
 		mapLocation.setY((float) object.getZ());
 

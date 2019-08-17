@@ -13,9 +13,8 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.zone.ZoneRequester;
@@ -80,7 +79,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void sendMessageOfTheDay(Player player) {
-		String message = DataManager.getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
+		String message = PswgDatabase.INSTANCE.getConfig().getString(this, "firstZoneMessage", "");
 		
 		if(!message.isEmpty())	// If the message isn't nothing
 			new SystemMessageIntent(player, message).broadcast();	// Send it

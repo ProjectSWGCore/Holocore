@@ -26,25 +26,28 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.crafting.survey;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class StartSurveyToolIntent extends Intent {
 	
 	private final CreatureObject creature;
-	private final SWGObject surveyTool;
+	private final TangibleObject surveyTool;
 	
-	public StartSurveyToolIntent(CreatureObject creature, SWGObject surveyTool) {
+	public StartSurveyToolIntent(@NotNull CreatureObject creature, @NotNull TangibleObject surveyTool) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
 	}
 	
+	@NotNull
 	public CreatureObject getCreature() {
 		return creature;
 	}
 	
-	public SWGObject getSurveyTool() {
+	@NotNull
+	public TangibleObject getSurveyTool() {
 		return surveyTool;
 	}
 	

@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.test.runners;
 
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
@@ -39,7 +38,6 @@ public abstract class TestRunner {
 	public static void initializeStatic() {
 		Log.clearWrappers();
 		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
 	}
 	
 	protected static long getUniqueId() {

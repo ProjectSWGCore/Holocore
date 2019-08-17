@@ -29,16 +29,15 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class GalacticResourceSpawner {
 	
@@ -58,28 +57,16 @@ public class GalacticResourceSpawner {
 	
 	private final Random random;
 	private final AtomicLong resourceIdMax;
+	private final SWGNameGenerator resourceNameGenerator;
 	
 	public GalacticResourceSpawner() {
 		this.random = new Random();
+		this.resourceNameGenerator = new SWGNameGenerator();
 		this.resourceIdMax = new AtomicLong(0);
 	}
 	
-	public static void main(String [] args) {
-		Log.addWrapper(new ConsoleLogWrapper());
-		DataManager.initialize();
-		RawResourceContainer container = new RawResourceContainer();
-		container.loadResources();
-		for (RawResource rawResource : container.getResources()) {
-			GalacticResourceContainer.getContainer().addRawResource(rawResource);
-		}
-		GalacticResourceSpawner spawner = new GalacticResourceSpawner();
-		spawner.initialize();
-		spawner.terminate();
-		DataManager.terminate();
-	}
-	
 	public void initialize() {
-		loadOldResources();
+		loadResources();
 		updateAllResources();
 	}
 	
@@ -92,39 +79,22 @@ public class GalacticResourceSpawner {
 		updateUnusedPools();
 	}
 	
-	private void loadOldResources() {
-		loadOldGalacticResources();
-		loadOldGalacticResourceSpawns();
-	}
-	
-	private void loadOldGalacticResources() {
-		GalacticResourceLoader loader = new GalacticResourceLoader();
+	private void loadResources() {
 		long startTime = StandardLog.onStartLoad("galactic resources");
-		List<GalacticResource> resources = loader.loadResources();
-		for (GalacticResource resource : resources) {
-			resource.setRawResource(GalacticResourceContainer.getContainer().getRawResource(resource.getRawResourceId()));
+		int resourceCount = 0;
+		for (GalacticResource resource : PswgDatabase.INSTANCE.getResources().getResources()) {
 			GalacticResourceContainer.getContainer().addGalacticResource(resource);
 			if (resource.getId() > resourceIdMax.get())
 				resourceIdMax.set(resource.getId());
+			resourceCount++;
 		}
-		StandardLog.onEndLoad(resources.size(), "galactic resources", startTime);
-	}
-	
-	private void loadOldGalacticResourceSpawns() {
-		GalacticResourceLoader loader = new GalacticResourceLoader();
-		long startTime = StandardLog.onStartLoad("galactic spawns");
-		List<GalacticResourceSpawn> spawns = loader.loadSpawns();
-		for (GalacticResourceSpawn spawn: spawns) {
-			if (!spawn.isExpired())
-				GalacticResourceContainer.getContainer().addResourceSpawn(spawn);
-		}
-		StandardLog.onEndLoad(spawns.size(), "galactic spawns", startTime);
+		StandardLog.onEndLoad(resourceCount, "galactic resources", startTime);
 	}
 	
 	private void saveResources() {
 		GalacticResourceLoader loader = new GalacticResourceLoader();
 		loader.saveResources(GalacticResourceContainer.getContainer().getAllResources());
-		loader.saveSpawns(GalacticResourceContainer.getContainer().getAllResourceSpawns());
+		PswgDatabase.INSTANCE.getResources().setResources(GalacticResourceContainer.getContainer().getAllResources());
 	}
 	
 	private void updateUnusedPools() {
@@ -172,42 +142,29 @@ public class GalacticResourceSpawner {
 	
 	private GalacticResource createNewResource(RawResource raw) {
 		long newId = resourceIdMax.incrementAndGet();
-		String newName = createRandomName(raw) + ' ' + newId;
-		GalacticResource resource = new GalacticResource(newId, newName, raw.getId());
-		resource.setRawResource(raw);
-		GalacticResourceContainer.getContainer().addGalacticResource(resource);
+		GalacticResource resource;
+		do {
+			String newName = resourceNameGenerator.generateName("resources");
+			resource = new GalacticResource(newId, newName, raw.getId());
+			resource.setRawResource(raw);
+		} while (!GalacticResourceContainer.getContainer().addGalacticResource(resource));
 		return resource;
 	}
 	
 	private void createNewSpawn(GalacticResource resource, Terrain terrain) {
 		GalacticResourceSpawn spawn = new GalacticResourceSpawn(resource.getId());
 		spawn.setRandomValues(terrain);
-		GalacticResourceContainer.getContainer().addResourceSpawn(spawn);
-	}
-	
-	private String createRandomName(RawResource raw) {
-		return raw.getName().getKey();
+		resource.addSpawn(spawn);
 	}
 	
 	private void updateSpawns() {
-		List<GalacticResource> resources = GalacticResourceContainer.getContainer().getSpawnedResources();
+		List<GalacticResource> resources = GalacticResourceContainer.getContainer().getAllResources();
 		for (GalacticResource resource : resources) {
-			updateResourceSpawns(resource);
-		}
-	}
-	
-	private void updateResourceSpawns(GalacticResource resource) {
-		for (Terrain terrain : BASE_PLANETS) {
-			updateResourceTerrainSpawns(resource, terrain);
-		}
-	}
-	
-	private void updateResourceTerrainSpawns(GalacticResource resource, Terrain terrain) {
-		List<GalacticResourceSpawn> spawns = GalacticResourceContainer.getContainer().getTerrainResourceSpawns(resource, terrain);
-		// Remove expired spawns
-		List<GalacticResourceSpawn> expired = spawns.stream().filter(GalacticResourceSpawn::isExpired).collect(Collectors.toList());
-		for (GalacticResourceSpawn spawn : expired) {
-			GalacticResourceContainer.getContainer().removeResourceSpawn(spawn);
+			List<GalacticResourceSpawn> spawns = resource.getSpawns();
+			if (spawns.isEmpty())
+				continue;
+			List<GalacticResourceSpawn> expired = spawns.stream().filter(GalacticResourceSpawn::isExpired).collect(toList());
+			expired.forEach(resource::removeSpawn);
 		}
 	}
 	

@@ -1,13 +1,34 @@
-image: openjdk:10-jdk-slim
-
 pipelines:
   default:
     - step:
-        caches:
-          - gradle
-        image: openjdk:10-jdk-slim
+        name: fetch code
+        image: alpine/git
         script:
-          - apt-get update
-          - apt-get install -y git
           - git submodule update --init
-          - ./gradlew shadowJar
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
+    - step:
+        name: test, build, and deploy
+        image: openjdk:12
+        caches:
+          - docker
+          - gradle
+          - gradlewrapper
+        script:
+          - ./gradlew test
+          - ./gradlew jlink
+          - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+          - docker build -t $DOCKER_HUB_REPO/holocore:$BITBUCKET_BRANCH .
+          - docker push $DOCKER_HUB_REPO/holocore:$BITBUCKET_BRANCH
+        artifacts:
+          - pswgcommon/**
+          - client-holocore/**
+          - .gradle/**
+          - build/**
+        services:
+          - docker
+
+definitions:
+  caches:
+    gradlewrapper: ~/.gradle/wrapper

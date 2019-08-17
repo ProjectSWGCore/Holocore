@@ -26,24 +26,26 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-import com.projectswg.common.utilities.TimeUtilities;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class GalacticResourceSpawn implements Persistable {
+public class GalacticResourceSpawn implements Persistable, MongoPersistable {
 	
 	private static final int	MAP_SIZE						= 16384;
 	private static final int	MUST_MAP_SIZE					= 8000;
 	private static final int	KASH_MAP_SIZE					= 8192;
-	private static final double	POSITION_GAUSSIAN_FACTOR		= MAP_SIZE / 2 * Math.sqrt(2);
-	private static final double	POSITION_MUST_GAUSSIAN_FACTOR	= MUST_MAP_SIZE / 2 * Math.sqrt(2);
-	private static final double	POSITION_KASH_GAUSSIAN_FACTOR	= KASH_MAP_SIZE / 2 * Math.sqrt(2);
+	private static final double	POSITION_GAUSSIAN_FACTOR		= MAP_SIZE / 2d * Math.sqrt(2);
+	private static final double	POSITION_MUST_GAUSSIAN_FACTOR	= MUST_MAP_SIZE / 2d * Math.sqrt(2);
+	private static final double	POSITION_KASH_GAUSSIAN_FACTOR	= KASH_MAP_SIZE / 2d * Math.sqrt(2);
 	
 	// Resource-based
 	private long resourceId;
@@ -55,19 +57,28 @@ public class GalacticResourceSpawn implements Persistable {
 	private int z;
 	private int radius;
 	// Time-based
-	private long startTime;
-	private long endTime;
+	private Instant startTime;
+	private Instant endTime;
 	
 	public GalacticResourceSpawn() {
-		
+		this.resourceId = 0;
+		this.minConcentration = 0;
+		this.maxConcentration = 0;
+		this.terrain = null;
+		this.x = 0;
+		this.z = 0;
+		this.radius = 0;
+		this.startTime = Instant.EPOCH;
+		this.endTime = Instant.EPOCH;
 	}
 	
 	public GalacticResourceSpawn(long resourceId) {
+		this();
 		this.resourceId = resourceId;
 	}
 	
 	public void setRandomValues(Terrain terrain) {
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		
 		this.minConcentration = random.nextInt(50);
 		this.maxConcentration = calculateRandomMaxConcentration(random, minConcentration);
@@ -78,8 +89,8 @@ public class GalacticResourceSpawn implements Persistable {
 		
 		int minSpawnTime = getMinSpawnTime();
 		int maxSpawnTime = getMaxSpawnTime();
-		this.startTime = TimeUtilities.getTime();
-		this.endTime = startTime + TimeUnit.DAYS.toMillis(random.nextInt(maxSpawnTime - minSpawnTime) + minSpawnTime);
+		this.startTime = Instant.now();
+		this.endTime = startTime.plus(random.nextInt(minSpawnTime, maxSpawnTime), ChronoUnit.DAYS);
 	}
 	
 	public long getResourceId() {
@@ -110,11 +121,11 @@ public class GalacticResourceSpawn implements Persistable {
 		return radius;
 	}
 	
-	public long getStartTime() {
+	public Instant getStartTime() {
 		return startTime;
 	}
 	
-	public long getEndTime() {
+	public Instant getEndTime() {
 		return endTime;
 	}
 	
@@ -128,23 +139,23 @@ public class GalacticResourceSpawn implements Persistable {
 	}
 	
 	public boolean isExpired() {
-		return TimeUtilities.getTime() > endTime;
+		return Instant.now().isAfter(endTime);
 	}
 	
 	private int getMinSpawnTime() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MIN-SPAWN-TIME", 7);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMinSpawnTime", 7);
 	}
 	
 	private int getMaxSpawnTime() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-TIME", 21);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMaxSpawnTime", 21);
 	}
 	
 	private int getMinRadius() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MIN-SPAWN-RADIUS", 200);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMinSpawnRadius", 200);
 	}
 	
 	private int getMaxRadius() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("RESOURCES-MAX-SPAWN-RADIUS", 500);
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "resourceMaxSpawnRadius", 500);
 	}
 	
 	private int calculateRandomMaxConcentration(Random random, int min) {
@@ -189,23 +200,6 @@ public class GalacticResourceSpawn implements Persistable {
 	}
 	
 	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		// Resource
-		stream.addLong(resourceId);
-		stream.addInt(minConcentration);
-		stream.addInt(maxConcentration);
-		// Location
-		stream.addAscii(terrain.name());
-		stream.addInt(x);
-		stream.addInt(z);
-		stream.addInt(radius);
-		// Time
-		stream.addLong(startTime);
-		stream.addLong(endTime);
-	}
-	
-	@Override
 	public void read(NetBufferStream stream) {
 		stream.getByte();
 		// Resource
@@ -218,10 +212,71 @@ public class GalacticResourceSpawn implements Persistable {
 		this.z = stream.getInt();
 		this.radius = stream.getInt();
 		// Time
-		this.startTime = stream.getLong();
-		this.endTime = stream.getLong();
+		this.startTime = Instant.ofEpochMilli(stream.getLong());
+		this.endTime = Instant.ofEpochMilli(stream.getLong());
 	}
-
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		// Resource
+		stream.addLong(resourceId);
+		stream.addInt(minConcentration);
+		stream.addInt(maxConcentration);
+		// Location
+		stream.addAscii(terrain.name());
+		stream.addInt(x);
+		stream.addInt(z);
+		stream.addInt(radius);
+		// Time
+		stream.addLong(startTime.toEpochMilli());
+		stream.addLong(endTime.toEpochMilli());
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		{
+			MongoData resource = data.getDocument("resource");
+			resourceId = resource.getLong("id", resourceId);
+			minConcentration = resource.getInteger("minConcentration", minConcentration);
+			maxConcentration = resource.getInteger("maxConcentration", maxConcentration);
+		}
+		{
+			MongoData location = data.getDocument("location");
+			terrain = Terrain.valueOf(location.getString("terrain", Terrain.TATOOINE.name()));
+			x = location.getInteger("x", x);
+			z = location.getInteger("z", z);
+			radius = location.getInteger("radius", radius);
+		}
+		{
+			MongoData time = data.getDocument("time");
+			startTime = time.getDate("start", Instant.EPOCH);
+			endTime = time.getDate("end", Instant.EPOCH);
+		}
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		{
+			MongoData resource = data.getDocument("resource");
+			resource.putLong("id", resourceId);
+			resource.putInteger("minConcentration", minConcentration);
+			resource.putInteger("maxConcentration", maxConcentration);
+		}
+		{
+			MongoData location = data.getDocument("location");
+			location.putString("terrain", terrain.name());
+			location.putInteger("x", x);
+			location.putInteger("z", z);
+			location.putInteger("radius", radius);
+		}
+		{
+			MongoData time = data.getDocument("time");
+			time.putDate("start", startTime);
+			time.putDate("end", endTime);
+		}
+	}
+	
 	private double getDistance(Terrain terrain, double x, double z) {
 		if (this.terrain != terrain)
 			return Double.MAX_VALUE;

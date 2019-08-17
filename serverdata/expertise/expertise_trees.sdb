@@ -1,0 +1,33 @@
+expertise_tree_id	expertise_tree_string_id	ui_background_id
+INTEGER	STRING	STRING
+1	expertise_tree_bh_general	left
+2	expertise_tree_bh_path	left_bounty_hunter
+3	expertise_tree_bh_warfare	
+4	expertise_tree_fs_general	left
+5	expertise_tree_fs_path	left_jedi
+6	expertise_tree_fs_warfare	
+7	expertise_tree_sm_general	left
+8	expertise_tree_sm_path	left_smuggler
+9	expertise_tree_sm_warfare	
+10	expertise_tree_of_general	left
+11	expertise_tree_of_path	left_officer
+12	expertise_tree_of_warfare	
+13	expertise_tree_co_path	left_commando
+14	expertise_tree_co_general	left
+15	expertise_tree_co_warfare	
+16	expertise_tree_me_general	left
+17	expertise_tree_me_path	left_medic
+18	expertise_tree_me_warfare	
+19	expertise_tree_sp_general	left
+20	expertise_tree_sp_path	left_spy
+21	expertise_tree_sp_warfare	
+22	expertise_tree_en_general	left
+23	expertise_tree_en_path	left_entertainer
+24	expertise_tree_en_warfare	
+25	expertise_tree_trader_domestic	left_trader
+26	expertise_tree_trader_structure	left_trader
+27	expertise_tree_trader_munition	left_trader
+28	expertise_tree_trader_engineer	left_trader
+29	expertise_tree_trader_general	left
+30	expertise_tree_beastmaster	left_beastmaster
+99	expertise_tree_test	

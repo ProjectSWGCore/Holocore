@@ -858,7 +858,7 @@ patrol_tat_10600	patrol_tat_10600	LOOP	TATOOINE	tat_world	0	-3123.4	5.0	2306.5	0
 patrol_tat_10601	patrol_tat_10600		TATOOINE	tat_world	0	-3137.9	5.0	2301.2	0	
 patrol_tat_10602	patrol_tat_10600		TATOOINE	tat_world	0	-3140.8	5.0	2274.9	0	
 patrol_tat_10603	patrol_tat_10600		TATOOINE	tat_world	0	-3124.8	5.0	2260.3	0	
-patrol_tat_10604	patrol_tat_10600		TATOOINE	tat_world	0	-3958.9	5.0	2278.6	0	
+patrol_tat_10604	patrol_tat_10600		TATOOINE	tat_world	0	-3058.9	5.0	2278.6	0	
 patrol_tat_10605	patrol_tat_10600		TATOOINE	tat_world	0	-3073.2	5.0	2319.3	0	
 patrol_tat_10700	patrol_tat_10700	LOOP	TATOOINE	tat_world	0	-3157.4	5.0	2210.5	0	Mos Espa - a Mos Espa security officer
 patrol_tat_10701	patrol_tat_10700		TATOOINE	tat_world	0	-3187.9	5.0	2300.0	0	
@@ -1111,3 +1111,14 @@ patrol_tat_15602	patrol_tat_15600		TATOOINE	tat_world	0	3856.8	15.1	2283.3	0
 patrol_tat_15603	patrol_tat_15600		TATOOINE	tat_world	0	3845.0	5.5	2232.5	0	
 patrol_tat_15604	patrol_tat_15600		TATOOINE	tat_world	0	3902.8	29.9	2258.7	0	
 patrol_tat_15605	patrol_tat_15600		TATOOINE	tat_world	0	3931.1	47.8	2265.8	0	
+patrol_tat_15700	patrol_tat_15700	LOOP	TATOOINE	tat_world	0	3540.4	5.0	-4900.2	0	Mos Eisley - an EG-6 power droid
+patrol_tat_15700	patrol_tat_15701		TATOOINE	tat_world	0	3514.6	5.0	-4885.6	0	
+patrol_tat_15700	patrol_tat_15702		TATOOINE	tat_world	0	3495.8	5.5	-4912.5	0	
+patrol_tat_15700	patrol_tat_15703		TATOOINE	tat_world	0	3491.4	5.5	-4920.1	0	
+patrol_tat_15700	patrol_tat_15704		TATOOINE	tat_world	0	3482.7	5.5	-4919.6	0	
+patrol_tat_15700	patrol_tat_15705		TATOOINE	tat_world	0	3490.8	5.5	-4970.7	0	
+patrol_tat_15700	patrol_tat_15706		TATOOINE	tat_world	0	3501.6	5.5	-4971.0	0	
+patrol_tat_15700	patrol_tat_15707		TATOOINE	tat_world	0	3513.1	5.0	-5001.0	0	
+patrol_tat_15700	patrol_tat_15708		TATOOINE	tat_world	0	3527.9	5.0	-4999.6	0	
+patrol_tat_15700	patrol_tat_15709		TATOOINE	tat_world	0	3565.9	5.0	-4950.5	0	
+patrol_tat_15700	patrol_tat_15710		TATOOINE	tat_world	0	3570.7	5.0	-4927.6	0	

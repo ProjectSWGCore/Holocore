@@ -31,18 +31,20 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
@@ -50,15 +52,16 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Bui
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Calendar;
+import java.time.Instant;
+import java.util.List;
 
 public class CharacterCreation {
 	
-	private final ProfTemplateData templateData;
+	private final Player player;
 	private final ClientCreateCharacter create;
 	
-	public CharacterCreation(ProfTemplateData templateData, ClientCreateCharacter create) {
-		this.templateData = templateData;
+	public CharacterCreation(Player player, ClientCreateCharacter create) {
+		this.player = player;
 		this.create = create;
 	}
 	
@@ -70,9 +73,11 @@ public class CharacterCreation {
 		setCreatureObjectValues(creatureObj);
 		setPlayerObjectValues(playerObj);
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
-		createStarterClothing(creatureObj, create.getRace());
+		createStarterClothing(creatureObj, create.getRace(), create.getClothes());
 		playerObj.setAdminTag(accessLevel);
-		new ObjectCreatedIntent(creatureObj).broadcast();
+		
+		ObjectCreatedIntent.broadcast(playerObj);
+		ObjectCreatedIntent.broadcast(creatureObj);
 		return creatureObj;
 	}
 	
@@ -82,6 +87,7 @@ public class CharacterCreation {
 			return createCreatureBuilding(template, info);
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		assert obj instanceof CreatureObject;
+		obj.setPersisted(true);
 		obj.setLocation(generateRandomLocation(info));
 		return (CreatureObject) obj;
 	}
@@ -105,7 +111,6 @@ public class CharacterCreation {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate("object/player/shared_player.iff");
 		assert obj instanceof PlayerObject;
 		obj.moveToContainer(creatureObj);
-		new ObjectCreatedIntent(obj).broadcast();
 		return (PlayerObject) obj;
 	}
 	
@@ -164,14 +169,17 @@ public class CharacterCreation {
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj) {
-		playerObj.setProfession(create.getProfession());
-		Calendar date = Calendar.getInstance();
-		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
+		playerObj.setProfession(Profession.getProfessionFromClient(create.getProfession()));
+		playerObj.setBornDate(Instant.now());
+		playerObj.setAccount(player.getUsername());
 	}
 	
-	private void createStarterClothing(CreatureObject creature, String race) {
-		for (String template : templateData.getItems(ClientFactory.formatToSharedFile(race))) {
-			createDefaultObject(creature, template);
+	private void createStarterClothing(CreatureObject creature, String race, String clothing) {
+		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(Race.getRaceByFile(race), clothing);
+		if (items != null) {
+			for (String itemTemplate : items) {
+				createDefaultObject(creature, itemTemplate);
+			}
 		}
 		
 		SWGObject inventory = creature.getSlottedObject("inventory");

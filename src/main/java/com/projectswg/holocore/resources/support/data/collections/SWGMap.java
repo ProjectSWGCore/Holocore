@@ -96,8 +96,10 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	@Override
 	public V remove(@NotNull Object key) {
 		V old = super.remove(key);
-		updateCount.incrementAndGet();
-		removeData(key);
+		if (old != null) {
+			updateCount.incrementAndGet();
+			removeData(key);
+		}
 		
 		return old;
 	}
@@ -108,13 +110,11 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	 * used after changing values for an item in this super.
 	 * 
 	 * @param key Associated key with the value that was modified.
-	 * @param target The parent of this map, who the map is bound to in order to send the delta
 	 */
-	public void update(Object key, SWGObject target) {
+	public void update(Object key) {
 		updateCount.incrementAndGet();
 		removeDataSize(key); // remove the size of the prior data
 		addData(key, super.get(key), (byte) 2);
-		sendDeltaMessage(target);
 	}
 	
 	@Override
@@ -277,6 +277,8 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		byte [] value;
 		synchronized (data) {
 			value = data.remove(key);
+			if (value == null)
+				return;
 			dataSize -= value.length;
 		}
 		
@@ -285,7 +287,9 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	private void removeDataSize(Object key) {
 		synchronized (data) {
-			dataSize -= data.get(key).length;
+			byte [] removed = data.get(key);
+			if (removed != null)
+				dataSize -= removed.length;
 		}
 	}
 	

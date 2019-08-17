@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.spawn;
 
-import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -35,8 +34,8 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.DetailNpcStatInfo;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStatLoader.NpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.DetailNpcStatInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
 import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
@@ -61,7 +60,7 @@ public class NPCCreator {
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		
-		NpcStatInfo npcStats = DataLoader.npcStats().getNpcStats(combatLevel);
+		NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(combatLevel);
 		DetailNpcStatInfo detailNpcStat = getDetailedNpcStats(npcStats, spawner.getDifficulty());
 		object.setSpawner(spawner);
 		object.systemMove(spawner.getEgg().getParent(), behaviorLocation(spawner));
@@ -80,7 +79,7 @@ public class NPCCreator {
 		int hue = spawner.getHue();
 		if (hue != 0) {
 			// No reason to add color customization if the value is default anyways
-			object.putCustomization("/private/index_color_1", new CustomizationVariable(hue));
+			object.putCustomization("/private/index_color_1", hue);
 		}
 		
 		// Assign weapons
@@ -209,7 +208,7 @@ public class NPCCreator {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
 			weapon.setMinDamage((int) (detailNpcStat.getDamagePerSecond() * 2 * 0.90));
 			weapon.setMaxDamage(detailNpcStat.getDamagePerSecond() * 2);
-			int range = DataLoader.npcWeaponRanges().getWeaponRange(template);
+			int range = DataLoader.Companion.npcWeaponRanges().getWeaponRange(template);
 			if (range == -1)
 				Log.w("Failed to load weapon range for: %s", template);
 			weapon.setMinRange(range);

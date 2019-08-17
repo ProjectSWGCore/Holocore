@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.world.travel;
 
-import com.projectswg.common.data.customization.CustomizationVariable;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
@@ -40,11 +39,10 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -55,7 +53,6 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
@@ -211,7 +208,7 @@ public class PlayerMountService extends Service {
 	
 	private void generateVehicle(CreatureObject creator, SWGObject deed) {
 		String pcdTemplate = pcdForVehicleDeed(deed.getTemplate());
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromPcdIff(pcdTemplate);
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromPcdIff(pcdTemplate);
 		if (vehicleInfo == null) {
 			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.getTemplate());
 			return;
@@ -261,27 +258,27 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
 			mount.setRunSpeed(vehicleInfo.getSpeed());
 			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
 			mount.setTurnScale(vehicleInfo.getTurnRateMax());
 			mount.setAccelScale(vehicleInfo.getAccelMax());
-			mount.putCustomization("/private/index_speed_max", new CustomizationVariable((int) (vehicleInfo.getSpeed() * 10d)));
-			mount.putCustomization("/private/index_speed_min", new CustomizationVariable((int) (vehicleInfo.getMinSpeed() * 10d)));
-			mount.putCustomization("/private/index_turn_rate_min", new CustomizationVariable(vehicleInfo.getTurnRate()));
-			mount.putCustomization("/private/index_turn_rate_max", new CustomizationVariable(vehicleInfo.getTurnRateMax()));
-			mount.putCustomization("/private/index_accel_min", new CustomizationVariable((int) (vehicleInfo.getAccelMin() * 10d)));
-			mount.putCustomization("/private/index_accel_max", new CustomizationVariable((int) (vehicleInfo.getAccelMax() * 10d)));
-			mount.putCustomization("/private/index_decel", new CustomizationVariable((int) (vehicleInfo.getDecel() * 10d)));
-			mount.putCustomization("/private/index_damp_roll", new CustomizationVariable((int) (vehicleInfo.getDampingRoll() * 10d)));
-			mount.putCustomization("/private/index_damp_pitch", new CustomizationVariable((int) (vehicleInfo.getDampingPitch() * 10d)));
-			mount.putCustomization("/private/index_damp_height", new CustomizationVariable((int) (vehicleInfo.getDampingHeight() * 10d)));
-			mount.putCustomization("/private/index_glide", new CustomizationVariable((int) (vehicleInfo.getGlide() * 10d)));
-			mount.putCustomization("/private/index_banking", new CustomizationVariable((int) vehicleInfo.getBankingAngle()));
-			mount.putCustomization("/private/index_hover_height", new CustomizationVariable((int) (vehicleInfo.getHoverHeight() * 10d)));
-			mount.putCustomization("/private/index_auto_level", new CustomizationVariable((int) (vehicleInfo.getAutoLevel() * 100d)));
-			mount.putCustomization("/private/index_strafe", new CustomizationVariable(vehicleInfo.isStrafe() ? 1 : 0));
+			mount.putCustomization("/private/index_speed_max", (int) (vehicleInfo.getSpeed() * 10d));
+			mount.putCustomization("/private/index_speed_min", (int) (vehicleInfo.getMinSpeed() * 10d));
+			mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.getTurnRate());
+			mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.getTurnRateMax());
+			mount.putCustomization("/private/index_accel_min", (int) (vehicleInfo.getAccelMin() * 10d));
+			mount.putCustomization("/private/index_accel_max", (int) (vehicleInfo.getAccelMax() * 10d));
+			mount.putCustomization("/private/index_decel", (int) (vehicleInfo.getDecel() * 10d));
+			mount.putCustomization("/private/index_damp_roll", (int) (vehicleInfo.getDampingRoll() * 10d));
+			mount.putCustomization("/private/index_damp_pitch", (int) (vehicleInfo.getDampingPitch() * 10d));
+			mount.putCustomization("/private/index_damp_height", (int) (vehicleInfo.getDampingHeight() * 10d));
+			mount.putCustomization("/private/index_glide", (int) (vehicleInfo.getGlide() * 10d));
+			mount.putCustomization("/private/index_banking", (int) vehicleInfo.getBankingAngle());
+			mount.putCustomization("/private/index_hover_height", (int) (vehicleInfo.getHoverHeight() * 10d));
+			mount.putCustomization("/private/index_auto_level", (int) (vehicleInfo.getAutoLevel() * 100d));
+			mount.putCustomization("/private/index_strafe", vehicleInfo.isStrafe() ? 1 : 0);
 		}
 		
 		ObjectCreatedIntent.broadcast(mount);
@@ -330,7 +327,7 @@ public class PlayerMountService extends Service {
 		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
 		mount.setPosture(Posture.DRIVING_VEHICLE);
 		
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
 			if (!vehicleInfo.getPlayerBuff().isEmpty())
 				BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, player, false);
@@ -362,7 +359,7 @@ public class PlayerMountService extends Service {
 		}
 		
 		
-		VehicleInfo vehicleInfo = DataLoader.vehicles().getVehicleFromIff(mount.getTemplate());
+		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (player.getParent() == mount)
 			dismount(player, mount, vehicleInfo);
 		
@@ -437,12 +434,12 @@ public class PlayerMountService extends Service {
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
-	private static boolean isMountable(CreatureObject mount) {
-		return mount.hasOptionFlags(OptionFlag.MOUNT);
+	private int getMountLimit() {
+		return PswgDatabase.INSTANCE.getConfig().getInt(this, "mountLimit", 1);
 	}
 	
-	private static int getMountLimit() {
-		return DataManager.getConfig(ConfigFile.FEATURES).getInt("MOUNT-LIMIT", 1);
+	private static boolean isMountable(CreatureObject mount) {
+		return mount.hasOptionFlags(OptionFlag.MOUNT);
 	}
 	
 	private static class Mount {

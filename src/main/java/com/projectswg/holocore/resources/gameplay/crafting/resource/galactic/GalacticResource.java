@@ -26,13 +26,29 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
+import com.projectswg.common.data.encodables.mongo.MongoPersistable;
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
+import org.jetbrains.annotations.NotNull;
 
-public class GalacticResource implements Persistable {
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+
+public class GalacticResource implements Persistable, MongoPersistable {
 	
 	private final GalacticResourceStats stats;
+	private final List<GalacticResourceSpawn> spawns;
+	private final Map<Terrain, List<GalacticResourceSpawn>> terrainSpawns;
 	
 	private long id;
 	private String name;
@@ -44,11 +60,14 @@ public class GalacticResource implements Persistable {
 	}
 	
 	public GalacticResource(long id, String name, long rawResourceId) {
+		this.stats = new GalacticResourceStats();
+		this.spawns = new CopyOnWriteArrayList<>();
+		this.terrainSpawns = new ConcurrentHashMap<>();
+		
 		this.id = id;
 		this.name = name;
 		this.rawId = rawResourceId;
 		this.rawResource = null;
-		this.stats = new GalacticResourceStats();
 	}
 	
 	public void generateRandomStats() {
@@ -75,8 +94,41 @@ public class GalacticResource implements Persistable {
 		return stats;
 	}
 	
+	public List<GalacticResourceSpawn> getSpawns() {
+		return Collections.unmodifiableList(spawns);
+	}
+	
+	public List<GalacticResourceSpawn> getSpawns(Terrain terrain) {
+		List<GalacticResourceSpawn> spawns = terrainSpawns.get(terrain);
+		return spawns == null ? List.of() : Collections.unmodifiableList(spawns);
+	}
+	
 	public void setRawResource(RawResource rawResource) {
 		this.rawResource = rawResource;
+	}
+	
+	public void addSpawn(@NotNull GalacticResourceSpawn spawn) {
+		spawns.add(spawn);
+		terrainSpawns.computeIfAbsent(spawn.getTerrain(), s -> new CopyOnWriteArrayList<>()).add(spawn);
+	}
+	
+	public void removeSpawn(@NotNull GalacticResourceSpawn spawn) {
+		spawns.remove(spawn);
+		terrainSpawns.compute(spawn.getTerrain(), (t, spawns) -> {
+			if (spawns == null)
+				return null;
+			spawns.remove(spawn);
+			return spawns.isEmpty() ? null : spawns;
+		});
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		id = stream.getLong();
+		name = stream.getAscii();
+		rawId = stream.getLong();
+		stats.read(stream);
 	}
 	
 	@Override
@@ -89,12 +141,25 @@ public class GalacticResource implements Persistable {
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		id = stream.getLong();
-		name = stream.getAscii();
-		rawId = stream.getLong();
-		stats.read(stream);
+	public void readMongo(MongoData data) {
+		spawns.clear();
+		terrainSpawns.clear();
+		
+		id = data.getLong("id", id);
+		name = data.getString("name", name);
+		rawId = data.getLong("rawId", rawId);
+		data.getDocument("stats", stats);
+		spawns.addAll(data.getArray("spawns", (Supplier<GalacticResourceSpawn>) GalacticResourceSpawn::new));
+		terrainSpawns.putAll(spawns.stream().collect(groupingBy(GalacticResourceSpawn::getTerrain)));
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putLong("id", id);
+		data.putString("name", name);
+		data.putLong("rawId", rawId);
+		data.putDocument("stats", stats);
+		data.putArray("spawns", spawns);
 	}
 	
 	@Override

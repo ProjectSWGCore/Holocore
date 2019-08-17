@@ -46,7 +46,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Travel");
 				listBox.addListItem("Vehicles");
 				listBox.addListItem("Powerups");
-				listBox.addListItem("5* Sets");
+				listBox.addListItem("Heroic Jewelry Sets");
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -592,7 +592,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Tusken Raider equipment");
 		listBox.addListItem("Wookie equipment");
 		listBox.addListItem("TCG");
-		
+
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleWearablesSelection", (event, parameters) -> handleWearablesSelection(player, parameters));
 		listBox.display(player);
 	}
@@ -1382,7 +1382,14 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		String [] items = new String[]{
 			"object/tangible/deed/vehicle_deed/shared_barc_speeder_deed.iff",
 			"object/tangible/deed/vehicle_deed/shared_mustafar_panning_droid.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_ab1_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_av21_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_desert_skiff_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_lava_skiff_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_usv5_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_v35_deed.iff",
 			"object/tangible/deed/vehicle_deed/shared_speederbike_swoop_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_xp38_deed.iff",
 			"object/tangible/deed/vehicle_deed/shared_landspeeder_tantive4_deed.iff"
 		};
 		for (String item : items) {
@@ -1401,39 +1408,29 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleJewelrySets(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of jewelry to receive.");
 		
-		listBox.addListItem("Bounty Hunter - Enforcer's Set");
+		listBox.addListItem("Heroism set");
 		
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSetSelection", (event, parameters) -> handleJewelrySelection(player, parameters));
 		listBox.display(player);
 	}
-	
+
 	private static void handleJewelrySelection(Player player, Map<String, String> parameters) {
-		int selectedRow = SuiListBox.getSelectedRow(parameters);
-		
-		switch (selectedRow) {
-			case 0:
-				CreatureObject creatureObject = player.getCreatureObject();
-				SWGObject inventory = creatureObject.getInventory();
-				
-				enforcersSetPiece(inventory, "object/tangible/wearables/ring/shared_ring_s01.iff");
-				enforcersSetPiece(inventory, "object/tangible/wearables/ring/shared_ring_s03.iff");
-				enforcersSetPiece(inventory, "object/tangible/wearables/necklace/shared_necklace_s01.iff");
-				enforcersSetPiece(inventory, "object/tangible/wearables/bracelet/shared_bracelet_s02_l.iff");
-				enforcersSetPiece(inventory, "object/tangible/wearables/bracelet/shared_bracelet_s02_r.iff");
-				break;
+		int selection = SuiListBox.getSelectedRow(parameters);
+
+		switch (selection) {
+			case 0: handleHeroism(player); break;
+
 		}
 	}
-	
-	private static void enforcersSetPiece(SWGObject destination, String template) {
-		SWGObject item = ObjectCreator.createObjectFromTemplate(template);
-		
-		item.addAttribute("@set_bonus:piece_bonus_count_3", "@set_bonus:set_bonus_bh_dps_1");
-		item.addAttribute("@set_bonus:piece_bonus_count_4", "@set_bonus:set_bonus_bh_dps_2");
-		item.addAttribute("@set_bonus:piece_bonus_count_5", "@set_bonus:set_bonus_bh_dps_3");
-		
-		ObjectCreatedIntent.broadcast(item);
-		
-		item.moveToContainer(destination);
+
+	private static void handleHeroism(Player player) {
+		spawnItems(player,
+				"item_band_set_hero_01_01",
+				"item_bracelet_l_set_hero_01_01",
+				"item_bracelet_r_set_hero_01_01",
+				"item_necklace_set_hero_01_01",
+				"item_ring_set_hero_01_01"
+		);
 	}
 	
 	private static void spawnPowerup(Player player, String template, String stfKey, String modifier, String value) {

@@ -1,7 +1,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.loot;
 
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
+import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -16,15 +16,7 @@ public class CmdLoot implements ICmdCallback {
 		if (!(target instanceof CreatureObject) || creature == null)
 			return;
 		
-		CreatureObject targetCreature = (CreatureObject) target;
-		SWGObject targetInventory = targetCreature.getSlottedObject("inventory");
-		if (targetInventory == null)
-			return;
-		
-		if (creature.isContainerOpen(targetInventory, "") || args.trim().equals("all"))
-			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT_ALL);
-		else
-			LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT);
+		LootRequestIntent.broadcast(player, (CreatureObject) target, LootType.LOOT_ALL);
 	}
 	
 }

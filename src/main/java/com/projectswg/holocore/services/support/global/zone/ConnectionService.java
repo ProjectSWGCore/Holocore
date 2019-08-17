@@ -127,14 +127,14 @@ public class ConnectionService extends Service {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.setFlagBitmask(PlayerFlags.LD);
+		player.setFlag(PlayerFlags.LD);
 	}
 	
 	private void clearPlayerFlag(Player p) {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.clearFlagBitmask(PlayerFlags.LD);
+		player.clearFlag(PlayerFlags.LD);
 	}
 	
 	private void zoneIn(Player p) {

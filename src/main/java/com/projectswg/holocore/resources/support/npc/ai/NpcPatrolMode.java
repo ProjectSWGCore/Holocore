@@ -26,20 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai;
 
-import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcPatrolRouteLoader.PatrolType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * AI object that patrols the specified route

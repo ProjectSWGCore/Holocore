@@ -29,8 +29,6 @@ package com.projectswg.holocore.services.gameplay.player.experience.skills;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Race;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
@@ -40,21 +38,21 @@ import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIn
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.RoadmapRewardLoader.RoadmapRewardInfo;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SkillTemplateLoader.SkillTemplateInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.items.RoadmapReward;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants
@@ -63,14 +61,9 @@ import java.util.Map;
  */
 public final class SkillTemplateService extends Service {
 	
-	private final Map<String, String[]> skillTemplates;
-	private final Map<String, RoadmapReward> rewards;
 	private final Map<String, String[]> badgeNames;
 
 	public SkillTemplateService() {
-		skillTemplates = new HashMap<>();
-		rewards = new HashMap<>();
-		
 		badgeNames = new HashMap<>();
 		badgeNames.put("bounty_hunter_1a", 	new String[]{"new_prof_bountyhunter_master"});
 		badgeNames.put("commando_1a", 		new String[]{"new_prof_commando_master"});
@@ -86,22 +79,6 @@ public final class SkillTemplateService extends Service {
 		badgeNames.put("trader_0c", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_armorsmith_master", "new_prof_crafting_weaponsmith_master"});
 		badgeNames.put("trader_0d", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_droidengineer_master"});
 	}
-
-	@Override
-	public boolean initialize() {
-		DatatableData skillTemplateTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill_template/skill_template.iff");
-
-		for (int row = 0; row < skillTemplateTable.getRowCount(); row++) {
-			String profession = (String) skillTemplateTable.getCell(row, 0);
-			String[] templates = ((String) skillTemplateTable.getCell(row, 4)).split(",");
-			
-			skillTemplates.put(profession, templates);
-		}
-
-		loadRewardItemsIff();
-
-		return super.initialize();
-	}
 	
 	@IntentHandler
 	private void handleLevelChangedIntent(LevelChangedIntent lci) {
@@ -114,10 +91,10 @@ public final class SkillTemplateService extends Service {
 		
 		for (int level = oldLevel + 1; level <= newLevel; level++) {
 			// Skills are only awarded every third or fourth level
-			if ((level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
+			if ((level == 1 || level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
 				PlayerObject playerObject = creatureObject.getPlayerObject();
-				String profession = playerObject.getProfession();
-				String[] templates = skillTemplates.get(profession);
+				Profession profession = playerObject.getProfession();
+				SkillTemplateInfo templates = DataLoader.Companion.skillTemplates().getTemplateFromName(profession.getClientName());
 
 				if (templates == null) {
 					Log.w("%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
@@ -126,7 +103,7 @@ public final class SkillTemplateService extends Service {
 				
 				int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
 
-				String skillName = templates[skillIndex];
+				String skillName = templates.getTemplates()[skillIndex];
 				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, skillName, creatureObject, true).broadcast();
 				playerObject.setProfWheelPosition(skillName);
 
@@ -153,74 +130,54 @@ public final class SkillTemplateService extends Service {
 		}
 		
 		creatureObject.sendObservers(new PlayClientEffectObjectMessage(effectFile, "", objectId, ""));
-		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
+		creatureObject.sendSelf(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
 		if (skillUp)
-			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+			creatureObject.sendSelf(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
-		RoadmapReward reward = rewards.get(skillName);
+		RoadmapRewardInfo reward = DataLoader.Companion.roadmapRewards().getRewardBySkillName(skillName);
+		if (reward == null)
+			return; // No reward to give
+		
 		Race characterRace = creatureObject.getRace();
-		String species = characterRace.getSpecies().toUpperCase();
+		String species = characterRace.getSpecies().toUpperCase(Locale.US);
 		SWGObject inventory = creatureObject.getSlottedObject("inventory");
 		String[] items;
 
-		if (reward.hasItems() || reward.isUniversalReward()) {
-			if (reward.isUniversalReward())
-				items = reward.getDefaultRewardItems();
-			else if (species.equals("ITHORIAN"))
-				items = reward.getIthorianRewardItems();
-			else if (species.equals("WOOKIEE"))
-				items = reward.getWookieeRewardItems();
-			else
-				items = reward.getDefaultRewardItems();
+		if (species.equals("ITHORIAN") && reward.getIthorianItems().length > 0)
+			items = reward.getIthorianItems();
+		else if (species.equals("WOOKIEE") && reward.getWookieeItems().length > 0)
+			items = reward.getWookieeItems();
+		else
+			items = reward.getDefaultItems();
 
-			Collection<String> staticItems = new ArrayList<>();
-			
-			for (String item : items) {
-				if (item.endsWith(".iff")) {
-					SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
-
-					if (nonStaticItem != null) {
-						nonStaticItem.moveToContainer(inventory);
-					}
-					new ObjectCreatedIntent(nonStaticItem).broadcast();
-				} else {
-					staticItems.add(item);
-				}
-			}
-			
-			// No reason to broadcast this intent if we don't need new static items anyways
-			if (!staticItems.isEmpty())
-				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), staticItems.toArray(new String[0])).broadcast();
-		}
-	}
-
-	private void loadRewardItemsIff() {
-		DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
+		Collection<String> staticItems = new ArrayList<>();
 		
-		for (int row = 0; row < rewardsTable.getRowCount(); row++) {
-			String roadmapTemplate = rewardsTable.getCell(row, 0).toString();
-			String roadmapSkillName = rewardsTable.getCell(row, 1).toString();
-			String appearanceName = rewardsTable.getCell(row, 2).toString();
-			String stringId = rewardsTable.getCell(row, 3).toString();
-			String itemDefault = rewardsTable.getCell(row, 4).toString();
-			String itemWookiee = rewardsTable.getCell(row, 5).toString();
-			String itemIthorian = rewardsTable.getCell(row, 6).toString();
-
-			rewards.put(roadmapSkillName, new RoadmapReward(roadmapTemplate, roadmapSkillName, appearanceName, stringId, itemDefault, itemWookiee, itemIthorian));
+		for (String item : items) {
+			if (item.endsWith(".iff")) {
+				SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(item);
+				nonStaticItem.moveToContainer(inventory);
+				new ObjectCreatedIntent(nonStaticItem).broadcast();
+			} else {
+				staticItems.add(item);
+			}
 		}
+		
+		// No reason to broadcast this intent if we don't need new static items anyways
+		if (!staticItems.isEmpty())
+			new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), staticItems.toArray(String[]::new)).broadcast();
 	}
 	
-	private void grantMasteryBadge(CreatureObject creature, String profession, String skillName) {
+	private void grantMasteryBadge(CreatureObject creature, Profession profession, String skillName) {
 		Log.d("grantMasteryBadge - skillName: %s", skillName);
 		
 		if (!skillName.endsWith("_phase4_master")) {
 			return;
 		}
 		
-		String[] badges = badgeNames.get(profession);
+		String[] badges = badgeNames.get(profession.getClientName());
 		
 		if (badges == null) {
 			Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);

@@ -35,10 +35,10 @@ import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public final class ObjectDataLoader extends DataLoader {
 	
@@ -50,6 +50,10 @@ public final class ObjectDataLoader extends DataLoader {
 	
 	public Map<ObjectDataAttribute, Object> getAttributes(String iff) {
 		return attributes.get(iff);
+	}
+	
+	public Collection<String> getObjects() {
+		return Collections.unmodifiableCollection(attributes.keySet());
 	}
 	
 	@Override
@@ -70,15 +74,17 @@ public final class ObjectDataLoader extends DataLoader {
 				mapping[j] = mapping[i];
 				mapping[i] = tmp;
 			}
-			while (set.next()) {
-				Map<ObjectDataAttribute, Object> objectAttributes = new EnumMap<>(ObjectDataAttribute.class);
-				for (int i = 1; i < mapping.length; i++) {
-					ObjectDataAttribute attr = mapping[i];
-					objectAttributes.put(attr, parse(attr, set, i));
-				}
-				attributes.put(set.getText(0), objectAttributes);
-			}
+			attributes.putAll(set.parallelStream(s -> parse(s, mapping)).collect(toMap(Map.Entry::getKey, Map.Entry::getValue)));
 		}
+	}
+	
+	private static Map.Entry<String, Map<ObjectDataAttribute, Object>> parse(SdbResultSet set, ObjectDataAttribute [] mapping) {
+		Map<ObjectDataAttribute, Object> objectAttributes = new EnumMap<>(ObjectDataAttribute.class);
+		for (int i = 1; i < mapping.length; i++) {
+			ObjectDataAttribute attr = mapping[i];
+			objectAttributes.put(attr, parse(attr, set, i));
+		}
+		return Map.entry(set.getText(0), objectAttributes);
 	}
 	
 	private static Object parse(ObjectDataAttribute attribute, SdbResultSet set, int index) {

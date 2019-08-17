@@ -29,23 +29,30 @@ package com.projectswg.holocore.intents.gameplay.crafting.survey;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
+import org.jetbrains.annotations.NotNull;
 
 public class StartSurveyingIntent extends Intent {
 	
 	private final CreatureObject creature;
 	private final GalacticResource resource;
 	
-	public StartSurveyingIntent(CreatureObject creature, GalacticResource resource) {
+	public StartSurveyingIntent(@NotNull CreatureObject creature, @NotNull GalacticResource resource) {
 		this.creature = creature;
 		this.resource = resource;
 	}
 	
+	@NotNull
 	public CreatureObject getCreature() {
 		return creature;
 	}
 	
+	@NotNull
 	public GalacticResource getResource() {
 		return resource;
+	}
+	
+	public static void broadcast(@NotNull CreatureObject creature, @NotNull GalacticResource resource) {
+		new StartSurveyingIntent(creature, resource).broadcast();
 	}
 	
 }

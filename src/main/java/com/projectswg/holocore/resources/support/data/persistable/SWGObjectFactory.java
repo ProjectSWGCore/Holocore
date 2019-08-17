@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.persistable;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -38,11 +39,34 @@ public class SWGObjectFactory {
 		obj.save(stream);
 	}
 	
+	public static MongoData save(SWGObject obj) {
+		return save(obj, new MongoData());
+	}
+	
+	public static MongoData save(SWGObject obj, MongoData data) {
+		obj.saveMongo(data);
+		assert data.containsKey("id") : "serialized MongoData does not contain the objectId";
+		assert data.containsKey("parent") : "serialized MongoData does not contain the parent id";
+		assert data.containsKey("parentCell") : "serialized MongoData does not contain the parent cell number";
+		assert data.containsKey("template") : "serialized MongoData does not contain the template";
+		return data;
+	}
+	
 	public static SWGObject create(NetBufferStream stream) {
 		long objectId = stream.getLong();
 		String template = stream.getAscii();
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
 		obj.read(stream);
+		return obj;
+	}
+	
+	public static SWGObject create(MongoData data) {
+		long objectId = data.getLong("id", 0);
+		String template = data.getString("template");
+		assert objectId != 0 : "objectId is not defined in MongoData";
+		assert template != null : "template is not defined in MongoData";
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
+		obj.readMongo(data);
 		return obj;
 	}
 	

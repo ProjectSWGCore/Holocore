@@ -30,8 +30,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.FlourishIntent;
@@ -40,6 +38,9 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.PerformanceLoader.PerformanceInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -65,37 +66,12 @@ public class EntertainmentService extends Service {
 	private static final byte XP_CYCLE_RATE = 10;
 	private static final byte WATCH_RADIUS = 20;
 	
-	private final Map<String, PerformanceData> performanceMap;    // performance names mapped to performance data
 	private final Map<Long, Performance> performerMap;
-	private final Map<String, String> danceMap;    // Maps performance ID to performance name
 	private final ScheduledExecutorService executorService;
 	
 	public EntertainmentService() {
-		performanceMap = new HashMap<>();
 		performerMap = new HashMap<>();    // TODO synchronize access?
-		danceMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor();
-	}
-	
-	@Override
-	public boolean initialize() {
-		DatatableData performanceTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/performance/performance.iff");
-		
-		for (int i = 0; i < performanceTable.getRowCount(); i++) {
-			String requiredDance = (String) performanceTable.getCell(i, 4);
-			
-			// Load the dances only. Music is currently unsupported.
-			if (!requiredDance.isEmpty()) {
-				String performanceName = (String) performanceTable.getCell(i, 0);
-				String performanceNumber = String.valueOf(performanceTable.getCell(i, 5));    // danceVisualId
-				PerformanceData performanceData = new PerformanceData(performanceNumber, (int) performanceTable.getCell(i, 10));    // flourishXpMod
-				
-				performanceMap.put(performanceName, performanceData);    // Map the name to the performance data
-				danceMap.put(performanceNumber, performanceName);    // Map the dance ID to a performance name!
-			}
-		}
-		
-		return super.initialize();
 	}
 	
 	@Override
@@ -116,9 +92,9 @@ public class EntertainmentService extends Service {
 			
 			if (!changeDance && dancer.isPerforming()) {
 				new SystemMessageIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
-			} else if (performanceMap.containsKey(danceName)) {
+			} else if (DataLoader.Companion.performances().getPerformanceByName(danceName) != null) {
 				// The dance name is valid.
-				if (dancer.hasAbility("startDance+" + danceName)) {
+				if (dancer.hasCommand("startDance+" + danceName)) {
 					
 					if (changeDance) {    // If they're changing dance, we just need to change their animation.
 						changeDance(dancer, danceName);
@@ -157,7 +133,7 @@ public class EntertainmentService extends Service {
 			case PE_ZONE_IN_SERVER:
 				// We need to check if they're dancing in order to start giving them XP
 				if (isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
-					scheduleExperienceTask(creature, danceMap.get(creature.getAnimation().replace("dance_", "")));
+					scheduleExperienceTask(creature, DataLoader.Companion.performances().getPerformanceByDanceId(Integer.parseInt(creature.getAnimation().replace("dance_", ""))).getPerformanceName());
 				}
 				
 				break;
@@ -311,7 +287,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void startDancing(CreatureObject dancer, String danceName) {
-		dancer.setAnimation("dance_" + performanceMap.get(danceName).getPerformanceId());
+		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(danceName).getPerformanceName());
 		dancer.setPerformanceId(0);    // 0 - anything else will make it look like we're playing music
 		dancer.setPerformanceCounter(0);
 		dancer.setPerforming(true);
@@ -342,7 +318,7 @@ public class EntertainmentService extends Service {
 	
 	private void changeDance(CreatureObject dancer, String newPerformanceName) {
 		performerMap.get(dancer.getObjectId()).setPerformanceName(newPerformanceName);
-		dancer.setAnimation("dance_" + performanceMap.get(newPerformanceName).getPerformanceId());
+		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(newPerformanceName).getPerformanceName());
 	}
 	
 	private void startWatching(CreatureObject actor, CreatureObject creature) {
@@ -443,19 +419,24 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if (performance == null) {
-				Log.e("Performer %s wasn't in performermap", performer);
+				StandardLog.onPlayerError(this, performer, "is not in performerMap");
 				return;
 			}
 			
 			String performanceName = performance.getPerformanceName();
-			PerformanceData performanceData = performanceMap.get(performanceName);
+			PerformanceInfo performanceData = DataLoader.Companion.performances().getPerformanceByName(performanceName);
+			if (performanceData == null) {
+				StandardLog.onPlayerError(this, performer, "was performing unknown performance: '%s'", performanceName);
+				return;
+			}
+			
 			int flourishXpMod = performanceData.getFlourishXpMod();
 			int performanceCounter = performer.getPerformanceCounter();
 			int xpGained = performanceCounter * flourishXpMod;
 			
 			if (xpGained > 0) {
 				if (isEntertainer(performer))
-					new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
+					new ExperienceIntent(performer, "entertainer", xpGained, true).broadcast();
 				performer.setPerformanceCounter(performanceCounter - 1);
 			}
 		}

@@ -75,9 +75,6 @@ public class BaselineObject {
 				case 6:
 					parseBaseline6(buffer);
 					break;
-				case 7:
-					parseBaseline7(buffer);
-					break;
 				case 8:
 					parseBaseline8(buffer);
 					break;
@@ -107,10 +104,6 @@ public class BaselineObject {
 		return createBaseline(target, 6, this::createBaseline6);
 	}
 	
-	public Baseline createBaseline7(Player target) {
-		return createBaseline(target, 7, this::createBaseline7);
-	}
-	
 	public Baseline createBaseline8(Player target) {
 		return createBaseline(target, 8, this::createBaseline8);
 	}
@@ -119,30 +112,56 @@ public class BaselineObject {
 		return createBaseline(target, 9, this::createBaseline9);
 	}
 	
+	/**
+	 * Creates the first baseline for the specified target.  Only sent if the target has full permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline1(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the third baseline for the specified target.  This baseline is public and is always set.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline3(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the fourth baseline for the specified target.  Only sent if the target has full permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline4(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the sixth baseline for the specified target.  This baseline is public and is always set.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline6(Player target, BaselineBuilder data) {
 		
 	}
 	
-	protected void createBaseline7(Player target, BaselineBuilder data) {
-		
-	}
-	
+	/**
+	 * Creates the eighth baseline for the specified target.  Only sent if the target has some permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline8(Player target, BaselineBuilder data) {
 		
 	}
 	
+	/**
+	 * Creates the ninth baseline for the specified target.  Only sent if the target has some permissions.
+	 * @param target the target to prepare the baseline for
+	 * @param data the baseline to build
+	 */
 	protected void createBaseline9(Player target, BaselineBuilder data) {
 		
 	}
@@ -160,10 +179,6 @@ public class BaselineObject {
 	}
 	
 	protected void parseBaseline6(NetBuffer buffer) {
-		
-	}
-	
-	protected void parseBaseline7(NetBuffer buffer) {
 		
 	}
 	

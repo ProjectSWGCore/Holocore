@@ -42,7 +42,7 @@ public class ConvertBuildingList implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting building list...");
-		Collection<SWGObject> objects = DataLoader.buildouts().getObjects().values();
+		Collection<SWGObject> objects = DataLoader.Companion.buildouts().getObjects().values();
 		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/building/buildings.sdb"))) {
 			gen.writeColumnNames("building_id", "terrain_name", "object_id");
 			for (SWGObject obj : objects) {

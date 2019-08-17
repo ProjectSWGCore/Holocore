@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
+import com.projectswg.holocore.intents.gameplay.crafting.survey.StopSamplingIntent;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -48,8 +48,8 @@ public class ProneCmdCallback implements ICmdCallback {
 		} else {
 			creature.setPosture(Posture.PRONE);
 			creature.setTurnScale(1);
-			creature.setMovementScale(0.50);
-			creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
+			creature.setMovementPercent(0.50);
+			StopSamplingIntent.broadcast(creature);
 		}
 	}
 

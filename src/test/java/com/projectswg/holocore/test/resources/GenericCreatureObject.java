@@ -28,10 +28,10 @@ package com.projectswg.holocore.test.resources;
 
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -71,14 +71,15 @@ public class GenericCreatureObject extends CreatureObject {
 		setGameObjectType(GameObjectType.GOT_CREATURE_CHARACTER);
 		
 		PlayerObject playerObject = new PlayerObject(-getObjectId());
+		playerObject.setTemplate("object/player/shared_player.iff");
 		playerObject.setArrangement(List.of(List.of("ghost")));
 		playerObject.systemMove(this);
 		playerObject.setObjectName(name);
-		createInventoryObject("inventory");
-		createInventoryObject("datapad");
-		createInventoryObject("appearance_inventory");
-		createInventoryObject("bank");
-		createInventoryObject("mission_bag");
+		createInventoryObject("object/tangible/inventory/shared_character_inventory.iff");
+		createInventoryObject("object/tangible/datapad/shared_character_datapad.iff");
+		createInventoryObject("object/tangible/inventory/shared_appearance_inventory.iff");
+		createInventoryObject("object/tangible/bank/shared_character_bank.iff");
+		createInventoryObject("object/tangible/mission_bag/shared_mission_bag.iff");
 	}
 	
 	@Override
@@ -86,10 +87,10 @@ public class GenericCreatureObject extends CreatureObject {
 		return (GenericPlayer) super.getOwner();
 	}
 	
-	private void createInventoryObject(String slot) {
-		SWGObject obj = new TangibleObject(GENERATED_IDS.incrementAndGet());
-		obj.setArrangement(List.of(List.of(slot)));
+	private void createInventoryObject(String template) {
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(GENERATED_IDS.incrementAndGet(), template);
 		obj.systemMove(this);
+		assert obj.getSlotArrangement() != -1;
 	}
 	
 }

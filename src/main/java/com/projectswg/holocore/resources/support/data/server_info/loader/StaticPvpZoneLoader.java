@@ -49,7 +49,7 @@ public class StaticPvpZoneLoader extends DataLoader {
 	}
 	
 	@Override
-	protected void load() throws IOException {
+	public void load() throws IOException {
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/gcw/pvp_zones.sdb"))) {
 			while (set.next()) {
 				StaticPvpZoneInfo staticPvpZone = new StaticPvpZoneInfo(set);
@@ -65,7 +65,7 @@ public class StaticPvpZoneLoader extends DataLoader {
 		private final double radius;
 		
 		public StaticPvpZoneInfo(SdbLoader.SdbResultSet set) {
-			id = (int) set.getInt("id");
+			id = (int) set.getInt("pvp_zone_id");
 			
 			location = Location.builder()
 					.setX(set.getInt("x"))

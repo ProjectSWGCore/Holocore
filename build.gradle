@@ -4,19 +4,20 @@ plugins {
 	id 'application'
 	id 'java'
 	id 'idea'
-	id "com.github.johnrengelman.shadow" version "4.0.3"
-	id "org.javamodularity.moduleplugin" version "1.2.1"
-	id "org.beryx.jlink" version "2.1.8"
+	id "com.github.johnrengelman.shadow" version "5.1.0"
+	id "org.javamodularity.moduleplugin" version "1.5.0"
+	id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+	id "org.beryx.jlink" version "2.10.2"
 }
 
 mainClassName = 'com.projectswg.holocore.ProjectSWG'
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 12
 
 sourceSets {
-	display { }
-	utility { }
-	integration { }
+	main
+	display
+	utility
+	integration
 }
 
 test {
@@ -34,6 +35,7 @@ idea {
 }
 
 jlink {
+//	addOptions '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages'
 	imageDir.set(file("$buildDir/holocore"))
 	imageZip.set(file("$buildDir/holocore.zip"))
 	launcher {
@@ -44,9 +46,9 @@ jlink {
 }
 
 shadowJar {
-	baseName = "Holocore"
-	classifier = null
-	version = null
+	archivesBaseName = 'Holocore'
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 }
 
 repositories {
@@ -56,9 +58,13 @@ repositories {
 dependencies {
 	compile project(':pswgcommon')
 	
+	compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.41'
+	compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '1.3.0-M2'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
-	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.9.1'
+	compile group: 'org.mongodb', name: 'mongodb-driver-sync', version: '3.10.2'
 	compile group: 'me.joshlarson', name: "fast-json", version: '3.0.0'
+	compile group: 'me.joshlarson', name: 'jlcommon-network', version: '1.0.0'
+	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
 	
 	testCompile 'junit:junit:4.12'
 	
@@ -79,8 +85,16 @@ dependencies {
 	integrationCompile 'junit:junit:4.12'
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+		jvmTarget = "12"
+	}
+}
+
 task CreateConvertLoginJar(type: ShadowJar) {
-	archiveName = 'ConvertLogin.jar'
+	archivesBaseName = "ConvertLogin"
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.ConvertLogin'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]
@@ -88,7 +102,9 @@ task CreateConvertLoginJar(type: ShadowJar) {
 }
 
 task CreatePacketCaptureProcessor(type: ShadowJar) {
-	archiveName = 'PacketCaptureProcessor.jar'
+	archivesBaseName = "PacketCaptureProcessor"
+	archiveClassifier.set(null)
+	archiveVersion.set(null)
 	manifest.attributes 'Main-Class': 'com.projectswg.utility.packets.ProcessPacketCapture'
 	from sourceSets.utility.output
 	configurations = [project.configurations.utilityRuntime]

@@ -33,13 +33,27 @@ import me.joshlarson.jlcommon.data.EnumLookup;
 import java.util.function.Function;
 
 public enum ServerAttribute {
-	PCD_PET_TEMPLATE	("pcd.pet.template", String.class, s -> s, s -> s),
-	EGG_SPAWNER			("egg.spawner", Spawner.class, s -> null, s -> null);
+	PCD_PET_TEMPLATE	("pcd.pet.template",				PredefinedDataType.STRING),
+	EGG_SPAWNER			("egg.spawner",					Spawner.class, s -> null, s -> null),
+	GALACTIC_RESOURCE_ID("resources.galactic_resource_id",	PredefinedDataType.LONG),
+	SURVEY_TOOL_RANGE	("survey_tool.range",				PredefinedDataType.INT);
 	
 	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);
 	
 	private final String key;
 	private final Storage<?> storage;
+	
+	ServerAttribute(String key, PredefinedDataType dataType) {
+		this.key = key;
+		switch (dataType) {
+			case STRING:	this.storage = new Storage<>(String.class, s -> s, s -> s);	break;
+			case INT:		this.storage = new Storage<>(Integer.class, String::valueOf, Integer::valueOf);	break;
+			case LONG:		this.storage = new Storage<>(Long.class, String::valueOf, Long::valueOf);	break;
+			case FLOAT:		this.storage = new Storage<>(Float.class, String::valueOf, Float::valueOf);	break;
+			case DOUBLE:	this.storage = new Storage<>(Double.class, String::valueOf, Double::valueOf);	break;
+			default:		throw new IllegalArgumentException("Undefined data type: " + dataType);
+		}
+	}
 	
 	<T> ServerAttribute(String key, Class<T> requiredClass, Function<T, String> storeFunction, Function<String, T> retrieveFunction) {
 		this.key = key;
@@ -83,6 +97,14 @@ public enum ServerAttribute {
 			return retrieveFunction.apply(str);
 		}
 		
+	}
+	
+	private enum PredefinedDataType {
+		STRING,
+		INT,
+		LONG,
+		FLOAT,
+		DOUBLE
 	}
 	
 }

@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.objects.permissions;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -37,10 +38,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.emptySet;
 
-public class ReadOnlyPermissions implements ContainerPermissions {
+public final class ReadOnlyPermissions implements ContainerPermissions {
 	
 	private static final ReadOnlyPermissions PERMISSIONS = new ReadOnlyPermissions(emptySet());
 	
@@ -56,6 +58,13 @@ public class ReadOnlyPermissions implements ContainerPermissions {
 		this.exempt = new HashSet<>();
 		this.locked = false;
 		read(stream);
+		this.locked = true;
+	}
+	
+	private ReadOnlyPermissions(MongoData data) {
+		this.exempt = new HashSet<>();
+		this.locked = false;
+		readMongo(data);
 		this.locked = true;
 	}
 	
@@ -81,7 +90,7 @@ public class ReadOnlyPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public final void save(NetBufferStream stream) {
+	public void save(NetBufferStream stream) {
 		stream.addByte(0);
 		stream.addInt(exempt.size());
 		for (SWGObject obj : exempt)
@@ -89,13 +98,26 @@ public class ReadOnlyPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public final void read(NetBufferStream stream) {
+	public void read(NetBufferStream stream) {
 		if (locked)
 			throw new IllegalStateException("Permissions is already locked");
 		stream.getByte();
 		int count = stream.getInt();
 		for (int i = 0; i < count; i++)
 			exempt.add(ObjectLookup.getObjectById(stream.getLong()));
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		if (locked)
+			throw new IllegalStateException("Permissions is already locked");
+		for (long id : data.getArray("exempt", Long.class))
+			exempt.add(ObjectLookup.getObjectById(id));
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		data.putArray("exempt", exempt.stream().map(SWGObject::getObjectId).collect(Collectors.toList()));
 	}
 	
 	/**
@@ -123,6 +145,10 @@ public class ReadOnlyPermissions implements ContainerPermissions {
 	
 	public static ReadOnlyPermissions from(NetBufferStream stream) {
 		return new ReadOnlyPermissions(stream);
+	}
+	
+	public static ReadOnlyPermissions from(MongoData data) {
+		return new ReadOnlyPermissions(data);
 	}
 	
 }

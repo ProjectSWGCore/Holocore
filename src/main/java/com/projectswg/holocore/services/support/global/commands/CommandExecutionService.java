@@ -51,7 +51,7 @@ public class CommandExecutionService extends Service {
 	}
 	
 	private void registerCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
-		List<Command> commands = DataLoader.commands().getCommandByCallback(callbackName);
+		List<Command> commands = DataLoader.Companion.commands().getCommandByCallback(callbackName);
 //		assert commands != null;
 		if (commands == null) {
 			Log.e("Invalid command registration: %s", callbackName);

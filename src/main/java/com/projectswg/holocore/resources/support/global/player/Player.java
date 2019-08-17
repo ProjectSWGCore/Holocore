@@ -36,30 +36,32 @@ import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.net.InetSocketAddress;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 public class Player implements Comparable<Player> {
 	
 	private final long networkId;
 	private final IntentChain intentChain;
 	private final AtomicReference<CreatureObject> creatureObject;
+	private final Consumer<SWGPacket> packetSender;
+	private final InetSocketAddress address;
 	
+	private String			accountId			= "";
 	private String			username			= "";
 	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
 	private PlayerServer	server				= PlayerServer.NONE;
 	private PlayerState		state				= PlayerState.DISCONNECTED;
 	private long			lastInboundMessage	= 0;
 	
-	public Player() {
-		this(0);
-	}
-	
-	public Player(long networkId) {
+	public Player(long networkId, InetSocketAddress address, Consumer<SWGPacket> packetSender) {
 		this.networkId = networkId;
+		this.address = address;
 		this.intentChain = new IntentChain();
 		this.creatureObject = new AtomicReference<>(null);
+		this.packetSender = packetSender;
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -68,6 +70,10 @@ public class Player implements Comparable<Player> {
 	
 	public void setPlayerServer(PlayerServer server) {
 		this.server = server;
+	}
+	
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
 	}
 	
 	public void setUsername(String username) {
@@ -96,12 +102,20 @@ public class Player implements Comparable<Player> {
 		return networkId;
 	}
 	
+	public InetSocketAddress getAddress() {
+		return address;
+	}
+	
 	public PlayerState getPlayerState() {
 		return state;
 	}
 	
 	public PlayerServer getPlayerServer() {
 		return server;
+	}
+	
+	public String getAccountId() {
+		return accountId;
 	}
 	
 	public String getUsername() {
@@ -160,39 +174,56 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public void sendPacket(SWGPacket packet) {
-		broadcast(new OutboundPacketIntent(this, packet));
+		packetSender.accept(packet);
+		IntentChain.broadcastChain(new OutboundPacketIntent(this, packet));
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
-		broadcast(new OutboundPacketIntent(this, packet1));
-		broadcast(new OutboundPacketIntent(this, packet2));
+		packetSender.accept(packet1);
+		packetSender.accept(packet2);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
-		broadcast(new OutboundPacketIntent(this, packet1));
-		broadcast(new OutboundPacketIntent(this, packet2));
-		broadcast(new OutboundPacketIntent(this, packet3));
+		packetSender.accept(packet1);
+		packetSender.accept(packet2);
+		packetSender.accept(packet3);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
-		broadcast(new OutboundPacketIntent(this, packet1));
-		broadcast(new OutboundPacketIntent(this, packet2));
-		broadcast(new OutboundPacketIntent(this, packet3));
-		broadcast(new OutboundPacketIntent(this, packet4));
+		packetSender.accept(packet1);
+		packetSender.accept(packet2);
+		packetSender.accept(packet3);
+		packetSender.accept(packet4);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3),
+				new OutboundPacketIntent(this, packet4)
+		);
 	}
 	
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
-		broadcast(new OutboundPacketIntent(this, packet1));
-		broadcast(new OutboundPacketIntent(this, packet2));
-		broadcast(new OutboundPacketIntent(this, packet3));
-		broadcast(new OutboundPacketIntent(this, packet4));
-		broadcast(new OutboundPacketIntent(this, packet5));
-	}
-	
-	public void sendPacket(Collection<? extends SWGPacket> packets) {
-		for (SWGPacket p : packets) {
-			broadcast(new OutboundPacketIntent(this, p));
-		}
+		packetSender.accept(packet1);
+		packetSender.accept(packet2);
+		packetSender.accept(packet3);
+		packetSender.accept(packet4);
+		packetSender.accept(packet5);
+		IntentChain.broadcastChain(
+				new OutboundPacketIntent(this, packet1),
+				new OutboundPacketIntent(this, packet2),
+				new OutboundPacketIntent(this, packet3),
+				new OutboundPacketIntent(this, packet4),
+				new OutboundPacketIntent(this, packet5)
+		);
 	}
 	
 	public void broadcast(Intent intent) {

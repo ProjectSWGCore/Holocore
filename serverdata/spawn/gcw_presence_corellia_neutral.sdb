@@ -1,0 +1,215 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
+spawn_gcw_cor_pres_neu_1	CORELLIA	cor_world	AREA	0	6663.8	330.0	-5913.3	179	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_2	CORELLIA	cor_world	AREA	0	6685.7	330.0	-5943.3	-90	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_3	CORELLIA	cor_world	PATROL	0	6714.2	315.0	-5572.3	0	0	a victory class dark trooper	crackdown_dark_trooper_victory	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13300	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_4	CORELLIA	cor_world	PATROL	0	6716.1	315.0	-5814.9	0	0	a Dark Novatrooper	imp_dark_trooper_nova	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13700	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_5	CORELLIA	cor_world	PATROL	0	6654.6	330.0	-5882.7	0	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13800	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_6	CORELLIA	cor_world	AREA	0	6750.9	315.0	-5666.5	-44	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_7	CORELLIA	cor_world	AREA	0	6751.1	315.0	-5684.1	-135	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_8	CORELLIA	cor_world	PATROL	0	6752.0	315.0	-5696.0	0	0	a glory class dark trooper	crackdown_dark_trooper_glory_hard	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13400	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_9	CORELLIA	cor_world	AREA	0	6752.1	315.0	-5823.5	-87	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_10	CORELLIA	cor_world	PATROL	0	6761.7	315.0	-5724.1	0	0	an exogen class dark trooper	crackdown_dark_trooper_exogen	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13500	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_11	CORELLIA	cor_world	PATROL	0	6769.5	315.0	-5777.9	0	0	a victory class dark trooper	crackdown_dark_trooper_victory	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	PATROL	0	patrol_cor_13600	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_12	CORELLIA	cor_world	AREA	0	6795.9	315.0	-5493.0	-121	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_13	CORELLIA	cor_world	AREA	0	6819.9	315.0	-5720.1	-140	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_14	CORELLIA	cor_world	AREA	0	6837.4	315.0	-5774.0	-100	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_15	CORELLIA	cor_world	AREA	0	6837.8	315.0	5791.2	-87	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_16	CORELLIA	cor_world	AREA	0	6817.5	315.0	-5820.9	46	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_17	CORELLIA	cor_world	AREA	0	6785.5	315.0	-5770.8	179	0	Droideka Sentry	imp_detain_droideka_sentry	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_18	CORELLIA	cor_world	AREA	0	6855.0	315.0	-5611.1	-34	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_19	CORELLIA	cor_world	AREA	0	6889.0	330.0	-5543.3	125	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_20	CORELLIA	cor_world	AREA	0	6897.1	330.0	-5537.1	148	0	an Imperial stormtrooper	imp_stormtrooper	ATTACKABLE	E	30	40	GCW - Neutral	Bela Vistal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_21	CORELLIA	cor_world	AREA	0	-118.7	28.0	-4204.6	16	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_22	CORELLIA	cor_world	AREA	0	-12.4	28.6	-4404.7	-179	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_23	CORELLIA	cor_world	AREA	0	-148.6	28.0	-4660.7	-158	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_24	CORELLIA	cor_world	AREA	0	-152.1	28.0	-4837.3	-134	1	a CorSec investigator	corsec_investigator	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_25	CORELLIA	cor_world	AREA	0	-159.2	28.0	-4660.7	161	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_26	CORELLIA	cor_world	AREA	0	-194.9	28.0	-4837.2	135	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_27	CORELLIA	cor_world	AREA	0	-188.9	28.0	-4076.8	-24	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_28	CORELLIA	cor_world	PATROL	0	-189.7	28.0	-4436.0	0	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	PATROL	0	patrol_cor_14000	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_29	CORELLIA	cor_world	AREA	0	-191.4	28.0	-4371.8	0	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_30	CORELLIA	cor_world	AREA	0	-201.2	28.0	-4122.0	20	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_31	CORELLIA	cor_world	AREA	0	-199.1	28.3	-4522.2	-90	1	a CorSec Security Specialist	corsec_detective_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_32	CORELLIA	cor_world	PATROL	0	-205.9	28.0	-4286.0	0	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	PATROL	0	patrol_cor_14200	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_33	CORELLIA	cor_world	PATROL	0	-210.0	28.2	-4534.5	0	1	a CorSec Captain	corsec_captain	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	PATROL	0	patrol_cor_14100	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_34	CORELLIA	cor_world	AREA	0	-220.9	28.3	-4522.3	89	1	a CorSec Security Specialist	corsec_detective_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_35	CORELLIA	cor_world	AREA	0	-216.9	28.0	-4121.1	-21	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_36	CORELLIA	cor_world	AREA	0	-221.1	28.0	-4798.1	-123	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_37	CORELLIA	cor_world	AREA	0	-223.2	28.0	-4078.0	9	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_38	CORELLIA	cor_world	AREA	0	-242.0	30.5	-4393.3	90	1	a CorSec Special Ops Master Sergeant	corsec_master_sergeant_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_39	CORELLIA	cor_world	AREA	0	-238.9	28.0	-4628.5	0	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_40	CORELLIA	cor_world	AREA	0	-276.7	28.0	-4535.2	-86	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_41	CORELLIA	cor_world	AREA	0	-283.2	28.0	-4411.0	123	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_42	CORELLIA	cor_world	AREA	0	-295.9	28.0	-4786.4	-166	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_43	CORELLIA	cor_world	AREA	0	-303.8	28.0	-4144.4	-56	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_44	CORELLIA	cor_world	AREA	0	-306.7	28.0	-4785.9	-173	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_45	CORELLIA	cor_world	AREA	0	-35.4	28.0	-4573.8	49	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_46	CORELLIA	cor_world	AREA	0	-42.2	28.0	-4500.6	44	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_47	CORELLIA	cor_world	AREA	0	-439.1	28.0	-4144.4	-25	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_48	CORELLIA	cor_world	AREA	0	-445.7	28.0	-4506.0	0	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_49	CORELLIA	cor_world	AREA	0	-446.5	28.0	-4744.0	-134	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_50	CORELLIA	cor_world	AREA	0	-458.0	28.0	-4585.0	-90	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_51	CORELLIA	cor_world	AREA	0	-458.0	28.0	-4590.8	-90	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_52	CORELLIA	cor_world	AREA	0	-499.3	28.0	-4469.1	-2	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_53	CORELLIA	cor_world	AREA	0	-502.1	28.0	-4701.1	-175	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_54	CORELLIA	cor_world	AREA	0	-517.9	28.0	-4213.9	-57	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_55	CORELLIA	cor_world	AREA	0	-526.1	28.0	-4670.1	-70	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_56	CORELLIA	cor_world	AREA	0	-526.1	28.0	-4675.8	-108	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_57	CORELLIA	cor_world	AREA	0	-533.6	28.0	-4626.5	-164	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_58	CORELLIA	cor_world	AREA	0	-557.5	28.0	-4230.3	-94	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_59	CORELLIA	cor_world	AREA	0	-574.2	28.0	-4247.0	-27	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_60	CORELLIA	cor_world	AREA	0	-59.1	28.0	-4260.1	47	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_61	CORELLIA	cor_world	AREA	0	-593.7	28.0	-4321.9	-114	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_62	CORELLIA	cor_world	AREA	0	-593.7	28.0	-4483.1	-90	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_63	CORELLIA	cor_world	AREA	0	-593.7	28.0	-4502.9	-88	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_64	CORELLIA	cor_world	AREA	0	-76.6	28.0	-4625.3	-145	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_65	CORELLIA	cor_world	PATROL	0	-94.9	28.0	-4649.5	0	1	A Super Battle Droid	super_battle_droid_corsec	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	PATROL	0	patrol_cor_14300	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_66	CORELLIA	cor_world	PATROL	0	1.8	28.0	-4439.0	-163	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	PATROL	0	patrol_cor_13900	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_67	CORELLIA	cor_world	AREA	0	25.9	28.0	-4240.9	0	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_68	CORELLIA	cor_world	AREA	0	111.5	28.0	-4464.9	26	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_69	CORELLIA	cor_world	AREA	0	144.7	28.0	-4536.6	152	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_70	CORELLIA	cor_world	AREA	0	158.9	28.0	-4707.2	137	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_71	CORELLIA	cor_world	AREA	0	168.1	28.0	-4698.4	145	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_72	CORELLIA	cor_world	AREA	0	22.6	28.0	-4290.2	-7	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_73	CORELLIA	cor_world	AREA	0	-32.3	28.0	-4282.5	45	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_74	CORELLIA	cor_world	AREA	0	96.6	28.0	-4394.9	91	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_75	CORELLIA	cor_world	AREA	0	96.6	28.0	-4407.1	91	1	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Coronet	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_76	CORELLIA	cor_world	AREA	0	3098.0	280.5	5002.6	-108	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_77	CORELLIA	cor_world	AREA	0	3098.2	280.0	4992.6	-92	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_78	CORELLIA	cor_world	PATROL	0	3187.8	290.0	4965.4	0	0	a CorSec investigator	corsec_investigator	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	PATROL	0	patrol_cor_14400	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_79	CORELLIA	cor_world	AREA	0	3120.0	300.0	5198.8	0	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_80	CORELLIA	cor_world	AREA	0	3127.1	300.0	5138.8	175	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_81	CORELLIA	cor_world	AREA	0	3151.6	300.0	5158.3	-8	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_82	CORELLIA	cor_world	AREA	0	3151.9	300.0	5268.8	-170	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_83	CORELLIA	cor_world	AREA	0	3162.9	300.0	5260.5	-144	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_84	CORELLIA	cor_world	AREA	0	3168.3	300.0	5138.6	179	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_85	CORELLIA	cor_world	AREA	0	3171.2	301.8	5099.9	171	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_86	CORELLIA	cor_world	AREA	0	3173.4	300.0	5308.9	48	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_87	CORELLIA	cor_world	AREA	0	3179.7	302.8	5100.2	-169	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_88	CORELLIA	cor_world	AREA	0	3185.2	300.0	5299.2	18	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_89	CORELLIA	cor_world	AREA	0	3185.4	290.0	4985.6	-82	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_90	CORELLIA	cor_world	PATROL	0	3255.0	300.0	5384.3	0	0	a CorSec Commissioner	corsec_comissioner	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	PATROL	0	patrol_cor_14500	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_91	CORELLIA	cor_world	AREA	0	3276.0	300.0	5454.4	-140	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_92	CORELLIA	cor_world	AREA	0	3279.0	300.0	5450.6	-140	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_93	CORELLIA	cor_world	AREA	0	3307.5	308.0	5486.6	44	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_94	CORELLIA	cor_world	AREA	0	3310.9	308.0	5482.5	42	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_95	CORELLIA	cor_world	AREA	0	3319.9	308.0	5522.9	74	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_96	CORELLIA	cor_world	AREA	0	3327.5	308.0	5519.6	32	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_97	CORELLIA	cor_world	AREA	0	3373.4	308.6	5466.1	-54	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_98	CORELLIA	cor_world	AREA	0	3387.6	308.6	5492.7	-72	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Doaba Guerfal	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_99	CORELLIA	cor_korvella_imp_detach_hq	AREA	10	10.0	-11.5	-20.0	20	0	a CorSec Security Specialist	corsec_detective_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_100	CORELLIA	cor_korvella_imp_detach_hq	AREA	10	13.0	-13.7	-16.0	18	0	a CorSec Chief	corsec_chief	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_101	CORELLIA	cor_korvella_imp_detach_hq	AREA	10	15.0	-11.5	-21.0	-1	0	a CorSec Security Specialist	corsec_detective_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_102	CORELLIA	cor_korvella_imp_detach_hq	AREA	10	20.0	-11.5	-21.0	-20	0	a CorSec Security Specialist	corsec_detective_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_103	CORELLIA	cor_korvella_imp_detach_hq	AREA	2	0.0	0.0	3.5	4	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_104	CORELLIA	cor_korvella_imp_detach_hq	AREA	5	1.0	-6.8	-6.0	115	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_105	CORELLIA	cor_korvella_imp_detach_hq	AREA	5	7.0	-6.8	-7.0	-12	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_106	CORELLIA	cor_korvella_imp_detach_hq	AREA	7	-5.0	-13.7	-12.0	25	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_107	CORELLIA	cor_korvella_imp_detach_hq	AREA	7	-6.0	-13.7	-4.0	58	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_108	CORELLIA	cor_korvella_imp_detach_hq	AREA	7	-6.0	-13.7	6.0	148	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_109	CORELLIA	cor_korvella_imp_detach_hq	AREA	8	-4.0	-13.7	13.0	157	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_110	CORELLIA	cor_korvella_imp_detach_hq	AREA	8	6.0	-13.7	11.0	-175	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_111	CORELLIA	cor_korvella_imp_detach_hq	AREA	9	13.0	-13.7	2.0	17	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_112	CORELLIA	cor_korvella_imp_detach_hq	AREA	9	17.0	-13.7	12.0	-88	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_113	CORELLIA	cor_korvella_imp_detach_hq_barracks	AREA	3	0.0	0.0	-4.5	0	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_114	CORELLIA	cor_korvella_imp_detach_hq_barracks	AREA	5	4.0	0.0	-2.0	-108	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_115	CORELLIA	cor_korvella_imp_detach_hq_officer_shed	AREA	3	0.0	0.0	-4.0	2	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_116	CORELLIA	cor_korvella_imp_detach_hq_officer_shed	AREA	4	4.0	0.0	1.5	-90	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_117	CORELLIA	cor_korvella_imp_detach_hq_officer_shed	AREA	6	-4.0	0.0	-3.0	96	0	an elite Imperial security guard	imp_elite_security_guard	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_118	CORELLIA	cor_world	AREA	0	-3046.0	31.0	2847.0	64	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_119	CORELLIA	cor_world	AREA	0	-3066.6	31.5	2786.0	149	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_120	CORELLIA	cor_world	AREA	0	-2998.6	30.9	2907.9	-90	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_121	CORELLIA	cor_world	AREA	0	-3093.0	31.0	2803.0	-13	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_122	CORELLIA	cor_world	AREA	0	-3112.0	31.0	2814.0	168	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_123	CORELLIA	cor_world	AREA	0	-3133.8	31.0	2810.9	-105	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_124	CORELLIA	cor_world	AREA	0	-3142.2	31.0	2811.8	106	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_125	CORELLIA	cor_world	AREA	0	-3277.3	52.6	2847.5	41	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_126	CORELLIA	cor_world	AREA	0	-3311.9	69.4	2883.8	45	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_127	CORELLIA	cor_world	AREA	0	-3209.9	30.5	2781.2	132	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_128	CORELLIA	cor_world	PATROL	0	-3335.0	86.0	3297.0	0	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	PATROL	0	patrol_cor_14700	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_129	CORELLIA	cor_world	AREA	0	-3387.8	86.0	3293.9	-40	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_130	CORELLIA	cor_world	AREA	0	-3371.5	86.0	3208.6	115	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_131	CORELLIA	cor_world	AREA	0	-3360.4	85.8	2935.6	131	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_132	CORELLIA	cor_world	AREA	0	-3373.0	101.0	3376.0	-139	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_133	CORELLIA	cor_world	AREA	0	-3387.4	86.0	2957.4	54	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_134	CORELLIA	cor_world	AREA	0	-3422.9	76.5	3358.1	143	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_135	CORELLIA	cor_world	PATROL	0	-3384.9	86.0	2970.3	0	0	A Super Battle Droid	super_battle_droid_corsec	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	PATROL	0	patrol_cor_15000	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_136	CORELLIA	cor_world	AREA	0	-3392.3	86.0	3164.4	119	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_137	CORELLIA	cor_world	AREA	0	-3402.9	101.0	3418.0	-139	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_138	CORELLIA	cor_world	AREA	0	-3401.5	76.5	3357.2	-139	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_139	CORELLIA	cor_world	PATROL	0	-3472.9	85.7	3189.3	-122	0	A Super Battle Droid	super_battle_droid_corsec	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	PATROL	0	patrol_cor_14600	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_140	CORELLIA	cor_world	AREA	0	-3435.1	86.0	3031.2	59	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_141	CORELLIA	cor_world	AREA	0	-3455.4	78.0	3341.9	0	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	TURN	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_142	CORELLIA	cor_world	AREA	0	-3582.0	86.0	3143.0	-27	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_143	CORELLIA	cor_world	AREA	0	-3569.1	86.0	3183.6	151	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_144	CORELLIA	cor_world	PATROL	0	-3589.1	86.0	3157.7	0	0	a CorSec Lieutenant	corsec_lieutenant	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	PATROL	0	patrol_cor_14800	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_145	CORELLIA	cor_world	AREA	0	-3589.3	86.0	3113.5	-125	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_146	CORELLIA	cor_world	AREA	0	-3547.4	70.0	3224.5	151	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_147	CORELLIA	cor_world	AREA	0	-3615.0	86.0	3210.0	142	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_148	CORELLIA	cor_world	AREA	0	-3697.4	86.0	3129.2	112	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_149	CORELLIA	cor_world	PATROL	0	-3677.3	88.5	3085.3	0	0	a CorSec Lieutenant	corsec_lieutenant	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	PATROL	0	patrol_cor_14900	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_150	CORELLIA	cor_world	AREA	0	-3724.3	101.0	3238.9	-113	0	A Super Battle Droid	super_battle_droid_corsec	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	TURN	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_151	CORELLIA	cor_world	AREA	0	-3753.8	86.0	3168.1	-68	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_152	CORELLIA	cor_world	AREA	0	-3761.6	86.6	3239.6	-179	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_153	CORELLIA	cor_world	AREA	0	-3805.0	101.0	3217.9	0	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	TURN	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_154	CORELLIA	cor_world	AREA	0	-3802.2	86.0	3167.2	0	0	a CorSec Soldier	corsec_trooper_aggro	ATTACKABLE	E	30	40	GCW - Neutral	Kor Vella	1	LOITER	3	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_155	CORELLIA	cor_world	AREA	0	-4932.5	21.0	-2427.7	123	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_156	CORELLIA	cor_world	AREA	0	-4936.1	21.0	-2486.2	54	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_157	CORELLIA	cor_world	AREA	0	-4941.2	20.9	-2522.0	149	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_158	CORELLIA	cor_world	AREA	0	-4942.5	21.0	-2438.9	106	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_159	CORELLIA	cor_world	AREA	0	-4944.3	21.0	-2387.8	-103	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_160	CORELLIA	cor_world	AREA	0	-4945.7	21.0	-2383.1	-111	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_161	CORELLIA	cor_world	AREA	0	-4975.9	21.0	-2323.7	76	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_162	CORELLIA	cor_world	AREA	0	-5031.2	21.0	-2614.9	178	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_163	CORELLIA	cor_world	PATROL	0	-5039.0	21.0	-2361.6	42	0	A Super Battle Droid	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	PATROL	0	patrol_cor_15200	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_164	CORELLIA	cor_world	AREA	0	-5044.7	21.0	-2303.0	44	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_165	CORELLIA	cor_world	AREA	0	-5048.7	21.0	-2299.5	44	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_166	CORELLIA	cor_world	AREA	0	-5055.1	21.0	-2616.0	137	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_167	CORELLIA	cor_world	AREA	0	-5092.3	21.0	-2648.2	175	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_168	CORELLIA	cor_world	AREA	0	-5112.1	21.0	-2279.3	79	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_169	CORELLIA	cor_world	AREA	0	-5124.9	21.0	-2425.7	61	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_170	CORELLIA	cor_world	AREA	0	-5128.2	21.0	-2652.1	162	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_171	CORELLIA	cor_world	AREA	0	-5131.7	21.0	-2419.4	18	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_172	CORELLIA	cor_world	AREA	0	-5135.0	21.0	-2658.8	168	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_173	CORELLIA	cor_world	AREA	0	-5174.6	21.0	-2656.7	-175	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_174	CORELLIA	cor_world	AREA	0	-5195.9	21.0	-2253.9	-24	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_175	CORELLIA	cor_world	AREA	0	-5212.9	21.0	-2650.9	-166	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_176	CORELLIA	cor_world	PATROL	0	-5218.5	21.0	-2513.2	50	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	PATROL	0	patrol_cor_15100	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_177	CORELLIA	cor_world	AREA	0	-5227.3	21.0	-2272.3	-29	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_178	CORELLIA	cor_world	AREA	0	-5245.9	20.9	-2636.5	-132	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_179	CORELLIA	cor_world	AREA	0	-5250.6	21.0	-2327.7	42	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_180	CORELLIA	cor_world	AREA	0	-5270.9	21.0	-2360.7	133	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_181	CORELLIA	cor_world	AREA	0	-5281.8	21.0	-2349.8	-46	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_182	CORELLIA	cor_world	AREA	0	-5301.8	21.0	-2572.0	-116	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_183	CORELLIA	cor_world	AREA	0	-5302.1	21.0	-2379.2	-135	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_184	CORELLIA	cor_world	AREA	0	-5306.8	21.0	-2561.2	-113	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_185	CORELLIA	cor_world	AREA	0	-5312.2	24.9	-2572.6	-24	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_186	CORELLIA	cor_world	AREA	0	-5338.7	21.0	-2427.9	-51	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_187	CORELLIA	cor_world	AREA	0	-5343.5	21.0	-2471.7	-89	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_188	CORELLIA	cor_world	AREA	0	-5381.8	20.7	-2741.1	130	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_189	CORELLIA	cor_world	AREA	0	-5396.8	21.0	-2614.9	-109	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_190	CORELLIA	cor_world	AREA	0	-5398.3	21.0	-2761.7	146	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_191	CORELLIA	cor_world	AREA	0	-5399.6	21.0	-2608.8	-119	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_192	CORELLIA	cor_world	AREA	0	-5418.2	20.9	-2799.6	125	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_193	CORELLIA	cor_world	AREA	0	-5459.6	21.0	-2841.6	-175	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_194	CORELLIA	cor_world	AREA	0	-5468.4	21.0	-2841.6	175	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_195	CORELLIA	cor_world	PATROL	0	-5478.9	21.0	-2668.0	89	0	A Super Battle Droid	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	PATROL	0	patrol_cor_15300	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_196	CORELLIA	cor_world	AREA	0	-5485.9	21.0	-2585.8	89	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_197	CORELLIA	cor_world	AREA	0	-5556.4	21.0	-2611.8	99	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_198	CORELLIA	cor_world	AREA	0	-5556.4	21.0	-2643.5	79	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_199	CORELLIA	cor_world	AREA	0	-5565.5	21.0	-2842.9	-158	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_200	CORELLIA	cor_world	AREA	0	-5574.1	21.0	-2843.3	173	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_201	CORELLIA	cor_world	AREA	0	-5605.4	21.0	-2711.7	-52	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	LOITER	5	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_202	CORELLIA	cor_world	AREA	0	-5633.8	21.0	-2824.4	-163	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_203	CORELLIA	cor_world	AREA	0	-5654.8	21.0	-2805.7	-169	0	a CorSec agent	corsec_agent	ATTACKABLE	E	30	40	GCW - Neutral	Tyrena	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_204	CORELLIA	cor_world	PATROL	0	-5264.0	4.0	-6425.9	-85	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	PATROL	0	patrol_cor_11300	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_205	CORELLIA	cor_world	AREA	0	-5320.0	24.4	-6237.8	94	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	LOITER	2	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_206	CORELLIA	cor_world	PATROL	0	-5320.0	4.0	-6423.2	89	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	PATROL	0	patrol_cor_11300	column	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_207	CORELLIA	cor_world	AREA	0	-5443.6	24.0	-6243.0	-78	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_208	CORELLIA	cor_world	AREA	0	-5534.1	23.4	-6217.9	138	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_209	CORELLIA	cor_world	AREA	0	-5549.5	23.4	-6202.1	-50	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_210	CORELLIA	cor_world	AREA	0	-5664.0	14.6	-6179.3	94	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_211	CORELLIA	cor_world	AREA	0	-5664.0	14.8	-6185.3	94	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_212	CORELLIA	cor_world	AREA	0	-5716.1	14.6	-6147.5	-89	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300
+spawn_gcw_cor_pres_neu_213	CORELLIA	cor_world	AREA	0	-5716.1	14.6	-6153.1	-91	0	a Rebel guard	reb_guard	ATTACKABLE	E	30	40	GCW - Neutral	Vreni Island	1	IDLE	0	0	-	idle	0	0	0	300

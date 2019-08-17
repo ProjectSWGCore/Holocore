@@ -20,11 +20,11 @@ public final class CmdSetGodMode implements ICmdCallback {
 		
 		CreatureObject creatureObject = player.getCreatureObject();
 		
-		if (creatureObject.hasAbility("admin")) {
-			creatureObject.removeAbility("admin");
+		if (creatureObject.hasCommand("admin")) {
+			creatureObject.removeCommand("admin");
 			SystemMessageIntent.broadcastPersonal(player, "God Mode Disabled");
 		} else {
-			creatureObject.addAbility("admin");
+			creatureObject.addCommand("admin");
 			SystemMessageIntent.broadcastPersonal(player, "God Mode Enabled");
 		}
 		ForceAwarenessUpdateIntent.broadcast(creatureObject);

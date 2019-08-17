@@ -29,22 +29,18 @@ package com.projectswg.holocore.services.gameplay.combat.loot;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupCloseLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupOpenLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupRequestLotteryItems;
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.*;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.LootType;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -57,7 +53,6 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.utilities.Arguments;
 
 import java.util.*;
@@ -75,7 +70,7 @@ public final class GrantLootService extends Service {
 	public GrantLootService() {
 		this.lootRestrictions = new ConcurrentHashMap<>();
 		this.executor = new ScheduledThreadPool(1, "grant-loot-service");
-		this.lootRange = DataManager.getConfig(ConfigFile.LOOTOPTIONS).getInt("LOOT-RANGE", 64);
+		this.lootRange = PswgDatabase.INSTANCE.getConfig().getInt(this, "lootRange", 64);
 	}
 	
 	@Override
@@ -261,6 +256,8 @@ public final class GrantLootService extends Service {
 			switch (item.moveToContainer(looter, looter.getInventory())) {
 				case SUCCESS: {
 					String itemName = item.getObjectName();
+					if (itemName.isEmpty())
+						itemName = item.getStringId().toString();
 					
 					if (item instanceof CreditObject) {
 						onLootedCredits(looter, ((CreditObject) item).getAmount());

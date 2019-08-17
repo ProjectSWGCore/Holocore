@@ -65,7 +65,8 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		waypoint.setPosition(terrain, position.getX(), position.getY(), position.getZ());
 		waypoint.setName(name);
 		waypoint.setColor(color);
-		player.getPlayerObject().addWaypoint(waypoint);
+		if (!player.getPlayerObject().addWaypoint(waypoint))
+			SystemMessageIntent.broadcastPersonal(player, "@base_player:too_many_waypoints");
 		ObjectCreatedIntent.broadcast(waypoint);
 	}
 }

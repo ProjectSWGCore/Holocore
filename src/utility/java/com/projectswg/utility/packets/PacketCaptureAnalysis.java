@@ -31,6 +31,7 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.hcap.PacketRecord;
 import com.projectswg.common.network.packets.PacketType;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.*;
@@ -182,9 +183,12 @@ public class PacketCaptureAnalysis {
 	
 	private void handleSceneCreateObjectByCrc(SceneCreateObjectByCrc p) {
 		objectCreations.incrementAndGet();
-		assertNotNull(p, currentTerrain.get(), "unknown terrain");
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(p.getObjectId(), CRC.getString(p.getObjectCrc()));
-		p.setLocation(Location.builder(p.getLocation()).setTerrain(currentTerrain.get()).build());
+		
+		if (currentTerrain.get() == null)
+			p.setLocation(Location.builder(p.getLocation()).setTerrain(Terrain.GONE).build());
+		else
+			p.setLocation(Location.builder(p.getLocation()).setTerrain(currentTerrain.get()).build());
 		obj.setLocation(p.getLocation());
 		loadingObjects.add(obj);
 		assertFalse(p, objects.containsKey(p.getObjectId()), "object already exists [initialized]");
@@ -201,8 +205,10 @@ public class PacketCaptureAnalysis {
 	}
 	
 	private void handleBaseline(Baseline p) {
+		assertTrue(p, !loadingObjects.isEmpty(), "no loading objects defined");
 		assertEquals(p, loadingObjects.getLast().getObjectId(), p.getObjectId(), "baseline sent for non-loading object");
 		assertFalse(p, objects.containsKey(p.getObjectId()), "already-initialized object");
+		loadingObjects.getLast().parseBaseline(p);
 	}
 	
 	private void handleDeltasMessage(DeltasMessage p) {
@@ -216,7 +222,7 @@ public class PacketCaptureAnalysis {
 		assertNull(p, objects.put(obj.getObjectId(), obj), "object already exists");
 		
 		if (obj instanceof BuildingObject) {
-			List<CellInfo> cellGoal = DataLoader.buildingCells().getBuilding(obj.getTemplate());
+			List<CellInfo> cellGoal = DataLoader.Companion.buildingCells().getBuilding(obj.getTemplate());
 			if (cellGoal != null) {
 				Collection<SWGObject> cells = obj.getContainedObjects();
 				assertEquals(p, cellGoal.size(), cells.size(), "Cells are not fully populated within building");

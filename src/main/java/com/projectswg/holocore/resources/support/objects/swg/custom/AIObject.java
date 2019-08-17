@@ -31,7 +31,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NpcStaticSpawnLoader.SpawnerFlag;
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;

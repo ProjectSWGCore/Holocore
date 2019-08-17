@@ -43,7 +43,7 @@ public class FactionFlagService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		Collection<StaticPvpZoneLoader.StaticPvpZoneInfo> staticPvpZones = DataLoader.staticPvpZones().getStaticPvpZones();
+		Collection<StaticPvpZoneLoader.StaticPvpZoneInfo> staticPvpZones = DataLoader.Companion.staticPvpZones().getStaticPvpZones();
 		
 		for (StaticPvpZoneLoader.StaticPvpZoneInfo staticPvpZone : staticPvpZones) {
 			int id = staticPvpZone.getId();

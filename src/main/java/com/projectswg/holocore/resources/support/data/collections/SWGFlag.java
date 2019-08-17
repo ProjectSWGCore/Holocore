@@ -32,8 +32,6 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.BitSet;
 
@@ -60,20 +58,22 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	
 	@Override
 	public byte[] encode() {
-		int[] list = toList();
-		ByteBuffer buffer = ByteBuffer.allocate(4 + (list.length * 4)).order(ByteOrder.LITTLE_ENDIAN);
+		byte [] encoded = toByteArray();
+		int length = (int) Math.ceil(encoded.length / 4.0);
 		
-		buffer.putInt(list.length);
-		for (int bits : list) {
-			buffer.putInt(bits);
-		}
-		
+		NetBuffer buffer = NetBuffer.allocate((length + 1) * 4);
+		buffer.addInt(length);
+		buffer.addRawArray(encoded);
 		return buffer.array();
 	}
 	
 	@Override
 	public void decode(NetBuffer data) {
-		throw new UnsupportedOperationException("Unable to decode bitset!");
+		int len = data.getInt();
+		byte [] encoded = data.getArray(len * 4);
+		
+		clear();
+		xor(BitSet.valueOf(encoded));
 	}
 	
 	@Override

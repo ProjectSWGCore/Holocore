@@ -41,6 +41,10 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	private int view;
 	private int updateType;
 	
+	public SWGBitSet() {
+		super(128);
+	}
+	
 	public SWGBitSet(int view, int updateType) {
 		super(128); // Seems to be the default size for the bitmask sets in SWGPackets
 		this.view = view;
@@ -59,8 +63,11 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	
 	@Override
 	public void decode(NetBuffer data) {
-		// TODO: Decode method for SWGBitSet
-		throw new UnsupportedOperationException("Unable to decode bitset!");
+		int len = data.getInt();
+		data.getInt();
+		byte [] bytes = data.getArray(len);
+		clear();
+		or(BitSet.valueOf(bytes));
 	}
 	
 	@Override

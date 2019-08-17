@@ -30,8 +30,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.config.ConfigFile;
-import com.projectswg.holocore.resources.support.data.server_info.DataManager;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -48,7 +47,7 @@ public class DeveloperService extends Service {
 	public boolean start() {
 		setupDeveloperArea();
 		
-		if (DataManager.getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
+		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "characterBuilder", false))
 			setupCharacterBuilders();
 		
 		return super.start();

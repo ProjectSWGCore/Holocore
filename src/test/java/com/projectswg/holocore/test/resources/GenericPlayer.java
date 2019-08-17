@@ -63,7 +63,7 @@ public class GenericPlayer extends Player {
 	private final AtomicBoolean zoning;
 	
 	public GenericPlayer() {
-		super(UNIQUE_ID.incrementAndGet());
+		super(UNIQUE_ID.incrementAndGet(), null, p -> {});
 		this.loadingObjects = new ConcurrentHashMap<>();
 		this.objects = new ConcurrentHashMap<>();
 		this.packets = new ArrayList<>();
@@ -108,13 +108,6 @@ public class GenericPlayer extends Player {
 		handlePacket(packet3);
 		handlePacket(packet4);
 		handlePacket(packet5);
-	}
-	
-	@Override
-	public void sendPacket(Collection<? extends SWGPacket> packets) {
-		this.packets.addAll(packets);
-		for (SWGPacket packet : packets)
-			handlePacket(packet);
 	}
 	
 	@Nullable

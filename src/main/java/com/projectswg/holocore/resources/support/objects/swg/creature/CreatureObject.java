@@ -28,9 +28,11 @@ package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
@@ -40,7 +42,6 @@ import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
-import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -48,6 +49,8 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
+import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -66,8 +69,8 @@ public class CreatureObject extends TangibleObject {
 	private transient long lastReserveOperation		= 0;
 	
 	private final CreatureObjectAwareness		awareness		= new CreatureObjectAwareness(this);
-	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP();
-	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP();
+	private final CreatureObjectClientServerNP	creo4 			= new CreatureObjectClientServerNP(this);
+	private final CreatureObjectSharedNP		creo6 			= new CreatureObjectSharedNP(this);
 	private final Map<CreatureObject, Integer>	damageMap 		= new HashMap<>();
 	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
 	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
@@ -77,9 +80,6 @@ public class CreatureObject extends TangibleObject {
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
 	private double	height					= 0;
-	private int		cashBalance				= 0;
-	private int		bankBalance				= 0;
-	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -89,28 +89,22 @@ public class CreatureObject extends TangibleObject {
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
-	
-	private SWGList<Integer> baseAttributes			= new SWGList<>(1, 2);
+	private AttributesMutable baseAttributes;
 	
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
+		this.baseAttributes = new AttributesMutable(this, 1, 2);
 		initBaseAttributes();
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
-	public void flushObjectCreates() {
+	public void flushAwareness() {
 		Player owner = getOwnerShallow();
 		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
 			return;
-		awareness.flushCreates(owner);
-	}
-	
-	public void flushObjectDestroys() {
-		Player owner = getOwnerShallow();
-		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
-			return;
-		awareness.flushDestroys(owner);
+		awareness.flush(owner);
+		sendAndFlushAllDeltas();
 	}
 	
 	public void resetObjectsAware() {
@@ -279,6 +273,10 @@ public class CreatureObject extends TangibleObject {
 		return containersOpen.remove(new Container(obj, slot));
 	}
 	
+	public void setTeleportDestination(SWGObject parent, Location location) {
+		awareness.setTeleportDestination(parent, location);
+	}
+	
 	public void addDelta(DeltasMessage delta) {
 		synchronized (pendingDeltas) {
 			pendingDeltas.add(delta);
@@ -308,14 +306,11 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	public void addSkill(String ... skillList) {
-		synchronized (skills) {
-			boolean delta = false;
-			for (String skillName : skillList)
-				delta |= skills.add(skillName);
-			if (delta)
-				skills.sendDeltaMessage(this);
-		}
+	public boolean addSkill(String skill) {
+		boolean added = skills.add(skill);
+		if (added)
+			skills.sendDeltaMessage(this);
+		return added;
 	}
 	
 	public boolean hasSkill(String skillName) {
@@ -326,22 +321,6 @@ public class CreatureObject extends TangibleObject {
 		return Collections.unmodifiableSet(skills);
 	}
 	
-	public void handleLevelSkillMods(String modName, int modValue){
-		adjustSkillmod(modName, 0, modValue);
-	}
-	
-	public int getCashBalance() {
-		return cashBalance;
-	}
-
-	public int getBankBalance() {
-		return bankBalance;
-	}
-	
-	public long getReserveBalance() {
-		return reserveBalance;
-	}
-
 	public Posture getPosture() {
 		return posture;
 	}
@@ -350,52 +329,8 @@ public class CreatureObject extends TangibleObject {
 		return race;
 	}
 	
-	public double getMovementScale() {
-		return creo4.getMovementScale();
-	}
-	
-	public double getMovementPercent() {
-		return creo4.getMovementPercent();
-	}
-	
-	public double getWalkSpeed() {
-		return creo4.getWalkSpeed();
-	}
-	
-	public double getRunSpeed() {
-		return creo4.getRunSpeed();
-	}
-	
-	public double getAccelScale() {
-		return creo4.getAccelScale();
-	}
-	
-	public double getAccelPercent() {
-		return creo4.getAccelPercent();
-	}
-	
-	public double getTurnScale() {
-		return creo4.getTurnScale();
-	}
-	
-	public double getSlopeModAngle() {
-		return creo4.getSlopeModAngle();
-	}
-	
-	public double getSlopeModPercent() {
-		return creo4.getSlopeModPercent();
-	}
-	
-	public double getWaterModPercent() {
-		return creo4.getWaterModPercent();
-	}
-	
 	public double getHeight() {
 		return height;
-	}
-	
-	public long getPerformanceListenTarget() {
-		return creo4.getPerformanceListenTarget();
 	}
 	
 	public int getGuildId() {
@@ -408,10 +343,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public int getLevelHealthGranted() {
 		return creo6.getLevelHealthGranted();
-	}
-	
-	public int getTotalLevelXp() {
-		return creo4.getTotalLevelXp();
 	}
 	
 	public CreatureDifficulty getDifficulty() {
@@ -460,114 +391,6 @@ public class CreatureObject extends TangibleObject {
 		this.race = race;
 	}
 	
-	public void setCashBalance(long cashBalance) {
-		if (cashBalance < 0)
-			cashBalance = 0;
-		if (cashBalance > 2E9) { // 2 billion cap
-			long leftover = cashBalance - (long)2E9;
-			cashBalance = (long) 2E9;
-			long bank = bankBalance + leftover;
-			long reserve = reserveBalance;
-			leftover = bank - (long) 2E9;
-			if (leftover > 0) {
-				bank = (long)2E9;
-				reserve += leftover;
-			}
-			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, (int) cashBalance);
-			setBankBalance(bank);
-			setReserveBalance(reserve);
-		} else {
-			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, (int) cashBalance);
-		}
-	}
-
-	public void setBankBalance(long bankBalance) {
-		if (bankBalance < 0)
-			bankBalance = 0;
-		if (bankBalance > 2E9) { // 2 billion cap
-			long leftover = bankBalance - (long)2E9;
-			bankBalance = (long) 2E9;
-			long cash = cashBalance + leftover;
-			long reserve = reserveBalance;
-			leftover = cash - (long) 2E9;
-			if (leftover > 0) {
-				cash = (long)2E9;
-				reserve += leftover;
-			}
-			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, (int) bankBalance);
-			setCashBalance(cash);
-			setReserveBalance(reserve);
-		} else {
-			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, (int) bankBalance);
-		}
-	}
-	
-	public void setReserveBalance(long reserveBalance) {
-		if (reserveBalance < 0)
-			reserveBalance = 0;
-		else if (reserveBalance > 3E9)
-			reserveBalance = (long) 3E9; // 3 billion cap
-		this.reserveBalance = reserveBalance;
-	}
-	
-	/**
-	 * Removes amount from cash first, then bank after. Returns true if the
-	 * operation was successful
-	 * @param amount the amount to remove
-	 * @return TRUE if successfully withdrawn, FALSE otherwise
-	 */
-	public boolean removeFromCashAndBank(long amount) {
-		long amountBalance = bankBalance + cashBalance;
-		if (amountBalance < amount)
-			return false;
-		if (cashBalance < amount) {
-			setBankBalance(bankBalance - (amount - cashBalance));
-			setCashBalance(0);
-		} else {
-			setCashBalance(cashBalance - amount);
-		}
-		return true;
-	}
-	
-	/**
-	 * Removes amount from bank first, then cash after. Returns true if the
-	 * operation was successful
-	 * @param amount the amount to remove
-	 * @return TRUE if successfully withdrawn, FALSE otherwise
-	 */
-	public boolean removeFromBankAndCash(long amount) {
-		long amountBalance = bankBalance + cashBalance;
-		if (amountBalance < amount)
-			return false;
-		if (bankBalance < amount) {
-			setCashBalance(cashBalance - (amount - bankBalance));
-			setBankBalance(0);
-		} else {
-			setBankBalance(bankBalance - amount);
-		}
-		return true;
-	}
-	
-	/**
-	 * Adds amount to cash balance.
-	 * @param amount the amount to add
-	 */
-	public void addToCash(long amount) {
-		setCashBalance(cashBalance + amount);
-	}
-	
-	/**
-	 * Adds amount to bank balance.
-	 * @param amount the amount to add
-	 */
-	public void addToBank(long amount) {
-		setBankBalance(bankBalance + amount);
-	}
-	
 	public boolean canPerformGalacticReserveTransaction() {
 		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
 	}
@@ -592,64 +415,154 @@ public class CreatureObject extends TangibleObject {
 		setMovementScale(1);
 	}
 	
-	public void setMovementScale(double movementScale) {
-		creo4.setMovementScale(movementScale);
-		sendDelta(4, 5, movementScale);
-	}
+	/*
+	 * =====-----  -----=====
+	 * ===== Baseline 4 =====
+	 * =====-----  -----=====
+	 */
 	
-	public void setMovementPercent(double movementPercent) {
-		creo4.setMovementPercent(movementPercent);
-		sendDelta(4, 4, movementPercent);
-	}
-	
-	public void setWalkSpeed(double walkSpeed) {
-		creo4.setWalkSpeed(walkSpeed);
-		sendDelta(4, 11, walkSpeed);
-	}
-	
-	public void setRunSpeed(double runSpeed) {
-		creo4.setRunSpeed(runSpeed);
-		sendDelta(4, 7, runSpeed);
-	}
-	
-	public void setAccelScale(double accelScale) {
-		creo4.setAccelScale(accelScale);
-		sendDelta(4, 1, accelScale);
+	public double getAccelPercent() {
+		return creo4.getAccelPercent();
 	}
 	
 	public void setAccelPercent(double accelPercent) {
-		creo4.setAccelPercent(accelPercent);
-		sendDelta(4, 0, accelPercent);
+		creo4.setAccelPercent((float) accelPercent);
 	}
 	
-	public void setTurnScale(double turnScale) {
-		creo4.setTurnScale(turnScale);
-		sendDelta(4, 10, turnScale);
+	public float getAccelScale() {
+		return creo4.getAccelScale();
+	}
+	
+	public void setAccelScale(double accelScale) {
+		creo4.setAccelScale((float) accelScale);
+	}
+	
+	@NotNull
+	public Attributes getBonusAttributes() {
+		return creo4.getBonusAttributes();
+	}
+	
+	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
+		creo4.adjustSkillmod(skillModName, base, modifier);
+	}
+	
+	public int getSkillModValue(@NotNull String skillModName) {
+		return creo4.getSkillModValue(skillModName);
+	}
+	
+	public float getMovementPercent() {
+		return creo4.getMovementPercent();
+	}
+	
+	public void setMovementPercent(double movementPercent) {
+		creo4.setMovementPercent((float) movementPercent);
+	}
+	
+	public float getMovementScale() {
+		return creo4.getMovementScale();
+	}
+	
+	public void setMovementScale(double movementScale) {
+		creo4.setMovementScale((float) movementScale);
+	}
+	
+	public long getPerformanceListenTarget() {
+		return creo4.getPerformanceListenTarget();
+	}
+	
+	public void setPerformanceListenTarget(long performanceListenTarget) {
+		creo4.setPerformanceListenTarget(performanceListenTarget);
+	}
+	
+	public float getRunSpeed() {
+		return creo4.getRunSpeed();
+	}
+	
+	public void setRunSpeed(double runSpeed) {
+		creo4.setRunSpeed((float) runSpeed);
+	}
+	
+	public float getSlopeModAngle() {
+		return creo4.getSlopeModAngle();
 	}
 	
 	public void setSlopeModAngle(double slopeModAngle) {
-		creo4.setSlopeModAngle(slopeModAngle);
-		sendDelta(4, 8, slopeModAngle);
+		creo4.setSlopeModAngle((float) slopeModAngle);
+	}
+	
+	public float getSlopeModPercent() {
+		return creo4.getSlopeModPercent();
 	}
 	
 	public void setSlopeModPercent(double slopeModPercent) {
-		creo4.setSlopeModPercent(slopeModPercent);
-		sendDelta(4, 9, slopeModPercent);
+		creo4.setSlopeModPercent((float) slopeModPercent);
+	}
+	
+	public float getTurnScale() {
+		return creo4.getTurnScale();
+	}
+	
+	public void setTurnScale(double turnScale) {
+		creo4.setTurnScale((float) turnScale);
+	}
+	
+	public float getWalkSpeed() {
+		return creo4.getWalkSpeed();
+	}
+	
+	public void setWalkSpeed(double walkSpeed) {
+		creo4.setWalkSpeed((float) walkSpeed);
+	}
+	
+	public float getWaterModPercent() {
+		return creo4.getWaterModPercent();
 	}
 	
 	public void setWaterModPercent(double waterModPercent) {
-		creo4.setWaterModPercent(waterModPercent);
-		sendDelta(4, 12, waterModPercent);
+		creo4.setWaterModPercent((float) waterModPercent);
+	}
+	
+	@NotNull
+	public Set<GroupMissionCriticalObject> getMissionCriticalObjects() {
+		return creo4.getMissionCriticalObjects();
+	}
+	
+	public void setMissionCriticalObjects(@NotNull Set<GroupMissionCriticalObject> missionCriticalObjects) {
+		creo4.setMissionCriticalObjects(missionCriticalObjects);
+	}
+	
+	@NotNull
+	public Set<String> getCommands() {
+		return creo4.getCommands();
+	}
+	
+	public void addCommand(@NotNull String command) {
+		creo4.addCommand(command);
+	}
+	
+	public void addCommand(@NotNull String... commands) {
+		creo4.addCommands(commands);
+	}
+	
+	public void removeCommand(@NotNull String command) {
+		creo4.removeCommand(command);
+	}
+	
+	public boolean hasCommand(@NotNull String command) {
+		return creo4.hasCommand(command);
+	}
+	
+	public int getTotalLevelXp() {
+		return creo4.getTotalLevelXp();
+	}
+	
+	public void setTotalLevelXp(int totalLevelXp) {
+		creo4.setTotalLevelXp(totalLevelXp);
 	}
 	
 	public void setHeight(double height) {
 		this.height = height;
 		sendDelta(3, 16, height);
-	}
-	
-	public void setPerformanceListenTarget(long performanceListenTarget) {
-		creo4.setPerformanceListenTarget(performanceListenTarget);
-		sendDelta(4, 6, performanceListenTarget);
 	}
 	
 	public void setGuildId(int guildId) {
@@ -665,11 +578,6 @@ public class CreatureObject extends TangibleObject {
 	public void setLevelHealthGranted(int levelHealthGranted) {
 		creo6.setLevelHealthGranted(levelHealthGranted);
 		sendDelta(6, 9, levelHealthGranted);
-	}
-	
-	public void setTotalLevelXp(int totalLevelXp) {
-		creo4.setTotalLevelXp(totalLevelXp);
-		sendDelta(4, 15, totalLevelXp);
 	}
 	
 	public void setDifficulty(CreatureDifficulty difficulty) {
@@ -713,7 +621,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public WeaponObject getEquippedWeapon() {
-		return creo6.getEquippedWeapon();
+		return getSlottedObjects().stream().filter(obj -> obj.getObjectId() == creo6.getEquippedWeapon()).map(WeaponObject.class::cast).findFirst().orElse(null);
 	}
 
 	public void setEquippedWeapon(WeaponObject weapon) {
@@ -724,7 +632,7 @@ public class CreatureObject extends TangibleObject {
 		else
 			equippedWeapon = weapon;
 		
-		creo6.setEquippedWeapon(equippedWeapon);
+		creo6.setEquippedWeapon(equippedWeapon.getObjectId());
 		sendDelta(6, 12, equippedWeapon.getObjectId());
 	}
 
@@ -861,14 +769,6 @@ public class CreatureObject extends TangibleObject {
 		statesBitmask = 0;
 		sendDelta(3, 18, statesBitmask);
 	}
-
-	public synchronized void adjustSkillmod(String skillModName, int base, int modifier) {
-		creo4.adjustSkillmod(skillModName, base, modifier, this);
-	}
-	
-	public int getSkillModValue(String skillModName) {
-		return creo4.getSkillModValue(skillModName);
-	}
 	
 	public void addBuff(Buff buff) {
 		creo6.putBuff(buff, this);
@@ -912,6 +812,10 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 27, performing);
 	}
 	
+	public HologramColour getHologramColor() {
+		return creo6.getHologramColor();
+	}
+	
 	public void setHologramColour(HologramColour hologramColour) {
 		creo6.setHologramColour(hologramColour);
 		sendDelta(6, 29, hologramColour.getValue());
@@ -935,9 +839,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseHealth() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(0);
-		}
+		return baseAttributes.getHealth();
 	}
 	
 	public int getAction() {
@@ -949,9 +851,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseAction() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(2);
-		}
+		return baseAttributes.getAction();
 	}
 	
 	public int getMind() {
@@ -963,85 +863,57 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getBaseMind() {
-		synchronized (baseAttributes) {
-			return baseAttributes.get(4);
-		}
-	}
-
-	public void addAbility(String ... abilities) {
-		creo4.addAbility(this, abilities);
+		return baseAttributes.getMind();
 	}
 	
-	public void removeAbility(String abilityName) {
-		creo4.removeAbility(abilityName);
-	}
-	
-	public boolean hasAbility(String abilityName) {
-		return creo4.hasAbility(abilityName);
-	}
-	
-	public Set<String> getAbilityNames() {
-		return creo4.getAbilityNames();
-	}
-
 	public void setBaseHealth(int baseHealth) {
-		synchronized(baseAttributes) {
-			baseAttributes.set(0, baseHealth);
-			baseAttributes.sendDeltaMessage(this);
-		}
+		baseAttributes.setHealth(baseHealth);
 	}
 	
 	public void setHealth(int health) {
-		creo6.setHealth(health, this);
+		creo6.setHealth(health);
 	}
 	
 	public void modifyHealth(int mod) {
-		creo6.modifyHealth(mod, this);
+		creo6.modifyHealth(mod);
 	}
 	
 	public void setMaxHealth(int maxHealth) {
-		creo6.setMaxHealth(maxHealth, this);
+		creo6.setMaxHealth(maxHealth);
 	}
 	
 	public void setBaseAction(int baseAction) {
-		synchronized(baseAttributes) {
-			baseAttributes.set(2, baseAction);
-			baseAttributes.sendDeltaMessage(this);
-		}
+		baseAttributes.setAction(baseAction);
 	}
 	
 	public void setAction(int action) {
-		creo6.setAction(action, this);
+		creo6.setAction(action);
 	}
 	
 	public void modifyAction(int mod) {
-		creo6.modifyAction(mod, this);
+		creo6.modifyAction(mod);
 	}
 	
 	public void setMaxAction(int maxAction) {
-		creo6.setMaxAction(maxAction, this);
+		creo6.setMaxAction(maxAction);
 	}
 	
 	public void setMind(int mind) {
-		creo6.setMind(mind, this);
+		creo6.setMind(mind);
 	}
 	
-	public int modifyMind(int mod) {
-		return creo6.modifyMind(mod, this);
+	public void modifyMind(int mod) {
+		creo6.modifyMind(mod);
 	}
 	
 	public void setMaxMind(int maxMind) {
-		creo6.setMaxMind(maxMind, this);
+		creo6.setMaxMind(maxMind);
 	}
 	
 	private void initBaseAttributes() {
-		baseAttributes.add(0, 1000); // Health
-		baseAttributes.add(1, 0);
-		baseAttributes.add(2, 300); // Action
-		baseAttributes.add(3, 0);
-		baseAttributes.add(4, 300); // Mind
-		baseAttributes.add(5, 0);
-		baseAttributes.clearDeltaQueue();
+		baseAttributes.setHealth(1000);
+		baseAttributes.setAction(300);
+		baseAttributes.setMind(300);
 	}
 	
 	public Collection<SWGObject> getItemsByTemplate(String slotName, String template) {
@@ -1154,15 +1026,11 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void createBaseline1(Player target, BaselineBuilder bb) {
-		super.createBaseline1(target, bb); // 0 variables
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
-		bb.addInt(bankBalance); // 0
-		bb.addInt(cashBalance); // 1
+		super.createBaseline1(target, bb); // 2 variables
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
 		bb.addObject(skills); // 3
 		
-		bb.incrementOperandCount(4);
+		bb.incrementOperandCount(2);
 	}
 	
 	@Override
@@ -1185,7 +1053,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline4(target, bb); // 0 variables
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
-		creo4.createBaseline4(target, bb);
+		creo4.createBaseline4(bb);
 	}
 	
 	@Override
@@ -1199,11 +1067,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline1(NetBuffer buffer) {
 		super.parseBaseline1(buffer);
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
-		bankBalance = buffer.getInt();
-		cashBalance = buffer.getInt();
-		baseAttributes = SWGList.getSwgList(buffer, 1, 2, Integer.class);
+		baseAttributes.decode(buffer);
 		skills = SWGSet.getSwgSet(buffer, 1, 3, StringType.ASCII);
 	}
 	
@@ -1231,27 +1095,58 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		creo4.saveMongo(data.getDocument("base4"));
+		creo6.saveMongo(data.getDocument("base6"));
+		data.putString("posture", posture.name());
+		data.putString("race", race.name());
+		data.putDouble("height", height);
+		data.putInteger("battleFatigue", battleFatigue);
+		data.putLong("ownerId", ownerId);
+		data.putLong("statesBitmask", statesBitmask);
+		data.putInteger("factionRank", factionRank);
+		data.putArray("skills", skills);
+		data.putDocument("baseAttributes", baseAttributes);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		skills.clear();
+		
+		creo4.readMongo(data.getDocument("base4"));
+		creo6.readMongo(data.getDocument("base6"));
+		posture = Posture.valueOf(data.getString("posture", posture.name()));
+		race = Race.valueOf(data.getString("race", race.name()));
+		height = data.getDouble("height", height);
+		battleFatigue = data.getInteger("battleFatigue", battleFatigue);
+		ownerId = data.getLong("ownerId", ownerId);
+		statesBitmask = data.getLong("statesBitmask", statesBitmask);
+		factionRank = (byte) data.getInteger("factionRank", factionRank);
+		skills.addAll(data.getArray("skills", String.class));
+		data.getDocument("baseAttributes", baseAttributes);
+	}
+	
+	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(1);
+		stream.addByte(3);
 		creo4.save(stream);
 		creo6.save(stream);
 		stream.addAscii(posture.name());
 		stream.addAscii(race.name());
 		stream.addFloat((float) height);
 		stream.addInt(battleFatigue);
-		stream.addInt(cashBalance);
-		stream.addInt(bankBalance);
-		stream.addLong(reserveBalance);
+		stream.addInt(getCashBalance());
+		stream.addInt(getBankBalance());
 		stream.addLong(ownerId);
 		stream.addLong(statesBitmask);
 		stream.addByte(factionRank);
 		synchronized (skills) {
 			stream.addList(skills, stream::addAscii);
 		}
-		synchronized (baseAttributes) {
-			stream.addList(baseAttributes, stream::addInt);
-		}
+		baseAttributes.save(stream);
 	}
 	
 	@Override
@@ -1260,6 +1155,8 @@ public class CreatureObject extends TangibleObject {
 		switch(stream.getByte()) {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
+			case 2: readVersion2(stream); break;
+			case 3: readVersion3(stream); break;
 		}
 		
 	}
@@ -1271,9 +1168,9 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(stream.getAscii());
 		height = stream.getFloat();
 		battleFatigue = stream.getInt();
-		cashBalance = stream.getInt();
-		bankBalance = stream.getInt();
-		reserveBalance = stream.getLong();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		stream.getLong();
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
@@ -1282,7 +1179,7 @@ public class CreatureObject extends TangibleObject {
 			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
 		}
 		stream.getList((i) -> skills.add(stream.getAscii()));
-		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+		readAttributes((byte) 0, baseAttributes, stream);
 	}
 	
 	private void readVersion1(NetBufferStream stream) {
@@ -1292,14 +1189,62 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(stream.getAscii());
 		height = stream.getFloat();
 		battleFatigue = stream.getInt();
-		cashBalance = stream.getInt();
-		bankBalance = stream.getInt();
-		reserveBalance = stream.getLong();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		stream.getLong();
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
-		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+		readAttributes((byte) 1, baseAttributes, stream);
+	}
+	
+	private void readVersion2(NetBufferStream stream) {
+		creo4.read(stream);
+		creo6.read(stream);
+		posture = Posture.valueOf(stream.getAscii());
+		race = Race.valueOf(stream.getAscii());
+		height = stream.getFloat();
+		battleFatigue = stream.getInt();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		ownerId = stream.getLong();
+		statesBitmask = stream.getLong();
+		factionRank = stream.getByte();
+		stream.getList((i) -> skills.add(stream.getAscii()));
+		readAttributes((byte) 2, baseAttributes, stream);
+	}
+	
+	private void readVersion3(NetBufferStream stream) {
+		creo4.read(stream);
+		creo6.read(stream);
+		posture = Posture.valueOf(stream.getAscii());
+		race = Race.valueOf(stream.getAscii());
+		height = stream.getFloat();
+		battleFatigue = stream.getInt();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
+		ownerId = stream.getLong();
+		statesBitmask = stream.getLong();
+		factionRank = stream.getByte();
+		stream.getList((i) -> skills.add(stream.getAscii()));
+		baseAttributes.read(stream);
+	}
+	
+	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
+		if (ver <= 2) {
+			int [] array = new int[6];
+			stream.getList((i) -> array[i] = stream.getInt());
+			attributes.setHealth(array[0]);
+			attributes.setHealthRegen(array[1]);
+			attributes.setAction(array[2]);
+			attributes.setActionRegen(array[3]);
+			attributes.setMind(array[4]);
+			attributes.setMindRegen(array[5]);
+		} else {
+			attributes.read(stream);
+		}
+		
 	}
 	
 	private static class Container {

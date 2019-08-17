@@ -27,9 +27,13 @@
 
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.building.UpdateCellPermissionMessage;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
@@ -37,6 +41,7 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CreatureObjectAwareness {
 	
@@ -44,16 +49,35 @@ public class CreatureObjectAwareness {
 	private final Set<SWGObject> aware;
 	private final Set<Long> awareIds;
 	private final Comparator<SWGObject> objectComparator;
+	private final AtomicReference<SWGPacket> finalTeleportPacket;
 	
 	public CreatureObjectAwareness(CreatureObject creature) {
 		this.creature = creature;
 		this.aware = new HashSet<>();
 		this.awareIds = new HashSet<>();
 		this.objectComparator = Comparator.comparingInt(CreatureObjectAwareness::getObjectDepth).thenComparingDouble(this::getDistance);
+		this.finalTeleportPacket = new AtomicReference<>(null);
 	}
 	
-	public synchronized void flushCreates(@NotNull Player target) {
+	public synchronized void setTeleportDestination(SWGObject parent, Location location) {
+		if (parent == null)
+			finalTeleportPacket.set(new DataTransform(creature.getObjectId(), 0, creature.getNextUpdateCount(), location, 0));
+		else
+			finalTeleportPacket.set(new DataTransformWithParent(creature.getObjectId(), 0, creature.getNextUpdateCount(), parent.getObjectId(), location, 0));
+	}
+	
+	public synchronized void flush(@NotNull Player target) {
 		Set<SWGObject> newAware = creature.getAware();
+		flushCreates(target, newAware);
+		
+		SWGPacket finalTeleportPacket = this.finalTeleportPacket.getAndSet(null);
+		if (finalTeleportPacket != null)
+			creature.sendSelf(finalTeleportPacket);
+		
+		flushDestroys(target, newAware);
+	}
+	
+	private void flushCreates(@NotNull Player target, Set<SWGObject> newAware) {
 		List<SWGObject> create = new ArrayList<>();
 		List<SWGObject> added = new ArrayList<>();
 		
@@ -89,8 +113,7 @@ public class CreatureObjectAwareness {
 		assert aware.contains(creature) : "not aware of creature";
 	}
 	
-	public synchronized void flushDestroys(@NotNull Player target) {
-		Set<SWGObject> newAware = creature.getAware();
+	private void flushDestroys(@NotNull Player target, Set<SWGObject> newAware) {
 		List<SWGObject> destroy = new ArrayList<>();
 		List<SWGObject> removed = new ArrayList<>();
 		
@@ -195,20 +218,14 @@ public class CreatureObjectAwareness {
 			target.sendPacket(create);
 		}
 		{ // Baselines
-			boolean creature = obj instanceof CreatureObject;
 			boolean owner = obj.getOwner() == target;
 			
-			if (owner && creature)
-				target.sendPacket(obj.createBaseline1(target));
-			
 			target.sendPacket(obj.createBaseline3(target));
-			
-			if (owner && creature)
-				target.sendPacket(obj.createBaseline4(target));
-			
 			target.sendPacket(obj.createBaseline6(target));
 			
 			if (owner) {
+				target.sendPacket(obj.createBaseline1(target));
+				target.sendPacket(obj.createBaseline4(target));
 				target.sendPacket(obj.createBaseline8(target));
 				target.sendPacket(obj.createBaseline9(target));
 			}

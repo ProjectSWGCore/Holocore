@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
 import com.projectswg.common.data.customization.CustomizationString;
-import com.projectswg.common.data.customization.CustomizationVariable;
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -42,8 +42,10 @@ import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -78,30 +80,59 @@ public class TangibleObject extends SWGObject {
 	
 	@Override
 	public void moveToContainer(SWGObject newParent) {
+		if (defaultMoveToContainer(newParent))
+			super.moveToContainer(newParent);    // Not stackable, use default behavior
+	}
+	
+	@Override
+	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
+		if (!getContainerPermissions().canMove(requester, newParent))
+			return ContainerResult.NO_PERMISSION;
+		return defaultMoveToContainer(newParent) ? super.moveToContainer(requester, newParent) : ContainerResult.SUCCESS;
+	}
+	
+	private boolean defaultMoveToContainer(SWGObject newParent) {
+		int counter = getCounter();
+		
 		// Check if object is stackable
 		if (newParent != null && counter > 0) {
 			// Scan container for matching stackable item
 			String ourTemplate = getTemplate();
 			Map<String, String> ourAttributes = getAttributes();
+			TangibleObject bestMatch = null;
 			
 			for (SWGObject candidate : newParent.getContainedObjects()) {
 				String theirTemplate = candidate.getTemplate();
 				Map<String, String> theirAttributes = candidate.getAttributes();
 				
-				if (this != candidate && candidate instanceof TangibleObject && ourTemplate.equals(theirTemplate) && ourAttributes.equals(theirAttributes)) {
-					DestroyObjectIntent.broadcast(this);
-					
-					// Increase stack count on matching stackable item
-					TangibleObject tangibleMatch = (TangibleObject) candidate;
-					int theirCounter = tangibleMatch.getCounter();
-					
-					tangibleMatch.setCounter(theirCounter + counter);
-					return;	// Stackable and matching item was found
-				}
+				if (candidate == this)
+					continue; // Can't transfer into itself
+				if (!(candidate instanceof TangibleObject))
+					continue; // Item not the correct type
+				if (!ourTemplate.equals(theirTemplate) || !ourAttributes.equals(theirAttributes))
+					continue; // Not eligible for stacking
+				
+				TangibleObject tangibleMatch = (TangibleObject) candidate;
+				if (tangibleMatch.getCounter() >= tangibleMatch.getMaxCounter())
+					continue; // Can't add anything to this object
+				
+				bestMatch = tangibleMatch;
+			}
+			
+			if (bestMatch != null) {
+				int theirCounter = bestMatch.getCounter();
+				int transferAmount = Math.min(bestMatch.getMaxCounter() - theirCounter, counter);
+				
+				bestMatch.setCounter(theirCounter + transferAmount);
+				setCounter(counter - transferAmount);
+				if (getCounter() > 0)
+					return true;
+				DestroyObjectIntent.broadcast(this);
+				return false;
 			}
 		}
 		
-		super.moveToContainer(newParent);    // Not stackable, use default behavior
+		return true;
 	}
 	
 	public int getMaxHitPoints() {
@@ -176,13 +207,17 @@ public class TangibleObject extends SWGObject {
 		return objectEffects;
 	}
 	
-	public void putCustomization(String name, CustomizationVariable value) {
+	public void putCustomization(String name, int value) {
 		appearanceData.put(name, value);
 		sendDelta(3, 6, appearanceData);
 	}
 	
-	public CustomizationVariable getCustomization(String name) {
+	public Integer getCustomization(String name) {
 		return appearanceData.get(name);
+	}
+	
+	public Map<String, Integer> getCustomization() {
+		return appearanceData.getVariables();
 	}
 	
 	public void setAppearanceData(CustomizationString appearanceData) {
@@ -295,6 +330,10 @@ public class TangibleObject extends SWGObject {
 	public void setCounter(int counter) {
 		this.counter = counter;
 		sendDelta(3, 9, counter);
+	}
+	
+	public int getMaxCounter() {
+		return 100;
 	}
 	
 	/**
@@ -466,5 +505,36 @@ public class TangibleObject extends SWGObject {
 		optionFlags = stream.getInt();
 		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
 	}
-
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		data.putDocument("appearance", appearanceData);
+		data.putInteger("maxHitPoints", maxHitPoints);
+		data.putInteger("components", components);
+		data.putInteger("condition", condition);
+		data.putInteger("pvpFlags", pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
+		data.putString("pvpStatus", pvpStatus.name());
+		data.putString("pvpFaction", pvpFaction.name());
+		data.putBoolean("visibleGmOnly", visibleGmOnly);
+		data.putByteArray("objectEffects", objectEffects);
+		data.putInteger("optionFlags", optionFlags);
+		data.putMap("effectsMap", effectsMap);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		appearanceData.readMongo(data.getDocument("appearance"));
+		maxHitPoints = data.getInteger("maxHitPoints", 1000);
+		components = data.getInteger("components", 0);
+		condition = data.getInteger("condition", 0);
+		pvpFlags.addAll(PvpFlag.getFlags(data.getInteger("pvpFlags", 0)));
+		pvpStatus = PvpStatus.valueOf(data.getString("pvpStatus", "COMBATANT"));
+		pvpFaction = PvpFaction.valueOf(data.getString("pvpFaction", "NEUTRAL"));
+		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
+		objectEffects = data.getByteArray("objectEffects");
+		optionFlags = data.getInteger("optionFlags", 0);
+		effectsMap.putAll(data.getMap("effectsMap", String.class, String.class));
+	}
 }

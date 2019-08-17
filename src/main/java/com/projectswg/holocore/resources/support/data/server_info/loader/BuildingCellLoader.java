@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static java.util.stream.Collectors.groupingBy;
+
 public final class BuildingCellLoader extends DataLoader {
 	
 	private final Map<String, List<CellInfo>> buildingMap;
@@ -55,19 +57,19 @@ public final class BuildingCellLoader extends DataLoader {
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/objects/building_cells.sdb"))) {
-			while (set.next()) {
-				buildingMap.computeIfAbsent(set.getText(0), b -> new ArrayList<>()).add(new CellInfo(set));
-			}
+			buildingMap.putAll(set.stream(CellInfo::new).collect(groupingBy(CellInfo::getBuilding)));
 		}
 	}
 	
 	public static class CellInfo {
 		
+		private final String building;
 		private final int id;
 		private final String name;
 		private final List<PortalInfo> neighbors;
 		
 		public CellInfo(SdbResultSet set) {
+			this.building = set.getText(0);
 			this.id = (int) set.getInt(1);
 			this.name = set.getText(2).intern();
 			this.neighbors = new ArrayList<>();
@@ -84,6 +86,10 @@ public final class BuildingCellLoader extends DataLoader {
 			} catch (IOException | JSONException e) {
 				Log.w("Invalid cell info: %s", set.getText(3));
 			}
+		}
+		
+		public String getBuilding() {
+			return building;
 		}
 		
 		public String getName() {

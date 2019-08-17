@@ -6,6 +6,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.PacketType;
 import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import com.projectswg.common.network.packets.swg.holo.login.HoloLoginRequestPacket;
 import com.projectswg.common.network.packets.swg.holo.login.HoloLoginResponsePacket;
 import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
@@ -15,9 +16,8 @@ import com.projectswg.common.network.packets.swg.zone.SceneEndBaselines;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
-import com.projectswg.connection.HolocoreSocket;
-import com.projectswg.connection.RawPacket;
-import com.projectswg.connection.ServerConnectionChangedReason;
+import com.projectswg.holocore.client.HolocoreSocket;
+import com.projectswg.holocore.client.RawPacket;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.concurrency.BasicThread;
@@ -26,9 +26,7 @@ import org.junit.Assert;
 
 import java.net.InetSocketAddress;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -107,8 +105,8 @@ public class HolocoreClient {
 	
 	public void disconnect() {
 		listenThread.stop(false);
-		socket.disconnect(ServerConnectionChangedReason.CLIENT_DISCONNECT);
-		socket.terminate();
+		socket.disconnect(ConnectionStoppedReason.APPLICATION);
+		socket.close();
 		listenThread.awaitTermination(1000);
 	}
 	

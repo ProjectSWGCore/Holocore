@@ -60,10 +60,12 @@ public class RawResourceContainer {
 		long startTime = StandardLog.onStartLoad("raw resources");
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/resources/resources.sdb"))) {
 			while (set.next()) {
+				StringBuilder crateTemplate = new StringBuilder(set.getText("crate_template"));
+				crateTemplate.insert(crateTemplate.lastIndexOf("/")+1, "resource_container_");
 				RawResource resource = new RawResourceBuilder(set.getInt("id"))
 						.setParent(resources.get(set.getInt("parent")))
 						.setName(set.getText("resource_name"))
-						.setCrateTemplate(set.getText("crate_template"))
+						.setCrateTemplate(crateTemplate.toString())
 						.setMinPools((int) set.getInt("min_pools"))
 						.setMaxPools((int) set.getInt("max_pools"))
 						.setMinTypes((int) set.getInt("min_types"))

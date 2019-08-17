@@ -30,8 +30,6 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
-import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
-import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -55,6 +53,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
@@ -82,7 +81,7 @@ public final class ObjectCreator {
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		assert template.startsWith("object/") && template.endsWith(".iff") : "Invalid template for createObjectFromTemplate: '" + template + '\'';
 		template = ClientFactory.formatToSharedFile(template);
-		Map<ObjectDataAttribute, Object> attributes = DataLoader.objectData().getAttributes(template);
+		Map<ObjectDataAttribute, Object> attributes = DataLoader.Companion.objectData().getAttributes(template);
 		if (attributes == null)
 			throw new ObjectCreationException(template, "Does not exist");
 		SWGObject obj = createObjectFromType(objectId, template, (BaselineType) attributes.get(ObjectDataAttribute.HOLOCORE_BASELINE_TYPE));
@@ -104,7 +103,7 @@ public final class ObjectCreator {
 		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
 		
-		handlePostCreation(obj, DataLoader.objectData().getAttributes(template));
+		handlePostCreation(obj, DataLoader.Companion.objectData().getAttributes(template));
 		updateMaxObjectId(objectId);
 		return obj;
 	}
@@ -163,22 +162,18 @@ public final class ObjectCreator {
 	
 	private static void createObjectSlots(SWGObject object) {
 		String slotDescriptor = object.getDataTextAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME);
-		String arrangementDescriptor = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
+		String slotArrangement = object.getDataTextAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME);
 		
 		if (!slotDescriptor.isEmpty()) {
-			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile(slotDescriptor);
+			List<String> descriptor = DataLoader.Companion.slotDescriptors().getSlots(slotDescriptor);
 			if (descriptor != null)
-				object.setSlots(descriptor.getSlots());
+				object.setSlots(descriptor); // The slots an object has
 		}
 		
-		if (!arrangementDescriptor.isEmpty()) {
-			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile(arrangementDescriptor);
-			if (arrangementData == null)
-				return;
-			
-			object.setArrangement(arrangementData.getArrangement());
+		if (!slotArrangement.isEmpty()) {
+			List<List<String>> arrangement = DataLoader.Companion.slotArrangements().getArrangement(slotArrangement);
+			if (arrangement != null)
+				object.setArrangement(arrangement); // The slots this object can go into
 		}
 	}
 	

@@ -26,7 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.combat.buffs;
 
-import com.projectswg.holocore.resources.gameplay.combat.buff.BuffData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 public class BuffIntent extends Intent {
 	
 	private String buffName;
-	private BuffData buffData;
+	private BuffInfo buffData;
 	private final CreatureObject buffer, receiver;
 	private final boolean remove;
 	
@@ -46,7 +47,7 @@ public class BuffIntent extends Intent {
 		this.remove = remove;
 	}
 	
-	public BuffIntent(@NotNull BuffData buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
+	public BuffIntent(@NotNull BuffInfo buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
 		this.buffData = buffData;
 		this.buffer = buffer;
 		this.receiver = receiver;
@@ -69,7 +70,7 @@ public class BuffIntent extends Intent {
 	}
 	
 	@Nullable
-	public BuffData getBuffData() {
+	public BuffLoader.BuffInfo getBuffData() {
 		return buffData;
 	}
 	
@@ -81,7 +82,7 @@ public class BuffIntent extends Intent {
 		new BuffIntent(buffName, buffer, receiver, remove).broadcast();
 	}
 	
-	public static void broadcast(@NotNull BuffData buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
+	public static void broadcast(@NotNull BuffInfo buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
 		new BuffIntent(buffData, buffer, receiver, remove).broadcast();
 	}
 	
