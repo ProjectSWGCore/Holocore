@@ -104,8 +104,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		// TODO evasion if no block
 		
 		// TODO line of sight checks between the explosive and each target
-		Set<CreatureObject> targets = objectsToCheck.stream().filter(CreatureObject.class::isInstance).map(CreatureObject.class::cast).filter(source::isAttackable)
-				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS).filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
+		Set<CreatureObject> targets = objectsToCheck.stream()
+				.filter(CreatureObject.class::isInstance)
+				.map(CreatureObject.class::cast)
+				.filter(target -> !target.equals(source))	// Make sure the attacker can't damage themselves
+				.filter(source::isAttackable)
+				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS)
+				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
 				.collect(Collectors.toSet());
 		
 		// This way, mines or grenades won't try to harm themselves
