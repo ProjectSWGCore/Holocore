@@ -262,7 +262,7 @@ public final class GrantLootService extends Service {
 					if (item instanceof CreditObject) {
 						onLootedCredits(looter, ((CreditObject) item).getAmount());
 					} else {
-						new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("loot_n", "solo_looted"), "TO", itemName)).broadcast();
+						new SystemMessageIntent(player, new ProsePackage("StringId", new StringId("spam", "loot_item_self"), "TU", itemName, "TT", getCorpse().getObjectName())).broadcast();
 					}
 					onLooted(looter, getCorpse());
 					break;
