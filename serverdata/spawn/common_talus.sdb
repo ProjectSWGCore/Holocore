@@ -1085,91 +1085,93 @@ spawn_tal_1090	TALUS	tal_giant_fynock_cave	AREA	11	-91.2	-92.7	-95.9	0	1	a rabid
 spawn_tal_1091	TALUS	tal_world	AREA	0	1542.7	43.3	-878.9	0	1	a fynock	fynock	ATTACKABLE	N	40	60	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tal_1092	TALUS	tal_world	AREA	0	1542.6	41.2	-847.8	0	1	a fynock	fynock	ATTACKABLE	N	40	60	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tal_1093	TALUS	tal_world	AREA	0	1547.4	40.0	-894.8	0	1	a fynock	fynock	ATTACKABLE	N	40	60	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1094	TALUS	tal_imp_vs_reb_barracks1	AREA	3	0.1	0.1	-3.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1095	TALUS	tal_imp_vs_reb_barracks2	AREA	3	0.2	0.1	-4.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1096	TALUS	tal_imp_vs_reb_base	AREA	1	11.3	1.0	21.7	-125	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1097	TALUS	tal_imp_vs_reb_base	AREA	1	-11.0	1.0	21.5	119	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1098	TALUS	tal_imp_vs_reb_base	AREA	2	-1.6	2.0	3.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1099	TALUS	tal_imp_vs_reb_base	AREA	4	-18.5	1.0	17.4	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1100	TALUS	tal_imp_vs_reb_base	AREA	5	15.0	1.0	-1.5	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1101	TALUS	tal_imp_vs_reb_base	AREA	6	13.0	1.0	-21.9	16	1	an Imperial sergeant	rtp_imperial_sergeant	ATTACKABLE	E	86	89	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1102	TALUS	tal_imp_vs_reb_base	AREA	7	-0.4	1.0	-20.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1103	TALUS	tal_imp_vs_reb_base	AREA	8	-16.7	1.0	-20.7	58	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1104	TALUS	tal_imp_vs_reb_base	AREA	9	-18.5	1.0	-3.9	90	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1105	TALUS	tal_imp_vs_reb_base	AREA	10	3.5	7.0	-10.7	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1106	TALUS	tal_imp_vs_reb_base	AREA	11	-4.4	7.0	8.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1107	TALUS	tal_imp_vs_reb_base	AREA	12	6.5	7.0	8.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1108	TALUS	tal_imp_vs_reb_base	AREA	12	13.3	7.0	9.1	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1109	TALUS	tal_world	AREA	0	-2403.3	38.0	3695.1	60	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1110	TALUS	tal_world	AREA	0	-2473.4	38.0	3754.5	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1111	TALUS	tal_world	AREA	0	-2472.2	38.0	3693.0	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1112	TALUS	tal_world	AREA	0	-2462.2	38.0	3784.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1113	TALUS	tal_world	AREA	0	-2431.7	38.0	3769.0	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1114	TALUS	tal_world	AREA	0	-2419.3	38.0	3648.4	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1115	TALUS	tal_world	AREA	0	-2382.3	38.0	3715.2	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1116	TALUS	tal_world	AREA	0	-2489.4	45.0	3725.6	-121	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1117	TALUS	tal_world	AREA	0	-2486.7	45.0	3733.7	-36	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1118	TALUS	tal_world	AREA	0	-2452.6	45.0	3659.4	-137	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1119	TALUS	tal_world	AREA	0	-2444.7	45.0	3657.2	137	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1120	TALUS	tal_world	AREA	0	-2401.9	38.0	3751.5	-126	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tal_1121	TALUS	tal_kahmurra_bunker	AREA	2	-4.0	0.3	-0.9	0	1	a mutated kahmurra	kahmurra_mutated	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1122	TALUS	tal_kahmurra_bunker	AREA	4	-4.6	-6.8	5.0	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1123	TALUS	tal_kahmurra_bunker	AREA	5	-5.9	-6.8	-5.4	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1124	TALUS	tal_kahmurra_bunker	AREA	5	-4.6	-6.8	-8.9	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1125	TALUS	tal_kahmurra_bunker	AREA	6	9.0	-6.8	-15.1	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1126	TALUS	tal_kahmurra_bunker	AREA	7	6.4	-6.8	-1.8	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1127	TALUS	tal_kahmurra_bunker	AREA	7	7.0	-6.8	-5.7	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1128	TALUS	tal_kahmurra_bunker	AREA	9	0.1	-13.8	-14.2	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1129	TALUS	tal_kahmurra_bunker	AREA	9	-5.3	-13.8	-14.2	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1130	TALUS	tal_kahmurra_bunker	AREA	9	1.1	-13.8	-0.7	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1131	TALUS	tal_kahmurra_bunker	AREA	9	-1.9	-13.8	-7.4	0	1	a rabid mutant kahmurra	kahmurra_mutant_rabid	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1132	TALUS	tal_world	AREA	0	-4799.1	16.6	-4752.8	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1133	TALUS	tal_world	AREA	0	-4776.7	16.9	-4751.6	0	1	a mutated kahmurra	kahmurra_mutated	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1134	TALUS	tal_world	AREA	0	-4805.0	16.5	-4746.7	0	1	a kahmurra blanca	murra_blanca	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1135	TALUS	tal_aqualish_cave	AREA	1	2.6	-5.0	9.2	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1136	TALUS	tal_aqualish_cave	AREA	2	9.6	-23.8	-26.9	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1137	TALUS	tal_aqualish_cave	AREA	3	7.8	-40.7	-73.6	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1138	TALUS	tal_aqualish_cave	AREA	3	-11.1	-40.4	-60.6	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1139	TALUS	tal_aqualish_cave	AREA	3	12.0	-40.3	-77.8	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1140	TALUS	tal_aqualish_cave	AREA	4	32.8	-45.3	-52.6	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1141	TALUS	tal_aqualish_cave	AREA	4	46.6	-46.4	-92.2	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1142	TALUS	tal_aqualish_cave	AREA	5	27.7	-60.3	-178.7	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1143	TALUS	tal_aqualish_cave	AREA	5	-7.2	-44.9	-138.2	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1144	TALUS	tal_aqualish_cave	AREA	5	64.1	-54.9	-153.0	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1145	TALUS	tal_aqualish_cave	AREA	5	28.5	-59.7	-184.5	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1146	TALUS	tal_aqualish_cave	AREA	5	49.5	-48.2	-125.5	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1147	TALUS	tal_aqualish_cave	AREA	6	-9.9	-64.7	-199.3	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1148	TALUS	tal_aqualish_cave	AREA	7	-14.9	-64.9	-220.4	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1149	TALUS	tal_aqualish_cave	AREA	7	-13.8	-63.9	-224.3	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1150	TALUS	tal_aqualish_cave	AREA	7	-22.5	-64.1	-254.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1151	TALUS	tal_aqualish_cave	AREA	7	-16.9	-62.9	-261.2	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1152	TALUS	tal_aqualish_cave	AREA	8	-121.3	-70.0	-177.6	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1153	TALUS	tal_aqualish_cave	AREA	8	-81.2	-99.9	-148.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1154	TALUS	tal_aqualish_cave	AREA	8	-88.7	-69.9	-99.6	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1155	TALUS	tal_aqualish_cave	AREA	8	-84.2	-100.8	-145.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1156	TALUS	tal_aqualish_cave	AREA	8	-91.4	-69.9	-97.1	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1157	TALUS	tal_aqualish_cave	AREA	8	-120.5	-68.9	-166.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1158	TALUS	tal_aqualish_cave	AREA	8	-62.3	-70.4	-179.7	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1159	TALUS	tal_aqualish_cave	AREA	8	-63.4	-70.5	-175.3	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1160	TALUS	tal_aqualish_cave	AREA	9	-37.7	-70.8	-87.3	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1161	TALUS	tal_aqualish_cave	AREA	9	-56.3	-68.4	-108.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1162	TALUS	tal_aqualish_cave	AREA	9	-42.4	-70.2	-85.8	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1163	TALUS	tal_aqualish_cave	AREA	9	-60.5	-68.4	-106.6	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1164	TALUS	tal_aqualish_cave	AREA	10	-30.4	-80.1	-144.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1165	TALUS	tal_aqualish_cave	AREA	10	-26.7	-79.9	-146.5	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1166	TALUS	tal_aqualish_cave	AREA	11	-93.8	-101.5	-116.2	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1167	TALUS	tal_aqualish_cave	AREA	11	-86.9	-102.3	-114.0	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_tal_1168	TALUS	tal_aqualish_cave	AREA	11	-86.8	-100.7	-104.3	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1169	TALUS	tal_aqualish_cave	AREA	11	-92.0	-100.9	-100.1	0	1	a Lost Aqualish warchief	lost_aqualish_warchief	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1170	TALUS	tal_world	AREA	0	-4350.0	30.9	-1429.9	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1171	TALUS	tal_world	AREA	0	-4347.6	31.0	-1418.3	0	1	a Lost Aqualish lookout	lost_aqualish_lookout	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
-spawn_tal_1172	TALUS	tal_world	AREA	0	4286.0	35.6	886.6	0	1	a berserk kahmurra	kahmurra_berserk	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_tal_1173	TALUS	tal_world	AREA	0	4219.4	6.0	1012.2	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1174	TALUS	tal_world	AREA	0	4300.7	6.0	1029.5	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_tal_1175	TALUS	tal_world	AREA	0	4147.2	6.0	943.2	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_tal_1176	TALUS	tal_world	AREA	0	4191.0	6.0	1008.1	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1177	TALUS	tal_world	AREA	0	4265.3	6.0	1011.8	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1178	TALUS	tal_world	AREA	0	4145.1	6.0	983.6	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_1179	TALUS	tal_world	AREA	0	4199.3	6.0	985.9	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_tal_1180	TALUS	tal_world	AREA	0	4288.0	6.0	998.1	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_tal_1181	TALUS	tal_world	AREA	0	4122.6	6.0	976.7	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1094	TALUS	tal_imp_vs_reb_barracks1	AREA	3	0.1	0.1	-3.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1095	TALUS	tal_imp_vs_reb_barracks2	AREA	3	0.2	0.1	-4.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1096	TALUS	tal_imp_vs_reb_base	PATROL	2	0.0	1.0	-5.4	0	1	an Imperial sergeant	rtp_imperial_sergeant	ATTACKABLE	E	86	89	POI	Imperial vs. Rebel Battle	1	PATROL	0	patrol_tal_7800	column	idle	0	0	0	30
+spawn_tal_1097	TALUS	tal_imp_vs_reb_base	AREA	1	11.3	1.0	21.7	-125	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1098	TALUS	tal_imp_vs_reb_base	AREA	1	-11.0	1.0	21.5	119	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1099	TALUS	tal_imp_vs_reb_base	AREA	2	-1.6	2.0	3.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1100	TALUS	tal_imp_vs_reb_base	AREA	4	-18.5	1.0	17.4	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1101	TALUS	tal_imp_vs_reb_base	AREA	5	15.0	1.0	-1.5	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1102	TALUS	tal_imp_vs_reb_base	AREA	6	13.0	1.0	-21.9	16	1	an Imperial sergeant	rtp_imperial_sergeant	ATTACKABLE	E	86	89	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1103	TALUS	tal_imp_vs_reb_base	AREA	7	-0.4	1.0	-20.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1104	TALUS	tal_imp_vs_reb_base	AREA	8	-16.7	1.0	-20.7	58	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1105	TALUS	tal_imp_vs_reb_base	AREA	9	-18.5	1.0	-3.9	90	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1106	TALUS	tal_imp_vs_reb_base	AREA	10	3.5	7.0	-10.7	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1107	TALUS	tal_imp_vs_reb_base	AREA	11	-4.4	7.0	8.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1108	TALUS	tal_imp_vs_reb_base	AREA	12	6.5	7.0	8.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1109	TALUS	tal_imp_vs_reb_base	AREA	12	13.3	7.0	9.1	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1110	TALUS	tal_world	PATROL	0	-2602.6	50.6	3730.2	81	1	a Rebel trooper	rebel_trooper	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	6	PATROL	0	patrol_tal_7900	column	idle	0	0	0	60
+spawn_tal_1111	TALUS	tal_world	AREA	0	-2403.3	38.0	3695.1	60	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1112	TALUS	tal_world	AREA	0	-2473.4	38.0	3754.5	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	2	LOITER	6	0	-	idle	0	0	0	30
+spawn_tal_1113	TALUS	tal_world	AREA	0	-2472.2	38.0	3693.0	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1114	TALUS	tal_world	AREA	0	-2462.2	38.0	3784.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	LOITER	6	0	-	idle	0	0	0	30
+spawn_tal_1115	TALUS	tal_world	AREA	0	-2431.7	38.0	3769.0	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	2	LOITER	6	0	-	idle	0	0	0	30
+spawn_tal_1116	TALUS	tal_world	AREA	0	-2419.3	38.0	3648.4	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
+spawn_tal_1117	TALUS	tal_world	AREA	0	-2382.3	38.0	3715.2	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	LOITER	6	0	-	idle	0	0	0	30
+spawn_tal_1118	TALUS	tal_world	AREA	0	-2489.4	45.0	3725.6	-121	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1119	TALUS	tal_world	AREA	0	-2486.7	45.0	3733.7	-36	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1120	TALUS	tal_world	AREA	0	-2452.6	45.0	3659.4	-137	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1121	TALUS	tal_world	AREA	0	-2444.7	45.0	3657.2	137	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1122	TALUS	tal_world	AREA	0	-2401.9	38.0	3751.5	-126	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
+spawn_tal_1123	TALUS	tal_kahmurra_bunker	AREA	2	-4.0	0.3	-0.9	0	1	a mutated kahmurra	kahmurra_mutated	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1124	TALUS	tal_kahmurra_bunker	AREA	4	-4.6	-6.8	5.0	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1125	TALUS	tal_kahmurra_bunker	AREA	5	-5.9	-6.8	-5.4	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1126	TALUS	tal_kahmurra_bunker	AREA	5	-4.6	-6.8	-8.9	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1127	TALUS	tal_kahmurra_bunker	AREA	6	9.0	-6.8	-15.1	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1128	TALUS	tal_kahmurra_bunker	AREA	7	6.4	-6.8	-1.8	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1129	TALUS	tal_kahmurra_bunker	AREA	7	7.0	-6.8	-5.7	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1130	TALUS	tal_kahmurra_bunker	AREA	9	0.1	-13.8	-14.2	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1131	TALUS	tal_kahmurra_bunker	AREA	9	-5.3	-13.8	-14.2	0	1	a kahmurra bio engineer	kahmurra_bio_engineer	ATTACKABLE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1132	TALUS	tal_kahmurra_bunker	AREA	9	1.1	-13.8	-0.7	0	1	a frenzied kahmurra	kahmurra_frenzied	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1133	TALUS	tal_kahmurra_bunker	AREA	9	-1.9	-13.8	-7.4	0	1	a rabid mutant kahmurra	kahmurra_mutant_rabid	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1134	TALUS	tal_world	AREA	0	-4799.1	16.6	-4752.8	0	1	a genetically-enhanced kahmurra	kahmurra_gen_enhanced	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1135	TALUS	tal_world	AREA	0	-4776.7	16.9	-4751.6	0	1	a mutated kahmurra	kahmurra_mutated	AGGRESSIVE	E	40	60	POI	Kahmurra Biogenetic Research Station	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1136	TALUS	tal_world	AREA	0	-4805.0	16.5	-4746.7	0	1	a kahmurra blanca	murra_blanca	AGGRESSIVE	N	40	60	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1137	TALUS	tal_aqualish_cave	AREA	1	2.6	-5.0	9.2	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1138	TALUS	tal_aqualish_cave	AREA	2	9.6	-23.8	-26.9	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1139	TALUS	tal_aqualish_cave	AREA	3	7.8	-40.7	-73.6	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1140	TALUS	tal_aqualish_cave	AREA	3	-11.1	-40.4	-60.6	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1141	TALUS	tal_aqualish_cave	AREA	3	12.0	-40.3	-77.8	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1142	TALUS	tal_aqualish_cave	AREA	4	32.8	-45.3	-52.6	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1143	TALUS	tal_aqualish_cave	AREA	4	46.6	-46.4	-92.2	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1144	TALUS	tal_aqualish_cave	AREA	5	27.7	-60.3	-178.7	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1145	TALUS	tal_aqualish_cave	AREA	5	-7.2	-44.9	-138.2	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1146	TALUS	tal_aqualish_cave	AREA	5	64.1	-54.9	-153.0	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1147	TALUS	tal_aqualish_cave	AREA	5	28.5	-59.7	-184.5	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1148	TALUS	tal_aqualish_cave	AREA	5	49.5	-48.2	-125.5	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1149	TALUS	tal_aqualish_cave	AREA	6	-9.9	-64.7	-199.3	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1150	TALUS	tal_aqualish_cave	AREA	7	-14.9	-64.9	-220.4	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1151	TALUS	tal_aqualish_cave	AREA	7	-13.8	-63.9	-224.3	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1152	TALUS	tal_aqualish_cave	AREA	7	-22.5	-64.1	-254.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1153	TALUS	tal_aqualish_cave	AREA	7	-16.9	-62.9	-261.2	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1154	TALUS	tal_aqualish_cave	AREA	8	-121.3	-70.0	-177.6	0	1	a Lost Aqualish bomber	lost_aqualish_bomber	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1155	TALUS	tal_aqualish_cave	AREA	8	-81.2	-99.9	-148.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1156	TALUS	tal_aqualish_cave	AREA	8	-88.7	-69.9	-99.6	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1157	TALUS	tal_aqualish_cave	AREA	8	-84.2	-100.8	-145.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1158	TALUS	tal_aqualish_cave	AREA	8	-91.4	-69.9	-97.1	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1159	TALUS	tal_aqualish_cave	AREA	8	-120.5	-68.9	-166.4	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1160	TALUS	tal_aqualish_cave	AREA	8	-62.3	-70.4	-179.7	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1161	TALUS	tal_aqualish_cave	AREA	8	-63.4	-70.5	-175.3	0	1	a Lost Aqualish marksman	lost_aqualish_marksman	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1162	TALUS	tal_aqualish_cave	AREA	9	-37.7	-70.8	-87.3	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1163	TALUS	tal_aqualish_cave	AREA	9	-56.3	-68.4	-108.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1164	TALUS	tal_aqualish_cave	AREA	9	-42.4	-70.2	-85.8	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1165	TALUS	tal_aqualish_cave	AREA	9	-60.5	-68.4	-106.6	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1166	TALUS	tal_aqualish_cave	AREA	10	-30.4	-80.1	-144.5	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1167	TALUS	tal_aqualish_cave	AREA	10	-26.7	-79.9	-146.5	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1168	TALUS	tal_aqualish_cave	AREA	11	-93.8	-101.5	-116.2	0	1	a Lost Aqualish Captain	lost_aqualish_captain	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1169	TALUS	tal_aqualish_cave	AREA	11	-86.9	-102.3	-114.0	0	1	a Lost Aqualish infiltrator	lost_aqualish_infiltrator	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tal_1170	TALUS	tal_aqualish_cave	AREA	11	-86.8	-100.7	-104.3	0	1	a Lost Aqualish Marshall	lost_aqualish_marshal	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1171	TALUS	tal_aqualish_cave	AREA	11	-92.0	-100.9	-100.1	0	1	a Lost Aqualish warchief	lost_aqualish_warchief	AGGRESSIVE	E	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1172	TALUS	tal_world	AREA	0	-4350.0	30.9	-1429.9	0	1	a Lost Aqualish commando	lost_aqualish_commando	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1173	TALUS	tal_world	AREA	0	-4347.6	31.0	-1418.3	0	1	a Lost Aqualish lookout	lost_aqualish_lookout	AGGRESSIVE	N	40	60	POI	Lost Aqualish War Party's Cave	4	LOITER	8	0	-	idle	0	0	0	600
+spawn_tal_1174	TALUS	tal_world	AREA	0	4286.0	35.6	886.6	0	1	a berserk kahmurra	kahmurra_berserk	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_tal_1175	TALUS	tal_world	AREA	0	4219.4	6.0	1012.2	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1176	TALUS	tal_world	AREA	0	4300.7	6.0	1029.5	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_tal_1177	TALUS	tal_world	AREA	0	4147.2	6.0	943.2	0	1	a greater sludge panther	panther_greater_sludge	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_tal_1178	TALUS	tal_world	AREA	0	4191.0	6.0	1008.1	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1179	TALUS	tal_world	AREA	0	4265.3	6.0	1011.8	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1180	TALUS	tal_world	AREA	0	4145.1	6.0	983.6	0	1	a famished sludge panther	panther_sludge_famished	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	1	TURN	0	0	-	idle	0	0	0	600
+spawn_tal_1181	TALUS	tal_world	AREA	0	4199.3	6.0	985.9	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_tal_1182	TALUS	tal_world	AREA	0	4288.0	6.0	998.1	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_tal_1183	TALUS	tal_world	AREA	0	4122.6	6.0	976.7	0	1	a sludge panther	sludge_panther	AGGRESSIVE	N	40	60	POI	Lost Village of Durbin	4	LOITER	8	0	-	idle	0	0	0	600
