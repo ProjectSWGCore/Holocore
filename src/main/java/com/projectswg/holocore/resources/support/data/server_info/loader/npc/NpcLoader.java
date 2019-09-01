@@ -26,11 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader.npc;
 
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,7 +123,7 @@ public final class NpcLoader extends DataLoader {
 		private final String name;
 		private final String stfName;
 		private final String niche;
-		private final PvpFaction faction;
+		private final Faction faction;
 		private final boolean specForce;
 		private final double attackSpeed;
 		private final double movementSpeed;
@@ -156,6 +157,7 @@ public final class NpcLoader extends DataLoader {
 			this.hue = (int) set.getInt("hue");
 			this.stfName = set.getText("stf_name");
 			this.niche = set.getText("niche").intern();
+			this.faction = ServerData.INSTANCE.getFactions().getFaction(set.getText("faction"));
 			this.iffs = List.of(set.getText("iff_template").split(";")).stream().map(s -> "object/mobile/"+s).map(ClientFactory::formatToSharedFile).collect(Collectors.toUnmodifiableList());
 			this.specForce = set.getBoolean("spec_force");
 			this.attackSpeed = set.getReal("attack_speed");
@@ -176,18 +178,6 @@ public final class NpcLoader extends DataLoader {
 			
 			if (scaleMax < scaleMin)
 				throw new IllegalArgumentException("scaleMax must be greater than scaleMin");
-			
-			switch (set.getText("faction")) {
-				case "rebel":
-					this.faction = PvpFaction.REBEL;
-					break;
-				case "imperial":
-					this.faction = PvpFaction.IMPERIAL;
-					break;
-				default:
-					this.faction = PvpFaction.NEUTRAL;
-					break;
-			}
 			
 			switch (niche) {
 				case "humanoid":
@@ -231,7 +221,7 @@ public final class NpcLoader extends DataLoader {
 			return Collections.unmodifiableList(iffs);
 		}
 		
-		public PvpFaction getFaction() {
+		public Faction getFaction() {
 			return faction;
 		}
 		

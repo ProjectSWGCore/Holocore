@@ -119,25 +119,14 @@ public class DuelService extends Service {
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
 		
-		EnterCombatIntent.broadcast(accepter, target);
-		EnterCombatIntent.broadcast(target, accepter);
-		
-		FactionIntent.broadcastUpdateFlags(accepter);
-		FactionIntent.broadcastUpdateFlags(target);
-		
 		new DuelPlayerIntent(accepter, target, DuelPlayerIntent.DuelEventType.BEGINDUEL).broadcast();
-		
 	}
 	
 	private void endDuel(CreatureObject ender, CreatureObject target) {
 		ender.removePlayerFromSentDuels(target);
 		target.removePlayerFromSentDuels(ender);
 		
-		ExitCombatIntent.broadcast(ender);
-		ExitCombatIntent.broadcast(target);
-		
-		FactionIntent.broadcastUpdateFlags(ender);
-		FactionIntent.broadcastUpdateFlags(target);
+		new DuelPlayerIntent(ender, target, DuelPlayerIntent.DuelEventType.END).broadcast();
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {

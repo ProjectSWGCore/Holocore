@@ -26,9 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.spawn;
 
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.CreatureNpcInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.DroidNpcInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.HumanoidNpcInfo;
@@ -194,7 +194,7 @@ public final class Spawner {
 		return npc.getIffs();
 	}
 	
-	public PvpFaction getFaction() {
+	public Faction getFaction() {
 		return npc.getFaction();
 	}
 	

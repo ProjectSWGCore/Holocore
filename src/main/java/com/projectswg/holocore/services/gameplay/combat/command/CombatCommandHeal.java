@@ -40,7 +40,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -84,7 +83,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 							
 							CreatureObject creatureTarget = (CreatureObject) target;
 							
-							if (source.isEnemyOf(creatureTarget)) {
+							if (source.isAttackable(creatureTarget)) {
 								doHeal(source, source, healAmount, combatCommand);
 							} else {
 								doHeal(source, creatureTarget, healAmount, combatCommand);

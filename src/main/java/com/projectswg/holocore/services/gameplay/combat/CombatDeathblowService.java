@@ -56,7 +56,7 @@ public class CombatDeathblowService extends Service {
 		}
 		
 		// They must be enemies
-		if (!corpse.isEnemyOf(killer)) {
+		if (!corpse.isAttackable(killer)) {
 			return;
 		}
 		

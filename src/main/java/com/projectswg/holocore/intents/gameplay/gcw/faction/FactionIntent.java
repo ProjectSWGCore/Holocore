@@ -26,15 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.gcw.faction;
 
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class FactionIntent extends Intent {
 	
 	private TangibleObject target;
-	private PvpFaction newFaction;
+	private Faction newFaction;
 	private FactionIntentType updateType;
 	private PvpStatus newStatus;
 	
@@ -47,7 +47,7 @@ public class FactionIntent extends Intent {
 		this.updateType = updateType;
 	}
 	
-	public FactionIntent(TangibleObject target, PvpFaction newFaction) {
+	public FactionIntent(TangibleObject target, Faction newFaction) {
 		this(target, FactionIntentType.FACTIONUPDATE);
 		this.newFaction = newFaction;
 	}
@@ -61,7 +61,7 @@ public class FactionIntent extends Intent {
 		return target;
 	}
 	
-	public PvpFaction getNewFaction() {
+	public Faction getNewFaction() {
 		return newFaction;
 	}
 	
@@ -81,7 +81,7 @@ public class FactionIntent extends Intent {
 		new FactionIntent(target, FactionIntentType.STATUSUPDATE).broadcast();
 	}
 	
-	public static void broadcastUpdateFaction(TangibleObject target, PvpFaction newFaction) {
+	public static void broadcastUpdateFaction(TangibleObject target, Faction newFaction) {
 		new FactionIntent(target, newFaction).broadcast();
 	}
 	

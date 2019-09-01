@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
 import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
@@ -42,6 +43,7 @@ object ServerData {
 	 */
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
 	val specialLines		by SoftDataLoaderDelegate(::SpecialLineLoader)
+	val factions			by SoftDataLoaderDelegate(::FactionLoader)
 	
 	/*
 	 * Skill / Expertise / Collection

@@ -240,7 +240,7 @@ public class PlayerMountService extends Service {
 		CreatureObject mount = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
 		mount.systemMove(null, player.getLocation());
 		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
-		mount.setPvpFaction(player.getPvpFaction());
+		mount.setFaction(player.getFaction());
 		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
 		
 		// TODO after combat there's a delay

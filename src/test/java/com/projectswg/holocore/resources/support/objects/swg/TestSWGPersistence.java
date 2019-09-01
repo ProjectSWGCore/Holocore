@@ -143,7 +143,7 @@ public class TestSWGPersistence {
 				"condition", obj.getCondition(),
 				"pvpFlags", obj.getPvpFlags().stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b),
 				"pvpStatus", obj.getPvpStatus().name(),
-				"pvpFaction", obj.getPvpFaction().name(),
+				"faction", obj.getFaction() == null ? "neutral" : obj.getFaction().getName(),
 				"visibleGmOnly", obj.isVisibleGmOnly(),
 				"objectEffects", new Binary(obj.getObjectEffects()),
 				"optionFlags", obj.getOptionFlags().stream().map(OptionFlag::getFlag).reduce(0, (a, b) -> a | b)

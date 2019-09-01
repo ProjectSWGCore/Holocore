@@ -133,7 +133,7 @@ public class NpcCombatMode extends NpcMode {
 	@Nullable
 	private CreatureObject getPrimaryTarget() {
 		return targets.stream()
-				.filter(creo -> creo.isEnemyOf(getAI()))
+				.filter(creo -> creo.isAttackable(getAI()))
 				.filter(creo -> (creo.getPosture() != Posture.INCAPACITATED || getSpawner().isDeathblow()) && creo.getPosture() != Posture.DEAD) // Don't attack if they're already dead
 				.min(Comparator.comparingInt(CreatureObject::getHealth)).orElse(null);
 	}
@@ -145,7 +145,7 @@ public class NpcCombatMode extends NpcMode {
 				.filter(AIObject.class::isInstance) // get nearby AI
 				.filter(ai -> ai.getWorldLocation().distanceTo(myLocation) < assistRange) // that can assist
 				.map(AIObject.class::cast)
-				.filter(ai -> targets.stream().anyMatch(ai::isEnemyOf))
+				.filter(ai -> targets.stream().anyMatch(ai::isAttackable))
 				.forEach(ai -> StartNpcCombatIntent.broadcast(ai, targets));
 	}
 	

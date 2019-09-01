@@ -193,7 +193,7 @@ public class CommandQueueService extends Service {
 							if (command.getTarget() == null) {
 								target = command.getSource();
 							} else if (command.getTarget() instanceof CreatureObject) {
-								target = command.getSource().isEnemyOf((CreatureObject) command.getTarget()) ? command.getSource() : command.getTarget();
+								target = command.getSource().isAttackable((CreatureObject) command.getTarget()) ? command.getSource() : command.getTarget();
 							} else {
 								target = null;
 							}

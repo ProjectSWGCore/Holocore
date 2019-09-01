@@ -429,7 +429,7 @@ public class CivilWarService extends Service {
 		
 		PlayerObject playerObject = creature.getPlayerObject();
 		
-		if (fi.getNewFaction() == PvpFaction.NEUTRAL) {
+		if (fi.getNewFaction() == null || fi.getNewFaction().getPvpFaction() == PvpFaction.NEUTRAL) {
 			// They've left the imperials or rebels and must have rank removed
 			playerObject.setCurrentGcwRank(0);
 			
