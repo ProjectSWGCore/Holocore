@@ -94,6 +94,8 @@ public class AIObject extends CreatureObject {
 		playersNearby.add(player);
 		if (activeMode != null)
 			activeMode.onPlayerEnterAware(player, flatDistanceTo(player));
+		
+		checkAwareAttack(player);
 	}
 	
 	@Override
@@ -122,20 +124,26 @@ public class AIObject extends CreatureObject {
 				return;
 		}
 		CreatureObject player = (CreatureObject) aware;
-		if (player.hasOptionFlags(OptionFlag.INVULNERABLE) || !playersNearby.contains(aware) || !isAttackable(player))
+		if (player.hasOptionFlags(OptionFlag.INVULNERABLE) || !playersNearby.contains(aware))
 			return;
 		
-		double distance = getLocation().flatDistanceTo(aware.getLocation());
-		double maxAggroDistance;
-		if (player.isLoggedInPlayer())
-			maxAggroDistance = getSpawner().getAggressiveRadius();
-		else if (!player.isPlayer())
-			maxAggroDistance = 30;
-		else
-			maxAggroDistance = -1; // Ensures the following if-statement will fail and remove the player from the list
-		
-		if (distance <= maxAggroDistance && isLineOfSight(player)) {
-			StartNpcCombatIntent.broadcast(this, List.of(player));
+		checkAwareAttack(player);
+	}
+	
+	private void checkAwareAttack(CreatureObject player) {
+		if (isAttackable(player)) {
+			double distance = getLocation().flatDistanceTo(player.getLocation());
+			double maxAggroDistance;
+			if (player.isLoggedInPlayer())
+				maxAggroDistance = getSpawner().getAggressiveRadius();
+			else if (!player.isPlayer())
+				maxAggroDistance = 30;
+			else
+				maxAggroDistance = -1; // Ensures the following if-statement will fail and remove the player from the list
+			
+			if (distance <= maxAggroDistance && isLineOfSight(player)) {
+				StartNpcCombatIntent.broadcast(this, List.of(player));
+			}
 		}
 	}
 	
