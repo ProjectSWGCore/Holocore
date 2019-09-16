@@ -110,6 +110,7 @@ public class NPCCreator {
 		setFlags(object, spawner);
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
+		spawner.addNPC(object);
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
 	}

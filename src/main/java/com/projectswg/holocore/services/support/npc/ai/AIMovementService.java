@@ -1,9 +1,11 @@
 package com.projectswg.holocore.services.support.npc.ai;
 
+import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent;
+import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -11,6 +13,8 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +61,7 @@ public class AIMovementService extends Service {
 		AIObject obj = snmi.getObject();
 		List<NavigationPoint> route = new ArrayList<>(snmi.getPoints().size());
 		for (NavigationPoint point : snmi.getPoints()) {
-			appendRoutePoint(route, point, snmi.getSpeed());
+			appendRoutePoint(route, offsetLocation(point, snmi.getOffset()), snmi.getSpeed());
 		}
 		
 		if (route.isEmpty())
@@ -87,7 +91,7 @@ public class AIMovementService extends Service {
 		if (waypoint.isNoOperation()) {
 			waypoints.add(waypoint);
 			return;
-		}
+		} 
 		if (prev == null) {
 			waypoints.add(NavigationPoint.at(waypoint.getParent(), waypoint.getLocation(), speed));
 		} else {
@@ -95,6 +99,21 @@ public class AIMovementService extends Service {
 				return;
 			waypoints.addAll(NavigationPoint.from(prev.getParent(), prev.getLocation(), waypoint.getParent(), waypoint.getLocation(), speed));
 		}
+	}
+	
+	static NavigationPoint offsetLocation(NavigationPoint point, @Nullable NavigationOffset offset) {
+		if (offset == null)
+			return point;
+		return NavigationPoint.at(point.getParent(), offsetLocation(point.getLocation(), offset), point.getSpeed());
+	}
+	
+	static Location offsetLocation(Location location, @NotNull NavigationOffset offset) {
+		double oX = offset.getX();
+		double oZ = offset.getZ();
+		double heading = location.getYaw(); // Should be 0 - 360, with 0 representing north and 270 representing east
+		double angle = Math.toRadians(heading <= 180 ? heading : (heading - 360)) + Math.atan2(oZ, oX);
+		double distance = Math.sqrt(oZ*oZ + oX*oX);
+		return Location.builder(location).setX(location.getX() + Math.sin(angle) * distance).setZ(location.getZ() + Math.cos(angle) * distance).build();
 	}
 	
 	private static class NavigationRoute {

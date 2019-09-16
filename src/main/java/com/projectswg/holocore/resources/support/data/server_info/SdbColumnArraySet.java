@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.support.data.server_info;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import org.intellij.lang.annotations.Language;
 
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,7 +40,7 @@ import java.util.regex.Pattern;
 public abstract class SdbColumnArraySet {
 	
 	private final Pattern pattern;
-	private final Map<SdbResultSet, MappedInfo> mappedInfo;
+	private final Map<File, MappedInfo> mappedInfo;
 	
 	private SdbColumnArraySet(@Language("RegExp") String regex) {
 		this.pattern = Pattern.compile(regex);
@@ -47,11 +48,11 @@ public abstract class SdbColumnArraySet {
 	}
 	
 	public int size(SdbResultSet set) {
-		return mappedInfo.computeIfAbsent(set, MappedInfo::new).getSize();
+		return mappedInfo.computeIfAbsent(set.getFile(), f -> new MappedInfo(set)).getSize();
 	}
 	
 	protected Collection<Entry<Integer, Integer>> getMappedEntries(SdbResultSet set) {
-		return mappedInfo.computeIfAbsent(set, MappedInfo::new).getMappedColumns().entrySet();
+		return mappedInfo.computeIfAbsent(set.getFile(), f -> new MappedInfo(set)).getMappedColumns().entrySet();
 	}
 	
 	public static class SdbTextColumnArraySet extends SdbColumnArraySet {

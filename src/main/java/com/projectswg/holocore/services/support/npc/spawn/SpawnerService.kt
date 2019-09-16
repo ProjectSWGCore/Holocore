@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.support.npc.spawn
 
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Point3D
-import com.projectswg.common.network.packets.SWGPacket
 import com.projectswg.common.network.packets.swg.zone.CreateClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.DestroyClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget
@@ -43,13 +42,11 @@ import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDa
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
-import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
@@ -123,7 +120,9 @@ class SpawnerService : Service() {
 			return
 		}
 		
-		executor.execute((spawner.respawnDelay * 1000).toLong()) { NPCCreator.createNPC(spawner) }
+		spawner.removeNPC(destroyedObject)
+		if (spawner.npcs.isEmpty())
+			executor.execute((spawner.respawnDelay * 1000).toLong()) { respawn(spawner) }
 	}
 	
 	private fun loadSpawners() {
@@ -163,6 +162,12 @@ class SpawnerService : Service() {
 				obj.moveToContainer(waypoint.parent, waypoint.location)
 				ObjectCreatedIntent.broadcast(obj)
 			}
+		}
+	}
+	
+	private fun respawn(spawner: Spawner) {
+		for (i in 0 until spawner.amount) {
+			NPCCreator.createNPC(spawner)
 		}
 	}
 	
