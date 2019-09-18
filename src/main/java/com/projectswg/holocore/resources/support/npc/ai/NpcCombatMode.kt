@@ -69,7 +69,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		targets.removeIf { creo -> creo.posture == Posture.INCAPACITATED || creo.posture == Posture.DEAD }
 		if (!targets.isEmpty()) {
 			performCombatAction()
-			queueNextLoop(500)
+			queueNextLoop(500 + ThreadLocalRandom.current().nextLong(-50, 50))
 		} else {
 			ScheduleNpcModeIntent.broadcast(ai, NpcNavigateMode(ai, returnLocation.get()))
 		}
