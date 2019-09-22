@@ -48,6 +48,7 @@ import com.projectswg.holocore.resources.support.objects.permissions.AdminPermis
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
@@ -121,7 +122,7 @@ class SpawnerService : Service() {
 		}
 		
 		spawner.removeNPC(destroyedObject)
-		if (spawner.npcs.isEmpty())
+		if (spawner.behavior != AIBehavior.PATROL || spawner.npcs.isEmpty())
 			executor.execute((spawner.respawnDelay * 1000).toLong()) { respawn(spawner) }
 	}
 	
