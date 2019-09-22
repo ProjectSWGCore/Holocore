@@ -66,8 +66,10 @@ public class NpcLoiterMode extends NpcMode {
 		}
 		Location currentLocation = mainLocation;
 		
-		if (random.nextDouble() > 0.25) // Only a 25% movement chance
+		if (random.nextDouble() > 0.25) { // Only a 25% movement chance
+			queueNextLoop(10000 + random.nextInt(5));
 			return;
+		}
 		double dist = Math.sqrt(radius);
 		double theta;
 		LocationBuilder l = Location.builder(currentLocation);
