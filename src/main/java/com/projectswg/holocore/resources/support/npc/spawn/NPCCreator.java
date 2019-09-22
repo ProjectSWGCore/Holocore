@@ -157,20 +157,23 @@ public class NPCCreator {
 		LocationBuilder builder = Location.builder(spawner.getLocation());
 		
 		switch (spawner.getBehavior()) {
-			case LOITER:
-				// Random location within float radius of spawner and 
-				int floatRadius = spawner.getLoiterRadius();
-				int offsetX = randomBetween(0, floatRadius);
-				int offsetZ = randomBetween(0, floatRadius);
+			case LOITER: {
+				// Random location within float radius of spawner
+				double angle = ThreadLocalRandom.current().nextDouble(Math.PI * 2);
+				double distance = ThreadLocalRandom.current().nextDouble(spawner.getLoiterRadius());
+				int offsetX = (int) (Math.cos(angle) * distance);
+				int offsetZ = (int) (Math.sin(angle) * distance);
 				
 				builder.translatePosition(offsetX, 0, offsetZ);
-	
+				
 				// Doesn't break here - LOITER NPCs also have TURN behavior
-			case TURN:
+			}
+			case TURN: {
 				// Random heading when spawned
-				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
+				int randomHeading = randomBetween(0, 360);    // Can't use negative numbers as minimum
 				builder.setHeading(randomHeading);
 				break;
+			}
 			default:
 				break;
 		}
