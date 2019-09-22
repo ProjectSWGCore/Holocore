@@ -13,6 +13,7 @@ import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
@@ -39,9 +40,12 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 				.min(Comparator.comparingInt { it.health }).orElse(null)
 	
 	override fun onPlayerMoveInAware(player: CreatureObject, distance: Double) {
-		if (distance > spawner.aggressiveRadius && !ai.defenders.contains(player.objectId)) {
-			// If out of aggressive range, and not actively fighting
-			targets.remove(player)
+		if (distance > spawner.aggressiveRadius) {
+			// If out of aggressive range, and not actively in combat
+			if (spawner.behavior == AIBehavior.PATROL && spawner.npcs.none { it.defenders.contains(player.objectId) })
+				targets.remove(player)
+			else if (!ai.defenders.contains(player.objectId))
+				targets.remove(player)
 		}
 	}
 	

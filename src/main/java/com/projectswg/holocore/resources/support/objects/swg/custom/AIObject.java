@@ -142,7 +142,12 @@ public class AIObject extends CreatureObject {
 				maxAggroDistance = -1; // Ensures the following if-statement will fail and remove the player from the list
 			
 			if (distance <= maxAggroDistance && isLineOfSight(player)) {
-				StartNpcCombatIntent.broadcast(this, List.of(player));
+				if (spawner.getBehavior() == AIBehavior.PATROL) {
+					for (AIObject npc : spawner.getNpcs())
+						StartNpcCombatIntent.broadcast(npc, List.of(player));
+				} else {
+					StartNpcCombatIntent.broadcast(this, List.of(player));
+				}
 			}
 		}
 	}
