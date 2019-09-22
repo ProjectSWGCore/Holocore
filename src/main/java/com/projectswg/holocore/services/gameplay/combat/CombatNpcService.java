@@ -44,7 +44,10 @@ public class CombatNpcService extends Service {
 		if (corpse.isPlayer())
 			return;
 		
-		deleteCorpseTasks.put(corpse.getObjectId(), executor.execute(TimeUnit.SECONDS.toMillis(120), () -> deleteCorpse(corpse)));
+		if (i.getKiller().isPlayer())
+			deleteCorpseTasks.put(corpse.getObjectId(), executor.execute(TimeUnit.SECONDS.toMillis(120), () -> deleteCorpse(corpse)));
+		else
+			executor.execute(15000, () -> deleteCorpse(corpse));
 	}
 	
 	@IntentHandler
