@@ -1,0 +1,8 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_chf_100	patrol_chf_100	LOOP	CHARACTER_FARM	chf_world	0	600	0	0	0	NPC combat test area - an AT-ST
+patrol_chf_101	patrol_chf_100		CHARACTER_FARM	chf_world	0	500	0	0	0	
+patrol_chf_200	patrol_chf_200	LOOP	CHARACTER_FARM	chf_world	0	950	0	0	0	NPC combat test area - a Trandoshan slaver
+patrol_chf_201	patrol_chf_200		CHARACTER_FARM	chf_world	0	1050	0	0	0	
+patrol_chf_300	patrol_chf_300	LOOP	CHARACTER_FARM	chf_world	0	1050	0	0	0	NPC combat test area - a Wookiee commando
+patrol_chf_301	patrol_chf_300		CHARACTER_FARM	chf_world	0	950	0	0	0	

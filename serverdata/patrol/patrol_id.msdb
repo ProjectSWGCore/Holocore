@@ -1,5 +1,6 @@
 patrol_terain	active
 TEXT	BOOLEAN
+patrol_character_farm.sdb	TRUE
 patrol_corellia.sdb	TRUE
 patrol_dantooine.sdb	TRUE
 patrol_dathomir.sdb	TRUE
