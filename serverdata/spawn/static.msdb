@@ -1,5 +1,6 @@
 file	enabled
 TEXT	BOOLEAN
+common_character_farm.sdb	TRUE
 common_corellia.sdb	TRUE
 common_dantooine.sdb	TRUE
 common_dathomir.sdb	TRUE
