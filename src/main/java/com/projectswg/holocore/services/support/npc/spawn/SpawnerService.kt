@@ -148,7 +148,7 @@ class SpawnerService : Service() {
 		val spawner = Spawner(spawn, egg)
 		egg.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
 		
-		for (i in spawner.npcs.size until spawner.amount) {
+		for (i in 0 until spawner.amount) {
 			NPCCreator.createNPC(spawner)
 		}
 		
@@ -167,7 +167,7 @@ class SpawnerService : Service() {
 	}
 	
 	private fun respawn(spawner: Spawner) {
-		for (i in 0 until spawner.amount) {
+		for (i in spawner.npcs.size until spawner.amount) {
 			NPCCreator.createNPC(spawner)
 		}
 	}
