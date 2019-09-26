@@ -96,23 +96,13 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val lineOfSight = obj.isLineOfSight(target)
 		
 		if (targetDistance > actionRange || !lineOfSight) {
-			if (targetDistance > actionRange * 2) {
-				val targetLocation = target.location
-				val location = obj.location
-				val moveHeading = location.getHeadingTo(targetLocation)
-				val moveDistance = max(0.0, targetDistance - actionRange / 2) / 3
-				val moveX = targetLocation.x + cos(moveHeading) * moveDistance
-				val moveZ = targetLocation.z + sin(moveHeading) * moveDistance
-				StartNpcMovementIntent.broadcast(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed)
-			} else {
-				val targetLocation = target.location
-				val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-20.0, 20.0)
-				val targetRange = actionRange / 2
-				val moveX = targetLocation.x + cos(targetHeading) * targetRange
-				val moveZ = targetLocation.z + sin(targetHeading) * targetRange
-				val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
-				StartNpcMovementIntent.broadcast(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed)
-			}
+			val targetLocation = target.location
+			val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-75.0, 75.0)
+			val targetRange = actionRange / 2
+			val moveX = targetLocation.x + sin(Math.toRadians(targetHeading)) * targetRange
+			val moveZ = targetLocation.z + cos(Math.toRadians(targetHeading)) * targetRange
+			val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
+			StartNpcMovementIntent.broadcast(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed)
 		}
 		
 		if (lineOfSight && iteration.get() % 4 == 0L) {
