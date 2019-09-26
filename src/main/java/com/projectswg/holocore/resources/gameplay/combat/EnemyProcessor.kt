@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.gameplay.combat
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
@@ -51,7 +52,9 @@ object EnemyProcessor {
 		if (source is AIObject) {
 			if (target is AIObject)
 				return isFactionAttackable(source, target)
-			return ((source.hasOptionFlags(OptionFlag.AGGRESSIVE) || source.defenders.contains(target.objectId)) && isFactionAttackable(target, source)) || isFactionAttackable(source, target) // EvP only when aggressive or under attack
+			
+			return ((source.hasOptionFlags(OptionFlag.AGGRESSIVE) || (if (source.spawner?.behavior == AIBehavior.PATROL) source.spawner.npcs.any { it.defenders.contains(target.objectId) } else source.defenders.contains(target.objectId)))
+					&& (isFactionAttackable(target, source)) || isFactionAttackable(source, target)) // EvP only when aggressive or under attack
 		} else if (target is AIObject) {
 			return isFactionAttackable(source, target) // PvE allowed
 		}
