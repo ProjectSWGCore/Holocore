@@ -124,8 +124,9 @@ public class AIObject extends CreatureObject {
 				return;
 		}
 		CreatureObject player = (CreatureObject) aware;
-		if (player.hasOptionFlags(OptionFlag.INVULNERABLE) || !playersNearby.contains(aware))
+		if (player.hasOptionFlags(OptionFlag.INVULNERABLE))
 			return;
+		playersNearby.add(player);
 		
 		checkAwareAttack(player);
 	}
