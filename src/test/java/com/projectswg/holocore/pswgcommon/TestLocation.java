@@ -45,9 +45,9 @@ public class TestLocation extends TestRunnerNoIntents {
 		
 		assertEquals(0, origin.getHeadingTo(pointNorth), 1E-7);
 		assertEquals(0, pointSouth.getHeadingTo(pointNorth), 1E-7);
-		assertEquals(90, origin.getHeadingTo(pointEast), 1E-7);
+		assertEquals(270, origin.getHeadingTo(pointEast), 1E-7);
 		assertEquals(180, origin.getHeadingTo(pointSouth), 1E-7);
-		assertEquals(270, origin.getHeadingTo(pointWest), 1E-7);
+		assertEquals(90, origin.getHeadingTo(pointWest), 1E-7);
 		
 		assertEquals(0, Location.builder(origin).setHeading(0).build().getYaw(), 1E-7);
 		assertEquals(90, Location.builder(origin).setHeading(90).build().getYaw(), 1E-7);

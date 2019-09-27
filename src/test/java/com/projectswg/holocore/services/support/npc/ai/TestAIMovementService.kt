@@ -29,21 +29,37 @@ package com.projectswg.holocore.services.support.npc.ai
 
 import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents
+import org.junit.Assert
 import org.junit.Test
+import kotlin.math.sqrt
 
-class TestAIMovementService {
+class TestAIMovementService: TestRunnerNoIntents() {
 	
 	@Test
 	fun testOffsetLocation() {
-		testOffset( 1.0,  1.0, 0.0, 1.0, 1.0)
-		testOffset(-1.0,  1.0, 90.0, 1.0, 1.0)
-		testOffset(-1.0, -1.0, 180.0, 1.0, 1.0)
-		testOffset( 1.0, -1.0, 270.0, 1.0, 1.0)
+		Assert.assertEquals("NORTH", 0.0,   headingTo(0.0, 1.0), 1E-7)
+		Assert.assertEquals("EAST",  270.0, headingTo(1.0, 0.0), 1E-7)
+		Assert.assertEquals("SOUTH", 180.0, headingTo(0.0, -1.0), 1E-7)
+		Assert.assertEquals("WEST",  90.0,  headingTo(-1.0, 0.0), 1E-7)
+		
+		testOffset(headingTo(0.0, 1.0),   1.0, 1.0)
+		testOffset(headingTo(-1.0, 0.0),  -1.0, 1.0)
+		testOffset(headingTo(0.0, -1.0), -1.0, -1.0)
+		testOffset(headingTo(1.0, 0.0), 1.0, -1.0)
+		
+		testOffset(headingTo(1.0, 1.0),   sqrt(2.0), 0.0)
 	}
 	
-	private fun testOffset(x: Double, z: Double, heading: Double, tx: Double, tz: Double) {
-		val startLocation = Location.builder().setPosition(0.0, 0.0, 0.0).setHeading(heading).build()
-		AIMovementService.offsetLocation(startLocation, NavigationOffset(tx, tz))
+	private fun headingTo(eX: Double, eZ: Double): Double {
+		return Location.builder().setPosition(0.0, 0.0, 0.0).build().getHeadingTo(Location.builder().setPosition(eX, 0.0, eZ).build())
+	}
+	
+	private fun testOffset(heading: Double, tx: Double, tz: Double) {
+		val startLocation = Location.builder().setPosition(0.0, 0.0, 0.0).build()
+		val endLocation = AIMovementService.offsetLocation(startLocation, heading, NavigationOffset(1.0, 1.0))
+		Assert.assertEquals("X", tx, endLocation.x, 1E-7)
+		Assert.assertEquals("Z", tz, endLocation.z, 1E-7)
 	}
 	
 }
