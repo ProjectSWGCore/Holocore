@@ -30,7 +30,6 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
@@ -101,10 +100,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void flushAwareness() {
 		Player owner = getOwnerShallow();
-		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED)
-			return;
-		awareness.flush(owner);
-		sendAndFlushAllDeltas();
+		if (getTerrain() == Terrain.GONE || owner == null || owner.getPlayerState() == PlayerState.DISCONNECTED) {
+			awareness.flushNoPlayer();
+		} else {
+			awareness.flush(owner);
+			sendAndFlushAllDeltas();
+		}
 	}
 	
 	public void resetObjectsAware() {
@@ -209,7 +210,7 @@ public class CreatureObject extends TangibleObject {
 			getAllChildren(children, obj);
 	}
 	
-	public final boolean isWithinAwarenessRange(SWGObject target) {
+	public boolean isWithinAwarenessRange(SWGObject target) {
 		assert isPlayer();
 		
 		Player owner = getOwnerShallow();
@@ -957,12 +958,6 @@ public class CreatureObject extends TangibleObject {
 				damageMap.put(attacker, damage);
 		}
 	}
-
-	public boolean isAttackable(CreatureObject otherObject) {
-		Posture otherPosture = otherObject.getPosture();
-		
-		return isEnemyOf(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
-	}
 	
 	public boolean hasSentDuelRequestToPlayer(CreatureObject player) {
 		return sentDuels.contains(player);
@@ -978,46 +973,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public void removePlayerFromSentDuels(CreatureObject player) {
 		sentDuels.remove(player);
-	}
-	
-	/**
-	 * Members of the same faction might be enemies, if there are players
-	 * involved.
-	 * @param otherObject
-	 * @return
-	 */
-	@Override
-	public boolean isEnemyOf(TangibleObject otherObject) {
-		if (!(otherObject instanceof CreatureObject)) {
-			// If the other object isn't a creature, then our job here's done
-			return super.isEnemyOf(otherObject);
-		}
-		
-		// TODO bounty hunting
-		// TODO pets, vehicles etc having same flagging as their owner
-		// TODO guild wars
-		
-		if (isDuelingPlayer((CreatureObject)otherObject)) {
-			// Dueling is an exception, since it allows allies to be enemies
-			return true;
-		}
-		
-		return super.isEnemyOf(otherObject);	// Default
-	}
-	
-	@Override
-	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
-		Set<PvpFlag> flags = super.getPvpFlagsFor(observer);
-		
-		if (observer instanceof CreatureObject) {
-			if (isDuelingPlayer((CreatureObject) observer)) {
-				flags.add(PvpFlag.ATTACKABLE);
-				flags.add(PvpFlag.ENEMY);
-				flags.add(PvpFlag.DUEL);
-			}
-		}
-		
-		return flags;
 	}
 	
 	public boolean isBaselinesSent(SWGObject obj) {

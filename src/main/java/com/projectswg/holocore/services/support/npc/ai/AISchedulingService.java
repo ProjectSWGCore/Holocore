@@ -40,8 +40,10 @@ public class AISchedulingService extends Service {
 	@IntentHandler
 	private void handleStartNpcCombatIntent(StartNpcCombatIntent snci) {
 		modes.compute(snci.getObject(), (o, prev) -> {
-			if (prev instanceof NpcCombatMode)
+			if (prev instanceof NpcCombatMode) {
+				((NpcCombatMode) prev).addTargets(snci.getTargets());
 				return prev;
+			}
 			NpcCombatMode mode = new NpcCombatMode(o);
 			mode.addTargets(snci.getTargets());
 			start(o, mode);

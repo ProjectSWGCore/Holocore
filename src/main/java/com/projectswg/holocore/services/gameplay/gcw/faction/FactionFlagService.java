@@ -14,6 +14,7 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticPvpZoneLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -174,9 +175,9 @@ public class FactionFlagService extends Service {
 	
 	private void handleTypeChange(FactionIntent fi) {
 		TangibleObject target = fi.getTarget();
-		PvpFaction newFaction = fi.getNewFaction();
+		Faction newFaction = fi.getNewFaction();
 		
-		target.setPvpFaction(newFaction);
+		target.setFaction(newFaction);
 		handleFlagChange(target);
 	}
 	

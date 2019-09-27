@@ -39,6 +39,7 @@ import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -275,7 +276,7 @@ public class GenericPlayer extends Player {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
 		assertTrue(obj instanceof CreatureObject);
-		((CreatureObject) obj).setPvpFaction(p.getPlayerFaction());
+		((CreatureObject) obj).setFaction(ServerData.INSTANCE.getFactions().getFaction(p.getPlayerFaction().name().toLowerCase(Locale.US)));
 		((CreatureObject) obj).setPvpFlags(p.getPvpFlags());
 	}
 	

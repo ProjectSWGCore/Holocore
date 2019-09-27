@@ -34,10 +34,7 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
-import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
-import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
-import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
@@ -46,11 +43,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class CombatCommandCommon {
 	
@@ -98,7 +91,7 @@ public class CombatCommandCommon {
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
 		
-		if (!source.isEnemyOf((TangibleObject) target)) {
+		if (!source.isAttackable((TangibleObject) target)) {
 			return CombatStatus.INVALID_TARGET;
 		}
 		

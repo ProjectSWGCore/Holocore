@@ -66,6 +66,53 @@ public class CreatureObjectAwareness {
 			finalTeleportPacket.set(new DataTransformWithParent(creature.getObjectId(), 0, creature.getNextUpdateCount(), parent.getObjectId(), location, 0));
 	}
 	
+	public synchronized void flushNoPlayer() {
+		Set<SWGObject> newAware = creature.getAware();
+		List<SWGObject> create = new ArrayList<>();
+		List<SWGObject> added = new ArrayList<>();
+		
+		// Create Deltas
+		for (SWGObject createCandidate : newAware) {
+			if (aware.contains(createCandidate))
+				continue;
+			added.add(createCandidate);
+		}
+		getCreateList(create, added);
+		
+		// Server awareness update
+		for (SWGObject add : create) { // Using "create" here because it's filtered to ensure no crashes
+			aware.add(add);
+			awareIds.add(add.getObjectId());
+			add.addObserver(creature);
+			creature.onObjectEnteredAware(add);
+		}
+		
+		List<SWGObject> destroy = new ArrayList<>();
+		List<SWGObject> removed = new ArrayList<>();
+		
+		// Create Deltas
+		for (SWGObject destroyCandidate : aware) {
+			if (newAware.contains(destroyCandidate))
+				continue;
+			removed.add(destroyCandidate);
+		}
+		getDestroyList(destroy, removed);
+		
+		// Remove destroyed objects so that nobody tries to send a packet to us after we send the destroy
+		for (Iterator<SWGObject> it = aware.iterator(); it.hasNext(); ) {
+			SWGObject currentAware = it.next();
+			for (SWGObject remove : destroy) { // Since the "create" is filtered, aware could also have been filtered
+				if (isParent(currentAware, remove)) {
+					it.remove();
+					awareIds.remove(currentAware.getObjectId());
+					remove.removeObserver(creature);
+					creature.onObjectExitedAware(remove);
+					break;
+				}
+			}
+		}
+	}
+	
 	public synchronized void flush(@NotNull Player target) {
 		Set<SWGObject> newAware = creature.getAware();
 		flushCreates(target, newAware);
@@ -106,6 +153,7 @@ public class CreatureObjectAwareness {
 			aware.add(add);
 			awareIds.add(add.getObjectId());
 			add.addObserver(creature);
+			creature.onObjectEnteredAware(add);
 		}
 		
 		// Hope we didn't screw anything up
@@ -133,6 +181,7 @@ public class CreatureObjectAwareness {
 					it.remove();
 					awareIds.remove(currentAware.getObjectId());
 					remove.removeObserver(creature);
+					creature.onObjectExitedAware(remove);
 					break;
 				}
 			}

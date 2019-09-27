@@ -3,6 +3,7 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.comb
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -19,11 +20,11 @@ public final class CmdPVP implements ICmdCallback {
 		
 		if (!args.isEmpty()) {
 			if (args.contains("imperial")) {
-				new FactionIntent(creature, PvpFaction.IMPERIAL).broadcast();
+				new FactionIntent(creature, ServerData.INSTANCE.getFactions().getFaction("imperial")).broadcast();
 			} else if (args.contains("rebel")) {
-				new FactionIntent(creature, PvpFaction.REBEL).broadcast();
+				new FactionIntent(creature, ServerData.INSTANCE.getFactions().getFaction("rebel")).broadcast();
 			} else {
-				new FactionIntent(creature, PvpFaction.NEUTRAL).broadcast();
+				new FactionIntent(creature, ServerData.INSTANCE.getFactions().getFaction("neutral")).broadcast();
 			}
 		} else if (creature.getPvpFaction() != PvpFaction.NEUTRAL) {
 			new FactionIntent(creature, FactionIntent.FactionIntentType.SWITCHUPDATE).broadcast();

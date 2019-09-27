@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,64 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.npc.ai;
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Location.LocationBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
+package com.projectswg.holocore.resources.support.npc.ai
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-/**
- * AI object that loiters the area
- */
-public class NpcLoiterMode extends NpcMode {
-	
-	private Location mainLocation;
-	private double radius;
-	
-	public NpcLoiterMode(AIObject obj, double radius) {
-		super(obj);
-		this.mainLocation = null;
-		this.radius = radius;
-	}
-	
-	@Override
-	public void onModeStart() {
-		Location currentLocation = getAI().getLocation();
-		if (mainLocation == null)
-			mainLocation = currentLocation;
-		if (mainLocation.distanceTo(currentLocation) >= 1)
-			runTo(mainLocation);
-	}
-	
-	@Override
-	public void act() {
-		Random random = ThreadLocalRandom.current();
-		if (isRooted()) {
-			queueNextLoop(10000 + random.nextInt(5));
-			return;
-		}
-		Location currentLocation = mainLocation;
-		
-		if (random.nextDouble() > 0.25) { // Only a 25% movement chance
-			queueNextLoop(10000 + random.nextInt(5));
-			return;
-		}
-		double dist = Math.sqrt(radius);
-		double theta;
-		LocationBuilder l = Location.builder(currentLocation);
-		do {
-			theta = random.nextDouble() * Math.PI * 2;
-			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
-			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
-		} while (!l.isWithinFlatDistance(mainLocation, radius));
-		l.setHeading(l.getYaw() - Math.toDegrees(theta));
-		
-		moveTo(l.build());
-		queueNextLoop(30 + random.nextInt(10));
-	}
-	
-}
+data class NavigationOffset(val x: Double, val z: Double)

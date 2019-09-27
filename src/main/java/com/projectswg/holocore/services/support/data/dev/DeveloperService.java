@@ -55,7 +55,7 @@ public class DeveloperService extends Service {
 	
 	private void setupDeveloperArea() {
 		AIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), AIObject.class);
-		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
+		dummy.setPvpFlags(PvpFlag.YOU_CAN_ATTACK);
 	}
 	
 	private void setupCharacterBuilders() {

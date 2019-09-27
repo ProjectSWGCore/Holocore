@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,76 +24,26 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.gcw.faction;
 
-import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.Intent;
+package com.projectswg.holocore.services.support.npc.ai
 
-public class FactionIntent extends Intent {
+import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset
+import org.junit.Test
+
+class TestAIMovementService {
 	
-	private TangibleObject target;
-	private Faction newFaction;
-	private FactionIntentType updateType;
-	private PvpStatus newStatus;
-	
-	private FactionIntent(TangibleObject target) {
-		this.target = target;
+	@Test
+	fun testOffsetLocation() {
+		testOffset( 1.0,  1.0, 0.0, 1.0, 1.0)
+		testOffset(-1.0,  1.0, 90.0, 1.0, 1.0)
+		testOffset(-1.0, -1.0, 180.0, 1.0, 1.0)
+		testOffset( 1.0, -1.0, 270.0, 1.0, 1.0)
 	}
 	
-	public FactionIntent(TangibleObject target, FactionIntentType updateType) {
-		this(target);
-		this.updateType = updateType;
-	}
-	
-	public FactionIntent(TangibleObject target, Faction newFaction) {
-		this(target, FactionIntentType.FACTIONUPDATE);
-		this.newFaction = newFaction;
-	}
-	
-	public FactionIntent(TangibleObject target, PvpStatus newStatus) {
-		this(target, FactionIntentType.STATUSUPDATE);
-		this.newStatus = newStatus;
-	}
-	
-	public TangibleObject getTarget() {
-		return target;
-	}
-	
-	public Faction getNewFaction() {
-		return newFaction;
-	}
-	
-	public FactionIntentType getUpdateType() {
-		return updateType;
-	}
-	
-	public PvpStatus getNewStatus() {
-		return newStatus;
-	}
-	
-	public static void broadcastUpdateFlags(TangibleObject target) {
-		new FactionIntent(target, FactionIntentType.FLAGUPDATE).broadcast();
-	}
-	
-	public static void broadcastStartSwitch(TangibleObject target) {
-		new FactionIntent(target, FactionIntentType.STATUSUPDATE).broadcast();
-	}
-	
-	public static void broadcastUpdateFaction(TangibleObject target, Faction newFaction) {
-		new FactionIntent(target, newFaction).broadcast();
-	}
-	
-	public static void broadcastUpdateStatus(TangibleObject target, PvpStatus newStatus) {
-		new FactionIntent(target, newStatus).broadcast();
-	}
-	
-	public enum FactionIntentType {
-		FLAGUPDATE,
-		SWITCHUPDATE,
-		STATUSUPDATE,
-		FACTIONUPDATE // Is automatically set in the correct constructor, don't use manually.
+	private fun testOffset(x: Double, z: Double, heading: Double, tx: Double, tz: Double) {
+		val startLocation = Location.builder().setPosition(0.0, 0.0, 0.0).setHeading(heading).build()
+		AIMovementService.offsetLocation(startLocation, NavigationOffset(tx, tz))
 	}
 	
 }

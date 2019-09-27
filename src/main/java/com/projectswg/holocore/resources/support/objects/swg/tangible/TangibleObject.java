@@ -38,14 +38,18 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent.FactionIntentType;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.resources.gameplay.combat.EnemyProcessor;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -58,7 +62,7 @@ public class TangibleObject extends SWGObject {
 	private int				condition		= 0;
 	private Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
 	private PvpStatus		pvpStatus = PvpStatus.COMBATANT;
-	private PvpFaction		pvpFaction = PvpFaction.NEUTRAL;
+	private Faction			faction			= null;
 	private boolean			visibleGmOnly	= true;
 	private byte []			objectEffects	= new byte[0];
 	private int    			optionFlags     = 0;
@@ -185,13 +189,22 @@ public class TangibleObject extends SWGObject {
 		sendDelta(3, 5, pvpStatus.getValue());
 	}
 	
-	public PvpFaction getPvpFaction() {
-		return pvpFaction;
+	@Nullable
+	public Faction getFaction() {
+		return faction;
 	}
 	
-	public void setPvpFaction(PvpFaction pvpFaction) {
-		this.pvpFaction = pvpFaction;
+	public PvpFaction getPvpFaction() {
+		Faction faction = this.faction;
+		if (faction == null)
+			return PvpFaction.NEUTRAL;
+		return faction.getPvpFaction();
+	}
+	
+	public void setFaction(Faction faction) {
+		this.faction = faction;
 		
+		PvpFaction pvpFaction = faction == null ? PvpFaction.NEUTRAL : faction.getPvpFaction();
 		sendDelta(3, 4, pvpFaction.getCrc());
 	}
 	
@@ -281,6 +294,10 @@ public class TangibleObject extends SWGObject {
 		}
 		sendDelta(3, 8, optionFlags);
 	}
+	
+	public boolean hasOptionFlags(OptionFlag option) {
+		return (optionFlags & option.getFlag()) != 0;
+	}
 
 	public boolean hasOptionFlags(OptionFlag ... options) {
 		for (OptionFlag option : options) {
@@ -341,63 +358,19 @@ public class TangibleObject extends SWGObject {
 	 * @param otherObject
 	 * @return true if this object is an enemy of {@code otherObject}
 	 */
-	public boolean isEnemyOf(TangibleObject otherObject) {
-		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
-			return false;
-		}
-		
-		if (otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
-			return true;
-		}
-		
-		PvpFaction ourFaction = getPvpFaction();
-		PvpFaction otherFaction = otherObject.getPvpFaction();
-		
-		if (ourFaction == PvpFaction.NEUTRAL || otherFaction == PvpFaction.NEUTRAL) {
-			// Neutrals are always excluded from factional combat, unless they're both neutral
-			return ourFaction == otherFaction;
-		}
-		
-		// At this point, neither are neutral
-		
-		if (ourFaction == otherFaction) {
-			// Members of the same faction are not enemies
-			return false;
-		}
-		
-		// At this point, they're members of opposing factions
-		
-		PvpStatus ourStatus = getPvpStatus();
-		PvpStatus otherStatus = otherObject.getPvpStatus();
-		
-		if (ourStatus == PvpStatus.ONLEAVE || otherStatus == PvpStatus.ONLEAVE) {
-			// They're of opposing factions, but one of them on leave
-			return false;
-		}
-		
-		// At this point, they're both either combatant or special forces
-		
-		boolean ourPlayer = getSlottedObject("ghost") != null;
-		boolean otherPlayer = otherObject.getSlottedObject("ghost") != null;
-		
-		if (ourPlayer && otherPlayer) {
-			// Two players can only attack each other if both are Special Forces
-			return ourStatus == PvpStatus.SPECIALFORCES && otherStatus == PvpStatus.SPECIALFORCES;
-		} else {
-			// At this point, we're dealing with player vs npc or npc vs npc
-			// In this case, they just need to not be on leave and we've already established this
-			return true;
-		}
+	public boolean isAttackable(TangibleObject otherObject) {
+		return EnemyProcessor.INSTANCE.isAttackable(this, otherObject);
 	}
 	
 	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
-		Set<PvpFlag> pvpFlags = EnumSet.copyOf(observer.pvpFlags); // More efficient behind the scenes
+		Set<PvpFlag> pvpFlags = EnumSet.noneOf(PvpFlag.class); // More efficient behind the scenes
 		
-		if (isEnemyOf(observer) && getPvpFaction() != PvpFaction.NEUTRAL && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
-			pvpFlags.add(PvpFlag.AGGRESSIVE);
-			pvpFlags.add(PvpFlag.ATTACKABLE);
-			pvpFlags.add(PvpFlag.ENEMY);
-		}
+		if (isAttackable(observer))
+			pvpFlags.add(PvpFlag.YOU_CAN_ATTACK);
+		if (observer.isAttackable(this))
+			pvpFlags.add(PvpFlag.CAN_ATTACK_YOU);
+		if (observer instanceof CreatureObject && ((CreatureObject) observer).isPlayer())
+			pvpFlags.add(PvpFlag.PLAYER);
 		
 		return pvpFlags;
 	}
@@ -413,7 +386,7 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(pvpFaction.getCrc()); // Faction - 4
+		bb.addInt(getPvpFaction().getCrc()); // Faction - 4
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addObject(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
@@ -445,7 +418,7 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
+		faction = ServerData.INSTANCE.getFactions().getFaction(PvpFaction.getFactionForCrc(buffer.getInt()).name().toLowerCase(Locale.US));
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData.decode(buffer);
 		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
@@ -477,7 +450,8 @@ public class TangibleObject extends SWGObject {
 		stream.addInt(condition);
 		stream.addInt(pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
 		stream.addAscii(pvpStatus.name());
-		stream.addAscii(pvpFaction.name());
+		Faction faction = this.faction;
+		stream.addAscii(faction == null ? "neutral" : faction.getName());
 		stream.addBoolean(visibleGmOnly);
 		stream.addArray(objectEffects);
 		stream.addInt(optionFlags);
@@ -499,7 +473,7 @@ public class TangibleObject extends SWGObject {
 		condition = stream.getInt();
 		pvpFlags = PvpFlag.getFlags(stream.getInt());
 		pvpStatus = PvpStatus.valueOf(stream.getAscii());
-		pvpFaction = PvpFaction.valueOf(stream.getAscii());
+		faction = ServerData.INSTANCE.getFactions().getFaction(stream.getAscii().toLowerCase(Locale.US));
 		visibleGmOnly = stream.getBoolean();
 		objectEffects = stream.getArray();
 		optionFlags = stream.getInt();
@@ -515,7 +489,8 @@ public class TangibleObject extends SWGObject {
 		data.putInteger("condition", condition);
 		data.putInteger("pvpFlags", pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
 		data.putString("pvpStatus", pvpStatus.name());
-		data.putString("pvpFaction", pvpFaction.name());
+		Faction faction = this.faction;
+		data.putString("faction", faction == null ? "neutral" : faction.getName());
 		data.putBoolean("visibleGmOnly", visibleGmOnly);
 		data.putByteArray("objectEffects", objectEffects);
 		data.putInteger("optionFlags", optionFlags);
@@ -531,7 +506,7 @@ public class TangibleObject extends SWGObject {
 		condition = data.getInteger("condition", 0);
 		pvpFlags.addAll(PvpFlag.getFlags(data.getInteger("pvpFlags", 0)));
 		pvpStatus = PvpStatus.valueOf(data.getString("pvpStatus", "COMBATANT"));
-		pvpFaction = PvpFaction.valueOf(data.getString("pvpFaction", "NEUTRAL"));
+		faction = ServerData.INSTANCE.getFactions().getFaction(data.getString(data.containsKey("pvpFaction") ? "pvpFaction" : "faction", "neutral"));
 		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
 		objectEffects = data.getByteArray("objectEffects");
 		optionFlags = data.getInteger("optionFlags", 0);

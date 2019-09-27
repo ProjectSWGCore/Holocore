@@ -1005,6 +1005,22 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	/**
+	 * Called when an object has entered this object's awareness
+	 * @param aware the object that has entered awareness
+	 */
+	public void onObjectEnteredAware(SWGObject aware) {
+		
+	}
+	
+	/**
+	 * Called when an object has exited this object's awareness
+	 * @param aware the object that has entered awareness
+	 */
+	public void onObjectExitedAware(SWGObject aware) {
+		
+	}
+	
+	/**
 	 * Called when this object has been moved somehow via awareness. This will
 	 * not run on any buildout or snapshot object!
 	 */

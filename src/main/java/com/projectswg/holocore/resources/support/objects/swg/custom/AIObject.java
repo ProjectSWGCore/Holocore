@@ -26,18 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.SpawnerFlag;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.log.Log;
@@ -81,47 +78,85 @@ public class AIObject extends CreatureObject {
 	}
 	
 	@Override
-	public void onObjectMoveInAware(SWGObject aware) {
-		if (aware.getBaselineType() != BaselineType.CREO)
+	public void onObjectEnteredAware(SWGObject aware) {
+		if (aware.getBaselineType() != BaselineType.CREO || hasOptionFlags(OptionFlag.INVULNERABLE))
 			return;
+		
 		if (((CreatureObject) aware).isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
 			aware = aware.getSlottedObject("rider");
-			if (aware == null)
+			if (!(aware instanceof CreatureObject))
 				return;
 		}
 		CreatureObject player = (CreatureObject) aware;
-		if (!player.isLoggedInPlayer())
+		if (player.hasOptionFlags(OptionFlag.INVULNERABLE))
 			return;
-		double distance = getLocation().flatDistanceTo(aware.getLocation());
-		NpcMode activeMode = this.activeMode;
-		if (distance <= 100 && player.getPosture() != Posture.INCAPACITATED && player.getPosture() != Posture.DEAD) {
-			if (playersNearby.add(player)) {
-				if (activeMode != null)
-					activeMode.onPlayerEnterAware(player, distance);
-			} else {
-				if (activeMode != null) {
-					activeMode.onPlayerMoveInAware(player, distance);
-					if (getSpawner().getSpawnerFlag() == SpawnerFlag.AGGRESSIVE && distance < getSpawner().getAggressiveRadius() && isEnemyOf(player) && isLineOfSight(player)) {
-						StartNpcCombatIntent.broadcast(this, List.of(player));
-					}
-					
+		
+		playersNearby.add(player);
+		if (activeMode != null)
+			activeMode.onPlayerEnterAware(player, flatDistanceTo(player));
+		
+		checkAwareAttack(player);
+	}
+	
+	@Override
+	public void onObjectExitedAware(SWGObject aware) {
+		if (aware.getBaselineType() != BaselineType.CREO)
+			return;
+		
+		if (((CreatureObject) aware).isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			aware = aware.getSlottedObject("rider");
+			if (!(aware instanceof CreatureObject))
+				return;
+		}
+		playersNearby.remove(aware);
+		if (activeMode != null)
+			activeMode.onPlayerExitAware((CreatureObject) aware);
+	}
+	
+	@Override
+	public void onObjectMoveInAware(SWGObject aware) {
+		if (aware.getBaselineType() != BaselineType.CREO)
+			return;
+		
+		if (((CreatureObject) aware).isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			aware = aware.getSlottedObject("rider");
+			if (!(aware instanceof CreatureObject))
+				return;
+		}
+		CreatureObject player = (CreatureObject) aware;
+		if (player.hasOptionFlags(OptionFlag.INVULNERABLE))
+			return;
+		playersNearby.add(player);
+		
+		checkAwareAttack(player);
+	}
+	
+	private void checkAwareAttack(CreatureObject player) {
+		if (isAttackable(player)) {
+			double distance = getLocation().flatDistanceTo(player.getLocation());
+			double maxAggroDistance;
+			if (player.isLoggedInPlayer())
+				maxAggroDistance = getSpawner().getAggressiveRadius();
+			else if (!player.isPlayer())
+				maxAggroDistance = 30;
+			else
+				maxAggroDistance = -1; // Ensures the following if-statement will fail and remove the player from the list
+			
+			if (distance <= maxAggroDistance && isLineOfSight(player)) {
+				if (spawner.getBehavior() == AIBehavior.PATROL) {
+					for (AIObject npc : spawner.getNpcs())
+						StartNpcCombatIntent.broadcast(npc, List.of(player));
+				} else {
+					StartNpcCombatIntent.broadcast(this, List.of(player));
 				}
-			}
-		} else {
-			if (playersNearby.remove(player)) {
-				if (activeMode != null)
-					activeMode.onPlayerExitAware(player);
 			}
 		}
 	}
 	
 	@Override
-	public boolean isEnemyOf(TangibleObject obj) {
-		Posture myPosture = getPosture();
-		if (myPosture == Posture.INCAPACITATED || myPosture == Posture.DEAD || !(obj instanceof CreatureObject))
-			return false;
-		Posture theirPosture = ((CreatureObject) obj).getPosture();
-		return (theirPosture != Posture.INCAPACITATED || hasPvpFlag(PvpFlag.AGGRESSIVE)) && theirPosture != Posture.DEAD && super.isEnemyOf(obj);
+	public boolean isWithinAwarenessRange(SWGObject target) {
+		assert target instanceof CreatureObject;
+		return isAttackable((CreatureObject) target) && flatDistanceTo(target) <= 50;
 	}
 	
 	public void setSpawner(Spawner spawner) {

@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.spawn;
 
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.location.Location;
@@ -34,6 +33,7 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.DetailNpcStatInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
 import com.projectswg.holocore.resources.support.npc.ai.NpcLoiterMode;
@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.utilities.Arguments;
 
@@ -109,6 +110,7 @@ public class NPCCreator {
 		setFlags(object, spawner);
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
+		spawner.addNPC(object);
 		ObjectCreatedIntent.broadcast(object);
 		return object.getObjectId();
 	}
@@ -116,10 +118,10 @@ public class NPCCreator {
 	private static void setFlags(AIObject object, Spawner spawner) {
 		switch (spawner.getSpawnerFlag()) {
 			case AGGRESSIVE:
-				object.setPvpFlags(PvpFlag.AGGRESSIVE);
+				object.setPvpFlags(PvpFlag.CAN_ATTACK_YOU);
 				object.addOptionFlags(OptionFlag.AGGRESSIVE);
 			case ATTACKABLE:
-				object.setPvpFlags(PvpFlag.ATTACKABLE);
+				object.setPvpFlags(PvpFlag.YOU_CAN_ATTACK);
 				object.addOptionFlags(OptionFlag.HAM_BAR);
 				break;
 			case INVULNERABLE:
@@ -128,19 +130,14 @@ public class NPCCreator {
 		}
 	}
 
-	private static void setNPCFaction(TangibleObject object, PvpFaction faction, boolean specForce) {
-		if (faction == PvpFaction.NEUTRAL) {
-			return;
-		}
-
-		// Clear any existing flags that mark them as attackable
-		object.clearPvpFlags(PvpFlag.ATTACKABLE, PvpFlag.AGGRESSIVE);
-		object.removeOptionFlags(OptionFlag.AGGRESSIVE);
-
-		new FactionIntent(object, faction).broadcast();
-
+	private static void setNPCFaction(TangibleObject object, Faction faction, boolean specForce) {
 		if (specForce) {
-			new FactionIntent(object, PvpStatus.SPECIALFORCES).broadcast();
+			IntentChain.broadcastChain(
+					new FactionIntent(object, faction),
+					new FactionIntent(object, PvpStatus.SPECIALFORCES)
+			);
+		} else {
+			new FactionIntent(object, faction).broadcast();
 		}
 	}
 	
@@ -160,20 +157,23 @@ public class NPCCreator {
 		LocationBuilder builder = Location.builder(spawner.getLocation());
 		
 		switch (spawner.getBehavior()) {
-			case LOITER:
-				// Random location within float radius of spawner and 
-				int floatRadius = spawner.getLoiterRadius();
-				int offsetX = randomBetween(0, floatRadius);
-				int offsetZ = randomBetween(0, floatRadius);
+			case LOITER: {
+				// Random location within float radius of spawner
+				double angle = ThreadLocalRandom.current().nextDouble(Math.PI * 2);
+				double distance = ThreadLocalRandom.current().nextDouble(spawner.getLoiterRadius());
+				int offsetX = (int) (Math.cos(angle) * distance);
+				int offsetZ = (int) (Math.sin(angle) * distance);
 				
 				builder.translatePosition(offsetX, 0, offsetZ);
-	
+				
 				// Doesn't break here - LOITER NPCs also have TURN behavior
-			case TURN:
+			}
+			case TURN: {
 				// Random heading when spawned
-				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
+				int randomHeading = randomBetween(0, 360);    // Can't use negative numbers as minimum
 				builder.setHeading(randomHeading);
 				break;
+			}
 			default:
 				break;
 		}

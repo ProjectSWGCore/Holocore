@@ -236,13 +236,13 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		
 		private static PatrolFormation parsePatrolFormation(String str) {
 			switch (str.toUpperCase(Locale.US)) {
-				case "column":
+				case "COLUMN":
 					return PatrolFormation.COLUMN;
-				case "wedge":
+				case "WEDGE":
 					return PatrolFormation.WEDGE;
-				case "line":
+				case "LINE":
 					return PatrolFormation.LINE;
-				case "box":
+				case "BOX":
 					return PatrolFormation.BOX;
 				case "":
 				default:
