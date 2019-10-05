@@ -11,6 +11,7 @@ public enum Converters {
 	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
 	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
 	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
+	TERRAINS					(ConvertTerrain::new),
 	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new);
 	
 	private final Supplier<Converter> converter;
