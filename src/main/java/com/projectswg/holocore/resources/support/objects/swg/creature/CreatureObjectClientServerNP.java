@@ -42,6 +42,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * CREO 4
@@ -50,6 +52,7 @@ import java.util.Set;
 class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	
 	private final CreatureObject obj;
+	private final Lock skillModLock = new ReentrantLock();
 	
 	/** CREO4-00 */ private float								accelPercent			= 1;
 	/** CREO4-01 */ private float								accelScale				= 1;
@@ -99,19 +102,24 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	// TODO: Add Bonus Attribute Setters
 	
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
-		SkillMod skillMod = skillMods.get(skillModName);
-		
-		if (skillMod == null) {
-			// They didn't have this SkillMod already.
-			skillMods.put(skillModName, new SkillMod(base, modifier));
-		} else {
-			// They already had this skillmod.
-			// All we need to do is adjust the base and the modifier and send an update
-			skillMod.adjustBase(base);
-			skillMod.adjustModifier(modifier);
-			skillMods.update(skillModName);
+		skillModLock.lock();
+		try {
+			SkillMod skillMod = skillMods.get(skillModName);
+			
+			if (skillMod == null) {
+				// They didn't have this SkillMod already.
+				skillMods.put(skillModName, new SkillMod(base, modifier));
+			} else {
+				// They already had this skillmod.
+				// All we need to do is adjust the base and the modifier and send an update
+				skillMod.adjustBase(base);
+				skillMod.adjustModifier(modifier);
+				skillMods.update(skillModName);
+			}
+			skillMods.sendDeltaMessage(obj);
+		} finally {
+			skillModLock.unlock();
 		}
-		skillMods.sendDeltaMessage(obj);
 	}
 	
 	public int getSkillModValue(@NotNull String skillModName) {
