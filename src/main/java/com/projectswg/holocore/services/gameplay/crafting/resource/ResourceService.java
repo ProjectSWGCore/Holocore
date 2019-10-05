@@ -54,7 +54,7 @@ public class ResourceService extends Service {
 	public boolean initialize() {
 		container.loadResources();
 		for (RawResource rawResource : container.getResources()) {
-			GalacticResourceContainer.getContainer().addRawResource(rawResource);
+			GalacticResourceContainer.INSTANCE.addRawResource(rawResource);
 		}
 		spawner.initialize();
 		spawnerUpdater.startWithFixedRate(0, TimeUnit.HOURS.toMillis(3));

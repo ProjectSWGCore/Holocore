@@ -13,7 +13,7 @@ public final class CmdRequestCoreSample implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		GalacticResource resource = GalacticResourceContainer.getContainer().getGalacticResourceByName(args);
+		GalacticResource resource = GalacticResourceContainer.INSTANCE.getGalacticResourceByName(args);
 		if (resource == null) {
 			SystemMessageIntent.broadcastPersonal(player, "@survey:sample_select_type");
 			return;

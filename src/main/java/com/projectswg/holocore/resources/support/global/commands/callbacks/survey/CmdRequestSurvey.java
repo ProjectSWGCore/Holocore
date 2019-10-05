@@ -22,7 +22,7 @@ public final class CmdRequestSurvey implements ICmdCallback {
 		if (!(target instanceof TangibleObject))
 			return;
 		
-		GalacticResource resource = GalacticResourceContainer.getContainer().getGalacticResourceByName(args);
+		GalacticResource resource = GalacticResourceContainer.INSTANCE.getGalacticResourceByName(args);
 		if (resource == null) {
 			SystemMessageIntent.broadcastPersonal(player, "Unknown resource: " + args);
 			return;

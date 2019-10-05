@@ -61,7 +61,7 @@ class GalacticResourceSpawner {
 		val startTime = StandardLog.onStartLoad("galactic resources")
 		var resourceCount = 0
 		for (resource in PswgDatabase.resources.resources) {
-			GalacticResourceContainer.getContainer().addGalacticResource(resource)
+			GalacticResourceContainer.addGalacticResource(resource)
 			if (resource.id > resourceIdMax.get())
 				resourceIdMax.set(resource.id)
 			resourceCount++
@@ -71,12 +71,12 @@ class GalacticResourceSpawner {
 	
 	private fun saveResources() {
 		val loader = GalacticResourceLoader()
-		loader.saveResources(GalacticResourceContainer.getContainer().allResources)
-		PswgDatabase.resources.resources = GalacticResourceContainer.getContainer().allResources
+		loader.saveResources(GalacticResourceContainer.allResources)
+		PswgDatabase.resources.resources = GalacticResourceContainer.allResources
 	}
 	
 	private fun updateUnusedPools() {
-		val rawResources = GalacticResourceContainer.getContainer().rawResources
+		val rawResources = GalacticResourceContainer.rawResources
 		for (raw in rawResources) {
 			if (raw.maxPools == 0)
 				continue
@@ -85,7 +85,7 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun updateUnusedResourcePool(raw: RawResource) {
-		val spawned = GalacticResourceContainer.getContainer().getSpawnedGalacticResources(raw)
+		val spawned = GalacticResourceContainer.getSpawnedGalacticResources(raw)
 		val minTypes = raw.minTypes
 		val maxTypes = raw.maxTypes
 		if (spawned >= minTypes)
@@ -126,7 +126,7 @@ class GalacticResourceSpawner {
 			resource = GalacticResource(newId, newName, raw.id)
 			resource.rawResource = raw
 			Log.t("Generating new resource: $resource  $raw")
-		} while (!GalacticResourceContainer.getContainer().addGalacticResource(resource))
+		} while (!GalacticResourceContainer.addGalacticResource(resource))
 		return resource
 	}
 	
@@ -137,7 +137,7 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun updateSpawns() {
-		val resources = GalacticResourceContainer.getContainer().allResources
+		val resources = GalacticResourceContainer.allResources
 		for (resource in resources) {
 			val spawns = resource.spawns
 			if (spawns.isEmpty())
