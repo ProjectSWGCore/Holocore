@@ -115,6 +115,11 @@ public class RawResource {
 		return recycled;
 	}
 	
+	@Override
+	public String toString() {
+		return "RawResource[id="+id+" name="+name+" type="+type+"]";
+	}
+	
 	public static RawResourceBuilder builder(long id) {
 		return new RawResourceBuilder(id);
 	}
