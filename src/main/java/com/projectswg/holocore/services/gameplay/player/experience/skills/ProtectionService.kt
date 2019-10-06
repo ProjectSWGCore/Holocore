@@ -63,16 +63,16 @@ class ProtectionService : Service() {
 	
 	@IntentHandler
 	private fun handleContainerTransferIntent(intent: ContainerTransferIntent) {
-		val item = intent.getObject()
+		val item = intent.obj
 		val newContainer = intent.container ?: return
 		val oldContainer = intent.oldContainer ?: return
 		
 		if (newContainer is CreatureObject) {
 			// They equipped something
-			handleTransfer(item, newContainer, true)    // newContainer is a character
+			handleTransfer(item, newContainer, item.arrangement[intent.arrangement-4] ?: EMPTY_LIST, true)    // newContainer is a character
 		} else if (oldContainer is CreatureObject) {
 			// They unequipped something
-			handleTransfer(item, oldContainer, false)    // oldContainer is a character
+			handleTransfer(item, oldContainer, item.arrangement[intent.oldArrangement-4] ?: EMPTY_LIST, false)    // oldContainer is a character
 		}
 	}
 	
@@ -91,53 +91,35 @@ class ProtectionService : Service() {
 		}
 	}
 	
-	private fun handleTransfer(item: SWGObject, container: CreatureObject, equip: Boolean) {
-		when (item.gameObjectType) {
-			GameObjectType.GOT_CLOTHING_CLOAK -> handleTransferRobe(item, container, equip)
-			GameObjectType.GOT_ARMOR_HEAD -> handleTransferArmor(item, "hat", container, equip)
-			GameObjectType.GOT_ARMOR_BODY -> handleTransferArmor(item, "chest2", container, equip)
-			GameObjectType.GOT_ARMOR_LEG -> handleTransferArmor(item, "pants1", container, equip)
-			GameObjectType.GOT_ARMOR_ARM -> handleTransferArmor(item, "bicep_r", container, equip) // Covers both biceps and both bracers. They all have the same protection weight.
-			else -> return
-		}
-	}
-	
-	private fun handleTransferRobe(robe: SWGObject, creature: CreatureObject, equip: Boolean) {
-		// Deduct any existing armor protection if the robe is being equipped or add it back if the robe is unequipped
-		for (slotName in armorSlotProtectionMap.keys) {
-			val slottedObject = creature.getSlottedObject(slotName)
-			
-			if (slottedObject != null) {
-				handleTransferArmor(slottedObject, slotName, creature, !equip)
+	private fun handleTransfer(item: SWGObject, container: CreatureObject, arrangement: List<String>, equip: Boolean) {
+		if (equip && item.gameObjectType == GameObjectType.GOT_CLOTHING_CLOAK) {
+			// Deduct any existing armor protection if the robe is being equipped or add it back if the robe is unequipped
+			for (slotName in armorSlotProtectionMap.keys) {
+				val slottedObject = container.getSlottedObject(slotName)
+
+				if (slottedObject != null && slottedObject != item) {
+					handleTransferArmor(slottedObject, slotName, container, !equip)
+				}
 			}
 		}
-		
-		var robeProtection = robeProtection(robe)
-		if (robeProtection <= 0)
-			return // Robe doesn't offer protection. Do nothing.
-		
-		if (!equip)
-			robeProtection = -robeProtection // They unequipped this item. Deduct the protection instead of adding it.
-		
-		adjustRobeProtectionType(creature, "kinetic", robeProtection)
-		adjustRobeProtectionType(creature, "energy", robeProtection)
-		adjustRobeProtectionType(creature, "heat", robeProtection)
-		adjustRobeProtectionType(creature, "cold", robeProtection)
-		adjustRobeProtectionType(creature, "acid", robeProtection)
-		adjustRobeProtectionType(creature, "electricity", robeProtection)
+		for (slot in arrangement) {
+			handleTransferArmor(item, slot, container, equip)
+		}
 	}
 	
 	private fun handleTransferArmor(armor: SWGObject, slotName: String, creature: CreatureObject, equip: Boolean) {
 		var slotProtection = armorSlotProtectionMap[slotName] ?: return
+		if (!equip)
+			slotProtection = -slotProtection
 		
-		if (equip) {
-			// They equipped this piece or armor. Check if they have a jedi robe with protection equipped. If they do, stop here.
-			if (creature.slottedObjects.any { robeProtection(it) > 0 })
-				return // Jedi robe equipped. Don't give them more protection from the piece of equipped armor.
-		} else {
-			// They unequipped this piece of armor. Deduct the protection instead of adding it.
-			slotProtection = (-slotProtection)
-		}
+//		if (equip) {
+//			// They equipped this piece or armor. Check if they have a jedi robe with protection equipped. If they do, stop here.
+//			if (creature.slottedObjects.any { robeProtection(it) > 0 })
+//				return // Jedi robe equipped. Don't give them more protection from the piece of equipped armor.
+//		} else {
+//			// They unequipped this piece of armor. Deduct the protection instead of adding it.
+//			slotProtection = (-slotProtection)
+//		}
 		
 		adjustArmorProtectionType(creature, armor, "kinetic", "cat_armor_standard_protection.kinetic", slotProtection)
 		adjustArmorProtectionType(creature, armor, "energy", "cat_armor_standard_protection.energy", slotProtection)
@@ -147,12 +129,6 @@ class ProtectionService : Service() {
 		adjustArmorProtectionType(creature, armor, "electricity", "cat_armor_special_protection.special_protection_type_electricity", slotProtection)
 	}
 	
-	private fun getWeightedProtection(item: SWGObject, attribute: String, slotProtection: Int): Int {
-		val protection = item.getAttribute(attribute)?.toDoubleOrNull() ?: return 0
-		
-		return (protection * slotProtection / 100.0).toInt()
-	}
-	
 	private fun adjustArmorProtectionType(creature: CreatureObject, armor: SWGObject, skillModName: String, attribute: String, slotProtection: Int) {
 		val protection = getWeightedProtection(armor, attribute, slotProtection)
 		
@@ -160,21 +136,18 @@ class ProtectionService : Service() {
 			SkillModIntent(skillModName, 0, protection, creature).broadcast()
 	}
 	
-	private fun adjustRobeProtectionType(creature: CreatureObject, skillModName: String, robeProtection: Int) {
-		if (robeProtection != 0)
-			SkillModIntent(skillModName, 0, robeProtection, creature).broadcast()
-	}
-	
-	private fun robeProtection(item: SWGObject): Int {
-		val protectionLevel = item.getAttribute("@obj_attr_n:protection_level") ?: return 0    // This robe does not offer protection
+	private fun getWeightedProtection(item: SWGObject, attribute: String, slotProtection: Int): Int {
+		val protection = item.getAttribute(attribute)?.toDoubleOrNull() ?: return 0
 		
-		val key = protectionLevel.replace("@obj_attr_n:", "")
-		
-		return robeProtectionMap.getOrDefault(key, 0)
+		return (protection * slotProtection / 100.0).toInt()
 	}
 	
 	companion object {
+		
 		private const val ARM_RPOTECTION = 7
+		
+		private val EMPTY_LIST = listOf<String>()
+		
 	}
 	
 }

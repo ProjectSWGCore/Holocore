@@ -233,17 +233,19 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 */
 	public void moveToContainer(@Nullable SWGObject newParent) {
 		SWGObject oldParent = parent;
+		int oldArrangement = this.slotArrangement;
 		if (systemMove(newParent))
-			broadcast(new ContainerTransferIntent(this, oldParent, newParent));
+			broadcast(new ContainerTransferIntent(this, oldParent, oldArrangement, newParent, this.slotArrangement));
 	}
 	
 	public void moveToSlot(@NotNull SWGObject newParent, String slot, int arrangementId) {
 		SWGObject oldParent = parent;
+		int oldArrangement = this.slotArrangement;
 		if (oldParent != newParent) {
 			if (oldParent != null)
 				oldParent.removeObject(this);
 			newParent.addSlottedObject(this, List.of(slot), arrangementId);
-			broadcast(new ContainerTransferIntent(this, oldParent, newParent));
+			broadcast(new ContainerTransferIntent(this, oldParent, oldArrangement, newParent, slotArrangement));
 		}
 	}
 	
