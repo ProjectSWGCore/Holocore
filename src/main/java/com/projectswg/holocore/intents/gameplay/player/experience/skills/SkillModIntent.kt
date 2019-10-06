@@ -24,25 +24,13 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http:></http:>//www.gnu.org/licenses/>.               *
  */
-package com.projectswg.holocore.intents.support.objects.swg
+package com.projectswg.holocore.intents.gameplay.player.experience.skills
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.Intent
 
-class ContainerTransferIntent(val `object`: SWGObject, val oldContainer: SWGObject?, val oldArrangement: Int, val container: SWGObject?, val arrangement: Int) : Intent() {
+class SkillModIntent(val skillModName: String, val adjustBase: Int, val adjustModifier: Int, vararg val affectedCreatures: CreatureObject) : Intent() {
 	
-	/** Alias for kotlin code, allowed as a stylistic choice */
-	val obj: SWGObject
-		get() = `object`
-	
-	override fun toString() = "ContainerTransferIntent[obj=$`object` old=$oldArrangement/$oldContainer new=$arrangement/$container]"
-	
-	companion object {
-		
-		fun broadcast(obj: SWGObject, oldContainer: SWGObject?, oldArrangement: Int, newContainer: SWGObject?, arrangement: Int) {
-			ContainerTransferIntent(obj, oldContainer, oldArrangement, newContainer, arrangement).broadcast()
-		}
-		
-	}
+	override fun toString() = "SkillModIntent['$skillModName' base=$adjustBase mod=$adjustModifier creatures=${affectedCreatures.toList()}]"
 	
 }
