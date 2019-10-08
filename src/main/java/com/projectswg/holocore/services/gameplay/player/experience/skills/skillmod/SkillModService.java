@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience.skills;
+package com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod;
 
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalServerData;
@@ -38,6 +38,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
+import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.adjust.*;
 import com.projectswg.holocore.utilities.IntentFactory;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -46,8 +47,8 @@ import me.joshlarson.jlcommon.log.Log;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 
 public class SkillModService extends Service {
 	
@@ -62,6 +63,9 @@ public class SkillModService extends Service {
 	private final RelationalServerData racialStatsDatabase;
 	private final PreparedStatement getPlayerLevelStatement;
 	private final PreparedStatement getRacialStatsStatement;
+	
+	private final Map<String, Function<SkillModAdjust, Collection<SkillModAdjust>>> skillModAdjusters;
+	
 	public SkillModService() {
 		
 		playerLevelDatabase = RelationalServerFactory.getServerData("player/player_levels.db", "player_levels");
@@ -74,7 +78,18 @@ public class SkillModService extends Service {
 		if (racialStatsDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load racial_stats.sdb file for SkillTemplateService");
 		
-		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);			
+		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);
+		
+		skillModAdjusters = Map.of(
+				"agility_modified", new AgilityAdjustFunction(),
+				"luck_modified", new LuckAdjustFunction(),
+				"precision_modified", new PrecisionAdjustFunction(),
+				"strength_modified", new StrengthAdjustFunction(),
+				"expertise_dodge", new SingleModAdjustFunction("display_only_dodge", 100),
+				"expertise_innate_protection_all", new InnateArmorAdjustFunction(),
+				"expertise_innate_protection_kinetic", new SingleModAdjustFunction("kinetic"),
+				"expertise_innate_protection_energy", new SingleModAdjustFunction("energy")
+		);
 	}
 	
 	@Override
@@ -121,6 +136,7 @@ public class SkillModService extends Service {
 
 		updateLevelHAMValues(creature, newLevel, profession);
 		updateLevelSkillModValues(creature, newLevel, profession, race);
+		grantBaseCombatChances(creature);
 	}
 	
 	@IntentHandler
@@ -140,8 +156,30 @@ public class SkillModService extends Service {
 		for (CreatureObject creature : smi.getAffectedCreatures()) {
 			String skillModName = smi.getSkillModName();
 			
-			creature.adjustSkillmod(skillModName, smi.getAdjustBase(), smi.getAdjustModifier());
-			updateSkillModHamValues(creature, skillModName, smi.getAdjustBase() + smi.getAdjustModifier());
+			int adjustBase = smi.getAdjustBase();
+			int adjustModifier = smi.getAdjustModifier();
+			
+			adjustSkillmod(creature, skillModName, adjustBase, adjustModifier);
+			updateSkillModHamValues(creature, skillModName, adjustBase + adjustModifier);
+		}
+	}
+	
+	private void adjustSkillmod(CreatureObject creature, String skillModName, int adjustBase, int adjustModifier) {
+		creature.adjustSkillmod(skillModName, adjustBase, adjustModifier);
+		
+		if (skillModAdjusters.containsKey(skillModName)) {
+			Function<SkillModAdjust, Collection<SkillModAdjust>> modIntentConsumer = skillModAdjusters.get(skillModName);
+			SkillModAdjust inputAdjust = new SkillModAdjust(skillModName, adjustBase, adjustModifier);
+			
+			Collection<SkillModAdjust> outputAdjusts = modIntentConsumer.apply(inputAdjust);
+			
+			for (SkillModAdjust outputAdjust : outputAdjusts) {
+				int outputBase = outputAdjust.getBase();
+				int outputModifier = outputAdjust.getModifier();
+				String outputName = outputAdjust.getName();
+				
+				adjustSkillmod(creature, outputName, outputBase, outputModifier);
+			}
 		}
 	}
 	
@@ -203,8 +241,8 @@ public class SkillModService extends Service {
 			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase(Locale.US));
 			
 			if (skillModValue > oldSkillModValue){
-				creature.adjustSkillmod(type.toString().toLowerCase(Locale.US), 0, -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
-				creature.adjustSkillmod(type.toString().toLowerCase(Locale.US), 0, skillModValue);
+				adjustSkillmod(creature, type.toString().toLowerCase(Locale.US), 0, -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
+				adjustSkillmod(creature, type.toString().toLowerCase(Locale.US), 0, skillModValue);
 
 				if (type == SkillModTypes.CONSTITUTION_MODIFIED || type == SkillModTypes.STAMINA_MODIFIED)
 					updateSkillModHamValues(creature, type.toString().toLowerCase(Locale.US),skillModValue - oldSkillModValue);
@@ -213,6 +251,15 @@ public class SkillModService extends Service {
 					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);
 			}				
 		}
+	}
+	
+	private void grantBaseCombatChances(CreatureObject creatureObject) {
+		creatureObject.adjustSkillmod("display_only_block", 500, 0);
+		creatureObject.adjustSkillmod("display_only_dodge", 500, 0);
+		creatureObject.adjustSkillmod("display_only_evasion", 500, 0);
+		creatureObject.adjustSkillmod("display_only_parry", 500, 0);
+		creatureObject.adjustSkillmod("display_only_critical", 500, 0);
+		creatureObject.adjustSkillmod("display_only_strikethrough", 500, 0);
 	}
 	
 	private int getLevelSkillModValue(int level, String professionModName, String raceModName){

@@ -40,6 +40,7 @@ import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDa
 import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.services.support.global.chat.ChatRoomService;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,6 +85,10 @@ public class ChatRoomHandler {
 	public void enterChatChannels(Player player) {
 		for (String channel : player.getPlayerObject().getJoinedChannels()) {
 			enterChatChannel(player, channel, false);
+		}
+
+		if (player.getAccessLevel() != AccessLevel.PLAYER) {
+			enterChatChannel(player, ChatRoomService.LOG_ROOM_PATH, true);
 		}
 	}
 	
@@ -232,7 +237,14 @@ public class ChatRoomHandler {
 			sendMessage(room, avatar, message, oobPackage);
 		}
 	}
-	
+
+	public void sendMessageToRoomFromSystem(String path, String message, OutOfBandPackage oobPackage) {
+		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar();
+		ChatRoom room = rooms.getRoomByPath(path);
+
+		sendMessage(room, systemAvatar, message, oobPackage);
+	}
+
 	public boolean notifyDestroyRoom(ChatAvatar destroyer, String roomPath, int sequence) {
 		ChatRoom room;
 		
@@ -272,6 +284,7 @@ public class ChatRoomHandler {
 		rooms.handleRows((r) -> createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false));
 		
 		createPlanetChannels(systemAvatar, basePath);
+		createAdminChannels(systemAvatar, basePath);
 		
 		/*
 		 * Battlefield Room path examples: SWG.Bria.corellia.battlefield SWG.Bria.corellia.battlefield.corellia_mountain_fortress.allFactions SWG.Bria.corellia.battlefield.corellia_pvp.allFactions / Imperial / Rebel SWG.Bria.corellia.battlefield.corellia_rebel_riverside_fort.allFactions
@@ -286,6 +299,10 @@ public class ChatRoomHandler {
 			createRoom(systemAvatar, true, false, path + "system", "system messages for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "Chat", "public chat for this planet, can create rooms here", false);
 		});
+	}
+
+	private void createAdminChannels(ChatAvatar systemAvatar, String basePath) {
+		createRoom(systemAvatar, false, false, ChatRoomService.LOG_ROOM_PATH, "server log", false);
 	}
 	
 	public ChatRoom getRoomById(int roomId) {

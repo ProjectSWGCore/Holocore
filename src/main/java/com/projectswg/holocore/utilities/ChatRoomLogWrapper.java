@@ -24,21 +24,23 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience.skills;
+package com.projectswg.holocore.utilities;
 
-import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent;
+import me.joshlarson.jlcommon.log.Log;
+import me.joshlarson.jlcommon.log.LogWrapper;
+import org.jetbrains.annotations.NotNull;
 
-@ManagerStructure(children = {
-		SkillModService.class,
-		SkillService.class,
-		SkillTemplateService.class
-})
-public final class SkillManager extends Manager {
-	
-	public SkillManager() {
-		
+public class ChatRoomLogWrapper implements LogWrapper {
+
+	private final String roomPath;
+
+	public ChatRoomLogWrapper(String roomPath) {
+		this.roomPath = roomPath;
 	}
-	
+
+	@Override
+	public void onLog(Log.@NotNull LogLevel level, @NotNull String str) {
+		SystemChatRoomMessageIntent.broadcast(roomPath, str);
+	}
 }

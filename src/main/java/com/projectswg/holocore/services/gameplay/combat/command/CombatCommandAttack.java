@@ -28,6 +28,7 @@
 package com.projectswg.holocore.services.gameplay.combat.command;
 
 import com.projectswg.common.data.combat.*;
+import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
@@ -40,6 +41,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.*;
@@ -84,6 +86,12 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	
 	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
 		// TODO single target only defence rolls against target
+		if (target instanceof CreatureObject && isAttackDodged(source, (CreatureObject) target)) {
+			info.setDodge(true);
+			info.setSuccess(false);	// This means that the attack did no damage to the target at all
+			target.sendObservers(new Animation(target.getObjectId(), "dodge"));
+		}
+		
 		// TODO single target only offence rolls for source
 		
 		// TODO below logic should be in CommandService when target checks are implemented in there
@@ -133,7 +141,8 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
 				target.sendObservers(createCombatSpam(source, target, weapon, info, command));
-				return;
+				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+				continue;	// This target negated the attack completely - move on to the next target
 			}
 			
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
@@ -231,6 +240,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		return mitigation / 100;
 		
+	}
+	
+	private static boolean isAttackDodged(CreatureObject source, CreatureObject target) {
+		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100;
+		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
+		
+		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
 	}
 	
 }

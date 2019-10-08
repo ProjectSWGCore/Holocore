@@ -78,17 +78,6 @@ class ProtectionService : Service() {
 		}
 	}
 	
-	@IntentHandler
-	private fun handleSkillModIntent(intent: SkillModIntent) {
-		// Modify protection values if an innate armor skillmod is being granted
-		val skillModName = intent.skillModName
-		
-		if ("expertise_innate_protection_all" == skillModName) {
-			for (skillMod in attributeLookup.keys)
-				SkillModIntent(skillMod, intent.adjustBase, intent.adjustModifier, *intent.affectedCreatures).broadcast()
-		}
-	}
-	
 	private fun handleTransfer(item: SWGObject, creature: CreatureObject, arrangement: List<String>, equip: Boolean) {
 		val jedi = creature.playerObject?.profession == Profession.FORCE_SENSITIVE
 		val robe = item.gameObjectType == GameObjectType.GOT_CLOTHING_CLOAK
