@@ -98,21 +98,6 @@ public class ProtectionService extends Service {
 		}
 	}
 	
-	@IntentHandler
-	private void handleSkillModIntent(SkillModIntent intent) {
-		// Modify protection values if an innate armor skillmod is being granted
-		String skillModName = intent.getSkillModName();
-		
-		if ("expertise_innate_protection_all".equals(skillModName)) {
-			new SkillModIntent("kinetic", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-			new SkillModIntent("energy", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-			new SkillModIntent("heat", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-			new SkillModIntent("cold", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-			new SkillModIntent("acid", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-			new SkillModIntent("electricity", intent.getAdjustBase(), intent.getAdjustModifier(), intent.getAffectedCreatures()).broadcast();
-		}
-	}
-	
 	private void handleTransfer(SWGObject item, CreatureObject container, boolean equip) {
 		switch (item.getGameObjectType()) {
 			case GOT_CLOTHING_CLOAK:
