@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills;
 
+import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
 
