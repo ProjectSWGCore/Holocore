@@ -32,7 +32,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.player.Profession
 import com.projectswg.holocore.services.gameplay.player.experience.skills.ProtectionService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillModService
+import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
 import org.junit.Assert
