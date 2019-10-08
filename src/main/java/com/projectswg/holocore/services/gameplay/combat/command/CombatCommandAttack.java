@@ -141,7 +141,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
 				target.sendObservers(createCombatSpam(source, target, weapon, info, command));
-				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 4, HitLocation.HIT_LOCATION_BODY, (short) 0));
+				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 				continue;	// This target negated the attack completely - move on to the next target
 			}
 			
