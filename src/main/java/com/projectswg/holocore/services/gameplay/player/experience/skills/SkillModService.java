@@ -121,6 +121,7 @@ public class SkillModService extends Service {
 
 		updateLevelHAMValues(creature, newLevel, profession);
 		updateLevelSkillModValues(creature, newLevel, profession, race);
+		grantBaseCombatChances(creature);
 	}
 	
 	@IntentHandler
@@ -213,6 +214,15 @@ public class SkillModService extends Service {
 					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);
 			}				
 		}
+	}
+	
+	private void grantBaseCombatChances(CreatureObject creatureObject) {
+		creatureObject.adjustSkillmod("display_only_block", 500, 0);
+		creatureObject.adjustSkillmod("display_only_dodge", 500, 0);
+		creatureObject.adjustSkillmod("display_only_evasion", 500, 0);
+		creatureObject.adjustSkillmod("display_only_parry", 500, 0);
+		creatureObject.adjustSkillmod("display_only_critical", 500, 0);
+		creatureObject.adjustSkillmod("display_only_strikethrough", 500, 0);
 	}
 	
 	private int getLevelSkillModValue(int level, String professionModName, String raceModName){
