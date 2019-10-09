@@ -40,6 +40,7 @@ import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDa
 import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.support.global.chat.ChatRoomService;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import org.jetbrains.annotations.NotNull;
@@ -327,7 +328,10 @@ public class ChatRoomHandler {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, room.getId(), message, oob);
 		for (ChatAvatar member : room.getMembers()) {
 			Player player = getPlayer(member);
-			if (player.getPlayerObject().isIgnored(sender.getName()))
+			if (player == null)
+				continue;
+			PlayerObject playerObject = player.getPlayerObject();
+			if (playerObject != null && playerObject.isIgnored(sender.getName()))
 				continue;
 			
 			player.sendPacket(chatRoomMessage);
