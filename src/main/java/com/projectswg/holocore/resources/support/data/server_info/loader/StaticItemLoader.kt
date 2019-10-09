@@ -106,7 +106,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val armorLevel: String = set.getText("armor_level")
 		val armorType: ArmorType
-		val protection: Double = set.getReal("protection")
+		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
 		val requiredProfession: String	= set.getText("required_profession")

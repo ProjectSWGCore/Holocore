@@ -80,8 +80,16 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 			boolean uninterrupted = Delay.sleepMicro(10);
 			assert uninterrupted;
 		}
+		waitForIntents();
+	}
+	
+	protected final void waitForIntents() {
 		while (intentManager.getIntentCount() > 0) {
-			boolean uninterrupted = Delay.sleepMicro(10);
+			boolean uninterrupted = Delay.sleepMilli(1);
+			assert uninterrupted;
+		}
+		while (intentManager.getIntentCount() > 0) {
+			boolean uninterrupted = Delay.sleepMilli(10);
 			assert uninterrupted;
 		}
 	}

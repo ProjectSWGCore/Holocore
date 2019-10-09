@@ -24,7 +24,6 @@ import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.cos
-import kotlin.math.max
 import kotlin.math.sin
 
 class NpcCombatMode(obj: AIObject) : NpcMode(obj) {

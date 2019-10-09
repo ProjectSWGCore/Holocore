@@ -99,7 +99,7 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 				// We don't use moveToContainer, because that would trigger auto-stacking.
 				newStack.systemMove(container);
 				
-				ContainerTransferIntent.broadcast(newStack, null, container);
+				ContainerTransferIntent.Companion.broadcast(newStack, null, -1, container, newStack.getSlotArrangement());
 				
 				ObjectCreatedIntent.broadcast(newStack);
 			} catch (NumberFormatException e) {

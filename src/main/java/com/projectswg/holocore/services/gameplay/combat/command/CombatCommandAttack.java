@@ -149,9 +149,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
 			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
-			int finalDamage = rawDamage;
 			
 			info.setRawDamage(rawDamage);
+			info.setFinalDamage(rawDamage);
 			info.setDamageType(damageType);
 			
 			// The armor of the target will mitigate some of the damage
@@ -162,12 +162,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			// End rolls
 			int targetHealth = target.getHealth();
-			boolean incapacitate = targetHealth <= finalDamage;
 			
-			if (incapacitate) {
+			final int finalDamage;
+			if (targetHealth <= info.getFinalDamage()) {
 				finalDamage = targetHealth;	// Target took more damage than they had health left. Final damage becomes the amount of remaining health.
 				RequestCreatureDeathIntent.broadcast(source, target);
 			} else {
+				finalDamage = info.getFinalDamage();
 				target.modifyHealth(-finalDamage);
 			}
 			

@@ -70,32 +70,33 @@ object StaticItemCreator {
 		if (info.requiredProfession.isNotEmpty())
 			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
 		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
+		
 		val kineticMax: Int
 		val energyMax: Int
 		when (info.armorType) {
 			StaticItemLoader.ArmorItemInfo.ArmorType.ASSAULT -> {
-				kineticMax = 7000
-				energyMax = 5000
+				kineticMax = info.protection + 1000
+				energyMax = info.protection - 1000
 				obj.addAttribute("armor_category", "@obj_attr_n:armor_assault")
 			}
 			StaticItemLoader.ArmorItemInfo.ArmorType.BATTLE -> {
-				kineticMax = 6000
-				energyMax = 6000
+				kineticMax = info.protection
+				energyMax = info.protection
 				obj.addAttribute("armor_category", "@obj_attr_n:armor_battle")
 			}
 			StaticItemLoader.ArmorItemInfo.ArmorType.RECON -> {
-				kineticMax = 5000
-				energyMax = 7000
+				kineticMax = info.protection - 1000
+				energyMax = info.protection + 1000
 				obj.addAttribute("armor_category", "@obj_attr_n:armor_reconnaissance")
 			}
 		}
 		
-		obj.addAttribute("cat_armor_standard_protection.kinetic", calculateProtection(kineticMax, info.protection))
-		obj.addAttribute("cat_armor_standard_protection.energy", calculateProtection(energyMax, info.protection))
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_heat", calculateProtection(6000, info.protection))
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_cold", calculateProtection(6000, info.protection))
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_acid", calculateProtection(6000, info.protection))
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_electricity", calculateProtection(6000, info.protection))
+		obj.addAttribute("cat_armor_standard_protection.kinetic", kineticMax.toString())
+		obj.addAttribute("cat_armor_standard_protection.energy", energyMax.toString())
+		obj.addAttribute("cat_armor_special_protection.special_protection_type_heat", info.protection.toString())
+		obj.addAttribute("cat_armor_special_protection.special_protection_type_cold", info.protection.toString())
+		obj.addAttribute("cat_armor_special_protection.special_protection_type_acid", info.protection.toString())
+		obj.addAttribute("cat_armor_special_protection.special_protection_type_electricity", info.protection.toString())
 		
 		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
@@ -242,10 +243,6 @@ object StaticItemCreator {
 			races += "MonCal Human Zabrak Bothan Sullustan Twi'lek "
 		
 		return if (races.isEmpty()) "" else races.substring(0, races.length - 1)
-	}
-	
-	private fun calculateProtection(max: Int, protection: Double): String {
-		return floor(max * protection).toInt().toString()
 	}
 	
 }
