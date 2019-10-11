@@ -47,13 +47,19 @@ public class GenericCreatureObject extends CreatureObject {
 	}
 	
 	public GenericCreatureObject(long objectId, String name) {
+		this(objectId, name, true);
+	}
+	
+	public GenericCreatureObject(long objectId, String name, boolean character) {
 		super(objectId);
 		player = new GenericPlayer();
 		player.setPlayerState(PlayerState.ZONED_IN);
-		setHasOwner(true);
 		setObjectName(name);
 		setTemplate("object/creature/player/shared_human_male.iff");
-		setupAsCharacter(name);
+		if (character) {
+			setHasOwner(true);
+			setupAsCharacter(name);
+		}
 	}
 	
 	public void setHasOwner(boolean hasOwner) {
