@@ -66,3 +66,11 @@ inline fun runSafeReturnException(op: () -> Any?): Throwable? {
 inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
 	handler(this ?: return)
 }
+
+inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
+	val start = System.nanoTime()
+	val ret = operation()
+	val end = System.nanoTime()
+	timeNanoseconds(end-start)
+	return ret
+}

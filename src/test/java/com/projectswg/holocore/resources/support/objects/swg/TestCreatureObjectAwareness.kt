@@ -43,17 +43,14 @@ import kotlin.collections.LinkedHashSet
 class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 	
 	@Test
-	fun testSelfAwareness() {
+	fun testCreateList() {
 		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
 		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0); addNPC(20); addPlayer(21) }
 		val building2 = createBuilding(3) { setPosition(10.0, 0.0, 10.0); addNPC(30); addPlayer(31) }
 		val awareness = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1, building2))).toList()
+		
 		val flushData = CreatureObjectAwareness.FlushAwarenessData(creature)
 		val create = flushData.buildCreate(HashSet(), LinkedHashSet(awareness))
-		println(awareness)
-		println(create)
-		println()
-		println()
 		val stack = LinkedList<SWGObject>()
 		
 		// Don't lose any objects
@@ -77,6 +74,18 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 			}
 			stack.add(obj)
 		}
+	}
+	
+	@Test
+	fun testDestroyList() {
+		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
+		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0); addNPC(20); addPlayer(21) }
+		val building2 = createBuilding(3) { setPosition(10.0, 0.0, 10.0); addNPC(30); addPlayer(31) }
+		val awareness = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1, building2))).toList()
+		val flushData = CreatureObjectAwareness.FlushAwarenessData(creature)
+		val create = flushData.buildCreate(HashSet(), LinkedHashSet(awareness))
+		val destroy = flushData.buildDestroy(HashSet(create), HashSet())
+		Assert.assertEquals(setOf(creature, building1, building2), HashSet(destroy))
 	}
 	
 	private fun getRecursiveInfo(creature: CreatureObject, objects: Collection<SWGObject>): List<SWGObject> {

@@ -38,7 +38,6 @@ import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
-
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
@@ -69,8 +68,9 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 				// Send all SceneCreateObject's and Baselines
 				val createStack = LinkedList<SWGObject>()
 				for (obj in create) {
-					if (obj.isBundledWithin(obj.parent, creature))
-						popStackUntil(target, createStack, obj.parent)
+					val parent = obj.parent
+					if (parent != null && obj.isBundledWithin(parent, creature))
+						popStackUntil(target, createStack, parent)
 					else
 						popStackAll(target, createStack)
 					createStack.add(obj)
@@ -192,11 +192,9 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 		}
 	}
 	
-	private fun popStackUntil(target: Player, createStack: LinkedList<SWGObject>, parent: SWGObject?) {
+	private fun popStackUntil(target: Player, createStack: LinkedList<SWGObject>, parent: SWGObject) {
 		var last: SWGObject? = createStack.peekLast()
-		while (last != null) {
-			if (last === parent)
-				break
+		while (last != null && !(last === parent)) {
 			createStack.pollLast()
 			target.sendPacket(SceneEndBaselines(last.objectId))
 			last = createStack.peekLast()
@@ -209,28 +207,28 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 	
 	class FlushAwarenessData(private val creature: CreatureObject) {
 		
-		private val objectComparator = Comparator.comparingInt<SWGObject> { getObjectDepth(it) }.thenComparingDouble { getDistance(creature, it) }
 		private val create = ArrayList<SWGObject>()
 		private val destroy = ArrayList<SWGObject>()
+		private val objectComparator = compareBy<SWGObject>({ getObjectDepth(it) }, { getDistance(creature, it) })
 		
 		fun buildCreate(oldAware: Set<SWGObject>, newAware: Set<SWGObject>): List<SWGObject> {
 			val create = this.create
 			create.clear()
-			val added = newAware.filter { !oldAware.contains(it) }.sortedWith(compareBy({ getObjectDepth(it) }, { getDistance(creature, it) }))
+			
+			val added = newAware.filter { !oldAware.contains(it) }.sortedWith(objectComparator)
 			for (obj in added) {
 				val parent = obj.parent
-				if (parent != null && !oldAware.contains(parent) && !create.contains(parent)) {
+				if (parent == null || oldAware.contains(parent) || !obj.isBundledWithin(parent, creature)) {
+					create.add(obj)
+					continue
+				}
+				val parentIndex = create.indexOf(parent)
+				if (parentIndex == -1) { // Ensures child is sent after the parent
 					assert(obj !is CellObject)
 					continue
 				}
 				assert(obj !is BuildingObject || added.containsAll(obj.getContainedObjects())) { "All cells must be sent with the building" }
-				if (!obj.isBundledWithin(parent, creature) || oldAware.contains(parent)) {
-					create.add(obj)
-				} else {
-					val parentIndex = create.indexOf(parent)
-					assert(parentIndex != -1) { "parent isn't added along with child" }
-					create.add(parentIndex + 1, obj)
-				}
+				create.add(parentIndex + 1, obj)
 			}
 			return create
 		}
@@ -243,8 +241,13 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 					.filter { !isParent(creature, it) }      // Only remove if it isn't our parent
 					.sortedWith(objectComparator)            // Sorted for proper ordering
 					.forEach {
-						if (!destroy.contains(it.parent))    // Optimization for the client - destroying the parent destroys the children
-							destroy.add(it)
+						var parent = it.parent
+						while (parent != null) {
+							if (destroy.contains(parent))
+								return@forEach               // Optimization for the client - destroying the parent destroys the children
+							parent = parent.parent
+						}
+						destroy.add(it)
 					}
 			
 			return destroy
@@ -254,12 +257,12 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 	
 	companion object {
 		
-		private fun getDistance(creature: CreatureObject, obj: SWGObject) = if (obj.parent != null) 0.0 else creature.worldLocation.distanceTo(obj.location)
+		private fun getDistance(creature: CreatureObject, obj: SWGObject) = if (obj.parent != null) 0 else creature.worldLocation.distanceTo(obj.location).toInt()
 		private fun getObjectDepth(obj: SWGObject?): Int = if (obj == null) 0 else (1 + getObjectDepth(obj.parent))
-		private fun SWGObject.isBundledWithin(parent: SWGObject?, creature: CreatureObject) = (parent != null && (this.slotArrangement == -1 || this.baselineType == BaselineType.PLAY || parent === creature))
+		private fun SWGObject.isBundledWithin(parent: SWGObject, creature: CreatureObject) = (this.slotArrangement == -1 || this.baselineType == BaselineType.PLAY || parent === creature)
 		
 		private fun isParent(child: SWGObject, testParent: SWGObject): Boolean {
-			var parent: SWGObject? = child
+			var parent: SWGObject? = child.parent
 			while (parent != null) {
 				if (parent === testParent)
 					return true
