@@ -114,11 +114,11 @@ public class SkillModService extends Service {
 				int modValue = Integer.parseInt(attributes.getValue());
 
 				if(cti.getContainer().getObjectId() == creature.getObjectId()){
-					creature.adjustSkillmod(modName, 0, modValue);
+					adjustSkillmod(creature, modName, 0, modValue);
 					updateSkillModHamValues(creature, modName,modValue);
 				}else if(cti.getOldContainer() != null){
 					if(cti.getOldContainer().getObjectId() == creature.getObjectId()){
-						creature.adjustSkillmod(modName, 0, -modValue);
+						adjustSkillmod(creature, modName, 0, -modValue);
 						updateSkillModHamValues(creature, modName, -modValue);
 					}
 				}				
