@@ -47,10 +47,12 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
 		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0); addNPC(20); addPlayer(21) }
 		val building2 = createBuilding(3) { setPosition(10.0, 0.0, 10.0); addNPC(30); addPlayer(31) }
-		val awareness = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1, building2))).toList()
+		val building3 = createBuilding(4) { setPosition(10.0, 0.0, 10.0); addNPC(40); addPlayer(41) }
+		val building4 = createBuilding(5) { setPosition(10.0, 0.0, 10.0); addNPC(50); addPlayer(51) }
+		val awareness = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1, building2, building3, building4))).toList()
 		
 		val flushData = CreatureObjectAwareness.FlushAwarenessData(creature)
-		val create = flushData.buildCreate(HashSet(), LinkedHashSet(awareness))
+		val create = flushData.buildCreate(HashSet(), HashSet(awareness))
 		val stack = LinkedList<SWGObject>()
 		
 		// Don't lose any objects
@@ -59,15 +61,12 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		// Verify that all bundled objects are next to their parent
 		for (obj in create) {
 			val parent = obj.parent
-			if (parent == null) {
-				stack.clear()
-			} else {
-				var last = stack.peekLast()
-				while (last != null && last != parent) {
-					stack.pollLast()
-					last = stack.peekLast()
-				}
-			}
+			if (parent != null)
+				popStackUntil(stack, parent)
+			else
+				popStackAll(stack)
+			if (!obj.isBundledWithin(parent, creature) && stack.peekLast() == parent)
+				stack.pollLast()
 			if (obj.isBundledWithin(parent, creature)) {
 				Assert.assertFalse(obj.toString(), stack.isEmpty())
 				Assert.assertEquals(obj.toString(), parent, stack.last)
@@ -98,6 +97,22 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 			list.addAll(getRecursiveInfo(creature, children))
 		}
 		return list
+	}
+	
+	private fun popStackAll(createStack: LinkedList<SWGObject>) {
+		var parent: SWGObject? = createStack.pollLast()
+		while (parent != null) {
+			parent = createStack.pollLast()
+		}
+	}
+	
+	private fun popStackUntil(createStack: LinkedList<SWGObject>, parent: SWGObject) {
+		var last: SWGObject? = createStack.peekLast()
+		val grandparent = parent.parent
+		while (last != null && !(last === parent) && !(last === grandparent)) {
+			createStack.pollLast()
+			last = createStack.peekLast()
+		}
 	}
 	
 	private fun createBuilding(id: Long, initializeBuilding: BuildingObject.() -> Unit): BuildingObject {

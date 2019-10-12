@@ -36,8 +36,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.DataTran
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
@@ -69,10 +69,15 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 				val createStack = LinkedList<SWGObject>()
 				for (obj in create) {
 					val parent = obj.parent
-					if (parent != null && obj.isBundledWithin(parent, creature))
+					if (parent != null) {
 						popStackUntil(target, createStack, parent)
-					else
+						if (!obj.isBundledWithin(parent, creature) && createStack.peekLast() == parent) {
+							target.sendPacket(SceneEndBaselines(parent.objectId))
+							createStack.pollLast()
+						}
+					} else {
 						popStackAll(target, createStack)
+					}
 					createStack.add(obj)
 					createObject(obj, target)
 				}
@@ -92,14 +97,14 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 			})
 	}
 	
-	private inline fun handleFlush(createHandler: (List<SWGObject>) -> Unit, intermediateCallback: () -> Unit, destroyHandler: (List<SWGObject>) -> Unit) {
+	private inline fun handleFlush(createHandler: (Collection<SWGObject>) -> Unit, intermediateCallback: () -> Unit, destroyHandler: (Collection<SWGObject>) -> Unit) {
 		val newAware = creature.aware
 		handleFlushCreate(newAware, createHandler)
 		intermediateCallback()
 		handleFlushDestroy(newAware, destroyHandler)
 	}
 	
-	private inline fun handleFlushCreate(newAware: Set<SWGObject>, createHandler: (List<SWGObject>) -> Unit) {
+	private inline fun handleFlushCreate(newAware: Set<SWGObject>, createHandler: (Collection<SWGObject>) -> Unit) {
 		val create = flushAwarenessData.buildCreate(aware, newAware)
 		createHandler(create)
 		
@@ -113,7 +118,7 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 		assert(!creature.isLoggedInPlayer || aware.contains(creature)) { "not aware of creature" }
 	}
 	
-	private inline fun handleFlushDestroy(newAware: Set<SWGObject>, destroyHandler: (List<SWGObject>) -> Unit) {
+	private inline fun handleFlushDestroy(newAware: Set<SWGObject>, destroyHandler: (Collection<SWGObject>) -> Unit) {
 		val destroy = flushAwarenessData.buildDestroy(aware, newAware)
 		// Remove destroyed objects immediately - before sending anything to the client
 		val it = aware.iterator()
@@ -194,7 +199,8 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 	
 	private fun popStackUntil(target: Player, createStack: LinkedList<SWGObject>, parent: SWGObject) {
 		var last: SWGObject? = createStack.peekLast()
-		while (last != null && !(last === parent)) {
+		val grandparent = parent.parent
+		while (last != null && !(last === parent) && !(last === grandparent)) {
 			createStack.pollLast()
 			target.sendPacket(SceneEndBaselines(last.objectId))
 			last = createStack.peekLast()
@@ -207,39 +213,27 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 	
 	class FlushAwarenessData(private val creature: CreatureObject) {
 		
-		private val create = ArrayList<SWGObject>()
-		private val destroy = ArrayList<SWGObject>()
-		private val objectComparator = compareBy<SWGObject>({ getObjectDepth(it) }, { getDistance(creature, it) })
+		private val create: MutableCollection<SWGObject> = if (creature is AIObject) ArrayList() else TreeSet(kotlin.Comparator(::compare))
+		private val destroy: MutableCollection<SWGObject> = ArrayList()
 		
-		fun buildCreate(oldAware: Set<SWGObject>, newAware: Set<SWGObject>): List<SWGObject> {
+		fun buildCreate(oldAware: Set<SWGObject>, newAware: Set<SWGObject>): Collection<SWGObject> {
 			val create = this.create
 			create.clear()
-			
-			val added = newAware.filter { !oldAware.contains(it) }.sortedWith(objectComparator)
-			for (obj in added) {
-				val parent = obj.parent
-				if (parent == null || oldAware.contains(parent) || !obj.isBundledWithin(parent, creature)) {
+			for (obj in newAware) {
+				if (!oldAware.contains(obj)) {
 					create.add(obj)
-					continue
 				}
-				val parentIndex = create.indexOf(parent)
-				if (parentIndex == -1) { // Ensures child is sent after the parent
-					assert(obj !is CellObject)
-					continue
-				}
-				assert(obj !is BuildingObject || added.containsAll(obj.getContainedObjects())) { "All cells must be sent with the building" }
-				create.add(parentIndex + 1, obj)
 			}
 			return create
 		}
 		
-		fun buildDestroy(oldAware: Set<SWGObject>, newAware: Set<SWGObject>): List<SWGObject> {
+		fun buildDestroy(oldAware: Set<SWGObject>, newAware: Set<SWGObject>): Collection<SWGObject> {
 			val destroy = this.destroy
 			destroy.clear()
 			oldAware.asSequence()
 					.filter { !newAware.contains(it) }       // Removed from old to new awareness
 					.filter { !isParent(creature, it) }      // Only remove if it isn't our parent
-					.sortedWith(objectComparator)            // Sorted for proper ordering
+					.sortedBy { getObjectDepth(it) }            // Sorted for proper ordering
 					.forEach {
 						var parent = it.parent
 						while (parent != null) {
@@ -253,13 +247,69 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 			return destroy
 		}
 		
+		private fun compare(a: SWGObject, b: SWGObject): Int {
+			var tmpA: SWGObject = a
+			var tmpAP: SWGObject? = a.parent
+			while (tmpAP != null) {
+				if (tmpAP === b)           // A is a child of B
+					return 1
+				var tmpB: SWGObject = b
+				var tmpBP: SWGObject? = b.parent
+				while (tmpBP != null) {
+					if (tmpBP === tmpA)    // B is a child of A
+						return -1
+					if (tmpAP === tmpBP) { // Found a shared parent, compare their next highest children
+						val bundledA = tmpA.isBundledWithin(tmpAP, creature)
+						val bundledB = tmpB.isBundledWithin(tmpBP, creature)
+						if (bundledA && !bundledB)
+							return -1
+						if (bundledB && !bundledA)
+							return 1
+						return tmpA.objectId.compareTo(tmpB.objectId) // If they're both bundled/not bundled, doesn't matter what order they're in
+					}
+					tmpB = tmpBP
+					tmpBP = tmpB.parent
+				}
+				tmpA = tmpAP
+				tmpAP = tmpA.parent
+				if (tmpAP == null) {
+					val distComp = getDistance(creature, tmpA).compareTo(getDistance(creature, tmpB))
+					if (distComp != 0)
+						return distComp
+					return tmpA.objectId.compareTo(tmpB.objectId)
+				}
+			}
+			// A is a top level object, since the above loop did not run
+			var tmpB: SWGObject = b
+			var tmpBP: SWGObject? = b.parent
+			while (tmpBP != null) {
+				tmpB = tmpBP
+				tmpBP = tmpB.parent
+			}
+			if (tmpA === tmpB)
+				return -1 // B is a child of A
+			val distComp = getDistance(creature, tmpA).compareTo(getDistance(creature, tmpB))
+			if (distComp != 0)
+				return distComp
+			return tmpA.objectId.compareTo(tmpB.objectId)
+		}
+		
 	}
 	
 	companion object {
 		
 		private fun getDistance(creature: CreatureObject, obj: SWGObject) = if (obj.parent != null) 0 else creature.worldLocation.distanceTo(obj.location).toInt()
-		private fun getObjectDepth(obj: SWGObject?): Int = if (obj == null) 0 else (1 + getObjectDepth(obj.parent))
 		private fun SWGObject.isBundledWithin(parent: SWGObject, creature: CreatureObject) = (this.slotArrangement == -1 || this.baselineType == BaselineType.PLAY || parent === creature)
+		
+		private fun getObjectDepth(obj: SWGObject?): Int {
+			var depth = 0
+			var tmp = obj
+			while (tmp != null) {
+				depth++
+				tmp = tmp.parent
+			}
+			return depth
+		}
 		
 		private fun isParent(child: SWGObject, testParent: SWGObject): Boolean {
 			var parent: SWGObject? = child.parent
