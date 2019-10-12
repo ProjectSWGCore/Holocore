@@ -27,8 +27,11 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
+import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
@@ -89,7 +92,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		if (target instanceof CreatureObject && isAttackDodged(source, (CreatureObject) target)) {
 			info.setDodge(true);
 			info.setSuccess(false);	// This means that the attack did no damage to the target at all
-			target.sendObservers(new Animation(target.getObjectId(), "dodge"));
+			long targetObjectId = target.getObjectId();
+			
+			// Play dodge animation on the creature that's dodging for everyone that can see the creature
+			target.sendObservers(new Animation(targetObjectId, "dodge"));
+			
+			// Send flytext to the relevant receivers
+			ShowFlyText showFlyText = new ShowFlyText(targetObjectId, new StringId("combat_effects", "dodge"), ShowFlyText.Scale.SMALLEST, new RGB(255, 255, 255));
+			target.sendSelf(showFlyText);
+			source.sendSelf(showFlyText);
 		}
 		
 		// TODO single target only offence rolls for source
