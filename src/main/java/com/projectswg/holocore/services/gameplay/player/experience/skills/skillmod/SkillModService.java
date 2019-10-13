@@ -254,12 +254,13 @@ public class SkillModService extends Service {
 	}
 	
 	private void grantBaseCombatChances(CreatureObject creatureObject) {
-		creatureObject.adjustSkillmod("display_only_block", 500, 0);
+		creatureObject.adjustSkillmod("display_only_block", 500, 0);	// 500 / 100 = 5%
 		creatureObject.adjustSkillmod("display_only_dodge", 500, 0);
 		creatureObject.adjustSkillmod("display_only_evasion", 500, 0);
 		creatureObject.adjustSkillmod("display_only_parry", 500, 0);
 		creatureObject.adjustSkillmod("display_only_critical", 500, 0);
 		creatureObject.adjustSkillmod("display_only_strikethrough", 500, 0);
+		creatureObject.adjustSkillmod("expertise_devastation_bonus", 20, 0);	// 20 / 10 = 2%
 	}
 	
 	private int getLevelSkillModValue(int level, String professionModName, String raceModName){
