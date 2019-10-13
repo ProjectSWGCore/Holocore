@@ -94,6 +94,16 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
+	public void putAll(Map<? extends K, ? extends V> m) {
+		for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+			K key = entry.getKey();
+			V value = entry.getValue();
+			
+			put(key, value);
+		}
+	}
+	
+	@Override
 	public V remove(@NotNull Object key) {
 		V old = super.remove(key);
 		if (old != null) {
