@@ -287,7 +287,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void startDancing(CreatureObject dancer, String danceName) {
-		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(danceName).getPerformanceName());
+		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(danceName).getDanceVisualId());
 		dancer.setPerformanceId(0);    // 0 - anything else will make it look like we're playing music
 		dancer.setPerformanceCounter(0);
 		dancer.setPerforming(true);
