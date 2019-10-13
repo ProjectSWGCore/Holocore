@@ -1,9 +1,14 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-spawn_chf_1	CHARACTER_FARM	chf_world	AREA	0	0	0	0	0	1	a Tusken raider	tusken_raider	ATTACKABLE	E	90	90	Outback	Taanab	3	LOITER	20	0	-	idle	0	0	0	10
-spawn_chf_2	CHARACTER_FARM	chf_world	AREA	0	30	0	0	0	1	a Jawa	jawa	ATTACKABLE	E	90	90	Outback	Taanab	3	LOITER	20	0	-	idle	0	0	0	10
-spawn_chf_3	CHARACTER_FARM	chf_world	AREA	0	500	0	0	0	1	Turret	heroic_echo_turret_rebel_s1_phase3	ATTACKABLE	B	150	150	Outback	Taanab	1	IDLE	0	0	-	idle	0	0	0	10
-spawn_chf_4	CHARACTER_FARM	chf_world	PATROL	0	600	0	0	0	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	80	90	Outback	Taanab	10	PATROL	0	patrol_chf_100	column	idle	0	0	0	10
-spawn_chf_5	CHARACTER_FARM	chf_world	PATROL	0	600	0	0	0	1	AT-ST	event_empday_imp_atst	ATTACKABLE	E	80	90	Outback	Taanab	2	PATROL	0	patrol_chf_100	column	idle	0	0	0	10
-spawn_chf_6	CHARACTER_FARM	chf_world	PATROL	0	950	0	0	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers	ATTACKABLE	E	90	90	Outback	Taanab	6	PATROL	0	patrol_chf_200	column	idle	0	0	0	10
-spawn_chf_7	CHARACTER_FARM	chf_world	PATROL	0	1050	0	0	0	1	a Wookiee commando	ep3_npc_wookiee_commando	ATTACKABLE	E	90	90	Outback	Taanab	6	PATROL	0	patrol_chf_300	column	idle	0	0	0	10
+spawn_chf_1	CHARACTER_FARM	chf_world	AREA	0	45	0	0	0	1	a Tusken raider	tusken_raider	ATTACKABLE	E	90	90	Outback	Taanab	3	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_2	CHARACTER_FARM	chf_world	AREA	0	55	0	0	0	1	a Jawa	jawa	ATTACKABLE	E	90	90	Outback	Taanab	3	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_3	CHARACTER_FARM	chf_world	PATROL	0	50	0	50	0	1	a Trandoshan slaver	ep3_npc_trandoshan_slavers	ATTACKABLE	E	90	90	Outback	Taanab	6	PATROL	0	patrol_chf_100	column	idle	0	0	0	10
+spawn_chf_4	CHARACTER_FARM	chf_world	PATROL	0	-50	0	50	0	1	a Wookiee commando	ep3_npc_wookiee_commando	ATTACKABLE	E	90	90	Outback	Taanab	6	PATROL	0	patrol_chf_200	column	idle	0	0	0	10
+spawn_chf_5	CHARACTER_FARM	chf_world	AREA	0	50	0	100	90	1	Turret	heroic_echo_turret_rebel_s1_phase3	ATTACKABLE	B	150	150	Outback	Taanab	1	IDLE	0	0	-	idle	0	0	0	10
+spawn_chf_6	CHARACTER_FARM	chf_world	PATROL	0	-50	0	100	-90	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	E	80	90	Outback	Taanab	10	PATROL	0	patrol_chf_300	column	idle	0	0	0	10
+spawn_chf_7	CHARACTER_FARM	chf_world	PATROL	0	-50	0	100	-90	1	AT-ST	event_empday_imp_atst	ATTACKABLE	E	80	90	Outback	Taanab	2	PATROL	0	patrol_chf_300	column	idle	0	0	0	10
+spawn_chf_8	CHARACTER_FARM	chf_world	AREA	0	-45	0	0	90	1	Dark Jedi	jedi_dark	ATTACKABLE	B	50	55	POI	Taanab	2	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_9	CHARACTER_FARM	chf_world	AREA	0	-55	0	0	-90	1	Light Jedi	jedi_light	ATTACKABLE	B	50	55	POI	Taanab	2	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_10	CHARACTER_FARM	chf_world	AREA	0	50	0	-50	0	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	N	20	30	POI	Taanab	1	TURN	0	0	-	idle	0	0	0	10
+spawn_chf_11	CHARACTER_FARM	chf_world	AREA	0	-45	0	-50	-90	1	Light Jedi	jedi_light	ATTACKABLE	B	50	55	POI	Taanab	2	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_12	CHARACTER_FARM	chf_world	AREA	0	-55	0	-50	90	1	an Imperial storm commando	imp_commando_storm	ATTACKABLE	B	50	55	POI	Taanab	2	LOITER	10	0	-	idle	0	0	0	10
