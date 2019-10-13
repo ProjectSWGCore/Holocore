@@ -288,16 +288,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		WeaponObject weapon = source.getEquippedWeapon();
 		WeaponType type = weapon.getType();
 		
-		// Only AoE and CoE heavy weapons can qualify for a devastation roll
-		switch (type) {
-			case HEAVY_WEAPON:
-			case DIRECTIONAL_TARGET_WEAPON:
-				double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10;
-				double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
-				
-				return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)
-			default: return false;
+		if (!WeaponType.HEAVY_WEAPON.equals(type) && !WeaponType.DIRECTIONAL_TARGET_WEAPON.equals(type)) {
+			// If the weapon type isn't a heavy weapon and isn't a flamethrower, then the weapon cannot roll a devastation
+			return false;
 		}
+		
+		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10;
+		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
+		
+		return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)
 	}
 	
 }
