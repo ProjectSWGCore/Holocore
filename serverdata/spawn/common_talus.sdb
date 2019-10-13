@@ -1087,7 +1087,6 @@ spawn_tal_1092	TALUS	tal_world	AREA	0	1542.6	41.2	-847.8	0	1	a fynock	fynock	ATT
 spawn_tal_1093	TALUS	tal_world	AREA	0	1547.4	40.0	-894.8	0	1	a fynock	fynock	ATTACKABLE	N	40	60	POI	Giant Fynock Cave	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tal_1094	TALUS	tal_imp_vs_reb_barracks1	AREA	3	0.1	0.1	-3.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
 spawn_tal_1095	TALUS	tal_imp_vs_reb_barracks2	AREA	3	0.2	0.1	-4.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
-spawn_tal_1096	TALUS	tal_imp_vs_reb_base	PATROL	2	0.0	1.0	-5.4	0	1	an Imperial sergeant	rtp_imperial_sergeant	ATTACKABLE	E	86	89	POI	Imperial vs. Rebel Battle	1	PATROL	0	patrol_tal_7800	column	idle	0	0	0	30
 spawn_tal_1097	TALUS	tal_imp_vs_reb_base	AREA	1	11.3	1.0	21.7	-125	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
 spawn_tal_1098	TALUS	tal_imp_vs_reb_base	AREA	1	-11.0	1.0	21.5	119	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
 spawn_tal_1099	TALUS	tal_imp_vs_reb_base	AREA	2	-1.6	2.0	3.6	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
@@ -1101,7 +1100,6 @@ spawn_tal_1106	TALUS	tal_imp_vs_reb_base	AREA	10	3.5	7.0	-10.7	0	1	a Stormtroope
 spawn_tal_1107	TALUS	tal_imp_vs_reb_base	AREA	11	-4.4	7.0	8.8	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
 spawn_tal_1108	TALUS	tal_imp_vs_reb_base	AREA	12	6.5	7.0	8.9	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
 spawn_tal_1109	TALUS	tal_imp_vs_reb_base	AREA	12	13.3	7.0	9.1	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
-spawn_tal_1110	TALUS	tal_world	PATROL	0	-2602.6	50.6	3730.2	81	1	a Rebel trooper	rebel_trooper	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	6	PATROL	0	patrol_tal_7900	column	idle	0	0	0	60
 spawn_tal_1111	TALUS	tal_world	AREA	0	-2403.3	38.0	3695.1	60	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	IDLE	0	0	-	idle	0	0	0	30
 spawn_tal_1112	TALUS	tal_world	AREA	0	-2473.4	38.0	3754.5	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	2	LOITER	6	0	-	idle	0	0	0	30
 spawn_tal_1113	TALUS	tal_world	AREA	0	-2472.2	38.0	3693.0	0	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	83	87	POI	Imperial vs. Rebel Battle	1	TURN	0	0	-	idle	0	0	0	30
