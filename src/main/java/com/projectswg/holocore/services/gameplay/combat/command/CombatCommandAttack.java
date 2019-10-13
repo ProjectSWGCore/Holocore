@@ -40,6 +40,7 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -143,6 +144,18 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		source.updateLastCombatTime();
 		
 		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
+		boolean devastating = isAttackDevastating(source, command);
+		
+		if (devastating) {
+			// Show Devastation flytext above the source for every target
+			ShowFlyText devastationFlyText = new ShowFlyText(source.getObjectId(), new StringId("combat_effects", "devastation"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255));
+			
+			source.sendSelf(devastationFlyText);
+			
+			for (CreatureObject target : targets) {
+				target.sendSelf(devastationFlyText);
+			}
+		}
 		
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
@@ -159,7 +172,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
 			
 			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
-			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
+			int weaponDamage = calculateWeaponDamage(source, weapon, command);
+			
+			if (devastating) {
+				weaponDamage *= 1.5;	// Devastation increases raw weapon damage by 50%;
+			}
+			
+			int rawDamage = weaponDamage + command.getAddedDamage();
 			
 			info.setRawDamage(rawDamage);
 			info.setFinalDamage(rawDamage);
@@ -258,6 +277,27 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
+	}
+	
+	private static boolean isAttackDevastating(CreatureObject source, CombatCommand command) {
+		if (command.getPercentAddFromWeapon() == 0) {
+			// If this ability doesn't use weapon damage it does not qualify for a devastation roll
+			return false;
+		}
+		
+		WeaponObject weapon = source.getEquippedWeapon();
+		WeaponType type = weapon.getType();
+		
+		// Only AoE and CoE heavy weapons can qualify for a devastation roll
+		switch (type) {
+			case HEAVY_WEAPON:
+			case DIRECTIONAL_TARGET_WEAPON:
+				double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10;
+				double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
+				
+				return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)
+			default: return false;
+		}
 	}
 	
 }
