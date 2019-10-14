@@ -33,7 +33,7 @@ import me.joshlarson.jlcommon.log.LogWrapper
 
 class ChatRoomLogWrapper(private val roomPath: String) : LogWrapper {
 	
-	val intentChain = IntentChain()
+	private val intentChain = IntentChain()
 	
 	override fun onLog(level: Log.LogLevel, str: String) {
 		val message = when (level) {
