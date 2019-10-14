@@ -125,7 +125,7 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 		while (it.hasNext()) {
 			val currentAware = it.next()
 			for (remove in destroy) { // Since the "create" is filtered, aware could also have been filtered
-				if (isParent(currentAware, remove)) {
+				if (currentAware === remove || isParent(currentAware, remove)) {
 					it.remove()
 					awareIds.remove(currentAware.objectId)
 					remove.removeObserver(creature)

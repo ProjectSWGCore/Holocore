@@ -28,6 +28,7 @@
 package com.projectswg.holocore.resources.support.objects.swg
 
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline
+import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObjectAwareness
@@ -85,6 +86,30 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val create = flushData.buildCreate(HashSet(), LinkedHashSet(awareness))
 		val destroy = flushData.buildDestroy(HashSet(create), HashSet())
 		Assert.assertEquals(setOf(creature, building1, building2), HashSet(destroy))
+	}
+	
+	@Test
+	fun testEnterExitEnterAwareness() {
+		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
+		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0); addNPC(20); addPlayer(21) }
+		val building2 = createBuilding(3) { setPosition(10.0, 0.0, 10.0); addNPC(30); addPlayer(31) }
+		val awareness = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1, building2))).toList()
+		
+		val creatureObjectAwareness = CreatureObjectAwareness(creature)
+		creature.setAware(AwarenessType.OBJECT, awareness)
+		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
+		for (obj in awareness) {
+			Assert.assertTrue("Should be aware of $obj", creatureObjectAwareness.isAware(obj))
+		}
+		
+		creature.setAware(AwarenessType.OBJECT, getRecursiveInfo(creature, listOf(creature)))
+		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
+		for (obj in getRecursiveInfo(creature, listOf(creature))) {
+			Assert.assertTrue("Should be aware of $obj", creatureObjectAwareness.isAware(obj))
+		}
+		for (obj in getRecursiveInfo(creature, listOf(building1, building2))) {
+			Assert.assertFalse("Should not be aware of $obj", creatureObjectAwareness.isAware(obj))
+		}
 	}
 	
 	private fun getRecursiveInfo(creature: CreatureObject, objects: Collection<SWGObject>): List<SWGObject> {
