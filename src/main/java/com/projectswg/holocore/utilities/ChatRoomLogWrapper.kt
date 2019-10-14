@@ -33,6 +33,8 @@ import me.joshlarson.jlcommon.log.LogWrapper
 class ChatRoomLogWrapper(private val roomPath: String) : LogWrapper {
 	
 	override fun onLog(level: Log.LogLevel, str: String) {
-		SystemChatRoomMessageIntent.broadcast(roomPath, str)
+		if (level >= Log.LogLevel.DATA)
+			SystemChatRoomMessageIntent.broadcast(roomPath, str)
 	}
+	
 }
