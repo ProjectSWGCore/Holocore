@@ -170,16 +170,19 @@ object StaticItemCreator {
 		applyColors(obj, info.color)
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CostumeItemInfo?) {
 //		if (info == null)
 //			return;
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.DnaItemInfo?) {
 //		if (info == null)
 //			return;
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.GrantItemInfo?) {
 //		if (info == null)
 //			return;
@@ -205,11 +208,13 @@ object StaticItemCreator {
 		applyColors(obj, info.color)
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.SchematicItemInfo?) {
 //		if (info == null)
 //			return;
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.StorytellerItemInfo?) {
 //		if (info == null)
 //			return;

@@ -317,14 +317,14 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		@JvmStatic
 		fun getSwgList(buffer: NetBuffer, num: Int, `var`: Int, type: StringType): SWGList<String> {
 			val list = SWGList<String>(num, `var`, type)
-//		list.decode(buffer.buffer, type)
+			list.decode(buffer)
 			return list
 		}
 		
 		@JvmStatic
 		fun <T: Any> getSwgList(buffer: NetBuffer, num: Int, `var`: Int, c: Class<T>): SWGList<T> {
 			val list = SWGList<T>(num, `var`)
-//		list.decode(buffer.buffer, c)
+			list.decode(buffer)
 			return list
 		}
 		
