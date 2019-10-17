@@ -60,4 +60,32 @@ public enum WeaponType {
 			return RIFLE;
 		return VALUES[num];
 	}
+	
+	/**
+	 * Determines whether this weapon type is in the melee category.
+	 * Lightsabers are included in the melee category!
+	 * @return {@code true} if this weapon type is in the melee category and {@code false} otherwise.
+	 */
+	public boolean isMelee() {
+		switch (this) {
+			case ONE_HANDED_MELEE:
+			case TWO_HANDED_MELEE:
+			case UNARMED:
+			case POLEARM_MELEE: return true;
+			default: return isLightsaber();	// If all else fails, resort to checking if this is a lightsaber
+		}
+	}
+	
+	/**
+	 * Determines whether this weapon type is in the lightsaber category, which is a subcategory of the melee category.
+	 * @return {@code true} if this weapon type is in the lightsaber category and {@code false} otherwise.
+	 */
+	public boolean isLightsaber() {
+		switch (this) {
+			case ONE_HANDED_SABER:
+			case TWO_HANDED_SABER:
+			case POLEARM_SABER: return true;
+			default: return false;
+		}
+	}
 }
