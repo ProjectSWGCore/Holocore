@@ -112,20 +112,7 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	public WeaponType getType() {
-		switch (getGameObjectType()) {
-			case GOT_WEAPON_HEAVY_MINE:		return WeaponType.HEAVY;
-			case GOT_WEAPON_HEAVY_MISC:		return WeaponType.HEAVY;
-			case GOT_WEAPON_HEAVY_SPECIAL:	return WeaponType.HEAVY;
-			case GOT_WEAPON_MELEE_1H:		return WeaponType.ONE_HANDED_MELEE;
-			case GOT_WEAPON_MELEE_2H:		return WeaponType.TWO_HANDED_MELEE;
-			case GOT_WEAPON_MELEE_MISC:		return WeaponType.ONE_HANDED_MELEE;
-			case GOT_WEAPON_MELEE_POLEARM:	return WeaponType.POLEARM_MELEE;
-			case GOT_WEAPON_RANGED_CARBINE:	return WeaponType.CARBINE;
-			case GOT_WEAPON_RANGED_PISTOL:	return WeaponType.PISTOL;
-			case GOT_WEAPON_RANGED_RIFLE:	return WeaponType.RIFLE;
-			case GOT_WEAPON_RANGED_THROWN:	return WeaponType.THROWN;
-		}
-		return WeaponType.UNARMED;
+		return type;
 	}
 	
 	public void setType(WeaponType type) {

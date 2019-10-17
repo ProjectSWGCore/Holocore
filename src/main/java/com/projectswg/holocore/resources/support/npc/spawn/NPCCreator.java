@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
@@ -46,6 +47,7 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.utilities.Arguments;
@@ -206,6 +208,8 @@ public class NPCCreator {
 	private static WeaponObject createWeapon(DetailNpcStatInfo detailNpcStat, String template) {
 		try {
 			WeaponObject weapon = (WeaponObject) ObjectCreator.createObjectFromTemplate(template);
+			WeaponType weaponType = getWeaponType(weapon.getGameObjectType());
+			
 			weapon.setMinDamage((int) (detailNpcStat.getDamagePerSecond() * 2 * 0.90));
 			weapon.setMaxDamage(detailNpcStat.getDamagePerSecond() * 2);
 			int range = DataLoader.Companion.npcWeaponRanges().getWeaponRange(template);
@@ -213,11 +217,37 @@ public class NPCCreator {
 				Log.w("Failed to load weapon range for: %s", template);
 			weapon.setMinRange(range);
 			weapon.setMaxRange(range);
+			weapon.setType(weaponType);
+			// TODO set damage type, since all NPC weapons shouldn't deal kinetic damage
 			return weapon;
 		} catch (ObjectCreationException e) {
 			Log.w("Weapon template does not exist: %s", template);
 			return null;
 		}
+	}
+	
+	/**
+	 * Somewhat accurate way of determining a WeaponType based on a GameObjectType.
+	 * Problem is that GOT_WEAPON_RANGED_RIFLE can be both a rifle and a heavy weapon, but we assume it's a rifle since NPCs don't use heavy weapons.
+	 *
+	 * @param weaponObjectType to determine a WeaponType based on
+	 * @return {@code WeaponType} that was determined from the given {@code weaponObjectType} param
+	 */
+	private static WeaponType getWeaponType(GameObjectType weaponObjectType) {
+		switch (weaponObjectType) {
+			case GOT_WEAPON_HEAVY_MINE:		return WeaponType.HEAVY;
+			case GOT_WEAPON_HEAVY_MISC:		return WeaponType.HEAVY;
+			case GOT_WEAPON_HEAVY_SPECIAL:	return WeaponType.HEAVY;
+			case GOT_WEAPON_MELEE_1H:		return WeaponType.ONE_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_2H:		return WeaponType.TWO_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_MISC:		return WeaponType.ONE_HANDED_MELEE;
+			case GOT_WEAPON_MELEE_POLEARM:	return WeaponType.POLEARM_MELEE;
+			case GOT_WEAPON_RANGED_CARBINE:	return WeaponType.CARBINE;
+			case GOT_WEAPON_RANGED_PISTOL:	return WeaponType.PISTOL;
+			case GOT_WEAPON_RANGED_RIFLE:	return WeaponType.RIFLE;
+			case GOT_WEAPON_RANGED_THROWN:	return WeaponType.THROWN;
+		}
+		return WeaponType.UNARMED;
 	}
 	
 }
