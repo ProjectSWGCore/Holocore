@@ -88,4 +88,21 @@ public enum WeaponType {
 			default: return false;
 		}
 	}
+	
+	/**
+	 * Determines whether this weapon type is in the ranged category.
+	 * @return {@code true} if this weapon type is in the ranged category and {@code false} otherwise.
+	 */
+	public boolean isRanged() {
+		switch (this) {
+			case RIFLE:
+			case CARBINE:
+			case PISTOL:
+			case HEAVY:
+			case HEAVY_WEAPON:
+			case DIRECTIONAL_TARGET_WEAPON:
+			case LIGHT_RIFLE: return true;
+			default: return false;
+		}
+	}
 }
