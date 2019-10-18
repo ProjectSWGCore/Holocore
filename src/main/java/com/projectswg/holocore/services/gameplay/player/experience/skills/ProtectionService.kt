@@ -69,14 +69,14 @@ class ProtectionService : Service() {
 		val newContainer = intent.container
 		val oldContainer = intent.oldContainer
 
-		if (item.owner == null) {
-			// Important that we don't grant protection to players while they are not online: https://bitbucket.org/projectswg/holocore/issues/192/protection-from-equipment-is-no-longer
-			return
-		}
-
 		
 		if (newContainer is CreatureObject) {
 			// They equipped something
+			if (newContainer.isPlayer && item.owner == null) {
+				// Important that we don't grant protection to players while they are not online: https://bitbucket.org/projectswg/holocore/issues/192/protection-from-equipment-is-no-longer
+				return
+			}
+
 			handleTransfer(item, newContainer, item.arrangement.getOrNull(intent.arrangement-4) ?: EMPTY_LIST, true)    // newContainer is a character
 		} else if (oldContainer is CreatureObject) {
 			// They unequipped something
