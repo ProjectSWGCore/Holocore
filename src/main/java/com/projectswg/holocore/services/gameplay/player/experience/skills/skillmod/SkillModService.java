@@ -216,12 +216,20 @@ public class SkillModService extends Service {
 		
 		if (newHealth != 0){
 			creature.setMaxHealth(creature.getMaxHealth() + newHealth);
-			creature.setHealth(creature.getMaxHealth());
+			
+			if (!creature.isInCombat()) {
+				// Don't replenish  health to 100% if creature is in combat
+				creature.setHealth(creature.getMaxHealth());
+			}
 		}
 		
 		if (newAction !=0){
 			creature.setMaxAction(creature.getMaxAction() + newAction);
-			creature.setAction(creature.getMaxAction());
+			
+			if (!creature.isInCombat()) {
+				// Don't replenish action to 100% if creature is in combat
+				creature.setAction(creature.getMaxAction());
+			}
 		}
 	}
 	
