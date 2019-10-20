@@ -503,7 +503,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		
 		listBox.addListItem("Lightsabers");
 		listBox.addListItem("Melee");
-		listBox.addListItem("Ranged");
+		listBox.addListItem("Ranged - Pistol");
+		listBox.addListItem("Ranged - Carbine");
+		listBox.addListItem("Ranged - Rifle");
+		listBox.addListItem("Ranged - Heavy Weapon");
 		
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleWeaponSelection", (event, parameters) -> handleWeaponSelection(player, parameters));
 		listBox.display(player);
@@ -515,7 +518,11 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		switch (selection) {
 			case 0: handleLightsabers(player); break;
 			case 1: handleMelee(player); break;
-			case 2: handleRanged(player); break;
+			case 2: handleRangedPistol(player); break;
+			case 3: handleRangedCarbine(player); break;
+			case 4: handleRangedRifle(player); break;
+			case 5: handleRangedHeavy(player); break;
+
 		}
 	}
 	
@@ -542,30 +549,79 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		);
 	}
 	
-	private static void handleRanged(Player player) {
+	private static void handleRangedPistol(Player player) {
 		spawnItems(player, 
-				"weapon_tow_pistol_flechette_05_01",
-				"weapon_tow_carbine_05_01",
-				"weapon_tow_rifle_05_02",
-				"weapon_tow_rifle_lightning_cannon_04_01",
-				"weapon_tow_heavy_rocket_launcher_05_01",
-				"weapon_borvo_carbine_03_01",
-				"weapon_borvo_pistol_03_01",
-				"weapon_borvo_rifle_03_01",
-				"weapon_content_rifle_tier_7_03_01",
 				"weapon_content_pistol_tier_7_03_01",
-				"weapon_content_carbine_tier_7_03_01",
-				"weapon_content_carbine_talus_selonian_04_01",
+				"weapon_content_pistol_tier_8_03_02",
+				"weapon_pistol_drop_lvl10_02_01",
+				"weapon_pistol_drop_lvl20_02_01",
+				"weapon_pistol_drop_lvl30_02_01",
 				"weapon_pistol_drop_lvl40_02_01",
-				"weapon_rifle_drop_lvl40_02_01",
-				"weapon_gcw_heavy_pulse_cannon_03_01",
-				"weapon_heavy_pvp_general_reward_06_01",
-				"weapon_pistol_imperial_pvp_general_reward_06_01",
-				"weapon_rifle_imperial_pvp_general_reward_06_01",
+				"weapon_smuggler_reward_pistol_04_01",
+				"weapon_smuggler_reward_pistol_dl44_04_01",
+				"weapon_tow_pistol_05_01",
+				"weapon_tow_pistol_05_02",
+				"weapon_tow_pistol_de10_04_01",
+				"weapon_tow_pistol_flechette_05_01",
+				"weapon_tow_pistol_intimidator_05_01",
+				"weapon_tow_pistol_ion_relic_05_01",
+				"weapon_tow_pistol_scatter_04_01",
+				"weapon_pistol_pvp_general_reward_06_01",
 				"weapon_carbine_pvp_imperial_general_reward_06_01"
 		);
 	}
-	
+
+	private static void handleRangedCarbine(Player player) {
+		spawnItems(player,
+				"weapon_carbine_drop_lvl10_02_01",
+				"weapon_carbine_drop_lvl20_02_01",
+				"weapon_carbine_drop_lvl30_02_01",
+				"weapon_mandalorian_carbine_04_01",
+				"weapon_tow_carbine_01_01",
+				"weapon_tow_carbine_03_01",
+				"weapon_tow_carbine_05_01",
+				"weapon_tow_carbine_sfor_05_01",
+				"weapon_tow_carbine_wookiee_06_01",
+				"weapon_content_carbine_tier_7_03_01",
+				"weapon_content_carbine_talus_selonian_04_01",
+				"weapon_carbine_pvp_imperial_general_reward_06_01"
+		);
+	}
+
+	private static void handleRangedRifle(Player player) {
+		spawnItems(player,
+				"weapon_rifle_drop_lvl10_02_01",
+				"weapon_rifle_drop_lvl20_02_01",
+				"weapon_rifle_drop_lvl30_02_01",
+				"weapon_rifle_drop_lvl40_02_01",
+				"weapon_rebel_rifle_04_01",
+				"weapon_mandalorian_rifle_04_01",
+				"weapon_jinkins_j1_01_01",
+				"weapon_tow_rifle_dp3_04_01",
+				"weapon_tow_rifle_lightning_cannon_04_01",
+				"weapon_borvo_rifle_03_01",
+				"weapon_content_rifle_tier_7_03_01",
+				"weapon_rifle_drop_lvl40_02_01",
+				"weapon_rifle_imperial_pvp_general_reward_06_01"
+		);
+	}
+
+	private static void handleRangedHeavy(Player player) {
+		spawnItems(player,
+				"weapon_publish_gift_27_04_01",
+				"heavy_avatar_acid_beam",
+				"weapon_gcw_heavy_pulse_cannon_03_01",
+				"weapon_heavy_pvp_general_reward_06_01",
+				"weapon_mandalorian_heavy_04_01",
+				"weapon_tow_cannon_01_01",
+				"weapon_tow_flamer_01_01",
+				"weapon_tow_heavy_acid_beam_04_01",
+				"weapon_tow_heavy_rocket_launcher_05_01"
+
+		);
+	}
+
+
 	private static void handleWearables(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a wearable category to receive a weapon of that type.");
 		
@@ -774,6 +830,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_clothing_jacket_ace_rebel_01_01",
 				"item_clothing_jacket_gcw_imperial_01_01",
 				"item_clothing_jacket_gcw_rebel_01_01",
+				"item_gcw_imperial_jacket_01",
+				"item_gcw_rebel_jacket_01",
 				"item_clothing_jacket_01_02",
 				"item_clothing_jacket_01_03",
 				"item_clothing_jacket_01_04",
@@ -841,7 +899,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		spawnItems(player, 
 				"item_clothing_robe_exar_cultist_hood_down_01_01",
 				"item_clothing_robe_exar_cultist_hood_up_01_01",
-				"item_clothing_robe_prefect_talmont_01_01",
 				"item_clothing_robe_01_01",
 				"item_clothing_robe_01_04",
 				"item_clothing_robe_01_05",
@@ -989,30 +1046,34 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	private static void handleJediEquipment(Player player) {
 		spawnItems(player, 
-				"item_gcw_imperial_cape_01",
-				"item_gcw_imperial_jacket_01",
-				"item_gcw_rebel_cape_01",
-				"item_gcw_rebel_jacket_01",
+				"item_jedi_robe_dark_03_01",
+				"item_jedi_robe_light_03_01",
 				"item_jedi_robe_04_01",
 				"item_jedi_robe_04_02",
-				"item_jedi_robe_06_03",
-				"item_jedi_robe_06_04",
-				"item_jedi_robe_dark_03_01",
+				"item_jedi_robe_04_03",
+				"item_jedi_robe_04_04",
 				"item_jedi_robe_dark_03_02",
-				"item_jedi_robe_dark_03_03",
 				"item_jedi_robe_dark_04_01",
 				"item_jedi_robe_dark_04_02",
 				"item_jedi_robe_dark_04_03",
-				"item_jedi_robe_dark_04_04",
-				"item_jedi_robe_dark_04_05",
-				"item_jedi_robe_light_03_01",
 				"item_jedi_robe_light_03_02",
-				"item_jedi_robe_light_03_03",
 				"item_jedi_robe_light_04_01",
 				"item_jedi_robe_light_04_02",
 				"item_jedi_robe_light_04_03",
+				"item_jedi_robe_06_01",
+				"item_jedi_robe_06_02",
+				"item_jedi_robe_06_03",
+				"item_jedi_robe_06_04",
+				"item_jedi_robe_06_05",
+				"item_jedi_robe_06_06",
+				"item_jedi_robe_dark_03_03",
+				"item_jedi_robe_dark_04_04",
+				"item_jedi_robe_dark_04_05",
+				"item_jedi_robe_light_03_03",
 				"item_jedi_robe_light_04_04",
-				"item_jedi_robe_light_04_05"
+				"item_jedi_robe_light_04_04",
+				"item_jedi_robe_light_04_05",
+				"item_fannypack_04_01"
 		);
 	}
 	
@@ -1088,7 +1149,11 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_tcg_loot_reward_series7_gold_cape",
 				"item_tow_duster_03_01",
 				"item_event_gmf_jacket_01",
-				"item_event_gmf_wings_01"
+				"item_event_gmf_wings_01",
+				"item_clothing_robe_prefect_talmont_01_01",
+				"item_gcw_imperial_cape_01",
+				"item_gcw_imperial_jacket_01",
+				"item_gcw_rebel_cape_01"
 		);
 	}
 	
@@ -1422,14 +1487,27 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	private static void handlePowerups(Player player) {
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","constitution_modified", "100");	// Breastplate
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","display_only_dodge", "500");	// Breastplate
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_copper_battery_usuable.iff", "item_reverse_engineering_powerup_armor_02_01","display_only_parry", "500");	// Breastplate
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "constitution_modified", "100");	// Shirt
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "display_only_dodge", "500");	// Shirt
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_chassis_blueprint_usuable.iff", "item_reverse_engineering_powerup_clothing_02_01", "display_only_parry", "500");	// Shirt
 		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "constitution_modified", "100");	// Weapon
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "display_only_dodge", "500");	// Weapon
+		spawnPowerup(player, "object/tangible/loot/generic_usable/shared_scope_weapon_generic.iff", "item_reverse_engineering_powerup_weapon_02_01", "display_only_parry", "500");	// Weapon
 	}
 	
 	private static void handleJewelrySets(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of jewelry to receive.");
 		
 		listBox.addListItem("Heroism set");
+		listBox.addListItem("Bounty Hunter sets");
+		listBox.addListItem("Medic sets");
+		listBox.addListItem("Jedi sets");
+		listBox.addListItem("Commando sets");
+		listBox.addListItem("Smuggler sets");
+		listBox.addListItem("Spy sets");
+		listBox.addListItem("Officer sets");
 		
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSetSelection", (event, parameters) -> handleJewelrySelection(player, parameters));
 		listBox.display(player);
@@ -1440,7 +1518,13 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 		switch (selection) {
 			case 0: handleHeroism(player); break;
-
+			case 1: handleBountyHunter(player); break;
+			case 2: handleMedic(player); break;
+			case 3: handleJedi(player); break;
+			case 4: handleCommando(player); break;
+			case 5: handleSmuggler(player); break;
+			case 6: handleSpy(player); break;
+			case 7: handleOfficer(player); break;
 		}
 	}
 
@@ -1453,7 +1537,148 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_ring_set_hero_01_01"
 		);
 	}
-	
+
+	private static void handleBountyHunter(Player player) {
+		spawnItems(player,
+				"item_band_set_bh_dps_01_01",
+				"item_band_set_bh_utility_a_01_01",
+				"item_band_set_bh_utility_b_01_01",
+				"item_bracelet_l_set_bh_dps_01_01",
+				"item_bracelet_l_set_bh_utility_a_01_01",
+				"item_bracelet_l_set_bh_utility_b_01_01",
+				"item_bracelet_r_set_bh_dps_01_01",
+				"item_bracelet_r_set_bh_utility_a_01_01",
+				"item_bracelet_r_set_bh_utility_b_01_01",
+				"item_necklace_set_bh_dps_01_01",
+				"item_necklace_set_bh_utility_a_01_01",
+				"item_necklace_set_bh_utility_b_01_01",
+				"item_ring_set_bh_dps_01_01",
+				"item_ring_set_bh_utility_a_01_01",
+				"item_ring_set_bh_utility_b_01_01"
+		);
+	}
+
+	private static void handleMedic(Player player) {
+		spawnItems(player,
+				"item_band_set_medic_dps_01_01",
+				"item_band_set_medic_utility_a_01_01",
+				"item_band_set_medic_utility_b_01_01",
+				"item_bracelet_l_set_medic_dps_01_01",
+				"item_bracelet_l_set_medic_utility_a_01_01",
+				"item_bracelet_l_set_medic_utility_b_01_01",
+				"item_bracelet_r_set_medic_dps_01_01",
+				"item_bracelet_r_set_medic_utility_a_01_01",
+				"item_bracelet_r_set_medic_utility_b_01_01",
+				"item_necklace_set_medic_dps_01_01",
+				"item_necklace_set_medic_utility_a_01_01",
+				"item_necklace_set_medic_utility_b_01_01",
+				"item_ring_set_medic_dps_01_01",
+				"item_ring_set_medic_utility_a_01_01",
+				"item_ring_set_medic_utility_b_01_01"
+		);
+	}
+
+	private static void handleJedi(Player player) {
+		spawnItems(player,
+				"item_band_set_jedi_dps_01_01",
+				"item_band_set_jedi_utility_a_01_01",
+				"item_band_set_jedi_utility_b_01_01",
+				"item_bracelet_l_set_jedi_dps_01_01",
+				"item_bracelet_l_set_jedi_utility_a_01_01",
+				"item_bracelet_l_set_jedi_utility_b_01_01",
+				"item_bracelet_r_set_jedi_dps_01_01",
+				"item_bracelet_r_set_jedi_utility_a_01_01",
+				"item_bracelet_r_set_jedi_utility_b_01_01",
+				"item_necklace_set_jedi_dps_01_01",
+				"item_necklace_set_jedi_utility_a_01_01",
+				"item_necklace_set_jedi_utility_b_01_01",
+				"item_ring_set_jedi_dps_01_01",
+				"item_ring_set_jedi_utility_a_01_01",
+				"item_ring_set_jedi_utility_b_01_01"
+		);
+	}
+
+	private static void handleCommando(Player player) {
+		spawnItems(player,
+				"item_band_set_commando_dps_01_01",
+				"item_band_set_commando_utility_a_01_01",
+				"item_band_set_commando_utility_b_01_01",
+				"item_bracelet_l_set_commando_dps_01_01",
+				"item_bracelet_l_set_commando_utility_a_01_01",
+				"item_bracelet_l_set_commando_utility_b_01_01",
+				"item_bracelet_r_set_commando_dps_01_01",
+				"item_bracelet_r_set_commando_utility_a_01_01",
+				"item_bracelet_r_set_commando_utility_b_01_01",
+				"item_necklace_set_commando_dps_01_01",
+				"item_necklace_set_commando_utility_a_01_01",
+				"item_necklace_set_commando_utility_b_01_01",
+				"item_ring_set_commando_dps_01_01",
+				"item_ring_set_commando_utility_a_01_01",
+				"item_ring_set_commando_utility_b_01_01"
+		);
+	}
+
+	private static void handleSmuggler(Player player) {
+		spawnItems(player,
+				"item_band_set_smuggler_dps_01_01",
+				"item_band_set_smuggler_utility_a_01_01",
+				"item_band_set_smuggler_utility_b_01_01",
+				"item_bracelet_l_set_smuggler_dps_01_01",
+				"item_bracelet_l_set_smuggler_utility_a_01_01",
+				"item_bracelet_l_set_smuggler_utility_b_01_01",
+				"item_bracelet_r_set_smuggler_dps_01_01",
+				"item_bracelet_r_set_smuggler_utility_a_01_01",
+				"item_bracelet_r_set_smuggler_utility_b_01_01",
+				"item_necklace_set_smuggler_dps_01_01",
+				"item_necklace_set_smuggler_utility_a_01_01",
+				"item_necklace_set_smuggler_utility_b_01_01",
+				"item_ring_set_smuggler_dps_01_01",
+				"item_ring_set_smuggler_utility_a_01_01",
+				"item_ring_set_smuggler_utility_b_01_01"
+		);
+	}
+
+	private static void handleSpy(Player player) {
+		spawnItems(player,
+				"item_band_set_spy_dps_01_01",
+				"item_band_set_spy_utility_a_01_01",
+				"item_band_set_spy_utility_b_01_01",
+				"item_bracelet_l_set_spy_dps_01_01",
+				"item_bracelet_l_set_spy_utility_a_01_01",
+				"item_bracelet_l_set_spy_utility_b_01_01",
+				"item_bracelet_r_set_spy_dps_01_01",
+				"item_bracelet_r_set_spy_utility_a_01_01",
+				"item_bracelet_r_set_spy_utility_b_01_01",
+				"item_necklace_set_spy_dps_01_01",
+				"item_necklace_set_spy_utility_a_01_01",
+				"item_necklace_set_spy_utility_b_01_01",
+				"item_ring_set_spy_dps_01_01",
+				"item_ring_set_spy_utility_a_01_01",
+				"item_ring_set_spy_utility_b_01_01"
+		);
+	}
+
+	private static void handleOfficer(Player player) {
+		spawnItems(player,
+				"item_band_set_officer_dps_01_01",
+				"item_band_set_officer_utility_a_01_01",
+				"item_band_set_officer_utility_b_01_01",
+				"item_bracelet_l_set_officer_dps_01_01",
+				"item_bracelet_l_set_officer_utility_a_01_01",
+				"item_bracelet_l_set_officer_utility_b_01_01",
+				"item_bracelet_r_set_officer_dps_01_01",
+				"item_bracelet_r_set_officer_utility_a_01_01",
+				"item_bracelet_r_set_officer_utility_b_01_01",
+				"item_necklace_set_officer_dps_01_01",
+				"item_necklace_set_officer_utility_a_01_01",
+				"item_necklace_set_officer_utility_b_01_01",
+				"item_ring_set_officer_dps_01_01",
+				"item_ring_set_officer_utility_a_01_01",
+				"item_ring_set_officer_utility_b_01_01"
+		);
+	}
+
+
 	private static void spawnPowerup(Player player, String template, String stfKey, String modifier, String value) {
 		TangibleObject powerup = (TangibleObject) ObjectCreator.createObjectFromTemplate(template);
 		powerup.setStf("static_item_n", stfKey);
