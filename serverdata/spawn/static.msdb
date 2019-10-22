@@ -17,7 +17,7 @@ common_talus.sdb	TRUE
 common_tatooine.sdb	TRUE
 common_yavin4.sdb	TRUE
 dungeon_corvette_imperial.sdb	TRUE
-dungeon_corvette_neutral.sdb	FALSE
+dungeon_corvette_neutral.sdb	TRUE
 dungeon_corvette_rebel.sdb	TRUE
 dungeon_kashyyyk_arena.sdb	FALSE
 dungeon_kashyyyk_avatar.sdb	TRUE
@@ -39,12 +39,12 @@ event_global_lifeday.sdb	FALSE
 event_global_loveday.sdb	FALSE
 event_global_remembranceday.sdb	FALSE
 gcw_invasion_bestine.sdb	FALSE
-gcw_base_corellia_imperial.sdb	TRUE
+gcw_base_corellia_imperial.sdb	FALSE
 gcw_base_corellia_rebel.sdb	TRUE
-gcw_base_naboo_imperial.sdb	TRUE
+gcw_base_naboo_imperial.sdb	FALSE
 gcw_base_naboo_rebel.sdb	TRUE
 gcw_base_talus_imperial.sdb	TRUE
-gcw_base_talus_rebel.sdb	TRUE
+gcw_base_talus_rebel.sdb	FALSE
 gcw_presence_corellia_imperial.sdb	FALSE
 gcw_presence_corellia_neutral.sdb	TRUE
 gcw_presence_corellia_rebel.sdb	FALSE
