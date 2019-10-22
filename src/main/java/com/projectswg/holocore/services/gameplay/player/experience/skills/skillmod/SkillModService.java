@@ -80,16 +80,19 @@ public class SkillModService extends Service {
 		
 		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);
 		
-		skillModAdjusters = Map.of(
-				"agility_modified", new AgilityAdjustFunction(),
-				"luck_modified", new LuckAdjustFunction(),
-				"precision_modified", new PrecisionAdjustFunction(),
-				"strength_modified", new StrengthAdjustFunction(),
-				"expertise_dodge", new SingleModAdjustFunction("display_only_dodge", 100),
-				"expertise_innate_protection_all", new InnateArmorAdjustFunction(),
-				"expertise_innate_protection_kinetic", new SingleModAdjustFunction("kinetic"),
-				"expertise_innate_protection_energy", new SingleModAdjustFunction("energy")
-		);
+		skillModAdjusters = new HashMap<>();
+		skillModAdjusters.put("agility", new AgilityAdjustFunction());
+		skillModAdjusters.put("agility_modified", new AgilityAdjustFunction());
+		skillModAdjusters.put("luck", new LuckAdjustFunction());
+		skillModAdjusters.put("luck_modified", new LuckAdjustFunction());
+		skillModAdjusters.put("precision", new PrecisionAdjustFunction());
+		skillModAdjusters.put("precision_modified", new PrecisionAdjustFunction());
+		skillModAdjusters.put("strength", new StrengthAdjustFunction());
+		skillModAdjusters.put("strength_modified", new StrengthAdjustFunction());
+		skillModAdjusters.put("expertise_dodge", new SingleModAdjustFunction("display_only_dodge", 100));
+		skillModAdjusters.put("expertise_innate_protection_all", new InnateArmorAdjustFunction());
+		skillModAdjusters.put("expertise_innate_protection_kinetic", new SingleModAdjustFunction("kinetic"));
+		skillModAdjusters.put("expertise_innate_protection_energy", new SingleModAdjustFunction("energy"));
 	}
 	
 	@Override
@@ -213,39 +216,45 @@ public class SkillModService extends Service {
 		
 		if (newHealth != 0){
 			creature.setMaxHealth(creature.getMaxHealth() + newHealth);
-			creature.setHealth(creature.getMaxHealth());
+			
+			if (!creature.isInCombat()) {
+				// Don't replenish  health to 100% if creature is in combat
+				creature.setHealth(creature.getMaxHealth());
+			}
 		}
 		
 		if (newAction !=0){
 			creature.setMaxAction(creature.getMaxAction() + newAction);
-			creature.setAction(creature.getMaxAction());
+			
+			if (!creature.isInCombat()) {
+				// Don't replenish action to 100% if creature is in combat
+				creature.setAction(creature.getMaxAction());
+			}
 		}
 	}
 	
 	private void updateLevelSkillModValues(CreatureObject creature, int level, Profession profession, String race){
-		int oldSkillModValue;
-		int skillModValue;
-		
 		if (level < 1 || level > 90){
 			return;
 		}		
 		
 		for(SkillModTypes type : SkillModTypes.values()){
 			String raceModName = type.isRaceModDefined() ? race + type.getRace() : "";
-			skillModValue = getLevelSkillModValue(level, profession.getName() + type.getProfession(),  raceModName);
+			int skillModValue = getLevelSkillModValue(level, profession.getName() + type.getProfession(),  raceModName);
 			
 			if (skillModValue <= 0){
 				continue;
 			}
 			
-			oldSkillModValue = creature.getSkillModValue(type.toString().toLowerCase(Locale.US));
+			String skillModName = type.toString().toLowerCase(Locale.US);
+			int oldSkillModValue = creature.getSkillModValue(skillModName);
 			
 			if (skillModValue > oldSkillModValue){
-				adjustSkillmod(creature, type.toString().toLowerCase(Locale.US), 0, -creature.getSkillModValue(type.toString().toLowerCase(Locale.US)));
-				adjustSkillmod(creature, type.toString().toLowerCase(Locale.US), 0, skillModValue);
+				adjustSkillmod(creature, skillModName, -creature.getSkillModValue(skillModName), 0);
+				adjustSkillmod(creature, skillModName, skillModValue, 0);
 
-				if (type == SkillModTypes.CONSTITUTION_MODIFIED || type == SkillModTypes.STAMINA_MODIFIED)
-					updateSkillModHamValues(creature, type.toString().toLowerCase(Locale.US),skillModValue - oldSkillModValue);
+				if (type == SkillModTypes.CONSTITUTION || type == SkillModTypes.STAMINA)
+					updateSkillModHamValues(creature, skillModName,skillModValue - oldSkillModValue);
 					
 				if (type.isLevelUpMessageDefined())
 					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);
@@ -344,14 +353,14 @@ public class SkillModService extends Service {
 	}
 	
 	public enum SkillModTypes{
-		LUCK_MODIFIED 			("_luck","_lck","level_up_stat_gain_0"),
-		PRECISION_MODIFIED 		("_precision","_pre","level_up_stat_gain_1"),
-		STRENGTH_MODIFIED 		("_strength","_str","level_up_stat_gain_2"),
-		CONSTITUTION_MODIFIED 	("_constitution","_con","level_up_stat_gain_3"),
-		STAMINA_MODIFIED 		("_stamina","_sta","level_up_stat_gain_4"),
-		AGILITY_MODIFIED 		("_agility","_agi","level_up_stat_gain_5"),
-		HEALTH_REGEN 			("_health_regen",null,null),
-		ACTION_REGEN 			("_action_regen",null,null);
+		LUCK		("_luck","_lck","level_up_stat_gain_0"),
+		PRECISION	("_precision","_pre","level_up_stat_gain_1"),
+		STRENGTH	("_strength","_str","level_up_stat_gain_2"),
+		CONSTITUTION("_constitution","_con","level_up_stat_gain_3"),
+		STAMINA		("_stamina","_sta","level_up_stat_gain_4"),
+		AGILITY		("_agility","_agi","level_up_stat_gain_5"),
+		HEALTH_REGEN("_health_regen",null,null),
+		ACTION_REGEN("_action_regen",null,null);
 		
 		private final String professionMod;
 		private final String raceMod;

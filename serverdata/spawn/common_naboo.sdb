@@ -1109,13 +1109,13 @@ spawn_nab_1106	NABOO	nab_world	AREA	0	-4932.2	6.4	-6792.0	0	1	a Rebel trooper	it
 spawn_nab_1107	NABOO	nab_world	AREA	0	-4917.8	4.2	-6913.2	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1108	NABOO	nab_world	AREA	0	-4914.8	4.8	-6771.0	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1109	NABOO	nab_world	AREA	0	-4895.1	3.4	-6821.5	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1110	NABOO	nab_world	AREA	0	-4894.8	6.3	-6870.5	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1110	NABOO	nab_world	AREA	0	-4894.8	6.3	-6870.5	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1111	NABOO	nab_world	AREA	0	-4892.8	6.1	-6839.5	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1112	NABOO	nab_world	AREA	0	-4890.8	5.1	-6933.6	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1113	NABOO	nab_world	AREA	0	-4890.2	7.1	-6887.6	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1114	NABOO	nab_world	AREA	0	-4890.0	6.2	-6866.3	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	0	0	-	idle	0	0	0	600
-spawn_nab_1115	NABOO	nab_world	AREA	0	-4886.5	6.4	-6875.8	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	0	0	-	idle	0	0	0	600
-spawn_nab_1116	NABOO	nab_world	AREA	0	-4882.7	6.0	-6869.6	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1114	NABOO	nab_world	AREA	0	-4890.0	6.2	-6866.3	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_nab_1115	NABOO	nab_world	AREA	0	-4886.5	6.4	-6875.8	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_nab_1116	NABOO	nab_world	AREA	0	-4882.7	6.0	-6869.6	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1117	NABOO	nab_world	AREA	0	-4875.2	5.4	-6921.5	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1118	NABOO	nab_world	AREA	0	-4868.6	6.2	-6857.0	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1119	NABOO	nab_world	AREA	0	-4843.3	5.0	-6914.9	0	1	a Rebel trooper	itp_rebel_trooper_elite	ATTACKABLE	E	85	90	Outback	ITP - Major Herands Contact Camp	1	LOITER	2	0	-	idle	0	0	0	600
@@ -1216,7 +1216,7 @@ spawn_nab_1213	NABOO	nab_world	AREA	0	-4661.5	37.5	3517.8	0	1	a nesting kaadu	ka
 spawn_nab_1214	NABOO	nab_world	AREA	0	-4616.4	37.1	3496.8	0	1	a nesting kaadu	kaadu_nesting	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_nab_1215	NABOO	nab_world	AREA	0	-4632.1	34.6	3464.7	0	1	a nesting kaadu	kaadu_nesting	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_nab_1216	NABOO	nab_world	AREA	0	1131.5	-188.0	4866.4	0	1	Doogal Belstar	legacy_naboo_typho_doogal_belstar	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1217	NABOO	nab_world	AREA	0	5233.9	-195.5	6346.0	0	1	Soris	legacy_soris	ATTACKABLE	N	20	25	Outback	Naboo	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1217	NABOO	nab_world	AREA	0	5233.9	-195.5	6346.0	0	1	Soris	legacy_soris	ATTACKABLE	N	20	25	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1218	NABOO	nab_world	AREA	0	-1638.4	14.0	-4033.7	-83	1	a Lesser Prophet of the Dark Side	lesser_prophet_of_the_dark_side	ATTACKABLE	E	80	85	Outback	Naboo	1	IDLE	0	0	-	idle	0	0	0	1800
 spawn_nab_1219	NABOO	nab_world	AREA	0	1253.3	10.7	4295.0	0	1	a master thief	master_thief	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	6	0	-	idle	0	0	0	600
 spawn_nab_1220	NABOO	nab_world	AREA	0	-1348.8	-190.2	6533.9	0	1	a master thief	master_thief	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
@@ -1259,7 +1259,7 @@ spawn_nab_1256	NABOO	nab_world	AREA	0	4898.0	-206.1	6511.8	0	1	a Beachcomber smu
 spawn_nab_1257	NABOO	nab_world	AREA	0	4896.6	-204.3	6433.9	0	1	a Beachcomber smuggler	naboo_beachcomber_smuggler	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_nab_1258	NABOO	nab_world	AREA	0	4893.7	-204.7	6446.6	0	1	a Beachcomber smuggler	naboo_beachcomber_smuggler	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_nab_1259	NABOO	nab_world	AREA	0	4877.3	-207.6	6398.8	0	1	a Beachcomber smuggler	naboo_beachcomber_smuggler	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_nab_1260	NABOO	nab_world	AREA	0	4328.7	295.4	-1251.4	0	1	Kippy Martin	naboo_deeja_peak_kippy_martin	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1260	NABOO	nab_world	AREA	0	4328.7	295.4	-1251.4	0	1	Kippy Martin	naboo_deeja_peak_kippy_martin	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1261	NABOO	nab_world	AREA	0	4367.3	290.8	-1246.6	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1262	NABOO	nab_world	AREA	0	4329.2	294.1	-1237.7	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1263	NABOO	nab_world	AREA	0	4325.6	295.2	-1261.7	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
@@ -1269,7 +1269,7 @@ spawn_nab_1266	NABOO	nab_world	AREA	0	4265.5	324.9	-1260.4	0	1	a starving flewt	
 spawn_nab_1267	NABOO	nab_world	AREA	0	4243.3	293.6	-1214.8	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1268	NABOO	nab_world	AREA	0	4365.4	283.7	-1212.7	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1269	NABOO	nab_world	AREA	0	4324.0	289.8	-1288.5	0	1	a starving flewt	naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1270	NABOO	nab_world	AREA	0	-4759.0	6.0	3582.0	0	1	Jak Chucka	naboo_jak_chucka	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1270	NABOO	nab_world	AREA	0	-4759.0	6.0	3582.0	0	1	Jak Chucka	naboo_jak_chucka	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1271	NABOO	nab_world	AREA	0	5802.9	169.7	-1172.9	0	1	a Mauler battlesword	naboo_mauler_battlesword	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle	0	0	0	600
 spawn_nab_1272	NABOO	nab_world	AREA	0	5752.5	152.2	-1201.2	0	1	a Mauler battlesword	naboo_mauler_battlesword	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle	0	0	0	600
 spawn_nab_1273	NABOO	nab_world	AREA	0	5731.9	150.8	-1232.6	0	1	a Mauler battlesword	naboo_mauler_battlesword	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle	0	0	0	600
@@ -1316,7 +1316,7 @@ spawn_nab_1313	NABOO	nab_world	AREA	0	-5995.1	9.2	3867.7	0	1	a Muskeg fanatic	na
 spawn_nab_1314	NABOO	nab_world	AREA	0	-5990.1	8.1	3904.1	0	1	a Muskeg fanatic	naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
 spawn_nab_1315	NABOO	nab_world	AREA	0	-5963.5	6.6	3887.4	0	1	a Muskeg fanatic	naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
 spawn_nab_1316	NABOO	nab_world	AREA	0	-5955.6	11.1	3849.8	0	1	a Muskeg fanatic	naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
-spawn_nab_1317	NABOO	nab_world	AREA	0	-1730.2	7.3	-5765.5	0	1	Flossin Noz (a Muskeg zealot chief)	naboo_muskeg_flossin_noz	AGGRESSIVE	B	25	35	Outback	Naboo	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1317	NABOO	nab_world	AREA	0	-1730.2	7.3	-5765.5	0	1	Flossin Noz (a Muskeg zealot chief)	naboo_muskeg_flossin_noz	AGGRESSIVE	B	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1318	NABOO	nab_world	AREA	0	-5946.8	6.1	3944.1	0	1	a Muskeg radical	naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
 spawn_nab_1319	NABOO	nab_world	AREA	0	-5929.2	7.6	3919.5	0	1	a Muskeg radical	naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
 spawn_nab_1320	NABOO	nab_world	AREA	0	-5921.9	6.4	3964.3	0	1	a Muskeg radical	naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	9	0	-	idle	0	0	0	600
@@ -1450,7 +1450,7 @@ spawn_nab_1447	NABOO	nab_world	AREA	0	5408.2	320.2	-2413.5	0	1	a mountain spinef
 spawn_nab_1448	NABOO	nab_world	AREA	0	5377.3	327.1	-2362.3	0	1	a mountain spineflap	spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1449	NABOO	nab_world	AREA	0	5372.8	319.5	-2413.0	0	1	a mountain spineflap	spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1450	NABOO	nab_world	AREA	0	5355.4	316.4	-2391.4	0	1	a mountain spineflap	spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1451	NABOO	nab_world	AREA	0	5402.2	322.9	-2397.8	0	1	Sprywing (a mountain spineflap)	spineflap_sprywing	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1451	NABOO	nab_world	AREA	0	5402.2	322.9	-2397.8	0	1	Sprywing (a mountain spineflap)	spineflap_sprywing	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1452	NABOO	nab_world	AREA	0	-1555.5	-195.5	6002.2	0	1	a Stormtrooper Squad Leader	stormtrooper_squad_leader	ATTACKABLE	E	25	35	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1453	NABOO	nab_world	AREA	0	-3158.4	4.6	2559.2	0	1	a thug	thug	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1454	NABOO	nab_world	AREA	0	-5065.4	5.3	3399.4	-131	1	a thug	thug	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	idle	0	0	0	600
@@ -1478,13 +1478,13 @@ spawn_nab_1475	NABOO	nab_world	AREA	0	-6116.2	-203.1	4822.4	0	1	a Skaak Tipper b
 spawn_nab_1476	NABOO	nab_world	PATROL	0	-6064.1	-196.2	4749.2	178	1	Hunnos Jarkey	naboo_theed_hunnos_jarkey	AGGRESSIVE	B	25	35	Outback	Theed Pirate Outpost	1	PATROL	0	patrol_nab_1900	column	idle	0	0	0	600
 spawn_nab_1477	NABOO	nab_world	AREA	0	-1855.3	4.6	-5077.1	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1478	NABOO	nab_world	AREA	0	-1838.3	4.3	-5059.5	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1479	NABOO	nab_world	AREA	0	-1837.2	3.8	-5096.2	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	0	0	-	idle	0	0	0	600
-spawn_nab_1480	NABOO	nab_world	AREA	0	-1836.8	3.5	-5084.8	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1479	NABOO	nab_world	AREA	0	-1837.2	3.8	-5096.2	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_nab_1480	NABOO	nab_world	AREA	0	-1836.8	3.5	-5084.8	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_nab_1481	NABOO	nab_world	AREA	0	-1836.8	4.6	-5108.5	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_1482	NABOO	nab_world	AREA	0	-1826.6	4.2	-5094.8	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	0	0	-	idle	0	0	0	600
-spawn_nab_1483	NABOO	nab_world	AREA	0	-1822.6	4.3	-5086.3	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1482	NABOO	nab_world	AREA	0	-1826.6	4.2	-5094.8	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_nab_1483	NABOO	nab_world	AREA	0	-1822.6	4.3	-5086.3	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_nab_1484	NABOO	nab_world	AREA	0	-1820.7	5.8	-5119.0	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_nab_1485	NABOO	nab_world	AREA	0	-1820.3	4.5	-5077.2	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1485	NABOO	nab_world	AREA	0	-1820.3	4.5	-5077.2	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_nab_1486	NABOO	nab_world	AREA	0	-1800.0	5.5	-5069.7	0	1	an Ultragungan droidtech	naboo_ultragungan_droidtech	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_nab_1487	NABOO	nab_world	AREA	0	-2070.9	16.4	-5070.5	0	1	an Ultragungan foot soldier	naboo_ultragungan_foot_soldier	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_nab_1488	NABOO	nab_world	AREA	0	-2064.0	17.0	-5059.1	0	1	an Ultragungan foot soldier	naboo_ultragungan_foot_soldier	AGGRESSIVE	N	25	35	Outback	Ultragungan Ruins Sacred Place	1	LOITER	5	0	-	idle	0	0	0	600
@@ -1621,7 +1621,7 @@ spawn_nab_1618	NABOO	nab_world	AREA	0	4761.3	8.6	-3862.4	179	1	a Swamp Trooper	s
 spawn_nab_1619	NABOO	nab_world	AREA	0	4779.8	11.8	-3839.0	179	1	a Swamp Trooper	swamp_trooper	ATTACKABLE	N	25	35	POI	Imperial vs Gungan Battle	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_nab_1620	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	swamp_trooper	ATTACKABLE	N	25	35	POI	Imperial vs Gungan Battle	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_nab_1621	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	swamp_trooper	ATTACKABLE	N	25	35	POI	Imperial vs Gungan Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_nab_1622	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	borvo_montrus	ATTACKABLE	B	20	30	POI	Imperial vs Gungun Battle	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_nab_1622	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	borvo_montrus	ATTACKABLE	B	20	30	POI	Imperial vs Gungun Battle	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_1623	NABOO	nab_mauler_stronghold	AREA	10	9.8	-16.0	135.3	0	1	a Mauler	mauler	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	TURN	0	0	-	idle	0	0	0	600
 spawn_nab_1624	NABOO	nab_mauler_stronghold	AREA	10	9.2	-16.0	108.4	0	1	a Mauler Guard	mauler_guard	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	TURN	0	0	-	idle	0	0	0	600
 spawn_nab_1625	NABOO	nab_mauler_stronghold	AREA	10	19.2	-16.0	116.1	0	1	a Mauler Guard	mauler_guard	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	TURN	0	0	-	idle	0	0	0	600

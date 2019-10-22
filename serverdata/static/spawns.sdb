@@ -10,28 +10,16 @@ bank_player	object/tangible/terminal/shared_terminal_bank.iff		4.3	0.52	0	90
 bank_player	object/tangible/terminal/shared_terminal_bank.iff		-4.3	0.52	0	-90
 cloning_cor	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
 cloning_cor	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
-cloning_cor	object/mobile/shared_clone_droid.iff	insurance	-5	0.1	1.8	90
 cloning_imp_sml	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0	0.13	-5.9	0
-cloning_imp_sml	object/mobile/shared_clone_droid.iff	room3	-5.2	0.1	-3.6	90
 cloning_imp_sml_2	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0	0.13	-5.9	0
-cloning_imp_sml_2	object/mobile/shared_clone_droid.iff	room3	-5.2	0.1	-3.6	90
 cloning_nab	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
 cloning_nab	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
-cloning_nab	object/mobile/shared_clone_droid.iff	insurance	-5	0.1	1.8	90
 cloning_outpost	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0	0.13	-5.9	0
-cloning_outpost	object/mobile/shared_clone_droid.iff	room3	-5.2	0.1	-3.6	90
 cloning_outpost_2	object/tangible/terminal/shared_terminal_cloning.iff	room3	-4.02	0.13	-5.63	0
-cloning_outpost_2	object/mobile/shared_clone_droid.iff	room1	3.8	0.1	4.7	180
 cloning_outpost_3	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0	0.13	-5.9	0
-cloning_outpost_3	object/mobile/shared_clone_droid.iff	room3	-5.2	0.1	-3.6	90
-cloning_player_cor	object/mobile/shared_clone_droid.iff	cloninglab	-12.2	-2.5	6.7	121
-cloning_player_nab	object/mobile/shared_clone_droid.iff	cloninglab	-12.2	-2.5	6.7	121
-cloning_player_tat	object/mobile/shared_clone_droid.iff	cloninglab	-12.2	-2.5	6.7	121
 cloning_tat	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
 cloning_tat	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
-cloning_tat	object/mobile/shared_clone_droid.iff	insurance	-5	0.1	1.8	90
 cloning_tat_sml	object/tangible/terminal/shared_terminal_cloning.iff	foyer1	4.4	0.3	4.8	-90
-cloning_tat_sml	object/mobile/shared_clone_droid.iff	livingroom1	4.6	-0.4	-4.3	-90
 corvette	object/tangible/terminal/shared_terminal_elevator_up.iff	elevator18	5.00	0.00	-13.40	180
 corvette	object/tangible/terminal/shared_terminal_elevator_down.iff	elevator18	5.00	12.00	-13.40	180
 corvette	object/tangible/terminal/shared_terminal_elevator_up.iff	elevator19	0.00	-12.00	37.67	180
@@ -99,6 +87,7 @@ starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	11.255	0.64	
 starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	2.52	0.64	50.02	0
 starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-3.23	0.64	50.05	0
 starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-12.71	0.64	52.04	35
+starport	object/static/particle/shared_pt_airport_race_light_group.iff		1.72	0	-5.06	0
 starport	object/creature/npc/theme_park/shared_player_transport.iff		1.72	0	-5.06	180
 starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		10	0	-10	90
 starport_kachirho	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
@@ -107,11 +96,13 @@ starport_kachirho	object/tangible/travel/ticket_collector/shared_ticket_collecto
 starport_mustafar	object/tangible/terminal/shared_terminal_travel.iff		-60	30.7	-130	180
 starport_mustafar	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-45	30.7	-152	0
 starport_mustafar	object/creature/npc/theme_park/shared_player_transport.iff		-55	30	-160	90
+starport_mustafar	object/static/particle/shared_pt_airport_race_light_group.iff		-55	30	-160	90
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-16.5	0.75	-68	180
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-27	0.75	-68	180
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	16.5	0.75	-68	180
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	27	0.75	-68	180
 starport_nab_theed	object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff	hangar	-0.51	7.94	21	0
+starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	-0.51	7.94	21	0
 starport_nab_theed	object/tangible/travel/ticket_collector/shared_ticket_collector.iff	hangar	-9.5	8	35	180
 starport_outpost	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
 starport_outpost	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90

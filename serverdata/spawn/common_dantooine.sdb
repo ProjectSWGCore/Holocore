@@ -624,5 +624,3 @@ spawn_dan_621	DANTOOINE	dan_warren	AREA	84	87.5	-52.0	10.9	0	1	a Teraud loyalist
 spawn_dan_622	DANTOOINE	dan_warren	AREA	87	118.4	-52.0	39.4	179	1	Bors Teraud	warren_bors_teraud	AGGRESSIVE	B	50	55	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_623	DANTOOINE	dan_warren	AREA	9	-10.0	-20.0	-59.9	101	1	Phy Hudgen (an escaped worker)	phy_hudgen	INVULNERABLE	N	100	100	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_624	DANTOOINE	dan_world	AREA	0	-462.1	15.5	-3800.0	0	1	O'Evitt Piboi (an escapee)	oevitt_piboi	INVULNERABLE	N	100	100	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dan_625	DANTOOINE	dan_world	AREA	0	4190.5	9.0	5215.4	113	1	Dark Jedi	jedi_dark	ATTACKABLE	B	50	55	POI	Jedi Temple Ruins	2	IDLE	0	0	-	idle	0	0	0	10
-spawn_dan_626	DANTOOINE	dan_world	AREA	0	4195.8	9.0	5210.3	-66	1	Light Jedi	jedi_light	ATTACKABLE	B	50	55	POI	Jedi Temple Ruins	2	IDLE	0	0	-	idle	0	0	0	10

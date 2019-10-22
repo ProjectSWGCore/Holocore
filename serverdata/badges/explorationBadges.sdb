@@ -50,7 +50,7 @@ TATOOINE	-6176	-3372	32	16	exp_tat_sarlacc_pit
 TATOOINE	-3931	-4419	32	15	exp_tat_escape_pod
 TATOOINE	-4650	-4362	16	14	exp_tat_krayt_skeleton
 TATOOINE	7450	4537	64	18	exp_tat_krayt_graveyard
-TATOOINE	-3966	6267	32	13	exp_tat_tusken_pool
+TATOOINE	-3966	6267	6	13	exp_tat_tusken_pool
 YAVIN4	5076	5537	32	23	exp_yav_temple_exar_kun
 YAVIN4	-875	-2047	32	22	exp_yav_temple_blueleaf
 YAVIN4	519	-646	32	21	exp_yav_temple_woolamander

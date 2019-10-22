@@ -38,7 +38,7 @@ event_global_halloween.sdb	FALSE
 event_global_lifeday.sdb	FALSE
 event_global_loveday.sdb	FALSE
 event_global_remembranceday.sdb	FALSE
-gcw_invasion_bestine.sdb	TRUE
+gcw_invasion_bestine.sdb	FALSE
 gcw_base_corellia_imperial.sdb	TRUE
 gcw_base_corellia_rebel.sdb	TRUE
 gcw_base_naboo_imperial.sdb	TRUE
