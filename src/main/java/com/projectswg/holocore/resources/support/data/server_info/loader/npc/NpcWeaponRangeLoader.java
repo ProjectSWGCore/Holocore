@@ -55,7 +55,7 @@ public final class NpcWeaponRangeLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_weapon_range.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_weapon.sdb"))) {
 			while (set.next()) {
 				weapons.put(ClientFactory.formatToSharedFile(set.getText("weapons")), (int) set.getInt("weapon_range"));
 			}
