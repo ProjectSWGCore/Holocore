@@ -20,6 +20,6 @@ jobs:
     - name: Docker Login
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build
-      run: docker build -t "docker.pkg.github.com/$GITHUB_REPOSITORY/holocore:$GITHUB_REF" .
+      run: docker build -t "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" .
     - name: Docker Push
-      run: docker push "docker.pkg.github.com/$GITHUB_REPOSITORY/holocore:$GITHUB_REF"
+      run: docker push "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF"
