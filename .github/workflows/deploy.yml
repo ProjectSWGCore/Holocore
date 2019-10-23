@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: ./gradlew clean jlink
     - name: Docker Login
-      run: docker login -u ${{ secrets.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+      run: docker login -u "${{ secrets.DOCKER_HUB_USER }}" -p "${{ secrets.DOCKER_HUB_PASSWORD }}"
     - name: Docker Build
       run: docker build -t ${{ secrets.DOCKER_HUB_REPO }}/holocore:$GITHUB_REF .
     - name: Docker Push
