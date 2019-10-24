@@ -1,7 +1,8 @@
 name: Deploy to QA
 
 on:
-  push:
+  release:
+    types: [published]
     branches:
       - quality_assurance
 
@@ -23,6 +24,10 @@ jobs:
     - name: Docker Login
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build
-      run: docker build -t "${{secrets.DOCKER_IMAGE }}:quality_assurance" .
+      run: |
+        docker build -t "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" .
+        docker tag "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" "${{secrets.DOCKER_IMAGE }}:quality_assurance"
     - name: Docker Push
-      run: docker push "${{secrets.DOCKER_IMAGE }}:quality_assurance"
+      run: |
+        docker push "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF"
+        docker push "${{secrets.DOCKER_IMAGE }}:quality_assurance"
