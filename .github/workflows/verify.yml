@@ -1,6 +1,8 @@
 name: PR Test
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, edited, review_requested]
 
 jobs:
   test:
