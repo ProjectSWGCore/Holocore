@@ -2,6 +2,12 @@ name: PR Test
 
 on:
   pull_request:
+  release:
+    types: [created, edited, prereleased]
+  push:
+    branches: 
+      - master
+      - quality_assurance
 
 jobs:
   test:
