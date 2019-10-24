@@ -1,0 +1,33 @@
+name: Deploy to QA
+
+on:
+  release:
+    types: [published]
+    branches:
+      - quality_assurance
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Set up JDK 12
+      uses: actions/setup-java@v1
+      with:
+        java-version: 12
+    - name: Build
+      run: ./gradlew --no-daemon clean jlink
+    - name: Docker Login
+      run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
+    - name: Docker Build
+      run: |
+        docker build -t "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" .
+        docker tag "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" "${{secrets.DOCKER_IMAGE }}:quality_assurance"
+    - name: Docker Push
+      run: |
+        docker push "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF"
+        docker push "${{secrets.DOCKER_IMAGE }}:quality_assurance"

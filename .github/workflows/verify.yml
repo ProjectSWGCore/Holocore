@@ -1,9 +1,16 @@
-name: Java Test
+name: PR Test
 
-on: [push, pull_request]
+on:
+  pull_request:
+  release:
+    types: [created, edited, prereleased]
+  push:
+    branches: 
+      - master
+      - quality_assurance
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -15,7 +22,5 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 12
-    - name: Build with Gradle
-      run: ./gradlew build
     - name: Test with Gradle
-      run: ./gradlew test
+      run: ./gradlew --no-daemon test
