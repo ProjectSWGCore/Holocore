@@ -2,7 +2,6 @@ name: PR Test
 
 on:
   pull_request:
-    types: [opened, edited, review_requested]
 
 jobs:
   test:
@@ -18,4 +17,4 @@ jobs:
       with:
         java-version: 12
     - name: Test with Gradle
-      run: ./gradlew test
+      run: ./gradlew --no-daemon test
