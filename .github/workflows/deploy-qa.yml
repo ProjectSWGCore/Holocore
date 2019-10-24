@@ -1,6 +1,9 @@
-name: Deploy
+name: Deploy to QA
 
-on: [push]
+on:
+  push:
+    branches:
+      - quality_assurance
 
 jobs:
   deploy:
@@ -16,10 +19,10 @@ jobs:
       with:
         java-version: 12
     - name: Build
-      run: ./gradlew clean jlink
+      run: ./gradlew --no-daemon clean jlink
     - name: Docker Login
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build
-      run: docker build -t "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" .
+      run: docker build -t "${{secrets.DOCKER_IMAGE }}:quality_assurance" .
     - name: Docker Push
-      run: docker push "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF"
+      run: docker push "${{secrets.DOCKER_IMAGE }}:quality_assurance"
