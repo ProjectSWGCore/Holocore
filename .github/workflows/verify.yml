@@ -1,4 +1,4 @@
-name: PR Test
+name: Gradle Test
 
 on:
   pull_request:
@@ -6,8 +6,8 @@ on:
     types: [created, edited, prereleased]
   push:
     branches: 
-      - master
-      - quality_assurance
+    - master
+    - quality_assurance
 
 jobs:
   test:
