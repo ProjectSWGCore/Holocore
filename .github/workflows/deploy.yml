@@ -21,8 +21,8 @@ jobs:
       run: ./gradlew --no-daemon clean test jlink
     - name: Docker Environment Variable Initialization
       run: |
-        IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
-        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
+        export IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
+        export RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
     - name: Docker Login
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build & Push
