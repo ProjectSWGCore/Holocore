@@ -2,8 +2,6 @@ name: Gradle Test
 
 on:
   pull_request:
-  release:
-    types: [created, edited, prereleased]
   push:
     branches: 
     - master
