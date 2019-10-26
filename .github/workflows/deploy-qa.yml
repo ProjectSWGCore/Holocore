@@ -4,7 +4,7 @@ on:
   release:
     types: [published]
     branches:
-      - quality_assurance
+    - quality_assurance
 
 jobs:
   deploy:
@@ -26,12 +26,12 @@ jobs:
     - name: Docker Build
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
-        RELEASE_NAME=`echo "refs/tags/OCT19-rc1" | sed 's/refs\/tags\///g'`
+        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
         docker build -t "$IMAGE_NAME:$RELEASE_NAME" .
         docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:quality_assurance"
     - name: Docker Push
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
-        RELEASE_NAME=`echo "refs/tags/OCT19-rc1" | sed 's/refs\/tags\///g'`
+        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
         docker push "$IMAGE_NAME:$RELEASE_NAME"
         docker push "$IMAGE_NAME:quality_assurance"
