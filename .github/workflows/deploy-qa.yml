@@ -25,9 +25,11 @@ jobs:
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build
       run: |
-        docker build -t `echo "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" | sed 's/refs\/tags\///g'` .
-        docker tag `echo "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" | sed 's/refs\/tags\///g'` "${{secrets.DOCKER_IMAGE }}:quality_assurance"
+        IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
+        RELEASE_NAME=`echo "refs/tags/OCT19-rc1" | sed 's/refs\/tags\///g'`
+        docker build -t "$IMAGE_NAME:$RELEASE_NAME" .
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:quality_assurance"
     - name: Docker Push
       run: |
-        docker push `echo "${{secrets.DOCKER_IMAGE }}:$GITHUB_REF" | sed 's/refs\/tags\///g'`
-        docker push "${{secrets.DOCKER_IMAGE }}:quality_assurance"
+        docker push "$IMAGE_NAME:$RELEASE_NAME"
+        docker push "$IMAGE_NAME:quality_assurance"
