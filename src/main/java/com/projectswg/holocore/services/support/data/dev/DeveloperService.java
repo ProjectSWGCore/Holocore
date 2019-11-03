@@ -117,6 +117,9 @@ public class DeveloperService extends Service {
 			new Location(-5575, 88, 4902, Terrain.YAVIN4),
 			new Location(-6485, 84, -446, Terrain.YAVIN4),
 
+			// Planet: Character Farm
+			new Location(0, 0, 0, Terrain.CHARACTER_FARM),
+
 		};
 		
 		for (Location cbtLocation : cbtLocations) {
