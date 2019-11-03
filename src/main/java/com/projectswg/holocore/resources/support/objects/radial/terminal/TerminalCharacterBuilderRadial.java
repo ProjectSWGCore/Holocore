@@ -1225,9 +1225,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Exar Kun");
 		listBox.addListItem("Yavin 4 - Geonosian Cave");
 		listBox.addListItem("Yavin 4 - Light Enclave");
-		listBox.addListItem("Character Farm - (Static) AI Turret vs. AI NPCs");
-		listBox.addListItem("Character Farm - (Loiter) AI Faction vs. AI Faction");
-		listBox.addListItem("Character Farm - (Patrol) AI vs. AI");
+		listBox.addListItem("Character Farm - AI test area;
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
 		listBox.display(player);
@@ -1285,9 +1283,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 33: handleYavLightEnclave(player); break;
 		// Planet: Character Farm
 			case 34: handleChfStatic(player); break;
-			case 35: handleChfLoiter(player); break;
-			case 36: handleChfPatrol(player); break;
-
 
 		}
 	}
@@ -1453,16 +1448,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 // Planet: Character Farm
 
 	private static void handleChfStatic(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(550d, 0d, 0d, Terrain.CHARACTER_FARM));
+		player.getCreatureObject().moveToLocation(new Location(0d, 0d, 0d, Terrain.CHARACTER_FARM));
 	}
-
-	private static void handleChfLoiter(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(15d, 0d, 0d, Terrain.CHARACTER_FARM));
-	}
-
-	private static void handleChfPatrol(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(1000d, 0d, 0d, Terrain.CHARACTER_FARM));
-	}
+				    
 
 	private static void handleVehicles(Player player) {
 		String [] items = new String[]{
