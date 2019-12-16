@@ -1225,7 +1225,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Exar Kun");
 		listBox.addListItem("Yavin 4 - Geonosian Cave");
 		listBox.addListItem("Yavin 4 - Light Enclave");
-		listBox.addListItem("Character Farm - AI test area;
+		listBox.addListItem("Character Farm - AI test area");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
 		listBox.display(player);
