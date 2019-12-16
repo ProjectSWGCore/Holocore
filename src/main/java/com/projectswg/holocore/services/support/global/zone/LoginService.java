@@ -48,10 +48,9 @@ import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharac
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.UserMetadata;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
-import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
@@ -229,14 +228,7 @@ public class LoginService extends Service {
 	}
 	
 	private void onSuccessfulLogin(UserMetadata user, Player player) {
-		switch(user.getAccessLevel()) {
-			default:
-			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
-			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
-			case "csr": player.setAccessLevel(AccessLevel.CSR); break;
-			case "qa": player.setAccessLevel(AccessLevel.QA); break;
-			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
-		}
+		player.setAccessLevel(user.getAccessLevel());
 		player.setAccountId(user.getUsername());
 		player.setPlayerState(PlayerState.LOGGED_IN);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();

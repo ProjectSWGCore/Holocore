@@ -63,7 +63,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class CreatureObject extends TangibleObject {
+public class 
+CreatureObject extends TangibleObject {
 	
 	private transient long lastReserveOperation		= 0;
 	

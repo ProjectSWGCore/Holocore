@@ -1,75 +1,47 @@
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.WriteConcern
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
-import com.mongodb.client.MongoDatabase
-import me.joshlarson.jlcommon.log.Log
+import com.projectswg.holocore.resources.support.data.server_info.database.*
+import com.projectswg.holocore.resources.support.data.server_info.mariadb.PswgUserDatabaseMaria
 import org.bson.Document
-import java.util.logging.Handler
-import java.util.logging.Level
-import java.util.logging.LogRecord
-import java.util.logging.Logger
-import kotlin.reflect.KProperty
 
 object PswgDatabase {
 	
-	private val database = ObjectRef<MongoDatabase?>(null)
-	val config by DatabaseDelegate(database, "config") { PswgConfigDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
-	val users by DatabaseDelegate(database, "users") { PswgUserDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
-	val objects by DatabaseDelegate(database, "objects") { PswgObjectDatabase(it?.withWriteConcern(WriteConcern.JOURNALED)) }
-	val resources by DatabaseDelegate(database, "resources") { PswgResourceDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
+	private var configImpl = PswgConfigDatabase.createDefault()
+	private var usersImpl = PswgUserDatabase.createDefault()
+	private var objectsImpl = PswgObjectDatabase.createDefault()
+	private var resourcesImpl = PswgResourceDatabase.createDefault()
+	
+	val config: PswgConfigDatabase
+		get() = configImpl
+	val users: PswgUserDatabase
+		get() = usersImpl
+	val objects: PswgObjectDatabase
+		get() = objectsImpl
+	val resources: PswgResourceDatabase
+		get() = resourcesImpl
 	
 	fun initialize(connectionString: String, databaseName: String) {
-		setupMongoLogging()
 		val client = MongoClients.create(connectionString)
 		val database = client.getDatabase(databaseName)
+		val databaseConfig = Database(database)
 		
-		this.database.element = database
+		val config = PswgConfigDatabaseMongo(databaseConfig.config.mongo)
+		val users = initTable(databaseConfig.users, defaultCreator = {PswgUserDatabase.createDefault()}, mariaInitializer = ::PswgUserDatabaseMaria, mongoInitializer = ::PswgUserDatabaseMongo)
+		val objects = initTable(databaseConfig.objects, defaultCreator = {PswgObjectDatabase.createDefault()}, mongoInitializer = ::PswgObjectDatabaseMongo)
+		val resources = initTable(databaseConfig.resources, defaultCreator = {PswgResourceDatabase.createDefault()}, mongoInitializer = ::PswgResourceDatabaseMongo)
+		
+		this.configImpl = config
+		this.usersImpl = users
+		this.objectsImpl = objects
+		this.resourcesImpl = resources
 	}
 	
-	private fun setupMongoLogging() {
-		var mongoLogger: Logger? = Logger.getLogger("com.mongodb")
-		while (mongoLogger != null) {
-			for (handler in mongoLogger.handlers) {
-				mongoLogger.removeHandler(handler)
-			}
-			if (mongoLogger.parent != null)
-				mongoLogger = mongoLogger.parent
-			else
-				break
-		}
-		mongoLogger?.addHandler(object : Handler() {
-			override fun publish(record: LogRecord) {
-				when (record.level) {
-					Level.INFO -> Log.i("MongoDB: %s", record.message)
-					Level.WARNING -> Log.w("MongoDB: %s", record.message)
-					Level.SEVERE -> Log.e("MongoDB: %s", record.message)
-					else -> Log.t("MongoDB: %s", record.message)
-				}
-			}
-			
-			override fun flush() {}
-			override fun close() {}
-		})
+	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {
+		if (table.isMariaDefined())
+			return mariaInitializer(table)
+		return mongoInitializer(table.mongo)
 	}
-	
-	private class DatabaseDelegate<T>(private val database: ObjectRef<MongoDatabase?>, private val collectionName: String, private var databaseSupplier: (MongoCollection<Document>?) -> T) {
-		
-		private var prevDatabase: MongoDatabase? = null
-		private var prevReturn: T = databaseSupplier(null)
-		
-		operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
-			val database = this.database.element
-			if (prevDatabase != database) {
-				this.prevDatabase = database
-				this.prevReturn = databaseSupplier(database?.getCollection(collectionName))
-			}
-			return prevReturn
-		}
-		
-	}
-	
-	private class ObjectRef<T: Any?>(var element: T)
 	
 }
