@@ -20,7 +20,6 @@ spawn_yav_17	YAVIN4	yav_world	AREA	0	-6966.8	73.0	-5730.2	0	1	a commoner	commone
 spawn_yav_18	YAVIN4	yav_world	AREA	0	-6911.3	73.0	-5736.3	-106	1	a commoner	commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation	0	0	0	900
 spawn_yav_19	YAVIN4	yav_world	AREA	0	-6893.0	73.0	-5743.4	0	1	a commoner	commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	6	0	-	idle	0	0	0	900
 spawn_yav_20	YAVIN4	yav_world	AREA	0	-6885.5	73.0	-5697.0	0	1	a rancher	farmer_rancher	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	6	0	-	npc_use_terminal_high	0	0	0	900
-spawn_yav_21	YAVIN4	yav_world	AREA	0	-6986.2	73.0	-5750.1	20	1	Jawa Junk Dealer	junk_jawa	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle	0	0	0	900
 spawn_yav_22	YAVIN4	yav_world	PATROL	0	-6883.3	73.0	-5685.0	45	1	a miner	miner	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yav_500	column	idle	0	0	0	900
 spawn_yav_23	YAVIN4	yav_world	AREA	0	-6912.8	73.0	-5736.7	74	1	Nore Brrea	nore_brrea_ice_cream	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle	0	0	0	900
 spawn_yav_24	YAVIN4	yav_world	AREA	0	-6872.8	73.0	-5686.3	-54	1	a Chiss male	patron_chiss_male	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle	0	0	0	900

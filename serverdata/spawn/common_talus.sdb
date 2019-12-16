@@ -922,7 +922,7 @@ spawn_tal_927	TALUS	tal_binayre_bunker	AREA	7	-5.8	-13.7	3.5	0	1	a Binayre pirat
 spawn_tal_928	TALUS	tal_binayre_bunker	AREA	7	-2.5	-13.7	-6.4	0	1	a Binayre ruffian	binayre_ruffian	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
 spawn_tal_929	TALUS	tal_binayre_bunker	AREA	8	3.2	-13.8	11.7	0	1	a Binayre pirate	binayre_pirate	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	3	LOITER	6	0	-	idle	0	0	0	600
 spawn_tal_930	TALUS	tal_binayre_bunker	AREA	9	15.7	-13.8	9.1	0	1	a Binayre smuggler	binayre_smuggler	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
-spawn_tal_931	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	binayre_swindler	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	1	LOITER	0	0	-	idle	0	0	0	600
+spawn_tal_931	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	binayre_swindler	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	1	LOITER	4	0	-	idle	0	0	0	600
 spawn_tal_932	TALUS	tal_binayre_bunker	AREA	10	13.7	-11.5	-20.9	0	1	a Binayre chief	binayre_chief	AGGRESSIVE	E	40	60	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
 spawn_tal_933	TALUS	tal_binayre_bunker	AREA	10	15.5	-13.8	-10.7	0	1	a Binayre swindler	binayre_swindler	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle	0	0	0	600
 spawn_tal_934	TALUS	tal_world	AREA	0	5567.6	102.0	-4079.8	0	1	a Binayre hooligan	binayre_hooligan	AGGRESSIVE	N	40	60	POI	Binayre Pirate Bunker	2	LOITER	4	0	-	idle	0	0	0	600

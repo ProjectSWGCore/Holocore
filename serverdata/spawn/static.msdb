@@ -49,8 +49,8 @@ gcw_presence_corellia_imperial.sdb	FALSE
 gcw_presence_corellia_neutral.sdb	TRUE
 gcw_presence_corellia_rebel.sdb	FALSE
 gcw_presence_naboo_imperial.sdb	FALSE
-gcw_presence_naboo_neutral.sdb	FALSE
-gcw_presence_naboo_rebel.sdb	TRUE
-gcw_presence_tatooine_imperial.sdb	TRUE
-gcw_presence_tatooine_neutral.sdb	FALSE
+gcw_presence_naboo_neutral.sdb	TRUE
+gcw_presence_naboo_rebel.sdb	FALSE
+gcw_presence_tatooine_imperial.sdb	FALSE
+gcw_presence_tatooine_neutral.sdb	TRUE
 gcw_presence_tatooine_rebel.sdb	FALSE

@@ -27,26 +27,26 @@ spawn_ror_24	RORI	ror_world	AREA	0	-4784.1	77.0	-2257.3	0	1	a thief	smuggler_pat
 spawn_ror_25	RORI	ror_world	AREA	0	-5126.3	80.0	-2249.3	0	1	Horace Korr (a retired Corellia Times reporter)	u13_horace_korr	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_ror_26	RORI	ror_world	AREA	0	-5120.2	80.0	-2514.5	0	1	Lieutenant Orden Tarc	u13_lieutenant_tarc	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_ror_27	RORI	ror_world	AREA	0	-5219.6	80.0	-2313.6	-173	1	Wernell Covington	u13_wernell_covington	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_28	RORI	ror_reb_outpost_medium_house	AREA	2	-9.1	0.6	3.7	92	1	General Ufwol (Rebel Pilot Trainer)	ufwol	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_29	RORI	ror_reb_outpost_shed1	AREA	4	4.3	0.1	3.2	-10	1	Vordin Sildor	vordin_sildor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_30	RORI	ror_reb_outpost_shed1	AREA	6	-4.1	0.1	-2.8	111	1	Raxa Binn	raxa_binn	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_31	RORI	ror_reb_outpost_small_house	AREA	3	5.7	0.7	0.9	-120	1	Booto Lubble	booto_lubble	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_32	RORI	ror_world	PATROL	0	3682.4	96.0	-6462.8	0	1	a CLL-8 binary load lifter	cll8_load_lifter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	PATROL	0	patrol_ror_1100	column	idle	0	0	0	600
-spawn_ror_33	RORI	ror_world	AREA	0	3664.7	96.0	-6427.2	-133	1	Staff Sergeant Levardio	pvp_bf_rebel_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_34	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	r4_droid	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
-spawn_ror_35	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	r5_droid	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
-spawn_ror_36	RORI	ror_world	AREA	0	3669.4	96.0	-6486.7	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_37	RORI	ror_world	AREA	0	3669.8	96.0	-6482.1	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_38	RORI	ror_world	AREA	0	3670.1	96.0	-6490.9	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_39	RORI	ror_world	AREA	0	3656.5	96.0	-6461.2	71	1	a Rebel First Lieutenant	rebel_first_lieutenant	ATTACKABLE	E	40	60	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_40	RORI	ror_world	AREA	0	3660.3	96.0	-6485.9	0	1	a Rebel First Lieutenant	rebel_first_lieutenant	ATTACKABLE	E	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
-spawn_ror_41	RORI	ror_world	AREA	0	3656.5	96.0	-6460.0	63	1	a Rebel Major	rebel_major	ATTACKABLE	E	40	60	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_42	RORI	ror_world	AREA	0	3684.7	96.0	-6460.8	-92	1	a Rebel recruiter	rebel_recruiter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_43	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
-spawn_ror_44	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
-spawn_ror_45	RORI	ror_restuss_starport	AREA	1	-6.1	80.0	-16.0	0	1	Kkrax	clone_kkrax	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_46	RORI	ror_world	PATROL	0	5404.4	84.0	6152.5	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	City	Restuss	1	PATROL	0	patrol_ror_1000	column	idle	0	0	0	600
-spawn_ror_47	RORI	ror_world	AREA	0	5241.6	80.0	6149.7	78	1	a Junk Dealer	junk_dealer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_28	RORI	ror_world	AREA	0	-5296.2	80.2	-2240.4	-36	1	Dender	junk_dender	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_29	RORI	ror_reb_outpost_medium_house	AREA	2	-9.1	0.6	3.7	92	1	General Ufwol (Rebel Pilot Trainer)	ufwol	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_30	RORI	ror_reb_outpost_shed1	AREA	4	4.3	0.1	3.2	-10	1	Vordin Sildor	vordin_sildor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_31	RORI	ror_reb_outpost_shed1	AREA	6	-4.1	0.1	-2.8	111	1	Raxa Binn	raxa_binn	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_32	RORI	ror_reb_outpost_small_house	AREA	3	5.7	0.7	0.9	-120	1	Booto Lubble	booto_lubble	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_33	RORI	ror_world	PATROL	0	3682.4	96.0	-6462.8	0	1	a CLL-8 binary load lifter	cll8_load_lifter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	PATROL	0	patrol_ror_1100	column	idle	0	0	0	600
+spawn_ror_34	RORI	ror_world	AREA	0	3664.7	96.0	-6427.2	-133	1	Staff Sergeant Levardio	pvp_bf_rebel_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_35	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	r4_droid	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
+spawn_ror_36	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	r5_droid	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
+spawn_ror_37	RORI	ror_world	AREA	0	3669.4	96.0	-6486.7	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
+spawn_ror_38	RORI	ror_world	AREA	0	3669.8	96.0	-6482.1	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
+spawn_ror_39	RORI	ror_world	AREA	0	3670.1	96.0	-6490.9	0	1	a Rebel commando	rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle	0	0	0	600
+spawn_ror_40	RORI	ror_world	AREA	0	3656.5	96.0	-6461.2	71	1	a Rebel First Lieutenant	rebel_first_lieutenant	ATTACKABLE	E	40	60	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_41	RORI	ror_world	AREA	0	3660.3	96.0	-6485.9	0	1	a Rebel First Lieutenant	rebel_first_lieutenant	ATTACKABLE	E	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
+spawn_ror_42	RORI	ror_world	AREA	0	3656.5	96.0	-6460.0	63	1	a Rebel Major	rebel_major	ATTACKABLE	E	40	60	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_43	RORI	ror_world	AREA	0	3684.7	96.0	-6460.8	-92	1	a Rebel recruiter	rebel_recruiter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_44	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
+spawn_ror_45	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle	0	0	0	600
+spawn_ror_46	RORI	ror_restuss_starport	AREA	1	-6.1	80.0	-16.0	0	1	Kkrax	clone_kkrax	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_ror_47	RORI	ror_world	PATROL	0	5404.4	84.0	6152.5	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	City	Restuss	1	PATROL	0	patrol_ror_1000	column	idle	0	0	0	600
 spawn_ror_48	RORI	ror_world	AREA	0	5310.8	80.0	6206.4	0	1	Marles Jacobe	restuss_marles_jacobe	INVULNERABLE	N	100	100	City	Restuss	1	LOITER	1	0	-	idle	0	0	0	600
 spawn_ror_49	RORI	ror_world	AREA	0	5398.0	82.0	6124.0	0	1	Emory	smuggler_fence_emory	INVULNERABLE	N	100	100	City	Restuss	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_50	RORI	ror_world	AREA	0	5427.5	80.0	6125.4	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	City	Restuss	1	LOITER	2	0	-	idle	0	0	0	600

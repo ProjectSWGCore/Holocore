@@ -26,7 +26,7 @@ spawn_end_23	ENDOR	end_world	AREA	0	3334.0	25.7	-3521.0	0	1	Alec	smuggler_fence_
 spawn_end_24	ENDOR	end_world	AREA	0	3346.5	25.7	-3501.8	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_end_25	ENDOR	end_world	AREA	0	3327.8	25.0	-3543.8	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_end_26	ENDOR	end_world	AREA	0	3309.6	24.4	-3518.2	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_end_27	ENDOR	end_world	AREA	0	3228.2	24.0	-3478.4	-98	1	Mensix Corp. Merchant	som_mustafarian_junk	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_end_27	ENDOR	end_world	AREA	0	3228.2	24.0	-3478.4	-98	1	a traveller	traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_end_28	ENDOR	end_world	PATROL	0	3260.0	24.0	-3466.7	-82	1	a technician	technician	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1100	column	idle	0	0	0	600
 spawn_end_29	ENDOR	end_world	AREA	0	3169.3	24.0	-3497.3	149	1	a traveller	traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_end_30	ENDOR	end_smuggler_outpost_house	AREA	1	-4.3	0.6	2.0	12	1	Galody	ig88_bothan_spy_01_galody	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle	0	0	0	600
