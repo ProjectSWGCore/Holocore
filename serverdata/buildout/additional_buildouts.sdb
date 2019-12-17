@@ -1364,5 +1364,13 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	BOOLEAN
 1362	RORI	object/tangible/content/shared_u13_ponda_gungan_statue_spawer.iff		-5360.0	80.0	-2291.0	0	ror_world	0	256	FALSE	
 1363	TATOOINE	object/static/particle/shared_particle_campfire_style_1.iff		3519.7	5.0	-4785.9	57	tat_world	0	256	TRUE	Mos Eisley
 1364	TATOOINE	object/static/particle/shared_particle_smoke.iff		4052.1	9.0	-4731.1	89	tat_world	0	256	TRUE	Mos Eisley
-1365	TATOOINE	object/static/vehicle/shared_static_swoop_bike.iff		3452.3	5.0	-4853.8	2	tat_world	0	128	TRUE	Mos Eisley
-1366	TATOOINE	object/static/vehicle/shared_static_speeder_bike.iff		3450.2	5.0	-4853.4	5	tat_world	0	128	TRUE	Mos Eisley
+1365	TATOOINE	object/static/vehicle/shared_static_swoop_bike.iff		3452.3	5.0	-4853.8	2	tat_world	0	256	TRUE	Mos Eisley
+1366	TATOOINE	object/static/vehicle/shared_static_speeder_bike.iff		3450.2	5.0	-4853.4	5	tat_world	0	256	TRUE	Mos Eisley
+1367	TATOOINE	object/static/vehicle/shared_static_sandcrawler.iff		2255.4	0.0	-4445.1	-45	tat_world	0	512	TRUE	Invasion - Jawa vs. Tusken
+1368	TATOOINE	object/static/structure/tatooine/shared_tent_house_tatooine_style_01.iff		2229.8	0.0	-4455.1	-100	tat_world	0	512	TRUE	Invasion - Jawa vs. Tusken
+1369	TATOOINE	object/static/structure/tatooine/shared_debris_tatt_drum_storage_2.iff		2231.1	0.0	-4449.5	118	tat_world	0	256	TRUE	Invasion - Jawa vs. Tusken
+1370	TATOOINE	object/static/structure/tatooine/shared_debris_tatt_crate_metal_1.iff		2230.7	0.0	-4448.6	172	tat_world	0	256	TRUE	Invasion - Jawa vs. Tusken
+1371	TATOOINE	object/static/structure/general/shared_campfire_burnt.iff		2240.6	0.0	-4451.4	-101	tat_world	0	256	TRUE	Invasion - Jawa vs. Tusken
+1372	TATOOINE	object/static/structure/general/shared_droid_lemedical_powerdown.iff		2232.1	0.0	-4450.6	20	tat_world	0	256	TRUE	Invasion - Jawa vs. Tusken
+1373	TATOOINE	object/static/structure/general/shared_trash_pile_s01.iff		2231.9	0.0	-4447.4	-60	tat_world	0	256	TRUE	Invasion - Jawa vs. Tusken
+1374	TATOOINE	object/static/particle/shared_particle_smoke.iff		2231.9	0.0	-4447.4	-60	tat_world	0	256	TRUE	

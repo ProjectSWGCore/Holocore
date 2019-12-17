@@ -260,6 +260,15 @@ spawn_tat_257	TATOOINE	tat_moseisley_medium_house5	AREA	3	-5.8	1.0	9.0	-2	1	an a
 spawn_tat_258	TATOOINE	tat_moseisley_medium_house7	AREA	3	-5.8	1.0	7.4	132	1	an Imperial recruiter	imp_recruiter	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	chassis_dealer_iv	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_260	TATOOINE	tat_moseisley_starport	AREA	7	56.0	-0.5	44.7	-151	1	Aurilian Contact	nexus_travel_01	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+																											
+spawn_tat_259	TATOOINE	tat_moseisley_starport	PATROL	4	-11.3	0.6	54.1	-145	1	an Ankura Gungan	gungan_ankura	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_16200	column	idle	0	0	0	600
+spawn_tat_259	TATOOINE	tat_world	PATROL	0	3661.7	5.0	-4799.8	119	1	an EG-6 power droid	eg6_power_droid	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_16300	column	idle	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	1	1.7	0.6	73.1	-28	1	a mountain villager	mountain_villager	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	4	2.5	0.6	51.6	-179	1	a smuggler	smuggler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	12	-59.1	2.6	40.0	96	1	a bartender	bartender	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	12	-45.8	2.6	33.9	-58	1	a noble	noble_male	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	12	-46.7	2.6	36.5	-132	1	a patron	patron_human_female_03	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_tat_259	TATOOINE	tat_moseisley_starport	AREA	12	-56.2	2.6	40.5	-104	1	an artisan	artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_261	TATOOINE	tat_moseisley_theater	AREA	1	0.2	0.6	-3.6	0	1	a patron	patron_human_female_02	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_tat_262	TATOOINE	tat_moseisley_theater	AREA	1	7.0	0.6	-4.0	-178	1	a storyteller vendor	storyteller_vendor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_263	TATOOINE	tat_moseisley_theater	AREA	8	21.9	2.1	64.5	0	1	a theater manager	quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle	0	0	0	600
@@ -541,8 +550,8 @@ spawn_tat_538	TATOOINE	tat_world	AREA	0	3380.6	5.0	-4850.7	38	1	a bounty hunter	
 spawn_tat_539	TATOOINE	tat_world	AREA	0	3418.0	5.0	-4849.3	23	1	an artisan	artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_tat_540	TATOOINE	tat_world	AREA	0	3455.1	5.0	-4861.0	89	1	an explorer	explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_tat_541	TATOOINE	tat_world	AREA	0	3453.8	5.0	-4859.4	115	1	a Collector	novice_collector	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_tat_542	TATOOINE	tat_world	AREA	0	3485.4	5.5	-4959.3	178	1	a Collector	novice_collector	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_tat_543	TATOOINE	tat_world	AREA	0	3502.7	5.5	-4939.9	-143	1	a settler	settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_tat_542	TATOOINE	tat_world	AREA	0	3515.2	5.5	-4957.2	127	1	a Collector	novice_collector	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_tat_543	TATOOINE	tat_world	AREA	0	3502.3	5.5	-4940.3	-143	1	a settler	settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_tat_544	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4884.3	78	1	an EG-6 power droid	eg6_power_droid	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle	0	0	0	600
 spawn_tat_545	TATOOINE	tat_world	AREA	0	3401.0	5.0	-4978.2	128	1	an explorer	explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_tat_546	TATOOINE	tat_moseisley_theater	AREA	1	-11.7	0.6	-8.8	80	1	a noble	noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
