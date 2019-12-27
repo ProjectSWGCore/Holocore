@@ -271,11 +271,11 @@ spawn_ror_268	RORI	ror_world	AREA	0	-6731.0	81.0	1082.0	0	1	Garyn's pirate	garyn
 spawn_ror_269	RORI	ror_world	AREA	0	1158.0	90.0	691.0	0	1	Garyn's pirate	garyn_pirate	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
 spawn_ror_270	RORI	ror_world	AREA	0	3012.0	81.0	-3653.0	0	1	Garyn's pirate	garyn_pirate	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
 spawn_ror_271	RORI	ror_world	AREA	0	6792.7	76.0	3022.6	0	1	Garyn's prowler	garyn_prowler	AGGRESSIVE	N	40	60	Outback	Rori	2	LOITER	6	0	-	idle	0	0	0	900
-spawn_ror_272	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's prowler	garyn_prowler	AGGRESSIVE	N	40	60	Outback	Rori	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_272	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's prowler	garyn_prowler	AGGRESSIVE	N	40	60	Outback	Rori	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_ror_273	RORI	ror_world	AREA	0	-2145.0	76.0	635.0	0	1	Garyn's raider	garyn_raider	AGGRESSIVE	N	40	60	Outback	Rori	1	LOITER	2	0	-	idle	0	0	0	900
 spawn_ror_274	RORI	ror_world	AREA	0	-448.0	77.0	3242.0	0	1	Garyn's raider	garyn_raider	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
-spawn_ror_275	RORI	ror_world	AREA	0	-795.4	80.3	-4130.6	0	1	Garyn's raider	garyn_raider	AGGRESSIVE	N	40	60	Outback	Rori	4	LOITER	8	0	-	idle	0	0	0	900
-spawn_ror_276	RORI	ror_world	AREA	0	6812.4	76.0	3007.8	0	1	Garyn's thief	garyn_thief	AGGRESSIVE	N	40	60	Outback	Rori	3	LOITER	9	0	-	idle	0	0	0	900
+spawn_ror_275	RORI	ror_world	AREA	0	-795.4	80.3	-4130.6	0	1	Garyn's raider	garyn_raider	AGGRESSIVE	N	40	60	Outback	Rori	3	LOITER	8	0	-	idle	0	0	0	900
+spawn_ror_276	RORI	ror_world	AREA	0	6812.4	76.0	3007.8	0	1	Garyn's thief	garyn_thief	AGGRESSIVE	N	40	60	Outback	Rori	2	LOITER	9	0	-	idle	0	0	0	900
 spawn_ror_277	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's thief	garyn_thief	AGGRESSIVE	N	40	60	Outback	Rori	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_278	RORI	ror_world	AREA	0	-2637.0	81.0	-3211.0	0	1	Garyn's thief	garyn_thief	AGGRESSIVE	N	40	60	Outback	Rori	1	LOITER	2	0	-	idle	0	0	0	900
 spawn_ror_279	RORI	ror_world	AREA	0	-2729.0	79.0	4495.0	0	1	Garyn's thief	garyn_thief	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
@@ -296,26 +296,26 @@ spawn_ror_293	RORI	ror_world	AREA	0	983.6	125.9	7297.8	0	1	a Black Sun Hitman	gl
 spawn_ror_294	RORI	ror_world	AREA	0	983.8	119.2	7268.5	0	1	a Black Sun Hitman	global_blksun_hitman	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
 spawn_ror_295	RORI	ror_world	AREA	0	6538.1	108.0	-4751.0	90	1	an Imperial surface Marshall	imp_surface_marshall	ATTACKABLE	E	40	60	Outback	Rori	1	IDLE	0	0	-	idle	0	0	0	900
 spawn_ror_296	RORI	ror_world	AREA	0	6533.5	108.0	-4763.1	0	1	an Imperial trooper	imp_trooper	ATTACKABLE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_297	RORI	ror_world	AREA	0	-5.0	77.0	1992.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_298	RORI	ror_world	AREA	0	-3.4	77.7	1961.1	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_299	RORI	ror_world	AREA	0	37.3	77.8	1964.7	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_300	RORI	ror_world	AREA	0	-31.5	77.6	1991.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_301	RORI	ror_world	AREA	0	-61.8	78.2	2054.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_302	RORI	ror_world	AREA	0	-5.1	76.3	2016.6	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_303	RORI	ror_world	AREA	0	-34.5	77.8	2065.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_304	RORI	ror_world	AREA	0	-57.8	77.7	1970.8	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_305	RORI	ror_world	AREA	0	86.5	78.4	1982.8	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_306	RORI	ror_world	AREA	0	29.4	77.6	1903.7	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_307	RORI	ror_world	AREA	0	-24.2	77.3	1979.6	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_308	RORI	ror_world	AREA	0	72.0	77.5	1950.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_ror_309	RORI	ror_world	AREA	0	0.0	77.0	1973.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_297	RORI	ror_world	AREA	0	-5.0	77.0	1992.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_298	RORI	ror_world	AREA	0	-3.4	77.7	1961.1	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_299	RORI	ror_world	AREA	0	37.3	77.8	1964.7	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_300	RORI	ror_world	AREA	0	-31.5	77.6	1991.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_301	RORI	ror_world	AREA	0	-61.8	78.2	2054.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_302	RORI	ror_world	AREA	0	-5.1	76.3	2016.6	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_303	RORI	ror_world	AREA	0	-34.5	77.8	2065.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_304	RORI	ror_world	AREA	0	-57.8	77.7	1970.8	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_305	RORI	ror_world	AREA	0	86.5	78.4	1982.8	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_306	RORI	ror_world	AREA	0	29.4	77.6	1903.7	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_307	RORI	ror_world	AREA	0	-24.2	77.3	1979.6	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_308	RORI	ror_world	AREA	0	72.0	77.5	1950.5	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
+spawn_ror_309	RORI	ror_world	AREA	0	0.0	77.0	1973.0	0	1	a Rebel scout	itp_thrawn_rebel_scout	ATTACKABLE	E	86	89	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	600
 spawn_ror_310	RORI	ror_world	AREA	0	-429.5	75.9	-5431.8	0	1	a domestic bearded jax	jax_bearded_domestic	ATTACKABLE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
 spawn_ror_311	RORI	ror_world	AREA	0	3475.4	80.3	-2142.1	0	1	a screaming kai tok	kai_tok_screaming	ATTACKABLE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
-spawn_ror_312	RORI	ror_world	AREA	0	6792.2	76.3	2985.7	0	1	Enraged Miner	miner_enraged	ATTACKABLE	N	40	60	Outback	Rori	4	LOITER	12	0	-	idle	0	0	0	900
+spawn_ror_312	RORI	ror_world	AREA	0	6792.2	76.3	2985.7	0	1	Enraged Miner	miner_enraged	ATTACKABLE	N	40	60	Outback	Rori	2	LOITER	12	0	-	idle	0	0	0	900
 spawn_ror_313	RORI	ror_world	AREA	0	-1700.0	76.0	6127.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_314	RORI	ror_world	AREA	0	-2894.0	78.0	2575.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_315	RORI	ror_world	AREA	0	-4506.0	77.0	1081.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_316	RORI	ror_world	AREA	0	-985.0	0.0	-303.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	4	TURN	8	0	-	idle	0	0	0	600
+spawn_ror_316	RORI	ror_world	AREA	0	-985.0	0.0	-303.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	2	TURN	8	0	-	idle	0	0	0	600
 spawn_ror_317	RORI	ror_world	AREA	0	1098.0	78.0	3830.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_318	RORI	ror_world	AREA	0	3809.0	83.0	-4427.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_319	RORI	ror_world	AREA	0	956.0	76.0	4058.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
@@ -323,8 +323,8 @@ spawn_ror_320	RORI	ror_world	AREA	0	960.0	78.0	6539.0	0	1	Enraged Miner	miner_en
 spawn_ror_321	RORI	ror_world	AREA	0	981.0	112.0	7566.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_322	RORI	ror_world	AREA	0	-763.8	81.1	-4111.5	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	LOITER	5	0	-	idle	0	0	0	900
 spawn_ror_323	RORI	ror_world	AREA	0	-766.0	80.0	-4104.0	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_324	RORI	ror_world	AREA	0	-759.9	81.2	-4115.5	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	2	LOITER	4	0	-	idle	0	0	0	900
-spawn_ror_325	RORI	ror_world	AREA	0	-768.9	81.2	-4106.6	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	3	LOITER	6	0	-	idle	0	0	0	900
+spawn_ror_324	RORI	ror_world	AREA	0	-759.9	81.2	-4115.5	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	1	LOITER	4	0	-	idle	0	0	0	900
+spawn_ror_325	RORI	ror_world	AREA	0	-768.9	81.2	-4106.6	0	1	Enraged Miner	miner_enraged	AGGRESSIVE	N	40	60	Outback	Rori	2	LOITER	6	0	-	idle	0	0	0	900
 spawn_ror_326	RORI	ror_world	AREA	0	5923.9	76.2	-2603.7	0	1	a wood mite	mite_wood	ATTACKABLE	N	40	60	Outback	Rori	1	TURN	0	0	-	idle	0	0	0	900
 spawn_ror_327	RORI	ror_world	AREA	0	5937.0	75.9	-2600.6	90	1	a wood mite matriarch	mite_wood_matriarch	ATTACKABLE	N	40	60	Outback	Rori	1	IDLE	0	0	-	idle	0	0	0	900
 spawn_ror_328	RORI	ror_world	AREA	0	5052.9	75.6	4646.8	0	1	a Narmle Militia Commander	narmle_commander	ATTACKABLE	N	40	60	Outback	Rori	1	LOITER	2	0	-	idle	0	0	0	900
@@ -591,7 +591,7 @@ spawn_ror_588	RORI	ror_hyperdrive_research_facility	AREA	9	-56.8	-20.0	76.4	0	1	
 spawn_ror_589	RORI	ror_hyperdrive_research_facility	AREA	9	-56.8	-20.0	76.4	0	1	an Imperial Colonel	imp_colonel	ATTACKABLE	E	40	60	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_590	RORI	ror_hyperdrive_research_facility	AREA	9	-66.6	-20.0	77.1	0	1	a Stormtrooper Medic	stormtrooper_medic	ATTACKABLE	E	40	60	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_591	RORI	ror_hyperdrive_research_facility	AREA	9	-66.6	-20.0	77.1	0	1	a Stormtrooper Medic	stormtrooper_medic	ATTACKABLE	E	40	60	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_592	RORI	ror_world	AREA	0	-1119.9	77.8	4543.2	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_ror_592	RORI	ror_world	AREA	0	-1119.9	77.8	4543.2	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_593	RORI	ror_world	AREA	0	-1110.0	75.9	4418.0	0	1	Jeanna	smuggler_fence_jeanna	INVULNERABLE	N	100	100	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_594	RORI	ror_world	AREA	0	-1137.0	79.3	4412.6	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_595	RORI	ror_world	AREA	0	-1112.1	77.3	4453.1	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle	0	0	0	600
@@ -620,8 +620,8 @@ spawn_ror_617	RORI	ror_imp_encampment_police_station	AREA	6	17.4	1.0	-20.9	0	1	a
 spawn_ror_618	RORI	ror_imp_encampment_police_station	AREA	8	-11.4	1.0	-20.1	0	1	an Imperial Private	imp_private	ATTACKABLE	N	40	60	POI	Imperial Encampment	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_619	RORI	ror_imp_encampment_police_station	AREA	8	-11.4	1.0	-20.1	0	1	an Imperial Private	imp_private	ATTACKABLE	N	40	60	POI	Imperial Encampment	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_620	RORI	ror_world	AREA	0	-5565.4	76.0	-5632.6	0	1	an Assault Trooper	imp_assault_trooper	ATTACKABLE	N	40	60	POI	Imperial Encampment	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_621	RORI	ror_world	AREA	0	-5530.2	76.0	-5662.9	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Encampment	1	LOITER	4	0	-	idle	0	0	0	900
-spawn_ror_622	RORI	ror_world	AREA	0	-5600.1	76.0	-5661.3	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Encampment	1	LOITER	4	0	-	idle	0	0	0	900
+spawn_ror_621	RORI	ror_world	AREA	0	-5530.2	76.0	-5662.9	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Encampment	1	LOITER	4	0	-	idle	0	0	0	900
+spawn_ror_622	RORI	ror_world	AREA	0	-5600.1	76.0	-5661.3	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Encampment	1	LOITER	4	0	-	idle	0	0	0	900
 spawn_ror_623	RORI	ror_world	AREA	0	-5577.0	75.5	-5787.0	0	1	Carlton	smuggler_fence_carlton	INVULNERABLE	N	100	100	POI	Imperial Encampment	1	TURN	0	0	-	idle	0	0	0	600
 spawn_ror_624	RORI	ror_world	AREA	0	-5601.6	75.6	-5773.1	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	POI	Imperial Encampment	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_625	RORI	ror_world	PATROL	0	-5607.8	75.6	-5794.4	0	1	a thief	smuggler_patrol_thief_7	ATTACKABLE	N	40	60	POI	Imperial Encampment	1	PATROL	0	patrol_ror_100	column	idle	0	0	0	600
@@ -672,19 +672,19 @@ spawn_ror_669	RORI	ror_world	AREA	0	7271.7	82.4	105.9	0	1	a Rebel commando	itp_t
 spawn_ror_670	RORI	ror_world	AREA	0	7267.8	79.8	119.6	0	1	a Rebel commando	itp_thrawn_rebel_commando	ATTACKABLE	E	86	89	POI	Kobola Bunker	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_671	RORI	ror_world	AREA	0	7265.7	83.7	93.0	0	1	a Rebel commando	itp_thrawn_rebel_commando	ATTACKABLE	E	86	89	POI	Kobola Bunker	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_ror_672	RORI	ror_world	AREA	0	7358.2	80.9	106.6	0	1	a Kobola guard	kobola_guard	ATTACKABLE	N	40	60	POI	Kobola Bunker	1	TURN	0	0	-	idle	0	0	0	600
-spawn_ror_673	RORI	ror_world	AREA	0	748.8	85.5	-2090.7	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_674	RORI	ror_world	AREA	0	765.9	82.7	-2086.3	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	3	LOITER	9	0	-	idle	0	0	0	600
-spawn_ror_675	RORI	ror_world	AREA	0	772.2	84.1	-2068.5	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_676	RORI	ror_world	AREA	0	770.1	82.3	-2084.4	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	3	LOITER	9	0	-	idle	0	0	0	600
-spawn_ror_677	RORI	ror_world	AREA	0	752.1	85.7	-2082.8	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_678	RORI	ror_world	AREA	0	781.5	82.6	-2073.7	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_679	RORI	ror_world	AREA	0	781.8	81.4	-2048.4	0	1	a female squall	squall_female	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	3	LOITER	9	0	-	idle	0	0	0	600
-spawn_ror_680	RORI	ror_world	AREA	0	790.6	78.9	-2036.8	0	1	a male squall	squall_male	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_681	RORI	ror_world	AREA	0	785.7	81.1	-2059.9	0	1	a vicious squall	squall_vicious	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	4	LOITER	12	0	-	idle	0	0	0	600
+spawn_ror_673	RORI	ror_world	AREA	0	748.8	85.5	-2090.7	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_674	RORI	ror_world	AREA	0	765.9	82.7	-2086.3	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	9	0	-	idle	0	0	0	600
+spawn_ror_675	RORI	ror_world	AREA	0	772.2	84.1	-2068.5	0	1	a hunter	hunter_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_676	RORI	ror_world	AREA	0	770.1	82.3	-2084.4	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	9	0	-	idle	0	0	0	600
+spawn_ror_677	RORI	ror_world	AREA	0	752.1	85.7	-2082.8	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_678	RORI	ror_world	AREA	0	781.5	82.6	-2073.7	0	1	a poacher	poacher_talus	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_679	RORI	ror_world	AREA	0	781.8	81.4	-2048.4	0	1	a female squall	squall_female	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	9	0	-	idle	0	0	0	600
+spawn_ror_680	RORI	ror_world	AREA	0	790.6	78.9	-2036.8	0	1	a male squall	squall_male	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_681	RORI	ror_world	AREA	0	785.7	81.1	-2059.9	0	1	a vicious squall	squall_vicious	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	3	LOITER	12	0	-	idle	0	0	0	600
 spawn_ror_682	RORI	ror_world	AREA	0	773.6	81.9	-2085.0	-138	1	Tombl Blaus	tombl_blaus_ice_cream	INVULNERABLE	N	100	100	POI	Poacher vs. Creature Battle	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_ror_683	RORI	ror_world	AREA	0	735.8	89.2	-2074.9	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	3	LOITER	9	0	-	idle	0	0	0	600
-spawn_ror_684	RORI	ror_world	AREA	0	722.2	91.2	-2076.5	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_ror_685	RORI	ror_world	AREA	0	714.6	93.6	-2063.5	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_683	RORI	ror_world	AREA	0	735.8	89.2	-2074.9	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	2	LOITER	9	0	-	idle	0	0	0	600
+spawn_ror_684	RORI	ror_world	AREA	0	722.2	91.2	-2076.5	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
+spawn_ror_685	RORI	ror_world	AREA	0	714.6	93.6	-2063.5	0	1	a vrobal	vrobal	ATTACKABLE	N	40	60	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle	0	0	0	600
 spawn_ror_686	RORI	ror_torton_cave	AREA	1	1.3	-3.2	-3.3	-1	1	a juvenile pygmy torton	torton_pygmy_juvenile	AGGRESSIVE	N	40	60	POI	Pygmy Torton Cave	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_ror_687	RORI	ror_torton_cave	AREA	10	-30.3	-71.7	-141.2	-28	1	a mature pygmy torton	torton_pygmy_mature	AGGRESSIVE	N	40	60	POI	Pygmy Torton Cave	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_ror_688	RORI	ror_torton_cave	AREA	11	-89.8	-93.7	-114.9	130	1	a torton pygmy matriarch	torton_pygmy_matriarch	AGGRESSIVE	E	40	60	POI	Pygmy Torton Cave	1	IDLE	0	0	-	idle	0	0	0	600

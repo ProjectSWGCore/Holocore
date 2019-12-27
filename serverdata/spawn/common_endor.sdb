@@ -447,7 +447,7 @@ spawn_end_444	ENDOR	end_jinda_cave	AREA	11	-98.9	-47.0	-83.7	0	1	a Jinda elder w
 spawn_end_445	ENDOR	end_jinda_cave	AREA	11	-112.0	-46.7	-86.6	0	1	a Jinda worker	jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_446	ENDOR	end_jinda_cave	AREA	11	-97.8	-30.9	-88.9	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_447	ENDOR	end_jinda_cave	AREA	11	-102.9	-30.9	-91.0	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_448	ENDOR	end_jinda_cave	AREA	11	-138.6	-45.8	-82.3	0	1	a skilled Jinda worker	skilled_jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_448	ENDOR	end_jinda_cave	AREA	11	-138.6	-45.8	-82.3	0	1	a skilled Jinda worker	jinda_worker_skilled	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_449	ENDOR	end_jinda_cave	AREA	16	-107.3	-50.1	-27.9	0	1	a Jinda veteran	jinda_veteran	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_450	ENDOR	end_jinda_cave	AREA	16	-115.8	-50.0	-27.5	0	1	a Jinda warrior	jinda_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_451	ENDOR	end_jinda_cave	AREA	16	-110.7	-49.7	-34.4	0	1	a seasoned Jinda warrior	seasoned_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
@@ -465,20 +465,20 @@ spawn_end_462	ENDOR	end_jinda_cave	AREA	20	-15.6	-26.8	-66.9	0	1	a Jinda tribesm
 spawn_end_463	ENDOR	end_jinda_cave	AREA	20	-7.9	-27.0	-80.8	0	1	a Jinda warrior	jinda_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_464	ENDOR	end_jinda_cave	AREA	20	-9.4	-26.8	-66.0	0	1	a Jinda worker	jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_465	ENDOR	end_jinda_cave	AREA	21	-28.4	-29.7	-77.4	0	1	a Jinda elder	jinda_elder	ATTACKABLE	E	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_466	ENDOR	end_jinda_cave	AREA	21	-30.0	-27.5	-67.4	0	1	a skilled Jinda worker	skilled_jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_467	ENDOR	end_jinda_cave	AREA	22	-7.6	-36.1	-96.6	0	1	a hardened Jinda warrior	hardened_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_466	ENDOR	end_jinda_cave	AREA	21	-30.0	-27.5	-67.4	0	1	a skilled Jinda worker	jinda_worker_skilled	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_467	ENDOR	end_jinda_cave	AREA	22	-7.6	-36.1	-96.6	0	1	a hardened Jinda warrior	jinda_warrior_hardened	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_468	ENDOR	end_jinda_cave	AREA	22	-24.5	-59.9	-106.5	0	1	a Jinda elder worker	jinda_elder_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_469	ENDOR	end_jinda_cave	AREA	22	-15.7	-36.0	-105.4	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_470	ENDOR	end_jinda_cave	AREA	22	-40.0	-36.8	-111.0	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_471	ENDOR	end_jinda_cave	AREA	22	-64.3	-44.8	-113.0	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_472	ENDOR	end_jinda_cave	AREA	22	-31.7	-59.8	-114.3	0	1	a skilled Jinda worker	skilled_jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_472	ENDOR	end_jinda_cave	AREA	22	-31.7	-59.8	-114.3	0	1	a skilled Jinda worker	jinda_worker_skilled	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_473	ENDOR	end_jinda_cave	AREA	26	-1.7	-59.9	-85.6	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_474	ENDOR	end_jinda_cave	AREA	26	9.9	-61.1	-96.6	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_475	ENDOR	end_jinda_cave	AREA	26	-0.3	-63.1	-107.4	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_476	ENDOR	end_jinda_cave	AREA	27	42.0	-60.8	-101.0	0	1	a hardened Jinda warrior	hardened_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_477	ENDOR	end_jinda_cave	AREA	27	28.5	-60.6	-100.1	0	1	a hardened Jinda warrior	hardened_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_478	ENDOR	end_jinda_cave	AREA	27	50.6	-58.6	-77.8	0	1	a hardened Jinda warrior	hardened_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_479	ENDOR	end_jinda_cave	AREA	27	50.2	-58.2	-90.7	0	1	a hardened Jinda warrior	hardened_jinda_warrior	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_476	ENDOR	end_jinda_cave	AREA	27	42.0	-60.8	-101.0	0	1	a hardened Jinda warrior	jinda_warrior_hardened	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_477	ENDOR	end_jinda_cave	AREA	27	28.5	-60.6	-100.1	0	1	a hardened Jinda warrior	jinda_warrior_hardened	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_478	ENDOR	end_jinda_cave	AREA	27	50.6	-58.6	-77.8	0	1	a hardened Jinda warrior	jinda_warrior_hardened	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_479	ENDOR	end_jinda_cave	AREA	27	50.2	-58.2	-90.7	0	1	a hardened Jinda warrior	jinda_warrior_hardened	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_480	ENDOR	end_jinda_cave	AREA	27	55.3	-57.9	-87.3	0	1	an archaic Jinda ritualist	jinda_archaic_ritualist	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_481	ENDOR	end_jinda_cave	AREA	27	37.5	-61.4	-114.3	0	1	a Jinda chief	jinda_chief	AGGRESSIVE	B	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_482	ENDOR	end_jinda_cave	AREA	27	30.7	-61.2	-108.0	0	1	a Jinda cub	jinda_cub	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
@@ -517,8 +517,8 @@ spawn_end_514	ENDOR	end_jinda_cave	AREA	9	-112.6	-45.9	-112.8	0	1	a masterful Ji
 spawn_end_515	ENDOR	end_jinda_cave	AREA	9	-91.5	-63.1	-118.8	0	1	a masterful Jinda warrior	jinda_masterful_warrior	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_516	ENDOR	end_jinda_cave	AREA	9	-86.0	-64.1	-109.6	0	1	a Jinda matriarch	jinda_matriarch	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_517	ENDOR	end_jinda_cave	AREA	9	-85.4	-63.9	-119.5	0	1	a Jinda veteran	jinda_veteran	AGGRESSIVE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_518	ENDOR	end_jinda_cave	AREA	9	-72.8	-62.7	-110.0	0	1	a skilled Jinda worker	skilled_jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_519	ENDOR	end_jinda_cave	AREA	9	-109.3	-61.6	-108.8	0	1	a skilled Jinda worker	skilled_jinda_worker	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_518	ENDOR	end_jinda_cave	AREA	9	-72.8	-62.7	-110.0	0	1	a skilled Jinda worker	jinda_worker_skilled	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_519	ENDOR	end_jinda_cave	AREA	9	-109.3	-61.6	-108.8	0	1	a skilled Jinda worker	jinda_worker_skilled	ATTACKABLE	N	70	85	POI	Jinda Ritualist's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_520	ENDOR	end_korga_cave	AREA	1	25.2	-27.5	-7.8	0	1	a Korga adept	korga_adept	AGGRESSIVE	N	70	85	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_521	ENDOR	end_korga_cave	AREA	10	49.9	-48.8	-102.9	0	1	an enraged Korga	korga_enraged	AGGRESSIVE	N	70	85	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_522	ENDOR	end_korga_cave	AREA	11	83.9	-46.3	-138.6	0	1	a crafty Korga scout	konga_crafty_scout	AGGRESSIVE	N	70	85	POI	Korga Cave	1	TURN	0	0	-	idle	0	0	0	600
@@ -543,11 +543,11 @@ spawn_end_540	ENDOR	end_world	AREA	0	-4645.0	88.8	-2163.0	0	1	Quinton	smuggler_f
 spawn_end_541	ENDOR	end_world	AREA	0	-4669.7	98.0	-2173.3	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle	0	0	0	600
 spawn_end_542	ENDOR	end_world	AREA	0	-4654.4	94.9	-2140.4	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle	0	0	0	600
 spawn_end_543	ENDOR	end_world	AREA	0	-4612.0	73.7	-2184.0	0	1	a mercenary	smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_end_544	ENDOR	end_marauder_orphans_cave	AREA	1	-12.1	-5.8	-7.3	0	1	a feral Marauder	feral_marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_544	ENDOR	end_marauder_orphans_cave	AREA	1	-12.1	-5.8	-7.3	0	1	a feral Marauder	marauder_feral	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_545	ENDOR	end_marauder_orphans_cave	AREA	11	78.7	-46.6	-142.3	0	1	a frenzied Marauder	marauder_frenzied	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_546	ENDOR	end_marauder_orphans_cave	AREA	2	48.1	-48.5	-63.9	0	1	a Marauder	marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_547	ENDOR	end_marauder_orphans_cave	AREA	4	68.3	-75.4	-64.3	0	1	a blood-crazed plains Marauder	blood_crazed_plains_marauder	AGGRESSIVE	N	70	90	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
-spawn_end_548	ENDOR	end_marauder_orphans_cave	AREA	4	91.5	-76.0	-68.1	0	1	a grassland blood Marauder	grassland_blood_marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_547	ENDOR	end_marauder_orphans_cave	AREA	4	68.3	-75.4	-64.3	0	1	a blood-crazed plains Marauder	marauder_blood_crazed_plains	AGGRESSIVE	N	70	90	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_548	ENDOR	end_marauder_orphans_cave	AREA	4	91.5	-76.0	-68.1	0	1	a grassland blood Marauder	marauder_grassland_blood	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_549	ENDOR	end_marauder_orphans_cave	AREA	5	92.1	-46.6	-110.5	0	1	a Marauder	marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_550	ENDOR	end_marauder_orphans_cave	AREA	8	131.1	-66.3	-97.0	0	1	a Marauder	marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600
 spawn_end_551	ENDOR	end_marauder_orphans_cave	AREA	8	130.8	-66.2	-119.1	0	1	a frenzied Marauder	marauder_frenzied	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle	0	0	0	600

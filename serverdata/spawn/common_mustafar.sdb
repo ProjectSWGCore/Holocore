@@ -1,7 +1,7 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
 spawn_mus_1	MUSTAFAR	mus_mensix	AREA	11	-104.00	10.80	126.60	-121	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_2	MUSTAFAR	mus_world	AREA	0	-2678.00	130.96	-807.00	0	1	an enthralled kubaza beetle	som_beetle_kubaza_enthralled	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_mus_2	MUSTAFAR	mus_world	AREA	0	-2678.00	130.96	-807.00	0	1	an enthralled kubaza beetle	beetle_kubaza_enthralled	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_mus_3	MUSTAFAR	mus_world	AREA	0	-1563.53	85.4422	193.51	0	1	a Blackguard minion	som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_mus_4	MUSTAFAR	mus_world	AREA	0	-1566.96	85.4422	230.10	0	1	a Blackguard minion	som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_mus_5	MUSTAFAR	mus_world	AREA	0	-1536.69	82	211.29	0	1	a Blackguard minion	som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	20	0	-	idle	0	0	0	600
@@ -20,10 +20,10 @@ spawn_mus_17	MUSTAFAR	mus_world	AREA	0	-1537.66	84.7197	189.36	0	1	a Blackguard 
 spawn_mus_18	MUSTAFAR	mus_world	AREA	0	-1528.56	84.5632	191.78	0	1	a Blackguard wilder	som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_mus_19	MUSTAFAR	mus_world	AREA	0	-1501.61	94.2824	261.41	0	1	a Blackguard wilder	som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_mus_20	MUSTAFAR	mus_world	AREA	0	-1494.10	94.2824	258.30	0	1	a Blackguard wilder	som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_21	MUSTAFAR	mus_world	AREA	0	-614.00	70.82	-874.00	0	1	a Blistmok Shrieker	som_blistmok_shrieker	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_22	MUSTAFAR	mus_world	AREA	0	3035.31	128.70	1478.98	0	1	a trained blistmok	som_blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	30	0	-	idle	0	0	0	600
-spawn_mus_23	MUSTAFAR	mus_world	AREA	0	3164.63	128.70	1695.51	0	1	a trained blistmok	som_blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	30	0	-	idle	0	0	0	600
-spawn_mus_24	MUSTAFAR	mus_world	PATROL	0	3176.43	205.96	1088.50	0	1	a trained blistmok	som_blistmok_trained	AGGRESSIVE	N	80	85	-	-	3	PATROL	0	0	column	idle	0	0	0	600
+spawn_mus_21	MUSTAFAR	mus_world	AREA	0	-614.00	70.82	-874.00	0	1	a Blistmok Shrieker	blistmok_shrieker	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_mus_22	MUSTAFAR	mus_world	AREA	0	3035.31	128.70	1478.98	0	1	a trained blistmok	blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	30	0	-	idle	0	0	0	600
+spawn_mus_23	MUSTAFAR	mus_world	AREA	0	3164.63	128.70	1695.51	0	1	a trained blistmok	blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	30	0	-	idle	0	0	0	600
+spawn_mus_24	MUSTAFAR	mus_world	PATROL	0	3176.43	205.96	1088.50	0	1	a trained blistmok	blistmok_trained	AGGRESSIVE	N	80	85	-	-	3	PATROL	0	0	column	idle	0	0	0	600
 spawn_mus_25	MUSTAFAR	mus_world	AREA	0	-901.61	67.85	-329.38	0	1	Ura Jen	som_blistmok_urajen	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_mus_26	MUSTAFAR	mus_world	AREA	0	-1340.37	83.3481	359.22	0	1	Colonel Narl	som_col_narl	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_mus_27	MUSTAFAR	mus_mensix	AREA	5	-9.50	10.80	52.60	90	1	Chief Glost	som_chief_glost	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
@@ -87,7 +87,7 @@ spawn_mus_84	MUSTAFAR	mus_world	AREA	0	2454.82	58.07	99.50	0	1	missing	som_dying
 spawn_mus_85	MUSTAFAR	mus_world	AREA	0	2451.75	58.07	96.30	0	1	missing	som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_mus_86	MUSTAFAR	mus_world	AREA	0	2450.55	58.31	79.04	0	1	missing	som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_mus_87	MUSTAFAR	mus_world	AREA	0	2467.25	58.07	98.11	0	1	missing	som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad	0	0	0	600
-spawn_mus_88	MUSTAFAR	mus_world	AREA	0	-1558.00	72.35	-2292.00	0	1	a Smoldering Lava Flea	som_flea_lava_smoldering	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
+spawn_mus_88	MUSTAFAR	mus_world	AREA	0	-1558.00	72.35	-2292.00	0	1	a Smoldering Lava Flea	flea_lava_smoldering	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_mus_89	MUSTAFAR	mus_world	AREA	0	-2517.36	294	1471.09	0	1	Foreman Nurfa Laz'op	som_foreman_nurfa	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
 spawn_mus_90	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	som_foreman_chivos	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_mus_91	MUSTAFAR	mus_mensix	AREA	5	-13.50	10.80	35.00	180	1	Foreman Donko Jen	som_foreman_donko	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
@@ -114,7 +114,7 @@ spawn_mus_111	MUSTAFAR	mus_world	AREA	0	315.82	116.29	-2506.71	0	1	Corpse of a T
 spawn_mus_112	MUSTAFAR	mus_world	AREA	0	345.82	146.33	-2566.24	0	1	Corpse of a Treasure Hunter	som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03	0	0	0	600
 spawn_mus_113	MUSTAFAR	mus_world	AREA	0	342.87	115.98	-2508.47	0	1	Corpse of a Treasure Hunter	som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03	0	0	0	600
 spawn_mus_114	MUSTAFAR	mus_world	AREA	0	-1565.77	83.278	399.42	0	1	Lislot Bloodscar	som_lislot_bloodscar	AGGRESSIVE	B	75	82	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_115	MUSTAFAR	mus_world	AREA	0	-200.66	19.9804	2377.76	0	1	Malfosa	som_malfosa	AGGRESSIVE	B	80	82	-	-	1	LOITER	150	0	-	idle	0	0	0	900
+spawn_mus_115	MUSTAFAR	mus_world	AREA	0	-200.66	19.9804	2377.76	0	1	Malfosa	malfosa	AGGRESSIVE	B	80	82	-	-	1	LOITER	150	0	-	idle	0	0	0	900
 spawn_mus_116	MUSTAFAR	mus_world	AREA	0	-2523.29	296	1452.93	0	1	Miner Renlo Hens	som_miner_hens	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
 spawn_mus_117	MUSTAFAR	mus_world	AREA	0	-526.45	99.80	-1366.03	0	1	a Mustafarian mining droid	som_mining_droid_bucket_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	20	0	-	idle	0	0	0	600
 spawn_mus_118	MUSTAFAR	mus_world	AREA	0	-1081.45	99.81	-1980.44	0	1	a Mustafarian mining droid	som_mining_droid_bucket_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	30	0	-	idle	0	0	0	600

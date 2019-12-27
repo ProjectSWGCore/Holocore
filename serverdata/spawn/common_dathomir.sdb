@@ -852,10 +852,10 @@ spawn_dat_849	DATHOMIR	dat_imp_prison_police_station	AREA	3	18.0	1.0	20.7	179	1	
 spawn_dat_850	DATHOMIR	dat_imp_prison_police_station	AREA	4	-19.5	1.0	16.6	-92	1	Inquisitor Olof	herald_dathomir_olof	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_851	DATHOMIR	dat_imp_prison_police_station	AREA	5	3.4	0.1	-3.6	-90	1	Dolac Legasi	dolac_legasi	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_852	DATHOMIR	dat_imp_prison_police_station	AREA	6	11.6	1.0	-21.2	68	1	Xarot Korlin	xarot_korlin	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_853	DATHOMIR	dat_world	AREA	0	-6109.8	131.0	964.8	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_854	DATHOMIR	dat_world	AREA	0	-6280.0	130.1	784.1	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_855	DATHOMIR	dat_world	AREA	0	-6521.7	130.1	793.5	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_856	DATHOMIR	dat_world	AREA	0	-6450.3	130.0	1098.4	0	1	an AT-ST	imp_atst	AGGRESSIVE	B	150	150	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_853	DATHOMIR	dat_world	AREA	0	-6109.8	131.0	964.8	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_854	DATHOMIR	dat_world	AREA	0	-6280.0	130.1	784.1	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_855	DATHOMIR	dat_world	AREA	0	-6521.7	130.1	793.5	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_856	DATHOMIR	dat_world	AREA	0	-6450.3	130.0	1098.4	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
 spawn_dat_857	DATHOMIR	dat_world	PATROL	0	-6343.4	120.0	972.6	0	1	a Novatrooper Cadet	stormtrooper_novatrooper_cadet	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4600	column	idle	0	0	0	600
 spawn_dat_858	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper Captain	stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4700	column	idle	0	0	0	600
 spawn_dat_859	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4800	column	idle	0	0	0	600

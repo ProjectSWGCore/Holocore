@@ -52,7 +52,7 @@ spawn_gcw_tat_pres_reb_49	TATOOINE	tat_world	AREA	0	3288.7	5.0	-4636.1	124	1	a R
 spawn_gcw_tat_pres_reb_50	TATOOINE	tat_world	AREA	0	3290.2	5.0	-4695.8	126	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_gcw_tat_pres_reb_51	TATOOINE	tat_world	PATROL	0	3304.5	5.0	-4602.5	122	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	2	PATROL	0	patrol_tat_11700	line	idle	0	0	0	600
 spawn_gcw_tat_pres_reb_52	TATOOINE	tat_world	AREA	0	3304.5	5.0	-4602.5	122	1	a Rebel guard	reb_guard	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_gcw_tat_pres_reb_53	TATOOINE	tat_world	PATROL	0	3318.3	5.0	-4613.0	30	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	2	PATROL	0	patrol_tat_11800	line	idle	0	0	0	600
+spawn_gcw_tat_pres_reb_53	TATOOINE	tat_world	PATROL	0	3318.3	4.0	-4613.0	30	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	2	PATROL	0	patrol_tat_11800	line	idle	0	0	0	600
 spawn_gcw_tat_pres_reb_54	TATOOINE	tat_world	AREA	0	3322.2	5.0	-4623.6	28	1	a Rebel security guard	reb_security_guard	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_gcw_tat_pres_reb_55	TATOOINE	tat_world	AREA	0	3356.8	7.5	-4711.3	125	1	a Rebel liberator	reb_liberator	ATTACKABLE	E	15	20	GCW	Mos Eisley	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_gcw_tat_pres_reb_56	TATOOINE	tat_world	PATROL	0	3360.2	5.0	-4742.2	-150	1	a Mos Eisley police officer	mos_eisley_police_officer	ATTACKABLE	E	15	20	GCW	Mos Eisley	2	PATROL	0	patrol_tat_11900	line	idle	0	0	0	600

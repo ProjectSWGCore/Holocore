@@ -1566,7 +1566,7 @@ spawn_cor_1563	CORELLIA	cor_world	AREA	0	3620.1	415.2	6645.3	0	1	a hunter	disapp
 spawn_cor_1564	CORELLIA	cor_world	AREA	0	-7144.3	298.6	1151.5	0	1	a mis-guided mercenary	fallen_guard	AGGRESSIVE	E	35	40	Outback	Corellia	1	TURN	0	0	-	idle	0	0	0	600
 spawn_cor_1565	CORELLIA	cor_world	AREA	0	-7151.1	299.4	1151.4	0	1	a mis-guided mercenary	fallen_guard	AGGRESSIVE	E	35	40	Outback	Corellia	1	TURN	0	0	-	idle	0	0	0	600
 spawn_cor_1566	CORELLIA	cor_world	AREA	0	-7131.8	296.8	1163.7	0	1	a mis-guided mercenary officer	fallen_officer	AGGRESSIVE	E	35	40	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_cor_1567	CORELLIA	cor_world	AREA	0	-7147.5	313.9	1133.2	0	1	a Fallen padawan	fallen_padawan	AGGRESSIVE	E	35	40	Outback	Corellia	1	TURN	0	0	-	idle	0	0	0	600
+spawn_cor_1567	CORELLIA	cor_world	AREA	0	-7147.5	313.9	1133.2	0	1	a Fallen padawan	jedi_padawan_fallen	AGGRESSIVE	E	35	40	Outback	Corellia	1	TURN	0	0	-	idle	0	0	0	600
 spawn_cor_1568	CORELLIA	cor_world	AREA	0	431.7	2.2	-2980.6	0	1	a farmer	farmer	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_cor_1569	CORELLIA	cor_world	AREA	0	6299.8	27.2	4375.6	0	1	a farmer	farmer	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	9	0	-	idle	0	0	0	600
 spawn_cor_1570	CORELLIA	cor_world	AREA	0	3354.4	457.6	5998.6	0	1	Ebela Puckett (a Grey Shroud crew leader)	grey_shroud_ebela_puckett	AGGRESSIVE	B	35	40	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
