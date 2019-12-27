@@ -640,7 +640,7 @@ spawn_lok_637	LOK	lok_world	PATROL	0	-1866.6	12.0	-3114.8	0	1	a Stormtrooper	rtp
 spawn_lok_638	LOK	lok_world	AREA	0	-1981.5	11.1	-3407.1	0	1	Nym's elite enforcer	smuggler_patrol_elite_4	ATTACKABLE	E	50	70	POI	Imperial Outpost	3	LOITER	20	0	-	idle	0	0	0	600
 spawn_lok_639	LOK	lok_world	AREA	0	-1936.5	12.1	-3386.8	0	1	Nym's elite enforcer	smuggler_patrol_elite_4	ATTACKABLE	E	50	70	POI	Imperial Outpost	3	LOITER	20	0	-	idle	0	0	0	600
 spawn_lok_640	LOK	lok_world	PATROL	0	-1947.9	12.0	-2975.0	-178	1	a Stormtrooper	rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	PATROL	0	patrol_lok_1700	column	idle	0	0	0	600
-spawn_lok_641	LOK	lok_world	PATROL	0	-1828.2	12.0	-3126.6	0	1	an AT-ST	imp_atst	ATTACKABLE	B	150	150	POI	Imperial Outpost	1	PATROL	9	patrol_lok_1800	column	idle	0	0	0	600
+spawn_lok_641	LOK	lok_world	PATROL	0	-1828.2	12.0	-3126.6	0	1	an AT-ST	imp_atst	ATTACKABLE	B	90	100	POI	Imperial Outpost	1	PATROL	9	patrol_lok_1800	column	idle	0	0	0	600
 spawn_lok_642	LOK	lok_world	AREA	0	-10.8	12.0	2712.7	-26	1	Cas Vankoo	cas_vankoo	AGGRESSIVE	B	70	80	POI	Kimogila Town	1	LOITER	5	0	-	idle	0	0	0	900
 spawn_lok_643	LOK	lok_world	AREA	0	-87.2	12.0	2724.9	0	1	a commoner	commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_lok_644	LOK	lok_world	AREA	0	-86.3	12.0	2686.0	0	1	a commoner	commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle	0	0	0	600

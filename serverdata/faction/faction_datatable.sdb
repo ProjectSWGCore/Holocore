@@ -19,7 +19,7 @@ clone_relics_droid	FALSE	TRUE	FALSE	-	clone_relics_scientist	-	1
 clone_relics_scientist	FALSE	FALSE	FALSE	-	clone_relics_droid	hutt;imperial;rebel	1
 cobral	TRUE	TRUE	FALSE	-	restuss;police	-	1
 cor_swoop	TRUE	TRUE	FALSE	-	smashball	-	1
-corsec	TRUE	TRUE	FALSE	-	afarathu;followers_of_lord_nyax;monumenter;rogue_corsec;lost_aqualish	beldonnas_league	1
+corsec	TRUE	TRUE	FALSE	-	afarathu;followers_of_lord_nyax;monumenter;rogue_corsec;lost_aqualish;flail	beldonnas_league	1
 dantari_raiders	TRUE	TRUE	FALSE	-	kunga_tribe;mokk_tribe;janta_tribe	-	1
 dark_jedi_kenobi	FALSE	TRUE	FALSE	-	-	-	1
 death_watch	FALSE	TRUE	FALSE	-	death_watch_special	-	1
@@ -33,7 +33,7 @@ espa	FALSE	FALSE	FALSE	-	-	espa_guard	1
 espa_guard	FALSE	TRUE	FALSE	-	heroic_tusken	espa	1
 faction_sayormi	FALSE	TRUE	FALSE	-	-	-	1
 fed_dub	TRUE	TRUE	FALSE	-	liberation_party;binayre;lost_aqualish;drall	-	1
-flail	TRUE	TRUE	FALSE	-	hidden_daggers	-	1
+flail	TRUE	TRUE	FALSE	-	hidden_daggers;corsec	-	1
 followers_of_lord_nyax	TRUE	TRUE	FALSE	-	corsec;beldonnas_league	-	1
 forest_kerritamba	TRUE	TRUE	FALSE	-	forest_outcast	-	1
 forest_outcast	TRUE	TRUE	FALSE	-	forest_kerritamba	-	1

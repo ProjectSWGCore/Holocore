@@ -1158,7 +1158,7 @@ patrol_tat_16208	patrol_tat_16200		TATOOINE	tat_moseisley_starport	14	-55.3	1.0	
 patrol_tat_16209	patrol_tat_16200		TATOOINE	tat_moseisley_starport	15	-46.6	1.0	6.9	0	
 patrol_tat_16210	patrol_tat_16200		TATOOINE	tat_world	0	3633.1	5.0	-4827.2	0	
 patrol_tat_16211	patrol_tat_16200		TATOOINE	tat_world	0	3645.8	5.0	-4799.8	0	
-patrol_tat_16212	patrol_tat_16200		TATOOINE	tat_world	0	3633.6	5.0	-4787.2	0	
+patrol_tat_16212	patrol_tat_16200		TATOOINE	tat_world	0	3639.6	5.0	-4785.8	0	
 patrol_tat_16213	patrol_tat_16200		TATOOINE	tat_world	0	3630.1	5.0	-4789.7	0	
 patrol_tat_16300	patrol_tat_16300	FLIP	TATOOINE	tat_world	0	3661.7	5.0	-4799.8	0	Mos Eisley - an EG-6 power droid
 patrol_tat_16301	patrol_tat_16300		TATOOINE	tat_world	0	3620.3	5.0	-4764.8	0	
@@ -1174,3 +1174,30 @@ patrol_tat_16310	patrol_tat_16300		TATOOINE	tat_moseisley_starport	1	7.7	0.6	78.
 patrol_tat_16311	patrol_tat_16300		TATOOINE	tat_moseisley_starport	1	1.9	0.6	76.1	0	
 patrol_tat_16312	patrol_tat_16300		TATOOINE	tat_world	0	3504.1	5.0	-4809.9	0	
 patrol_tat_16313	patrol_tat_16300		TATOOINE	tat_world	0	3501.4	5.0	-4812.9	0	
+patrol_tat_16400	patrol_tat_16400	FLIP	TATOOINE	tat_moseisley_lucky_despot	2	-4.0	7.0	0.5	0	Mos Eisley - Luckey Despot - a Nova Orion Industries employee
+patrol_tat_16401	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	2	-11.6	7.0	3.2	0	
+patrol_tat_16402	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-12.4	9.0	13.2	0	
+patrol_tat_16403	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-2.8	9.0	14.4	0	
+patrol_tat_16404	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-3.6	9.0	17.3	0	
+patrol_tat_16405	patrol_tat_16400		TATOOINE	tat_world	0	3359.1	14.0	-4587.7	0	
+patrol_tat_16406	patrol_tat_16400		TATOOINE	tat_world	0	3353.0	14.0	-4582.3	0	
+patrol_tat_16407	patrol_tat_16400		TATOOINE	tat_world	0	3334.4	7.2	-4598.0	0	
+patrol_tat_16408	patrol_tat_16400		TATOOINE	tat_world	0	3328.2	4.0	-4636.9	0	
+patrol_tat_16409	patrol_tat_16400		TATOOINE	tat_world	0	3384.1	4.0	-4677.4	0	
+patrol_tat_16410	patrol_tat_16400		TATOOINE	tat_world	0	3393.1	5.0	-4744.5	0	
+patrol_tat_16411	patrol_tat_16400		TATOOINE	tat_world	0	3464.5	4.0	-4793.9	0	
+patrol_tat_16412	patrol_tat_16400		TATOOINE	tat_world	0	3490.2	5.0	-4798.5	0	
+patrol_tat_16413	patrol_tat_16400		TATOOINE	tat_world	0	3501.9	5.0	-4804.8	0	
+patrol_tat_16414	patrol_tat_16400		TATOOINE	tat_world	0	3538.0	5.1	-4803.1	0	
+patrol_tat_16415	patrol_tat_16400		TATOOINE	tat_moseisley_starport	1	2.7	0.6	76.6	0	
+patrol_tat_16416	patrol_tat_16400		TATOOINE	tat_moseisley_starport	3	14.0	0.6	79.2	0	
+patrol_tat_16417	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	12.7	0.6	61.7	0	
+patrol_tat_16418	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	10.5	0.6	53.1	0	
+patrol_tat_16419	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	15.8	0.6	59.5	0	
+patrol_tat_16420	patrol_tat_16400		TATOOINE	tat_moseisley_starport	5	28.0	0.6	61.5	0	
+patrol_tat_16421	patrol_tat_16400		TATOOINE	tat_moseisley_starport	6	33.2	0.6	57.2	0	
+patrol_tat_16422	patrol_tat_16400		TATOOINE	tat_moseisley_starport	7	43.8	0.6	40.9	0	
+patrol_tat_16423	patrol_tat_16400		TATOOINE	tat_moseisley_starport	13	53.5	1.0	25.0	0	
+patrol_tat_16424	patrol_tat_16400		TATOOINE	tat_moseisley_starport	16	55.5	1.0	14.6	0	
+patrol_tat_16425	patrol_tat_16400		TATOOINE	tat_world	0	3607.4	5.0	-4752.7	0	
+patrol_tat_16426	patrol_tat_16400		TATOOINE	tat_world	0	3627.9	5.0	-4789.2	0	
