@@ -23,7 +23,7 @@ public class ConvertLogin {
 		// super("org.sqlite.JDBC", "jdbc:sqlite:" + file);
 		Class.forName("org.sqlite.JDBC");
 		System.out.println("Connecting to sqlite...");
-		try (Connection sqlite = DriverManager.getConnection("jdbc:sqlite:serverdata/login/login.db")) {
+		try (Connection sqlite = DriverManager.getConnection("jdbc:sqlite:serverdata/nge/login/login.db")) {
 			System.out.println("Connected");
 			MongoClient client = new MongoClient();
 			MongoDatabase database = client.getDatabase("nge");

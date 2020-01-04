@@ -58,7 +58,7 @@ public final class ObjectDataLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/objects/object_data.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/objects/object_data.sdb"))) {
 			ObjectDataAttribute [] mapping = ObjectDataAttribute.values();
 			List<String> columns = set.getColumns();
 			for (int i = 1; i < columns.size(); i++) {

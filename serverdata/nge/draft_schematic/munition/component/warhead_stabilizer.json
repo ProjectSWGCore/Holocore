@@ -1,0 +1,175 @@
+{
+    "parent": "object/draft_schematic/munition/base_munition.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/munition/warhead_stabilizer.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "thermal_insulation"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "thermal_insulation"
+                            ],
+                            "ingredient": "ore",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "interdiction_coil_substrate"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "interdiction_coil_substrate"
+                            ],
+                            "ingredient": "ore_carbonate",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "field_interdiction_coil"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "field_interdiction_coil"
+                            ],
+                            "ingredient": "copper",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "fuse_warhead_interface"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "fuse_warhead_interface"
+                            ],
+                            "ingredient": "gemstone_armophous",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "contaminent_preventor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "contaminent_preventor"
+                            ],
+                            "ingredient": "gas_inert",
+                            "count": 21
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "module_casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "module_casing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.munition.specific_item.crafting_component_munition"
+    ],
+    "complexity": 30,
+    "sharedTemplate": "object/draft_schematic/munition/component/shared_warhead_stabilizer.iff",
+    "volume": 8
+}

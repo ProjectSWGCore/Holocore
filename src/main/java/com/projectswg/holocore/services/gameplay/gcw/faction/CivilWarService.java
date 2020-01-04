@@ -168,7 +168,7 @@ public class CivilWarService extends Service {
 		String what = "rank abilities";
 		long startTime = StandardLog.onStartLoad(what);
 		
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/gcw/abilities.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/gcw/abilities.sdb"))) {
 			while (set.next()) {
 				int rank = (int) set.getInt("rank");
 				String imperial = set.getText("imperial");

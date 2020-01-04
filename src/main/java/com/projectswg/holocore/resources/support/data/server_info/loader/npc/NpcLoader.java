@@ -68,7 +68,7 @@ public final class NpcLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/npc/npc.msdb"))) {
 			npcMap.putAll(set.parallelStream(NpcInfo::new).collect(toMap(NpcInfo::getId, Function.identity())));
 		}
 	}

@@ -23,7 +23,7 @@ public class SpecialLineLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/command/special_lines.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/special_lines.sdb"))) {
 			while (set.next()) {
 				SpecialLineInfo specialLineInfo = new SpecialLineInfo(set);
 				

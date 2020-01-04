@@ -56,7 +56,7 @@ public final class SkillLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/skill/skills.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/skill/skills.sdb"))) {
 			while (set.next()) {
 				SkillInfo skills = new SkillInfo(set);
 				skillsByName.put(skills.getName(), skills);

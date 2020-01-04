@@ -90,14 +90,14 @@ public class ConvertBuildouts implements Converter{
 	
 	private void createAreas() throws IOException {
 		System.out.println("Generating areas...");
-		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/buildout/areas.sdb"))) {
+		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/nge/buildout/areas.sdb"))) {
 			gen.writeColumnNames(AREA_COLUMNS[0]);
 			writeAreas(gen);
 		}
 	}
 	
 	private void createObjects() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/object_tag_map.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/object_tag_map.sdb"))) {
 			while (set.next()) {
 				objectTagMap.put(set.getInt(1), set.getText(0));
 			}
@@ -131,7 +131,7 @@ public class ConvertBuildouts implements Converter{
 	
 	private void generateObjectFile(List<SWGObject> objects) throws IOException {
 		isValidBuildoutAreas(objects);
-		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/buildout/objects.sdb"))) {
+		try (SdbGenerator gen = new SdbGenerator(new File("serverdata/nge/buildout/objects.sdb"))) {
 			gen.writeColumnNames(OBJECT_COLUMNS[0]);
 			int objNum = 0;
 			int percent = 0;

@@ -82,7 +82,7 @@ public final class BuildoutLoader {
 	
 	private void loadStandardBuildouts() {
 		Set<String> events = this.events;
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/objects.sdb"))) {
 			while (set.next()) {
 				// "id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"
 				String event = set.getText(3);
@@ -113,7 +113,7 @@ public final class BuildoutLoader {
 	}
 	
 	private void loadAdditionalBuildouts() {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/additional_buildouts.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/additional_buildouts.sdb"))) {
 			while (set.next()) {
 				if (!set.getBoolean("active"))
 					continue;

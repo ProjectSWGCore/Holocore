@@ -1,0 +1,15 @@
+patrol_terain	active
+TEXT	BOOLEAN
+patrol_character_farm.sdb	TRUE
+patrol_corellia.sdb	TRUE
+patrol_dantooine.sdb	TRUE
+patrol_dathomir.sdb	TRUE
+patrol_endor.sdb	TRUE
+patrol_kashyyyk.sdb	TRUE
+patrol_lok.sdb	TRUE
+patrol_mustafar.sdb	FALSE
+patrol_naboo.sdb	TRUE
+patrol_rori.sdb	TRUE
+patrol_talus.sdb	TRUE
+patrol_tatooine.sdb	TRUE
+patrol_yavin4.sdb	TRUE

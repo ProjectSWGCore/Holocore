@@ -14,7 +14,7 @@ class ConvertSlotDefinition implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting slot definitions...");
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/abstract/slot_definitions.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/abstract/slot_definitions.sdb"))) {
 			sdb.writeColumnNames("slotName", "global", "modifiable", "observeWithParent", "exposeToWorld");
 			convertFile(sdb, new File("clientdata/abstract/slot/slot_definition/slot_definitions.iff"));
 		} catch (IOException e) {
