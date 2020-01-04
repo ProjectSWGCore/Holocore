@@ -51,7 +51,7 @@ public final class SlotDescriptorLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/abstract/slot_descriptors.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/abstract/slot_descriptors.sdb"))) {
 			while (set.next()) {
 				descriptors.put(set.getText("iff"), List.of(set.getText("slots").split(";")));
 			}

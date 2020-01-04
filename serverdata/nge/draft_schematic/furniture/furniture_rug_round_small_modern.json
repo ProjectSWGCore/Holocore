@@ -1,0 +1,52 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_clothing",
+    "crateObjectTemplate": "object/factory/factory_crate_furniture.iff",
+    "craftedObjectTemplate": "object/tangible/furniture/modern/rug_rnd_sml_s01.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "rug"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "rug"
+                            ],
+                            "ingredient": "hide",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.clothing.rug_item"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_rug_round_small_modern.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "volume": 2
+}

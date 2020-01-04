@@ -1,0 +1,127 @@
+{
+    "parent": "object/draft_schematic/item/base_item_schematic.iff",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/holiday/empire_day/aa1n_vebrobrain_protocol_droid_component_crate.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "aa1n_central_processor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "aa1n_central_processor"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/aa1n_central_processor.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "aa1n_circuit_board"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "aa1n_circuit_board"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/aa1n_circuit_board.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "bus_port"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "bus_port"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/aa1n_io_bus_port.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "memory_bank"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "memory_bank"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/aa1n_memory_bank.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_station_item"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/item/shared_item_event_empire_day_aa1n_verbobrain.iff",
+    "objvars": {
+        "crafting.no_critical_fail": 1
+    },
+    "volume": 1
+}

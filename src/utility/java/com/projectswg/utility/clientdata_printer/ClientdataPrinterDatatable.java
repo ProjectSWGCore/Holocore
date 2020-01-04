@@ -52,7 +52,7 @@ public class ClientdataPrinterDatatable {
 	@SuppressWarnings("UseOfSystemOutOrSystemErr")
 	private static void printTable(String table) throws IOException {
 		DatatableData data = (DatatableData) ClientFactory.getInfoFromFile(table);
-		File outputFile = new File("serverdata/", table.replace("datatables/", "").replace(".iff", ".sdb"));
+		File outputFile = new File("serverdata/nge/", table.replace("datatables/", "").replace(".iff", ".sdb"));
 		try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
 			for (int col = 0; col < data.getColumnCount(); col++) {
 				if (col > 0)

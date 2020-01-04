@@ -1,0 +1,13 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "sharedTemplate": "object/draft_schematic/community_crafting/shared_base_community_crafting.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "volume": 1,
+    "complexity": 1
+}

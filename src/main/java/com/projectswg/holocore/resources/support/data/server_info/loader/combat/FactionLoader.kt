@@ -46,7 +46,7 @@ class FactionLoader : DataLoader() {
 	
 	@Throws(IOException::class)
 	override fun load() {
-		SdbLoader.load(File("serverdata/faction/faction_datatable.sdb")).use { set ->
+		SdbLoader.load(File("serverdata/nge/faction/faction_datatable.sdb")).use { set ->
 			factions = set.stream { Faction(it) }.collect(Collectors.toMap({ it.name }, { it }))
 		}
 	}

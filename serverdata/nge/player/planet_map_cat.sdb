@@ -1,0 +1,94 @@
+name	index	iscategory	issubcategory	can_be_active	faction	faction_visible_only
+STRING	INTEGER	BOOLEAN	BOOLEAN	BOOLEAN	STRING	BOOLEAN
+unknown	1	true	false	false		false
+bank	2	true	false	false		false
+cantina	3	true	false	true		false
+capitol	4	true	false	false		false
+cloningfacility	5	true	false	false		false
+garage	6	true	false	false		false
+guild	7	true	false	false		false
+guild_combat	8	false	true	false		false
+guild_commerce	9	false	true	false		false
+guild_theater	10	false	true	true		false
+guild_university	11	false	true	false		false
+hotel	12	true	false	false		false
+medicalcenter	13	true	false	true		false
+shuttleport	14	true	false	false		false
+starport	15	true	false	false		false
+themepark	16	true	false	false		false
+city	17	true	false	false		false
+waypoint	18	true	false	false		false
+trainer	19	true	false	false		false
+trainer_brawler	20	false	true	false		false
+trainer_artisan	21	false	true	false		false
+trainer_scout	22	false	true	false		false
+trainer_marksman	23	false	true	false		false
+trainer_entertainer	24	false	true	false		false
+trainer_medic	25	false	true	false		false
+junkshop	26	true	false	false		false
+tavern	27	true	false	true		false
+barracks	28	true	false	true		false
+vendor	29	true	false	false		false
+vendor_armor	30	false	true	false		false
+vendor_clothing	31	false	true	false		false
+vendor_components	32	false	true	false		false
+vendor_droids	33	false	true	false		false
+vendor_equipment	34	false	true	false		false
+vendor_food	35	false	true	false		false
+vendor_housing	36	false	true	false		false
+vendor_resources	37	false	true	false		false
+vendor_tools	38	false	true	false		false
+vendor_weapons	39	false	true	false		false
+vendor_junk	40	false	true	false		false
+terminal	41	true	false	false		false
+terminal_bank	42	false	true	false		false
+terminal_bazaar	43	false	true	false		false
+terminal_mission	44	false	true	false		false
+rebel	45	true	false	false	rebel	true
+imperial	46	true	false	false	imperial	true
+rebel_hq	47	false	true	true	rebel	true
+imperial_hq	48	false	true	true	imperial	true
+camp	49	false	true	true		false
+cityhall	50	false	false	true		false
+theater	51	false	false	true		false
+vendor_pets	52	false	true	false		false
+vendor_medical	53	false	true	false		false
+poi	54	true	false	false		false
+garage	55	true	false	false		false
+museum	56	true	false	false		false
+salon	57	true	false	false		false
+space	58	true	false	false		false
+space_recruiter	59	false	true	false		false
+space_chassis_broker	60	false	true	false		false
+space_chassis	61	true	false	false		false
+trainer_starfighter_engineer	62	false	true	false		false
+trainer_shipwright	63	false	true	false		false
+trainer_pilot_privateer	64	false	true	false		false
+trainer_pilot_rebel	65	false	true	false		false
+trainer_pilot_imperial	66	false	true	false		false
+vendor_ships	67	false	true	false		false
+sf_rebel_forward_base	68	false	true	true	rebel	true
+sf_imperial_forward_base	69	false	true	true	imperial	true
+sf_rebel_minor_base	70	false	true	true	rebel	true
+sf_imperial_minor_base	71	false	true	true	imperial	true
+sf_rebel_major_base	72	false	true	true	rebel	true
+sf_imperial_major_base	73	false	true	true	imperial	true
+sf_rebel_hq	47	false	true	true	rebel	true
+sf_imperial_hq	48	false	true	true	imperial	true
+terminal_gcw_static_base	74	false	true	true		false
+terminal_mission_entertainer	75	false	true	false		false
+terminal_mission_artisan	76	false	true	false		false
+terminal_mission_scout	77	false	true	false		false
+terminal_mission_bounty	78	false	true	false		false
+terminal_mission_rebel	79	false	true	false	rebel	true
+terminal_mission_imperial	80	false	true	false	imperial	true
+city_junk_dealer	81	false	true	false		false
+gcw_region	82	true	false	false		false
+gcw_factional_presence	83	true	false	false		false
+gcw_factional_presence_rebel_only	84	false	true	false		false
+gcw_factional_presence_imperial_only	85	false	true	false		false
+gcw_factional_presence_rebel_and_imperial	86	false	true	false		false
+player_placed_factional_base	87	true	false	false		false
+player_placed_factional_base_rebel	88	false	true	true		false
+player_placed_factional_base_imperial	89	false	true	true		false
+vendor_chronicles	90	false	true	false		false

@@ -58,7 +58,7 @@ public class RawResourceContainer {
 	public void loadResources() {
 		resources.clear();
 		long startTime = StandardLog.onStartLoad("raw resources");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/resources/resources.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/resources/resources.sdb"))) {
 			while (set.next()) {
 				StringBuilder crateTemplate = new StringBuilder(set.getText("crate_template"));
 				crateTemplate.insert(crateTemplate.lastIndexOf("/")+1, "resource_container_");
