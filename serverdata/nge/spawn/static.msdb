@@ -10,7 +10,7 @@ common_kashyyyk_hunting.sdb	TRUE
 common_kashyyyk_main.sdb	TRUE
 common_kashyyyk_slaver.sdb	TRUE
 common_lok.sdb	TRUE
-common_mustafar.sdb	FALSE
+common_mustafar.sdb	TRUE
 common_naboo.sdb	TRUE
 common_rori.sdb	TRUE
 common_talus.sdb	TRUE
