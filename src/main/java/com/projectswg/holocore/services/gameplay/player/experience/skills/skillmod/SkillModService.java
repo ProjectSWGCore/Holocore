@@ -68,13 +68,13 @@ public class SkillModService extends Service {
 	
 	public SkillModService() {
 		
-		playerLevelDatabase = RelationalServerFactory.getServerData("player/player_levels.db", "player_levels");
+		playerLevelDatabase = RelationalServerFactory.getServerData("nge/player/player_levels.db", "player_levels");
 		if (playerLevelDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load player_levels.sdb file for SkillTemplateService");
 		
 		getPlayerLevelStatement = playerLevelDatabase.prepareStatement(GET_PLAYER_LEVELS_SQL);	
 		
-		racialStatsDatabase = RelationalServerFactory.getServerData("player/racial_stats.db", "racial_stats");
+		racialStatsDatabase = RelationalServerFactory.getServerData("nge/player/racial_stats.db", "racial_stats");
 		if (racialStatsDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load racial_stats.sdb file for SkillTemplateService");
 		
