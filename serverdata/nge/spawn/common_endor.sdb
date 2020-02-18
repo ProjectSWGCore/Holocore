@@ -565,3 +565,33 @@ spawn_end_562	ENDOR	end_world	AREA	0	-6878.0	15.2	618.0	0	1	Lavina	humanoid_smug
 spawn_end_563	ENDOR	end_world	AREA	0	-6859.6	17.7	607.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle	0	0	0	600
 spawn_end_564	ENDOR	end_world	AREA	0	-6899.2	11.9	649.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle	0	0	0	600
 spawn_end_565	ENDOR	end_world	AREA	0	-6865.2	13.0	658.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_end_566	ENDOR	end_world	AREA	0	85.4	9.0	31.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_end_567	ENDOR	end_world	AREA	0	89.8	9.0	53.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_end_568	ENDOR	end_world	AREA	0	74.2	19.0	9.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_569	ENDOR	end_world	AREA	0	91.6	19.0	69.2	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_570	ENDOR	end_world	AREA	0	104.8	29.0	56.5	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_571	ENDOR	end_world	AREA	0	51.4	29.3	40.6	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_572	ENDOR	end_world	AREA	0	82.6	29.3	22.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_573	ENDOR	end_world	AREA	0	4599.8	10.0	-2399.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_574	ENDOR	end_world	AREA	0	4607.6	30.3	-2413.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_575	ENDOR	end_world	AREA	0	4544.2	30.0	-2387.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_576	ENDOR	end_world	AREA	0	4543.8	40.3	-2349.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_577	ENDOR	end_world	AREA	0	4555.6	40.3	-2465.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_578	ENDOR	end_world	AREA	0	4545.5	40.0	-2404.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_579	ENDOR	end_world	AREA	0	4543.9	50.3	-2453.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_580	ENDOR	end_world	AREA	0	1529.9	5.4	-3155.8	-173	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_end_581	ENDOR	end_world	AREA	0	1529.6	5.4	-3158.4	10	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_end_582	ENDOR	end_world	AREA	0	1413.9	2.0	-3214.2	124	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_end_583	ENDOR	end_world	AREA	0	1424.3	1.0	-3225.3	-20	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_end_584	ENDOR	end_world	AREA	0	1423.3	1.0	-3223.3	152	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_end_585	ENDOR	end_world	AREA	0	1422.8	1.0	-3279.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_586	ENDOR	end_world	AREA	0	1476.4	1.0	-3272.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_587	ENDOR	end_world	AREA	0	1394.4	1.0	-3319.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_588	ENDOR	end_world	AREA	0	1463.9	1.8	-3359.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Tree Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_589	ENDOR	end_world	AREA	0	-666.4	1.0	-5082.8	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_590	ENDOR	end_world	AREA	0	-660.3	1.0	-5109.2	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_591	ENDOR	end_world	AREA	0	-614.0	1.9	-5098.5	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_592	ENDOR	end_world	AREA	0	-564.0	1.0	-5072.6	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_end_593	ENDOR	end_world	AREA	0	-496.2	0.5	-5014.8	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle	0	0	0	600
+spawn_end_594	ENDOR	end_world	AREA	0	-473.4	2.1	-5052.6	147	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_end_595	ENDOR	end_world	AREA	0	-512.8	1.0	-5067.7	-58	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	IDLE	0	0	-	idle	0	0	0	600
