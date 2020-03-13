@@ -847,127 +847,139 @@ spawn_dat_845	DATHOMIR	dat_world	AREA	0	5729.8	125.0	1854.7	0	1	a pirate	humanoi
 spawn_dat_846	DATHOMIR	dat_world	AREA	0	5751.5	124.7	1826.3	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle	0	0	0	600
 spawn_dat_847	DATHOMIR	dat_world	PATROL	0	5681.9	125.0	1846.5	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dat_7500	column	idle	0	0	0	600
 spawn_dat_848	DATHOMIR	dat_world	PATROL	0	5754.7	125.0	1860.2	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dat_7600	column	idle	0	0	0	600
-spawn_dat_849	DATHOMIR	dat_imp_prison_police_station	AREA	3	18.0	1.0	20.7	179	1	Vinzel Haylon	humanoid_imperial_warden_vinzel_haylon	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_850	DATHOMIR	dat_imp_prison_police_station	AREA	4	-19.5	1.0	16.6	-92	1	Inquisitor Olof	humanoid_herald_dathomir_olof	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_851	DATHOMIR	dat_imp_prison_police_station	AREA	5	3.4	0.1	-3.6	-90	1	Dolac Legasi	humanoid_dolac_legasi	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_852	DATHOMIR	dat_imp_prison_police_station	AREA	6	11.6	1.0	-21.2	68	1	Xarot Korlin	humanoid_imperial_xarot_korlin	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_853	DATHOMIR	dat_world	AREA	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_854	DATHOMIR	dat_world	AREA	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_855	DATHOMIR	dat_world	AREA	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_856	DATHOMIR	dat_world	AREA	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_864	DATHOMIR	dat_world	AREA	0	-6390.7	120.0	934.0	-98	1	Lucia	humanoid_smuggler_fence_lucia	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_865	DATHOMIR	dat_world	AREA	0	-6346.0	128.0	743.0	0	1	Tylar	humanoid_smuggler_fence_tylar	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_857	DATHOMIR	dat_world	PATROL	0	-6343.4	120.0	972.6	0	1	a Novatrooper Cadet	humanoid_imperial_stormtrooper_novatrooper_cadet	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4600	column	idle	0	0	0	600
-spawn_dat_858	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper Captain	humanoid_imperial_stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4700	column	idle	0	0	0	600
-spawn_dat_859	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4800	column	idle	0	0	0	600
-spawn_dat_860	DATHOMIR	dat_world	PATROL	0	-6356.5	128.0	780.4	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4900	column	idle	0	0	0	600
-spawn_dat_861	DATHOMIR	dat_world	PATROL	0	-6399.3	120.0	900.0	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5000	column	idle	0	0	0	600
-spawn_dat_862	DATHOMIR	dat_world	PATROL	0	-6342.3	128.0	766.8	0	1	a Novatrooper Medic	humanoid_imperial_stormtrooper_novatrooper_medic	AGGRESSIVE	E	75	85	POI	Imperial Prison	3	PATROL	0	patrol_dat_5100	column	idle	0	0	0	600
-spawn_dat_863	DATHOMIR	dat_world	PATROL	0	-6200.8	120.0	982.1	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5200	column	idle	0	0	0	600
-spawn_dat_866	DATHOMIR	dat_world	AREA	0	3456.1	28.9	1378.5	0	1	Aramis Kariya (a Rebel pilot)	humanoid_itp_rebel_pilot_aramis	ATTACKABLE	E	85	90	POI	Misty Falls	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_867	DATHOMIR	dat_ns_stronghold	AREA	5	12.6	0.8	-30.5	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_868	DATHOMIR	dat_ns_stronghold	AREA	7	0.9	0.8	-54.5	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	90	100	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_869	DATHOMIR	dat_ns_stronghold	AREA	9	-6.5	7.2	-16.8	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_870	DATHOMIR	dat_ns_stronghold	AREA	10	13.5	7.2	-15.9	0	1	Kais	humanoid_kais	ATTACKABLE	B	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_871	DATHOMIR	dat_ns_stronghold	AREA	10	7.6	7.2	-34.8	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_872	DATHOMIR	dat_ns_stronghold	AREA	11	-1.0	7.2	-0.6	0	1	Gethzerion	humanoid_gethzerion	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_873	DATHOMIR	dat_ns_stronghold	AREA	11	-7.5	7.2	-3.5	0	1	a Nightsister rancor tamer	humanoid_nightsister_rancor_tamer	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_874	DATHOMIR	dat_ns_stronghold	AREA	11	3.7	7.2	-5.6	0	1	a Nightsister stalker	humanoid_nightsister_stalker	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_875	DATHOMIR	dat_ns_stronghold	AREA	12	-19.6	7.2	-28.5	0	1	a diax	humanoid_diax	ATTACKABLE	B	75	80	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_876	DATHOMIR	dat_ns_stronghold	AREA	12	-12.4	7.2	-36.3	0	1	Fath H'ray	humanoid_fath_hray	ATTACKABLE	B	80	85	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_877	DATHOMIR	dat_ns_stronghold	AREA	12	-21.0	7.2	-20.8	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_878	DATHOMIR	dat_ns_stronghold	AREA	12	-12.9	7.2	-12.5	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
-spawn_dat_879	DATHOMIR	dat_world	AREA	0	-4085.0	133.8	-209.5	43	1	Spell Weaver Leandra	humanoid_herald_dathomir_leandra	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_882	DATHOMIR	dat_world	PATROL	0	-3943.0	125.1	-253.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5300	column	idle	0	0	0	600
-spawn_dat_883	DATHOMIR	dat_world	PATROL	0	-3972.4	131.0	-204.6	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	80	85	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5400	column	idle	0	0	0	600
-spawn_dat_880	DATHOMIR	dat_world	AREA	0	-4002.7	119.0	-62.5	-169	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_884	DATHOMIR	dat_world	PATROL	0	-4016.1	119.9	-243.4	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5500	column	idle	0	0	0	600
-spawn_dat_881	DATHOMIR	dat_world	AREA	0	-4157.7	121.0	-82.3	157	1	a Nightsister rancor tamer	humanoid_nightsister_rancor_tamer	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_885	DATHOMIR	dat_world	PATROL	0	-3969.6	122.3	-270.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5600	column	idle	0	0	0	600
-spawn_dat_886	DATHOMIR	dat_world	PATROL	0	-3931.6	131.3	-210.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5700	column	idle	0	0	0	600
-spawn_dat_887	DATHOMIR	dat_world	AREA	0	-3930.6	130.1	-227.4	-151	1	Morris	humanoid_smuggler_fence_morris	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_888	DATHOMIR	dat_ns_cave	AREA	1	-1.2	-5.8	6.1	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_889	DATHOMIR	dat_ns_cave	AREA	1	12.1	-18.5	-14.7	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_890	DATHOMIR	dat_ns_cave	AREA	1	7.3	-18.3	-14.7	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_891	DATHOMIR	dat_ns_cave	AREA	2	-10.9	-30.8	-29.0	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_892	DATHOMIR	dat_ns_cave	AREA	3	5.7	-40.9	-77.2	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_893	DATHOMIR	dat_ns_cave	AREA	3	4.9	-40.9	-72.2	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_894	DATHOMIR	dat_ns_cave	AREA	3	2.0	-41.1	-78.1	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_895	DATHOMIR	dat_ns_cave	AREA	4	49.9	-45.6	-101.2	0	1	a cavern spider	creature_spider_cavern	AGGRESSIVE	N	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_896	DATHOMIR	dat_ns_cave	AREA	4	45.6	-46.2	-95.3	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_897	DATHOMIR	dat_ns_cave	AREA	4	43.6	-46.3	-58.4	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_898	DATHOMIR	dat_ns_cave	AREA	4	43.6	-46.7	-54.7	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_899	DATHOMIR	dat_ns_cave	AREA	5	20.0	-47.2	-131.8	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_900	DATHOMIR	dat_ns_cave	AREA	5	50.5	-56.4	-173.7	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_901	DATHOMIR	dat_ns_cave	AREA	5	54.3	-48.4	-126.9	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_902	DATHOMIR	dat_ns_cave	AREA	5	59.1	-49.1	-132.3	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_903	DATHOMIR	dat_ns_cave	AREA	5	22.1	-47.2	-132.1	0	1	a Spiderclan crawler	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_904	DATHOMIR	dat_ns_cave	AREA	5	55.4	-55.9	-152.2	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_905	DATHOMIR	dat_ns_cave	AREA	5	60.1	-56.5	-161.7	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_906	DATHOMIR	dat_ns_cave	AREA	5	27.8	-46.3	-122.5	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_907	DATHOMIR	dat_ns_cave	AREA	5	2.0	-44.7	-133.3	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_908	DATHOMIR	dat_ns_cave	AREA	5	-2.8	-44.5	-127.2	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_909	DATHOMIR	dat_ns_cave	AREA	5	54.4	-55.4	-150.2	0	1	a Spiderclan stalker	humanoid_spider_nightsister_stalker	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_910	DATHOMIR	dat_ns_cave	AREA	5	52.8	-56.4	-172.8	0	1	a Spiderclan web dancer	humanoid_spider_nightsister_web_dancer	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_911	DATHOMIR	dat_ns_cave	AREA	7	-15.6	-63.2	-260.7	0	1	a cavern spider queen	creature_spider_cavern_queen	AGGRESSIVE	B	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_912	DATHOMIR	dat_ns_cave	AREA	7	-15.9	-65.6	-217.1	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_913	DATHOMIR	dat_ns_cave	AREA	7	-5.4	-64.1	-233.7	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_914	DATHOMIR	dat_ns_cave	AREA	7	-22.2	-65.2	-247.7	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_915	DATHOMIR	dat_ns_cave	AREA	8	-54.4	-70.7	-181.0	0	1	a cavern spider	creature_spider_cavern	AGGRESSIVE	N	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_916	DATHOMIR	dat_ns_cave	AREA	8	-60.6	-70.8	-179.9	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_917	DATHOMIR	dat_ns_cave	AREA	8	-71.2	-97.8	-152.5	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_918	DATHOMIR	dat_ns_cave	AREA	8	-87.7	-100.4	-149.7	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_919	DATHOMIR	dat_ns_cave	AREA	8	-100.3	-69.6	-110.6	0	1	a Spiderclan protector	humanoid_spider_nightsister_protector	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_920	DATHOMIR	dat_ns_cave	AREA	8	-93.1	-70.7	-113.5	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_921	DATHOMIR	dat_ns_cave	AREA	8	-60.3	-70.9	-177.1	0	1	a Spiderclan auspex	humanoid_spider_nightsister_spell_weaver	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_922	DATHOMIR	dat_ns_cave	AREA	8	-55.3	-70.7	-178.8	0	1	a Spiderclan web dancer	humanoid_spider_nightsister_web_dancer	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_923	DATHOMIR	dat_ns_cave	AREA	9	-11.7	-69.1	-93.6	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_924	DATHOMIR	dat_ns_cave	AREA	9	-11.3	-68.1	-100.5	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_925	DATHOMIR	dat_ns_cave	AREA	10	-57.5	-91.7	-149.1	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_926	DATHOMIR	dat_ns_cave	AREA	10	-57.7	-91.9	-141.4	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_927	DATHOMIR	dat_world	AREA	0	-1225.7	115.1	6275.0	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_928	DATHOMIR	dat_world	AREA	0	-1224.6	106.6	6218.4	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_929	DATHOMIR	dat_world	AREA	0	-1182.9	122.1	6280.1	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_930	DATHOMIR	dat_world	AREA	0	-1154.2	140.3	6211.3	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_932	DATHOMIR	dat_world	AREA	0	-1138.0	111.6	6303.0	46	1	Gib	humanoid_smuggler_fence_gib	INVULNERABLE	N	100	100	POI	Nightspider Cult Cave	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_931	DATHOMIR	dat_world	PATROL	0	-1096.3	115.4	6320.8	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	PATROL	0	patrol_dat_6100	column	idle	0	0	0	600
-spawn_dat_933	DATHOMIR	dat_world	AREA	0	-1106.9	125.6	6268.6	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_934	DATHOMIR	dat_world	AREA	0	-1113.8	107.7	6343.9	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_935	DATHOMIR	dat_world	AREA	0	-1149.1	107.6	6332.4	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_936	DATHOMIR	dat_world	AREA	0	-1210.2	129.5	6332.6	0	1	a bane back spider	creature_spider_bane_back	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_937	DATHOMIR	dat_world	AREA	0	2546.5	106.7	-1599.2	0	1	an escaped Nightsister slave	humanoid_nightsister_slave_escaped	INVULNERABLE	N	100	100	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_938	DATHOMIR	dat_world	AREA	0	2536.1	123.9	-1668.8	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_939	DATHOMIR	dat_world	AREA	0	2555.0	124.0	-1679.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_dat_940	DATHOMIR	dat_world	AREA	0	2545.2	123.4	-1678.8	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_941	DATHOMIR	dat_world	AREA	0	2547.7	112.2	-1618.1	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_942	DATHOMIR	dat_world	AREA	0	2478.9	127.3	-1712.3	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_943	DATHOMIR	dat_world	AREA	0	2483.6	129.4	-1634.5	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_944	DATHOMIR	dat_world	AREA	0	2509.8	120.4	-1549.8	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_945	DATHOMIR	dat_world	AREA	0	2539.4	130.3	-1798.6	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_946	DATHOMIR	dat_world	AREA	0	2544.7	112.4	-1621.3	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_947	DATHOMIR	dat_world	AREA	0	2597.2	124.2	-1582.9	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_dat_948	DATHOMIR	dat_world	AREA	0	-3975.4	131.5	-158.0	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	90	100	POI	NS Stronghold	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_949	DATHOMIR	dat_world	AREA	0	-4081.1	132.9	-207.0	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Stronghold	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_950	DATHOMIR	dat_world	AREA	0	-2520.0	128.6	1500.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_951	DATHOMIR	dat_world	AREA	0	-2520.0	127.0	1510.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_952	DATHOMIR	dat_world	AREA	0	-2510.0	129.5	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_953	DATHOMIR	dat_world	AREA	0	-2530.0	129.1	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_954	DATHOMIR	dat_world	AREA	0	-2490.0	122.1	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_955	DATHOMIR	dat_world	AREA	0	-2510.0	124.7	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_956	DATHOMIR	dat_world	AREA	0	-2530.0	125.5	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_957	DATHOMIR	dat_world	AREA	0	-2550.0	125.4	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_958	DATHOMIR	dat_world	AREA	0	-2520.0	130.3	1469.5	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_959	DATHOMIR	dat_world	AREA	0	-2500.0	125.7	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_960	DATHOMIR	dat_world	AREA	0	-2540.0	126.2	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_961	DATHOMIR	dat_world	AREA	0	-2500.0	120.6	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_962	DATHOMIR	dat_world	AREA	0	-2540.0	127.0	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_963	DATHOMIR	dat_world	AREA	0	-2500.0	120.3	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_964	DATHOMIR	dat_world	AREA	0	-2520.0	122.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_965	DATHOMIR	dat_world	AREA	0	-2540.0	125.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_966	DATHOMIR	dat_world	AREA	0	-2520.0	128.5	1598.0	179	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_967	DATHOMIR	dat_world	AREA	0	-2510.0	122.8	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_968	DATHOMIR	dat_world	AREA	0	-2530.0	126.6	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_969	DATHOMIR	dat_world	AREA	0	-2519.8	123.3	1556.0	179	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_970	DATHOMIR	dat_world	AREA	0	-2520.0	126.4	1580.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_971	DATHOMIR	dat_world	AREA	0	-2520.0	124.5	1570.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_972	DATHOMIR	dat_world	AREA	0	533.2	229.5	4239.5	133	1	Arch Witch Azzenaj	humanoid_herald_dathomir_azzenaj	INVULNERABLE	N	100	100	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_849	DATHOMIR	dat_imp_prison_police_station	AREA	2	-2.4	2.0	3.8	-40	1	a Novatrooper Captain	humanoid_imperial_stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_850	DATHOMIR	dat_imp_prison_police_station	AREA	3	18.0	1.0	20.7	179	1	Vinzel Haylon	humanoid_imperial_warden_vinzel_haylon	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_851	DATHOMIR	dat_imp_prison_police_station	AREA	4	-19.5	1.0	16.6	-92	1	Inquisitor Olof	humanoid_herald_dathomir_olof	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_852	DATHOMIR	dat_imp_prison_police_station	AREA	5	3.4	0.1	-3.6	-90	1	Dolac Legasi	humanoid_dolac_legasi	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_853	DATHOMIR	dat_imp_prison_police_station	AREA	6	11.6	1.0	-21.2	68	1	Xarot Korlin	humanoid_imperial_xarot_korlin	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_854	DATHOMIR	dat_imp_prison_police_station	AREA	10	2.8	7.0	0.2	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_855	DATHOMIR	dat_world	AREA	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_856	DATHOMIR	dat_world	AREA	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_857	DATHOMIR	dat_world	AREA	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_858	DATHOMIR	dat_world	AREA	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_859	DATHOMIR	dat_world	AREA	0	-6390.7	120.0	934.0	-98	1	Lucia	humanoid_smuggler_fence_lucia	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_860	DATHOMIR	dat_world	AREA	0	-6346.0	128.0	743.0	0	1	Tylar	humanoid_smuggler_fence_tylar	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_861	DATHOMIR	dat_world	PATROL	0	-6343.4	120.0	972.6	0	1	a Novatrooper Cadet	humanoid_imperial_stormtrooper_novatrooper_cadet	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4600	column	idle	0	0	0	600
+spawn_dat_862	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper Captain	humanoid_imperial_stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4700	column	idle	0	0	0	600
+spawn_dat_863	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4800	column	idle	0	0	0	600
+spawn_dat_864	DATHOMIR	dat_world	PATROL	0	-6356.5	128.0	780.4	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4900	column	idle	0	0	0	600
+spawn_dat_865	DATHOMIR	dat_world	PATROL	0	-6399.3	120.0	900.0	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5000	column	idle	0	0	0	600
+spawn_dat_866	DATHOMIR	dat_world	PATROL	0	-6342.3	128.0	766.8	0	1	a Novatrooper Medic	humanoid_imperial_stormtrooper_novatrooper_medic	AGGRESSIVE	E	75	85	POI	Imperial Prison	3	PATROL	0	patrol_dat_5100	column	idle	0	0	0	600
+spawn_dat_867	DATHOMIR	dat_world	PATROL	0	-6200.8	120.0	982.1	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5200	column	idle	0	0	0	600
+spawn_dat_868	DATHOMIR	dat_world	AREA	0	-6146.6	128.0	969.9	44	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_869	DATHOMIR	dat_world	AREA	0	-6146.5	128.0	976.4	134	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_870	DATHOMIR	dat_world	AREA	0	-6202.5	128.0	1006.8	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_871	DATHOMIR	dat_world	AREA	0	-6314.6	120.0	996.3	154	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_872	DATHOMIR	dat_world	AREA	0	-6380.4	120.0	1007.4	-143	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_873	DATHOMIR	dat_world	AREA	0	-6437.7	120.0	918.5	38	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_874	DATHOMIR	dat_world	AREA	0	-6389.8	120.0	860.3	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_875	DATHOMIR	dat_world	AREA	0	-6322.5	120.0	870.7	49	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_876	DATHOMIR	dat_world	AREA	0	-6346.5	128.0	805.6	171	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_877	DATHOMIR	dat_world	AREA	0	-6353.8	128.0	804.0	151	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_878	DATHOMIR	dat_world	AREA	0	3456.1	28.9	1378.5	0	1	Aramis Kariya (a Rebel pilot)	humanoid_itp_rebel_pilot_aramis	ATTACKABLE	E	85	90	POI	Misty Falls	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_879	DATHOMIR	dat_ns_stronghold	AREA	5	12.6	0.8	-30.5	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_880	DATHOMIR	dat_ns_stronghold	AREA	7	0.9	0.8	-54.5	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	90	100	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_881	DATHOMIR	dat_ns_stronghold	AREA	9	-6.5	7.2	-16.8	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_882	DATHOMIR	dat_ns_stronghold	AREA	10	13.5	7.2	-15.9	0	1	Kais	humanoid_kais	ATTACKABLE	B	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_883	DATHOMIR	dat_ns_stronghold	AREA	10	7.6	7.2	-34.8	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_884	DATHOMIR	dat_ns_stronghold	AREA	11	-1.0	7.2	-0.6	0	1	Gethzerion	humanoid_gethzerion	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_885	DATHOMIR	dat_ns_stronghold	AREA	11	-7.5	7.2	-3.5	0	1	a Nightsister rancor tamer	humanoid_nightsister_rancor_tamer	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_886	DATHOMIR	dat_ns_stronghold	AREA	11	3.7	7.2	-5.6	0	1	a Nightsister stalker	humanoid_nightsister_stalker	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_887	DATHOMIR	dat_ns_stronghold	AREA	12	-19.6	7.2	-28.5	0	1	a diax	humanoid_diax	ATTACKABLE	B	75	80	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_888	DATHOMIR	dat_ns_stronghold	AREA	12	-12.4	7.2	-36.3	0	1	Fath H'ray	humanoid_fath_hray	ATTACKABLE	B	80	85	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_889	DATHOMIR	dat_ns_stronghold	AREA	12	-21.0	7.2	-20.8	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_890	DATHOMIR	dat_ns_stronghold	AREA	12	-12.9	7.2	-12.5	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle	0	0	0	600
+spawn_dat_891	DATHOMIR	dat_world	AREA	0	-4085.0	133.8	-209.5	43	1	Spell Weaver Leandra	humanoid_herald_dathomir_leandra	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_892	DATHOMIR	dat_world	PATROL	0	-3943.0	125.1	-253.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5300	column	idle	0	0	0	600
+spawn_dat_893	DATHOMIR	dat_world	PATROL	0	-3972.4	131.0	-204.6	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	80	85	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5400	column	idle	0	0	0	600
+spawn_dat_894	DATHOMIR	dat_world	AREA	0	-4002.7	119.0	-62.5	-169	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_895	DATHOMIR	dat_world	PATROL	0	-4016.1	119.9	-243.4	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5500	column	idle	0	0	0	600
+spawn_dat_896	DATHOMIR	dat_world	AREA	0	-4157.7	121.0	-82.3	157	1	a Nightsister rancor tamer	humanoid_nightsister_rancor_tamer	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_897	DATHOMIR	dat_world	PATROL	0	-3969.6	122.3	-270.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5600	column	idle	0	0	0	600
+spawn_dat_898	DATHOMIR	dat_world	PATROL	0	-3931.6	131.3	-210.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5700	column	idle	0	0	0	600
+spawn_dat_899	DATHOMIR	dat_world	AREA	0	-3930.6	130.1	-227.4	-151	1	Morris	humanoid_smuggler_fence_morris	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_900	DATHOMIR	dat_ns_cave	AREA	1	-1.2	-5.8	6.1	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_901	DATHOMIR	dat_ns_cave	AREA	1	12.1	-18.5	-14.7	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_902	DATHOMIR	dat_ns_cave	AREA	1	7.3	-18.3	-14.7	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_903	DATHOMIR	dat_ns_cave	AREA	2	-10.9	-30.8	-29.0	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_904	DATHOMIR	dat_ns_cave	AREA	3	5.7	-40.9	-77.2	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_905	DATHOMIR	dat_ns_cave	AREA	3	4.9	-40.9	-72.2	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_906	DATHOMIR	dat_ns_cave	AREA	3	2.0	-41.1	-78.1	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_907	DATHOMIR	dat_ns_cave	AREA	4	49.9	-45.6	-101.2	0	1	a cavern spider	creature_spider_cavern	AGGRESSIVE	N	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_908	DATHOMIR	dat_ns_cave	AREA	4	45.6	-46.2	-95.3	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_909	DATHOMIR	dat_ns_cave	AREA	4	43.6	-46.3	-58.4	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_910	DATHOMIR	dat_ns_cave	AREA	4	43.6	-46.7	-54.7	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_911	DATHOMIR	dat_ns_cave	AREA	5	20.0	-47.2	-131.8	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_912	DATHOMIR	dat_ns_cave	AREA	5	50.5	-56.4	-173.7	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_913	DATHOMIR	dat_ns_cave	AREA	5	54.3	-48.4	-126.9	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_914	DATHOMIR	dat_ns_cave	AREA	5	59.1	-49.1	-132.3	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_915	DATHOMIR	dat_ns_cave	AREA	5	22.1	-47.2	-132.1	0	1	a Spiderclan crawler	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_916	DATHOMIR	dat_ns_cave	AREA	5	55.4	-55.9	-152.2	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_917	DATHOMIR	dat_ns_cave	AREA	5	60.1	-56.5	-161.7	0	1	a Spiderclan acolyte	humanoid_spider_nightsister_crawler	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_918	DATHOMIR	dat_ns_cave	AREA	5	27.8	-46.3	-122.5	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_919	DATHOMIR	dat_ns_cave	AREA	5	2.0	-44.7	-133.3	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_920	DATHOMIR	dat_ns_cave	AREA	5	-2.8	-44.5	-127.2	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_921	DATHOMIR	dat_ns_cave	AREA	5	54.4	-55.4	-150.2	0	1	a Spiderclan stalker	humanoid_spider_nightsister_stalker	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_922	DATHOMIR	dat_ns_cave	AREA	5	52.8	-56.4	-172.8	0	1	a Spiderclan web dancer	humanoid_spider_nightsister_web_dancer	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_923	DATHOMIR	dat_ns_cave	AREA	7	-15.6	-63.2	-260.7	0	1	a cavern spider queen	creature_spider_cavern_queen	AGGRESSIVE	B	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_924	DATHOMIR	dat_ns_cave	AREA	7	-15.9	-65.6	-217.1	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_925	DATHOMIR	dat_ns_cave	AREA	7	-5.4	-64.1	-233.7	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_926	DATHOMIR	dat_ns_cave	AREA	7	-22.2	-65.2	-247.7	0	1	a Nightsister crystal guardian	humanoid_itp_vader_nightsister_guardian	AGGRESSIVE	E	85	90	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_927	DATHOMIR	dat_ns_cave	AREA	8	-54.4	-70.7	-181.0	0	1	a cavern spider	creature_spider_cavern	AGGRESSIVE	N	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_928	DATHOMIR	dat_ns_cave	AREA	8	-60.6	-70.8	-179.9	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_929	DATHOMIR	dat_ns_cave	AREA	8	-71.2	-97.8	-152.5	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_930	DATHOMIR	dat_ns_cave	AREA	8	-87.7	-100.4	-149.7	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_931	DATHOMIR	dat_ns_cave	AREA	8	-100.3	-69.6	-110.6	0	1	a Spiderclan protector	humanoid_spider_nightsister_protector	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_932	DATHOMIR	dat_ns_cave	AREA	8	-93.1	-70.7	-113.5	0	1	a Spiderclan sentinel	humanoid_spider_nightsister_sentinel	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_933	DATHOMIR	dat_ns_cave	AREA	8	-60.3	-70.9	-177.1	0	1	a Spiderclan auspex	humanoid_spider_nightsister_spell_weaver	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_934	DATHOMIR	dat_ns_cave	AREA	8	-55.3	-70.7	-178.8	0	1	a Spiderclan web dancer	humanoid_spider_nightsister_web_dancer	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_935	DATHOMIR	dat_ns_cave	AREA	9	-11.7	-69.1	-93.6	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_936	DATHOMIR	dat_ns_cave	AREA	9	-11.3	-68.1	-100.5	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_937	DATHOMIR	dat_ns_cave	AREA	10	-57.5	-91.7	-149.1	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_938	DATHOMIR	dat_ns_cave	AREA	10	-57.7	-91.9	-141.4	0	1	a reclusive cavern spider	creature_spider_cavern_reclusive	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_939	DATHOMIR	dat_world	AREA	0	-1225.7	115.1	6275.0	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_940	DATHOMIR	dat_world	AREA	0	-1224.6	106.6	6218.4	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_941	DATHOMIR	dat_world	AREA	0	-1182.9	122.1	6280.1	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_942	DATHOMIR	dat_world	AREA	0	-1154.2	140.3	6211.3	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_943	DATHOMIR	dat_world	AREA	0	-1138.0	111.6	6303.0	46	1	Gib	humanoid_smuggler_fence_gib	INVULNERABLE	N	100	100	POI	Nightspider Cult Cave	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_944	DATHOMIR	dat_world	PATROL	0	-1096.3	115.4	6320.8	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	PATROL	0	patrol_dat_6100	column	idle	0	0	0	600
+spawn_dat_945	DATHOMIR	dat_world	AREA	0	-1106.9	125.6	6268.6	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_946	DATHOMIR	dat_world	AREA	0	-1113.8	107.7	6343.9	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_947	DATHOMIR	dat_world	AREA	0	-1149.1	107.6	6332.4	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_948	DATHOMIR	dat_world	AREA	0	-1210.2	129.5	6332.6	0	1	a bane back spider	creature_spider_bane_back	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_949	DATHOMIR	dat_world	AREA	0	2546.5	106.7	-1599.2	0	1	an escaped Nightsister slave	humanoid_nightsister_slave_escaped	INVULNERABLE	N	100	100	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_950	DATHOMIR	dat_world	AREA	0	2536.1	123.9	-1668.8	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_951	DATHOMIR	dat_world	AREA	0	2555.0	124.0	-1679.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_dat_952	DATHOMIR	dat_world	AREA	0	2545.2	123.4	-1678.8	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_953	DATHOMIR	dat_world	AREA	0	2547.7	112.2	-1618.1	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_954	DATHOMIR	dat_world	AREA	0	2478.9	127.3	-1712.3	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_955	DATHOMIR	dat_world	AREA	0	2483.6	129.4	-1634.5	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_956	DATHOMIR	dat_world	AREA	0	2509.8	120.4	-1549.8	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_957	DATHOMIR	dat_world	AREA	0	2539.4	130.3	-1798.6	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_958	DATHOMIR	dat_world	AREA	0	2544.7	112.4	-1621.3	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_959	DATHOMIR	dat_world	AREA	0	2597.2	124.2	-1582.9	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS Forced Labor Camp	3	LOITER	6	0	-	idle	0	0	0	600
+spawn_dat_960	DATHOMIR	dat_world	AREA	0	-3975.4	131.5	-158.0	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	90	100	POI	NS Stronghold	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_961	DATHOMIR	dat_world	AREA	0	-4081.1	132.9	-207.0	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	NS Stronghold	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_962	DATHOMIR	dat_world	AREA	0	-2520.0	128.6	1500.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_963	DATHOMIR	dat_world	AREA	0	-2520.0	127.0	1510.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_964	DATHOMIR	dat_world	AREA	0	-2510.0	129.5	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_965	DATHOMIR	dat_world	AREA	0	-2530.0	129.1	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_966	DATHOMIR	dat_world	AREA	0	-2490.0	122.1	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_967	DATHOMIR	dat_world	AREA	0	-2510.0	124.7	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_968	DATHOMIR	dat_world	AREA	0	-2530.0	125.5	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_969	DATHOMIR	dat_world	AREA	0	-2550.0	125.4	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	80	85	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_970	DATHOMIR	dat_world	AREA	0	-2520.0	130.3	1469.5	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_971	DATHOMIR	dat_world	AREA	0	-2500.0	125.7	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_972	DATHOMIR	dat_world	AREA	0	-2540.0	126.2	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_973	DATHOMIR	dat_world	AREA	0	-2500.0	120.6	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_974	DATHOMIR	dat_world	AREA	0	-2540.0	127.0	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	86	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_975	DATHOMIR	dat_world	AREA	0	-2500.0	120.3	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_976	DATHOMIR	dat_world	AREA	0	-2520.0	122.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_977	DATHOMIR	dat_world	AREA	0	-2540.0	125.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_978	DATHOMIR	dat_world	AREA	0	-2520.0	128.5	1598.0	179	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_979	DATHOMIR	dat_world	AREA	0	-2510.0	122.8	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_980	DATHOMIR	dat_world	AREA	0	-2530.0	126.6	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_981	DATHOMIR	dat_world	AREA	0	-2519.8	123.3	1556.0	179	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_982	DATHOMIR	dat_world	AREA	0	-2520.0	126.4	1580.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_983	DATHOMIR	dat_world	AREA	0	-2520.0	124.5	1570.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	85	90	POI	NS vs. SMC Battle	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_984	DATHOMIR	dat_world	AREA	0	533.2	229.5	4239.5	133	1	Arch Witch Azzenaj	humanoid_herald_dathomir_azzenaj	INVULNERABLE	N	100	100	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle	0	0	0	600

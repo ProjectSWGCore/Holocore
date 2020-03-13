@@ -595,25 +595,25 @@ patrol_dat_7601	patrol_dat_7600		DATHOMIR	dat_world	0	5745.1	125.0	1837.4	0
 patrol_dat_7602	patrol_dat_7600		DATHOMIR	dat_world	0	5711.3	125.0	1835.2	0	
 patrol_dat_7603	patrol_dat_7600		DATHOMIR	dat_world	0	5694.6	125.0	1857.2	0	
 patrol_dat_7604	patrol_dat_7600		DATHOMIR	dat_world	0	5711.0	125.0	1879.0	0	
-patrol_dat_7700	patrol_dat_7700	FLIP	DATHOMIR	dat_world	10	29.5	-12.0	70.9	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_7701	patrol_dat_7700		DATHOMIR	dat_world	10	35.6	-12.0	71.1	0	
-patrol_dat_7702	patrol_dat_7700		DATHOMIR	dat_world	10	35.5	-12.0	51.3	0	
-patrol_dat_7800	patrol_dat_7800	FLIP	DATHOMIR	dat_world	10	30.5	-12.0	35.2	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_7801	patrol_dat_7800		DATHOMIR	dat_world	10	35.4	-12.0	35.0	0	
-patrol_dat_7802	patrol_dat_7800		DATHOMIR	dat_world	10	23.5	-12.0	35.0	0	
-patrol_dat_7803	patrol_dat_7800		DATHOMIR	dat_world	14	23.5	-12.0	27.1	0	
-patrol_dat_7804	patrol_dat_7800		DATHOMIR	dat_world	14	23.5	-12.0	11.1	0	
-patrol_dat_7805	patrol_dat_7800		DATHOMIR	dat_world	14	61.3	-12.0	11.5	0	
-patrol_dat_7900	patrol_dat_7900	FLIP	DATHOMIR	dat_world	13	35.5	-12.0	94.6	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_7901	patrol_dat_7900		DATHOMIR	dat_world	13	35.6	-20.0	112.7	0	
-patrol_dat_7902	patrol_dat_7900		DATHOMIR	dat_world	13	36.6	-20.0	143.1	0	
-patrol_dat_8000	patrol_dat_8000	LOOP	DATHOMIR	dat_world	15	11.2	-12.0	3.0	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_8001	patrol_dat_8000		DATHOMIR	dat_world	15	-6.5	-20.0	2.9	0	
-patrol_dat_8100	patrol_dat_8100	LOOP	DATHOMIR	dat_world	18	-30.5	-20.0	86.8	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_8101	patrol_dat_8100		DATHOMIR	dat_world	17	-30.6	-20.0	3.4	0	
-patrol_dat_8102	patrol_dat_8100		DATHOMIR	dat_world	18	-30.4	-20.0	75.7	0	
-patrol_dat_8200	patrol_dat_8200	LOOP	DATHOMIR	dat_world	18	-30.6	-20.0	19.0	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_8201	patrol_dat_8200		DATHOMIR	dat_world	18	-30.6	-20.0	81.4	0	
-patrol_dat_8300	patrol_dat_8300	LOOP	DATHOMIR	dat_world	20	-8.5	-20.0	85.3	0	Imperial Weapons Research Facility - a Meatlump pronk
-patrol_dat_8301	patrol_dat_8300		DATHOMIR	dat_world	19	-30.1	-20.0	101.3	0	
-patrol_dat_8302	patrol_dat_8300		DATHOMIR	dat_world	19	-15.8	-20.0	101.4	0	
+patrol_dat_7700	patrol_dat_7700	FLIP	DATHOMIR	dat_imp_weapons_research_facility	10	29.5	-12.0	70.9	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_7701	patrol_dat_7700		DATHOMIR	dat_imp_weapons_research_facility	10	35.6	-12.0	71.1	0	
+patrol_dat_7702	patrol_dat_7700		DATHOMIR	dat_imp_weapons_research_facility	10	35.5	-12.0	51.3	0	
+patrol_dat_7800	patrol_dat_7800	FLIP	DATHOMIR	dat_imp_weapons_research_facility	10	30.5	-12.0	35.2	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_7801	patrol_dat_7800		DATHOMIR	dat_imp_weapons_research_facility	10	35.4	-12.0	35.0	0	
+patrol_dat_7802	patrol_dat_7800		DATHOMIR	dat_imp_weapons_research_facility	10	23.5	-12.0	35.0	0	
+patrol_dat_7803	patrol_dat_7800		DATHOMIR	dat_imp_weapons_research_facility	14	23.5	-12.0	27.1	0	
+patrol_dat_7804	patrol_dat_7800		DATHOMIR	dat_imp_weapons_research_facility	14	23.5	-12.0	11.1	0	
+patrol_dat_7805	patrol_dat_7800		DATHOMIR	dat_imp_weapons_research_facility	14	61.3	-12.0	11.5	0	
+patrol_dat_7900	patrol_dat_7900	FLIP	DATHOMIR	dat_imp_weapons_research_facility	13	35.5	-12.0	94.6	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_7901	patrol_dat_7900		DATHOMIR	dat_imp_weapons_research_facility	13	35.6	-20.0	112.7	0	
+patrol_dat_7902	patrol_dat_7900		DATHOMIR	dat_imp_weapons_research_facility	13	36.6	-20.0	143.1	0	
+patrol_dat_8000	patrol_dat_8000	LOOP	DATHOMIR	dat_imp_weapons_research_facility	15	11.2	-12.0	3.0	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_8001	patrol_dat_8000		DATHOMIR	dat_imp_weapons_research_facility	15	-6.5	-20.0	2.9	0	
+patrol_dat_8100	patrol_dat_8100	LOOP	DATHOMIR	dat_imp_weapons_research_facility	18	-30.5	-20.0	86.8	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_8101	patrol_dat_8100		DATHOMIR	dat_imp_weapons_research_facility	17	-30.6	-20.0	3.4	0	
+patrol_dat_8102	patrol_dat_8100		DATHOMIR	dat_imp_weapons_research_facility	18	-30.4	-20.0	75.7	0	
+patrol_dat_8200	patrol_dat_8200	LOOP	DATHOMIR	dat_imp_weapons_research_facility	18	-30.6	-20.0	19.0	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_8201	patrol_dat_8200		DATHOMIR	dat_imp_weapons_research_facility	18	-30.6	-20.0	81.4	0	
+patrol_dat_8300	patrol_dat_8300	LOOP	DATHOMIR	dat_imp_weapons_research_facility	20	-8.5	-20.0	85.3	0	Imperial Weapons Research Facility - a Meatlump pronk
+patrol_dat_8301	patrol_dat_8300		DATHOMIR	dat_imp_weapons_research_facility	19	-30.1	-20.0	101.3	0	
+patrol_dat_8302	patrol_dat_8300		DATHOMIR	dat_imp_weapons_research_facility	19	-15.8	-20.0	101.4	0	
