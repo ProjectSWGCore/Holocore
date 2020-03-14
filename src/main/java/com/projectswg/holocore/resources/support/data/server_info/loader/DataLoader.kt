@@ -57,6 +57,7 @@ abstract class DataLoader {
 		fun specialLines(): SpecialLineLoader = ServerData.specialLines
 		fun staticPvpZones(): StaticPvpZoneLoader = ServerData.staticPvpZones
 		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
+		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels
 	}
 	
 }

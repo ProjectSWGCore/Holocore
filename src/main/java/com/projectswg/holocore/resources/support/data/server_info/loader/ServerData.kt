@@ -93,7 +93,8 @@ object ServerData {
 	val vehicles			by SoftDataLoaderDelegate(::VehicleLoader)
 	val staticPvpZones		by SoftDataLoaderDelegate(::StaticPvpZoneLoader)
 	val dynamicSpawns		by SoftDataLoaderDelegate(::DynamicSpawnLoader)
-	
+	val terrainLevels		by SoftDataLoaderDelegate(::TerrainLevelLoader)
+
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)
 	
