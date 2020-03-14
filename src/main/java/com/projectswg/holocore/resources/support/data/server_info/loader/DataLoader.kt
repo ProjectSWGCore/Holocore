@@ -58,6 +58,7 @@ abstract class DataLoader {
 		fun staticPvpZones(): StaticPvpZoneLoader = ServerData.staticPvpZones
 		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
 		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels
+		fun noSpawnZones(): NoSpawnZoneLoader = ServerData.noSpawnZones
 	}
 	
 }
