@@ -46,6 +46,7 @@ public final class DynamicSpawnLoader extends DataLoader {
 	}
 	
 	public static class DynamicSpawnInfo {
+		private String dynamicId;
 		private String lairTemplate;
 		private String npcBoss;
 		private String npcElite;
@@ -55,6 +56,7 @@ public final class DynamicSpawnLoader extends DataLoader {
 		private String npcNormal4;
 		
 		public DynamicSpawnInfo(SdbLoader.SdbResultSet set) {
+			this.dynamicId = set.getText("dynamic_id");
 			this.lairTemplate = set.getText("lair_type");
 			this.npcBoss = set.getText("npc_boss");
 			this.npcElite = set.getText("npc_elite");
@@ -62,6 +64,10 @@ public final class DynamicSpawnLoader extends DataLoader {
 			this.npcNormal2 = set.getText("npc_normal_2");
 			this.npcNormal3 = set.getText("npc_normal_3");
 			this.npcNormal4 = set.getText("npc_normal_4");
+		}
+		
+		public String getDynamicId() {
+			return dynamicId;
 		}
 		
 		public String getLairTemplate() {
