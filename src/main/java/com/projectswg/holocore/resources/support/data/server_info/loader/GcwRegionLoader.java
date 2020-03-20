@@ -26,9 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +48,33 @@ public class GcwRegionLoader extends DataLoader {
 	@NotNull
 	public Map<Terrain, Collection<GcwRegionInfo>> getRegionsByTerrain() {
 		return Collections.unmodifiableMap(regions);
+	}
+	
+	@NotNull
+	public Optional<GcwRegionInfo> getRegion(SWGObject object) {
+		Location worldLocation = object.getWorldLocation();
+		Terrain terrain = worldLocation.getTerrain();
+		
+		Collection<GcwRegionInfo> terrainRegions = regions.get(terrain);
+		
+		if (terrainRegions == null) {
+			// The terrain the player is on doesn't have any GCW regions
+			return Optional.empty();
+		}
+		
+		Optional<GcwRegionInfo> regionInfoOpt = terrainRegions.stream()
+				.filter(info -> {
+					Location location = Location.builder()
+							.setTerrain(info.getTerrain())
+							.setX(info.getCenterX())
+							.setZ(info.getCenterZ())
+							.build();
+					
+					return location.isWithinFlatDistance(worldLocation, info.getRadius());
+				})
+				.findFirst();
+		
+		return regionInfoOpt;
 	}
 	
 	@Override
