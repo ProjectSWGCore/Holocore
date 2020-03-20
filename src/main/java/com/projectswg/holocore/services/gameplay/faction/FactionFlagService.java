@@ -1,4 +1,4 @@
-package com.projectswg.holocore.services.gameplay.gcw.faction;
+package com.projectswg.holocore.services.gameplay.faction;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;

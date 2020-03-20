@@ -24,13 +24,12 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.gcw.faction;
+package com.projectswg.holocore.services.gameplay.faction;
 
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
-		CivilWarService.class,
 		FactionFlagService.class
 })
 public final class FactionManager extends Manager {

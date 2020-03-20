@@ -24,64 +24,63 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.gcw.faction;
 
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+package com.projectswg.holocore.services.gameplay.gcw;
 
-import java.util.Optional;
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class CivilWarPointIntent extends Intent {
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+
+public class TestCivilWarRankService extends TestRunnerNoIntents {
 	
-	private final PlayerObject receiver;
-	private final int points;
-	private final ProsePackage prose;
+	private final CivilWarRankService service;
 	
-	private CivilWarPointIntent(@NotNull PlayerObject receiver, int points, @Nullable ProsePackage prose) {
-		this.receiver = receiver;
-		this.points = points;
-		this.prose = prose;
+	public TestCivilWarRankService() {
+		service = new CivilWarRankService();
 	}
 	
-	public CivilWarPointIntent(PlayerObject receiver, int points) {
-		this(receiver, points, null);
+	private int epochTime(LocalDate date) {
+		return (int) date.atStartOfDay(OffsetDateTime.now().getOffset()).toEpochSecond();
 	}
 	
-	@NotNull
-	public PlayerObject getReceiver() {
-		return receiver;
+	@Test
+	public void testNextUpdateTime() {
+		LocalDate now = LocalDate.of(2018, 2, 19);	// It's a Monday
+		LocalDate rankDay = LocalDate.of(2018, 2, 23);	// It's a Friday, the exact time we rank up
+		LocalDate dayAfter = LocalDate.of(2018, 2, 24);	// It's a Saturday, 24 hours after rank up
+		LocalDate nextRankDay = LocalDate.of(2018, 3, 2);	// It's a Friday, exactly one week after first rank up
+		
+		int nowRankTime = epochTime(rankDay);
+		int nextRankTime = epochTime(nextRankDay);
+		
+		Assert.assertEquals(nowRankTime, service.nextUpdateTime(now));
+		Assert.assertEquals(nextRankTime, service.nextUpdateTime(rankDay));	// When we hit the scheduled rank time, the next update should be in a week
+		Assert.assertEquals(nextRankTime, service.nextUpdateTime(dayAfter));	// Next time should be in six days (from Saturday to Friday)
 	}
 	
-	public int getPoints() {
-		return points;
+	@Test
+	public void testIsDecayRank() {
+		Assert.assertFalse(service.isDecayRank(6));
+		Assert.assertTrue(service.isDecayRank(7));
 	}
 	
-	@Nullable
-	public ProsePackage getProse() {
-		return prose;
+	@Test
+	public void testRankProgress() {
+		Assert.assertEquals(2.86f, service.rankProgress(10.0f, 20.0f, 7, 9000), 1);
 	}
 	
-	/**
-	 * Displays basic system message to the player with the amount of points gained.
-	 * @param receiver that should receive GCW points
-	 * @param points amount that the {@code receiver} should receive
-	 */
-	public static void broadcast(@NotNull PlayerObject receiver, int points) {
-		new CivilWarPointIntent(receiver, points).broadcast();
+	@Test
+	public void testIsRankDown() {
+		Assert.assertFalse(service.isRankDown(40, 50));
+		Assert.assertTrue(service.isRankDown(3, -10));
 	}
 	
-	/**
-	 * Displays customized system message to the player.
-	 * @param receiver that should receive GCW points
-	 * @param points amount that the {@code receiver} should receive
-	 * @param prose custom message to display to the player in case the default one doesn't cut it. If {@code null}, we fall back to the default
-	 *                 basic system message.
-	 */
-	public static void broadcast(@NotNull PlayerObject receiver, int points, @Nullable ProsePackage prose) {
-		new CivilWarPointIntent(receiver, points, prose).broadcast();
+	@Test
+	public void testLeftoverPoints() {
+		Assert.assertEquals(6000, service.leftoverPoints(130, 20000));
 	}
 	
 }
