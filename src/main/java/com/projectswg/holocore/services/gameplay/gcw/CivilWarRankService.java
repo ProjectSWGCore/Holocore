@@ -26,24 +26,15 @@
  *                                                                                  *
  ***********************************************************************************/
 
-package com.projectswg.holocore.services.gameplay.gcw.faction;
+package com.projectswg.holocore.services.gameplay.gcw;
 
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
-import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
-import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.CivilWarPointIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -62,7 +53,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CivilWarService extends Service {
+/**
+ * Responsible for managing the Galactic Civil War ranks of players.
+ */
+public class CivilWarRankService extends Service {
 	
 	private static final int IMPERIAL_INDEX = 0;
 	private static final int REBEL_INDEX = 1;
@@ -75,10 +69,10 @@ public class CivilWarService extends Service {
 	private final ZoneOffset updateOffset;
 	private int rankEpoch;
 	
-	public CivilWarService() {
+	public CivilWarRankService() {
 		rankAbilities = new HashMap<>();
 		playerObjects = ConcurrentHashMap.newKeySet();
-		threadPool = new ScheduledThreadPool(1, "civil-war-service");
+		threadPool = new ScheduledThreadPool(1, "civil-war-rank-service");
 		// Rank update time is the night between Thursday and Friday at 00:00 UTC
 		updateWeekDay = DayOfWeek.FRIDAY;
 		updateTime = LocalTime.MIDNIGHT;
@@ -127,41 +121,6 @@ public class CivilWarService extends Service {
 		progress += (float) points / (currentRank * 100.0f);
 		
 		return progress;
-	}
-	
-	boolean isFactionEligible(PvpFaction killerFaction, PvpFaction corpseFaction) {
-		return killerFaction != PvpFaction.NEUTRAL && corpseFaction != PvpFaction.NEUTRAL && killerFaction != corpseFaction;
-	}
-	
-	byte makeMultiplier(boolean specialForces, boolean player) {
-		byte multiplier = 1;
-		
-		if (specialForces) {
-			multiplier += 1;
-		}
-		
-		if (player) {
-			multiplier += 18;
-		}
-		
-		return multiplier;
-	}
-	
-	int baseForDifficulty(CreatureDifficulty difficulty) {
-		switch (difficulty) {
-			case NORMAL:
-				return 5;
-			case ELITE:
-				return 10;
-			case BOSS:
-				return 15;
-			default:
-				throw new IllegalArgumentException("Unhandled CreatureDifficulty: " + difficulty);
-		}
-	}
-	
-	int pointsGranted(int base, byte multiplier) {
-		return base * multiplier;
 	}
 	
 	private void loadRankAbilities() {
@@ -335,77 +294,6 @@ public class CivilWarService extends Service {
 		});
 		
 		scheduleRankUpdate();    // Schedule next rank update
-	}
-	
-	private void grantPoints(ProsePackage prose, PlayerObject receiver, int points) {
-		receiver.setGcwPoints(receiver.getGcwPoints() + points);
-		SystemMessageIntent.broadcastPersonal(receiver.getOwner(), prose);
-	}
-	
-	@IntentHandler
-	private void handleCivilWarPointIntent(CivilWarPointIntent cwpi) {
-		int points = cwpi.getPoints();
-		PlayerObject receiver = cwpi.getReceiver();
-		ProsePackage prose = new ProsePackage(new StringId("gcw", "gcw_rank_generic_point_grant"), "DI", points);
-		
-		grantPoints(prose, receiver, points);
-	}
-	
-	@IntentHandler
-	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
-		CreatureObject corpseCreature = cki.getCorpse();
-		CreatureObject killerCreature = cki.getKiller();
-		PvpFaction killerFaction = killerCreature.getPvpFaction();
-		
-		if (!killerCreature.isPlayer()) {
-			return;
-		}
-		
-		boolean specialForces = corpseCreature.getPvpStatus() == PvpStatus.SPECIALFORCES;
-		
-		if (!isFactionEligible(killerFaction, corpseCreature.getPvpFaction())) {
-			return;
-		}
-		
-		PlayerObject killerPlayer = killerCreature.getPlayerObject();
-		
-		byte multiplier = makeMultiplier(specialForces, corpseCreature.isPlayer());
-		int base = baseForDifficulty(corpseCreature.getDifficulty());
-		int granted = pointsGranted(base, multiplier);
-		ProsePackage prose;
-		
-		if (specialForces) {
-			// Increment kill counter
-			killerPlayer.setPvpKills(killerPlayer.getPvpKills() + 1);
-			
-			// Determine which effect and sound to play
-			String effectFile;
-			String soundFile;
-			
-			if (killerFaction == PvpFaction.REBEL) {
-				effectFile = "clienteffect/holoemote_rebel.cef";
-				soundFile = "sound/music_themequest_victory_rebel.snd";
-			} else {
-				effectFile = "clienteffect/holoemote_imperial.cef";
-				soundFile = "sound/music_themequest_victory_imperial.snd";
-			}
-			
-			// PvP GCW point system message
-			prose = new ProsePackage("StringId", new StringId("gcw", "gcw_rank_pvp_kill_point_grant"), "DI", granted, "TT", corpseCreature
-					.getObjectName());
-			
-			// Send visual effect to killer and everyone around
-			killerCreature.sendObservers(new PlayClientEffectObjectMessage(effectFile, "head", killerCreature.getObjectId(), ""));
-			
-			// Send sound to just to the killer
-			killerCreature.sendSelf(new PlayMusicMessage(0, soundFile, 0, false));
-		} else {
-			// NPC GCW point system message
-			prose = new ProsePackage(new StringId("gcw", "gcw_rank_generic_point_grant"), "DI", granted);
-		}
-		
-		// Increment GCW point counter
-		grantPoints(prose, killerPlayer, granted);
 	}
 	
 	@IntentHandler
