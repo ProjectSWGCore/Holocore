@@ -54,6 +54,7 @@ public class GuildObject extends SWGObject {
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addObject(abbreviations);
+		bb.incrementOperandCount(1);
 	}
 	
 	@Override
@@ -65,6 +66,8 @@ public class GuildObject extends SWGObject {
 		bb.addObject(gcwGroupImperialScorePercentileHistoryThisGalaxy);
 		bb.addObject(gcwImperialScorePercentileOtherGalaxies);
 		bb.addObject(gcwGroupImperialScorePercentileOtherGalaxies);
+		bb.addInt(0);	// unknown, but client underflows if there aren't 4 bytes here
+		bb.incrementOperandCount(8);
 	}
 	
 	@Override
@@ -82,6 +85,7 @@ public class GuildObject extends SWGObject {
 		gcwGroupImperialScorePercentileHistoryThisGalaxy = SWGMap.getSwgMap(buffer, 6, 5, StringType.ASCII, CurrentServerGCWZoneHistory.class);
 		gcwImperialScorePercentileOtherGalaxies = SWGMap.getSwgMap(buffer, 6, 6, StringType.ASCII, OtherServerGCWZonePercent.class);
 		gcwGroupImperialScorePercentileOtherGalaxies = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII, OtherServerGCWZonePercent.class);
+		// unknown variable
 	}
 	
 	public static class CurrentServerGCWZonePercent implements Encodable {
