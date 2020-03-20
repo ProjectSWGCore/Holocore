@@ -56,7 +56,8 @@ abstract class DataLoader {
 		fun vehicles(): VehicleLoader = ServerData.vehicles
 		fun specialLines(): SpecialLineLoader = ServerData.specialLines
 		fun staticPvpZones(): StaticPvpZoneLoader = ServerData.staticPvpZones
-		
+		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
+
 	}
 	
 }
