@@ -41,15 +41,15 @@ class PswgGcwRegionDatabase(private val collection: MongoCollection<Document>?) 
 		collection?.createIndex(Indexes.ascending("zone"), IndexOptions().unique(true))
 	}
 
-	fun createZone(zoneName: String) {
+	fun createZone(zoneName: String, basePoints: Long) {
 		collection ?: return
 
 		val mongoData = MongoData()
 
 		// Initiualize a zone with some points. We do this so gaining 100% control can't be done by being the first to receive any amount of GCW points.
 		mongoData.putString("zone", zoneName)
-		mongoData.putLong("imperialPoints", CivilWarRegionService.BASE_ZONE_POINTS)
-		mongoData.putLong("rebelPoints", CivilWarRegionService.BASE_ZONE_POINTS)
+		mongoData.putLong("imperialPoints", basePoints)
+		mongoData.putLong("rebelPoints", basePoints)
 
 		collection.insertOne(mongoData.toDocument())
 	}

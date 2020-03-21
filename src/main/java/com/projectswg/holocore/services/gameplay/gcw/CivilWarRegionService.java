@@ -72,7 +72,7 @@ import java.util.stream.Collectors;
  */
 public class CivilWarRegionService extends Service {
 	
-	public static final long BASE_ZONE_POINTS = 50_000;	// Amount of points that each faction has by default in each zone. The point is to make a zone more difficult to capture if it has been reset.
+	private static final long BASE_ZONE_POINTS = 50_000;	// Amount of points that each faction has by default in each zone. The point is to make a zone more difficult to capture if it has been reset.
 	private static final String EGG_TEMPLATE = "object/tangible/spawning/shared_spawn_egg.iff";
 	private static final int PRESENCE_POINTS = 15;
 	
@@ -110,7 +110,7 @@ public class CivilWarRegionService extends Service {
 				ZoneMetadata zone = regionDatabase.getZone(regionName);
 				
 				if (zone == null) {
-					regionDatabase.createZone(regionName);
+					regionDatabase.createZone(regionName, BASE_ZONE_POINTS);
 					guildObject.setImperialZonePercent(null, regionName, 50);	// Start the zone as perfectly balanced. You know, as all things should be.
 				} else {
 					int imperialPercentage = calculateImperialPercent(zone.getImperialPoints(), zone.getRebelPoints());
@@ -276,7 +276,7 @@ public class CivilWarRegionService extends Service {
 			
 			if (rebels <= 0) {
 				// No rebels present. Deduct points.
-				rebelPoints =  Math.min(zoneMetadata.getRebelPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
+				rebelPoints =  Math.max(zoneMetadata.getRebelPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
 				
 				regionDatabase.setRebelPoints(zoneName, rebelPoints);
 			} else {
@@ -291,7 +291,7 @@ public class CivilWarRegionService extends Service {
 			
 			if (imperials <= 0) {
 				// No imperials present. Deduct points.
-				imperialPoints =  Math.min(zoneMetadata.getImperialPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
+				imperialPoints =  Math.max(zoneMetadata.getImperialPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
 				
 				regionDatabase.setImperialPoints(zoneName, imperialPoints);
 			} else {
