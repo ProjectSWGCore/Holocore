@@ -25,52 +25,43 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.utilities
+package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import me.joshlarson.jlcommon.log.Log
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.model.Filters
+import com.mongodb.client.model.IndexOptions
+import com.mongodb.client.model.Indexes
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
+import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import org.bson.Document
 
-/**
- * Runs the given operation, catching any exception and logging it to Log.e
- */
-inline fun <T> runSafe(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		Log.e(t)
+class PswgUserDatabaseMongo(private val mongoCollection: MongoCollection<Document>) : PswgUserDatabase {
+	
+	init {
+		mongoCollection.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun <T> runSafeIgnoreException(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		// ignored
+	
+	override fun getUser(username: String): UserMetadata? {
+		return mongoCollection
+				.find(Filters.eq("username", username))
+				.map { createUserMetadata(it) }
+				.first()
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun runSafeReturnException(op: () -> Any?): Throwable? {
-	try {
-		op()
-		return null
-	} catch (t: Throwable) {
-		return t
+	
+	private fun createUserMetadata(doc: Document): UserMetadata {
+		val accessLevel = when (doc.getString("accessLevel")) {
+			"warden" -> AccessLevel.WARDEN
+			"csr" -> AccessLevel.CSR
+			"qa" -> AccessLevel.QA
+			"dev" -> AccessLevel.DEV
+			else -> AccessLevel.PLAYER
+		}
+		return UserMetadata(accountId = doc.getObjectId("_id").toHexString(),
+							username = doc.getString("username"),
+							password = doc.getString("password"),
+							accessLevel = accessLevel,
+							isBanned = doc.getBoolean("banned"))
 	}
-}
-
-inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
-	handler(this ?: return)
-}
-
-inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
-	val start = System.nanoTime()
-	val ret = operation()
-	val end = System.nanoTime()
-	timeNanoseconds(end-start)
-	return ret
+	
 }

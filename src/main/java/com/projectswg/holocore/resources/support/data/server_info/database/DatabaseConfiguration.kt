@@ -25,52 +25,29 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.utilities
+package com.projectswg.holocore.resources.support.data.server_info.database
 
-import me.joshlarson.jlcommon.log.Log
+import org.bson.Document
 
-/**
- * Runs the given operation, catching any exception and logging it to Log.e
- */
-inline fun <T> runSafe(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		Log.e(t)
+
+class DatabaseConfiguration(doc: Document) {
+	
+	val connector: String = doc.getString("connector") ?: "mongodb"
+	val host: String = doc.getString("host") ?: ""
+	val port: Int = doc.getInteger("port", 0)
+	val database: String = doc.getString("database") ?: ""
+	val user: String = doc.getString("user") ?: ""
+	val pass: String = doc.getString("pass") ?: ""
+	val accessLevels = doc.getList("accessLevels", Document::class.java, ArrayList())
+			.map { ConfigurationAccessLevels(it) }
+			.filter { it.user.isNotEmpty() }
+			.groupBy { it.user }
+			.mapValues { it.value.last().accessLevel }
+	val tables: Map<String, String> = doc.get("tables", Document()).toMap().filter { it.key is String && it.value is String }.mapValues { it.value as String }
+	
+	class ConfigurationAccessLevels(doc: Document) {
+		val user: String = doc.getString("user") ?: ""
+		val accessLevel: String = doc.getString("accessLevel") ?: "player"
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun <T> runSafeIgnoreException(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		// ignored
-	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun runSafeReturnException(op: () -> Any?): Throwable? {
-	try {
-		op()
-		return null
-	} catch (t: Throwable) {
-		return t
-	}
-}
-
-inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
-	handler(this ?: return)
-}
-
-inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
-	val start = System.nanoTime()
-	val ret = operation()
-	val end = System.nanoTime()
-	timeNanoseconds(end-start)
-	return ret
+	
 }

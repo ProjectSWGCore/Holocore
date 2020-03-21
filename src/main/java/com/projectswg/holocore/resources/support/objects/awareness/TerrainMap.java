@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.objects.awareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TerrainMap {
 	
@@ -37,9 +38,11 @@ public class TerrainMap {
 	private static final int INDEX_FACTOR = (int) (Math.log(MAP_WIDTH / (double) CHUNK_COUNT_ACROSS) / Math.log(2) + 1e-12);
 	
 	private final TerrainMapChunk [] chunks;
+	private final ReentrantLock updateLock;
 	
 	public TerrainMap() {
 		this.chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS*CHUNK_COUNT_ACROSS];
+		this.updateLock = new ReentrantLock(false);
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
 				chunks[z*CHUNK_COUNT_ACROSS+x] = new TerrainMapChunk();
@@ -49,8 +52,14 @@ public class TerrainMap {
 	}
 	
 	public void updateChunks() {
-		for (TerrainMapChunk chunk : chunks) {
-			chunk.update();
+		if (!updateLock.tryLock())
+			return;
+		try {
+			for (TerrainMapChunk chunk : chunks) {
+				chunk.update();
+			}
+		} finally {
+			updateLock.unlock();
 		}
 	}
 	

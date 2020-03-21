@@ -25,52 +25,53 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.utilities
+package com.projectswg.holocore.resources.support.data.server_info.mariadb
 
+import com.projectswg.holocore.resources.support.data.server_info.database.DatabaseTable
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
+import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import me.joshlarson.jlcommon.log.Log
+import java.sql.ResultSet
+import java.sql.SQLException
+import java.util.*
 
-/**
- * Runs the given operation, catching any exception and logging it to Log.e
- */
-inline fun <T> runSafe(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		Log.e(t)
-	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun <T> runSafeIgnoreException(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		// ignored
-	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun runSafeReturnException(op: () -> Any?): Throwable? {
-	try {
-		op()
+class PswgUserDatabaseMaria(private val database: DatabaseTable): PswgUserDatabase {
+	
+	private val getUserStatement = ThreadLocal.withInitial { database.mariaConnection!!.prepareStatement("SELECT userID, password, banned FROM ${database.mariaTable!!} WHERE username = $1") }
+	
+	override fun getUser(username: String): UserMetadata? {
+		try {
+			val accessLevel = when (database.configuration?.accessLevels?.get(username)) {
+				"warden" -> AccessLevel.WARDEN
+				"csr" -> AccessLevel.CSR
+				"qa" -> AccessLevel.QA
+				"dev" -> AccessLevel.DEV
+				else -> AccessLevel.PLAYER
+			}
+			val statement = getUserStatement.get()
+			statement.setString(1, username)
+			statement.executeQuery().use { set ->
+				return UserMetadata(accountId = set.getInt("userId").toString(16).toUpperCase(Locale.US),
+									username = username,
+									password = set.getString("password") ?: return null,
+									accessLevel = accessLevel,
+									isBanned = set.getInt("banned") != 0)
+			}
+		} catch (e: SQLException) {
+			Log.w("SQLException when looking up user: $username")
+			Log.w(e)
+		}
 		return null
-	} catch (t: Throwable) {
-		return t
 	}
-}
-
-inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
-	handler(this ?: return)
-}
-
-inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
-	val start = System.nanoTime()
-	val ret = operation()
-	val end = System.nanoTime()
-	timeNanoseconds(end-start)
-	return ret
+	
+	private inline fun (ResultSet).use(op: (ResultSet) -> Unit) {
+		@Suppress("ConvertTryFinallyToUseCall")
+		try {
+			op(this)
+		} finally {
+			close()
+		}
+	}
+	
 }

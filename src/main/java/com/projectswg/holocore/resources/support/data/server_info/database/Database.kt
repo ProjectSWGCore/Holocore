@@ -25,52 +25,56 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.utilities
+package com.projectswg.holocore.resources.support.data.server_info.database
 
+import com.mongodb.client.MongoDatabase
+import com.mongodb.client.model.Filters
 import me.joshlarson.jlcommon.log.Log
+import java.sql.DriverManager
+import java.util.logging.Handler
+import java.util.logging.Level
+import java.util.logging.LogRecord
+import java.util.logging.Logger
 
-/**
- * Runs the given operation, catching any exception and logging it to Log.e
- */
-inline fun <T> runSafe(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		Log.e(t)
+class Database(mongo: MongoDatabase) {
+	
+	val config = DatabaseTable(mongo.getCollection("config"), null, null, null)
+	private val configuration = config.mongo.find(Filters.exists("connector")).map { DatabaseConfiguration(it) }.first()
+	private val connection = if (configuration == null || configuration.connector != "mariadb") null
+							else DriverManager.getConnection("jdbc:mariadb://${configuration.host}:${configuration.port}/${configuration.database}?autoReconnect=true&user=${configuration.user}&password=${configuration.pass}")
+	val users = DatabaseTable(mongo.getCollection("users"), configuration, connection, configuration?.tables?.get("users"))
+	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
+	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
+	val gcwRegions = DatabaseTable(mongo.getCollection("gcwRegions"), configuration, connection, configuration?.tables?.get("gcwRegions"))
+	
+	init {
+		setupMongoLogging()
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun <T> runSafeIgnoreException(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		// ignored
+	
+	private fun setupMongoLogging() {
+		var mongoLogger: Logger? = Logger.getLogger("com.mongodb")
+		while (mongoLogger != null) {
+			for (handler in mongoLogger.handlers) {
+				mongoLogger.removeHandler(handler)
+			}
+			if (mongoLogger.parent != null)
+				mongoLogger = mongoLogger.parent
+			else
+				break
+		}
+		mongoLogger?.addHandler(object : Handler() {
+			override fun publish(record: LogRecord) {
+				when (record.level) {
+					Level.INFO -> Log.i("MongoDB: %s", record.message)
+					Level.WARNING -> Log.w("MongoDB: %s", record.message)
+					Level.SEVERE -> Log.e("MongoDB: %s", record.message)
+					else -> Log.t("MongoDB: %s", record.message)
+				}
+			}
+			
+			override fun flush() {}
+			override fun close() {}
+		})
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun runSafeReturnException(op: () -> Any?): Throwable? {
-	try {
-		op()
-		return null
-	} catch (t: Throwable) {
-		return t
-	}
-}
-
-inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
-	handler(this ?: return)
-}
-
-inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
-	val start = System.nanoTime()
-	val ret = operation()
-	val end = System.nanoTime()
-	timeNanoseconds(end-start)
-	return ret
+	
 }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
  * *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,40 +24,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http:></http:>//www.gnu.org/licenses/>.               *
  */
+package com.projectswg.holocore.utilities
 
-package com.projectswg.holocore.resources.support.data.server_info.mongodb
+import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent
+import me.joshlarson.jlcommon.control.IntentChain
+import me.joshlarson.jlcommon.log.Log
+import me.joshlarson.jlcommon.log.LogWrapper
 
-import com.mongodb.client.MongoCollection
-import com.mongodb.client.model.Filters
-import com.mongodb.client.model.IndexOptions
-import com.mongodb.client.model.Indexes
-import org.bson.Document
-
-class PswgUserDatabase(private val collection: MongoCollection<Document>?) {
+class ChatRoomLogWrapper(private val roomPath: String) : LogWrapper {
 	
-	init {
-		collection?.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
+	private val intentChain = IntentChain()
+	
+	override fun onLog(level: Log.LogLevel, str: String) {
+		val message = when (level) {
+			Log.LogLevel.TRACE  -> return
+			Log.LogLevel.DATA   -> " \\#5555FF\\D: "+str.substringAfter(": ")
+			Log.LogLevel.INFO   -> " \\#00FF00\\I: "+str.substringAfter(": ")
+			Log.LogLevel.WARN   -> " \\#FFFF00\\W: "+str.substringAfter(": ")
+			Log.LogLevel.ERROR  -> " \\#FF0000\\E: "+str.substringAfter(": ")
+			Log.LogLevel.ASSERT -> " \\#FF00FF\\A: "+str.substringAfter(": ")
+		}
+		intentChain.broadcastAfter(SystemChatRoomMessageIntent(roomPath, message))
 	}
-	
-	fun getUser(username: String): UserMetadata? {
-		return collection
-				?.find(Filters.eq("username", username))
-				?.map { UserMetadata(it) }
-				?.first()
-	}
-	
-}
-
-class UserMetadata(doc: Document) {
-	
-	val accountId: String = doc.getObjectId("_id").toHexString()
-	val username: String = doc.getString("username")
-	val password: String = doc.getString("password")
-	val accessLevel: String = doc.getString("accessLevel")
-	val isBanned: Boolean = doc.getBoolean("banned")
-	
-	override fun toString(): String = "UserMetadata[username=$username accessLevel=$accessLevel banned=$isBanned]"
-	override fun equals(other: Any?): Boolean = if (other is UserMetadata) accountId == other.accountId else false
-	override fun hashCode(): Int = accountId.hashCode()
 	
 }

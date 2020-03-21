@@ -38,7 +38,7 @@ internal class TerrainMapChunk {
 	private val objects: CopyOnWriteArrayList<SWGObject> = CopyOnWriteArrayList()
 	private val npcObjects: CopyOnWriteArrayList<SWGObject> = CopyOnWriteArrayList()
 	private val creatures: CopyOnWriteArrayList<CreatureAware> = CopyOnWriteArrayList()
-	private val npcs: CopyOnWriteArrayList<NpcAware> = CopyOnWriteArrayList()
+	private val npcs: CopyOnWriteArrayList<CreatureAware> = CopyOnWriteArrayList()
 	private var neighbors: Array<TerrainMapChunk?> = arrayOf(this)
 	
 	fun link(neighbor: TerrainMapChunk) {
@@ -55,7 +55,7 @@ internal class TerrainMapChunk {
 		if (obj is AIObject && !obj.hasOptionFlags(OptionFlag.INVULNERABLE)) {
 			for (neighbor in neighbors)
 				neighbor!!.npcObjects.addIfAbsent(obj)
-			npcs.add(NpcAware(obj))
+			npcs.add(CreatureAware(obj))
 		} else if (obj is CreatureObject && obj.isPlayer) {
 			for (neighbor in neighbors)
 				neighbor!!.npcObjects.addIfAbsent(obj)
@@ -85,47 +85,37 @@ internal class TerrainMapChunk {
 	
 	private class CreatureAware(val creature: CreatureObject) {
 		
-		private val aware = ArrayList<SWGObject>()
+		private val aware = DoubleBufferedAwareness()
 		
 		fun test(tests: List<SWGObject>) {
-			aware.clear()
+			val buffer = aware.buffer
+			buffer.clear()
 			for (test in tests) {
 				if (creature.isWithinAwarenessRange(test)) {
-					aware.add(test)
+					buffer.add(test)
 				}
 			}
-			if (aware.isEmpty())
-				creature.setAware(AwarenessType.OBJECT, EMPTY_AWARENESS)
-			else
-				creature.setAware(AwarenessType.OBJECT, ArrayList(aware))
+			creature.setAware(AwarenessType.OBJECT, aware.readOnlyBuffer)
 			creature.flushAwareness()
+			aware.flipBuffer()
 		}
 		
 	}
 	
-	private class NpcAware(val creature: CreatureObject) {
+	private class DoubleBufferedAwareness {
 		
-		private val aware = ArrayList<SWGObject>()
+		private val awareness = arrayOf<ArrayList<SWGObject>>(ArrayList(), ArrayList())
+		private val readOnlyAwareness = arrayOf(Collections.unmodifiableList(awareness[0]), Collections.unmodifiableList(awareness[1]))
+		private var index: Int = 0
 		
-		fun test(tests: List<SWGObject>) {
-			aware.clear()
-			for (test in tests) {
-				if (creature.isWithinAwarenessRange(test)) {
-					aware.add(test)
-				}
-			}
-			if (aware.isEmpty())
-				creature.setAware(AwarenessType.OBJECT, EMPTY_AWARENESS)
-			else
-				creature.setAware(AwarenessType.OBJECT, ArrayList(aware))
-			creature.flushAwareness()
+		val buffer: ArrayList<SWGObject>
+			get() = awareness[index]
+		val readOnlyBuffer: List<SWGObject>
+			get() = readOnlyAwareness[index]
+		
+		fun flipBuffer() {
+			index = (index+1) % 2
 		}
-		
-	}
-	
-	companion object {
-		
-		private val EMPTY_AWARENESS = listOf<SWGObject>()
 		
 	}
 	

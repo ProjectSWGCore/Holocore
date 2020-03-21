@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2020 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,23 +24,35 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities;
 
-import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent;
-import me.joshlarson.jlcommon.log.Log;
-import me.joshlarson.jlcommon.log.LogWrapper;
-import org.jetbrains.annotations.NotNull;
+package com.projectswg.holocore.resources.support.data.server_info.database
 
-public class ChatRoomLogWrapper implements LogWrapper {
-
-	private final String roomPath;
-
-	public ChatRoomLogWrapper(String roomPath) {
-		this.roomPath = roomPath;
+interface PswgGcwRegionDatabase {
+	
+	fun createZone(zoneName: String, basePoints: Long)
+	fun setImperialPoints(zoneName: String, points: Long)
+	fun setRebelPoints(zoneName: String, points: Long)
+	fun getZone(zoneName: String): ZoneMetadata?
+	
+	companion object {
+		
+		fun createDefault(): PswgGcwRegionDatabase {
+			return object : PswgGcwRegionDatabase {
+				override fun createZone(zoneName: String, basePoints: Long) {}
+				override fun setImperialPoints(zoneName: String, points: Long) {}
+				override fun setRebelPoints(zoneName: String, points: Long) {}
+				override fun getZone(zoneName: String): ZoneMetadata? = null
+			}
+		}
+		
 	}
+	
+}
 
-	@Override
-	public void onLog(Log.@NotNull LogLevel level, @NotNull String str) {
-		SystemChatRoomMessageIntent.broadcast(roomPath, str);
-	}
+class ZoneMetadata(val zone: String, val imperialPoints: Long, val rebelPoints: Long) {
+	
+	override fun toString(): String = "ZoneMetadata[zone=$zone imperialPoints=$imperialPoints rebelPoints=$rebelPoints]"
+	override fun equals(other: Any?): Boolean = if (other is ZoneMetadata) zone == other.zone else false
+	override fun hashCode(): Int = zone.hashCode()
+	
 }

@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: Build
+      run: ./gradlew --no-daemon clean test jlink
+    - name: Docker Login
+      run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
+    - name: Docker Build & Push
+      run: |
+        IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
+        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
+        docker build -t "$IMAGE_NAME:$RELEASE_NAME" .
+        docker push "$IMAGE_NAME:$RELEASE_NAME"
+    - name: Docker Push to QA
+      if: github.event.release.prerelease
+      run: |
+        IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
+        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:quality_assurance"
+        docker push "$IMAGE_NAME:quality_assurance"
+    - name: Docker Push to Master
+      if: github.event.release.prerelease == false
+      run: |
+        IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
+        RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:latest"
+        docker push "$IMAGE_NAME:latest"

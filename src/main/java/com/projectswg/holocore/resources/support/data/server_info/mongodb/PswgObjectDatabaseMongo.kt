@@ -25,52 +25,63 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.utilities
+package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import me.joshlarson.jlcommon.log.Log
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.model.*
+import com.projectswg.common.data.encodables.mongo.MongoData
+import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgObjectDatabase
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import org.bson.Document
+import java.util.regex.Pattern
+import java.util.stream.Collectors.toList
 
-/**
- * Runs the given operation, catching any exception and logging it to Log.e
- */
-inline fun <T> runSafe(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		Log.e(t)
+class PswgObjectDatabaseMongo(private val collection: MongoCollection<Document>) : PswgObjectDatabase {
+	
+	override val objects: List<MongoData>
+		get() = collection.find().map { MongoData(it) }.into(ArrayList()) ?: ArrayList()
+	
+	init {
+		collection.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun <T> runSafeIgnoreException(op: () -> T) {
-	try {
-		op()
-	} catch (t: Throwable) {
-		// ignored
+	
+	override fun addObject(obj: SWGObject) {
+		collection.replaceOne(Filters.eq("id", obj.objectId), SWGObjectFactory.save(obj, MongoData()).toDocument(), ReplaceOptions().upsert(true))
 	}
-}
-
-/**
- * Runs the given operation, catching any exception and suppressing it
- */
-inline fun runSafeReturnException(op: () -> Any?): Throwable? {
-	try {
-		op()
-		return null
-	} catch (t: Throwable) {
-		return t
+	
+	override fun addObjects(objects: Collection<SWGObject>) {
+		if (objects.isEmpty())
+			return
+		collection.bulkWrite(objects.stream()
+				.map { obj ->
+					ReplaceOneModel(
+							Filters.eq("id", obj.objectId),
+							SWGObjectFactory.save(obj).toDocument(),
+							ReplaceOptions().upsert(true)
+					)
+				}
+				.collect(toList()),
+				BulkWriteOptions().ordered(false))
 	}
-}
-
-inline infix fun Throwable?.handle(handler: (Throwable) -> Any?) {
-	handler(this ?: return)
-}
-
-inline fun <T> measureTime(timeNanoseconds: (Long) -> Unit, operation: () -> T): T {
-	val start = System.nanoTime()
-	val ret = operation()
-	val end = System.nanoTime()
-	timeNanoseconds(end-start)
-	return ret
+	
+	override fun removeObject(id: Long): Boolean {
+		return collection.deleteOne(Filters.eq("id", id)).deletedCount > 0
+	}
+	
+	override fun getCharacterCount(account: String): Int {
+		return collection.countDocuments(Filters.eq("account", account)).toInt()
+	}
+	
+	override fun isCharacter(firstName: String): Boolean {
+		return collection.countDocuments(Filters.and(
+				Filters.regex("template", "object/creature/player/shared_.+\\.iff"),
+				Filters.regex("base3.objectName", Pattern.compile(Pattern.quote(firstName) + "( .+|$)", Pattern.CASE_INSENSITIVE))
+		)) > 0
+	}
+	
+	override fun clearObjects(): Long {
+		return collection.deleteMany(Filters.exists("_id")).deletedCount
+	}
+	
 }

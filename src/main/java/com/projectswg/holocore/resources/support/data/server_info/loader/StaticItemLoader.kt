@@ -217,6 +217,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 	}
 	
+	@Suppress("UNUSED_PARAMETER")
 	class StorytellerItemInfo(set: SdbResultSet)
 	
 	class WeaponItemInfo(set: SdbResultSet) {

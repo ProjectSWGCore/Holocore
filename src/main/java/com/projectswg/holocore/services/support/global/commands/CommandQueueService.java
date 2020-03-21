@@ -170,6 +170,7 @@ public class CommandQueueService extends Service {
 			commandTimer.setCooldownMax((float) cooldownTime);
 			commandTimer.setCommandNameCrc(command.getCrc());
 			commandTimer.setSequenceId(counter);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.COOLDOWN);
 			creature.sendSelf(commandTimer);
 			
 			executor.execute((long) (cooldownTime * 1000), () -> activeCooldownGroups.remove(group));

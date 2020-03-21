@@ -28,66 +28,56 @@
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
 import com.mongodb.client.MongoCollection
-import com.mongodb.client.model.*
+import com.mongodb.client.model.Filters
+import com.mongodb.client.model.IndexOptions
+import com.mongodb.client.model.Indexes
 import com.projectswg.common.data.encodables.mongo.MongoData
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgGcwRegionDatabase
+import com.projectswg.holocore.resources.support.data.server_info.database.ZoneMetadata
 import org.bson.Document
-import java.util.*
-import java.util.regex.Pattern
-import java.util.stream.Collectors.toList
 
-class PswgObjectDatabase(private val collection: MongoCollection<Document>?) {
-	
-	val objects: List<MongoData>
-		get() = collection?.find()?.map { MongoData(it) }?.into(ArrayList()) ?: ArrayList()
+class PswgGcwRegionDatabaseMongo(private val collection: MongoCollection<Document>) : PswgGcwRegionDatabase {
 	
 	init {
-		collection?.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
+		collection.createIndex(Indexes.ascending("zone"), IndexOptions().unique(true))
 	}
-	
-	fun addObject(obj: SWGObject) {
-		collection ?: return
-		collection.replaceOne(Filters.eq("id", obj.objectId), SWGObjectFactory.save(obj, MongoData()).toDocument(), ReplaceOptions().upsert(true))
+
+	override fun createZone(zoneName: String, basePoints: Long) {
+		val mongoData = MongoData()
+
+		// Initiualize a zone with some points. We do this so gaining 100% control can't be done by being the first to receive any amount of GCW points.
+		mongoData.putString("zone", zoneName)
+		mongoData.putLong("imperialPoints", basePoints)
+		mongoData.putLong("rebelPoints", basePoints)
+
+		collection.insertOne(mongoData.toDocument())
 	}
-	
-	fun addObjects(objects: Collection<SWGObject>) {
-		collection ?: return
-		if (objects.isEmpty())
-			return
-		collection.bulkWrite(objects.stream()
-				.map { obj ->
-					ReplaceOneModel(
-							Filters.eq("id", obj.objectId),
-							SWGObjectFactory.save(obj).toDocument(),
-							ReplaceOptions().upsert(true)
-					)
-				}
-				.collect(toList()),
-				BulkWriteOptions().ordered(false))
+
+	override fun setImperialPoints(zoneName: String, points: Long) {
+		val mongoData = MongoData()
+
+		mongoData.putLong("imperialPoints", points)
+
+		collection.updateOne(Filters.eq("zone", zoneName), Document("\$set", mongoData.toDocument()))
 	}
-	
-	fun removeObject(id: Long): Boolean {
-		collection ?: return true
-		return collection.deleteOne(Filters.eq("id", id)).deletedCount > 0
+
+	override fun setRebelPoints(zoneName: String, points: Long) {
+		val mongoData = MongoData()
+
+		mongoData.putLong("rebelPoints", points)
+
+		collection.updateOne(Filters.eq("zone", zoneName), Document("\$set", mongoData.toDocument()))
 	}
-	
-	fun getCharacterCount(account: String): Int {
-		collection ?: return 0
-		return collection.countDocuments(Filters.eq("account", account)).toInt()
-	}
-	
-	fun isCharacter(firstName: String): Boolean {
-		collection ?: return false
-		return collection.countDocuments(Filters.and(
-				Filters.regex("template", "object/creature/player/shared_.+\\.iff"),
-				Filters.regex("base3.objectName", Pattern.compile(Pattern.quote(firstName) + "( .+|$)", Pattern.CASE_INSENSITIVE))
-		)) > 0
-	}
-	
-	fun clearObjects(): Long {
-		collection ?: return 0
-		return collection.deleteMany(Filters.exists("_id")).deletedCount
+
+	override fun getZone(zoneName: String): ZoneMetadata? {
+		return collection
+				.find(Filters.eq("zone", zoneName))
+				.map { ZoneMetadata(
+						zone=it.getString("zone"),
+						imperialPoints=it.getLong("imperialPoints"),
+						rebelPoints=it.getLong("rebelPoints")
+				)}
+				.first()
 	}
 	
 }
