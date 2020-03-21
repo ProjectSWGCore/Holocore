@@ -71,7 +71,7 @@ public class GuildObject extends SWGObject {
 		bb.addObject(gcwImperialScorePercentileOtherGalaxies);
 		bb.addObject(gcwGroupImperialScorePercentileOtherGalaxies);
 		bb.addInt(0);	// unknown, but client underflows if there aren't 4 bytes here
-		bb.incrementOperandCount(8);
+		bb.incrementOperandCount(7);
 	}
 	
 	@Override
