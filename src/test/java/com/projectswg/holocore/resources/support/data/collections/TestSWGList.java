@@ -48,6 +48,7 @@ public class TestSWGList extends TestRunnerNoIntents {
 		SWGList<String> swgList = SWGList.Companion.createAsciiList(3, 6);
 		swgList.addAll(List.of(strings));
 		
+		Assert.assertEquals(size, swgList.size());
 		Assert.assertArrayEquals(strings, swgList.toArray());
 		
 		List<String> list = new ArrayList<>();
