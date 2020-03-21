@@ -116,6 +116,8 @@ public class PlayerMountService extends Service {
 			enterMount(eci.getSource(), (CreatureObject) target);
 		else if (cmdName.equals("dismount"))
 			exitMount(eci.getSource(), (CreatureObject) target);
+		else if (cmdName.equals("dismountandstore")) 
+			storeMount(eci.getSource(),(CreatureObject) eci.getTarget(),(IntangibleObject) eci.getTarget());		
 	}
 	
 	@IntentHandler
@@ -427,7 +429,7 @@ public class PlayerMountService extends Service {
 	private void dismount(CreatureObject player, CreatureObject mount, VehicleInfo vehicleInfo) {
 		assert player.getParent() == mount;
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		player.moveToContainer(null, mount.getLocation());
+		player.moveToSlot(null, mount, "", player.getArrangementId(player));
 		player.resetMovement();
 		if (vehicleInfo != null && !vehicleInfo.getPlayerBuff().isEmpty())
 			BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, mount, true);
