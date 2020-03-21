@@ -45,7 +45,7 @@ class Database(mongo: MongoDatabase) {
 	val users = DatabaseTable(mongo.getCollection("users"), configuration, connection, configuration?.tables?.get("users"))
 	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
 	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
-	val gcwRegions = DatabaseTable(mongo.getCollection("gcwRegions"), configuration, connection, configuration?.tables?.get("gcwRegions"))
+	val gcwRegions = DatabaseTable(mongo.getCollection("gcwregions"), configuration, connection, configuration?.tables?.get("gcwRegions"))
 	
 	init {
 		setupMongoLogging()
