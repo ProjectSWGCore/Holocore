@@ -68,7 +68,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	constructor(page: Int, update: Int, stringType: StringType = StringType.UNSPECIFIED):
 			this(page, update, decoder={throw UnsupportedOperationException("don't know how to decode object")}, encoder=createDefaultEncoder<T>(stringType), encodedLength=createDefaultEncodedLength(stringType))
 	
-	override val size: Int = list.size
+	override val size: Int get() = list.size	
 	override fun isEmpty(): Boolean = list.isEmpty()
 	override fun contains(element: T): Boolean = list.contains(element)
 	override fun containsAll(elements: Collection<T>): Boolean = list.containsAll(elements)
