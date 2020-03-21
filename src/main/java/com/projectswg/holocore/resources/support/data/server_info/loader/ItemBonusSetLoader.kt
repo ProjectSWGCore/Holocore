@@ -41,7 +41,7 @@ class ItemBonusSetLoader internal constructor() : DataLoader() {
 
 	@Throws(IOException::class)
 	override fun load() {
-		SdbLoader.load(File("serverdata/items/items_bonus_sets.sdb")).use { set ->
+		SdbLoader.load(File("serverdata/nge/items/items_bonus_sets.sdb")).use { set ->
 			while (set.next()) {
 				val itemBonusSetInfo = ItemBonusSetInfo(set)
 				val setId = itemBonusSetInfo.setId

@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.support.objects
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import java.util.*
@@ -233,6 +234,8 @@ object StaticItemCreator {
 
 	private fun applySetBonus(obj: TangibleObject, wornItemBuff: Int) {
 		val itemBonusSetsById = DataLoader.ItemBonusSets().getItemBonusSetsById(wornItemBuff) ?: return
+
+		obj.setServerAttribute(ServerAttribute.SET_BONUS_ID, wornItemBuff)
 
 		for (itemBonusSet in itemBonusSetsById) {
 			val count = itemBonusSet.count
