@@ -29,6 +29,8 @@ package com.projectswg.holocore.resources.gameplay.player;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 
@@ -44,7 +46,14 @@ public class ActivePlayerPredicate implements Predicate<Player> {
 		boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
 		boolean dead = creatureObject.getPosture() == Posture.DEAD;
 		boolean cloaked = !creatureObject.isVisible();
+		boolean privateCell = false;	// Player might be inside a private building
 		
-		return !afk && !offline && !incapacitated && !dead && !cloaked;
+		SWGObject parent = creatureObject.getParent();
+		
+		if (parent instanceof CellObject) {
+			privateCell = !((CellObject) parent).isPublic();
+		}
+		
+		return !afk && !offline && !incapacitated && !dead && !cloaked && !privateCell;
 	}
 }
