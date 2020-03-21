@@ -59,6 +59,8 @@ abstract class DataLoader {
 		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
 		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels
 		fun noSpawnZones(): NoSpawnZoneLoader = ServerData.noSpawnZones
+		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
+
 	}
 	
 }
