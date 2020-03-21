@@ -30,9 +30,8 @@ import com.projectswg.common.data.encodables.gcw.GcwGroup;
 import com.projectswg.common.data.encodables.gcw.GcwGroupZone;
 import com.projectswg.common.data.encodables.gcw.GcwRegion;
 import com.projectswg.common.data.encodables.gcw.GcwRegionZone;
-import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.objects.GameObjectType;
@@ -43,13 +42,13 @@ import com.projectswg.common.network.packets.swg.zone.GcwRegionsRsp;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.CivilWarPointIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.gameplay.player.ActivePlayerPredicate;
 import com.projectswg.holocore.resources.support.data.server_info.loader.GcwRegionLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgGcwRegionDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.ZoneMetadata;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -61,6 +60,7 @@ import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -72,12 +72,14 @@ import java.util.stream.Collectors;
  */
 public class CivilWarRegionService extends Service {
 	
+	public static final long BASE_ZONE_POINTS = 50_000;	// Amount of points that each faction has by default in each zone. The point is to make a zone more difficult to capture if it has been reset.
 	private static final String EGG_TEMPLATE = "object/tangible/spawning/shared_spawn_egg.iff";
+	private static final int PRESENCE_POINTS = 15;
 	
 	private final GcwRegionLoader regionLoader;	// Stores static information about zone names and their locations in the game
 	private final PswgGcwRegionDatabase regionDatabase;	// Stores dynamic information about how many points each faction has per zone
 	private final ScheduledThreadPool executor;
-	private final Collection<SWGObject> eggs;
+	private final Map<SWGObject, GcwRegionLoader.GcwRegionInfo> eggMap;
 	
 	private GuildObject guildObject;
 	
@@ -85,7 +87,7 @@ public class CivilWarRegionService extends Service {
 		regionLoader = ServerData.INSTANCE.getGcwRegionLoader();
 		regionDatabase = PswgDatabase.INSTANCE.getGcwRegions();
 		executor = new ScheduledThreadPool(1, "civil-war-region-service");
-		eggs = Collections.synchronizedCollection(new ArrayList<>());
+		eggMap = Collections.synchronizedMap(new HashMap<>());
 	}
 	
 	@Override
@@ -119,21 +121,29 @@ public class CivilWarRegionService extends Service {
 				Location location = Location.builder()
 						.setTerrain(terrain)
 						.setX(terrainRegion.getCenterX())
-						.setY(0)	// TODO read height of terrain and use that as y-coordinate
+						.setY(0)	// TODO read height of terrain and use that as y-coordinate to avoid having the egg spawning inside a hill or something
 						.setZ(terrainRegion.getCenterZ())
 						.build();
 				
 				egg.moveToContainer(null, location);	// Spawn egg at desired position
+				egg.setObjectName(regionName);	// Give the egg the name of the region
 				ObjectCreatedIntent.broadcast(egg);
-				eggs.add(egg);
+				eggMap.put(egg, terrainRegion);
 			}
 		}
 		
-		long checkRate = 1000;	// Attempt to delete old NPCs every 1000ms
+		// Decay or boost percentage of zones based on player presence every 15 minutes
+		long checkRate = TimeUnit.MILLISECONDS.convert(15, TimeUnit.MINUTES);
 		executor.start();
-		executor.executeWithFixedRate(checkRate, checkRate, this::grantPresencePoints);
+		executor.executeWithFixedRate(checkRate, checkRate, this::checkPresence);
 		
 		return true;
+	}
+	
+	@Override
+	public boolean stop() {
+		executor.stop();
+		return super.stop();
 	}
 	
 	@IntentHandler
@@ -193,9 +203,10 @@ public class CivilWarRegionService extends Service {
 	private void handleCivilWarPoint(CivilWarPointIntent intent) {
 		PlayerObject player = intent.getReceiver();
 		CreatureObject creature = (CreatureObject) player.getParent();
-		PvpFaction pvpFaction = creature.getPvpFaction();
 		
 		Objects.requireNonNull(creature, "PlayerObject without a parent");
+		
+		PvpFaction pvpFaction = creature.getPvpFaction();
 		
 		if (pvpFaction == PvpFaction.NEUTRAL) {
 			// Not sure how a neutral would receive GCW points, but that shouldn't tip the scales in either direction
@@ -217,7 +228,7 @@ public class CivilWarRegionService extends Service {
 		ZoneMetadata zoneMetadata = regionDatabase.getZone(zoneName);
 		
 		if (zoneMetadata == null) {
-			Log.w("Synchronization issue between SDB file and database, unable to find zone %s", zoneName);
+			Log.w("Synchronization issue between SDB file and database, unable to find zone %s in database", zoneName);
 			return;
 		}
 		
@@ -227,12 +238,12 @@ public class CivilWarRegionService extends Service {
 		switch (pvpFaction) {
 			case REBEL: {
 				rebelTotal += points;
-				regionDatabase.addRebelPoints(zoneName, rebelTotal);
+				regionDatabase.setRebelPoints(zoneName, rebelTotal);
 				break;
 			}
 			case IMPERIAL: {
 				imperialTotal += points;
-				regionDatabase.addImperialPoints(zoneName, imperialTotal);
+				regionDatabase.setImperialPoints(zoneName, imperialTotal);
 				break;
 			}
 		}
@@ -241,69 +252,68 @@ public class CivilWarRegionService extends Service {
 		guildObject.setImperialZonePercent(regionInfo.getTerrain(), zoneName, imperialPercent);
 	}
 	
-	private void grantPresencePoints() {
-		for (SWGObject egg : eggs) {
-			Set<Player> observers = egg.getObservers();
+	/**
+	 * Checks presence of players in every GCW region.
+	 * Each faction can be awarded or deducted points based on presence.
+	 * Scales with amount of players present.
+	 */
+	private void checkPresence() {
+		for (Map.Entry<SWGObject, GcwRegionLoader.GcwRegionInfo> entry : eggMap.entrySet()) {
+			SWGObject egg = entry.getKey();
+			GcwRegionLoader.GcwRegionInfo region = entry.getValue();
+			String zoneName = region.getRegionName();
+			ZoneMetadata zoneMetadata = regionDatabase.getZone(zoneName);
 			
-			for (Player observer : observers) {
-				CreatureObject creatureObject = observer.getCreatureObject();
-				PvpFaction pvpFaction = creatureObject.getPvpFaction();
-				
-				boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
-				boolean dead = creatureObject.getPosture() == Posture.DEAD;
-				boolean cloaked = !creatureObject.isVisible();
-				boolean notSpecialForces = !creatureObject.hasPvpFlag(PvpFlag.OVERT);
-				boolean afk = creatureObject.getPlayerObject().isFlagSet(PlayerFlags.AFK);
-				boolean offline = creatureObject.getPlayerObject().isFlagSet(PlayerFlags.LD);
-				
-				if (incapacitated || dead || cloaked || notSpecialForces || afk || offline) {
-					// Player must participate in GCW. Being present is not enough.
-					return;
-				}
-				
-				// TODO how do we know that they've been in the area an appropriate amount of time?
+			if (zoneMetadata == null) {
+				Log.w("Synchronization issue between SDB file and database, unable to find zone %s in database", zoneName);
+				return;
 			}
-		}
-	}
-	
-	private void decayPresencePoints() {
-		for (SWGObject egg : eggs) {
+			
 			Set<Player> observers = egg.getObservers();
 			
-			long rebels = observers.stream()
-					.map(Player::getCreatureObject)
-					.filter(creatureObject -> creatureObject.hasPvpFlag(PvpFlag.OVERT))	// Only Special Forces players can prevent decay
-					.filter(creatureObject -> {
-						PlayerObject playerObject = creatureObject.getPlayerObject();
-						boolean afk = playerObject.isFlagSet(PlayerFlags.AFK);
-						boolean offline = playerObject.isFlagSet(PlayerFlags.LD);
-						boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
-						boolean dead = creatureObject.getPosture() == Posture.DEAD;
-						boolean cloaked = !creatureObject.isVisible();
-						boolean specialForces = creatureObject.hasPvpFlag(PvpFlag.OVERT);	// TODO separate filter
-						
-						return !afk && !offline && !incapacitated && !dead && !cloaked && specialForces;
-					})
-					.map(CreatureObject::getPvpFaction)
-					.filter(faction -> faction == PvpFaction.REBEL)
-					.count();
-
+			long rebels = countPresentPlayers(observers, PvpFaction.REBEL);
+			long rebelPoints = zoneMetadata.getRebelPoints();
+			
 			if (rebels <= 0) {
 				// No rebels present. Deduct points.
+				rebelPoints =  Math.min(zoneMetadata.getRebelPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
 				
+				regionDatabase.setRebelPoints(zoneName, rebelPoints);
+			} else {
+				// Rebels are present. Award points that scales with the amount of rebels in the area.
+				rebelPoints += PRESENCE_POINTS * rebels;
+				
+				regionDatabase.setRebelPoints(zoneName, rebelPoints);
 			}
 			
-			long imperials = observers.stream()
-					.map(Player::getCreatureObject)
-					.map(CreatureObject::getPvpFaction)
-					.filter(faction -> faction == PvpFaction.IMPERIAL)
-					.count();
+			long imperials = countPresentPlayers(observers, PvpFaction.IMPERIAL);
+			long imperialPoints = zoneMetadata.getImperialPoints();
 			
 			if (imperials <= 0) {
 				// No imperials present. Deduct points.
+				imperialPoints =  Math.min(zoneMetadata.getImperialPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
 				
+				regionDatabase.setImperialPoints(zoneName, imperialPoints);
+			} else {
+				// Imperials  are present. Award points that scales with the amount of imperials in the area.
+				imperialPoints += PRESENCE_POINTS * imperials;
+				
+				regionDatabase.setImperialPoints(zoneName, imperialPoints);
 			}
+			
+			// Update zone percent on planetary map if applicable
+			guildObject.setImperialZonePercent(region.getTerrain(), zoneName, calculateImperialPercent(imperialPoints, rebelPoints));
 		}
+	}
+	
+	private long countPresentPlayers(Set<Player> observers, PvpFaction faction) {
+		return observers.stream()
+				.filter(new ActivePlayerPredicate())
+				.map(Player::getCreatureObject)
+				.filter(creatureObject -> creatureObject.getPvpStatus() == PvpStatus.SPECIALFORCES)	// Only Special Forces players can prevent decay
+				.map(CreatureObject::getPvpFaction)
+				.filter(playerFaction -> playerFaction == faction)
+				.count();
 	}
 	
 	private int calculateImperialPercent(long imperialTotal, long rebelTotal) {
@@ -316,7 +326,4 @@ public class CivilWarRegionService extends Service {
 		return (int) ((double) imperialTotal / (double) (imperialTotal + rebelTotal) * 100);
 	}
 	
-	// TODO scheduled job that deducts points from factions that are not present in all zones, until the base amount of 50_000 is reached
-	
-	// TODO scheduled job that checks legitimate factional presence inside each zone. This will count towards points in that zone for the relevant faction.
 }

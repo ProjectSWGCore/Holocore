@@ -32,6 +32,7 @@ import com.mongodb.client.model.Filters
 import com.mongodb.client.model.IndexOptions
 import com.mongodb.client.model.Indexes
 import com.projectswg.common.data.encodables.mongo.MongoData
+import com.projectswg.holocore.services.gameplay.gcw.CivilWarRegionService
 import org.bson.Document
 
 class PswgGcwRegionDatabase(private val collection: MongoCollection<Document>?) {
@@ -47,13 +48,13 @@ class PswgGcwRegionDatabase(private val collection: MongoCollection<Document>?) 
 
 		// Initiualize a zone with some points. We do this so gaining 100% control can't be done by being the first to receive any amount of GCW points.
 		mongoData.putString("zone", zoneName)
-		mongoData.putLong("imperialPoints", 50_000)
-		mongoData.putLong("rebelPoints", 50_000)
+		mongoData.putLong("imperialPoints", CivilWarRegionService.BASE_ZONE_POINTS)
+		mongoData.putLong("rebelPoints", CivilWarRegionService.BASE_ZONE_POINTS)
 
 		collection.insertOne(mongoData.toDocument())
 	}
 
-	fun addImperialPoints(zoneName: String, points: Long) {
+	fun setImperialPoints(zoneName: String, points: Long) {
 		collection ?: return
 		val mongoData = MongoData()
 
@@ -62,7 +63,7 @@ class PswgGcwRegionDatabase(private val collection: MongoCollection<Document>?) 
 		collection.updateOne(Filters.eq("zone", zoneName), Document("\$set", mongoData.toDocument()))
 	}
 
-	fun addRebelPoints(zoneName: String, points: Long) {
+	fun setRebelPoints(zoneName: String, points: Long) {
 		collection ?: return
 		val mongoData = MongoData()
 
