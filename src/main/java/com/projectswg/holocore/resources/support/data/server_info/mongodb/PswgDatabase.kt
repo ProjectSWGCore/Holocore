@@ -19,7 +19,8 @@ object PswgDatabase {
 	val users by DatabaseDelegate(database, "users") { PswgUserDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
 	val objects by DatabaseDelegate(database, "objects") { PswgObjectDatabase(it?.withWriteConcern(WriteConcern.JOURNALED)) }
 	val resources by DatabaseDelegate(database, "resources") { PswgResourceDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
-	
+	val gcwRegions by DatabaseDelegate(database, "gcwregions") { PswgGcwRegionDatabase(it?.withWriteConcern(WriteConcern.ACKNOWLEDGED)) }
+
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
 		val client = MongoClients.create(connectionString)

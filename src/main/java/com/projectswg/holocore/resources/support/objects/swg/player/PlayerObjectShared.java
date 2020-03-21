@@ -101,6 +101,10 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		flagsList.sendDeltaMessage(obj);
 	}
 	
+	public boolean isFlagSet(int flag) {
+		return flagsList.get(flag);
+	}
+	
 	public BitSet getProfileFlags() {
 		return (BitSet) profileFlags.clone();
 	}

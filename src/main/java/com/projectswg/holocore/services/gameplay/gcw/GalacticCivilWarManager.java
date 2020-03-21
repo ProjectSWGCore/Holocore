@@ -7,6 +7,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 		CivilWarPointService.class,
 		CivilWarPvpService.class,
 		CivilWarRankService.class,
+		CivilWarRegionService.class,
 })
 public class GalacticCivilWarManager extends Manager {
 	
