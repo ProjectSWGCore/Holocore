@@ -64,7 +64,7 @@ public class DynamicSpawnService extends Service {
 	}
 	
 	@IntentHandler
-	public void handlePlayerTransformed(PlayerTransformedIntent intent) {
+	private void handlePlayerTransformed(PlayerTransformedIntent intent) {
 		Location location = intent.getNewLocation();
 		
 		updateTimestamps(location);
