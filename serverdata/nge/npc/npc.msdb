@@ -1,0 +1,9 @@
+file	enabled
+TEXT	BOOLEAN
+npc_1.sdb	TRUE
+npc_2.sdb	TRUE
+npc_3.sdb	TRUE
+npc_4.sdb	TRUE
+npc_5.sdb	TRUE
+npc_6.sdb	TRUE
+npc_7.sdb	TRUE

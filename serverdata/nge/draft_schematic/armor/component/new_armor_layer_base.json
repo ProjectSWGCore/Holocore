@@ -1,0 +1,5 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_armor",
+    "craftedObjectTemplate": "object/tangible/component/armor/new_armor_layer_test.iff"
+}

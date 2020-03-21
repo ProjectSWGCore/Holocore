@@ -1,0 +1,124 @@
+{
+    "parent": "object/draft_schematic/chemistry/base_chemistry_schematic.iff",
+    "itemsPerContainer": 30,
+    "craftedObjectTemplate": "object/tangible/medicine/crafted/crafted_medpack_fire_blanket.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "coolent_gel"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "coolent_gel"
+                            ],
+                            "ingredient": "vegetable_fungi_rori",
+                            "count": 26
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "fire_suppression_lining"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "fire_suppression_lining"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 44
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "delivery_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "delivery_medium"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/synthetic_cloth.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "drug_strength_compound"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "drug_strength_compound"
+                            ],
+                            "ingredient": "object/tangible/component/chemistry/biologic_effect_controller_advanced.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.crafted_items.crafting_medpack_cure_poison_chemistry"
+    ],
+    "complexity": 28,
+    "sharedTemplate": "object/draft_schematic/chemistry/shared_med_fire_blanket.iff",
+    "volume": 1
+}

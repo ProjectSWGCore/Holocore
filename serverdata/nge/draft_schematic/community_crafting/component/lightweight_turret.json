@@ -1,0 +1,70 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/lightweight_turret.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "lightweight_turret_hardware"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_schematic",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "community_crafting_n",
+                                "lightweight_turret_hardware"
+                            ],
+                            "ingredient": "object/draft_schematic/community_crafting/component/lightweight_turret_hardware.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "lightweight_turret_electronics"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_schematic",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "community_crafting_n",
+                                "lightweight_turret_electronics"
+                            ],
+                            "ingredient": "object/draft_schematic/community_crafting/component/lightweight_turret_electronics.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.lightweight_turret"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_lightweight_turret.iff"
+}

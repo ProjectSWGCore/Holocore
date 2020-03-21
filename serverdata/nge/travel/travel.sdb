@@ -1,0 +1,65 @@
+planet	type	name	x	z
+TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	REAL	REAL
+corellia	shuttleport	Coronet Shuttle A	-25	-4410
+corellia	shuttleport	Coronet Shuttle B	-329	-4641
+corellia	shuttleport	Vreni Island Shuttle	-5551	-6059
+corellia	shuttleport	Tyrena Shuttle A	-5005	-2386
+corellia	shuttleport	Tyrena Shuttle B	-5600	-2790
+corellia	shuttleport	Doaba Guerfel Shuttleport	3081	4994
+corellia	shuttleport	Kor Vella Shuttleport	-3775	3234
+corellia	shuttleport	Bela Vistal Shuttleport A	6644	-5922
+corellia	shuttleport	Bela Vistal Shuttleport B	6930	-5534
+corellia	starport	Coronet Starport	-75	-4723
+corellia	starport	Tyrena Starport	-4998	-2246
+corellia	starport	Kor Vella Starport	-3141	2864
+corellia	starport	Doaba Guerfel Starport	3358	5581
+dantooine	starport	Mining Outpost	-636	2505
+dantooine	starport	Imperial Outpost	-4208	-2350
+dantooine	starport	Agro Outpost	1569	-6415
+dathomir	starport	Science Outpost	-49	-1584
+dathomir	starport	Trade Outpost	618	3092
+dathomir	shuttleport	Quarantine Zone	-5688	-6468
+endor	starport	Smuggler Outpost	-950	1553
+endor	starport	Research Outpost	3201	-3500
+lok	starport	Nym's Stronghold	479	5511
+naboo	starport	Kaadara Starport	5295	6675
+naboo	shuttleport	Kaadara Shuttleport	5123	6616
+naboo	shuttleport	Dee'ja Peak Shuttleport	5331	-1576
+naboo	shuttleport	Moenia Shuttleport	4961	-4892
+naboo	shuttleport	Lake Retreat Shuttleport	-5494	-21
+naboo	shuttleport	Keren Shuttleport	2021	2525
+naboo	shuttleport	Keren Shuttleport South	1567	2837
+naboo	starport	Keren Starport	1377	2760
+naboo	starport	Moenia Starport	4745	-4672
+naboo	shuttleport	Theed Shuttle A	-5856	4172
+naboo	shuttleport	Theed Shuttle B	-5005	4072
+naboo	shuttleport	Theed Shuttle C	-5411	4321
+naboo	starport	Theed Spaceport	-4866	4155
+rori	starport	Narmle Starport	-5359	-2188
+rori	shuttleport	Narmle Shuttleport	-5255	-2161
+rori	starport	Rebel Outpost	3693	-6403
+rori	starport	Restuss Starport	5301	6190
+rori	shuttleport	Restuss Shuttleport	5221	6203
+talus	starport	Dearic Starport	274	-2933
+talus	shuttleport	Dearic Shuttleport	699	-3042
+talus	starport	Nashal Starport	4461	5342
+talus	shuttleport	Nashal Shuttleport	4334	5431
+talus	starport	Imperial Outpost	-2227	2322
+tatooine	starport	Bestine Starport	-1350	-3586
+tatooine	starport	Mos Eisley Starport	3592	-4793
+tatooine	starport	Mos Espa Starport	-2844	2097
+tatooine	starport	Mos Entha Starport	1257	3079
+tatooine	shuttleport	Anchorhead Shuttle	46	-5338
+tatooine	shuttleport	Mos Entha Shuttleport A	1730	3184
+tatooine	shuttleport	Mos Entha Shuttleport B	1394	3468
+tatooine	shuttleport	Mos Espa Shuttle West	-3112	2174
+tatooine	shuttleport	Mos Espa Shuttle East	-2801	2182
+tatooine	shuttleport	Mos Espa Shuttle South	-2896	1932
+tatooine	shuttleport	Mos Eisley Shuttleport	3418	-4647
+tatooine	shuttleport	Bestine Shuttleport	-1098	-3562
+tatooine	shuttleport	Wayfar Shuttleport	-5089	-6611
+yavin4	starport	Imperial Base	4054	-6216
+yavin4	starport	Labor Outpost	-6922	-5727
+yavin4	starport	Mining Outpost	-267	4896
+kashyyyk_main	starport	Kachirho Starport	-689	-170
+mustafar	starport	Mensix Mining Facility	-2476	1622

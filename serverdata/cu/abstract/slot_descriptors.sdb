@@ -1,0 +1,37 @@
+iff	slots
+
+ammo_cartridge	ammo_cartridge
+appearance_inventory	hat;earring_r;earring_l;eyes;mouth;neck;cloak;back;chest1;chest2;chest3_r;chest3_l;bicep_r;bicep_l;bracer_lower_r;bracer_upper_r;bracer_lower_l;bracer_upper_l;wrist_r;wrist_l;gloves;utility_belt;pants1;pants2;shoes;cybernetic_hand_l;cybernetic_hand_r
+buy_back	inventory
+crafting_station	ingredient_hopper
+crafting_tool	anythingNoMod2;anythingNoMod1;test_manf_schematic
+creature	inventory;default_weapon
+default_ammo	ammo_weapon_slot
+default_lightsaber	saber_inv;crafted_components
+default_weapon	default_weapon_ammo_slot;crafted_components
+droid	inventory;datapad
+hack_transport	inventory
+manufacture_installation	ingredient_hopper;output_hopper;manf_schematic;crafted_components;anythingNoMod1
+mission_list_entry	token_creator;token_end_location;token_target;token_start_location
+mount_pcd	inventory;default_weapon;mount_covering;mount_saddle
+mount_rider	rider;rider1;rider2;rider3;rider4;rider5;rider6;rider7;inventory;datapad;hangar;default_weapon;mission_bag;hat;hair;earring_r;earring_l;eyes;mouth;neck;cloak;back;chest1;chest2;chest3_r;chest3_l;bicep_r;bicep_l;bracer_lower_r;bracer_upper_r;bracer_lower_l;bracer_upper_l;wrist_r;wrist_l;gloves;hold_r;hold_l;ring_r;ring_l;utility_belt;pants1;pants2;shoes;ghost;bank
+player	inventory;datapad;hangar;default_weapon;mission_bag;hat;hair;earring_r;earring_l;eyes;mouth;neck;cloak;back;chest1;chest2;chest3_r;chest3_l;bicep_r;bicep_l;bracer_lower_r;bracer_upper_r;bracer_lower_l;bracer_upper_l;wrist_r;wrist_l;gloves;hold_r;hold_l;ring_r;ring_l;utility_belt;pants1;pants2;shoes;ghost;bank;appearance_inventory;cybernetic_hand_l;cybernetic_hand_r
+ship_arc170	ship_pilot;ship_droid;ship_gunner1;ship_gunner2
+ship_control_device	ship_control_device
+ship_havoc	ship_pilot;ship_droid;ship_gunner1
+ship_hutt_turret_ship	ship_pilot;ship_droid;ship_gunner1
+ship_operations_station	ship_operations_pob
+ship_pilot_station	ship_pilot_pob;ship_droid
+ship_single_seat	ship_pilot;ship_droid
+ship_tieaggressor	ship_pilot;ship_droid;ship_gunner1
+ship_ywing	ship_pilot;ship_droid;ship_gunner1
+structure_control_device	structure_control_device
+tangible	crafted_components
+terminal_mission	datapad
+test_cartridge_ammo	test_cartridge_ammo_slot
+token	token_waypoint
+turretcontrol_falcon	ship_gunner0_pob;ship_gunner1_pob
+turretcontrol_y8_lower	ship_gunner1_pob;ship_gunner3_pob;ship_gunner4_pob
+turretcontrol_y8_upper	ship_gunner0_pob
+turret_ladder	ship_gunner0_pob;ship_gunner1_pob;ship_gunner2_pob;ship_gunner3_pob;ship_gunner4_pob;ship_gunner5_pob;ship_gunner6_pob;ship_gunner7_pob
+

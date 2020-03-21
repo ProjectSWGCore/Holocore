@@ -1,11 +1,24 @@
-/bin
-/clientdata
-/.settings
-/odb
-/serverdata/**/*.iff
-/serverdata/**/*.db
-/target
-/cfg/*.cfg
-packets.txt
-log.txt
-/target/
+.settings
+scripts/
+
+# IDE-based
+Holocore.iml
+out
+classes/
+.idea
+.classpath
+.project
+
+# Gradle
+build
+.gradle
+gradle.properties
+
+# Holocore
+/clientdata/
+/log/
+/cfg/
+/odb/
+/bin/
+*.db
+*.iff

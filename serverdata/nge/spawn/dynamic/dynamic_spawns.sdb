@@ -1,0 +1,10 @@
+dynamic_id	lair_type	type	planet	special	npc_boss	npc_elite	npc_normal_1	npc_normal_2	npc_normal_3	npc_normal_4
+TEXT	TEXT	TEXT	TEXT	BOOLEAN	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+alkahara_bandit	object/building/poi/shared_tatooine_alkahara_large1.iff;object/building/poi/shared_tatooine_alkahara_large2.iff;object/building/poi/shared_tatooine_alkahara_bandits_camp_medium.iff;object/building/poi/shared_tatooine_alkahara_bandits_camp_small1.iff;object/building/poi/shared_tatooine_alkahara_bandits_camp_small2.iff	npc	TATOOINE	FALSE	alkhara_champion	alkhara_lieutenant	alkhara_bandit			
+bantha	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha	bantha_bonecracker	bantha	bantha		
+bantha_bull	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha_bull	bantha_bull_ramp	bantha_bonecracker	bantha		
+bantha_dune	object/tangible/lair/bantha/shared_lair_bantha_dune.iff	creature	TATOOINE	FALSE	bantha_dune	bantha_bonecracker	bantha			
+bantha_dwarf	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha_dwarf	bantha_bonecracker	bantha			
+bantha_feral	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha_feral	bantha_bonecracker	bantha			
+bantha_matriarch	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha_matriarch	bantha_bonecracker	bantha			
+bantha_rogue	object/tangible/lair/bantha/shared_lair_bantha.iff	creature	TATOOINE	FALSE	bantha_rogue	bantha_bonecracker	bantha			

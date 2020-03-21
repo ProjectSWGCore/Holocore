@@ -1,0 +1,16 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_misc",
+    "crateObjectTemplate": "object/factory/factory_crate_generic_items.iff",
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.dance_prop.prop"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_dancing",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}
