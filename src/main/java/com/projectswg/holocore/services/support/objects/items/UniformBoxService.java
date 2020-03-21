@@ -55,7 +55,7 @@ public class UniformBoxService extends Service {
 	private PreparedStatement getUniformBoxStatement;
 	
 	public UniformBoxService(){
-		uniformBoxDatabase = RelationalServerFactory.getServerData("player/npe_uniformbox.db", "npe_uniformbox");
+		uniformBoxDatabase = RelationalServerFactory.getServerData("nge/player/npe_uniformbox.db", "npe_uniformbox");
 		if (uniformBoxDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load npe_uniformbox.sdb file for UniformBoxService");
 		

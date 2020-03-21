@@ -159,6 +159,10 @@ public class PlayerObject extends IntangibleObject {
 		play3.toggleFlags(PlayerFlags.bitsetFromFlags(flags));
 	}
 	
+	public boolean isFlagSet(PlayerFlags flag) {
+		return play3.isFlagSet(flag.getFlag());
+	}
+	
 	public BitSet getProfileFlags() {
 		return play3.getProfileFlags();
 	}

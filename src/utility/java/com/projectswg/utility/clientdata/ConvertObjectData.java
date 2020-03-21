@@ -24,7 +24,7 @@ class ConvertObjectData implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting object data...");
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/object_data.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/objects/object_data.sdb"))) {
 			{
 				List<String> columns = new ArrayList<>();
 				columns.add("iff");

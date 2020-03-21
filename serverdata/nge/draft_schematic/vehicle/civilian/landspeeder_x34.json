@@ -1,0 +1,70 @@
+{
+    "parent": "object/draft_schematic/vehicle/base/base_vehicle_schematic.iff",
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/deed/vehicle_deed/landspeeder_x34_deed.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "vehicle_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "vehicle_body"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 1125
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "structural_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "structural_frame"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 3125
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.vehicle.crafted_item.crafting_artisan_vehicle"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/vehicle/civilian/shared_landspeeder_x34.iff",
+    "volume": 1
+}

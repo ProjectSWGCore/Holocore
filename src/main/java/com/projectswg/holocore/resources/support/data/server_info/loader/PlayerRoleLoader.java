@@ -58,7 +58,7 @@ public final class PlayerRoleLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/role.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/role.sdb"))) {
 			while (set.next()) {
 				RoleInfo role = new RoleInfo(set);
 				rolesByIndex.put(role.getIndex(), role);

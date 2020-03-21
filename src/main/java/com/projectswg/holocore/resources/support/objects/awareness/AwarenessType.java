@@ -35,7 +35,8 @@ public enum AwarenessType {
 	SELF,
 	OBJECT,
 	GROUP,
-	TRADE;
+	TRADE,
+	GUILD;
 	
 	private static final Collection<AwarenessType> VALUES = Collections.unmodifiableCollection(Arrays.asList(values()));
 	

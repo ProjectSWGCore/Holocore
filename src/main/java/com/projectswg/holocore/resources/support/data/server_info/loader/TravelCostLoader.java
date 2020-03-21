@@ -58,7 +58,7 @@ public final class TravelCostLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/travel/travel_costs.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/travel/travel_costs.sdb"))) {
 			while (set.next()) {
 				TravelCostInfo travel = new TravelCostInfo(set);
 				costs.put(travel.getPlanet(), travel.getCosts());

@@ -51,7 +51,7 @@ public final class ExpertiseTreeLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/expertise/expertise_trees.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/expertise/expertise_trees.sdb"))) {
 			while (set.next()) {
 				ExpertiseTreeInfo treeInfo = new ExpertiseTreeInfo(set);
 				trees.put(treeInfo.getId(), treeInfo);

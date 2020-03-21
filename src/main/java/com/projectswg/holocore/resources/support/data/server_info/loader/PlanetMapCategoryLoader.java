@@ -51,7 +51,7 @@ public final class PlanetMapCategoryLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/planet_map_cat.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/planet_map_cat.sdb"))) {
 			while (set.next()) {
 				PlanetMapCategoryInfo mapInfo = new PlanetMapCategoryInfo(set);
 				categoriesByName.put(mapInfo.getName(), mapInfo);

@@ -57,7 +57,11 @@ abstract class DataLoader {
 		fun vehicles(): VehicleLoader = ServerData.vehicles
 		fun specialLines(): SpecialLineLoader = ServerData.specialLines
 		fun staticPvpZones(): StaticPvpZoneLoader = ServerData.staticPvpZones
-		
+		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
+		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels
+		fun noSpawnZones(): NoSpawnZoneLoader = ServerData.noSpawnZones
+		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
+
 	}
 	
 }

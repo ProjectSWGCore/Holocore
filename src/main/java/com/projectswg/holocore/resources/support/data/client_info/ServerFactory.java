@@ -211,7 +211,7 @@ public final class ServerFactory extends DataFactory {
 
 	@Override
 	protected String getFolder() {
-		return "./serverdata/";
+		return "./serverdata/nge/";
 	}
 
 	public static ServerFactory getInstance() {

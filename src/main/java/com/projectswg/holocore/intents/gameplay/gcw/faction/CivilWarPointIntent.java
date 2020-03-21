@@ -26,18 +26,28 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.gcw.faction;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class CivilWarPointIntent extends Intent {
 	
 	private final PlayerObject receiver;
 	private final int points;
+	private final ProsePackage prose;
 	
-	private CivilWarPointIntent(@NotNull PlayerObject receiver, int points) {
+	private CivilWarPointIntent(@NotNull PlayerObject receiver, int points, @Nullable ProsePackage prose) {
 		this.receiver = receiver;
 		this.points = points;
+		this.prose = prose;
+	}
+	
+	public CivilWarPointIntent(PlayerObject receiver, int points) {
+		this(receiver, points, null);
 	}
 	
 	@NotNull
@@ -49,8 +59,29 @@ public class CivilWarPointIntent extends Intent {
 		return points;
 	}
 	
+	@Nullable
+	public ProsePackage getProse() {
+		return prose;
+	}
+	
+	/**
+	 * Displays basic system message to the player with the amount of points gained.
+	 * @param receiver that should receive GCW points
+	 * @param points amount that the {@code receiver} should receive
+	 */
 	public static void broadcast(@NotNull PlayerObject receiver, int points) {
 		new CivilWarPointIntent(receiver, points).broadcast();
+	}
+	
+	/**
+	 * Displays customized system message to the player.
+	 * @param receiver that should receive GCW points
+	 * @param points amount that the {@code receiver} should receive
+	 * @param prose custom message to display to the player in case the default one doesn't cut it. If {@code null}, we fall back to the default
+	 *                 basic system message.
+	 */
+	public static void broadcast(@NotNull PlayerObject receiver, int points, @Nullable ProsePackage prose) {
+		new CivilWarPointIntent(receiver, points, prose).broadcast();
 	}
 	
 }

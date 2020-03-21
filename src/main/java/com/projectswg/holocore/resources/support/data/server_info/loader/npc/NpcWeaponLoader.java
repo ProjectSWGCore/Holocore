@@ -55,7 +55,7 @@ public final class NpcWeaponLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_weapon.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/npc/npc_weapon.sdb"))) {
 			while (set.next()) {
 				weapons.put(set.getText("weapon_id"), List.of(set.getText("weapons").split(";")));
 			}

@@ -51,7 +51,7 @@ public class TerrainZoneInsertionLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/player_spawns.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/player_spawns.sdb"))) {
 			while (set.next()) {
 				ZoneInsertion def = new ZoneInsertion(set);
 				zoneInsertions.put(def.getId(), def);

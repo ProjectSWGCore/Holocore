@@ -54,7 +54,7 @@ public final class ExpertiseAbilityLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/expertise/expertise_abilities.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/expertise/expertise_abilities.sdb"))) {
 			while (set.next()) {
 				ExpertiseAbilityInfo expertise = new ExpertiseAbilityInfo(set);
 				expertiseBySkill.put(expertise.getSkill(), expertise);
