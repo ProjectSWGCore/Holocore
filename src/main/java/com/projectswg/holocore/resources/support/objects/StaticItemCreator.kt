@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.support.objects
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import java.util.*
@@ -100,6 +101,7 @@ object StaticItemCreator {
 		
 		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
+		applySetBonus(obj, info.wornItemBuff)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WearableItemInfo?) {
@@ -121,6 +123,8 @@ object StaticItemCreator {
 		val raceRestriction = buildRaceRestrictionString(info)
 		if (raceRestriction.isNotEmpty())
 			obj.addAttribute("species_restrictions.species_name", raceRestriction)
+
+		applySetBonus(obj, info.wornItemBuff)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {
@@ -230,6 +234,21 @@ object StaticItemCreator {
 			if (colors[i] >= 0) {
 				obj.putCustomization("/private/index_color_$i", colors[i])
 			}
+		}
+	}
+
+	private fun applySetBonus(obj: TangibleObject, wornItemBuff: Int) {
+		val itemBonusSetsById = DataLoader.ItemBonusSets().getItemBonusSetsById(wornItemBuff) ?: return
+
+		obj.setServerAttribute(ServerAttribute.SET_BONUS_ID, wornItemBuff)
+
+		for (itemBonusSet in itemBonusSetsById) {
+			val count = itemBonusSet.count
+			val buffName = itemBonusSet.buffName
+			val attrName = "@set_bonus:piece_bonus_count_$count"
+			val attrVal = "@set_bonus:$buffName"
+
+			obj.addAttribute(attrName, attrVal)
 		}
 	}
 	

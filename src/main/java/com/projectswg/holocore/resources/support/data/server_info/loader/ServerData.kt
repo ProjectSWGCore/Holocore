@@ -64,7 +64,8 @@ object ServerData {
 	val staticItems			by SoftDataLoaderDelegate(::StaticItemLoader)
 	val roadmapRewards		by SoftDataLoaderDelegate(::RoadmapRewardLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
-	
+	val itemBonusSet		by SoftDataLoaderDelegate(::ItemBonusSetLoader)
+
 	/*
 	 * NPC Info
 	 */
