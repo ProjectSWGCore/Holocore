@@ -30,8 +30,10 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.combat.AttackInfo;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -52,9 +54,11 @@ enum CombatCommandBuff implements CombatCommandHitType {
 			return;    // Only CreatureObjects have buffs
 		CreatureObject target = (CreatureObject) targetPrecheck;
 		
+		boolean applyToSelf = isApplyToSelf(source, target);
+		
 		String buffNameTarget = combatCommand.getBuffNameTarget();
 		
-		addBuff(source, target, buffNameTarget);
+		addBuff(source, applyToSelf ? source : target, buffNameTarget);
 		
 		WeaponObject weapon = source.getEquippedWeapon();
 		CombatAction combatAction = createCombatAction(source, weapon, TrailLocation.RIGHT_HAND, combatCommand);
@@ -65,6 +69,31 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		}
 		
 		source.sendObservers(combatAction, createCombatSpam(source, target, weapon, new AttackInfo(), combatCommand));
+	}
+	
+	private boolean isApplyToSelf(CreatureObject source, CreatureObject target) {
+		FactionLoader.Faction sourceFaction = source.getFaction();
+		FactionLoader.Faction targetFaction = target.getFaction();
+		
+		if (sourceFaction == null || targetFaction == null) {
+			return false;
+		}
+		
+		if (target.isAttackable(source)) {
+			// You can't buff someone you can attack
+			return true;
+		} else if (sourceFaction.isEnemy(targetFaction)) {
+			PvpStatus sourcePvpStatus = source.getPvpStatus();
+			PvpStatus targetPvpStatus = target.getPvpStatus();
+			
+			if (sourcePvpStatus == PvpStatus.COMBATANT && targetPvpStatus == PvpStatus.ONLEAVE) {
+				return false;
+			}
+			
+			return sourcePvpStatus != PvpStatus.ONLEAVE || targetPvpStatus != PvpStatus.ONLEAVE;
+		}
+		
+		return false;
 	}
 	
 }
