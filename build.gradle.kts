@@ -10,7 +10,8 @@ plugins {
 	id("org.beryx.jlink") version "2.17.2"
 }
 
-val javaMajorVersion = "12"
+val javaMajorVersion = "13"
+val kotlinTargetVersion = "12"
 
 application {
 	mainClassName = "holocore/com.projectswg.holocore.ProjectSWG"
@@ -91,7 +92,7 @@ tasks.named<ShadowJar>("shadowJar") {
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
 	kotlinOptions {
-		jvmTarget = javaMajorVersion
+		jvmTarget = kotlinTargetVersion
 	}
 }
 
