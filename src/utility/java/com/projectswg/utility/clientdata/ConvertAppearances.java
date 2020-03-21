@@ -19,7 +19,7 @@ class ConvertAppearances implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting object data...");
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/object_appearances.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/objects/object_appearances.sdb"))) {
 			{
 				List<String> columns = new ArrayList<>();
 				columns.add("file");

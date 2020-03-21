@@ -51,7 +51,7 @@ public final class SkillTemplateLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/skill/skill_template.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/skill/skill_template.sdb"))) {
 			while (set.next()) {
 				SkillTemplateInfo templateInfo = new SkillTemplateInfo(set);
 				templateFromName.put(templateInfo.getName(), templateInfo);

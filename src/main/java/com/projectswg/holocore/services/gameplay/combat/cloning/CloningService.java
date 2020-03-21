@@ -85,7 +85,7 @@ public class CloningService extends Service {
 	}
 
 	private void loadRespawnData() {
-		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
+		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("nge/cloning/cloning_respawn.db", "cloning_respawn")) {
 			try (ResultSet set = respawnDatabase.executeQuery(DB_QUERY)) {
 				while (set.next()) {
 					int tubeCount = set.getInt("tubes");

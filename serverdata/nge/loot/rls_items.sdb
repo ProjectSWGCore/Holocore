@@ -1,0 +1,5 @@
+rarity	static_item_id
+TEXT KEY	TEXT
+RARE	item_color_crystal_02_16
+LEGENDARY	item_color_crystal_02_20
+EXCEPTIONAL	item_color_crystal_02_29
