@@ -429,7 +429,7 @@ public class PlayerMountService extends Service {
 	private void dismount(CreatureObject player, CreatureObject mount, VehicleInfo vehicleInfo) {
 		assert player.getParent() == mount;
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		player.moveToSlot(null, mount, "", player.getArrangementId(player));
+		player.moveToSlot(null, "", player.getArrangementId(player));
 		player.resetMovement();
 		if (vehicleInfo != null && !vehicleInfo.getPlayerBuff().isEmpty())
 			BuffIntent.broadcast(vehicleInfo.getPlayerBuff(), player, mount, true);
