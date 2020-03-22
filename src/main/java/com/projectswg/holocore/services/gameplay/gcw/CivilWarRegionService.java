@@ -74,7 +74,7 @@ public class CivilWarRegionService extends Service {
 	
 	private static final long BASE_ZONE_POINTS = 50_000;	// Amount of points that each faction has by default in each zone. The point is to make a zone more difficult to capture if it has been reset.
 	private static final String EGG_TEMPLATE = "object/tangible/spawning/shared_spawn_egg.iff";
-	private static final int PRESENCE_POINTS = 15;
+	private static final int PRESENCE_POINTS_PER_TICK = 20;	// Base amount of GCW points contributed to a region by presence
 	
 	private final GcwRegionLoader regionLoader;	// Stores static information about zone names and their locations in the game
 	private final PswgGcwRegionDatabase regionDatabase;	// Stores dynamic information about how many points each faction has per zone
@@ -132,10 +132,10 @@ public class CivilWarRegionService extends Service {
 			}
 		}
 		
-		// Decay or boost percentage of zones based on player presence every 15 minutes
-		long checkRate = TimeUnit.MILLISECONDS.convert(15, TimeUnit.MINUTES);
+		// Decay or boost percentage of zones based on player presence every 10 minutes
+		long checkRate = TimeUnit.MILLISECONDS.convert(10, TimeUnit.MINUTES);
 		executor.start();
-		executor.executeWithFixedRate(checkRate, checkRate, this::checkPresence);
+		executor.executeWithFixedRate(checkRate, checkRate, this::updateRegionalPresence);
 		
 		return true;
 	}
@@ -257,7 +257,7 @@ public class CivilWarRegionService extends Service {
 	 * Each faction can be awarded or deducted points based on presence.
 	 * Scales with amount of players present.
 	 */
-	private void checkPresence() {
+	private void updateRegionalPresence() {
 		for (Map.Entry<SWGObject, GcwRegionLoader.GcwRegionInfo> entry : eggMap.entrySet()) {
 			SWGObject egg = entry.getKey();
 			GcwRegionLoader.GcwRegionInfo region = entry.getValue();
@@ -270,50 +270,72 @@ public class CivilWarRegionService extends Service {
 			}
 			
 			Set<Player> observers = egg.getObservers();
-			
-			long rebels = countPresentPlayers(observers, PvpFaction.REBEL);
 			long rebelPoints = zoneMetadata.getRebelPoints();
 			
-			if (rebels <= 0) {
-				// No rebels present. Deduct points.
-				rebelPoints =  Math.max(zoneMetadata.getRebelPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
+			{
+				List<CreatureObject> rebels = presentPlayers(observers, PvpFaction.REBEL);
 				
-				regionDatabase.setRebelPoints(zoneName, rebelPoints);
-			} else {
-				// Rebels are present. Award points that scales with the amount of rebels in the area.
-				rebelPoints += PRESENCE_POINTS * rebels;
+				long rebelCount = rebels.size();
 				
-				regionDatabase.setRebelPoints(zoneName, rebelPoints);
+				if (rebelCount <= 0) {
+					// No rebels present. Deduct points.
+					rebelPoints = Math.max(zoneMetadata.getRebelPoints() - PRESENCE_POINTS_PER_TICK, BASE_ZONE_POINTS);
+					
+					regionDatabase.setRebelPoints(zoneName, rebelPoints);
+				} else {
+					// Rebels are present. Award points that scales with the amount of rebels in the area.
+					long rebelRankIncrease = getRankBonusIncrease(rebels);
+					rebelPoints += rebelRankIncrease / 100 * PRESENCE_POINTS_PER_TICK;
+					rebelPoints += PRESENCE_POINTS_PER_TICK * rebelCount;
+					
+					regionDatabase.setRebelPoints(zoneName, rebelPoints);
+				}
+				
 			}
 			
-			long imperials = countPresentPlayers(observers, PvpFaction.IMPERIAL);
 			long imperialPoints = zoneMetadata.getImperialPoints();
 			
-			if (imperials <= 0) {
-				// No imperials present. Deduct points.
-				imperialPoints =  Math.max(zoneMetadata.getImperialPoints() - PRESENCE_POINTS, BASE_ZONE_POINTS);
+			{
+				List<CreatureObject> imperials = presentPlayers(observers, PvpFaction.IMPERIAL);
 				
-				regionDatabase.setImperialPoints(zoneName, imperialPoints);
-			} else {
-				// Imperials  are present. Award points that scales with the amount of imperials in the area.
-				imperialPoints += PRESENCE_POINTS * imperials;
+				long imperialCount = imperials.size();
 				
-				regionDatabase.setImperialPoints(zoneName, imperialPoints);
+				if (imperialCount <= 0) {
+					// No imperials present. Deduct points.
+					imperialPoints = Math.max(zoneMetadata.getImperialPoints() - PRESENCE_POINTS_PER_TICK, BASE_ZONE_POINTS);
+					
+					regionDatabase.setImperialPoints(zoneName, imperialPoints);
+				} else {
+					// Imperials  are present. Award points that scales with the amount of imperials in the area.
+					long imperialRankIncrease = getRankBonusIncrease(imperials);
+					imperialPoints += imperialRankIncrease / 100 * PRESENCE_POINTS_PER_TICK;
+					imperialPoints += PRESENCE_POINTS_PER_TICK * imperialCount;
+					
+					regionDatabase.setImperialPoints(zoneName, imperialPoints);
+				}
+				
 			}
-			
 			// Update zone percent on planetary map if applicable
 			guildObject.setImperialZonePercent(region.getTerrain(), zoneName, calculateImperialPercent(imperialPoints, rebelPoints));
 		}
 	}
 	
-	private long countPresentPlayers(Set<Player> observers, PvpFaction faction) {
+	private List<CreatureObject> presentPlayers(Set<Player> observers, PvpFaction faction) {
 		return observers.stream()
 				.filter(new ActivePlayerPredicate())
 				.map(Player::getCreatureObject)
-				.filter(creatureObject -> creatureObject.getPvpStatus() == PvpStatus.SPECIALFORCES)	// Only Special Forces players can prevent decay
-				.map(CreatureObject::getPvpFaction)
-				.filter(playerFaction -> playerFaction == faction)
-				.count();
+				.filter(creatureObject -> creatureObject
+				.getPvpStatus() == PvpStatus.SPECIALFORCES)    // Only Special Forces players can prevent decay
+				.filter(creatureObject -> creatureObject.getPvpFaction() == faction)
+				.collect(Collectors.toList());
+	}
+	
+	private long getRankBonusIncrease(Collection<CreatureObject> players) {
+		return players.stream()
+				.map(CreatureObject::getPlayerObject)
+				.mapToInt(PlayerObject::getCurrentGcwRank)
+				.map(i -> i +1)	// Rank is zero-indexed
+				.sum() * 10;
 	}
 	
 	private int calculateImperialPercent(long imperialTotal, long rebelTotal) {
