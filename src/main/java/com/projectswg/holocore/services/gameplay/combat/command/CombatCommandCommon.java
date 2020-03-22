@@ -77,7 +77,7 @@ public class CombatCommandCommon {
 		combatSpam.setDefenderPosition(target.getLocation().getPosition());
 		combatSpam.setInfo(info);
 		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
-		combatSpam.setSpamType(CombatSpamFilterType.ALL);
+		combatSpam.setSpamType(info.isSuccess() ? CombatSpamFilterType.SELF : CombatSpamFilterType.ALL);
 		return combatSpam;
 	}
 	
