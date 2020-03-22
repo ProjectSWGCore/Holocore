@@ -244,8 +244,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (oldParent != newParent) {
 			if (oldParent != null)
 				oldParent.removeObject(this);
-			if (newParent != null)
-				newParent.addSlottedObject(this, List.of(slot), arrangementId);
+			newParent.addSlottedObject(this, List.of(slot), arrangementId);
 			broadcast(new ContainerTransferIntent(this, oldParent, oldArrangement, newParent, slotArrangement));
 		}
 	}
