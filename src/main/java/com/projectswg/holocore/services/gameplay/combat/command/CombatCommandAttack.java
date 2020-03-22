@@ -281,17 +281,17 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		// If the defender is wielding a lightsaber, parry can always be rolled, regardless of what the attacker is wielding
 		// If both attacker and defender are wielding melee weapons, parry can be rolled
 		if (defenderWeaponType.isLightsaber() || (defenderWeaponType.isMelee() && attackerWeaponType.isMelee())) {
-			double parryChance = (target.getSkillModValue("display_only_parry") - source.getSkillModValue("display_only_parry_reduction")) / 100;
+			double parryChance = (target.getSkillModValue("display_only_parry") - source.getSkillModValue("display_only_parry_reduction")) / 100d;
 			double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 			
-			return roll <= parryChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
+			return roll <= parryChance;	// If parry chance is 25%, then the roll should be between 0 and 25 (both inclusive)
 		} else {
 			return false;
 		}
 	}
 	
 	private static boolean isAttackDodged(CreatureObject source, CreatureObject target) {
-		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100;
+		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100d;
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
@@ -311,7 +311,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			return false;
 		}
 		
-		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10;
+		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10d;
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)
