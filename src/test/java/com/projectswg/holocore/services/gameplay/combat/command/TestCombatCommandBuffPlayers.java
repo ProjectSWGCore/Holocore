@@ -22,7 +22,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(Parameterized.class)
-public class TestCombatCommandBuff extends TestRunnerSynchronousIntents {
+public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 	
 	private CreatureObject source;
 	private CreatureObject target;
