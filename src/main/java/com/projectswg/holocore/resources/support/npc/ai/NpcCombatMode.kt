@@ -118,8 +118,8 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		obj.intendedTargetId = target.objectId
 		obj.lookAtTargetId = target.objectId
 		// If we're close, angle towards target
-		val myLocation = obj.worldLocation
-		val targetLocation = target.worldLocation
+		val myLocation = obj.location
+		val targetLocation = target.location
 		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(myLocation.getHeadingTo(targetLocation)).build(), npcRunSpeed)
 		
 		if (target.posture == Posture.INCAPACITATED) {
