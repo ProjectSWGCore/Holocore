@@ -112,7 +112,7 @@ public class SkillModService extends Service {
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
 	
 		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
-			if(attributes.getKey().endsWith("_modified")){
+			if(attributes.getKey().startsWith("cat_stat_mod_bonus") || attributes.getKey().startsWith("cat_skill_mod_bonus")){
 				String[] splitModName = attributes.getKey().split(":",2);
 				String modName = splitModName[1];
 				int modValue = Integer.parseInt(attributes.getValue());
