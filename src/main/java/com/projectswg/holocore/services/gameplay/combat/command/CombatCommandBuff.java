@@ -93,6 +93,16 @@ enum CombatCommandBuff implements CombatCommandHitType {
 			return sourcePvpStatus != PvpStatus.ONLEAVE || targetPvpStatus != PvpStatus.ONLEAVE;
 		}
 		
+		if (source.isPlayer() && !target.isPlayer()) {
+			// A player is attempting to buff a NPC
+			long sourceGroupId = source.getGroupId();
+			long npcGroupId = target.getGroupId();
+			boolean bothGrouped = sourceGroupId != 0 &&  npcGroupId != 0;
+			
+			// Buff ourselves instead if player and NPC are ungrouped or are in different groups
+			return !bothGrouped || sourceGroupId != npcGroupId;
+		}
+		
 		return false;
 	}
 	
