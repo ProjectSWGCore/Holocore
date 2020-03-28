@@ -133,6 +133,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (arrangementId == -1) {
 			addContainedObject(object);
 		} else {
+			List<List<String>> arrangements = object.getArrangement();
+			
+			for (List<String> possibleSlots : arrangements) {
+				for (String possibleSlot : possibleSlots) {
+					SWGObject slottedObject = getSlottedObject(possibleSlot);
+					
+					if (slottedObject == null) {
+						addSlottedObject(object, possibleSlots, arrangementId);
+						return;
+					}
+				}
+			}
 			addSlottedObject(object, object.getArrangement().get(arrangementId - 4), arrangementId);
 		}
 	}
@@ -176,9 +188,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() - object.getVolume() - 1);
 		} else {
-			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
-				slots.remove(requiredSlot);
-			}
+			removeSlottedObject(object);
 		}
 		
 		// Remove as parent
@@ -187,6 +197,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.slotArrangement = -1;
 		
 		onRemovedChild(object);
+	}
+	
+	private void removeSlottedObject(SWGObject object) {
+		List<List<String>> arrangements = object.getArrangement();
+		
+		for (List<String> possibleSlots : arrangements) {
+			for (String possibleSlot : possibleSlots) {
+				if (slots.remove(possibleSlot, object)) {
+					return;
+				}
+			}
+		}
 	}
 	
 	/**

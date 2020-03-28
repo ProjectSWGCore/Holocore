@@ -191,4 +191,27 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		Assert.assertEquals(4, parent.getArrangementId(child));
 	}
 	
+	@Test
+	public void testMultiplePossibleSlotObjects() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject ring1 = new GenericTangibleObject(2);
+		ring1.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		SWGObject ring2 = new GenericTangibleObject(3);
+		ring2.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		SWGObject ring3 = new GenericTangibleObject(4);
+		ring3.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		
+		parent.setSlots(List.of("ring_l", "ring_r"));
+		
+		ring1.moveToContainer(parent);
+		ring2.moveToContainer(parent);
+		
+		Assert.assertEquals("Should be able to equip a ring when slot is unoccupied", parent, ring1.getParent());
+		Assert.assertEquals("Should be able to equip a second ring when a similar slot is unoccupied", parent, ring2.getParent());
+		
+		ring3.moveToContainer(parent);
+		
+		Assert.assertEquals("Ring 3 should have been equipped", parent, ring3.getParent());
+		Assert.assertNotEquals("Ring 1 should have been unequipped", ring1.getParent(), parent);
+	}
 }
