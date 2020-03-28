@@ -111,6 +111,7 @@ public enum RadialHandler {
 		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
 		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
 		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
+		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
 	}
 	
 	private void initializeContainerRadials() {
