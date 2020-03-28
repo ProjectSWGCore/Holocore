@@ -1,0 +1,76 @@
+item_name	iff_template	type	string_name	volume	hit_points	no_trade	bio_link	crystal_shader	crystal_quality	crystal_min_dmg	crystal_max_dmg	index_color_0	index_color_1	index_color_2	index_color_3	comments
+TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT
+item_krayt_pearl_04_01	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	0	2	5	-1	0	-1	-1	Poor
+item_krayt_pearl_04_02	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	0	3	5	-1	0	-1	-1	Poor
+item_krayt_pearl_04_03	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	1	4	5	-1	0	-1	-1	Fair
+item_krayt_pearl_04_04	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	1	5	6	-1	0	-1	-1	Fair
+item_krayt_pearl_04_05	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	2	6	7	-1	0	-1	-1	Good
+item_krayt_pearl_04_06	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	2	7	8	-1	0	-1	-1	Good
+item_krayt_pearl_04_07	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	3	8	9	-1	0	-1	-1	Good
+item_krayt_pearl_04_08	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	3	9	10	-1	0	-1	-1	Good
+item_krayt_pearl_04_09	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	3	10	11	-1	0	-1	-1	Good
+item_krayt_pearl_04_10	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	4	11	12	-1	0	-1	-1	Quality
+item_krayt_pearl_04_11	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	4	12	13	-1	0	-1	-1	Quality
+item_krayt_pearl_04_12	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	4	13	14	-1	0	-1	-1	Select
+item_krayt_pearl_04_13	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	4	14	15	-1	0	-1	-1	Select
+item_krayt_pearl_04_14	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	5	15	16	-1	0	-1	-1	Premium
+item_krayt_pearl_04_15	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	5	16	17	-1	0	-1	-1	Premium
+item_krayt_pearl_04_16	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	5	17	18	-1	0	-1	-1	Premium
+item_krayt_pearl_04_17	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	5	18	19	-1	0	-1	-1	Premium
+item_krayt_pearl_04_18	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Krayt Dragon Pearl	1	1000	0	0	0	6	19	20	-1	0	-1	-1	Flawless
+item_krayt_pearl_04_19	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Ancient Krayt Dragon Pearl	1	1000	0	0	0	6	20	22	-1	0	-1	-1	Ancient
+item_krayt_pearl_04_20	object/tangible/component/weapon/lightsaber/lightsaber_module_krayt_dragon_pearl.iff	crystal	Ancient Krayt Dragon Pearl	1	1000	0	0	0	6	21	23	-1	0	-1	-1	Ancient
+item_color_crystal_02_00	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	0	-1	-1	
+item_color_crystal_02_01	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	1	-1	-1	
+item_color_crystal_02_02	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	2	-1	-1	
+item_color_crystal_02_03	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	3	-1	-1	
+item_color_crystal_02_04	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	4	-1	-1	
+item_color_crystal_02_05	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	5	-1	-1	
+item_color_crystal_02_06	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	6	-1	-1	
+item_color_crystal_02_07	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	7	-1	-1	
+item_color_crystal_02_08	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	8	-1	-1	
+item_color_crystal_02_09	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	9	-1	-1	
+item_color_crystal_02_10	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	10	-1	-1	
+item_color_crystal_02_11	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	11	-1	-1	
+item_color_crystal_02_12	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Maul's Vengeance	1	1000	0	0	0	0	0	0	-1	12	-1	-1	
+item_color_crystal_02_13	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kun's Blood	1	1000	0	0	0	0	0	0	-1	13	-1	-1	
+item_color_crystal_02_14	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bondara's Folly	1	1000	0	0	0	0	0	0	-1	14	-1	-1	
+item_color_crystal_02_15	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Ulric's Redemption	1	1000	0	0	0	0	0	0	-1	15	-1	-1	
+item_color_crystal_02_16	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bane's Heart	1	1000	0	0	0	0	0	0	-1	16	-1	-1	
+item_color_crystal_02_17	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Gallia's Intuition	1	1000	0	0	0	0	0	0	-1	17	-1	-1	
+item_color_crystal_02_18	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Prowess of Plo Koon	1	1000	0	0	0	0	0	0	-1	18	-1	-1	
+item_color_crystal_02_19	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	B'nar's Sacrifice	1	1000	0	0	0	0	0	0	-1	19	-1	-1	
+item_color_crystal_02_20	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Windu's Guile	1	1000	0	0	0	0	0	0	-1	20	-1	-1	This is the rank 12 pvp reward crystal, don't use for anything else.
+item_color_crystal_02_21	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Mundi's Response	1	1000	0	0	0	0	0	0	-1	21	-1	-1	
+item_color_crystal_02_22	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Strength of Luminaria	1	1000	0	0	0	0	0	0	-1	22	-1	-1	
+item_color_crystal_02_23	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Baas's Wisdom	1	1000	0	0	0	0	0	0	-1	23	-1	-1	
+item_color_crystal_02_24	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Quintessence of the Force	1	1000	0	0	0	0	0	0	-1	24	-1	-1	
+item_color_crystal_02_25	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Dawn of Dagobah	1	1000	0	0	0	0	0	0	-1	25	-1	-1	
+item_color_crystal_02_26	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Horn's Future	1	1000	0	0	0	0	0	0	-1	26	-1	-1	
+item_color_crystal_02_27	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Qui-gon's Devotion	1	1000	0	0	0	0	0	0	-1	27	-1	-1	
+item_color_crystal_02_28	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kenobi's Legacy	1	1000	0	0	0	0	0	0	-1	28	-1	-1	
+item_color_crystal_02_29	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Sunrider's Destiny	1	1000	0	0	0	0	0	0	-1	29	-1	-1	
+item_color_crystal_02_30	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kit's Ferocity	1	1000	0	0	0	0	0	0	-1	30	-1	-1	
+item_echo_base_permafrost_crystal_06_01	object/tangible/component/weapon/lightsaber/lightsaber_module_permafrost_crystal.iff	crystal	Permafrost Crystal	1	1000	0	0	2	0	0	0	-1	-1	-1	-1	Echo Base Instance Loot
+item_outbreak_undead_blackwing_crystal	object/tangible/component/weapon/lightsaber/lightsaber_module_blackwing_crystal.iff	crystal	Blackwing Crystal	1	1000	0	0	3	0	0	0	-1	-1	-1	-1	
+item_power_crystal_04_01	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	1	2	-1	31	-1	-1	Poor
+item_power_crystal_04_02	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	2	3	-1	31	-1	-1	Poor
+item_power_crystal_04_03	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	1	3	4	-1	31	-1	-1	Poor
+item_power_crystal_04_04	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	1	4	5	-1	31	-1	-1	Fair
+item_power_crystal_04_05	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	1	5	6	-1	31	-1	-1	Fair
+item_power_crystal_04_06	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	2	6	7	-1	31	-1	-1	Good
+item_power_crystal_04_07	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	2	7	8	-1	31	-1	-1	Good
+item_power_crystal_04_08	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	2	8	9	-1	31	-1	-1	Good
+item_power_crystal_04_09	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	3	9	10	-1	31	-1	-1	Good
+item_power_crystal_04_10	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	3	10	11	-1	31	-1	-1	Good
+item_power_crystal_04_11	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	3	11	12	-1	31	-1	-1	Quality
+item_power_crystal_04_12	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	4	12	13	-1	31	-1	-1	Quality
+item_power_crystal_04_13	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	4	13	14	-1	31	-1	-1	Select
+item_power_crystal_04_14	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	4	14	15	-1	31	-1	-1	Select
+item_power_crystal_04_15	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	5	15	16	-1	31	-1	-1	Premium
+item_power_crystal_04_16	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	5	16	17	-1	31	-1	-1	Premium
+item_power_crystal_04_17	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	5	17	18	-1	31	-1	-1	Premium
+item_power_crystal_04_18	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	18	19	-1	31	-1	-1	Premium
+item_power_crystal_04_19	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	19	20	-1	31	-1	-1	Flawless
+item_power_crystal_04_20	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	20	22	-1	31	-1	-1	Ancient
+item_tow_lava_crystal_06_01	object/tangible/component/weapon/lightsaber/lightsaber_module_lava_crystal.iff	crystal	Lava Crystal	1	1000	0	0	1	0	0	0	-1	-1	-1	-1	ToW expansion
