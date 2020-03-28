@@ -37,6 +37,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.combat.
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff;
@@ -50,9 +51,13 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		// TODO group buffs
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		
-		if (!(targetPrecheck instanceof CreatureObject))
-			return;    // Only CreatureObjects have buffs
-		CreatureObject target = (CreatureObject) targetPrecheck;
+		CreatureObject target;
+		
+		if (targetPrecheck instanceof CreatureObject) {
+			target = (CreatureObject) targetPrecheck;
+		} else {
+			target = source;
+		}
 		
 		boolean applyToSelf = isApplyToSelf(source, target);
 		
@@ -76,7 +81,7 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		FactionLoader.Faction targetFaction = target.getFaction();
 		
 		if (sourceFaction == null || targetFaction == null) {
-			return false;
+			return true;
 		}
 		
 		if (target.isAttackable(source)) {
@@ -94,6 +99,10 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		}
 		
 		if (source.isPlayer() && !target.isPlayer()) {
+			if (target.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+				// You can't buff invulnerable NPCs
+				return true;
+			}
 			// A player is attempting to buff a NPC
 			long sourceGroupId = source.getGroupId();
 			long npcGroupId = target.getGroupId();
