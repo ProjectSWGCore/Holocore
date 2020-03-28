@@ -62,6 +62,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class LoginService extends Service {
 	private final Map<String, List<CreatureObject>> players;
 	
 	public LoginService() {
-		this.players = new HashMap<>();
+		this.players = Collections.synchronizedMap(new HashMap<>());
 	}
 	
 	@IntentHandler
