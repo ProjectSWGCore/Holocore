@@ -28,11 +28,16 @@
 package com.projectswg.holocore.services.gameplay.combat.command;
 
 import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.CombatSpamType;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -42,7 +47,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff;
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
-import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatSpam;
 
 enum CombatCommandBuff implements CombatCommandHitType {
 	INSTANCE;
@@ -60,20 +64,20 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		}
 		
 		boolean applyToSelf = isApplyToSelf(source, target);
+		CreatureObject effectiveTarget = applyToSelf ? source : target;
 		
 		String buffNameTarget = combatCommand.getBuffNameTarget();
-		
-		addBuff(source, applyToSelf ? source : target, buffNameTarget);
+		addBuff(source, effectiveTarget, buffNameTarget);
 		
 		WeaponObject weapon = source.getEquippedWeapon();
 		CombatAction combatAction = createCombatAction(source, weapon, TrailLocation.RIGHT_HAND, combatCommand);
 		combatAction.addDefender(new Defender(source.getObjectId(), source.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		
 		if (!buffNameTarget.isEmpty()) {
-			combatAction.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+			combatAction.addDefender(new Defender(target.getObjectId(), effectiveTarget.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		}
 		
-		source.sendObservers(combatAction, createCombatSpam(source, target, weapon, new AttackInfo(), combatCommand));
+		source.sendObservers(combatAction, createCombatSpamPerform(source, effectiveTarget, combatCommand));
 	}
 	
 	private boolean isApplyToSelf(CreatureObject source, CreatureObject target) {
@@ -113,6 +117,28 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		}
 		
 		return false;
+	}
+	
+	static CombatSpam createCombatSpamPerform(CreatureObject source, CreatureObject target, CombatCommand command) {
+		CombatSpam spam = new CombatSpam(source.getObjectId());
+		
+		spam.setAttacker(source.getObjectId());
+		spam.setAttackerPosition(source.getLocation().getPosition());
+		spam.setDefender(target.getObjectId());
+		spam.setDefenderPosition(target.getLocation().getPosition());
+		spam.setInfo(new AttackInfo());
+		spam.setDataType((byte) 2);	// 2 means the combat log entry is a specified message
+		
+		if (source.equals(target)) {
+			OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("cbt_spam", "perform_notarget"), "TU", source.getObjectName(), "TO", new StringId("cmd_n", command.getName())));
+			spam.setSpamMessage(oobp);
+		} else {
+			OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("cbt_spam", "perform_target"), "TU", source.getObjectName(), "TO", new StringId("cmd_n", command.getName()), "TT", target.getObjectName()));
+			spam.setSpamMessage(oobp);
+		}
+		spam.setSpamType(CombatSpamType.BUFF);
+		
+		return spam;
 	}
 	
 }
