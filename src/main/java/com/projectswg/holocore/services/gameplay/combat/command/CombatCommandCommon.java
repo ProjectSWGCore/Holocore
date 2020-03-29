@@ -36,6 +36,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -174,6 +176,16 @@ public class CombatCommandCommon {
 	
 	static void showFlyText(TangibleObject obj, String text, Scale scale, RGB c, ShowFlyText.Flag... flags) {
 		obj.sendSelf(new ShowFlyText(obj.getObjectId(), text, scale, c, flags));
+	}
+	
+	static double getAddedDamageBoost(CreatureObject source, CombatCommand command) {
+		SpecialLineLoader.SpecialLineInfo specialLine = ServerData.INSTANCE.getSpecialLines().getSpecialLine(command.getSpecialLine());
+		if (specialLine != null) {
+			String damageModName = specialLine.getAddedDamageModName();
+			return source.getSkillModValue(damageModName) / 100d;
+		}
+		
+		return 0;
 	}
 	
 }
