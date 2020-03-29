@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.data.server_info;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -57,10 +58,12 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbTextColumnArraySet extends SdbColumnArraySet {
 		
+		private final String defValue;
 		private final ThreadLocal<String []> cachedArray;
 		
-		SdbTextColumnArraySet(@Language("RegExp") String regex) {
+		SdbTextColumnArraySet(@Language("RegExp") String regex, @Nullable String defValue) {
 			super(regex);
+			this.defValue = defValue;
 			this.cachedArray = new ThreadLocal<>();
 		}
 		
@@ -85,10 +88,12 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbIntegerColumnArraySet extends SdbColumnArraySet {
 		
+		private final int defValue;
 		private final ThreadLocal<int []> cachedArray;
 		
-		SdbIntegerColumnArraySet(@Language("RegExp") String regex) {
+		SdbIntegerColumnArraySet(@Language("RegExp") String regex, int defValue) {
 			super(regex);
+			this.defValue = defValue;
 			this.cachedArray = new ThreadLocal<>();
 		}
 		
@@ -100,7 +105,7 @@ public abstract class SdbColumnArraySet {
 				this.cachedArray.set(cachedArray);
 			}
 			
-			Arrays.fill(cachedArray, Integer.MAX_VALUE);
+			Arrays.fill(cachedArray, defValue);
 			if (set != null) {
 				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = (int) set.getInt(e.getValue());
@@ -113,10 +118,12 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbLongColumnArraySet extends SdbColumnArraySet {
 		
+		private final long defValue;
 		private final ThreadLocal<long []> cachedArray;
 		
-		SdbLongColumnArraySet(@Language("RegExp") String regex) {
+		SdbLongColumnArraySet(@Language("RegExp") String regex, long defValue) {
 			super(regex);
+			this.defValue = defValue;
 			this.cachedArray = new ThreadLocal<>();
 		}
 		
@@ -128,7 +135,7 @@ public abstract class SdbColumnArraySet {
 				this.cachedArray.set(cachedArray);
 			}
 			
-			Arrays.fill(cachedArray, Long.MAX_VALUE);
+			Arrays.fill(cachedArray, defValue);
 			if (set != null) {
 				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getInt(e.getValue());
@@ -141,10 +148,12 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbRealColumnArraySet extends SdbColumnArraySet {
 		
+		private final double defValue;
 		private final ThreadLocal<double []> cachedArray;
 		
-		SdbRealColumnArraySet(@Language("RegExp") String regex) {
+		SdbRealColumnArraySet(@Language("RegExp") String regex, double defValue) {
 			super(regex);
+			this.defValue = defValue;
 			this.cachedArray = new ThreadLocal<>();
 		}
 		
@@ -156,7 +165,7 @@ public abstract class SdbColumnArraySet {
 				this.cachedArray.set(cachedArray);
 			}
 			
-			Arrays.fill(cachedArray, Double.NaN);
+			Arrays.fill(cachedArray, defValue);
 			if (set != null) {
 				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getReal(e.getValue());
@@ -169,10 +178,12 @@ public abstract class SdbColumnArraySet {
 	
 	public static class SdbBooleanColumnArraySet extends SdbColumnArraySet {
 		
+		private final boolean defValue;
 		private final ThreadLocal<boolean []> cachedArray;
 		
-		SdbBooleanColumnArraySet(@Language("RegExp") String regex) {
+		SdbBooleanColumnArraySet(@Language("RegExp") String regex, boolean defValue) {
 			super(regex);
+			this.defValue = defValue;
 			this.cachedArray = new ThreadLocal<>();
 		}
 		
@@ -184,7 +195,7 @@ public abstract class SdbColumnArraySet {
 				this.cachedArray.set(cachedArray);
 			}
 			
-			Arrays.fill(cachedArray, false);
+			Arrays.fill(cachedArray, defValue);
 			if (set != null) {
 				for (Entry<Integer, Integer> e : getMappedEntries(set)) {
 					cachedArray[e.getKey()] = set.getBoolean(e.getValue());
