@@ -4,6 +4,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.ServerD
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
@@ -34,11 +35,12 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		long group2 = 4321;
 		
 		return Arrays.asList(
-				new Input("Ungrouped player should not be able to buff ungrouped NPC", 0, 0, false),
-				new Input("Grouped player should not be able to buff ungrouped NPC", group1, 0, false),
-				new Input("Ungrouped player should not be able to buff grouped NPC", 0, group2, false),
-				new Input("Grouped player should not be able to buff NPC in a different group", group1, group2, false),
-				new Input("Grouped player should be able to buff NPC in the same group", group1, group1, true)
+				new Input("Ungrouped player should not be able to buff ungrouped NPC", 0, 0, false,false),
+				new Input("Grouped player should not be able to buff ungrouped NPC", group1, 0, false,false),
+				new Input("Ungrouped player should not be able to buff grouped NPC", 0, group2, false,false),
+				new Input("Grouped player should not be able to buff NPC in a different group", group1, group2, false,false),
+				new Input("Grouped player should be able to buff NPC in the same group", group1, group1, false,true),
+				new Input("Player should not be able to buff invulnerable NPC", 0, 0, true, false)
 		);
 	}
 	
@@ -57,6 +59,10 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		target = new GenericCreatureObject(3, "NPC", false);
 		target.setFaction(ServerData.INSTANCE.getFactions().getFaction("neutral"));
 		target.setGroupId(input.getNpcGroupId());
+		
+		if (input.isNpcInvulnerable()) {
+			target.setOptionFlags(OptionFlag.INVULNERABLE);
+		}
 		
 		registerService(new BuffService());
 	}
@@ -88,12 +94,14 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		private final String caseName;
 		private final long playerGroupId;	// Group ID of the player
 		private final long npcGroupId;	// Group ID of the NPC
+		private final boolean npcInvulnerable;
 		private final boolean expected;
 		
-		public Input(String caseName, long playerGroupId, long npcGroupId, boolean expected) {
+		public Input(String caseName, long playerGroupId, long npcGroupId, boolean npcInvulnerable, boolean expected) {
 			this.caseName = caseName;
 			this.playerGroupId = playerGroupId;
 			this.npcGroupId = npcGroupId;
+			this.npcInvulnerable = npcInvulnerable;
 			this.expected = expected;
 		}
 		
@@ -107,6 +115,10 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		
 		public long getNpcGroupId() {
 			return npcGroupId;
+		}
+		
+		public boolean isNpcInvulnerable() {
+			return npcInvulnerable;
 		}
 		
 		public boolean isExpected() {
