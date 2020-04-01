@@ -77,8 +77,8 @@ public final class BuffLoader extends DataLoader {
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buff/buff.sdb"))) {
-			SdbTextColumnArraySet effectParams = set.getTextArrayParser("effect([0-9]+)_param");
-			SdbRealColumnArraySet effectValues = set.getRealArrayParser("effect([0-9]+)_value");
+			SdbTextColumnArraySet effectParams = set.getTextArrayParser("effect([0-9]+)_param", null);
+			SdbRealColumnArraySet effectValues = set.getRealArrayParser("effect([0-9]+)_value", 0);
 			while (set.next()) {
 				BuffInfo buff = new BuffInfo(set, effectParams, effectValues);
 				buffsByCrc.put(buff.getCrc(), buff);
