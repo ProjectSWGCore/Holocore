@@ -146,6 +146,8 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
 		boolean devastating = isAttackDevastating(source, command);
+		double weaponDamageBoost = 1.0;	// Damage increase of the weapon
+		double addedDamageBoost = 1.0;	// Damage increase of the command
 		
 		if (devastating) {
 			// Show Devastation flytext above the source for every target
@@ -156,8 +158,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			for (CreatureObject target : targets) {
 				target.sendSelf(devastationFlyText);
 			}
+			
+			weaponDamageBoost += 0.5;	// 50% damage boost from devastation
 		}
 		
+		// Apply special line damage boost
+		addedDamageBoost += CombatCommandCommon.getAddedDamageBoost(source, command);
+
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
 			
@@ -174,12 +181,12 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
 			int weaponDamage = calculateWeaponDamage(source, weapon, command);
+			int addedDamage = command.getAddedDamage();
 			
-			if (devastating) {
-				weaponDamage *= 1.5;	// Devastation increases raw weapon damage by 50%;
-			}
+			weaponDamage *= weaponDamageBoost;
+			addedDamage *= addedDamageBoost;
 			
-			int rawDamage = weaponDamage + command.getAddedDamage();
+			int rawDamage = weaponDamage + addedDamage;
 			
 			info.setRawDamage(rawDamage);
 			info.setFinalDamage(rawDamage);
