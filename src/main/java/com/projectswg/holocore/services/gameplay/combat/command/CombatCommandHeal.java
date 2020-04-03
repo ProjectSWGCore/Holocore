@@ -33,6 +33,8 @@ import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectLocMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
@@ -156,7 +158,21 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		
 		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "heal_fly"), "DI", difference, "TO", attribName));
 		ShowFlyText flyText = new ShowFlyText(healed.getObjectId(), oobp, Scale.MEDIUM, new RGB(46, 139, 87), ShowFlyText.Flag.IS_HEAL);
-		PlayClientEffectObjectMessage effect = new PlayClientEffectObjectMessage("appearance/pt_heal.prt", "root", healed.getObjectId(), "");
+		String commandName = combatCommand.getName();
+		SWGPacket effect;
+		
+		if (commandName.startsWith("me_bacta_bomb_")) {
+			SWGObject healedParent = healed.getParent();
+			long cellId = healedParent != null ? healedParent.getObjectId() : 0;
+			effect = new PlayClientEffectLocMessage("clienteffect/bacta_bomb.cef", healed.getTerrain(), healed.getLocation().getPosition(), cellId, 0, "");
+		} else if (commandName.startsWith("me_bacta_grenade_")) {
+			SWGObject healedParent = healed.getParent();
+			long cellId = healedParent != null ? healedParent.getObjectId() : 0;
+			effect = new PlayClientEffectLocMessage("clienteffect/bacta_grenade.cef", healed.getTerrain(), healed.getLocation().getPosition(), cellId, 0, "");
+		} else {
+			effect = new PlayClientEffectObjectMessage("appearance/pt_heal.prt", "root", healed.getObjectId(), "");
+		}
+		
 		
 		healed.sendObservers(combatAction, flyText, effect);
 	}
