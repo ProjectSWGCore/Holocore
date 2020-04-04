@@ -28,9 +28,7 @@
 package com.projectswg.holocore.services.gameplay.combat.command;
 
 import com.projectswg.common.data.RGB;
-import com.projectswg.common.data.combat.AttackInfo;
-import com.projectswg.common.data.combat.HitLocation;
-import com.projectswg.common.data.combat.TrailLocation;
+import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
@@ -42,13 +40,13 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
-import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatSpam;
 
 enum CombatCommandHeal implements CombatCommandHitType {
 	INSTANCE;
@@ -138,6 +136,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 				healed.modifyHealth(healAmount);
 				difference = healed.getHealth() - currentHealth;
 				attribName = "HEALTH";
+				healed.sendObservers(createCombatSpam(healer, healed, healAmount));
 				break;
 			}
 			
@@ -175,9 +174,23 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		}
 		
 		
-		// TODO doesn't look like a heal in the combat log
+		healed.sendObservers(combatAction, flyText, effect);
+	}
+
+	private static CombatSpam createCombatSpam(CreatureObject healer, CreatureObject healed, int healAmount) {
+		CombatSpam spam = new CombatSpam(healer.getObjectId());
 		
-		healed.sendObservers(combatAction, flyText, effect, createCombatSpam(healer, healed, weapon, new AttackInfo(), combatCommand));
+		spam.setAttacker(healer.getObjectId());
+		spam.setAttackerPosition(healer.getLocation().getPosition());
+		spam.setDefender(healed.getObjectId());
+		spam.setDefenderPosition(healed.getLocation().getPosition());
+		spam.setInfo(new AttackInfo());
+		spam.setDataType((byte) 2);	// 2 means the combat log entry is a specified message
+		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "perform_heal_damage_success"), "TT", healer.getObjectName(), "TO", healed.getObjectName(), "DI", healAmount));
+		spam.setSpamMessage(oobp);
+		spam.setSpamType(CombatSpamType.MEDICAL);
+		
+		return spam;
 	}
 	
 }
