@@ -844,7 +844,7 @@ patrol_tat_10107	patrol_tat_10100		TATOOINE	tat_jabbas_palace	7	28.0	0.2	40.9	0
 patrol_tat_10108	patrol_tat_10100		TATOOINE	tat_jabbas_palace	7	25.2	0.2	30.1	0	
 patrol_tat_10109	patrol_tat_10100		TATOOINE	tat_jabbas_palace	7	24.9	0.2	0.6	0	
 patrol_tat_10110	patrol_tat_10100		TATOOINE	tat_jabbas_palace	19	25.1	0.2	-8.8	0	
-patrol_tat_10200	patrol_tat_10200	LOOP	TATOOINE	tat_jabbas_palace	22	-23.3	3.6	32.3	0	POI - Jabbas Palace - Agtor
+patrol_tat_10200	patrol_tat_10200	FLIP	TATOOINE	tat_jabbas_palace	22	-23.3	3.6	32.3	0	POI - Jabbas Palace - Agtor
 patrol_tat_10201	patrol_tat_10200		TATOOINE	tat_jabbas_palace	22	-23.3	3.6	51.9	0	
 patrol_tat_10300	patrol_tat_10300	LOOP	TATOOINE	tat_jabbas_palace	23	-32.9	3.0	59.8	0	POI - Jabbas Palace - Rautog
 patrol_tat_10301	patrol_tat_10300		TATOOINE	tat_jabbas_palace	23	-32.9	3.0	72.6	0	
@@ -1201,3 +1201,31 @@ patrol_tat_16423	patrol_tat_16400		TATOOINE	tat_moseisley_starport	13	53.5	1.0	2
 patrol_tat_16424	patrol_tat_16400		TATOOINE	tat_moseisley_starport	16	55.5	1.0	14.6	0	
 patrol_tat_16425	patrol_tat_16400		TATOOINE	tat_world	0	3607.4	5.0	-4752.7	0	
 patrol_tat_16426	patrol_tat_16400		TATOOINE	tat_world	0	3627.9	5.0	-4789.2	0	
+patrol_tat_16500	patrol_tat_16500	FLIP	TATOOINE	tat_jabbas_palace	1	-1.1	0.2	137.2	0	POI - Jabbas Palace - Bomarr Monk
+patrol_tat_16501	patrol_tat_16500		TATOOINE	tat_world	0	-5867.8	90.0	-6202.5	0	
+patrol_tat_16502	patrol_tat_16500		TATOOINE	tat_world	0	-5837.5	90.0	-6197.2	0	
+patrol_tat_16503	patrol_tat_16500		TATOOINE	tat_world	0	-5784.0	84.5	-6254.1	0	
+patrol_tat_16504	patrol_tat_16500		TATOOINE	tat_world	0	-5749.3	71.7	-6292.7	0	
+patrol_tat_16505	patrol_tat_16500		TATOOINE	tat_world	0	-5723.5	74.1	-6324.0	0	
+patrol_tat_16506	patrol_tat_16500		TATOOINE	tat_world	0	-5613.2	49.0	-6456.0	0	
+patrol_tat_16507	patrol_tat_16500		TATOOINE	tat_world	0	-5566.4	54.5	-6457.1	0	
+patrol_tat_16508	patrol_tat_16500		TATOOINE	tat_world	0	-5428.4	43.9	-6459.6	0	
+patrol_tat_16509	patrol_tat_16500		TATOOINE	tat_world	0	-5305.3	53.2	-6458.0	0	
+patrol_tat_16510	patrol_tat_16500		TATOOINE	tat_world	0	-5249.4	73.9	-6458.7	0	
+patrol_tat_16511	patrol_tat_16500		TATOOINE	tat_world	0	-5215.4	75.0	-6458.5	0	
+patrol_tat_16512	patrol_tat_16500		TATOOINE	tat_world	0	-5215.5	75.0	-6508.5	0	
+patrol_tat_16600	patrol_tat_16600	FLIP	TATOOINE	tat_world	0	-6176.3	90.0	-6387.4	0	POI - Jabbas Palace - an explorer
+patrol_tat_16601	patrol_tat_16600		TATOOINE	tat_world	0	-6146.9	89.3	-6282.9	0	
+patrol_tat_16602	patrol_tat_16600		TATOOINE	tat_world	0	-6113.9	84.8	-6208.7	0	
+patrol_tat_16603	patrol_tat_16600		TATOOINE	tat_world	0	-6049.4	90.1	-6151.7	0	
+patrol_tat_16604	patrol_tat_16600		TATOOINE	tat_world	0	-5953.3	90.0	-6146.2	0	
+patrol_tat_16605	patrol_tat_16600		TATOOINE	tat_world	0	-5875.1	90.0	-6183.8	0	
+patrol_tat_16606	patrol_tat_16600		TATOOINE	tat_world	0	-5870.8	90.1	-6203.3	0	
+patrol_tat_16607	patrol_tat_16600		TATOOINE	tat_jabbas_palace	1	2.5	0.2	137.4	0	
+patrol_tat_16608	patrol_tat_16600		TATOOINE	tat_jabbas_palace	1	1.8	0.2	125.5	0	
+patrol_tat_16609	patrol_tat_16600		TATOOINE	tat_jabbas_palace	1	9.4	0.2	119.9	0	
+patrol_tat_16700	patrol_tat_16700	FLIP	TATOOINE	tat_jabbas_palace	1	-9.2	0.2	120.0	0	POI - Jabbas Palace - an artisan
+patrol_tat_16701	patrol_tat_16700		TATOOINE	tat_jabbas_palace	1	-2.2	0.2	124.3	0	
+patrol_tat_16702	patrol_tat_16700		TATOOINE	tat_jabbas_palace	1	2.4	0.2	143.1	0	
+patrol_tat_16703	patrol_tat_16700		TATOOINE	tat_world	0	-5859.3	90.0	-6202.7	0	
+patrol_tat_16704	patrol_tat_16700		TATOOINE	tat_world	0	-5824.1	90.0	-6167.9	0	
