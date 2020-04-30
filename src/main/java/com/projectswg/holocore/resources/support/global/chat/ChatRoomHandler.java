@@ -303,7 +303,9 @@ public class ChatRoomHandler {
 	}
 
 	private void createAdminChannels(ChatAvatar systemAvatar, String basePath) {
-		createRoom(systemAvatar, false, false, ChatRoomService.LOG_ROOM_PATH, "server log", false);
+		for (AdminChatRooms room : AdminChatRooms.values()) {
+			createRoom(systemAvatar, false, false, room.getRoomPath(), room.getRoomTitle(), false);
+		}
 	}
 	
 	public ChatRoom getRoomById(int roomId) {

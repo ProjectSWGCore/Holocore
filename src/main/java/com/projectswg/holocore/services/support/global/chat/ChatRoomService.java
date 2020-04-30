@@ -67,7 +67,7 @@ public class ChatRoomService extends Service {
 
 	@Override
 	public boolean start() {
-		Log.addWrapper(new ChatRoomLogWrapper(ChatRoomService.LOG_ROOM_PATH));
+		Log.addWrapper(new ChatRoomLogWrapper());
 
 		return super.start();
 	}
@@ -168,7 +168,7 @@ public class ChatRoomService extends Service {
 
 	@IntentHandler
 	private void handleSystemChatRoomMessageIntent(SystemChatRoomMessageIntent intent) {
-		chatRoomHandler.sendMessageToRoomFromSystem(intent.getRoomPath(), intent.getMessage(), new OutOfBandPackage());
+		chatRoomHandler.sendMessageToRoomFromSystem(intent.getRoomPath().getRoomPath(), intent.getMessage(), new OutOfBandPackage());
 	}
 	
 	/* Chat Rooms */
