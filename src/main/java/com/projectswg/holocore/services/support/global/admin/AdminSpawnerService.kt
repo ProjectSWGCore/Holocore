@@ -68,7 +68,7 @@ class AdminSpawnerService : Service() {
 		if (eci.command.crc == COMMAND_CREATE_SPAWNING_ELEMENT) {
 			val creature = eci.source
 			val location = creature.location
-			val building = creature.superParent?.buildoutTag ?: location.terrain.name.toLowerCase(Locale.US).substring(0, 3)
+			val building = creature.superParent?.buildoutTag ?: location.terrain.name.toLowerCase(Locale.US).substring(0, 3) + "_world"
 			val cell = (creature.parent as? CellObject?)?.number ?: 0
 			val args = eci.arguments.split(' ', limit = 2)
 			val type = sanitizeSpawnerType(args.getOrElse(0) { "AREA" }.toUpperCase(Locale.US))
