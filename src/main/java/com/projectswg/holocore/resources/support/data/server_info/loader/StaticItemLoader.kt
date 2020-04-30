@@ -55,7 +55,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	@Throws(IOException::class)
 	override fun load() {
 		SdbLoader.load(File("serverdata/nge/items/master_item.msdb")).use { set ->
-			val colorArray = set.getIntegerArrayParser("index_color_(\\d+)")
+			val colorArray = set.getIntegerArrayParser("index_color_(\\d+)", Integer.MAX_VALUE)
 			while (set.next()) {
 				val slot = StaticItemInfo(set, colorArray)
 				itemByName[slot.itemName] = slot
@@ -121,7 +121,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
-		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int = set.getInt("value").toInt()
 		
@@ -144,7 +144,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	class CollectionItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
 		val slotName: String = set.getText("collection_slot_name")
-		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		
 	}
@@ -192,7 +192,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	
 	class GenericItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
-		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int				= set.getInt("value").toInt()
 		val isUnique: Boolean		= set.getInt("isUnique") != 0L
@@ -201,7 +201,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	
 	class ObjectItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
-		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int = set.getInt("value").toInt()
 		val isUnique: Boolean = set.getInt("isUnique") != 0L
@@ -302,7 +302,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
-		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int					= set.getInt("value").toInt()
 		

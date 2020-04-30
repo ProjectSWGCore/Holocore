@@ -89,28 +89,29 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	}
 	
 	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
-		// TODO single target only defence rolls against target
-		if (target instanceof CreatureObject && isAttackDodged(source, (CreatureObject) target)) {
-			info.setDodge(true);
-			info.setSuccess(false);	// This means that the attack did no damage to the target at all
-			long targetObjectId = target.getObjectId();
+		Set<CreatureObject> targets = new HashSet<>();
+		
+		if (target instanceof CreatureObject) {
+			CreatureObject creatureTarget = (CreatureObject) target;
+
+			targets.add(creatureTarget);
 			
-			// Play dodge animation on the creature that's dodging for everyone that can see the creature
-			target.sendObservers(new Animation(targetObjectId, "dodge"));
-			
-			// Send flytext to the relevant receivers
-			ShowFlyText showFlyText = new ShowFlyText(targetObjectId, new StringId("combat_effects", "dodge"), ShowFlyText.Scale.SMALLEST, new RGB(255, 255, 255));
-			target.sendSelf(showFlyText);
-			source.sendSelf(showFlyText);
+			// Let the defender roll single target defences against the attack of the attacker
+			if (isAttackParried(source, creatureTarget, weapon)) {
+				info.setParry(true);
+				info.setSuccess(false);
+			} else if (isAttackDodged(source, creatureTarget)) {
+				// The defender dodged the attack from the target
+				info.setDodge(true);
+				info.setSuccess(false);	// This means that the attack did no damage to the target at all
+				long targetObjectId = target.getObjectId();
+				
+				// Play dodge animation on the creature that's dodging for everyone that can see the creature
+				target.sendObservers(new Animation(targetObjectId, "dodge"));
+			}
 		}
 		
 		// TODO single target only offence rolls for source
-		
-		// TODO below logic should be in CommandService when target checks are implemented in there
-		Set<CreatureObject> targets = new HashSet<>();
-		
-		if (target instanceof CreatureObject)
-			targets.add((CreatureObject) target);
 		
 		doCombat(source, targets, weapon, info, command);
 	}
@@ -145,6 +146,8 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
 		boolean devastating = isAttackDevastating(source, command);
+		double weaponDamageBoost = 1.0;	// Damage increase of the weapon
+		double addedDamageBoost = 1.0;	// Damage increase of the command
 		
 		if (devastating) {
 			// Show Devastation flytext above the source for every target
@@ -155,8 +158,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			for (CreatureObject target : targets) {
 				target.sendSelf(devastationFlyText);
 			}
+			
+			weaponDamageBoost += 0.5;	// 50% damage boost from devastation
 		}
 		
+		// Apply special line damage boost
+		addedDamageBoost += CombatCommandCommon.getAddedDamageBoost(source, command);
+
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
 			
@@ -173,12 +181,12 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
 			int weaponDamage = calculateWeaponDamage(source, weapon, command);
+			int addedDamage = command.getAddedDamage();
 			
-			if (devastating) {
-				weaponDamage *= 1.5;	// Devastation increases raw weapon damage by 50%;
-			}
+			weaponDamage *= weaponDamageBoost;
+			addedDamage *= addedDamageBoost;
 			
-			int rawDamage = weaponDamage + command.getAddedDamage();
+			int rawDamage = weaponDamage + addedDamage;
 			
 			info.setRawDamage(rawDamage);
 			info.setFinalDamage(rawDamage);
@@ -272,8 +280,25 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 	}
 	
+	private static boolean isAttackParried(CreatureObject source, CreatureObject target, WeaponObject attackerWeapon) {
+		WeaponObject defenderWeapon = target.getEquippedWeapon();
+		WeaponType defenderWeaponType = defenderWeapon.getType();
+		WeaponType attackerWeaponType = attackerWeapon.getType();
+		
+		// If the defender is wielding a lightsaber, parry can always be rolled, regardless of what the attacker is wielding
+		// If both attacker and defender are wielding melee weapons, parry can be rolled
+		if (defenderWeaponType.isLightsaber() || (defenderWeaponType.isMelee() && attackerWeaponType.isMelee())) {
+			double parryChance = (target.getSkillModValue("display_only_parry") - source.getSkillModValue("display_only_parry_reduction")) / 100d;
+			double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
+			
+			return roll <= parryChance;	// If parry chance is 25%, then the roll should be between 0 and 25 (both inclusive)
+		} else {
+			return false;
+		}
+	}
+	
 	private static boolean isAttackDodged(CreatureObject source, CreatureObject target) {
-		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100;
+		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100d;
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
@@ -293,7 +318,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			return false;
 		}
 		
-		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10;
+		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10d;
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)

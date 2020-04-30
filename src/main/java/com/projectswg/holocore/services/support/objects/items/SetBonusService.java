@@ -31,17 +31,15 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class SetBonusService extends Service {
-	
-	private static final int MIN_SET_PIECES = 2;
-	private static final int MAX_SET_PIECES = 11;
 	
 	public SetBonusService() {
 	
@@ -67,26 +65,24 @@ public class SetBonusService extends Service {
 		if (newContainer instanceof CreatureObject) {
 			// They equipped an object
 			CreatureObject creature = (CreatureObject) newContainer;
-			int matchingPieces = matchingPieces(creature, object);
+			long equipped = matchingPieces(creature, object);
 			
-			if (matchingPieces < minPiecesRequired) {
+			if (equipped < minPiecesRequired) {
 				// The creature does not have enough matching pieces equipped to qualify for the first set bonus
 				return;
 			}
 			
-			int bonus = findBonus(matchingPieces - 1, object, true);
-			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
+			String attribute = "@set_bonus:piece_bonus_count_" + equipped;
 			
 			checkSetBonus(creature, object, attribute, false);
 		} else if (oldContainer instanceof CreatureObject) {
 			// They unequipped an object
 			CreatureObject creature = (CreatureObject) oldContainer;
 			
-			int matchingPieces = matchingPieces(creature, object);
-			boolean remove = matchingPieces < minPiecesRequired;
+			long equipped = matchingPieces(creature, object);
 			
-			// They still have enough pieces of the set equipped to receive a bonus
-			int bonus = findBonus(matchingPieces, object, remove);	// Look for a lower rank of the set bonus to apply
+			boolean remove = equipped < minPiecesRequired;
+			long bonus = findBonus(equipped, object, remove);
 			String attribute = "@set_bonus:piece_bonus_count_" + bonus;
 			
 			checkSetBonus(creature, object, attribute, remove);
@@ -95,8 +91,17 @@ public class SetBonusService extends Service {
 	
 	private void checkSetBonus(CreatureObject creature, SWGObject object, String attribute, boolean remove) {
 		String attributeValue = object.getAttribute(attribute);
+		
+		if (attributeValue == null) {
+			return;
+		}
+		
 		String buffName = buffName(attributeValue);
-		String message = sysMessage(attributeValue);
+		
+		if (!remove && creature.hasBuff(buffName)) {
+			return;
+		}
+		
 		
 		// Grant or remove the relevant buff
 		BuffIntent.broadcast(buffName, creature, creature, remove);
@@ -106,6 +111,7 @@ public class SetBonusService extends Service {
 			Player owner = creature.getOwner();
 			
 			if (owner != null) {
+				String message = sysMessage(attributeValue);
 				SystemMessageIntent.broadcastPersonal(owner, message);
 			}
 		}
@@ -120,16 +126,9 @@ public class SetBonusService extends Service {
 	}
 	
 	private int minPiecesRequired(SWGObject object) {
-		for (int i = MIN_SET_PIECES; i <= MAX_SET_PIECES; i++) {
-			String attribute = "@set_bonus:piece_bonus_count_" + i;
-			String bonus = object.getAttribute(attribute);
-			
-			if (bonus != null) {
-				return i;
-			}
-		}
-		
-		return -1;
+		return bonusCounts(object)
+				.reduce(Math::min)
+				.orElse(-1);
 	}
 	
 	/**
@@ -140,55 +139,38 @@ public class SetBonusService extends Service {
 	 *           will find the bonus that the creature should already have.
 	 * @return the number for the resulting bonus
 	 */
-	private int findBonus(int matchingPieces, SWGObject object, boolean up) {
-		int start = up ? matchingPieces : MAX_SET_PIECES;
-		int end = up ? MAX_SET_PIECES : matchingPieces;
-		int current = start;
-		
-		while (++current <= end) {
-			String attribute = "@set_bonus:piece_bonus_count_" + current;
-			String bonus = object.getAttribute(attribute);
-			
-			if (bonus != null) {
-				return current;
-			}
-		}
-		
-		return matchingPieces;
+	private long findBonus(long matchingPieces, SWGObject object, boolean up) {
+		return up ? findNextBonus(matchingPieces, object) : findPrevBonus(matchingPieces, object);
 	}
 	
-	private int matchingPieces(CreatureObject creature, SWGObject object) {
-		Collection<SWGObject> slottedObjects = creature.getSlottedObjects();
-		
-		int counter = 0;
-		
-		for (SWGObject slottedObject : slottedObjects) {
-			if (match(object, slottedObject)) {
-				counter++;
-			}
-		}
-		
-		return counter;
+	private long findNextBonus(long matchingPieces, SWGObject object) {
+		return bonusCounts(object)
+				.filter(count -> count >= matchingPieces)
+				.reduce(Math::min)
+				.orElse(0);
 	}
 	
-	private boolean match(SWGObject object1, SWGObject object2) {
-		for (int i = MIN_SET_PIECES; i <= MAX_SET_PIECES; i++) {
-			String attribute = "@set_bonus:piece_bonus_count_" + i;
-			String o1Bonus = object1.getAttribute(attribute);
-			String o2Bonus = object2.getAttribute(attribute);
-			
-			if (o1Bonus == null && o2Bonus == null) {
-				// Both objects don't have a set bonus for this amount of matching pieces. Move on.
-				continue;
-			}
-			
-			if (!Objects.equals(o1Bonus, o2Bonus)) {
-				// Both pieces have a bonus for this amount of pieces but they do not match
-				return false;
-			}
-		}
-		
-		return true;
+	private long findPrevBonus(long matchingPieces, SWGObject object) {
+		return bonusCounts(object)
+				.filter(count -> count <= matchingPieces)
+				.reduce(Math::max)
+				.orElse(0);
+	}
+	
+	private long matchingPieces(CreatureObject creature, SWGObject object) {
+		return creature.getSlottedObjects().stream()
+				.distinct()	// An item can occupy multiple slots - ensure an item is only counted once
+				.map(slottedObject -> slottedObject.getServerAttribute(ServerAttribute.SET_BONUS_ID))
+				.filter(Objects::nonNull)
+				.filter(setId -> Objects.equals(setId, object.getServerAttribute(ServerAttribute.SET_BONUS_ID)))
+				.count();
+	}
+	
+	private IntStream bonusCounts(SWGObject object) {
+		return object.getAttributes().keySet().stream()
+				.filter(attrName -> attrName.startsWith("@set_bonus:piece_bonus_count_"))
+				.map(attrName -> attrName.replace("@set_bonus:piece_bonus_count_", ""))
+				.mapToInt(Integer::parseInt);
 	}
 	
 }

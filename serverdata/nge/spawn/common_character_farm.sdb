@@ -12,3 +12,73 @@ spawn_chf_9	CHARACTER_FARM	chf_world	AREA	0	-55	0	0	-90	1	Light Jedi	humanoid_je
 spawn_chf_10	CHARACTER_FARM	chf_world	AREA	0	50	0	-50	0	1	an Imperial storm commando	humanoid_imperial_commando_storm	ATTACKABLE	N	20	30	Outback	Character Farm	1	TURN	0	0	-	idle	0	0	0	10
 spawn_chf_11	CHARACTER_FARM	chf_world	AREA	0	-45	0	-50	-90	1	Light Jedi	humanoid_jedi_light	ATTACKABLE	B	50	55	Outback	Character Farm	2	LOITER	10	0	-	idle	0	0	0	10
 spawn_chf_12	CHARACTER_FARM	chf_world	AREA	0	-55	0	-50	90	1	an Imperial storm commando	humanoid_imperial_commando_storm	ATTACKABLE	B	50	55	Outback	Character Farm	2	LOITER	10	0	-	idle	0	0	0	10
+spawn_chf_13	CHARACTER_FARM	chf_world	AREA	0	200	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	angry	0	0	0	10
+spawn_chf_14	CHARACTER_FARM	chf_world	AREA	0	205	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	bored	0	0	0	10
+spawn_chf_15	CHARACTER_FARM	chf_world	AREA	0	210	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	calm	0	0	0	10
+spawn_chf_16	CHARACTER_FARM	chf_world	AREA	0	215	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	conversation	0	0	0	10
+spawn_chf_17	CHARACTER_FARM	chf_world	AREA	0	220	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	dance_1	0	0	0	10
+spawn_chf_18	CHARACTER_FARM	chf_world	AREA	0	225	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	dance_2	0	0	0	10
+spawn_chf_19	CHARACTER_FARM	chf_world	AREA	0	230	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	default	0	0	0	10
+spawn_chf_20	CHARACTER_FARM	chf_world	AREA	0	235	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	entertained	0	0	0	10
+spawn_chf_21	CHARACTER_FARM	chf_world	AREA	0	240	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	fishing	0	0	0	10
+spawn_chf_22	CHARACTER_FARM	chf_world	AREA	0	245	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	happy	0	0	0	10
+spawn_chf_23	CHARACTER_FARM	chf_world	AREA	0	250	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	idle	0	0	0	10
+spawn_chf_24	CHARACTER_FARM	chf_world	AREA	0	255	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	nervous	0	0	0	10
+spawn_chf_25	CHARACTER_FARM	chf_world	AREA	0	260	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_accusing	0	0	0	10
+spawn_chf_26	CHARACTER_FARM	chf_world	AREA	0	265	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_angry	0	0	0	10
+spawn_chf_27	CHARACTER_FARM	chf_world	AREA	0	270	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_consoling	0	0	0	10
+spawn_chf_28	CHARACTER_FARM	chf_world	AREA	0	275	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dance_basic	0	0	0	10
+spawn_chf_29	CHARACTER_FARM	chf_world	AREA	0	280	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_01	0	0	0	10
+spawn_chf_30	CHARACTER_FARM	chf_world	AREA	0	285	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_02	0	0	0	10
+spawn_chf_31	CHARACTER_FARM	chf_world	AREA	0	290	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_03	0	0	0	10
+spawn_chf_32	CHARACTER_FARM	chf_world	AREA	0	295	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_imperial	0	0	0	10
+spawn_chf_33	CHARACTER_FARM	chf_world	AREA	0	300	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_meditate	0	0	0	10
+spawn_chf_34	CHARACTER_FARM	chf_world	AREA	0	305	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sad	0	0	0	10
+spawn_chf_35	CHARACTER_FARM	chf_world	AREA	0	310	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	10
+spawn_chf_36	CHARACTER_FARM	chf_world	AREA	0	315	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	10
+spawn_chf_37	CHARACTER_FARM	chf_world	AREA	0	320	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_table	0	0	0	10
+spawn_chf_38	CHARACTER_FARM	chf_world	AREA	0	325	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_table_eating	0	0	0	10
+spawn_chf_39	CHARACTER_FARM	chf_world	AREA	0	330	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	10
+spawn_chf_40	CHARACTER_FARM	chf_world	AREA	0	335	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	10
+spawn_chf_41	CHARACTER_FARM	chf_world	AREA	0	340	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	sad	0	0	0	10
+spawn_chf_42	CHARACTER_FARM	chf_world	AREA	0	345	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_1	0	0	0	10
+spawn_chf_43	CHARACTER_FARM	chf_world	AREA	0	350	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_2	0	0	0	10
+spawn_chf_44	CHARACTER_FARM	chf_world	AREA	0	355	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_3	0	0	0	10
+spawn_chf_45	CHARACTER_FARM	chf_world	AREA	0	360	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_oola	0	0	0	10
+spawn_chf_46	CHARACTER_FARM	chf_world	AREA	0	365	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_sy_snootles	0	0	0	10
+spawn_chf_47	CHARACTER_FARM	chf_world	AREA	0	370	0	0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	threaten	0	0	0	10
+spawn_chf_48	CHARACTER_FARM	chf_world	AREA	0	200	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	angry	0	0	0	10
+spawn_chf_49	CHARACTER_FARM	chf_world	AREA	0	205	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	bored	0	0	0	10
+spawn_chf_50	CHARACTER_FARM	chf_world	AREA	0	210	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	calm	0	0	0	10
+spawn_chf_51	CHARACTER_FARM	chf_world	AREA	0	215	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	conversation	0	0	0	10
+spawn_chf_52	CHARACTER_FARM	chf_world	AREA	0	220	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	dance_1	0	0	0	10
+spawn_chf_53	CHARACTER_FARM	chf_world	AREA	0	225	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	dance_2	0	0	0	10
+spawn_chf_54	CHARACTER_FARM	chf_world	AREA	0	230	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	default	0	0	0	10
+spawn_chf_55	CHARACTER_FARM	chf_world	AREA	0	235	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	entertained	0	0	0	10
+spawn_chf_56	CHARACTER_FARM	chf_world	AREA	0	240	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	fishing	0	0	0	10
+spawn_chf_57	CHARACTER_FARM	chf_world	AREA	0	245	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	happy	0	0	0	10
+spawn_chf_58	CHARACTER_FARM	chf_world	AREA	0	250	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	idle	0	0	0	10
+spawn_chf_59	CHARACTER_FARM	chf_world	AREA	0	255	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	nervous	0	0	0	10
+spawn_chf_60	CHARACTER_FARM	chf_world	AREA	0	260	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_accusing	0	0	0	10
+spawn_chf_61	CHARACTER_FARM	chf_world	AREA	0	265	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_angry	0	0	0	10
+spawn_chf_62	CHARACTER_FARM	chf_world	AREA	0	270	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_consoling	0	0	0	10
+spawn_chf_63	CHARACTER_FARM	chf_world	AREA	0	275	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dance_basic	0	0	0	10
+spawn_chf_64	CHARACTER_FARM	chf_world	AREA	0	280	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_01	0	0	0	10
+spawn_chf_65	CHARACTER_FARM	chf_world	AREA	0	285	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_02	0	0	0	10
+spawn_chf_66	CHARACTER_FARM	chf_world	AREA	0	290	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_dead_03	0	0	0	10
+spawn_chf_67	CHARACTER_FARM	chf_world	AREA	0	295	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_imperial	0	0	0	10
+spawn_chf_68	CHARACTER_FARM	chf_world	AREA	0	300	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_meditate	0	0	0	10
+spawn_chf_69	CHARACTER_FARM	chf_world	AREA	0	305	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sad	0	0	0	10
+spawn_chf_70	CHARACTER_FARM	chf_world	AREA	0	310	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	10
+spawn_chf_71	CHARACTER_FARM	chf_world	AREA	0	315	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	10
+spawn_chf_72	CHARACTER_FARM	chf_world	AREA	0	320	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_table	0	0	0	10
+spawn_chf_73	CHARACTER_FARM	chf_world	AREA	0	325	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_sitting_table_eating	0	0	0	10
+spawn_chf_74	CHARACTER_FARM	chf_world	AREA	0	330	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	10
+spawn_chf_75	CHARACTER_FARM	chf_world	AREA	0	335	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	10
+spawn_chf_76	CHARACTER_FARM	chf_world	AREA	0	340	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	sad	0	0	0	10
+spawn_chf_77	CHARACTER_FARM	chf_world	AREA	0	345	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_1	0	0	0	10
+spawn_chf_78	CHARACTER_FARM	chf_world	AREA	0	350	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_2	0	0	0	10
+spawn_chf_79	CHARACTER_FARM	chf_world	AREA	0	355	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_music_3	0	0	0	10
+spawn_chf_80	CHARACTER_FARM	chf_world	AREA	0	360	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_oola	0	0	0	10
+spawn_chf_81	CHARACTER_FARM	chf_world	AREA	0	365	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	themepark_sy_snootles	0	0	0	10
+spawn_chf_82	CHARACTER_FARM	chf_world	AREA	0	370	0	20	0	1	a Tusken raider	humanoid_tusken_raider	INVULNERABLE	N	100	100	Outback	Character Farm	1	IDLE	0	0	-	threaten	0	0	0	10

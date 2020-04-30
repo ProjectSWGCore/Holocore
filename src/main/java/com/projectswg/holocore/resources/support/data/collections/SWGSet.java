@@ -100,6 +100,17 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	}
 	
 	@Override
+	public boolean addAll(Collection<? extends E> c) {
+		boolean changed = false;
+		
+		for (E e : c) {
+			changed |= add(e);
+		}
+		
+		return changed;
+	}
+	
+	@Override
 	public boolean remove(Object o) {
 		if (!super.remove(o))
 			return false;

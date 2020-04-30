@@ -145,6 +145,7 @@ public class AwarenessService extends Service {
 			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, obj.getNextUpdateCount(), newWorldLocation, 0));
 		}
 		awareness.updateObject(obj);
+		sendObjectUpdates(obj, oti.getOldParent(), oti.getNewParent(), oldLocation, newLocation, 0);
 		if (obj instanceof CreatureObject)
 			((CreatureObject) obj).setTeleportDestination(newParent, newLocation);
 	}

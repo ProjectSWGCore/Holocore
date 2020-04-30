@@ -61,7 +61,7 @@ public final class PerformanceLoader extends DataLoader {
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/performance/performance.sdb"))) {
-			SdbTextColumnArraySet flourishes = set.getTextArrayParser("flourish(%d+)");
+			SdbTextColumnArraySet flourishes = set.getTextArrayParser("flourish(%d+)", null);
 			while (set.next()) {
 				PerformanceInfo performance = new PerformanceInfo(set, flourishes);
 				nameMap.put(performance.getPerformanceName(), performance);

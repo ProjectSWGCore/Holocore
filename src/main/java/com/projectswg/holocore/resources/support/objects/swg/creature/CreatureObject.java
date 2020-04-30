@@ -623,7 +623,11 @@ CreatureObject extends TangibleObject {
 	}
 
 	public WeaponObject getEquippedWeapon() {
-		return getSlottedObjects().stream().filter(obj -> obj.getObjectId() == creo6.getEquippedWeapon()).map(WeaponObject.class::cast).findFirst().orElse(null);
+		return getSlottedObjects().stream()
+				.filter(obj -> obj.getObjectId() == creo6.getEquippedWeapon())
+				.map(WeaponObject.class::cast)
+				.findFirst()
+				.orElse(null);
 	}
 
 	public void setEquippedWeapon(WeaponObject weapon) {

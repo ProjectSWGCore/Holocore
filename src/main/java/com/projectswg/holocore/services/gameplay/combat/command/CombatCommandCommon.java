@@ -36,12 +36,15 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -77,7 +80,19 @@ public class CombatCommandCommon {
 		combatSpam.setDefenderPosition(target.getLocation().getPosition());
 		combatSpam.setInfo(info);
 		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
-		combatSpam.setSpamType(CombatSpamFilterType.ALL);
+		
+		if (info.isSuccess()) {
+			if (info.isBlockResult()) {
+				combatSpam.setSpamType(CombatSpamType.BLOCK);
+			} else if (info.isEvadeResult()) {
+				combatSpam.setSpamType(CombatSpamType.EVADE);
+			} else {
+				combatSpam.setSpamType(CombatSpamType.HIT);
+			}
+		} else {
+			combatSpam.setSpamType(CombatSpamType.MISS);
+		}
+		
 		return combatSpam;
 	}
 	
@@ -174,6 +189,16 @@ public class CombatCommandCommon {
 	
 	static void showFlyText(TangibleObject obj, String text, Scale scale, RGB c, ShowFlyText.Flag... flags) {
 		obj.sendSelf(new ShowFlyText(obj.getObjectId(), text, scale, c, flags));
+	}
+	
+	static double getAddedDamageBoost(CreatureObject source, CombatCommand command) {
+		SpecialLineLoader.SpecialLineInfo specialLine = ServerData.INSTANCE.getSpecialLines().getSpecialLine(command.getSpecialLine());
+		if (specialLine != null) {
+			String damageModName = specialLine.getAddedDamageModName();
+			return source.getSkillModValue(damageModName) / 100d;
+		}
+		
+		return 0;
 	}
 	
 }

@@ -80,7 +80,7 @@ public class NpcLoiterMode extends NpcMode {
 		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		
-		moveTo(l.build());
+		moveTo(getAI().getParent(), l.build());
 		queueNextLoop(30 + random.nextInt(10));
 	}
 	

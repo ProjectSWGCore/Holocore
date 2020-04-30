@@ -1,3 +1,4 @@
 line	cooldown	damage	critical	action_cost	freeshot	swift
 TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
 fs_dm	expertise_cooldown_line_fs_dm	expertise_damage_line_fs_dm	expertise_critical_line_fs_dm	expertise_action_line_fs_dm	expertise_freeshot_fs_dm	-
+me_heal	-	expertise_healing_line_me_heal	-	expertise_action_line_me_heal	expertise_freeshot_me_heal	fast_attack_line_me_heal

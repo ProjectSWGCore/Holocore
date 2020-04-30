@@ -93,6 +93,7 @@ public class SkillModService extends Service {
 		skillModAdjusters.put("expertise_innate_protection_all", new InnateArmorAdjustFunction());
 		skillModAdjusters.put("expertise_innate_protection_kinetic", new SingleModAdjustFunction("kinetic"));
 		skillModAdjusters.put("expertise_innate_protection_energy", new SingleModAdjustFunction("energy"));
+		skillModAdjusters.put("expertise_saber_block", new SingleModAdjustFunction("display_only_parry", 100));
 	}
 	
 	@Override
@@ -111,7 +112,7 @@ public class SkillModService extends Service {
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
 	
 		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
-			if(attributes.getKey().endsWith("_modified")){
+			if(attributes.getKey().startsWith("cat_stat_mod_bonus") || attributes.getKey().startsWith("cat_skill_mod_bonus")){
 				String[] splitModName = attributes.getKey().split(":",2);
 				String modName = splitModName[1];
 				int modValue = Integer.parseInt(attributes.getValue());

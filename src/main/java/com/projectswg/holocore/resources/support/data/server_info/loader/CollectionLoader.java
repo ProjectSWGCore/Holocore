@@ -69,9 +69,9 @@ public final class CollectionLoader extends DataLoader {
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/collections/collections.sdb"))) {
-			SdbTextColumnArraySet categoryArray = set.getTextArrayParser("category(\\d+)");
-			SdbTextColumnArraySet prereqArray = set.getTextArrayParser("prereq_slot_name(\\d+)");
-			SdbTextColumnArraySet alternateTitleArray = set.getTextArrayParser("alternate_title(\\d+)");
+			SdbTextColumnArraySet categoryArray = set.getTextArrayParser("category(\\d+)", null);
+			SdbTextColumnArraySet prereqArray = set.getTextArrayParser("prereq_slot_name(\\d+)", null);
+			SdbTextColumnArraySet alternateTitleArray = set.getTextArrayParser("alternate_title(\\d+)", null);
 			while (set.next()) {
 				CollectionSlotInfo slot = new CollectionSlotInfo(set, categoryArray, prereqArray, alternateTitleArray);
 				collectionsByName.computeIfAbsent(slot.getCollectionName(), c -> new ArrayList<>()).add(slot);
