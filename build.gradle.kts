@@ -4,7 +4,7 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.3.70"
+	kotlin("jvm") version "1.3.72"
 	id("com.github.johnrengelman.shadow") version "5.2.0"
 	id("org.javamodularity.moduleplugin") version "1.5.0"
 	id("org.beryx.jlink") version "2.17.2"
@@ -94,6 +94,12 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 	kotlinOptions {
 		jvmTarget = kotlinTargetVersion
 	}
+}
+
+tasks.create<JavaExec>("runDebug") {
+	enableAssertions = true
+	classpath = sourceSets.main.get().runtimeClasspath
+	main = "com.projectswg.holocore.ProjectSWG"
 }
 
 tasks.create<ShadowJar>("CreateConvertLoginJar") {
