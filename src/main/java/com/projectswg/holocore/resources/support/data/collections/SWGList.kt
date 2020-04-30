@@ -190,11 +190,12 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		}
 	}
 	
-	override fun getLength(): Int {
-		lock.withLock {
-			return 8 + list.sumBy(encodedLength)
+	override val length: Int
+		get() {
+			lock.withLock {
+				return 8 + list.sumBy(encodedLength)
+			}
 		}
-	}
 	
 	private fun addRemoveDelta(index: Int) {
 		deltaQueue.add(0)
@@ -334,7 +335,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		fun createLongList(page: Int, update: Int): SWGList<Long> = SWGList(page, update, NetBuffer::getLong, NetBuffer::addLong) {8}
 		fun createFloatList(page: Int, update: Int): SWGList<Float> = SWGList(page, update, NetBuffer::getFloat, NetBuffer::addFloat) {4}
 		fun createDoubleList(page: Int, update: Int): SWGList<Double> = SWGList(page, update, {buf -> buf.float.toDouble()}, {buf, d -> buf.addFloat(d.toFloat())}, {8})
-		fun <T: Encodable> createEncodableList(page: Int, update: Int, supplier: () -> T): SWGList<T> = SWGList(page, update, supplier, NetBuffer::addEncodable, Encodable::getLength)
+		fun <T: Encodable> createEncodableList(page: Int, update: Int, supplier: () -> T): SWGList<T> = SWGList(page, update, supplier, NetBuffer::addEncodable, Encodable::length)
 		fun createAsciiList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getAscii, NetBuffer::addAscii) {2+it.length}
 		fun createUnicodeList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getUnicode, NetBuffer::addUnicode) {4+it.length*2}
 		

@@ -142,9 +142,10 @@ class AttributesMutable(obj: SWGObject, type: Int, update: Int) : Attributes, En
 		ham.decode(data)
 	}
 	
-	override fun getLength(): Int {
-		return ham.length
-	}
+	override val length: Int
+		get() {
+			return ham.length
+		}
 	
 	private fun Int.addUntilMax(num: Int, max: Int): Int = Math.max(0, Math.min(max, this + num))
 	
