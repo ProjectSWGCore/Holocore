@@ -73,7 +73,7 @@ class AdminSpawnerService : Service() {
 			val args = eci.arguments.split(' ', limit = 2)
 			val type = sanitizeSpawnerType(args.getOrElse(0) { "AREA" }.toUpperCase(Locale.US))
 			val comment = args.getOrElse(1) { "NPC" }
-			val output = String.format("%s\t%s\t%s\t%s\t%d\t%.1f\t%.1f\t%.1f\t%.0f%s", location.terrain, type, comment, building, cell, location.x, location.y, location.z, location.yaw)
+			val output = String.format("%s\t%s\t%s\t%s\t%d\t%.1f\t%.1f\t%.1f\t%.0f%s", location.terrain, type, comment, building, cell, location.x, location.y, location.z, location.yaw, System.lineSeparator())
 			outputStreamLock.withLock {
 				outputFile.appendText(output)
 			}
