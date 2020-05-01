@@ -64,7 +64,7 @@ class AdminSpawnerService : Service() {
 			val type = sanitizeSpawnerType(args.getOrElse(0) { "AREA" }.toUpperCase(Locale.US))
 			val comment = args.getOrElse(1) { "NPC" }
 			val actualYaw = location.yaw
-			val soeYaw = if (actualYaw < 180) -actualYaw else 360 - actualYaw
+			val soeYaw = if (actualYaw < 180) actualYaw else actualYaw - 360
 			val output = String.format("%s\t%s\t%s\t%d\t%.1f\t%.1f\t%.1f\t%.0f\t%s%s", location.terrain, type, building, cell, location.x, location.y, location.z, soeYaw, comment, System.lineSeparator())
 			outputStreamLock.withLock {
 				outputFile.appendText(output)
