@@ -37,10 +37,7 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import me.joshlarson.jlcommon.log.Log
 import java.io.File
-import java.io.OutputStreamWriter
-import java.nio.charset.StandardCharsets
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
@@ -49,17 +46,10 @@ class AdminSpawnerService : Service() {
 
 	private val outputFile = File("log/spawners.txt")
 	private val outputStreamLock = ReentrantLock()
-	private var outputStream: OutputStreamWriter? = null
 
 	override fun start(): Boolean {
 		outputFile.delete()
 		outputFile.createNewFile()
-		return true
-	}
-
-	override fun stop(): Boolean {
-		outputStream?.close()
-		outputStream = null
 		return true
 	}
 
