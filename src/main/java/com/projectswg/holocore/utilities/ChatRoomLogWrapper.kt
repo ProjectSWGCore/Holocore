@@ -27,11 +27,12 @@
 package com.projectswg.holocore.utilities
 
 import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent
+import com.projectswg.holocore.resources.support.global.chat.AdminChatRooms
 import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.log.Log
 import me.joshlarson.jlcommon.log.LogWrapper
 
-class ChatRoomLogWrapper(private val roomPath: String) : LogWrapper {
+class ChatRoomLogWrapper : LogWrapper {
 	
 	private val intentChain = IntentChain()
 	
@@ -44,7 +45,7 @@ class ChatRoomLogWrapper(private val roomPath: String) : LogWrapper {
 			Log.LogLevel.ERROR  -> " \\#FF0000\\E: "+str.substringAfter(": ")
 			Log.LogLevel.ASSERT -> " \\#FF00FF\\A: "+str.substringAfter(": ")
 		}
-		intentChain.broadcastAfter(SystemChatRoomMessageIntent(roomPath, message))
+		intentChain.broadcastAfter(SystemChatRoomMessageIntent(AdminChatRooms.SYSTEM_LOG, message))
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.projectswg.holocore.services.support.global;
 
+import com.projectswg.holocore.services.support.global.admin.AdministrationManager;
 import com.projectswg.holocore.services.support.global.chat.ChatManager;
 import com.projectswg.holocore.services.support.global.commands.CommandManager;
 import com.projectswg.holocore.services.support.global.health.ServerHealthService;
@@ -9,6 +10,8 @@ import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
+		AdministrationManager.class,
+		
 		ChatManager.class,
 		
 		CommandManager.class,
