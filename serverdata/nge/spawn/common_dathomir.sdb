@@ -9,11 +9,11 @@ spawn_dat_6	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-8.9	1.8	-20.9	0	1	a Corellia Un
 spawn_dat_7	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-2.7	1.8	-16.7	-179	1	Hirael Chindiaye (an independent investor)	humanoid_heroic_sd_neut_hirael_chindiaye_invest_intro	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_8	DATHOMIR	dat_aurilia_adv_gh	AREA	11	3.0	1.8	-17.3	-179	1	Major Appleton (an Imperial investigator)	humanoid_heroic_sd_imperial_major_appleton_invest_intro	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_9	DATHOMIR	dat_aurilia_adv_gh	AREA	11	8.6	1.8	-22.1	0	1	Tusken Fanatic	humanoid_nexus_tusken_starter	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_10	DATHOMIR	dat_aurilia_kakirks_collections	AREA	1	2,4	1,2	-1,4	89	1	a collector	humanoid_collector	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_10	DATHOMIR	dat_aurilia_kakirks_collections	AREA	1	2.4	1.2	-1.4	89	1	a collector	humanoid_collector	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_11	DATHOMIR	dat_aurilia_kakirks_collections	AREA	1	0.1	1.2	-1.6	0	1	Kakirk (Nexus Collector)	humanoid_nexus_collector	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_12	DATHOMIR	dat_aurilia_prisoner_hut1	AREA	1	0.4	0.6	-1.6	0	1	a Nightsister prisoner	humanoid_township_nightsister_prisoner	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_13	DATHOMIR	dat_aurilia_prisoner_hut2	AREA	1	-0.1	0.6	-0.9	0	1	Mellichae	humanoid_mellichae	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_14	DATHOMIR	dat_aurilia_prisoner_hut3	AREA	1	-0,5	0,6	-1,1	-2	1	a prisoner	humanoid_prisoner	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	600
+spawn_dat_14	DATHOMIR	dat_aurilia_prisoner_hut3	AREA	1	-0.5	0.6	-1.1	-2	1	a prisoner	humanoid_prisoner	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	600
 spawn_dat_15	DATHOMIR	dat_aurilia_pyramid_hut1	AREA	1	2.1	1.2	-2.2	0	1	Rohak (Town Elder)	humanoid_fs_villager_elder	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_16	DATHOMIR	dat_aurilia_pyramid_hut4	AREA	1	-1.2	1.2	-1.5	0	1	Dageerin	humanoid_fs_villager_sad1	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_17	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	-2.1	1.2	-2.7	0	1	2-1B (medical droid)	droid_21b_med	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
@@ -21,8 +21,8 @@ spawn_dat_18	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	0.4	1.2	0.0	0	1	Sivarra M
 spawn_dat_19	DATHOMIR	dat_aurilia_vansics_scrap	AREA	1	-0.6	1.2	-1.0	0	1	Vansic (a junk dealer)	humanoid_vansic	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_20	DATHOMIR	dat_world	PATROL	0	5411.0	78.5	-4180.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6200	column	idle	0	0	0	600
 spawn_dat_21	DATHOMIR	dat_world	PATROL	0	5428.9	78.5	-4135.1	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6700	column	idle	0	0	0	600
-spawn_dat_22	DATHOMIR	dat_world	AREA	0	5330,6	78,5	-4054,7	-170	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_23	DATHOMIR	dat_world	AREA	0	5330,2	78,5	-4057,0	7	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_22	DATHOMIR	dat_world	AREA	0	5330.6	78.5	-4054.7	-170	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_23	DATHOMIR	dat_world	AREA	0	5330.2	78.5	-4057.0	7	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_dat_24	DATHOMIR	dat_world	AREA	0	5232.2	78.5	-4156.9	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_dat_25	DATHOMIR	dat_world	AREA	0	5242.0	78.5	-4182.7	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_dat_26	DATHOMIR	dat_world	AREA	0	5330.2	78.5	-4047.7	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	2	0	-	idle	0	0	0	600
@@ -36,15 +36,15 @@ spawn_dat_33	DATHOMIR	dat_world	PATROL	0	5339.6	78.5	-4111.1	0	1	an Aurilia citi
 spawn_dat_34	DATHOMIR	dat_world	PATROL	0	5376.7	78.5	-4087.5	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_7100	column	idle	0	0	0	600
 spawn_dat_35	DATHOMIR	dat_world	PATROL	0	5237.9	78.5	-4081.9	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_7200	column	idle	0	0	0	600
 spawn_dat_36	DATHOMIR	dat_world	PATROL	0	5317.0	78.5	-4058.3	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_7300	column	idle	0	0	0	600
-spawn_dat_37	DATHOMIR	dat_world	AREA	0	5335,9	78,5	-4048,4	-2	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_38	DATHOMIR	dat_world	AREA	0	5271,7	78,5	-4096,3	-110	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_39	DATHOMIR	dat_world	AREA	0	5248,4	78,5	-4100,0	-47	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_40	DATHOMIR	dat_world	AREA	0	5316,1	78,5	-4092,8	75	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_41	DATHOMIR	dat_world	AREA	0	5341,6	78,5	-4094,6	98	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_42	DATHOMIR	dat_world	AREA	0	5329,4	78,5	-4200,1	139	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	4	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_43	DATHOMIR	dat_world	AREA	0	5420,5	78,5	-4171,0	84	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_44	DATHOMIR	dat_world	AREA	0	5426,2	78,5	-4155,8	18	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_45	DATHOMIR	dat_world	AREA	0	5402,0	78,5	-4171,1	-110	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_37	DATHOMIR	dat_world	AREA	0	5335.9	78.5	-4048.4	-2	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_38	DATHOMIR	dat_world	AREA	0	5271.7	78.5	-4096.3	-110	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_39	DATHOMIR	dat_world	AREA	0	5248.4	78.5	-4100.0	-47	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_40	DATHOMIR	dat_world	AREA	0	5316.1	78.5	-4092.8	75	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_41	DATHOMIR	dat_world	AREA	0	5341.6	78.5	-4094.6	98	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_42	DATHOMIR	dat_world	AREA	0	5329.4	78.5	-4200.1	139	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_43	DATHOMIR	dat_world	AREA	0	5420.5	78.5	-4171.0	84	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	2	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_44	DATHOMIR	dat_world	AREA	0	5426.2	78.5	-4155.8	18	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	5	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_45	DATHOMIR	dat_world	AREA	0	5402.0	78.5	-4171.1	-110	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	4	LOITER	10	0	-	idle	0	0	0	600
 spawn_dat_46	DATHOMIR	dat_world	AREA	0	5241.8	98.4	-4211.3	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_47	DATHOMIR	dat_world	AREA	0	5246.8	98.4	-4212.7	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_48	DATHOMIR	dat_world	AREA	0	5287.7	78.5	-4077.5	135	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
@@ -61,7 +61,7 @@ spawn_dat_58	DATHOMIR	dat_world	PATROL	0	5469.6	98.2	-4142.3	0	1	an Aurilia sent
 spawn_dat_59	DATHOMIR	dat_world	PATROL	0	5358.5	98.4	-4204.4	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_6900	column	idle	0	0	0	600
 spawn_dat_60	DATHOMIR	dat_world	PATROL	0	5275.9	78.5	-4071.4	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_7000	column	idle	0	0	0	600
 spawn_dat_61	DATHOMIR	dat_world	PATROL	0	5400.2	78.5	-2050.0	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_7400	column	idle	0	0	0	600
-spawn_dat_62	DATHOMIR	dat_world	AREA	0	5326,6	78,5	-4091,8	-178	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_62	DATHOMIR	dat_world	AREA	0	5326.6	78.5	-4091.8	-178	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_dat_63	DATHOMIR	dat_world	AREA	0	5378.9	98.4	-4073.0	83	1	Captain Sarguillo	humanoid_fs_villager_captain	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_64	DATHOMIR	dat_world	AREA	0	5205.0	78.5	-4148.6	0	1	Lieutenant Thulough (a Rebel intelligence officer)	humanoid_heroic_sd_rebel_lt_thulough_invest_intro	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_65	DATHOMIR	dat_world	AREA	0	5440.0	78.5	-4172.1	179	1	Maximillian (Aurilian travel consultant)	humanoid_nexus_travel_02	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
@@ -69,66 +69,66 @@ spawn_dat_66	DATHOMIR	dat_world	AREA	0	5304.3	78.5	-4151.8	179	1	Paemos (Mayor o
 spawn_dat_67	DATHOMIR	dat_world	AREA	0	5461.0	79.0	-4169.2	-105	1	Quharek	humanoid_quharek	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_68	DATHOMIR	dat_world	AREA	0	5306.1	78.5	-4214.4	179	1	Shaneeka (chief engineer of Aurilia)	humanoid_fs_villager_engineer	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dat_69	DATHOMIR	dat_world	AREA	0	5418.9	78.9	-4187.5	-52	1	Torvin	humanoid_nova_orion_intro_quest_giver	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_70	DATHOMIR	dat_science_outpost_cantina	AREA	1	-5,2	0,6	2,1	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_71	DATHOMIR	dat_science_outpost_cantina	AREA	2	5,1	0,6	3,4	28	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_72	DATHOMIR	dat_science_outpost_cantina	AREA	3	5,1	0,6	-3,7	44	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_73	DATHOMIR	dat_science_outpost_cantina	AREA	3	-2,2	0,6	-1,2	-3	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_74	DATHOMIR	dat_science_outpost_cloning	AREA	3	1,2	0,1	-3,5	100	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_75	DATHOMIR	dat_science_outpost_cloning	AREA	4	5,4	0,1	1,4	-90	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_76	DATHOMIR	dat_science_outpost_cloning	AREA	4	3,4	0,1	1,7	92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_77	DATHOMIR	dat_science_outpost_cloning	AREA	5	2,8	0,1	-5,5	28	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_78	DATHOMIR	dat_science_outpost_cloning	AREA	5	4,0	0,1	-1,9	180	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_79	DATHOMIR	dat_science_outpost_cloning	AREA	5	4,2	0,1	-5,5	-28	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_80	DATHOMIR	dat_science_outpost_med_center	AREA	1	4,9	0,6	2,2	-96	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_81	DATHOMIR	dat_science_outpost_med_center	AREA	1	0,6	0,6	6,1	180	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_82	DATHOMIR	dat_science_outpost_med_center	AREA	1	2,4	0,6	2,1	88	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_83	DATHOMIR	dat_science_outpost_med_center	AREA	3	1,7	0,6	-3,1	-57	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_84	DATHOMIR	dat_science_outpost_med_center	AREA	3	0,4	0,6	-1,3	158	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_85	DATHOMIR	dat_science_outpost_med_center	AREA	3	-0,8	0,6	-7,8	28	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_70	DATHOMIR	dat_science_outpost_cantina	AREA	1	-5.2	0.6	2.1	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_71	DATHOMIR	dat_science_outpost_cantina	AREA	2	5.1	0.6	3.4	28	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_72	DATHOMIR	dat_science_outpost_cantina	AREA	3	5.1	0.6	-3.7	44	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_73	DATHOMIR	dat_science_outpost_cantina	AREA	3	-2.2	0.6	-1.2	-3	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_74	DATHOMIR	dat_science_outpost_cloning	AREA	3	1.2	0.1	-3.5	100	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_75	DATHOMIR	dat_science_outpost_cloning	AREA	4	5.4	0.1	1.4	-90	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_76	DATHOMIR	dat_science_outpost_cloning	AREA	4	3.4	0.1	1.7	92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_77	DATHOMIR	dat_science_outpost_cloning	AREA	5	2.8	0.1	-5.5	28	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_78	DATHOMIR	dat_science_outpost_cloning	AREA	5	4.0	0.1	-1.9	180	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_79	DATHOMIR	dat_science_outpost_cloning	AREA	5	4.2	0.1	-5.5	-28	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_80	DATHOMIR	dat_science_outpost_med_center	AREA	1	4.9	0.6	2.2	-96	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_81	DATHOMIR	dat_science_outpost_med_center	AREA	1	0.6	0.6	6.1	180	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_82	DATHOMIR	dat_science_outpost_med_center	AREA	1	2.4	0.6	2.1	88	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_83	DATHOMIR	dat_science_outpost_med_center	AREA	3	1.7	0.6	-3.1	-57	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_84	DATHOMIR	dat_science_outpost_med_center	AREA	3	0.4	0.6	-1.3	158	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_85	DATHOMIR	dat_science_outpost_med_center	AREA	3	-0.8	0.6	-7.8	28	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dat_86	DATHOMIR	dat_science_outpost_med_center	AREA	4	10.3	0.6	-4.5	-90	1	Arnecio Ulvaw'op (Rebel Pilot Trainer)	humanoid_rebel_arnecio_ulvawop	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_87	DATHOMIR	dat_science_outpost_shed	AREA	4	3,8	0,1	-0,3	-30	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_88	DATHOMIR	dat_science_outpost_shed	AREA	4	3,6	0,1	2,0	176	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_89	DATHOMIR	dat_science_outpost_starport	AREA	1	-4,7	0,1	-17,6	90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_90	DATHOMIR	dat_world	AREA	0	-49,9	18,0	-1599,5	61	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_dat_91	DATHOMIR	dat_world	AREA	0	-83,5	18,0	-1613,6	-83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_92	DATHOMIR	dat_world	AREA	0	-97,5	18,0	-1606,2	-64	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	4	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_93	DATHOMIR	dat_world	AREA	0	-86,5	18,0	-1575,8	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_87	DATHOMIR	dat_science_outpost_shed	AREA	4	3.8	0.1	-0.3	-30	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_88	DATHOMIR	dat_science_outpost_shed	AREA	4	3.6	0.1	2.0	176	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_89	DATHOMIR	dat_science_outpost_starport	AREA	1	-4.7	0.1	-17.6	90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_90	DATHOMIR	dat_world	AREA	0	-49.9	18.0	-1599.5	61	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_91	DATHOMIR	dat_world	AREA	0	-83.5	18.0	-1613.6	-83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_92	DATHOMIR	dat_world	AREA	0	-97.5	18.0	-1606.2	-64	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_93	DATHOMIR	dat_world	AREA	0	-86.5	18.0	-1575.8	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Science Outpost	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_dat_94	DATHOMIR	dat_world	AREA	0	-98.4	18.0	-1565.5	47	1	a frontiersman	humanoid_frontiersman	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_95	DATHOMIR	dat_world	AREA	0	-109,8	18,0	-1592,8	50	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_96	DATHOMIR	dat_world	AREA	0	-111,2	18,0	-1591,3	91	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_95	DATHOMIR	dat_world	AREA	0	-109.8	18.0	-1592.8	50	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_96	DATHOMIR	dat_world	AREA	0	-111.2	18.0	-1591.3	91	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_97	DATHOMIR	dat_world	PATROL	0	-104.3	18.0	-1633.7	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_5800	column	idle	0	0	0	600
 spawn_dat_98	DATHOMIR	dat_world	PATROL	0	-34.5	18.0	-1584.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_5900	column	idle	0	0	0	600
 spawn_dat_99	DATHOMIR	dat_world	PATROL	0	-117.0	18.0	-1622.2	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_6000	column	idle	0	0	0	600
-spawn_dat_100	DATHOMIR	dat_world	AREA	0	-45,6	18,0	-1584,9	99	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_101	DATHOMIR	dat_world	AREA	0	-75,0	18,0	-1598,3	-30	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_102	DATHOMIR	dat_world	AREA	0	-76,2	18,0	-1598,7	9	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_103	DATHOMIR	dat_world	AREA	0	-42,8	18,0	-1585,2	-84	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_104	DATHOMIR	dat_world	AREA	0	-79,8	18,0	-1591,3	36	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_100	DATHOMIR	dat_world	AREA	0	-45.6	18.0	-1584.9	99	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_101	DATHOMIR	dat_world	AREA	0	-75.0	18.0	-1598.3	-30	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_102	DATHOMIR	dat_world	AREA	0	-76.2	18.0	-1598.7	9	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_103	DATHOMIR	dat_world	AREA	0	-42.8	18.0	-1585.2	-84	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_104	DATHOMIR	dat_world	AREA	0	-79.8	18.0	-1591.3	36	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dat_105	DATHOMIR	dat_world	AREA	0	-115.0	18.0	-1614.8	68	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_106	DATHOMIR	dat_world	AREA	0	-32.3	18.0	-1595.1	-27	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_107	DATHOMIR	dat_world	AREA	0	-93.0	18.0	-1632.1	-52	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_108	DATHOMIR	dat_world	AREA	0	-67.5	18.0	-1622.1	-61	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_109	DATHOMIR	dat_world	AREA	0	-75,9	18,0	-1596,5	155	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_109	DATHOMIR	dat_world	AREA	0	-75.9	18.0	-1596.5	155	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_dat_110	DATHOMIR	dat_world	AREA	0	-83.6	18.0	-1587.1	-145	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_111	DATHOMIR	dat_world	AREA	0	-79,7	18,0	-1557,5	38	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_112	DATHOMIR	dat_world	AREA	0	-75,8	18,0	-1587,9	127	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dat_113	DATHOMIR	dat_world	AREA	0	-94,2	18,0	-1630,7	136	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_114	DATHOMIR	dat_world	AREA	0	-103,7	18,0	-1620,5	-132	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Science Outpost	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_111	DATHOMIR	dat_world	AREA	0	-79.7	18.0	-1557.5	38	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_112	DATHOMIR	dat_world	AREA	0	-75.8	18.0	-1587.9	127	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dat_113	DATHOMIR	dat_world	AREA	0	-94.2	18.0	-1630.7	136	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_114	DATHOMIR	dat_world	AREA	0	-103.7	18.0	-1620.5	-132	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Science Outpost	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_dat_115	DATHOMIR	dat_world	AREA	0	-120.9	18.0	-1610.9	-51	1	Kam	humanoid_smuggler_fence_kam	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_116	DATHOMIR	dat_world	AREA	0	-101.9	18.0	-1542.6	-141	1	Shaki Hamachil	humanoid_shaki_hamachil	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_117	DATHOMIR	dat_world	AREA	0	-70.5	18.0	-1639.0	37	1	Shibb Nisshil	humanoid_imperial_shibb_nisshil	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dat_118	DATHOMIR	dat_trade_outpost_cantina	AREA	1	-0.1	0.6	0.9	35	1	Nirame Sakute (Privateer Pilot Trainer)	humanoid_nirame_sakute	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_119	DATHOMIR	dat_trade_outpost_cantina	AREA	1	2.4	0.6	6.1	146	1	Wallaw Loowobbli	humanoid_wallaw_loowobbli	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_120	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-0,9	0,6	-1,4	-88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_121	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-3,7	0,6	-1,3	84	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_122	DATHOMIR	dat_trade_outpost_shed1	AREA	4	4,9	0,1	0,6	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_123	DATHOMIR	dat_trade_outpost_shed1	AREA	5	5,2	0,1	-3,6	-105	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_124	DATHOMIR	dat_trade_outpost_shed1	AREA	5	2,6	0,1	-3,6	90	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_125	DATHOMIR	dat_trade_outpost_shed1	AREA	5	3,3	0,1	-4,6	56	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_126	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-3,7	0,1	-5,6	0	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_127	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-5,3	0,1	-4,3	118	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dat_128	DATHOMIR	dat_trade_outpost_shed2	AREA	4	4,2	0,1	1,3	-94	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_129	DATHOMIR	dat_trade_outpost_shed2	AREA	6	-4,1	0,1	-3,9	90	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_120	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-0.9	0.6	-1.4	-88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_121	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-3.7	0.6	-1.3	84	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_122	DATHOMIR	dat_trade_outpost_shed1	AREA	4	4.9	0.1	0.6	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_123	DATHOMIR	dat_trade_outpost_shed1	AREA	5	5.2	0.1	-3.6	-105	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_124	DATHOMIR	dat_trade_outpost_shed1	AREA	5	2.6	0.1	-3.6	90	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_125	DATHOMIR	dat_trade_outpost_shed1	AREA	5	3.3	0.1	-4.6	56	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_126	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-3.7	0.1	-5.6	0	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_127	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-5.3	0.1	-4.3	118	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dat_128	DATHOMIR	dat_trade_outpost_shed2	AREA	4	4.2	0.1	1.3	-94	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_129	DATHOMIR	dat_trade_outpost_shed2	AREA	6	-4.1	0.1	-3.9	90	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dat_130	DATHOMIR	dat_world	AREA	0	509.0	13.2	3076.0	-29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_ground	0	0	0	600
 spawn_dat_131	DATHOMIR	dat_world	AREA	0	579.7	6.0	3105.8	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dat_132	DATHOMIR	dat_world	AREA	0	581.7	6.0	3050.6	-136	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
@@ -138,13 +138,13 @@ spawn_dat_135	DATHOMIR	dat_world	AREA	0	610.0	6.0	3084.0	19	1	a commoner	humanoi
 spawn_dat_136	DATHOMIR	dat_world	AREA	0	615.0	6.0	3058.0	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_137	DATHOMIR	dat_world	AREA	0	623.0	6.0	3092.0	-74	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_138	DATHOMIR	dat_world	AREA	0	648.0	6.1	3070.0	-3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_139	DATHOMIR	dat_world	AREA	0	590,2	6,0	3074,1	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_dat_140	DATHOMIR	dat_world	AREA	0	602,7	6,0	3059,1	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_dat_141	DATHOMIR	dat_world	AREA	0	592,1	6,0	3084,4	-25	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_142	DATHOMIR	dat_world	AREA	0	593,2	6,0	3085,1	-41	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_143	DATHOMIR	dat_world	AREA	0	590,9	6,0	3086,9	150	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_139	DATHOMIR	dat_world	AREA	0	590.2	6.0	3074.1	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dat_140	DATHOMIR	dat_world	AREA	0	602.7	6.0	3059.1	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_141	DATHOMIR	dat_world	AREA	0	592.1	6.0	3084.4	-25	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_142	DATHOMIR	dat_world	AREA	0	593.2	6.0	3085.1	-41	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_143	DATHOMIR	dat_world	AREA	0	590.9	6.0	3086.9	150	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_144	DATHOMIR	dat_world	AREA	0	595.0	6.0	3046.0	25	1	an escaped Nightsister slave	humanoid_nightsister_slave_escaped	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	nervous	0	0	0	600
-spawn_dat_145	DATHOMIR	dat_world	AREA	0	593,3	6,0	3065,1	-97	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Trade Outpost	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_dat_145	DATHOMIR	dat_world	AREA	0	593.3	6.0	3065.1	-97	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Trade Outpost	1	LOITER	5	0	-	idle	0	0	0	600
 spawn_dat_146	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	Loisya Starkos	humanoid_loisya_starkos	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_147	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	Omogg's representative	humanoid_omoggs_representative	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_148	DATHOMIR	dat_world	AREA	0	543.0	6.2	3053.0	-79	1	Russell	humanoid_smuggler_broker_russell	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle	0	0	0	600

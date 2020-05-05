@@ -1,29 +1,29 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-spawn_dan_1	DANTOOINE	dan_imp_outpost_bank	AREA	4	4,0	0,1	0,4	-180	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_2	DANTOOINE	dan_imp_outpost_bank	AREA	5	2,6	0,1	-5,3	-91	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_1	DANTOOINE	dan_imp_outpost_bank	AREA	4	4.0	0.1	0.4	-180	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_2	DANTOOINE	dan_imp_outpost_bank	AREA	5	2.6	0.1	-5.3	-91	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dan_3	DANTOOINE	dan_imp_outpost_cantina	AREA	3	0.0	0.1	-5.7	0	1	Insurgent (Black Epsilon Pilot Trainer)	humanoid_imperial_insurgent	INVULNERABLE	N	100	100	City	Imperial Outpost	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dan_4	DANTOOINE	dan_imp_outpost_cantina	AREA	4	3,5	0,1	4,5	154	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_5	DANTOOINE	dan_imp_outpost_cantina	AREA	4	4,9	0,1	2,5	-22	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_6	DANTOOINE	dan_imp_outpost_cantina	AREA	5	4,7	0,1	-4,8	-41	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_7	DANTOOINE	dan_imp_outpost_cantina	AREA	5	2,9	0,1	-4,8	27	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_8	DANTOOINE	dan_imp_outpost_cantina	AREA	5	4,7	0,1	-2,7	-141	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_9	DANTOOINE	dan_imp_outpost_cloning	AREA	4	2,8	0,1	2,5	143	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_10	DANTOOINE	dan_imp_outpost_cloning	AREA	4	4,1	0,1	0,2	-89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_11	DANTOOINE	dan_imp_outpost_cloning	AREA	6	-4,1	0,1	-4,4	177	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_12	DANTOOINE	dan_imp_outpost_hospital	AREA	4	3,9	0,1	0,5	167	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_4	DANTOOINE	dan_imp_outpost_cantina	AREA	4	3.5	0.1	4.5	154	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_5	DANTOOINE	dan_imp_outpost_cantina	AREA	4	4.9	0.1	2.5	-22	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_6	DANTOOINE	dan_imp_outpost_cantina	AREA	5	4.7	0.1	-4.8	-41	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_7	DANTOOINE	dan_imp_outpost_cantina	AREA	5	2.9	0.1	-4.8	27	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_8	DANTOOINE	dan_imp_outpost_cantina	AREA	5	4.7	0.1	-2.7	-141	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_9	DANTOOINE	dan_imp_outpost_cloning	AREA	4	2.8	0.1	2.5	143	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_10	DANTOOINE	dan_imp_outpost_cloning	AREA	4	4.1	0.1	0.2	-89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_11	DANTOOINE	dan_imp_outpost_cloning	AREA	6	-4.1	0.1	-4.4	177	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dan_12	DANTOOINE	dan_imp_outpost_hospital	AREA	4	3.9	0.1	0.5	167	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_13	DANTOOINE	dan_imp_outpost_hospital	AREA	6	-4.5	0.1	-1.6	136	1	a tusk-cat	creature_cat_tusk	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_14	DANTOOINE	dan_imp_outpost_starport	AREA	1	-4,7	0,1	-17,6	91	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_14	DANTOOINE	dan_imp_outpost_starport	AREA	1	-4.7	0.1	-17.6	91	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dan_15	DANTOOINE	dan_world	AREA	0	-4213.0	3.0	-2393.8	175	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_16	DANTOOINE	dan_world	AREA	0	-4233.7	3.0	-2402.1	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_dan_17	DANTOOINE	dan_world	AREA	0	-4197.7	3.0	-2425.6	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_18	DANTOOINE	dan_world	AREA	0	-4231.6	3.0	-2425.6	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_19	DANTOOINE	dan_world	AREA	0	-4224,5	3,0	-2358,9	-59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_20	DANTOOINE	dan_world	AREA	0	-4245,6	3,0	-2347,0	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_21	DANTOOINE	dan_world	AREA	0	-4223,9	3,0	-2417,9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	3	LOITER	5	0	-	idle	0	0	0	600
-spawn_dan_22	DANTOOINE	dan_world	AREA	0	-4207,2	3,0	-2410,2	79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dan_19	DANTOOINE	dan_world	AREA	0	-4224.5	3.0	-2358.9	-59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_20	DANTOOINE	dan_world	AREA	0	-4245.6	3.0	-2347.0	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_21	DANTOOINE	dan_world	AREA	0	-4223.9	3.0	-2417.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	3	LOITER	5	0	-	idle	0	0	0	600
+spawn_dan_22	DANTOOINE	dan_world	AREA	0	-4207.2	3.0	-2410.2	79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_dan_23	DANTOOINE	dan_world	AREA	0	-4231.8	3.0	-2403.6	-61	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_24	DANTOOINE	dan_world	AREA	0	-4252,3	3,0	-2403,3	-84	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_24	DANTOOINE	dan_world	AREA	0	-4252.3	3.0	-2403.3	-84	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dan_25	DANTOOINE	dan_world	AREA	0	-4198.9	3.0	-2426.4	46	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_26	DANTOOINE	dan_world	AREA	0	-4217.4	3.0	-2402.6	127	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_27	DANTOOINE	dan_world	AREA	0	-4233.8	3.0	-2354.5	-170	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle	0	0	0	600
@@ -85,52 +85,52 @@ spawn_dan_82	DANTOOINE	dan_world	AREA	0	-625.6	3.0	2481.3	116	1	Fern Yarrow (an 
 spawn_dan_83	DANTOOINE	dan_world	AREA	0	-618.7	3.0	2539.3	-45	1	Kelvus Naria	humanoid_kelvus_naria	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dan_84	DANTOOINE	dan_world	AREA	0	-623.7	3.0	2482.8	-174	1	Kess Yarrow (a Rebel pilot)	humanoid_rebel_kess_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_dan_85	DANTOOINE	dan_world	AREA	0	-625.8	3.0	2479.0	26	1	Rane Yarrow (a freelance pilot)	humanoid_rane_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_86	DANTOOINE	dan_pirate_outpost_bldg1	AREA	4	4,2	0,1	0,8	-168	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_87	DANTOOINE	dan_pirate_outpost_bldg1	AREA	4	4,0	0,1	3,3	-1	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_88	DANTOOINE	dan_pirate_outpost_bldg1	AREA	6	-4,0	0,1	-4,2	141	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_89	DANTOOINE	dan_pirate_outpost_bldg1	AREA	6	-4,1	0,1	-1,7	75	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_90	DANTOOINE	dan_pirate_outpost_bldg2	AREA	5	3,1	0,1	-4,5	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_91	DANTOOINE	dan_pirate_outpost_bldg2	AREA	5	3,6	0,1	-2,8	-169	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_92	DANTOOINE	dan_pirate_outpost_bldg2	AREA	6	-3,2	0,1	-1,2	93	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_93	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	3,7	0,1	1,5	-165	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_94	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	5,3	0,1	-0,2	-80	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_95	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	2,6	0,1	-0,2	36	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_96	DANTOOINE	dan_pirate_outpost_bldg3	AREA	6	-3,5	0,1	-1,9	79	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dan_86	DANTOOINE	dan_pirate_outpost_bldg1	AREA	4	4.2	0.1	0.8	-168	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_87	DANTOOINE	dan_pirate_outpost_bldg1	AREA	4	4.0	0.1	3.3	-1	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dan_88	DANTOOINE	dan_pirate_outpost_bldg1	AREA	6	-4.0	0.1	-4.2	141	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_89	DANTOOINE	dan_pirate_outpost_bldg1	AREA	6	-4.1	0.1	-1.7	75	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_90	DANTOOINE	dan_pirate_outpost_bldg2	AREA	5	3.1	0.1	-4.5	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_91	DANTOOINE	dan_pirate_outpost_bldg2	AREA	5	3.6	0.1	-2.8	-169	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_92	DANTOOINE	dan_pirate_outpost_bldg2	AREA	6	-3.2	0.1	-1.2	93	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dan_93	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	3.7	0.1	1.5	-165	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_94	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	5.3	0.1	-0.2	-80	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_95	DANTOOINE	dan_pirate_outpost_bldg3	AREA	4	2.6	0.1	-0.2	36	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_96	DANTOOINE	dan_pirate_outpost_bldg3	AREA	6	-3.5	0.1	-1.9	79	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_97	DANTOOINE	dan_pirate_outpost_bldg4	AREA	4	4.9	0.1	3.8	179	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_98	DANTOOINE	dan_pirate_outpost_bldg4	AREA	5	3.2	0.1	-4.6	56	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_99	DANTOOINE	dan_pirate_outpost_bldg4	AREA	5	5.1	0.1	-3.7	-105	1	a starport manager	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_100	DANTOOINE	dan_pirate_outpost_bldg5	AREA	4	3,9	0,1	4,2	-1	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_101	DANTOOINE	dan_pirate_outpost_bldg5	AREA	5	4,9	0,1	-3,0	180	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_102	DANTOOINE	dan_pirate_outpost_bldg5	AREA	5	2,8	0,1	-3,8	53	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_103	DANTOOINE	dan_pirate_outpost_bldg5	AREA	6	-3,8	0,1	-0,6	-151	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_104	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	7,1	0,6	4,3	120	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_100	DANTOOINE	dan_pirate_outpost_bldg5	AREA	4	3.9	0.1	4.2	-1	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_101	DANTOOINE	dan_pirate_outpost_bldg5	AREA	5	4.9	0.1	-3.0	180	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_102	DANTOOINE	dan_pirate_outpost_bldg5	AREA	5	2.8	0.1	-3.8	53	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_103	DANTOOINE	dan_pirate_outpost_bldg5	AREA	6	-3.8	0.1	-0.6	-151	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_104	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	7.1	0.6	4.3	120	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_dan_105	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	9.8	0.6	2.6	-43	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_106	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	2.9	0.6	3.2	-139	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_107	DANTOOINE	dan_pirate_outpost_cantina	AREA	1	0.6	0.6	0.9	37	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_108	DANTOOINE	dan_pirate_outpost_cantina	AREA	2	-9.2	0.6	2.7	127	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_109	DANTOOINE	dan_pirate_outpost_cantina	AREA	2	-7.3	0.6	2.5	-85	1	a explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	600
 spawn_dan_110	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-3.3	0.6	-7.3	-3	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	themepark_music_1	0	0	0	600
-spawn_dan_111	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-5,6	0,6	-3,4	147	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
+spawn_dan_111	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-5.6	0.6	-3.4	147	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
 spawn_dan_112	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	1.8	0.6	-4.8	-107	1	a commoner	humanoid_commoner_aqualish	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_113	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-0.4	0.6	-3.1	-159	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_114	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-5,8	0,6	-4,4	134	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
+spawn_dan_114	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-5.8	0.6	-4.4	134	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
 spawn_dan_115	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-4.5	0.6	-2.3	146	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_116	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-7,1	0,6	-5,8	108	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
-spawn_dan_117	DANTOOINE	dan_pirate_outpost_cantina	AREA	4	10,1	0,6	-5,0	-85	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_118	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	2,6	0,1	3,2	-89	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_119	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4,2	0,1	4,0	-90	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_120	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4,2	0,1	2,0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_121	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	3,0	0,1	-2,3	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_122	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	4,2	0,1	-2,4	-98	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_116	DANTOOINE	dan_pirate_outpost_cantina	AREA	3	-7.1	0.6	-5.8	108	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	entertained	0	0	0	600
+spawn_dan_117	DANTOOINE	dan_pirate_outpost_cantina	AREA	4	10.1	0.6	-5.0	-85	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_118	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	2.6	0.1	3.2	-89	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_119	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4.2	0.1	4.0	-90	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_120	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4.2	0.1	2.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_121	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	3.0	0.1	-2.3	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_122	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	4.2	0.1	-2.4	-98	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_dan_123	DANTOOINE	dan_world	PATROL	0	1563.7	4.0	-6414.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2000	column	idle	0	0	0	600
 spawn_dan_124	DANTOOINE	dan_world	AREA	0	1542.7	4.0	-6417.0	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_125	DANTOOINE	dan_world	AREA	0	1601.5	4.0	-6419.6	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_126	DANTOOINE	dan_world	PATROL	0	1596.0	4.0	-6394.5	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2400	column	idle	0	0	0	600
 spawn_dan_127	DANTOOINE	dan_world	PATROL	0	1621.6	4.0	-6369.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_200	column	idle	0	0	0	600
-spawn_dan_128	DANTOOINE	dan_world	AREA	0	1558,4	4,0	-6426,7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_dan_129	DANTOOINE	dan_world	AREA	0	1552,3	4,0	-6403,1	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_dan_130	DANTOOINE	dan_world	AREA	0	1582,2	4,0	-6388,8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	4	LOITER	10	0	-	idle	0	0	0	600
-spawn_dan_131	DANTOOINE	dan_world	AREA	0	1607,0	4,0	-6380,1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dan_128	DANTOOINE	dan_world	AREA	0	1558.4	4.0	-6426.7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dan_129	DANTOOINE	dan_world	AREA	0	1552.3	4.0	-6403.1	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle	0	0	0	600
+spawn_dan_130	DANTOOINE	dan_world	AREA	0	1582.2	4.0	-6388.8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_dan_131	DANTOOINE	dan_world	AREA	0	1607.0	4.0	-6380.1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle	0	0	0	600
 spawn_dan_132	DANTOOINE	dan_world	AREA	0	1593.6	4.0	-6442.2	-22	1	a explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_133	DANTOOINE	dan_world	AREA	0	1559.3	4.0	-6372.9	136	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Pirate Outpost	1	TURN	0	0	-	idle	0	0	0	600
 spawn_dan_134	DANTOOINE	dan_world	PATROL	0	1549.0	4.0	-6374.0	-163	1	a pirate	humanoid_pirate	ATTACKABLE	E	60	70	City	Pirate Outpost	1	PATROL	0	patrol_dan_2300	column	idle	0	0	0	600
@@ -139,9 +139,9 @@ spawn_dan_136	DANTOOINE	dan_world	PATROL	0	1553.2	4.0	-6390.3	-90	1	a pirate	hum
 spawn_dan_137	DANTOOINE	dan_world	AREA	0	1621.3	4.0	-6379.1	142	1	a pirate	humanoid_pirate_captain	ATTACKABLE	E	60	70	City	Pirate Outpost	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_dan_138	DANTOOINE	dan_world	AREA	0	1608.0	4.0	-6395.7	91	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_139	DANTOOINE	dan_world	AREA	0	1567.1	4.0	-6436.6	-33	1	a Selonian thief	humanoid_selonian_thief	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_140	DANTOOINE	dan_world	AREA	0	1568,5	4,0	-6383,7	80	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_dan_140	DANTOOINE	dan_world	AREA	0	1568.5	4.0	-6383.7	80	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_dan_141	DANTOOINE	dan_world	AREA	0	1569.9	4.0	-6404.3	-57	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_142	DANTOOINE	dan_world	AREA	0	1604,1	4,0	-6424,7	-89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_142	DANTOOINE	dan_world	AREA	0	1604.1	4.0	-6424.7	-89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dan_143	DANTOOINE	dan_world	AREA	0	1629.2	4.0	-6414.9	-66	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_144	DANTOOINE	dan_world	PATROL	0	1591.9	4.0	-6400.3	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2100	column	idle	0	0	0	600
 spawn_dan_145	DANTOOINE	dan_world	PATROL	0	1588.9	4.0	-6399.2	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2200	column	idle	0	0	0	600
@@ -672,26 +672,26 @@ spawn_dan_669	DANTOOINE	dan_warren	AREA	84	87.5	-52.0	10.9	0	1	a Teraud loyalist
 spawn_dan_670	DANTOOINE	dan_warren	AREA	87	118.4	-52.0	39.4	179	1	Bors Teraud	humanoid_warren_bors_teraud	AGGRESSIVE	B	50	55	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_671	DANTOOINE	dan_warren	AREA	9	-10.0	-20.0	-59.9	101	1	Phy Hudgen (an escaped worker)	humanoid_phy_hudgen	INVULNERABLE	N	100	100	POI	The Warren	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dan_672	DANTOOINE	dan_world	AREA	0	-462.1	15.5	-3800.0	0	1	O'Evitt Piboi (an escapee)	humanoid_oevitt_piboi	INVULNERABLE	N	100	100	POI	The Warren	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dan_673	DANTOOINE	dan_mining_outpost_cantina	AREA	1	1,0	0,6	3,9	-128	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_674	DANTOOINE	dan_mining_outpost_cantina	AREA	1	0,5	0,6	1,6	-22	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_675	DANTOOINE	dan_mining_outpost_cantina	AREA	1	-1,5	0,6	2,4	61	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_676	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-7,5	0,6	3,5	-97	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_677	DANTOOINE	dan_mining_outpost_cantina	AREA	3	1,4	0,6	-6,7	-80	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_678	DANTOOINE	dan_mining_outpost_cloning	AREA	4	2,4	0,1	2,2	56	1	a medic	humanoid_medic	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_679	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4,2	0,1	2,0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_680	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4,2	0,1	4,0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_681	DANTOOINE	dan_mining_outpost_cloning	AREA	5	3,1	0,1	-5,3	175	1	a medic	humanoid_medic	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_682	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-2,7	0,1	-5,7	-19	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_683	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-4,5	0,1	-3,2	-90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_684	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4,9	0,1	0,6	-2	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_685	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4,9	0,1	3,7	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_686	DANTOOINE	dan_mining_outpost_shed2	AREA	5	3,3	0,1	-4,6	56	1	a settler	humanoid_settler	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_687	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-3,6	0,1	-5,6	-4	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_688	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-5,3	0,1	-4,5	89	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_689	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-4,2	0,1	-3,5	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_dan_690	DANTOOINE	dan_mining_outpost_starport	AREA	1	-6,6	0,1	-16,0	92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_691	DANTOOINE	dan_mining_outpost_starport	AREA	1	-4,5	0,1	-16,1	-86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dan_692	DANTOOINE	dan_world	AREA	0	-575,7	3,0	2502,3	162	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100			1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dan_693	DANTOOINE	dan_world	AREA	0	-619,6	3,0	2489,8	32	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_694	DANTOOINE	dan_world	AREA	0	-601,1	3,0	2529,3	59	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_dan_695	DANTOOINE	dan_world	AREA	0	-635,6	3,0	2473,0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100			1	LOITER	5	0	-	idle	0	0	0	600
+spawn_dan_673	DANTOOINE	dan_mining_outpost_cantina	AREA	1	1.0	0.6	3.9	-128	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_674	DANTOOINE	dan_mining_outpost_cantina	AREA	1	0.5	0.6	1.6	-22	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_675	DANTOOINE	dan_mining_outpost_cantina	AREA	1	-1.5	0.6	2.4	61	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_676	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-7.5	0.6	3.5	-97	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_677	DANTOOINE	dan_mining_outpost_cantina	AREA	3	1.4	0.6	-6.7	-80	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_678	DANTOOINE	dan_mining_outpost_cloning	AREA	4	2.4	0.1	2.2	56	1	a medic	humanoid_medic	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_679	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4.2	0.1	2.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_680	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4.2	0.1	4.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_681	DANTOOINE	dan_mining_outpost_cloning	AREA	5	3.1	0.1	-5.3	175	1	a medic	humanoid_medic	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_682	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-2.7	0.1	-5.7	-19	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_683	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-4.5	0.1	-3.2	-90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_684	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4.9	0.1	0.6	-2	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_685	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4.9	0.1	3.7	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_686	DANTOOINE	dan_mining_outpost_shed2	AREA	5	3.3	0.1	-4.6	56	1	a settler	humanoid_settler	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_687	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-3.6	0.1	-5.6	-4	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_688	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-5.3	0.1	-4.5	89	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_689	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-4.2	0.1	-3.5	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_dan_690	DANTOOINE	dan_mining_outpost_starport	AREA	1	-6.6	0.1	-16.0	92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_691	DANTOOINE	dan_mining_outpost_starport	AREA	1	-4.5	0.1	-16.1	-86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dan_692	DANTOOINE	dan_world	AREA	0	-575.7	3.0	2502.3	162	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100			1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dan_693	DANTOOINE	dan_world	AREA	0	-619.6	3.0	2489.8	32	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_694	DANTOOINE	dan_world	AREA	0	-601.1	3.0	2529.3	59	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100			1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_dan_695	DANTOOINE	dan_world	AREA	0	-635.6	3.0	2473.0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100			1	LOITER	5	0	-	idle	0	0	0	600
