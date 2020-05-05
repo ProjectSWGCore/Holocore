@@ -864,7 +864,6 @@ spawn_cor_862	CORELLIA	cor_tyrena_starport	AREA	7	57.2	-0.5	35.1	0	1	a CorSec ag
 spawn_cor_863	CORELLIA	cor_tyrena_starport	AREA	7	57.2	-0.5	36.2	-179	1	a CorSec trooper	humanoid_corsec_trooper	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_cor_864	CORELLIA	cor_tyrena_starport	AREA	7	40.2	0.6	38.8	55	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_cor_865	CORELLIA	cor_tyrena_starport	AREA	7	48.1	0.6	48.8	-175	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_cor_866	CORELLIA	cor_tyrena_starport	AREA	7	48.1	0.6	48.8	-175	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_cor_867	CORELLIA	cor_tyrena_starport	AREA	9	-36.5	1.6	63.8	24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_cor_868	CORELLIA	cor_tyrena_starport	AREA	9	-27.2	1.6	65.5	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_cor_869	CORELLIA	cor_tyrena_starport	AREA	9	-27.2	1.6	52.4	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
