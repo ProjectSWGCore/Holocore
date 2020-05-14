@@ -685,11 +685,11 @@ spawn_tat_682	TATOOINE	tat_mosentha_starport	AREA	16	58.9	1.0	8.0	-46	1	a Jawa t
 spawn_tat_683	TATOOINE	tat_mosentha_starport	AREA	4	-3.2	0.6	51.7	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_tat_684	TATOOINE	tat_mosentha_starport	AREA	4	5.0	0.6	62.2	146	1	a dervish	humanoid_dervish	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_tat_685	TATOOINE	tat_mosentha_starport	AREA	4	5.5	0.6	49.9	-3	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	nervous	0	0	0	600
-spawn_tat_686	TATOOINE	tat_mosentha_starport	AREA	4	-4.8	0.6	68.0	-178	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_tat_686	TATOOINE	tat_mosentha_starport	AREA	4	-4.8	0.6	68.0	-178	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_tat_687	TATOOINE	tat_mosentha_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_688	TATOOINE	tat_mosentha_starport	AREA	7	56.6	-0.5	41.1	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_tat_689	TATOOINE	tat_mosentha_starport	AREA	7	55.9	-0.5	44.6	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_tat_690	TATOOINE	tat_mosentha_starport	AREA	7	53.8	-0.5	42.3	84	1	a male rodian thug	humanoid_male_rodian_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
+spawn_tat_690	TATOOINE	tat_mosentha_starport	AREA	7	54.4	-0.5	41.5	27	1	a male rodian thug	humanoid_male_rodian_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_691	TATOOINE	tat_mosentha_starport	AREA	7	41.3	0.6	38.2	110	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_consoling	0	0	0	600
 spawn_tat_692	TATOOINE	tat_mosentha_starport	AREA	9	-31.9	1.6	58.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	4	0	-	idle	0	0	0	600
 spawn_tat_693	TATOOINE	tat_mosentha_starport	AREA	9	-28.2	1.6	65.8	-24	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
@@ -704,7 +704,7 @@ spawn_tat_701	TATOOINE	tat_world	AREA	0	1490.3	7.0	3049.6	0	1	a commoner	humanoi
 spawn_tat_702	TATOOINE	tat_world	AREA	0	1641.0	7.0	2944.6	-29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	5	LOITER	10	0	-	idle	0	0	0	600
 spawn_tat_703	TATOOINE	tat_world	AREA	0	1303.9	7.0	3114.5	-125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_tat_704	TATOOINE	tat_world	AREA	0	1309.8	7.0	3174.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	4	LOITER	10	0	-	idle	0	0	0	600
-spawn_tat_705	TATOOINE	tat_world	AREA	0	1306.5	7.0	3088.3	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	4	LOITER	10	0	-	idle	0	0	0	600
+spawn_tat_705	TATOOINE	tat_world	AREA	0	1306.5	7.0	3088.3	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_tat_706	TATOOINE	tat_world	AREA	0	1492.7	7.0	3010.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	2	LOITER	5	0	-	idle	0	0	0	600
 spawn_tat_707	TATOOINE	tat_world	AREA	0	1585.0	7.0	3030.5	72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_tat_708	TATOOINE	tat_world	AREA	0	1727.5	7.0	3177.4	113	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation	0	0	0	600
@@ -773,7 +773,7 @@ spawn_tat_770	TATOOINE	tat_world	AREA	0	1235.0	1.5	3263.1	178	1	an entertainer	h
 spawn_tat_771	TATOOINE	tat_world	AREA	0	1391.7	7.5	3164.1	-18	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
 spawn_tat_772	TATOOINE	tat_world	AREA	0	1464.5	7.0	3153.8	86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation	0	0	0	600
 spawn_tat_773	TATOOINE	tat_world	AREA	0	1789.4	7.0	3022.7	-95	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_tat_774	TATOOINE	tat_world	AREA	0	1374.1	7.0	2980.6	-95	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_tat_774	TATOOINE	tat_world	AREA	0	1374.1	7.0	2980.6	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_tat_775	TATOOINE	tat_world	AREA	0	1236.0	1.5	3261.2	-20	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_table	0	0	0	600
 spawn_tat_776	TATOOINE	tat_world	AREA	0	1147.4	7.0	2967.6	147	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_tat_777	TATOOINE	tat_world	AREA	0	1370.1	11.0	3162.4	-128	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle	0	0	0	600
@@ -2070,3 +2070,20 @@ spawn_tat_2067	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinato
 spawn_tat_2068	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tat_2069	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_tat_2070	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tat_2071	TATOOINE	tat_world	AREA	0	1550.6	11.0	3295.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	3	0	-	idle	0	0	0	600
+spawn_tat_2072	TATOOINE	tat_world	AREA	0	1616.2	7.0	3317.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	2	LOITER	4	0	-	idle	0	0	0	600
+spawn_tat_2073	TATOOINE	tat_world	AREA	0	1542.5	7.0	3437.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	3	LOITER	7	0	-	idle	0	0	0	600
+spawn_tat_2074	TATOOINE	tat_world	PATROL	0	1564.2	15.0	3493.9	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Entha	1	PATROL	0	patrol_tat_18900	column	idle	0	0	0	600
+spawn_tat_2075	TATOOINE	tat_world	AREA	0	1503.8	14.9	3465.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_2076	TATOOINE	tat_world	AREA	0	1329.2	14.9	3337.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2077	TATOOINE	tat_world	AREA	0	1354.6	7.0	3329.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2078	TATOOINE	tat_world	AREA	0	1376.5	7.0	3364.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2079	TATOOINE	tat_world	AREA	0	1345.0	7.0	3251.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	3	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2080	TATOOINE	tat_world	AREA	0	1445.1	7.0	3249.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2081	TATOOINE	tat_world	AREA	0	1405.6	7.0	3039.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2082	TATOOINE	tat_world	AREA	0	1326.2	7.0	3029.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_tat_2083	TATOOINE	tat_world	AREA	0	1218.6	7.0	3163.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	3	LOITER	8	0	-	idle	0	0	0	600
+spawn_tat_2084	TATOOINE	tat_world	AREA	0	1247.1	7.0	3162.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2085	TATOOINE	tat_world	AREA	0	1178.2	7.0	2978.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	2	LOITER	5	0	-	idle	0	0	0	600
+spawn_tat_2086	TATOOINE	tat_world	AREA	0	1199.5	7.0	2960.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	5	LOITER	20	0	-	idle	0	0	0	600
+spawn_tat_2074	TATOOINE	tat_world	PATROL	0	1713.4	7.0	3078.9	0	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Entha	1	PATROL	0	patrol_tat_19000	column	idle	0	0	0	600
