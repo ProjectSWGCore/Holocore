@@ -41,7 +41,6 @@ import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.services.support.global.chat.ChatRoomService;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -89,7 +88,9 @@ public class ChatRoomHandler {
 		}
 
 		if (player.getAccessLevel() != AccessLevel.PLAYER) {
-			enterChatChannel(player, ChatRoomService.LOG_ROOM_PATH, true);
+			for (AdminChatRooms room : AdminChatRooms.values()) {
+				enterChatChannel(player, room.getRoomPath(), true);
+			}
 		}
 	}
 	

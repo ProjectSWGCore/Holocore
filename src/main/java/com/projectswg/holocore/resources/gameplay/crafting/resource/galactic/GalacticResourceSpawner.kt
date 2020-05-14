@@ -70,8 +70,6 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun saveResources() {
-		val loader = GalacticResourceLoader()
-		loader.saveResources(GalacticResourceContainer.allResources)
 		PswgDatabase.resources.resources = GalacticResourceContainer.allResources
 	}
 	
