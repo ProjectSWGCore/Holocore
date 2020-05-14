@@ -14,8 +14,10 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 
 import java.util.Collection;
@@ -1290,168 +1292,177 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 // Planet: Corellia
 	
 	private static void handleCorStronghold(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(4735d, 26d, -5676d, Terrain.CORELLIA));
+		teleportTo(player, 4735d, 26d, -5676d, Terrain.CORELLIA);
 	}
 	
 	private static void handleCorCorsecBase(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(5137d, 16d, 1518d, Terrain.CORELLIA));
+		teleportTo(player, 5137d, 16d, 1518d, Terrain.CORELLIA);
 	}
 	
 	private static void handleCorRebelXwingBase(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(213d, 50d, 4533d, Terrain.CORELLIA));
+		teleportTo(player, 213d, 50d, 4533d, Terrain.CORELLIA);
 	}
 
 // Planet: Dantooine
 	
 	private static void handleDanJediTemple(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(4078d, 10d, 5370d, Terrain.DANTOOINE));
+		teleportTo(player, 4078d, 10d, 5370d, Terrain.DANTOOINE);
 	}
 	
 	private static void handleDanCrystalCave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-6225d, 48d, 7381d, Terrain.DANTOOINE));
+		teleportTo(player, -6225d, 48d, 7381d, Terrain.DANTOOINE);
 	}
 	
 	private static void handleDanWarren(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-564d, 1d, -3789d, Terrain.DANTOOINE));
+		teleportTo(player, -564d, 1d, -3789d, Terrain.DANTOOINE);
 	}
 
 // Planet: Dathomir
 	
 	private static void handleDatImperialPrison(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-6079d, 132d, 971d, Terrain.DATHOMIR));
+		teleportTo(player, -6079d, 132d, 971d, Terrain.DATHOMIR);
 	}
 	
 	private static void handleDatNS(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-3989d, 124d, -10d, Terrain.DATHOMIR));
+		teleportTo(player, -3989d, 124d, -10d, Terrain.DATHOMIR);
 	}
 	
 	private static void handleDatNSvsSMC(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-2457d, 117d, 1530d, Terrain.DATHOMIR));
+		teleportTo(player, -2457d, 117d, 1530d, Terrain.DATHOMIR);
 	}
 	
 	private static void handleDatQz(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-5786d, 510d, -6554d, Terrain.DATHOMIR));
+		teleportTo(player, -5786d, 510d, -6554d, Terrain.DATHOMIR);
 	}
 
 // Planet: Endor
 	
 	private static void handleEndJindaCave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-1714d, 31d, -8d, Terrain.ENDOR));
+		teleportTo(player, -1714d, 31d, -8d, Terrain.ENDOR);
 	}
 	
 	private static void handleEndDwb(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-4683d, 13d, 4326d, Terrain.ENDOR));
+		teleportTo(player, -4683d, 13d, 4326d, Terrain.ENDOR);
 	}
 
 // Planet: Kashyyyk
 	
 	private static void handleKasEtyyy(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(275d, 48d, 503d, Terrain.KASHYYYK_HUNTING));
+		teleportTo(player, 275d, 48d, 503d, Terrain.KASHYYYK_HUNTING);
 	}
 	
 	private static void handleKasKachirho(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(146d, 19d, 162d, Terrain.KASHYYYK_MAIN));
+		teleportTo(player, 146d, 19d, 162d, Terrain.KASHYYYK_MAIN);
 	}
 	
 	
 	private static void handleKasKkowir(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-164d, 16d, -262d, Terrain.KASHYYYK_DEAD_FOREST));
+		teleportTo(player, -164d, 16d, -262d, Terrain.KASHYYYK_DEAD_FOREST);
 	}
 
 // Planet: Lok
 	
 	private static void handleLokDroidCave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(3331d, 105d, -4912d, Terrain.LOK));
+		teleportTo(player, 3331d, 105d, -4912d, Terrain.LOK);
 	}
 	
 	private static void handleLokGreatMaze(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(3848d, 62d, -464d, Terrain.LOK));
+		teleportTo(player, 3848d, 62d, -464d, Terrain.LOK);
 	}
 	
 	private static void handleLokImperialOutpost(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-1914d, 11d, -3299d, Terrain.LOK));
+		teleportTo(player, -1914d, 11d, -3299d, Terrain.LOK);
 	}
 	
 	private static void handleLokKimogilaTown(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-70d, 42d, 2769d, Terrain.LOK));
+		teleportTo(player, -70d, 42d, 2769d, Terrain.LOK);
 	}
 
 // Planet: Naboo
 	
 	private static void handleNabEmperorsRetreat(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(2535d, 295d, -3887d, Terrain.NABOO));
+		teleportTo(player, 2535d, 295d, -3887d, Terrain.NABOO);
 	}
 	
 	private static void handleNabWeaponFac(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-6439d, 41d, -3265d, Terrain.NABOO));
+		teleportTo(player, -6439d, 41d, -3265d, Terrain.NABOO);
 	}
 
 // Planet: Rori
 	
 	private static void handleRorHyperdriveFacility(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-1211d, 98d, 4552d, Terrain.RORI));
+		teleportTo(player, -1211d, 98d, 4552d, Terrain.RORI);
 	}
 
 // Planet: Talus
 	
 	private static void handleTalDetainmentCenter(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(4958d, 449d, -5983d, Terrain.TALUS));
+		teleportTo(player, 4958d, 449d, -5983d, Terrain.TALUS);
 	}
 
 // Planet: Tatooine
 	
 	private static void handleTatFortTusken(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-3941d, 59d, 6318d, Terrain.TATOOINE));
+		teleportTo(player, -3941d, 59d, 6318d, Terrain.TATOOINE);
 	}
 	
 	private static void handleTatKraytGrave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(7380d, 122d, 4298d, Terrain.TATOOINE));
+		teleportTo(player, 7380d, 122d, 4298d, Terrain.TATOOINE);
 	}
 	
 	private static void handleTatMosEisley(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(3525d, 4d, -4807d, Terrain.TATOOINE));
+		teleportTo(player, 3525d, 4d, -4807d, Terrain.TATOOINE);
 	}
 	
 	private static void handleTatMosTaike(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(3684d, 7d, 2357d, Terrain.TATOOINE));
+		teleportTo(player, 3684d, 7d, 2357d, Terrain.TATOOINE);
 	}
 	
 	private static void handleTatSquillCave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(57d, 152d, -79d, Terrain.TATOOINE));
+		teleportTo(player, 57d, 152d, -79d, Terrain.TATOOINE);
 	}
 	
 	private static void handleTatImperialOasis(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-5458d, 10d, 2601d, Terrain.TATOOINE));
+		teleportTo(player, -5458d, 10d, 2601d, Terrain.TATOOINE);
 	}
 
 // Planet: Yavin 4
 	
 	private static void handleYavBlueleafTemple(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-947d, 86d, -2131d, Terrain.YAVIN4));
+		teleportTo(player, -947d, 86d, -2131d, Terrain.YAVIN4);
 	}
 	
 	private static void handleYavExarKun(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(4928d, 103d, 5587d, Terrain.YAVIN4));
+		teleportTo(player, 4928d, 103d, 5587d, Terrain.YAVIN4);
 	}
 	
 	private static void handleYavDarkEnclave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(5107d, 81d, 301d, Terrain.YAVIN4));
+		teleportTo(player, 5107d, 81d, 301d, Terrain.YAVIN4);
 	}
 	
 	private static void handleYavLightEnclave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-5575d, 87d, 4902d, Terrain.YAVIN4));
+		teleportTo(player, -5575d, 87d, 4902d, Terrain.YAVIN4);
 	}
 	
 	private static void handleYavGeoCave(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(-6485d, 83d, -446d, Terrain.YAVIN4));
+		teleportTo(player, -6485d, 83d, -446d, Terrain.YAVIN4);
 	}
 // Planet: Character Farm
 
 	private static void handleChfStatic(Player player) {
-		player.getCreatureObject().moveToLocation(new Location(0d, 0d, 0d, Terrain.CHARACTER_FARM));
+		teleportTo(player, 0d, 0d, 0d, Terrain.CHARACTER_FARM);
 	}
-				    
-
+	
+	private static void teleportTo(Player player, double x, double y, double z, Terrain terrain) {
+		player.getCreatureObject().moveToContainer(null, new Location(x, y, z, terrain));
+	}
+	
+	private static void teleportTo(Player player, String buildoutTag, double x, double y, double z) {
+		BuildingObject building = ObjectStorageService.BuildingLookup.getBuildingByTag(buildoutTag);
+		assert building != null : "building does not exist";
+		player.getCreatureObject().moveToContainer(building, new Location(x, y, z, building.getTerrain()));
+	}
+	
 	private static void handleVehicles(Player player) {
 		String [] items = new String[]{
 			"object/tangible/deed/vehicle_deed/shared_barc_speeder_deed.iff",
