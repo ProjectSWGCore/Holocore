@@ -33,8 +33,11 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import me.joshlarson.jlcommon.control.Service;
 
 public class DeveloperService extends Service {
@@ -125,6 +128,17 @@ public class DeveloperService extends Service {
 		for (Location cbtLocation : cbtLocations) {
 			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocation, TangibleObject.class);
 		}
+		
+	}
+	
+	private void createCBT(String buildingName, int cellNumber, double x, double y, double z) {
+		SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/terminal/shared_terminal_character_builder.iff");
+		BuildingObject building = ObjectStorageService.BuildingLookup.getBuildingByTag(buildingName);
+		assert building != null : "building does not exist";
+		CellObject cell = building.getCellByNumber(cellNumber);
+		assert cell != null : "cell does not exist";
+		obj.moveToContainer(cell, x, y, z);
+		ObjectCreatedIntent.broadcast(obj);
 	}
 	
 	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
