@@ -70,8 +70,8 @@ class AdminSpawnerService : Service() {
 				outputFile.appendText(output)
 			}
 			val color = when(type) {
-				"PATROL" -> "#000000"
-				"WAYPOINT" -> "#0000FF"
+				"PATROL" -> "#33A5FF"
+				"WAYPOINT" -> "#33F6FF"
 				else -> "#FFFF00"
 			}
 			val egg = ObjectCreator.createObjectFromTemplate(when(type) {
