@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 
 import java.util.Random;
 
@@ -61,19 +62,19 @@ public class GalacticResourceStats implements Persistable, MongoPersistable {
 		this.unitToughness = 0;
 	}
 	
-	public void generateRandomStats() {
+	public void generateRandomStats(RawResource resource) {
 		Random random = new Random();
-		this.coldResistance		= generateRandomNumber(random);
-		this.conductivity		= generateRandomNumber(random);
-		this.decayResistance	= generateRandomNumber(random);
-		this.entangleResistance	= generateRandomNumber(random);
-		this.flavor				= generateRandomNumber(random);
-		this.heatResistance		= generateRandomNumber(random);
-		this.malleability		= generateRandomNumber(random);
-		this.overallQuality		= generateRandomNumber(random);
-		this.potentialEnergy	= generateRandomNumber(random);
-		this.shockResistance	= generateRandomNumber(random);
-		this.unitToughness		= generateRandomNumber(random);
+		this.coldResistance		= resource.isAttrColdResistance() ? generateRandomNumber(random) : 0;
+		this.conductivity		= resource.isAttrConductivity() ? generateRandomNumber(random) : 0;
+		this.decayResistance	= resource.isAttrDecayResistance() ? generateRandomNumber(random) : 0;
+		this.entangleResistance	= resource.isAttrEntangleResistance() ? generateRandomNumber(random) : 0;
+		this.flavor				= resource.isAttrFlavor() ? generateRandomNumber(random) : 0;
+		this.heatResistance		= resource.isAttrHeatResistance() ? generateRandomNumber(random) : 0;
+		this.malleability		= resource.isAttrMalleability() ? generateRandomNumber(random) : 0;
+		this.overallQuality		= resource.isAttrOverallQuality() ? generateRandomNumber(random) : 0;
+		this.potentialEnergy	= resource.isAttrPotentialEnergy() ? generateRandomNumber(random) : 0;
+		this.shockResistance	= resource.isAttrShockResistance() ? generateRandomNumber(random) : 0;
+		this.unitToughness		= resource.isAttrUnitToughness() ? generateRandomNumber(random) : 0;
 	}
 	
 	@Override
@@ -110,17 +111,17 @@ public class GalacticResourceStats implements Persistable, MongoPersistable {
 	
 	@Override
 	public void readMongo(MongoData data) {
-		coldResistance = (short) data.getInteger("coldResistance", coldResistance);
-		conductivity = (short) data.getInteger("conductivity", conductivity);
-		decayResistance = (short) data.getInteger("decayResistance", decayResistance);
-		entangleResistance = (short) data.getInteger("entangleResistance", entangleResistance);
-		flavor = (short) data.getInteger("flavor", flavor);
-		heatResistance = (short) data.getInteger("heatResistance", heatResistance);
-		malleability = (short) data.getInteger("malleability", malleability);
-		overallQuality = (short) data.getInteger("overallQuality", overallQuality);
-		potentialEnergy = (short) data.getInteger("potentialEnergy", potentialEnergy);
-		shockResistance = (short) data.getInteger("shockResistance", shockResistance);
-		unitToughness = (short) data.getInteger("unitToughness", unitToughness);
+		coldResistance     = data.getInteger("coldResistance", coldResistance);
+		conductivity       = data.getInteger("conductivity", conductivity);
+		decayResistance    = data.getInteger("decayResistance", decayResistance);
+		entangleResistance = data.getInteger("entangleResistance", entangleResistance);
+		flavor             = data.getInteger("flavor", flavor);
+		heatResistance     = data.getInteger("heatResistance", heatResistance);
+		malleability       = data.getInteger("malleability", malleability);
+		overallQuality     = data.getInteger("overallQuality", overallQuality);
+		potentialEnergy    = data.getInteger("potentialEnergy", potentialEnergy);
+		shockResistance    = data.getInteger("shockResistance", shockResistance);
+		unitToughness      = data.getInteger("unitToughness", unitToughness);
 	}
 	
 	@Override

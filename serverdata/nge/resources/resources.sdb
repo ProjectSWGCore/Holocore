@@ -1,4 +1,4 @@
-id	parent	resource_name	crate_template	min_types	max_types	min_pools	max_pools	recycled	res_decay_resist	res_quality	res_cold_resist	res_heat_resist	res_malleability	res_toughness	res_shock_resistance	res_conductivity	res_potential_energy	entangle_resistance	res_flavor
+id	parent	resource_name	crate_template	min_types	max_types	min_pools	max_pools	recycled	attr_decay_resist	attr_quality	attr_cold_resist	attr_heat_resist	attr_malleability	attr_toughness	attr_shock_resist	attr_conductivity	attr_potential_energy	attr_entangle_resist	attr_flavor
 INTEGER PRIMARY KEY	INTEGER	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER
 1	0	resource		658	690	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 2	1	energy		69	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0

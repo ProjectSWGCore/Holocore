@@ -47,6 +47,17 @@ public class RawResource {
 	private final int minPools;
 	private final int maxPools;
 	private final boolean recycled;
+	private final boolean attrColdResistance;
+	private final boolean attrConductivity;
+	private final boolean attrDecayResistance;
+	private final boolean attrEntangleResistance;
+	private final boolean attrFlavor;
+	private final boolean attrHeatResistance;
+	private final boolean attrMalleability;
+	private final boolean attrOverallQuality;
+	private final boolean attrPotentialEnergy;
+	private final boolean attrShockResistance;
+	private final boolean attrUnitToughness;
 	private final List<RawResource> children;
 	
 	private RawResource(RawResourceBuilder builder) {
@@ -61,6 +72,17 @@ public class RawResource {
 		this.minPools = builder.minPools;
 		this.maxPools = builder.maxPools;
 		this.recycled = builder.recycled;
+		this.attrColdResistance     = builder.attrColdResistance;
+		this.attrConductivity       = builder.attrConductivity;
+		this.attrDecayResistance    = builder.attrDecayResistance;
+		this.attrEntangleResistance = builder.attrEntangleResistance;
+		this.attrFlavor             = builder.attrFlavor;
+		this.attrHeatResistance     = builder.attrHeatResistance;
+		this.attrMalleability       = builder.attrMalleability;
+		this.attrOverallQuality     = builder.attrOverallQuality;
+		this.attrPotentialEnergy    = builder.attrPotentialEnergy;
+		this.attrShockResistance    = builder.attrShockResistance;
+		this.attrUnitToughness      = builder.attrUnitToughness;
 		
 		Arguments.validate(minTypes != -1, "minTypes must be initialized");
 		Arguments.validate(maxTypes != -1, "maxTypes must be initialized");
@@ -115,6 +137,50 @@ public class RawResource {
 		return recycled;
 	}
 	
+	public boolean isAttrColdResistance() {
+		return attrColdResistance;
+	}
+	
+	public boolean isAttrConductivity() {
+		return attrConductivity;
+	}
+	
+	public boolean isAttrDecayResistance() {
+		return attrDecayResistance;
+	}
+	
+	public boolean isAttrEntangleResistance() {
+		return attrEntangleResistance;
+	}
+	
+	public boolean isAttrFlavor() {
+		return attrFlavor;
+	}
+	
+	public boolean isAttrHeatResistance() {
+		return attrHeatResistance;
+	}
+	
+	public boolean isAttrMalleability() {
+		return attrMalleability;
+	}
+	
+	public boolean isAttrOverallQuality() {
+		return attrOverallQuality;
+	}
+	
+	public boolean isAttrPotentialEnergy() {
+		return attrPotentialEnergy;
+	}
+	
+	public boolean isAttrShockResistance() {
+		return attrShockResistance;
+	}
+	
+	public boolean isAttrUnitToughness() {
+		return attrUnitToughness;
+	}
+	
 	@Override
 	public String toString() {
 		return "RawResource[id="+id+" name="+name+" type="+type+"]";
@@ -135,6 +201,17 @@ public class RawResource {
 		private int maxTypes = -1;
 		private int minPools = -1;
 		private int maxPools = -1;
+		private boolean attrColdResistance = false;
+		private boolean attrConductivity = false;
+		private boolean attrDecayResistance = false;
+		private boolean attrEntangleResistance = false;
+		private boolean attrFlavor = false;
+		private boolean attrHeatResistance = false;
+		private boolean attrMalleability = false;
+		private boolean attrOverallQuality = false;
+		private boolean attrPotentialEnergy = false;
+		private boolean attrShockResistance = false;
+		private boolean attrUnitToughness = false;
 		private boolean recycled = false;
 		
 		public RawResourceBuilder(long id) {
@@ -178,6 +255,61 @@ public class RawResource {
 		
 		public RawResourceBuilder setRecycled(boolean recycled) {
 			this.recycled = recycled;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrColdResistance(boolean attrColdResistance) {
+			this.attrColdResistance = attrColdResistance;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrConductivity(boolean attrConductivity) {
+			this.attrConductivity = attrConductivity;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrDecayResistance(boolean attrDecayResistance) {
+			this.attrDecayResistance = attrDecayResistance;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrEntangleResistance(boolean attrEntangleResistance) {
+			this.attrEntangleResistance = attrEntangleResistance;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrFlavor(boolean attrFlavor) {
+			this.attrFlavor = attrFlavor;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrHeatResistance(boolean attrHeatResistance) {
+			this.attrHeatResistance = attrHeatResistance;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrMalleability(boolean attrMalleability) {
+			this.attrMalleability = attrMalleability;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrOverallQuality(boolean attrOverallQuality) {
+			this.attrOverallQuality = attrOverallQuality;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrPotentialEnergy(boolean attrPotentialEnergy) {
+			this.attrPotentialEnergy = attrPotentialEnergy;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrShockResistance(boolean attrShockResistance) {
+			this.attrShockResistance = attrShockResistance;
+			return this;
+		}
+		
+		public RawResourceBuilder setAttrUnitToughness(boolean attrUnitToughness) {
+			this.attrUnitToughness = attrUnitToughness;
 			return this;
 		}
 		
