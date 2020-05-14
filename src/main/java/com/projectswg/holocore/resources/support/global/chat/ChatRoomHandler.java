@@ -328,6 +328,8 @@ public class ChatRoomHandler {
 	}
 	
 	private static void sendMessage(ChatRoom room, ChatAvatar sender, String message, OutOfBandPackage oob) {
+		if (message.startsWith("\\#"))
+			message = " " + message;
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, room.getId(), message, oob);
 		for (ChatAvatar member : room.getMembers()) {
 			Player player = getPlayer(member);
