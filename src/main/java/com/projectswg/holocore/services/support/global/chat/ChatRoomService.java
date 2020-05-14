@@ -34,7 +34,6 @@ import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomMessageIntent;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent;
@@ -51,9 +50,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 public class ChatRoomService extends Service {
-
-	public static final String LOG_ROOM_PATH = "SWG." + ProjectSWG.getGalaxy().getName() + ".admin.ServerLog";
-
+	
 	private final ChatRoomHandler chatRoomHandler;
 	
 	public ChatRoomService() {

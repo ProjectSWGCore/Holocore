@@ -81,7 +81,7 @@ class AdminSpawnerService : Service() {
 			})
 			egg.moveToContainer(creature.parent, location)
 			ObjectCreatedIntent.broadcast(egg)
-			SystemChatRoomMessageIntent.broadcast(AdminChatRooms.SPAWNER_LOG, "${color}The spawner $type ($comment) has been created at your location")
+			SystemChatRoomMessageIntent.broadcast(AdminChatRooms.SPAWNER_LOG, "\\${color}\\The spawner $type ($comment) has been created at your location")
 		}
 	}
 	
