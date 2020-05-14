@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.data.persistable;
 import com.projectswg.common.persistable.InputPersistenceStream;
 import com.projectswg.common.persistable.OutputPersistenceStream;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,10 +42,14 @@ public class TestResourcePersistable extends TestRunnerNoIntents {
 	
 	@Test
 	public void testGalacticResourcePersistable() throws IOException {
+		final var rawResourceLoader = new RawResourceContainer();
+		rawResourceLoader.loadResources();
 		GalacticResource res = new GalacticResource(1, "MYRESOURCE", 15);
+		res.setRawResource(rawResourceLoader.getResource(15));
 		res.generateRandomStats();
 		test(res);
 		res = new GalacticResource(200, "Test", 100);
+		res.setRawResource(rawResourceLoader.getResource(100));
 		res.generateRandomStats();
 		test(res);
 		for (int i = 0; i < 50; i++) {

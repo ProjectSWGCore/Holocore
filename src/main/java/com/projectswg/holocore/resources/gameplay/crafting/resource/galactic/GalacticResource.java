@@ -71,7 +71,7 @@ public class GalacticResource implements Persistable, MongoPersistable {
 	}
 	
 	public void generateRandomStats() {
-		stats.generateRandomStats();
+		stats.generateRandomStats(rawResource);
 	}
 	
 	public long getId() {
