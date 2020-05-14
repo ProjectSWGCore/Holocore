@@ -15,6 +15,7 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
@@ -1457,10 +1458,20 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		player.getCreatureObject().moveToContainer(null, new Location(x, y, z, terrain));
 	}
 	
-	private static void teleportTo(Player player, String buildoutTag, double x, double y, double z) {
+	private static void teleportTo(Player player, String buildoutTag, int cellNumber, double x, double y, double z) {
 		BuildingObject building = ObjectStorageService.BuildingLookup.getBuildingByTag(buildoutTag);
 		assert building != null : "building does not exist";
-		player.getCreatureObject().moveToContainer(building, new Location(x, y, z, building.getTerrain()));
+		CellObject cell = building.getCellByNumber(cellNumber);
+		assert cell != null : "cell does not exist";
+		player.getCreatureObject().moveToContainer(cell, new Location(x, y, z, building.getTerrain()));
+	}
+	
+	private static void teleportTo(Player player, String buildoutTag, String cellName, double x, double y, double z) {
+		BuildingObject building = ObjectStorageService.BuildingLookup.getBuildingByTag(buildoutTag);
+		assert building != null : "building does not exist";
+		CellObject cell = building.getCellByName(cellName);
+		assert cell != null : "cell does not exist";
+		player.getCreatureObject().moveToContainer(cell, new Location(x, y, z, building.getTerrain()));
 	}
 	
 	private static void handleVehicles(Player player) {
