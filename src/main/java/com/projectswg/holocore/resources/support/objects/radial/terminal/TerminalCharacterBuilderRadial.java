@@ -1228,6 +1228,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Exar Kun");
 		listBox.addListItem("Yavin 4 - Geonosian Cave");
 		listBox.addListItem("Yavin 4 - Light Enclave");
+		listBox.addListItem("Space Station - Nova Orion");
 		listBox.addListItem("Character Farm - AI test area");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
@@ -1284,8 +1285,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 31: handleYavExarKun(player); break;
 			case 32: handleYavGeoCave(player); break;
 			case 33: handleYavLightEnclave(player); break;
+		// Space Station: Nova Orion
+			case 34: handleNovaOrion(player); break;
 		// Planet: Character Farm
-			case 34: handleChfStatic(player); break;
+			case 35: handleChfStatic(player); break;
 
 		}
 	}
@@ -1445,9 +1448,14 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		teleportTo(player, -5575d, 87d, 4902d, Terrain.YAVIN4);
 	}
 	
-	private static void handleYavGeoCave(Player player) {
-		teleportTo(player, -6485d, 83d, -446d, Terrain.YAVIN4);
+	private static void handleYavGeoCave(Player player) {teleportTo(player, -6485d, 83d, -446d, Terrain.YAVIN4); }
+
+// Space Station: Nova Orion
+
+	private static void handleNovaOrion(Player player) {
+		teleportTo(player, "du1_nova_orion", 8, 89.1, 0.8, -64.7);
 	}
+
 // Planet: Character Farm
 
 	private static void handleChfStatic(Player player) {

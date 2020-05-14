@@ -128,9 +128,10 @@ public class DeveloperService extends Service {
 		for (Location cbtLocation : cbtLocations) {
 			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocation, TangibleObject.class);
 		}
-		
+
+		createCBT("du1_nova_orion", 8, 79.1, 0.8, -57.5);
 	}
-	
+
 	private void createCBT(String buildingName, int cellNumber, double x, double y, double z) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate("object/tangible/terminal/shared_terminal_character_builder.iff");
 		BuildingObject building = ObjectStorageService.BuildingLookup.getBuildingByTag(buildingName);
