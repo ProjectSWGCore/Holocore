@@ -73,7 +73,7 @@ class WaypointCmdCallback : ICmdCallback {
 				break
 			argumentIndex = nextArgumentIndex
 		}
-		Log.d("Waypoint arguments: %s", waypointParameters)
+		
 		if (!currentState.nextStates.contains(Parameter.END)) {
 			SystemMessageIntent.broadcastPersonal(player, "Failed to parse waypoint command!")
 			return
