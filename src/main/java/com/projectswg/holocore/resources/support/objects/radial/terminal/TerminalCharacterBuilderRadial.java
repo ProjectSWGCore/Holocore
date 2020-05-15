@@ -1180,12 +1180,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleSurveyTools(Player player) {
 		spawnItems(player, 
 				"survey_tool_gas",
-				"survey_tool_inorganic",
 				"survey_tool_liquid",
 				"survey_tool_lumber",
 				"survey_tool_mineral",
 				"survey_tool_moisture",
-				"survey_tool_organic",
 				"survey_tool_solar",
 				"survey_tool_wind"
 		);
@@ -1229,6 +1227,12 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Geonosian Cave");
 		listBox.addListItem("Yavin 4 - Light Enclave");
 		listBox.addListItem("Space Station - Nova Orion");
+		listBox.addListItem("Space Station - NPE Station");
+		listBox.addListItem("Dungeon - Heroic Exar Kun");
+		listBox.addListItem("Dungeon - Heroic Imperial Star Destroyer");
+		listBox.addListItem("Dungeon - NPE Dungeon");
+		listBox.addListItem("Dungeon - Myyyydil Cave");
+		listBox.addListItem("Dungeon - Avatar Platform");
 		listBox.addListItem("Character Farm - AI test area");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
@@ -1285,10 +1289,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 31: handleYavExarKun(player); break;
 			case 32: handleYavGeoCave(player); break;
 			case 33: handleYavLightEnclave(player); break;
-		// Space Station: Nova Orion
+		// Space Stations:
 			case 34: handleNovaOrion(player); break;
+			case 35: handleNPEStation(player); break;
+		// Dungeons:
+			case 36: handleHeroicEK(player); break;
+			case 37: handleHeroicISD(player); break;
+			case 38: handleNPEDungeon(player); break;
+			case 39: handleMyyydrilCave(player); break;
+			case 40: handleAvatarPlatform(player); break;
 		// Planet: Character Farm
-			case 35: handleChfStatic(player); break;
+			case 41: handleChfStatic(player); break;
 
 		}
 	}
@@ -1323,9 +1334,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 // Planet: Dathomir
 	
-	private static void handleDatImperialPrison(Player player) {
-		teleportTo(player, -6079d, 132d, 971d, Terrain.DATHOMIR);
-	}
+	private static void handleDatImperialPrison(Player player) {teleportTo(player, -6079d, 132d, 971d, Terrain.DATHOMIR);}
 	
 	private static void handleDatNS(Player player) {
 		teleportTo(player, -3989d, 124d, -10d, Terrain.DATHOMIR);
@@ -1358,11 +1367,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleKasKachirho(Player player) {
 		teleportTo(player, 146d, 19d, 162d, Terrain.KASHYYYK_MAIN);
 	}
-	
-	
-	private static void handleKasKkowir(Player player) {
-		teleportTo(player, -164d, 16d, -262d, Terrain.KASHYYYK_DEAD_FOREST);
-	}
+
+	private static void handleKasKkowir(Player player) {teleportTo(player, -164d, 16d, -262d, Terrain.KASHYYYK_DEAD_FOREST);}
 
 // Planet: Lok
 	
@@ -1394,15 +1400,11 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 // Planet: Rori
 	
-	private static void handleRorHyperdriveFacility(Player player) {
-		teleportTo(player, -1211d, 98d, 4552d, Terrain.RORI);
-	}
+	private static void handleRorHyperdriveFacility(Player player) {teleportTo(player, -1211d, 98d, 4552d, Terrain.RORI);}
 
 // Planet: Talus
 	
-	private static void handleTalDetainmentCenter(Player player) {
-		teleportTo(player, 4958d, 449d, -5983d, Terrain.TALUS);
-	}
+	private static void handleTalDetainmentCenter(Player player) {teleportTo(player, 4958d, 449d, -5983d, Terrain.TALUS);}
 
 // Planet: Tatooine
 	
@@ -1450,11 +1452,31 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	private static void handleYavGeoCave(Player player) {teleportTo(player, -6485d, 83d, -446d, Terrain.YAVIN4); }
 
-// Space Station: Nova Orion
+// Space Stations:
 
 	private static void handleNovaOrion(Player player) {
-		teleportTo(player, "du1_nova_orion", 8, 89.1, 0.8, -64.7);
+		teleportTo(player, "du1_nova_orion", 8, 79.1, 0.8, -57.5);
 	}
+
+	private static void handleNPEStation(Player player) {
+		teleportTo(player, "du1_npe_station_1", 8, 50.2, 0.8, -36.5);
+	}
+
+// Dungeons:
+
+	private static void handleHeroicEK(Player player) {
+		teleportTo(player, "du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);
+	}
+
+	private static void handleHeroicISD(Player player) {
+		teleportTo(player, "du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
+	}
+
+	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
+
+	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
+
+	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
 
 // Planet: Character Farm
 

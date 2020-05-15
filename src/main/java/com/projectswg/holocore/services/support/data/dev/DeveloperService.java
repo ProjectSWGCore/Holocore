@@ -129,7 +129,17 @@ public class DeveloperService extends Service {
 			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocation, TangibleObject.class);
 		}
 
+		// Space Stations:
+		createCBT("du1_npe_station_1", 8, 50.2, 0.8, -36.5);
 		createCBT("du1_nova_orion", 8, 79.1, 0.8, -57.5);
+
+		// Dungeons:
+		createCBT("du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);
+		createCBT("du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
+		createCBT("du1_npe_dungeon_1", 1, 7.7, 9.5, 6.6);
+		createCBT("kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);
+		createCBT("kas_pob_avatar_1", 1, 103.2, 0.1, 21.7);
+
 	}
 
 	private void createCBT(String buildingName, int cellNumber, double x, double y, double z) {
