@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.data.dev;
 
-import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
@@ -35,7 +34,6 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import me.joshlarson.jlcommon.control.Service;
@@ -48,17 +46,10 @@ public class DeveloperService extends Service {
 	
 	@Override
 	public boolean start() {
-		setupDeveloperArea();
-		
 		if (PswgDatabase.INSTANCE.getConfig().getBoolean(this, "characterBuilder", false))
 			setupCharacterBuilders();
 		
 		return super.start();
-	}
-	
-	private void setupDeveloperArea() {
-		AIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), AIObject.class);
-		dummy.setPvpFlags(PvpFlag.YOU_CAN_ATTACK);
 	}
 	
 	private void setupCharacterBuilders() {
