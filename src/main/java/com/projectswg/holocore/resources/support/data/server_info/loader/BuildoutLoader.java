@@ -113,7 +113,7 @@ public final class BuildoutLoader {
 	}
 	
 	private void loadAdditionalBuildouts() {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/additional_buildouts.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/additional_buildouts.msdb"))) {
 			while (set.next()) {
 				if (!set.getBoolean("active"))
 					continue;

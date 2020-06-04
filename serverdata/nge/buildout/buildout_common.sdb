@@ -1,0 +1,267 @@
+buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
+INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
+bo_common_1	TATOOINE	tat_world	0	object/static/space/ship/shared_cargo_freighter.iff	3000.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_2	TATOOINE	tat_world	0	object/static/space/ship/shared_corellian_corvette.iff	2800.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_3	TATOOINE	tat_world	0	object/static/space/ship/shared_nebulon_frigate.iff	2600.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_4	TATOOINE	tat_world	0	object/static/space/spacestation/shared_imperial_spacestation_01.iff	2400.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_5	TATOOINE	tat_world	0	object/static/space/spacestation/shared_pirate_outpost_asteroid_.iff	2200.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_6	TATOOINE	tat_world	0	object/static/space/spacestation/shared_rsf_spacestation.iff	2000.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_7	TATOOINE	tat_world	0	object/static/space/spacestation/shared_tradefed_destroyed_hulk.iff	1800.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_8	TATOOINE	tat_world	0	object/static/space/spacestation/shared_corsec_outpost_01.iff	1600.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_9	CORELLIA	cor_world	0	object/tangible/theme_park/rebel/shared_rtp_wedge_imperial_meeting.iff	6905.8	330.0	-5604.0	0	0	0	0	256	FALSE	Banner
+bo_common_10	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1901.0	12.0	-3079.0	0	0	0	0	256	FALSE	Banner
+bo_common_11	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1998.0	12.0	-3073.8	0	0	0	0	256	FALSE	Banner
+bo_common_12	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1819.7	12.0	-3050.0	0	0	0	0	256	FALSE	Banner
+bo_common_13	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1974.1	12.0	-2997.9	0	0	0	0	256	FALSE	Banner
+bo_common_14	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1894.1	12.0	-3049.9	0	0	0	0	256	FALSE	Banner
+bo_common_15	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1871.9	12.0	-3123.7	0	0	0	0	256	FALSE	Banner
+bo_common_16	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1892.5	12.0	-3173.8	0	0	0	0	256	FALSE	Banner
+bo_common_17	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1957.8	12.0	-3076.4	0	0	0	0	256	FALSE	Banner
+bo_common_18	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1970.1	12.0	-3150.0	0	0	0	0	256	FALSE	Banner
+bo_common_19	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1905.3	12.0	-3137.6	0	0	0	0	256	FALSE	Banner
+bo_common_20	TALUS	tal_world	0	object/tangible/theme_park/rebel/shared_rtp_leia_crime_scene.iff	4267.3	0.6	5265.1	0	0	0	0	256	FALSE	Banner
+bo_common_21	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	534.5	81.0	-662.7	0	0	0	0	256	FALSE	Banner
+bo_common_22	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	515.7	81.0	-666.3	0	0	0	0	256	FALSE	Banner
+bo_common_23	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	525.3	81.0	-656.1	0	0	0	0	256	FALSE	Banner
+bo_common_24	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	494.5	81.0	-648.3	0	0	0	0	256	FALSE	Banner
+bo_common_25	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	500.1	81.0	-620.9	0	0	0	0	256	FALSE	Banner
+bo_common_26	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	540.5	81.0	-669.7	0	0	0	0	256	FALSE	Banner
+bo_common_27	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	512.9	81.0	-642.2	0	0	0	0	256	FALSE	Banner
+bo_common_28	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	529.9	81.0	-682.2	0	0	0	0	256	FALSE	Banner
+bo_common_29	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	485.3	81.0	-633.9	0	0	0	0	256	FALSE	Banner
+bo_common_30	NABOO	nab_borvos_vault	34	object/tangible/terminal/shared_terminal_borvo_ai_controller.iff	71.3	-36.0	148.9	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_31	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	10.2	-35.0	214.3	270	0	0	0	128	TRUE	Borvos Vault
+bo_common_32	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	0.8	-35.0	227.7	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_33	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-13.8	-35.0	214.3	-90	0	0	0	128	TRUE	Borvos Vault
+bo_common_34	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-25.8	-35.0	227.7	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_35	NABOO	nab_borvos_vault	13	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-76.7	-35.0	223.0	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_36	NABOO	nab_borvos_vault	13	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-92.3	-35.0	223.0	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_37	NABOO	nab_borvos_vault	19	object/tangible/terminal/shared_terminal_borvos_vault.iff	24.3	-36.0	238.1	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_38	NABOO	nab_borvos_vault	15	object/tangible/terminal/shared_terminal_borvos_vault.iff	-47.7	-36.0	242.8	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_39	NABOO	nab_borvos_vault	36	object/tangible/terminal/shared_terminal_borvos_vault.iff	-73.2	-36.0	224.8	270	0	0	0	128	TRUE	Borvos Vault
+bo_common_40	NABOO	nab_borvos_vault	35	object/tangible/terminal/shared_terminal_borvos_vault.iff	-95.7	-36.0	225.0	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_41	NABOO	nab_borvos_vault	26	object/tangible/terminal/shared_terminal_borvos_vault.iff	-12.8	-28.0	170.1	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_42	NABOO	nab_borvos_vault	4	object/tangible/terminal/shared_terminal_borvos_vault.iff	25.9	-36.0	79.2	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_43	NABOO	nab_borvos_vault	1	object/tangible/terminal/shared_terminal_borvos_vault.iff	86.7	-36.0	118.3	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_44	NABOO	nab_borvos_vault	10	object/tangible/terminal/shared_terminal_borvos_vault.iff	-75.8	-36.0	106.0	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_45	NABOO	nab_borvos_vault	26	object/tangible/terminal/shared_terminal_borvos_vault.iff	-11.7	-36.0	170.0	-135	0	0	0	128	TRUE	Borvos Vault
+bo_common_46	NABOO	nab_borvos_vault	1	object/tangible/terminal/shared_terminal_borvos_vault.iff	91.6	-36.0	103.6	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_47	ENDOR	end_dwb	27	object/tangible/container/general/shared_tech_bookcase.iff	48.1	-32.0	-47.8	0	0	0	0	128	TRUE	Container
+bo_common_48	ENDOR	end_dwb	4	object/tangible/container/general/shared_tech_chest.iff	-3.1	-12.0	36.5	180	0	0	0	128	TRUE	Container
+bo_common_49	LOK	lok_evil_droid_eng_cave	28	object/tangible/container/loot/shared_astromech_container.iff	-65.3	-66.0	-177.8	0	0	0	0	128	TRUE	Container
+bo_common_50	LOK	lok_imperial_gas_mine	11	object/tangible/container/loot/shared_gas_filter_container.iff	-87.8	-99.4	-88.9	-90	0	0	0	128	TRUE	Container
+bo_common_51	LOK	lok_ntp_mercenary_bunker	7	object/tangible/container/loot/shared_computer_container.iff	-60.6	-20.0	48.3	270	0	0	0	128	TRUE	Container
+bo_common_52	NABOO	nab_borvos_vault	40	object/tangible/container/drum/shared_large_plain_crate_s01.iff	29.7	-36.0	172.0	-179	0	0	0	128	TRUE	Container
+bo_common_53	NABOO	nab_borvos_vault	21	object/tangible/container/drum/shared_large_plain_crate_s01.iff	54.5	-36.0	182.3	-91	0	0	0	128	TRUE	Container
+bo_common_54	NABOO	nab_borvos_vault	18	object/tangible/container/drum/shared_large_plain_crate_s02.iff	18.6	-36.0	201.0	178	0	0	0	128	TRUE	Container
+bo_common_55	NABOO	nab_borvos_vault	18	object/tangible/container/drum/shared_large_plain_crate_s03.iff	11.8	-36.0	189.2	-177	0	0	0	128	TRUE	Container
+bo_common_56	NABOO	nab_borvos_vault	15	object/tangible/container/drum/shared_large_plain_crate_s03.iff	-17.4	-36.0	241.1	-12	0	0	0	128	TRUE	Container
+bo_common_57	NABOO	nab_borvos_vault	6	object/tangible/container/drum/shared_large_plain_crate_s04.iff	44.9	-36.0	127.1	86	0	0	0	128	TRUE	Container
+bo_common_58	NABOO	nab_borvos_vault	11	object/tangible/container/drum/shared_large_plain_crate_s04.iff	-52.7	-36.0	50.2	179	0	0	0	128	TRUE	Container
+bo_common_59	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-53.2	-18.0	-36.6	0	0	0	0	128	TRUE	Container
+bo_common_60	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-44.5	-18.0	-43.0	-90	0	0	0	128	TRUE	Container
+bo_common_61	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-43.0	-18.0	-55.7	0	0	0	0	128	TRUE	Container
+bo_common_62	YAVIN4	yav_geonosian_cave	25	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-74.8	-22.0	-152.4	180	0	0	0	128	TRUE	Container
+bo_common_63	YAVIN4	yav_geonosian_cave	32	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-70.2	-34.0	-262.5	180	0	0	0	128	TRUE	Container
+bo_common_64	YAVIN4	yav_geonosian_cave	35	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-140.1	-34.0	-201.5	0	0	0	0	128	TRUE	Container
+bo_common_65	TATOOINE	tat_world	0	object/tangible/crafting/station/shared_public_space_station.iff	3534.0	5.0	-4811.0	-90	0	0	0	8	TRUE	Crafting Station
+bo_common_66	LOK	lok_evil_droid_eng_cave	22	object/tangible/furniture/nym_themepark/collection/shared_armoire_s01.iff	-12.0	-43.7	-100.3	-138	0	0	0	128	TRUE	Droid Cave
+bo_common_67	LOK	lok_evil_droid_eng_cave	1	object/tangible/furniture/nym_themepark/collection/shared_frn_all_data_terminal_free_s2.iff	0.1	-22.0	-19.8	0	0	0	0	128	TRUE	Droid Cave
+bo_common_68	LOK	lok_evil_droid_eng_cave	5	object/tangible/furniture/nym_themepark/collection/shared_frn_all_lamp_free_s04.iff	-61.4	-46.4	-52.0	-40	0	0	0	128	TRUE	Droid Cave
+bo_common_69	LOK	lok_evil_droid_eng_cave	10	object/tangible/furniture/nym_themepark/collection/shared_frn_all_meatlump_grill_s02.iff	-176.5	-49.5	-60.5	54	0	0	0	128	TRUE	Droid Cave
+bo_common_70	LOK	lok_evil_droid_eng_cave	2	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s1.iff	-31.6	-29.2	-27.2	23	0	0	0	128	TRUE	Droid Cave
+bo_common_71	LOK	lok_evil_droid_eng_cave	3	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s2.iff	-50.6	-29.5	-38.1	67	0	0	0	128	TRUE	Droid Cave
+bo_common_72	LOK	lok_evil_droid_eng_cave	11	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s3.iff	-98.6	-39.4	-86.0	-97	0	0	0	128	TRUE	Droid Cave
+bo_common_73	LOK	lok_evil_droid_eng_cave	16	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s4.iff	-111.8	-57.2	-37.7	38	0	0	0	128	TRUE	Droid Cave
+bo_common_74	LOK	lok_evil_droid_eng_cave	11	object/tangible/furniture/nym_themepark/collection/shared_table_work_bench.iff	-101.1	-55.2	-80.9	90	0	0	0	128	TRUE	Droid Cave
+bo_common_75	LOK	lok_evil_droid_eng_cave	25	object/tangible/terminal/shared_terminal_nym_cave.iff	-60.6	-65.8	-142.3	-90	0	0	0	128	TRUE	Droid Cave
+bo_common_76	LOK	lok_evil_droid_eng_cave	27	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	49.2	-65.8	-83.3	-90	0	0	0	128	TRUE	Droid Cave
+bo_common_77	ENDOR	end_dwb	21	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff	-2.4	-32.0	-27.8	90	0	0	0	128	FALSE	DWB
+bo_common_78	ENDOR	end_dwb	23	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff	4.3	-32.0	-102.3	90	0	0	0	128	FALSE	DWB
+bo_common_79	ENDOR	end_dwb	51	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-151.0	-60.0	-99.0	180	0	0	0	128	TRUE	DWB
+bo_common_80	ENDOR	end_dwb	53	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-230.0	-60.0	-124.0	90	0	0	0	128	TRUE	DWB
+bo_common_81	ENDOR	end_dwb	59	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-232.0	-60.0	-220.0	90	0	0	0	128	TRUE	DWB
+bo_common_82	ENDOR	end_dwb	9	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-84.5	-20.0	-50.5	-90	0	0	0	128	TRUE	DWB
+bo_common_83	ENDOR	end_dwb	17	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-8.4	-32.0	-95.4	-89	0	0	0	128	TRUE	DWB
+bo_common_84	ENDOR	end_dwb	33	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	25.9	-64.0	-95.4	-179	0	0	0	128	TRUE	DWB
+bo_common_85	ENDOR	end_dwb	1	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-17.7	-12.0	-8.5	0	0	0	0	128	TRUE	DWB
+bo_common_86	ENDOR	end_dwb	64	object/tangible/dungeon/death_watch_bunker/shared_filter_dispenser.iff	-13.7	-52.0	-147.7	180	0	0	0	128	TRUE	DWB
+bo_common_87	ENDOR	end_dwb	34	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff	112.9	-64.0	-113.9	178	0	0	0	128	TRUE	DWB
+bo_common_88	ENDOR	end_dwb	34	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff	113.4	-64.0	-151.9	-179	0	0	0	128	TRUE	DWB
+bo_common_89	ENDOR	end_dwb	64	object/tangible/dungeon/death_watch_bunker/shared_workbench.iff	-15.8	-52.0	-147.5	180	0	0	0	128	TRUE	DWB
+bo_common_90	ENDOR	end_dwb	34	object/tangible/dungeon/shared_terminal_free_s1.iff	74.5	-54.0	-143.0	-87	0	0	0	128	TRUE	DWB
+bo_common_91	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	59.9	0.0	-86.0	0	0	0	0	128	FALSE	DWB
+bo_common_92	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	49.0	0.0	-78.7	0	0	0	0	128	FALSE	DWB
+bo_common_93	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	56.1	0.0	-68.0	0	0	0	0	128	FALSE	DWB
+bo_common_94	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	67.0	0.0	-75.4	0	0	0	0	128	FALSE	DWB
+bo_common_95	ENDOR	end_dwb	34	object/tangible/newbie_tutorial/shared_debris.iff	66.4	-64.0	-114.5	-177	0	0	0	128	TRUE	DWB
+bo_common_96	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	58.0	0.0	-93.0	0	0	0	0	128	TRUE	DWB
+bo_common_97	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	42.0	0.0	-77.0	90	0	0	0	128	TRUE	DWB
+bo_common_98	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	58.0	0.0	-61.0	-179	0	0	0	128	TRUE	DWB
+bo_common_99	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	73.9	0.0	-77.0	-90	0	0	0	128	TRUE	DWB
+bo_common_100	YAVIN4	yav_geonosian_cave	14	object/tangible/dungeon/shared_trash_container.iff	-131.6	-22.2	-70.9	0	0	0	0	128	TRUE	DWB
+bo_common_101	LOK	lok_imperial_gas_mine	11	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff	-91.8	-100.4	-93.6	0	0	0	0	128	TRUE	Gas Mine
+bo_common_102	LOK	lok_imperial_gas_mine	8	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	-81.0	-99.0	-163.3	0	0	0	0	128	TRUE	Gas Mine
+bo_common_103	YAVIN4	yav_geonosian_cave	38	object/static/destructible/shared_destructible_cave_wall_damprock.iff	-102.0	-31.4	-368.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_104	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.4	-22.1	-111.9	180	0	0	0	128	TRUE	Geo Cave
+bo_common_105	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.3	-21.6	-110.5	90	0	0	0	128	TRUE	Geo Cave
+bo_common_106	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.2	-21.8	-109.5	55	0	0	0	128	TRUE	Geo Cave
+bo_common_107	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-38.7	-22.0	-99.2	155	0	0	0	128	TRUE	Geo Cave
+bo_common_108	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-39.7	-22.2	-97.7	186	0	0	0	128	TRUE	Geo Cave
+bo_common_109	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-111.0	-33.7	-228.3	0	0	0	0	128	TRUE	Geo Cave
+bo_common_110	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-109.5	-33.3	-227.5	115	0	0	0	128	TRUE	Geo Cave
+bo_common_111	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-113.0	-33.4	-229.2	48	0	0	0	128	TRUE	Geo Cave
+bo_common_112	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.6	-21.9	-112.1	64	0	0	0	128	TRUE	Geo Cave
+bo_common_113	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.6	-22.0	-111.2	16	0	0	0	128	TRUE	Geo Cave
+bo_common_114	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.9	-22.0	-110.2	3	0	0	0	128	TRUE	Geo Cave
+bo_common_115	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.9	-22.1	-109.2	22	0	0	0	128	TRUE	Geo Cave
+bo_common_116	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-38.4	-22.2	-96.5	64	0	0	0	128	TRUE	Geo Cave
+bo_common_117	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-40.1	-22.2	-99.0	23	0	0	0	128	TRUE	Geo Cave
+bo_common_118	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-39.7	-22.2	-100.0	3	0	0	0	128	TRUE	Geo Cave
+bo_common_119	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_crate1.iff	-22.2	-22.0	-132.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_120	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_crate1.iff	-22.1	-22.0	-133.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_121	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.8	-34.0	-333.5	0	0	0	0	128	TRUE	Geo Cave
+bo_common_122	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.3	-34.0	-334.5	90	0	0	0	128	TRUE	Geo Cave
+bo_common_123	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.3	-34.0	-335.6	180	0	0	0	128	TRUE	Geo Cave
+bo_common_124	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_dented.iff	-23.4	-22.0	-133.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_125	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_dented.iff	-23.2	-22.0	-131.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_126	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	32.1	-24.0	-335.6	0	0	0	0	128	TRUE	Geo Cave
+bo_common_127	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	32.9	-24.0	-335.1	0	0	0	0	128	TRUE	Geo Cave
+bo_common_128	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	33.8	-24.0	-335.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_129	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	34.5	-24.0	-335.5	0	0	0	0	128	TRUE	Geo Cave
+bo_common_130	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	35.6	-24.0	-335.1	0	0	0	0	128	TRUE	Geo Cave
+bo_common_131	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	35.2	-24.0	-334.3	0	0	0	0	128	TRUE	Geo Cave
+bo_common_132	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_storage1.iff	-23.2	-22.0	-132.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_133	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_storage1.iff	-21.9	-22.0	-131.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_134	YAVIN4	yav_geonosian_cave	4	object/tangible/terminal/shared_terminal_geo_bunker.iff	-34.0	-18.0	-31.0	90	0	0	0	128	TRUE	Geo Cave
+bo_common_135	YAVIN4	yav_geonosian_cave	5	object/tangible/terminal/shared_terminal_geo_bunker.iff	-49.7	-18.0	-55.7	0	0	0	0	128	TRUE	Geo Cave
+bo_common_136	YAVIN4	yav_geonosian_cave	9	object/tangible/terminal/shared_terminal_geo_bunker.iff	-105.3	-18.0	-64.0	180	0	0	0	128	TRUE	Geo Cave
+bo_common_137	YAVIN4	yav_geonosian_cave	24	object/tangible/terminal/shared_terminal_geo_bunker.iff	-79.0	-22.0	-146.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_138	YAVIN4	yav_geonosian_cave	31	object/tangible/terminal/shared_terminal_geo_bunker.iff	-67.0	-34.0	-260.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_139	YAVIN4	yav_geonosian_cave	34	object/tangible/terminal/shared_terminal_geo_bunker.iff	-133.1	-34.0	-204.0	180	0	0	0	128	TRUE	Geo Cave
+bo_common_140	YAVIN4	yav_geonosian_cave	41	object/tangible/terminal/shared_terminal_geo_bunker.iff	-4.0	-34.0	-417.0	270	0	0	0	128	TRUE	Geo Cave
+bo_common_141	YAVIN4	yav_geonosian_cave	42	object/tangible/terminal/shared_terminal_geo_bunker.iff	38.0	-34.0	-332.9	270	0	0	0	128	TRUE	Geo Cave
+bo_common_142	YAVIN4	yav_geonosian_cave	4	object/tangible/theme_park/shared_invisible_object.iff	4.3	-18.2	-27.7	0	0	0	0	8	TRUE	Geo Cave
+bo_common_143	YAVIN4	yav_geonosian_cave	16	object/tangible/theme_park/shared_invisible_object.iff	-11.7	-30.2	-110.2	0	0	0	0	8	TRUE	Geo Cave
+bo_common_144	YAVIN4	yav_geonosian_cave	27	object/tangible/theme_park/shared_invisible_object.iff	-103.9	-27.6	-191.1	0	0	0	0	8	TRUE	Geo Cave
+bo_common_145	YAVIN4	yav_geonosian_cave	33	object/tangible/theme_park/shared_invisible_object.iff	-127.6	-34.0	-250.8	0	0	0	0	8	TRUE	Geo Cave
+bo_common_146	YAVIN4	yav_geonosian_cave	43	object/tangible/theme_park/shared_invisible_object.iff	47.5	-34.0	-333.9	0	0	0	0	8	TRUE	Geo Cave
+bo_common_147	DATHOMIR	dat_ns_rancor_cave	11	object/tangible/door/shared_heroic_axkva_min_door.iff	-91.0	-101.0	-102.7	180	0	0	0	128	TRUE	Heroics - AM
+bo_common_148	CORELLIA	cor_world	0	object/tangible/spawning/shared_auto_invasion_spawner.iff	-51.0	28.0	-4734.0	0	0	0	0	8	FALSE	Invasion spawner
+bo_common_149	ENDOR	end_world	0	object/tangible/spawning/shared_auto_invasion_spawner.iff	-977.0	73.0	1554.0	0	0	0	0	8	FALSE	Invasion spawner
+bo_common_150	CORELLIA	cor_coronet_starport	4	object/tangible/collection/shared_col_jalopy_crate_04.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_151	NABOO	nab_kaadara_starport	4	object/tangible/collection/shared_col_jalopy_crate_03.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_152	NABOO	nab_theed_hangar	5	object/tangible/collection/shared_col_jalopy_crate_08.iff	49.1	8.0	-21.4	-160	0	0	0	128	TRUE	ITV
+bo_common_153	TALUS	tal_dearic_starport	4	object/tangible/collection/shared_col_jalopy_crate_06.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_154	TALUS	tal_nashal_starport	4	object/tangible/collection/shared_col_jalopy_crate_07.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_155	TATOOINE	tat_bestine_starport	4	object/tangible/collection/shared_col_jalopy_crate_01.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_156	TATOOINE	tat_moseisley_starport	4	object/tangible/collection/shared_col_jalopy_crate_02.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_157	TATOOINE	tat_mosespa_starport	4	object/tangible/collection/shared_col_jalopy_crate_05.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_158	TATOOINE	tat_jabbas_palace	22	object/tangible/instrument/shared_organ_max_rebo.iff	-11.0	2.0	36.0	0	0	0	0	64	TRUE	Jabbas Palace
+bo_common_159	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_couch.iff	-2.0	0.0	8.0	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_160	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_desk_lamp.iff	1.6	0.8	8.5	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_161	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_desk.iff	1.3	0.0	9.1	-90	0	0	0	128	TRUE	Lucky Despot
+bo_common_162	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_rug.iff	-1.3	0.0	10.7	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_163	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_table.iff	-1.7	0.0	12.4	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_164	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff	-1.4	0.0	11.4	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_165	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff	-0.2	0.0	9.2	90	0	0	0	128	TRUE	Lucky Despot
+bo_common_166	TATOOINE	tat_moseisley_lucky_despot	9	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff	28.8	6.9	5.6	124	0	0	0	128	TRUE	Lucky Despot
+bo_common_167	TATOOINE	tat_moseisley_lucky_despot	9	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff	30.3	7.0	3.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_168	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/painting/shared_painting_house_cleanup_imperial.iff	-2.7	1.2	7.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_169	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/painting/shared_painting_house_cleanup_rebel.iff	-4.2	1.2	7.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_170	CORELLIA	cor_meatlump_hideout_main	3	object/tangible/datapad/shared_data_dropoff.iff	-4.2	0.6	-4.1	0	0	0	0	128	FALSE	Meatlump
+bo_common_171	LOK	lok_ntp_mercenary_bunker	5	object/tangible/terminal/shared_systems_control_terminal.iff	9.5	-12.0	43.8	90	0	0	0	128	TRUE	Nym's TP
+bo_common_172	LOK	lok_ntp_mercenary_bunker	5	object/tangible/terminal/shared_systems_control_terminal.iff	11.0	-12.0	64.3	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_173	LOK	lok_ntp_mercenary_bunker	7	object/tangible/terminal/shared_systems_control_terminal.iff	-47.1	-20.0	42.9	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_174	LOK	lok_ntp_mercenary_bunker	7	object/tangible/terminal/shared_systems_control_terminal.iff	-78.7	-20.0	46.9	90	0	0	0	128	TRUE	Nym's TP
+bo_common_175	LOK	lok_ntp_mercenary_bunker	3	object/tangible/terminal/shared_systems_control_terminal.iff	3.3	0.3	-5.5	0	0	0	0	128	TRUE	Nym's TP
+bo_common_176	LOK	lok_ntp_mercenary_bunker	14	object/tangible/terminal/shared_systems_control_terminal.iff	19.1	-12.0	26.4	180	0	0	0	128	TRUE	Nym's TP
+bo_common_177	LOK	lok_ntp_mercenary_bunker	16	object/tangible/terminal/shared_systems_control_terminal.iff	-9.1	-20.0	-0.3	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_178	LOK	lok_ntp_mercenary_bunker	19	object/tangible/terminal/shared_systems_control_terminal.iff	-34.5	-20.0	93.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_179	LOK	lok_ntp_mercenary_bunker	12	object/tangible/terminal/shared_systems_control_terminal.iff	74.6	-12.0	51.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_180	LOK	lok_ntp_mercenary_bunker	13	object/tangible/terminal/shared_systems_control_terminal.iff	24.2	-20.0	115.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_181	LOK	lok_ntp_mercenary_bunker	9	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff	-54.2	-20.0	74.0	0	0	0	0	128	TRUE	Nym's TP
+bo_common_182	LOK	lok_ntp_mercenary_bunker	8	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	-54.4	-20.0	12.8	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_183	ENDOR	end_world	0	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff	-6500.0	-0.9	-7000.0	0	0	0	0	8	TRUE	PvP Battlefield
+bo_common_184	YAVIN4	yav_world	0	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff	1015.0	68.7	425.0	0	0	0	0	8	FALSE	PvP Battlefield
+bo_common_185	DANTOOINE	dan_mining_outpost_cantina	4	object/tangible/quest/shared_clone_relics_box_large.iff	9.5	0.6	-4.8	-10	0	0	0	128	TRUE	Quest
+bo_common_186	DATHOMIR	dat_ns_rancor_cave	8	object/tangible/quest/shared_clone_relics_skeleton_human.iff	-87.7	-70.0	-115.4	-128	0	0	0	128	TRUE	Quest
+bo_common_187	DATHOMIR	dat_ns_rancor_cave	5	object/tangible/quest/township/shared_axkva_nightsister_skull.iff	47.5	-54.5	-155.6	-37	0	0	0	128	TRUE	Quest
+bo_common_188	DATHOMIR	dat_ns_rancor_cave	5	object/tangible/quest/township/shared_axkva_pedastal.iff	47.5	-58.4	-155.6	-37	0	0	0	128	TRUE	Quest
+bo_common_189	LOK	lok_ntp_mercenary_bunker	21	object/tangible/quest/shared_nym_grenade_container.iff	-7.0	-20.0	78.4	180	0	0	0	128	TRUE	Quest
+bo_common_190	NABOO	nab_deeja_house2	6	object/tangible/quest/shared_clone_relics_box_large.iff	-4.8	-4.9	-8.1	-19	0	0	0	128	TRUE	Quest
+bo_common_191	NABOO	nab_mauler_stronghold	5	object/tangible/quest/shared_mauler_stronghold_terminal.iff	8.1	-12.0	54.4	-171	0	0	0	128	TRUE	Quest
+bo_common_192	NABOO	nab_mauler_stronghold	5	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-3.9	-12.0	51.9	84	0	0	0	128	TRUE	Quest
+bo_common_193	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	3.6	-16.0	115.3	180	0	0	0	128	TRUE	Quest
+bo_common_194	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	9.0	-16.0	120.4	91	0	0	0	128	TRUE	Quest
+bo_common_195	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	27.0	-16.0	121.1	-93	0	0	0	128	TRUE	Quest
+bo_common_196	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	3.4	-16.0	126.5	-1	0	0	0	128	TRUE	Quest
+bo_common_197	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-2.0	-16.0	121.8	-88	0	0	0	128	TRUE	Quest
+bo_common_198	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-34.7	-12.0	166.6	88	0	0	0	128	TRUE	Quest
+bo_common_199	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-18.3	-12.0	167.4	-90	0	0	0	128	TRUE	Quest
+bo_common_200	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-160.3	-44.0	68.8	0	0	0	0	128	TRUE	Quest
+bo_common_201	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-145.0	-44.0	68.8	1	0	0	0	128	TRUE	Quest
+bo_common_202	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-102.7	-44.0	-17.4	98	0	0	0	128	TRUE	Quest
+bo_common_203	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-94.1	-44.0	-25.0	3	0	0	0	128	TRUE	Quest
+bo_common_204	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-78.3	-44.0	-24.9	-7	0	0	0	128	TRUE	Quest
+bo_common_205	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-62.7	-44.0	-25.2	5	0	0	0	128	TRUE	Quest
+bo_common_206	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-20.0	-16.0	121.8	90	0	0	0	128	TRUE	Quest
+bo_common_207	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-26.2	-12.0	175.2	179	0	0	0	128	TRUE	Quest
+bo_common_208	NABOO	nab_mauler_stronghold	17	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-96.9	-28.0	127.2	-179	0	0	0	128	TRUE	Quest
+bo_common_209	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-168.7	-44.0	77.2	82	0	0	0	128	TRUE	Quest
+bo_common_210	NABOO	nab_theed_palace	8	object/tangible/quest/shared_rsf_computer.iff	38.6	12.0	44.9	0	0	0	0	128	TRUE	Quest
+bo_common_211	TALUS	tal_nashal_cantina	13	object/tangible/quest/shared_clone_relics_box_large.iff	-27.2	-0.5	10.5	27	0	0	0	128	TRUE	Quest
+bo_common_212	TALUS	tal_nashal_starport	7	object/tangible/quest/shared_talus_grave_robbers_box_magseal.iff	56.0	-0.5	33.7	77	0	0	0	128	TRUE	Quest
+bo_common_213	TATOOINE	tat_fort_tusken	5	object/tangible/quest/shared_clone_relics_starmap_box.iff	4.2	8.3	-22.1	1	0	0	0	128	TRUE	Quest
+bo_common_214	TATOOINE	tat_sennex_camp	17	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-96.9	-28.0	127.2	-179	0	0	0	128	TRUE	Quest
+bo_common_215	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	3.6	-16.0	115.3	180	0	0	0	128	TRUE	Quest
+bo_common_216	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	9.0	-16.0	120.4	91	0	0	0	128	TRUE	Quest
+bo_common_217	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	27.0	-16.0	121.1	-93	0	0	0	128	TRUE	Quest
+bo_common_218	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	3.4	-16.0	126.5	-1	0	0	0	128	TRUE	Quest
+bo_common_219	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-20.0	-16.0	121.8	90	0	0	0	128	TRUE	Quest
+bo_common_220	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-2.0	-16.0	121.8	-88	0	0	0	128	TRUE	Quest
+bo_common_221	TATOOINE	tat_sennex_camp	5	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	8.1	-12.0	54.4	-171	0	0	0	128	TRUE	Quest
+bo_common_222	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-168.7	-44.0	77.2	82	0	0	0	128	TRUE	Quest
+bo_common_223	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-160.3	-44.0	68.8	0	0	0	0	128	TRUE	Quest
+bo_common_224	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-145.0	-44.0	68.8	2	0	0	0	128	TRUE	Quest
+bo_common_225	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-102.7	-44.0	-17.4	98	0	0	0	128	TRUE	Quest
+bo_common_226	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-94.1	-44.0	-25.0	3	0	0	0	128	TRUE	Quest
+bo_common_227	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-78.3	-44.0	-24.9	0	0	0	0	128	TRUE	Quest
+bo_common_228	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-62.7	-44.0	-25.2	6	0	0	0	128	TRUE	Quest
+bo_common_229	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-26.2	-12.0	175.2	179	0	0	0	128	TRUE	Quest
+bo_common_230	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-34.7	-12.0	166.6	88	0	0	0	128	TRUE	Quest
+bo_common_231	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-18.3	-12.0	167.4	-90	0	0	0	128	TRUE	Quest
+bo_common_232	TATOOINE	tat_sennex_camp	26	object/tangible/quest/shared_sennex_hq_databank.iff	-80.7	-28.0	52.9	0	0	0	0	128	TRUE	Quest
+bo_common_233	YAVIN4	yav_geonosian_cave	5	object/tangible/quest/shared_clone_relics_box_magseal.iff	-39.7	-18.0	-36.9	0	0	0	0	128	TRUE	Quest
+bo_common_234	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5312.5	78.5	-4159.2	0	0	0	0	64	TRUE	Quest - Figurine 1
+bo_common_235	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5382.5	98.2	-4065.4	0	0	0	0	64	TRUE	Quest - Figurine 2
+bo_common_236	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5116.3	78.4	-3957.8	0	0	0	0	64	TRUE	Quest - Figurine 3
+bo_common_237	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5408.1	78.9	-4189.1	0	0	0	0	64	TRUE	Quest - Figurine 4
+bo_common_238	DATHOMIR	dat_aurilia_prisoner_hut1	1	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	-3.9	0.6	-0.4	0	0	0	0	64	TRUE	Quest - Figurine 5
+bo_common_239	DATHOMIR	dat_aurilia_adv_gh	10	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	9.4	1.8	-2.1	0	0	0	0	64	TRUE	Quest - Figurine 6
+bo_common_240	CORELLIA	cor_world	0	object/tangible/gcw/shared_pvp_region_watcher.iff	4772.3	95.0	-5233.7	0	0	0	0	8	FALSE	
+bo_common_241	DATHOMIR	dat_ns_rancor_cave	6	object/static/terrain/corellia/shared_rock_crystl_shrpbush_med.iff	-11.5	-64.6	-202.2	0	0	0	0	128	TRUE	
+bo_common_242	DATHOMIR	dat_ns_rancor_cave	7	object/tangible/quest/imperial/shared_itp_vader_force_crystal.iff	-25.3	-63.7	-254.7	20	0	0	0	128	TRUE	
+bo_common_243	DATHOMIR	dat_world	0	object/tangible/spawning/kashyyyk/shared_rodian_shuttle_spawner.iff	5423.0	83.2	-4125.7	0	0	0	0	256	FALSE	
+bo_common_244	DUNGEON1	du1_nova_orion	28	object/tangible/quest/nova_orion/shared_nova_orion_katiara_grave_node.iff	-27.8	29.0	16.0	0	0	0	0	16	FALSE	
+bo_common_245	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-10.3	90	0	0	0	128	TRUE	
+bo_common_246	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-8.8	90	0	0	0	128	TRUE	
+bo_common_247	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-7.3	90	0	0	0	128	TRUE	
+bo_common_248	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-5.8	90	0	0	0	128	TRUE	
+bo_common_249	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-4.3	90	0	0	0	128	TRUE	
+bo_common_250	NABOO	nab_world	0	object/tangible/datapad/shared_droid_datapad_1.iff	-6590.9	-209.8	5982.8	0	0	0	0	256	TRUE	
+bo_common_251	NABOO	nab_world	0	object/tangible/datapad/shared_droid_datapad_6.iff	-6586.4	-209.9	5984.3	0	0	0	0	256	TRUE	
+bo_common_252	RORI	ror_world	0	object/tangible/content/shared_u13_ponda_gungan_statue_spawer.iff	-5360.0	80.0	-2291.0	0	0	0	0	256	FALSE	
+bo_common_253	TATOOINE	tat_world	0	object/static/particle/shared_particle_campfire_style_1.iff	3519.7	5.0	-4785.9	57	0	0	0	256	TRUE	Mos Eisley
+bo_common_254	TATOOINE	tat_world	0	object/static/particle/shared_particle_smoke.iff	4052.1	9.0	-4731.1	89	0	0	0	256	TRUE	Mos Eisley
+bo_common_255	TATOOINE	tat_world	0	object/static/vehicle/shared_static_swoop_bike.iff	3452.3	5.0	-4853.8	2	0	0	0	256	TRUE	Mos Eisley
+bo_common_256	TATOOINE	tat_world	0	object/static/vehicle/shared_static_speeder_bike.iff	3450.2	5.0	-4853.4	5	0	0	0	256	TRUE	Mos Eisley
+bo_common_257	TATOOINE	tat_world	0	object/static/vehicle/shared_static_sandcrawler.iff	2255.4	0.0	-4445.1	-45	0	0	0	512	TRUE	Invasion - Jawa vs. Tusken
+bo_common_258	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_tent_house_tatooine_style_01.iff	2229.8	0.0	-4455.1	-100	0	0	0	512	TRUE	Invasion - Jawa vs. Tusken
+bo_common_259	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_debris_tatt_drum_storage_2.iff	2231.1	0.0	-4449.5	118	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_260	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_debris_tatt_crate_metal_1.iff	2230.7	0.0	-4448.6	172	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_261	TATOOINE	tat_world	0	object/static/structure/general/shared_droid_lemedical_powerdown.iff	2232.1	0.0	-4450.6	20	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_262	TATOOINE	tat_world	0	object/static/structure/general/shared_trash_pile_s01.iff	2231.9	0.0	-4447.4	-60	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_263	TATOOINE	tat_world	0	object/static/structure/general/shared_campfire_burnt.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_264	TATOOINE	tat_world	0	object/static/particle/shared_particle_smoke.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_265	TATOOINE	tat_world	0	object/static/particle/shared_particle_campfire_style_1.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken

@@ -6,7 +6,7 @@ plugins {
 	java
 	kotlin("jvm") version "1.3.72"
 	id("com.github.johnrengelman.shadow") version "5.2.0"
-	id("org.javamodularity.moduleplugin") version "1.5.0"
+	id("org.javamodularity.moduleplugin") version "1.7.0"
 	id("org.beryx.jlink") version "2.17.2"
 }
 
