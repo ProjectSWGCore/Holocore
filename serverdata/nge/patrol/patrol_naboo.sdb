@@ -414,7 +414,7 @@ patrol_nab_6507	patrol_nab_6500		NABOO	nab_world	0	4696.0	295.8	-1632.2	0
 patrol_nab_6508	patrol_nab_6500		NABOO	nab_world	0	4694.1	296.1	-1659.7	0	
 patrol_nab_6509	patrol_nab_6500		NABOO	nab_world	0	4691.9	293.5	-1708.5	0	
 patrol_nab_6600	patrol_nab_6600	FLIP	NABOO	nab_world	0	5139.8	-192.0	6761.8	0	Kaadara - a Naboo security inspector
-patrol_nab_6601	patrol_nab_6600		NABOO	nab_world	0	5108.9	-1920	6730.1	0	
+patrol_nab_6601	patrol_nab_6600		NABOO	nab_world	0	5108.9	-192.0	6730.1	0	
 patrol_nab_6700	patrol_nab_6700	FLIP	NABOO	nab_world	0	5139.8	-192.0	6761.8	0	Kaadara - a Naboo security inspector
 patrol_nab_6701	patrol_nab_6700		NABOO	nab_world	0	5174.1	-192.0	6796.1	0	
 patrol_nab_6800	patrol_nab_6800	FLIP	NABOO	nab_world	0	4856.7	3.8	-4927.9	0	Moenia - a CLL-8 binary load lifter
