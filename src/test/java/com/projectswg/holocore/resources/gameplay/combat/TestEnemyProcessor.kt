@@ -43,7 +43,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	private val neutral = ServerData.factions.getFaction("neutral") ?: throw AssertionError("Failed to lookup 'neutral'")
 	private val rebel = ServerData.factions.getFaction("rebel") ?: throw AssertionError("Failed to lookup 'rebel'")
 	private val imperial = ServerData.factions.getFaction("imperial") ?: throw AssertionError("Failed to lookup 'imperial'")
-	private val gungan = ServerData.factions.getFaction("gungan") ?: throw AssertionError("Failed to lookup 'gungan'")
+	private val jawa = ServerData.factions.getFaction("jawa") ?: throw AssertionError("Failed to lookup 'jawa'")
 	private val townsperson = ServerData.factions.getFaction("townsperson") ?: throw AssertionError("Failed to lookup 'townsperson'")
 	
 	@Test
@@ -51,7 +51,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 		val player1 = GenericCreatureObject(1)
 		val player2 = GenericCreatureObject(2)
 		val statusList = PvpStatus.values()
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (player1Faction in factions) {
 			for (player2Faction in factions) {
@@ -83,7 +83,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	fun testPvE() {
 		val player = GenericCreatureObject(1)
 		val npc = AIObject(2)
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (player1Faction in factions) {
 			for (player2Faction in factions) {
@@ -105,7 +105,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	fun testEvE() {
 		val npc1 = AIObject(1)
 		val npc2 = AIObject(2)
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (npc1Faction in factions) {
 			for (npc2Faction in factions) {
