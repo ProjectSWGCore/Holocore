@@ -390,25 +390,25 @@ patrol_dat_4508	patrol_dat_4500		DATHOMIR	dat_world	0	-7495.6	569.3	-7396.7	0
 patrol_dat_4509	patrol_dat_4500		DATHOMIR	dat_world	0	-7492.7	568.1	-7448.8	0	
 patrol_dat_4510	patrol_dat_4500		DATHOMIR	dat_world	0	-7456.8	569.9	-7460.1	0	
 patrol_dat_4511	patrol_dat_4500		DATHOMIR	dat_world	0	-7483.1	569.3	-7432.8	0	
-patrol_dat_4600	patrol_dat_4600	FLIP	DATHOMIR	dat_world	0	-6343.4	120.0	972.6	0	Imperial Prison - a Novatrooper Cadet
+patrol_dat_4600	patrol_dat_4600	FLIP	DATHOMIR	dat_world	0	-6343.4	120.0	972.6	0	POI - Imperial Prison - a Novatrooper Cadet
 patrol_dat_4601	patrol_dat_4600		DATHOMIR	dat_world	0	-6370.2	120.0	973.7	0	
 patrol_dat_4602	patrol_dat_4600		DATHOMIR	dat_world	0	-6410.4	120.0	973.5	0	
 patrol_dat_4603	patrol_dat_4600		DATHOMIR	dat_world	0	-6414.2	120.0	954.4	0	
 patrol_dat_4604	patrol_dat_4600		DATHOMIR	dat_world	0	-6416.7	120.0	932.4	0	
 patrol_dat_4605	patrol_dat_4600		DATHOMIR	dat_world	0	-6407.9	120.0	909.1	0	
 patrol_dat_4606	patrol_dat_4600		DATHOMIR	dat_world	0	-6400.2	120.0	900.5	0	
-patrol_dat_4700	patrol_dat_4700	FLIP	DATHOMIR	dat_world	0	-6472.4	120.0	975.1	0	Imperial Prison - a Novatrooper Captain
+patrol_dat_4700	patrol_dat_4700	FLIP	DATHOMIR	dat_world	0	-6472.4	120.0	975.1	0	POI - Imperial Prison - a Novatrooper Captain
 patrol_dat_4701	patrol_dat_4700		DATHOMIR	dat_world	0	-6463.5	120.0	966.4	0	
 patrol_dat_4702	patrol_dat_4700		DATHOMIR	dat_world	0	-6467.0	120.0	952.3	0	
 patrol_dat_4703	patrol_dat_4700		DATHOMIR	dat_world	0	-6453.2	119.8	934.4	0	
 patrol_dat_4704	patrol_dat_4700		DATHOMIR	dat_world	0	-6450.0	119.1	925.5	0	
 patrol_dat_4705	patrol_dat_4700		DATHOMIR	dat_world	0	-6455.5	112.8	907.7	0	
-patrol_dat_4800	patrol_dat_4800	FLIP	DATHOMIR	dat_world	0	-6355.2	120.0	838.2	0	Imperial Prison - a Novatrooper Commander
+patrol_dat_4800	patrol_dat_4800	FLIP	DATHOMIR	dat_world	0	-6355.2	120.0	838.2	0	POI - Imperial Prison - a Novatrooper Commander
 patrol_dat_4801	patrol_dat_4800		DATHOMIR	dat_world	0	-6356.7	120.0	866.2	0	
 patrol_dat_4802	patrol_dat_4800		DATHOMIR	dat_world	0	-6366.3	120.0	881.7	0	
 patrol_dat_4803	patrol_dat_4800		DATHOMIR	dat_world	0	-6393.1	120.0	884.4	0	
 patrol_dat_4804	patrol_dat_4800		DATHOMIR	dat_world	0	-6391.5	120.0	864.8	0	
-patrol_dat_4900	patrol_dat_4900	FLIP	DATHOMIR	dat_world	0	-6356.5	128.0	780.4	0	Imperial Prison - an Elite Novatrooper
+patrol_dat_4900	patrol_dat_4900	FLIP	DATHOMIR	dat_world	0	-6356.5	128.0	780.4	0	POI - Imperial Prison - an Elite Novatrooper
 patrol_dat_4901	patrol_dat_4900		DATHOMIR	dat_world	0	-6335.0	128.0	781.5	0	
 patrol_dat_4902	patrol_dat_4900		DATHOMIR	dat_world	0	-6319.7	128.0	780.3	0	
 patrol_dat_4903	patrol_dat_4900		DATHOMIR	dat_world	0	-6319.4	128.0	757.8	0	
@@ -417,13 +417,13 @@ patrol_dat_4905	patrol_dat_4900		DATHOMIR	dat_world	0	-6339.4	128.0	727.0	0
 patrol_dat_4906	patrol_dat_4900		DATHOMIR	dat_world	0	-6362.8	128.0	726.9	0	
 patrol_dat_4907	patrol_dat_4900		DATHOMIR	dat_world	0	-6363.1	128.0	746.5	0	
 patrol_dat_4908	patrol_dat_4900		DATHOMIR	dat_world	0	-6364.0	128.0	777.9	0	
-patrol_dat_5000	patrol_dat_5000	FLIP	DATHOMIR	dat_world	0	-6399.3	120.0	900.0	0	Imperial Prison - an Elite Novatrooper Commander
+patrol_dat_5000	patrol_dat_5000	FLIP	DATHOMIR	dat_world	0	-6399.3	120.0	900.0	0	POI - Imperial Prison - an Elite Novatrooper Commander
 patrol_dat_5001	patrol_dat_5000		DATHOMIR	dat_world	0	-6375.4	120.0	899.5	0	
 patrol_dat_5002	patrol_dat_5000		DATHOMIR	dat_world	0	-6338.5	120.0	900.2	0	
 patrol_dat_5003	patrol_dat_5000		DATHOMIR	dat_world	0	-6332.1	120.0	912.6	0	
 patrol_dat_5004	patrol_dat_5000		DATHOMIR	dat_world	0	-6331.7	120.0	941.3	0	
 patrol_dat_5005	patrol_dat_5000		DATHOMIR	dat_world	0	-6336.0	120.0	964.5	0	
-patrol_dat_5100	patrol_dat_5100	FLIP	DATHOMIR	dat_world	0	-6342.3	128.0	766.8	0	Imperial Prison - a Novatrooper Medic
+patrol_dat_5100	patrol_dat_5100	FLIP	DATHOMIR	dat_world	0	-6342.3	128.0	766.8	0	POI - Imperial Prison - a Novatrooper Medic
 patrol_dat_5101	patrol_dat_5100		DATHOMIR	dat_world	0	-6343.1	128.0	778.7	0	
 patrol_dat_5102	patrol_dat_5100		DATHOMIR	dat_world	0	-6348.3	128.0	788.0	0	
 patrol_dat_5103	patrol_dat_5100		DATHOMIR	dat_world	0	-6348.8	128.0	797.2	0	
@@ -432,7 +432,7 @@ patrol_dat_5105	patrol_dat_5100		DATHOMIR	dat_world	0	-6378.3	128.0	791.5	0
 patrol_dat_5106	patrol_dat_5100		DATHOMIR	dat_world	0	-6395.4	128.0	794.2	0	
 patrol_dat_5107	patrol_dat_5100		DATHOMIR	dat_world	0	-6412.8	128.0	798.4	0	
 patrol_dat_5108	patrol_dat_5100		DATHOMIR	dat_world	0	-6430.6	128.0	788.3	0	
-patrol_dat_5200	patrol_dat_5200	FLIP	DATHOMIR	dat_world	0	-6200.8	120.0	982.1	0	Imperial Prison - a Novatrooper Squad Leader
+patrol_dat_5200	patrol_dat_5200	FLIP	DATHOMIR	dat_world	0	-6200.8	120.0	982.1	0	POI - Imperial Prison - a Novatrooper Squad Leader
 patrol_dat_5201	patrol_dat_5200		DATHOMIR	dat_world	0	-6218.8	120.0	995.8	0	
 patrol_dat_5202	patrol_dat_5200		DATHOMIR	dat_world	0	-6235.5	120.0	1007.4	0	
 patrol_dat_5203	patrol_dat_5200		DATHOMIR	dat_world	0	-6267.2	120.0	989.8	0	
@@ -617,3 +617,161 @@ patrol_dat_8201	patrol_dat_8200		DATHOMIR	dat_imp_weapons_research_facility	18	-
 patrol_dat_8300	patrol_dat_8300	LOOP	DATHOMIR	dat_imp_weapons_research_facility	20	-8.5	-20.0	85.3	0	Imperial Weapons Research Facility - a Meatlump pronk
 patrol_dat_8301	patrol_dat_8300		DATHOMIR	dat_imp_weapons_research_facility	19	-30.1	-20.0	101.3	0	
 patrol_dat_8302	patrol_dat_8300		DATHOMIR	dat_imp_weapons_research_facility	19	-15.8	-20.0	101.4	0	
+patrol_dat_8400	patrol_dat_8400	LOOP	DATHOMIR	dat_world	0	589.9	6.0	3050.7	0	Trade Outpost - an EG-6 power droid
+patrol_dat_8401	patrol_dat_8400		DATHOMIR	dat_world	0	589.9	6.0	3050.7	0	
+patrol_dat_8402	patrol_dat_8400		DATHOMIR	dat_world	0	606.7	6.0	3050.3	0	
+patrol_dat_8403	patrol_dat_8400		DATHOMIR	dat_world	0	618.0	6.0	3056.5	0	
+patrol_dat_8404	patrol_dat_8400		DATHOMIR	dat_world	0	621.3	6.0	3084.1	0	
+patrol_dat_8405	patrol_dat_8400		DATHOMIR	dat_world	0	617.9	6.0	3095.4	0	
+patrol_dat_8406	patrol_dat_8400		DATHOMIR	dat_world	0	609.8	6.0	3088.3	0	
+patrol_dat_8407	patrol_dat_8400		DATHOMIR	dat_world	0	593.2	6.0	3092.8	0	
+patrol_dat_8408	patrol_dat_8400		DATHOMIR	dat_world	0	575.3	6.0	3099.0	0	
+patrol_dat_8409	patrol_dat_8400		DATHOMIR	dat_world	0	557	6.7	3094.8	0	
+patrol_dat_8410	patrol_dat_8400		DATHOMIR	dat_world	0	538.6	8.6	3091.8	0	
+patrol_dat_8411	patrol_dat_8400		DATHOMIR	dat_world	0	537.7	8.6	3082.1	0	
+patrol_dat_8412	patrol_dat_8400		DATHOMIR	dat_world	0	550.3	6.3	3076	0	
+patrol_dat_8413	patrol_dat_8400		DATHOMIR	dat_world	0	574.1	6	3069.9	0	
+patrol_dat_8414	patrol_dat_8400		DATHOMIR	dat_world	0	584.5	6	3059.6	0	
+patrol_dat_8500	patrol_dat_8500	FLIP	DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0	Trade Outpost - an explorer
+patrol_dat_8501	patrol_dat_8500		DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0	
+patrol_dat_8502	patrol_dat_8500		DATHOMIR	dat_trade_outpost_starport	1	-12.8	0.1	-17.4	0	
+patrol_dat_8503	patrol_dat_8500		DATHOMIR	dat_world	0	615.3	6	3093.7	0	
+patrol_dat_8504	patrol_dat_8500		DATHOMIR	dat_world	0	613.6	6	3083.1	0	
+patrol_dat_8505	patrol_dat_8500		DATHOMIR	dat_world	0	610.7	6	3065.1	0	
+patrol_dat_8506	patrol_dat_8500		DATHOMIR	dat_world	0	607.9	6	3046.4	0	
+patrol_dat_8507	patrol_dat_8500		DATHOMIR	dat_world	0	610.8	6.8	3043.4	0	
+patrol_dat_8508	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	1	7.6	0.6	5.4	0	
+patrol_dat_8509	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	1	2.3	0.6	3.2	0	
+patrol_dat_8510	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	2	-5.3	0.6	3.6	0	
+patrol_dat_8511	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	-7.1	0.6	-1.4	0	
+patrol_dat_8512	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	-2.1	0.6	-3.6	0	
+patrol_dat_8513	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	2	0.6	-4.6	0	
+patrol_dat_8514	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	4	5.9	0.6	-4.6	0	
+patrol_dat_8600	patrol_dat_8600	FLIP	DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0	Trade Outpost - a medic
+patrol_dat_8601	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0	
+patrol_dat_8602	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	3	1.2	0.1	-3.2	0	
+patrol_dat_8603	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	3	-1.4	0.1	1.5	0	
+patrol_dat_8604	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	2	-4.3	0.1	1.8	0	
+patrol_dat_8605	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	2	-4.6	0.1	3.4	0	
+patrol_dat_8606	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	1	0.5	0.1	4.7	0	
+patrol_dat_8607	patrol_dat_8600		DATHOMIR	dat_world	0	618.3	6	3054.2	0	
+patrol_dat_8608	patrol_dat_8600		DATHOMIR	dat_world	0	608.7	6	3054.3	0	
+patrol_dat_8609	patrol_dat_8600		DATHOMIR	dat_world	0	596.6	6	3057.5	0	
+patrol_dat_8610	patrol_dat_8600		DATHOMIR	dat_world	0	573.4	6	3073.7	0	
+patrol_dat_8611	patrol_dat_8600		DATHOMIR	dat_world	0	545.1	7.6	3085.3	0	
+patrol_dat_8612	patrol_dat_8600		DATHOMIR	dat_world	0	524.4	12	3082	0	
+patrol_dat_8613	patrol_dat_8600		DATHOMIR	dat_world	0	510.6	13.1	3074.5	0	
+patrol_dat_8614	patrol_dat_8600		DATHOMIR	dat_world	0	490.8	13.2	3062.5	0	
+patrol_dat_8615	patrol_dat_8600		DATHOMIR	dat_world	0	468.3	17.4	3032.6	0	
+patrol_dat_8616	patrol_dat_8600		DATHOMIR	dat_world	0	449.7	23.7	3002.7	0	
+patrol_dat_8617	patrol_dat_8600		DATHOMIR	dat_world	0	431.1	27.2	2970.1	0	
+patrol_dat_8618	patrol_dat_8600		DATHOMIR	dat_world	0	420	27.9	2950	0	
+patrol_dat_8700	patrol_dat_8700	FLIP	DATHOMIR	dat_world	0	581.2	6	3105.3	0	Trade Outpost - a Chiss poacher smuggler
+patrol_dat_8701	patrol_dat_8700		DATHOMIR	dat_world	0	581.2	6	3105.3	0	
+patrol_dat_8702	patrol_dat_8700		DATHOMIR	dat_world	0	581.3	6	3093.6	0	
+patrol_dat_8703	patrol_dat_8700		DATHOMIR	dat_world	0	592.1	6	3091.5	0	
+patrol_dat_8704	patrol_dat_8700		DATHOMIR	dat_world	0	610.5	6	3090	0	
+patrol_dat_8705	patrol_dat_8700		DATHOMIR	dat_world	0	620.3	6	3088.9	0	
+patrol_dat_8706	patrol_dat_8700		DATHOMIR	dat_world	0	633.9	6	3084.6	0	
+patrol_dat_8707	patrol_dat_8700		DATHOMIR	dat_world	0	638	6	3067.4	0	
+patrol_dat_8708	patrol_dat_8700		DATHOMIR	dat_world	0	638.2	6	3051.2	0	
+patrol_dat_8709	patrol_dat_8700		DATHOMIR	dat_world	0	634.7	6	3040.4	0	
+patrol_dat_8710	patrol_dat_8700		DATHOMIR	dat_world	0	623.1	6	3035.1	0	
+patrol_dat_8711	patrol_dat_8700		DATHOMIR	dat_world	0	619.3	6	3043.4	0	
+patrol_dat_8712	patrol_dat_8700		DATHOMIR	dat_world	0	613.4	6	3050.8	0	
+patrol_dat_8713	patrol_dat_8700		DATHOMIR	dat_world	0	597.9	6	3052.9	0	
+patrol_dat_8714	patrol_dat_8700		DATHOMIR	dat_world	0	587.2	6	3056.4	0	
+patrol_dat_8715	patrol_dat_8700		DATHOMIR	dat_world	0	575	6	3060.5	0	
+patrol_dat_8716	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	1	-0.3	0.1	3.9	0	
+patrol_dat_8717	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	2	-5.3	0.1	3.2	0	
+patrol_dat_8718	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	2	-4.1	0.1	1.3	0	
+patrol_dat_8719	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	3	-0.5	0.1	1.1	0	
+patrol_dat_8720	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	3	-0.6	0.1	-3.4	0	
+patrol_dat_8721	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	6	-3.2	0.1	-4.1	0	
+patrol_dat_8800	patrol_dat_8800	FLIP	DATHOMIR	dat_world	0	-6521.8	130.1	793.6	0	POI - Imperial Prison - an AT-ST
+patrol_dat_8801	patrol_dat_8800		DATHOMIR	dat_world	0	-6504.7	130.3	778.9	0	
+patrol_dat_8802	patrol_dat_8800		DATHOMIR	dat_world	0	-6469.7	130.3	759.4	0	
+patrol_dat_8803	patrol_dat_8800		DATHOMIR	dat_world	0	-6420.7	130	762.2	0	
+patrol_dat_8804	patrol_dat_8800		DATHOMIR	dat_world	0	-6381.5	130	752.3	0	
+patrol_dat_8805	patrol_dat_8800		DATHOMIR	dat_world	0	-6374.9	132.7	718.1	0	
+patrol_dat_8806	patrol_dat_8800		DATHOMIR	dat_world	0	-6345.8	133.5	707.6	0	
+patrol_dat_8807	patrol_dat_8800		DATHOMIR	dat_world	0	-6318.4	132.4	707.8	0	
+patrol_dat_8808	patrol_dat_8800		DATHOMIR	dat_world	0	-6288	130.1	720.8	0	
+patrol_dat_8809	patrol_dat_8800		DATHOMIR	dat_world	0	-6286.2	130	767.4	0	
+patrol_dat_8900	patrol_dat_8900	FLIP	DATHOMIR	dat_world	0	-6279.9	130.1	784.2	0	POI - Imperial Prison - an AT-ST
+patrol_dat_8901	patrol_dat_8900		DATHOMIR	dat_world	0	-6256.7	130	825.9	0	
+patrol_dat_8902	patrol_dat_8900		DATHOMIR	dat_world	0	-6248.5	130	855.9	0	
+patrol_dat_8903	patrol_dat_8900		DATHOMIR	dat_world	0	-6225.4	130	878.1	0	
+patrol_dat_8904	patrol_dat_8900		DATHOMIR	dat_world	0	-6197.8	130	885.6	0	
+patrol_dat_8905	patrol_dat_8900		DATHOMIR	dat_world	0	-6175.3	130.1	906.2	0	
+patrol_dat_8906	patrol_dat_8900		DATHOMIR	dat_world	0	-6145.6	130.1	942.1	0	
+patrol_dat_8907	patrol_dat_8900		DATHOMIR	dat_world	0	-6129.3	130.4	950	0	
+patrol_dat_9000	patrol_dat_9000	FLIP	DATHOMIR	dat_world	0	-6109.3	130.9	964.9	0	POI - Imperial Prison - an AT-ST
+patrol_dat_9001	patrol_dat_9000		DATHOMIR	dat_world	0	-6129.7	127.1	978.3	0	
+patrol_dat_9002	patrol_dat_9000		DATHOMIR	dat_world	0	-6145.5	127.7	990	0	
+patrol_dat_9003	patrol_dat_9000		DATHOMIR	dat_world	0	-6164.3	127.2	1011	0	
+patrol_dat_9004	patrol_dat_9000		DATHOMIR	dat_world	0	-6173.8	128.2	1023.3	0	
+patrol_dat_9005	patrol_dat_9000		DATHOMIR	dat_world	0	-6202.3	129.7	1038.9	0	
+patrol_dat_9006	patrol_dat_9000		DATHOMIR	dat_world	0	-6238.4	130	1047	0	
+patrol_dat_9007	patrol_dat_9000		DATHOMIR	dat_world	0	-6263.2	130	1065.5	0	
+patrol_dat_9008	patrol_dat_9000		DATHOMIR	dat_world	0	-6295.2	130	1075.9	0	
+patrol_dat_9009	patrol_dat_9000		DATHOMIR	dat_world	0	-6323.3	130	1076.4	0	
+patrol_dat_9010	patrol_dat_9000		DATHOMIR	dat_world	0	-6357.8	130	1092.2	0	
+patrol_dat_9011	patrol_dat_9000		DATHOMIR	dat_world	0	-6396.1	130	1091	0	
+patrol_dat_9012	patrol_dat_9000		DATHOMIR	dat_world	0	-6434.2	130	1094.5	0	
+patrol_dat_9100	patrol_dat_9100	FLIP	DATHOMIR	dat_world	0	-6450.5	130	1098.5	0	POI - Imperial Prison - an AT-ST
+patrol_dat_9101	patrol_dat_9100		DATHOMIR	dat_world	0	-6480.8	130	1099	0	
+patrol_dat_9102	patrol_dat_9100		DATHOMIR	dat_world	0	-6509.9	130	1079.1	0	
+patrol_dat_9103	patrol_dat_9100		DATHOMIR	dat_world	0	-6520.7	130	1051.9	0	
+patrol_dat_9104	patrol_dat_9100		DATHOMIR	dat_world	0	-6529.5	130	1028.4	0	
+patrol_dat_9105	patrol_dat_9100		DATHOMIR	dat_world	0	-6553	130	1005.3	0	
+patrol_dat_9106	patrol_dat_9100		DATHOMIR	dat_world	0	-6566.5	130	976.8	0	
+patrol_dat_9107	patrol_dat_9100		DATHOMIR	dat_world	0	-6560.4	130	942.9	0	
+patrol_dat_9108	patrol_dat_9100		DATHOMIR	dat_world	0	-6534.1	130	913.3	0	
+patrol_dat_9109	patrol_dat_9100		DATHOMIR	dat_world	0	-6521.8	130	881.3	0	
+patrol_dat_9110	patrol_dat_9100		DATHOMIR	dat_world	0	-6511.8	130	855.9	0	
+patrol_dat_9111	patrol_dat_9100		DATHOMIR	dat_world	0	-6521.6	130	826.1	0	
+patrol_dat_9112	patrol_dat_9100		DATHOMIR	dat_world	0	-6523.8	130	806.8	0	
+patrol_dat_9200	patrol_dat_9200	FLIP	DATHOMIR	dat_world	0	-6164.6	128	974.9	0	Imperial Prison - an Elite Novatrooper
+patrol_dat_9201	patrol_dat_9200		DATHOMIR	dat_world	0	-6171.1	128	994	0	
+patrol_dat_9202	patrol_dat_9200		DATHOMIR	dat_world	0	-6185	128	1012.5	0	
+patrol_dat_9203	patrol_dat_9200		DATHOMIR	dat_world	0	-6200.7	128	1023	0	
+patrol_dat_9204	patrol_dat_9200		DATHOMIR	dat_world	0	-6224.9	128	1028.7	0	
+patrol_dat_9205	patrol_dat_9200		DATHOMIR	dat_world	0	-6249.9	128	1029	0	
+patrol_dat_9206	patrol_dat_9200		DATHOMIR	dat_world	0	-6259.8	128	1033.1	0	
+patrol_dat_9207	patrol_dat_9200		DATHOMIR	dat_world	0	-6279.2	128	1056.1	0	
+patrol_dat_9208	patrol_dat_9200		DATHOMIR	dat_world	0	-6303.8	128	1061.7	0	
+patrol_dat_9209	patrol_dat_9200		DATHOMIR	dat_world	0	-6330.2	128	1060.2	0	
+patrol_dat_9210	patrol_dat_9200		DATHOMIR	dat_world	0	-6359.2	128	1073.4	0	
+patrol_dat_9211	patrol_dat_9200		DATHOMIR	dat_world	0	-6395.1	128	1073	0	
+patrol_dat_9212	patrol_dat_9200		DATHOMIR	dat_world	0	-6416.1	128	1067.1	0	
+patrol_dat_9213	patrol_dat_9200		DATHOMIR	dat_world	0	-6436.1	128	1076.3	0	
+patrol_dat_9214	patrol_dat_9200		DATHOMIR	dat_world	0	-6454.6	128	1082.5	0	
+patrol_dat_9215	patrol_dat_9200		DATHOMIR	dat_world	0	-6470.3	128	1084.2	0	
+patrol_dat_9216	patrol_dat_9200		DATHOMIR	dat_world	0	-6488.1	128	1076.9	0	
+patrol_dat_9217	patrol_dat_9200		DATHOMIR	dat_world	0	-6499.1	128	1062.2	0	
+patrol_dat_9218	patrol_dat_9200		DATHOMIR	dat_world	0	-6504.1	128	1045.7	0	
+patrol_dat_9219	patrol_dat_9200		DATHOMIR	dat_world	0	-6506.4	128	1019.1	0	
+patrol_dat_9220	patrol_dat_9200		DATHOMIR	dat_world	0	-6530.4	128	1003	0	
+patrol_dat_9221	patrol_dat_9200		DATHOMIR	dat_world	0	-6541.4	128	985.2	0	
+patrol_dat_9222	patrol_dat_9200		DATHOMIR	dat_world	0	-6546.7	128	968.7	0	
+patrol_dat_9223	patrol_dat_9200		DATHOMIR	dat_world	0	-6539.9	128	949.5	0	
+patrol_dat_9224	patrol_dat_9200		DATHOMIR	dat_world	0	-6506.4	128	919.4	0	
+patrol_dat_9225	patrol_dat_9200		DATHOMIR	dat_world	0	-6501.3	128	884.7	0	
+patrol_dat_9226	patrol_dat_9200		DATHOMIR	dat_world	0	-6485.2	128	859.5	0	
+patrol_dat_9227	patrol_dat_9200		DATHOMIR	dat_world	0	-6500.4	128	831.6	0	
+patrol_dat_9228	patrol_dat_9200		DATHOMIR	dat_world	0	-6502.1	128	804.4	0	
+patrol_dat_9229	patrol_dat_9200		DATHOMIR	dat_world	0	-6487.1	128	784.1	0	
+patrol_dat_9230	patrol_dat_9200		DATHOMIR	dat_world	0	-6464.1	128	774.5	0	
+patrol_dat_9231	patrol_dat_9200		DATHOMIR	dat_world	0	-6445.2	128	778.5	0	
+patrol_dat_9300	patrol_dat_9300	FLIP	DATHOMIR	dat_world	0	-6164.8	128	971.7	0	Imperial Prison - an Elite Novatrooper
+patrol_dat_9301	patrol_dat_9300		DATHOMIR	dat_world	0	-6166.4	128	956.2	0	
+patrol_dat_9302	patrol_dat_9300		DATHOMIR	dat_world	0	-6179.5	128	923.8	0	
+patrol_dat_9303	patrol_dat_9300		DATHOMIR	dat_world	0	-6197.2	128	910.5	0	
+patrol_dat_9304	patrol_dat_9300		DATHOMIR	dat_world	0	-6229.2	128	900.4	0	
+patrol_dat_9305	patrol_dat_9300		DATHOMIR	dat_world	0	-6246.6	128	891.5	0	
+patrol_dat_9306	patrol_dat_9300		DATHOMIR	dat_world	0	-6269	128	867.7	0	
+patrol_dat_9307	patrol_dat_9300		DATHOMIR	dat_world	0	-6273.8	128	835.4	0	
+patrol_dat_9308	patrol_dat_9300		DATHOMIR	dat_world	0	-6287.5	128	814.6	0	
+patrol_dat_9309	patrol_dat_9300		DATHOMIR	dat_world	0	-6303.7	128	801.3	0	
+patrol_dat_9310	patrol_dat_9300		DATHOMIR	dat_world	0	-6336.5	128	799.2	0	
