@@ -399,7 +399,7 @@ patrol_tal_5806	patrol_tal_5800		TALUS	tal_world	0	4255.6	49.0	4699.3	0
 patrol_tal_5807	patrol_tal_5800		TALUS	tal_world	0	4247.7	49.5	4714.4	0	
 patrol_tal_5808	patrol_tal_5800		TALUS	tal_world	0	4242.7	49.9	4728.8	0	
 patrol_tal_5809	patrol_tal_5800		TALUS	tal_world	0	4243.6	49.2	4752.1	0	
-patrol_tal_5900	patrol_tal_5900	FLIP	TALUS	tal_world	0	4564.8	2.0	5483.4	0	rebel_patrol_8_10050445
+patrol_tal_5900	patrol_tal_5900	LOOP	TALUS	tal_world	0	4564.8	2.0	5483.4	0	Nashal - an EG-6 power droid
 patrol_tal_5901	patrol_tal_5900		TALUS	tal_world	0	4554.4	2.0	5440.4	0	
 patrol_tal_5902	patrol_tal_5900		TALUS	tal_world	0	4469.4	2.0	5461.3	0	
 patrol_tal_5903	patrol_tal_5900		TALUS	tal_world	0	4415.7	2.0	5447.5	0	
@@ -434,7 +434,7 @@ patrol_tal_6018	patrol_tal_6000		TALUS	tal_world	0	4259.5	49.4	4761.8	0
 patrol_tal_6019	patrol_tal_6000		TALUS	tal_world	0	4268.6	49.4	4756.3	0	
 patrol_tal_6020	patrol_tal_6000		TALUS	tal_world	0	4270.3	49.4	4746.1	0	
 patrol_tal_6021	patrol_tal_6000		TALUS	tal_world	0	4269.5	49.4	4735.0	0	
-patrol_tal_6100	patrol_tal_6100	FLIP	TALUS	tal_world	0	4386.0	2.0	5268.6	0	rebel_patrol_3_10050230
+patrol_tal_6100	patrol_tal_6100	FLIP	TALUS	tal_world	0	4386.0	2.0	5268.6	0	Nashal - a settler
 patrol_tal_6101	patrol_tal_6100		TALUS	tal_world	0	4343.0	2.0	5301.1	0	
 patrol_tal_6102	patrol_tal_6100		TALUS	tal_world	0	4369.0	2.0	5333.1	0	
 patrol_tal_6103	patrol_tal_6100		TALUS	tal_world	0	4383.1	2.0	5396.3	0	
@@ -462,7 +462,7 @@ patrol_tal_6303	patrol_tal_6300		TALUS	tal_world	0	4295.6	49.4	4762.8	0
 patrol_tal_6304	patrol_tal_6300		TALUS	tal_world	0	4283.2	49.4	4763.6	0	
 patrol_tal_6305	patrol_tal_6300		TALUS	tal_world	0	4267.8	49.4	4763.7	0	
 patrol_tal_6306	patrol_tal_6300		TALUS	tal_world	0	4261.3	49.4	4766.9	0	
-patrol_tal_6400	patrol_tal_6400	FLIP	TALUS	tal_world	0	4501.6	2.0	5266.2	0	rebel_patrol_7_10050378
+patrol_tal_6400	patrol_tal_6400	FLIP	TALUS	tal_world	0	4501.6	2.0	5266.2	0	Nashal - an artisan
 patrol_tal_6401	patrol_tal_6400		TALUS	tal_world	0	4550.6	2.0	5305.1	0	
 patrol_tal_6402	patrol_tal_6400		TALUS	tal_world	0	4551.9	2.0	5336.6	0	
 patrol_tal_6403	patrol_tal_6400		TALUS	tal_world	0	4551.3	2.0	5311.5	0	
@@ -495,7 +495,7 @@ patrol_tal_6800	patrol_tal_6800	FLIP	TALUS	tal_world	0	4298.8	49.4	4728.2	0	Talu
 patrol_tal_6801	patrol_tal_6800		TALUS	tal_world	0	4296.0	49.4	4723.0	0	
 patrol_tal_6802	patrol_tal_6800		TALUS	tal_world	0	4277.3	49.4	4724.6	0	
 patrol_tal_6803	patrol_tal_6800		TALUS	tal_world	0	4268.7	49.4	4710.0	0	
-patrol_tal_6900	patrol_tal_6900	FLIP	TALUS	tal_world	0	4398.5	2.0	5016.8	0	rebel_patrol_2_10050164
+patrol_tal_6900	patrol_tal_6900	FLIP	TALUS	tal_world	0	4398.5	2.0	5016.8	0	Nashal - a nomad
 patrol_tal_6901	patrol_tal_6900		TALUS	tal_world	0	4363.0	2.0	5082.3	0	
 patrol_tal_6902	patrol_tal_6900		TALUS	tal_world	0	4366.2	2.0	5164.2	0	
 patrol_tal_6903	patrol_tal_6900		TALUS	tal_world	0	4360.7	2.0	5200.0	0	
@@ -632,6 +632,108 @@ patrol_tal_7806	patrol_tal_7800		TALUS	tal_imp_vs_reb_base	1	4.5	1.0	15.5	0
 patrol_tal_7807	patrol_tal_7800		TALUS	tal_imp_vs_reb_base	1	0.4	1.0	19.6	0	
 patrol_tal_7808	patrol_tal_7800		TALUS	tal_world	0	-2446.5	38.0	3739.5	0	
 patrol_tal_7809	patrol_tal_7800		TALUS	tal_world	0	-2474.1	38.0	3782.5	0	
-patrol_tal_7900	patrol_tal_7900	LOOP	TALUS	tal_world	0	-2602.6	50.6	3730.2	0	POI - Imperial vs. Rebel Battle - a Rebel trooper
-patrol_tal_7901	patrol_tal_7900		TALUS	tal_world	0	-2541.2	38.0	3740.4	0	
-patrol_tal_7902	patrol_tal_7900		TALUS	tal_world	0	-2431.6	38.0	3768.4	0	
+patrol_tal_7900	patrol_tal_7900	LOOP	TALUS	tal_world	0	-2185.2	82.6	3549.9	0	POI - Imperial vs. Rebel Battle - 
+patrol_tal_7901	patrol_tal_7900		TALUS	tal_world	0	-2208.7	88.4	3535.8	-120	
+patrol_tal_7902	patrol_tal_7900		TALUS	tal_world	0	-2232.0	94.7	3527.0	-101	
+patrol_tal_7903	patrol_tal_7900		TALUS	tal_world	0	-2247.1	93.6	3536.6	-20	
+patrol_tal_7904	patrol_tal_7900		TALUS	tal_world	0	-2248.2	96.1	3559.9	-14	
+patrol_tal_7905	patrol_tal_7900		TALUS	tal_world	0	-2251.1	74.8	3592.0	-6	
+patrol_tal_7906	patrol_tal_7900		TALUS	tal_world	0	-2259.0	58.1	3616.1	-24	
+patrol_tal_7907	patrol_tal_7900		TALUS	tal_world	0	-2270.8	43.2	3640.6	-20	
+patrol_tal_7908	patrol_tal_7900		TALUS	tal_world	0	-2282.0	38.0	3672.0	-44	
+patrol_tal_7909	patrol_tal_7900		TALUS	tal_world	0	-2317.1	38.0	3685.4	-69	
+patrol_tal_7910	patrol_tal_7900		TALUS	tal_world	0	-2374.6	38.0	3702.2	-77	
+patrol_tal_7911	patrol_tal_7900		TALUS	tal_world	0	-2403.6	38.0	3738.8	-38	
+patrol_tal_7912	patrol_tal_7900		TALUS	tal_world	0	-2427.3	38.0	3765.9	-55	
+patrol_tal_7913	patrol_tal_7900		TALUS	tal_world	0	-2459.0	38.0	3764.9	148	
+patrol_tal_8000	patrol_tal_8000	FLIP	TALUS	tal_world	0	-2232.2	57.7	3900.8	0	POI - Imperial vs. Rebel Battle - 
+patrol_tal_8001	patrol_tal_8000		TALUS	tal_world	0	-2245.4	61.5	3891.4	-130	
+patrol_tal_8002	patrol_tal_8000		TALUS	tal_world	0	-2263.8	62.0	3887.6	-101	
+patrol_tal_8003	patrol_tal_8000		TALUS	tal_world	0	-2283.7	61.5	3883.8	-103	
+patrol_tal_8004	patrol_tal_8000		TALUS	tal_world	0	-2321.5	50.7	3870.4	-124	
+patrol_tal_8005	patrol_tal_8000		TALUS	tal_world	0	-2356.8	38.6	3840.3	-131	
+patrol_tal_8006	patrol_tal_8000		TALUS	tal_world	0	-2388.1	38.0	3813.2	-130	
+patrol_tal_8007	patrol_tal_8000		TALUS	tal_world	0	-2415.6	38.0	3799.1	-116	
+patrol_tal_8008	patrol_tal_8000		TALUS	tal_world	0	-2445.0	38.0	3766.7	-139	
+patrol_tal_8009	patrol_tal_8000		TALUS	tal_world	0	-2469.1	38.0	3728.9	-156	
+patrol_tal_8010	patrol_tal_8000		TALUS	tal_world	0	-2465.6	38.0	3695.1	151	
+patrol_tal_8011	patrol_tal_8000		TALUS	tal_world	0	-2422.0	38.0	3661.8	121	
+patrol_tal_8100	patrol_tal_8100	FLIP	TALUS	tal_world	0	-2564.4	21.3	3938.8	0	POI - Imperial vs. Rebel Battle - 
+patrol_tal_8101	patrol_tal_8100		TALUS	tal_world	0	-2541.0	26.4	3924.4	113	
+patrol_tal_8102	patrol_tal_8100		TALUS	tal_world	0	-2520.1	34.3	3917.0	134	
+patrol_tal_8103	patrol_tal_8100		TALUS	tal_world	0	-2504.3	36.5	3906.9	153	
+patrol_tal_8104	patrol_tal_8100		TALUS	tal_world	0	-2494.1	39.5	3886.6	161	
+patrol_tal_8105	patrol_tal_8100		TALUS	tal_world	0	-2489.5	35.1	3854.6	172	
+patrol_tal_8106	patrol_tal_8100		TALUS	tal_world	0	-2491.0	37.7	3818.5	179	
+patrol_tal_8107	patrol_tal_8100		TALUS	tal_world	0	-2484.2	38.0	3769.7	164	
+patrol_tal_8108	patrol_tal_8100		TALUS	tal_world	0	-2470.7	38.0	3725.8	160	
+patrol_tal_8109	patrol_tal_8100		TALUS	tal_world	0	-2442.0	38.0	3675.7	139	
+patrol_tal_8110	patrol_tal_8100		TALUS	tal_world	0	-2411.9	38.0	3682.8	63	
+patrol_tal_8111	patrol_tal_8100		TALUS	tal_world	0	-2380.8	38.0	3708.4	41	
+patrol_tal_8112	patrol_tal_8100		TALUS	tal_world	0	-2419.4	38.0	3764.9	-36	
+patrol_tal_8200	patrol_tal_8200	FLIP	TALUS	tal_world	0	-2676.4	57.8	3625.4	0	POI - Imperial vs. Rebel Battle - 
+patrol_tal_8201	patrol_tal_8200		TALUS	tal_world	0	-2674.0	60.8	3644.9	45	
+patrol_tal_8202	patrol_tal_8200		TALUS	tal_world	0	-2649.4	54.4	3657.2	64	
+patrol_tal_8203	patrol_tal_8200		TALUS	tal_world	0	-2625.9	51.9	3671.8	57	
+patrol_tal_8204	patrol_tal_8200		TALUS	tal_world	0	-2599.9	42.8	3680.4	71	
+patrol_tal_8205	patrol_tal_8200		TALUS	tal_world	0	-2570.5	39.2	3689.0	76	
+patrol_tal_8206	patrol_tal_8200		TALUS	tal_world	0	-2541.9	38.1	3703.8	58	
+patrol_tal_8207	patrol_tal_8200		TALUS	tal_world	0	-2504.5	38.0	3731.1	53	
+patrol_tal_8208	patrol_tal_8200		TALUS	tal_world	0	-2463.7	38.0	3753.5	63	
+patrol_tal_8209	patrol_tal_8200		TALUS	tal_world	0	-2423.5	38.0	3757.5	105	
+patrol_tal_8210	patrol_tal_8200		TALUS	tal_world	0	-2399.9	38.0	3726.0	145	
+patrol_tal_8211	patrol_tal_8200		TALUS	tal_world	0	-2392.9	38.0	3692.5	-126	
+patrol_tal_8212	patrol_tal_8200		TALUS	tal_world	0	-2425.1	38.0	3672.9	-119	
+patrol_tal_8213	patrol_tal_8200		TALUS	tal_world	0	-2464.3	38.0	3689.5	-59	
+patrol_tal_8300	patrol_tal_8300	FLIP	TALUS	tal_world	0	540.0	6.5	-2984.9	0	Dearic - a traveller
+patrol_tal_8301	patrol_tal_8300		TALUS	tal_world	0	546.7	6.5	-2983.9	134	
+patrol_tal_8302	patrol_tal_8300		TALUS	tal_world	0	552.5	6.5	-3002.5	137	
+patrol_tal_8303	patrol_tal_8300		TALUS	tal_world	0	534.7	6.5	-3009.2	-156	
+patrol_tal_8304	patrol_tal_8300		TALUS	tal_world	0	529.4	6.5	-3015.9	-134	
+patrol_tal_8305	patrol_tal_8300		TALUS	tal_world	0	522.3	6.5	-3009.2	-92	
+patrol_tal_8306	patrol_tal_8300		TALUS	tal_world	0	504.8	6.0	-3013.2	-97	
+patrol_tal_8307	patrol_tal_8300		TALUS	tal_world	0	466.9	6.0	-3017.9	-149	
+patrol_tal_8308	patrol_tal_8300		TALUS	tal_world	0	447.6	6.0	-3045.3	-136	
+patrol_tal_8309	patrol_tal_8300		TALUS	tal_world	0	415.8	6.0	-3044.8	-81	
+patrol_tal_8310	patrol_tal_8300		TALUS	tal_world	0	411.6	6.0	-3036.6	-20	
+patrol_tal_8311	patrol_tal_8300		TALUS	tal_world	0	407.6	6.0	-2996.4	-24	
+patrol_tal_8312	patrol_tal_8300		TALUS	tal_world	0	391.7	6.0	-2971.9	-36	
+patrol_tal_8313	patrol_tal_8300		TALUS	tal_world	0	363.4	6.0	-2959.1	-65	
+patrol_tal_8314	patrol_tal_8300		TALUS	tal_world	0	341.6	6.0	-2944.3	-49	
+patrol_tal_8315	patrol_tal_8300		TALUS	tal_world	0	326.3	6.0	-2931.9	-93	
+patrol_tal_8316	patrol_tal_8300		TALUS	tal_dearic_starport	1	2.2	0.6	77.2	126	
+patrol_tal_8317	patrol_tal_8300		TALUS	tal_dearic_starport	1	5.6	0.6	77.1	72	
+patrol_tal_8318	patrol_tal_8300		TALUS	tal_dearic_starport	3	13.5	0.6	78.6	126	
+patrol_tal_8319	patrol_tal_8300		TALUS	tal_dearic_starport	4	13.8	0.6	68.2	179	
+patrol_tal_8320	patrol_tal_8300		TALUS	tal_dearic_starport	4	10.5	0.6	53.0	154	
+patrol_tal_8321	patrol_tal_8300		TALUS	tal_dearic_starport	4	16.1	0.6	59.8	64	
+patrol_tal_8322	patrol_tal_8300		TALUS	tal_dearic_starport	5	27.7	0.6	61.4	90	
+patrol_tal_8323	patrol_tal_8300		TALUS	tal_dearic_starport	6	33.7	0.6	56.7	137	
+patrol_tal_8324	patrol_tal_8300		TALUS	tal_dearic_starport	7	38.2	0.6	47.8	145	
+patrol_tal_8325	patrol_tal_8300		TALUS	tal_dearic_starport	7	44.3	0.6	40.6	139	
+patrol_tal_8326	patrol_tal_8300		TALUS	tal_dearic_starport	7	49.3	-0.5	32.8	151	
+patrol_tal_8327	patrol_tal_8300		TALUS	tal_dearic_starport	13	53.1	1.0	24.5	156	
+patrol_tal_8328	patrol_tal_8300		TALUS	tal_dearic_starport	16	55.8	1.0	15.0	171	
+patrol_tal_8329	patrol_tal_8300		TALUS	tal_world	0	255.3	6.0	-2978.7	-24	
+patrol_tal_8330	patrol_tal_8300		TALUS	tal_world	0	245.8	6.0	-2957.5	-34	
+patrol_tal_8331	patrol_tal_8300		TALUS	tal_world	0	235.8	6.0	-2942.7	-33	
+patrol_tal_8400	patrol_tal_8400	FLIP	TALUS	tal_dearic_starport	7	44.8	0.6	46.7	0	Dearic - an Astromech waiter
+patrol_tal_8401	patrol_tal_8400		TALUS	tal_dearic_starport	7	41.6	0.6	45.0	-48	
+patrol_tal_8402	patrol_tal_8400		TALUS	tal_dearic_starport	6	37.1	0.6	51.5	-27	
+patrol_tal_8403	patrol_tal_8400		TALUS	tal_dearic_starport	6	33.4	0.6	59.4	-48	
+patrol_tal_8404	patrol_tal_8400		TALUS	tal_dearic_starport	5	27.8	0.6	62.7	-77	
+patrol_tal_8405	patrol_tal_8400		TALUS	tal_dearic_starport	4	17.5	0.6	61.5	-97	
+patrol_tal_8406	patrol_tal_8400		TALUS	tal_dearic_starport	4	6.5	0.6	60.1	-92	
+patrol_tal_8407	patrol_tal_8400		TALUS	tal_dearic_starport	4	-7.4	0.6	60.0	-91	
+patrol_tal_8408	patrol_tal_8400		TALUS	tal_dearic_starport	8	-18.0	0.6	60.7	-88	
+patrol_tal_8409	patrol_tal_8400		TALUS	tal_dearic_starport	8	-22.1	1.6	60.6	-89	
+patrol_tal_8410	patrol_tal_8400		TALUS	tal_dearic_starport	9	-26.6	1.6	64.2	-69	
+patrol_tal_8411	patrol_tal_8400		TALUS	tal_dearic_starport	9	-27.8	1.6	60.8	-130	
+patrol_tal_8412	patrol_tal_8400		TALUS	tal_dearic_starport	9	-30.7	1.6	55.3	168	
+patrol_tal_8413	patrol_tal_8400		TALUS	tal_dearic_starport	9	-28.4	1.6	52	146	
+patrol_tal_8414	patrol_tal_8400		TALUS	tal_dearic_starport	9	-31.7	1.6	60	-45	
+patrol_tal_8415	patrol_tal_8400		TALUS	tal_dearic_starport	9	-35.3	1.6	63.7	-44	
+patrol_tal_8416	patrol_tal_8400		TALUS	tal_dearic_starport	9	-29.6	1.6	50.2	152	
+patrol_tal_8417	patrol_tal_8400		TALUS	tal_dearic_starport	9	-29.1	1.6	48.5	-97	
+patrol_tal_8418	patrol_tal_8400		TALUS	tal_dearic_starport	9	-31.7	1.6	48.3	-55	
+patrol_tal_8419	patrol_tal_8400		TALUS	tal_dearic_starport	9	-33	1.6	49.6	-51	
