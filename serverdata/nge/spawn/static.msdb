@@ -8,6 +8,7 @@ common_endor.sdb	TRUE
 common_kashyyyk_dead_forest.sdb	TRUE
 common_kashyyyk_hunting.sdb	TRUE
 common_kashyyyk_main.sdb	TRUE
+common_kashyyyk_rryatt.sdb	TRUE
 common_kashyyyk_slaver.sdb	TRUE
 common_lok.sdb	TRUE
 common_mustafar.sdb	TRUE
@@ -24,10 +25,6 @@ dungeon_kashyyyk_avatar.sdb	TRUE
 dungeon_kashyyyk_bocctyyy.sdb	FALSE
 dungeon_kashyyyk_hracca.sdb	TRUE
 dungeon_kashyyyk_myyydril.sdb	TRUE
-dungeon_kashyyyk_rryatt_1_2.sdb	FALSE
-dungeon_kashyyyk_rryatt_3.sdb	FALSE
-dungeon_kashyyyk_rryatt_4.sdb	FALSE
-dungeon_kashyyyk_rryatt_5.sdb	FALSE
 dungeon_meatlump.sdb	FALSE
 dungeon_mustafar_orf.sdb	FALSE
 dungeon_nova_orion.sdb	TRUE
