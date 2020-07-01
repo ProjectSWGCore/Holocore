@@ -10,6 +10,7 @@ patrol_kashyyyk_main.sdb	TRUE
 patrol_kashyyyk_dead_forest.sdb	TRUE
 patrol_kashyyyk_hunting.sdb	TRUE
 patrol_kashyyyk_rryatt.sdb	TRUE
+patrol_kashyyyk_slaver.sdb	TRUE
 patrol_lok.sdb	TRUE
 patrol_mustafar.sdb	FALSE
 patrol_naboo.sdb	TRUE

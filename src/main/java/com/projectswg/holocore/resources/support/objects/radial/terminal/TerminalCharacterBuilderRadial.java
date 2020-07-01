@@ -1212,6 +1212,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Kashyyyk - Rryatt Trail, 3");
 		listBox.addListItem("Kashyyyk - Rryatt Trail, 4");
 		listBox.addListItem("Kashyyyk - Rryatt Trail, 5");
+		listBox.addListItem("Kashyyyk - Slaver");
 		listBox.addListItem("Lok - Droid Cave");
 		listBox.addListItem("Lok - Great Maze of Lok");
 		listBox.addListItem("Lok - Imperial Outpost");
@@ -1274,42 +1275,43 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 17: handleKasRryatt3(player); break;
 			case 18: handleKasRryatt4(player); break;
 			case 19: handleKasRryatt5(player); break;
+			case 20: handleKasSlaver(player); break;
 		// Planet: Lok
-			case 20: handleLokDroidCave(player); break;
-			case 21: handleLokGreatMaze(player); break;
-			case 22: handleLokImperialOutpost(player); break;
-			case 23: handleLokKimogilaTown(player); break;
+			case 21: handleLokDroidCave(player); break;
+			case 22: handleLokGreatMaze(player); break;
+			case 23: handleLokImperialOutpost(player); break;
+			case 24: handleLokKimogilaTown(player); break;
 		// Planet: Naboo
-			case 24: handleNabEmperorsRetreat(player); break;
-			case 25: handleNabWeaponFac(player); break;
+			case 25: handleNabEmperorsRetreat(player); break;
+			case 26: handleNabWeaponFac(player); break;
 		// Planet: Rori
-			case 26: handleRorHyperdriveFacility(player); break;
+			case 27: handleRorHyperdriveFacility(player); break;
 		// Planet: Talus
-			case 27: handleTalDetainmentCenter(player); break;
+			case 28: handleTalDetainmentCenter(player); break;
 		// Planet: Tatooine
-			case 28: handleTatFortTusken(player); break;
-			case 29: handleTatImperialOasis(player); break;
-			case 30: handleTatKraytGrave(player); break;
-			case 31: handleTatMosEisley(player); break;
-			case 32: handleTatMosTaike(player); break;
-			case 33: handleTatSquillCave(player); break;
+			case 29: handleTatFortTusken(player); break;
+			case 30: handleTatImperialOasis(player); break;
+			case 31: handleTatKraytGrave(player); break;
+			case 32: handleTatMosEisley(player); break;
+			case 33: handleTatMosTaike(player); break;
+			case 34: handleTatSquillCave(player); break;
 		// Planet: Yavin 4
-			case 34: handleYavBlueleafTemple(player); break;
-			case 35: handleYavDarkEnclave(player); break;
-			case 36: handleYavExarKun(player); break;
-			case 37: handleYavGeoCave(player); break;
-			case 38: handleYavLightEnclave(player); break;
+			case 35: handleYavBlueleafTemple(player); break;
+			case 36: handleYavDarkEnclave(player); break;
+			case 37: handleYavExarKun(player); break;
+			case 38: handleYavGeoCave(player); break;
+			case 39: handleYavLightEnclave(player); break;
 		// Space Stations:
-			case 39: handleNovaOrion(player); break;
-			case 40: handleNPEStation(player); break;
+			case 40: handleNovaOrion(player); break;
+			case 41: handleNPEStation(player); break;
 		// Dungeons:
-			case 41: handleHeroicEK(player); break;
-			case 42: handleHeroicISD(player); break;
-			case 43: handleNPEDungeon(player); break;
-			case 44: handleMyyydrilCave(player); break;
-			case 45: handleAvatarPlatform(player); break;
+			case 42: handleHeroicEK(player); break;
+			case 43: handleHeroicISD(player); break;
+			case 44: handleNPEDungeon(player); break;
+			case 45: handleMyyydrilCave(player); break;
+			case 46: handleAvatarPlatform(player); break;
 		// Planet: Character Farm
-			case 46: handleChfStatic(player); break;
+			case 47: handleChfStatic(player); break;
 
 		}
 	}
@@ -1389,6 +1391,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleKasRryatt4(Player player) {teleportTo(player, 768d, 141d, -439d, Terrain.KASHYYYK_RRYATT_TRAIL);}
 
 	private static void handleKasRryatt5(Player player) {teleportTo(player, 2495d, -24d, -924d, Terrain.KASHYYYK_RRYATT_TRAIL);}
+
+	private static void handleKasSlaver(Player player) {teleportTo(player, 561.8d, 22.8d, 1552.8d, Terrain.KASHYYYK_NORTH_DUNGEONS);}
 
 // Planet: Lok
 	

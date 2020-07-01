@@ -1,41 +1,271 @@
-scene	area	clone_scene	clone_area	restrict_bind_facility
-TEXT	TEXT	TEXT	TEXT	INTEGER
-tatooine	-	tatooine	-	0
-naboo	-	naboo	-	0
-rori	-	rori	-	0
-corellia	-	corellia	-	0
-talus	-	talus	-	0
-lok	-	lok	-	0
-yavin4	-	yavin4	-	0
-endor	-	endor	-	0
-dantooine	-	dantooine	-	0
-dathomir	-	dathomir	-	0
-kashyyyk_main	-	kashyyyk_main	-	0
-kashyyyk_hunting	-	kashyyyk_hunting	-	0
-kashyyyk_hunting	-	kashyyyk_main	-	0
-kashyyyk_dead_forest	-	kashyyyk_dead_forest	-	0
-kashyyyk_dead_forest	-	kashyyyk_main	-	0
-kashyyyk_rryatt_trail	-	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2	0
-kashyyyk_rryatt_trail	-	kashyyyk_main	-	0
-kashyyyk_north_dungeons	arena	kashyyyk_dead_forest	-	0
-kashyyyk_north_dungeons	slaver	kashyyyk_north_dungeons	slaver	0
-kashyyyk_north_dungeons	slaver	kashyyyk_main	-	0
-kashyyyk_south_dungeons	hracca	kashyyyk_south_dungeons	hracca	0
-kashyyyk_south_dungeons	hracca	kashyyyk_hunting	-	0
-kashyyyk_south_dungeons	bocctyyy	kashyyyk_south_dungeons	bocctyyy	0
-kashyyyk_south_dungeons	bocctyyy	kashyyyk_hunting	-	0
-kashyyyk_pob_dungeons	avatar_platform	kashyyyk_pob_dungeons	avatar_platform	0
-kashyyyk_pob_dungeons	myyydril_caverns	kashyyyk_pob_dungeons	myyydril_caverns	0
-kashyyyk_pob_dungeons	myyydril_caverns	kashyyyk_dead_forest	-	0
-mustafar	-	mustafar	-	0
-dungeon1	-	dungeon1	-	0
-dungeon1	npe_shared_station	dungeon1	npe_shared_station	1
-dungeon1	npe_dungeon	dungeon1	npe_dungeon	1
-dungeon1	heroic_axkva_min	dathomir	-	0
-dungeon1	heroic_ig88	lok	-	0
-adventure1	heroic_tusken_army	tatooine	-	0
-dungeon1	heroic_star_destroyer	dungeon1	heroic_star_destroyer	0
-dungeon1	nova_orion_station	dungeon1	nova_orion_station	0
-dungeon1	heroic_exar_kun	yavin4	-	0
-dungeon1	mtp_hideout_instance	corellia	-	0
-adventure2	echo_base	adventure2	echo_base	0
+terrain	x1	z1	x2	z2	area	comment	target_terrain	building_id	cell	x	y	z
+TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	TEXT	TEXT	INTEGER	REAL	REAL	REAL
+KASHYYYK_MAIN	-4096	-4096	4096	4096	kashyyyk_main	Kachirho	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYY_DEAD_FOREST	-2048	-2048	2048	2048	kashyyyk_dead_forest	Dead Forest	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
+KASHYYY_HUNTING	-2048	-2048	2048	2048	kashyyyk_hunting	Hunting Grounds	KASHYYYK_HUNTING		0	560.9	23.5	520.6
+KASHYYYK_NORTH_DUNGEONS	-3840	2816	-2816	3840	slaver	Slaver - 1	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	-2560	2816	-1536	3840	slaver	Slaver - 2	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	-1280	2816	-256	3840	slaver	Slaver - 3	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	0	2816	1024	3840	slaver	Slaver - 4	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	1280	2816	2304	3840	slaver	Slaver - 5	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	2560	2816	3584	3840	slaver	Slaver - 6	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	-3840	1536	-2816	2560	slaver	Slaver - 7	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	-2560	1536	-1536	2560	slaver	Slaver - 8	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	-1280	1536	-256	2560	slaver	Slaver - 9	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	0	1536	1024	2560	slaver	Slaver - 10	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	1280	1536	2304	2560	slaver	Slaver - 11	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	2560	1536	3584	2560	slaver	Slaver - 12	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_NORTH_DUNGEONS	88	-2192	936	-1392	arena	Arena - 1	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
+KASHYYYK_NORTH_DUNGEONS	1352	-2192	2200	-1392	arena	Arena - 2	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
+KASHYYYK_NORTH_DUNGEONS	88	-3480	936	-2680	arena	Arena - 3	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
+KASHYYYK_NORTH_DUNGEONS	1352	-3480	2200	-2680	arena	Arena - 4	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
+KASHYYYK_POB_DUNGEONS	1024	1024	2048	2048	avatar_platform	Avatar - 1	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_1	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	2048	1024	3072	2048	avatar_platform	Avatar - 2	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_2	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	3072	1024	4096	2048	avatar_platform	Avatar - 3	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_3	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	4096	1024	5120	2048	avatar_platform	Avatar - 4	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_4	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	5120	1024	6144	2048	avatar_platform	Avatar - 5	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_5	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	1024	2048	2048	3072	avatar_platform	Avatar - 6	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_6	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	2048	2048	3072	3072	avatar_platform	Avatar - 7	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_7	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	3072	2048	4096	3072	avatar_platform	Avatar - 8	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_8	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	4096	2048	5120	3072	avatar_platform	Avatar - 9	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_9	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	5120	2048	6144	3072	avatar_platform	Avatar - 10	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_10	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-2048	1024	-1024	2048	avatar_platform	Avatar - 11	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_11	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-3072	1024	-2048	2048	avatar_platform	Avatar - 12	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_12	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-4096	1024	-3072	2048	avatar_platform	Avatar - 13	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_13	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-5120	1024	-4096	2048	avatar_platform	Avatar - 14	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_14	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-6144	1024	-5120	2048	avatar_platform	Avatar - 15	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_15	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-2048	2048	-1024	3072	avatar_platform	Avatar - 16	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_16	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-3072	2048	-2048	3072	avatar_platform	Avatar - 17	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_17	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-4096	2048	-3072	3072	avatar_platform	Avatar - 18	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_18	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-5120	2048	-4096	3072	avatar_platform	Avatar - 19	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_19	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	-6144	2048	-5120	3072	avatar_platform	Avatar - 20	KASHYYYK_POB_DUNGEONS	kas_pob_avatar_20	1	109.3	0.0	23.3
+KASHYYYK_POB_DUNGEONS	1024	-2048	2048	-1024	myyydril_caverns	Myyydril - 1	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	2048	-2048	3072	-1024	myyydril_caverns	Myyydril - 2	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_2	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	3072	-2048	4096	-1024	myyydril_caverns	Myyydril - 3	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_3	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	4096	-2048	5120	-1024	myyydril_caverns	Myyydril - 4	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_4	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	5120	-2048	6144	-1024	myyydril_caverns	Myyydril - 5	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_5	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	1024	-3072	2048	-2048	myyydril_caverns	Myyydril - 6	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_6	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	2048	-3072	3072	-2048	myyydril_caverns	Myyydril - 7	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_7	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	3072	-3072	4096	-2048	myyydril_caverns	Myyydril - 8	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_8	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	4096	-3072	5120	-2048	myyydril_caverns	Myyydril - 9	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_9	1	-1.7	-1.4	-5.4
+KASHYYYK_POB_DUNGEONS	5120	-3072	6144	-2048	myyydril_caverns	Myyydril - 10	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_10	1	-1.7	-1.4	-5.4
+KASHYYYK_RRYATT_TRAIL	-3908	3114	-2208	4614	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 1 - 1_2	KASHYYYK_RRYATT_TRAIL		0	-3775.0	169.2	3387.0
+KASHYYYK_RRYATT_TRAIL	-2208	2614	-408	4614	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 1 - 3	KASHYYYK_RRYATT_TRAIL		0	-3775.0	169.2	3387.0
+KASHYYYK_RRYATT_TRAIL	-3908	1864	-2208	3114	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 1 - 4	KASHYYYK_RRYATT_TRAIL		0	-3775.0	169.2	3387.0
+KASHYYYK_RRYATT_TRAIL	-2208	1864	-708	2614	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 1 - 5	KASHYYYK_RRYATT_TRAIL		0	-3775.0	169.2	3387.0
+KASHYYYK_RRYATT_TRAIL	444	3130	2144	4630	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 2 - 1_2	KASHYYYK_RRYATT_TRAIL		0	577.1	169.2	3402.9
+KASHYYYK_RRYATT_TRAIL	2144	2630	3944	4630	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 2 - 3	KASHYYYK_RRYATT_TRAIL		0	577.1	169.2	3402.9
+KASHYYYK_RRYATT_TRAIL	444	1880	2144	3130	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 2 - 4	KASHYYYK_RRYATT_TRAIL		0	577.1	169.2	3402.9
+KASHYYYK_RRYATT_TRAIL	2144	1880	3644	2630	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 2 - 5	KASHYYYK_RRYATT_TRAIL		0	577.1	169.2	3402.9
+KASHYYYK_RRYATT_TRAIL	-3892	-182	-2192	1318	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 3 - 1_2	KASHYYYK_RRYATT_TRAIL		0	-3758.8	169.2	90.8
+KASHYYYK_RRYATT_TRAIL	-2192	-682	-392	1318	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 3 - 3	KASHYYYK_RRYATT_TRAIL		0	-3758.8	169.2	90.8
+KASHYYYK_RRYATT_TRAIL	-3892	-1432	-2192	-182	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 3 - 4	KASHYYYK_RRYATT_TRAIL		0	-3758.8	169.2	90.8
+KASHYYYK_RRYATT_TRAIL	-2192	-1432	-692	-682	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 3 - 5	KASHYYYK_RRYATT_TRAIL		0	-3758.8	169.2	90.8
+KASHYYYK_RRYATT_TRAIL	460	-166	2160	1334	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 4 - 1_2	KASHYYYK_RRYATT_TRAIL		0	593.7	169.2	106.0
+KASHYYYK_RRYATT_TRAIL	2160	-666	3960	1334	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 4 - 3	KASHYYYK_RRYATT_TRAIL		0	593.7	169.2	106.0
+KASHYYYK_RRYATT_TRAIL	460	-1416	2160	-166	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 4 - 4	KASHYYYK_RRYATT_TRAIL		0	593.7	169.2	106.0
+KASHYYYK_RRYATT_TRAIL	2160	-1416	3660	-666	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 4 - 5	KASHYYYK_RRYATT_TRAIL		0	593.7	169.2	106.0
+KASHYYYK_RRYATT_TRAIL	-3924	-3622	-2224	-2122	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 5 - 1_2	KASHYYYK_RRYATT_TRAIL		0	-3790.6	169.2	-3349.5
+KASHYYYK_RRYATT_TRAIL	-2224	-4122	-424	-2122	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 5 - 3	KASHYYYK_RRYATT_TRAIL		0	-3790.6	169.2	-3349.5
+KASHYYYK_RRYATT_TRAIL	-3924	-4872	-2224	-3622	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 5 - 4	KASHYYYK_RRYATT_TRAIL		0	-3790.6	169.2	-3349.5
+KASHYYYK_RRYATT_TRAIL	-2224	-4872	-724	-4122	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 5 - 5	KASHYYYK_RRYATT_TRAIL		0	-3790.6	169.2	-3349.5
+KASHYYYK_RRYATT_TRAIL	428	-3606	2128	-2106	kashyyyk_rryatt_trail_lvl_1_and_2	Rryatt Trail 6 - 1_2	KASHYYYK_RRYATT_TRAIL		0	560.9	169.2	-3332.7
+KASHYYYK_RRYATT_TRAIL	2128	-4106	3928	-2106	kashyyyk_rryatt_trail_lvl_3	Rryatt Trail 6 - 3	KASHYYYK_RRYATT_TRAIL		0	560.9	169.2	-3332.7
+KASHYYYK_RRYATT_TRAIL	428	-4856	2128	-3606	kashyyyk_rryatt_trail_lvl_4	Rryatt Trail 6 - 4	KASHYYYK_RRYATT_TRAIL		0	560.9	169.2	-3332.7
+KASHYYYK_RRYATT_TRAIL	2128	-4856	3628	-4106	kashyyyk_rryatt_trail_lvl_5	Rryatt Trail 6 - 5	KASHYYYK_RRYATT_TRAIL		0	560.9	169.2	-3332.7
+KASHYYYK_SOUTH_DUNGEONS	-3968	2944	-2944	3968	hracca	Hracca - 1	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-2816	2944	-1792	3968	hracca	Hracca - 2	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-1664	2944	-640	3968	hracca	Hracca - 3	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-3968	1792	-2944	2816	hracca	Hracca - 4	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-2816	1792	-1792	2816	hracca	Hracca - 5	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-1664	1792	-640	2816	hracca	Hracca - 6	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-3968	640	-2944	1664	hracca	Hracca - 7	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-2816	640	-1792	1664	hracca	Hracca - 8	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-1664	640	-640	1664	hracca	Hracca - 9	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-3968	-512	-2944	512	hracca	Hracca - 10	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-2816	-512	-1792	512	hracca	Hracca - 11	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	-1664	-512	-640	512	hracca	Hracca - 12	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	128	-256	640	256	bocctyyy	Bocctyyy - 1	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	768	-256	1284	256	bocctyyy	Bocctyyy - 2	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	1412	-256	1924	256	bocctyyy	Bocctyyy - 3	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	2052	-256	2564	256	bocctyyy	Bocctyyy - 4	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	128	-896	640	-384	bocctyyy	Bocctyyy - 5	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	768	-896	1284	-384	bocctyyy	Bocctyyy - 6	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	1412	-896	1924	-384	bocctyyy	Bocctyyy - 7	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	2052	-896	2564	-384	bocctyyy	Bocctyyy - 8	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	128	-1536	640	-1024	bocctyyy	Bocctyyy - 9	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	768	-1536	1284	-1024	bocctyyy	Bocctyyy - 10	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	1408	-1536	1928	-1024	bocctyyy	Bocctyyy - 11	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+KASHYYYK_SOUTH_DUNGEONS	2052	-1536	2564	-1024	bocctyyy	Bocctyyy - 12	KASHYYYK_MAIN		0	-500.3	17.6	109.7
+MUSTAFAR	-6880	2848	-2304	6976	mustafar_main_nw	Mustarar - NW	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2304	2848	1120	6976	mustafar_main_ne	Mustarar - NE	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-6880	-1024	-3480	2848	mustafar_main_sw	Mustarar - SW	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-3480	-1024	1120	2848	mustafar_main_se	Mustarar - SE	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	6016	2576	7040	mustafar_volcano	Mustafar Vulcano - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	4592	2576	5616	mustafar_volcano	Mustafar Vulcano - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	3168	2576	4192	mustafar_volcano	Mustafar Vulcano - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	1744	2576	2768	mustafar_volcano	Mustafar Vulcano - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	320	2576	1344	mustafar_volcano	Mustafar Vulcano - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	1552	-1104	2576	-80	mustafar_volcano	Mustafar Vulcano - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	6014	4064	7038	mustafar_volcano	Mustafar Vulcano - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	4590	4064	5614	mustafar_volcano	Mustafar Vulcano - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	3166	4064	4190	mustafar_volcano	Mustafar Vulcano - 9	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	1742	4064	2766	mustafar_volcano	Mustafar Vulcano - 10	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	318	4064	1342	mustafar_volcano	Mustafar Vulcano - 11	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	3040	-1106	4064	-82	mustafar_volcano	Mustafar Vulcano - 12	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	5952	5072	6464	mustafar_droid_army	Mustafar Droid Army - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	5020	5072	5532	mustafar_droid_army	Mustafar Droid Army - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	4032	5072	4544	mustafar_droid_army	Mustafar Droid Army - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	3088	5072	3600	mustafar_droid_army	Mustafar Droid Army - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	2160	5072	2672	mustafar_droid_army	Mustafar Droid Army - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	1168	5072	1680	mustafar_droid_army	Mustafar Droid Army - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	192	5072	704	mustafar_droid_army	Mustafar Droid Army - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	4560	-741	5072	-229	mustafar_droid_army	Mustafar Droid Army - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	6000	6200	6500	uplink_cave	Mustafar Uplink Cave - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	5300	6200	5800	uplink_cave	Mustafar Uplink Cave - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	4600	6200	5100	uplink_cave	Mustafar Uplink Cave - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	3900	6200	4400	uplink_cave	Mustafar Uplink Cave - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	3200	6200	3700	uplink_cave	Mustafar Uplink Cave - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	2500	6200	3000	uplink_cave	Mustafar Uplink Cave - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	1800	6200	2300	uplink_cave	Mustafar Uplink Cave - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	5700	1100	6200	1600	uplink_cave	Mustafar Uplink Cave - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	6700	7000	7200	obiwan_crystal_cave	Mustafar Crystal Cave - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	6000	7000	6500	obiwan_crystal_cave	Mustafar Crystal Cave - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	5300	7000	5800	obiwan_crystal_cave	Mustafar Crystal Cave - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	4600	7000	5100	obiwan_crystal_cave	Mustafar Crystal Cave - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	3900	7000	4400	obiwan_crystal_cave	Mustafar Crystal Cave - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	3200	7000	3700	obiwan_crystal_cave	Mustafar Crystal Cave - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	2500	7000	3000	obiwan_crystal_cave	Mustafar Crystal Cave - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	1800	7000	2300	obiwan_crystal_cave	Mustafar Crystal Cave - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	1100	7000	1600	obiwan_crystal_cave	Mustafar Crystal Cave - 9	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	400	7000	900	obiwan_crystal_cave	Mustafar Crystal Cave - 10	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	-300	7000	200	obiwan_crystal_cave	Mustafar Crystal Cave - 11	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	6500	-1000	7000	-500	obiwan_crystal_cave	Mustafar Crystal Cave - 12	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-7000	-3000	-6500	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-6300	-3000	-5800	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-5600	-3000	-5100	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4900	-3000	-4400	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4200	-3000	-3700	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-3500	-3000	-3000	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2800	-3000	-2300	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2100	-3000	-1600	-2500	decrepit_droid_factory	Mustafar Decrepit DF - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-7000	-4000	-6500	-3500	working_droid_factory	Mustafar Working DF - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-6300	-4000	-5800	-3500	working_droid_factory	Mustafar Working DF - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-5600	-4000	-5100	-3500	working_droid_factory	Mustafar Working DF - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4900	-4000	-4400	-3500	working_droid_factory	Mustafar Working DF - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4200	-4000	-3700	-3500	working_droid_factory	Mustafar Working DF - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-3500	-4000	-3000	-3500	working_droid_factory	Mustafar Working DF - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2800	-4000	-2300	-3500	working_droid_factory	Mustafar Working DF - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2100	-4000	-1600	-3500	working_droid_factory	Mustafar Working DF - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-1400	-4000	-900	-3500	working_droid_factory	Mustafar Working DF - 9	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-700	-4000	-200	-3500	working_droid_factory	Mustafar Working DF - 10	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	0	-4000	500	-3500	working_droid_factory	Mustafar Working DF - 11	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	700	-4000	1200	-3500	working_droid_factory	Mustafar Working DF - 12	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-7000	-5000	-6500	-4500	old_republic_facility	Mustafar OR Facility - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-6300	-5000	-5800	-4500	old_republic_facility	Mustafar OR Facility - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-5600	-5000	-5100	-4500	old_republic_facility	Mustafar OR Facility - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4900	-5000	-4400	-4500	old_republic_facility	Mustafar OR Facility - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4200	-5000	-3700	-4500	old_republic_facility	Mustafar OR Facility - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-3500	-5000	-3000	-4500	old_republic_facility	Mustafar OR Facility - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2800	-5000	-2300	-4500	old_republic_facility	Mustafar OR Facility - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2100	-5000	-1600	-4500	old_republic_facility	Mustafar OR Facility - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-1400	-5000	-900	-4500	old_republic_facility	Mustafar OR Facility - 9	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-700	-5000	-200	-4500	old_republic_facility	Mustafar OR Facility - 10	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	0	-5000	500	-4500	old_republic_facility	Mustafar OR Facility - 11	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	700	-5000	1200	-4500	old_republic_facility	Mustafar OR Facility - 12	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-7000	-6000	-6500	-5500	sher_kar_cave	Mustafar Sher Kar - 1	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-6300	-6000	-5800	-5500	sher_kar_cave	Mustafar Sher Kar - 2	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-5600	-6000	-5100	-5500	sher_kar_cave	Mustafar Sher Kar - 3	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4900	-6000	-4400	-5500	sher_kar_cave	Mustafar Sher Kar - 4	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-4200	-6000	-3700	-5500	sher_kar_cave	Mustafar Sher Kar - 5	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-3500	-6000	-3000	-5500	sher_kar_cave	Mustafar Sher Kar - 6	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2800	-6000	-2300	-5500	sher_kar_cave	Mustafar Sher Kar - 7	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-2100	-6000	-1600	-5500	sher_kar_cave	Mustafar Sher Kar - 8	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-1400	-6000	-900	-5500	sher_kar_cave	Mustafar Sher Kar - 9	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	-700	-6000	-200	-5500	sher_kar_cave	Mustafar Sher Kar - 10	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	0	-6000	500	-5500	sher_kar_cave	Mustafar Sher Kar - 11	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+MUSTAFAR	700	-6000	1200	-5500	sher_kar_cave	Mustafar Sher Kar - 12	MUSTAFAR	mus_mensix	11	-112.0	11.5	113.3
+ADVENTURE1	-4964	2822	-2964	4822	heroic_tusken_army	Heroic Tusken - 1	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	-1964	2822	36	4822	heroic_tusken_army	Heroic Tusken - 2	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	1036	2822	3036	4822	heroic_tusken_army	Heroic Tusken - 3	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	4036	2822	6036	4822	heroic_tusken_army	Heroic Tusken - 4	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	-4964	-178	-2964	1822	heroic_tusken_army	Heroic Tusken - 5	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	-1964	-178	36	1822	heroic_tusken_army	Heroic Tusken - 6	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	1036	-178	3036	1822	heroic_tusken_army	Heroic Tusken - 7	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	4036	-178	6036	1822	heroic_tusken_army	Heroic Tusken - 8	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	-4964	-3178	-2964	-1178	heroic_tusken_army	Heroic Tusken - 9	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	-1956	-3170	44	-1170	heroic_tusken_army	Heroic Tusken - 10	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	1036	-3178	3036	-1178	heroic_tusken_army	Heroic Tusken - 11	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE1	4036	-3178	6036	-1178	heroic_tusken_army	Heroic Tusken - 12	TATOOINE	tat_mosespa_cloning	4	1.8	-4.8	0.7
+ADVENTURE2	-6900	3100	-3100	6900	echo_base	Heroic Echo Base - 1	ADVENTURE2		0	-3666.5	91.0	6531.5
+ADVENTURE2	-1900	3100	1900	6900	echo_base	Heroic Echo Base - 2	ADVENTURE2		0	1329.6	91.0	6528.6
+ADVENTURE2	3100	3100	6900	6900	echo_base	Heroic Echo Base - 3	ADVENTURE2		0	6330.4	91.0	6529.1
+ADVENTURE2	-6900	-1900	-3100	1900	echo_base	Heroic Echo Base - 4	ADVENTURE2		0	-3666.9	91.0	1531.7
+ADVENTURE2	-1900	-1900	1900	1900	echo_base	Heroic Echo Base - 5	ADVENTURE2		0	1332.3	91.0	1532.2
+ADVENTURE2	3100	-1900	6900	1900	echo_base	Heroic Echo Base - 6	ADVENTURE2		0	6335.7	91.0	1532.4
+ADVENTURE2	-6900	-6900	-3100	-3100	echo_base	Heroic Echo Base - 7	ADVENTURE2		0	-3655.5	91.0	-3468.2
+ADVENTURE2	-1900	-6900	1900	-3100	echo_base	Heroic Echo Base - 8	ADVENTURE2		0	1334.2	91.0	-3467.8
+ADVENTURE2	3100	-6900	6900	-3100	echo_base	Heroic Echo Base - 9	ADVENTURE2		0	6321.7	91.0	-3459.7
+DUNGEON1	-300	0	0	300	npe_shared_station	NPE Station - 1	DUNGEON1	du1_npe_station_1	14	-26.2	1.5	-48.4
+DUNGEON1	-1200	0	-900	300	npe_shared_station	NPE Station - 2	DUNGEON1	du1_npe_station_2	14	-26.2	1.5	-48.4
+DUNGEON1	-2100	0	-1800	300	npe_shared_station	NPE Station - 3	DUNGEON1	du1_npe_station_3	14	-26.2	1.5	-48.4
+DUNGEON1	-3000	0	-2700	300	npe_shared_station	NPE Station - 4	DUNGEON1	du1_npe_station_4	14	-26.2	1.5	-48.4
+DUNGEON1	-3900	0	-3600	300	npe_shared_station	NPE Station - 5	DUNGEON1	du1_npe_station_5	14	-26.2	1.5	-48.4
+DUNGEON1	-4800	0	-4500	300	npe_shared_station	NPE Station - 6	DUNGEON1	du1_npe_station_6	14	-26.2	1.5	-48.4
+DUNGEON1	-5700	0	-5400	300	nova_orion_station	Nova Orion	DUNGEON1	du1_nova_orion	14	-26.2	1.5	-48.4
+DUNGEON1	-400	800	0	1350	npe_dungeon	NPE Dungeon - 1	DUNGEON1	du1_npe_dungeon_1	1	11.6	10.0	9.6
+DUNGEON1	-1300	800	-900	1350	npe_dungeon	NPE Dungeon - 2	DUNGEON1	du1_npe_dungeon_2	1	11.6	10.0	9.6
+DUNGEON1	-2200	800	-1800	1350	npe_dungeon	NPE Dungeon - 3	DUNGEON1	du1_npe_dungeon_3	1	11.6	10.0	9.6
+DUNGEON1	-3100	800	-2700	1350	npe_dungeon	NPE Dungeon - 4	DUNGEON1	du1_npe_dungeon_4	1	11.6	10.0	9.6
+DUNGEON1	-4000	800	-3600	1350	npe_dungeon	NPE Dungeon - 5	DUNGEON1	du1_npe_dungeon_5	1	11.6	10.0	9.6
+DUNGEON1	-4900	800	-4500	1350	npe_dungeon	NPE Dungeon - 6	DUNGEON1	du1_npe_dungeon_6	1	11.6	10.0	9.6
+DUNGEON1	-7000	-7000	-6500	-6500	heroic_axkva_min	Heroic AM - 1	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-6000	-7000	-5500	-6500	heroic_axkva_min	Heroic AM - 2	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-5000	-7000	-4500	-6500	heroic_axkva_min	Heroic AM - 3	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-4000	-7000	-3500	-6500	heroic_axkva_min	Heroic AM - 4	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-3000	-7000	-2500	-6500	heroic_axkva_min	Heroic AM - 5	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-2000	-7000	-1500	-6500	heroic_axkva_min	Heroic AM - 6	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-1000	-7000	-500	-6500	heroic_axkva_min	Heroic AM - 7	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	0	-7000	500	-6500	heroic_axkva_min	Heroic AM - 8	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	1000	-7000	1500	-6500	heroic_axkva_min	Heroic AM - 9	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	2000	-7000	2500	-6500	heroic_axkva_min	Heroic AM - 10	DATHOMIR	dat_aurilia_trinket_shop2	1	2.5	1.2	-3.4
+DUNGEON1	-7000	-6000	-6500	-5500	heroic_ig88	Heroic IG88 - 1	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-6000	-6000	-5500	-5500	heroic_ig88	Heroic IG88 - 2	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-5000	-6000	-4500	-5500	heroic_ig88	Heroic IG88 - 3	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-4000	-6000	-3500	-5500	heroic_ig88	Heroic IG88 - 4	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-3000	-6000	-2500	-5500	heroic_ig88	Heroic IG88 - 5	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-2000	-6000	-1500	-5500	heroic_ig88	Heroic IG88 - 6	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-1000	-6000	-500	-5500	heroic_ig88	Heroic IG88 - 7	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	0	-6000	500	-5500	heroic_ig88	Heroic IG88 - 8	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	1000	-6000	1500	-5500	heroic_ig88	Heroic IG88 - 9	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	2000	-6000	2500	-5500	heroic_ig88	Heroic IG88 - 10	LOK	lok_nym_cloning	9	0.6	0.3	1.4
+DUNGEON1	-7750	5500	-6750	7000	heroic_star_destroyer	Heroic ISD - 1	DUNGEON1	du1_heroic_isd_1	33	-7.5	175.3	-34.7
+DUNGEON1	-6150	5500	-5150	7000	heroic_star_destroyer	Heroic ISD - 2	DUNGEON1	du1_heroic_isd_2	33	-7.5	175.3	-34.7
+DUNGEON1	-4550	5500	-3550	7000	heroic_star_destroyer	Heroic ISD - 3	DUNGEON1	du1_heroic_isd_3	33	-7.5	175.3	-34.7
+DUNGEON1	-2950	5500	-1950	7000	heroic_star_destroyer	Heroic ISD - 4	DUNGEON1	du1_heroic_isd_4	33	-7.5	175.3	-34.7
+DUNGEON1	-1350	5500	-350	7000	heroic_star_destroyer	Heroic ISD - 5	DUNGEON1	du1_heroic_isd_5	33	-7.5	175.3	-34.7
+DUNGEON1	250	5500	1250	7000	heroic_star_destroyer	Heroic ISD - 6	DUNGEON1	du1_heroic_isd_6	33	-7.5	175.3	-34.7
+DUNGEON1	1850	5500	2850	7000	heroic_star_destroyer	Heroic ISD - 7	DUNGEON1	du1_heroic_isd_7	33	-7.5	175.3	-34.7
+DUNGEON1	3450	5500	4450	7000	heroic_star_destroyer	Heroic ISD - 8	DUNGEON1	du1_heroic_isd_8	33	-7.5	175.3	-34.7
+DUNGEON1	5050	5500	6050	7000	heroic_star_destroyer	Heroic ISD - 9	DUNGEON1	du1_heroic_isd_9	33	-7.5	175.3	-34.7
+DUNGEON1	6650	5500	7650	7000	heroic_star_destroyer	Heroic ISD - 10	DUNGEON1	du1_heroic_isd_10	33	-7.5	175.3	-34.7
+DUNGEON1	-7000	-4000	-6000	-3000	heroic_exar_kun	Heroic EK - 1	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	-5500	-4000	-4500	-3000	heroic_exar_kun	Heroic EK - 2	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	-4000	-4000	-3000	-3000	heroic_exar_kun	Heroic EK - 3	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	-2500	-4000	-1500	-3000	heroic_exar_kun	Heroic EK - 4	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	-1000	-4000	0	-3000	heroic_exar_kun	Heroic EK - 5	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	500	-4000	1500	-3000	heroic_exar_kun	Heroic EK - 6	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	2000	-4000	3000	-3000	heroic_exar_kun	Heroic EK - 7	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	3500	-4000	4500	-3000	heroic_exar_kun	Heroic EK - 8	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	5000	-4000	6000	-3000	heroic_exar_kun	Heroic EK - 9	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	6500	-4000	7500	-3000	heroic_exar_kun	Heroic EK - 10	YAVIN4	yav_labor_outpost_cloning	3	0.0	0.1	-4.6
+DUNGEON1	7284	2590	7584	2890	mtp_hideout_instance	Meatlump - 1	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	2050	7584	2350	mtp_hideout_instance	Meatlump - 2	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	1510	7584	1810	mtp_hideout_instance	Meatlump - 3	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	970	7584	1270	mtp_hideout_instance	Meatlump - 4	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	430	7584	730	mtp_hideout_instance	Meatlump - 5	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	-110	7584	190	mtp_hideout_instance	Meatlump - 6	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	-650	7584	-350	mtp_hideout_instance	Meatlump - 7	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	-1190	7584	-890	mtp_hideout_instance	Meatlump - 8	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	-1730	7584	-1430	mtp_hideout_instance	Meatlump - 9	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
+DUNGEON1	7284	-2270	7584	-1970	mtp_hideout_instance	Meatlump - 10	CORELLIA	cor_coronet_cloning	4	1.8	-4.8	0.4
