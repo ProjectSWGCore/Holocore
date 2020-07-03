@@ -417,6 +417,16 @@ public class GroupService extends Service {
 		sendSystemMessage(creature.getOwner(), "removed");
 		group.removeMember(creature);
 		updateChatRoom(creature.getOwner(), group, UpdateType.LEAVE);
+
+		// If the leader has left, promote another group member to leader and notify the group of this
+		if (creature.getObjectId() == group.getLeaderId()) {
+			CreatureObject newLeader = group.getGroupMemberObjects().iterator().next();	// Pick a new leader
+
+			group.setLeader(newLeader);
+
+			sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getObjectName());
+		}
+
 	}
 	
 	private void updateChatRoom(Player player, GroupObject group, UpdateType updateType) {

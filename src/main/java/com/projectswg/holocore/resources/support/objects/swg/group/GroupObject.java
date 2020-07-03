@@ -100,9 +100,6 @@ public class GroupObject extends SWGObject {
 	}
 	
 	public void removeMember(CreatureObject creature) {
-		if (leader.equals(creature) && size() >= 2) {
-			setLeader(groupMembers.get(1));
-		}
 		removeGroupMembers(creature);
 		calculateLevel();
 	}
