@@ -30,7 +30,7 @@ spawn_kas_main_27	KASHYYYK_MAIN	kas_main_world	AREA	0	-549.6	19.0	-132.4	-28	1	E
 spawn_kas_main_28	KASHYYYK_MAIN	kas_main_world	AREA	0	-442.8	211.2	-74.6	-142	1	Fezrik Bendledon	humanoid_kashyyyk_fezrik_bendledon	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_kas_main_29	KASHYYYK_MAIN	kas_main_world	AREA	0	-453.6	158.4	-20.0	-81	1	Flash Harrison	humanoid_kashyyyk_flash_harrison	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_standing_drinking	1	0	0	600
 spawn_kas_main_30	KASHYYYK_MAIN	kas_main_world	AREA	0	-556.0	19.8	-71.2	-155	1	Gursan Bryes	humanoid_kashyyyk_gursan_bryes	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_kas_main_31	KASHYYYK_MAIN	kas_main_world	AREA	0	-419.1	179.6	-88.8	-95	1	Harwakokok the Mighty	humanoid_kashyyyk_avatar_harwakokok	AGGRESSIVE	B	85	88	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_kas_main_31	KASHYYYK_MAIN	kas_main_world	AREA	0	-419.1	179.6	-88.8	-95	1	Harwakokok the Mighty	humanoid_kashyyyk_avatar_harwakokok	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_kas_main_32	KASHYYYK_MAIN	kas_main_world	AREA	0	-513.1	19.3	-108.7	0	1	Ikvizi	humanoid_kashyyyk_ikvizi	INVULNERABLE	N	100	100	City	Kachirho	1	TURN	0	0	-	scared	0	0	0	600
 spawn_kas_main_33	KASHYYYK_MAIN	kas_main_world	AREA	0	-578.9	18.8	-68.1	-159	1	Kiaanta (Patrol Squad)	humanoid_kashyyyk_marium_valmont	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_kas_main_34	KASHYYYK_MAIN	kas_main_world	AREA	0	-478.4	211.3	-92.7	95	1	Mada Johnson	humanoid_kashyyyk_mada_johnson	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle	0	0	0	600
