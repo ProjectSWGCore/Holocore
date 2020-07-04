@@ -1,4 +1,4 @@
-terrain	x1	z1	x2	z2	area	comment	target_terrain	building_id	cell	x	y	z
+location_terrain	location_x1	location_z1	location_x2	location_z2	location_area	comment	clone_terrain	clone_building_id	clone_cell	clone_x	clone_y	clone_z
 TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	TEXT	TEXT	INTEGER	REAL	REAL	REAL
 KASHYYYK_MAIN	-4096	-4096	4096	4096	kashyyyk_main	Kachirho	KASHYYYK_MAIN		0	-500.3	17.6	109.7
 KASHYYY_DEAD_FOREST	-2048	-2048	2048	2048	kashyyyk_dead_forest	Dead Forest	KASHYYY_DEAD_FOREST		0	-146.8	31.6	-171.7
