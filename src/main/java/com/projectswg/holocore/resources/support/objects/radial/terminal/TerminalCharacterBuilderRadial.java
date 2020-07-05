@@ -534,7 +534,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"weapon_mandalorian_lightsaber_04_01",
 				"weapon_npe_lightsaber_02_01",
 				"weapon_npe_lightsaber_02_02",
-				"weapon_roadmap_lightsaber_02_02"
+				"weapon_roadmap_lightsaber_02_02",
+				"item_color_crystal_02_16",	// Bane's Heart
+				"item_color_crystal_02_19",	// B'nar's Sacrifice
+				"item_color_crystal_02_20",	// Windu's Guile
+				"item_color_crystal_02_28",	// Kenobi's Legacy
+				"item_color_crystal_02_29",	// Sunrider's Destiny
+				"item_power_crystal_04_01",	// Power crystal
+				"item_power_crystal_04_04",	// Power crystal
+				"item_power_crystal_04_07",	// Power crystal
+				"item_power_crystal_04_09",	// Power crystal
+				"item_power_crystal_04_20"	// Power crystal
 		);
 	}
 	
