@@ -1,4 +1,21 @@
-line	cooldown	damage	critical	action_cost	freeshot	swift
-TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
-fs_dm	expertise_cooldown_line_fs_dm	expertise_damage_line_fs_dm	expertise_critical_line_fs_dm	expertise_action_line_fs_dm	expertise_freeshot_fs_dm	-
-me_heal	-	expertise_healing_line_me_heal	-	expertise_action_line_me_heal	expertise_freeshot_me_heal	fast_attack_line_me_heal
+line	comment	cooldown	damage	critical	action_cost	freeshot	swift
+TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+bh_dm	Assault	expertise_cooldown_line_dm	-		expertise_action_line_dm	-	-
+bh_dm_crit	Ambush	-	-	expertise_action_line_dm_crit	-	-	-
+co_dm		-	expertise_damage_line_co_dm	expertise_critical_line_co_dm	expertise_action_line_co_dm	expertise_freeshot_co_dm	-
+co_grenade		-	-	-	expertise_action_line_co_grenade	expertise_freeshot_co_grenade	fast_attack_line_co_grenade
+fs_ae_dm_cc		expertise_cooldown_line_fs_ae_dm_cc	-	expertise_action_line_fs_ae_dm_cc	-	-	-
+fs_dm		expertise_cooldown_line_fs_dm	expertise_damage_line_fs_dm	expertise_critical_line_fs_dm	expertise_action_line_fs_dm	expertise_freeshot_fs_dm	-
+fs_dm_cc_crit		expertise_cooldown_line_fs_cc_crit	-	expertise_action_line_fs_cc_crit	-	-	-
+fs_sweep		expertise_cooldown_line_fs_sweep	-	-	-	-	-
+me_dm		expertise_cooldown_line_me_evasion	expertise_damage_line_me_dm	expertise_critical_line_me_dm	expertise_action_line_me_dm	-	-
+me_heal		-	-	-	-	expertise_freeshot_me_heal	fast_attack_line_me_heal
+of_aoe		-	-	-	expertise_action_line_of_aoe	expertise_freeshot_of_aoe	-
+of_heal		-	-	-	-	-	fast_attack_line_of_heal
+of_paint		expertise_cooldown_line_of_paint	-	-	expertise_action_line_of_paint	-	-
+of_purge		expertise_cooldown_line_of_purge	-	-	-	-	-
+of_sure		expertise_cooldown_line_of_sure	expertise_damage_line_of_sure	expertise_critical_line_of_sure	expertise_action_line_of_sure	expertise_freeshot_of_sure	-
+sm_dm		expertise_cooldown_line_sm_dm	expertise_damage_line_sm_dm	expertise_critical_line_sm_dm	expertise_action_line_sm_dm	expertise_freeshot_sm_dm	fast_attack_line_sm_dm
+sp_dm		expertise_cooldown_line_sp_dm	expertise_damage_line_sp_dm	expertise_critical_line_sp_dm	expertise_action_line_sp_dm	expertise_freeshot_sp_dm	fast_attack_line_sp_dm
+sp_preparation		expertise_cooldown_line_sp_preparation	-	-	-	-	-
+sp_smoke		-	-	-	-	-	fast_attack_line_sp_smoke

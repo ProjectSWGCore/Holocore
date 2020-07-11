@@ -175,7 +175,7 @@ spawn_mus_172	MUSTAFAR	mus_world	AREA	0	-2464.06	130	3097.35	0	1	a Razor Runner 
 spawn_mus_173	MUSTAFAR	mus_world	AREA	0	-3102.54	81.53	-3025.21	0	1	a salvage bandit chief	humanoid_som_crystal_flats_salvage_bandit_chief	AGGRESSIVE	B	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
 spawn_mus_174	MUSTAFAR	mus_world	AREA	0	-3141.69	83.86	-2991.76	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
 spawn_mus_175	MUSTAFAR	mus_world	AREA	0	-3148.58	83.43	-2993.08	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_176	MUSTAFAR	mus_world	AREA	0	-3128.03	82.08	-3025.63	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	0	0	-	idle	0	0	0	600
+spawn_mus_176	MUSTAFAR	mus_world	AREA	0	-3128.03	82.08	-3025.63	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
 spawn_mus_177	MUSTAFAR	mus_world	AREA	0	-3119.33	81.50	-3021.84	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_mus_178	MUSTAFAR	mus_world	AREA	0	-3132.33	89.47	-3054.35	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
 spawn_mus_179	MUSTAFAR	mus_world	AREA	0	-3125.31	89.47	-3052.10	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600

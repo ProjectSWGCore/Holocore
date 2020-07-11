@@ -28,6 +28,7 @@ package com.projectswg.holocore.utilities;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +36,18 @@ import java.util.Map.Entry;
 
 public class SdbGenerator implements Closeable, AutoCloseable {
 	
-	private static final Charset ASCII = Charset.forName("ASCII");
+	private static final Charset ASCII = StandardCharsets.US_ASCII;
 	
-	private BufferedWriter writer;
+	private final BufferedWriter writer;
 	
 	public SdbGenerator(File file) throws FileNotFoundException {
 		if (file == null)
 			throw new NullPointerException("File cannot be null!");
 		this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), ASCII));
+	}
+
+	public SdbGenerator(BufferedWriter writer) {
+		this.writer = writer;
 	}
 	
 	public void close() throws IOException {

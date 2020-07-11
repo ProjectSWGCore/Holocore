@@ -34,10 +34,11 @@ import java.util.function.Function;
 
 public enum ServerAttribute {
 	PCD_PET_TEMPLATE	("pcd.pet.template",				PredefinedDataType.STRING),
-	EGG_SPAWNER			("egg.spawner",					Spawner.class, s -> null, s -> null),
+	EGG_SPAWNER			("egg.spawner",						Spawner.class, s -> null, s -> null),
 	GALACTIC_RESOURCE_ID("resources.galactic_resource_id",	PredefinedDataType.LONG),
 	SURVEY_TOOL_RANGE	("survey_tool.range",				PredefinedDataType.INT),
-	SET_BONUS_ID		("set_bonus.id",					PredefinedDataType.INT);
+	SET_BONUS_ID		("set_bonus.id",					PredefinedDataType.INT),
+	LINK_OBJECT_ID		("link.object.id",					PredefinedDataType.LONG);
 	
 	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);
 	

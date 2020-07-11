@@ -1,0 +1,24 @@
+location_terrain	location_x	location_z	location_template	comment	target_terrain	target_building_id	target_cell_id	target_x	target_y	target_z
+TEXT	REAL	REAL	TEXT	TEXT	TEXT	TEXT	INTEGER	REAL	REAL	REAL
+KASHYYYK_DEAD_FOREST	87	-477	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Kkowir to Kachirho	KASHYYYK_MAIN		0	-746.6	18.6	255.0
+KASHYYYK_MAIN	-743	258	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Kachirho to Kkowir	KASHYYYK_DEAD_FOREST		0	87.1	29.4	-473.5
+KASHYYYK_DEAD_FOREST	-265	354	object/tangible/door/shared_thm_kash_cave_myyydril_door.iff	Kashyyyk - Kkowir to Myyydrill Cave	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	1	-4.0	-4.0	-12.0
+KASHYYYK_POB_DUNGEONS	5137	-2719	object/tangible/door/shared_thm_kash_cave_myyydril_door.iff	Kashyyyk - Myyydrill Cave to Kkowir	KASHYYYK_DEAD_FOREST		0	-260.6	44.7	355.4
+KASHYYYK_MAIN	415	976	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Kachirho to Blackscale Slaver Compound	KASHYYYK_NORTH_DUNGEONS		0	561.9	22.8	1.550.6
+KASHYYYK_NORTH_DUNGEONS	561	1548	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Blackscale Slaver Compound to Kachirho	KASHYYYK_DEAD_FOREST		0	414.9	20.3	972.4
+KASHYYYK_MAIN	-58	843	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Kachirho to Ryratt Trail	KASHYYYK_RRYATT_TRAIL		0	532.0	173.5	82.2
+KASHYYYK_RRYATT_TRAIL	530	82	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Ryratt Trail to Kachirho	KASHYYYK_DEAD_FOREST		0	-60.2	21.6	839.7
+KASHYYYK_MAIN	188	-430	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Kachirho to Etyyy	KASHYYYK_HUNTING		0	666.9	10.6	674.0
+KASHYYYK_HUNTING	670	676	object/tangible/door/shared_thm_kash_zonegate_door_simple.iff	Kashyyyk - Etyyy to Kachirho	KASHYYYK_MAIN		0	189.6	20.5	-430.3
+KASHYYYK_MAIN	-478	-12	object/building/kashyyyk/shared_mun_kash_tree_door_level1_main.iff	Kashyyyk - Ground to 1st level	KASHYYYK_MAIN		0	-461.0	157.2	-71.0
+KASHYYYK_MAIN	-472	-9	object/building/kashyyyk/shared_mun_kash_tree_door_level2_main.iff	Kashyyyk - Ground to 2nd level	KASHYYYK_MAIN		0	-466.0	179.5	-86.0
+KASHYYYK_MAIN	-470	-15	object/building/kashyyyk/shared_mun_kash_tree_door_level3_main.iff	Kashyyyk - Ground to 3rd level	KASHYYYK_MAIN		0	-457.0	210.9	-86.1
+KASHYYYK_MAIN	-463	-79	object/building/kashyyyk/shared_mun_kash_tree_door_level_ground.iff	Kashyyyk - 1st level to ground level	KASHYYYK_MAIN		0	-479.0	29.0	-24.0
+KASHYYYK_MAIN	-459	-78	object/building/kashyyyk/shared_mun_kash_tree_door_level2.iff	Kashyyyk - 1st level to 2nd level	KASHYYYK_MAIN		0	-466.0	179.5	-86.0
+KASHYYYK_MAIN	-466	-77	object/building/kashyyyk/shared_mun_kash_tree_door_level3.iff	Kashyyyk - 1st level to 3rd level	KASHYYYK_MAIN		0	-457.0	210.9	-86.1
+KASHYYYK_MAIN	-458	-89	object/building/kashyyyk/shared_mun_kash_tree_door_level_ground.iff	Kashyyyk - 2nd level to ground level	KASHYYYK_MAIN		0	-479.0	29.0	-24.0
+KASHYYYK_MAIN	-458	-85	object/building/kashyyyk/shared_mun_kash_tree_door_level1_main.iff	Kashyyyk - 2nd level to 1st level	KASHYYYK_MAIN		0	-461.0	157.2	-71.0
+KASHYYYK_MAIN	-461	-92	object/building/kashyyyk/shared_mun_kash_tree_door_level3.iff	Kashyyyk - 2nd level to 3rd level	KASHYYYK_MAIN		0	-457.0	210.9	-86.1
+KASHYYYK_MAIN	-453	-94	object/building/kashyyyk/shared_mun_kash_tree_door_level_ground.iff	Kashyyyk - 3rd level to ground level	KASHYYYK_MAIN		0	-479.0	29.0	-24.0
+KASHYYYK_MAIN	-450	-91	object/building/kashyyyk/shared_mun_kash_tree_door_level1_main.iff	Kashyyyk - 3rd level to 1st level	KASHYYYK_MAIN		0	-461.0	157.2	-71.0
+KASHYYYK_MAIN	-459	-93	object/building/kashyyyk/shared_mun_kash_tree_door_level2_main.iff	Kashyyyk - 3rd level to 2nd level	KASHYYYK_MAIN		0	-466.0	179.5	-86.0

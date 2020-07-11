@@ -79,7 +79,13 @@ public class DeveloperService extends Service {
 			new Location(275, 48.1, 503, Terrain.KASHYYYK_HUNTING),
 			new Location(146, 19.1, 162, Terrain.KASHYYYK_MAIN),
 			new Location(-164, 16.5, -262, Terrain.KASHYYYK_DEAD_FOREST),
-			
+			new Location(534, 173.5, 82, Terrain.KASHYYYK_RRYATT_TRAIL),
+			new Location(1422, 70.2, 722, Terrain.KASHYYYK_RRYATT_TRAIL),
+			new Location(2526, 182.3, -278, Terrain.KASHYYYK_RRYATT_TRAIL),
+			new Location(768, 140.9, -439, Terrain.KASHYYYK_RRYATT_TRAIL),
+			new Location(2495, -24.1, -924, Terrain.KASHYYYK_RRYATT_TRAIL),
+			new Location(561.8, 22.8, 1552.8, Terrain.KASHYYYK_NORTH_DUNGEONS),
+
 			// Planet: Lok
 			new Location(3331, 106, -4912, Terrain.LOK),
 			new Location(3848, 62, -464, Terrain.LOK),

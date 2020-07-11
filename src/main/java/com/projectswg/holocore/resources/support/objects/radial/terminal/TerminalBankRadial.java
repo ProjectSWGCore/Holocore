@@ -1,5 +1,7 @@
 package com.projectswg.holocore.resources.support.objects.radial.terminal;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.sui.SuiEvent;
@@ -12,7 +14,6 @@ import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInt
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.utilities.IntentFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -109,7 +110,7 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 		creature.setBankBalance(amount + creature.getBankBalance());
 		creature.setCashBalance(0L);
 		if (amount > 0)
-			IntentFactory.sendSystemMessage(player, "@base_player:prose_deposit_success", "DI", (int) amount);
+			SystemMessageIntent.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_deposit_success"), "DI", (int) amount));
 		else
 			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_deposit");
 	}
@@ -119,7 +120,7 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 		creature.setCashBalance(creature.getCashBalance() + amount);
 		creature.setBankBalance(0L);
 		if (amount > 0)
-			IntentFactory.sendSystemMessage(player, "@base_player:prose_withdraw_success", "DI", (int) amount);
+			SystemMessageIntent.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_withdraw_success"), "DI", (int) amount));
 		else
 			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_withdraw");
 	}

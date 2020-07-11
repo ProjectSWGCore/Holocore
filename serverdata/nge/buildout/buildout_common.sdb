@@ -1,0 +1,829 @@
+buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
+INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
+bo_common_1	TATOOINE	tat_world	0	object/static/space/ship/shared_cargo_freighter.iff	3000.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_2	TATOOINE	tat_world	0	object/static/space/ship/shared_corellian_corvette.iff	2800.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_3	TATOOINE	tat_world	0	object/static/space/ship/shared_nebulon_frigate.iff	2600.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_4	TATOOINE	tat_world	0	object/static/space/spacestation/shared_imperial_spacestation_01.iff	2400.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_5	TATOOINE	tat_world	0	object/static/space/spacestation/shared_pirate_outpost_asteroid_.iff	2200.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_6	TATOOINE	tat_world	0	object/static/space/spacestation/shared_rsf_spacestation.iff	2000.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_7	TATOOINE	tat_world	0	object/static/space/spacestation/shared_tradefed_destroyed_hulk.iff	1800.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_8	TATOOINE	tat_world	0	object/static/space/spacestation/shared_corsec_outpost_01.iff	1600.0	100.0	-5000.0	0	0	0	0	1024	FALSE	Scene - 
+bo_common_9	CORELLIA	cor_world	0	object/tangible/theme_park/rebel/shared_rtp_wedge_imperial_meeting.iff	6905.8	330.0	-5604.0	0	0	0	0	256	FALSE	Banner
+bo_common_10	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1901.0	12.0	-3079.0	0	0	0	0	256	FALSE	Banner
+bo_common_11	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1998.0	12.0	-3073.8	0	0	0	0	256	FALSE	Banner
+bo_common_12	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1819.7	12.0	-3050.0	0	0	0	0	256	FALSE	Banner
+bo_common_13	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1974.1	12.0	-2997.9	0	0	0	0	256	FALSE	Banner
+bo_common_14	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1894.1	12.0	-3049.9	0	0	0	0	256	FALSE	Banner
+bo_common_15	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1871.9	12.0	-3123.7	0	0	0	0	256	FALSE	Banner
+bo_common_16	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1892.5	12.0	-3173.8	0	0	0	0	256	FALSE	Banner
+bo_common_17	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1957.8	12.0	-3076.4	0	0	0	0	256	FALSE	Banner
+bo_common_18	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1970.1	12.0	-3150.0	0	0	0	0	256	FALSE	Banner
+bo_common_19	LOK	lok_world	0	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff	-1905.3	12.0	-3137.6	0	0	0	0	256	FALSE	Banner
+bo_common_20	TALUS	tal_world	0	object/tangible/theme_park/rebel/shared_rtp_leia_crime_scene.iff	4267.3	0.6	5265.1	0	0	0	0	256	FALSE	Banner
+bo_common_21	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	534.5	81.0	-662.7	0	0	0	0	256	FALSE	Banner
+bo_common_22	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	515.7	81.0	-666.3	0	0	0	0	256	FALSE	Banner
+bo_common_23	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	525.3	81.0	-656.1	0	0	0	0	256	FALSE	Banner
+bo_common_24	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	494.5	81.0	-648.3	0	0	0	0	256	FALSE	Banner
+bo_common_25	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	500.1	81.0	-620.9	0	0	0	0	256	FALSE	Banner
+bo_common_26	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	540.5	81.0	-669.7	0	0	0	0	256	FALSE	Banner
+bo_common_27	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	512.9	81.0	-642.2	0	0	0	0	256	FALSE	Banner
+bo_common_28	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	529.9	81.0	-682.2	0	0	0	0	256	FALSE	Banner
+bo_common_29	YAVIN4	yav_world	0	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff	485.3	81.0	-633.9	0	0	0	0	256	FALSE	Banner
+bo_common_30	NABOO	nab_borvos_vault	34	object/tangible/terminal/shared_terminal_borvo_ai_controller.iff	71.3	-36.0	148.9	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_31	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	10.2	-35.0	214.3	270	0	0	0	128	TRUE	Borvos Vault
+bo_common_32	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	0.8	-35.0	227.7	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_33	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-13.8	-35.0	214.3	-90	0	0	0	128	TRUE	Borvos Vault
+bo_common_34	NABOO	nab_borvos_vault	14	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-25.8	-35.0	227.7	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_35	NABOO	nab_borvos_vault	13	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-76.7	-35.0	223.0	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_36	NABOO	nab_borvos_vault	13	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff	-92.3	-35.0	223.0	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_37	NABOO	nab_borvos_vault	19	object/tangible/terminal/shared_terminal_borvos_vault.iff	24.3	-36.0	238.1	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_38	NABOO	nab_borvos_vault	15	object/tangible/terminal/shared_terminal_borvos_vault.iff	-47.7	-36.0	242.8	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_39	NABOO	nab_borvos_vault	36	object/tangible/terminal/shared_terminal_borvos_vault.iff	-73.2	-36.0	224.8	270	0	0	0	128	TRUE	Borvos Vault
+bo_common_40	NABOO	nab_borvos_vault	35	object/tangible/terminal/shared_terminal_borvos_vault.iff	-95.7	-36.0	225.0	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_41	NABOO	nab_borvos_vault	26	object/tangible/terminal/shared_terminal_borvos_vault.iff	-12.8	-28.0	170.1	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_42	NABOO	nab_borvos_vault	4	object/tangible/terminal/shared_terminal_borvos_vault.iff	25.9	-36.0	79.2	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_43	NABOO	nab_borvos_vault	1	object/tangible/terminal/shared_terminal_borvos_vault.iff	86.7	-36.0	118.3	180	0	0	0	128	TRUE	Borvos Vault
+bo_common_44	NABOO	nab_borvos_vault	10	object/tangible/terminal/shared_terminal_borvos_vault.iff	-75.8	-36.0	106.0	90	0	0	0	128	TRUE	Borvos Vault
+bo_common_45	NABOO	nab_borvos_vault	26	object/tangible/terminal/shared_terminal_borvos_vault.iff	-11.7	-36.0	170.0	-135	0	0	0	128	TRUE	Borvos Vault
+bo_common_46	NABOO	nab_borvos_vault	1	object/tangible/terminal/shared_terminal_borvos_vault.iff	91.6	-36.0	103.6	0	0	0	0	128	TRUE	Borvos Vault
+bo_common_47	ENDOR	end_dwb	27	object/tangible/container/general/shared_tech_bookcase.iff	48.1	-32.0	-47.8	0	0	0	0	128	TRUE	Container
+bo_common_48	ENDOR	end_dwb	4	object/tangible/container/general/shared_tech_chest.iff	-3.1	-12.0	36.5	180	0	0	0	128	TRUE	Container
+bo_common_49	LOK	lok_evil_droid_eng_cave	28	object/tangible/container/loot/shared_astromech_container.iff	-65.3	-66.0	-177.8	0	0	0	0	128	TRUE	Container
+bo_common_50	LOK	lok_imperial_gas_mine	11	object/tangible/container/loot/shared_gas_filter_container.iff	-87.8	-99.4	-88.9	-90	0	0	0	128	TRUE	Container
+bo_common_51	LOK	lok_ntp_mercenary_bunker	7	object/tangible/container/loot/shared_computer_container.iff	-60.6	-20.0	48.3	270	0	0	0	128	TRUE	Container
+bo_common_52	NABOO	nab_borvos_vault	40	object/tangible/container/drum/shared_large_plain_crate_s01.iff	29.7	-36.0	172.0	-179	0	0	0	128	TRUE	Container
+bo_common_53	NABOO	nab_borvos_vault	21	object/tangible/container/drum/shared_large_plain_crate_s01.iff	54.5	-36.0	182.3	-91	0	0	0	128	TRUE	Container
+bo_common_54	NABOO	nab_borvos_vault	18	object/tangible/container/drum/shared_large_plain_crate_s02.iff	18.6	-36.0	201.0	178	0	0	0	128	TRUE	Container
+bo_common_55	NABOO	nab_borvos_vault	18	object/tangible/container/drum/shared_large_plain_crate_s03.iff	11.8	-36.0	189.2	-177	0	0	0	128	TRUE	Container
+bo_common_56	NABOO	nab_borvos_vault	15	object/tangible/container/drum/shared_large_plain_crate_s03.iff	-17.4	-36.0	241.1	-12	0	0	0	128	TRUE	Container
+bo_common_57	NABOO	nab_borvos_vault	6	object/tangible/container/drum/shared_large_plain_crate_s04.iff	44.9	-36.0	127.1	86	0	0	0	128	TRUE	Container
+bo_common_58	NABOO	nab_borvos_vault	11	object/tangible/container/drum/shared_large_plain_crate_s04.iff	-52.7	-36.0	50.2	179	0	0	0	128	TRUE	Container
+bo_common_59	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-53.2	-18.0	-36.6	0	0	0	0	128	TRUE	Container
+bo_common_60	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-44.5	-18.0	-43.0	-90	0	0	0	128	TRUE	Container
+bo_common_61	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-43.0	-18.0	-55.7	0	0	0	0	128	TRUE	Container
+bo_common_62	YAVIN4	yav_geonosian_cave	25	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-74.8	-22.0	-152.4	180	0	0	0	128	TRUE	Container
+bo_common_63	YAVIN4	yav_geonosian_cave	32	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-70.2	-34.0	-262.5	180	0	0	0	128	TRUE	Container
+bo_common_64	YAVIN4	yav_geonosian_cave	35	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff	-140.1	-34.0	-201.5	0	0	0	0	128	TRUE	Container
+bo_common_65	TATOOINE	tat_world	0	object/tangible/crafting/station/shared_public_space_station.iff	3534.0	5.0	-4811.0	-90	0	0	0	8	TRUE	Crafting Station
+bo_common_66	LOK	lok_evil_droid_eng_cave	22	object/tangible/furniture/nym_themepark/collection/shared_armoire_s01.iff	-12.0	-43.7	-100.3	-138	0	0	0	128	TRUE	Droid Cave
+bo_common_67	LOK	lok_evil_droid_eng_cave	1	object/tangible/furniture/nym_themepark/collection/shared_frn_all_data_terminal_free_s2.iff	0.1	-22.0	-19.8	0	0	0	0	128	TRUE	Droid Cave
+bo_common_68	LOK	lok_evil_droid_eng_cave	5	object/tangible/furniture/nym_themepark/collection/shared_frn_all_lamp_free_s04.iff	-61.4	-46.4	-52.0	-40	0	0	0	128	TRUE	Droid Cave
+bo_common_69	LOK	lok_evil_droid_eng_cave	10	object/tangible/furniture/nym_themepark/collection/shared_frn_all_meatlump_grill_s02.iff	-176.5	-49.5	-60.5	54	0	0	0	128	TRUE	Droid Cave
+bo_common_70	LOK	lok_evil_droid_eng_cave	2	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s1.iff	-31.6	-29.2	-27.2	23	0	0	0	128	TRUE	Droid Cave
+bo_common_71	LOK	lok_evil_droid_eng_cave	3	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s2.iff	-50.6	-29.5	-38.1	67	0	0	0	128	TRUE	Droid Cave
+bo_common_72	LOK	lok_evil_droid_eng_cave	11	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s3.iff	-98.6	-39.4	-86.0	-97	0	0	0	128	TRUE	Droid Cave
+bo_common_73	LOK	lok_evil_droid_eng_cave	16	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s4.iff	-111.8	-57.2	-37.7	38	0	0	0	128	TRUE	Droid Cave
+bo_common_74	LOK	lok_evil_droid_eng_cave	11	object/tangible/furniture/nym_themepark/collection/shared_table_work_bench.iff	-101.1	-55.2	-80.9	90	0	0	0	128	TRUE	Droid Cave
+bo_common_75	LOK	lok_evil_droid_eng_cave	25	object/tangible/terminal/shared_terminal_nym_cave.iff	-60.6	-65.8	-142.3	-90	0	0	0	128	TRUE	Droid Cave
+bo_common_76	LOK	lok_evil_droid_eng_cave	27	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	49.2	-65.8	-83.3	-90	0	0	0	128	TRUE	Droid Cave
+bo_common_77	ENDOR	end_dwb	21	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff	-2.4	-32.0	-27.8	90	0	0	0	128	FALSE	DWB
+bo_common_78	ENDOR	end_dwb	23	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff	4.3	-32.0	-102.3	90	0	0	0	128	FALSE	DWB
+bo_common_79	ENDOR	end_dwb	51	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-151.0	-60.0	-99.0	180	0	0	0	128	TRUE	DWB
+bo_common_80	ENDOR	end_dwb	53	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-230.0	-60.0	-124.0	90	0	0	0	128	TRUE	DWB
+bo_common_81	ENDOR	end_dwb	59	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-232.0	-60.0	-220.0	90	0	0	0	128	TRUE	DWB
+bo_common_82	ENDOR	end_dwb	9	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-84.5	-20.0	-50.5	-90	0	0	0	128	TRUE	DWB
+bo_common_83	ENDOR	end_dwb	17	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-8.4	-32.0	-95.4	-89	0	0	0	128	TRUE	DWB
+bo_common_84	ENDOR	end_dwb	33	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	25.9	-64.0	-95.4	-179	0	0	0	128	TRUE	DWB
+bo_common_85	ENDOR	end_dwb	1	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff	-17.7	-12.0	-8.5	0	0	0	0	128	TRUE	DWB
+bo_common_86	ENDOR	end_dwb	64	object/tangible/dungeon/death_watch_bunker/shared_filter_dispenser.iff	-13.7	-52.0	-147.7	180	0	0	0	128	TRUE	DWB
+bo_common_87	ENDOR	end_dwb	34	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff	112.9	-64.0	-113.9	178	0	0	0	128	TRUE	DWB
+bo_common_88	ENDOR	end_dwb	34	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff	113.4	-64.0	-151.9	-179	0	0	0	128	TRUE	DWB
+bo_common_89	ENDOR	end_dwb	64	object/tangible/dungeon/death_watch_bunker/shared_workbench.iff	-15.8	-52.0	-147.5	180	0	0	0	128	TRUE	DWB
+bo_common_90	ENDOR	end_dwb	34	object/tangible/dungeon/shared_terminal_free_s1.iff	74.5	-54.0	-143.0	-87	0	0	0	128	TRUE	DWB
+bo_common_91	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	59.9	0.0	-86.0	0	0	0	0	128	FALSE	DWB
+bo_common_92	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	49.0	0.0	-78.7	0	0	0	0	128	FALSE	DWB
+bo_common_93	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	56.1	0.0	-68.0	0	0	0	0	128	FALSE	DWB
+bo_common_94	ENDOR	end_dwb	26	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff	67.0	0.0	-75.4	0	0	0	0	128	FALSE	DWB
+bo_common_95	ENDOR	end_dwb	34	object/tangible/newbie_tutorial/shared_debris.iff	66.4	-64.0	-114.5	-177	0	0	0	128	TRUE	DWB
+bo_common_96	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	58.0	0.0	-93.0	0	0	0	0	128	TRUE	DWB
+bo_common_97	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	42.0	0.0	-77.0	90	0	0	0	128	TRUE	DWB
+bo_common_98	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	58.0	0.0	-61.0	-179	0	0	0	128	TRUE	DWB
+bo_common_99	ENDOR	end_dwb	26	object/tangible/terminal/shared_terminal_water_pressure.iff	73.9	0.0	-77.0	-90	0	0	0	128	TRUE	DWB
+bo_common_100	YAVIN4	yav_geonosian_cave	14	object/tangible/dungeon/shared_trash_container.iff	-131.6	-22.2	-70.9	0	0	0	0	128	TRUE	DWB
+bo_common_101	LOK	lok_imperial_gas_mine	11	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff	-91.8	-100.4	-93.6	0	0	0	0	128	TRUE	Gas Mine
+bo_common_102	LOK	lok_imperial_gas_mine	8	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	-81.0	-99.0	-163.3	0	0	0	0	128	TRUE	Gas Mine
+bo_common_103	YAVIN4	yav_geonosian_cave	38	object/static/destructible/shared_destructible_cave_wall_damprock.iff	-102.0	-31.4	-368.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_104	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.4	-22.1	-111.9	180	0	0	0	128	TRUE	Geo Cave
+bo_common_105	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.3	-21.6	-110.5	90	0	0	0	128	TRUE	Geo Cave
+bo_common_106	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-78.2	-21.8	-109.5	55	0	0	0	128	TRUE	Geo Cave
+bo_common_107	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-38.7	-22.0	-99.2	155	0	0	0	128	TRUE	Geo Cave
+bo_common_108	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-39.7	-22.2	-97.7	186	0	0	0	128	TRUE	Geo Cave
+bo_common_109	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-111.0	-33.7	-228.3	0	0	0	0	128	TRUE	Geo Cave
+bo_common_110	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-109.5	-33.3	-227.5	115	0	0	0	128	TRUE	Geo Cave
+bo_common_111	YAVIN4	yav_geonosian_cave	29	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff	-113.0	-33.4	-229.2	48	0	0	0	128	TRUE	Geo Cave
+bo_common_112	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.6	-21.9	-112.1	64	0	0	0	128	TRUE	Geo Cave
+bo_common_113	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.6	-22.0	-111.2	16	0	0	0	128	TRUE	Geo Cave
+bo_common_114	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.9	-22.0	-110.2	3	0	0	0	128	TRUE	Geo Cave
+bo_common_115	YAVIN4	yav_geonosian_cave	13	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-76.9	-22.1	-109.2	22	0	0	0	128	TRUE	Geo Cave
+bo_common_116	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-38.4	-22.2	-96.5	64	0	0	0	128	TRUE	Geo Cave
+bo_common_117	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-40.1	-22.2	-99.0	23	0	0	0	128	TRUE	Geo Cave
+bo_common_118	YAVIN4	yav_geonosian_cave	15	object/static/destructible/shared_destructible_tato_cave_rock_med.iff	-39.7	-22.2	-100.0	3	0	0	0	128	TRUE	Geo Cave
+bo_common_119	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_crate1.iff	-22.2	-22.0	-132.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_120	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_crate1.iff	-22.1	-22.0	-133.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_121	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.8	-34.0	-333.5	0	0	0	0	128	TRUE	Geo Cave
+bo_common_122	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.3	-34.0	-334.5	90	0	0	0	128	TRUE	Geo Cave
+bo_common_123	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_dented.iff	37.3	-34.0	-335.6	180	0	0	0	128	TRUE	Geo Cave
+bo_common_124	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_dented.iff	-23.4	-22.0	-133.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_125	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_dented.iff	-23.2	-22.0	-131.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_126	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	32.1	-24.0	-335.6	0	0	0	0	128	TRUE	Geo Cave
+bo_common_127	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	32.9	-24.0	-335.1	0	0	0	0	128	TRUE	Geo Cave
+bo_common_128	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	33.8	-24.0	-335.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_129	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	34.5	-24.0	-335.5	0	0	0	0	128	TRUE	Geo Cave
+bo_common_130	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	35.6	-24.0	-335.1	0	0	0	0	128	TRUE	Geo Cave
+bo_common_131	YAVIN4	yav_geonosian_cave	42	object/static/destructible/shared_destructible_tato_drum_storage1.iff	35.2	-24.0	-334.3	0	0	0	0	128	TRUE	Geo Cave
+bo_common_132	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_storage1.iff	-23.2	-22.0	-132.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_133	YAVIN4	yav_geonosian_cave	21	object/static/destructible/shared_destructible_tato_drum_storage1.iff	-21.9	-22.0	-131.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_134	YAVIN4	yav_geonosian_cave	4	object/tangible/terminal/shared_terminal_geo_bunker.iff	-34.0	-18.0	-31.0	90	0	0	0	128	TRUE	Geo Cave
+bo_common_135	YAVIN4	yav_geonosian_cave	5	object/tangible/terminal/shared_terminal_geo_bunker.iff	-49.7	-18.0	-55.7	0	0	0	0	128	TRUE	Geo Cave
+bo_common_136	YAVIN4	yav_geonosian_cave	9	object/tangible/terminal/shared_terminal_geo_bunker.iff	-105.3	-18.0	-64.0	180	0	0	0	128	TRUE	Geo Cave
+bo_common_137	YAVIN4	yav_geonosian_cave	24	object/tangible/terminal/shared_terminal_geo_bunker.iff	-79.0	-22.0	-146.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_138	YAVIN4	yav_geonosian_cave	31	object/tangible/terminal/shared_terminal_geo_bunker.iff	-67.0	-34.0	-260.0	0	0	0	0	128	TRUE	Geo Cave
+bo_common_139	YAVIN4	yav_geonosian_cave	34	object/tangible/terminal/shared_terminal_geo_bunker.iff	-133.1	-34.0	-204.0	180	0	0	0	128	TRUE	Geo Cave
+bo_common_140	YAVIN4	yav_geonosian_cave	41	object/tangible/terminal/shared_terminal_geo_bunker.iff	-4.0	-34.0	-417.0	270	0	0	0	128	TRUE	Geo Cave
+bo_common_141	YAVIN4	yav_geonosian_cave	42	object/tangible/terminal/shared_terminal_geo_bunker.iff	38.0	-34.0	-332.9	270	0	0	0	128	TRUE	Geo Cave
+bo_common_142	YAVIN4	yav_geonosian_cave	4	object/tangible/theme_park/shared_invisible_object.iff	4.3	-18.2	-27.7	0	0	0	0	8	TRUE	Geo Cave
+bo_common_143	YAVIN4	yav_geonosian_cave	16	object/tangible/theme_park/shared_invisible_object.iff	-11.7	-30.2	-110.2	0	0	0	0	8	TRUE	Geo Cave
+bo_common_144	YAVIN4	yav_geonosian_cave	27	object/tangible/theme_park/shared_invisible_object.iff	-103.9	-27.6	-191.1	0	0	0	0	8	TRUE	Geo Cave
+bo_common_145	YAVIN4	yav_geonosian_cave	33	object/tangible/theme_park/shared_invisible_object.iff	-127.6	-34.0	-250.8	0	0	0	0	8	TRUE	Geo Cave
+bo_common_146	YAVIN4	yav_geonosian_cave	43	object/tangible/theme_park/shared_invisible_object.iff	47.5	-34.0	-333.9	0	0	0	0	8	TRUE	Geo Cave
+bo_common_147	DATHOMIR	dat_ns_rancor_cave	11	object/tangible/door/shared_heroic_axkva_min_door.iff	-91.0	-101.0	-102.7	180	0	0	0	128	TRUE	Heroics - AM
+bo_common_148	CORELLIA	cor_world	0	object/tangible/spawning/shared_auto_invasion_spawner.iff	-51.0	28.0	-4734.0	0	0	0	0	8	FALSE	Invasion spawner
+bo_common_149	ENDOR	end_world	0	object/tangible/spawning/shared_auto_invasion_spawner.iff	-977.0	73.0	1554.0	0	0	0	0	8	FALSE	Invasion spawner
+bo_common_150	CORELLIA	cor_coronet_starport	4	object/tangible/collection/shared_col_jalopy_crate_04.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_151	NABOO	nab_kaadara_starport	4	object/tangible/collection/shared_col_jalopy_crate_03.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_152	NABOO	nab_theed_hangar	5	object/tangible/collection/shared_col_jalopy_crate_08.iff	49.1	8.0	-21.4	-160	0	0	0	128	TRUE	ITV
+bo_common_153	TALUS	tal_dearic_starport	4	object/tangible/collection/shared_col_jalopy_crate_06.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_154	TALUS	tal_nashal_starport	4	object/tangible/collection/shared_col_jalopy_crate_07.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_155	TATOOINE	tat_bestine_starport	4	object/tangible/collection/shared_col_jalopy_crate_01.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_156	TATOOINE	tat_moseisley_starport	4	object/tangible/collection/shared_col_jalopy_crate_02.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_157	TATOOINE	tat_mosespa_starport	4	object/tangible/collection/shared_col_jalopy_crate_05.iff	-11.9	0.6	50.8	55	0	0	0	128	TRUE	ITV
+bo_common_158	TATOOINE	tat_jabbas_palace	22	object/tangible/instrument/shared_organ_max_rebo.iff	-11.0	2.0	36.0	0	0	0	0	64	TRUE	Jabbas Palace
+bo_common_159	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_couch.iff	-2.0	0.0	8.0	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_160	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_desk_lamp.iff	1.6	0.8	8.5	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_161	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_desk.iff	1.3	0.0	9.1	-90	0	0	0	128	TRUE	Lucky Despot
+bo_common_162	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_rug.iff	-1.3	0.0	10.7	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_163	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_table.iff	-1.7	0.0	12.4	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_164	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff	-1.4	0.0	11.4	-1	0	0	0	128	TRUE	Lucky Despot
+bo_common_165	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff	-0.2	0.0	9.2	90	0	0	0	128	TRUE	Lucky Despot
+bo_common_166	TATOOINE	tat_moseisley_lucky_despot	9	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff	28.8	6.9	5.6	124	0	0	0	128	TRUE	Lucky Despot
+bo_common_167	TATOOINE	tat_moseisley_lucky_despot	9	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff	30.3	7.0	3.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_168	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/painting/shared_painting_house_cleanup_imperial.iff	-2.7	1.2	7.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_169	TATOOINE	tat_moseisley_lucky_despot	15	object/tangible/painting/shared_painting_house_cleanup_rebel.iff	-4.2	1.2	7.0	0	0	0	0	128	TRUE	Lucky Despot
+bo_common_170	CORELLIA	cor_meatlump_hideout_main	3	object/tangible/datapad/shared_data_dropoff.iff	-4.2	0.6	-4.1	0	0	0	0	128	FALSE	Meatlump
+bo_common_171	LOK	lok_ntp_mercenary_bunker	5	object/tangible/terminal/shared_systems_control_terminal.iff	9.5	-12.0	43.8	90	0	0	0	128	TRUE	Nym's TP
+bo_common_172	LOK	lok_ntp_mercenary_bunker	5	object/tangible/terminal/shared_systems_control_terminal.iff	11.0	-12.0	64.3	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_173	LOK	lok_ntp_mercenary_bunker	7	object/tangible/terminal/shared_systems_control_terminal.iff	-47.1	-20.0	42.9	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_174	LOK	lok_ntp_mercenary_bunker	7	object/tangible/terminal/shared_systems_control_terminal.iff	-78.7	-20.0	46.9	90	0	0	0	128	TRUE	Nym's TP
+bo_common_175	LOK	lok_ntp_mercenary_bunker	3	object/tangible/terminal/shared_systems_control_terminal.iff	3.3	0.3	-5.5	0	0	0	0	128	TRUE	Nym's TP
+bo_common_176	LOK	lok_ntp_mercenary_bunker	14	object/tangible/terminal/shared_systems_control_terminal.iff	19.1	-12.0	26.4	180	0	0	0	128	TRUE	Nym's TP
+bo_common_177	LOK	lok_ntp_mercenary_bunker	16	object/tangible/terminal/shared_systems_control_terminal.iff	-9.1	-20.0	-0.3	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_178	LOK	lok_ntp_mercenary_bunker	19	object/tangible/terminal/shared_systems_control_terminal.iff	-34.5	-20.0	93.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_179	LOK	lok_ntp_mercenary_bunker	12	object/tangible/terminal/shared_systems_control_terminal.iff	74.6	-12.0	51.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_180	LOK	lok_ntp_mercenary_bunker	13	object/tangible/terminal/shared_systems_control_terminal.iff	24.2	-20.0	115.6	0	0	0	0	128	TRUE	Nym's TP
+bo_common_181	LOK	lok_ntp_mercenary_bunker	9	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff	-54.2	-20.0	74.0	0	0	0	0	128	TRUE	Nym's TP
+bo_common_182	LOK	lok_ntp_mercenary_bunker	8	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff	-54.4	-20.0	12.8	-90	0	0	0	128	TRUE	Nym's TP
+bo_common_183	ENDOR	end_world	0	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff	-6500.0	-0.9	-7000.0	0	0	0	0	8	TRUE	PvP Battlefield
+bo_common_184	YAVIN4	yav_world	0	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff	1015.0	68.7	425.0	0	0	0	0	8	FALSE	PvP Battlefield
+bo_common_185	DANTOOINE	dan_mining_outpost_cantina	4	object/tangible/quest/shared_clone_relics_box_large.iff	9.5	0.6	-4.8	-10	0	0	0	128	TRUE	Quest
+bo_common_186	DATHOMIR	dat_ns_rancor_cave	8	object/tangible/quest/shared_clone_relics_skeleton_human.iff	-87.7	-70.0	-115.4	-128	0	0	0	128	TRUE	Quest
+bo_common_187	DATHOMIR	dat_ns_rancor_cave	5	object/tangible/quest/township/shared_axkva_nightsister_skull.iff	47.5	-54.5	-155.6	-37	0	0	0	128	TRUE	Quest
+bo_common_188	DATHOMIR	dat_ns_rancor_cave	5	object/tangible/quest/township/shared_axkva_pedastal.iff	47.5	-58.4	-155.6	-37	0	0	0	128	TRUE	Quest
+bo_common_189	LOK	lok_ntp_mercenary_bunker	21	object/tangible/quest/shared_nym_grenade_container.iff	-7.0	-20.0	78.4	180	0	0	0	128	TRUE	Quest
+bo_common_190	NABOO	nab_deeja_house2	6	object/tangible/quest/shared_clone_relics_box_large.iff	-4.8	-4.9	-8.1	-19	0	0	0	128	TRUE	Quest
+bo_common_191	NABOO	nab_mauler_stronghold	5	object/tangible/quest/shared_mauler_stronghold_terminal.iff	8.1	-12.0	54.4	-171	0	0	0	128	TRUE	Quest
+bo_common_192	NABOO	nab_mauler_stronghold	5	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-3.9	-12.0	51.9	84	0	0	0	128	TRUE	Quest
+bo_common_193	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	3.6	-16.0	115.3	180	0	0	0	128	TRUE	Quest
+bo_common_194	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	9.0	-16.0	120.4	91	0	0	0	128	TRUE	Quest
+bo_common_195	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	27.0	-16.0	121.1	-93	0	0	0	128	TRUE	Quest
+bo_common_196	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	3.4	-16.0	126.5	-1	0	0	0	128	TRUE	Quest
+bo_common_197	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-2.0	-16.0	121.8	-88	0	0	0	128	TRUE	Quest
+bo_common_198	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-34.7	-12.0	166.6	88	0	0	0	128	TRUE	Quest
+bo_common_199	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-18.3	-12.0	167.4	-90	0	0	0	128	TRUE	Quest
+bo_common_200	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-160.3	-44.0	68.8	0	0	0	0	128	TRUE	Quest
+bo_common_201	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-145.0	-44.0	68.8	1	0	0	0	128	TRUE	Quest
+bo_common_202	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-102.7	-44.0	-17.4	98	0	0	0	128	TRUE	Quest
+bo_common_203	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-94.1	-44.0	-25.0	3	0	0	0	128	TRUE	Quest
+bo_common_204	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-78.3	-44.0	-24.9	-7	0	0	0	128	TRUE	Quest
+bo_common_205	NABOO	nab_mauler_stronghold	32	object/tangible/quest/shared_mauler_stronghold_terminal.iff	-62.7	-44.0	-25.2	5	0	0	0	128	TRUE	Quest
+bo_common_206	NABOO	nab_mauler_stronghold	10	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-20.0	-16.0	121.8	90	0	0	0	128	TRUE	Quest
+bo_common_207	NABOO	nab_mauler_stronghold	12	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-26.2	-12.0	175.2	179	0	0	0	128	TRUE	Quest
+bo_common_208	NABOO	nab_mauler_stronghold	17	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-96.9	-28.0	127.2	-179	0	0	0	128	TRUE	Quest
+bo_common_209	NABOO	nab_mauler_stronghold	29	object/tangible/quest/shared_typho_mauler_weapons_cache.iff	-168.7	-44.0	77.2	82	0	0	0	128	TRUE	Quest
+bo_common_210	NABOO	nab_theed_palace	8	object/tangible/quest/shared_rsf_computer.iff	38.6	12.0	44.9	0	0	0	0	128	TRUE	Quest
+bo_common_211	TALUS	tal_nashal_cantina	13	object/tangible/quest/shared_clone_relics_box_large.iff	-27.2	-0.5	10.5	27	0	0	0	128	TRUE	Quest
+bo_common_212	TALUS	tal_nashal_starport	7	object/tangible/quest/shared_talus_grave_robbers_box_magseal.iff	56.0	-0.5	33.7	77	0	0	0	128	TRUE	Quest
+bo_common_213	TATOOINE	tat_fort_tusken	5	object/tangible/quest/shared_clone_relics_starmap_box.iff	4.2	8.3	-22.1	1	0	0	0	128	TRUE	Quest
+bo_common_214	TATOOINE	tat_sennex_camp	17	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-96.9	-28.0	127.2	-179	0	0	0	128	TRUE	Quest
+bo_common_215	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	3.6	-16.0	115.3	180	0	0	0	128	TRUE	Quest
+bo_common_216	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	9.0	-16.0	120.4	91	0	0	0	128	TRUE	Quest
+bo_common_217	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	27.0	-16.0	121.1	-93	0	0	0	128	TRUE	Quest
+bo_common_218	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	3.4	-16.0	126.5	-1	0	0	0	128	TRUE	Quest
+bo_common_219	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-20.0	-16.0	121.8	90	0	0	0	128	TRUE	Quest
+bo_common_220	TATOOINE	tat_sennex_camp	10	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-2.0	-16.0	121.8	-88	0	0	0	128	TRUE	Quest
+bo_common_221	TATOOINE	tat_sennex_camp	5	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	8.1	-12.0	54.4	-171	0	0	0	128	TRUE	Quest
+bo_common_222	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-168.7	-44.0	77.2	82	0	0	0	128	TRUE	Quest
+bo_common_223	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-160.3	-44.0	68.8	0	0	0	0	128	TRUE	Quest
+bo_common_224	TATOOINE	tat_sennex_camp	29	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-145.0	-44.0	68.8	2	0	0	0	128	TRUE	Quest
+bo_common_225	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-102.7	-44.0	-17.4	98	0	0	0	128	TRUE	Quest
+bo_common_226	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-94.1	-44.0	-25.0	3	0	0	0	128	TRUE	Quest
+bo_common_227	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-78.3	-44.0	-24.9	0	0	0	0	128	TRUE	Quest
+bo_common_228	TATOOINE	tat_sennex_camp	32	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-62.7	-44.0	-25.2	6	0	0	0	128	TRUE	Quest
+bo_common_229	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-26.2	-12.0	175.2	179	0	0	0	128	TRUE	Quest
+bo_common_230	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-34.7	-12.0	166.6	88	0	0	0	128	TRUE	Quest
+bo_common_231	TATOOINE	tat_sennex_camp	12	object/tangible/quest/shared_sennex_hq_computer_terminal.iff	-18.3	-12.0	167.4	-90	0	0	0	128	TRUE	Quest
+bo_common_232	TATOOINE	tat_sennex_camp	26	object/tangible/quest/shared_sennex_hq_databank.iff	-80.7	-28.0	52.9	0	0	0	0	128	TRUE	Quest
+bo_common_233	YAVIN4	yav_geonosian_cave	5	object/tangible/quest/shared_clone_relics_box_magseal.iff	-39.7	-18.0	-36.9	0	0	0	0	128	TRUE	Quest
+bo_common_234	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5312.5	78.5	-4159.2	0	0	0	0	64	TRUE	Quest - Figurine 1
+bo_common_235	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5382.5	98.2	-4065.4	0	0	0	0	64	TRUE	Quest - Figurine 2
+bo_common_236	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5116.3	78.4	-3957.8	0	0	0	0	64	TRUE	Quest - Figurine 3
+bo_common_237	DATHOMIR	dat_world	0	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	5408.1	78.9	-4189.1	0	0	0	0	64	TRUE	Quest - Figurine 4
+bo_common_238	DATHOMIR	dat_aurilia_prisoner_hut1	1	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	-3.9	0.6	-0.4	0	0	0	0	64	TRUE	Quest - Figurine 5
+bo_common_239	DATHOMIR	dat_aurilia_adv_gh	10	object/tangible/quest/township/shared_rohak_figurine_spawner.iff	9.4	1.8	-2.1	0	0	0	0	64	TRUE	Quest - Figurine 6
+bo_common_240	CORELLIA	cor_world	0	object/tangible/gcw/shared_pvp_region_watcher.iff	4772.3	95.0	-5233.7	0	0	0	0	8	FALSE	
+bo_common_241	DATHOMIR	dat_ns_rancor_cave	6	object/static/terrain/corellia/shared_rock_crystl_shrpbush_med.iff	-11.5	-64.6	-202.2	0	0	0	0	128	TRUE	
+bo_common_242	DATHOMIR	dat_ns_rancor_cave	7	object/tangible/quest/imperial/shared_itp_vader_force_crystal.iff	-25.3	-63.7	-254.7	20	0	0	0	128	TRUE	
+bo_common_243	DATHOMIR	dat_world	0	object/tangible/spawning/kashyyyk/shared_rodian_shuttle_spawner.iff	5423.0	83.2	-4125.7	0	0	0	0	256	FALSE	
+bo_common_244	DUNGEON1	du1_nova_orion	28	object/tangible/quest/nova_orion/shared_nova_orion_katiara_grave_node.iff	-27.8	29.0	16.0	0	0	0	0	16	FALSE	
+bo_common_245	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-10.3	90	0	0	0	128	TRUE	
+bo_common_246	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-8.8	90	0	0	0	128	TRUE	
+bo_common_247	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-7.3	90	0	0	0	128	TRUE	
+bo_common_248	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-5.8	90	0	0	0	128	TRUE	
+bo_common_249	NABOO	nab_deeja_house2	5	object/static/item/shared_item_container_weapons.iff	-10.6	6.1	-4.3	90	0	0	0	128	TRUE	
+bo_common_250	NABOO	nab_world	0	object/tangible/datapad/shared_droid_datapad_1.iff	-6590.9	-209.8	5982.8	0	0	0	0	256	TRUE	
+bo_common_251	NABOO	nab_world	0	object/tangible/datapad/shared_droid_datapad_6.iff	-6586.4	-209.9	5984.3	0	0	0	0	256	TRUE	
+bo_common_252	RORI	ror_world	0	object/tangible/content/shared_u13_ponda_gungan_statue_spawer.iff	-5360.0	80.0	-2291.0	0	0	0	0	256	FALSE	
+bo_common_253	TATOOINE	tat_world	0	object/static/particle/shared_particle_campfire_style_1.iff	3519.7	5.0	-4785.9	57	0	0	0	256	TRUE	Mos Eisley
+bo_common_254	TATOOINE	tat_world	0	object/static/particle/shared_particle_smoke.iff	4052.1	9.0	-4731.1	89	0	0	0	256	TRUE	Mos Eisley
+bo_common_255	TATOOINE	tat_world	0	object/static/vehicle/shared_static_swoop_bike.iff	3452.3	5.0	-4853.8	2	0	0	0	256	TRUE	Mos Eisley
+bo_common_256	TATOOINE	tat_world	0	object/static/vehicle/shared_static_speeder_bike.iff	3450.2	5.0	-4853.4	5	0	0	0	256	TRUE	Mos Eisley
+bo_common_257	TATOOINE	tat_world	0	object/static/vehicle/shared_static_sandcrawler.iff	2255.4	0.0	-4445.1	-45	0	0	0	512	TRUE	Invasion - Jawa vs. Tusken
+bo_common_258	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_tent_house_tatooine_style_01.iff	2229.8	0.0	-4455.1	-100	0	0	0	512	TRUE	Invasion - Jawa vs. Tusken
+bo_common_259	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_debris_tatt_drum_storage_2.iff	2231.1	0.0	-4449.5	118	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_260	TATOOINE	tat_world	0	object/static/structure/tatooine/shared_debris_tatt_crate_metal_1.iff	2230.7	0.0	-4448.6	172	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_261	TATOOINE	tat_world	0	object/static/structure/general/shared_droid_lemedical_powerdown.iff	2232.1	0.0	-4450.6	20	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_262	TATOOINE	tat_world	0	object/static/structure/general/shared_trash_pile_s01.iff	2231.9	0.0	-4447.4	-60	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_263	TATOOINE	tat_world	0	object/static/structure/general/shared_campfire_burnt.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_264	TATOOINE	tat_world	0	object/static/particle/shared_particle_smoke.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_265	TATOOINE	tat_world	0	object/static/particle/shared_particle_campfire_style_1.iff	2240.6	0.0	-4451.4	-101	0	0	0	256	TRUE	Invasion - Jawa vs. Tusken
+bo_common_266	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	1	object/tangible/door/thm_kash_cave_myyydril_door.iff	-4.13	-0.31	-0.06	180	0	0	0	256	TRUE	Zonegate - Myyydril Cave to Kkowir Forest
+bo_common_267	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/warl_cave_plant.iff	147.4	-41.4	-11.5	168	0	0	0	256	TRUE	
+bo_common_268	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/warl_cave_plant.iff	146.5	-41.7	-9.2	-96	0	0	0	256	TRUE	
+bo_common_269	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/warl_cave_plant.iff	149.2	-40.8	-20.1	-49	0	0	0	256	TRUE	
+bo_common_270	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/warl_cave_plant.iff	115.6	-44.2	-37.6	2	0	0	0	256	TRUE	
+bo_common_271	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/warl_cave_plant.iff	113.7	-44.1	-38.4	-22	0	0	0	256	TRUE	
+bo_common_272	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/warl_cave_plant.iff	168.7	-55.0	14.9	163	0	0	0	256	TRUE	
+bo_common_273	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/warl_cave_plant.iff	167.4	-55.1	16.8	-34	0	0	0	256	TRUE	
+bo_common_274	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/warl_cave_plant.iff	167.0	-55.0	15.2	-114	0	0	0	256	TRUE	
+bo_common_275	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/warl_cave_plant.iff	156.3	-54.7	23.0	158	0	0	0	256	TRUE	
+bo_common_276	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/warl_cave_plant.iff	168.5	-55.0	5.2	-19	0	0	0	256	TRUE	
+bo_common_277	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/warl_cave_plant.iff	133.3	-40.5	-79.2	-172	0	0	0	256	TRUE	
+bo_common_278	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/warl_cave_plant.iff	133.5	-40.9	-77.4	-9	0	0	0	256	TRUE	
+bo_common_279	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/warl_cave_plant.iff	132.6	-40.8	-78.2	-91	0	0	0	256	TRUE	
+bo_common_280	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/warl_cave_plant.iff	133.4	-36.2	-47.9	-77	0	0	0	256	TRUE	
+bo_common_281	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	13	object/tangible/quest/warl_cave_plant.iff	93.4	-29.1	-107.4	-109	0	0	0	256	TRUE	
+bo_common_282	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/warl_cave_plant.iff	38.5	-29.3	-106.6	-4	0	0	0	256	TRUE	
+bo_common_283	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/warl_cave_plant.iff	37.4	-29.4	-107.7	-103	0	0	0	256	TRUE	
+bo_common_284	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/warl_cave_plant.iff	27.0	-29.3	-103.3	73	0	0	0	256	TRUE	
+bo_common_285	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	9	object/tangible/quest/warl_cave_plant.iff	68.2	-26.7	-52.7	-57	0	0	0	256	TRUE	
+bo_common_286	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	11	object/tangible/quest/warl_cave_plant.iff	83.7	-30.6	-36.5	24	0	0	0	256	TRUE	
+bo_common_287	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	11	object/tangible/quest/warl_cave_plant.iff	81.9	-29.6	-37.7	-51	0	0	0	256	TRUE	
+bo_common_288	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	10	object/tangible/quest/warl_cave_plant.iff	57.1	-26.8	-20.2	-38	0	0	0	256	TRUE	
+bo_common_289	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	7	object/tangible/quest/warl_cave_plant.iff	31.5	-21.1	-10.1	174	0	0	0	256	TRUE	
+bo_common_290	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	6	object/tangible/quest/warl_cave_plant.iff	28.4	-21.2	-60.7	25	0	0	0	256	TRUE	
+bo_common_291	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/warl_cave_plant.iff	6.8	-17.2	-44.6	10	0	0	0	256	TRUE	
+bo_common_292	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/warl_cave_plant.iff	5.8	-17.4	-45.4	-62	0	0	0	256	TRUE	
+bo_common_293	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/warl_cave_plant.iff	16.2	-17.5	-34.9	-124	0	0	0	256	TRUE	
+bo_common_294	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/warl_cave_plant.iff	15.1	-17.1	-33.1	-36	0	0	0	256	TRUE	
+bo_common_295	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	4.5	-16.9	-34.7	-45	0	0	0	256	TRUE	
+bo_common_296	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	7.9	-16.9	-33.0	4	0	0	0	256	TRUE	
+bo_common_297	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	12.9	-17.6	-38.9	-41	0	0	0	256	TRUE	
+bo_common_298	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	13.5	-17.7	-40.2	-167	0	0	0	256	TRUE	
+bo_common_299	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	17.6	-18.0	-46.0	151	0	0	0	256	TRUE	
+bo_common_300	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	22.8	-20.2	-46.3	-150	0	0	0	256	TRUE	
+bo_common_301	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	7	object/tangible/quest/naktra_crystals.iff	25.5	-20.6	-29.0	-27	0	0	0	256	TRUE	
+bo_common_302	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/naktra_crystals.iff	36.4	-21.1	-33.7	115	0	0	0	256	TRUE	
+bo_common_303	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	6	object/tangible/quest/naktra_crystals.iff	25.0	-20.5	-55.9	-63	0	0	0	256	TRUE	
+bo_common_304	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	6	object/tangible/quest/naktra_crystals.iff	25.5	-20.7	-57.1	-179	0	0	0	256	TRUE	
+bo_common_305	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	6	object/tangible/quest/naktra_crystals.iff	46.4	-23.4	-58.7	91	0	0	0	256	TRUE	
+bo_common_306	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	6	object/tangible/quest/naktra_crystals.iff	45.7	-24.8	-68.3	113	0	0	0	256	TRUE	
+bo_common_307	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	27.3	-28.6	-83.4	-97	0	0	0	256	TRUE	
+bo_common_308	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	30.8	-29.0	-81.7	-140	0	0	0	256	TRUE	
+bo_common_309	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	24.1	-28.9	-99.7	-150	0	0	0	256	TRUE	
+bo_common_310	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	41.8	-29.3	-107.5	168	0	0	0	256	TRUE	
+bo_common_311	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	61.5	-29.3	-84.1	52	0	0	0	256	TRUE	
+bo_common_312	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	13	object/tangible/quest/naktra_crystals.iff	64.3	-29.0	-111.0	-176	0	0	0	256	TRUE	
+bo_common_313	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	13	object/tangible/quest/naktra_crystals.iff	71.7	-28.8	-97.1	-30	0	0	0	256	TRUE	
+bo_common_314	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	14	object/tangible/quest/naktra_crystals.iff	82.2	-31.7	-86.8	-47	0	0	0	256	TRUE	
+bo_common_315	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	14	object/tangible/quest/naktra_crystals.iff	96.6	-32.3	-80.3	-131	0	0	0	256	TRUE	
+bo_common_316	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	14	object/tangible/quest/naktra_crystals.iff	115.8	-38.9	-83.0	-75	0	0	0	256	TRUE	
+bo_common_317	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	134.2	-40.1	-83.9	113	0	0	0	256	TRUE	
+bo_common_318	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	135.1	-35.9	-55.6	77	0	0	0	256	TRUE	
+bo_common_319	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	121.4	-44.0	-18.9	-62	0	0	0	256	TRUE	
+bo_common_320	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	140.1	-43.2	-9.6	54	0	0	0	256	TRUE	
+bo_common_321	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	152.4	-38.8	-9.8	79	0	0	0	256	TRUE	
+bo_common_322	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	153.1	-39.1	-15.4	150	0	0	0	256	TRUE	
+bo_common_323	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	20	object/tangible/quest/naktra_crystals.iff	122.6	-43.1	5.2	-33	0	0	0	256	TRUE	
+bo_common_324	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	20	object/tangible/quest/naktra_crystals.iff	145.8	-51.8	6.3	43	0	0	0	256	TRUE	
+bo_common_325	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	163.7	-54.7	2.2	-60	0	0	0	256	TRUE	
+bo_common_326	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	151.8	-54.7	16.9	-69	0	0	0	256	TRUE	
+bo_common_327	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	152.5	-54.8	19.4	0	0	0	0	256	TRUE	
+bo_common_328	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	160.4	-54.8	24.9	30	0	0	0	256	TRUE	
+bo_common_329	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	170.3	-55.0	18.6	167	0	0	0	256	TRUE	
+bo_common_330	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	167.0	-55.1	17.4	-133	0	0	0	256	TRUE	
+bo_common_331	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	176.6	-54.8	7.5	114	0	0	0	256	TRUE	
+bo_common_332	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	177.2	-54.8	15.2	50	0	0	0	256	TRUE	
+bo_common_333	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	172.5	-54.7	24.5	32	0	0	0	256	TRUE	
+bo_common_334	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	96.4	-152.6	-238.8	-85	0	0	0	256	TRUE	
+bo_common_335	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	97.4	-152.7	-234.3	-117	0	0	0	256	TRUE	
+bo_common_336	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	115.1	-152.9	-243.4	55	0	0	0	256	TRUE	
+bo_common_337	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	114.2	-153.9	-223.5	12	0	0	0	256	TRUE	
+bo_common_338	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	126.6	-158.8	-238.2	-153	0	0	0	256	TRUE	
+bo_common_339	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	143.6	-159.3	-232.2	47	0	0	0	256	TRUE	
+bo_common_340	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	35	object/tangible/quest/naktra_crystals.iff	130.1	-159.8	-216.2	-115	0	0	0	256	TRUE	
+bo_common_341	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	130.6	-159.9	-215.6	20	0	0	0	256	TRUE	
+bo_common_342	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	129.6	-160.5	-202.4	-26	0	0	0	256	TRUE	
+bo_common_343	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	121.0	-159.9	-203.0	-70	0	0	0	256	TRUE	
+bo_common_344	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	113.6	-160.4	-202.0	12	0	0	0	256	TRUE	
+bo_common_345	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	108.2	-159.9	-208.7	175	0	0	0	256	TRUE	
+bo_common_346	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	112.1	-159.9	-193.7	56	0	0	0	256	TRUE	
+bo_common_347	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	117.3	-160.5	-189.6	132	0	0	0	256	TRUE	
+bo_common_348	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	125.6	-160.4	-189.4	-159	0	0	0	256	TRUE	
+bo_common_349	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	135.5	-160.5	-191.5	-144	0	0	0	256	TRUE	
+bo_common_350	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	132.6	-159.9	-179.8	40	0	0	0	256	TRUE	
+bo_common_351	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	36	object/tangible/quest/naktra_crystals.iff	135.2	-160.3	-200.8	-145	0	0	0	256	TRUE	
+bo_common_352	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	37	object/tangible/quest/naktra_crystals.iff	119.1	-167.6	-161.8	30	0	0	0	256	TRUE	
+bo_common_353	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	37	object/tangible/quest/naktra_crystals.iff	119.8	-174.7	-149.0	102	0	0	0	256	TRUE	
+bo_common_354	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	37	object/tangible/quest/naktra_crystals.iff	119.4	-178.3	-135.7	-105	0	0	0	256	TRUE	
+bo_common_355	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	37	object/tangible/quest/naktra_crystals.iff	118.0	-177.7	-133.4	-18	0	0	0	256	TRUE	
+bo_common_356	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	38	object/tangible/quest/naktra_crystals.iff	75.3	-188.4	-131.3	-22	0	0	0	256	TRUE	
+bo_common_357	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	38	object/tangible/quest/naktra_crystals.iff	72.9	-188.7	-142.2	145	0	0	0	256	TRUE	
+bo_common_358	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	38	object/tangible/quest/naktra_crystals.iff	85.9	-195.7	-169.0	87	0	0	0	256	TRUE	
+bo_common_359	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	38	object/tangible/quest/naktra_crystals.iff	74.3	-195.2	-176.9	-98	0	0	0	256	TRUE	
+bo_common_360	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	38	object/tangible/quest/naktra_crystals.iff	88.5	-195.7	-195.3	55	0	0	0	256	TRUE	
+bo_common_361	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/naktra_crystals.iff	-173.2	-169.1	-395.0	88	0	0	0	256	TRUE	
+bo_common_362	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/naktra_crystals.iff	-170.6	-168.6	-407.5	15	0	0	0	256	TRUE	
+bo_common_363	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/naktra_crystals.iff	-162.6	-168.9	-420.3	35	0	0	0	256	TRUE	
+bo_common_364	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/naktra_crystals.iff	-160.8	-169.0	-418.5	104	0	0	0	256	TRUE	
+bo_common_365	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/naktra_crystals.iff	-145.4	-171.6	-410.0	89	0	0	0	256	TRUE	
+bo_common_366	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/naktra_crystals.iff	-141.4	-173.3	-424.4	74	0	0	0	256	TRUE	
+bo_common_367	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-211.8	-221.5	27.9	73	0	0	0	256	TRUE	
+bo_common_368	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-197.6	-220.7	35.2	120	0	0	0	256	TRUE	
+bo_common_369	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-184.7	-221.8	60.0	-174	0	0	0	256	TRUE	
+bo_common_370	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-160.1	-220.4	81.5	-154	0	0	0	256	TRUE	
+bo_common_371	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	46	object/tangible/quest/naktra_crystals.iff	-121.1	-221.1	61.1	144	0	0	0	256	TRUE	
+bo_common_372	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	46	object/tangible/quest/naktra_crystals.iff	-112.0	-221.2	61.6	-149	0	0	0	256	TRUE	
+bo_common_373	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-116.1	-263.1	-134.7	-122	0	0	0	256	TRUE	
+bo_common_374	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-99.0	-259.6	-189.8	-147	0	0	0	256	TRUE	
+bo_common_375	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-118.7	-262.3	-188.9	-82	0	0	0	256	TRUE	
+bo_common_376	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-105.1	-261.6	-203.9	171	0	0	0	256	TRUE	
+bo_common_377	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	78	object/tangible/quest/naktra_crystals.iff	-152.6	-263.7	-254.8	-117	0	0	0	256	TRUE	
+bo_common_378	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-370.9	-256.7	-119.4	0	0	0	0	256	TRUE	
+bo_common_379	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-355.7	-256.5	-119.1	109	0	0	0	256	TRUE	
+bo_common_380	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-353.5	-254.9	-125.9	-73	0	0	0	256	TRUE	
+bo_common_381	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-364.1	-254.3	-100.0	-25	0	0	0	256	TRUE	
+bo_common_382	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-346.2	-255.1	-101.4	-104	0	0	0	256	TRUE	
+bo_common_383	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/naktra_crystals.iff	-347.7	-254.6	-99.8	-106	0	0	0	256	TRUE	
+bo_common_384	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-258.4	-183.6	168.3	59	0	0	0	256	TRUE	
+bo_common_385	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-265.9	-181.2	180.8	116	0	0	0	256	TRUE	
+bo_common_386	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-264.3	-181.5	180.6	107	0	0	0	256	TRUE	
+bo_common_387	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-272.4	-177.8	198.1	-91	0	0	0	256	TRUE	
+bo_common_388	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-273.0	-177.3	213.1	-13	0	0	0	256	TRUE	
+bo_common_389	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-282.7	-177.6	202.6	-175	0	0	0	256	TRUE	
+bo_common_390	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-288.8	-177.8	213.9	43	0	0	0	256	TRUE	
+bo_common_391	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-308.2	-178.3	204.4	-126	0	0	0	256	TRUE	
+bo_common_392	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-313.6	-178.0	213.6	38	0	0	0	256	TRUE	
+bo_common_393	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	54	object/tangible/quest/naktra_crystals.iff	-330.8	-174.5	203.3	-106	0	0	0	256	TRUE	
+bo_common_394	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	60	object/tangible/quest/naktra_crystals.iff	-141.7	-65.7	79.9	-117	0	0	0	256	TRUE	
+bo_common_395	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	60	object/tangible/quest/naktra_crystals.iff	-140.8	-66.0	64.5	-143	0	0	0	256	TRUE	
+bo_common_396	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	60	object/tangible/quest/naktra_crystals.iff	-134.6	-65.6	65.9	67	0	0	0	256	TRUE	
+bo_common_397	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-153.2	-65.3	57.1	26	0	0	0	256	TRUE	
+bo_common_398	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	58	object/tangible/quest/naktra_crystals.iff	-162.8	-77.0	93.9	55	0	0	0	256	TRUE	
+bo_common_399	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	58	object/tangible/quest/naktra_crystals.iff	-168.0	-77.7	94.0	87	0	0	0	256	TRUE	
+bo_common_400	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	58	object/tangible/quest/naktra_crystals.iff	-171.1	-67.2	64.3	-160	0	0	0	256	TRUE	
+bo_common_401	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-170.8	-65.8	46.5	176	0	0	0	256	TRUE	
+bo_common_402	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-172.0	-65.6	41.1	92	0	0	0	256	TRUE	
+bo_common_403	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-160.8	-65.9	29.0	-174	0	0	0	256	TRUE	
+bo_common_404	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-156.4	-66.2	30.3	-157	0	0	0	256	TRUE	
+bo_common_405	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-138.9	-65.9	31.1	-134	0	0	0	256	TRUE	
+bo_common_406	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-136.2	-65.8	29.7	-177	0	0	0	256	TRUE	
+bo_common_407	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-124.7	-64.8	22.0	169	0	0	0	256	TRUE	
+bo_common_408	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-123.5	-64.2	20.3	-95	0	0	0	256	TRUE	
+bo_common_409	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-121.2	-62.7	17.2	148	0	0	0	256	TRUE	
+bo_common_410	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-108.6	-58.9	19.4	94	0	0	0	256	TRUE	
+bo_common_411	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-106.8	-57.3	15.1	-107	0	0	0	256	TRUE	
+bo_common_412	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-97.0	-57.0	42.5	35	0	0	0	256	TRUE	
+bo_common_413	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-95.3	-56.8	40.2	102	0	0	0	256	TRUE	
+bo_common_414	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	61	object/tangible/quest/naktra_crystals.iff	-93.6	-56.9	29.1	71	0	0	0	256	TRUE	
+bo_common_415	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-88.0	-53.8	25.7	26	0	0	0	256	TRUE	
+bo_common_416	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-85.7	-51.7	25.9	15	0	0	0	256	TRUE	
+bo_common_417	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-73.0	-44.0	13.1	-154	0	0	0	256	TRUE	
+bo_common_418	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-56.5	-42.7	25.3	101	0	0	0	256	TRUE	
+bo_common_419	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-53.9	-42.6	21.9	94	0	0	0	256	TRUE	
+bo_common_420	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-64.3	-35.0	-5.4	-84	0	0	0	256	TRUE	
+bo_common_421	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-56.3	-35.7	-1.4	38	0	0	0	256	TRUE	
+bo_common_422	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	62	object/tangible/quest/naktra_crystals.iff	-55.3	-35.5	-1.4	106	0	0	0	256	TRUE	
+bo_common_423	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-51.8	-35.0	-9.7	-125	0	0	0	256	TRUE	
+bo_common_424	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-49.2	-33.6	-14.5	-67	0	0	0	256	TRUE	
+bo_common_425	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-40.8	-27.3	-29.6	119	0	0	0	256	TRUE	
+bo_common_426	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-40.2	-26.1	-32.6	76	0	0	0	256	TRUE	
+bo_common_427	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-45.0	-25.5	-47.7	-162	0	0	0	256	TRUE	
+bo_common_428	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	63	object/tangible/quest/naktra_crystals.iff	-21.9	-18.3	-35.3	-30	0	0	0	256	TRUE	
+bo_common_429	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	26	object/tangible/quest/luilris_mushrooms.iff	161.8	-58.6	-10.6	34	0	0	0	256	TRUE	
+bo_common_430	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	26	object/tangible/quest/luilris_mushrooms.iff	163.2	-62.7	-20.3	65	0	0	0	256	TRUE	
+bo_common_431	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	26	object/tangible/quest/luilris_mushrooms.iff	158.1	-69.5	-37.4	138	0	0	0	256	TRUE	
+bo_common_432	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	26	object/tangible/quest/luilris_mushrooms.iff	155.3	-69.8	-38.1	-106	0	0	0	256	TRUE	
+bo_common_433	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	27	object/tangible/quest/luilris_mushrooms.iff	138.4	-74.1	-37.8	-132	0	0	0	256	TRUE	
+bo_common_434	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	27	object/tangible/quest/luilris_mushrooms.iff	138.2	-78.0	-18.3	-11	0	0	0	256	TRUE	
+bo_common_435	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	27	object/tangible/quest/luilris_mushrooms.iff	142.1	-78.3	-16.8	76	0	0	0	256	TRUE	
+bo_common_436	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	162.7	-90.9	-52.4	39	0	0	0	256	TRUE	
+bo_common_437	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	171.0	-91.3	-53.0	102	0	0	0	256	TRUE	
+bo_common_438	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	172.8	-91.4	-3.1	26	0	0	0	256	TRUE	
+bo_common_439	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	170.9	-91.4	-2.8	-3	0	0	0	256	TRUE	
+bo_common_440	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	124.2	-91.4	-5.6	-35	0	0	0	256	TRUE	
+bo_common_441	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	139.0	-95.8	-67.4	-28	0	0	0	256	TRUE	
+bo_common_442	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	130.4	-97.0	-76.5	140	0	0	0	256	TRUE	
+bo_common_443	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	156.6	-91.9	-89.0	138	0	0	0	256	TRUE	
+bo_common_444	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	170.8	-91.3	-82.1	39	0	0	0	256	TRUE	
+bo_common_445	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	161.0	-92.4	-69.5	41	0	0	0	256	TRUE	
+bo_common_446	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	153.4	-91.7	-58.8	0	0	0	0	256	TRUE	
+bo_common_447	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	111.9	-96.1	-88.2	-110	0	0	0	256	TRUE	
+bo_common_448	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	111.5	-95.3	-103.2	-106	0	0	0	256	TRUE	
+bo_common_449	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	119.0	-94.0	-107.7	137	0	0	0	256	TRUE	
+bo_common_450	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	119.8	-97.1	-79.4	-57	0	0	0	256	TRUE	
+bo_common_451	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	136.6	-95.3	-107.4	-14	0	0	0	256	TRUE	
+bo_common_452	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	120.0	-94.2	-106.1	171	0	0	0	256	TRUE	
+bo_common_453	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	145.4	-94.3	-102.6	132	0	0	0	256	TRUE	
+bo_common_454	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	166.6	-91.4	-91.0	-127	0	0	0	256	TRUE	
+bo_common_455	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	174.7	-91.0	-86.4	51	0	0	0	256	TRUE	
+bo_common_456	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	180.4	-90.8	-94.5	102	0	0	0	256	TRUE	
+bo_common_457	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	181.1	-91.1	-99.9	90	0	0	0	256	TRUE	
+bo_common_458	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	163.8	-95.6	-108.6	-22	0	0	0	256	TRUE	
+bo_common_459	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	177.5	-95.6	-122.7	148	0	0	0	256	TRUE	
+bo_common_460	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	180.4	-95.3	-116.0	80	0	0	0	256	TRUE	
+bo_common_461	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	170.9	-93.4	-131.3	66	0	0	0	256	TRUE	
+bo_common_462	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	162.3	-92.2	-139.3	-97	0	0	0	256	TRUE	
+bo_common_463	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	166.8	-91.9	-148.7	-84	0	0	0	256	TRUE	
+bo_common_464	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	167.7	-91.8	-154.4	-152	0	0	0	256	TRUE	
+bo_common_465	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	174.1	-91.7	-161.9	-137	0	0	0	256	TRUE	
+bo_common_466	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	171.8	-92.0	-159.2	-108	0	0	0	256	TRUE	
+bo_common_467	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	190.6	-93.3	-151.2	41	0	0	0	256	TRUE	
+bo_common_468	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	199.6	-94.0	-162.7	157	0	0	0	256	TRUE	
+bo_common_469	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	205.4	-95.6	-158.6	-172	0	0	0	256	TRUE	
+bo_common_470	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	210.7	-97.0	-153.3	89	0	0	0	256	TRUE	
+bo_common_471	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	198.0	-96.6	-141.5	-29	0	0	0	256	TRUE	
+bo_common_472	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	207.8	-94.8	-124.6	-9	0	0	0	256	TRUE	
+bo_common_473	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	227.5	-91.8	-134.3	171	0	0	0	256	TRUE	
+bo_common_474	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	227.2	-91.9	-123.2	4	0	0	0	256	TRUE	
+bo_common_475	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	115.6	-96.5	-83.2	113	0	0	0	256	TRUE	
+bo_common_476	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	140.5	-94.4	-57.8	-116	0	0	0	256	TRUE	
+bo_common_477	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	124.0	-92.7	-48.4	-119	0	0	0	256	TRUE	
+bo_common_478	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	159.5	-90.8	-51.3	54	0	0	0	256	TRUE	
+bo_common_479	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	154.2	-90.8	-52.3	-177	0	0	0	256	TRUE	
+bo_common_480	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	172.2	-90.8	-47.2	88	0	0	0	256	TRUE	
+bo_common_481	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	154.7	-91.0	-133.6	145	0	0	0	256	TRUE	
+bo_common_482	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	156.5	-91.8	-124.8	-45	0	0	0	256	TRUE	
+bo_common_483	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	142.8	-91.3	-131.7	14	0	0	0	256	TRUE	
+bo_common_484	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	146.9	-91.2	-144.9	86	0	0	0	256	TRUE	
+bo_common_485	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	128.3	-90.8	-133.5	-18	0	0	0	256	TRUE	
+bo_common_486	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	119.6	-91.3	-135.0	-72	0	0	0	256	TRUE	
+bo_common_487	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	118.8	-91.0	-141.8	-61	0	0	0	256	TRUE	
+bo_common_488	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	118.3	-91.6	-154.6	-71	0	0	0	256	TRUE	
+bo_common_489	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	146.7	-91.4	-153.5	84	0	0	0	256	TRUE	
+bo_common_490	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	145.3	-92.7	-162.8	126	0	0	0	256	TRUE	
+bo_common_491	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	116.7	-93.6	-168.1	-109	0	0	0	256	TRUE	
+bo_common_492	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	145.6	-94.0	-173.8	76	0	0	0	256	TRUE	
+bo_common_493	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	116.7	-94.3	-199.3	-85	0	0	0	256	TRUE	
+bo_common_494	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	147.0	-92.5	-201.1	102	0	0	0	256	TRUE	
+bo_common_495	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	143.4	-91.3	-207.9	164	0	0	0	256	TRUE	
+bo_common_496	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	29	object/tangible/quest/luilris_mushrooms.iff	118.8	-90.7	-211.3	-78	0	0	0	256	TRUE	
+bo_common_497	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	31	object/tangible/quest/luilris_mushrooms.iff	130.1	-91.1	-234.2	-157	0	0	0	256	TRUE	
+bo_common_498	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	31	object/tangible/quest/luilris_mushrooms.iff	121.2	-90.7	-223.7	-50	0	0	0	256	TRUE	
+bo_common_499	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	31	object/tangible/quest/luilris_mushrooms.iff	179.8	-112.9	-229.2	17	0	0	0	256	TRUE	
+bo_common_500	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	32	object/tangible/quest/luilris_mushrooms.iff	200.1	-119.4	-235.8	149	0	0	0	256	TRUE	
+bo_common_501	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	32	object/tangible/quest/luilris_mushrooms.iff	196.3	-119.8	-210.9	-44	0	0	0	256	TRUE	
+bo_common_502	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	32	object/tangible/quest/luilris_mushrooms.iff	200.5	-119.7	-204.9	-61	0	0	0	256	TRUE	
+bo_common_503	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	33	object/tangible/quest/luilris_mushrooms.iff	225.8	-123.5	-206.0	74	0	0	0	256	TRUE	
+bo_common_504	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	33	object/tangible/quest/luilris_mushrooms.iff	220.3	-123.5	-219.5	-135	0	0	0	256	TRUE	
+bo_common_505	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	33	object/tangible/quest/luilris_mushrooms.iff	230.9	-123.3	-231.2	115	0	0	0	256	TRUE	
+bo_common_506	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	33	object/tangible/quest/luilris_mushrooms.iff	229.0	-123.4	-246.3	106	0	0	0	256	TRUE	
+bo_common_507	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	31	object/tangible/quest/luilris_mushrooms.iff	153.1	-98.7	-243.6	-114	0	0	0	256	TRUE	
+bo_common_508	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	25	object/tangible/quest/luilris_mushrooms.iff	257.0	-80.3	-129.7	141	0	0	0	256	TRUE	
+bo_common_509	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	25	object/tangible/quest/luilris_mushrooms.iff	249.7	-80.7	-131.9	-166	0	0	0	256	TRUE	
+bo_common_510	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	25	object/tangible/quest/luilris_mushrooms.iff	260.0	-79.4	-123.5	67	0	0	0	256	TRUE	
+bo_common_511	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	25	object/tangible/quest/luilris_mushrooms.iff	259.4	-69.4	-97.3	38	0	0	0	256	TRUE	
+bo_common_512	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	25	object/tangible/quest/luilris_mushrooms.iff	253.9	-68.8	-92.5	-4	0	0	0	256	TRUE	
+bo_common_513	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	238.2	-63.5	-96.2	39	0	0	0	256	TRUE	
+bo_common_514	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	235.1	-63.5	-100.7	-147	0	0	0	256	TRUE	
+bo_common_515	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	232.6	-63.5	-93.0	-17	0	0	0	256	TRUE	
+bo_common_516	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	226.3	-63.4	-99.0	-133	0	0	0	256	TRUE	
+bo_common_517	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	222.5	-63.8	-91.6	-12	0	0	0	256	TRUE	
+bo_common_518	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	218.2	-63.6	-100.4	-149	0	0	0	256	TRUE	
+bo_common_519	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	215.3	-63.6	-90.1	-19	0	0	0	256	TRUE	
+bo_common_520	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	210.0	-63.7	-98.1	-152	0	0	0	256	TRUE	
+bo_common_521	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	208.9	-63.6	-78.9	21	0	0	0	256	TRUE	
+bo_common_522	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	203.5	-63.5	-85.6	-169	0	0	0	256	TRUE	
+bo_common_523	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	200.3	-63.7	-77.7	10	0	0	0	256	TRUE	
+bo_common_524	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	194.7	-63.7	-74.9	8	0	0	0	256	TRUE	
+bo_common_525	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	197.3	-63.4	-69.9	28	0	0	0	256	TRUE	
+bo_common_526	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	206.2	-63.6	-88.1	-127	0	0	0	256	TRUE	
+bo_common_527	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	199.8	-63.5	-85.7	-130	0	0	0	256	TRUE	
+bo_common_528	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	193.6	-63.7	-82.5	175	0	0	0	256	TRUE	
+bo_common_529	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	187.3	-63.7	-86.1	-153	0	0	0	256	TRUE	
+bo_common_530	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	185.9	-63.6	-77.3	-16	0	0	0	256	TRUE	
+bo_common_531	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	179.7	-63.2	-84.4	160	0	0	0	256	TRUE	
+bo_common_532	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	24	object/tangible/quest/luilris_mushrooms.iff	179.7	-63.3	-76.8	-32	0	0	0	256	TRUE	
+bo_common_533	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	23	object/tangible/quest/luilris_mushrooms.iff	156.8	-55.7	-77.5	-23	0	0	0	256	TRUE	
+bo_common_534	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	23	object/tangible/quest/luilris_mushrooms.iff	151.9	-55.5	-80.7	0	0	0	0	256	TRUE	
+bo_common_535	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	23	object/tangible/quest/luilris_mushrooms.iff	148.7	-55.3	-87.6	-104	0	0	0	256	TRUE	
+bo_common_536	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	154.5	-46.6	-107.5	124	0	0	0	256	TRUE	
+bo_common_537	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	147.6	-46.4	-105.9	-95	0	0	0	256	TRUE	
+bo_common_538	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	154.4	-46.7	-112.3	63	0	0	0	256	TRUE	
+bo_common_539	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	155.7	-46.6	-117.8	127	0	0	0	256	TRUE	
+bo_common_540	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	152.5	-46.7	-121.3	91	0	0	0	256	TRUE	
+bo_common_541	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	153.5	-46.3	-126.9	122	0	0	0	256	TRUE	
+bo_common_542	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	156.7	-46.3	-132.4	113	0	0	0	256	TRUE	
+bo_common_543	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	152.2	-46.4	-134.1	-176	0	0	0	256	TRUE	
+bo_common_544	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	149.9	-46.6	-140.8	164	0	0	0	256	TRUE	
+bo_common_545	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	147.6	-46.5	-144.9	-173	0	0	0	256	TRUE	
+bo_common_546	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	143.1	-46.6	-138.5	-158	0	0	0	256	TRUE	
+bo_common_547	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	135.3	-46.4	-140.6	-141	0	0	0	256	TRUE	
+bo_common_548	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	126.5	-46.6	-146.8	-137	0	0	0	256	TRUE	
+bo_common_549	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	124.2	-46.6	-151.9	-127	0	0	0	256	TRUE	
+bo_common_550	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	127.9	-46.7	-157.5	176	0	0	0	256	TRUE	
+bo_common_551	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	131.3	-46.4	-157.6	96	0	0	0	256	TRUE	
+bo_common_552	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	121.9	-46.5	-140.7	-98	0	0	0	256	TRUE	
+bo_common_553	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	113.4	-46.3	-140.0	-160	0	0	0	256	TRUE	
+bo_common_554	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	108.0	-46.3	-137.0	-42	0	0	0	256	TRUE	
+bo_common_555	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	106.7	-46.5	-144.5	-139	0	0	0	256	TRUE	
+bo_common_556	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	107.1	-46.5	-150.8	-125	0	0	0	256	TRUE	
+bo_common_557	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	109.3	-46.6	-130.4	-38	0	0	0	256	TRUE	
+bo_common_558	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	117.1	-46.6	-129.8	65	0	0	0	256	TRUE	
+bo_common_559	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	112.8	-46.5	-120.6	-21	0	0	0	256	TRUE	
+bo_common_560	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	117.3	-46.7	-114.7	-42	0	0	0	256	TRUE	
+bo_common_561	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	123.7	-46.4	-106.6	2	0	0	0	256	TRUE	
+bo_common_562	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	140.8	-46.3	-109.5	-17	0	0	0	256	TRUE	
+bo_common_563	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	145.7	-46.6	-116.0	-136	0	0	0	256	TRUE	
+bo_common_564	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	144.0	-46.3	-124.5	-68	0	0	0	256	TRUE	
+bo_common_565	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	134.1	-46.5	-123.4	18	0	0	0	256	TRUE	
+bo_common_566	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	139.5	-46.4	-113.4	138	0	0	0	256	TRUE	
+bo_common_567	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	22	object/tangible/quest/luilris_mushrooms.iff	121.0	-46.4	-128.8	-130	0	0	0	256	TRUE	
+bo_common_568	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	74	object/tangible/quest/pod_egg_sacs.iff	-73.6	-201.8	-159.1	-37	0	0	0	256	TRUE	
+bo_common_569	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	74	object/tangible/quest/pod_egg_sacs.iff	-75.1	-201.4	-160.4	-73	0	0	0	256	TRUE	
+bo_common_570	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	73	object/tangible/quest/pod_egg_sacs.iff	-68.0	-200.3	-180.5	145	0	0	0	256	TRUE	
+bo_common_571	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	73	object/tangible/quest/pod_egg_sacs.iff	-74.8	-200.0	-188.5	121	0	0	0	256	TRUE	
+bo_common_572	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	73	object/tangible/quest/pod_egg_sacs.iff	-80.6	-200.1	-188.4	-125	0	0	0	256	TRUE	
+bo_common_573	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	71	object/tangible/quest/pod_egg_sacs.iff	-99.8	-200.0	-185.5	-81	0	0	0	256	TRUE	
+bo_common_574	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	71	object/tangible/quest/pod_egg_sacs.iff	-101.2	-200.1	-191.3	-43	0	0	0	256	TRUE	
+bo_common_575	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	71	object/tangible/quest/pod_egg_sacs.iff	-101.8	-200.0	-198.0	-162	0	0	0	256	TRUE	
+bo_common_576	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	71	object/tangible/quest/pod_egg_sacs.iff	-98.3	-199.9	-225.4	-132	0	0	0	256	TRUE	
+bo_common_577	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	71	object/tangible/quest/pod_egg_sacs.iff	-91.0	-199.7	-228.5	141	0	0	0	256	TRUE	
+bo_common_578	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	72	object/tangible/quest/pod_egg_sacs.iff	-86.6	-199.8	-228.6	133	0	0	0	256	TRUE	
+bo_common_579	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	72	object/tangible/quest/pod_egg_sacs.iff	-70.8	-200.2	-209.5	-21	0	0	0	256	TRUE	
+bo_common_580	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	72	object/tangible/quest/pod_egg_sacs.iff	-63.4	-199.9	-213.3	119	0	0	0	256	TRUE	
+bo_common_581	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	72	object/tangible/quest/pod_egg_sacs.iff	-62.2	-200.0	-208.6	88	0	0	0	256	TRUE	
+bo_common_582	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	72	object/tangible/quest/pod_egg_sacs.iff	-62.5	-199.8	-224.3	92	0	0	0	256	TRUE	
+bo_common_583	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-90.6	-199.9	-162.3	50	0	0	0	256	TRUE	
+bo_common_584	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-90.9	-199.8	-156.5	53	0	0	0	256	TRUE	
+bo_common_585	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-109.9	-200.1	-167.6	136	0	0	0	256	TRUE	
+bo_common_586	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-91.6	-199.5	-151.0	79	0	0	0	256	TRUE	
+bo_common_587	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-91.0	-199.6	-145.7	86	0	0	0	256	TRUE	
+bo_common_588	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-91.7	-200.2	-133.7	55	0	0	0	256	TRUE	
+bo_common_589	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-98.6	-200.3	-124.7	28	0	0	0	256	TRUE	
+bo_common_590	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-105.9	-199.7	-123.4	-7	0	0	0	256	TRUE	
+bo_common_591	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-109.8	-199.5	-132.1	-152	0	0	0	256	TRUE	
+bo_common_592	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-114.9	-199.2	-122.8	25	0	0	0	256	TRUE	
+bo_common_593	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-121.8	-199.3	-121.2	-40	0	0	0	256	TRUE	
+bo_common_594	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-126.8	-199.5	-126.7	-145	0	0	0	256	TRUE	
+bo_common_595	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-122.2	-199.5	-128.0	134	0	0	0	256	TRUE	
+bo_common_596	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-126.4	-199.3	-117.7	19	0	0	0	256	TRUE	
+bo_common_597	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-134.2	-199.3	-125.2	178	0	0	0	256	TRUE	
+bo_common_598	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	68	object/tangible/quest/pod_egg_sacs.iff	-146.8	-201.9	-124.2	-171	0	0	0	256	TRUE	
+bo_common_599	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	69	object/tangible/quest/pod_egg_sacs.iff	-141.2	-200.8	-124.2	144	0	0	0	256	TRUE	
+bo_common_600	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	68	object/tangible/quest/pod_egg_sacs.iff	-152.7	-203.3	-117.2	-144	0	0	0	256	TRUE	
+bo_common_601	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-118.8	-200.1	-150.2	-55	0	0	0	256	TRUE	
+bo_common_602	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-127.3	-199.9	-150.1	70	0	0	0	256	TRUE	
+bo_common_603	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-130.5	-199.6	-146.6	-39	0	0	0	256	TRUE	
+bo_common_604	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-140.3	-199.8	-147.6	22	0	0	0	256	TRUE	
+bo_common_605	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-146.9	-200.2	-166.4	-87	0	0	0	256	TRUE	
+bo_common_606	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-144.8	-200.2	-175.2	-97	0	0	0	256	TRUE	
+bo_common_607	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-149.4	-199.8	-184.5	-94	0	0	0	256	TRUE	
+bo_common_608	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-147.9	-200.2	-191.6	-169	0	0	0	256	TRUE	
+bo_common_609	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-138.6	-200.2	-194.3	-152	0	0	0	256	TRUE	
+bo_common_610	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-130.5	-200.0	-195.1	129	0	0	0	256	TRUE	
+bo_common_611	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-124.0	-199.9	-193.9	154	0	0	0	256	TRUE	
+bo_common_612	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-119.1	-200.0	-191.1	109	0	0	0	256	TRUE	
+bo_common_613	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	70	object/tangible/quest/pod_egg_sacs.iff	-116.9	-199.6	-181.1	76	0	0	0	256	TRUE	
+bo_common_614	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	64	object/tangible/quest/pod_egg_sacs.iff	-118.0	-167.8	-124.8	51	0	0	0	256	TRUE	
+bo_common_615	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-107.4	-167.3	-132.5	56	0	0	0	256	TRUE	
+bo_common_616	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-100.8	-167.6	-134.7	52	0	0	0	256	TRUE	
+bo_common_617	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-94.0	-168.0	-138.3	75	0	0	0	256	TRUE	
+bo_common_618	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-92.2	-167.8	-143.2	112	0	0	0	256	TRUE	
+bo_common_619	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-92.2	-168.0	-148.3	135	0	0	0	256	TRUE	
+bo_common_620	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-91.9	-167.2	-156.0	132	0	0	0	256	TRUE	
+bo_common_621	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-92.2	-166.8	-163.2	130	0	0	0	256	TRUE	
+bo_common_622	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-109.1	-167.4	-144.2	-166	0	0	0	256	TRUE	
+bo_common_623	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-101.8	-167.4	-153.6	-147	0	0	0	256	TRUE	
+bo_common_624	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-96.5	-167.1	-163.8	-91	0	0	0	256	TRUE	
+bo_common_625	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-100.0	-167.9	-173.9	-132	0	0	0	256	TRUE	
+bo_common_626	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-92.3	-168.6	-174.9	125	0	0	0	256	TRUE	
+bo_common_627	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-102.1	-168.0	-187.3	-174	0	0	0	256	TRUE	
+bo_common_628	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-109.3	-168.0	-179.8	-49	0	0	0	256	TRUE	
+bo_common_629	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-111.5	-167.9	-186.8	-166	0	0	0	256	TRUE	
+bo_common_630	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-119.1	-167.3	-179.5	-59	0	0	0	256	TRUE	
+bo_common_631	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	65	object/tangible/quest/pod_egg_sacs.iff	-118.3	-167.2	-186.9	-175	0	0	0	256	TRUE	
+bo_common_632	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-123.6	-167.5	-184.8	-73	0	0	0	256	TRUE	
+bo_common_633	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-124.4	-167.6	-193.2	-169	0	0	0	256	TRUE	
+bo_common_634	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-128.5	-167.5	-188.1	56	0	0	0	256	TRUE	
+bo_common_635	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-130.4	-167.5	-198.5	-169	0	0	0	256	TRUE	
+bo_common_636	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-140.3	-167.8	-200.8	-125	0	0	0	256	TRUE	
+bo_common_637	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-147.9	-167.4	-195.1	-109	0	0	0	256	TRUE	
+bo_common_638	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-143.5	-168.3	-188.8	74	0	0	0	256	TRUE	
+bo_common_639	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-152.8	-166.9	-191.3	-144	0	0	0	256	TRUE	
+bo_common_640	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-159.8	-165.6	-184.9	-12	0	0	0	256	TRUE	
+bo_common_641	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-161.9	-166.1	-191.2	-149	0	0	0	256	TRUE	
+bo_common_642	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-167.4	-166.6	-186.8	-62	0	0	0	256	TRUE	
+bo_common_643	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-169.7	-166.8	-194.9	-179	0	0	0	256	TRUE	
+bo_common_644	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-175.9	-168.0	-187.4	-56	0	0	0	256	TRUE	
+bo_common_645	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-179.5	-167.4	-197.7	161	0	0	0	256	TRUE	
+bo_common_646	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	67	object/tangible/quest/pod_egg_sacs.iff	-132.5	-167.4	-206.9	89	0	0	0	256	TRUE	
+bo_common_647	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-139.6	-167.5	-212.5	-131	0	0	0	256	TRUE	
+bo_common_648	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-134.3	-168.2	-224.1	161	0	0	0	256	TRUE	
+bo_common_649	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-142.5	-166.9	-226.5	-97	0	0	0	256	TRUE	
+bo_common_650	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-137.4	-170.0	-233.3	57	0	0	0	256	TRUE	
+bo_common_651	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-130.2	-170.4	-235.4	72	0	0	0	256	TRUE	
+bo_common_652	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-139.1	-168.4	-240.9	-56	0	0	0	256	TRUE	
+bo_common_653	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-141.1	-168.1	-250.2	164	0	0	0	256	TRUE	
+bo_common_654	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-135.1	-168.4	-251.3	119	0	0	0	256	TRUE	
+bo_common_655	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-130.8	-169.3	-248.8	175	0	0	0	256	TRUE	
+bo_common_656	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-118.1	-167.9	-249.4	103	0	0	0	256	TRUE	
+bo_common_657	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-125.8	-168.2	-227.5	-22	0	0	0	256	TRUE	
+bo_common_658	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-113.6	-167.0	-229.7	166	0	0	0	256	TRUE	
+bo_common_659	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-110.2	-167.7	-215.4	52	0	0	0	256	TRUE	
+bo_common_660	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-101.7	-168.5	-225.1	164	0	0	0	256	TRUE	
+bo_common_661	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-95.2	-168.7	-225.5	132	0	0	0	256	TRUE	
+bo_common_662	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-94.0	-168.5	-217.7	-23	0	0	0	256	TRUE	
+bo_common_663	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	66	object/tangible/quest/pod_egg_sacs.iff	-102.1	-168.5	-216.2	3	0	0	0	256	TRUE	
+bo_common_664	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/pod_egg_sacs.iff	-220.8	-177.8	-388.3	-156	0	0	0	256	TRUE	
+bo_common_665	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/pod_egg_sacs.iff	-217.2	-177.2	-392.3	176	0	0	0	256	TRUE	
+bo_common_666	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/pod_egg_sacs.iff	-182.7	-169.2	-387.6	8	0	0	0	256	TRUE	
+bo_common_667	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/pod_egg_sacs.iff	-175.0	-169.1	-394.3	126	0	0	0	256	TRUE	
+bo_common_668	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	42	object/tangible/quest/pod_egg_sacs.iff	-185.7	-169.2	-399.8	-167	0	0	0	256	TRUE	
+bo_common_669	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-171.3	-168.8	-408.3	63	0	0	0	256	TRUE	
+bo_common_670	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-180.4	-168.8	-414.6	-53	0	0	0	256	TRUE	
+bo_common_671	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-177.8	-168.5	-427.5	-174	0	0	0	256	TRUE	
+bo_common_672	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-162.7	-168.8	-419.6	78	0	0	0	256	TRUE	
+bo_common_673	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-146.0	-171.5	-409.8	70	0	0	0	256	TRUE	
+bo_common_674	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-143.6	-172.0	-417.1	105	0	0	0	256	TRUE	
+bo_common_675	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-142.5	-173.3	-424.8	113	0	0	0	256	TRUE	
+bo_common_676	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	43	object/tangible/quest/pod_egg_sacs.iff	-149.0	-173.4	-430.2	150	0	0	0	256	TRUE	
+bo_common_677	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-211.7	-221.3	31.9	98	0	0	0	256	TRUE	
+bo_common_678	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-203.5	-221.5	46.2	5	0	0	0	256	TRUE	
+bo_common_679	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-197.7	-220.7	35.3	132	0	0	0	256	TRUE	
+bo_common_680	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-196.0	-221.3	51.1	-138	0	0	0	256	TRUE	
+bo_common_681	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-185.8	-221.2	49.4	86	0	0	0	256	TRUE	
+bo_common_682	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-197.6	-221.0	58.0	-80	0	0	0	256	TRUE	
+bo_common_683	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	44	object/tangible/quest/naktra_crystals.iff	-184.7	-221.8	60.0	175	0	0	0	256	TRUE	
+bo_common_684	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-175.0	-221.2	70.1	44	0	0	0	256	TRUE	
+bo_common_685	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-169.4	-221.1	79.3	-149	0	0	0	256	TRUE	
+bo_common_686	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-156.1	-221.9	85.8	172	0	0	0	256	TRUE	
+bo_common_687	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-149.3	-220.4	83.2	-120	0	0	0	256	TRUE	
+bo_common_688	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	45	object/tangible/quest/naktra_crystals.iff	-148.9	-221.6	74.7	-77	0	0	0	256	TRUE	
+bo_common_689	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	46	object/tangible/quest/naktra_crystals.iff	-121.3	-221.1	60.9	142	0	0	0	256	TRUE	
+bo_common_690	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	46	object/tangible/quest/naktra_crystals.iff	-112.0	-221.2	61.7	-162	0	0	0	256	TRUE	
+bo_common_691	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	76	object/tangible/quest/naktra_crystals.iff	-144.7	-263.5	-120.5	154	0	0	0	256	TRUE	
+bo_common_692	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	76	object/tangible/quest/naktra_crystals.iff	-157.1	-263.1	-115.9	-92	0	0	0	256	TRUE	
+bo_common_693	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	76	object/tangible/quest/naktra_crystals.iff	-156.1	-263.8	-153.3	178	0	0	0	256	TRUE	
+bo_common_694	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	76	object/tangible/quest/naktra_crystals.iff	-148.7	-263.0	-145.0	0	0	0	0	256	TRUE	
+bo_common_695	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-120.5	-262.0	-168.0	117	0	0	0	256	TRUE	
+bo_common_696	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-116.1	-263.1	-134.5	-46	0	0	0	256	TRUE	
+bo_common_697	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-89.8	-259.6	-181.1	178	0	0	0	256	TRUE	
+bo_common_698	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-107.3	-262.3	-202.4	118	0	0	0	256	TRUE	
+bo_common_699	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-123.9	-261.0	-193.0	-52	0	0	0	256	TRUE	
+bo_common_700	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-93.4	-261.3	-231.7	124	0	0	0	256	TRUE	
+bo_common_701	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	77	object/tangible/quest/naktra_crystals.iff	-132.5	-261.6	-238.7	-54	0	0	0	256	TRUE	
+bo_common_702	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	78	object/tangible/quest/naktra_crystals.iff	-136.6	-263.6	-261.6	-134	0	0	0	256	TRUE	
+bo_common_703	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	78	object/tangible/quest/naktra_crystals.iff	-152.7	-263.7	-254.8	-103	0	0	0	256	TRUE	
+bo_common_704	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	79	object/tangible/quest/naktra_crystals.iff	-172.2	-263.1	-243.7	-127	0	0	0	256	TRUE	
+bo_common_705	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-330.2	-273.0	-198.5	9	0	0	0	256	TRUE	
+bo_common_706	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-336.8	-272.5	-208.6	-130	0	0	0	256	TRUE	
+bo_common_707	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-344.4	-272.1	-215.2	-119	0	0	0	256	TRUE	
+bo_common_708	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-348.4	-272.0	-211.4	-111	0	0	0	256	TRUE	
+bo_common_709	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-352.1	-271.8	-203.7	-86	0	0	0	256	TRUE	
+bo_common_710	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-344.2	-272.3	-198.7	141	0	0	0	256	TRUE	
+bo_common_711	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-337.1	-271.7	-192.7	3	0	0	0	256	TRUE	
+bo_common_712	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-352.2	-271.7	-187.1	175	0	0	0	256	TRUE	
+bo_common_713	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-348.5	-271.0	-182.1	167	0	0	0	256	TRUE	
+bo_common_714	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-345.5	-267.1	-162.7	-14	0	0	0	256	TRUE	
+bo_common_715	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	47	object/tangible/quest/luilris_mushrooms.iff	-351.4	-266.1	-161.3	-22	0	0	0	256	TRUE	
+bo_common_716	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-366.9	-264.0	-164.2	-102	0	0	0	256	TRUE	
+bo_common_717	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-368.1	-263.1	-158.1	-22	0	0	0	256	TRUE	
+bo_common_718	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-360.0	-257.9	-145.5	-13	0	0	0	256	TRUE	
+bo_common_719	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-376.6	-260.0	-149.3	-102	0	0	0	256	TRUE	
+bo_common_720	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-375.7	-256.6	-142.7	-34	0	0	0	256	TRUE	
+bo_common_721	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/luilris_mushrooms.iff	-369.9	-254.3	-133.8	-46	0	0	0	256	TRUE	
+bo_common_722	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-357.3	-256.1	-126.0	79	0	0	0	256	TRUE	
+bo_common_723	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-371.5	-255.6	-126.0	-123	0	0	0	256	TRUE	
+bo_common_724	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-358.0	-256.7	-119.5	69	0	0	0	256	TRUE	
+bo_common_725	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-377.9	-255.6	-123.0	-86	0	0	0	256	TRUE	
+bo_common_726	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-377.6	-256.5	-117.5	-66	0	0	0	256	TRUE	
+bo_common_727	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-384.9	-254.7	-120.7	-98	0	0	0	256	TRUE	
+bo_common_728	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-383.4	-255.2	-106.4	-68	0	0	0	256	TRUE	
+bo_common_729	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-358.8	-255.6	-103.8	91	0	0	0	256	TRUE	
+bo_common_730	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-361.2	-255.7	-108.7	111	0	0	0	256	TRUE	
+bo_common_731	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-364.0	-254.6	-101.0	-17	0	0	0	256	TRUE	
+bo_common_732	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-369.1	-254.8	-102.2	21	0	0	0	256	TRUE	
+bo_common_733	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-383.6	-253.3	-95.9	-84	0	0	0	256	TRUE	
+bo_common_734	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-385.8	-249.3	-87.7	-62	0	0	0	256	TRUE	
+bo_common_735	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/luilris_mushrooms.iff	-379.1	-246.3	-81.7	68	0	0	0	256	TRUE	
+bo_common_736	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-384.7	-241.2	-72.3	-67	0	0	0	256	TRUE	
+bo_common_737	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-379.6	-241.3	-62.2	-21	0	0	0	256	TRUE	
+bo_common_738	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-367.2	-236.8	-59.6	18	0	0	0	256	TRUE	
+bo_common_739	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-356.9	-227.9	-63.9	68	0	0	0	256	TRUE	
+bo_common_740	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-365.4	-256.5	-119.0	-104	0	0	0	256	TRUE	
+bo_common_741	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-356.8	-256.5	-123.7	71	0	0	0	256	TRUE	
+bo_common_742	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-357.2	-256.6	-118.8	87	0	0	0	256	TRUE	
+bo_common_743	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-356.7	-255.2	-128.1	123	0	0	0	256	TRUE	
+bo_common_744	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	48	object/tangible/quest/r_naktra_crystals.iff	-370.7	-254.2	-131.3	-109	0	0	0	256	TRUE	
+bo_common_745	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-375.5	-255.2	-125.3	179	0	0	0	256	TRUE	
+bo_common_746	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-383.8	-255.6	-111.1	-104	0	0	0	256	TRUE	
+bo_common_747	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-382.3	-255.9	-117.7	22	0	0	0	256	TRUE	
+bo_common_748	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	49	object/tangible/quest/r_naktra_crystals.iff	-371.0	-254.2	-100.7	9	0	0	0	256	TRUE	
+bo_common_749	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-353.5	-227.1	-73.5	-145	0	0	0	256	TRUE	
+bo_common_750	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-345.9	-227.7	-69.5	45	0	0	0	256	TRUE	
+bo_common_751	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-350.2	-222.3	-83.1	-89	0	0	0	256	TRUE	
+bo_common_752	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-346.3	-217.2	-93.5	121	0	0	0	256	TRUE	
+bo_common_753	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	50	object/tangible/quest/luilris_mushrooms.iff	-352.1	-217.7	-99.7	-157	0	0	0	256	TRUE	
+bo_common_754	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	51	object/tangible/quest/luilris_mushrooms.iff	-375.2	-206.3	-100.7	-159	0	0	0	256	TRUE	
+bo_common_755	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	51	object/tangible/quest/luilris_mushrooms.iff	-373.6	-207.1	-95.6	2	0	0	0	256	TRUE	
+bo_common_756	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	51	object/tangible/quest/luilris_mushrooms.iff	-382.7	-206.8	-96.2	-131	0	0	0	256	TRUE	
+bo_common_757	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	51	object/tangible/quest/luilris_mushrooms.iff	-378.2	-203.5	-85.8	-4	0	0	0	256	TRUE	
+bo_common_758	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	52	object/tangible/quest/luilris_mushrooms.iff	-379.2	-198.0	-69.1	-20	0	0	0	256	TRUE	
+bo_common_759	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	52	object/tangible/quest/luilris_mushrooms.iff	-373.1	-197.7	-65.8	21	0	0	0	256	TRUE	
+bo_common_760	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	52	object/tangible/quest/luilris_mushrooms.iff	-338.5	-187.8	-69.8	121	0	0	0	256	TRUE	
+bo_common_761	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	52	object/tangible/quest/luilris_mushrooms.iff	-332.3	-187.4	-59.4	51	0	0	0	256	TRUE	
+bo_common_762	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	52	object/tangible/quest/luilris_mushrooms.iff	-331.7	-187.5	-54.1	102	0	0	0	256	TRUE	
+bo_common_763	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-344.3	-187.3	-40.2	-105	0	0	0	256	TRUE	
+bo_common_764	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-332.9	-186.5	-35.8	31	0	0	0	256	TRUE	
+bo_common_765	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-335.2	-185.7	-32.0	-11	0	0	0	256	TRUE	
+bo_common_766	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-348.9	-188.6	-33.2	-147	0	0	0	256	TRUE	
+bo_common_767	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-354.2	-190.2	-31.6	-86	0	0	0	256	TRUE	
+bo_common_768	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-354.0	-183.5	12.1	-75	0	0	0	256	TRUE	
+bo_common_769	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-352.3	-183.6	10.4	178	0	0	0	256	TRUE	
+bo_common_770	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-393.2	-185.9	21.6	-35	0	0	0	256	TRUE	
+bo_common_771	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-369.6	-175.3	64.5	-107	0	0	0	256	TRUE	
+bo_common_772	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-375.2	-175.5	70.6	-77	0	0	0	256	TRUE	
+bo_common_773	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-363.5	-175.7	85.2	42	0	0	0	256	TRUE	
+bo_common_774	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-356.2	-175.9	84.1	0	0	0	0	256	TRUE	
+bo_common_775	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-350.7	-176.0	74.5	155	0	0	0	256	TRUE	
+bo_common_776	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-308.2	-178.5	58.1	127	0	0	0	256	TRUE	
+bo_common_777	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-376.0	-175.9	77.9	-132	0	0	0	256	TRUE	
+bo_common_778	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-425.4	-188.9	118.3	-26	0	0	0	256	TRUE	
+bo_common_779	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-395.6	-183.6	135.2	34	0	0	0	256	TRUE	
+bo_common_780	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-390.8	-183.5	130.9	22	0	0	0	256	TRUE	
+bo_common_781	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-358.6	-188.7	119.3	55	0	0	0	256	TRUE	
+bo_common_782	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	53	object/tangible/quest/luilris_mushrooms.iff	-390.1	-183.6	137.6	-121	0	0	0	256	TRUE	
+bo_common_783	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	10	object/tangible/quest/naktra_crystals.iff	48.8	-26.5	-1.6	-103	0	0	0	256	TRUE	
+bo_common_784	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	10	object/tangible/quest/naktra_crystals.iff	63.2	-26.6	-11.2	56	0	0	0	256	TRUE	
+bo_common_785	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	10	object/tangible/quest/naktra_crystals.iff	58.7	-26.7	-21.5	-137	0	0	0	256	TRUE	
+bo_common_786	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	7	object/tangible/quest/naktra_crystals.iff	34.7	-21.0	-8.5	-39	0	0	0	256	TRUE	
+bo_common_787	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	31.2	-29.0	-109.5	-140	0	0	0	256	TRUE	
+bo_common_788	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	28.3	-29.1	-107.7	-137	0	0	0	256	TRUE	
+bo_common_789	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/quest/naktra_crystals.iff	56.0	-29.1	-82.6	10	0	0	0	256	TRUE	
+bo_common_790	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	13	object/tangible/quest/naktra_crystals.iff	93.5	-29.0	-109.0	101	0	0	0	256	TRUE	
+bo_common_791	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	14	object/tangible/quest/naktra_crystals.iff	85.7	-32.0	-82.9	1	0	0	0	256	TRUE	
+bo_common_792	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	14	object/tangible/quest/naktra_crystals.iff	103.6	-34.9	-93.8	131	0	0	0	256	TRUE	
+bo_common_793	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	124.4	-41.2	-70.8	-36	0	0	0	256	TRUE	
+bo_common_794	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	134.4	-37.6	-60.0	41	0	0	0	256	TRUE	
+bo_common_795	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	121.5	-36.9	-56.9	-117	0	0	0	256	TRUE	
+bo_common_796	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	120.7	-36.1	-44.4	-129	0	0	0	256	TRUE	
+bo_common_797	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	120.8	-36.2	-40.9	-34	0	0	0	256	TRUE	
+bo_common_798	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/quest/naktra_crystals.iff	135.0	-36.0	-42.3	108	0	0	0	256	TRUE	
+bo_common_799	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	119.3	-44.0	-37.1	-111	0	0	0	256	TRUE	
+bo_common_800	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	121.1	-44.0	-21.3	-43	0	0	0	256	TRUE	
+bo_common_801	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	121.6	-43.9	-14.3	-83	0	0	0	256	TRUE	
+bo_common_802	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	141.7	-43.0	-10.4	35	0	0	0	256	TRUE	
+bo_common_803	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	153.1	-38.8	-12.2	84	0	0	0	256	TRUE	
+bo_common_804	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	151.1	-39.9	-18.0	-102	0	0	0	256	TRUE	
+bo_common_805	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	139.6	-43.7	-24.8	179	0	0	0	256	TRUE	
+bo_common_806	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/quest/naktra_crystals.iff	132.4	-44.0	-34.0	155	0	0	0	256	TRUE	
+bo_common_807	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/quest/naktra_crystals.iff	162.8	-54.7	4.0	130	0	0	0	256	TRUE	
+bo_common_808	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	40	object/tangible/quest/nawika_jewel_box.iff	-10.6	-213.7	-166.0	-44	0	0	0	256	TRUE	
+bo_common_809	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	40	object/tangible/quest/pod_egg_sacs.iff	-51.3	-206.2	-157.5	97	0	0	0	256	TRUE	
+bo_common_810	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	74	object/tangible/quest/pod_egg_sacs.iff	-59.1	-205.6	-158.9	-77	0	0	0	256	TRUE	
+bo_common_811	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/luilris_mushrooms.iff	3.3	-16.8	-44.2	-144	0	0	0	256	TRUE	
+bo_common_812	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/luilris_mushrooms.iff	20.5	-19.3	-45.3	-111	0	0	0	256	TRUE	
+bo_common_813	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/luilris_mushrooms.iff	37.9	-20.7	-45.1	116	0	0	0	256	TRUE	
+bo_common_814	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	7	object/tangible/quest/luilris_mushrooms.iff	27.1	-20.8	-12.0	-17	0	0	0	256	TRUE	
+bo_common_815	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	10	object/tangible/quest/luilris_mushrooms.iff	51.6	-26.5	3.9	-53	0	0	0	256	TRUE	
+bo_common_816	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	17	object/tangible/quest/luilris_mushrooms.iff	108.8	-41.8	-1.7	49	0	0	0	256	TRUE	
+bo_common_817	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	4	object/tangible/quest/luilris_mushrooms.iff	11.2	-20.9	-62.0	143	0	0	0	256	TRUE	
+bo_common_818	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	4	object/tangible/quest/luilris_mushrooms.iff	-5.6	-23.6	-61.4	-91	0	0	0	256	TRUE	
+bo_common_819	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/quest/luilris_mushrooms.iff	7.3	-17.0	-34.0	-35	0	0	0	256	TRUE	
+bo_common_820	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/loot/misc/kashyyyk_cave_plant.iff	16.4	-17.4	-33.3	20	0	0	0	256	TRUE	
+bo_common_821	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	3	object/tangible/loot/misc/kashyyyk_cave_plant.iff	6.8	-17.3	-46.0	-34	0	0	0	256	TRUE	
+bo_common_822	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	8	object/tangible/loot/misc/kashyyyk_cave_plant.iff	38.2	-29.4	-107.3	-40	0	0	0	256	TRUE	
+bo_common_823	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	19	object/tangible/loot/misc/kashyyyk_cave_plant.iff	134.3	-40.6	-78.6	-72	0	0	0	256	TRUE	
+bo_common_824	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/loot/misc/kashyyyk_cave_plant.iff	115.0	-44.1	-38.8	169	0	0	0	256	TRUE	
+bo_common_825	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	18	object/tangible/loot/misc/kashyyyk_cave_plant.iff	148.7	-40.7	-9.6	-130	0	0	0	256	TRUE	
+bo_common_826	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	11	object/tangible/loot/misc/kashyyyk_cave_plant.iff	83.3	-29.9	-37.7	154	0	0	0	256	TRUE	
+bo_common_827	KASHYYYK_POB_DUNGEONS	kas_pob_myyydril_1	21	object/tangible/loot/misc/kashyyyk_cave_plant.iff	168.9	-55.1	16.1	-100	0	0	0	256	TRUE	

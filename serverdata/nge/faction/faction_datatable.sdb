@@ -44,12 +44,12 @@ geonosian_crazy	FALSE	TRUE	FALSE	-	geonosian_mad_bunker;geonosian_crazed_monster
 geonosian_mad_bunker	FALSE	TRUE	FALSE	-	-	geonosian_crazed_monster	1
 gondula_tribe	TRUE	TRUE	FALSE	-	donkuwah_tribe;korga_tribe;pubam;endor_marauder	panshee_tribe	1
 gorax	FALSE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
-gungan	TRUE	TRUE	FALSE	-	plasma_thief;swamp_rat;borvo	-	1
+gungan	TRUE	TRUE	FALSE	-	plasma_thief;swamp_rat;borvo;Imperial	-	1
 heroic_tusken	FALSE	TRUE	FALSE	-	espa;expa_guard	-	1
 hidden_daggers	TRUE	TRUE	FALSE	-	corsec;beldonnas_league;flail;police	rogue_corsec	1
 hsskor	FALSE	TRUE	TRUE	-	kashyyyk_resistance	-	1
 hutt	TRUE	TRUE	FALSE	-	naboo_security_force;nym;Imperial;corsec;narmle;police	jabba;borvo	1
-imperial	TRUE	TRUE	TRUE	imperial	rebel	-	1
+imperial	TRUE	TRUE	TRUE	imperial	rebel;gungan;nightsister;hutt	-	1
 imperialcitizen	FALSE	FALSE	FALSE	-	-	-	1
 jabba	TRUE	TRUE	FALSE	-	valarian;borvo;police	hutt	1
 janta_tribe	TRUE	TRUE	FALSE	-	kunga_tribe;dantari_raiders	-	1
@@ -77,6 +77,7 @@ olag_greck	TRUE	TRUE	FALSE	-	corsec;beldonnas_league	-	1
 panshee_tribe	TRUE	TRUE	FALSE	-	donkuwah_tribe;korga_tribe;pubam;endor_marauder	gondula_tribe	1
 pirate	TRUE	TRUE	FALSE	-	-	-	1
 plasma_thief	TRUE	TRUE	FALSE	-	gungan;police	-	1
+poacher	FALSE	TRUE	FALSE	-	vrobal	-	1
 police	TRUE	TRUE	FALSE	-	borvo;naboo_pirate;plasma_thief;swamp_rat;trade_federation;garyn;cobral;spice_collective;mtn_clan;thug;bandit;Hutt; jabba;hidden_daggers;tusken_raider;valarian;swoop	townsperson	1
 pubam	TRUE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 rebel	TRUE	TRUE	TRUE	rebel	imperial	-	1
@@ -102,6 +103,7 @@ tusken_raider	TRUE	TRUE	FALSE	-	jawa;alkhara;police	-	1
 unattackable	FALSE	FALSE	FALSE	unattackable	-	-	1
 underworld	TRUE	FALSE	FALSE	-	-	-	1
 valarian	TRUE	TRUE	FALSE	-	jabba;police	-	1
+vrobal	FALSE	TRUE	FALSE	-	poacher	-	1
 warren_cyborg	FALSE	TRUE	FALSE	-	warren_imperial;warren_imperial_worker;warren_huurton;warren_teraud;warren_scientist	-	1
 warren_huurton	FALSE	TRUE	FALSE	-	warren_imperial;warren_imperial_worker;warren_cyborg;warren_teraud	-	1
 warren_imperial	FALSE	TRUE	FALSE	-	warren_huurton;warren_teraud;warren_cyborg	warren_imperial_worker	1

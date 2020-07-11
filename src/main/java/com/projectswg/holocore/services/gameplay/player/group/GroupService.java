@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.gameplay.player.group;
 
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent;
@@ -45,7 +46,6 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import com.projectswg.holocore.utilities.IntentFactory;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -417,6 +417,16 @@ public class GroupService extends Service {
 		sendSystemMessage(creature.getOwner(), "removed");
 		group.removeMember(creature);
 		updateChatRoom(creature.getOwner(), group, UpdateType.LEAVE);
+
+		// If the leader has left, promote another group member to leader and notify the group of this
+		if (creature.getObjectId() == group.getLeaderId()) {
+			CreatureObject newLeader = group.getGroupMemberObjects().iterator().next();	// Pick a new leader
+
+			group.setLeader(newLeader);
+
+			sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getObjectName());
+		}
+
 	}
 	
 	private void updateChatRoom(Player player, GroupObject group, UpdateType updateType) {
@@ -464,6 +474,6 @@ public class GroupService extends Service {
 	}
 	
 	private void sendSystemMessage(Player target, String id, Object... objects) {
-		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
+		SystemMessageIntent.broadcastPersonal(target, new ProsePackage(new StringId("@group:" + id), objects));
 	}
 }
