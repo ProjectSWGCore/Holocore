@@ -50,6 +50,7 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.staticobject.StaticObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -202,6 +203,13 @@ public class TravelService extends Service {
 			}
 			
 			pointForCollector.setCollector(object);
+		} else if (object instanceof BuildingObject && (object.getTemplate().contains("starport") || object.getTemplate().contains("hangar"))) {
+			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
+			
+			if (pointForCollector == null || pointForCollector.getLocation().flatDistanceTo(object.getLocation()) >= 50)
+				return;
+			
+			pointForCollector.setStarport((BuildingObject) object);
 		}
 	}
 	
