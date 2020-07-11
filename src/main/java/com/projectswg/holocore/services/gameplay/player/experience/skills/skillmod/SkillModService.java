@@ -26,12 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod;
 
+import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -39,7 +42,6 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.adjust.*;
-import com.projectswg.holocore.utilities.IntentFactory;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -349,7 +351,7 @@ public class SkillModService extends Service {
 	
 	private void sendSystemMessage(Player target, String id, Object... objects) {
 		if (target != null){
-			IntentFactory.sendSystemMessage(target, "@spam:" + id, objects);
+			SystemMessageIntent.broadcastPersonal(target, new ProsePackage(new StringId("@spam:" + id), objects));
 		}
 	}
 	
