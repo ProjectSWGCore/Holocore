@@ -11,6 +11,8 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 public class TestSdbGenerator {
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	
     private StringWriter stringWriter;
     private SdbGenerator generator;
 
@@ -28,8 +30,8 @@ public class TestSdbGenerator {
 
         generator.writeColumnNames(col1, col2);
         generator.close();  // Flushes changes to the StringWriter
-
-        String result = stringWriter.toString().replace("\n", "");
+		
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = col1 + separator + col2;
 
         assertEquals("Column names should be written in the given order, separated by a TAB", expected, result);
@@ -42,7 +44,7 @@ public class TestSdbGenerator {
         generator.writeLine(cell);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
 
         assertEquals("String data type should be supported", cell, result);
     }
@@ -54,7 +56,7 @@ public class TestSdbGenerator {
         generator.writeLine(cell);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = String.valueOf(cell);
 
         assertEquals("int data type should be supported", expected, result);
@@ -65,7 +67,7 @@ public class TestSdbGenerator {
         generator.writeLine(new Object[]{null});
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = "";
 
         assertEquals("null should be written as an empty string", expected, result);
@@ -85,7 +87,7 @@ public class TestSdbGenerator {
         generator.writeLine(collection);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = val1 + valSeparator + val2;
 
         assertEquals("Multiple values in a Collection should be supported", expected, result);
@@ -100,7 +102,7 @@ public class TestSdbGenerator {
         generator.writeLine(collection);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
 
         assertEquals("Single value in a Collection should be supported", val, result);
     }
@@ -121,7 +123,7 @@ public class TestSdbGenerator {
         generator.writeLine(collectionCollection);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = val1 + valSeparator + val2 + valSeparator + val3 + valSeparator + val4;
 
         assertEquals("Collections of collections should be supported", expected, result);
@@ -144,7 +146,7 @@ public class TestSdbGenerator {
         generator.writeLine(map);
         generator.close();
 
-        String result = stringWriter.toString().replace("\n", "");
+        String result = stringWriter.toString().replace(LINE_SEPARATOR, "");
         String expected = k1 + pairSeparator + v1 + entrySeparator + k2 + pairSeparator + v2;
 
         assertEquals("Single value in a Collection should be supported", expected, result);
