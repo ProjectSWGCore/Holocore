@@ -55,9 +55,9 @@ public class ExperienceLevelService extends Service {
 	
 	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
 		int currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
+		int newXpTotal = xpMultiplied ? (currentXp + (int) Math.ceil((xpGained * xpMultiplier))) : (currentXp + xpGained);
 		playerObject.setExperiencePoints(xpType, newXpTotal);
-		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", xpGained, xpType);
+		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", (newXpTotal - currentXp), xpType);
 		
 		switch (playerObject.getProfession()) {
 			case TRADER_DOMESTIC:
