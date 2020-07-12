@@ -46,6 +46,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -149,6 +150,15 @@ public class ChatRoomHandler {
 		}
 		
 		enterChatChannel(player, room, 0, ignoreInvitation);
+	}
+	
+	public void leaveChatChannels(Player player) {
+		PlayerObject playerObject = player.getPlayerObject();
+		List<String> joinedChannels = playerObject.getJoinedChannels();
+		
+		for (String joinedChannel : joinedChannels) {
+			leaveChatChannel(player, joinedChannel);
+		}
 	}
 	
 	public void leaveChatChannel(Player player, ChatRoom room, int sequence) {
@@ -344,11 +354,14 @@ public class ChatRoomHandler {
 	}
 	
 	private static void sendPacketToMembers(ChatRoom room, SWGPacket packet) {
-		for (ChatAvatar member : room.getMembers()) {
-			getPlayer(member).sendPacket(packet);
-		}
+		room.getMembers()
+				.stream()
+				.map(ChatRoomHandler::getPlayer)
+				.filter(Objects::nonNull)	// Don't try sending packets to players that can't be found
+				.forEach(player -> player.sendPacket(packet));
 	}
 	
+	@Nullable
 	private static Player getPlayer(ChatAvatar avatar) {
 		return PlayerLookup.getPlayerByFirstName(avatar.getName());
 	}
