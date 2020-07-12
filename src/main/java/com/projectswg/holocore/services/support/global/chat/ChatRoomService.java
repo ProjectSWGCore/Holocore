@@ -39,9 +39,11 @@ import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
 import com.projectswg.holocore.resources.support.global.chat.ChatRoomHandler;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import com.projectswg.holocore.utilities.ChatRoomLogWrapper;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -135,6 +137,15 @@ public class ChatRoomService extends Service {
 			default:
 				break;
 		}
+	}
+	
+	@IntentHandler
+	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
+		CreatureObject deleted = dci.getCreature();
+		Player player = deleted.getOwner();
+		
+		assert player != null;
+		chatRoomHandler.leaveChatChannels(player);
 	}
 	
 	@IntentHandler

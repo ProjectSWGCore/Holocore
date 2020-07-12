@@ -10,6 +10,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -68,6 +69,7 @@ public class CharacterLookupService extends Service {
 		return creature.getOwner();
 	}
 	
+	@Nullable
 	private Player getPlayerByFirstName(@NotNull String name) {
 		CreatureObject creature = getCharacterByFirstName(name);
 		if (creature == null)
@@ -145,6 +147,7 @@ public class CharacterLookupService extends Service {
 			return AUTHORITY.get().getPlayerByFullName(name);
 		}
 		
+		@Nullable
 		public static Player getPlayerByFirstName(String name) {
 			return AUTHORITY.get().getPlayerByFirstName(name);
 		}
