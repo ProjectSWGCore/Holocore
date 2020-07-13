@@ -133,7 +133,7 @@ public final class SkillTemplateService extends Service {
 		creatureObject.sendSelf(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
 		if (skillUp)
-			creatureObject.sendSelf(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+			creatureObject.sendSelf(new PlayMusicMessage(0, "sound/sys_comm_generic.snd", 1, false));
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {

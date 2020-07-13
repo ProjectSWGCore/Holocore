@@ -243,7 +243,7 @@ public class TransferItemCallback implements ICmdCallback {
 			// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 			actor.setEquippedWeapon(null);
 		}
-		actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
+		actor.sendSelf(new PlayMusicMessage(0, "sound/pl_all_draw_item.snd", 1, false));
 	}
 	
 	private static void applyEffect(CreatureObject actor, SWGObject target, boolean equip) {
