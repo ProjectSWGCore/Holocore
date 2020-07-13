@@ -59,6 +59,7 @@ object StaticItemCreator {
 		applyAttributes(obj, info.dnaInfo)
 		applyAttributes(obj, info.grantInfo)
 		applyAttributes(obj, info.genericInfo)
+		applyAttributes(obj, info.itemInfo)
 		applyAttributes(obj, info.objectInfo)
 		applyAttributes(obj, info.schematicInfo)
 		applyAttributes(obj, info.storytellerInfo)
