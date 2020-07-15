@@ -78,6 +78,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val dnaInfo: DnaItemInfo?
 		val grantInfo: GrantItemInfo?
 		val genericInfo: GenericItemInfo?
+		val itemInfo: GenericItemInfo?
 		val objectInfo: ObjectItemInfo?
 		val schematicInfo: SchematicItemInfo?
 		val storytellerInfo: StorytellerItemInfo?
@@ -94,6 +95,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			this.dnaInfo = if ("dna" == type) DnaItemInfo(set) else null
 			this.grantInfo = if ("grant" == type) GrantItemInfo(set) else null
 			this.genericInfo = if ("generic" == type) GenericItemInfo(set, colorArray) else null
+			this.itemInfo = if ("item" == type) GenericItemInfo(set, colorArray) else null
 			this.objectInfo = if ("object" == type) ObjectItemInfo(set, colorArray) else null
 			this.schematicInfo = if ("schematic" == type) SchematicItemInfo(set) else null
 			this.storytellerInfo = if ("storyteller" == type) StorytellerItemInfo(set) else null
@@ -172,7 +174,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val buffName: String = set.getText("buff_name")
 		
 	}
-	
+
 	class DnaItemInfo(set: SdbResultSet)
 	
 	class GrantItemInfo(set: SdbResultSet) {
