@@ -73,6 +73,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -475,6 +476,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		return combined;
+	}
+	
+	public void runOnChildObjectsRecursively(Consumer<SWGObject> op) {
+		for (SWGObject obj : getContainedObjects()) {
+			op.accept(obj);
+			obj.runOnChildObjectsRecursively(op);
+		}
+		for (SWGObject obj : getSlottedObjects()) {
+			op.accept(obj);
+			obj.runOnChildObjectsRecursively(op);
+		}
 	}
 	
 	public void setSlots(@NotNull Collection<String> slots) {
