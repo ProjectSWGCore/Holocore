@@ -143,25 +143,59 @@ public class CharacterLookupService extends Service {
 			return getCharacterByFirstName(name) != null;
 		}
 		
+		@Nullable
 		public static Player getPlayerByFullName(String name) {
-			return AUTHORITY.get().getPlayerByFullName(name);
+			CharacterLookupService characterLookupService = AUTHORITY.get();
+			
+			if (characterLookupService == null) {
+				return null;
+			}
+			
+			return characterLookupService.getPlayerByFullName(name);
 		}
 		
 		@Nullable
 		public static Player getPlayerByFirstName(String name) {
-			return AUTHORITY.get().getPlayerByFirstName(name);
+			CharacterLookupService characterLookupService = AUTHORITY.get();
+			
+			if (characterLookupService == null) {
+				return null;
+			}
+			
+			return characterLookupService.getPlayerByFirstName(name);
 		}
 		
+		@Nullable
 		public static CreatureObject getCharacterByFullName(String name) {
-			return AUTHORITY.get().getCharacterByFullName(name);
+			CharacterLookupService characterLookupService = AUTHORITY.get();
+			
+			if (characterLookupService == null) {
+				return null;
+			}
+			
+			return characterLookupService.getCharacterByFullName(name);
 		}
 		
+		@Nullable
 		public static CreatureObject getCharacterByFirstName(String name) {
-			return AUTHORITY.get().getCharacterByFirstName(name);
+			CharacterLookupService characterLookupService = AUTHORITY.get();
+			
+			if (characterLookupService == null) {
+				return null;
+			}
+			
+			return characterLookupService.getCharacterByFirstName(name);
 		}
 		
+		@Nullable
 		public static Collection<CreatureObject> getLoggedInCharacters() {
-			return AUTHORITY.get().getLoggedInCharacters();
+			CharacterLookupService characterLookupService = AUTHORITY.get();
+			
+			if (characterLookupService == null) {
+				return null;
+			}
+			
+			return characterLookupService.getLoggedInCharacters();
 		}
 		
 	}
