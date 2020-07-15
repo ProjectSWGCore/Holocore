@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.gameplay.world.travel
 
 import com.projectswg.common.data.encodables.tangible.Posture
-import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
 import me.joshlarson.jlcommon.concurrency.Delay
 import me.joshlarson.jlcommon.log.Log
 import java.util.concurrent.CopyOnWriteArrayList
@@ -104,11 +104,11 @@ class TravelGroup(landTime: Long, groundTime: Long, airTime: Long) : Runnable {
 	
 	private fun updateShuttlePostures(landed: Boolean) {
 		for (tp in points) {
-			val shuttle = tp.shuttle ?: continue // No associated shuttle 
+			val shuttle = tp.shuttle ?: continue // No associated shuttle
 			val starport = tp.starport
 			if (starport != null) {
-				val effectFile = if (landed) "voice/sound/voice_starport_transport_arriving.snd" else "voice/sound/voice_starport_transport_away.snd"
-				val effect = PlayClientEffectObjectMessage(effectFile, "", shuttle.objectId, "")
+				val soundFile = if (landed) "sound/ui_alarm_clock3.snd" else "sound/ui_alarm_clock5.snd"
+				val effect = PlayMusicMessage(0, soundFile, 1, false)
 				starport.runOnChildObjectsRecursively { obj -> obj.sendSelf(effect) }
 			}
 			shuttle.posture = if (landed) Posture.UPRIGHT else Posture.PRONE
