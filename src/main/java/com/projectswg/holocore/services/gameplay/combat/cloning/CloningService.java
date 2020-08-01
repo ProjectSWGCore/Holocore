@@ -12,6 +12,7 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
@@ -315,6 +316,7 @@ public class CloningService extends Service {
 		corpse.setMovementPercent(1);
 		corpse.setHealth(corpse.getMaxHealth());
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
+		corpse.sendSelf(new PlayMusicMessage(0, "sound/spc_me_heal.snd", 1, false));
 		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));
 		corpse.broadcast(new BuffIntent("incapWeaken", corpse, corpse, true));
 		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {

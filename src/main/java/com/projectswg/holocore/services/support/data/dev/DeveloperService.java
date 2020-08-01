@@ -91,7 +91,11 @@ public class DeveloperService extends Service {
 			new Location(3848, 62, -464, Terrain.LOK),
 			new Location(-1914, 12, -3299, Terrain.LOK),
 			new Location(-70, 41.1, 2768, Terrain.LOK),
-			
+
+			// Planet: Mustafar
+			new Location(4908, 24, 6046, Terrain.MUSTAFAR),
+			new Location(-2489, 230, 1621, Terrain.MUSTAFAR),
+
 			// Planet: Naboo
 			new Location(2535, 295.9, -3887, Terrain.NABOO),
 			new Location(-6439, 41, -3265, Terrain.NABOO),

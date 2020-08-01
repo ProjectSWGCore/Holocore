@@ -12,7 +12,7 @@ patrol_kashyyyk_hunting.sdb	TRUE
 patrol_kashyyyk_rryatt.sdb	TRUE
 patrol_kashyyyk_slaver.sdb	TRUE
 patrol_lok.sdb	TRUE
-patrol_mustafar.sdb	FALSE
+patrol_mustafar.sdb	TRUE
 patrol_naboo.sdb	TRUE
 patrol_rori.sdb	TRUE
 patrol_talus.sdb	TRUE
