@@ -132,3 +132,4 @@ bo_atmo_129	LOK	lok_world	0	object/soundobject/shared_soundobject_refrigeration_
 bo_atmo_130	LOK	lok_nym_starport	1	object/soundobject/shared_soundobject_starport_interior.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
 bo_atmo_131	LOK	lok_nym_starport	1	object/soundobject/shared_soundobject_starport_announcer.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
 bo_atmo_132	LOK	lok_world	0	object/soundobject/shared_soundobject_city_crowd_medium.iff	421.0	12.0	5050.0	0	0	0	0	16	TRUE	Audio - Nym Bazaar
+bo_atmo_133	TATOOINE	tat_moseisley_lucky_despot	2	object/soundobject/shared_soundobject_nova_orion_band.iff	-15.5	8.0	0.3	0	0	0	0	16	TRUE	Audio - Luckey Despot
