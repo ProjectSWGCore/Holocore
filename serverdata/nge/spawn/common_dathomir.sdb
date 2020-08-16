@@ -927,10 +927,10 @@ spawn_dat_924	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper 
 spawn_dat_925	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4800	column	idle	0	0	0	600
 spawn_dat_926	DATHOMIR	dat_world	PATROL	0	-6342.3	128.0	766.8	0	1	a Novatrooper Medic	humanoid_imperial_stormtrooper_novatrooper_medic	AGGRESSIVE	E	75	85	POI	Imperial Prison	2	PATROL	0	patrol_dat_5100	column	idle	0	0	0	600
 spawn_dat_927	DATHOMIR	dat_world	PATROL	0	-6200.8	120.0	982.1	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5200	column	idle	0	0	0	600
-spawn_dat_928	DATHOMIR	dat_world	PATROL	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9000	column	idle	0	0	0	600
-spawn_dat_929	DATHOMIR	dat_world	PATROL	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8900	column	idle	0	0	0	600
-spawn_dat_930	DATHOMIR	dat_world	PATROL	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8800	column	idle	0	0	0	600
-spawn_dat_931	DATHOMIR	dat_world	PATROL	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9100	column	idle	0	0	0	600
+spawn_dat_928	DATHOMIR	dat_world	PATROL	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9000	column	idle	0	0	0	600
+spawn_dat_929	DATHOMIR	dat_world	PATROL	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8900	column	idle	0	0	0	600
+spawn_dat_930	DATHOMIR	dat_world	PATROL	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8800	column	idle	0	0	0	600
+spawn_dat_931	DATHOMIR	dat_world	PATROL	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9100	column	idle	0	0	0	600
 spawn_dat_932	DATHOMIR	dat_world	PATROL	0	-6356.5	128.0	780.4	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4900	column	idle	0	0	0	600
 spawn_dat_933	DATHOMIR	dat_world	AREA	0	-6146.6	128.0	969.9	44	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_934	DATHOMIR	dat_world	AREA	0	-6146.5	128.0	976.4	134	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle	0	0	0	600
