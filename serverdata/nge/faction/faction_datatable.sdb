@@ -27,7 +27,7 @@ death_watch_special	FALSE	FALSE	FALSE	-	-	-	1
 desert_demon	TRUE	TRUE	FALSE	-	swoop	-	1
 donkuwah_tribe	TRUE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 drall	TRUE	TRUE	FALSE	-	corsec;fed_dub	-	1
-droid_army	FALSE	TRUE	FALSE	-	mustafar_miners	-	1
+droid_army	FALSE	TRUE	FALSE	-	mustafar_miners;mustafar_miner	-	1
 endor_marauder	TRUE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 espa	FALSE	FALSE	FALSE	-	-	espa_guard	1
 espa_guard	FALSE	TRUE	FALSE	-	heroic_tusken	espa	1
@@ -66,6 +66,7 @@ mokk_tribe	TRUE	TRUE	FALSE	-	janta_tribe;dantari_raiders	-	1
 monumenter	TRUE	TRUE	FALSE	-	corsec;beldonnas_league	-	1
 mtn_clan	TRUE	TRUE	FALSE	-	nightsister;police	-	1
 mustafar_miners	FALSE	TRUE	FALSE	-	droid_army	-	1
+mustafar_miner	FALSE	TRUE	FALSE	-	droid_army	-	1
 naboo	TRUE	TRUE	FALSE	-	borvo	-	1
 naboo_pirate	TRUE	TRUE	FALSE	-	naboo_security_force;police	-	1
 naboo_security_force	TRUE	TRUE	FALSE	-	borvo;naboo_pirate;plasma_thief;swamp_rat;trade_federation	-	1

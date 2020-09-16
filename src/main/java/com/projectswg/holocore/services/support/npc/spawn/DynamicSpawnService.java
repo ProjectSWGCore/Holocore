@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class DynamicSpawnService extends Service {
 	
 	private static final int SPAWN_DISTANCE_TO_PLAYER = 70;	// Spawner is created 70m away from the player and NPCs are spawned around the spawner
-	private static final String EGG_TEMPLATE = "object/tangible/ground_spawning/shared_random_spawner.iff";
+	private static final String EGG_TEMPLATE = "object/path_waypoint/shared_path_waypoint_patrol.iff";
 	
 	private final DynamicSpawnLoader dynamicSpawnLoader;
 	private final NoSpawnZoneLoader noSpawnZoneLoader;
