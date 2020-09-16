@@ -2395,9 +2395,9 @@ spawn_nab_2392	NABOO	nab_weapon_development_facility	AREA	9	-50.6	-20.0	79.5	-85
 spawn_nab_2393	NABOO	nab_world	AREA	0	-6505.9	40.0	-3308.6	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	35	40	POI	Weapon Development Facility	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_nab_2394	NABOO	nab_world	AREA	0	-6499.3	40.0	-3251.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	35	40	POI	Weapon Development Facility	3	LOITER	10	0	-	idle	0	0	0	600
 spawn_nab_2395	NABOO	nab_world	AREA	0	-6499.6	40.0	-3247.3	0	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	35	40	POI	Weapon Development Facility	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_nab_2396	NABOO	nab_world	AREA	0	-6495.6	40.0	-3265.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Weapon Development Facility	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_nab_2397	NABOO	nab_world	AREA	0	-6480.3	40.0	-3331.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Weapon Development Facility	1	LOITER	10	0	-	idle	0	0	0	600
-spawn_nab_2398	NABOO	nab_world	AREA	0	-6528.6	40.0	-3335.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Weapon Development Facility	1	LOITER	10	0	-	idle	0	0	0	600
+spawn_nab_2396	NABOO	nab_world	AREA	0	-6495.6	40.0	-3265.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	35	40	POI	Weapon Development Facility	1	LOITER	3	0	-	idle	0	0	0	600
+spawn_nab_2397	NABOO	nab_world	AREA	0	-6480.3	40.0	-3331.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	35	40	POI	Weapon Development Facility	1	LOITER	3	0	-	idle	0	0	0	600
+spawn_nab_2398	NABOO	nab_world	AREA	0	-6528.6	40.0	-3335.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	35	40	POI	Weapon Development Facility	1	LOITER	3	0	-	idle	0	0	0	600
 spawn_nab_2399	NABOO	nab_world	AREA	0	-6508.1	40.0	-3270.7	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	35	40	POI	Weapon Development Facility	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_2400	NABOO	nab_world	AREA	0	-6511.8	40.0	-3311.2	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	35	40	POI	Weapon Development Facility	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_nab_2401	NABOO	nab_world	AREA	0	-6494.6	40.0	-3286.0	0	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	35	40	POI	Weapon Development Facility	1	LOITER	4	0	-	idle	0	0	0	600

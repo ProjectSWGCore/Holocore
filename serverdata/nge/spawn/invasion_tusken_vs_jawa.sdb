@@ -1,12 +1,12 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-spawn_tat_1	TATOOINE	tat_world	AREA	0	2221.4	0.0	-4436.0	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	5	LOITER	10	0	-	idle	0	0	0	60
-spawn_tat_2	TATOOINE	tat_world	AREA	0	2248.3	0.0	-4451.9	0	1	a Jawa engineer	humanoid_jawa_engineer	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	3	LOITER	3	0	-	idle	0	0	0	60
-spawn_tat_3	TATOOINE	tat_world	AREA	0	2251.1	0.0	-4402.6	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	4	LOITER	10	0	-	idle	0	0	0	60
+spawn_tat_1	TATOOINE	tat_world	AREA	0	2221.4	0.0	-4436.0	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	2	LOITER	10	0	-	idle	0	0	0	60
+spawn_tat_2	TATOOINE	tat_world	AREA	0	2248.3	0.0	-4451.9	0	1	a Jawa engineer	humanoid_jawa_engineer	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	1	LOITER	3	0	-	idle	0	0	0	60
+spawn_tat_3	TATOOINE	tat_world	AREA	0	2251.1	0.0	-4402.6	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	E	30	40	Invasion	Jawa vs. Tusken	2	LOITER	10	0	-	idle	0	0	0	60
 spawn_tat_4	TATOOINE	tat_world	AREA	0	2225.7	0.0	-4440.2	-98	1	a Jawa leader	humanoid_jawa_leader	ATTACKABLE	B	40	40	Invasion	Jawa vs. Tusken	1	IDLE	0	0	-	idle	0	0	0	60
-spawn_tat_5	TATOOINE	tat_world	PATROL	0	1851.5	0.2	-4064.3	143	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	12	PATROL	0	patrol_tat_15800	line	idle	0	0	0	10
-spawn_tat_6	TATOOINE	tat_world	PATROL	0	1846.1	1.1	-4073.4	143	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	12	PATROL	0	patrol_tat_15900	line	idle	0	0	0	10
-spawn_tat_7	TATOOINE	tat_world	PATROL	0	1858.5	1.0	-4047.6	153	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	12	PATROL	0	patrol_tat_16000	line	idle	0	0	0	10
-spawn_tat_8	TATOOINE	tat_world	PATROL	0	1830.8	0.6	-4061.0	147	1	Tusken Raider Warrior	humanoid_tusken_raider_soldier	AGGRESSIVE	E	30	35	Invasion	Jawa vs. Tusken	10	PATROL	0	patrol_tat_16100	wedge	idle	0	0	0	10
+spawn_tat_5	TATOOINE	tat_world	PATROL	0	1851.5	0.2	-4064.3	143	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	2	PATROL	0	patrol_tat_15800	line	idle	0	0	0	10
+spawn_tat_6	TATOOINE	tat_world	PATROL	0	1846.1	1.1	-4073.4	143	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	2	PATROL	0	patrol_tat_15900	line	idle	0	0	0	10
+spawn_tat_7	TATOOINE	tat_world	PATROL	0	1858.5	1.0	-4047.6	153	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	30	35	Invasion	Jawa vs. Tusken	2	PATROL	0	patrol_tat_16000	line	idle	0	0	0	10
+spawn_tat_8	TATOOINE	tat_world	PATROL	0	1830.8	0.6	-4061.0	147	1	Tusken Raider Warrior	humanoid_tusken_raider_soldier	AGGRESSIVE	E	30	35	Invasion	Jawa vs. Tusken	3	PATROL	0	patrol_tat_16100	wedge	idle	0	0	0	10
 spawn_tat_9	TATOOINE	tat_world	AREA	0	1839.8	0.5	-4062.1	176	1	a Tusken bantha	creature_bantha_tusken	INVULNERABLE	N	100	100	Invasion	Jawa vs. Tusken	1	IDLE	0	0	-	idle	0	0	0	10
 spawn_tat_10	TATOOINE	tat_world	AREA	0	1851.3	0.4	-4053.1	158	1	a Tusken bantha	creature_bantha_tusken	INVULNERABLE	N	100	100	Invasion	Jawa vs. Tusken	1	IDLE	0	0	-	idle	0	0	0	10
