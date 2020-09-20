@@ -2127,7 +2127,7 @@ spawn_cor_2124	CORELLIA	cor_world	AREA	0	-3590.7	16.5	-344.4	0	1	a Rebel trooper
 spawn_cor_2125	CORELLIA	cor_world	AREA	0	-3602.2	21.6	-328.2	0	1	a Rebel trooper	humanoid_itp_rebel_trooper_elite	ATTACKABLE	E	85	89	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_cor_2126	CORELLIA	cor_world	AREA	0	-3615.1	16.5	-321.4	0	1	a Rebel trooper	humanoid_itp_rebel_trooper_elite	ATTACKABLE	E	85	89	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_cor_2127	CORELLIA	cor_world	AREA	0	-3630.3	25.6	-334.4	0	1	a Rebel trooper	humanoid_itp_rebel_trooper_elite	ATTACKABLE	E	85	89	Outback	Corellia	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_cor_2128	CORELLIA	cor_world	AREA	0	-686.0	3.1	-4155.5	0	1	a renegade CorSec trooper	humanoid_corsec_renegade	AGGRESSIVE	N	30	40	Outback	Corellia	2	LOITER	6	0	-	idle	0	0	0	600
+spawn_cor_2128	CORELLIA	cor_world	AREA	0	-686.0	3.1	-4155.5	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	30	40	Outback	Corellia	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_cor_2129	CORELLIA	cor_world	AREA	0	434.7	7.2	-4625.9	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	30	40	Outback	Corellia	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_cor_2130	CORELLIA	cor_world	AREA	0	438.8	3.2	-4646.0	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	30	40	Outback	Corellia	2	LOITER	6	0	-	idle	0	0	0	600
 spawn_cor_2131	CORELLIA	cor_world	AREA	0	451.6	2.7	-4639.9	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	30	40	Outback	Corellia	2	LOITER	6	0	-	idle	0	0	0	600
