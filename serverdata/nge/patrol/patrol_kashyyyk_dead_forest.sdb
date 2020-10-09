@@ -10,7 +10,7 @@ patrol_kas_dead_106	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0
 patrol_kas_dead_107	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	360.1	23.8	-357.9	0	
 patrol_kas_dead_108	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	406.6	25.9	-389.1	0	
 patrol_kas_dead_109	patrol_kas_dead_100		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	410.4	26.9	-440.3	0	
-patrol_kas_dead_200	patrol_kas_dead_200	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	87.6	29.4	-476.6	0	Dead Forest - a kerritamba warrior
+patrol_kas_dead_200	patrol_kas_dead_200	FLIP	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	87.6	29.4	-476.6	15	Dead Forest - a kerritamba warrior
 patrol_kas_dead_201	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	81.2	26.9	-437.7	0	
 patrol_kas_dead_202	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	46.9	26.4	-374.5	0	
 patrol_kas_dead_203	patrol_kas_dead_200		KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	6.4	26.4	-300.0	0	

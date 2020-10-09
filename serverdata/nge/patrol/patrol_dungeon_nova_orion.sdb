@@ -19,7 +19,7 @@ patrol_du_nova_orion_115	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	3	-9.
 patrol_du_nova_orion_116	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-12.0	0.8	-37.0	0	
 patrol_du_nova_orion_117	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-14.4	0.6	-44.1	0	
 patrol_du_nova_orion_118	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-18.6	0.6	-49.6	0	
-patrol_du_nova_orion_119	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-22.8	0.8	-54.2	0	
+patrol_du_nova_orion_119	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-22.8	0.8	-54.2	10	
 patrol_du_nova_orion_120	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-20.7	0.7	-49.6	0	
 patrol_du_nova_orion_121	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-20.6	0.7	-45.1	0	
 patrol_du_nova_orion_122	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	14	-12.5	0.8	-38.1	0	
@@ -59,7 +59,7 @@ patrol_du_nova_orion_155	patrol_du_nova_orion_100		DUNGEON1	du1_nova_orion	12	-6
 patrol_du_nova_orion_200	patrol_du_nova_orion_200	LOOP	DUNGEON1	du1_nova_orion	3	-0.4	-1.0	-33.1	0	Nova Orion - an EG-6 power droid
 patrol_du_nova_orion_201	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	3	-8.2	0.8	-31.1	0	
 patrol_du_nova_orion_202	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	3	-17.4	0.8	-25.3	0	
-patrol_du_nova_orion_203	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	3	-24.2	0.8	-18.5	0	
+patrol_du_nova_orion_203	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	3	-28.4	0.8	-13.1	0	
 patrol_du_nova_orion_204	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	3	-29.9	0.8	-8.3	0	
 patrol_du_nova_orion_205	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	2	-32.5	-1.0	0.0	0	
 patrol_du_nova_orion_206	patrol_du_nova_orion_200		DUNGEON1	du1_nova_orion	2	-30.5	0.8	7.7	0	
@@ -92,7 +92,7 @@ patrol_du_nova_orion_308	patrol_du_nova_orion_300		DUNGEON1	du1_nova_orion	1	10.
 patrol_du_nova_orion_309	patrol_du_nova_orion_300		DUNGEON1	du1_nova_orion	1	13.9	-1.0	7.4	0	
 patrol_du_nova_orion_310	patrol_du_nova_orion_300		DUNGEON1	du1_nova_orion	1	13.1	-1.0	1.9	0	
 patrol_du_nova_orion_311	patrol_du_nova_orion_300		DUNGEON1	du1_nova_orion	1	13.2	-1.0	-5.6	0	
-patrol_du_nova_orion_400	patrol_du_nova_orion_400	FLIP	DUNGEON1	du1_nova_orion	1	-6.0	-0.5	-4.2	0	Nova Orion - an Astromech waiter
+patrol_du_nova_orion_400	patrol_du_nova_orion_400	FLIP	DUNGEON1	du1_nova_orion	1	-6.0	-0.5	-4.2	10	Nova Orion - an Astromech waiter
 patrol_du_nova_orion_401	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	-5.0	-0.5	-8.7	0	
 patrol_du_nova_orion_402	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	-1.6	-1.0	-16.3	0	
 patrol_du_nova_orion_403	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	0.3	-3.0	-25.8	0	
@@ -121,7 +121,7 @@ patrol_du_nova_orion_425	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	14	-1
 patrol_du_nova_orion_426	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	14	-10.1	0.7	-50.5	0	
 patrol_du_nova_orion_427	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	14	-9.4	0.7	-46.8	0	
 patrol_du_nova_orion_428	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	14	-11.6	0.8	-38.7	0	
-patrol_du_nova_orion_429	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	-11.0	0.8	-31	0	
+patrol_du_nova_orion_429	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	-11.0	0.8	-31	10	
 patrol_du_nova_orion_430	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	-17.9	0.8	-25.8	0	
 patrol_du_nova_orion_431	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	-25.1	0.8	-18.6	0	
 patrol_du_nova_orion_432	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	3	-30.8	0.8	-8.4	0	
@@ -130,8 +130,8 @@ patrol_du_nova_orion_434	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	2	-25
 patrol_du_nova_orion_435	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	-15.1	-1.0	-0.8	0	
 patrol_du_nova_orion_436	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	-8.5	-0.5	6.6	0	
 patrol_du_nova_orion_437	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	-1.1	-1.0	13.6	0	
-patrol_du_nova_orion_438	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	5.7	-0.5	9.2	0	
-patrol_du_nova_orion_439	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	10.2	-0.5	3.6	0	
+patrol_du_nova_orion_438	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	7.9	-0.5	8.6	0	
+patrol_du_nova_orion_439	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	9.0	0.2	-3.0	0	
 patrol_du_nova_orion_440	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	13.4	-1.0	-2.2	0	
 patrol_du_nova_orion_441	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	1	19.8	-1.8	-0.9	0	
 patrol_du_nova_orion_442	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	4	27.0	-3.0	0.1	0	
@@ -140,7 +140,7 @@ patrol_du_nova_orion_444	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	5	33.
 patrol_du_nova_orion_445	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	5	31.1	0.8	13	0	
 patrol_du_nova_orion_446	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	5	28.9	0.8	20.5	0	
 patrol_du_nova_orion_447	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	37.4	0.8	26.2	0	
-patrol_du_nova_orion_448	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	37.7	0.8	36.3	0	
+patrol_du_nova_orion_448	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	37.7	0.8	36.3	10	
 patrol_du_nova_orion_449	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	51.6	0.9	33	0	
 patrol_du_nova_orion_450	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	62.4	0.9	33.3	0	
 patrol_du_nova_orion_451	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	77.3	0.8	31.3	0	
@@ -151,7 +151,7 @@ patrol_du_nova_orion_455	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	91.
 patrol_du_nova_orion_456	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	86.9	0.8	20.1	0	
 patrol_du_nova_orion_457	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	90	0.8	24.9	0	
 patrol_du_nova_orion_458	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	97.5	0.8	27.1	0	
-patrol_du_nova_orion_459	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	102.1	0.8	25.6	0	
+patrol_du_nova_orion_459	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	102.1	0.8	25.6	15	
 patrol_du_nova_orion_460	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	93.9	0.8	26	0	
 patrol_du_nova_orion_461	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	7	85.1	0.8	25.5	0	
 patrol_du_nova_orion_462	patrol_du_nova_orion_400		DUNGEON1	du1_nova_orion	6	80.9	0.8	27	0	
@@ -227,9 +227,9 @@ patrol_du_nova_orion_702	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	51.
 patrol_du_nova_orion_703	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	48.4	0.8	-16.4	0	
 patrol_du_nova_orion_704	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	43.1	0.8	-20.7	0	
 patrol_du_nova_orion_705	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	41.5	0.8	-30.2	0	
-patrol_du_nova_orion_706	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	37	0.8	-40.5	0	
-patrol_du_nova_orion_707	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	43.2	0.8	-51.2	0	
-patrol_du_nova_orion_708	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	47.6	0.9	-54.7	0	
+patrol_du_nova_orion_706	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	37	0.8	-40.5	5	
+patrol_du_nova_orion_707	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	43.2	0.8	-51.2	5	
+patrol_du_nova_orion_708	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	47.6	0.9	-54.7	5	
 patrol_du_nova_orion_709	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	60.5	0.8	-47.5	0	
 patrol_du_nova_orion_710	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	71.7	0.9	-37.2	0	
 patrol_du_nova_orion_711	patrol_du_nova_orion_700		DUNGEON1	du1_nova_orion	8	79.5	0.8	-29.4	0	

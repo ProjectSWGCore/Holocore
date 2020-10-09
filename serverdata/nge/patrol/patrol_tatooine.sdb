@@ -200,11 +200,11 @@ patrol_tat_3002	patrol_tat_3000		TATOOINE	tat_world	0	-2729.3	5.0	2076.8	0
 patrol_tat_3003	patrol_tat_3000		TATOOINE	tat_world	0	-2775.6	5.0	2149.1	0	
 patrol_tat_3004	patrol_tat_3000		TATOOINE	tat_world	0	-2811.9	5.0	2144.3	0	
 patrol_tat_3005	patrol_tat_3000		TATOOINE	tat_world	0	-2820.3	5.0	2175.1	0	
-patrol_tat_3100	patrol_tat_3100	FLIP	TATOOINE	tat_world	0	-1351.0	12.0	-3678.5	0	Bestine - commoner near cantina
-patrol_tat_3101	patrol_tat_3100		TATOOINE	tat_world	0	-1341.8	12.0	-3705.4	0	
-patrol_tat_3102	patrol_tat_3100		TATOOINE	tat_world	0	-1366.8	12.0	-3726.2	0	
+patrol_tat_3100	patrol_tat_3100	FLIP	TATOOINE	tat_world	0	-1351.0	12.0	-3678.5	15	Bestine - commoner near cantina
+patrol_tat_3101	patrol_tat_3100		TATOOINE	tat_world	0	-1344.2	12.0	-3708.9	10	
+patrol_tat_3102	patrol_tat_3100		TATOOINE	tat_world	0	-1366.8	12.0	-3726.2	10	
 patrol_tat_3103	patrol_tat_3100		TATOOINE	tat_world	0	-1371.5	12.0	-3713.8	0	
-patrol_tat_3104	patrol_tat_3100		TATOOINE	tat_world	0	-1395.1	12.0	-3708.5	0	
+patrol_tat_3104	patrol_tat_3100		TATOOINE	tat_world	0	-1395.1	12.0	-3708.5	10	
 patrol_tat_3105	patrol_tat_3100		TATOOINE	tat_world	0	-1428.7	12.0	-3735.2	0	
 patrol_tat_3200	patrol_tat_3200	FLIP	TATOOINE	tat_world	0	-909.0	19.5	-4027.0	0	Bestine - recon mercenaries
 patrol_tat_3201	patrol_tat_3200		TATOOINE	tat_world	0	-918.1	19.4	-4024.3	0	
@@ -665,14 +665,14 @@ patrol_tat_7113	patrol_tat_7100		TATOOINE	tat_world	0	3544.8	5.0	-4838.5	0
 patrol_tat_7114	patrol_tat_7100		TATOOINE	tat_world	0	3525.3	4.0	-4816.9	0	
 patrol_tat_7200	patrol_tat_7200	LOOP	TATOOINE	tat_world	0	-1144.4	98.0	-3903.6	0	Bestine - Sand trooper imperial base on hill
 patrol_tat_7201	patrol_tat_7200		TATOOINE	tat_world	0	-1137.0	98.1	-3888.8	0	
-patrol_tat_7202	patrol_tat_7200		TATOOINE	tat_world	0	-1137.0	98.9	-3884.6	0	
-patrol_tat_7203	patrol_tat_7200		TATOOINE	tat_world	0	-1164.7	95.2	-3884.7	0	
-patrol_tat_7204	patrol_tat_7200		TATOOINE	tat_world	0	-1164.8	98.2	-3921.5	0	
+patrol_tat_7202	patrol_tat_7200		TATOOINE	tat_world	0	-1137.0	98.9	-3884.6	5	
+patrol_tat_7203	patrol_tat_7200		TATOOINE	tat_world	0	-1164.7	95.2	-3884.7	5	
+patrol_tat_7204	patrol_tat_7200		TATOOINE	tat_world	0	-1164.8	98.2	-3921.5	5	
 patrol_tat_7205	patrol_tat_7200		TATOOINE	tat_world	0	-1153.6	98.1	-3919.5	0	
-patrol_tat_7300	patrol_tat_7300	LOOP	TATOOINE	tat_world	0	-1142.5	98.1	-3922.9	0	Bestine - Dark Trooper imperial base on hill
-patrol_tat_7301	patrol_tat_7300		TATOOINE	tat_world	0	-1120.9	96.5	-3921.9	0	
-patrol_tat_7302	patrol_tat_7300		TATOOINE	tat_world	0	-1121.5	97.8	-3888.0	0	
-patrol_tat_7303	patrol_tat_7300		TATOOINE	tat_world	0	-1135.8	99.0	-3884.0	0	
+patrol_tat_7300	patrol_tat_7300	LOOP	TATOOINE	tat_world	0	-1142.5	98.1	-3922.9	5	Bestine - Dark Trooper imperial base on hill
+patrol_tat_7301	patrol_tat_7300		TATOOINE	tat_world	0	-1120.9	96.5	-3921.9	5	
+patrol_tat_7302	patrol_tat_7300		TATOOINE	tat_world	0	-1121.5	97.8	-3888.0	5	
+patrol_tat_7303	patrol_tat_7300		TATOOINE	tat_world	0	-1135.8	99.0	-3884.0	5	
 patrol_tat_7304	patrol_tat_7300		TATOOINE	tat_world	0	-1144.9	98.0	-3903.9	0	
 patrol_tat_7305	patrol_tat_7300		TATOOINE	tat_world	0	-1144.6	97.9	-3920.9	0	
 patrol_tat_7400	patrol_tat_7400	LOOP	TATOOINE	tat_world	0	-2921.6	5.0	2107.7	0	Mos Espa - Power droid in front of starport
@@ -852,12 +852,12 @@ patrol_tat_10204	patrol_tat_10200		TATOOINE	tat_jabbas_palace	22	-23.3	3.6	46.1	
 patrol_tat_10204	patrol_tat_10200		TATOOINE	tat_jabbas_palace	22	-23.3	3.6	51.9	0	
 patrol_tat_10300	patrol_tat_10300	LOOP	TATOOINE	tat_jabbas_palace	23	-32.9	3.0	59.8	0	POI - Jabbas Palace - Rautog
 patrol_tat_10301	patrol_tat_10300		TATOOINE	tat_jabbas_palace	23	-32.9	3.0	72.6	0	
-patrol_tat_10400	patrol_tat_10400	LOOP	TATOOINE	tat_jabbas_palace	11	-48.8	0.2	82.6	0	POI - Jabbas Palace - Artogg
-patrol_tat_10401	patrol_tat_10400		TATOOINE	tat_jabbas_palace	11	-32.0	0.2	82.5	0	
-patrol_tat_10500	patrol_tat_10500	LOOP	TATOOINE	tat_jabbas_palace	14	17.0	0.2	82.2	0	POI - Jabbas Palace - an EG-6 power droid
-patrol_tat_10501	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	20.0	0.2	77.0	0	
-patrol_tat_10502	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	15.9	0.2	80.4	0	
-patrol_tat_10503	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	20.7	0.2	86.4	0	
+patrol_tat_10400	patrol_tat_10400	LOOP	TATOOINE	tat_jabbas_palace	11	-48.8	0.2	82.6	10	POI - Jabbas Palace - Artogg
+patrol_tat_10401	patrol_tat_10400		TATOOINE	tat_jabbas_palace	11	-32.0	0.2	82.5	10	
+patrol_tat_10500	patrol_tat_10500	LOOP	TATOOINE	tat_jabbas_palace	14	17.0	0.2	82.2	5	POI - Jabbas Palace - an EG-6 power droid
+patrol_tat_10501	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	20.0	0.2	77.0	5	
+patrol_tat_10502	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	15.9	0.2	80.4	5	
+patrol_tat_10503	patrol_tat_10500		TATOOINE	tat_jabbas_palace	14	20.7	0.2	86.4	5	
 patrol_tat_10600	patrol_tat_10600	LOOP	TATOOINE	tat_world	0	-3123.4	5.0	2306.5	0	Mos Espa - Presence patrol
 patrol_tat_10601	patrol_tat_10600		TATOOINE	tat_world	0	-3137.9	5.0	2301.2	0	
 patrol_tat_10602	patrol_tat_10600		TATOOINE	tat_world	0	-3140.8	5.0	2274.9	0	
@@ -914,7 +914,7 @@ patrol_tat_11200	patrol_tat_11200	FLIP	TATOOINE	tat_world	0	81.0	52.0	-5333.0	0	
 patrol_tat_11201	patrol_tat_11200		TATOOINE	tat_world	0	29.4	51.5	-5343.0	0	
 patrol_tat_11202	patrol_tat_11200		TATOOINE	tat_world	0	81.0	52.0	-5333.0	0	
 patrol_tat_11203	patrol_tat_11200		TATOOINE	tat_world	0	131.3	52.0	-5335.9	0	
-patrol_tat_11204	patrol_tat_11200		TATOOINE	tat_world	0	162.6	52.0	-5329.1	0	
+patrol_tat_11204	patrol_tat_11200		TATOOINE	tat_world	0	162.6	52.0	-5329.1	10	
 patrol_tat_11300	patrol_tat_11300	FLIP	TATOOINE	tat_world	0	-1105.8	12.0	-3573.1	0	Bestine - Presence patrol
 patrol_tat_11301	patrol_tat_11300		TATOOINE	tat_world	0	-1082.8	12.0	-3512.3	0	
 patrol_tat_11400	patrol_tat_11400	FLIP	TATOOINE	tat_world	0	-1415.60	10.00	-3775.20	0	Bestine - Presence patrol
@@ -1150,7 +1150,7 @@ patrol_tat_16102	patrol_tat_16100		TATOOINE	tat_world	0	1856.3	0.0	-4170.7	0
 patrol_tat_16103	patrol_tat_16100		TATOOINE	tat_world	0	2058.2	0.0	-4368.8	0	
 patrol_tat_16104	patrol_tat_16100		TATOOINE	tat_world	0	2189.6	0.0	-4456.5	0	
 patrol_tat_16105	patrol_tat_16100		TATOOINE	tat_world	0	2219.6	0.0	-4451.6	0	
-patrol_tat_16200	patrol_tat_16200	FLIP	TATOOINE	tat_moseisley_starport	4	-11.3	0.6	54.1	0	Mos Eisley - an Ankuran Gungan
+patrol_tat_16200	patrol_tat_16200	FLIP	TATOOINE	tat_moseisley_starport	4	-11.3	0.6	54.1	15	Mos Eisley - an Ankuran Gungan
 patrol_tat_16201	patrol_tat_16200		TATOOINE	tat_moseisley_starport	4	-17.1	0.6	60.5	0	
 patrol_tat_16202	patrol_tat_16200		TATOOINE	tat_moseisley_starport	8	-21.9	1.6	60.5	0	
 patrol_tat_16203	patrol_tat_16200		TATOOINE	tat_moseisley_starport	9	-36.4	1.6	54.8	0	
@@ -1163,8 +1163,8 @@ patrol_tat_16209	patrol_tat_16200		TATOOINE	tat_moseisley_starport	15	-46.6	1.0	
 patrol_tat_16210	patrol_tat_16200		TATOOINE	tat_world	0	3633.1	5.0	-4827.2	0	
 patrol_tat_16211	patrol_tat_16200		TATOOINE	tat_world	0	3645.8	5.0	-4799.8	0	
 patrol_tat_16212	patrol_tat_16200		TATOOINE	tat_world	0	3639.6	5.0	-4785.8	0	
-patrol_tat_16213	patrol_tat_16200		TATOOINE	tat_world	0	3630.1	5.0	-4789.7	0	
-patrol_tat_16300	patrol_tat_16300	FLIP	TATOOINE	tat_world	0	3661.7	5.0	-4799.8	0	Mos Eisley - an EG-6 power droid
+patrol_tat_16213	patrol_tat_16200		TATOOINE	tat_world	0	3630.1	5.0	-4789.7	15	
+patrol_tat_16300	patrol_tat_16300	FLIP	TATOOINE	tat_world	0	3661.7	5.0	-4799.8	15	Mos Eisley - an EG-6 power droid
 patrol_tat_16301	patrol_tat_16300		TATOOINE	tat_world	0	3620.3	5.0	-4764.8	0	
 patrol_tat_16302	patrol_tat_16300		TATOOINE	tat_moseisley_starport	16	56.6	1.0	14.3	0	
 patrol_tat_16303	patrol_tat_16300		TATOOINE	tat_moseisley_starport	13	52.7	0.6	25.0	0	
@@ -1177,9 +1177,9 @@ patrol_tat_16309	patrol_tat_16300		TATOOINE	tat_moseisley_starport	3	14.2	0.6	78
 patrol_tat_16310	patrol_tat_16300		TATOOINE	tat_moseisley_starport	1	7.7	0.6	78.8	0	
 patrol_tat_16311	patrol_tat_16300		TATOOINE	tat_moseisley_starport	1	1.9	0.6	76.1	0	
 patrol_tat_16312	patrol_tat_16300		TATOOINE	tat_world	0	3504.1	5.0	-4809.9	0	
-patrol_tat_16313	patrol_tat_16300		TATOOINE	tat_world	0	3501.4	5.0	-4812.9	0	
+patrol_tat_16313	patrol_tat_16300		TATOOINE	tat_world	0	3501.4	5.0	-4812.9	10	
 patrol_tat_16400	patrol_tat_16400	FLIP	TATOOINE	tat_moseisley_lucky_despot	2	-4.0	7.0	0.5	0	Mos Eisley - Luckey Despot - a Nova Orion Industries employee
-patrol_tat_16401	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	2	-11.6	7.0	3.2	0	
+patrol_tat_16401	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	2	-11.6	7.0	3.2	15	
 patrol_tat_16402	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-12.4	9.0	13.2	0	
 patrol_tat_16403	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-2.8	9.0	14.4	0	
 patrol_tat_16404	patrol_tat_16400		TATOOINE	tat_moseisley_lucky_despot	1	-3.6	9.0	17.3	0	
@@ -1196,7 +1196,7 @@ patrol_tat_16414	patrol_tat_16400		TATOOINE	tat_world	0	3538.0	5.1	-4803.1	0
 patrol_tat_16415	patrol_tat_16400		TATOOINE	tat_moseisley_starport	1	2.7	0.6	76.6	0	
 patrol_tat_16416	patrol_tat_16400		TATOOINE	tat_moseisley_starport	3	14.0	0.6	79.2	0	
 patrol_tat_16417	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	12.7	0.6	61.7	0	
-patrol_tat_16418	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	10.5	0.6	53.1	0	
+patrol_tat_16418	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	10.5	0.6	53.1	10	
 patrol_tat_16419	patrol_tat_16400		TATOOINE	tat_moseisley_starport	4	15.8	0.6	59.5	0	
 patrol_tat_16420	patrol_tat_16400		TATOOINE	tat_moseisley_starport	5	28.0	0.6	61.5	0	
 patrol_tat_16421	patrol_tat_16400		TATOOINE	tat_moseisley_starport	6	33.2	0.6	57.2	0	
@@ -1204,7 +1204,7 @@ patrol_tat_16422	patrol_tat_16400		TATOOINE	tat_moseisley_starport	7	43.8	0.6	40
 patrol_tat_16423	patrol_tat_16400		TATOOINE	tat_moseisley_starport	13	53.5	1.0	25.0	0	
 patrol_tat_16424	patrol_tat_16400		TATOOINE	tat_moseisley_starport	16	55.5	1.0	14.6	0	
 patrol_tat_16425	patrol_tat_16400		TATOOINE	tat_world	0	3607.4	5.0	-4752.7	0	
-patrol_tat_16426	patrol_tat_16400		TATOOINE	tat_world	0	3627.9	5.0	-4789.2	0	
+patrol_tat_16426	patrol_tat_16400		TATOOINE	tat_world	0	3627.9	5.0	-4789.2	15	
 patrol_tat_16500	patrol_tat_16500	FLIP	TATOOINE	tat_jabbas_palace	1	-1.1	0.2	137.2	0	POI - Jabbas Palace - a Gamorrean guard
 patrol_tat_16501	patrol_tat_16500		TATOOINE	tat_world	0	-5867.8	90.0	-6202.5	0	
 patrol_tat_16502	patrol_tat_16500		TATOOINE	tat_world	0	-5837.5	90.0	-6197.2	0	
@@ -1304,14 +1304,14 @@ patrol_tat_17407	patrol_tat_17400		TATOOINE	tat_world	0	3541.4	5.2	-4736.2	0
 patrol_tat_17408	patrol_tat_17400		TATOOINE	tat_moseisley_hospital	1	0.0	0.2	14.2	0	
 patrol_tat_17409	patrol_tat_17400		TATOOINE	tat_moseisley_hospital	1	-14.6	0.2	13.6	0	
 patrol_tat_17410	patrol_tat_17400		TATOOINE	tat_moseisley_hospital	2	-9.5	0.2	0.1	0	
-patrol_tat_17411	patrol_tat_17400		TATOOINE	tat_moseisley_hospital	2	-3.6	0.2	0.0	0	
-patrol_tat_17500	patrol_tat_17500	FLIP	TATOOINE	tat_world	0	3576.9	5.0	-4711.6	0	City - Mos Eisley - a Chadra Fan male
+patrol_tat_17411	patrol_tat_17400		TATOOINE	tat_moseisley_hospital	2	-3.6	0.2	0.0	15	
+patrol_tat_17500	patrol_tat_17500	FLIP	TATOOINE	tat_world	0	3576.9	5.0	-4711.6	10	City - Mos Eisley - a Chadra Fan male
 patrol_tat_17501	patrol_tat_17500		TATOOINE	tat_world	0	3574.8	5.0	-4717.8	0	
 patrol_tat_17502	patrol_tat_17500		TATOOINE	tat_world	0	3528.3	4.0	-4715.5	0	
 patrol_tat_17503	patrol_tat_17500		TATOOINE	tat_world	0	3491.3	5.0	-4720.3	0	
 patrol_tat_17504	patrol_tat_17500		TATOOINE	tat_world	0	3409.7	5.0	-4667.0	0	
 patrol_tat_17505	patrol_tat_17500		TATOOINE	tat_world	0	3381.3	4.0	-4671.0	0	
-patrol_tat_17506	patrol_tat_17500		TATOOINE	tat_world	0	3363.9	5.0	-4678.2	0	
+patrol_tat_17506	patrol_tat_17500		TATOOINE	tat_world	0	3363.9	5.0	-4678.2	15	
 patrol_tat_17600	patrol_tat_17600	FLIP	TATOOINE	tat_world	0	3214.1	5.0	-4868.8	0	City - Mos Eisley - an R3 unit
 patrol_tat_17601	patrol_tat_17600		TATOOINE	tat_world	0	3240.5	4.0	-4863.2	0	
 patrol_tat_17602	patrol_tat_17600		TATOOINE	tat_world	0	3261.2	4.0	-4846.8	0	
@@ -1323,8 +1323,8 @@ patrol_tat_17607	patrol_tat_17600		TATOOINE	tat_world	0	3583.6	5.0	-4893.7	0
 patrol_tat_17608	patrol_tat_17600		TATOOINE	tat_world	0	3617.7	4.2	-4869.7	0	
 patrol_tat_17609	patrol_tat_17600		TATOOINE	tat_world	0	3691.7	5.0	-4859.2	0	
 patrol_tat_17610	patrol_tat_17600		TATOOINE	tat_world	0	3708.8	4.0	-4831.9	0	
-patrol_tat_17611	patrol_tat_17600		TATOOINE	tat_world	0	3715.5	5.0	-4735.0	0	
-patrol_tat_17700	patrol_tat_17700	FLIP	TATOOINE	tat_moseisley_starport	12	-58.3	2.6	43.1	0	City - Mos Eisley - N.S.H. technician
+patrol_tat_17611	patrol_tat_17600		TATOOINE	tat_world	0	3715.5	5.0	-4735.0	10	
+patrol_tat_17700	patrol_tat_17700	FLIP	TATOOINE	tat_moseisley_starport	12	-58.3	2.6	43.1	15	City - Mos Eisley - N.S.H. technician
 patrol_tat_17701	patrol_tat_17700		TATOOINE	tat_moseisley_starport	12	-55.6	2.6	43.0	0	
 patrol_tat_17702	patrol_tat_17700		TATOOINE	tat_moseisley_starport	12	-52.3	2.6	39.5	0	
 patrol_tat_17703	patrol_tat_17700		TATOOINE	tat_moseisley_starport	11	-46.5	2.2	45.1	0	
@@ -1334,8 +1334,8 @@ patrol_tat_17706	patrol_tat_17700		TATOOINE	tat_moseisley_starport	8	-20.0	1.2	5
 patrol_tat_17707	patrol_tat_17700		TATOOINE	tat_moseisley_starport	4	-5.1	0.6	65.1	0	
 patrol_tat_17708	patrol_tat_17700		TATOOINE	tat_moseisley_starport	5	19.9	0.6	61.5	0	
 patrol_tat_17709	patrol_tat_17700		TATOOINE	tat_moseisley_starport	5	31.2	0.6	60.6	0	
-patrol_tat_17710	patrol_tat_17700		TATOOINE	tat_moseisley_starport	7	41.9	0.6	38.8	0	
-patrol_tat_17800	patrol_tat_17800	FLIP	TATOOINE	tat_moseisley_starport	4	7.7	0.6	57.4	0	City - Mos Eisley - a Rodian Trader
+patrol_tat_17710	patrol_tat_17700		TATOOINE	tat_moseisley_starport	7	41.9	0.6	38.8	15	
+patrol_tat_17800	patrol_tat_17800	FLIP	TATOOINE	tat_moseisley_starport	4	7.7	0.6	57.4	15	City - Mos Eisley - a Rodian Trader
 patrol_tat_17801	patrol_tat_17800		TATOOINE	tat_moseisley_starport	4	15.0	0.6	68.8	0	
 patrol_tat_17802	patrol_tat_17800		TATOOINE	tat_moseisley_starport	3	14.3	0.6	80.6	0	
 patrol_tat_17803	patrol_tat_17800		TATOOINE	tat_moseisley_starport	1	-0.1	0.6	74.8	0	
@@ -1347,7 +1347,7 @@ patrol_tat_17808	patrol_tat_17800		TATOOINE	tat_world	0	3473.8	4.3	-4855.5	0
 patrol_tat_17809	patrol_tat_17800		TATOOINE	tat_moseisley_cantina	1	45.3	0.1	-3.7	0	
 patrol_tat_17810	patrol_tat_17800		TATOOINE	tat_moseisley_cantina	2	34.2	0.1	-5.4	0	
 patrol_tat_17811	patrol_tat_17800		TATOOINE	tat_moseisley_cantina	2	29.6	0.1	-0.8	0	
-patrol_tat_17812	patrol_tat_17800		TATOOINE	tat_moseisley_cantina	3	11.2	-0.9	0.6	0	
+patrol_tat_17812	patrol_tat_17800		TATOOINE	tat_moseisley_cantina	3	11.2	-0.9	0.6	30	
 patrol_tat_17900	patrol_tat_17900	FLIP	TATOOINE	tat_moseisley_cantina	13	-25.3	-0.5	9.4	0	City - Mos Eisley - a Jawa
 patrol_tat_17901	patrol_tat_17900		TATOOINE	tat_moseisley_cantina	12	-24.1	-0.9	20.3	0	
 patrol_tat_17902	patrol_tat_17900		TATOOINE	tat_moseisley_cantina	12	-19.4	-0.9	18.0	0	
@@ -1364,8 +1364,8 @@ patrol_tat_17912	patrol_tat_17900		TATOOINE	tat_world	0	3399.6	4.0	-4941.9	0
 patrol_tat_17913	patrol_tat_17900		TATOOINE	tat_world	0	3397.4	4.1	-4966.3	0	
 patrol_tat_17914	patrol_tat_17900		TATOOINE	tat_world	0	3358.8	5.0	-5035.4	0	
 patrol_tat_17915	patrol_tat_17900		TATOOINE	tat_world	0	3390.5	5.0	-5059.6	0	
-patrol_tat_17916	patrol_tat_17900		TATOOINE	tat_world	0	3393.2	5.0	-5058.8	0	
-patrol_tat_18000	patrol_tat_18000	FLIP	TATOOINE	tat_world	0	3497.9	5.0	-5038.1	0	City - Mos Eisley - a hermit
+patrol_tat_17916	patrol_tat_17900		TATOOINE	tat_world	0	3393.2	5.0	-5058.8	10	
+patrol_tat_18000	patrol_tat_18000	FLIP	TATOOINE	tat_world	0	3497.9	5.0	-5038.1	15	City - Mos Eisley - a hermit
 patrol_tat_18001	patrol_tat_18000		TATOOINE	tat_world	0	3561.6	5.0	-4959.2	0	
 patrol_tat_18002	patrol_tat_18000		TATOOINE	tat_world	0	3571.5	5.0	-4928.6	0	
 patrol_tat_18003	patrol_tat_18000		TATOOINE	tat_world	0	3519.1	5.0	-4875.8	0	
@@ -1384,7 +1384,7 @@ patrol_tat_18107	patrol_tat_18100		TATOOINE	tat_world	0	3419.3	4.0	-4769.9	0
 patrol_tat_18108	patrol_tat_18100		TATOOINE	tat_world	0	3433.3	4.0	-4774.0	0	
 patrol_tat_18109	patrol_tat_18100		TATOOINE	tat_world	0	3482.5	4.0	-4730.7	0	
 patrol_tat_18110	patrol_tat_18100		TATOOINE	tat_world	0	3506.7	4.9	-4718.7	0	
-patrol_tat_18111	patrol_tat_18100		TATOOINE	tat_world	0	3537.2	5.0	-4694.0	0	
+patrol_tat_18111	patrol_tat_18100		TATOOINE	tat_world	0	3537.2	5.0	-4694.0	15	
 patrol_tat_18200	patrol_tat_18200	FLIP	TATOOINE	tat_world	0	82.9	52.1	-5318.9	0	City - Anchorhead - a businessman
 patrol_tat_18201	patrol_tat_18200		TATOOINE	tat_world	0	76.1	52.0	-5325.6	0	
 patrol_tat_18202	patrol_tat_18200		TATOOINE	tat_world	0	74.1	52.0	-5364.0	0	
@@ -1397,7 +1397,7 @@ patrol_tat_18301	patrol_tat_18300		TATOOINE	tat_world	0	123.9	52.0	-5391.0	0
 patrol_tat_18302	patrol_tat_18300		TATOOINE	tat_world	0	114.9	52.0	-5339.9	0	
 patrol_tat_18303	patrol_tat_18300		TATOOINE	tat_world	0	155.8	52.0	-5332.0	0	
 patrol_tat_18304	patrol_tat_18300		TATOOINE	tat_world	0	157.7	52.0	-5334.0	0	
-patrol_tat_18400	patrol_tat_18400	FLIP	TATOOINE	tat_world	0	-166.8	65.0	-5313.4	0	City - Anchorhead - an EG-6 power droid
+patrol_tat_18400	patrol_tat_18400	FLIP	TATOOINE	tat_world	0	-166.8	65.0	-5313.4	15	City - Anchorhead - an EG-6 power droid
 patrol_tat_18401	patrol_tat_18400		TATOOINE	tat_world	0	-152.1	65.0	-5319.2	0	
 patrol_tat_18402	patrol_tat_18400		TATOOINE	tat_world	0	-88.0	65.0	-5306.9	0	
 patrol_tat_18403	patrol_tat_18400		TATOOINE	tat_world	0	-34.2	65.0	-5297.6	0	
@@ -1407,7 +1407,7 @@ patrol_tat_18406	patrol_tat_18400		TATOOINE	tat_world	0	37.9	52.0	-5341.4	0
 patrol_tat_18407	patrol_tat_18400		TATOOINE	tat_world	0	73.0	52.0	-5348.8	0	
 patrol_tat_18408	patrol_tat_18400		TATOOINE	tat_world	0	76.7	52.0	-5358.8	0	
 patrol_tat_18409	patrol_tat_18400		TATOOINE	tat_world	0	111.5	52.0	-5359.1	0	
-patrol_tat_18410	patrol_tat_18400		TATOOINE	tat_world	0	130.0	52.0	-5379.0	0	
+patrol_tat_18410	patrol_tat_18400		TATOOINE	tat_world	0	130.0	52.0	-5379.0	30	
 patrol_tat_18500	patrol_tat_18500	FLIP	TATOOINE	tat_world	0	-1441.8	10.0	-3749.8	0	City - Bestine - an explorer
 patrol_tat_18501	patrol_tat_18500		TATOOINE	tat_world	0	-1398.0	9.7	-3748.6	0	
 patrol_tat_18502	patrol_tat_18500		TATOOINE	tat_world	0	-1378.2	12.0	-3726.4	0	
@@ -1416,7 +1416,7 @@ patrol_tat_18504	patrol_tat_18500		TATOOINE	tat_world	0	-1284.7	12.0	-3591.6	0
 patrol_tat_18505	patrol_tat_18500		TATOOINE	tat_world	0	-1285.9	12.0	-3526.9	0	
 patrol_tat_18506	patrol_tat_18500		TATOOINE	tat_world	0	-1289.5	12.0	-3521.5	0	
 patrol_tat_18507	patrol_tat_18500		TATOOINE	tat_world	0	-1287.6	12.0	-3484.8	0	
-patrol_tat_18508	patrol_tat_18500		TATOOINE	tat_world	0	-1291.5	12.0	-3474.3	0	
+patrol_tat_18508	patrol_tat_18500		TATOOINE	tat_world	0	-1291.5	12.0	-3474.3	15	
 patrol_tat_18600	patrol_tat_18600	LOOP	TATOOINE	tat_world	0	-1108.7	12.0	-3632.2	0	City - Bestine - a noble
 patrol_tat_18601	patrol_tat_18600		TATOOINE	tat_world	0	-1138.4	12.0	-3658.2	0	
 patrol_tat_18602	patrol_tat_18600		TATOOINE	tat_world	0	-1191.8	12.0	-3629.3	0	
@@ -1430,7 +1430,7 @@ patrol_tat_18609	patrol_tat_18600		TATOOINE	tat_world	0	-1168.5	12.0	-3532.2	0
 patrol_tat_18610	patrol_tat_18600		TATOOINE	tat_world	0	-1122.0	12.0	-3562.6	0	
 patrol_tat_18611	patrol_tat_18600		TATOOINE	tat_world	0	-1096.8	12.0	-3594.9	0	
 patrol_tat_18612	patrol_tat_18600		TATOOINE	tat_world	0	-1097.5	12.0	-3614.4	0	
-patrol_tat_18700	patrol_tat_18700	FLIP	TATOOINE	tat_world	0	-1108.7	12.0	-3632.2	0	City - Bestine - a moisture farmer
+patrol_tat_18700	patrol_tat_18700	FLIP	TATOOINE	tat_world	0	-1387.5	12.0	-3586.0	15	City - Bestine - a moisture farmer
 patrol_tat_18701	patrol_tat_18700		TATOOINE	tat_world	0	-1375.3	12.0	-3627.0	0	
 patrol_tat_18702	patrol_tat_18700		TATOOINE	tat_bestine_starport	16	52.7	1.0	11.0	0	
 patrol_tat_18703	patrol_tat_18700		TATOOINE	tat_bestine_starport	16	55.8	1.0	16.8	0	
@@ -1447,7 +1447,7 @@ patrol_tat_18713	patrol_tat_18700		TATOOINE	tat_world	0	-1247.0	12.0	-3628.2	0
 patrol_tat_18714	patrol_tat_18700		TATOOINE	tat_world	0	-1191.4	12.0	-3629.9	0	
 patrol_tat_18715	patrol_tat_18700		TATOOINE	tat_world	0	-1148.0	12.0	-3663.3	0	
 patrol_tat_18716	patrol_tat_18700		TATOOINE	tat_world	0	-1137.9	12.0	-3666.0	0	
-patrol_tat_18800	patrol_tat_18800	LOOP	TATOOINE	tat_world	0	-1105.2	12.0	-3704.6	0	City - Bestine - an artisan
+patrol_tat_18800	patrol_tat_18800	LOOP	TATOOINE	tat_world	0	-1105.2	12.0	-3704.6	15	City - Bestine - an artisan
 patrol_tat_18801	patrol_tat_18800		TATOOINE	tat_world	0	-1132.1	12.0	-3692.3	0	
 patrol_tat_18802	patrol_tat_18800		TATOOINE	tat_world	0	-1120.6	12.0	-3686.8	0	
 patrol_tat_18803	patrol_tat_18800		TATOOINE	tat_world	0	-1129.1	12.0	-3676.5	0	
@@ -1456,7 +1456,7 @@ patrol_tat_18805	patrol_tat_18800		TATOOINE	tat_world	0	-1140.2	12.0	-3668.7	0
 patrol_tat_18806	patrol_tat_18800		TATOOINE	tat_world	0	-1192.3	12.0	-3624.5	0	
 patrol_tat_18807	patrol_tat_18800		TATOOINE	tat_world	0	-1264.3	12.5	-3641.1	0	
 patrol_tat_18808	patrol_tat_18800		TATOOINE	tat_world	0	-1269.1	12.5	-3637.4	0	
-patrol_tat_18809	patrol_tat_18800		TATOOINE	tat_world	0	-1294.0	12.5	-3668.7	0	
+patrol_tat_18809	patrol_tat_18800		TATOOINE	tat_world	0	-1294.0	12.5	-3668.7	15	
 patrol_tat_18900	patrol_tat_18900	LOOP	TATOOINE	tat_world	0	1564.2	15.0	3493.9	0	City - Mos Entha - a noble
 patrol_tat_18901	patrol_tat_18900		TATOOINE	tat_world	0	1544.5	15.0	3482.1	0	
 patrol_tat_18902	patrol_tat_18900		TATOOINE	tat_world	0	1544.4	14.9	3473.8	0	
@@ -1558,7 +1558,7 @@ patrol_tat_19311	patrol_tat_19300		TATOOINE	tat_jabbas_palace	22	0.3	2	43.8	0
 patrol_tat_19312	patrol_tat_19300		TATOOINE	tat_jabbas_palace	22	5.3	2	43.5	0	
 patrol_tat_19313	patrol_tat_19300		TATOOINE	tat_jabbas_palace	22	8.6	2	45.6	0	
 patrol_tat_19314	patrol_tat_19300		TATOOINE	tat_jabbas_palace	22	8.8	2	47.5	10	
-patrol_tat_19400	patrol_tat_19400	LOOP	TATOOINE	tat_world	0	3426.2	5.6	-4643	0	Mos Eisley - a commoner
+patrol_tat_19400	patrol_tat_19400	LOOP	TATOOINE	tat_world	0	3426.2	5.6	-4643	15	Mos Eisley - a commoner
 patrol_tat_19401	patrol_tat_19400		TATOOINE	tat_world	0	3412.1	4.1	-4641.5	0	
 patrol_tat_19402	patrol_tat_19400		TATOOINE	tat_world	0	3395.4	4	-4647.7	0	
 patrol_tat_19403	patrol_tat_19400		TATOOINE	tat_world	0	3366.4	4.1	-4651.1	0	
@@ -1608,7 +1608,7 @@ patrol_tat_19446	patrol_tat_19400		TATOOINE	tat_world	0	3453.7	5	-4695.4	0
 patrol_tat_19447	patrol_tat_19400		TATOOINE	tat_world	0	3428.4	5	-4677.1	0	
 patrol_tat_19448	patrol_tat_19400		TATOOINE	tat_world	0	3411.6	5	-4665.8	0	
 patrol_tat_19449	patrol_tat_19400		TATOOINE	tat_world	0	3412.2	5	-4658.8	0	
-patrol_tat_19450	patrol_tat_19400		TATOOINE	tat_world	0	3416.9	5.6	-4657.3	0	
+patrol_tat_19450	patrol_tat_19400		TATOOINE	tat_world	0	3416.9	5.6	-4657.3	10	
 patrol_tat_19451	patrol_tat_19400		TATOOINE	tat_world	0	3426.3	5.6	-4642.8	0	
 patrol_tat_19500	patrol_tat_19500	LOOP	TATOOINE	tat_world	0	3477.6	5	-4620.3	0	Mos Eisley - a commoner
 patrol_tat_19501	patrol_tat_19500		TATOOINE	tat_world	0	3477.6	5	-4620.3	0	
@@ -1645,7 +1645,7 @@ patrol_tat_19531	patrol_tat_19500		TATOOINE	tat_world	0	3466.5	5.5	-4945.7	0
 patrol_tat_19532	patrol_tat_19500		TATOOINE	tat_world	0	3474.1	5.5	-4952.2	0	
 patrol_tat_19533	patrol_tat_19500		TATOOINE	tat_world	0	3475.1	5.5	-4958.5	0	
 patrol_tat_19534	patrol_tat_19500		TATOOINE	tat_world	0	3482.3	5.5	-4956.6	0	
-patrol_tat_19535	patrol_tat_19500		TATOOINE	tat_world	0	3496	5.5	-4948.3	0	
+patrol_tat_19535	patrol_tat_19500		TATOOINE	tat_world	0	3496	5.5	-4948.3	15	
 patrol_tat_19536	patrol_tat_19500		TATOOINE	tat_world	0	3512.8	5.5	-4967.3	0	
 patrol_tat_19537	patrol_tat_19500		TATOOINE	tat_world	0	3509.8	5.5	-4969.8	0	
 patrol_tat_19538	patrol_tat_19500		TATOOINE	tat_world	0	3504.1	5.5	-4970.7	0	
@@ -1713,7 +1713,7 @@ patrol_tat_19635	patrol_tat_19600		TATOOINE	tat_world	0	3699.8	4.2	-4746.8	0
 patrol_tat_19636	patrol_tat_19600		TATOOINE	tat_world	0	3706.9	4.6	-4777.8	0	
 patrol_tat_19637	patrol_tat_19600		TATOOINE	tat_world	0	3707.9	4.1	-4808.9	0	
 patrol_tat_19638	patrol_tat_19600		TATOOINE	tat_world	0	3701.7	5	-4812.6	0	
-patrol_tat_19639	patrol_tat_19600		TATOOINE	tat_world	0	3694.8	5	-4813.1	0	
+patrol_tat_19639	patrol_tat_19600		TATOOINE	tat_world	0	3694.8	5	-4813.1	15	
 patrol_tat_19640	patrol_tat_19600		TATOOINE	tat_world	0	3705.2	4.8	-4819.5	0	
 patrol_tat_19641	patrol_tat_19600		TATOOINE	tat_world	0	3706.5	4	-4840	0	
 patrol_tat_19642	patrol_tat_19600		TATOOINE	tat_world	0	3697.3	4	-4856.2	0	
@@ -1750,7 +1750,7 @@ patrol_tat_19672	patrol_tat_19600		TATOOINE	tat_world	0	3315.4	4	-4614.6	0
 patrol_tat_19673	patrol_tat_19600		TATOOINE	tat_world	0	3301.3	5	-4603.9	0	
 patrol_tat_19674	patrol_tat_19600		TATOOINE	tat_world	0	3270.3	4.9	-4588.3	0	
 patrol_tat_19675	patrol_tat_19600		TATOOINE	tat_world	0	3245.8	4.8	-4581.1	0	
-patrol_tat_19700	patrol_tat_19700	LOOP	TATOOINE	tat_world	0	3233.5	5	-4684.3	0	Mos Eisley - a commoner
+patrol_tat_19700	patrol_tat_19700	LOOP	TATOOINE	tat_world	0	3233.5	5	-4684.3	15	Mos Eisley - a commoner
 patrol_tat_19701	patrol_tat_19700		TATOOINE	tat_world	0	3233.5	5	-4684.3	0	
 patrol_tat_19702	patrol_tat_19700		TATOOINE	tat_world	0	3233.1	5	-4695.3	0	
 patrol_tat_19703	patrol_tat_19700		TATOOINE	tat_world	0	3213.1	5	-4724	0	
@@ -1822,7 +1822,7 @@ patrol_tat_19768	patrol_tat_19700		TATOOINE	tat_world	0	3289.9	4.3	-4700.7	0
 patrol_tat_19769	patrol_tat_19700		TATOOINE	tat_world	0	3274	4.1	-4690.2	0	
 patrol_tat_19770	patrol_tat_19700		TATOOINE	tat_world	0	3252.4	4.1	-4686.9	0	
 patrol_tat_19771	patrol_tat_19700		TATOOINE	tat_world	0	3235.6	5	-4684.6	0	
-patrol_tat_19800	patrol_tat_19800	LOOP	TATOOINE	tat_world	0	3201.3	5	-4733.7	0	Mos Eisley - a commoner
+patrol_tat_19800	patrol_tat_19800	LOOP	TATOOINE	tat_world	0	3201.3	5	-4733.7	15	Mos Eisley - a commoner
 patrol_tat_19801	patrol_tat_19800		TATOOINE	tat_world	0	3201.3	5	-4733.7	0	
 patrol_tat_19802	patrol_tat_19800		TATOOINE	tat_world	0	3209.2	5	-4732.5	0	
 patrol_tat_19803	patrol_tat_19800		TATOOINE	tat_world	0	3225.8	5	-4709.7	0	
@@ -1938,7 +1938,7 @@ patrol_tat_19931	patrol_tat_19900		TATOOINE	tat_world	0	3366	5	-5045.4	0
 patrol_tat_19932	patrol_tat_19900		TATOOINE	tat_world	0	3390.3	5	-5063.7	0	
 patrol_tat_19933	patrol_tat_19900		TATOOINE	tat_world	0	3416.2	5	-5082.1	0	
 patrol_tat_19934	patrol_tat_19900		TATOOINE	tat_world	0	3448.4	5	-5100.9	0	
-patrol_tat_19935	patrol_tat_19900		TATOOINE	tat_world	0	3463.5	5	-5102.1	0	
+patrol_tat_19935	patrol_tat_19900		TATOOINE	tat_world	0	3464.8	5	-5106.6	0	
 patrol_tat_19936	patrol_tat_19900		TATOOINE	tat_world	0	3482.4	5	-5091.7	0	
 patrol_tat_19937	patrol_tat_19900		TATOOINE	tat_world	0	3502.4	5	-5065.7	0	
 patrol_tat_19938	patrol_tat_19900		TATOOINE	tat_world	0	3514	5	-5030.1	0	
@@ -1977,7 +1977,7 @@ patrol_tat_19970	patrol_tat_19900		TATOOINE	tat_world	0	3201.2	5	-4744.8	0
 patrol_tat_19971	patrol_tat_19900		TATOOINE	tat_world	0	3214	5	-4756.6	0	
 patrol_tat_19972	patrol_tat_19900		TATOOINE	tat_world	0	3232.4	5	-4770.5	0	
 patrol_tat_19973	patrol_tat_19900		TATOOINE	tat_world	0	3254	5	-4786.8	0	
-patrol_tat_20000	patrol_tat_20000	LOOP	TATOOINE	tat_moseisley_university	9	-9.2	1.1	-13	0	Mos Eisley - a commoner
+patrol_tat_20000	patrol_tat_20000	LOOP	TATOOINE	tat_moseisley_university	9	-9.2	1.1	-13	10	Mos Eisley - a commoner
 patrol_tat_20001	patrol_tat_20000		TATOOINE	tat_moseisley_university	9	-9.3	1.1	-12.9	0	
 patrol_tat_20002	patrol_tat_20000		TATOOINE	tat_moseisley_university	9	-10.9	1.1	-7.2	0	
 patrol_tat_20003	patrol_tat_20000		TATOOINE	tat_moseisley_university	4	-10.5	1.1	-4.5	0	
@@ -2023,7 +2023,7 @@ patrol_tat_20042	patrol_tat_20000		TATOOINE	tat_world	0	3499.6	5.5	-4919.4	0
 patrol_tat_20043	patrol_tat_20000		TATOOINE	tat_world	0	3507.7	5.5	-4917.3	0	
 patrol_tat_20044	patrol_tat_20000		TATOOINE	tat_world	0	3507.6	5.5	-4924.5	0	
 patrol_tat_20045	patrol_tat_20000		TATOOINE	tat_world	0	3509.4	5.5	-4927.8	0	
-patrol_tat_20046	patrol_tat_20000		TATOOINE	tat_world	0	3511.7	5.5	-4927.8	0	
+patrol_tat_20046	patrol_tat_20000		TATOOINE	tat_world	0	3511.7	5.5	-4927.8	15	
 patrol_tat_20047	patrol_tat_20000		TATOOINE	tat_world	0	3517.6	5.5	-4931.9	0	
 patrol_tat_20048	patrol_tat_20000		TATOOINE	tat_world	0	3523.8	5.5	-4930.8	0	
 patrol_tat_20049	patrol_tat_20000		TATOOINE	tat_world	0	3524.7	5.5	-4939.5	0	
@@ -2089,7 +2089,7 @@ patrol_tat_20108	patrol_tat_20000		TATOOINE	tat_moseisley_university	4	-4.7	1.1	
 patrol_tat_20109	patrol_tat_20000		TATOOINE	tat_moseisley_university	4	-10.8	1.1	-5.5	0	
 patrol_tat_20110	patrol_tat_20000		TATOOINE	tat_moseisley_university	9	-11	1.1	-12.4	0	
 patrol_tat_20100	patrol_tat_20100	LOOP	TATOOINE	tat_world	0	3553.2	5	-4709.6	0	Mos Eisley - a commoner
-patrol_tat_20101	patrol_tat_20100		TATOOINE	tat_world	0	3553.2	5	-4709.6	0	
+patrol_tat_20101	patrol_tat_20100		TATOOINE	tat_world	0	3553.2	5	-4709.6	15	
 patrol_tat_20102	patrol_tat_20100		TATOOINE	tat_world	0	3547.9	4	-4716.9	0	
 patrol_tat_20103	patrol_tat_20100		TATOOINE	tat_world	0	3552.9	4	-4737.8	0	
 patrol_tat_20104	patrol_tat_20100		TATOOINE	tat_world	0	3555.6	4.3	-4751.2	0	
@@ -2110,7 +2110,7 @@ patrol_tat_20118	patrol_tat_20100		TATOOINE	tat_world	0	3496.3	5.5	-4908.8	0
 patrol_tat_20119	patrol_tat_20100		TATOOINE	tat_world	0	3493	5.5	-4918.8	0	
 patrol_tat_20120	patrol_tat_20100		TATOOINE	tat_world	0	3486.4	5.5	-4920.2	0	
 patrol_tat_20121	patrol_tat_20100		TATOOINE	tat_world	0	3486.2	5.5	-4924.1	0	
-patrol_tat_20122	patrol_tat_20100		TATOOINE	tat_world	0	3495.1	5.5	-4941.1	0	
+patrol_tat_20122	patrol_tat_20100		TATOOINE	tat_world	0	3495.1	5.5	-4941.1	15	
 patrol_tat_20123	patrol_tat_20100		TATOOINE	tat_world	0	3474.2	5.5	-4936.1	0	
 patrol_tat_20124	patrol_tat_20100		TATOOINE	tat_world	0	3471.8	5.5	-4939.6	0	
 patrol_tat_20125	patrol_tat_20100		TATOOINE	tat_world	0	3471.8	5.5	-4946.2	0	

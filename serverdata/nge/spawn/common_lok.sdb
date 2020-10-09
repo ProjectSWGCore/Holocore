@@ -456,7 +456,7 @@ spawn_lok_453	LOK	lok_world	AREA	0	-2129.0	104.0	5939.0	0	1	a langlatch giant	cr
 spawn_lok_454	LOK	lok_world	AREA	0	-225.0	12.9	-462.8	0	1	a gurnaset	creature_gurnaset	ATTACKABLE	N	50	70	Outback	Lok	2	LOITER	4	0	-	idle	0	0	0	600
 spawn_lok_455	LOK	lok_world	AREA	0	-227.8	13.1	-458.2	0	1	a gurnaset hatchling	creature_gurnaset_hatchling	ATTACKABLE	N	50	70	Outback	Lok	4	LOITER	12	0	-	idle	0	0	0	600
 spawn_lok_456	LOK	lok_world	AREA	0	-2580.6	11.9	6180.5	0	1	a lowland salt mynock	creature_mynock_lowland_salt	ATTACKABLE	N	50	70	Outback	Lok	4	LOITER	12	0	-	idle	0	0	0	600
-spawn_lok_457	LOK	lok_world	AREA	0	-2720.6	40.4	4170.0	0	1	a giant spined snake	creature_spined_snake	AGGRESSIVE	N	50	70	Outback	Lok	1	LOITER	3	0	-	idle	0	0	0	600
+spawn_lok_457	LOK	lok_world	AREA	0	-2720.6	40.4	4170.0	0	1	a giant spined snake	creature_snake_spined_giant	AGGRESSIVE	N	50	70	Outback	Lok	1	LOITER	3	0	-	idle	0	0	0	600
 spawn_lok_458	LOK	lok_world	AREA	0	-2894.2	15.8	-225.9	0	1	a marooned pirate engineer	humanoid_marooned_pirate_engineer	AGGRESSIVE	N	50	70	Outback	Lok	4	LOITER	12	0	-	idle	0	0	0	600
 spawn_lok_459	LOK	lok_world	AREA	0	-3315.3	12.2	-5633.8	0	1	a pharple	creature_pharple	ATTACKABLE	N	50	70	Outback	Lok	6	LOITER	20	0	-	idle	0	0	0	600
 spawn_lok_460	LOK	lok_world	AREA	0	-3644.1	12.1	-2035.3	0	1	Nym's droideka	droid_nym_droideka	ATTACKABLE	E	50	70	Outback	Lok	1	LOITER	3	0	-	idle	0	0	0	600
