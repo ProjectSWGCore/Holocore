@@ -51,5 +51,5 @@ gcw_presence_naboo_rebel.sdb	FALSE
 gcw_presence_tatooine_imperial.sdb	FALSE
 gcw_presence_tatooine_neutral.sdb	TRUE
 gcw_presence_tatooine_rebel.sdb	FALSE
-invasion_tusken_vs_jawa.sdb	TRUE
+invasion_tusken_vs_jawa.sdb	FALSE
 instance_droid_army.sdb	TRUE

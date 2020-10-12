@@ -214,10 +214,10 @@ starport_nab_theed	object/creature/npc/theme_park/shared_player_transport_theed_
 starport_nab_theed	object/soundobject/shared_soundobject_starport_exterior.iff	hangar	-0.5	7.9	21.0	0
 starport_nab_theed	object/soundobject/shared_soundobject_starport_interior.iff	hall1	-26.9	0.7	-72.4	0
 starport_nab_theed	object/soundobject/shared_soundobject_starport_interior.iff	hall2	21.5	0.7	-72.3	0
-starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	47.0	0
-starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	23.5	0
-starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	0.0	0
-starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	-23.5	0
+starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	42.0	0
+starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	18.5	0
+starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	-5.0	0
+starport_nab_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	-28.5	0
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-16.5	0.8	-68.0	180
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-27.0	0.8	-68.0	180
 starport_nab_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	16.5	0.8	-68.0	180
