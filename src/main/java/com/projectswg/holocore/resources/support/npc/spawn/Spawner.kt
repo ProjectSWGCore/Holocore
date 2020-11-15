@@ -44,9 +44,9 @@ import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.ThreadLocalRandom
 import java.util.stream.Collectors
 
-class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
+class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
-	private val spawn: StaticSpawnInfo = Objects.requireNonNull(spawn, "spawn")
+	private val spawn: SpawnInfo = Objects.requireNonNull(spawn, "spawn")
 	private val npc: NpcInfo = Objects.requireNonNull(DataLoader.npcs().getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
 	private val npcsInternal = CopyOnWriteArrayList<AIObject>()
 	

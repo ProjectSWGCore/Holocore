@@ -99,6 +99,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::new);
 		registerCallback("goto", CmdGoto::new);
 		registerCallback("console_npc", CmdNpc::new);
+		registerCallback("createNPC", CmdCreateNpc::new);
 		registerCallback("qatool", CmdQaTool::new);
 		registerCallback("revertPlayerAppearance", CmdRevertPlayerAppearance::new);
 		registerCallback("setGodMode", CmdSetGodMode::new);

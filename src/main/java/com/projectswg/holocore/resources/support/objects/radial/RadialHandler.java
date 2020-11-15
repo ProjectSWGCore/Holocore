@@ -112,6 +112,7 @@ public enum RadialHandler {
 		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
 		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
 		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
+		registerHandler("object/tangible/spawning/shared_spawn_egg.iff", new SpawnerRadial());
 	}
 	
 	private void initializeContainerRadials() {
