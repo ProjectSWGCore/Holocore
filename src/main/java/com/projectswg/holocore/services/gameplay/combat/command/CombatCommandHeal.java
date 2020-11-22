@@ -44,6 +44,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
@@ -113,9 +114,15 @@ enum CombatCommandHeal implements CombatCommandHitType {
 						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
 						
 						if (source.isAttackable(nearbyCreature)) {
+							// Don't heal (potential) enemies
 							continue;
 						}
-						
+
+						if (nearbyCreature.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+							// Don't heal creatures that can't take damage
+							continue;
+						}
+
 						// Heal nearby friendly
 						doHeal(source, nearbyCreature, healAmount, combatCommand);
 					}
