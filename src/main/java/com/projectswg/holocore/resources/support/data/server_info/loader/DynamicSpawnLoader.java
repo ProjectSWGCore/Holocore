@@ -62,13 +62,17 @@ public final class DynamicSpawnLoader extends DataLoader {
 	public void load() throws IOException {
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/dynamic/dynamic_spawns.sdb"))) {
 			while (set.next()) {
-				String planet = set.getText("planet");
-				Terrain terrain = Terrain.getTerrainFromName(planet);
-				assert terrain != null : "unable to find terrain by name " + planet;
-				
-				Collection<DynamicSpawnInfo> dynamicSpawnInfos = terrainSpawns.computeIfAbsent(terrain, k -> new ArrayList<>());
+				String planetsCellValue = set.getText("planets");
+				String[] planets = planetsCellValue.split(";");
 				DynamicSpawnLoader.DynamicSpawnInfo dynamicSpawninfo = new DynamicSpawnLoader.DynamicSpawnInfo(set);
-				dynamicSpawnInfos.add(dynamicSpawninfo);
+				
+				for (String planet : planets) {
+					Terrain terrain = Terrain.getTerrainFromName(planet);
+					assert terrain != null : "unable to find terrain by name " + planet;
+					
+					Collection<DynamicSpawnInfo> dynamicSpawnInfos = terrainSpawns.computeIfAbsent(terrain, k -> new ArrayList<>());
+					dynamicSpawnInfos.add(dynamicSpawninfo);
+				}
 			}
 		}
 	}
