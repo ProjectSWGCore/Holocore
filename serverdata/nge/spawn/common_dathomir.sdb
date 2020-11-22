@@ -475,27 +475,27 @@ spawn_dat_472	DATHOMIR	dat_world	AREA	0	-7457.9	570.0	-7314.0	132	1	a 2-1B surgi
 spawn_dat_473	DATHOMIR	dat_world	AREA	0	-6710.7	549.5	-6488.9	0	1	Adol Mantid	humanoid_outbreak_afflicted_boss_lvl_40	AGGRESSIVE	E	40	40	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_dat_474	DATHOMIR	dat_world	AREA	0	-5905.0	558.4	-6428.6	80	1	Black Sun Escort	humanoid_outbreak_black_sun_smuggler_escort_01	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_475	DATHOMIR	dat_world	AREA	0	-5905.6	558.4	-6426.7	80	1	Black Sun Escort	humanoid_outbreak_black_sun_smuggler_escort_02	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_476	DATHOMIR	dat_world	AREA	0	-5919.9	559.1	-6660.9	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_477	DATHOMIR	dat_world	AREA	0	-5923.2	559.2	-6685.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_478	DATHOMIR	dat_world	AREA	0	-5927.2	559.2	-6657.1	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_479	DATHOMIR	dat_world	AREA	0	-5930.0	559.1	-6661.2	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_480	DATHOMIR	dat_world	AREA	0	-5932.1	559.0	-6675.5	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_481	DATHOMIR	dat_world	AREA	0	-6280.6	561.7	-7528.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_482	DATHOMIR	dat_world	AREA	0	-6281.5	561.1	-7519.0	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_483	DATHOMIR	dat_world	AREA	0	-6290.7	561.2	-7520.1	-50	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_484	DATHOMIR	dat_world	AREA	0	-6806.5	554.4	-6454.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_485	DATHOMIR	dat_world	AREA	0	-6820.1	554.0	-6468.0	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_486	DATHOMIR	dat_world	AREA	0	-6834.1	553.1	-6473.0	-23	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_487	DATHOMIR	dat_world	AREA	0	-6843.9	552.3	-6463.3	42	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
-spawn_dat_488	DATHOMIR	dat_world	AREA	0	-7134.6	561.3	-6907.2	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_489	DATHOMIR	dat_world	AREA	0	-7149.6	562.7	-6911.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_490	DATHOMIR	dat_world	AREA	0	-7150.0	562.8	-6936.8	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_491	DATHOMIR	dat_world	AREA	0	-7150.3	562.8	-6931.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_492	DATHOMIR	dat_world	AREA	0	-7417.4	570.0	-7313.3	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_493	DATHOMIR	dat_world	AREA	0	-7430.6	570.0	-7336.7	51	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_dat_494	DATHOMIR	dat_world	AREA	0	-7450.3	570.0	-7344.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_495	DATHOMIR	dat_world	AREA	0	-7453.4	570.0	-7331.8	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
-spawn_dat_496	DATHOMIR	dat_world	AREA	0	-7458.7	570.0	-7337.4	89	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_476	DATHOMIR	dat_world	AREA	0	-5919.9	559.1	-6660.9	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_477	DATHOMIR	dat_world	AREA	0	-5923.2	559.2	-6685.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_478	DATHOMIR	dat_world	AREA	0	-5927.2	559.2	-6657.1	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_479	DATHOMIR	dat_world	AREA	0	-5930.0	559.1	-6661.2	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_480	DATHOMIR	dat_world	AREA	0	-5932.1	559.0	-6675.5	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_481	DATHOMIR	dat_world	AREA	0	-6280.6	561.7	-7528.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_482	DATHOMIR	dat_world	AREA	0	-6281.5	561.1	-7519.0	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_483	DATHOMIR	dat_world	AREA	0	-6290.7	561.2	-7520.1	-50	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_484	DATHOMIR	dat_world	AREA	0	-6806.5	554.4	-6454.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_485	DATHOMIR	dat_world	AREA	0	-6820.1	554.0	-6468.0	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_486	DATHOMIR	dat_world	AREA	0	-6834.1	553.1	-6473.0	-23	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_487	DATHOMIR	dat_world	AREA	0	-6843.9	552.3	-6463.3	42	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	TURN	0	0	-	idle	0	0	0	600
+spawn_dat_488	DATHOMIR	dat_world	AREA	0	-7134.6	561.3	-6907.2	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_489	DATHOMIR	dat_world	AREA	0	-7149.6	562.7	-6911.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_490	DATHOMIR	dat_world	AREA	0	-7150.0	562.8	-6936.8	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_491	DATHOMIR	dat_world	AREA	0	-7150.3	562.8	-6931.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_492	DATHOMIR	dat_world	AREA	0	-7417.4	570.0	-7313.3	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_493	DATHOMIR	dat_world	AREA	0	-7430.6	570.0	-7336.7	51	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	conversation	0	0	0	600
+spawn_dat_494	DATHOMIR	dat_world	AREA	0	-7450.3	570.0	-7344.6	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_495	DATHOMIR	dat_world	AREA	0	-7453.4	570.0	-7331.8	0	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
+spawn_dat_496	DATHOMIR	dat_world	AREA	0	-7458.7	570.0	-7337.4	89	1	Camp Guard	humanoid_outbreak_mixed_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_497	DATHOMIR	dat_world	AREA	0	-5750.0	511.0	-6493.1	90	1	Captain Firmus Piett	humanoid_outbreak_imperial_officer_captain_piett	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_498	DATHOMIR	dat_world	AREA	0	-7483.4	568.6	-7284.3	0	1	Chak Krist	humanoid_outbreak_afflicted_boss_lvl_85	AGGRESSIVE	E	85	85	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_dat_499	DATHOMIR	dat_world	AREA	0	-5663.4	538.2	-6818.4	0	1	Chewbacca	humanoid_outbreak_chewbacca	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
@@ -585,19 +585,19 @@ spawn_dat_582	DATHOMIR	dat_world	AREA	0	-7421.5	570.0	-7313.1	-139	1	Klex Fulgor
 spawn_dat_583	DATHOMIR	dat_world	AREA	0	-6854.0	551.4	-6464.1	-171	1	Kyra 'Naa	humanoid_outbreak_wave_defense_gamma_kyra_naa	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_584	DATHOMIR	dat_world	AREA	0	-7148.2	562.6	-6941.1	168	1	Lieutenant Erlem Marh	humanoid_outbreak_wave_defense_delta_erlem_marh	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_585	DATHOMIR	dat_world	AREA	0	-5780.1	510.7	-6549.4	46	1	Lieutenant Liam Waurie	humanoid_outbreak_imperial_officer_gate_keeper	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_586	DATHOMIR	dat_world	AREA	0	-5781.1	512.1	-6568.8	-100	1	missing	humanoid_outbreak_imperial_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_587	DATHOMIR	dat_world	AREA	0	-5783.0	511.4	-6564.4	-100	1	missing	humanoid_outbreak_imperial_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_588	DATHOMIR	dat_world	AREA	0	-5795.4	511.3	-6552.2	-172	1	missing	humanoid_outbreak_imperial_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_589	DATHOMIR	dat_world	AREA	0	-5800.4	512.3	-6551.4	-172	1	missing	humanoid_outbreak_imperial_guard_aggro	ATTACKABLE	N	90	90	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_590	DATHOMIR	dat_world	AREA	0	-5693.2	511.1	-6464.6	118	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_591	DATHOMIR	dat_world	AREA	0	-5694.6	511.0	-6467.0	118	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_592	DATHOMIR	dat_world	AREA	0	-5706.2	511.2	-6509.7	-33	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_593	DATHOMIR	dat_world	AREA	0	-5744.2	511.0	-6480.3	111	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_594	DATHOMIR	dat_world	AREA	0	-5745.9	511.0	-6484.0	111	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_595	DATHOMIR	dat_world	AREA	0	-5774.9	510.7	-6553.5	46	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_596	DATHOMIR	dat_world	AREA	0	-5784.1	510.3	-6558.7	-42	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_597	DATHOMIR	dat_world	AREA	0	-5784.6	510.8	-6544.9	46	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_dat_598	DATHOMIR	dat_world	AREA	0	-5790.6	510.5	-6553.2	137	1	missing	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_586	DATHOMIR	dat_world	AREA	0	-5781.1	512.1	-6568.8	-100	1	Stormtrooper guard	humanoid_outbreak_imperial_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_587	DATHOMIR	dat_world	AREA	0	-5783.0	511.4	-6564.4	-100	1	Stormtrooper guard	humanoid_outbreak_imperial_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_588	DATHOMIR	dat_world	AREA	0	-5795.4	511.3	-6552.2	-172	1	Stormtrooper guard	humanoid_outbreak_imperial_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_589	DATHOMIR	dat_world	AREA	0	-5800.4	512.3	-6551.4	-172	1	Stormtrooper guard	humanoid_outbreak_imperial_guard_aggro	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_590	DATHOMIR	dat_world	AREA	0	-5693.2	511.1	-6464.6	118	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_591	DATHOMIR	dat_world	AREA	0	-5694.6	511.0	-6467.0	118	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_592	DATHOMIR	dat_world	AREA	0	-5706.2	511.2	-6509.7	-33	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_593	DATHOMIR	dat_world	AREA	0	-5744.2	511.0	-6480.3	111	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_594	DATHOMIR	dat_world	AREA	0	-5745.9	511.0	-6484.0	111	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_595	DATHOMIR	dat_world	AREA	0	-5774.9	510.7	-6553.5	46	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_596	DATHOMIR	dat_world	AREA	0	-5784.1	510.3	-6558.7	-42	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_597	DATHOMIR	dat_world	AREA	0	-5784.6	510.8	-6544.9	46	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
+spawn_dat_598	DATHOMIR	dat_world	AREA	0	-5790.6	510.5	-6553.2	137	1	Stormtrooper guard	humanoid_outbreak_stormtrooper_guard	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	idle	0	0	0	600
 spawn_dat_599	DATHOMIR	dat_world	AREA	0	-6360.4	545.5	-6558.2	0	1	Navik Geelo	humanoid_outbreak_afflicted_boss_lvl_30	AGGRESSIVE	E	30	30	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
 spawn_dat_600	DATHOMIR	dat_world	AREA	0	-7441.4	570.0	-7321.7	179	1	Nils Cridmeen (Mechanic)	humanoid_outbreak_shuttle_mechanic	INVULNERABLE	N	100	100	Dungeon	Quarantine Zone	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
 spawn_dat_601	DATHOMIR	dat_world	AREA	0	-6966.3	550.0	-6610.1	0	1	Ool Awmod	humanoid_outbreak_afflicted_boss_lvl_60	AGGRESSIVE	E	60	60	Dungeon	Quarantine Zone	1	LOITER	2	0	-	idle	0	0	0	600
