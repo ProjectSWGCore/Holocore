@@ -44,6 +44,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
@@ -113,9 +114,15 @@ enum CombatCommandHeal implements CombatCommandHitType {
 						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
 						
 						if (source.isAttackable(nearbyCreature)) {
+							// Don't heal (potential) enemies
 							continue;
 						}
-						
+
+						if (nearbyCreature.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+							// Don't heal creatures that can't take damage
+							continue;
+						}
+
 						// Heal nearby friendly
 						doHeal(source, nearbyCreature, healAmount, combatCommand);
 					}
@@ -136,7 +143,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 				healed.modifyHealth(healAmount);
 				difference = healed.getHealth() - currentHealth;
 				attribName = "HEALTH";
-				healed.sendObservers(createCombatSpam(healer, healed, healAmount));
+				healed.sendObservers(createCombatSpam(healer, healed, difference));
 				break;
 			}
 			
@@ -177,7 +184,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		healed.sendObservers(combatAction, flyText, effect);
 	}
 
-	private static CombatSpam createCombatSpam(CreatureObject healer, CreatureObject healed, int healAmount) {
+	private static CombatSpam createCombatSpam(CreatureObject healer, CreatureObject healed, int difference) {
 		CombatSpam spam = new CombatSpam(healer.getObjectId());
 		
 		spam.setAttacker(healer.getObjectId());
@@ -186,7 +193,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		spam.setDefenderPosition(healed.getLocation().getPosition());
 		spam.setInfo(new AttackInfo());
 		spam.setDataType((byte) 2);	// 2 means the combat log entry is a specified message
-		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "perform_heal_damage_success"), "TT", healer.getObjectName(), "TO", healed.getObjectName(), "DI", healAmount));
+		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "perform_heal_damage_success"), "TT", healer.getObjectName(), "TO", healed.getObjectName(), "DI", difference));
 		spam.setSpamMessage(oobp);
 		spam.setSpamType(CombatSpamType.MEDICAL);
 		
