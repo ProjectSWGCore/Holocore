@@ -1,4 +1,4 @@
-dynamic_id	scene_id	type	special_cl	special_cl	attackable	planet	npc_boss	npc_elite	npc_normal_1	npc_normal_2	npc_normal_3	npc_normal_4
+dynamic_id	scene_id	type	special_cl	level	attackable	planet	npc_boss	npc_elite	npc_normal_1	npc_normal_2	npc_normal_3	npc_normal_4
 TEXT	TEXT	TEXT	BOOLEAN	INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
 aakuan_champion	objective_data_terminal	npc	FALSE		AGGRESSIVE	TALUS	humanoid_aakuan_champion	humanoid_aakuan_guardian	humanoid_aakuan_assassin	humanoid_aakuan_defender	humanoid_aakuan_follower	humanoid_aakuan_keeper
 aakuan_sentinal	objective_data_terminal	npc	FALSE		AGGRESSIVE	TALUS	humanoid_aakuan_sentinel	humanoid_aakuan_guardian	humanoid_aakuan_assassin	humanoid_aakuan_defender	humanoid_aakuan_follower	humanoid_aakuan_keeper
