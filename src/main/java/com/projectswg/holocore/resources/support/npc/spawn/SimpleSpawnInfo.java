@@ -190,6 +190,7 @@ public class SimpleSpawnInfo implements SpawnInfo {
             info.amount = 1;
             info.minSpawnTime = (int) TimeUnit.SECONDS.convert(8, TimeUnit.MINUTES);
             info.maxSpawnTime = (int) TimeUnit.SECONDS.convert(12, TimeUnit.MINUTES);
+            info.loiterRadius = 15;
         }
 
         public Builder withNpcId(String npcId) {
@@ -253,6 +254,12 @@ public class SimpleSpawnInfo implements SpawnInfo {
 
         public Builder withAmount(int amount) {
             info.amount = amount;
+
+            return this;
+        }
+
+        public Builder withBehavior(AIBehavior behavior) {
+            info.behavior = behavior;
 
             return this;
         }
