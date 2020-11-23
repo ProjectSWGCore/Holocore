@@ -26,10 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.jedi;
 
-import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
@@ -39,6 +37,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * <h3>Responsibilities</h3>
  * <ul>
@@ -46,9 +46,24 @@ import me.joshlarson.jlcommon.control.Service;
  *     <li>Applying the owner attribute to crystals that are created and don't already have it</li>
  * </ul>
  */
-public class LightsaberCrystalService extends Service {
-	
-	private static final String CRYSTAL_OWNER = "@obj_attr_n:crystal_owner";
+public final class LightsaberCrystalService extends Service {
+
+	// Object attribute keys
+	public static final String CRYSTAL_OWNER = "@obj_attr_n:crystal_owner";
+	public static final String QUALITY = "@obj_attr_n:quality";
+	private static final String MIN_DAMAGE = "@obj_attr_n:mindamage";
+	private static final String MAX_DAMAGE = "@obj_attr_n:maxdamage";
+
+	// Object attribute values
+	private static final String POOR_VALUE = "@jedi_spam:crystal_quality_0";
+	private static final String FAIR_VALUE = "@jedi_spam:crystal_quality_1";
+	private static final String GOOD_VALUE = "@jedi_spam:crystal_quality_2";
+	private static final String QUALITY_VALUE = "@jedi_spam:crystal_quality_3";
+	private static final String SELECT_VALUE = "@jedi_spam:crystal_quality_4";
+	private static final String PREMIUM_VALUE = "@jedi_spam:crystal_quality_5";
+	private static final String FLAWLESS_VALUE = "@jedi_spam:crystal_quality_6";
+	private static final String PERFECT_VALUE = "@jedi_spam:crystal_quality_7";
+
 	private static final String UNTUNED = "\\#D1F56F UNTUNED \\#FFFFFF ";
 	
 	@IntentHandler
@@ -73,31 +88,53 @@ public class LightsaberCrystalService extends Service {
 			crystal.addAttribute(CRYSTAL_OWNER, tuner.getObjectName());
 			crystal.setObjectName( "\\#00FF00" + crystal.getObjectName() + " (tuned)");
 			
-			// TODO if power crystal or pearl (look for Quality? attribute on object), then apply randomized(?) min/max attributes as well
-			
+			if (isPowerCrystal(crystal)) {
+				generateDamageModifiers(crystal);
+			}
+
 			SystemMessageIntent.broadcastPersonal(owner, "@jedi_spam:crystal_tune_success");
 		}));
 		
 		suiMessageBox.display(owner);
 	}
 	
-	@IntentHandler
-	private void handleObjectCreated(ObjectCreatedIntent intent) {
-		SWGObject object = intent.getObject();
-		
-		if (object.getGameObjectType() != GameObjectType.GOT_COMPONENT_SABER_CRYSTAL || isTuned(object)) {
-			// We don't apply the untuned attribute to something that's not a lightsaber crystal or already has the attribute
-			return;
-		}
-		
-		object.addAttribute(CRYSTAL_OWNER, UNTUNED);
-	}
-	
-	private final boolean isTuned(SWGObject crystal) {
+	private boolean isTuned(SWGObject crystal) {
 		if (!crystal.hasAttribute(CRYSTAL_OWNER)) {
 			return false;
 		}
 		
 		return !UNTUNED.equals(crystal.getAttribute(CRYSTAL_OWNER));
 	}
+
+	private boolean isPowerCrystal(SWGObject crystal) {
+		return crystal.hasAttribute(QUALITY);
+	}
+
+	private void generateDamageModifiers(SWGObject crystal) {
+		int baseDamage = getBaseDamage(crystal);
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		int addedDamage = random.nextInt(0, 4);	// Randomly add 0, 1, 2 or 3 damage points
+		int minDamage = baseDamage + addedDamage;
+		int maxDamage = minDamage + 1;
+
+		crystal.addAttribute(MIN_DAMAGE, String.valueOf(minDamage));
+		crystal.addAttribute(MAX_DAMAGE, String.valueOf(maxDamage));
+	}
+
+	private int getBaseDamage(SWGObject crystal) {
+		String attribute = crystal.getAttribute(QUALITY);
+
+		switch (attribute) {
+			case POOR_VALUE: return 1;
+			case FAIR_VALUE: return 3;
+			case GOOD_VALUE: return 6;
+			case QUALITY_VALUE: return 11;
+			case SELECT_VALUE: return 13;
+			case PREMIUM_VALUE: return 15;
+			case FLAWLESS_VALUE: return 19;
+			case PERFECT_VALUE: return 22;
+			default: throw new UnsupportedOperationException("Unknown attribute " + attribute);
+		}
+	}
+
 }

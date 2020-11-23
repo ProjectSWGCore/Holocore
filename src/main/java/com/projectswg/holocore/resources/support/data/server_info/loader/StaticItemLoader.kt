@@ -75,6 +75,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val collectionInfo: CollectionItemInfo?
 		val consumableInfo: ConsumableItemInfo?
 		val costumeInfo: CostumeItemInfo?
+		val crystalInfo: CrystalItemInfo?
 		val dnaInfo: DnaItemInfo?
 		val grantInfo: GrantItemInfo?
 		val genericInfo: GenericItemInfo?
@@ -92,6 +93,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			this.collectionInfo = if ("collection" == type) CollectionItemInfo(set, colorArray) else null
 			this.consumableInfo = if ("consumable" == type) ConsumableItemInfo(set) else null
 			this.costumeInfo = if ("costume" == type) CostumeItemInfo(set) else null
+			this.crystalInfo = if ("crystal" == type) CrystalItemInfo(set, colorArray) else null
 			this.dnaInfo = if ("dna" == type) DnaItemInfo(set) else null
 			this.grantInfo = if ("grant" == type) GrantItemInfo(set) else null
 			this.genericInfo = if ("generic" == type) GenericItemInfo(set, colorArray) else null
@@ -173,6 +175,15 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val buffName: String = set.getText("buff_name")
 		
+	}
+
+	class CrystalItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
+		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
+			get() = field.clone()
+		val quality: Int = set.getInt("crystal_quality").toInt()
+		val minDmg: Int = set.getInt("crystal_min_dmg").toInt()
+		val maxDmg: Int = set.getInt("crystal_max_dmg").toInt()
+
 	}
 
 	class DnaItemInfo(set: SdbResultSet)
