@@ -142,21 +142,19 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	private fun getWeaponCommand(weapon: WeaponObject): String {
-		val ai = weapon.parent as AIObject?
-		
-		return if (ai != null && GameObjectType.GOT_CREATURE == ai.gameObjectType) {
-			// Creatures use different default attack abilities than humanoids do
-			"creatureMeleeAttack"    // TODO this is a bit simple as there are ranged attacks available for some creatures as well.
-		} else {
-			when (weapon.type) {
-				WeaponType.PISTOL -> "rangedShotPistol"
-				WeaponType.RIFLE -> "rangedShotRifle"
-				WeaponType.LIGHT_RIFLE -> "rangedShotLightRifle"
-				WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
-				WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
-				WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
-				else -> "meleeHit"
-			}
+		if (weapon.template == "object/weapon/creature/shared_creature_default_weapon.iff") {
+			// Creature weapon, use the melee attack designed for creatures
+			return "creatureMeleeAttack"
+		}
+
+		return when (weapon.type) {
+			WeaponType.PISTOL -> "rangedShotPistol"
+			WeaponType.RIFLE -> "rangedShotRifle"
+			WeaponType.LIGHT_RIFLE -> "rangedShotLightRifle"
+			WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
+			WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
+			WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
+			else -> "meleeHit"
 		}
 	}
 	
