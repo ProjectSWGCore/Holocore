@@ -580,7 +580,7 @@ patrol_dat_7303	patrol_dat_7300		DATHOMIR	dat_world	0	5324.9	78.5	-4073.4	0
 patrol_dat_7304	patrol_dat_7300		DATHOMIR	dat_world	0	5330.4	78.5	-4076.1	0	
 patrol_dat_7305	patrol_dat_7300		DATHOMIR	dat_world	0	5346.1	78.5	-4077.7	0	
 patrol_dat_7306	patrol_dat_7300		DATHOMIR	dat_world	0	5362.0	78.5	-4077.7	0	
-patrol_dat_7400	patrol_dat_7400	FLIP	DATHOMIR	dat_world	0	5400.2	78.5	-2050.0	0	Aurilia - an Aurilia sentinel #4
+patrol_dat_7400	patrol_dat_7400	LOOP	DATHOMIR	dat_world	0	5400.2	78.5	-4050.0	0	Aurilia - an Aurilia sentinel #4
 patrol_dat_7401	patrol_dat_7400		DATHOMIR	dat_world	0	5400.2	78.5	-4081.3	0	
 patrol_dat_7402	patrol_dat_7400		DATHOMIR	dat_world	0	5397.4	78.5	-4069.3	0	
 patrol_dat_7403	patrol_dat_7400		DATHOMIR	dat_world	0	5385.3	78.5	-4057.6	0	
