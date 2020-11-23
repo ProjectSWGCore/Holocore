@@ -138,7 +138,7 @@ melee_crafted_lightsaber_s9_training	object/weapon/melee/sword/crafted_saber/swo
 melee_crafted_lightsaber_training	object/weapon/melee/sword/crafted_saber/generic_sword_lightsaber_training.iff	MELEE	ONE_HANDED_SABER	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
 melee_crafted_lightsaber_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_training.iff	MELEE	ONE_HANDED_SABER	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
 melee_crafted_sword_ep3_wookiee	object/weapon/melee/sword/crafted_saber/ep3/sword_wookiee.iff	MELEE	ONE_HANDED_SABER	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_default_weapon	object/weapon/creature/creature_default_weapon.iff	MELEE	UNARMED	5		2	KINETIC	1250		
+melee_creature_default_weapon	object/weapon/creature/creature_default_weapon.iff	MELEE	UNARMED	5		2	KINETIC	1250		
 melee_knife_dagger	object/weapon/melee/knife/knife_dagger.iff	MELEE	ONE_HANDED_MELEE	5		3	KINETIC	1250		
 melee_knife_dagger_static	object/weapon/melee/knife/knife_dagger_static.iff	MELEE	ONE_HANDED_MELEE	5		3	KINETIC	1250		
 melee_knife_donkuwah	object/weapon/melee/knife/knife_donkuwah.iff	MELEE	ONE_HANDED_MELEE	5		3	KINETIC	1250		
