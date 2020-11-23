@@ -33,6 +33,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
+import com.projectswg.holocore.services.gameplay.jedi.LightsaberCrystalService
 import java.util.*
 import kotlin.math.floor
 
@@ -56,6 +57,7 @@ object StaticItemCreator {
 		applyAttributes(obj, info.weaponInfo)
 		applyAttributes(obj, info.collectionInfo)
 		applyAttributes(obj, info.costumeInfo)
+		applyAttributes(obj, info.crystalInfo)
 		applyAttributes(obj, info.dnaInfo)
 		applyAttributes(obj, info.grantInfo)
 		applyAttributes(obj, info.genericInfo)
@@ -179,6 +181,22 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CostumeItemInfo?) {
 //		if (info == null)
 //			return;
+	}
+
+	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CrystalItemInfo?) {
+		if (info == null)
+			return;
+
+		applyColors(obj, info.color)
+
+		obj.addAttribute(LightsaberCrystalService.CRYSTAL_OWNER, "\\#D1F56F UNTUNED \\#FFFFFF ");
+
+		if (info.minDmg > 0 && info.maxDmg > 0) {
+			val quality = info.quality
+			val qualityValue = "@jedi_spam:crystal_quality_$quality"
+
+			obj.addAttribute(LightsaberCrystalService.QUALITY, qualityValue)
+		}
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
