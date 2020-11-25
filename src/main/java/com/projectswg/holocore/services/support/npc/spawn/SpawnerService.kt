@@ -57,6 +57,7 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.stream.Collectors
 
@@ -182,6 +183,13 @@ class SpawnerService : Service() {
 	}
 	
 	private fun spawn(spawn: SpawnInfo) {
+		val npcId = spawn.npcId
+
+		if (DataLoader.npcs().getNpc(npcId) == null) {
+			Log.w("Invalid npc %s", npcId);
+			return
+		}
+
 		val egg = createEgg(spawn)
 		val spawner = Spawner(spawn, egg)
 		egg.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
@@ -197,7 +205,7 @@ class SpawnerService : Service() {
 				obj.containerPermissions = AdminPermissions.getPermissions()
 				obj.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
 				
-				obj.objectName = String.format("P: %s\nG: %s\nNPC:%s\nID:%s", waypoint.patrolId, waypoint.groupId, spawn.npcId, spawn.id)
+				obj.objectName = String.format("P: %s\nG: %s\nNPC:%s\nID:%s", waypoint.patrolId, waypoint.groupId, npcId, spawn.id)
 				obj.moveToContainer(waypoint.parent, waypoint.location)
 				ObjectCreatedIntent.broadcast(obj)
 			}
