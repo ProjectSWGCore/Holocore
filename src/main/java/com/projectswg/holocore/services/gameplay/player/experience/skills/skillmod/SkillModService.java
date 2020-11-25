@@ -96,6 +96,7 @@ public class SkillModService extends Service {
 		skillModAdjusters.put("expertise_innate_protection_kinetic", new SingleModAdjustFunction("kinetic"));
 		skillModAdjusters.put("expertise_innate_protection_energy", new SingleModAdjustFunction("energy"));
 		skillModAdjusters.put("expertise_saber_block", new SingleModAdjustFunction("display_only_parry", 100));
+		skillModAdjusters.put("expertise_glancing_blow_all", new SingleModAdjustFunction("display_only_glancing_blow", 100));
 	}
 	
 	@Override
