@@ -1,13 +1,13 @@
 terrain	comment	x	z	radius
 TEXT	TEXT	INTEGER	INTEGER	INTEGER
-CORELLIA	City - Bela Vistal	6788	-5654	500
-CORELLIA	City - Coronet	-178	-4504	600
-CORELLIA	City - Doaba Guerfel	3272	5456	650
-CORELLIA	City - Kor Vella	-3512	3184	750
-CORELLIA	City - Tyrena	-5282	-2526	650
-CORELLIA	GCW - Corellia base	4778	-5232	300
-CORELLIA	GCW - Imperial forward base	4247	-4950	150
-CORELLIA	GCW - Rebel forward base	5290	-5619	150
+CORELLIA	City - Bela Vistal	6788	-5654	800
+CORELLIA	City - Coronet	-178	-4504	800
+CORELLIA	City - Doaba Guerfel	3272	5456	800
+CORELLIA	City - Kor Vella	-3512	3184	800
+CORELLIA	City - Tyrena	-5282	-2526	800
+CORELLIA	GCW - Tactical Training Facility	4778	-5232	500
+CORELLIA	GCW - Imperial forward base	4247	-4950	250
+CORELLIA	GCW - Rebel forward base	5290	-5619	250
 CORELLIA	Object - Agrilat swamps	816	4624	1000
 CORELLIA	Object - Bofa Treat Gang bunker	-2713	2855	150
 CORELLIA	Object - Broken walls	1886	-227	50
@@ -19,9 +19,9 @@ CORELLIA	POI - Rebel hideout	-6502	5993	300
 CORELLIA	POI - Rogue Corsec Base	5213	1593	300
 CORELLIA	POI - Stronghold	4659	-5787	200
 CORELLIA	POI - Vreni Island	-5472	-6272	500
-DANTOOINE	City - Imperial Outpost	-4224	-2400	300
-DANTOOINE	City - Mining Outpost	-622	2488	300
-DANTOOINE	City - Pirate Outpost	1586	-6402	300
+DANTOOINE	City - Imperial Outpost	-4224	-2400	500
+DANTOOINE	City - Mining Outpost	-622	2488	500
+DANTOOINE	City - Pirate Outpost	1586	-6402	500
 DANTOOINE	Object - Bridge	-417	-3020	75
 DANTOOINE	Object - Forsaken force drifter	-2078	-321	100
 DANTOOINE	Object - Rebel base near Janta Stronghold	7008	-3993	150
@@ -37,8 +37,8 @@ DANTOOINE	POI - Kunga Stronghold	-124	-326	250
 DANTOOINE	POI - Mokk Stronghold	-7064	-3335	150
 DANTOOINE	POI - The Warren	-555	-3823	300
 DATHOMIR	City - Aurilia	5322	-4129	1000
-DATHOMIR	City - Survey Outpost	-85	-1600	400
-DATHOMIR	City - Trade Outpost	599	3071	400
+DATHOMIR	City - Survey Outpost	-85	-1600	500
+DATHOMIR	City - Trade Outpost	599	3071	500
 DATHOMIR	Object - Quarantine Zone 1	-7000	-7000	1000
 DATHOMIR	Object - Quarantine Zone 2	-6500	-7000	1000
 DATHOMIR	Object - Singing Mountain Fortress	182	4513	500
@@ -51,8 +51,8 @@ DATHOMIR	POI - Nightspider Cult Cave	-1172	6245	150
 DATHOMIR	POI - NS Forced Labor Camp	2538	-1689	500
 DATHOMIR	POI - NS vs. SMC	-2521	1533	300
 DATHOMIR	POI - Singing Mountain Clan	540	4195	500
-ENDOR	City - Research Outpost	3222	-3467	400
-ENDOR	City - Smuggler Outpost	-898	1587	400
+ENDOR	City - Research Outpost	3222	-3467	500
+ENDOR	City - Smuggler Outpost	-898	1587	500
 ENDOR	Object - DWB	-4706	4241	500
 ENDOR	Object -Tao-Ni bunker	2552	6649	300
 ENDOR	POI - Dulok Village 1	6068	-2475	200
@@ -65,7 +65,7 @@ ENDOR	POI - Jinda Ritualists Cave	-1712	14	150
 ENDOR	POI - Korga Cave	2260	3561	150
 ENDOR	POI - Marauders Stronghold	-4637	-2272	250
 ENDOR	POI - Orphaned Marauders Cave	-6927	702	150
-LOK	City - Nym	423	5082	500
+LOK	City - Nym	423	5082	800
 LOK	City - Nym N	419	5434	300
 LOK	Object - Abandoned imperial base	-4501	7406	100
 LOK	Object - Abandoned rebel base	487	4038	50
@@ -81,13 +81,16 @@ LOK	POI - Imperial Outpost	-1920	-3084	400
 LOK	POI - Kimogila town	-76	2711	300
 LOK	POI - Mount Chaolt	2946	-4703	400
 LOK	POI - The Great Maze of Lok	3825	-550	200
-NABOO	City - Deeja Peak 1	5188	-1552	400
-NABOO	City - Deeja Peak 2	4874	-1422	400
-NABOO	City - Kaadara	5168	6704	350
-NABOO	City - Keren	1809	2694	600
-NABOO	City - Lake Retreat 1	-5546	-33	200
-NABOO	City - Lake Retreat 2	-5637	173	50
-NABOO	City - Moenia	4860	-4807	400
+NABOO	City - Deeja Peak 1	5188	-1552	500
+NABOO	City - Deeja Peak 2	4874	-1422	500
+NABOO	City - Kaadara	5168	6704	500
+NABOO	City - Keren	1809	2694	800
+NABOO	City - Lake Retreat 1	-5546	-33	500
+NABOO	City - Lake Retreat 2	-5637	173	250
+NABOO	City - Moenia	4860	-4807	800
+NABOO	GCW - Imperial forward base	1507	-1557	250
+NABOO	GCW - Rebel forward base	533	-1451	250
+NABOO	GCW - Weapons Development Facility	974	-1506	250
 NABOO	Object - Beachcomber	4901	6446	100
 NABOO	Object - Beachcomber	4904	6452	100
 NABOO	Object - Borvo bunker	-4185	3890	100
@@ -141,10 +144,10 @@ NABOO	Object - Ultragungan camp 8	-2031	-5152	100
 NABOO	POI - Gungan Sacred place	-1975	-5433	400
 NABOO	POI - Imperial vs. Gungan Battle	4765	-3875	100
 NABOO	POI - Narglatch cave	5859	-4637	150
-RORI	City - Narmle	-5184	-2291	500
-RORI	City - Rebel Outpost	3677	-6447	150
-RORI	City - Restuss	5318	5680	700
-RORI	City - Starport	5284	6183	300
+RORI	City - Narmle	-5184	-2291	1000
+RORI	City - Rebel Outpost	3677	-6447	400
+RORI	City - Restuss	5318	5680	800
+RORI	City - Restuss Starport	5284	6183	400
 RORI	Object - Lake Octir	-3616	3680	1000
 RORI	POI - Borgle Bat Cave	862	-4893	150
 RORI	POI - Garyn Raiders Bunker	-6022	-1822	150
@@ -157,9 +160,9 @@ RORI	POI - Rori Gungans Swamp town	-2065	3308	200
 TALUS	City - Dearic	432	-2996	500
 TALUS	City - Imperial Outpost	-2178	2300	250
 TALUS	City - Nashal	4355	5267	400
-TALUS	GCW - Imperial forward base	-4795	-2680	150
-TALUS	GCW - Rebel forward base	-5112	-3494	150
-TALUS	GCW - Weapons Depot	-4935	-3121	250
+TALUS	GCW - Imperial forward base	-4795	-2680	250
+TALUS	GCW - Rebel forward base	-5112	-3494	250
+TALUS	GCW - Talus Weapons Depot	-4935	-3121	250
 TALUS	Object - NSH base	-4629	-3242	150
 TALUS	POI - Aakuan Champions Cave	5927	4657	150
 TALUS	POI - Binayre Pirate Bunker	5570	-4080	150
@@ -173,14 +176,14 @@ TALUS	POI - Kahmurra Biogenetic Research Station	-4828	-4751	150
 TALUS	POI - Lost Aqualish War Partys Cave	-4350	-1424	150
 TALUS	POI - Lost Village of Durbin	4222	995	150
 TATOOINE	Camp - Alkahara with 2 tents	-1262	5461	50
-TATOOINE	City - Anchorhead	112	-5352	250
-TATOOINE	City - Anchorhead 2	-150	-5277	100
+TATOOINE	City - Anchorhead	112	-5352	500
+TATOOINE	City - Anchorhead 2	-150	-5277	300
 TATOOINE	City - Bestine	-1227	-3639	500
-TATOOINE	City - Mos Eisley	3430	-4780	500
-TATOOINE	City - Mos Entha	1488	3256	600
-TATOOINE	City - Mos Espa	-2940	2190	700
-TATOOINE	City - Mos Taike	3884	2342	250
-TATOOINE	City - Mos Taike 2	3991	2495	100
+TATOOINE	City - Mos Eisley	3430	-4780	1000
+TATOOINE	City - Mos Entha	1488	3256	1000
+TATOOINE	City - Mos Espa	-2940	2190	1000
+TATOOINE	City - Mos Taike	3884	2342	500
+TATOOINE	City - Mos Taike 2	3991	2495	300
 TATOOINE	City - Wayfar	-5174	-6582	250
 TATOOINE	Object - 4 pillars connected at top	6527	5523	50
 TATOOINE	Object - Ancient skeleton	-5802	5408	50
@@ -283,10 +286,10 @@ TATOOINE	POI - Jawa Traders	-6140	1855	500
 TATOOINE	POI - Krayt Graveyard	7466	4515	500
 TATOOINE	POI - Krayt skeleton	-4649	-4361	300
 TATOOINE	POI - Lars Homestead	-2586	-5534	300
-YAVIN4	City - Imperial Outpost	4034	-6230	200
-YAVIN4	City - Imperial Outpost	4033	-6230	200
-YAVIN4	City - Labor Outpost	-6932	-5711	200
-YAVIN4	City - Minig Outpost	-307	4861	200
+YAVIN4	City - Imperial Outpost	4034	-6230	400
+YAVIN4	City - Imperial Outpost	4033	-6230	400
+YAVIN4	City - Labor Outpost	-6932	-5711	400
+YAVIN4	City - Minig Outpost	-307	4861	400
 YAVIN4	Object - Nagem Drlar	5857	-320	150
 YAVIN4	POI - Temple of Exar Kun	5056	5537	500
 YAVIN4	POI - The Great Massassi Temple	-3038	-2960	250
