@@ -108,10 +108,10 @@ enum CombatCommandAttack implements CombatCommandHitType {
 				
 				// Play dodge animation on the creature that's dodging for everyone that can see the creature
 				target.sendObservers(new Animation(targetObjectId, "dodge"));
+			} else if (isAttackGlanced(source, creatureTarget)) {
+				info.setGlancing(true);
 			}
 		}
-		
-		// TODO single target only offence rolls for source
 		
 		doCombat(source, targets, weapon, info, command);
 	}
@@ -195,8 +195,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			// The armor of the target will mitigate some of the damage
 			armorMitigate(info, damageType, target, command);
 			
-			// TODO block roll for defender
-			// TODO Critical hit roll for attacker
+			if (info.isGlancing()) {
+				handleGlancingBlow(info, target);
+			}
 			
 			// End rolls
 			int targetHealth = target.getHealth();
@@ -233,6 +234,20 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		info.setBlockedDamage(armorAbsorbed);	// Describes how many points of damage the armor absorbed
 		
 		info.setFinalDamage(currentDamage);
+	}
+	
+	private static void handleGlancingBlow(AttackInfo info, SWGObject target) {
+		int finalDamage = info.getFinalDamage();
+		
+		// Glancing blows cause only 40% damage to be applied
+		finalDamage *= 0.4;
+		
+		info.setFinalDamage(finalDamage);
+		
+		// Show Glancing flytext above the object that rolled a glancing blow
+		ShowFlyText glancingFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "glancing_blow"), ShowFlyText.Scale.MEDIUM, new RGB(0, 160, 0));
+		
+		target.sendSelf(glancingFlyText);
 	}
 	
 	private static int getArmor(DamageType damageType, CreatureObject creature) {
@@ -302,6 +317,24 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
 		
 		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
+	}
+	
+	private static boolean isAttackGlanced(CreatureObject source, CreatureObject target) {
+		double glanceChance = target.getSkillModValue("display_only_glancing_blow") / 100d;
+		WeaponObject sourceEquippedWeapon = source.getEquippedWeapon();
+		WeaponType weaponType = sourceEquippedWeapon.getType();
+		
+		if (weaponType.isMelee()) {
+			glanceChance += target.getSkillModValue("expertise_glancing_blow_melee");
+		}
+		
+		if (weaponType.isRanged()) {
+			glanceChance += target.getSkillModValue("expertise_glancing_blow_ranged");
+		}
+		
+		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
+		
+		return roll <= glanceChance;	// If glance chance is 25%, then the roll should be between 0 and 25 (both inclusive)
 	}
 	
 	private static boolean isAttackDevastating(CreatureObject source, CombatCommand command) {
