@@ -120,7 +120,8 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		// If we're close, angle towards target
 		val myLocation = obj.location
 		val targetLocation = target.location
-		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(myLocation.getHeadingTo(targetLocation)).build(), npcRunSpeed)
+		val headingTo = myLocation.getHeadingTo(targetLocation.position)
+		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed)
 		
 		if (target.posture == Posture.INCAPACITATED) {
 			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0)
