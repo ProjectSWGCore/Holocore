@@ -120,6 +120,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("broadcastPlanet", CmdBroadcastPlanet::new);
 		registerCallback("planetChat", CmdPlanetChat::new);
 		registerCallback("spatialChatInternal", CmdSpatialChatInternal::new);
+		registerCallback("setSpokenLanguage", CmdSetSpokenLanguage::new);
 		addChatFriendScripts();
 	}
 	

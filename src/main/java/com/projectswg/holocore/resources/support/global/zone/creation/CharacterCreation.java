@@ -53,6 +53,9 @@ import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class CharacterCreation {
@@ -70,10 +73,10 @@ public class CharacterCreation {
 		CreatureObject	creatureObj	= createCreature(race.getFilename(), info);
 		PlayerObject	playerObj	= createPlayer(creatureObj);
 		
-		setCreatureObjectValues(creatureObj);
-		setPlayerObjectValues(playerObj);
+		setCreatureObjectValues(creatureObj, race);
+		setPlayerObjectValues(playerObj, race);
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
-		createStarterClothing(creatureObj, create.getRace(), create.getClothes());
+		createStarterClothing(creatureObj, race, create.getClothes());
 		playerObj.setAdminTag(accessLevel);
 		
 		ObjectCreatedIntent.broadcast(playerObj);
@@ -142,8 +145,8 @@ public class CharacterCreation {
 		hairObj.setAppearanceData(customization);
 	}
 	
-	private void setCreatureObjectValues(CreatureObject creatureObj) {
-		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
+	private void setCreatureObjectValues(CreatureObject creatureObj, Race race) {
+		creatureObj.setRace(race);
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setObjectName(create.getName());
@@ -153,6 +156,12 @@ public class CharacterCreation {
 		creatureObj.setCashBalance(100);
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
+		
+		Collection<String> languages = languagesSkillsForRace(creatureObj.getRace());
+		
+		for (String language : languages) {
+			new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, language, creatureObj, true).broadcast();
+		}
 		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		defWeapon.setMaxRange(5);
@@ -168,14 +177,15 @@ public class CharacterCreation {
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 	}
 	
-	private void setPlayerObjectValues(PlayerObject playerObj) {
+	private void setPlayerObjectValues(PlayerObject playerObj, Race race) {
 		playerObj.setProfession(Profession.getProfessionFromClient(create.getProfession()));
 		playerObj.setBornDate(Instant.now());
 		playerObj.setAccount(player.getUsername());
+		playerObj.setLanguageId(defaultLanguageForRace(race));
 	}
 	
-	private void createStarterClothing(CreatureObject creature, String race, String clothing) {
-		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(Race.getRaceByFile(race), clothing);
+	private void createStarterClothing(CreatureObject creature, Race race, String clothing) {
+		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(race, clothing);
 		if (items != null) {
 			for (String itemTemplate : items) {
 				createDefaultObject(creature, itemTemplate);
@@ -185,6 +195,80 @@ public class CharacterCreation {
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		assert inventory != null : "inventory is not defined";
 		createDefaultObject(inventory, "object/tangible/npe/shared_npe_uniform_box.iff");
+	}
+	
+	private Collection<String> languagesSkillsForRace(Race race) {
+		Collection<String> languages = new HashSet<>();
+		
+		languages.add("social_language_basic_comprehend");	// Anyone can comprehend Galactic Basic
+		languages.add("social_language_wookiee_comprehend");	// Anyone can comprehend Shyriiwook
+		
+		switch (race) {
+			case HUMAN_MALE:
+			case HUMAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				break;
+			case BOTHAN_MALE:
+			case BOTHAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_bothan_speak");
+				languages.add("social_language_bothan_comprehend");
+				break;
+			case ITHORIAN_MALE:
+			case ITHORIAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_ithorian_speak");
+				languages.add("social_language_ithorian_comprehend");
+				break;
+			case TWILEK_MALE:
+			case TWILEK_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_lekku_comprehend");
+				languages.add("social_language_lekku_speak");
+				languages.add("social_language_twilek_comprehend");
+				languages.add("social_language_twilek_speak");
+				break;
+			case MONCAL_MALE:
+			case MONCAL_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_moncalamari_comprehend");
+				languages.add("social_language_moncalamari_speak");
+				break;
+			case RODIAN_MALE:
+			case RODIAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_rodian_comprehend");
+				languages.add("social_language_rodian_speak");
+				break;
+			case SULLUSTAN_MALE:
+			case SULLUSTAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_sullustan_comprehend");
+				languages.add("social_language_sullustan_speak");
+				break;
+			case TRANDOSHAN_MALE:
+			case TRANDOSHAN_FEMALE:
+				languages.add("social_language_basic_speak");
+				languages.add("social_language_trandoshan_comprehend");
+				languages.add("social_language_trandoshan_speak");
+				break;
+			case WOOKIEE_MALE:
+			case WOOKIEE_FEMALE:
+				languages.add("social_language_wookiee_speak");
+				break;
+		}
+		
+		return languages;
+	}
+	
+	private static int defaultLanguageForRace(Race race) {
+		switch (race) {
+			case WOOKIEE_MALE:
+			case WOOKIEE_FEMALE:
+				return 5;	// Wookiees speak Shyriiwook by default
+			default:
+				return 1;	// Galactic basic
+		}
 	}
 	
 	private static Location generateRandomLocation(ZoneInsertion info) {
