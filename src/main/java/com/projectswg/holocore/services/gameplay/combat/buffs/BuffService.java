@@ -51,7 +51,6 @@ import java.util.stream.Stream;
 public class BuffService extends Service {
 	
 	/*
-	 * TODO allow removal of buffs with BuffInfo where PLAYER_REMOVABLE == 1
 	 * TODO remove buffs on respec. Listen for respec event and remove buffs with BuffInfo where
 	 *      REMOVE_ON_RESPEC == 1
 	 * TODO remove group buff(s) from receiver when distance between caster and receiver is 100m.
@@ -99,10 +98,20 @@ public class BuffService extends Service {
 		
 		Objects.requireNonNull(buffData, "No known buff: " + buffName);
 		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
+		CreatureObject buffer = bi.getBuffer();
+		CreatureObject receiver = bi.getReceiver();
+		
 		if (bi.isRemove()) {
-			removeBuff(bi.getReceiver(), buffData, false);
+			// If a player is removing a buff from themselves, check if the buff allows this
+			if (buffer.equals(receiver)) {
+				if (!buffData.isPlayerRemovable()) {
+					return;
+				}
+			}
+			
+			removeBuff(receiver, buffData, false);
 		} else {
-			addBuff(bi.getReceiver(), buffData, bi.getBuffer());
+			addBuff(receiver, buffData, buffer);
 		}
 	}
 	
