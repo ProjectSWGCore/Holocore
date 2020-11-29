@@ -55,6 +55,7 @@ object StaticItemCreator {
 		applyAttributes(obj, info.wearableInfo)
 		applyAttributes(obj, info.weaponInfo)
 		applyAttributes(obj, info.collectionInfo)
+		applyAttributes(obj, info.consumableInfo)
 		applyAttributes(obj, info.costumeInfo)
 		applyAttributes(obj, info.crystalInfo)
 		applyAttributes(obj, info.dnaInfo)
@@ -175,6 +176,16 @@ object StaticItemCreator {
 		
 		applyColors(obj, info.color)
 	}
+
+	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ConsumableItemInfo?) {
+		if (info == null)
+			return
+
+		if (info.charges != 0) {
+			obj.addAttribute("charges", info.charges.toString())
+			obj.counter = info.charges
+		}
+	}
 	
 	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CostumeItemInfo?) {
@@ -213,20 +224,24 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.GenericItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.value != 0)
-			obj.addAttribute("charges", info.value.toString())
-		
+
+		if (info.charges != 0) {
+			obj.addAttribute("charges", info.charges.toString())
+			obj.counter = info.charges
+		}
+
 		applyColors(obj, info.color)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ObjectItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.value != 0)
-			obj.addAttribute("charges", info.value.toString())
-		
+
+		if (info.charges != 0) {
+			obj.addAttribute("charges", info.charges.toString())
+			obj.counter = info.charges
+		}
+
 		applyColors(obj, info.color)
 	}
 	

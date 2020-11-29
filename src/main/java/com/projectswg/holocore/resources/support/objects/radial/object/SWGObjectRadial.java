@@ -13,6 +13,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class SWGObjectRadial implements RadialHandlerInterface {
 	
@@ -88,13 +89,29 @@ public class SWGObjectRadial implements RadialHandlerInterface {
 				}
 				
 				// Create new object using same template
-				// TODO needs to copy other stuff as well, such as customization variables and object attributes
 				String template = originalStack.getTemplate();
 				TangibleObject newStack = (TangibleObject) ObjectCreator.createObjectFromTemplate(template);
+				
+				for (Map.Entry<String, String> attributeEntry : originalStack.getAttributes().entrySet()) {
+					newStack.addAttribute(attributeEntry.getKey(), attributeEntry.getValue());
+				}
+				
+				newStack.setObjectName(originalStack.getObjectName());
+				newStack.setStringId(originalStack.getStringId());
+				newStack.setDetailStf(originalStack.getDetailStringId());
 				
 				// Adjust stack sizes
 				originalStack.setCounter(oldStackSize);
 				newStack.setCounter(newStackSize);
+				
+				if (originalStack.hasAttribute("charges")) {
+					originalStack.addAttribute("charges", String.valueOf(oldStackSize));
+					newStack.addAttribute("charges", String.valueOf(newStackSize));
+				}
+				
+				for (Map.Entry<String, Integer> customizationEntry : originalStack.getCustomization().entrySet()) {
+					newStack.putCustomization(customizationEntry.getKey(), customizationEntry.getValue());
+				}
 				
 				// We don't use moveToContainer, because that would trigger auto-stacking.
 				newStack.systemMove(container);
