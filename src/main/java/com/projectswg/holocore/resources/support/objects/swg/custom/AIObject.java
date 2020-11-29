@@ -32,6 +32,7 @@ import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -132,7 +133,7 @@ public class AIObject extends CreatureObject {
 	}
 	
 	private void checkAwareAttack(CreatureObject player) {
-		if (isAttackable(player)) {
+		if (isAttackable(player) && !isPlayerIgnored(player)) {
 			double distance = getLocation().flatDistanceTo(player.getLocation());
 			double maxAggroDistance;
 			if (player.isLoggedInPlayer())
@@ -251,6 +252,21 @@ public class AIObject extends CreatureObject {
 			Log.w(t);
 			queueNextLoop(1000);
 		}
+	}
+	
+	private boolean isPlayerIgnored(CreatureObject player) {
+		CreatureDifficulty difficulty = getDifficulty();
+		
+		if (difficulty == CreatureDifficulty.NORMAL) {
+			// Normal difficulty NPCs will let the player escape if the player has recently been incapacitated
+			return isPlayerRecentlyIncapacitated(player);
+		}
+		
+		return false;
+	}
+	
+	private boolean isPlayerRecentlyIncapacitated(CreatureObject player) {
+		return player.hasBuff("incapWeaken");
 	}
 	
 }
