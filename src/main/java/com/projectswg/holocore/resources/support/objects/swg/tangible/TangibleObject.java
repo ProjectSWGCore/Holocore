@@ -102,12 +102,15 @@ public class TangibleObject extends SWGObject {
 		if (newParent != null && counter > 0) {
 			// Scan container for matching stackable item
 			String ourTemplate = getTemplate();
-			Map<String, String> ourAttributes = getAttributes();
+			Map<String, String> ourAttributes = new HashMap<>(getAttributes());
 			TangibleObject bestMatch = null;
+			ourAttributes.remove("charges");	// Don't compare charges count
 			
 			for (SWGObject candidate : newParent.getContainedObjects()) {
 				String theirTemplate = candidate.getTemplate();
-				Map<String, String> theirAttributes = candidate.getAttributes();
+				Map<String, String> theirAttributes = new HashMap<>(candidate.getAttributes());
+				
+				theirAttributes.remove("charges");	// Don't compare charges count
 				
 				if (candidate == this)
 					continue; // Can't transfer into itself
@@ -126,9 +129,16 @@ public class TangibleObject extends SWGObject {
 			if (bestMatch != null) {
 				int theirCounter = bestMatch.getCounter();
 				int transferAmount = Math.min(bestMatch.getMaxCounter() - theirCounter, counter);
+				int added = theirCounter + transferAmount;
+				int subtracted = counter - transferAmount;
 				
-				bestMatch.setCounter(theirCounter + transferAmount);
-				setCounter(counter - transferAmount);
+				if (hasAttribute("charges")) {
+					addAttribute("charges", String.valueOf(subtracted));
+					bestMatch.addAttribute("charges", String.valueOf(added));
+				}
+				
+				bestMatch.setCounter(added);
+				setCounter(subtracted);
 				if (getCounter() > 0)
 					return true;
 				DestroyObjectIntent.broadcast(this);
@@ -443,7 +453,7 @@ public class TangibleObject extends SWGObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(1);
+		stream.addByte(2);
 		appearanceData.save(stream);
 		stream.addInt(maxHitPoints);
 		stream.addInt(components);
@@ -459,6 +469,7 @@ public class TangibleObject extends SWGObject {
 			stream.addAscii(e.getKey());
 			stream.addAscii(e.getValue());
 		});
+		stream.addInt(counter);
 	}
 	
 	@Override
@@ -478,6 +489,9 @@ public class TangibleObject extends SWGObject {
 		objectEffects = stream.getArray();
 		optionFlags = stream.getInt();
 		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
+		if (version == 2) {
+			counter = stream.getInt();
+		}
 	}
 	
 	@Override
@@ -495,6 +509,7 @@ public class TangibleObject extends SWGObject {
 		data.putByteArray("objectEffects", objectEffects);
 		data.putInteger("optionFlags", optionFlags);
 		data.putMap("effectsMap", effectsMap);
+		data.putInteger("counter", counter);
 	}
 	
 	@Override
@@ -511,5 +526,6 @@ public class TangibleObject extends SWGObject {
 		objectEffects = data.getByteArray("objectEffects");
 		optionFlags = data.getInteger("optionFlags", 0);
 		effectsMap.putAll(data.getMap("effectsMap", String.class, String.class));
+		counter = data.getInteger("counter", 0);
 	}
 }

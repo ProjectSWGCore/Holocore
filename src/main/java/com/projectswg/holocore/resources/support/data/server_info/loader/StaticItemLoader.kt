@@ -204,7 +204,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	}
 	
 	class GenericItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
+
+		val charges: Int			= set.getInt("charges").toInt()
 		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int				= set.getInt("value").toInt()
@@ -213,7 +214,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	}
 	
 	class ObjectItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
+
+		val charges: Int			= set.getInt("charges").toInt()
 		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int = set.getInt("value").toInt()
