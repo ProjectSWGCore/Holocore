@@ -84,6 +84,7 @@ public class CommandExecutionService extends Service {
 		registerCallback("transferItemWeapon", TransferItemCallback::new);
 		registerCallback("logout", LogoutCmdCallback::new);
 		registerCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
+		registerCallback("removeBuff", CmdRemoveBuff::new);
 		
 		addAdminScripts();
 		addChatScripts();
