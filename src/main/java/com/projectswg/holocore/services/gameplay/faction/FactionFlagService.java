@@ -281,6 +281,11 @@ public class FactionFlagService extends Service {
 		return pvpZones.values().stream()
 				.anyMatch(pvpZone -> {
 					Location zoneLocation = pvpZone.getLocation();
+					
+					if (location.getTerrain() != zoneLocation.getTerrain()) {
+						return false;
+					}
+					
 					double radius = pvpZone.getRadius();
 					
 					return location.isWithinFlatDistance(zoneLocation, radius);
