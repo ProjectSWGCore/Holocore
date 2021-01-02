@@ -47,6 +47,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import com.projectswg.holocore.utilities.TerrainUtils;
+import dk.madsboddum.swgterrain.api.TerrainEngine;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.Nullable;
@@ -170,10 +172,13 @@ public class DynamicSpawnService extends Service {
 		double randomOffsetZ = random.nextDouble(-MAX_SPAWN_DISTANCE_TO_PLAYER, MAX_SPAWN_DISTANCE_TO_PLAYER);
 		double eggX = location.getX() + randomOffsetX;
 		double eggZ = location.getZ() + randomOffsetZ;
+		double eggY = getEggY(terrain, eggX, eggZ);
+		
 		Location eggLocation = Location.builder(location)
 				.setX(eggX)
 				.setZ(eggZ)
-				.build();    // TODO y parameter should be set and calculated based on X and Z in relevant terrain. Currently they'll spawn in the air or below ground.
+				.setY(eggY)
+				.build();
 		int randomSpawnInfoIndex = random.nextInt(0, spawnInfos.size());
 		DynamicSpawnLoader.DynamicSpawnInfo spawnInfo = new ArrayList<>(spawnInfos).get(randomSpawnInfoIndex);
 		
@@ -216,6 +221,12 @@ public class DynamicSpawnService extends Service {
 		int randomIdx = random.nextInt(0, npcIdCount);
 		
 		return npcIds[randomIdx];
+	}
+	
+	private double getEggY(Terrain terrain, double eggX, double eggZ) {
+		TerrainEngine terrainEngine = TerrainUtils.getEngine(terrain);
+		
+		return terrainEngine.getHeight(eggX, eggZ);
 	}
 	
 }

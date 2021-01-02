@@ -15,4 +15,6 @@ open module holocore {
 	requires commons.cli;
 	requires kotlin.stdlib;
 	requires kotlinx.coroutines.core;
+	
+	requires swgterrain;
 }
