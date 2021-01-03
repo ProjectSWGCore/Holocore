@@ -19,6 +19,7 @@ application {
 
 repositories {
     jcenter()
+	maven("https://jitpack.io")	// Automatically creates a JVM library based on a git repository
 }
 
 sourceSets {
@@ -34,6 +35,7 @@ sourceSets {
 			implementation(group="me.joshlarson", name="fast-json", version="3.0.0")
 			implementation(group="me.joshlarson", name="jlcommon-network", version="1.0.0")
 			implementation(group="commons-cli", name="commons-cli", version="1.4")
+			implementation(group="com.github.madsboddum", name="swgterrain", version="1.1.2")
 		}
 	}
 	test {
