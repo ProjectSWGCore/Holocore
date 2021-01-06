@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
 spawn_gcw_cor_base_reb_1	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.5	-6.8	-6.5	-90	0	a Rebel commando	humanoid_rebel_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base - Rebel	1	IDLE	0	0	-	idle	0	0	0	300
 spawn_gcw_cor_base_reb_2	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.4	-6.8	-17.1	0	0	a Rebel commando	humanoid_rebel_base_rebel_commando	ATTACKABLE	E	90	95	GCW	Corellia GCW Base - Rebel	1	IDLE	0	0	-	idle	0	0	0	300

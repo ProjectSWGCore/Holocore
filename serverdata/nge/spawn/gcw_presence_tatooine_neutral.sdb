@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
 spawn_gcw_tat_pres_neu_1	TATOOINE	tat_world	AREA	0	-50.7	9.7	-5586.6	0	1	Anchorhead Police Officer	humanoid_police_tatooine_anchorhead	ATTACKABLE	E	15	20	GCW	Anchorhead	1	LOITER	3	0	-	idle	0	0	0	600
 spawn_gcw_tat_pres_neu_2	TATOOINE	tat_world	AREA	0	-54.9	9.8	-5561.6	0	1	Anchorhead Police Officer	humanoid_police_tatooine_anchorhead	ATTACKABLE	E	15	20	GCW	Anchorhead	1	LOITER	3	0	-	idle	0	0	0	600

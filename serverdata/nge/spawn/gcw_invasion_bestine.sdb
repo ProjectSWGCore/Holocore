@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	loot_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
 gcw_best_001	TATOOINE	tat_world	AREA	0	-1208.7	12.0	-3626.0	90	1	a Stormtrooper	humanoid_imperial_city_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120
 gcw_best_002	TATOOINE	tat_world	AREA	0	-1214.0	12.0	-3628.5	179	1	a Stormtrooper	humanoid_imperial_city_sandtrooper_sgt	AGGRESSIVE	E	90	90	GCW Bestine - Imperial	GCW Bestine	1	IDLE	0	0	-	idle	0	0	0	120

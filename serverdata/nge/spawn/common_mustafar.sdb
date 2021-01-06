@@ -1,281 +1,281 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	quest_id	loot_id	respawn
-STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL
-spawn_mus_001	MUSTAFAR	mus_world	AREA	0	-4398.4	85.5	3161.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_002	MUSTAFAR	mus_world	AREA	0	-4343.2	81.0	3397.2	0	1	Xos	humanoid_som_kenobi_reunite_dark_jedi	AGGRESSIVE	B	80	90	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_003	MUSTAFAR	mus_world	AREA	0	-5265.9	316.0	4485.0	0	1	Mining Strike Leader	humanoid_som_kenobi_striking_mining_leader	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_004	MUSTAFAR	mus_world	AREA	0	-2544.7	115.7	469.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_01	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01	0	0	0	600
-spawn_mus_005	MUSTAFAR	mus_world	AREA	0	-2543.8	116.4	458.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_01	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01	0	0	0	600
-spawn_mus_006	MUSTAFAR	mus_world	AREA	0	-4447.4	85.4	3182.2	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	3	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_007	MUSTAFAR	mus_world	AREA	0	-2554.6	116.1	463.2	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02	0	0	0	600
-spawn_mus_008	MUSTAFAR	mus_world	AREA	0	-2564.2	116.3	469.3	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02	0	0	0	600
-spawn_mus_009	MUSTAFAR	mus_world	AREA	0	-2534.2	146.3	409.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03	0	0	0	600
-spawn_mus_010	MUSTAFAR	mus_world	AREA	0	-2537.1	116.0	467.5	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03	0	0	0	600
-spawn_mus_011	MUSTAFAR	mus_world	AREA	0	-4445.8	83.3	3375.4	0	1	Lislot Bloodscar	humanoid_som_lislot_bloodscar	AGGRESSIVE	B	75	82	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_012	MUSTAFAR	mus_world	AREA	0	-3080.7	20.0	5353.8	0	1	Malfosa	creature_sherkar_malfosa	AGGRESSIVE	B	80	82	-	-	1	LOITER	50	0	-	idle	0	0	0	900
-spawn_mus_013	MUSTAFAR	mus_world	AREA	0	-5403.3	296.0	4428.9	0	1	Miner Renlo Hens	humanoid_som_miner_hens	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_014	MUSTAFAR	mus_world	AREA	0	-3406.5	99.8	1610.0	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_015	MUSTAFAR	mus_world	AREA	0	-3961.5	99.8	995.6	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_016	MUSTAFAR	mus_world	AREA	0	-3820.7	99.8	1199.3	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_017	MUSTAFAR	mus_world	AREA	0	-4351.0	89.2	3162.1	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_018	MUSTAFAR	mus_world	AREA	0	-3496.9	99.8	1441.7	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_019	MUSTAFAR	mus_world	AREA	0	-4106.8	99.8	1170.0	0	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_020	MUSTAFAR	mus_world	AREA	0	-3882.9	103.6	-252.4	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_021	MUSTAFAR	mus_world	AREA	0	-3934.4	140.4	1345.2	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_022	MUSTAFAR	mus_world	AREA	0	-4041.0	144.9	1322.7	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_023	MUSTAFAR	mus_world	AREA	0	-4138.5	145.2	1327.7	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_024	MUSTAFAR	mus_world	AREA	0	485.2	128.7	5771.3	0	1	a Phantoms bandit	humanoid_som_mustafarian_phantom_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_025	MUSTAFAR	mus_world	AREA	0	-4383.5	93.2	3211.7	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_026	MUSTAFAR	mus_world	AREA	0	-2745.5	225.8	3521.4	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_027	MUSTAFAR	mus_world	AREA	0	-2706.2	156.6	3344.7	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	7	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_028	MUSTAFAR	mus_world	AREA	0	-2673.0	133.9	3205.4	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_029	MUSTAFAR	mus_world	AREA	0	-4367.8	92.6	3213.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_030	MUSTAFAR	mus_world	AREA	0	-2738.8	131.7	3108.5	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_031	MUSTAFAR	mus_world	AREA	0	-2727.3	198.6	3484.9	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_032	MUSTAFAR	mus_world	AREA	0	-2709.9	158.2	3350.5	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_033	MUSTAFAR	mus_world	AREA	0	-2732.9	131.3	3111.7	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_034	MUSTAFAR	mus_world	AREA	0	-2689.0	118.5	3082.9	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_035	MUSTAFAR	mus_world	AREA	0	-2684.3	118.4	3087.6	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_036	MUSTAFAR	mus_world	AREA	0	-2684.3	118.3	3079.7	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_037	MUSTAFAR	mus_world	AREA	0	-2692.5	118.6	3079.6	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_038	MUSTAFAR	mus_world	AREA	0	-2691.5	119.5	3087.5	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_039	MUSTAFAR	mus_world	AREA	0	-4308.7	85.2	3172.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	3	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_040	MUSTAFAR	mus_world	AREA	0	-449.4	157.8	-154.7	0	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_041	MUSTAFAR	mus_world	AREA	0	-5792.4	106.7	5809.3	0	1	Pletus Croix	humanoid_som_naboo_historian	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_042	MUSTAFAR	mus_world	AREA	0	441.4	132.4	5115.3	0	1	Jural	humanoid_som_reporter_jural	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_043	MUSTAFAR	mus_world	AREA	0	438.5	132.8	5116.6	0	1	Talper	humanoid_som_reporter_talper	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01	0	0	0	600
-spawn_mus_044	MUSTAFAR	mus_world	AREA	0	-2654.0	38.1	6088.5	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	4	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_045	MUSTAFAR	mus_world	AREA	0	-2701.4	20.0	5912.8	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_046	MUSTAFAR	mus_world	AREA	0	-2700.5	31.3	6020.1	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_047	MUSTAFAR	mus_world	AREA	0	-2547.2	32.3	5839.7	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_048	MUSTAFAR	mus_world	PATROL	0	-2618.9	40.2	6064.6	0	1	The Shambler	humanoid_som_ruins_leader	AGGRESSIVE	E	70	85	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_049	MUSTAFAR	mus_world	AREA	0	-4425.2	85.4	3156.3	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_050	MUSTAFAR	mus_world	AREA	0	-2700.6	20.0	5901.1	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_051	MUSTAFAR	mus_world	AREA	0	-2696.3	31.7	6026.5	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_052	MUSTAFAR	mus_world	AREA	0	-2634.2	20.0	5888.8	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_053	MUSTAFAR	mus_world	AREA	0	-4380.0	94.3	3233.4	0	1	San'sii the Kursk	humanoid_som_sansii_kursk	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_054	MUSTAFAR	mus_world	AREA	0	194.4	266.7	4096.3	0	1	The Storm Lord	humanoid_som_storm_lord	AGGRESSIVE	B	85	90	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_055	MUSTAFAR	mus_world	AREA	0	311.2	171.5	3744.3	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_056	MUSTAFAR	mus_world	AREA	0	318.4	171.5	3747.0	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_057	MUSTAFAR	mus_world	AREA	0	209.3	263.7	4082.8	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_058	MUSTAFAR	mus_world	AREA	0	202.7	264.0	4080.9	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_059	MUSTAFAR	mus_world	AREA	0	180.2	264.5	4091.6	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_060	MUSTAFAR	mus_world	AREA	0	-4417.7	84.7	3165.4	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_061	MUSTAFAR	mus_world	AREA	0	183.0	264.5	4112.9	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_062	MUSTAFAR	mus_world	AREA	0	192.2	264.5	4116.8	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_063	MUSTAFAR	mus_world	AREA	0	191.7	206.7	4233.7	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_064	MUSTAFAR	mus_world	AREA	0	195.8	206.7	4235.8	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_065	MUSTAFAR	mus_world	AREA	0	307.5	161.3	3767.6	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_066	MUSTAFAR	mus_world	AREA	0	276.2	135.0	3877.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	7	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_067	MUSTAFAR	mus_world	AREA	0	157.8	161.4	4569.5	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_068	MUSTAFAR	mus_world	AREA	0	287.7	129.9	4316.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	8	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_069	MUSTAFAR	mus_world	AREA	0	389.1	200.5	4347.0	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_070	MUSTAFAR	mus_world	AREA	0	396.0	201.9	4352.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_071	MUSTAFAR	mus_world	AREA	0	-4408.6	84.6	3167.8	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_072	MUSTAFAR	mus_world	AREA	0	415.7	168.2	4091.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_073	MUSTAFAR	mus_world	AREA	0	283.3	207.1	4037.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_074	MUSTAFAR	mus_world	AREA	0	288.5	207.1	4025.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_075	MUSTAFAR	mus_world	AREA	0	312.2	207.9	4014.0	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_mus_076	MUSTAFAR	mus_world	AREA	0	331.6	206.7	4037.3	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_077	MUSTAFAR	mus_world	AREA	0	230.9	240.8	4130.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	2	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_078	MUSTAFAR	mus_world	AREA	0	209.3	245.9	4145.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_079	MUSTAFAR	mus_world	AREA	0	176.1	252.9	4138.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	9	0	-	idle	0	0	0	600
-spawn_mus_080	MUSTAFAR	mus_world	AREA	0	316.1	171.5	3742.0	0	1	Prophet of the Storm Lord	humanoid_som_storm_lord_prophet	AGGRESSIVE	N	75	85	-	-	1	LOITER	3	0	-	idle	0	0	0	600
-spawn_mus_081	MUSTAFAR	mus_world	AREA	0	166.3	207.6	4225.8	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_mus_082	MUSTAFAR	mus_world	AREA	0	-4381.6	94.3	3237.4	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_083	MUSTAFAR	mus_world	AREA	0	192.0	206.7	4237.9	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_084	MUSTAFAR	mus_world	PATROL	0	284.8	206.0	4061.3	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	3	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_085	MUSTAFAR	mus_world	AREA	0	379.4	217.3	4368.3	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_086	MUSTAFAR	mus_world	AREA	0	325.1	206.7	4024.8	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_mus_087	MUSTAFAR	mus_world	PATROL	0	-5412.6	296.0	4461.5	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	2	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_088	MUSTAFAR	mus_world	AREA	0	-5020.6	199.5	4491.9	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	4	0	-	idle	0	0	0	600
-spawn_mus_089	MUSTAFAR	mus_world	AREA	0	-5358.0	294.8	4448.8	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	2	LOITER	3	0	-	idle	0	0	0	600
-spawn_mus_090	MUSTAFAR	mus_world	AREA	0	-5384.5	295.7	4426.1	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_091	MUSTAFAR	mus_world	AREA	0	-5384.8	294.0	4441.6	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_092	MUSTAFAR	mus_world	AREA	0	-5293.0	316.0	4481.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_093	MUSTAFAR	mus_world	AREA	0	-5558.0	131.0	2169.0	0	1	an enthralled kubaza beetle	creature_beetle_kubaza_enthralled	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_094	MUSTAFAR	mus_world	AREA	0	-4374.1	94.3	3234.3	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_095	MUSTAFAR	mus_world	AREA	0	-5273.7	316.0	4488.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_096	MUSTAFAR	mus_world	AREA	0	-5269.0	316.0	4482.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_097	MUSTAFAR	mus_world	AREA	0	-5269.2	316.0	4485.6	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_098	MUSTAFAR	mus_world	AREA	0	-5269.2	316.0	4489.5	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_099	MUSTAFAR	mus_world	AREA	0	-5017.9	200.2	4484.8	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_100	MUSTAFAR	mus_world	AREA	0	-5364.9	294.0	4449.3	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_101	MUSTAFAR	mus_world	PATROL	0	-5278.8	316.0	4492.3	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_102	MUSTAFAR	mus_world	AREA	0	-5274.0	316.0	4483.5	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_103	MUSTAFAR	mus_world	AREA	0	-4266.3	81.0	3325.3	0	1	a treasure hunter bodyguard	humanoid_som_treasure_hunter_bodyguard	AGGRESSIVE	E	75	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_104	MUSTAFAR	mus_world	AREA	0	-4484.5	83.0	3311.3	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_105	MUSTAFAR	mus_world	AREA	0	-3494.0	70.8	2102.0	0	1	a Blistmok Shrieker	creature_blistmok_shrieker	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_106	MUSTAFAR	mus_world	AREA	0	-4472.6	83.0	3306.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_107	MUSTAFAR	mus_world	AREA	0	-4229.7	83.3	3348.5	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	2	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_108	MUSTAFAR	mus_world	AREA	0	-4438.9	83.0	3378.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_109	MUSTAFAR	mus_world	AREA	0	-4352.1	81.0	3311.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_110	MUSTAFAR	mus_world	AREA	0	-4270.6	80.9	3251.5	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_111	MUSTAFAR	mus_world	AREA	0	-4288.1	81.0	3263.1	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_112	MUSTAFAR	mus_world	AREA	0	-4248.1	83.3	3360.3	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_113	MUSTAFAR	mus_world	AREA	0	155.3	128.7	4455.0	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	6	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_114	MUSTAFAR	mus_world	AREA	0	-4256.8	83.0	3312.4	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_115	MUSTAFAR	mus_world	AREA	0	-4282.0	83.0	3338.0	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_116	MUSTAFAR	mus_world	AREA	0	-4219.1	83.3	3314.9	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_117	MUSTAFAR	mus_world	AREA	0	-4449.0	82.9	3368.5	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_118	MUSTAFAR	mus_world	AREA	0	-4432.2	83.0	3376.5	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_119	MUSTAFAR	mus_world	PATROL	0	-4323.1	81.0	3257.9	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	2	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_120	MUSTAFAR	mus_world	AREA	0	-4410.5	85.2	3159.8	0	1	Vansk of the Blackguard	humanoid_som_vansk_blackguard	AGGRESSIVE	B	78	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_121	MUSTAFAR	mus_world	PATROL	0	-5236.1	249.3	4452.4	0	1	Voakar Duset	humanoid_som_voakar_duset	AGGRESSIVE	B	80	85	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_122	MUSTAFAR	mus_world	AREA	0	-702.0	58.1	3777.0	0	1	a lava runner tanray	creature_tanray_lava_runner	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_123	MUSTAFAR	mus_world	AREA	0	-1775.1	133.9	3959.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_124	MUSTAFAR	mus_world	AREA	0	284.6	128.7	4671.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_125	MUSTAFAR	mus_world	AREA	0	-1799.4	107.8	3924.7	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_126	MUSTAFAR	mus_world	PATROL	0	-2635.0	81.4	2832.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_127	MUSTAFAR	mus_world	AREA	0	-1888.7	140.2	3694.8	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_128	MUSTAFAR	mus_world	AREA	0	-1671.0	131.4	3491.5	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_129	MUSTAFAR	mus_world	AREA	0	-1643.7	109.7	3293.1	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_130	MUSTAFAR	mus_world	AREA	0	-3039.7	87.5	4047.5	0	1	Magma Horn	creature_tulrus_magma_horn	AGGRESSIVE	B	80	85	-	-	1	LOITER	9	0	-	idle	0	0	0	600
-spawn_mus_131	MUSTAFAR	mus_world	AREA	0	-1758.1	84.5	3169.7	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_132	MUSTAFAR	mus_world	AREA	0	-1585.5	116.0	2931.5	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_133	MUSTAFAR	mus_world	PATROL	0	296.4	206.0	4064.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	3	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_134	MUSTAFAR	mus_world	AREA	0	-1925.5	115.8	2886.8	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_135	MUSTAFAR	mus_world	AREA	0	-2567.1	97.2	2698.7	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_136	MUSTAFAR	mus_world	AREA	0	-2891.3	110.2	2646.6	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_137	MUSTAFAR	mus_world	AREA	0	-2548.7	110.3	2781.1	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_138	MUSTAFAR	mus_world	AREA	0	-1209.2	58.1	4834.1	0	1	Cobak	creature_xandank_cobak	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_139	MUSTAFAR	mus_world	AREA	0	-5094.0	44.5	5438.0	0	1	a large xandank	creature_xandank_large	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_140	MUSTAFAR	mus_world	AREA	0	-4582.9	48.1	5111.7	0	1	The Xandank Packleader	creature_xandank_pack_leader	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_141	MUSTAFAR	mus_world	AREA	0	-4586.0	48.1	5104.8	0	1	a xandank pack mate	creature_xandank_pack_mate	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_142	MUSTAFAR	mus_world	AREA	0	-1219.4	58.1	4845.4	0	1	a xandank stalker	creature_xandank_smoking_forest_stalker	AGGRESSIVE	N	75	85	-	-	5	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_143	MUSTAFAR	mus_world	AREA	0	-3781.6	67.9	2646.6	0	1	Ura Jen	creature_blistmok_urajen	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_144	MUSTAFAR	mus_world	AREA	0	-4220.4	83.3	3335.2	0	1	Colonel Narl	humanoid_som_col_narl	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_145	MUSTAFAR	mus_world	AREA	0	-5432.8	130.6	6016.8	0	1	Captain Relgon Starkill	humanoid_som_coyn_captain	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_146	MUSTAFAR	mus_world	AREA	0	-5301.1	266.9	5991.5	0	1	Commander Hal Razor	humanoid_som_coyn_commander	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_147	MUSTAFAR	mus_world	AREA	0	-4443.5	85.4	3169.5	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_148	MUSTAFAR	mus_world	AREA	0	-5335.0	114.5	6150.7	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_149	MUSTAFAR	mus_world	AREA	0	-5427.1	114.5	6090.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_150	MUSTAFAR	mus_world	PATROL	0	-5459.1	114.5	6094.9	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	2	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_151	MUSTAFAR	mus_world	AREA	0	-5449.7	114.5	6071.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_152	MUSTAFAR	mus_world	AREA	0	-5423.8	114.5	6062.6	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_153	MUSTAFAR	mus_world	AREA	0	-5401.8	114.9	6074.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_154	MUSTAFAR	mus_world	PATROL	0	-5296.1	264.5	6011.6	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_155	MUSTAFAR	mus_world	AREA	0	-5292.4	138.7	6075.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_156	MUSTAFAR	mus_world	AREA	0	-5441.1	130.3	6003.0	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_157	MUSTAFAR	mus_world	AREA	0	-5299.2	265.1	6014.8	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_158	MUSTAFAR	mus_world	AREA	0	-4447.0	85.4	3206.1	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_159	MUSTAFAR	mus_world	AREA	0	-5299.1	265.8	6006.1	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_160	MUSTAFAR	mus_world	AREA	0	-5297.4	266.9	5990.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_161	MUSTAFAR	mus_world	AREA	0	-5305.4	266.9	5990.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_162	MUSTAFAR	mus_world	AREA	0	-5419.6	130.1	6015.1	0	1	a Razor Runner elite trooper	humanoid_som_coyn_shock_elite	AGGRESSIVE	E	70	85	-	-	2	LOITER	4	0	-	idle	0	0	0	600
-spawn_mus_163	MUSTAFAR	mus_world	AREA	0	-5427.1	123.5	6155.5	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_164	MUSTAFAR	mus_world	AREA	0	-5585.3	112.4	6169.6	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_165	MUSTAFAR	mus_world	AREA	0	-5635.1	112.6	6128.0	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_166	MUSTAFAR	mus_world	AREA	0	-5370.6	119.9	6228.7	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_167	MUSTAFAR	mus_world	AREA	0	-5483.6	113.5	6239.1	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_168	MUSTAFAR	mus_world	AREA	0	-5514.5	128.3	6026.1	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_169	MUSTAFAR	mus_world	AREA	0	-4416.7	82.0	3187.3	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_170	MUSTAFAR	mus_world	AREA	0	-5328.8	114.1	6139.6	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_171	MUSTAFAR	mus_world	AREA	0	-5320.5	114.7	6139.8	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_172	MUSTAFAR	mus_world	AREA	0	-5344.1	130.0	6073.4	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_173	MUSTAFAR	mus_world	AREA	0	-5982.5	81.5	-49.2	0	1	a salvage bandit chief	humanoid_som_crystal_flats_salvage_bandit_chief	AGGRESSIVE	B	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_174	MUSTAFAR	mus_world	AREA	0	-6021.7	83.9	-15.8	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_175	MUSTAFAR	mus_world	AREA	0	-6028.6	83.4	-17.1	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_176	MUSTAFAR	mus_world	AREA	0	-6008.0	82.1	-49.6	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle	0	0	0	600
-spawn_mus_177	MUSTAFAR	mus_world	AREA	0	-5999.3	81.5	-45.8	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_178	MUSTAFAR	mus_world	AREA	0	-6012.3	89.5	-78.4	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_179	MUSTAFAR	mus_world	AREA	0	-6005.3	89.5	-76.1	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_180	MUSTAFAR	mus_world	AREA	0	-4329.3	89.2	3158.0	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_181	MUSTAFAR	mus_world	AREA	0	-6007.5	89.5	-67.9	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_182	MUSTAFAR	mus_world	AREA	0	-6015.9	89.5	-71.4	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_183	MUSTAFAR	mus_world	AREA	0	-6010.6	89.5	-73.0	0	1	Boss Uruli	humanoid_som_crystal_flats_salvage_bandit_king	AGGRESSIVE	B	75	82	-	-	1	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_184	MUSTAFAR	mus_world	AREA	0	-6005.3	81.1	44.4	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_185	MUSTAFAR	mus_world	AREA	0	-6015.8	83.2	59.7	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_186	MUSTAFAR	mus_world	AREA	0	-6028.4	87.5	70.0	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle	0	0	0	600
-spawn_mus_187	MUSTAFAR	mus_world	AREA	0	-6066.6	81.5	38.7	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_188	MUSTAFAR	mus_world	AREA	0	-6048.7	80.0	-1.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_189	MUSTAFAR	mus_world	AREA	0	-6036.1	79.6	8.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_190	MUSTAFAR	mus_world	AREA	0	-6042.7	80.8	27.5	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_191	MUSTAFAR	mus_world	AREA	0	-4334.6	85.1	3184.5	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_192	MUSTAFAR	mus_world	AREA	0	-6058.8	81.5	18.2	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_193	MUSTAFAR	mus_world	PATROL	0	-6018.3	82.1	-3.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_194	MUSTAFAR	mus_world	PATROL	0	-440.7	58.1	2044.4	0	1	a CWW8a battle droid	droid_som_cww8a	INVULNERABLE	N	100	100	-	-	1	PATROL	0	0	column	idle	0	0	0	600
-spawn_mus_195	MUSTAFAR	mus_world	AREA	0	-4635.3	41.5	3297.1	0	1	Doctor Lu	humanoid_som_doctor_lu	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_196	MUSTAFAR	mus_world	AREA	0	-456.8	60.7	3092.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad	0	0	0	600
-spawn_mus_197	MUSTAFAR	mus_world	AREA	0	-414.3	58.1	3106.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_198	MUSTAFAR	mus_world	AREA	0	-431.8	58.5	3102.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_199	MUSTAFAR	mus_world	AREA	0	-439.1	59.3	3089.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_200	MUSTAFAR	mus_world	AREA	0	-4292.7	78.0	3213.0	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_201	MUSTAFAR	mus_world	AREA	0	-454.4	59.1	3068.4	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad	0	0	0	600
-spawn_mus_202	MUSTAFAR	mus_world	AREA	0	-405.4	58.5	3054.7	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_203	MUSTAFAR	mus_world	AREA	0	-435.5	58.1	3062.9	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_204	MUSTAFAR	mus_world	AREA	0	-408.5	58.1	3083.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_205	MUSTAFAR	mus_world	AREA	0	-425.2	58.1	3075.5	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad	0	0	0	600
-spawn_mus_206	MUSTAFAR	mus_world	AREA	0	-428.2	58.1	3072.3	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_207	MUSTAFAR	mus_world	AREA	0	-429.4	58.3	3055.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_208	MUSTAFAR	mus_world	AREA	0	-412.7	58.1	3074.1	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad	0	0	0	600
-spawn_mus_209	MUSTAFAR	mus_world	AREA	0	-4438.0	72.4	684.0	0	1	a Smoldering Lava Flea	creature_flea_lava_smoldering	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_210	MUSTAFAR	mus_world	AREA	0	-5397.4	294.0	4447.1	0	1	Foreman Nurfa Laz'op	humanoid_som_foreman_nurfa	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle	0	0	0	600
-spawn_mus_211	MUSTAFAR	mus_world	AREA	0	-4312.9	77.9	3214.6	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_212	MUSTAFAR	mus_world	AREA	0	-2776.5	40.8	4276.1	0	1	Ancient Jundak	creature_jundak_ancient	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_213	MUSTAFAR	mus_world	AREA	0	-1088.0	58.5	5286.0	0	1	Ancient Jundak	creature_jundak_ancient	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle	0	0	0	600
-spawn_mus_214	MUSTAFAR	mus_world	AREA	0	315.1	206.7	4037.7	0	1	Scavenger	humanoid_som_kenobi_enclave_scavenger	AGGRESSIVE	N	70	85	-	-	3	LOITER	12	0	-	idle	0	0	0	600
-spawn_mus_215	MUSTAFAR	mus_world	AREA	0	332.2	129.9	4241.9	0	1	Scavenger	humanoid_som_kenobi_enclave_scavenger	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle	0	0	0	600
-spawn_mus_216	MUSTAFAR	mus_world	AREA	0	165.1	161.2	4578.1	0	1	Skar	humanoid_som_kenobi_historian_dark_jedi	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle	0	0	0	900
-spawn_mus_217	MUSTAFAR	mus_mensix	AREA	11	-104.00	10.80	126.60	-121	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_218	MUSTAFAR	mus_mensix	AREA	13	-59.70	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_219	MUSTAFAR	mus_mensix	AREA	14	-107.80	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_220	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	humanoid_som_foreman_chivos	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_221	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_222	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_223	MUSTAFAR	mus_mensix	AREA	16	-166.60	10.80	39.90	91	1	A Computer Technician	humanoid_som_kenobi_computer_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_224	MUSTAFAR	mus_mensix	AREA	18	-94.50	14.90	2.80	-90	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_225	MUSTAFAR	mus_mensix	AREA	20	-16.40	19.10	-20.40	-75	1	Epo Qetora	humanoid_som_kenobi_epo_qetora	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_226	MUSTAFAR	mus_mensix	AREA	20	-28.80	19.10	-22.00	29	1	Q4P3	droid_som_kenobi_pann_q4p3_protocol	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_227	MUSTAFAR	mus_mensix	AREA	20	-23.70	19.10	-6.10	79	1	Ithes Olok	humanoid_som_cube_ithes_olok	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_228	MUSTAFAR	mus_mensix	AREA	22	-152.40	19.10	-13.30	-116	1	Mining Corporation Executive	humanoid_som_kenobi_mining_exec	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_229	MUSTAFAR	mus_mensix	AREA	22	-152.70	19.10	-17.40	-68	1	Urup Fal'co	humanoid_som_urup_falco	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_230	MUSTAFAR	mus_mensix	AREA	22	-158.10	22.60	-15.20	90	1	Milo Mensix	humanoid_som_foreman_milo	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_231	MUSTAFAR	mus_mensix	AREA	24	-155.20	19.10	-67.20	179	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_232	MUSTAFAR	mus_mensix	AREA	24	-145.60	18.60	-58.10	-80	1	Surveyor Jo Keslev	humanoid_som_surveyor_keslev	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_233	MUSTAFAR	mus_mensix	AREA	24	-150.00	18.60	-61.00	0	1	Chief Armstrong	humanoid_som_chief_armstrong	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_234	MUSTAFAR	mus_mensix	AREA	25	-126.00	19.10	-41.80	-161	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_235	MUSTAFAR	mus_mensix	AREA	25	-124.30	19.10	-44.00	-95	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_236	MUSTAFAR	mus_mensix	AREA	25	-126.90	19.10	-44.60	50	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_237	MUSTAFAR	mus_mensix	AREA	26	-90.00	22.70	-47.90	49	1	Mensix Corp. Merchant	humanoid_som_mustafarian_junk	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_238	MUSTAFAR	mus_mensix	AREA	26	-81.50	23.20	-34.70	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_239	MUSTAFAR	mus_mensix	AREA	29	-56.50	31.50	-119.10	135	1	an unhappy tourist	humanoid_som_traveler_f	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_240	MUSTAFAR	mus_mensix	AREA	29	-55.10	31.50	-120.30	-53	1	an unhappy tourist	humanoid_som_traveler_m	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_241	MUSTAFAR	mus_mensix	AREA	29	-41.90	31.50	-106.90	-145	1	a pilot	humanoid_som_volcano_pilot	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_242	MUSTAFAR	mus_mensix	AREA	5	-9.50	10.80	52.60	90	1	Chief Glost	humanoid_som_chief_glost	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_243	MUSTAFAR	mus_mensix	AREA	5	-13.50	10.80	35.00	180	1	Foreman Donko Jen	humanoid_som_foreman_donko	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_244	MUSTAFAR	mus_mensix	AREA	7	-9.70	10.80	90.80	86	1	Pwwoz Pwwa	humanoid_som_kenobi_pwwoz_pwwa	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_245	MUSTAFAR	mus_mensix	AREA	9	-73.60	10.80	53.80	-90	1	Menth Paul	humanoid_som_kenobi_menth_paul	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_246	MUSTAFAR	mus_mensix	AREA	9	-94.30	10.80	53.10	90	1	Ikt	humanoid_som_kenobi_serpent_ikt	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_247	MUSTAFAR	mus_mensix	AREA	9	-80.60	10.80	41.90	-163	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_standing_drinking	0	0	0	600
-spawn_mus_248	MUSTAFAR	mus_mensix	AREA	9	-86.70	10.80	41.80	152	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_standing_drinking	1	0	0	600
-spawn_mus_249	MUSTAFAR	mus_mensix	AREA	9	-94.30	10.80	55.00	179	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_250	MUSTAFAR	mus_mensix	AREA	9	-77.20	10.80	67.40	117	1	Pei Yi	humanoid_som_pei_yi	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_251	MUSTAFAR	mus_mensix	AREA	9	-85.60	10.80	39.60	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_252	MUSTAFAR	mus_mensix	AREA	9	-75.50	10.80	66.30	-85	1	Diskret Stahn	humanoid_som_diskret_stahn	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_253	MUSTAFAR	mus_mensix	AREA	9	-75.70	10.80	40.40	-95	1	Uggo	humanoid_som_kenobi_cursed_shard_sucker	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_254	MUSTAFAR	mus_mensix	AREA	10	-71.8	10.8	122.0	88	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_255	MUSTAFAR	mus_mensix	AREA	10	-79.7	10.3	117.7	-41	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_256	MUSTAFAR	mus_mensix	AREA	10	-81.6	10.3	119.9	143	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_257	MUSTAFAR	mus_mensix	AREA	8	-86.2	10.8	87.2	-146	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_258	MUSTAFAR	mus_mensix	AREA	9	-71.3	10.8	67.5	169	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_mus_259	MUSTAFAR	mus_mensix	AREA	9	-69.8	10.8	65.3	-71	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_mus_260	MUSTAFAR	mus_mensix	AREA	9	-72.0	10.8	64.0	17	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_261	MUSTAFAR	mus_mensix	AREA	9	-89.6	10.8	39.3	-178	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_262	MUSTAFAR	mus_mensix	AREA	9	-97.4	10.8	58.2	-1	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_mus_263	MUSTAFAR	mus_mensix	AREA	9	-97.3	10.8	60.7	-173	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair	0	0	0	600
-spawn_mus_264	MUSTAFAR	mus_mensix	PATROL	14	-88.3	10.8	32.4	92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_900	column	idle	0	0	0	600
-spawn_mus_265	MUSTAFAR	mus_mensix	PATROL	20	-28.0	18.6	-15.2	91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1000	column	idle	0	0	0	600
-spawn_mus_266	MUSTAFAR	mus_world	PATROL	0	-2480.4	230.1	1635.5	-2	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1100	column	idle	0	0	0	600
-spawn_mus_267	MUSTAFAR	mus_mensix	PATROL	29	-39.9	31.5	-117.8	99	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1200	column	idle	0	0	0	600
-spawn_mus_268	MUSTAFAR	mus_world	PATROL	0	-3169.7	145.1	1372.2	-100	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1300	column	idle	0	0	0	600
-spawn_mus_269	MUSTAFAR	mus_world	AREA	0	-3123.0	145.3	1332.6	-9	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	2	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_270	MUSTAFAR	mus_world	AREA	0	-3010.7	140.4	1340.1	7	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle	0	0	0	600
-spawn_mus_271	MUSTAFAR	mus_world	AREA	0	-2891.7	150.9	1388.0	132	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_272	MUSTAFAR	mus_world	AREA	0	-2526.2	225.0	1643.1	163	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_273	MUSTAFAR	mus_world	AREA	0	-2528.0	225.0	1642.7	165	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_274	MUSTAFAR	mus_mensix	AREA	29	-56.3	31.5	-107.1	-90	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_275	MUSTAFAR	mus_world	AREA	0	-2488.0	230.0	1636.2	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
-spawn_mus_276	MUSTAFAR	mus_world	AREA	0	-2463.2	230.1	1618.9	-60	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_277	MUSTAFAR	mus_world	AREA	0	-2465.5	230.1	1620.3	122	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation	0	0	0	600
-spawn_mus_278	MUSTAFAR	mus_mensix	AREA	26	-72.0	23.2	-47.9	109	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle	0	0	0	600
-spawn_mus_279	MUSTAFAR	mus_mensix	AREA	26	-75.4	23.2	-35.6	92	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high	0	0	0	600
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	loot_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER	INTEGER NOT NULL
+spawn_mus_001	MUSTAFAR	mus_world	AREA	0	-4398.4	85.5	3161.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle				600
+spawn_mus_002	MUSTAFAR	mus_world	AREA	0	-4343.2	81.0	3397.2	0	1	Xos	humanoid_som_kenobi_reunite_dark_jedi	AGGRESSIVE	B	80	90	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_003	MUSTAFAR	mus_world	AREA	0	-5265.9	316.0	4485.0	0	1	Mining Strike Leader	humanoid_som_kenobi_striking_mining_leader	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_004	MUSTAFAR	mus_world	AREA	0	-2544.7	115.7	469.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_01	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01				600
+spawn_mus_005	MUSTAFAR	mus_world	AREA	0	-2543.8	116.4	458.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_01	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01				600
+spawn_mus_006	MUSTAFAR	mus_world	AREA	0	-4447.4	85.4	3182.2	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	3	LOITER	8	0	-	idle				600
+spawn_mus_007	MUSTAFAR	mus_world	AREA	0	-2554.6	116.1	463.2	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02				600
+spawn_mus_008	MUSTAFAR	mus_world	AREA	0	-2564.2	116.3	469.3	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02				600
+spawn_mus_009	MUSTAFAR	mus_world	AREA	0	-2534.2	146.3	409.8	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03				600
+spawn_mus_010	MUSTAFAR	mus_world	AREA	0	-2537.1	116.0	467.5	0	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_03	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03				600
+spawn_mus_011	MUSTAFAR	mus_world	AREA	0	-4445.8	83.3	3375.4	0	1	Lislot Bloodscar	humanoid_som_lislot_bloodscar	AGGRESSIVE	B	75	82	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_012	MUSTAFAR	mus_world	AREA	0	-3080.7	20.0	5353.8	0	1	Malfosa	creature_sherkar_malfosa	AGGRESSIVE	B	80	82	-	-	1	LOITER	50	0	-	idle				900
+spawn_mus_013	MUSTAFAR	mus_world	AREA	0	-5403.3	296.0	4428.9	0	1	Miner Renlo Hens	humanoid_som_miner_hens	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_014	MUSTAFAR	mus_world	AREA	0	-3406.5	99.8	1610.0	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_015	MUSTAFAR	mus_world	AREA	0	-3961.5	99.8	995.6	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_016	MUSTAFAR	mus_world	AREA	0	-3820.7	99.8	1199.3	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_017	MUSTAFAR	mus_world	AREA	0	-4351.0	89.2	3162.1	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_018	MUSTAFAR	mus_world	AREA	0	-3496.9	99.8	1441.7	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle				600
+spawn_mus_019	MUSTAFAR	mus_world	AREA	0	-4106.8	99.8	1170.0	0	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_020	MUSTAFAR	mus_world	AREA	0	-3882.9	103.6	-252.4	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_021	MUSTAFAR	mus_world	AREA	0	-3934.4	140.4	1345.2	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_022	MUSTAFAR	mus_world	AREA	0	-4041.0	144.9	1322.7	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle				600
+spawn_mus_023	MUSTAFAR	mus_world	AREA	0	-4138.5	145.2	1327.7	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_024	MUSTAFAR	mus_world	AREA	0	485.2	128.7	5771.3	0	1	a Phantoms bandit	humanoid_som_mustafarian_phantom_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_025	MUSTAFAR	mus_world	AREA	0	-4383.5	93.2	3211.7	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_026	MUSTAFAR	mus_world	AREA	0	-2745.5	225.8	3521.4	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_027	MUSTAFAR	mus_world	AREA	0	-2706.2	156.6	3344.7	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	7	LOITER	15	0	-	idle				600
+spawn_mus_028	MUSTAFAR	mus_world	AREA	0	-2673.0	133.9	3205.4	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_029	MUSTAFAR	mus_world	AREA	0	-4367.8	92.6	3213.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_030	MUSTAFAR	mus_world	AREA	0	-2738.8	131.7	3108.5	0	1	a salvage bandit	humanoid_som_mustafarian_salvage_bandit	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_031	MUSTAFAR	mus_world	AREA	0	-2727.3	198.6	3484.9	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_032	MUSTAFAR	mus_world	AREA	0	-2709.9	158.2	3350.5	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_033	MUSTAFAR	mus_world	AREA	0	-2732.9	131.3	3111.7	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_034	MUSTAFAR	mus_world	AREA	0	-2689.0	118.5	3082.9	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_035	MUSTAFAR	mus_world	AREA	0	-2684.3	118.4	3087.6	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_036	MUSTAFAR	mus_world	AREA	0	-2684.3	118.3	3079.7	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_037	MUSTAFAR	mus_world	AREA	0	-2692.5	118.6	3079.6	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_038	MUSTAFAR	mus_world	AREA	0	-2691.5	119.5	3087.5	0	1	Salvage Bandit Chief	humanoid_som_mustafarian_salvage_bandit_leader	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_039	MUSTAFAR	mus_world	AREA	0	-4308.7	85.2	3172.5	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	3	LOITER	8	0	-	idle				600
+spawn_mus_040	MUSTAFAR	mus_world	AREA	0	-449.4	157.8	-154.7	0	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_041	MUSTAFAR	mus_world	AREA	0	-5792.4	106.7	5809.3	0	1	Pletus Croix	humanoid_som_naboo_historian	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_042	MUSTAFAR	mus_world	AREA	0	441.4	132.4	5115.3	0	1	Jural	humanoid_som_reporter_jural	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_043	MUSTAFAR	mus_world	AREA	0	438.5	132.8	5116.6	0	1	Talper	humanoid_som_reporter_talper	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01				600
+spawn_mus_044	MUSTAFAR	mus_world	AREA	0	-2654.0	38.1	6088.5	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	4	LOITER	10	0	-	idle				600
+spawn_mus_045	MUSTAFAR	mus_world	AREA	0	-2701.4	20.0	5912.8	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_046	MUSTAFAR	mus_world	AREA	0	-2700.5	31.3	6020.1	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_047	MUSTAFAR	mus_world	AREA	0	-2547.2	32.3	5839.7	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle				600
+spawn_mus_048	MUSTAFAR	mus_world	PATROL	0	-2618.9	40.2	6064.6	0	1	The Shambler	humanoid_som_ruins_leader	AGGRESSIVE	E	70	85	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_049	MUSTAFAR	mus_world	AREA	0	-4425.2	85.4	3156.3	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_050	MUSTAFAR	mus_world	AREA	0	-2700.6	20.0	5901.1	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_051	MUSTAFAR	mus_world	AREA	0	-2696.3	31.7	6026.5	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle				600
+spawn_mus_052	MUSTAFAR	mus_world	AREA	0	-2634.2	20.0	5888.8	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle				600
+spawn_mus_053	MUSTAFAR	mus_world	AREA	0	-4380.0	94.3	3233.4	0	1	San'sii the Kursk	humanoid_som_sansii_kursk	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_054	MUSTAFAR	mus_world	AREA	0	194.4	266.7	4096.3	0	1	The Storm Lord	humanoid_som_storm_lord	AGGRESSIVE	B	85	90	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_055	MUSTAFAR	mus_world	AREA	0	311.2	171.5	3744.3	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_056	MUSTAFAR	mus_world	AREA	0	318.4	171.5	3747.0	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_057	MUSTAFAR	mus_world	AREA	0	209.3	263.7	4082.8	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_058	MUSTAFAR	mus_world	AREA	0	202.7	264.0	4080.9	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_059	MUSTAFAR	mus_world	AREA	0	180.2	264.5	4091.6	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_060	MUSTAFAR	mus_world	AREA	0	-4417.7	84.7	3165.4	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_061	MUSTAFAR	mus_world	AREA	0	183.0	264.5	4112.9	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_062	MUSTAFAR	mus_world	AREA	0	192.2	264.5	4116.8	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_063	MUSTAFAR	mus_world	AREA	0	191.7	206.7	4233.7	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_064	MUSTAFAR	mus_world	AREA	0	195.8	206.7	4235.8	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_065	MUSTAFAR	mus_world	AREA	0	307.5	161.3	3767.6	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle				600
+spawn_mus_066	MUSTAFAR	mus_world	AREA	0	276.2	135.0	3877.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	7	LOITER	15	0	-	idle				600
+spawn_mus_067	MUSTAFAR	mus_world	AREA	0	157.8	161.4	4569.5	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle				600
+spawn_mus_068	MUSTAFAR	mus_world	AREA	0	287.7	129.9	4316.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	8	LOITER	15	0	-	idle				600
+spawn_mus_069	MUSTAFAR	mus_world	AREA	0	389.1	200.5	4347.0	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_070	MUSTAFAR	mus_world	AREA	0	396.0	201.9	4352.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_071	MUSTAFAR	mus_world	AREA	0	-4408.6	84.6	3167.8	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_072	MUSTAFAR	mus_world	AREA	0	415.7	168.2	4091.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_073	MUSTAFAR	mus_world	AREA	0	283.3	207.1	4037.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_074	MUSTAFAR	mus_world	AREA	0	288.5	207.1	4025.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_075	MUSTAFAR	mus_world	AREA	0	312.2	207.9	4014.0	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle				600
+spawn_mus_076	MUSTAFAR	mus_world	AREA	0	331.6	206.7	4037.3	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_077	MUSTAFAR	mus_world	AREA	0	230.9	240.8	4130.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	2	LOITER	6	0	-	idle				600
+spawn_mus_078	MUSTAFAR	mus_world	AREA	0	209.3	245.9	4145.1	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_079	MUSTAFAR	mus_world	AREA	0	176.1	252.9	4138.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	9	0	-	idle				600
+spawn_mus_080	MUSTAFAR	mus_world	AREA	0	316.1	171.5	3742.0	0	1	Prophet of the Storm Lord	humanoid_som_storm_lord_prophet	AGGRESSIVE	N	75	85	-	-	1	LOITER	3	0	-	idle				600
+spawn_mus_081	MUSTAFAR	mus_world	AREA	0	166.3	207.6	4225.8	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle				600
+spawn_mus_082	MUSTAFAR	mus_world	AREA	0	-4381.6	94.3	3237.4	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_083	MUSTAFAR	mus_world	AREA	0	192.0	206.7	4237.9	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_084	MUSTAFAR	mus_world	PATROL	0	284.8	206.0	4061.3	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	3	PATROL	0	0	column	idle				600
+spawn_mus_085	MUSTAFAR	mus_world	AREA	0	379.4	217.3	4368.3	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_086	MUSTAFAR	mus_world	AREA	0	325.1	206.7	4024.8	0	1	a storm lord zealot	humanoid_som_storm_lord_touched	AGGRESSIVE	N	75	85	-	-	2	LOITER	4	0	-	idle				600
+spawn_mus_087	MUSTAFAR	mus_world	PATROL	0	-5412.6	296.0	4461.5	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	2	PATROL	0	0	column	idle				600
+spawn_mus_088	MUSTAFAR	mus_world	AREA	0	-5020.6	199.5	4491.9	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	4	0	-	idle				600
+spawn_mus_089	MUSTAFAR	mus_world	AREA	0	-5358.0	294.8	4448.8	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	2	LOITER	3	0	-	idle				600
+spawn_mus_090	MUSTAFAR	mus_world	AREA	0	-5384.5	295.7	4426.1	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_091	MUSTAFAR	mus_world	AREA	0	-5384.8	294.0	4441.6	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_092	MUSTAFAR	mus_world	AREA	0	-5293.0	316.0	4481.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_093	MUSTAFAR	mus_world	AREA	0	-5558.0	131.0	2169.0	0	1	an enthralled kubaza beetle	creature_beetle_kubaza_enthralled	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_094	MUSTAFAR	mus_world	AREA	0	-4374.1	94.3	3234.3	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_095	MUSTAFAR	mus_world	AREA	0	-5273.7	316.0	4488.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_096	MUSTAFAR	mus_world	AREA	0	-5269.0	316.0	4482.4	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_097	MUSTAFAR	mus_world	AREA	0	-5269.2	316.0	4485.6	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_098	MUSTAFAR	mus_world	AREA	0	-5269.2	316.0	4489.5	0	1	a Miner on strike	humanoid_som_striking_camp_miner	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_099	MUSTAFAR	mus_world	AREA	0	-5017.9	200.2	4484.8	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_100	MUSTAFAR	mus_world	AREA	0	-5364.9	294.0	4449.3	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_101	MUSTAFAR	mus_world	PATROL	0	-5278.8	316.0	4492.3	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_102	MUSTAFAR	mus_world	AREA	0	-5274.0	316.0	4483.5	0	1	a Miner crew chief on strike	humanoid_som_striking_camp_miner_chief	ATTACKABLE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_103	MUSTAFAR	mus_world	AREA	0	-4266.3	81.0	3325.3	0	1	a treasure hunter bodyguard	humanoid_som_treasure_hunter_bodyguard	AGGRESSIVE	E	75	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_104	MUSTAFAR	mus_world	AREA	0	-4484.5	83.0	3311.3	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_105	MUSTAFAR	mus_world	AREA	0	-3494.0	70.8	2102.0	0	1	a Blistmok Shrieker	creature_blistmok_shrieker	AGGRESSIVE	E	75	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_106	MUSTAFAR	mus_world	AREA	0	-4472.6	83.0	3306.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_107	MUSTAFAR	mus_world	AREA	0	-4229.7	83.3	3348.5	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	2	LOITER	8	0	-	idle				600
+spawn_mus_108	MUSTAFAR	mus_world	AREA	0	-4438.9	83.0	3378.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_109	MUSTAFAR	mus_world	AREA	0	-4352.1	81.0	3311.0	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_110	MUSTAFAR	mus_world	AREA	0	-4270.6	80.9	3251.5	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_111	MUSTAFAR	mus_world	AREA	0	-4288.1	81.0	3263.1	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_112	MUSTAFAR	mus_world	AREA	0	-4248.1	83.3	3360.3	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_113	MUSTAFAR	mus_world	AREA	0	155.3	128.7	4455.0	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	6	LOITER	15	0	-	idle				600
+spawn_mus_114	MUSTAFAR	mus_world	AREA	0	-4256.8	83.0	3312.4	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_115	MUSTAFAR	mus_world	AREA	0	-4282.0	83.0	3338.0	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_116	MUSTAFAR	mus_world	AREA	0	-4219.1	83.3	3314.9	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_117	MUSTAFAR	mus_world	AREA	0	-4449.0	82.9	3368.5	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_118	MUSTAFAR	mus_world	AREA	0	-4432.2	83.0	3376.5	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_119	MUSTAFAR	mus_world	PATROL	0	-4323.1	81.0	3257.9	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	2	PATROL	0	0	column	idle				600
+spawn_mus_120	MUSTAFAR	mus_world	AREA	0	-4410.5	85.2	3159.8	0	1	Vansk of the Blackguard	humanoid_som_vansk_blackguard	AGGRESSIVE	B	78	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_121	MUSTAFAR	mus_world	PATROL	0	-5236.1	249.3	4452.4	0	1	Voakar Duset	humanoid_som_voakar_duset	AGGRESSIVE	B	80	85	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_122	MUSTAFAR	mus_world	AREA	0	-702.0	58.1	3777.0	0	1	a lava runner tanray	creature_tanray_lava_runner	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_123	MUSTAFAR	mus_world	AREA	0	-1775.1	133.9	3959.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle				600
+spawn_mus_124	MUSTAFAR	mus_world	AREA	0	284.6	128.7	4671.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	15	0	-	idle				600
+spawn_mus_125	MUSTAFAR	mus_world	AREA	0	-1799.4	107.8	3924.7	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle				600
+spawn_mus_126	MUSTAFAR	mus_world	PATROL	0	-2635.0	81.4	2832.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_127	MUSTAFAR	mus_world	AREA	0	-1888.7	140.2	3694.8	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle				600
+spawn_mus_128	MUSTAFAR	mus_world	AREA	0	-1671.0	131.4	3491.5	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle				600
+spawn_mus_129	MUSTAFAR	mus_world	AREA	0	-1643.7	109.7	3293.1	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle				600
+spawn_mus_130	MUSTAFAR	mus_world	AREA	0	-3039.7	87.5	4047.5	0	1	Magma Horn	creature_tulrus_magma_horn	AGGRESSIVE	B	80	85	-	-	1	LOITER	9	0	-	idle				600
+spawn_mus_131	MUSTAFAR	mus_world	AREA	0	-1758.1	84.5	3169.7	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_132	MUSTAFAR	mus_world	AREA	0	-1585.5	116.0	2931.5	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_133	MUSTAFAR	mus_world	PATROL	0	296.4	206.0	4064.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	3	PATROL	0	0	column	idle				600
+spawn_mus_134	MUSTAFAR	mus_world	AREA	0	-1925.5	115.8	2886.8	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_135	MUSTAFAR	mus_world	AREA	0	-2567.1	97.2	2698.7	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_136	MUSTAFAR	mus_world	AREA	0	-2891.3	110.2	2646.6	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_137	MUSTAFAR	mus_world	AREA	0	-2548.7	110.3	2781.1	0	1	a tulrus matriarch	creature_tulrus_nesting_grounds_matriarch	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_138	MUSTAFAR	mus_world	AREA	0	-1209.2	58.1	4834.1	0	1	Cobak	creature_xandank_cobak	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_139	MUSTAFAR	mus_world	AREA	0	-5094.0	44.5	5438.0	0	1	a large xandank	creature_xandank_large	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_140	MUSTAFAR	mus_world	AREA	0	-4582.9	48.1	5111.7	0	1	The Xandank Packleader	creature_xandank_pack_leader	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_141	MUSTAFAR	mus_world	AREA	0	-4586.0	48.1	5104.8	0	1	a xandank pack mate	creature_xandank_pack_mate	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_142	MUSTAFAR	mus_world	AREA	0	-1219.4	58.1	4845.4	0	1	a xandank stalker	creature_xandank_smoking_forest_stalker	AGGRESSIVE	N	75	85	-	-	5	LOITER	10	0	-	idle				600
+spawn_mus_143	MUSTAFAR	mus_world	AREA	0	-3781.6	67.9	2646.6	0	1	Ura Jen	creature_blistmok_urajen	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_144	MUSTAFAR	mus_world	AREA	0	-4220.4	83.3	3335.2	0	1	Colonel Narl	humanoid_som_col_narl	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_145	MUSTAFAR	mus_world	AREA	0	-5432.8	130.6	6016.8	0	1	Captain Relgon Starkill	humanoid_som_coyn_captain	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_146	MUSTAFAR	mus_world	AREA	0	-5301.1	266.9	5991.5	0	1	Commander Hal Razor	humanoid_som_coyn_commander	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_147	MUSTAFAR	mus_world	AREA	0	-4443.5	85.4	3169.5	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle				600
+spawn_mus_148	MUSTAFAR	mus_world	AREA	0	-5335.0	114.5	6150.7	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_149	MUSTAFAR	mus_world	AREA	0	-5427.1	114.5	6090.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_150	MUSTAFAR	mus_world	PATROL	0	-5459.1	114.5	6094.9	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	2	PATROL	0	0	column	idle				600
+spawn_mus_151	MUSTAFAR	mus_world	AREA	0	-5449.7	114.5	6071.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_152	MUSTAFAR	mus_world	AREA	0	-5423.8	114.5	6062.6	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_153	MUSTAFAR	mus_world	AREA	0	-5401.8	114.9	6074.3	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_154	MUSTAFAR	mus_world	PATROL	0	-5296.1	264.5	6011.6	0	1	a Razor Runner commando	humanoid_som_coyn_commando	AGGRESSIVE	N	70	85	-	-	3	PATROL	0	0	column	idle				600
+spawn_mus_155	MUSTAFAR	mus_world	AREA	0	-5292.4	138.7	6075.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_156	MUSTAFAR	mus_world	AREA	0	-5441.1	130.3	6003.0	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_157	MUSTAFAR	mus_world	AREA	0	-5299.2	265.1	6014.8	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_158	MUSTAFAR	mus_world	AREA	0	-4447.0	85.4	3206.1	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	2	LOITER	5	0	-	idle				600
+spawn_mus_159	MUSTAFAR	mus_world	AREA	0	-5299.1	265.8	6006.1	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_160	MUSTAFAR	mus_world	AREA	0	-5297.4	266.9	5990.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_161	MUSTAFAR	mus_world	AREA	0	-5305.4	266.9	5990.7	0	1	a Razor Runner shock trooper	humanoid_som_coyn_shock	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_162	MUSTAFAR	mus_world	AREA	0	-5419.6	130.1	6015.1	0	1	a Razor Runner elite trooper	humanoid_som_coyn_shock_elite	AGGRESSIVE	E	70	85	-	-	2	LOITER	4	0	-	idle				600
+spawn_mus_163	MUSTAFAR	mus_world	AREA	0	-5427.1	123.5	6155.5	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_164	MUSTAFAR	mus_world	AREA	0	-5585.3	112.4	6169.6	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_165	MUSTAFAR	mus_world	AREA	0	-5635.1	112.6	6128.0	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_166	MUSTAFAR	mus_world	AREA	0	-5370.6	119.9	6228.7	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_167	MUSTAFAR	mus_world	AREA	0	-5483.6	113.5	6239.1	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	10	0	-	idle				600
+spawn_mus_168	MUSTAFAR	mus_world	AREA	0	-5514.5	128.3	6026.1	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_169	MUSTAFAR	mus_world	AREA	0	-4416.7	82.0	3187.3	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_170	MUSTAFAR	mus_world	AREA	0	-5328.8	114.1	6139.6	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_171	MUSTAFAR	mus_world	AREA	0	-5320.5	114.7	6139.8	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_172	MUSTAFAR	mus_world	AREA	0	-5344.1	130.0	6073.4	0	1	a Razor Runner trooper	humanoid_som_coyn_trooper	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle				600
+spawn_mus_173	MUSTAFAR	mus_world	AREA	0	-5982.5	81.5	-49.2	0	1	a salvage bandit chief	humanoid_som_crystal_flats_salvage_bandit_chief	AGGRESSIVE	B	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_174	MUSTAFAR	mus_world	AREA	0	-6021.7	83.9	-15.8	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_175	MUSTAFAR	mus_world	AREA	0	-6028.6	83.4	-17.1	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_176	MUSTAFAR	mus_world	AREA	0	-6008.0	82.1	-49.6	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	2	LOITER	10	0	-	idle				600
+spawn_mus_177	MUSTAFAR	mus_world	AREA	0	-5999.3	81.5	-45.8	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_178	MUSTAFAR	mus_world	AREA	0	-6012.3	89.5	-78.4	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_179	MUSTAFAR	mus_world	AREA	0	-6005.3	89.5	-76.1	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_180	MUSTAFAR	mus_world	AREA	0	-4329.3	89.2	3158.0	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_181	MUSTAFAR	mus_world	AREA	0	-6007.5	89.5	-67.9	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_182	MUSTAFAR	mus_world	AREA	0	-6015.9	89.5	-71.4	0	1	a salvage bandit enforcer	humanoid_som_crystal_flats_salvage_bandit_enforcer	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_183	MUSTAFAR	mus_world	AREA	0	-6010.6	89.5	-73.0	0	1	Boss Uruli	humanoid_som_crystal_flats_salvage_bandit_king	AGGRESSIVE	B	75	82	-	-	1	LOITER	6	0	-	idle				600
+spawn_mus_184	MUSTAFAR	mus_world	AREA	0	-6005.3	81.1	44.4	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_185	MUSTAFAR	mus_world	AREA	0	-6015.8	83.2	59.7	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_186	MUSTAFAR	mus_world	AREA	0	-6028.4	87.5	70.0	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	3	LOITER	6	0	-	idle				600
+spawn_mus_187	MUSTAFAR	mus_world	AREA	0	-6066.6	81.5	38.7	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_188	MUSTAFAR	mus_world	AREA	0	-6048.7	80.0	-1.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_189	MUSTAFAR	mus_world	AREA	0	-6036.1	79.6	8.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_190	MUSTAFAR	mus_world	AREA	0	-6042.7	80.8	27.5	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_191	MUSTAFAR	mus_world	AREA	0	-4334.6	85.1	3184.5	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_192	MUSTAFAR	mus_world	AREA	0	-6058.8	81.5	18.2	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_193	MUSTAFAR	mus_world	PATROL	0	-6018.3	82.1	-3.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_194	MUSTAFAR	mus_world	PATROL	0	-440.7	58.1	2044.4	0	1	a CWW8a battle droid	droid_som_cww8a	INVULNERABLE	N	100	100	-	-	1	PATROL	0	0	column	idle				600
+spawn_mus_195	MUSTAFAR	mus_world	AREA	0	-4635.3	41.5	3297.1	0	1	Doctor Lu	humanoid_som_doctor_lu	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_196	MUSTAFAR	mus_world	AREA	0	-456.8	60.7	3092.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad				600
+spawn_mus_197	MUSTAFAR	mus_world	AREA	0	-414.3	58.1	3106.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_198	MUSTAFAR	mus_world	AREA	0	-431.8	58.5	3102.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_199	MUSTAFAR	mus_world	AREA	0	-439.1	59.3	3089.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_200	MUSTAFAR	mus_world	AREA	0	-4292.7	78.0	3213.0	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_201	MUSTAFAR	mus_world	AREA	0	-454.4	59.1	3068.4	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad				600
+spawn_mus_202	MUSTAFAR	mus_world	AREA	0	-405.4	58.5	3054.7	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_203	MUSTAFAR	mus_world	AREA	0	-435.5	58.1	3062.9	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_204	MUSTAFAR	mus_world	AREA	0	-408.5	58.1	3083.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_205	MUSTAFAR	mus_world	AREA	0	-425.2	58.1	3075.5	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad				600
+spawn_mus_206	MUSTAFAR	mus_world	AREA	0	-428.2	58.1	3072.3	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_207	MUSTAFAR	mus_world	AREA	0	-429.4	58.3	3055.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle				600
+spawn_mus_208	MUSTAFAR	mus_world	AREA	0	-412.7	58.1	3074.1	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad				600
+spawn_mus_209	MUSTAFAR	mus_world	AREA	0	-4438.0	72.4	684.0	0	1	a Smoldering Lava Flea	creature_flea_lava_smoldering	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_210	MUSTAFAR	mus_world	AREA	0	-5397.4	294.0	4447.1	0	1	Foreman Nurfa Laz'op	humanoid_som_foreman_nurfa	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle				600
+spawn_mus_211	MUSTAFAR	mus_world	AREA	0	-4312.9	77.9	3214.6	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle				600
+spawn_mus_212	MUSTAFAR	mus_world	AREA	0	-2776.5	40.8	4276.1	0	1	Ancient Jundak	creature_jundak_ancient	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_213	MUSTAFAR	mus_world	AREA	0	-1088.0	58.5	5286.0	0	1	Ancient Jundak	creature_jundak_ancient	AGGRESSIVE	E	70	85	-	-	1	LOITER	8	0	-	idle				600
+spawn_mus_214	MUSTAFAR	mus_world	AREA	0	315.1	206.7	4037.7	0	1	Scavenger	humanoid_som_kenobi_enclave_scavenger	AGGRESSIVE	N	70	85	-	-	3	LOITER	12	0	-	idle				600
+spawn_mus_215	MUSTAFAR	mus_world	AREA	0	332.2	129.9	4241.9	0	1	Scavenger	humanoid_som_kenobi_enclave_scavenger	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle				600
+spawn_mus_216	MUSTAFAR	mus_world	AREA	0	165.1	161.2	4578.1	0	1	Skar	humanoid_som_kenobi_historian_dark_jedi	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle				900
+spawn_mus_217	MUSTAFAR	mus_mensix	AREA	11	-104.00	10.80	126.60	-121	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_218	MUSTAFAR	mus_mensix	AREA	13	-59.70	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_219	MUSTAFAR	mus_mensix	AREA	14	-107.80	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_220	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	humanoid_som_foreman_chivos	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_221	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_222	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_223	MUSTAFAR	mus_mensix	AREA	16	-166.60	10.80	39.90	91	1	A Computer Technician	humanoid_som_kenobi_computer_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_224	MUSTAFAR	mus_mensix	AREA	18	-94.50	14.90	2.80	-90	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_225	MUSTAFAR	mus_mensix	AREA	20	-16.40	19.10	-20.40	-75	1	Epo Qetora	humanoid_som_kenobi_epo_qetora	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_226	MUSTAFAR	mus_mensix	AREA	20	-28.80	19.10	-22.00	29	1	Q4P3	droid_som_kenobi_pann_q4p3_protocol	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_227	MUSTAFAR	mus_mensix	AREA	20	-23.70	19.10	-6.10	79	1	Ithes Olok	humanoid_som_cube_ithes_olok	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_228	MUSTAFAR	mus_mensix	AREA	22	-152.40	19.10	-13.30	-116	1	Mining Corporation Executive	humanoid_som_kenobi_mining_exec	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_229	MUSTAFAR	mus_mensix	AREA	22	-152.70	19.10	-17.40	-68	1	Urup Fal'co	humanoid_som_urup_falco	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_230	MUSTAFAR	mus_mensix	AREA	22	-158.10	22.60	-15.20	90	1	Milo Mensix	humanoid_som_foreman_milo	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_231	MUSTAFAR	mus_mensix	AREA	24	-155.20	19.10	-67.20	179	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_232	MUSTAFAR	mus_mensix	AREA	24	-145.60	18.60	-58.10	-80	1	Surveyor Jo Keslev	humanoid_som_surveyor_keslev	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_233	MUSTAFAR	mus_mensix	AREA	24	-150.00	18.60	-61.00	0	1	Chief Armstrong	humanoid_som_chief_armstrong	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_234	MUSTAFAR	mus_mensix	AREA	25	-126.00	19.10	-41.80	-161	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_235	MUSTAFAR	mus_mensix	AREA	25	-124.30	19.10	-44.00	-95	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_236	MUSTAFAR	mus_mensix	AREA	25	-126.90	19.10	-44.60	50	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_237	MUSTAFAR	mus_mensix	AREA	26	-90.00	22.70	-47.90	49	1	Mensix Corp. Merchant	humanoid_som_mustafarian_junk	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_238	MUSTAFAR	mus_mensix	AREA	26	-81.50	23.20	-34.70	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_239	MUSTAFAR	mus_mensix	AREA	29	-56.50	31.50	-119.10	135	1	an unhappy tourist	humanoid_som_traveler_f	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_240	MUSTAFAR	mus_mensix	AREA	29	-55.10	31.50	-120.30	-53	1	an unhappy tourist	humanoid_som_traveler_m	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_241	MUSTAFAR	mus_mensix	AREA	29	-41.90	31.50	-106.90	-145	1	a pilot	humanoid_som_volcano_pilot	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_242	MUSTAFAR	mus_mensix	AREA	5	-9.50	10.80	52.60	90	1	Chief Glost	humanoid_som_chief_glost	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_243	MUSTAFAR	mus_mensix	AREA	5	-13.50	10.80	35.00	180	1	Foreman Donko Jen	humanoid_som_foreman_donko	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_244	MUSTAFAR	mus_mensix	AREA	7	-9.70	10.80	90.80	86	1	Pwwoz Pwwa	humanoid_som_kenobi_pwwoz_pwwa	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_245	MUSTAFAR	mus_mensix	AREA	9	-73.60	10.80	53.80	-90	1	Menth Paul	humanoid_som_kenobi_menth_paul	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_246	MUSTAFAR	mus_mensix	AREA	9	-94.30	10.80	53.10	90	1	Ikt	humanoid_som_kenobi_serpent_ikt	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_247	MUSTAFAR	mus_mensix	AREA	9	-80.60	10.80	41.90	-163	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_standing_drinking				600
+spawn_mus_248	MUSTAFAR	mus_mensix	AREA	9	-86.70	10.80	41.80	152	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_standing_drinking	1			600
+spawn_mus_249	MUSTAFAR	mus_mensix	AREA	9	-94.30	10.80	55.00	179	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_250	MUSTAFAR	mus_mensix	AREA	9	-77.20	10.80	67.40	117	1	Pei Yi	humanoid_som_pei_yi	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_251	MUSTAFAR	mus_mensix	AREA	9	-85.60	10.80	39.60	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_252	MUSTAFAR	mus_mensix	AREA	9	-75.50	10.80	66.30	-85	1	Diskret Stahn	humanoid_som_diskret_stahn	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_253	MUSTAFAR	mus_mensix	AREA	9	-75.70	10.80	40.40	-95	1	Uggo	humanoid_som_kenobi_cursed_shard_sucker	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_254	MUSTAFAR	mus_mensix	AREA	10	-71.8	10.8	122.0	88	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_255	MUSTAFAR	mus_mensix	AREA	10	-79.7	10.3	117.7	-41	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_256	MUSTAFAR	mus_mensix	AREA	10	-81.6	10.3	119.9	143	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_257	MUSTAFAR	mus_mensix	AREA	8	-86.2	10.8	87.2	-146	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_258	MUSTAFAR	mus_mensix	AREA	9	-71.3	10.8	67.5	169	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair				600
+spawn_mus_259	MUSTAFAR	mus_mensix	AREA	9	-69.8	10.8	65.3	-71	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair				600
+spawn_mus_260	MUSTAFAR	mus_mensix	AREA	9	-72.0	10.8	64.0	17	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_261	MUSTAFAR	mus_mensix	AREA	9	-89.6	10.8	39.3	-178	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_262	MUSTAFAR	mus_mensix	AREA	9	-97.4	10.8	58.2	-1	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair				600
+spawn_mus_263	MUSTAFAR	mus_mensix	AREA	9	-97.3	10.8	60.7	-173	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair				600
+spawn_mus_264	MUSTAFAR	mus_mensix	PATROL	14	-88.3	10.8	32.4	92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_900	column	idle				600
+spawn_mus_265	MUSTAFAR	mus_mensix	PATROL	20	-28.0	18.6	-15.2	91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1000	column	idle				600
+spawn_mus_266	MUSTAFAR	mus_world	PATROL	0	-2480.4	230.1	1635.5	-2	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1100	column	idle				600
+spawn_mus_267	MUSTAFAR	mus_mensix	PATROL	29	-39.9	31.5	-117.8	99	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1200	column	idle				600
+spawn_mus_268	MUSTAFAR	mus_world	PATROL	0	-3169.7	145.1	1372.2	-100	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1300	column	idle				600
+spawn_mus_269	MUSTAFAR	mus_world	AREA	0	-3123.0	145.3	1332.6	-9	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	2	LOITER	5	0	-	idle				600
+spawn_mus_270	MUSTAFAR	mus_world	AREA	0	-3010.7	140.4	1340.1	7	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle				600
+spawn_mus_271	MUSTAFAR	mus_world	AREA	0	-2891.7	150.9	1388.0	132	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_272	MUSTAFAR	mus_world	AREA	0	-2526.2	225.0	1643.1	163	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_273	MUSTAFAR	mus_world	AREA	0	-2528.0	225.0	1642.7	165	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_274	MUSTAFAR	mus_mensix	AREA	29	-56.3	31.5	-107.1	-90	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_275	MUSTAFAR	mus_world	AREA	0	-2488.0	230.0	1636.2	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
+spawn_mus_276	MUSTAFAR	mus_world	AREA	0	-2463.2	230.1	1618.9	-60	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_277	MUSTAFAR	mus_world	AREA	0	-2465.5	230.1	1620.3	122	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation				600
+spawn_mus_278	MUSTAFAR	mus_mensix	AREA	26	-72.0	23.2	-47.9	109	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle				600
+spawn_mus_279	MUSTAFAR	mus_mensix	AREA	26	-75.4	23.2	-35.6	92	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high				600
