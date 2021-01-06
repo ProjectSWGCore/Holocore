@@ -1,0 +1,5 @@
+spawn_id	conversation_id
+TEXT	TEXT
+spawn_tat_3	rebel_recruiter/imperial_root
+spawn_tat_3	rebel_recruiter/neutral_root
+spawn_tat_3	rebel_recruiter/normal_root
