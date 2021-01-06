@@ -28,6 +28,7 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.ConversationLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
 import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
@@ -97,6 +98,7 @@ object ServerData {
 	val terrainLevels		by SoftDataLoaderDelegate(::TerrainLevelLoader)
 	val noSpawnZones		by SoftDataLoaderDelegate(::NoSpawnZoneLoader)
 	val gcwRegionLoader		by SoftDataLoaderDelegate(::GcwRegionLoader)
+	val conversationLoader	by SoftDataLoaderDelegate(::ConversationLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)

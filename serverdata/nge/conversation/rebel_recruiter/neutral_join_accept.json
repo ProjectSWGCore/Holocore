@@ -1,0 +1,23 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_99"
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	]
+}
