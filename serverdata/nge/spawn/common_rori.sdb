@@ -160,7 +160,7 @@ spawn_ror_157	RORI	ror_world	AREA	0	5409.7	80.0	6097.6	0	1	a thief	humanoid_smug
 spawn_ror_158	RORI	ror_world	AREA	0	5427.5	80.0	6125.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	40	60	City	Restuss	1	LOITER	2	0	-	idle				600
 spawn_ror_159	RORI	ror_world	AREA	0	5398.0	82.0	6124.0	0	1	Emory	humanoid_smuggler_fence_emory	INVULNERABLE	N	100	100	City	Restuss	1	TURN	0	0	-	idle				600
 spawn_ror_160	RORI	ror_world	AREA	0	5310.8	80.0	6206.4	0	1	Marles Jacobe	humanoid_restuss_marles_jacobe	INVULNERABLE	N	100	100	City	Restuss	1	LOITER	1	0	-	idle				600
-spawn_ror_161	RORI	ror_world	AREA	0	5916.4	80.8	5551.9	0	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Restuss Imperial Base	1	IDLE	0	0	-	idle				600
+spawn_ror_161	RORI	ror_world	AREA	0	5916.4	80.8	5551.9	0	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Restuss Imperial Base	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_ror_162	RORI	ror_world	AREA	0	4828.0	80.0	5843.4	0	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Restuss Rebel Base	1	IDLE	0	0	-	idle		rebel_recruiter		600
 spawn_ror_163	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	10	13.7	-13.8	-13.8	0	1	a Gundark flunky	humanoid_u13_gundark_flunky	AGGRESSIVE	N	40	60	Dungeon	Gundark Bunker	1	TURN	0	0	-	idle				600
 spawn_ror_164	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	10	17.0	-13.8	-13.9	0	1	a Gundark flunky	humanoid_u13_gundark_flunky	AGGRESSIVE	N	40	60	Dungeon	Gundark Bunker	1	TURN	0	0	-	idle				600

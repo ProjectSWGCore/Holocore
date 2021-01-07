@@ -641,7 +641,7 @@ spawn_lok_638	LOK	lok_world	AREA	0	-1828.2	12.0	-3126.6	0	1	a Stormtrooper	human
 spawn_lok_639	LOK	lok_world	AREA	0	-1832.5	12.0	-3049.3	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	LOITER	3	0	-	idle				600
 spawn_lok_640	LOK	lok_world	AREA	0	-1841.2	12.0	-3089.8	90	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	IDLE	0	0	-	idle				600
 spawn_lok_641	LOK	lok_world	AREA	0	-1841.2	12.0	-3079.6	90	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	IDLE	0	0	-	idle				600
-spawn_lok_642	LOK	lok_world	AREA	0	-1844.4	12.0	-3069.1	90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle				600
+spawn_lok_642	LOK	lok_world	AREA	0	-1844.4	12.0	-3069.1	90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_lok_643	LOK	lok_world	PATROL	0	-1866.6	12.0	-3114.8	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	PATROL	0	patrol_lok_1600	column	idle				600
 spawn_lok_644	LOK	lok_world	AREA	0	-1874.2	12.0	-3123.7	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle				600
 spawn_lok_645	LOK	lok_world	AREA	0	-1887.3	12.0	-3175.3	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	LOITER	3	0	-	idle				600

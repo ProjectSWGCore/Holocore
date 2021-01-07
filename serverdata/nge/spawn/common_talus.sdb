@@ -296,7 +296,7 @@ spawn_tal_293	TALUS	tal_world	PATROL	0	-2186.8	20.0	2280.6	0	1	an Imperial Colon
 spawn_tal_294	TALUS	tal_world	AREA	0	-2132.8	27.0	2211.8	0	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	40	60	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tal_295	TALUS	tal_world	PATROL	0	-2194.6	20.0	2343.4	100	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	40	60	City	Imperial Outpost	1	IDLE	0	0	-	conversation				600
 spawn_tal_296	TALUS	tal_world	PATROL	0	-2184.2	20.0	2278.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	40	60	City	Imperial Outpost	1	PATROL	0	patrol_tal_2000	column	idle				600
-spawn_tal_297	TALUS	tal_world	AREA	0	-2191.7	20.0	2268.6	-91	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle				600
+spawn_tal_297	TALUS	tal_world	AREA	0	-2191.7	20.0	2268.6	-91	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_tal_298	TALUS	tal_world	PATROL	0	-2192.2	20.0	2343.0	-78	1	an Imperial Sergeant Major	humanoid_imperial_sergeant_major	ATTACKABLE	E	40	60	City	Imperial Outpost	1	IDLE	0	0	-	conversation				600
 spawn_tal_299	TALUS	tal_world	AREA	0	-2209.3	20.0	2301.4	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle				600
 spawn_tal_300	TALUS	tal_world	AREA	0	-2213.1	20.0	2301.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle				600
@@ -809,7 +809,7 @@ spawn_tal_806	TALUS	tal_genetech_syndicate	AREA	45	-120.7	-50.0	61.6	0	1	a brood
 spawn_tal_807	TALUS	tal_genetech_syndicate	AREA	45	-116.0	-50.0	81.5	0	1	a brood X aurek arachne	creature_arachne_brood_x_aurek	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle				600
 spawn_tal_808	TALUS	tal_genetech_syndicate	AREA	45	-121.1	-50.0	31.2	65	1	an arachne brood queen	creature_arachne_brood_queen	AGGRESSIVE	B	40	60	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle				600
 spawn_tal_809	TALUS	tal_world	AREA	0	7.4	42.8	-3543.5	-48	1	Jana T'bayr	humanoid_talus_genetech_syndicate_jana	INVULNERABLE	N	100	100	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle				600
-spawn_tal_810	TALUS	tal_dearic_imp_office	AREA	4	-0.3	2.5	7.7	176	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	Dungeon	Imperial Office	1	IDLE	0	0	-	idle				600
+spawn_tal_810	TALUS	tal_dearic_imp_office	AREA	4	-0.3	2.5	7.7	176	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	Dungeon	Imperial Office	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_tal_811	TALUS	tal_dearic_imp_office	PATROL	5	8.8	1.1	4.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	40	60	Dungeon	Imperial Office	1	PATROL	0	patrol_tal_2700	column	idle				600
 spawn_tal_812	TALUS	tal_dearic_imp_office	AREA	7	8.5	1.1	-13.2	24	1	Colonel Braedic Ekirk	humanoid_imperial_talus_coa_colonel_braedic_ekirk	INVULNERABLE	N	100	100	Dungeon	Imperial Office	1	IDLE	0	0	-	idle				600
 spawn_tal_813	TALUS	tal_dearic_imp_office	AREA	7	13.1	1.1	-9.1	-119	1	Galiir Ac Yandar	humanoid_talus_coa_galiir_ac_yandar	INVULNERABLE	N	100	100	Dungeon	Imperial Office	1	IDLE	0	0	-	idle				600

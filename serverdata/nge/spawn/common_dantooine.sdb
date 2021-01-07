@@ -48,7 +48,7 @@ spawn_dan_45	DANTOOINE	dan_world	AREA	0	-4275.4	3.0	-2414.0	89	1	an explorer	hum
 spawn_dan_46	DANTOOINE	dan_world	AREA	0	-4203.2	3.0	-2357.8	-135	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle				600
 spawn_dan_47	DANTOOINE	dan_world	AREA	0	-4221.8	10.0	-2441.0	-47	1	an Imperial officer	humanoid_imperial_officer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle				600
 spawn_dan_48	DANTOOINE	dan_world	AREA	0	-4231.6	10.0	-2439.8	-137	1	an Imperial officer	humanoid_imperial_officer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair				600
-spawn_dan_49	DANTOOINE	dan_world	AREA	0	-4197.4	3.0	-2402.5	-92	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle				600
+spawn_dan_49	DANTOOINE	dan_world	AREA	0	-4197.4	3.0	-2402.5	-92	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_dan_50	DANTOOINE	dan_world	PATROL	0	-4219.9	3.0	-2363.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_1000	column	idle				600
 spawn_dan_51	DANTOOINE	dan_world	PATROL	0	-4217.9	3.0	-2365.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_900	column	idle				600
 spawn_dan_52	DANTOOINE	dan_world	AREA	0	-4221.5	3.0	-2378.4	104	1	Colonel Bek Rabor (an Imperial officer)	humanoid_imperial_col_bek_rabor	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle				600

@@ -1,7 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_80"
+		"key": "s_80",
+		"comment": "So be it.  If you decide that you want to come back, let me know.  But for now, you are no longer a member of the Rebellion."
 	},
 	"playerResponses": [],
 	"requirements": [

@@ -1,24 +1,24 @@
 {
 	"npcMessage": {
-		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_216",
-		"comment": "Hello friend.  Ready to get back to some real work?"
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_410",
+		"comment": "How are we doing in the war effort against the Rebel scum?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/faction_recruiter_rebel",
+				"file": "conversation/faction_recruiter_imperial",
 				"key": "s_49",
 				"comment": "I would like to make a change to my military status."
 			},
-			"next": "rebel_recruiter/change_status"
+			"next": "imperial_recruiter/change_status"
 		}
 	],
 	"requirements": [
 		{
 			"type": "faction_name",
 			"args": {
-				"faction": "rebel"
+				"faction": "imperial"
 			}
 		},
 		{

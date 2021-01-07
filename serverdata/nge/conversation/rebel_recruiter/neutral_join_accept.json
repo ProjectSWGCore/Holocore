@@ -1,7 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_99"
+		"key": "s_99",
+		"comment": "Welcome aboard. If you need to change your status, use the icon in your command browser named Change Neutral Status."
 	},
 	"playerResponses": [],
 	"requirements": [

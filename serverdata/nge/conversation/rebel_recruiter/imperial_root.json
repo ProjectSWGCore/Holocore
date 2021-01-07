@@ -1,7 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_230"
+		"key": "s_230",
+		"comment": "I'm sorry, but I do not know you and do not wish to."
 	},
 	"playerResponses": [],
 	"requirements": [

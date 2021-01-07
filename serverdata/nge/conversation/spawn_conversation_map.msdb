@@ -1,3 +1,4 @@
 file	enabled
 TEXT	BOOLEAN
-spawn_tat_3.sdb	TRUE
+rebel_recruiter.sdb	TRUE
+imperial_recruiter.sdb  TRUE

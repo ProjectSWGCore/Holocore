@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_76",
+		"comment": "Are you certain that this is what you want to do?  You may be missing out on some important battles.   Going on leave means that you will not be recognized as a member of the Imperial military and will be ignored by the Rebel Alliance."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_79",
+				"comment": "I am certain."
+			},
+			"next": "imperial_recruiter/resign_accept"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		}
+	],
+	"events": []
+}

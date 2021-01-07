@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_442",
+		"comment": "Stop wasting my time.  If you are serious, come back and talk to me."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": []
+}

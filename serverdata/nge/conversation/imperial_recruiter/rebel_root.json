@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_308",
+		"comment": "Leave my sight, scum.  Insurrectionists like you should be punished."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": []
+}

@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_432",
+		"comment": "Joining the military is a big commitment.  Are you sure that you are ready?  You realize that those upstart rebels will attack you on sight?  Not the so-called 'special forces' but their main troops."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_434",
+				"comment": "Absolutely.  It would be a great honor to serve the Empire."
+			},
+			"next": "recruiter_imperial/neutral_join_accept"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_440",
+				"comment": "Perhaps I should think about it a bit longer."
+			},
+			"next": "recruiter_imperial/neutral_join_decline"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": []
+}

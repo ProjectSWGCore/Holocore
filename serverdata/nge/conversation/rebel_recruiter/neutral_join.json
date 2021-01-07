@@ -1,20 +1,23 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_352"
+		"key": "s_352",
+		"comment": "This is not a decision to be taken lightly.  Rebels are hunted across the galaxy.  If you join us, while you are an active combatant, Imperials will attack you on sight but Imperial Special Forces will leave you alone.  Are you ready for that?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_354"
+				"key": "s_354",
+				"comment": "That doesn't scare me.  Down with the Emperor!"
 			},
 			"next": "rebel_recruiter/neutral_join_accept"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_360"
+				"key": "s_360",
+				"comment": "Now that you put it that way, perhaps I was a bit hasty."
 			},
 			"next": "rebel_recruiter/neutral_join_decline"
 		}

@@ -1,24 +1,24 @@
 {
 	"npcMessage": {
-		"file": "conversation/faction_recruiter_rebel",
+		"file": "conversation/faction_recruiter_imperial",
 		"key": "s_50",
 		"comment": "What kind of change were you considering?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/faction_recruiter_rebel",
+				"file": "conversation/faction_recruiter_imperial",
 				"key": "s_74",
-				"comment": "This is all too much for me.  I would like to resign completely."
+				"comment": "I would like to use my personal leave time."
 			},
-			"next": "rebel_recruiter/resign"
+			"next": "imperial_recruiter/resign"
 		}
 	],
 	"requirements": [
 		{
 			"type": "faction_name",
 			"args": {
-				"faction": "rebel"
+				"faction": "imperial"
 			}
 		},
 		{

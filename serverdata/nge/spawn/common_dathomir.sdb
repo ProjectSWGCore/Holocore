@@ -3,7 +3,7 @@ STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	IN
 spawn_dat_1	DATHOMIR	dat_aurilia_adv_gh	AREA	8	-21.0	2.3	11.5	72	1	Nym's Envoy	humanoid_nexus_ig88_starter	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600
 spawn_dat_2	DATHOMIR	dat_aurilia_adv_gh	AREA	10	-10.3	1.8	-6.0	90	1	a cold-weather Rebel trooper	humanoid_heroic_echo_rebel_cw_trooper	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600
 spawn_dat_3	DATHOMIR	dat_aurilia_adv_gh	AREA	10	-12.0	1.8	-11.8	90	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle		rebel_recruiter		600
-spawn_dat_4	DATHOMIR	dat_aurilia_adv_gh	AREA	10	11.4	1.8	-10.9	-90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600
+spawn_dat_4	DATHOMIR	dat_aurilia_adv_gh	AREA	10	11.4	1.8	-10.9	-90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_dat_5	DATHOMIR	dat_aurilia_adv_gh	AREA	10	11.3	1.8	-6.8	-90	1	an Imperial snowtrooper	humanoid_heroic_echo_imperial_snowtrooper	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600
 spawn_dat_6	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-8.9	1.8	-20.9	0	1	a Corellia University teaching assistant	humanoid_exar_intro_assistant	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600
 spawn_dat_7	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-2.7	1.8	-16.7	-179	1	Hirael Chindiaye (an independent investor)	humanoid_heroic_sd_neut_hirael_chindiaye_invest_intro	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle				600

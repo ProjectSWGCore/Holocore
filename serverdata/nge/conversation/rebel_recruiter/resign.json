@@ -1,13 +1,15 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_76"
+		"key": "s_76",
+		"comment": "How could you turn your back on people trying to win freedom from tyranny?  We need everyone we can get!  Won't you reconsider?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_78"
+				"key": "s_78",
+				"comment": "I'm sure.  I have had enough war. I want out."
 			},
 			"next": "rebel_recruiter/resign_accept"
 		}
