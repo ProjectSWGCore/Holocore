@@ -1,7 +1,6 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"action": "greet",
 		"key": "s_352",
 		"comment": "This is not a decision to be taken lightly.  Rebels are hunted across the galaxy.  If you join us, while you are an active combatant, Imperials will attack you on sight but Imperial Special Forces will leave you alone.  Are you ready for that?"
 	},
@@ -31,5 +30,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "yes"
+			}
+		}
+	]
 }

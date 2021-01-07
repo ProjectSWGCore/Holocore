@@ -20,6 +20,12 @@
 			"args": {
 				"faction": "neutral"
 			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "sigh_deeply"
+			}
 		}
 	]
 }

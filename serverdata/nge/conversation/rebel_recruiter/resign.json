@@ -1,7 +1,6 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"action": "point_accusingly",
 		"key": "s_76",
 		"comment": "How could you turn your back on people trying to win freedom from tyranny?  We need everyone we can get!  Won't you reconsider?"
 	},
@@ -23,5 +22,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_accusingly"
+			}
+		}
+	]
 }

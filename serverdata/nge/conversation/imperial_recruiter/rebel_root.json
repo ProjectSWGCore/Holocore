@@ -13,5 +13,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "gesticulate_wildly"
+			}
+		}
+	]
 }

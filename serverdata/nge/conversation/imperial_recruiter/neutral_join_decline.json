@@ -1,7 +1,6 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"action": "backhand_threaten",
 		"key": "s_442",
 		"comment": "Stop wasting my time.  If you are serious, come back and talk to me."
 	},
@@ -14,5 +13,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "pound_fist_palm"
+			}
+		}
+	]
 }

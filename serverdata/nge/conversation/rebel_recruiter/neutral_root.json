@@ -22,5 +22,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
 }

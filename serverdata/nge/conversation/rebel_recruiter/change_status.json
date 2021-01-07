@@ -31,5 +31,12 @@
 			}
 		}
 	],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
 }

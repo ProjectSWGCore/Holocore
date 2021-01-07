@@ -1,7 +1,6 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"action": "salute1",
 		"key": "s_99",
 		"comment": "Welcome aboard. If you need to change your status, use the icon in your command browser named Change Neutral Status."
 	},
@@ -19,6 +18,12 @@
 			"type": "faction_change",
 			"args": {
 				"faction": "rebel"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
 			}
 		}
 	]
