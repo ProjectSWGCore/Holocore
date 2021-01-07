@@ -1,6 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
+		"action": "salute1",
 		"key": "s_116",
 		"comment": "Welcome to the Imperial Military.  I expect good things from you, recruit!"
 	},

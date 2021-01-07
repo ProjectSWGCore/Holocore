@@ -1,6 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
+		"action": "backhand_threaten",
 		"key": "s_362",
 		"comment": "We only want serious, committed candidates.  If you change your mind, talk to me then."
 	},

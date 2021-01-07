@@ -1,6 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
+		"action": "greet",
 		"key": "s_432",
 		"comment": "Joining the military is a big commitment.  Are you sure that you are ready?  You realize that those upstart rebels will attack you on sight?  Not the so-called 'special forces' but their main troops."
 	},

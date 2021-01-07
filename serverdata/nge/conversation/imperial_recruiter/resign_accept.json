@@ -1,6 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
+		"action": "sigh_deeply",
 		"key": "s_94",
 		"comment": "So be it.  I'll put the paperwork through.  We will watch you closely to make sure that you don't cross any lines, citizen."
 	},

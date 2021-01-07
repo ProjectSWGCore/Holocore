@@ -1,6 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
+		"action": "backhand_threaten",
 		"key": "s_442",
 		"comment": "Stop wasting my time.  If you are serious, come back and talk to me."
 	},
