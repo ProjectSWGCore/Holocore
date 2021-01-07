@@ -175,8 +175,13 @@ public class SimpleSpawnInfo implements SpawnInfo {
     public int getAmount() {
         return amount;
     }
-
-    public static class Builder {
+	
+	@Override
+	public String getConversationId() {
+		return null;
+	}
+	
+	public static class Builder {
 
         private final SimpleSpawnInfo info;
 

@@ -96,6 +96,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		private final int minSpawnTime;
 		private final int maxSpawnTime;
 		private final int amount;
+		private final String conversationId;
 		
 		private StaticSpawnInfo(SdbResultSet set) {
 			this.id = set.getText("spawn_id");
@@ -145,6 +146,8 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 					this.difficulty = CreatureDifficulty.BOSS;
 					break;
 			}
+			
+			this.conversationId = set.getText("conversation_id");
 		}
 		
 		@Override
@@ -255,6 +258,11 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		@Override
 		public int getAmount() {
 			return amount;
+		}
+		
+		@Override
+		public String getConversationId() {
+			return conversationId;
 		}
 		
 		private static PatrolFormation parsePatrolFormation(String str) {

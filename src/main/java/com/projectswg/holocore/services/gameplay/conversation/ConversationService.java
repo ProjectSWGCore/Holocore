@@ -138,14 +138,14 @@ public class ConversationService extends Service {
 		CreatureObject starter = intent.getStarter();
 		
 		Spawner spawner = npc.getSpawner();
-		String spawnId = spawner.getId();
+		String conversationId = spawner.getConversationId();
 		
-		List<Conversation> conversations = conversationLoader.getInitialConversations(spawnId);
+		List<Conversation> conversations = conversationLoader.getInitialConversations(conversationId);
 		
 		Conversation conversation = reduce(conversations, starter.getOwner());
 		
 		if (conversation == null) {
-			StandardLog.onPlayerEvent(this, starter, "No eligible conversations for spawnId %s", spawnId);
+			StandardLog.onPlayerEvent(this, starter, "No eligible conversations for spawner with ID %s", spawner.getId());
 			return;
 		}
 		
@@ -194,9 +194,9 @@ public class ConversationService extends Service {
 	private boolean isConversableNpc(AIObject npc) {
 		ConversationLoader conversationLoader = ServerData.INSTANCE.getConversationLoader();
 		Spawner spawner = npc.getSpawner();
-		String spawnId = spawner.getId();
+		String conversationId = spawner.getConversationId();
 		
-		Collection<String> spawnConversationIds = conversationLoader.getConversationIds(spawnId);
+		Collection<String> spawnConversationIds = conversationLoader.getConversationIds(conversationId);
 		
 		return !spawnConversationIds.isEmpty();
 	}

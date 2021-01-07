@@ -75,5 +75,7 @@ public interface SpawnInfo {
     int getMaxSpawnTime();
 
     int getAmount();
+    
+    String getConversationId();
 
 }
