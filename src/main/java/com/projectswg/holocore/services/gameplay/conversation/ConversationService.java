@@ -183,7 +183,11 @@ public class ConversationService extends Service {
 		CreatureObject creatureObject = intent.getCreatureObject();
 		
 		if (isConversing(creatureObject)) {
-			abortConversation(creatureObject);
+			Session session = sessions.remove(creatureObject);
+			
+			if (!isWithinRange(creatureObject, session.getNpc())) {
+				abortConversation(creatureObject);
+			}
 		}
 	}
 	
@@ -288,6 +292,11 @@ public class ConversationService extends Service {
 	
 	private void abortConversation(CreatureObject creatureObject) {
 		Session session = sessions.remove(creatureObject);
+		
+		abortConversation(creatureObject, session);
+	}
+	
+	private void abortConversation(CreatureObject creatureObject, Session session) {
 		Conversation conversation = session.getConversation();
 		AIObject npc = session.getNpc();
 		ProsePackage npcMessage = conversation.getNpcMessage();
