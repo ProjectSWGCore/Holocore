@@ -102,21 +102,21 @@ public class ConversationLoader extends DataLoader {
 		ProsePackage npcMessage = readProsePackage(npcMessageObj);
 		conversation.setNpcMessage(npcMessage);
 		
-		List<JSONObject> playerResponseObjs = (List<JSONObject>) jsonObject.get("playerResponses");
+		List<Map<String, Object>> playerResponseObjs = (List<Map<String, Object>>) jsonObject.get("playerResponses");
 		List<PlayerResponse> playerResponses = readPlayerResponses(playerResponseObjs);
 		
 		for (PlayerResponse playerResponse : playerResponses) {
 			conversation.addPlayerResponse(playerResponse);
 		}
 		
-		List<JSONObject> requirementObjs = (List<JSONObject>) jsonObject.get("requirements");
+		List<Map<String, Object>> requirementObjs = (List<Map<String, Object>>) jsonObject.get("requirements");
 		List<Requirement> requirements = readRequirements(requirementObjs);
 		
 		for (Requirement requirement : requirements) {
 			conversation.addRequirement(requirement);
 		}
 		
-		List<JSONObject> eventObjs = (List<JSONObject>) jsonObject.get("events");
+		List<Map<String, Object>> eventObjs = (List<Map<String, Object>>) jsonObject.get("events");
 		List<Event> events = readEvents(eventObjs);
 		
 		for (Event event : events) {
@@ -133,10 +133,10 @@ public class ConversationLoader extends DataLoader {
 		return new ProsePackage(file, key);
 	}
 	
-	private List<PlayerResponse> readPlayerResponses(List<JSONObject> playerResponseObjs) {
+	private List<PlayerResponse> readPlayerResponses(List<Map<String, Object>> playerResponseObjs) {
 		List<PlayerResponse> playerResponses = new ArrayList<>();
 		
-		for (JSONObject playerResponseObj : playerResponseObjs) {
+		for (Map<String, Object> playerResponseObj : playerResponseObjs) {
 			Map<String, Object> playerMessageRaw = (Map<String, Object>) playerResponseObj.get("playerMessage");
 			ProsePackage prosePackage = readProsePackage(playerMessageRaw);
 			
@@ -150,10 +150,10 @@ public class ConversationLoader extends DataLoader {
 		return playerResponses;
 	}
 	
-	private List<Requirement> readRequirements(List<JSONObject> requirementObjs) {
+	private List<Requirement> readRequirements(List<Map<String, Object>> requirementObjs) {
 		List<Requirement> requirements = new ArrayList<>();
 		
-		for (JSONObject requirementObj : requirementObjs) {
+		for (Map<String, Object> requirementObj : requirementObjs) {
 			String type = (String) requirementObj.get("type");
 			Map<String, Object> args = (Map<String, Object>) requirementObj.get("args");
 			RequirementParser<? extends Requirement> requirementParser = requirementParserMap.get(type);
@@ -165,10 +165,10 @@ public class ConversationLoader extends DataLoader {
 		return requirements;
 	}
 	
-	private List<Event> readEvents(List<JSONObject> eventObjs) {
+	private List<Event> readEvents(List<Map<String, Object>> eventObjs) {
 		List<Event> events = new ArrayList<>();
 		
-		for (JSONObject eventObj : eventObjs) {
+		for (Map<String, Object> eventObj : eventObjs) {
 			String type = (String) eventObj.get("type");
 			Map<String, Object> args = (Map<String, Object>) eventObj.get("args");
 			EventParser<? extends Event> eventParser = eventParserMap.get(type);
