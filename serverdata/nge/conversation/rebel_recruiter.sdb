@@ -1,4 +1,4 @@
-spawn_id	conversation_id
+conversation_id	conversation_file
 TEXT	TEXT
 rebel_recruiter	rebel_recruiter/imperial_root
 rebel_recruiter	rebel_recruiter/neutral_root

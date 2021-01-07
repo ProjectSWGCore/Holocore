@@ -126,7 +126,10 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
 	val maxLevel: Int
 		get() = spawn.maxLevel
-	
+
+	val conversationId: String
+		get() = spawn.conversationId
+
 	val name: String
 		get() = npc.name
 	
@@ -198,7 +201,7 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
 	val creatureInfo: CreatureNpcInfo
 		get() = npc.creatureInfo
-	
+
 	init {
 		if (spawn.patrolId.isEmpty() || spawn.patrolId == "0") { // TODO: Replace the latter with empty string
 			this.patrolRoute = null

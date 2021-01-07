@@ -62,28 +62,28 @@ public class ConversationLoader extends DataLoader {
 	}
 	
 	@Nullable
-	public Conversation getConversation(String conversationId) {
+	public Conversation getConversation(String conversationFile) {
 		try {
-			InputStream inputStream = new FileInputStream("serverdata/nge/conversation/" + conversationId + ".json");
+			InputStream inputStream = new FileInputStream("serverdata/nge/conversation/" + conversationFile + ".json");
 			JSONObject jsonObject = JSON.readObject(inputStream);
 			
-			return readConversation(conversationId, jsonObject);
+			return readConversation(conversationFile, jsonObject);
 		} catch (Throwable t) {
-			Log.e("Unable to load conversation by ID %s", conversationId);
+			Log.e("Unable to load conversation from file %s", conversationFile);
 			Log.e(t);
 			return null;
 		}
 	}
 	
 	@NotNull
-	public List<Conversation> getInitialConversations(String spawnId) {
-		if (!spawnConversationsMap.containsKey(spawnId)) {
+	public List<Conversation> getInitialConversations(String conversationId) {
+		if (!spawnConversationsMap.containsKey(conversationId)) {
 			return Collections.emptyList();
 		}
 		
-		Collection<String> conversationIds = spawnConversationsMap.get(spawnId);
+		Collection<String> conversationFiles = spawnConversationsMap.get(conversationId);
 		
-		return conversationIds.stream()
+		return conversationFiles.stream()
 				.map(this::getConversation)
 				.filter(Objects::nonNull)
 				.collect(Collectors.toList());
@@ -94,8 +94,8 @@ public class ConversationLoader extends DataLoader {
 		return spawnConversationsMap.getOrDefault(spawnId, Collections.emptyList());
 	}
 	
-	private Conversation readConversation(String conversationId, JSONObject jsonObject) {
-		Conversation conversation = new Conversation(conversationId);
+	private Conversation readConversation(String conversationFile, JSONObject jsonObject) {
+		Conversation conversation = new Conversation(conversationFile);
 		
 		Map<String, Object> npcMessageObj = (Map<String, Object>) jsonObject.get("npcMessage");
 		
@@ -199,10 +199,10 @@ public class ConversationLoader extends DataLoader {
 	private void loadSpawnToConversations() throws IOException {
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/conversation/spawn_conversation_map.msdb"))) {
 			while (set.next()) {
-				String spawnId = set.getText("spawn_id");
 				String conversationId = set.getText("conversation_id");
+				String conversationFile = set.getText("conversation_file");
 				
-				spawnConversationsMap.computeIfAbsent(spawnId, a -> new ArrayList<>()).add(conversationId);
+				spawnConversationsMap.computeIfAbsent(conversationId, a -> new ArrayList<>()).add(conversationFile);
 			}
 		}
 	}
