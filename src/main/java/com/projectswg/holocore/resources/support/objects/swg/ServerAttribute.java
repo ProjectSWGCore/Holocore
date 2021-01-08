@@ -38,7 +38,8 @@ public enum ServerAttribute {
 	GALACTIC_RESOURCE_ID("resources.galactic_resource_id",	PredefinedDataType.LONG),
 	SURVEY_TOOL_RANGE	("survey_tool.range",				PredefinedDataType.INT),
 	SET_BONUS_ID		("set_bonus.id",					PredefinedDataType.INT),
-	LINK_OBJECT_ID		("link.object.id",					PredefinedDataType.LONG);
+	LINK_OBJECT_ID		("link.object.id",					PredefinedDataType.LONG),
+	ITEM_VALUE			("item.value",						PredefinedDataType.INT);
 	
 	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);
 	

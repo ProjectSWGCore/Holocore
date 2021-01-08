@@ -168,7 +168,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val noTrade: Boolean			= set.getInt("no_trade") != 0L
 		val bioLink: Boolean			= set.getInt("bio_link") != 0L
 		val charges: Int				= set.getInt("charges").toInt()
-		
+		val value: Int					= set.getInt("value").toInt()
+
 	}
 	
 	class CostumeItemInfo(set: SdbResultSet) {
