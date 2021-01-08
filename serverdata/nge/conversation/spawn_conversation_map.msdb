@@ -7,7 +7,7 @@ junk_dealer_generic.sdb	TRUE
 junk_dealer_wookiee.sdb	TRUE
 recruiter_imperial.sdb	TRUE
 recruiter_rebel.sdb	TRUE
-tatooine_dungeon_white_thranta_receptionist.sdb TRUE
+tatooine_dungeon_white_thranta_receptionist.sdb	TRUE
 tatooine_jabbas_palace_barada.sdb	TRUE
 tatooine_jabbas_palace_bib_fortuna.sdb	TRUE
 tatooine_jabbas_palace_boba_fett.sdb	TRUE
@@ -17,11 +17,11 @@ tatooine_jabbas_palace_jawl.sdb	TRUE
 tatooine_jabbas_palace_ree_yees.sdb	TRUE
 tatooine_jabbas_palace_reelo_baruk.sdb	TRUE
 tatooine_mos_eisley_bib_fortuna.sdb	TRUE
-tatooine_mos_eisley_cheated_gambler.sdb TRUE
+tatooine_mos_eisley_cheated_gambler.sdb	TRUE
 tatooine_mos_eisley_dunir.sdb	TRUE
 tatooine_mos_eisley_happer.sdb	TRUE
-tatooine_mos_eisley_gendra.sdb  TRUE
-tatooine_mos_eisley_keela.sdb  TRUE
+tatooine_mos_eisley_gendra.sdb	TRUE
+tatooine_mos_eisley_keela.sdb	TRUE
 tatooine_mos_eisley_niko.sdb	TRUE
 tatooine_mos_eisley_nogri.sdb	TRUE
 tatooine_mos_eisley_purvis.sdb	TRUE

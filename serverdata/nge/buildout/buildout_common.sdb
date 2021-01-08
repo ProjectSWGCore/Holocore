@@ -843,3 +843,4 @@ bo_common_840	NABOO	nab_theed_hangar	5	object/tangible/tcg/series5/hangar_ships/
 bo_common_841	NABOO	nab_theed_hangar	5	object/tangible/tcg/series5/hangar_ships/naboo_n1.iff	41.2	7.9	27.4	-89	0	0	0	128	TRUE	
 bo_common_842	NABOO	nab_world	0	object/tangible/tcg/series7/garage_display_vehicles/speeder_ric_920.iff	-5146.0	6.0	4283.1	-34	0	0	0	128	TRUE	
 bo_common_843	NABOO	nab_world	0	object/tangible/tcg/series7/garage_display_vehicles/koro2_speeder.iff	-4943.3	6.0	4059.2	132	0	0	0	128	TRUE	
+bo_common_844	TATOOINE	tat_mosespa_watto	2	object/static/creature/droids_eg6.iff	0.5	-0.5	6.2	-112	0	0	0	128	TRUE	
