@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_85",
+		"comment": "I think you should be talking to Reelo Baruk. I'm a little busy right now."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shake_head_no"
+			}
+		}
+	]
+}

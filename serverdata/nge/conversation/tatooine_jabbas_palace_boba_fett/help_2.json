@@ -1,0 +1,32 @@
+{
+	"npcMessage": {
+		"file": "conversation/boba_fett",
+		"key": "s_748",
+		"comment": "Just leave... now."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/boba_fett",
+				"key": "s_758",
+				"comment": "Yeah! You know, we could be partners."
+			},
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/boba_fett",
+				"key": "s_674",
+				"comment": "Okay"
+			},
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "slit_throat"
+			}
+		}
+	]
+}

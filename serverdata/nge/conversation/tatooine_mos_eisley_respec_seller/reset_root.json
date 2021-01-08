@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_35",
+		"comment": "I'll tell you what, since this is your first time I will give you a special deal.  That's right, free!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "No thanks."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/reset_decline"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "That sounds like a good deal to me, I'll take it."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/reset_accept"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "whisper"
+			}
+		}
+	]
+}

@@ -5,7 +5,7 @@ spawn_tat_2	TATOOINE	tat_anchorhead_medium_house	AREA	2	8.5	0.4	-9.3	-179	1	a co
 spawn_tat_3	TATOOINE	tat_anchorhead_medium_house	AREA	2	-3.0	0.4	-9.4	0	1	Nitra Vendallan	humanoid_nitra_vendallan	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle	44			600
 spawn_tat_4	TATOOINE	tat_anchorhead_medium_house	AREA	3	-5.2	1.0	9.2	-179	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_5	TATOOINE	tat_anchorhead_medium_house	AREA	3	-7.5	1.0	4.2	178	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_use_terminal_high				600
-spawn_tat_6	TATOOINE	tat_anchorhead_medium_house	AREA	66	-0.8	-4.0	-4.2	-96	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle		recruiter_rebel		600
+spawn_tat_6	TATOOINE	tat_anchorhead_medium_house	AREA	6	-0.8	-4.0	-4.2	-96	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle		recruiter_rebel		600
 spawn_tat_7	TATOOINE	tat_world	AREA	0	65.5	52.0	-5375.9	87	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation				600
 spawn_tat_8	TATOOINE	tat_world	AREA	0	129.8	52.0	-5401.7	-65	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation				600
 spawn_tat_9	TATOOINE	tat_world	PATROL	0	82.9	52.1	-5318.9	-88	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tat_18200	column	idle				600
@@ -85,7 +85,7 @@ spawn_tat_82	TATOOINE	tat_bestine_hotel	AREA	4	0.7	1.0	2.5	0	1	(Retired) Freelan
 spawn_tat_83	TATOOINE	tat_bestine_hotel	AREA	4	4.5	1.2	-20.5	-179	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	angry				600
 spawn_tat_84	TATOOINE	tat_bestine_hotel	AREA	4	8.3	1.2	-20.7	179	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	happy				600
 spawn_tat_85	TATOOINE	tat_bestine_hotel	AREA	4	7.3	1.0	-6.9	0	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	3	0	-	idle				600
-spawn_tat_86	TATOOINE	tat_bestine_hotel	AREA	5	19.0	1.6	13.0	175	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle				600
+spawn_tat_86	TATOOINE	tat_bestine_hotel	AREA	5	19.0	1.6	13.0	175	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		bartender		600
 spawn_tat_87	TATOOINE	tat_bestine_hotel	AREA	5	23.0	1.3	-7.8	-3	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_88	TATOOINE	tat_bestine_hotel	AREA	5	22.7	1.3	-3.6	-171	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_89	TATOOINE	tat_bestine_hotel	AREA	5	22.4	1.3	10.3	-109	1	Gil Burtin (Pilots' Guild Founder)	humanoid_gil_burtin	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1			600
@@ -108,13 +108,13 @@ spawn_tat_105	TATOOINE	tat_bestine_starport	AREA	13	50.8	1.0	22.2	-98	1	an explo
 spawn_tat_106	TATOOINE	tat_bestine_starport	AREA	4	-1.2	0.6	56.5	-28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_107	TATOOINE	tat_bestine_starport	AREA	4	8.6	0.6	61.8	-117	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_108	TATOOINE	tat_bestine_starport	AREA	4	1.1	0.6	66.4	50	1	Abo	humanoid_abo	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle				600
-spawn_tat_109	TATOOINE	tat_bestine_starport	AREA	4	2.5	0.6	67.7	-152	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle				600
+spawn_tat_109	TATOOINE	tat_bestine_starport	AREA	4	2.5	0.6	67.7	-152	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		chassis_dealer		600
 spawn_tat_110	TATOOINE	tat_bestine_starport	AREA	7	41.5	0.6	37.6	134	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tat_111	TATOOINE	tat_bestine_starport	AREA	9	-30.2	1.6	48.7	-5	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation				600
 spawn_tat_112	TATOOINE	tat_bestine_starport	AREA	9	-30.4	1.6	51.2	179	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation				600
 spawn_tat_113	TATOOINE	tat_world	AREA	0	-745.0	16.3	-4062.0	0	1	a bantha	creature_bantha	ATTACKABLE	N	5	20	City	Bestine	1	LOITER	5	0	-	idle				600
 spawn_tat_114	TATOOINE	tat_world	AREA	0	-780.9	20.9	-4054.2	0	1	a bantha	creature_bantha	ATTACKABLE	N	5	20	City	Bestine	1	LOITER	5	0	-	idle				600
-spawn_tat_115	TATOOINE	tat_world	AREA	0	-1214.2	12.0	-3597.5	-55	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle				600
+spawn_tat_115	TATOOINE	tat_world	AREA	0	-1214.2	12.0	-3597.5	-55	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		bartender		600
 spawn_tat_116	TATOOINE	tat_world	AREA	0	-1364.4	12.0	-3692.1	93	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_ground				600
 spawn_tat_117	TATOOINE	tat_world	PATROL	0	-1355.0	12.0	-3659.0	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	20	City	Bestine	3	PATROL	0	patrol_tat_3400	column	idle				600
 spawn_tat_118	TATOOINE	tat_world	AREA	0	-1222.4	12.0	-3620.3	155	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair				600
@@ -324,7 +324,7 @@ spawn_tat_321	TATOOINE	tat_moseisley_medium_house5	AREA	2	2.9	0.4	-9.1	0	1	a com
 spawn_tat_322	TATOOINE	tat_moseisley_medium_house5	AREA	3	-5.8	1.0	9.0	-2	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tat_323	TATOOINE	tat_moseisley_medium_house7	AREA	3	-5.8	1.0	7.4	132	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		imperial_recruiter		600
 spawn_tat_324	TATOOINE	tat_moseisley_starport	AREA	1	1.7	0.6	73.1	-28	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
-spawn_tat_325	TATOOINE	tat_moseisley_starport	AREA	12	-59.1	2.6	40.0	96	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_325	TATOOINE	tat_moseisley_starport	AREA	12	-59.1	2.6	40.0	96	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		bartender		600
 spawn_tat_326	TATOOINE	tat_moseisley_starport	AREA	12	-45.8	2.6	33.9	-58	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_327	TATOOINE	tat_moseisley_starport	AREA	12	-46.7	2.6	36.5	-132	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_328	TATOOINE	tat_moseisley_starport	AREA	12	-56.2	2.6	40.5	-104	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
@@ -334,7 +334,7 @@ spawn_tat_331	TATOOINE	tat_moseisley_starport	PATROL	4	7.7	0.6	57.4	-94	1	a Jawa
 spawn_tat_332	TATOOINE	tat_moseisley_starport	AREA	4	-3.6	0.6	61.4	-41	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_333	TATOOINE	tat_moseisley_starport	AREA	4	2.5	0.6	51.6	-179	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tat_334	TATOOINE	tat_moseisley_starport	PATROL	4	-11.3	0.6	54.1	-145	1	an Ankura Gungan	humanoid_gungan_ankura	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_16200	column	idle				600
-spawn_tat_335	TATOOINE	tat_moseisley_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_335	TATOOINE	tat_moseisley_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		chassis_dealer		600
 spawn_tat_336	TATOOINE	tat_moseisley_starport	AREA	7	56.0	-0.5	44.7	-151	1	Aurilian Contact	humanoid_nexus_travel_01	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_337	TATOOINE	tat_moseisley_theater	AREA	1	-11.7	0.6	-8.8	80	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_338	TATOOINE	tat_moseisley_theater	AREA	1	-11.8	0.6	-6.6	95	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair				600
@@ -444,7 +444,7 @@ spawn_tat_441	TATOOINE	tat_world	PATROL	0	3456.0	4.0	-4510.9	0	1	a nomad	humanoi
 spawn_tat_442	TATOOINE	tat_world	AREA	0	3241.9	5.0	-4846.1	134	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
 spawn_tat_443	TATOOINE	tat_world	AREA	0	3350.9	5.0	-4496.4	-45	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle				600
 spawn_tat_444	TATOOINE	tat_world	AREA	0	3310.1	5.0	-4532.7	-17	1	a patron	humanoid_patron_human_male_02	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
-spawn_tat_445	TATOOINE	tat_world	AREA	0	3533.1	5.0	-4788.9	-93	1	a profession counselor	humanoid_respec_seller	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_445	TATOOINE	tat_world	AREA	0	3533.1	5.0	-4788.9	-93	1	a profession counselor	humanoid_respec_seller	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_respec_seller		600
 spawn_tat_446	TATOOINE	tat_world	AREA	0	3722.1	4.0	-4822.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	3	LOITER	8	0	-	idle				600
 spawn_tat_447	TATOOINE	tat_world	AREA	0	3337.0	5.6	-4756.2	-89	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained				600
 spawn_tat_448	TATOOINE	tat_world	AREA	0	3286.2	5.0	-4525.1	8	1	a Rebel coordinator	humanoid_coa2_rebel_coordinator	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
@@ -601,7 +601,7 @@ spawn_tat_598	TATOOINE	tat_world	PATROL	0	3214.1	5.0	-4868.8	77	1	an R3 unit	dro
 spawn_tat_599	TATOOINE	tat_world	AREA	0	3552.8	5.0	-4933.2	-134	1	an Unknown Lab Assistant	humanoid_content_lab_assistant	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dead_02				600
 spawn_tat_600	TATOOINE	tat_world	AREA	0	3330.0	5.0	-4607.0	169	1	Baboo	humanoid_tatooine_baboo	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_601	TATOOINE	tat_world	AREA	0	3457.0	5.0	-4861.0	-103	1	Beast Trainer	humanoid_trainer_beast_master	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_602	TATOOINE	tat_world	AREA	0	3562.7	5.0	-4938.8	127	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_602	TATOOINE	tat_world	AREA	0	3562.7	5.0	-4938.8	127	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_bib_fortuna		600
 spawn_tat_603	TATOOINE	tat_world	AREA	0	3366.1	5.0	-4639.3	-177	1	Byxle Pedette	humanoid_tatooine_opening_byxle	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_604	TATOOINE	tat_world	AREA	0	3280.1	5.7	-5141.0	0	1	desert swooper	humanoid_desert_swooper	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle				600
 spawn_tat_605	TATOOINE	tat_world	AREA	0	3306.3	5.5	-5123.5	0	1	desert swooper	humanoid_desert_swooper	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle				600
@@ -614,7 +614,7 @@ spawn_tat_611	TATOOINE	tat_world	AREA	0	3227.5	6.7	-5226.4	0	1	desert swooper le
 spawn_tat_612	TATOOINE	tat_world	AREA	0	3804.9	180.0	-4485.4	0	1	Dewback	creature_dewback_stormtrooper	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	6	0	-	idle				600
 spawn_tat_613	TATOOINE	tat_world	AREA	0	3840.2	180.0	-4498.0	-36	1	Dewback	creature_dewback_stormtrooper	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	6	0	-	idle				600
 spawn_tat_614	TATOOINE	tat_world	AREA	0	3261.0	5.0	-4861.6	0	1	Drixa Dreul	humanoid_tatooine_opening_drixa	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle				600
-spawn_tat_615	TATOOINE	tat_world	AREA	0	3521.6	5.0	-4683.3	-173	1	Dunir Signos	humanoid_tatooine_opening_dunir	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_615	TATOOINE	tat_world	AREA	0	3521.6	5.0	-4683.3	-173	1	Dunir Signos	humanoid_tatooine_opening_dunir	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_dunir		600
 spawn_tat_616	TATOOINE	tat_world	AREA	0	3195.5	8.7	-5226.3	0	1	elite desert swooper	humanoid_desert_swooper_elite	AGGRESSIVE	E	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle				600
 spawn_tat_617	TATOOINE	tat_world	AREA	0	3212.6	7.6	-5237.4	0	1	elite desert swooper	humanoid_desert_swooper_elite	AGGRESSIVE	E	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle				600
 spawn_tat_618	TATOOINE	tat_world	AREA	0	3223.1	6.3	-5253.8	0	1	elite desert swooper	humanoid_desert_swooper_elite	AGGRESSIVE	E	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle				600
@@ -646,20 +646,20 @@ spawn_tat_643	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4740.0	-53	1	Lt. Harburik	hu
 spawn_tat_644	TATOOINE	tat_world	AREA	0	3386.4	5.0	-4792.4	13	1	Lurval	humanoid_newbie_gendra_lurval	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_645	TATOOINE	tat_world	AREA	0	3490.6	5.0	-4778.2	125	1	Matilda Carson (Painting Allocation Engineer)	humanoid_matilda_carson	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_646	TATOOINE	tat_world	AREA	0	3196.4	5.0	-4647.7	62	1	Moa	humanoid_tatooine_moa	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
-spawn_tat_647	TATOOINE	tat_world	AREA	0	3550.6	5.0	-4933.9	68	1	Mos Eisley Policeman Happer	humanoid_content_mos_eisley_policeman_happer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_647	TATOOINE	tat_world	AREA	0	3550.6	5.0	-4933.9	68	1	Mos Eisley Policeman Happer	humanoid_content_mos_eisley_policeman_happer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_happer		600
 spawn_tat_648	TATOOINE	tat_world	AREA	0	3477.7	5.0	-4846.1	111	1	Muna Skish	humanoid_newbie_gendra_muna_skish	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_649	TATOOINE	tat_world	AREA	0	3483.9	5.0	-4786.9	125	1	Navari Trik (Painting Distribution Specialist)	humanoid_navari_trik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_650	TATOOINE	tat_world	AREA	0	3506.0	5.0	-4795.0	120	1	Niko Brehe	humanoid_tatooine_opening_niko	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_651	TATOOINE	tat_world	AREA	0	3450.0	4.0	-5077.0	-11	1	Nogri Hessen	humanoid_tatooine_opening_nogri	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_650	TATOOINE	tat_world	AREA	0	3506.0	5.0	-4795.0	120	1	Niko Brehe	humanoid_tatooine_opening_niko	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_niko		600
+spawn_tat_651	TATOOINE	tat_world	AREA	0	3450.0	4.0	-5077.0	-11	1	Nogri Hessen	humanoid_tatooine_opening_nogri	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_nogri		600
 spawn_tat_652	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4757.3	97	1	Oola	humanoid_oola	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_oola				600
 spawn_tat_653	TATOOINE	tat_world	AREA	0	3526.5	5.0	-4619.7	53	1	Pall	humanoid_pall	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_654	TATOOINE	tat_world	AREA	0	3512.8	5.0	-4764.5	-143	1	Purvis Arrison	humanoid_newbie_ranged_teacher_purvis_arrison	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_655	TATOOINE	tat_world	AREA	0	3619.5	5.0	-4711.3	8	1	Reimos Taligg	humanoid_tatooine_opening_reimos	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_654	TATOOINE	tat_world	AREA	0	3512.8	5.0	-4764.5	-143	1	Purvis Arrison	humanoid_newbie_ranged_teacher_purvis_arrison	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_purvis		600
+spawn_tat_655	TATOOINE	tat_world	AREA	0	3619.5	5.0	-4711.3	8	1	Reimos Taligg	humanoid_tatooine_opening_reimos	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_reimos		600
 spawn_tat_656	TATOOINE	tat_world	AREA	0	3321.6	10.0	-5372.4	0	1	Shinn's mugger	humanoid_tatooine_shinn_mugger	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	3	0	-	idle				600
 spawn_tat_657	TATOOINE	tat_world	AREA	0	3552.8	5.0	-4935.3	-37	1	Stormtrooper Groupleader	humanoid_content_mos_eisley_stormtrooper_groupleader	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
 spawn_tat_658	TATOOINE	tat_world	AREA	0	3490.2	5.0	-4871.5	-26	1	Taibela	humanoid_legacy_taibela	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_659	TATOOINE	tat_world	AREA	0	2757.9	7.0	-4570.1	64	1	Toggi Bok	humanoid_tatooine_opening_toggi	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_660	TATOOINE	tat_world	AREA	0	3670.3	5.0	-4890.1	167	1	Tori Radeen	humanoid_tatooine_opening_tori	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_660	TATOOINE	tat_world	AREA	0	3670.3	5.0	-4890.1	167	1	Tori Radeen	humanoid_tatooine_opening_tori	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_tori		600
 spawn_tat_661	TATOOINE	tat_world	AREA	0	3484.4	5.0	-4808.7	-67	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_662	TATOOINE	tat_world	AREA	0	4103.6	13.3	-4631.0	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600
 spawn_tat_663	TATOOINE	tat_world	AREA	0	4152.2	6.7	-4674.2	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600
@@ -737,7 +737,7 @@ spawn_tat_734	TATOOINE	tat_mosentha_starport	AREA	4	-3.2	0.6	51.7	-179	1	a commo
 spawn_tat_735	TATOOINE	tat_mosentha_starport	AREA	4	5.0	0.6	62.2	146	1	a dervish	humanoid_dervish	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_736	TATOOINE	tat_mosentha_starport	AREA	4	5.5	0.6	49.9	-3	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	nervous				600
 spawn_tat_737	TATOOINE	tat_mosentha_starport	AREA	4	-4.8	0.6	68.0	-178	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair				600
-spawn_tat_738	TATOOINE	tat_mosentha_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle				600
+spawn_tat_738	TATOOINE	tat_mosentha_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		chassis_dealer		600
 spawn_tat_739	TATOOINE	tat_mosentha_starport	AREA	7	56.6	-0.5	41.1	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_740	TATOOINE	tat_mosentha_starport	AREA	7	55.9	-0.5	44.6	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_741	TATOOINE	tat_mosentha_starport	AREA	7	54.4	-0.5	41.5	27	1	a male rodian thug	humanoid_male_rodian_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle				600
@@ -861,7 +861,7 @@ spawn_tat_858	TATOOINE	tat_world	AREA	0	1283.4	7.0	3154.6	141	1	Tweego	humanoid_
 spawn_tat_859	TATOOINE	tat_world	AREA	0	1514.0	7.0	3313.0	-92	1	Wren	humanoid_smuggler_fence_wren	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle				600
 spawn_tat_860	TATOOINE	tat_mosespa_cantina	AREA	13	-29.7	-0.5	8.2	33	1	Commander Da'la Socuna (Rebel Pilot Trainer)	humanoid_rebel_commander_dala_socuna	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_861	TATOOINE	tat_mosespa_cantina	AREA	2	30.0	0.1	-8.3	50	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair				600
-spawn_tat_862	TATOOINE	tat_mosespa_cantina	AREA	3	8.5	-0.9	-0.1	82	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
+spawn_tat_862	TATOOINE	tat_mosespa_cantina	AREA	3	8.5	-0.9	-0.1	82	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		bartender		600
 spawn_tat_863	TATOOINE	tat_mosespa_cantina	AREA	3	10.8	-0.9	-10.4	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_864	TATOOINE	tat_mosespa_cantina	AREA	3	26.2	-0.9	-8.3	-43	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_865	TATOOINE	tat_mosespa_cantina	AREA	3	5.2	-0.9	12.6	-27	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
@@ -876,8 +876,8 @@ spawn_tat_873	TATOOINE	tat_mosespa_cantina	AREA	3	-5.0	-0.9	-5.4	0	1	Dorn Gestro
 spawn_tat_874	TATOOINE	tat_mosespa_cantina	AREA	3	10.4	-0.9	-2.7	-63	1	Jilljoo Jab	humanoid_jilljoo_jab	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_875	TATOOINE	tat_mosespa_cantina	AREA	7	4.5	-0.9	13.6	143	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_876	TATOOINE	tat_mosespa_starport	AREA	12	-55.8	2.6	41.7	145	1	Qord D'Baelor	humanoid_tatooine_wald_customer	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
-spawn_tat_877	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
-spawn_tat_878	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	a Junk Dealer	humanoid_junk_dealer_special	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
+spawn_tat_877	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		chassis_dealer		600
+spawn_tat_878	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	a Junk Dealer	humanoid_junk_dealer_special	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic		600
 spawn_tat_879	TATOOINE	tat_mosespa_watto	AREA	2	4.5	-0.5	1.9	-100	1	Watto	humanoid_watto	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_880	TATOOINE	tat_world	AREA	0	-2989.8	5.0	2123.8	-151	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation				600
 spawn_tat_881	TATOOINE	tat_world	AREA	0	-2778.4	5.0	2010.4	-80	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_accusing				600
@@ -1026,7 +1026,7 @@ spawn_tat_1023	TATOOINE	tat_wayfar_cantina	AREA	1	39.9	0.1	3.1	0	1	a Klaatu	huma
 spawn_tat_1024	TATOOINE	tat_wayfar_cantina	AREA	2	30.0	0.1	-8.2	50	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_1025	TATOOINE	tat_wayfar_cantina	AREA	2	29.4	0.1	-6.1	107	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_1026	TATOOINE	tat_wayfar_cantina	AREA	2	31.6	0.1	-6.5	-133	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation				600
-spawn_tat_1027	TATOOINE	tat_wayfar_cantina	AREA	3	8.4	-0.9	0.7	90	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle				600
+spawn_tat_1027	TATOOINE	tat_wayfar_cantina	AREA	3	8.4	-0.9	0.7	90	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		bartender		600
 spawn_tat_1028	TATOOINE	tat_wayfar_cantina	AREA	3	26.2	-0.9	-8.2	-43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_1029	TATOOINE	tat_wayfar_cantina	AREA	3	17.0	-0.9	6.7	-134	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_1030	TATOOINE	tat_wayfar_cantina	AREA	3	16.3	-0.9	3.9	-39	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation				600
@@ -2027,11 +2027,11 @@ spawn_tat_2024	TATOOINE	tat_jabbas_palace	AREA	1	6.6	0.3	128.3	-81	1	8-LOM	droid
 spawn_tat_2025	TATOOINE	tat_jabbas_palace	PATROL	1	-1.1	0.2	137.2	51	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	3	PATROL	0	patrol_tat_16500	column	idle				600
 spawn_tat_2026	TATOOINE	tat_jabbas_palace	PATROL	1	-9.2	0.2	120.0	88	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_16700	column	idle				600
 spawn_tat_2027	TATOOINE	tat_jabbas_palace	AREA	1	7.7	0.2	130.3	-90	1	Bruce McBrain	humanoid_bruce_mcbrain	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2028	TATOOINE	tat_jabbas_palace	AREA	1	-5.4	0.2	114.3	11	1	Jawl	humanoid_clone_jawl	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
+spawn_tat_2028	TATOOINE	tat_jabbas_palace	AREA	1	-5.4	0.2	114.3	11	1	Jawl	humanoid_clone_jawl	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_jawl		600
 spawn_tat_2029	TATOOINE	tat_jabbas_palace	AREA	1	-6.4	0.2	134.3	90	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2030	TATOOINE	tat_jabbas_palace	PATROL	1	4.0	0.2	122.4	0	1	Ortugg	humanoid_ortugg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_9900	column	idle				600
-spawn_tat_2031	TATOOINE	tat_jabbas_palace	AREA	1	5.9	0.3	116.1	-41	1	Ree-Yees	humanoid_ree_yees	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2032	TATOOINE	tat_jabbas_palace	AREA	1	-2.0	0.2	113.1	0	1	Reelo Baruk	humanoid_reelo_baruk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle				600
+spawn_tat_2031	TATOOINE	tat_jabbas_palace	AREA	1	5.9	0.3	116.1	-41	1	Ree-Yees	humanoid_ree_yees	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_ree_yees		600
+spawn_tat_2032	TATOOINE	tat_jabbas_palace	AREA	1	-2.0	0.2	113.1	0	1	Reelo Baruk	humanoid_reelo_baruk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle		tatooine_jabbas_palace_reelo_baruk		600
 spawn_tat_2033	TATOOINE	tat_jabbas_palace	AREA	10	-27.7	0.2	84.8	133	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2034	TATOOINE	tat_jabbas_palace	AREA	12	-43.0	3.0	64.2	91	1	Porcellus	humanoid_porcellus	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tat_2035	TATOOINE	tat_jabbas_palace	AREA	14	18.1	0.2	90.8	125	1	8D8 Droid	droid_8d8	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
@@ -2066,19 +2066,19 @@ spawn_tat_2063	TATOOINE	tat_jabbas_palace	AREA	22	1.1	2.0	35.2	-4	1	a thug	human
 spawn_tat_2064	TATOOINE	tat_jabbas_palace	AREA	22	7.5	2.0	46.8	-37	1	a wastrel	humanoid_wastrel	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_sitting_chair				600
 spawn_tat_2065	TATOOINE	tat_jabbas_palace	PATROL	22	-23.3	3.6	46.1	0	1	Agtor	humanoid_agtor	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10200	column	idle				600
 spawn_tat_2066	TATOOINE	tat_jabbas_palace	AREA	22	8.1	2.0	34.2	-90	1	Beissa (Jabba's Pilot Trainer)	humanoid_beissa	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2067	TATOOINE	tat_jabbas_palace	AREA	22	-12.1	2.0	49.4	105	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2068	TATOOINE	tat_jabbas_palace	AREA	22	-1.0	3.0	31.0	-40	1	Boba Fett	humanoid_boba_fett	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
+spawn_tat_2067	TATOOINE	tat_jabbas_palace	AREA	22	-12.1	2.0	49.4	105	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_bib_fortuna		600
+spawn_tat_2068	TATOOINE	tat_jabbas_palace	AREA	22	-1.0	3.0	31.0	-40	1	Boba Fett	humanoid_boba_fett	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_boba_fett		600
 spawn_tat_2069	TATOOINE	tat_jabbas_palace	AREA	22	-13.0	2.0	37.1	0	1	Droopy McCool	humanoid_droopy_mccool	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_music_3	9			600
 spawn_tat_2070	TATOOINE	tat_jabbas_palace	AREA	22	-15.1	2.0	45.8	106	1	G-5P0	droid_g5p0_protocol	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2071	TATOOINE	tat_jabbas_palace	PATROL	22	-1.8	2.0	47.3	0	1	Gurgot	humanoid_gurgot	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10000	column	idle				600
-spawn_tat_2072	TATOOINE	tat_jabbas_palace	AREA	22	-16.9	2.8	45.2	90	1	Jabba the Hutt	creature_jabba	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
+spawn_tat_2072	TATOOINE	tat_jabbas_palace	AREA	22	-16.9	2.8	45.2	90	1	Jabba the Hutt	creature_jabba	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_jabba		600
 spawn_tat_2073	TATOOINE	tat_jabbas_palace	AREA	22	-11.0	2.0	35.9	0	1	Max Rebo	humanoid_max_rebo	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_music_2				600
 spawn_tat_2074	TATOOINE	tat_jabbas_palace	AREA	22	-10.0	2.0	43.0	90	1	Oola	humanoid_oola	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_oola				600
 spawn_tat_2075	TATOOINE	tat_jabbas_palace	AREA	22	-16.1	2.8	42.3	90	1	Salacious Crumb	creature_salacious_crumb	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2076	TATOOINE	tat_jabbas_palace	AREA	22	-9.0	2.0	37.0	0	1	Sy Snootles	humanoid_sy_snootles	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_sy_snootles				600
 spawn_tat_2077	TATOOINE	tat_jabbas_palace	AREA	22	5.9	2.0	27.0	0	1	Torgau	humanoid_torgau	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle				600
 spawn_tat_2078	TATOOINE	tat_jabbas_palace	AREA	24	-18.0	5.8	73.1	78	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2079	TATOOINE	tat_jabbas_palace	AREA	26	-34.1	0.1	77.2	0	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	nervous				600
+spawn_tat_2079	TATOOINE	tat_jabbas_palace	AREA	26	-34.1	0.1	77.2	0	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	nervous		chassis_dealer		600
 spawn_tat_2080	TATOOINE	tat_jabbas_palace	AREA	27	-37.9	0.1	76.8	0	1	a prisoner	humanoid_clone_wookiee_prisoner_i	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad				600
 spawn_tat_2081	TATOOINE	tat_jabbas_palace	AREA	28	-34.3	0.1	86.5	178	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	threaten				600
 spawn_tat_2082	TATOOINE	tat_jabbas_palace	AREA	29	-40.4	0.1	87.5	127	1	a hostage	humanoid_disappear_hostage	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad				600
@@ -2096,7 +2096,7 @@ spawn_tat_2093	TATOOINE	tat_jabbas_palace	AREA	37	19.0	-11.0	42.0	-2	1	Malakili	
 spawn_tat_2094	TATOOINE	tat_jabbas_palace	AREA	37	19.2	-11.0	47.4	132	1	Ugtaur	humanoid_ugtaur	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_sitting_table				600
 spawn_tat_2095	TATOOINE	tat_jabbas_palace	AREA	38	-0.7	-10.9	44.4	90	1	a rancor	creature_rancor	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2096	TATOOINE	tat_jabbas_palace	AREA	4	-6.7	5.8	97.9	179	1	Bronell	humanoid_bronell	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
-spawn_tat_2097	TATOOINE	tat_jabbas_palace	AREA	4	-6.0	5.8	84.5	0	1	Ephant Mon	humanoid_ephant_mon	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle				600
+spawn_tat_2097	TATOOINE	tat_jabbas_palace	AREA	4	-6.0	5.8	84.5	0	1	Ephant Mon	humanoid_ephant_mon	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle		tatooine_jabbas_palace_ephant_mon		600
 spawn_tat_2098	TATOOINE	tat_jabbas_palace	PATROL	4	-11.2	5.8	87.5	0	1	Gartogg	humanoid_gartogg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10100	column	idle				600
 spawn_tat_2099	TATOOINE	tat_jabbas_palace	AREA	4	-12.3	5.8	93.5	87	1	Rogua	humanoid_rogua	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2100	TATOOINE	tat_jabbas_palace	AREA	4	-0.6	5.8	98.0	-162	1	Torrug	humanoid_torrug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600

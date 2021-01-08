@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/npe_main_bartender",
+		"key": "s_24",
+		"comment": "How may I help you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/npe_main_bartender",
+				"key": "s_57",
+				"comment": "I hear that you are the resident master drink mixer around here."
+			},
+			"next": "bartender/order"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

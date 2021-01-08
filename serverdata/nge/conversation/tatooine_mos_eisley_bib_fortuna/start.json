@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/bib_fortuna_mos_eisley",
+		"key": "s_195",
+		"comment": "I'm waiting for someone at the moment and it isn't you."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "explain"
+			}
+		}
+	]
+}

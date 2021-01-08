@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/boba_fett",
+		"key": "s_760",
+		"comment": "It's a good idea for you to leave now."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/boba_fett",
+				"key": "s_666",
+				"comment": "I've heard Jabba is working you hard. Maybe you could use some help?"
+			},
+			"next": "tatooine_jabbas_palace_boba_fett/help_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/boba_fett",
+				"key": "s_758",
+				"comment": "Yeah! You know, we could be partners."
+			},
+			"next": "tatooine_jabbas_palace_boba_fett/help_2"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_accusingly"
+			}
+		}
+	]
+}

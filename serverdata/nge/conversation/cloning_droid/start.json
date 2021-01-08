@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/clone_droid",
+		"key": "s_10",
+		"comment": "I recommend relaxing with one of the many Entertainers in the galaxy.  If that doesn't suit your fancy, you'll just have to wait it out, I'm afraid."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

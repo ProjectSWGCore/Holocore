@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/npe_main_bartender",
+		"key": "s_80",
+		"comment": "You should try the Fermented Blue Milk. It's excellent!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/npe_main_bartender",
+				"key": "s_51",
+				"comment": "Thanks!"
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "feed_creature_medium"
+			}
+		}
+	]
+}

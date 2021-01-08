@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_clone_relics_clone_trooper_jawl",
+		"key": "s_1258",
+		"comment": "I have too much stuff on my hands right now so please leave me alone."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

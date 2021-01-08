@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_10",
+		"comment": "You know the deceased? Perhaps you could shed some light on what could have happened."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/happer_mos_eisley",
+				"key": "s_9",
+				"comment": "Is that Bera Jeza?  Oh no!"
+			},
+			"next": "tatooine_mos_eisley_happer/known_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/happer_mos_eisley",
+				"key": "s_11",
+				"comment": "I don't know if I can help, but I am more than willing to assist the Mos Eisley Police if possible."
+			},
+			"next": "tatooine_mos_eisley_happer/help_1"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shrug_shoulders"
+			}
+		}
+	]
+}
