@@ -33,11 +33,8 @@ import com.projectswg.holocore.resources.gameplay.conversation.model.PlayerRespo
 import com.projectswg.holocore.resources.gameplay.conversation.model.Requirement;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.events.ChangePlayerFactionEventParser;
-import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.events.NpcAnimationEventParser;
-import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.events.PlayerAnimationEventParser;
-import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.requirements.FactionNameRequirementParser;
-import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.requirements.FactionStatusRequirementParser;
+import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.events.*;
+import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.requirements.*;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.json.JSON;
 import me.joshlarson.json.JSONObject;
@@ -198,6 +195,7 @@ public class ConversationLoader extends DataLoader {
 		eventParserMap.put("faction_change", new ChangePlayerFactionEventParser());
 		eventParserMap.put("player_animation", new PlayerAnimationEventParser());
 		eventParserMap.put("npc_animation", new NpcAnimationEventParser());
+		eventParserMap.put("show_sellable_items", new ShowSellableItemsEventParser());
 	}
 	
 	private void loadSpawnToConversations() throws IOException {

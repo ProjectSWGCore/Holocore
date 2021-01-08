@@ -12,6 +12,10 @@
 			"args": {
 				"animation": "thank"
 			}
+		},
+		{
+			"type": "show_sellable_items",
+			"args": {}
 		}
 	]
 }

@@ -181,9 +181,13 @@ object StaticItemCreator {
 		if (info == null)
 			return
 
-		if (info.charges != 0) {
+		if (info.charges > 0) {
 			obj.addAttribute("charges", info.charges.toString())
 			obj.counter = info.charges
+		}
+
+		if (info.value > 0) {
+			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, info.value)
 		}
 	}
 	
@@ -225,9 +229,13 @@ object StaticItemCreator {
 		if (info == null)
 			return
 
-		if (info.charges != 0) {
+		if (info.charges > 0) {
 			obj.addAttribute("charges", info.charges.toString())
 			obj.counter = info.charges
+		}
+
+		if (info.value > 0) {
+			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, info.value)
 		}
 
 		applyColors(obj, info.color)
