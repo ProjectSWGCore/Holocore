@@ -1,0 +1,40 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_250",
+		"comment": "As you wish.  I will show you what is available."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_358",
+				"comment": "Thank you very much."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": [
+					"combatant"
+				]
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "explain"
+			}
+		}
+	]
+}

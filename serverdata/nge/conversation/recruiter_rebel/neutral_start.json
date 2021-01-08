@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_334",
+		"comment": "Hello friend.  Is there something that I can do for you?  Are you interested in helping free the peoples of the galaxy?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_114",
+				"comment": "Yes. I want to be a part of the Alliance!"
+			},
+			"next": "recruiter_rebel/neutral_selected"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "whisper"
+			}
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_356",
+		"comment": "Superb!  Welcome to the Rebellion!  "
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}

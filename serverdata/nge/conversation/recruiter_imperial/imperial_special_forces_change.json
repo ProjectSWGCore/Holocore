@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_50",
+		"comment": "What kind of change were you considering?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_49",
+				"comment": "I would like to make a change to my military status."
+			},
+			"next": "recruiter_imperial/imperial_special_forces_downgrade"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_88",
+				"comment": "I believe it is time to end my tour of duty.  I would like to resign."
+			},
+			"next": "recruiter_imperial/imperial_resign"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "rub_chin_thoughtful"
+			}
+		}
+	]
+}

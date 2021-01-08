@@ -1,0 +1,47 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_216",
+		"comment": "Hello friend.  Ready to get back to some real work?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_218",
+				"comment": "I am ready to get back to my duties."
+			},
+			"next": "recruiter_rebel/imperial_on_leave_upgrade"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_226",
+				"comment": "Actually, I think I like being on leave.  "
+			},
+			"next": "recruiter_rebel/imperial_on_leave_stay"
+		},
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"faction": "on_leave"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

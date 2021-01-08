@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_84a67771",
+		"comment": "Alright, let me see what you are offering."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thank"
+			}
+		}
+	]
+}

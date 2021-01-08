@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_64",
+		"comment": "Special Forces is recruiting.  Would you like to submit your application?  This means that you will be authorized to hunt the Rebel 'special forces', as they like to call themselves."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_66",
+				"comment": "Yes, I want to join Special Forces, sir!"
+			},
+			"next": "recruiter_imperial/imperial_combatant_upgrade_accepted"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_55",
+				"comment": "On second thought, I think I'll stay as I am."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

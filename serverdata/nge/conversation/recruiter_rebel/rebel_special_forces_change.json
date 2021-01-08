@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_50",
+		"comment": "What kind of change were you considering?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_49",
+				"comment": "I would like to make a change to my military status."
+			},
+			"next": "recruiter_rebel/rebel_special_forces_downgrade"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_74",
+				"comment": "This is all too much for me.  I would like to resign completely."
+			},
+			"next": "recruiter_rebel/rebel_resign"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "rub_chin_thoughtful"
+			}
+		}
+	]
+}

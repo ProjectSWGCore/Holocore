@@ -1,0 +1,23 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_86",
+		"comment": "Your sense of duty is admirable.  Long live the Emperor!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_status",
+			"args": {
+				"faction": "combatant"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}

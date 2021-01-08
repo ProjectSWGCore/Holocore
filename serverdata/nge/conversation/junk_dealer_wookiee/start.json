@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_wke_junk_dealer",
+		"key": "s_bef51e38",
+		"comment": "Welcome offworlder. Perhaps you have something on your person that you wish to sell. My company is interested in all sorts of goods that people tend to come across."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/ep3_wke_junk_dealer",
+				"key": "s_cd7a3f41",
+				"comment": "I am sorry but I don't think I have anything you would want."
+			},
+			"next": "junk_dealer_wookiee/no_items"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/ep3_wke_junk_dealer",
+				"key": "s_54fab04f",
+				"comment": "I have some things that you might be interested in."
+			},
+			"next": "junk_dealer_wookiee/sell_items"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

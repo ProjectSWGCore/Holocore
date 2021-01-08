@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_espa_watto",
+		"key": "s_400",
+		"comment": "What are you looking for outlander?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

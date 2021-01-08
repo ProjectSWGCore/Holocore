@@ -1,0 +1,49 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_330",
+		"comment": "How are we doing in the war against the Imperial tyrants?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_248",
+				"comment": "I need supplies.  Do you have anything available?"
+			},
+			"next": "recruiter_rebel/rebel_special_forces_supplies"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_49",
+				"comment": "I would like to make a change to my military status."
+			},
+			"next": "recruiter_rebel/rebel_special_forces_change"
+		},
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": [
+					"special_forces"
+				]
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute2"
+			}
+		}
+	]
+}

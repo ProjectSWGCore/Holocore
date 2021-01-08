@@ -1,0 +1,31 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_116",
+		"comment": "Welcome to the Imperial Military.  I expect good things from you, recruit!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_117",
+				"comment": "Thank you, sir."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "imperial"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "yes"
+			}
+		}
+	]
+}

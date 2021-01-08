@@ -1,0 +1,31 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_115",
+		"comment": "Superb!  Welcome to the Rebellion!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_116",
+				"comment": "Thank you very much."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "yes"
+			}
+		}
+	]
+}

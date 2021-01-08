@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_58",
+		"comment": "That's a shame.  It will take some time to push the paperwork through for approval.  Your status will change in about 5 minutes."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": "on_leave"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}
+

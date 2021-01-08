@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/barada",
+		"key": "s_44",
+		"comment": "I'm not sure what you're doing in my garage, but you better go do it somewhere else."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

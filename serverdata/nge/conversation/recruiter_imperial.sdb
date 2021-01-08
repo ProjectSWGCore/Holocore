@@ -1,0 +1,7 @@
+conversation_id	conversation_file
+TEXT	TEXT
+recruiter_imperial	recruiter_imperial/neutral_start
+recruiter_imperial	recruiter_imperial/imperial_opposite_faction
+recruiter_imperial	recruiter_imperial/imperial_on_leave_start
+recruiter_imperial	recruiter_imperial/imperial_combatant_start
+recruiter_imperial	recruiter_imperial/imperial_special_forces_start

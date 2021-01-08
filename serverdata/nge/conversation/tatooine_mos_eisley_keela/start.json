@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_knives_fencing_keela",
+		"key": "s_12",
+		"comment": "I cann't talk. If I say anything Una will kill me."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "scared"
+			}
+		}
+	]
+}

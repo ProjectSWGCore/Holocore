@@ -8,16 +8,18 @@
 		{
 			"playerMessage": {
 				"file": "conversation/junk_dealer_generic",
-				"key": "s_54fab04f",
-				"comment": "I have some things that you might be interested in."
+				"key": "s_cd7a3f41",
+				"comment": "I am sorry but I don't think I have anything you would want."
 			},
+			"next": "junk_dealer_generic/decline"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/junk_dealer_generic",
-				"key": "s_cd7a3f41",
-				"comment": "I am sorry but I don't think I have anything you would want."
+				"key": "s_54fab04f",
+				"comment": "I have some things that you might be interested in."
 			},
+			"next": "junk_dealer_generic/accept"
 		}
 	],
 	"requirements": [],
@@ -25,7 +27,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "explain"
+				"animation": "wave1"
 			}
 		}
 	]

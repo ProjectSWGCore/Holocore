@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_127",
+		"comment": "I'm tired. I think I'll take some time off."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

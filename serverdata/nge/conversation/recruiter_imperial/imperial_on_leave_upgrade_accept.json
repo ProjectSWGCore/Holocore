@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_432",
+		"comment": "Joining the military is a big commitment.  Are you sure that you are ready?  You realize that those upstart rebels will attack you on sight?  Not the so-called 'special forces' but their main troops."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_79",
+				"comment": "I am certain."
+			},
+			"next": "recruiter_imperial/imperial_on_leave_upgrade_accepted",
+		},
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "explain"
+			}
+		}
+	]
+}

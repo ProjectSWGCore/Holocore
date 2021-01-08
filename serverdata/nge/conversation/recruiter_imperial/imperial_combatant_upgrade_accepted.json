@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_68",
+		"comment": "Very good.  I'll fast-track this application and you will be active in 30 seconds."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_438",
+				"comment": "Thank you, sir."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}

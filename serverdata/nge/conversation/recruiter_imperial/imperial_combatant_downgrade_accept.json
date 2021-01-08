@@ -1,0 +1,18 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_82",
+		"comment": "I need to process your paperwork.  You will officially be on leave in 5 minutes."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}
+

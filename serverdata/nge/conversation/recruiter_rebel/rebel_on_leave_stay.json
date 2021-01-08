@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_362",
+		"comment": "We only want serious, committed candidates.  If you change your mind, talk to me then."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_226",
+				"comment": "Actually, I think I like being on leave.  "
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

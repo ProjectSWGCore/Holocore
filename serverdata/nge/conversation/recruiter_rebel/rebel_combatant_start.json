@@ -1,0 +1,49 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_234",
+		"comment": "Hello friend.  Is there something that I may do to help you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_248",
+				"comment": "I need supplies.  Do you have anything available?"
+			},
+			"next": "recruiter_rebel/rebel_combatant_supplies"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_49",
+				"comment": "I would like to make a change to my military status."
+			},
+			"next": "recruiter_rebel/rebel_combatant_change"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": [
+					"combatant"
+				]
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute2"
+			}
+		}
+	]
+}

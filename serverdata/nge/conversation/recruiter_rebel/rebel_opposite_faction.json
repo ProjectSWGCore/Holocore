@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_232",
+		"comment": "What are you doing talking to me?  People like you are destroying the galaxy."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "gesticulate_wildly"
+			}
+		}
+	]
+}

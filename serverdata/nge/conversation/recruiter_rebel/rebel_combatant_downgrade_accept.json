@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_92",
+		"comment": "It will take me some time to process, but you will be on leave beginning in 5 minutes.  "
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"statuses": "on_leave"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}
+
