@@ -1,0 +1,9 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1	Yavin_fallenStar_e3_Warn_Megean					0	0	0
+1	quest.task.ground.encounter	2	Yavin_fallenStar_e4_defeatGuard					1	0	0
+2	quest.task.ground.wait_for_signal	3	Yavin_fallenStar_e6_meganAgrees					0	0	0
+3	quest.task.ground.wait_for_signal	4	Yavin_fallenStar_e7_informOsae					0	0	0
+4	quest.task.ground.reward	5	Yavin_fallenStar_e7_get_first_reward					1	0	0
+5	quest.task.ground.complete_quest							0	0	0
+6	quest.task.ground.clear_quest		Yavin_fallenStar_e27_goonWins					0	0	0

@@ -1,0 +1,8 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1	yavin_meganjobs_e10_hyperdrive_megan					0	0	0
+1	quest.task.ground.encounter	3	yavin_meganjobs_e11_hyberdrive_megan					3	0	0
+2	quest.task.ground.clear_quest		yavin_meganjobs_e23_end_hyperdrive					0	0	0
+3	quest.task.ground.wait_for_signal	4	yavin_meganjobs_e13_hyperdrive_megan					0	0	0
+4	quest.task.ground.reward	5	yavin_meganjobs_e7_worker_reward					1	0	0
+5	quest.task.ground.complete_quest		yavin_meganjobs_e24_clear_hyberdrive					0	0	0

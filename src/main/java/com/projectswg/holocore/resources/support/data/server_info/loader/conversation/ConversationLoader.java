@@ -189,6 +189,8 @@ public class ConversationLoader extends DataLoader {
 	private void initRequirementParsers() {
 		requirementParserMap.put("faction_name", new FactionNameRequirementParser());
 		requirementParserMap.put("faction_status", new FactionStatusRequirementParser());
+		requirementParserMap.put("active_quest", new ActiveQuestRequirementParser());
+		requirementParserMap.put("complete_quest", new CompleteQuestRequirementParser());
 	}
 	
 	private void initEventParsers() {
@@ -196,6 +198,8 @@ public class ConversationLoader extends DataLoader {
 		eventParserMap.put("player_animation", new PlayerAnimationEventParser());
 		eventParserMap.put("npc_animation", new NpcAnimationEventParser());
 		eventParserMap.put("show_sellable_items", new ShowSellableItemsEventParser());
+		eventParserMap.put("grant_quest", new GrantQuestEventParser());
+		eventParserMap.put("advance_quest", new AdvanceQuestEventParser());
 	}
 	
 	private void loadSpawnToConversations() throws IOException {

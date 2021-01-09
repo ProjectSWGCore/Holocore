@@ -1,0 +1,18 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1						0	0	0
+1	quest.task.ground.wait_for_signal	2;5;8;11						0	0	0
+2	quest.task.ground.timer	3						0	10	10
+3	quest.task.ground.encounter							4	0	0
+4	quest.task.ground.clear_quest							0	0	0
+5	quest.task.ground.timer	6						0	130	70
+6	quest.task.ground.encounter							3	0	0
+7	quest.task.ground.clear_quest							0	0	0
+8	quest.task.ground.timer	9						0	210	210
+9	quest.task.ground.encounter							1	0	0
+10	quest.task.ground.clear_quest							0	0	0
+11	quest.task.ground.timer	12						0	370	370
+12	quest.task.ground.encounter	13						1	0	0
+13	quest.task.ground.wait_for_signal	14	talkWirartu					0	0	0
+14	quest.task.ground.complete_quest							0	0	0
+15	quest.task.ground.clear_quest							0	0	0

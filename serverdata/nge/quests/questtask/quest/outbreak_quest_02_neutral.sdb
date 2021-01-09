@@ -1,0 +1,9 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.timer	1	commPiettTimer					0	10	10
+1	quest.task.ground.comm_player	2	commPiett	@quest/ground/outbreak_quest_02_neutral:task01_comm_message_text	object/mobile/dressed_guri.iff			0	0	0
+2	quest.task.ground.timer	3	timer					0	20	20
+3	quest.task.ground.comm_player	4	commPiett	@quest/ground/outbreak_quest_02_neutral:task03_comm_message_text	object/mobile/dressed_guri.iff			0	0	0
+4	quest.task.ground.go_to_location	5	goFacility					0	0	0
+5	quest.task.ground.comm_player	6	piettCom	@quest/ground/outbreak_quest_02_neutral:task05_comm_message_text	object/mobile/dressed_guri.iff			0	0	0
+6	quest.task.ground.wait_for_signal		findTroopers					0	0	0

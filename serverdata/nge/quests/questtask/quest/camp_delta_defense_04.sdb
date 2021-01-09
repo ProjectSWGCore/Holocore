@@ -1,0 +1,15 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1	goToPost					0	0	0
+1	quest.task.ground.wait_for_signal	2;5	waitingAtPost					0	0	0
+2	quest.task.ground.wait_for_signal	3	failSignal					0	0	0
+3	quest.task.ground.comm_player	4	fromGuard	@quest/ground/camp_delta_defense_04:task03_comm_message_text	object/mobile/outbreak_prison_guard_erlem_marh.iff			0	0	0
+4	quest.task.ground.clear_quest		clear					0	0	0
+5	quest.task.ground.timer	6;10	surviveTimer					0	60	60
+6	quest.task.ground.wait_for_signal	7	waitToCleanUpAll					0	0	0
+7	quest.task.ground.comm_player	8	fromGuard	@quest/ground/camp_delta_defense_04:task07_comm_message_text	object/mobile/outbreak_prison_guard_erlem_marh.iff			0	0	0
+8	quest.task.ground.wait_for_signal	9	collectRewardDelta					0	0	0
+9	quest.task.ground.complete_quest							0	0	0
+10	quest.task.ground.wait_for_signal	11	failSignal					0	0	0
+11	quest.task.ground.comm_player	12	fromGuard	@quest/ground/camp_delta_defense_04:task11_comm_message_text	object/mobile/outbreak_prison_guard_erlem_marh.iff			0	0	0
+12	quest.task.ground.clear_quest		clear					0	0	0

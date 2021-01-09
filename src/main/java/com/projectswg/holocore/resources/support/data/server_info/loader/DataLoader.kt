@@ -81,6 +81,7 @@ abstract class DataLoader {
 		fun noSpawnZones(): NoSpawnZoneLoader = ServerData.noSpawnZones
 		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
 		fun conversationLoader(): ConversationLoader = ServerData.conversationLoader
+		fun questLoader(): QuestLoader = ServerData.questLoader
 
 	}
 	

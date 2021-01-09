@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;4;9;12;13	ac_hoolar_01_null					0	0	0
+1	quest.task.ground.wait_for_signal	2;3	ac_30_hoolar_02_wfs_task_complete					0	0	0
+2	quest.task.ground.wait_for_signal		ac_30_hoolar_02_wfs_quest_complete				ac_ongoing_launchpad_loruna_repeater	0	0	0
+3	quest.task.ground.comm_player		ac_30_hoolar_02_wfs_task_complete_comm	@quest/ground/ac_repeater_loruna_enf_30_dnpc2_hoolar_02:task03_comm_message_text	object/mobile/azure_cabal_hoolar.iff			0	0	0
+4	quest.task.ground.retrieve_item	5	ac_30_hoolar_02_dml2_retrieve					0	0	0
+5	quest.task.ground.comm_player	6;7	ac_30_hoolar_02_dml2_comm	@quest/ground/ac_repeater_loruna_enf_30_dnpc2_hoolar_02:task05_comm_message_text	object/mobile/azure_cabal_hoolar.iff			0	0	0
+6	quest.task.ground.spawn		ac_30_hoolar_02_dml2_spawn					0	0	0
+7	quest.task.ground.destroy_multi_and_loot	8	ac_30_hoolar_02_dml2					0	0	0
+8	quest.task.ground.comm_player		ac_30_haadj_02_dml2_comm2	@quest/ground/ac_repeater_loruna_enf_30_dnpc2_hoolar_02:task08_comm_message_text	object/mobile/azure_cabal_hoolar.iff			0	0	0
+9	quest.task.ground.destroy_multi_and_loot	10	ac_30_hoolar_02_dml1			azure_cabal_ms_supervisor		0	0	0
+10	quest.task.ground.comm_player	11	ac_30_hoolar_02_dml1_comm	@quest/ground/ac_repeater_loruna_enf_30_dnpc2_hoolar_02:task10_comm_message_text	object/mobile/azure_cabal_hoolar.iff			0	0	0
+11	quest.task.ground.retrieve_item		ac_30_hoolar_02_dml1_retrieve					0	0	0
+12	quest.task.ground.destroy_multi		ac_30_hoolar_02_dm2			azure_cabal_ms_trainer		6	0	0
+13	quest.task.ground.destroy_multi		ac_30_hoolar_02_dm1			azure_cabal_ms_cadet		13	0	0

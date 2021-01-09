@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1	elevator_toDroid					0	0	0
+1	quest.task.ground.destroy_multi	2	thugs			npe_thug_01		3	0	0
+2	quest.task.ground.wait_for_signal	3	elevator_fromDroid					0	0	0
+3	quest.task.ground.wait_for_signal	4	return1					0	0	0
+4	quest.task.ground.wait_for_signal	5	elevator_toData					0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6	get_data			npe_commando		0	0	0
+6	quest.task.ground.timer	7						0	3	5
+7	quest.task.ground.comm_player	8		@quest/ground/npe_commando:task07_comm_message_text	object/mobile/dressed_npe_commando.iff			0	0	0
+8	quest.task.ground.timer	9	dataUpload					0	10	15
+9	quest.task.ground.comm_player	10		@quest/ground/npe_commando:task09_comm_message_text	object/mobile/dressed_npe_commando.iff			0	0	0
+10	quest.task.ground.retrieve_item	11	defuse					0	0	0
+11	quest.task.ground.wait_for_signal	12	elevator_down					0	0	0
+12	quest.task.ground.wait_for_signal	13	final_return					0	0	0
+13	quest.task.ground.complete_quest							0	0	0

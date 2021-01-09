@@ -1,0 +1,18 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.timer	1	tatooine_knives_thrust_e2					0	5	20
+1	quest.task.ground.comm_player	2	tatooine_knives_thrust_e3	@quest/ground/tatooine_knives_thrust:task01_comm_message_text	object/mobile/dressed_tatooine_labria.iff			0	0	0
+2	quest.task.ground.wait_for_signal	3	tatooine_knives_thrust_e4					0	0	0
+3	quest.task.ground.go_to_location	4	tatoonie_knives_thrust_e67					0	0	0
+4	quest.task.ground.encounter	6	tatoonie_knives_thrust_e6					1	0	0
+5	quest.task.ground.clear_quest		tatooine_knives_thrust_e7					0	0	0
+6	quest.task.ground.retrieve_item	7	tatoonie_knives_thrust_e65					0	0	0
+7	quest.task.ground.wait_for_signal	8	tatooine_knives_thrust_e8					0	0	0
+8	quest.task.ground.go_to_location	9	tatooine_knives_thrust_e107					0	0	0
+9	quest.task.ground.encounter	11	tatooine_knives_thrust_e10					1	0	0
+10	quest.task.ground.clear_quest		tatooine_knives_thrust_e17					0	0	0
+11	quest.task.ground.wait_for_signal	12	tatooine_knives_thrust_e12					0	0	0
+12	quest.task.ground.destroy_multi_and_loot	13	tatooine_knives_thrust_e13			jawa_engineer		0	0	0
+13	quest.task.ground.wait_for_signal	14	tatooine_knives_thrust_e14					0	0	0
+14	quest.task.ground.reward	15	tatooine_knives_thrust_15				tatooine_knives_fencing_reward	1	0	0
+15	quest.task.ground.complete_quest		tatooine_knives_thrust_e16					0	0	0

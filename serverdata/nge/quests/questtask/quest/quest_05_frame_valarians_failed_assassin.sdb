@@ -1,0 +1,6 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.comm_player	1	jabbaTaunt	@quest/ground/quest_05_frame_valarians_failed_assassin:task00_comm_message_text	object/mobile/jabba_the_hutt.iff			0	0	0
+1	quest.task.ground.timer	2	timerTask					0	15	15
+2	quest.task.ground.comm_player	3	msBobaFett	@quest/ground/quest_05_frame_valarians_failed_assassin:task02_comm_message_text	object/mobile/boba_fett.iff			0	0	0
+3	quest.task.ground.complete_quest		completeMe				quest/quest_06_conspire_cale	0	0	0

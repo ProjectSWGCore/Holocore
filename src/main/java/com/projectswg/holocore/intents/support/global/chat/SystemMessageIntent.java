@@ -28,9 +28,11 @@ package com.projectswg.holocore.intents.support.global.chat;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SystemMessageIntent extends Intent {
 	
@@ -39,6 +41,7 @@ public class SystemMessageIntent extends Intent {
 	private final Terrain terrain;
 	private final String message;
 	private final ProsePackage prose;
+	private final ChatSystemMessage.SystemChatType systemChatType;
 	
 	/**
 	 * Custom broadcast type with a specified receiver and message
@@ -53,6 +56,7 @@ public class SystemMessageIntent extends Intent {
 		this.terrain = null;
 		this.message = message;
 		this.prose = null;
+		this.systemChatType = ChatSystemMessage.SystemChatType.PERSONAL;
 	}
 	
 	/**
@@ -67,11 +71,12 @@ public class SystemMessageIntent extends Intent {
 		this.terrain = terrain;
 		this.message = message;
 		this.prose = null;
+		this.systemChatType = ChatSystemMessage.SystemChatType.PERSONAL;
 	}
 	
 	/**
 	 * Personal message to the receiver with the prose package
-	 * 
+	 *
 	 * @param receiver the receiver
 	 * @param prose the prose package to send
 	 */
@@ -81,6 +86,22 @@ public class SystemMessageIntent extends Intent {
 		this.terrain = null;
 		this.message = null;
 		this.prose = prose;
+		this.systemChatType = ChatSystemMessage.SystemChatType.PERSONAL;
+	}
+	
+	/**
+	 * Personal message to the receiver with the prose package
+	 * 
+	 * @param receiver the receiver
+	 * @param prose the prose package to send
+	 */
+	public SystemMessageIntent(@NotNull Player receiver, @NotNull ProsePackage prose, @NotNull ChatSystemMessage.SystemChatType systemChatType) {
+		this.broadcastType = BroadcastType.PERSONAL;
+		this.receiver = receiver;
+		this.terrain = null;
+		this.message = null;
+		this.prose = prose;
+		this.systemChatType = systemChatType;
 	}
 	
 	/**
@@ -95,6 +116,7 @@ public class SystemMessageIntent extends Intent {
 		this.terrain = null;
 		this.message = message;
 		this.prose = null;
+		this.systemChatType = ChatSystemMessage.SystemChatType.PERSONAL;
 	}
 	
 	/**
@@ -107,6 +129,7 @@ public class SystemMessageIntent extends Intent {
 		this.terrain = null;
 		this.message = message;
 		this.prose = null;
+		this.systemChatType = ChatSystemMessage.SystemChatType.PERSONAL;
 	}
 	
 	public BroadcastType getBroadcastType() {
@@ -129,12 +152,20 @@ public class SystemMessageIntent extends Intent {
 		return prose;
 	}
 	
+	public ChatSystemMessage.SystemChatType getSystemChatType() {
+		return systemChatType;
+	}
+	
 	public static void broadcastPersonal(@NotNull Player receiver, @NotNull String message) {
 		new SystemMessageIntent(receiver, message).broadcast();
 	}
 	
 	public static void broadcastPersonal(@NotNull Player receiver, @NotNull ProsePackage prose) {
-		new SystemMessageIntent(receiver, prose).broadcast();
+		new SystemMessageIntent(receiver, prose, ChatSystemMessage.SystemChatType.PERSONAL).broadcast();
+	}
+	
+	public static void broadcastPersonal(@NotNull Player receiver, @NotNull ProsePackage prose, @NotNull ChatSystemMessage.SystemChatType systemChatType) {
+		new SystemMessageIntent(receiver, prose, systemChatType).broadcast();
 	}
 	
 	public static void broadcastArea(@NotNull Player receiver, @NotNull String message) {

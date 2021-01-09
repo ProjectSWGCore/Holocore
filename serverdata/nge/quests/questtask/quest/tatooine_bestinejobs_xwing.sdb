@@ -1,0 +1,5 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.retrieve_item	1	tatooine_bestinejobs_xwing_e2					0	0	0
+1	quest.task.ground.comm_player	2	tatooine_bestinejobs_xwing_e3	@quest/ground/tatooine_bestinejobs_xwing:task01_comm_message_text	object/mobile/dressed_bestinejobs_jasha.iff			0	0	0
+2	quest.task.ground.complete_quest		tatooine_bestinejobs_xwing_e6					0	0	0

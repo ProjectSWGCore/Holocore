@@ -1,0 +1,10 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	tatooine_wald_firstquest_kill_greatermynock			tatooine_mynock_greater		20	0	0
+1	quest.task.ground.wait_for_signal	2;5;7	tatooine_wald_firstquest_returntowald1					0	0	0
+2	quest.task.ground.wait_for_tasks	3	tatooine_wald_firstquest_task_two_and_three_complete_WFT					0	0	0
+3	quest.task.ground.wait_for_signal	4	tatooine_wald_firstquest_returntowald2					0	0	0
+4	quest.task.ground.complete_quest		tatooine_wald_firstquest_complete_quest					0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6	tatooine_wald_firstquest_laserflits_DML					0	0	0
+6	quest.task.ground.wait_for_signal		tatooine_wald_firstquest_deliver_swoop_parts_WFS					0	0	0
+7	quest.task.ground.wait_for_signal		tatooine_wald_firstquest_engineparts_WFS					0	0	0

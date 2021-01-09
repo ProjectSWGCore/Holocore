@@ -1,0 +1,18 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;14						0	0	0
+1	quest.task.ground.go_to_location	2;6;8;10;12	mustafar_lava_beetle_nest_one					0	0	0
+2	quest.task.ground.wait_for_tasks	3	lava_beetle_nest_tasks					0	0	0
+3	quest.task.ground.encounter	4	mustafar_lava_beetle_nest_two					8	0	0
+4	quest.task.ground.wait_for_signal	5	mustafar_lava_beetle_nest_four					0	0	0
+5	quest.task.ground.complete_quest							0	0	0
+6	quest.task.ground.wait_for_signal	7	destroy_lava_beetle_nest_four					0	0	0
+7	quest.task.ground.encounter		destroyed_beetle_soldier_four					5	0	0
+8	quest.task.ground.wait_for_signal	9	destroy_lava_beetle_nest_three					0	0	0
+9	quest.task.ground.encounter		destroyed_beetle_soldier_three					5	0	0
+10	quest.task.ground.wait_for_signal	11	destroy_lava_beetle_nest_two					0	0	0
+11	quest.task.ground.encounter		destroyed_beetle_soldiers_two					5	0	0
+12	quest.task.ground.wait_for_signal	13	destroy_lava_beetle_nest_one					0	0	0
+13	quest.task.ground.encounter		destroyed_beetle_soldiers_one					5	0	0
+14	quest.task.ground.wait_for_signal	15						0	0	0
+15	quest.task.ground.clear_quest							0	0	0

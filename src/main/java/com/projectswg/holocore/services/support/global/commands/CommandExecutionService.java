@@ -44,6 +44,7 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.flags
 import com.projectswg.holocore.resources.support.global.commands.callbacks.generic.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.group.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.loot.CmdLoot;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.quest.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestCoreSample;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestSurvey;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -122,6 +123,7 @@ public class CommandExecutionService extends Service {
 		addGroupScripts();
 		addSurveyScripts();
 		addConversationScripts();
+		addQuestScripts();
 	}
 	
 	private void addAdminScripts() {
@@ -220,6 +222,11 @@ public class CommandExecutionService extends Service {
 		registerCallback("npcconversationstart", NpcConversationStartCmdCallback::new);
 		registerCallback("npcconversationselect", NpcConversationSelectCmdCallback::new);
 		registerCallback("npcconversationstop", NpcConversationStopCmdCallback::new);
+	}
+	
+	private void addQuestScripts() {
+		registerCallback("abandonquest", CmdAbandonQuest::new);
+		registerCallback("completequest", CmdCompleteQuest::new);
 	}
 	
 }

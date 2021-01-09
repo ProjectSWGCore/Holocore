@@ -1,0 +1,15 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.show_message_box	1	tat_eisley_answers_e1					0	0	0
+1	quest.task.ground.retrieve_item	2	tat_eisley_answers_e2					0	0	0
+2	quest.task.ground.show_message_box	3	tat_eisley_answers_e3					0	0	0
+3	quest.task.ground.retrieve_item	4	tat_eisley_answers_e4					0	0	0
+4	quest.task.ground.show_message_box	5;11	tat_eisley_answers_e5					0	0	0
+5	quest.task.ground.retrieve_item	6	tat_eisley_answers_e6					0	0	0
+6	quest.task.ground.show_message_box	7	tat_eisley_answers_e7					0	0	0
+7	quest.task.ground.retrieve_item	8	tat_eisley_answers_e8					0	0	0
+8	quest.task.ground.show_message_box	9	tat_eisley_answers_e9					0	0	0
+9	quest.task.ground.comm_player	10	tat_eisley_answers_e10	@quest/ground/tatooine_eisley_answers:task09_comm_message_text	object/mobile/bib_fortuna.iff			0	0	0
+10	quest.task.ground.complete_quest		tat_eisley_answers_e11				tatooine_eisley_faceevil	0	0	0
+11	quest.task.ground.timer	12	tat_eisley_answers_e5a					0	10	14
+12	quest.task.ground.comm_player		tat_eisley_answers_e5b	@quest/ground/tatooine_eisley_answers:task12_comm_message_text	object/mobile/dressed_noble_old_human_female_02.iff			0	0	0

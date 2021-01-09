@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;2;3;4;5;6	nothingTask					0	0	0
+1	quest.task.ground.wait_for_signal		rinorLeaves					0	0	0
+2	quest.task.ground.wait_for_signal		redWeedLeaves					0	0	0
+3	quest.task.ground.wait_for_signal		greyBushLeaves					0	0	0
+4	quest.task.ground.wait_for_signal		ongmuelPlantLeaves					0	0	0
+5	quest.task.ground.wait_for_signal		lessetPlantLeaves					0	0	0
+6	quest.task.ground.wait_for_tasks	7	gatherHerbs					0	0	0
+7	quest.task.ground.comm_player	8;11	comm	@quest/ground/wod_prologue_herb_gathering:task07_comm_message_text	object/mobile/dressed_gray_witch.iff			0	0	0
+8	quest.task.ground.wait_for_signal	9	storeHerbsNightsister					0	0	0
+9	quest.task.ground.wait_for_signal	10	returnForTreatNightsister					0	0	0
+10	quest.task.ground.complete_quest		finish					0	0	0
+11	quest.task.ground.wait_for_signal	12	storeHerbsSinging					0	0	0
+12	quest.task.ground.wait_for_signal	13	returnForTreatSinging					0	0	0
+13	quest.task.ground.complete_quest		finish					0	0	0
+14	quest.task.ground.clear_quest						quest/wod_themepark_herb_gathering_fail	0	0	0

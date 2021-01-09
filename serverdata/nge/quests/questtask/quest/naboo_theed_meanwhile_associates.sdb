@@ -1,0 +1,13 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	theed_meanwhile_associates_01					12	0	0
+1	quest.task.ground.comm_player	2	theed_meanwhile_associates_01b	@quest/ground/naboo_theed_meanwhile_associates:task01_comm_message_text	object/mobile/naboo_lt_khartoor.iff			0	0	0
+2	quest.task.ground.retrieve_item	3	theed_meanwhile_associates_02					0	0	0
+3	quest.task.ground.comm_player	4	theed_meanwhile_associates_02b	@quest/ground/naboo_theed_meanwhile_associates:task03_comm_message_text	object/mobile/naboo_lt_khartoor.iff			0	0	0
+4	quest.task.ground.retrieve_item	5	theed_meanwhile_associates_03					0	0	0
+5	quest.task.ground.show_message_box	6	theed_meanwhile_associates_03b					0	0	0
+6	quest.task.ground.destroy_multi	7	theed_meanwhile_associates_04			naboo_borvo_derm_worrit		1	0	0
+7	quest.task.ground.comm_player	8	theed_meanwhile_associates_04b	@quest/ground/naboo_theed_meanwhile_associates:task07_comm_message_text	object/mobile/dressed_borvos_champion.iff			0	0	0
+8	quest.task.ground.retrieve_item	9	theed_meanwhile_associates_05					0	0	0
+9	quest.task.ground.wait_for_signal	10	theed_meanwhile_associates_06					0	0	0
+10	quest.task.ground.wait_for_signal		theed_meanwhile_associates_07					0	0	0

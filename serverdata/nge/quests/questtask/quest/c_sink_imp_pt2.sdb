@@ -1,0 +1,7 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.grant_space_quest	1	c_sink_imp_kill_banyare_gsq					0	0	0
+1	quest.task.ground.wait_for_signal	2	c_sink_imp_kill_binyare_success_wfs					0	0	0
+2	quest.task.ground.complete_quest		c_sink_imp_pt2_icq					0	0	0
+3	quest.task.ground.wait_for_signal	4	c_sink_imp_kill_binyare_failed_wfs					0	0	0
+4	quest.task.ground.clear_quest		c_sink_imp_pt2_quest_cleared_ilq					0	0	0

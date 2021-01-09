@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.player;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.network.NetBuffer;
@@ -558,8 +559,72 @@ public class PlayerObject extends IntangibleObject {
 		play8.setActiveQuest(activeQuest);
 	}
 	
-	public Map<Integer, Integer> getQuests() {
+	public Map<CRC, Quest> getQuests() {
 		return play8.getQuests();
+	}
+	
+	public void addQuest(String questName) {
+		play8.addQuest(questName);
+	}
+	
+	public void removeQuest(String questName) {
+		play8.removeQuest(questName);
+	}
+	
+	public int incrementQuestCounter(String questName) {
+		return play8.incrementQuestCounter(questName);
+	}
+	
+	/**
+	 * Determines if the specified quest is present in the journal of the player.
+	 * The quest can be complete or incomplete.
+	 * @param questName to find
+	 * @return {@code true} if present in quest journal and {@code false} otherwise
+	 */
+	public boolean isQuestInJournal(String questName) {
+		return play8.isQuestInJournal(questName);
+	}
+	
+	/**
+	 * Determines if the specifie dquest has been completed.
+	 * The quest must also be present in the quest journal.
+	 * @param questName to check
+	 * @return {@code true} if complete and {@code false} otherwise
+	 */
+	public boolean isQuestComplete(String questName) {
+		return play8.isQuestComplete(questName);
+	}
+	
+	public void addActiveQuestTask(String questName, int taskIndex) {
+		play8.addActiveQuestTask(questName, taskIndex);
+	}
+	
+	public void removeActiveQuestTask(String questName, int taskIndex) {
+		play8.removeActiveQuestTask(questName, taskIndex);
+	}
+	
+	public void addCompleteQuestTask(String questName, int taskIndex) {
+		play8.addCompleteQuestTask(questName, taskIndex);
+	}
+	
+	public void removeCompleteQuestTask(String questName, int taskIndex) {
+		play8.removeCompleteQuestTask(questName, taskIndex);
+	}
+	
+	public Collection<Integer> getQuestActiveTasks(String questName) {
+		return play8.getQuestActiveTasks(questName);
+	}
+	
+	public void completeQuest(String questName) {
+		play8.completeQuest(questName);
+	}
+	
+	public void setQuestRewardReceived(String questName, boolean rewardReceived) {
+		play8.setQuestRewardReceived(questName, rewardReceived);
+	}
+	
+	public boolean isQuestRewardReceived(String questName) {
+		return play8.isQuestRewardReceived(questName);
 	}
 	
 	public String getProfWheelPosition() {

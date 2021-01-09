@@ -1,0 +1,8 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	yavin_fallenstar_e11_kill_robbers					10	0	0
+1	quest.task.ground.destroy_multi_and_loot	2	yavin_fallenstar_e12_kill_smugglers					0	0	0
+2	quest.task.ground.wait_for_signal	3	yavin_fallenstar_e13_warn_opca					0	0	0
+3	quest.task.ground.wait_for_signal	4	yavin_fallenstar_e14_return_osae					0	0	0
+4	quest.task.ground.reward	5	yavin_fallenstar_e26_reward_Opca					1	0	0
+5	quest.task.ground.complete_quest		yavin_fallenstar_e30					0	0	0

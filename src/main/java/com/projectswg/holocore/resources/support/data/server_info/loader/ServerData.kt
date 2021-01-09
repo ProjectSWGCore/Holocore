@@ -99,6 +99,7 @@ object ServerData {
 	val noSpawnZones		by SoftDataLoaderDelegate(::NoSpawnZoneLoader)
 	val gcwRegionLoader		by SoftDataLoaderDelegate(::GcwRegionLoader)
 	val conversationLoader	by SoftDataLoaderDelegate(::ConversationLoader)
+	val questLoader			by SoftDataLoaderDelegate(::QuestLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)

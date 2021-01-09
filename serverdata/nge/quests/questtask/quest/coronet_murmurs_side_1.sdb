@@ -1,0 +1,5 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	murmur_side_kill_security_level_1			murmur_admin_security		10	0	0
+1	quest.task.ground.comm_player	2		@quest/ground/coronet_murmurs_side_1:task01_comm_message_text	object/mobile/dressed_murmur_side_security_director.iff			0	0	0
+2	quest.task.ground.complete_quest						coronet_murmurs_side_2	0	0	0
