@@ -127,7 +127,7 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	val maxLevel: Int
 		get() = spawn.maxLevel
 
-	val conversationId: String
+	val conversationId: String?
 		get() = spawn.conversationId
 
 	val name: String
