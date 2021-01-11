@@ -140,6 +140,10 @@ public class ConversationService extends Service {
 		Spawner spawner = npc.getSpawner();
 		String conversationId = spawner.getConversationId();
 		
+		if (conversationId == null) {
+			return;
+		}
+		
 		List<Conversation> conversations = conversationLoader.getInitialConversations(conversationId);
 		
 		Conversation conversation = reduce(conversations, starter.getOwner());
@@ -195,6 +199,10 @@ public class ConversationService extends Service {
 		ConversationLoader conversationLoader = ServerData.INSTANCE.getConversationLoader();
 		Spawner spawner = npc.getSpawner();
 		String conversationId = spawner.getConversationId();
+		
+		if (conversationId == null) {
+			return false;
+		}
 		
 		Collection<String> spawnConversationIds = conversationLoader.getConversationIds(conversationId);
 		
