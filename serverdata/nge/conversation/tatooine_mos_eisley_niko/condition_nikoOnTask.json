@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_39",
+		"comment": "So did you off those thugs that stole from Jabba?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_40",
+				"comment": "Not yet."
+			},
+			"next": "tatooine_mos_eisley_niko/s_40"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_66",
+		"comment": "What are you doing here? You should be out in the field, reconning those Tuskens!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_away"
+			}
+		}
+	]
+}

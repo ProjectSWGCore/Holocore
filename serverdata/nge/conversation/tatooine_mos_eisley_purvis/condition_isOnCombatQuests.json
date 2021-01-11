@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_70",
+		"comment": "Still dealing with those Tuskens, eh? Ok, well, get back out there. This isn't break time."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "wave_on_dismissing"
+			}
+		}
+	]
+}

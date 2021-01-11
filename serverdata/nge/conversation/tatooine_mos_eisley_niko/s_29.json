@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_31",
+		"comment": "They killed one of Jabba's couriers and stole some valuable Old Republic coins. Jabba wants them back."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_33",
+				"comment": "What about the gangers that have them?"
+			},
+			"next": "tatooine_mos_eisley_niko/s_33"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

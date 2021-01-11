@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/tatooine_eisley_niko",
-		"key": "s_69",
-		"comment": "You don't want to have anything to do with me, pal."
+		"key": "s_37",
+		"comment": "I'm done with you."
 	},
 	"playerResponses": [],
 	"requirements": [],
@@ -10,7 +10,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "dismiss"
+				"animation": "thanks"
 			}
 		}
 	]

@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_35",
+		"comment": "Jabba wants them dead as an example to any other upstart gangs."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_38",
+				"comment": "You want me to kill them in cold blood?"
+			},
+			"next": "tatooine_mos_eisley_niko/s_38"
+		}
+	],
+	"requirements": [],
+	"events": []
+}
