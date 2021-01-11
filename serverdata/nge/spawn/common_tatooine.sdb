@@ -658,7 +658,7 @@ spawn_tat_655	TATOOINE	tat_world	AREA	0	3619.5	5.0	-4711.3	8	1	Reimos Taligg	hum
 spawn_tat_656	TATOOINE	tat_world	AREA	0	3321.6	10.0	-5372.4	0	1	Shinn's mugger	humanoid_tatooine_shinn_mugger	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	3	0	-	idle				600
 spawn_tat_657	TATOOINE	tat_world	AREA	0	3552.8	5.0	-4935.3	-37	1	Stormtrooper Groupleader	humanoid_content_mos_eisley_stormtrooper_groupleader	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation				600
 spawn_tat_658	TATOOINE	tat_world	AREA	0	3490.2	5.0	-4871.5	-26	1	Taibela	humanoid_legacy_taibela	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
-spawn_tat_659	TATOOINE	tat_world	AREA	0	2757.9	7.0	-4570.1	64	1	Toggi Bok	humanoid_tatooine_opening_toggi	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_659	TATOOINE	tat_world	AREA	0	2757.9	7.0	-4570.1	64	1	Toggi Bok	humanoid_tatooine_opening_toggi	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_toggi		600
 spawn_tat_660	TATOOINE	tat_world	AREA	0	3670.3	5.0	-4890.1	167	1	Tori Radeen	humanoid_tatooine_opening_tori	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_tori		600
 spawn_tat_661	TATOOINE	tat_world	AREA	0	3484.4	5.0	-4808.7	-67	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_662	TATOOINE	tat_world	AREA	0	4103.6	13.3	-4631.0	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600

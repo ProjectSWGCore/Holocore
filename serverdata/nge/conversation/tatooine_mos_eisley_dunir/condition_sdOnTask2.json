@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_33",
+		"comment": "You should be headed to the White Thranta shipping office to pick up the package the receptionist has for me."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_dunir",
+				"key": "s_35",
+				"comment": "I'm on my way."
+			},
+			"next": "tatooine_mos_eisley_dunir/s_35"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

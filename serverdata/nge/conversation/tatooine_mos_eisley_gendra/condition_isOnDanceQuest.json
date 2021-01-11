@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_147",
+		"comment": "Have you gone over to fill in for the dancer yet? My friend really needs some help."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

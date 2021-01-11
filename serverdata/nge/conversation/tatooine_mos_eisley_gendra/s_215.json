@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_216",
+		"comment": "Meat can be found by harvesting it from creatures that have been killed. Simply use the carcass and collect the meat. You can also get hides and bones this way."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_217",
+				"comment": "What if I don't want to kill anything?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_217"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_away"
+			}
+		}
+	]
+}

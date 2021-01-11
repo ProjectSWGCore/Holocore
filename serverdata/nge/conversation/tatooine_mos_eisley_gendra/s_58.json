@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_59",
+		"comment": "I'll show you. I'm sure you'll get some great jobs from the terminals. People always need things crafted."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_53",
+				"comment": "It's fine. What else can I do?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_53"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

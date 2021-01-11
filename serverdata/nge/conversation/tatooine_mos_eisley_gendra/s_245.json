@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_233",
+		"comment": "You're in luck! I just happen to have a spare slitherhorn. Take good care of it. After all, you can't expect people to just hand you things whenever you need it."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_230",
+				"comment": "I'm set. What do you need?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_230"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_245",
+				"comment": "I don't have an instrument."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_245"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "snap_finger1"
+			}
+		}
+	]
+}

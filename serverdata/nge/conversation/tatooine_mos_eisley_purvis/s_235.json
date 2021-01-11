@@ -6,5 +6,12 @@
 	},
 	"playerResponses": [],
 	"requirements": [],
-	"events": []
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
 }

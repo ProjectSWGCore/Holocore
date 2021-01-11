@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_27",
+		"comment": "Great job out there."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_dunir",
+				"key": "s_28",
+				"comment": "Thanks, now about that fee you promised me."
+			},
+			"next": "tatooine_mos_eisley_dunir/s_28"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thumb_up"
+			}
+		}
+	]
+}

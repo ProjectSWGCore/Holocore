@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_258",
+		"comment": "Great! I have a friend, runs a cantina, he's looking to sell some food, but he wants to start basic. Can you make some Meat Jerky?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_260",
+				"comment": "I can do that."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_260"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_264",
+				"comment": "Sounds dull."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_264"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "snap_finger1"
+			}
+		}
+	]
+}

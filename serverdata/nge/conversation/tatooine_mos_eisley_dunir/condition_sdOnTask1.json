@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_34",
+		"comment": "You should be headed to Toggi to deliver that package I gave you."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_dunir",
+				"key": "s_36",
+				"comment": "Going there now."
+			},
+			"next": "tatooine_mos_eisley_dunir/s_36"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

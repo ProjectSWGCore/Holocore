@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_85",
+		"comment": "He says it doesn't matter. You choose. You go do a set of either dancing or music, and he'll be happy."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_86",
+				"comment": "Ok, I'd be happy to."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_86"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

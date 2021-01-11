@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_213",
+		"comment": "You'll need to see a pilot trainer for that. I can show you where one is if you'd like?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_220",
+				"comment": "Where is the Neutral trainer?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_220"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_224",
+				"comment": "Where is the Imperial trainer?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_224"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_239",
+				"comment": "Where is the Rebel trainer?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_239"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_80",
+		"comment": "You're going to be famous one day, you know that? I hear your work was outstanding."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_89",
+				"comment": "Thanks for the compliment."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_89"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_198",
+				"comment": "How do I become a pilot?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_198"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

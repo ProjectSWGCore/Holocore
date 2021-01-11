@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_246",
+		"comment": "And I don't have one to give you. You should try the bazaar. Sometimes people sell them. Get yourself a nice slitherhorn, and then you'll be ready to go."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

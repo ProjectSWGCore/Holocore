@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_toggi",
+		"key": "s_14",
+		"comment": "Just some shipping. I wouldn't get too concerned about it."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

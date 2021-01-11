@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_48",
+		"comment": "Oh, that tea was great! I mean, um...I didn't have any of it, but it smelled great. The taste was exquisite. Or, I mean, um, it would have been. If I had some."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_49",
+				"comment": "It's all right. As long as I got paid."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_49"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_50",
+				"comment": "You should show some restraint."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_50"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_197",
+				"comment": "How do I become a pilot?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_197"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

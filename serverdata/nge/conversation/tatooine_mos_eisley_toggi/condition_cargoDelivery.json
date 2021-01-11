@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_toggi",
+		"key": "s_4",
+		"comment": "What do you want?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_6",
+				"comment": "I have a package for you from Dunir."
+			},
+			"next": "tatooine_mos_eisley_niko/s_6"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

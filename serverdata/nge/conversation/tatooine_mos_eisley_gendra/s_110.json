@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_112",
+		"comment": "Matter of fact, there is. Can you play music?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_199",
+				"comment": "Music? I can handle that."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_199"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

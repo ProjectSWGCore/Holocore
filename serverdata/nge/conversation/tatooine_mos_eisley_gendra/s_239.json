@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_243",
+		"comment": "The Rebel trainer is in Mos Espa, you'll have to take a shuttle. I'll mark the shuttle port for you, then you can head to Mos Espa and I'll make sure you have a waypoint to the trainer there."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}

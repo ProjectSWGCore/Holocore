@@ -20,7 +20,7 @@
 				"comment": "Resetting my expertise sounds interesting, but how much will it cost me?"
 			},
 			"next": "tatooine_mos_eisley_respec_seller/reset_root"
-		},
+		}
 	],
 	"requirements": [],
 	"events": [

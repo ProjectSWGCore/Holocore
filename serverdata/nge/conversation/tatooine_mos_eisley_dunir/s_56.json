@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_59",
+		"comment": "Make sure you complete what Reimos needs. I heard Jabba is taking a personal interest in your progress in this issue."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

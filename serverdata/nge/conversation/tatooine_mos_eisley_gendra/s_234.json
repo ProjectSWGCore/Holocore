@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_236",
+		"comment": "Something about a package that was supposed to be delivered? He was on Tansarii Point Station when Han Solo was there and there was some trouble. I don't know much more about it."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_238",
+				"comment": "Well, I'll be happy to play in the cantina."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_238"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_240",
+				"comment": "I think I'll just go."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_240"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

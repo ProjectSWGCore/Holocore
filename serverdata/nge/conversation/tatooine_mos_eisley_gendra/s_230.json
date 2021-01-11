@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_232",
+		"comment": "A musician was supposed to be arriving to play a set in the cantina, but apparently he was arrested at the starport. Could you fill in?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_234",
+				"comment": "Why was he arrested?"
+			},
+			"next": "tatooine_mos_eisley_gendra/s_234"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_242",
+				"comment": "I think I can do that."
+			},
+			"next": "tatooine_mos_eisley_gendra/s_242"
+		}
+	],
+	"requirements": [],
+	"events": []
+}
