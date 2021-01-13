@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_44",
+		"comment": "I need that explosive returned before somebody figures out how to arm it!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_accusingly"
+			}
+		}
+	]
+}

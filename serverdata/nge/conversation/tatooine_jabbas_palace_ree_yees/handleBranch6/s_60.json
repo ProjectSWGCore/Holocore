@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_62",
+		"comment": "An item we acquired recently. A famed musician was touring Tatooine a few weeks ago and we stole his gem encrusted bell, the one they use to signal the end of a concert. The Sand Splitters walked out of here with it and are looking for a buyer. Get it back from them."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/ree_yees",
+				"key": "s_64",
+				"comment": "I'll get it back."
+			},
+			"next": "tatooine_jabbas_palace_ree_yees/handleBranch8/s_64",
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/ree_yees",
+				"key": "s_66",
+				"comment": "Someone stole from Jabba?"
+			},
+			"next": "tatooine_jabbas_palace_ree_yees/handleBranch8/s_66"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_28",
+		"comment": "No, that's all. Get the gem encrusted bell, and I'll call you."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_34",
+		"comment": "Have you found Jabba's ledger yet? Then what, pray tell, are you doing at the palace? Get back out there!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_away"
+			}
+		}
+	]
+}
