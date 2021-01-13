@@ -1,0 +1,42 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_252",
+		"comment": "Don't fool yourself, we are at war. The Tusken Raiders are ready to take this city, and I won't let that happen. I won't let you let that happen either."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_254",
+				"comment": "Good, I'm looking for work."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch15/s_254"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_256",
+				"comment": "What is it you want me to do?"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch15/s_256"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_44",
+				"comment": "You have me confused with someone else."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch15/s_44"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "pound_fist_palm"
+			}
+		}
+	]
+}

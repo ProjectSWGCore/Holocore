@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_240",
+		"comment": "You're doing it now just to be mean. I mean why else would you stand here arguing with me. You could have just said it and been on your way by now."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_243",
+				"comment": "Well, I'm not saying it."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch12/s_243"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_248",
+				"comment": "Yes, sir!"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch12/s_248"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

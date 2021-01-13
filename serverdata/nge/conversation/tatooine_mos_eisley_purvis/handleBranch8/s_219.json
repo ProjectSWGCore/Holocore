@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_221",
+		"comment": "There's not much point in my being a superior officer if I can't get a 'yes, sir' every once in a while is there?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_224",
+				"comment": "Doesn't matter to me."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch9/s_224"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_250",
+				"comment": "Fine. Yes, sir!"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch9/s_250"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

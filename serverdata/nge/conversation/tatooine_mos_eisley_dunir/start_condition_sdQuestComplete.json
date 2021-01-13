@@ -1,0 +1,42 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_55",
+		"comment": "Have you talked to Reimos yet?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_56",
+				"comment": "Yes, I am working for him."
+			},
+			"next": "tatooine_mos_eisley_dunir/handleBranch1/s_56"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_58",
+				"comment": "Yea, I've already completed what he needed me to do."
+			},
+			"next": "tatooine_mos_eisley_dunir/handleBranch1/s_58"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_57",
+				"comment": "No, not yet."
+			},
+			"next": "tatooine_mos_eisley_dunir/handleBranch1/s_57"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

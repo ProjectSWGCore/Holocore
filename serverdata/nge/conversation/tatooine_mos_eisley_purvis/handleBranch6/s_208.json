@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_211",
+		"comment": "No! Put some heart into it. I know you've got more than that. Now give it to me! Let me hear a 'Yes, sir!'"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_213",
+				"comment": "I'm not gonna say it."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch7/s_213"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_69",
+				"comment": "Yes, sir!"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch7/s_69"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "pound_fist_palm"
+			}
+		}
+	]
+}

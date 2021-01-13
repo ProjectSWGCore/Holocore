@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/barada",
+		"key": "s_19",
+		"comment": "Have you found any more of those suspicious engine parts Valarian's been using?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

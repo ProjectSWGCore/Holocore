@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_52",
+		"comment": "I'll load the directions into your datapad."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_dunir",
+				"key": "s_53",
+				"comment": "Thanks."
+			},
+			"next": "tatooine_mos_eisley_dunir/handleBranch10/s_53"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shake_head_no"
+			}
+		}
+	]
+}

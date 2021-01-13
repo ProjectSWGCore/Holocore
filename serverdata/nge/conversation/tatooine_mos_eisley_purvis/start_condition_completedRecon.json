@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_197",
+		"comment": "Recon's exciting, isn't it? No, I guess it's not. So let's get down to something exciting. Combat. Are you ready to battle for Mos Eisley?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_200",
+				"comment": "Battle? Seriously?"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch5/s_200"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_203",
+				"comment": "I guess I'm ready for combat."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch5/s_203"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "laugh"
+			}
+		}
+	]
+}
