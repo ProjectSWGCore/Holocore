@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_70",
+		"comment": "Alright, I can give it to you for free again today, but remember you have %DI free resets left after this!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_71",
+				"comment": "That sounds good, I'll take it."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch12/s_71"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_72",
+				"comment": "I think I'll hold off on that for today."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch12/s_72"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

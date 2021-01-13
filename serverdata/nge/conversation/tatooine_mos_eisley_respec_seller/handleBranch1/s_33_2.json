@@ -8,18 +8,18 @@
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_45",
-				"comment": "No thanks."
+				"key": "s_37",
+				"comment": "That sounds like a good deal to me, I'll take it."
 			},
-			"next": "tatooine_mos_eisley_respec_seller/reset_decline"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch3/s_37"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_37",
-				"comment": "That sounds like a good deal to me, I'll take it."
+				"key": "s_45",
+				"comment": "No thanks."
 			},
-			"next": "tatooine_mos_eisley_respec_seller/reset_accept"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch3/s_45"
 		}
 	],
 	"requirements": [],
@@ -27,7 +27,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "whisper"
+				"animation": "shrug_shoulders"
 			}
 		}
 	]

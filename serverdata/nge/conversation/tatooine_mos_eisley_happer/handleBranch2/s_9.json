@@ -8,26 +8,18 @@
 		{
 			"playerMessage": {
 				"file": "conversation/happer_mos_eisley",
-				"key": "s_9",
-				"comment": "Is that Bera Jeza?  Oh no!"
-			},
-			"next": "tatooine_mos_eisley_happer/known_1"
-		},
-		{
-			"playerMessage": {
-				"file": "conversation/happer_mos_eisley",
 				"key": "s_11",
 				"comment": "I don't know if I can help, but I am more than willing to assist the Mos Eisley Police if possible."
 			},
-			"next": "tatooine_mos_eisley_happer/help_1"
-		}
+			"next": "tatooine_mos_eisley_happer/condition_handleBranch3/s_11"
+		},
 	],
 	"requirements": [],
 	"events": [
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "shrug_shoulders"
+				"animation": "listen"
 			}
 		}
 	]

@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_57",
+		"comment": "Unfortunately you don't have %DI credits to cover the procedure.  Come back when you've saved up some more money.  Good day!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "bye"
+			}
+		}
+	]
+}

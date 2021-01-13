@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_89",
+		"comment": "It looks like you are currently experiencing cloning sickness.  Please come back and speak with me when you are feeling better."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shrug_shoulders"
+			}
+		}
+	]
+}

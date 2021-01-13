@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/respecseller",
-		"key": "s_66",
-		"comment": "Very well.  Best of luck to you!"
+		"key": "s_56",
+		"comment": "Our business is concluded then.  Farewell."
 	},
 	"playerResponses": [],
 	"requirements": [],
@@ -10,7 +10,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "feed_creature_medium"
+				"animation": "heal_other"
 			}
 		}
 	]

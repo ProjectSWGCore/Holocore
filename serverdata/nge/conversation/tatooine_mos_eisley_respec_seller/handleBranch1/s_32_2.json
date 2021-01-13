@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_58",
+		"comment": "First time is always free (be sure to tell all your friends).  Do you want to use your free respec at this time?  Remember that you will lose any experience you might have earned towards your next level if you go through with this."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "Yes, please."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_60"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "No thanks."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_64"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shrug_shoulders"
+			}
+		}
+	]
+}

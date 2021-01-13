@@ -1,0 +1,42 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_70",
+		"comment": "This time the price will be %DI credits, which is a complete bargain.  Prices might go up next week, so you should think about buying right now!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_53",
+				"comment": "That's a bit too much if you ask me."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch15/s_53"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_54",
+				"comment": "Those prices are ridiculous...but okay.  I'll take it."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch15/s_54_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_54",
+				"comment": "Those prices are ridiculous...but okay.  I'll take it."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch15/s_54_2"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "snap_finger1"
+			}
+		}
+	]
+}

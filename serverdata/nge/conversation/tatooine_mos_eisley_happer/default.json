@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
-		"file": "conversation/respecseller",
-		"key": "s_55",
-		"comment": "Very well.  Good day then. NEXT IN LINE, PLEASE."
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_32",
+		"comment": "Sorry citizen, I have a murder scene to attend to."
 	},
 	"playerResponses": [],
 	"requirements": [],

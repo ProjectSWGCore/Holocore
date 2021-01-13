@@ -1,0 +1,82 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_31",
+		"comment": "Greetings.  Are you interested in changing professions?  Perhaps resetting your expertise is more what you had in mind?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "I'm interested in changing my profession, but how much does it cost?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_32_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "I'm interested in changing my profession, but how much does it cost?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_32_2"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "I'm interested in changing my profession, but how much does it cost?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_32_3"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_45",
+				"comment": "I'm interested in changing my profession, but how much does it cost?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_32_4"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "Resetting my expertise sounds interesting, but how much will it cost me?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_33_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "Resetting my expertise sounds interesting, but how much will it cost me?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_33_2"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "Resetting my expertise sounds interesting, but how much will it cost me?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_33_3"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_37",
+				"comment": "Resetting my expertise sounds interesting, but how much will it cost me?"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch1/s_33_4"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

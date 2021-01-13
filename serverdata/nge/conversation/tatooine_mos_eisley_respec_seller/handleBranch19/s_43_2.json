@@ -8,18 +8,18 @@
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_75",
-				"comment": "Those prices are criminal!  I don't think so."
+				"key": "s_60",
+				"comment": "Yes, please."
 			},
-			"next": "tatooine_mos_eisley_respec_seller/change_decline"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_60"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_79",
-				"comment": "WHAT!?!?  Jabba The Hutt has better deals than that...but okay.  I'll take it"
+				"key": "s_64",
+				"comment": "No thanks."
 			},
-			"next": "tatooine_mos_eisley_respec_seller/change_accept"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_64"
 		}
 	],
 	"requirements": [],
@@ -27,7 +27,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "whisper"
+				"animation": "explain"
 			}
 		}
 	]

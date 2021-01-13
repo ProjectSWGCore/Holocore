@@ -6,12 +6,5 @@
 	},
 	"playerResponses": [],
 	"requirements": [],
-	"events": [
-		{
-			"type": "npc_animation",
-			"args": {
-				"animation": "dismiss"
-			}
-		}
-	]
+	"events": []
 }

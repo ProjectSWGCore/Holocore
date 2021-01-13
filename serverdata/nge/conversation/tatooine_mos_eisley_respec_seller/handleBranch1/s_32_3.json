@@ -1,0 +1,42 @@
+{
+	"npcMessage": {
+		"file": "conversation/respecseller",
+		"key": "s_68",
+		"comment": "This time the price will be %DI credits, which is a complete bargain.  Prices might go up next week, so you should think about buying right now!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_75",
+				"comment": "Those prices are criminal!  I don't think so."
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_75"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_79",
+				"comment": "WHAT!?!?  Jabba The Hutt has better deals than that...but okay.  I'll take it"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_79_1"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/respecseller",
+				"key": "s_79",
+				"comment": "WHAT!?!?  Jabba The Hutt has better deals than that...but okay.  I'll take it"
+			},
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_79_2"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shrug_shoulders"
+			}
+		}
+	]
+}
