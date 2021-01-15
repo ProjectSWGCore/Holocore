@@ -10,7 +10,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "heal_other"
+				"animation": "bye"
 			}
 		}
 	]

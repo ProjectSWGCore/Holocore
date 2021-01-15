@@ -11,7 +11,7 @@
 				"key": "s_75",
 				"comment": "Those prices are criminal!  I don't think so."
 			},
-			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_75"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch24/s_75"
 		},
 		{
 			"playerMessage": {
@@ -19,7 +19,7 @@
 				"key": "s_79",
 				"comment": "WHAT!?!?  Jabba The Hutt has better deals than that...but okay.  I'll take it"
 			},
-			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_79_1"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch24/s_79_1"
 		},
 		{
 			"playerMessage": {
@@ -27,7 +27,7 @@
 				"key": "s_79",
 				"comment": "WHAT!?!?  Jabba The Hutt has better deals than that...but okay.  I'll take it"
 			},
-			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_79_2"
+			"next": "tatooine_mos_eisley_respec_seller/handleBranch24/s_79_2"
 		}
 	],
 	"requirements": [],

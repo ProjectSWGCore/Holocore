@@ -27,7 +27,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "shrug_shoulders"
+				"animation": "snap_finger1"
 			}
 		}
 	]

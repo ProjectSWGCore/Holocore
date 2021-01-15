@@ -8,7 +8,7 @@
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_45",
+				"key": "s_60",
 				"comment": "Yes, please."
 			},
 			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_60"
@@ -16,7 +16,7 @@
 		{
 			"playerMessage": {
 				"file": "conversation/respecseller",
-				"key": "s_37",
+				"key": "s_64",
 				"comment": "No thanks."
 			},
 			"next": "tatooine_mos_eisley_respec_seller/handleBranch21/s_64"
