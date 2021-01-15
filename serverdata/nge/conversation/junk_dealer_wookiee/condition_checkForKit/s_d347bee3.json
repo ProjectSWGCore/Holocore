@@ -1,0 +1,51 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_3fc7eb45",
+		"comment": "Well let's see here. I have one that makes an orange rug, one that makes a blue rug, one that can make a Nabooian sculpture, one that makes a table, and one that makes some sort of model gong. I will only give you one kit at a time so if you want another you are going to have to get rid of the one you currently have first."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_ee977dee",
+				"comment": "Let me have one of those orange rug kits."
+			},
+			"next": "junk_dealer_generic/s_ee977dee"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_8f39769",
+				"comment": "I will take one of the blue rug kits."
+			},
+			"next": "junk_dealer_generic/s_8f39769"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_d347bee3",
+				"comment": "I think I would like one of those model gong kits."
+			},
+			"next": "junk_dealer_generic/s_fe657cdd"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_9ede4b84",
+				"comment": "Let me have one that makes the table."
+			},
+			"next": "junk_dealer_generic/s_9ede4b84"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_87c5851b",
+				"comment": "I think I will try out the one that makes the sculpture."
+			},
+			"next": "junk_dealer_generic/s_87c5851b"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

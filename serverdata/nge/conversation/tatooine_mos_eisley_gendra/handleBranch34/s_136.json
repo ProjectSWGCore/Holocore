@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_138",
+		"comment": "There is. My friend hired perhaps the clumsiest waiter he could find, and the guy keeps smashing glasses. Could you make my friend some new glassware?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_140",
+				"comment": "I believe I can do that."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch36/s_140"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

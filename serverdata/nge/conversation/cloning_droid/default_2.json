@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/clone_droid",
+		"key": "s_6",
+		"comment": "Unfortunately the cloning process can make you quite ill and incompetent in battle for a while.  For %DI credits I can give you an injection to cure the illness immediately."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/chassis_npc",
+				"key": "s_8",
+				"comment": "That's a little steep.  Are there any other options?"
+			},
+			"next": "cloning_droid/handleBranch2/s_8"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/chassis_npc",
+				"key": "s_12",
+				"comment": "Fine.  I'll pay."
+			},
+			"next": "cloning_droid/handleBranch2/s_12"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_105",
+		"comment": "Very good."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

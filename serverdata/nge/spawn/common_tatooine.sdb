@@ -660,7 +660,7 @@ spawn_tat_657	TATOOINE	tat_world	AREA	0	3552.8	5.0	-4935.3	-37	1	Stormtrooper Gr
 spawn_tat_658	TATOOINE	tat_world	AREA	0	3490.2	5.0	-4871.5	-26	1	Taibela	humanoid_legacy_taibela	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
 spawn_tat_659	TATOOINE	tat_world	AREA	0	2757.9	7.0	-4570.1	64	1	Toggi Bok	humanoid_tatooine_opening_toggi	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_toggi		600
 spawn_tat_660	TATOOINE	tat_world	AREA	0	3670.3	5.0	-4890.1	167	1	Tori Radeen	humanoid_tatooine_opening_tori	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_tori		600
-spawn_tat_661	TATOOINE	tat_world	AREA	0	3484.4	5.0	-4808.7	-67	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle				600
+spawn_tat_661	TATOOINE	tat_world	AREA	0	3484.4	5.0	-4808.7	-67	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_trehla		600
 spawn_tat_662	TATOOINE	tat_world	AREA	0	4103.6	13.3	-4631.0	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600
 spawn_tat_663	TATOOINE	tat_world	AREA	0	4152.2	6.7	-4674.2	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600
 spawn_tat_664	TATOOINE	tat_world	AREA	0	4153.4	8.8	-4728.1	0	1	Tusken Raider Soldier	humanoid_tusken_raider_soldier	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle				600
@@ -2033,10 +2033,10 @@ spawn_tat_2030	TATOOINE	tat_jabbas_palace	PATROL	1	-1.1	0.2	137.2	51	1	a Gamorre
 spawn_tat_2031	TATOOINE	tat_jabbas_palace	PATROL	1	-9.2	0.2	120.0	88	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_16700	column	idle				600
 spawn_tat_2032	TATOOINE	tat_jabbas_palace	AREA	1	7.7	0.2	130.3	-90	1	Bruce McBrain	humanoid_bruce_mcbrain	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2033	TATOOINE	tat_jabbas_palace	AREA	1	-5.4	0.2	114.3	11	1	Jawl	humanoid_clone_jawl	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_jawl		600
-spawn_tat_2034	TATOOINE	tat_jabbas_palace	AREA	1	-6.4	0.2	134.3	90	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
+spawn_tat_2034	TATOOINE	tat_jabbas_palace	AREA	1	-6.4	0.2	134.3	90	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_ollobo		600
 spawn_tat_2035	TATOOINE	tat_jabbas_palace	PATROL	1	4.0	0.2	122.4	0	1	Ortugg	humanoid_ortugg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_9900	column	idle				600
 spawn_tat_2036	TATOOINE	tat_jabbas_palace	AREA	1	5.9	0.3	116.1	-41	1	Ree-Yees	humanoid_ree_yees	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_ree_yees		600
-spawn_tat_2037	TATOOINE	tat_jabbas_palace	AREA	1	-2.0	0.2	113.1	0	1	Reelo Baruk	humanoid_reelo_baruk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle		tatooine_jabbas_palace_reelo_baruk		600
+spawn_tat_2037	TATOOINE	tat_jabbas_palace	AREA	1	-2.0	0.2	113.1	0	1	Reelo Baruk	humanoid_reelo_baruk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_reelo_baruk		600
 spawn_tat_2038	TATOOINE	tat_jabbas_palace	AREA	10	-27.7	0.2	84.8	133	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
 spawn_tat_2039	TATOOINE	tat_jabbas_palace	AREA	12	-43.0	3.0	64.2	91	1	Porcellus	humanoid_porcellus	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_use_terminal_high				600
 spawn_tat_2040	TATOOINE	tat_jabbas_palace	AREA	14	18.1	0.2	90.8	125	1	8D8 Droid	droid_8d8	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle				600
@@ -2175,3 +2175,11 @@ spawn_tat_2172	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinato
 spawn_tat_2173	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle				600
 spawn_tat_2174	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle				600
 spawn_tat_2175	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle				600
+spawn_tat_2176	TATOOINE	tat_anchorhead_cloning	AREA	10	0.3	-0.4	-0.9	179	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2177	TATOOINE	tat_bestine_cloning	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2178	TATOOINE	tat_moseisley_cloning1	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2179	TATOOINE	tat_moseisley_cloning2	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2180	TATOOINE	tat_mosentha_cloning	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2181	TATOOINE	tat_mosespa_cloning	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2182	TATOOINE	tat_mostaike_cloning	AREA	10	0.3	-0.4	-0.9	179	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		cloning_droid		600
+spawn_tat_2183	TATOOINE	tat_wayfar_cloning	AREA	10	0.3	-0.4	-0.9	179	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		cloning_droid		600

@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_601",
+		"comment": "Please go to the junk dealer."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

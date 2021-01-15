@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_83",
+		"comment": "That's smart. You're looking for credits, and I have them. I'll make sure it's worth your while if you gave that medical data to me."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_85",
+				"comment": "I'll make sure you get the information."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch22/s_85"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

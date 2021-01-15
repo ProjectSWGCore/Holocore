@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_823",
+		"comment": "Interesting. I have the pilot for you. Go to the Imperial Outpost on Talus and speak with Hakasha Sireen of Black Epsilon. I don't know much about her, but will she suit your needs?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_827",
+				"comment": "Yes!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch67/s_827"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_835",
+				"comment": "I would rather be more upfront. Let me choose another planet."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch67/s_835"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_843",
+				"comment": "I think I'd like to start over."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch67/s_843"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_216",
+		"comment": "Sure, I'll have Gendra contact you."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_218",
+				"comment": "Thanks."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch104/s_218"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

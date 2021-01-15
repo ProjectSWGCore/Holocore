@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_49",
+		"comment": "I am sorry but you do not have any space in your inventory for me to give you a kit. Maybe you should clear out some room and talk to me again if you are still interested."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_303",
+		"comment": "Welcome to Mos Eisley. Watch your back here.  There has never been a more wretched hive of scum and villainy, as you may have heard. You and I have some business to attend to."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_305",
+				"comment": "Business? I don't even know you!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch1/s_305"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

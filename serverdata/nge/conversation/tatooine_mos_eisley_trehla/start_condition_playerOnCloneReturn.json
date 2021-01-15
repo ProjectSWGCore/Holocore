@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_403",
+		"comment": "I hope that was enlightening."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_405",
+				"comment": "I'd like to know about being a pilot."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch29/s_405"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_409",
+				"comment": "What factions operate around here?"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch29/s_409"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

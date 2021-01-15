@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_718",
+		"comment": "I have one more task that I need you to accomplish for me."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_721",
+				"comment": "What is this task?"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch49/s_721"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

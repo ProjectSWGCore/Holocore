@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_737",
+		"comment": "I'll see you when you get back."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

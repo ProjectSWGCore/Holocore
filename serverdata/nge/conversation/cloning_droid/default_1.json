@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/clone_droid",
+		"key": "s_4",
+		"comment": "You look well enough to me.  Off you go."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

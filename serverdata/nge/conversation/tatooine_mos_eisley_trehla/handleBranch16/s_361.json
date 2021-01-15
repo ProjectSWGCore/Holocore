@@ -1,0 +1,20 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_363",
+		"comment": "Go to the bazaar terminals. More information will be given to you once you are there. While you are there, please place this Paint Dispersal Unit up for sale. You may keep the proceeds. I do not need it anymore."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_365",
+				"comment": "Do you want me to buy anything?"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch17/s_365"
+		}
+
+	],
+	"requirements": [],
+	"events": []
+}

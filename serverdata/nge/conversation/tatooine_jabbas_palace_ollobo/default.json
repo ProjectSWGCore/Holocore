@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_ollobo_jabbas",
+		"key": "s_6d35d0e1",
+		"comment": "If yer lookin' ta get into mighty Jabba's good graces then Ollobo wrong chap ta talk at. If'n yer lookin' ta make extra credit or two mayhaps we make good deal."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_ollobo_jabbas",
+				"key": "s_6ee477c3",
+				"comment": "What sort of deal are you talking about?"
+			},
+			"next": "tatooine_jabbas_palace_ollobo/handleBranch1/s_6ee477c3"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_ollobo_jabbas",
+				"key": "s_aadc214b",
+				"comment": "I am not interested in any sort of deal."
+			},
+			"next": "tatooine_jabbas_palace_ollobo/handleBranch1/s_aadc214b"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

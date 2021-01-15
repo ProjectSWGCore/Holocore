@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_57",
+		"comment": "You aren't as smart as my sources led me to believe."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

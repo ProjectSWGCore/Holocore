@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/clone_droid",
+		"key": "s_14",
+		"comment": "My scans indicate that you are in perfect health.  How do you feel?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

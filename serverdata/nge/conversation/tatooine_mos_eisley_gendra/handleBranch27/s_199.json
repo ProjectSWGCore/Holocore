@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_201",
+		"comment": "Do you have your own instrument? This is very important. If you don't have one, you'll need to go get one before you can perform."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_230",
+				"comment": "I'm set. What do you need?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch28/s_230"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_245",
+				"comment": "I don't have an instrument."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch28/s_245"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

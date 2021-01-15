@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_ollobo_jabbas",
+		"key": "s_b950c3eb",
+		"comment": "Ya 'member that Ollobo here. Ya find what Jabba wants, Ollobo deal fer it."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

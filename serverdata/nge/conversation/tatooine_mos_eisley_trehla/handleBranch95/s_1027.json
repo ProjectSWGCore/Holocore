@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_1031",
+		"comment": "CorSec defends their sector from pirates, mostly. They try to stay neutral in the Galactic Civil War. Is this something that interests you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1035",
+				"comment": "Absolutely!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch93/s_1035"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1043",
+				"comment": "Perhaps not. I want to choose something else."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch93/s_1043"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1051",
+				"comment": "Actually, I want to start over."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch93/s_1051"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

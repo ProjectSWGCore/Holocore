@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_67",
+		"comment": "Of course you do, doesn't everyone?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_68",
+				"comment": "I'm serious. I want more of the cut."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch14/s_68"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

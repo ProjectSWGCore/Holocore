@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_746",
+		"comment": "Did you give him the information?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_749",
+				"comment": "I'd like to know about being a pilot."
+			},
+			"next": "tatooine_mos_eisley_trehla/condition_playerOnLastStep/s_749"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

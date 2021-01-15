@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_226",
+		"comment": "Who are you interested in knowing about?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_228",
+				"comment": "I would like to know about the Rebels."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch111/s_228"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_230",
+				"comment": "I want to know about the Imperials."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch111/s_230"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_232",
+				"comment": "I want to know about the Criminals."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch111/s_232"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

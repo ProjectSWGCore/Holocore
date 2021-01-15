@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_12fe83a6",
+		"comment": "I just want them gone. They are taking up valuable space in my inventory so I will just give you one of each type if you want."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_d347bee3",
+				"comment": "Ok sounds good. What sort of kits do you have?"
+			},
+			"next": "junk_dealer_generic/condition_checkForKit/s_d347bee3"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_b60b73f8",
+				"comment": "No thanks, I don't think that I need any of those kits."
+			},
+			"next": "junk_dealer_generic/condition_checkForKitToo/s_b60b73f8"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

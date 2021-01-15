@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_83",
+		"comment": "Funny you should ask. My friend was just saying how popular you were, both dancing and playing music. Want to go back for an encore?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_84",
+				"comment": "Doing which?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch15/s_84"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_407",
+		"comment": "It always is. But do not dwell on thoughts of darkness or despair. "
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_413",
+				"comment": "No, I won't dwell at all."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch31/s_413"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_forward"
+			}
+		}
+	]
+}

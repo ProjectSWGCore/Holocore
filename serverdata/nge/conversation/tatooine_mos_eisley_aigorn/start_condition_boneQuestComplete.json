@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_97",
+		"comment": "So Tori mentioned me did she? I'll have to make sure she doesn't do that again. You however, appear to be someone I can depend on."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_99",
+				"comment": "Just what is it you need?"
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch26/s_99"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

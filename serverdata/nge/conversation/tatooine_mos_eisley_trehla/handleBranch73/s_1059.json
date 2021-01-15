@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_1063",
+		"comment": "Led by Emperor Palpatine and his army, the Empire stands for law and order. They are powerful and organized, and very little escapes their notice."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_759",
+				"comment": "Interesting, please go on."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch97/s_1067"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

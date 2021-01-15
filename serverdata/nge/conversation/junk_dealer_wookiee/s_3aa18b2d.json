@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_d9e6b751",
+		"comment": "An inventor recently sold me and my fellow junk dealers a large quantity of these special kits that were supposed to revolutionize crafting. Unfortunately, they are useless without the special components that they are designed to use."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_6d53d062",
+				"comment": "Why don't you just get some of the special components?"
+			},
+			"next": "junk_dealer_generic/s_6d53d062"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "explain"
+			}
+		}
+	]
+}

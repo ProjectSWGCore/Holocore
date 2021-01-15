@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_ollobo_jabbas",
+		"key": "s_73b59dd6",
+		"comment": "Ollobo check what ya got. No barter. Ya deal or not deal. Ollobo no ask questions, 'cause Ollobo no care. Jabba tell Ollobo ta deal, Ollobo deal."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

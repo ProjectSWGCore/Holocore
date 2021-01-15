@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_731",
+		"comment": "Thank you. Tell Trace Lyson in Mos Espa about the Tusken raids so close to Mos Eisley. Tell him that there's a change in the political climate that bodes ill for us. "
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_734",
+				"comment": "I will do as you ask."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch51/s_734"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

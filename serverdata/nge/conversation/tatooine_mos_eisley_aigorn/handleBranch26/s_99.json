@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_101",
+		"comment": "I need data extracted from a computer inside a shipping company near here. It would be worth quite a few credits if delivered into the right hands."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_104",
+				"comment": "Who has the right hands?"
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch27/s_104"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

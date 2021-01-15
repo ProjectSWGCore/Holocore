@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_775",
+		"comment": "All right. Which planet interests you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_764",
+				"comment": "Tatooine! I like it here."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch58/s_764"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_787",
+				"comment": "Naboo. Isn't that where top Imperial officers go on vacation?"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch58/s_787"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_819",
+				"comment": "Talus. Someone has to keep watch on Corellia."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch58/s_819"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

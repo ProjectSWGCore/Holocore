@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_383",
+		"comment": "Well, you will. Check the bazaar often as you never know when you will find a diamond among the coal. "
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_385",
+				"comment": "So now that I know about bazaar terminals, what's next?"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch23/s_385"
+		}
+	],
+	"requirements": [],
+	"events": []
+}
