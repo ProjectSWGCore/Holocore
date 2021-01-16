@@ -105,6 +105,7 @@ object StaticItemCreator {
 		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
 		applySetBonus(obj, info.wornItemBuff)
+		applyItemValue(info.value, obj)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WearableItemInfo?) {
@@ -128,6 +129,7 @@ object StaticItemCreator {
 			obj.addAttribute("species_restrictions.species_name", raceRestriction)
 
 		applySetBonus(obj, info.wornItemBuff)
+		applyItemValue(info.value, obj);
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {
@@ -152,11 +154,8 @@ object StaticItemCreator {
 		// Not all weapons have a proc effect
 			obj.addAttribute("proc_name", "@ui_buff:${info.procEffect}")
 		
-		// TODO set DPS
-		
 		obj.addAttribute("cat_wpn_other.wpn_range", String.format("%d-%dm", info.minRange, info.maxRange))
-		// Ziggy: Special Action Cost would go under cat_wpn_other as well, but it's a pre-NGE artifact.
-		
+
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
 		weapon.attackSpeed = info.attackSpeed.toFloat()
@@ -166,6 +165,8 @@ object StaticItemCreator {
 		weapon.elementalType = info.elementalType
 		weapon.minDamage = info.minDamage
 		weapon.maxDamage = info.maxDamage
+
+		applyItemValue(info.value, obj);
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CollectionItemInfo?) {
@@ -186,9 +187,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
-		if (info.value > 0) {
-			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, info.value)
-		}
+		applyItemValue(info.value, obj);
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
@@ -234,10 +233,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
-		if (info.value > 0) {
-			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, info.value)
-		}
-
+		applyItemValue(info.value, obj);
 		applyColors(obj, info.color)
 	}
 	
@@ -250,6 +246,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
+		applyItemValue(info.value, obj);
 		applyColors(obj, info.color)
 	}
 	
@@ -309,5 +306,11 @@ object StaticItemCreator {
 		
 		return if (races.isEmpty()) "" else races.substring(0, races.length - 1)
 	}
-	
+
+	private fun applyItemValue(value: Int, obj: TangibleObject) {
+		if (value > 0) {
+			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, value)
+		}
+	}
+
 }
