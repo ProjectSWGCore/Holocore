@@ -573,7 +573,7 @@ patrol_dat_7201	patrol_dat_7200		DATHOMIR	dat_world	0	5260.9	78.5	-4086.1	0
 patrol_dat_7202	patrol_dat_7200		DATHOMIR	dat_world	0	5291.3	78.5	-4086.2	0	
 patrol_dat_7203	patrol_dat_7200		DATHOMIR	dat_world	0	5325.0	78.5	-4086.0	0	
 patrol_dat_7204	patrol_dat_7200		DATHOMIR	dat_world	0	5376.5	78.5	-4085.9	0	
-patrol_dat_7300	patrol_dat_7300	FLIP	DATHOMIR	dat_world	0	5317.1	78.5	-4058.3	0	Aurilia - an Aurilia citizen #7
+patrol_dat_7300	patrol_dat_7300	FLIP	DATHOMIR	dat_world	0	5317.1	78.5	-4058.3	15	Aurilia - an Aurilia citizen #7
 patrol_dat_7301	patrol_dat_7300		DATHOMIR	dat_world	0	5321.9	78.5	-4058.4	0	
 patrol_dat_7302	patrol_dat_7300		DATHOMIR	dat_world	0	5322.5	78.5	-4070.1	0	
 patrol_dat_7303	patrol_dat_7300		DATHOMIR	dat_world	0	5324.9	78.5	-4073.4	0	

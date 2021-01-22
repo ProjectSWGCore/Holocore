@@ -1,143 +1,156 @@
 buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
 INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
-bo_atmo_1	CORELLIA	cor_coronet_theater	6	object/soundobject/shared_soundobject_cantina_large.iff	-0.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
-bo_atmo_2	CORELLIA	cor_coronet_theater	6	object/soundobject/shared_soundobject_cantina_medium.iff	-20.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
-bo_atmo_3	CORELLIA	cor_coronet_theater	6	object/soundobject/shared_soundobject_cantina_medium.iff	19.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
-bo_atmo_4	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-75.0	28.0	-4723.0	0	0	0	0	32	TRUE	Ambient - Coronet Starport
-bo_atmo_5	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	3358.0	308.0	5581.0	0	0	0	0	32	TRUE	Ambient - Doaba Guerfel Starport
-bo_atmo_6	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-3141.0	31.0	2864.0	0	0	0	0	32	TRUE	Ambient - Kor Vella Starport
-bo_atmo_7	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-4998.0	21.0	-2246.0	0	0	0	0	32	TRUE	Ambient - Tyrena Starport
-bo_atmo_8	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_city_crowd_medium.iff	-50.0	28.0	-4604.0	0	0	0	0	16	TRUE	Audio - Coronet Bazaar
-bo_atmo_9	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_refrigeration_unit.iff	334.0	32.0	-4415.0	0	0	0	0	16	TRUE	Audio - Pump
-bo_atmo_10	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-75.0	28.0	-4723.0	0	0	0	0	32	TRUE	Crowd - Coronet Starport
-bo_atmo_11	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	3358.0	308.0	5581.0	0	0	0	0	32	TRUE	Crowd - Doaba Guerfel Starport
-bo_atmo_12	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-3141.0	31.0	2864.0	0	0	0	0	32	TRUE	Crowd - Kor Vella Starport
-bo_atmo_13	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-4998.0	21.0	-2246.0	0	0	0	0	32	TRUE	Crowd - Tyrena Starport
-bo_atmo_14	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_rebel.iff	-75.0	0.0	-4723.0	0	0	0	0	1024	TRUE	Traffic - Coronet Starport
-bo_atmo_15	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	3358.0	308.0	5581.0	0	0	0	0	1024	TRUE	Traffic - Doaba Guerfel Starport
-bo_atmo_16	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	-3141.0	31.0	2864.0	0	0	0	0	1024	TRUE	Traffic - Kor Vella Starport
-bo_atmo_17	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	-4998.0	21.0	-2246.0	0	0	0	0	1024	TRUE	Traffic - Tyrena Starport
-bo_atmo_18	CORELLIA	cor_world	0	object/soundobject/shared_soundobject_transport_interior.iff	19.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Stronghold
-bo_atmo_19	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	1569.0	4.0	-6415.0	0	0	0	0	300	TRUE	Ambient - Agro Outpost
-bo_atmo_20	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-4208.0	3.0	-2350.0	0	0	0	0	32	TRUE	Ambient - Imperial Outpost
-bo_atmo_21	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-636.0	3.0	2505.0	0	0	0	0	32	TRUE	Ambient - Mining Outpost
-bo_atmo_22	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	1569.0	4.0	-6415.0	0	0	0	0	32	TRUE	Crowd - Agro Outpost
-bo_atmo_23	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-4208.0	3.0	-2350.0	0	0	0	0	32	TRUE	Crowd - Imperial Outpost
-bo_atmo_24	DANTOOINE	dan_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-636.0	3.0	2505.0	0	0	0	0	32	TRUE	Crowd - Mining Outpost
+bo_atmo_1	CORELLIA	cor_coronet_theater	6	object/soundobject/soundobject_cantina_large.iff	-0.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
+bo_atmo_2	CORELLIA	cor_coronet_theater	6	object/soundobject/soundobject_cantina_medium.iff	-20.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
+bo_atmo_3	CORELLIA	cor_coronet_theater	6	object/soundobject/soundobject_cantina_medium.iff	19.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Coronet Theater
+bo_atmo_4	CORELLIA	cor_world	0	object/soundobject/soundobject_starport_exterior.iff	-75.0	28.0	-4723.0	0	0	0	0	32	TRUE	Ambient - Coronet Starport
+bo_atmo_5	CORELLIA	cor_world	0	object/soundobject/soundobject_starport_exterior.iff	3358.0	308.0	5581.0	0	0	0	0	32	TRUE	Ambient - Doaba Guerfel Starport
+bo_atmo_6	CORELLIA	cor_world	0	object/soundobject/soundobject_starport_exterior.iff	-3141.0	31.0	2864.0	0	0	0	0	32	TRUE	Ambient - Kor Vella Starport
+bo_atmo_7	CORELLIA	cor_world	0	object/soundobject/soundobject_starport_exterior.iff	-4998.0	21.0	-2246.0	0	0	0	0	32	TRUE	Ambient - Tyrena Starport
+bo_atmo_8	CORELLIA	cor_world	0	object/soundobject/soundobject_city_crowd_medium.iff	-50.0	28.0	-4604.0	0	0	0	0	16	TRUE	Audio - Coronet Bazaar
+bo_atmo_9	CORELLIA	cor_world	0	object/soundobject/soundobject_refrigeration_unit.iff	334.0	32.0	-4415.0	0	0	0	0	16	TRUE	Audio - Pump
+bo_atmo_10	CORELLIA	cor_world	0	object/soundobject/soundobject_transport_interior.iff	19.8	1.7	32.8	0	0	0	0	16	TRUE	Audio - Stronghold
+bo_atmo_11	CORELLIA	cor_world	0	object/soundobject/soundobject_city_crowd_small.iff	-75.0	28.0	-4723.0	0	0	0	0	32	TRUE	Crowd - Coronet Starport
+bo_atmo_12	CORELLIA	cor_world	0	object/soundobject/soundobject_city_crowd_small.iff	3358.0	308.0	5581.0	0	0	0	0	32	TRUE	Crowd - Doaba Guerfel Starport
+bo_atmo_13	CORELLIA	cor_world	0	object/soundobject/soundobject_city_crowd_small.iff	-3141.0	31.0	2864.0	0	0	0	0	32	TRUE	Crowd - Kor Vella Starport
+bo_atmo_14	CORELLIA	cor_world	0	object/soundobject/soundobject_city_crowd_small.iff	-4998.0	21.0	-2246.0	0	0	0	0	32	TRUE	Crowd - Tyrena Starport
+bo_atmo_15	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_rebel.iff	-75.0	0.0	-4723.0	0	0	0	0	1024	TRUE	Traffic - Coronet Starport
+bo_atmo_16	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	3358.0	308.0	5581.0	0	0	0	0	1024	TRUE	Traffic - Doaba Guerfel Starport
+bo_atmo_17	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	-3141.0	31.0	2864.0	0	0	0	0	1024	TRUE	Traffic - Kor Vella Starport
+bo_atmo_18	CORELLIA	cor_world	0	object/static/structure/general/distant_ship_controller_general.iff	-4998.0	21.0	-2246.0	0	0	0	0	1024	TRUE	Traffic - Tyrena Starport
+bo_atmo_19	DANTOOINE	dan_world	0	object/soundobject/soundobject_starport_exterior.iff	1569.0	4.0	-6415.0	0	0	0	0	300	TRUE	Ambient - Agro Outpost
+bo_atmo_20	DANTOOINE	dan_world	0	object/soundobject/soundobject_starport_exterior.iff	-4208.0	3.0	-2350.0	0	0	0	0	32	TRUE	Ambient - Imperial Outpost
+bo_atmo_21	DANTOOINE	dan_world	0	object/soundobject/soundobject_starport_exterior.iff	-636.0	3.0	2505.0	0	0	0	0	32	TRUE	Ambient - Mining Outpost
+bo_atmo_22	DANTOOINE	dan_world	0	object/soundobject/soundobject_city_crowd_small.iff	1569.0	4.0	-6415.0	0	0	0	0	32	TRUE	Crowd - Agro Outpost
+bo_atmo_23	DANTOOINE	dan_world	0	object/soundobject/soundobject_city_crowd_small.iff	-4208.0	3.0	-2350.0	0	0	0	0	32	TRUE	Crowd - Imperial Outpost
+bo_atmo_24	DANTOOINE	dan_world	0	object/soundobject/soundobject_city_crowd_small.iff	-636.0	3.0	2505.0	0	0	0	0	32	TRUE	Crowd - Mining Outpost
 bo_atmo_25	DANTOOINE	dan_world	0	object/static/structure/general/distant_ship_controller_general.iff	1569.0	4.0	-6415.0	0	0	0	0	1024	TRUE	Traffic - Agro Outpost
 bo_atmo_26	DANTOOINE	dan_world	0	object/static/structure/general/distant_ship_controller_general.iff	-4208.0	3.0	-2350.0	0	0	0	0	1024	TRUE	Traffic - Imperial Outpost
 bo_atmo_27	DANTOOINE	dan_world	0	object/static/structure/general/distant_ship_controller_general.iff	-636.0	3.0	2505.0	0	0	0	0	1024	TRUE	Traffic - Mining Outpost
-bo_atmo_28	DATHOMIR	dat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-49.0	18.0	-1584.0	0	0	0	0	32	TRUE	Ambient - Science Outpost
-bo_atmo_29	DATHOMIR	dat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	618.0	6.0	3092.0	0	0	0	0	32	TRUE	Ambient - Trade Outpost
-bo_atmo_30	DATHOMIR	dat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-49.0	18.0	-1584.0	0	0	0	0	32	TRUE	Crowd - Science Outpost
-bo_atmo_31	DATHOMIR	dat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	618.0	6.0	3092.0	0	0	0	0	32	TRUE	Crowd - Trade Outpost
+bo_atmo_28	DATHOMIR	dat_world	0	object/soundobject/soundobject_starport_exterior.iff	-49.0	18.0	-1584.0	0	0	0	0	32	TRUE	Ambient - Science Outpost
+bo_atmo_29	DATHOMIR	dat_world	0	object/soundobject/soundobject_starport_exterior.iff	618.0	6.0	3092.0	0	0	0	0	32	TRUE	Ambient - Trade Outpost
+bo_atmo_30	DATHOMIR	dat_world	0	object/soundobject/soundobject_city_crowd_small.iff	-49.0	18.0	-1584.0	0	0	0	0	32	TRUE	Crowd - Science Outpost
+bo_atmo_31	DATHOMIR	dat_world	0	object/soundobject/soundobject_city_crowd_small.iff	618.0	6.0	3092.0	0	0	0	0	32	TRUE	Crowd - Trade Outpost
 bo_atmo_32	DATHOMIR	dat_world	0	object/static/structure/general/distant_ship_controller_general.iff	-49.0	18.0	-1584.0	0	0	0	0	1024	TRUE	Traffic - Science Outpost
 bo_atmo_33	DATHOMIR	dat_world	0	object/static/structure/general/distant_ship_controller_general.iff	618.0	6.0	3092.0	0	0	0	0	1024	TRUE	Traffic - Trade Outpost
-bo_atmo_34	DUNGEON1	du1_nova_orion	1	object/soundobject/shared_soundobject_cantina_medium.iff	9.2	-1.0	9.4	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_34	DUNGEON1	du1_nova_orion	1	object/soundobject/shared_soundobject_figrin_dan_band.iff	13.5	0.0	12.7	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_35	DUNGEON1	du1_nova_orion	6	object/soundobject/shared_soundobject_sailbarge_lower.iff	75.7	0.8	56.5	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_36	DUNGEON1	du1_nova_orion	7	object/soundobject/shared_soundobject_refrigeration_unit.iff	93.8	0.8	20.2	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_37	DUNGEON1	du1_nova_orion	8	object/soundobject/shared_soundobject_sailbarge_lower.iff	62.1	0.8	-45.2	0	0	0	0	32	TRUE	Audio - Nova Orion
-bo_atmo_38	DUNGEON1	du1_nova_orion	9	object/soundobject/shared_soundobject_refrigeration_unit.iff	96.4	0.8	-16.7	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_39	DUNGEON1	du1_nova_orion	12	object/soundobject/shared_soundobject_cloning_facility.iff	-57.3	-1.2	0.0	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_40	DUNGEON1	du1_nova_orion	11	object/soundobject/shared_soundobject_sailbarge_lower.iff	-40.6	0.6	29.4	0	0	0	0	16	TRUE	Audio - Nova Orion
-bo_atmo_41	ENDOR	end_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	3201.0	24.0	-3500.0	0	0	0	0	32	TRUE	Ambient - Research Outpost
-bo_atmo_42	ENDOR	end_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-950.0	73.0	1553.0	0	0	0	0	32	TRUE	Ambient - Smuggler Outpost
-bo_atmo_43	ENDOR	end_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	3201.0	24.0	-3500.0	0	0	0	0	32	TRUE	Crowd - Research Outpost
-bo_atmo_44	ENDOR	end_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-950.0	73.0	1553.0	0	0	0	0	32	TRUE	Crowd - Smuggler Outpost
-bo_atmo_45	ENDOR	end_world	0	object/static/space/ship/shared_cargo_freighter.iff	-818.0	100.0	1540.0	-159	0	0	0	1024	TRUE	Scene - Cargo Freighter
-bo_atmo_46	ENDOR	end_world	0	object/static/structure/general/distant_ship_controller_general.iff	3201.0	24.0	-3500.0	0	0	0	0	1024	TRUE	Traffic - Research Outpost
-bo_atmo_47	ENDOR	end_world	0	object/static/structure/general/distant_ship_controller_general.iff	-950.0	73.0	1553.0	0	0	0	0	1024	TRUE	Traffic - Smuggler Outpost
-bo_atmo_48	KASHYYYK_MAIN	kas_main_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-689.0	21.0	-170.0	0	0	0	0	32	TRUE	Ambient - Kachirho Starport
-bo_atmo_49	KASHYYYK_MAIN	kas_main_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-689.0	21.0	-170.0	0	0	0	0	32	TRUE	Crowd - Kachirho Starport
-bo_atmo_50	KASHYYYK_MAIN	kas_main_world	0	object/static/structure/general/distant_ship_controller_general.iff	-689.0	21.0	-170.0	0	0	0	0	1024	TRUE	Traffic - Kachirho Starport
-bo_atmo_51	LOK	lok_nym_starport	1	object/soundobject/shared_soundobject_starport_interior.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
-bo_atmo_52	LOK	lok_nym_starport	1	object/soundobject/shared_soundobject_starport_announcer.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
-bo_atmo_53	LOK	lok_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	479.0	8.0	5511.0	0	0	0	0	32	TRUE	Ambient - Nym's Stronghold
-bo_atmo_54	LOK	lok_world	0	object/soundobject/shared_soundobject_installation_hydro.iff	-1979.0	12.0	-2985.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_55	LOK	lok_world	0	object/soundobject/shared_soundobject_installation_hydro.iff	-1961.0	12.0	-2985.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_56	LOK	lok_world	0	object/soundobject/shared_soundobject_quiet_steam.iff	-1916.0	12.0	-3009.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_57	LOK	lok_world	0	object/soundobject/shared_soundobject_power_generator.iff	-1968.0	12.0	-3029.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_58	LOK	lok_world	0	object/soundobject/shared_soundobject_installation_hydro.iff	-1986.0	12.0	-3164.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_59	LOK	lok_world	0	object/soundobject/shared_soundobject_installation_hydro.iff	-1968.0	12.0	-3175.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_60	LOK	lok_world	0	object/soundobject/shared_soundobject_power_generator.iff	-1826.0	12.0	-3114.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_61	LOK	lok_world	0	object/soundobject/shared_soundobject_installation_photo_bio.iff	-1858.0	12.0	-3053.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_62	LOK	lok_world	0	object/soundobject/shared_soundobject_refrigeration_unit.iff	-1918.0	12.0	-3029.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
-bo_atmo_63	LOK	lok_world	0	object/soundobject/shared_soundobject_city_crowd_medium.iff	421.0	12.0	5050.0	0	0	0	0	16	TRUE	Audio - Nym Bazaar
-bo_atmo_64	LOK	lok_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	479.0	8.0	5511.0	0	0	0	0	32	TRUE	Crowd - Nym's Stronghold
-bo_atmo_65	LOK	lok_world	0	object/static/structure/general/distant_ship_controller_general.iff	479.0	8.0	5511.0	0	0	0	0	1024	TRUE	Traffic - Nym's Stronghold
-bo_atmo_66	MUSTAFAR	mus_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	407.0	230.0	-1355.0	0	0	0	0	32	TRUE	Ambient - Mensix Mining Facility
-bo_atmo_67	MUSTAFAR	mus_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	407.0	230.0	-1355.0	0	0	0	0	32	TRUE	Crowd - Mensix Mining Facility
-bo_atmo_68	MUSTAFAR	mus_world	0	object/static/structure/general/distant_ship_controller_general.iff	407.0	230.0	-1355.0	0	0	0	0	1024	TRUE	Traffic - Mensix Mining Facility
-bo_atmo_69	NABOO	nab_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	5295.0	-192.0	6675.0	0	0	0	0	32	TRUE	Ambient - Kaadara Starport
-bo_atmo_70	NABOO	nab_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	1377.0	13.0	2760.0	0	0	0	0	32	TRUE	Ambient - Keren Starport
-bo_atmo_71	NABOO	nab_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	4745.0	0.0	-4672.0	0	0	0	0	32	TRUE	Ambient - Moenia Starport
-bo_atmo_72	NABOO	nab_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-4866.0	6.0	4155.0	0	0	0	0	32	TRUE	Ambient - Theed Spaceport
-bo_atmo_73	NABOO	nab_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	5295.0	-192.0	6675.0	0	0	0	0	32	TRUE	Crowd - Kaadara Starport
-bo_atmo_74	NABOO	nab_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	1377.0	13.0	2760.0	0	0	0	0	32	TRUE	Crowd - Keren Starport
-bo_atmo_75	NABOO	nab_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	4745.0	0.0	-4672.0	0	0	0	0	32	TRUE	Crowd - Moenia Starport
-bo_atmo_76	NABOO	nab_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-4866.0	6.0	4155.0	0	0	0	0	32	TRUE	Crowd - Theed Spaceport
-bo_atmo_77	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	5295.0	-192.0	6675.0	0	0	0	0	1024	TRUE	Traffic - Kaadara Starport
-bo_atmo_78	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	1377.0	13.0	2760.0	0	0	0	0	1024	TRUE	Traffic - Keren Starport
-bo_atmo_79	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	4745.0	0.0	-4672.0	0	0	0	0	1024	TRUE	Traffic - Moenia Starport
-bo_atmo_80	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	-4866.0	6.0	4155.0	0	0	0	0	1024	TRUE	Traffic - Theed Spaceport
-bo_atmo_81	RORI	ror_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-5359.0	80.0	-2188.0	0	0	0	0	32	TRUE	Ambient - Narmle Starport
-bo_atmo_82	RORI	ror_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	3693.0	96.0	-6403.0	0	0	0	0	32	TRUE	Ambient - Rebel Outpost
-bo_atmo_83	RORI	ror_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	5301.0	80.0	6190.0	0	0	0	0	32	TRUE	Ambient - Restuss Starport
-bo_atmo_84	RORI	ror_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-5359.0	80.0	-2188.0	0	0	0	0	32	TRUE	Crowd - Narmle Starport
-bo_atmo_85	RORI	ror_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	3693.0	96.0	-6403.0	0	0	0	0	32	TRUE	Crowd - Rebel Outpost
-bo_atmo_86	RORI	ror_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	5301.0	80.0	6190.0	0	0	0	0	32	TRUE	Crowd - Restuss Starport
-bo_atmo_87	RORI	ror_world	0	object/static/space/ship/shared_corellian_corvette.iff	3693.0	230.0	-6403.0	59	0	0	0	1024	TRUE	Scene - Corellian Corvette
-bo_atmo_88	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_general.iff	-5359.0	80.0	-2188.0	0	0	0	0	1024	TRUE	Traffic - Narmle Starport
-bo_atmo_89	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_rebel.iff	3693.0	96.0	-6403.0	0	0	0	0	1024	TRUE	Traffic - Rebel Outpost
-bo_atmo_90	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_general.iff	5301.0	80.0	6190.0	0	0	0	0	1024	TRUE	Traffic - Restuss Starport
-bo_atmo_91	TALUS	tal_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	274.0	6.0	-2933.0	0	0	0	0	32	TRUE	Ambient - Dearic Starport
-bo_atmo_92	TALUS	tal_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-2227.0	20.0	2322.0	0	0	0	0	32	TRUE	Ambient - Imperial Outpost
-bo_atmo_93	TALUS	tal_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	4461.0	2.0	5342.0	0	0	0	0	32	TRUE	Ambient - Nashal Starport
-bo_atmo_94	TALUS	tal_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	274.0	6.0	-2933.0	0	0	0	0	32	TRUE	Crowd - Dearic Starport
-bo_atmo_95	TALUS	tal_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-2227.0	20.0	2322.0	0	0	0	0	32	TRUE	Crowd - Imperial Outpost
-bo_atmo_96	TALUS	tal_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	4461.0	2.0	5342.0	0	0	0	0	32	TRUE	Crowd - Nashal Starport
-bo_atmo_97	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	274.0	6.0	-2933.0	0	0	0	0	1024	TRUE	Traffic - Dearic Starport
-bo_atmo_98	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	-2227.0	20.0	2322.0	0	0	0	0	1024	TRUE	Traffic - Imperial Outpost
-bo_atmo_99	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	4461.0	2.0	5342.0	0	0	0	0	1024	TRUE	Traffic - Nashal Starport
-bo_atmo_100	TATOOINE	tat_jabbas_palace	1	object/soundobject/shared_soundobject_jabba_palace_entrance.iff	-0.2	0.2	124.5	0	0	0	0	16	TRUE	Audio - Jabbas Palace Entrance Ambience
-bo_atmo_101	TATOOINE	tat_jabbas_palace	12	object/soundobject/shared_soundobject_fire_roaring.iff	-46.6	3.0	61.3	0	0	0	0	16	TRUE	Audio - Jabbas Palace Kitchen Fire
-bo_atmo_102	TATOOINE	tat_moseisley_cantina	13	object/soundobject/shared_soundobject_refrigeration_unit.iff	-25.7	-0.5	7.8	0	0	0	0	16	TRUE	Audio - Mos Eisley Cantina Computer
-bo_atmo_103	TATOOINE	tat_moseisley_lucky_despot	2	object/soundobject/shared_soundobject_nova_orion_band.iff	-15.5	8.0	0.3	0	0	0	0	16	TRUE	Audio - Luckey Despot
-bo_atmo_104	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-1350.0	12.0	-3586.0	0	0	0	0	32	TRUE	Ambient - Bestine Starport
-bo_atmo_105	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	3592.0	5.0	-4793.0	0	0	0	0	32	TRUE	Ambient - Mos Eisley Starport
-bo_atmo_106	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	1257.0	7.0	3079.0	0	0	0	0	32	TRUE	Ambient - Mos Entha Starport
-bo_atmo_107	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-2844.0	5.0	2097.0	0	0	0	0	32	TRUE	Ambient - Mos Espa Starport
-bo_atmo_108	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	-1128.6	12.0	-3684.2	0	0	0	0	16	TRUE	Audio - Market Bestine
-bo_atmo_109	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	-1434.8	10.0	-3752.7	0	0	0	0	16	TRUE	Audio - Market Bestine
-bo_atmo_110	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_small.iff	-5288.6	7.5	2708.1	0	0	0	0	16	TRUE	Audio - Market Imperial Oasis
-bo_atmo_111	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	1574.5	7.0	3332.4	0	0	0	0	16	TRUE	Audio - Market Mos Entha
-bo_atmo_112	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	1588.6	7.0	3114.3	0	0	0	0	16	TRUE	Audio - Market Mos Entha
-bo_atmo_113	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	1301.6	7.0	3151.1	0	0	0	0	16	TRUE	Audio - Market Mos Entha
-bo_atmo_114	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	-2745.6	5.0	2027.1	0	0	0	0	16	TRUE	Audio - Market Mos Espa
-bo_atmo_115	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	-2867.8	5.0	2496.6	0	0	0	0	16	TRUE	Audio - Market Mos Espa
-bo_atmo_116	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_large.iff	-3023.8	5.0	2059.1	0	0	0	0	16	TRUE	Audio - Market Mos Espa
-bo_atmo_117	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_small.iff	3771.3	7.5	2362.1	0	0	0	0	16	TRUE	Audio - Market Mos Taike
-bo_atmo_118	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	3250.0	4.0	-4865.0	0	0	0	0	16	TRUE	Audio - Mos Eisley
-bo_atmo_119	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_medium.iff	3500.0	2.0	-4945.0	0	0	0	0	16	TRUE	Audio - Mos Eisley Bazaar
-bo_atmo_120	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_marketplace_small.iff	1505.0	7.0	3141.0	0	0	0	0	16	TRUE	Audio - Mos Entha
-bo_atmo_121	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_medium.iff	1272.0	7.0	2943.0	0	0	0	0	16	TRUE	Audio - Mos Entha Bazaar
-bo_atmo_122	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_quiet_steam.iff	1765.0	7.0	3063.0	0	0	0	0	16	TRUE	Audio - Mos Entha Garage
-bo_atmo_123	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	2758.0	2.0	-4563.0	0	0	0	0	16	TRUE	Audio - Tatooine Camp
-bo_atmo_124	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-1350.0	12.0	-3586.0	0	0	0	0	32	TRUE	Crowd - Bestine Starport
-bo_atmo_125	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	3592.0	5.0	-4793.0	0	0	0	0	32	TRUE	Crowd - Mos Eisley Starport
-bo_atmo_126	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	1257.0	7.0	3079.0	0	0	0	0	32	TRUE	Crowd - Mos Entha Starport
-bo_atmo_127	TATOOINE	tat_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-2844.0	5.0	2097.0	0	0	0	0	32	TRUE	Crowd - Mos Espa Starport
-bo_atmo_128	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller2.iff	-1374.0	0.0	-3578.0	0	0	0	0	1024	TRUE	Traffic - Bestine Starport
-bo_atmo_129	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	3592.0	5.0	-4793.0	0	0	0	0	1024	TRUE	Traffic - Mos Eisley Starport
-bo_atmo_130	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	1257.0	7.0	3079.0	0	0	0	0	1024	TRUE	Traffic - Mos Entha Starport
-bo_atmo_131	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	-2844.0	5.0	2097.0	0	0	0	0	1024	TRUE	Traffic - Mos Espa Starport
-bo_atmo_132	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	4054.0	37.0	-6216.0	0	0	0	0	32	TRUE	Ambient - Imperial Base
-bo_atmo_133	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-6922.0	73.0	-5727.0	0	0	0	0	32	TRUE	Ambient - Labor Outpost
-bo_atmo_134	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_starport_exterior.iff	-267.0	35.0	4896.0	0	0	0	0	32	TRUE	Ambient - Mining Outpost
-bo_atmo_135	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	4054.0	37.0	-6216.0	0	0	0	0	32	TRUE	Crowd - Imperial Base
-bo_atmo_136	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-6922.0	73.0	-5727.0	0	0	0	0	32	TRUE	Crowd - Labor Outpost
-bo_atmo_137	YAVIN4	yav_world	0	object/soundobject/shared_soundobject_city_crowd_small.iff	-267.0	35.0	4896.0	0	0	0	0	32	TRUE	Crowd - Mining Outpost
-bo_atmo_138	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	4054.0	37.0	-6216.0	0	0	0	0	1024	TRUE	Traffic - Imperial Base
-bo_atmo_139	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	-6922.0	73.0	-5727.0	0	0	0	0	1024	TRUE	Traffic - Labor Outpost
-bo_atmo_140	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	-267.0	35.0	4896.0	0	0	0	0	1024	TRUE	Traffic - Mining Outpost
+bo_atmo_34	DUNGEON1	du1_nova_orion	1	object/soundobject/soundobject_cantina_medium.iff	9.2	-1.0	9.4	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_35	DUNGEON1	du1_nova_orion	1	object/soundobject/soundobject_figrin_dan_band.iff	13.5	0.0	12.7	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_36	DUNGEON1	du1_nova_orion	6	object/soundobject/soundobject_sailbarge_lower.iff	75.7	0.8	56.5	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_37	DUNGEON1	du1_nova_orion	7	object/soundobject/soundobject_refrigeration_unit.iff	93.8	0.8	20.2	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_38	DUNGEON1	du1_nova_orion	8	object/soundobject/soundobject_sailbarge_lower.iff	62.1	0.8	-45.2	0	0	0	0	32	TRUE	Audio - Nova Orion
+bo_atmo_39	DUNGEON1	du1_nova_orion	9	object/soundobject/soundobject_refrigeration_unit.iff	96.4	0.8	-16.7	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_40	DUNGEON1	du1_nova_orion	12	object/soundobject/soundobject_cloning_facility.iff	-57.3	-1.2	0.0	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_41	DUNGEON1	du1_nova_orion	11	object/soundobject/soundobject_sailbarge_lower.iff	-40.6	0.6	29.4	0	0	0	0	16	TRUE	Audio - Nova Orion
+bo_atmo_42	ENDOR	end_world	0	object/soundobject/soundobject_starport_exterior.iff	3201.0	24.0	-3500.0	0	0	0	0	32	TRUE	Ambient - Research Outpost
+bo_atmo_43	ENDOR	end_world	0	object/soundobject/soundobject_starport_exterior.iff	-950.0	73.0	1553.0	0	0	0	0	32	TRUE	Ambient - Smuggler Outpost
+bo_atmo_44	ENDOR	end_world	0	object/soundobject/soundobject_city_crowd_small.iff	3201.0	24.0	-3500.0	0	0	0	0	32	TRUE	Crowd - Research Outpost
+bo_atmo_45	ENDOR	end_world	0	object/soundobject/soundobject_city_crowd_small.iff	-950.0	73.0	1553.0	0	0	0	0	32	TRUE	Crowd - Smuggler Outpost
+bo_atmo_46	ENDOR	end_world	0	object/static/space/ship/cargo_freighter.iff	-818.0	100.0	1540.0	-159	0	0	0	1024	TRUE	Scene - Cargo Freighter
+bo_atmo_47	ENDOR	end_world	0	object/static/structure/general/distant_ship_controller_general.iff	3201.0	24.0	-3500.0	0	0	0	0	1024	TRUE	Traffic - Research Outpost
+bo_atmo_48	ENDOR	end_world	0	object/static/structure/general/distant_ship_controller_general.iff	-950.0	73.0	1553.0	0	0	0	0	1024	TRUE	Traffic - Smuggler Outpost
+bo_atmo_49	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	object/static/particle/pt_campfire_s01.iff	275.6	9.1	-29.8	0	0	0	0	128	TRUE	
+bo_atmo_50	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	object/static/particle/pt_smoke_large.iff	262.6	7.7	-17.6	0	0	0	0	128	TRUE	
+bo_atmo_51	KASHYYYK_MAIN	kas_main_world	0	object/soundobject/soundobject_starport_exterior.iff	-689.0	21.0	-170.0	0	0	0	0	32	TRUE	Ambient - Kachirho Starport
+bo_atmo_52	KASHYYYK_MAIN	kas_main_world	0	object/soundobject/soundobject_city_crowd_small.iff	-689.0	21.0	-170.0	0	0	0	0	32	TRUE	Crowd - Kachirho Starport
+bo_atmo_53	KASHYYYK_MAIN	kas_main_world	0	object/static/structure/general/distant_ship_controller_general.iff	-689.0	21.0	-170.0	0	0	0	0	1024	TRUE	Traffic - Kachirho Starport
+bo_atmo_54	LOK	lok_nym_starport	1	object/soundobject/soundobject_starport_interior.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
+bo_atmo_55	LOK	lok_nym_starport	1	object/soundobject/soundobject_starport_announcer.iff	-7.5	0.1	-17.5	0	0	0	0	16	TRUE	Audio - Nym Starport
+bo_atmo_56	LOK	lok_world	0	object/soundobject/soundobject_starport_exterior.iff	479.0	8.0	5511.0	0	0	0	0	32	TRUE	Ambient - Nym's Stronghold
+bo_atmo_57	LOK	lok_world	0	object/soundobject/soundobject_installation_hydro.iff	-1979.0	12.0	-2985.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_58	LOK	lok_world	0	object/soundobject/soundobject_installation_hydro.iff	-1961.0	12.0	-2985.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_59	LOK	lok_world	0	object/soundobject/soundobject_quiet_steam.iff	-1916.0	12.0	-3009.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_60	LOK	lok_world	0	object/soundobject/soundobject_power_generator.iff	-1968.0	12.0	-3029.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_61	LOK	lok_world	0	object/soundobject/soundobject_installation_hydro.iff	-1986.0	12.0	-3164.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_62	LOK	lok_world	0	object/soundobject/soundobject_installation_hydro.iff	-1968.0	12.0	-3175.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_63	LOK	lok_world	0	object/soundobject/soundobject_power_generator.iff	-1826.0	12.0	-3114.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_64	LOK	lok_world	0	object/soundobject/soundobject_installation_photo_bio.iff	-1858.0	12.0	-3053.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_65	LOK	lok_world	0	object/soundobject/soundobject_refrigeration_unit.iff	-1918.0	12.0	-3029.0	0	0	0	0	16	TRUE	Audio - Imperial Outpost
+bo_atmo_66	LOK	lok_world	0	object/soundobject/soundobject_city_crowd_medium.iff	421.0	12.0	5050.0	0	0	0	0	16	TRUE	Audio - Nym Bazaar
+bo_atmo_67	LOK	lok_world	0	object/soundobject/soundobject_city_crowd_small.iff	479.0	8.0	5511.0	0	0	0	0	32	TRUE	Crowd - Nym's Stronghold
+bo_atmo_68	LOK	lok_world	0	object/static/structure/general/distant_ship_controller_general.iff	479.0	8.0	5511.0	0	0	0	0	1024	TRUE	Traffic - Nym's Stronghold
+bo_atmo_69	MUSTAFAR	mus_world	0	object/soundobject/soundobject_starport_exterior.iff	407.0	230.0	-1355.0	0	0	0	0	32	TRUE	Ambient - Mensix Mining Facility
+bo_atmo_70	MUSTAFAR	mus_world	0	object/soundobject/soundobject_city_crowd_small.iff	407.0	230.0	-1355.0	0	0	0	0	32	TRUE	Crowd - Mensix Mining Facility
+bo_atmo_71	MUSTAFAR	mus_world	0	object/static/structure/general/distant_ship_controller_general.iff	407.0	230.0	-1355.0	0	0	0	0	1024	TRUE	Traffic - Mensix Mining Facility
+bo_atmo_72	NABOO	nab_world	0	object/soundobject/soundobject_starport_exterior.iff	5295.0	-192.0	6675.0	0	0	0	0	32	TRUE	Ambient - Kaadara Starport
+bo_atmo_73	NABOO	nab_world	0	object/soundobject/soundobject_starport_exterior.iff	1377.0	13.0	2760.0	0	0	0	0	32	TRUE	Ambient - Keren Starport
+bo_atmo_74	NABOO	nab_world	0	object/soundobject/soundobject_starport_exterior.iff	4745.0	0.0	-4672.0	0	0	0	0	32	TRUE	Ambient - Moenia Starport
+bo_atmo_75	NABOO	nab_world	0	object/soundobject/soundobject_starport_exterior.iff	-4866.0	6.0	4155.0	0	0	0	0	32	TRUE	Ambient - Theed Spaceport
+bo_atmo_76	NABOO	nab_world	0	object/soundobject/soundobject_city_crowd_small.iff	5295.0	-192.0	6675.0	0	0	0	0	32	TRUE	Crowd - Kaadara Starport
+bo_atmo_77	NABOO	nab_world	0	object/soundobject/soundobject_city_crowd_small.iff	1377.0	13.0	2760.0	0	0	0	0	32	TRUE	Crowd - Keren Starport
+bo_atmo_78	NABOO	nab_world	0	object/soundobject/soundobject_city_crowd_small.iff	4745.0	0.0	-4672.0	0	0	0	0	32	TRUE	Crowd - Moenia Starport
+bo_atmo_79	NABOO	nab_world	0	object/soundobject/soundobject_city_crowd_small.iff	-4866.0	6.0	4155.0	0	0	0	0	32	TRUE	Crowd - Theed Spaceport
+bo_atmo_80	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	5295.0	-192.0	6675.0	0	0	0	0	1024	TRUE	Traffic - Kaadara Starport
+bo_atmo_81	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	1377.0	13.0	2760.0	0	0	0	0	1024	TRUE	Traffic - Keren Starport
+bo_atmo_82	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	4745.0	0.0	-4672.0	0	0	0	0	1024	TRUE	Traffic - Moenia Starport
+bo_atmo_83	NABOO	nab_world	0	object/static/structure/general/distant_ship_controller_general.iff	-4866.0	6.0	4155.0	0	0	0	0	1024	TRUE	Traffic - Theed Spaceport
+bo_atmo_84	RORI	ror_world	0	object/soundobject/soundobject_starport_exterior.iff	-5359.0	80.0	-2188.0	0	0	0	0	32	TRUE	Ambient - Narmle Starport
+bo_atmo_85	RORI	ror_world	0	object/soundobject/soundobject_starport_exterior.iff	3693.0	96.0	-6403.0	0	0	0	0	32	TRUE	Ambient - Rebel Outpost
+bo_atmo_86	RORI	ror_world	0	object/soundobject/soundobject_starport_exterior.iff	5301.0	80.0	6190.0	0	0	0	0	32	TRUE	Ambient - Restuss Starport
+bo_atmo_87	RORI	ror_world	0	object/soundobject/soundobject_city_crowd_small.iff	-5359.0	80.0	-2188.0	0	0	0	0	32	TRUE	Crowd - Narmle Starport
+bo_atmo_88	RORI	ror_world	0	object/soundobject/soundobject_city_crowd_small.iff	3693.0	96.0	-6403.0	0	0	0	0	32	TRUE	Crowd - Rebel Outpost
+bo_atmo_89	RORI	ror_world	0	object/soundobject/soundobject_city_crowd_small.iff	5301.0	80.0	6190.0	0	0	0	0	32	TRUE	Crowd - Restuss Starport
+bo_atmo_90	RORI	ror_world	0	object/static/space/ship/corellian_corvette.iff	3693.0	230.0	-6403.0	59	0	0	0	1024	TRUE	Scene - Corellian Corvette
+bo_atmo_91	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_general.iff	-5359.0	80.0	-2188.0	0	0	0	0	1024	TRUE	Traffic - Narmle Starport
+bo_atmo_92	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_rebel.iff	3693.0	96.0	-6403.0	0	0	0	0	1024	TRUE	Traffic - Rebel Outpost
+bo_atmo_93	RORI	ror_world	0	object/static/structure/general/distant_ship_controller_general.iff	5301.0	80.0	6190.0	0	0	0	0	1024	TRUE	Traffic - Restuss Starport
+bo_atmo_94	TALUS	tal_world	0	object/soundobject/soundobject_starport_exterior.iff	274.0	6.0	-2933.0	0	0	0	0	32	TRUE	Ambient - Dearic Starport
+bo_atmo_95	TALUS	tal_world	0	object/soundobject/soundobject_starport_exterior.iff	-2227.0	20.0	2322.0	0	0	0	0	32	TRUE	Ambient - Imperial Outpost
+bo_atmo_96	TALUS	tal_world	0	object/soundobject/soundobject_starport_exterior.iff	4461.0	2.0	5342.0	0	0	0	0	32	TRUE	Ambient - Nashal Starport
+bo_atmo_97	TALUS	tal_world	0	object/soundobject/soundobject_city_crowd_small.iff	274.0	6.0	-2933.0	0	0	0	0	32	TRUE	Crowd - Dearic Starport
+bo_atmo_98	TALUS	tal_world	0	object/soundobject/soundobject_city_crowd_small.iff	-2227.0	20.0	2322.0	0	0	0	0	32	TRUE	Crowd - Imperial Outpost
+bo_atmo_99	TALUS	tal_world	0	object/soundobject/soundobject_city_crowd_small.iff	4461.0	2.0	5342.0	0	0	0	0	32	TRUE	Crowd - Nashal Starport
+bo_atmo_100	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	274.0	6.0	-2933.0	0	0	0	0	1024	TRUE	Traffic - Dearic Starport
+bo_atmo_101	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	-2227.0	20.0	2322.0	0	0	0	0	1024	TRUE	Traffic - Imperial Outpost
+bo_atmo_102	TALUS	tal_world	0	object/static/structure/general/distant_ship_controller_general.iff	4461.0	2.0	5342.0	0	0	0	0	1024	TRUE	Traffic - Nashal Starport
+bo_atmo_103	TATOOINE	tat_jabbas_palace	1	object/soundobject/soundobject_jabba_palace_entrance.iff	-0.2	0.2	124.5	0	0	0	0	16	TRUE	Audio - Jabbas Palace Entrance Ambience
+bo_atmo_104	TATOOINE	tat_jabbas_palace	12	object/soundobject/soundobject_fire_roaring.iff	-46.6	3.0	61.3	0	0	0	0	16	TRUE	Audio - Jabbas Palace Kitchen Fire
+bo_atmo_105	TATOOINE	tat_moseisley_cantina	13	object/soundobject/soundobject_refrigeration_unit.iff	-25.7	-0.5	7.8	0	0	0	0	16	TRUE	Audio - Mos Eisley Cantina Computer
+bo_atmo_106	TATOOINE	tat_moseisley_lucky_despot	2	object/soundobject/soundobject_nova_orion_band.iff	-15.5	8.0	0.3	0	0	0	0	16	TRUE	Audio - Luckey Despot
+bo_atmo_107	TATOOINE	tat_world	0	object/soundobject/soundobject_starport_exterior.iff	-1350.0	12.0	-3586.0	0	0	0	0	32	TRUE	Ambient - Bestine Starport
+bo_atmo_108	TATOOINE	tat_world	0	object/soundobject/soundobject_starport_exterior.iff	3592.0	5.0	-4793.0	0	0	0	0	32	TRUE	Ambient - Mos Eisley Starport
+bo_atmo_109	TATOOINE	tat_world	0	object/soundobject/soundobject_starport_exterior.iff	1257.0	7.0	3079.0	0	0	0	0	32	TRUE	Ambient - Mos Entha Starport
+bo_atmo_110	TATOOINE	tat_world	0	object/soundobject/soundobject_starport_exterior.iff	-2844.0	5.0	2097.0	0	0	0	0	32	TRUE	Ambient - Mos Espa Starport
+bo_atmo_111	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	-1128.6	12.0	-3684.2	0	0	0	0	16	TRUE	Audio - Market Bestine
+bo_atmo_112	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	-1434.8	10.0	-3752.7	0	0	0	0	16	TRUE	Audio - Market Bestine
+bo_atmo_113	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_small.iff	-5288.6	7.5	2708.1	0	0	0	0	16	TRUE	Audio - Market Imperial Oasis
+bo_atmo_114	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	1574.5	7.0	3332.4	0	0	0	0	16	TRUE	Audio - Market Mos Entha
+bo_atmo_115	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	1588.6	7.0	3114.3	0	0	0	0	16	TRUE	Audio - Market Mos Entha
+bo_atmo_116	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	1301.6	7.0	3151.1	0	0	0	0	16	TRUE	Audio - Market Mos Entha
+bo_atmo_117	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	-2745.6	5.0	2027.1	0	0	0	0	16	TRUE	Audio - Market Mos Espa
+bo_atmo_118	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	-2867.8	5.0	2496.6	0	0	0	0	16	TRUE	Audio - Market Mos Espa
+bo_atmo_119	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	-3023.8	5.0	2059.1	0	0	0	0	16	TRUE	Audio - Market Mos Espa
+bo_atmo_120	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_small.iff	3771.3	7.5	2362.1	0	0	0	0	16	TRUE	Audio - Market Mos Taike
+bo_atmo_121	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	3250.0	4.0	-4865.0	0	0	0	0	16	TRUE	Audio - Mos Eisley
+bo_atmo_122	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_medium.iff	3500.0	2.0	-4945.0	0	0	0	0	16	TRUE	Audio - Mos Eisley Bazaar
+bo_atmo_123	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_cheering.iff	3335.7	5.6	-4756.8	0	0	0	0	32	TRUE	Audio - Mos Eisley Theater outside
+bo_atmo_124	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_small.iff	1505.0	7.0	3141.0	0	0	0	0	16	TRUE	Audio - Mos Entha
+bo_atmo_125	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_medium.iff	1272.0	7.0	2943.0	0	0	0	0	16	TRUE	Audio - Mos Entha Bazaar
+bo_atmo_126	TATOOINE	tat_world	0	object/soundobject/soundobject_quiet_steam.iff	1765.0	7.0	3063.0	0	0	0	0	16	TRUE	Audio - Mos Entha Garage
+bo_atmo_127	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	2758.0	2.0	-4563.0	0	0	0	0	16	TRUE	Audio - Tatooine Camp
+bo_atmo_128	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	-1350.0	12.0	-3586.0	0	0	0	0	32	TRUE	Crowd - Bestine Starport
+bo_atmo_129	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3264.8	5.0	-4861.9	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_130	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3317.1	4.8	-4913.2	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_131	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3468.0	4.0	-4876.6	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_132	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3501.6	4.0	-4850.1	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_133	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3527.2	4.0	-4714.1	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_134	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3397.8	4.9	-4766.2	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_135	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3382.1	4.0	-4655.1	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_136	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_large.iff	3320.8	5.0	-4505.2	0	0	0	0	32	TRUE	Crowd - Mos Eisley
+bo_atmo_137	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	3592.0	5.0	-4793.0	0	0	0	0	32	TRUE	Crowd - Mos Eisley Starport
+bo_atmo_138	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	1257.0	7.0	3079.0	0	0	0	0	32	TRUE	Crowd - Mos Entha Starport
+bo_atmo_139	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	-2844.0	5.0	2097.0	0	0	0	0	32	TRUE	Crowd - Mos Espa Starport
+bo_atmo_140	TATOOINE	tat_world	0	object/static/particle/pt_smoke.iff	3716.3	20.5	-5176.8	55	0	0	0	128	TRUE	Mos Eisley
+bo_atmo_141	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	3305.5	5.5	-5137.6	34	0	0	0	128	TRUE	Mos Eisley
+bo_atmo_142	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller2.iff	-1374.0	0.0	-3578.0	0	0	0	0	1024	TRUE	Traffic - Bestine Starport
+bo_atmo_143	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	3592.0	5.0	-4793.0	0	0	0	0	1024	TRUE	Traffic - Mos Eisley Starport
+bo_atmo_144	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	1257.0	7.0	3079.0	0	0	0	0	1024	TRUE	Traffic - Mos Entha Starport
+bo_atmo_145	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	-2844.0	5.0	2097.0	0	0	0	0	1024	TRUE	Traffic - Mos Espa Starport
+bo_atmo_146	YAVIN4	yav_world	0	object/soundobject/soundobject_starport_exterior.iff	4054.0	37.0	-6216.0	0	0	0	0	32	TRUE	Ambient - Imperial Base
+bo_atmo_147	YAVIN4	yav_world	0	object/soundobject/soundobject_starport_exterior.iff	-6922.0	73.0	-5727.0	0	0	0	0	32	TRUE	Ambient - Labor Outpost
+bo_atmo_148	YAVIN4	yav_world	0	object/soundobject/soundobject_starport_exterior.iff	-267.0	35.0	4896.0	0	0	0	0	32	TRUE	Ambient - Mining Outpost
+bo_atmo_149	YAVIN4	yav_world	0	object/soundobject/soundobject_city_crowd_small.iff	4054.0	37.0	-6216.0	0	0	0	0	32	TRUE	Crowd - Imperial Base
+bo_atmo_150	YAVIN4	yav_world	0	object/soundobject/soundobject_city_crowd_small.iff	-6922.0	73.0	-5727.0	0	0	0	0	32	TRUE	Crowd - Labor Outpost
+bo_atmo_151	YAVIN4	yav_world	0	object/soundobject/soundobject_city_crowd_small.iff	-267.0	35.0	4896.0	0	0	0	0	32	TRUE	Crowd - Mining Outpost
+bo_atmo_152	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	4054.0	37.0	-6216.0	0	0	0	0	1024	TRUE	Traffic - Imperial Base
+bo_atmo_153	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	-6922.0	73.0	-5727.0	0	0	0	0	1024	TRUE	Traffic - Labor Outpost
+bo_atmo_154	YAVIN4	yav_world	0	object/static/structure/general/distant_ship_controller_general.iff	-267.0	35.0	4896.0	0	0	0	0	1024	TRUE	Traffic - Mining Outpost

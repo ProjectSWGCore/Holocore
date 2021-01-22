@@ -107,7 +107,7 @@ class TravelGroup(landTime: Long, groundTime: Long, airTime: Long) : Runnable {
 			val shuttle = tp.shuttle ?: continue // No associated shuttle
 			val starport = tp.starport
 			if (starport != null) {
-				val soundFile = if (landed) "sound/ui_alarm_clock3.snd" else "sound/ui_alarm_clock5.snd"
+				val soundFile = if (landed) "sound/ui_som_analysis_succeed.snd" else "sound/ui_som_analysis_fail.snd"
 				val effect = PlayMusicMessage(0, soundFile, 1, false)
 				starport.runOnChildObjectsRecursively { obj -> obj.sendSelf(effect) }
 			}

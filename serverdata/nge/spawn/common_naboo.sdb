@@ -195,12 +195,12 @@ spawn_nab_192	NABOO	nab_world	PATROL	0	5173.7	-191.5	6610.2	-129	1	a medic	human
 spawn_nab_193	NABOO	nab_world	PATROL	0	5139.8	-192.0	6761.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	25	35	City	Kaadara	1	PATROL	0	patrol_nab_6600	column	idle				600
 spawn_nab_194	NABOO	nab_world	PATROL	0	5144.5	-192.0	6766.7	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	25	35	City	Kaadara	1	PATROL	0	patrol_nab_6700	column	idle				600
 spawn_nab_195	NABOO	nab_world	PATROL	0	5155.4	-192	6851.2	-6	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11400	column	idle				600
-spawn_nab_196	NABOO	nab_world	AREA	0	5037.7	-192.0	6686.3	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
-spawn_nab_197	NABOO	nab_world	AREA	0	5159.5	-192.0	6756.9	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
-spawn_nab_198	NABOO	nab_world	AREA	0	5180.1	-192.0	6648.6	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
-spawn_nab_199	NABOO	nab_world	AREA	0	5296.9	-192.0	6579.9	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
-spawn_nab_200	NABOO	nab_world	AREA	0	5383.4	-192.0	6658.8	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
-spawn_nab_201	NABOO	nab_world	AREA	0	5366.1	-197.2	6441.5	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	25	35	City	Kaadara	1	TURN	0	0	-	idle				600
+spawn_nab_196	NABOO	nab_world	AREA	0	5037.7	-192.0	6686.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
+spawn_nab_197	NABOO	nab_world	AREA	0	5159.5	-192.0	6756.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
+spawn_nab_198	NABOO	nab_world	AREA	0	5180.1	-192.0	6648.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
+spawn_nab_199	NABOO	nab_world	AREA	0	5296.9	-192.0	6579.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
+spawn_nab_200	NABOO	nab_world	AREA	0	5383.4	-192.0	6658.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
+spawn_nab_201	NABOO	nab_world	AREA	0	5366.1	-197.2	6441.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle				600
 spawn_nab_202	NABOO	nab_world	PATROL	0	5290.7	-192	6682.4	5	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11100	column	idle				600
 spawn_nab_203	NABOO	nab_world	PATROL	0	5358.9	-192	6590.4	-101	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11700	column	idle				600
 spawn_nab_204	NABOO	nab_world	AREA	0	5184.9	-192.0	6671.2	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle				600

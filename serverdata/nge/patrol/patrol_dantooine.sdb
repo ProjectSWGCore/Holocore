@@ -1,16 +1,16 @@
 patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
 TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-patrol_dan_100	patrol_dan_100	FLIP	DANTOOINE	dan_world	0	-540.5	0.1	2512.7	0	Mining Outpost - Scientist
+patrol_dan_100	patrol_dan_100	FLIP	DANTOOINE	dan_world	0	-540.5	0.1	2512.7	30	Mining Outpost - Scientist
 patrol_dan_101	patrol_dan_100		DANTOOINE	dan_world	0	-555.4	2.9	2511.4	0	
 patrol_dan_102	patrol_dan_100		DANTOOINE	dan_world	0	-594.7	3.0	2508.1	0	
 patrol_dan_103	patrol_dan_100		DANTOOINE	dan_world	0	-654.3	3.0	2444.9	0	
 patrol_dan_104	patrol_dan_100		DANTOOINE	dan_world	0	-671.1	2.4	2364.1	0	
-patrol_dan_105	patrol_dan_100		DANTOOINE	dan_world	0	-698.2	5.1	2278.6	0	
-patrol_dan_200	patrol_dan_200	FLIP	DANTOOINE	dan_world	0	1619.8	4.0	-6368.1	0	Pirate Outpost - Commoner
+patrol_dan_105	patrol_dan_100		DANTOOINE	dan_world	0	-698.2	5.1	2278.6	60	
+patrol_dan_200	patrol_dan_200	FLIP	DANTOOINE	dan_world	0	1619.8	4.0	-6368.1	30	Pirate Outpost - Commoner
 patrol_dan_201	patrol_dan_200		DANTOOINE	dan_world	0	1604.6	4.0	-6379.0	0	
 patrol_dan_202	patrol_dan_200		DANTOOINE	dan_world	0	1567.9	4.0	-6379.9	0	
 patrol_dan_203	patrol_dan_200		DANTOOINE	dan_world	0	1553.9	4.0	-6397.1	0	
-patrol_dan_204	patrol_dan_200		DANTOOINE	dan_world	0	1543.4	4.0	-6416.1	0	
+patrol_dan_204	patrol_dan_200		DANTOOINE	dan_world	0	1543.4	4.0	-6416.1	15	
 patrol_dan_300	patrol_dan_300	LOOP	DANTOOINE	dan_world	0	-7173.4	3.0	-852.6	0	Dantari Village West - Loreweaver
 patrol_dan_301	patrol_dan_300		DANTOOINE	dan_world	0	-7219.3	3.0	-871.2	0	
 patrol_dan_302	patrol_dan_300		DANTOOINE	dan_world	0	-7223.6	3.0	-880.4	0	
@@ -18,10 +18,10 @@ patrol_dan_303	patrol_dan_300		DANTOOINE	dan_world	0	-7218.0	3.0	-887.7	0
 patrol_dan_304	patrol_dan_300		DANTOOINE	dan_world	0	-7163.0	3.0	-870.3	0	
 patrol_dan_305	patrol_dan_300		DANTOOINE	dan_world	0	-7163.0	3.0	-853.6	0	
 patrol_dan_306	patrol_dan_300		DANTOOINE	dan_world	0	-7173.4	3.0	-852.6	0	
-patrol_dan_400	patrol_dan_400	FLIP	DANTOOINE	dan_world	0	-4267.2	3.0	-2430.5	0	Imperial Outpost - Stormtrooper
+patrol_dan_400	patrol_dan_400	FLIP	DANTOOINE	dan_world	0	-4267.2	3.0	-2430.5	15	Imperial Outpost - Stormtrooper
 patrol_dan_401	patrol_dan_400		DANTOOINE	dan_world	0	-4251.5	3.0	-2420.4	0	
 patrol_dan_402	patrol_dan_400		DANTOOINE	dan_world	0	-4197.2	3.0	-2420.9	0	
-patrol_dan_403	patrol_dan_400		DANTOOINE	dan_world	0	-4182.6	3.0	-2430.3	0	
+patrol_dan_403	patrol_dan_400		DANTOOINE	dan_world	0	-4182.6	3.0	-2430.3	15	
 patrol_dan_500	patrol_dan_500	LOOP	DANTOOINE	dan_world	0	-4266.3	3.0	-2317.9	0	Imperial Outpost - AT-ST
 patrol_dan_501	patrol_dan_500		DANTOOINE	dan_world	0	-4181.9	3.0	-2319.6	0	
 patrol_dan_502	patrol_dan_500		DANTOOINE	dan_world	0	-4140.1	3.0	-2373.5	0	
@@ -49,11 +49,11 @@ patrol_dan_807	patrol_dan_800		DANTOOINE	dan_world	0	-4247.0	3.0	-2412.0	0
 patrol_dan_808	patrol_dan_800		DANTOOINE	dan_world	0	-4243.7	3.0	-2398.3	0	
 patrol_dan_809	patrol_dan_800		DANTOOINE	dan_world	0	-4229.0	3.0	-2395.0	0	
 patrol_dan_810	patrol_dan_800		DANTOOINE	dan_world	0	-4216.5	3.0	-2385.8	0	
-patrol_dan_900	patrol_dan_900	FLIP	DANTOOINE	dan_world	0	-4204.1	3.0	-2358.4	0	Imperial Outpost - R5
+patrol_dan_900	patrol_dan_900	FLIP	DANTOOINE	dan_world	0	-4204.1	3.0	-2358.4	20	Imperial Outpost - R5
 patrol_dan_901	patrol_dan_900		DANTOOINE	dan_world	0	-4220.0	3.0	-2373.0	0	
 patrol_dan_902	patrol_dan_900		DANTOOINE	dan_world	0	-4228.0	3.0	-2394.0	0	
 patrol_dan_903	patrol_dan_900		DANTOOINE	dan_world	0	-4261.0	3.0	-2394.0	0	
-patrol_dan_904	patrol_dan_900		DANTOOINE	dan_world	0	-4261.0	3.0	-2382.0	0	
+patrol_dan_904	patrol_dan_900		DANTOOINE	dan_world	0	-4261.0	3.0	-2382.0	15	
 patrol_dan_1000	patrol_dan_1000	LOOP	DANTOOINE	dan_world	0	-4208.0	3.0	-2360.0	0	Imperial Outpost - R5
 patrol_dan_1001	patrol_dan_1000		DANTOOINE	dan_world	0	-4242.0	3.0	-2359.0	0	
 patrol_dan_1002	patrol_dan_1000		DANTOOINE	dan_world	0	-4253.0	3.0	-2351.0	0	
@@ -77,39 +77,39 @@ patrol_dan_1301	patrol_dan_1300		DANTOOINE	dan_world	0	-4201.0	3.0	-2398.0	0
 patrol_dan_1302	patrol_dan_1300		DANTOOINE	dan_world	0	-4218.0	3.0	-2394.0	0	
 patrol_dan_1303	patrol_dan_1300		DANTOOINE	dan_world	0	-4243.0	3.0	-2350.0	0	
 patrol_dan_1304	patrol_dan_1300		DANTOOINE	dan_world	0	-4235.0	3.0	-2349.0	0	
-patrol_dan_1400	patrol_dan_1400	FLIP	DANTOOINE	dan_world	0	-644.0	3.0	2462.0	0	Mining Outpost - Settler
+patrol_dan_1400	patrol_dan_1400	FLIP	DANTOOINE	dan_world	0	-644.0	3.0	2462.0	30	Mining Outpost - Settler
 patrol_dan_1401	patrol_dan_1400		DANTOOINE	dan_world	0	-629.0	3.0	2467.0	0	
 patrol_dan_1402	patrol_dan_1400		DANTOOINE	dan_world	0	-600.0	3.0	2494.0	0	
 patrol_dan_1403	patrol_dan_1400		DANTOOINE	dan_world	0	-589.0	3.0	2499.0	0	
 patrol_dan_1404	patrol_dan_1400		DANTOOINE	dan_world	0	-602.0	3.0	2532.0	0	
-patrol_dan_1500	patrol_dan_1500	FLIP	DANTOOINE	dan_world	0	-620.0	3.0	2451.0	0	Mining Outpost - Technician
+patrol_dan_1500	patrol_dan_1500	FLIP	DANTOOINE	dan_world	0	-620.0	3.0	2451.0	30	Mining Outpost - Technician
 patrol_dan_1501	patrol_dan_1500		DANTOOINE	dan_world	0	-622.7	3.0	2447.6	0	
 patrol_dan_1502	patrol_dan_1500		DANTOOINE	dan_world	0	-636.0	3.0	2459.0	0	
 patrol_dan_1503	patrol_dan_1500		DANTOOINE	dan_world	0	-661.0	3.0	2497.0	0	
 patrol_dan_1504	patrol_dan_1500		DANTOOINE	dan_world	0	-645.2	3.0	2507.9	0	
 patrol_dan_1505	patrol_dan_1500		DANTOOINE	dan_world	0	-629.5	3.0	2499.6	0	
 patrol_dan_1506	patrol_dan_1500		DANTOOINE	dan_world	0	-617.0	3.0	2515.0	0	
-patrol_dan_1507	patrol_dan_1500		DANTOOINE	dan_world	0	-619.0	3.0	2538.0	0	
+patrol_dan_1507	patrol_dan_1500		DANTOOINE	dan_world	0	-619.0	3.0	2538.0	15	
 patrol_dan_1600	patrol_dan_1600	LOOP	DANTOOINE	dan_world	0	-635.0	3.0	2483.0	0	Mining Outpost - R5
-patrol_dan_1601	patrol_dan_1600		DANTOOINE	dan_world	0	-601.0	3.0	2528.0	0	
-patrol_dan_1602	patrol_dan_1600		DANTOOINE	dan_world	0	-627.0	3.0	2532.0	0	
+patrol_dan_1601	patrol_dan_1600		DANTOOINE	dan_world	0	-601.0	3.0	2528.0	30	
+patrol_dan_1602	patrol_dan_1600		DANTOOINE	dan_world	0	-627.0	3.0	2532.0	15	
 patrol_dan_1603	patrol_dan_1600		DANTOOINE	dan_world	0	-612.0	3.0	2520.0	0	
 patrol_dan_1604	patrol_dan_1600		DANTOOINE	dan_world	0	-629.8	3.0	2499.2	0	
 patrol_dan_1605	patrol_dan_1600		DANTOOINE	dan_world	0	-647.0	3.0	2510.0	0	
 patrol_dan_1606	patrol_dan_1600		DANTOOINE	dan_world	0	-659.4	3.0	2494.0	0	
 patrol_dan_1607	patrol_dan_1600		DANTOOINE	dan_world	0	-648.0	3.0	2482.0	0	
 patrol_dan_1608	patrol_dan_1600		DANTOOINE	dan_world	0	-636.8	3.0	2482.5	0	
-patrol_dan_1700	patrol_dan_1700	FLIP	DANTOOINE	dan_world	0	-600.0	3.0	2485.0	0	Mining Outpost - Settler
+patrol_dan_1700	patrol_dan_1700	FLIP	DANTOOINE	dan_world	0	-600.0	3.0	2485.0	30	Mining Outpost - Settler
 patrol_dan_1701	patrol_dan_1700		DANTOOINE	dan_world	0	-629.3	3.0	2486.0	0	
-patrol_dan_1702	patrol_dan_1700		DANTOOINE	dan_world	0	-644.0	3.0	2449.0	0	
-patrol_dan_1703	patrol_dan_1700		DANTOOINE	dan_world	0	-679.0	3.0	2472.0	0	
+patrol_dan_1702	patrol_dan_1700		DANTOOINE	dan_world	0	-644.0	3.0	2449.0	15	
+patrol_dan_1703	patrol_dan_1700		DANTOOINE	dan_world	0	-679.0	3.0	2472.0	15	
 patrol_dan_1800	patrol_dan_1800	LOOP	DANTOOINE	dan_world	0	1630.0	4.0	-6392.0	0	Pirate Outpost - Pirate
 patrol_dan_1801	patrol_dan_1800		DANTOOINE	dan_world	0	1605.0	4.0	-6435.7	0	
 patrol_dan_1802	patrol_dan_1800		DANTOOINE	dan_world	0	1581.0	4.0	-6439.0	0	
 patrol_dan_1803	patrol_dan_1800		DANTOOINE	dan_world	0	1577.0	4.0	-6436.0	0	
 patrol_dan_1804	patrol_dan_1800		DANTOOINE	dan_world	0	1568.0	4.0	-6435.9	0	
 patrol_dan_1805	patrol_dan_1800		DANTOOINE	dan_world	0	1565.0	4.0	-6389.0	0	
-patrol_dan_1806	patrol_dan_1800		DANTOOINE	dan_world	0	1591.0	4.0	-6371.0	0	
+patrol_dan_1806	patrol_dan_1800		DANTOOINE	dan_world	0	1591.0	4.0	-6371.0	30	
 patrol_dan_1807	patrol_dan_1800		DANTOOINE	dan_world	0	1616.0	4.0	-6375.0	0	
 patrol_dan_1808	patrol_dan_1800		DANTOOINE	dan_world	0	1629.0	4.0	-6390.0	0	
 patrol_dan_1900	patrol_dan_1900	LOOP	DANTOOINE	dan_world	0	1550.0	4.0	-6389.0	0	Pirate Outpost - Pirate
@@ -154,7 +154,7 @@ patrol_dan_2208	patrol_dan_2200		DANTOOINE	dan_world	0	1576.1	4.0	-6396.8	0
 patrol_dan_2300	patrol_dan_2300	FLIP	DANTOOINE	dan_world	0	1545.0	4.0	-6376.0	0	Pirate Outpost - Pirate #3
 patrol_dan_2301	patrol_dan_2300		DANTOOINE	dan_world	0	1586.0	4.0	-6374.0	0	
 patrol_dan_2302	patrol_dan_2300		DANTOOINE	dan_world	0	1629.0	4.0	-6376.0	0	
-patrol_dan_2400	patrol_dan_2400	FLIP	DANTOOINE	dan_world	0	1601.0	4.0	-6418.0	0	Pirate Outpost - Criminal
+patrol_dan_2400	patrol_dan_2400	FLIP	DANTOOINE	dan_world	0	1601.0	4.0	-6418.0	30	Pirate Outpost - Criminal
 patrol_dan_2401	patrol_dan_2400		DANTOOINE	dan_world	0	1594.0	4.0	-6392.0	0	
 patrol_dan_2402	patrol_dan_2400		DANTOOINE	dan_world	0	1578.0	4.0	-6374.0	0	
 patrol_dan_2403	patrol_dan_2400		DANTOOINE	dan_world	0	1550.0	4.0	-6367.0	0	
@@ -251,7 +251,7 @@ patrol_dan_3603	patrol_dan_3600		DANTOOINE	dan_world	0	-657.60	3	2421.3	0
 patrol_dan_3604	patrol_dan_3600		DANTOOINE	dan_world	0	-663.40	3	2423.7	0	
 patrol_dan_3605	patrol_dan_3600		DANTOOINE	dan_world	0	-659.00	3	2448.2	0	
 patrol_dan_3606	patrol_dan_3600		DANTOOINE	dan_world	0	-654.20	3	2474.6	0	
-patrol_dan_3607	patrol_dan_3600		DANTOOINE	dan_world	0	-640.30	3	2488.0	0	
+patrol_dan_3607	patrol_dan_3600		DANTOOINE	dan_world	0	-640.30	3	2488.0	30	
 patrol_dan_3608	patrol_dan_3600		DANTOOINE	dan_world	0	-626.20	3	2500.2	0	
 patrol_dan_3609	patrol_dan_3600		DANTOOINE	dan_world	0	-618.60	3	2514.6	0	
 patrol_dan_3610	patrol_dan_3600		DANTOOINE	dan_world	0	-614.40	3	2536.0	0	
