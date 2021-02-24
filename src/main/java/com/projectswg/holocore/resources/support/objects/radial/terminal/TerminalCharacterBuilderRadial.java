@@ -736,8 +736,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_clothing_boots_01_15",
 				"item_clothing_boots_01_19",
 				"item_clothing_boots_01_21",
-				"item_clothing_boots_01_22",
-				"item_clothing_boots_01_24"
+				"item_clothing_boots_01_22"
 		);
 	}
 	
@@ -1059,7 +1058,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	
 	private static void handleJediRobes(Player player) {
 		spawnItems(player,
-				"item_jedi_robe_padawan_04_01",
 				"item_npe_fs_robe_02_02",
 				"item_jedi_robe_dark_03_01",
 				"item_jedi_robe_light_03_01",
