@@ -1,0 +1,14 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1;3;6;9						0	0	0
+1	quest.task.ground.encounter		encounter1					3	0	0
+2	quest.task.ground.clear_quest							0	0	0
+3	quest.task.ground.timer	4						0	50	80
+4	quest.task.ground.encounter		encounter2					3	0	0
+5	quest.task.ground.clear_quest							0	0	0
+6	quest.task.ground.timer	7						0	50	80
+7	quest.task.ground.encounter		encounter3					3	0	0
+8	quest.task.ground.clear_quest							0	0	0
+9	quest.task.ground.wait_for_tasks	10						0	0	0
+10	quest.task.ground.wait_for_signal	11	attackDefeated					0	0	0
+11	quest.task.ground.complete_quest							0	0	0

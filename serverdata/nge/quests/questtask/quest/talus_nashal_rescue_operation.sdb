@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.timer	1	rescue_op_timer_01_00					0	20	40
+1	quest.task.ground.comm_player	2	rescue_op_comm_01_01	@quest/ground/talus_nashal_rescue_operation:task01_comm_message_text	/object/mobile/dressed_corsec_captain_human_male_02.iff			0	0	0
+2	quest.task.ground.wait_for_signal	3	rescue_op_signal_01_02					0	0	0
+3	quest.task.ground.go_to_location	4	rescue_op_gotoloc_01_03					0	0	0
+4	quest.task.ground.retrieve_item	5	rescue_op_retrieve_01_04					0	0	0
+5	quest.task.ground.show_message_box	6	rescue_op_msgbox_01_04a					0	0	0
+6	quest.task.ground.retrieve_item	7	rescue_op_retrieve_02_05					0	0	0
+7	quest.task.ground.show_message_box	8	rescue_op_msgbox_02_05a					0	0	0
+8	quest.task.ground.comm_player	9;10;11	rescue_op_comm_02_06	@quest/ground/talus_nashal_rescue_operation:task08_comm_message_text	/object/mobile/dressed_corsec_captain_human_male_02.iff			0	0	0
+9	quest.task.ground.destroy_multi		rescue_op_destroy_02_07b			talus_nashal_brood1a_arachne		6	0	0
+10	quest.task.ground.destroy_multi		rescue_op_destroy_01_07a			talus_nashal_brood1_arachne		12	0	0
+11	quest.task.ground.wait_for_tasks	12	rescue_op_tasks_01_07					0	0	0
+12	quest.task.ground.comm_player	13	rescue_op_comm_03_08	@quest/ground/talus_nashal_rescue_operation:task12_comm_message_text	/object/mobile/dressed_corsec_captain_human_male_02.iff			0	0	0
+13	quest.task.ground.complete_quest		rescue_op_comm_03_09				quest/talus_nashal_tracking_crew	0	0	0

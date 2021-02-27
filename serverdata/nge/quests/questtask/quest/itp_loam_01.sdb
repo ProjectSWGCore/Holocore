@@ -1,0 +1,11 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;7;8	itp_loam_01_00					0	0	0
+1	quest.task.ground.wait_for_tasks	2	itp_loam_01_01					0	0	0
+2	quest.task.ground.comm_player	3;5;6	itp_loam_01_02	@quest/ground/itp_loam_01:task02_comm_message_text	object/mobile/loam_redge.iff			0	0	0
+3	quest.task.ground.wait_for_tasks	4	itp_loam_01_03					0	0	0
+4	quest.task.ground.wait_for_signal		itp_loam_01_04					0	0	0
+5	quest.task.ground.destroy_multi		itp_loam_01_03b			itp_loam_rebel_commander_01		1	0	0
+6	quest.task.ground.retrieve_item		itp_loam_01_03a					0	0	0
+7	quest.task.ground.destroy_multi		itp_loam_01_01b			itp_loam_twilek_force_sensitive		1	0	0
+8	quest.task.ground.retrieve_item		itp_loam_01_01a					0	0	0

@@ -1,0 +1,6 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;3						0	0	0
+1	quest.task.ground.destroy_multi_and_loot	2	naboo_24_gungan_power_grab_03_guardians			naboo_peacewar_drennic_guard		0	0	0
+2	quest.task.ground.wait_for_signal		naboo_24_gungan_power_grab_03_return_translator					0	0	0
+3	quest.task.ground.destroy_multi_and_loot		naboo_24_gungan_power_grab_03_hunting_hunters			naboo_peacewar_drennic_hunter		0	0	0

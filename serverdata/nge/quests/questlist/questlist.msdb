@@ -1,0 +1,5 @@
+file	enabled
+TEXT	BOOLEAN
+groundquest.sdb	TRUE
+quest.sdb	TRUE
+spacequest.sdb	TRUE

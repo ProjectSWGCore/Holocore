@@ -1,0 +1,7 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi_and_loot	1	tatooine_anchorjobs_legplus_e1					0	0	0
+1	quest.task.ground.timer	2	tatooine_anchorjobs_legplus_e2					0	10	10
+2	quest.task.ground.comm_player	3	tatooine_anchorjobs_legplus_e3	@quest/ground/tatooine_anchorjobs_legplus:task02_comm_message_text	object/mobile/dressed_anchorjobs_ordo.iff			0	0	0
+3	quest.task.ground.wait_for_signal	4	tatooine_anchorjobs_legplus_e4					0	0	0
+4	quest.task.ground.complete_quest		tatooine_anchorjobs_legplus_e5					0	0	0

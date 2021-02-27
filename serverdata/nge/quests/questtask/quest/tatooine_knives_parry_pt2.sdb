@@ -1,0 +1,15 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1	tatooine_knives_parry_e1					0	0	0
+1	quest.task.ground.show_message_box	2;7	tatooine_knives_parry_e20					0	0	0
+2	quest.task.ground.wait_for_tasks	3	tatooine_knives_parry_e101					0	0	0
+3	quest.task.ground.comm_player	4	tatooine_knives_parry_e102	@quest/ground/tatooine_knives_parry_pt2:task03_comm_message_text	object/mobile/dressed_tatooine_kcur.iff			0	0	0
+4	quest.task.ground.wait_for_signal	5	tatooine_knives_parry_e14					0	0	0
+5	quest.task.ground.reward	6	tatooine_knives_parry_e15				tatooine_knives_fencing_reward	1	0	0
+6	quest.task.ground.complete_quest		tatooine_knives_parry_e16					0	0	0
+7	quest.task.ground.go_to_location	8;10;12	tatooine_knives_parry_e103					0	0	0
+8	quest.task.ground.encounter		tatooine_knives_parry_e102					4	0	0
+9	quest.task.ground.clear_quest		tatooine_knives_parry_e100					0	0	0
+10	quest.task.ground.escort		tatooine_knives_parry_e125					0	0	0
+11	quest.task.ground.clear_quest		tatooine_knives_parry_e13					0	0	0
+12	quest.task.ground.go_to_location		tatooine_knives_parry_e136					0	0	0

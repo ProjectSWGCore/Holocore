@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1;12;13;14	chirq_council_03_01					0	0	0
+1	quest.task.ground.wait_for_tasks	2	chirq_council_03_02					0	0	0
+2	quest.task.ground.wait_for_signal	3	chirq_council_03_03					0	0	0
+3	quest.task.ground.wait_for_signal	4	chirq_council_03_04					0	0	0
+4	quest.task.ground.wait_for_signal	5;6;9;10	chirq_council_03_05					0	0	0
+5	quest.task.ground.reward		chirq_council_03_05a					1	0	0
+6	quest.task.ground.wait_for_tasks	7	chirq_council_03_06					0	0	0
+7	quest.task.ground.retrieve_item	8	chirq_council_03_08					0	0	0
+8	quest.task.ground.complete_quest		chirq_council_03_08a				quest/corellia_39_chirq_council_03b	0	0	0
+9	quest.task.ground.destroy_multi		chirq_council_03_06a			corellia_grey_shroud_terrorist		6	0	0
+10	quest.task.ground.retrieve_item	11	chirq_council_03_07					0	0	0
+11	quest.task.ground.destroy_multi		chirq_council_03_07a			corellia_grey_shroud_ebela_puckett		1	0	0
+12	quest.task.ground.retrieve_item		chirq_council_03_02c					0	0	0
+13	quest.task.ground.destroy_multi		chirq_council_03_02b			corellia_monumenter_poacher		7	0	0
+14	quest.task.ground.destroy_multi		chirq_council_03_02a			corellia_chirq_ruffian		7	0	0

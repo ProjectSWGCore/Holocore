@@ -1,0 +1,13 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1	azure_cabal_hunters_path_02_null					0	0	0
+1	quest.task.ground.destroy_multi_and_loot	2	azure_cabal_hunters_path_02_destroy_loot_1					0	0	0
+2	quest.task.ground.comm_player	3	azure_cabal_hunters_path_02_comm_1	@quest/ground/tatooine_24_azure_cabal_hunters_path_02:task02_comm_message_text	object/mobile/tatooine_tweego.iff			0	0	0
+3	quest.task.ground.retrieve_item	4	azure_cabal_hunters_path_02_retrieve_1					0	0	0
+4	quest.task.ground.spawn	5	azure_cabal_hunters_path_02_spawn_1					0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6;10	azure_cabal_hunters_path_02_destroy_loot_2			dominant_bantha		0	0	0
+6	quest.task.ground.timer	7	azure_cabal_hunters_path_02_timer					0	5	7
+7	quest.task.ground.encounter	8	azure_cabal_hunters_path_02_ambush					3	0	0
+8	quest.task.ground.wait_for_signal		azure_cabal_hunters_path_02_return					0	0	0
+9	quest.task.ground.comm_player		azure_cabal_hunters_path_02_comm_3	@quest/ground/tatooine_24_azure_cabal_hunters_path_02:task09_comm_message_text	object/mobile/tatooine_tweego.iff			0	0	0
+10	quest.task.ground.comm_player		azure_cabal_hunters_path_02_comm_2	@quest/ground/tatooine_24_azure_cabal_hunters_path_02:task10_comm_message_text	object/mobile/tatooine_tweego.iff			0	0	0

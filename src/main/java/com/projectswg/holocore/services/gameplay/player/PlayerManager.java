@@ -6,6 +6,7 @@ import com.projectswg.holocore.services.gameplay.player.equipment.EquipmentManag
 import com.projectswg.holocore.services.gameplay.player.experience.ExperienceManager;
 import com.projectswg.holocore.services.gameplay.player.group.GroupManager;
 import com.projectswg.holocore.services.gameplay.player.guild.GuildService;
+import com.projectswg.holocore.services.gameplay.player.quest.QuestService;
 import me.joshlarson.jlcommon.control.Manager;
 import me.joshlarson.jlcommon.control.ManagerStructure;
 
@@ -16,6 +17,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 		ExperienceManager.class,
 		GroupManager.class,
 		GuildService.class,
+		QuestService.class,
 })
 public class PlayerManager extends Manager {
 	
