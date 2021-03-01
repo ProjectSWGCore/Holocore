@@ -1,425 +1,740 @@
 buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
-INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
-bo_gcw_restuss_ph0_1	RORI	ror_world	0	object/building/naboo/association_hall_civilian_naboo.iff	5287.6	80.0	5876.8	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_2	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5468.3	80.0	5705.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_3	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5468.2	80.0	5726.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_4	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5329.7	80.0	5861.4	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_5	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5163.6	80.0	5814.6	90.14	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_6	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5100.0	80.0	5695.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_7	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_10.iff	5195.4	80.0	5530.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_8	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_2.iff	5108.6	80.0	5665.0	34.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_9	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_3.iff	5238.1	80.0	5658.4	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_10	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_4.iff	5509.4	80.0	5520.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_11	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_4.iff	5364.7	80.0	5834.7	-90.14	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_12	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_4.iff	5203.2	80.0	5711.8	179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_13	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_4.iff	5174.5	80.0	5852.0	134.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_14	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_4.iff	5188.6	80.0	5772.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_15	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_5.iff	5517.6	80.0	5683.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_16	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_5.iff	5199.0	80.0	5662.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_17	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_6.iff	5520.7	80.0	5655.9	-90.34	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_18	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_6.iff	5293.6	80.0	5812.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_19	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_6.iff	5200.2	80.0	5731.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_20	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5522.4	80.0	5636.4	-89.56	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_21	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5522.3	80.0	5611.3	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_22	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5316.1	80.0	5527.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_23	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5341.0	80.0	5528.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_24	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5076.9	80.0	5733.9	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_25	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5077.0	80.0	5759.1	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_26	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5125.6	80.0	5553.3	56.72	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_27	RORI	ror_world	0	object/building/naboo/filler_building_naboo_theed_style_8.iff	5139.1	80.0	5532.2	56.72	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_28	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5421.4	80.0	5609.6	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_29	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5509.4	80.0	5724.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_30	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5367.2	80.0	5891.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_31	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5229.3	80.0	5771.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_32	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5296.8	80.0	5545.7	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_33	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_01.iff	5097.1	80.0	5767.9	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_34	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5421.8	80.0	5642.2	89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_35	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5393.8	80.0	5860.9	-134.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_36	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5342.7	80.0	5652.3	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_37	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5248.1	80.0	5814.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_38	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5258.0	80.0	5788.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_39	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5226.4	80.0	5562.3	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_40	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5097.8	80.0	5728.1	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_41	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	5159.8	80.0	5524.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_42	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_s02.iff	5526.3	80.0	5568.9	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_43	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_s02.iff	5386.5	80.0	5548.5	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_44	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_s02.iff	5145.0	80.0	5776.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_45	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_s02.iff	5120.6	80.0	5590.6	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_46	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5443.9	80.0	5837.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_47	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5492.8	80.0	5772.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_48	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5462.9	80.0	5515.3	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_49	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5225.2	80.0	5851.6	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_50	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5282.7	80.0	5647.9	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_51	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5250.5	80.0	5528.9	0.18	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_52	RORI	ror_world	0	object/building/naboo/thm_nboo_block_bldg_64x32_style_01.iff	5156.0	80.0	5719.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_53	RORI	ror_world	0	object/building/restuss/restuss_bank.iff	5181.0	80.0	5584.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_54	RORI	ror_world	0	object/building/restuss/restuss_cloning_facility.iff	5426.0	80.0	5894.7	-135.79	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_55	RORI	ror_world	0	object/building/restuss/restuss_guild_combat.iff	5446.4	80.0	5800.6	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_56	RORI	ror_world	0	object/building/restuss/restuss_guild_commerce.iff	5237.7	80.0	5702.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_57	RORI	ror_world	0	object/building/restuss/restuss_guild_theater.iff	5467.0	80.0	5615.8	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_58	RORI	ror_world	0	object/building/restuss/restuss_guild_university.iff	5385.9	80.0	5608.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_59	RORI	ror_world	0	object/building/restuss/restuss_hospital.iff	5298.1	79.9	5592.1	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_60	RORI	ror_world	0	object/building/restuss/restuss_hotel.iff	5150.0	80.0	5653.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_61	RORI	ror_world	0	object/building/restuss/restuss_shuttleport.iff	5212.9	80.0	5810.6	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_62	RORI	ror_world	0	object/building/restuss/restuss_starport.iff	5364.5	80.0	5751.9	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_63	RORI	ror_world	0	object/static/creature/dantooine_picket.iff	5167.6	80.0	5628.4	-178.19	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_64	RORI	ror_world	0	object/static/flora/potted_plant_flowers_orange.iff	5254.1	80.0	5592.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_65	RORI	ror_world	0	object/static/flora/potted_plant_flowers_purple.iff	5254.1	80.0	5590.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_66	RORI	ror_world	0	object/static/flora/potted_plant_flowers_purple.iff	5254.0	80.0	5594.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_67	RORI	ror_world	0	object/static/installation/mockup_power_generator_wind_style_1.iff	5517.0	80.0	5602.9	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_68	RORI	ror_world	0	object/static/installation/mockup_power_generator_wind_style_1.iff	5517.1	80.1	5644.0	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_69	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.1	83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_70	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5588.9	83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_71	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.0	83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_72	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.0	83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_73	RORI	ror_world	0	object/static/item/item_basket_shallow.iff	5208.0	80.0	5731.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_74	RORI	ror_world	0	object/static/item/item_bottle_fat.iff	5184.3	81.2	5669.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_75	RORI	ror_world	0	object/static/item/item_bottle_pear.iff	5184.0	81.2	5669.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_76	RORI	ror_world	0	object/static/item/item_bottle_tall.iff	5184.2	81.1	5669.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_77	RORI	ror_world	0	object/static/item/item_bowl_plain.iff	5093.0	80.7	5757.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_78	RORI	ror_world	0	object/static/item/item_cage_bamboo.iff	5385.6	80.0	5672.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_79	RORI	ror_world	0	object/static/item/item_cage_bamboo.iff	5093.1	80.0	5757.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_80	RORI	ror_world	0	object/static/item/item_carbine_dh17.iff	5388.8	81.2	5669.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_81	RORI	ror_world	0	object/static/item/item_cloth_patches.iff	5208.3	80.6	5727.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_82	RORI	ror_world	0	object/static/item/item_con_barrel_lg_s1.iff	5345.2	80.0	5616.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_83	RORI	ror_world	0	object/static/item/item_con_bowl_serving_full.iff	5184.4	81.2	5668.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_84	RORI	ror_world	0	object/static/item/item_con_plate_s1_full.iff	5184.2	81.2	5667.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_85	RORI	ror_world	0	object/static/item/item_con_ration_kit_lg.iff	5184.1	81.2	5669.2	-39.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_86	RORI	ror_world	0	object/static/item/item_con_ration_kit_m.iff	5184.3	81.2	5668.9	-30.37	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_87	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5385.9	80.0	5673.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_88	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5386.0	80.0	5674.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_89	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5089.1	80.0	5761.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_90	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5089.5	80.0	5761.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_91	RORI	ror_world	0	object/static/item/item_container_energy_solid.iff	5386.6	80.0	5673.9	17.19	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_92	RORI	ror_world	0	object/static/item/item_container_energy_solid.iff	5093.4	80.0	5758.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_93	RORI	ror_world	0	object/static/item/item_container_inorganic_chemicals.iff	5094.3	80.0	5758.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_94	RORI	ror_world	0	object/static/item/item_container_inorganic_minerals.iff	5371.0	80.0	5589.6	-0.39	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_95	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	5386.6	80.0	5674.9	158.89	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_96	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	5386.3	80.0	5674.6	109.44	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_97	RORI	ror_world	0	object/static/item/item_crate_clothing_small.iff	5386.7	80.0	5675.7	-55.58	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_98	RORI	ror_world	0	object/static/item/item_crate_clothing_small.iff	5209.9	80.0	5727.8	-42.40	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_99	RORI	ror_world	0	object/static/item/item_dye_kit.iff	5255.5	80.6	5852.2	-114.02	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_100	RORI	ror_world	0	object/static/item/item_hair_dye_kit.iff	5255.7	80.0	5852.1	-42.40	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_101	RORI	ror_world	0	object/static/item/item_jar_berries.iff	5184.0	82.0	5670.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_102	RORI	ror_world	0	object/static/item/item_jar_bugs.iff	5184.3	82.0	5670.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_103	RORI	ror_world	0	object/static/item/item_jar_bugs.iff	5089.0	81.3	5761.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_104	RORI	ror_world	0	object/static/item/item_jar_empty.iff	5088.5	81.2	5761.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_105	RORI	ror_world	0	object/static/item/item_jar_funk.iff	5184.4	82.0	5670.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_106	RORI	ror_world	0	object/static/item/item_jar_guts.iff	5088.8	81.2	5761.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_107	RORI	ror_world	0	object/static/item/item_jar_spice_blue.iff	5184.4	81.2	5670.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_108	RORI	ror_world	0	object/static/item/item_jar_spice_red.iff	5184.5	81.1	5669.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_109	RORI	ror_world	0	object/static/item/item_makeup.iff	5255.4	80.6	5852.9	-152.98	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_110	RORI	ror_world	0	object/static/item/item_medic_bacta_tank_advanced.iff	5376.4	80.0	5588.2	174.36	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_111	RORI	ror_world	0	object/static/item/item_medic_bacta_tank_advanced.iff	5377.1	80.0	5588.3	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_112	RORI	ror_world	0	object/static/item/item_medic_bag.iff	5371.0	80.0	5588.5	177.23	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_113	RORI	ror_world	0	object/static/item/item_medical_console.iff	5371.1	80.9	5589.6	137.51	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_114	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5255.3	80.0	5852.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_115	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5207.9	80.6	5727.6	56.72	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_116	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5207.9	80.1	5731.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_117	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5208.2	80.1	5731.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_118	RORI	ror_world	0	object/static/item/item_ribbon.iff	5254.9	80.7	5852.5	-2.29	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_119	RORI	ror_world	0	object/static/item/item_ribbon.iff	5207.9	80.7	5727.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_120	RORI	ror_world	0	object/static/item/item_rifle.iff	5389.2	81.2	5669.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_121	RORI	ror_world	0	object/static/item/item_ryyk_blade.iff	5386.2	80.1	5673.5	-1.15	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_122	RORI	ror_world	0	object/static/item/item_sewing_utensils.iff	5255.1	80.6	5852.3	-43.18	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_123	RORI	ror_world	0	object/static/item/item_sewing_utensils.iff	5207.9	80.6	5727.0	180.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_124	RORI	ror_world	0	object/static/item/item_shisha.iff	5092.7	80.0	5758.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_125	RORI	ror_world	0	object/static/item/item_tech_console_sectional_b.iff	5345.8	80.0	5616.4	140.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_126	RORI	ror_world	0	object/static/item/item_vibrolance.iff	5389.4	80.9	5676.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_127	RORI	ror_world	0	object/static/item/item_vibrolance.iff	5389.6	80.9	5676.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_128	RORI	ror_world	0	object/static/item/item_wood_staff.iff	5389.2	81.1	5676.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_129	RORI	ror_world	0	object/static/item/wp_mle_lance_s01.iff	5090.3	80.7	5761.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_130	RORI	ror_world	0	object/static/item/wp_rifle_bowcaster_combined.iff	5090.2	80.0	5761.0	-37.82	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_131	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5431.4	80.0	5700.2	-25.78	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_132	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5437.7	80.0	5704.3	-42.97	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_133	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5427.9	80.0	5690.9	-88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_134	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5350.3	80.0	5616.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_135	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.0	80.0	5644.6	-88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_136	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.0	80.0	5639.9	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_137	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.2	80.0	5632.0	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_138	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5252.0	80.0	5599.0	-91.67	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_139	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5250.0	80.0	5583.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_140	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5252.0	80.0	5585.0	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_141	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5249.8	80.0	5601.0	179.52	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_142	RORI	ror_world	0	object/static/structure/general/data_terminal_free_s1.iff	5161.6	80.0	5628.9	107.14	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_143	RORI	ror_world	0	object/static/structure/general/data_terminal_free_s2.iff	5164.3	80.0	5630.3	-179.34	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_144	RORI	ror_world	0	object/static/structure/general/droid_lemedical_powerdown.iff	5371.8	80.0	5590.4	-178.19	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_145	RORI	ror_world	0	object/static/structure/general/droid_r2_powerdown.iff	5257.9	80.0	5602.1	53.86	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_146	RORI	ror_world	0	object/static/structure/general/droid_r2_powerdown.iff	5184.6	80.0	5720.7	-68.18	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_147	RORI	ror_world	0	object/static/structure/general/droid_r4_powerdown.iff	5187.0	80.0	5716.7	-130.06	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_148	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_01.iff	5400.3	80.0	5890.9	-131.78	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_149	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_01.iff	5423.2	80.0	5867.6	-134.07	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_150	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5326.5	80.0	5566.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_151	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5258.7	80.0	5610.3	93.97	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_152	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5258.7	80.0	5573.8	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_153	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5179.0	80.0	5661.1	90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_154	RORI	ror_world	0	object/static/structure/general/tankfarm_s01.iff	5135.1	80.0	5629.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_155	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5522.2	80.0	5623.8	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_156	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5328.9	80.0	5527.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_157	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5284.6	80.0	5534.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_158	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5284.4	80.0	5543.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_159	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5076.9	80.0	5746.4	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_160	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5132.6	80.0	5542.7	57.30	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_161	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5214.0	80.0	5565.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_162	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5198.1	80.0	5617.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_163	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5164.0	80.0	5551.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_164	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5148.0	80.0	5603.1	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_165	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s03.iff	5367.0	80.0	5849.0	179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_166	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s03.iff	5349.0	80.0	5849.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_167	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5363.0	80.0	5849.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_168	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5353.0	80.0	5849.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_169	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5202.0	80.0	5617.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_170	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5214.1	80.0	5605.0	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_171	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5214.0	80.0	5569.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_172	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5213.9	80.0	5587.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_173	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5582.0	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_174	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5599.0	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_175	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5160.0	80.0	5551.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_176	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5564.0	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_177	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	5214.0	80.0	5609.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_178	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	5148.0	80.0	5559.2	-88.81	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_179	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s01.iff	5358.2	80.0	5849.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_180	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5214.0	80.0	5578.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_181	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5214.1	80.0	5596.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_182	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5148.1	80.0	5572.9	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_183	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5147.9	80.0	5591.0	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_184	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5490.6	80.6	5646.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_185	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5443.5	80.6	5647.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_186	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5247.7	80.0	5592.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_187	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s01.iff	5490.4	80.0	5719.7	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_188	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s01.iff	5490.5	80.0	5730.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_189	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5417.0	80.0	5846.2	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_190	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5457.9	80.0	5859.0	89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_191	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5383.4	80.0	5879.8	-122.61	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_192	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5118.8	80.0	5727.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_193	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5117.1	80.0	5712.0	179.52	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_194	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s01.iff	5360.2	80.0	5612.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_195	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s01.iff	5360.2	80.0	5592.2	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_196	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s02.iff	5205.7	80.0	5765.6	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_197	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s02.iff	5205.8	80.0	5777.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_198	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5305.9	93.7	5860.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_199	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5269.7	93.8	5860.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_200	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5126.2	114.1	5553.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_201	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5138.8	114.0	5531.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_202	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5231.2	80.0	5547.9	90.14	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_203	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5133.7	80.0	5727.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_204	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5127.5	80.0	5727.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_205	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5121.4	80.0	5727.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_206	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5126.0	80.0	5712.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_207	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5108.5	80.0	5712.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_208	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5110.1	80.0	5727.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_209	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5213.6	80.0	5521.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_210	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5524.2	80.0	5716.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_211	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5522.2	80.0	5631.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_212	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5522.2	80.0	5616.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_213	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5492.2	80.0	5830.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_214	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5412.1	80.0	5846.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_215	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5451.2	80.0	5874.0	45.84	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_216	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5457.9	80.0	5863.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_217	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5457.9	80.0	5854.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_218	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5421.8	80.0	5846.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_219	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5500.8	80.1	5823.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_220	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5389.1	80.0	5904.0	-44.69	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_221	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5345.9	80.0	5883.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_222	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5381.2	80.0	5883.6	-30.94	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_223	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5385.5	80.0	5876.1	-35.52	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_224	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5346.0	80.0	5872.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_225	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5357.2	80.0	5854.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_226	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5321.4	80.0	5527.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_227	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5336.4	80.0	5527.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_228	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5301.6	80.0	5518.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_229	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5210.3	80.0	5575.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_230	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.7	80.0	5645.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_231	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.2	80.0	5629.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_232	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.3	80.0	5637.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_233	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5100.9	80.0	5649.5	32.66	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_234	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5077.0	80.0	5754.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_235	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5077.0	80.0	5739.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_236	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.4	80.0	5701.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_237	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.5	80.0	5659.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_238	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.4	80.0	5680.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_239	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5151.8	80.0	5595.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_240	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5136.7	80.0	5527.1	-21.20	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_241	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5136.4	80.0	5536.5	-34.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_242	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5148.2	80.0	5519.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_243	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5139.9	80.0	5519.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_244	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5128.2	80.0	5549.0	-32.09	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_245	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5132.8	80.0	5595.3	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_246	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5312.1	78.7	5829.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_247	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5308.2	78.6	5833.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_248	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5303.3	78.7	5821.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_249	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5299.5	78.6	5825.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_250	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5245.9	78.7	5604.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_251	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5241.1	78.6	5599.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_252	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5246.0	78.7	5579.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_253	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5255.0	78.7	5588.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_254	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5241.0	78.7	5585.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_255	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5168.5	78.6	5686.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_256	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5173.6	78.6	5686.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_257	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5177.0	78.6	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_258	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5165.0	78.7	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_259	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5169.8	78.6	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_260	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5131.6	78.7	5686.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_261	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5130.2	78.6	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_262	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5126.5	78.7	5686.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_263	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5127.9	78.7	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_264	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5135.0	78.6	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_265	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5123.0	78.6	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_266	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5254.9	78.7	5596.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_267	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5172.2	78.6	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_268	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5498.4	80.0	5744.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_269	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5524.3	80.0	5716.1	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_270	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5432.1	80.0	5528.3	30.37	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_271	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5491.6	80.0	5830.5	-5.16	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_272	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5500.7	80.0	5822.4	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_273	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5452.1	80.0	5719.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_274	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5357.6	80.0	5544.1	-45.26	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_275	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5316.3	80.0	5528.0	-36.10	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_276	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5300.8	80.0	5517.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_277	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5228.6	80.0	5575.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_278	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5155.9	80.0	5805.6	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_279	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5100.3	80.0	5649.7	33.80	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_280	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5119.9	80.0	5645.0	12.61	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_281	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.4	80.0	5721.3	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_282	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.3	80.0	5660.7	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_283	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.4	80.0	5681.5	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_284	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5152.3	80.0	5595.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_285	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5120.2	80.0	5636.5	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_286	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5522.0	80.0	5648.9	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_287	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5522.2	80.0	5608.4	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_288	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5517.3	80.0	5539.1	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_289	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5502.3	80.0	5525.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_290	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5411.5	80.0	5846.0	22.92	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_291	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5388.5	80.0	5903.2	-45.26	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_292	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5346.0	80.0	5882.4	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_293	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5354.7	80.0	5888.6	-29.22	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_294	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5357.1	80.0	5853.2	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_295	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5356.7	80.0	5854.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_296	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5306.2	80.0	5812.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_297	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5265.1	80.0	5860.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_298	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5195.2	80.4	5855.9	-21.77	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_299	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5171.0	80.0	5831.2	105.61	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_300	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5294.0	80.0	5569.0	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_301	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5136.4	80.0	5527.9	-112.30	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_302	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5148.4	80.0	5519.4	2.29	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_303	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5124.9	80.0	5554.3	56.15	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_304	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_sml_s03.iff	5187.8	80.0	5653.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_305	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_sml_s03.iff	5187.7	80.0	5671.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_306	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5304.2	80.0	5821.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_307	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5307.2	80.0	5834.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_308	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5246.9	80.0	5579.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_309	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5254.9	80.0	5596.9	-96.83	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_310	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5244.9	80.0	5603.9	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_311	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5241.0	80.0	5584.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_312	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5123.1	80.0	5680.0	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_313	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5135.1	80.0	5682.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_314	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5165.0	80.0	5679.9	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_315	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5131.1	80.0	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_316	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5177.2	80.0	5682.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_317	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5173.1	80.0	5676.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_318	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5126.9	80.0	5686.0	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_319	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5169.0	80.0	5685.8	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_320	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5458.0	81.0	5864.5	-83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_321	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5457.8	84.0	5864.6	-83.65	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_322	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5500.9	80.0	5823.0	-92.25	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_323	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5500.9	83.0	5823.0	-92.25	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_324	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_1.iff	5305.6	80.0	5827.4	44.12	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_325	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_2.iff	5510.0	80.0	5636.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_326	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_2.iff	5510.0	80.0	5611.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_327	RORI	ror_world	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	5245.2	80.0	5584.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_328	RORI	ror_world	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	5244.9	80.0	5599.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_329	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5527.1	79.5	5645.8	2.99	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_330	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5353.3	80.0	5667.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_331	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5388.1	80.0	5673.6	18.33	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_332	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5252.5	80.0	5851.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_333	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5185.7	80.0	5718.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_334	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5164.0	80.0	5628.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_335	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5483.5	80.0	5750.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_336	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5493.8	80.0	5528.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_337	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5442.0	80.0	5530.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_338	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5358.5	87.2	5851.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_339	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5432.9	80.0	5579.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_340	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5355.1	80.0	5579.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_341	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5297.9	80.0	5669.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_342	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5303.4	80.0	5818.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_343	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5313.9	80.0	5829.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_344	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5284.4	80.0	5811.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_345	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5275.2	80.0	5785.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_346	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5280.1	80.0	5531.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_347	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5233.1	80.0	5634.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_348	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5165.4	80.0	5760.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_349	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5219.6	80.0	5725.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_350	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5175.3	80.0	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_351	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5123.9	80.0	5717.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_352	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5124.7	80.0	5681.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_353	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5111.5	80.0	5760.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_354	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5073.0	80.1	5754.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_355	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5072.9	80.2	5738.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_356	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_1.iff	5124.5	80.0	5626.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_357	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_2.iff	5371.7	80.0	5665.8	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_358	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_2.iff	5357.4	80.0	5665.8	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_359	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	5388.1	80.0	5670.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_360	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	5259.0	80.0	5601.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_361	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_metal_1.iff	5258.6	80.0	5602.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_362	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_metal_1.iff	5210.6	80.0	5728.0	-106.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_363	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_dented_1.iff	5528.4	80.7	5647.1	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_364	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_dented_1.iff	5389.0	80.0	5670.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_365	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_storage_1.iff	5527.9	80.8	5646.0	-156.81	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_366	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_storage_1.iff	5389.0	80.0	5671.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_367	RORI	ror_world	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	5515.2	81.0	5663.7	0.10	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_368	RORI	ror_world	0	object/tangible/crafting/station/public_clothing_station.iff	5218.9	80.0	5724.0	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_369	RORI	ror_world	0	object/tangible/crafting/station/public_clothing_station.iff	5218.9	80.0	5728.2	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_370	RORI	ror_world	0	object/tangible/crafting/station/public_food_station.iff	5179.0	80.0	5663.7	89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_371	RORI	ror_world	0	object/tangible/crafting/station/public_food_station.iff	5179.0	80.0	5658.0	88.81	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_372	RORI	ror_world	0	object/tangible/crafting/station/public_structure_station.iff	5258.2	80.0	5576.4	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_373	RORI	ror_world	0	object/tangible/crafting/station/public_structure_station.iff	5258.1	80.0	5570.9	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_374	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5465.1	80.0	5783.5	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_375	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5465.0	80.0	5777.7	89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_376	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5258.2	80.0	5612.3	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_377	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5258.2	80.0	5605.8	-89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_378	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5851.0	88.81	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_379	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5852.2	88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_380	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5849.6	87.09	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_381	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5852.2	-91.67	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_382	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5849.6	-88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_383	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5850.9	-90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_384	RORI	ror_world	0	object/tangible/furniture/all/frn_all_decorative_lg_s1.iff	5514.8	80.1	5665.3	-32.66	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_385	RORI	ror_world	0	object/tangible/furniture/all/frn_all_decorative_sm_s4.iff	5513.7	80.0	5665.2	-60.16	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_386	RORI	ror_world	0	object/tangible/furniture/all/frn_all_toolchest_lg_s01.iff	5184.6	80.0	5716.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_387	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5323.8	80.0	5566.6	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_388	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5320.6	80.0	5566.6	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_389	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5329.1	80.0	5566.7	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_390	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5332.3	80.0	5566.8	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_391	RORI	ror_world	0	object/tangible/furniture/modern/bar_counter_s1.iff	5184.1	80.0	5668.9	91.10	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_392	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_fruit_stand_small_style_01.iff	5386.4	80.0	5670.9	-159.86	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_393	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_meat_rack.iff	5392.2	80.0	5675.6	-41.25	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_394	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_table_small_style_01.iff	5255.4	80.0	5852.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_395	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_table_small_style_01.iff	5207.9	80.0	5727.5	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_396	RORI	ror_world	0	object/tangible/instrument/organ_max_rebo.iff	5432.5	80.6	5570.0	-26.93	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_397	RORI	ror_world	0	object/tangible/microphone/microphone.iff	5432.1	80.6	5564.4	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_398	RORI	ror_world	0	object/tangible/sign/all_sign_city_s03.iff	5460.1	80.0	5854.3	-91.10	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_399	RORI	ror_world	0	object/tangible/sign/all_sign_city_s03.iff	5075.1	80.0	5739.3	93.39	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_400	RORI	ror_world	0	object/tangible/speaker/speaker.iff	5436.6	80.6	5572.8	-91.67	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_401	RORI	ror_world	0	object/tangible/speaker/speaker.iff	5436.5	80.6	5559.4	-88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_402	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5304.8	80.0	5831.5	154.88	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_403	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5301.6	80.0	5828.5	110.58	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_404	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5306.7	80.0	5823.1	-20.63	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_405	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5309.9	80.0	5826.3	-67.04	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_406	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5510.1	80.0	5610.3	-179.91	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_407	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5509.9	80.0	5611.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_408	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5169.8	80.0	5677.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_409	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5171.9	80.0	5677.6	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_410	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5432.8	80.0	5701.1	149.15	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_411	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5435.4	80.0	5702.6	148.97	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_412	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5180.0	80.0	5633.9	89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_413	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5180.0	80.0	5636.1	89.38	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_414	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5510.0	80.0	5635.2	179.52	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_415	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5510.0	80.0	5636.9	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_416	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5130.0	80.0	5677.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_417	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5127.9	80.0	5677.7	0.00	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_418	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5511.0	80.0	5636.0	90.53	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_419	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5511.0	80.0	5611.0	91.10	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_420	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5509.0	80.0	5611.0	-89.95	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_421	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5509.0	80.0	5636.0	-88.24	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_422	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5166.5	80.0	5681.0	91.67	0	0	0	512	TRUE	Restuss Phase 0
-bo_gcw_restuss_ph0_423	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5133.4	80.0	5681.1	-92.25	0	0	0	512	TRUE	Restuss Phase 0
+TEXT PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
+bo_gcw_restuss_phase_0_1	RORI	ror_world	0	object/static/item/item_newbie_crate.iff	5908.6	81.0	5579.1	-4	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_2	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	5909.0	80.9	5585.9	33	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_3	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5909.6	81.0	5578.0	53	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_4	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.4	81.0	5576.8	65	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_5	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.1	81.7	5577.4	-48	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_6	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5906.5	81.0	5579.5	-30	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_7	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.0	81.0	5578.0	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_8	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.6	81.0	5576.9	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_9	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.6	81.7	5576.9	52	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_10	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5906.9	81.7	5578.2	68	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_11	RORI	ror_world	0	object/static/structure/corellia/corl_tent_hut_s01.iff	5913.1	81.0	5582.3	110	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_12	RORI	ror_world	0	object/static/item/item_tool_recording_rod.iff	5928.1	76.0	5609.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_13	RORI	ror_world	0	object/static/structure/general/camp_campfire_logs_fresh_s01.iff	5912.1	81.0	5523.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_14	RORI	ror_world	0	object/static/structure/general/camp_lawn_chair_s01.iff	5912.5	81.0	5525.4	165	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_15	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_imperial_02.iff	5913.3	81.0	5526.3	-170	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_16	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5912.8	81.0	5516.2	133	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_17	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5925.2	81.0	5523.8	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_18	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5925.1	81.0	5514.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_19	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.0	81.1	5514.8	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_20	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.2	80.9	5524.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_21	RORI	ror_world	0	object/static/structure/tatooine/palette_supply_05.iff	5910.2	81.0	5525.9	-40	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_22	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5929.5	81.0	5515.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_23	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5933.9	80.9	5519.3	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_24	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5925.2	81.0	5519.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_25	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5929.6	81.0	5523.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_26	RORI	ror_world	0	object/static/structure/corellia/corl_power_arial_thin.iff	5914.2	80.0	5527.0	-95	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_27	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_1.iff	5913.4	59.6	5526.9	-83	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_28	RORI	ror_world	0	object/static/structure/general/poi_tato_tent_s01.iff	5904.1	81.0	5523.3	-70	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
+bo_gcw_restuss_phase_0_29	RORI	ror_world	0	object/static/structure/general/poi_all_construction_metal_pile.iff	5970.2	81.0	5652.5	-151	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_30	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02_on.iff	5972.1	81.0	5648.3	-20	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_31	RORI	ror_world	0	object/static/item/item_cheap_cabinet_01.iff	5965.1	81.0	5640.5	62	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_32	RORI	ror_world	0	object/static/item/item_cheap_cabinet_01.iff	5965.8	81.0	5639.2	62	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_33	RORI	ror_world	0	object/static/item/item_cheap_cabinet_01.iff	5967.4	81.0	5636.1	69	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_34	RORI	ror_world	0	object/static/item/item_cheap_cabinet_01.iff	5966.8	81.0	5637.6	62	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_35	RORI	ror_world	0	object/static/item/item_tank_gas.iff	5973.7	81.0	5638.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_36	RORI	ror_world	0	object/static/item/item_tank_gas.iff	5973.6	81.0	5638.6	73	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_37	RORI	ror_world	0	object/static/item/eqp_camping_grill_s2.iff	5971.5	81.0	5635.6	168	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_38	RORI	ror_world	0	object/static/item/item_items_container_lg.iff	5973.3	81.0	5636.1	-47	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_39	RORI	ror_world	0	object/static/structure/corellia/corl_power_box_node.iff	5978.0	81.5	5628.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_40	RORI	ror_world	0	object/static/structure/corellia/corl_power_box_node.iff	5979.5	81.8	5634.3	-43	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_41	RORI	ror_world	0	object/static/item/eqp_camping_tent_s4.iff	5964.4	81.0	5649.2	-116	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_42	RORI	ror_world	0	object/static/item/eqp_camping_pavilion_s1.iff	5969.4	80.6	5639.4	-27	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Command
+bo_gcw_restuss_phase_0_43	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_imperial_03.iff	5963.9	81.0	5531.3	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_44	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_imperial_02.iff	5968.7	81.0	5534.7	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_45	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	5971.3	80.8	5531.7	-96	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_46	RORI	ror_world	0	object/static/structure/corellia/corl_tent_med.iff	5966.9	81.0	5532.2	40	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_47	RORI	ror_world	0	object/static/item/eqp_camping_tent_s3.iff	5974.1	81.0	5536.5	-70	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_48	RORI	ror_world	0	object/static/item/eqp_camping_tent_s4.iff	5962.5	81.0	5526.2	174	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Logistics
+bo_gcw_restuss_phase_0_49	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	5926.5	81.0	5641.4	39	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_50	RORI	ror_world	0	object/static/structure/corellia/corl_tent_small.iff	5926.3	81.0	5640.4	-171	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_51	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_imperial_02.iff	5926.9	81.0	5639.5	-57	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_52	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	5925.2	81.0	5638.9	17	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_53	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	5919.7	81.0	5627.7	-141	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_54	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_imperial_02.iff	5919.9	81.0	5629.3	129	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_55	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	5921.4	81.0	5629.5	-141	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_56	RORI	ror_world	0	object/static/structure/corellia/corl_tent_small.iff	5920.7	81.0	5628.6	-140	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_57	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	5919.6	81.0	5634.2	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_58	RORI	ror_world	0	object/static/structure/general/cylinder_clone_tube.iff	5922.0	81.0	5634.9	-156	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Medical
+bo_gcw_restuss_phase_0_59	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5982.4	80.9	5657.9	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_60	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5991.6	81.2	5648.9	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_61	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5986.1	81.2	5654.4	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_62	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5962.3	78.0	5662.7	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_63	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5994.7	79.9	5645.8	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_64	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5985.4	80.8	5538.2	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_65	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5997.2	80.4	5526.2	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_66	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5996.3	80.3	5514.4	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_67	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5984.5	79.9	5502.4	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_68	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	6002.3	81.0	5574.4	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_69	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	6002.1	81.1	5586.9	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_70	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5995.0	79.1	5634.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_71	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5990.3	81.3	5562.2	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_72	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5990.3	81.2	5598.9	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_73	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.0	81.1	5514.8	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_74	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.2	80.9	5524.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_75	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5962.9	78.4	5499.6	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_76	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5930.1	77.9	5499.6	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_77	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5907.0	81.0	5660.0	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_78	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5929.1	77.6	5662.6	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_79	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5893.6	81.0	5635.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_80	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5895.1	81.1	5648.1	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_81	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5903.8	80.2	5505.2	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_82	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5904.9	80.1	5541.9	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_83	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5925.1	81.0	5523.8	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_84	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5925.1	81.0	5514.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_85	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5891.8	80.0	5517.2	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_86	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5893.1	80.1	5529.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_87	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5900.3	80.9	5602.6	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_88	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5905.4	80.9	5623.3	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_89	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5900.1	80.5	5562.8	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_90	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5888.2	80.9	5574.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_91	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5888.5	81.0	5590.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_92	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5903.7	81.1	5656.8	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_93	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5902.4	81.1	5626.4	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_94	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5986.5	80.5	5625.4	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_95	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5992.1	80.5	5631.0	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_96	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5949.3	77.5	5662.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_97	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5957.2	78.1	5662.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_98	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5941.3	77.5	5662.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_99	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5933.6	77.6	5662.8	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_100	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5901.8	80.5	5538.7	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_101	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5900.4	80.2	5508.5	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_102	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5987.7	79.7	5505.6	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_103	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5993.3	79.7	5511.2	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_104	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5994.1	80.9	5529.4	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_105	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5988.6	81.0	5535.0	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_106	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5993.5	81.1	5565.6	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_107	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5999.0	81.1	5571.1	135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_108	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5998.8	81.1	5590.3	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_109	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5993.2	81.1	5595.9	45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_110	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5929.5	81.0	5515.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_111	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5933.8	80.9	5519.3	90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_112	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5925.2	81.0	5519.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_113	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5929.6	81.0	5523.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_114	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5942.5	78.0	5499.6	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_115	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5934.8	78.0	5499.6	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_116	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5950.9	77.3	5499.7	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_117	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5958.6	77.3	5499.7	180	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_118	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5898.1	81.1	5651.2	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_119	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5896.8	81.1	5632.0	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_120	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5897.1	81.0	5599.4	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_121	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5891.6	81.0	5593.9	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_122	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5891.3	80.6	5571.5	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_123	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5896.9	80.6	5565.9	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_124	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5896.2	80.5	5533.1	-45	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_125	RORI	ror_world	0	object/static/structure/dantooine/dant_fence_8m.iff	5894.9	80.1	5514.2	-135	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Walls
+bo_gcw_restuss_phase_0_126	RORI	ror_world	0	object/static/structure/corellia/corl_tent_small.iff	4837.7	79.8	5808.6	-136	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_127	RORI	ror_world	0	object/static/structure/general/campfire_ash.iff	4833.4	80.0	5814.1	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_128	RORI	ror_world	0	object/static/structure/general/camp_lawn_chair_s01.iff	4832.4	80.0	5813.0	4	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_129	RORI	ror_world	0	object/static/item/item_container_armor.iff	4836.8	80.0	5808.1	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_130	RORI	ror_world	0	object/static/item/item_container_weapon.iff	4838.3	80.0	5809.6	39	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_131	RORI	ror_world	0	object/static/structure/general/camp_tent_s01.iff	4837.0	80.0	5813.2	-71	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_132	RORI	ror_world	0	object/static/structure/general/camp_tent_s01.iff	4833.9	80.0	5810.4	-10	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_133	RORI	ror_world	0	object/static/structure/corellia/corl_tent_med.iff	4782.0	80.0	5904.5	-50	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_134	RORI	ror_world	0	object/static/structure/general/camp_lawn_chair_s01.iff	4779.6	80.0	5905.3	149	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_135	RORI	ror_world	0	object/static/structure/general/camp_lawn_chair_s01.iff	4781.1	80.0	5905.2	-166	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_136	RORI	ror_world	0	object/static/structure/general/data_terminal_s1.iff	4783.8	80.0	5905.6	-119	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_137	RORI	ror_world	0	object/static/item/eqp_camping_crate_s1.iff	4781.7	80.0	5907.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_138	RORI	ror_world	0	object/static/item/eqp_camping_crate_s1.iff	4781.7	80.0	5908.1	-12	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_139	RORI	ror_world	0	object/static/item/eqp_camping_crate_s1.iff	4781.6	80.4	5908.2	-71	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_140	RORI	ror_world	0	object/static/item/eqp_camping_crate_s1.iff	4781.8	80.4	5907.5	-58	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_141	RORI	ror_world	0	object/static/item/item_storage_cabinet_01.iff	4782.8	80.0	5907.5	-155	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_142	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	4777.6	80.0	5901.8	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_143	RORI	ror_world	0	object/static/structure/general/trash_pile_s01.iff	4777.6	80.0	5906.6	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_144	RORI	ror_world	0	object/static/item/item_turbine_generator.iff	4775.9	80.0	5904.5	-14	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_145	RORI	ror_world	0	object/static/item/item_container_inorganic_chemicals.iff	4774.8	80.0	5904.2	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_146	RORI	ror_world	0	object/static/item/item_container_inorganic_chemicals.iff	4774.2	80.0	5904.2	-4	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_147	RORI	ror_world	0	object/static/item/item_container_inorganic_chemicals.iff	4774.7	80.4	5904.1	81	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_148	RORI	ror_world	0	object/static/item/item_tool_instrument_calibrator.iff	4770.0	80.0	5903.9	164	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_149	RORI	ror_world	0	object/static/item/item_tool_radio.iff	4769.3	80.0	5903.2	147	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_150	RORI	ror_world	0	object/static/item/item_tool_tools.iff	4769.8	80.0	5903.5	18	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_151	RORI	ror_world	0	object/static/item/item_tool_recording_rod.iff	4779.0	75.0	5890.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_152	RORI	ror_world	0	object/static/structure/general/camp_cot_s01.iff	4785.0	80.0	5904.2	-30	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_153	RORI	ror_world	0	object/static/structure/general/camp_cot_s01.iff	4785.2	80.0	5901.9	-36	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_154	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4775.1	80.0	5893.3	-9	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_155	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4783.2	80.0	5899.1	16	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_156	RORI	ror_world	0	object/static/structure/corellia/corl_power_connector.iff	4771.3	79.8	5906.0	-46	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications
+bo_gcw_restuss_phase_0_157	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_01.iff	4780.7	80.0	5781.1	-9	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_158	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_03.iff	4778.2	80.0	5772.0	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_159	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_01.iff	4777.0	80.0	5771.9	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_160	RORI	ror_world	0	object/static/item/item_chair_cafe_s01.iff	4776.3	80.0	5775.6	65	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_161	RORI	ror_world	0	object/static/item/item_chair_cafe_s01.iff	4779.7	80.0	5775.8	-62	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_162	RORI	ror_world	0	object/static/item/item_chair_cafe_s01.iff	4777.8	80.0	5774.1	-37	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_163	RORI	ror_world	0	object/static/item/item_chair_cafe_s01.iff	4777.4	80.0	5777.6	63	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_164	RORI	ror_world	0	object/static/worldbuilding/furniture/cheap_end_table.iff	4779.2	80.0	5780.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_165	RORI	ror_world	0	object/static/item/item_chair_cafe_s01.iff	4779.4	80.0	5779.1	-22	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_166	RORI	ror_world	0	object/static/item/item_camera.iff	4779.1	80.0	5780.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_167	RORI	ror_world	0	object/static/structure/corellia/corl_tent_med.iff	4777.7	80.0	5775.9	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_168	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4774.8	80.0	5780.8	179	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_169	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_console_tableglobe_02.iff	4777.7	80.0	5775.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Command
+bo_gcw_restuss_phase_0_170	RORI	ror_world	0	object/static/structure/general/data_terminal_s3.iff	4726.9	80.0	5876.3	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_171	RORI	ror_world	0	object/static/structure/general/data_terminal_s2.iff	4725.4	80.0	5876.1	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_172	RORI	ror_world	0	object/static/structure/corellia/corl_tent_med.iff	4723.9	80.0	5874.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_173	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	4726.7	80.0	5872.8	-15	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_174	RORI	ror_world	0	object/static/item/item_diagnostic_screen.iff	4726.8	80.7	5872.8	124	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_175	RORI	ror_world	0	object/static/item/item_document.iff	4726.6	80.7	5872.6	-34	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_176	RORI	ror_world	0	object/static/structure/corellia/corl_tent_small.iff	4724.6	80.0	5866.7	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_177	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	4723.4	80.0	5865.3	107	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_178	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	4723.5	80.0	5865.7	92	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_179	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	4723.7	80.0	5866.9	92	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_180	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	4723.6	80.0	5866.5	107	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_181	RORI	ror_world	0	object/static/item/item_container_energy_radioactive.iff	4724.9	80.0	5867.6	30	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_182	RORI	ror_world	0	object/static/item/item_container_energy_radioactive.iff	4724.8	80.0	5866.1	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Logistics
+bo_gcw_restuss_phase_0_183	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	4727.1	80.0	5813.4	9	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_184	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_02.iff	4723.7	80.0	5811.3	135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_185	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	4723.9	80.0	5809.7	-135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_186	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	4725.5	80.0	5811.4	-135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_187	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_02.iff	4719.3	80.0	5808.1	-45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_188	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	4717.5	80.0	5808.0	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_189	RORI	ror_world	0	object/static/item/eqp_camping_cot_s2.iff	4719.1	80.0	5809.7	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_190	RORI	ror_world	0	object/static/item/eqp_camping_cot_s3.iff	4723.2	80.0	5813.6	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_191	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_03.iff	4723.0	80.0	5812.4	-45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_192	RORI	ror_world	0	object/static/item/eqp_camping_cot_s3.iff	4721.8	80.0	5812.2	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_193	RORI	ror_world	0	object/static/structure/military/military_rebel_clone_tent_large.iff	4721.5	80.0	5809.6	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_194	RORI	ror_world	0	object/static/item/eqp_camping_cot_s3.iff	4721.5	80.0	5807.4	-135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_195	RORI	ror_world	0	object/static/worldbuilding/terminal/floor_data_terminal_03.iff	4720.3	80.0	5807.2	135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_196	RORI	ror_world	0	object/static/item/eqp_camping_cot_s3.iff	4720.1	80.0	5806.1	-135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_197	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4725.6	80.0	5813.5	44	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Medical
+bo_gcw_restuss_phase_0_198	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4847.3	79.0	5885.5	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_199	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4833.8	79.4	5855.6	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_200	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4833.9	80.8	5855.6	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_201	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.3	81.3	5846.5	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_202	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.3	79.9	5846.6	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_203	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.3	81.1	5838.4	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_204	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.2	79.6	5838.5	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_205	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4833.8	79.9	5857.4	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_206	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4815.0	80.6	5868.5	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_207	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4823.0	79.0	5857.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_208	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.7	81.6	5829.4	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_209	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4834.7	80.1	5829.4	177	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_210	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4833.9	80.0	5824.4	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_211	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4845.2	79.5	5808.3	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_212	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4823.1	79.3	5824.8	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_213	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4822.9	78.9	5799.4	147	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_214	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4833.0	79.7	5796.2	135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_215	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4723.9	77.7	5888.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_216	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.0	81.1	5824.4	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_217	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.1	79.6	5824.3	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_218	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.3	82.5	5824.7	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_219	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.3	81.1	5824.7	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_220	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4772.3	79.6	5824.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_221	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4771.8	78.8	5852.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_222	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4783.0	79.4	5824.3	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_223	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4733.1	79.3	5888.0	86	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_224	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4733.1	77.9	5888.0	86	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_225	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4726.6	80.9	5847.6	2	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_226	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4726.7	79.5	5847.6	2	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_227	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4716.0	79.6	5857.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_228	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4726.9	80.0	5856.7	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_229	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4741.4	77.4	5871.2	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_230	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4785.5	80.5	5914.4	86	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_231	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4785.5	79.1	5914.4	86	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_232	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4770.2	80.7	5914.7	-88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_233	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4770.2	79.3	5914.8	-88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_234	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4760.8	80.5	5906.2	4	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_235	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4760.8	79.0	5906.2	4	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_236	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.6	80.9	5852.2	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_237	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.7	79.4	5852.2	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_238	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.4	81.4	5861.2	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_239	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.5	79.9	5861.2	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_240	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.2	81.4	5875.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_241	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.2	79.9	5875.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_242	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.4	80.9	5866.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_243	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.4	79.4	5866.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_244	RORI	ror_world	0	object/static/item/item_tool_recording_rod.iff	4779.0	75.0	5890.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_245	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4815.0	77.2	5885.3	-45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_246	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4761.4	78.3	5914.9	-45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_247	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4794.3	78.1	5915.0	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_248	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4782.6	78.9	5885.7	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_249	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4771.7	78.7	5885.7	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_250	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4782.6	78.6	5852.1	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_251	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4741.2	77.4	5888.4	45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_252	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4761.4	77.8	5897.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_253	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4726.2	81.9	5832.3	175	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_254	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4726.1	80.4	5832.3	175	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_255	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4726.9	79.5	5823.7	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_256	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4716.1	78.9	5823.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_257	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4717.8	79.9	5797.1	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_258	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.3	79.1	5815.3	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_259	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.2	80.6	5815.3	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_260	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.5	82.0	5815.7	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_261	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.5	80.6	5815.7	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_262	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4731.9	80.2	5799.6	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_263	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4731.9	81.7	5799.7	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_264	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4739.7	82.2	5795.1	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_265	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4739.7	80.7	5795.0	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_266	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.9	81.8	5800.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_267	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4782.9	80.3	5800.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_268	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.1	81.3	5791.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_269	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4783.1	79.9	5791.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_270	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.7	82.8	5805.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_271	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.7	81.3	5805.6	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_272	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.9	82.3	5796.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_273	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4772.9	80.9	5796.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_274	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4749.4	81.3	5788.9	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_275	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4749.4	79.9	5788.9	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_276	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4757.2	81.8	5784.3	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_277	RORI	ror_world	0	object/static/structure/general/debris_deathstar_small_tube.iff	4757.2	80.4	5784.3	120	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_278	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4760.2	79.1	5782.8	-149	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_279	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4794.9	78.7	5781.9	147	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_280	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4772.2	79.7	5791.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_281	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4731.8	79.2	5799.7	-149	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_282	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4783.1	79.5	5791.4	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_283	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4786.4	80.3	5768.3	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_284	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4769.1	80.4	5768.3	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_285	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4823.0	78.5	5841.2	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_286	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4831.7	78.9	5885.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_287	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4839.1	79.5	5802.3	135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_288	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4815.0	78.6	5876.2	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_289	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4834.1	78.5	5851.1	-92	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_290	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4834.5	78.8	5833.9	-92	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_291	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4808.9	78.5	5790.6	147	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_292	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4790.0	78.2	5914.6	176	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_293	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4765.7	78.4	5914.9	1	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_294	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4761.2	78.2	5910.7	94	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_295	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4771.8	78.6	5869.2	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_296	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4716.1	78.8	5840.5	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_297	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4741.4	77.4	5880.0	90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_298	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4716.9	77.8	5884.0	-34	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_299	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4709.7	76.9	5870.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_300	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4711.8	79.8	5803.1	-135	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_301	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4783.2	78.3	5819.8	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_302	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4772.4	79.7	5820.2	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_303	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4772.8	80.0	5801.0	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_304	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4782.5	78.6	5856.7	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_305	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4782.3	78.6	5871.1	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_306	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4737.6	77.0	5888.2	176	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_307	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4726.6	79.6	5827.8	-94	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_308	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4726.8	78.6	5852.1	92	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_309	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4777.6	80.1	5768.3	180	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_310	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4735.8	79.4	5797.4	-149	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_311	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4783.0	79.0	5796.0	88	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_312	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_style_01.iff	4753.3	79.0	5786.6	-149	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_313	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4710.0	77.6	5879.2	-45	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_314	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4709.6	77.0	5862.5	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_315	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4705.9	79.8	5809.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Walls
+bo_gcw_restuss_phase_0_316	RORI	ror_world	0	object/building/naboo/association_hall_civilian_naboo.iff	5287.6	80.0	5876.8	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_317	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5468.3	80.0	5705.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_318	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5468.2	80.0	5726.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_319	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5329.7	80.0	5861.4	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_320	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5163.6	80.0	5814.6	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_321	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5100.0	80.0	5695.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_322	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_10.iff	5195.4	80.0	5530.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_323	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_2.iff	5108.6	80.0	5665.0	35	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_324	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_3.iff	5238.1	80.0	5658.4	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_325	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_4.iff	5509.4	80.0	5520.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_326	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_4.iff	5364.7	80.0	5834.7	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_327	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_4.iff	5203.2	80.0	5711.8	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_328	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_4.iff	5174.5	80.0	5852.0	135	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_329	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_4.iff	5188.6	80.0	5772.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_330	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_5.iff	5517.6	80.0	5683.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_331	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_5.iff	5199.0	80.0	5662.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_332	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_6.iff	5520.7	80.0	5655.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_333	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_6.iff	5293.6	80.0	5812.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_334	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_6.iff	5200.2	80.0	5731.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_335	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5522.4	80.0	5636.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_336	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5522.3	80.0	5611.3	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_337	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5316.1	80.0	5527.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_338	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5341.0	80.0	5528.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_339	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5076.9	80.0	5733.9	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_340	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5077.0	80.0	5759.1	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_341	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5125.6	80.0	5553.3	57	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_342	RORI	ror_world	0	object/building/naboo/filler_building_naboo_style_8.iff	5139.1	80.0	5532.2	57	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_343	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5421.4	80.0	5609.6	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_344	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5509.4	80.0	5724.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_345	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5367.2	80.0	5891.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_346	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5229.3	80.0	5771.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_347	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5296.8	80.0	5545.7	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_348	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_01.iff	5097.1	80.0	5767.9	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_349	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5421.8	80.0	5642.2	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_350	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5393.8	80.0	5860.9	-135	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_351	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5342.7	80.0	5652.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_352	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5248.1	80.0	5814.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_353	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5258.0	80.0	5788.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_354	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5226.4	80.0	5562.3	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_355	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5097.8	80.0	5728.1	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_356	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_32x16_style_02.iff	5159.8	80.0	5524.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_357	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_s02.iff	5526.3	80.0	5568.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_358	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_s02.iff	5386.5	80.0	5548.5	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_359	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_s02.iff	5145.0	80.0	5776.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_360	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_s02.iff	5120.6	80.0	5590.6	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_361	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5443.9	80.0	5837.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_362	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5492.8	80.0	5772.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_363	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5462.9	80.0	5515.3	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_364	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5225.2	80.0	5851.6	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_365	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5282.7	80.0	5647.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_366	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5250.5	80.0	5528.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_367	RORI	ror_world	0	object/building/naboo/filler_nboo_bldg_64x32_style_01.iff	5156.0	80.0	5719.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_368	RORI	ror_world	0	object/building/restuss/restuss_bank.iff	5181.0	80.0	5584.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_369	RORI	ror_world	0	object/building/restuss/restuss_cloning_facility.iff	5426.0	80.0	5894.7	-136	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_370	RORI	ror_world	0	object/building/restuss/restuss_guild_combat.iff	5446.4	80.0	5800.6	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_371	RORI	ror_world	0	object/building/restuss/restuss_guild_commerce.iff	5237.7	80.0	5702.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_372	RORI	ror_world	0	object/building/restuss/restuss_guild_theater.iff	5467.0	80.0	5615.8	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_373	RORI	ror_world	0	object/building/restuss/restuss_guild_university.iff	5385.9	80.0	5608.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_374	RORI	ror_world	0	object/building/restuss/restuss_hospital.iff	5298.1	79.9	5592.1	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_375	RORI	ror_world	0	object/building/restuss/restuss_hotel.iff	5150.0	80.0	5653.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_376	RORI	ror_world	0	object/building/restuss/restuss_shuttleport.iff	5212.9	80.0	5810.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_377	RORI	ror_world	0	object/building/restuss/restuss_starport.iff	5364.5	80.0	5751.9	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_378	RORI	ror_world	0	object/static/creature/dantooine_picket.iff	5167.6	80.0	5628.4	-178	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_379	RORI	ror_world	0	object/static/flora/potted_plant_flowers_orange.iff	5254.1	80.0	5592.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_380	RORI	ror_world	0	object/static/flora/potted_plant_flowers_purple.iff	5254.1	80.0	5590.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_381	RORI	ror_world	0	object/static/flora/potted_plant_flowers_purple.iff	5254.0	80.0	5594.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_382	RORI	ror_world	0	object/static/installation/mockup_power_generator_wind_style_1.iff	5517.0	80.0	5602.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_383	RORI	ror_world	0	object/static/installation/mockup_power_generator_wind_style_1.iff	5517.1	80.1	5644.0	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_384	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.1	84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_385	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5588.9	84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_386	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.0	84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_387	RORI	ror_world	0	object/static/item/item_bacta_ampules.iff	5371.2	80.9	5589.0	84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_388	RORI	ror_world	0	object/static/item/item_basket_shallow.iff	5208.0	80.0	5731.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_389	RORI	ror_world	0	object/static/item/item_bottle_fat.iff	5184.3	81.2	5669.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_390	RORI	ror_world	0	object/static/item/item_bottle_pear.iff	5184.0	81.2	5669.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_391	RORI	ror_world	0	object/static/item/item_bottle_tall.iff	5184.2	81.1	5669.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_392	RORI	ror_world	0	object/static/item/item_bowl_plain.iff	5093.0	80.7	5757.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_393	RORI	ror_world	0	object/static/item/item_cage_bamboo.iff	5385.6	80.0	5672.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_394	RORI	ror_world	0	object/static/item/item_cage_bamboo.iff	5093.1	80.0	5757.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_395	RORI	ror_world	0	object/static/item/item_carbine_dh17.iff	5388.8	81.2	5669.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_396	RORI	ror_world	0	object/static/item/item_cloth_patches.iff	5208.3	80.6	5727.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_397	RORI	ror_world	0	object/static/item/item_con_barrel_lg_s1.iff	5345.2	80.0	5616.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_398	RORI	ror_world	0	object/static/item/item_con_bowl_serving_full.iff	5184.4	81.2	5668.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_399	RORI	ror_world	0	object/static/item/item_con_plate_s1_full.iff	5184.2	81.2	5667.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_400	RORI	ror_world	0	object/static/item/item_con_ration_kit_lg.iff	5184.1	81.2	5669.2	-40	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_401	RORI	ror_world	0	object/static/item/item_con_ration_kit_m.iff	5184.3	81.2	5668.9	-30	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_402	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5385.9	80.0	5673.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_403	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5386.0	80.0	5674.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_404	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5089.1	80.0	5761.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_405	RORI	ror_world	0	object/static/item/item_container_energy_liquid.iff	5089.5	80.0	5761.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_406	RORI	ror_world	0	object/static/item/item_container_energy_solid.iff	5386.6	80.0	5673.9	17	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_407	RORI	ror_world	0	object/static/item/item_container_energy_solid.iff	5093.4	80.0	5758.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_408	RORI	ror_world	0	object/static/item/item_container_inorganic_chemicals.iff	5094.3	80.0	5758.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_409	RORI	ror_world	0	object/static/item/item_container_inorganic_minerals.iff	5371.0	80.0	5589.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_410	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	5386.6	80.0	5674.9	159	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_411	RORI	ror_world	0	object/static/item/item_container_organic_food.iff	5386.3	80.0	5674.6	109	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_412	RORI	ror_world	0	object/static/item/item_crate_clothing_small.iff	5386.7	80.0	5675.7	-56	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_413	RORI	ror_world	0	object/static/item/item_crate_clothing_small.iff	5209.9	80.0	5727.8	-42	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_414	RORI	ror_world	0	object/static/item/item_dye_kit.iff	5255.5	80.6	5852.2	-114	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_415	RORI	ror_world	0	object/static/item/item_hair_dye_kit.iff	5255.7	80.0	5852.1	-42	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_416	RORI	ror_world	0	object/static/item/item_jar_berries.iff	5184.0	82.0	5670.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_417	RORI	ror_world	0	object/static/item/item_jar_bugs.iff	5184.3	82.0	5670.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_418	RORI	ror_world	0	object/static/item/item_jar_bugs.iff	5089.0	81.3	5761.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_419	RORI	ror_world	0	object/static/item/item_jar_empty.iff	5088.5	81.2	5761.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_420	RORI	ror_world	0	object/static/item/item_jar_funk.iff	5184.4	82.0	5670.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_421	RORI	ror_world	0	object/static/item/item_jar_guts.iff	5088.8	81.2	5761.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_422	RORI	ror_world	0	object/static/item/item_jar_spice_blue.iff	5184.4	81.2	5670.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_423	RORI	ror_world	0	object/static/item/item_jar_spice_red.iff	5184.5	81.1	5669.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_424	RORI	ror_world	0	object/static/item/item_makeup.iff	5255.4	80.6	5852.9	-153	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_425	RORI	ror_world	0	object/static/item/item_medic_bacta_tank_advanced.iff	5376.4	80.0	5588.2	174	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_426	RORI	ror_world	0	object/static/item/item_medic_bacta_tank_advanced.iff	5377.1	80.0	5588.3	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_427	RORI	ror_world	0	object/static/item/item_medic_bag.iff	5371.0	80.0	5588.5	177	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_428	RORI	ror_world	0	object/static/item/item_medical_console.iff	5371.1	80.9	5589.6	138	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_429	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5255.3	80.0	5852.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_430	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5207.9	80.6	5727.6	57	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_431	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5207.9	80.1	5731.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_432	RORI	ror_world	0	object/static/item/item_raw_cloth.iff	5208.2	80.1	5731.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_433	RORI	ror_world	0	object/static/item/item_ribbon.iff	5254.9	80.7	5852.5	-2	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_434	RORI	ror_world	0	object/static/item/item_ribbon.iff	5207.9	80.7	5727.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_435	RORI	ror_world	0	object/static/item/item_rifle.iff	5389.2	81.2	5669.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_436	RORI	ror_world	0	object/static/item/item_ryyk_blade.iff	5386.2	80.1	5673.5	-1	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_437	RORI	ror_world	0	object/static/item/item_sewing_utensils.iff	5255.1	80.6	5852.3	-43	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_438	RORI	ror_world	0	object/static/item/item_sewing_utensils.iff	5207.9	80.6	5727.0	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_439	RORI	ror_world	0	object/static/item/item_shisha.iff	5092.7	80.0	5758.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_440	RORI	ror_world	0	object/static/item/item_tech_console_sectional_b.iff	5345.8	80.0	5616.4	141	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_441	RORI	ror_world	0	object/static/item/item_vibrolance.iff	5389.4	80.9	5676.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_442	RORI	ror_world	0	object/static/item/item_vibrolance.iff	5389.6	80.9	5676.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_443	RORI	ror_world	0	object/static/item/item_wood_staff.iff	5389.2	81.1	5676.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_444	RORI	ror_world	0	object/static/item/wp_mle_lance_s01.iff	5090.3	80.7	5761.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_445	RORI	ror_world	0	object/static/item/wp_rifle_bowcaster_combined.iff	5090.2	80.0	5761.0	-38	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_446	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5431.4	80.0	5700.2	-26	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_447	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5437.7	80.0	5704.3	-43	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_448	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5427.9	80.0	5690.9	-88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_449	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5350.3	80.0	5616.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_450	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.0	80.0	5644.6	-88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_451	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.0	80.0	5639.9	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_452	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5180.2	80.0	5632.0	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_453	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5252.0	80.0	5599.0	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_454	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5250.0	80.0	5583.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_455	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5252.0	80.0	5585.0	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_456	RORI	ror_world	0	object/static/structure/general/bench_generic_style_1.iff	5249.8	80.0	5601.0	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_457	RORI	ror_world	0	object/static/structure/general/data_terminal_free_s1.iff	5161.6	80.0	5628.9	107	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_458	RORI	ror_world	0	object/static/structure/general/data_terminal_free_s2.iff	5164.3	80.0	5630.3	-179	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_459	RORI	ror_world	0	object/static/structure/general/droid_lemedical_powerdown.iff	5371.8	80.0	5590.4	-178	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_460	RORI	ror_world	0	object/static/structure/general/droid_r2_powerdown.iff	5257.9	80.0	5602.1	54	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_461	RORI	ror_world	0	object/static/structure/general/droid_r2_powerdown.iff	5184.6	80.0	5720.7	-68	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_462	RORI	ror_world	0	object/static/structure/general/droid_r4_powerdown.iff	5187.0	80.0	5716.7	-130	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_463	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_01.iff	5400.3	80.0	5890.9	-132	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_464	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_01.iff	5423.2	80.0	5867.6	-134	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_465	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5326.5	80.0	5566.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_466	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5258.7	80.0	5610.3	94	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_467	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5258.7	80.0	5573.8	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_468	RORI	ror_world	0	object/static/structure/general/streetlamp_large_style_02.iff	5179.0	80.0	5661.1	91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_469	RORI	ror_world	0	object/static/structure/general/tankfarm_s01.iff	5135.1	80.0	5629.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_470	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5522.2	80.0	5623.8	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_471	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5328.9	80.0	5527.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_472	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5284.6	80.0	5534.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_473	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5284.4	80.0	5543.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_474	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5076.9	80.0	5746.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_475	RORI	ror_world	0	object/static/structure/naboo/archway_wide_s02.iff	5132.6	80.0	5542.7	57	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_476	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5214.0	80.0	5565.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_477	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5198.1	80.0	5617.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_478	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5164.0	80.0	5551.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_479	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s01.iff	5148.0	80.0	5603.1	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_480	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s03.iff	5367.0	80.0	5849.0	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_481	RORI	ror_world	0	object/static/structure/naboo/bridge_stairs_s03.iff	5349.0	80.0	5849.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_482	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5363.0	80.0	5849.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_483	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5353.0	80.0	5849.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_484	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5202.0	80.0	5617.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_485	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5214.1	80.0	5605.0	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_486	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5214.0	80.0	5569.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_487	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5213.9	80.0	5587.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_488	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5582.0	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_489	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5599.0	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_490	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5160.0	80.0	5551.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_491	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	5148.0	80.0	5564.0	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_492	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	5214.0	80.0	5609.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_493	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	5148.0	80.0	5559.2	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_494	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s01.iff	5358.2	80.0	5849.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_495	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5214.0	80.0	5578.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_496	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5214.1	80.0	5596.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_497	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5148.1	80.0	5572.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_498	RORI	ror_world	0	object/static/structure/naboo/elevated_walkway_s02.iff	5147.9	80.0	5591.0	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_499	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5490.6	80.6	5646.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_500	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5443.5	80.6	5647.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_501	RORI	ror_world	0	object/static/structure/naboo/fountain_naboo_style_1.iff	5247.7	80.0	5592.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_502	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s01.iff	5490.4	80.0	5719.7	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_503	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s01.iff	5490.5	80.0	5730.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_504	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5417.0	80.0	5846.2	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_505	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5457.9	80.0	5859.0	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_506	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5383.4	80.0	5879.8	-123	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_507	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5118.8	80.0	5727.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_508	RORI	ror_world	0	object/static/structure/naboo/gate_narrow_s02.iff	5117.1	80.0	5712.0	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_509	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s01.iff	5360.2	80.0	5612.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_510	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s01.iff	5360.2	80.0	5592.2	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_511	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s02.iff	5205.7	80.0	5765.6	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_512	RORI	ror_world	0	object/static/structure/naboo/gate_wide_s02.iff	5205.8	80.0	5777.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_513	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5305.9	93.7	5860.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_514	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5269.7	93.8	5860.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_515	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5126.2	114.1	5553.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_516	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	5138.8	114.0	5531.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_517	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5231.2	80.0	5547.9	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_518	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5133.7	80.0	5727.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_519	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5127.5	80.0	5727.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_520	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5121.4	80.0	5727.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_521	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5126.0	80.0	5712.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_522	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5108.5	80.0	5712.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_523	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5110.1	80.0	5727.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_524	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_metal_fence_wall_lg_s02.iff	5213.6	80.0	5521.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_525	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5524.2	80.0	5716.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_526	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5522.2	80.0	5631.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_527	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5522.2	80.0	5616.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_528	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5492.2	80.0	5830.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_529	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5412.1	80.0	5846.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_530	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5451.2	80.0	5874.0	46	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_531	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5457.9	80.0	5863.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_532	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5457.9	80.0	5854.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_533	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5421.8	80.0	5846.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_534	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5500.8	80.1	5823.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_535	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5389.1	80.0	5904.0	-45	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_536	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5345.9	80.0	5883.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_537	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5381.2	80.0	5883.6	-31	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_538	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5385.5	80.0	5876.1	-36	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_539	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5346.0	80.0	5872.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_540	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5357.2	80.0	5854.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_541	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5321.4	80.0	5527.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_542	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5336.4	80.0	5527.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_543	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5301.6	80.0	5518.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_544	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5210.3	80.0	5575.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_545	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.7	80.0	5645.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_546	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.2	80.0	5629.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_547	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5120.3	80.0	5637.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_548	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5100.9	80.0	5649.5	33	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_549	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5077.0	80.0	5754.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_550	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5077.0	80.0	5739.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_551	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.4	80.0	5701.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_552	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.5	80.0	5659.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_553	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5084.4	80.0	5680.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_554	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5151.8	80.0	5595.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_555	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5136.7	80.0	5527.1	-21	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_556	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5136.4	80.0	5536.5	-34	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_557	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5148.2	80.0	5519.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_558	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5139.9	80.0	5519.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_559	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5128.2	80.0	5549.0	-32	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_560	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s01.iff	5132.8	80.0	5595.3	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_561	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5312.1	78.7	5829.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_562	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5308.2	78.6	5833.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_563	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5303.3	78.7	5821.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_564	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5299.5	78.6	5825.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_565	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5245.9	78.7	5604.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_566	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5241.1	78.6	5599.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_567	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5246.0	78.7	5579.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_568	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5255.0	78.7	5588.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_569	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5241.0	78.7	5585.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_570	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5168.5	78.6	5686.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_571	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5173.6	78.6	5686.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_572	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5177.0	78.6	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_573	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5165.0	78.7	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_574	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5169.8	78.6	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_575	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5131.6	78.7	5686.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_576	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5130.2	78.6	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_577	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5126.5	78.7	5686.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_578	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5127.9	78.7	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_579	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5135.0	78.6	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_580	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5123.0	78.6	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_581	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5254.9	78.7	5596.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_582	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pillar_pillar_s03.iff	5172.2	78.6	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_583	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5498.4	80.0	5744.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_584	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5524.3	80.0	5716.1	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_585	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5432.1	80.0	5528.3	30	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_586	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5491.6	80.0	5830.5	-5	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_587	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5500.7	80.0	5822.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_588	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5452.1	80.0	5719.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_589	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5357.6	80.0	5544.1	-45	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_590	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5316.3	80.0	5528.0	-36	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_591	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5300.8	80.0	5517.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_592	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5228.6	80.0	5575.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_593	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5155.9	80.0	5805.6	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_594	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5100.3	80.0	5649.7	34	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_595	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5119.9	80.0	5645.0	13	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_596	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.4	80.0	5721.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_597	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.3	80.0	5660.7	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_598	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5084.4	80.0	5681.5	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_599	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5152.3	80.0	5595.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_600	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s01.iff	5120.2	80.0	5636.5	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_601	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5522.0	80.0	5648.9	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_602	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5522.2	80.0	5608.4	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_603	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5517.3	80.0	5539.1	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_604	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5502.3	80.0	5525.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_605	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5411.5	80.0	5846.0	23	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_606	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5388.5	80.0	5903.2	-45	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_607	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5346.0	80.0	5882.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_608	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5354.7	80.0	5888.6	-29	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_609	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5357.1	80.0	5853.2	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_610	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5356.7	80.0	5854.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_611	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5306.2	80.0	5812.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_612	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5265.1	80.0	5860.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_613	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5195.2	80.4	5855.9	-22	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_614	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5171.0	80.0	5831.2	106	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_615	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5294.0	80.0	5569.0	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_616	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5136.4	80.0	5527.9	-112	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_617	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5148.4	80.0	5519.4	2	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_618	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_large_s02.iff	5124.9	80.0	5554.3	56	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_619	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_sml_s03.iff	5187.8	80.0	5653.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_620	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_pristine_wall_sml_s03.iff	5187.7	80.0	5671.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_621	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5304.2	80.0	5821.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_622	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5307.2	80.0	5834.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_623	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5246.9	80.0	5579.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_624	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_large_s01.iff	5254.9	80.0	5596.9	-97	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_625	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5244.9	80.0	5603.9	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_626	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5241.0	80.0	5584.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_627	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5123.1	80.0	5680.0	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_628	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5135.1	80.0	5682.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_629	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5165.0	80.0	5679.9	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_630	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5131.1	80.0	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_631	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5177.2	80.0	5682.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_632	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5173.1	80.0	5676.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_633	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5126.9	80.0	5686.0	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_634	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_short_curved_wall_small_s01.iff	5169.0	80.0	5685.8	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_635	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5458.0	81.0	5864.5	-84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_636	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5457.8	84.0	5864.6	-84	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_637	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5500.9	80.0	5823.0	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_638	RORI	ror_world	0	object/static/structure/naboo/nboo_imprv_tall_curved_wall_large_s01.iff	5500.9	83.0	5823.0	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_639	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_1.iff	5305.6	80.0	5827.4	44	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_640	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_2.iff	5510.0	80.0	5636.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_641	RORI	ror_world	0	object/static/structure/naboo/obelisk_naboo_theed_style_2.iff	5510.0	80.0	5611.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_642	RORI	ror_world	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	5245.2	80.0	5584.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_643	RORI	ror_world	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	5244.9	80.0	5599.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_644	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5527.1	79.5	5645.8	3	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_645	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5353.3	80.0	5667.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_646	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5388.1	80.0	5673.6	18	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_647	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5252.5	80.0	5851.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_648	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5185.7	80.0	5718.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_649	RORI	ror_world	0	object/static/structure/naboo/poi_nboo_tent_small.iff	5164.0	80.0	5628.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_650	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5483.5	80.0	5750.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_651	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5493.8	80.0	5528.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_652	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5442.0	80.0	5530.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_653	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5358.5	87.2	5851.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_654	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5432.9	80.0	5579.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_655	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5355.1	80.0	5579.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_656	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5297.9	80.0	5669.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_657	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5303.4	80.0	5818.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_658	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5313.9	80.0	5829.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_659	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5284.4	80.0	5811.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_660	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5275.2	80.0	5785.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_661	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5280.1	80.0	5531.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_662	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5233.1	80.0	5634.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_663	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5165.4	80.0	5760.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_664	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5219.6	80.0	5725.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_665	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5175.3	80.0	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_666	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5123.9	80.0	5717.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_667	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5124.7	80.0	5681.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_668	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5111.5	80.0	5760.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_669	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5073.0	80.1	5754.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_670	RORI	ror_world	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	5072.9	80.2	5738.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_671	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_1.iff	5124.5	80.0	5626.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_672	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_2.iff	5371.7	80.0	5665.8	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_673	RORI	ror_world	0	object/static/structure/tatooine/antenna_tatt_style_2.iff	5357.4	80.0	5665.8	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_674	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	5388.1	80.0	5670.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_675	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	5259.0	80.0	5601.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_676	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_metal_1.iff	5258.6	80.0	5602.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_677	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_metal_1.iff	5210.6	80.0	5728.0	-106	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_678	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_dented_1.iff	5528.4	80.7	5647.1	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_679	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_dented_1.iff	5389.0	80.0	5670.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_680	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_storage_1.iff	5527.9	80.8	5646.0	-157	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_681	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_drum_storage_1.iff	5389.0	80.0	5671.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_682	RORI	ror_world	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	5515.2	81.0	5663.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_683	RORI	ror_world	0	object/tangible/crafting/station/public_clothing_station.iff	5218.9	80.0	5724.0	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_684	RORI	ror_world	0	object/tangible/crafting/station/public_clothing_station.iff	5218.9	80.0	5728.2	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_685	RORI	ror_world	0	object/tangible/crafting/station/public_food_station.iff	5179.0	80.0	5663.7	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_686	RORI	ror_world	0	object/tangible/crafting/station/public_food_station.iff	5179.0	80.0	5658.0	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_687	RORI	ror_world	0	object/tangible/crafting/station/public_structure_station.iff	5258.2	80.0	5576.4	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_688	RORI	ror_world	0	object/tangible/crafting/station/public_structure_station.iff	5258.1	80.0	5570.9	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_689	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5465.1	80.0	5783.5	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_690	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5465.0	80.0	5777.7	90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_691	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5258.2	80.0	5612.3	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_692	RORI	ror_world	0	object/tangible/crafting/station/public_weapon_station.iff	5258.2	80.0	5605.8	-89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_693	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5851.0	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_694	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5852.2	88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_695	RORI	ror_world	0	object/tangible/furniture/all/frn_all_chair_recliner_s1.iff	5251.2	80.0	5849.6	87	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_696	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5852.2	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_697	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5849.6	-88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_698	RORI	ror_world	0	object/tangible/furniture/all/frn_all_couch_ottoman_s1.iff	5252.4	80.0	5850.9	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_699	RORI	ror_world	0	object/tangible/furniture/all/frn_all_decorative_lg_s1.iff	5514.8	80.1	5665.3	-33	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_700	RORI	ror_world	0	object/tangible/furniture/all/frn_all_decorative_sm_s4.iff	5513.7	80.0	5665.2	-60	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_701	RORI	ror_world	0	object/tangible/furniture/all/frn_all_toolchest_lg_s01.iff	5184.6	80.0	5716.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_702	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5323.8	80.0	5566.6	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_703	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5320.6	80.0	5566.6	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_704	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5329.1	80.0	5566.7	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_705	RORI	ror_world	0	object/tangible/furniture/all/frn_bench_generic.iff	5332.3	80.0	5566.8	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_706	RORI	ror_world	0	object/tangible/furniture/modern/bar_counter_s1.iff	5184.1	80.0	5668.9	91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_707	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_fruit_stand_small_style_01.iff	5386.4	80.0	5670.9	-160	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_708	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_meat_rack.iff	5392.2	80.0	5675.6	-41	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_709	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_table_small_style_01.iff	5255.4	80.0	5852.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_710	RORI	ror_world	0	object/tangible/furniture/tatooine/frn_tato_table_small_style_01.iff	5207.9	80.0	5727.5	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_711	RORI	ror_world	0	object/tangible/instrument/organ_max_rebo.iff	5432.5	80.6	5570.0	-27	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_712	RORI	ror_world	0	object/tangible/microphone/microphone.iff	5432.1	80.6	5564.4	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_713	RORI	ror_world	0	object/tangible/sign/all_sign_city_s03.iff	5460.1	80.0	5854.3	-91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_714	RORI	ror_world	0	object/tangible/sign/all_sign_city_s03.iff	5075.1	80.0	5739.3	93	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_715	RORI	ror_world	0	object/tangible/speaker/speaker.iff	5436.6	80.6	5572.8	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_716	RORI	ror_world	0	object/tangible/speaker/speaker.iff	5436.5	80.6	5559.4	-88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_717	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5304.8	80.0	5831.5	155	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_718	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5301.6	80.0	5828.5	111	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_719	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5306.7	80.0	5823.1	-21	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_720	RORI	ror_world	0	object/tangible/terminal/terminal_bazaar.iff	5309.9	80.0	5826.3	-67	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_721	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5510.1	80.0	5610.3	-180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_722	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5509.9	80.0	5611.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_723	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5169.8	80.0	5677.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_724	RORI	ror_world	0	object/tangible/terminal/terminal_mission_artisan.iff	5171.9	80.0	5677.6	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_725	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5432.8	80.0	5701.1	149	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_726	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5435.4	80.0	5702.6	149	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_727	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5180.0	80.0	5633.9	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_728	RORI	ror_world	0	object/tangible/terminal/terminal_mission_imperial.iff	5180.0	80.0	5636.1	89	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_729	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5510.0	80.0	5635.2	180	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_730	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5510.0	80.0	5636.9	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_731	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5130.0	80.0	5677.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_732	RORI	ror_world	0	object/tangible/terminal/terminal_mission_scout.iff	5127.9	80.0	5677.7	0	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_733	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5511.0	80.0	5636.0	91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_734	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5511.0	80.0	5611.0	91	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_735	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5509.0	80.0	5611.0	-90	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_736	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5509.0	80.0	5636.0	-88	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_737	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5166.5	80.0	5681.0	92	0	0	0	512	TRUE	Restuss Phase 0 - City
+bo_gcw_restuss_phase_0_738	RORI	ror_world	0	object/tangible/terminal/terminal_mission.iff	5133.4	80.0	5681.1	-92	0	0	0	512	TRUE	Restuss Phase 0 - City
