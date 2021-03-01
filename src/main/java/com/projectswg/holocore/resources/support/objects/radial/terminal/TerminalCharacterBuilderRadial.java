@@ -1566,7 +1566,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			"object/tangible/deed/vehicle_deed/shared_landspeeder_v35_deed.iff",
 			"object/tangible/deed/vehicle_deed/shared_speederbike_swoop_deed.iff",
 			"object/tangible/deed/vehicle_deed/shared_landspeeder_xp38_deed.iff",
-			"object/tangible/deed/vehicle_deed/shared_landspeeder_tantive4_deed.iff"
+			"object/tangible/deed/vehicle_deed/shared_landspeeder_tantive4_deed.iff",
+			"object/tangible/deed/vehicle_deed/shared_jetpack_deed.iff",
 		};
 		for (String item : items) {
 			SWGObject deed = ObjectCreator.createObjectFromTemplate(item);

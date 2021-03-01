@@ -1031,7 +1031,7 @@ spawn_tat_1028	TATOOINE	tat_world	AREA	0	-3085.5	5.0	2050.6	78	1	Caryn	humanoid_
 spawn_tat_1029	TATOOINE	tat_world	AREA	0	-3105.0	5.0	2314.0	82	1	Diala	humanoid_smuggler_fence_diala	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_1030	TATOOINE	tat_world	AREA	0	-2873.4	5.0	2591.4	-94	1	Eyleen	humanoid_tatooine_repo_daezii	AGGRESSIVE	B	5	20	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_1031	TATOOINE	tat_world	AREA	0	-3101.7	5.0	2184.6	118	1	Giaal Itotr	humanoid_giaal_itotr	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair				600
-spawn_tat_1032	TATOOINE	tat_world	AREA	0	-2883.4	5.0	2581.2	0	1	Guz'Ordnak	humanoid_tatooine_repo_buhba	AGGRESSIVE	B	5	20	City	Mos Espa	1	LOITER	3	0	-	idle				600
+spawn_tat_1032	TATOOINE	tat_world	AREA	0	-2883.4	5.0	2581.2	0	1	Guz'Ordnak	humanoid_tatooine_repo_buhba	AGGRESSIVE	B	5	20	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_1033	TATOOINE	tat_world	AREA	0	-2878.7	5.0	2585.0	-40	1	Hilbrun	humanoid_tatooine_repo_pah	AGGRESSIVE	B	5	20	City	Mos Espa	1	IDLE	0	0	-	idle				600
 spawn_tat_1034	TATOOINE	tat_world	AREA	0	-3396.9	7.4	2466.3	0	1	Jabba's thief	humanoid_jabba_thief	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	32	0	-	idle				600
 spawn_tat_1035	TATOOINE	tat_world	AREA	0	-3388.3	7.4	2474.9	0	1	Jabba's thug	humanoid_jabba_thug	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	32	0	-	idle				600
@@ -1374,21 +1374,21 @@ spawn_tat_1371	TATOOINE	tat_world	AREA	0	-5345.3	5.8	2727.9	45	1	an elite Imperi
 spawn_tat_1372	TATOOINE	tat_world	AREA	0	-5357.0	5.4	2741.5	0	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	Dungeon	Imperial Oasis	1	LOITER	2	0	-	idle				600
 spawn_tat_1373	TATOOINE	tat_world	AREA	0	-5312.7	8.4	2662.6	0	1	Colonel Darkstone	humanoid_imperial_colonel_darkstone	INVULNERABLE	N	100	100	Dungeon	Imperial Oasis	1	IDLE	0	0	-	idle				600
 spawn_tat_1374	TATOOINE	tat_mosespa_laserflit_bunker	AREA	4	3.1	-12.0	31.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1375	TATOOINE	tat_mosespa_laserflit_bunker	AREA	5	28.8	-12.0	35.8	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
+spawn_tat_1375	TATOOINE	tat_mosespa_laserflit_bunker	AREA	5	28.8	-12.0	35.8	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
 spawn_tat_1376	TATOOINE	tat_mosespa_laserflit_bunker	AREA	5	29.9	-12.0	26.8	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1377	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-16.2	-16.0	84.5	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1378	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-9.6	-16.0	77.8	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1379	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-9.6	-16.0	74.1	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1380	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	10.9	-16.0	80.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1381	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	11.7	-16.0	82.7	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
+spawn_tat_1377	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-16.2	-16.0	84.5	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1378	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-9.6	-16.0	77.8	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1379	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	-9.6	-16.0	74.1	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1380	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	10.9	-16.0	80.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1381	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	11.7	-16.0	82.7	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
 spawn_tat_1382	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	2.9	-16.0	63.7	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1383	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	23.9	-16.0	73.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1384	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	43.5	-16.0	67.4	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1385	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	64.7	-16.0	71.6	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1386	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	66.2	-16.0	77.5	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1387	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	67.3	-16.0	71.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
+spawn_tat_1383	TATOOINE	tat_mosespa_laserflit_bunker	AREA	7	23.9	-16.0	73.2	-81	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	IDLE	0	0	-	idle				600
+spawn_tat_1384	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	43.5	-16.0	67.4	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1385	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	64.7	-16.0	71.6	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1386	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	66.2	-16.0	77.5	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
+spawn_tat_1387	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	67.3	-16.0	71.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
 spawn_tat_1388	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	80.9	-16.0	59.3	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
-spawn_tat_1389	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	84.1	-16.0	86.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
+spawn_tat_1389	TATOOINE	tat_mosespa_laserflit_bunker	AREA	8	84.1	-16.0	86.2	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	TURN	0	0	-	idle				600
 spawn_tat_1390	TATOOINE	tat_mosespa_laserflit_bunker	AREA	9	-38.7	-14.0	79.6	0	1	a Laserflit gang member	humanoid_tatooine_laserflit	AGGRESSIVE	N	10	20	Dungeon	Laserflit Bunker	1	LOITER	2	0	-	idle				600
 spawn_tat_1391	TATOOINE	tat_romo_vax_bunker	AREA	10	3.2	-12.0	21.3	0	1	Romo Vax's henchman	humanoid_tatooine_romo_vax_henchman	AGGRESSIVE	N	10	20	Dungeon	Romo Vax Bunker	1	LOITER	2	0	-	idle				600
 spawn_tat_1392	TATOOINE	tat_romo_vax_bunker	AREA	2	-4.1	0.3	3.1	0	1	Romo Vax's henchman	humanoid_tatooine_romo_vax_henchman	AGGRESSIVE	N	10	20	Dungeon	Romo Vax Bunker	1	LOITER	2	0	-	idle				600

@@ -1,5 +1,5 @@
 buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
 INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
 bo_cloning_1	KASHYYYK_HUNTING	kas_hunting_world	0	object/mobile/ep3/ep3_rodian_camp_doctor_01.iff	560.9	23.5	520.6	-69	0	0	0	128	TRUE	Cloning
-bo_cloning_2	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	object/mobile/ep3/ep3_wookiee_spirit_healer_01.iff	80.2	29.4	-475.9	22	0	0	0	128	TRUE	Cloning
+bo_cloning_2	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	object/mobile/ep3/wookiee_spirit_healer_01.iff	80.2	29.4	-475.9	22	0	0	0	128	TRUE	Cloning
 bo_cloning_3	KASHYYYK_DEAD_FOREST	kas_dead_f_world	0	object/static/structure/general/cloning_tube.iff	94.6	29.4	-473.3	-49	0	0	0	128	TRUE	Cloning

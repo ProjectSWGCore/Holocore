@@ -113,9 +113,6 @@ public final class NpcLoader extends DataLoader {
 			loot_table2					TEXT
 			loot_table3_chance			INTEGER
 			loot_table3					TEXT
-			collection_roll			*	INTEGER
-			collection_loot			*	TEXT
-			collection_faction		*	TEXT
 			chronicle_loot_chance	*	INTEGER
 			chronicle_loot_category	*	TEXT
 		 */
