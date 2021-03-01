@@ -102,6 +102,7 @@ public class DeveloperService extends Service {
 			
 			// Planet: Rori
 			new Location(-1211, 97.8, 4552, Terrain.RORI),
+			new Location(5289, 80.0, 6142, Terrain.RORI),
 			
 			// Planet: Talus
 			new Location(4958, 449.9, -5983, Terrain.TALUS),

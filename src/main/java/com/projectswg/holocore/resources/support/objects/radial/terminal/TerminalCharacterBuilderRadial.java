@@ -1231,6 +1231,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Naboo - Emperor's Retreat");
 		listBox.addListItem("Naboo - Weapon Development Facility");
 		listBox.addListItem("Rori - Hyperdrive Research Facility");
+		listBox.addListItem("Rori - Restuss Starport");
 		listBox.addListItem("Talus - Detainment Center");
 		listBox.addListItem("Tatooine - Fort Tusken");
 		listBox.addListItem("Tatooine - Imperial Oasis");
@@ -1302,32 +1303,33 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 28: handleNabWeaponFac(player); break;
 		// Planet: Rori
 			case 29: handleRorHyperdriveFacility(player); break;
+			case 30: handleRorRestussStarport(player); break;
 		// Planet: Talus
-			case 30: handleTalDetainmentCenter(player); break;
+			case 31: handleTalDetainmentCenter(player); break;
 		// Planet: Tatooine
-			case 31: handleTatFortTusken(player); break;
-			case 32: handleTatImperialOasis(player); break;
-			case 33: handleTatKraytGrave(player); break;
-			case 34: handleTatMosEisley(player); break;
-			case 35: handleTatMosTaike(player); break;
-			case 36: handleTatSquillCave(player); break;
+			case 32: handleTatFortTusken(player); break;
+			case 33: handleTatImperialOasis(player); break;
+			case 34: handleTatKraytGrave(player); break;
+			case 35: handleTatMosEisley(player); break;
+			case 36: handleTatMosTaike(player); break;
+			case 37: handleTatSquillCave(player); break;
 		// Planet: Yavin 4
-			case 37: handleYavBlueleafTemple(player); break;
-			case 38: handleYavDarkEnclave(player); break;
-			case 39: handleYavExarKun(player); break;
-			case 40: handleYavGeoCave(player); break;
-			case 41: handleYavLightEnclave(player); break;
+			case 38: handleYavBlueleafTemple(player); break;
+			case 39: handleYavDarkEnclave(player); break;
+			case 40: handleYavExarKun(player); break;
+			case 41: handleYavGeoCave(player); break;
+			case 42: handleYavLightEnclave(player); break;
 		// Space Stations:
-			case 42: handleNovaOrion(player); break;
-			case 43: handleNPEStation(player); break;
+			case 43: handleNovaOrion(player); break;
+			case 44: handleNPEStation(player); break;
 		// Dungeons:
-			case 44: handleHeroicEK(player); break;
-			case 45: handleHeroicISD(player); break;
-			case 46: handleNPEDungeon(player); break;
-			case 47: handleMyyydrilCave(player); break;
-			case 48: handleAvatarPlatform(player); break;
+			case 45: handleHeroicEK(player); break;
+			case 46: handleHeroicISD(player); break;
+			case 47: handleNPEDungeon(player); break;
+			case 48: handleMyyydrilCave(player); break;
+			case 49: handleAvatarPlatform(player); break;
 		// Planet: Character Farm
-			case 49: handleChfStatic(player); break;
+			case 50: handleChfStatic(player); break;
 
 		}
 	}
@@ -1451,6 +1453,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 // Planet: Rori
 	
 	private static void handleRorHyperdriveFacility(Player player) {teleportTo(player, -1211d, 98d, 4552d, Terrain.RORI);}
+
+	private static void handleRorRestussStarport(Player player) {teleportTo(player, 5289d, 80d, 6142d, Terrain.RORI);}
 
 // Planet: Talus
 	
