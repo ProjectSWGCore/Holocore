@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_rebel_ground_destroy_2",
+		"key": "s_29",
+		"comment": "Well if you think you can handle it, there's still more Imperial troops roaming the streets that we could use a hand with."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_rebel_ground_destroy_2",
+				"key": "s_32",
+				"comment": "Count me in, sir!"
+			},
+			"next": "rori_restuss_rebel_captain_klork/grant_quest"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}

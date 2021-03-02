@@ -5,9 +5,9 @@ bo_gcw_restuss_phase_3_2	RORI	ror_world	0	object/static/structure/general/trash_
 bo_gcw_restuss_phase_3_3	RORI	ror_world	0	object/static/item/item_newbie_crate.iff	5908.6	81.0	5579.1	-4.6	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
 bo_gcw_restuss_phase_3_4	RORI	ror_world	0	object/static/item/wp_carbine_laser_combined.iff	5908.6	82.0	5579.0	-32.1	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
 bo_gcw_restuss_phase_3_5	RORI	ror_world	0	object/static/structure/general/data_terminal_s3.iff	5908.6	81.0	5575.5	-155.9	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
-bo_gcw_restuss_phase_3_6	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5909.6	81.0	5578.0	53.9	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
-bo_gcw_restuss_phase_3_7	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.4	81.0	5576.8	65.3	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
-bo_gcw_restuss_phase_3_8	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.1	81.7	5577.4	-48.1	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
+bo_gcw_restuss_phase_3_6	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5909.6	81.0	5578.0	53.9	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
+bo_gcw_restuss_phase_3_7	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5910.4	81.0	5576.8	65.3	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
+bo_gcw_restuss_phase_3_8	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5910.1	81.7	5577.4	-48.1	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
 bo_gcw_restuss_phase_3_9	RORI	ror_world	0	object/static/structure/general/banner_imperial_style_01.iff	5907.6	80.9	5584.1	-90.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
 bo_gcw_restuss_phase_3_10	RORI	ror_world	0	object/building/military/military_base_shed_imperial_barracks_s01.iff	5915.4	81.0	5587.5	-90.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
 bo_gcw_restuss_phase_3_11	RORI	ror_world	0	object/static/structure/corellia/corl_tent_hut_s01.iff	5907.7	81.0	5572.9	142.8	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Barracks
@@ -19,7 +19,7 @@ bo_gcw_restuss_phase_3_16	RORI	ror_world	0	object/static/structure/military/mili
 bo_gcw_restuss_phase_3_17	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.0	81.1	5514.8	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
 bo_gcw_restuss_phase_3_18	RORI	ror_world	0	object/static/structure/military/military_column_weak_imperial_style_01.iff	5934.2	80.9	5524.0	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
 bo_gcw_restuss_phase_3_19	RORI	ror_world	0	object/static/structure/tatooine/debris_tatt_crate_metal_1.iff	5924.1	81.0	5626.4	52.7	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
-bo_gcw_restuss_phase_3_20	RORI	ror_world	0	object/static/structure/tatooine/palette_supply_01.iff	5925.8	81.0	5626.4	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
+bo_gcw_restuss_phase_3_20	RORI	ror_world	0	object/static/structure/tatooine/palette_supply_06.iff	5925.8	81.0	5626.4	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
 bo_gcw_restuss_phase_3_21	RORI	ror_world	0	object/static/structure/corellia/corl_power_arial_prime.iff	5913.4	88.0	5526.2	90.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
 bo_gcw_restuss_phase_3_22	RORI	ror_world	0	object/static/structure/corellia/corl_power_arial_prime.iff	5929.5	80.3	5522.8	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
 bo_gcw_restuss_phase_3_23	RORI	ror_world	0	object/static/structure/corellia/corl_power_arial_thin.iff	5925.1	84.4	5514.1	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Imperial Base - Communications
@@ -117,9 +117,9 @@ bo_gcw_restuss_phase_3_114	RORI	ror_world	0	object/static/structure/military/bun
 bo_gcw_restuss_phase_3_115	RORI	ror_world	0	object/static/item/item_container_armor.iff	4823.2	80.0	5814.0	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
 bo_gcw_restuss_phase_3_116	RORI	ror_world	0	object/static/structure/military/bunker_crate_style_01.iff	4829.0	84.5	5806.1	-138.4	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
 bo_gcw_restuss_phase_3_117	RORI	ror_world	0	object/static/structure/general/streetlamp_small_red_style_01.iff	4826.0	83.4	5818.0	41.8	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
-bo_gcw_restuss_phase_3_118	RORI	ror_world	0	object/static/item/item_container_weapon.iff	4827.7	80.7	5819.5	-61.9	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
-bo_gcw_restuss_phase_3_119	RORI	ror_world	0	object/static/item/item_container_weapon.iff	4827.9	80.0	5819.1	39.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
-bo_gcw_restuss_phase_3_120	RORI	ror_world	0	object/static/item/item_container_weapon.iff	4827.0	80.0	5819.9	39.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
+bo_gcw_restuss_phase_3_118	RORI	ror_world	0	object/static/item/item_container_weapons.iff	4827.7	80.7	5819.5	-61.9	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
+bo_gcw_restuss_phase_3_119	RORI	ror_world	0	object/static/item/item_container_weapons.iff	4827.9	80.0	5819.1	39.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
+bo_gcw_restuss_phase_3_120	RORI	ror_world	0	object/static/item/item_container_weapons.iff	4827.0	80.0	5819.9	39.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
 bo_gcw_restuss_phase_3_121	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4829.3	80.0	5821.1	-47.9	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
 bo_gcw_restuss_phase_3_122	RORI	ror_world	0	object/building/military/military_base_shed_rebel_style_01.iff	4831.3	80.0	5810.2	-48.4	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Barracks
 bo_gcw_restuss_phase_3_123	RORI	ror_world	0	object/static/item/item_newbie_crate.iff	4771.4	80.0	5893.4	24.6	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
@@ -131,7 +131,7 @@ bo_gcw_restuss_phase_3_128	RORI	ror_world	0	object/static/structure/general/data
 bo_gcw_restuss_phase_3_129	RORI	ror_world	0	object/static/item/item_tool_recording_rod.iff	4779.0	75.0	5890.0	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
 bo_gcw_restuss_phase_3_130	RORI	ror_world	0	object/static/structure/military/bunker_crate_style_01.iff	4773.7	82.5	5910.4	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
 bo_gcw_restuss_phase_3_131	RORI	ror_world	0	object/static/structure/military/bunker_crate_style_01.iff	4782.5	82.6	5910.4	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
-bo_gcw_restuss_phase_3_132	RORI	ror_world	0	object/static/structure/tatooine/palette_supply_01.iff	4769.9	80.0	5901.0	-111.7	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
+bo_gcw_restuss_phase_3_132	RORI	ror_world	0	object/static/structure/tatooine/palette_supply_06.iff	4769.9	80.0	5901.0	-111.7	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
 bo_gcw_restuss_phase_3_133	RORI	ror_world	0	object/static/structure/general/banner_rebel_style_01.iff	4775.1	80.0	5893.3	-9.2	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
 bo_gcw_restuss_phase_3_134	RORI	ror_world	0	object/static/structure/military/bunker_crate_style_01.iff	4782.5	82.6	5896.1	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications
 bo_gcw_restuss_phase_3_135	RORI	ror_world	0	object/static/structure/military/bunker_crate_style_01.iff	4773.7	82.6	5896.1	0.0	0	0	0	512	TRUE	Restuss Phase 3 - Rebel Base - Communications

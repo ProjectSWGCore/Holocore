@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_imperial_ground_destroy_1",
+		"key": "s_41",
+		"comment": "The Rebellion is not wanted around here."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "threaten"
+			}
+		}
+	]
+}

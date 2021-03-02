@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_imperial_ground_destroy_2",
+		"key": "s_61",
+		"comment": "I'm still awaiting new orders, soldier. Come back later and I will have your mission plan ready."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shrug_shoulders"
+			}
+		}
+	]
+}

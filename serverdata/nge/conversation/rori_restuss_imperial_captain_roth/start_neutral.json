@@ -1,0 +1,24 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_imperial_ground_destroy_1",
+		"key": "s_39",
+		"comment": "You should leave this place at once, civilian. There's a war coming!"
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "wave_finger_warning"
+			}
+		}
+	]
+}

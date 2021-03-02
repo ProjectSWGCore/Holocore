@@ -2,14 +2,14 @@ buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	rad
 TEXT PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
 bo_gcw_restuss_phase_0_1	RORI	ror_world	0	object/static/item/item_newbie_crate.iff	5908.6	81.0	5579.1	-4	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
 bo_gcw_restuss_phase_0_2	RORI	ror_world	0	object/static/structure/general/streetlamp_small_style_02.iff	5909.0	80.9	5585.9	33	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_3	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5909.6	81.0	5578.0	53	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_4	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.4	81.0	5576.8	65	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_5	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5910.1	81.7	5577.4	-48	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_6	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5906.5	81.0	5579.5	-30	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_7	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.0	81.0	5578.0	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_8	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.6	81.0	5576.9	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_9	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5907.6	81.7	5576.9	52	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
-bo_gcw_restuss_phase_0_10	RORI	ror_world	0	object/static/item/item_container_weapon.iff	5906.9	81.7	5578.2	68	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_3	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5909.6	81.0	5578.0	53	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_4	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5910.4	81.0	5576.8	65	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_5	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5910.1	81.7	5577.4	-48	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_6	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5906.5	81.0	5579.5	-30	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_7	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5907.0	81.0	5578.0	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_8	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5907.6	81.0	5576.9	60	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_9	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5907.6	81.7	5576.9	52	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
+bo_gcw_restuss_phase_0_10	RORI	ror_world	0	object/static/item/item_container_weapons.iff	5906.9	81.7	5578.2	68	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
 bo_gcw_restuss_phase_0_11	RORI	ror_world	0	object/static/structure/corellia/corl_tent_hut_s01.iff	5913.1	81.0	5582.3	110	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Barracks
 bo_gcw_restuss_phase_0_12	RORI	ror_world	0	object/static/item/item_tool_recording_rod.iff	5928.1	76.0	5609.0	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
 bo_gcw_restuss_phase_0_13	RORI	ror_world	0	object/static/structure/general/camp_campfire_logs_fresh_s01.iff	5912.1	81.0	5523.5	0	0	0	0	512	TRUE	Restuss Phase 0 - Imperial Base - Communications
@@ -129,7 +129,7 @@ bo_gcw_restuss_phase_0_126	RORI	ror_world	0	object/static/structure/corellia/cor
 bo_gcw_restuss_phase_0_127	RORI	ror_world	0	object/static/structure/general/campfire_ash.iff	4833.4	80.0	5814.1	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
 bo_gcw_restuss_phase_0_128	RORI	ror_world	0	object/static/structure/general/camp_lawn_chair_s01.iff	4832.4	80.0	5813.0	4	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
 bo_gcw_restuss_phase_0_129	RORI	ror_world	0	object/static/item/item_container_armor.iff	4836.8	80.0	5808.1	0	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
-bo_gcw_restuss_phase_0_130	RORI	ror_world	0	object/static/item/item_container_weapon.iff	4838.3	80.0	5809.6	39	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
+bo_gcw_restuss_phase_0_130	RORI	ror_world	0	object/static/item/item_container_weapons.iff	4838.3	80.0	5809.6	39	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
 bo_gcw_restuss_phase_0_131	RORI	ror_world	0	object/static/structure/general/camp_tent_s01.iff	4837.0	80.0	5813.2	-71	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
 bo_gcw_restuss_phase_0_132	RORI	ror_world	0	object/static/structure/general/camp_tent_s01.iff	4833.9	80.0	5810.4	-10	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Barracks
 bo_gcw_restuss_phase_0_133	RORI	ror_world	0	object/static/structure/corellia/corl_tent_med.iff	4782.0	80.0	5904.5	-50	0	0	0	512	TRUE	Restuss Phase 0 - Rebel Base - Communications

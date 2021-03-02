@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_rebel_ground_destroy_1",
+		"key": "s_28",
+		"comment": "Good to have you here, soldier. I hope you came prepared to fight. The Empire is calling in their Dark Troopers from around the galaxy. We need to make sure they never get here. If you can thin out their numbers by 5 before they even get to Restuss, it will be a big blow to the Imperial army."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_rebel_ground_destroy_1",
+				"key": "s_30",
+				"comment": "I can handle it, sir!"
+			},
+			"next": "rori_restuss_rebel_captain_redding/grant_quest"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}
