@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_250",
-		"comment": "As you wish.  I will show you what is available."
+		"key": "s_68",
+		"comment": "Good for you!  I'll update your status and you will be a member of the Special Forces in 30 seconds."
 	},
 	"playerResponses": [
 		{
@@ -23,9 +23,7 @@
 		{
 			"type": "faction_status",
 			"args": {
-				"statuses": [
-					"combatant"
-				]
+				"statuses": ["combatant","on_leave"]
 			}
 		}
 	],
@@ -33,7 +31,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "explain"
+				"animation": "heal_other"
 			}
 		}
 	]

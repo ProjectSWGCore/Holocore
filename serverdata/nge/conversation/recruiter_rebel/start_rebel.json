@@ -11,15 +11,31 @@
 				"key": "s_248",
 				"comment": "I need supplies.  Do you have anything available?"
 			},
-			"next": "recruiter_rebel/rebel_combatant_supplies"
+			"next": "recruiter_rebel/rebel_show_supplies"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_49",
-				"comment": "I would like to make a change to my military status."
+				"key": "s_93",
+				"comment": "Special Forces"
 			},
-			"next": "recruiter_rebel/rebel_combatant_change"
+			"next": "recruiter_rebel/rebel_go_special_forces"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_86",
+				"comment": "I need to go on leave for a time."
+			},
+			"next": "recruiter_rebel/rebel_go_on_leave"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_74",
+				"comment": "This is all too much for me.  I would like to resign completely."
+			},
+			"next": "recruiter_rebel/rebel_go_resign"
 		}
 	],
 	"requirements": [
@@ -27,14 +43,6 @@
 			"type": "faction_name",
 			"args": {
 				"faction": "rebel"
-			}
-		},
-		{
-			"type": "faction_status",
-			"args": {
-				"statuses": [
-					"combatant"
-				]
 			}
 		}
 	],

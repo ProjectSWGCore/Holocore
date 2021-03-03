@@ -10,16 +10,33 @@
 				"file": "conversation/faction_recruiter_imperial",
 				"key": "s_438",
 				"comment": "Thank you, sir."
-			},
-		},
+			}
+		}
 	],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+					"faction": "imperial"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+					"statuses": ["combatant","special_forces"]
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "explain"
+					"animation": "explain"
 			}
+		},
+		{
+			"type": "show_sellable_items",
+			"args": {}
 		}
 	]
 }

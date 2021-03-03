@@ -5,7 +5,20 @@
 		"comment": "Your sense of duty is admirable.  Long live the Emperor!"
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+					"faction": "imperial"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+					"statuses": ["special_forces","on_leave"]
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",
@@ -15,4 +28,3 @@
 		}
 	]
 }
-

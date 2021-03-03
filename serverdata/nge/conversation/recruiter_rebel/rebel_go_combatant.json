@@ -5,7 +5,20 @@
 		"comment": "Superb!  Welcome to the Rebellion!  "
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": ["special_forces","on_leave"]
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",

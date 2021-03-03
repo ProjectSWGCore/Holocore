@@ -68,12 +68,11 @@ patrol_ror_1307	patrol_ror_1300		RORI	ror_world	0	5588.3	80.1	5665.6	0
 patrol_ror_1308	patrol_ror_1300		RORI	ror_world	0	5549.8	80.0	5666.1	0	
 patrol_ror_1309	patrol_ror_1300		RORI	ror_world	0	5503.5	80.0	5666.5	0	
 patrol_ror_1310	patrol_ror_1300		RORI	ror_world	0	5453.5	80.0	5668.2	0	
-patrol_ror_1311	patrol_ror_1300		RORI	ror_world	0	5453.5	80.0	5668.2	0	
-patrol_ror_1312	patrol_ror_1300		RORI	ror_world	0	5409.3	80.0	5664.1	0	
-patrol_ror_1313	patrol_ror_1300		RORI	ror_world	0	5381.1	80.0	5652.2	0	
-patrol_ror_1314	patrol_ror_1300		RORI	ror_world	0	5355.0	80.0	5632.2	0	
-patrol_ror_1315	patrol_ror_1300		RORI	ror_world	0	5330.4	80.0	5628.0	0	
-patrol_ror_1316	patrol_ror_1300		RORI	ror_world	0	5314.5	80.0	5654.5	300	
+patrol_ror_1311	patrol_ror_1300		RORI	ror_world	0	5409.3	80.0	5664.1	0	
+patrol_ror_1312	patrol_ror_1300		RORI	ror_world	0	5381.1	80.0	5652.2	0	
+patrol_ror_1313	patrol_ror_1300		RORI	ror_world	0	5355.0	80.0	5632.2	0	
+patrol_ror_1314	patrol_ror_1300		RORI	ror_world	0	5330.4	80.0	5628.0	0	
+patrol_ror_1315	patrol_ror_1300		RORI	ror_world	0	5314.5	80.0	5654.5	300	
 patrol_ror_1400	patrol_ror_1400	FLIP	RORI	ror_world	0	5930.5	81.0	5625.2	0	Restuss - Stormtroopers group #2
 patrol_ror_1401	patrol_ror_1400		RORI	ror_world	0	5913.1	81.0	5612.0	0	
 patrol_ror_1402	patrol_ror_1400		RORI	ror_world	0	5871.3	80.5	5616.0	0	

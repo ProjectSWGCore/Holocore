@@ -5,7 +5,14 @@
 		"comment": "So be it.  I'll put the paperwork through.  We will watch you closely to make sure that you don't cross any lines, citizen."
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "faction_change",

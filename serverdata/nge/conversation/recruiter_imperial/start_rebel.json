@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"key": "s_308",
-		"comment": "Superb!  Welcome to the Rebellion!  "
+		"key": "s_306",
+		"comment": "I do not talk to terrorists and insurgents.  "
 	},
 	"playerResponses": [],
 	"requirements": [
@@ -17,7 +17,13 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "gesticulate_wildly"
+				"animation": "backhand_threaten"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "nod"
 			}
 		}
 	]

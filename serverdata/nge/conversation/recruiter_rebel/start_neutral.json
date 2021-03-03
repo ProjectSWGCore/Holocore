@@ -11,7 +11,7 @@
 				"key": "s_114",
 				"comment": "Yes. I want to be a part of the Alliance!"
 			},
-			"next": "recruiter_rebel/neutral_selected"
+			"next": "recruiter_rebel/neutral_join"
 		}
 	],
 	"requirements": [

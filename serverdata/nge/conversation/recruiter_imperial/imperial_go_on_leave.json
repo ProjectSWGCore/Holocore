@@ -5,7 +5,20 @@
 		"comment": "I need to process your paperwork.  You will officially be on leave in 5 minutes."
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": ["combatant","special_forces"]
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",

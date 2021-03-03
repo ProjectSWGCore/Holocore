@@ -1,7 +1,5 @@
 conversation_id	conversation_file
 TEXT	TEXT
-recruiter_rebel	recruiter_rebel/neutral_start
-recruiter_rebel	recruiter_rebel/rebel_opposite_faction
-recruiter_rebel	recruiter_rebel/rebel_on_leave_start
-recruiter_rebel	recruiter_rebel/rebel_combatant_start
-recruiter_rebel	recruiter_rebel/rebel_special_forces_start
+recruiter_rebel	recruiter_rebel/start_neutral
+recruiter_rebel	recruiter_rebel/start_imperial
+recruiter_rebel	recruiter_rebel/start_rebel

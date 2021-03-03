@@ -61,8 +61,8 @@ public class TangibleObject extends SWGObject {
 	private boolean			inCombat		= false;
 	private int				condition		= 0;
 	private Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
-	private PvpStatus		pvpStatus = PvpStatus.COMBATANT;
-	private Faction			faction			= null;
+	private PvpStatus		pvpStatus 		= PvpStatus.COMBATANT;
+	private Faction			faction			= ServerData.INSTANCE.getFactions().getFaction(PvpFaction.NEUTRAL.name().toLowerCase(Locale.US));
 	private boolean			visibleGmOnly	= true;
 	private byte []			objectEffects	= new byte[0];
 	private int    			optionFlags     = 0;

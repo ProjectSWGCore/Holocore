@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_414",
+		"comment": "Greetings, civilian.  Would you be interested in joining the military?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_115",
+				"comment": "Yes. I want to be a part of the Empire!"
+			},
+			"next": "recruiter_imperial/neutral_join"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

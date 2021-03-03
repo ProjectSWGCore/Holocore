@@ -13,7 +13,14 @@
 			}
 		}
 	],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "neutral"
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "faction_change",
