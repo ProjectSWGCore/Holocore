@@ -5,7 +5,20 @@
 		"comment": "That's a shame.  It will take some time to push the paperwork through for approval.  Your status will change in about 5 minutes."
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "faction_status",
+			"args": {
+				"statuses": ["combatant","special_forces"]
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",

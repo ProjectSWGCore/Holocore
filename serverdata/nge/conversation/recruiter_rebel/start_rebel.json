@@ -24,6 +24,14 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_95",
+				"comment": "Combatant"
+			},
+			"next": "recruiter_rebel/rebel_go_combatant"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
 				"key": "s_86",
 				"comment": "I need to go on leave for a time."
 			},
