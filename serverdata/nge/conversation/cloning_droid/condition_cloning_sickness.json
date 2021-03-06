@@ -11,7 +11,7 @@
 				"key": "s_8",
 				"comment": "That's a little steep.  Are there any other options?"
 			},
-			"next": "cloning_droid/handleBranch2/s_8"
+			"next": "cloning_droid/condition_cloning_sickness/s_8"
 		},
 		{
 			"playerMessage": {
@@ -19,7 +19,7 @@
 				"key": "s_12",
 				"comment": "Fine.  I'll pay."
 			},
-			"next": "cloning_droid/handleBranch2/s_12"
+			"next": "cloning_droid/condition_cloning_sickness/s_12"
 		}
 	],
 	"requirements": [],

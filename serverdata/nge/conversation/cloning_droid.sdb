@@ -1,3 +1,4 @@
 conversation_id	conversation_file
 TEXT	TEXT
-cloning_droid	cloning_droid/default_1
+cloning_droid	cloning_droid/condition_cloning_sickness
+cloning_droid	cloning_droid/start

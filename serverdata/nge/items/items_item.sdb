@@ -12,60 +12,60 @@ item_consumable_detect_hidden_02_01	object/tangible/loot/generic_usable/binocula
 item_consumable_detect_hidden_02_02	object/tangible/loot/generic_usable/binoculars_s2_generic.iff	consumable	Advanced Electrobinoculars	1	1000	0	detectHiddenConsumable40	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	8	
 item_consumable_detect_hidden_02_03	object/tangible/loot/generic_usable/binoculars_s2_generic.iff	consumable	Superior Electrobinoculars	1	1000	0	detectHiddenConsumable65	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	8	
 item_consumable_detect_hidden_02_04	object/tangible/loot/generic_usable/binoculars_s1_generic.iff	consumable	Experimental Electrobinoculars	1	1000	0	detectHiddenConsumable100	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	8	
-item_consumable_drop_agi_lvl01_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Dexterity Stim	1	1000	0	agiConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	2	-1	-1	90	0	3	
-item_consumable_drop_agi_lvl10_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Dexterity Stim	1	1000	0	agiConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	2	-1	-1	210	0	3	
-item_consumable_drop_agi_lvl20_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Dexterity Stim	1	1000	0	agiConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	2	-1	-1	470	0	3	
-item_consumable_drop_agi_lvl30_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Quickness Stim	1	1000	0	agiConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	2	-1	-1	840	0	3	
-item_consumable_drop_agi_lvl40_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Quickness Stim	1	1000	0	agiConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	2	-1	-1	1290	0	3	
-item_consumable_drop_agi_lvl50_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Quickness Stim	1	1000	0	agiConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	2	-1	-1	1750	0	3	
-item_consumable_drop_agi_lvl60_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Agility Stim	1	1000	0	agiConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	2	-1	-1	2220	0	3	
-item_consumable_drop_agi_lvl70_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Agility Stim	1	1000	0	agiConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	2	-1	-1	2610	0	3	
-item_consumable_drop_agi_lvl80_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Agility Stim	1	1000	0	agiConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	2	-1	-1	2890	0	3	
-item_consumable_drop_con_lvl01_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Fitness Stim	1	1000	0	conConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	5	-1	-1	90	0	3	
-item_consumable_drop_con_lvl10_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Fitness Stim	1	1000	0	conConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	5	-1	-1	210	0	3	
-item_consumable_drop_con_lvl20_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Fitness Stim	1	1000	0	conConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	5	-1	-1	470	0	3	
-item_consumable_drop_con_lvl30_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Health Stim	1	1000	0	conConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	7	-1	-1	840	0	3	
-item_consumable_drop_con_lvl40_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Health Stim	1	1000	0	conConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	7	-1	-1	1290	0	3	
-item_consumable_drop_con_lvl50_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Health Stim	1	1000	0	conConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	7	-1	-1	1750	0	3	
-item_consumable_drop_con_lvl60_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Constitution Stim	1	1000	0	conConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	6	-1	-1	2220	0	3	
-item_consumable_drop_con_lvl70_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Constitution Stim	1	1000	0	conConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	6	-1	-1	2610	0	3	
-item_consumable_drop_con_lvl80_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Constitution Stim	1	1000	0	conConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	6	-1	-1	2890	0	3	
-item_consumable_drop_lck_lvl01_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Trinket	1	1000	0	lckConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	90	0	3	
-item_consumable_drop_lck_lvl10_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Trinket	1	1000	0	lckConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	-1	-1	-1	210	0	3	
-item_consumable_drop_lck_lvl20_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Trinket	1	1000	0	lckConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	-1	-1	-1	470	0	3	
-item_consumable_drop_lck_lvl30_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Keepsake	1	1000	0	lckConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	-1	-1	-1	840	0	3	
-item_consumable_drop_lck_lvl40_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Keepsake	1	1000	0	lckConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	-1	-1	-1	1290	0	3	
-item_consumable_drop_lck_lvl50_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Keepsake	1	1000	0	lckConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	-1	-1	-1	1750	0	3	
-item_consumable_drop_lck_lvl60_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Artifact	1	1000	0	lckConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	-1	-1	-1	2220	0	3	
-item_consumable_drop_lck_lvl70_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Artifact	1	1000	0	lckConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	-1	-1	-1	2610	0	3	
-item_consumable_drop_lck_lvl80_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Artifact	1	1000	0	lckConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	-1	-1	-1	2890	0	3	
-item_consumable_drop_pre_lvl01_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Perception Scope	1	1000	0	preConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	90	0	3	
-item_consumable_drop_pre_lvl10_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Perception Scope	1	1000	0	preConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	-1	-1	-1	210	0	3	
-item_consumable_drop_pre_lvl20_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Perception Scope	1	1000	0	preConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	-1	-1	-1	470	0	3	
-item_consumable_drop_pre_lvl30_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Ocular Enhancement Scope	1	1000	0	preConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	-1	-1	-1	840	0	3	
-item_consumable_drop_pre_lvl40_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Ocular Enhancement Scope	1	1000	0	preConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	-1	-1	-1	1290	0	3	
-item_consumable_drop_pre_lvl50_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Ocular Enhancement Scope	1	1000	0	preConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	-1	-1	-1	1750	0	3	
-item_consumable_drop_pre_lvl60_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Precision Scope	1	1000	0	preConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	-1	-1	-1	2220	0	3	
-item_consumable_drop_pre_lvl70_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Precision Scope	1	1000	0	preConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	-1	-1	-1	2610	0	3	
-item_consumable_drop_pre_lvl80_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Precision Scope	1	1000	0	preConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	-1	-1	-1	2890	0	3	
-item_consumable_drop_sta_lvl01_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Fortitude Stim	1	1000	0	staConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	6	-1	-1	90	0	3	
-item_consumable_drop_sta_lvl10_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Fortitude Stim	1	1000	0	staConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	6	-1	-1	210	0	3	
-item_consumable_drop_sta_lvl20_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Fortitude Stim	1	1000	0	staConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	6	-1	-1	470	0	3	
-item_consumable_drop_sta_lvl30_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Endurance Stim	1	1000	0	staConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	6	-1	-1	840	0	3	
-item_consumable_drop_sta_lvl40_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Endurance Stim	1	1000	0	staConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	6	-1	-1	1290	0	3	
-item_consumable_drop_sta_lvl50_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Endurance Stim	1	1000	0	staConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	6	-1	-1	1750	0	3	
-item_consumable_drop_sta_lvl60_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Stamina Stim	1	1000	0	staConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	6	-1	-1	2220	0	3	
-item_consumable_drop_sta_lvl70_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Stamina Stim	1	1000	0	staConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	6	-1	-1	2610	0	3	
-item_consumable_drop_sta_lvl80_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Stamina Stim	1	1000	0	staConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	6	-1	-1	2890	0	3	
-item_consumable_drop_str_lvl01_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Energy Stim	1	1000	0	strConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	4	-1	-1	90	0	3	
-item_consumable_drop_str_lvl10_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Energy Stim	1	1000	0	strConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	4	-1	-1	210	0	3	
-item_consumable_drop_str_lvl20_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Energy Stim	1	1000	0	strConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	4	-1	-1	470	0	3	
-item_consumable_drop_str_lvl30_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Power Stim	1	1000	0	strConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	4	-1	-1	840	0	3	
-item_consumable_drop_str_lvl40_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Power Stim	1	1000	0	strConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	4	-1	-1	1290	0	3	
-item_consumable_drop_str_lvl50_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Power Stim	1	1000	0	strConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	4	-1	-1	1750	0	3	
-item_consumable_drop_str_lvl60_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Strength Stim	1	1000	0	strConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	4	-1	-1	2220	0	3	
-item_consumable_drop_str_lvl70_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Strength Stim	1	1000	0	strConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	4	-1	-1	2610	0	3	
-item_consumable_drop_str_lvl80_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Strength Stim	1	1000	0	strConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	4	-1	-1	2890	0	3	
+item_consumable_drop_agi_lvl01_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Dexterity Stim	1	1000	0	agiConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	2	-1	-1	5	0	3	
+item_consumable_drop_agi_lvl10_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Dexterity Stim	1	1000	0	agiConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	2	-1	-1	10	0	3	
+item_consumable_drop_agi_lvl20_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Dexterity Stim	1	1000	0	agiConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	2	-1	-1	20	0	3	
+item_consumable_drop_agi_lvl30_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Quickness Stim	1	1000	0	agiConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	2	-1	-1	30	0	3	
+item_consumable_drop_agi_lvl40_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Quickness Stim	1	1000	0	agiConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	2	-1	-1	40	0	3	
+item_consumable_drop_agi_lvl50_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Quickness Stim	1	1000	0	agiConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	2	-1	-1	50	0	3	
+item_consumable_drop_agi_lvl60_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Agility Stim	1	1000	0	agiConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	2	-1	-1	60	0	3	
+item_consumable_drop_agi_lvl70_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Agility Stim	1	1000	0	agiConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	2	-1	-1	70	0	3	
+item_consumable_drop_agi_lvl80_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Agility Stim	1	1000	0	agiConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	2	-1	-1	80	0	3	
+item_consumable_drop_con_lvl01_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Fitness Stim	1	1000	0	conConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	5	-1	-1	5	0	3	
+item_consumable_drop_con_lvl10_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Fitness Stim	1	1000	0	conConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	5	-1	-1	10	0	3	
+item_consumable_drop_con_lvl20_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Fitness Stim	1	1000	0	conConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	5	-1	-1	20	0	3	
+item_consumable_drop_con_lvl30_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Health Stim	1	1000	0	conConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	7	-1	-1	30	0	3	
+item_consumable_drop_con_lvl40_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Health Stim	1	1000	0	conConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	7	-1	-1	40	0	3	
+item_consumable_drop_con_lvl50_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Health Stim	1	1000	0	conConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	7	-1	-1	50	0	3	
+item_consumable_drop_con_lvl60_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Constitution Stim	1	1000	0	conConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	6	-1	-1	60	0	3	
+item_consumable_drop_con_lvl70_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Improved Constitution Stim	1	1000	0	conConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	6	-1	-1	70	0	3	
+item_consumable_drop_con_lvl80_01_02	object/tangible/loot/generic_usable/stim_syringe_generic.iff	consumable	Advanced Constitution Stim	1	1000	0	conConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	6	-1	-1	80	0	3	
+item_consumable_drop_lck_lvl01_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Trinket	1	1000	0	lckConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	5	0	3	
+item_consumable_drop_lck_lvl10_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Trinket	1	1000	0	lckConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	-1	-1	-1	10	0	3	
+item_consumable_drop_lck_lvl20_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Trinket	1	1000	0	lckConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	-1	-1	-1	20	0	3	
+item_consumable_drop_lck_lvl30_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Keepsake	1	1000	0	lckConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	-1	-1	-1	30	0	3	
+item_consumable_drop_lck_lvl40_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Keepsake	1	1000	0	lckConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	-1	-1	-1	40	0	3	
+item_consumable_drop_lck_lvl50_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Keepsake	1	1000	0	lckConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	-1	-1	-1	50	0	3	
+item_consumable_drop_lck_lvl60_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Hopeful Artifact	1	1000	0	lckConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	-1	-1	-1	60	0	3	
+item_consumable_drop_lck_lvl70_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Charmed Artifact	1	1000	0	lckConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	-1	-1	-1	70	0	3	
+item_consumable_drop_lck_lvl80_01_02	object/tangible/loot/generic_usable/jedi_relic_01_generic.iff	consumable	Lucky Artifact	1	1000	0	lckConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	-1	-1	-1	80	0	3	
+item_consumable_drop_pre_lvl01_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Perception Scope	1	1000	0	preConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	5	0	3	
+item_consumable_drop_pre_lvl10_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Perception Scope	1	1000	0	preConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	-1	-1	-1	10	0	3	
+item_consumable_drop_pre_lvl20_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Perception Scope	1	1000	0	preConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	-1	-1	-1	20	0	3	
+item_consumable_drop_pre_lvl30_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Ocular Enhancement Scope	1	1000	0	preConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	-1	-1	-1	30	0	3	
+item_consumable_drop_pre_lvl40_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Ocular Enhancement Scope	1	1000	0	preConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	-1	-1	-1	40	0	3	
+item_consumable_drop_pre_lvl50_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Ocular Enhancement Scope	1	1000	0	preConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	-1	-1	-1	50	0	3	
+item_consumable_drop_pre_lvl60_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Precision Scope	1	1000	0	preConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	-1	-1	-1	60	0	3	
+item_consumable_drop_pre_lvl70_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Improved Precision Scope	1	1000	0	preConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	-1	-1	-1	70	0	3	
+item_consumable_drop_pre_lvl80_01_02	object/tangible/loot/generic_usable/scope_weapon_generic.iff	consumable	Advanced Precision Scope	1	1000	0	preConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	-1	-1	-1	80	0	3	
+item_consumable_drop_sta_lvl01_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Fortitude Stim	1	1000	0	staConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	6	-1	-1	5	0	3	
+item_consumable_drop_sta_lvl10_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Fortitude Stim	1	1000	0	staConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	6	-1	-1	10	0	3	
+item_consumable_drop_sta_lvl20_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Fortitude Stim	1	1000	0	staConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	6	-1	-1	20	0	3	
+item_consumable_drop_sta_lvl30_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Endurance Stim	1	1000	0	staConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	6	-1	-1	30	0	3	
+item_consumable_drop_sta_lvl40_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Endurance Stim	1	1000	0	staConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	6	-1	-1	40	0	3	
+item_consumable_drop_sta_lvl50_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Endurance Stim	1	1000	0	staConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	6	-1	-1	50	0	3	
+item_consumable_drop_sta_lvl60_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Stamina Stim	1	1000	0	staConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	6	-1	-1	60	0	3	
+item_consumable_drop_sta_lvl70_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Improved Stamina Stim	1	1000	0	staConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	6	-1	-1	70	0	3	
+item_consumable_drop_sta_lvl80_01_02	object/tangible/loot/generic_usable/stim_a_generic.iff	consumable	Advanced Stamina Stim	1	1000	0	staConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	6	-1	-1	80	0	3	
+item_consumable_drop_str_lvl01_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Energy Stim	1	1000	0	strConsumable5	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	4	-1	-1	5	0	3	
+item_consumable_drop_str_lvl10_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Energy Stim	1	1000	0	strConsumable10	0	short_reuse_4	5	0				0											0	0			10		0	0		-1	4	-1	-1	10	0	3	
+item_consumable_drop_str_lvl20_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Energy Stim	1	1000	0	strConsumable15	0	short_reuse_4	5	0				0											0	0			20		0	0		-1	4	-1	-1	20	0	3	
+item_consumable_drop_str_lvl30_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Power Stim	1	1000	0	strConsumable20	0	short_reuse_4	5	0				0											0	0			30		0	0		-1	4	-1	-1	30	0	3	
+item_consumable_drop_str_lvl40_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Power Stim	1	1000	0	strConsumable25	0	short_reuse_4	5	0				0											0	0			40		0	0		-1	4	-1	-1	40	0	3	
+item_consumable_drop_str_lvl50_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Power Stim	1	1000	0	strConsumable30	0	short_reuse_4	5	0				0											0	0			50		0	0		-1	4	-1	-1	50	0	3	
+item_consumable_drop_str_lvl60_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Strength Stim	1	1000	0	strConsumable35	0	short_reuse_4	5	0				0											0	0			60		0	0		-1	4	-1	-1	60	0	3	
+item_consumable_drop_str_lvl70_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Improved Strength Stim	1	1000	0	strConsumable40	0	short_reuse_4	5	0				0											0	0			70		0	0		-1	4	-1	-1	70	0	3	
+item_consumable_drop_str_lvl80_01_02	object/tangible/loot/generic_usable/stim_medium_generic.iff	consumable	Advanced Strength Stim	1	1000	0	strConsumable45	0	short_reuse_4	5	0				0											0	0			80		0	0		-1	4	-1	-1	80	0	3	
 item_content_binocs_detection_03_01	object/tangible/loot/generic_usable/binoculars_s1_generic.iff	consumable	Infrared Electrobinoculars	1	1000	0	contentClickDetectionAcc	0	long_reuse_4	180	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_content_binocs_detection_03_02	object/tangible/loot/generic_usable/binoculars_s1_generic.iff	consumable	Thermal Imaging Electrobinoculars	1	1000	0	contentClickDetectionAcc2	0	long_reuse_4	1800	0				0											0	0			37		0	0		-1	-1	-1	-1	3000	0	0	
 item_content_charged_combo_acc_02_01	object/tangible/loot/generic_usable/software_module_generic.iff	consumable	Targeting Assistance Mem-Stik	1	1000	0	contentChargedComboAcc_1	0	short_reuse_4	5	0				0											0	0			1		0	0		-1	-1	-1	-1	175	0	8	Naboo/Jabba/Correlia quest reward
@@ -826,74 +826,74 @@ item_content_instrument_bandfill_03_01	object/tangible/instrument/bandfill.iff	i
 item_content_shisa_02_01	object/tangible/furniture/decorative/shisa.iff	item	Shisa	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	2800	0	0	
 item_content_veh_custom_kit_02_01	object/tangible/item/generic_vehicle_customization.iff	item	Barada's Vehicle Customization Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	75	0	5	
 item_content_veh_custom_kit_02_02	object/tangible/item/generic_vehicle_customization.iff	item	Vehicle Customization Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	2	
-item_corellia_junk_agrilat_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	338	0	0	
-item_corellia_junk_bageraset_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Bageraset Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_canoid_01_01	object/tangible/loot/creature_loot/generic/big_tooth_generic.iff	item	Canoid Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_canoid_hunter_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Canoid Hunter Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_canoid_pack_leader_01_01	object/tangible/loot/creature_loot/generic/bug_jar.iff	item	Canoid Pack Leader Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
-item_corellia_junk_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Carrion Spat Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	295	0	0	
-item_corellia_junk_corellian_butterfly_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_corellia_junk_corellian_butterfly_defender_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Defender Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	323	0	0	
-item_corellia_junk_corellian_butterfly_drone_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Drone Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_corellia_junk_corellian_butterfly_drone_large_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Large Corellian Butterfly Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_corellia_junk_corellian_butterfly_monarch_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Corellian Butterfly Larvae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	338	0	0	
-item_corellia_junk_corellian_butterfly_warrior_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Warrior Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	323	0	0	
-item_corellia_junk_corellian_butterfly_worker_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Corellian Butterfly Worker Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	254	0	0	
-item_corellia_junk_crazed_durni_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Crazed Durni Intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_crimson_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Crimson Sand Panther Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	413	0	0	
-item_corellia_junk_dalyrake_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Dalyrake Arm	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
-item_corellia_junk_dalyrake_harvester_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Dalyrake Harvester Arm	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	352	0	0	
-item_corellia_junk_deranged_wrix_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Deranged Wrix Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	309	0	0	
-item_corellia_junk_devil_gulginaw_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Devil Gulginaw Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	309	0	0	
-item_corellia_junk_dire_cat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Dire Cat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	254	0	0	
-item_corellia_junk_durni_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Durni Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_corellia_junk_dwarf_gronda_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Dwarf Gronda Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	294	0	0	
-item_corellia_junk_female_dire_cat_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dire Cat Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_female_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Forest Slice Hound Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_corellia_junk_female_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Grassland Slice Hound Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_female_sand_panther_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Sand Panther Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	398	0	0	
-item_corellia_junk_female_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Slice Hound Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_corellia_junk_forest_murra_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Forest Murra Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	291	0	0	
-item_corellia_junk_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	291	0	0	
-item_corellia_junk_giant_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Giant Carrion Spat Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_corellia_junk_giant_dalyrake_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Dalyrake Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	382	0	0	
-item_corellia_junk_giant_gubbur_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Gubbar Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	227	0	0	
-item_corellia_junk_grand_wrix_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Grand Wrix Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	382	0	0	
-item_corellia_junk_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Grassland Slice Hound Shank	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_corellia_junk_great_plains_stalker_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Great Plains Stalker Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	587	0	0	
-item_corellia_junk_greater_gulginaw_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Greater Gulginaw Guts	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	382	0	0	
-item_corellia_junk_gronda_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Gronda Jaw Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	308	0	0	
-item_corellia_junk_gronda_elder_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gronda Elder Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	323	0	0	
-item_corellia_junk_gronda_juggernaut_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Gronda Juggernaut Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	587	0	0	
-item_corellia_junk_gubbur_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Gubbur Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_corellia_junk_gulginaw_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Gulginaw Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_corellia_junk_gurrcat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Gurrcat Fang	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_corellia_junk_howling_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Howling Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_corellia_junk_humbaba_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Humbaba Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	309	0	0	
-item_corellia_junk_krahbu_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Krahbu Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	253	0	0	
-item_corellia_junk_majestic_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Majestic Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	323	0	0	
-item_corellia_junk_mottled_wrix_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Mottled Wrix Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	352	0	0	
-item_corellia_junk_mountain_murra_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Mountain Murra Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	294	0	0	
-item_corellia_junk_murra_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Murra Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	253	0	0	
-item_corellia_junk_noxious_vrelt_scavenger_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Noxious Vrelt Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	240	0	0	
-item_corellia_junk_paralope_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Paralope Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_corellia_junk_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Plumed Rasp Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_corellia_junk_rogue_bageraset_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Rogue Bageraset Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	240	0	0	
-item_corellia_junk_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Sand Panther Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	398	0	0	
-item_corellia_junk_sand_panther_cub_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Sand Panther Cub Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	382	0	0	
-item_corellia_junk_savage_humbaba_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Savage Humbaba Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	413	0	0	
-item_corellia_junk_scavenger_rat_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Scavenger Rat Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	227	0	0	
-item_corellia_junk_sharnaff_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Sharnaff Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	353	0	0	
-item_corellia_junk_sharnaff_bull_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Sharnaff Bull Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	368	0	0	
-item_corellia_junk_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	253	0	0	
-item_corellia_junk_swamp_gurrcat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Swamp Gurrcat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_corellia_junk_tabage_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Tabage Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_corellia_junk_violent_krahbu_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Violent Krahbu Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_corellia_junk_vrelt_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Vrelt Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_corellia_junk_vynock_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Vynock Wing Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	253	0	0	
-item_corellia_junk_war_gronda_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	War Gronda Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	398	0	0	
-item_corellia_junk_wooded_paralope_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Wooded Paralope Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_corellia_junk_wrix_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Wrix Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	240	0	0	
+item_corellia_junk_agrilat_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_bageraset_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Bageraset Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_canoid_01_01	object/tangible/loot/creature_loot/generic/big_tooth_generic.iff	item	Canoid Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_canoid_hunter_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Canoid Hunter Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_canoid_pack_leader_01_01	object/tangible/loot/creature_loot/generic/bug_jar.iff	item	Canoid Pack Leader Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Carrion Spat Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_defender_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Defender Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_drone_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Drone Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_drone_large_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Large Corellian Butterfly Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_monarch_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Corellian Butterfly Larvae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_warrior_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Warrior Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_corellian_butterfly_worker_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Corellian Butterfly Worker Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_crazed_durni_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Crazed Durni Intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_crimson_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Crimson Sand Panther Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_dalyrake_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Dalyrake Arm	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_dalyrake_harvester_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Dalyrake Harvester Arm	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_deranged_wrix_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Deranged Wrix Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_devil_gulginaw_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Devil Gulginaw Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_dire_cat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Dire Cat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_durni_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Durni Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_dwarf_gronda_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Dwarf Gronda Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_female_dire_cat_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dire Cat Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_female_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Forest Slice Hound Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_female_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Grassland Slice Hound Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_female_sand_panther_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Sand Panther Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_female_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Slice Hound Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_forest_murra_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Forest Murra Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_giant_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Giant Carrion Spat Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_giant_dalyrake_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Dalyrake Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_giant_gubbur_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Gubbar Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_grand_wrix_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Grand Wrix Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Grassland Slice Hound Shank	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_great_plains_stalker_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Great Plains Stalker Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_greater_gulginaw_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Greater Gulginaw Guts	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gronda_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Gronda Jaw Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gronda_elder_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gronda Elder Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gronda_juggernaut_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Gronda Juggernaut Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gubbur_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Gubbur Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gulginaw_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Gulginaw Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_gurrcat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Gurrcat Fang	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_howling_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Howling Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_humbaba_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Humbaba Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_krahbu_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Krahbu Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_majestic_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Majestic Plumed Rasp Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_mottled_wrix_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Mottled Wrix Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_mountain_murra_01_01	object/tangible/loot/creature_loot/generic/brain_s01.iff	item	Mountain Murra Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_murra_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Murra Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_noxious_vrelt_scavenger_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Noxious Vrelt Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_paralope_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Paralope Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Plumed Rasp Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_rogue_bageraset_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Rogue Bageraset Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Sand Panther Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_sand_panther_cub_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Sand Panther Cub Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_savage_humbaba_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Savage Humbaba Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_scavenger_rat_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Scavenger Rat Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_sharnaff_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Sharnaff Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_sharnaff_bull_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Sharnaff Bull Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_swamp_gurrcat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Swamp Gurrcat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_tabage_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Tabage Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_violent_krahbu_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Violent Krahbu Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_vrelt_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Vrelt Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_vynock_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Vynock Wing Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_war_gronda_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	War Gronda Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_wooded_paralope_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Wooded Paralope Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_corellia_junk_wrix_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Wrix Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_costume_kit	object/tangible/item/costume_kit/costume_kit.iff	item	Standard Holoshroud	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	1	for common costumes
 item_costume_kit_holiday	object/tangible/item/costume_kit/costume_kit_holiday.iff	item	Holiday Holoshroud	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	1	for holiday costumes
 item_crafting_display_terminal_01_01	object/tangible/terminal/crafting_assembly_terminal.iff	item	Crafting Assembly Terminal	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
@@ -1181,259 +1181,259 @@ item_junk_creature_1thru10_01_02	object/tangible/loot/creature_loot/generic/gene
 item_junk_creature_1thru10_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_creature_1thru10_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_creature_1thru10_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
-item_junk_creature_21thru30_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_creature_21thru30_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_creature_21thru30_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_creature_21thru30_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_creature_21thru30_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_creature_31thru40_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_creature_31thru40_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_creature_31thru40_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_creature_31thru40_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_creature_31thru40_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_creature_41thru50_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_creature_41thru50_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_creature_41thru50_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_creature_41thru50_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_creature_41thru50_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_creature_51thru60_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_creature_51thru60_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_creature_51thru60_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_creature_51thru60_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_creature_51thru60_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_creature_61thru70_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_creature_61thru70_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_creature_61thru70_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_creature_61thru70_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_creature_61thru70_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_creature_71thru80_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_creature_71thru80_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_creature_71thru80_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_creature_71thru80_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_creature_71thru80_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_creature_81thru90_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_creature_81thru90_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_creature_81thru90_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_creature_81thru90_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_creature_81thru90_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
+item_junk_creature_21thru30_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_21thru30_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_21thru30_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_21thru30_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_21thru30_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_31thru40_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_31thru40_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_31thru40_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_31thru40_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_31thru40_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_41thru50_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_41thru50_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_41thru50_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_41thru50_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_41thru50_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_51thru60_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_51thru60_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_51thru60_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_51thru60_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_51thru60_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_61thru70_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_61thru70_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_61thru70_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_61thru70_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_61thru70_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_71thru80_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_71thru80_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_71thru80_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_71thru80_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_71thru80_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_81thru90_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_81thru90_01_02	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_81thru90_01_03	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_81thru90_01_04	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Organ	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_creature_81thru90_01_05	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_droid_11thru15_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	80	0	0	
 item_junk_droid_11thru15_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Deprecated Droid Software	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	-1	-1	80	0	0	
 item_junk_droid_11thru15_01_03	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Worn Servo Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_droid_11thru15_01_04	object/tangible/loot/npc_loot/radio_generic.iff	item	Vocabulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_droid_11thru15_01_05	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item	Rapid Program Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
-item_junk_droid_16thru20_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	9	-1	-1	105	0	0	
-item_junk_droid_16thru20_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Burnt Out Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	4	-1	-1	105	0	0	
-item_junk_droid_16thru20_01_03	object/tangible/loot/npc_loot/datadisk_generic.iff	item	Demagnetized Datadisk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_droid_16thru20_01_04	object/tangible/loot/npc_loot/decryptor_generic.iff	item	Unpowered Memory Encryptor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_droid_16thru20_01_05	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
+item_junk_droid_16thru20_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	9	-1	-1	15	0	0	
+item_junk_droid_16thru20_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Burnt Out Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	4	-1	-1	15	0	0	
+item_junk_droid_16thru20_01_03	object/tangible/loot/npc_loot/datadisk_generic.iff	item	Demagnetized Datadisk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_16thru20_01_04	object/tangible/loot/npc_loot/decryptor_generic.iff	item	Unpowered Memory Encryptor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_16thru20_01_05	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_droid_1thru5_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	1	-1	-1	45	0	0	
 item_junk_droid_1thru5_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark I Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	11	-1	-1	45	0	0	
 item_junk_droid_1thru5_01_03	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Outdated Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_droid_1thru5_01_04	object/tangible/loot/npc_loot/comlink_civilian_generic.iff	item	Comlink	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_droid_1thru5_01_05	object/tangible/loot/npc_loot/elect_module_misc_01.iff	item	Control Box	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
-item_junk_droid_21thru25_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	-1	-1	130	0	0	
-item_junk_droid_21thru25_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark II Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	4	-1	-1	130	0	0	
-item_junk_droid_21thru25_01_03	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_droid_21thru25_01_04	object/tangible/loot/npc_loot/elect_module_simple_generic.iff	item	Untuned Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_droid_21thru25_01_05	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	Power Converter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_droid_26thru30_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	15	-1	-1	155	0	0	
-item_junk_droid_26thru30_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Weak Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	155	0	0	
-item_junk_droid_26thru30_01_03	object/tangible/loot/npc_loot/electronic_key_generic.iff	item	Restraining Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_droid_26thru30_01_04	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_droid_26thru30_01_05	object/tangible/loot/npc_loot/frequency_jammer_wire_generic.iff	item	Wire Element	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_droid_31thru35_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	19	-1	-1	185	0	0	
-item_junk_droid_31thru35_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	185	0	0	
-item_junk_droid_31thru35_01_03	object/tangible/loot/npc_loot/generator_device_generic.iff	item	Power Supply	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_droid_31thru35_01_04	object/tangible/loot/npc_loot/software_module_generic.iff	item	Mark II Vocabulation Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_droid_31thru35_01_05	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Hydraulics System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_droid_36thru40_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	24	-1	-1	215	0	0	
-item_junk_droid_36thru40_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	215	0	0	
-item_junk_droid_36thru40_01_03	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_droid_36thru40_01_04	object/tangible/loot/npc_loot/comlink_civilian_generic.iff	item	Comlink	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_droid_36thru40_01_05	object/tangible/loot/npc_loot/elect_module_misc_01.iff	item	Control Box	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_droid_41thru45_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	25	-1	-1	245	0	0	
-item_junk_droid_41thru45_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark III Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	15	-1	-1	245	0	0	
-item_junk_droid_41thru45_01_03	object/tangible/loot/npc_loot/elect_module_wires.iff	item	Emergency Reactivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_droid_41thru45_01_04	object/tangible/loot/npc_loot/impulse_detector_01_generic.iff	item	Cracked Remote Transmitter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_droid_41thru45_01_05	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item	Damaged Transceiver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_droid_46thru50_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	280	0	0	
-item_junk_droid_46thru50_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Mythra Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	24	-1	-1	280	0	0	
-item_junk_droid_46thru50_01_03	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Servo Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_droid_46thru50_01_04	object/tangible/loot/npc_loot/radio_generic.iff	item	Vocabulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_droid_46thru50_01_05	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item	Rapid Program Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_droid_51thru55_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	29	-1	-1	315	0	0	
-item_junk_droid_51thru55_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	9	-1	-1	315	0	0	
-item_junk_droid_51thru55_01_03	object/tangible/loot/npc_loot/datadisk_generic.iff	item	Datadisk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_droid_51thru55_01_04	object/tangible/loot/npc_loot/decryptor_generic.iff	item	Memory Encryptor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_droid_51thru55_01_05	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_droid_56thru60_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	32	-1	-1	350	0	0	
-item_junk_droid_56thru60_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	-1	-1	350	0	0	
-item_junk_droid_56thru60_01_03	object/tangible/loot/npc_loot/software_module_orange_generic.iff	item	Mark V Vocab Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_droid_56thru60_01_04	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_droid_56thru60_01_05	object/tangible/loot/npc_loot/elect_module_simple_generic.iff	item	Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_droid_61thru65_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	2	-1	385	0	0	
-item_junk_droid_61thru65_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark IV Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	385	0	0	
-item_junk_droid_61thru65_01_03	object/tangible/loot/npc_loot/electronic_key_generic.iff	item	Restraining Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_droid_61thru65_01_04	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_droid_61thru65_01_05	object/tangible/loot/npc_loot/frequency_jammer_wire_generic.iff	item	Wire Element	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_droid_66thru70_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	4	-1	425	0	0	
-item_junk_droid_66thru70_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Thallium Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	33	-1	-1	425	0	0	
-item_junk_droid_66thru70_01_03	object/tangible/loot/npc_loot/generator_device_generic.iff	item	Power Supply	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_droid_66thru70_01_04	object/tangible/loot/npc_loot/software_module_generic.iff	item	Mark VII Vocabulation Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_droid_66thru70_01_05	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Plugged Hydraulics System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
+item_junk_droid_21thru25_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	-1	-1	15	0	0	
+item_junk_droid_21thru25_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark II Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	4	-1	-1	15	0	0	
+item_junk_droid_21thru25_01_03	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_21thru25_01_04	object/tangible/loot/npc_loot/elect_module_simple_generic.iff	item	Untuned Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_21thru25_01_05	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	Power Converter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_26thru30_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	15	-1	-1	15	0	0	
+item_junk_droid_26thru30_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Weak Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	15	0	0	
+item_junk_droid_26thru30_01_03	object/tangible/loot/npc_loot/electronic_key_generic.iff	item	Restraining Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_26thru30_01_04	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_26thru30_01_05	object/tangible/loot/npc_loot/frequency_jammer_wire_generic.iff	item	Wire Element	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_31thru35_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	19	-1	-1	15	0	0	
+item_junk_droid_31thru35_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	15	0	0	
+item_junk_droid_31thru35_01_03	object/tangible/loot/npc_loot/generator_device_generic.iff	item	Power Supply	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_31thru35_01_04	object/tangible/loot/npc_loot/software_module_generic.iff	item	Mark II Vocabulation Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_31thru35_01_05	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Hydraulics System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_36thru40_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	24	-1	-1	15	0	0	
+item_junk_droid_36thru40_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	15	0	0	
+item_junk_droid_36thru40_01_03	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_36thru40_01_04	object/tangible/loot/npc_loot/comlink_civilian_generic.iff	item	Comlink	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_36thru40_01_05	object/tangible/loot/npc_loot/elect_module_misc_01.iff	item	Control Box	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_41thru45_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	25	-1	-1	15	0	0	
+item_junk_droid_41thru45_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark III Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	15	-1	-1	15	0	0	
+item_junk_droid_41thru45_01_03	object/tangible/loot/npc_loot/elect_module_wires.iff	item	Emergency Reactivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_41thru45_01_04	object/tangible/loot/npc_loot/impulse_detector_01_generic.iff	item	Cracked Remote Transmitter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_41thru45_01_05	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item	Damaged Transceiver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_46thru50_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	15	0	0	
+item_junk_droid_46thru50_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Mythra Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	24	-1	-1	15	0	0	
+item_junk_droid_46thru50_01_03	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Servo Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_46thru50_01_04	object/tangible/loot/npc_loot/radio_generic.iff	item	Vocabulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_46thru50_01_05	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item	Rapid Program Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_51thru55_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	29	-1	-1	15	0	0	
+item_junk_droid_51thru55_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	9	-1	-1	15	0	0	
+item_junk_droid_51thru55_01_03	object/tangible/loot/npc_loot/datadisk_generic.iff	item	Datadisk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_51thru55_01_04	object/tangible/loot/npc_loot/decryptor_generic.iff	item	Memory Encryptor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_51thru55_01_05	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_56thru60_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	32	-1	-1	15	0	0	
+item_junk_droid_56thru60_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	-1	-1	15	0	0	
+item_junk_droid_56thru60_01_03	object/tangible/loot/npc_loot/software_module_orange_generic.iff	item	Mark V Vocab Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_56thru60_01_04	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_56thru60_01_05	object/tangible/loot/npc_loot/elect_module_simple_generic.iff	item	Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_61thru65_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	2	-1	15	0	0	
+item_junk_droid_61thru65_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark IV Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	27	-1	-1	15	0	0	
+item_junk_droid_61thru65_01_03	object/tangible/loot/npc_loot/electronic_key_generic.iff	item	Restraining Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_61thru65_01_04	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_61thru65_01_05	object/tangible/loot/npc_loot/frequency_jammer_wire_generic.iff	item	Wire Element	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_66thru70_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	4	-1	15	0	0	
+item_junk_droid_66thru70_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Thallium Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	33	-1	-1	15	0	0	
+item_junk_droid_66thru70_01_03	object/tangible/loot/npc_loot/generator_device_generic.iff	item	Power Supply	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_66thru70_01_04	object/tangible/loot/npc_loot/software_module_generic.iff	item	Mark VII Vocabulation Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_66thru70_01_05	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Plugged Hydraulics System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_droid_6thru10_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	4	-1	-1	60	0	0	
 item_junk_droid_6thru10_01_02	object/tangible/loot/npc_loot/copper_battery_generic.iff	item	Desh Copper Battery	1	1000	0		0		0	0				0											0	0			1		0	0		-1	1	-1	-1	60	0	0	
 item_junk_droid_6thru10_01_03	object/tangible/loot/npc_loot/elect_module_wires.iff	item	Emergency Reactivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_droid_6thru10_01_04	object/tangible/loot/npc_loot/impulse_detector_01_generic.iff	item	Remote Transmitter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_droid_6thru10_01_05	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item	Transceiver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
-item_junk_droid_71thru75_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	22	-1	460	0	0	
-item_junk_droid_71thru75_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	0	-1	-1	460	0	0	
-item_junk_droid_71thru75_01_03	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_droid_71thru75_01_04	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_droid_71thru75_01_05	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	Power Converter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_droid_76thru82_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	27	-1	500	0	0	
-item_junk_droid_76thru82_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	22	-1	-1	500	0	0	
-item_junk_droid_76thru82_01_03	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_droid_76thru82_01_04	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Servo Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_droid_76thru82_01_05	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_droid_83plus_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	6	-1	545	0	0	
-item_junk_droid_83plus_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark V Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	545	0	0	
-item_junk_droid_83plus_01_03	object/tangible/loot/npc_loot/datapad_flashy_generic.iff	item	Datapad	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_droid_83plus_01_04	object/tangible/loot/npc_loot/software_module_red_generic.iff	item	Mark X Vocab Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_droid_83plus_01_05	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Locomotor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	35	-1	-1	545	0	0	
+item_junk_droid_71thru75_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	22	-1	15	0	0	
+item_junk_droid_71thru75_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	0	-1	-1	15	0	0	
+item_junk_droid_71thru75_01_03	object/tangible/loot/npc_loot/disk_drive_generic.iff	item	Data Housing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_71thru75_01_04	object/tangible/loot/npc_loot/elect_module_complex_generic.iff	item	Differential Regulator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_71thru75_01_05	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	Power Converter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_76thru82_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	27	-1	15	0	0	
+item_junk_droid_76thru82_01_02	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Droid Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	22	-1	-1	15	0	0	
+item_junk_droid_76thru82_01_03	object/tangible/loot/npc_loot/engineer_analysis_board_generic.iff	item	Self Analysis Circuit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_76thru82_01_04	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Servo Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_76thru82_01_05	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_83plus_01_01	object/tangible/loot/npc_loot/wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	12	6	-1	15	0	0	
+item_junk_droid_83plus_01_02	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Mark V Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	6	-1	-1	15	0	0	
+item_junk_droid_83plus_01_03	object/tangible/loot/npc_loot/datapad_flashy_generic.iff	item	Datapad	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_83plus_01_04	object/tangible/loot/npc_loot/software_module_red_generic.iff	item	Mark X Vocab Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_droid_83plus_01_05	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Locomotor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	35	-1	-1	15	0	0	
 item_junk_imitation_pearl_01_01	object/tangible/loot/npc_loot/pearl_generic.iff	item	Scratched Krayt Dragon Pearl	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	900	0	0	krayt cash prize
 item_junk_imitation_pearl_01_02	object/tangible/loot/npc_loot/pearl_generic.iff	item	Cracked Krayt Dragon Pearl	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	1200	0	0	krayt cash prize
-item_junk_insect_11thru20_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_insect_11thru20_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_insect_11thru20_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_insect_11thru20_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_insect_11thru20_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_insect_1thru10_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_insect_1thru10_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_insect_1thru10_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_insect_1thru10_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_insect_1thru10_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_insect_21thru30_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_insect_21thru30_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_insect_21thru30_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_insect_21thru30_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_insect_21thru30_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_insect_31thru40_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_insect_31thru40_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_insect_31thru40_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_insect_31thru40_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_insect_31thru40_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_insect_41thru50_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_insect_41thru50_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_insect_41thru50_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_insect_41thru50_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_insect_41thru50_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_insect_51thru60_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_insect_51thru60_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_insect_51thru60_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_insect_51thru60_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_insect_51thru60_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_insect_61thru70_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_insect_61thru70_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_insect_61thru70_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_insect_61thru70_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_insect_61thru70_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_insect_71thru80_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_insect_71thru80_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_insect_71thru80_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_insect_71thru80_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_insect_71thru80_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_insect_81thru90_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_insect_81thru90_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_insect_81thru90_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_insect_81thru90_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
-item_junk_insect_81thru90_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	975	0	0	
+item_junk_insect_11thru20_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_11thru20_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_11thru20_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_11thru20_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_11thru20_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_1thru10_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_1thru10_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_1thru10_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_1thru10_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_1thru10_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_21thru30_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_21thru30_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_21thru30_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_21thru30_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_21thru30_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_31thru40_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_31thru40_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_31thru40_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_31thru40_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_31thru40_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_41thru50_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_41thru50_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_41thru50_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_41thru50_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_41thru50_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_51thru60_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_51thru60_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_51thru60_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_51thru60_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_51thru60_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_61thru70_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_61thru70_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_61thru70_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_61thru70_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_61thru70_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_71thru80_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_71thru80_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_71thru80_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_71thru80_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_71thru80_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_81thru90_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_81thru90_01_02	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_81thru90_01_03	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_81thru90_01_04	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Nerve Complex	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_insect_81thru90_01_05	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_itv	object/tangible/veteran_reward/instant_travel_terminal.iff	item	ITV: Rattletrap	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_junk_npc_11thru15_01_01	object/tangible/loot/npc_loot/rocket_ammo_generic.iff	item	Explosive Dud	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_npc_11thru15_01_02	object/tangible/loot/npc_loot/aero_magnifier_generic.iff	item	Aeromagnifier	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_npc_11thru15_01_03	object/tangible/loot/npc_loot/rusty_toolkit_generic.iff	item	Tool Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_npc_11thru15_01_04	object/tangible/loot/npc_loot/hyperdrive_part_generic.iff	item	Hyperdrive Unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
 item_junk_npc_11thru15_01_05	object/tangible/loot/npc_loot/scope_weapon_generic.iff	item	Weapon Scope	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	80	0	0	
-item_junk_npc_16thru20_01_01	object/tangible/loot/npc_loot/cage_generic.iff	item	Wooden Cage	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_npc_16thru20_01_02	object/tangible/loot/npc_loot/serum_vial_generic.iff	item	Unidentified Serum Vial	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_npc_16thru20_01_03	object/tangible/loot/npc_loot/metal_ball_generic.iff	item	Bearing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_npc_16thru20_01_04	object/tangible/loot/npc_loot/shield_module_generic.iff	item	Shield Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
-item_junk_npc_16thru20_01_05	object/tangible/loot/npc_loot/bottle_s04_generic.iff	item	Simple Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	105	0	0	
+item_junk_npc_16thru20_01_01	object/tangible/loot/npc_loot/cage_generic.iff	item	Wooden Cage	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_16thru20_01_02	object/tangible/loot/npc_loot/serum_vial_generic.iff	item	Unidentified Serum Vial	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_16thru20_01_03	object/tangible/loot/npc_loot/metal_ball_generic.iff	item	Bearing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_16thru20_01_04	object/tangible/loot/npc_loot/shield_module_generic.iff	item	Shield Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_16thru20_01_05	object/tangible/loot/npc_loot/bottle_s04_generic.iff	item	Simple Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_npc_1thru5_01_01	object/tangible/loot/npc_loot/basket_generic.iff	item	Basket	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_npc_1thru5_01_02	object/tangible/loot/npc_loot/bowl_generic.iff	item	Simple Bowl	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_npc_1thru5_01_03	object/tangible/loot/npc_loot/clamp_generic.iff	item	Clamps	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_npc_1thru5_01_04	object/tangible/loot/npc_loot/id_chip_generic.iff	item	ID Chip	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_junk_npc_1thru5_01_05	object/tangible/loot/npc_loot/impulse_detector_01_generic.iff	item	Impulse Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
-item_junk_npc_21thru25_01_01	object/tangible/loot/npc_loot/shisa_generic.iff	item	Shisa	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_npc_21thru25_01_02	object/tangible/loot/npc_loot/healing_chemical_generic.iff	item	Unidentified Chemicals	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_npc_21thru25_01_03	object/tangible/loot/npc_loot/metal_barrel_generic.iff	item	Barrel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_npc_21thru25_01_04	object/tangible/loot/npc_loot/shoe_soul_generic.iff	item	Shoe Sole	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_npc_21thru25_01_05	object/tangible/loot/npc_loot/answering_machine_generic.iff	item	Ambush Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	130	0	0	
-item_junk_npc_26thru30_01_01	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_npc_26thru30_01_02	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_npc_26thru30_01_03	object/tangible/loot/npc_loot/software_module_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_npc_26thru30_01_04	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item	Chassis Blueprints	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_npc_26thru30_01_05	object/tangible/loot/npc_loot/metal_case_generic.iff	item	Dented Metal Case	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	155	0	0	
-item_junk_npc_31thru35_01_01	object/tangible/loot/npc_loot/speaker_generic.iff	item	Speakers	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_npc_31thru35_01_02	object/tangible/loot/npc_loot/bottle_s02_generic.iff	item	Empty Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_npc_31thru35_01_03	object/tangible/loot/npc_loot/substance_analyzer_generic.iff	item	Substance Analyzer	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_npc_31thru35_01_04	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item	Impulse Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_npc_31thru35_01_05	object/tangible/loot/npc_loot/motivator_device_generic.iff	item	Burnt Out Motivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	185	0	0	
-item_junk_npc_36thru40_01_01	object/tangible/loot/npc_loot/jewelry_ear_s04.iff	item	Cheap Jewel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_npc_36thru40_01_02	object/tangible/loot/npc_loot/bug_jar_generic.iff	item	Indigenous Bug Collection	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_npc_36thru40_01_03	object/tangible/loot/npc_loot/notebook_generic.iff	item	Used Notebook	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_npc_36thru40_01_04	object/tangible/loot/npc_loot/survival_equipment_generic.iff	item	Survival Gear	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_npc_36thru40_01_05	object/tangible/loot/npc_loot/power_output_analyzer_generic.iff	item	Power Output Analyzer	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_junk_npc_41thru45_01_01	object/tangible/loot/npc_loot/organichem_stores_generic.iff	item	Organichem Stores	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_npc_41thru45_01_02	object/tangible/loot/npc_loot/syringe_generic.iff	item	Syringe	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_npc_41thru45_01_03	object/tangible/loot/npc_loot/broad_spectrum_med_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_npc_41thru45_01_04	object/tangible/loot/npc_loot/prop_jacket_generic.iff	item	Used Jacket	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_npc_41thru45_01_05	object/tangible/loot/npc_loot/tool_bundle_generic.iff	item	Bundle of Tools	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	245	0	0	
-item_junk_npc_46thru50_01_01	object/tangible/loot/npc_loot/chem_dispersion_device_generic.iff	item	Chemical Dispersion Unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_npc_46thru50_01_02	object/tangible/loot/npc_loot/tube_paste_generic.iff	item	Dried Paste	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_npc_46thru50_01_03	object/tangible/loot/npc_loot/installation_repair_device_generic.iff	item	Unpowered Installation Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_npc_46thru50_01_04	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Tubing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_npc_46thru50_01_05	object/tangible/loot/npc_loot/blue_wiring_generic.iff	item	Used Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	280	0	0	
-item_junk_npc_51thru55_01_01	object/tangible/loot/npc_loot/writing_utensils_generic.iff	item	Writing Utensil	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_npc_51thru55_01_02	object/tangible/loot/npc_loot/large_dispersal_unit_generic.iff	item	Dispersal Unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_npc_51thru55_01_03	object/tangible/loot/npc_loot/jewelry_ear_s02.iff	item	Costume Ear Bead	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_npc_51thru55_01_04	object/tangible/loot/npc_loot/bacta_ampules_generic.iff	item	Spent Bacta Ampules	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_npc_51thru55_01_05	object/tangible/loot/npc_loot/radio_generic.iff	item	Com Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	315	0	0	
-item_junk_npc_56thru60_01_01	object/tangible/loot/npc_loot/id_chip_generic.iff	item	Used ID Chip	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_npc_56thru60_01_02	object/tangible/loot/npc_loot/clothing_repair_device_generic.iff	item	Clothing Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_npc_56thru60_01_03	object/tangible/loot/npc_loot/ration_kit_device_generic.iff	item	Rations Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_npc_56thru60_01_04	object/tangible/loot/npc_loot/survey_pad_adv_generic.iff	item	Unpowered Survey Pad	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_npc_56thru60_01_05	object/tangible/loot/npc_loot/laser_trap_generic.iff	item	Laser Trap	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	350	0	0	
-item_junk_npc_61thru65_01_01	object/tangible/loot/npc_loot/rebreather_generic.iff	item	Clogged Rebreather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_npc_61thru65_01_02	object/tangible/loot/npc_loot/ledger_generic.iff	item	Used Ledger	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_npc_61thru65_01_03	object/tangible/loot/npc_loot/handheld_viewscreen_1_generic.iff	item	Vidscreen	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_npc_61thru65_01_04	object/tangible/loot/npc_loot/recording_rod_generic.iff	item	Recording Rod	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_npc_61thru65_01_05	object/tangible/loot/npc_loot/shield_module_generic.iff	item	Shield Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	385	0	0	
-item_junk_npc_66thru70_01_01	object/tangible/loot/npc_loot/armor_repair_device_generic.iff	item	Armor Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_npc_66thru70_01_02	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_npc_66thru70_01_03	object/tangible/loot/npc_loot/medical_console_generic.iff	item	Medical Console	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_npc_66thru70_01_04	object/tangible/loot/npc_loot/hyperdrive_part_generic.iff	item	Speeder Drive	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
-item_junk_npc_66thru70_01_05	object/tangible/loot/npc_loot/camera_generic.iff	item	Worklight	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	425	0	0	
+item_junk_npc_21thru25_01_01	object/tangible/loot/npc_loot/shisa_generic.iff	item	Shisa	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_21thru25_01_02	object/tangible/loot/npc_loot/healing_chemical_generic.iff	item	Unidentified Chemicals	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_21thru25_01_03	object/tangible/loot/npc_loot/metal_barrel_generic.iff	item	Barrel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_21thru25_01_04	object/tangible/loot/npc_loot/shoe_soul_generic.iff	item	Shoe Sole	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_21thru25_01_05	object/tangible/loot/npc_loot/answering_machine_generic.iff	item	Ambush Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_26thru30_01_01	object/tangible/loot/npc_loot/small_motor_generic.iff	item	Motor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_26thru30_01_02	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_26thru30_01_03	object/tangible/loot/npc_loot/software_module_generic.iff	item	Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_26thru30_01_04	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item	Chassis Blueprints	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_26thru30_01_05	object/tangible/loot/npc_loot/metal_case_generic.iff	item	Dented Metal Case	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_31thru35_01_01	object/tangible/loot/npc_loot/speaker_generic.iff	item	Speakers	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_31thru35_01_02	object/tangible/loot/npc_loot/bottle_s02_generic.iff	item	Empty Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_31thru35_01_03	object/tangible/loot/npc_loot/substance_analyzer_generic.iff	item	Substance Analyzer	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_31thru35_01_04	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item	Impulse Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_31thru35_01_05	object/tangible/loot/npc_loot/motivator_device_generic.iff	item	Burnt Out Motivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_36thru40_01_01	object/tangible/loot/npc_loot/jewelry_ear_s04.iff	item	Cheap Jewel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_36thru40_01_02	object/tangible/loot/npc_loot/bug_jar_generic.iff	item	Indigenous Bug Collection	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_36thru40_01_03	object/tangible/loot/npc_loot/notebook_generic.iff	item	Used Notebook	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_36thru40_01_04	object/tangible/loot/npc_loot/survival_equipment_generic.iff	item	Survival Gear	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_36thru40_01_05	object/tangible/loot/npc_loot/power_output_analyzer_generic.iff	item	Power Output Analyzer	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_41thru45_01_01	object/tangible/loot/npc_loot/organichem_stores_generic.iff	item	Organichem Stores	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_41thru45_01_02	object/tangible/loot/npc_loot/syringe_generic.iff	item	Syringe	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_41thru45_01_03	object/tangible/loot/npc_loot/broad_spectrum_med_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_41thru45_01_04	object/tangible/loot/npc_loot/prop_jacket_generic.iff	item	Used Jacket	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_41thru45_01_05	object/tangible/loot/npc_loot/tool_bundle_generic.iff	item	Bundle of Tools	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_46thru50_01_01	object/tangible/loot/npc_loot/chem_dispersion_device_generic.iff	item	Chemical Dispersion Unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_46thru50_01_02	object/tangible/loot/npc_loot/tube_paste_generic.iff	item	Dried Paste	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_46thru50_01_03	object/tangible/loot/npc_loot/installation_repair_device_generic.iff	item	Unpowered Installation Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_46thru50_01_04	object/tangible/loot/npc_loot/tubed_device_generic.iff	item	Tubing	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_46thru50_01_05	object/tangible/loot/npc_loot/blue_wiring_generic.iff	item	Used Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_51thru55_01_01	object/tangible/loot/npc_loot/writing_utensils_generic.iff	item	Writing Utensil	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_51thru55_01_02	object/tangible/loot/npc_loot/large_dispersal_unit_generic.iff	item	Dispersal Unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_51thru55_01_03	object/tangible/loot/npc_loot/jewelry_ear_s02.iff	item	Costume Ear Bead	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_51thru55_01_04	object/tangible/loot/npc_loot/bacta_ampules_generic.iff	item	Spent Bacta Ampules	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_51thru55_01_05	object/tangible/loot/npc_loot/radio_generic.iff	item	Com Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_56thru60_01_01	object/tangible/loot/npc_loot/id_chip_generic.iff	item	Used ID Chip	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_56thru60_01_02	object/tangible/loot/npc_loot/clothing_repair_device_generic.iff	item	Clothing Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_56thru60_01_03	object/tangible/loot/npc_loot/ration_kit_device_generic.iff	item	Rations Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_56thru60_01_04	object/tangible/loot/npc_loot/survey_pad_adv_generic.iff	item	Unpowered Survey Pad	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_56thru60_01_05	object/tangible/loot/npc_loot/laser_trap_generic.iff	item	Laser Trap	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_61thru65_01_01	object/tangible/loot/npc_loot/rebreather_generic.iff	item	Clogged Rebreather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_61thru65_01_02	object/tangible/loot/npc_loot/ledger_generic.iff	item	Used Ledger	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_61thru65_01_03	object/tangible/loot/npc_loot/handheld_viewscreen_1_generic.iff	item	Vidscreen	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_61thru65_01_04	object/tangible/loot/npc_loot/recording_rod_generic.iff	item	Recording Rod	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_61thru65_01_05	object/tangible/loot/npc_loot/shield_module_generic.iff	item	Shield Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_66thru70_01_01	object/tangible/loot/npc_loot/armor_repair_device_generic.iff	item	Armor Repair Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_66thru70_01_02	object/tangible/loot/npc_loot/medical_device_generic.iff	item	Medical Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_66thru70_01_03	object/tangible/loot/npc_loot/medical_console_generic.iff	item	Medical Console	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_66thru70_01_04	object/tangible/loot/npc_loot/hyperdrive_part_generic.iff	item	Speeder Drive	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_66thru70_01_05	object/tangible/loot/npc_loot/camera_generic.iff	item	Worklight	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_junk_npc_6thru10_01_01	object/tangible/loot/npc_loot/bottle_s03_generic.iff	item	Colored Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_npc_6thru10_01_02	object/tangible/loot/npc_loot/launcher_tube_generic.iff	item	Launcher Tube	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_npc_6thru10_01_03	object/tangible/loot/npc_loot/ledger_generic.iff	item	Ledger	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_npc_6thru10_01_04	object/tangible/loot/npc_loot/cloth_box_generic.iff	item	Cloth Box	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
 item_junk_npc_6thru10_01_05	object/tangible/loot/npc_loot/magseal_detector_generic.iff	item	Magseal Detector	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	60	0	0	
-item_junk_npc_71thru75_01_01	object/tangible/loot/npc_loot/clamp_generic.iff	item	Molecular Clamp	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_npc_71thru75_01_02	object/tangible/loot/npc_loot/jewelry_setting_generic.iff	item	Costume Jewelry Setting	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_npc_71thru75_01_03	object/tangible/loot/npc_loot/red_wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_npc_71thru75_01_04	object/tangible/loot/npc_loot/rocket_generic.iff	item	Rocket Dud	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_npc_71thru75_01_05	object/tangible/loot/npc_loot/bottle_s01_generic.iff	item	Cracked Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	460	0	0	
-item_junk_npc_76thru82_01_01	object/tangible/loot/npc_loot/briefcase_generic.iff	item	Attache Case	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_npc_76thru82_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Tech Canister	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_npc_76thru82_01_03	object/tangible/loot/npc_loot/chance_cube_8_generic.iff	item	Loaded Chance Cube	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_npc_76thru82_01_04	object/tangible/loot/npc_loot/clipon_id_badge_generic.iff	item	ID Badge	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_npc_76thru82_01_05	object/tangible/loot/npc_loot/software_module_generic.iff	item	Wiped Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_junk_npc_83plus_01_01	object/tangible/loot/npc_loot/artifact_generic.iff	item	Collapsed Artifact	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_npc_83plus_01_02	object/tangible/loot/npc_loot/jewelry_ear_s13.iff	item	Ear Jewel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_npc_83plus_01_03	object/tangible/loot/npc_loot/handheld_viewscreen_2_generic.iff	item	Used Vidscreen	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_npc_83plus_01_04	object/tangible/loot/npc_loot/power_output_analyzer_generic.iff	item	Power Output Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
-item_junk_npc_83plus_01_05	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	545	0	0	
+item_junk_npc_71thru75_01_01	object/tangible/loot/npc_loot/clamp_generic.iff	item	Molecular Clamp	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_71thru75_01_02	object/tangible/loot/npc_loot/jewelry_setting_generic.iff	item	Costume Jewelry Setting	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_71thru75_01_03	object/tangible/loot/npc_loot/red_wiring_generic.iff	item	Wiring	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_71thru75_01_04	object/tangible/loot/npc_loot/rocket_generic.iff	item	Rocket Dud	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_71thru75_01_05	object/tangible/loot/npc_loot/bottle_s01_generic.iff	item	Cracked Bottle	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_76thru82_01_01	object/tangible/loot/npc_loot/briefcase_generic.iff	item	Attache Case	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_76thru82_01_02	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item	Tech Canister	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_76thru82_01_03	object/tangible/loot/npc_loot/chance_cube_8_generic.iff	item	Loaded Chance Cube	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_76thru82_01_04	object/tangible/loot/npc_loot/clipon_id_badge_generic.iff	item	ID Badge	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_76thru82_01_05	object/tangible/loot/npc_loot/software_module_generic.iff	item	Wiped Software Module	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_83plus_01_01	object/tangible/loot/npc_loot/artifact_generic.iff	item	Collapsed Artifact	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_83plus_01_02	object/tangible/loot/npc_loot/jewelry_ear_s13.iff	item	Ear Jewel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_83plus_01_03	object/tangible/loot/npc_loot/handheld_viewscreen_2_generic.iff	item	Used Vidscreen	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_83plus_01_04	object/tangible/loot/npc_loot/power_output_analyzer_generic.iff	item	Power Output Device	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_junk_npc_83plus_01_05	object/tangible/loot/npc_loot/circuit_board_generic.iff	item	Circuit Board	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_katiara_gravestone_quest_item	object/tangible/quest/nova_orion/nova_orion_katiara_gravestone.iff	item	Katiara's Gravestone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	1	0	
 item_katiara_toy	object/tangible/loot/quest/nova_orion/stuffed_star_destroyer.iff	item	Katiara's Toy	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_katiara_toy_quest_item	object/tangible/loot/quest/nova_orion/stuffed_star_destroyer_quest_item.iff	item	Katiara's Toy	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	1	0	
@@ -1485,27 +1485,27 @@ item_meatlump_device_food_01	object/tangible/meatlump/event/slicing_device_meatl
 item_meatlump_device_map_01	object/tangible/meatlump/event/slicing_device_meatlump_map.iff	item	Decryptor	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	24	
 item_meatlump_device_safe_01	object/tangible/meatlump/event/slicing_device_meatlump_safe.iff	item	Safe Slicer	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	24	
 item_meatlump_device_weapon_01	object/tangible/meatlump/event/slicing_device_meatlump_weapon.iff	item	Power Cell Abatement	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	24	
-item_meatlump_junkloot_bedroll_01_01	object/tangible/loot/dungeon/meatlump/musty_smelling_bedroll.iff	item	a Musty Smelling Bedroll	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	300	0	0	
+item_meatlump_junkloot_bedroll_01_01	object/tangible/loot/dungeon/meatlump/musty_smelling_bedroll.iff	item	a Musty Smelling Bedroll	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_meatlump_junkloot_datapad_picture_01_01	object/tangible/loot/dungeon/meatlump/picture_of_mom.iff	item	a Datapad Picture	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	50	0	0	
-item_meatlump_junkloot_drainstopper_01_01	object/tangible/loot/dungeon/meatlump/drain_stopper.iff	item	a Drain Stopper	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_flaring_kit_01_01	object/tangible/loot/dungeon/meatlump/flaring_swagging_cutting_kit.iff	item	a Flaring, Swagging and Cutting Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	
-item_meatlump_junkloot_handtorch_01_01	object/tangible/loot/dungeon/meatlump/hand_torch.iff	item	a Hand Torch	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_instrument_pouch_01_01	object/tangible/loot/dungeon/meatlump/instrument_pouch.iff	item	an Instrument Pouch	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_leak_system_01_01	object/tangible/loot/dungeon/meatlump/leak_inspection_system.iff	item	a Leak Inspection System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	800	0	0	
-item_meatlump_junkloot_lumpclip_01_01	object/tangible/loot/dungeon/meatlump/lump_clip.iff	item	a Lump Clip	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_magnetic_locator_01_01	object/tangible/loot/dungeon/meatlump/magnetic_locator.iff	item	a Magnetic Locator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	400	0	0	
-item_meatlump_junkloot_pet_01_01	object/tangible/loot/dungeon/meatlump/meatlump_pet_01.iff	item	Baxter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	800	0	0	
-item_meatlump_junkloot_pet_01_02	object/tangible/loot/dungeon/meatlump/meatlump_pet_02.iff	item	Weezy	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	800	0	0	
-item_meatlump_junkloot_pet_01_03	object/tangible/loot/dungeon/meatlump/meatlump_pet_03.iff	item	Comet	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	800	0	0	
+item_meatlump_junkloot_drainstopper_01_01	object/tangible/loot/dungeon/meatlump/drain_stopper.iff	item	a Drain Stopper	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_flaring_kit_01_01	object/tangible/loot/dungeon/meatlump/flaring_swagging_cutting_kit.iff	item	a Flaring, Swagging and Cutting Kit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_handtorch_01_01	object/tangible/loot/dungeon/meatlump/hand_torch.iff	item	a Hand Torch	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_instrument_pouch_01_01	object/tangible/loot/dungeon/meatlump/instrument_pouch.iff	item	an Instrument Pouch	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_leak_system_01_01	object/tangible/loot/dungeon/meatlump/leak_inspection_system.iff	item	a Leak Inspection System	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_lumpclip_01_01	object/tangible/loot/dungeon/meatlump/lump_clip.iff	item	a Lump Clip	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_magnetic_locator_01_01	object/tangible/loot/dungeon/meatlump/magnetic_locator.iff	item	a Magnetic Locator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_pet_01_01	object/tangible/loot/dungeon/meatlump/meatlump_pet_01.iff	item	Baxter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_pet_01_02	object/tangible/loot/dungeon/meatlump/meatlump_pet_02.iff	item	Weezy	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_pet_01_03	object/tangible/loot/dungeon/meatlump/meatlump_pet_03.iff	item	Comet	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_meatlump_junkloot_petrified_meatlump_01_01	object/tangible/loot/dungeon/meatlump/petrified_meatlump.iff	item	a Petrified Meatlump	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	50	0	0	
 item_meatlump_junkloot_pie_01_01	object/tangible/loot/dungeon/meatlump/half_eaten_pie.iff	item	a Half Eaten Pie	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	50	0	0	
-item_meatlump_junkloot_pipe_cutter_01_01	object/tangible/loot/dungeon/meatlump/pipe_cutter.iff	item	a Pipe Cutter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_plunger_01_01	object/tangible/loot/dungeon/meatlump/plunger.iff	item	a Plunger	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	0	
-item_meatlump_junkloot_pressure_gauge_01_01	object/tangible/loot/dungeon/meatlump/pressure_guage.iff	item	a Pressure Gauge	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	0	
-item_meatlump_junkloot_sculpture_01_01	object/tangible/loot/dungeon/meatlump/meatlump_sculpture_01.iff	item	a Meatlump Sculpture, Style 1	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_sculpture_01_02	object/tangible/loot/dungeon/meatlump/meatlump_sculpture_02.iff	item	a Meatlump Sculpture, Style 2	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	200	0	0	
-item_meatlump_junkloot_temperature_clamp_01_01	object/tangible/loot/dungeon/meatlump/temperature_clamp.iff	item	a Temperature Clamp	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	300	0	0	
-item_meatlump_junkloot_towel_01_01	object/tangible/loot/dungeon/meatlump/clean_towel.iff	item	a Clean Towel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	300	0	0	
+item_meatlump_junkloot_pipe_cutter_01_01	object/tangible/loot/dungeon/meatlump/pipe_cutter.iff	item	a Pipe Cutter	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_plunger_01_01	object/tangible/loot/dungeon/meatlump/plunger.iff	item	a Plunger	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_pressure_gauge_01_01	object/tangible/loot/dungeon/meatlump/pressure_guage.iff	item	a Pressure Gauge	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_sculpture_01_01	object/tangible/loot/dungeon/meatlump/meatlump_sculpture_01.iff	item	a Meatlump Sculpture, Style 1	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_sculpture_01_02	object/tangible/loot/dungeon/meatlump/meatlump_sculpture_02.iff	item	a Meatlump Sculpture, Style 2	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_temperature_clamp_01_01	object/tangible/loot/dungeon/meatlump/temperature_clamp.iff	item	a Temperature Clamp	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_meatlump_junkloot_towel_01_01	object/tangible/loot/dungeon/meatlump/clean_towel.iff	item	a Clean Towel	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_meatlump_lump_01_01	object/tangible/loot/dungeon/meatlump/meatlump_lump.iff	item	Meatlump Lump	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_meatlump_lump_unfinished_01_01	object/tangible/meatlump/hideout/meatlump_lump_unfinished.iff	item	An Unmarked Meatlump Lump	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_mini_vehicle_terminal_awing	object/tangible/furniture/terminal/terminal_mini_vehicle.iff	item	Terminal Control for Miniature A-Wing Toy	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
@@ -1514,42 +1514,42 @@ item_mini_vehicle_terminal_basilisk	object/tangible/furniture/terminal/terminal_
 item_mtp_hideout_quest_comlink	object/tangible/meatlump/event/quest_comlink.iff	item	Smuggler Shuttle Comlink	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	meatlump quest item
 item_mtp_king_corellia_times_story	object/tangible/meatlump/hideout/mtp_king_story.iff	item	a copy of Vani Korr's second Meatlump article	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_mtp_meatlump_king_reward	object/tangible/meatlump/reward/mtp_king_cutout.iff	item	The Meatlump King: The Cardboardening	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	ToW expansion
-item_naboo_junk_alpha_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Alpha Veermok Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	146	0	0	
-item_naboo_junk_elder_female_swamp_tusk_cat_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Elder Female Tusk Cat Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
-item_naboo_junk_elder_male_swamp_tusk_cat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Elder Male Tusk Cat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_naboo_junk_fambaa_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Fambaa Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	179	0	0	
-item_naboo_junk_giant_peko_peko_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Giant Peko Peko Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_naboo_junk_giant_veermok_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Giant Veermok Lungs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	257	0	0	
-item_naboo_junk_gungan_falumpaset_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Gungan Falumpaset Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_naboo_junk_gungan_fambaa_01_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Gungan Fambaa Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_naboo_junk_gungan_kaadu_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Gungan Fambaa Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_naboo_junk_gungan_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Gungan Veermok Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_naboo_junk_ikopi_stag_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Ikopi Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
+item_naboo_junk_alpha_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Alpha Veermok Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_elder_female_swamp_tusk_cat_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Elder Female Tusk Cat Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_elder_male_swamp_tusk_cat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Elder Male Tusk Cat Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_fambaa_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Fambaa Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_giant_peko_peko_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Giant Peko Peko Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_giant_veermok_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Giant Veermok Lungs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_gungan_falumpaset_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Gungan Falumpaset Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_gungan_fambaa_01_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Gungan Fambaa Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_gungan_kaadu_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Gungan Fambaa Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_gungan_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Gungan Veermok Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_ikopi_stag_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Ikopi Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_naboo_junk_kaadu_female_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Kaadu Female Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	91	0	0	
-item_naboo_junk_mauler_veermok_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Mauler Veermok Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	665	0	0	
-item_naboo_junk_naboo_greater_shaupaut_elder_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Greater Shaupaut Elder Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
-item_naboo_junk_naboo_shaupaut_elder_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Shaupaut Elder Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_naboo_junk_naboo_shaupaut_hunter_elder_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Shaupaut Hunter Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	267	0	0	
-item_naboo_junk_naboo_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Veermok Arm Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_naboo_junk_naboo_veermok_guard_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Veermok Guard Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	241	0	0	
-item_naboo_junk_naboo_veermok_ravager_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Veermok Ravager Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	254	0	0	
-item_naboo_junk_naboo_veermok_scavenger_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Veermok Ravager Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
-item_naboo_junk_naboo_veermok_scout_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Veermok Scout Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	228	0	0	
-item_naboo_junk_naboo_veermok_sentry_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Veermok Sentry Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	241	0	0	
-item_naboo_junk_narglatch_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Narglatch Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	163	0	0	
-item_naboo_junk_narglatch_cub_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Narglatch Cub Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	157	0	0	
-item_naboo_junk_narglatch_female_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Narglatch Female Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_naboo_junk_nightspider_dirtcrawler_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Nightspider Dirtcrawler Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	168	0	0	
-item_naboo_junk_nightspider_vinecrawler_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Nightspider Vinecrawler Mandible	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_naboo_junk_nightspider_vineripper_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Nightspider Vineripper Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	157	0	0	
-item_naboo_junk_nightspider_vineshredder_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Nightspider Vineshredder Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	168	0	0	
-item_naboo_junk_peko_peko_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Peko Peko Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	0	
-item_naboo_junk_peko_peko_albatross_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Peko Peko Albatross Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	974	0	0	
-item_naboo_junk_rogue_fambaa_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Rogue Fambaa Innards	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_naboo_junk_shaupaut_hunter_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Shaupat Hunter Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	168	0	0	
-item_naboo_junk_spitting_rawl_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Spitting Rawl Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_naboo_junk_swamp_stalker_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Swamp Stalker Fang	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
-item_naboo_junk_vine_rawl_01_01	object/tangible/loot/creature_loot/generic/lizard_scale_generic.iff	item	Vine Rawl Scale	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	137	0	0	
+item_naboo_junk_mauler_veermok_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Mauler Veermok Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_greater_shaupaut_elder_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Greater Shaupaut Elder Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_shaupaut_elder_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Shaupaut Elder Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_shaupaut_hunter_elder_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Shaupaut Hunter Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Veermok Arm Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_guard_01_01	object/tangible/loot/creature_loot/generic/humanoid_skull.iff	item	Veermok Guard Skull	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_ravager_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Veermok Ravager Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_scavenger_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Veermok Ravager Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_scout_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Veermok Scout Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_naboo_veermok_sentry_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Veermok Sentry Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_narglatch_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Narglatch Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_narglatch_cub_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Narglatch Cub Jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_narglatch_female_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Narglatch Female Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_nightspider_dirtcrawler_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Nightspider Dirtcrawler Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_nightspider_vinecrawler_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Nightspider Vinecrawler Mandible	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_nightspider_vineripper_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Nightspider Vineripper Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_nightspider_vineshredder_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Nightspider Vineshredder Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_peko_peko_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Peko Peko Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_peko_peko_albatross_01_01	object/tangible/loot/creature_loot/generic/generic_feather.iff	item	Peko Peko Albatross Feather	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_rogue_fambaa_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Rogue Fambaa Innards	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_shaupaut_hunter_01_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	Shaupat Hunter Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_spitting_rawl_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Spitting Rawl Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_swamp_stalker_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Swamp Stalker Fang	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_naboo_junk_vine_rawl_01_01	object/tangible/loot/creature_loot/generic/lizard_scale_generic.iff	item	Vine Rawl Scale	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_nova_orion_space_resource_01_01	object/tangible/space/story_loot/nova_orion_crystal.iff	item	Midlithe Crystal	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_npe_dance_prop_l_entertainer_02_01	object/tangible/dance_prop/generic_prop_sparkler_l.iff	item	Dance Sparkler (left)	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	250	0	0	
 item_npe_dance_prop_r_entertainer_02_01	object/tangible/dance_prop/generic_prop_sparkler_r.iff	item	Dance Sparkler (right)	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	250	0	0	
@@ -1803,60 +1803,60 @@ item_stage_pyrotechnic_01_01	object/tangible/item/publish_gift_magic_painting_ct
 item_stage_smoke_01_01	object/tangible/item/publish_gift_magic_painting_ctrl_obj.iff	item	Stage Smoke Machine	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_storage_increase_05_03	object/tangible/loot/generic_usable/generic_storage_increase.iff	item	A Crate for Increased Building Storage	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_storage_increase_05_04	object/tangible/loot/generic_usable/generic_storage_increase.iff	item	A Crate for Increased Building Storage	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
-item_tatooine_junk_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	Bantha Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	0	
-item_tatooine_junk_bocatt_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Bocatt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	127	0	0	
-item_tatooine_junk_bull_bantha_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Bull Bantha Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	108	0	0	
-item_tatooine_junk_canyon_krayt_dragon_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Krayt Pearl Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	973	0	0	
+item_tatooine_junk_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	Bantha Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_bocatt_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Bocatt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_bull_bantha_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Bull Bantha Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_canyon_krayt_dragon_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Krayt Pearl Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_cu_pa_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Cu pa Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	92	0	0	
-item_tatooine_junk_desert_razorback_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Desert Razorback Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	191	0	0	
-item_tatooine_junk_desert_squill_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Desert Squill Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	146	0	0	
-item_tatooine_junk_dewback_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Dewback Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	127	0	0	
+item_tatooine_junk_desert_razorback_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Desert Razorback Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_desert_squill_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Desert Squill Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_dewback_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Dewback Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_dewback_cannibal_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Cannibal Dewback Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	92	0	0	
-item_tatooine_junk_dim_u_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Dim-U Bantha Foot	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	37	0	0	
+item_tatooine_junk_dim_u_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Dim-U Bantha Foot	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_domestic_eopie_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Eopie Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	30	0	0	
-item_tatooine_junk_dragonet_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Dragonet Intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	203	0	0	
-item_tatooine_junk_dune_bantha_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dune Bantha Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	157	0	0	
+item_tatooine_junk_dragonet_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Dragonet Intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_dune_bantha_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dune Bantha Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_dwarf_bantha	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dwarf Bantha Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	71	0	0	
 item_tatooine_junk_dwarf_eopie	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Dwarf Eopie Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	32	0	0	
 item_tatooine_junk_dwarf_nuna_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Dwarf Nuna Jaw Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	32	0	0	
 item_tatooine_junk_eopie_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Eopie Innards	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	40	0	0	
-item_tatooine_junk_feral_bantha_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Feral Bantha Lungs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	109	0	0	
+item_tatooine_junk_feral_bantha_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Feral Bantha Lungs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_giant_canyon_krayt_dragon_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Canyon Krayt Dragon Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	1008	0	0	
-item_tatooine_junk_giant_sand_beetle_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Sand Beetle Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	215	0	0	
+item_tatooine_junk_giant_sand_beetle_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Sand Beetle Larva	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_giant_worrt_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Giant Worrt Leg Parts	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	92	0	0	
 item_tatooine_junk_gorg_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Gorg Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	34	0	0	
 item_tatooine_junk_greater_desert_womprat_01_01	object/tangible/loot/creature_loot/generic/bug_jar.iff	item	Desert Womprat Mites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	84	0	0	
-item_tatooine_junk_jundland_eopie_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Jundland Eopie Entrails	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	168	0	0	
-item_tatooine_junk_juvenile_canyon_krayt_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Juvenile Krayt Talon Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	980	0	0	
-item_tatooine_junk_krayt_dragon_ancient_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Ancient Krayt Pearl Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	1019	0	0	
+item_tatooine_junk_jundland_eopie_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Jundland Eopie Entrails	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_juvenile_canyon_krayt_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Juvenile Krayt Talon Joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_krayt_dragon_ancient_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Ancient Krayt Pearl Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_kreetle_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Kreetle Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	32	0	0	
 item_tatooine_junk_lesser_desert_womprat_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Desert Womprat Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	34	0	0	
 item_tatooine_junk_lesser_dewback_01_01	object/tangible/loot/creature_loot/generic/lizard_scale_generic.iff	item	Lesser Dewback Scale	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
-item_tatooine_junk_malignant_squill_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Malignant Squill Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	587	0	0	
-item_tatooine_junk_matriarch_bantha_01_01	object/tangible/loot/creature_loot/generic/big_tooth_generic.iff	item	Matriarch Bantha Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	109	0	0	
+item_tatooine_junk_malignant_squill_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Malignant Squill Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_matriarch_bantha_01_01	object/tangible/loot/creature_loot/generic/big_tooth_generic.iff	item	Matriarch Bantha Tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_minor_worrt_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Minor Worrt Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	32	0	0	
 item_tatooine_junk_mound_mite_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Mound Mite Mandible	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	41	0	0	
-item_tatooine_junk_mountain_dewback_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Mountain Dewback Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	180	0	0	
-item_tatooine_junk_mountain_squill_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Mountain Squill Arm Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	203	0	0	
-item_tatooine_junk_mountain_worrt_01_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Mountain Worrt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	146	0	0	
+item_tatooine_junk_mountain_dewback_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Mountain Dewback Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_mountain_squill_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Mountain Squill Arm Bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_mountain_worrt_01_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	Mountain Worrt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_mutant_womprat_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Mutant Womprat Eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	85	0	0	
 item_tatooine_junk_rill_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Rill Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	34	0	0	
-item_tatooine_junk_rock_beetle_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Rock Beetle Larvae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	137	0	0	
-item_tatooine_junk_rockmite_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Rock Mite Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	37	0	0	
-item_tatooine_junk_rogue_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	Rogue Bantha Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	100	0	0	
-item_tatooine_junk_ronto_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Ronto Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	127	0	0	
-item_tatooine_junk_ronto_male_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Male Ronto Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	136	0	0	
+item_tatooine_junk_rock_beetle_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Rock Beetle Larvae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_rockmite_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Rock Mite Antennae	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_rogue_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	Rogue Bantha Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_ronto_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Ronto Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
+item_tatooine_junk_ronto_male_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Male Ronto Liver	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_scyk_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Scyk Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	78	0	0	
 item_tatooine_junk_sevorrt_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Sevorrt Innards	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	45	0	0	
 item_tatooine_junk_squill_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Squill Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	85	0	0	
 item_tatooine_junk_swarming_lesser_dewback_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Swarming Lesser Dewback Heart	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	85	0	0	
 item_tatooine_junk_tatooine_mynock_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Mynock Digestive Gland	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	34	0	0	
-item_tatooine_junk_tusken_bantha_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Tusken Bantha Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	281	0	0	
+item_tatooine_junk_tusken_bantha_01_01	object/tangible/loot/creature_loot/generic/stomach_s02.iff	item	Tusken Bantha Stomach	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_variegated_womprat_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Variegated Womprat Leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	85	0	0	
-item_tatooine_junk_wild_dune_boar_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Wild Dune Boar Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	587	0	0	
+item_tatooine_junk_wild_dune_boar_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Wild Dune Boar Tusk	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_womprat_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Womprat Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	41	0	0	
 item_tatooine_junk_womprat_city_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Womprat Parasites	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	34	0	0	
-item_tatooine_junk_worrt_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Worrt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	37	0	0	
+item_tatooine_junk_worrt_01_01	object/tangible/loot/creature_loot/generic/alien_brain.iff	item	Worrt Brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	
 item_tatooine_junk_zucca_boar_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Zucca Boar Hoof	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	59	0	0	
 item_tcg_loot_reward_series1_bas_relief	object/tangible/tcg/series1/decorative_bas_relief.iff	item	Great Hyperspace War Bas-Relief	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
 item_tcg_loot_reward_series1_chon_bust	object/tangible/tcg/series1/decorative_chon_bust.iff	item	Chon Actrion Bust	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	0	0	0	
@@ -2006,29 +2006,29 @@ item_tow_decor_sith_relic_02_01	object/tangible/loot/mustafar/sith_relic_01.iff	
 item_tow_decor_stuffed_bantha_02_01	object/tangible/loot/mustafar/stuff_bantha_doll.iff	item	Stuffed Bantha	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
 item_tow_decor_stuffed_dewback_02_01	object/tangible/loot/mustafar/stuffed_dewback_doll.iff	item	Stuffed Dewback	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
 item_tow_decor_stuffed_rancor_02_01	object/tangible/loot/mustafar/stuff_rancor_doll.iff	item	Stuffed Rancor Doll	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
-item_tow_junk_creature_antenna_02_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	a Mustafarian insect antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_blood_02_01	object/tangible/loot/npc_loot/serum_vial_generic.iff	item	a bottle of Mustafarian creature blood	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_bone_02_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	a Mustafarian creature bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_brain_02_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	a Mustafarian creature brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_eye_02_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	a blistmok eyeball	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_hide_02_01	object/tangible/loot/creature_loot/generic/generic_hide.iff	item	a patch of tough hide	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_horn_02_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	a tulrus horn	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_intestines_02_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Mustafarian creature intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_jaw_02_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	a xandank jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_mandible_02_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	a Mustafarian insect mandible	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_talon_02_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	a jundak talon	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_creature_tooth_02_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	a tanray tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_droid_memory_unit_02_01	object/tangible/loot/npc_loot/software_module_generic.iff	item	a damaged droid memory unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_droid_motivator_02_01	object/tangible/loot/npc_loot/small_motor_generic.iff	item	a damaged droid motivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_droid_power_cell_02_01	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	a damaged droid power cell	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_insect_eye_02_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	a Mustafarian insect eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_insect_leg_02_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	a lava flea leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_insect_shell_02_01	object/tangible/loot/npc_loot/bug_jar_generic.iff	item	a kubaza beetle shell	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_jewelry_onyx_02_01	object/tangible/loot/npc_loot/jewelry_ear_s12.iff	item	a piece of onyx jewelry	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_lava_rock_02_01	object/tangible/loot/npc_loot/rock_generic.iff	item	a decorated lava rock	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_lava_tongs_02_01	object/tangible/loot/npc_loot/clamp_generic.iff	item	a pair of lava rock tongs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_mining_tool_02_01	object/tangible/loot/npc_loot/installation_repair_device_generic.iff	item	a small mining tool	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
-item_tow_junk_swivel_joint_02_01	object/tangible/loot/npc_loot/shield_module_generic.iff	item	a damaged droid swivel joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	500	0	0	ToW Junk
+item_tow_junk_creature_antenna_02_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	a Mustafarian insect antenna	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_blood_02_01	object/tangible/loot/npc_loot/serum_vial_generic.iff	item	a bottle of Mustafarian creature blood	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_bone_02_01	object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff	item	a Mustafarian creature bone	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_brain_02_01	object/tangible/loot/creature_loot/generic/generic_brain.iff	item	a Mustafarian creature brain	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_eye_02_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	a blistmok eyeball	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_hide_02_01	object/tangible/loot/creature_loot/generic/generic_hide.iff	item	a patch of tough hide	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_horn_02_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	a tulrus horn	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_intestines_02_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Mustafarian creature intestines	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_jaw_02_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	a xandank jaw	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_mandible_02_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	a Mustafarian insect mandible	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_talon_02_01	object/tangible/loot/creature_loot/generic/generic_horn.iff	item	a jundak talon	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_creature_tooth_02_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	a tanray tooth	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_droid_memory_unit_02_01	object/tangible/loot/npc_loot/software_module_generic.iff	item	a damaged droid memory unit	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_droid_motivator_02_01	object/tangible/loot/npc_loot/small_motor_generic.iff	item	a damaged droid motivator	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_droid_power_cell_02_01	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item	a damaged droid power cell	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_insect_eye_02_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	a Mustafarian insect eye	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_insect_leg_02_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	a lava flea leg	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_insect_shell_02_01	object/tangible/loot/npc_loot/bug_jar_generic.iff	item	a kubaza beetle shell	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_jewelry_onyx_02_01	object/tangible/loot/npc_loot/jewelry_ear_s12.iff	item	a piece of onyx jewelry	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_lava_rock_02_01	object/tangible/loot/npc_loot/rock_generic.iff	item	a decorated lava rock	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_lava_tongs_02_01	object/tangible/loot/npc_loot/clamp_generic.iff	item	a pair of lava rock tongs	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_mining_tool_02_01	object/tangible/loot/npc_loot/installation_repair_device_generic.iff	item	a small mining tool	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
+item_tow_junk_swivel_joint_02_01	object/tangible/loot/npc_loot/shield_module_generic.iff	item	a damaged droid swivel joint	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	15	0	0	ToW Junk
 item_tow_misc_dance_prop_l_02_01	object/tangible/dance_prop/generic_must_prop_baton_01_l.iff	item	Weighted Dance Baton	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
 item_tow_misc_dance_prop_l_02_02	object/tangible/dance_prop/generic_must_prop_baton_02_l.iff	item	Dance Baton (Left)	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
 item_tow_misc_dance_prop_l_02_03	object/tangible/dance_prop/generic_must_prop_baton_03_l.iff	item	Flat Blade Dance Baton (Left)	1	1000	0		0		0	0				0											0	0			1		0	0		-1	-1	-1	-1	6500	0	0	ToW expansion
