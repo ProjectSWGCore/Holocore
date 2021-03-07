@@ -133,7 +133,7 @@ spawn_endor_130	ENDOR	end_mummer_bunker	AREA	9	-53.6	-20.0	76.4	0	1	an elite Bla
 spawn_endor_131	ENDOR	end_dwb	AREA	1	-32.3	-12.0	-9.0	85	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_132	ENDOR	end_dwb	AREA	1	-32.2	-12.0	-2.6	177	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_133	ENDOR	end_dwb	AREA	10	-124.9	-20.0	-20.3	179	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
-spawn_endor_134	ENDOR	end_dwb	AREA	10	-127.4	-20.0	-27.2	58	1	Black Sun Guard	humanoid_dwb_guard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+spawn_endor_134	ENDOR	end_dwb	AREA	10	-127.4	-20.0	-27.2	58	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_135	ENDOR	end_dwb	AREA	10	-128.4	-20.0	-19.5	94	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_136	ENDOR	end_dwb	AREA	11	-132.9	-20.0	-53.3	93	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_137	ENDOR	end_dwb	AREA	11	-128.6	-20.0	-52.6	179	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
@@ -142,7 +142,7 @@ spawn_endor_139	ENDOR	end_dwb	AREA	12	-92.6	-20.0	-80.3	89	1	Battle Droid	droid_
 spawn_endor_140	ENDOR	end_dwb	AREA	12	-82.9	-20.0	-80.0	-90	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_141	ENDOR	end_dwb	AREA	12	-73.6	-20.0	-89.7	-174	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_142	ENDOR	end_dwb	AREA	12	-73.4	-20.0	-100.4	-15	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
-spawn_endor_143	ENDOR	end_dwb	AREA	12	-93.0	-20.0	-96.3	88	1	Black Sun Guard	humanoid_dwb_guard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+spawn_endor_143	ENDOR	end_dwb	AREA	12	-93.0	-20.0	-96.3	88	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_144	ENDOR	end_dwb	AREA	12	-59.7	-20.0	-53.1	-88	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	80	86	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_145	ENDOR	end_dwb	AREA	13	-62.8	-20.0	-72.9	103	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_146	ENDOR	end_dwb	AREA	13	-54.5	-20.0	-73.2	-89	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
@@ -156,7 +156,7 @@ spawn_endor_153	ENDOR	end_dwb	AREA	15	-88.3	-20.0	-114.8	34	1	Black Sun Assassin
 spawn_endor_154	ENDOR	end_dwb	AREA	15	-83.2	-20.0	-117.2	-40	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_155	ENDOR	end_dwb	AREA	16	-58.8	-20.0	-40.9	-89	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_156	ENDOR	end_dwb	AREA	16	-23.4	-20.0	-40.7	97	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
-spawn_endor_157	ENDOR	end_dwb	AREA	16	-37.9	-20.0	-46.7	-1	1	Black Sun Guard	humanoid_dwb_guard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+spawn_endor_157	ENDOR	end_dwb	AREA	16	-37.9	-20.0	-46.7	-1	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_158	ENDOR	end_dwb	AREA	16	-3.7	-20.0	-47.5	-1	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_159	ENDOR	end_dwb	AREA	16	-79.8	-20.0	-40.6	85	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	80	86	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_160	ENDOR	end_dwb	AREA	17	-30.7	-20.0	-56.8	172	1	Mara Jade	humanoid_itp_imperial_mara_jade	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			1800
@@ -203,7 +203,7 @@ spawn_endor_200	ENDOR	end_dwb	AREA	27	49.4	-32.0	-51.0	-85	1	Battle Droid	droid_
 spawn_endor_201	ENDOR	end_dwb	AREA	28	99.2	-32.0	-83.1	-1	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_202	ENDOR	end_dwb	AREA	28	98.4	-32.0	-93.1	-53	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_203	ENDOR	end_dwb	AREA	28	86.9	-32.0	-84.2	174	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	88	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
-spawn_endor_204	ENDOR	end_dwb	AREA	29	90.7	-32.0	-68.1	164	1	Black Sun Guard	humanoid_dwb_guard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+spawn_endor_204	ENDOR	end_dwb	AREA	29	90.7	-32.0	-68.1	164	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_205	ENDOR	end_dwb	AREA	29	96.0	-32.0	-56.4	-163	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_206	ENDOR	end_dwb	AREA	29	91.9	-32.0	-56.3	178	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600
 spawn_endor_207	ENDOR	end_dwb	AREA	30	112.9	-32.0	-80.6	-88	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	86	90	Dungeon	DWB	1	IDLE	0	0	-	idle			600

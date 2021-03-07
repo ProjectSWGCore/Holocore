@@ -151,10 +151,9 @@ class LootGenerationService : Service() {
 	
 	private fun sendRareLootPackets(chest: SWGObject, corpse: CreatureObject, killer: CreatureObject) {
 		val effect = PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse.objectId, "")
-		val sound = PlayMusicMessage(0, "sound/rare_loot_chest.snd", 1, false)
 		val box = ShowLootBox(killer.objectId, longArrayOf(chest.objectId))
 
-		killer.owner?.sendPacket(effect, sound, box)
+		killer.owner?.sendPacket(effect, box)
 	}
 	
 	private class NPCLoot(val isDropCredits: Boolean, val npcTables: MutableList<NPCLootTable> = ArrayList())

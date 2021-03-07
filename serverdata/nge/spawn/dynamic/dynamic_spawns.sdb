@@ -231,7 +231,7 @@ durni_crazed	lair_durni	creature	FALSE		AGGRESSIVE	CORELLIA	creature_durni_craze
 durni_fiendish	lair_durni_grassland	creature	FALSE		ATTACKABLE	CORELLIA	creature_durni_fiendish	creature_durni_crazed	creature_durni			
 durni_sedated	lair_durni_mountain	creature	FALSE		ATTACKABLE	CORELLIA	creature_durni_sedated	creature_durni_fiendish	creature_durni_crazed	creature_durni		
 durni_warrior_vehement	lair_durni_mountain	creature	FALSE		AGGRESSIVE	CORELLIA	creature_durni_warrior_vehement	creature_durni_sedated	creature_durni_fiendish	creature_durni_crazed	creature_durni	
-dwb	objective_data_terminal	npc	FALSE		AGGRESSIVE	ENDOR	humanoid_dwb_henchman	humanoid_dwb_thug	humanoid_dwb_guard	humanoid_dwb_guard		
+dwb	objective_data_terminal	npc	FALSE		AGGRESSIVE	ENDOR	humanoid_dwb_assassin	humanoid_dwb_henchman	humanoid_dwb_thug	humanoid_dwb_guard	humanoid_dwb_guard	
 eopie	lair_eopie;lair_eopie_mountain;lair_eopie_wasteland	creature	FALSE		ATTACKABLE	TATOOINE	creature_eopie	creature_eopie	creature_eopie			
 eopie_desert	lair_eopie_desert	creature	FALSE		ATTACKABLE	TATOOINE	creature_eopie_desert	creature_eopie	creature_eopie			
 eopie_dune	lair_eopie_dune	creature	FALSE		ATTACKABLE	TATOOINE	creature_eopie_jundland	creature_eopie_desert	creature_eopie			

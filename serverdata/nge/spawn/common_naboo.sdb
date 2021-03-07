@@ -62,13 +62,13 @@ spawn_naboo_59	NABOO	nab_world	AREA	0	5026	360	-1432.8	35	1	a businessman	humano
 spawn_naboo_60	NABOO	nab_world	AREA	0	4766.3	330	-1294.4	18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
 spawn_naboo_61	NABOO	nab_world	AREA	0	4755.6	330	-1329	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
 spawn_naboo_62	NABOO	nab_world	AREA	0	4633.7	330	-1345.6	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
-spawn_naboo_63	NABOO	nab_world	AREA	0	4713.4	330	-1353.7	-168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
+spawn_naboo_63	NABOO	nab_world	AREA	0	4713.4	330	-1353.7	-168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	10	0	-	idle			600
 spawn_naboo_64	NABOO	nab_world	AREA	0	4900.9	360	-1425.7	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
 spawn_naboo_65	NABOO	nab_world	AREA	0	4928.2	360	-1423.8	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
 spawn_naboo_66	NABOO	nab_world	AREA	0	4959.1	360	-1429.7	103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	3	LOITER	10	0	-	idle			600
 spawn_naboo_67	NABOO	nab_world	AREA	0	4958.6	360	-1527.3	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
 spawn_naboo_68	NABOO	nab_world	AREA	0	5012.6	360	-1542.3	103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
-spawn_naboo_69	NABOO	nab_world	AREA	0	5124.4	350	-1490.1	32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
+spawn_naboo_69	NABOO	nab_world	AREA	0	5124.4	350	-1490.1	32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	10	0	-	idle			600
 spawn_naboo_70	NABOO	nab_world	AREA	0	5105.6	350	-1520.2	59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
 spawn_naboo_71	NABOO	nab_world	AREA	0	5041.7	360	-1431.5	-25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
 spawn_naboo_72	NABOO	nab_world	AREA	0	5029.8	360	-1452.9	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	2	LOITER	10	0	-	idle			600
@@ -294,7 +294,7 @@ spawn_naboo_291	NABOO	nab_world	AREA	0	1341.7	13	2747.7	-78	1	a commoner	humanoi
 spawn_naboo_292	NABOO	nab_world	AREA	0	1255.6	13	2754.1	163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_293	NABOO	nab_world	AREA	0	1232.6	13	2774	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	3	LOITER	10	0	-	idle			600
 spawn_naboo_294	NABOO	nab_world	AREA	0	1258.3	13	2771.2	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
-spawn_naboo_295	NABOO	nab_world	AREA	0	1257.9	13	2793.3	-10	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
+spawn_naboo_295	NABOO	nab_world	AREA	0	1257.9	13	2793.3	-10	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	10	0	-	idle			600
 spawn_naboo_296	NABOO	nab_world	AREA	0	1243.1	13	2793.1	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_297	NABOO	nab_world	AREA	0	1309.9	13	2832.1	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
 spawn_naboo_298	NABOO	nab_world	AREA	0	1363.7	13	2853.4	18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
@@ -314,7 +314,7 @@ spawn_naboo_311	NABOO	nab_world	AREA	0	1845.3	12	2464.3	147	1	a commoner	humanoi
 spawn_naboo_312	NABOO	nab_world	AREA	0	1890.7	12	2380.3	112	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
 spawn_naboo_313	NABOO	nab_world	AREA	0	1939	12	2359.2	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_314	NABOO	nab_world	AREA	0	1949.9	12	2382.4	3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	3	LOITER	10	0	-	idle			600
-spawn_naboo_315	NABOO	nab_world	AREA	0	1952.2	12	2419.4	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
+spawn_naboo_315	NABOO	nab_world	AREA	0	1952.2	12	2419.4	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	10	0	-	idle			600
 spawn_naboo_316	NABOO	nab_world	AREA	0	1977.9	12	2497.7	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_317	NABOO	nab_world	AREA	0	1965.4	12	2477.1	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_318	NABOO	nab_world	AREA	0	1884	12	2636.9	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
@@ -324,7 +324,7 @@ spawn_naboo_321	NABOO	nab_world	AREA	0	1834.5	12	2728.1	-70	1	a commoner	humanoi
 spawn_naboo_322	NABOO	nab_world	AREA	0	1811.3	12	2730.7	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
 spawn_naboo_323	NABOO	nab_world	AREA	0	1723.5	12	2716.6	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
 spawn_naboo_324	NABOO	nab_world	AREA	0	1713	12	2699.9	-149	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
-spawn_naboo_325	NABOO	nab_world	AREA	0	1730.1	40	2799.9	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
+spawn_naboo_325	NABOO	nab_world	AREA	0	1730.1	40	2799.9	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	10	0	-	idle			600
 spawn_naboo_326	NABOO	nab_world	AREA	0	1750.7	40	2815.1	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	2	LOITER	10	0	-	idle			600
 spawn_naboo_327	NABOO	nab_world	AREA	0	2010.8	40	2799.9	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
 spawn_naboo_328	NABOO	nab_world	AREA	0	1993.5	30	2714.8	116	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
@@ -463,7 +463,7 @@ spawn_naboo_460	NABOO	nab_world	AREA	0	4718.7	3.8	-4945.6	91	1	a businessman	hum
 spawn_naboo_461	NABOO	nab_world	AREA	0	4900	6.3	-4805.6	161	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	conversation			600
 spawn_naboo_462	NABOO	nab_world	AREA	0	4901	6.3	-4807.8	-37	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	conversation			600
 spawn_naboo_463	NABOO	nab_world	AREA	0	4801.1	4.3	-4870.5	37	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_naboo_464	NABOO	nab_world	AREA	0	4806	4.2	-4710.4	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	2	LOITER	10	0	-	idle			600
+spawn_naboo_464	NABOO	nab_world	AREA	0	4806	4.2	-4710.4	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	10	0	-	idle			600
 spawn_naboo_465	NABOO	nab_world	AREA	0	4763.8	4.2	-4727.8	-121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
 spawn_naboo_466	NABOO	nab_world	AREA	0	4810.1	4.2	-4664.6	-176	1	a commoner	humanoid_commoner_ishitib	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_467	NABOO	nab_world	AREA	0	4885.3	3.8	-4823	-105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	3	LOITER	10	0	-	idle			600
@@ -474,7 +474,7 @@ spawn_naboo_471	NABOO	nab_world	AREA	0	4707.4	3.8	-4828.9	-30	1	a commoner	human
 spawn_naboo_472	NABOO	nab_world	AREA	0	4675.8	3.8	-4752	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
 spawn_naboo_473	NABOO	nab_world	AREA	0	4687.8	4.7	-4899.4	-4	1	a commoner	humanoid_commoner_gran	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	conversation			600
 spawn_naboo_474	NABOO	nab_world	AREA	0	4687.7	4.7	-4896.9	180	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	conversation			600
-spawn_naboo_475	NABOO	nab_world	AREA	0	4769.7	3.8	-4957.3	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	2	LOITER	10	0	-	idle			600
+spawn_naboo_475	NABOO	nab_world	AREA	0	4769.7	3.8	-4957.3	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	10	0	-	idle			600
 spawn_naboo_476	NABOO	nab_world	AREA	0	4851.9	3.8	-4916.5	13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
 spawn_naboo_477	NABOO	nab_world	AREA	0	4917.5	3.8	-4894.4	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
 spawn_naboo_478	NABOO	nab_world	AREA	0	4957.2	3.8	-4874.4	-5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
@@ -657,12 +657,12 @@ spawn_naboo_654	NABOO	nab_theed_theater	AREA	1	7.2	0.6	-3.2	178	1	a storyteller 
 spawn_naboo_655	NABOO	nab_theed_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_656	NABOO	nab_world	PATROL	0	-5769.4	6.5	4313.5	9	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_10300	column	idle			600
 spawn_naboo_657	NABOO	nab_world	AREA	0	-4917.1	6	4116.9	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_658	NABOO	nab_world	AREA	0	-4982.8	6	4230.5	-103	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_658	NABOO	nab_world	AREA	0	-4982.8	6	4230.5	-103	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_659	NABOO	nab_world	AREA	0	-5503.7	6	4374.5	-58	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_660	NABOO	nab_world	AREA	0	-5510.4	14	4463.4	121	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_661	NABOO	nab_world	AREA	0	-5765.5	6	4130	84	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_662	NABOO	nab_world	AREA	0	-5679.4	6	4110.5	-147	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_663	NABOO	nab_world	AREA	0	-5496.5	6	4386.4	108	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
+spawn_naboo_663	NABOO	nab_world	AREA	0	-5496.5	6	4386.4	108	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_664	NABOO	nab_world	PATROL	0	-5552.1	6.5	4234.2	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_9700	column	idle			600
 spawn_naboo_665	NABOO	nab_world	PATROL	0	-5247.9	6.9	4619.9	12	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_10200	column	idle			600
 spawn_naboo_666	NABOO	nab_world	AREA	0	-5581.3	-149.1	-65.9	-94	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -674,18 +674,18 @@ spawn_naboo_671	NABOO	nab_world	AREA	0	-5570.1	-150	-51.3	-36	1	a commoner	human
 spawn_naboo_672	NABOO	nab_world	AREA	0	-5560.9	-150	-64.7	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_673	NABOO	nab_world	AREA	0	-4945	6	4108.2	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_674	NABOO	nab_world	AREA	0	-4924.9	6	4130.2	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
-spawn_naboo_675	NABOO	nab_world	AREA	0	-4899.3	6	4119.1	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_675	NABOO	nab_world	AREA	0	-4899.3	6	4119.1	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_676	NABOO	nab_world	AREA	0	-4857.7	6	4113	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_677	NABOO	nab_world	AREA	0	-4826.1	6	4114.9	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_677	NABOO	nab_world	AREA	0	-4826.1	6	4114.9	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_678	NABOO	nab_world	AREA	0	-4814.8	6	4099.1	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_679	NABOO	nab_world	AREA	0	-4841.7	6	4107.2	-104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_680	NABOO	nab_world	AREA	0	-4867.9	6	4101	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_681	NABOO	nab_world	AREA	0	-4882.2	6	4123.7	-23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_682	NABOO	nab_world	AREA	0	-4882.9	6	4152.1	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_683	NABOO	nab_world	AREA	0	-4986.3	6	4124.7	168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_684	NABOO	nab_world	AREA	0	-4940.1	6	4073.2	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_684	NABOO	nab_world	AREA	0	-4940.1	6	4073.2	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_685	NABOO	nab_world	AREA	0	-4981.3	6	4030	19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_686	NABOO	nab_world	AREA	0	-5010.9	6	4054.2	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_686	NABOO	nab_world	AREA	0	-5010.9	6	4054.2	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_687	NABOO	nab_world	AREA	0	-5021.8	6	4080.4	29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_688	NABOO	nab_world	AREA	0	-5044.2	6	4133.1	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_689	NABOO	nab_world	AREA	0	-4935.1	6	4193.7	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
@@ -697,7 +697,7 @@ spawn_naboo_694	NABOO	nab_world	AREA	0	-5104.1	6	4205.5	-100	1	a commoner	humano
 spawn_naboo_695	NABOO	nab_world	AREA	0	-5102.7	6	4243.7	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_696	NABOO	nab_world	AREA	0	-5103.8	6	4273.7	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_697	NABOO	nab_world	AREA	0	-5132.5	6	4297.4	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
-spawn_naboo_698	NABOO	nab_world	AREA	0	-5162.2	6	4318.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_698	NABOO	nab_world	AREA	0	-5162.2	6	4318.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_699	NABOO	nab_world	AREA	0	-5199.8	6	4316.3	-111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_700	NABOO	nab_world	AREA	0	-5150.6	6	4305.1	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_701	NABOO	nab_world	AREA	0	-5127.8	6	4279.3	139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
@@ -712,16 +712,16 @@ spawn_naboo_709	NABOO	nab_world	AREA	0	-5234.3	6	4194	130	1	a commoner	humanoid_
 spawn_naboo_710	NABOO	nab_world	AREA	0	-5200.1	6	4150.9	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_711	NABOO	nab_world	AREA	0	-5182.5	6	4143.8	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_712	NABOO	nab_world	AREA	0	-5218.7	6	4169.3	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_713	NABOO	nab_world	AREA	0	-5472.4	6	4384.1	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	4	LOITER	10	0	-	idle			600
+spawn_naboo_713	NABOO	nab_world	AREA	0	-5472.4	6	4384.1	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_714	NABOO	nab_world	AREA	0	-5520	6	4390.3	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_715	NABOO	nab_world	AREA	0	-5519	6	4358.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_715	NABOO	nab_world	AREA	0	-5519	6	4358.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_716	NABOO	nab_world	AREA	0	-5492.1	6	4344.7	118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_717	NABOO	nab_world	AREA	0	-5475.6	6	4330.5	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_718	NABOO	nab_world	AREA	0	-5495.9	6	4322.1	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_718	NABOO	nab_world	AREA	0	-5495.9	6	4322.1	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_719	NABOO	nab_world	AREA	0	-5500.1	6	4289	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_720	NABOO	nab_world	AREA	0	-5524.6	6	4268.4	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_720	NABOO	nab_world	AREA	0	-5524.6	6	4268.4	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_721	NABOO	nab_world	AREA	0	-5501.3	6	4252.2	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_722	NABOO	nab_world	AREA	0	-5472.9	6	4266.4	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_722	NABOO	nab_world	AREA	0	-5472.9	6	4266.4	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_723	NABOO	nab_world	AREA	0	-5482.8	6	4243.4	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_724	NABOO	nab_world	AREA	0	-5509.6	6	4230.8	-116	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_725	NABOO	nab_world	AREA	0	-5518.4	6	4208	-88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
@@ -737,30 +737,30 @@ spawn_naboo_734	NABOO	nab_world	AREA	0	-5490.5	6	4118.6	1	1	a commoner	humanoid_
 spawn_naboo_735	NABOO	nab_world	AREA	0	-5658.6	6	4479.2	-73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_736	NABOO	nab_world	AREA	0	-5618.4	6	4486.9	41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_737	NABOO	nab_world	AREA	0	-5760.2	6	4384.8	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_738	NABOO	nab_world	AREA	0	-5730.6	6	4286.8	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
+spawn_naboo_738	NABOO	nab_world	AREA	0	-5730.6	6	4286.8	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_739	NABOO	nab_world	AREA	0	-5698.9	6	4284.6	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_740	NABOO	nab_world	AREA	0	-5815.6	6	4290	-76	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_741	NABOO	nab_world	AREA	0	-5839.7	6	4263.8	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_741	NABOO	nab_world	AREA	0	-5839.7	6	4263.8	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_742	NABOO	nab_world	AREA	0	-5883.9	6	4263.7	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
 spawn_naboo_743	NABOO	nab_world	AREA	0	-5918.8	6	4238	-97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_744	NABOO	nab_world	AREA	0	-5951.9	6	4241.9	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_745	NABOO	nab_world	AREA	0	-5890.2	6	4239.6	70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
+spawn_naboo_745	NABOO	nab_world	AREA	0	-5890.2	6	4239.6	70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_746	NABOO	nab_world	AREA	0	-5859.2	6	4259.6	123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_747	NABOO	nab_world	AREA	0	-5863.8	6	4215.2	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_748	NABOO	nab_world	AREA	0	-5847.7	6	4181.2	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
-spawn_naboo_749	NABOO	nab_world	AREA	0	-5842.8	6	4153.3	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	3	LOITER	10	0	-	idle			600
+spawn_naboo_749	NABOO	nab_world	AREA	0	-5842.8	6	4153.3	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_750	NABOO	nab_world	AREA	0	-5809.2	6	4131.1	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_751	NABOO	nab_world	AREA	0	-5749.6	6	4150.1	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_752	NABOO	nab_world	AREA	0	-5725.4	6	4129	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_753	NABOO	nab_world	AREA	0	-5695	6	4128	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_754	NABOO	nab_world	AREA	0	-5624.9	6	4135.4	6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_755	NABOO	nab_world	AREA	0	-5704	6.5	4183.2	-41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_756	NABOO	nab_world	AREA	0	-5657.5	6	4229.1	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	4	LOITER	10	0	-	idle			600
+spawn_naboo_756	NABOO	nab_world	AREA	0	-5657.5	6	4229.1	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_757	NABOO	nab_world	AREA	0	-5674.4	6	4275.7	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
 spawn_naboo_758	NABOO	nab_world	AREA	0	-5686.3	6	4299.2	-51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_759	NABOO	nab_world	AREA	0	-5710.1	6	4299.8	-105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_760	NABOO	nab_world	AREA	0	-5662.9	6	4249.8	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_761	NABOO	nab_world	AREA	0	-5617.2	6	4168.6	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_761	NABOO	nab_world	AREA	0	-5617.2	6	4168.6	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_762	NABOO	nab_world	AREA	0	-5633.1	6	4146.1	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_763	NABOO	nab_world	AREA	0	-5611.9	6	4149.3	91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_764	NABOO	nab_world	AREA	0	-5625.4	6	4105.2	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
@@ -777,7 +777,7 @@ spawn_naboo_774	NABOO	nab_world	AREA	0	-5979.2	6	4308.5	-99	1	a commoner	humanoi
 spawn_naboo_775	NABOO	nab_world	AREA	0	-5973.7	6	4264.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_776	NABOO	nab_world	AREA	0	-5967.1	6	4223.9	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_777	NABOO	nab_world	AREA	0	-5985.3	6	4291.2	17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_778	NABOO	nab_world	AREA	0	-5876.3	6	4344.5	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_778	NABOO	nab_world	AREA	0	-5876.3	6	4344.5	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_779	NABOO	nab_world	AREA	0	-5841.6	6	4295.3	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_780	NABOO	nab_world	AREA	0	-5838.3	6	4209.7	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_781	NABOO	nab_world	AREA	0	-5834.1	6	4175.7	176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
@@ -801,7 +801,7 @@ spawn_naboo_798	NABOO	nab_world	AREA	0	-5575.7	-149.1	-67.2	141	1	a noble	humano
 spawn_naboo_799	NABOO	nab_world	AREA	0	-5431.5	6	4166.6	-3	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_800	NABOO	nab_world	AREA	0	-5573.6	-149.1	-70.1	-36	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_801	NABOO	nab_world	AREA	0	-5861	6.6	4183.9	-163	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_802	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	2	LOITER	10	0	-	idle			600
+spawn_naboo_802	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
 spawn_naboo_803	NABOO	nab_world	AREA	0	-5488.4	-150	-4.5	176	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_804	NABOO	nab_world	AREA	0	-5861.2	6.6	4181.6	-95	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_805	NABOO	nab_world	AREA	0	-5638.6	-157.4	-37.2	-84	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -859,16 +859,16 @@ spawn_naboo_856	NABOO	nab_world	AREA	0	-4821.0	6.0	4140.0	-136	1	a profession co
 spawn_naboo_857	NABOO	nab_world	PATROL	0	-4704.9	6.0	4017.0	130	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_8600	column	idle			600
 spawn_naboo_858	NABOO	nab_world	AREA	0	-4703.4	6.0	3933.6	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
 spawn_naboo_859	NABOO	nab_world	AREA	0	-4670.5	6.0	3976.4	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
-spawn_naboo_860	NABOO	nab_world	AREA	0	-4663.3	6.0	4021.5	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
+spawn_naboo_860	NABOO	nab_world	AREA	0	-4663.3	6.0	4021.5	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	6	0	-	idle			600
 spawn_naboo_861	NABOO	nab_world	AREA	0	-4629.8	6.0	3938.3	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
 spawn_naboo_862	NABOO	nab_world	AREA	0	-4599.4	6.0	3981.2	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
 spawn_naboo_863	NABOO	nab_world	AREA	0	-4577.3	6.0	4042.2	0	1	a terrorist	humanoid_naboo_theed_terrorist_carbine	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
 spawn_naboo_864	NABOO	nab_world	AREA	0	-4664.0	6.0	3904.1	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
 spawn_naboo_865	NABOO	nab_world	AREA	0	-4644.4	6.0	3991.9	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
-spawn_naboo_866	NABOO	nab_world	AREA	0	-4622.3	6.0	4084.3	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
+spawn_naboo_866	NABOO	nab_world	AREA	0	-4622.3	6.0	4084.3	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	6	0	-	idle			600
 spawn_naboo_867	NABOO	nab_world	AREA	0	-4610.2	6.0	4148.7	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	4	0	-	idle			600
 spawn_naboo_868	NABOO	nab_world	AREA	0	-4561.0	6.0	4116.8	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
-spawn_naboo_869	NABOO	nab_world	AREA	0	-4553.4	6.0	4080.9	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	2	LOITER	6	0	-	idle			600
+spawn_naboo_869	NABOO	nab_world	AREA	0	-4553.4	6.0	4080.9	0	1	a terrorist	humanoid_naboo_theed_terrorist_sword	AGGRESSIVE	N	25	35	City	Theed	1	LOITER	6	0	-	idle			600
 spawn_naboo_870	NABOO	nab_world	PATROL	0	1362.3	12.1	2753.0	-165	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_10400	column	idle			600
 spawn_naboo_871	NABOO	nab_world	PATROL	0	1576.5	24.1	2842.8	23	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_11000	column	idle			600
 spawn_naboo_872	NABOO	nab_world	AREA	0	-5112.5	4.8	4597.1	159	1	Ados Jarkey	humanoid_naboo_theed_ados_jarkey	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -1412,7 +1412,7 @@ spawn_naboo_1409	NABOO	nab_kaadara_old_war_bunker	AREA	9	-6.3	-13.8	-2.2	30	1	a 
 spawn_naboo_1410	NABOO	nab_world	AREA	0	5605.8	-207.2	6923.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	1	LOITER	6	0	-	idle			600
 spawn_naboo_1411	NABOO	nab_world	AREA	0	5583.7	-206.3	6904.4	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	2	LOITER	6	0	-	idle			600
 spawn_naboo_1412	NABOO	nab_world	AREA	0	5582.1	-209.5	6946.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	1	LOITER	6	0	-	idle			600
-spawn_naboo_1413	NABOO	nab_world	AREA	0	5540.6	-207.2	6916.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	2	LOITER	6	0	-	idle			600
+spawn_naboo_1413	NABOO	nab_world	AREA	0	5540.6	-207.2	6916.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	1	LOITER	6	0	-	idle			600
 spawn_naboo_1414	NABOO	nab_world	AREA	0	5533.4	-208.7	6935.1	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	25	35	Dungeon	Old War Bunker	1	LOITER	6	0	-	idle			600
 spawn_naboo_1415	NABOO	nab_pirate_bunker	PATROL	10	3.4	-12.0	20.3	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	AGGRESSIVE	N	25	35	Dungeon	Pirate Bunker	1	PATROL	0	patrol_nab_7300	column	idle			600
 spawn_naboo_1416	NABOO	nab_pirate_bunker	AREA	2	-4.6	0.3	-3.5	36	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	25	35	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
@@ -1737,7 +1737,7 @@ spawn_naboo_1734	NABOO	nab_world	AREA	0	4877.3	-207.6	6398.8	0	1	a Beachcomber s
 spawn_naboo_1735	NABOO	nab_world	AREA	0	5024.7	39.7	4154.0	0	1	a bounty hunter	humanoid_bounty_hunter	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1736	NABOO	nab_world	AREA	0	-6080.2	-209.1	5943.3	0	1	a Bounty Hunter	humanoid_bounty_hunter	AGGRESSIVE	E	35	40	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1737	NABOO	nab_world	AREA	0	-2944.9	10.8	1698.6	0	1	a brigand scout	humanoid_brigade_scout	AGGRESSIVE	N	20	30	Outback	Naboo	1	LOITER	4	0	-	idle			600
-spawn_naboo_1738	NABOO	nab_world	AREA	0	-4941.4	-196.4	4716.5	0	1	a devious looking Ankura Gungan	humanoid_gungan_ankura_devious	ATTACKABLE	N	25	35	Outback	Naboo	6	TURN	15	0	-	idle			600
+spawn_naboo_1738	NABOO	nab_world	AREA	0	-4941.4	-196.4	4716.5	0	1	a devious looking Ankura Gungan	humanoid_gungan_ankura_devious	ATTACKABLE	N	25	35	Outback	Naboo	3	TURN	15	0	-	idle			600
 spawn_naboo_1739	NABOO	nab_world	AREA	0	-6081.0	-196.5	6767.8	0	1	a dread pirate	humanoid_dread_pirate	AGGRESSIVE	N	20	30	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1740	NABOO	nab_world	AREA	0	4777.2	241.6	-2284.5	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1741	NABOO	nab_world	AREA	0	4762.0	262.4	-2242.6	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
@@ -1754,9 +1754,9 @@ spawn_naboo_1751	NABOO	nab_world	AREA	0	1214.4	226.8	-1258.3	0	1	a giant fanned 
 spawn_naboo_1752	NABOO	nab_world	AREA	0	-4471.6	295.4	-3479.5	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1753	NABOO	nab_world	AREA	0	-4452.0	294.4	-3450.0	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1754	NABOO	nab_world	AREA	0	-4428.1	304.8	-3424.8	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
-spawn_naboo_1755	NABOO	nab_world	AREA	0	-236.6	12.1	2806.7	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1755	NABOO	nab_world	AREA	0	-236.6	12.1	2806.7	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1756	NABOO	nab_world	AREA	0	-288.5	12.8	2829.4	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
-spawn_naboo_1757	NABOO	nab_world	AREA	0	-272.5	12.9	2778.8	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1757	NABOO	nab_world	AREA	0	-272.5	12.9	2778.8	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1758	NABOO	nab_world	AREA	0	-274.0	12.9	2823.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1759	NABOO	nab_world	AREA	0	-7553.9	8.9	3707.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1760	NABOO	nab_world	AREA	0	3494.8	-209.2	6634.4	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	4	0	-	idle			600
@@ -1764,27 +1764,27 @@ spawn_naboo_1761	NABOO	nab_world	AREA	0	-254.9	12.8	2829.7	0	1	a Gungan General	
 spawn_naboo_1762	NABOO	nab_world	AREA	0	-290.2	12.8	2809.7	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
 spawn_naboo_1763	NABOO	nab_world	AREA	0	-263.2	13.0	2840.3	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
 spawn_naboo_1764	NABOO	nab_world	AREA	0	-238.2	11.2	2791.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
-spawn_naboo_1765	NABOO	nab_world	AREA	0	-286.6	12.6	2792.9	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1765	NABOO	nab_world	AREA	0	-286.6	12.6	2792.9	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1766	NABOO	nab_world	AREA	0	-240.9	12.8	2827.4	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
 spawn_naboo_1767	NABOO	nab_world	AREA	0	-255.5	12.5	2778.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
-spawn_naboo_1768	NABOO	nab_world	AREA	0	-7310.9	13.8	2742.8	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	3	LOITER	10	0	-	idle			600
-spawn_naboo_1769	NABOO	nab_world	AREA	0	3421.5	-198.2	5082.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	20	30	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1768	NABOO	nab_world	AREA	0	-7310.9	13.8	2742.8	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	10	0	-	idle			600
+spawn_naboo_1769	NABOO	nab_world	AREA	0	3421.5	-198.2	5082.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1770	NABOO	nab_world	AREA	0	-187.1	107.5	-901.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
 spawn_naboo_1771	NABOO	nab_world	AREA	0	-3151.4	4.6	2561.1	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	8	0	-	idle			600
-spawn_naboo_1772	NABOO	nab_world	AREA	0	2145.4	-196.0	5426.3	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1772	NABOO	nab_world	AREA	0	2145.4	-196.0	5426.3	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1773	NABOO	nab_world	AREA	0	-3736.0	80.6	257.8	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1774	NABOO	nab_world	AREA	0	6123.8	168.2	82.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1775	NABOO	nab_world	AREA	0	6117.6	165.4	61.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1776	NABOO	nab_world	AREA	0	6107.3	161.5	63.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1777	NABOO	nab_world	AREA	0	6102.3	159.7	77.4	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1778	NABOO	nab_world	AREA	0	-7552.0	8.7	3715.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	8	0	-	idle			600
-spawn_naboo_1779	NABOO	nab_world	AREA	0	-4428.1	261.7	-2230.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
-spawn_naboo_1780	NABOO	nab_world	AREA	0	3488.2	112.5	-2885.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1779	NABOO	nab_world	AREA	0	-4428.1	261.7	-2230.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
+spawn_naboo_1780	NABOO	nab_world	AREA	0	3488.2	112.5	-2885.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1781	NABOO	nab_world	AREA	0	1234.2	-196.1	5510.1	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1782	NABOO	nab_world	AREA	0	3942.2	5.9	2699.2	20	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	IDLE	0	0	-	idle			600
 spawn_naboo_1783	NABOO	nab_world	AREA	0	7588.4	-209.8	6948.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1784	NABOO	nab_world	AREA	0	-7542.9	10.5	2254.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
-spawn_naboo_1785	NABOO	nab_world	AREA	0	-1032.4	-209.4	6831.9	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1785	NABOO	nab_world	AREA	0	-1032.4	-209.4	6831.9	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1786	NABOO	nab_world	AREA	0	-6596.8	152.2	-2680.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1787	NABOO	nab_world	AREA	0	1946.7	-187.7	6618.4	0	1	a Gungan priest	humanoid_gungan_priest	ATTACKABLE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1788	NABOO	nab_world	AREA	0	5869.7	38.5	3051.9	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	20	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
@@ -1795,7 +1795,7 @@ spawn_naboo_1792	NABOO	nab_world	AREA	0	-7377.4	5.9	-7238.1	0	1	a gungan reject	
 spawn_naboo_1793	NABOO	nab_world	AREA	0	-7370.6	4.9	-7220.7	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	20	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1794	NABOO	nab_world	AREA	0	-242.1	12.9	2819.7	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	20	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1795	NABOO	nab_world	AREA	0	-288.3	12.7	2816.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	20	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
-spawn_naboo_1796	NABOO	nab_world	AREA	0	-5046.8	-197.7	6173.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	20	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1796	NABOO	nab_world	AREA	0	-5046.8	-197.7	6173.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	20	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1797	NABOO	nab_world	AREA	0	3620.8	107.1	549.6	0	1	a highwayman	humanoid_highwayman	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
 spawn_naboo_1798	NABOO	nab_world	AREA	0	-1638.4	14.0	-4033.7	-83	1	a Lesser Prophet of the Dark Side	humanoid_jedi_lesser_prophet_of_the_dark_side	ATTACKABLE	E	80	85	Outback	Naboo	1	IDLE	0	0	-	idle			1800
 spawn_naboo_1799	NABOO	nab_world	AREA	0	4135.0	6.7	2911.6	0	1	a male swamp tusk-cat	creature_cat_tusk_male_swamp	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	2	0	-	idle			600
@@ -1805,7 +1805,7 @@ spawn_naboo_1802	NABOO	nab_world	AREA	0	2513.6	14.0	2284.7	0	1	a Mauler	humanoid
 spawn_naboo_1803	NABOO	nab_world	AREA	0	2495.9	14.0	2277.4	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1804	NABOO	nab_world	AREA	0	2467.5	16.2	2269.2	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1805	NABOO	nab_world	AREA	0	-2549.3	-197.0	6781.9	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
-spawn_naboo_1806	NABOO	nab_world	AREA	0	-7271.7	-196.6	5039.0	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1806	NABOO	nab_world	AREA	0	-7271.7	-196.6	5039.0	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1807	NABOO	nab_world	AREA	0	493.9	18.5	1885.6	0	1	a Mauler apprentice	humanoid_mauler_apprentice	AGGRESSIVE	N	20	35	Outback	Naboo	1	PATROL	0	patrol_nab_3800	column	idle			600
 spawn_naboo_1808	NABOO	nab_world	AREA	0	2276.0	12.2	1902.9	0	1	a Mauler apprentice	humanoid_mauler_apprentice	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1809	NABOO	nab_world	AREA	0	2270.9	12.5	1894.4	0	1	a Mauler apprentice	humanoid_mauler_apprentice	AGGRESSIVE	N	20	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
@@ -1827,7 +1827,7 @@ spawn_naboo_1824	NABOO	nab_world	AREA	0	5753.9	153.3	-1172.5	0	1	a Mauler warbla
 spawn_naboo_1825	NABOO	nab_world	AREA	0	5720.3	145.0	-1202.2	0	1	a Mauler warblaster	humanoid_naboo_mauler_warblaster	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1826	NABOO	nab_world	AREA	0	5683.0	140.0	-1184.4	0	1	a Mauler warblaster	humanoid_naboo_mauler_warblaster	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1827	NABOO	nab_world	AREA	0	5764.9	158.5	-1135.9	0	1	a Mauler warblaster	humanoid_naboo_mauler_warblaster	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1828	NABOO	nab_world	AREA	0	6.8	442.2	-1863.7	0	1	a mountain ikopi	creature_ikopi_mountain	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1828	NABOO	nab_world	AREA	0	6.8	442.2	-1863.7	0	1	a mountain ikopi	creature_ikopi_mountain	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1829	NABOO	nab_world	AREA	0	5444.4	335.0	-2384.2	0	1	a mountain spineflap	creature_spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1830	NABOO	nab_world	AREA	0	5433.4	320.7	-2423.2	0	1	a mountain spineflap	creature_spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1831	NABOO	nab_world	AREA	0	5426.1	327.2	-2351.8	0	1	a mountain spineflap	creature_spineflap_mountain	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
@@ -1871,13 +1871,13 @@ spawn_naboo_1868	NABOO	nab_world	AREA	0	-1712.6	5.8	-5674.9	0	1	a Muskeg extremi
 spawn_naboo_1869	NABOO	nab_world	AREA	0	-1708.9	5.0	-5694.9	0	1	a Muskeg extremist	humanoid_naboo_muskeg_extremist	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1870	NABOO	nab_world	AREA	0	-5995.1	9.2	3867.7	0	1	a Muskeg fanatic	humanoid_naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
 spawn_naboo_1871	NABOO	nab_world	AREA	0	-5990.1	8.1	3904.1	0	1	a Muskeg fanatic	humanoid_naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1872	NABOO	nab_world	AREA	0	-5963.5	6.6	3887.4	0	1	a Muskeg fanatic	humanoid_naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1872	NABOO	nab_world	AREA	0	-5963.5	6.6	3887.4	0	1	a Muskeg fanatic	humanoid_naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1873	NABOO	nab_world	AREA	0	-5955.6	11.1	3849.8	0	1	a Muskeg fanatic	humanoid_naboo_muskeg_fanatic	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
 spawn_naboo_1874	NABOO	nab_world	AREA	0	-5946.8	6.1	3944.1	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1875	NABOO	nab_world	AREA	0	-5929.2	7.6	3919.5	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1875	NABOO	nab_world	AREA	0	-5929.2	7.6	3919.5	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1876	NABOO	nab_world	AREA	0	-5921.9	6.4	3964.3	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1877	NABOO	nab_world	AREA	0	-5907.8	7.5	3941.6	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1878	NABOO	nab_world	AREA	0	-5899.5	8.7	3916.6	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1877	NABOO	nab_world	AREA	0	-5907.8	7.5	3941.6	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
+spawn_naboo_1878	NABOO	nab_world	AREA	0	-5899.5	8.7	3916.6	0	1	a Muskeg radical	humanoid_naboo_muskeg_radical	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1879	NABOO	nab_world	AREA	0	-1797.9	4.1	-5762.9	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1880	NABOO	nab_world	AREA	0	-1789.6	5.6	-5734.6	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1881	NABOO	nab_world	AREA	0	-1768.4	7.1	-5769.0	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
@@ -1885,13 +1885,13 @@ spawn_naboo_1882	NABOO	nab_world	AREA	0	-1754.9	7.8	-5737.6	0	1	a Muskeg reactio
 spawn_naboo_1883	NABOO	nab_world	AREA	0	-1754.1	5.5	-5801.7	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1884	NABOO	nab_world	AREA	0	-1731.9	5.7	-5740.6	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1885	NABOO	nab_world	AREA	0	-1712.4	5.1	-5755.1	0	1	a Muskeg reactionary	humanoid_naboo_muskeg_reactionary	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
-spawn_naboo_1886	NABOO	nab_world	AREA	0	-6113.9	8.9	3846.4	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1886	NABOO	nab_world	AREA	0	-6113.9	8.9	3846.4	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1887	NABOO	nab_world	AREA	0	-6107.3	8.5	3881.8	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1888	NABOO	nab_world	AREA	0	-6105.9	10.6	3811.8	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1888	NABOO	nab_world	AREA	0	-6105.9	10.6	3811.8	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1889	NABOO	nab_world	AREA	0	-6076.2	7.9	3856.0	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
-spawn_naboo_1890	NABOO	nab_world	AREA	0	-6057.1	9.4	3815.1	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	9	0	-	idle			600
+spawn_naboo_1890	NABOO	nab_world	AREA	0	-6057.1	9.4	3815.1	0	1	a Muskeg zealot	humanoid_naboo_muskeg_zealot	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	9	0	-	idle			600
 spawn_naboo_1891	NABOO	nab_world	AREA	0	-7322.1	11.4	-4146.0	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			900
-spawn_naboo_1892	NABOO	nab_world	AREA	0	-3583.6	92.1	-875.7	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	8	0	-	idle			900
+spawn_naboo_1892	NABOO	nab_world	AREA	0	-3583.6	92.1	-875.7	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	8	0	-	idle			900
 spawn_naboo_1893	NABOO	nab_world	AREA	0	1007.4	184.6	-3453.3	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1894	NABOO	nab_world	AREA	0	7346.2	4.1	3605.2	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1895	NABOO	nab_world	AREA	0	5385.3	301.0	-1327.3	0	1	a Naboo pirate raider	humanoid_naboo_pirate_raider	AGGRESSIVE	E	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
@@ -1902,7 +1902,7 @@ spawn_naboo_1899	NABOO	nab_world	AREA	0	5364.9	314.3	-1337.0	0	1	a Naboo pirate 
 spawn_naboo_1900	NABOO	nab_world	AREA	0	5352.0	319.7	-1309.5	0	1	a Naboo pirate swashbuckler	humanoid_naboo_pirate_swashbuckler	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1901	NABOO	nab_world	AREA	0	5316.2	292.4	-1267.5	0	1	a Naboo pirate swashbuckler	humanoid_naboo_pirate_swashbuckler	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1902	NABOO	nab_world	AREA	0	5296.4	301.5	-1301.4	0	1	a Naboo pirate swashbuckler	humanoid_naboo_pirate_swashbuckler	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1903	NABOO	nab_world	AREA	0	-2177.3	-195.7	6357.0	0	1	a Naboo police officer	humanoid_naboo_police	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1903	NABOO	nab_world	AREA	0	-2177.3	-195.7	6357.0	0	1	a Naboo police officer	humanoid_naboo_police	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1904	NABOO	nab_world	AREA	0	4810.2	89.3	-852.9	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1905	NABOO	nab_world	AREA	0	4785.4	87.3	-867.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1906	NABOO	nab_world	AREA	0	4781.8	83.8	-836.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
@@ -1920,7 +1920,7 @@ spawn_naboo_1917	NABOO	nab_world	AREA	0	-4608.6	-198.2	4548.6	0	1	a nesting kaad
 spawn_naboo_1918	NABOO	nab_world	AREA	0	-4661.5	37.5	3517.8	0	1	a nesting kaadu	creature_kaadu_nesting	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1919	NABOO	nab_world	AREA	0	-4616.4	37.1	3496.8	0	1	a nesting kaadu	creature_kaadu_nesting	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1920	NABOO	nab_world	AREA	0	-4632.1	34.6	3464.7	0	1	a nesting kaadu	creature_kaadu_nesting	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
-spawn_naboo_1921	NABOO	nab_world	AREA	0	-6085.1	9.0	3835.6	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1921	NABOO	nab_world	AREA	0	-6085.1	9.0	3835.6	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	2	LOITER	10	0	-	idle			600
 spawn_naboo_1922	NABOO	nab_world	AREA	0	-5038.7	6.0	3693.2	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1923	NABOO	nab_world	AREA	0	-5023.7	6.0	3745.0	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1924	NABOO	nab_world	AREA	0	-5005.3	6.0	3666.0	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
@@ -1928,11 +1928,11 @@ spawn_naboo_1925	NABOO	nab_world	AREA	0	-4996.6	6.0	3710.3	0	1	a nightspider	cre
 spawn_naboo_1926	NABOO	nab_world	AREA	0	-4968.1	6.0	3645.8	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1927	NABOO	nab_world	AREA	0	-4922.4	6.0	3662.4	0	1	a nightspider	creature_nightspider	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1928	NABOO	nab_world	AREA	0	5002.3	-190.5	6388.4	0	1	a nightspider dirtcrawler	creature_nightspider_dirtcrawler	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
-spawn_naboo_1929	NABOO	nab_world	AREA	0	4957.2	-193.1	6410.4	0	1	a nightspider dirtcrawler	creature_nightspider_dirtcrawler	AGGRESSIVE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1929	NABOO	nab_world	AREA	0	4957.2	-193.1	6410.4	0	1	a nightspider dirtcrawler	creature_nightspider_dirtcrawler	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1930	NABOO	nab_world	AREA	0	5026.8	-189.4	6201.9	0	1	a nightspider fleshrender	creature_nightspider_fleshrender	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1931	NABOO	nab_world	AREA	0	5002.5	-189.7	6199.2	0	1	a nightspider fleshrender	creature_nightspider_fleshrender	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1932	NABOO	nab_world	AREA	0	-1693.9	-196.5	5430.2	0	1	a nightspider poison spitter	creature_nightspider_poison_splitter	AGGRESSIVE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
-spawn_naboo_1933	NABOO	nab_world	AREA	0	4974.2	-191.4	6369.3	0	1	a nightspider vineripper	creature_nightspider_vineripper	ATTACKABLE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1933	NABOO	nab_world	AREA	0	4974.2	-191.4	6369.3	0	1	a nightspider vineripper	creature_nightspider_vineripper	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1934	NABOO	nab_world	AREA	0	4942.4	-196.0	6375.2	0	1	a nightspider vineripper	creature_nightspider_vineripper	ATTACKABLE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
 spawn_naboo_1935	NABOO	nab_world	AREA	0	-5732.5	12.6	3691.6	0	1	a Peddler fence	humanoid_naboo_peddler_fence	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1936	NABOO	nab_world	AREA	0	-5758.7	15.4	3696.3	0	1	a Peddler fence	humanoid_naboo_peddler_fence	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
@@ -1941,7 +1941,7 @@ spawn_naboo_1938	NABOO	nab_world	AREA	0	-5730.6	12.5	3720.7	0	1	a Peddler frontm
 spawn_naboo_1939	NABOO	nab_world	AREA	0	-5748.2	12.0	3729.2	0	1	a Peddler frontman	humanoid_naboo_peddler_frontman	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_1940	NABOO	nab_world	AREA	0	-5912.2	24.7	695.2	0	1	a peko peko albatross	creature_peko_peko_albatross	AGGRESSIVE	B	80	85	Outback	Naboo	1	TURN	0	0	-	idle			1800
 spawn_naboo_1941	NABOO	nab_world	AREA	0	-1671.0	186.5	-2611.0	0	1	a peko peko albatross	creature_peko_peko_albatross	AGGRESSIVE	B	80	85	Outback	Naboo	1	TURN	0	0	-	idle			1800
-spawn_naboo_1942	NABOO	nab_world	AREA	0	-2406.3	14.3	569.3	0	1	a plasma thief	humanoid_plasma_thief	ATTACKABLE	N	25	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_1942	NABOO	nab_world	AREA	0	-2406.3	14.3	569.3	0	1	a plasma thief	humanoid_plasma_thief	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_1943	NABOO	nab_world	AREA	0	4578.3	307.8	-1808.5	0	1	a rabid narglatch	creature_narglatch_rabid	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1944	NABOO	nab_world	AREA	0	4562.9	289.6	-1840.2	0	1	a rabid narglatch	creature_narglatch_rabid	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1945	NABOO	nab_world	AREA	0	4550.5	303.2	-1779.2	0	1	a rabid narglatch	creature_narglatch_rabid	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
@@ -1968,7 +1968,7 @@ spawn_naboo_1965	NABOO	nab_world	AREA	0	5022.6	91.3	-930.8	0	1	a Skaak Tipper th
 spawn_naboo_1966	NABOO	nab_world	AREA	0	5013.7	90.8	-945.5	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1967	NABOO	nab_world	PATROL	0	5005.6	90.8	-927.7	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	25	35	Outback	Naboo	1	PATROL	0	patrol_nab_4900	column	idle			600
 spawn_naboo_1968	NABOO	nab_world	AREA	0	968.9	263.0	-1330.9	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	8	0	-	idle			600
-spawn_naboo_1969	NABOO	nab_world	AREA	0	-677.0	-196.1	5201.9	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_1969	NABOO	nab_world	AREA	0	-677.0	-196.1	5201.9	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	25	35	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_1970	NABOO	nab_world	AREA	0	-7407.6	2.9	921.5	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_1971	NABOO	nab_world	AREA	0	4367.3	290.8	-1246.6	0	1	a starving flewt	humanoid_naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
 spawn_naboo_1972	NABOO	nab_world	AREA	0	4329.2	294.1	-1237.7	0	1	a starving flewt	humanoid_naboo_gunrunner	AGGRESSIVE	N	25	35	Outback	Naboo	1	LOITER	2	0	-	idle			600
@@ -2016,7 +2016,7 @@ spawn_naboo_2013	NABOO	nab_world	PATROL	0	-4657.5	7.6	3631.7	0	1	a wild-eyed fam
 spawn_naboo_2014	NABOO	nab_world	PATROL	0	-4884.1	5.0	3238.8	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	80	85	Outback	Naboo	1	PATROL	0	patrol_nab_800	column	idle			600
 spawn_naboo_2015	NABOO	nab_world	AREA	0	4424.2	5.0	-5072.0	129	1	Ahnyx Pollard	humanoid_itp_rebel_ahnyx_pollard	ATTACKABLE	B	85	90	Outback	Naboo	1	IDLE	0	0	-	npc_angry			600
 spawn_naboo_2016	NABOO	nab_world	AREA	0	-1771.5	12.0	2390.7	-89	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	idle			600
-spawn_naboo_2017	NABOO	nab_world	AREA	0	-1561.4	-195.2	5994.7	0	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	20	35	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_2017	NABOO	nab_world	AREA	0	-1561.4	-195.2	5994.7	0	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	20	35	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_2018	NABOO	nab_world	AREA	0	-6601.2	-209.8	5981.0	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_2019	NABOO	nab_world	AREA	0	-6600.2	-209.9	5992.9	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_2020	NABOO	nab_world	AREA	0	-6589.5	-209.8	5985.3	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	25	35	Outback	Naboo	1	TURN	0	0	-	idle			600
@@ -2024,12 +2024,12 @@ spawn_naboo_2021	NABOO	nab_world	AREA	0	-6582.1	-209.9	5989.3	0	1	an elder femal
 spawn_naboo_2022	NABOO	nab_world	AREA	0	-1774.5	12.1	2387.4	0	1	an IG assassin droid	droid_ig_assassin	ATTACKABLE	N	20	35	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_2023	NABOO	nab_world	AREA	0	-2191.9	11.9	689.8	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	25	35	Outback	Naboo	3	LOITER	10	0	-	idle			600
 spawn_naboo_2024	NABOO	nab_world	AREA	0	4704.7	243.9	-2277.7	0	1	Blot (a feral shaupaut)	creature_shaupaut_feral_blot	AGGRESSIVE	B	25	35	Outback	Naboo	1	TURN	0	0	-	idle			120
-spawn_naboo_2025	NABOO	nab_world	AREA	0	-2001.3	11.3	4302.4	0	1	Borvo's mercenary	humanoid_borvo_mercenary	ATTACKABLE	N	20	30	Outback	Naboo	3	LOITER	10	0	-	idle			600
+spawn_naboo_2025	NABOO	nab_world	AREA	0	-2001.3	11.3	4302.4	0	1	Borvo's mercenary	humanoid_borvo_mercenary	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	10	0	-	idle			600
 spawn_naboo_2026	NABOO	nab_world	AREA	0	5720.5	-192.9	6610.0	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	4	0	-	idle			600
 spawn_naboo_2027	NABOO	nab_world	AREA	0	5236.9	-195.5	6324.8	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
-spawn_naboo_2028	NABOO	nab_world	AREA	0	5219.9	-195.5	6369.5	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
-spawn_naboo_2029	NABOO	nab_world	AREA	0	6316.6	3.8	4248.5	0	1	Borvo's thief	humanoid_borvo_thief	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
-spawn_naboo_2030	NABOO	nab_world	AREA	0	5725.7	-192.9	6599.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	6	0	-	idle			600
+spawn_naboo_2028	NABOO	nab_world	AREA	0	5219.9	-195.5	6369.5	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	8	0	-	idle			600
+spawn_naboo_2029	NABOO	nab_world	AREA	0	6316.6	3.8	4248.5	0	1	Borvo's thief	humanoid_borvo_thief	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	6	0	-	idle			600
+spawn_naboo_2030	NABOO	nab_world	AREA	0	5725.7	-192.9	6599.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	20	30	Outback	Naboo	1	LOITER	6	0	-	idle			600
 spawn_naboo_2031	NABOO	nab_world	AREA	0	5240.7	-195.5	6350.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
 spawn_naboo_2032	NABOO	nab_world	AREA	0	5217.7	-195.5	6347.9	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
 spawn_naboo_2033	NABOO	nab_world	AREA	0	5773.5	5.0	-7297.7	0	1	Bounty Hunter	humanoid_borvo_bounty_hunter	AGGRESSIVE	N	20	30	Outback	Naboo	2	LOITER	8	0	-	idle			600
@@ -2192,9 +2192,9 @@ spawn_naboo_2189	NABOO	nab_world	AREA	0	2558.4	352.3	-3656.5	0	1	an Imperial com
 spawn_naboo_2190	NABOO	nab_world	AREA	0	2536.8	295.8	-3875.5	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	80	85	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
 spawn_naboo_2191	NABOO	nab_world	AREA	0	2180.3	362.0	-3697.6	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	80	85	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
 spawn_naboo_2192	NABOO	nab_world	AREA	0	2445.0	292.0	-3948.5	0	1	an Imperial command security guard	humanoid_imperial_command_security_guard	ATTACKABLE	E	85	90	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
-spawn_naboo_2193	NABOO	nab_world	AREA	0	2335.4	230.9	-3959.1	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	85	90	POI	Emperor's Retreat	2	LOITER	6	0	-	idle			600
+spawn_naboo_2193	NABOO	nab_world	AREA	0	2335.4	230.9	-3959.1	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	85	90	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
 spawn_naboo_2194	NABOO	nab_world	AREA	0	2347.7	392.1	-3563.4	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	85	90	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
-spawn_naboo_2195	NABOO	nab_world	AREA	0	2089.5	263.0	-3777.1	0	1	an Imperial medic	humanoid_imperial_medic	ATTACKABLE	E	85	90	POI	Emperor's Retreat	2	LOITER	6	0	-	idle			600
+spawn_naboo_2195	NABOO	nab_world	AREA	0	2089.5	263.0	-3777.1	0	1	an Imperial medic	humanoid_imperial_medic	ATTACKABLE	E	85	90	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
 spawn_naboo_2196	NABOO	nab_world	AREA	0	1719.2	385.0	-3672.5	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	E	85	90	POI	Emperor's Retreat	2	LOITER	6	0	-	idle			600
 spawn_naboo_2197	NABOO	nab_world	AREA	0	2378.5	325.0	-4102.4	0	1	an Imperial sharpshooter	humanoid_imperial_sharpshooter	ATTACKABLE	E	85	90	POI	Emperor's Retreat	1	LOITER	6	0	-	idle			600
 spawn_naboo_2198	NABOO	nab_world	AREA	0	1896.3	395.0	-4022.0	0	1	an Imperial surgeon	humanoid_imperial_medic_hard	ATTACKABLE	E	85	90	POI	Emperor's Retreat	2	LOITER	6	0	-	idle			600
@@ -2209,17 +2209,17 @@ spawn_naboo_2206	NABOO	nab_world	AREA	0	2412.9	292.0	-3939.2	77	1	Imperial Pilot
 spawn_naboo_2207	NABOO	nab_world	AREA	0	2444.2	292.0	-3896.8	-160	1	Inquisitor Fa'Zoll (Imperial Pilot Trainer)	humanoid_imperial_inquisitor_fazoll	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2208	NABOO	nab_world	AREA	0	2415.0	292.0	-3948.0	77	1	Lt. Allard Lissara	humanoid_imperial_lt_allard_lissara	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2209	NABOO	nab_world	AREA	0	-1992.2	5.2	-5422.2	-115	1	Boss Nass	humanoid_boss_nass	INVULNERABLE	N	100	100	POI	Gungan Sacred Place	1	IDLE	0	0	-	idle			600
-spawn_naboo_2210	NABOO	nab_world	AREA	0	4724.8	12.8	-3902.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
+spawn_naboo_2210	NABOO	nab_world	AREA	0	4724.8	12.8	-3902.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	1	LOITER	4	0	-	idle			600
 spawn_naboo_2211	NABOO	nab_world	AREA	0	4738.1	12.7	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	6	0	-	idle			600
 spawn_naboo_2212	NABOO	nab_world	AREA	0	4761.2	13.4	-3886.2	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	6	0	-	idle			600
-spawn_naboo_2213	NABOO	nab_world	AREA	0	4775.1	14.0	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
+spawn_naboo_2213	NABOO	nab_world	AREA	0	4775.1	14.0	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	1	LOITER	4	0	-	idle			600
 spawn_naboo_2214	NABOO	nab_world	AREA	0	4795.9	14.2	-3883.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	6	0	-	idle			600
 spawn_naboo_2215	NABOO	nab_world	AREA	0	4809.8	13.6	-3872.1	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	20	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
-spawn_naboo_2216	NABOO	nab_world	AREA	0	4736.7	10.6	-3847.9	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
+spawn_naboo_2216	NABOO	nab_world	AREA	0	4736.7	10.6	-3847.9	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	1	LOITER	4	0	-	idle			600
 spawn_naboo_2217	NABOO	nab_world	AREA	0	4761.3	8.6	-3862.4	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
 spawn_naboo_2218	NABOO	nab_world	AREA	0	4779.8	11.8	-3839.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
-spawn_naboo_2219	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
-spawn_naboo_2220	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	2	LOITER	4	0	-	idle			600
+spawn_naboo_2219	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	1	LOITER	4	0	-	idle			600
+spawn_naboo_2220	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	25	35	POI	Imperial vs Gungan Battle	1	LOITER	4	0	-	idle			600
 spawn_naboo_2221	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	humanoid_borvo_montrus	ATTACKABLE	B	20	30	POI	Imperial vs Gungun Battle	1	LOITER	4	0	-	idle			600
 spawn_naboo_2222	NABOO	nab_mauler_stronghold	AREA	10	9.8	-16.0	135.3	0	1	a Mauler	humanoid_mauler	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	TURN	0	0	-	idle			600
 spawn_naboo_2223	NABOO	nab_mauler_stronghold	AREA	10	9.2	-16.0	108.4	0	1	a Mauler Guard	humanoid_mauler_guard	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	TURN	0	0	-	idle			600
@@ -2287,7 +2287,7 @@ spawn_naboo_2284	NABOO	nab_world	AREA	0	2779.3	77.5	1143.0	15	1	a Mauler acolyte
 spawn_naboo_2285	NABOO	nab_world	AREA	0	2888.6	77.6	1191.0	0	1	a Mauler acolyte	humanoid_mauler_acolyte	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	IDLE	0	0	-	idle			600
 spawn_naboo_2286	NABOO	nab_world	AREA	0	2940.4	73.0	1195.3	-10	1	a Mauler acolyte	humanoid_mauler_acolyte	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	IDLE	0	0	-	idle			600
 spawn_naboo_2287	NABOO	nab_world	AREA	0	2925.6	94.0	1129.8	140	1	a Mauler Beastmaster	humanoid_mauler_beastmaster	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	IDLE	0	0	-	idle			600
-spawn_naboo_2288	NABOO	nab_world	AREA	0	2852.8	94.0	1112.3	0	1	a Mauler Guard	humanoid_mauler_guard	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	2	LOITER	6	0	-	idle			600
+spawn_naboo_2288	NABOO	nab_world	AREA	0	2852.8	94.0	1112.3	0	1	a Mauler Guard	humanoid_mauler_guard	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	LOITER	6	0	-	idle			600
 spawn_naboo_2289	NABOO	nab_world	AREA	0	2900.7	94.0	1125.4	0	1	a Mauler lord	humanoid_mauler_lord	AGGRESSIVE	E	20	35	POI	Mauler Stronghold	2	LOITER	6	0	-	idle			600
 spawn_naboo_2290	NABOO	nab_world	AREA	0	2931.6	94.0	1129.1	-101	1	a Mauler veermok	creature_veermok_mauler	AGGRESSIVE	N	20	35	POI	Mauler Stronghold	1	IDLE	0	0	-	idle			600
 spawn_naboo_2291	NABOO	nab_world	AREA	0	-1992.5	6.1	-5286.1	1	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	20	35	POI	Mordran	1	IDLE	0	0	-	idle			600
@@ -2319,7 +2319,7 @@ spawn_naboo_2316	NABOO	nab_narglatch_cave	AREA	8	147.9	-67.4	-122.6	0	1	a nargla
 spawn_naboo_2317	NABOO	nab_narglatch_cave	AREA	8	129.2	-66.7	-108.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	25	35	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
 spawn_naboo_2318	NABOO	nab_narglatch_cave	AREA	9	188.6	-65.9	-105.6	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	25	35	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
 spawn_naboo_2319	NABOO	nab_narglatch_cave	AREA	9	188.5	-66.3	-101.5	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	25	35	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_2320	NABOO	nab_world	AREA	0	5875.4	36.0	-4670.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	25	35	POI	Narglatch Cave	2	LOITER	6	0	-	idle			600
+spawn_naboo_2320	NABOO	nab_world	AREA	0	5875.4	36.0	-4670.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	25	35	POI	Narglatch Cave	1	LOITER	6	0	-	idle			600
 spawn_naboo_2321	NABOO	nab_world	AREA	0	5848.5	36.0	-4658.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	25	35	POI	Narglatch Cave	2	LOITER	6	0	-	idle			600
 spawn_naboo_2322	NABOO	nab_weapon_development_facility	PATROL	10	35.9	-12.0	66.1	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	35	40	POI	Weapon Development Facility	1	PATROL	0	patrol_nab_8100	column	idle			600
 spawn_naboo_2323	NABOO	nab_weapon_development_facility	AREA	11	44.9	-12.0	85.8	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	35	40	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600

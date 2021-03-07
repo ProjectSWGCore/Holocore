@@ -435,8 +435,8 @@ spawn_tatooine_432	TATOOINE	tat_world	AREA	0	3412.0	5.0	-4906.7	-139	1	a contrac
 spawn_tatooine_433	TATOOINE	tat_world	AREA	0	3413.2	5.0	-4908.0	-110	1	a criminal	humanoid_criminal	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_434	TATOOINE	tat_world	AREA	0	3123.8	6.2	-4833.8	0	1	a desert kreetle	creature_kreetle_orphan	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_435	TATOOINE	tat_world	AREA	0	3540.8	5.7	-5058.7	150	1	a desert kreetle	creature_kreetle_orphan	ATTACKABLE	N	5	20	City	Mos Eisley	1	TURN	0	0	-	idle			600
-spawn_tatooine_436	TATOOINE	tat_world	AREA	0	3329.1	6.9	-5225.5	0	1	a dwarf nuna	creature_nuna_dwarf	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
-spawn_tatooine_437	TATOOINE	tat_world	AREA	0	3366.7	7.4	-5233.6	0	1	a dwarf nuna	creature_nuna_dwarf	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
+spawn_tatooine_436	TATOOINE	tat_world	AREA	0	3329.1	6.9	-5225.5	0	1	a dwarf nuna	creature_nuna_dwarf	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
+spawn_tatooine_437	TATOOINE	tat_world	AREA	0	3366.7	7.4	-5233.6	0	1	a dwarf nuna	creature_nuna_dwarf	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_438	TATOOINE	tat_world	AREA	0	3325.2	5.0	-4850.8	-73	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_439	TATOOINE	tat_world	AREA	0	3366.8	5.0	-4855.7	13	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_440	TATOOINE	tat_world	AREA	0	3727.2	5.0	-4740.6	-28	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -481,7 +481,7 @@ spawn_tatooine_478	TATOOINE	tat_world	AREA	0	3358.9	5.0	-4988.8	48	1	a LIN demol
 spawn_tatooine_479	TATOOINE	tat_world	AREA	0	3337.4	5.5	-4753.7	-108	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_480	TATOOINE	tat_world	AREA	0	3417.0	5.7	-5151.0	0	1	a minor worrt	creature_worrt_minor	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_481	TATOOINE	tat_world	AREA	0	3430.1	5.0	-5140.4	0	1	a minor worrt	creature_worrt_minor	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
-spawn_tatooine_482	TATOOINE	tat_world	AREA	0	3836.5	50.2	-5055.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
+spawn_tatooine_482	TATOOINE	tat_world	AREA	0	3836.5	50.2	-5055.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_483	TATOOINE	tat_world	AREA	0	3294.0	5.0	-4687.0	100	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_484	TATOOINE	tat_world	AREA	0	3633.3	5.0	-4782.6	-116	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_485	TATOOINE	tat_world	AREA	0	3473.3	5.0	-4852.3	69	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
@@ -492,7 +492,7 @@ spawn_tatooine_489	TATOOINE	tat_world	AREA	0	3664.7	5.0	-4858.7	-54	1	a nomad	hu
 spawn_tatooine_490	TATOOINE	tat_world	AREA	0	3701.4	5.0	-4800.9	130	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_491	TATOOINE	tat_world	AREA	0	3436.1	5.0	-4622.7	-25	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_492	TATOOINE	tat_world	AREA	0	3320.4	5.0	-4504.6	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle			600
-spawn_tatooine_493	TATOOINE	tat_world	AREA	0	3453.5	4.0	-4517.8	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	3	LOITER	5	0	-	idle			600
+spawn_tatooine_493	TATOOINE	tat_world	AREA	0	3453.5	4.0	-4517.8	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	2	LOITER	5	0	-	idle			600
 spawn_tatooine_494	TATOOINE	tat_world	AREA	0	3476.2	4.0	-4546.4	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_495	TATOOINE	tat_world	AREA	0	3486.1	4.0	-4569.1	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle			600
 spawn_tatooine_496	TATOOINE	tat_world	AREA	0	3241.9	5.0	-4846.1	134	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
@@ -568,8 +568,8 @@ spawn_tatooine_565	TATOOINE	tat_world	AREA	0	3236.2	5.0	-4869.8	140	1	a settler	
 spawn_tatooine_566	TATOOINE	tat_world	AREA	0	37019	5.0	-4822.2	-97	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_567	TATOOINE	tat_world	AREA	0	3358.6	5.0	-4779.7	-104	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_568	TATOOINE	tat_world	AREA	0	3502.3	5.5	-4940.3	-143	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_569	TATOOINE	tat_world	AREA	0	3288.1	5.1	-5071.4	0	1	a sewer worrt	creature_worrt_sewer	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
-spawn_tatooine_570	TATOOINE	tat_world	AREA	0	3651.2	6.7	-4972.3	-150	1	a sewer worrt	creature_worrt_sewer	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	4	0	-	idle			600
+spawn_tatooine_569	TATOOINE	tat_world	AREA	0	3288.1	5.1	-5071.4	0	1	a sewer worrt	creature_worrt_sewer	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	6	0	-	idle			600
+spawn_tatooine_570	TATOOINE	tat_world	AREA	0	3651.2	6.7	-4972.3	-150	1	a sewer worrt	creature_worrt_sewer	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	4	0	-	idle			600
 spawn_tatooine_571	TATOOINE	tat_world	AREA	0	3121.8	6.9	-4873.0	0	1	a Sickly Womprat	creature_womprat_sickly	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_572	TATOOINE	tat_world	AREA	0	3608.6	5.0	-4864.5	155	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_tatooine_573	TATOOINE	tat_world	AREA	0	3252.8	5.0	-4524.5	-60	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -591,7 +591,7 @@ spawn_tatooine_588	TATOOINE	tat_world	AREA	0	3127.2	6.7	-4755.9	0	1	a tame Worrt
 spawn_tatooine_589	TATOOINE	tat_world	AREA	0	3161.3	5.5	-4963.9	0	1	a tame Worrt	creature_worrt_tame	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_590	TATOOINE	tat_world	AREA	0	3326.9	5.0	-4919.8	-75	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_591	TATOOINE	tat_world	AREA	0	3707.5	5.0	-4612.2	120	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Eisley	1	TURN	0	0	-	idle			600
-spawn_tatooine_592	TATOOINE	tat_world	AREA	0	3837.5	47.4	-5038.7	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
+spawn_tatooine_592	TATOOINE	tat_world	AREA	0	3837.5	47.4	-5038.7	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_593	TATOOINE	tat_world	AREA	0	3990.0	5.0	-4806.0	0	1	a Tusken zealot	humanoid_tusken_raider_zealot	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_594	TATOOINE	tat_world	AREA	0	3999.0	5.0	-4853.0	0	1	a Tusken zealot	humanoid_tusken_raider_zealot	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_595	TATOOINE	tat_world	AREA	0	4019.0	5.0	-4764.0	0	1	a Tusken zealot	humanoid_tusken_raider_zealot	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
@@ -611,7 +611,7 @@ spawn_tatooine_608	TATOOINE	tat_world	AREA	0	3092.5	0.2	-4397.4	0	1	a water thie
 spawn_tatooine_609	TATOOINE	tat_world	AREA	0	3094.4	8.5	-4351.8	0	1	a water thief	humanoid_water_thief	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_610	TATOOINE	tat_world	AREA	0	3118.0	1.6	-4381.0	0	1	a water thief	humanoid_water_thief	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_611	TATOOINE	tat_world	AREA	0	3408.2	5.0	-4912.0	47	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_612	TATOOINE	tat_world	AREA	0	3819.6	51.9	-5050.3	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Eisley	3	LOITER	6	0	-	idle			600
+spawn_tatooine_612	TATOOINE	tat_world	AREA	0	3819.6	51.9	-5050.3	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_613	TATOOINE	tat_world	AREA	0	3142.0	5.3	-4638.0	0	1	a worrt	creature_worrt	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_614	TATOOINE	tat_world	AREA	0	3410.6	5.0	-5132.1	0	1	a worrt	creature_worrt	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_615	TATOOINE	tat_world	AREA	0	3596.8	9.7	-5034.3	-90	1	a worrt	creature_worrt	ATTACKABLE	N	5	20	City	Mos Eisley	1	TURN	0	0	-	idle			600
@@ -675,7 +675,7 @@ spawn_tatooine_672	TATOOINE	tat_world	AREA	0	3323.3	6.6	-5164.5	0	1	desert swoop
 spawn_tatooine_673	TATOOINE	tat_world	AREA	0	3324.7	5.2	-5116.1	0	1	desert swooper	humanoid_desert_swooper	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_674	TATOOINE	tat_world	AREA	0	3327.8	5.5	-5139.0	0	1	desert swooper	humanoid_desert_swooper	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_675	TATOOINE	tat_world	AREA	0	3227.5	6.7	-5226.4	0	1	desert swooper leader	humanoid_desert_swooper_leader	AGGRESSIVE	B	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
-spawn_tatooine_676	TATOOINE	tat_world	AREA	0	3804.9	180.0	-4485.4	0	1	Dewback	creature_dewback_stormtrooper	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	6	0	-	idle			600
+spawn_tatooine_676	TATOOINE	tat_world	AREA	0	3804.9	180.0	-4485.4	0	1	Dewback	creature_dewback_stormtrooper	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_677	TATOOINE	tat_world	AREA	0	3840.2	180.0	-4498.0	-36	1	Dewback	creature_dewback_stormtrooper	ATTACKABLE	N	5	20	City	Mos Eisley	2	LOITER	6	0	-	idle			600
 spawn_tatooine_678	TATOOINE	tat_world	AREA	0	3261.2	5.0	-4857.6	0	1	Drixa Dreul	humanoid_tatooine_opening_drixa	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	1	0	-	idle			600
 spawn_tatooine_679	TATOOINE	tat_world	AREA	0	3521.6	5.0	-4683.3	-173	1	Dunir Signos	humanoid_tatooine_opening_dunir	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_dunir	600
@@ -951,7 +951,7 @@ spawn_tatooine_948	TATOOINE	tat_mosespa_watto	AREA	2	4.5	-0.5	1.9	-100	1	Watto	h
 spawn_tatooine_949	TATOOINE	tat_world	AREA	0	-2989.8	5.0	2123.8	-151	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_950	TATOOINE	tat_world	AREA	0	-2778.4	5.0	2010.4	-80	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_accusing			600
 spawn_tatooine_951	TATOOINE	tat_world	AREA	0	-2709.2	5.0	2180.0	0	1	a commoner	humanoid_commoner_human_male	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
-spawn_tatooine_952	TATOOINE	tat_world	AREA	0	-2824.7	5.0	2406.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	3	LOITER	6	0	-	idle			600
+spawn_tatooine_952	TATOOINE	tat_world	AREA	0	-2824.7	5.0	2406.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	2	LOITER	6	0	-	idle			600
 spawn_tatooine_953	TATOOINE	tat_world	AREA	0	-2947.0	5.0	2238.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	3	LOITER	10	0	-	idle			600
 spawn_tatooine_954	TATOOINE	tat_world	AREA	0	-3042.5	5.0	2442.2	-101	1	a criminal	humanoid_smuggler_patrol_thief_1	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_955	TATOOINE	tat_world	AREA	0	-2929.9	5.0	2116.3	-139	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
@@ -964,17 +964,17 @@ spawn_tatooine_961	TATOOINE	tat_world	AREA	0	-2794.6	5.0	2508.5	0	1	a greater Ta
 spawn_tatooine_962	TATOOINE	tat_world	AREA	0	-3507.4	14.0	2058.1	0	1	a Jawa	humanoid_jawa	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_963	TATOOINE	tat_world	AREA	0	-2931.3	5.0	2114.7	37	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_964	TATOOINE	tat_world	AREA	0	-3513.0	14.0	2058.0	0	1	a Jawa Avenger	humanoid_jawa_avenger	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
-spawn_tatooine_965	TATOOINE	tat_world	AREA	0	-2488.8	8.9	2091.5	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_966	TATOOINE	tat_world	AREA	0	-2543.5	7.7	2546.2	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_967	TATOOINE	tat_world	AREA	0	-2572.3	7.4	1800.5	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_968	TATOOINE	tat_world	AREA	0	-2634.0	14.5	2698.8	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_969	TATOOINE	tat_world	AREA	0	-2761.0	6.2	1650.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_970	TATOOINE	tat_world	AREA	0	-2763.4	6.1	2752.7	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_971	TATOOINE	tat_world	AREA	0	-2912.2	5.1	2829.9	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_972	TATOOINE	tat_world	AREA	0	-3035.1	11.5	1651.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_973	TATOOINE	tat_world	AREA	0	-3074.4	6.7	2856.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_974	TATOOINE	tat_world	AREA	0	-3208.3	7.8	2757.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_975	TATOOINE	tat_world	AREA	0	-3225.0	13.2	1761.2	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
+spawn_tatooine_965	TATOOINE	tat_world	AREA	0	-2488.8	8.9	2091.5	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_966	TATOOINE	tat_world	AREA	0	-2543.5	7.7	2546.2	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_967	TATOOINE	tat_world	AREA	0	-2572.3	7.4	1800.5	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_968	TATOOINE	tat_world	AREA	0	-2634.0	14.5	2698.8	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_969	TATOOINE	tat_world	AREA	0	-2761.0	6.2	1650.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_970	TATOOINE	tat_world	AREA	0	-2763.4	6.1	2752.7	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_971	TATOOINE	tat_world	AREA	0	-2912.2	5.1	2829.9	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_972	TATOOINE	tat_world	AREA	0	-3035.1	11.5	1651.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_973	TATOOINE	tat_world	AREA	0	-3074.4	6.7	2856.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_974	TATOOINE	tat_world	AREA	0	-3208.3	7.8	2757.1	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_975	TATOOINE	tat_world	AREA	0	-3225.0	13.2	1761.2	0	1	a mound mite	creature_mite_mound	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
 spawn_tatooine_976	TATOOINE	tat_world	AREA	0	-2990.7	5.0	2122.0	31	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_977	TATOOINE	tat_world	AREA	0	-2896.5	5.0	2127.8	-135	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_978	TATOOINE	tat_world	AREA	0	-2780.9	5.0	2010.9	109	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -983,17 +983,17 @@ spawn_tatooine_980	TATOOINE	tat_world	AREA	0	-3163.8	5.0	2154.7	0	1	a slum thief
 spawn_tatooine_981	TATOOINE	tat_world	AREA	0	-3171.5	5.0	2170.1	0	1	a slum thief	humanoid_watto_thieves	AGGRESSIVE	N	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_982	TATOOINE	tat_world	AREA	0	-3188.3	5.0	2187.9	0	1	a slum thief	humanoid_watto_thieves	AGGRESSIVE	N	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_983	TATOOINE	tat_world	AREA	0	-3038.1	5.0	2220.7	-156	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_984	TATOOINE	tat_world	AREA	0	-2463.7	8.3	2100.4	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_985	TATOOINE	tat_world	AREA	0	-2531.1	9.3	2592.5	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_986	TATOOINE	tat_world	AREA	0	-2568.6	8.8	1825.1	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_987	TATOOINE	tat_world	AREA	0	-2609.5	11.7	2691.5	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_988	TATOOINE	tat_world	AREA	0	-2780.0	7.5	1626.0	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_989	TATOOINE	tat_world	AREA	0	-2780.2	6.5	2773.6	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_990	TATOOINE	tat_world	AREA	0	-2914.8	5.6	2853.3	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_991	TATOOINE	tat_world	AREA	0	-3049.0	7.9	1667.3	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_992	TATOOINE	tat_world	AREA	0	-3109.1	6.9	2870.8	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_993	TATOOINE	tat_world	AREA	0	-3207.4	9.5	1775.7	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_994	TATOOINE	tat_world	AREA	0	-3232.1	8.9	2754.9	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
+spawn_tatooine_984	TATOOINE	tat_world	AREA	0	-2463.7	8.3	2100.4	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_985	TATOOINE	tat_world	AREA	0	-2531.1	9.3	2592.5	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_986	TATOOINE	tat_world	AREA	0	-2568.6	8.8	1825.1	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_987	TATOOINE	tat_world	AREA	0	-2609.5	11.7	2691.5	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_988	TATOOINE	tat_world	AREA	0	-2780.0	7.5	1626.0	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_989	TATOOINE	tat_world	AREA	0	-2780.2	6.5	2773.6	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_990	TATOOINE	tat_world	AREA	0	-2914.8	5.6	2853.3	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_991	TATOOINE	tat_world	AREA	0	-3049.0	7.9	1667.3	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_992	TATOOINE	tat_world	AREA	0	-3109.1	6.9	2870.8	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_993	TATOOINE	tat_world	AREA	0	-3207.4	9.5	1775.7	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_994	TATOOINE	tat_world	AREA	0	-3232.1	8.9	2754.9	0	1	a tempest rill	creature_rill_tempest	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
 spawn_tatooine_995	TATOOINE	tat_world	AREA	0	-2744.7	5.0	2031.3	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_996	TATOOINE	tat_world	AREA	0	-2801.5	5.0	2325.7	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_997	TATOOINE	tat_world	AREA	0	-2859.0	5.0	2252.7	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
@@ -1003,17 +1003,17 @@ spawn_tatooine_1000	TATOOINE	tat_world	AREA	0	-2958.0	5.0	2538.5	0	1	a thug	huma
 spawn_tatooine_1001	TATOOINE	tat_world	AREA	0	-2996.4	5.0	2326.4	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1002	TATOOINE	tat_world	AREA	0	-3065.1	5.0	2142.4	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1003	TATOOINE	tat_world	AREA	0	-2871.1	5.0	2387.8	-35	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1004	TATOOINE	tat_world	AREA	0	-2473.7	7.0	2133.0	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1005	TATOOINE	tat_world	AREA	0	-2547.9	8.9	1819.2	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1006	TATOOINE	tat_world	AREA	0	-2561.2	10.1	2580.1	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1007	TATOOINE	tat_world	AREA	0	-2639.4	6.9	2679.9	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1008	TATOOINE	tat_world	AREA	0	-2800.4	10.0	1649.5	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1009	TATOOINE	tat_world	AREA	0	-2808.6	5.0	2765.9	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1010	TATOOINE	tat_world	AREA	0	-2940.4	5.3	2844.1	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1011	TATOOINE	tat_world	AREA	0	-3061.4	11.2	1651.8	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1012	TATOOINE	tat_world	AREA	0	-3120.4	5.9	2839.6	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1013	TATOOINE	tat_world	AREA	0	-3222.2	11.2	1793.4	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1014	TATOOINE	tat_world	AREA	0	-3242.3	9.1	2733.7	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1004	TATOOINE	tat_world	AREA	0	-2473.7	7.0	2133.0	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1005	TATOOINE	tat_world	AREA	0	-2547.9	8.9	1819.2	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1006	TATOOINE	tat_world	AREA	0	-2561.2	10.1	2580.1	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1007	TATOOINE	tat_world	AREA	0	-2639.4	6.9	2679.9	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1008	TATOOINE	tat_world	AREA	0	-2800.4	10.0	1649.5	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1009	TATOOINE	tat_world	AREA	0	-2808.6	5.0	2765.9	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1010	TATOOINE	tat_world	AREA	0	-2940.4	5.3	2844.1	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1011	TATOOINE	tat_world	AREA	0	-3061.4	11.2	1651.8	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1012	TATOOINE	tat_world	AREA	0	-3120.4	5.9	2839.6	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1013	TATOOINE	tat_world	AREA	0	-3222.2	11.2	1793.4	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1014	TATOOINE	tat_world	AREA	0	-3242.3	9.1	2733.7	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1015	TATOOINE	tat_world	AREA	0	-2872.4	5.0	2389.3	131	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1016	TATOOINE	tat_world	AREA	0	-3063.2	5.0	2100.7	-106	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_1017	TATOOINE	tat_world	AREA	0	-2867.6	5.0	2387.8	-25	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
@@ -1034,7 +1034,7 @@ spawn_tatooine_1031	TATOOINE	tat_world	AREA	0	-2873.4	5.0	2591.4	-94	1	Eyleen	hu
 spawn_tatooine_1032	TATOOINE	tat_world	AREA	0	-3101.7	5.0	2184.6	118	1	Giaal Itotr	humanoid_giaal_itotr	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_1033	TATOOINE	tat_world	AREA	0	-2883.4	5.0	2581.2	0	1	Guz'Ordnak	humanoid_tatooine_repo_buhba	AGGRESSIVE	B	5	20	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1034	TATOOINE	tat_world	AREA	0	-2878.7	5.0	2585.0	-40	1	Hilbrun	humanoid_tatooine_repo_pah	AGGRESSIVE	B	5	20	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1035	TATOOINE	tat_world	AREA	0	-3396.9	7.4	2466.3	0	1	Jabba's thief	humanoid_jabba_thief	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	32	0	-	idle			600
+spawn_tatooine_1035	TATOOINE	tat_world	AREA	0	-3396.9	7.4	2466.3	0	1	Jabba's thief	humanoid_jabba_thief	ATTACKABLE	N	5	20	City	Mos Espa	2	LOITER	32	0	-	idle			600
 spawn_tatooine_1036	TATOOINE	tat_world	AREA	0	-3388.3	7.4	2474.9	0	1	Jabba's thug	humanoid_jabba_thug	ATTACKABLE	N	5	20	City	Mos Espa	3	LOITER	32	0	-	idle			600
 spawn_tatooine_1037	TATOOINE	tat_world	AREA	0	-2814.2	5.0	1939.7	-77	1	Kaeline Ungasan	humanoid_kaeline_ungasan	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1038	TATOOINE	tat_world	AREA	0	-3056.4	7.5	2085.3	-38	1	Kav Goldor	humanoid_feeder_tusken_militia_leader	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
@@ -1333,24 +1333,24 @@ spawn_tatooine_1330	TATOOINE	tat_world	AREA	0	-6980.3	187.4	7081.2	0	1	Tusken Re
 spawn_tatooine_1331	TATOOINE	tat_hutt_cave	AREA	1	-1.4	-5.3	9.1	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1332	TATOOINE	tat_hutt_cave	AREA	10	-28.2	-79.7	-141.4	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1333	TATOOINE	tat_hutt_cave	AREA	2	-10.4	-30.8	-27.7	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1334	TATOOINE	tat_hutt_cave	AREA	3	9.3	-40.6	-76.0	0	1	Jabba's swooper	humanoid_jabba_swooper	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1334	TATOOINE	tat_hutt_cave	AREA	3	9.3	-40.6	-76.0	0	1	Jabba's swooper	humanoid_jabba_swooper	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1335	TATOOINE	tat_hutt_cave	AREA	3	13.1	-40.5	-73.7	0	1	Jabba's swooper leader	humanoid_jabba_swooper_leader	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1336	TATOOINE	tat_hutt_cave	AREA	4	41.1	-46.1	-99.7	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1337	TATOOINE	tat_hutt_cave	AREA	4	44.4	-46.1	-94.7	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1338	TATOOINE	tat_hutt_cave	AREA	4	46.1	-47.0	-53.9	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1339	TATOOINE	tat_hutt_cave	AREA	5	-3.0	-45.5	-145.7	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1340	TATOOINE	tat_hutt_cave	AREA	5	61.8	-56.4	-172.0	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1340	TATOOINE	tat_hutt_cave	AREA	5	61.8	-56.4	-172.0	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1341	TATOOINE	tat_hutt_cave	AREA	5	12.7	-45.0	-122.9	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1342	TATOOINE	tat_hutt_cave	AREA	5	31.2	-58.9	-171.1	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1343	TATOOINE	tat_hutt_cave	AREA	5	49.9	-49.1	-132.6	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1343	TATOOINE	tat_hutt_cave	AREA	5	49.9	-49.1	-132.6	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1344	TATOOINE	tat_hutt_cave	AREA	6	-37.3	-66.9	-179.7	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1345	TATOOINE	tat_hutt_cave	AREA	6	-11.4	-64.6	-200.2	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1346	TATOOINE	tat_hutt_cave	AREA	7	-14.6	-65.7	-213.6	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1347	TATOOINE	tat_hutt_cave	AREA	7	-24.0	-64.8	-250.7	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1345	TATOOINE	tat_hutt_cave	AREA	6	-11.4	-64.6	-200.2	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	2	LOITER	6	0	-	idle			600
+spawn_tatooine_1346	TATOOINE	tat_hutt_cave	AREA	7	-14.6	-65.7	-213.6	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1347	TATOOINE	tat_hutt_cave	AREA	7	-24.0	-64.8	-250.7	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1348	TATOOINE	tat_hutt_cave	AREA	7	-6.1	-64.7	-239.0	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1349	TATOOINE	tat_hutt_cave	AREA	8	-90.8	-70.4	-124.4	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1350	TATOOINE	tat_hutt_cave	AREA	9	-15.7	-69.0	-98.6	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1351	TATOOINE	tat_hutt_cave	AREA	9	-59.6	-68.3	-102.7	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1349	TATOOINE	tat_hutt_cave	AREA	8	-90.8	-70.4	-124.4	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	2	LOITER	6	0	-	idle			600
+spawn_tatooine_1350	TATOOINE	tat_hutt_cave	AREA	9	-15.7	-69.0	-98.6	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1351	TATOOINE	tat_hutt_cave	AREA	9	-59.6	-68.3	-102.7	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1352	TATOOINE	tat_world	AREA	0	5098.4	22.6	595.0	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	10	20	Dungeon	Hutt Cave	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1353	TATOOINE	tat_imp_oasis_med_house2	AREA	2	-6	0.4	-2.3	128	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	Dungeon	Imperial Oasis	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_1354	TATOOINE	tat_imp_oasis_med_house2	AREA	2	-6	0.4	-4.3	36	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	Dungeon	Imperial Oasis	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -1572,13 +1572,13 @@ spawn_tatooine_1569	TATOOINE	tat_sennex_slave_bunker	AREA	5	3.0	-12.0	37.2	179	1
 spawn_tatooine_1570	TATOOINE	tat_sennex_slave_bunker	AREA	5	3.4	-12.0	23.3	179	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1571	TATOOINE	tat_sennex_slave_bunker	AREA	5	4.5	-12.0	67.0	0	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1572	TATOOINE	tat_sennex_slave_bunker	AREA	5	9.8	-12.0	47.9	90	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1573	TATOOINE	tat_sennex_slave_bunker	AREA	7	-63.3	-20.0	48.0	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	2	LOITER	4	0	-	idle			600
+spawn_tatooine_1573	TATOOINE	tat_sennex_slave_bunker	AREA	7	-63.3	-20.0	48.0	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	1	LOITER	4	0	-	idle			600
 spawn_tatooine_1574	TATOOINE	tat_sennex_slave_bunker	AREA	7	-49.8	-20.0	67.3	0	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1575	TATOOINE	tat_sennex_slave_bunker	AREA	7	-55.6	-20.0	35.0	0	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1576	TATOOINE	tat_sennex_slave_bunker	AREA	7	-66.7	-20.0	24.0	0	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1577	TATOOINE	tat_sennex_slave_bunker	AREA	7	-67.5	-20.0	69.1	0	1	a Sennex slaver veteran	humanoid_huff_sennex_slaver_veteran	AGGRESSIVE	E	10	20	Dungeon	Sennex Slave Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1578	TATOOINE	tat_sennex_slave_bunker	AREA	8	-51.5	-20.0	13.1	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	2	LOITER	4	0	-	idle			600
-spawn_tatooine_1579	TATOOINE	tat_sennex_slave_bunker	AREA	8	-68.8	-20.0	11.9	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	2	LOITER	4	0	-	idle			600
+spawn_tatooine_1579	TATOOINE	tat_sennex_slave_bunker	AREA	8	-68.8	-20.0	11.9	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	1	LOITER	4	0	-	idle			600
 spawn_tatooine_1580	TATOOINE	tat_sennex_slave_bunker	AREA	9	-52.8	-20.0	83.2	0	1	a Sennex slave driver	humanoid_huff_sennex_slave_driver	AGGRESSIVE	N	10	20	Dungeon	Sennex Slave Bunker	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1581	TATOOINE	tat_squill_cave	AREA	1	-3.2	-8.4	7.3	30	1	a mountain squill	creature_squill_mountain	AGGRESSIVE	N	10	20	Dungeon	Squill Cave	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1582	TATOOINE	tat_squill_cave	AREA	1	2.5	-20.9	-18.1	-6	1	a mountain squill guardian	creature_squill_mountain_guardian	AGGRESSIVE	N	10	20	Dungeon	Squill Cave	1	IDLE	0	0	-	idle			600
@@ -1814,15 +1814,15 @@ spawn_tatooine_1811	TATOOINE	tat_world	AREA	0	-1677.8	9.9	-3290.4	0	1	an R5 unit
 spawn_tatooine_1812	TATOOINE	tat_world	AREA	0	-1689.1	11.5	-3310.4	0	1	Valarian Depot Foreman	humanoid_valarian_boss_depot	AGGRESSIVE	B	10	20	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1813	TATOOINE	tat_world	AREA	0	-1693.8	11.8	-3310.7	0	1	Valarian Depot Guard	humanoid_valarian_thief_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1814	TATOOINE	tat_world	AREA	0	-1698.9	11.9	-3329.6	0	1	Valarian Depot Guard	humanoid_valarian_thief_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	6	0	-	idle			600
-spawn_tatooine_1815	TATOOINE	tat_world	AREA	0	-1585.3	7.6	-3317.9	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
+spawn_tatooine_1815	TATOOINE	tat_world	AREA	0	-1585.3	7.6	-3317.9	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	9	0	-	idle			600
 spawn_tatooine_1816	TATOOINE	tat_world	AREA	0	-1606.6	7.4	-3364.9	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
 spawn_tatooine_1817	TATOOINE	tat_world	AREA	0	-1613.9	11.7	-3248.3	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
-spawn_tatooine_1818	TATOOINE	tat_world	AREA	0	-1681.3	10.9	-3384.3	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
+spawn_tatooine_1818	TATOOINE	tat_world	AREA	0	-1681.3	10.9	-3384.3	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	9	0	-	idle			600
 spawn_tatooine_1819	TATOOINE	tat_world	AREA	0	-1685.4	12.9	-3270.6	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
 spawn_tatooine_1820	TATOOINE	tat_world	AREA	0	-1738.0	26.8	-3301.8	0	1	Valarian Depot Scout	humanoid_valarian_scout_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
-spawn_tatooine_1821	TATOOINE	tat_world	AREA	0	-1633.4	8.4	-3367.2	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
+spawn_tatooine_1821	TATOOINE	tat_world	AREA	0	-1633.4	8.4	-3367.2	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	9	0	-	idle			600
 spawn_tatooine_1822	TATOOINE	tat_world	AREA	0	-1677.7	8.9	-3249.3	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
-spawn_tatooine_1823	TATOOINE	tat_world	AREA	0	-1725.5	17.3	-3358.7	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_leader	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
+spawn_tatooine_1823	TATOOINE	tat_world	AREA	0	-1725.5	17.3	-3358.7	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_leader	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	9	0	-	idle			600
 spawn_tatooine_1824	TATOOINE	tat_world	AREA	0	-1772.8	17.8	-3358.7	0	1	Valarian Depot Swooper	humanoid_valarian_swooper_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
 spawn_tatooine_1825	TATOOINE	tat_world	AREA	0	-1626.3	9.1	-3326.7	0	1	Valarian Depot Worker	humanoid_valarian_thug_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1826	TATOOINE	tat_world	AREA	0	-1637.5	9.9	-3303.3	0	1	Valarian Depot Worker	humanoid_valarian_thug_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	6	0	-	idle			600
@@ -1905,14 +1905,14 @@ spawn_tatooine_1902	TATOOINE	tat_world	AREA	0	-255.8	4.7	-6197.0	0	1	a Desert De
 spawn_tatooine_1903	TATOOINE	tat_world	AREA	0	-6109.9	191.2	3971.8	0	1	a Desert Demon bodyguard	humanoid_desert_demon_bodyguard	AGGRESSIVE	E	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1904	TATOOINE	tat_world	AREA	0	-6110.2	190.3	3965.2	0	1	a Desert Demon leader	humanoid_desert_demon_leader	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1905	TATOOINE	tat_world	AREA	0	-5725.2	23.5	6484.3	0	1	a dewback	creature_dewback	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1906	TATOOINE	tat_world	AREA	0	-2602.4	9.1	-2299.0	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1907	TATOOINE	tat_world	AREA	0	5453.1	27.1	2144.6	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1906	TATOOINE	tat_world	AREA	0	-2602.4	9.1	-2299.0	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1907	TATOOINE	tat_world	AREA	0	5453.1	27.1	2144.6	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	10	20	Outback	Tatooine	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1908	TATOOINE	tat_world	AREA	0	-7217.4	309.8	3869.8	168	1	a downed pilot	humanoid_watto_leg_pilot	INVULNERABLE	N	100	100	Outback	Tatooine	1	TURN	0	0	-	idle			600
-spawn_tatooine_1909	TATOOINE	tat_world	AREA	0	-1816.3	10.6	-3880.1	0	1	a dune bantha	creature_bantha_dune	ATTACKABLE	N	10	20	Outback	Tatooine	5	LOITER	30	0	-	idle			600
+spawn_tatooine_1909	TATOOINE	tat_world	AREA	0	-1816.3	10.6	-3880.1	0	1	a dune bantha	creature_bantha_dune	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	30	0	-	idle			600
 spawn_tatooine_1910	TATOOINE	tat_world	AREA	0	-5417.3	41.6	-6044.5	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	Outback	Tatooine	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1911	TATOOINE	tat_world	AREA	0	-5467.3	30.0	-3885.6	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	Outback	Tatooine	3	LOITER	6	0	-	idle			1800
 spawn_tatooine_1912	TATOOINE	tat_world	AREA	0	-6206.8	34.5	5060.2	0	1	a giant sand beetle	creature_beetle_sand_giant	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			1800
-spawn_tatooine_1913	TATOOINE	tat_world	AREA	0	-5135.0	146.5	4432.9	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	90	100	Outback	Tatooine	2	LOITER	50	0	-	idle			1800
+spawn_tatooine_1913	TATOOINE	tat_world	AREA	0	-5135.0	146.5	4432.9	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	90	100	Outback	Tatooine	1	LOITER	50	0	-	idle			1800
 spawn_tatooine_1914	TATOOINE	tat_world	AREA	0	7070.7	96.9	7140.0	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	90	100	Outback	Tatooine	1	LOITER	2	0	-	idle			1800
 spawn_tatooine_1915	TATOOINE	tat_world	AREA	0	-5812.1	345.0	1538.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1916	TATOOINE	tat_world	AREA	0	-5813.2	343.5	3132.3	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
@@ -1920,16 +1920,16 @@ spawn_tatooine_1917	TATOOINE	tat_world	AREA	0	3383.3	6.7	-6588.6	0	1	a grizzled 
 spawn_tatooine_1918	TATOOINE	tat_world	AREA	0	624.0	78.0	3124.0	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1919	TATOOINE	tat_world	AREA	0	637.0	78.0	3119.0	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1920	TATOOINE	tat_world	AREA	0	660.0	78.0	3121.0	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1921	TATOOINE	tat_world	AREA	0	5768.2	53.7	4008.8	0	1	a Jawa Avenger	humanoid_jawa_avenger	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1922	TATOOINE	tat_world	AREA	0	5944.6	180.0	-3827.8	0	1	a Jawa engineer	humanoid_jawa_engineer	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1923	TATOOINE	tat_world	AREA	0	5760.9	51.0	4000.9	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1921	TATOOINE	tat_world	AREA	0	5768.2	53.7	4008.8	0	1	a Jawa Avenger	humanoid_jawa_avenger	ATTACKABLE	N	10	20	Outback	Tatooine	2	LOITER	6	0	-	idle			600
+spawn_tatooine_1922	TATOOINE	tat_world	AREA	0	5944.6	180.0	-3827.8	0	1	a Jawa engineer	humanoid_jawa_engineer	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	6	0	-	idle			600
+spawn_tatooine_1923	TATOOINE	tat_world	AREA	0	5760.9	51.0	4000.9	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	N	10	20	Outback	Tatooine	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1924	TATOOINE	tat_world	AREA	0	7023.8	109.3	2417.1	0	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1925	TATOOINE	tat_world	AREA	0	-4936.6	29.8	-5552.9	0	1	a mountain squill	creature_squill_mountain	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1926	TATOOINE	tat_world	AREA	0	6400.7	65.0	185.7	0	1	a mountain squill	creature_squill_mountain	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			1800
+spawn_tatooine_1926	TATOOINE	tat_world	AREA	0	6400.7	65.0	185.7	0	1	a mountain squill	creature_squill_mountain	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	6	0	-	idle			1800
 spawn_tatooine_1927	TATOOINE	tat_world	AREA	0	-6893.9	68.8	1514.4	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			1800
-spawn_tatooine_1928	TATOOINE	tat_world	AREA	0	-3165.0	9.4	3630.9	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1928	TATOOINE	tat_world	AREA	0	-3165.0	9.4	3630.9	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1929	TATOOINE	tat_world	AREA	0	-7171.4	41.2	-2400.3	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1930	TATOOINE	tat_world	AREA	0	2201.1	0.0	-4458.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1930	TATOOINE	tat_world	AREA	0	2201.1	0.0	-4458.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1931	TATOOINE	tat_world	AREA	0	-3804.7	30.9	-4723.6	177	1	a Sand Crawler crewman	humanoid_legacy_jawa_grunt	ATTACKABLE	N	10	20	Outback	Tatooine	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1932	TATOOINE	tat_world	AREA	0	3914.6	83.2	-4304.4	0	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1933	TATOOINE	tat_world	AREA	0	3921.7	89.6	-4322.1	0	1	a scavenger Punk	humanoid_scavenger_punk	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
@@ -1949,18 +1949,18 @@ spawn_tatooine_1946	TATOOINE	tat_world	AREA	0	-2129.3	6.6	674.4	0	1	a thief	huma
 spawn_tatooine_1947	TATOOINE	tat_world	AREA	0	-4821.3	26.4	6529.9	0	1	a Tusken bantha	creature_bantha_tusken	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1948	TATOOINE	tat_world	AREA	0	-5282.9	40.0	-4442.9	0	1	a Tusken bantha	creature_bantha_tusken	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1949	TATOOINE	tat_world	AREA	0	-5340.4	40.0	-4452.4	0	1	a Tusken bantha	creature_bantha_tusken	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1950	TATOOINE	tat_world	AREA	0	5785.0	50.0	3992.9	0	1	a Tusken captain	humanoid_tusken_captain	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1950	TATOOINE	tat_world	AREA	0	5785.0	50.0	3992.9	0	1	a Tusken captain	humanoid_tusken_captain	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1951	TATOOINE	tat_world	AREA	0	-5338.0	40.0	-4434.9	0	1	a Tusken captain	humanoid_tusken_captain	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1952	TATOOINE	tat_world	AREA	0	-4825.2	26.7	6529.0	0	1	a Tusken chief	humanoid_tusken_chief	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1953	TATOOINE	tat_world	AREA	0	-4826.3	26.8	6532.4	0	1	a Tusken commoner	humanoid_tusken_commoner	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1954	TATOOINE	tat_world	AREA	0	-3753.0	13.8	-4747.7	0	1	a Tusken Outrider	humanoid_tusken_raider_wildman	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1955	TATOOINE	tat_world	AREA	0	5744.9	53.0	4011.3	0	1	a Tusken Outrider	humanoid_tusken_raider_wildman	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
-spawn_tatooine_1956	TATOOINE	tat_world	AREA	0	5778.0	50.8	3982.9	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1956	TATOOINE	tat_world	AREA	0	5778.0	50.8	3982.9	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	6	0	-	idle			600
 spawn_tatooine_1957	TATOOINE	tat_world	AREA	0	-5289.5	40.0	-4441.3	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1958	TATOOINE	tat_world	AREA	0	-5318.3	40.0	-4427.3	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1959	TATOOINE	tat_world	AREA	0	-5323.2	40.0	-4443.6	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	4	0	-	idle			600
 spawn_tatooine_1960	TATOOINE	tat_world	AREA	0	-5332.0	40.0	-4455.9	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	4	0	-	idle			600
-spawn_tatooine_1961	TATOOINE	tat_world	AREA	0	-5316.0	40.0	-4444.8	0	1	a Tusken sniper	humanoid_tusken_sniper	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	4	0	-	idle			600
+spawn_tatooine_1961	TATOOINE	tat_world	AREA	0	-5316.0	40.0	-4444.8	0	1	a Tusken sniper	humanoid_tusken_sniper	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	4	0	-	idle			600
 spawn_tatooine_1962	TATOOINE	tat_world	AREA	0	5779.8	50.5	4000.2	0	1	a Tusken warlord	humanoid_tusken_warlord	AGGRESSIVE	E	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1963	TATOOINE	tat_world	AREA	0	7032.8	90.1	2500.3	0	1	a Tusken warlord	humanoid_tusken_warlord	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1964	TATOOINE	tat_world	AREA	0	7054.4	92.7	2510.3	0	1	a Tusken warlord	humanoid_tusken_warlord	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
@@ -1988,11 +1988,11 @@ spawn_tatooine_1985	TATOOINE	tat_world	AREA	0	-951.7	11.0	-4269.9	0	1	an Alkhara
 spawn_tatooine_1986	TATOOINE	tat_world	AREA	0	-961.3	10.7	-4298.4	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1987	TATOOINE	tat_world	AREA	0	-971.1	13.0	-4257.3	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1988	TATOOINE	tat_world	AREA	0	-981.7	14.5	-4281.6	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1989	TATOOINE	tat_world	AREA	0	-4691.0	30.7	5460.4	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	5	LOITER	35	0	-	idle			600
-spawn_tatooine_1990	TATOOINE	tat_world	AREA	0	-860.1	9.3	-1228.7	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
+spawn_tatooine_1989	TATOOINE	tat_world	AREA	0	-4691.0	30.7	5460.4	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	35	0	-	idle			600
+spawn_tatooine_1990	TATOOINE	tat_world	AREA	0	-860.1	9.3	-1228.7	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1991	TATOOINE	tat_world	AREA	0	-1264.0	10.1	5463.4	87	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	6	0	-	idle			600
 spawn_tatooine_1992	TATOOINE	tat_world	AREA	0	-3327.0	7.5	-3719.6	0	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1993	TATOOINE	tat_world	AREA	0	6464.7	9.1	-2229.6	0	1	an elder zucca boar	creature_boar_zucca_elder	ATTACKABLE	N	10	20	Outback	Tatooine	4	LOITER	32	0	-	idle			900
+spawn_tatooine_1993	TATOOINE	tat_world	AREA	0	6464.7	9.1	-2229.6	0	1	an elder zucca boar	creature_boar_zucca_elder	ATTACKABLE	N	10	20	Outback	Tatooine	3	LOITER	32	0	-	idle			900
 spawn_tatooine_1994	TATOOINE	tat_world	AREA	0	-4605.9	45.4	-4737.3	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1995	TATOOINE	tat_world	AREA	0	-4624.0	39.8	-4707.1	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1996	TATOOINE	tat_world	AREA	0	-4646.4	42.3	-4759.1	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	10	20	Outback	Tatooine	1	LOITER	2	0	-	idle			600
@@ -2027,9 +2027,9 @@ spawn_tatooine_2024	TATOOINE	tat_world	AREA	0	-3925.9	18.6	-4270.6	0	1	Valarian'
 spawn_tatooine_2025	TATOOINE	tat_world	AREA	0	-3941.1	21.3	-4297.1	0	1	Valarian's assassin	humanoid_valarian_assassin	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	3	0	-	idle			600
 spawn_tatooine_2026	TATOOINE	tat_world	AREA	0	-3946.5	21.4	-4278.9	0	1	Valarian's smuggler	humanoid_tatooine_valarian_smuggler	AGGRESSIVE	N	10	20	Outback	Tatooine	1	LOITER	3	0	-	idle			600
 spawn_tatooine_2027	TATOOINE	tat_world	AREA	0	-5009.3	39.8	-6129.9	0	1	Valarian's thief	humanoid_valarian_thief	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	32	0	-	idle			600
-spawn_tatooine_2028	TATOOINE	tat_world	AREA	0	-5024.4	39.8	-6109.5	0	1	Valarian's thief	humanoid_valarian_thief	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	32	0	-	idle			600
-spawn_tatooine_2029	TATOOINE	tat_world	AREA	0	1124.2	160.6	-3930.7	0	1	a brigand	humanoid_brigand	AGGRESSIVE	N	10	20	Outback	Tatooine	4	LOITER	10	0	-	idle			600
-spawn_tatooine_2029	TATOOINE	tat_world	AREA	0	1002.9	187.7	-3019.4	0	1	a brigand	humanoid_brigand	AGGRESSIVE	N	10	20	Outback	Tatooine	5	LOITER	20	0	-	idle			600
+spawn_tatooine_2028	TATOOINE	tat_world	AREA	0	-5024.4	39.8	-6109.5	0	1	Valarian's thief	humanoid_valarian_thief	AGGRESSIVE	N	10	20	Outback	Tatooine	2	LOITER	32	0	-	idle			600
+spawn_tatooine_2029	TATOOINE	tat_world	AREA	0	1124.2	160.6	-3930.7	0	1	a brigand	humanoid_brigand	AGGRESSIVE	N	10	20	Outback	Tatooine	3	LOITER	10	0	-	idle			600
+spawn_tatooine_2029	TATOOINE	tat_world	AREA	0	1002.9	187.7	-3019.4	0	1	a brigand	humanoid_brigand	AGGRESSIVE	N	10	20	Outback	Tatooine	4	LOITER	20	0	-	idle			600
 spawn_tatooine_2030	TATOOINE	tat_world	PATROL	0	969.8	12.6	2513.4	0	1	a black hole Stormtrooper	humanoid_imperial_stormtrooper_black_hole	ATTACKABLE	N	10	20	Outback	Tatooine	1	PATROL	0	patrol_tat_3900	column	idle			600
 spawn_tatooine_2031	TATOOINE	tat_world	PATROL	0	998.9	12.6	2499.7	0	1	a black hole Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_black_hole_squad_leader	ATTACKABLE	N	10	20	Outback	Tatooine	1	PATROL	0	patrol_tat_3800	column	idle			600
 spawn_tatooine_2032	TATOOINE	tat_world	PATROL	0	-1801.8	7.9	-3913.5	0	1	a dune bantha	creature_bantha_dune	ATTACKABLE	N	10	20	Outback	Tatooine	1	PATROL	0	patrol_tat_3500	column	idle			600
@@ -2085,7 +2085,7 @@ spawn_tatooine_2081	TATOOINE	tat_world	AREA	0	-4006.7	68.5	6290.5	0	1	a Tusken s
 spawn_tatooine_2082	TATOOINE	tat_world	PATROL	0	-4020.6	60.0	6225.2	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	E	15	20	POI	Fort Tusken	1	PATROL	0	patrol_tat_100	column	idle			600
 spawn_tatooine_2083	TATOOINE	tat_world	PATROL	0	-3977.0	60.0	6281.3	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	E	15	20	POI	Fort Tusken	1	PATROL	0	patrol_tat_200	column	idle			600
 spawn_tatooine_2084	TATOOINE	tat_world	PATROL	0	-4009.4	60.0	6243.5	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	E	15	20	POI	Fort Tusken	1	PATROL	0	patrol_tat_300	column	idle			600
-spawn_tatooine_2085	TATOOINE	tat_world	AREA	0	-6109.9	24.8	-3360.5	0	1	a jundland eopie	creature_eopie_jundland	ATTACKABLE	N	10	20	POI	Great Pit of Carkoon	3	LOITER	6	0	-	idle			600
+spawn_tatooine_2085	TATOOINE	tat_world	AREA	0	-6109.9	24.8	-3360.5	0	1	a jundland eopie	creature_eopie_jundland	ATTACKABLE	N	10	20	POI	Great Pit of Carkoon	2	LOITER	6	0	-	idle			600
 spawn_tatooine_2086	TATOOINE	tat_world	AREA	0	-6112.3	27.2	-3375.0	0	1	a jundland eopie	creature_eopie_jundland	ATTACKABLE	N	10	20	POI	Great Pit of Carkoon	3	LOITER	6	0	-	idle			600
 spawn_tatooine_2087	TATOOINE	tat_jabbas_palace	AREA	1	-9.1	0.2	142.3	86	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2088	TATOOINE	tat_jabbas_palace	AREA	1	9.5	0.2	142.1	-87	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
@@ -2235,10 +2235,10 @@ spawn_tatooine_2231	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dra
 spawn_tatooine_2232	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
 spawn_tatooine_2233	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
 spawn_tatooine_2234	TATOOINE	tat_world	AREA	0	7484.3	8.1	4483.7	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2235	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
+spawn_tatooine_2235	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
 spawn_tatooine_2236	TATOOINE	tat_world	AREA	0	-2455.2	0.0	-5384.6	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
-spawn_tatooine_2237	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
-spawn_tatooine_2238	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	droid_tatooine_lin_demolitionmech	AGGRESSIVE	E	10	20	POI	Lars Homestead	3	LOITER	6	0	-	idle			600
+spawn_tatooine_2237	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
+spawn_tatooine_2238	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	droid_tatooine_lin_demolitionmech	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
 spawn_tatooine_2239	TATOOINE	tat_world	AREA	0	-2575.0	0.0	-5517.0	0	1	Zef Ando	humanoid_legacy_zef_ando	INVULNERABLE	N	100	100	POI	Lars Homestead	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2240	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Old Mos Espa Arena Track	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2241	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
