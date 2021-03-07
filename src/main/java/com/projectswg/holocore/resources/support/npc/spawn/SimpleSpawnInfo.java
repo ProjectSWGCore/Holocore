@@ -187,7 +187,7 @@ public class SimpleSpawnInfo implements SpawnInfo {
 
         private Builder() {
             info = new SimpleSpawnInfo();
-            info.id = "simple";
+            info.id = "SPAWNER";
             info.behavior = AIBehavior.IDLE;
             info.mood = "";
             info.spawnerFlag = NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE;

@@ -36,6 +36,18 @@ public enum SpawnerType {
 	GCW_BANNER_ONPOLE("object/tangible/gcw/shared_flip_banner_onpole_spawner.iff"),
 	QUEST("object/tangible/spawning/shared_quest_spawner.iff"),
 	EGG("object/tangible/spawning/shared_spawn_egg.iff"),
+	WAYPOINT("object/path_waypoint/shared_path_waypoint.iff"),
+	WAYPOINT_AUTO_SPAWN("object/path_waypoint/shared_path_waypoint_auto_spawn.iff"),
+	WAYPOINT_CITY("object/path_waypoint/shared_path_waypoint_city.iff"),
+	WAYPOINT_DROID("object/path_waypoint/shared_path_waypoint_droid.iff"),
+	WAYPOINT_PATROL("object/path_waypoint/shared_path_waypoint_patrol.iff"),
+	DYNAMIC_REGION_CONTROLLER("object/building/shared_invisible_dynamic_region_controller.iff"),
+	HOLIDAY_CONTROLLER("object/building/shared_invisible_holiday_controller.iff"),
+	EVENT_CONTROLLER("object/building/shared_local_event_controller.iff"),
+	BUILDOUT("object/tangible/buildout/shared_buildout_placeholder.iff"),
+	BUILDOUT_RING("object/tangible/buildout/shared_buildout_placeholder_ring.iff"),
+	POI_BASE("object/tangible/poi/base/shared_poi_base.iff"),
+	INVISIBLE_OBJECT("object/tangible/theme_park/shared_invisible_object.iff"),
 	GCW_CLONING("object/tangible/spawning/event/shared_gcw_cloning_sickness_droid_spawner.iff"),
 	GCW_CITY("object/tangible/gcw/shared_gcw_city_spawner.iff"),
 	MISSION_EASY("object/tangible/mission/shared_mission_informant_spawner_easy.iff"),
@@ -54,9 +66,7 @@ public enum SpawnerType {
 	OUT_SCIENTIST("object/tangible/spawning/event/shared_outbreak_dungeon_scientist_spawner.iff"),
 	OUT_GAMMA("object/tangible/spawning/event/shared_outbreak_gamma_survivor_spawner.iff"),
 	OUT_HIDDEN("object/tangible/spawning/event/shared_outbreak_hidden_content_spawner.iff"),
-	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff"),
-	UNCHECKED("object/mobile/shared_bossk.iff"),
-	CHECKED("object/mobile/shared_boba_fett.iff");
+	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff");
 	
 	private static final SpawnerType [] VALUES = values();
 	

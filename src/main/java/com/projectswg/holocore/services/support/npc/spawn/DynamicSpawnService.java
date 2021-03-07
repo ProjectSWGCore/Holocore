@@ -60,8 +60,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class DynamicSpawnService extends Service {
 	
-	private static final int MAX_SPAWN_DISTANCE_TO_PLAYER = 110;    // Spawner is created up to this amount of meters away from the player
-	private static final SpawnerType SPAWNER_TYPE = SpawnerType.RANDOM;	// Important that this type is only used by dynamic spawns
+	private static final int MAX_SPAWN_DISTANCE_TO_PLAYER = 150;    // Spawner is created up to this amount of meters away from the player
+	private static final SpawnerType SPAWNER_TYPE = SpawnerType.DYNAMIC_REGION_CONTROLLER;	// Important that this type is only used by dynamic spawns
 	
 	private final DynamicSpawnLoader dynamicSpawnLoader;
 	private final NoSpawnZoneLoader noSpawnZoneLoader;
@@ -73,8 +73,8 @@ public class DynamicSpawnService extends Service {
 		dynamicSpawnLoader = ServerData.INSTANCE.getDynamicSpawns();
 		noSpawnZoneLoader = ServerData.INSTANCE.getNoSpawnZones();
 		terrainLevelLoader = ServerData.INSTANCE.getTerrainLevels();
-		npcSpawnChance = PswgDatabase.INSTANCE.getConfig().getLong(this, "npcSpawnChance", 15);
-		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 8);
+		npcSpawnChance = PswgDatabase.INSTANCE.getConfig().getLong(this, "npcSpawnChance", 5);
+		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 20);
 	}
 	
 	@IntentHandler
@@ -202,7 +202,7 @@ public class DynamicSpawnService extends Service {
 			return;
 		}
 		
-		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder().withNpcId(npcId).withDifficulty(difficulty).withSpawnerType(SpawnerType.RANDOM)
+		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder().withNpcId(npcId).withDifficulty(difficulty).withSpawnerType(SpawnerType.DYNAMIC_REGION_CONTROLLER)
 				.withMinLevel(minLevel).withMaxLevel(maxLevel).withSpawnerFlag(spawnerFlag).withBehavior(AIBehavior.LOITER).withLocation(location)
 				.build();
 		
