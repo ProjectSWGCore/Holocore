@@ -41,6 +41,7 @@ sourceSets {
 	test {
 		dependencies {
 			implementation(group="junit", name="junit", version="4.12")
+			implementation(group="org.mockito", name="mockito-core", version="3.8.0")
 		}
 	}
 	create("display") {

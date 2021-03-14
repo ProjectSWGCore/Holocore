@@ -35,11 +35,13 @@ import java.util.Collection;
 public class ActiveQuestRequirement implements Requirement {
 	
 	private final String questName;
-	private final int task;
+	private final boolean active;
+	private final Integer task;
 	
-	public ActiveQuestRequirement(String questName, int task) {
+	public ActiveQuestRequirement(String questName, boolean active, Integer task) {
 		this.questName = questName;
 		this.task = task;
+		this.active = active;
 	}
 	
 	@Override
@@ -47,15 +49,32 @@ public class ActiveQuestRequirement implements Requirement {
 		PlayerObject playerObject = player.getPlayerObject();
 		
 		if (!playerObject.isQuestInJournal(questName)) {
-			return false;
+			return !active;
 		}
 		
 		if (playerObject.isQuestComplete(questName)) {
-			return false;
+			return !active;
 		}
 		
-		Collection<Integer> questActiveTasks = playerObject.getQuestActiveTasks(questName);
-		
-		return questActiveTasks.contains(task);
+		if (task != null) {
+			Collection<Integer> questActiveTasks = playerObject.getQuestActiveTasks(questName);
+			boolean taskActive = questActiveTasks.contains(task);
+			
+			return taskActive == active;
+		}
+
+		return active;
+	}
+	
+	public String getQuestName() {
+		return questName;
+	}
+	
+	public Integer getTask() {
+		return task;
+	}
+	
+	public boolean isActive() {
+		return active;
 	}
 }
