@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
@@ -82,10 +83,62 @@ enum CombatCommandAttack implements CombatCommandHitType {
 						// TODO AoE based on Location instead of delay egg
 					}
 					break;
+				case CONE:
+					doCombatCone(source, target, info, weapon, command);
+					break;
 				default:
 					break;
 			}
 		}
+	}
+	
+	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		double coneLength = command.getConeLength();
+		double coneWidth = command.getConeWidth();
+		
+		Location sourceWorldLocation = source.getWorldLocation();
+		Location targetWorldLocation = target.getWorldLocation();
+		
+		double dirX = targetWorldLocation.getX() - sourceWorldLocation.getX();
+		double dirZ = targetWorldLocation.getZ() - sourceWorldLocation.getZ();
+		
+		Set<SWGObject> objectsToCheck = source.getObjectsAware();
+		
+		// TODO line of sight checks between the attacker and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
+				.filter(CreatureObject.class::isInstance)
+				.map(CreatureObject.class::cast)
+				.filter(candidate -> !target.equals(source))	// Make sure the attacker can't damage themselves
+				.filter(source::isAttackable)
+				.filter(candidate -> canPerform(source, target, command) == CombatStatus.SUCCESS)
+				.filter(candidate -> sourceWorldLocation.distanceTo(candidate.getLocation()) <= coneLength)
+				.filter(candidate -> {
+					Location candidateWorldLocation = candidate.getWorldLocation();
+					
+					return isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneLength, coneWidth, dirX, dirZ);
+				})
+				.collect(Collectors.toSet());
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private boolean isInConeAngle(Location attackerLocation, Location targetLocation, double coneLength, double coneWidth, double directionX, double directionZ) {
+		double radius = coneWidth / 2d;
+		double angle = 2 * Math.atan(coneLength / radius);
+		
+		double targetX = targetLocation.getX() - attackerLocation.getX();
+		double targetZ = targetLocation.getZ() - attackerLocation.getZ();
+		
+		double targetAngle = Math.atan2(targetZ, targetX) - Math.atan2(directionZ, directionX);
+		
+		double degrees = targetAngle * 180 / Math.PI;
+		double coneAngle = angle / 2;
+		
+		if (degrees > coneAngle || degrees < -coneAngle) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {

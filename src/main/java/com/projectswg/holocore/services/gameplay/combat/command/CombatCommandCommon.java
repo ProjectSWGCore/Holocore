@@ -125,6 +125,7 @@ public class CombatCommandCommon {
 		
 		switch (c.getAttackType()) {
 			case AREA:
+			case CONE:
 			case TARGET_AREA:
 				return canPerformArea(source, c);
 			case SINGLE_TARGET:

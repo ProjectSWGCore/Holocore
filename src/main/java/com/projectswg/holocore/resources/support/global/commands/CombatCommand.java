@@ -61,6 +61,7 @@ public class CombatCommand extends Command {
 	private final int delayAttackLoops;
 	private final DelayAttackEggPosition eggPosition;
 	private final double coneLength;
+	private final double coneWidth;
 	private final HealAttrib healAttrib;
 	private final String specialLine;
 	
@@ -91,6 +92,7 @@ public class CombatCommand extends Command {
 		this.delayAttackLoops = builder.delayAttackLoops;
 		this.eggPosition = builder.eggPosition;
 		this.coneLength = builder.coneLength;
+		this.coneWidth = builder.coneWidth;
 		this.healAttrib = builder.healAttrib;
 		this.specialLine = builder.specialLine;
 	}
@@ -212,6 +214,10 @@ public class CombatCommand extends Command {
 		return coneLength;
 	}
 	
+	public double getConeWidth() {
+		return coneWidth;
+	}
+	
 	public HealAttrib getHealAttrib() {
 		return healAttrib;
 	}
@@ -256,6 +262,7 @@ public class CombatCommand extends Command {
 		private int delayAttackLoops;
 		private DelayAttackEggPosition eggPosition;
 		private double coneLength;
+		private double coneWidth;
 		private HealAttrib healAttrib;
 		private String specialLine;
 		
@@ -390,6 +397,11 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withConeLength(double coneLength) {
 			this.coneLength = coneLength;
+			return this;
+		}
+		
+		public CombatCommandBuilder withConeWidth(double coneWidth) {
+			this.coneWidth = coneWidth;
 			return this;
 		}
 		

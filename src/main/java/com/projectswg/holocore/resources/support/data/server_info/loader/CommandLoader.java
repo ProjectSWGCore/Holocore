@@ -126,6 +126,7 @@ public class CommandLoader extends DataLoader {
 						.withAnimations(WeaponType.POLEARM_SABER, getAnimationList(set.getText("anim_polearmlightsaber")))
 						.withAttackType(AttackType.valueOf(set.getText("attackType")))
 						.withConeLength(set.getReal("coneLength"))
+						.withConeWidth(set.getReal("coneWidth"))
 						.withAddedDamage((int) set.getInt("addedDamage"))
 						.withPercentAddFromWeapon(set.getReal("percentAddFromWeapon"))
 						.withBypassArmor(set.getReal("bypassArmor"))
