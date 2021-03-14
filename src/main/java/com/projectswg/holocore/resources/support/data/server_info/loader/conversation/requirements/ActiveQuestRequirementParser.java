@@ -37,8 +37,17 @@ public class ActiveQuestRequirementParser implements RequirementParser<ActiveQue
 	public ActiveQuestRequirement parse(Map<String, Object> args) {
 		String questName = (String) args.get("quest");
 		boolean active = (Boolean) args.get("active");
-		Integer task = (Integer) args.get("task");
+		Long task = (Long) args.get("task");
 		
-		return new ActiveQuestRequirement(questName, active, task);
+		return new ActiveQuestRequirement(questName, active, getTaskValue(task));
+	}
+	
+	private Integer getTaskValue(Long task) {
+		if (task == null) {
+			// The parameter is optional
+			return null;
+		}
+		
+		return task.intValue();
 	}
 }

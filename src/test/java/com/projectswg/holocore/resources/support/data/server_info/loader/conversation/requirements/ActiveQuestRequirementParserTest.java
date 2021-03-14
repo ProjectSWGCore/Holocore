@@ -25,7 +25,7 @@ public class ActiveQuestRequirementParserTest {
 		
 		Map<String, Object> args = Map.of(
 				"quest", expectedQuestName,
-				"task", expectedTask,
+				"task", Long.valueOf(expectedTask),
 				"active", expectedActive
 		);
 		
