@@ -6,6 +6,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.sui.SuiEvent;
+import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -17,6 +18,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
@@ -50,6 +53,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("Vehicles");
 				listBox.addListItem("Powerups");
 				listBox.addListItem("Heroic Jewelry Sets");
+				listBox.addListItem("Level 90");
 				
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -70,6 +74,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 5: handleVehicles(player); break;
 			case 6: handlePowerups(player); break;
 			case 7: handleJewelrySets(player); break;
+			case 8: handleLevel90(player); break;
 		}
 	}
 	
@@ -1788,6 +1793,43 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		powerup.moveToContainer(inventory);
 		
 		ObjectCreatedIntent.broadcast(powerup);
+	}
+	
+	private static void handleLevel90(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		
+		if (creatureObject.getLevel() >= 90) {
+			return;
+		}
+		
+		PlayerObject playerObject = player.getPlayerObject();
+		Profession profession = playerObject.getProfession();
+		String xpType = getXpType(profession);
+		
+		new ExperienceIntent(creatureObject, xpType, 99999999).broadcast();
+	}
+	
+	private static String getXpType(Profession profession) {
+		switch (profession) {
+			case TRADER_DOMESTIC:
+			case TRADER_ENGINEER:
+			case TRADER_GENERAL:
+			case TRADER_MUNITIONS:
+			case TRADER_STRUCTURES:
+				return "crafting";
+			case BOUNTY_HUNTER:
+			case COMMANDO:
+			case SPY:
+			case FORCE_SENSITIVE:
+			case OFFICER:
+			case MEDIC:
+			case SMUGGLER:
+				return "combat";
+			case ENTERTAINER:
+				return "entertainer";
+			default:
+				throw new IllegalArgumentException("Unknown profession " + profession);
+		}
 	}
 	
 }
