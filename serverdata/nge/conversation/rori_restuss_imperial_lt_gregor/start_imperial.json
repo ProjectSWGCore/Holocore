@@ -1,17 +1,33 @@
 {
 	"npcMessage": {
-		"file": "conversation/restuss_imperial_ground_destroy_2",
-		"key": "s_18",
-		"comment": "Glad to have you back, soldier. A new threat has emerged that has to be dealt with immediately. The blasted Rebels have moved in their Elite Commandos to Restuss and they are wreaking havoc among our clean up crews! We need someone to put a stop to it immediately. Your mission will be to defeat 5 of them."
+		"file": "conversation/death_watch_imperial_herald",
+		"key": "s_68732e54",
+		"comment": "Soldier. How may I help you? You are well viewed in the eyes of the Empire for your help earlier."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/restuss_imperial_ground_destroy_2",
-				"key": "s_20",
-				"comment": "Not a problem, sir!"
+				"file": "conversation/npe_imperial_questgiver",
+				"key": "s_13",
+				"comment": "Yes? Is there something I can help you with?"
 			},
-			"next": "rori_restuss_imperial_lt_gregor/grant_quest"
+			"next": "rori_restuss_imperial_lt_gregor/imperial_quest_5_commando_grant"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_imperial_ground_destroy_1",
+				"key": "s_38",
+				"comment": "We'll see how elite they are. I'll take care of it."
+			},
+			"next": "rori_restuss_imperial_lt_gregor/imperial_quest_5_commando_active"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/naboo_imperial_trainer_2",
+				"key": "s_b2a924ab",
+				"comment": "I'd like a briefing."
+			},
+			"next": "rori_restuss_imperial_lt_gregor/imperial_quest_5_commando_completed"
 		}
 	],
 	"requirements": [
@@ -26,7 +42,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "salute2"
+				"animation": "explain"
 			}
 		}
 	]

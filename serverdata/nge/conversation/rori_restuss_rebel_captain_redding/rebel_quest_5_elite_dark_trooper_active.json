@@ -1,0 +1,32 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_rebel_ground_destroy_1",
+		"key": "s_11",
+		"comment": "You still need to hunt down more Dark Troopers, soldier."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/restuss_rebel_st3_destroy_elite",
+				"task": 0,
+				"active": true
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

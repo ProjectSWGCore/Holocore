@@ -1,0 +1,40 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_imperial_ground_destroy_1",
+		"key": "s_39",
+		"comment": "An amazing feat out there, soldier. You've made us all proud. This war isn't lost yet!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_imperial_ground_destroy_2",
+				"key": "s_20",
+				"comment": "Not a problem, sir!"
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/restuss_rebel_stormtrooper_2",
+				"task": 1,
+				"active": true
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute_2"
+			}
+		},
+		{
+			"type": "advance_quest",
+			"args": {
+				"quest": "quest/restuss_rebel_stormtrooper_2"
+			}
+		}
+	]
+}

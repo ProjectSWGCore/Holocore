@@ -1,0 +1,40 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_imperial_ground_destroy_1",
+		"key": "s_6",
+		"comment": "Reports of your success have already reached me, soldier. I'm most impressed. There's still more work to be done though, so let me know when you are ready to get back out there."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_imperial_ground_destroy_2",
+				"key": "s_20",
+				"comment": "Not a problem, sir!"
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/restuss_imperial_soldier_2",
+				"task": 1,
+				"active": true
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute_2"
+			}
+		},
+		{
+			"type": "advance_quest",
+			"args": {
+				"quest": "quest/restuss_imperial_soldier_2"
+			}
+		}
+	]
+}

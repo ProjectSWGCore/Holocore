@@ -1,10 +1,35 @@
 {
 	"npcMessage": {
-		"file": "conversation/restuss_imperial_ground_destroy_2",
-		"key": "s_61",
-		"comment": "I'm still awaiting new orders, soldier. Come back later and I will have your mission plan ready."
+		"file": "conversation/death_watch_imperial_herald",
+		"key": "s_68732e54",
+		"comment": "Soldier. How may I help you? You are well viewed in the eyes of the Empire for your help earlier."
 	},
-	"playerResponses": [],
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/npe_imperial_questgiver",
+				"key": "s_13",
+				"comment": "Yes? Is there something I can help you with?"
+			},
+			"next": "rori_restuss_imperial_captain_roth/imperial_quest_5_elite_grant"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/restuss_imperial_ground_destroy_2",
+				"key": "s_36",
+				"comment": "I think I'll just stick with hunting the Elite Commandos."
+			},
+			"next": "rori_restuss_imperial_captain_roth/imperial_quest_5_elite_active"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/naboo_imperial_trainer_2",
+				"key": "s_b2a924ab",
+				"comment": "I'd like a briefing."
+			},
+			"next": "rori_restuss_imperial_captain_roth/imperial_quest_5_elite_completed"
+		}
+	],
 	"requirements": [
 		{
 			"type": "faction_name",
@@ -17,7 +42,7 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "shrug_shoulders"
+				"animation": "explain"
 			}
 		}
 	]

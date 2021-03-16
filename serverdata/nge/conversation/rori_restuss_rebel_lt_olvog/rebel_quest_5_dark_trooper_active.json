@@ -1,0 +1,32 @@
+{
+	"npcMessage": {
+		"file": "conversation/restuss_rebel_ground_destroy_2",
+		"key": "s_58",
+		"comment": "Alright, soldier. Be careful out there."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/restuss_rebel_stormtrooper_2",
+				"task": 0,
+				"active": true
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "apologize"
+			}
+		}
+	]
+}

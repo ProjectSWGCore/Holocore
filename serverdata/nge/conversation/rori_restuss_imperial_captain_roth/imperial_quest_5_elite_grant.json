@@ -5,7 +5,15 @@
 		"comment": "Excellent, show them what the Emperor's finest can do!"
 	},
 	"playerResponses": [],
-	"requirements": [],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/restuss_imperial_st3_destroy_elite",
+				"active": false
+			}
+		}
+	],
 	"events": [
 		{
 			"type": "npc_animation",
