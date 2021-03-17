@@ -1,0 +1,5 @@
+conversation_id	conversation_file
+TEXT	TEXT
+tatooine_mos_eisley_darth_vader	tatooine_mos_eisley_darth_vader/start_neutral
+tatooine_mos_eisley_darth_vader	tatooine_mos_eisley_darth_vader/start_rebel
+tatooine_mos_eisley_darth_vader	tatooine_mos_eisley_darth_vader/start_imperial
