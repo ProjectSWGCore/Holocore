@@ -80,11 +80,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 						// Same as AREA, but the target is the destination for the AoE and  can take damage
 						doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
 					} else {
-						// TODO AoE based on Location instead of delay egg
+						// TODO AoE based on Location instead of delay egg (free-targeting with heavy weapons)
 					}
 					break;
 				case CONE:
-					doCombatCone(source, target, info, weapon, command);
+					if (target != null) {
+						doCombatCone(source, target, info, weapon, command);
+					} else {
+						// TODO CoE based on Location (free-targeting with flamethrowers)
+					}
 					break;
 				default:
 					break;
@@ -92,12 +96,11 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		}
 	}
 	
-	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, WeaponObject weapon, CombatCommand command) {
 		double coneLength = command.getConeLength();
 		double coneWidth = command.getConeWidth();
 		
 		Location sourceWorldLocation = source.getWorldLocation();
-		Location targetWorldLocation = target.getWorldLocation();
 		
 		double dirX = targetWorldLocation.getX() - sourceWorldLocation.getX();
 		double dirZ = targetWorldLocation.getZ() - sourceWorldLocation.getZ();
@@ -108,37 +111,33 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
 				.map(CreatureObject.class::cast)
-				.filter(candidate -> !target.equals(source))	// Make sure the attacker can't damage themselves
+				.filter(candidate -> !candidate.equals(source))	// Make sure the attacker can't damage themselves
 				.filter(source::isAttackable)
-				.filter(candidate -> canPerform(source, target, command) == CombatStatus.SUCCESS)
+				.filter(candidate -> canPerform(source, candidate, command) == CombatStatus.SUCCESS)
 				.filter(candidate -> sourceWorldLocation.distanceTo(candidate.getLocation()) <= coneLength)
 				.filter(candidate -> {
 					Location candidateWorldLocation = candidate.getWorldLocation();
 					
-					return isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneLength, coneWidth, dirX, dirZ);
+					return isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneWidth, dirX, dirZ);
 				})
 				.collect(Collectors.toSet());
 		
 		doCombat(source, targets, weapon, info, command);
 	}
-	
-	private boolean isInConeAngle(Location attackerLocation, Location targetLocation, double coneLength, double coneWidth, double directionX, double directionZ) {
-		double radius = coneWidth / 2d;
-		double angle = 2 * Math.atan(coneLength / radius);
-		
+
+	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		doCombatCone(source, target.getWorldLocation(), info, weapon, command);
+	}
+
+	boolean isInConeAngle(Location attackerLocation, Location targetLocation, double coneWidth, double directionX, double directionZ) {
 		double targetX = targetLocation.getX() - attackerLocation.getX();
 		double targetZ = targetLocation.getZ() - attackerLocation.getZ();
 		
 		double targetAngle = Math.atan2(targetZ, targetX) - Math.atan2(directionZ, directionX);
 		
 		double degrees = targetAngle * 180 / Math.PI;
-		double coneAngle = angle / 2;
 		
-		if (degrees > coneAngle || degrees < -coneAngle) {
-			return false;
-		}
-		
-		return true;
+		return !(Math.abs(degrees) > coneWidth);
 	}
 	
 	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
