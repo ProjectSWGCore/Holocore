@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
@@ -79,13 +80,64 @@ enum CombatCommandAttack implements CombatCommandHitType {
 						// Same as AREA, but the target is the destination for the AoE and  can take damage
 						doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
 					} else {
-						// TODO AoE based on Location instead of delay egg
+						// TODO AoE based on Location instead of delay egg (free-targeting with heavy weapons)
+					}
+					break;
+				case CONE:
+					if (target != null) {
+						doCombatCone(source, target, info, weapon, command);
+					} else {
+						// TODO CoE based on Location (free-targeting with flamethrowers)
 					}
 					break;
 				default:
 					break;
 			}
 		}
+	}
+	
+	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		double coneLength = command.getConeLength();
+		double coneWidth = command.getConeWidth();
+		
+		Location sourceWorldLocation = source.getWorldLocation();
+		
+		double dirX = targetWorldLocation.getX() - sourceWorldLocation.getX();
+		double dirZ = targetWorldLocation.getZ() - sourceWorldLocation.getZ();
+		
+		Set<SWGObject> objectsToCheck = source.getObjectsAware();
+		
+		// TODO line of sight checks between the attacker and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
+				.filter(CreatureObject.class::isInstance)
+				.map(CreatureObject.class::cast)
+				.filter(candidate -> !candidate.equals(source))	// Make sure the attacker can't damage themselves
+				.filter(source::isAttackable)
+				.filter(candidate -> canPerform(source, candidate, command) == CombatStatus.SUCCESS)
+				.filter(candidate -> sourceWorldLocation.distanceTo(candidate.getLocation()) <= coneLength)
+				.filter(candidate -> {
+					Location candidateWorldLocation = candidate.getWorldLocation();
+					
+					return isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneWidth, dirX, dirZ);
+				})
+				.collect(Collectors.toSet());
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+
+	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		doCombatCone(source, target.getWorldLocation(), info, weapon, command);
+	}
+
+	boolean isInConeAngle(Location attackerLocation, Location targetLocation, double coneWidth, double directionX, double directionZ) {
+		double targetX = targetLocation.getX() - attackerLocation.getX();
+		double targetZ = targetLocation.getZ() - attackerLocation.getZ();
+		
+		double targetAngle = Math.atan2(targetZ, targetX) - Math.atan2(directionZ, directionX);
+		
+		double degrees = targetAngle * 180 / Math.PI;
+		
+		return !(Math.abs(degrees) > coneWidth);
 	}
 	
 	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
