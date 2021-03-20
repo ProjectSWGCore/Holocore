@@ -45,7 +45,7 @@ public class CommandQueueService extends Service {
 	@Override
 	public boolean initialize() {
 		executor.start();
-		executor.executeWithFixedRate(1000, 1000, this::executeQueuedCommands);
+		executor.executeWithFixedRate(1000, 100, this::executeQueuedCommands);
 		return true;
 	}
 	

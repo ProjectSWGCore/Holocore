@@ -240,7 +240,7 @@ bo_gcw_restuss_phase_1_237	RORI	ror_world	0	object/static/structure/general/bann
 bo_gcw_restuss_phase_1_238	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4833.8	79.9	5857.4	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_239	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4847.4	78.1	5869.0	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_240	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4847.3	78.5	5885.5	45.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
-bo_gcw_restuss_phase_1_241	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4815.0	80.6	5868.5	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
+bo_gcw_restuss_phase_1_241	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4815.0	80.0	5868.5	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_242	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4823.0	79.0	5857.6	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_243	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4833.9	80.0	5824.4	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_244	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4845.2	79.5	5808.3	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
@@ -276,8 +276,8 @@ bo_gcw_restuss_phase_1_273	RORI	ror_world	0	object/static/structure/military/mil
 bo_gcw_restuss_phase_1_274	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4783.1	79.5	5791.4	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_275	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4766.0	79.4	5792.0	30.7	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_276	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4789.4	78.8	5791.2	-32.1	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
-bo_gcw_restuss_phase_1_277	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4786.4	80.3	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
-bo_gcw_restuss_phase_1_278	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4769.1	80.4	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
+bo_gcw_restuss_phase_1_277	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4786.4	80.0	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
+bo_gcw_restuss_phase_1_278	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4769.1	80.0	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_279	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4803.4	78.8	5800.0	-32.1	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_280	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4833.8	80.0	5840.9	90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_281	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4823.0	78.5	5841.2	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
@@ -302,7 +302,7 @@ bo_gcw_restuss_phase_1_299	RORI	ror_world	0	object/static/structure/military/mil
 bo_gcw_restuss_phase_1_300	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4709.7	76.9	5870.9	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_301	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4711.8	79.8	5803.1	-135.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_302	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_32_style_01.iff	4746.0	79.2	5791.2	-149.3	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
-bo_gcw_restuss_phase_1_303	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4777.6	80.1	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
+bo_gcw_restuss_phase_1_303	RORI	ror_world	0	object/static/structure/military/military_wall_weak_rebl_16_style_01.iff	4777.6	80.0	5768.3	180.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_304	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4710.0	77.6	5879.2	-45.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_305	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4709.6	77.0	5862.5	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
 bo_gcw_restuss_phase_1_306	RORI	ror_world	0	object/static/structure/military/military_column_weak_rebel_style_01.iff	4705.9	79.8	5809.0	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - Rebel Base - Walls
@@ -357,32 +357,32 @@ bo_gcw_restuss_phase_1_354	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_355	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5353.8	80.0	5847.4	46.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_356	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5362.7	80.0	5851.8	-86.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_357	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5382.8	80.0	5882.5	80.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_358	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5457.6	80.2	5861.2	75.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_358	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5457.6	80.0	5861.2	75.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_359	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5456.5	80.0	5853.7	-86.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_360	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5414.0	80.0	5846.8	8.4	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_361	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5492.2	80.6	5829.8	41.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_362	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5500.5	80.8	5822.2	53.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_361	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5492.2	80.0	5829.8	41.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_362	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5500.5	80.0	5822.2	53.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_363	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5506.7	80.0	5696.6	-25.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_364	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5506.7	80.0	5671.8	-65.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_365	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5528.4	80.8	5671.0	45.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_366	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5528.3	80.7	5696.2	82.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_367	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5522.3	80.2	5616.5	8.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_368	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5521.1	80.2	5631.3	61.3	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_369	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5321.4	80.2	5527.2	-34.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_370	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5336.2	80.2	5527.9	-19.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_371	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5300.3	81.2	5518.6	25.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_365	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5528.4	80.0	5671.0	45.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_366	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5528.3	80.0	5696.2	82.0	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_367	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5522.3	80.0	5616.5	8.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_368	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5521.1	80.0	5631.3	61.3	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_369	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5321.4	80.0	5527.2	-34.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_370	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5336.2	80.0	5527.9	-19.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_371	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5300.3	80.0	5518.6	25.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_372	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5202.2	80.0	5618.9	3.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_373	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5210.0	80.5	5649.8	-3.7	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_374	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5209.9	80.3	5675.1	-38.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_375	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5188.3	79.6	5675.5	14.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_376	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5188.2	79.6	5650.7	4.3	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_373	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5210.0	80.0	5649.8	-3.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_374	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5209.9	80.0	5675.1	-38.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_375	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5188.3	80.0	5675.5	14.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_376	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5188.2	80.0	5650.7	4.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_377	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5222.9	80.0	5647.3	-12.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_378	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5232.4	80.0	5637.6	-68.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_379	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5243.7	80.0	5637.3	70.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_380	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5253.3	80.0	5646.9	-69.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_381	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5253.5	80.0	5658.5	-53.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_382	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5222.5	80.0	5658.7	87.3	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_383	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5084.9	80.2	5660.0	68.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_383	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5084.9	80.0	5660.0	68.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_384	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5084.6	80.0	5680.8	-54.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_385	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5084.8	80.0	5702.7	-62.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_386	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_01.iff	5160.2	80.0	5548.6	-54.0	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -398,10 +398,10 @@ bo_gcw_restuss_phase_1_395	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_396	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5301.9	80.0	5830.2	44.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_397	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5343.3	80.0	5845.5	-66.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_398	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5372.1	80.0	5854.3	-9.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_399	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5521.2	80.2	5621.0	16.9	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_400	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5521.4	80.2	5625.7	13.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_401	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5325.9	80.2	5528.2	6.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_402	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5330.6	80.2	5527.9	5.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_399	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5521.2	80.0	5621.0	16.9	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_400	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5521.4	80.0	5625.7	13.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_401	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5325.9	80.0	5528.2	6.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_402	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5330.6	80.0	5527.9	5.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_403	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5284.8	80.0	5531.8	-60.4	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_404	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5134.6	80.0	5539.4	-51.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_405	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_02.iff	5134.8	80.0	5542.8	-79.9	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -423,10 +423,10 @@ bo_gcw_restuss_phase_1_420	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_421	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5298.2	80.0	5856.3	-28.4	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_422	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5266.7	80.0	5856.3	-22.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_423	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5307.9	80.0	5856.0	22.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_424	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5275.7	79.9	5897.6	7.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_424	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5275.7	80.0	5897.6	7.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_425	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5299.2	80.0	5897.3	-69.4	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_426	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5267.2	80.3	5865.3	20.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_427	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5308.2	80.3	5865.2	61.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_426	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5267.2	80.0	5865.3	20.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_427	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5308.2	80.0	5865.2	61.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_428	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5298.3	80.0	5816.5	88.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_429	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5289.2	80.0	5816.5	-52.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_430	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5288.8	80.0	5807.4	-88.8	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -437,23 +437,23 @@ bo_gcw_restuss_phase_1_434	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_435	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5483.7	80.0	5697.2	-89.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_436	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5511.8	80.0	5678.1	-60.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_437	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5511.8	80.0	5688.7	51.9	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_438	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5522.8	80.3	5690.9	29.7	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_439	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5523.1	80.9	5678.5	80.3	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_438	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5522.8	80.0	5690.9	29.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_439	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5523.1	80.0	5678.5	80.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_440	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5516.3	80.0	5660.5	41.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_441	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5525.5	80.0	5660.5	-79.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_442	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5515.9	80.0	5651.4	-17.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_443	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5525.0	80.0	5651.3	-79.9	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_444	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5520.9	80.2	5610.4	-77.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_445	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5523.2	80.2	5612.3	36.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_446	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5521.6	80.2	5637.7	-4.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_444	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5520.9	80.0	5610.4	-77.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_445	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5523.2	80.0	5612.3	36.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_446	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5521.6	80.0	5637.7	-4.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_447	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5502.1	80.0	5528.1	-74.4	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_448	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5516.7	80.0	5527.2	-45.3	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_449	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5315.3	80.2	5528.8	-1.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_450	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5317.1	80.2	5526.4	-54.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_449	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5315.3	80.0	5528.8	-1.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_450	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5317.1	80.0	5526.4	-54.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_451	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5204.4	80.0	5669.7	53.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_452	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5204.6	79.7	5657.4	-39.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_453	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5193.4	79.6	5657.0	-14.7	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_454	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5193.3	79.6	5667.6	-86.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_452	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5204.6	80.0	5657.4	-39.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_453	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5193.4	80.0	5657.0	-14.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_454	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5193.3	80.0	5667.6	-86.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_455	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5249.9	80.0	5678.4	2.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_456	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5226.4	80.0	5678.8	89.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_457	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5108.3	80.0	5710.8	-61.3	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -465,14 +465,14 @@ bo_gcw_restuss_phase_1_462	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_463	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5126.3	80.0	5555.9	80.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_464	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5124.7	80.0	5550.3	-41.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_465	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_03.iff	5137.7	80.0	5532.5	40.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_466	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5074.2	79.8	5761.0	73.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_466	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5074.2	80.0	5761.0	73.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_467	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5193.7	80.0	5775.5	-88.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_468	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5165.5	80.0	5848.8	4.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_469	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5280.3	80.7	5889.0	-87.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_469	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5280.3	80.0	5889.0	-87.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_470	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5345.8	80.0	5850.0	-1.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_471	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5367.5	80.0	5848.7	80.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_472	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5450.9	80.0	5873.8	61.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_473	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5497.9	80.9	5826.4	36.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_473	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5497.9	80.0	5826.4	36.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_474	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5517.5	80.0	5638.2	-26.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_475	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5343.2	80.0	5531.4	-35.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_476	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5251.2	80.0	5599.9	61.4	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -480,15 +480,15 @@ bo_gcw_restuss_phase_1_477	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_478	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_04.iff	5084.0	80.0	5688.2	86.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_479	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5181.0	80.0	5782.4	-17.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_480	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5162.8	80.0	5852.3	-6.3	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_481	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5275.7	80.6	5882.2	74.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_482	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5285.7	79.5	5899.7	73.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_481	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5275.7	80.0	5882.2	74.0	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_482	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5285.7	80.0	5899.7	73.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_483	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5296.0	80.0	5810.3	19.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_484	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5312.3	80.0	5853.7	30.9	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_485	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5313.3	80.1	5871.9	28.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_485	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5313.3	80.0	5871.9	28.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_486	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5458.3	80.0	5864.7	-73.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_487	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5485.0	80.0	5736.4	17.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_488	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5484.8	80.1	5718.3	73.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_489	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5452.8	80.1	5714.8	4.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_488	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5484.8	80.0	5718.3	73.0	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_489	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5452.8	80.0	5714.8	4.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_490	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5451.6	80.0	5696.7	50.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_491	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5523.1	80.0	5654.3	77.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_492	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5242.8	80.0	5602.6	84.8	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -496,13 +496,13 @@ bo_gcw_restuss_phase_1_493	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_494	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5233.0	80.0	5650.3	7.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_495	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5243.3	80.0	5642.9	-81.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_496	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5109.2	80.0	5678.7	87.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_497	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5091.1	80.1	5679.7	-65.0	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_497	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5091.1	80.0	5679.7	-65.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_498	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5179.3	80.0	5533.6	57.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_499	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_05.iff	5185.8	80.0	5522.6	-36.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_500	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5185.4	80.0	5766.7	75.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_501	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5156.4	80.1	5817.7	36.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_501	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5156.4	80.0	5817.7	36.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_502	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5175.7	80.0	5853.2	-7.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_503	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5285.8	81.2	5881.4	22.5	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_503	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5285.8	80.0	5881.4	22.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_504	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5293.9	80.0	5814.9	-63.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_505	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5342.9	80.0	5871.5	-76.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_506	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5455.2	80.0	5717.6	7.9	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -517,12 +517,12 @@ bo_gcw_restuss_phase_1_514	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_515	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_06.iff	5140.9	80.0	5531.2	56.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_516	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5194.7	80.0	5769.8	-7.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_517	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5172.4	80.0	5849.5	-85.4	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_518	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5296.1	81.3	5873.6	89.9	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_518	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5296.1	80.0	5873.6	89.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_519	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5350.1	80.0	5851.3	54.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_520	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5320.7	80.0	5859.2	-13.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_521	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5476.9	80.0	5730.7	-1.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_522	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5460.0	80.0	5702.0	16.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_523	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5519.4	80.2	5514.5	70.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_523	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5519.4	80.0	5514.5	70.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_524	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5253.2	80.0	5580.9	-12.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_525	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5247.2	80.0	5657.4	-74.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_526	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5103.7	80.0	5687.1	21.9	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -530,20 +530,20 @@ bo_gcw_restuss_phase_1_527	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_528	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5084.2	80.0	5685.0	-25.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_529	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_07.iff	5084.5	80.0	5690.6	-35.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_530	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5185.0	80.0	5771.5	-25.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_531	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5158.7	80.4	5822.0	84.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_531	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5158.7	80.0	5822.0	84.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_532	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5168.4	80.0	5828.7	-25.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_533	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5290.8	81.2	5875.1	27.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_533	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5290.8	80.0	5875.1	27.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_534	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5347.3	80.0	5846.6	29.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_535	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5326.6	80.0	5859.3	75.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_536	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5471.0	80.0	5730.3	76.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_537	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5465.9	80.0	5702.1	35.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_538	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5502.6	80.1	5515.9	44.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_538	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5502.6	80.0	5515.9	44.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_539	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5228.5	80.0	5657.3	40.3	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_540	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5103.6	80.0	5693.0	19.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_541	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5197.5	80.0	5524.6	-71.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_542	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_08.iff	5180.4	80.0	5526.1	-17.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_543	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5157.3	80.0	5805.7	24.1	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_544	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5282.6	81.2	5876.2	9.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_544	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5282.6	80.0	5876.2	9.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_545	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5315.5	80.0	5867.7	-4.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_546	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5482.4	80.0	5722.4	-46.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_547	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5454.9	80.0	5710.5	81.0	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -553,9 +553,9 @@ bo_gcw_restuss_phase_1_550	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_551	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5166.5	80.0	5683.6	-18.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_552	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5095.3	80.0	5681.9	44.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_553	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_09.iff	5213.7	80.0	5529.0	-44.5	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_554	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5160.3	79.8	5829.2	-80.1	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_554	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5160.3	80.0	5829.2	-80.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_555	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5169.6	80.0	5856.9	-34.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_556	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5285.5	81.0	5869.5	-71.7	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_556	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5285.5	80.0	5869.5	-71.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_557	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5336.3	80.0	5860.8	78.1	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_558	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5461.3	80.0	5728.5	-69.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_559	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5475.7	80.0	5703.4	7.6	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -575,8 +575,8 @@ bo_gcw_restuss_phase_1_572	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_573	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5147.5	80.0	5557.5	46.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_574	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_10.iff	5165.2	80.0	5550.0	27.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_575	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5168.1	80.0	5812.1	-48.2	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_576	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5275.8	80.7	5871.7	-35.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_577	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5294.3	79.9	5884.6	60.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_576	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5275.8	80.0	5871.7	-35.6	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_577	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5294.3	80.0	5884.6	60.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_578	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5294.9	80.0	5866.0	-2.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_579	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5315.4	80.0	5857.7	17.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_580	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5482.1	80.0	5732.4	34.9	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -596,12 +596,12 @@ bo_gcw_restuss_phase_1_593	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_594	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_11.iff	5149.5	80.0	5551.3	-13.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_595	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5162.8	80.0	5806.9	-70.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_596	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5305.9	80.0	5863.2	-5.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_597	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5330.2	80.1	5870.0	79.8	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_598	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5467.8	80.1	5719.5	75.3	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_599	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5469.6	80.1	5712.7	75.0	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_597	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5330.2	80.0	5870.0	79.8	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_598	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5467.8	80.0	5719.5	75.3	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_599	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5469.6	80.0	5712.7	75.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_600	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5213.4	80.0	5615.2	-54.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_601	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5215.7	80.0	5596.3	53.6	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_602	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5093.0	80.1	5696.6	-56.2	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_602	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_12.iff	5093.0	80.0	5696.6	-56.2	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_603	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_13.iff	5166.8	80.0	5796.9	10.4	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_604	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_13.iff	5270.1	80.0	5859.4	38.5	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_605	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_13.iff	5332.0	80.0	5865.4	-74.3	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -655,7 +655,7 @@ bo_gcw_restuss_phase_1_652	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_653	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5419.4	80.0	5536.3	15.6	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_654	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5353.7	80.0	5540.9	13.8	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_655	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5305.6	80.0	5520.7	-50.4	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_656	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5285.8	80.7	5518.2	31.4	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_656	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5285.8	80.0	5518.2	31.4	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_657	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5294.6	80.0	5564.5	0.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_658	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5220.7	80.0	5575.2	-75.7	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_659	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_building_chunk_destoyed_15.iff	5116.0	80.0	5646.5	53.3	0	0	0	512	TRUE	Restuss Phase 1 - City
@@ -670,7 +670,7 @@ bo_gcw_restuss_phase_1_667	RORI	ror_world	0	object/static/worldbuilding/structur
 bo_gcw_restuss_phase_1_668	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_guild_combat_destroyed.iff	5446.4	80.0	5800.6	-179.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_669	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_guild_commerce_destroyed.iff	5237.7	80.0	5702.1	0.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_670	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_guild_university_destroyed.iff	5385.9	80.0	5608.2	0.0	0	0	0	512	TRUE	Restuss Phase 1 - City
-bo_gcw_restuss_phase_1_671	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_hospital_destroyed.iff	5298.1	79.9	5592.1	-179.9	0	0	0	512	TRUE	Restuss Phase 1 - City
+bo_gcw_restuss_phase_1_671	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_hospital_destroyed.iff	5298.1	80.0	5592.1	-179.9	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_672	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_hotel_destroyed.iff	5150.0	80.0	5653.0	0.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_673	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_shuttleport_destroyed.iff	5212.9	80.0	5810.6	-90.0	0	0	0	512	TRUE	Restuss Phase 1 - City
 bo_gcw_restuss_phase_1_674	RORI	ror_world	0	object/static/worldbuilding/structures/mun_nboo_starport_destroyed.iff	5364.5	80.0	5751.9	-179.9	0	0	0	512	TRUE	Restuss Phase 1 - City
