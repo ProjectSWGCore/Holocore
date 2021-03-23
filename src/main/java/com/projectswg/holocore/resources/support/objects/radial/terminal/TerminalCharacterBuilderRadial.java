@@ -44,17 +44,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		switch (selection) {
 			case ITEM_USE: {
 				SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.");
-				
-				listBox.addListItem("Armor");
-				listBox.addListItem("Weapons");
-				listBox.addListItem("Wearables");
-				listBox.addListItem("Tools");
-				listBox.addListItem("Travel");
-				listBox.addListItem("Vehicles");
-				listBox.addListItem("Powerups");
-				listBox.addListItem("Heroic Jewelry Sets");
-				listBox.addListItem("Level 90");
-				
+
+				listBox.addListItem("CHARACTER - Level 90");
+				listBox.addListItem("TRAVEL - Fast Travel Locations");
+				listBox.addListItem("ITEMS - Armor");
+				listBox.addListItem("ITEMS - Weapons");
+				listBox.addListItem("ITEMS - Wearables");
+				listBox.addListItem("ITEMS - Heroic Jewelry Sets");
+				listBox.addListItem("ITEMS - Tools");
+				listBox.addListItem("ITEMS - Powerups");
+				listBox.addListItem("ITEMS - Vehicles");
+
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
 				break;
@@ -66,15 +66,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		int selection = SuiListBox.getSelectedRow(parameters);
 		
 		switch (selection) {
-			case 0: handleArmor(player); break;
-			case 1: handleWeapons(player); break;
-			case 2: handleWearables(player); break;
-			case 3: handleTools(player); break;
-			case 4: handleTravel(player); break;
-			case 5: handleVehicles(player); break;
-			case 6: handlePowerups(player); break;
-			case 7: handleJewelrySets(player); break;
-			case 8: handleLevel90(player); break;
+			case 0: handleLevel90(player); break;
+			case 1: handleTravel(player); break;
+			case 2: handleArmor(player); break;
+			case 3: handleWeapons(player); break;
+			case 4: handleWearables(player); break;
+			case 5: handleJewelrySets(player); break;
+			case 6: handleTools(player); break;
+			case 7: handlePowerups(player); break;
+			case 8: handleVehicles(player); break;
 		}
 	}
 	
@@ -571,16 +571,13 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		spawnItems(player, 
 				"weapon_content_pistol_tier_7_03_01",
 				"weapon_content_pistol_tier_8_03_02",
-				"weapon_pistol_drop_lvl10_02_01",
 				"weapon_pistol_drop_lvl20_02_01",
-				"weapon_pistol_drop_lvl30_02_01",
 				"weapon_pistol_drop_lvl40_02_01",
 				"weapon_smuggler_reward_pistol_04_01",
 				"weapon_smuggler_reward_pistol_dl44_04_01",
 				"weapon_tow_pistol_05_01",
 				"weapon_tow_pistol_05_02",
 				"weapon_tow_pistol_de10_04_01",
-				"weapon_tow_pistol_flechette_05_01",
 				"weapon_tow_pistol_intimidator_05_01",
 				"weapon_tow_pistol_ion_relic_05_01",
 				"weapon_tow_pistol_scatter_04_01",
@@ -593,12 +590,8 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		spawnItems(player,
 				"weapon_carbine_drop_lvl10_02_01",
 				"weapon_carbine_drop_lvl20_02_01",
-				"weapon_carbine_drop_lvl30_02_01",
 				"weapon_mandalorian_carbine_04_01",
 				"weapon_tow_carbine_01_01",
-				"weapon_tow_carbine_03_01",
-				"weapon_tow_carbine_05_01",
-				"weapon_tow_carbine_sfor_05_01",
 				"weapon_tow_carbine_wookiee_06_01",
 				"weapon_content_carbine_tier_7_03_01",
 				"weapon_content_carbine_talus_selonian_04_01",
@@ -609,8 +602,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleRangedRifle(Player player) {
 		spawnItems(player,
 				"weapon_rifle_drop_lvl10_02_01",
-				"weapon_rifle_drop_lvl20_02_01",
-				"weapon_rifle_drop_lvl30_02_01",
 				"weapon_rifle_drop_lvl40_02_01",
 				"weapon_rebel_rifle_04_01",
 				"weapon_mandalorian_rifle_04_01",
