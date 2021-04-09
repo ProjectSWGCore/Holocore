@@ -9,7 +9,7 @@ fs_dm		expertise_cooldown_line_fs_dm	expertise_damage_line_fs_dm	expertise_criti
 fs_dm_cc_crit		expertise_cooldown_line_fs_cc_crit	-	expertise_action_line_fs_cc_crit	-	-	-
 fs_sweep		expertise_cooldown_line_fs_sweep	-	-	-	-	-
 me_dm		expertise_cooldown_line_me_evasion	expertise_damage_line_me_dm	expertise_critical_line_me_dm	expertise_action_line_me_dm	-	-
-me_heal		-	-	-	-	expertise_freeshot_me_heal	fast_attack_line_me_heal
+me_heal		-	expertise_healing_line_me_heal	-	-	expertise_freeshot_me_heal	fast_attack_line_me_heal
 of_aoe		-	-	-	expertise_action_line_of_aoe	expertise_freeshot_of_aoe	-
 of_heal		-	-	-	-	-	fast_attack_line_of_heal
 of_paint		expertise_cooldown_line_of_paint	-	-	expertise_action_line_of_paint	-	-
