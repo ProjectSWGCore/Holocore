@@ -25,11 +25,15 @@ fs_sweep	Sweep	expertise_cooldown_line_fs_sweep	-	-	expertise_action_line_fs_swe
 me_aoe_revive	Area Revive	expertise_cooldown_line_me_aoe_revive	-	-	-	-	-
 me_burst	Burst	-	-	-	expertise_action_line_me_burst	-	-
 me_debuff	Debuff	-	-	-	-	expertise_freeshot_me_debuff	fast_attack_line_me_debuff
-me_dm	Vital Striek	-	expertise_damage_line_me_dm	expertise_critical_line_me_dm	expertise_action_line_me_dm	-	fast_attack_line_me_dm
+me_dm	Vital Strike	-	expertise_damage_line_me_dm	expertise_critical_line_me_dm	expertise_action_line_me_dm	-	fast_attack_line_me_dm
 me_dot	Medic DoT	expertise_cooldown_line_me_dot	expertise_damage_line_me_dot	-	-	-	-
 me_evasion	Evasion	expertise_cooldown_line_me_evasion	-	-	-	-	-
 me_heal	Heal	-	expertise_healing_line_me_heal	-	expertise_action_line_me_heal	expertise_freeshot_me_heal	fast_attack_line_me_heal
-me_revive	Revive	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
+me_rv_area	Revive Area	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
+me_rv_combat	Revive Combat	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
+me_rv_ooc	Revive Outside Combat	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
+me_rv_pvp_area	Revive Area PvP	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
+me_rv_pvp_single	Revive Pvp	expertise_cooldown_line_me_revive	-	-	-	-	fast_attack_line_me_revive
 me_smash	Flurry	-	-	-	expertise_action_line_me_smash	-	-
 me_stasis_self	Stasis	expertise_cooldown_line_me_stasis_self	-	-	-	-	-
 of_aoe	AOE	-	expertise_damage_line_of_aoe	expertise_critical_line_of_aoe	expertise_action_line_of_aoe	expertise_freeshot_of_aoe	fast_attack_line_of_aoe
