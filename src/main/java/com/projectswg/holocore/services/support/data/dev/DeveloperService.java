@@ -122,8 +122,10 @@ public class DeveloperService extends Service {
 			new Location(-5575, 88, 4902, Terrain.YAVIN4),
 			new Location(-6485, 84, -446, Terrain.YAVIN4),
 
-			// Planet: Character Farm
-			new Location(0, 0, 0, Terrain.CHARACTER_FARM),
+			// Planet: Mustafar Jedi Challenge
+			new Location(2209.8, 74.8, 6410.2, Terrain.MUSTAFAR),
+			new Location(2195.1, 74.8, 4990.4, Terrain.MUSTAFAR),
+			new Location(2190.5, 74.8, 3564.8, Terrain.MUSTAFAR),
 
 		};
 		

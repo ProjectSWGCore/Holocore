@@ -299,8 +299,8 @@ spawn_tatooine_296	TATOOINE	tat_moseisley_cantina	AREA	8	-6.7	-0.9	-20.9	-24	1	C
 spawn_tatooine_297	TATOOINE	tat_moseisley_cloning1	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		cloning_droid	600
 spawn_tatooine_298	TATOOINE	tat_moseisley_cloning2	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		cloning_droid	600
 spawn_tatooine_299	TATOOINE	tat_moseisley_combat_gh	AREA	8	3.2	1.1	-8.4	-90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_300	TATOOINE	tat_moseisley_commerce_gh	AREA	4	0.7	2.5	5.4	0	1	Mayor Mikdanyell Guh'rantt	humanoid_mos_eisley_mayor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_mayor	600
-spawn_tatooine_301	TATOOINE	tat_moseisley_commerce_gh	AREA	6	-12.1	1.1	4.6	179	1	Peawp R'dawc	humanoid_brawler_quest_peawp_rdawc	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_peawp_rdawc	600
+spawn_tatooine_300	TATOOINE	tat_moseisley_combat_gh	AREA	6	-12.1	1.1	4.6	179	1	Peawp R'dawc	humanoid_brawler_quest_peawp_rdawc	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_301	TATOOINE	tat_moseisley_commerce_gh	AREA	4	0.7	2.5	5.4	0	1	Mayor Mikdanyell Guh'rantt	humanoid_mos_eisley_mayor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_302	TATOOINE	tat_moseisley_generic_house	AREA	1	-3.8	0.5	-1.5	0	1	a Dead Biologist	humanoid_content_dead_biologist_i	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dead_02			600
 spawn_tatooine_303	TATOOINE	tat_moseisley_hospital	AREA	2	-7.6	0.2	1.7	-21	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_304	TATOOINE	tat_moseisley_hospital	AREA	2	-1.9	0.2	-2.3	-174	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
@@ -403,7 +403,7 @@ spawn_tatooine_400	TATOOINE	tat_world	AREA	0	3377.0	4.0	-4753.0	-111	1	a commone
 spawn_tatooine_401	TATOOINE	tat_world	AREA	0	3620.7	5.0	-4713.1	-176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_402	TATOOINE	tat_world	AREA	0	3538.3	5.0	-4692.7	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_403	TATOOINE	tat_world	AREA	0	3526.0	4.0	-4721.0	-54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
-spawn_tatooine_404	TATOOINE	tat_world	AREA	0	3549.7	5.0	-4708.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_tatooine_404	TATOOINE	tat_world	AREA	0	3549.7	5.0	-4708.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_405	TATOOINE	tat_world	AREA	0	3559.0	4.0	-4725.0	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_406	TATOOINE	tat_world	AREA	0	3510.9	5.0	-4766.2	44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_407	TATOOINE	tat_world	AREA	0	3358.9	5.0	-5016.9	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
@@ -2228,19 +2228,16 @@ spawn_tatooine_2224	TATOOINE	tat_world	PATROL	0	-6078.2	23.8	1800.2	0	1	a Jawa P
 spawn_tatooine_2225	TATOOINE	tat_world	PATROL	0	-6103.2	23.6	1850.2	-100	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_16900	column	idle			600
 spawn_tatooine_2226	TATOOINE	tat_world	PATROL	0	-6204.2	23.1	1703.3	40	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_17000	column	idle			600
 spawn_tatooine_2227	TATOOINE	tat_world	PATROL	0	-6196.1	23.3	1802.1	-50	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_17100	column	idle			600
-spawn_tatooine_2228	TATOOINE	tat_world	AREA	0	7428.0	5.7	4529.0	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	90	120	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2229	TATOOINE	tat_world	AREA	0	7428.0	5.7	4529.0	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	90	120	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2230	TATOOINE	tat_world	AREA	0	7358.0	14.6	4486.6	0	1	a juvenile canyon krayt dragon	creature_krayt_dragon_juvenile_canyon	AGGRESSIVE	B	80	100	POI	Krayt Graveyard	1	LOITER	50	0	-	idle			600
-spawn_tatooine_2231	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2232	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2233	TATOOINE	tat_world	AREA	0	7433.0	6.4	4561.6	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2234	TATOOINE	tat_world	AREA	0	7484.3	8.1	4483.7	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
-spawn_tatooine_2235	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
-spawn_tatooine_2236	TATOOINE	tat_world	AREA	0	-2455.2	0.0	-5384.6	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
-spawn_tatooine_2237	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
-spawn_tatooine_2238	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	droid_tatooine_lin_demolitionmech	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
-spawn_tatooine_2239	TATOOINE	tat_world	AREA	0	-2575.0	0.0	-5517.0	0	1	Zef Ando	humanoid_legacy_zef_ando	INVULNERABLE	N	100	100	POI	Lars Homestead	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2240	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Old Mos Espa Arena Track	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2241	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
-spawn_tatooine_2242	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
-spawn_tatooine_2243	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
+spawn_tatooine_2228	TATOOINE	tat_world	AREA	0	7358.0	14.6	4486.6	0	1	a juvenile canyon krayt dragon	creature_krayt_dragon_juvenile_canyon	AGGRESSIVE	B	80	100	POI	Krayt Graveyard	1	LOITER	50	0	-	idle			600
+spawn_tatooine_2229	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
+spawn_tatooine_2230	TATOOINE	tat_world	AREA	0	7484.3	8.1	4483.7	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
+spawn_tatooine_2231	TATOOINE	tat_world	AREA	0	-2451.9	0.0	-5363.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
+spawn_tatooine_2232	TATOOINE	tat_world	AREA	0	-2455.2	0.0	-5384.6	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
+spawn_tatooine_2233	TATOOINE	tat_world	AREA	0	-2481.6	0.0	-5364.4	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	10	20	POI	Lars Homestead	1	LOITER	6	0	-	idle			600
+spawn_tatooine_2234	TATOOINE	tat_world	AREA	0	-2568.0	0.0	-5636.4	0	1	a modified Battle Droid	droid_tatooine_lin_demolitionmech	AGGRESSIVE	E	10	20	POI	Lars Homestead	2	LOITER	6	0	-	idle			600
+spawn_tatooine_2235	TATOOINE	tat_world	AREA	0	-2575.0	0.0	-5517.0	0	1	Zef Ando	humanoid_legacy_zef_ando	INVULNERABLE	N	100	100	POI	Lars Homestead	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2236	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Old Mos Espa Arena Track	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2237	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
+spawn_tatooine_2238	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
+spawn_tatooine_2239	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
+spawn_tatooine_2240	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4795.4	-90	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600

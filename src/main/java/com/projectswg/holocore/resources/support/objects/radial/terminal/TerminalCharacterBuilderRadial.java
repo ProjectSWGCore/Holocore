@@ -1247,7 +1247,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Dungeon - NPE Dungeon");
 		listBox.addListItem("Dungeon - Myyyydil Cave");
 		listBox.addListItem("Dungeon - Avatar Platform");
-		listBox.addListItem("Character Farm - AI test area");
+		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Easy)");
+		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Medium)");
+		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Hard)");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
 		listBox.display(player);
@@ -1324,8 +1326,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 47: handleNPEDungeon(player); break;
 			case 48: handleMyyydrilCave(player); break;
 			case 49: handleAvatarPlatform(player); break;
-		// Planet: Character Farm
-			case 50: handleChfStatic(player); break;
+		// Planet: Mustafar Jedi Challenge
+			case 50: handleJediChallEasy(player); break;
+			case 51: handleJediChallMedium(player); break;
+			case 52: handleJediChallHard(player); break;
 
 		}
 	}
@@ -1522,16 +1526,23 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		teleportTo(player, "du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
 	}
 
-	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
+	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);
+	}
+	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);
+	}
+	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);
+	}
 
-	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
+// Planet: Mustafar Jedi Challenge
 
-	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
-
-// Planet: Character Farm
-
-	private static void handleChfStatic(Player player) {
-		teleportTo(player, 0d, 0d, 0d, Terrain.CHARACTER_FARM);
+	private static void handleJediChallEasy(Player player) {
+		teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);
+	}
+	private static void handleJediChallMedium(Player player) {
+		teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);
+	}
+	private static void handleJediChallHard(Player player) {
+		teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);
 	}
 	
 	private static void teleportTo(Player player, double x, double y, double z, Terrain terrain) {

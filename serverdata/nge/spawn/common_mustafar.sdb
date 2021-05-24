@@ -44,14 +44,14 @@ spawn_mustafar_041	MUSTAFAR	mus_world	AREA	0	-5792.4	106.7	5809.3	0	1	Pletus Cro
 spawn_mustafar_042	MUSTAFAR	mus_world	AREA	0	441.4	132.4	5115.3	0	1	Jural	humanoid_som_reporter_jural	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle			600
 spawn_mustafar_043	MUSTAFAR	mus_world	AREA	0	438.5	132.8	5116.6	0	1	Talper	humanoid_som_reporter_talper	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01			600
 spawn_mustafar_044	MUSTAFAR	mus_world	AREA	0	-2654.0	38.1	6088.5	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	4	LOITER	10	0	-	idle			600
-spawn_mustafar_045	MUSTAFAR	mus_world	AREA	0	-2701.4	20.0	5912.8	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle			600
-spawn_mustafar_046	MUSTAFAR	mus_world	AREA	0	-2700.5	31.3	6020.1	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle			600
-spawn_mustafar_047	MUSTAFAR	mus_world	AREA	0	-2547.2	32.3	5839.7	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle			600
+spawn_mustafar_045	MUSTAFAR	mus_world	AREA	0	-2701.4	20.0	5912.8	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle			600
+spawn_mustafar_046	MUSTAFAR	mus_world	AREA	0	-2700.5	31.3	6020.1	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	4	LOITER	15	0	-	idle			600
+spawn_mustafar_047	MUSTAFAR	mus_world	AREA	0	-2547.2	32.3	5839.7	0	1	a mindless treasure hunter	humanoid_som_ruins_hunter	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle			600
 spawn_mustafar_048	MUSTAFAR	mus_world	PATROL	0	-2618.9	40.2	6064.6	0	1	The Shambler	humanoid_som_ruins_leader	AGGRESSIVE	E	70	85	-	-	1	PATROL	0	0	column	idle			600
 spawn_mustafar_049	MUSTAFAR	mus_world	AREA	0	-4425.2	85.4	3156.3	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle			600
 spawn_mustafar_050	MUSTAFAR	mus_world	AREA	0	-2700.6	20.0	5901.1	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle			600
-spawn_mustafar_051	MUSTAFAR	mus_world	AREA	0	-2696.3	31.7	6026.5	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	6	LOITER	15	0	-	idle			600
-spawn_mustafar_052	MUSTAFAR	mus_world	AREA	0	-2634.2	20.0	5888.8	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	5	LOITER	15	0	-	idle			600
+spawn_mustafar_051	MUSTAFAR	mus_world	AREA	0	-2696.3	31.7	6026.5	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle			600
+spawn_mustafar_052	MUSTAFAR	mus_world	AREA	0	-2634.2	20.0	5888.8	0	1	a frenzied treasure hunter	humanoid_som_ruins_stalker	AGGRESSIVE	N	70	85	-	-	3	LOITER	15	0	-	idle			600
 spawn_mustafar_053	MUSTAFAR	mus_world	AREA	0	-4380.0	94.3	3233.4	0	1	San'sii the Kursk	humanoid_som_sansii_kursk	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_054	MUSTAFAR	mus_world	AREA	0	194.4	266.7	4096.3	0	1	The Storm Lord	humanoid_som_storm_lord	AGGRESSIVE	B	85	90	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_055	MUSTAFAR	mus_world	AREA	0	311.2	171.5	3744.3	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
@@ -64,10 +64,10 @@ spawn_mustafar_061	MUSTAFAR	mus_world	AREA	0	183.0	264.5	4112.9	0	1	a storm lord
 spawn_mustafar_062	MUSTAFAR	mus_world	AREA	0	192.2	264.5	4116.8	0	1	a storm lord guard	humanoid_som_storm_lord_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_063	MUSTAFAR	mus_world	AREA	0	191.7	206.7	4233.7	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_064	MUSTAFAR	mus_world	AREA	0	195.8	206.7	4235.8	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
-spawn_mustafar_065	MUSTAFAR	mus_world	AREA	0	307.5	161.3	3767.6	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle			600
-spawn_mustafar_066	MUSTAFAR	mus_world	AREA	0	276.2	135.0	3877.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	7	LOITER	15	0	-	idle			600
-spawn_mustafar_067	MUSTAFAR	mus_world	AREA	0	157.8	161.4	4569.5	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	6	LOITER	15	0	-	idle			600
-spawn_mustafar_068	MUSTAFAR	mus_world	AREA	0	287.7	129.9	4316.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	8	LOITER	15	0	-	idle			600
+spawn_mustafar_065	MUSTAFAR	mus_world	AREA	0	307.5	161.3	3767.6	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle			600
+spawn_mustafar_066	MUSTAFAR	mus_world	AREA	0	276.2	135.0	3877.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle			600
+spawn_mustafar_067	MUSTAFAR	mus_world	AREA	0	157.8	161.4	4569.5	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	3	LOITER	15	0	-	idle			600
+spawn_mustafar_068	MUSTAFAR	mus_world	AREA	0	287.7	129.9	4316.4	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle			600
 spawn_mustafar_069	MUSTAFAR	mus_world	AREA	0	389.1	200.5	4347.0	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_070	MUSTAFAR	mus_world	AREA	0	396.0	201.9	4352.2	0	1	a storm lord minion	humanoid_som_storm_lord_minion	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_071	MUSTAFAR	mus_world	AREA	0	-4408.6	84.6	3167.8	0	1	a Blackguard wilder	humanoid_som_blackguard_wilder	AGGRESSIVE	N	70	85	-	-	1	LOITER	5	0	-	idle			600
@@ -112,7 +112,7 @@ spawn_mustafar_109	MUSTAFAR	mus_world	AREA	0	-4352.1	81.0	3311.0	0	1	a treasure 
 spawn_mustafar_110	MUSTAFAR	mus_world	AREA	0	-4270.6	80.9	3251.5	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_111	MUSTAFAR	mus_world	AREA	0	-4288.1	81.0	3263.1	0	1	a treasure hunter guard	humanoid_som_treasure_hunter_guard	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_112	MUSTAFAR	mus_world	AREA	0	-4248.1	83.3	3360.3	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
-spawn_mustafar_113	MUSTAFAR	mus_world	AREA	0	155.3	128.7	4455.0	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	6	LOITER	15	0	-	idle			600
+spawn_mustafar_113	MUSTAFAR	mus_world	AREA	0	155.3	128.7	4455.0	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	3	LOITER	15	0	-	idle			600
 spawn_mustafar_114	MUSTAFAR	mus_world	AREA	0	-4256.8	83.0	3312.4	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_115	MUSTAFAR	mus_world	AREA	0	-4282.0	83.0	3338.0	0	1	a treasure hunter mercenary	humanoid_som_treasure_hunter_merc	AGGRESSIVE	N	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_116	MUSTAFAR	mus_world	AREA	0	-4219.1	83.3	3314.9	0	1	a treasure hunter protector	humanoid_som_treasure_hunter_protector	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle			600
@@ -123,7 +123,7 @@ spawn_mustafar_120	MUSTAFAR	mus_world	AREA	0	-4410.5	85.2	3159.8	0	1	Vansk of th
 spawn_mustafar_121	MUSTAFAR	mus_world	PATROL	0	-5236.1	249.3	4452.4	0	1	Voakar Duset	humanoid_som_voakar_duset	AGGRESSIVE	B	80	85	-	-	1	PATROL	0	0	column	idle			600
 spawn_mustafar_122	MUSTAFAR	mus_world	AREA	0	-702.0	58.1	3777.0	0	1	a lava runner tanray	creature_tanray_lava_runner	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_123	MUSTAFAR	mus_world	AREA	0	-1775.1	133.9	3959.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle			600
-spawn_mustafar_124	MUSTAFAR	mus_world	AREA	0	284.6	128.7	4671.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	8	LOITER	15	0	-	idle			600
+spawn_mustafar_124	MUSTAFAR	mus_world	AREA	0	284.6	128.7	4671.5	0	1	a trained blistmok	creature_blistmok_trained	AGGRESSIVE	N	80	85	-	-	4	LOITER	15	0	-	idle			600
 spawn_mustafar_125	MUSTAFAR	mus_world	AREA	0	-1799.4	107.8	3924.7	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	2	LOITER	8	0	-	idle			600
 spawn_mustafar_126	MUSTAFAR	mus_world	PATROL	0	-2635.0	81.4	2832.0	0	1	an ancient tulrus	creature_tulrus_nesting_grounds_ancient	AGGRESSIVE	E	75	85	-	-	1	PATROL	0	0	column	idle			600
 spawn_mustafar_127	MUSTAFAR	mus_world	AREA	0	-1888.7	140.2	3694.8	0	1	a tulrus bull	creature_tulrus_nesting_grounds_bull	AGGRESSIVE	N	75	85	-	-	1	LOITER	15	0	-	idle			600
@@ -141,7 +141,7 @@ spawn_mustafar_138	MUSTAFAR	mus_world	AREA	0	-1209.2	58.1	4834.1	0	1	Cobak	creat
 spawn_mustafar_139	MUSTAFAR	mus_world	AREA	0	-5094.0	44.5	5438.0	0	1	a large xandank	creature_xandank_large	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_140	MUSTAFAR	mus_world	AREA	0	-4582.9	48.1	5111.7	0	1	The Xandank Packleader	creature_xandank_pack_leader	AGGRESSIVE	E	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_141	MUSTAFAR	mus_world	AREA	0	-4586.0	48.1	5104.8	0	1	a xandank pack mate	creature_xandank_pack_mate	AGGRESSIVE	N	75	85	-	-	4	LOITER	15	0	-	idle			600
-spawn_mustafar_142	MUSTAFAR	mus_world	AREA	0	-1219.4	58.1	4845.4	0	1	a xandank stalker	creature_xandank_smoking_forest_stalker	AGGRESSIVE	N	75	85	-	-	5	LOITER	10	0	-	idle			600
+spawn_mustafar_142	MUSTAFAR	mus_world	AREA	0	-1219.4	58.1	4845.4	0	1	a xandank stalker	creature_xandank_smoking_forest_stalker	AGGRESSIVE	N	75	85	-	-	3	LOITER	10	0	-	idle			600
 spawn_mustafar_143	MUSTAFAR	mus_world	AREA	0	-3781.6	67.9	2646.6	0	1	Ura Jen	creature_blistmok_urajen	AGGRESSIVE	B	80	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_144	MUSTAFAR	mus_world	AREA	0	-4220.4	83.3	3335.2	0	1	Colonel Narl	humanoid_som_col_narl	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_145	MUSTAFAR	mus_world	AREA	0	-5432.8	130.6	6016.8	0	1	Captain Relgon Starkill	humanoid_som_coyn_captain	AGGRESSIVE	B	75	85	-	-	1	LOITER	8	0	-	idle			600
