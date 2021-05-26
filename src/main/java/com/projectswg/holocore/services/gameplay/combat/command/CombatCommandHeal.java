@@ -64,11 +64,6 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		// Apply special line heal boost
 		healAmount += CombatCommandCommon.getAddedDamageBoost(source, combatCommand);
 		
-		if (healAmount <= 0) {
-			// Pointless to calculate who gets healed if we aren't healing any amount
-			return;
-		}
-		
 		switch (combatCommand.getAttackType()) {
 			case SINGLE_TARGET: {
 				switch (combatCommand.getTargetType()) {
@@ -147,6 +142,11 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		
 		switch (combatCommand.getHealAttrib()) {
 			case HEALTH: {
+				if (healed.getHealth() == healed.getMaxHealth()) {
+					// Pointless to heal health if health is already full
+					return;
+				}
+				
 				int currentHealth = healed.getHealth();
 				healed.modifyHealth(healAmount);
 				difference = healed.getHealth() - currentHealth;
@@ -156,6 +156,11 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			}
 			
 			case ACTION: {
+				if (healed.getAction() == healed.getMaxAction()) {
+					// Pointless to heal action if health is already full
+					return;
+				}
+				
 				int currentAction = healed.getAction();
 				healed.modifyAction(healAmount);
 				difference = healed.getAction() - currentAction;
