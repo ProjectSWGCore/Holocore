@@ -143,6 +143,13 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		switch (combatCommand.getHealAttrib()) {
 			case HEALTH: {
 				int currentHealth = healed.getHealth();
+				int maxHealth = healed.getMaxHealth();
+				
+				if (currentHealth == maxHealth) {
+					// Pointless to heal health if it's already full
+					return;
+				}
+				
 				healed.modifyHealth(healAmount);
 				difference = healed.getHealth() - currentHealth;
 				attribName = "HEALTH";
@@ -152,6 +159,13 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			
 			case ACTION: {
 				int currentAction = healed.getAction();
+				int maxAction = healed.getMaxAction();
+				
+				if (currentAction == maxAction) {
+					// Pointless to heal action if it's already full
+					return;
+				}
+				
 				healed.modifyAction(healAmount);
 				difference = healed.getAction() - currentAction;
 				attribName = "ACTION";
