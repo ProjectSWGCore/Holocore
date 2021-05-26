@@ -159,7 +159,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			
 			case ACTION: {
 				int currentAction = healed.getAction();
-				int maxAction = health.getMaxAction();
+				int maxAction = healed.getMaxAction();
 				
 				if (currentAction == maxAction) {
 					// Pointless to heal action if it's already full
