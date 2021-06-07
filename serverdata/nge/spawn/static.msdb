@@ -35,7 +35,6 @@ event_global_halloween.sdb	FALSE
 event_global_lifeday.sdb	FALSE
 event_global_loveday.sdb	FALSE
 event_global_remembranceday.sdb	FALSE
-gcw_invasion_bestine.sdb	FALSE
 gcw_base_corellia_imperial.sdb	FALSE
 gcw_base_corellia_rebel.sdb	TRUE
 gcw_base_naboo_imperial.sdb	FALSE
@@ -51,6 +50,8 @@ gcw_presence_naboo_rebel.sdb	FALSE
 gcw_presence_tatooine_imperial.sdb	FALSE
 gcw_presence_tatooine_neutral.sdb	TRUE
 gcw_presence_tatooine_rebel.sdb	FALSE
-invasion_tusken_vs_jawa.sdb	TRUE
-instance_droid_army.sdb	TRUE
 instance_jedi_challenge.sdb	TRUE
+invasion_droid_army.sdb	TRUE
+invasion_echo_base.sdb	TRUE
+invasion_gcw_bestine.sdb	FALSE
+invasion_tusken_vs_jawa.sdb	TRUE
