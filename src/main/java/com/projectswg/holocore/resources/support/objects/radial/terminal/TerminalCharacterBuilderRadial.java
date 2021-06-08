@@ -1222,7 +1222,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Lok - Great Maze of Lok");
 		listBox.addListItem("Lok - Imperial Outpost");
 		listBox.addListItem("Lok - Kimogila Town");
-		listBox.addListItem("Mustafar - Droid Army");
 		listBox.addListItem("Mustafar - Mensix Mining Facility");
 		listBox.addListItem("Naboo - Emperor's Retreat");
 		listBox.addListItem("Naboo - Weapon Development Facility");
@@ -1242,14 +1241,16 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Light Enclave");
 		listBox.addListItem("Space Station - Nova Orion");
 		listBox.addListItem("Space Station - NPE Station");
-		listBox.addListItem("Dungeon - Heroic Exar Kun");
-		listBox.addListItem("Dungeon - Heroic Imperial Star Destroyer");
+		listBox.addListItem("Dungeon - Heroic Exar Kun (empty)");
+		listBox.addListItem("Dungeon - Heroic Imperial Star Destroyer (empty)");
 		listBox.addListItem("Dungeon - NPE Dungeon");
 		listBox.addListItem("Dungeon - Myyyydil Cave");
 		listBox.addListItem("Dungeon - Avatar Platform");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Easy)");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Medium)");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Hard)");
+		listBox.addListItem("Invasion - Hoth");
+		listBox.addListItem("Invasion - Droid Army");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
 		listBox.display(player);
@@ -1291,45 +1292,45 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 22: handleLokGreatMaze(player); break;
 			case 23: handleLokImperialOutpost(player); break;
 			case 24: handleLokKimogilaTown(player); break;
-
 		// Planet: Mustafar
-			case 25: handleMusDroidArmy(player); break;
-			case 26: handleMusMensix(player); break;
-
+			case 25: handleMusMensix(player); break;
 		// Planet: Naboo
-			case 27: handleNabEmperorsRetreat(player); break;
-			case 28: handleNabWeaponFac(player); break;
+			case 26: handleNabEmperorsRetreat(player); break;
+			case 27: handleNabWeaponFac(player); break;
 		// Planet: Rori
-			case 29: handleRorHyperdriveFacility(player); break;
-			case 30: handleRorRestussStarport(player); break;
+			case 28: handleRorHyperdriveFacility(player); break;
+			case 29: handleRorRestussStarport(player); break;
 		// Planet: Talus
-			case 31: handleTalDetainmentCenter(player); break;
+			case 30: handleTalDetainmentCenter(player); break;
 		// Planet: Tatooine
-			case 32: handleTatFortTusken(player); break;
-			case 33: handleTatImperialOasis(player); break;
-			case 34: handleTatKraytGrave(player); break;
-			case 35: handleTatMosEisley(player); break;
-			case 36: handleTatMosTaike(player); break;
-			case 37: handleTatSquillCave(player); break;
+			case 31: handleTatFortTusken(player); break;
+			case 32: handleTatImperialOasis(player); break;
+			case 33: handleTatKraytGrave(player); break;
+			case 34: handleTatMosEisley(player); break;
+			case 35: handleTatMosTaike(player); break;
+			case 36: handleTatSquillCave(player); break;
 		// Planet: Yavin 4
-			case 38: handleYavBlueleafTemple(player); break;
-			case 39: handleYavDarkEnclave(player); break;
-			case 40: handleYavExarKun(player); break;
-			case 41: handleYavGeoCave(player); break;
-			case 42: handleYavLightEnclave(player); break;
+			case 37: handleYavBlueleafTemple(player); break;
+			case 38: handleYavDarkEnclave(player); break;
+			case 39: handleYavExarKun(player); break;
+			case 40: handleYavGeoCave(player); break;
+			case 41: handleYavLightEnclave(player); break;
 		// Space Stations:
-			case 43: handleNovaOrion(player); break;
-			case 44: handleNPEStation(player); break;
+			case 42: handleNovaOrion(player); break;
+			case 43: handleNPEStation(player); break;
 		// Dungeons:
-			case 45: handleHeroicEK(player); break;
-			case 46: handleHeroicISD(player); break;
-			case 47: handleNPEDungeon(player); break;
-			case 48: handleMyyydrilCave(player); break;
-			case 49: handleAvatarPlatform(player); break;
+			case 44: handleHeroicEK(player); break;
+			case 45: handleHeroicISD(player); break;
+			case 46: handleNPEDungeon(player); break;
+			case 47: handleMyyydrilCave(player); break;
+			case 48: handleAvatarPlatform(player); break;
 		// Planet: Mustafar Jedi Challenge
-			case 50: handleJediChallEasy(player); break;
-			case 51: handleJediChallMedium(player); break;
-			case 52: handleJediChallHard(player); break;
+			case 49: handleJediChallEasy(player); break;
+			case 50: handleJediChallMedium(player); break;
+			case 51: handleJediChallHard(player); break;
+		// Invasion:
+			case 52: handleHoth(player); break;
+			case 53: handleMusDroidArmy(player); break;
 
 		}
 	}
@@ -1339,11 +1340,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleCorStronghold(Player player) {
 		teleportTo(player, 4735d, 26d, -5676d, Terrain.CORELLIA);
 	}
-	
 	private static void handleCorCorsecBase(Player player) {
 		teleportTo(player, 5137d, 16d, 1518d, Terrain.CORELLIA);
 	}
-	
 	private static void handleCorRebelXwingBase(Player player) {
 		teleportTo(player, 213d, 50d, 4533d, Terrain.CORELLIA);
 	}
@@ -1353,11 +1352,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleDanJediTemple(Player player) {
 		teleportTo(player, 4078d, 10d, 5370d, Terrain.DANTOOINE);
 	}
-	
 	private static void handleDanCrystalCave(Player player) {
 		teleportTo(player, -6225d, 48d, 7381d, Terrain.DANTOOINE);
 	}
-	
 	private static void handleDanWarren(Player player) {
 		teleportTo(player, -564d, 1d, -3789d, Terrain.DANTOOINE);
 	}
@@ -1365,15 +1362,12 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 // Planet: Dathomir
 	
 	private static void handleDatImperialPrison(Player player) {teleportTo(player, -6079d, 132d, 971d, Terrain.DATHOMIR);}
-	
 	private static void handleDatNS(Player player) {
 		teleportTo(player, -3989d, 124d, -10d, Terrain.DATHOMIR);
 	}
-	
 	private static void handleDatNSvsSMC(Player player) {
 		teleportTo(player, -2457d, 117d, 1530d, Terrain.DATHOMIR);
 	}
-	
 	private static void handleDatQz(Player player) {
 		teleportTo(player, -5786d, 510d, -6554d, Terrain.DATHOMIR);
 	}
@@ -1383,7 +1377,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleEndJindaCave(Player player) {
 		teleportTo(player, -1714d, 31d, -8d, Terrain.ENDOR);
 	}
-	
 	private static void handleEndDwb(Player player) {
 		teleportTo(player, -4683d, 13d, 4326d, Terrain.ENDOR);
 	}
@@ -1393,23 +1386,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleKasEtyyy(Player player) {
 		teleportTo(player, 275d, 48d, 503d, Terrain.KASHYYYK_HUNTING);
 	}
-	
 	private static void handleKasKachirho(Player player) {
 		teleportTo(player, 146d, 19d, 162d, Terrain.KASHYYYK_MAIN);
 	}
-
 	private static void handleKasKkowir(Player player) {teleportTo(player, -164d, 16d, -262d, Terrain.KASHYYYK_DEAD_FOREST);}
-
 	private static void handleKasRryatt1(Player player) {teleportTo(player, 534d, 173d, 82d, Terrain.KASHYYYK_RRYATT_TRAIL);}
-
 	private static void handleKasRryatt2(Player player) {teleportTo(player, 1422d, 70d, 722d, Terrain.KASHYYYK_RRYATT_TRAIL);}
-
 	private static void handleKasRryatt3(Player player) {teleportTo(player, 2526d, 182d, -278d, Terrain.KASHYYYK_RRYATT_TRAIL);}
-
 	private static void handleKasRryatt4(Player player) {teleportTo(player, 768d, 141d, -439d, Terrain.KASHYYYK_RRYATT_TRAIL);}
-
 	private static void handleKasRryatt5(Player player) {teleportTo(player, 2495d, -24d, -924d, Terrain.KASHYYYK_RRYATT_TRAIL);}
-
 	private static void handleKasSlaver(Player player) {teleportTo(player, 561.8d, 22.8d, 1552.8d, Terrain.KASHYYYK_NORTH_DUNGEONS);}
 
 // Planet: Lok
@@ -1417,24 +1402,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleLokDroidCave(Player player) {
 		teleportTo(player, 3331d, 105d, -4912d, Terrain.LOK);
 	}
-	
 	private static void handleLokGreatMaze(Player player) {
 		teleportTo(player, 3848d, 62d, -464d, Terrain.LOK);
 	}
-	
 	private static void handleLokImperialOutpost(Player player) {
 		teleportTo(player, -1914d, 11d, -3299d, Terrain.LOK);
 	}
-	
 	private static void handleLokKimogilaTown(Player player) {
 		teleportTo(player, -70d, 42d, 2769d, Terrain.LOK);
 	}
 
 // Planet: Mustafar
-
-	private static void handleMusDroidArmy(Player player) {
-		teleportTo(player, 4908d, 24d, 6046d, Terrain.MUSTAFAR);
-	}
 
 	private static void handleMusMensix(Player player) {
 		teleportTo(player, -2489d, 230d, 1621d, Terrain.MUSTAFAR);
@@ -1445,7 +1423,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleNabEmperorsRetreat(Player player) {
 		teleportTo(player, 2535d, 295d, -3887d, Terrain.NABOO);
 	}
-	
 	private static void handleNabWeaponFac(Player player) {
 		teleportTo(player, -6439d, 41d, -3265d, Terrain.NABOO);
 	}
@@ -1453,7 +1430,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 // Planet: Rori
 	
 	private static void handleRorHyperdriveFacility(Player player) {teleportTo(player, -1211d, 98d, 4552d, Terrain.RORI);}
-
 	private static void handleRorRestussStarport(Player player) {teleportTo(player, 5289d, 80d, 6142d, Terrain.RORI);}
 
 // Planet: Talus
@@ -1465,23 +1441,18 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleTatFortTusken(Player player) {
 		teleportTo(player, -3941d, 59d, 6318d, Terrain.TATOOINE);
 	}
-	
 	private static void handleTatKraytGrave(Player player) {
 		teleportTo(player, 7380d, 122d, 4298d, Terrain.TATOOINE);
 	}
-	
 	private static void handleTatMosEisley(Player player) {
 		teleportTo(player, 3525d, 4d, -4807d, Terrain.TATOOINE);
 	}
-	
 	private static void handleTatMosTaike(Player player) {
 		teleportTo(player, 3684d, 7d, 2357d, Terrain.TATOOINE);
 	}
-	
 	private static void handleTatSquillCave(Player player) {
 		teleportTo(player, 57d, 152d, -79d, Terrain.TATOOINE);
 	}
-	
 	private static void handleTatImperialOasis(Player player) {
 		teleportTo(player, -5458d, 10d, 2601d, Terrain.TATOOINE);
 	}
@@ -1491,19 +1462,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleYavBlueleafTemple(Player player) {
 		teleportTo(player, -947d, 86d, -2131d, Terrain.YAVIN4);
 	}
-	
 	private static void handleYavExarKun(Player player) {
 		teleportTo(player, 4928d, 103d, 5587d, Terrain.YAVIN4);
 	}
-	
 	private static void handleYavDarkEnclave(Player player) {
 		teleportTo(player, 5107d, 81d, 301d, Terrain.YAVIN4);
 	}
-	
 	private static void handleYavLightEnclave(Player player) {
 		teleportTo(player, -5575d, 87d, 4902d, Terrain.YAVIN4);
 	}
-	
 	private static void handleYavGeoCave(Player player) {teleportTo(player, -6485d, 83d, -446d, Terrain.YAVIN4); }
 
 // Space Stations:
@@ -1511,7 +1478,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleNovaOrion(Player player) {
 		teleportTo(player, "du1_nova_orion", 8, 79.1, 0.8, -57.5);
 	}
-
 	private static void handleNPEStation(Player player) {
 		teleportTo(player, "du1_npe_station_1", 8, 50.2, 0.8, -36.5);
 	}
@@ -1521,30 +1487,19 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleHeroicEK(Player player) {
 		teleportTo(player, "du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);
 	}
-
 	private static void handleHeroicISD(Player player) {
 		teleportTo(player, "du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
 	}
+	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
+	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
+	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
+	private static void handleJediChallEasy(Player player) {teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);	}
+	private static void handleJediChallMedium(Player player) {teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);	}
+	private static void handleJediChallHard(Player player) {teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);	}
+	private static void handleMusDroidArmy(Player player) {teleportTo(player, 4908d, 24d, 6046d, Terrain.MUSTAFAR);}
+	private static void handleHoth(Player player) {teleportTo(player, -3717.9d, 94.1d, 5975.5d, Terrain.ADVENTURE2);}
 
-	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);
-	}
-	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);
-	}
-	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);
-	}
 
-// Planet: Mustafar Jedi Challenge
-
-	private static void handleJediChallEasy(Player player) {
-		teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);
-	}
-	private static void handleJediChallMedium(Player player) {
-		teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);
-	}
-	private static void handleJediChallHard(Player player) {
-		teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);
-	}
-	
 	private static void teleportTo(Player player, double x, double y, double z, Terrain terrain) {
 		player.getCreatureObject().moveToContainer(null, new Location(x, y, z, terrain));
 	}

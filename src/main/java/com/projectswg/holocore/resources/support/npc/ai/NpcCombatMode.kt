@@ -93,8 +93,8 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val attackRange = weapon.maxRange.toDouble()
 		val actionRange = attackRange / 2
 		val lineOfSight = obj.isLineOfSight(target)
-		
-		if (targetDistance > actionRange || !lineOfSight) {
+
+		if (ai.walkSpeed > 0 && (targetDistance > actionRange || !lineOfSight)) {
 			val targetLocation = target.location
 			val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-75.0, 75.0)
 			val targetRange = actionRange / 2

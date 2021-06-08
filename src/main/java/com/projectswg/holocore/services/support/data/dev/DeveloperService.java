@@ -73,8 +73,11 @@ public class DeveloperService extends Service {
 			
 			// Planet: Endor
 			new Location(-1714, 31.5, -8, Terrain.ENDOR),
-			new Location(-4683, 13.3, 4326, Terrain.ENDOR),		
-			
+			new Location(-4683, 13.3, 4326, Terrain.ENDOR),
+
+			// Planet: Hoth
+			new Location(-3717.9, 94.1, 5975.5, Terrain.ADVENTURE2),
+
 			// Planet: Kashyyyk
 			new Location(275, 48.1, 503, Terrain.KASHYYYK_HUNTING),
 			new Location(146, 19.1, 162, Terrain.KASHYYYK_MAIN),
@@ -93,8 +96,11 @@ public class DeveloperService extends Service {
 			new Location(-70, 41.1, 2768, Terrain.LOK),
 
 			// Planet: Mustafar
-			new Location(4908, 24, 6046, Terrain.MUSTAFAR),
+			new Location(4908.3, 24.6, 6045.8, Terrain.MUSTAFAR),
 			new Location(-2489, 230, 1621, Terrain.MUSTAFAR),
+			new Location(2209.8, 74.8, 6410.2, Terrain.MUSTAFAR),
+			new Location(2195.1, 74.8, 4990.4, Terrain.MUSTAFAR),
+			new Location(2190.5, 74.8, 3564.8, Terrain.MUSTAFAR),
 
 			// Planet: Naboo
 			new Location(2535, 295.9, -3887, Terrain.NABOO),
@@ -121,11 +127,6 @@ public class DeveloperService extends Service {
 			new Location(5107, 81.7, 301, Terrain.YAVIN4),
 			new Location(-5575, 88, 4902, Terrain.YAVIN4),
 			new Location(-6485, 84, -446, Terrain.YAVIN4),
-
-			// Planet: Mustafar Jedi Challenge
-			new Location(2209.8, 74.8, 6410.2, Terrain.MUSTAFAR),
-			new Location(2195.1, 74.8, 4990.4, Terrain.MUSTAFAR),
-			new Location(2190.5, 74.8, 3564.8, Terrain.MUSTAFAR),
 
 		};
 		
