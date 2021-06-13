@@ -1366,7 +1366,7 @@ spawn_corellia_1363	CORELLIA	cor_slavers_bunker	AREA	41	48.8	-58.0	80.6	0	1	a pr
 spawn_corellia_1364	CORELLIA	cor_slavers_bunker	AREA	41	46.8	-60.0	70.9	0	1	a slave	humanoid_tyrena_slave	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle			600
 spawn_corellia_1365	CORELLIA	cor_slavers_bunker	AREA	41	58.9	-60.0	91.2	0	1	a slave	humanoid_tyrena_slave	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle			600
 spawn_corellia_1366	CORELLIA	cor_slavers_bunker	AREA	41	60.3	-60.0	101.2	0	1	a slave	humanoid_tyrena_slave	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	TURN	0	0	-	idle			600
-spawn_corellia_1367	CORELLIA	cor_slavers_bunker	AREA	41	31.9	-60.0	95.0	31	1	a warm corpse	humanoid_tyrena_warm_corpse	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	npc_dead_3			600
+spawn_corellia_1367	CORELLIA	cor_slavers_bunker	AREA	41	31.9	-60.0	95.0	31	1	a warm corpse	humanoid_tyrena_warm_corpse	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	npc_dead_03			600
 spawn_corellia_1368	CORELLIA	cor_slavers_bunker	AREA	41	60.0	-60.0	95.2	-78	1	Neeka Z'all	humanoid_tyrena_neeka_zall	INVULNERABLE	N	100	100	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle			600
 spawn_corellia_1369	CORELLIA	cor_slavers_bunker	AREA	42	27.7	-68.0	165.2	0	1	an elite slaver guard	humanoid_tyrena_elite_slaver_guard	AGGRESSIVE	E	35	40	Dungeon	Corellian Slaver Bunker	1	IDLE	0	0	-	idle			600
 spawn_corellia_1370	CORELLIA	cor_slavers_bunker	PATROL	43	43.7	-68.0	165.1	0	1	an elite slaver guard	humanoid_tyrena_elite_slaver_guard	AGGRESSIVE	E	35	40	Dungeon	Corellian Slaver Bunker	1	PATROL	0	patrol_cor_3700	column	idle			600

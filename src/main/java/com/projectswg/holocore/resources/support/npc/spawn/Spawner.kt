@@ -68,8 +68,8 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	 * @return a random IFF template
 	 */
 	fun getRandomIffTemplate(): String = getRandom(iffs)
-	fun getRandomPrimaryWeapon(): String = getRandom(primaryWeapons)
-	fun getRandomSecondaryWeapon(): String = getRandom(secondaryWeapons)
+	fun getRandomDefaultWeapon(): String = getRandom(defaultWeapon)
+	fun getRandomThrownWeapon(): String = getRandom(thrownWeapon)
 	
 	fun addNPC(obj: AIObject) {
 		npcsInternal.add(obj)
@@ -160,11 +160,11 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	val hue: Int
 		get() = npc.hue
 	
-	val primaryWeapons: List<String>
-		get() = npc.primaryWeapons.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+	val defaultWeapon: List<String>
+		get() = npc.defaultWeapon.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
-	val secondaryWeapons: List<String>
-		get() = npc.secondaryWeapons.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+	val thrownWeapon: List<String>
+		get() = npc.thrownWeapon.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
 	val aggressiveRadius: Int
 		get() = npc.aggressiveRadius

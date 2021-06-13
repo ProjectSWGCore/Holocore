@@ -87,11 +87,11 @@ public class NPCCreator {
 		
 		// Assign weapons
 		try {
-			spawner.getPrimaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addPrimaryWeapon);
-			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
-			List<WeaponObject> primaryWeapons = object.getPrimaryWeapons();
-			if (!primaryWeapons.isEmpty())
-				object.setEquippedWeapon(primaryWeapons.get(ThreadLocalRandom.current().nextInt(primaryWeapons.size())));
+			spawner.getDefaultWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addDefaultWeapon);
+			spawner.getThrownWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addThrownWeapon);
+			List<WeaponObject> defaultWeapon = object.getDefaultWeapon();
+			if (!defaultWeapon.isEmpty())
+				object.setEquippedWeapon(defaultWeapon.get(ThreadLocalRandom.current().nextInt(defaultWeapon.size())));
 		} catch (Throwable t) {
 			Log.w(t);
 		}

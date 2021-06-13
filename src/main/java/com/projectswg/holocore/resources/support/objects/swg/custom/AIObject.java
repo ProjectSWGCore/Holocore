@@ -52,8 +52,8 @@ import java.util.concurrent.ScheduledFuture;
 public class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
-	private final List<WeaponObject> primaryWeapons;
-	private final List<WeaponObject> secondaryWeapons;
+	private final List<WeaponObject> defaultWeapon;
+	private final List<WeaponObject> thrownWeapon;
 	private final SWGObject hiddenInventory;
 	
 	private NpcMode defaultMode;
@@ -66,8 +66,8 @@ public class AIObject extends CreatureObject {
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
-		this.primaryWeapons = new ArrayList<>();
-		this.secondaryWeapons = new ArrayList<>();
+		this.defaultWeapon = new ArrayList<>();
+		this.thrownWeapon = new ArrayList<>();
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
 		
 		this.spawner = null;
@@ -164,13 +164,13 @@ public class AIObject extends CreatureObject {
 		this.spawner = spawner;
 	}
 	
-	public void addPrimaryWeapon(WeaponObject weapon) {
-		this.primaryWeapons.add(weapon);
+	public void addDefaultWeapon(WeaponObject weapon) {
+		this.defaultWeapon.add(weapon);
 		weapon.systemMove(hiddenInventory);
 	}
 	
-	public void addSecondaryWeapon(WeaponObject weapon) {
-		this.secondaryWeapons.add(weapon);
+	public void addThrownWeapon(WeaponObject weapon) {
+		this.thrownWeapon.add(weapon);
 		weapon.systemMove(hiddenInventory);
 	}
 	
@@ -187,12 +187,12 @@ public class AIObject extends CreatureObject {
 		return spawner;
 	}
 	
-	public List<WeaponObject> getPrimaryWeapons() {
-		return Collections.unmodifiableList(primaryWeapons);
+	public List<WeaponObject> getDefaultWeapon() {
+		return Collections.unmodifiableList(defaultWeapon);
 	}
 	
-	public List<WeaponObject> getSecondaryWeapons() {
-		return Collections.unmodifiableList(secondaryWeapons);
+	public List<WeaponObject> getThrownWeapon() {
+		return Collections.unmodifiableList(thrownWeapon);
 	}
 	
 	public String getCreatureId() {
