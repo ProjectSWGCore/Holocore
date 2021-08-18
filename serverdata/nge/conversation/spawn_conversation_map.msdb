@@ -3,6 +3,7 @@ TEXT	BOOLEAN
 bartender.sdb	TRUE
 chassis_dealer.sdb	TRUE
 cloning_droid.sdb	TRUE
+commoner.sdb	TRUE
 junk_dealer_generic.sdb	TRUE
 junk_dealer_wookiee.sdb	TRUE
 recruiter_imperial.sdb	TRUE

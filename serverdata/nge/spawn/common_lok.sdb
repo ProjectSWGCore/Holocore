@@ -110,35 +110,35 @@ spawn_lok_107	LOK	lok_world	AREA	0	547.9	11.8	5158.3	-14	1	a WED Treadwell droid
 spawn_lok_108	LOK	lok_world	AREA	0	610.5	11.9	5061.5	157	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
 spawn_lok_109	LOK	lok_world	AREA	0	216.1	11.9	4988.3	92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_110	LOK	lok_world	AREA	0	220.2	17.0	5153.8	45	1	Andria E'liyha	humanoid_herald_lok_andria	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_111	LOK	lok_world	AREA	0	242.4	12.0	4968.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_111	LOK	lok_world	AREA	0	242.4	12.0	4968.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_112	LOK	lok_world	AREA	0	251.4	12.0	4998.5	0	1	Joti Laike	humanoid_u10_joti_laike	ATTACKABLE	B	50	70	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
-spawn_lok_113	LOK	lok_world	AREA	0	297.8	11.9	5155.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
+spawn_lok_113	LOK	lok_world	AREA	0	297.8	11.9	5155.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle		commoner	600
 spawn_lok_114	LOK	lok_world	AREA	0	301.3	12.0	5043.8	9	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
 spawn_lok_115	LOK	lok_world	PATROL	0	307.6	12.0	4910.8	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	50	70	City	Nym's Stronghold	1	PATROL	0	patrol_lok_600	column	idle			600
-spawn_lok_116	LOK	lok_world	AREA	0	329.8	12.1	5063.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_116	LOK	lok_world	AREA	0	329.8	12.1	5063.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_117	LOK	lok_world	AREA	0	334.1	12.0	5118.5	42	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_118	LOK	lok_world	AREA	0	335.7	12.0	4925.5	0	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	2	LOITER	6	0	-	idle			600
 spawn_lok_119	LOK	lok_world	AREA	0	339.4	12.0	4889.3	0	1	Speedbump	creature_speedbump	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_120	LOK	lok_world	AREA	0	340.7	12.1	4998.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_120	LOK	lok_world	AREA	0	340.7	12.1	4998.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_121	LOK	lok_world	AREA	0	351.2	12.1	4838.1	90	1	Slobbers	creature_slobbers	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_122	LOK	lok_world	AREA	0	351.5	12.1	4862.1	90	1	Bedhead	creature_bedhead	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_123	LOK	lok_world	AREA	0	351.7	11.9	4854.0	90	1	Blinky	creature_kusak_blinky	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_124	LOK	lok_world	AREA	0	351.7	12.1	4846.0	90	1	Scarecrow	creature_kusak_scarecrow	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_125	LOK	lok_world	AREA	0	361.6	12.0	4878.9	-60	1	Runt	creature_runt	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_126	LOK	lok_world	AREA	0	362.0	12.1	4837.0	0	1	Ralia Reeven (Nym's Quartermaster)	humanoid_ntp_quatermaster	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	TURN	0	0	-	idle			600
-spawn_lok_127	LOK	lok_world	AREA	0	367.0	12.0	5203.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_127	LOK	lok_world	AREA	0	367.0	12.0	5203.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_128	LOK	lok_world	AREA	0	367.4	12.0	5176.9	77	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_129	LOK	lok_world	AREA	0	370.7	12.0	5095.4	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_129	LOK	lok_world	AREA	0	370.7	12.0	5095.4	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_130	LOK	lok_world	PATROL	0	372.9	12.0	4927.0	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	50	70	City	Nym's Stronghold	1	PATROL	0	patrol_lok_800	column	idle			600
 spawn_lok_131	LOK	lok_world	AREA	0	373.3	11.8	5179.2	88	1	Talia v'laenya	humanoid_herald_lok_talia	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_132	LOK	lok_world	AREA	0	373.4	12.0	4985.4	43	1	Nym's Fuel Technician	humanoid_nym_fuel_tech_ii	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_133	LOK	lok_world	AREA	0	375.5	12.0	5129.7	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_133	LOK	lok_world	AREA	0	375.5	12.0	5129.7	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_134	LOK	lok_world	AREA	0	376.3	11.2	5225.3	0	1	Wart Face	creature_wart_face	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_135	LOK	lok_world	AREA	0	378.4	11.9	5042.9	173	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
 spawn_lok_136	LOK	lok_world	AREA	0	385.2	12.0	5147.7	176	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_137	LOK	lok_world	AREA	0	393.0	12.0	5010.6	55	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
 spawn_lok_138	LOK	lok_world	AREA	0	401.0	12.0	5226.0	0	1	Baldwin	humanoid_smuggler_broker_baldwin	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	TURN	0	0	-	idle			600
-spawn_lok_139	LOK	lok_world	AREA	0	414.4	11.9	4972.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_139	LOK	lok_world	AREA	0	414.4	11.9	4972.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_140	LOK	lok_world	AREA	0	416.7	12.5	5050.3	88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_lok_141	LOK	lok_world	AREA	0	422.0	12.5	5070.9	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_lok_142	LOK	lok_world	AREA	0	427.8	13.0	5136.1	102	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_accusing			600
@@ -146,7 +146,7 @@ spawn_lok_143	LOK	lok_world	AREA	0	429.9	12.0	4847.5	81	1	Reggi Tirver	humanoid_
 spawn_lok_144	LOK	lok_world	AREA	0	429.9	13.0	5135.7	-78	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	nervous			600
 spawn_lok_145	LOK	lok_world	AREA	0	436.9	12.0	5127.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_lok_146	LOK	lok_world	AREA	0	437.1	8.7	5503.9	68	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
-spawn_lok_147	LOK	lok_world	AREA	0	437.6	11.9	5169.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
+spawn_lok_147	LOK	lok_world	AREA	0	437.6	11.9	5169.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle		commoner	600
 spawn_lok_148	LOK	lok_world	AREA	0	439.1	8.7	5504.8	-123	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
 spawn_lok_149	LOK	lok_world	PATROL	0	461.6	7.4	5477.0	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	50	70	City	Nym's Stronghold	1	PATROL	0	patrol_lok_200	column	idle			600
 spawn_lok_150	LOK	lok_world	AREA	0	461.7	23.0	4981.5	-100	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
@@ -159,7 +159,7 @@ spawn_lok_156	LOK	lok_world	AREA	0	467.2	34.5	4810.3	90	1	Arena Referee	humanoid
 spawn_lok_157	LOK	lok_world	PATROL	0	469.1	8.8	5503.6	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	PATROL	0	patrol_lok_1900	column	idle			600
 spawn_lok_158	LOK	lok_world	AREA	0	470.0	23.0	4952.0	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_03	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
 spawn_lok_159	LOK	lok_world	AREA	0	470.0	23.0	4946.0	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_lead	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
-spawn_lok_160	LOK	lok_world	AREA	0	470.8	12.1	5089.6	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_160	LOK	lok_world	AREA	0	470.8	12.1	5089.6	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_161	LOK	lok_world	AREA	0	471.0	11.9	5018.4	-123	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_162	LOK	lok_world	AREA	0	472.8	22.8	4921.0	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	50	70	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_163	LOK	lok_world	AREA	0	473.0	23.0	4956.0	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_02	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
@@ -167,22 +167,22 @@ spawn_lok_164	LOK	lok_world	AREA	0	477.0	23.0	4947.0	0	1	a disgruntled townspers
 spawn_lok_165	LOK	lok_world	AREA	0	477.9	23.0	4952.1	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_05	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
 spawn_lok_166	LOK	lok_world	AREA	0	480.2	23.0	4961.8	-174	1	Nym's Fuel Technician	humanoid_nym_fuel_tech_iii	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_167	LOK	lok_world	AREA	0	480.9	22.8	4921.2	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	50	70	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_168	LOK	lok_world	AREA	0	482.9	11.9	5126.2	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_168	LOK	lok_world	AREA	0	482.9	11.9	5126.2	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_169	LOK	lok_world	AREA	0	484.2	23.0	4948.4	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_06	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
-spawn_lok_170	LOK	lok_world	AREA	0	488.6	9.5	5499.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_170	LOK	lok_world	AREA	0	488.6	9.5	5499.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_171	LOK	lok_world	AREA	0	490.2	12.0	5021.6	138	1	Kaibe	humanoid_ig88_nym_slicer_kaibe	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_172	LOK	lok_world	AREA	0	493.0	12.0	5146.0	89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_173	LOK	lok_world	AREA	0	506.4	12.1	5011.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
+spawn_lok_173	LOK	lok_world	AREA	0	506.4	12.1	5011.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle		commoner	600
 spawn_lok_174	LOK	lok_world	AREA	0	517.6	12.1	5121.5	0	1	Gargle	creature_ntp_gargle	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_175	LOK	lok_world	AREA	0	517.8	12.0	5100.5	141	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_176	LOK	lok_world	AREA	0	519.3	12.0	5097.9	-29	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
 spawn_lok_177	LOK	lok_world	AREA	0	519.9	12.0	5037.1	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	3	0	-	idle			600
-spawn_lok_178	LOK	lok_world	AREA	0	527.9	11.9	5184.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
-spawn_lok_179	LOK	lok_world	AREA	0	531.1	12.0	4983.3	-93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_180	LOK	lok_world	AREA	0	537.7	12.0	5100.9	24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_178	LOK	lok_world	AREA	0	527.9	11.9	5184.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle		commoner	600
+spawn_lok_179	LOK	lok_world	AREA	0	531.1	12.0	4983.3	-93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+spawn_lok_180	LOK	lok_world	AREA	0	537.7	12.0	5100.9	24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_181	LOK	lok_world	PATROL	0	557.1	12.0	5011.3	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	50	70	City	Nym's Stronghold	1	PATROL	0	patrol_lok_700	column	idle			600
-spawn_lok_182	LOK	lok_world	AREA	0	560.4	11.9	5141.9	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_183	LOK	lok_world	AREA	0	578.4	11.9	4993.4	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+spawn_lok_182	LOK	lok_world	AREA	0	560.4	11.9	5141.9	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+spawn_lok_183	LOK	lok_world	AREA	0	578.4	11.9	4993.4	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_184	LOK	lok_world	AREA	0	588.3	3.0	5354.7	-117	1	Balfur Jhcor (associate bounty hunter)	humanoid_u10_bossk_henchman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_185	LOK	lok_world	AREA	0	591.0	12.4	5020.8	0	1	Ding	creature_ntp_ding	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_186	LOK	lok_world	AREA	0	610.2	11.9	5105.3	34	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
@@ -643,7 +643,7 @@ spawn_lok_640	LOK	lok_world	AREA	0	-1841.2	12.0	-3089.8	90	1	a Stormtrooper	huma
 spawn_lok_641	LOK	lok_world	AREA	0	-1841.2	12.0	-3079.6	90	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_lok_642	LOK	lok_world	AREA	0	-1844.4	12.0	-3069.1	90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter	600
 spawn_lok_643	LOK	lok_world	PATROL	0	-1866.6	12.0	-3114.8	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	PATROL	0	patrol_lok_1600	column	idle			600
-spawn_lok_644	LOK	lok_world	AREA	0	-1874.2	12.0	-3123.7	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_lok_644	LOK	lok_world	AREA	0	-1874.2	12.0	-3123.7	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_lok_645	LOK	lok_world	AREA	0	-1887.3	12.0	-3175.3	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	LOITER	3	0	-	idle			600
 spawn_lok_646	LOK	lok_world	AREA	0	-1899.3	12.0	-3100.2	179	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	TURN	0	0	-	idle			600
 spawn_lok_647	LOK	lok_world	AREA	0	-1900.4	12.0	-2984.4	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	85	88	POI	Imperial Outpost	1	LOITER	3	0	-	idle			600
@@ -668,13 +668,13 @@ spawn_lok_665	LOK	lok_world	AREA	0	-130.6	12.1	2647.3	0	1	a kimogila hatchling	c
 spawn_lok_666	LOK	lok_world	AREA	0	-136.4	12.0	2658.4	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	75	85	POI	Kimogila Town	1	LOITER	20	0	-	idle			900
 spawn_lok_667	LOK	lok_world	AREA	0	-136.7	12.0	2764.6	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	75	85	POI	Kimogila Town	1	LOITER	20	0	-	idle			900
 spawn_lok_668	LOK	lok_world	AREA	0	-144.4	12.0	2753.7	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	75	85	POI	Kimogila Town	1	LOITER	20	0	-	idle			900
-spawn_lok_669	LOK	lok_world	AREA	0	-43.9	12.0	2725.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
-spawn_lok_670	LOK	lok_world	AREA	0	-53.0	12.0	2720.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
-spawn_lok_671	LOK	lok_world	AREA	0	-66.6	12.0	2691.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
-spawn_lok_672	LOK	lok_world	AREA	0	-83.5	12.0	2702.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
+spawn_lok_669	LOK	lok_world	AREA	0	-43.9	12.0	2725.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+spawn_lok_670	LOK	lok_world	AREA	0	-53.0	12.0	2720.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+spawn_lok_671	LOK	lok_world	AREA	0	-66.6	12.0	2691.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+spawn_lok_672	LOK	lok_world	AREA	0	-83.5	12.0	2702.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
 spawn_lok_673	LOK	lok_world	AREA	0	-83.5	12.0	2719.8	87	1	Cale Serasai	humanoid_ntp_cale_serasai	INVULNERABLE	N	100	100	POI	Kimogila Town	1	IDLE	0	0	-	idle			600
-spawn_lok_674	LOK	lok_world	AREA	0	-86.3	12.0	2686.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
-spawn_lok_675	LOK	lok_world	AREA	0	-87.2	12.0	2724.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle			600
+spawn_lok_674	LOK	lok_world	AREA	0	-86.3	12.0	2686.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+spawn_lok_675	LOK	lok_world	AREA	0	-87.2	12.0	2724.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
 spawn_lok_676	LOK	lok_world	AREA	0	1.2	12.0	2711.8	0	1	a giant dune kimogila	creature_kimogila_giant_dune	AGGRESSIVE	B	75	85	POI	Kimogila Town	1	LOITER	25	0	-	idle			900
 spawn_lok_677	LOK	lok_world	AREA	0	2882.8	334.6	-4568.8	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	50	70	POI	Mount Chaolt	2	LOITER	20	0	-	idle			600
 spawn_lok_678	LOK	lok_world	AREA	0	2890.1	307.4	-4472.5	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	50	70	POI	Mount Chaolt	2	LOITER	20	0	-	idle			600

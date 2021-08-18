@@ -29,16 +29,16 @@ spawn_yavin4_26	YAVIN4	yav_labor_outpost_small_house	AREA	1	-5.6	0.6	5.8	135	1	a
 spawn_yavin4_27	YAVIN4	yav_labor_outpost_small_house	AREA	1	-3.3	0.6	4	175	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
 spawn_yavin4_28	YAVIN4	yav_labor_outpost_small_house	AREA	1	-3.0	0.6	1.0	-4	1	Major Eker (Rebel Pilot Trainer)	humanoid_rebel_major_eker	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_29	YAVIN4	yav_labor_outpost_starport	AREA	1	-4.7	0.1	-17.6	89	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_yavin4_30	YAVIN4	yav_world	AREA	0	-6943.7	73	-5707.1	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	3	LOITER	10	0	-	idle			600
-spawn_yavin4_31	YAVIN4	yav_world	AREA	0	-6967.7	73	-5688.8	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	4	LOITER	10	0	-	idle			600
+spawn_yavin4_30	YAVIN4	yav_world	AREA	0	-6943.7	73	-5707.1	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	3	LOITER	10	0	-	idle		commoner	600
+spawn_yavin4_31	YAVIN4	yav_world	AREA	0	-6967.7	73	-5688.8	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	4	LOITER	10	0	-	idle		commoner	600
 spawn_yavin4_32	YAVIN4	yav_world	AREA	0	-6984.9	73	-5751.5	31	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_33	YAVIN4	yav_world	AREA	0	-6983.6	73	-5753.3	31	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_34	YAVIN4	yav_world	AREA	0	-6872.8	73.0	-5686.3	-54	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_35	YAVIN4	yav_world	AREA	0	-6904.7	73.0	-5656.3	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_yavin4_36	YAVIN4	yav_world	AREA	0	-6981.1	73.0	-5659.5	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
-spawn_yavin4_37	YAVIN4	yav_world	AREA	0	-6966.8	73.0	-5730.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	6	0	-	idle			600
+spawn_yavin4_36	YAVIN4	yav_world	AREA	0	-6981.1	73.0	-5659.5	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle		commoner	600
+spawn_yavin4_37	YAVIN4	yav_world	AREA	0	-6966.8	73.0	-5730.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	6	0	-	idle		commoner	600
 spawn_yavin4_38	YAVIN4	yav_world	AREA	0	-6911.3	73.0	-5736.3	-106	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
-spawn_yavin4_39	YAVIN4	yav_world	AREA	0	-6893.0	73.0	-5743.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	6	0	-	idle			600
+spawn_yavin4_39	YAVIN4	yav_world	AREA	0	-6893.0	73.0	-5743.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	6	0	-	idle		commoner	600
 spawn_yavin4_40	YAVIN4	yav_world	PATROL	0	-6883.3	73.0	-5685.0	45	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yav_500	column	idle			600
 spawn_yavin4_41	YAVIN4	yav_world	PATROL	0	-6929.9	73.0	-5709.8	0	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yav_600	column	idle			600
 spawn_yavin4_42	YAVIN4	yav_world	AREA	0	-6885.5	73.0	-5697.0	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	6	0	-	npc_use_terminal_high			600
@@ -84,9 +84,9 @@ spawn_yavin4_81	YAVIN4	yav_mining_outpost_small_house	AREA	4	-0.4	0.7	3.5	56	1	a
 spawn_yavin4_82	YAVIN4	yav_mining_outpost_small_house	AREA	4	-1.2	0.7	5.4	180	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_yavin4_83	YAVIN4	yav_mining_outpost_small_house	AREA	4	3.3	0.7	2.5	-28	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_yavin4_84	YAVIN4	yav_world	AREA	0	-319.1	35	4842.8	-90	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
-spawn_yavin4_85	YAVIN4	yav_world	AREA	0	-351.1	35.0	4859.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
-spawn_yavin4_86	YAVIN4	yav_world	AREA	0	-284.7	35.0	4873.1	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	3	LOITER	10	0	-	idle			600
-spawn_yavin4_87	YAVIN4	yav_world	AREA	0	-264.8	35.0	4860.8	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	2	LOITER	5	0	-	idle			600
+spawn_yavin4_85	YAVIN4	yav_world	AREA	0	-351.1	35.0	4859.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle		commoner	600
+spawn_yavin4_86	YAVIN4	yav_world	AREA	0	-284.7	35.0	4873.1	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	3	LOITER	10	0	-	idle		commoner	600
+spawn_yavin4_87	YAVIN4	yav_world	AREA	0	-264.8	35.0	4860.8	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	2	LOITER	5	0	-	idle		commoner	600
 spawn_yavin4_88	YAVIN4	yav_world	PATROL	0	-349.6	35.0	4853.2	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_300	column	idle			600
 spawn_yavin4_89	YAVIN4	yav_world	PATROL	0	-254.8	35.0	4872.8	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_200	column	idle			600
 spawn_yavin4_90	YAVIN4	yav_world	AREA	0	-312.0	35.0	4855.4	177	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600

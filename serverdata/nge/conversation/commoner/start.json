@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/destroysample",
+		"key": "s_f324f7d5",
+		"comment": "I haven't seen you around here before."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "wave_on_dismissing"
+			}
+		}
+	]
+}

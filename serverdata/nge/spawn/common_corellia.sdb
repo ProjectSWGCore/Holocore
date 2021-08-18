@@ -58,7 +58,7 @@ spawn_corellia_55	CORELLIA	cor_bela_combat_gh	AREA	6	-12.3	1.1	1.3	-9	1	a common
 spawn_corellia_56	CORELLIA	cor_bela_combat_gh	AREA	7	8.0	1.1	-12.2	-28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_corellia_57	CORELLIA	cor_bela_combat_gh	AREA	7	6.7	1.1	-9.8	117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_corellia_58	CORELLIA	cor_bela_combat_gh	AREA	8	2.8	1.1	-8.4	-92	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
-spawn_corellia_59	CORELLIA	cor_bela_combat_gh	AREA	9	-11.4	1.1	-13.4	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+spawn_corellia_59	CORELLIA	cor_bela_combat_gh	AREA	9	-11.4	1.1	-13.4	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_60	CORELLIA	cor_bela_comm_gh	AREA	1	2.5	2.5	11.9	-32	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_corellia_61	CORELLIA	cor_bela_comm_gh	AREA	4	-4.5	1.1	-0.6	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
 spawn_corellia_62	CORELLIA	cor_bela_comm_gh	AREA	4	-6.3	1.1	-0.8	89	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -93,7 +93,7 @@ spawn_corellia_90	CORELLIA	cor_bela_university	AREA	4	5.0	1.1	-0.2	-116	1	a smug
 spawn_corellia_91	CORELLIA	cor_bela_university	AREA	5	12.9	1.1	3.1	5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
 spawn_corellia_92	CORELLIA	cor_bela_university	AREA	5	13.1	1.1	5.3	-180	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
 spawn_corellia_93	CORELLIA	cor_bela_university	AREA	6	-14.8	1.1	-0.3	100	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
-spawn_corellia_94	CORELLIA	cor_bela_university	AREA	7	14.6	1.1	-13.4	94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+spawn_corellia_94	CORELLIA	cor_bela_university	AREA	7	14.6	1.1	-13.4	94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_95	CORELLIA	cor_bela_university	AREA	8	-3.1	1.1	-8.3	129	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
 spawn_corellia_96	CORELLIA	cor_bela_university	AREA	8	-0.3	1.1	-9.7	-71	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
 spawn_corellia_97	CORELLIA	cor_bela_university	AREA	9	-9.1	1.1	-13.0	-177	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -116,17 +116,17 @@ spawn_corellia_113	CORELLIA	cor_world	AREA	0	6829.9	330.0	-5457.7	88	1	a commone
 spawn_corellia_114	CORELLIA	cor_world	AREA	0	6858.0	330.0	-5469.1	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
 spawn_corellia_115	CORELLIA	cor_world	AREA	0	6932.6	330.0	-5533.0	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
 spawn_corellia_116	CORELLIA	cor_world	AREA	0	6931.6	330.0	-5534.7	31	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
-spawn_corellia_117	CORELLIA	cor_world	AREA	0	6760.1	315.0	-5709.9	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle			600
-spawn_corellia_118	CORELLIA	cor_world	AREA	0	6747.5	315.0	-5650.3	-4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
-spawn_corellia_119	CORELLIA	cor_world	AREA	0	6824.4	315.0	-5731.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	3	LOITER	10	0	-	idle			600
-spawn_corellia_120	CORELLIA	cor_world	AREA	0	6827.2	315.0	-5758.7	177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle			600
-spawn_corellia_121	CORELLIA	cor_world	AREA	0	6826.0	315.0	-5795.2	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle			600
-spawn_corellia_122	CORELLIA	cor_world	AREA	0	6729.7	315.0	-5817.9	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
-spawn_corellia_123	CORELLIA	cor_world	AREA	0	6720.5	330.0	-5902.6	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	5	0	-	idle			600
-spawn_corellia_124	CORELLIA	cor_world	AREA	0	6704.1	330.0	-5908.2	-131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	3	LOITER	10	0	-	idle			600
-spawn_corellia_125	CORELLIA	cor_world	AREA	0	6707.9	315.0	-5590.1	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
-spawn_corellia_126	CORELLIA	cor_world	AREA	0	6758.0	315.0	-5519.5	-157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
-spawn_corellia_127	CORELLIA	cor_world	AREA	0	6906.8	330.0	-5550.0	-156	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle			600
+spawn_corellia_117	CORELLIA	cor_world	AREA	0	6760.1	315.0	-5709.9	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_118	CORELLIA	cor_world	AREA	0	6747.5	315.0	-5650.3	-4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_119	CORELLIA	cor_world	AREA	0	6824.4	315.0	-5731.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_120	CORELLIA	cor_world	AREA	0	6827.2	315.0	-5758.7	177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_121	CORELLIA	cor_world	AREA	0	6826.0	315.0	-5795.2	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_122	CORELLIA	cor_world	AREA	0	6729.7	315.0	-5817.9	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_123	CORELLIA	cor_world	AREA	0	6720.5	330.0	-5902.6	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_124	CORELLIA	cor_world	AREA	0	6704.1	330.0	-5908.2	-131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_125	CORELLIA	cor_world	AREA	0	6707.9	315.0	-5590.1	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_126	CORELLIA	cor_world	AREA	0	6758.0	315.0	-5519.5	-157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_127	CORELLIA	cor_world	AREA	0	6906.8	330.0	-5550.0	-156	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	2	LOITER	10	0	-	idle		commoner	600
 spawn_corellia_128	CORELLIA	cor_world	PATROL	0	6757.7	315.2	-5655	92		a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Bela Vistal	1	PATROL	0	patrol_cor_16100	column	idle			600
 spawn_corellia_129	CORELLIA	cor_world	AREA	0	6827.2	330.0	-5471.3	10	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
 spawn_corellia_130	CORELLIA	cor_world	AREA	0	6726.2	315.0	-5680.4	-125	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
@@ -316,7 +316,7 @@ spawn_corellia_313	CORELLIA	cor_coronet_theater	AREA	1	2.6	0.6	-2.6	90	1	a Botha
 spawn_corellia_314	CORELLIA	cor_coronet_theater	AREA	1	3.7	0.6	-2.6	-90	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	conversation			600
 spawn_corellia_315	CORELLIA	cor_coronet_theater	AREA	6	22.3	0.7	43.3	-179	1	a Bothan information broker	humanoid_bothan_information_broker	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_316	CORELLIA	cor_coronet_theater	AREA	6	-17.5	0.9	41.1	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_317	CORELLIA	cor_coronet_theater	AREA	6	22.3	0.8	42.2	5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
+spawn_corellia_317	CORELLIA	cor_coronet_theater	AREA	6	22.3	0.8	42.2	5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_318	CORELLIA	cor_coronet_theater	AREA	6	-18.6	0.9	41.1	134	1	an audience member	humanoid_quest_crowd_pleaser_audience_member	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_319	CORELLIA	cor_coronet_theater	AREA	7	28.9	2.1	58.2	-47	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_320	CORELLIA	cor_coronet_theater	AREA	8	26.5	2.1	73.0	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
@@ -346,64 +346,64 @@ spawn_corellia_343	CORELLIA	cor_world	AREA	0	-182.0	28.0	-4733.4	159	1	a busines
 spawn_corellia_344	CORELLIA	cor_world	AREA	0	-189.6	28	-4772.4	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_345	CORELLIA	cor_world	PATROL	0	-50.1	28.0	-4718.3	45		a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_15400	column	idle			600
 spawn_corellia_346	CORELLIA	cor_world	PATROL	0	-146.2	28.0	-4739.0	-23	1	a CLL-8 binary load lifter	droid_binary_load_lifter	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10000	column	idle			600
-spawn_corellia_347	CORELLIA	cor_world	AREA	0	-106.8	28.0	-4528.6	-97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle			600
-spawn_corellia_348	CORELLIA	cor_world	AREA	0	101.3	28.0	-4554.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle			600
-spawn_corellia_349	CORELLIA	cor_world	AREA	0	-160.0	28.0	-4725.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	8	0	-	idle			600
-spawn_corellia_350	CORELLIA	cor_world	AREA	0	-41.4	28.5	-4603.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	5	0	-	idle			600
-spawn_corellia_351	CORELLIA	cor_world	AREA	0	14.1	28.0	-4489.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	3	0	-	idle			600
-spawn_corellia_352	CORELLIA	cor_world	AREA	0	-4.3	28.0	-4420.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	5	0	-	idle			600
-spawn_corellia_353	CORELLIA	cor_world	AREA	0	76.8	28.0	-4407.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	3	LOITER	10	0	-	idle			600
-spawn_corellia_354	CORELLIA	cor_world	AREA	0	73.5	28.0	-4479.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	10	0	-	idle			600
-spawn_corellia_355	CORELLIA	cor_world	AREA	0	-185.3	28.0	-4358.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	3	LOITER	10	0	-	idle			600
-spawn_corellia_356	CORELLIA	cor_world	AREA	0	-209.6	28.0	-4376.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	10	0	-	idle			600
-spawn_corellia_357	CORELLIA	cor_world	AREA	0	-32.5	28.0	-4644.9	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle			600
-spawn_corellia_358	CORELLIA	cor_world	AREA	0	-77.9	28.0	-4644.1	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle			600
-spawn_corellia_359	CORELLIA	cor_world	AREA	0	-103.1	28.0	-4182.6	85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_360	CORELLIA	cor_world	AREA	0	-112.6	28.0	-4310.7	151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_361	CORELLIA	cor_world	AREA	0	-119.0	28.0	-4285.3	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_362	CORELLIA	cor_world	AREA	0	-122.2	28.0	-4392.8	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_363	CORELLIA	cor_world	AREA	0	-15.5	28.0	-4415.3	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_364	CORELLIA	cor_world	AREA	0	-158.7	28.0	-4526.3	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_365	CORELLIA	cor_world	AREA	0	-163.8	28.0	-4552.1	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_366	CORELLIA	cor_world	AREA	0	-163.8	28.0	-4606.3	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_367	CORELLIA	cor_world	AREA	0	-163.9	28.0	-4181.5	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_368	CORELLIA	cor_world	AREA	0	-168.4	28.0	-4515.6	103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_369	CORELLIA	cor_world	AREA	0	-181.0	28.0	-4505.0	109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_370	CORELLIA	cor_world	AREA	0	-195.9	28.0	-4451.7	-5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_371	CORELLIA	cor_world	AREA	0	-302.2	28.0	-4300.8	29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_372	CORELLIA	cor_world	AREA	0	-306.1	28.0	-4600.7	146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_373	CORELLIA	cor_world	AREA	0	-306.5	28.0	-4546.5	95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_374	CORELLIA	cor_world	AREA	0	-350.5	28.0	-4287.7	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_375	CORELLIA	cor_world	AREA	0	-350.9	28.0	-4219.9	-64	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_376	CORELLIA	cor_world	AREA	0	-351.0	28.0	-4250.8	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_377	CORELLIA	cor_world	AREA	0	-357.9	28.0	-4267.8	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_378	CORELLIA	cor_world	AREA	0	-37.3	28.0	-4476.8	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_379	CORELLIA	cor_world	AREA	0	-56.8	28.0	-4229.3	47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_380	CORELLIA	cor_world	AREA	0	-64.8	28.0	-4398.6	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_381	CORELLIA	cor_world	AREA	0	-71.0	28.0	-4325.2	61	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_382	CORELLIA	cor_world	AREA	0	-78.7	28.0	-4286.4	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_383	CORELLIA	cor_world	AREA	0	-87.6	28.0	-4302.2	97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_384	CORELLIA	cor_world	AREA	0	-92.2	28.0	-4471.1	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_385	CORELLIA	cor_world	AREA	0	10.3	28.0	-4633.8	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_386	CORELLIA	cor_world	AREA	0	14.5	28.0	-4407.1	38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_387	CORELLIA	cor_world	AREA	0	40.5	28.0	-4416.6	81	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_388	CORELLIA	cor_world	AREA	0	55.6	28.0	-4782.2	123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_389	CORELLIA	cor_world	AREA	0	71.9	28.0	-4569.0	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_390	CORELLIA	cor_world	AREA	0	-210.5	28.0	-4491.0	104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_391	CORELLIA	cor_world	AREA	0	-210.3	28.0	-4406.5	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_392	CORELLIA	cor_world	AREA	0	-511.5	28	-4614.8	96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_393	CORELLIA	cor_world	AREA	0	-258.9	28	-4759	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_394	CORELLIA	cor_world	AREA	0	-142.2	28	-4755.7	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_395	CORELLIA	cor_world	AREA	0	-149	28	-4677.8	-53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_396	CORELLIA	cor_world	AREA	0	55	28	-4717.6	38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_397	CORELLIA	cor_world	AREA	0	-277.4	28	-4216.1	48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_398	CORELLIA	cor_world	AREA	0	-208.6	28	-4096.1	177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
-spawn_corellia_399	CORELLIA	cor_world	PATROL	0	-200.1	28.0	-4398.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10200	column	idle			600
-spawn_corellia_400	CORELLIA	cor_world	PATROL	0	-298.6	28.0	-4379.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10500	column	idle			600
-spawn_corellia_401	CORELLIA	cor_world	PATROL	0	-128.2	28.0	-4394.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10300	column	idle			600
-spawn_corellia_402	CORELLIA	cor_world	PATROL	0	-503.1	28.0	-4673.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10700	column	idle			600
-spawn_corellia_403	CORELLIA	cor_world	PATROL	0	-9.9	28.0	-4640.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10100	column	idle			600
-spawn_corellia_404	CORELLIA	cor_world	PATROL	0	-9.9	28.0	-4640.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10400	column	idle			600
+spawn_corellia_347	CORELLIA	cor_world	AREA	0	-106.8	28.0	-4528.6	-97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_348	CORELLIA	cor_world	AREA	0	101.3	28.0	-4554.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_349	CORELLIA	cor_world	AREA	0	-160.0	28.0	-4725.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	8	0	-	idle		commoner	600
+spawn_corellia_350	CORELLIA	cor_world	AREA	0	-41.4	28.5	-4603.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_351	CORELLIA	cor_world	AREA	0	14.1	28.0	-4489.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	3	0	-	idle		commoner	600
+spawn_corellia_352	CORELLIA	cor_world	AREA	0	-4.3	28.0	-4420.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_353	CORELLIA	cor_world	AREA	0	76.8	28.0	-4407.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_354	CORELLIA	cor_world	AREA	0	73.5	28.0	-4479.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_355	CORELLIA	cor_world	AREA	0	-185.3	28.0	-4358.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_356	CORELLIA	cor_world	AREA	0	-209.6	28.0	-4376.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_357	CORELLIA	cor_world	AREA	0	-32.5	28.0	-4644.9	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_358	CORELLIA	cor_world	AREA	0	-77.9	28.0	-4644.1	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_359	CORELLIA	cor_world	AREA	0	-103.1	28.0	-4182.6	85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_360	CORELLIA	cor_world	AREA	0	-112.6	28.0	-4310.7	151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_361	CORELLIA	cor_world	AREA	0	-119.0	28.0	-4285.3	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_362	CORELLIA	cor_world	AREA	0	-122.2	28.0	-4392.8	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_363	CORELLIA	cor_world	AREA	0	-15.5	28.0	-4415.3	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_364	CORELLIA	cor_world	AREA	0	-158.7	28.0	-4526.3	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_365	CORELLIA	cor_world	AREA	0	-163.8	28.0	-4552.1	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_366	CORELLIA	cor_world	AREA	0	-163.8	28.0	-4606.3	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_367	CORELLIA	cor_world	AREA	0	-163.9	28.0	-4181.5	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_368	CORELLIA	cor_world	AREA	0	-168.4	28.0	-4515.6	103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_369	CORELLIA	cor_world	AREA	0	-181.0	28.0	-4505.0	109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_370	CORELLIA	cor_world	AREA	0	-195.9	28.0	-4451.7	-5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_371	CORELLIA	cor_world	AREA	0	-302.2	28.0	-4300.8	29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_372	CORELLIA	cor_world	AREA	0	-306.1	28.0	-4600.7	146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_373	CORELLIA	cor_world	AREA	0	-306.5	28.0	-4546.5	95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_374	CORELLIA	cor_world	AREA	0	-350.5	28.0	-4287.7	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_375	CORELLIA	cor_world	AREA	0	-350.9	28.0	-4219.9	-64	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_376	CORELLIA	cor_world	AREA	0	-351.0	28.0	-4250.8	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_377	CORELLIA	cor_world	AREA	0	-357.9	28.0	-4267.8	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_378	CORELLIA	cor_world	AREA	0	-37.3	28.0	-4476.8	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_379	CORELLIA	cor_world	AREA	0	-56.8	28.0	-4229.3	47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_380	CORELLIA	cor_world	AREA	0	-64.8	28.0	-4398.6	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_381	CORELLIA	cor_world	AREA	0	-71.0	28.0	-4325.2	61	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_382	CORELLIA	cor_world	AREA	0	-78.7	28.0	-4286.4	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_383	CORELLIA	cor_world	AREA	0	-87.6	28.0	-4302.2	97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_384	CORELLIA	cor_world	AREA	0	-92.2	28.0	-4471.1	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_385	CORELLIA	cor_world	AREA	0	10.3	28.0	-4633.8	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_386	CORELLIA	cor_world	AREA	0	14.5	28.0	-4407.1	38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_387	CORELLIA	cor_world	AREA	0	40.5	28.0	-4416.6	81	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_388	CORELLIA	cor_world	AREA	0	55.6	28.0	-4782.2	123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_389	CORELLIA	cor_world	AREA	0	71.9	28.0	-4569.0	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_390	CORELLIA	cor_world	AREA	0	-210.5	28.0	-4491.0	104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_391	CORELLIA	cor_world	AREA	0	-210.3	28.0	-4406.5	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_392	CORELLIA	cor_world	AREA	0	-511.5	28	-4614.8	96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_393	CORELLIA	cor_world	AREA	0	-258.9	28	-4759	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_394	CORELLIA	cor_world	AREA	0	-142.2	28	-4755.7	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_395	CORELLIA	cor_world	AREA	0	-149	28	-4677.8	-53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_396	CORELLIA	cor_world	AREA	0	55	28	-4717.6	38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_397	CORELLIA	cor_world	AREA	0	-277.4	28	-4216.1	48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_398	CORELLIA	cor_world	AREA	0	-208.6	28	-4096.1	177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_399	CORELLIA	cor_world	PATROL	0	-200.1	28.0	-4398.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10200	column	idle		commoner	600
+spawn_corellia_400	CORELLIA	cor_world	PATROL	0	-298.6	28.0	-4379.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10500	column	idle		commoner	600
+spawn_corellia_401	CORELLIA	cor_world	PATROL	0	-128.2	28.0	-4394.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10300	column	idle		commoner	600
+spawn_corellia_402	CORELLIA	cor_world	PATROL	0	-503.1	28.0	-4673.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10700	column	idle		commoner	600
+spawn_corellia_403	CORELLIA	cor_world	PATROL	0	-9.9	28.0	-4640.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10100	column	idle		commoner	600
+spawn_corellia_404	CORELLIA	cor_world	PATROL	0	-9.9	28.0	-4640.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Coronet	1	PATROL	0	patrol_cor_10400	column	idle		commoner	600
 spawn_corellia_405	CORELLIA	cor_world	AREA	0	-172.3	28.0	-4436.8	-147	1	a Corellia Times vendor	humanoid_mtp_corellia_times_vendor	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_406	CORELLIA	cor_world	AREA	0	-201.1	28.0	-4504.4	-34	1	a CorSec agent	humanoid_corsec_agent	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
 spawn_corellia_407	CORELLIA	cor_world	AREA	0	19.9	28.0	-4774.7	17	1	a gadget specialist	humanoid_quest_gadget_specialist	INVULNERABLE	N	100	100	City	Coronet	1	IDLE	0	0	-	idle			600
@@ -526,7 +526,7 @@ spawn_corellia_523	CORELLIA	cor_doaba_cantina	AREA	1	41.5	0.1	1.2	114	1	a common
 spawn_corellia_524	CORELLIA	cor_doaba_cantina	AREA	1	43.6	0.1	0.3	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
 spawn_corellia_525	CORELLIA	cor_doaba_cantina	AREA	3	7.6	-0.9	1.4	68	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_526	CORELLIA	cor_doaba_cantina	AREA	3	3.9	-0.9	-4.8	1	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
-spawn_corellia_527	CORELLIA	cor_doaba_cantina	AREA	3	14.0	-0.9	-10.7	-76	1	a commoner	humanoid_commoner	ATTACKABLE	N	30	40	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+spawn_corellia_527	CORELLIA	cor_doaba_cantina	AREA	3	14.0	-0.9	-10.7	-76	1	a commoner	humanoid_commoner	ATTACKABLE	N	30	40	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_528	CORELLIA	cor_doaba_cantina	AREA	3	19.8	-0.9	5.8	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	entertained			600
 spawn_corellia_529	CORELLIA	cor_doaba_cantina	AREA	3	20.6	-0.9	8.0	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	entertained			600
 spawn_corellia_530	CORELLIA	cor_doaba_cantina	AREA	3	26.1	-0.9	-9.0	-15	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -562,13 +562,13 @@ spawn_corellia_559	CORELLIA	cor_doaba_hospital	AREA	2	-1.5	0.2	-0.2	51	1	a medic
 spawn_corellia_560	CORELLIA	cor_doaba_hospital	PATROL	2	0.1	0.2	5.6	-176		a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_16400	column	idle			600
 spawn_corellia_561	CORELLIA	cor_doaba_hospital	AREA	2	3.3	0.2	-7.6	5	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_562	CORELLIA	cor_doaba_hotel	AREA	4	7.4	1.0	-6.9	179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
-spawn_corellia_563	CORELLIA	cor_doaba_hotel	AREA	4	7.4	1.0	-8.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+spawn_corellia_563	CORELLIA	cor_doaba_hotel	AREA	4	7.4	1.0	-8.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_564	CORELLIA	cor_doaba_hotel	AREA	4	1.4	1.0	3.3	-13	1	Admiral Willham Burke	humanoid_rebel_willham_burke	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_565	CORELLIA	cor_doaba_hotel	AREA	4	2.8	1.0	3.4	-40	1	Commander Zo'ssa	humanoid_rebel_zo_ssa	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_angry			600
 spawn_corellia_566	CORELLIA	cor_doaba_hotel	AREA	5	24.3	1.3	10.0	-171	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_567	CORELLIA	cor_doaba_hotel	AREA	5	24.3	1.3	8.9	1	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_568	CORELLIA	cor_doaba_hotel	AREA	6	-10.6	1.0	4.2	-90	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_standing_drinking			600
-spawn_corellia_569	CORELLIA	cor_doaba_hotel	AREA	10	-23.5	1.6	-17.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+spawn_corellia_569	CORELLIA	cor_doaba_hotel	AREA	10	-23.5	1.6	-17.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_570	CORELLIA	cor_doaba_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_571	CORELLIA	cor_doaba_starport	AREA	1	-0.9	0.6	74.5	144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
 spawn_corellia_572	CORELLIA	cor_doaba_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
@@ -618,15 +618,15 @@ spawn_corellia_615	CORELLIA	cor_world	AREA	0	3302.3	308.0	5504.5	-94	1	a commone
 spawn_corellia_616	CORELLIA	cor_world	AREA	0	3348	308	5602.3	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
 spawn_corellia_617	CORELLIA	cor_world	AREA	0	3347.2	308	5604.9	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
 spawn_corellia_618	CORELLIA	cor_world	AREA	0	3331.4	324	5693.5	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
-spawn_corellia_619	CORELLIA	cor_world	AREA	0	3174.6	300.0	5355.3	-36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	3	LOITER	10	0	-	idle			600
-spawn_corellia_620	CORELLIA	cor_world	AREA	0	3112.4	300.0	5164.3	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
-spawn_corellia_621	CORELLIA	cor_world	AREA	0	3109.8	300.0	5145.5	-175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
-spawn_corellia_622	CORELLIA	cor_world	AREA	0	3378.8	308.6	5480.1	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle			600
-spawn_corellia_623	CORELLIA	cor_world	AREA	0	3368.5	308.0	5507.3	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle			600
-spawn_corellia_624	CORELLIA	cor_world	AREA	0	3327.8	308.0	5527.0	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
-spawn_corellia_625	CORELLIA	cor_world	AREA	0	3315.1	308.0	5499.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle			600
-spawn_corellia_626	CORELLIA	cor_world	PATROL	0	3123.0	300.0	5149.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_8900	column	idle			600
-spawn_corellia_627	CORELLIA	cor_world	PATROL	0	3051.5	300.0	5190.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_9000	column	idle			600
+spawn_corellia_619	CORELLIA	cor_world	AREA	0	3174.6	300.0	5355.3	-36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_620	CORELLIA	cor_world	AREA	0	3112.4	300.0	5164.3	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_621	CORELLIA	cor_world	AREA	0	3109.8	300.0	5145.5	-175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_622	CORELLIA	cor_world	AREA	0	3378.8	308.6	5480.1	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_623	CORELLIA	cor_world	AREA	0	3368.5	308.0	5507.3	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_624	CORELLIA	cor_world	AREA	0	3327.8	308.0	5527.0	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_625	CORELLIA	cor_world	AREA	0	3315.1	308.0	5499.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_626	CORELLIA	cor_world	PATROL	0	3123.0	300.0	5149.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_8900	column	idle		commoner	600
+spawn_corellia_627	CORELLIA	cor_world	PATROL	0	3051.5	300.0	5190.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_9000	column	idle		commoner	600
 spawn_corellia_628	CORELLIA	cor_world	AREA	0	3335.4	308.0	5503.8	-57	1	a jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
 spawn_corellia_629	CORELLIA	cor_world	AREA	0	3314.1	308	5527.1	-154	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_630	CORELLIA	cor_world	PATROL	0	3093.5	280.2	5013.5	2		a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_cor_16300	column	idle			600
@@ -748,26 +748,26 @@ spawn_corellia_745	CORELLIA	cor_world	AREA	0	-3782.7	86.6	3239.1	-2	1	a commoner
 spawn_corellia_746	CORELLIA	cor_world	AREA	0	-3146.5	31	2970.8	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_747	CORELLIA	cor_world	AREA	0	-3176.7	31	2881.8	62	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
 spawn_corellia_748	CORELLIA	cor_world	AREA	0	-3174.3	31	2883.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-spawn_corellia_749	CORELLIA	cor_world	AREA	0	-3774.1	86	3166	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	10	0	-	idle			600
-spawn_corellia_750	CORELLIA	cor_world	AREA	0	-3747.6	86	3216.5	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_751	CORELLIA	cor_world	AREA	0	-3645.6	85.9	3115.7	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_752	CORELLIA	cor_world	AREA	0	-3585.4	86	3150	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_753	CORELLIA	cor_world	AREA	0	-3612.6	86	3213.8	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_754	CORELLIA	cor_world	AREA	0	-3448.5	86	3142.4	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_755	CORELLIA	cor_world	AREA	0	-3433.1	86	3113.3	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle			600
-spawn_corellia_756	CORELLIA	cor_world	AREA	0	-3425.2	86	3084.5	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_757	CORELLIA	cor_world	AREA	0	-3411.7	86	3107.6	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle			600
-spawn_corellia_758	CORELLIA	cor_world	AREA	0	-3391.5	86	3143.5	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_759	CORELLIA	cor_world	AREA	0	-3375.1	86	3165.2	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle			600
-spawn_corellia_760	CORELLIA	cor_world	AREA	0	-3363.8	86	3260.4	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle			600
-spawn_corellia_761	CORELLIA	cor_world	AREA	0	-3326.8	86	3304	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_762	CORELLIA	cor_world	AREA	0	-3366.8	86	3285.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_763	CORELLIA	cor_world	AREA	0	-3386.1	86	2981	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_764	CORELLIA	cor_world	AREA	0	-3393.1	86	3005.6	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_765	CORELLIA	cor_world	AREA	0	-3122.7	31	2995.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_766	CORELLIA	cor_world	AREA	0	-3108.9	31	2805.5	-120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-spawn_corellia_767	CORELLIA	cor_world	AREA	0	-3164.3	31	2777.4	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle			600
-spawn_corellia_768	CORELLIA	cor_world	AREA	0	-3162.6	31	2909.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+spawn_corellia_749	CORELLIA	cor_world	AREA	0	-3774.1	86	3166	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_750	CORELLIA	cor_world	AREA	0	-3747.6	86	3216.5	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_751	CORELLIA	cor_world	AREA	0	-3645.6	85.9	3115.7	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_752	CORELLIA	cor_world	AREA	0	-3585.4	86	3150	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_753	CORELLIA	cor_world	AREA	0	-3612.6	86	3213.8	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_754	CORELLIA	cor_world	AREA	0	-3448.5	86	3142.4	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_755	CORELLIA	cor_world	AREA	0	-3433.1	86	3113.3	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_756	CORELLIA	cor_world	AREA	0	-3425.2	86	3084.5	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_757	CORELLIA	cor_world	AREA	0	-3411.7	86	3107.6	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_758	CORELLIA	cor_world	AREA	0	-3391.5	86	3143.5	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_759	CORELLIA	cor_world	AREA	0	-3375.1	86	3165.2	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_760	CORELLIA	cor_world	AREA	0	-3363.8	86	3260.4	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_761	CORELLIA	cor_world	AREA	0	-3326.8	86	3304	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_762	CORELLIA	cor_world	AREA	0	-3366.8	86	3285.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_763	CORELLIA	cor_world	AREA	0	-3386.1	86	2981	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_764	CORELLIA	cor_world	AREA	0	-3393.1	86	3005.6	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_765	CORELLIA	cor_world	AREA	0	-3122.7	31	2995.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_766	CORELLIA	cor_world	AREA	0	-3108.9	31	2805.5	-120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_767	CORELLIA	cor_world	AREA	0	-3164.3	31	2777.4	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_768	CORELLIA	cor_world	AREA	0	-3162.6	31	2909.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
 spawn_corellia_769	CORELLIA	cor_world	AREA	0	-3152	31	2784.5	93	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_770	CORELLIA	cor_world	AREA	0	-3321.1	86	3220.7	146	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
 spawn_corellia_771	CORELLIA	cor_world	AREA	0	-3132.1	31	2800.3	-88	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
@@ -898,43 +898,43 @@ spawn_corellia_895	CORELLIA	cor_world	AREA	0	-5275.5	21.0	-2379.4	0	1	a Braggan'
 spawn_corellia_896	CORELLIA	cor_world	AREA	0	-5145.0	21.0	-2291.9	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	35	40	City	Tyrena	1	TURN	0	0	-	idle			600
 spawn_corellia_897	CORELLIA	cor_world	AREA	0	-5464.8	21.0	-2683.2	-40	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
 spawn_corellia_898	CORELLIA	cor_world	AREA	0	-5481	21	-2680.5	175	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	2	LOITER	5	0	-	idle			600
-spawn_corellia_899	CORELLIA	cor_world	AREA	0	-5208.0	21.0	-2333.9	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	3	0	-	idle			600
-spawn_corellia_900	CORELLIA	cor_world	AREA	0	-5633.7	21.0	-2757.5	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_901	CORELLIA	cor_world	AREA	0	-5583.8	21.0	-2764.8	-145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_902	CORELLIA	cor_world	AREA	0	-5500.8	21.0	-2778.3	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_903	CORELLIA	cor_world	AREA	0	-5409.4	21.0	-2700.5	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+spawn_corellia_899	CORELLIA	cor_world	AREA	0	-5208.0	21.0	-2333.9	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	3	0	-	idle		commoner	600
+spawn_corellia_900	CORELLIA	cor_world	AREA	0	-5633.7	21.0	-2757.5	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_901	CORELLIA	cor_world	AREA	0	-5583.8	21.0	-2764.8	-145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_902	CORELLIA	cor_world	AREA	0	-5500.8	21.0	-2778.3	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_903	CORELLIA	cor_world	AREA	0	-5409.4	21.0	-2700.5	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_904	CORELLIA	cor_world	AREA	0	-5464.9	21.0	-2680.3	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
 spawn_corellia_905	CORELLIA	cor_world	AREA	0	-5466.9	21.0	-2680.8	135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
-spawn_corellia_906	CORELLIA	cor_world	AREA	0	-5162.9	21.0	-2277.6	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+spawn_corellia_906	CORELLIA	cor_world	AREA	0	-5162.9	21.0	-2277.6	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_907	CORELLIA	cor_world	AREA	0	-5112.5	21.0	-2504.8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
-spawn_corellia_908	CORELLIA	cor_world	AREA	0	-5089.7	21.0	-2344.8	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_909	CORELLIA	cor_world	AREA	0	-5004.4	21.0	-2342.6	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+spawn_corellia_908	CORELLIA	cor_world	AREA	0	-5089.7	21.0	-2344.8	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_909	CORELLIA	cor_world	AREA	0	-5004.4	21.0	-2342.6	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_910	CORELLIA	cor_world	AREA	0	-5110.6	21.0	-2504.7	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
-spawn_corellia_911	CORELLIA	cor_world	AREA	0	-5322.0	21.0	-2455.1	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_912	CORELLIA	cor_world	AREA	0	-5225.1	21.0	-2491.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_913	CORELLIA	cor_world	AREA	0	-5064.6	21.0	-2392.4	56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
-spawn_corellia_914	CORELLIA	cor_world	AREA	0	-5199.2	21.0	-2434.4	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+spawn_corellia_911	CORELLIA	cor_world	AREA	0	-5322.0	21.0	-2455.1	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_912	CORELLIA	cor_world	AREA	0	-5225.1	21.0	-2491.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_913	CORELLIA	cor_world	AREA	0	-5064.6	21.0	-2392.4	56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_914	CORELLIA	cor_world	AREA	0	-5199.2	21.0	-2434.4	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_915	CORELLIA	cor_world	AREA	0	-5110.2	21.3	-2387.5	47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_916	CORELLIA	cor_world	AREA	0	-4995.7	21.6	-2382.6	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_corellia_917	CORELLIA	cor_world	AREA	0	-4976.1	21	-2214.9	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
-spawn_corellia_918	CORELLIA	cor_world	AREA	0	-5407.9	21	-2680.3	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_919	CORELLIA	cor_world	AREA	0	-5454.8	21	-2693.2	-70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle			600
-spawn_corellia_920	CORELLIA	cor_world	AREA	0	-5472.1	21	-2699.2	131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_921	CORELLIA	cor_world	AREA	0	-5556.9	21.6	-2626.1	-65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_922	CORELLIA	cor_world	AREA	0	-5520.1	21	-2775.9	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	2	LOITER	5	0	-	idle			600
-spawn_corellia_923	CORELLIA	cor_world	AREA	0	-5581.1	21	-2751.4	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle			600
-spawn_corellia_924	CORELLIA	cor_world	AREA	0	-5596.7	21	-2786.6	-127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_925	CORELLIA	cor_world	AREA	0	-5592.6	21	-2801.1	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_926	CORELLIA	cor_world	AREA	0	-5666.2	21	-2699.4	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_927	CORELLIA	cor_world	AREA	0	-5637.3	21.6	-2661.2	-27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_928	CORELLIA	cor_world	AREA	0	-5283.1	21	-2549.6	-12	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	5	0	-	idle			600
-spawn_corellia_929	CORELLIA	cor_world	AREA	0	-5181.3	21	-2567.5	20	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle			600
-spawn_corellia_930	CORELLIA	cor_world	AREA	0	-5193.4	21	-2497.7	-143	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	2	LOITER	10	0	-	idle			600
-spawn_corellia_931	CORELLIA	cor_world	AREA	0	-5109.3	21	-2427.3	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_932	CORELLIA	cor_world	AREA	0	-5037.9	21	-2353.6	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_933	CORELLIA	cor_world	AREA	0	-5039.6	21	-2294.8	11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_934	CORELLIA	cor_world	AREA	0	-5096.8	21	-2328.2	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
-spawn_corellia_935	CORELLIA	cor_world	AREA	0	-4986.5	21	-2216.2	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+spawn_corellia_918	CORELLIA	cor_world	AREA	0	-5407.9	21	-2680.3	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_919	CORELLIA	cor_world	AREA	0	-5454.8	21	-2693.2	-70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_920	CORELLIA	cor_world	AREA	0	-5472.1	21	-2699.2	131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_921	CORELLIA	cor_world	AREA	0	-5556.9	21.6	-2626.1	-65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_922	CORELLIA	cor_world	AREA	0	-5520.1	21	-2775.9	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_923	CORELLIA	cor_world	AREA	0	-5581.1	21	-2751.4	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_924	CORELLIA	cor_world	AREA	0	-5596.7	21	-2786.6	-127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_925	CORELLIA	cor_world	AREA	0	-5592.6	21	-2801.1	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_926	CORELLIA	cor_world	AREA	0	-5666.2	21	-2699.4	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_927	CORELLIA	cor_world	AREA	0	-5637.3	21.6	-2661.2	-27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_928	CORELLIA	cor_world	AREA	0	-5283.1	21	-2549.6	-12	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_929	CORELLIA	cor_world	AREA	0	-5181.3	21	-2567.5	20	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	3	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_930	CORELLIA	cor_world	AREA	0	-5193.4	21	-2497.7	-143	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	2	LOITER	10	0	-	idle		commoner	600
+spawn_corellia_931	CORELLIA	cor_world	AREA	0	-5109.3	21	-2427.3	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_932	CORELLIA	cor_world	AREA	0	-5037.9	21	-2353.6	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_933	CORELLIA	cor_world	AREA	0	-5039.6	21	-2294.8	11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_934	CORELLIA	cor_world	AREA	0	-5096.8	21	-2328.2	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_935	CORELLIA	cor_world	AREA	0	-4986.5	21	-2216.2	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
 spawn_corellia_936	CORELLIA	cor_world	AREA	0	-5538.9	21.0	-2600.6	4	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
 spawn_corellia_937	CORELLIA	cor_world	AREA	0	-5200.6	21.0	-2506.2	-53	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
 spawn_corellia_938	CORELLIA	cor_world	AREA	0	-5090.4	21.0	-2580.9	21	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
@@ -1050,16 +1050,16 @@ spawn_corellia_1047	CORELLIA	cor_world	AREA	0	-5502.5	23.4	-6184.1	-90	1	a battl
 spawn_corellia_1048	CORELLIA	cor_world	AREA	0	-5517.7	23.4	-6203.2	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
 spawn_corellia_1049	CORELLIA	cor_world	AREA	0	-5295	4	-6427.1	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
 spawn_corellia_1050	CORELLIA	cor_world	AREA	0	-5161	4.8	-6443.6	27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_corellia_1051	CORELLIA	cor_world	AREA	0	-5518.6	23.4	-6190.7	50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1052	CORELLIA	cor_world	AREA	0	-5451.6	23.6	-6208.9	124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1053	CORELLIA	cor_world	AREA	0	-5452.1	23.9	-6238.4	115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1054	CORELLIA	cor_world	AREA	0	-5500.4	23.4	-6221.5	-40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	2	LOITER	5	0	-	idle			600
-spawn_corellia_1055	CORELLIA	cor_world	AREA	0	-5513.3	23.4	-6222.5	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1056	CORELLIA	cor_world	AREA	0	-5369.1	23.9	-6239.9	100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1057	CORELLIA	cor_world	AREA	0	-5273.5	4	-6429.4	162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1058	CORELLIA	cor_world	AREA	0	-5298.8	4	-6418.1	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	2	LOITER	5	0	-	idle			600
-spawn_corellia_1059	CORELLIA	cor_world	AREA	0	-5299	4	-6433.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
-spawn_corellia_1060	CORELLIA	cor_world	AREA	0	-5155.9	4.1	-6423.5	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle			600
+spawn_corellia_1051	CORELLIA	cor_world	AREA	0	-5518.6	23.4	-6190.7	50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1052	CORELLIA	cor_world	AREA	0	-5451.6	23.6	-6208.9	124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1053	CORELLIA	cor_world	AREA	0	-5452.1	23.9	-6238.4	115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1054	CORELLIA	cor_world	AREA	0	-5500.4	23.4	-6221.5	-40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1055	CORELLIA	cor_world	AREA	0	-5513.3	23.4	-6222.5	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1056	CORELLIA	cor_world	AREA	0	-5369.1	23.9	-6239.9	100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1057	CORELLIA	cor_world	AREA	0	-5273.5	4	-6429.4	162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1058	CORELLIA	cor_world	AREA	0	-5298.8	4	-6418.1	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	2	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1059	CORELLIA	cor_world	AREA	0	-5299	4	-6433.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+spawn_corellia_1060	CORELLIA	cor_world	AREA	0	-5155.9	4.1	-6423.5	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
 spawn_corellia_1061	CORELLIA	cor_world	AREA	0	-5551.5	23.4	-6174.3	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	30	40	City	Vreni Island	1	LOITER	6	0	-	idle			600
 spawn_corellia_1062	CORELLIA	cor_world	AREA	0	-5554.1	23.4	-6178.2	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	30	40	City	Vreni Island	1	LOITER	6	0	-	idle			600
 spawn_corellia_1063	CORELLIA	cor_world	AREA	0	-5558.3	23.4	-6126.1	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	30	40	City	Vreni Island	1	LOITER	6	0	-	idle			600
@@ -2289,12 +2289,12 @@ spawn_corellia_2286	CORELLIA	cor_hidden_reb_base	AREA	11	-6.2	7.0	6.1	82	1	a Reb
 spawn_corellia_2287	CORELLIA	cor_hidden_reb_base	AREA	11	-11.2	7.0	11.7	167	1	Leia Organa	humanoid_rebel_rtp_leia_organa_summoned	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
 spawn_corellia_2288	CORELLIA	cor_hidden_reb_base	AREA	12	5.9	7.0	10.0	87	1	a Rebel Colonel	humanoid_rebel_colonel	ATTACKABLE	E	30	40	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_corellia_2289	CORELLIA	cor_world	PATROL	0	-6479.0	398.0	5966.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	PATROL	0	patrol_cor_13000	column	idle			600
-spawn_corellia_2290	CORELLIA	cor_world	AREA	0	-6563.6	398.0	5984.9	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_2291	CORELLIA	cor_world	AREA	0	-6552.4	398.0	6014.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_2292	CORELLIA	cor_world	AREA	0	-6510.1	398.0	6040.9	-148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_2293	CORELLIA	cor_world	AREA	0	-6454.7	398.0	6008.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_2294	CORELLIA	cor_world	AREA	0	-6486.0	398.0	5970.2	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_2295	CORELLIA	cor_world	AREA	0	-6497.1	398.0	5950.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_2290	CORELLIA	cor_world	AREA	0	-6563.6	398.0	5984.9	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_2291	CORELLIA	cor_world	AREA	0	-6552.4	398.0	6014.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_2292	CORELLIA	cor_world	AREA	0	-6510.1	398.0	6040.9	-148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_2293	CORELLIA	cor_world	AREA	0	-6454.7	398.0	6008.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_2294	CORELLIA	cor_world	AREA	0	-6486.0	398.0	5970.2	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_2295	CORELLIA	cor_world	AREA	0	-6497.1	398.0	5950.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
 spawn_corellia_2296	CORELLIA	cor_world	AREA	0	-6490.7	398.0	6047.5	100	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
 spawn_corellia_2297	CORELLIA	cor_world	AREA	0	-6583.8	405.0	5967.6	0	1	a Rebel Captain	humanoid_rebel_army_captain	ATTACKABLE	E	30	40	POI	Hidden Rebel Base	1	LOITER	6	0	-	idle			600
 spawn_corellia_2298	CORELLIA	cor_world	AREA	0	-6555.2	403.3	5944.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	30	40	POI	Hidden Rebel Base	1	LOITER	3	0	-	idle			600

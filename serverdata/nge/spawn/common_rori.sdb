@@ -28,7 +28,7 @@ spawn_rori_25	RORI	ror_narmle_starport	AREA	4	4	0.6	60.7	180	1	a businessman	hum
 spawn_rori_26	RORI	ror_narmle_starport	AREA	4	-2.3	0.6	62.2	177	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_rori_27	RORI	ror_narmle_starport	AREA	4	4.5	0.6	59.2	-19	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_28	RORI	ror_narmle_starport	AREA	4	-3.2	0.6	51.7	175	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_29	RORI	ror_narmle_starport	AREA	7	40.2	0.6	40.7	14	1	a commoner	humanoid_commoner_gran	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+spawn_rori_29	RORI	ror_narmle_starport	AREA	7	40.2	0.6	40.7	14	1	a commoner	humanoid_commoner_gran	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_30	RORI	ror_narmle_starport	AREA	7	55.2	-0.5	31.9	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_rori_31	RORI	ror_narmle_starport	AREA	7	55	-0.5	33.7	167	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_32	RORI	ror_narmle_starport	AREA	9	-32.8	1.6	51.6	71	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
@@ -37,22 +37,22 @@ spawn_rori_34	RORI	ror_narmle_starport	AREA	9	-31.6	1.6	66	-99	1	a fugitive	huma
 spawn_rori_35	RORI	ror_narmle_starport	AREA	9	-30.5	1.6	52.5	-107	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_36	RORI	ror_narmle_starport	AREA	10	-40.4	1.6	47.7	165	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_rori_37	RORI	ror_narmle_starport	AREA	4	5.7	0.6	67.2	147	1	Chassis Dealer	humanoid_chassis_dealer_ii	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-spawn_rori_38	RORI	ror_world	AREA	0	-5362.3	80	-2074.7	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_39	RORI	ror_world	AREA	0	-5462.9	80	-2088.8	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle			600
-spawn_rori_40	RORI	ror_world	AREA	0	-5467.9	80	-2130.5	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_41	RORI	ror_world	AREA	0	-5280.8	80.1	-2249.9	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle			600
-spawn_rori_42	RORI	ror_world	AREA	0	-5216.8	80	-2253.4	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_43	RORI	ror_world	AREA	0	-5161.3	80	-2249.7	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_44	RORI	ror_world	AREA	0	-5103.2	80	-2338	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_45	RORI	ror_world	AREA	0	-5093.1	80	-2402.6	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_46	RORI	ror_world	AREA	0	-5135.1	80	-2403.7	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
+spawn_rori_38	RORI	ror_world	AREA	0	-5362.3	80	-2074.7	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_39	RORI	ror_world	AREA	0	-5462.9	80	-2088.8	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_40	RORI	ror_world	AREA	0	-5467.9	80	-2130.5	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_41	RORI	ror_world	AREA	0	-5280.8	80.1	-2249.9	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_42	RORI	ror_world	AREA	0	-5216.8	80	-2253.4	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_43	RORI	ror_world	AREA	0	-5161.3	80	-2249.7	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_44	RORI	ror_world	AREA	0	-5103.2	80	-2338	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_45	RORI	ror_world	AREA	0	-5093.1	80	-2402.6	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
+spawn_rori_46	RORI	ror_world	AREA	0	-5135.1	80	-2403.7	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_47	RORI	ror_world	AREA	0	-5132.9	80.2	-2446.6	-127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
-spawn_rori_48	RORI	ror_world	AREA	0	-5158.5	80	-2486.1	80	1	a commoner	humanoid_commoner_ishitib	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-spawn_rori_49	RORI	ror_world	AREA	0	-4985.8	80	-2351.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle			600
-spawn_rori_50	RORI	ror_world	AREA	0	-5005.6	80.6	-2366.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
+spawn_rori_48	RORI	ror_world	AREA	0	-5158.5	80	-2486.1	80	1	a commoner	humanoid_commoner_ishitib	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
+spawn_rori_49	RORI	ror_world	AREA	0	-4985.8	80	-2351.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_50	RORI	ror_world	AREA	0	-5005.6	80.6	-2366.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_51	RORI	ror_world	AREA	0	-5245.2	81.3	-2164.7	44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_52	RORI	ror_world	AREA	0	-5244.3	80.4	-2187.5	140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	3	LOITER	10	0	-	idle			600
-spawn_rori_53	RORI	ror_world	AREA	0	-5274.1	80.7	-2191.9	-137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
+spawn_rori_52	RORI	ror_world	AREA	0	-5244.3	80.4	-2187.5	140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	3	LOITER	10	0	-	idle		commoner	600
+spawn_rori_53	RORI	ror_world	AREA	0	-5274.1	80.7	-2191.9	-137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_54	RORI	ror_world	AREA	0	-5276.8	81	-2270.7	-89	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_55	RORI	ror_world	AREA	0	-5279.6	81	-2270.7	93	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_56	RORI	ror_world	AREA	0	-5300.8	80	-2280.4	178	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -73,8 +73,8 @@ spawn_rori_70	RORI	ror_world	AREA	0	-5170.2	80	-2338.4	-95	1	an artisan	humanoid
 spawn_rori_71	RORI	ror_world	AREA	0	-5157.4	80	-2498.8	-149	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
 spawn_rori_72	RORI	ror_world	AREA	0	-4988.7	80	-2261.7	91	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
 spawn_rori_73	RORI	ror_world	AREA	0	-5157.9	80	-2293.8	139	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_74	RORI	ror_world	AREA	0	-5120.6	80.0	-2443.1	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-spawn_rori_75	RORI	ror_world	AREA	0	-5210.7	80.0	-2269.6	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+spawn_rori_74	RORI	ror_world	AREA	0	-5120.6	80.0	-2443.1	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
+spawn_rori_75	RORI	ror_world	AREA	0	-5210.7	80.0	-2269.6	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_76	RORI	ror_world	AREA	0	-4968.0	80.0	-2399.0	-128	1	a courier	humanoid_itp_rebel_courier	ATTACKABLE	E	86	89	City	Narmle	1	IDLE	0	0	-	idle			600
 spawn_rori_77	RORI	ror_world	AREA	0	-5249.2	80.0	-2274.8	-159	1	a Rebel Sergeant Major	humanoid_rebel_sergeant_major	ATTACKABLE	E	40	60	City	Narmle	1	IDLE	0	0	-	idle			600
 spawn_rori_78	RORI	ror_world	AREA	0	-4784.1	77.0	-2257.3	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	40	60	City	Narmle	1	LOITER	2	0	-	idle			600

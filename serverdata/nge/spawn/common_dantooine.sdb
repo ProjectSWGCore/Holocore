@@ -16,12 +16,12 @@ spawn_dantooine_13	DANTOOINE	dan_imp_outpost_hospital	AREA	6	-4.5	0.1	-1.6	136	1
 spawn_dantooine_14	DANTOOINE	dan_imp_outpost_starport	AREA	1	-4.7	0.1	-17.6	91	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_15	DANTOOINE	dan_world	AREA	0	-4213.0	3.0	-2393.8	175	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_16	DANTOOINE	dan_world	AREA	0	-4233.7	3.0	-2402.1	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_dantooine_17	DANTOOINE	dan_world	AREA	0	-4197.7	3.0	-2425.6	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_18	DANTOOINE	dan_world	AREA	0	-4231.6	3.0	-2425.6	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_dantooine_17	DANTOOINE	dan_world	AREA	0	-4197.7	3.0	-2425.6	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		commoner	600
+spawn_dantooine_18	DANTOOINE	dan_world	AREA	0	-4231.6	3.0	-2425.6	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_dantooine_19	DANTOOINE	dan_world	AREA	0	-4224.5	3.0	-2358.9	-59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_20	DANTOOINE	dan_world	AREA	0	-4245.6	3.0	-2347.0	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_dantooine_21	DANTOOINE	dan_world	AREA	0	-4223.9	3.0	-2417.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	3	LOITER	5	0	-	idle			600
-spawn_dantooine_22	DANTOOINE	dan_world	AREA	0	-4207.2	3.0	-2410.2	79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	2	LOITER	5	0	-	idle			600
+spawn_dantooine_21	DANTOOINE	dan_world	AREA	0	-4223.9	3.0	-2417.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	3	LOITER	5	0	-	idle		commoner	600
+spawn_dantooine_22	DANTOOINE	dan_world	AREA	0	-4207.2	3.0	-2410.2	79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	2	LOITER	5	0	-	idle		commoner	600
 spawn_dantooine_23	DANTOOINE	dan_world	AREA	0	-4231.8	3.0	-2403.6	-61	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_24	DANTOOINE	dan_world	AREA	0	-4252.3	3.0	-2403.3	-84	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_25	DANTOOINE	dan_world	AREA	0	-4198.9	3.0	-2426.4	46	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
@@ -82,7 +82,7 @@ spawn_dantooine_79	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-4.2	0.1	-3.5	180	1
 spawn_dantooine_80	DANTOOINE	dan_mining_outpost_starport	AREA	1	-6.6	0.1	-16.0	92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_81	DANTOOINE	dan_mining_outpost_starport	AREA	1	-4.5	0.1	-16.1	-86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_82	DANTOOINE	dan_world	AREA	0	-644.9	3.0	2460.7	23	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_83	DANTOOINE	dan_world	AREA	0	-642.3	3.0	2448.4	-56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+spawn_dantooine_83	DANTOOINE	dan_world	AREA	0	-642.3	3.0	2448.4	-56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_dantooine_84	DANTOOINE	dan_world	AREA	0	-647.2	3.0	2441.9	-60	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_85	DANTOOINE	dan_world	AREA	0	-575.7	3.0	2502.3	162	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_86	DANTOOINE	dan_world	AREA	0	-593.8	3.0	2527.3	128	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
@@ -147,14 +147,14 @@ spawn_dantooine_144	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4.2	0.1	2.0	-90	
 spawn_dantooine_145	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	3.0	0.1	-2.3	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_146	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	4.2	0.1	-2.4	-98	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_147	DANTOOINE	dan_world	PATROL	0	1563.7	4.0	-6414.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2000	column	idle			600
-spawn_dantooine_148	DANTOOINE	dan_world	AREA	0	1542.7	4.0	-6417.0	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_149	DANTOOINE	dan_world	AREA	0	1601.5	4.0	-6419.6	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_150	DANTOOINE	dan_world	PATROL	0	1596.0	4.0	-6394.5	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2400	column	idle			600
-spawn_dantooine_151	DANTOOINE	dan_world	PATROL	0	1621.6	4.0	-6369.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_200	column	idle			600
-spawn_dantooine_152	DANTOOINE	dan_world	AREA	0	1558.4	4.0	-6426.7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle			600
-spawn_dantooine_153	DANTOOINE	dan_world	AREA	0	1552.3	4.0	-6403.1	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle			600
-spawn_dantooine_154	DANTOOINE	dan_world	AREA	0	1582.2	4.0	-6388.8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	4	LOITER	10	0	-	idle			600
-spawn_dantooine_155	DANTOOINE	dan_world	AREA	0	1607.0	4.0	-6380.1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle			600
+spawn_dantooine_148	DANTOOINE	dan_world	AREA	0	1542.7	4.0	-6417.0	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle		commoner	600
+spawn_dantooine_149	DANTOOINE	dan_world	AREA	0	1601.5	4.0	-6419.6	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle		commoner	600
+spawn_dantooine_150	DANTOOINE	dan_world	PATROL	0	1596.0	4.0	-6394.5	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2400	column	idle		commoner	600
+spawn_dantooine_151	DANTOOINE	dan_world	PATROL	0	1621.6	4.0	-6369.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_200	column	idle		commoner	600
+spawn_dantooine_152	DANTOOINE	dan_world	AREA	0	1558.4	4.0	-6426.7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	2	LOITER	5	0	-	idle		commoner	600
+spawn_dantooine_153	DANTOOINE	dan_world	AREA	0	1552.3	4.0	-6403.1	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle		commoner	600
+spawn_dantooine_154	DANTOOINE	dan_world	AREA	0	1582.2	4.0	-6388.8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	4	LOITER	10	0	-	idle		commoner	600
+spawn_dantooine_155	DANTOOINE	dan_world	AREA	0	1607.0	4.0	-6380.1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	3	LOITER	10	0	-	idle		commoner	600
 spawn_dantooine_156	DANTOOINE	dan_world	AREA	0	1593.6	4.0	-6442.2	-22	1	a explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_157	DANTOOINE	dan_world	AREA	0	1559.3	4.0	-6372.9	136	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Pirate Outpost	1	TURN	0	0	-	idle			600
 spawn_dantooine_158	DANTOOINE	dan_world	PATROL	0	1549.0	4.0	-6374.0	-163	1	a pirate	humanoid_pirate	ATTACKABLE	E	60	70	City	Pirate Outpost	1	PATROL	0	patrol_dan_2300	column	idle			600

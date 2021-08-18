@@ -166,43 +166,43 @@ spawn_talus_163	TALUS	tal_dearic_university	AREA	7	8.4	1.1	-14.9	0	1	a pathfinde
 spawn_talus_164	TALUS	tal_dearic_university	AREA	7	6.8	1.1	-13	90	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_165	TALUS	tal_dearic_university	AREA	8	-0.4	1.1	-9.5	-65	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
 spawn_talus_166	TALUS	tal_dearic_university	AREA	8	-2.8	1.1	-8.6	123	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_167	TALUS	tal_world	AREA	0	323.3	6.0	-3097.7	85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_168	TALUS	tal_world	AREA	0	378.7	6.0	-2756.5	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_169	TALUS	tal_world	AREA	0	152.7	6.0	-2932.0	84	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_170	TALUS	tal_world	AREA	0	525.9	6.5	-2989.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_171	TALUS	tal_world	AREA	0	579.1	6.0	-3030.8	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_172	TALUS	tal_world	AREA	0	614.7	6.0	-3014.0	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_173	TALUS	tal_world	AREA	0	731.6	6	-3001.7	65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_174	TALUS	tal_world	AREA	0	581.9	6	-2962.7	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_175	TALUS	tal_world	AREA	0	470.4	6	-2852.8	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_176	TALUS	tal_world	AREA	0	388.6	6	-2878.9	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_177	TALUS	tal_world	AREA	0	379	6	-2963.6	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_178	TALUS	tal_world	AREA	0	409.7	6	-2976.4	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_179	TALUS	tal_world	AREA	0	342.8	6	-2955.3	-92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_180	TALUS	tal_world	AREA	0	325.7	6	-2970.8	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_181	TALUS	tal_world	AREA	0	324.6	6	-2988.8	-146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_182	TALUS	tal_world	AREA	0	311	6	-2980.8	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_183	TALUS	tal_world	AREA	0	335.7	6	-2932	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_184	TALUS	tal_world	AREA	0	298.2	6	-2840.3	-53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	3	LOITER	10	0	-	idle			600
-spawn_talus_185	TALUS	tal_world	AREA	0	161.5	6	-2827	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_186	TALUS	tal_world	AREA	0	161.4	6	-2849.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_187	TALUS	tal_world	AREA	0	157.7	6	-2874.7	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_188	TALUS	tal_world	AREA	0	156.3	6	-2902.1	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_189	TALUS	tal_world	AREA	0	160.4	6	-2928.9	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_190	TALUS	tal_world	AREA	0	159.6	6	-2951.3	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_191	TALUS	tal_world	AREA	0	167.9	6	-3000.3	152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_192	TALUS	tal_world	AREA	0	169.1	6	-3021.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	4	LOITER	10	0	-	idle			600
+spawn_talus_167	TALUS	tal_world	AREA	0	323.3	6.0	-3097.7	85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+spawn_talus_168	TALUS	tal_world	AREA	0	378.7	6.0	-2756.5	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+spawn_talus_169	TALUS	tal_world	AREA	0	152.7	6.0	-2932.0	84	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+spawn_talus_170	TALUS	tal_world	AREA	0	525.9	6.5	-2989.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_171	TALUS	tal_world	AREA	0	579.1	6.0	-3030.8	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_172	TALUS	tal_world	AREA	0	614.7	6.0	-3014.0	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_173	TALUS	tal_world	AREA	0	731.6	6	-3001.7	65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_174	TALUS	tal_world	AREA	0	581.9	6	-2962.7	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_175	TALUS	tal_world	AREA	0	470.4	6	-2852.8	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_176	TALUS	tal_world	AREA	0	388.6	6	-2878.9	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_177	TALUS	tal_world	AREA	0	379	6	-2963.6	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_178	TALUS	tal_world	AREA	0	409.7	6	-2976.4	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_179	TALUS	tal_world	AREA	0	342.8	6	-2955.3	-92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_180	TALUS	tal_world	AREA	0	325.7	6	-2970.8	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_181	TALUS	tal_world	AREA	0	324.6	6	-2988.8	-146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_182	TALUS	tal_world	AREA	0	311	6	-2980.8	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_183	TALUS	tal_world	AREA	0	335.7	6	-2932	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_184	TALUS	tal_world	AREA	0	298.2	6	-2840.3	-53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	3	LOITER	10	0	-	idle		commoner	600
+spawn_talus_185	TALUS	tal_world	AREA	0	161.5	6	-2827	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_186	TALUS	tal_world	AREA	0	161.4	6	-2849.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_187	TALUS	tal_world	AREA	0	157.7	6	-2874.7	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_188	TALUS	tal_world	AREA	0	156.3	6	-2902.1	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_189	TALUS	tal_world	AREA	0	160.4	6	-2928.9	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_190	TALUS	tal_world	AREA	0	159.6	6	-2951.3	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_191	TALUS	tal_world	AREA	0	167.9	6	-3000.3	152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_192	TALUS	tal_world	AREA	0	169.1	6	-3021.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	4	LOITER	10	0	-	idle		commoner	600
 spawn_talus_193	TALUS	tal_world	AREA	0	141.9	6	-2949	-90	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_194	TALUS	tal_world	AREA	0	336.8	6	-3023.8	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_195	TALUS	tal_world	AREA	0	249.2	6	-2956	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
+spawn_talus_194	TALUS	tal_world	AREA	0	336.8	6	-3023.8	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_195	TALUS	tal_world	AREA	0	249.2	6	-2956	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_196	TALUS	tal_world	AREA	0	234.6	6	-2943.1	5	1	a commoner	humanoid_commoner_nikto	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
-spawn_talus_197	TALUS	tal_world	AREA	0	509.5	6	-2943.9	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	3	LOITER	10	0	-	idle			600
-spawn_talus_198	TALUS	tal_world	AREA	0	539.5	6	-2946.2	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	4	LOITER	10	0	-	idle			600
-spawn_talus_199	TALUS	tal_world	AREA	0	498	6	-3025.6	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	2	LOITER	10	0	-	idle			600
+spawn_talus_197	TALUS	tal_world	AREA	0	509.5	6	-2943.9	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	3	LOITER	10	0	-	idle		commoner	600
+spawn_talus_198	TALUS	tal_world	AREA	0	539.5	6	-2946.2	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	4	LOITER	10	0	-	idle		commoner	600
+spawn_talus_199	TALUS	tal_world	AREA	0	498	6	-3025.6	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	2	LOITER	10	0	-	idle		commoner	600
 spawn_talus_200	TALUS	tal_world	AREA	0	508.6	6.6	-3104.1	67	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
 spawn_talus_201	TALUS	tal_world	AREA	0	718.8	6	-3036.4	127	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_talus_202	TALUS	tal_world	AREA	0	685.1	6.1	-3130.4	-180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
-spawn_talus_203	TALUS	tal_world	AREA	0	685.1	6.1	-3122.4	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle			600
+spawn_talus_202	TALUS	tal_world	AREA	0	685.1	6.1	-3130.4	-180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_203	TALUS	tal_world	AREA	0	685.1	6.1	-3122.4	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_204	TALUS	tal_world	AREA	0	691.5	6	-3105.3	-123	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
 spawn_talus_205	TALUS	tal_world	AREA	0	183.3	6	-3064.2	121	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
 spawn_talus_206	TALUS	tal_world	AREA	0	182.3	6	-3065.5	95	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
@@ -243,11 +243,11 @@ spawn_talus_240	TALUS	tal_imp_outpost_officer_shed	AREA	5	3.6	0.1	-2.9	-118	1	Co
 spawn_talus_241	TALUS	tal_imp_outpost_officer_shed	AREA	6	-4.5	0.1	-4.2	76	1	Prisk Kith'Vys (Imperial Pilot Trainer)	humanoid_imperial_prisk_kith_vys	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_242	TALUS	tal_imp_outpost_starport	AREA	1	-10.7	0.1	-16.1	91	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_talus_243	TALUS	tal_imp_outpost_starport	AREA	1	-7.1	0.1	-16.2	-88	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_244	TALUS	tal_world	AREA	0	-2216.5	20	2362	-39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
-spawn_talus_245	TALUS	tal_world	AREA	0	-2190	20	2325.8	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
-spawn_talus_246	TALUS	tal_world	AREA	0	-2191.5	20	2308.2	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
-spawn_talus_247	TALUS	tal_world	AREA	0	-2196.5	20	2285.8	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
-spawn_talus_248	TALUS	tal_world	AREA	0	-2214.7	20	2291.3	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
+spawn_talus_244	TALUS	tal_world	AREA	0	-2216.5	20	2362	-39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_245	TALUS	tal_world	AREA	0	-2190	20	2325.8	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_246	TALUS	tal_world	AREA	0	-2191.5	20	2308.2	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_247	TALUS	tal_world	AREA	0	-2196.5	20	2285.8	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_248	TALUS	tal_world	AREA	0	-2214.7	20	2291.3	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_249	TALUS	tal_world	AREA	0	-2229.2	20	2265	-154	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_250	TALUS	tal_world	AREA	0	-2222.4	20	2265.9	-15	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_talus_251	TALUS	tal_world	AREA	0	-2223.2	20	2320.9	1	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -420,7 +420,7 @@ spawn_talus_417	TALUS	tal_nashal_starport	AREA	10	-43.2	1.6	49.9	-85	1	a pathfin
 spawn_talus_418	TALUS	tal_nashal_starport	AREA	12	-55.8	2.6	42.1	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_419	TALUS	tal_nashal_starport	AREA	14	-53.5	2.7	23.3	-90	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_420	TALUS	tal_nashal_starport	AREA	14	-56.5	1	8.7	47	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_421	TALUS	tal_nashal_starport	AREA	15	-46.6	1	10.8	11	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+spawn_talus_421	TALUS	tal_nashal_starport	AREA	15	-46.6	1	10.8	11	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		commoner	600
 spawn_talus_422	TALUS	tal_nashal_university	AREA	4	-5.3	1.1	-0.8	-4	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_423	TALUS	tal_nashal_university	AREA	4	6.2	1.1	2.8	-117	1	a scientist	humanoid_scientist_rodian_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_424	TALUS	tal_nashal_university	AREA	4	4.7	1.1	1.6	52	1	a scientist	humanoid_scientist_twilek_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
@@ -434,35 +434,35 @@ spawn_talus_431	TALUS	tal_nashal_university	AREA	7	6.8	1.1	-13	90	1	a scientist	
 spawn_talus_432	TALUS	tal_nashal_university	AREA	8	-0.9	1.1	-9	-77	1	a scientist	humanoid_scientist_moncal_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_433	TALUS	tal_nashal_university	AREA	8	-2.8	1.1	-8.5	103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_434	TALUS	tal_world	AREA	0	4357	2	5183.8	160	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
-spawn_talus_435	TALUS	tal_world	AREA	0	4333.8	9.9	5372.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_436	TALUS	tal_world	PATROL	0	4439.0	2.0	5278.9	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_4600	column	idle			600
-spawn_talus_437	TALUS	tal_world	PATROL	0	4317.8	2.0	5287.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_4700	column	idle			600
-spawn_talus_438	TALUS	tal_world	AREA	0	4450.4	2	5278.4	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_439	TALUS	tal_world	AREA	0	4461.1	2	5267.1	-176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle			600
-spawn_talus_440	TALUS	tal_world	AREA	0	4461.5	2	5245.6	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	4	LOITER	10	0	-	idle			600
-spawn_talus_441	TALUS	tal_world	AREA	0	4442.3	2	5236.2	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle			600
-spawn_talus_442	TALUS	tal_world	AREA	0	4414.5	2	5259.5	-17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle			600
-spawn_talus_443	TALUS	tal_world	AREA	0	4421	2	5280.9	23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	5	LOITER	10	0	-	idle			600
-spawn_talus_444	TALUS	tal_world	AREA	0	4399.5	2	5267.1	-125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	2	LOITER	10	0	-	idle			600
-spawn_talus_445	TALUS	tal_world	AREA	0	4455.4	2	5362.7	-30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_435	TALUS	tal_world	AREA	0	4333.8	9.9	5372.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		commoner	600
+spawn_talus_436	TALUS	tal_world	PATROL	0	4439.0	2.0	5278.9	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_4600	column	idle		commoner	600
+spawn_talus_437	TALUS	tal_world	PATROL	0	4317.8	2.0	5287.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_4700	column	idle		commoner	600
+spawn_talus_438	TALUS	tal_world	AREA	0	4450.4	2	5278.4	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_439	TALUS	tal_world	AREA	0	4461.1	2	5267.1	-176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle		commoner	600
+spawn_talus_440	TALUS	tal_world	AREA	0	4461.5	2	5245.6	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	4	LOITER	10	0	-	idle		commoner	600
+spawn_talus_441	TALUS	tal_world	AREA	0	4442.3	2	5236.2	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle		commoner	600
+spawn_talus_442	TALUS	tal_world	AREA	0	4414.5	2	5259.5	-17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle		commoner	600
+spawn_talus_443	TALUS	tal_world	AREA	0	4421	2	5280.9	23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	5	LOITER	10	0	-	idle		commoner	600
+spawn_talus_444	TALUS	tal_world	AREA	0	4399.5	2	5267.1	-125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	2	LOITER	10	0	-	idle		commoner	600
+spawn_talus_445	TALUS	tal_world	AREA	0	4455.4	2	5362.7	-30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_446	TALUS	tal_world	AREA	0	4449	2	5380.4	-122	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
-spawn_talus_447	TALUS	tal_world	AREA	0	4384.5	2	5337.2	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_448	TALUS	tal_world	AREA	0	4340.5	9.9	5385	-7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_449	TALUS	tal_world	AREA	0	4340.7	9.9	5403.3	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_447	TALUS	tal_world	AREA	0	4384.5	2	5337.2	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_448	TALUS	tal_world	AREA	0	4340.5	9.9	5385	-7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_449	TALUS	tal_world	AREA	0	4340.7	9.9	5403.3	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_450	TALUS	tal_world	AREA	0	4332.3	9.9	5419	-91	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_451	TALUS	tal_world	AREA	0	4206.5	2	5291	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_452	TALUS	tal_world	AREA	0	4182.1	2	5291.4	-77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_453	TALUS	tal_world	AREA	0	4226.2	2	5308.2	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_451	TALUS	tal_world	AREA	0	4206.5	2	5291	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_452	TALUS	tal_world	AREA	0	4182.1	2	5291.4	-77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_453	TALUS	tal_world	AREA	0	4226.2	2	5308.2	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_454	TALUS	tal_world	AREA	0	4068.2	2	5289.5	-89	1	a commoner	humanoid_commoner_trandoshan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_455	TALUS	tal_world	AREA	0	4066.9	2	5288.1	0	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_talus_456	TALUS	tal_world	AREA	0	4291.6	2	5188.8	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_457	TALUS	tal_world	AREA	0	4266	2	5160.4	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle			600
+spawn_talus_456	TALUS	tal_world	AREA	0	4291.6	2	5188.8	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_457	TALUS	tal_world	AREA	0	4266	2	5160.4	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	3	LOITER	10	0	-	idle		commoner	600
 spawn_talus_458	TALUS	tal_world	AREA	0	4348.9	2	5179.4	-94	1	a commoner	humanoid_commoner_devaronian	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_459	TALUS	tal_world	AREA	0	4362.3	2	5085.6	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	4	LOITER	10	0	-	idle			600
-spawn_talus_460	TALUS	tal_world	AREA	0	4348	2	5203.7	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_459	TALUS	tal_world	AREA	0	4362.3	2	5085.6	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	4	LOITER	10	0	-	idle		commoner	600
+spawn_talus_460	TALUS	tal_world	AREA	0	4348	2	5203.7	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_461	TALUS	tal_world	AREA	0	4373.6	2	5097.3	-29	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
-spawn_talus_462	TALUS	tal_world	AREA	0	4464.6	2	5213.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
-spawn_talus_463	TALUS	tal_world	AREA	0	4507.9	2	5197	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_462	TALUS	tal_world	AREA	0	4464.6	2	5213.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+spawn_talus_463	TALUS	tal_world	AREA	0	4507.9	2	5197	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_464	TALUS	tal_world	AREA	0	4104.3	2	5288.8	67	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_465	TALUS	tal_world	AREA	0	4237.3	0.4	5264.5	-17	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_466	TALUS	tal_world	AREA	0	4346.6	2	5069.5	-144	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
